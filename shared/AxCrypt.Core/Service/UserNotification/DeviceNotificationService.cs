@@ -1,0 +1,84 @@
+﻿using AxCrypt.Api.Model.Notification;
+using AxCrypt.Common;
+using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Extensions;
+using static AxCrypt.Abstractions.TypeResolve;
+
+namespace AxCrypt.Core.Service.UserNotification
+{
+    public class DeviceNotificationService : INotificationService
+    {
+        private INotificationService _localService;
+        private INotificationService _remoteService;
+
+        public DeviceNotificationService(INotificationService localService, INotificationService remoteService)
+        {
+            _localService = localService;
+            _remoteService = remoteService;
+        }
+
+        public INotificationService Refresh()
+        {
+            return this;
+        }
+
+        public LogOnIdentity Identity
+        {
+            get
+            {
+                return _remoteService.Identity;
+            }
+        }
+
+        public async Task<IEnumerable<UserNotificationApiModel>> GetAllUserNotificationAsync(string useremail, string subslevel)
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                try
+                {
+                    return await _remoteService.GetAllUserNotificationAsync(useremail, subslevel).Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                }
+            }
+
+            return await _localService.GetAllUserNotificationAsync(useremail, subslevel).Free();
+        }
+        
+         public async Task<bool> InsertUserNotificationAsync(IEnumerable<NotificationApiModel> notificationModel)
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                try
+                {
+                    return await _remoteService.InsertUserNotificationAsync(notificationModel).Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                }
+            }
+
+            return await _localService.InsertUserNotificationAsync(notificationModel).Free();
+        }
+
+        public async Task<bool> DeleteAsync(long id)
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                try
+                {
+                    return await _remoteService.DeleteAsync(id).Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                }
+            }
+
+            return await _localService.DeleteAsync(id).Free();
+        }
+    }
+}

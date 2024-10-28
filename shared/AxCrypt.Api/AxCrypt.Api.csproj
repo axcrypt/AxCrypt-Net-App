@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Model\Migration\Balance.cs" />
+    <Compile Remove="Model\Migration\BusinessSubscriptionApiModel.cs" />
+    <Compile Remove="Model\Migration\BusPaymentTransLog.cs" />
+    <Compile Remove="Model\Migration\BusSubsInfo.cs" />
+    <Compile Remove="Model\Migration\Charge.cs" />
+    <Compile Remove="Model\Migration\MasterKeyApiModel.cs" />
+    <Compile Remove="Model\Migration\MasterPrivateKey.cs" />
+    <Compile Remove="Model\Migration\PaymentTransLogApiModel.cs" />
+    <Compile Remove="Model\Migration\Refund.cs" />
+    <Compile Remove="Model\Migration\SubscriptionIndexApiModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AxCrypt.Abstractions\AxCrypt.Abstractions.csproj" />
+    <ProjectReference Include="..\AxCrypt.Common\AxCrypt.Common.csproj" />
+  </ItemGroup>
+
+</Project>

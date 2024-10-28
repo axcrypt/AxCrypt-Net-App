@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://swea.riksbank.se/xsd" elementFormDefault="unqualified" targetNamespace="http://swea.riksbank.se/xsd" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="LanguageType">
+    <xs:annotation>
+      <xs:documentation>
+				en=English
+				sv=Swedish
+			</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="en" />
+      <xs:enumeration value="sv" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AggregateMethodType">
+    <xs:annotation>
+      <xs:documentation>
+			 D-Daily
+	 		W-Weekly
+	 		M-Monthly
+	 		Q-Quarterly
+	 		Y-Yearly
+	 		</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="D" />
+      <xs:enumeration value="W" />
+      <xs:enumeration value="M" />
+      <xs:enumeration value="Q" />
+      <xs:enumeration value="Y" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CurrencyCrossPair">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="seriesid1" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="seriesid2" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CrossRequestParameters">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="aggregateMethod" type="tns:AggregateMethodType" />
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="crossPair" type="tns:CurrencyCrossPair" />
+      <xs:element minOccurs="1" maxOccurs="1" name="datefrom" nillable="true" type="xs:date" />
+      <xs:element minOccurs="1" maxOccurs="1" name="dateto" nillable="true" type="xs:date" />
+      <xs:element minOccurs="1" maxOccurs="1" name="languageid" nillable="true" type="tns:LanguageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SearchGroupSeries">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="groupid" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="seriesid" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Group">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="groupdescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="groupid" type="xs:int" />
+      <xs:element minOccurs="0" name="groupname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="languageid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="parentgroupid" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GroupSeries">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="datefrom" nillable="true" type="xs:date" />
+      <xs:element minOccurs="0" name="dateto" nillable="true" type="xs:date" />
+      <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="groupid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="longdescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="seriesid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="shortdescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="source" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="datefrom" nillable="true" type="xs:date" />
+      <xs:element minOccurs="0" name="dateto" nillable="true" type="xs:date" />
+      <xs:element minOccurs="0" name="informationtext" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="groups" nillable="true" type="tns:ResultGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ResultGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="groupid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="groupname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="series" nillable="true" type="tns:ResultSeries" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ResultSeries">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="seriesid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="seriesname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="unit" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="resultrows" nillable="true" type="tns:ResultRow" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ResultRow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" nillable="true" type="xs:date" />
+      <xs:element minOccurs="0" name="period" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="min" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="average" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="max" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="ultimo" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="value" nillable="true" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CrossResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="datefrom" nillable="true" type="xs:date" />
+      <xs:element minOccurs="0" name="dateto" nillable="true" type="xs:date" />
+      <xs:element minOccurs="0" name="informationtext" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="groups" nillable="true" type="tns:CrossResultGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CrossResultGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="groupid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="groupname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="series" nillable="true" type="tns:CrossResultSeries" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CrossResultSeries">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="seriesid1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="seriesid2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="seriesname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="resultrows" nillable="true" type="tns:ResultRow" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Series">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="datefrom" nillable="true" type="xs:date" />
+      <xs:element minOccurs="0" name="dateto" nillable="true" type="xs:date" />
+      <xs:element minOccurs="0" name="seriesdescription" type="xs:string" />
+      <xs:element minOccurs="0" name="seriesid" type="xs:string" />
+      <xs:element minOccurs="0" name="seriesname" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CalendarDay">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="bankday" nillable="true" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="caldate" nillable="true" type="xs:date" />
+      <xs:element minOccurs="1" maxOccurs="1" name="week" nillable="true" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="weekyear" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SearchRequestParameters">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="aggregateMethod" type="tns:AggregateMethodType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="datefrom" type="xs:date" />
+      <xs:element minOccurs="1" maxOccurs="1" name="dateto" type="xs:date" />
+      <xs:element minOccurs="1" maxOccurs="1" name="languageid" type="tns:LanguageType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="min" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="avg" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="max" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ultimo" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="searchGroupSeries" type="tns:SearchGroupSeries" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ServiceExceptionType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Exception">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Exception" nillable="true" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceException">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServiceException" nillable="true" type="tns:ServiceExceptionType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getInterestAndExchangeGroupNames">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="languageid" type="tns:LanguageType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getInterestAndExchangeGroupNamesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="tns:Group" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getInterestAndExchangeNames">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="groupid" type="xs:int" />
+        <xs:element minOccurs="1" maxOccurs="1" name="languageid" type="tns:LanguageType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getInterestAndExchangeNamesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="tns:GroupSeries" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getLatestInterestAndExchangeRates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="languageid" type="tns:LanguageType" />
+        <xs:element minOccurs="1" maxOccurs="unbounded" name="seriesid" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getLatestInterestAndExchangeRatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="return" nillable="true" type="tns:Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getMonthlyAverageExchangeRates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="year" type="xs:int" />
+        <xs:element minOccurs="1" maxOccurs="1" name="month" type="xs:int" />
+        <xs:element minOccurs="1" maxOccurs="1" name="languageid" type="tns:LanguageType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getMonthlyAverageExchangeRatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="return" nillable="true" type="tns:Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAllCrossNames">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="languageid" type="tns:LanguageType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAllCrossNamesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="tns:Series" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getCrossRates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="crossRequestParameters" type="tns:CrossRequestParameters" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getCrossRatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="return" nillable="true" type="tns:CrossResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getCalendarDays">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="datefrom" type="xs:date" />
+        <xs:element minOccurs="1" maxOccurs="1" name="dateto" type="xs:date" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getCalendarDaysResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="tns:CalendarDay" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getInterestAndExchangeRates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="searchRequestParameters" type="tns:SearchRequestParameters" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getInterestAndExchangeRatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="return" nillable="true" type="tns:Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAnnualAverageExchangeRates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="year" type="xs:int" />
+        <xs:element minOccurs="1" maxOccurs="1" name="month" type="xs:int" />
+        <xs:element minOccurs="1" maxOccurs="1" name="languageid" type="tns:LanguageType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAnnualAverageExchangeRatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="return" nillable="true" type="tns:Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

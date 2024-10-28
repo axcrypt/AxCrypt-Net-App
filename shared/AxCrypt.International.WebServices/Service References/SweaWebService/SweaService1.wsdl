@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="http://swea.riksbank.se/ws" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ywvr="http://swea.riksbank.se/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" name="SweaService" targetNamespace="http://swea.riksbank.se/ws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+	This is the Riksbank's webservice for interest and exchange rates.
+	The Riksbank’s database contains round 60 interest rate series, Swedish and foreign, as well as around 50 exchange rate series. 
+	The database is usually updated twice a day, at around 9.30 a.m. and around 12.30 p.m.
+	</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema>
+      <xs:import schemaLocation="swea.xsd" namespace="http://swea.riksbank.se/xsd" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getMonthlyAverageExchangeRatesRequest">
+    <wsdl:part name="parameters" element="ywvr:getMonthlyAverageExchangeRates" />
+  </wsdl:message>
+  <wsdl:message name="getCrossRatesRequest">
+    <wsdl:part name="parameters" element="ywvr:getCrossRates" />
+  </wsdl:message>
+  <wsdl:message name="getAllCrossNamesRequest">
+    <wsdl:part name="parameters" element="ywvr:getAllCrossNames" />
+  </wsdl:message>
+  <wsdl:message name="getCrossRatesResponse">
+    <wsdl:part name="parameters" element="ywvr:getCrossRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAnnualAverageExchangeRatesRequest">
+    <wsdl:part name="parameters" element="ywvr:getAnnualAverageExchangeRates" />
+  </wsdl:message>
+  <wsdl:message name="ServiceException">
+    <wsdl:part name="parameters" element="ywvr:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="getAllCrossNamesResponse">
+    <wsdl:part name="parameters" element="ywvr:getAllCrossNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCalendarDaysResponse">
+    <wsdl:part name="parameters" element="ywvr:getCalendarDaysResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAnnualAverageExchangeRatesResponse">
+    <wsdl:part name="parameters" element="ywvr:getAnnualAverageExchangeRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getInterestAndExchangeNamesResponse">
+    <wsdl:part name="parameters" element="ywvr:getInterestAndExchangeNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getInterestAndExchangeRatesResponse">
+    <wsdl:part name="parameters" element="ywvr:getInterestAndExchangeRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getInterestAndExchangeRatesRequest">
+    <wsdl:part name="parameters" element="ywvr:getInterestAndExchangeRates" />
+  </wsdl:message>
+  <wsdl:message name="getMonthlyAverageExchangeRatesResponse">
+    <wsdl:part name="parameters" element="ywvr:getMonthlyAverageExchangeRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLatestInterestAndExchangeRatesRequest">
+    <wsdl:part name="parameters" element="ywvr:getLatestInterestAndExchangeRates" />
+  </wsdl:message>
+  <wsdl:message name="getLatestInterestAndExchangeRatesResponse">
+    <wsdl:part name="parameters" element="ywvr:getLatestInterestAndExchangeRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCalendarDaysRequest">
+    <wsdl:part name="parameters" element="ywvr:getCalendarDays" />
+  </wsdl:message>
+  <wsdl:message name="getInterestAndExchangeGroupNamesResponse">
+    <wsdl:part name="parameters" element="ywvr:getInterestAndExchangeGroupNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getInterestAndExchangeNamesRequest">
+    <wsdl:part name="parameters" element="ywvr:getInterestAndExchangeNames" />
+  </wsdl:message>
+  <wsdl:message name="getInterestAndExchangeGroupNamesRequest">
+    <wsdl:part name="parameters" element="ywvr:getInterestAndExchangeGroupNames" />
+  </wsdl:message>
+  <wsdl:portType name="SweaWebServicePortType">
+    <wsdl:operation name="getInterestAndExchangeNames">
+      <wsdl:input wsaw:Action="urn:getInterestAndExchangeNames" message="tns:getInterestAndExchangeNamesRequest" />
+      <wsdl:output wsaw:Action="urn:getInterestAndExchangeNamesResponse" message="tns:getInterestAndExchangeNamesResponse" />
+      <wsdl:fault wsaw:Action="urn:getInterestAndExchangeNamesServiceException" name="ServiceException" message="tns:ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getMonthlyAverageExchangeRates">
+      <wsdl:input wsaw:Action="urn:getMonthlyAverageExchangeRates" message="tns:getMonthlyAverageExchangeRatesRequest" />
+      <wsdl:output wsaw:Action="urn:getMonthlyAverageExchangeRatesResponse" message="tns:getMonthlyAverageExchangeRatesResponse" />
+      <wsdl:fault wsaw:Action="urn:getMonthlyAverageExchangeRatesServiceException" name="ServiceException" message="tns:ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getInterestAndExchangeGroupNames">
+      <wsdl:input wsaw:Action="urn:getInterestAndExchangeGroupNames" message="tns:getInterestAndExchangeGroupNamesRequest" />
+      <wsdl:output wsaw:Action="urn:getInterestAndExchangeGroupNamesResponse" message="tns:getInterestAndExchangeGroupNamesResponse" />
+      <wsdl:fault wsaw:Action="urn:getInterestAndExchangeGroupNamesServiceException" name="ServiceException" message="tns:ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getCrossRates">
+      <wsdl:input wsaw:Action="urn:getCrossRates" message="tns:getCrossRatesRequest" />
+      <wsdl:output wsaw:Action="urn:getCrossRatesResponse" message="tns:getCrossRatesResponse" />
+      <wsdl:fault wsaw:Action="urn:getCrossRatesServiceException" name="ServiceException" message="tns:ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllCrossNames">
+      <wsdl:input wsaw:Action="urn:getAllCrossNames" message="tns:getAllCrossNamesRequest" />
+      <wsdl:output wsaw:Action="urn:getAllCrossNamesResponse" message="tns:getAllCrossNamesResponse" />
+      <wsdl:fault wsaw:Action="urn:getAllCrossNamesServiceException" name="ServiceException" message="tns:ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getCalendarDays">
+      <wsdl:input wsaw:Action="urn:getCalendarDays" message="tns:getCalendarDaysRequest" />
+      <wsdl:output wsaw:Action="urn:getCalendarDaysResponse" message="tns:getCalendarDaysResponse" />
+      <wsdl:fault wsaw:Action="urn:getCalendarDaysServiceException" name="ServiceException" message="tns:ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getAnnualAverageExchangeRates">
+      <wsdl:input wsaw:Action="urn:getAnnualAverageExchangeRates" message="tns:getAnnualAverageExchangeRatesRequest" />
+      <wsdl:output wsaw:Action="urn:getAnnualAverageExchangeRatesResponse" message="tns:getAnnualAverageExchangeRatesResponse" />
+      <wsdl:fault wsaw:Action="urn:getAnnualAverageExchangeRatesServiceException" name="ServiceException" message="tns:ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getInterestAndExchangeRates">
+      <wsdl:input wsaw:Action="urn:getInterestAndExchangeRates" message="tns:getInterestAndExchangeRatesRequest" />
+      <wsdl:output wsaw:Action="urn:getInterestAndExchangeRatesResponse" message="tns:getInterestAndExchangeRatesResponse" />
+      <wsdl:fault wsaw:Action="urn:getInterestAndExchangeRatesServiceException" name="ServiceException" message="tns:ServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getLatestInterestAndExchangeRates">
+      <wsdl:input wsaw:Action="urn:getLatestInterestAndExchangeRates" message="tns:getLatestInterestAndExchangeRatesRequest" />
+      <wsdl:output wsaw:Action="urn:getLatestInterestAndExchangeRatesResponse" message="tns:getLatestInterestAndExchangeRatesResponse" />
+      <wsdl:fault wsaw:Action="urn:getLatestInterestAndExchangeRatesServiceException" name="ServiceException" message="tns:ServiceException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SweaWebServiceSoap12Binding" type="tns:SweaWebServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getInterestAndExchangeNames">
+      <soap12:operation soapAction="urn:getInterestAndExchangeNames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap12:fault use="literal" name="tns:ServiceException" namespace="" />
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMonthlyAverageExchangeRates">
+      <soap12:operation soapAction="urn:getMonthlyAverageExchangeRates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap12:fault use="literal" name="tns:ServiceException" namespace="" />
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getLatestInterestAndExchangeRates">
+      <soap12:operation soapAction="urn:getLatestInterestAndExchangeRates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap12:fault use="literal" name="tns:ServiceException" namespace="" />
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getInterestAndExchangeGroupNames">
+      <soap12:operation soapAction="urn:getInterestAndExchangeGroupNames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap12:fault use="literal" name="tns:ServiceException" namespace="" />
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCrossRates">
+      <soap12:operation soapAction="urn:getCrossRates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap12:fault use="literal" name="tns:ServiceException" namespace="" />
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAllCrossNames">
+      <soap12:operation soapAction="urn:getAllCrossNames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap12:fault use="literal" name="tns:ServiceException" namespace="" />
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCalendarDays">
+      <soap12:operation soapAction="urn:getCalendarDays" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap12:fault use="literal" name="tns:ServiceException" namespace="" />
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAnnualAverageExchangeRates">
+      <soap12:operation soapAction="urn:getAnnualAverageExchangeRates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap12:fault use="literal" name="tns:ServiceException" namespace="" />
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getInterestAndExchangeRates">
+      <soap12:operation soapAction="urn:getInterestAndExchangeRates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap12:fault use="literal" name="tns:ServiceException" namespace="" />
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SweaWebService">
+    <wsdl:port name="SweaWebServiceHttpSoap12Endpoint" binding="tns:SweaWebServiceSoap12Binding">
+      <soap12:address location="https://swea.riksbank.se:443/sweaWS/services/SweaWebServiceHttpSoap12Endpoint" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

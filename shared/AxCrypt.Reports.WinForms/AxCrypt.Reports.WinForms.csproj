@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\axcrypt-net\AxCrypt.Abstractions\AxCrypt.Abstractions.csproj" />
+    <ProjectReference Include="..\..\axcrypt-net\AxCrypt.Api\AxCrypt.Api.csproj" />
+    <ProjectReference Include="..\..\axcrypt-net\AxCrypt.Desktop\AxCrypt.Desktop.csproj" />
+    <ProjectReference Include="..\AxCrypt.International.WebServices\AxCrypt.International.WebServices.csproj" />
+    <ProjectReference Include="..\AxCrypt.International\AxCrypt.International.csproj" />
+    <ProjectReference Include="..\AxCrypt.Reports\AxCrypt.Reports.csproj" />
+  </ItemGroup>
+
+</Project>

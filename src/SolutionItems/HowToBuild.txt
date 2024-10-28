@@ -1,0 +1,29 @@
+﻿About SolutionItems.dll
+=======================
+
+The project 'SolutionItems' is a dummy project to bridge the missing feature of a generic MSBuild project
+and also to compensate for older versions of Visual Studio Express not supporting the 'Solution Items' feature
+of the non-Express editions of Visual Studio.
+
+How To Build
+============
+
+Windows: Visual Studio 2015 (Any version including Community) or Xamarin Studio. Load the solution and hit 'Build'.
+
+Linux: Not recently tested.
+
+About Configuration and Platforms
+=================================
+
+One solution file is used for to build all configurations and platforms.
+
+Supported configurations are:
+
+Debug            - Debugging and development.
+Release          - Distributable.
+
+Target platforms are:
+
+Any CPU          - Defined for all
+
+Unfortunately we cannot provide any level of support for use of the source code. Enjoy responsibly!

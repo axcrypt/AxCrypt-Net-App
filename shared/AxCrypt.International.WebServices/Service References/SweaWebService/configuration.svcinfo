@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configurationSnapshot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:schemas-microsoft-com:xml-wcfconfigurationsnapshot">
+  <behaviors />
+  <bindings>
+    <binding digest="System.ServiceModel.Configuration.CustomBindingElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data name=&quot;SweaWebServiceSoap12Binding&quot;&gt;&lt;httpsTransport /&gt;&lt;textMessageEncoding messageVersion=&quot;Soap12&quot; /&gt;&lt;/Data&gt;" bindingType="customBinding" name="SweaWebServiceSoap12Binding" />
+  </bindings>
+  <endpoints>
+    <endpoint normalizedDigest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;https://swea.riksbank.se:443/sweaWS/services/SweaWebServiceHttpSoap12Endpoint&quot; binding=&quot;customBinding&quot; bindingConfiguration=&quot;SweaWebServiceSoap12Binding&quot; contract=&quot;SweaWebService.SweaWebServicePortType&quot; name=&quot;SweaWebServiceHttpSoap12Endpoint&quot; /&gt;" digest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;https://swea.riksbank.se:443/sweaWS/services/SweaWebServiceHttpSoap12Endpoint&quot; binding=&quot;customBinding&quot; bindingConfiguration=&quot;SweaWebServiceSoap12Binding&quot; contract=&quot;SweaWebService.SweaWebServicePortType&quot; name=&quot;SweaWebServiceHttpSoap12Endpoint&quot; /&gt;" contractName="SweaWebService.SweaWebServicePortType" name="SweaWebServiceHttpSoap12Endpoint" />
+  </endpoints>
+</configurationSnapshot>
