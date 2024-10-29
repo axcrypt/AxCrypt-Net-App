@@ -36,7 +36,7 @@ namespace AxCrypt.App.Windows
 
             MainPage = new MainPage();
 
-            //_progressBackgroundWorker = new ProgressBackgroundComponent(null);
+            _progressBackgroundWorker = new ProgressBackgroundComponent(null);
 
 
             //PlatformInitializer.Initialize();
@@ -46,23 +46,23 @@ namespace AxCrypt.App.Windows
         {
             base.OnStart();
 
-            //Task.Run(async () =>
-            //{
-            //    try
-            //    {
-            //        await InitializeProgram();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        await new ApplicationManager().ClearAllSettings();
-            //        //MessageBox.Show(ex.Message, "AxCrypt failed to start. All Settings cleared.", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            //        Quit();
-            //    }
-            //    finally
-            //    {
-            //        _isInitializing = false;
-            //    }
-            //});
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await InitializeProgram();
+                }
+                catch (Exception ex)
+                {
+                    await new ApplicationManager().ClearAllSettings();
+                    //MessageBox.Show(ex.Message, "AxCrypt failed to start. All Settings cleared.", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    Quit();
+                }
+                finally
+                {
+                    _isInitializing = false;
+                }
+            });
         }
 
         private async Task InitializeProgram()

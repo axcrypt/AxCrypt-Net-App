@@ -13,7 +13,8 @@ public class ProgressBackgroundComponent : Component, IProgressBackground
     {
         if (container == null)
         {
-            throw new ArgumentNullException("container");
+            return;
+            //throw new ArgumentNullException("container");
         }
 
         container.Add(this);

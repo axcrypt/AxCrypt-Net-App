@@ -17,7 +17,7 @@ namespace AxCrypt.App.Windows
         {
             base.OnAppearing();
 
-            //New<IRuntimeEnvironment>().FirstInstanceIsReady();
+            New<IRuntimeEnvironment>().FirstInstanceIsReady();
 
         }
 

@@ -1,6 +1,7 @@
 ﻿using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Windows.Helpers;
 using AxCrypt.App.Windows.Services;
+using AxCrypt.App.Windows.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 
@@ -81,7 +82,7 @@ namespace AxCrypt.App.Windows
         {
             services.AddSingleton<ITrayService, TrayService>();
             services.AddSingleton<INotificationService, NotificationService>();
-
+            services.AddSingleton<HomeViewModel>();
 
         }
     }

@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">AxCrypt.App.Windows</a>
+        <a class="navbar-brand" href="">AxCrypt</a>
     </div>
 </div>
 
@@ -9,19 +9,46 @@
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+            <NavLink class="nav-link one" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link two" href="securedfolders">
+                <span class="oi scrdfldr" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.EncryptedFoldersToolStripMenuItemText</span>
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+            <NavLink class="nav-link three" href="passwordManager">
+                <span class="oi scrts" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.Introduction2MailText16</span>
             </NavLink>
+        </div>
+        @* <div class="nav-item px-3">
+            <NavLink class="nav-link">
+                <span class="oi scrdmssngr" aria-hidden="true"></span> <span class="nav-text">Secured messenger</span>
+            </NavLink>
+        </div> *@
+        <div class="nav-item px-3">
+            <NavLink class="nav-link four" href="notification">
+                <span class="oi notifctn" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.PromptNotificationsText</span>
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link five" href="SupportIndex">
+                <span class="oi suprt" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.PrioritySupportTitle</span>
+            </NavLink>
+        </div>
+        <div class="abt-sec">
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="mainpage" @onclick="FeedbackPopup">
+                    <span class="oi fdbck" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SendFeedbackTitle</span>
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="mainpage" @onclick="AboutPopup">
+                    <span class="oi info" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.AboutAxcryptLinkLabel</span>
+                </NavLink>
+            </div>
         </div>
     </nav>
 </div>
