@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:AxCrypt.App.Windows.Components.Pages.LogPage"
+             x:Class="AxCrypt.App.Windows.LogViewerWindow"
+             Title="LogViewerWindow">
+    <BlazorWebView HostPage="wwwroot/index.html">
+        <BlazorWebView.RootComponents>
+            <RootComponent Selector="#app" ComponentType="{x:Type components:DebugLogOutput}" />
+        </BlazorWebView.RootComponents>
+    </BlazorWebView>
+</ContentPage>

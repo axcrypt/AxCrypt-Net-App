@@ -49,41 +49,41 @@ public static class Utility
     //    return notification;
     //}
 
-    //public static bool IsBusinessUser
-    //{
-    //    get
-    //    {
-    //        if (IsUserAuthorized())
-    //        {
-    //            return New<IXecretsUserGateway>(UserContext.Name).UserSubscriptionLevel == SubscriptionLevel.Business;
-    //        }
-    //        return true;
-    //    }
-    //}
+    public static bool IsBusinessUser
+    {
+        get
+        {
+            //if (IsUserAuthorized())
+            //{
+            //    return New<IXecretsUserGateway>(UserContext.Name).UserSubscriptionLevel == SubscriptionLevel.Business;
+            //}
+            return true;
+        }
+    }
 
-    //public static bool IsPremiumUser
-    //{
-    //    get
-    //    {
-    //        if (IsUserAuthorized())
-    //        {
-    //            return New<IXecretsUserGateway>(UserContext.Name).UserSubscriptionLevel == SubscriptionLevel.Premium;
-    //        }
-    //        return false;
-    //    }
-    //}
+    public static bool IsPremiumUser
+    {
+        get
+        {
+            //if (IsUserAuthorized())
+            //{
+            //    return New<IXecretsUserGateway>(UserContext.Name).UserSubscriptionLevel == SubscriptionLevel.Premium;
+            //}
+            return true;
+        }
+    }
 
-    //public static bool IsPasswordManager
-    //{
-    //    get
-    //    {
-    //        if (IsUserAuthorized())
-    //        {
-    //            return New<IXecretsUserGateway>(UserContext.Name).UserSubscriptionLevel == SubscriptionLevel.PasswordManager;
-    //        }
-    //        return false;
-    //    }
-    //}
+    public static bool IsPasswordManager
+    {
+        get
+        {
+            //if (IsUserAuthorized())
+            //{
+            //    return New<IXecretsUserGateway>(UserContext.Name).UserSubscriptionLevel == SubscriptionLevel.PasswordManager;
+            //}
+            return true;
+        }
+    }
 
     private static bool IsUserAuthorized()
     {
@@ -98,5 +98,10 @@ public static class Utility
     public static DevicePlatform GetCurrentPlatform()
     {
         return DeviceInfo.Platform;
+    }
+
+    public static bool ToggleUpgradePopup(bool currentState)
+    {
+        return !currentState;
     }
 }

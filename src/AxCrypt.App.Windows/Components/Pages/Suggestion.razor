@@ -1,0 +1,65 @@
+﻿@using static AxCrypt.Abstractions.TypeResolve
+
+<div class="suggestion">
+    <div class="sugg-popup @(showSugPopup ? "active" : "")" @onclick="TogglePopup" id="popup-part">
+        <span @onclick="DownloadMobileAppLink">Do you have our <bold class="text-style">Mobile Application ?</bold></span>
+        <img class="close-img" @onclick="ClosePopup" style="right: -10px; top: -10px;" />
+        <div class="dwnld-sec" style="margin: 18px 0px 20px;">
+            <img class="appstre-img" src="" alt="hand-img" @onclick="DownloadiOsApp" />
+            <img class="gglplay-img " src="" alt="hand-img" @onclick="DownloadAndroidApp" />
+        </div>
+        <div>
+            <span> Have you tried our <bold class="text-style">Password Generator?</bold></span><br />
+            <img class="pwdgnrt-img" src="" alt="hand-img" /><br />
+            <button class="button learn-btn sub-lvl-clr" @onclick="PasswordGeneratorLink" style="margin-right: 20px;">
+                <span>Try now</span>
+            </button>
+            <button class="button learn-btn" @onclick="LearnMore">
+                <span>Learn more</span>
+            </button>
+        </div>
+    </div>
+</div>
+@code {
+
+    private bool showSugPopup = true;
+    private DateTime lastClosedTime = DateTime.MinValue;
+
+    private void TogglePopup()
+    {
+        if ((DateTime.Now - lastClosedTime).TotalMinutes >= 5)
+        {
+            showSugPopup = !showSugPopup;
+        }
+    }
+    private void ClosePopup()
+    {
+        showSugPopup = false;
+        lastClosedTime = DateTime.Now;
+    }
+
+    public void DownloadMobileAppLink()
+    {
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://axcrypt.net/download/"));
+    }
+
+    public void PasswordGeneratorLink()
+    {
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://axcrypt.net/information/password-generator/"));
+    }
+
+    private void DownloadAndroidApp()
+    {
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x"));
+    }
+
+    private void DownloadiOsApp()
+    {
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://apps.apple.com/us/app/axcrypt/id1157695909"));
+    }
+
+    private void LearnMore()
+    {
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://axcrypt.net/information/requirements/"));
+    }
+}

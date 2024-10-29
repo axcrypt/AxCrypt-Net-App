@@ -1,0 +1,111 @@
+﻿@using AxCrypt.Api.Model
+@using AxCrypt.App.Windows.Helpers
+@using AxCrypt.Core.UI
+@using AxCrypt.Core.Extensions
+@using static AxCrypt.Abstractions.TypeResolve
+
+@{
+    DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
+}
+
+<div id="modal-dialog1" class="modalDialog" style="display: block;">
+    <div class="invite-popup text-center">
+        <div>
+            <div class="close-img" onclick="closeModalDialog('modal-dialog1')"></div>
+            <div class="center-column">
+                <div>
+                    <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
+                    <span class="text-center font-bold" style="font-size: 20px;">
+                        Invite your friend to AxCrypt!
+                    </span>
+                </div>
+                <div class="invite-text">
+                    <span class="grey-clr">Enter user email whom you want to invite:</span><br />
+                    <input type="text" id="inviteFriend" name="inviteFriend" placeholder="Type your friend's email here" @bind-value="@InvitedUser" @onfocus="OnInputFocus">
+                    @if (!string.IsNullOrEmpty(ErrorMessage))
+                    {
+                        <div class="error-message" style="color:red;">@ErrorMessage</div>
+                    }
+                </div>
+                <div>
+                    <button class="button font-medium success btn-large" @onclick="()=> InviteFriend()">Invite!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (IsSuccess)
+{
+    <div id="modal-dialog1" class="modalDialog" style="display: block;">
+        <div class="invite-popup text-center">
+            <div class="center-column">
+                <div>
+                    <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
+                    <span class="text-center font-bold" style="font-size: 20px;"> Your friend @InvitedUser is invited successfully! </span>
+                </div>
+                <button class="button font-medium success btn-large" @onclick="CloseSuccessPopup"> OK</button>
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .error-message {
+        color: red;
+        margin-top: 5px;
+    }
+</style>
+@code {
+    private bool IsSuccess { get; set; }
+    private string? ErrorMessage { get; set; }
+    private string? InvitedUser { get; set; }
+    private bool ShowInvitePopup { get; set; }
+
+    private void OnInputFocus()
+    {
+        ErrorMessage = string.Empty;
+    }
+
+    private async Task InviteFriend()
+    {
+        if (string.IsNullOrEmpty(InvitedUser) && InvitedUser != "")
+        {
+            ErrorMessage = "Please Enter the valid email";
+            return;
+        }
+        ErrorMessage = string.Empty;
+        await EnsureUserAccountStatusAndGetInvitedUserPublicKey();
+        ShowInvitePopup = false;
+        IsSuccess = true;
+        return;
+    }
+
+    private async Task<IEnumerable<Core.Crypto.Asymmetric.UserPublicKey>> EnsureUserAccountStatusAndGetInvitedUserPublicKey()
+    {
+        EmailAddress invitedEmail = EmailAddress.Parse(InvitedUser);
+        AccountStatus accountStatus = await invitedEmail.GetValidEmailAccountStatusAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
+
+        IEnumerable<EmailAddress> invitedEmails = new EmailAddress[] { invitedEmail };
+        return await invitedEmails.ToAvailableKnownPublicKeysAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
+    }
+
+    private bool ShowInviteUserDialog(AccountStatus accountStatus)
+    {
+        if (accountStatus == AccountStatus.Offline || accountStatus == AccountStatus.Unknown)
+        {
+            return false;
+        }
+        if (accountStatus != AccountStatus.NotFound)
+        {
+            return true;
+        }
+
+        return true;
+    }
+
+    private void CloseSuccessPopup()
+    {
+        IsSuccess = false;
+        InvitedUser = string.Empty;
+        return;
+    }
+}

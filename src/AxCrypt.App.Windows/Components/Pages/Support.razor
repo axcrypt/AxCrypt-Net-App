@@ -1,0 +1,154 @@
+﻿@page "/SupportIndex"
+@using AxCrypt.Api.Model
+@using AxCrypt.App.Windows.Helpers
+@using AxCrypt.App.Windows.Services
+@using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.Core.UI.Footer
+@using AxCrypt.Content;
+@using static AxCrypt.Abstractions.TypeResolve;
+
+@inject SupportViewModel supportViewModel;
+@inject SupportService supportService;
+@inject NavigationManager navigationManager;
+@inject IJSRuntime JSRuntime
+
+<div class="mb-sec">
+    <NavLink class="mb-title flex-start" href="mainpagemobile" style="align-items: center;">
+        <img class="back-btn" src="" alt="go-back-img" />
+        <span class="goback-text">Support</span>
+    </NavLink>
+</div>
+@if (subscriptionLevel == SubscriptionLevel.Free)
+{
+    <div>
+        <h2 class="page-title">@Texts.PromptSupport</h2>
+        <div class="label-text free-sec" style="text-align:center;">
+            <label>Sorry,</label>
+            <p class="SupWarngText">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
+            <img class="support-image" src="" alt="support-img" />
+        </div>
+    </div>
+}
+else
+{
+    <div id="content-index" class="medium-12 columns support">
+        <div class="">
+            <h1 class="page-title">
+                @pageTitle
+            </h1>
+            <p class="hide-txt">@pageDescription</p>
+        </div>
+        <div>
+            <div class="label-text">
+                <label>How can we help you?</label>
+            </div>
+            <div style="display:flex; padding:8px 0px;">
+                <a style="text-decoration:none;" href="https://axcrypt.net/information/guides/get-started/">
+                    <div class="link-box">
+                        <img class="idea-img" src="" alt="idea-img" />
+                        <div style="padding: 5px 0px; line-height: 16px;">
+                            <span class="lable-txt">@Texts.SupportGetStartedVideoText</span><br />
+                            <span class="link-txt">@linkLabel</span>
+                            <img class="arrow-img" src="" alt="arrow-img" />
+                        </div>
+                    </div>
+                </a>
+                <a style="text-decoration:none;" href="https://axcrypt.net/information/faq/">
+                    <div class="link-box" style="margin-left: 35px;">
+                        <img class="faq-img" src="" alt="faq-img" />
+                        <div style="padding: 5px 0px; line-height: 16px;">
+                            <span class="lable-txt">Let`s check our</span><br />
+                            <span class="link-txt">FAQ Page</span>
+                            <img class="arrow-img" src="" alt="arrow-img" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div style="padding-top:30px;">
+                <span class="desc-txt">Or describe your problem here:</span>
+            </div>
+            <div>
+                <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="supportViewModel.Body" tabindex=1>
+                        </textarea>
+            </div>
+            <div class="btn-sec">
+                <input type="reset" class="button border btn-large font-medium btn-hide" value="@Texts.ButtonCancelText" />
+                <input type="submit" class="button success btn-large font-medium" value="@Texts.ButtonSendText" @onclick="SupportValidSubmit" />
+            </div>
+        </div>
+    </div>
+}
+@if (!IsLoading)
+{
+    @if (!IsWideScreen)
+    {
+        <footer>
+            <AxCrypt.MauiBlazor.Components.Shared.Mobile.Footer footerActions="@footerActions" />
+        </footer>
+    }
+}
+else
+{
+    <p>Loading...</p>
+}
+@code {
+    private SubscriptionLevel subscriptionLevel;
+    private string pageTitle = "";
+    private string pageDescription = "";
+    private string linkLabel = "";
+    private string supportInfo = "";
+    private string feedBack = "";
+    protected override void OnInitialized()
+    {
+        subscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        supportViewModel = new SupportViewModel(supportService);
+        linkLabel = Texts.GetStartedLinkLabel;
+        if (Utility.IsBusinessUser)
+        {
+            pageTitle = Texts.PrioritySupportTitle;
+            pageDescription = Texts.BusinessSupportInfo;
+        }
+        else if (Utility.IsPremiumUser)
+        {
+            pageTitle = Texts.SupportPageTitle;
+            pageDescription = Texts.PremiumSupportInfo;
+        }
+        else if (Utility.IsPasswordManager)
+        {
+            pageTitle = Texts.PromptSupport;
+        }
+        else
+        {
+            pageTitle = Texts.PromptSupport;
+            supportInfo = Texts.FreeSupportInfo;
+            feedBack = Texts.LinkToFeedbackWebPage;
+        }
+    }
+    private async Task SupportValidSubmit()
+    {
+        await supportViewModel.SupportAsync(supportViewModel);
+        navigationManager.NavigateTo("/SupportIndex", true);
+    }
+    bool IsWideScreen { get; set; }
+    bool IsLoading { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error determining screen width: {ex.Message}");
+            }
+            finally
+            {
+                IsLoading = false;
+                StateHasChanged();
+            }
+        }
+    }
+    private FooterActions footerActions = FooterActions.Support;
+}

@@ -16,6 +16,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <MauiXaml Update="LogViewerWindow.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+  </ItemGroup>
+  <ItemGroup>
     <None Update="App.xaml">
       <SubType>Designer</SubType>
     </None>

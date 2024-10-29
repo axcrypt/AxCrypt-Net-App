@@ -7,10 +7,15 @@ using Microsoft.AspNetCore.Components;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Core.Session;
 using AxCrypt.App.Windows.Code;
+using AxCrypt.Common;
+using static System.Net.Mime.MediaTypeNames;
+using AxCrypt.Core.Extensions;
+using System.Globalization;
+using AxCrypt.Content;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class HomeViewModel: ISignIn
+public class HomeViewModel : ISignIn
 {
     private readonly NavigationManager _navigationManager;
     private MainViewModel _mainViewModel;
@@ -19,7 +24,7 @@ public class HomeViewModel: ISignIn
     public HomeViewModel(NavigationManager navigationManager)
     {
         _navigationManager = navigationManager ?? throw new ArgumentNullException(nameof(navigationManager));
-        
+
         SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent();
     }
 
@@ -74,6 +79,92 @@ public class HomeViewModel: ISignIn
         ShowRenewSubscriptionDialog();
     }
 
+    private async Task SetLanguageAsync(string cultureName)
+    {
+        Resolve.UserSettings.CultureName = cultureName;
+        if (Resolve.Log.IsInfoEnabled)
+        {
+            Resolve.Log.LogInfo("Set new UI language culture to '{0}'.".InvariantFormat(Resolve.UserSettings.CultureName));
+        }
+
+        UpdateArabicStyle();
+
+        InitializeContentResources();
+        await SetWindowTitleTextAsync(_mainViewModel.LoggedOn);
+        //_daysLeftPremiumLabel.UpdateText();
+        await SetSoftwareStatus();
+    }
+
+    private void InitializeContentResources()
+    {
+        SetCulture();
+    }
+
+    private static void SetCulture()
+    {
+        if (String.IsNullOrEmpty(Resolve.UserSettings.CultureName))
+        {
+            return;
+        }
+        Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Resolve.UserSettings.CultureName);
+    }
+
+    private async Task SetSignInSignOutStatusAsync(bool isSignedIn)
+    {
+        await SetWindowTitleTextAsync(isSignedIn);
+
+        //bool isSignedInWithAxCryptId = New<KnownIdentities>().IsLoggedOnWithAxCryptId;
+
+        //_createAccountToolStripMenuItem.Enabled = !isSignedIn;
+        //_debugManageAccountToolStripMenuItem.Enabled = isSignedInWithAxCryptId;
+        //_exportMyPrivateKeyToolStripMenuItem.Enabled = isSignedInWithAxCryptId;
+        //_exportSharingKeyToolStripMenuItem.Enabled = isSignedInWithAxCryptId;
+        //_importMyPrivateKeyToolStripMenuItem.Enabled = !isSignedIn;
+        //_importOthersSharingKeyToolStripMenuItem.Enabled = isSignedInWithAxCryptId;
+        //_inviteUserToolStripMenuItem.Enabled = New<AxCryptOnlineState>().IsOnline && isSignedIn;
+        //_optionsEncryptionUpgradeModeToolStripMenuItem.Enabled = isSignedInWithAxCryptId;
+        //_optionsChangePassphraseToolStripMenuItem.Enabled = New<AxCryptOnlineState>().IsOnline;
+        //_passwordResetToolStripMenuItem.Enabled = !isSignedIn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail);
+        //_signInToolStripMenuItem.Visible = !isSignedIn;
+        //_notifySignInToolStripMenuItem.Visible = !isSignedIn;
+        //_signOutToolStripMenuItem.Visible = isSignedIn;
+        //_notifySignOutToolStripMenuItem.Visible = isSignedIn;
+        //_encryptionUpgradeMenuItem.Enabled = isSignedInWithAxCryptId;
+    }
+
+    public string Text { get; set; }
+
+    private async Task SetWindowTitleTextAsync(bool isLoggedOn)
+    {
+        Text = await new Display().WindowTitleTextAsync(isLoggedOn);
+    }
+
+    private async Task SetSoftwareStatus()
+    {
+        //_softwareStatusButton.Image = Resources.bulb_green_40px;
+        //_softwareStatusButton.Visible = true;
+        VersionUpdateStatus status = _mainViewModel.VersionUpdateStatus;
+        switch (status)
+        {
+            case VersionUpdateStatus.ShortTimeSinceLastSuccessfulCheck:
+            case VersionUpdateStatus.IsUpToDate:
+                //_softwareStatusButton.Visible = false;
+                break;
+
+            case VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck:
+                //_softwareStatusButton.ToolTipText = Texts.OldVersionTooltip;
+                break;
+
+            case VersionUpdateStatus.NewerVersionIsAvailable:
+                //_softwareStatusButton.ToolTipText = Texts.NewVersionIsAvailableText.InvariantFormat(_mainViewModel.DownloadVersion.Version) + ' ' + Texts.ClickToDownloadText;
+                break;
+
+            case VersionUpdateStatus.Unknown:
+                //_softwareStatusButton.ToolTipText = Texts.ClickToCheckForNewerVersionTooltip;
+                break;
+        }
+    }
+
     private void UpdateArabicStyle()
     {
         //if (Resolve.UserSettings.CultureName == "ar-AR")
@@ -85,4 +176,24 @@ public class HomeViewModel: ISignIn
         //this.RightToLeft = RightToLeft.No;
     }
 
+    private void ShowRenewSubscriptionDialog()
+    {
+        if (!_mainViewModel.LoggedOn || !AxCryptUserAccountViewModel.HadAnyPaidSubscription)
+        {
+            return;
+        }
+
+        //using (RenewSubscriptionPromptDialog dialog = new RenewSubscriptionPromptDialog(this))
+        //{
+        //    if (dialog.HideDialog)
+        //    {
+        //        return;
+        //    }
+
+        //    if (dialog.ShowDialog(this) != DialogResult.OK)
+        //    {
+        //        return;
+        //    }
+        //}
+    }
 }

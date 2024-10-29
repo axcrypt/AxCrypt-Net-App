@@ -1,0 +1,54 @@
+﻿@using AxCrypt.App.Windows.Models
+<link href="css/login.min.css" rel="stylesheet" />
+<section class="content">
+    <article class="left-section reg-sec" id="content-wrap">
+        <h1 class="reg-tle">Welcome to <span class="grn-clr">AxCrypt</span> world!</h1>
+        <span style="margin-bottom: 10px;">Currently you are <b class="font-extra-bold">offline</b>. However, you still can <span class="grn-clr font-extra-bold"><b>Sign up!</b></span></span><br />
+        <label class="sub-head">Sign up</label>
+        <EditForm Model="@registerModel" class="signup-sec">
+            <div>
+                <div>
+                    <label>Your email</label>
+                    <input type="email" @bind-value="registerModel.UserName" class="form-control email-img" placeholder="Enter your email" />
+                </div>
+                <div>
+                    <label>Create a password:</label>
+                    <input type="password" @bind-value="registerModel.Password" class="form-control pswd-img" placeholder="Create your password" />
+                </div>
+                <div>
+                    <label>Verify password:</label>
+                    <input type="password" @bind-value="registerModel.VerifyPassword" class="form-control pswd-img" placeholder="Type your password one more time" />
+                </div>
+                <div class="check-bx">
+                    <input type="checkbox" />
+                    <span class="che-txt">Show password</span>
+                </div>
+                <button class="button grn-bg whte-clr" style="width:100%; margin: 20px 0px;" @onclick="ConfimationPopup">Sign Up </button>
+                <div class="signup-link">
+                    <NavLink class="nav-link" href="mailto:support@axcrypt.net">
+                        <span class="che-txt">Do you need any help?</span>
+                        <span class="grn-clr">Contact us!</span>
+                    </NavLink>
+                </div>
+            </div>
+        </EditForm>
+    </article>
+    <aside class="right-section">
+        <img class="sgnin-img" src="" alt="" />
+    </aside>
+    @if (confimationPopup)
+    {
+        <AxCrypt.MauiBlazor.Windows.Pages.Desktop.ConfirmationPopup />
+    }
+</section>
+@code {
+    RegisterModel registerModel = new();
+    // private void Submit()
+    // {
+    // }
+    bool confimationPopup = false;
+    void ConfimationPopup()
+    {
+        confimationPopup = !confimationPopup;
+    }
+}

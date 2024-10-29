@@ -67,7 +67,12 @@
 
     <ItemGroup>
       <Folder Include="AxCryptWindowsForms\" />
-      <Folder Include="Models\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MauiXaml Update="LogViewerWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
     </ItemGroup>
 
 </Project>

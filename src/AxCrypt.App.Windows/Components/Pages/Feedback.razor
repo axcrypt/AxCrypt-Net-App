@@ -1,0 +1,91 @@
+﻿@page "/feedback"
+
+@using AxCrypt.Abstractions
+@using AxCrypt.App.Components.Models
+@using AxCrypt.Content
+@using AxCrypt.Core.Crypto
+@using AxCrypt.Core.Service
+@using AxCrypt.Core.UI
+@using static AxCrypt.Abstractions.TypeResolve
+
+<div id="modal-dialog3" class="modalDialog fdbck-popup" style="display: block;">
+    <div class="text-center">
+        <div class="close-img" onclick="closeModalDialog('modal-dialog3')"></div>
+        <img class="fdbck-img" src="feedback-img" />
+        <p class="bold-highlight">Please let us know if you experience any <span>difficulties</span> with AxCrypt, have <span>questions, ideas or praises</span> to share! </p>
+        <form id="feedback-form" @onsubmit="HandleFormSubmit">
+            <div class="flex-start" style="margin-bottom: -12px;">
+                @foreach (FeedbackSubject subject in AllSubject)
+                {
+                    <button class="button btn-small @(subject == SelectedSubject ? "highlighted font-medium" : "")"
+                            @onclick="() => SelectSubject(subject)">
+                        @subject.ToString()
+                    </button>
+                }
+            </div>
+
+            <div class="align-items" style="gap: 4%;">
+                <textarea id="userInput" @bind="userInput" rows="5" cols="30"></textarea>
+            </div>
+            <input type="submit" id="submit-button" class="button success btn-medium font-medium" value="Submit" style="margin-right: 15px; padding: 6px 0px;" />
+            <input type="button" onclick="closeModalDialog('modal-dialog3')" class="button border btn-medium font-medium" value="Cancel" style="" />
+        </form>
+    </div>
+</div>
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        AllSubject = Enum.GetValues(typeof(FeedbackSubject))
+                 .Cast<FeedbackSubject>()
+                 .ToList();
+    }
+
+    private string userInput { get; set; } = string.Empty;
+    private void CloseTextArea()
+    {
+        userInput = "";
+    }
+
+    [Parameter]
+    public FeedbackSubject SelectedSubject { get; set; }
+
+    [Parameter]
+    public EventCallback<FeedbackSubject> SelectedSubjectChanged { get; set; }
+
+    private void SelectSubject(FeedbackSubject subject)
+    {
+        SelectedSubject = subject;
+    }
+
+    public List<FeedbackSubject> AllSubject { get; private set; }
+
+    private async Task HandleFormSubmit()
+    {
+        if (string.IsNullOrEmpty(userInput))
+        {
+            return;
+        }
+        // Perform form submission logic here
+        //await SelectedSubjectChanged.InvokeAsync(SelectedSubject);
+        // Optionally, reset form state or perform other actions
+        try
+        {
+            IAccountService accountService = New<LogOnIdentity, IAccountService>(New<KnownIdentities>().DefaultEncryptionIdentity);
+            try
+            {
+                using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorFeedbackMessage, Texts.ProgressIndicatorWaitMessage))
+                {
+                    await accountService.SendFeedbackAsync(SelectedSubject.ToString(), userInput);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        finally
+        {
+        }
+    }
+}

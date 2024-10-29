@@ -1,33 +1,49 @@
-﻿@page "/"
+﻿@page "/register"
 
 @using AxCrypt.Api.Model;
 @using AxCrypt.App.Windows.Helpers
 @using AxCrypt.App.Windows.ViewModels
-@using AxCrypt.Common;
-@using Microsoft.Maui.Devices;
+@using Microsoft.Maui.Devices
 @using static AxCrypt.Abstractions.TypeResolve;
 
-@inject HomeViewModel HomeModel
-@inject NavigationManager navigation
 @inject IJSRuntime JSRuntime
 
+<link href="css/@subscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
 
 @{
-    DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
+    DeviceIdiom currentDevice = GetCurrentDeviceIdiom();
 }
 
-<link href="css/login.min.css" rel="stylesheet" />
-
-<div dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
+@if (!IsLoading)
+{
     @if (IsWideScreen)
     {
-        <AxCrypt.App.Windows.Components.LoginPage />
+        <AxCrypt.App.Windows.Components.Pages.RegisterPage />
     }
-</div>
+}
+else
+{
+    <p>Loading...</p>
+}
 
 @code {
-    private bool IsLoading { get; set; }
-    private bool IsWideScreen { get; set; }
+    private SubscriptionLevel subscriptionLevel { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        subscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        await base.OnInitializedAsync();
+    }
+
+
+    private DeviceIdiom GetCurrentDeviceIdiom()
+    {
+        return DeviceInfo.Idiom;
+    }
+
+    bool IsWideScreen { get; set; }
+    bool IsLoading { get; set; }
+
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -36,13 +52,6 @@
             try
             {
                 IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
-
-                if (New<AxCryptOnlineState>().IsOffline)
-                {
-                    navigation.NavigateTo("/register");
-                }
-
-
             }
             catch (Exception ex)
             {
@@ -56,3 +65,4 @@
         }
     }
 }
+
