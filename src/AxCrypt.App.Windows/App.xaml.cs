@@ -15,6 +15,8 @@ using AxCrypt.Content;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Extensions;
 using AxCrypt.App.Windows.Desktop;
+using Microsoft.AspNetCore.Components;
+using AxCrypt.App.Windows.ViewModels;
 
 namespace AxCrypt.App.Windows
 {
@@ -31,11 +33,11 @@ namespace AxCrypt.App.Windows
 
         private KnownFoldersViewModel _knownFoldersViewModel;
 
-        public App()
+        public App(NavigationManager navigationManager, HomeViewModel homeModel)
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MainPage(navigationManager, homeModel);
 
             _progressBackgroundWorker = new ProgressBackgroundComponent(null);
 

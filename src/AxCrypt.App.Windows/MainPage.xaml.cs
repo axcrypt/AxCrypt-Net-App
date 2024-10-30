@@ -1,16 +1,20 @@
 ﻿using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Windows.Services;
+using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
+using Microsoft.AspNetCore.Components;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        HomeViewModel viewModel;
+        public MainPage(NavigationManager navigationManager, HomeViewModel homeModel)
         {
             InitializeComponent();
+            viewModel = homeModel;
         }
 
         protected override void OnAppearing()
@@ -18,7 +22,7 @@ namespace AxCrypt.App.Windows
             base.OnAppearing();
 
             New<IRuntimeEnvironment>().FirstInstanceIsReady();
-
+            viewModel.AxCryptMainForm_ShownAsync();
         }
 
         protected override void ChangeVisualState()

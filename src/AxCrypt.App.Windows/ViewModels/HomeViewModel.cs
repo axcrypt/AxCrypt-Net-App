@@ -26,6 +26,7 @@ public class HomeViewModel : ISignIn
         _navigationManager = navigationManager ?? throw new ArgumentNullException(nameof(navigationManager));
 
         SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent();
+        //AxCryptMainForm_ShownAsync();
     }
 
     private void SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent()
@@ -38,7 +39,7 @@ public class HomeViewModel : ISignIn
         New<SessionNotify>().AddCommand(async (notification) => await New<SessionNotificationHandler>().HandleNotificationAsync(notification));
     }
 
-    private async void AxCryptMainForm_ShownAsync(object sender, EventArgs e)
+    public async void AxCryptMainForm_ShownAsync()
     {
         New<IRuntimeEnvironment>().FirstInstanceIsReady();
         UpdateArabicStyle();
@@ -52,8 +53,14 @@ public class HomeViewModel : ISignIn
         await _fileOperationViewModel.IdentityViewModel.LogOnAsync.ExecuteAsync(null);
     }
 
-    private async Task SignInAsync()
+    private async Task SignInAsync(bool nav = true)
     {
+        if (nav)
+        {
+            _navigationManager.NavigateTo("/login");
+            return;
+        }
+
         SignUpSignIn signUpSignIn = new SignUpSignIn(_navigationManager)
         {
             //Version = _apiVersion,
