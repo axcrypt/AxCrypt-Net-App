@@ -15,6 +15,8 @@ using AxCrypt.Content;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Extensions;
 using AxCrypt.App.Windows.Desktop;
+using AxCrypt.Core.Ipc;
+using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using AxCrypt.App.Windows.ViewModels;
 
@@ -71,7 +73,7 @@ namespace AxCrypt.App.Windows
         private async Task InitializeProgram()
         {
             InitializeContentResources();
-            RegisterTypeFactories();
+            //RegisterTypeFactories();
             CheckLavasoftWebCompanionExistence();
             EnsureUiContextInitialized();
             EnsureFileAssociation();
@@ -104,6 +106,9 @@ namespace AxCrypt.App.Windows
         private void InitializeContentResources()
         {
             SetCulture();
+
+            TypeMap.Register.Singleton<IUIThread>(() => new UIThread(this));
+            TypeMap.Register.Singleton<IProgressBackground>(() => _progressBackgroundWorker);
         }
 
         private static void SetCulture()
@@ -116,33 +121,33 @@ namespace AxCrypt.App.Windows
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Resolve.UserSettings.CultureName);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "It's not actually complex since it's just a registry.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It's not actually complex since it's just a registry.")]
-        private void RegisterTypeFactories()
-        {
-            TypeMap.Register.Singleton<IUIThread>(() => new UIThread(this));
-            TypeMap.Register.Singleton<IProgressBackground>(() => _progressBackgroundWorker);
-            TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
-            TypeMap.Register.Singleton<IDataItemSelection>(() => new FileFolderSelection());
-            //TypeMap.Register.Singleton<IDeviceLocked>(() => new DeviceLocked());
-            TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
-            //TypeMap.Register.Singleton<InstallationVerifier>(() => new InstallationVerifier());
-            //TypeMap.Register.Singleton<IKnownFolderImageProvider>(() => new KnownFolderImageProvider());
-            TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
-            //TypeMap.Register.Singleton<MouseDownFilter>(() => new MouseDownFilter(this));
-            TypeMap.Register.Singleton<IGlobalNotification>(() => new NotifyIconGlobalNotification());
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "It's not actually complex since it's just a registry.")]
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It's not actually complex since it's just a registry.")]
+        //private void RegisterTypeFactories()
+        //{
+        //    TypeMap.Register.Singleton<IUIThread>(() => new UIThread(this));
+        //    TypeMap.Register.Singleton<IProgressBackground>(() => _progressBackgroundWorker);
+        //    TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
+        //    TypeMap.Register.Singleton<IDataItemSelection>(() => new FileFolderSelection());
+        //    //TypeMap.Register.Singleton<IDeviceLocked>(() => new DeviceLocked());
+        //    TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
+        //    //TypeMap.Register.Singleton<InstallationVerifier>(() => new InstallationVerifier());
+        //    //TypeMap.Register.Singleton<IKnownFolderImageProvider>(() => new KnownFolderImageProvider());
+        //    TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
+        //    //TypeMap.Register.Singleton<MouseDownFilter>(() => new MouseDownFilter(this));
+        //    TypeMap.Register.Singleton<IGlobalNotification>(() => new NotifyIconGlobalNotification());
 
-            TypeMap.Register.New<SessionNotificationHandler>(() => new SessionNotificationHandler(Resolve.FileSystemState, Resolve.KnownIdentities, New<ActiveFileAction>(), New<AxCryptFile>(), New<IStatusChecker>()));
-            TypeMap.Register.New<IdentityViewModel>(() => new IdentityViewModel(Resolve.FileSystemState, Resolve.KnownIdentities, Resolve.UserSettings, Resolve.SessionNotify));
-            TypeMap.Register.New<FileOperationViewModel>(() => new FileOperationViewModel(Resolve.FileSystemState, Resolve.SessionNotify, Resolve.KnownIdentities, Resolve.ParallelFileOperation, New<IStatusChecker>(), New<IdentityViewModel>()));
-            TypeMap.Register.New<MainViewModel>(() => new MainViewModel(Resolve.FileSystemState, Resolve.UserSettings));
-            TypeMap.Register.New<KnownFoldersViewModel>(() => new KnownFoldersViewModel(Resolve.FileSystemState, Resolve.SessionNotify, Resolve.KnownIdentities));
-            TypeMap.Register.New<WatchedFoldersViewModel>(() => new WatchedFoldersViewModel(Resolve.FileSystemState));
+        //    TypeMap.Register.New<SessionNotificationHandler>(() => new SessionNotificationHandler(Resolve.FileSystemState, Resolve.KnownIdentities, New<ActiveFileAction>(), New<AxCryptFile>(), New<IStatusChecker>()));
+        //    TypeMap.Register.New<IdentityViewModel>(() => new IdentityViewModel(Resolve.FileSystemState, Resolve.KnownIdentities, Resolve.UserSettings, Resolve.SessionNotify));
+        //    TypeMap.Register.New<FileOperationViewModel>(() => new FileOperationViewModel(Resolve.FileSystemState, Resolve.SessionNotify, Resolve.KnownIdentities, Resolve.ParallelFileOperation, New<IStatusChecker>(), New<IdentityViewModel>()));
+        //    TypeMap.Register.New<MainViewModel>(() => new MainViewModel(Resolve.FileSystemState, Resolve.UserSettings));
+        //    TypeMap.Register.New<KnownFoldersViewModel>(() => new KnownFoldersViewModel(Resolve.FileSystemState, Resolve.SessionNotify, Resolve.KnownIdentities));
+        //    TypeMap.Register.New<WatchedFoldersViewModel>(() => new WatchedFoldersViewModel(Resolve.FileSystemState));
 
-            //TypeMap.Register.New<AboutBox>(() => new AboutBox());
+        //    //TypeMap.Register.New<AboutBox>(() => new AboutBox());
 
-            //FormsTypes.Register(this);
-        }
+        //    //FormsTypes.Register(this);
+        //}
 
         private static void CheckLavasoftWebCompanionExistence()
         {
@@ -216,5 +221,108 @@ namespace AxCrypt.App.Windows
 
             return window;
         }
+
+        #region From PlatformInitializer
+
+        private static void RunBackground(CommandLine commandLine)
+        {
+            if (!commandLine.HasCommands)
+            {
+                Resolve.CommandService.Call(CommandVerb.Show, -1);
+                return;
+            }
+            commandLine.Execute();
+            //new ExplorerRefresh().Notify();
+        }
+
+        private static Task<bool> Ensure()
+        {
+            return EnsureNetVersionUsingNothingThatCrashesTheProcess();
+        }
+
+        private static async Task<bool> EnsureNetVersionUsingNothingThatCrashesTheProcess()
+        {
+            // Check if the type "System.Reflection.ReflectionContext" exists (indicating .NET 4.5 or higher)
+            if (Type.GetType("System.Reflection.ReflectionContext", false) != null)
+            {
+                return true;
+            }
+
+            bool result = await Application.Current.MainPage.DisplayAlert("AxCrypt", "You need .NET 4.5 or higher installed. Click OK to download.", "OK", "Cancel");
+
+            if (result)
+            {
+                await Microsoft.Maui.ApplicationModel.Launcher.OpenAsync(new Uri("https://www.microsoft.com/download/details.aspx?id=30653"));
+            }
+            return false;
+        }
+
+        private static void WireupEvents()
+        {
+        }
+
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        //private static void RunInteractive(CommandLine commandLine)
+        //{
+        //    AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+        //    TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+
+        //    try
+        //    {
+        //        MainPage mainPage = new MainPage();
+        //        //mainPage.Initialize(commandLine);
+        //        Application.Current.MainPage = mainPage;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ExceptionMessageAndReport(ex);
+        //    }
+        //    finally
+        //    {
+        //        AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
+        //        TaskScheduler.UnobservedTaskException -= TaskScheduler_UnobservedTaskException;
+        //    }
+        //}
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Exception ex = (Exception)e.ExceptionObject;
+        }
+
+        private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            e.SetObserved();
+        }
+
+        private static void ExceptionMessageAndReport(Exception ex)
+        {
+            New<IReport>().Exception(ex);
+            while (ex.InnerException != null)
+            {
+                ex = ex.InnerException;
+            }
+            New<IPopup>().ShowAsync(PopupButtons.Ok, "Exception", ex.Message);
+        }
+
+        //private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        //{
+        //    if (e.ExceptionObject is ApplicationExitException)
+        //    {
+        //        Application.Exit();
+        //    }
+        //    ExceptionMessageAndReport(e.ExceptionObject as Exception);
+        //}
+
+        //private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        //{
+        //    if (e.Exception is ApplicationExitException)
+        //    {
+        //        Application.Exit();
+        //    }
+        //    ExceptionMessageAndReport(e.Exception as Exception);
+        //}
+
+        #endregion
     }
+
 }

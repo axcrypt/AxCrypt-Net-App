@@ -29,6 +29,7 @@ using AxCrypt.Abstractions;
 using AxCrypt.Abstractions.Algorithm;
 using AxCrypt.Api;
 using AxCrypt.App.Windows.Desktop;
+using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.Common;
 using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
@@ -39,6 +40,7 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.Service.UserNotification;
+using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Mono;
@@ -75,6 +77,7 @@ public class PlatformInitializer
         New<IRuntimeEnvironment>().AppPath = commandLineArgs[0];
 
         RegisterTypeFactories();
+        RegisterTypeFactoriesApp();
 
         CommandLine commandLine = new CommandLine(commandLineArgs.Skip(1));
         //bool isFirstInstance = New<IRuntimeEnvironment>().IsFirstInstance;
@@ -109,38 +112,38 @@ public class PlatformInitializer
         //Environment.ExitCode = 0;
     }
 
-    private static void RunBackground(CommandLine commandLine)
-    {
-        if (!commandLine.HasCommands)
-        {
-            Resolve.CommandService.Call(CommandVerb.Show, -1);
-            return;
-        }
-        commandLine.Execute();
-        //new ExplorerRefresh().Notify();
-    }
+    //private static void RunBackground(CommandLine commandLine)
+    //{
+    //    if (!commandLine.HasCommands)
+    //    {
+    //        Resolve.CommandService.Call(CommandVerb.Show, -1);
+    //        return;
+    //    }
+    //    commandLine.Execute();
+    //    //new ExplorerRefresh().Notify();
+    //}
 
-    private static Task<bool> Ensure()
-    {
-        return EnsureNetVersionUsingNothingThatCrashesTheProcess();
-    }
+    //private static Task<bool> Ensure()
+    //{
+    //    return EnsureNetVersionUsingNothingThatCrashesTheProcess();
+    //}
 
-    private static async Task<bool> EnsureNetVersionUsingNothingThatCrashesTheProcess()
-    {
-        // Check if the type "System.Reflection.ReflectionContext" exists (indicating .NET 4.5 or higher)
-        if (Type.GetType("System.Reflection.ReflectionContext", false) != null)
-        {
-            return true;
-        }
+    //private static async Task<bool> EnsureNetVersionUsingNothingThatCrashesTheProcess()
+    //{
+    //    // Check if the type "System.Reflection.ReflectionContext" exists (indicating .NET 4.5 or higher)
+    //    if (Type.GetType("System.Reflection.ReflectionContext", false) != null)
+    //    {
+    //        return true;
+    //    }
 
-        bool result = await Application.Current.MainPage.DisplayAlert("AxCrypt", "You need .NET 4.5 or higher installed. Click OK to download.", "OK", "Cancel");
+    //    bool result = await Application.Current.MainPage.DisplayAlert("AxCrypt", "You need .NET 4.5 or higher installed. Click OK to download.", "OK", "Cancel");
 
-        if (result)
-        {
-            await Microsoft.Maui.ApplicationModel.Launcher.OpenAsync(new Uri("https://www.microsoft.com/download/details.aspx?id=30653"));
-        }
-        return false;
-    }
+    //    if (result)
+    //    {
+    //        await Microsoft.Maui.ApplicationModel.Launcher.OpenAsync(new Uri("https://www.microsoft.com/download/details.aspx?id=30653"));
+    //    }
+    //    return false;
+    //}
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Dependency registration, not real complexity")]
@@ -203,6 +206,32 @@ public class PlatformInitializer
 
         TypeMap.Register.New<LogOnIdentity, AdditionalUserSettings>((LogOnIdentity identity) => new AdditionalUserSettings(identity));
         TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "It's not actually complex since it's just a registry.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It's not actually complex since it's just a registry.")]
+    private static void RegisterTypeFactoriesApp()
+    {
+        TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
+        TypeMap.Register.Singleton<IDataItemSelection>(() => new FileFolderSelection());
+        //TypeMap.Register.Singleton<IDeviceLocked>(() => new DeviceLocked());
+        TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
+        //TypeMap.Register.Singleton<InstallationVerifier>(() => new InstallationVerifier());
+        //TypeMap.Register.Singleton<IKnownFolderImageProvider>(() => new KnownFolderImageProvider());
+        TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
+        //TypeMap.Register.Singleton<MouseDownFilter>(() => new MouseDownFilter(this));
+        TypeMap.Register.Singleton<IGlobalNotification>(() => new NotifyIconGlobalNotification());
+
+        TypeMap.Register.New<SessionNotificationHandler>(() => new SessionNotificationHandler(Resolve.FileSystemState, Resolve.KnownIdentities, New<ActiveFileAction>(), New<AxCryptFile>(), New<IStatusChecker>()));
+        TypeMap.Register.New<IdentityViewModel>(() => new IdentityViewModel(Resolve.FileSystemState, Resolve.KnownIdentities, Resolve.UserSettings, Resolve.SessionNotify));
+        TypeMap.Register.New<FileOperationViewModel>(() => new FileOperationViewModel(Resolve.FileSystemState, Resolve.SessionNotify, Resolve.KnownIdentities, Resolve.ParallelFileOperation, New<IStatusChecker>(), New<IdentityViewModel>()));
+        TypeMap.Register.New<MainViewModel>(() => new MainViewModel(Resolve.FileSystemState, Resolve.UserSettings));
+        TypeMap.Register.New<KnownFoldersViewModel>(() => new KnownFoldersViewModel(Resolve.FileSystemState, Resolve.SessionNotify, Resolve.KnownIdentities));
+        TypeMap.Register.New<WatchedFoldersViewModel>(() => new WatchedFoldersViewModel(Resolve.FileSystemState));
+
+        //TypeMap.Register.New<AboutBox>(() => new AboutBox());
+
+        //FormsTypes.Register(this);
     }
 
     private static IEnumerable<Assembly> LoadFromFiles(IEnumerable<FileInfo> files)

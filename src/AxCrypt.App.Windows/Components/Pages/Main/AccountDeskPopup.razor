@@ -5,6 +5,7 @@
 @using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Content
 @using AxCrypt.Core
+@using AxCrypt.Core.Crypto
 @using AxCrypt.Core.Crypto.Asymmetric
 @using AxCrypt.Core.Extensions
 @using AxCrypt.Core.Runtime
@@ -88,11 +89,11 @@
 {
     <div class="key-mngnt-Popup model-popup sub-pop1 hide-model-popup" id="">
         <div class="font-medium left-align">
-            <dd @onclick="()=>HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">Import Someone`s Public Sharing Key</dd>
-            <dd @onclick="()=>HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">Export My Public Sharing Key</dd>
-            <dd class="@GetDisabledClass(!_mainViewModel.LoggedOn)" @onclick="@(async() => { if(isImportAxCryptIDDisabled) await HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">Import AxCrypt ID with sharing and access keys</dd>
-            <dd @onclick="()=>HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">Export AxCrypt ID Secret and Sharing Key Pair</dd>
-            <dd class="@GetDisabledClass(!_mainViewModel.LoggedOn)" @onclick="@(async() => { if(isImportAxCryptIDDisabled) await HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">Create AxCrypt ID</dd>
+            <dd class="@GetDisabledClass(!_mainViewModel.LoggedOn)" @onclick="()=>HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">Import Someone`s Public Sharing Key</dd>
+            <dd class="@GetDisabledClass(!_mainViewModel.LoggedOn)" @onclick="()=>HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">Export My Public Sharing Key</dd>
+            <dd class="@GetDisabledClass(_mainViewModel.LoggedOn)" @onclick="@(async() => {  await HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">Import AxCrypt ID with sharing and access keys</dd>
+            <dd class="@GetDisabledClass(!_mainViewModel.LoggedOn)" @onclick="()=>HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">Export AxCrypt ID Secret and Sharing Key Pair</dd>
+            <dd class="@GetDisabledClass(_mainViewModel.LoggedOn)" @onclick="@(async() => { await HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">Create AxCrypt ID</dd>
         </div>
     </div>
 }
@@ -143,7 +144,7 @@
 
 @code {
     public string? UserEmail { get; set; }
-    public int DaysLeft { get; set; } = 30;
+    public int DaysLeft { get; set; }
     private bool isDialogOpen { get; set; }
     public SubscriptionLevel SubscriptionLevel { get; set; }
     public string? Subscription { get; set; }
@@ -184,7 +185,7 @@
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         _mainViewModel = New<MainViewModel>();
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
@@ -192,9 +193,40 @@
         _fileOperationViewModel = New<FileOperationViewModel>();
         SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
         UserEmail = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().UserEmail;
-        Subscription = SubscriptionLevel.ToString();
+        Subscription = await DetermineSubscriptionType();
+        DaysLeft = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().DaysLeft;
 
-        base.OnInitialized();
+        base.OnInitializedAsync();
+    }
+
+    public async Task<string> DetermineSubscriptionType()
+    {
+        CreatedTime = await GetManageAxCryptID();
+        double totalDays = (New<INow>().Utc - CreatedTime).Days + DaysLeft;
+
+        if (totalDays > 31) // Tolerance for yearly
+        {
+            return "Yearly";
+        }
+        else if (totalDays >= 25 && totalDays <= 35) // Tolerance for monthly
+        {
+            return "Monthly";
+        }
+        else
+        {
+            return "Unknown";
+        }
+    }
+
+    private ManageAccountViewModel _viewModel;
+
+    public async Task<DateTime> GetManageAxCryptID()
+    {
+        AccountStorage userKeyPairs = new AccountStorage(New<LogOnIdentity, IAccountService>(Resolve.KnownIdentities.DefaultEncryptionIdentity));
+        _viewModel = await ManageAccountViewModel.CreateAsync(userKeyPairs);
+        CreatedTime = _viewModel.AccountProperties.First().Timestamp;
+
+        return CreatedTime;
     }
 
     private string GetDisabledClass(bool isDisabled)
