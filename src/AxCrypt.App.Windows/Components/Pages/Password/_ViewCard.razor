@@ -14,7 +14,6 @@
 @inject NavigationManager navigationManager
 @inject SecretsClientModel secretsClientModel
 @inject SecretService secretService
-@inject Home home
 @inject ViewSecretViewModel viewSecretViewModel
 @inject ShareSecretViewModel shareSecretViewModel
 @inject AlertNotification alertNotification
@@ -187,8 +186,9 @@
 
     private async Task OnAfterRenderAsync()
     {
-        SubscriptionLevel = SubscriptionLevel.Premium;
-        UserEmail = "yosufkani@axcrypt.net";
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        UserEmail = New<AccountStatusViewModel>().UserEmail;
+
         try
         {
             await JSRuntime.InvokeVoidAsync("toggleClass");

@@ -435,7 +435,7 @@
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); StateHasChanged(); });
 
-        SubscriptionLevel = SubscriptionLevel.Premium;
+        SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
     }
 
     protected override void OnAfterRender(bool firstRender)

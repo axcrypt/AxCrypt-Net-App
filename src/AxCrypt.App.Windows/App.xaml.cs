@@ -14,6 +14,7 @@ using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Extensions;
+using AxCrypt.App.Windows.Desktop;
 
 namespace AxCrypt.App.Windows
 {
@@ -122,7 +123,7 @@ namespace AxCrypt.App.Windows
             TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
             TypeMap.Register.Singleton<IDataItemSelection>(() => new FileFolderSelection());
             //TypeMap.Register.Singleton<IDeviceLocked>(() => new DeviceLocked());
-            //TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
+            TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
             //TypeMap.Register.Singleton<InstallationVerifier>(() => new InstallationVerifier());
             //TypeMap.Register.Singleton<IKnownFolderImageProvider>(() => new KnownFolderImageProvider());
             TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));

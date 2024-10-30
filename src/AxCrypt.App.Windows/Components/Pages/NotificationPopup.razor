@@ -44,6 +44,6 @@
 
     protected override void OnInitialized()
     {
-        SubscriptionLevel = SubscriptionLevel.Premium;
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
     }
 }

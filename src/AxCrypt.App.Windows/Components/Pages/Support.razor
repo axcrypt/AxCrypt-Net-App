@@ -18,7 +18,7 @@
         <span class="goback-text">Support</span>
     </NavLink>
 </div>
-@if (subscriptionLevel == SubscriptionLevel.Free)
+@if (SubscriptionLevel == SubscriptionLevel.Free)
 {
     <div>
         <h2 class="page-title">@Texts.PromptSupport</h2>
@@ -92,7 +92,7 @@ else
     <p>Loading...</p>
 }
 @code {
-    private SubscriptionLevel subscriptionLevel;
+    private SubscriptionLevel SubscriptionLevel { get; set; }
     private string pageTitle = "";
     private string pageDescription = "";
     private string linkLabel = "";
@@ -100,7 +100,7 @@ else
     private string feedBack = "";
     protected override void OnInitialized()
     {
-        subscriptionLevel = SubscriptionLevel.Premium;
+        SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
         supportViewModel = new SupportViewModel(supportService);
         linkLabel = Texts.GetStartedLinkLabel;
         if (Utility.IsBusinessUser)

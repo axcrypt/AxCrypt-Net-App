@@ -1,5 +1,6 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Data
+@using AxCrypt.App.Components.Models
 @using AxCrypt.Content
 @using static AxCrypt.Abstractions.TypeResolve
 
@@ -45,12 +46,12 @@
         </div>
         <div class="abt-sec">
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="mainpage" @onclick="FeedbackPopup">
+                <NavLink class="nav-link" href="" @onclick="FeedbackPopup">
                     <span class="oi fdbck" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SendFeedbackTitle</span>
                 </NavLink>
             </div>
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="mainpage" @onclick="AboutPopup">
+                <NavLink class="nav-link" href="" @onclick="AboutPopup">
                     <span class="oi info" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.AboutAxcryptLinkLabel</span>
                 </NavLink>
             </div>
@@ -84,7 +85,7 @@
 
     protected override void OnAfterRender(bool firstRender)
     {
-        SubscriptionLevel = SubscriptionLevel.Premium;
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         base.OnAfterRender(firstRender);
     }
 

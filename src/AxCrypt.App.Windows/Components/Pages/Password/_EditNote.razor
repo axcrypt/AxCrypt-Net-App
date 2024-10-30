@@ -16,8 +16,8 @@
 @inject AlertNotification alertNotification
 @inject IJSRuntime jsRuntime
 
-<link href="css/@subscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
 
 <div style="width: 85%; margin-top: 80px;">
     <div class="page-heading">
@@ -65,14 +65,14 @@
         }
 </div>
 @code {
-    private SubscriptionLevel subscriptionLevel;
+    private SubscriptionLevel SubscriptionLevel;
     public SecretCardViewModel NoteModel { get; set; }
     private SecretViewModel CurrentSecret { get; set; }
     bool isAxCryptUser = true;
 
     protected override void OnInitialized()
     {
-        subscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         CurrentSecret = secretService.GetCurrentSecret();
         if (CurrentSecret == null)
         {

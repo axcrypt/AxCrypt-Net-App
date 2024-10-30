@@ -1,4 +1,5 @@
-﻿using AxCrypt.Api;
+﻿using AxCrypt.Abstractions;
+using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Secret;
 using AxCrypt.App.Components.Helpers;
@@ -10,7 +11,9 @@ using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.Service;
 using AxCrypt.Core.Service.Secrets;
+using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
 using System.Collections.ObjectModel;

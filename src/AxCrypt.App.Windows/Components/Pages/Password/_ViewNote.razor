@@ -13,15 +13,14 @@
 @inject NavigationManager navigationManager
 @inject SecretsClientModel secretsClientModel
 @inject SecretService secretService
-@inject Home home
 @inject ViewSecretViewModel viewSecretViewModel
 @inject ShareSecretViewModel shareSecretViewModel
 @inject AlertNotification alertNotification
 @inject IJSRuntime jsRuntime
 
-<link href="css/@subscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/sharesecret.min.css" rel="stylesheet" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/sharesecret.min.css" rel="stylesheet" />
 
 <div style="margin-top: 80px;" class="page-max-height">
     <div class="page-heading">
@@ -159,7 +158,7 @@
     </form>
 </div>
 @code {
-    private SubscriptionLevel subscriptionLevel;
+    private SubscriptionLevel SubscriptionLevel { get; set; }
     public SecretCardViewModel NoteModel { get; set; }
     private SecretViewModel CurrentSecret { get; set; }
     bool IsSharedView { get; set; }
@@ -168,6 +167,7 @@
 
     private async Task OnAfterRenderAsync()
     {
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         try
         {
             await jsRuntime.InvokeVoidAsync("toggleClass");
@@ -212,7 +212,7 @@
 
     protected override void OnInitialized()
     {
-        subscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         CurrentSecret = secretService.GetCurrentSecret();
         if (CurrentSecret == null)
         {

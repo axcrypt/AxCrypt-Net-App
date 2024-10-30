@@ -1,15 +1,20 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Data
-@inherits LayoutComponentBase
+@using AxCrypt.App.Components.Models
 
-<link href="css/@subscriptionLevel.ToString().ToLower()/sidemenu.min.css" rel="preload" as="style" importance="high" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/site.min.css" rel="preload" as="style" importance="high" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/index.min.css" rel="preload" as="style" importance="high" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" importance="high" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" importance="high" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/topmenu.min.css" rel="stylesheet" importance="high" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/support.min.css" rel="stylesheet" importance="high" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/notification.min.css" rel="stylesheet" importance="high" />
+@using static AxCrypt.Abstractions.TypeResolve;
+
+@inherits LayoutComponentBase
+@inject IJSRuntime JS
+
+<link href="css/@SubscriptionLevel.ToString().ToLower()/sidemenu.min.css" rel="preload" as="style" importance="high" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/site.min.css" rel="preload" as="style" importance="high" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/index.min.css" rel="preload" as="style" importance="high" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" importance="high" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" importance="high" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/topmenu.min.css" rel="stylesheet" importance="high" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/support.min.css" rel="stylesheet" importance="high" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/notification.min.css" rel="stylesheet" importance="high" />
 <link href="css/login.min.css" rel="stylesheet" />
 
 <div class="page" dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
@@ -43,13 +48,47 @@
 </div>
 
 @code {
-    private SubscriptionLevel subscriptionLevel;
+    private SubscriptionLevel SubscriptionLevel { get; set; }
     //bool IsWideScreen { get; set; }
     bool IsLoading { get; set; }
+    private string UserEmail { get; set; }
 
     protected override void OnInitialized()
     {
-        subscriptionLevel = SubscriptionLevel.Premium;
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        UserEmail = New<AccountStatusViewModel>().UserEmail;
         base.OnInitialized();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                // IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error determining screen width: {ex.Message}");
+            }
+            finally
+            {
+                await AddCssFiles();
+                IsLoading = false;
+                StateHasChanged();
+            }
+        }
+    }
+
+    private async Task AddCssFiles()
+    {
+        string cssBasePath = $"css/{SubscriptionLevel.ToString().ToLower()}/";
+
+        //await JS.InvokeVoidAsync("addCssFile", $"{cssBasePath}sidemenu.min.css");
+        await JS.InvokeVoidAsync("addCssFile", $"{cssBasePath}index.min.css");
+        await JS.InvokeVoidAsync("addCssFile", $"{cssBasePath}site.min.css");
+        await JS.InvokeVoidAsync("addCssFile", $"{cssBasePath}topmenu.min.css");
+        await JS.InvokeVoidAsync("addCssFile", $"{cssBasePath}notification.min.css");
     }
 }

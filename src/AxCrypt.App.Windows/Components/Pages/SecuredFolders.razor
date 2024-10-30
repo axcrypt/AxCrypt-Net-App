@@ -1,6 +1,7 @@
 ﻿@page "/securedfolders"
 
 @using AxCrypt.Api.Model;
+@using AxCrypt.App.Components.Models
 @using AxCrypt.Core.IO
 @using AxCrypt.Core.UI
 @using System.Collections.ObjectModel
@@ -28,7 +29,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        SubscriptionLevel = SubscriptionLevel.Premium;
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
 
         await base.OnInitializedAsync();
     }

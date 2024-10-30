@@ -1,12 +1,11 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Models;
-using AxCrypt.App.Components.Models.Notification;
 using AxCrypt.App.Components.Models.Secret;
 using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Windows.Components.Pages;
-using AxCrypt.App.Windows.Helpers;
 using AxCrypt.App.Windows.Initialize;
+using AxCrypt.App.Windows.Models;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Core.Runtime;
@@ -91,14 +90,17 @@ namespace AxCrypt.App.Windows
 
         private static void RegisterSingletons(IServiceCollection services)
         {
+            services.AddSingleton<LoginModel>();
+            services.AddSingleton<MainPage>();
+
             services.AddSingleton<ITrayService, TrayService>();
             services.AddSingleton<INotificationService, NotificationService>();
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
 
             services.AddSingleton<FileShareService>();
-            //services.AddSingleton<RecentFolders>();
             services.AddSingleton<FeedbackViewModel>();
+            services.AddSingleton<AppLocalizationOptions>();
 
             services.AddSingleton<SupportService>();
             services.AddSingleton<AxCrypt.App.Components.Services.AlertNotification>();
@@ -119,7 +121,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<AxCrypt.App.Components.Services.SecretServiceUtility>();
 
             services.AddSingleton<FileShareService>();
-            //services.AddSingleton<RecentFolders>();
+            services.AddSingleton<RecentFolders>();
             services.AddSingleton<FeedbackViewModel>();
 
             services.AddSingleton<AxCrypt.App.Windows.ViewModels.SupportViewModel>();

@@ -9,7 +9,7 @@
 
 @inject IJSRuntime JSRuntime
 
-<link href="css/@subscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
 
 @{
     DeviceIdiom currentDevice = GetCurrentDeviceIdiom();
@@ -28,11 +28,11 @@ else
 }
 
 @code {
-    private SubscriptionLevel subscriptionLevel { get; set; }
+    private SubscriptionLevel SubscriptionLevel { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        subscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         await base.OnInitializedAsync();
     }
 

@@ -17,9 +17,9 @@
 @inject SecretServiceUtility secretServiceUtility
 @inject AlertNotification alertNotification
 
-<link href="css/@subscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
-<link href="css/@subscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
+<link href="css/@SubscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
 
 <div style="width: 85%; margin-top: 80px;">
     <div class="page-heading">
@@ -107,7 +107,7 @@
    
 </div>
 @code {
-    private SubscriptionLevel subscriptionLevel;
+    private SubscriptionLevel SubscriptionLevel { get; set; }
 
     private EditForm editForm;
 
@@ -121,7 +121,7 @@
 
     protected override void OnInitialized()
     {
-        subscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         newSecretViewModel.Secret.Card.CardNumber = "";
         newSecretViewModel.Secret.Card.SecretDesc = "";
         newSecretViewModel.Secret.Card.NameOnCard = "";

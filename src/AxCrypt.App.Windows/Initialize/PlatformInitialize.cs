@@ -39,7 +39,6 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.Service.UserNotification;
-using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Mono;
@@ -63,26 +62,12 @@ public class PlatformInitializer
         InitializePrivate();
     }
 
-    private static async void InitializePrivate()
+    private static void InitializePrivate()
     {
-        await Main();
-    }
-
-    [STAThread]
-    private static async Task Main()
-    {
-        bool result = await Ensure();
-        if (!result)
-        {
-            return;
-        }
-
         _workFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"AxCrypt" + Path.DirectorySeparatorChar);
 
         TypeMap.Register.Singleton<INow>(() => new Now());
         TypeMap.Register.Singleton<IReport>(() => new Report(_workFolderPath, 1000000));
-
-        //EmbeddedResourceManager.Initialize();
 
         string[] commandLineArgs = Environment.GetCommandLineArgs();
 
@@ -92,31 +77,31 @@ public class PlatformInitializer
         RegisterTypeFactories();
 
         CommandLine commandLine = new CommandLine(commandLineArgs.Skip(1));
-        bool isFirstInstance = New<IRuntimeEnvironment>().IsFirstInstance;
-        if (isFirstInstance && commandLine.HasCommands)
-        {
-            New<IRuntimeEnvironment>().IsFirstInstance = isFirstInstance = false;
-            New<IRuntimeEnvironment>().RunApp("--start");
-        }
+        //bool isFirstInstance = New<IRuntimeEnvironment>().IsFirstInstance;
+        //if (isFirstInstance && commandLine.HasCommands)
+        //{
+        //    New<IRuntimeEnvironment>().IsFirstInstance = isFirstInstance = false;
+        //    New<IRuntimeEnvironment>().RunApp("--start");
+        //}
 
-        WireupEvents();
+        //WireupEvents();
 
-        try
-        {
-            if (isFirstInstance)
-            {
-                //RunInteractive(commandLine);
-            }
-            else
-            {
-                RunBackground(commandLine);
-            }
-        }
-        catch (Exception ex)
-        {
-            New<IReport>().Exception(ex);
-            throw;
-        }
+        //try
+        //{
+        //    if (isFirstInstance)
+        //    {
+        //        RunInteractive(commandLine);
+        //    }
+        //    else
+        //    {
+        //        RunBackground(commandLine);
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    New<IReport>().Exception(ex);
+        //    throw;
+        //}
 
         //Resolve.CommandService.Dispose();
         //TypeMap.Register.Clear();
@@ -211,68 +196,13 @@ public class PlatformInitializer
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It's not actually complex since it's just a registry.")]
     private static void RegisterTypeFactories()
     {
-        TypeMap.Register.Singleton<IDataItemSelection>(() => new FileFolderSelection());
-        TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
-        TypeMap.Register.New<SessionNotificationHandler>(() => new SessionNotificationHandler(Resolve.FileSystemState, Resolve.KnownIdentities, New<ActiveFileAction>(), New<AxCryptFile>(), New<IStatusChecker>()));
-        TypeMap.Register.New<IdentityViewModel>(() => new IdentityViewModel(Resolve.FileSystemState, Resolve.KnownIdentities, Resolve.UserSettings, Resolve.SessionNotify));
-        TypeMap.Register.New<FileOperationViewModel>(() => new FileOperationViewModel(Resolve.FileSystemState, Resolve.SessionNotify, Resolve.KnownIdentities, Resolve.ParallelFileOperation, New<IStatusChecker>(), New<IdentityViewModel>()));
-        TypeMap.Register.New<MainViewModel>(() => new MainViewModel(Resolve.FileSystemState, Resolve.UserSettings));
-        TypeMap.Register.New<KnownFoldersViewModel>(() => new KnownFoldersViewModel(Resolve.FileSystemState, Resolve.SessionNotify, Resolve.KnownIdentities));
-        TypeMap.Register.New<WatchedFoldersViewModel>(() => new WatchedFoldersViewModel(Resolve.FileSystemState));
-
         TypeMap.Register.Singleton<IVersion>(() => new DesktopVersion());
         TypeMap.Register.Singleton<IPopup>(() => new PopupService());
         TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(TimeSpan.Zero));
-        //UIThread thread = new UIThread();
-        //ypeMap.Register.Singleton<IUIThread>(() => thread);
         TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
 
         TypeMap.Register.New<LogOnIdentity, AdditionalUserSettings>((LogOnIdentity identity) => new AdditionalUserSettings(identity));
         TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
-
-        InitializeContentResources();
-    }
-
-    public static async void InitializeContentResources()
-    {
-        if (DeviceInfo.Platform != DevicePlatform.Android && DeviceInfo.Platform != DevicePlatform.iOS)
-        {
-            if (Thread.CurrentThread.CurrentUICulture.Name != Resolve.UserSettings.CultureName)
-            {
-                await SetLanguageAsync(Resolve.UserSettings.CultureName);
-            }
-        }
-    }
-
-    public static async Task SetLanguageAsync(string cultureName)
-    {
-        if (Resolve.UserSettings.CultureName == cultureName)
-        {
-            return;
-        }
-        Resolve.UserSettings.CultureName = cultureName;
-        if (Resolve.Log.IsInfoEnabled)
-        {
-            Resolve.Log.LogInfo("Set new UI language culture to '{0}'.".InvariantFormat(Resolve.UserSettings.CultureName));
-        }
-        SetCulture();
-    }
-
-    public static void SetCulture()
-    {
-        if (DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS)
-        {
-            return;
-        }
-
-        if (string.IsNullOrEmpty(Resolve.UserSettings.CultureName))
-        {
-            return;
-        }
-
-        CultureInfo cultureInfo = CultureInfo.GetCultureInfo(Resolve.UserSettings.CultureName);
-        Thread.CurrentThread.CurrentUICulture = cultureInfo;
-        AxCrypt.Content.Resource.Culture = cultureInfo;
     }
 
     private static IEnumerable<Assembly> LoadFromFiles(IEnumerable<FileInfo> files)
@@ -309,28 +239,28 @@ public class PlatformInitializer
     {
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-    private static void RunInteractive(CommandLine commandLine)
-    {
-        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-        TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+    //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+    //private static void RunInteractive(CommandLine commandLine)
+    //{
+    //    AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+    //    TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
 
-        try
-        {
-            MainPage mainPage = new MainPage();
-            //mainPage.Initialize(commandLine);
-            Application.Current.MainPage = mainPage;
-        }
-        catch (Exception ex)
-        {
-            ExceptionMessageAndReport(ex);
-        }
-        finally
-        {
-            AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
-            TaskScheduler.UnobservedTaskException -= TaskScheduler_UnobservedTaskException;
-        }
-    }
+    //    try
+    //    {
+    //        MainPage mainPage = new MainPage();
+    //        //mainPage.Initialize(commandLine);
+    //        Application.Current.MainPage = mainPage;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        ExceptionMessageAndReport(ex);
+    //    }
+    //    finally
+    //    {
+    //        AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
+    //        TaskScheduler.UnobservedTaskException -= TaskScheduler_UnobservedTaskException;
+    //    }
+    //}
 
     private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {

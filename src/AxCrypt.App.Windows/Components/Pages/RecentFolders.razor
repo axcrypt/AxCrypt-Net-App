@@ -123,7 +123,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        SubscriptionLevel = SubscriptionLevel.Premium;
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         _mainViewModel = New<MainViewModel>();
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
         _fileOperationViewModel = New<FileOperationViewModel>();

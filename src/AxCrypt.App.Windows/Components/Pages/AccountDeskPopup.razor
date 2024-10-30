@@ -190,7 +190,7 @@
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
 
         _fileOperationViewModel = New<FileOperationViewModel>();
-        SubscriptionLevel = SubscriptionLevel.Premium;
+        SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
         UserEmail = "yosufkani@axcrypt.net";
         Subscription = "Premium";
         //ValidFormatted = "30 days left";
