@@ -191,9 +191,8 @@
 
         _fileOperationViewModel = New<FileOperationViewModel>();
         SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
-        UserEmail = "yosufkani@axcrypt.net";
-        Subscription = "Premium";
-        //ValidFormatted = "30 days left";
+        UserEmail = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().UserEmail;
+        Subscription = SubscriptionLevel.ToString();
 
         base.OnInitialized();
     }

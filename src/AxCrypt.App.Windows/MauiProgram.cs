@@ -121,7 +121,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<AxCrypt.App.Components.Services.SecretServiceUtility>();
 
             services.AddSingleton<FileShareService>();
-            services.AddSingleton<RecentFolders>();
             services.AddSingleton<FeedbackViewModel>();
 
             services.AddSingleton<AxCrypt.App.Windows.ViewModels.SupportViewModel>();

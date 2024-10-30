@@ -397,6 +397,9 @@
 
     protected bool isHovered = false;
     protected string hoveredElement = string.Empty;
+        
+    [Parameter]
+    public EventCallback CloseSettingsPopup { get; set; }
 
     protected void ShowPopup(string element)
     {
