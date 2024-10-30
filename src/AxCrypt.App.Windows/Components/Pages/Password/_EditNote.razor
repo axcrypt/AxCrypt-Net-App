@@ -1,0 +1,144 @@
+﻿@page ﻿"/editnote"
+
+@using AxCrypt.Api.Model
+@using AxCrypt.App.Components.Helpers
+@using AxCrypt.Content
+@using AxCrypt.Cryptor.Model
+@using AxCrypt.App.Components.Models
+@using AxCrypt.App.Components.Models.Secret
+@using AxCrypt.App.Components.Services
+@using Microsoft.JSInterop
+@using static AxCrypt.Abstractions.TypeResolve;
+@inject NavigationManager navigationManager
+@inject SecretsClientModel secretsClientModel
+@inject SecretService secretService
+@inject EditSecretViewModel editSecretViewModel
+@inject AlertNotification alertNotification
+@inject IJSRuntime jsRuntime
+
+<link href="css/@subscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
+<link href="css/@subscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
+
+<div style="width: 85%; margin-top: 80px;">
+    <div class="page-heading">
+        <h3 class="password-creation">
+            Edit Note
+        </h3>
+    </div>
+    <LoadingComponent IsLoading="@editSecretViewModel.Loading" />
+   <EditForm Model="@secretService.CurrentSecret.Note" OnValidSubmit="SavePassword">
+        <DataAnnotationsValidator />
+        @if (!editSecretViewModel.Loading)
+        {
+            <div class="row">
+                <ul class="clean-up" style=" list-style:none">
+                <li>
+                    <label for="Password_SecretDesc">Description:</label><br />
+                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;"  @bind="@secretService.CurrentSecret.Note.SecretDesc"></textarea>
+                     <ValidationMessage For="@(() => secretService.CurrentSecret.Note.SecretDesc)" />
+                </li>
+                <li>
+                    <label for="Note_Note">Note:</label>
+                    <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important;"  @bind="@secretService.CurrentSecret.Note.Note" ></textarea>
+                <ValidationMessage For="@(() => secretService.CurrentSecret.Note.Note)" />
+                </li>
+                <li>
+                <div>
+                    <button type="submit" class="button btn-extra-small success" >Save</button>
+                    <NavLink href="passwordManager">
+                        <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
+                    </NavLink>
+                </div>
+            </li>
+            </ul>
+        </div>
+        }
+    </EditForm>
+    @if (alertNotification.IsNotificationVisible)
+        {
+            <div class="medium-11 columns">
+                <div data-alert class="alert-box @alertNotification.NotificationClass radius">
+                    <span style="white-space: break-spaces;">@alertNotification.NotificationMessage</span>
+                    <a class="clse-img" style="float: right; color:white; cursor: pointer;" @onclick="alertNotification.HideNotification">X</a>
+                </div>
+            </div>
+        }
+</div>
+@code {
+    private SubscriptionLevel subscriptionLevel;
+    public SecretCardViewModel NoteModel { get; set; }
+    private SecretViewModel CurrentSecret { get; set; }
+    bool isAxCryptUser = true;
+
+    protected override void OnInitialized()
+    {
+        subscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        CurrentSecret = secretService.GetCurrentSecret();
+        if (CurrentSecret == null)
+        {
+            navigationManager.NavigateTo("/error");
+        }
+    }
+    private async Task SavePassword()
+    {
+        Progress<LoadingModel> progress = new Progress<LoadingModel>(p =>
+         {
+             editSecretViewModel.Loading = p.IsLoading;
+             InvokeAsync(StateHasChanged);
+         });
+        editSecretViewModel.Secret = secretService.CurrentSecret;
+        bool saveResult = await editSecretViewModel.SaveSecretAsync(progress);
+        if (saveResult)
+        {
+            alertNotification.ShowNotification("Your new password entry has been Updated!.", NotificationType.Success);
+        }
+        else
+        {
+            alertNotification.ShowNotification(editSecretViewModel.ErrorMessage, NotificationType.Warning);
+        }
+        navigationManager.NavigateTo("/passwordManager",true);
+    }
+    private async Task OnAfterRenderAsync()
+    {
+        try
+        {
+            await jsRuntime.InvokeVoidAsync("toggleClass");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    bool contextMenu = false;
+    void contextMenuPopup()
+    {
+        contextMenu = !contextMenu;
+    }
+  
+
+    //sync popup
+    bool isFirstClick = true;
+    bool SyncPopup { get; set; }
+    void openSyncPopup()
+    {
+        SyncPopup = true;
+    }
+    void closeSyncPopup()
+    {
+        SyncPopup = false;
+    }
+    void showSyncPopup()
+    {
+        if (isFirstClick)
+        {
+            openSyncPopup();
+            isFirstClick = false;
+        }
+    }
+    private async Task HandleOnChange(ChangeEventArgs args)
+    {
+        NoteModel.SecretDesc = args.Value.ToString();
+    }
+   
+}

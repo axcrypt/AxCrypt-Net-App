@@ -83,7 +83,7 @@ else
     @if (!IsWideScreen)
     {
         <footer>
-            <AxCrypt.MauiBlazor.Components.Shared.Mobile.Footer footerActions="@footerActions" />
+            <AxCrypt.App.Windows.Components.Shared.Mobile.Footer footerActions="@footerActions" />
         </footer>
     }
 }
@@ -100,7 +100,7 @@ else
     private string feedBack = "";
     protected override void OnInitialized()
     {
-        subscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        subscriptionLevel = SubscriptionLevel.Premium;
         supportViewModel = new SupportViewModel(supportService);
         linkLabel = Texts.GetStartedLinkLabel;
         if (Utility.IsBusinessUser)

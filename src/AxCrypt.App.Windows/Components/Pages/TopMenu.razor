@@ -72,21 +72,21 @@
         {
             @if (IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
             {
-                <AccountDeskPopup ClosePopup="CloseAccountPopup" />
+                <AxCrypt.App.Windows.Components.Pages.AccountDeskPopup ClosePopup="CloseAccountPopup" />
             }
         }
         @if (settingsPopup)
         {
             @if (IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
             {
-                <SettingsDeskPopup CloseSettingsPopup="ClosedSettingsPopup" />
+                <AxCrypt.App.Windows.Components.Pages.SettingsDeskPopup CloseSettingsPopup="ClosedSettingsPopup" />
             }
         }
         @if (notifyPopup)
         {
             @if (IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
             {
-                <NotificationPopup />
+                <AxCrypt.App.Windows.Components.Pages.NotificationPopup />
             }
         }
     }
@@ -104,8 +104,8 @@
     protected override async Task OnInitializedAsync()
     {
         _mainViewModel = New<MainViewModel>();
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        UserEmail = New<AccountStatusViewModel>().UserEmail;
+        SubscriptionLevel = SubscriptionLevel.Premium;
+        UserEmail = "yosufkani@axcrypt.net";
 
         string currentCulture = Resolve.UserSettings.CultureName;
         CultureOption? cultureOption = appLocalizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == currentCulture);

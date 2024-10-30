@@ -555,12 +555,12 @@
         }
     }
 
-    private SubscriptionLevel SubscriptionLevel { get; set; }
+    private SubscriptionLevel SubscriptionLevel { get; set; } = SubscriptionLevel.Premium;
     private bool IsWideScreen { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
         if (firstRender)
         {
             try

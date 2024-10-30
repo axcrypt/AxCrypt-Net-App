@@ -1,8 +1,6 @@
 ﻿@using AxCrypt.Api.Model
-@using AxCrypt.App.Windows.Helpers
-@using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.App.Components.Data
 @using AxCrypt.Content
-
 @using static AxCrypt.Abstractions.TypeResolve
 
 <div class="top-row ps-3 navbar navbar-dark">
@@ -86,7 +84,7 @@
 
     protected override void OnAfterRender(bool firstRender)
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        SubscriptionLevel = SubscriptionLevel.Premium;
         base.OnAfterRender(firstRender);
     }
 

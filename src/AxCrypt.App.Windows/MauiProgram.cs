@@ -1,7 +1,18 @@
-﻿using AxCrypt.App.Components.Services.Interface;
+﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Components.Helpers;
+using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Models.Notification;
+using AxCrypt.App.Components.Models.Secret;
+using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Helpers;
+using AxCrypt.App.Windows.Initialize;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Windows.ViewModels;
+using AxCrypt.Core.Runtime;
+using AxCrypt.Core.UI;
+using AxCrypt.Cryptor.Model;
+using AxCrypt.Mono;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 
@@ -82,8 +93,44 @@ namespace AxCrypt.App.Windows
         {
             services.AddSingleton<ITrayService, TrayService>();
             services.AddSingleton<INotificationService, NotificationService>();
+            services.AddSingleton<IFolderPicker, FolderPickerWindows>();
+            services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
+
+            services.AddSingleton<FileShareService>();
+            //services.AddSingleton<RecentFolders>();
+            services.AddSingleton<FeedbackViewModel>();
+
+            services.AddSingleton<SupportService>();
+            services.AddSingleton<AxCrypt.App.Components.Services.AlertNotification>();
+            services.AddSingleton<ILogging, Logging>();
+            services.AddSingleton<IStatusChecker, StatusChecker>();
+            services.AddSingleton<UserNotificationService>();
+            services.AddSingleton<SecretClientModel>();
+            services.AddSingleton<SecretsClientModel>();
+            services.AddSingleton<NewSecretViewModel>();
+            services.AddSingleton<SecretService>();
+            services.AddSingleton<ShareSecretViewModel>();
+            services.AddSingleton<ManageSecretViewModel>();
+            services.AddSingleton<EditSecretViewModel>();
+            services.AddSingleton<ViewSecretViewModel>();
+            services.AddSingleton<NotificationViewModel>();
+            services.AddSingleton<NotificationItemViewModel>();
+            services.AddSingleton<SecretsListViewModel>();
+            services.AddSingleton<AxCrypt.App.Components.Services.SecretServiceUtility>();
+
+            services.AddSingleton<FileShareService>();
+            //services.AddSingleton<RecentFolders>();
+            services.AddSingleton<FeedbackViewModel>();
+
+            services.AddSingleton<AxCrypt.App.Windows.ViewModels.SupportViewModel>();
+            services.AddSingleton<ILogging, Logging>();
+            services.AddSingleton<IStatusChecker, StatusChecker>();
+            services.AddSingleton<UserNotificationService>();
             services.AddSingleton<HomeViewModel>();
 
+            TypeMap.Register.Singleton<AxCrypt.App.Components.Models.AccountStatusViewModel>(() => new AxCrypt.App.Components.Models.AccountStatusViewModel());
+
+            PlatformInitializer.Initialize();
         }
     }
 }

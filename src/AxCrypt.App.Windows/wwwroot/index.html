@@ -9,6 +9,48 @@
     <link rel="stylesheet" href="css/app.css" />
     <link rel="stylesheet" href="AxCrypt.App.Windows.styles.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
+
+    <script>
+        function enablePopup() {
+            DotNet.invokeMethodAsync("AxCrypt.MauiBlazor.Windows", "EnablePopup");
+        }
+    </script>
+    <script>
+        // Disable pinch-to-zoom
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('gesturechange', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('gestureend', function (e) {
+            e.preventDefault();
+        });
+
+        // Disable double-tap zoom
+        document.addEventListener('touchstart', function (event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        // Disable zoom on scroll (desktop)
+        document.addEventListener('wheel', function (e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+    <script>
+        window.addCssFile = function (cssPath) {
+            var link = document.createElement("link");
+            link.href = cssPath;
+            link.rel = "stylesheet";
+            document.head.appendChild(link);
+        };
+    </script>
 </head>
 
 <body>
@@ -22,9 +64,46 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-
+    <script src="_framework/blazor.webassembly.js"></script>
     <script src="_framework/blazor.webview.js" autostart="false"></script>
-
+    <script src="js/clipboard.js"></script>
 </body>
-
 </html>
+<script src="js/homepopup.js"></script>
+<script src="js/popup.js"></script>
+<script src="js/devicetype.js"></script>
+<script src="js/swipearea.js"></script>
+<script src="js/supportblur.js"></script>
+<script src="js/security.js"></script>
+<script src="js/secretsEdit.js"></script>
+<script src="js/secretsList.js"></script>
+<script src="js/secretsView.js"></script>
+<script src="js/fileDrop.js"></script>
+<script src="js/longPress.js"></script>
+<script src="js/touchEvents.js"></script>
+<script src="js/preventRefresh.js"></script>
+<script>
+    function setupSwipe(dotNetHelper) {
+        const carousel = document.getElementById("carousel-container");
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        carousel.addEventListener('touchstart', function (event) {
+            touchstartX = event.changedTouches[0].screenX;
+        }, false);
+
+        carousel.addEventListener('touchend', function (event) {
+            touchendX = event.changedTouches[0].screenX;
+            handleSwipeGesture(dotNetHelper);
+        }, false);
+
+        function handleSwipeGesture(dotNetHelper) {
+            const swipeThreshold = 50;
+            if (touchendX < touchstartX - swipeThreshold) {
+                dotNetHelper.invokeMethodAsync('OnSwipeLeft');
+            } else if (touchendX > touchstartX + swipeThreshold) {
+                dotNetHelper.invokeMethodAsync('OnSwipeRight');
+            }
+        }
+    }
+</script>

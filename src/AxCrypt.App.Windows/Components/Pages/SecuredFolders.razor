@@ -1,0 +1,35 @@
+﻿@page "/securedfolders"
+
+@using AxCrypt.Api.Model;
+@using AxCrypt.Core.IO
+@using AxCrypt.Core.UI
+@using System.Collections.ObjectModel
+@using static AxCrypt.Abstractions.TypeResolve
+
+<link href="css/login.min.css" rel="stylesheet" />
+<div class="home-index">
+    <div>
+        <div class="page-title">
+            <h1 class="">Secured folders</h1>
+        </div>
+    </div>
+    <AxCrypt.App.Windows.Components.Pages.HomeBody />
+    <div>
+        <div style="padding: 10px 0px;">
+            <label class="text-style font-bold">Recent Folders</label>
+        </div>
+        <div>
+            <AxCrypt.App.Windows.Components.Pages.RecentFolders />
+        </div>
+    </div>
+</div>
+@code {
+    SubscriptionLevel SubscriptionLevel { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        SubscriptionLevel = SubscriptionLevel.Premium;
+
+        await base.OnInitializedAsync();
+    }
+}

@@ -1,4 +1,4 @@
-﻿@page "/aboutaxcrypt"
+﻿@page "/about"
 
 @using AxCrypt.Api.Model;
 @using AxCrypt.Core.Runtime
@@ -32,6 +32,11 @@
     </div>
 </div>
 @code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
     private string SubscriptionStausAnsExpiration { get; set; } = new Display().GetLicenseStatusAndExpiration();
 
     private string ProductName { get; set; } = New<AboutAssembly>().AssemblyProduct;

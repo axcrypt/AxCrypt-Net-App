@@ -1,0 +1,646 @@
+﻿using AxCrypt.Api;
+using AxCrypt.Api.Model;
+using AxCrypt.Api.Model.Secret;
+using AxCrypt.App.Components.Helpers;
+using AxCrypt.App.Components.Password;
+using AxCrypt.App.Components.PasswordManager;
+using AxCrypt.App.Components.Services;
+using AxCrypt.App.Components.Utility;
+using AxCrypt.Common;
+using AxCrypt.Content;
+using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Runtime;
+using AxCrypt.Core.Service.Secrets;
+using AxCrypt.Core.UI;
+using AxCrypt.Cryptor.Model;
+using System.Collections.ObjectModel;
+using System.Text;
+using static AxCrypt.Abstractions.TypeResolve;
+
+namespace AxCrypt.App.Components.Models.Secret
+{
+    public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
+    {
+        private readonly int MaxRecentSecretsToShow = 10;
+        private LogOnIdentity _identity;
+
+        private readonly string _sortOptionAll = Texts.SecretsAllItems;
+        private readonly string _sortOptionRecent = Texts.SecretsRecentlyAdded;
+        private readonly string _sortOptionShared = Texts.PromptSharedWith;
+
+        private bool _activateSharedListFilter = false;
+
+        public SecretsListViewModel()
+        {
+            _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            ClearErrorProviders();
+
+            HasPaidSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
+            HasPaidSubscription = ViewModelHelper.CanAddNewSecret();
+            HasNoSecretsCapability = HasPaidSubscription ? false : true;
+
+            Keyword = "";
+            SortOptionAllText = _sortOptionAll;
+            SortOptionRecentText = _sortOptionRecent;
+            SortOptionSharedText = _sortOptionShared;
+            _CachedSecrets = new Dictionary<SecretFilterOption, ObservableCollection<SecretViewModel>>();
+            FilteredSecrets = new ObservableCollection<SecretViewModel>();
+            SearchedSecrets = new ObservableCollection<SecretViewModel>();
+            Secrets = new ObservableCollection<SecretViewModel>();
+            SelectedSecretListFilter = SecretFilterOption.All;
+            SelectedSecretTypeFilter = 0;
+            ShowSecretTypeCreateMenu = false;
+            ShowSecretFilterMenu = false;
+            _alertNotification = new AlertNotification();
+        }
+
+        public ObservableCollection<SecretViewModel> Secrets
+        {
+            get
+            {
+                return GetProperty<ObservableCollection<SecretViewModel>>(nameof(Secrets));
+            }
+            set
+            {
+                SetProperty(nameof(Secrets), value);
+                if (!Secrets.Any())
+                {
+                    _CachedSecrets = new Dictionary<SecretFilterOption, ObservableCollection<SecretViewModel>>();
+                    return;
+                }
+
+                SelectedSecretListFilter = SelectedSecretListFilter == SecretFilterOption.None ? SecretFilterOption.All : SelectedSecretListFilter;
+                if (_CachedSecrets.ContainsKey(SelectedSecretListFilter))
+                {
+                    _CachedSecrets.Remove(SelectedSecretListFilter);
+                }
+                _CachedSecrets.Add(SelectedSecretListFilter, Secrets);
+            }
+        }
+
+        private IDictionary<SecretFilterOption, ObservableCollection<SecretViewModel>> _CachedSecrets;
+
+        public ObservableCollection<SecretViewModel> FilteredSecrets
+        {
+            get
+            {
+                return GetProperty<ObservableCollection<SecretViewModel>>(nameof(FilteredSecrets));
+            }
+            set
+            {
+                SetProperty(nameof(FilteredSecrets), value);
+                ShowSecretsList = FilteredSecrets?.Any() ?? false;
+            }
+        }
+
+        public ObservableCollection<SecretViewModel> SearchedSecrets
+        {
+            get
+            {
+                return GetProperty<ObservableCollection<SecretViewModel>>(nameof(SearchedSecrets));
+            }
+            set
+            {
+                SetProperty(nameof(SearchedSecrets), value);
+            }
+        }
+
+        public string Keyword
+        {
+            get { return GetProperty<string>(nameof(Keyword)); }
+            set { SetProperty(nameof(Keyword), value); }
+        }
+
+        public SecretType SelectedSecretTypeFilter
+        {
+            get { return GetProperty<SecretType>(nameof(SelectedSecretTypeFilter)); }
+            set { SetProperty(nameof(SelectedSecretTypeFilter), value); }
+        }
+
+        public SecretsFilter SelectedSecretFilter
+        {
+            get { return GetProperty<SecretsFilter>(nameof(SelectedSecretFilter)); }
+            set { SetProperty(nameof(SelectedSecretFilter), value); }
+        }
+
+        public SecretFilterOption SelectedSecretListFilter
+        {
+            get { return GetProperty<SecretFilterOption>(nameof(SelectedSecretListFilter)); }
+            set { SetProperty(nameof(SelectedSecretListFilter), value); }
+        }
+
+        public bool ShowSecretTypeCreateMenu { get; set; }
+
+        public bool ShowSecretFilterMenu { get; set; }
+
+        public bool HasPaidSubscription
+        { get { return GetProperty<bool>(nameof(HasPaidSubscription)); } private set { SetProperty(nameof(HasPaidSubscription), value); } }
+
+        public bool HasNoSecretsCapability { get; set; }
+
+        public bool ShowSecretsList
+        { get { return GetProperty<bool>(nameof(ShowSecretsList)); } private set { SetProperty(nameof(ShowSecretsList), value); } }
+
+        public int SecretListHeightRequest { get; set; }
+
+        public string SortOptionAllText
+        { get { return GetProperty<string>(nameof(SortOptionAllText)); } private set { SetProperty(nameof(SortOptionAllText), value); } }
+
+        public string SortOptionRecentText
+        { get { return GetProperty<string>(nameof(SortOptionRecentText)); } private set { SetProperty(nameof(SortOptionRecentText), value); } }
+
+        public string SortOptionSharedText
+        { get { return GetProperty<string>(nameof(SortOptionSharedText)); } private set { SetProperty(nameof(SortOptionSharedText), value); } }
+
+        public string ErrorMessage
+        {
+            get
+            {
+                return GetProperty<string>(nameof(ErrorMessage));
+            }
+            set
+            {
+                SetProperty(nameof(ErrorMessage), value);
+                if (value != "")
+                    CanShowErrorMessage = true;
+                else
+                    CanShowErrorMessage = false;
+            }
+        }
+
+        private bool _loading { get; set; } = false;
+
+        private Action _onStateChange;
+
+        public void SetOnStateChange(Action onStateChange)
+        {
+            _onStateChange = onStateChange;
+        }
+
+        public bool Loading
+        {
+            get => _loading;
+            set
+            {
+                if (_loading != value)
+                {
+                    _loading = value;
+                    _onStateChange?.Invoke();
+                }
+            }
+        }
+
+        public bool CanShowErrorMessage
+        {
+            get { return GetProperty<bool>(nameof(CanShowErrorMessage)); }
+            set { SetProperty(nameof(CanShowErrorMessage), value); }
+        }
+
+        public async void OnTabOpened()
+        {
+            if (_activateSharedListFilter)
+            {
+                return;
+            }
+
+            _CachedSecrets = new Dictionary<SecretFilterOption, ObservableCollection<SecretViewModel>>();
+            await FindSecrets();
+        }
+
+        private AlertNotification _alertNotification;
+
+        /// <summary>
+        /// Get all secrets that match a specified keyword and belong to the current user
+        /// </summary>
+        /// <param name="keyword">Keyword to search with</param>
+        /// <returns>SecretCollection containing found secrets</returns>
+        public async Task<ObservableCollection<SecretViewModel>> FindSecrets(bool forceReload = false, IProgress<LoadingModel> progress = null)
+        {
+            return await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress(async () =>
+            {
+                _activateSharedListFilter = false;
+                if (forceReload)
+                {
+                    _CachedSecrets.Clear();
+                    Secrets.Clear();
+                }
+                if (_CachedSecrets.ContainsKey(SecretFilterOption.All))
+                {
+                    Secrets = _CachedSecrets[SecretFilterOption.All];
+                    await ApplyFilter();
+                    return Secrets;
+                }
+
+                IEnumerable<SecretViewModel> secrets = await LoadSecrets(() => PersonalSecrets.SelectBySearch(Keyword ?? ""));
+                Secrets = new ObservableCollection<SecretViewModel>(secrets);
+                await ApplyFilter();
+                return Secrets;
+            }, progress);
+        }
+
+        private async Task<IEnumerable<SecretViewModel>> LoadSecrets(Func<Task<SecretClientCollection>> SelectBySearchFuncAsync)
+        {
+            return await Task.Run(async () =>
+            {
+                IEnumerable<AxCrypt.Cryptor.Model.SecretClientModel> secrets = await SelectBySearchFuncAsync();
+                return secrets.Select(sc => { return new SecretViewModel(sc); });
+            });
+        }
+
+        private async Task FindSharedWithSecrets(IProgress<LoadingModel> progress = null)
+        {
+            await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
+            {
+                if (_CachedSecrets.ContainsKey(SecretFilterOption.Shared))
+                {
+                    Secrets = _CachedSecrets[SecretFilterOption.Shared];
+                    await ApplyFilter();
+                    return Task.CompletedTask;
+                }
+
+                IEnumerable<SecretViewModel> sharedWithSecrets = await LoadSecrets(() => SharedSecrets.SelectBySearch(Keyword ?? ""));
+                Secrets = new ObservableCollection<SecretViewModel>(sharedWithSecrets);
+                await ApplyFilter();
+
+                return Task.CompletedTask;
+            }, progress);
+        }
+
+        public async Task FilterSecretsBy(SecretsFilter type, IProgress<LoadingModel> progress = null)
+        {
+            if (SelectedSecretFilter == type)
+            {
+                return;
+            }
+
+            SelectedSecretFilter = type;
+
+            await ApplyFilterOnSecrets();
+            progress?.Report(new LoadingModel { IsLoading = false });
+        }
+
+        public async Task ApplyFilterOnSecrets(IProgress<LoadingModel> progress = null)
+        {
+            await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
+            {
+                {
+                    await Task.Run(() =>
+                    {
+                        ApplyFilter();
+                    });
+                }
+                return Task.CompletedTask;
+            }, progress);
+        }
+
+        public async Task ClearFiltersAndReloadSecrets()
+        {
+            SelectedSecretFilter = SecretsFilter.All;
+            SelectedSecretListFilter = SecretFilterOption.All;
+
+            _CachedSecrets.Clear();
+
+            Secrets = await FindSecrets(forceReload: true);
+
+            FilteredSecrets = new ObservableCollection<SecretViewModel>(Secrets);
+        }
+
+        private async Task ApplyFilter(IProgress<LoadingModel> progress = null)
+        {
+            SearchSecrets();
+
+            IList<SecretViewModel> filteredSecrets = FilterSecretsByType();
+            FilteredSecrets = new ObservableCollection<SecretViewModel>(filteredSecrets);
+
+            switch (SelectedSecretListFilter)
+            {
+                case SecretFilterOption.None:
+                case SecretFilterOption.All:
+                    FilteredSecrets = new ObservableCollection<SecretViewModel>(FilteredSecrets);
+                    SortOptionAllText = _sortOptionAll + $" ({FilteredSecrets.Count})";
+                    SortOptionRecentText = _sortOptionRecent;
+                    SortOptionSharedText = _sortOptionShared;
+                    break;
+
+                case SecretFilterOption.Recently:
+                    FilteredSecrets = new ObservableCollection<SecretViewModel>(FilteredSecrets.OrderByDescending(x => x.UpdatedUtc).Take(MaxRecentSecretsToShow));
+                    SortOptionAllText = _sortOptionAll;
+                    SortOptionRecentText = _sortOptionRecent + $" ({FilteredSecrets.Count})";
+                    SortOptionSharedText = _sortOptionShared;
+                    break;
+
+                case SecretFilterOption.Shared:
+                    FilteredSecrets = new ObservableCollection<SecretViewModel>(FilteredSecrets.OrderByDescending(x => x.SharedWith != null).Take(MaxRecentSecretsToShow));
+                    SortOptionAllText = _sortOptionAll;
+                    SortOptionRecentText = _sortOptionRecent;
+                    SortOptionSharedText = _sortOptionShared + $" ({FilteredSecrets.Count})";
+                    break;
+
+                default:
+                    break;
+            }
+            progress?.Report(new LoadingModel { IsLoading = false });
+        }
+
+        private void SearchSecrets()
+        {
+            IEnumerable<SecretClientModel> allSecrets = Secrets.Select(se => se.ToClientModel(se.SecretGuid)).ToList();
+            IEnumerable<SecretClientModel> searchResult = PersonalSecrets.SearchInSecrets(allSecrets, Keyword);
+
+            SearchedSecrets = new ObservableCollection<SecretViewModel>(searchResult.Select(sc => { return new SecretViewModel(sc); }));
+        }
+
+        private IList<SecretViewModel> FilterSecretsByType()
+        {
+            int totalCount = SearchedSecrets.Count;
+            SecretViewModel[] secrets = SearchedSecrets.ToArray();
+
+            IList<SecretViewModel> filteredSecrets = new List<SecretViewModel>();
+            for (int i = 0; i < totalCount; i++)
+            {
+                SecretViewModel secretModel = secrets[i];
+                if (SelectedSecretFilter != 0 && secretModel.SecretType.ToString() != SelectedSecretFilter.ToString())
+                {
+                    continue;
+                }
+
+                filteredSecrets.Add(secretModel);
+            }
+
+            return filteredSecrets;
+        }
+
+        public async Task FilterSecretsBy(SecretFilterOption secretFilter, IProgress<LoadingModel> progress = null)
+        {
+            await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
+            {
+                if (SelectedSecretListFilter == secretFilter)
+                {
+                    return Task.CompletedTask;
+                }
+                SelectedSecretListFilter = secretFilter;
+                UpdateSecretListFilterStyle(secretFilter);
+
+                await FindSecrets();
+                await ApplyFilterOnSecrets();
+                return Task.CompletedTask;
+            }, progress);
+        }
+
+        public async Task FilterSharedSecrets(SecretFilterOption secretFilter, IProgress<LoadingModel> progress = null)
+        {
+            await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
+            {
+                _activateSharedListFilter = true;
+                if (SelectedSecretListFilter == secretFilter)
+                {
+                    return Task.CompletedTask;
+                }
+
+                SelectedSecretListFilter = secretFilter;
+                UpdateSecretListFilterStyle(secretFilter);
+
+                await FindSharedWithSecrets();
+
+                await ApplyFilterOnSecrets();
+                return Task.CompletedTask;
+            }, progress);
+        }
+
+        private void UpdateSecretListFilterStyle(SecretFilterOption secretFilter = SecretFilterOption.None)
+        {
+            switch (secretFilter)
+            {
+                case SecretFilterOption.None:
+                case SecretFilterOption.All:
+
+                    LoadCachedSecretsByFilter(SecretFilterOption.All);
+                    break;
+
+                case SecretFilterOption.Recently:
+
+                    LoadCachedSecretsByFilter(SecretFilterOption.All);
+                    break;
+
+                case SecretFilterOption.Shared:
+
+                    LoadCachedSecretsByFilter(SecretFilterOption.Shared);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void LoadCachedSecretsByFilter(SecretFilterOption filterOption)
+        {
+            if (_CachedSecrets.ContainsKey(filterOption))
+            {
+                Secrets = _CachedSecrets[filterOption];
+            }
+        }
+
+        public async Task SortSecretsBy(SecretsSortOrder sortorderOption)
+        {
+            await ApplyFilterOnSecrets();
+
+            ShowSecretFilterMenu = false;
+            List<SecretViewModel> combinedSecrets = new List<SecretViewModel>();
+            if (sortorderOption == SecretsSortOrder.ByContent)
+            {
+                combinedSecrets.AddRange(FilteredSecrets.OrderBy(s => SecDescription(s)));
+                FilteredSecrets = new ObservableCollection<SecretViewModel>(combinedSecrets);
+                return;
+            }
+
+            combinedSecrets.AddRange(FilteredSecrets);
+            FilteredSecrets = new ObservableCollection<SecretViewModel>(combinedSecrets);
+        }
+
+        private static string SecDescription(SecretViewModel secret)
+        {
+            if (secret.SecretType == SecretType.Card)
+            {
+                return secret.Card.SecretDesc;
+            }
+
+            if (secret.SecretType == SecretType.Note)
+            {
+                return secret.Note.SecretDesc;
+            }
+
+            return secret.Password.SecretDesc;
+        }
+
+        private void ClearErrorProviders()
+        {
+            ErrorMessage = "";
+        }
+
+        private UserSettings _userSettings;
+
+        public async Task<bool> ExportTextAsync()
+        {
+            LogOnIdentity identity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
+            byte[] txtData = GetSecretsTxtData();
+            if (txtData == null)
+            {
+                return false;
+            }
+
+            string downloadsFolderPath = GetDownloadsFolderPath();
+            if (downloadsFolderPath == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Alert", "Could not determine the Downloads folder path.", "OK");
+                return false;
+            }
+
+            string fileName = identity.UserEmail.Address + ".secrets.txt";
+            string filePath = Path.Combine(downloadsFolderPath, fileName);
+
+            int count = 1;
+            while (File.Exists(filePath))
+            {
+                string tempFileName = $"{identity.UserEmail.Address}.secrets({count}).txt";
+                filePath = Path.Combine(downloadsFolderPath, tempFileName);
+                count++;
+            }
+
+            await File.WriteAllBytesAsync(filePath, txtData);
+            return true;
+        }
+
+        public byte[] GetSecretsTxtData()
+        {
+            FilterSecretsByType();
+            if (FilteredSecrets == null || FilteredSecrets.Count == 0)
+            {
+                return null;
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (SecretViewModel secretViewModel in FilteredSecrets)
+            {
+                sb.Append("Type: ");
+                sb.Append(secretViewModel.SecretType.ToString());
+                sb.Append(Environment.NewLine);
+
+                switch (secretViewModel.SecretType)
+                {
+                    case SecretType.Legacy:
+                    case SecretType.Password:
+                        sb.Append("Url: ");
+                        sb.Append(secretViewModel.Password.Url.Trim());
+                        sb.Append(Environment.NewLine);
+                        sb.Append("Description: ");
+                        sb.Append(secretViewModel.Password.SecretDesc.Trim());
+                        sb.Append(Environment.NewLine);
+                        sb.Append("Username: ");
+                        sb.Append(secretViewModel.Password.Username.Trim());
+                        sb.Append(Environment.NewLine);
+                        sb.Append("Secret: ");
+                        sb.Append(secretViewModel.Password.SecretValue.Trim());
+                        sb.Append(Environment.NewLine);
+                        break;
+
+                    case SecretType.Card:
+                        sb.Append("CardNumber: ");
+                        sb.Append(secretViewModel.Card.CardNumber.Trim());
+                        sb.Append(Environment.NewLine);
+                        sb.Append("Description: ");
+                        sb.Append(secretViewModel.Card.SecretDesc.Trim());
+                        sb.Append(Environment.NewLine);
+                        sb.Append("NameOnCard: ");
+                        sb.Append(secretViewModel.Card.NameOnCard.Trim());
+                        sb.Append(Environment.NewLine);
+                        sb.Append("SecurityCode: ");
+                        sb.Append(secretViewModel.Card.SecurityCode.Trim());
+                        sb.Append(Environment.NewLine);
+                        sb.Append("ExpirationDate: ");
+                        sb.Append(secretViewModel.Card.ExpirationDate.Trim());
+                        sb.Append(Environment.NewLine);
+                        break;
+
+                    case SecretType.Note:
+                        sb.Append("Description: ");
+                        sb.Append(secretViewModel.Note.SecretDesc.Trim());
+                        sb.Append(Environment.NewLine);
+                        sb.Append("Note: ");
+                        sb.Append(secretViewModel.Note.Note.Trim());
+                        sb.Append(Environment.NewLine);
+                        break;
+                }
+                sb.Append(Environment.NewLine);
+            }
+            return Encoding.UTF8.GetBytes(sb.ToString());
+        }
+
+        public async Task<bool> ExportXml()
+        {
+            LogOnIdentity identity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
+            Stream xmlStream = await GetRawXML();
+            if (xmlStream == Stream.Null && New<AxCryptOnlineState>().IsOffline)
+            {
+                _alertNotification.ShowNotification("Could not download the file when offline.", NotificationType.Warning);
+                return false;
+            }
+
+            string downloadsFolderPath = GetDownloadsFolderPath();
+            if (downloadsFolderPath == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Alert", "Could not determine the Downloads folder path.", "OK");
+                return false;
+            }
+
+            string fileName = identity.UserEmail.Address + ".secrets.xml";
+            string filePath = Path.Combine(downloadsFolderPath, fileName);
+
+            int count = 1;
+            while (File.Exists(filePath))
+            {
+                string tempFileName = $"{identity.UserEmail.Address}.secrets({count}).xml";
+                filePath = Path.Combine(downloadsFolderPath, tempFileName);
+                count++;
+            }
+
+            using (StreamReader reader = new StreamReader(xmlStream))
+            {
+                string xmlData = await reader.ReadToEndAsync();
+                await File.WriteAllTextAsync(filePath, xmlData);
+            }
+            return true;
+        }
+
+        private async Task<Stream> GetRawXML()
+        {
+            LogOnIdentity identity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
+            SecretsListRequestOptions requestOptions = new SecretsListRequestOptions(identity.UserEmail.Address)
+            {
+                GetRawXml = true
+            };
+            EncryptedSecretApiModel userSecrets = await New<LogOnIdentity, ISecretsService>(identity).GetSecretsAsync(requestOptions);
+
+            if (userSecrets.SecretBody == null)
+            {
+                return Stream.Null;
+            }
+
+            byte[] byteArray = Encoding.UTF8.GetBytes(userSecrets.SecretBody);
+            Stream stream = new MemoryStream(byteArray);
+            return stream;
+        }
+
+        private string GetDownloadsFolderPath()
+        {
+            string downloadsFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+
+            return downloadsFolderPath;
+        }
+    }
+}

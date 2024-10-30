@@ -1,0 +1,115 @@
+﻿@page ﻿"/AddNote"
+
+@using AxCrypt.App.Components.Helpers
+@using AxCrypt.App.Components.Models.Secret
+@using AxCrypt.App.Windows.Helpers
+@using AxCrypt.App.Windows.Models
+@using AxCrypt.App.Windows.Services
+@using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.Cryptor.Model
+@using AxCrypt.App.Components.Services
+@using AxCrypt.App.Components.Models;
+@using AxCrypt.Api.Model;
+@using AxCrypt.Content;
+@using static AxCrypt.Abstractions.TypeResolve;
+@using System.Collections.Specialized
+@inject NewSecretViewModel newSecretViewModel
+@inject NavigationManager navigationManager;
+@inject SecretServiceUtility secretServiceUtility
+@inject SecretService currentSecret
+@inject AlertNotification alertNotification
+
+<link href="css/@subscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
+<link href="css/@subscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
+<link href="css/@subscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
+
+<div style="width: 85%; margin-top: 80px;">
+    <div class="page-heading">
+            <h3 class="password-creation">
+                Add Note
+            </h3>
+    </div>
+     <LoadingComponent IsLoading="@newSecretViewModel.Loading" />
+     <div>
+         @if(!newSecretViewModel.Loading)
+        {
+           <EditForm Model="@newSecretViewModel.Secret.Note" OnValidSubmit="SavePassword" @ref="editForm">
+        <DataAnnotationsValidator />
+        <div class="row">
+            <ul class="clean-up" style=" list-style:none; ">
+                <li>
+                    <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
+                    <textarea id="pwd-desc-inp"
+                    placeholder="example" maxlength="100000"
+                    style="color:#494949 !important;" @bind="@newSecretViewModel.Secret.Note.SecretDesc" rows="2"
+                    class="@GetInputClass(nameof(newSecretViewModel.Secret.Note.SecretDesc))"></textarea>
+                     <ValidationMessage For="@(() => newSecretViewModel.Secret.Note.SecretDesc)" />
+                </li>
+                <li>
+                    <label for="Note_Note">Note:</label>
+                    <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important;" placeholder="example" @bind="@newSecretViewModel.Secret.Note.Note"></textarea>
+                </li>
+                <li>
+                    <div style=" gap:20px; ">
+                        <button type="submit" class="button btn-extra-small success" >Save</button>
+                        <NavLink href="passwordManager">
+                            <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
+                        </NavLink>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    @if (alertNotification.IsNotificationVisible)
+        {
+            <div class="medium-11 columns">
+                <div data-alert class="alert-box @alertNotification.NotificationClass radius">
+                    <span style="white-space: break-spaces;">@alertNotification.NotificationMessage</span>
+                    <a class="clse-img" style="float: right; color:white; cursor: pointer;" @onclick="alertNotification.HideNotification">X</a>
+                </div>
+            </div>
+        }
+   </EditForm>  
+        }      
+     </div>
+</div>
+@code {
+    private SubscriptionLevel subscriptionLevel;
+
+    private EditForm editForm;
+
+    private string GetInputClass(string propertyName)
+    {
+        FieldIdentifier fieldIdentifier = new FieldIdentifier(newSecretViewModel.Secret.Note, propertyName);
+        bool isFieldValid = editForm.EditContext.GetValidationMessages(fieldIdentifier).Any();
+
+        return isFieldValid ? "input-error" : string.Empty; 
+    }
+
+    protected override void OnInitialized()
+    {
+        subscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        newSecretViewModel.Secret.Note.SecretDesc = "";
+        newSecretViewModel.Secret.Note.Note = "";
+        newSecretViewModel = new NewSecretViewModel(secretServiceUtility);
+        alertNotification.OnNotificationChanged += StateHasChanged;
+    }
+
+    private async Task SavePassword()
+    {
+         Progress<LoadingModel> progress = new Progress<LoadingModel>(p =>
+       {
+           newSecretViewModel.Loading = p.IsLoading;
+           InvokeAsync(StateHasChanged);
+       });
+        bool success = await newSecretViewModel.SaveSecretAsync(progress);
+        if (success)
+        {
+            alertNotification.ShowNotification("Your new Note entry has been saved.", NotificationType.Success);
+             navigationManager.NavigateTo("/passwordManager", true);
+        }
+        else
+        {
+            alertNotification.ShowNotification(newSecretViewModel.ErrorMessage, NotificationType.Warning);
+        }
+    }
+}

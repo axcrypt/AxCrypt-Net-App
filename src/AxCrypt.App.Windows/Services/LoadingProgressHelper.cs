@@ -1,4 +1,4 @@
-﻿using AxCrypt.App.Windows.Models;
+﻿using AxCrypt.App.Components.Models;
 
 namespace AxCrypt.App.Windows.Services;
 

@@ -320,11 +320,11 @@
     {
         @if (SubscriptionLevel != SubscriptionLevel.Free)
         {
-            <AxCrypt.MauiBlazor.Windows.Shared.Suggestion />
+            <AxCrypt.App.Windows.Components.Pages.Suggestion />
         }
         else
         {
-            <AxCrypt.MauiBlazor.Windows.Shared.Subscription />
+            <AxCrypt.App.Windows.Components.Pages.Subscription />
         }
     }
 </div>
@@ -435,7 +435,7 @@
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); StateHasChanged(); });
 
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        SubscriptionLevel = SubscriptionLevel.Premium;
     }
 
     protected override void OnAfterRender(bool firstRender)

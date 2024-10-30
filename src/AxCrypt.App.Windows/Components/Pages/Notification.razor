@@ -1,4 +1,7 @@
-﻿@using AxCrypt.App.Windows.Helpers
+﻿@page "/notification"
+
+@using AxCrypt.App.Components.Models
+@using AxCrypt.App.Windows.Helpers
 @using AxCrypt.App.Windows.Models
 @using AxCrypt.App.Windows.Services
 @using AxCrypt.Content
@@ -46,7 +49,7 @@ else
                 </tr>
             </thead>
 
-            <LoadingComponent IsLoading="@model.Loading" />
+            <AxCrypt.App.Windows.Components.Pages.LoadingComponent IsLoading="@model.Loading" />
 
             <tbody id="notilist" class="notify-pg-tbl-body">
                 @if (!model.Loading)

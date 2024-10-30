@@ -143,10 +143,10 @@
 
 @code {
     public string? UserEmail { get; set; }
-    public int DaysLeft { get; set; }
+    public int DaysLeft { get; set; } = 30;
     private bool isDialogOpen { get; set; }
     public SubscriptionLevel SubscriptionLevel { get; set; }
-    public string Subscription { get; set; }
+    public string? Subscription { get; set; }
     public DateTime CreatedTime { get; set; }
     public string ValidFormatted
     {
@@ -190,7 +190,10 @@
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
 
         _fileOperationViewModel = New<FileOperationViewModel>();
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        SubscriptionLevel = SubscriptionLevel.Premium;
+        UserEmail = "yosufkani@axcrypt.net";
+        Subscription = "Premium";
+        //ValidFormatted = "30 days left";
 
         base.OnInitialized();
     }

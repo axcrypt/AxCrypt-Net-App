@@ -19,6 +19,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\shared\AxCrypt.Abstractions\AxCrypt.Abstractions.csproj" />
     <ProjectReference Include="..\..\shared\AxCrypt.Core\AxCrypt.Core.csproj" />
+    <ProjectReference Include="..\..\shared\AxCrypt.Cryptor\AxCrypt.Cryptor.csproj" />
+    <ProjectReference Include="..\..\shared\AxCrypt.Mono\AxCrypt.Mono.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +33,11 @@
 
   <ItemGroup>
     <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.92" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Notification\" />
+    <Folder Include="Models\Secret\" />
   </ItemGroup>
 
 </Project>
