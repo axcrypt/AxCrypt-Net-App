@@ -1,35 +1,36 @@
-﻿using AxCrypt.Api.Model;
-using AxCrypt.App.Windows.Helpers;
+﻿using AxCrypt.App.Windows.Helpers;
 using AxCrypt.App.Windows.Services;
-using AxCrypt.Common;
+using AxCrypt.App.Windows.Models;
+using Microsoft.JSInterop;
 using AxCrypt.Content;
-using AxCrypt.Core.UI.ViewModel;
-using System.ComponentModel.DataAnnotations;
+using AxCrypt.Api.Model;
+using AxCrypt.Common;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Components.Models;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class SupportViewModel : ViewModelBase
+public class SupportViewModel
 {
-    private SupportService supportService;
+    private readonly SupportService _supportService;
+    private readonly IJSRuntime _jsRuntime;
 
-    public SupportViewModel(SupportService supportService)
+    public SupportModel Model { get; set; }
+    public bool IsWideScreen { get; set; }
+    public bool IsLoading { get; set; }
+    public string ErrorMessage { get; set; }
+    public bool SubmittedSuccess { get; set; }
+
+    public SupportViewModel(SupportService supportService, IJSRuntime jsRuntime)
     {
-        this.supportService = supportService;
+        _supportService = supportService;
+        _jsRuntime = jsRuntime;
+        Model = new SupportModel();
+        Model.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
     }
 
-    [Required, StringLength(100000)]
-    [Display(Name = nameof(Texts.SupportBodyPrompt), ResourceType = typeof(Content.Resource))]
-    public string Body { get; set; }
-
-    public string Subject { get; set; }
-
-    public bool SubmittedSuccess { get; set; } = false;
-
-    public string ErrorMessage { get; set; }
-
-    public async Task<bool> SupportAsync(SupportViewModel model)
+    public async Task<bool> SubmitSupportAsync()
     {
         if (New<AxCryptOnlineState>().IsOffline)
         {
@@ -37,28 +38,46 @@ public class SupportViewModel : ViewModelBase
             return false;
         }
 
-        if (string.IsNullOrEmpty(model.Body))
+        if (string.IsNullOrEmpty(Model.Body))
         {
             ErrorMessage = "Fill the required(marked *) fields!";
             return false;
         }
+
         bool submitted = false;
-        model.Subject = Texts.PromptSupport;
-        if (Utility.IsPasswordManager)
+        Model.Subject = Texts.PromptSupport;
+        if (AxCrypt.App.Components.Data.Utility.IsPasswordManager)
         {
-            model.Subject = $"{nameof(SubscriptionLevel.PasswordManager)} {Texts.PromptSupport}";
+            Model.Subject = $"{nameof(SubscriptionLevel.PasswordManager)} {Texts.PromptSupport}";
         }
-        if (Utility.IsPremiumUser)
+        if (AxCrypt.App.Components.Data.Utility.IsPremiumUser)
         {
-            model.Subject = Texts.PrioritySupportTitle;
+            Model.Subject = Texts.PrioritySupportTitle;
         }
-        if (Utility.IsBusinessUser)
+        if (AxCrypt.App.Components.Data.Utility.IsBusinessUser)
         {
-            model.Subject = Texts.BusinessPrioritySupportTitle;
+            Model.Subject = Texts.BusinessPrioritySupportTitle;
         }
 
-        submitted = await supportService.SendPremiumSupportRequestEmail(model.Subject, model.Body);
+        submitted = await _supportService.SendPremiumSupportRequestEmail(Model.Subject, Model.Body);
         SubmittedSuccess = submitted;
         return submitted;
+    }
+
+    public async Task InitializeScreenPropertiesAsync()
+    {
+        IsLoading = true;
+        try
+        {
+            IsWideScreen = await Utility.IsWideScreenAsync(_jsRuntime);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error determining screen width: {ex.Message}");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
     }
 }

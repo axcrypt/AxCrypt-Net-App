@@ -1,0 +1,981 @@
+﻿@using AxCrypt.Abstractions
+@using AxCrypt.Api.Model
+@using AxCrypt.App.Components.Services.Interface
+@using AxCrypt.App.Components.ViewModels
+@using AxCrypt.Common
+@using AxCrypt.Content
+@using AxCrypt.Core
+@using AxCrypt.Core.Crypto
+@using AxCrypt.Core.Runtime
+@using AxCrypt.Core.Service
+@using AxCrypt.Core.Session
+@using AxCrypt.Core.UI
+@using AxCrypt.Core.Extensions
+@using AxCrypt.Core.UI.ViewModel
+@using System.Collections.ObjectModel
+@using System.Globalization
+
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject IExportKeyManagementFile ExportKeyFile
+
+<div class="desk-stngs-popup manage-acc-sec model-popup font-medium hide-model-popup">
+    <span class="font-bold">@Texts.SettingsPageTitle</span>
+    <NavLink class="nav-link center-column">
+        <div>
+            <img class="" src="images/default/IcoEye.svg" alt="go-back-img" />
+            <span class="grey-clr">@Texts.OptionsHideRecentFilesToolStripMenuItemText</span>
+        </div>
+        <div style="float:right; padding-left:15px;">
+            <label class="toggle">
+                <input type="checkbox" @bind="HideRecentFiles" @onclick="ToggleHideRecentFiles" />
+                <span class="slider round">
+                    @if (HideRecentFiles)
+                    {
+                        <span class="on-off-text on-text">ON</span>
+                        <span class="on-off-text off-text" style="display:none;">OFF</span>
+                    }
+                    else
+                    {
+                        <span class="on-off-text on-text" style="display:none;">ON</span>
+                        <span class="on-off-text off-text">OFF</span>
+                    }
+                </span>
+            </label>
+        </div>
+    </NavLink>
+    <NavLink class="nav-link center-column">
+        <div>
+            <img class="" src="images/default/IcoEye.svg" alt="go-back-img" />
+            <span class="grey-clr">@Texts.OptionsConvertMenuItemText</span>
+        </div>
+        <div style="float:right; padding-left:15px;">
+            <label class="toggle">
+                <input type="checkbox" @bind="AutoUpgradeToAES256" @onclick="ToggleAutoUpgradeMode">
+                <span class="slider round">
+                    @if (AutoUpgradeToAES256)
+                    {
+                        <span class="on-off-text on-text">ON</span>
+                        <span class="on-off-text off-text" style="display:none;">OFF</span>
+                    }
+                    else
+                    {
+                        <span class="on-off-text on-text" style="display:none;">ON</span>
+                        <span class="on-off-text off-text">OFF</span>
+                    }
+                </span>
+            </label>
+        </div>
+    </NavLink>
+    <NavLink class="nav-link center-column">
+        <div>
+            <img class="" src="images/default/IcoOffln1.svg" alt="go-back-img" />
+            <span class="grey-clr">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
+        </div>
+        <div style="float:right; padding-left:15px;">
+            <label class="toggle">
+                <input type="checkbox" @bind="IncludeSubfolders" @onclick="async(e)=> ToggleIncludeSubfolders(e)">
+                <span class="slider round">
+                    @if (IncludeSubfolders)
+                    {
+                        <span class="on-off-text on-text">ON</span>
+                        <span class="on-off-text off-text" style="display:none;">OFF</span>
+                    }
+                    else
+                    {
+                        <span class="on-off-text on-text" style="display:none;">ON</span>
+                        <span class="on-off-text off-text">OFF</span>
+                    }
+                </span>
+            </label>
+        </div>
+    </NavLink>
+    <div class="key-section">
+        <NavLink @attributes="NavLinkAttributes1()" @onclick="InactSgnOutPopup">
+            <img class="sgn-out-img" src="images/default/IcoSngOut.svg" alt="go-back-img" />
+            <span>@Texts.IdleSignOutToolStripMenuItemText</span>
+        </NavLink>
+    </div>
+    <div class="key-section">
+        <NavLink class="nav-link" @onclick="(e)=> RestoreRename(e)">
+            <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
+            <span>Restore to original</span>
+        </NavLink>
+    </div>
+    <NavLink class="nav-link center-column">
+        <div>
+            <img class="" src="images/default/IcoOffln1.svg" alt="go-back-img" />
+            <span class="grey-clr">@Texts.AlwaysOffline</span>
+        </div>
+        <div style="float:right; padding-left:15px;">
+            <label class="toggle">
+                <input type="checkbox" @bind="AlwaysOffline" @onclick="(e)=> ToggleAlwaysOffline(e)">
+                <span class="slider round">
+                    @if (AlwaysOffline)
+                    {
+                        <span class="on-off-text on-text">ON</span>
+                        <span class="on-off-text off-text" style="display:none;">OFF</span>
+                    }
+                    else
+                    {
+                        <span class="on-off-text on-text" style="display:none;">ON</span>
+                        <span class="on-off-text off-text">OFF</span>
+                    }
+                </span>
+            </label>
+        </div>
+    </NavLink>
+    <div class="key-section">
+        <NavLink @attributes="NavLinkAttributes3()" @onclick="FileEncryptionProperty">
+            <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
+            <span>Encryption File Properties</span>
+        </NavLink>
+    </div>
+    <div class="key-section">
+        <NavLink class="nav-link" @onclick="(e)=> InviteUser(e)">
+            <img class="" src="images/default/IcoInvtFrnd1.svg" alt="go-back-img" />
+            <span>@Texts.InviteUserToolStripMenuItemText</span>
+        </NavLink>
+    </div>
+    <div class="key-section">
+        <NavLink class="debug" @attributes="NavLinkAttributes2()" @onclick="ToggleDebugPopup">
+            <img class="dbg-img" src="images/default/IcoDbg.svg" alt="go-back-img" />
+            <span>@Texts.DebugToolStripMenuItemText</span>
+        </NavLink>
+    </div>
+</div>
+@if (InactSgnOut)
+{
+    <div class="model-popup sub-pop1 hide-model-popup">
+        <div id="inactivity">
+            <form id="inactivityForm">
+                <input type="radio" id="disable" name="inactivity" value="0" @onclick="()=> OnInactivityContextMenu(0)" checked=@IsChecked(0)>
+                <label for="disable">Disable</label><br />
+                <input type="radio" id="minutes1" name="inactivity" value="5" @onclick="()=> OnInactivityContextMenu(5)" checked=@IsChecked(5)>
+                <label for="minutes1">5 minutes</label><br />
+                <input type="radio" id="minutes2" name="inactivity" value="15" @onclick="()=> OnInactivityContextMenu(15)" checked=@IsChecked(15)>
+                <label for="minutes2">15 minutes</label><br />
+                <input type="radio" id="minutes3" name="inactivity" value="30" @onclick="()=> OnInactivityContextMenu(30)" checked=@IsChecked(30)>
+                <label for="minutes3">30 minutes</label><br />
+                <input type="radio" id="minutes4" name="inactivity" value="60" @onclick="()=> OnInactivityContextMenu(60)" checked=@IsChecked(60)>
+                <label for="minutes4">60 minutes</label>
+            </form>
+        </div>
+    </div>
+}
+@if (FileEncryptionProperties)
+{
+    <div class="model-popup sub-pop1 hide-model-popup encrypt-pop">
+        <div id="date-modified-toggle">
+            <dl>
+                <dd class="center-column">
+                    <div>
+                        <img class="" src="images/default/Icodate.svg" alt="date-img" />
+                        <span class="font-medium grey-clr">
+                            Date Modified
+                        </span>
+                    </div>
+                    <div style="float:right; padding-left:15px;">
+                        <label class="toggle">
+                            <input type="checkbox" @bind="@IsDateModifiedOn" @onclick="(e)=> FilePropertiesDateModified(e)">
+
+                            <span class="slider round">
+                                @if (IsDateModifiedOn)
+                                {
+                                    <span class="on-off-text on-text">ON</span>
+                                    <span class="on-off-text off-text" style="display:none;">OFF</span>
+                                }
+                                else
+                                {
+                                    <span class="on-off-text on-text" style="display:none;">ON</span>
+                                    <span class="on-off-text off-text">OFF</span>
+                                }
+                            </span>
+                        </label>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dd>
+                    <img class="" src="images/default/IcoBtnEdit.svg" alt="btn-file-img" />
+                    <span class="font-medium grey-clr">
+                        File Name
+                    </span>
+                    <div style="float:right; padding-left:15px;">
+                        <label class="toggle">
+                            <input type="checkbox" @bind="@IsFileNameOn" @onclick="(e) => FilePropertiesFileName(e)">
+
+                            <span class="slider round">
+                                @if (IsFileNameOn)
+                                {
+                                    <span class="on-off-text on-text">ON</span>
+                                    <span class="on-off-text off-text" style="display:none;">OFF</span>
+                                }
+                                else
+                                {
+                                    <span class="on-off-text on-text" style="display:none;">ON</span>
+                                    <span class="on-off-text off-text">OFF</span>
+                                }
+                            </span>
+                        </label>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+}
+@if (DebugPopup)
+{
+    <div class="model-popup sub-pop2 font-medium hide-model-popup">
+        <div class="manage-acc-sec">
+            <NavLink class="nav-link" @onclick="CheckAxCryptVersionAsync">
+                <img class="" src="images/default/IcoChckVrsn.svg" alt="go-back-img" />
+                <span>Check version now</span>
+            </NavLink>
+            <NavLink class="nav-link" @onclick="OpenOptions">
+                <img class="" src="images/default/IcoExtrFtrs1.svg" alt="go-back-img" />
+                <span>Options</span>
+            </NavLink>
+            <NavLink class="nav-link" @onclick="OnOpenLogViewerClicked">
+                <img class="" src="images/default/IcoLgng.svg" alt="go-back-img" />
+                <span>Logging</span>
+            </NavLink>
+            <NavLink class="nav-link" @onclick="OpenManageAxCryptID">
+                <img class="" src="images/default/IcoUsers.svg" alt="go-back-img" />
+                <span>Manage AxCrypt ID</span>
+            </NavLink>
+            <NavLink class="nav-link" @onclick="async ()=> OpenBrokenFiles()">
+                <img class="" src="images/default/IcoBrkFl.svg" alt="go-back-img" />
+                <span>Try broken file</span>
+            </NavLink>
+            <NavLink class="nav-link" @onclick="async ()=> VerifyAxCryptFiles()">
+                <img class="" src="images/default/IcoChckVrsn1.svg" alt="go-back-img" />
+                <span>Check and verify file </span>
+            </NavLink>
+            <NavLink class="nav-link" @onclick="async ()=> AxCryptFileFormatCheck()">
+                <img class="" src="images/default/Frame1.svg" alt="go-back-img" />
+                <span>Check file</span>
+            </NavLink>
+            <NavLink class="nav-link" @onclick="OpenReportAsync">
+                <img class="" src="images/default/XMLID_601.svg" alt="go-back-img" />
+                <span>Open error report snapshot</span>
+            </NavLink>
+        </div>
+    </div>
+}
+
+@if (InvitePopup)
+{
+    <InvitePopup />
+}
+@if (ShowVersion)
+{
+    <div id="modal-dialog1" class="modalDialog" style="display: block;">
+        <div class="invite-popup text-center">
+            <div class="center-column">
+                <div tyle="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                    <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
+                    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                        @if (string.Compare(LatestVersion, CurrentVersion) > 0)
+                        {
+                            <span class="text-center" style="font-size: 20px; color: green;">A new version is available!</span>
+
+                            <br />
+                            @* <span class="text-center font-bold" style="font-size: 15px;"> Latest Version : @LatestVersion </span> *@
+                        }
+                        else
+                        {
+                            <span class="text-center" style="font-size: 20px; color: green;">You are up to date!</span>
+                        }
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                    @if (string.Compare(LatestVersion, CurrentVersion) > 0)
+                    {
+                        <button class="button font-medium success btn-large" @onclick="()=> RedirectToDownload()">Update</button>
+                    }
+                    else
+                    {
+                        <button class="button font-medium success btn-large" @onclick="()=> CloseSuccessPopup()">OK</button>
+                    }
+                    <button class="button font-medium success btn-large" @onclick="()=>CloseSuccessPopup()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (ShowOptions)
+{
+    <div id="modal-dialog1" class="modalDialog" style="display: block;">
+        <div class="invite-popup text-center">
+            <div class="center-column">
+                <div>
+                    <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
+                </div>
+                <div class="input-group">
+                    <label for="restApiUrl">Rest Api Url:</label>
+                    <input type="text" id="restApiUrl" class="form-control email-img" @bind="@_restApiBaseUrl" />
+                </div>
+                <div class="input-group">
+                    <label for="timeout">@Texts.DialogDebugOptionsRestApiTimeoutPrompt</label>
+                    <input type="text" id="timeout" class="form-control email-img" @bind="@_timeoutTimeSpan" />
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                    <button class="button font-medium success btn-large" @onclick="(e)=> SetOptionsToolStripMenuItem_Click(e)">OK</button>
+                    <button class="button font-medium success btn-large" @onclick="CloseOptions">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (ShowManageAxCryptID)
+{
+    <div id="modal-dialog1" class="modalDialog" style="display: block;">
+        <div class="invite-popup text-center">
+            <label for="title">Manage AxCrypt ID</label>
+            <div class="center-column">
+                <div>
+                    <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
+                </div>
+            </div>
+            <div>
+                <label for="userEmail">@_emailLabel</label>
+            </div>
+            <div class="input-group">
+                <div>
+                    <textarea id="timeout" style="position:center;" class="form-control email-img" rows="4" cols="60" readonly>Timestamp: @CreatedTime </textarea>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                <button class="button font-medium success btn-large" @onclick="(e)=>ChangePassphraseButton_Click(e)">Change Password</button>
+                <button class="button font-medium success btn-large" @onclick="CloseManageAxCryptID">Close</button>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+        .input-group label {
+            min-width: 120px;
+            margin-right: 10px;
+        }
+
+        .input-group input {
+            flex-grow: 1;
+        }
+</style>
+@code {
+    @inject NavigationManager navigation
+
+    private Core.UI.ViewModel.MainViewModel _mainViewModel;
+    private Core.UI.ViewModel.FileOperationViewModel _fileOperationViewModel;
+    private ManageAccountViewModel _viewModel;
+
+    bool InactSgnOut = false;
+    bool FileEncryptionProperties = false;
+
+    public Uri? DownloadVersion { get; set; }
+    public string? CurrentVersion { get; set; }
+    public string? LatestVersion { get; set; }
+    public bool ShowVersion { get; set; }
+    public bool ShowOptions { get; set; }
+    public bool ShowManageAxCryptID { get; set; }
+    public int MembersCount { get; set; }
+    public int TotalMembers { get; set; }
+    public string? InvitedUser { get; set; }
+    public bool InvitePopup { get; set; }
+    public ObservableCollection<FileDetails> RecentFilesList { get; set; } = new ObservableCollection<FileDetails>();
+
+    protected bool isHovered = false;
+    protected string hoveredElement = string.Empty;
+        
+    [Parameter]
+    public EventCallback CloseSettingsPopup { get; set; }
+
+    protected void ShowPopup(string element)
+    {
+        isHovered = true;
+        hoveredElement = element;
+    }
+
+    public bool IsHovered { get; set; }
+
+    protected void HidePopup()
+    {
+        isHovered = false;
+        hoveredElement = string.Empty;
+    }
+
+    public bool IsPopupVisible { get; set; }
+    public bool ActiveSubScription { get; set; }
+    public string? UserEmail { get; set; }
+    public int DaysLeft { get; set; }
+    public bool SubscribedFromAppStore { get; set; }
+    public string? SubscriptionStatusText { get; set; }
+    public bool ShowConfirmDeleteAccountPopup { get; set; }
+    public SubscriptionLevel SubscriptionLevel { get; set; }
+    public string? Subscription { get; set; }
+    public DateTime CreatedTime { get; set; }
+    public double SelectedOption { get; set; } = 0;
+    public bool IsChecked(int value) => SelectedOption == value;
+
+    public string ValidFormatted
+    {
+        get
+        {
+            if (DaysLeft == 0)
+            {
+                return "0 days left";
+            }
+
+            DateTime validDate = New<INow>().Utc.AddDays(DaysLeft);
+            return validDate.ToString("dd MMM yyyy");
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        _mainViewModel = New<Core.UI.ViewModel.MainViewModel>();
+        _mainViewModel.LoggedOn = Core.Resolve.KnownIdentities.IsLoggedOn;
+        _fileOperationViewModel = New<Core.UI.ViewModel.FileOperationViewModel>();
+
+        _restApiBaseUrl = Resolve.UserSettings.RestApiBaseUrl.ToString();
+        _timeoutTimeSpan = Resolve.UserSettings.ApiTimeout.ToString();
+
+        base.OnInitialized();
+    }
+
+    void InactSgnOutPopup()
+    {
+        InactSgnOut = !InactSgnOut;
+    }
+
+    void FileEncryptionProperty()
+    {
+        FileEncryptionProperties = !FileEncryptionProperties;
+    }
+
+    bool DebugPopup = false;
+
+    void ToggleDebugPopup()
+    {
+        DebugPopup = !DebugPopup;
+    }
+
+    void ToggleInvitePopup()
+    {
+        InvitePopup = !InvitePopup;
+    }
+
+    IDictionary<string, object> NavLinkAttributes1()
+    {
+        Dictionary<string, object> attributes = new Dictionary<string, object>();
+        attributes["class"] = "nav-link" + (InactSgnOut ? " active" : "");
+        return attributes;
+    }
+
+    IDictionary<string, object> NavLinkAttributes2()
+    {
+        Dictionary<string, object> attributes = new Dictionary<string, object>();
+        attributes["class"] = "nav-link" + (DebugPopup ? " active" : "");
+        return attributes;
+    }
+
+    IDictionary<string, object> NavLinkAttributes3()
+    {
+        Dictionary<string, object> attributes = new Dictionary<string, object>();
+        attributes["class"] = "nav-link" + (FileEncryptionProperties ? " active" : "");
+        return attributes;
+    }
+
+    public bool IsSuccess { get; set; }
+
+    private void RedirectToDownload()
+    {
+        navigation.NavigateTo(DownloadVersion.ToString());
+        ShowVersion = !ShowVersion;
+    }
+
+    private void CloseSuccessPopup()
+    {
+        ShowVersion = !ShowVersion;
+    }
+
+    private bool hideRecentFiles;
+
+    public bool HideRecentFiles
+    {
+        get => hideRecentFiles;
+        set
+        {
+            if (hideRecentFiles != value)
+            {
+                hideRecentFiles = value;
+                ToggleHideRecentFiles();
+            }
+        }
+    }
+
+    private void ToggleHideRecentFiles()
+    {
+        SetRecentFilesHiddenState(!New<UserSettings>().HideRecentFiles);
+    }
+
+    private void SetRecentFilesHiddenState(bool hideRecentFiles)
+    {
+        New<UserSettings>().HideRecentFiles = hideRecentFiles;
+
+        if (hideRecentFiles)
+        {
+            RecentFilesList.Clear();
+        }
+        else
+        {
+            RecentFilesList = new ObservableCollection<FileDetails>(_mainViewModel.RecentFiles.Select(f => new FileDetails(f)));
+        }
+    }
+
+    private void ToggleAutoUpgradeMode()
+    {
+        if (_mainViewModel.EncryptionUpgradeMode == EncryptionUpgradeMode.AutoUpgrade)
+        {
+            _mainViewModel.EncryptionUpgradeMode = EncryptionUpgradeMode.RetainWithoutUpgrade;
+            return;
+        }
+
+        if (!New<IVerifySignInPassword>().Verify(Texts.LegacyConversionVerificationPrompt))
+        {
+            return;
+        }
+
+        _mainViewModel.EncryptionUpgradeMode = EncryptionUpgradeMode.AutoUpgrade;
+    }
+
+    private async void ToggleIncludeSubfolders(EventArgs e)
+    {
+        await PremiumFeature_ClickAsync(LicenseCapability.IncludeSubfolders, (ss, ee) => { return ToggleIncludeSubfoldersOption(); }, null, e);
+    }
+
+    private async Task ToggleIncludeSubfoldersOption()
+    {
+        if (_mainViewModel.FolderOperationMode == FolderOperationMode.IncludeSubfolders)
+        {
+            _mainViewModel.FolderOperationMode = FolderOperationMode.SingleFolder;
+            return;
+        }
+
+        if (!New<IVerifySignInPassword>().Verify(Texts.ChangeOptionGenericWarning))
+        {
+            return;
+        }
+
+        PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.IncludeSubfoldersConfirmationTitle, Texts.IncludeSubfoldersConfirmationBody);
+        if (result == PopupButtons.Ok)
+        {
+            _mainViewModel.FolderOperationMode = FolderOperationMode.IncludeSubfolders;
+        }
+    }
+
+    public void OnInactivityContextMenu(int duration)
+    {
+        bool hasFeature = New<LicensePolicy>().Capabilities.Has(LicenseCapability.InactivitySignOut);
+
+        if (hasFeature)
+        {
+            SelectedOption = duration;
+            New<UserSettings>().InactivitySignOutTime = TimeSpan.FromMinutes(int.Parse(duration.ToString()));
+            TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
+            New<InactivitySignOut>().RestartInactivityTimer();
+        }
+    }
+
+    private async void RestoreRename(EventArgs args)
+    {
+        await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await FileSelectionOperation(FileSelectionType.Rename); }, null, args);
+    }
+
+    private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
+    {
+        if (_mainViewModel.License.Has(requiredCapability))
+        {
+            if (realHandler != null)
+            {
+                await realHandler(sender, e);
+            }
+            return;
+        }
+
+        //showUpgradePopup = true;
+    }
+
+    public async Task FileSelectionOperation(FileSelectionType fileSelectionType)
+    {
+        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
+            {
+                FileSelectionType = fileSelectionType
+            };
+
+        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
+
+        if (fileSelectionEventArgs.Cancel)
+        {
+            return;
+        }
+
+        await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(selectedFiles.Select(e => e.FullPath).ToList());
+    }
+
+    private async Task<IEnumerable<FileResult>> InternalFileSelectionAsync(FileSelectionEventArgs e)
+    {
+        IEnumerable<FileResult> pickResult = await FilePicker.PickMultipleAsync(new PickOptions
+            {
+                PickerTitle = "Please select files",
+            });
+
+        if (!pickResult.Any())
+        {
+            e.Cancel = true;
+        }
+
+        return pickResult;
+    }
+
+    private void ToggleAlwaysOffline(EventArgs e)
+    {
+        bool offlineMode = !New<UserSettings>().OfflineMode;
+        New<UserSettings>().OfflineMode = offlineMode;
+        New<AxCryptOnlineState>().IsOffline = offlineMode;
+    }
+
+    private void FilePropertiesDateModified(EventArgs e)
+    {
+        New<UserSettings>().EncryptFilePropertiesDateModified = !New<UserSettings>().EncryptFilePropertiesDateModified;
+    }
+
+    private void FilePropertiesFileName(EventArgs e)
+    {
+        New<UserSettings>().EncryptFilePropertiesFileName = !New<UserSettings>().EncryptFilePropertiesFileName;
+    }
+
+    private async void InviteUser(EventArgs e)
+    {
+        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { InvitePopup = !InvitePopup; }, null, e);
+    }
+
+    #region Debug Section
+
+    private async void CheckAxCryptVersionAsync()
+    {
+        ShowVersion = !ShowVersion;
+
+        await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
+    }
+
+    private string _restApiBaseUrl { get; set; }
+    private string _timeoutTimeSpan { get; set; }
+
+    private void OpenOptions()
+    {
+        ShowOptions = true;
+    }
+
+    private void SetOptionsToolStripMenuItem_Click(EventArgs e)
+    {
+        Resolve.UserSettings.RestApiBaseUrl = new Uri(_restApiBaseUrl);
+        Resolve.UserSettings.ApiTimeout = TimeSpan.Parse(_timeoutTimeSpan);
+
+        ShowOptions = !ShowOptions;
+    }
+
+    private void CloseOptions()
+    {
+        ShowOptions = !ShowOptions;
+    }
+
+    private void OnOpenLogViewerClicked()
+    {
+        Window newWindow = new Window(new LogViewerWindow());
+        Application.Current?.OpenWindow(newWindow);
+    }
+
+    private async void OpenManageAxCryptID()
+    {
+        AccountStorage userKeyPairs = new AccountStorage(New<LogOnIdentity, IAccountService>(Resolve.KnownIdentities.DefaultEncryptionIdentity));
+        _viewModel = await ManageAccountViewModel.CreateAsync(userKeyPairs);
+        _viewModel.BindPropertyChanged<IEnumerable<AccountProperties>>(nameof(ManageAccountViewModel.AccountProperties), ListAccountEmails);
+
+        ShowManageAxCryptID = true;
+    }
+
+    private ObservableCollection<ManageAccountModel> _accountEmailsListView { get; set; } = new ObservableCollection<ManageAccountModel>();
+    private string _emailLabel { get; set; }
+
+    private void ListAccountEmails(IEnumerable<AccountProperties> emails)
+    {
+        foreach (AccountProperties email in emails)
+        {
+            ManageAccountModel item = new ManageAccountModel(email.Timestamp.ToLocalTime().ToString(CultureInfo.CurrentCulture), "Timestamp");
+
+            _accountEmailsListView.Add(item);
+        }
+
+        if (_accountEmailsListView.Count == 0)
+        {
+            _emailLabel = String.Empty;
+            return;
+        }
+
+        _emailLabel = emails.First().EmailAddress;
+    }
+
+    private void ChangePassphraseButton_Click(EventArgs e)
+    {
+        New<UserSettings>().UserEmail.ProcessChangePassword();
+        ShowManageAxCryptID = !ShowManageAxCryptID;
+    }
+
+    private void CloseManageAxCryptID()
+    {
+        ShowManageAxCryptID = !ShowManageAxCryptID;
+    }
+
+    private bool isDateModifiedOn { get; set; }
+    private bool isFileNameOn { get; set; }
+
+    public bool IsDateModifiedOn
+    {
+        get => isDateModifiedOn;
+        set
+        {
+            if (isDateModifiedOn != value)
+            {
+                isDateModifiedOn = value;
+                UpdateDateModifiedSetting();
+            }
+        }
+    }
+
+    public bool IsFileNameOn
+    {
+        get => isFileNameOn;
+        set
+        {
+            if (isFileNameOn != value)
+            {
+                isFileNameOn = value;
+                UpdateFileNameSetting();
+            }
+        }
+    }
+
+    private void UpdateDateModifiedSetting()
+    {
+        New<UserSettings>().EncryptFilePropertiesDateModified = IsDateModifiedOn;
+    }
+
+    private void UpdateFileNameSetting()
+    {
+        New<UserSettings>().EncryptFilePropertiesFileName = IsFileNameOn;
+    }
+
+    private async void OpenBrokenFiles()
+    {
+        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
+            {
+                FileSelectionType = FileSelectionType.Decrypt
+            };
+
+        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
+
+        await _fileOperationViewModel.TryBrokenFiles.ExecuteAsync(selectedFiles.Select(f => f.FullPath));
+    }
+
+    private async void VerifyAxCryptFiles()
+    {
+        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
+            {
+                FileSelectionType = FileSelectionType.Decrypt
+            };
+
+        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
+
+        await _fileOperationViewModel.VerifyFiles.ExecuteAsync(selectedFiles.Select(f => f.FullPath));
+    }
+
+    private async void AxCryptFileFormatCheck()
+    {
+        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
+            {
+                FileSelectionType = FileSelectionType.Decrypt
+            };
+
+        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
+
+        await _fileOperationViewModel.IntegrityCheckFiles.ExecuteAsync(selectedFiles.Select(f => f.FullPath));
+    }
+
+    private void OpenReportAsync()
+    {
+        New<IReport>().Open();
+    }
+
+    #endregion
+
+    public void HandleSelection(FileSelectionEventArgs e)
+    {
+        if (e == null)
+        {
+            throw new ArgumentNullException(nameof(e));
+        }
+
+        HandleSelectionInternal(e);
+    }
+
+    private void HandleSelectionInternal(FileSelectionEventArgs e)
+    {
+        switch (e.FileSelectionType)
+        {
+            case FileSelectionType.SaveAsEncrypted:
+            case FileSelectionType.SaveAsDecrypted:
+                HandleSaveAsFileSelection(e);
+                break;
+
+            case FileSelectionType.WipeConfirm:
+                //HandleWipeConfirm(e);
+                break;
+
+            case FileSelectionType.Folder:
+                //HandleFolderSelection(e);
+                break;
+
+            default:
+                //HandleOpenFileSelection(e);
+                break;
+        }
+    }
+
+    private string Title { get; set; }
+    private string DefaultExt { get; set; }
+    private string Filter { get; set; }
+    private bool AddExtension { get; set; }
+    private string FileName { get; set; }
+
+    private async void HandleSaveAsFileSelection(FileSelectionEventArgs e)
+    {
+        switch (e.FileSelectionType)
+        {
+            case FileSelectionType.SaveAsEncrypted:
+                Title = Texts.EncryptFileSaveAsDialogTitle;
+                DefaultExt = OS.Current.AxCryptExtension;
+                AddExtension = true;
+                Filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + DefaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
+                break;
+
+            case FileSelectionType.SaveAsDecrypted:
+                string extension = Path.GetExtension(e.SelectedFiles[0]);
+                Title = Texts.DecryptedSaveAsFileDialogTitle;
+                DefaultExt = extension;
+                AddExtension = !string.IsNullOrEmpty(extension);
+                Filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + DefaultExt, Texts.FileFilterFileTypeFiles, Texts.FileFilterFileTypeAllFiles);
+                break;
+        }
+
+        FileName = Path.GetFileName(e.SelectedFiles[0]);
+        string savedPath = await ExportKeyFile.ShowSaveFileDialogAsync(Title, DefaultExt, Filter, FileName);
+
+        Core.Service.UserKeyPair activeKeyPair = Core.Resolve.KnownIdentities.DefaultEncryptionIdentity.ActiveEncryptionKeyPair;
+        Core.UI.EmailAddress userEmail = activeKeyPair.UserEmail;
+        Core.Crypto.Asymmetric.IAsymmetricPublicKey publicKey = activeKeyPair.KeyPair.PublicKey;
+
+        byte[] export = activeKeyPair.ToArray(Resolve.KnownIdentities.DefaultEncryptionIdentity.Passphrase);
+
+        if (!string.IsNullOrEmpty(savedPath))
+        {
+            await File.WriteAllBytesAsync(savedPath, export);
+        }
+    }
+
+    private bool includeSubfolders;
+
+    public bool IncludeSubfolders
+    {
+        get => includeSubfolders;
+        set
+        {
+            if (includeSubfolders != value)
+            {
+                includeSubfolders = value;
+                IncludeSubFoldersChanged();
+            }
+        }
+    }
+
+    public async void IncludeSubFoldersChanged()
+    {
+        await _mainViewModel.SetFolderOperationMode(IncludeSubfolders ? FolderOperationMode.IncludeSubfolders : FolderOperationMode.SingleFolder);
+    }
+
+    private bool alwaysOnline;
+
+    public bool AlwaysOffline
+    {
+        get => alwaysOnline;
+        set
+        {
+            if (alwaysOnline != value)
+            {
+                alwaysOnline = value;
+                MakeAlwaysOffline();
+            }
+        }
+    }
+
+    public void MakeAlwaysOffline()
+    {
+        New<UserSettings>().OfflineMode = AlwaysOffline;
+
+        if (AlwaysOffline)
+        {
+            New<AxCryptOnlineState>().IsOffline = true;
+            return;
+        }
+
+        New<AxCryptOnlineState>().IsOffline = false;
+    }
+
+    private bool autoUpgradeToAES256;
+
+    public bool AutoUpgradeToAES256
+    {
+        get => autoUpgradeToAES256;
+        set
+        {
+            if (autoUpgradeToAES256 != value)
+            {
+                autoUpgradeToAES256 = value;
+            }
+        }
+    }
+
+    public class ManageAccountModel
+    {
+        public ManageAccountModel(string email, string timestamp)
+        {
+            EmailAddress = email;
+            Timestamp = timestamp;
+        }
+
+        public string EmailAddress { get; set; }
+
+        public string Timestamp { get; set; }
+    }
+}

@@ -16,7 +16,7 @@
         <div class="close-img" onclick="closeModalDialog('modal-dialog3')"></div>
         <img class="fdbck-img" src="feedback-img" />
         <p class="bold-highlight">Please let us know if you experience any <span>difficulties</span> with AxCrypt, have <span>questions, ideas or praises</span> to share! </p>
-        <form id="feedback-form" @onsubmit="FeedbackViewModel.HandleFormSubmit">
+        <form id="feedback-form" @onsubmit="()=>FeedbackViewModel.HandleFormSubmit()">
             <div class="flex-start" style="margin-bottom: -12px;">
                 @foreach (FeedbackSubject subject in FeedbackViewModel.AllSubject)
                 {

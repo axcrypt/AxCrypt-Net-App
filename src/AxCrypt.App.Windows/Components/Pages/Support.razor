@@ -7,10 +7,8 @@
 @using AxCrypt.Content;
 @using static AxCrypt.Abstractions.TypeResolve;
 
-@inject SupportViewModel supportViewModel;
-@inject SupportService supportService;
-@inject NavigationManager navigationManager;
-@inject IJSRuntime JSRuntime
+@inject SupportViewModel SupportViewModel
+@inject NavigationManager _navigationManager
 
 <div class="mb-sec">
     <NavLink class="mb-title flex-start" href="mainpagemobile" style="align-items: center;">
@@ -18,7 +16,7 @@
         <span class="goback-text">Support</span>
     </NavLink>
 </div>
-@if (SubscriptionLevel == SubscriptionLevel.Free)
+@if (SupportViewModel.Model.SubscriptionLevel == SubscriptionLevel.Free)
 {
     <div>
         <h2 class="page-title">@Texts.PromptSupport</h2>
@@ -34,9 +32,9 @@ else
     <div id="content-index" class="medium-12 columns support">
         <div class="">
             <h1 class="page-title">
-                @pageTitle
+                @SupportViewModel.Model.PageTitle
             </h1>
-            <p class="hide-txt">@pageDescription</p>
+            <p class="hide-txt">@SupportViewModel.Model.PageDescription</p>
         </div>
         <div>
             <div class="label-text">
@@ -48,7 +46,7 @@ else
                         <img class="idea-img" src="" alt="idea-img" />
                         <div style="padding: 5px 0px; line-height: 16px;">
                             <span class="lable-txt">@Texts.SupportGetStartedVideoText</span><br />
-                            <span class="link-txt">@linkLabel</span>
+                            <span class="link-txt">@SupportViewModel.Model.LinkLabel</span>
                             <img class="arrow-img" src="" alt="arrow-img" />
                         </div>
                     </div>
@@ -68,19 +66,19 @@ else
                 <span class="desc-txt">Or describe your problem here:</span>
             </div>
             <div>
-                <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="supportViewModel.Body" tabindex=1>
-                        </textarea>
+                <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Model.Body" tabindex=1>
+                            </textarea>
             </div>
             <div class="btn-sec">
                 <input type="reset" class="button border btn-large font-medium btn-hide" value="@Texts.ButtonCancelText" />
-                <input type="submit" class="button success btn-large font-medium" value="@Texts.ButtonSendText" @onclick="SupportValidSubmit" />
+                <input type="submit" class="button success btn-large font-medium" value="@Texts.ButtonSendText" @onclick="SupportViewModel.SubmitSupportAsync" />
             </div>
         </div>
     </div>
 }
-@if (!IsLoading)
+@if (!SupportViewModel.IsLoading)
 {
-    @if (!IsWideScreen)
+    @if (!SupportViewModel.IsWideScreen)
     {
         <footer>
             <AxCrypt.App.Windows.Components.Shared.Mobile.Footer footerActions="@footerActions" />
@@ -92,63 +90,17 @@ else
     <p>Loading...</p>
 }
 @code {
-    private SubscriptionLevel SubscriptionLevel { get; set; }
-    private string pageTitle = "";
-    private string pageDescription = "";
-    private string linkLabel = "";
-    private string supportInfo = "";
-    private string feedBack = "";
-    protected override void OnInitialized()
-    {
-        SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
-        supportViewModel = new SupportViewModel(supportService);
-        linkLabel = Texts.GetStartedLinkLabel;
-        if (Utility.IsBusinessUser)
-        {
-            pageTitle = Texts.PrioritySupportTitle;
-            pageDescription = Texts.BusinessSupportInfo;
-        }
-        else if (Utility.IsPremiumUser)
-        {
-            pageTitle = Texts.SupportPageTitle;
-            pageDescription = Texts.PremiumSupportInfo;
-        }
-        else if (Utility.IsPasswordManager)
-        {
-            pageTitle = Texts.PromptSupport;
-        }
-        else
-        {
-            pageTitle = Texts.PromptSupport;
-            supportInfo = Texts.FreeSupportInfo;
-            feedBack = Texts.LinkToFeedbackWebPage;
-        }
-    }
-    private async Task SupportValidSubmit()
-    {
-        await supportViewModel.SupportAsync(supportViewModel);
-        navigationManager.NavigateTo("/SupportIndex", true);
-    }
-    bool IsWideScreen { get; set; }
-    bool IsLoading { get; set; }
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error determining screen width: {ex.Message}");
-            }
-            finally
-            {
-                IsLoading = false;
-                StateHasChanged();
-            }
-        }
-    }
     private FooterActions footerActions = FooterActions.Support;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await SupportViewModel.InitializeScreenPropertiesAsync();
+        await base.OnInitializedAsync();
+    }
+
+    private async void SubmitSupportAsync()
+    {
+        await SupportViewModel.SubmitSupportAsync();
+        _navigationManager.NavigateTo("/SupportIndex", true);
+    }
 }

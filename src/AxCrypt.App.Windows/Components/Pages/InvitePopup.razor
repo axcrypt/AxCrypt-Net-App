@@ -1,8 +1,11 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Windows.Helpers
+@using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Core.UI
 @using AxCrypt.Core.Extensions
 @using static AxCrypt.Abstractions.TypeResolve
+
+@inject InviteViewModel InviteViewModel
 
 @{
     DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
@@ -21,29 +24,29 @@
                 </div>
                 <div class="invite-text">
                     <span class="grey-clr">Enter user email whom you want to invite:</span><br />
-                    <input type="text" id="inviteFriend" name="inviteFriend" placeholder="Type your friend's email here" @bind-value="@InvitedUser" @onfocus="OnInputFocus">
-                    @if (!string.IsNullOrEmpty(ErrorMessage))
+                    <input type="text" id="inviteFriend" name="inviteFriend" placeholder="Type your friend's email here" @bind-value="@InviteViewModel.InvitedUser" @onfocus="InviteViewModel.OnInputFocus">
+                    @if (!string.IsNullOrEmpty(InviteViewModel.ErrorMessage))
                     {
-                        <div class="error-message" style="color:red;">@ErrorMessage</div>
+                        <div class="error-message" style="color:red;">@InviteViewModel.ErrorMessage</div>
                     }
                 </div>
                 <div>
-                    <button class="button font-medium success btn-large" @onclick="()=> InviteFriend()">Invite!</button>
+                    <button class="button font-medium success btn-large" @onclick="()=> InviteViewModel.InviteFriend()">Invite!</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@if (IsSuccess)
+@if (InviteViewModel.IsSuccess)
 {
     <div id="modal-dialog1" class="modalDialog" style="display: block;">
         <div class="invite-popup text-center">
             <div class="center-column">
                 <div>
                     <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
-                    <span class="text-center font-bold" style="font-size: 20px;"> Your friend @InvitedUser is invited successfully! </span>
+                    <span class="text-center font-bold" style="font-size: 20px;"> Your friend @InviteViewModel.InvitedUser is invited successfully! </span>
                 </div>
-                <button class="button font-medium success btn-large" @onclick="CloseSuccessPopup"> OK</button>
+                <button class="button font-medium success btn-large" @onclick="InviteViewModel.CloseSuccessPopup"> OK</button>
             </div>
         </div>
     </div>
@@ -55,57 +58,8 @@
     }
 </style>
 @code {
-    private bool IsSuccess { get; set; }
-    private string? ErrorMessage { get; set; }
-    private string? InvitedUser { get; set; }
-    private bool ShowInvitePopup { get; set; }
-
-    private void OnInputFocus()
+    protected override void OnInitialized()
     {
-        ErrorMessage = string.Empty;
-    }
-
-    private async Task InviteFriend()
-    {
-        if (string.IsNullOrEmpty(InvitedUser) && InvitedUser != "")
-        {
-            ErrorMessage = "Please Enter the valid email";
-            return;
-        }
-        ErrorMessage = string.Empty;
-        await EnsureUserAccountStatusAndGetInvitedUserPublicKey();
-        ShowInvitePopup = false;
-        IsSuccess = true;
-        return;
-    }
-
-    private async Task<IEnumerable<Core.Crypto.Asymmetric.UserPublicKey>> EnsureUserAccountStatusAndGetInvitedUserPublicKey()
-    {
-        EmailAddress invitedEmail = EmailAddress.Parse(InvitedUser);
-        AccountStatus accountStatus = await invitedEmail.GetValidEmailAccountStatusAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
-
-        IEnumerable<EmailAddress> invitedEmails = new EmailAddress[] { invitedEmail };
-        return await invitedEmails.ToAvailableKnownPublicKeysAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
-    }
-
-    private bool ShowInviteUserDialog(AccountStatus accountStatus)
-    {
-        if (accountStatus == AccountStatus.Offline || accountStatus == AccountStatus.Unknown)
-        {
-            return false;
-        }
-        if (accountStatus != AccountStatus.NotFound)
-        {
-            return true;
-        }
-
-        return true;
-    }
-
-    private void CloseSuccessPopup()
-    {
-        IsSuccess = false;
-        InvitedUser = string.Empty;
-        return;
+        base.OnInitialized();
     }
 }

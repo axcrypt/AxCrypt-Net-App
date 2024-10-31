@@ -1,0 +1,269 @@
+﻿@using AxCrypt.Api.Model
+@using AxCrypt.App.Components.Models
+@using AxCrypt.App.Windows.Helpers
+@using AxCrypt.App.Windows.Models
+@using AxCrypt.App.Windows.Services
+@using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.Common
+@using AxCrypt.Core
+@using AxCrypt.Core.Extensions
+@using AxCrypt.Core.UI
+@using AxCrypt.Core.UI.ViewModel
+@using Microsoft.Extensions.Options;
+@using System.Globalization;
+@using System.Resources;
+@using System.Diagnostics
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject AppLocalizationOptions localizationOptions
+@inject NavigationManager navigationManager
+@inject IJSRuntime JSRuntime
+@inject UserNotificationService notificationService
+
+@{
+    DeviceIdiom currentDevice = GetCurrentDeviceIdiom();
+}
+
+<div class="top-menu">
+    <div class="language-selector padding">
+        <div class="dropdown">
+            <button class="dropbtn font-high @(showDropdown ? "active" : "")" @onclick="ToggleDropdown">
+                @*<button class="dropbtn font-high active" @onclick="ToggleDropdown">*@
+                <img class="flag-icon" src="@selectedLanguageImageUrl" alt="flag-icon" style="padding-right: 10px;" />
+                @selectedLanguageDisplayName
+                <img class="drp-dwn down" src="" alt="dropdown-img" />
+            </button>
+            <div class="hide-model-popup language-dropdown" style="display: @(showDropdown ? "block" : "none")">
+                @foreach (CultureOption culture in appLocalizationOptions.SupportedCultures)
+                {
+                    <div class="dropdown-item-container">
+                        <NavLink class="language-item font-high" @onclick="() => ChangeLanguage(culture.Name, culture.ImageUrl)">
+                            <img class="flag-icon" src="@culture.ImageUrl" alt="@culture.DisplayName" />
+                            @culture.DisplayName
+                            @if (culture.Name == selectedLanguage)
+                            {
+                                <img class="tick-icon" src="" alt="tick" />
+                            }
+                        </NavLink>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <NavLink @onclick="ToggleSettingsPopup">
+        <img class="sttng-icon padding" src="/images/default/IcoExtrFtr.svg" alt="settings-icon" />
+    </NavLink>
+    <NavLink @onclick="ToggleNotifyPopup">
+        <div>
+            <a id="notification-bell">
+                <span class="notification-badge">
+                    @model.Notifications.Count()
+                </span>
+            </a>
+            <img class="notif-icon padding" src="/images/default/IcoNtfctns.svg" alt="notify-icon" />
+        </div>
+    </NavLink>
+    <NavLink class="update-btn padding" @onclick="(e)=>CheckAxCryptVersionAsync(e)">Update</NavLink>
+    <NavLink class="mb-prfle" @onclick="ToggleAccountPopup">
+        <span class="">@UserEmail.Substring(0, 2).ToUpper()</span>
+    </NavLink>
+    @if (!IsLoading)
+    {
+        @if (accountPopup)
+        {
+            @if (IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
+            {
+                <AxCrypt.App.Windows.Components.Pages.AccountDeskPopup ClosePopup="CloseAccountPopup" />
+            }
+        }
+        @if (settingsPopup)
+        {
+            @if (IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
+            {
+                <AxCrypt.App.Windows.Components.Pages.SettingsDeskPopup CloseSettingsPopup="ClosedSettingsPopup" />
+            }
+        }
+        @if (notifyPopup)
+        {
+            @if (IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
+            {
+                <AxCrypt.App.Windows.Components.Pages.NotificationPopup />
+            }
+        }
+    }
+    else
+    {
+        <p>Loading...</p>
+    }
+</div>
+@code {
+    NotificationViewModel? model;
+    private MainViewModel? _mainViewModel;
+    private SubscriptionLevel SubscriptionLevel { get; set; }
+    private string? UserEmail { get; set; } = "you";
+
+    protected override async Task OnInitializedAsync()
+    {
+        _mainViewModel = New<MainViewModel>();
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        //UserEmail = New<AccountStatusViewModel>().UserEmail;
+
+        string currentCulture = Resolve.UserSettings.CultureName;
+        CultureOption? cultureOption = appLocalizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == currentCulture);
+
+        if (cultureOption != null)
+        {
+            selectedLanguage = cultureOption.Name;
+            selectedLanguageImageUrl = cultureOption.ImageUrl;
+            selectedLanguageDisplayName = cultureOption.DisplayName;
+        }
+
+        model = notificationService.NotificationModel;
+        await base.OnInitializedAsync();
+    }
+
+    private DeviceIdiom GetCurrentDeviceIdiom()
+    {
+        return DeviceInfo.Idiom;
+    }
+
+    protected override void OnInitialized()
+    {
+
+    }
+
+    bool accountPopup = false;
+    void ToggleAccountPopup()
+    {
+        accountPopup = !accountPopup;
+    }
+    bool settingsPopup = false;
+    void ToggleSettingsPopup()
+    {
+        settingsPopup = !settingsPopup;
+    }
+    bool notifyPopup = false;
+    void ToggleNotifyPopup()
+    {
+        notifyPopup = !notifyPopup;
+    }
+    private string selectedLanguageImageUrl = "images/flag/FrmEng.svg";
+    private string? selectedLanguageDisplayName = "Eng(US)";
+    private bool showDropdown = false;
+    private string? selectedLanguage;
+    private AppLocalizationOptions appLocalizationOptions = new AppLocalizationOptions();
+    private void ToggleDropdown()
+    {
+        showDropdown = !showDropdown;
+    }
+    private async Task ChangeLanguage(string cultureName, string imageUrl)
+    {
+        selectedLanguage = cultureName;
+        selectedLanguageImageUrl = imageUrl;
+        selectedLanguageDisplayName = appLocalizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == cultureName)?.DisplayName;
+        await SetLanguageAsync(cultureName);
+        showDropdown = false;
+        navigationManager.NavigateTo(navigationManager.Uri, forceLoad: true);
+    }
+
+    bool IsWideScreen { get; set; }
+    bool IsLargeScreen { get; set; }
+    bool IsLoading { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await notificationService.LoadNotificationListAsync();
+
+            try
+            {
+                IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
+                IsLargeScreen = await Utility.IsLargeScreenAsync(JSRuntime);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error determining screen width: {ex.Message}");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+    }
+
+    private void CloseAccountPopup()
+    {
+        accountPopup = false;
+    }
+
+    private void ClosedSettingsPopup()
+    {
+        settingsPopup = false;
+    }
+
+    private async void CheckAxCryptVersionAsync(EventArgs e)
+    {
+        switch (_mainViewModel.VersionUpdateStatus)
+        {
+            case VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck:
+            case VersionUpdateStatus.ShortTimeSinceLastSuccessfulCheck:
+            case VersionUpdateStatus.IsUpToDate:
+            case VersionUpdateStatus.Unknown:
+                await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
+                break;
+
+            case VersionUpdateStatus.NewerVersionIsAvailable:
+                Process.Start(Resolve.UserSettings.UpdateUrl.ToString());
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public async Task SetLanguageAsync(string cultureName)
+    {
+        if (Resolve.UserSettings.CultureName == cultureName)
+        {
+            return;
+        }
+        Resolve.UserSettings.CultureName = cultureName;
+        if (Resolve.Log.IsInfoEnabled)
+        {
+            Resolve.Log.LogInfo("Set new UI language culture to '{0}'.".InvariantFormat(Resolve.UserSettings.CultureName));
+        }
+        SetCulture();
+
+        InitializeContentResources();
+
+        await SetWindowTitleTextAsync(_mainViewModel.LoggedOn);
+    }
+
+    private void InitializeContentResources()
+    {
+        SetCulture();
+    }
+
+    public static void SetCulture()
+    {
+        if (DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS)
+        {
+            return;
+        }
+
+        if (string.IsNullOrEmpty(Resolve.UserSettings.CultureName))
+        {
+            return;
+        }
+
+        CultureInfo cultureInfo = CultureInfo.GetCultureInfo(Resolve.UserSettings.CultureName);
+        Thread.CurrentThread.CurrentUICulture = cultureInfo;
+        AxCrypt.Content.Resource.Culture = cultureInfo;
+    }
+
+    private async Task SetWindowTitleTextAsync(bool isLoggedOn)
+    {
+        string text = await new Display().WindowTitleTextAsync(isLoggedOn);
+    }
+}
