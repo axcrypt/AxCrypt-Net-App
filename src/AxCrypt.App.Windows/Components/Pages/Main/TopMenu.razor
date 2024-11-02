@@ -73,21 +73,21 @@
         {
             @if (IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
             {
-                <AxCrypt.App.Windows.Components.Pages.AccountDeskPopup ClosePopup="CloseAccountPopup" />
+                <AxCrypt.App.Windows.Components.Pages.Main.AccountDeskPopup ClosePopup="CloseAccountPopup" />
             }
         }
         @if (settingsPopup)
         {
             @if (IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
             {
-                <AxCrypt.App.Windows.Components.Pages.SettingsDeskPopup CloseSettingsPopup="ClosedSettingsPopup" />
+                <AxCrypt.App.Windows.Components.Pages.Main.SettingsDeskPopup CloseSettingsPopup="ClosedSettingsPopup" />
             }
         }
         @if (notifyPopup)
         {
             @if (IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
             {
-                <AxCrypt.App.Windows.Components.Pages.NotificationPopup />
+                <AxCrypt.App.Windows.Components.Pages.Main.NotificationPopup />
             }
         }
     }
