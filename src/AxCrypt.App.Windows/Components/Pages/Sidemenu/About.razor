@@ -1,10 +1,13 @@
 ﻿@page "/about"
 
 @using AxCrypt.Api.Model;
+@using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Core.Runtime
 @using AxCrypt.Core.UI
 @using AxCrypt.Core;
 @using static AxCrypt.Abstractions.TypeResolve
+
+@inject AboutViewModel AboutViewModel
 
 <div class="abt-axc-sec">
     <div id="modal-dialog2" class="modalDialog" style="display: block;">
@@ -13,11 +16,11 @@
             <div class="align-items" style="gap: 4%;">
                 <div style="padding: 5% 3%;"><img src="images/default/axcrypt_icon_text.svg" alt="AxCrypt-icon" /></div>
                 <div style="text-align: left;">
-                    <label class="txt-clr">@ProductName</label><br />
+                    <label class="txt-clr">@AboutViewModel.ProductName</label><br />
                     <label class="txt-clr">Version:</label>
-                    <span class="font-bold">@Version</span> <br />
+                    <span class="font-bold">@AboutViewModel.Version</span> <br />
                     <label class="txt-clr">Subscription:</label>
-                    <span class="font-bold">@SubscriptionStausAnsExpiration</span><br />
+                    <span class="font-bold">@AboutViewModel.SubscriptionStatusAndExpiration</span><br />
                     <label class="txt-clr">About us:</label>
                     <a class="font-small" style="font-size: 10px;" href="https://www.axcrypt.net/information/axcrypt/">https://www.axcrypt.net/information/axcrypt/</a> <br />
                     <label class="highlight-text">
@@ -27,19 +30,14 @@
                     <span style="font-size: 12px;">Includes software from http://www.bouncycastle.org/.</span>
                 </div>
             </div>
-            <span class="font-small grey-clr">@Copyright</span>
+            <span class="font-small grey-clr">@AboutViewModel.Copyright</span>
         </div>
     </div>
 </div>
+
 @code {
     protected override void OnInitialized()
     {
         base.OnInitialized();
     }
-
-    private string SubscriptionStausAnsExpiration { get; set; } = new Display().GetLicenseStatusAndExpiration();
-
-    private string ProductName { get; set; } = New<AboutAssembly>().AssemblyProduct;
-    public string Version { get; set; } = New<UserSettings>().ThisVersion;
-    public string Copyright { get; set; } = New<AboutAssembly>().AssemblyCopyright;
 }

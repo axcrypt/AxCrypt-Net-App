@@ -6,19 +6,11 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using System.Globalization;
 using AxCrypt.App.Windows.Infrastructure;
-
-using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Api.Model;
-using AxCrypt.Api;
-using AxCrypt.Common;
-using AxCrypt.Content;
 using AxCrypt.Core.Service;
-using AxCrypt.Core.Extensions;
-using AxCrypt.App.Windows.Desktop;
 using AxCrypt.Core.Ipc;
-using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using AxCrypt.App.Windows.ViewModels;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows
 {
