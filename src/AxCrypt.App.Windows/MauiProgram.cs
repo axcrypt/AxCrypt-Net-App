@@ -124,6 +124,7 @@ namespace AxCrypt.App.Windows
 
             services.AddSingleton<UserNotificationService>();
             services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<RecentFoldersViewModel>();
             services.AddSingleton<FeedbackViewModel>();
             services.AddScoped<AboutViewModel>();
             services.AddScoped<SupportViewModel>();
