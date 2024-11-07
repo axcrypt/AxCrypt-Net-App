@@ -1,5 +1,4 @@
-﻿using AxCrypt.Api.Model;
-using AxCrypt.Core.Runtime;
+﻿using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using AxCrypt.Core;
@@ -8,10 +7,8 @@ using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Core.Session;
 using AxCrypt.App.Windows.Code;
 using AxCrypt.Common;
-using static System.Net.Mime.MediaTypeNames;
 using AxCrypt.Core.Extensions;
 using System.Globalization;
-using AxCrypt.Content;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -21,6 +18,7 @@ public class HomeViewModel : ISignIn
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
     private KnownFoldersViewModel _knownFoldersViewModel;
+
     public HomeViewModel(NavigationManager navigationManager)
     {
         _navigationManager = navigationManager ?? throw new ArgumentNullException(nameof(navigationManager));

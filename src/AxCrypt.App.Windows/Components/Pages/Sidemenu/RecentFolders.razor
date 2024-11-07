@@ -5,6 +5,7 @@
 @using AxCrypt.App.Windows.Helpers
 @using AxCrypt.App.Windows.Models
 @using AxCrypt.App.Windows.Services
+@using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Content
 @using AxCrypt.Core
 @using AxCrypt.Core.IO
@@ -15,40 +16,36 @@
 @using Microsoft.AspNetCore.Components.Web
 @using static AxCrypt.Abstractions.TypeResolve
 
-@inject NavigationManager navigationMgr
-
-@inject IFolderPicker FolderPicker
-@inject FileShareService FileShareService
+@inject RecentFoldersViewModel RecentFoldersViewModel
 
 @{
     DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
 }
 
-<link href="css/@SubscriptionLevel.ToString().ToLower()/index.css" rel="stylesheet" />
+<link href="css/@RecentFoldersViewModel.SubscriptionLevel.ToString().ToLower()/index.css" rel="stylesheet" />
 <link href="css/login.min.css" rel="stylesheet" />
 
-
-<div @onclick="SortByDate">
+<div @onclick="RecentFoldersViewModel.SortByDate">
     <label class="font-medium">Sort by: <span class="txt-clr">Date</span></label>
     <img class="arw-img" src="" alt="arrow-image" />
     <img class="date-drpdwn" src="" alt="arrow-image" />
 </div>
-@if (RecentFoldersList.Any())
+@if (RecentFoldersViewModel.RecentFoldersList.Any())
 {
     <div class="rcnt-fld-sec hgt-ovflw">
-        <AxCrypt.App.Windows.Components.Pages.LoadingComponent IsLoading="Loading" />
-        @if (!Loading)
+        <AxCrypt.App.Windows.Components.Pages.Shared.LoadingComponent IsLoading="RecentFoldersViewModel.Loading" />
+        @if (!RecentFoldersViewModel.Loading)
         {
-            @if (currentDevice != DeviceIdiom.Phone && SubscriptionLevel != SubscriptionLevel.Free)
+            @if (currentDevice != DeviceIdiom.Phone && RecentFoldersViewModel.SubscriptionLevel != SubscriptionLevel.Free)
             {
-                <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="(ss) => AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label>Add or Drag Folder</label></div>
+                <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="(ss) => RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label>Add or Drag Folder</label></div>
             }
-            @foreach (string folder in RecentFoldersList)
+            @foreach (string folder in RecentFoldersViewModel.RecentFoldersList)
             {
                 string folderWithoutTrailingSlash = folder.TrimEnd('\\');
-                <div class="rcnt-fld-bx fld-dflt-cl" @onmousedown="(e) => HandleFileClick(e)"
-                     @ondblclick="(arg) => OnContextMenuAction(arg, SecuredFolderContextMenu.ShowInExplorer)"
-                     @oncontextmenu="e => SecuredContextMenu(e, folder)">
+                <div class="rcnt-fld-bx fld-dflt-cl" @onmousedown="(e) => RecentFoldersViewModel.HandleFileClick(e)"
+                     @ondblclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShowInExplorer)"
+                     @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
                     <img class="fldr-img" src="" /><br /><label>@Path.GetFileName(folderWithoutTrailingSlash)</label>
                 </div>
             }
@@ -90,273 +87,33 @@ else
 
 <div id="securedContextMenu" class="hide-model-popup home-context-menu" style="display: none;">
     <dl class="font-medium" style="margin-bottom: 5px;">
-        <dd @onclick="(arg) => OnContextMenuAction(arg, SecuredFolderContextMenu.ShareKey)">Share Keys</dd>
-        <dd @onclick="(arg) => OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptPermanently)">Decrypt Permanently </dd>
-        <dd @onclick="(arg) => OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptTemporarily)">Decrypt Temporarily </dd>
-        <dd @onclick="(arg) => OnContextMenuAction(arg, SecuredFolderContextMenu.RemoveFromListButKeepSecured)">Remove from list but keep secured</dd>
-        <dd @onclick="(arg) => OnContextMenuAction(arg, SecuredFolderContextMenu.ShowInExplorer)">Open Explore Here</dd>
-        <dd @onclick="(arg) => OnContextMenuAction(arg, SecuredFolderContextMenu.AddSecuredFolder)">Add Secured Folder</dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShareKey)">Share Keys</dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptPermanently)">Decrypt Permanently </dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptTemporarily)">Decrypt Temporarily </dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.RemoveFromListButKeepSecured)">Remove from list but keep secured</dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShowInExplorer)">Open Explore Here</dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.AddSecuredFolder)">Add Secured Folder</dd>
     </dl>
 </div>
 
-@if (showPopup)
+@if (RecentFoldersViewModel.showPopup)
 {
     <div class="modalDialog sharekey-popup" id="sharekey">
-        <ShareKey SelectedFilesOrFoldersList=@SelectedShareKeyFolders OnClose="ClosePopup" />
+        <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList=@RecentFoldersViewModel.SelectedShareKeyFolders OnClose="RecentFoldersViewModel.ClosePopup" />
     </div>
 }
 
-@if (showUpgradePopup)
+@if (RecentFoldersViewModel.showUpgradePopup)
 {
     <div class="modalDialog" id="upgrade-popup">
-        <AxCrypt.App.Windows.Components.Pages.Upgrade />
+        <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
     </div>
 }
 
 @code {
-
-    private MainViewModel _mainViewModel;
-    private FileOperationViewModel _fileOperationViewModel;
-
-    bool showUpgradePopup = false;
-    public List<string> SelectedShareKeyFolders { get; set; }
-
     protected override async Task OnInitializedAsync()
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        _mainViewModel = New<MainViewModel>();
-        _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
-        _fileOperationViewModel = New<FileOperationViewModel>();
-
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.WatchedFolders), (IEnumerable<string> folders) => { UpdateWatchedFolders(folders); });
-
-        Progress<LoadingModel> progress = new Progress<LoadingModel>(p =>
-        {
-            Loading = p.IsLoading;
-            InvokeAsync(StateHasChanged);
-        });
-
-        base.OnInitialized();
-        IEnumerable<string> folders = await RecentFoldersAsync(progress);
-        RecentFoldersList = new System.Collections.ObjectModel.ObservableCollection<string>(folders);
+        await RecentFoldersViewModel.InitializeAsync();
+        await base.OnInitializedAsync();
     }
-
-    private bool _loading { get; set; } = true;
-
-    private Action _onStateChange;
-
-    public void SetOnStateChange(Action onStateChange)
-    {
-        _onStateChange = onStateChange;
-    }
-
-    public bool Loading
-    {
-        get => _loading;
-        set
-        {
-            if (_loading != value)
-            {
-                _loading = value;
-                _onStateChange?.Invoke();
-            }
-        }
-    }
-
-    public async Task<IEnumerable<string>> RecentFoldersAsync(IProgress<LoadingModel> progress = null)
-    {
-        return await LoadingProgressHelper.ExecuteLoadingProgress(async () =>
-           {
-               return await Task.FromResult<IEnumerable<string>>(_mainViewModel.WatchedFolders);
-           }, progress);
-    }
-
-    protected bool isNtFundHovered = false;
-    protected void ShwNotfndPop()
-    {
-        isNtFundHovered = true;
-    }
-
-    protected void HdeNotfndPop()
-    {
-        isNtFundHovered = false;
-    }
-
-    protected bool isTempHovered = false;
-    protected void ShowTempPopup()
-    {
-        isTempHovered = true;
-    }
-
-    protected void HideTempPopup()
-    {
-        isTempHovered = false;
-    }
-
-    private void ClosePopup()
-    {
-        showPopup = false;
-    }
-
-    private void HandleFileClick(MouseEventArgs e)
-    {
-        FolderContextMenu = false;
-    }
-
-    private void SecuredContextMenu(MouseEventArgs e, string foldersPaths)
-    {
-        SelectedRecentFolders.Clear();
-        if (foldersPaths != null)
-        {
-            SelectedRecentFolders.Add(foldersPaths);
-            FolderContextMenu = !FolderContextMenu;
-        }
-    }
-
-    private string SelectedFolder { get; set; }
-    public IList<string> SelectedRecentFolders { get; set; } = new List<string>();
-
-    private bool isDescending { get; set; }
-
-    private void SortByDate()
-    {
-        if (RecentFoldersList.Any())
-        {
-            IEnumerable<IDataContainer> dataContainers = RecentFoldersList.Select(f => New<IDataContainer>(f));
-            IEnumerable<IDataStore> data = dataContainers.Select(rf => rf.FileItemInfo(rf.FullName));
-
-            if (isDescending)
-            {
-                RecentFoldersList = new ObservableCollection<string>(data.Where(rf => rf != null).OrderByDescending(rf => rf.CreationTimeUtc).Select(f => f.FullName));
-            }
-            else
-            {
-                RecentFoldersList = new ObservableCollection<string>(data.Where(rf => rf != null).OrderBy(rf => rf.CreationTimeUtc).Select(f => f.FullName));
-
-            }
-
-            isDescending = !isDescending;
-        }
-    }
-
-    private void UpdateWatchedFolders(IEnumerable<string> watchedFolders)
-    {
-        RecentFoldersList = new ObservableCollection<string>(watchedFolders);
-        StateHasChanged();
-    }
-
-    private async void AddSecuredFolder(EventArgs eventArgs)
-    {
-        FolderContextMenu = false;
-        await PremiumFeature_ClickAsync(LicenseCapability.SecureFolders, (ss, ee) => { WatchedFoldersAddSecureFolderMenuItem_Click(ss, ee); return Constant.CompletedTask; }, null, eventArgs);
-    }
-
-    private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
-    {
-        if (_mainViewModel.License.Has(requiredCapability))
-        {
-            if (realHandler != null)
-            {
-                await realHandler(sender, e);
-            }
-            return;
-        }
-
-        showUpgradePopup = true;
-    }
-
-    private async void WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
-    {
-        string folder = await SelectSecureFolder();
-        if (string.IsNullOrEmpty(folder))
-        {
-            return;
-        }
-
-        await _mainViewModel.AddWatchedFolders.ExecuteAsync(new string[] { folder });
-    }
-
-    private async Task<string> SelectSecureFolder()
-    {
-        return await FolderPicker.PickFolderAsync();
-    }
-
-    private async void OnContextMenuAction(EventArgs arg, SecuredFolderContextMenu contextMenu)
-    {
-        if (!SelectedRecentFolders.Any())
-        {
-            return;
-        }
-
-        switch (contextMenu)
-        {
-            case SecuredFolderContextMenu.ShareKey:
-                WatchedFolderKeySharing(arg);
-                break;
-
-            case SecuredFolderContextMenu.DecryptPermanently:
-                DecryptPermanently();
-                break;
-
-            case SecuredFolderContextMenu.DecryptTemporarily:
-                DecryptTemporarily();
-                break;
-
-            case SecuredFolderContextMenu.ShowInExplorer:
-                OpenSelectedFolder();
-                break;
-
-            case SecuredFolderContextMenu.RemoveFromListButKeepSecured:
-                RemoveWatchedFolders();
-                break;
-
-            case SecuredFolderContextMenu.AddSecuredFolder:
-                AddSecuredFolder(arg);
-                break;
-        }
-    }
-
-    private async void WatchedFolderKeySharing(EventArgs args)
-    {
-        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, (ss, ee) => { return WatchedFoldersKeySharingAsync(SelectedRecentFolders); }, null, args);
-    }
-
-    private async Task WatchedFoldersKeySharingAsync(IEnumerable<string> folderPaths)
-    {
-        if (!folderPaths.Any())
-        {
-            return;
-        }
-
-        SharingListViewModel viewModel = await SharingListViewModel.CreateForFoldersAsync(folderPaths, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        FileShareService.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel);
-        showPopup = true;
-
-        await viewModel.ShareFolders.ExecuteAsync(null);
-    }
-
-    private async void DecryptPermanently()
-    {
-        await _mainViewModel.DecryptWatchedFolders.ExecuteAsync(SelectedRecentFolders);
-    }
-
-    private async void DecryptTemporarily()
-    {
-        await _fileOperationViewModel.DecryptFolders.ExecuteAsync(SelectedRecentFolders);
-    }
-
-    private void OpenSelectedFolder()
-    {
-        _mainViewModel.OpenSelectedFolder.Execute(SelectedRecentFolders.First());
-    }
-
-    private async void RemoveWatchedFolders()
-    {
-        await _mainViewModel.RemoveWatchedFolders.ExecuteAsync(SelectedRecentFolders);
-    }
-
-    private SubscriptionLevel SubscriptionLevel { get; set; }
-    bool showPopup { get; set; }
-    public ObservableCollection<string>? RecentFoldersList { get; set; }
-    public bool FolderContextMenu { get; set; }
 }

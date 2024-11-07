@@ -3,6 +3,7 @@ using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Models.Secret;
 using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Initialize;
 using AxCrypt.App.Windows.Models;
 using AxCrypt.App.Windows.Services;
@@ -12,8 +13,11 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
 using AxCrypt.Mono;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
+
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows
 {
@@ -101,17 +105,10 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<FileShareService>(); 
             services.AddSingleton<AppLocalizationOptions>();
 
-            services.AddSingleton<FeedbackViewModel>();
-            services.AddScoped<AboutViewModel>();
-            services.AddScoped<SupportViewModel>();
-            services.AddScoped<SuggestionViewModel>();
-            services.AddScoped<InviteViewModel>();
-
             services.AddSingleton<SupportService>();
             services.AddSingleton<AxCrypt.App.Components.Services.AlertNotification>();
             services.AddSingleton<ILogging, Logging>();
             services.AddSingleton<IStatusChecker, StatusChecker>();
-            services.AddSingleton<UserNotificationService>();
             services.AddSingleton<SecretClientModel>();
             services.AddSingleton<SecretsClientModel>();
             services.AddSingleton<NewSecretViewModel>();
@@ -125,16 +122,18 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SecretsListViewModel>();
             services.AddSingleton<AxCrypt.App.Components.Services.SecretServiceUtility>();
 
-            services.AddSingleton<FileShareService>();
-            services.AddSingleton<FeedbackViewModel>();
-
-            services.AddSingleton<ILogging, Logging>();
-            services.AddSingleton<IStatusChecker, StatusChecker>();
             services.AddSingleton<UserNotificationService>();
             services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<FeedbackViewModel>();
+            services.AddScoped<AboutViewModel>();
+            services.AddScoped<SupportViewModel>();
+            services.AddScoped<SuggestionViewModel>();
+            services.AddScoped<InviteViewModel>();
+            services.AddScoped<TopMenuViewModel>();
+            services.AddScoped<AccountViewModel>();
+            services.AddScoped<SettingsViewModel>();
 
-            TypeMap.Register.Singleton<AxCrypt.App.Components.Models.AccountStatusViewModel>(() => new AxCrypt.App.Components.Models.AccountStatusViewModel());
-
+            TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
             PlatformInitializer.Initialize();
         }
     }

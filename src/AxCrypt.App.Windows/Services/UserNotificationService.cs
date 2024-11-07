@@ -1,7 +1,6 @@
 ﻿using AxCrypt.App.Components.Models;
 using AxCrypt.App.Windows.Helpers;
 using AxCrypt.App.Windows.Models;
-using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Core.UI;
 using System.Collections.ObjectModel;
 using static AxCrypt.Abstractions.TypeResolve;

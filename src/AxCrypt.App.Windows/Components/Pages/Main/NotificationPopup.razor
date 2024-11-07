@@ -1,9 +1,12 @@
 ﻿@using AxCrypt.Api.Model;
 @using AxCrypt.App.Components.Models
-@using AxCrypt.App.Windows.Models
-@using AxCrypt.App.Windows.ViewModels
-@inject NotificationViewModel model
+@using AxCrypt.App.Components.Models.Notification
+@using AxCrypt.App.Components.Services
+
 @using static AxCrypt.Abstractions.TypeResolve
+
+@inject NotificationViewModel model
+@inject UserNotificationService service
 
 <div class="notification-popup hide-model-popup" id="notify-popup">
     <label class="notif-popup-title">Notifications</label>
@@ -45,5 +48,6 @@
     protected override void OnInitialized()
     {
         SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        model = service.NotificationModel;
     }
 }
