@@ -6,7 +6,9 @@ using AxCrypt.App.Components.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto.Asymmetric;
+using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -24,9 +26,9 @@ public class ShareKeyViewModel : ComponentBase
     public List<string> NewUsersList { get; set; } = new List<string>();
     public List<UserPublicKey> _sharedKeyUsersList = new List<UserPublicKey>() { };
     public IEnumerable<ShareKeyFile>? ShareKeyFileList { get; set; }
-    public IList<ShareKeyUser> ShareKeyUserList { get; set; } = new List<ShareKeyUser>();
+    public IList<ShareKeyUser> _shareKeyUserList { get; set; }
 
-    public EmailAddress? UserEmailForContextMenuAction { get; set; }
+    private EmailAddress? UserEmailForContextMenuAction;
 
     public bool contextMenu { get; set; } = false;
     public bool showDialog { get; set; } = false;
@@ -34,10 +36,15 @@ public class ShareKeyViewModel : ComponentBase
     public bool WarngPopup { get; set; } = false;
     public bool isFirstClick { get; set; } = true;
     public bool isAxCryptUser { get; set; } = true;
+    public string? ErrorMessage { get; set; }
 
-    public void contextMenuPopup(EmailAddress email)
+    public void contextMenuPopup(string email)
     {
-        UserEmailForContextMenuAction = email;
+        if (!EmailAddress.TryParse(email, out UserEmailForContextMenuAction))
+        {
+            //show an error message
+            return;
+        }
         contextMenu = !contextMenu;
     }
 
@@ -115,33 +122,128 @@ public class ShareKeyViewModel : ComponentBase
         ClearErrorProviders();
     }
 
+    public void SuggestUnSharedUserEmailList()
+    {
+        FileShareService.ViewModel.NewKeyShare = RecipientEmail.Trim();
+
+        IEnumerable<ShareKeyUser> filteredUnSharedUsersList = SuggestNotSharedWithByText(RecipientEmail);
+        if (!filteredUnSharedUsersList.Any())
+        {
+            ClearErrorProviders();
+            return;
+        }
+
+        foreach (ShareKeyUser user in filteredUnSharedUsersList)
+        {
+            EmailSuggestion emailSuggestion = new EmailSuggestion();
+            emailSuggestion.Email = user.UserEmail;
+            emailSuggestion.GroupName = user.GroupName;
+            emailSuggestion.Type = user.Image;
+
+            AllSuggestions.Add(emailSuggestion);
+        }
+
+        ClearErrorProviders();
+    }
+
+    private IEnumerable<ShareKeyUser> SuggestNotSharedWithByText(string suggestingText)
+    {
+        IEnumerable<UserPublicKey> filteredUserList = FileShareService.ViewModel.NotSharedWith.Where(nsw => string.IsNullOrEmpty(nsw.GroupName) && nsw.Email.Address.Contains(suggestingText));
+        List<ShareKeyUser> filteredUnSharedUsersList = filteredUserList.Distinct(UserPublicKey.EmailComparer).ToArray().Select(user => new ShareKeyUser(user.Email, AccountStatus.Verified)).ToList();
+
+        IEnumerable<UserPublicKey> filteredGroupList = FileShareService.ViewModel.NotSharedWith.Where(nsw => !string.IsNullOrEmpty(nsw.GroupName) && nsw.GroupName.Contains(suggestingText));
+        IEnumerable<ShareKeyUser> filteredUnSharedGroupsList = filteredGroupList.Distinct().ToArray().Select(user => new ShareKeyUser(user.Email, user.GroupName)).ToList();
+
+        filteredUnSharedUsersList.AddRange(filteredUnSharedGroupsList);
+        return filteredUnSharedUsersList;
+    }
+
     public async void AddShareKeyUser()
     {
-        if (string.IsNullOrWhiteSpace(RecipientEmail))
+        if (string.IsNullOrWhiteSpace(RecipientEmail) || RecipientEmail == Texts.AddEmailPromptText)
         {
             return;
         }
 
-        EmailAddress addedUserEmailAddress;
-        if (!EmailAddress.TryParse(RecipientEmail.Trim(), out addedUserEmailAddress))
+        EmailAddress addedUserEmailAddress = ShareKeyUserEmailAddress();
+        UserPublicKey groupPublicKey = ValidShareKeyUserGroup();
+        if (addedUserEmailAddress == EmailAddress.Empty && groupPublicKey == null)
+        {
+            ErrorMessage = Texts.InvalidEmail;
+            return;
+        }
+
+        if (groupPublicKey != null)
+        {
+            addedUserEmailAddress = groupPublicKey.Email;
+        }
+
+        if (_shareKeyUserList.Any(user => user.UserEmail == addedUserEmailAddress.Address))
         {
             return;
         }
 
-        if (ShareKeyUserList.Any(user => user.UserEmail == addedUserEmailAddress))
+        if (New<AxCryptOnlineState>().IsOffline && !await AddShareKeyWhenOffline(addedUserEmailAddress))
         {
             return;
         }
 
-        if (!IsConnected())
+        ShareKeyUser shareKeyUser = null;
+        if (groupPublicKey == null)
         {
-            ShowHideOfflineError();
-            return;
+            AccountStatus accountStatus = AccountStatus.Verified;
+            if (!New<AxCryptOnlineState>().IsOffline)
+            {
+                accountStatus = await ShareNewContactAsync();
+            }
+
+            shareKeyUser = new ShareKeyUser(EmailAddress.Parse(FileShareService.ViewModel.NewKeyShare), accountStatus);
+        }
+        else
+        {
+            FileShareService.ViewModel.NewKeyShare = groupPublicKey.Email.Address;
+            await FileShareService.ViewModel.AddNewKeyShare.ExecuteAsync(FileShareService.ViewModel.NewKeyShare);
+
+            string shareGroupText = RecipientEmail.Trim();
+            shareKeyUser = new ShareKeyUser(groupPublicKey.Email, shareGroupText);
         }
 
         await AddEmailToKeyShareListAsync(addedUserEmailAddress);
         RecipientEmail = string.Empty;
         StateHasChanged();
+    }
+
+    private EmailAddress ShareKeyUserEmailAddress()
+    {
+        if (EmailAddress.TryParse(RecipientEmail.Trim(), out EmailAddress addedUserEmailAddress))
+        {
+            return addedUserEmailAddress;
+        }
+
+        return EmailAddress.Empty;
+    }
+
+    private UserPublicKey ValidShareKeyUserGroup()
+    {
+        string shareUserText = RecipientEmail.Trim();
+        return FileShareService.ViewModel.GetValidGroupPublicKey(shareUserText);
+    }
+
+    private async Task<bool> AddShareKeyWhenOffline(EmailAddress userEmail)
+    {
+        if (!FileShareService.ViewModel.NotSharedWith.Any(ur => ur.Email == userEmail))
+        {
+            await DisplayOfflineWarningMessageAsync();
+            return false;
+        }
+
+        await FileShareService.ViewModel.AddKeyShares.ExecuteAsync(new List<EmailAddress> { userEmail });
+        return true;
+    }
+
+    private async Task DisplayOfflineWarningMessageAsync()
+    {
+        await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.KeySharingOffline);
     }
 
     public static bool IsConnected()
@@ -154,7 +256,7 @@ public class ShareKeyViewModel : ComponentBase
     {
         using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorWaitMessage, Texts.ProgressIndicatorWaitMessage))
         {
-            await ShareSelectedIndices(new List<EmailAddress>() { addedUserEmailAddress });
+            await ShareSelectedIndices(new List<string> { addedUserEmailAddress.Address });
 
             AccountStatus accountStatus = await ShareNewContactAsync();
             if (accountStatus != AccountStatus.Unknown)
@@ -166,21 +268,19 @@ public class ShareKeyViewModel : ComponentBase
         }
     }
 
-    private Task ShareSelectedIndices(IEnumerable<EmailAddress> newKeyShareUserList)
+    private Task ShareSelectedIndices(IEnumerable<string> newKeyShareUserList)
     {
-        try
-        {
-            return FileShareService.ViewModel.AddKeyShares.ExecuteAsync(newKeyShareUserList);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
+        return FileShareService.ViewModel.AddKeyShares.ExecuteAsync(newKeyShareUserList.Select(user => EmailAddress.Parse(user)));
     }
 
     private async Task<AccountStatus> ShareNewContactAsync()
     {
-        if (string.IsNullOrEmpty(RecipientEmail))
+        if (string.IsNullOrEmpty(FileShareService.ViewModel.NewKeyShare))
+        {
+            return AccountStatus.Unknown;
+        }
+
+        if (!AdHocValidationDueToMonoLimitations())
         {
             return AccountStatus.Unknown;
         }
@@ -208,12 +308,15 @@ public class ShareKeyViewModel : ComponentBase
             if (New<AxCryptOnlineState>().IsOffline)
             {
                 ShowHideOfflineError();
+                await DisplayOfflineWarningMessageAsync();
+                RecipientEmail = string.Empty;
+                StateHasChanged();
             }
         }
         catch (BadRequestApiException braex)
         {
             New<IReport>().Exception(braex);
-            //ErrorMessage = Texts.InvalidEmail;
+            ErrorMessage = Texts.InvalidEmail;
         }
 
         return AccountStatus.Unknown;
@@ -240,7 +343,29 @@ public class ShareKeyViewModel : ComponentBase
 
     private void AddKeySharingUserList(EmailAddress addedUserEmailAddress, AccountStatus accountStatus)
     {
-        ShareKeyUserList.Add(new ShareKeyUser(addedUserEmailAddress, accountStatus));
+        _shareKeyUserList.Add(new ShareKeyUser(addedUserEmailAddress, accountStatus));
+    }
+
+    private bool AdHocValidationDueToMonoLimitations()
+    {
+        bool validated = AdHocValidateAllFieldsIndependently();
+        return validated;
+    }
+
+    private bool AdHocValidateAllFieldsIndependently()
+    {
+        return AdHocValidateNewKeyShare();
+    }
+
+    private bool AdHocValidateNewKeyShare()
+    {
+        if (FileShareService.ViewModel[nameof(SharingListViewModel.NewKeyShare)].Length > 0)
+        {
+            ErrorMessage = Texts.InvalidEmail;
+            return false;
+        }
+
+        return true;
     }
 
     [Parameter]
@@ -277,7 +402,8 @@ public class ShareKeyViewModel : ComponentBase
 
     public async Task RemoveSharedKey()
     {
-        await FileShareService.ViewModel.RemoveKeyShares.ExecuteAsync(_sharedKeyUsersList.Where(user => user.Email == UserEmailForContextMenuAction));
+        await FileShareService.ViewModel.RemoveKeyShares.ExecuteAsync(new UserPublicKey[] { (UserPublicKey)FileShareService.ViewModel.SharedWith.First(su => su.Email == UserEmailForContextMenuAction) });
+
         RemoveKeySharingUserList(UserEmailForContextMenuAction);
         contextMenu = !contextMenu;
         UserEmailForContextMenuAction = EmailAddress.Empty;
@@ -285,19 +411,30 @@ public class ShareKeyViewModel : ComponentBase
 
     private void RemoveKeySharingUserList(EmailAddress addedUserEmailAddress)
     {
-        ShareKeyUser selectedSharedKeyUser = ShareKeyUserList.Single(skul => skul.UserEmail == addedUserEmailAddress);
+        ShareKeyUser selectedSharedKeyUser = _shareKeyUserList.Single(skul => skul.UserEmail == addedUserEmailAddress.Address);
         if (selectedSharedKeyUser == null)
         {
             return;
         }
 
-        ShareKeyUserList.Remove(selectedSharedKeyUser);
+        _shareKeyUserList.Remove(selectedSharedKeyUser);
         //UpdateUIElementsOnChange();
     }
 
-    public void RefreshShare()
+    public async Task RefreshShare()
     {
-        return;
+        if (UserEmailForContextMenuAction == EmailAddress.Empty)
+        {
+            return;
+        }
+
+        bool isGroup = FileShareService.ViewModel.GetValidGroupPublicKey("", new List<EmailAddress>() { UserEmailForContextMenuAction }) != null;
+        if (isGroup && !New<LicensePolicy>().Capabilities.Has(LicenseCapability.Business))
+        {
+            return;
+        }
+
+        await FileShareService.ViewModel.RefreshKnownContact.ExecuteAsync(new List<EmailAddress>() { UserEmailForContextMenuAction });
     }
 
     private void ShowHideOfflineError()
@@ -321,7 +458,7 @@ public class ShareKeyViewModel : ComponentBase
     [Parameter]
     public IEnumerable<string> SelectedFilesOrFoldersList { get; set; } = new List<string>();
 
-    public class EmailSuggestion
+    public class EmailSuggestion()
     {
         public string? Email { get; set; }
         public string? GroupName { get; set; }
@@ -330,24 +467,18 @@ public class ShareKeyViewModel : ComponentBase
 
     public List<EmailSuggestion> EmailSuggestions = new List<EmailSuggestion>();
 
-    public List<EmailSuggestion> AllSuggestions = new List<EmailSuggestion>
-    {
-        new EmailSuggestion { Email = "user1@example.com", Type = "individual" },
-        new EmailSuggestion { Email = "admin1@example.com", Type = "admin" },
-        new EmailSuggestion { GroupName = "Finance Team", Type = "group" },
-        new EmailSuggestion { Email = "desktopuser@example.com", Type = "desktop-contact" },
-    };
+    public List<EmailSuggestion> AllSuggestions = new List<EmailSuggestion>();
 
     public void OnEmailInput(ChangeEventArgs e)
     {
+        SuggestUnSharedUserEmailList();
+
         RecipientEmail = e.Value?.ToString();
 
         if (!string.IsNullOrEmpty(RecipientEmail))
         {
-            EmailSuggestions = AllSuggestions
-                .Where(s => s.Email?.Contains(RecipientEmail, StringComparison.OrdinalIgnoreCase) == true ||
-                            s.GroupName?.Contains(RecipientEmail, StringComparison.OrdinalIgnoreCase) == true)
-                .ToList();
+            EmailSuggestions = AllSuggestions.Where(s => s.Email?.Contains(RecipientEmail, StringComparison.OrdinalIgnoreCase) == true ||
+                            s.GroupName?.Contains(RecipientEmail, StringComparison.OrdinalIgnoreCase) == true).ToList();
             showSuggestionDropdown = EmailSuggestions.Any();
         }
         else

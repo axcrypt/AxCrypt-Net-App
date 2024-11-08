@@ -124,12 +124,12 @@
                 </div>
             }
             <div>
-                <h3 class="txt-clr font-bold">All users with access in selected files (<span id="userCount">@ShareKeyViewModel.ShareKeyUserList.Count()</span>)</h3>
+                <h3 class="txt-clr font-bold">All users with access in selected files (<span id="userCount">@ShareKeyViewModel._shareKeyUserList.Count()</span>)</h3>
 
-                @if (ShareKeyViewModel.ShareKeyUserList.Any())
+                @if (ShareKeyViewModel._shareKeyUserList.Any())
                 {
                     <div class="user-list-bx share-list scroll-container " id="sharedUserList" style="margin-right:0px">
-                        @foreach (ShareKeyUser user in ShareKeyViewModel.ShareKeyUserList)
+                        @foreach (ShareKeyUser user in ShareKeyViewModel._shareKeyUserList)
                         {
                             <dl>
                                 <dd class="file-bgrnd">

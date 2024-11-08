@@ -17,6 +17,7 @@ using AxCrypt.App.Components.Services;
 
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Components.Data;
+using AxCrypt.Content;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -315,6 +316,16 @@ public class HomeBodyViewModel : ComponentBase
     private async Task ShareKeysWithFileSelectionAsync(IEnumerable<FileDetails> selectedRecentFiles = null)
     {
         List<string> filesList = selectedRecentFiles?.Select(f => f.FilePath).ToList();
+        IEnumerable<string> encryptableFileNames = filesList.Where(f => New<IDataStore>(f).IsEncryptable());
+        if (encryptableFileNames != null && encryptableFileNames.Any())
+        {
+            PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "There are some unencrypted files also selected for key sharing. AxCrypt will encrypt and then key share the selected files. Would you like to continue to proceed?");
+            if (click != PopupButtons.Ok)
+            {
+                return;
+            }
+        }
+
         IEnumerable<FileResult> selectedFiles = selectedRecentFiles?.Select(f => new FileResult(f.FilePath)).ToList();
 
         if (selectedFiles == null || !selectedFiles.Any())
@@ -335,9 +346,17 @@ public class HomeBodyViewModel : ComponentBase
         }
 
         SharingListViewModel sharingListViewModel = await SharingListViewModel.CreateForFilesAsync(filesList, New<KnownIdentities>().DefaultEncryptionIdentity);
-
         FileShareService.SetSelectedFilesOrFolders(selectedFiles.Select(e => e.FullPath), sharingListViewModel);
         SelectedShareKeyFiles = filesList;
+
+        if (encryptableFileNames != null && encryptableFileNames.Any())
+        {
+            _fileOperationViewModel.Recipients = sharingListViewModel.SharedWith;
+            await _fileOperationViewModel.EncryptFiles.ExecuteAsync(encryptableFileNames);
+            _fileOperationViewModel.Recipients = null;
+        }
+
+        await sharingListViewModel.ShareFiles.ExecuteAsync(null);
 
         ShowSharePopup = true;
         StateHasChanged();

@@ -7,15 +7,24 @@ namespace AxCrypt.App.Components.Models
     {
         public ShareKeyUser(EmailAddress userEmail, AccountStatus userAccountStatus)
         {
-            UserEmail = userEmail;
+            UserEmail = userEmail.Address;
             Image = "";
             if (userAccountStatus == AccountStatus.Verified)
             {
-                Image = "";
+                Image = "~/images/default/Ico.svg";
             }
         }
 
-        public EmailAddress UserEmail { get; set; }
+        public ShareKeyUser(EmailAddress userEmail, string groupName)
+        {
+            UserEmail = userEmail.Address;
+            GroupName = groupName;
+            Image = "~/images/business/IcoGrp.svg";
+        }
+
+        public string UserEmail { get; set; }
+
+        public string GroupName { get; set; }
 
         public string Image { get; set; }
 
