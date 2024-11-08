@@ -68,14 +68,20 @@ public class SettingsViewModel
     protected bool isHovered = false;
     protected string hoveredElement = string.Empty;
 
+    public bool IsChecked(int value) => SelectedOption == value;
+
     protected void ShowPopup(string element) => isHovered = true;
+
     protected void HidePopup() => isHovered = false;
+
     public void ToggleDebugPopup() => DebugPopup = !DebugPopup;
+
     public void ToggleInvitePopup() => InvitePopup = !InvitePopup;
 
     public void ToggleHideRecentFiles() => SetRecentFilesHiddenState(!New<UserSettings>().HideRecentFiles);
 
     public void InactSgnOutPopup() => InactSgnOut = !InactSgnOut;
+
     public void FileEncryptionProperty() => FileEncryptionProperties = !FileEncryptionProperties;
 
     [Parameter]
@@ -281,6 +287,7 @@ public class SettingsViewModel
     }
 
     private ObservableCollection<ManageAccountModel> _accountEmailsListView { get; set; } = new ObservableCollection<ManageAccountModel>();
+
     public string _emailLabel { get; set; }
 
     private void ListAccountEmails(IEnumerable<AccountProperties> emails)

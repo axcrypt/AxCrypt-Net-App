@@ -26,7 +26,7 @@
             Edit Card
         </h3>
     </div>
-    <LoadingComponent IsLoading="@editSecretViewModel.Loading" />
+    <AxCrypt.App.Windows.Components.Pages.Shared.LoadingComponent IsLoading="@editSecretViewModel.Loading" />
     <EditForm Model="@secretService.CurrentSecret.Card" OnValidSubmit="SavePassword">
         <DataAnnotationsValidator />
         @if (!editSecretViewModel.Loading)

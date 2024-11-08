@@ -19,65 +19,64 @@
 @using System.Collections.ObjectModel
 
 @using static AxCrypt.Abstractions.TypeResolve
-@inject FileShareService FileShareService
-@inject IFolderPicker FolderPicker
+@inject HomeBodyViewModel viewModel
 @inject IJSRuntime jsRunTime
 
 <div class="home-body" style="margin-top: 15px;">
     <div style="display:block; margin-bottom: 25px;">
         <label class="fle-nme fnt-sze">Actions</label>
         <div class="" style="display:flex;">
-            <div class="act-box" @onclick="(()=>ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Open, SelectedRecentFiles))" @onmouseover='@( () => ShowPopup("open") )' @onmouseout="HidePopup">
+            <div class="act-box" @onclick="(()=>viewModel.ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Open, viewModel.SelectedRecentFiles))" @onmouseover='@( () => viewModel.ShowPopup("open") )' @onmouseout="viewModel.HidePopup">
                 <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
                 <span class="text-size">@Texts.McInfMenuOpen</span>
-                @if (isHovered && hoveredElement == "open")
+                @if (viewModel.isHovered && viewModel.hoveredElement == "open")
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
                         <span class="txt-clr font-medium">Click to open a secured files</span>
                     </div>
                 }
             </div>
-            <div class="act-box" @onclick="(()=>ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Encrypt, SelectedRecentFiles))" @onmouseover='@( () => ShowPopup("secure") )' @onmouseout="HidePopup">
+            <div class="act-box" @onclick="(()=>viewModel.ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Encrypt, viewModel.SelectedRecentFiles))" @onmouseover='@( () => viewModel.ShowPopup("secure") )' @onmouseout="viewModel.HidePopup">
                 <img class="act-img scr-act" src="" alt="scr-img" />
                 <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
-                @if (isHovered && hoveredElement == "secure")
+                @if (viewModel.isHovered && viewModel.hoveredElement == "secure")
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
                         <span class="txt-clr font-medium">Click to securely encrypt files</span>
                     </div>
                 }
             </div>
-            <div class="act-box" @onmouseover='@( () => ShowPopup("stop") )' @onmouseout="HidePopup" @onclick="(()=>ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Decrypt, SelectedRecentFiles))">
+            <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("stop") )' @onmouseout="viewModel.HidePopup" @onclick="(()=>viewModel.ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Decrypt, viewModel.SelectedRecentFiles))">
                 <img class="act-img stpscr-act" src="" alt="stpscr-img" />
                 <span class="text-size">Stop</span>
-                @if (isHovered && hoveredElement == "stop")
+                @if (viewModel.isHovered && viewModel.hoveredElement == "stop")
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
                         <span class="txt-clr font-medium">Click to stop securing files.</span>
                     </div>
                 }
             </div>
-            @if (SubscriptionLevel == SubscriptionLevel.Free)
+            @if (viewModel.SubscriptionLevel == SubscriptionLevel.Free)
             {
                 <div class="popup-container">
-                    <div class="hover-trigger" @onmouseover='@( () => ShowPopup("share") )'>
+                    <div class="hover-trigger" @onmouseover='@( () => viewModel.ShowPopup("share") )'>
                         <div class="act-box shre-box" style="background-color:#D9D9D9;">
                             <img class="act-img vwr-shrks-act" src="" alt="shrks-img" /><span class="text-size">Share</span>
                         </div>
                     </div>
 
-                    @if (isHovered && hoveredElement == "share")
+                    @if (viewModel.isHovered && viewModel.hoveredElement == "share")
                     {
                         <div class="popup-section">
                             <div class="free-color" id="upgrade-sec" style="padding:10px; text-align:center; border-radius:5px;">
                                 <span style="color:white;">
                                     Upgrade to access this <strong>feature!</strong>
                                 </span>
-                                <button class="upgrd-btn font-medium btn-medium" @onclick="() => UpgradeToShare = Utility.ToggleUpgradePopup(UpgradeToShare)">Upgrade</button>
+                                <button class="upgrd-btn font-medium btn-medium" @onclick="() => viewModel.UpgradeToShare = Utility.ToggleUpgradePopup(viewModel.UpgradeToShare)">Upgrade</button>
                             </div>
                         </div>
                     }
-                    @if (UpgradeToShare)
+                    @if (viewModel.UpgradeToShare)
                     {
                         <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
                     }
@@ -85,10 +84,10 @@
             }
             else
             {
-                <div class="act-box" @onclick="async(e)=> ShareKeysAsync(e)" @onmouseover='@( () => ShowPopup("share") )' @onmouseout="HidePopup">
+                <div class="act-box" @onclick="async(e)=> viewModel.ShareKeysAsync(e)" @onmouseover='@( () => viewModel.ShowPopup("share") )' @onmouseout="viewModel.HidePopup">
                     <img class="act-img shrks-act" src="" alt="shrks-img" />
                     <span class="text-size">Share</span>
-                    @if (isHovered && hoveredElement == "share")
+                    @if (viewModel.isHovered && viewModel.hoveredElement == "share")
                     {
                         <div class="home-hover text-center" style="background-color:#fff;">
                             <span class="txt-clr font-medium">Click to share access with your colleagues.</span>
@@ -101,11 +100,11 @@
             {
             <div class="act-box"><img class="act-img new-mssg" src="" alt="scr-img" /><span class="text-size">New message</span></div>
             } *@
-            @if (SubscriptionLevel == SubscriptionLevel.Business)
+            @if (viewModel.SubscriptionLevel == SubscriptionLevel.Business)
             {
-                <div class="act-box" @onmouseover='@( () => ShowPopup("master key") )' @onmouseout="HidePopup" @onclick="RedirectToAccountSite">
+                <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("master key") )' @onmouseout="viewModel.HidePopup" @onclick="viewModel.RedirectToAccountSite">
                     <img class="act-img mtrkey-act" src="" alt="mtrkey-img" /><span class="text-size">@Texts.MasterKeyTitle</span>
-                    @if (isHovered && hoveredElement == "master key")
+                    @if (viewModel.isHovered && viewModel.hoveredElement == "master key")
                     {
                         <div class="home-hover text-center" style="background-color:#fff;">
                             <span class="txt-clr font-medium">Go to Masterkey</span>
@@ -114,9 +113,9 @@
                 </div>
                 @if (Utility.IsMainMenuHidden)
                 {
-                    <div class="act-box" @onmouseover='@( () => ShowPopup("create groups") )' @onmouseout="HidePopup" @onclick="RedirectToAccountSite">
+                    <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("create groups") )' @onmouseout="viewModel.HidePopup" @onclick="viewModel.RedirectToAccountSite">
                         <img class="act-img grp-act" src="" alt="grp-img" /><span class="text-size">Create groups</span>
-                        @if (isHovered && hoveredElement == "create groups")
+                        @if (viewModel.isHovered && viewModel.hoveredElement == "create groups")
                         {
                             <div class="home-hover text-center" style="background-color:#fff;">
                                 <span class="txt-clr font-medium">Go to Groups</span>
@@ -125,11 +124,11 @@
                     </div>
                 }
             }
-            @if (isFilesPending)
+            @if (viewModel.isFilesPending)
             {
-                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => ShowPopup("clean") )' @onmouseout="HidePopup" @onclick="(e) => CloseAndRemoveOpenFilesButton_Click(e)">
+                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => viewModel.ShowPopup("clean") )' @onmouseout="viewModel.HidePopup" @onclick="(e) => viewModel.CloseAndRemoveOpenFilesButton_Click(e)">
                     <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">Clean</span>
-                    @if (isHovered && hoveredElement == "clean")
+                    @if (viewModel.isHovered && viewModel.hoveredElement == "clean")
                     {
                         <div class="home-hover text-center" style="background-color:#fff;">
                             <span class="txt-clr font-medium">Click to encrypt any opened files or new files in Secured Folders, but ensure they are not in use first.</span>
@@ -137,7 +136,7 @@
                     }
                 </div>
             }
-            @if (Utility.IsMainMenuHidden && SubscriptionLevel == SubscriptionLevel.Free)
+            @if (Utility.IsMainMenuHidden && viewModel.SubscriptionLevel == SubscriptionLevel.Free)
             {
                 <div class="info-box" style="margin-top:17px; padding: 7px 5px;">
                     <table>
@@ -163,7 +162,7 @@
         </div>
     </div>
     <div>
-        @if (SubscriptionLevel == SubscriptionLevel.Premium)
+        @if (viewModel.SubscriptionLevel == SubscriptionLevel.Premium)
         {
             <div style="display: block;">
                 <div style="display:flex; min-width: 331px;">
@@ -177,7 +176,7 @@
                             <br />
                             <span class="sub-text">For someone else</span>
                         </div>
-                        <button @onclick="BuyForSomeoneElseLink" class="buy-button"> Buy</button>
+                        <button @onclick="viewModel.BuyForSomeoneElseLink" class="buy-button"> Buy</button>
                     </div>
                     <div class="sub-box" style="background-color: #000000; margin-left:15px;">
                         <div style="padding: 10px 20px; line-height:12px;">
@@ -187,12 +186,12 @@
                             <span class="sub-text">For organisations</span>
 
                         </div>
-                        <button @onclick="ChangeSubscriptionToBusinessLink" class="buy-button"> Change</button>
+                        <button @onclick="viewModel.ChangeSubscriptionToBusinessLink" class="buy-button"> Change</button>
                     </div>
                 </div>
             </div>
         }
-        else if (SubscriptionLevel == SubscriptionLevel.Business)
+        else if (viewModel.SubscriptionLevel == SubscriptionLevel.Business)
         {
             <div>
                 <label class="fle-nme fnt-sze" style="padding-bottom:20px;">Active subscriptions</label>
@@ -201,18 +200,18 @@
                         <div class="battery-head"> </div>
                         <div class="battery-body" id="battery-body">
                             <div class="charge-level">
-                                <span style="text-align: center; margin:auto auto;"> @MembersCount/<span style="font-weight:bold;">@TotalMembers</span></span>
+                                <span style="text-align: center; margin:auto auto;"> @viewModel.MembersCount/<span style="font-weight:bold;">@viewModel.TotalMembers</span></span>
                             </div>
                         </div>
                     </div>
                     <div style="margin-left:5px;">
-                        <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="RedirectToAccountWebUrl">Renew<img class="rnw-btn" src="" alt="img" /></button>
+                        <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="viewModel.RedirectToAccountWebUrl">Renew<img class="rnw-btn" src="" alt="img" /></button>
                         <button class="subs-btn" style="background-color: #000;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">Add users<img class="add-usr" src="" alt="img" /></button>
                     </div>
                 </div>
             </div>
         }
-        else if (SubscriptionLevel == SubscriptionLevel.Free)
+        else if (viewModel.SubscriptionLevel == SubscriptionLevel.Free)
         {
             <div class="upgrd-box free-color">
                 <img class="img-upgrdpl" src="" alt="" />
@@ -220,35 +219,35 @@
                     <label class="unlck-txt">
                         Unlock our amazing <span>features</span> developed to <span>empower your security!</span>
                     </label>
-                    <button class="upgrd-btn font-medium btn-large" @onclick="() => UpgradePopup = Utility.ToggleUpgradePopup(UpgradePopup)" style="height: 37px;"> Upgrade now</button>
+                    <button class="upgrd-btn font-medium btn-large" @onclick="() => viewModel.UpgradePopup = Utility.ToggleUpgradePopup(viewModel.UpgradePopup)" style="height: 37px;"> Upgrade now</button>
                 </div>
             </div>
-            @if (UpgradePopup)
+            @if (viewModel.UpgradePopup)
             {
                 <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
             }
         }
     </div>
 </div>
-@if (ShowSharePopup)
+@if (viewModel.ShowSharePopup)
 {
     <div class="modalDialog sharekey-popup" id="sharekey">
-        <ShareKey SelectedFilesOrFoldersList=@SelectedShareKeyFiles IsFolder="false" OnClose="CloseSharePopup" />
+        <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList=@viewModel.SelectedShareKeyFiles IsFolder="false" OnClose="viewModel.CloseSharePopup" />
     </div>
 }
 <div class="mre-act-sec">
-    @if (SubscriptionLevel != SubscriptionLevel.Free)
+    @if (viewModel.SubscriptionLevel != SubscriptionLevel.Free)
     {
         <div style="display:block;">
             <label class="fle-nme fnt-sze">Cloud services</label>
             <div style="display: flex;">
-                @foreach (KnownFolder knownFolder in _knownFoldersViewModel.KnownFolders)
+                @foreach (KnownFolder knownFolder in viewModel._knownFoldersViewModel.KnownFolders)
                 {
                     <div>
-                        <button @onclick="() => OnCloudServiceButtonClick(knownFolder)"
+                        <button @onclick="() => viewModel.OnCloudServiceButtonClick(knownFolder)"
                                 class="assets-box"
-                                style="background-color:@(knownFolder.Enabled ? _ENABLEDTOOLSTRIPBACKCOLOR : DisabledBackColor)">
-                            <img class="icon @GetIconClass(knownFolder.DisplayName)" src="" alt="@knownFolder.DisplayName" />
+                                style="background-color:@(knownFolder.Enabled ? _ENABLEDTOOLSTRIPBACKCOLOR : viewModel.DisabledBackColor)">
+                            <img class="icon @viewModel.GetIconClass(knownFolder.DisplayName)" src="" alt="@knownFolder.DisplayName" />
                         </button>
                     </div>
                 }
@@ -258,17 +257,17 @@
     <div class="medium-9" style="display:block;">
         <label class="fle-nme fnt-sze">More actions</label>
         <div style="display: flex; gap: 2%;">
-            @if (SubscriptionLevel != SubscriptionLevel.Free)
+            @if (viewModel.SubscriptionLevel != SubscriptionLevel.Free)
             {
-                <div class="mre-actn-box" @onclick="(e)=> RandomRenameAsync(e)">
+                <div class="mre-actn-box" @onclick="(e)=> viewModel.RandomRenameAsync(e)">
                     <img class="ico-eye-sml" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.AnonymousRenameMenuText</span>
                 </div>
-                <div class="mre-actn-box" @onclick="(e)=> SecureWipeFiles(e)">
+                <div class="mre-actn-box" @onclick="(e)=> viewModel.SecureWipeFiles(e)">
                     <img class="ico-dlt" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
                 </div>
-                <div class="mre-actn-box" @onclick="UpgradeTo256">
+                <div class="mre-actn-box" @onclick="viewModel.UpgradeTo256">
                     <img class="ico-apikey" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
                 </div>
@@ -278,37 +277,37 @@
             }
             else
             {
-                <div class="mre-actn-box atn-bgclr" @onclick="AlwaysOfflineForFreeUser">
+                <div class="mre-actn-box atn-bgclr" @onclick="viewModel.AlwaysOfflineForFreeUser">
                     <img class="ico-offln" src="" alt="hand-img" />
                     <span class="text-size text-style">Always offline</span>
                 </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="OpenPopup">
+                <div class="mre-actn-box atn-bgclr" @onclick="viewModel.OpenPopup">
                     <img class="ico-invtfrd" src="" alt="hand-img" />
                     <span class="text-size text-style">Invite friend</span>
                 </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="() => UpgradeToEncrypt = Utility.ToggleUpgradePopup(UpgradeToEncrypt)">
+                <div class="mre-actn-box atn-bgclr" @onclick="() => viewModel.UpgradeToEncrypt = Utility.ToggleUpgradePopup(viewModel.UpgradeToEncrypt)">
                     <img class="ico-apikey" src="" alt="hand-img" />
                     <span class="text-size text-style">Upgrade files to AES-256</span>
                 </div>
-                @if (UpgradeToEncrypt)
+                @if (viewModel.UpgradeToEncrypt)
                 {
                     <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
                 }
             }
         </div>
     </div>
-    @if (shareKey)
+    @if (viewModel.shareKey)
     {
         <div class="modalDialog sharekey-popup" id="sharekey">
-            <ShareKey SelectedFilesOrFoldersList="SelectedShareKeyFiles" OnClose="CloseSharePopup" />
+            <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList="viewModel.SelectedShareKeyFiles" OnClose="viewModel.CloseSharePopup" />
         </div>
     }
-    @if (ShowInvitePopup)
+    @if (viewModel.ShowInvitePopup)
     {
-        <InvitePopup />
+        <AxCrypt.App.Windows.Components.Pages.PopupDialog.InvitePopup />
     }
 
-    @if (showUpgradePopup)
+    @if (viewModel.showUpgradePopup)
     {
         <div class="modalDialog" id="upgrade-popup">
             <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
@@ -318,358 +317,36 @@
 <div>
     @if (Utility.IsMainMenuHidden)
     {
-        @if (SubscriptionLevel != SubscriptionLevel.Free)
+        @if (viewModel.SubscriptionLevel != SubscriptionLevel.Free)
         {
-            <AxCrypt.App.Windows.Components.Pages.Suggestion />
+            <AxCrypt.App.Windows.Components.Pages.PopupDialog.Suggestion />
         }
         else
         {
-            <AxCrypt.App.Windows.Components.Pages.Subscription />
+            <AxCrypt.App.Windows.Components.Pages.PopupDialog.Subscription />
         }
     }
 </div>
 @code {
-    private FileOperationViewModel? _fileOperationViewModel;
-    private MainViewModel? _mainViewModel;
-    private KnownFoldersViewModel? _knownFoldersViewModel;
-
-    private FileSystemState? _fileSystemState;
-
-    [Parameter]
-    public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
-
-    bool isFilesPending = false;
-
-    private SubscriptionLevel SubscriptionLevel { get; set; }
-
-    bool ShowInvitePopup { get; set; }
-
-    public void OpenPopup()
-    {
-        ShowInvitePopup = !ShowInvitePopup;
-    }
-
-    public int MembersCount { get; set; }
-    public int TotalMembers { get; set; }
-    public string? DisplayName { get; set; }
-    public bool IsEnabled { get; set; }
-    public string? ImageSource { get; set; }
-    public string? EnabledBackColor { get; set; }
-    public string? DisabledBackColor { get; set; }
     public const string _ENABLEDTOOLSTRIPBACKCOLOR = "#FFFFFF";
-    protected bool isHovered = false;
-    protected string hoveredElement = string.Empty;
-
-    protected void ShowPopup(string element)
-    {
-        isHovered = true;
-        hoveredElement = element;
-    }
-
-    public bool IsHovered { get; set; }
-
-    protected void HidePopup()
-    {
-        isHovered = false;
-        hoveredElement = string.Empty;
-    }
-
-    public bool IsPopupVisible { get; set; }
-    public bool ActiveSubScription { get; set; }
-    public string UserEmail { get; set; }
-    public int DaysLeft { get; set; }
-    public bool SubscribedFromAppStore { get; set; }
-    public string SubscriptionStatusText { get; set; }
-    public bool ShowConfirmDeleteAccountPopup { get; set; }
-
-    public string GetIconClass(string displayName)
-    {
-        return displayName.ToLower() switch
-        {
-            "onedrive" => "onedrv-icon",
-            "documents" => "cld-icon",
-            "google drive" => "ggldrv-icon",
-            "dropbox" => "drpbx-icon",
-            _ => "default-icon"
-        };
-    }
-
-    public async Task OnCloudServiceButtonClick(KnownFolder knownFolder)
-    {
-        IEnumerable<string> filesList = new List<string>();
-        IEnumerable<FileResult> selectedFiles = new List<FileResult>();
-        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[] { knownFolder.My.FullName })
-            {
-                FileSelectionType = FileSelectionType.Open
-            };
-
-        selectedFiles = await FolderPicker.PickMultipleAsync(knownFolder.My.FullName, fileSelectionEventArgs);
-
-        if (!selectedFiles.Any())
-        {
-            return;
-        }
-
-        filesList = selectedFiles.Select(e => e.FullPath).ToList();
-
-        await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(filesList);
-    }
-
-    public void BuyForSomeoneElseLink()
-    {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/Premium/CreateSubscription"));
-    }
-
-    public void ChangeSubscriptionToBusinessLink()
-    {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/HomeBusiness/CreateSubscription"));
-    }
 
     protected override void OnInitialized()
     {
-        _mainViewModel = New<MainViewModel>();
-        _fileOperationViewModel = New<FileOperationViewModel>();
-        _knownFoldersViewModel = New<KnownFoldersViewModel>();
-        _fileSystemState = Resolve.FileSystemState;
-        Utility.OnIsMainMenuHiddenChanged += StateHasChanged;
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); StateHasChanged(); });
-
-        SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
+        viewModel.Initialized();
+        base.OnInitialized();
     }
 
     protected override void OnAfterRender(bool firstRender)
     {
         if (firstRender)
         {
-            isFilesPending = AreFilesPending();
-            this.SelectingFiles += HandleSelectingFiles;
+            viewModel.isFilesPending = viewModel.AreFilesPending();
+            this.viewModel.SelectingFiles += viewModel.HandleSelectingFiles;
         }
 
         base.OnAfterRender(firstRender);
     }
 
-    private bool AreFilesPending()
-    {
-        IList<ActiveFile> openFiles = _fileSystemState.DecryptedActiveFiles;
-        if (openFiles.Count > 0)
-        {
-            return isFilesPending = true;
-        }
-
-        List<IDataStore> files = new List<IDataStore>();
-        foreach (IDataContainer container in Resolve.KnownIdentities.LoggedOnWatchedFolders.Select(wf => New<IDataContainer>(wf.Path)))
-        {
-            files.AddRange(container.ListOfFiles(_fileSystemState.WatchedFolders.Select(x => New<IDataContainer>(x.Path)), New<UserSettings>().FolderOperationMode.Policy()));
-        }
-        if (!New<UserSettings>().DoNotShowAgain.HasFlag(DoNotShowAgainOptions.IgnoreFileWarning))
-        {
-            return files.Where(ds => !ds.IsEncrypted()).Any();
-        }
-
-        return isFilesPending = files.Where(ds => ds.IsEncryptable()).Any();
-    }
-
-    public async void HandleSelectingFiles(object sender, FileSelectionEventArgs fileSelectionEventArgs)
-    {
-        IEnumerable<FileResult> pickResult = await InternalFileSelectionAsync(fileSelectionEventArgs);
-
-        if (pickResult.Any())
-        {
-            fileSelectionEventArgs.SelectedFiles = pickResult.Select(file => file.FullPath).ToArray();
-
-            if (!fileSelectionEventArgs.Cancel)
-            {
-                OnFileSelection(fileSelectionEventArgs.FileSelectionType, fileSelectionEventArgs);
-            }
-        }
-    }
-
-    private void ExecuteSelectFilesCommand(FileSelectionType fileSelectionType, ObservableCollection<FileDetails> selectedFiles)
-    {
-        if (!selectedFiles.Any())
-        {
-            ExecuteSelectFilesCommand(fileSelectionType);
-        }
-        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
-            {
-                FileSelectionType = fileSelectionType,
-                SelectedFiles = selectedFiles.Select(file => file.FilePath).ToArray()
-            };
-
-        OnFileSelection(fileSelectionType, fileSelectionEventArgs);
-    }
-
-    private void ExecuteSelectFilesCommand(FileSelectionType fileSelectionType)
-    {
-        FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new string[0])
-            {
-                FileSelectionType = fileSelectionType,
-            };
-        OnSelectingFiles(fileSelectionArgs);
-        if (fileSelectionArgs.Cancel)
-        {
-            new FileSelectionEventArgs(new List<string>());
-        }
-    }
-
-    public event EventHandler<FileSelectionEventArgs> SelectingFiles;
-
-    protected virtual void OnSelectingFiles(FileSelectionEventArgs e)
-    {
-        SelectingFiles?.Invoke(this, e);
-    }
-
-    private static async Task<IEnumerable<FileResult>> InternalFileSelectionAsync(FileSelectionEventArgs e)
-    {
-        IDictionary<DevicePlatform, IEnumerable<string>> fileTypes = GetFileTypesForSelectionType(e.FileSelectionType);
-
-        FilePickerFileType customFileType = new FilePickerFileType(fileTypes);
-        IEnumerable<FileResult> pickResult = await FilePicker.PickMultipleAsync(new PickOptions
-            {
-                PickerTitle = "Please select files",
-                FileTypes = customFileType,
-            });
-
-        if (!pickResult.Any())
-        {
-            e.Cancel = true;
-        }
-
-        return pickResult;
-    }
-
-    public static IDictionary<DevicePlatform, IEnumerable<string>> GetFileTypesForSelectionType(FileSelectionType selectionType)
-    {
-        Dictionary<DevicePlatform, IEnumerable<string>> fileTypes = new Dictionary<DevicePlatform, IEnumerable<string>>();
-        IRuntimeEnvironment runtimeEnvironment = New<IRuntimeEnvironment>();
-
-        switch (selectionType)
-        {
-            case FileSelectionType.Open:
-            case FileSelectionType.Decrypt:
-                fileTypes.Add(DevicePlatform.WinUI, new[] { "." + runtimeEnvironment.AxCryptExtension });
-                fileTypes.Add(DevicePlatform.iOS, new string[] { });
-                fileTypes.Add(DevicePlatform.Android, new string[] { });
-                break;
-
-            case FileSelectionType.Encrypt:
-            case FileSelectionType.Rename:
-            case FileSelectionType.KeySharing:
-            case FileSelectionType.KeySharingEncrypt:
-            case FileSelectionType.Wipe:
-                fileTypes.Add(DevicePlatform.WinUI, new string[] { });
-                fileTypes.Add(DevicePlatform.iOS, new string[] { });
-                fileTypes.Add(DevicePlatform.Android, new string[] { });
-                break;
-
-            case FileSelectionType.ImportPublicKeys:
-            case FileSelectionType.ImportPrivateKeys:
-                fileTypes.Add(DevicePlatform.WinUI, new[] { ".txt", "." + runtimeEnvironment.AxCryptExtension });
-                fileTypes.Add(DevicePlatform.iOS, new string[] { });
-                fileTypes.Add(DevicePlatform.Android, new string[] { });
-                break;
-
-            default:
-                throw new NotImplementedException("File selection type not supported.");
-        }
-
-        return fileTypes;
-    }
-
-    private async void OnFileSelection(FileSelectionType fileSelectionType, FileSelectionEventArgs args)
-    {
-        if (!args.SelectedFiles.Any())
-        {
-            return;
-        }
-
-        IEnumerable<string> selectedFiles = args.SelectedFiles;
-
-        switch (fileSelectionType)
-        {
-            case FileSelectionType.Open:
-                await _fileOperationViewModel.OpenFiles.ExecuteAsync(selectedFiles);
-                StateHasChanged();
-                break;
-
-            case FileSelectionType.Encrypt:
-                await _fileOperationViewModel.EncryptFiles.ExecuteAsync(selectedFiles);
-                StateHasChanged();
-                break;
-
-            case FileSelectionType.Decrypt:
-                await _fileOperationViewModel.DecryptFiles.ExecuteAsync(selectedFiles);
-                StateHasChanged();
-                break;
-        }
-    }
-
-    private async void ShareKeysAsync(EventArgs e)
-    {
-        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeysWithFileSelectionAsync(SelectedRecentFiles); }, null, e);
-    }
-
-    public List<string> SelectedShareKeyFiles { get; set; }
-
-    private async Task ShareKeysWithFileSelectionAsync(IEnumerable<FileDetails> selectedRecentFiles = null)
-    {
-        List<string> filesList = selectedRecentFiles?.Select(f => f.FilePath).ToList();
-        IEnumerable<FileResult> selectedFiles = selectedRecentFiles?.Select(f => new FileResult(f.FilePath)).ToList();
-
-        if (selectedFiles == null || !selectedFiles.Any())
-        {
-            FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
-                {
-                    FileSelectionType = FileSelectionType.KeySharingEncrypt
-                };
-
-            selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
-
-            if (fileSelectionEventArgs.Cancel)
-            {
-                return;
-            }
-
-            filesList = selectedFiles.Select(e => e.FullPath).ToList();
-        }
-
-        SharingListViewModel sharingListViewModel = await SharingListViewModel.CreateForFilesAsync(filesList, New<KnownIdentities>().DefaultEncryptionIdentity);
-
-        FileShareService.SetSelectedFilesOrFolders(selectedFiles.Select(e => e.FullPath), sharingListViewModel);
-        SelectedShareKeyFiles = filesList;
-
-        ShowSharePopup = true;
-        StateHasChanged();
-    }
-
-    private async void CloseAndRemoveOpenFilesButton_Click(EventArgs e)
-    {
-        await EncryptPendingFiles();
-    }
-
-    private async Task EncryptPendingFiles()
-    {
-        if (_mainViewModel != null)
-        {
-            new ApplicationManager().WaitForBackgroundToComplete();
-            await _mainViewModel.EncryptPendingFiles.ExecuteAsync(null);
-            new ApplicationManager().WaitForBackgroundToComplete();
-        }
-    }
-
-    public ObservableCollection<FileDetails> RecentFilesList { get; set; } = new ObservableCollection<FileDetails>();
-
-    private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
-    {
-        RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
-        StateHasChanged();
-    }
-
-    public void Dispose()
-    {
-        Utility.OnIsMainMenuHiddenChanged -= StateHasChanged;
-    }
 
     public async Task ToggleSection()
     {
@@ -683,149 +360,4 @@
         }
     }
 
-    public async void RedirectToAccountWebUrl()
-    {
-        LogOnIdentity identity = New<KnownIdentities>().DefaultEncryptionIdentity;
-        string tag = string.Empty;
-        if (New<KnownIdentities>().IsLoggedOn)
-        {
-            IAccountService accountService = New<LogOnIdentity, IAccountService>(identity);
-            tag = (await accountService.AccountAsync()).Tag ?? string.Empty;
-        }
-
-        BrowseUtility.RedirectToPurchasePage(identity.UserEmail.Address, true, tag);
-    }
-
-    private async void ClearAndRemoveOpentedFiles()
-    {
-        //await New<MainHomeViewModel>().EncryptPendingFiles();
-    }
-
-    bool shareKey = false;
-    public bool ShowSharePopup { get; set; }
-    public bool UpgradePopup = false;
-    public bool UpgradeToEncrypt = false;
-    public bool UpgradeToShare = false;
-    bool showUpgradePopup = false;
-    public void CloseSharePopup()
-    {
-        ShowSharePopup = false;
-    }
-
-    private void RedirectToAccountSite()
-    {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/"));
-    }
-
-    private async void RandomRenameAsync(EventArgs e)
-    {
-        await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await FileSelectionOperation(FileSelectionType.Rename); }, null, e);
-    }
-
-    private async void SecureWipeFiles(EventArgs e)
-    {
-        await PremiumFeature_ClickAsync(LicenseCapability.SecureWipe, async (ss, ee) => { await FileSelectionOperation(FileSelectionType.WipeConfirm); }, null, e);
-    }
-
-    private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
-    {
-        if (_mainViewModel.License.Has(requiredCapability))
-        {
-            if (realHandler != null)
-            {
-                await realHandler(sender, e);
-            }
-            return;
-        }
-
-        showUpgradePopup = true;
-    }
-
-    public async Task FileSelectionOperation(FileSelectionType fileSelectionType)
-    {
-        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
-            {
-                FileSelectionType = fileSelectionType
-            };
-
-        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
-
-        if (fileSelectionEventArgs.Cancel)
-        {
-            return;
-        }
-
-        fileSelectionEventArgs.SelectedFiles = selectedFiles.Select(e => e.FullPath).ToList();
-
-        HandleFileOperation(fileSelectionType, fileSelectionEventArgs);
-    }
-
-    private async void HandleFileOperation(FileSelectionType fileSelectionType, FileSelectionEventArgs e)
-    {
-        switch (fileSelectionType)
-        {
-            case FileSelectionType.Rename:
-                HandleRandomRename(e);
-                break;
-
-            case FileSelectionType.Wipe:
-                await HandleWipeConfirm(e);
-                break;
-        }
-    }
-
-    private async void HandleRandomRename(FileSelectionEventArgs e)
-    {
-        IList<string> files = e.SelectedFiles;
-        await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(files);
-    }
-
-    private async Task HandleWipeConfirm(FileSelectionEventArgs e)
-    {
-        IList<string> selectedFiles = e.SelectedFiles;
-        foreach (string file in selectedFiles)
-        {
-            bool confirm = await Application.Current.MainPage.DisplayAlert("Confirm Wipe", "Are you sure you want to permanently wipe the selected file?", "Yes", "No");
-            if (confirm)
-            {
-                await _fileOperationViewModel.WipeFiles.ExecuteAsync(file);
-            }
-        }
-    }
-
-    private async void UpgradeTo256()
-    {
-        string folder = await FolderPicker.PickFolderAsync();
-        if (folder == null)
-        {
-            return;
-        }
-
-        IEnumerable<IDataContainer> dataContainers = new List<IDataContainer> { New<IDataContainer>(folder) };
-        await _fileOperationViewModel.AsyncEncryptionUpgrade.ExecuteAsync(dataContainers);
-    }
-
-    private bool alwaysOnline;
-
-    public bool AlwaysOffline
-    {
-        get => alwaysOnline;
-        set
-        {
-            if (alwaysOnline != value)
-            {
-                alwaysOnline = value;
-                AlwaysOfflineForFreeUser();
-            }
-        }
-    }
-
-    public string? ErrorMessage { get; set; }
-
-    public void AlwaysOfflineForFreeUser()
-    {
-        AlwaysOffline = !New<UserSettings>().OfflineMode;
-        ErrorMessage = AlwaysOffline ? "Offline mode is now enabled." : "Offline mode is now disabled.";
-        New<IPopup>().ShowAsync(PopupButtons.Ok, "Success", ErrorMessage);
-    }
 }
