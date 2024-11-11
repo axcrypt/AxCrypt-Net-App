@@ -84,7 +84,7 @@
             }
             else
             {
-                <div class="act-box" @onclick="async(e)=> viewModel.ShareKeysAsync(e)" @onmouseover='@( () => viewModel.ShowPopup("share") )' @onmouseout="viewModel.HidePopup">
+                <div class="act-box" @onclick="async(e)=> viewModel.ShareKeysAsync(e)">
                     <img class="act-img shrks-act" src="" alt="shrks-img" />
                     <span class="text-size">Share</span>
                     @if (viewModel.isHovered && viewModel.hoveredElement == "share")

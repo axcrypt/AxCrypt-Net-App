@@ -1,7 +1,9 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Secret;
 using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Password;
+using AxCrypt.App.Components.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
@@ -11,6 +13,9 @@ namespace AxCrypt.App.Components.Models.Secret
 {
     public class EditSecretViewModel : ManageSecretViewModel
     {
+        public AlertNotification? AlertNotification { get; set; }
+        public SubscriptionLevel SubscriptionLevel {  get; set; }  
+
         public EditSecretViewModel(SecretService secretService)
         {
             Secret = secretService.GetCurrentSecret();
@@ -20,7 +25,7 @@ namespace AxCrypt.App.Components.Models.Secret
 
         private bool _loading { get; set; } = false;
 
-        private Action _onStateChange;
+        private Action? _onStateChange;
 
         public void SetOnStateChange(Action onStateChange)
         {

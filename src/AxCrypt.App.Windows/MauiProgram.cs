@@ -3,6 +3,10 @@ using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Models.Secret;
 using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Windows.Components.Pages.Main;
+using AxCrypt.App.Windows.Components.Pages.Password;
+using AxCrypt.App.Windows.Components.Pages.Shared;
+using AxCrypt.App.Windows.Components.Pages.Sidemenu;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Initialize;
 using AxCrypt.App.Windows.Models;
@@ -97,13 +101,28 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<LoginModel>();
             services.AddSingleton<MainPage>();
 
+            services.AddSingleton<Home>();
+            services.AddSingleton<HomeBody>();
+            services.AddSingleton<ShareKey>();
+            services.AddSingleton<SecuredFolders>();
+            services.AddSingleton<RecentFolders>();
+            services.AddSingleton<PasswordManager>();
+            services.AddSingleton<Feedback>();
+            services.AddSingleton<About>();
+            services.AddSingleton<Notification>();
+            services.AddSingleton<Support>();
+            services.AddSingleton<SettingsDeskPopup>();
+            services.AddSingleton<NotificationPopup>();
+            services.AddSingleton<AccountDeskPopup>();
+
             services.AddSingleton<ITrayService, TrayService>();
             services.AddSingleton<INotificationService, NotificationService>();
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
 
-            services.AddSingleton<FileShareService>(); 
+            services.AddSingleton<FileShareService>();
             services.AddSingleton<AppLocalizationOptions>();
+            services.AddSingleton<AxCrypt.App.Components.Services.LoginService>();
 
             services.AddSingleton<SupportService>();
             services.AddSingleton<AxCrypt.App.Components.Services.AlertNotification>();
@@ -138,6 +157,10 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<AdvancedOptionsViewModel>();
 
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
+
+            //TypeMap.Register.Singleton<UIThread>(() => new UIThread());
+            TypeMap.Register.Singleton<IUIThread>(() => new UIThread());
+
             PlatformInitializer.Initialize();
         }
     }

@@ -13,11 +13,10 @@
 @using AxCrypt.Content;
 @using static AxCrypt.Abstractions.TypeResolve;
 @using System.Collections.Specialized
+
 @inject NewSecretViewModel newSecretViewModel
 @inject NavigationManager navigationManager;
 @inject SecretServiceUtility secretServiceUtility
-@inject SecretService currentSecret
-@inject AlertNotification alertNotification
 
 <link href="css/@SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
 <link href="css/@SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
@@ -29,7 +28,7 @@
                 Add Note
             </h3>
     </div>
-     <LoadingComponent IsLoading="@newSecretViewModel.Loading" />
+     <AxCrypt.App.Windows.Components.Pages.Shared.LoadingComponent IsLoading="@newSecretViewModel.Loading" />
      <div>
          @if(!newSecretViewModel.Loading)
         {
@@ -59,12 +58,12 @@
                 </li>
             </ul>
         </div>
-    @if (alertNotification.IsNotificationVisible)
+    @if (newSecretViewModel.AlertNotification.IsNotificationVisible)
         {
             <div class="medium-11 columns">
-                <div data-alert class="alert-box @alertNotification.NotificationClass radius">
-                    <span style="white-space: break-spaces;">@alertNotification.NotificationMessage</span>
-                    <a class="clse-img" style="float: right; color:white; cursor: pointer;" @onclick="alertNotification.HideNotification">X</a>
+                <div data-alert class="alert-box @newSecretViewModel.AlertNotification.NotificationClass radius">
+                    <span style="white-space: break-spaces;">@newSecretViewModel.AlertNotification.NotificationMessage</span>
+                    <a class="clse-img" style="float: right; color:white; cursor: pointer;" @onclick="newSecretViewModel.AlertNotification.HideNotification">X</a>
                 </div>
             </div>
         }
@@ -91,7 +90,7 @@
         newSecretViewModel.Secret.Note.SecretDesc = "";
         newSecretViewModel.Secret.Note.Note = "";
         newSecretViewModel = new NewSecretViewModel(secretServiceUtility);
-        alertNotification.OnNotificationChanged += StateHasChanged;
+        newSecretViewModel.AlertNotification.OnNotificationChanged += StateHasChanged;
     }
 
     private async Task SavePassword()
@@ -104,12 +103,12 @@
         bool success = await newSecretViewModel.SaveSecretAsync(progress);
         if (success)
         {
-            alertNotification.ShowNotification("Your new Note entry has been saved.", NotificationType.Success);
-             navigationManager.NavigateTo("/passwordManager", true);
+            newSecretViewModel.AlertNotification.ShowNotification("Your new Note entry has been saved.", NotificationType.Success);
+            navigationManager.NavigateTo("/passwordManager", true);
         }
         else
         {
-            alertNotification.ShowNotification(newSecretViewModel.ErrorMessage, NotificationType.Warning);
+            newSecretViewModel.AlertNotification.ShowNotification(newSecretViewModel.ErrorMessage, NotificationType.Warning);
         }
     }
 }

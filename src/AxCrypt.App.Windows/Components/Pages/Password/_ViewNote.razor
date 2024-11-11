@@ -10,17 +10,16 @@
 @using AxCrypt.App.Components.Services
 @using Microsoft.JSInterop
 @using static AxCrypt.Abstractions.TypeResolve;
+
 @inject NavigationManager navigationManager
-@inject SecretsClientModel secretsClientModel
 @inject SecretService secretService
 @inject ViewSecretViewModel viewSecretViewModel
 @inject ShareSecretViewModel shareSecretViewModel
-@inject AlertNotification alertNotification
 @inject IJSRuntime jsRuntime
 
-<link href="css/@SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
-<link href="css/@SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
-<link href="css/@SubscriptionLevel.ToString().ToLower()/sharesecret.min.css" rel="stylesheet" />
+<link href="css/@viewSecretViewModel.SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
+<link href="css/@viewSecretViewModel.SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
+<link href="css/@viewSecretViewModel.SubscriptionLevel.ToString().ToLower()/sharesecret.min.css" rel="stylesheet" />
 
 <div style="margin-top: 80px;" class="page-max-height">
     <div class="page-heading">
@@ -28,7 +27,7 @@
             View Note
         </h3>
     </div>
-     <LoadingComponent IsLoading="@viewSecretViewModel.Loading" />
+     <AxCrypt.App.Windows.Components.Pages.Shared.LoadingComponent IsLoading="@viewSecretViewModel.Loading" />
     <form>
         <div class="row">
         @if (!viewSecretViewModel.Loading)
@@ -42,7 +41,7 @@
                     <label for="Note_Note">@Texts.NoteLabel</label>
                     <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Note.Note" readonly="readonly"></textarea>
                 </li>
-                @if (secretService.CurrentSecret.SharedWith != null && secretService.CurrentSecret.OwnerEmail != UserEmail)
+                @if (secretService.CurrentSecret.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
                 {
 
                     <li class="list-row">
@@ -158,7 +157,6 @@
     </form>
 </div>
 @code {
-    private SubscriptionLevel SubscriptionLevel { get; set; }
     public SecretCardViewModel NoteModel { get; set; }
     private SecretViewModel CurrentSecret { get; set; }
     bool IsSharedView { get; set; }
@@ -167,7 +165,7 @@
 
     private async Task OnAfterRenderAsync()
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        viewSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         try
         {
             await jsRuntime.InvokeVoidAsync("toggleClass");
@@ -194,12 +192,13 @@
         bool deleted =await viewSecretViewModel.DeleteSecretAsync(progress);
         if (deleted)
         {
-            alertNotification.ShowNotification("Your secret has been deleted!.", NotificationType.Success);
+            viewSecretViewModel.AlertNotification.ShowNotification("Your secret has been deleted!.", NotificationType.Success);
         }
         else
         {
-            alertNotification.ShowNotification(viewSecretViewModel.ErrorMessage, NotificationType.Warning);
+            viewSecretViewModel.AlertNotification.ShowNotification(viewSecretViewModel.ErrorMessage, NotificationType.Warning);
         }
+
         navigationManager.NavigateTo("/passwordManager", true);
     }
 
@@ -208,19 +207,18 @@
         NoteModel.SecretDesc = args.Value.ToString();
     }
 
-    string UserEmail { get; set; }
-
     protected override void OnInitialized()
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        UserEmail = New<AccountStatusViewModel>().UserEmail;
+        viewSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        viewSecretViewModel.UserEmail = New<AccountStatusViewModel>().UserEmail;
         CurrentSecret = secretService.GetCurrentSecret();
         if (CurrentSecret == null)
         {
             navigationManager.NavigateTo("/error");
         }
-        IsSharedView = CurrentSecret.SharedWith != null && CurrentSecret.OwnerEmail != UserEmail;
+        IsSharedView = CurrentSecret.SharedWith != null && CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail;
     }
+
     private async Task NavigateToEdit()
     {
         SecretViewModel secret = secretService.CurrentSecret;
@@ -236,22 +234,27 @@
             }
         }
     }
+
     private async Task ApplyShare()
     {
         await shareSecretViewModel.ApplyShareSecret();
         navigationManager.NavigateTo("/passwordManager");
     }
+
     //sync popup
     bool isFirstClick = true;
     bool SyncPopup { get; set; }
+
     void openSyncPopup()
     {
         SyncPopup = true;
     }
+
     void closeSyncPopup()
     {
         SyncPopup = false;
     }
+
     void showSyncPopup()
     {
         if (isFirstClick)

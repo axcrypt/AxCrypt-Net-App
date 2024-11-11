@@ -30,16 +30,25 @@
     <img class="arw-img" src="" alt="arrow-image" />
     <img class="date-drpdwn" src="" alt="arrow-image" />
 </div>
-@if (RecentFoldersViewModel.RecentFoldersList.Any())
-{
-    <div class="rcnt-fld-sec hgt-ovflw">
-        <AxCrypt.App.Windows.Components.Pages.Shared.LoadingComponent IsLoading="RecentFoldersViewModel.Loading" />
-        @if (!RecentFoldersViewModel.Loading)
+
+<div class="rcnt-fld-sec hgt-ovflw">
+    <AxCrypt.App.Windows.Components.Pages.Shared.LoadingComponent IsLoading="RecentFoldersViewModel.Loading" />
+    @if (!RecentFoldersViewModel.Loading)
+    {
+        @if (currentDevice != DeviceIdiom.Phone && RecentFoldersViewModel.SubscriptionLevel != SubscriptionLevel.Free)
         {
-            @if (currentDevice != DeviceIdiom.Phone && RecentFoldersViewModel.SubscriptionLevel != SubscriptionLevel.Free)
-            {
-                <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="(ss) => RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label>Add or Drag Folder</label></div>
-            }
+            <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="(ss) => RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label>Add or Drag Folder</label></div>
+        }
+        @if (!RecentFoldersViewModel.RecentFoldersList.Any())
+        {
+            <div class="text-center" style="padding-top: 20px;">
+                <span class="empty-view-heading">Let`s start our journey!</span><br />
+                <span>Add and secure your first folder.</span><br />
+                <img class="empty-rcnt-fld-img" alt="default folder img" />
+            </div>
+        }
+        else
+        {
             @foreach (string folder in RecentFoldersViewModel.RecentFoldersList)
             {
                 string folderWithoutTrailingSlash = folder.TrimEnd('\\');
@@ -50,7 +59,8 @@
                 </div>
             }
         }
-        @* <div class="rcnt-fld-bx tmpr-img whte-clr fld-tem-cl" @onmouseover="ShowTempPopup" @onmouseout="HideTempPopup">
+    }
+    @* <div class="rcnt-fld-bx tmpr-img whte-clr fld-tem-cl" @onmouseover="ShowTempPopup" @onmouseout="HideTempPopup">
     <img class="" src="images/default/IcoFldrwhte.svg" /><br /><label>Netflix</label>
     @if (isTempHovered && currentDevice == DeviceIdiom.Desktop)
     {
@@ -74,16 +84,7 @@
     </div>
     }
     </div> *@
-    </div>
-}
-else
-{
-    <div class="text-center" style="padding-top: 20px;">
-        <span class="empty-view-heading">Let`s start our journey!</span><br />
-        <span>Add and secure your first folder.</span><br />
-        <img class="empty-rcnt-fld-img" alt="default folder img" />
-    </div>
-}
+</div>
 
 <div id="securedContextMenu" class="hide-model-popup home-context-menu" style="display: none;">
     <dl class="font-medium" style="margin-bottom: 5px;">
@@ -115,5 +116,15 @@ else
     {
         await RecentFoldersViewModel.InitializeAsync();
         await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await RecentFoldersViewModel.InitializeAsync();
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
     }
 }

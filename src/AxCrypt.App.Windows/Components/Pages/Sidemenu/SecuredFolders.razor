@@ -25,12 +25,8 @@
     </div>
 </div>
 @code {
-    SubscriptionLevel SubscriptionLevel { get; set; }
-
     protected override async Task OnInitializedAsync()
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-
         await base.OnInitializedAsync();
     }
 }

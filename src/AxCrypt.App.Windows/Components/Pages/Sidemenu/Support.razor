@@ -8,6 +8,7 @@
 @using static AxCrypt.Abstractions.TypeResolve;
 
 @inject SupportViewModel SupportViewModel
+@inject IJSRuntime _jsRuntime
 @inject NavigationManager _navigationManager
 
 <div class="mb-sec">
@@ -67,11 +68,11 @@ else
             </div>
             <div>
                 <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Model.Body" tabindex=1>
-                            </textarea>
+                                    </textarea>
             </div>
             <div class="btn-sec">
                 <input type="reset" class="button border btn-large font-medium btn-hide" value="@Texts.ButtonCancelText" />
-                <input type="submit" class="button success btn-large font-medium" value="@Texts.ButtonSendText" @onclick="SupportViewModel.SubmitSupportAsync" />
+                <input type="submit" class="button success btn-large font-medium" value="@Texts.ButtonSendText" @onclick="SubmitSupportAsync" />
             </div>
         </div>
     </div>
@@ -90,17 +91,38 @@ else
     <p>Loading...</p>
 }
 @code {
+    private bool IsLoading { get; set; }
+    private bool IsWideScreen { get; set; }
     private FooterActions footerActions = FooterActions.Support;
 
     protected override async Task OnInitializedAsync()
     {
-        await SupportViewModel.InitializeScreenPropertiesAsync();
+        SupportViewModel.Initialize();
         await base.OnInitializedAsync();
+    }
+
+    public async Task InitializeScreenPropertiesAsync()
+    {
+        IsLoading = true;
+        try
+        {
+            IsWideScreen = await Utility.IsWideScreenAsync(_jsRuntime);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error determining screen width: {ex.Message}");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
     }
 
     private async void SubmitSupportAsync()
     {
         await SupportViewModel.SubmitSupportAsync();
+        StateHasChanged();
+
         _navigationManager.NavigateTo("/SupportIndex", true);
     }
 }

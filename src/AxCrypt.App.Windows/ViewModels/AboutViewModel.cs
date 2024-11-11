@@ -11,16 +11,11 @@ public class AboutViewModel
     public string? Version { get; private set; }
     public string? Copyright { get; private set; }
 
-    public AboutViewModel()
-    {
-        InitializeProperties();
-    }
-
-    private void InitializeProperties()
+    public void InitializeProperties()
     {
         SubscriptionStatusAndExpiration = new Display().GetLicenseStatusAndExpiration();
         ProductName = New<AboutAssembly>().AssemblyProduct;
-        Version = New<UserSettings>().ThisVersion;
+        Version = New<AboutAssembly>().AboutVersionText;
         Copyright = New<AboutAssembly>().AssemblyCopyright;
     }
 }

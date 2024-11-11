@@ -19,7 +19,7 @@
 {
     @if (IsWideScreen)
     {
-        <AxCrypt.App.Windows.Components.Pages.RegisterPage />
+        <AxCrypt.App.Windows.Components.Pages.PopupDialog.RegisterPage />
     }
 }
 else
@@ -29,6 +29,8 @@ else
 
 @code {
     private SubscriptionLevel SubscriptionLevel { get; set; }
+    bool IsWideScreen { get; set; }
+    bool IsLoading { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -41,10 +43,6 @@ else
     {
         return DeviceInfo.Idiom;
     }
-
-    bool IsWideScreen { get; set; }
-    bool IsLoading { get; set; }
-
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

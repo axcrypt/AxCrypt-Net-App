@@ -1,4 +1,5 @@
-﻿using AxCrypt.App.Components.Helpers;
+﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Password;
 using AxCrypt.App.Components.Services;
 using AxCrypt.Common;
@@ -10,6 +11,8 @@ namespace AxCrypt.App.Components.Models.Secret
 {
     public class ViewSecretViewModel : ManageSecretViewModel
     {
+        public AlertNotification AlertNotification { get; set; }
+
         public ViewSecretViewModel(SecretService secretService)
         {
             _secretService = secretService;
@@ -36,6 +39,27 @@ namespace AxCrypt.App.Components.Models.Secret
             get { return GetProperty<bool>(nameof(ShowCopiedToClipboardIndicator)); }
             private set { SetProperty(nameof(ShowCopiedToClipboardIndicator), value); }
         }
+
+        public SubscriptionLevel SubscriptionLevel { get; set; }
+
+        public string UserEmail { get; set; }
+
+        private bool _loading { get; set; } = false;
+
+        public bool Loading
+        {
+            get => _loading;
+            set
+            {
+                if (_loading != value)
+                {
+                    _loading = value;
+                    _onStateChange?.Invoke();
+                }
+            }
+        }
+
+        private Action _onStateChange;
 
         private async Task EditSecretAsync()
         {
@@ -65,28 +89,15 @@ namespace AxCrypt.App.Components.Models.Secret
             }
         }
 
-        private bool _loading { get; set; } = false;
-
-        private Action _onStateChange;
-
         public void SetOnStateChange(Action onStateChange)
         {
             _onStateChange = onStateChange;
         }
 
-        public bool Loading
+        public string GetValue(bool isVisible, string value)
         {
-            get => _loading;
-            set
-            {
-                if (_loading != value)
-                {
-                    _loading = value;
-                    _onStateChange?.Invoke();
-                }
-            }
+            return isVisible ? value : "**click to show**";
         }
-
 
         public async Task<bool> DeleteSecretAsync(IProgress<LoadingModel> progress = null)
         {
@@ -120,8 +131,8 @@ namespace AxCrypt.App.Components.Models.Secret
                 }
                 bool deleted = await PersonalSecrets.DeleteAsync(secrets[0]);
                 return deleted;
-            },progress);
-                
+            }, progress);
+
         }
     }
 }

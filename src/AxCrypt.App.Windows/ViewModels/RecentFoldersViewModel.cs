@@ -66,10 +66,12 @@ public class RecentFoldersViewModel : ComponentBase
 
     public Action OnStateChange { get; set; }
 
-    public RecentFoldersViewModel()
+    public RecentFoldersViewModel(IFolderPicker folderPicker)
     {
         _mainViewModel = New<MainViewModel>();
         _fileOperationViewModel = New<FileOperationViewModel>();
+        _fileShareService = new FileShareService();
+        _folderPicker = folderPicker;
     }
 
     public async Task InitializeAsync()
@@ -80,7 +82,7 @@ public class RecentFoldersViewModel : ComponentBase
         Progress<LoadingModel> progress = new Progress<LoadingModel>(p =>
         {
             Loading = p.IsLoading;
-            InvokeAsync(StateHasChanged);
+            //InvokeAsync(StateHasChanged);
         });
 
         IEnumerable<string> folders = await RecentFoldersAsync(progress);
@@ -89,10 +91,23 @@ public class RecentFoldersViewModel : ComponentBase
 
     public async Task<IEnumerable<string>> RecentFoldersAsync(IProgress<LoadingModel> progress = null)
     {
+
         return await LoadingProgressHelper.ExecuteLoadingProgress(async () =>
         {
-            return await Task.FromResult<IEnumerable<string>>(_mainViewModel.WatchedFolders);
+            return await Task.FromResult<IEnumerable<string>>(SetWatchedFoldersAsync());
         }, progress);
+    }
+
+    public IEnumerable<string> SetWatchedFoldersAsync()
+    {
+        _mainViewModel.WatchedFoldersEnabled = _mainViewModel.License.Has(LicenseCapability.SecureFolders);
+        if (!_mainViewModel.WatchedFoldersEnabled)
+        {
+            _mainViewModel.WatchedFolders = new string[0];
+            return new List<string>();
+        }
+
+        return Resolve.KnownIdentities.LoggedOnWatchedFolders.Select(wf => wf.Path).ToList();
     }
 
     public void SortByDate()

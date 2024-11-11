@@ -15,7 +15,6 @@
 @inject NavigationManager navigationManager;
 @inject NewSecretViewModel newSecretViewModel
 @inject SecretServiceUtility secretServiceUtility
-@inject AlertNotification alertNotification
 
 <link href="css/@SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
 <link href="css/@SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
@@ -27,7 +26,7 @@
                 Add Card
             </h3>    
     </div>
-     <LoadingComponent IsLoading="@newSecretViewModel.Loading" />
+     <AxCrypt.App.Windows.Components.Pages.Shared.LoadingComponent IsLoading="@newSecretViewModel.Loading" />
     <div>
         @if(!newSecretViewModel.Loading)
         {
@@ -92,12 +91,12 @@
                 </li>
             </ul>
         </div>
-     @if (alertNotification.IsNotificationVisible)
+     @if (newSecretViewModel.AlertNotification.IsNotificationVisible)
         {
             <div class="medium-11 columns">
-                <div data-alert class="alert-box @alertNotification.NotificationClass radius">
-                    <span style="white-space: break-spaces;">@alertNotification.NotificationMessage</span>
-                    <a class="clse-img" style="float: right; color:white; cursor: pointer;" @onclick="alertNotification.HideNotification">X</a>
+                <div data-alert class="alert-box @newSecretViewModel.AlertNotification.NotificationClass radius">
+                    <span style="white-space: break-spaces;">@newSecretViewModel.AlertNotification.NotificationMessage</span>
+                    <a class="clse-img" style="float: right; color:white; cursor: pointer;" @onclick="newSecretViewModel.AlertNotification.HideNotification">X</a>
                 </div>
             </div>
         }
@@ -127,25 +126,24 @@
         newSecretViewModel.Secret.Card.NameOnCard = "";
         newSecretViewModel.Secret.Card.SecurityCode = "";
         newSecretViewModel = new NewSecretViewModel(secretServiceUtility);
-         alertNotification.OnNotificationChanged += StateHasChanged;
+        newSecretViewModel.AlertNotification.OnNotificationChanged += StateHasChanged;
     }
 
     private async Task SavePassword()
     {
-         Progress<LoadingModel> progress = new Progress<LoadingModel>(p =>
-       {
-           newSecretViewModel.Loading = p.IsLoading;
-           InvokeAsync(StateHasChanged);
-       });
+        Progress<LoadingModel> progress = new Progress<LoadingModel>(p =>
+      {
+          newSecretViewModel.Loading = p.IsLoading;
+          InvokeAsync(StateHasChanged);
+      });
         bool success = await newSecretViewModel.SaveSecretAsync(progress);
-         if (success)
+        if (success)
         {
-            alertNotification.ShowNotification("Your new Card entry has been saved.", NotificationType.Success);
-             navigationManager.NavigateTo("/passwordManager", true);
+            newSecretViewModel.AlertNotification.ShowNotification("Your new Card entry has been saved.", NotificationType.Success);
+            navigationManager.NavigateTo("/passwordManager", true);
+            return;
         }
-        else
-        {
-            alertNotification.ShowNotification(newSecretViewModel.ErrorMessage, NotificationType.Warning);
-        }
+
+        newSecretViewModel.AlertNotification.ShowNotification(newSecretViewModel.ErrorMessage, NotificationType.Warning);
     }
 }

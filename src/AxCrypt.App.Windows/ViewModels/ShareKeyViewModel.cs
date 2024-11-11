@@ -17,16 +17,16 @@ namespace AxCrypt.App.Windows.ViewModels;
 public class ShareKeyViewModel : ComponentBase
 {
     [Inject]
-    FileShareService FileShareService { get; set; }
+    FileShareService? FileShareService { get; set; }
 
     public SubscriptionLevel SubscriptionLevel { get; set; }
     public bool IsWideScreen { get; set; }
 
     public bool showSuggestionDropdown = false;
-    public List<string> NewUsersList { get; set; } = new List<string>();
-    public List<UserPublicKey> _sharedKeyUsersList = new List<UserPublicKey>() { };
+    public List<string>? NewUsersList { get; set; } = new List<string>();
+    public List<UserPublicKey>? _sharedKeyUsersList = new List<UserPublicKey>() { };
     public IEnumerable<ShareKeyFile>? ShareKeyFileList { get; set; }
-    public IList<ShareKeyUser> _shareKeyUserList { get; set; }
+    public IList<ShareKeyUser>? _shareKeyUserList { get; set; } = new List<ShareKeyUser>();
 
     private EmailAddress? UserEmailForContextMenuAction;
 
@@ -492,9 +492,6 @@ public class ShareKeyViewModel : ComponentBase
         RecipientEmail = suggestion;
         showSuggestionDropdown = false;
     }
-
-    [Parameter]
-    public string Files { get; set; }
 
     public List<string> SelectedFiles { get; set; } = new List<string>();
 

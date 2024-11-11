@@ -195,17 +195,18 @@
     </form>
 </div>
 @code {
+    [Parameter]
+    public IEnumerable<string> SelectedFilesOrFoldersList { get; set; } = new List<string>();
+    
+    [Parameter]
+    public bool IsFolder { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
     private async Task closeSharePopup()
     {
         await JSRuntime.InvokeVoidAsync("closeSharePopup");
-    }
-
-    protected override void OnParametersSet()
-    {
-        if (!string.IsNullOrEmpty(ShareKeyViewModel.Files))
-        {
-            ShareKeyViewModel.SelectedFiles = ShareKeyViewModel.Files.Split(',').ToList();
-        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -223,7 +224,7 @@
             }
             finally
             {
-                StateHasChanged();
+                //StateHasChanged();
             }
         }
     }

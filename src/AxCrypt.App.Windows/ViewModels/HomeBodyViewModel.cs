@@ -30,13 +30,19 @@ public class HomeBodyViewModel : ComponentBase
     private FileSystemState? _fileSystemState;
 
     [Parameter]
+    public IEnumerable<string> SelectedFilesOrFoldersList { get; set; } = new List<string>();
+    
+    [Parameter]
+    public bool IsFolder { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    [Parameter]
     public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
 
     [Inject]
     private IFolderPicker FolderPicker { get; set; }
-
-    [Inject]
-    private FileShareService FileShareService { get; set; }
 
     public event EventHandler<FileSelectionEventArgs> SelectingFiles;
 
@@ -98,7 +104,7 @@ public class HomeBodyViewModel : ComponentBase
         _fileSystemState = Resolve.FileSystemState;
         Utility.OnIsMainMenuHiddenChanged += StateHasChanged;
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); StateHasChanged(); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); /*StateHasChanged();*/ });
 
         SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
     }
@@ -346,6 +352,7 @@ public class HomeBodyViewModel : ComponentBase
         }
 
         SharingListViewModel sharingListViewModel = await SharingListViewModel.CreateForFilesAsync(filesList, New<KnownIdentities>().DefaultEncryptionIdentity);
+        FileShareService FileShareService = new FileShareService();
         FileShareService.SetSelectedFilesOrFolders(selectedFiles.Select(e => e.FullPath), sharingListViewModel);
         SelectedShareKeyFiles = filesList;
 
@@ -359,7 +366,7 @@ public class HomeBodyViewModel : ComponentBase
         await sharingListViewModel.ShareFiles.ExecuteAsync(null);
 
         ShowSharePopup = true;
-        StateHasChanged();
+        //StateHasChanged();
     }
 
     public async void CloseAndRemoveOpenFilesButton_Click(EventArgs e)
@@ -382,7 +389,7 @@ public class HomeBodyViewModel : ComponentBase
     private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
     {
         RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
-        StateHasChanged();
+        //StateHasChanged();
     }
 
     public void Dispose()

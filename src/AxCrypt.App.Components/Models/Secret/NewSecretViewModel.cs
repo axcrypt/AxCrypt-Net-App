@@ -15,9 +15,34 @@ namespace AxCrypt.App.Components.Models.Secret
 {
     public class NewSecretViewModel : ManageSecretViewModel
     {
+        public AlertNotification AlertNotification { get; set; }
+
+        private bool _loading { get; set; } = false;
+
+        public bool Loading
+        {
+            get => _loading;
+            set
+            {
+                if (_loading != value)
+                {
+                    _loading = value;
+                    _onStateChange?.Invoke();
+                }
+            }
+        }
+
+        public string ErrorMessage { get; set; }
+        public bool CanShowErrorMessage { get; set; }
+        public bool ShowSuggestPasswordLoadingIcon { get; set; }
+
+        [Parameter]
+        public SecretViewModel Secret { get; set; }
+
         public NewSecretViewModel(SecretServiceUtility secretServiceUtility)
         {
             Secret = Initialize(secretServiceUtility.CurrentSecretType);
+            AlertNotification = new AlertNotification();
         }
 
         public async Task<bool> SaveSecretAsync(IProgress<LoadingModel> progress = null)
@@ -67,34 +92,12 @@ namespace AxCrypt.App.Components.Models.Secret
             return new SecretViewModel(type, SecretPasswordViewModel.Empty, SecretCardViewModel.Empty, SecretNoteViewModel.Empty, new List<SecretSharedUserViewModel>());
         }
 
-        [Parameter]
-        public SecretViewModel Secret { get; set; }
-
-        private bool _loading { get; set; } = false;
-
         private Action _onStateChange;
 
         public void SetOnStateChange(Action onStateChange)
         {
             _onStateChange = onStateChange;
         }
-
-        public bool Loading
-        {
-            get => _loading;
-            set
-            {
-                if (_loading != value)
-                {
-                    _loading = value;
-                    _onStateChange?.Invoke();
-                }
-            }
-        }
-
-        public string ErrorMessage { get; set; }
-        public bool CanShowErrorMessage { get; set; }
-        public bool ShowSuggestPasswordLoadingIcon { get; set; }
 
         public async Task SuggestPasswordAsync()
         {

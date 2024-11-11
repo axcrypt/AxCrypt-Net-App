@@ -16,6 +16,7 @@ using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
+using Microsoft.AspNetCore.Components;
 using System.Collections.ObjectModel;
 using System.Text;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -26,13 +27,11 @@ namespace AxCrypt.App.Components.Models.Secret
     {
         private readonly int MaxRecentSecretsToShow = 10;
         private LogOnIdentity _identity;
-
         private readonly string _sortOptionAll = Texts.SecretsAllItems;
         private readonly string _sortOptionRecent = Texts.SecretsRecentlyAdded;
         private readonly string _sortOptionShared = Texts.PromptSharedWith;
 
         private bool _activateSharedListFilter = false;
-
         public SecretsListViewModel()
         {
             _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
@@ -59,8 +58,10 @@ namespace AxCrypt.App.Components.Models.Secret
             SelectedSecretTypeFilter = 0;
             ShowSecretTypeCreateMenu = false;
             ShowSecretFilterMenu = false;
-            _alertNotification = new AlertNotification();
+            AlertNotification = new AlertNotification();
         }
+
+        public AlertNotification AlertNotification { get; set; }
 
         public ObservableCollection<SecretViewModel> Secrets
         {
@@ -216,6 +217,53 @@ namespace AxCrypt.App.Components.Models.Secret
         }
 
         private AlertNotification _alertNotification;
+
+        public SecretsSortOrder SelectedSortOrder { get; set; } = SecretsSortOrder.None;
+        public SecretFilterOption Filter { get; set; } = SecretFilterOption.All;
+        public SecretsFilter SelectedFilter { get; set; } = SecretsFilter.All;
+
+        public async Task OnInputChanged(ChangeEventArgs e)
+        {
+            Keyword = e.Value.ToString();
+            await ApplyFilterOnSecrets();
+        }
+
+        public async Task SortSecrets(ChangeEventArgs e)
+        {
+            if (Enum.TryParse<SecretsSortOrder>(e.Value.ToString(), out var sortOrder))
+            {
+                SelectedSortOrder = sortOrder;
+            }
+
+            await SortSecretsBy(SelectedSortOrder);
+        }
+
+        public async Task ExportFile(string fileType)
+        {
+            bool saveResult = false;
+
+            switch (fileType)
+            {
+                case "TXT":
+                    saveResult = await ExportTextAsync();
+                    break;
+                case "XML":
+                    saveResult = await ExportXml();
+                    break;
+                default:
+                    AlertNotification.ShowNotification("Unsupported file type.", NotificationType.Warning);
+                    return;
+            }
+
+            if (saveResult)
+            {
+                AlertNotification.ShowNotification("Your file has been successfully downloaded!", NotificationType.Success);
+            }
+            else
+            {
+                AlertNotification.ShowNotification("Failed to download the file. Please check your internet connection and try again.", NotificationType.Warning);
+            }
+        }
 
         /// <summary>
         /// Get all secrets that match a specified keyword and belong to the current user
