@@ -43,11 +43,8 @@
 </div>
 
 @code {
-    private SubscriptionLevel SubscriptionLevel { get; set; }
-
     protected override void OnInitialized()
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         model = service.NotificationModel;
     }
 }

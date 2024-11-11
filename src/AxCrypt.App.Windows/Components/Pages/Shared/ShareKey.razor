@@ -4,8 +4,8 @@
 @using AxCrypt.Api
 @using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Models
+@using AxCrypt.App.Components.Services
 @using AxCrypt.App.Windows.Helpers
-@using AxCrypt.App.Windows.Services
 @using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Common
 @using AxCrypt.Content
@@ -20,6 +20,7 @@
 
 @inject ShareKeyViewModel ShareKeyViewModel
 @inject IJSRuntime JSRuntime
+@inject FileShareService FileShareService
 
 @{
     DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
@@ -101,10 +102,10 @@
                     </div>
                 }
             </div>
-            @if (ShareKeyViewModel.SelectedFilesOrFoldersList.Any())
+            @if (ShareKeyViewModel.SelectedFilesOrFolders.Any())
             {
                 <div class="center-column fle-exton-img" style="padding: 10px 0px;">
-                    @foreach (string file in ShareKeyViewModel.SelectedFilesOrFoldersList)
+                    @foreach (string file in ShareKeyViewModel.SelectedFilesOrFolders)
                     {
                         <div class="selected-file">
                             <img class="vdo-img" />
@@ -197,7 +198,7 @@
 @code {
     [Parameter]
     public IEnumerable<string> SelectedFilesOrFoldersList { get; set; } = new List<string>();
-    
+
     [Parameter]
     public bool IsFolder { get; set; }
 
@@ -207,6 +208,13 @@
     private async Task closeSharePopup()
     {
         await JSRuntime.InvokeVoidAsync("closeSharePopup");
+    }
+
+    protected override void OnInitialized()
+    {
+        ShareKeyViewModel.InitializeViewModel();
+
+        base.OnInitialized();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

@@ -101,10 +101,8 @@
     }
 </div>
 @code {
-
     protected override async Task OnInitializedAsync()
     {
-        ViewModel.TopMenuModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         ViewModel.TopMenuModel.UserEmail = New<AccountStatusViewModel>().UserEmail;
 
         string currentCulture = Resolve.UserSettings.CultureName;

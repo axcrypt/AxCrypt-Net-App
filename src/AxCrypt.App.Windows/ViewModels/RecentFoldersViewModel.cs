@@ -23,7 +23,7 @@ public class RecentFoldersViewModel : ComponentBase
     private readonly IFolderPicker _folderPicker;
 
     [Inject]
-    private FileShareService _fileShareService { get; set; }
+    private ShareKeyViewModel _shareKeyViewModel { get; set; } 
 
     private bool _loading;
     private bool _isDescending;
@@ -66,12 +66,12 @@ public class RecentFoldersViewModel : ComponentBase
 
     public Action OnStateChange { get; set; }
 
-    public RecentFoldersViewModel(IFolderPicker folderPicker)
+    public RecentFoldersViewModel(IFolderPicker folderPicker, ShareKeyViewModel shareKeyViewModel)
     {
         _mainViewModel = New<MainViewModel>();
         _fileOperationViewModel = New<FileOperationViewModel>();
-        _fileShareService = new FileShareService();
         _folderPicker = folderPicker;
+        _shareKeyViewModel = shareKeyViewModel;
     }
 
     public async Task InitializeAsync()
@@ -221,10 +221,10 @@ public class RecentFoldersViewModel : ComponentBase
         if (!folderPaths.Any()) return;
 
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFoldersAsync(folderPaths, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        _fileShareService.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel);
+        _shareKeyViewModel.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel);
         showPopup = true;
-
-        await viewModel.ShareFolders.ExecuteAsync(null);
+        //StateHasChanged();
+        //await viewModel.ShareFolders.ExecuteAsync(null);
     }
 
     public async void DecryptPermanently()

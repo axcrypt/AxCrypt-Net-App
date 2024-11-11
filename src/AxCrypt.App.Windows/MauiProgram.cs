@@ -120,7 +120,8 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
 
-            services.AddSingleton<FileShareService>();
+            //services.AddSingleton<FileShareService>();
+            services.AddSingleton<AxCrypt.App.Components.Services.FileShareService>();
             services.AddSingleton<AppLocalizationOptions>();
             services.AddSingleton<AxCrypt.App.Components.Services.LoginService>();
 
