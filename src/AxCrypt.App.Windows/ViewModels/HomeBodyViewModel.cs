@@ -29,11 +29,14 @@ public class HomeBodyViewModel : ComponentBase
 
     private FileSystemState? _fileSystemState;
 
+    [Inject]
+    private ShareKeyViewModel _shareKeyViewModel { get; set; }
+
     [Parameter]
     public IEnumerable<string> SelectedFilesOrFoldersList { get; set; } = new List<string>();
     
     [Parameter]
-    public bool IsFolder { get; set; }
+    public bool? IsFolder { get; set; }
 
     [Parameter]
     public EventCallback OnClose { get; set; }
@@ -42,9 +45,9 @@ public class HomeBodyViewModel : ComponentBase
     public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
 
     [Inject]
-    private IFolderPicker FolderPicker { get; set; }
+    private IFolderPicker? FolderPicker { get; set; }
 
-    public event EventHandler<FileSelectionEventArgs> SelectingFiles;
+    public event EventHandler<FileSelectionEventArgs>? SelectingFiles;
 
     public bool isFilesPending = false;
 
@@ -83,10 +86,10 @@ public class HomeBodyViewModel : ComponentBase
 
     public bool IsPopupVisible { get; set; }
     public bool ActiveSubScription { get; set; }
-    public string UserEmail { get; set; }
+    public string? UserEmail { get; set; }
     public int DaysLeft { get; set; }
     public bool SubscribedFromAppStore { get; set; }
-    public string SubscriptionStatusText { get; set; }
+    public string? SubscriptionStatusText { get; set; }
     public bool ShowConfirmDeleteAccountPopup { get; set; }
     public bool shareKey = false;
     public bool ShowSharePopup { get; set; }
@@ -95,6 +98,11 @@ public class HomeBodyViewModel : ComponentBase
     public bool UpgradeToShare = false;
     public bool showUpgradePopup = false;
     public string? ErrorMessage { get; set; }
+
+    public HomeBodyViewModel(ShareKeyViewModel shareKeyViewModel)
+    {
+        _shareKeyViewModel = shareKeyViewModel;
+    }
 
     public void Initialized()
     {
@@ -317,7 +325,7 @@ public class HomeBodyViewModel : ComponentBase
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeysWithFileSelectionAsync(SelectedRecentFiles); }, null, e);
     }
 
-    public List<string> SelectedShareKeyFiles { get; set; }
+    public List<string>? SelectedShareKeyFiles { get; set; }
 
     private async Task ShareKeysWithFileSelectionAsync(IEnumerable<FileDetails> selectedRecentFiles = null)
     {
@@ -352,8 +360,7 @@ public class HomeBodyViewModel : ComponentBase
         }
 
         SharingListViewModel sharingListViewModel = await SharingListViewModel.CreateForFilesAsync(filesList, New<KnownIdentities>().DefaultEncryptionIdentity);
-        FileShareService FileShareService = new FileShareService();
-        FileShareService.SetSelectedFilesOrFolders(selectedFiles.Select(e => e.FullPath), sharingListViewModel);
+        _shareKeyViewModel.SetSelectedFilesOrFolders(selectedFiles.Select(e => e.FullPath), sharingListViewModel);
         SelectedShareKeyFiles = filesList;
 
         if (encryptableFileNames != null && encryptableFileNames.Any())
