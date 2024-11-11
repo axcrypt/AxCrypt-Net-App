@@ -1,0 +1,33 @@
+﻿@using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.Content
+@using AxCrypt.Core.Runtime
+@using AxCrypt.Core.UI
+
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject AdvancedOptionsViewModel viewModel
+
+<div class="modal">
+    <div class="modal-content">
+        <div>
+            <label>Application Config Path</label>
+            <input type="path" @bind="viewModel.AppConfigPath" />
+        </div>
+
+        <div>
+            <label>Temp File Path</label>
+            <input type="path" @bind="viewModel._tempConfigPath" @oninput="(e)=> viewModel.BrowseButton_click(e)" />
+        </div>
+        <div class="button-container">
+            <button @onclick="(e)=> viewModel.ButtonOk_Click(e)">OK</button>
+            <button @onclick="(e)=> viewModel.CancelButton_Click(e)">Cancel</button>
+        </div>
+    </div>
+</div>
+@code {
+    protected override void OnInitialized()
+    {
+        viewModel.Initialize();
+        base.OnInitialized();
+    }
+}

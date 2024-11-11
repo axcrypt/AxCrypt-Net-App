@@ -18,6 +18,7 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.App.Windows.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Windows.Components.Pages;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -201,7 +202,6 @@ public class SettingsViewModel
         await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await FileSelectionOperation(FileSelectionType.Rename); }, null, args);
     }
 
-
     public async Task FileSelectionOperation(FileSelectionType fileSelectionType)
     {
         FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
@@ -239,6 +239,18 @@ public class SettingsViewModel
     public async void InviteUser(EventArgs e)
     {
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { InvitePopup = !InvitePopup; }, null, e);
+    }
+
+    public bool ShowAdvancedOptions { get; set; }
+
+    public async Task ToggleAdvancedOption()
+    {
+        if (!_mainViewModel.LoggedOn)
+        {
+            return;
+        }
+
+        ShowAdvancedOptions = !ShowAdvancedOptions;
     }
 
     #region Debug Section

@@ -105,6 +105,12 @@
             <span>Restore to original</span>
         </NavLink>
     </div>
+    <div class="key-section">
+        <NavLink class="nav-link" @onclick="(e)=> settingsViewModel.ToggleAdvancedOption()">
+            <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
+            <span>Advanced Option</span>
+        </NavLink>
+    </div>
     <NavLink class="nav-link center-column">
         <div>
             <img class="" src="images/default/IcoOffln1.svg" alt="go-back-img" />
@@ -358,6 +364,11 @@
             </div>
         </div>
     </div>
+}
+
+@if (settingsViewModel.ShowAdvancedOptions)
+{
+    <AdvancedOptionsDialog />
 }
 
 <style>

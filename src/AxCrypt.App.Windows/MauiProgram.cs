@@ -128,13 +128,14 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<ShareKeyViewModel>();
             services.AddSingleton<RecentFoldersViewModel>();
             services.AddSingleton<FeedbackViewModel>();
-            services.AddScoped<AboutViewModel>();
-            services.AddScoped<SupportViewModel>();
-            services.AddScoped<SuggestionViewModel>();
-            services.AddScoped<InviteViewModel>();
-            services.AddScoped<TopMenuViewModel>();
-            services.AddScoped<AccountViewModel>();
-            services.AddScoped<SettingsViewModel>();
+            services.AddSingleton<AboutViewModel>();
+            services.AddSingleton<SupportViewModel>();
+            services.AddSingleton<SuggestionViewModel>();
+            services.AddSingleton<InviteViewModel>();
+            services.AddSingleton<TopMenuViewModel>();
+            services.AddSingleton<AccountViewModel>();
+            services.AddSingleton<SettingsViewModel>();
+            services.AddSingleton<AdvancedOptionsViewModel>();
 
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
             PlatformInitializer.Initialize();
