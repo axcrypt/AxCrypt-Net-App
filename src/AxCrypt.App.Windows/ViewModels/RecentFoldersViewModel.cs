@@ -13,6 +13,7 @@ using AxCrypt.Abstractions;
 using AxCrypt.App.Windows.Helpers;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -20,10 +21,9 @@ public class RecentFoldersViewModel : ComponentBase
 {
     private readonly MainViewModel _mainViewModel;
     private readonly FileOperationViewModel _fileOperationViewModel;
-    private readonly IFolderPicker _folderPicker;
 
     [Inject]
-    private ShareKeyViewModel _shareKeyViewModel { get; set; } 
+    private ShareKeyViewModel _shareKeyViewModel { get; set; }
 
     private bool _loading;
     private bool _isDescending;
@@ -66,12 +66,11 @@ public class RecentFoldersViewModel : ComponentBase
 
     public Action OnStateChange { get; set; }
 
-    public RecentFoldersViewModel(IFolderPicker folderPicker, ShareKeyViewModel shareKeyViewModel)
+    public RecentFoldersViewModel()
     {
         _mainViewModel = New<MainViewModel>();
         _fileOperationViewModel = New<FileOperationViewModel>();
-        _folderPicker = folderPicker;
-        _shareKeyViewModel = shareKeyViewModel;
+        _shareKeyViewModel = new ShareKeyViewModel();
     }
 
     public async Task InitializeAsync()
@@ -205,7 +204,8 @@ public class RecentFoldersViewModel : ComponentBase
 
     private async void WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
     {
-        string folder = await _folderPicker.PickFolderAsync();
+        IFolderPicker folderPicker = new FolderPickerWindows(); 
+        string folder = await folderPicker.PickFolderAsync();
         if (string.IsNullOrEmpty(folder)) return;
 
         await _mainViewModel.AddWatchedFolders.ExecuteAsync(new string[] { folder });
@@ -223,7 +223,7 @@ public class RecentFoldersViewModel : ComponentBase
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFoldersAsync(folderPaths, Resolve.KnownIdentities.DefaultEncryptionIdentity);
         _shareKeyViewModel.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel, true);
         showPopup = true;
-        //StateHasChanged();
+        StateHasChanged();
         //await viewModel.ShareFolders.ExecuteAsync(null);
     }
 

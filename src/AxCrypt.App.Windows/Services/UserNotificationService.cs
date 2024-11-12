@@ -1,4 +1,5 @@
 ﻿using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Services;
 using AxCrypt.App.Windows.Helpers;
 using AxCrypt.App.Windows.Models;
 using AxCrypt.Core.UI;
@@ -18,7 +19,7 @@ public class UserNotificationService
 
     public async Task LoadNotificationListAsync(IProgress<LoadingModel> progress = null)
     {
-        await Services.LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
+        await LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
         {
             IEnumerable<NotificationItemViewModel> notificationItems = await LoadNotificationsAsync();
             NotificationModel.Notifications = new ObservableCollection<NotificationItemViewModel>(notificationItems);
