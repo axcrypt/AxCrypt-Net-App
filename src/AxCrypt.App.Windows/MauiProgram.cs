@@ -15,6 +15,7 @@ using AxCrypt.App.Windows.Models;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.App.Windows.ViewModels.Feedback;
+using AxCrypt.Core;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
@@ -26,7 +27,7 @@ namespace AxCrypt.App.Windows
 {
     public static class MauiProgram
     {
-        public static MauiApp CreateMauiApp()
+        public static MauiApp CreateMauiApp(CommandLine commandLine)
         {
             var builder = MauiApp.CreateBuilder();
             builder
@@ -37,9 +38,9 @@ namespace AxCrypt.App.Windows
                 });
 
             IServiceCollection services = builder.Services;
-            services.AddMauiBlazorWebView();
-
             RegisterSingletons(services);
+
+            services.AddMauiBlazorWebView();
 
             builder.ConfigureLifecycleEvents(lifecycle =>
             {
@@ -141,6 +142,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SecretServiceUtility>();
             services.AddSingleton<AxCrypt.App.Components.Services.UserNotificationService>();
             services.AddSingleton<HomeViewModel>();
+
             services.AddSingleton<HomeBodyViewModel>();
             services.AddSingleton<ShareKeyViewModel>();
             services.AddSingleton<RecentFoldersViewModel>();
