@@ -2,6 +2,7 @@
 
 @using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Helpers
+@using AxCrypt.App.Components.Services.Interface
 @using AxCrypt.Content
 @using AxCrypt.Core.Secrets
 @using AxCrypt.Core.UI
@@ -12,6 +13,7 @@
 @using Microsoft.JSInterop
 @using static AxCrypt.Abstractions.TypeResolve;
 
+@inject IStatusAlertService StatusAlertService;
 @inject NavigationManager navigationManager
 @inject SecretService secretService
 @inject ViewSecretViewModel viewSecretViewModel
@@ -83,7 +85,7 @@
                             @if (!IsSharedView)
                             {
                                 <div>
-                                    <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="async () => await NavigateToEdit()" />
+                                    <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" />
                                 </div>
                             }
                         </div>
@@ -175,39 +177,31 @@
 </div>
 
 @code {
-    public SecretCardViewModel CardModel { get; set; }
-    private SecretViewModel CurrentSecret { get; set; }
+    public SecretCardViewModel? CardModel { get; set; }
+    private SecretViewModel? CurrentSecret { get; set; }
     bool IsSharedView { get; set; }
     bool isAxCryptUser = true;
+
+    protected override void OnInitialized()
+    {
+        CurrentSecret = secretService.GetCurrentSecret();
+        if (CurrentSecret == null)
+        {
+            navigationManager.NavigateTo("/error");
+        }
+
+        IsSharedView = CurrentSecret?.SharedWith != null && CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail;
+    }
 
     private async Task OnAfterRenderAsync()
     {
         viewSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         viewSecretViewModel.UserEmail = New<AccountStatusViewModel>().UserEmail;
 
-        try
-        {
-            await JSRuntime.InvokeVoidAsync("toggleClass");
-        }
-
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
+        await JSRuntime.InvokeVoidAsync("toggleClass");
     }
 
-    protected override void OnInitialized()
-    {
-        //SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        CurrentSecret = secretService.GetCurrentSecret();
-        if (CurrentSecret == null)
-        {
-            navigationManager.NavigateTo("/error");
-        }
-        IsSharedView = CurrentSecret.SharedWith != null && CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail;
-    }
-
-    private async Task NavigateToEdit()
+    private void NavigateToEdit()
     {
         SecretViewModel secret = secretService.CurrentSecret;
         if (secret != null)
@@ -231,21 +225,23 @@
         {
             return;
         }
+
         bool deleted = await viewSecretViewModel.DeleteSecretAsync();
         if (deleted)
         {
-            viewSecretViewModel.AlertNotification.ShowNotification("Your secret has been deleted!.", NotificationType.Success);
+            StatusAlertService.Success("Your secret has been deleted!.");
         }
         else
         {
-            viewSecretViewModel.AlertNotification.ShowNotification(viewSecretViewModel.ErrorMessage, NotificationType.Warning);
+            StatusAlertService.Error(viewSecretViewModel.ErrorMessage);
         }
+
         navigationManager.NavigateTo("/passwordManager", true);
     }
 
     private async Task HandleOnChange(ChangeEventArgs args)
     {
-        CardModel.SecretDesc = args.Value.ToString();
+        CardModel.SecretDesc = args?.Value?.ToString();
     }
 
     private async Task ApplyShare()
@@ -296,7 +292,6 @@
         await JSRuntime.InvokeVoidAsync("copyToClipboard", value);
     }
 
-    //sync popup
     bool isFirstClick = true;
     bool SyncPopup { get; set; }
 
@@ -318,5 +313,4 @@
             isFirstClick = false;
         }
     }
-
 }

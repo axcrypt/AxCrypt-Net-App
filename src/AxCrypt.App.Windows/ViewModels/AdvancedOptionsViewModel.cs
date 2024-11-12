@@ -4,17 +4,23 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using AxCrypt.App.Components.Services.Interface;
+using Microsoft.AspNetCore.Components;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class AdvancedOptionsViewModel
+public class AdvancedOptionsViewModel : ComponentBase
 {
     public string? _tempConfigPath { get; set; }
     public string? AppConfigPath { get; set; }
 
     public IFolderPicker? FolderPicker { get; set; }
+
+    public AdvancedOptionsViewModel(IFolderPicker folderPicker)
+    {
+        FolderPicker = folderPicker;
+    }
 
     public void Initialize()
     {
@@ -28,6 +34,7 @@ public class AdvancedOptionsViewModel
         if (selectedPath != null)
         {
             _tempConfigPath = selectedPath;
+            StateHasChanged();
         }
     }
 

@@ -2,6 +2,7 @@
 
 @using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Helpers
+@using AxCrypt.App.Components.Services.Interface
 @using AxCrypt.Content
 @using AxCrypt.Cryptor.Model
 @using AxCrypt.App.Components.Models
@@ -10,6 +11,7 @@
 @using Microsoft.JSInterop
 @using static AxCrypt.Abstractions.TypeResolve;
 
+@inject IStatusAlertService StatusAlertService;
 @inject NavigationManager navigationManager
 @inject SecretService secretService
 @inject EditSecretViewModel editSecretViewModel
@@ -53,19 +55,10 @@
         </div>
         }
     </EditForm>
-    @if (editSecretViewModel.AlertNotification.IsNotificationVisible)
-        {
-            <div class="medium-11 columns">
-                <div data-alert class="alert-box @editSecretViewModel.AlertNotification.NotificationClass radius">
-                    <span style="white-space: break-spaces;">@editSecretViewModel.AlertNotification.NotificationMessage</span>
-                    <a class="clse-img" style="float: right; color:white; cursor: pointer;" @onclick="editSecretViewModel.AlertNotification.HideNotification">X</a>
-                </div>
-            </div>
-        }
 </div>
 @code {
-    public SecretCardViewModel NoteModel { get; set; }
-    private SecretViewModel CurrentSecret { get; set; }
+    public SecretCardViewModel? NoteModel { get; set; }
+    private SecretViewModel? CurrentSecret { get; set; }
     bool isAxCryptUser = true;
 
     protected override void OnInitialized()
@@ -78,6 +71,11 @@
         }
     }
 
+    private async Task OnAfterRenderAsync()
+    {
+        await jsRuntime.InvokeVoidAsync("toggleClass");
+    }
+
     private async Task SavePassword()
     {
         Progress<LoadingModel> progress = new Progress<LoadingModel>(p =>
@@ -85,29 +83,19 @@
              editSecretViewModel.Loading = p.IsLoading;
              InvokeAsync(StateHasChanged);
          });
+
         editSecretViewModel.Secret = secretService.CurrentSecret;
         bool saveResult = await editSecretViewModel.SaveSecretAsync(progress);
         if (saveResult)
         {
-            editSecretViewModel.AlertNotification.ShowNotification("Your new password entry has been Updated!.", NotificationType.Success);
+            StatusAlertService.Success("Your new password entry has been Updated!.");
         }
         else
         {
-            editSecretViewModel.AlertNotification.ShowNotification(editSecretViewModel.ErrorMessage, NotificationType.Warning);
+            StatusAlertService.Error(editSecretViewModel.ErrorMessage);
         }
-        navigationManager.NavigateTo("/passwordManager",true);
-    }
 
-    private async Task OnAfterRenderAsync()
-    {
-        try
-        {
-            await jsRuntime.InvokeVoidAsync("toggleClass");
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
+        navigationManager.NavigateTo("/passwordManager",true);
     }
 
     bool contextMenu = false;
@@ -117,7 +105,6 @@
         contextMenu = !contextMenu;
     }
   
-    //sync popup
     bool isFirstClick = true;
     bool SyncPopup { get; set; }
 

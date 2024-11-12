@@ -1,14 +1,8 @@
-﻿using AxCrypt.Api.Model;
-using AxCrypt.App.Components.Data;
-using AxCrypt.App.Components.Models;
-using AxCrypt.App.Components.Models.Notification;
-using AxCrypt.App.Components.Services;
+﻿using AxCrypt.App.Components.Services;
 using AxCrypt.App.Windows.Models;
 using AxCrypt.Common;
 using AxCrypt.Core;
 using AxCrypt.Core.UI.ViewModel;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System.Diagnostics;
 using System.Globalization;
 

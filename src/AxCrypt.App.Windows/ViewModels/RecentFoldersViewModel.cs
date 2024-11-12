@@ -221,7 +221,7 @@ public class RecentFoldersViewModel : ComponentBase
         if (!folderPaths.Any()) return;
 
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFoldersAsync(folderPaths, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        _shareKeyViewModel.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel);
+        _shareKeyViewModel.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel, true);
         showPopup = true;
         //StateHasChanged();
         //await viewModel.ShareFolders.ExecuteAsync(null);

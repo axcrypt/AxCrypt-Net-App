@@ -11,8 +11,6 @@ namespace AxCrypt.App.Components.Models.Secret
 {
     public class ViewSecretViewModel : ManageSecretViewModel
     {
-        public AlertNotification AlertNotification { get; set; }
-
         public ViewSecretViewModel(SecretService secretService)
         {
             _secretService = secretService;

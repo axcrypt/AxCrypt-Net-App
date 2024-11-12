@@ -22,17 +22,20 @@ namespace AxCrypt.App.Windows.ViewModels;
 public class AccountViewModel
 {
 
-    private FileOperationViewModel _fileOperationViewModel;
-    private MainViewModel _mainViewModel;
+    private FileOperationViewModel? _fileOperationViewModel;
+    private MainViewModel? _mainViewModel;
+    private IExportKeyManagementFile? ExportKeyFile;
+    private string DefaultExt = ".txt";
+
+    [Parameter]
+    public EventCallback ClosePopup { get; set; }
 
     public AccountModel Account { get; set; }
 
-    private IExportKeyManagementFile? ExportKeyFile;
     public bool SubsDtlsPopup { get; set; }
     public bool IsDialogOpen { get; set; } = false;
-
-    private string DefaultExt = ".txt";
     public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<INow>().Utc.AddDays(Account.DaysLeft).ToString("dd MMM yyyy");
+    public bool keyMPopup { get; set; }
 
     public AccountViewModel()
     {
@@ -296,8 +299,6 @@ public class AccountViewModel
         return isDisabled ? "disabled" : string.Empty;
     }
 
-    public bool keyMPopup { get; set; }
-
     public void ToggleKMPopup()
     {
         keyMPopup = !keyMPopup;
@@ -309,9 +310,6 @@ public class AccountViewModel
         attributes["class"] = "nav-link next-arrow" + (keyMPopup ? " active" : "");
         return attributes;
     }
-
-    [Parameter]
-    public EventCallback ClosePopup { get; set; }
 
     public void OnOptionClicked()
     {

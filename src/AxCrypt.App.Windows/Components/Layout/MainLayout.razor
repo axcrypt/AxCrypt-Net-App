@@ -36,9 +36,13 @@
         </div>
         <main>
             <div>
-                <AxCrypt.App.Windows.Components.Pages.TopMenu />
+                <AxCrypt.App.Windows.Components.Pages.Main.TopMenu />
             </div>
             @Body
+
+            <div>
+                <AxCrypt.App.Components.Pages.StatusPopupComponent />
+            </div>
         </main>
     }
     else
@@ -49,7 +53,6 @@
 
 @code {
     private SubscriptionLevel SubscriptionLevel { get; set; }
-    //bool IsWideScreen { get; set; }
     bool IsLoading { get; set; }
     private string UserEmail { get; set; }
 

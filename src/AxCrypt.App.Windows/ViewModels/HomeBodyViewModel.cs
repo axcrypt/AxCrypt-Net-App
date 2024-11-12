@@ -23,18 +23,27 @@ namespace AxCrypt.App.Windows.ViewModels;
 
 public class HomeBodyViewModel : ComponentBase
 {
-    private FileOperationViewModel? _fileOperationViewModel;
+    private FileOperationViewModel _fileOperationViewModel;
     private MainViewModel? _mainViewModel;
-    public KnownFoldersViewModel? _knownFoldersViewModel { get; set; }
-
     private FileSystemState? _fileSystemState;
 
+    private bool UpgradePopup = false;
+    private bool UpgradeToEncrypt = false;
+    private bool UpgradeToShare = false;
+    private bool showUpgradePopup = false;
+    private bool shareKey = false;
+    private bool isHovered = false;
+    private string hoveredElement = string.Empty;
+
     [Inject]
-    private ShareKeyViewModel _shareKeyViewModel { get; set; }
+    private ShareKeyViewModel? _shareKeyViewModel { get; set; }
+
+    [Inject]
+    private IFolderPicker? FolderPicker { get; set; }
 
     [Parameter]
     public IEnumerable<string> SelectedFilesOrFoldersList { get; set; } = new List<string>();
-    
+
     [Parameter]
     public bool? IsFolder { get; set; }
 
@@ -44,22 +53,14 @@ public class HomeBodyViewModel : ComponentBase
     [Parameter]
     public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
 
-    [Inject]
-    private IFolderPicker? FolderPicker { get; set; }
+    public KnownFoldersViewModel? _knownFoldersViewModel { get; set; }
 
     public event EventHandler<FileSelectionEventArgs>? SelectingFiles;
 
-    public bool isFilesPending = false;
+    private bool isFilesPending = false;
 
     public SubscriptionLevel SubscriptionLevel { get; set; }
-
     public bool ShowInvitePopup { get; set; }
-
-    public void OpenPopup()
-    {
-        ShowInvitePopup = !ShowInvitePopup;
-    }
-
     public int MembersCount { get; set; }
     public int TotalMembers { get; set; }
     public string? DisplayName { get; set; }
@@ -67,23 +68,7 @@ public class HomeBodyViewModel : ComponentBase
     public string? ImageSource { get; set; }
     public string? EnabledBackColor { get; set; }
     public string? DisabledBackColor { get; set; }
-    public bool isHovered = false;
-    public string hoveredElement = string.Empty;
-
-    public void ShowPopup(string element)
-    {
-        isHovered = true;
-        hoveredElement = element;
-    }
-
     public bool IsHovered { get; set; }
-
-    public void HidePopup()
-    {
-        isHovered = false;
-        hoveredElement = string.Empty;
-    }
-
     public bool IsPopupVisible { get; set; }
     public bool ActiveSubScription { get; set; }
     public string? UserEmail { get; set; }
@@ -91,19 +76,26 @@ public class HomeBodyViewModel : ComponentBase
     public bool SubscribedFromAppStore { get; set; }
     public string? SubscriptionStatusText { get; set; }
     public bool ShowConfirmDeleteAccountPopup { get; set; }
-    public bool shareKey = false;
     public bool ShowSharePopup { get; set; }
-    public bool UpgradePopup = false;
-    public bool UpgradeToEncrypt = false;
-    public bool UpgradeToShare = false;
-    public bool showUpgradePopup = false;
     public string? ErrorMessage { get; set; }
 
-    public HomeBodyViewModel(ShareKeyViewModel shareKeyViewModel)
+    public void OpenPopup()
     {
-        _shareKeyViewModel = shareKeyViewModel;
+        ShowInvitePopup = !ShowInvitePopup;
     }
 
+    public void ShowPopup(string element)
+    {
+        isHovered = true;
+        hoveredElement = element;
+    }
+
+    public void HidePopup()
+    {
+        isHovered = false;
+        hoveredElement = string.Empty;
+    }
+    
     public void Initialized()
     {
         _mainViewModel = New<MainViewModel>();
@@ -115,6 +107,7 @@ public class HomeBodyViewModel : ComponentBase
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); /*StateHasChanged();*/ });
 
         SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
+        _shareKeyViewModel = new ShareKeyViewModel();
     }
 
     public string GetIconClass(string displayName)
@@ -229,7 +222,6 @@ public class HomeBodyViewModel : ComponentBase
         }
     }
 
-
     protected virtual void OnSelectingFiles(FileSelectionEventArgs e)
     {
         SelectingFiles?.Invoke(this, e);
@@ -325,45 +317,64 @@ public class HomeBodyViewModel : ComponentBase
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeysWithFileSelectionAsync(SelectedRecentFiles); }, null, e);
     }
 
-    public List<string>? SelectedShareKeyFiles { get; set; }
+    public IEnumerable<string>? SelectedShareKeyFiles { get; set; }
 
     private async Task ShareKeysWithFileSelectionAsync(IEnumerable<FileDetails> selectedRecentFiles = null)
     {
-        List<string> filesList = selectedRecentFiles?.Select(f => f.FilePath).ToList();
+        IEnumerable<FileResult> selectedFiles = await GetFilesToProcessAsync(selectedRecentFiles);
+        IEnumerable<string> filesList = selectedFiles.Select(e => e.FullPath).ToList();
+
+        if (await HasUnencryptedFilesAsync(filesList))
+        {
+            return;
+        }
+
+        await ProcessFileSharingAsync(filesList);
+    }
+
+    private async Task<IEnumerable<FileResult>> GetFilesToProcessAsync(IEnumerable<FileDetails> selectedRecentFiles)
+    {
+        if (selectedRecentFiles != null && selectedRecentFiles.Any())
+        {
+            return selectedRecentFiles?.Select(f => new FileResult(f.FilePath)).ToList();
+        }
+
+        return await PromptUserFileSelectionAsync();
+    }
+
+    private async Task<IEnumerable<FileResult>> PromptUserFileSelectionAsync()
+    {
+        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
+        {
+            FileSelectionType = FileSelectionType.KeySharingEncrypt
+        };
+
+        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
+
+        return fileSelectionEventArgs.Cancel ? Enumerable.Empty<FileResult>() : selectedFiles;
+    }
+
+    private async Task<bool> HasUnencryptedFilesAsync(IEnumerable<string> filesList)
+    {
         IEnumerable<string> encryptableFileNames = filesList.Where(f => New<IDataStore>(f).IsEncryptable());
-        if (encryptableFileNames != null && encryptableFileNames.Any())
+
+        if (encryptableFileNames.Any())
         {
             PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "There are some unencrypted files also selected for key sharing. AxCrypt will encrypt and then key share the selected files. Would you like to continue to proceed?");
-            if (click != PopupButtons.Ok)
-            {
-                return;
-            }
+            return click != PopupButtons.Ok;
         }
 
-        IEnumerable<FileResult> selectedFiles = selectedRecentFiles?.Select(f => new FileResult(f.FilePath)).ToList();
+        return false;
+    }
 
-        if (selectedFiles == null || !selectedFiles.Any())
-        {
-            FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
-            {
-                FileSelectionType = FileSelectionType.KeySharingEncrypt
-            };
-
-            selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
-
-            if (fileSelectionEventArgs.Cancel)
-            {
-                return;
-            }
-
-            filesList = selectedFiles.Select(e => e.FullPath).ToList();
-        }
-
+    private async Task ProcessFileSharingAsync(IEnumerable<string> filesList)
+    {
         SharingListViewModel sharingListViewModel = await SharingListViewModel.CreateForFilesAsync(filesList, New<KnownIdentities>().DefaultEncryptionIdentity);
-        _shareKeyViewModel.SetSelectedFilesOrFolders(selectedFiles.Select(e => e.FullPath), sharingListViewModel);
+        _shareKeyViewModel.SetSelectedFilesOrFolders(filesList, sharingListViewModel);
         SelectedShareKeyFiles = filesList;
 
-        if (encryptableFileNames != null && encryptableFileNames.Any())
+        IEnumerable<string> encryptableFileNames = filesList.Where(f => New<IDataStore>(f).IsEncryptable());
+        if (encryptableFileNames.Any())
         {
             _fileOperationViewModel.Recipients = sharingListViewModel.SharedWith;
             await _fileOperationViewModel.EncryptFiles.ExecuteAsync(encryptableFileNames);
@@ -373,7 +384,6 @@ public class HomeBodyViewModel : ComponentBase
         await sharingListViewModel.ShareFiles.ExecuteAsync(null);
 
         ShowSharePopup = true;
-        //StateHasChanged();
     }
 
     public async void CloseAndRemoveOpenFilesButton_Click(EventArgs e)
@@ -524,7 +534,6 @@ public class HomeBodyViewModel : ComponentBase
             }
         }
     }
-
 
     public void AlwaysOfflineForFreeUser()
     {

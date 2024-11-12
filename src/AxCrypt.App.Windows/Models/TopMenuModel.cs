@@ -1,9 +1,18 @@
 ﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Components.Models;
+
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.Models;
 
 public class TopMenuModel
 {
+    public TopMenuModel()
+    {
+        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        UserEmail = New<AccountStatusViewModel>().UserEmail;
+    }
+
     public SubscriptionLevel SubscriptionLevel { get; set; }
 
     public bool AccountPopup { get; set; }

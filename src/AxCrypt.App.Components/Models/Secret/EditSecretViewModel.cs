@@ -13,7 +13,6 @@ namespace AxCrypt.App.Components.Models.Secret
 {
     public class EditSecretViewModel : ManageSecretViewModel
     {
-        public AlertNotification? AlertNotification { get; set; }
         public SubscriptionLevel SubscriptionLevel {  get; set; }  
 
         public EditSecretViewModel(SecretService secretService)

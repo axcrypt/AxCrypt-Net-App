@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components;
 
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Windows.Services;
+using AxCrypt.App.Components.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 

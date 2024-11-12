@@ -2,7 +2,6 @@
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Components.Models;
-using AxCrypt.App.Components.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
@@ -15,7 +14,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class ShareKeyViewModel 
+public class ShareKeyViewModel
 {
     public SubscriptionLevel SubscriptionLevel { get; set; }
     public bool IsWideScreen { get; set; }
@@ -39,8 +38,9 @@ public class ShareKeyViewModel
         _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
     }
 
-    public void SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel)
+    public void SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel, bool isFolder = false)
     {
+        IsFolder = isFolder;
         SelectedFilesOrFolders = filesOrFoldersPath;
         _viewModel = sharingListViewModel;
         _viewModel.BindPropertyChanged<IEnumerable<UserPublicKey>>(nameof(SharingListViewModel.SharedWith), (aks) =>
@@ -395,7 +395,6 @@ public class ShareKeyViewModel
         return true;
     }
 
-    [Parameter]
     public bool IsFolder { get; set; }
 
     public async Task ApplyShareKeys()

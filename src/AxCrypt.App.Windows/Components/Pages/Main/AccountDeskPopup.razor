@@ -150,4 +150,12 @@
 
         await base.OnInitializedAsync();
     }
+
+    [Parameter]
+    public EventCallback ClosePopup { get; set; }
+
+    public void OnOptionClicked()
+    {
+        ClosePopup.InvokeAsync(null);
+    }
 }

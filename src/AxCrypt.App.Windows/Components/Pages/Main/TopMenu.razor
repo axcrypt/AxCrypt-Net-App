@@ -1,8 +1,8 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Models
+@using AxCrypt.App.Components.Models.Notification
+@using AxCrypt.App.Components.Services
 @using AxCrypt.App.Windows.Helpers
-@using AxCrypt.App.Windows.Models
-@using AxCrypt.App.Windows.Services
 @using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Common
 @using AxCrypt.Core
@@ -66,7 +66,7 @@
     </NavLink>
     <NavLink class="update-btn padding" @onclick="ViewModel.CheckAxCryptVersionAsync">Update</NavLink>
     <NavLink class="mb-prfle" @onclick="ViewModel.ToggleAccountPopup">
-        <span class="">@ViewModel.TopMenuModel.UserEmail.Substring(0, 2).ToUpper()</span>
+        <span class=""> @(string.IsNullOrEmpty(ViewModel.TopMenuModel.UserEmail) ? string.Empty : ViewModel.TopMenuModel.UserEmail.Substring(0, Math.Min(2, ViewModel.TopMenuModel.UserEmail.Length)).ToUpper()) </span>
     </NavLink>
 
     @if (!ViewModel.TopMenuModel.IsLoading)

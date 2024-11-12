@@ -7,7 +7,6 @@ using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core;
 using AxCrypt.Core.UI.ViewModel;
-using Microsoft.AspNetCore.Components;
 using System.Collections.ObjectModel;
 using AxCrypt.Core.Extensions;
 using System.Globalization;
@@ -18,16 +17,15 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.App.Windows.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Windows.Components.Pages;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
 public class SettingsViewModel
 {
-    private MainViewModel _mainViewModel;
-    private FileOperationViewModel _fileOperationViewModel;
-    private ManageAccountViewModel _viewModel;
-    private IExportKeyManagementFile ExportKeyFile;
+    private MainViewModel? _mainViewModel;
+    private FileOperationViewModel? _fileOperationViewModel;
+    private ManageAccountViewModel? _viewModel;
+    private IExportKeyManagementFile? ExportKeyFile;
     private bool hideRecentFiles;
     private bool isDateModifiedOn;
     private bool isFileNameOn;
@@ -37,6 +35,8 @@ public class SettingsViewModel
         _mainViewModel = New<MainViewModel>();
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
         _fileOperationViewModel = New<FileOperationViewModel>();
+        RestApiBaseUrl = Resolve.UserSettings.RestApiBaseUrl.ToString();
+        TimeoutTimeSpan = Resolve.UserSettings.ApiTimeout.ToString();
     }
 
     public bool InactSgnOut { get; set; }
@@ -68,6 +68,22 @@ public class SettingsViewModel
 
     protected bool isHovered = false;
     protected string hoveredElement = string.Empty;
+    public bool IsSuccess { get; set; }
+
+    public bool HideRecentFiles
+    {
+        get => hideRecentFiles;
+        set
+        {
+            if (hideRecentFiles != value)
+            {
+                hideRecentFiles = value;
+                ToggleHideRecentFiles();
+            }
+        }
+    }
+
+    public bool ShowAdvancedOptions { get; set; }
 
     public bool IsChecked(int value) => SelectedOption == value;
 
@@ -84,9 +100,6 @@ public class SettingsViewModel
     public void InactSgnOutPopup() => InactSgnOut = !InactSgnOut;
 
     public void FileEncryptionProperty() => FileEncryptionProperties = !FileEncryptionProperties;
-
-    [Parameter]
-    public EventCallback CloseSettingsPopup { get; set; }
 
     public IDictionary<string, object> NavLinkAttributes1()
     {
@@ -109,24 +122,9 @@ public class SettingsViewModel
         return attributes;
     }
 
-    public bool IsSuccess { get; set; }
     public void CloseSuccessPopup()
     {
         ShowVersion = !ShowVersion;
-    }
-
-
-    public bool HideRecentFiles
-    {
-        get => hideRecentFiles;
-        set
-        {
-            if (hideRecentFiles != value)
-            {
-                hideRecentFiles = value;
-                ToggleHideRecentFiles();
-            }
-        }
     }
 
     private void SetRecentFilesHiddenState(bool hideRecentFiles)
@@ -241,8 +239,6 @@ public class SettingsViewModel
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { InvitePopup = !InvitePopup; }, null, e);
     }
 
-    public bool ShowAdvancedOptions { get; set; }
-
     public async Task ToggleAdvancedOption()
     {
         if (!_mainViewModel.LoggedOn)
@@ -255,15 +251,92 @@ public class SettingsViewModel
 
     #region Debug Section
 
+    private string? Title { get; set; }
+    private string? DefaultExt { get; set; }
+    private string? Filter { get; set; }
+    private bool AddExtension { get; set; }
+    private string? FileName { get; set; }
+    public string? RestApiBaseUrl { get; set; }
+    public string? TimeoutTimeSpan { get; set; }
+    private ObservableCollection<ManageAccountModel> _accountEmailsListView { get; set; } = new ObservableCollection<ManageAccountModel>();
+    public string? _emailLabel { get; set; }
+
+    public bool IsDateModifiedOn
+    {
+        get => isDateModifiedOn;
+        set
+        {
+            if (isDateModifiedOn != value)
+            {
+                isDateModifiedOn = value;
+                UpdateDateModifiedSetting();
+            }
+        }
+    }
+
+    public bool IsFileNameOn
+    {
+        get => isFileNameOn;
+        set
+        {
+            if (isFileNameOn != value)
+            {
+                isFileNameOn = value;
+                UpdateFileNameSetting();
+            }
+        }
+    }
+
+    private bool includeSubfolders;
+
+    public bool IncludeSubfolders
+    {
+        get => includeSubfolders;
+        set
+        {
+            if (includeSubfolders != value)
+            {
+                includeSubfolders = value;
+                IncludeSubFoldersChanged();
+            }
+        }
+    }
+
+    private bool alwaysOnline;
+
+    public bool AlwaysOffline
+    {
+        get => alwaysOnline;
+        set
+        {
+            if (alwaysOnline != value)
+            {
+                alwaysOnline = value;
+                MakeAlwaysOffline();
+            }
+        }
+    }
+
+    private bool autoUpgradeToAES256;
+
+    public bool AutoUpgradeToAES256
+    {
+        get => autoUpgradeToAES256;
+        set
+        {
+            if (autoUpgradeToAES256 != value)
+            {
+                autoUpgradeToAES256 = value;
+            }
+        }
+    }
+
     public async void CheckAxCryptVersionAsync()
     {
         ShowVersion = !ShowVersion;
 
         await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
     }
-
-    public string? RestApiBaseUrl { get; set; }
-    public string? TimeoutTimeSpan { get; set; }
 
     public void OpenOptions()
     {
@@ -298,10 +371,6 @@ public class SettingsViewModel
         ShowManageAxCryptID = true;
     }
 
-    private ObservableCollection<ManageAccountModel> _accountEmailsListView { get; set; } = new ObservableCollection<ManageAccountModel>();
-
-    public string _emailLabel { get; set; }
-
     private void ListAccountEmails(IEnumerable<AccountProperties> emails)
     {
         foreach (AccountProperties email in emails)
@@ -329,33 +398,6 @@ public class SettingsViewModel
     public void CloseManageAxCryptID()
     {
         ShowManageAxCryptID = !ShowManageAxCryptID;
-    }
-
-
-    public bool IsDateModifiedOn
-    {
-        get => isDateModifiedOn;
-        set
-        {
-            if (isDateModifiedOn != value)
-            {
-                isDateModifiedOn = value;
-                UpdateDateModifiedSetting();
-            }
-        }
-    }
-
-    public bool IsFileNameOn
-    {
-        get => isFileNameOn;
-        set
-        {
-            if (isFileNameOn != value)
-            {
-                isFileNameOn = value;
-                UpdateFileNameSetting();
-            }
-        }
     }
 
     private void UpdateDateModifiedSetting()
@@ -459,12 +501,6 @@ public class SettingsViewModel
         }
     }
 
-    private string Title { get; set; }
-    private string DefaultExt { get; set; }
-    private string Filter { get; set; }
-    private bool AddExtension { get; set; }
-    private string FileName { get; set; }
-
     private async void HandleSaveAsFileSelection(FileSelectionEventArgs e)
     {
         switch (e.FileSelectionType)
@@ -500,39 +536,9 @@ public class SettingsViewModel
         }
     }
 
-    private bool includeSubfolders;
-
-    public bool IncludeSubfolders
-    {
-        get => includeSubfolders;
-        set
-        {
-            if (includeSubfolders != value)
-            {
-                includeSubfolders = value;
-                IncludeSubFoldersChanged();
-            }
-        }
-    }
-
     public async void IncludeSubFoldersChanged()
     {
         await _mainViewModel.SetFolderOperationMode(IncludeSubfolders ? FolderOperationMode.IncludeSubfolders : FolderOperationMode.SingleFolder);
-    }
-
-    private bool alwaysOnline;
-
-    public bool AlwaysOffline
-    {
-        get => alwaysOnline;
-        set
-        {
-            if (alwaysOnline != value)
-            {
-                alwaysOnline = value;
-                MakeAlwaysOffline();
-            }
-        }
     }
 
     public void MakeAlwaysOffline()
@@ -546,20 +552,6 @@ public class SettingsViewModel
         }
 
         New<AxCryptOnlineState>().IsOffline = false;
-    }
-
-    private bool autoUpgradeToAES256;
-
-    public bool AutoUpgradeToAES256
-    {
-        get => autoUpgradeToAES256;
-        set
-        {
-            if (autoUpgradeToAES256 != value)
-            {
-                autoUpgradeToAES256 = value;
-            }
-        }
     }
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
