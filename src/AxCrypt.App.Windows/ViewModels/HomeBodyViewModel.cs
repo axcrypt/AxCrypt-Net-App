@@ -27,14 +27,6 @@ public class HomeBodyViewModel : ComponentBase
     private MainViewModel? _mainViewModel;
     private FileSystemState? _fileSystemState;
 
-    private bool UpgradePopup = false;
-    private bool UpgradeToEncrypt = false;
-    private bool UpgradeToShare = false;
-    private bool showUpgradePopup = false;
-    private bool shareKey = false;
-    private bool isHovered = false;
-    private string hoveredElement = string.Empty;
-
     [Inject]
     private ShareKeyViewModel? _shareKeyViewModel { get; set; }
 
@@ -57,17 +49,10 @@ public class HomeBodyViewModel : ComponentBase
 
     public event EventHandler<FileSelectionEventArgs>? SelectingFiles;
 
-    private bool isFilesPending = false;
-
-    public SubscriptionLevel SubscriptionLevel { get; set; }
-    public bool ShowInvitePopup { get; set; }
-    public int MembersCount { get; set; }
-    public int TotalMembers { get; set; }
     public string? DisplayName { get; set; }
     public bool IsEnabled { get; set; }
     public string? ImageSource { get; set; }
     public string? EnabledBackColor { get; set; }
-    public string? DisabledBackColor { get; set; }
     public bool IsHovered { get; set; }
     public bool IsPopupVisible { get; set; }
     public bool ActiveSubScription { get; set; }
@@ -76,8 +61,23 @@ public class HomeBodyViewModel : ComponentBase
     public bool SubscribedFromAppStore { get; set; }
     public string? SubscriptionStatusText { get; set; }
     public bool ShowConfirmDeleteAccountPopup { get; set; }
+
+    public SubscriptionLevel SubscriptionLevel { get; set; }
+    public bool ShowInvitePopup { get; set; }
+    public int MembersCount { get; set; }
+    public int TotalMembers { get; set; }
+    public string? DisabledBackColor { get; set; }
     public bool ShowSharePopup { get; set; }
     public string? ErrorMessage { get; set; }
+    public bool UpgradePopup { get; set; }
+    public bool UpgradeToEncrypt { get; set; }
+    public bool UpgradeToShare { get; set; }
+    public bool showUpgradePopup { get; set; }
+    public bool shareKey { get; set; }
+
+    public string hoveredElement { get; set; } = string.Empty;
+    public bool isHovered { get; set; }
+    public bool isFilesPending { get; set; }
 
     public void OpenPopup()
     {
@@ -95,7 +95,7 @@ public class HomeBodyViewModel : ComponentBase
         isHovered = false;
         hoveredElement = string.Empty;
     }
-    
+
     public void Initialized()
     {
         _mainViewModel = New<MainViewModel>();
