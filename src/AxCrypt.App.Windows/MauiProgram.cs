@@ -4,6 +4,7 @@ using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Models.Secret;
 using AxCrypt.App.Components.Services;
 using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Components.Utility.View;
 using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Components.Pages.Password;
@@ -96,9 +97,20 @@ namespace AxCrypt.App.Windows
 
         private static void RegisterSingletons(IServiceCollection services)
         {
+            services.AddSingleton<IStatusAlertService, StatusAlertService>();
+            services.AddSingleton<ProcessIndicatorService>();
+
+            services.AddSingleton<ITrayService, TrayService>();
+            services.AddSingleton<INotificationService, NotificationService>();
+            
+            services.AddSingleton<ILogging, Logging>();
+            services.AddSingleton<IStatusChecker, StatusChecker>();
+            services.AddSingleton<IFolderPicker, FolderPickerWindows>();
+            services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
+            services.AddSingleton<AppLocalizationOptions>();
+
             services.AddSingleton<LoginModel>();
             services.AddSingleton<MainPage>();
-
             services.AddSingleton<Home>();
             services.AddSingleton<HomeBody>();
             services.AddSingleton<ShareKey>();
@@ -113,20 +125,8 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SettingsDeskPopup>();
             services.AddSingleton<NotificationPopup>();
             services.AddSingleton<AccountDeskPopup>();
-
-            services.AddSingleton<ITrayService, TrayService>();
-            services.AddSingleton<INotificationService, NotificationService>();
-            services.AddSingleton<IStatusAlertService, StatusAlertService>();
-            services.AddSingleton<IFolderPicker, FolderPickerWindows>();
-            services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
-
-            services.AddSingleton<AppLocalizationOptions>();
             services.AddSingleton<LoginService>();
-
             services.AddSingleton<SupportService>();
-            services.AddSingleton<AlertNotification>();
-            services.AddSingleton<ILogging, Logging>();
-            services.AddSingleton<IStatusChecker, StatusChecker>();
             services.AddSingleton<SecretClientModel>();
             services.AddSingleton<SecretsClientModel>();
             services.AddSingleton<NewSecretViewModel>();
@@ -139,7 +139,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<NotificationItemViewModel>();
             services.AddSingleton<SecretsListViewModel>();
             services.AddSingleton<SecretServiceUtility>();
-
             services.AddSingleton<AxCrypt.App.Components.Services.UserNotificationService>();
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<HomeBodyViewModel>();

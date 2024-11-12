@@ -4,6 +4,7 @@ using AxCrypt.Api.Model.Secret;
 using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Password;
 using AxCrypt.App.Components.Services;
+using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
@@ -13,11 +14,13 @@ namespace AxCrypt.App.Components.Models.Secret
 {
     public class EditSecretViewModel : ManageSecretViewModel
     {
-        public SubscriptionLevel SubscriptionLevel {  get; set; }  
+        public SubscriptionLevel SubscriptionLevel { get; set; }
 
-        public EditSecretViewModel(SecretService secretService)
+        private ProcessIndicatorService _ProcessIndicatorService;
+        public EditSecretViewModel(SecretService secretService, ProcessIndicatorService processIndicatorService)
         {
             Secret = secretService.GetCurrentSecret();
+            _ProcessIndicatorService = processIndicatorService;
         }
 
         public SecretViewModel Secret { get; set; }
@@ -44,16 +47,16 @@ namespace AxCrypt.App.Components.Models.Secret
             }
         }
 
-        public async Task<bool> SaveSecretAsync(IProgress<LoadingModel> progress = null)
+        public async Task<bool> SaveSecretAsync()
         {
-            return await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress(async () =>
+            if (New<AxCryptOnlineState>().IsOffline)
             {
-                if (New<AxCryptOnlineState>().IsOffline)
-                {
-                    ErrorMessage = Texts.NoInternetErrorMessage;
-                    return false;
-                }
+                ErrorMessage = Texts.NoInternetErrorMessage;
+                return false;
+            }
 
+            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+            {
                 HasPaidSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
                 if (!HasPaidSubscription)
                 {
@@ -75,7 +78,7 @@ namespace AxCrypt.App.Components.Models.Secret
                     return false;
                 }
                 return true;
-            }, progress);
+            }
         }
 
         private async Task<bool> UpdateSecretAsync()

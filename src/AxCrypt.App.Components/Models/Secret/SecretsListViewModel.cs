@@ -6,6 +6,7 @@ using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Password;
 using AxCrypt.App.Components.PasswordManager;
 using AxCrypt.App.Components.Services;
+using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Components.Utility;
 using AxCrypt.Common;
 using AxCrypt.Content;
@@ -26,15 +27,18 @@ namespace AxCrypt.App.Components.Models.Secret
     public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     {
         private readonly int MaxRecentSecretsToShow = 10;
-        private LogOnIdentity _identity;
         private readonly string _sortOptionAll = Texts.SecretsAllItems;
         private readonly string _sortOptionRecent = Texts.SecretsRecentlyAdded;
         private readonly string _sortOptionShared = Texts.PromptSharedWith;
-
         private bool _activateSharedListFilter = false;
-        public SecretsListViewModel()
+        private LogOnIdentity _identity;
+
+        private IStatusAlertService _StatusAlertService;
+
+        public SecretsListViewModel(IStatusAlertService statusAlertService)
         {
             _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
+            _StatusAlertService = statusAlertService;
             Initialize();
         }
 
@@ -58,10 +62,7 @@ namespace AxCrypt.App.Components.Models.Secret
             SelectedSecretTypeFilter = 0;
             ShowSecretTypeCreateMenu = false;
             ShowSecretFilterMenu = false;
-            AlertNotification = new AlertNotification();
         }
-
-        public AlertNotification AlertNotification { get; set; }
 
         public ObservableCollection<SecretViewModel> Secrets
         {
@@ -216,8 +217,6 @@ namespace AxCrypt.App.Components.Models.Secret
             await FindSecrets();
         }
 
-        private AlertNotification _alertNotification;
-
         public SecretsSortOrder SelectedSortOrder { get; set; } = SecretsSortOrder.None;
         public SecretFilterOption Filter { get; set; } = SecretFilterOption.All;
         public SecretsFilter SelectedFilter { get; set; } = SecretsFilter.All;
@@ -251,17 +250,17 @@ namespace AxCrypt.App.Components.Models.Secret
                     saveResult = await ExportXml();
                     break;
                 default:
-                    AlertNotification.ShowNotification("Unsupported file type.", NotificationType.Warning);
+                    _StatusAlertService.Error("Unsupported file type.");
                     return;
             }
 
             if (saveResult)
             {
-                AlertNotification.ShowNotification("Your file has been successfully downloaded!", NotificationType.Success);
+                _StatusAlertService.Success("Your file has been successfully downloaded!");
             }
             else
             {
-                AlertNotification.ShowNotification("Failed to download the file. Please check your internet connection and try again.", NotificationType.Warning);
+                _StatusAlertService.Error("Failed to download the file. Please check your internet connection and try again.");
             }
         }
 
@@ -270,28 +269,25 @@ namespace AxCrypt.App.Components.Models.Secret
         /// </summary>
         /// <param name="keyword">Keyword to search with</param>
         /// <returns>SecretCollection containing found secrets</returns>
-        public async Task<ObservableCollection<SecretViewModel>> FindSecrets(bool forceReload = false, IProgress<LoadingModel> progress = null)
+        public async Task<ObservableCollection<SecretViewModel>> FindSecrets(bool forceReload = true)
         {
-            return await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress(async () =>
+            _activateSharedListFilter = false;
+            if (forceReload)
             {
-                _activateSharedListFilter = false;
-                if (forceReload)
-                {
-                    _CachedSecrets.Clear();
-                    Secrets.Clear();
-                }
-                if (_CachedSecrets.ContainsKey(SecretFilterOption.All))
-                {
-                    Secrets = _CachedSecrets[SecretFilterOption.All];
-                    await ApplyFilter();
-                    return Secrets;
-                }
-
-                IEnumerable<SecretViewModel> secrets = await LoadSecrets(() => PersonalSecrets.SelectBySearch(Keyword ?? ""));
-                Secrets = new ObservableCollection<SecretViewModel>(secrets);
+                _CachedSecrets.Clear();
+                Secrets.Clear();
+            }
+            if (_CachedSecrets.ContainsKey(SecretFilterOption.All))
+            {
+                Secrets = _CachedSecrets[SecretFilterOption.All];
                 await ApplyFilter();
                 return Secrets;
-            }, progress);
+            }
+
+            IEnumerable<SecretViewModel> secrets = await LoadSecrets(() => PersonalSecrets.SelectBySearch(Keyword ?? ""));
+            Secrets = new ObservableCollection<SecretViewModel>(secrets);
+            await ApplyFilter();
+            return Secrets;
         }
 
         private async Task<IEnumerable<SecretViewModel>> LoadSecrets(Func<Task<SecretClientCollection>> SelectBySearchFuncAsync)
@@ -638,7 +634,7 @@ namespace AxCrypt.App.Components.Models.Secret
             Stream xmlStream = await GetRawXML();
             if (xmlStream == Stream.Null && New<AxCryptOnlineState>().IsOffline)
             {
-                _alertNotification.ShowNotification("Could not download the file when offline.", NotificationType.Warning);
+                _StatusAlertService.Error("Could not download the file when offline.");
                 return false;
             }
 

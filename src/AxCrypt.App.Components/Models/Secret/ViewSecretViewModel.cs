@@ -2,6 +2,7 @@
 using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Password;
 using AxCrypt.App.Components.Services;
+using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
@@ -11,9 +12,12 @@ namespace AxCrypt.App.Components.Models.Secret
 {
     public class ViewSecretViewModel : ManageSecretViewModel
     {
-        public ViewSecretViewModel(SecretService secretService)
+        private ProcessIndicatorService _ProcessIndicatorService;
+
+        public ViewSecretViewModel(SecretService secretService, ProcessIndicatorService processIndicatorService)
         {
             _secretService = secretService;
+            _ProcessIndicatorService = processIndicatorService;
             InitializeSecret();
         }
 
@@ -97,16 +101,16 @@ namespace AxCrypt.App.Components.Models.Secret
             return isVisible ? value : "**click to show**";
         }
 
-        public async Task<bool> DeleteSecretAsync(IProgress<LoadingModel> progress = null)
+        public async Task<bool> DeleteSecretAsync()
         {
-            return await LoadingProgressHelper.ExecuteLoadingProgress(async () =>
+            if (New<AxCryptOnlineState>().IsOffline)
             {
-                if (New<AxCryptOnlineState>().IsOffline)
-                {
-                    ErrorMessage = Texts.NoInternetErrorMessage;
-                    return false;
-                }
+                ErrorMessage = Texts.NoInternetErrorMessage;
+                return false;
+            }
 
+            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+            {
                 HasPaidSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
 
                 if (!HasPaidSubscription)
@@ -129,7 +133,7 @@ namespace AxCrypt.App.Components.Models.Secret
                 }
                 bool deleted = await PersonalSecrets.DeleteAsync(secrets[0]);
                 return deleted;
-            }, progress);
+            }
 
         }
     }

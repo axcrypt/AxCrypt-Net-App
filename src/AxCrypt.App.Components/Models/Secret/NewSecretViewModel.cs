@@ -4,6 +4,7 @@ using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Password;
 using AxCrypt.App.Components.Services;
 using AxCrypt.App.Components.Utility;
+using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Cryptor.Model;
@@ -15,21 +16,10 @@ namespace AxCrypt.App.Components.Models.Secret
 {
     public class NewSecretViewModel : ManageSecretViewModel
     {
-        public AlertNotification AlertNotification { get; set; }
-
-        private bool _loading { get; set; } = false;
-
-        public bool Loading
+        private ProcessIndicatorService _ProcessIndicatorService;
+        public NewSecretViewModel(ProcessIndicatorService processIndicatorService)
         {
-            get => _loading;
-            set
-            {
-                if (_loading != value)
-                {
-                    _loading = value;
-                    _onStateChange?.Invoke();
-                }
-            }
+            _ProcessIndicatorService = processIndicatorService;
         }
 
         public string ErrorMessage { get; set; }
@@ -42,18 +32,18 @@ namespace AxCrypt.App.Components.Models.Secret
         public NewSecretViewModel(SecretServiceUtility secretServiceUtility)
         {
             Secret = Initialize(secretServiceUtility.CurrentSecretType);
-            AlertNotification = new AlertNotification();
         }
 
-        public async Task<bool> SaveSecretAsync(IProgress<LoadingModel> progress = null)
+        public async Task<bool> SaveSecretAsync()
         {
-            return await LoadingProgressHelper.ExecuteLoadingProgress(async () =>
+            if (New<AxCryptOnlineState>().IsOffline)
             {
-                if (New<AxCryptOnlineState>().IsOffline)
-                {
-                    ErrorMessage = Texts.NoInternetErrorMessage;
-                    return false;
-                }
+                ErrorMessage = Texts.NoInternetErrorMessage;
+                return false;
+            }
+
+            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+            {
                 if (!ViewModelHelper.CanAddNewSecret())
                 {
                     ErrorMessage = Texts.SaveSecretErrorIsReadOnly;
@@ -82,7 +72,7 @@ namespace AxCrypt.App.Components.Models.Secret
                 bool created = await PersonalSecrets.InsertAsync(newSecret);
 
                 return created;
-            }, progress);
+            }
         }
 
         #region Manage View Model

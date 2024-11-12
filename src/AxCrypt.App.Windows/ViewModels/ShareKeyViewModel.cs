@@ -14,7 +14,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class ShareKeyViewModel
+public class ShareKeyViewModel : ViewModelBase
 {
     public SubscriptionLevel SubscriptionLevel { get; set; }
     public bool IsWideScreen { get; set; }
@@ -481,8 +481,7 @@ public class ShareKeyViewModel
         //ErrorMessage = "";
     }
 
-    [Parameter]
-    public IEnumerable<string> SelectedFilesOrFolders { get; set; } = new List<string>();
+    public IEnumerable<string>? SelectedFilesOrFolders { get; set; }
 
     public class EmailSuggestion()
     {

@@ -24,7 +24,6 @@
             Edit Card
         </h3>
     </div>
-    <AxCrypt.App.Windows.Components.Pages.Shared.LoadingComponent IsLoading="@editSecretViewModel.Loading" />
     <EditForm Model="@secretService.CurrentSecret.Card" OnValidSubmit="SavePassword">
         <DataAnnotationsValidator />
         @if (!editSecretViewModel.Loading)
@@ -105,14 +104,8 @@
 
     private async Task SavePassword()
     {
-        Progress<LoadingModel> progress = new Progress<LoadingModel>(p =>
-        {
-            editSecretViewModel.Loading = p.IsLoading;
-            InvokeAsync(StateHasChanged);
-        });
-
         editSecretViewModel.Secret = secretService.CurrentSecret;
-        bool saveResult = await editSecretViewModel.SaveSecretAsync(progress);
+        bool saveResult = await editSecretViewModel.SaveSecretAsync();
         if (saveResult)
         {
             StatusAlertService.Success("Your new password entry has been Updated!.");

@@ -1,4 +1,6 @@
-﻿namespace AxCrypt.App.Components.Services.Interface;
+﻿using AxCrypt.App.Components.Utility;
+
+namespace AxCrypt.App.Components.Services.Interface;
 
 public interface IStatusAlertService
 {

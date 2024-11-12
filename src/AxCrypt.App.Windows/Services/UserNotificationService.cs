@@ -1,5 +1,6 @@
 ﻿using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Services;
+using AxCrypt.App.Components.Utility.View;
 using AxCrypt.App.Windows.Helpers;
 using AxCrypt.App.Windows.Models;
 using AxCrypt.Core.UI;

@@ -11,22 +11,22 @@ namespace AxCrypt.App.Components.Services;
 
 public class UserNotificationService
 {
-    public UserNotificationService()
+    private ProcessIndicatorService _ProcessIndicatorService;
+    public UserNotificationService(ProcessIndicatorService processIndicatorService)
     {
+        _ProcessIndicatorService = processIndicatorService;
         NotificationModel = new();
     }
 
     public NotificationViewModel NotificationModel { get; set; }
 
-    public async Task LoadNotificationListAsync(IProgress<LoadingModel> progress = null)
+    public async Task LoadNotificationListAsync()
     {
-        await Services.LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
+        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
         {
             IEnumerable<NotificationItemViewModel> notificationItems = await LoadNotificationsAsync();
             NotificationModel.Notifications = new ObservableCollection<NotificationItemViewModel>(notificationItems);
-
-            return Task.CompletedTask;
-        }, progress);
+        }
     }
 
     private async Task<IEnumerable<NotificationItemViewModel>> LoadNotificationsAsync()
@@ -44,15 +44,17 @@ public class UserNotificationService
         {
             return false;
         }
-
-        return await NotificationApiHelper.DeleteNotificationAsync(id);
+        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        {
+            return await NotificationApiHelper.DeleteNotificationAsync(id);
+        }
     }
 
-    public async Task SortNotificationsByDate(SortDirection dateSortDirection, IProgress<LoadingModel> progress)
+    public async Task SortNotificationsByDate(SortDirection dateSortDirection)
     {
         if (!NotificationModel.Notifications.Any())
         {
-            await LoadNotificationListAsync(progress);
+            await LoadNotificationListAsync();
         }
 
         IEnumerable<NotificationItemViewModel> sortedNotifications = new List<NotificationItemViewModel>();
@@ -60,7 +62,7 @@ public class UserNotificationService
         {
             sortedNotifications = NotificationModel.Notifications.OrderBy(n => n.CreatedDate);
         }
-        
+
         if (dateSortDirection == SortDirection.Descending)
         {
             sortedNotifications = NotificationModel.Notifications.OrderByDescending(n => n.CreatedDate);

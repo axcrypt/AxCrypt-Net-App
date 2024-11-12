@@ -1,4 +1,5 @@
 ﻿using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Components.Utility;
 
 namespace AxCrypt.App.Components.Services;
 
@@ -7,6 +8,13 @@ public class StatusAlertService : IStatusAlertService
     public event Action<bool> OnPopupVisibilityChanged;
 
     private bool _isVisible;
+
+    private readonly int _milliSecondsDelay;
+
+    public StatusAlertService()
+    {
+        _milliSecondsDelay = 20000;
+    }
 
     public bool IsVisible
     {
@@ -27,7 +35,7 @@ public class StatusAlertService : IStatusAlertService
         Type = NotificationType.Success;
         Show(alert);
     }
-    
+
     public void Error(string alert)
     {
         Type = NotificationType.Warning;
@@ -38,10 +46,19 @@ public class StatusAlertService : IStatusAlertService
     {
         Alert = alert;
         IsVisible = true;
+
+        DelayAutoHide(_milliSecondsDelay);
     }
 
     public void Hide()
     {
+        Alert = "";
         IsVisible = false;
+    }
+
+    private void DelayAutoHide(int milliSecondsDelay)
+    {
+        Task.Delay(milliSecondsDelay);
+        Hide();
     }
 }

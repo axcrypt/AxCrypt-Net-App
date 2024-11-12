@@ -1,4 +1,5 @@
-﻿using AxCrypt.App.Windows.Helpers;
+﻿using AxCrypt.App.Components.Utility.View;
+using AxCrypt.App.Windows.Helpers;
 using System.Collections.ObjectModel;
 
 namespace AxCrypt.App.Windows.Models

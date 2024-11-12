@@ -10,10 +10,10 @@ using AxCrypt.App.Components.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using AxCrypt.Abstractions;
-using AxCrypt.App.Windows.Helpers;
+using AxCrypt.App.Windows.Services;
+using AxCrypt.App.Components.Utility.View;
 
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -21,6 +21,7 @@ public class RecentFoldersViewModel : ComponentBase
 {
     private readonly MainViewModel _mainViewModel;
     private readonly FileOperationViewModel _fileOperationViewModel;
+    private ProcessIndicatorService _ProcessIndicatorService;
 
     [Inject]
     private ShareKeyViewModel _shareKeyViewModel { get; set; }
@@ -66,11 +67,12 @@ public class RecentFoldersViewModel : ComponentBase
 
     public Action OnStateChange { get; set; }
 
-    public RecentFoldersViewModel()
+    public RecentFoldersViewModel(ProcessIndicatorService processIndicatorService)
     {
         _mainViewModel = New<MainViewModel>();
         _fileOperationViewModel = New<FileOperationViewModel>();
         _shareKeyViewModel = new ShareKeyViewModel();
+        _ProcessIndicatorService = processIndicatorService;
     }
 
     public async Task InitializeAsync()
@@ -78,23 +80,16 @@ public class RecentFoldersViewModel : ComponentBase
         SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
 
-        Progress<LoadingModel> progress = new Progress<LoadingModel>(p =>
-        {
-            Loading = p.IsLoading;
-            //InvokeAsync(StateHasChanged);
-        });
-
-        IEnumerable<string> folders = await RecentFoldersAsync(progress);
+        IEnumerable<string> folders = await RecentFoldersAsync();
         RecentFoldersList = new ObservableCollection<string>(folders);
     }
 
-    public async Task<IEnumerable<string>> RecentFoldersAsync(IProgress<LoadingModel> progress = null)
+    public async Task<IEnumerable<string>> RecentFoldersAsync()
     {
-
-        return await LoadingProgressHelper.ExecuteLoadingProgress(async () =>
+        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
         {
             return await Task.FromResult<IEnumerable<string>>(SetWatchedFoldersAsync());
-        }, progress);
+        }
     }
 
     public IEnumerable<string> SetWatchedFoldersAsync()

@@ -101,7 +101,7 @@
                     </div>
                 }
             </div>
-            @if (ShareKeyViewModel.SelectedFilesOrFolders.Any())
+            @if (ShareKeyViewModel.SelectedFilesOrFolders != null && ShareKeyViewModel.SelectedFilesOrFolders.Any())
             {
                 <div class="center-column fle-exton-img" style="padding: 10px 0px;">
                     @foreach (string file in ShareKeyViewModel.SelectedFilesOrFolders)
