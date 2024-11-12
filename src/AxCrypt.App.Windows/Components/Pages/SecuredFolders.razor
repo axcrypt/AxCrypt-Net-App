@@ -7,7 +7,6 @@
 @using AxCrypt.Core.UI
 @using System.Collections.ObjectModel
 @using static AxCrypt.Abstractions.TypeResolve
-@inject IStatusAlertService StatusAlertService
 
 <link href="css/login.min.css" rel="stylesheet" />
 <div class="home-index">
@@ -22,7 +21,7 @@
             <label class="text-style font-bold">Recent Folders</label>
         </div>
         <div>
-            <RecentFolders />
+            <AxCrypt.App.Windows.ViewModels.RecentFoldersViewModel />
         </div>
     </div>
 </div>
@@ -30,6 +29,5 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        StatusAlertService.Success("Welcome");
     }
 }
