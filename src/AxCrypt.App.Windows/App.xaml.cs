@@ -23,6 +23,8 @@ using static PInvoke.User32;
 using AxCrypt.Core.IO;
 using System.Text.RegularExpressions;
 using AxCrypt.Mono;
+using Microsoft.Maui.Hosting;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows;
 
@@ -39,17 +41,22 @@ public partial class App : Application
 
     private KnownFoldersViewModel _knownFoldersViewModel;
 
-    public App(NavigationManager navigationManager)
+    public App()
     {
         InitializeComponent();
-        //HomeViewModel homeModel = AxCrypt.App.Components.Helpers.ServiceProvider.GetService<HomeViewModel>();
-        HomeViewModel homeModel = new HomeViewModel(navigationManager);
-        //MainPage = new MainPage(navigationManager, homeModel);
 
+        InitializeContentResources();
+        RegisterTypeFactories();
+        CheckLavasoftWebCompanionExistence();
+        EnsureUiContextInitialized();
+        EnsureFileAssociation();
+
+        SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent();
+
+        //HomeViewModel homeModel = new HomeViewModel(navigationManager);
         _progressBackgroundWorker = new ProgressBackgroundComponent(null);
 
-
-        //PlatformInitializer.Initialize();
+        MainPage = new MainPage(_mainViewModel, _fileOperationViewModel, _knownFoldersViewModel);
     }
 
     protected override void OnStart()
@@ -75,25 +82,23 @@ public partial class App : Application
         });
     }
 
-    private ApiVersion _apiVersion;
-
     private async Task InitializeProgram()
     {
-        InitializeContentResources();
-        RegisterTypeFactories();
-        CheckLavasoftWebCompanionExistence();
-        EnsureUiContextInitialized();
-        EnsureFileAssociation();
+        //InitializeContentResources();
+        //RegisterTypeFactories();
+        //CheckLavasoftWebCompanionExistence();
+        //EnsureUiContextInitialized();
+        //EnsureFileAssociation();
 
-        if (!await new ApplicationManager().ValidateSettings())
-        {
-            return;
-        }
+        //if (!await new ApplicationManager().ValidateSettings())
+        //{
+        //    return;
+        //}
 
-        SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent();
+        //SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent();
         CheckOfflineModeFirst();
-        await GetApiVersionAsync();
-        SetThisVersion();
+        //await GetApiVersionAsync(); - moved
+        //SetThisVersion(); - moved
         StartKeyPairService();
         AttachLogListener();
         //ConfigureUiOptions();
@@ -113,9 +118,6 @@ public partial class App : Application
     private void InitializeContentResources()
     {
         SetCulture();
-
-        TypeMap.Register.Singleton<IUIThread>(() => new UIThread(this));
-        TypeMap.Register.Singleton<IProgressBackground>(() => _progressBackgroundWorker);
     }
 
     private static void SetCulture()
@@ -195,24 +197,6 @@ public partial class App : Application
         {
             New<UserSettings>().OfflineMode = true;
         }
-    }
-
-    private async Task GetApiVersionAsync()
-    {
-        try
-        {
-            _apiVersion = await New<ICache>().GetItemAsync(CacheKey.RootKey.Subkey("WrapMessageDialogsAsync_ApiVersion"), () => New<GlobalApiClient>().ApiVersionAsync(Environment.OSVersion.VersionString, New<AboutAssembly>().AssemblyVersion));
-        }
-        catch (ApiException aex)
-        {
-            await aex.HandleApiExceptionAsync();
-            _apiVersion = ApiVersion.Zero;
-        }
-    }
-
-    private static void SetThisVersion()
-    {
-        New<UserSettings>().ThisVersion = New<IVersion>().Current.ToString();
     }
 
     private static void StartKeyPairService()
@@ -570,7 +554,8 @@ public partial class App : Application
 
     private async Task SetWindowTitleTextAsync(bool isLoggedOn)
     {
-        //Text = await new Display().WindowTitleTextAsync(isLoggedOn);
+        //set app windowtitle
+        await new Display().WindowTitleTextAsync(isLoggedOn);
     }
 
     private static void WireDownEvents()
@@ -729,52 +714,16 @@ public partial class App : Application
         //    return;
         //}
 
-        await SetSignInSignOutStatusAsync(_mainViewModel.LoggedOn);
-        if (_mainViewModel.LoggedOn && Thread.CurrentThread.CurrentUICulture.Name != Resolve.UserSettings.CultureName)
-        {
-            await SetLanguageAsync(Resolve.UserSettings.CultureName);
-        }
+        //await SetSignInSignOutStatusAsync(_mainViewModel.LoggedOn);
+        //if (_mainViewModel.LoggedOn && Thread.CurrentThread.CurrentUICulture.Name != Resolve.UserSettings.CultureName)
+        //{
+        //    await SetLanguageAsync(Resolve.UserSettings.CultureName);
+        //}
 
-        ShowRenewSubscriptionDialog();
+        //ShowRenewSubscriptionDialog();
     }
 
-    private async Task SetSignInSignOutStatusAsync(bool isSignedIn)
-    {
-        await SetWindowTitleTextAsync(isSignedIn);
 
-        bool isSignedInWithAxCryptId = New<KnownIdentities>().IsLoggedOnWithAxCryptId;
-
-        //_createAccountToolStripMenuItem.Enabled = !isSignedIn;
-        //_debugManageAccountToolStripMenuItem.Enabled = isSignedInWithAxCryptId;
-        //_exportMyPrivateKeyToolStripMenuItem.Enabled = isSignedInWithAxCryptId;
-        //_exportSharingKeyToolStripMenuItem.Enabled = isSignedInWithAxCryptId;
-        //_importMyPrivateKeyToolStripMenuItem.Enabled = !isSignedIn;
-        //_importOthersSharingKeyToolStripMenuItem.Enabled = isSignedInWithAxCryptId;
-        //_inviteUserToolStripMenuItem.Enabled = New<AxCryptOnlineState>().IsOnline && isSignedIn;
-        //_optionsEncryptionUpgradeModeToolStripMenuItem.Enabled = isSignedInWithAxCryptId;
-        //_optionsChangePassphraseToolStripMenuItem.Enabled = New<AxCryptOnlineState>().IsOnline;
-        //_passwordResetToolStripMenuItem.Enabled = !isSignedIn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail);
-        //_signInToolStripMenuItem.Visible = !isSignedIn;
-        //_notifySignInToolStripMenuItem.Visible = !isSignedIn;
-        //_signOutToolStripMenuItem.Visible = isSignedIn;
-        //_notifySignOutToolStripMenuItem.Visible = isSignedIn;
-        //_encryptionUpgradeMenuItem.Enabled = isSignedInWithAxCryptId;
-    }
-    private async Task SetLanguageAsync(string cultureName)
-    {
-        Resolve.UserSettings.CultureName = cultureName;
-        if (Resolve.Log.IsInfoEnabled)
-        {
-            Resolve.Log.LogInfo("Set new UI language culture to '{0}'.".InvariantFormat(Resolve.UserSettings.CultureName));
-        }
-
-        UpdateArabicStyle();
-
-        InitializeContentResources();
-        await SetWindowTitleTextAsync(_mainViewModel.LoggedOn);
-        //_daysLeftPremiumLabel.UpdateText();
-        await SetSoftwareStatus();
-    }
 
     private void UpdateArabicStyle()
     {
@@ -785,53 +734,6 @@ public partial class App : Application
         //}
 
         //this.RightToLeft = RightToLeft.No;
-    }
-
-    private async Task SetSoftwareStatus()
-    {
-        //_softwareStatusButton.Image = Resources.bulb_green_40px;
-        //_softwareStatusButton.Visible = true;
-        //VersionUpdateStatus status = _mainViewModel.VersionUpdateStatus;
-        //switch (status)
-        //{
-        //    case VersionUpdateStatus.ShortTimeSinceLastSuccessfulCheck:
-        //    case VersionUpdateStatus.IsUpToDate:
-        //        _softwareStatusButton.Visible = false;
-        //        break;
-
-        //    case VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck:
-        //        _softwareStatusButton.ToolTipText = Texts.OldVersionTooltip;
-        //        break;
-
-        //    case VersionUpdateStatus.NewerVersionIsAvailable:
-        //        _softwareStatusButton.ToolTipText = Texts.NewVersionIsAvailableText.InvariantFormat(_mainViewModel.DownloadVersion.Version) + ' ' + Texts.ClickToDownloadText;
-        //        break;
-
-        //    case VersionUpdateStatus.Unknown:
-        //        _softwareStatusButton.ToolTipText = Texts.ClickToCheckForNewerVersionTooltip;
-        //        break;
-        //}
-    }
-
-    private void ShowRenewSubscriptionDialog()
-    {
-        if (!_mainViewModel.LoggedOn || !AxCryptUserAccountViewModel.HadAnyPaidSubscription)
-        {
-            return;
-        }
-
-        //using (RenewSubscriptionPromptDialog dialog = new RenewSubscriptionPromptDialog(this))
-        //{
-        //    if (dialog.HideDialog)
-        //    {
-        //        return;
-        //    }
-
-        //    if (dialog.ShowDialog(this) != DialogResult.OK)
-        //    {
-        //        return;
-        //    }
-        //}
     }
 
     private static Task ShowSignedInInformationAsync(CommandVerb verb, IEnumerable<string> files)
@@ -897,7 +799,6 @@ public partial class App : Application
         });
     }
 
-
     protected override Window CreateWindow(IActivationState? activationState)
     {
         Window window = base.CreateWindow(activationState);
@@ -908,108 +809,6 @@ public partial class App : Application
 
         return window;
     }
-
-    #region From PlatformInitializer
-
-    private static void RunBackground(CommandLine commandLine)
-    {
-        if (!commandLine.HasCommands)
-        {
-            Resolve.CommandService.Call(CommandVerb.Show, -1);
-            return;
-        }
-        commandLine.Execute();
-        //new ExplorerRefresh().Notify();
-    }
-
-    private static Task<bool> Ensure()
-    {
-        return EnsureNetVersionUsingNothingThatCrashesTheProcess();
-    }
-
-    private static async Task<bool> EnsureNetVersionUsingNothingThatCrashesTheProcess()
-    {
-        // Check if the type "System.Reflection.ReflectionContext" exists (indicating .NET 4.5 or higher)
-        if (Type.GetType("System.Reflection.ReflectionContext", false) != null)
-        {
-            return true;
-        }
-
-        bool result = await Application.Current.MainPage.DisplayAlert("AxCrypt", "You need .NET 4.5 or higher installed. Click OK to download.", "OK", "Cancel");
-
-        if (result)
-        {
-            await Microsoft.Maui.ApplicationModel.Launcher.OpenAsync(new Uri("https://www.microsoft.com/download/details.aspx?id=30653"));
-        }
-        return false;
-    }
-
-    private static void WireupEvents()
-    {
-    }
-
-    //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-    //private static void RunInteractive(CommandLine commandLine)
-    //{
-    //    AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-    //    TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
-
-    //    try
-    //    {
-    //        MainPage mainPage = new MainPage();
-    //        //mainPage.Initialize(commandLine);
-    //        Application.Current.MainPage = mainPage;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        ExceptionMessageAndReport(ex);
-    //    }
-    //    finally
-    //    {
-    //        AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
-    //        TaskScheduler.UnobservedTaskException -= TaskScheduler_UnobservedTaskException;
-    //    }
-    //}
-
-    private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-    {
-        Exception ex = (Exception)e.ExceptionObject;
-    }
-
-    private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
-    {
-        e.SetObserved();
-    }
-
-    private static void ExceptionMessageAndReport(Exception ex)
-    {
-        New<IReport>().Exception(ex);
-        while (ex.InnerException != null)
-        {
-            ex = ex.InnerException;
-        }
-        New<IPopup>().ShowAsync(PopupButtons.Ok, "Exception", ex.Message);
-    }
-
-    //private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-    //{
-    //    if (e.ExceptionObject is ApplicationExitException)
-    //    {
-    //        Application.Exit();
-    //    }
-    //    ExceptionMessageAndReport(e.ExceptionObject as Exception);
-    //}
-
-    //private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
-    //{
-    //    if (e.Exception is ApplicationExitException)
-    //    {
-    //        Application.Exit();
-    //    }
-    //    ExceptionMessageAndReport(e.Exception as Exception);
-    //}
-
-    #endregion
 
     public override void CloseWindow(Window window)
     {
@@ -1023,59 +822,13 @@ public partial class App : Application
 
     protected override void OnResume()
     {
+        //Check subscription level and resume operation
         base.OnResume();
     }
 
     protected override void OnSleep()
     {
+        // on minimize the window
         base.OnSleep();
-    }
-
-    public override void OpenWindow(Window window)
-    {
-        window.Created += Window_Created;
-        window.DisplayDensityChanged += Window_DisplayDensityChanged;
-        window.SizeChanged += Window_SizeChanged;
-        window.Deactivated += Window_Deactivated;
-        window.Destroying += Window_Destroying;
-        window.Stopped += Window_Stopped;
-        window.Resumed += Window_Resumed;
-
-        base.OpenWindow(window);
-    }
-
-    private void Window_SizeChanged(object? sender, EventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Window_Stopped(object? sender, EventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Window_Resumed(object? sender, EventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Window_DisplayDensityChanged(object? sender, DisplayDensityChangedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Window_Destroying(object? sender, EventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Window_Created(object? sender, EventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Window_Deactivated(object? sender, EventArgs e)
-    {
-        throw new NotImplementedException();
     }
 }

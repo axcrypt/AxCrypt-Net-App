@@ -20,6 +20,7 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
 using AxCrypt.Mono;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 
@@ -39,6 +40,8 @@ namespace AxCrypt.App.Windows
 
             IServiceCollection services = builder.Services;
             RegisterSingletons(services);
+
+            services.AddSingleton<ICustomNavigationService, CustomNavigationService>();
 
             services.AddMauiBlazorWebView();
 
@@ -65,7 +68,7 @@ namespace AxCrypt.App.Windows
 
                     windows.OnVisibilityChanged((vis, fd) =>
                     {
-
+                        // when minimized - vis.Visible = false
                     });
 
                     windows.OnClosed((wind, windArg) =>
@@ -157,11 +160,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<AdvancedOptionsViewModel>();
 
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
-
-            //TypeMap.Register.Singleton<UIThread>(() => new UIThread());
-            TypeMap.Register.Singleton<IUIThread>(() => new UIThread());
-
-            PlatformInitializer.Initialize();
         }
     }
 }

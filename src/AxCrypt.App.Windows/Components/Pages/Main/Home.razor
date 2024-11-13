@@ -15,7 +15,6 @@
 @using Microsoft.Maui.Devices;
 @using static AxCrypt.Abstractions.TypeResolve;
 
-@inject HomeViewModel HomeModel
 @inject NavigationManager navigation
 @inject IJSRuntime JSRuntime
 
@@ -35,14 +34,9 @@
 @code {
     private bool IsLoading { get; set; }
     private bool IsWideScreen { get; set; }
-    private LogOnIdentity _identity;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (_identity == null)
-        {
-            SignIn();
-        }
         if (firstRender)
         {
             try
@@ -66,122 +60,5 @@
                 StateHasChanged();
             }
         }
-    }
-
-    public async void SignIn()
-    {
-        try
-        {
-            AccountStatus status = await New<LogOnIdentity, IAccountService>(LogOnIdentity.Empty).StatusAsync(EmailAddress.Parse("yosufkani@axcrypt.net"));
-            if (status == AccountStatus.NotFound)
-            {
-                return;
-            }
-
-            if (New<UserSettings>().UserEmail != "yosufkani@axcrypt.net")
-            {
-                await new ApplicationManager().ClearAllSettings();
-            }
-
-            Passphrase passphrase = new Passphrase("mdFashil@07");
-
-            New<AxCryptOnlineState>().IsOnline = IsConnected();
-            New<ICache>().RemoveItem(CacheKey.RootKey);
-
-            IAccountService service = New<LogOnIdentity, IAccountService>(new LogOnIdentity(EmailAddress.Parse("yosufkani@axcrypt.net"), passphrase));
-            AccountStorage accountStorage = new AccountStorage(service);
-
-            bool isIdentityValid = false;
-
-            try
-            {
-                isIdentityValid = await accountStorage.IsIdentityValidAsync();
-            }
-            catch (ApiException)
-            {
-            }
-
-            IEnumerable<UserKeyPair> keyPairs = new UserKeyPair[0];
-            if (isIdentityValid)
-            {
-                keyPairs = (await accountStorage.AllKeyPairsAsync());
-                if (!keyPairs.Any())
-                {
-                    if (!New<AxCryptOnlineState>().IsOnline)
-                    {
-                        status = AccountStatus.Offline;
-                    }
-                    else
-                    {
-                        status = AccountStatus.Unknown;
-                    }
-
-                    isIdentityValid = false;
-                }
-            }
-
-            if (!isIdentityValid)
-            {
-                return;
-            }
-
-            _identity = new LogOnIdentity(keyPairs, passphrase);
-
-            await New<KnownIdentities>().SetDefaultEncryptionIdentity(_identity);
-            await UpdateAccountAndLogonIdentity(_identity);
-
-            return;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message, ex);
-        }
-    }
-
-    public static bool IsConnected()
-    {
-        NetworkAccess current = Connectivity.Current.NetworkAccess;
-        return current == NetworkAccess.Internet;
-    }
-
-    private async Task UpdateAccountAndLogonIdentity(LogOnIdentity identity)
-    {
-        await New<KnownIdentities>().SetDefaultEncryptionIdentity(identity);
-        TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
-        await UpdateAccountPlanStateAsync(identity, new NameOf(nameof(Texts.MessageAskAboutStartTrialForMobileApps)));
-    }
-
-    private async Task UpdateAccountPlanStateAsync(LogOnIdentity identity, NameOf startTrialMessage)
-    {
-        using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorWaitMessage, Texts.ProgressIndicatorWaitMessage))
-        {
-            PlanInformation planInformation = await PlanInformation.CreateAsync(identity);
-            if (planInformation.PlanState == PlanState.NoPremium || planInformation.PlanState == PlanState.OfflineNoPremium)
-            {
-                New<AccountStatusViewModel>().UpdateFreeAccountPlanInfo(planInformation);
-                return;
-            }
-
-            switch (planInformation.PlanState)
-            {
-                case PlanState.HasPremium:
-                case PlanState.HasPasswordManager:
-                    await New<AccountStatusViewModel>().LoadAccountStatusAsync();
-                    return;
-
-                case PlanState.HasBusiness:
-                    await New<AccountStatusViewModel>().AddMasterKeyInfo(identity);
-                    await New<AccountStatusViewModel>().LoadAccountStatusAsync();
-                    return;
-
-                case PlanState.CanTryPremium:
-                    return;
-
-                default:
-                    break;
-            }
-        }
-
-        return;
     }
 }

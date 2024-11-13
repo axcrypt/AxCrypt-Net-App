@@ -87,7 +87,7 @@ namespace AxCrypt.App.Windows.WinUI
                 }
                 else
                 {
-                    RunBackground(commandLine);
+                   // RunBackground(commandLine);
                 }
             }
             catch (Exception ex)
@@ -96,11 +96,6 @@ namespace AxCrypt.App.Windows.WinUI
                 throw;
             }
 
-            Resolve.CommandService.Dispose();
-            TypeMap.Register.Clear();
-
-            Environment.ExitCode = 0;
-            _mauiApp = MauiProgram.CreateMauiApp(commandLine);
             return _mauiApp;
         }
 
@@ -148,10 +143,11 @@ namespace AxCrypt.App.Windows.WinUI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Dependency registration, not real complexity")]
         private static void RegisterTypeFactories(string startPath)
         {
-            IEnumerable<Assembly> extraAssemblies = LoadFromFiles(new DirectoryInfo(Path.GetDirectoryName(startPath)).GetFiles("*.dll"));
-
-            Resolve.RegisterTypeFactories(_workFolderPath, extraAssemblies);
             RuntimeEnvironment.RegisterTypeFactories();
+            TypeMap.Register.Singleton<FileLocker>(() => new FileLocker());
+
+            IEnumerable<Assembly> extraAssemblies = LoadFromFiles(new DirectoryInfo(Path.GetDirectoryName(startPath)).GetFiles("*.dll"));
+            Resolve.RegisterTypeFactories(_workFolderPath, extraAssemblies);
             DesktopFactory.RegisterTypeFactories();
 
             TypeMap.Register.New<IProtectedData>(() => new ProtectedDataImplementation(System.Security.Cryptography.DataProtectionScope.CurrentUser));
@@ -183,7 +179,6 @@ namespace AxCrypt.App.Windows.WinUI
             TypeMap.Register.Singleton<ILicenseAuthority>(() => new PublicLicenseAuthority());
             TypeMap.Register.Singleton<PremiumManager>(() => new PremiumManagerWithAutoTrial());
             TypeMap.Register.Singleton<AboutAssembly>(() => new AboutAssembly(Assembly.GetExecutingAssembly()));
-            TypeMap.Register.Singleton<FileLocker>(() => new FileLocker());
             TypeMap.Register.Singleton<IProgressDialog>(() => new ProgressDialog());
             TypeMap.Register.Singleton<CultureNameMapper>(() => new CultureNameMapper(New<GlobalApiClient>().GetCultureInfoListAsync));
         }

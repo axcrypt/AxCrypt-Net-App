@@ -14,17 +14,18 @@ using AxCrypt.Mono;
 using AxCrypt.App.Components;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
 public class HomeViewModel : ISignIn
 {
-    private readonly NavigationManager _navigationManager;
+    private readonly ICustomNavigationService _navigationManager;
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
     private KnownFoldersViewModel _knownFoldersViewModel;
 
-    public HomeViewModel(NavigationManager navigationManager)
+    public HomeViewModel(ICustomNavigationService navigationManager)
     {
         _navigationManager = navigationManager ?? throw new ArgumentNullException(nameof(navigationManager));
 

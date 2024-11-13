@@ -5,6 +5,7 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using Microsoft.AspNetCore.Components;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.Code;
 
@@ -16,9 +17,9 @@ internal class SignUpSignIn
 
     public ApiVersion Version { get; set; }
 
-    private readonly NavigationManager _navigationManager;
+    private readonly ICustomNavigationService _navigationManager;
 
-    public SignUpSignIn(NavigationManager navigationManager)
+    public SignUpSignIn(ICustomNavigationService navigationManager)
     {
         _navigationManager = navigationManager;
     }
