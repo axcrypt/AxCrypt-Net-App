@@ -18,6 +18,7 @@ using AxCrypt.App.Components.Services;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Components.Data;
 using AxCrypt.Content;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -108,6 +109,7 @@ public class HomeBodyViewModel : ComponentBase
 
         SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
         _shareKeyViewModel = new ShareKeyViewModel();
+        FolderPicker = new FolderPickerWindows();
     }
 
     public string GetIconClass(string displayName)
@@ -265,6 +267,7 @@ public class HomeBodyViewModel : ComponentBase
             case FileSelectionType.KeySharing:
             case FileSelectionType.KeySharingEncrypt:
             case FileSelectionType.Wipe:
+            case FileSelectionType.WipeConfirm:
                 fileTypes.Add(DevicePlatform.WinUI, new string[] { });
                 fileTypes.Add(DevicePlatform.iOS, new string[] { });
                 fileTypes.Add(DevicePlatform.Android, new string[] { });
@@ -381,7 +384,7 @@ public class HomeBodyViewModel : ComponentBase
             _fileOperationViewModel.Recipients = null;
         }
 
-        await sharingListViewModel.ShareFiles.ExecuteAsync(null);
+        //await sharingListViewModel.ShareFiles.ExecuteAsync(null);
 
         ShowSharePopup = true;
     }
@@ -483,7 +486,7 @@ public class HomeBodyViewModel : ComponentBase
                 HandleRandomRename(e);
                 break;
 
-            case FileSelectionType.Wipe:
+            case FileSelectionType.WipeConfirm:
                 await HandleWipeConfirm(e);
                 break;
         }
@@ -503,7 +506,7 @@ public class HomeBodyViewModel : ComponentBase
             bool confirm = await Application.Current.MainPage.DisplayAlert("Confirm Wipe", "Are you sure you want to permanently wipe the selected file?", "Yes", "No");
             if (confirm)
             {
-                await _fileOperationViewModel.WipeFiles.ExecuteAsync(file);
+                await _fileOperationViewModel.WipeFiles.ExecuteAsync(new List<string> { file });
             }
         }
     }

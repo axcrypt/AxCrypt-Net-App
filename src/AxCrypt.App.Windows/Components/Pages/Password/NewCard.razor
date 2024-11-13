@@ -1,6 +1,7 @@
 ﻿@page ﻿"/AddCard"
 
 @using AxCrypt.Api.Model.Secret
+@using AxCrypt.App.Components.Helpers
 @using AxCrypt.App.Components.Models.Secret
 @using AxCrypt.App.Components.Services
 @using AxCrypt.App.Components.Models;
@@ -16,7 +17,7 @@
 @inject IStatusAlertService StatusAlertService;
 @inject NavigationManager navigationManager;
 @inject NewSecretViewModel newSecretViewModel
-@inject SecretServiceUtility secretServiceUtility
+@inject SecretService secretService
 
 <link href="css/@SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
 <link href="css/@SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
@@ -109,11 +110,8 @@
     protected override void OnInitialized()
     {
         SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        newSecretViewModel.Secret.Card.CardNumber = "";
-        newSecretViewModel.Secret.Card.SecretDesc = "";
-        newSecretViewModel.Secret.Card.NameOnCard = "";
-        newSecretViewModel.Secret.Card.SecurityCode = "";
-        newSecretViewModel = new NewSecretViewModel(secretServiceUtility);
+        secretService.SecretType = SecretType.Card;
+        newSecretViewModel = new NewSecretViewModel(secretService);
     }
 
     private async Task SavePassword()

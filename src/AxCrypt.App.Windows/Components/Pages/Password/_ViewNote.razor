@@ -133,16 +133,16 @@
                                 <div class="file-box-desktop file-box-empty scroll-container" id="sharedUserList" style="margin-right:0px; margin-right:5px;"></div>
                             }
                             @if (shareSecretViewModel.CanContextMenuOpened)
-                        {
-                            <div class="hide-model-popup context-menu">
-                                <dl>
-                                    <dd>
-                                        <img class="unshare-icon" src="/images/IcoUnShare.svg" alt="" />
-                                        <span @onclick="shareSecretViewModel.RemoveSelectedSharedUser">@Texts.UnSharePromptText</span>
-                                    </dd>
-                                </dl>
-                            </div>
-                        }
+                            {
+                                <div class="hide-model-popup context-menu">
+                                    <dl>
+                                        <dd>
+                                            <img class="unshare-icon" src="/images/IcoUnShare.svg" alt="" />
+                                            <span @onclick="shareSecretViewModel.RemoveSelectedSharedUser">@Texts.UnSharePromptText</span>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            }
                         </div>
                     </div>
                     <div style="margin-left: 0px !important;">
@@ -155,35 +155,29 @@
     </form>
 </div>
 @code {
-    public SecretCardViewModel NoteModel { get; set; } = SecretCardViewModel.Empty;
-    private SecretViewModel? CurrentSecret { get; set; }
     bool IsSharedView { get; set; }
-
     bool isAxCryptUser = true;
     
     protected override void OnInitialized()
     {
         viewSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         viewSecretViewModel.UserEmail = New<AccountStatusViewModel>().UserEmail;
-        CurrentSecret = secretService.GetCurrentSecret();
-        if (CurrentSecret == null)
+
+        if (secretService.CurrentSecret == null)
         {
             navigationManager.NavigateTo("/error");
         }
 
-        IsSharedView = CurrentSecret?.SharedWith != null && CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail;
+        IsSharedView = secretService.CurrentSecret?.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail;
     }
 
     private async Task OnAfterRenderAsync()
     {
-        viewSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-
         await jsRuntime.InvokeVoidAsync("toggleClass");
     }
 
     private async Task DeleteSecret()
     {
-          SecretViewModel secret = secretService.CurrentSecret;
         bool isConfirmed = await Application.Current.MainPage.DisplayAlert("Alert!", "Are You sure want to delete this secret.", Texts.ButtonOkText, Texts.ButtonCancelText);
         if (!isConfirmed)
         {
@@ -205,7 +199,7 @@
 
     private void HandleOnChange(ChangeEventArgs args)
     {
-        NoteModel.SecretDesc = args?.Value?.ToString();
+        secretService.CurrentSecret.Note.SecretDesc = args?.Value?.ToString();
     }
 
     private void NavigateToEdit()

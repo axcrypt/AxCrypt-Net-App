@@ -6,6 +6,7 @@
 @using AxCrypt.App.Components.Services
 @using AxCrypt.App.Components.Services.Interface
 @using AxCrypt.Content
+@using AxCrypt.Cryptor.Model
 @using Microsoft.JSInterop
 @using static AxCrypt.Abstractions.TypeResolve;
 
@@ -26,72 +27,67 @@
     </div>
     <EditForm Model="@secretService.CurrentSecret.Card" OnValidSubmit="SavePassword">
         <DataAnnotationsValidator />
-        @if (!editSecretViewModel.Loading)
-        {
-            <div class="row">
+        <div class="row">
 
-                <ul class="clean-up" style=" list-style:none">
-                    <li>
-                        <label for="Card_CardNumber">@Texts.CardNumberPrompt</label>
-                        <input maxlength="19" minlength="12" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.CardNumber" type="text"
-                               onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                        <ValidationMessage For="@(() => secretService.CurrentSecret.Card.CardNumber)" />
-                    </li>
-                    <li>
-                        <label for="Card_SecretDesc">@Texts.DescriptionLabel:</label>
-                        <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.SecretDesc"></textarea>
-                        <ValidationMessage For="@(() => secretService.CurrentSecret.Card.SecretDesc)" />
-                    </li>
-                    <li class="list-row">
-                        <div class="list-width">
-                            <label for="Card_NameOnCard">@Texts.NameOnCardPrompt</label>
-                            <input type="text" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.NameOnCard">
-                            <ValidationMessage For="@(() => secretService.CurrentSecret.Card.NameOnCard)" />
-                        </div>
-                        <div class="list-width">
-                            <label for="Card_SecurityCode">Security code:</label><br />
-                            <div style="display:flex">
-                                <input maxlength="1000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.SecurityCode" name="Card.SecurityCode" type="text"
-                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                       oninput="this.value = this.value.replace(/\D/g, '').substring(0, 3)">
-                                <ValidationMessage For="@(() => secretService.CurrentSecret.Card.SecurityCode)" />
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-row">
-                        <div class="list-width">
-                            <label for="Card_ExpirationDate">@Texts.ExpirationDatePrompt</label>
-                            <input id="card-exp-date-inp" style="color:#494949 !important; " @bind="@secretService.CurrentSecret.Card.ExpirationDate"
-                                   type="text" class="form-control"
+            <ul class="clean-up" style=" list-style:none">
+                <li>
+                    <label for="Card_CardNumber">@Texts.CardNumberPrompt</label>
+                    <input maxlength="19" minlength="12" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.CardNumber" type="text"
+                           onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                    <ValidationMessage For="@(() => secretService.CurrentSecret.Card.CardNumber)" />
+                </li>
+                <li>
+                    <label for="Card_SecretDesc">@Texts.DescriptionLabel:</label>
+                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.SecretDesc"></textarea>
+                    <ValidationMessage For="@(() => secretService.CurrentSecret.Card.SecretDesc)" />
+                </li>
+                <li class="list-row">
+                    <div class="list-width">
+                        <label for="Card_NameOnCard">@Texts.NameOnCardPrompt</label>
+                        <input type="text" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.NameOnCard">
+                        <ValidationMessage For="@(() => secretService.CurrentSecret.Card.NameOnCard)" />
+                    </div>
+                    <div class="list-width">
+                        <label for="Card_SecurityCode">Security code:</label><br />
+                        <div style="display:flex">
+                            <input maxlength="1000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.SecurityCode" name="Card.SecurityCode" type="text"
                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                   oninput="this.value = this.value.replace(/\D/g, '').substring(0, 6).replace(/(\d{2})(\d{2})/, '$1/$2')">
-                            <ValidationMessage For="@(() => secretService.CurrentSecret.Card.ExpirationDate)" />
+                                   oninput="this.value = this.value.replace(/\D/g, '').substring(0, 3)">
+                            <ValidationMessage For="@(() => secretService.CurrentSecret.Card.SecurityCode)" />
                         </div>
-                    </li>
-                    <li>
-                        <div>
-                            <button type="submit" class="button btn-extra-small success">Save</button>
-                            <NavLink href="passwordManager">
-                                <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
-                            </NavLink>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        }
+                    </div>
+                </li>
+                <li class="list-row">
+                    <div class="list-width">
+                        <label for="Card_ExpirationDate">@Texts.ExpirationDatePrompt</label>
+                        <input id="card-exp-date-inp" style="color:#494949 !important; " @bind="@secretService.CurrentSecret.Card.ExpirationDate"
+                               type="text" class="form-control"
+                               onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                               oninput="this.value = this.value.replace(/\D/g, '').substring(0, 6).replace(/(\d{2})(\d{2})/, '$1/$2')">
+                        <ValidationMessage For="@(() => secretService.CurrentSecret.Card.ExpirationDate)" />
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <button type="submit" class="button btn-extra-small success">Save</button>
+                        <NavLink href="passwordManager">
+                            <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
+                        </NavLink>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </EditForm>
 </div>
 
 @code {
-    public SecretCardViewModel CardModel { get; set; }
-    private SecretViewModel? CurrentSecret { get; set; }
     bool isAxCryptUser = true;
 
     protected override void OnInitialized()
     {
         editSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        CurrentSecret = secretService.GetCurrentSecret();
-        if (CurrentSecret == null)
+
+        if (secretService.CurrentSecret == null)
         {
             navigationManager.NavigateTo("/error");
         }
@@ -120,7 +116,7 @@
 
     private void HandleOnChange(ChangeEventArgs args)
     {
-        CardModel.SecretDesc = args?.Value?.ToString();
+        secretService.CurrentSecret.Card.SecretDesc = args?.Value?.ToString();
     }
 
     bool contextMenu = false;

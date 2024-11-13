@@ -7,7 +7,7 @@ using AxCrypt.App.Components.Services;
 using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
-using AxCrypt.Core.Runtime;
+
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Components.Models.Secret
@@ -16,35 +16,32 @@ namespace AxCrypt.App.Components.Models.Secret
     {
         public SubscriptionLevel SubscriptionLevel { get; set; }
 
-        private ProcessIndicatorService _ProcessIndicatorService;
-        public EditSecretViewModel(SecretService secretService, ProcessIndicatorService processIndicatorService)
+        private ProcessIndicatorService? _ProcessIndicatorService;
+
+        public EditSecretViewModel(SecretService secretService, ProcessIndicatorService processIndicatorService) : base(secretService) 
         {
-            Secret = secretService.GetCurrentSecret();
             _ProcessIndicatorService = processIndicatorService;
-        }
 
-        public SecretViewModel Secret { get; set; }
-
-        private bool _loading { get; set; } = false;
-
-        private Action? _onStateChange;
-
-        public void SetOnStateChange(Action onStateChange)
-        {
-            _onStateChange = onStateChange;
-        }
-
-        public bool Loading
-        {
-            get => _loading;
-            set
+            switch (Secret.SecretType)
             {
-                if (_loading != value)
-                {
-                    _loading = value;
-                    _onStateChange?.Invoke();
-                }
+                case Api.Model.Secret.SecretType.Legacy:
+                case Api.Model.Secret.SecretType.Password:
+                    PageTitle = Texts.EditPasswordTitle;
+                    break;
+
+                case Api.Model.Secret.SecretType.Card:
+                    PageTitle = Texts.EditCardTitle;
+                    break;
+
+                case Api.Model.Secret.SecretType.Note:
+                    PageTitle = Texts.EditNoteTitle;
+                    break;
+
+                default:
+                    break;
             }
+
+            base.ShowSecretByType(Secret.SecretType);
         }
 
         public async Task<bool> SaveSecretAsync()
@@ -55,15 +52,14 @@ namespace AxCrypt.App.Components.Models.Secret
                 return false;
             }
 
+            if (!HasPaidSubscription)
+            {
+                ErrorMessage = Texts.SaveSecretErrorIsReadOnly;
+                return false;
+            }
+
             using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
             {
-                HasPaidSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
-                if (!HasPaidSubscription)
-                {
-                    ErrorMessage = Texts.SaveSecretErrorIsReadOnly;
-                    return false;
-                }
-
                 if (Secret == null)
                 {
                     return false;
@@ -130,51 +126,51 @@ namespace AxCrypt.App.Components.Models.Secret
             return true;
         }
 
-        public bool ValidModel()
-        {
-            switch (Secret.SecretType)
-            {
-                case Api.Model.Secret.SecretType.Legacy:
-                case Api.Model.Secret.SecretType.Password:
-                    return ValidPasswordModel();
+        //public bool ValidModel()
+        //{
+        //    switch (Secret.SecretType)
+        //    {
+        //        case Api.Model.Secret.SecretType.Legacy:
+        //        case Api.Model.Secret.SecretType.Password:
+        //            return ValidPasswordModel();
 
-                case Api.Model.Secret.SecretType.Card:
-                    return ValidCardModel();
+        //        case Api.Model.Secret.SecretType.Card:
+        //            return ValidCardModel();
 
-                case Api.Model.Secret.SecretType.Note:
-                    return ValidNoteModel();
-            }
-            return false;
-        }
+        //        case Api.Model.Secret.SecretType.Note:
+        //            return ValidNoteModel();
+        //    }
+        //    return false;
+        //}
 
-        private bool ValidNoteModel()
-        {
-            if (string.IsNullOrEmpty(Secret.Note.SecretDesc))
-            {
-                ErrorMessage = "Fill all the required(marked *) fields!";
-                return false;
-            }
-            return true;
-        }
+        //private bool ValidNoteModel()
+        //{
+        //    if (string.IsNullOrEmpty(Secret.Note.SecretDesc))
+        //    {
+        //        ErrorMessage = "Fill all the required(marked *) fields!";
+        //        return false;
+        //    }
+        //    return true;
+        //}
 
-        private bool ValidCardModel()
-        {
-            if (string.IsNullOrEmpty(Secret.Card.CardNumber) || string.IsNullOrEmpty(Secret.Card.SecretDesc) || string.IsNullOrEmpty(Secret.Card.ExpirationDate) || string.IsNullOrEmpty(Secret.Card.NameOnCard) || string.IsNullOrEmpty(Secret.Card.SecurityCode))
-            {
-                ErrorMessage = "Fill all the required(marked *) fields!";
-                return false;
-            }
-            return true;
-        }
+        //private bool ValidCardModel()
+        //{
+        //    if (string.IsNullOrEmpty(Secret.Card.CardNumber) || string.IsNullOrEmpty(Secret.Card.SecretDesc) || string.IsNullOrEmpty(Secret.Card.ExpirationDate) || string.IsNullOrEmpty(Secret.Card.NameOnCard) || string.IsNullOrEmpty(Secret.Card.SecurityCode))
+        //    {
+        //        ErrorMessage = "Fill all the required(marked *) fields!";
+        //        return false;
+        //    }
+        //    return true;
+        //}
 
-        private bool ValidPasswordModel()
-        {
-            if (string.IsNullOrEmpty(Secret.Password.SecretDesc) || string.IsNullOrEmpty(Secret.Password.SecretValue))
-            {
-                ErrorMessage = "Fill all the required(marked *) fields!";
-                return false;
-            }
-            return true;
-        }
+        //private bool ValidPasswordModel()
+        //{
+        //    if (string.IsNullOrEmpty(Secret.Password.SecretDesc) || string.IsNullOrEmpty(Secret.Password.SecretValue))
+        //    {
+        //        ErrorMessage = "Fill all the required(marked *) fields!";
+        //        return false;
+        //    }
+        //    return true;
+        //}
     }
 }

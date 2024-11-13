@@ -116,12 +116,12 @@
                                 </div>
                             </div>
                             <div class="">
-                                <h3 class="select-files font-bold">Added users with access (<span id="userCount">@secretService.CurrentSecret.SharedWith?.Count()</span>)</h3>
-                                @if (secretService.CurrentSecret.SharedWith.Any())
+                                <h3 class="select-files font-bold">Added users with access (<span id="userCount">@shareSecretViewModel.Secret.SharedWith?.Count()</span>)</h3>
+                                @if (shareSecretViewModel.Secret.SharedWith.Any())
                                 {
                                     <div class="row">
                                         <div class="file-box-desktop scroll-container" id="sharedUserList" style="margin-bottom:0px; margin-right:5px;">
-                                            @foreach (SecretSharedUserViewModel user in secretService.CurrentSecret.SharedWith)
+                                            @foreach (SecretSharedUserViewModel user in shareSecretViewModel.Secret.SharedWith)
                                             {
                                                 <dl>
                                                     <dd class="list-bgrnd">
@@ -173,36 +173,32 @@
 </div>
 
 @code {
-    public SecretCardViewModel? CardModel { get; set; }
-    private SecretViewModel? CurrentSecret { get; set; }
     bool IsSharedView { get; set; }
     bool isAxCryptUser = true;
 
     protected override void OnInitialized()
     {
-        CurrentSecret = secretService.GetCurrentSecret();
-        if (CurrentSecret == null)
+        viewSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        viewSecretViewModel.UserEmail = New<AccountStatusViewModel>().UserEmail;
+
+        if (secretService.CurrentSecret == null)
         {
             navigationManager.NavigateTo("/error");
         }
 
-        IsSharedView = CurrentSecret?.SharedWith != null && CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail;
+        IsSharedView = secretService.CurrentSecret?.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail;
     }
 
     private async Task OnAfterRenderAsync()
     {
-        viewSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        viewSecretViewModel.UserEmail = New<AccountStatusViewModel>().UserEmail;
-
         await JSRuntime.InvokeVoidAsync("toggleClass");
     }
 
     private void NavigateToEdit()
     {
-        SecretViewModel secret = secretService.CurrentSecret;
-        if (secret != null)
+        if (secretService.CurrentSecret != null)
         {
-            string url = secret.SecretType switch
+            string url = secretService.CurrentSecret.SecretType switch
             {
                 AxCrypt.Api.Model.Secret.SecretType.Card => $"/editcard"
             };
@@ -215,7 +211,6 @@
 
     private async Task DeleteSecret()
     {
-        SecretViewModel secret = secretService.CurrentSecret;
         bool isConfirmed = await Application.Current.MainPage.DisplayAlert("Alert!", "Are You sure want to delete this secret.", Texts.ButtonOkText, Texts.ButtonCancelText);
         if (!isConfirmed)
         {
@@ -237,7 +232,7 @@
 
     private async Task HandleOnChange(ChangeEventArgs args)
     {
-        CardModel.SecretDesc = args?.Value?.ToString();
+        secretService.CurrentSecret.Card.SecretDesc = args?.Value?.ToString();
     }
 
     private async Task ApplyShare()

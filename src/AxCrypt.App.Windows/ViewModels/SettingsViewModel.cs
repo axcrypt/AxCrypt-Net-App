@@ -214,7 +214,8 @@ public class SettingsViewModel
             return;
         }
 
-        await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(selectedFiles.Select(e => e.FullPath).ToList());
+        IEnumerable<string> filesList = selectedFiles.Select(e => e.FullPath).ToList();
+        await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(filesList);
     }
 
     public void ToggleAlwaysOffline(EventArgs e)

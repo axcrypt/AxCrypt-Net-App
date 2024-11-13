@@ -6,37 +6,26 @@ using AxCrypt.Core.UI;
 using System.Collections.ObjectModel;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Cryptor.Model;
-using AxCrypt.Core.Runtime;
-using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Components.Utility;
 using AxCrypt.App.Components.Password;
 using AxCrypt.App.Components.Helpers;
+
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Components.Models.Secret
 {
     public class ShareSecretViewModel : ManageSecretViewModel
     {
         private LogOnIdentity _identity;
-        private readonly SecretService _secretService;
-        private SecretViewModel _secret;
 
-        public SecretViewModel Secret
+        public ShareSecretViewModel(SecretService secretService) : base(secretService)
         {
-            get { return GetProperty<SecretViewModel>(nameof(Secret)); }
-            private set { SetProperty(nameof(Secret), value); }
-        }
-
-        public ShareSecretViewModel(SecretService secretService)
-        {
-            _secretService = secretService;
-            InitializeSecret();
             _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
 
             SetNewContactState();
-            bool hasEncryptionCapability = New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
 
-            SharedSecretTitle = _secretService.CurrentSecret.SecretTitle;
-            ShareSecretUserList = new ObservableCollection<SecretSharedUserViewModel>(_secretService.CurrentSecret.SharedWith.Select(user => new SecretSharedUserViewModel(user.UserEmail, user.Visibility, user.OwnerEmail, AccountStatus.Verified)));
+            SharedSecretTitle = Secret.SecretTitle;
+            ShareSecretUserList = new ObservableCollection<SecretSharedUserViewModel>(Secret.SharedWith.Select(user => new SecretSharedUserViewModel(user.UserEmail, user.Visibility, user.OwnerEmail, AccountStatus.Verified)));
 
             CanEnableAddShareSecret = true;
             EnableApplyButton = false;
@@ -45,11 +34,6 @@ namespace AxCrypt.App.Components.Models.Secret
             VisibilityType = SecretShareVisibility.Forever.ToString();
             PageTitle = Texts.ShareAccessTitle;
             VisibilityTypeList = ViewModelHelper.GetVisibilityTypeList();
-        }
-
-        public void InitializeSecret()
-        {
-            _secret = _secretService.GetCurrentSecret();
         }
 
         public ObservableCollection<SecretSharedUserViewModel> ShareSecretUserList { get; set; } = new ObservableCollection<SecretSharedUserViewModel>();
@@ -87,7 +71,7 @@ namespace AxCrypt.App.Components.Models.Secret
             set { SetProperty(nameof(EnableApplyButton), value); }
         }
 
-        public EmailAddress UserEmailForContextMenuAction { get; set; }
+        public EmailAddress? UserEmailForContextMenuAction { get; set; }
 
         public bool CanEnableNewShareSecretUserEntry { get; set; }
 
@@ -143,14 +127,14 @@ namespace AxCrypt.App.Components.Models.Secret
                 return false;
             }
 
-            if (_secretService.CurrentSecret.SharedWith.Any(user => user.UserEmail == addedUserEmailAddress))
+            if (Secret.SharedWith.Any(user => user.UserEmail == addedUserEmailAddress))
             {
                 ErrorMessage = "Email already exists!";
                 return false;
             }
 
             int maxAllowedUsersCount = ViewModelHelper.MaxAllowedUsersCountToShare();
-            int currentUserCount = _secretService.CurrentSecret.SharedWith.Count();
+            int currentUserCount = Secret.SharedWith.Count();
 
             if (currentUserCount >= maxAllowedUsersCount)
             {
@@ -170,15 +154,15 @@ namespace AxCrypt.App.Components.Models.Secret
                 return;
             }
 
-            if (_secretService.CurrentSecret.SharedWith is List<SecretSharedUserViewModel> sharedWithList)
+            if (Secret.SharedWith is List<SecretSharedUserViewModel> sharedWithList)
             {
                 sharedWithList.Add(new SecretSharedUserViewModel(addedUserEmailAddress, parsedVisibility, _identity.UserEmail.Address));
             }
             else
             {
-                List<SecretSharedUserViewModel> updatedList = _secretService.CurrentSecret.SharedWith.ToList();
+                List<SecretSharedUserViewModel> updatedList = Secret.SharedWith.ToList();
                 updatedList.Add(new SecretSharedUserViewModel(addedUserEmailAddress, parsedVisibility, _identity.UserEmail.Address));
-                _secretService.CurrentSecret.SharedWith = updatedList;
+                Secret.SharedWith = updatedList;
             }
 
             UpdateUIElementsOnChange();
@@ -221,12 +205,12 @@ namespace AxCrypt.App.Components.Models.Secret
 
         private void RemoveSharedUserInternal(EmailAddress addedUserEmailAddress)
         {
-            List<SecretSharedUserViewModel> sharedWithList = _secretService.CurrentSecret.SharedWith as List<SecretSharedUserViewModel>;
+            List<SecretSharedUserViewModel> sharedWithList = Secret.SharedWith as List<SecretSharedUserViewModel>;
 
             if (sharedWithList == null)
             {
-                sharedWithList = _secretService.CurrentSecret.SharedWith.ToList();
-                _secretService.CurrentSecret.SharedWith = sharedWithList;
+                sharedWithList = Secret.SharedWith.ToList();
+                Secret.SharedWith = sharedWithList;
             }
 
             SecretSharedUserViewModel selectedSharedKeyUser = sharedWithList.SingleOrDefault(ss => ss.UserEmail == addedUserEmailAddress);
@@ -257,9 +241,9 @@ namespace AxCrypt.App.Components.Models.Secret
                 return false;
             }
 
-            SecretClientModel theSecret = _secret.ToClientModel(_secret.SecretGuid);
+            SecretClientModel theSecret = Secret.ToClientModel(Secret.SecretGuid);
 
-            IEnumerable<AxCrypt.Core.Secrets.SecretSharedUser> secretSharedUsers = _secretService.CurrentSecret.SharedWith.Select(us => new SecretSharedUser(us.UserEmail, us.Visibility));
+            IEnumerable<AxCrypt.Core.Secrets.SecretSharedUser> secretSharedUsers = Secret.SharedWith.Select(us => new SecretSharedUser(us.UserEmail, us.Visibility));
             if (!secretSharedUsers.Any())
             {
                 new List<AxCrypt.Core.Secrets.SecretSharedUser>();
@@ -267,8 +251,8 @@ namespace AxCrypt.App.Components.Models.Secret
 
             theSecret.Share = new ShareSecret(secretSharedUsers, _identity.UserEmail.Address, New<INow>().Utc);
             await PersonalSecrets.ShareAsync(theSecret);
-            _secret.SharedWith = _secretService.CurrentSecret.SharedWith;
-            _secretService.CurrentSecret = new SecretViewModel(theSecret);
+            Secret.SharedWith = Secret.SharedWith;
+            Secret = new SecretViewModel(theSecret);
             ShareSecretUserList.Clear();
             return true;
         }

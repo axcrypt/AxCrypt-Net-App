@@ -1,5 +1,4 @@
-﻿using AxCrypt.Abstractions;
-using AxCrypt.Api;
+﻿using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Secret;
 using AxCrypt.App.Components.Helpers;
@@ -8,18 +7,18 @@ using AxCrypt.App.Components.PasswordManager;
 using AxCrypt.App.Components.Services;
 using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Components.Utility;
+using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
-using AxCrypt.Core.Service;
 using AxCrypt.Core.Service.Secrets;
-using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
 using Microsoft.AspNetCore.Components;
 using System.Collections.ObjectModel;
 using System.Text;
+
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Components.Models.Secret
@@ -33,12 +32,15 @@ namespace AxCrypt.App.Components.Models.Secret
         private bool _activateSharedListFilter = false;
         private LogOnIdentity _identity;
 
-        private IStatusAlertService _StatusAlertService;
+        private IStatusAlertService? _StatusAlertService;
+        private ProcessIndicatorService _ProcessIndicatorService;
 
-        public SecretsListViewModel(IStatusAlertService statusAlertService)
+        public SecretsListViewModel(IStatusAlertService statusAlertService, ProcessIndicatorService processIndicatorService)
         {
             _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
             _StatusAlertService = statusAlertService;
+            _ProcessIndicatorService = processIndicatorService;
+
             Initialize();
         }
 
@@ -178,28 +180,6 @@ namespace AxCrypt.App.Components.Models.Secret
             }
         }
 
-        private bool _loading { get; set; } = false;
-
-        private Action _onStateChange;
-
-        public void SetOnStateChange(Action onStateChange)
-        {
-            _onStateChange = onStateChange;
-        }
-
-        public bool Loading
-        {
-            get => _loading;
-            set
-            {
-                if (_loading != value)
-                {
-                    _loading = value;
-                    _onStateChange?.Invoke();
-                }
-            }
-        }
-
         public bool CanShowErrorMessage
         {
             get { return GetProperty<bool>(nameof(CanShowErrorMessage)); }
@@ -250,17 +230,17 @@ namespace AxCrypt.App.Components.Models.Secret
                     saveResult = await ExportXml();
                     break;
                 default:
-                    _StatusAlertService.Error("Unsupported file type.");
+                    _StatusAlertService?.Error("Unsupported file type.");
                     return;
             }
 
             if (saveResult)
             {
-                _StatusAlertService.Success("Your file has been successfully downloaded!");
+                _StatusAlertService?.Success("Your file has been successfully downloaded!");
             }
             else
             {
-                _StatusAlertService.Error("Failed to download the file. Please check your internet connection and try again.");
+                _StatusAlertService?.Error("Failed to download the file. Please check your internet connection and try again.");
             }
         }
 
@@ -269,95 +249,86 @@ namespace AxCrypt.App.Components.Models.Secret
         /// </summary>
         /// <param name="keyword">Keyword to search with</param>
         /// <returns>SecretCollection containing found secrets</returns>
-        public async Task<ObservableCollection<SecretViewModel>> FindSecrets(bool forceReload = true)
+        public async Task<ObservableCollection<SecretViewModel>> FindSecrets()
         {
-            _activateSharedListFilter = false;
-            if (forceReload)
+            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
             {
-                _CachedSecrets.Clear();
-                Secrets.Clear();
-            }
-            if (_CachedSecrets.ContainsKey(SecretFilterOption.All))
-            {
-                Secrets = _CachedSecrets[SecretFilterOption.All];
-                await ApplyFilter();
+                ClearFilterAndCachedSecrets();
+
+                if (_CachedSecrets.ContainsKey(SecretFilterOption.All))
+                {
+                    Secrets = _CachedSecrets[SecretFilterOption.All];
+                    ApplyFilter();
+                    return Secrets;
+                }
+
+                IEnumerable<SecretViewModel> secrets = await LoadSecrets(() => PersonalSecrets.SelectBySearch(Keyword ?? ""));
+                Secrets = new ObservableCollection<SecretViewModel>(secrets);
+                ApplyFilter();
                 return Secrets;
             }
+        }
 
-            IEnumerable<SecretViewModel> secrets = await LoadSecrets(() => PersonalSecrets.SelectBySearch(Keyword ?? ""));
-            Secrets = new ObservableCollection<SecretViewModel>(secrets);
-            await ApplyFilter();
-            return Secrets;
+        private void ClearFilterAndCachedSecrets()
+        {
+            _activateSharedListFilter = false;
+
+            _CachedSecrets.Clear();
+            Secrets.Clear();
         }
 
         private async Task<IEnumerable<SecretViewModel>> LoadSecrets(Func<Task<SecretClientCollection>> SelectBySearchFuncAsync)
         {
             return await Task.Run(async () =>
             {
-                IEnumerable<AxCrypt.Cryptor.Model.SecretClientModel> secrets = await SelectBySearchFuncAsync();
+                IEnumerable<SecretClientModel> secrets = await SelectBySearchFuncAsync();
                 return secrets.Select(sc => { return new SecretViewModel(sc); });
             });
         }
 
-        private async Task FindSharedWithSecrets(IProgress<LoadingModel> progress = null)
+        private async Task FindSharedWithSecrets()
         {
-            await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
+            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
             {
                 if (_CachedSecrets.ContainsKey(SecretFilterOption.Shared))
                 {
                     Secrets = _CachedSecrets[SecretFilterOption.Shared];
-                    await ApplyFilter();
-                    return Task.CompletedTask;
+                    ApplyFilter();
+                    return;
                 }
 
                 IEnumerable<SecretViewModel> sharedWithSecrets = await LoadSecrets(() => SharedSecrets.SelectBySearch(Keyword ?? ""));
                 Secrets = new ObservableCollection<SecretViewModel>(sharedWithSecrets);
-                await ApplyFilter();
-
-                return Task.CompletedTask;
-            }, progress);
+                ApplyFilter();
+            }
         }
 
-        public async Task FilterSecretsBy(SecretsFilter type, IProgress<LoadingModel> progress = null)
+        public async Task FilterSecretsBy(SecretsFilter type)
         {
             if (SelectedSecretFilter == type)
             {
                 return;
             }
-
-            SelectedSecretFilter = type;
-
-            await ApplyFilterOnSecrets();
-            progress?.Report(new LoadingModel { IsLoading = false });
-        }
-
-        public async Task ApplyFilterOnSecrets(IProgress<LoadingModel> progress = null)
-        {
-            await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
+            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
             {
-                {
-                    await Task.Run(() =>
-                    {
-                        ApplyFilter();
-                    });
-                }
-                return Task.CompletedTask;
-            }, progress);
+                SelectedSecretFilter = type;
+
+                await ApplyFilterOnSecrets();
+            }
         }
 
-        public async Task ClearFiltersAndReloadSecrets()
+        public async Task ApplyFilterOnSecrets()
         {
-            SelectedSecretFilter = SecretsFilter.All;
-            SelectedSecretListFilter = SecretFilterOption.All;
-
-            _CachedSecrets.Clear();
-
-            Secrets = await FindSecrets(forceReload: true);
-
-            FilteredSecrets = new ObservableCollection<SecretViewModel>(Secrets);
+            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+            {
+                await Task.Run(() =>
+                {
+                    ApplyFilter();
+                });
+            }
         }
 
-        private async Task ApplyFilter(IProgress<LoadingModel> progress = null)
+        private void ApplyFilter()
         {
             SearchSecrets();
 
@@ -391,7 +362,6 @@ namespace AxCrypt.App.Components.Models.Secret
                 default:
                     break;
             }
-            progress?.Report(new LoadingModel { IsLoading = false });
         }
 
         private void SearchSecrets()
@@ -422,31 +392,31 @@ namespace AxCrypt.App.Components.Models.Secret
             return filteredSecrets;
         }
 
-        public async Task FilterSecretsBy(SecretFilterOption secretFilter, IProgress<LoadingModel> progress = null)
+        public async Task FilterSecretsBy(SecretFilterOption secretFilter)
         {
-            await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
+            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
             {
                 if (SelectedSecretListFilter == secretFilter)
                 {
-                    return Task.CompletedTask;
+                    return;
                 }
                 SelectedSecretListFilter = secretFilter;
                 UpdateSecretListFilterStyle(secretFilter);
 
                 await FindSecrets();
                 await ApplyFilterOnSecrets();
-                return Task.CompletedTask;
-            }, progress);
+                return;
+            }
         }
 
-        public async Task FilterSharedSecrets(SecretFilterOption secretFilter, IProgress<LoadingModel> progress = null)
+        public async Task FilterSharedSecrets(SecretFilterOption secretFilter)
         {
-            await AxCrypt.App.Components.Services.LoadingProgressHelper.ExecuteLoadingProgress<Task>(async () =>
+            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
             {
                 _activateSharedListFilter = true;
                 if (SelectedSecretListFilter == secretFilter)
                 {
-                    return Task.CompletedTask;
+                    return;
                 }
 
                 SelectedSecretListFilter = secretFilter;
@@ -455,8 +425,8 @@ namespace AxCrypt.App.Components.Models.Secret
                 await FindSharedWithSecrets();
 
                 await ApplyFilterOnSecrets();
-                return Task.CompletedTask;
-            }, progress);
+                return;
+            }
         }
 
         private void UpdateSecretListFilterStyle(SecretFilterOption secretFilter = SecretFilterOption.None)
@@ -465,17 +435,14 @@ namespace AxCrypt.App.Components.Models.Secret
             {
                 case SecretFilterOption.None:
                 case SecretFilterOption.All:
-
                     LoadCachedSecretsByFilter(SecretFilterOption.All);
                     break;
 
                 case SecretFilterOption.Recently:
-
                     LoadCachedSecretsByFilter(SecretFilterOption.All);
                     break;
 
                 case SecretFilterOption.Shared:
-
                     LoadCachedSecretsByFilter(SecretFilterOption.Shared);
                     break;
 
@@ -509,27 +476,25 @@ namespace AxCrypt.App.Components.Models.Secret
             FilteredSecrets = new ObservableCollection<SecretViewModel>(combinedSecrets);
         }
 
-        private static string SecDescription(SecretViewModel secret)
+        private static string? SecDescription(SecretViewModel? secret)
         {
-            if (secret.SecretType == SecretType.Card)
+            if (secret?.SecretType == SecretType.Card)
             {
                 return secret.Card.SecretDesc;
             }
 
-            if (secret.SecretType == SecretType.Note)
+            if (secret?.SecretType == SecretType.Note)
             {
                 return secret.Note.SecretDesc;
             }
 
-            return secret.Password.SecretDesc;
+            return secret?.Password.SecretDesc;
         }
 
         private void ClearErrorProviders()
         {
             ErrorMessage = "";
         }
-
-        private UserSettings _userSettings;
 
         public async Task<bool> ExportTextAsync()
         {

@@ -28,8 +28,6 @@
     </div>
    <EditForm Model="@secretService.CurrentSecret.Note" OnValidSubmit="SavePassword">
         <DataAnnotationsValidator />
-        @if (!editSecretViewModel.Loading)
-        {
             <div class="row">
                 <ul class="clean-up" style=" list-style:none">
                 <li>
@@ -52,19 +50,16 @@
             </li>
             </ul>
         </div>
-        }
     </EditForm>
 </div>
 @code {
-    public SecretCardViewModel? NoteModel { get; set; }
-    private SecretViewModel? CurrentSecret { get; set; }
     bool isAxCryptUser = true;
 
     protected override void OnInitialized()
     {
         editSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        CurrentSecret = secretService.GetCurrentSecret();
-        if (CurrentSecret == null)
+
+        if (secretService.CurrentSecret == null)
         {
             navigationManager.NavigateTo("/error");
         }
@@ -122,7 +117,7 @@
 
     private async Task HandleOnChange(ChangeEventArgs args)
     {
-        NoteModel.SecretDesc = args.Value.ToString();
+        secretService.CurrentSecret.Note.SecretDesc = args.Value.ToString();
     }
    
 }

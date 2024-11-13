@@ -3,12 +3,17 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using AxCrypt.Core;
 using Microsoft.AspNetCore.Components;
-using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Core.Session;
 using AxCrypt.App.Windows.Code;
 using AxCrypt.Common;
 using AxCrypt.Core.Extensions;
 using System.Globalization;
+using AxCrypt.Abstractions;
+using AxCrypt.Core.Crypto;
+using AxCrypt.Mono;
+using AxCrypt.App.Components;
+
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -29,7 +34,7 @@ public class HomeViewModel : ISignIn
 
     private void SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent()
     {
-        New<LicensePolicy>();
+        //New<LicensePolicy>();
         _mainViewModel = New<MainViewModel>();
         _fileOperationViewModel = New<FileOperationViewModel>();
         _knownFoldersViewModel = New<KnownFoldersViewModel>();

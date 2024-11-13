@@ -12,6 +12,7 @@ namespace AxCrypt.App.Components.Services;
 public class UserNotificationService
 {
     private ProcessIndicatorService _ProcessIndicatorService;
+
     public UserNotificationService(ProcessIndicatorService processIndicatorService)
     {
         _ProcessIndicatorService = processIndicatorService;

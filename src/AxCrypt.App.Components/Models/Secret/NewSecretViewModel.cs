@@ -8,7 +8,6 @@ using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Cryptor.Model;
-using Microsoft.AspNetCore.Components;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -16,23 +15,40 @@ namespace AxCrypt.App.Components.Models.Secret
 {
     public class NewSecretViewModel : ManageSecretViewModel
     {
-        private ProcessIndicatorService _ProcessIndicatorService;
-        public NewSecretViewModel(ProcessIndicatorService processIndicatorService)
+        private ProcessIndicatorService? _ProcessIndicatorService;
+
+        public NewSecretViewModel(SecretService secretService, ProcessIndicatorService processIndicatorService = null) : base(secretService)
         {
             _ProcessIndicatorService = processIndicatorService;
+
+            Secret = Initialize(secretService.SecretType);
+
+            switch (secretService.SecretType)
+            {
+                case SecretType.Legacy:
+                case SecretType.Password:
+                    PageTitle = Texts.AddPasswordTitle;
+                    Secret.Password = new SecretPasswordViewModel("", "", "", "", "");
+                    break;
+
+                case SecretType.Card:
+                    PageTitle = Texts.AddCardTitle;
+                    Secret.Card = new SecretCardViewModel("", "", "", "", "");
+                    break;
+
+                case SecretType.Note:
+                    PageTitle = Texts.AddNoteTitle;
+                    Secret.Note = new SecretNoteViewModel("", "");
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.ShowSecretByType(secretService.SecretType);
         }
 
-        public string ErrorMessage { get; set; }
-        public bool CanShowErrorMessage { get; set; }
-        public bool ShowSuggestPasswordLoadingIcon { get; set; }
-
-        [Parameter]
-        public SecretViewModel Secret { get; set; }
-
-        public NewSecretViewModel(SecretServiceUtility secretServiceUtility)
-        {
-            Secret = Initialize(secretServiceUtility.CurrentSecretType);
-        }
+        public bool? ShowSuggestPasswordLoadingIcon { get; set; }
 
         public async Task<bool> SaveSecretAsync()
         {
@@ -82,71 +98,11 @@ namespace AxCrypt.App.Components.Models.Secret
             return new SecretViewModel(type, SecretPasswordViewModel.Empty, SecretCardViewModel.Empty, SecretNoteViewModel.Empty, new List<SecretSharedUserViewModel>());
         }
 
-        private Action _onStateChange;
-
-        public void SetOnStateChange(Action onStateChange)
-        {
-            _onStateChange = onStateChange;
-        }
-
         public async Task SuggestPasswordAsync()
         {
             ShowSuggestPasswordLoadingIcon = true;
             Secret.Password.SecretValue = await SecretsApiHelper.SuggestPasswordAsync();
             ShowSuggestPasswordLoadingIcon = false;
-        }
-
-        public bool ValidModel()
-        {
-            switch (Secret.SecretType)
-            {
-                case Api.Model.Secret.SecretType.Legacy:
-                case Api.Model.Secret.SecretType.Password:
-                    return ValidPasswordModel();
-
-                case Api.Model.Secret.SecretType.Card:
-                    return ValidCardModel();
-
-                case Api.Model.Secret.SecretType.Note:
-                    return ValidNoteModel();
-            }
-            return false;
-        }
-
-        private bool ValidNoteModel()
-        {
-            if (string.IsNullOrEmpty(Secret.Note.SecretDesc))
-            {
-                ErrorMessage = "Fill all the required(marked *) fields!";
-                return false;
-            }
-            return true;
-        }
-
-        private bool ValidCardModel()
-        {
-            if (string.IsNullOrEmpty(Secret.Card.CardNumber) || string.IsNullOrEmpty(Secret.Card.SecretDesc) || string.IsNullOrEmpty(Secret.Card.ExpirationDate) || string.IsNullOrEmpty(Secret.Card.NameOnCard) || string.IsNullOrEmpty(Secret.Card.SecurityCode))
-            {
-                ErrorMessage = "Fill all the required(marked *) fields!";
-                return false;
-            }
-            return true;
-        }
-
-        private bool ValidPasswordModel()
-        {
-            if (string.IsNullOrEmpty(Secret.Password.SecretDesc) || string.IsNullOrEmpty(Secret.Password.SecretValue))
-            {
-                ErrorMessage = "Fill all the required(marked *) fields!";
-                return false;
-            }
-            return true;
-        }
-
-        private void ClearErrorFileds()
-        {
-            CanShowErrorMessage = false;
-            ErrorMessage = "";
         }
 
         #endregion Manage View Model

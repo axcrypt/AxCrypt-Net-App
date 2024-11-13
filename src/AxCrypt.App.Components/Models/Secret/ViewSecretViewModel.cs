@@ -5,7 +5,7 @@ using AxCrypt.App.Components.Services;
 using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
-using AxCrypt.Core.Runtime;
+
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Components.Models.Secret
@@ -14,21 +14,31 @@ namespace AxCrypt.App.Components.Models.Secret
     {
         private ProcessIndicatorService _ProcessIndicatorService;
 
-        public ViewSecretViewModel(SecretService secretService, ProcessIndicatorService processIndicatorService)
+        public ViewSecretViewModel(SecretService secretService, ProcessIndicatorService processIndicatorService) : base(secretService)
         {
-            _secretService = secretService;
             _ProcessIndicatorService = processIndicatorService;
-            InitializeSecret();
+
+            switch (Secret.SecretType)
+            {
+                case Api.Model.Secret.SecretType.Legacy:
+                case Api.Model.Secret.SecretType.Password:
+                    PageTitle = Texts.ViewPasswordTitle;
+                    break;
+
+                case Api.Model.Secret.SecretType.Card:
+                    PageTitle = Texts.ViewCardTitle;
+                    break;
+
+                case Api.Model.Secret.SecretType.Note:
+                    PageTitle = Texts.ViewNoteTitle;
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.ShowSecretByType(Secret.SecretType);
         }
-
-        private readonly SecretService _secretService;
-
-        public void InitializeSecret()
-        {
-            _secret = _secretService.GetCurrentSecret();
-        }
-
-        public SecretViewModel _secret { get; private set; }
 
         public bool HidePassword
         {
@@ -44,57 +54,7 @@ namespace AxCrypt.App.Components.Models.Secret
 
         public SubscriptionLevel SubscriptionLevel { get; set; }
 
-        public string UserEmail { get; set; }
-
-        private bool _loading { get; set; } = false;
-
-        public bool Loading
-        {
-            get => _loading;
-            set
-            {
-                if (_loading != value)
-                {
-                    _loading = value;
-                    _onStateChange?.Invoke();
-                }
-            }
-        }
-
-        private Action _onStateChange;
-
-        private async Task EditSecretAsync()
-        {
-            if (New<AxCryptOnlineState>().IsOffline)
-            {
-                ErrorMessage = Texts.NoInternetErrorMessage;
-                return;
-            }
-
-            if (!HasPaidSubscription)
-            {
-                ErrorMessage = Texts.SaveSecretErrorIsReadOnly;
-                return;
-            }
-
-            if (Secret == null)
-            {
-                return;
-            }
-        }
-
-        private async Task ShareSecretAsync()
-        {
-            if (_secret == null)
-            {
-                return;
-            }
-        }
-
-        public void SetOnStateChange(Action onStateChange)
-        {
-            _onStateChange = onStateChange;
-        }
+        public string? UserEmail { get; set; }
 
         public string GetValue(bool isVisible, string value)
         {
@@ -109,23 +69,20 @@ namespace AxCrypt.App.Components.Models.Secret
                 return false;
             }
 
+            if (!HasPaidSubscription)
+            {
+                ErrorMessage = Texts.SaveSecretErrorIsReadOnly;
+                return false;
+            }
+
             using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
             {
-                HasPaidSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
-
-                if (!HasPaidSubscription)
-                {
-                    ErrorMessage = Texts.SaveSecretErrorIsReadOnly;
-                    return false;
-                }
-
-                _secret = _secretService.GetCurrentSecret();
-                if (_secret == null)
+                if (Secret == null)
                 {
                     return false;
                 }
 
-                SecretClientCollection secrets = await PersonalSecrets.SelectById(_secret.SecretGuid);
+                SecretClientCollection secrets = await PersonalSecrets.SelectById(Secret.SecretGuid);
                 if (secrets == null || !secrets.Any())
                 {
                     ErrorMessage = Texts.DeleteSecretErrorNotFound;
@@ -134,7 +91,6 @@ namespace AxCrypt.App.Components.Models.Secret
                 bool deleted = await PersonalSecrets.DeleteAsync(secrets[0]);
                 return deleted;
             }
-
         }
     }
 }

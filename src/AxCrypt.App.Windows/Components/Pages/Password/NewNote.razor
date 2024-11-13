@@ -1,5 +1,6 @@
 ﻿@page ﻿"/AddNote"
 
+@using AxCrypt.Api.Model.Secret
 @using AxCrypt.App.Components.Helpers
 @using AxCrypt.App.Components.Models.Secret
 @using AxCrypt.App.Components.Services.Interface
@@ -18,7 +19,7 @@
 @inject IStatusAlertService StatusAlertService;
 @inject NewSecretViewModel newSecretViewModel
 @inject NavigationManager navigationManager;
-@inject SecretServiceUtility secretServiceUtility
+@inject SecretService secretService
 
 <link href="css/@SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
 <link href="css/@SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
@@ -76,9 +77,8 @@
     protected override void OnInitialized()
     {
         SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        newSecretViewModel.Secret.Note.SecretDesc = "";
-        newSecretViewModel.Secret.Note.Note = "";
-        newSecretViewModel = new NewSecretViewModel(secretServiceUtility);
+        secretService.SecretType = SecretType.Note;
+        newSecretViewModel = new NewSecretViewModel(secretService);
     }
 
     private async Task SavePassword()

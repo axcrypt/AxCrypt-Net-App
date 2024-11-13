@@ -3,15 +3,16 @@ using AxCrypt.Api.Model.Secret;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
+
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Components.Models.Secret
 {
     public class SecretViewModel : ViewModelBase
     {
-        private LogOnIdentity _identity;
+        private LogOnIdentity? _identity;
 
-        public SecretViewModel(AxCrypt.Cryptor.Model.SecretClientModel secret)
+        public SecretViewModel(Cryptor.Model.SecretClientModel secret)
         {
             SecretGuid = secret.Id;
             DBId = secret.DBId;
@@ -21,6 +22,7 @@ namespace AxCrypt.App.Components.Models.Secret
             SharedWith = secret.Share?.SharedWith?.Select(ss => new SecretSharedUserViewModel(ss.UserEmail, ss.VisibilityType, secret.Share.OwnerEmail)) ?? new List<SecretSharedUserViewModel>();
             _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
             OwnerEmail = !string.IsNullOrEmpty(secret.Share?.OwnerEmail) ? secret.Share.OwnerEmail : _identity.UserEmail.Address;
+            
             switch (secret.Type)
             {
                 case SecretType.Legacy:
@@ -55,34 +57,49 @@ namespace AxCrypt.App.Components.Models.Secret
             SharedWith = share;
         }
 
-        private void Initialize(AxCrypt.Core.Secrets.SecretPassword secretPwd)
+        private void Initialize(Core.Secrets.SecretPassword secretPwd)
         {
             Password = new SecretPasswordViewModel(secretPwd.Title, secretPwd.Url, secretPwd.Username, secretPwd.Description, secretPwd.TheSecret);
         }
 
-        private void Initialize(AxCrypt.Core.Secrets.SecretCard secretCard)
+        private void Initialize(Core.Secrets.SecretCard secretCard)
         {
             Card = new SecretCardViewModel(secretCard.Number, secretCard.Description, secretCard.NameOnCard, secretCard.SecurityCode, secretCard.ExpirationDate);
         }
 
-        private void Initialize(AxCrypt.Core.Secrets.SecretNote secretNote)
+        private void Initialize(Core.Secrets.SecretNote secretNote)
         {
             Note = new SecretNoteViewModel(secretNote.Description, secretNote.Note);
         }
 
-        public Guid SecretGuid { get; private set; }
-        public long DBId { get; private set; }
-        public DateTime CreatedUtc { get; private set; }
-        public DateTime UpdatedUtc { get; private set; }
-        public SecretType SecretType { get; set; }
-        public SecretsFilter SecretsFilterType { get; set; }
-        public SecretPasswordViewModel Password { get; set; }
-        public SecretCardViewModel Card { get; set; }
-        public SecretNoteViewModel Note { get; set; }
-        public IEnumerable<SecretSharedUserViewModel> SharedWith { get; set; }
-        public string OwnerEmail { get; set; }
+        public Guid SecretGuid
+        { get { return GetProperty<Guid>(nameof(SecretGuid)); } set { SetProperty(nameof(SecretGuid), value); } }
 
-        public string SecretTitle
+        public long DBId { get; private set; }
+
+        public DateTime CreatedUtc { get; private set; }
+
+        public DateTime UpdatedUtc { get; private set; }
+
+        public SecretType SecretType
+        { get { return GetProperty<SecretType>(nameof(SecretType)); } private set { SetProperty(nameof(SecretType), value); } }
+
+        public SecretPasswordViewModel Password
+        { get { return GetProperty<SecretPasswordViewModel>(nameof(Password)); } set { SetProperty(nameof(Password), value); } }
+
+        public SecretCardViewModel Card
+        { get { return GetProperty<SecretCardViewModel>(nameof(Card)); } set { SetProperty(nameof(Card), value); } }
+
+        public SecretNoteViewModel Note
+        { get { return GetProperty<SecretNoteViewModel>(nameof(Note)); } set { SetProperty(nameof(Note), value); } }
+
+        public IEnumerable<SecretSharedUserViewModel> SharedWith
+        { get { return GetProperty<IEnumerable<SecretSharedUserViewModel>>(nameof(SharedWith)); } set { SetProperty(nameof(SharedWith), value); } }
+
+        public string OwnerEmail
+        { get { return GetProperty<string>(nameof(OwnerEmail)); } set { SetProperty(nameof(OwnerEmail), value); } }
+
+        public string? SecretTitle
         {
             get
             {
