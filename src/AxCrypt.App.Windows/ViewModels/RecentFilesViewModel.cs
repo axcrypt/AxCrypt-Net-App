@@ -90,7 +90,7 @@ internal class RecentFilesViewModel : ComponentBase
             SelectedFiles.Add(fileDetails);
         }
 
-        StateHasChanged();
+        OnRecentFilesStateChanged?.Invoke();
     }
 
     public void SelectSingleFile(ChangeEventArgs e, FileDetails selectedFile)
@@ -100,12 +100,12 @@ internal class RecentFilesViewModel : ComponentBase
         if (!isChecked)
         {
             SelectedFiles.Remove(selectedFile);
-            StateHasChanged();
+            OnRecentFilesStateChanged?.Invoke();
             return;
         }
 
         SelectedFiles.Add(selectedFile);
-        StateHasChanged();
+        OnRecentFilesStateChanged?.Invoke();
     }
 
     public void HandleFileClick(MouseEventArgs e, FileDetails fileDetails)
@@ -213,7 +213,6 @@ internal class RecentFilesViewModel : ComponentBase
     private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
     {
         RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
-        //StateHasChanged();
     }
 
     public void UpgradeSubscription()
@@ -314,7 +313,7 @@ internal class RecentFilesViewModel : ComponentBase
         }
 
         await ShareKeysAsync(fileSelectionArgs.SelectedFiles);
-        StateHasChanged();
+        OnRecentFilesStateChanged?.Invoke();
     }
 
     private async Task ShareKeysAsync(IEnumerable<string> fileNames)

@@ -328,6 +328,8 @@
     }
 </div>
 @code {
+    [Parameter]
+    public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
     public const string _ENABLEDTOOLSTRIPBACKCOLOR = "#FFFFFF";
 
     protected override void OnInitialized()
