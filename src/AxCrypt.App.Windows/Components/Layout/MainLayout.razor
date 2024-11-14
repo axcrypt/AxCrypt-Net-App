@@ -1,11 +1,13 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Data
 @using AxCrypt.App.Components.Models
+@using AxCrypt.App.Windows.Services
 
 @using static AxCrypt.Abstractions.TypeResolve;
 
 @inherits LayoutComponentBase
 @inject IJSRuntime JS
+@inject HomeUserService HomeUserService
 
 <link href="css/@SubscriptionLevel.ToString().ToLower()/sidemenu.min.css" rel="preload" as="style" importance="high" />
 <link href="css/@SubscriptionLevel.ToString().ToLower()/site.min.css" rel="preload" as="style" importance="high" />
@@ -20,24 +22,31 @@
 <div class="page" dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (!IsLoading)
     {
-        <div class="">
-            @if (!Utility.IsMainMenuHidden)
-            {
-                <img class="hide-icon" src="" alt="image hide" @onclick="Utility.ToggleMainMenu" />
-                <NavMenu />
-            }
-            else
-            {
-                <div class="" style="width:100px;overflow:hidden; ">
-                    <img class="expbd-icon" src="" alt="image hide" @onclick="Utility.ToggleMainMenu" />
+        @if (IsSignedIn)
+        {
+            <div class="">
+                @if (!Utility.IsMainMenuHidden)
+                {
+                    <img class="hide-icon" src="" alt="image hide" @onclick="Utility.ToggleMainMenu" />
                     <NavMenu />
+                }
+                else
+                {
+                    <div class="" style="width:100px;overflow:hidden; ">
+                        <img class="expbd-icon" src="" alt="image hide" @onclick="Utility.ToggleMainMenu" />
+                        <NavMenu />
+                    </div>
+                }
+            </div>
+        }
+
+        <main>
+            @if (IsSignedIn)
+            {
+                <div>
+                    <AxCrypt.App.Windows.Components.Pages.Main.TopMenu />
                 </div>
             }
-        </div>
-        <main>
-            <div>
-                <AxCrypt.App.Windows.Components.Pages.Main.TopMenu />
-            </div>
 
             @Body
 
@@ -58,11 +67,20 @@
     bool IsLoading { get; set; }
     private string UserEmail { get; set; }
 
+    private bool IsSignedIn { get; set; }
+
     protected override void OnInitialized()
     {
+        HomeUserService.OnUserSignedInStateChanged += UpdateSignInPageState;
         SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         UserEmail = New<AccountStatusViewModel>().UserEmail;
         base.OnInitialized();
+    }
+
+    private void UpdateSignInPageState(bool isSignedIn)
+    {
+        IsSignedIn = isSignedIn;
+        StateHasChanged(); // Refresh UI
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

@@ -4,6 +4,7 @@
 @using AxCrypt.Api.Model;
 @using AxCrypt.App.Components.Models
 @using AxCrypt.App.Windows.Helpers
+@using AxCrypt.App.Windows.Services
 @using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Common;
 @using AxCrypt.Content
@@ -15,6 +16,7 @@
 @using Microsoft.Maui.Devices;
 @using static AxCrypt.Abstractions.TypeResolve;
 
+@inject HomeUserService HomeUserService
 @inject NavigationManager navigation
 @inject IJSRuntime JSRuntime
 
@@ -22,18 +24,33 @@
     DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
 }
 
-<link href="css/login.min.css" rel="stylesheet" />
-
 <div dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (IsWideScreen)
     {
-        <AxCrypt.App.Windows.Components.Pages.Login.LoginPage />
+        @if (!HomeUserService.IsSignedIn)
+        {
+            @if (ShowSignUp)
+            {
+                <AxCrypt.App.Windows.Components.Pages.PopupDialog.Register />
+            }
+            else
+            {
+                <AxCrypt.App.Windows.Components.Pages.Login.LoginPage />
+            }
+        }
+        else
+        {
+            <HomePage />
+        }
     }
 </div>
+
 
 @code {
     private bool IsLoading { get; set; }
     private bool IsWideScreen { get; set; }
+
+    public bool ShowSignUp { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -60,5 +77,17 @@
                 StateHasChanged();
             }
         }
+    }
+
+    protected override void OnInitialized()
+    {
+        HomeUserService.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
+        base.OnInitialized();
+    }
+
+    private void UpdateSignUpPageVisibility(bool showSignUp)
+    {
+        ShowSignUp = showSignUp;
+        StateHasChanged(); // Refresh UI
     }
 }

@@ -25,6 +25,7 @@ public partial class MainPage : ContentPage, ISignIn
 {
     //HomeViewModel viewModel;
     private ICustomNavigationService _navigationManager;
+    private HomeUserService _homeUserService;
 
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
@@ -39,10 +40,11 @@ public partial class MainPage : ContentPage, ISignIn
     }
 
     //public MainPage(NavigationManager navigationManager, HomeViewModel homeModel) : this()
-    public MainPage(MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel) : this()
+    public MainPage(HomeUserService homeUserService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel) : this()
     {
         //_navigationManager = customNavigationService;
         //_mainViewModel = New<MainViewModel>();
+        _homeUserService = homeUserService;
         _mainViewModel = mainViewModel;
         _fileOperationViewModel = fileOperationViewModel;
         _knownFoldersViewModel = knownFoldersViewModel;
@@ -92,6 +94,7 @@ public partial class MainPage : ContentPage, ISignIn
     {
         //_fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
         //_fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
+        _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await HandleLogOn(e);
 
     }
 
@@ -104,7 +107,7 @@ public partial class MainPage : ContentPage, ISignIn
 
     private async Task SignInAsync()
     {
-        SignUpSignIn signUpSignIn = new SignUpSignIn(_navigationManager)
+        SignUpSignIn signUpSignIn = new SignUpSignIn(_navigationManager, _homeUserService)
         {
             Version = _apiVersion,
             UserEmail = New<UserSettings>().UserEmail,
@@ -368,7 +371,8 @@ public partial class MainPage : ContentPage, ISignIn
 
     private async Task HandleExistingAccountLogOn(LogOnEventArgs e)
     {
-        _navigationManager.NavigateTo("/login");
+        _homeUserService.ShowSignIn();
+        //_navigationManager.NavigateTo("/login");
 
         //LogOnAccountViewModel viewModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
         //using (SignUpSignInAccountDialog logOnDialog = new SignUpSignInAccountDialog(this, viewModel))

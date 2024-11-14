@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using AxCrypt.Mono;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows;
 
@@ -35,7 +36,7 @@ public partial class App : Application
 
     private KnownFoldersViewModel _knownFoldersViewModel;
 
-    public App()
+    public App(HomeUserService homeUserService)
     {
         InitializeComponent();
 
@@ -50,7 +51,7 @@ public partial class App : Application
         //HomeViewModel homeModel = new HomeViewModel(navigationManager);
         _progressBackgroundWorker = new ProgressBackgroundComponent(null);
 
-        MainPage = new MainPage(_mainViewModel, _fileOperationViewModel, _knownFoldersViewModel);
+        MainPage = new MainPage(homeUserService, _mainViewModel, _fileOperationViewModel, _knownFoldersViewModel);
     }
 
     protected override void OnStart()

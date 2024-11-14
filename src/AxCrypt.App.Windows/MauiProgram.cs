@@ -144,7 +144,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SecretsListViewModel>();
             services.AddSingleton<SecretServiceUtility>();
             services.AddSingleton<AxCrypt.App.Components.Services.UserNotificationService>();
-            services.AddSingleton<HomeViewModel>();
 
             services.AddSingleton<HomeBodyViewModel>();
             services.AddSingleton<ShareKeyViewModel>();
@@ -158,6 +157,9 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<AccountViewModel>();
             services.AddSingleton<SettingsViewModel>();
             services.AddSingleton<AdvancedOptionsViewModel>();
+            services.AddSingleton<RecentFilesViewModel>();
+
+            services.AddSingleton<HomeUserService>();
 
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
         }

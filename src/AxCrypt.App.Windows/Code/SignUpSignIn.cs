@@ -18,10 +18,12 @@ internal class SignUpSignIn
     public ApiVersion Version { get; set; }
 
     private readonly ICustomNavigationService _navigationManager;
+    private readonly HomeUserService _homeUserService;
 
-    public SignUpSignIn(ICustomNavigationService navigationManager)
+    public SignUpSignIn(ICustomNavigationService navigationManager, HomeUserService homeUserService)
     {
         _navigationManager = navigationManager;
+        _homeUserService = homeUserService;
     }
 
     public async Task DialogsAsync(ISignIn signingInState)
@@ -38,7 +40,8 @@ internal class SignUpSignIn
 
         viewModel.CreateAccount = (e) =>
         {
-            _navigationManager.NavigateTo($"/signup?UserEmail={UserEmail}");
+            _homeUserService.ShowSignUpPage();
+            //_navigationManager.NavigateTo($"/signup?UserEmail={UserEmail}");
             return Task.CompletedTask;
         };
 
