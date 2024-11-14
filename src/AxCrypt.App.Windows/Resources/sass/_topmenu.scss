@@ -1,0 +1,735 @@
+﻿.mng-accnt {
+    content: $IcoMngAccnt;
+}
+
+.desk-acnt-popup, .desk-stngs-popup, .notification-popup {
+    position: absolute;
+    top: 90px !important;
+    right: 2%;
+    text-align: left;
+    z-index: 1;
+
+    a {
+        text-decoration: none;
+        color: #494949;
+    }
+
+    img {
+        height: 18px;
+    }
+}
+
+.text-overlfow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 160px;
+    position: relative;
+    top: 10px;
+    white-space: nowrap;
+    padding-left: 5px;
+}
+
+.acc-subs {
+    display: block;
+    width: 70%;
+    margin: 1% auto 5%;
+    text-align: center;
+    line-height: 26px;
+}
+
+.can-subs {
+    color: $CanSubsClr !important;
+    text-decoration: underline !important;
+    padding-top: 10px;
+    text-underline-offset: 5px;
+    background: none;
+}
+
+
+.manage-acc-sec {
+    img {
+        padding-right: 10px;
+        opacity: 0.7;
+    }
+
+    a {
+        color: $colDsbl !important;
+        padding: 10px 5px;
+    }
+
+    .log-out-clr {
+        color: $colRed;
+    }
+}
+
+.key-mngnt-Popup {
+    width: 32%;
+
+    label {
+        padding: 4px;
+    }
+
+    .act-clr {
+        color: #000;
+        display: block;
+    }
+
+    .act-clr:hover {
+        background-color: $colAvtr;
+        color: $TxtClr !important;
+        margin: 0 -20px;
+        padding: 4px 22px;
+    }
+}
+
+.subs-dtls-popup {
+    .center-column {
+        margin: 20px 10px;
+        line-height: 28px;
+        gap: 12px;
+    }
+
+    .ico-user-dk {
+        content: $IcoUserDesk;
+    }
+
+    span {
+        padding-right: 8px;
+    }
+}
+
+.sub-pop1 {
+    position: absolute;
+    right: 19%;
+    top: 35%;
+}
+
+.sub-pop2 {
+    position: absolute;
+    right: 19%;
+    top: 50%;
+}
+
+.sub-pop2 a.active,
+.sub-pop2 a:hover,
+.key-section a.active,
+.key-section a:hover {
+    background-color: $colAvtr;
+    color: $TxtClr !important;
+    padding: 10px 25px;
+    margin: 0 -20px;
+}
+
+.key-section a.active,
+.key-section a:hover {
+    background-image: $IcoIndctr;
+    background-repeat: no-repeat;
+    background-position: top left;
+
+    .kym-sec {
+        content: $IcoKMngmnt;
+    }
+
+    .next-arrow {
+        float: right;
+        content: $IcoDrpDwn;
+        padding-top: 5px;
+        height: 14px;
+    }
+
+    .sgn-out-img {
+        content: $IcoSngOut;
+    }
+
+    .dbg-img {
+        content: $IcoDbg;
+    }
+
+    .encrypt-file-prop-img {
+        content: $BtnFltrAct;
+    }
+}
+
+.dsbl-clr {
+    color: $colTxtDsbl;
+}
+
+#inactivity input[type="radio"] {
+    width: 16px;
+    height: 16px;
+}
+
+#inactivity input[type="radio"] + label {
+    color: $colTxtDsbl;
+    font-size: 12px;
+    padding: 2px 5px;
+}
+
+#inactivity input[type="radio"]:checked + label {
+    color: #000;
+}
+
+.invite-text {
+    text-align: left !important;
+
+    input[type=text] {
+        width: 100%;
+        color: $TxtClr;
+        border-radius: 5px;
+        height: 32px;
+        border: 0.2px solid #494949 !important;
+    }
+
+    input[type=text]::Placeholder {
+        color: $FlActBg !important;
+    }
+}
+
+.invite-popup {
+    .center-column {
+        flex-direction: column;
+
+        div {
+            padding-bottom: 10px;
+            width: 100%;
+        }
+    }
+}
+#date-modified-toggle {
+    img {
+        padding-right: 5px;
+        vertical-align: text-top;
+    }
+}
+
+.notification-badge {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: $colBg;
+    position: absolute;
+    font-size: 6px;
+    margin-left: 8px;
+}
+
+//for the notification popup//
+@media (min-width: 1140px) {
+    .notification-popup .notification {
+        position: relative;
+        margin-right: 500px;
+    }
+
+    .notifi-popup {
+        width: 100%;
+        margin-bottom: 0rem !important;
+        font-size: 12px;
+
+        tr {
+            background-color: transparent !important;
+            border-top: 1px solid $BorderClr;
+            border-bottom: 1px solid $BorderClr;
+        }
+
+        span {
+            font-weight: 700;
+            font-size: 9px;
+        }
+    }
+
+    .notif-popup-title {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 19px;
+        width: 150px;
+        display: inline-block;
+        padding: 15px 20px;
+    }
+
+    .noticlearall {
+        float: right;
+        position: absolute;
+        right: 20px;
+        padding-top: 15px;
+    }
+
+    .notifipopup-show {
+        display: inline-block;
+        width: 100%;
+        padding: 15px 120px;
+        margin: 0 20%;
+    }
+
+    .bgrnd-clr {
+        .unrd-img {
+            content: $IcoUnrdNtfctns;
+        }
+    }
+
+    .notification-popup {
+        display: flex;
+        position: absolute;
+        z-index: 1;
+        width: 440px;
+        height: auto;
+        border-radius: 15px;
+        border: 1px solid $BorderClr;
+        box-shadow: 12px 12px 20px 0px #23232340;
+        background-color: #ffffff;
+        flex-wrap: wrap;
+        right: 1%;
+        top: 12%;
+
+        tr td {
+            padding-right: 0px !important;
+            //color: $FlActBg;
+            color: $TxtClr;
+
+            &.bgrnd-clr {
+                background-color: $colAvtr;
+                color: $TxtClr;
+            }
+        }
+
+        a {
+            color: $TxtClr !important;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+    .encrypt-pop {
+        top:58%;
+
+    }
+}
+
+//languages dropdown
+.drp-dwn {
+    content: $IcoBack;
+    transform: rotate(-90deg);
+    width: 8px;
+    margin-left: 18px;
+}
+
+.dropbtn {
+    background-color: #ffffff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    width: 160px;
+    color: $colDsbl;
+}
+
+.dropbtn.active {
+    border-radius: 4px 4px 0px 0px;
+    border: 1px solid #000000;
+    color: $TxtClr;
+
+    .down {
+        transform: rotate(90deg);
+    }
+}
+
+.tick-icon {
+    content: $TickMark;
+    position: absolute;
+    right: 0px;
+}
+
+.language-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 4px 4px 4px 0px #00000040;
+    z-index: 1;
+    height: 255px;
+    overflow-y: auto;
+    border: 1px solid $BorderClr;
+    border-radius: 0px 0px 4px 4px;
+
+    a.active, a:hover {
+        color: $TxtClr;
+    }
+}
+
+.language-item {
+    color: $colDsbl;
+    padding: 7px 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.language-item img {
+    padding-right: 10px;
+}
+
+.language-item:hover {
+    background-color: $PflBg;
+}
+
+/* Customize the scrollbar */
+.language-dropdown::-webkit-scrollbar {
+    width: 4px;
+}
+
+.language-dropdown::-webkit-scrollbar-thumb {
+    background-color: $TxtClr;
+}
+
+//popup top triangle code for all top menu's
+.notification-popup:after,
+.notification-popup:before,
+.desk-acnt-popup:after,
+.desk-acnt-popup:before,
+.desk-stngs-popup:after,
+.desk-stngs-popup:before,
+.lang-popup:after,
+.lang-popup:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -20px;
+    transform: translateX(50%); 
+    border-style: solid;
+}
+
+.notification-popup:after,
+.desk-acnt-popup:after,
+.desk-stngs-popup:after,
+.lang-popup:after {
+    border-color: transparent transparent #FFFAFA transparent;
+    border-width: 0 10px 20px 10px;
+}
+
+.notification-popup:before,
+.desk-acnt-popup:before,
+.desk-stngs-popup:before,
+.lang-popup:before {
+    border-color: transparent transparent $BorderClr transparent;
+    border-width: 0 11px 20px 11px;
+}
+
+.notification-popup:after,
+.notification-popup:before {
+    right: 39% !important;
+}
+
+.desk-acnt-popup:after,
+.desk-acnt-popup:before {
+    right: 12% !important;
+}
+
+.desk-stngs-popup:after,
+.desk-stngs-popup:before {
+    right: 58% !important;
+}
+
+@media (max-width: 768px) {
+    .manage-acc-sec {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 0px;
+        justify-content: center;
+        flex-direction: column;
+
+        a {
+            text-decoration: none;
+        }
+    }
+
+    .subs-txt {
+        font-size: 32px;
+        font-weight: 800;
+    }
+
+    .acnt-upg {
+        color: #48772C;
+        background-color: #fff;
+        border: 1px solid #48772C;
+        margin: 15px 0px;
+    }
+    .text-overlfow {
+        max-width: 190px;
+        top: 8px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1140px) {
+
+    .main-back-arrow, .acc-txt {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .hide-acc-popup, .hide-key-popup, .hide-setng-popup, .hide-inact-popup, .hide-dbug-popup, .hide-encrypt-file {
+        display: none;
+        visibility: hidden;
+    }
+
+    .model-popup .hide-setng-popup {
+        display: none;
+        visibility: hidden;
+    }
+
+    .notification-popup:after,
+    .notification-popup:before {
+        right: 40% !important;
+    }
+
+    .desk-acnt-popup:after,
+    .desk-acnt-popup:before {
+        right: 8% !important;
+    }
+
+    .desk-stngs-popup:after,
+    .desk-stngs-popup:before {
+        right: 48% !important;
+    }
+}
+
+@media (max-width: 1140px) {
+    .back-arrow, .main-back-arrow {
+        content: $IcoBack;
+    }
+
+    .accnt-prfl {
+        width: 78px;
+        height: 78px;
+        border-radius: 56px;
+        margin: 0 auto 20px;
+        padding: 25px 0px;
+        color: $TxtClr;
+        background-color: $PflBg;
+
+        h3 {
+            font-weight: 800;
+            font-size: 24px;
+        }
+    }
+
+    .acc-subs, .manage-acc-sec {
+
+        label {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        img {
+            opacity: 1;
+        }
+
+        a {
+            color: #494949 !important;
+            padding: 0px;
+        }
+
+        table tbody tr {
+            display: flex;
+            align-items: flex-start;
+            border-bottom: 2px solid #EFEFEF;
+
+            td {
+                padding: 10px 0px;
+
+
+                img {
+                    padding-right: 20px;
+                }
+            }
+        }
+    }
+
+    .next-arrow {
+        content: $IcoArrwNxt;
+    }
+
+    .dlt-dsbl {
+        color: #D98D8B;
+    }
+
+    .left-align {
+        padding-bottom: 20px;
+
+        span {
+            font-weight: 700;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .goback-text, .acc-txt {
+        padding-left: 20px;
+        font-weight: 700;
+        font-size: 32px;
+    }
+
+    #inactivity input[type="radio"] + label {
+        width: 98%;
+        font-size: 16px;
+    }
+
+    #inactivity input[type="radio"]:checked + label {
+        background-image: $TickMark;
+        background-repeat: no-repeat;
+        background-position: right;
+        color: $TxtClr;
+    }
+
+    #inactivity input[type="radio"] {
+        display: none;
+    }
+}
+
+@media (min-width: 1140px) {
+    /* Style the toggle switch for settings page */
+    .desk-stngs-popup, .encrypt-pop {
+        .toggle {
+            width: 58px;
+            height: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            width: 24px;
+            height: 23px;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .on-text {
+            left: 0px;
+        }
+
+        .off-text {
+            right: -3px;
+        }
+    }
+
+    .accnt-prfl {
+        width: 40px;
+        height: 40px;
+        border-radius: 56px;
+        margin: 0 auto 20px;
+        padding: 10px 0px;
+        color: $TxtClr;
+        background-color: $PflBg;
+
+        h3 {
+            font-weight: 700;
+            font-size: 16px;
+        }
+    }
+
+    .acc-subs {
+        width: 90% !important;
+    }
+}
+
+
+//mobile app notification  code
+@media (max-width: 1140px) {
+    .notif-mbl {
+        display: flex;
+        background-color: $colVwrAvtr;
+        border-radius: 5px;
+        padding: 16px;
+        font-size: 14px;
+        min-height: 75px;
+        transition: transform 0.3s ease;
+
+        &.earlier {
+            opacity: 0.5;
+        }
+
+        > .notifi-img {
+            flex-grow: 1;
+        }
+
+        > .notifi-text {
+            flex-grow: 2.5;
+            padding: 0 20px;
+        }
+
+        > .notifi-action {
+            flex-grow: 1;
+        }
+
+        > .swipe-transformed {
+            transform: translateX(-30%);
+            transition: transform 0.3s ease;
+        }
+    }
+
+    #notif-mbl {
+        margin-right: 0px;
+    }
+
+    .swipe-action-confirm {
+        display: none;
+        margin-left: -100px;
+
+        &.active {
+            display: block;
+            margin-right: 0px;
+            position: absolute;
+            right: 0px;
+
+            > .swipe-item {
+                width: 100%;
+                height: 70px;
+                border-radius: 4px;
+                background-color: $colBtnPrmActv;
+                content: Url(/images/default/Layer2.svg);
+                padding: 27px;
+                visibility: visible;
+                box-shadow: 0px 4px 6px 0px $BoxShadowClr;
+                transition: transform 0.5s ease;
+            }
+        }
+    }
+
+    .notification {
+        display: none;
+        width: 76px;
+        height: 76px;
+        border-radius: 4px;
+        background-color: $colBtnPrmActv;
+        content: Url(/images/default/Layer2.svg);
+        padding: 27px;
+        box-shadow: 0px 4px 6px 0px $BoxShadowClr;
+        transition: transform 0.5s ease;
+        margin-top: 7px;
+    }
+
+    .notif-mbl.swiped-left {
+        overflow: hidden;
+        margin-left: -80px;
+        margin-right: 10px;
+
+        .notification-unread-button {
+            display: none;
+        }
+    }
+    .notify-txt {
+        font-Weight: 400;
+        font-size: 12px;
+    }
+}

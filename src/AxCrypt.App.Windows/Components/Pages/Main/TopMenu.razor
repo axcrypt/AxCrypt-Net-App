@@ -69,7 +69,7 @@
         <span class=""> @(string.IsNullOrEmpty(ViewModel.TopMenuModel.UserEmail) ? string.Empty : ViewModel.TopMenuModel.UserEmail.Substring(0, Math.Min(2, ViewModel.TopMenuModel.UserEmail.Length)).ToUpper()) </span>
     </NavLink>
 
-    @if (!ViewModel.TopMenuModel.IsLoading)
+    @if (!IsLoading)
     {
         @if (ViewModel.TopMenuModel.AccountPopup)
         {
@@ -101,6 +101,8 @@
     }
 </div>
 @code {
+    bool IsLoading { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         ViewModel.TopMenuModel.UserEmail = New<AccountStatusViewModel>().UserEmail;
@@ -134,11 +136,11 @@
         }
         finally
         {
-            ViewModel.TopMenuModel.IsLoading = false;
+            IsLoading = false;
         }
     }
 
-    public  void ChangeLanguage(string cultureName, string imageUrl)
+    public void ChangeLanguage(string cultureName, string imageUrl)
     {
         ViewModel.TopMenuModel.SelectedLanguage = cultureName;
         ViewModel.TopMenuModel.SelectedLanguageImageUrl = imageUrl;

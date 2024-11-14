@@ -49,9 +49,9 @@
   border: none;
 }
 
-.notifi-img img {
-    min-width: 22px;
-    max-width: 25px;
+.notifi-img {
+  width: 24px;
+  height: 24px;
 }
 .notifi-img .PasswordResetInitiated,
 .notifi-img .UserEmailChangeInitiated {
@@ -144,11 +144,6 @@
 
 .notif-def-icon {
   Content: url(/images/default/acc-notification-bell.svg);
-}
-
-.empty-notify-img {
-  content: url(/images/premium/ImgNoNotify.svg);
-  padding-top: 20px;
 }
 
 @media (max-width: 1350px) {

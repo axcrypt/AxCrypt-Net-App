@@ -1,220 +1,193 @@
 ﻿.notify-pg-title {
-    Content: none;
-    margin-top: 32px;
+  Content: url(/images/premium/IcoPrm.svg);
+  margin-top: 32px;
 }
 
 .notification-unread-button {
-    Content: url(/images/free/IcoUnrdNtfctns.svg);
-    padding: 15px 5px;
+  Content: url(/images/free/IcoUnrdNtfctns.svg);
+  padding: 15px 5px;
 }
 
 .notification-table {
-    font-size: 14px;
+  font-size: 14px;
 }
-
-    .notification-table thead tr {
-        box-shadow: 0px 4px 6px 0px rgba(49, 73, 35, 0.25);
-        border-radius: 5px;
-    }
-
-    .notification-table th {
-        background-color: #E5ECE1;
-        color: #000000 !important;
-        border-collapse: collapse;
-        border-radius: 0px;
-        text-align: left;
-        left: 0px;
-        top: 0px;
-        height: 24px;
-    }
-
-    .notification-table tbody tr:nth-child(1) td {
-        padding-top: 20px;
-    }
-
-    .notification-table tbody td:nth-child(2) {
-        font-weight: 700;
-    }
+.notification-table thead tr {
+  box-shadow: 0px 4px 6px 0px rgba(49, 73, 35, 0.25);
+  border-radius: 5px;
+}
+.notification-table th {
+  background-color: #E5ECE1;
+  color: #000000 !important;
+  border-collapse: collapse;
+  border-radius: 0px;
+  text-align: left;
+  left: 0px;
+  top: 0px;
+  height: 24px;
+}
+.notification-table tbody tr:nth-child(1) td {
+  padding-top: 20px;
+}
+.notification-table tbody td:nth-child(2) {
+  font-weight: 700;
+}
 
 .curved-table {
-    width: 100% !important;
-    border-collapse: collapse;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+  width: 100% !important;
+  border-collapse: collapse;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.curved-table thead th:first-child {
+  border-radius: 5px 0 0 5px;
+}
+.curved-table thead th:last-child {
+  border-radius: 0 5px 5px 0;
+}
+.curved-table tbody {
+  border-collapse: collapse;
+  border: none;
 }
 
-    .curved-table thead th:first-child {
-        border-radius: 5px 0 0 5px;
-    }
-
-    .curved-table thead th:last-child {
-        border-radius: 0 5px 5px 0;
-    }
-
-    .curved-table tbody {
-        border-collapse: collapse;
-        border: none;
-    }
-
-.notifi-img img {
-    min-width: 22px;
-    max-width: 25px;
+.notifi-img {
+  width: 24px;
+  height: 24px;
 }
-
-.notifi-img .PasswordResetInitiated, .notifi-img .UserEmailChangeInitiated {
-    Content: url(/images/default/Ico.svg);
+.notifi-img .PasswordResetInitiated,
+.notifi-img .UserEmailChangeInitiated {
+  Content: url(/images/default/Ico.svg);
 }
-
 .notifi-img .secretmessenger {
-    content: url(/images/premium/FrmStts.svg);
+  content: url(/images/premium/FrmStts.svg);
 }
-
 .notifi-img .notifmsg {
-    content: url(/images/free/IcoScrdMssngr.svg);
+  content: url(/images/free/IcoScrdMssngr.svg);
 }
-
 .notifi-img .UserEmailChanged,
 .notifi-img .PasswordReset {
-    Content: url(/images/default/IcoChsOptns.svg);
-    min-height: 22px;
+  Content: url(/images/default/IcoChsOptns.svg);
+  min-height: 22px;
 }
-
 .notifi-img .PaymentSuccessful,
 .notifi-img .KeyShared,
 .notifi-img .MasterKeyShared,
 .notifi-img .ShareSecret {
-    Content: url(/images/default/IcoClbrtn.svg);
+  Content: url(/images/default/IcoClbrtn.svg);
 }
-
 .notifi-img .SubscriptionExpiresSoon,
 .notifi-img .SubscriptionExpired,
 .notifi-img .PaymentCancelled {
-    Content: url(/images/default/IcoWrn.svg);
+  Content: url(/images/default/IcoWrn.svg);
 }
-
 .notifi-img .PaymentFailed,
 .notifi-img .SubscriptionCancelled,
 .notifi-img .PaymentFailure {
-    Content: url(/images/default/IcoErrr.svg);
+  Content: url(/images/default/IcoErrr.svg);
 }
 
 .deletebin {
-    background-image: url(/images/free/IcoDlt.svg) !important;
-    background-repeat: no-repeat;
-    background-size: 12px;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
+  background-image: url(/images/free/IcoDlt.svg) !important;
+  background-repeat: no-repeat;
+  background-size: 12px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
 
 .noticlearall {
-    color: #000000 !important;
+  color: #000000 !important;
 }
 
 .notifiarrow {
-    Content: url(/images/premium/IcoSortBy.svg);
+  Content: url(/images/premium/IcoSortBy.svg);
 }
 
 .notify-pg-tbl-head {
-    height: 32px;
-    background: #E5ECE1;
-    border-radius: 5px;
+  height: 32px;
+  background: #E5ECE1;
+  border-radius: 5px;
 }
-
-    .notify-pg-tbl-head th {
-        font-style: normal;
-        font-weight: 700;
-        line-height: 16px;
-        color: #E5ECE1;
-        padding-left: 15px;
-    }
+.notify-pg-tbl-head th {
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  color: #E5ECE1;
+  padding-left: 15px;
+}
 
 .notify-pg-tbl-body tr {
-    top: 10px;
-    gap: 192px;
+  top: 10px;
+  gap: 192px;
 }
-
 .notify-pg-tbl-body td {
-    font-style: normal;
-    font-weight: 400;
-    line-height: 25px;
-    color: #000000;
-    padding: 10px 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px;
+  color: #000000;
+  padding: 10px 15px;
 }
 
 .notify-pg-showmr {
-    color: #000000 !important;
-    text-align: center;
-    font-weight: 700;
+  color: #000000 !important;
+  text-align: center;
+  font-weight: 700;
 }
 
-    .notify-pg-showmr:hover {
-        color: #000000 !important;
-        text-decoration: none;
-    }
+.notify-pg-showmr:hover {
+  color: #000000 !important;
+  text-decoration: none;
+}
 
 .view-more-notifi-sec {
-    display: table-row !important;
+  display: table-row !important;
 }
 
 .notif-def-icon {
-    Content: url(/images/default/acc-notification-bell.svg);
-}
-
-.empty-notify-img {
-    content: url(/images/free/ImgNoNotify.svg);
-    padding-top: 20px;
+  Content: url(/images/default/acc-notification-bell.svg);
 }
 
 @media (max-width: 1350px) {
-    .notif-mbl {
-        background-color: #D2DCCD;
-        border-radius: 5px;
-        padding: 0px !important;
-        font-size: 14px;
-        min-height: 75px;
-        transition: transform 0.3s ease;
-        margin-bottom: 10px;
-    }
-
-        .notif-mbl img {
-            width: 32px;
-            height: 32px;
-        }
-
-        .notif-mbl tr td {
-            padding: 0px !important;
-        }
-
-    .notification-item {
-        width: 100%;
-    }
-
-        .notification-item.swiped-left {
-            transform: translateX(-40px);
-        }
-
-    .delete-btn {
-        position: absolute;
-        right: 0;
-        width: 100px;
-        display: none;
-        background-color: red;
-        text-align: center;
-        font-size: 18px;
-        cursor: pointer;
-        transition: background-color 0.3s ease-in-out;
-        margin-top: -7px;
-    }
-
-        .delete-btn button {
-            border-radius: 5px !important;
-            color: white !important;
-            background-color: red;
-            padding: 22px 30px;
-        }
-
-    .notification-item.swiped-left + .delete-btn {
-        display: flex;
-    }
+  .notif-mbl {
+    background-color: #D2DCCD;
+    border-radius: 5px;
+    padding: 0px !important;
+    font-size: 14px;
+    min-height: 75px;
+    transition: transform 0.3s ease;
+    margin-bottom: 10px;
+  }
+  .notif-mbl img {
+    width: 32px;
+    height: 32px;
+  }
+  .notif-mbl tr td {
+    padding: 0px !important;
+  }
+  .notification-item {
+    width: 100%;
+  }
+  .notification-item.swiped-left {
+    transform: translateX(-40px);
+  }
+  .delete-btn {
+    position: absolute;
+    right: 0;
+    width: 100px;
+    display: none;
+    background-color: red;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: -7px;
+  }
+  .delete-btn button {
+    border-radius: 5px !important;
+    color: white !important;
+    background-color: red;
+    padding: 22px 30px;
+  }
+  .notification-item.swiped-left + .delete-btn {
+    display: flex;
+  }
 }

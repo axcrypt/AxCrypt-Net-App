@@ -27,8 +27,6 @@ public class TopMenuModel
 
     public bool IsLargeScreen { get; set; }
 
-    public bool IsLoading { get; set; } = true;
-
     public string? SelectedLanguage { get; set; }
 
     public string SelectedLanguageImageUrl { get; set; } = "images/flag/FrmEng.svg";

@@ -20,7 +20,7 @@
 <div class="page" dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (!IsLoading)
     {
-        <div class="sidebar">
+        <div class="">
             @if (!Utility.IsMainMenuHidden)
             {
                 <img class="hide-icon" src="" alt="image hide" @onclick="Utility.ToggleMainMenu" />
@@ -71,7 +71,7 @@
         {
             try
             {
-                // IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
+                //IsWideScreen = await Utility.IsWideScreenAsync(JS);
             }
             catch (Exception ex)
             {
@@ -81,6 +81,7 @@
             {
                 await AddCssFiles();
                 IsLoading = false;
+                SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
                 StateHasChanged();
             }
         }
@@ -90,7 +91,7 @@
     {
         string cssBasePath = $"css/{SubscriptionLevel.ToString().ToLower()}/";
 
-        //await JS.InvokeVoidAsync("addCssFile", $"{cssBasePath}sidemenu.min.css");
+        await JS.InvokeVoidAsync("addCssFile", $"{cssBasePath}sidemenu.min.css");
         await JS.InvokeVoidAsync("addCssFile", $"{cssBasePath}index.min.css");
         await JS.InvokeVoidAsync("addCssFile", $"{cssBasePath}site.min.css");
         await JS.InvokeVoidAsync("addCssFile", $"{cssBasePath}topmenu.min.css");

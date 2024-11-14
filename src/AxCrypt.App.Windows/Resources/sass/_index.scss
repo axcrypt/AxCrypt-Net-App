@@ -1,0 +1,1095 @@
+﻿.home-title {
+    content: url('/images/default/Title-hand.svg');
+}
+
+.home-index {
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    a:hover {
+        color: none !important;
+        cursor: pointer;
+    }
+}
+
+.head-sec {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.home-body {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.mre-act-sec {
+    display: flex;
+    gap: 3%;
+    justify-content: space-between;
+}
+
+.act-box {
+    display: block;
+    margin-right: 15px;
+    margin-top: 20px;
+    padding: 15px 5px;
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    background-color: $ActnBgClr;
+    color: $WhtTxtClr;
+    text-align: center;
+    line-height: 16px;
+    box-shadow: 0px 4px 6px 0px $BoxShadowClr;
+    cursor: pointer;
+}
+
+.opnscrd-act {
+    content: url(/images/default/IcoOpnScrd.svg);
+}
+
+.scr-act {
+    content: url(/images/default/IcoScr.svg);
+}
+
+.stpscr-act {
+    content: url(/images/default/IcoStpScr.svg);
+}
+
+.shrks-act {
+    content: url(/images/default/IcoShrKs.svg);
+}
+
+.PssdMngr-act {
+    content: url(/images/premium/icoPssdMngrWhite.svg);
+}
+
+.mtrkey-act {
+    content: url(/images/business/IcoMstrKey.svg);
+    width: 27px;
+    height: 24px;
+}
+
+.grp-act {
+    content: url(/images/business/IcoGroup.svg);
+    width: 34px;
+    height: 24px;
+}
+
+.cln-act {
+    content: url(/images/default/IcoCln.svg);
+}
+
+.vwr-shrks-act {
+    content: url(/images/free/IcoShrKs.svg);
+}
+
+.new-mssg {
+    content: url(/images/default/IcoNwMssg.svg);
+}
+
+.act-img {
+    margin: auto auto;
+    display: block;
+}
+
+.text-size, .act-txt-sze {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+}
+
+.text-style {
+    color: $TxtClr;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.fade-clr {
+    border: 1px dotted $BorderClr !important;
+
+    .text-style {
+        color: $CanSubsClr !important;
+    }
+}
+
+.fnt-sze {
+    font-size: 16px;
+}
+
+.ico-eye {
+    content: url(/images/premium/IcoEye.svg);
+    padding: 5px;
+}
+
+.ico-hidden {
+    content: url(/images/premium/IcoHiddenPassword.svg);
+    padding: 5px;
+}
+
+.sub-box {
+    margin-top: 10px;
+    width: 158px;
+    height: 100px;
+    border-radius: 8px;
+    color: #FFFFFF;
+
+    .subs-plan {
+        font-size: 20px;
+    }
+}
+
+.plan-prm-icon {
+    content: url(/images/default/IcoPremiumUpgrade.svg);
+    margin-bottom: 8px;
+}
+
+.plan-bus-icon {
+    content: url(/images/default/IcoBusinessUpgrade.svg);
+    margin-bottom: 8px;
+}
+
+.buy-button {
+    width: 110px !important;
+    height: 28px;
+    padding: 2px 25px;
+    margin: 0px 20px;
+    background-color: white;
+    color: darkgreen;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.assets-box {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    margin: 10px 20px 20px 0px;
+    padding: 3px;
+    border: 1px solid $BorderClr;
+    box-shadow: 0px 2px 4px 0px rgba(35, 35, 35, 0.25);
+    background-color: transparent;
+}
+
+.onedrv-icon {
+    content: url(/images/default/IcoOneDrv.svg);
+}
+
+.cld-icon {
+    content: url(/images/default/IcoIcld.svg);
+}
+
+.ggldrv-icon {
+    content: url(/images/default/IcoGglDrv.svg);
+}
+
+.drpbx-icon {
+    content: url(/images/default/IcoDrpbx.svg);
+}
+
+//temporary
+.default-icon {
+    content: url(/images/default/IcoIcld.svg);
+}
+
+.mre-actn-box {
+    height: 40px;
+    border-radius: 4px;
+    margin: 1.5% 0;
+    border: 1px solid $BorderClr;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    max-width: 188px;
+    padding: 5px 0px;
+    cursor: pointer;
+}
+
+.fle-exton-img {
+    img {
+        width: 40px;   
+        height: 40px;
+    }
+
+    .fle-nme {
+        display: inline-block;
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-left: 15px;
+    }
+
+    .mp4, .MP4,
+    .avi, .AVI,
+    .mov, .MOV,
+    .mkv, .MKV {
+        content: $IcoVd;
+    }
+
+    .txt, .TXT,
+    .xml, .XML,
+    .doc, .DOC,
+    .docx, .DOCX,
+    .pdf, .PDF,
+    .xls, .XLS,
+    .xlsx, .XLSX,
+    .js, .JS,
+    .cshtml, .CSHTML {
+        content: $IcoDcmnt;
+    }
+
+    .mp3, .MP3,
+    .wav, .WAV,
+    .aac, .AAC {
+        content: $IcoMsc;
+    }
+
+    .png, .PNG,
+    .svg, .SVG,
+    .jpg, .JPG,
+    .jpeg, .JPEG {
+        content: $IcoPctr;
+    }
+}
+
+.file-ext-def-icon {
+    Content: $IcoDcmnt;
+}
+
+.arw-img {
+    content: url(/images/default/Arrow.svg);
+}
+
+.ico-eye-sml {
+    content: $IcoEye;
+    padding: 5px;
+}
+
+.ico-dlt {
+    content: $IcoDlt;
+    padding: 5px;
+}
+
+.ico-apikey {
+    content: $IcoAPIKey;
+    padding: 5px;
+}
+
+.ico-offln {
+    content: $IcoOffln;
+    padding: 5px;
+}
+
+.ico-invtfrd {
+    content: $IcoInvtFrnd;
+    padding: 5px;
+}
+
+.check-box {
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.rcnt-fle-tbl {
+    thead tr th {
+        color: $HdTxtClr;
+        font-size: 12px;
+        font-weight: 600;
+        border: none;
+        padding-bottom: 15px;
+        padding-right: 2%;
+
+        img {
+            padding-left: 5px;
+        }
+    }
+
+    tbody tr td {
+        border: none;
+        color: $colDsbl;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 7px 0px;
+        padding-right: 2%;
+    }
+
+    tbody tr:hover,
+    tbody tr.active,
+    .selected {
+        background: $TbleBg !important;
+        box-shadow: 0px 1px 4px 0px #00000040;
+    }
+}
+
+.file-max-hgt {
+    max-height: 365px;
+    overflow-y: scroll;
+}
+
+.fle-nme {
+    color: $HdTxtClr;
+}
+
+.sub-text {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.appstre-img, .gglplay-img {
+    cursor: pointer;
+}
+
+.appstre-img {
+    content: url(/images/default/AppStore.svg);
+    width: 134.4px;
+    height: 42px;
+}
+
+.gglplay-img {
+    content: url(/images/default/BtnGooglePlay.svg);
+    width: 134.4px;
+    height: 42px;
+}
+
+.dwnld-sec {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+.pwdgnrt-img {
+    content: $ImgPsswrdGnrt;
+    margin: 3% 0%;
+}
+
+.learn-btn {
+    padding: 5px;
+    width: 72px !important;
+    border: 1px solid $BorderClr;
+    color: black;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 8px;
+}
+
+.sub-lvl-clr {
+    background-color: $BorderClr;
+    color: white;
+}
+
+/*home suggestion section*/
+.sugg-popup {
+    display: none;
+    justify-content: right;
+    background-color: white;
+}
+
+.sugg-popup.active {
+    display: block;
+    top: 48%;
+    right: 3%;
+    position: fixed;
+    background-color: white;
+    text-align: right;
+    padding: 20px;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2509803922);
+    border-radius: 5px;
+}
+
+.info-prple {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    background-color: #48772C;
+    padding: 3px 0px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.info-prple:nth-child(4n+1) {
+    background-color: #48772C;
+}
+
+.info-prple:nth-child(4n+2) {
+    background-color: #FFC50D;
+}
+
+.info-prple:nth-child(4n+3) {
+    background-color: #86B96E;
+}
+
+.info-prple:nth-child(4n+4) {
+    background-color: #494949;
+}
+
+.bdr-clr {
+    background: #fff !important;
+    border: 1px solid #000;
+    color: #000;
+}
+
+.Backbtn {
+    content: url(images/default/btnback.svg);
+    color: $BtnBackClr;
+}
+
+.modalDialog.sync-popup > div {
+    width: 287px;
+    height: 287px;
+    border-radius: 29px;
+    padding: 20px;
+}
+
+//Share key design
+.modalDialog.sharekey-popup > div {
+    width: 50% !important;
+    height: fit-content;
+    margin: 8% auto;
+    padding-top: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.shr-key-title {
+    width: 100%;
+    padding: 7px 0px !important;
+    color: $WhtTxtClr;
+    background-color: $BgrndCol;
+}
+
+.sharekey-content {
+    margin: 15px auto;
+    border-radius: 10px;
+    padding: 10px 30px 0px;
+
+    input[type=email] {
+        border: 1px solid $ButCanBorder;
+        background-image: url(/images/default/IcoSearch.svg);
+        background-repeat: no-repeat;
+        background-position: top 10px right 10px;
+        background-size: 18px;
+    }
+
+    .fle-exton-img img {
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.selected-file {
+    background: $FileBg;
+    padding: 4px 7px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.file-box {
+    max-height: 195px;
+    min-height: 195px;
+    border: 0.2px solid #999999;
+    box-sizing: border-box;
+    border-radius: 5px;
+    overflow-y: scroll;
+    padding: 10px 15px;
+
+    > dl > dd {
+        margin: 0px !important;
+
+        hr {
+            margin: 0px !important;
+        }
+    }
+}
+
+.share-list {
+    background: $FileBg;
+}
+
+.empty-list {
+    background-image: $IcoKeyShrng;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.context-menu {
+    height: 80px;
+    width: 120px;
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    float: right;
+    right: 20px;
+    bottom: 25%;
+    padding: 8px 10px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+
+    dd {
+        padding: 3px 7px;
+    }
+
+    dd:hover {
+        background-color: #F2F4F0;
+        border-radius: 4px;
+    }
+
+    .refresh-icon {
+        content: $IcoRefresh;
+        padding-right: 3px;
+    }
+
+    .unshare-icon {
+        content: $IcoUnShare;
+        padding-right: 3px;
+    }
+}
+
+.sync-img {
+    content: $ImgSnsCncts;
+}
+
+.sd-img {
+    content: $ImgSd;
+}
+
+.axcrypt-icon {
+    content: $AxCryptIcon;
+}
+
+.contact-icon {
+    content: $IcoContact;
+}
+
+.axcrypt-icon, .contact-icon, .shared-text {
+    padding-left: 8px;
+    height: 18px;
+}
+
+.ico-optn {
+    content: $IcoOptns;
+}
+
+.mb-shre {
+    display: none;
+}
+
+.dk-shre {
+    display: block;
+}
+
+.home-context-menu {
+    background-color: #f9f9f9;
+    border: 1px solid $BorderClr;
+    border-radius: 16px;
+    width: 417px;
+    padding: 10px;
+    background-color: white;
+    position: absolute;
+    display: none; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+
+    dd {
+        padding: 4px 10px;
+        margin-bottom: 3px;
+        margin-top: 4px;
+    }
+
+    dd:hover {
+        color: $TxtClr;
+        background-color: $PflBg;
+        margin: 4px -10px;
+        padding: 4px 20px;
+        background-image: $IcoIndctr;
+        background-repeat: no-repeat;
+        background-position: top right 0px;
+    }
+}
+.home-context-menu::after {
+    content: "";
+    position: absolute;
+    top: 60%;
+    left: 20px;
+    transform: translateY(-60%) rotate(90deg);
+    width: 0;
+    height: 0;
+}
+
+//recent folders
+.rcnt-fld-bx {
+    width: 178px;
+    height: 84px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 12px 1px $colFldMbbxshdw;
+    display: block;
+    padding: 20px 0px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+
+    label {
+        max-width: 150px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}
+
+.rcnt-fld-bx.selected {
+    background: $TbleBg;
+    box-shadow: 0px 1px 4px 0px #00000040;
+}
+
+.date-drpdwn {
+    content: $IcoDrpDwn;
+    transform: rotate(90deg);
+    height: 11px;
+    width: 13px;
+}
+
+.add-fldr-img {
+    content: $IcoFldrAdd;
+}
+
+.add-fldr {
+    border-style: dotted !important;
+    box-shadow: none;
+}
+
+.hover-popup {
+    img {
+        padding: 6px 0px;
+    }
+}
+
+.fld-dflt-cl {
+    border: 1px solid $BorderClr;
+}
+
+.fld-tem-cl {
+    background: $colMbrDsbl;
+}
+
+.fld-ntfnd-cl {
+    background: $colDsblBg;
+}
+
+.rcnt-fld-sec {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3%;
+    margin-top: 10px;
+    max-height: 310px;
+    overflow-y: scroll;
+}
+
+.recent-fle-rw a {
+    color: $colTxtDsbl;
+}
+
+.recent-fle-rw a.active,
+.recent-fle-rw a:hover {
+    color: $TxtClr;
+}
+
+.fldr-img {
+    content: $IcoFldr;
+}
+
+.tmpr-img {
+    background-image: $IcoTmprr !important;
+    background-repeat: no-repeat;
+    background-position: top 8px right 8px !important;
+}
+
+.abt-axc-sec {
+    .modalDialog > div {
+        padding: 30px 15px !important;
+    }
+
+    label {
+        font-weight: 400;
+        padding: 5px 0px;
+    }
+}
+
+.shre-fle-txt {
+    display: inline-block;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 1280px) {
+    .sugg-popup, .free-sugtn {
+        //visibility: hidden;
+    }
+}
+
+@media (max-height: 740px) {
+    .sugg-popup, .free-sugtn {
+        //visibility: hidden;
+    }
+}
+@media (max-width: 768px) {
+    .dk-shre {
+        display: none;
+    }
+
+    .mb-shre {
+        display: block !important;
+    }
+
+    .sharekey-content {
+        padding: 0px;
+
+        input[type=email] {
+            background-position: top 10px left 7px;
+            background-size: 14px;
+            text-indent: 25px;
+            font-size: 12px;
+        }
+    }
+
+    .selected-file {
+        background-color: $colVwrAvtr;
+        width: 47%;
+        height: 76px;
+        text-align: center;
+        padding: 25px 5px;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .file-box {
+        border: none;
+        min-height: 280px;
+        padding: 0px;
+        margin-top: 20px;
+
+        > dl > dd {
+            padding: 7px;
+            border-radius: 5px;
+        }
+
+        hr {
+            display: none;
+        }
+    }
+
+    .ico-info {
+        content: $IcoInf;
+        padding-top: 5px;
+    }
+
+    .empty-list {
+        background-size: 340px;
+        height: fit-content;
+    }
+
+    .share-list {
+        background: none !important;
+    }
+
+    .file-bgrnd {
+        background: $FileBg;
+    }
+
+    .shr-ky-ftr {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 15px;
+
+        .btn-small {
+            width: 100%;
+        }
+    }
+
+    .add-button {
+        background-image: url(/images/default/IcoAdd.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        margin-top: 4px;
+        text-indent: -9999px;
+        overflow: hidden;
+    }
+
+    .act-box {
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        padding: 15px;
+        margin-right: 10px;
+
+        img {
+            padding-bottom: 4px;
+            max-height: 29px;
+        }
+    }
+
+    .act-img {
+        width: 26px;
+        height: 32px;
+    }
+
+    .head-sec {
+        margin: 12px auto 5px;
+        margin-left: 20px;
+        align-items: center;
+    }
+
+    .assets-box {
+        width: 72px;
+        height: 56px;
+        align-items: center;
+        padding: 5%;
+    }
+
+    .info-prple {
+        width: 32px;
+        height: 32px;
+    }
+
+    .recent-fle-rw {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+    }
+
+    .fltr-ico {
+        content: $BtnFltr;
+    }
+
+    .fltr-ico:active {
+        content: $BtnFltrAct;
+    }
+
+    .act-txt-sze {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .sort-img {
+        content: $IcoSort;
+        padding-right: 5px;
+    }
+
+    .rnt-fle-bx {
+        width: 100%;
+        height: 70px;
+        flex-shrink: 0;
+        border-radius: 5px;
+        border: 1px solid $BorderClr;
+        box-shadow: 0px 5px 12px 1px $colFldMbbxshdw;
+        margin-top: 10px;
+        padding: 13px 10px 10px;
+
+        table tr td {
+            padding: 0px 2px;
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            color: #CACACA;
+            font-size: 12px;
+        }
+
+        tr:nth-child(odd) {
+            font-size: 16px;
+        }
+    }
+
+    .rnt-fle-bx:active {
+        background-color: $FlActBg;
+
+        tr:nth-child(even) {
+            color: $FltxtAct;
+        }
+    }
+
+    .rnt-fle-bx.selected {
+        background-color: $FlActBg;
+    }
+
+    .rcnt-fle-tbl {
+        overflow: hidden;
+    }
+
+    .home-search {
+        border-radius: 5px;
+        border: 1px solid #CACACA;
+        width: 100%;
+        height: 40px;
+        text-indent: 25px;
+        background-image: url(/images/default/IcoSearch.svg);
+        background-repeat: no-repeat;
+        background-position: left 5px center;
+    }
+
+    .rcnt-fld-sec {
+        gap: 6%;
+        overflow: scroll;
+        margin-top: 20px;
+    }
+
+    .rcnt-fld-bx {
+        width: 47%;
+        height: 108px;
+        padding: 30px 0px;
+        background-image: $IcoOptns;
+        background-repeat: no-repeat;
+        background-position: top 8px right 5px;
+    }
+
+
+    .fle-exton-img {
+        .mp4, .MP4,
+        .avi, .AVI,
+        .mov, .MOV,
+        .mkv, .MKV {
+            content: $IcoVdMb;
+        }
+
+        .txt, .TXT,
+        .xml, .XML,
+        .doc, .DOC,
+        .docx, .DOCX,
+        .pdf, .PDF,
+        .xls, .XLS,
+        .xlsx, .XLSX,
+        .js, .JS,
+        .cshtml, .CSHTML {
+            content: $IcoDocMb;
+        }
+
+        .mp3, .MP3,
+        .wav, .WAV,
+        .aac, .AAC {
+            content: $IcoMusMb;
+        }
+
+        .png, .PNG,
+        .svg, .SVG,
+        .jpg, .JPG,
+        .jpeg, .JPEG {
+            content: $IcoPicMb;
+        }
+
+        .fle-nme {
+            max-width: 220px;
+            padding-left: 0px;
+            display: block;
+        }
+    }
+
+    .home-title {
+        height: 32px;
+        width: 36px;
+        padding-left: 8px;
+        padding-bottom: 5px;
+    }
+
+    .recent-fle-rw a {
+        text-decoration: none;
+    }
+
+    .recent-fle-rw a.active,
+    .recent-fle-rw a:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.25em;
+        text-decoration-thickness: 0.25em;
+    }
+
+    .fltr-popup {
+        display: none;
+        position: fixed;
+        background: #fff;
+        border: 1px solid $BorderClr;
+        padding: 16px;
+        z-index: 999;
+        width: 160px;
+        height: 155px;
+        right: 15px;
+        top: 33%;
+        border-radius: 16px;
+        box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        color: $colTxtDsbl;
+
+        input[type='radio'] {
+            margin: 8px;
+        }
+
+        input[type='radio']:checked + label {
+            color: $colTxtRglrBd;
+        }
+    }
+    .home-body {
+        margin-top: 5px;
+        margin-bottom: 25px;
+    }
+
+    .hgt-ovflw {
+        max-height: 445px;
+        overflow: scroll;
+    }
+
+    .shared-text {
+        display: inline-block;
+        max-width: 250px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media only screen and (max-width: 1370px) {
+    .rcnt-fle-tbl {
+        max-width: 850px;
+
+        tbody tr td {
+            font-size: 16px;
+            font-weight: 400;
+        }
+    }
+
+    .scrd-sec {
+        display: none;
+        visibility: hidden;
+    }
+
+    .info-prple {
+        font-size: 12px;
+        font-weight: 600;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1370px) {
+    .rcnt-fld-bx {
+        width: 160px;
+        height: fit-content;
+    }
+    .fle-exton-img .fle-nme {
+        //max-width: 115px;
+        padding-left: 3%;
+    }
+}

@@ -8,23 +8,17 @@ using System.Globalization;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Ipc;
-using Microsoft.AspNetCore.Components;
-using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Windows.Desktop;
 using AxCrypt.Core.Crypto;
-using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Common;
-using AxCrypt.Api.Model;
-using AxCrypt.Api;
 using AxCrypt.App.Windows.Infrastructure.Dialogs;
-using static PInvoke.User32;
 using AxCrypt.Core.IO;
 using System.Text.RegularExpressions;
 using AxCrypt.Mono;
-using Microsoft.Maui.Hosting;
-using AxCrypt.App.Windows.Services;
+
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows;
 

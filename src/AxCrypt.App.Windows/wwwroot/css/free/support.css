@@ -1,145 +1,129 @@
 ﻿.label-text label {
-    font-weight: 700;
-    font-size: 24px;
-    color: #000000 !important;
-    margin: 2% 0%;
-}
-
-.free-sec {
-    margin: 0 20%;
+  font-weight: 700;
+  font-size: 24px;
+  color: #000000 !important;
+  margin: 2% 0%;
 }
 
 .support-image {
-    Content: url(/images/free/ImgVwrSrrSpprt.svg);
-    margin: 5% auto;
+  Content: url(/images/free/ImgVwrSrrSpprt.svg);
+  margin: 5% 19%;
 }
 
 .link-box {
-    width: 165px;
-    height: auto;
-    border: 1px solid #86B96E;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-Content: flex-start;
-    gap: 5px;
-    background-color: rgba(217, 217, 217, 0.3);
-    padding: 2px 5px;
-    box-shadow: 0px 8px 12px 0px rgba(60, 97, 43, 0.25);
+  width: 165px;
+  height: auto;
+  border: 1px solid #86B96E;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-Content: flex-start;
+  gap: 5px;
+  background-color: rgba(217, 217, 217, 0.3);
+  padding: 2px 5px;
+  box-shadow: 0px 8px 12px 0px rgba(60, 97, 43, 0.25);
 }
 
 .lable-txt {
-    font-weight: 700;
-    font-size: 10px;
-    color: #494949;
+  font-weight: 700;
+  font-size: 10px;
+  color: #494949;
 }
 
 .link-txt {
-    font-weight: 700;
-    font-size: 12px;
-    color: #000000;
+  font-weight: 700;
+  font-size: 12px;
+  color: #000000;
 }
 
 .desc-txt {
-    font-size: 18px;
-    color: #000000;
+  font-size: 18px;
+  color: #000000;
 }
 
 .idea-img {
-    Content: url(/images/free/IcoIdea.svg);
+  Content: url(/images/free/IcoIdea.svg);
 }
 
 .faq-img {
-    Content: url(/images/premium/IcoQstnMrk.svg);
+  Content: url(/images/premium/IcoQstnMrk.svg);
 }
 
 .arrow-img {
-    Content: url(/images/free/IcoArrow.svg);
-    padding-left: 27px;
+  Content: url(/images/free/IcoArrow.svg);
+  padding-left: 27px;
 }
 
 .btn-sec {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
 #support-input-body {
-    min-height: 120px;
+  min-height: 120px;
 }
 
 .sup-text-blur {
-    background-image: url(/images/free/ImgVwrSrrSpprt.svg);
-    background-repeat: no-repeat;
-    background-position: top 65% center;
+  background-image: url(/images/free/ImgVwrSrrSpprt.svg);
+  background-repeat: no-repeat;
+  background-position: top 65% center;
 }
 
-    .sup-text-blur:focus {
-        background-image: none;
-    }
+.sup-text-blur:focus {
+  background-image: none;
+}
 
 .mb-sec {
-    display: none;
+  display: none;
 }
 
 @media only screen and (max-width: 768px) {
-    .link-box {
-        width: auto;
-    }
-
-    .free-sec {
-        margin: 0 5%;
-    }
-
-    .support-image {
-        max-width: 340px;
-    }
-
-    .sup-text-blur {
-        background-size: 100%;
-    }
-
-    .hide-txt, .page-title {
-        display: none;
-    }
-
-    .support .btn-large {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-
-    .support .btn-sec {
-        flex-direction: column-reverse;
-        gap: 0px;
-    }
-
-    .mb-sec {
-        display: block;
-    }
-
-    .btn-hide {
-        display: none;
-    }
+  .link-box {
+    width: auto;
+  }
+  .support-image {
+    margin: 0% 8%;
+    margin-left: 0px;
+    margin-right: 25px;
+    max-width: 105%;
+  }
+  .sup-text-blur {
+    background-size: 100%;
+  }
+  .hide-txt, .page-title {
+    display: none;
+  }
+  .support .btn-large {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .support .btn-sec {
+    flex-direction: column-reverse;
+    gap: 0px;
+  }
+  .mb-sec {
+    display: block;
+  }
+  .btn-hide {
+    display: none;
+  }
 }
-
 @media only screen and (max-width: 280px) {
-    .page-title, .label-text label {
-        font-size: 19px;
-    }
+  .page-title, .label-text label {
+    font-size: 19px;
+  }
 }
-
 .SupWarngText {
-    text-align: center;
-    margin: 0 auto;
+  text-align: center;
+  margin: 0 auto;
 }
-
-    .SupWarngText span {
-        color: #48772C;
-        font-weight: 700;
-        font-size: 24px;
-    }
-
-    .SupWarngText a {
-        color: #494949;
-        font-weight: 800;
-        text-decoration: underline;
-    }
+.SupWarngText span {
+  color: #48772C;
+  font-weight: 700;
+  font-size: 24px;
+}
+.SupWarngText a {
+  color: #494949;
+  font-weight: 800;
+  text-decoration: underline;
+}

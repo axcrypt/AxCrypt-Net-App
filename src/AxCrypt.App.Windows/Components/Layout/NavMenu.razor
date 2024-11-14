@@ -4,19 +4,21 @@
 @using AxCrypt.Content
 @using static AxCrypt.Abstractions.TypeResolve
 
-<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">AxCrypt</a>
+<link href="css/@SubscriptionLevel.ToString().ToLower()/sidemenu.min.css" rel="stylesheet" />
+
+<div class="side-menu">
+    <div class="navbar" style="margin-top: 10px;">
+        <div class="container-fluid">
+            <a href=""> <img class="axc-icon" src="" alt="" style="max-width: @(Utility.IsMainMenuHidden?"":"100%")" /></a>
+        </div>
     </div>
 </div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
+<div class="" @onclick="ToggleSideMenu">
+    <nav class="flex-column" style="padding-top:60px;">
         <div class="nav-item px-3">
-            <NavLink class="nav-link one" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            <NavLink class="nav-link one" href="mainpage" Match="NavLinkMatch.All">
+                <span class="oi account" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.HomeLinkLabel</span>
             </NavLink>
         </div>
         <div class="nav-item px-3">
@@ -46,17 +48,17 @@
         </div>
         <div class="abt-sec">
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="" @onclick="FeedbackPopup">
+                <NavLink class="nav-link" @onclick="FeedbackPopup" style="width:100%">
                     <span class="oi fdbck" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SendFeedbackTitle</span>
                 </NavLink>
             </div>
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="" @onclick="AboutPopup">
+                <NavLink class="nav-link" @onclick="AboutPopup">
                     <span class="oi info" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.AboutAxcryptLinkLabel</span>
                 </NavLink>
             </div>
         </div>
-          <div>
+        <div>
             <AxCrypt.App.Windows.Components.Pages.Shared.ProgressBar />
         </div>
     </nav>
@@ -83,10 +85,20 @@
     private bool aboutPopup = false;
     private SubscriptionLevel SubscriptionLevel { get; set; }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override void OnInitialized()
     {
         SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        base.OnAfterRender(firstRender);
+
+        base.OnInitialized();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+            base.OnAfterRender(firstRender);
+        }
     }
 
     private void ToggleSideMenu()

@@ -1,0 +1,557 @@
+﻿.sidebar {
+    background: $SdebrbgndClr;
+    height: 100%;
+}
+
+.axc-icon {
+    content: $IcoAxCryptGrn;
+    padding: 10px 5px;
+    overflow: hidden;
+}
+
+.account {
+    content: $IcoUserDefault;
+    height: 19px;
+    width: 23px;
+}
+
+.scrdfldr {
+    content: $IcoScrdFldrDefault;
+    height: 20px;
+    width: 17.6px;
+}
+
+.scrts {
+    content: $IcoScrtsDefault;
+    height: 20px;
+    width: 17.6px;
+}
+
+.scrdmssngr {
+    content: $IcoScrdMssngrDefault;
+    height: 20px;
+    width: 17.6px;
+}
+
+.notifctn {
+    content: $IcoActivityDefault;
+    width: 20px;
+    height: 20px;
+}
+
+.suprt {
+    content: $IcoSupportDefault;
+    width: 20px;
+    height: 20px;
+}
+
+.fdbck {
+    content: $IcoFdbckDefault;
+    width: 20px;
+    height: 20px;
+}
+
+.info {
+    content: $IcoInfOldDefault;
+    width: 16px;
+    height: 16px;
+}
+
+.nav-item {
+    a {
+        color: #A4A4A4;
+        padding: 12px 15px;
+        border-radius: 8px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    span {
+        margin-right: 20px;
+    }
+}
+
+.nav-item .one.active,
+.nav-item .two.active,
+.nav-item .three.active,
+.nav-item .four.active,
+.nav-item .five.active,
+.nav-item a:hover,
+.footer-menu a.active,
+.footer-menu a:hover {
+    background-color: $SdeMnubgndClr;
+    color: $SdeMnuTxtClr;
+    width: 98%;
+
+    .account {
+        content: $IcoUser;
+    }
+
+    .scrdfldr {
+        content: $IcoScrdFldr;
+    }
+
+    .scrts {
+        content: $IcoScrts;
+    }
+
+    .scrdmssngr {
+        content: $IcoScrdMssngr;
+    }
+
+    .notifctn {
+        content: $IcoActivity;
+    }
+
+    .suprt {
+        content: $IcoSupport;
+    }
+
+    .fdbck {
+        content: $IcoFdbck;
+    }
+
+    .info {
+        content: $IcoInfOld;
+    }
+}
+
+.abt-sec {
+    position: absolute;
+    top: 515px;
+}
+
+.flex-column .nav-link.active.one,
+.flex-column .nav-link.active.two,
+.flex-column .nav-link.active.three,
+.flex-column .nav-link.active.four,
+.flex-column .nav-link.active.five {
+    background-image: $IcoIndctr;
+    background-repeat: no-repeat;
+    background-position: top 4px right;
+}
+  
+.oi {
+    left: 7px !important;
+}
+
+.hide-icon {
+    content: $IcoHd;
+    float: right;
+    padding-top: 110px;
+    margin-right: -12px;
+    cursor: pointer;
+}
+
+.expbd-icon {
+    content: $IcoExpbd;
+    float: right;
+    margin-top: 110px;
+    cursor: pointer;
+    overflow: visible !important;
+    position: absolute;
+    left: 80px;
+}
+
+.nav-link {
+    overflow: hidden;
+}
+
+//feedback page
+.fdbck-img {
+    content: $ImgFdbck;
+    padding-bottom: 15px;
+}
+
+.modalDialog.fdbck-popup > div {
+    margin: 7% auto;
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+    }
+}
+
+.flex-start {
+    .button {
+        background-color: #D9D9D9;
+        font-size: 12px;
+        border-radius: 4px 4px 0px 0px;
+        height: 32px;
+    }
+}
+
+.flex-start {
+    .button.highlighted {
+        background-color: $BgrndCol !important;
+        color: $WhtTxtClr;
+    }
+}
+
+.abt-axc a {
+    color: #000000;
+}
+
+//progrees bar line
+.progres-sec {
+    margin-top: 190px;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    height: 80px;
+    background: $psmgrBgClr;
+    padding: 15px 20px;
+    border-radius: 8px;
+}
+
+.progress-bar {
+    background-color: $ActnBgClr;
+    height: 100%;
+    width: 0%;
+    border-radius: 4px;
+    transition: width 0.1s ease;
+}
+
+.fist-rw {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    color: $colTxtPrmBd;
+
+    div:nth-child(2){
+        font-weight: 700;
+    }
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 4px;
+    height: 10px;
+    position: relative;
+}
+
+.progress-bubble-start {
+    position: absolute;
+    top: 0px;
+    right: -5px;
+    height: 10px;
+    width: 10px;
+    background-color: black;
+    border-radius: 50%;
+    transition: left 0.1s ease;
+    z-index: 1;
+    margin-left: -10px;
+}
+
+.progress-bubble-end {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 10px;
+    width: 10px;
+    background-color: white;
+    border: 2px solid $BorderClr;
+    border-radius: 50%;
+}
+
+.progres-fle-txt {
+    display: inline-block;
+    max-width: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//progress bar circle
+.progress-circle-sec {
+    margin-top: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.progress-wrapper {
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.progress-circle {
+    transform: rotate(90deg);
+}
+
+.progress-background {
+    fill: none;
+    stroke: $psmgrBgClr;
+    stroke-width: 8;
+}
+
+.progress-value {
+    fill: none;
+    stroke: $ActnBgClr;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.1s ease;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: $TxtClr;
+}
+
+
+@media (max-width: 768px) {
+    .account {
+        filter: brightness(1);
+    }
+
+    .sidebar {
+        width: 90%;
+        z-index: 1;
+        overflow-y: hidden !important;
+        border-radius: 0px 32px 32px 0px;
+        background: $SdebrbgndClrMb;
+    }
+
+    .menu-ico {
+        background-image: $IcoBrgMn;
+        width: 42px;
+        height: 32px;
+    }
+
+    .axc-icon {
+        height: 46px;
+        padding-left: 20px;
+        padding-top: 90px;
+    }
+
+    .mbl-mre-act {
+        width: 88px;
+        height: 88px;
+        background: $MreActBg;
+        border-radius: 50px;
+        padding: 25px 5px;
+        box-shadow: (0px 8px 16px rgba(97, 129, 82, 0.30));
+        position: fixed;
+        bottom: 25px;
+        display: flex;
+        justify-content: center;
+        margin: auto 37%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .nav-item a.active,
+    .nav-item a:hover {
+        text-decoration: underline;
+        text-underline-offset: 1.85em;
+        text-decoration-thickness: 0.4em;
+    }
+
+    .footer-menu.nav-item {
+        a {
+            padding: 0px;
+        }
+
+        span {
+            margin-right: 5px;
+        }
+    }
+    //mobile footer section
+    .mobile-footer {
+        position: fixed;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-content: flex-start;
+        text-align: center;
+        color: white;
+        width: 100%;
+        height: 85px;
+        padding: 10px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        border-radius: 32px 32px 0px 0px;
+        background: var(--colBG, #FFF);
+        box-shadow: 0px 2px 10px 4px rgba(190, 189, 189, 0.25);
+    }
+
+    #mreActFeat {
+        justify-content: center;
+    }
+
+    .footer-menu {
+        text-align: center;
+        padding: 10px 3px 10px;
+        line-height: 14px;
+    }
+
+    .footer-menu a {
+        color: #CACACA;
+        text-align: center;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .footer-menu a.active,
+    .footer-menu a:hover {
+        color: $TxtClr;
+        background-color: #fff;
+
+        .mb-pwd-mngr {
+            content: $IcoPwdMngrMb;
+        }
+    }
+
+    .footer-menu img {
+        width: 24px;
+        height: 20px;
+    }
+
+    .footer-popup {
+        display: flex;
+        position: fixed;
+        bottom: 90px;
+    }
+
+    .active-plan {
+        display: flex;
+        position: relative;
+    }
+
+    .cstmz-actn {
+        width: 64px;
+        height: 64px;
+        background-color: #FFF;
+        border: 2px solid $colBg;
+        border-style: dotted;
+        border-radius: 40px;
+        text-align: center;
+        box-shadow: 0px 5px 10px rgba(43, 70, 27, 0.30);
+    }
+
+    .mre-rnd {
+        width: 64px;
+        height: 64px;
+        background: $MreActBg;
+        box-shadow: 0px 5px 12px 1px $colFldMbbxshdw;
+        border-radius: 40px;
+        padding: 18px 22px;
+        position: relative;
+    }
+
+    .mre-act:nth-child(1), .mre-act:nth-child(3) {
+        bottom: 0px;
+    }
+
+    .mre-act:nth-child(2) {
+        bottom: 40px;
+    }
+
+    .cstmz-img {
+        content: $IcoCstmzActn;
+    }
+
+    .mre-act-dflt {
+        background: $MreActBg;
+    }
+
+    .mre-act-actv {
+        background: $colBg;
+    }
+
+    .mb-pwd-mngr {
+        content: $IcoPwdMgrMbDflt;
+    }
+    //feedback & about
+    #userInput {
+        background-image: url(/images/default/mobile/ImgFeedback.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 340px;
+        width: 100%;
+    }
+
+    #userInput:focus {
+        background-image: none;
+    }
+
+    .flex-start {
+
+        a {
+            text-decoration: underline;
+            text-underline-offset: 3.5px;
+        }
+
+        .button {
+            background: none !important;
+            border-radius: 8px;
+            height: 46px;
+            color: $colTxtDsbl;
+            font-weight: 700;
+            font-size: 16px;
+        }
+    }
+
+    .flex-start {
+        .button.highlighted {
+            background-color: $CanSubsClr !important;
+            color: $TxtClr;
+        }
+    }
+
+    .mb-abt-axc {
+        color: $colDsbl;
+    }
+
+    .mb-abt {
+        padding-bottom: 30px;
+        line-height: 21px;
+
+        img {
+            height: 62px;
+        }
+
+        &.flex-start {
+            gap: 5%;
+        }
+    }
+
+    .icofb {
+        content: $IcoFb;
+    }
+
+    .icoinst {
+        content: $IcoInst;
+    }
+
+    .icoln {
+        content: $IcoLn;
+    }
+
+    .icotw {
+        content: $IcoTw;
+    }
+
+    .progres-sec {
+        position: absolute;
+        bottom: 20px;
+        padding: 8px 20px;
+        height: 70px;
+        z-index: 1;
+        width: 300px;
+    }
+
+    .fist-rw {
+        padding-bottom: 0px;
+    }
+}

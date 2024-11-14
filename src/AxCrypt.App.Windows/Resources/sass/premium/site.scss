@@ -1,0 +1,10 @@
+﻿@import "_variables";
+@import "../_site";
+
+.page-title::before {
+    top: -5px;
+    right: 0px;
+    width: 32px;
+    height: 32px;
+    transform: rotate(25deg);
+}

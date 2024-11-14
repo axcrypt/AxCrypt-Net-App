@@ -21,7 +21,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
-  max-width: 250px;
+  max-width: 160px;
   position: relative;
   top: 10px;
   white-space: nowrap;
@@ -73,34 +73,6 @@
   padding: 4px 22px;
 }
 
-    .key-mngnt-Popup a:hover, .key-mngnt-Popup dd:hover, .manage-acc-sec a:hover, .manage-acc-sec dd:hover {
-        background-image: url(/images/business/IcoIndctr.svg);
-        background-repeat: no-repeat;
-        background-position: top left;
-        background-color: #B7B7B7;
-        color: #000 !important;
-    }
-
-        .key-mngnt-Popup a:hover .log-out-clr, .key-mngnt-Popup dd:hover .log-out-clr, .manage-acc-sec a:hover .log-out-clr, .manage-acc-sec dd:hover .log-out-clr {
-            opacity: 0.8;
-        }
-
-    .key-mngnt-Popup a:hover, .manage-acc-sec a:hover {
-        padding: 10px 25px;
-        margin: 0 -20px;
-    }
-
-    .key-mngnt-Popup dd, .manage-acc-sec dd {
-        padding: 5px;
-        margin-bottom: 0px;
-    }
-
-        .key-mngnt-Popup dd:hover, .manage-acc-sec dd:hover {
-            padding: 5px 25px;
-            margin-left: -20px;
-            margin-right: -20px;
-        }
-
 .subs-dtls-popup .center-column {
   margin: 20px 10px;
   line-height: 28px;
@@ -135,29 +107,35 @@
   margin: 0 -20px;
 }
 
-    .key-section a.active .key-section a:hover {
-        background-image: url(/images/business/IcoIndctr.svg);
-        background-repeat: no-repeat;
-        background-position: top left;
-    }
-        .key-section a.active .key-section a:hover .kym-sec {
-            content: url(/images/business/IcoKMngmnt.svg);
-        }
-        .key-section a.active .key-section a:hover .next-arrow {
-            float: right;
-            content: url(/images/business/IcoDrpDwn.svg);
-            padding-top: 5px;
-            height: 14px;
-        }
-        .key-section a.active .key-section a:hover .sgn-out-img {
-            content: url(/images/business/IcoSngOut.svg);
-        }
-        .key-section a.active .key-section a:hover .dbg-img {
-            content: url(/images/business/IcoDbgAct.svg);
-        }
-        .key-section a.active .key-section a:hover .encrypt-file-prop-img {
-            content: url(/images/business/BtnFltr.svg);
-        }
+.key-section a.active,
+.key-section a:hover {
+  background-image: url(/images/business/IcoIndctr.svg);
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+.key-section a.active .kym-sec,
+.key-section a:hover .kym-sec {
+  content: url(/images/business/IcoKMngmnt.svg);
+}
+.key-section a.active .next-arrow,
+.key-section a:hover .next-arrow {
+  float: right;
+  content: url(/images/business/IcoDrpDwn.svg);
+  padding-top: 5px;
+  height: 14px;
+}
+.key-section a.active .sgn-out-img,
+.key-section a:hover .sgn-out-img {
+  content: url(/images/business/IcoSngOut.svg);
+}
+.key-section a.active .dbg-img,
+.key-section a:hover .dbg-img {
+  content: url(/images/business/IcoDbg.svg);
+}
+.key-section a.active .encrypt-file-prop-img,
+.key-section a:hover .encrypt-file-prop-img {
+  content: url(/images/business/BtnFltr.svg);
+}
 
 .dsbl-clr {
   color: #CACACA;
@@ -238,7 +216,7 @@
   }
   .notifi-popup span {
     font-weight: 700;
-    font-size: 10px;
+    font-size: 9px;
   }
   .notif-popup-title {
     font-weight: 700;
@@ -311,8 +289,6 @@
   align-items: center;
   width: 160px;
   color: #A4A4A4;
-  border-radius: 4px;
-  border: 1px solid #000000;
 }
 
 .dropbtn.active {
@@ -419,18 +395,6 @@
   right: 58% !important;
 }
 
-.acnt-upg {
-  color: #48772C;
-  background-color: #fff;
-  border: 1px solid #48772C;
-  margin: 15px 0px 0px;
-}
-
-.subs-txt {
-    font-size: 20px;
-    font-weight: 800;
-}
-
 @media (max-width: 768px) {
   .manage-acc-sec {
     display: flex;
@@ -447,6 +411,9 @@
     font-weight: 800;
   }
   .acnt-upg {
+    color: #48772C;
+    background-color: #fff;
+    border: 1px solid #48772C;
     margin: 15px 0px;
   }
   .text-overlfow {
@@ -493,10 +460,10 @@
     color: #000;
     background-color: #B7B7B7;
   }
-    .accnt-prfl span {
-        font-weight: 800;
-        font-size: 24px;
-    }
+  .accnt-prfl h3 {
+    font-weight: 800;
+    font-size: 24px;
+  }
   .acc-subs label, .manage-acc-sec label {
     font-size: 16px;
     font-weight: 700;
@@ -574,24 +541,21 @@
   .desk-stngs-popup .off-text, .encrypt-pop .off-text {
     right: -3px;
   }
-    .accnt-prfl {
-        width: 64px;
-        height: 64px;
-        border-radius: 50px;
-        margin: 0 auto 10px;
-        padding: 19px 0;
-        color: #000;
-        background-color: #B7B7B7;
-    }
-  .accnt-prfl span {
-    font-weight: 800;
+  .accnt-prfl {
+    width: 40px;
+    height: 40px;
+    border-radius: 56px;
+    margin: 0 auto 20px;
+    padding: 10px 0px;
+    color: #000;
+    background-color: #B7B7B7;
+  }
+  .accnt-prfl h3 {
+    font-weight: 700;
     font-size: 16px;
   }
   .acc-subs {
-    width: 100% !important;
-  }
-  .desk-acnt-popup a:hover, .desk-acnt-popup a:focus, .desk-stngs-popup a:hover, .desk-stngs-popup a:focus {
-    color: #000 !important;
+    width: 90% !important;
   }
 }
 @media (max-width: 1140px) {

@@ -10,7 +10,7 @@
 .page-title::before {
   content: "";
   position: absolute;
-  background-image: none;
+  background-image: url(/images/premium/IcoPrm.svg);
   background-size: contain;
   background-repeat: no-repeat;
   transform-origin: center center;
@@ -92,12 +92,6 @@
 .flex-start {
   display: flex;
   justify-content: flex-start;
-}
-
-.empty-view-heading {
-  color: #494949;
-  font-size: 20px;
-  font-weight: 800;
 }
 
 .font-small {
@@ -186,23 +180,6 @@
   cursor: pointer;
   position: relative;
 }
-
-.modal-header {
-    font-size: 20px;
-    padding: 20px;
-    border-bottom: none;
-}
-
-.modal-body {
-    padding: 10px 20px;
-}
-
-.modal-footer {
-    border-top: none;
-    justify-content: center;
-    gap: 20px;
-}
-
 
 .model-popup {
   border: 1px solid #86B96E;
@@ -676,13 +653,8 @@ input:checked + .slider:before {
     font-size: 40px !important;
   }
 }
-@media (min-width: 1142px) {
+@media (min-width: 1155px) {
   .page {
     background: #F9F9F9;
   }
-}
-.disable-actn {
-  pointer-events: none;
-  cursor: not-allowed;
-  opacity: 0.4;
 }
