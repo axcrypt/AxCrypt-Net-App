@@ -1,15 +1,12 @@
-﻿using AxCrypt.App.Windows.Models;
-using AxCrypt.Content;
+﻿using AxCrypt.Content;
 using AxCrypt.Api.Model;
 using AxCrypt.Common;
 using AxCrypt.App.Components.Models;
-using Microsoft.AspNetCore.Components;
-
-using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Components.Services;
 
-namespace AxCrypt.App.Windows.ViewModels;
+using static AxCrypt.Abstractions.TypeResolve;
+
+namespace AxCrypt.App.Components.ViewModels;
 
 public class SupportViewModel
 {

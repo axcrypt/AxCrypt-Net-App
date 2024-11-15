@@ -1,22 +1,25 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.Api;
+using AxCrypt.App.Windows.Desktop;
+using AxCrypt.App.Windows.Infrastructure;
+using AxCrypt.App.Windows.Infrastructure.Dialogs;
+using AxCrypt.Common;
+using AxCrypt.Content;
 using AxCrypt.Core;
+using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Extensions;
+using AxCrypt.Core.IO;
+using AxCrypt.Core.Ipc;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
-using AxCrypt.Core.UI.ViewModel;
-using AxCrypt.Core.UI;
-using System.Globalization;
-using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.Core.Service;
-using AxCrypt.Core.Ipc;
-using AxCrypt.App.Windows.Desktop;
-using AxCrypt.Core.Crypto;
-using AxCrypt.Content;
-using AxCrypt.Core.Extensions;
-using AxCrypt.Common;
-using AxCrypt.App.Windows.Infrastructure.Dialogs;
-using AxCrypt.Core.IO;
-using System.Text.RegularExpressions;
+using AxCrypt.Core.Service.Secrets;
+using AxCrypt.Core.Service.UserNotification;
+using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Mono;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Windows.Services;
@@ -149,7 +152,12 @@ public partial class App : Application
         TypeMap.Register.New<WatchedFoldersViewModel>(() => new WatchedFoldersViewModel(Resolve.FileSystemState));
 
         //TypeMap.Register.Singleton<IVersion>(() => new DesktopVersion());
-        //TypeMap.Register.New<LogOnIdentity, AdditionalUserSettings>((LogOnIdentity identity) => new AdditionalUserSettings(identity));
+        TypeMap.Register.New<LogOnIdentity, AdditionalUserSettings>((LogOnIdentity identity) => new AdditionalUserSettings(identity));
+        TypeMap.Register.New<LogOnIdentity, IAccountService>((LogOnIdentity identity) => new CachingAccountService(new DeviceAccountService(new LocalAccountService(identity, Resolve.WorkFolder.FileInfo), new ApiAccountService(new AxCryptApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
+        TypeMap.Register.New<LogOnIdentity, ISecretsService>((LogOnIdentity identity) => new DeviceSecretsService(new LocalSecretsService(identity, Resolve.WorkFolder.FileInfo), new NullSecretsService(identity)));
+        TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new DeviceNotificationService(new LocalNotificationService(), new NullNotificationService(identity)));
+        TypeMap.Register.New<LogOnIdentity, ISecretsService>((LogOnIdentity identity) => new CachingSecretsService(new DeviceSecretsService(new LocalSecretsService(identity, Resolve.WorkFolder.FileInfo), new ApiSecretsService(new AxSecretsApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
+        TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new CachingNotificationService(new DeviceNotificationService(new LocalNotificationService(), new ApiNotificationService(new AxNotificationApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
 
         //TypeMap.Register.New<AboutBox>(() => new AboutBox());
 

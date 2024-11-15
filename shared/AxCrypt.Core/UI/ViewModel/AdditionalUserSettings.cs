@@ -29,7 +29,11 @@ namespace AxCrypt.Core.UI.ViewModel
         {
             get
             {
-                return Task.Run(async () => await New<LogOnIdentity, ISecretsService>(Identity).GetFreeUserSecretsCount(UserEmail)).Result;
+                if (!string.IsNullOrEmpty(Identity.UserEmail.Address) && !string.IsNullOrEmpty(UserEmail))
+                {
+                    return Task.Run(async () => await New<LogOnIdentity, ISecretsService>(Identity).GetFreeUserSecretsCount(UserEmail)).Result;
+                }
+                return 0;   
             }
         }
 

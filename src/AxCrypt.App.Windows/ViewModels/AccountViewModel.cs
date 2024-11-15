@@ -1,5 +1,4 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Service;
@@ -21,7 +20,6 @@ namespace AxCrypt.App.Windows.ViewModels;
 
 public class AccountViewModel
 {
-
     private FileOperationViewModel? _fileOperationViewModel;
     private MainViewModel? _mainViewModel;
     private IExportKeyManagementFile? ExportKeyFile;
@@ -65,9 +63,14 @@ public class AccountViewModel
 
     public async Task<DateTime> GetManageAxCryptID()
     {
-        AccountStorage userKeyPairs = new AccountStorage(New<LogOnIdentity, IAccountService>(Resolve.KnownIdentities.DefaultEncryptionIdentity));
-        ManageAccountViewModel viewModel = await ManageAccountViewModel.CreateAsync(userKeyPairs);
-        Account.CreatedTime = viewModel.AccountProperties.First().Timestamp;
+        if (!string.IsNullOrEmpty(Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address))
+        {
+            AccountStorage userKeyPairs = new AccountStorage(New<LogOnIdentity, IAccountService>(Resolve.KnownIdentities.DefaultEncryptionIdentity));
+            ManageAccountViewModel viewModel = await ManageAccountViewModel.CreateAsync(userKeyPairs);
+            Account.CreatedTime = viewModel.AccountProperties.First().Timestamp;
+            return Account.CreatedTime;
+        }
+
         return Account.CreatedTime;
     }
 
@@ -233,6 +236,14 @@ public class AccountViewModel
     {
         string userEmail = New<UserSettings>().UserEmail.ToString();
         userEmail.ProcessChangePassword();
+    }
+
+    public void PasswordReset_Click(EventArgs e)
+    {
+        if (!Account.IsLoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail))
+        {
+            BrowseUtility.RedirectToAccountWebUrl(Texts.PasswordResetHyperLink);
+        }
     }
 
     public async void ClearAllSettingsAndRestartAsync()

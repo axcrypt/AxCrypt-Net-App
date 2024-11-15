@@ -1,6 +1,6 @@
 ﻿using AxCrypt.Api.Model;
 
-namespace AxCrypt.App.Windows.Models;
+namespace AxCrypt.App.Components.Models;
 
 public class SupportModel
 {

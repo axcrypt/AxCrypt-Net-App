@@ -5,7 +5,7 @@ using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Windows.ViewModels.Feedback;
+namespace AxCrypt.App.Components.ViewModels.Feedback;
 
 public class FeedbackViewModel
 {

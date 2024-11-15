@@ -16,6 +16,7 @@ using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Components.Data;
 using AxCrypt.Content;
 using AxCrypt.App.Windows.Services;
+using AxCrypt.App.Components.Services;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -26,6 +27,7 @@ public class HomeBodyViewModel : ComponentBase
     private FileOperationViewModel _fileOperationViewModel;
     private MainViewModel? _mainViewModel;
     private FileSystemState? _fileSystemState;
+    private IFolderPicker? _folderPicker;
 
     [Inject]
     public FileShareService? FileShareService { get; set; }
@@ -43,9 +45,6 @@ public class HomeBodyViewModel : ComponentBase
             OnSharingListStateChanged?.Invoke();
         }
     }
-
-    [Inject]
-    private IFolderPicker? FolderPicker { get; set; }
 
     [Parameter]
     public IEnumerable<string> SelectedFilesOrFoldersList { get; set; } = new List<string>();
@@ -121,8 +120,8 @@ public class HomeBodyViewModel : ComponentBase
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); /*StateHasChanged();*/ });
 
         SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
-        _shareKeyViewModel = new ShareKeyViewModel();
-        FolderPicker = new FolderPickerWindows();
+        _folderPicker = new FolderPickerWindows();
+        FileShareService = new FileShareService();
     }
 
     public string GetIconClass(string displayName)
@@ -151,7 +150,7 @@ public class HomeBodyViewModel : ComponentBase
             FileSelectionType = FileSelectionType.Open
         };
 
-        selectedFiles = await FolderPicker.PickMultipleAsync(knownFolder.My.FullName, fileSelectionEventArgs);
+        selectedFiles = await _folderPicker.PickMultipleAsync(knownFolder.My.FullName, fileSelectionEventArgs);
 
         if (!selectedFiles.Any())
         {
@@ -336,7 +335,7 @@ public class HomeBodyViewModel : ComponentBase
     public IEnumerable<string>? SelectedShareKeyFiles { get; set; }
     public SharingListViewModel SharingListViewModel { get; set; }
 
-    private async Task ShareKeysWithFileSelectionAsync(IEnumerable<FileDetails> selectedRecentFiles = null)
+    private async Task ShareKeysWithFileSelectionAsync(IEnumerable<FileDetails> selectedRecentFiles)
     {
         IEnumerable<FileResult> selectedFiles = await GetFilesToProcessAsync(selectedRecentFiles);
         IEnumerable<string> filesList = selectedFiles.Select(e => e.FullPath).ToList();
@@ -532,7 +531,7 @@ public class HomeBodyViewModel : ComponentBase
 
     public async void UpgradeTo256()
     {
-        string folder = await FolderPicker.PickFolderAsync();
+        string folder = await _folderPicker.PickFolderAsync();
         if (folder == null)
         {
             return;

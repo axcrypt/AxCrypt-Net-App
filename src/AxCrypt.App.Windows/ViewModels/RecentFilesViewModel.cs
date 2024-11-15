@@ -275,7 +275,7 @@ internal class RecentFilesViewModel : ComponentBase
     {
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(SelectedFiles.Select(f => f.FilePath));
     }
-
+    
     public async void OpenSecuredRecentFiles(EventArgs args, IEnumerable<FileDetails> selectedFiles)
     {
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(selectedFiles.Select(f => f.FilePath));
@@ -333,6 +333,13 @@ internal class RecentFilesViewModel : ComponentBase
 
         IEnumerable<string> encryptedFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncrypted());
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, Resolve.KnownIdentities.DefaultEncryptionIdentity);
+        // using (KeyShareDialog dialog = new KeyShareDialog(this, viewModel, fileNames))
+        // {
+        //     if (dialog.ShowDialog(this) != DialogResult.OK)
+        //     {
+        //         return;
+        //     }
+        // }
 
         FileShareService.SetSelectedFilesOrFolders(fileNames, viewModel);
         SelectedShareKeyFiles = fileNames.Select(f => f).ToList();
@@ -369,7 +376,7 @@ internal class RecentFilesViewModel : ComponentBase
     public async Task<IList<FileDetails>> LoadRecentFiles()
     {
         using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
-        {
+        { 
             IList<FileDetails> recentFiles = new List<FileDetails>();
 
             try

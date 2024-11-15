@@ -32,7 +32,7 @@ public class ShareKeyViewModel : ViewModelBase
     private EmailAddress? UserEmailForContextMenuAction;
 
     private LogOnIdentity? _identity;
-    private SharingListViewModel _viewModel;
+    private SharingListViewModel? _viewModel;
     private FileOperationViewModel? _fileOperationViewModel;
     private IEnumerable<string>? _shareKeyFileNameList;
 

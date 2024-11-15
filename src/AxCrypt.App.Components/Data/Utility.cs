@@ -34,7 +34,7 @@ public static class Utility
         }
     }
 
-    public static event Action OnIsMainMenuHiddenChanged;
+    public static event Action? OnIsMainMenuHiddenChanged;
 
     public static void ToggleMainMenu()
     {
@@ -58,7 +58,7 @@ public static class Utility
             //    {
             //        return New<IXecretsUserGateway>(UserContext.Name).UserSubscriptionLevel == SubscriptionLevel.Business;
             //    }
-            return true;
+            return false;
         }
     }
 
@@ -84,6 +84,11 @@ public static class Utility
             //}
             return false;
         }
+    }
+
+    private static bool IsUserAuthorized()
+    {
+        throw new NotImplementedException();
     }
 
     public static DeviceIdiom GetCurrentDeviceIdiom()

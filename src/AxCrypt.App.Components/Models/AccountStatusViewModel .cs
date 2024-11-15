@@ -56,7 +56,7 @@ namespace AxCrypt.App.Components.Models
         }
 
         public string UserEmail { get; set; } = string.Empty;
-        public int DaysLeft { get; set; }
+        public int DaysLeft { get; set; } = 0;
         public string ValidFormatted
         {
             get
@@ -73,11 +73,12 @@ namespace AxCrypt.App.Components.Models
         public async Task LoadAccountStatusAsync()
         {
             KnownIdentities identityStorage = New<KnownIdentities>();
-            if (!identityStorage.IsLoggedOn)
+            LogOnIdentity identity = identityStorage.DefaultEncryptionIdentity;
+            if (!identityStorage.IsLoggedOn && string.IsNullOrEmpty(identity.UserEmail.Address))
             {
                 return;
             }
-            LogOnIdentity identity = identityStorage.DefaultEncryptionIdentity;
+
             UserEmail = identity.UserEmail.Address;
             PlanInformation pi = await PlanInformation.CreateAsync(identity);
             PlanState = pi.PlanState;

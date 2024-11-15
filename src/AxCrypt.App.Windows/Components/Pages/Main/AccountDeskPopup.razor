@@ -21,19 +21,22 @@
     <span class="font-bold">Account</span>
     <div class="acc-subs">
         <div class="accnt-prfl">
-            <h3 class="txt-clr">@accountViewModel.Account.UserEmail.Substring(0, 2).ToUpper()</h3>
+            <h3 class="txt-clr">
+                @(string.IsNullOrEmpty(accountViewModel.Account?.UserEmail) || accountViewModel.Account.UserEmail.Length < 2 ? "" : accountViewModel.Account.UserEmail.Substring(0, 2).ToUpper())
+            </h3>
         </div>
-        <h3 class="subs-txt txt-clr">@accountViewModel.Account.SubscriptionLevel</h3>
+
+        <h3 class="subs-txt txt-clr">@accountViewModel?.Account?.SubscriptionLevel</h3>
         <div>
             <div style="text-align:left;">
                 <img class="" src="images/default/IcoMssg.svg" alt="go-back-img" />
-                <span class="grey-clr font-high text-overlfow">@accountViewModel.Account.UserEmail</span>
+                <span class="grey-clr font-high text-overlfow">@accountViewModel?.Account?.UserEmail</span>
             </div>
-            @if (accountViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
+            @if (accountViewModel?.Account?.SubscriptionLevel != SubscriptionLevel.Free)
             {
                 <div style="text-align:left;">
                     <img class="" src="images/default/IcoClndr.svg" alt="go-back-img" />
-                    <span class="grey-clr font-high" style="padding-left: 5px;">expire in <span class="txt-clr">@accountViewModel.Account.DaysLeft</span></span>
+                    <span class="grey-clr font-high" style="padding-left: 5px;">expire in <span class="txt-clr">@accountViewModel?.Account?.DaysLeft</span></span>
                 </div>
                 <a class="can-subs" @onclick="accountViewModel.CancelSubscription">Cancel subscription</a>
             }
@@ -55,6 +58,12 @@
             <NavLink class="nav-link" @onclick="(e) => accountViewModel.ChangePassphraseMenuItem_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
                 <span>Password change</span>
+            </NavLink>
+        </div>
+        <div class="key-section" disabled="@IsPasswordReset()">
+            <NavLink class="nav-link" @onclick="(e) => accountViewModel.PasswordReset_Click(e)">
+                <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
+                <span>Password Reset</span>
             </NavLink>
         </div>
         <div class="key-section">
@@ -151,11 +160,26 @@
         await base.OnInitializedAsync();
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            base.OnAfterRender(firstRender);
+            StateHasChanged();
+        }
+    }
+
     [Parameter]
     public EventCallback ClosePopup { get; set; }
 
     public void OnOptionClicked()
     {
         ClosePopup.InvokeAsync(null);
+    }
+
+    public string IsPasswordReset()
+    {
+        bool isPasswordReset = accountViewModel.Account.IsLoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail);
+        return isPasswordReset ? "" : "disabled";
     }
 }

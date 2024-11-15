@@ -3,10 +3,6 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Api.Model;
 using AxCrypt.Core.Crypto;
 using AxCrypt.App.Components.Models;
-using AxCrypt.Content;
-using AxCrypt.Core.Runtime;
-
-using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Components.Services;
 
@@ -38,8 +34,11 @@ public class FileShareService : ViewModelBase, IDisposable
         }
     }
 
-    public void SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel)
+    public bool IsFolder { get; set; }
+
+    public void SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel, bool isFolder = false)
     {
+        IsFolder = isFolder;
         SelectedFilesOrFolders = filesOrFoldersPath;
         _viewModel = sharingListViewModel;
         _viewModel.BindPropertyChanged<IEnumerable<UserPublicKey>>(nameof(SharingListViewModel.SharedWith), (aks) =>

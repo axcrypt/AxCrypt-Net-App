@@ -24,28 +24,6 @@ namespace AxCrypt.App.Components.Models.Notification
             }
         }
 
-        private bool _loading { get; set; } = true;
-
-        private Action? _onStateChange;
-
-        public void SetOnStateChange(Action onStateChange)
-        {
-            _onStateChange = onStateChange;
-        }
-
-        public bool Loading
-        {
-            get => _loading;
-            set
-            {
-                if (_loading != value)
-                {
-                    _loading = value;
-                    _onStateChange?.Invoke();
-                }
-            }
-        }
-
         public string? ErrorMessage { get; set; }
 
         public SortDirection DateSortDirection { get; set; } = SortDirection.Ascending;

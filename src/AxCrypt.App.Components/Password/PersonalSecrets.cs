@@ -162,7 +162,12 @@ namespace AxCrypt.App.Components.Password
 
         private static async Task<SecretClientCollection> LoadActiveSecretsAsync()
         {
-            return await SecretsApiHelper.GetSecrets(New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity);
+            if (string.IsNullOrEmpty(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address))
+            {
+                new SecretCollection();
+            }
+
+            return await SecretsApiHelper.GetSecrets(New<KnownIdentities>().DefaultEncryptionIdentity);
         }
 
         public static async Task<bool> InsertAsync(SecretClientModel secret)

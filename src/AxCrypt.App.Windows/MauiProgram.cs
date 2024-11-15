@@ -1,26 +1,23 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Models.Notification;
 using AxCrypt.App.Components.Models.Secret;
 using AxCrypt.App.Components.Services;
 using AxCrypt.App.Components.Services.Interface;
-using AxCrypt.App.Components.Utility.View;
+using AxCrypt.App.Components.ViewModels;
+using AxCrypt.App.Components.ViewModels.Feedback;
 using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Components.Pages.Password;
 using AxCrypt.App.Windows.Components.Pages.Shared;
-using AxCrypt.App.Windows.Infrastructure;
-using AxCrypt.App.Windows.Initialize;
-using AxCrypt.App.Windows.Models;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Windows.ViewModels;
-using AxCrypt.App.Windows.ViewModels.Feedback;
 using AxCrypt.Core;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
 using AxCrypt.Mono;
-using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 
@@ -103,6 +100,7 @@ namespace AxCrypt.App.Windows
         {
             services.AddSingleton<IStatusAlertService, StatusAlertService>();
             services.AddSingleton<ProcessIndicatorService>();
+            services.AddSingleton<FileShareService>();
 
             services.AddSingleton<ITrayService, TrayService>();
             services.AddSingleton<INotificationService, NotificationService>();
@@ -117,7 +115,8 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<MainPage>();
             services.AddSingleton<Home>();
             services.AddSingleton<HomeBody>();
-            services.AddSingleton<ShareKey>();
+            services.AddSingleton<HomeBody>();
+            services.AddSingleton<MainHomeComponent>();
             services.AddSingleton<SecuredFolders>();
             services.AddSingleton<RecentFolders>();
             services.AddSingleton<PasswordManager>();
@@ -139,13 +138,15 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<ManageSecretViewModel>();
             services.AddSingleton<EditSecretViewModel>();
             services.AddSingleton<ViewSecretViewModel>();
-            services.AddSingleton<AxCrypt.App.Components.Models.Notification.NotificationViewModel>();
+            services.AddSingleton<NotificationViewModel>();
             services.AddSingleton<NotificationItemViewModel>();
             services.AddSingleton<SecretsListViewModel>();
             services.AddSingleton<SecretServiceUtility>();
-            services.AddSingleton<AxCrypt.App.Components.Services.UserNotificationService>();
+            services.AddSingleton<UserNotificationService>();
+            services.AddSingleton<HomeViewModel>();
 
             services.AddSingleton<HomeBodyViewModel>();
+            services.AddSingleton<RecentFilesViewModel>();
             services.AddSingleton<ShareKeyViewModel>();
             services.AddSingleton<RecentFoldersViewModel>();
             services.AddSingleton<FeedbackViewModel>();
