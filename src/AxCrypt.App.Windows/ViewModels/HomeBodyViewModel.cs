@@ -13,12 +13,11 @@ using System.Collections.ObjectModel;
 using AxCrypt.Common;
 using AxCrypt.Core.Extensions;
 using AxCrypt.App.Components.Services.Interface;
-using AxCrypt.App.Components.Services;
-
-using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Components.Data;
 using AxCrypt.Content;
 using AxCrypt.App.Windows.Services;
+
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -29,7 +28,21 @@ public class HomeBodyViewModel : ComponentBase
     private FileSystemState? _fileSystemState;
 
     [Inject]
+    public FileShareService? FileShareService { get; set; }
+
     private ShareKeyViewModel? _shareKeyViewModel { get; set; }
+    public ShareKeyViewModel? ShareKeyViewModel
+    {
+        get
+        {
+            return _shareKeyViewModel;
+        }
+        set
+        {
+            _shareKeyViewModel = value;
+            OnSharingListStateChanged?.Invoke();
+        }
+    }
 
     [Inject]
     private IFolderPicker? FolderPicker { get; set; }
@@ -321,6 +334,7 @@ public class HomeBodyViewModel : ComponentBase
     }
 
     public IEnumerable<string>? SelectedShareKeyFiles { get; set; }
+    public SharingListViewModel SharingListViewModel { get; set; }
 
     private async Task ShareKeysWithFileSelectionAsync(IEnumerable<FileDetails> selectedRecentFiles = null)
     {
@@ -370,10 +384,14 @@ public class HomeBodyViewModel : ComponentBase
         return false;
     }
 
+    public event Action? OnSharingListStateChanged;
+
     private async Task ProcessFileSharingAsync(IEnumerable<string> filesList)
     {
         SharingListViewModel sharingListViewModel = await SharingListViewModel.CreateForFilesAsync(filesList, New<KnownIdentities>().DefaultEncryptionIdentity);
-        _shareKeyViewModel.SetSelectedFilesOrFolders(filesList, sharingListViewModel);
+        FileShareService = new FileShareService();
+        FileShareService.SetSelectedFilesOrFolders(filesList, sharingListViewModel);
+        SharingListViewModel = sharingListViewModel;
         SelectedShareKeyFiles = filesList;
 
         IEnumerable<string> encryptableFileNames = filesList.Where(f => New<IDataStore>(f).IsEncryptable());
@@ -387,6 +405,7 @@ public class HomeBodyViewModel : ComponentBase
         //await sharingListViewModel.ShareFiles.ExecuteAsync(null);
 
         ShowSharePopup = true;
+        OnSharingListStateChanged?.Invoke();
     }
 
     public async void CloseAndRemoveOpenFilesButton_Click(EventArgs e)

@@ -153,6 +153,7 @@ internal class RecentFilesViewModel : ComponentBase
     public bool Upgradepop = false;
 
     public List<string> SelectedShareKeyFiles { get; set; }
+    public SharingListViewModel SharingListViewModel { get; set; }
 
     public bool ShowSharePopup { get; set; }
 
@@ -316,6 +317,8 @@ internal class RecentFilesViewModel : ComponentBase
         OnRecentFilesStateChanged?.Invoke();
     }
 
+    public SharingListViewModel SharedListViewModel { get; set; }
+
     private async Task ShareKeysAsync(IEnumerable<string> fileNames)
     {
         IEnumerable<string> encryptableFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncryptable());
@@ -330,17 +333,13 @@ internal class RecentFilesViewModel : ComponentBase
 
         IEnumerable<string> encryptedFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncrypted());
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        // using (KeyShareDialog dialog = new KeyShareDialog(this, viewModel, fileNames))
-        // {
-        //     if (dialog.ShowDialog(this) != DialogResult.OK)
-        //     {
-        //         return;
-        //     }
-        // }
 
         FileShareService.SetSelectedFilesOrFolders(fileNames, viewModel);
         SelectedShareKeyFiles = fileNames.Select(f => f).ToList();
+        SharedListViewModel = viewModel;
+
         ShowSharePopup = true;
+        StateHasChanged();
 
         if (encryptableFileNames != null && encryptableFileNames.Any())
         {

@@ -2,6 +2,7 @@
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
@@ -16,6 +17,9 @@ namespace AxCrypt.App.Windows.ViewModels;
 
 public class ShareKeyViewModel : ViewModelBase
 {
+    [Inject]
+    public FileShareService FileShareService { get; set; }
+
     public SubscriptionLevel SubscriptionLevel { get; set; }
     public bool IsWideScreen { get; set; }
 
@@ -32,18 +36,31 @@ public class ShareKeyViewModel : ViewModelBase
     private FileOperationViewModel? _fileOperationViewModel;
     private IEnumerable<string>? _shareKeyFileNameList;
 
-    public void InitializeViewModel()
+    public event Action? OnSharingListStateChanged;
+
+    public SharingListViewModel SharingListViewModel
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
+        get
+        {
+            return _viewModel;
+        }
+        set
+        {
+            _viewModel = value;
+            OnSharingListStateChanged?.Invoke();
+        }
     }
+
+    public SharingListViewModel SharedListViewModel { get; set; }
 
     public void SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel, bool isFolder = false)
     {
         IsFolder = isFolder;
         SelectedFilesOrFolders = filesOrFoldersPath;
         _viewModel = sharingListViewModel;
-        _viewModel.BindPropertyChanged<IEnumerable<UserPublicKey>>(nameof(SharingListViewModel.SharedWith), (aks) =>
+        SharingListViewModel = _viewModel;
+        SharedListViewModel = _viewModel;
+        _viewModel.BindPropertyChanged<IEnumerable<UserPublicKey>>(nameof(Core.UI.ViewModel.SharingListViewModel.SharedWith), (aks) =>
         {
             _shareKeyUserList = aks.Distinct(UserPublicKey.EmailComparer).ToArray().Select(user =>
             {
@@ -147,13 +164,13 @@ public class ShareKeyViewModel : ViewModelBase
 
     private void UpdateNewKeyShareUser()
     {
-        _viewModel.NewKeyShare = RecipientEmail.Trim();
+        SharingListViewModel.NewKeyShare = RecipientEmail.Trim();
         ClearErrorProviders();
     }
 
     public void SuggestUnSharedUserEmailList()
     {
-        _viewModel.NewKeyShare = RecipientEmail.Trim();
+        SharingListViewModel.NewKeyShare = RecipientEmail.Trim();
 
         IEnumerable<ShareKeyUser> filteredUnSharedUsersList = SuggestNotSharedWithByText(RecipientEmail);
         if (!filteredUnSharedUsersList.Any())
@@ -177,10 +194,10 @@ public class ShareKeyViewModel : ViewModelBase
 
     private IEnumerable<ShareKeyUser> SuggestNotSharedWithByText(string suggestingText)
     {
-        IEnumerable<UserPublicKey> filteredUserList = _viewModel.NotSharedWith.Where(nsw => string.IsNullOrEmpty(nsw.GroupName) && nsw.Email.Address.Contains(suggestingText));
+        IEnumerable<UserPublicKey> filteredUserList = SharingListViewModel.NotSharedWith.Where(nsw => string.IsNullOrEmpty(nsw.GroupName) && nsw.Email.Address.Contains(suggestingText));
         List<ShareKeyUser> filteredUnSharedUsersList = filteredUserList.Distinct(UserPublicKey.EmailComparer).ToArray().Select(user => new ShareKeyUser(user.Email, AccountStatus.Verified)).ToList();
 
-        IEnumerable<UserPublicKey> filteredGroupList = _viewModel.NotSharedWith.Where(nsw => !string.IsNullOrEmpty(nsw.GroupName) && nsw.GroupName.Contains(suggestingText));
+        IEnumerable<UserPublicKey> filteredGroupList = SharingListViewModel.NotSharedWith.Where(nsw => !string.IsNullOrEmpty(nsw.GroupName) && nsw.GroupName.Contains(suggestingText));
         IEnumerable<ShareKeyUser> filteredUnSharedGroupsList = filteredGroupList.Distinct().ToArray().Select(user => new ShareKeyUser(user.Email, user.GroupName)).ToList();
 
         filteredUnSharedUsersList.AddRange(filteredUnSharedGroupsList);
@@ -226,12 +243,12 @@ public class ShareKeyViewModel : ViewModelBase
                 accountStatus = await ShareNewContactAsync();
             }
 
-            shareKeyUser = new ShareKeyUser(EmailAddress.Parse(_viewModel.NewKeyShare), accountStatus);
+            shareKeyUser = new ShareKeyUser(EmailAddress.Parse(SharingListViewModel.NewKeyShare), accountStatus);
         }
         else
         {
-            _viewModel.NewKeyShare = groupPublicKey.Email.Address;
-            await _viewModel.AddNewKeyShare.ExecuteAsync(_viewModel.NewKeyShare);
+            SharingListViewModel.NewKeyShare = groupPublicKey.Email.Address;
+            await SharingListViewModel.AddNewKeyShare.ExecuteAsync(SharingListViewModel.NewKeyShare);
 
             string shareGroupText = RecipientEmail.Trim();
             shareKeyUser = new ShareKeyUser(groupPublicKey.Email, shareGroupText);
@@ -254,18 +271,18 @@ public class ShareKeyViewModel : ViewModelBase
     private UserPublicKey ValidShareKeyUserGroup()
     {
         string shareUserText = RecipientEmail.Trim();
-        return _viewModel.GetValidGroupPublicKey(shareUserText);
+        return SharingListViewModel.GetValidGroupPublicKey(shareUserText);
     }
 
     private async Task<bool> AddShareKeyWhenOffline(EmailAddress userEmail)
     {
-        if (!_viewModel.NotSharedWith.Any(ur => ur.Email == userEmail))
+        if (!SharingListViewModel.NotSharedWith.Any(ur => ur.Email == userEmail))
         {
             await DisplayOfflineWarningMessageAsync();
             return false;
         }
 
-        await _viewModel.AddKeyShares.ExecuteAsync(new List<EmailAddress> { userEmail });
+        await SharingListViewModel.AddKeyShares.ExecuteAsync(new List<EmailAddress> { userEmail });
         return true;
     }
 
@@ -298,12 +315,12 @@ public class ShareKeyViewModel : ViewModelBase
 
     private Task ShareSelectedIndices(IEnumerable<string> newKeyShareUserList)
     {
-        return _viewModel.AddKeyShares.ExecuteAsync(newKeyShareUserList.Select(user => EmailAddress.Parse(user)));
+        return SharingListViewModel.AddKeyShares.ExecuteAsync(newKeyShareUserList.Select(user => EmailAddress.Parse(user)));
     }
 
     private async Task<AccountStatus> ShareNewContactAsync()
     {
-        if (string.IsNullOrEmpty(_viewModel.NewKeyShare))
+        if (string.IsNullOrEmpty(SharingListViewModel.NewKeyShare))
         {
             return AccountStatus.Unknown;
         }
@@ -327,8 +344,8 @@ public class ShareKeyViewModel : ViewModelBase
 
         try
         {
-            await _viewModel.AddNewKeyShare.ExecuteAsync(_viewModel.NewKeyShare);
-            if (_viewModel.SharedWith.Where(sw => sw.Email.ToString() == _viewModel.NewKeyShare).Any())
+            await SharingListViewModel.AddNewKeyShare.ExecuteAsync(SharingListViewModel.NewKeyShare);
+            if (SharingListViewModel.SharedWith.Where(sw => sw.Email.ToString() == SharingListViewModel.NewKeyShare).Any())
             {
                 return accountStatus;
             }
@@ -351,8 +368,8 @@ public class ShareKeyViewModel : ViewModelBase
 
     private async Task<AccountStatus> VerifyNewKeyShareStatus()
     {
-        await _viewModel.UpdateNewKeyShareStatus.ExecuteAsync(null);
-        AccountStatus sharedUserAccountStatus = _viewModel.NewKeyShareStatus;
+        await SharingListViewModel.UpdateNewKeyShareStatus.ExecuteAsync(null);
+        AccountStatus sharedUserAccountStatus = SharingListViewModel.NewKeyShareStatus;
 
         if (sharedUserAccountStatus == AccountStatus.Offline)
         {
@@ -386,7 +403,7 @@ public class ShareKeyViewModel : ViewModelBase
 
     private bool AdHocValidateNewKeyShare()
     {
-        if (_viewModel[nameof(SharingListViewModel.NewKeyShare)].Length > 0)
+        if (SharingListViewModel[nameof(Core.UI.ViewModel.SharingListViewModel.NewKeyShare)].Length > 0)
         {
             ErrorMessage = Texts.InvalidEmail;
             return false;
@@ -406,14 +423,14 @@ public class ShareKeyViewModel : ViewModelBase
                 case true:
                     using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorWaitMessage, Texts.ProgressIndicatorWaitMessage))
                     {
-                        await _viewModel.ShareFolders.ExecuteAsync(_viewModel.SharedWith);
+                        await SharingListViewModel.ShareFolders.ExecuteAsync(SharingListViewModel.SharedWith);
                     }
                     break;
 
                 case false:
                     using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorWaitMessage, Texts.ProgressIndicatorWaitMessage))
                     {
-                        await _viewModel.ShareFiles.ExecuteAsync(_viewModel.SharedWith);
+                        await SharingListViewModel.ShareFiles.ExecuteAsync(SharingListViewModel.SharedWith);
                     }
                     break;
             }
@@ -428,7 +445,7 @@ public class ShareKeyViewModel : ViewModelBase
 
     public async Task RemoveSharedKey()
     {
-        await _viewModel.RemoveKeyShares.ExecuteAsync(new UserPublicKey[] { (UserPublicKey)_viewModel.SharedWith.First(su => su.Email == UserEmailForContextMenuAction) });
+        await SharingListViewModel.RemoveKeyShares.ExecuteAsync(new UserPublicKey[] { (UserPublicKey)SharingListViewModel.SharedWith.First(su => su.Email == UserEmailForContextMenuAction) });
 
         RemoveKeySharingUserList(UserEmailForContextMenuAction);
         contextMenu = !contextMenu;
@@ -454,13 +471,13 @@ public class ShareKeyViewModel : ViewModelBase
             return;
         }
 
-        bool isGroup = _viewModel.GetValidGroupPublicKey("", new List<EmailAddress>() { UserEmailForContextMenuAction }) != null;
+        bool isGroup = SharingListViewModel.GetValidGroupPublicKey("", new List<EmailAddress>() { UserEmailForContextMenuAction }) != null;
         if (isGroup && !New<LicensePolicy>().Capabilities.Has(LicenseCapability.Business))
         {
             return;
         }
 
-        await _viewModel.RefreshKnownContact.ExecuteAsync(new List<EmailAddress>() { UserEmailForContextMenuAction });
+        await SharingListViewModel.RefreshKnownContact.ExecuteAsync(new List<EmailAddress>() { UserEmailForContextMenuAction });
     }
 
     private void ShowHideOfflineError()

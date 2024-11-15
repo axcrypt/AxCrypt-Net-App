@@ -10,7 +10,6 @@ using AxCrypt.App.Components.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using AxCrypt.Abstractions;
-using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Components.Utility.View;
 
 using static AxCrypt.Abstractions.TypeResolve;
@@ -24,7 +23,7 @@ public class RecentFoldersViewModel : ComponentBase
     private ProcessIndicatorService _ProcessIndicatorService;
 
     [Inject]
-    private ShareKeyViewModel _shareKeyViewModel { get; set; }
+    private FileShareService FileShareService { get; set; }
 
     private bool _loading;
     private bool _isDescending;
@@ -35,6 +34,7 @@ public class RecentFoldersViewModel : ComponentBase
     public ObservableCollection<string> RecentFoldersList { get; set; } = new ObservableCollection<string>();
     public IList<string> SelectedRecentFolders { get; set; } = new List<string>();
     public List<string> SelectedShareKeyFolders { get; set; } = new List<string>();
+    public SharingListViewModel SharingListViewModel { get; set; }
     public SubscriptionLevel SubscriptionLevel { get; set; }
 
     public bool Loading
@@ -71,7 +71,7 @@ public class RecentFoldersViewModel : ComponentBase
     {
         _mainViewModel = New<MainViewModel>();
         _fileOperationViewModel = New<FileOperationViewModel>();
-        _shareKeyViewModel = new ShareKeyViewModel();
+        FileShareService = new FileShareService();
         _ProcessIndicatorService = processIndicatorService;
     }
 
@@ -199,7 +199,7 @@ public class RecentFoldersViewModel : ComponentBase
 
     private async void WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
     {
-        IFolderPicker folderPicker = new FolderPickerWindows(); 
+        IFolderPicker folderPicker = new Services.FolderPickerWindows();
         string folder = await folderPicker.PickFolderAsync();
         if (string.IsNullOrEmpty(folder)) return;
 
@@ -211,12 +211,18 @@ public class RecentFoldersViewModel : ComponentBase
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, (ss, ee) => { return WatchedFoldersKeySharingAsync(SelectedRecentFolders); }, null, args);
     }
 
+    public IEnumerable<string>? SelectedShareKeyFiles { get; set; }
+    public SharingListViewModel SharedListViewModel { get; set; }
+
     public async Task WatchedFoldersKeySharingAsync(IEnumerable<string> folderPaths)
     {
         if (!folderPaths.Any()) return;
 
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFoldersAsync(folderPaths, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        _shareKeyViewModel.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel, true);
+        FileShareService.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel, true);
+        SharedListViewModel = viewModel;
+        SelectedShareKeyFiles = folderPaths;
+
         showPopup = true;
         StateHasChanged();
         //await viewModel.ShareFolders.ExecuteAsync(null);

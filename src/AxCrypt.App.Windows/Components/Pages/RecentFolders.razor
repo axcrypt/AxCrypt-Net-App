@@ -97,7 +97,7 @@
 @if (RecentFoldersViewModel.showPopup)
 {
     <div class="modalDialog sharekey-popup" id="sharekey">
-        <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList=@RecentFoldersViewModel.SelectedShareKeyFolders IsFolder="true" OnClose="RecentFoldersViewModel.ClosePopup" />
+        <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList=@RecentFoldersViewModel.SelectedShareKeyFolders SharingListViewModel="@RecentFoldersViewModel.SharingListViewModel" IsFolder="true" OnClose="RecentFoldersViewModel.ClosePopup" />
     </div>
 }
 

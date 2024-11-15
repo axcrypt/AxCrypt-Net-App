@@ -232,7 +232,7 @@
 @if (viewModel.ShowSharePopup)
 {
     <div class="modalDialog sharekey-popup" id="sharekey">
-        <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList=@viewModel.SelectedShareKeyFiles IsFolder="false" OnClose="viewModel.CloseSharePopup" />
+        <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList=@viewModel.SelectedShareKeyFiles SharingListViewModel="@viewModel.SharingListViewModel" IsFolder="false" OnClose="viewModel.CloseSharePopup" />
     </div>
 }
 <div class="mre-act-sec">
@@ -299,7 +299,7 @@
     @if (viewModel.shareKey)
     {
         <div class="modalDialog sharekey-popup" id="sharekey">
-            <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList="viewModel.SelectedShareKeyFiles" OnClose="viewModel.CloseSharePopup" />
+            <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList="viewModel.SelectedShareKeyFiles" SharingListViewModel="viewModel.SharingListViewModel" OnClose="viewModel.CloseSharePopup" />
         </div>
     }
     @if (viewModel.ShowInvitePopup)
