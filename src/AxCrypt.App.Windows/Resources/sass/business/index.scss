@@ -10,7 +10,6 @@
     background: $WhtBgClr;
     box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.25);
 }
-
 .battery {
     float: left;
     padding: 5px 5px 5px 20px;
@@ -62,4 +61,14 @@
     width: 112px;
     font-size: 12px;
     font-weight: 700;
+}
+
+.empty-rcnt-fle-img {
+    content: url(/images/business/ImgNoFls.svg);
+    padding-top: 20px;
+}
+
+.empty-rcnt-fld-img {
+    content: url(/images/business/ImgNoFldrs.svg);
+    padding-top: 20px;
 }

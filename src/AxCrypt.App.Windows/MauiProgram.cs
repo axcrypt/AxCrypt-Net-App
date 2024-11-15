@@ -116,7 +116,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<Home>();
             services.AddSingleton<HomeBody>();
             services.AddSingleton<HomeBody>();
-            services.AddSingleton<MainHomeComponent>();
             services.AddSingleton<SecuredFolders>();
             services.AddSingleton<RecentFolders>();
             services.AddSingleton<PasswordManager>();

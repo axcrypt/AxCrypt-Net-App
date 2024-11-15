@@ -599,6 +599,29 @@ input:checked + .slider:before {
     vertical-align: middle;
 }
 
+.empty-view-heading {
+    color: #494949;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+.modal-header {
+    font-size: 20px;
+    padding: 20px;
+    border-bottom: none;
+}
+
+.modal-body {
+    padding: 10px 20px;
+}
+
+.modal-footer {
+    border-top: none;
+    justify-content: center;
+    gap: 20px;
+}
+
 @media (max-width: 768px) {
     .button.success {
         background-color: $BgrndCol !important;

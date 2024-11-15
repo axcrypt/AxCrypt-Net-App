@@ -220,9 +220,9 @@ public class SettingsViewModel
 
     public void ToggleAlwaysOffline(EventArgs e)
     {
-        bool offlineMode = !New<UserSettings>().OfflineMode;
-        New<UserSettings>().OfflineMode = offlineMode;
-        New<AxCryptOnlineState>().IsOffline = offlineMode;
+        AlwaysOffline = !New<UserSettings>().OfflineMode;
+        New<UserSettings>().OfflineMode = AlwaysOffline;
+        New<AxCryptOnlineState>().IsOffline = AlwaysOffline;
     }
 
     public void FilePropertiesDateModified(EventArgs e)
@@ -313,7 +313,7 @@ public class SettingsViewModel
             if (alwaysOnline != value)
             {
                 alwaysOnline = value;
-                MakeAlwaysOffline();
+                //MakeAlwaysOffline();
             }
         }
     }

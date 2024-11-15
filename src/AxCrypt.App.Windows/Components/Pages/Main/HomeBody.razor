@@ -20,7 +20,7 @@
 @using System.Collections.ObjectModel
 
 @using static AxCrypt.Abstractions.TypeResolve
-@inject HomeBodyViewModel viewModel
+@inject HomeBodyViewModel? viewModel
 @inject IJSRuntime jsRunTime
 
 <div class="home-body" style="margin-top: 15px;">
@@ -233,7 +233,7 @@
 @if (viewModel.ShowSharePopup)
 {
     <div class="modalDialog sharekey-popup" id="sharekey">
-        <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList=@viewModel.SelectedShareKeyFiles SharingListViewModel="@viewModel.SharingListViewModel" IsFolder="false" OnClose="viewModel.CloseSharePopup" />
+        <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList=@viewModel.SelectedShareKeyFiles SharingListViewModel="@viewModel.SharingListViewModel" OnClose="viewModel.CloseSharePopup" />
     </div>
 }
 <div class="mre-act-sec">
@@ -242,7 +242,7 @@
         <div style="display:block;">
             <label class="fle-nme fnt-sze">Cloud services</label>
             <div style="display: flex;">
-                @foreach (KnownFolder knownFolder in viewModel._knownFoldersViewModel.KnownFolders)
+                @foreach (KnownFolder? knownFolder in viewModel?.KnownFoldersViewModel?.KnownFolders)
                 {
                     <div>
                         <button @onclick="() => viewModel.OnCloudServiceButtonClick(knownFolder)"
@@ -343,13 +343,21 @@
     {
         if (firstRender)
         {
-            viewModel.isFilesPending = viewModel.AreFilesPending();
-            this.viewModel.SelectingFiles += viewModel.HandleSelectingFiles;
+            try
+            {
+                viewModel.isFilesPending = viewModel.AreFilesPending();
+                this.viewModel.SelectingFiles += viewModel.HandleSelectingFiles;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error determining screen width: {ex.Message}");
+            }
+            finally
+            {
+                //StateHasChanged();
+            }
         }
-
-        base.OnAfterRender(firstRender);
     }
-
 
     public async Task ToggleSection()
     {

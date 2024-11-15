@@ -5,6 +5,10 @@
   margin: 2% 0%;
 }
 
+.free-sec {
+  margin: 0 20%;
+}
+
 .support-image {
   Content: url(/images/business/ImgSupport.svg);
   margin: 5% 19%;
@@ -80,6 +84,9 @@
 @media only screen and (max-width: 768px) {
   .link-box {
     width: auto;
+  }
+  .free-sec {
+    margin: 0 5%;
   }
   .support-image {
     margin: 0% 8%;

@@ -224,7 +224,7 @@ public class RecentFoldersViewModel : ComponentBase
         SelectedShareKeyFiles = folderPaths;
 
         showPopup = true;
-        StateHasChanged();
+        //StateHasChanged();
         //await viewModel.ShareFolders.ExecuteAsync(null);
     }
 

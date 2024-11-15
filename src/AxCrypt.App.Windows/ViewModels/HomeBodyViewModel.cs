@@ -58,22 +58,7 @@ public class HomeBodyViewModel : ComponentBase
     [Parameter]
     public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
 
-    public KnownFoldersViewModel? _knownFoldersViewModel { get; set; }
-
     public event EventHandler<FileSelectionEventArgs>? SelectingFiles;
-
-    public string? DisplayName { get; set; }
-    public bool IsEnabled { get; set; }
-    public string? ImageSource { get; set; }
-    public string? EnabledBackColor { get; set; }
-    public bool IsHovered { get; set; }
-    public bool IsPopupVisible { get; set; }
-    public bool ActiveSubScription { get; set; }
-    public string? UserEmail { get; set; }
-    public int DaysLeft { get; set; }
-    public bool SubscribedFromAppStore { get; set; }
-    public string? SubscriptionStatusText { get; set; }
-    public bool ShowConfirmDeleteAccountPopup { get; set; }
 
     public SubscriptionLevel SubscriptionLevel { get; set; }
     public bool ShowInvitePopup { get; set; }
@@ -109,15 +94,17 @@ public class HomeBodyViewModel : ComponentBase
         hoveredElement = string.Empty;
     }
 
+    public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }
+
     public void Initialized()
     {
         _mainViewModel = New<MainViewModel>();
         _fileOperationViewModel = New<FileOperationViewModel>();
-        _knownFoldersViewModel = New<KnownFoldersViewModel>();
         _fileSystemState = Resolve.FileSystemState;
         Utility.OnIsMainMenuHiddenChanged += StateHasChanged;
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); /*StateHasChanged();*/ });
+        KnownFoldersViewModel = New<KnownFoldersViewModel>();
 
         SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
         _folderPicker = new FolderPickerWindows();
@@ -312,17 +299,17 @@ public class HomeBodyViewModel : ComponentBase
         {
             case FileSelectionType.Open:
                 await _fileOperationViewModel.OpenFiles.ExecuteAsync(selectedFiles);
-                StateHasChanged();
+                //StateHasChanged();
                 break;
 
             case FileSelectionType.Encrypt:
                 await _fileOperationViewModel.EncryptFiles.ExecuteAsync(selectedFiles);
-                StateHasChanged();
+                //StateHasChanged();
                 break;
 
             case FileSelectionType.Decrypt:
                 await _fileOperationViewModel.DecryptFiles.ExecuteAsync(selectedFiles);
-                StateHasChanged();
+                //StateHasChanged();
                 break;
         }
     }

@@ -15,7 +15,7 @@ public class InviteViewModel
     public bool IsSuccess { get; private set; }
     public string? ErrorMessage { get; private set; }
     public string? InvitedUser { get; set; }
-    public bool ShowInvitePopup { get; private set; } = true;
+    public bool ShowInvitePopup { get; private set; }
 
     public void OnInputFocus()
     {
