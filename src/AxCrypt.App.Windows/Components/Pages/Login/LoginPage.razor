@@ -1,57 +1,37 @@
 ﻿@page "/login"
-
-@using AxCrypt.Api.Model;
-@using AxCrypt.App.Components.Models
 @using AxCrypt.App.Components.Services
-@using AxCrypt.Common;
-@using AxCrypt.Content;
-@using AxCrypt.Core.Crypto;
-@using AxCrypt.Core.Service;
-@using AxCrypt.Core.Session;
-@using AxCrypt.Core.UI;
-@using AxCrypt.Core.UI.ViewModel;
-@using Microsoft.AspNetCore.Components;
-@using static AxCrypt.Abstractions.TypeResolve;
+@using AxCrypt.App.Components.Utility
+@using AxCrypt.Content
+@using AxCrypt.Core
+@using AxCrypt.Core.UI.ViewModel
 
-@inject LoginModel loginModel
-@inject LoginService service
-
-<link href="css/login.min.css" rel="stylesheet" />
+@inject LogOnViewModel LogOnViewModel
 
 <section class="content">
     <div class="">
-        @if (service.Loading)
-        {
-            <div class="secrets-loading-overlay">
-                <div class="loading-content">
-                    <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
-                    <span style="color:black ">It will take just a moment...</span>
-                </div>
-            </div>
-        }
         <article class="left-section" id="content-wrap">
             <h1 class="login-title hg-img">@Texts.WelcomeBackTitle</h1>
             <span class="sub-head">Log in</span>
-            <EditForm Model="@loginModel" OnValidSubmit="async()=> await HandleValidSubmit()" class="signup-sec">
-                @if (!string.IsNullOrEmpty(loginModel.ErrorMessage))
+            <EditForm Model="@LogOnViewModel.LogOnAccountModel" OnValidSubmit="ButtonLogIn_Click" class="signup-sec">
+                @if (!string.IsNullOrEmpty(LogOnViewModel.ErrorMessage))
                 {
-                    <div class="alert alert-danger">@loginModel.ErrorMessage</div>
+                    <div class="alert alert-danger">@LogOnViewModel.ErrorMessage</div>
                 }
                 <div style="display:flex;">
                     <div style="width:100%;">
                         <label>@Texts.EmailLabel</label>
-                        <input type="text" @bind-value="loginModel.Email" class="form-control email-img" placeholder="Type your email" />
+                        <input type="text" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" />
                     </div>
                 </div>
                 <div>
                     <label>@Texts.PassphrasePrompt</label>
-                    <input type="password" @bind-value="loginModel.Password" class="form-control pswd-img" placeholder="Type your password" />
+                    <input type="password" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" />
                 </div>
                 <br />
-                <div class="check-bx" style="margin: 15px 0px;">
-                    <input type="checkbox" checked="@loginModel.RememberMe" @bind-value="loginModel.RememberMe" />
-                    <span class="che-txt">@Texts.PromptKeepMeSignedIn</span>
-                </div>
+                @*                 <div class="check-bx" style="margin: 15px 0px;">
+                <input type="checkbox" checked="@LogOnViewModel.RememberMe" @bind-value="LogOnViewModel.RememberMe" />
+                <span class="che-txt">@Texts.PromptKeepMeSignedIn</span>
+                </div> *@
                 <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;">Log in</button>
                 <div class="signup-link">
                     <div style="display:inline-flex; align-items:center;">
@@ -71,33 +51,94 @@
         </aside>
     </div>
 </section>
+
 @code {
-    @inject LoginService loginService;
     private bool isAlertVisible { get; set; }
-
-    private async Task HandleValidSubmit()
-    {
-        if (string.IsNullOrEmpty(loginModel.Email) || string.IsNullOrEmpty(loginModel.Password))
-        {
-            loginModel.ErrorMessage = Texts.LoginError;
-            service.Loading = false;
-            return;
-        }
-
-        try
-        {
-            service.Loading = true;
-            await loginService.HandleValidSubmit(loginModel);
-        }
-        finally
-        {
-            service.Loading = false;
-        }
-    }
 
     protected override async Task OnInitializedAsync()
     {
-        loginModel = new LoginModel();
         await base.OnInitializedAsync();
+    }
+
+    private async void ButtonLogIn_Click()
+    {
+        LogOnViewModel.PageResult = DialogResult.None;
+
+        if (!await AdHocValidationDueToMonoLimitations())
+        {
+            return;
+        }
+
+        LogOnViewModel.PageResult = DialogResult.OK;
+    }
+
+    private async Task<bool> AdHocValidationDueToMonoLimitations()
+    {
+        if (!AdHocValidateUserEmail())
+        {
+            return false;
+        }
+
+        if (!string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.EncryptedFileFullName))
+        {
+            return await AdHocValidatePassphraseForFile();
+        }
+
+        if (!await AdHocValidatePassphrase())
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool AdHocValidateUserEmail()
+    {
+        LogOnViewModel.ErrorMessage = "";
+        if (string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail))
+        {
+            LogOnViewModel.ErrorMessage = Texts.BadEmail;
+            return false;
+        }
+
+        if (LogOnViewModel.LogOnAccountModel[nameof(AccountEmailViewModel.UserEmail)].Length > 0)
+        {
+            LogOnViewModel.ErrorMessage = Texts.BadEmail;
+            return false;
+        }
+
+        return true;
+    }
+
+    private async Task<bool> AdHocValidatePassphrase()
+    {
+        LogOnViewModel.ErrorMessage = "";
+        if (!await LogOnViewModel.LogOnAccountModel.ValidateItemAsync(nameof(LogOnViewModel.LogOnAccountModel.PasswordText)))
+        {
+            LogOnViewModel.ErrorMessage = Texts.WrongPassphrase;
+            return false;
+        }
+        return true;
+    }
+
+    private async Task<bool> AdHocValidatePassphraseForFile()
+    {
+        LogOnViewModel.ErrorMessage = "";
+        if (!await LogOnViewModel.LogOnAccountModel.ValidateItemAsync(nameof(LogOnViewModel.LogOnAccountModel.EncryptedFileFullName)))
+        {
+            LogOnViewModel.ErrorMessage = Texts.WrongPassphrase;
+            return false;
+        }
+        return true;
+    }
+
+    private void createNewAccountLabel_LinkClicked(object sender, EventArgs e)
+    {
+        BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToSignUpWebPage);
+    }
+
+    private void SignUpSignInDialog_HelpButtonClicked(object sender, EventArgs e)
+    {
+        BrowseUtility.RedirectTo(Texts.LinkToGettingStarted);
     }
 }

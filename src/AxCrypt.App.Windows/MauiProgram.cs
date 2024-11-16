@@ -127,7 +127,9 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SettingsDeskPopup>();
             services.AddSingleton<NotificationPopup>();
             services.AddSingleton<AccountDeskPopup>();
-            services.AddSingleton<LoginService>();
+
+            services.AddSingleton<LogOnViewModel>();
+
             services.AddSingleton<SupportService>();
             services.AddSingleton<SecretClientModel>();
             services.AddSingleton<SecretsClientModel>();
@@ -142,7 +144,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SecretsListViewModel>();
             services.AddSingleton<SecretServiceUtility>();
             services.AddSingleton<UserNotificationService>();
-            services.AddSingleton<HomeViewModel>();
 
             services.AddSingleton<HomeBodyViewModel>();
             services.AddSingleton<RecentFilesViewModel>();

@@ -1,4 +1,13 @@
-﻿@using AxCrypt.App.Windows.Models
+﻿@using AxCrypt.App.Components.Services
+@using AxCrypt.App.Components.Utility
+@using AxCrypt.App.Windows.Models
+@using AxCrypt.Common
+@using AxCrypt.Content
+@using AxCrypt.Core.Service
+@using AxCrypt.Core.UI
+@using AxCrypt.Core.UI.ViewModel
+@using static AxCrypt.Abstractions.TypeResolve
+
 <link href="css/login.min.css" rel="stylesheet" />
 <section class="content">
     <article class="left-section reg-sec" id="content-wrap">
@@ -43,10 +52,122 @@
 </section>
 @code {
     RegisterModel registerModel = new();
+    private CreateNewAccountViewModel _viewModel;
+    private bool _isCreating = false;
 
     bool confimationPopup = false;
     void ConfimationPopup()
     {
         confimationPopup = !confimationPopup;
+    }
+
+    private void CreateNewAccountDialog_Load(object s, EventArgs ee)
+    {
+        // _passwordStrengthMeter.MeterChanged += (sender, e) =>
+        // {
+        //     _toolTip.SetToolTip(PassphraseTextBox, _passwordStrengthMeter.StrengthTip);
+        // };
+
+        //_viewModel.BindPropertyChanged(nameof(CreateNewAccountViewModel.ShowPassword), (bool show) => { PassphraseTextBox.UseSystemPasswordChar = VerifyPassphraseTextbox.UseSystemPasswordChar = !(ShowPassphraseCheckBox.Checked = show); });
+    }
+
+    private async void _buttonOk_Click(object sender, EventArgs e)
+    {
+        if (_isCreating || !AdHocValidationDueToMonoLimitations())
+        {
+            registerModel.DialogResult = DialogResult.None;
+            return;
+        }
+
+        if (!New<KeyPairService>().IsAnyAvailable)
+        {
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.OfflineAccountTitle, Texts.OfflineAccountBePatient);
+        }
+        CreateAccountAsync();
+    }
+
+    private async void CreateAccountAsync()
+    {
+        _isCreating = true;
+
+        try
+        {
+            New<AxCryptOnlineState>().IsOnline = false;
+            TaskRunner.WaitFor(() => _viewModel.CreateAccount.ExecuteAsync(null));
+        }
+        finally
+        {
+            _isCreating = false;
+        }
+
+        registerModel.DialogResult = DialogResult.OK;
+    }
+
+    private bool AdHocValidationDueToMonoLimitations()
+    {
+        bool validated = AdHocValidateAllFieldsIndependently();
+        return validated;
+    }
+
+    private bool AdHocValidateAllFieldsIndependently()
+    {
+        return AdHocValidatePassphrase() & AdHocValidateVerfication() & AdHocValidateUserEmail();
+    }
+
+    private bool AdHocValidatePassphrase()
+    {
+        registerModel.ErrorMessage = "";
+        if (_viewModel[nameof(CreateNewAccountViewModel.PasswordText)].Length > 0)
+        {
+            registerModel.ErrorMessage = Texts.PasswordPolicyViolation;
+            return false;
+        }
+        return true;
+    }
+
+    private bool AdHocValidateVerfication()
+    {
+        registerModel.ErrorMessage = "";
+        if (_viewModel[nameof(CreateNewAccountViewModel.Verification)].Length > 0)
+        {
+            registerModel.ErrorMessage = Texts.PassphraseVerificationMismatch;
+            return false;
+        }
+        return true;
+    }
+
+    private bool AdHocValidateUserEmail()
+    {
+        registerModel.ErrorMessage = "";
+        if (_viewModel[nameof(CreateNewAccountViewModel.UserEmail)].Length > 0)
+        {
+            registerModel.ErrorMessage = Texts.BadEmail;
+            return false;
+        }
+        return true;
+    }
+
+    // protected override void OnFormClosing(FormClosingEventArgs e)
+    // {
+    //     if (e == null)
+    //     {
+    //         throw new ArgumentNullException("e");
+    //     }
+
+    //     if (_isCreating)
+    //     {
+    //         e.Cancel = true;
+    //     }
+    //     base.OnFormClosing(e);
+    // }
+
+    private async void _helpButton_Click(object sender, EventArgs e)
+    {
+        await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.DialogVerifyAccountTitle, Texts.PasswordRulesInfo);
+    }
+
+    private void ClearErrorProviders()
+    {
+        registerModel.ErrorMessage = "";
     }
 }

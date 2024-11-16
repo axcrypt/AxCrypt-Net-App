@@ -29,11 +29,6 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.UI.ViewModel
@@ -72,13 +67,11 @@ namespace AxCrypt.Core.UI.ViewModel
             EncryptedFileFullName = encryptedFileFullName;
             PasswordText = String.Empty;
             ShowPassword = New<UserSettings>().DisplayDecryptPassphrase;
-            ShowEmail = true;
         }
 
         private void BindPropertyChangedEvents()
         {
             BindPropertyChangedInternal(nameof(ShowPassword), (bool show) => New<UserSettings>().DisplayDecryptPassphrase = show);
-            BindPropertyChangedInternal(nameof(ShowEmail), (bool show) => { if (!ShowEmail) UserEmail = String.Empty; });
             BindPropertyChangedInternal(nameof(UserEmail), async (string userEmail) => { if (await ValidateAsync(nameof(UserEmail))) { _userSettings.UserEmail = userEmail; } });
         }
 
@@ -90,17 +83,11 @@ namespace AxCrypt.Core.UI.ViewModel
 
         public string EncryptedFileFullName { get { return GetProperty<string>(nameof(EncryptedFileFullName)); } set { SetProperty(nameof(EncryptedFileFullName), value); } }
 
-        public bool ShowEmail { get { return GetProperty<bool>(nameof(ShowEmail)); } private set { SetProperty(nameof(ShowEmail), value); } }
-
         protected override async Task<bool> ValidateAsync(string columnName)
         {
             switch (columnName)
             {
                 case nameof(UserEmail):
-                    if (!ShowEmail)
-                    {
-                        return true;
-                    }
                     if (!UserEmail.IsValidEmailOrEmpty())
                     {
                         ValidationError = (int)ViewModel.ValidationError.InvalidEmail;
@@ -115,7 +102,6 @@ namespace AxCrypt.Core.UI.ViewModel
                     return ValidatePassphraseForFile();
 
                 case nameof(ShowPassword):
-                case nameof(ShowEmail):
                     return true;
 
                 default:
@@ -134,7 +120,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task<bool> ValidatePassphraseAsync()
         {
-            if (ShowEmail && UserEmail.Length > 0)
+            if (UserEmail.Length > 0)
             {
                 return await ValidatePassphraseForEmailAsync();
             }
