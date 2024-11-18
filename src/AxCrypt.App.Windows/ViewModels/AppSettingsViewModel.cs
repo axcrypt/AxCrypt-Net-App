@@ -35,15 +35,16 @@ public class AppSettingsViewModel
     public AppSettingsViewModel(LogOnViewModel logOnViewModel)
     {
         _logOnViewModel = logOnViewModel;
+        _mainViewModel = _logOnViewModel.MainViewModel;
+        _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
     }
 
     public void Initialized()
     {
-        _mainViewModel = _logOnViewModel.MainViewModel;
-        _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
-        _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
         RestApiBaseUrl = Resolve.UserSettings.RestApiBaseUrl.ToString();
         TimeoutTimeSpan = Resolve.UserSettings.ApiTimeout.ToString();
+        
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
     }
 
     public bool InactSgnOut { get; set; }
@@ -124,17 +125,16 @@ public class AppSettingsViewModel
     {
         New<UserSettings>().HideRecentFiles = hideRecentFiles;
 
-        if (hideRecentFiles)
-        {
-            RecentFilesList.Clear();
-        }
-        else
+        if (!hideRecentFiles)
         {
             RecentFilesList = new ObservableCollection<FileDetails>(_mainViewModel.RecentFiles.Select(f => new FileDetails(f)));
+            return;
         }
+
+        RecentFilesList.Clear();
     }
 
-    public void ToggleAutoUpgradeMode()
+    public void ToggleEncryptionUpgradeMode()
     {
         if (_mainViewModel.EncryptionUpgradeMode == EncryptionUpgradeMode.AutoUpgrade)
         {
@@ -190,26 +190,9 @@ public class AppSettingsViewModel
 
     public async void RestoreRename(EventArgs args)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await FileSelectionOperation(FileSelectionType.Rename); }, null, args);
+        await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(null); }, null, args);
     }
 
-    public async Task FileSelectionOperation(FileSelectionType fileSelectionType)
-    {
-        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
-        {
-            FileSelectionType = fileSelectionType
-        };
-
-        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
-
-        if (fileSelectionEventArgs.Cancel)
-        {
-            return;
-        }
-
-        IEnumerable<string> filesList = selectedFiles.Select(e => e.FullPath).ToList();
-        await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(filesList);
-    }
 
     public void ToggleAlwaysOffline(EventArgs e)
     {
@@ -253,7 +236,7 @@ public class AppSettingsViewModel
     public string? RestApiBaseUrl { get; set; }
     public string? TimeoutTimeSpan { get; set; }
     private ObservableCollection<ManageAccountModel> _accountEmailsListView { get; set; } = new ObservableCollection<ManageAccountModel>();
-    public string? _emailLabel { get; set; }
+    public string? EmailLabel { get; set; }
 
     public bool IsDateModifiedOn
     {
@@ -376,11 +359,11 @@ public class AppSettingsViewModel
 
         if (_accountEmailsListView.Count == 0)
         {
-            _emailLabel = String.Empty;
+            EmailLabel = String.Empty;
             return;
         }
 
-        _emailLabel = emails.First().EmailAddress;
+        EmailLabel = emails.First().EmailAddress;
     }
 
     public void ChangePassphraseButton_Click(EventArgs e)
@@ -406,38 +389,17 @@ public class AppSettingsViewModel
 
     public async void OpenBrokenFiles()
     {
-        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
-        {
-            FileSelectionType = FileSelectionType.Decrypt
-        };
-
-        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
-
-        await _fileOperationViewModel.TryBrokenFiles.ExecuteAsync(selectedFiles.Select(f => f.FullPath));
+        await _fileOperationViewModel.TryBrokenFiles.ExecuteAsync(null);
     }
 
     public async void VerifyAxCryptFiles()
     {
-        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
-        {
-            FileSelectionType = FileSelectionType.Decrypt
-        };
-
-        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
-
-        await _fileOperationViewModel.VerifyFiles.ExecuteAsync(selectedFiles.Select(f => f.FullPath));
+        await _fileOperationViewModel.VerifyFiles.ExecuteAsync(null);
     }
 
     public async void AxCryptFileFormatCheck()
     {
-        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
-        {
-            FileSelectionType = FileSelectionType.Decrypt
-        };
-
-        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
-
-        await _fileOperationViewModel.IntegrityCheckFiles.ExecuteAsync(selectedFiles.Select(f => f.FullPath));
+        await _fileOperationViewModel.IntegrityCheckFiles.ExecuteAsync(null);
     }
 
     public void OpenReportAsync()

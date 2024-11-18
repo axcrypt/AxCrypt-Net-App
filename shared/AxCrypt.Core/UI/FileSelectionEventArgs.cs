@@ -42,6 +42,6 @@ namespace AxCrypt.Core.UI
 
         public bool Skip { get; set; }
 
-        public IList<string> SelectedFiles { get; set; }
+        public IList<string> SelectedFiles { get; private set; }
     }
 }

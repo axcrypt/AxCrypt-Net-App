@@ -13,6 +13,7 @@ using AxCrypt.Abstractions;
 using AxCrypt.App.Components.Utility.View;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.Core.UI;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -22,6 +23,8 @@ public class RecentFoldersViewModel : ComponentBase
     private readonly MainViewModel _mainViewModel;
     private readonly FileOperationViewModel _fileOperationViewModel;
     private ProcessIndicatorService _ProcessIndicatorService;
+
+    private WatchedFoldersViewModel _viewModel;
 
     [Inject]
     private FileShareService FileShareService { get; set; }
@@ -37,16 +40,6 @@ public class RecentFoldersViewModel : ComponentBase
     public List<string> SelectedShareKeyFolders { get; set; } = new List<string>();
     public SharingListViewModel SharingListViewModel { get; set; }
     public SubscriptionLevel SubscriptionLevel { get; set; }
-
-    public bool Loading
-    {
-        get => _loading;
-        set
-        {
-            _loading = value;
-            OnStateChange?.Invoke();
-        }
-    }
 
     public bool showPopup
     {
@@ -66,15 +59,15 @@ public class RecentFoldersViewModel : ComponentBase
         set => _folderContextMenu = value;
     }
 
-    public Action OnStateChange { get; set; }
-
     public RecentFoldersViewModel(ProcessIndicatorService processIndicatorService, LogOnViewModel logOnViewModel)
     {
         _logOnViewModel = logOnViewModel;
         _mainViewModel = logOnViewModel.MainViewModel;
-        _fileOperationViewModel = logOnViewModel.FileOperationViewModel ;
+        _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
         FileShareService = new FileShareService();
         _ProcessIndicatorService = processIndicatorService;
+
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.WatchedFolders), (IEnumerable<string> folders) => { UpdateWatchedFolders(folders); });
     }
 
     public async Task InitializeAsync()
@@ -104,6 +97,16 @@ public class RecentFoldersViewModel : ComponentBase
         }
 
         return Resolve.KnownIdentities.LoggedOnWatchedFolders.Select(wf => wf.Path).ToList();
+    }
+
+    private void UpdateWatchedFolders(IEnumerable<string> folders)
+    {
+        if (folders != null && folders.Any())
+        {
+            RecentFoldersList.Clear();
+
+            RecentFoldersList = new ObservableCollection<string>(folders.Select(fld => fld));
+        }
     }
 
     public void SortByDate()

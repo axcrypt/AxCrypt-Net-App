@@ -14,15 +14,17 @@ using System.Collections.ObjectModel;
 using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Core.IO;
 using Microsoft.AspNetCore.Components.Web;
+using AxCrypt.Api.Model;
 
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Api.Model;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-internal class RecentFilesViewModel : ComponentBase
+public class RecentFilesViewModel : ComponentBase
 {
     private LogOnViewModel _logOnViewModel;
+    private MainViewModel _mainViewModel;
+    private FileOperationViewModel _fileOperationViewModel;
     private ProcessIndicatorService _ProcessIndicatorService;
 
     [Inject]
@@ -40,29 +42,15 @@ internal class RecentFilesViewModel : ComponentBase
         _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
     }
 
-    private MainViewModel _mainViewModel;
-    private FileOperationViewModel _fileOperationViewModel;
-
     public void OnInitializedAsync()
     {
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
+
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { UpdateRecentFiles(_mainViewModel.RecentFiles); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
     }
 
-    private ObservableCollection<FileDetails> _recentFilesList = new ObservableCollection<FileDetails>();
-
-    public ObservableCollection<FileDetails> RecentFilesList
-    {
-        get
-        {
-            return _recentFilesList;
-        }
-        set
-        {
-            _recentFilesList = value;
-            OnRecentFilesStateChanged?.Invoke();
-        }
-    }
+    public ObservableCollection<FileDetails> RecentFilesList { get; set; }
 
     public ObservableCollection<FileDetails> SelectedFiles = new ObservableCollection<FileDetails>();
 
@@ -277,7 +265,7 @@ internal class RecentFilesViewModel : ComponentBase
     {
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(SelectedFiles.Select(f => f.FilePath));
     }
-    
+
     public async void OpenSecuredRecentFiles(EventArgs args, IEnumerable<FileDetails> selectedFiles)
     {
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(selectedFiles.Select(f => f.FilePath));
@@ -378,7 +366,7 @@ internal class RecentFilesViewModel : ComponentBase
     public async Task<IList<FileDetails>> LoadRecentFiles()
     {
         using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
-        { 
+        {
             IList<FileDetails> recentFiles = new List<FileDetails>();
 
             try

@@ -27,7 +27,8 @@
     <div style="display:block; margin-bottom: 25px;">
         <label class="fle-nme fnt-sze">Actions</label>
         <div class="" style="display:flex;">
-            <div class="act-box" @onclick="(()=>viewModel.ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Open, viewModel.SelectedRecentFiles))" @onmouseover='@( () => viewModel.ShowPopup("open") )' @onmouseout="viewModel.HidePopup">
+            <div class="act-box" @onclick="()=> viewModel.OpenFile()" @onmouseover='@( () => viewModel.ShowPopup("open") )'>
+                @* <div class="act-box" @onclick="(()=>viewModel.ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Open, viewModel.SelectedRecentFiles))" @onmouseover='@( () => viewModel.ShowPopup("open") )' @onmouseout="viewModel.HidePopup"> *@
                 <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
                 <span class="text-size">@Texts.McInfMenuOpen</span>
                 @if (viewModel.isHovered && viewModel.hoveredElement == "open")
@@ -37,7 +38,7 @@
                     </div>
                 }
             </div>
-            <div class="act-box" @onclick="(()=>viewModel.ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Encrypt, viewModel.SelectedRecentFiles))" @onmouseover='@( () => viewModel.ShowPopup("secure") )' @onmouseout="viewModel.HidePopup">
+            <div class="act-box" @onclick="()=>viewModel.SecureFile()" @onmouseover='@( () => viewModel.ShowPopup("secure") )'>
                 <img class="act-img scr-act" src="" alt="scr-img" />
                 <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
                 @if (viewModel.isHovered && viewModel.hoveredElement == "secure")
@@ -47,7 +48,7 @@
                     </div>
                 }
             </div>
-            <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("stop") )' @onmouseout="viewModel.HidePopup" @onclick="(()=>viewModel.ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Decrypt, viewModel.SelectedRecentFiles))">
+            <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("stop") )' @onclick="()=>viewModel.StopSecuringFile()">
                 <img class="act-img stpscr-act" src="" alt="stpscr-img" />
                 <span class="text-size">Stop</span>
                 @if (viewModel.isHovered && viewModel.hoveredElement == "stop")
@@ -103,7 +104,7 @@
             } *@
             @if (viewModel.SubscriptionLevel == SubscriptionLevel.Business)
             {
-                <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("master key") )' @onmouseout="viewModel.HidePopup" @onclick="viewModel.RedirectToAccountSite">
+                <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("master key") )' @* @onmouseout="viewModel.HidePopup" *@ @onclick="viewModel.RedirectToAccountSite">
                     <img class="act-img mtrkey-act" src="" alt="mtrkey-img" /><span class="text-size">@Texts.MasterKeyTitle</span>
                     @if (viewModel.isHovered && viewModel.hoveredElement == "master key")
                     {
@@ -114,7 +115,7 @@
                 </div>
                 @if (Utility.IsMainMenuHidden)
                 {
-                    <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("create groups") )' @onmouseout="viewModel.HidePopup" @onclick="viewModel.RedirectToAccountSite">
+                    <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("create groups") )' @* @onmouseout="viewModel.HidePopup" *@ @onclick="viewModel.RedirectToAccountSite">
                         <img class="act-img grp-act" src="" alt="grp-img" /><span class="text-size">Create groups</span>
                         @if (viewModel.isHovered && viewModel.hoveredElement == "create groups")
                         {
@@ -127,7 +128,7 @@
             }
             @if (viewModel.isFilesPending)
             {
-                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => viewModel.ShowPopup("clean") )' @onmouseout="viewModel.HidePopup" @onclick="(e) => viewModel.CloseAndRemoveOpenFilesButton_Click(e)">
+                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => viewModel.ShowPopup("clean") )' @* @onmouseout="viewModel.HidePopup" *@ @onclick="(e) => viewModel.CleanAndRemoveOpenFilesButton_Click(e)">
                     <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">Clean</span>
                     @if (viewModel.isHovered && viewModel.hoveredElement == "clean")
                     {
@@ -268,7 +269,7 @@
                     <img class="ico-dlt" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
                 </div>
-                <div class="mre-actn-box" @onclick="viewModel.UpgradeTo256">
+                <div class="mre-actn-box" @onclick="viewModel.EncryptionUpgrade">
                     <img class="ico-apikey" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
                 </div>
@@ -346,7 +347,6 @@
             try
             {
                 viewModel.isFilesPending = viewModel.AreFilesPending();
-                this.viewModel.SelectingFiles += viewModel.HandleSelectingFiles;
             }
             catch (Exception ex)
             {

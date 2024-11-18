@@ -42,7 +42,7 @@ namespace AxCrypt.App.Components.Services
 
             if (pickResult.Any())
             {
-                fileSelectionEventArgs.SelectedFiles = pickResult.Select(file => file.FullPath).ToArray();
+                //fileSelectionEventArgs.SelectedFiles = pickResult.Select(file => file.FullPath).ToArray();
 
                 if (!fileSelectionEventArgs.Cancel)
                 {

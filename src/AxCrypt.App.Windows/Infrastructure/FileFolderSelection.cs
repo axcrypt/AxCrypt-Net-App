@@ -22,7 +22,7 @@ public class FileFolderSelection : IDataItemSelection
     //}
     public FileFolderSelection()
     {
-            
+
     }
 
     public Task HandleSelection(FileSelectionEventArgs e)
@@ -143,7 +143,7 @@ public class FileFolderSelection : IDataItemSelection
 
             case FileSelectionType.Open:
                 pickOptions.PickerTitle = Texts.OpenEncryptedFileOpenDialogTitle;
-                isMultiSelect = true;
+                isMultiSelect = false;
                 filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
                 //consider FileOpenPicker for read only selections
                 break;
@@ -184,25 +184,33 @@ public class FileFolderSelection : IDataItemSelection
 
         IDictionary<DevicePlatform, IEnumerable<string>> filterValuePairs = new Dictionary<DevicePlatform, IEnumerable<string>>()
         {
-            { DevicePlatform.WinUI, filterPattern.Split(" ") }
+            { DevicePlatform.WinUI, filterPattern.Split("|") }
         };
         pickOptions.FileTypes = new FilePickerFileType(filterValuePairs);
 
         IEnumerable<FileResult> ofd;
-        if (isMultiSelect)
+        try
         {
-            ofd = await FilePicker.PickMultipleAsync(pickOptions);
-        }
-        else
-        {
-            FileResult? fileResult = await FilePicker.PickAsync(pickOptions);
-            ofd = fileResult == null ? new List<FileResult>() : new List<FileResult> { fileResult };
-        }
+            if (isMultiSelect)
+            {
+                ofd = await FilePicker.PickMultipleAsync(pickOptions);
+            }
+            else
+            {
+                FileResult? fileResult = await FilePicker.PickAsync(pickOptions);
+                ofd = fileResult == null ? new List<FileResult>() : new List<FileResult> { fileResult };
+            }
 
-        e.SelectedFiles?.Clear();
-        if (ofd == null || !ofd.Any())
+            e.SelectedFiles?.Clear();
+            if (ofd == null || !ofd.Any())
+            {
+                e.Cancel = true;
+                return;
+            }
+        }
+        catch (Exception ex)
         {
-            e.Cancel = true;
+            Console.WriteLine(ex.Message);
             return;
         }
 

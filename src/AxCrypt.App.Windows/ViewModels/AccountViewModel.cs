@@ -172,7 +172,10 @@ public class AccountViewModel
             return new List<string>();
         }
 
-        fileSelectionEventArgs.SelectedFiles = selectedFiles.Select(e => e.FullPath).ToList();
+        foreach (string file in selectedFiles.Select(e => e.FullPath))
+        {
+            fileSelectionEventArgs.SelectedFiles.Add(file);
+        }
 
         return fileSelectionEventArgs.SelectedFiles;
     }

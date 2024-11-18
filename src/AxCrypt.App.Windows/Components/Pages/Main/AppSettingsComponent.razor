@@ -40,7 +40,7 @@
         </div>
         <div style="float:right; padding-left:15px;">
             <label class="toggle">
-                <input type="checkbox" @bind="appSettingsViewModel.AutoUpgradeToAES256" @onclick="appSettingsViewModel.ToggleAutoUpgradeMode">
+                <input type="checkbox" @bind="appSettingsViewModel.AutoUpgradeToAES256" @onclick="appSettingsViewModel.ToggleEncryptionUpgradeMode">
                 <span class="slider round">
                     @if (appSettingsViewModel.AutoUpgradeToAES256)
                     {
@@ -337,7 +337,7 @@
                 </div>
             </div>
             <div>
-                <label for="userEmail">@appSettingsViewModel._emailLabel</label>
+                <label for="userEmail">@appSettingsViewModel.EmailLabel</label>
             </div>
             <div class="input-group">
                 <div>
