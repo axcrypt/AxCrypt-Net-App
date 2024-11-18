@@ -135,8 +135,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<LoginModel>();
             services.AddSingleton<MainPage>();
             services.AddSingleton<Home>();
-            services.AddSingleton<HomeBody>();
-            services.AddSingleton<HomeBody>();
+            services.AddSingleton<HomeActionsComponent>();
             services.AddSingleton<SecuredFolders>();
             services.AddSingleton<RecentFolders>();
             services.AddSingleton<PasswordManager>();
@@ -145,12 +144,12 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<Notification>();
             services.AddSingleton<TopMenu>();
             services.AddSingleton<Support>();
-            services.AddSingleton<SettingsDeskPopup>();
+            services.AddSingleton<AppSettingsComponent>();
             services.AddSingleton<NotificationPopup>();
-            services.AddSingleton<AccountDeskPopup>();
 
             services.AddSingleton<LogOnViewModel>();
 
+            services.AddSingleton<ProfileOptionComponent>();
             services.AddSingleton<SupportService>();
             services.AddSingleton<SecretClientModel>();
             services.AddSingleton<SecretsClientModel>();
@@ -166,7 +165,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SecretServiceUtility>();
             services.AddSingleton<UserNotificationService>();
 
-            services.AddSingleton<HomeBodyViewModel>();
+            services.AddSingleton<HomeActionsViewModel>();
             services.AddSingleton<RecentFilesViewModel>();
             services.AddSingleton<ShareKeyViewModel>();
             services.AddSingleton<RecentFoldersViewModel>();
@@ -177,7 +176,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<InviteViewModel>();
             services.AddSingleton<TopMenuViewModel>();
             services.AddSingleton<AccountViewModel>();
-            services.AddSingleton<SettingsViewModel>();
+            services.AddSingleton<AppSettingsViewModel>();
             services.AddSingleton<AdvancedOptionsViewModel>();
             services.AddSingleton<RecentFilesViewModel>();
 

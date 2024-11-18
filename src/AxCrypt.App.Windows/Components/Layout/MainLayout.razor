@@ -12,15 +12,7 @@
 <link href="css/login.min.css" rel="stylesheet" />
 
 @{
-    string subscriptionLevel;
-    if (LogOnViewModel.License.Has(Core.Runtime.LicenseCapability.Premium))
-        subscriptionLevel = SubscriptionLevel.Premium.ToString().ToLower();
-    else if (LogOnViewModel.License.Has(Core.Runtime.LicenseCapability.Business))
-        subscriptionLevel = SubscriptionLevel.Business.ToString().ToLower();
-    else if (LogOnViewModel.License.Has(Core.Runtime.LicenseCapability.PasswordManager))
-        subscriptionLevel = SubscriptionLevel.PasswordManager.ToString().ToLower();
-    else
-        subscriptionLevel = SubscriptionLevel.Free.ToString().ToLower();
+    string subscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
 }
 
 <link href="css/@subscriptionLevel/sidemenu.min.css" rel="preload" as="style" importance="high" />
@@ -73,14 +65,12 @@
 
 
 @code {
-    private SubscriptionLevel SubscriptionLevel { get; set; }
     // bool IsLoading { get; set; }
 
     private bool CanShowSignInPage { get; set; }
 
     protected override void OnInitialized()
     {
-        SubscriptionLevel = SubscriptionLevel.Free;
         CanShowSignInPage = LogOnViewModel.IsVisible;
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdateSignInPageState;
         base.OnInitialized();

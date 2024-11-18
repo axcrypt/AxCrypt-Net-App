@@ -17,11 +17,12 @@
 @inject SecretService secretService
 @inject ViewSecretViewModel viewSecretViewModel
 @inject ShareSecretViewModel shareSecretViewModel
+@inject LogOnViewModel LogOnViewModel
 @inject IJSRuntime jsRuntime
 
-<link href="css/@viewSecretViewModel.SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
-<link href="css/@viewSecretViewModel.SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
-<link href="css/@viewSecretViewModel.SubscriptionLevel.ToString().ToLower()/sharesecret.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/sharesecret.min.css" rel="stylesheet" />
 
 <div style="margin-top: 80px;" class="page-max-height">
     <div class="page-heading">
@@ -157,11 +158,10 @@
 @code {
     bool IsSharedView { get; set; }
     bool isAxCryptUser = true;
-    
+
     protected override void OnInitialized()
     {
-        viewSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        viewSecretViewModel.UserEmail = New<AccountStatusViewModel>().UserEmail;
+        viewSecretViewModel.UserEmail = Core.Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
 
         if (secretService.CurrentSecret == null)
         {

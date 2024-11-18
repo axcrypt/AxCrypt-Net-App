@@ -19,11 +19,13 @@ using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Components.Services;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Components.Models;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class HomeBodyViewModel : ComponentBase
+public class HomeActionsViewModel : ComponentBase
 {
+    private LogOnViewModel _logOnViewModel;
     private FileOperationViewModel _fileOperationViewModel;
     private MainViewModel? _mainViewModel;
     private FileSystemState? _fileSystemState;
@@ -94,19 +96,24 @@ public class HomeBodyViewModel : ComponentBase
         hoveredElement = string.Empty;
     }
 
-    public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }
+    public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }   
+
+    public HomeActionsViewModel(LogOnViewModel logOnViewModel)
+    {
+        _logOnViewModel = logOnViewModel;
+    }
 
     public void Initialized()
     {
-        _mainViewModel = New<MainViewModel>();
-        _fileOperationViewModel = New<FileOperationViewModel>();
+        _mainViewModel = _logOnViewModel.MainViewModel;
+        _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
         _fileSystemState = Resolve.FileSystemState;
         Utility.OnIsMainMenuHiddenChanged += StateHasChanged;
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); /*StateHasChanged();*/ });
-        KnownFoldersViewModel = New<KnownFoldersViewModel>();
 
-        SubscriptionLevel = New<AxCrypt.App.Components.Models.AccountStatusViewModel>().SubscriptionLevel;
+        SubscriptionLevel = _logOnViewModel.SubscriptionLevel;
+        KnownFoldersViewModel = New<KnownFoldersViewModel>();   
         _folderPicker = new FolderPickerWindows();
         FileShareService = new FileShareService();
     }

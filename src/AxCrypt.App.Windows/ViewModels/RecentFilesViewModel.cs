@@ -22,6 +22,7 @@ namespace AxCrypt.App.Windows.ViewModels;
 
 internal class RecentFilesViewModel : ComponentBase
 {
+    private LogOnViewModel _logOnViewModel;
     private ProcessIndicatorService _ProcessIndicatorService;
 
     [Inject]
@@ -32,11 +33,11 @@ internal class RecentFilesViewModel : ComponentBase
 
     public KnownFoldersViewModel _knownFoldersViewModel;
 
-    public RecentFilesViewModel()
+    public RecentFilesViewModel(LogOnViewModel logOnViewModel)
     {
-        _mainViewModel = New<MainViewModel>();
-        _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
-        _fileOperationViewModel = New<FileOperationViewModel>();
+        _logOnViewModel = logOnViewModel;
+        _mainViewModel = logOnViewModel.MainViewModel;
+        _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
     }
 
     private MainViewModel _mainViewModel;
@@ -44,6 +45,7 @@ internal class RecentFilesViewModel : ComponentBase
 
     public void OnInitializedAsync()
     {
+        _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
     }
 

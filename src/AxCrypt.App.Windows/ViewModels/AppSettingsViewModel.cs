@@ -17,11 +17,13 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.App.Windows.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Components.Models;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class SettingsViewModel
+public class AppSettingsViewModel
 {
+    private LogOnViewModel _logOnViewModel;
     private MainViewModel? _mainViewModel;
     private FileOperationViewModel? _fileOperationViewModel;
     private ManageAccountViewModel? _viewModel;
@@ -30,11 +32,16 @@ public class SettingsViewModel
     private bool isDateModifiedOn;
     private bool isFileNameOn;
 
+    public AppSettingsViewModel(LogOnViewModel logOnViewModel)
+    {
+        _logOnViewModel = logOnViewModel;
+    }
+
     public void Initialized()
     {
-        _mainViewModel = New<MainViewModel>();
+        _mainViewModel = _logOnViewModel.MainViewModel;
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
-        _fileOperationViewModel = New<FileOperationViewModel>();
+        _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
         RestApiBaseUrl = Resolve.UserSettings.RestApiBaseUrl.ToString();
         TimeoutTimeSpan = Resolve.UserSettings.ApiTimeout.ToString();
     }
@@ -47,28 +54,14 @@ public class SettingsViewModel
     public bool ShowVersion { get; set; }
     public bool ShowOptions { get; set; }
     public bool ShowManageAxCryptID { get; set; }
-    public int MembersCount { get; set; }
-    public int TotalMembers { get; set; }
-    public string? InvitedUser { get; set; }
     public bool InvitePopup { get; set; }
     public ObservableCollection<FileDetails> RecentFilesList { get; set; } = new ObservableCollection<FileDetails>();
-    public bool IsPopupVisible { get; set; }
-    public bool ActiveSubScription { get; set; }
-    public string? UserEmail { get; set; }
-    public int DaysLeft { get; set; }
-    public bool SubscribedFromAppStore { get; set; }
-    public string? SubscriptionStatusText { get; set; }
-    public bool ShowConfirmDeleteAccountPopup { get; set; }
-    public SubscriptionLevel SubscriptionLevel { get; set; }
-    public string? Subscription { get; set; }
     public DateTime CreatedTime { get; set; }
     public double SelectedOption { get; set; } = 0;
     public bool DebugPopup { get; set; }
-    public string ValidFormatted => DaysLeft == 0 ? "0 days left" : New<INow>().Utc.AddDays(DaysLeft).ToString("dd MMM yyyy");
 
     protected bool isHovered = false;
     protected string hoveredElement = string.Empty;
-    public bool IsSuccess { get; set; }
 
     public bool HideRecentFiles
     {

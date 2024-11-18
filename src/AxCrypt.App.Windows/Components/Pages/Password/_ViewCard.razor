@@ -4,6 +4,7 @@
 @using AxCrypt.App.Components.Helpers
 @using AxCrypt.App.Components.Services.Interface
 @using AxCrypt.Content
+@using AxCrypt.Core
 @using AxCrypt.Core.Secrets
 @using AxCrypt.Core.UI
 @using AxCrypt.Cryptor.Model
@@ -18,11 +19,12 @@
 @inject SecretService secretService
 @inject ViewSecretViewModel viewSecretViewModel
 @inject ShareSecretViewModel shareSecretViewModel
+@inject LogOnViewModel LogOnViewModel
 @inject IJSRuntime JSRuntime
 
-<link href="css/@viewSecretViewModel.SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
-<link href="css/@viewSecretViewModel.SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
-<link href="css/@viewSecretViewModel.SubscriptionLevel.ToString().ToLower()/sharesecret.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/sharesecret.min.css" rel="stylesheet" />
 
 <div style="margin-top: 80px;" class="page-max-height">
     <div class="page-heading">
@@ -178,8 +180,7 @@
 
     protected override void OnInitialized()
     {
-        viewSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        viewSecretViewModel.UserEmail = New<AccountStatusViewModel>().UserEmail;
+        viewSecretViewModel.UserEmail = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
 
         if (secretService.CurrentSecret == null)
         {

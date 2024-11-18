@@ -11,10 +11,10 @@ using AxCrypt.Content;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Runtime;
 using AxCrypt.App.Components.Services.Interface;
-
-using static AxCrypt.Abstractions.TypeResolve;
 using Microsoft.AspNetCore.Components;
 using AxCrypt.App.Windows.Models;
+
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -53,14 +53,13 @@ public class AccountViewModel
         Account.SubscriptionLevel = _logOnViewModel.SubscriptionLevel;
         Account.UserEmail = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
         Account.Subscription = await DetermineSubscriptionType();
-        Account.DaysLeft = New<AccountStatusViewModel>().DaysLeft;
+        //Account.DaysLeft = New<AccountStatusViewModel>().DaysLeft;
     }
 
     public async Task<string> DetermineSubscriptionType()
     {
         Account.CreatedTime = await GetManageAxCryptID();
-        double totalDays = (New<INow>().Utc - Account.CreatedTime).Days + Account.DaysLeft;
-
+        double totalDays = (New<INow>().Utc - Account.CreatedTime).TotalDays + Account.DaysLeft;
         return totalDays > 31 ? "Yearly" : (totalDays >= 25 && totalDays <= 35 ? "Monthly" : "Unknown");
     }
 
@@ -243,7 +242,7 @@ public class AccountViewModel
 
     public void PasswordReset_Click(EventArgs e)
     {
-        if (!Account.IsLoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail))
+        if (!_mainViewModel.LoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail))
         {
             BrowseUtility.RedirectToAccountWebUrl(Texts.PasswordResetHyperLink);
         }

@@ -1,4 +1,5 @@
-﻿using AxCrypt.App.Components.Services;
+﻿using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Services;
 using AxCrypt.App.Windows.Models;
 using AxCrypt.Common;
 using AxCrypt.Core;
@@ -6,20 +7,22 @@ using AxCrypt.Core.UI.ViewModel;
 using System.Diagnostics;
 using System.Globalization;
 
-using static AxCrypt.Abstractions.TypeResolve;
-
 namespace AxCrypt.App.Windows.ViewModels;
 
 public class TopMenuViewModel
 {
+    private LogOnViewModel _logOnViewModel;
     private readonly UserNotificationService _notificationService;
     private MainViewModel? _mainViewModel;
 
-    public TopMenuViewModel(UserNotificationService notificationService)
+    public TopMenuViewModel(UserNotificationService notificationService, LogOnViewModel logOnViewModel)
     {
+        _logOnViewModel = logOnViewModel;
         _notificationService = notificationService;
-        _mainViewModel = New<MainViewModel>();
+        _mainViewModel = logOnViewModel.MainViewModel;
         TopMenuModel = new TopMenuModel();
+        TopMenuModel.SubscriptionLevel = logOnViewModel.SubscriptionLevel;
+        TopMenuModel.UserEmail = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
     }
 
     public TopMenuModel TopMenuModel { get; set; }

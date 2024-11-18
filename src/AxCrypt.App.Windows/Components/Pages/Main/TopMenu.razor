@@ -66,7 +66,7 @@
         {
             @if (ViewModel.TopMenuModel.IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
             {
-                <AxCrypt.App.Windows.Components.Pages.Main.AccountDeskPopup ClosePopup="ViewModel.CloseAccountPopup" />
+                <AxCrypt.App.Windows.Components.Pages.Main.ProfileOptionComponent ClosePopup="ViewModel.CloseAccountPopup" />
             }
         }
 
@@ -74,7 +74,7 @@
         {
             @if (ViewModel.TopMenuModel.IsLargeScreen && currentDevice == DeviceIdiom.Desktop)
             {
-                <AxCrypt.App.Windows.Components.Pages.Main.SettingsDeskPopup CloseSettingsPopup="ViewModel.CloseSettingsPopup" />
+                <AxCrypt.App.Windows.Components.Pages.Main.AppSettingsComponent CloseSettingsPopup="ViewModel.CloseSettingsPopup" />
             }
         }
 
@@ -96,8 +96,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ViewModel.TopMenuModel.UserEmail = New<AccountStatusViewModel>().UserEmail;
-
         string currentCulture = Resolve.UserSettings.CultureName;
         CultureOption cultureOption = localizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == currentCulture);
 

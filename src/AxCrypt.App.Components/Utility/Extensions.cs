@@ -1,11 +1,5 @@
 ﻿using AxCrypt.Api.Model;
-using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AxCrypt.App.Components.Utility
 {

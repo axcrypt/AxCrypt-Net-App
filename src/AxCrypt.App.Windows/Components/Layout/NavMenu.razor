@@ -4,7 +4,9 @@
 @using AxCrypt.Content
 @using static AxCrypt.Abstractions.TypeResolve
 
-<link href="css/@SubscriptionLevel.ToString().ToLower()/sidemenu.min.css" rel="stylesheet" />
+@inject LogOnViewModel LogOnViewModel
+
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/sidemenu.min.css" rel="stylesheet" />
 
 <div class="side-menu">
     <div class="navbar" style="margin-top: 10px;">
@@ -83,12 +85,9 @@
 
     private bool isSideMenuHide = false;
     private bool aboutPopup = false;
-    private SubscriptionLevel SubscriptionLevel { get; set; }
 
     protected override void OnInitialized()
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-
         base.OnInitialized();
     }
 
@@ -96,7 +95,6 @@
     {
         if (firstRender)
         {
-            SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
             base.OnAfterRender(firstRender);
         }
     }

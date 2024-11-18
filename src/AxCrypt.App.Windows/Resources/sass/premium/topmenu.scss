@@ -1,2 +1,29 @@
 ﻿@import "_variables";
 @import "../_topmenu";
+
+.key-mngnt-Popup a:hover, .key-mngnt-Popup dd:hover, .manage-acc-sec a:hover, .manage-acc-sec dd:hover {
+    background-image: url(/images/premium/IcoIndctr.svg);
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-color: #C5CFC0;
+    color: #48772C !important;
+}
+.key-mngnt-Popup a:hover .log-out-clr, .key-mngnt-Popup dd:hover .log-out-clr, .manage-acc-sec a:hover .log-out-clr, .manage-acc-sec dd:hover .log-out-clr {
+    opacity: 0.8;
+}
+
+.key-mngnt-Popup a:hover, .manage-acc-sec a:hover {
+    padding: 10px 25px;
+    margin: 0 -20px;
+}
+
+.key-mngnt-Popup dd, .manage-acc-sec dd {
+    padding: 5px;
+    margin-bottom: 0px;
+}
+
+.key-mngnt-Popup dd:hover, .manage-acc-sec dd:hover {
+    padding: 5px 25px;
+    margin-left: -20px;
+    margin-right: -20px;
+}

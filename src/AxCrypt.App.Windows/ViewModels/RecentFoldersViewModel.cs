@@ -18,6 +18,7 @@ namespace AxCrypt.App.Windows.ViewModels;
 
 public class RecentFoldersViewModel : ComponentBase
 {
+    private LogOnViewModel _logOnViewModel;
     private readonly MainViewModel _mainViewModel;
     private readonly FileOperationViewModel _fileOperationViewModel;
     private ProcessIndicatorService _ProcessIndicatorService;
@@ -67,17 +68,18 @@ public class RecentFoldersViewModel : ComponentBase
 
     public Action OnStateChange { get; set; }
 
-    public RecentFoldersViewModel(ProcessIndicatorService processIndicatorService)
+    public RecentFoldersViewModel(ProcessIndicatorService processIndicatorService, LogOnViewModel logOnViewModel)
     {
-        _mainViewModel = New<MainViewModel>();
-        _fileOperationViewModel = New<FileOperationViewModel>();
+        _logOnViewModel = logOnViewModel;
+        _mainViewModel = logOnViewModel.MainViewModel;
+        _fileOperationViewModel = logOnViewModel.FileOperationViewModel ;
         FileShareService = new FileShareService();
         _ProcessIndicatorService = processIndicatorService;
     }
 
     public async Task InitializeAsync()
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        SubscriptionLevel = _logOnViewModel.SubscriptionLevel;
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
 
         IEnumerable<string> folders = await RecentFoldersAsync();

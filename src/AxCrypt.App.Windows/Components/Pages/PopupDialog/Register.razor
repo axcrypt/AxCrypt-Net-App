@@ -8,9 +8,10 @@
 @using Microsoft.Maui.Devices
 @using static AxCrypt.Abstractions.TypeResolve;
 
+@inject LogOnViewModel LogOnViewModel
 @inject IJSRuntime JSRuntime
 
-<link href="css/@SubscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
 
 @{
     DeviceIdiom currentDevice = GetCurrentDeviceIdiom();
@@ -29,16 +30,13 @@ else
 }
 
 @code {
-    private SubscriptionLevel SubscriptionLevel { get; set; }
     bool IsWideScreen { get; set; }
     bool IsLoading { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         await base.OnInitializedAsync();
     }
-
 
     private DeviceIdiom GetCurrentDeviceIdiom()
     {

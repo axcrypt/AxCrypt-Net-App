@@ -16,8 +16,11 @@
 //using static AxCrypt.Abstractions.TypeResolve;
 //using AxCrypt.App.Windows.Services;
 
-//namespace AxCrypt.App.Windows.ViewModels;
+namespace AxCrypt.App.Windows.ViewModels;
+public class HomeViewModel
+{
 
+}
 //public class HomeViewModel : ISignIn
 //{
 //    private readonly ICustomNavigationService _navigationManager;

@@ -15,10 +15,12 @@
 @inject NavigationManager navigationManager
 @inject SecretService secretService
 @inject EditSecretViewModel editSecretViewModel
+@inject LogOnViewModel LogOnViewModel
+
 @inject IJSRuntime jsRuntime
 
-<link href="css/@editSecretViewModel.SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
-<link href="css/@editSecretViewModel.SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
 
 <div style="width: 85%; margin-top: 80px;">
     <div class="page-heading">
@@ -57,7 +59,7 @@
 
     protected override void OnInitialized()
     {
-        editSecretViewModel.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
+        editSecretViewModel.SubscriptionLevel = LogOnViewModel.SubscriptionLevel;
 
         if (secretService.CurrentSecret == null)
         {

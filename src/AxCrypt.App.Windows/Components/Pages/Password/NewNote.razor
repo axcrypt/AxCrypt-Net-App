@@ -20,10 +20,11 @@
 @inject NewSecretViewModel newSecretViewModel
 @inject NavigationManager navigationManager;
 @inject SecretService secretService
+@inject LogOnViewModel LogOnViewModel
 
-<link href="css/@SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
-<link href="css/@SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
-<link href="css/@SubscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
+<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
 
 <div style="width: 85%; margin-top: 80px;">
     <div class="page-heading">
@@ -62,8 +63,6 @@
      </div>
 </div>
 @code {
-    private SubscriptionLevel SubscriptionLevel { get; set; }
-
     private EditForm editForm;
 
     private string GetInputClass(string propertyName)
@@ -76,7 +75,6 @@
 
     protected override void OnInitialized()
     {
-        SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
         secretService.SecretType = SecretType.Note;
         newSecretViewModel = new NewSecretViewModel(secretService);
     }
