@@ -87,7 +87,7 @@
             <img class="mng-accnt" src="" alt="go-back-img" style="float:right" />
         </NavLink>
         <NavLink class="nav-link" href="">
-            <span class="log-out-clr font-medium" @onclick="()=> accountViewModel.SignOut()">Log out</span>
+            <span class="log-out-clr font-medium" @onclick="()=> accountViewModel.SignOut()">@Texts.LogOffText</span>
         </NavLink>
         <NavLink class="nav-link" @onclick="(e)=> accountViewModel.ExitMenuItem_Click(e)" style="padding: 3px 5px 7px;">
             <span class="font-medium">@Texts.ExitToolStripMenuItemText</span>

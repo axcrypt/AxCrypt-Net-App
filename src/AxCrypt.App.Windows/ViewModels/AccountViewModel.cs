@@ -35,20 +35,23 @@ public class AccountViewModel
     public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<INow>().Utc.AddDays(Account.DaysLeft).ToString("dd MMM yyyy");
     public bool keyMPopup { get; set; }
 
-    public AccountViewModel()
+    LogOnViewModel _logOnViewModel;
+
+    public AccountViewModel(LogOnViewModel logOnModel)
     {
+        _logOnViewModel = logOnModel;
         Account = new AccountModel();
     }
 
     public async Task InitializeAsync()
     {
-        _mainViewModel = New<MainViewModel>();
+        _mainViewModel = _logOnViewModel.MainViewModel;
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
         Account.IsLoggedOn = _mainViewModel.LoggedOn;
-        _fileOperationViewModel = New<FileOperationViewModel>();
+        _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
 
-        Account.SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
-        Account.UserEmail = New<AccountStatusViewModel>().UserEmail;
+        Account.SubscriptionLevel = _logOnViewModel.SubscriptionLevel;
+        Account.UserEmail = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
         Account.Subscription = await DetermineSubscriptionType();
         Account.DaysLeft = New<AccountStatusViewModel>().DaysLeft;
     }
@@ -291,7 +294,13 @@ public class AccountViewModel
 
     public async void SignOut()
     {
-        await _fileOperationViewModel.IdentityViewModel.LogOnLogOff.ExecuteAsync(null);
+        if (_mainViewModel.DecryptedFiles.Any())
+        {
+            await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
+            return;
+        }
+
+        await _logOnViewModel.InvokeLogOnOrLogOffAndLogOnAgainAsync();
     }
 
     public async void ExitMenuItem_Click(EventArgs e)

@@ -10,10 +10,9 @@ using AxCrypt.App.Components.ViewModels.Feedback;
 using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Components.Pages.Password;
-using AxCrypt.App.Windows.Components.Pages.Shared;
+using AxCrypt.App.Windows.Helpers;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Windows.ViewModels;
-using AxCrypt.Core;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
@@ -25,7 +24,7 @@ namespace AxCrypt.App.Windows
 {
     public static class MauiProgram
     {
-        public static MauiApp CreateMauiApp(CommandLine commandLine)
+        public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
             builder
@@ -66,15 +65,23 @@ namespace AxCrypt.App.Windows
                     windows.OnVisibilityChanged((vis, fd) =>
                     {
                         // when minimized - vis.Visible = false
+                        if (vis.Visible == false)
+                        {
+                            vis.AppWindow.Hide();
+                            fd.Handled = true;
+                            //MauiWindowsExtensions.MinimizeToTray();
+                            //MauiWindowsExtensions.BringToFront();
+                            SetupTrayIcon();
+                        }
                     });
 
                     windows.OnClosed((wind, windArg) =>
                     {
                         wind.AppWindow.Hide();
                         windArg.Handled = true;
-                        //MauiWindowsExtensions.MinimizeToTray();
+                        MauiWindowsExtensions.MinimizeToTray();
                         //MauiWindowsExtensions.BringToFront();
-                        //    SetupTrayIcon();
+                        SetupTrayIcon();
                     });
 
                     //windows.OnVisibilityChanged((del) =>
@@ -94,6 +101,20 @@ namespace AxCrypt.App.Windows
 #endif
 
             return builder.Build();
+        }
+
+        private static void SetupTrayIcon()
+        {
+            ITrayService trayService = new TrayService();
+            if (trayService != null)
+            {
+                trayService.Initialize();
+
+                INotificationService notificationService = new NotificationService();
+                trayService.ClickHandler = () =>
+                    notificationService
+                        ?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
+            }
         }
 
         private static void RegisterSingletons(IServiceCollection services)

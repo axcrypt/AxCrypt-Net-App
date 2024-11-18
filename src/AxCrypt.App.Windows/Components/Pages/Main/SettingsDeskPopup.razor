@@ -1,20 +1,5 @@
-﻿@using AxCrypt.Abstractions
-@using AxCrypt.Api.Model
-@using AxCrypt.App.Components.Services.Interface
-@using AxCrypt.App.Components.ViewModels
-@using AxCrypt.App.Windows.ViewModels
-@using AxCrypt.Common
+﻿@using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Content
-@using AxCrypt.Core
-@using AxCrypt.Core.Crypto
-@using AxCrypt.Core.Runtime
-@using AxCrypt.Core.Service
-@using AxCrypt.Core.Session
-@using AxCrypt.Core.UI
-@using AxCrypt.Core.Extensions
-@using AxCrypt.Core.UI.ViewModel
-@using System.Collections.ObjectModel
-@using System.Globalization
 
 @using static AxCrypt.Abstractions.TypeResolve
 
@@ -405,6 +390,7 @@
             flex-grow: 1;
         }
 </style>
+
 @code {
     protected override void OnInitialized()
     {

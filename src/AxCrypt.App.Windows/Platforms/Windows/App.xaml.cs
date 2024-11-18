@@ -83,7 +83,7 @@ namespace AxCrypt.App.Windows.WinUI
             {
                 if (isFirstInstance)
                 {
-                    RunInteractive(commandLine);
+                    RunInteractive();
                 }
                 else
                 {
@@ -218,7 +218,7 @@ namespace AxCrypt.App.Windows.WinUI
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        private void RunInteractive(CommandLine commandLine)
+        private void RunInteractive()
         {
             //EnableVisualStyles();
             //SetCompatibleTextRenderingDefault(false);
@@ -228,7 +228,7 @@ namespace AxCrypt.App.Windows.WinUI
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             try
             {
-                _mauiApp = MauiProgram.CreateMauiApp(commandLine);
+                _mauiApp = MauiProgram.CreateMauiApp();
                 return;
                 //Application.Run(new AxCryptMainForm(commandLine));
             }

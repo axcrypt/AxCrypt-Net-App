@@ -23,7 +23,7 @@ using System.Text.RegularExpressions;
 
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Windows.Services;
-using AxCrypt.App.Components.Services;
+using AxCrypt.App.Components.Models;
 
 namespace AxCrypt.App.Windows;
 
@@ -61,6 +61,9 @@ public partial class App : Application
     protected override void OnStart()
     {
         base.OnStart();
+
+        string[] commandLineArgs = Environment.GetCommandLineArgs();
+        _commandLine = new CommandLine(commandLineArgs.Skip(1));
 
         Task.Run(async () =>
         {

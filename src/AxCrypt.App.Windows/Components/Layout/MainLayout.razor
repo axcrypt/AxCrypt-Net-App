@@ -1,7 +1,6 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Data
 @using AxCrypt.App.Components.Models
-@using AxCrypt.App.Components.Services
 @using AxCrypt.App.Windows.Services
 
 @using static AxCrypt.Abstractions.TypeResolve;
@@ -89,8 +88,8 @@
 
     private void UpdateSignInPageState(bool canShowSignInPage)
     {
-        InvokeAsync(() =>
-        {
+         InvokeAsync(() =>
+         {
             CanShowSignInPage = canShowSignInPage;
             StateHasChanged(); // Refresh UI
         });

@@ -1,9 +1,10 @@
-﻿using AxCrypt.App.Components.Utility;
+﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Components.Utility;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Components.Services;
+namespace AxCrypt.App.Components.Models;
 
 public interface ILogOnDialogService
 {
@@ -32,18 +33,34 @@ public class LogOnViewModel : ViewModelBase
         }
         IsVisible = false;
 
+        //mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { IsVisible = !loggedOn; });
         mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnLogOnDialogVisibilityChanged?.Invoke(_isVisible); } });
-
     }
+
+    public MainViewModel MainViewModel { get { return GetProperty<MainViewModel>(nameof(MainViewModel)); } set { SetProperty(nameof(MainViewModel), value); } }
+
+    public FileOperationViewModel FileOperationViewModel { get { return GetProperty<FileOperationViewModel>(nameof(FileOperationViewModel)); } set { SetProperty(nameof(FileOperationViewModel), value); } }
+
+
     public DialogResult PageResult { get { return GetProperty<DialogResult>(nameof(PageResult)); } set { SetProperty(nameof(PageResult), value); } }
 
     public LicenseCapabilities License { get { return GetProperty<LicenseCapabilities>(nameof(License)); } set { SetProperty(nameof(License), value); } }
+
+    public SubscriptionLevel SubscriptionLevel
+    {
+        get
+        {
+            return License.GetLicenseStatus();
+        }
+    }
 
     public LogOnAccountViewModel LogOnAccountModel { get; set; }
 
     public string ErrorMessage { get; set; }
 
     public event Action<bool>? OnLogOnDialogVisibilityChanged;
+
+    public Func<Task>? OnLogOnOrLogOffAndLogOnAgain;
 
     private bool _isVisible;
 
@@ -55,6 +72,11 @@ public class LogOnViewModel : ViewModelBase
             _isVisible = value;
             OnLogOnDialogVisibilityChanged?.Invoke(_isVisible);
         }
+    }
+
+    public async Task InvokeLogOnOrLogOffAndLogOnAgainAsync()
+    {
+        OnLogOnOrLogOffAndLogOnAgain?.Invoke();
     }
 
     //public async Task HandleValidSubmit(LoginModel login)

@@ -1,13 +1,11 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Components.Services;
+using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Components.Utility;
 using AxCrypt.App.Windows.Code;
-using AxCrypt.App.Windows.Components.Pages.PopupDialog;
 using AxCrypt.App.Windows.Services;
-using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -17,7 +15,6 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using Microsoft.AspNetCore.Components;
 using System.Globalization;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -52,7 +49,6 @@ public partial class MainPage : ContentPage, ISignIn
         _mainViewModel = mainViewModel;
         _fileOperationViewModel = fileOperationViewModel;
         _knownFoldersViewModel = knownFoldersViewModel;
-        //viewModel = homeModel;
     }
 
     protected override void OnAppearing()
@@ -80,6 +76,9 @@ public partial class MainPage : ContentPage, ISignIn
 
         BindToViewModels();
         BindToFileOperationViewModel();
+
+        _logOnService.MainViewModel = _mainViewModel;
+        _logOnService.FileOperationViewModel = _fileOperationViewModel;
 
         await SignInAsync();
     }
@@ -112,7 +111,7 @@ public partial class MainPage : ContentPage, ISignIn
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await SetWindowTitleTextAsync(_mainViewModel.LoggedOn); });
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { _recentFilesListView.UpdateRecentFiles(_mainViewModel.RecentFiles); });
         //_mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await ConfigureLinkLabelAsync(New<KnownIdentities>().DefaultEncryptionIdentity); });
-        //_mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
+        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await SetSignInSignOutStatusAsync(loggedOn); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await new Display().LocalSignInWarningPopUpAsync(loggedOn); });
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.OpenEncryptedEnabled), (bool enabled) => { _openEncryptedToolStripMenuItem.Enabled = enabled; });
@@ -173,8 +172,9 @@ public partial class MainPage : ContentPage, ISignIn
         //_encryptToolStripButton.Tag = _fileOperationViewModel.EncryptFiles;
         //_encryptToolStripMenuItem.Click += async (sender, e) => { await _fileOperationViewModel.EncryptFiles.ExecuteAsync(null); };
         _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
-       // _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
+        // _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
         _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await HandleLogOn(e);
+        _logOnService.OnLogOnOrLogOffAndLogOnAgain = async () => New<IUIThread>().SendTo(async () => await LogOnOrLogOffAndLogOnAgainAsync());
         _fileOperationViewModel.SelectingFiles += (sender, e) => New<IUIThread>().SendTo(() => New<IDataItemSelection>().HandleSelection(e));
         _fileOperationViewModel.ToggleEncryptionUpgradeMode += (sender, e) => New<IUIThread>().SendTo(() => ToggleEncryptionUpgradeMode());
         //_inviteUserToolStripMenuItem.Click += async (sender, e) => { await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await InviteUserAsync(); }, sender, e); };
@@ -195,6 +195,25 @@ public partial class MainPage : ContentPage, ISignIn
         //_watchedFoldersdecryptTemporarilyMenuItem.Click += async (sender, e) => { await _fileOperationViewModel.DecryptFolders.ExecuteAsync(_mainViewModel.SelectedWatchedFolders); };
         //_watchedFoldersListView.MouseDoubleClick += async (sender, e) => { await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(_mainViewModel.SelectedWatchedFolders.FirstOrDefault()); };
         //_recentFilesShowInFolderToolStripMenuItem.Click += async (sender, e) => { await _fileOperationViewModel.ShowInFolder.ExecuteAsync(_mainViewModel.SelectedRecentFiles); };
+    }
+
+
+    private async Task LogOnOrLogOffAndLogOnAgainAsync()
+    {
+        bool wasLoggedOn = Resolve.KnownIdentities.IsLoggedOn;
+        if (wasLoggedOn)
+        {
+            await _fileOperationViewModel.IdentityViewModel.LogOnLogOff.ExecuteAsync(null);
+        }
+        else
+        {
+            await SignInAsync();
+        }
+        bool didLogOff = wasLoggedOn && !Resolve.KnownIdentities.IsLoggedOn;
+        if (didLogOff)
+        {
+            await SignInAsync();
+        }
     }
 
     public bool IsSigningIn { get; set; }
@@ -499,7 +518,7 @@ public partial class MainPage : ContentPage, ISignIn
 
         e.Passphrase = new Passphrase(_logOnService.LogOnAccountModel.PasswordText);
         e.UserEmail = _logOnService.LogOnAccountModel.UserEmail;
-
+        _logOnService.PageResult = DialogResult.None;
         //LogOnAccountViewModel viewModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
         //using (SignUpSignInAccountDialog logOnDialog = new SignUpSignInAccountDialog(this, viewModel))
         //{
@@ -575,25 +594,5 @@ public partial class MainPage : ContentPage, ISignIn
     {
         //_optionsDebugToolStripMenuItem.Checked = enabled;
         //_debugToolStripMenuItem.Visible = enabled;
-    }
-
-    protected override void OnDisappearing()
-    {
-        SetupTrayIcon();
-        base.OnDisappearing();
-    }
-
-    private void SetupTrayIcon()
-    {
-        ITrayService trayService = new TrayService();
-        if (trayService != null)
-        {
-            trayService.Initialize();
-
-            INotificationService notificationService = new NotificationService();
-            trayService.ClickHandler = () =>
-                notificationService
-                    ?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
-        }
     }
 }
