@@ -37,14 +37,18 @@ public class AppSettingsViewModel
         _logOnViewModel = logOnViewModel;
         _mainViewModel = _logOnViewModel.MainViewModel;
         _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
+        AlwaysOffline = New<UserSettings>().OfflineMode;
+        HideRecentFiles = New<UserSettings>().HideRecentFiles;
+        InactivitySignOut = New<UserSettings>().InactivitySignOutTime.Minutes;
     }
 
     public void Initialized()
     {
         RestApiBaseUrl = Resolve.UserSettings.RestApiBaseUrl.ToString();
         TimeoutTimeSpan = Resolve.UserSettings.ApiTimeout.ToString();
-        
+
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
     }
 
     public bool InactSgnOut { get; set; }
@@ -64,20 +68,13 @@ public class AppSettingsViewModel
     protected bool isHovered = false;
     protected string hoveredElement = string.Empty;
 
-    public bool HideRecentFiles
-    {
-        get => hideRecentFiles;
-        set
-        {
-            if (hideRecentFiles != value)
-            {
-                hideRecentFiles = value;
-                ToggleHideRecentFiles();
-            }
-        }
-    }
+    public bool HideRecentFiles { get; set; }
 
     public bool ShowAdvancedOptions { get; set; }
+
+    public List<int> InactivityTimeoutOptions { get; } = new List<int> { 0, 5, 15, 30, 60 };
+
+    public int InactivitySignOut { get; set; }
 
     public bool IsChecked(int value) => SelectedOption == value;
 
@@ -175,24 +172,22 @@ public class AppSettingsViewModel
         }
     }
 
-    public void OnInactivityContextMenu(int duration)
+    public async Task OnInactivityContextMenu(int duration, EventArgs e)
     {
-        bool hasFeature = New<LicensePolicy>().Capabilities.Has(LicenseCapability.InactivitySignOut);
-
-        if (hasFeature)
+        await PremiumFeature_ClickAsync(LicenseCapability.InactivitySignOut, async (ss, ee) =>
         {
             SelectedOption = duration;
             New<UserSettings>().InactivitySignOutTime = TimeSpan.FromMinutes(int.Parse(duration.ToString()));
+            InactivitySignOut = New<UserSettings>().InactivitySignOutTime.Minutes;
             TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
             New<InactivitySignOut>().RestartInactivityTimer();
-        }
+        }, null, e);
     }
 
     public async void RestoreRename(EventArgs args)
     {
         await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(null); }, null, args);
     }
-
 
     public void ToggleAlwaysOffline(EventArgs e)
     {
@@ -235,7 +230,8 @@ public class AppSettingsViewModel
     private string? FileName { get; set; }
     public string? RestApiBaseUrl { get; set; }
     public string? TimeoutTimeSpan { get; set; }
-    private ObservableCollection<ManageAccountModel> _accountEmailsListView { get; set; } = new ObservableCollection<ManageAccountModel>();
+    private ObservableCollection<ManageAccountModel> AccountEmailsList { get; set; } = new ObservableCollection<ManageAccountModel>();
+
     public string? EmailLabel { get; set; }
 
     public bool IsDateModifiedOn
@@ -289,7 +285,7 @@ public class AppSettingsViewModel
             if (alwaysOnline != value)
             {
                 alwaysOnline = value;
-                //MakeAlwaysOffline();
+                MakeAlwaysOffline();
             }
         }
     }
@@ -354,10 +350,10 @@ public class AppSettingsViewModel
         {
             ManageAccountModel item = new ManageAccountModel(email.Timestamp.ToLocalTime().ToString(CultureInfo.CurrentCulture), "Timestamp");
 
-            _accountEmailsListView.Add(item);
+            AccountEmailsList.Add(item);
         }
 
-        if (_accountEmailsListView.Count == 0)
+        if (AccountEmailsList.Count == 0)
         {
             EmailLabel = String.Empty;
             return;
@@ -408,54 +404,6 @@ public class AppSettingsViewModel
     }
 
     #endregion
-
-    private async Task<IEnumerable<FileResult>> InternalFileSelectionAsync(FileSelectionEventArgs e)
-    {
-        IEnumerable<FileResult> pickResult = await FilePicker.PickMultipleAsync(new PickOptions
-        {
-            PickerTitle = "Please select files",
-        });
-
-        if (!pickResult.Any())
-        {
-            e.Cancel = true;
-        }
-
-        return pickResult;
-    }
-
-    public void HandleSelection(FileSelectionEventArgs e)
-    {
-        if (e == null)
-        {
-            throw new ArgumentNullException(nameof(e));
-        }
-
-        HandleSelectionInternal(e);
-    }
-
-    private void HandleSelectionInternal(FileSelectionEventArgs e)
-    {
-        switch (e.FileSelectionType)
-        {
-            case FileSelectionType.SaveAsEncrypted:
-            case FileSelectionType.SaveAsDecrypted:
-                HandleSaveAsFileSelection(e);
-                break;
-
-            case FileSelectionType.WipeConfirm:
-                //HandleWipeConfirm(e);
-                break;
-
-            case FileSelectionType.Folder:
-                //HandleFolderSelection(e);
-                break;
-
-            default:
-                //HandleOpenFileSelection(e);
-                break;
-        }
-    }
 
     private async void HandleSaveAsFileSelection(FileSelectionEventArgs e)
     {
@@ -510,6 +458,8 @@ public class AppSettingsViewModel
         New<AxCryptOnlineState>().IsOffline = false;
     }
 
+    private bool showUpgradePopup = false;
+
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {
         if (_mainViewModel.License.Has(requiredCapability))
@@ -521,6 +471,6 @@ public class AppSettingsViewModel
             return;
         }
 
-        //showUpgradePopup = true;
+        showUpgradePopup = true;
     }
 }

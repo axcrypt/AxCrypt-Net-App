@@ -31,6 +31,7 @@
 
 @{
     int MaxAvatarsToShow = 4;
+    SettingsViewModel.HideRecentFiles = New<UserSettings>().HideRecentFiles;
 }
 
 <div class="home-index">
@@ -78,7 +79,7 @@
                                     <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails) ? "selected" : "")"
                                         @onmousedown="(e) => RecentFilesViewModel.HandleFileClick(e, fileDetails)"
                                         @oncontextmenu="e => RecentFilesViewModel.HandleContextMenu(e, fileDetails)"
-                                        @ondblclick="(e) => RecentFilesViewModel.OpenSecuredRecentFiles(e, new List<FileDetails> { fileDetails })">
+                                        @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, new List<FileDetails> { fileDetails })">
                                         <td> <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectSingleFile(e, fileDetails)" checked="@RecentFilesViewModel.IsHeaderCheckboxChecked" /> </td>
                                         @{
                                             string imagefileSourceClass = !string.IsNullOrEmpty(fileDetails.FileExt) ? fileDetails.FileExt : "file-ext-def-icon";
@@ -181,16 +182,11 @@
         RecentFilesViewModel.OnRecentFilesStateChanged += UpdatePopupVisibility;
     }
 
-    private void UpdatePopupVisibility()
-    {
-        StateHasChanged(); // Refresh UI
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            RecentFilesViewModel.RecentFilesList = new ObservableCollection<FileDetails>(await RecentFilesViewModel.LoadRecentFiles());
+            //RecentFilesViewModel.RecentFilesList = new ObservableCollection<FileDetails>(await RecentFilesViewModel.LoadRecentFiles());
         }
         try
         {
@@ -203,5 +199,13 @@
         {
             IsLoading = false;
         }
+    }
+
+    private void UpdatePopupVisibility(bool updateList)
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 }

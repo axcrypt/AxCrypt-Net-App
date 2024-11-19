@@ -28,7 +28,6 @@
         <label class="fle-nme fnt-sze">Actions</label>
         <div class="" style="display:flex;">
             <div class="act-box" @onclick="()=> viewModel.OpenFile()" @onmouseover='@( () => viewModel.ShowPopup("open") )'>
-                @* <div class="act-box" @onclick="(()=>viewModel.ExecuteSelectFilesCommand(AxCrypt.Core.UI.FileSelectionType.Open, viewModel.SelectedRecentFiles))" @onmouseover='@( () => viewModel.ShowPopup("open") )' @onmouseout="viewModel.HidePopup"> *@
                 <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
                 <span class="text-size">@Texts.McInfMenuOpen</span>
                 @if (viewModel.isHovered && viewModel.hoveredElement == "open")
@@ -329,6 +328,7 @@
         }
     }
 </div>
+
 @code {
     [Parameter]
     public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
@@ -338,6 +338,7 @@
     {
         viewModel.Initialized();
         base.OnInitialized();
+        viewModel.OnSharingListStateChanged += UpdateShareKeyPage;
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -371,4 +372,11 @@
         }
     }
 
+    void UpdateShareKeyPage(bool showPopup = false)
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
 }

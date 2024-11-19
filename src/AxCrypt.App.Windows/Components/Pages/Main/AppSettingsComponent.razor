@@ -144,16 +144,16 @@
     <div class="model-popup sub-pop1 hide-model-popup">
         <div id="inactivity">
             <form id="inactivityForm">
-                <input type="radio" id="disable" name="inactivity" value="0" @onclick="()=> appSettingsViewModel.OnInactivityContextMenu(0)" checked=@appSettingsViewModel.IsChecked(0)>
-                <label for="disable">Disable</label><br />
-                <input type="radio" id="minutes1" name="inactivity" value="5" @onclick="()=> appSettingsViewModel.OnInactivityContextMenu(5)" checked=@appSettingsViewModel.IsChecked(5)>
-                <label for="minutes1">5 minutes</label><br />
-                <input type="radio" id="minutes2" name="inactivity" value="15" @onclick="()=> appSettingsViewModel.OnInactivityContextMenu(15)" checked=@appSettingsViewModel.IsChecked(15)>
-                <label for="minutes2">15 minutes</label><br />
-                <input type="radio" id="minutes3" name="inactivity" value="30" @onclick="()=> appSettingsViewModel.OnInactivityContextMenu(30)" checked=@appSettingsViewModel.IsChecked(30)>
-                <label for="minutes3">30 minutes</label><br />
-                <input type="radio" id="minutes4" name="inactivity" value="60" @onclick="()=> appSettingsViewModel.OnInactivityContextMenu(60)" checked=@appSettingsViewModel.IsChecked(60)>
-                <label for="minutes4">60 minutes</label>
+                @foreach (int timeout in appSettingsViewModel.InactivityTimeoutOptions)
+                {
+                    <input type="radio" id="timeout-@timeout"
+                           name="inactivity"
+                           value="@timeout"
+                           checked="@(timeout == appSettingsViewModel.InactivitySignOut)"
+                           @onclick="(e) => appSettingsViewModel.OnInactivityContextMenu(timeout, e)" />
+                    <label for="timeout-@timeout">@((timeout == 0) ? "Disable" : $"{timeout} minutes")</label>
+                    <br />
+                }
             </form>
         </div>
     </div>

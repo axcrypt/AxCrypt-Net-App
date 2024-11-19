@@ -53,7 +53,6 @@ public class HomeActionsViewModel : ComponentBase
     public int MembersCount { get; set; }
     public int TotalMembers { get; set; }
     public string? DisabledBackColor { get; set; }
-    public bool ShowSharePopup { get; set; }
     public string? ErrorMessage { get; set; }
     public bool UpgradePopup { get; set; }
     public bool UpgradeToEncrypt { get; set; }
@@ -63,6 +62,19 @@ public class HomeActionsViewModel : ComponentBase
     public string hoveredElement { get; set; } = string.Empty;
     public bool isHovered { get; set; }
     public bool isFilesPending { get; set; }
+
+    public event Action<bool>? OnSharingListStateChanged;
+
+    private bool _showSharePopup;
+    public bool ShowSharePopup
+    {
+        get => _showSharePopup;
+        set
+        {
+            _showSharePopup = value;
+            OnSharingListStateChanged?.Invoke(_showSharePopup);
+        }
+    }
 
     public void OpenPopup()
     {
@@ -82,10 +94,12 @@ public class HomeActionsViewModel : ComponentBase
     }
 
     public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }
-
-    public HomeActionsViewModel(LogOnViewModel logOnViewModel)
+    private IStatusAlertService _statusAlertService;
+    public HomeActionsViewModel(LogOnViewModel logOnViewModel, FileShareService fileShareService, IStatusAlertService statusAlertService)
     {
         _logOnViewModel = logOnViewModel;
+        FileShareService = fileShareService;
+        _statusAlertService = statusAlertService;
         KnownFoldersViewModel = New<KnownFoldersViewModel>();
     }
 
@@ -100,7 +114,9 @@ public class HomeActionsViewModel : ComponentBase
         _folderPicker = new FolderPickerWindows();
         FileShareService = new FileShareService();
 
+        //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { UpdateRecentFiles(RecentFilesList); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
+
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); });
 
         KnownFoldersViewModel.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
@@ -132,7 +148,22 @@ public class HomeActionsViewModel : ComponentBase
 
     private async Task ShareKeysWithFileSelectionAsync(IEnumerable<FileDetails> fileNames)
     {
-        IEnumerable<string> selectedRecentFiles = fileNames.Select(f => f.FilePath);
+        IEnumerable<string> selectedRecentFiles = new List<string>();
+        selectedRecentFiles = fileNames.Select(f => f.FilePath);
+
+        if (selectedRecentFiles == null && !selectedRecentFiles.Any())
+        {
+            IEnumerable<FileResult> pickResult = await FilePicker.PickMultipleAsync(new PickOptions
+            {
+                PickerTitle = "Please select files",
+            });
+
+            if (!pickResult.Any())
+            {
+                selectedRecentFiles = pickResult.Select(f => f.FullPath).ToList();
+            }
+        }
+
         IEnumerable<string> encryptableFileNames = selectedRecentFiles.Where(f => New<IDataStore>(f).IsEncryptable());
         if (encryptableFileNames != null && encryptableFileNames.Any())
         {
@@ -160,7 +191,6 @@ public class HomeActionsViewModel : ComponentBase
         await sharingListViewModel.ShareFiles.ExecuteAsync(null);
 
         ShowSharePopup = true;
-        OnSharingListStateChanged?.Invoke();
     }
 
     public void CloseSharePopup()
@@ -203,8 +233,6 @@ public class HomeActionsViewModel : ComponentBase
 
         return isFilesPending = files.Where(ds => ds.IsEncryptable()).Any();
     }
-
-    public event Action? OnSharingListStateChanged;
 
     private void UpdateKnownFolders(IEnumerable<KnownFolder> folders)
     {
@@ -253,29 +281,14 @@ public class HomeActionsViewModel : ComponentBase
         await _fileOperationViewModel.AsyncEncryptionUpgrade.ExecuteAsync(null);
     }
 
-    private bool alwaysOnline;
-
-    public bool AlwaysOffline
-    {
-        get => alwaysOnline;
-        set
-        {
-            if (alwaysOnline != value)
-            {
-                alwaysOnline = value;
-                AlwaysOfflineForFreeUser();
-            }
-        }
-    }
-
     public void AlwaysOfflineForFreeUser()
     {
-        AlwaysOffline = !New<UserSettings>().OfflineMode;
-        New<UserSettings>().OfflineMode = AlwaysOffline;
-        New<AxCryptOnlineState>().IsOffline = AlwaysOffline;
+        bool alwaysOnline = !New<UserSettings>().OfflineMode;
+        New<UserSettings>().OfflineMode = alwaysOnline;
+        New<AxCryptOnlineState>().IsOffline = alwaysOnline;
 
-        ErrorMessage = AlwaysOffline ? "Offline mode is enabled." : "Offline mode is disabled.";
-        New<IPopup>().ShowAsync(PopupButtons.Ok, "Success", ErrorMessage);
+        string alert = alwaysOnline ? "Offline mode is enabled." : "Offline mode is disabled.";
+        _statusAlertService.Success(alert);
     }
 
     public async void RedirectToAccountWebUrl()

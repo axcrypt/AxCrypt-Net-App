@@ -51,7 +51,7 @@
         @foreach (string folder in RecentFoldersViewModel.RecentFoldersList)
         {
             string folderWithoutTrailingSlash = folder.TrimEnd('\\');
-            <div class="rcnt-fld-bx fld-dflt-cl" @onmousedown="(e) => RecentFoldersViewModel.HandleFileClick(e)"
+            <div class="rcnt-fld-bx fld-dflt-cl" @onmousedown="(e) => RecentFoldersViewModel.HandleFolderClick(e)"
                  @ondblclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShowInExplorer)"
                  @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
                 <img class="fldr-img" src="" /><br /><label>@Path.GetFileName(folderWithoutTrailingSlash)</label>
@@ -114,15 +114,24 @@
     {
         await RecentFoldersViewModel.InitializeAsync();
         await base.OnInitializedAsync();
+        RecentFoldersViewModel.OnRecentFoldersStateChanged += UpdateRecentFoldersList;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await RecentFoldersViewModel.InitializeAsync();
+            //await RecentFoldersViewModel.InitializeAsync();
         }
 
         await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private void UpdateRecentFoldersList(bool updateFolders)
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 }

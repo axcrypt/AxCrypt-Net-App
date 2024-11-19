@@ -13,7 +13,6 @@ using AxCrypt.Abstractions;
 using AxCrypt.App.Components.Utility.View;
 
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Core.UI;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -35,10 +34,9 @@ public class RecentFoldersViewModel : ComponentBase
     private bool _showPopup;
     private bool _showUpgradePopup;
 
-    public ObservableCollection<string> RecentFoldersList { get; set; } = new ObservableCollection<string>();
+    public ObservableCollection<string> RecentFoldersList { get; set; }
+
     public IList<string> SelectedRecentFolders { get; set; } = new List<string>();
-    public List<string> SelectedShareKeyFolders { get; set; } = new List<string>();
-    public SharingListViewModel SharingListViewModel { get; set; }
     public SubscriptionLevel SubscriptionLevel { get; set; }
 
     public bool showPopup
@@ -66,8 +64,6 @@ public class RecentFoldersViewModel : ComponentBase
         _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
         FileShareService = new FileShareService();
         _ProcessIndicatorService = processIndicatorService;
-
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.WatchedFolders), (IEnumerable<string> folders) => { UpdateWatchedFolders(folders); });
     }
 
     public async Task InitializeAsync()
@@ -75,37 +71,42 @@ public class RecentFoldersViewModel : ComponentBase
         SubscriptionLevel = _logOnViewModel.SubscriptionLevel;
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
 
-        IEnumerable<string> folders = await RecentFoldersAsync();
-        RecentFoldersList = new ObservableCollection<string>(folders);
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.WatchedFolders), (IEnumerable<string> folders) => { UpdateWatchedFolders(folders); });
     }
 
-    public async Task<IEnumerable<string>> RecentFoldersAsync()
-    {
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
-        {
-            return await Task.FromResult<IEnumerable<string>>(SetWatchedFoldersAsync());
-        }
-    }
+    public event Action<bool>? OnRecentFoldersStateChanged;
 
-    public IEnumerable<string> SetWatchedFoldersAsync()
-    {
-        _mainViewModel.WatchedFoldersEnabled = _mainViewModel.License.Has(LicenseCapability.SecureFolders);
-        if (!_mainViewModel.WatchedFoldersEnabled)
-        {
-            _mainViewModel.WatchedFolders = new string[0];
-            return new List<string>();
-        }
+    private bool _updateList;
 
-        return Resolve.KnownIdentities.LoggedOnWatchedFolders.Select(wf => wf.Path).ToList();
+    public bool UpdateList
+    {
+        get => _updateList;
+        set
+        {
+            _updateList = value;
+            OnRecentFoldersStateChanged.Invoke(_updateList);
+        }
     }
 
     private void UpdateWatchedFolders(IEnumerable<string> folders)
     {
-        if (folders != null && folders.Any())
+        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
         {
-            RecentFoldersList.Clear();
+            if (RecentFoldersList != null && folders.Count() != RecentFoldersList.Count)
+            {
+                RecentFoldersList = new ObservableCollection<string>(folders.Select(fld => fld));
+                UpdateList = true;
+                return;
+            }
 
-            RecentFoldersList = new ObservableCollection<string>(folders.Select(fld => fld));
+            if (folders != null && folders.Any())
+            {
+                RecentFoldersList = new ObservableCollection<string>();
+                RecentFoldersList = new ObservableCollection<string>(folders.Select(fld => fld));
+                return;
+            }
+
+            RecentFoldersList = new ObservableCollection<string>();
         }
     }
 
@@ -131,7 +132,7 @@ public class RecentFoldersViewModel : ComponentBase
         showPopup = false;
     }
 
-    public void HandleFileClick(MouseEventArgs e)
+    public void HandleFolderClick(MouseEventArgs e)
     {
         FolderContextMenu = false;
     }
@@ -145,6 +146,10 @@ public class RecentFoldersViewModel : ComponentBase
 
         switch (contextMenu)
         {
+            case SecuredFolderContextMenu.AddSecuredFolder:
+                await AddSecuredFolder(arg);
+                break;
+
             case SecuredFolderContextMenu.ShareKey:
                 WatchedFolderKeySharing(arg);
                 break;
@@ -165,12 +170,8 @@ public class RecentFoldersViewModel : ComponentBase
                 RemoveWatchedFolders();
                 break;
 
-            case SecuredFolderContextMenu.AddSecuredFolder:
-                await AddSecuredFolder(arg);
-                break;
         }
     }
-
 
     public void SecuredContextMenu(MouseEventArgs e, string folderPath)
     {
@@ -186,20 +187,6 @@ public class RecentFoldersViewModel : ComponentBase
     {
         FolderContextMenu = false;
         await PremiumFeature_ClickAsync(LicenseCapability.SecureFolders, (ss, ee) => { WatchedFoldersAddSecureFolderMenuItem_Click(ss, ee); return Constant.CompletedTask; }, null, eventArgs);
-    }
-
-    public async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
-    {
-        if (_mainViewModel.License.Has(requiredCapability))
-        {
-            if (realHandler != null)
-            {
-                await realHandler(sender, e);
-            }
-            return;
-        }
-
-        showUpgradePopup = true;
     }
 
     private async void WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
@@ -219,7 +206,7 @@ public class RecentFoldersViewModel : ComponentBase
     public IEnumerable<string>? SelectedShareKeyFiles { get; set; }
     public SharingListViewModel SharedListViewModel { get; set; }
 
-    public async Task WatchedFoldersKeySharingAsync(IEnumerable<string> folderPaths)
+    private async Task WatchedFoldersKeySharingAsync(IEnumerable<string> folderPaths)
     {
         if (!folderPaths.Any()) return;
 
@@ -233,23 +220,37 @@ public class RecentFoldersViewModel : ComponentBase
         //await viewModel.ShareFolders.ExecuteAsync(null);
     }
 
-    public async void DecryptPermanently()
+    private async void DecryptPermanently()
     {
         await _mainViewModel.DecryptWatchedFolders.ExecuteAsync(SelectedRecentFolders);
     }
 
-    public async void DecryptTemporarily()
+    private async void DecryptTemporarily()
     {
         await _fileOperationViewModel.DecryptFolders.ExecuteAsync(SelectedRecentFolders);
     }
 
-    public void OpenSelectedFolder()
+    private void OpenSelectedFolder()
     {
         _mainViewModel.OpenSelectedFolder.Execute(SelectedRecentFolders.First());
     }
 
-    public async void RemoveWatchedFolders()
+    private async void RemoveWatchedFolders()
     {
         await _mainViewModel.RemoveWatchedFolders.ExecuteAsync(SelectedRecentFolders);
+    }
+
+    private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
+    {
+        if (_mainViewModel.License.Has(requiredCapability))
+        {
+            if (realHandler != null)
+            {
+                await realHandler(sender, e);
+            }
+            return;
+        }
+
+        showUpgradePopup = true;
     }
 }

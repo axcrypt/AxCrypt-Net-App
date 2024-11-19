@@ -17,6 +17,11 @@ using Microsoft.AspNetCore.Components.Web;
 using AxCrypt.Api.Model;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.Abstractions;
+using AxCrypt.Core.Crypto;
+using Microsoft.UI.Xaml.Controls;
+using System.Globalization;
+using Microsoft.WindowsAppSDK.Runtime;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -30,11 +35,6 @@ public class RecentFilesViewModel : ComponentBase
     [Inject]
     public FileShareService FileShareService { get; set; }
 
-    [Inject]
-    public IFolderPicker FolderPicker { get; set; }
-
-    public KnownFoldersViewModel _knownFoldersViewModel;
-
     public RecentFilesViewModel(LogOnViewModel logOnViewModel)
     {
         _logOnViewModel = logOnViewModel;
@@ -46,8 +46,22 @@ public class RecentFilesViewModel : ComponentBase
     {
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
 
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { UpdateRecentFiles(_mainViewModel.RecentFiles); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { UpdateRecentFilesList(_mainViewModel.RecentFiles); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
+    }
+
+    public event Action<bool>? OnRecentFilesStateChanged;
+
+    private bool _updateList;
+
+    public bool UpdateList
+    {
+        get => _updateList;
+        set
+        {
+            _updateList = value;
+            OnRecentFilesStateChanged.Invoke(_updateList);
+        }
     }
 
     public ObservableCollection<FileDetails> RecentFilesList { get; set; }
@@ -55,8 +69,6 @@ public class RecentFilesViewModel : ComponentBase
     public ObservableCollection<FileDetails> SelectedFiles = new ObservableCollection<FileDetails>();
 
     private FileDetails SelectedFile = new FileDetails();
-
-    public event Action? OnRecentFilesStateChanged;
 
     public bool IsHeaderCheckboxChecked { get; set; } = false;
 
@@ -80,7 +92,7 @@ public class RecentFilesViewModel : ComponentBase
             SelectedFiles.Add(fileDetails);
         }
 
-        OnRecentFilesStateChanged?.Invoke();
+        OnRecentFilesStateChanged?.Invoke(UpdateList);
     }
 
     public void SelectSingleFile(ChangeEventArgs e, FileDetails selectedFile)
@@ -90,12 +102,12 @@ public class RecentFilesViewModel : ComponentBase
         if (!isChecked)
         {
             SelectedFiles.Remove(selectedFile);
-            OnRecentFilesStateChanged?.Invoke();
+            OnRecentFilesStateChanged?.Invoke(UpdateList);
             return;
         }
 
         SelectedFiles.Add(selectedFile);
-        OnRecentFilesStateChanged?.Invoke();
+        OnRecentFilesStateChanged?.Invoke(UpdateList);
     }
 
     public void HandleFileClick(MouseEventArgs e, FileDetails fileDetails)
@@ -203,29 +215,27 @@ public class RecentFilesViewModel : ComponentBase
 
     private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
     {
-        RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
-    }
+        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        {
+            if (RecentFilesList != null && files.Count() != RecentFilesList.Count)
+            {
+                RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
+                UpdateList = true;
+                return;
+            }
 
-    public void UpgradeSubscription()
-    {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://axcrypt.net/pricing/"));
+            if (RecentFilesList == null && files.Any())
+            {
+                RecentFilesList = new ObservableCollection<FileDetails>();
+                RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
+                return;
+            }
+
+            RecentFilesList = new ObservableCollection<FileDetails>();
+        }
     }
 
     public bool showUpgradePopup = false;
-
-    private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
-    {
-        if (_mainViewModel.License.Has(requiredCapability))
-        {
-            if (realHandler != null)
-            {
-                await realHandler(sender, e);
-            }
-            return;
-        }
-
-        showUpgradePopup = true;
-    }
 
     public async Task OnContextMenuAction(EventArgs args, SecuredFilesContextMenu securedFilesContextMenu)
     {
@@ -266,7 +276,7 @@ public class RecentFilesViewModel : ComponentBase
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(SelectedFiles.Select(f => f.FilePath));
     }
 
-    public async void OpenSecuredRecentFiles(EventArgs args, IEnumerable<FileDetails> selectedFiles)
+    public async void OpenSecuredMouseDoubleClick(EventArgs args, IEnumerable<FileDetails> selectedFiles)
     {
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(selectedFiles.Select(f => f.FilePath));
     }
@@ -304,7 +314,7 @@ public class RecentFilesViewModel : ComponentBase
         }
 
         await ShareKeysAsync(fileSelectionArgs.SelectedFiles);
-        OnRecentFilesStateChanged?.Invoke();
+        OnRecentFilesStateChanged?.Invoke(UpdateList);
     }
 
     public SharingListViewModel SharedListViewModel { get; set; }
@@ -323,13 +333,6 @@ public class RecentFilesViewModel : ComponentBase
 
         IEnumerable<string> encryptedFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncrypted());
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        // using (KeyShareDialog dialog = new KeyShareDialog(this, viewModel, fileNames))
-        // {
-        //     if (dialog.ShowDialog(this) != DialogResult.OK)
-        //     {
-        //         return;
-        //     }
-        // }
 
         FileShareService.SetSelectedFilesOrFolders(fileNames, viewModel);
         SelectedShareKeyFiles = fileNames.Select(f => f).ToList();
@@ -363,30 +366,129 @@ public class RecentFilesViewModel : ComponentBase
         await _mainViewModel.RemoveRecentFiles.ExecuteAsync(RecentFilesList.Select(files => files.FilePath));
     }
 
-    public async Task<IList<FileDetails>> LoadRecentFiles()
+    private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        if (_mainViewModel.License.Has(requiredCapability))
         {
-            IList<FileDetails> recentFiles = new List<FileDetails>();
+            if (realHandler != null)
+            {
+                await realHandler(sender, e);
+            }
+            return;
+        }
 
+        showUpgradePopup = true;
+    }
+
+    private void UpdateRecentFilesList(IEnumerable<ActiveFile> recentFiles)
+    {
+        if (New<UserSettings>().HideRecentFiles)
+        {
+            return;
+        }
+
+        int i = 0;
+        foreach (ActiveFile file in recentFiles)
+        {
             try
             {
-                IEnumerable<ActiveFile> files = _mainViewModel.SetRecentFiles();
-
-                if (files == null)
-                {
-                    return recentFiles;
-                }
-
-                recentFiles = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
-
-                return recentFiles;
+                RecentFilesList.Add(UpdateListViewItem(file));
+                ++i;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error fetching recent files: {ex.Message}");
-                return recentFiles;
+                ex.ReportAndDisplay();
             }
         }
+    }
+
+    private FileDetails UpdateListViewItem(ActiveFile activeFile)
+    {
+        FileDetails fileDetails = new FileDetails();
+        fileDetails.FileName = activeFile.DecryptedFileInfo.Name;
+        fileDetails.FileSize = activeFile.Size();
+        fileDetails.FileExtension = GetFileExtention(activeFile.DecryptedFileInfo.Name);
+
+        fileDetails.FilePath = activeFile.EncryptedFileInfo.FullName;
+        fileDetails.LastAccessedDate = activeFile.Properties.LastActivityTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture);
+        fileDetails.LastModifiedDate = activeFile.EncryptedFileInfo.LastWriteTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture);
+
+        LogOnIdentity decryptIdentity = ValidateActiveFileIdentity(activeFile.Identity);
+        IAxCryptDocument document = activeFile.EncryptedFileInfo.GetAxCryptDocument(decryptIdentity);
+        UpdateStatusDependentPropertiesOfListViewItem(activeFile, document.IsKeyShared(), document.IsMasterKeyShared());
+
+        if (!activeFile.IsShared && !activeFile.IsMasterKeyShared)
+        {
+            return fileDetails;
+        }
+
+        string ownAccount = decryptIdentity.UserEmail.Address;
+        EncryptedProperties properties = EncryptedProperties.Create(activeFile.EncryptedFileInfo, decryptIdentity);
+        if (properties == null)
+        {
+            return fileDetails;
+        }
+
+        fileDetails.SharedWith = properties.SharedKeyHolders.Select(key => key.Email.Address).Where(address => address != ownAccount).ToList().Any() ? properties.SharedKeyHolders.Select(key => key.Email.Address).Where(address => address != ownAccount).ToList() : new List<string>();
+
+        try
+        {
+            if (activeFile.Properties.CryptoId != Guid.Empty)
+            {
+                fileDetails.Algorithm = Resolve.CryptoFactory.Create(activeFile.Properties.CryptoId).Name;
+            }
+
+            return fileDetails;
+        }
+        catch (ArgumentException aex)
+        {
+            New<IReport>().Exception(aex);
+        }
+
+        return fileDetails;
+    }
+
+    public string GetFileExtention(string fileExt)
+    {
+        if (string.IsNullOrEmpty(fileExt)) return string.Empty;
+
+        string extention = Path.GetExtension(fileExt);
+
+        return extention.StartsWith(".") ? extention.Substring(1) : extention;
+    }
+
+    private static LogOnIdentity ValidateActiveFileIdentity(LogOnIdentity activeFileIdentity)
+    {
+        if (activeFileIdentity != LogOnIdentity.Empty)
+        {
+            return activeFileIdentity;
+        }
+
+        return New<KnownIdentities>().DefaultEncryptionIdentity;
+    }
+
+    private static void UpdateStatusDependentPropertiesOfListViewItem(ActiveFile activeFile, bool isShared, bool isMasterKeyShared)
+    {
+        if (activeFile.IsDecrypted)
+        {
+            return;
+        }
+
+        if (isShared && isMasterKeyShared)
+        {
+            return;
+        }
+
+        if (isShared)
+        {
+            return;
+        }
+
+        if (isMasterKeyShared)
+        {
+            return;
+        }
+
+        return;
     }
 }

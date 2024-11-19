@@ -255,7 +255,8 @@ public class AccountViewModel
     {
         if (_mainViewModel.DecryptedFiles.Any())
         {
-            await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null); return;
+            await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null); 
+            return;
         }
         await new ApplicationManager().ClearAllSettings();
         await ShutDownAnd(New<IUIThread>().RestartApplication);
