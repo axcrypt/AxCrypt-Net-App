@@ -1,5 +1,4 @@
 using AxCrypt.App.Components.Models;
-using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Components.Services;
 using AxCrypt.App.Components.ViewModels;
 using AxCrypt.Content;
@@ -15,13 +14,11 @@ using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Core.IO;
 using Microsoft.AspNetCore.Components.Web;
 using AxCrypt.Api.Model;
-
-using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Abstractions;
 using AxCrypt.Core.Crypto;
-using Microsoft.UI.Xaml.Controls;
 using System.Globalization;
-using Microsoft.WindowsAppSDK.Runtime;
+
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -44,8 +41,6 @@ public class RecentFilesViewModel : ComponentBase
 
     public void OnInitializedAsync()
     {
-        _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
-
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { UpdateRecentFilesList(_mainViewModel.RecentFiles); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
     }
@@ -151,24 +146,11 @@ public class RecentFilesViewModel : ComponentBase
 
     public SubscriptionLevel SubscriptionLevel { get; set; }
 
-
-    public bool Upgradepop = false;
-
     public List<string> SelectedShareKeyFiles { get; set; }
+
     public SharingListViewModel SharingListViewModel { get; set; }
 
     public bool ShowSharePopup { get; set; }
-
-    public void ClosePopup()
-    {
-        ShowSharePopup = false;
-    }
-
-    public bool ShowInvitePopup { get; set; }
-    public void OpenPopup()
-    {
-        ShowInvitePopup = !ShowInvitePopup;
-    }
 
     public bool isNameAscending { get; set; }
     public bool isSizeAscending { get; set; }
@@ -234,8 +216,6 @@ public class RecentFilesViewModel : ComponentBase
             RecentFilesList = new ObservableCollection<FileDetails>();
         }
     }
-
-    public bool showUpgradePopup = false;
 
     public async Task OnContextMenuAction(EventArgs args, SecuredFilesContextMenu securedFilesContextMenu)
     {
@@ -351,6 +331,11 @@ public class RecentFilesViewModel : ComponentBase
         await viewModel.ShareFiles.ExecuteAsync(null);
     }
 
+    public void ClosePopup()
+    {
+        ShowSharePopup = false;
+    }
+
     private async void ShowInFolder()
     {
         await _fileOperationViewModel.ShowInFolder.ExecuteAsync(SelectedFiles.Select(f => f.FilePath));
@@ -377,7 +362,7 @@ public class RecentFilesViewModel : ComponentBase
             return;
         }
 
-        showUpgradePopup = true;
+        _logOnViewModel.UpgradeDialog.Show();
     }
 
     private void UpdateRecentFilesList(IEnumerable<ActiveFile> recentFiles)

@@ -1,37 +1,60 @@
-﻿@using Microsoft.JSInterop
+﻿@using AxCrypt.App.Components.Models
+@using Microsoft.JSInterop
+
 @using static AxCrypt.Abstractions.TypeResolve
+
+@inject LogOnViewModel LogOnModel
+
 @inject IJSRuntime JS
 
-<div id="modal-dialog5" class="modalDialog" style="@(showModal ? "display: block;" : "display: none;")">
-    <div id="UpgradePopup" class="upg-popup text-center">
-        <div class="close-img" @onclick="CloseModal"></div>
-        <div>
-            <img class="AES256-img" src="" alt="premium-icon" /><br />
-            <p style="padding-top:15px;">
-                Upgrade to have <strong>higher security level!</strong>
-            </p>
-            <div class="center-column" style="padding-top:15px;">
-                <button class="btn-large font-medium grn-bg whte-clr" @onclick="UpgradeSubscription">
-                    Upgrade
-                </button>
-                <button class="btn-large font-medium button cancel" @onclick="CloseModal">
-                    Later
-                </button>
+@if (IsVisible)
+{
+    <div id="modal-dialog5" class="modalDialog">
+        <div id="UpgradePopup" class="upg-popup text-center">
+            <div class="close-img" @onclick="ClosePopup"></div>
+            <div>
+                <img class="AES256-img" src="" alt="premium-icon" /><br />
+                <p style="padding-top:15px;">
+                    Upgrade to have <strong>higher security level!</strong>
+                </p>
+                <div class="center-column" style="padding-top:15px;">
+                    <button class="btn-large font-medium grn-bg whte-clr" @onclick="UpgradeSubscription">
+                        Upgrade
+                    </button>
+                    <button class="btn-large font-medium button cancel" @onclick="ClosePopup">
+                        Later
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+}
 @code {
+    private bool IsVisible;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        LogOnModel.UpgradeDialog.OnDialogVisibilityChanged += UpdateUpgradeDialogState;
+    }
+
     private void UpgradeSubscription()
     {
         New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/"));
+        ClosePopup();
     }
 
-    private bool showModal = true;
-
-    private void CloseModal()
+    private void UpdateUpgradeDialogState(bool canShowUpgradeDialog)
     {
-        showModal = !showModal;
+        InvokeAsync(() =>
+        {
+            IsVisible = canShowUpgradeDialog;
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void ClosePopup()
+    {
+        LogOnModel.UpgradeDialog.Close();
     }
 }

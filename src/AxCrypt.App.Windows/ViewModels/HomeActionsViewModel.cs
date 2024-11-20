@@ -76,11 +76,6 @@ public class HomeActionsViewModel : ComponentBase
         }
     }
 
-    public void OpenPopup()
-    {
-        ShowInvitePopup = !ShowInvitePopup;
-    }
-
     public void ShowPopup(string element)
     {
         //isHovered = true;
@@ -95,6 +90,7 @@ public class HomeActionsViewModel : ComponentBase
 
     public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }
     private IStatusAlertService _statusAlertService;
+
     public HomeActionsViewModel(LogOnViewModel logOnViewModel, FileShareService fileShareService, IStatusAlertService statusAlertService)
     {
         _logOnViewModel = logOnViewModel;
@@ -291,6 +287,16 @@ public class HomeActionsViewModel : ComponentBase
         _statusAlertService.Success(alert);
     }
 
+    public async void InviteUser(EventArgs e)
+    {
+        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { _logOnViewModel.InviteDialog.Show(); }, null, e);
+    }
+
+    public void UpgradeDialog()
+    {
+        _logOnViewModel.UpgradeDialog.Show();
+    }
+
     public async void RedirectToAccountWebUrl()
     {
         LogOnIdentity identity = New<KnownIdentities>().DefaultEncryptionIdentity;
@@ -330,7 +336,7 @@ public class HomeActionsViewModel : ComponentBase
             return;
         }
 
-        showUpgradePopup = true;
+        _logOnViewModel.UpgradeDialog.Show();
     }
 
     public void Dispose()

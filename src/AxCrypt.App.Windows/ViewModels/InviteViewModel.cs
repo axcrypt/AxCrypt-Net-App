@@ -1,6 +1,8 @@
 ﻿using AxCrypt.Core.Extensions;
 using AxCrypt.Api.Model;
 using AxCrypt.Core.UI;
+using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.Core.Crypto.Asymmetric;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -8,14 +10,15 @@ namespace AxCrypt.App.Windows.ViewModels;
 
 public class InviteViewModel
 {
-    public InviteViewModel()
+    private IStatusAlertService _alerService;
+
+    public InviteViewModel(IStatusAlertService statusAlertService)
     {
+        _alerService = statusAlertService;
     }
 
-    public bool IsSuccess { get; private set; }
-    public string? ErrorMessage { get; private set; }
+    public string? ErrorMessage { get;  set; }
     public string? InvitedUser { get; set; }
-    public bool ShowInvitePopup { get; private set; }
 
     public void OnInputFocus()
     {
@@ -24,34 +27,47 @@ public class InviteViewModel
 
     public async Task InviteFriend()
     {
-        if (string.IsNullOrEmpty(InvitedUser) || InvitedUser != "")
+        ErrorMessage = string.Empty;
+
+        if (string.IsNullOrEmpty(InvitedUser))
         {
             ErrorMessage = "Please enter a valid email.";
             return;
         }
 
-        ErrorMessage = string.Empty;
+        bool isInvited = await EnsureUserAccountStatusAndGetInvitedUserPublicKey();
+        if (isInvited)
+        {
+            _alerService.Success($"You send invitation to {InvitedUser} successfully");
+            InvitedUser = "";
+            ErrorMessage = "";
+        }
 
-        await EnsureUserAccountStatusAndGetInvitedUserPublicKey();
-        ShowInvitePopup = false;
-        IsSuccess = true;
         return;
     }
 
-    private async Task<IEnumerable<Core.Crypto.Asymmetric.UserPublicKey>> EnsureUserAccountStatusAndGetInvitedUserPublicKey()
+    private async Task<bool> EnsureUserAccountStatusAndGetInvitedUserPublicKey()
     {
-        EmailAddress invitedEmail = EmailAddress.Parse(InvitedUser);
-        AccountStatus accountStatus = await invitedEmail.GetValidEmailAccountStatusAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
+        try
+        {
+            EmailAddress invitedEmail = EmailAddress.Parse(InvitedUser);
+            AccountStatus accountStatus = await invitedEmail.GetValidEmailAccountStatusAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
 
-        IEnumerable<EmailAddress> invitedEmails = new EmailAddress[] { invitedEmail };
-        return await invitedEmails.ToAvailableKnownPublicKeysAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
-    }
+            IEnumerable<EmailAddress> invitedEmails = new EmailAddress[] { invitedEmail };
+            IEnumerable<UserPublicKey> inviteKey = await invitedEmails.ToAvailableKnownPublicKeysAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
+            if (inviteKey != null && inviteKey.Any())
+            {
+                return true;
+            }
+        }
 
-    public void CloseSuccessPopup()
-    {
-        IsSuccess = false;
-        InvitedUser = string.Empty;
-        ShowInvitePopup = true;
+        catch (Exception ex)
+        {
+            ErrorMessage = $"{ex.Message}";
+            return false;
+        }
+
+        return true;
     }
 }
 

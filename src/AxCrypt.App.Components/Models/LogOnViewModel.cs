@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Components.Services.UI;
 using AxCrypt.App.Components.Utility;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
@@ -20,6 +21,8 @@ public class LogOnViewModel : ViewModelBase
     public LogOnViewModel()
     {
         License = New<LicensePolicy>().Capabilities;
+        InviteDialog = new CommonDialogService();
+        UpgradeDialog = new CommonDialogService();
     }
 
     public void ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
@@ -41,10 +44,13 @@ public class LogOnViewModel : ViewModelBase
 
     public FileOperationViewModel FileOperationViewModel { get { return GetProperty<FileOperationViewModel>(nameof(FileOperationViewModel)); } set { SetProperty(nameof(FileOperationViewModel), value); } }
 
-
     public DialogResult PageResult { get { return GetProperty<DialogResult>(nameof(PageResult)); } set { SetProperty(nameof(PageResult), value); } }
 
     public LicenseCapabilities License { get { return GetProperty<LicenseCapabilities>(nameof(License)); } set { SetProperty(nameof(License), value); } }
+
+    public CommonDialogService InviteDialog { get { return GetProperty<CommonDialogService>(nameof(InviteDialog)); } set { SetProperty(nameof(InviteDialog), value); } }
+
+    public CommonDialogService UpgradeDialog { get { return GetProperty<CommonDialogService>(nameof(UpgradeDialog)); } set { SetProperty(nameof(UpgradeDialog), value); } }
 
     public SubscriptionLevel SubscriptionLevel
     {

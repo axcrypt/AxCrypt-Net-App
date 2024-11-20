@@ -77,10 +77,6 @@
                             </div>
                         </div>
                     }
-                    @if (viewModel.UpgradeToShare)
-                    {
-                        <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
-                    }
                 </div>
             }
             else
@@ -220,13 +216,9 @@
                     <label class="unlck-txt">
                         Unlock our amazing <span>features</span> developed to <span>empower your security!</span>
                     </label>
-                    <button class="upgrd-btn font-medium btn-large" @onclick="() => viewModel.UpgradePopup = Utility.ToggleUpgradePopup(viewModel.UpgradePopup)" style="height: 37px;"> Upgrade now</button>
+                    <button class="upgrd-btn font-medium btn-large" @onclick="viewModel.UpgradeDialog" style="height: 37px;"> Upgrade now</button>
                 </div>
             </div>
-            @if (viewModel.UpgradePopup)
-            {
-                <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
-            }
         }
     </div>
 </div>
@@ -282,18 +274,14 @@
                     <img class="ico-offln" src="" alt="hand-img" />
                     <span class="text-size text-style">Always offline</span>
                 </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="viewModel.OpenPopup">
+                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>viewModel.InviteUser(e)">
                     <img class="ico-invtfrd" src="" alt="hand-img" />
                     <span class="text-size text-style">Invite friend</span>
                 </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="() => viewModel.UpgradeToEncrypt = Utility.ToggleUpgradePopup(viewModel.UpgradeToEncrypt)">
+                <div class="mre-actn-box atn-bgclr" @onclick="viewModel.UpgradeDialog">
                     <img class="ico-apikey" src="" alt="hand-img" />
                     <span class="text-size text-style">Upgrade files to AES-256</span>
                 </div>
-                @if (viewModel.UpgradeToEncrypt)
-                {
-                    <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
-                }
             }
         </div>
     </div>
@@ -301,17 +289,6 @@
     {
         <div class="modalDialog sharekey-popup" id="sharekey">
             <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList="viewModel.SelectedShareKeyFiles" SharingListViewModel="viewModel.SharingListViewModel" OnClose="viewModel.CloseSharePopup" />
-        </div>
-    }
-    @if (viewModel.ShowInvitePopup)
-    {
-        <AxCrypt.App.Windows.Components.Pages.PopupDialog.InvitePopup />
-    }
-
-    @if (viewModel.showUpgradePopup)
-    {
-        <div class="modalDialog" id="upgrade-popup">
-            <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
         </div>
     }
 </div>
@@ -332,6 +309,7 @@
 @code {
     [Parameter]
     public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
+
     public const string _ENABLEDTOOLSTRIPBACKCOLOR = "#FFFFFF";
 
     protected override void OnInitialized()

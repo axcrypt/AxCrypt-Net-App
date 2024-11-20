@@ -146,13 +146,10 @@
             <form id="inactivityForm">
                 @foreach (int timeout in appSettingsViewModel.InactivityTimeoutOptions)
                 {
-                    <input type="radio" id="timeout-@timeout"
-                           name="inactivity"
-                           value="@timeout"
-                           checked="@(timeout == appSettingsViewModel.InactivitySignOut)"
-                           @onclick="(e) => appSettingsViewModel.OnInactivityContextMenu(timeout, e)" />
-                    <label for="timeout-@timeout">@((timeout == 0) ? "Disable" : $"{timeout} minutes")</label>
-                    <br />
+                    <input type="radio" id="timeout-@timeout" name="inactivity" value="@timeout" 
+                    checked="@(timeout == appSettingsViewModel.InactivitySignOut)" 
+                    @onclick="(e) => appSettingsViewModel.OnInactivityContextMenu(timeout, e)" />
+                    <label for="timeout-@timeout">@((timeout == 0) ? "Disable" : $"{timeout} minutes")</label><br />
                 }
             </form>
         </div>
@@ -259,10 +256,6 @@
     </div>
 }
 
-@if (appSettingsViewModel.InvitePopup)
-{
-    <AxCrypt.App.Windows.Components.Pages.PopupDialog.InvitePopup />
-}
 @if (appSettingsViewModel.ShowVersion)
 {
     <div id="modal-dialog1" class="modalDialog" style="display: block;">

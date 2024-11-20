@@ -1,5 +1,4 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
 using AxCrypt.App.Components.ViewModels;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Service;
@@ -15,9 +14,9 @@ using AxCrypt.Content;
 using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.Core.Runtime;
 using AxCrypt.App.Windows.Models;
+using AxCrypt.App.Components.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Components.Models;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -40,6 +39,7 @@ public class AppSettingsViewModel
         AlwaysOffline = New<UserSettings>().OfflineMode;
         HideRecentFiles = New<UserSettings>().HideRecentFiles;
         InactivitySignOut = New<UserSettings>().InactivitySignOutTime.Minutes;
+        IncludeSubfolders = New<UserSettings>().FolderOperationMode == FolderOperationMode.IncludeSubfolders;
     }
 
     public void Initialized()
@@ -65,9 +65,6 @@ public class AppSettingsViewModel
     public double SelectedOption { get; set; } = 0;
     public bool DebugPopup { get; set; }
 
-    protected bool isHovered = false;
-    protected string hoveredElement = string.Empty;
-
     public bool HideRecentFiles { get; set; }
 
     public bool ShowAdvancedOptions { get; set; }
@@ -76,15 +73,7 @@ public class AppSettingsViewModel
 
     public int InactivitySignOut { get; set; }
 
-    public bool IsChecked(int value) => SelectedOption == value;
-
-    protected void ShowPopup(string element) => isHovered = true;
-
-    protected void HidePopup() => isHovered = false;
-
     public void ToggleDebugPopup() => DebugPopup = !DebugPopup;
-
-    public void ToggleInvitePopup() => InvitePopup = !InvitePopup;
 
     public void ToggleHideRecentFiles() => SetRecentFilesHiddenState(!New<UserSettings>().HideRecentFiles);
 
@@ -157,6 +146,7 @@ public class AppSettingsViewModel
         if (_mainViewModel.FolderOperationMode == FolderOperationMode.IncludeSubfolders)
         {
             _mainViewModel.FolderOperationMode = FolderOperationMode.SingleFolder;
+            IncludeSubfolders = false;
             return;
         }
 
@@ -169,6 +159,7 @@ public class AppSettingsViewModel
         if (result == PopupButtons.Ok)
         {
             _mainViewModel.FolderOperationMode = FolderOperationMode.IncludeSubfolders;
+            IncludeSubfolders = true;
         }
     }
 
@@ -208,7 +199,7 @@ public class AppSettingsViewModel
 
     public async void InviteUser(EventArgs e)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { InvitePopup = !InvitePopup; }, null, e);
+        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { _logOnViewModel.InviteDialog.Show(); }, null, e);
     }
 
     public async Task ToggleAdvancedOption()
@@ -260,49 +251,11 @@ public class AppSettingsViewModel
         }
     }
 
-    private bool includeSubfolders;
+    public bool IncludeSubfolders { get; set; }
 
-    public bool IncludeSubfolders
-    {
-        get => includeSubfolders;
-        set
-        {
-            if (includeSubfolders != value)
-            {
-                includeSubfolders = value;
-                IncludeSubFoldersChanged();
-            }
-        }
-    }
+    public bool AlwaysOffline { get; set; }
 
-    private bool alwaysOnline;
-
-    public bool AlwaysOffline
-    {
-        get => alwaysOnline;
-        set
-        {
-            if (alwaysOnline != value)
-            {
-                alwaysOnline = value;
-                MakeAlwaysOffline();
-            }
-        }
-    }
-
-    private bool autoUpgradeToAES256;
-
-    public bool AutoUpgradeToAES256
-    {
-        get => autoUpgradeToAES256;
-        set
-        {
-            if (autoUpgradeToAES256 != value)
-            {
-                autoUpgradeToAES256 = value;
-            }
-        }
-    }
+    public bool AutoUpgradeToAES256 { get; set; }
 
     public async void CheckAxCryptVersionAsync()
     {
@@ -440,25 +393,18 @@ public class AppSettingsViewModel
         }
     }
 
-    public async void IncludeSubFoldersChanged()
-    {
-        await _mainViewModel.SetFolderOperationMode(IncludeSubfolders ? FolderOperationMode.IncludeSubfolders : FolderOperationMode.SingleFolder);
-    }
-
     public void MakeAlwaysOffline()
     {
         New<UserSettings>().OfflineMode = AlwaysOffline;
 
         if (AlwaysOffline)
         {
-            New<AxCryptOnlineState>().IsOffline = true;
+            New<AxCryptOnlineState>().IsOffline = AlwaysOffline;
             return;
         }
 
-        New<AxCryptOnlineState>().IsOffline = false;
+        New<AxCryptOnlineState>().IsOffline = !AlwaysOffline;
     }
-
-    private bool showUpgradePopup = false;
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {
@@ -471,6 +417,6 @@ public class AppSettingsViewModel
             return;
         }
 
-        showUpgradePopup = true;
+        _logOnViewModel.UpgradeDialog.Show();
     }
 }

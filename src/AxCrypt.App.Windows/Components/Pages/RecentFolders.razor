@@ -102,13 +102,6 @@
     </div>
 }
 
-@if (RecentFoldersViewModel.showUpgradePopup)
-{
-    <div class="modalDialog" id="upgrade-popup">
-        <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
-    </div>
-}
-
 @code {
     protected override async Task OnInitializedAsync()
     {

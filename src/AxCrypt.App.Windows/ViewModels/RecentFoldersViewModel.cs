@@ -45,12 +45,6 @@ public class RecentFoldersViewModel : ComponentBase
         set => _showPopup = value;
     }
 
-    public bool showUpgradePopup
-    {
-        get => _showUpgradePopup;
-        set => _showUpgradePopup = value;
-    }
-
     public bool FolderContextMenu
     {
         get => _folderContextMenu;
@@ -251,6 +245,6 @@ public class RecentFoldersViewModel : ComponentBase
             return;
         }
 
-        showUpgradePopup = true;
+        _logOnViewModel.UpgradeDialog.Show();
     }
 }

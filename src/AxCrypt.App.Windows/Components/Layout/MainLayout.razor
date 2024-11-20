@@ -51,6 +51,8 @@
             <div>
                 <AxCrypt.App.Windows.Components.Pages.Main.TopMenu />
             </div>
+            <AxCrypt.App.Windows.Components.Pages.PopupDialog.InvitePopup />
+            <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
         }
 
         @Body
@@ -76,8 +78,8 @@
 
     private void UpdateSignInPageState(bool canShowSignInPage)
     {
-         InvokeAsync(() =>
-         {
+        InvokeAsync(() =>
+        {
             CanShowSignInPage = canShowSignInPage;
             StateHasChanged(); // Refresh UI
         });

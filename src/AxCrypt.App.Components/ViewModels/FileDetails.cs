@@ -160,12 +160,10 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
 
     public string GetFileExtention(string fileExt)
     {
-        if (string.IsNullOrEmpty(fileExt))
-            return string.Empty;
+        if (string.IsNullOrEmpty(fileExt)) return string.Empty;
 
         string extention = Path.GetExtension(fileExt);
 
         return extention.StartsWith(".") ? extention.Substring(1) : extention;
-
     }
 }

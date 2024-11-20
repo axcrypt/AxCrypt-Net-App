@@ -374,7 +374,7 @@ public partial class App : Application
 
     private void InitializeMouseDownFilter()
     {
-        New<MouseDownFilter>().FormClicked += AxCryptMainForm_ClickAsync;
+        //New<MouseDownFilter>().FormClicked += AxCryptMainForm_ClickAsync;
     }
 
     private async void AxCryptMainForm_ClickAsync(object sender, EventArgs e)

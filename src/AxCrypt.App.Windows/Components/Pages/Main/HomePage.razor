@@ -161,15 +161,6 @@
             <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList="RecentFilesViewModel.SelectedShareKeyFiles" IsFolder="false" OnClose="RecentFilesViewModel.ClosePopup" />
         </div>
     }
-    @if (RecentFilesViewModel.ShowInvitePopup)
-    {
-        <AxCrypt.App.Windows.Components.Pages.PopupDialog.InvitePopup />
-    }
-
-    @if (RecentFilesViewModel.showUpgradePopup)
-    {
-        <Upgrade />
-    }
 </div>
 
 @code {
