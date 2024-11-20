@@ -1,25 +1,12 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Data
-@using AxCrypt.App.Components.Services.Interface
 @using AxCrypt.App.Components.ViewModels
-@using AxCrypt.App.Windows.Helpers
-@using AxCrypt.App.Windows.Services
 @using AxCrypt.App.Windows.ViewModels
-@using AxCrypt.Common
 @using AxCrypt.Content
 @using AxCrypt.Core
-@using AxCrypt.Core.Crypto
-@using AxCrypt.Core.Extensions
-@using AxCrypt.Core.IO
-@using AxCrypt.Core.Runtime
-@using AxCrypt.Core.Service
-@using AxCrypt.Core.Session
 @using AxCrypt.Core.UI
-@using AxCrypt.Core.UI.ViewModel
-@using Microsoft.AspNetCore.Components.Forms
 @using System.Collections.ObjectModel
 
-@using static AxCrypt.Abstractions.TypeResolve
 @inject HomeActionsViewModel? viewModel
 @inject IJSRuntime jsRunTime
 
@@ -222,12 +209,7 @@
         }
     </div>
 </div>
-@if (viewModel.ShowSharePopup)
-{
-    <div class="modalDialog sharekey-popup" id="sharekey">
-        <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList=@viewModel.SelectedShareKeyFiles SharingListViewModel="@viewModel.SharingListViewModel" OnClose="viewModel.CloseSharePopup" />
-    </div>
-}
+
 <div class="mre-act-sec">
     @if (viewModel.SubscriptionLevel != SubscriptionLevel.Free)
     {
@@ -285,12 +267,6 @@
             }
         </div>
     </div>
-    @if (viewModel.shareKey)
-    {
-        <div class="modalDialog sharekey-popup" id="sharekey">
-            <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList="viewModel.SelectedShareKeyFiles" SharingListViewModel="viewModel.SharingListViewModel" OnClose="viewModel.CloseSharePopup" />
-        </div>
-    }
 </div>
 <div>
     @if (Utility.IsMainMenuHidden)
@@ -316,7 +292,6 @@
     {
         viewModel.Initialized();
         base.OnInitialized();
-        viewModel.OnSharingListStateChanged += UpdateShareKeyPage;
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -350,7 +325,7 @@
         }
     }
 
-    void UpdateShareKeyPage(bool showPopup = false)
+    void UpdateShareKeyDialog(bool showPopup = false)
     {
         InvokeAsync(() =>
         {

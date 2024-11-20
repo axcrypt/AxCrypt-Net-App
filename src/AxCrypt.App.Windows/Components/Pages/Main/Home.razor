@@ -1,21 +1,10 @@
 ﻿@page "/"
 
-@using AxCrypt.Abstractions
-@using AxCrypt.Api.Model;
 @using AxCrypt.App.Components.Data
 @using AxCrypt.App.Components.Models
-@using AxCrypt.App.Components.Services
-@using AxCrypt.App.Windows.Helpers
 @using AxCrypt.App.Windows.Services
-@using AxCrypt.App.Windows.ViewModels
-@using AxCrypt.Common;
-@using AxCrypt.Content
-@using AxCrypt.Core.Crypto
-@using AxCrypt.Core.Runtime
-@using AxCrypt.Core.Service
-@using AxCrypt.Core.Session
-@using AxCrypt.Core.UI
-@using Microsoft.Maui.Devices;
+@using AxCrypt.Common
+
 @using static AxCrypt.Abstractions.TypeResolve;
 
 @inject LogOnViewModel LogOnViewModel
@@ -43,6 +32,7 @@
     {
         <HomePage />
     }
+
 </div>
 
 
@@ -74,16 +64,16 @@
             finally
             {
                 IsLoading = false;
-                StateHasChanged();
+                //StateHasChanged();
             }
         }
     }
 
     protected override void OnInitialized()
     {
+        base.OnInitialized();
         HomeUserService.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdatePageState;
-        base.OnInitialized();
     }
 
     private void UpdatePageState(bool canShowSignInPage = true)

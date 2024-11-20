@@ -23,9 +23,10 @@ public class LogOnViewModel : ViewModelBase
         License = New<LicensePolicy>().Capabilities;
         InviteDialog = new CommonDialogService();
         UpgradeDialog = new CommonDialogService();
+        ShareKeyDialog = new CommonDialogService();
     }
 
-    public void ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
+    public  void ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
     {
         LogOnAccountModel = logOnAccountModel;
         IsVisible = true;
@@ -37,7 +38,7 @@ public class LogOnViewModel : ViewModelBase
         IsVisible = false;
 
         //mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { IsVisible = !loggedOn; });
-        mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnLogOnDialogVisibilityChanged?.Invoke(_isVisible); } });
+        mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnSubscriptionChanged?.Invoke(); } });
     }
 
     public MainViewModel MainViewModel { get { return GetProperty<MainViewModel>(nameof(MainViewModel)); } set { SetProperty(nameof(MainViewModel), value); } }
@@ -51,6 +52,8 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService InviteDialog { get { return GetProperty<CommonDialogService>(nameof(InviteDialog)); } set { SetProperty(nameof(InviteDialog), value); } }
 
     public CommonDialogService UpgradeDialog { get { return GetProperty<CommonDialogService>(nameof(UpgradeDialog)); } set { SetProperty(nameof(UpgradeDialog), value); } }
+   
+    public CommonDialogService ShareKeyDialog { get { return GetProperty<CommonDialogService>(nameof(ShareKeyDialog)); } set { SetProperty(nameof(ShareKeyDialog), value); } }
 
     public SubscriptionLevel SubscriptionLevel
     {
@@ -63,6 +66,8 @@ public class LogOnViewModel : ViewModelBase
     public LogOnAccountViewModel LogOnAccountModel { get; set; }
 
     public string ErrorMessage { get; set; }
+
+    public event Action? OnSubscriptionChanged;
 
     public event Action<bool>? OnLogOnDialogVisibilityChanged;
 
@@ -84,6 +89,7 @@ public class LogOnViewModel : ViewModelBase
     {
         OnLogOnOrLogOffAndLogOnAgain?.Invoke();
     }
+
 
     //public async Task HandleValidSubmit(LoginModel login)
     //{

@@ -28,15 +28,13 @@ public class RecentFilesViewModel : ComponentBase
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
     private ProcessIndicatorService _ProcessIndicatorService;
-
-    [Inject]
-    public FileShareService FileShareService { get; set; }
-
+    
     public RecentFilesViewModel(LogOnViewModel logOnViewModel)
     {
         _logOnViewModel = logOnViewModel;
         _mainViewModel = logOnViewModel.MainViewModel;
         _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
+        SubscriptionLevel = logOnViewModel.SubscriptionLevel;
     }
 
     public void OnInitializedAsync()
@@ -45,19 +43,7 @@ public class RecentFilesViewModel : ComponentBase
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
     }
 
-    public event Action<bool>? OnRecentFilesStateChanged;
-
-    private bool _updateList;
-
-    public bool UpdateList
-    {
-        get => _updateList;
-        set
-        {
-            _updateList = value;
-            OnRecentFilesStateChanged.Invoke(_updateList);
-        }
-    }
+    public ShareKeyViewModel? SharekeysViewModel { get; set; }
 
     public ObservableCollection<FileDetails> RecentFilesList { get; set; }
 
@@ -65,7 +51,13 @@ public class RecentFilesViewModel : ComponentBase
 
     private FileDetails SelectedFile = new FileDetails();
 
+    public SubscriptionLevel SubscriptionLevel { get; set; }
+
     public bool IsHeaderCheckboxChecked { get; set; } = false;
+    public bool ContextMenu { get; set; } = false;
+    public bool isNameAscending { get; set; }
+    public bool isSizeAscending { get; set; }
+    public bool isDateModifiedAscending { get; set; }
 
     public void ToggleAllCheckboxes(ChangeEventArgs e)
     {
@@ -86,8 +78,6 @@ public class RecentFilesViewModel : ComponentBase
             fileDetails.IsChecked = IsHeaderCheckboxChecked;
             SelectedFiles.Add(fileDetails);
         }
-
-        OnRecentFilesStateChanged?.Invoke(UpdateList);
     }
 
     public void SelectSingleFile(ChangeEventArgs e, FileDetails selectedFile)
@@ -97,12 +87,10 @@ public class RecentFilesViewModel : ComponentBase
         if (!isChecked)
         {
             SelectedFiles.Remove(selectedFile);
-            OnRecentFilesStateChanged?.Invoke(UpdateList);
             return;
         }
 
         SelectedFiles.Add(selectedFile);
-        OnRecentFilesStateChanged?.Invoke(UpdateList);
     }
 
     public void HandleFileClick(MouseEventArgs e, FileDetails fileDetails)
@@ -127,8 +115,6 @@ public class RecentFilesViewModel : ComponentBase
         }
     }
 
-    public bool ContextMenu { get; set; } = false;
-
     public void HandleContextMenu(MouseEventArgs e, FileDetails fileDetails)
     {
         try
@@ -144,17 +130,6 @@ public class RecentFilesViewModel : ComponentBase
         }
     }
 
-    public SubscriptionLevel SubscriptionLevel { get; set; }
-
-    public List<string> SelectedShareKeyFiles { get; set; }
-
-    public SharingListViewModel SharingListViewModel { get; set; }
-
-    public bool ShowSharePopup { get; set; }
-
-    public bool isNameAscending { get; set; }
-    public bool isSizeAscending { get; set; }
-    public bool isDateModifiedAscending { get; set; }
 
     public void SortByName()
     {
@@ -202,7 +177,6 @@ public class RecentFilesViewModel : ComponentBase
             if (RecentFilesList != null && files.Count() != RecentFilesList.Count)
             {
                 RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
-                UpdateList = true;
                 return;
             }
 
@@ -294,10 +268,7 @@ public class RecentFilesViewModel : ComponentBase
         }
 
         await ShareKeysAsync(fileSelectionArgs.SelectedFiles);
-        OnRecentFilesStateChanged?.Invoke(UpdateList);
     }
-
-    public SharingListViewModel SharedListViewModel { get; set; }
 
     private async Task ShareKeysAsync(IEnumerable<string> fileNames)
     {
@@ -313,13 +284,7 @@ public class RecentFilesViewModel : ComponentBase
 
         IEnumerable<string> encryptedFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncrypted());
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-
-        FileShareService.SetSelectedFilesOrFolders(fileNames, viewModel);
-        SelectedShareKeyFiles = fileNames.Select(f => f).ToList();
-        SharedListViewModel = viewModel;
-
-        ShowSharePopup = true;
-        StateHasChanged();
+        SharekeysViewModel.SetSelectedFilesOrFolders(fileNames, viewModel);
 
         if (encryptableFileNames != null && encryptableFileNames.Any())
         {
@@ -329,11 +294,6 @@ public class RecentFilesViewModel : ComponentBase
         }
 
         await viewModel.ShareFiles.ExecuteAsync(null);
-    }
-
-    public void ClosePopup()
-    {
-        ShowSharePopup = false;
     }
 
     private async void ShowInFolder()

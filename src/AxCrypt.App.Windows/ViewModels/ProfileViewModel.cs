@@ -11,33 +11,27 @@ using AxCrypt.Content;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Runtime;
 using AxCrypt.App.Components.Services.Interface;
-using Microsoft.AspNetCore.Components;
 using AxCrypt.App.Windows.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class AccountViewModel
+public class ProfileViewModel
 {
+    private LogOnViewModel _logOnViewModel;
     private FileOperationViewModel? _fileOperationViewModel;
     private MainViewModel? _mainViewModel;
     private IExportKeyManagementFile? ExportKeyFile;
     private string DefaultExt = ".txt";
 
-    [Parameter]
-    public EventCallback ClosePopup { get; set; }
-
     public AccountModel Account { get; set; }
-
     public bool SubsDtlsPopup { get; set; }
     public bool IsDialogOpen { get; set; } = false;
     public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<INow>().Utc.AddDays(Account.DaysLeft).ToString("dd MMM yyyy");
     public bool keyMPopup { get; set; }
 
-    LogOnViewModel _logOnViewModel;
-
-    public AccountViewModel(LogOnViewModel logOnModel)
+    public ProfileViewModel(LogOnViewModel logOnModel)
     {
         _logOnViewModel = logOnModel;
         Account = new AccountModel();
@@ -74,18 +68,6 @@ public class AccountViewModel
         }
 
         return Account.CreatedTime;
-    }
-
-    public void OpenDialog() => IsDialogOpen = true;
-
-    public void CloseDialog() => IsDialogOpen = false;
-
-    public void ToggleSubscriptionDetailsPopup() => SubsDtlsPopup = !SubsDtlsPopup;
-
-    public void ChangePassphrase()
-    {
-        string userEmail = New<UserSettings>().UserEmail.ToString();
-        userEmail.ProcessChangePassword();
     }
 
     public async Task HandleImportAndExportKeys(KeyManagement keyManagement)
@@ -332,11 +314,6 @@ public class AccountViewModel
         Dictionary<string, object> attributes = new Dictionary<string, object>();
         attributes["class"] = "nav-link next-arrow" + (keyMPopup ? " active" : "");
         return attributes;
-    }
-
-    public void OnOptionClicked()
-    {
-        ClosePopup.InvokeAsync(null);
     }
 
     public void CancelSubscription()

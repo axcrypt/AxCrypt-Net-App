@@ -15,13 +15,6 @@ public class AdvancedOptionsViewModel : ComponentBase
     public string? _tempConfigPath { get; set; }
     public string? AppConfigPath { get; set; }
 
-    public IFolderPicker? FolderPicker { get; set; }
-
-    public AdvancedOptionsViewModel(IFolderPicker folderPicker)
-    {
-        FolderPicker = folderPicker;
-    }
-
     public void Initialize()
     {
         AppConfigPath = New<WorkFolder>().FileInfo.FullName;
@@ -30,7 +23,8 @@ public class AdvancedOptionsViewModel : ComponentBase
 
     public async void BrowseButton_click(EventArgs e)
     {
-        string selectedPath = await FolderPicker.PickFolderAsync();
+        IFolderPicker folderPicker = new Services.FolderPickerWindows();
+        string selectedPath = await folderPicker.PickFolderAsync();
         if (selectedPath != null)
         {
             _tempConfigPath = selectedPath;

@@ -26,7 +26,7 @@ namespace AxCrypt.App.Windows
     {
         public static MauiApp CreateMauiApp()
         {
-            var builder = MauiApp.CreateBuilder();
+            MauiAppBuilder builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
@@ -121,7 +121,6 @@ namespace AxCrypt.App.Windows
         {
             services.AddSingleton<IStatusAlertService, StatusAlertService>();
             services.AddSingleton<ProcessIndicatorService>();
-            services.AddSingleton<FileShareService>();
 
             services.AddSingleton<ITrayService, TrayService>();
             services.AddSingleton<INotificationService, NotificationService>();
@@ -175,7 +174,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SuggestionViewModel>();
             services.AddSingleton<InviteViewModel>();
             services.AddSingleton<TopMenuViewModel>();
-            services.AddSingleton<AccountViewModel>();
+            services.AddSingleton<ProfileViewModel>();
             services.AddSingleton<AppSettingsViewModel>();
             services.AddSingleton<AdvancedOptionsViewModel>();
             services.AddSingleton<RecentFilesViewModel>();

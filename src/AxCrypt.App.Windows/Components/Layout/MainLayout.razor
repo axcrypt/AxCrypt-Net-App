@@ -1,30 +1,23 @@
-﻿@using AxCrypt.Api.Model
-@using AxCrypt.App.Components.Data
+﻿@using AxCrypt.App.Components.Data
 @using AxCrypt.App.Components.Models
-@using AxCrypt.App.Windows.Services
-
-@using static AxCrypt.Abstractions.TypeResolve;
 
 @inherits LayoutComponentBase
 @inject IJSRuntime JS
 @inject LogOnViewModel LogOnViewModel
 
 <link href="css/login.min.css" rel="stylesheet" />
+@if (SubscriptionLevel != null)
+{
+    <link href="css/@SubscriptionLevel/sidemenu.min.css" rel="stylesheet" />
+    <link href="css/@SubscriptionLevel/index.min.css" rel="stylesheet" />
+    <link href="css/@SubscriptionLevel/site.min.css" rel="stylesheet" />
+    <link href="css/@SubscriptionLevel/topmenu.min.css" rel="stylesheet" />
+    <link href="css/@SubscriptionLevel/notification.min.css" rel="stylesheet" />
 
-@{
-    string subscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
+    <link href="css/@SubscriptionLevel/newsecret.min.css" rel="stylesheet" />
+    <link href="css/@SubscriptionLevel/secretlist.min.css" rel="stylesheet" />
+    <link href="css/@SubscriptionLevel/support.min.css" rel="stylesheet" />
 }
-
-<link href="css/@subscriptionLevel/sidemenu.min.css" rel="preload" as="style" importance="high" />
-<link href="css/@subscriptionLevel/index.min.css" rel="preload" as="style" importance="high" />
-<link href="css/@subscriptionLevel/site.min.css" rel="preload" as="style" importance="high" />
-<link href="css/@subscriptionLevel/topmenu.min.css" rel="stylesheet" importance="high" />
-<link href="css/@subscriptionLevel/notification.min.css" rel="stylesheet" importance="high" />
-
-<link href="css/@subscriptionLevel/newsecret.min.css" rel="stylesheet" importance="high" />
-<link href="css/@subscriptionLevel/secretlist.min.css" rel="stylesheet" importance="high" />
-<link href="css/@subscriptionLevel/support.min.css" rel="stylesheet" importance="high" />
-
 
 <div class="page" dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (!CanShowSignInPage)
@@ -53,6 +46,7 @@
             </div>
             <AxCrypt.App.Windows.Components.Pages.PopupDialog.InvitePopup />
             <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
+            <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey />
         }
 
         @Body
@@ -64,15 +58,15 @@
     </main>
 </div>
 
-
-
 @code {
     private bool CanShowSignInPage { get; set; }
+    private string SubscriptionLevel { get; set; }
 
     protected override void OnInitialized()
     {
         CanShowSignInPage = LogOnViewModel.IsVisible;
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdateSignInPageState;
+        LogOnViewModel.OnSubscriptionChanged += UpdateSubscriptionState;
         base.OnInitialized();
     }
 
@@ -81,6 +75,14 @@
         InvokeAsync(() =>
         {
             CanShowSignInPage = canShowSignInPage;
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void UpdateSubscriptionState()
+    {
+        InvokeAsync(() =>
+        {
             StateHasChanged(); // Refresh UI
         });
     }
@@ -101,7 +103,6 @@
             //     {
             await AddCssFiles();
             //         // IsLoading = false;
-            //         // SubscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel;
             //         //StateHasChanged();
             //     }
         }
@@ -109,7 +110,7 @@
 
     private async Task AddCssFiles()
     {
-        string cssBasePath = "free";
+        string cssBasePath = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
 
         await JS.InvokeVoidAsync("addCssFile", $"css/{cssBasePath}/sidemenu.min.css");
         await JS.InvokeVoidAsync("addCssFile", $"css/{cssBasePath}/index.min.css");

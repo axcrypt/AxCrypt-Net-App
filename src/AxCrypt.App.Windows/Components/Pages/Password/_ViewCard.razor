@@ -1,18 +1,12 @@
 ﻿@page "/viewcard"
 
-@using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Helpers
+@using AxCrypt.App.Components.Models
+@using AxCrypt.App.Components.Models.Secret
 @using AxCrypt.App.Components.Services.Interface
 @using AxCrypt.Content
 @using AxCrypt.Core
-@using AxCrypt.Core.Secrets
 @using AxCrypt.Core.UI
-@using AxCrypt.Cryptor.Model
-@using AxCrypt.App.Components.Models
-@using AxCrypt.App.Components.Models.Secret
-@using AxCrypt.App.Components.Services
-@using Microsoft.JSInterop
-@using static AxCrypt.Abstractions.TypeResolve;
 
 @inject IStatusAlertService StatusAlertService;
 @inject NavigationManager navigationManager

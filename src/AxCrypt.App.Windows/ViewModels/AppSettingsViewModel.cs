@@ -40,6 +40,9 @@ public class AppSettingsViewModel
         HideRecentFiles = New<UserSettings>().HideRecentFiles;
         InactivitySignOut = New<UserSettings>().InactivitySignOutTime.Minutes;
         IncludeSubfolders = New<UserSettings>().FolderOperationMode == FolderOperationMode.IncludeSubfolders;
+        IsFileNameOn = New<UserSettings>().EncryptFilePropertiesFileName;
+        IsDateModifiedOn = New<UserSettings>().EncryptFilePropertiesDateModified;
+        IsFileNameOn = New<UserSettings>().EncryptFilePropertiesFileName;
     }
 
     public void Initialized()
@@ -51,16 +54,23 @@ public class AppSettingsViewModel
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
     }
 
-    public bool InactSgnOut { get; set; }
+    public ObservableCollection<FileDetails> RecentFilesList { get; set; } = new ObservableCollection<FileDetails>();
+
+    public List<int> InactivityTimeoutOptions { get; } = new List<int> { 0, 5, 15, 30, 60 };
+
     public bool FileEncryptionProperties { get; set; }
+    public bool IsDateModifiedOn { get; set; }
+    public bool IsFileNameOn { get; set; }
+    public bool IncludeSubfolders { get; set; }
+    public bool AlwaysOffline { get; set; }
+    public bool AutoUpgradeToAES256 { get; set; }
+    public bool InactSgnOut { get; set; }
     public Uri? DownloadVersion { get; set; }
     public string? CurrentVersion { get; set; }
     public string? LatestVersion { get; set; }
     public bool ShowVersion { get; set; }
     public bool ShowOptions { get; set; }
     public bool ShowManageAxCryptID { get; set; }
-    public bool InvitePopup { get; set; }
-    public ObservableCollection<FileDetails> RecentFilesList { get; set; } = new ObservableCollection<FileDetails>();
     public DateTime CreatedTime { get; set; }
     public double SelectedOption { get; set; } = 0;
     public bool DebugPopup { get; set; }
@@ -68,8 +78,6 @@ public class AppSettingsViewModel
     public bool HideRecentFiles { get; set; }
 
     public bool ShowAdvancedOptions { get; set; }
-
-    public List<int> InactivityTimeoutOptions { get; } = new List<int> { 0, 5, 15, 30, 60 };
 
     public int InactivitySignOut { get; set; }
 
@@ -189,12 +197,12 @@ public class AppSettingsViewModel
 
     public void FilePropertiesDateModified(EventArgs e)
     {
-        New<UserSettings>().EncryptFilePropertiesDateModified = !New<UserSettings>().EncryptFilePropertiesDateModified;
+        New<UserSettings>().EncryptFilePropertiesDateModified = !IsDateModifiedOn;
     }
 
     public void FilePropertiesFileName(EventArgs e)
     {
-        New<UserSettings>().EncryptFilePropertiesFileName = !New<UserSettings>().EncryptFilePropertiesFileName;
+        New<UserSettings>().EncryptFilePropertiesFileName = !IsFileNameOn;
     }
 
     public async void InviteUser(EventArgs e)
@@ -214,48 +222,10 @@ public class AppSettingsViewModel
 
     #region Debug Section
 
-    private string? Title { get; set; }
-    private string? DefaultExt { get; set; }
-    private string? Filter { get; set; }
-    private bool AddExtension { get; set; }
-    private string? FileName { get; set; }
     public string? RestApiBaseUrl { get; set; }
     public string? TimeoutTimeSpan { get; set; }
     private ObservableCollection<ManageAccountModel> AccountEmailsList { get; set; } = new ObservableCollection<ManageAccountModel>();
-
     public string? EmailLabel { get; set; }
-
-    public bool IsDateModifiedOn
-    {
-        get => isDateModifiedOn;
-        set
-        {
-            if (isDateModifiedOn != value)
-            {
-                isDateModifiedOn = value;
-                UpdateDateModifiedSetting();
-            }
-        }
-    }
-
-    public bool IsFileNameOn
-    {
-        get => isFileNameOn;
-        set
-        {
-            if (isFileNameOn != value)
-            {
-                isFileNameOn = value;
-                UpdateFileNameSetting();
-            }
-        }
-    }
-
-    public bool IncludeSubfolders { get; set; }
-
-    public bool AlwaysOffline { get; set; }
-
-    public bool AutoUpgradeToAES256 { get; set; }
 
     public async void CheckAxCryptVersionAsync()
     {
@@ -326,16 +296,6 @@ public class AppSettingsViewModel
         ShowManageAxCryptID = !ShowManageAxCryptID;
     }
 
-    private void UpdateDateModifiedSetting()
-    {
-        New<UserSettings>().EncryptFilePropertiesDateModified = IsDateModifiedOn;
-    }
-
-    private void UpdateFileNameSetting()
-    {
-        New<UserSettings>().EncryptFilePropertiesFileName = IsFileNameOn;
-    }
-
     public async void OpenBrokenFiles()
     {
         await _fileOperationViewModel.TryBrokenFiles.ExecuteAsync(null);
@@ -357,54 +317,6 @@ public class AppSettingsViewModel
     }
 
     #endregion
-
-    private async void HandleSaveAsFileSelection(FileSelectionEventArgs e)
-    {
-        switch (e.FileSelectionType)
-        {
-            case FileSelectionType.SaveAsEncrypted:
-                Title = Texts.EncryptFileSaveAsDialogTitle;
-                DefaultExt = OS.Current.AxCryptExtension;
-                AddExtension = true;
-                Filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + DefaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
-                break;
-
-            case FileSelectionType.SaveAsDecrypted:
-                string extension = Path.GetExtension(e.SelectedFiles[0]);
-                Title = Texts.DecryptedSaveAsFileDialogTitle;
-                DefaultExt = extension;
-                AddExtension = !string.IsNullOrEmpty(extension);
-                Filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + DefaultExt, Texts.FileFilterFileTypeFiles, Texts.FileFilterFileTypeAllFiles);
-                break;
-        }
-
-        FileName = Path.GetFileName(e.SelectedFiles[0]);
-        string savedPath = await ExportKeyFile.ShowSaveFileDialogAsync(Title, DefaultExt, Filter, FileName);
-
-        Core.Service.UserKeyPair activeKeyPair = Core.Resolve.KnownIdentities.DefaultEncryptionIdentity.ActiveEncryptionKeyPair;
-        Core.UI.EmailAddress userEmail = activeKeyPair.UserEmail;
-        Core.Crypto.Asymmetric.IAsymmetricPublicKey publicKey = activeKeyPair.KeyPair.PublicKey;
-
-        byte[] export = activeKeyPair.ToArray(Resolve.KnownIdentities.DefaultEncryptionIdentity.Passphrase);
-
-        if (!string.IsNullOrEmpty(savedPath))
-        {
-            await File.WriteAllBytesAsync(savedPath, export);
-        }
-    }
-
-    public void MakeAlwaysOffline()
-    {
-        New<UserSettings>().OfflineMode = AlwaysOffline;
-
-        if (AlwaysOffline)
-        {
-            New<AxCryptOnlineState>().IsOffline = AlwaysOffline;
-            return;
-        }
-
-        New<AxCryptOnlineState>().IsOffline = !AlwaysOffline;
-    }
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {

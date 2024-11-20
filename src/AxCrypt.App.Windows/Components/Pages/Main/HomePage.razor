@@ -1,30 +1,14 @@
 ﻿@page "/mainpage"
 
-@using AxCrypt.Abstractions
-@using AxCrypt.Abstractions.Rest
 @using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Utility.View
 @using AxCrypt.App.Components.ViewModels
 @using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Content
-@using AxCrypt.Common
-@using AxCrypt.Core
-@using AxCrypt.Core.Extensions
-@using AxCrypt.Core.IO
-@using AxCrypt.Core.Runtime
-@using AxCrypt.Core.Session
 @using AxCrypt.Core.UI
-@using AxCrypt.Core.UI.ViewModel
-@using Microsoft.AspNetCore.Components.Web
-@using Microsoft.JSInterop
-@using Newtonsoft.Json;
-@using System.Windows;
-@using System.Globalization;
-@using System.Resources;
-@using Microsoft.AspNetCore.Components.Forms
-@using System.Collections.ObjectModel
 
 @using static AxCrypt.Abstractions.TypeResolve
+
 @inject RecentFilesViewModel RecentFilesViewModel
 @inject AppSettingsViewModel SettingsViewModel
 @inject IJSRuntime JSRuntime
@@ -155,12 +139,6 @@
             </dl>
         </div>
     </div>
-    @if (RecentFilesViewModel.ShowSharePopup)
-    {
-        <div class="modalDialog sharekey-popup" id="sharekey">
-            <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList="RecentFilesViewModel.SelectedShareKeyFiles" IsFolder="false" OnClose="RecentFilesViewModel.ClosePopup" />
-        </div>
-    }
 </div>
 
 @code {
@@ -170,7 +148,6 @@
     {
         await base.OnInitializedAsync();
         RecentFilesViewModel.OnInitializedAsync();
-        RecentFilesViewModel.OnRecentFilesStateChanged += UpdatePopupVisibility;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

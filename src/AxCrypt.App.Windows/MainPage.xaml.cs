@@ -2,7 +2,6 @@
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Components.Models;
-using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Components.Utility;
 using AxCrypt.App.Windows.Code;
 using AxCrypt.App.Windows.Services;
@@ -12,7 +11,6 @@ using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
-using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System.Globalization;

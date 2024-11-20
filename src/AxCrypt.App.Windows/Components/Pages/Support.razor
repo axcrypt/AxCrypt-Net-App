@@ -1,13 +1,9 @@
 ﻿@page "/SupportIndex"
+
 @using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Data
 @using AxCrypt.App.Components.ViewModels
-@using AxCrypt.App.Windows.Helpers
-@using AxCrypt.App.Windows.Services
-@using AxCrypt.App.Windows.ViewModels
-@using AxCrypt.Core.UI.Footer
-@using AxCrypt.Content;
-@using static AxCrypt.Abstractions.TypeResolve;
+@using AxCrypt.Content
 
 @inject SupportViewModel SupportViewModel
 @inject IJSRuntime _jsRuntime
@@ -79,23 +75,15 @@ else
         </div>
     </div>
 }
-@if (!SupportViewModel.IsLoading)
-{
-    @if (!SupportViewModel.IsWideScreen)
-    {
-        <footer>
-            <AxCrypt.App.Windows.Components.Shared.Mobile.Footer footerActions="@footerActions" />
-        </footer>
-    }
-}
-else
+
+@if (SupportViewModel.IsLoading)
 {
     <p>Loading...</p>
 }
+
 @code {
     private bool IsLoading { get; set; }
     private bool IsWideScreen { get; set; }
-    private FooterActions footerActions = FooterActions.Support;
 
     protected override async Task OnInitializedAsync()
     {

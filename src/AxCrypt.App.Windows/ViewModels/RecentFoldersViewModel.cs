@@ -25,25 +25,15 @@ public class RecentFoldersViewModel : ComponentBase
 
     private WatchedFoldersViewModel _viewModel;
 
-    [Inject]
-    private FileShareService FileShareService { get; set; }
+    public ShareKeyViewModel? SharekeysViewModel { get; set; }
 
-    private bool _loading;
     private bool _isDescending;
     private bool _folderContextMenu;
-    private bool _showPopup;
-    private bool _showUpgradePopup;
 
     public ObservableCollection<string> RecentFoldersList { get; set; }
 
     public IList<string> SelectedRecentFolders { get; set; } = new List<string>();
     public SubscriptionLevel SubscriptionLevel { get; set; }
-
-    public bool showPopup
-    {
-        get => _showPopup;
-        set => _showPopup = value;
-    }
 
     public bool FolderContextMenu
     {
@@ -56,7 +46,6 @@ public class RecentFoldersViewModel : ComponentBase
         _logOnViewModel = logOnViewModel;
         _mainViewModel = logOnViewModel.MainViewModel;
         _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
-        FileShareService = new FileShareService();
         _ProcessIndicatorService = processIndicatorService;
     }
 
@@ -68,20 +57,6 @@ public class RecentFoldersViewModel : ComponentBase
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.WatchedFolders), (IEnumerable<string> folders) => { UpdateWatchedFolders(folders); });
     }
 
-    public event Action<bool>? OnRecentFoldersStateChanged;
-
-    private bool _updateList;
-
-    public bool UpdateList
-    {
-        get => _updateList;
-        set
-        {
-            _updateList = value;
-            OnRecentFoldersStateChanged.Invoke(_updateList);
-        }
-    }
-
     private void UpdateWatchedFolders(IEnumerable<string> folders)
     {
         using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
@@ -89,7 +64,6 @@ public class RecentFoldersViewModel : ComponentBase
             if (RecentFoldersList != null && folders.Count() != RecentFoldersList.Count)
             {
                 RecentFoldersList = new ObservableCollection<string>(folders.Select(fld => fld));
-                UpdateList = true;
                 return;
             }
 
@@ -119,11 +93,6 @@ public class RecentFoldersViewModel : ComponentBase
 
             _isDescending = !_isDescending;
         }
-    }
-
-    public void ClosePopup()
-    {
-        showPopup = false;
     }
 
     public void HandleFolderClick(MouseEventArgs e)
@@ -197,21 +166,14 @@ public class RecentFoldersViewModel : ComponentBase
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, (ss, ee) => { return WatchedFoldersKeySharingAsync(SelectedRecentFolders); }, null, args);
     }
 
-    public IEnumerable<string>? SelectedShareKeyFiles { get; set; }
-    public SharingListViewModel SharedListViewModel { get; set; }
-
     private async Task WatchedFoldersKeySharingAsync(IEnumerable<string> folderPaths)
     {
         if (!folderPaths.Any()) return;
 
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFoldersAsync(folderPaths, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        FileShareService.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel, true);
-        SharedListViewModel = viewModel;
-        SelectedShareKeyFiles = folderPaths;
+        SharekeysViewModel.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel, true);
 
-        showPopup = true;
-        //StateHasChanged();
-        //await viewModel.ShareFolders.ExecuteAsync(null);
+        await viewModel.ShareFolders.ExecuteAsync(null);
     }
 
     private async void DecryptPermanently()

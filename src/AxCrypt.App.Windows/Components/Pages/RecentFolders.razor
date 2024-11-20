@@ -1,22 +1,7 @@
-﻿@using AxCrypt.Abstractions
-@using AxCrypt.Api.Model;
+﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Data
-@using AxCrypt.App.Components.Models
-@using AxCrypt.App.Components.Services.Interface
 @using AxCrypt.App.Components.Utility.View
-@using AxCrypt.App.Windows.Helpers
-@using AxCrypt.App.Windows.Models
-@using AxCrypt.App.Windows.Services
 @using AxCrypt.App.Windows.ViewModels
-@using AxCrypt.Content
-@using AxCrypt.Core
-@using AxCrypt.Core.IO
-@using AxCrypt.Core.Runtime
-@using AxCrypt.Core.UI
-@using AxCrypt.Core.UI.ViewModel
-@using System.Collections.ObjectModel
-@using Microsoft.AspNetCore.Components.Web
-@using static AxCrypt.Abstractions.TypeResolve
 
 @inject RecentFoldersViewModel RecentFoldersViewModel
 
@@ -95,19 +80,11 @@
     </dl>
 </div>
 
-@if (RecentFoldersViewModel.showPopup)
-{
-    <div class="modalDialog sharekey-popup" id="sharekey">
-        <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey SelectedFilesOrFoldersList=@RecentFoldersViewModel.SelectedShareKeyFiles SharingListViewModel="@RecentFoldersViewModel.SharedListViewModel" IsFolder="true" OnClose="RecentFoldersViewModel.ClosePopup" />
-    </div>
-}
-
 @code {
     protected override async Task OnInitializedAsync()
     {
         await RecentFoldersViewModel.InitializeAsync();
         await base.OnInitializedAsync();
-        RecentFoldersViewModel.OnRecentFoldersStateChanged += UpdateRecentFoldersList;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
