@@ -12,7 +12,7 @@ public class TrayService : ITrayService
 
     public void Initialize()
     {
-        tray = new WindowsTrayIcon("Platforms/Windows/appicon.ico");
+        tray = new WindowsTrayIcon("Resources/AppIcon/appicon.ico");
         tray.LeftClick = () => {
             MauiWindowsExtensions.BringToFront();
             ClickHandler?.Invoke();

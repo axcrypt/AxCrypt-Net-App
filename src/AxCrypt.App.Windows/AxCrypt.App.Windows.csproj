@@ -156,4 +156,10 @@
       <Folder Include="Resources\Images\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Resources\AppIcon\appicon.ico">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
