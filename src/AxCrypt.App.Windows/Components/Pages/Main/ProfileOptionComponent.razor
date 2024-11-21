@@ -125,16 +125,6 @@
     </div>
 }
 
-@if (accountViewModel.Account.ImportPass)
-{
-    <AxCrypt.App.Windows.Components.Pages.PopupDialog.ImportPrivatePasswordDialog IsOpen="true" OnClose="accountViewModel.HandleDialogClose" />
-}
-
-@if (accountViewModel.Account.CreateId)
-{
-    <AxCrypt.App.Windows.Components.Pages.PopupDialog.CreateNewAccountDialog IsOpen="true" OnClose="accountViewModel.HandleCreateDialogClose" />
-}
-
 <style>
     .disabled {
         pointer-events: none;

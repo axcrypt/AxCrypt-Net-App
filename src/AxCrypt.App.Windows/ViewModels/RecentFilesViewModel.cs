@@ -28,7 +28,7 @@ public class RecentFilesViewModel : ComponentBase
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
     private ProcessIndicatorService _ProcessIndicatorService;
-    
+
     public RecentFilesViewModel(LogOnViewModel logOnViewModel)
     {
         _logOnViewModel = logOnViewModel;
@@ -337,6 +337,7 @@ public class RecentFilesViewModel : ComponentBase
         {
             try
             {
+                RecentFilesList = new ObservableCollection<FileDetails>();
                 RecentFilesList.Add(UpdateListViewItem(file));
                 ++i;
             }

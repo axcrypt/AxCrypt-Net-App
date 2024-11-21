@@ -4,7 +4,9 @@ using AxCrypt.Api.Model;
 using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Utility;
 using AxCrypt.App.Windows.Code;
+using AxCrypt.App.Windows.Components.Pages.PopupDialog;
 using AxCrypt.App.Windows.Services;
+using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -306,6 +308,7 @@ public partial class MainPage : ContentPage, ISignIn
             return;
         }
 
+        _logOnService.RenewSubscriptionDialog.Show();
         //using (RenewSubscriptionPromptDialog dialog = new RenewSubscriptionPromptDialog(this))
         //{
         //    if (dialog.HideDialog)
@@ -391,6 +394,8 @@ public partial class MainPage : ContentPage, ISignIn
 
     private void HandleCreateNewAccount(LogOnEventArgs e)
     {
+        CreateNewAccountDialogViewModel createNewAccountDialogViewModel = new CreateNewAccountDialogViewModel(_logOnService);
+        createNewAccountDialogViewModel.SetCreateNewAccount(e.Passphrase.Text, e.Identity.UserEmail);
         //using (CreateNewAccountDialog dialog = new CreateNewAccountDialog(this, e.Passphrase.Text, EmailAddress.Empty))
         //{
         //    DialogResult dialogResult = dialog.ShowDialog(this);
@@ -419,6 +424,8 @@ public partial class MainPage : ContentPage, ISignIn
 
     private void HandleExistingLogOnForEncryptedFile(LogOnEventArgs e)
     {
+        FilePasswordDialogViewModel filePasswordDialogViewModel = new FilePasswordDialogViewModel(_logOnService);
+        filePasswordDialogViewModel.SetFilePassword(e.EncryptedFileFullName);
         //using (FilePasswordDialog logOnDialog = new FilePasswordDialog(this, e.EncryptedFileFullName))
         //{
         //    DialogResult dialogResult = logOnDialog.ShowDialog(this);
@@ -444,7 +451,6 @@ public partial class MainPage : ContentPage, ISignIn
         if (!_logOnService.IsVisible)
         {
             LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
-            _logOnService.ShowLogOnDialog(logOnModel, _mainViewModel);
         }
 
         if (_logOnService.PageResult == DialogResult.None)
@@ -546,5 +552,10 @@ public partial class MainPage : ContentPage, ISignIn
     {
         //_optionsDebugToolStripMenuItem.Checked = enabled;
         //_debugToolStripMenuItem.Visible = enabled;
+    }
+
+    private void ImportMyPrivateKeyToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        _logOnService.ImportPrivatePasswordDialog.Show();
     }
 }

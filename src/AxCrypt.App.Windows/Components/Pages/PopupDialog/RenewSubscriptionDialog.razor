@@ -1,0 +1,101 @@
+﻿@using AxCrypt.App.Components.Models
+@using AxCrypt.Common
+@using AxCrypt.Content
+@using AxCrypt.Core.UI
+
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject LogOnViewModel viewModel
+
+<style>
+    .password-dialog .text-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        text-align: left;
+        font-size: 14px;
+        line-height: 1.6;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+</style>
+
+@if (IsVisible)
+{
+    <div id="modal-dialog6" class="modalDialog password-dialog">
+        <div class="text-content">
+            @((MarkupString)InitializeFeatureText())
+        </div>
+        <div class="button-group">
+            <button @onclick="RenewSubscriptionAsync">@Texts.BusinessSubscriptionRenewMenu</button>
+            <button @onclick="UpdateDoNotShowAgainOptions">@Texts.ButtonNotNow</button>
+            <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@IsCheckboxDontShowThisAgain" />
+        </div>
+    </div>
+}
+
+@code {
+    private bool IsVisible;
+
+    private DoNotShowAgainOptions _dontShowAgainFlag;
+    public bool HideDialog { get; set; } = false;
+    private string DoNotShowAgain { get; set; } = Texts.DontShowAgainCheckBoxText;
+    public bool IsCheckboxDontShowThisAgain { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        _dontShowAgainFlag = DoNotShowAgainOptions.UpgradeSubscriptionWarning;
+        base.OnInitialized();
+        viewModel.RenewSubscriptionDialog.OnDialogVisibilityChanged += UpdateRenewDialogState;
+    }
+
+    string InitializeFeatureText()
+    {
+        string upgradeSubscriptionPromptText = Texts.UpgradeSubscriptionPromptText;
+        upgradeSubscriptionPromptText += "<br/><br/>";
+        string[] features = Texts.RenewSubscriptionDialogFeaturesList.Split('\n');
+        upgradeSubscriptionPromptText += "<ul>";
+        foreach (string feature in features)
+        {
+            upgradeSubscriptionPromptText += $"<li>{feature}</li>";
+        }
+
+        return upgradeSubscriptionPromptText;
+    }
+
+    private void ToggleCheckbox(ChangeEventArgs e)
+    {
+        IsCheckboxDontShowThisAgain = (bool)e.Value;
+    }
+
+    private void UpdateDoNotShowAgainOptions()
+    {
+        if (_dontShowAgainFlag != DoNotShowAgainOptions.None && IsCheckboxDontShowThisAgain)
+        {
+            New<UserSettings>().DoNotShowAgain = New<UserSettings>().DoNotShowAgain | _dontShowAgainFlag;
+        }
+
+        viewModel.RenewSubscriptionDialog.Close();
+    }
+
+    protected async Task RenewSubscriptionAsync()
+    {
+        UpdateDoNotShowAgainOptions();
+        await New<PremiumManager>().BuyPremium(New<KnownIdentities>().DefaultEncryptionIdentity, true);
+
+        viewModel.RenewSubscriptionDialog.Close();
+    }
+
+    void UpdateRenewDialogState(bool isVisible)
+    {
+        InvokeAsync(() =>
+        {
+            IsVisible = isVisible;
+            StateHasChanged();
+        });
+    }
+}

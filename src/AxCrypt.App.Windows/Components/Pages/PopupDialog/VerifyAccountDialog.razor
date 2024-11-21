@@ -1,0 +1,80 @@
+﻿@using AxCrypt.App.Components.Models
+@using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.Content
+
+@inject LogOnViewModel LogOnModel
+@inject VerifyAccountDialogViewModel verifyViewModel
+
+@if (IsVisible)
+{
+    <div id="modal-dialog6" class="modalDialog">
+        <div>
+            <div class="close-img" onclick="closeModalDialog('modal-dialog6')"></div>
+            <div>
+                <div class="modal-header text-center">
+                    <span>Changing options may be dangerous. Only do this if you are sure you understand what this option does.</span>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label>@verifyViewModel.PassPhrase</label>
+                    </div> 
+                    
+                    <div>
+                        <label>Your password:</label>
+                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.PassPhrase"/>
+                    </div>
+                    
+                    <div>
+                        <label>Verify password:</label>
+                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.PassPhraseVerification"/>
+                    </div>
+                    
+                    <div>
+                        <label>Verification Code:</label>
+                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.ActivationCode" />
+                    </div>
+                    <div>
+                        <input type="checkbox" checked="@verifyViewModel.ShowPassword" @onchange="ToggleShowPassword" />
+                        <span class="grey-clr font-medium">Show password</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button success btn-small" @onclick="verifyViewModel.ButtonOk_Click">Ok</button>
+                <button class="button cancel btn-small" @onclick="verifyViewModel.ResendButton_Click">@Texts.ResendButtonText</button>
+                <button class="button cancel btn-small" @onclick="verifyViewModel.HelpButton_Click">@Texts.ButtonHelpText</button>
+                <button class="button cancel btn-small" @onclick="Cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool IsVisible;
+    private bool IsChecked;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        LogOnModel.VerifyAccountDialog.OnDialogVisibilityChanged += UpdateVerifyAccountDialogState;
+    }
+
+    void ToggleShowPassword(ChangeEventArgs e)
+    {
+        verifyViewModel.ShowPassword = (bool)e.Value;
+    }
+
+    private void UpdateVerifyAccountDialogState(bool canShowVerifyAccountDialog)
+    {
+        InvokeAsync(() =>
+        {
+            IsVisible = canShowVerifyAccountDialog;
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void Cancel()
+    {
+        LogOnModel.VerifyAccountDialog.Close();
+    }
+}

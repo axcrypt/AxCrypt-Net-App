@@ -11,6 +11,7 @@ using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Components.Pages.Password;
 using AxCrypt.App.Windows.Helpers;
+using AxCrypt.App.Windows.Infrastructure.Dialogs;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Core.Runtime;
@@ -210,8 +211,15 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<AppSettingsViewModel>();
             services.AddSingleton<AdvancedOptionsViewModel>();
             services.AddSingleton<RecentFilesViewModel>();
+            services.AddSingleton<ImportPrivateKeyViewModel>();
+            services.AddSingleton<CreateNewAccountDialogViewModel>();
+            services.AddSingleton<FilePasswordDialogViewModel>();
+            services.AddSingleton<VerifyAccountDialogViewModel>();
+            services.AddSingleton<VerifyPasswordViewModel>();
 
             services.AddSingleton<HomeUserService>();
+
+            TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
 
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
         }

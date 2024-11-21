@@ -1,38 +1,46 @@
-﻿@using AxCrypt.Content
+﻿@using AxCrypt.App.Components.Models
+@using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.Content
 
-<div class="modal" style="display:@(IsOpen ? "block" : "none")">
-    <div class="modal-content">
-        <h3>@Texts.TitleCreateAxCryptIdTitle</h3>
+@inject LogOnViewModel logOnModel
+@inject CreateNewAccountDialogViewModel accountViewModel
 
-        <div>
-            <label>@Texts.PromptEmailText</label>
-            <input type="email" @bind="UserEmail" @oninput="ClearErrorProviders" />
+@if (IsVisible)
+{
+    <div class="modal">
+        <div class="modal-content">
+            <h3>@Texts.TitleCreateAxCryptIdTitle</h3>
+
+            <div>
+                <label>@Texts.PromptEmailText</label>
+                <input type="email" @bind="accountViewModel.UserEmail" @oninput="accountViewModel.ClearErrorProviders" />
+            </div>
+
+            <div>
+                <label>@Texts.PassphrasePrompt</label>
+                <input type="password" @bind="accountViewModel.PassphraseText" @oninput="accountViewModel.ClearErrorProviders" />
+                <PasswordStrengthMeter Password="accountViewModel.PassphraseText" />
+                <input type="checkbox" @onchange="(e)=>ToggleShowPassword(e)" />
+            </div>
+
+            <div>
+                <label>@Texts.VerifyPasswordPrompt</label>
+                <input type="password" @bind="accountViewModel.VerifyPassPhraseText" @oninput="accountViewModel.ClearErrorProviders" />
+            </div>
+
+            <div>
+                <button style="background-color:limegreen" @onclick="accountViewModel.ButtonOk_Click" disabled="@accountViewModel.IsCreating">@Texts.ButtonOkText</button>
+                <button @onclick="Cancel">@Texts.ButtonCancelText</button>
+                <button style="background-color:limegreen; border-color:black" @onclick="accountViewModel.HelpButton_Click">@Texts.HelpToolStripMenuItemText</button>
+            </div>
+
+            @if (!string.IsNullOrEmpty(accountViewModel.ErrorMessage))
+            {
+                <div class="error">@accountViewModel.ErrorMessage</div>
+            }
         </div>
-
-        <div>
-            <label>@Texts.PassphrasePrompt</label>
-            <input type="password" @bind="PasswordText" @oninput="ClearErrorProviders" />
-            <PasswordStrengthMeter Password="PasswordText" />
-            <input type="checkbox" @onchange="ToggleShowPassword" />
-        </div>
-
-        <div>
-            <label>@Texts.VerifyPasswordPrompt</label>
-            <input type="password" @bind="Verification" @oninput="ClearErrorProviders" />
-        </div>
-
-        <div>
-            <button style="background-color:limegreen" @onclick="OnOkClick" disabled="@IsCreating">@Texts.ButtonOkText</button>
-            <button @onclick="Cancel">@Texts.ButtonCancelText</button>
-            <button style="background-color:limegreen; border-color:black" @onclick="Help">@Texts.HelpToolStripMenuItemText</button>
-        </div>
-
-        @if (!string.IsNullOrEmpty(ErrorMessage))
-        {
-            <div class="error">@ErrorMessage</div>
-        }
     </div>
-</div>
+}
 
 <style>
     .modal {
@@ -64,81 +72,30 @@
 </style>
 
 @code {
-    [Parameter]
-    public bool IsOpen { get; set; }
+    private bool IsVisible;
 
-    [Parameter]
-    public EventCallback<bool> OnClose { get; set; }
-
-    private string PasswordText { get; set; }
-    private string Verification { get; set; }
-    private string UserEmail { get; set; }
-    private bool ShowPassword { get; set; }
-    private string ErrorMessage { get; set; }
-    private bool IsCreating { get; set; }
-
-    private void ClearErrorProviders()
+    protected override void OnInitialized()
     {
-        ErrorMessage = string.Empty;
+        logOnModel.CreateNewAccountDialog.OnDialogVisibilityChanged += UpdateCreateNewAccountState;
+        base.OnInitialized();
     }
 
-    private void ToggleShowPassword(ChangeEventArgs e)
+    void ToggleShowPassword(ChangeEventArgs e)
     {
-        ShowPassword = (bool)e.Value;
+        accountViewModel.ShowPassword = (bool)e.Value;
     }
 
-    private async Task OnOkClick()
+    void UpdateCreateNewAccountState(bool isVisible)
     {
-        if (IsCreating || !ValidateInputs())
+        InvokeAsync(() =>
         {
-            return;
-        }
-
-        IsCreating = true;
-
-        if (/* Account creation successful */ true)
-        {
-            await OnClose.InvokeAsync(false);
-        }
-        else
-        {
-            ErrorMessage = Texts.FailedPrivateImport;
-            IsCreating = false;
-        }
+            IsVisible = isVisible;
+            StateHasChanged();
+        });
     }
 
-    private bool ValidateInputs()
+    void Cancel()
     {
-        bool isValid = true;
-
-        if (string.IsNullOrEmpty(PasswordText))
-        {
-            ErrorMessage = Texts.PasswordPolicyViolation;
-            isValid = false;
-        }
-
-        if (string.IsNullOrEmpty(Verification) || PasswordText != Verification)
-        {
-            ErrorMessage = Texts.PassphraseVerificationMismatch;
-            isValid = false;
-        }
-
-        if (string.IsNullOrEmpty(UserEmail))
-        {
-            ErrorMessage = Texts.BadEmail;
-            isValid = false;
-        }
-
-        return isValid;
-    }
-
-    private async Task Cancel()
-    {
-        await OnClose.InvokeAsync(false);
-    }
-
-    private void Help()
-    {
-        
+        logOnModel.CreateNewAccountDialog.Close();
     }
 }

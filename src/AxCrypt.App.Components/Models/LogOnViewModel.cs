@@ -24,9 +24,15 @@ public class LogOnViewModel : ViewModelBase
         InviteDialog = new CommonDialogService();
         UpgradeDialog = new CommonDialogService();
         ShareKeyDialog = new CommonDialogService();
+        ImportPrivatePasswordDialog = new CommonDialogService();
+        RenewSubscriptionDialog = new CommonDialogService();
+        CreateNewAccountDialog = new CommonDialogService();
+        FilePasswordDialog = new CommonDialogService();
+        VerifyAccountDialog = new CommonDialogService();
+        VerifyPasswordDialog = new CommonDialogService();
     }
 
-    public  void ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
+    public void ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
     {
         LogOnAccountModel = logOnAccountModel;
         IsVisible = true;
@@ -54,6 +60,18 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService UpgradeDialog { get { return GetProperty<CommonDialogService>(nameof(UpgradeDialog)); } set { SetProperty(nameof(UpgradeDialog), value); } }
    
     public CommonDialogService ShareKeyDialog { get { return GetProperty<CommonDialogService>(nameof(ShareKeyDialog)); } set { SetProperty(nameof(ShareKeyDialog), value); } }
+    
+    public CommonDialogService ImportPrivatePasswordDialog { get { return GetProperty<CommonDialogService>(nameof(ImportPrivatePasswordDialog)); } set { SetProperty(nameof(ImportPrivatePasswordDialog), value); } }
+    
+    public CommonDialogService RenewSubscriptionDialog { get { return GetProperty<CommonDialogService>(nameof(RenewSubscriptionDialog)); } set { SetProperty(nameof(RenewSubscriptionDialog), value); } }
+    
+    public CommonDialogService CreateNewAccountDialog { get { return GetProperty<CommonDialogService>(nameof(CreateNewAccountDialog)); } set { SetProperty(nameof(CreateNewAccountDialog), value); } }
+   
+    public CommonDialogService FilePasswordDialog { get { return GetProperty<CommonDialogService>(nameof(FilePasswordDialog)); } set { SetProperty(nameof(FilePasswordDialog), value); } }
+    
+    public CommonDialogService VerifyAccountDialog { get { return GetProperty<CommonDialogService>(nameof(VerifyAccountDialog)); } set { SetProperty(nameof(VerifyAccountDialog), value); } }
+    
+    public CommonDialogService VerifyPasswordDialog { get { return GetProperty<CommonDialogService>(nameof(VerifyPasswordDialog)); } set { SetProperty(nameof(VerifyPasswordDialog), value); } }
 
     public SubscriptionLevel SubscriptionLevel
     {

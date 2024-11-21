@@ -81,13 +81,13 @@ public class ProfileViewModel
                 await ExportMySharingKey();
                 break;
             case KeyManagement.ImportAxCryptID:
-                Account.ImportPass = true;
+                _logOnViewModel.ImportPrivatePasswordDialog.Show();
                 break;
             case KeyManagement.ExportAxCryptIDAndSharingKeyPair:
                 await ExportMyPrivateKey();
                 break;
             case KeyManagement.CreateAxCryptID:
-                Account.CreateId = true;
+                _logOnViewModel.CreateNewAccountDialog.Show();
                 break;
         }
     }

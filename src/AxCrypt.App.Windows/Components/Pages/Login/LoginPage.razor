@@ -1,11 +1,15 @@
 ﻿@page "/login"
+
 @using AxCrypt.App.Components.Models
+@using AxCrypt.App.Components.Services
 @using AxCrypt.App.Components.Utility
+@using AxCrypt.App.Components.Utility.View
 @using AxCrypt.Content
 @using AxCrypt.Core
 @using AxCrypt.Core.UI.ViewModel
 
 @inject LogOnViewModel LogOnViewModel
+@inject ProcessIndicatorService processIndicatorService
 
 <section class="content">
     <div class="">
@@ -62,14 +66,17 @@
 
     private async void ButtonLogIn_Click()
     {
-        LogOnViewModel.PageResult = DialogResult.None;
-
-        if (!await AdHocValidationDueToMonoLimitations())
+        using (ProcessIndicator processIndicator = new ProcessIndicator(processIndicatorService))
         {
-            return;
-        }
+            LogOnViewModel.PageResult = DialogResult.None;
 
-        LogOnViewModel.PageResult = DialogResult.OK;
+            if (!await AdHocValidationDueToMonoLimitations())
+            {
+                return;
+            }
+
+            LogOnViewModel.PageResult = DialogResult.OK;
+        }
     }
 
     private async Task<bool> AdHocValidationDueToMonoLimitations()

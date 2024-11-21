@@ -12,7 +12,7 @@ public static class FormsTypes
     {
         TypeMap.Register.Singleton<IPopup>(() => new PopupService());
         //TypeMap.Register.Singleton<IPopup>(() => new Popup(parent));
-        TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword(app.MainPage));
+        //TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword(app.MainPage));
         TypeMap.Register.Singleton<IMainUI>(() => new MainUI(app.MainPage));
     }
 }

@@ -433,9 +433,9 @@ public class ShareKeyViewModel : ViewModelBase
         //ErrorMessage = "";
     }
 
-    public List<EmailSuggestion> EmailSuggestions = new List<EmailSuggestion>();
+    public List<EmailSuggestion> EmailSuggestions { get; set; }
 
-    public List<EmailSuggestion> AllSuggestions = new List<EmailSuggestion>();
+    public List<EmailSuggestion> AllSuggestions { get; set; }
 
     public void OnEmailInput(ChangeEventArgs e)
     {
@@ -443,8 +443,7 @@ public class ShareKeyViewModel : ViewModelBase
 
         if (!string.IsNullOrEmpty(RecipientEmail))
         {
-            EmailSuggestions = AllSuggestions.Where(s => s.Email?.Contains(RecipientEmail, StringComparison.OrdinalIgnoreCase) == true ||
-                            s.GroupName?.Contains(RecipientEmail, StringComparison.OrdinalIgnoreCase) == true).ToList();
+            EmailSuggestions = AllSuggestions.Where(s => s.Email?.Contains(RecipientEmail, StringComparison.OrdinalIgnoreCase) == true || s.GroupName?.Contains(RecipientEmail, StringComparison.OrdinalIgnoreCase) == true).ToList();
             showSuggestionDropdown = EmailSuggestions.Any();
 
             SuggestUnSharedUserEmailList();
