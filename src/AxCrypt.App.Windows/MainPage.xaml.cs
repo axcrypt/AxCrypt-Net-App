@@ -451,6 +451,7 @@ public partial class MainPage : ContentPage, ISignIn
         if (!_logOnService.IsVisible)
         {
             LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
+            _logOnService.ShowLogOnDialog(logOnModel, _mainViewModel);
         }
 
         if (_logOnService.PageResult == DialogResult.None)
