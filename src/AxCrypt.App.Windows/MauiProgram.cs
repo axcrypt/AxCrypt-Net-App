@@ -164,6 +164,8 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
             services.AddSingleton<AppLocalizationOptions>();
 
+            services.AddSingleton<ICssService, CssService>();
+
             services.AddSingleton<LoginModel>();
             services.AddSingleton<MainPage>();
             services.AddSingleton<Home>();

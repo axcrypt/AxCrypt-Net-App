@@ -22,6 +22,10 @@ public class TopMenuViewModel
         _mainViewModel = logOnViewModel.MainViewModel;
         TopMenuModel = new TopMenuModel();
         TopMenuModel.SubscriptionLevel = logOnViewModel.SubscriptionLevel;
+    }
+
+    public void Initialize()
+    {
         TopMenuModel.UserEmail = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
     }
 

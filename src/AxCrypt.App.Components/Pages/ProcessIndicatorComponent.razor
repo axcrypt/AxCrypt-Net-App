@@ -31,11 +31,20 @@
 
 @if (IsVisible)
 {
-    <div class="secrets-loading-content">
-        <h2>@Title</h2>
+    @* <div class="modalDialog" style="display: block;">
+        <div class="secrets-loading-content">
+            <h2>@Title</h2>
+            <div class="loading-content">
+                <img src="" alt="Loading..." />
+                <span>@Message</span>
+            </div>
+        </div>
+    </div> *@
+
+    <div class="secrets-loading-overlay">
         <div class="loading-content">
-            <img src="" alt="Loading..." />
-            <span>@Message</span>
+            <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
+            <span style="color:black ">@Message</span>
         </div>
     </div>
 }

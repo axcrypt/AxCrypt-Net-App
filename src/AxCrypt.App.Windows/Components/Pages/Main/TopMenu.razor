@@ -56,7 +56,9 @@
     </NavLink>
     <NavLink class="update-btn padding" @onclick="ViewModel.CheckAxCryptVersionAsync">Update</NavLink>
     <NavLink class="mb-prfle" @onclick="ViewModel.ToggleAccountPopup">
-        <span class=""> @(string.IsNullOrEmpty(ViewModel.TopMenuModel.UserEmail) ? string.Empty : ViewModel.TopMenuModel.UserEmail.Substring(0, Math.Min(2, ViewModel.TopMenuModel.UserEmail.Length)).ToUpper()) </span>
+        <span class="">
+            @(string.IsNullOrEmpty(ViewModel.TopMenuModel.UserEmail) ? "N/A" : ViewModel.TopMenuModel.UserEmail.Substring(0, Math.Min(2, ViewModel.TopMenuModel.UserEmail.Length)).ToUpper())
+        </span>
     </NavLink>
 
     @if (!IsLoading)
@@ -105,6 +107,7 @@
             ViewModel.TopMenuModel.SelectedLanguageDisplayName = cultureOption.DisplayName;
         }
 
+        ViewModel.Initialize();
         model = notificationService.NotificationModel;
         await notificationService.LoadNotificationListAsync();
     }
@@ -112,6 +115,11 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            ViewModel.Initialize();
+        }
 
         try
         {
@@ -136,5 +144,13 @@
         ViewModel.SetLanguageAsync(cultureName);
         ViewModel.TopMenuModel.ShowDropdown = false;
         navigationManager.NavigateTo(navigationManager.Uri, forceLoad: true);
+    }
+
+    private void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 }

@@ -87,6 +87,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        //LogOnViewModel.OnSubscriptionChanged += UpdateState;
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -111,5 +112,13 @@
     private void FeedbackPopup()
     {
         feedbackPopup = !feedbackPopup;
+    }
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 }

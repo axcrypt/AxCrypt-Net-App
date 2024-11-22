@@ -1,6 +1,8 @@
 ﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Components.Services;
 using AxCrypt.App.Components.Services.UI;
 using AxCrypt.App.Components.Utility;
+using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -18,7 +20,9 @@ public interface ILogOnDialogService
 
 public class LogOnViewModel : ViewModelBase
 {
-    public LogOnViewModel()
+    private ProcessIndicatorService _processIndicatorService;
+
+    public LogOnViewModel(ProcessIndicatorService processIndicatorService)
     {
         License = New<LicensePolicy>().Capabilities;
         InviteDialog = new CommonDialogService();
@@ -30,6 +34,7 @@ public class LogOnViewModel : ViewModelBase
         FilePasswordDialog = new CommonDialogService();
         VerifyAccountDialog = new CommonDialogService();
         VerifyPasswordDialog = new CommonDialogService();
+        _processIndicatorService = processIndicatorService;
     }
 
     public void ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
@@ -41,9 +46,11 @@ public class LogOnViewModel : ViewModelBase
         {
             Task.Delay(1000);
         }
+        InitiateProgressIndicator();
+
         IsVisible = false;
 
-        //mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { IsVisible = !loggedOn; });
+        mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { if (loggedOn) { ProcessIndicator?.Dispose(); }/* else { IsVisible = !loggedOn; }*/ });
         mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnSubscriptionChanged?.Invoke(); } });
     }
 
@@ -58,26 +65,41 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService InviteDialog { get { return GetProperty<CommonDialogService>(nameof(InviteDialog)); } set { SetProperty(nameof(InviteDialog), value); } }
 
     public CommonDialogService UpgradeDialog { get { return GetProperty<CommonDialogService>(nameof(UpgradeDialog)); } set { SetProperty(nameof(UpgradeDialog), value); } }
-   
+
     public CommonDialogService ShareKeyDialog { get { return GetProperty<CommonDialogService>(nameof(ShareKeyDialog)); } set { SetProperty(nameof(ShareKeyDialog), value); } }
-    
+
     public CommonDialogService ImportPrivatePasswordDialog { get { return GetProperty<CommonDialogService>(nameof(ImportPrivatePasswordDialog)); } set { SetProperty(nameof(ImportPrivatePasswordDialog), value); } }
-    
+
     public CommonDialogService RenewSubscriptionDialog { get { return GetProperty<CommonDialogService>(nameof(RenewSubscriptionDialog)); } set { SetProperty(nameof(RenewSubscriptionDialog), value); } }
-    
+
     public CommonDialogService CreateNewAccountDialog { get { return GetProperty<CommonDialogService>(nameof(CreateNewAccountDialog)); } set { SetProperty(nameof(CreateNewAccountDialog), value); } }
-   
+
     public CommonDialogService FilePasswordDialog { get { return GetProperty<CommonDialogService>(nameof(FilePasswordDialog)); } set { SetProperty(nameof(FilePasswordDialog), value); } }
-    
+
     public CommonDialogService VerifyAccountDialog { get { return GetProperty<CommonDialogService>(nameof(VerifyAccountDialog)); } set { SetProperty(nameof(VerifyAccountDialog), value); } }
-    
+
     public CommonDialogService VerifyPasswordDialog { get { return GetProperty<CommonDialogService>(nameof(VerifyPasswordDialog)); } set { SetProperty(nameof(VerifyPasswordDialog), value); } }
+
+    public ProcessIndicator ProcessIndicator { get; set; }
+
+    private void InitiateProgressIndicator()
+    {
+        ProcessIndicator = new ProcessIndicator(_processIndicatorService);
+    }
 
     public SubscriptionLevel SubscriptionLevel
     {
         get
         {
             return License.GetLicenseStatus();
+        }
+    }
+
+    public bool IsLoggedOn
+    {
+        get 
+        {
+            return MainViewModel.LoggedOn;
         }
     }
 
@@ -91,7 +113,7 @@ public class LogOnViewModel : ViewModelBase
 
     public Func<Task>? OnLogOnOrLogOffAndLogOnAgain;
 
-    private bool _isVisible;
+    private static bool _isVisible;
 
     public bool IsVisible
     {

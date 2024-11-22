@@ -9,8 +9,8 @@ namespace AxCrypt.App.Windows.ViewModels;
 public class FilePasswordDialogViewModel : ViewModelBase
 {
     private LogOnViewModel _logOnViewModel;
-
-    public FilePasswordViewModel ViewModel { get; private set; }
+    private string _fileName;
+    private FilePasswordViewModel? _viewModel { get; set; }
 
     public FilePasswordDialogViewModel(LogOnViewModel logOnViewModel)
     {
@@ -19,7 +19,8 @@ public class FilePasswordDialogViewModel : ViewModelBase
 
     public void SetFilePassword(string encryptedFileFullName)
     {
-        ViewModel = new FilePasswordViewModel(encryptedFileFullName);
+        _viewModel = new FilePasswordViewModel(encryptedFileFullName);
+        FileName = _viewModel.FileName;
         InitializePropertyValues();
         _logOnViewModel.FilePasswordDialog.Show();
     }
@@ -34,16 +35,16 @@ public class FilePasswordDialogViewModel : ViewModelBase
 
     private void BindPropertyChangedEvents()
     {
-        ViewModel.BindPropertyChanged(nameof(FilePasswordViewModel.ShowPassword), (bool show) => { ShowPassPhrase = show; });
-        ViewModel.BindPropertyChanged(nameof(FilePasswordViewModel.FileName), (string fileName) => { FileName = fileName; });
+        _viewModel.BindPropertyChanged(nameof(FilePasswordViewModel.ShowPassword), (bool show) => { ShowPassPhrase = show; });
+        _viewModel.BindPropertyChanged(nameof(FilePasswordViewModel.FileName), (string fileName) => { FileName = fileName; });
         //ViewModel.BindPropertyChanged(nameof(FilePasswordViewModel.IsLegacyFile), (bool isLegacy) => { _moreButton.Visible = isLegacy; });
     }
 
-    public string PassPhrase { get; set; }
+    public string PassPhrase { get; set; } = string.Empty;
     public bool ShowPassPhrase { get; set; }
-    public string FileName { get; set; }
-    public string KeyFile { get; set; }
-    public DialogResult DialogResult { get; set; }
+    public string FileName { get; set; } = string.Empty;
+    public string KeyFile { get; set; } = string.Empty;
+    public DialogResult DialogResult { get; set; } = DialogResult.None;
     public string ErrorMessage { get; set; }
 
     public void OkButton_Click(EventArgs e)
@@ -61,24 +62,24 @@ public class FilePasswordDialogViewModel : ViewModelBase
     {
         ErrorMessage = "";
 
-        if (ViewModel[nameof(FilePasswordViewModel.KeyFileName)].Length > 0)
+        if (_viewModel[nameof(FilePasswordViewModel.KeyFileName)].Length > 0)
         {
             ErrorMessage = Texts.FileNotFound;
             return false;
         }
 
-        if (ViewModel[nameof(FilePasswordViewModel.PasswordText)].Length == 0)
+        if (_viewModel[nameof(FilePasswordViewModel.PasswordText)].Length == 0)
         {
             return true;
         }
 
-        if (String.IsNullOrEmpty(ViewModel.FileName))
+        if (String.IsNullOrEmpty(_viewModel.FileName))
         {
             ErrorMessage = Texts.UnknownLogOn;
         }
         else
         {
-            ErrorMessage = ViewModel.ValidationError.ToValidationMessage();
+            ErrorMessage = _viewModel.ValidationError.ToValidationMessage();
         }
         return false;
     }
@@ -112,11 +113,13 @@ public class FilePasswordDialogViewModel : ViewModelBase
         //        _keyFileTextBox.Focus();
         //    }
         //}
-
-        FileResult fileResult = await FilePicker.Default.PickAsync();
-        if (fileResult != null)
+        if (string.IsNullOrEmpty(_fileName))
         {
-            KeyFile = fileResult.FullPath;
+            FileResult fileResult = await FilePicker.Default.PickAsync();
+            if (fileResult != null)
+            {
+                _fileName = fileResult.FullPath;
+            }
         }
     }
 

@@ -2,124 +2,132 @@
 @using AxCrypt.App.Components.Models
 @using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Content
+@using AxCrypt.Core
 @using AxCrypt.Core.UI
 
 @using static AxCrypt.Abstractions.TypeResolve
 
-@inject ProfileViewModel accountViewModel
+@inject ProfileViewModel ProfileViewModel
 
 <div class="desk-acnt-popup model-popup hide-model-popup" id="" style="">
     <span class="font-bold">Account</span>
     <div class="acc-subs">
         <div class="accnt-prfl">
             <h3 class="txt-clr">
-                @(string.IsNullOrEmpty(accountViewModel.Account?.UserEmail) || accountViewModel.Account.UserEmail.Length < 2 ? "" : accountViewModel.Account.UserEmail.Substring(0, 2).ToUpper())
+                @if (!string.IsNullOrEmpty(ProfileViewModel.Account?.UserEmail) && ProfileViewModel.Account.UserEmail.Length >= 2)
+                {
+                    @ProfileViewModel.Account.UserEmail.Substring(0, 2).ToUpper()
+                }
+                else
+                {
+                    <span></span> 
+                }
             </h3>
         </div>
 
-        <h3 class="subs-txt txt-clr">@accountViewModel?.Account?.SubscriptionLevel</h3>
+        <h3 class="subs-txt txt-clr">@ProfileViewModel?.Account?.SubscriptionLevel</h3>
         <div>
             <div style="text-align:left;">
                 <img class="" src="images/default/IcoMssg.svg" alt="go-back-img" />
-                <span class="grey-clr font-high text-overlfow">@accountViewModel?.Account?.UserEmail</span>
+                <span class="grey-clr font-high text-overlfow">@ProfileViewModel?.Account?.UserEmail</span>
             </div>
-            @if (accountViewModel?.Account?.SubscriptionLevel != SubscriptionLevel.Free)
+            @if (ProfileViewModel?.Account?.SubscriptionLevel != SubscriptionLevel.Free)
             {
                 <div style="text-align:left;">
                     <img class="" src="images/default/IcoClndr.svg" alt="go-back-img" />
-                    <span class="grey-clr font-high" style="padding-left: 5px;">expire in <span class="txt-clr">@accountViewModel?.Account?.DaysLeft</span></span>
+                    <span class="grey-clr font-high" style="padding-left: 5px;">expire in <span class="txt-clr">@ProfileViewModel?.Account?.DaysLeft</span></span>
                 </div>
-                <a class="can-subs" @onclick="accountViewModel.CancelSubscription">Cancel subscription</a>
+                <a class="can-subs" @onclick="ProfileViewModel.CancelSubscription">Cancel subscription</a>
             }
             else
             {
-                <button class="font-bold acnt-upg" style=" width: 154px;height: 37px;" @onclick="accountViewModel.UpgradeSubscription"> Upgrade now</button>
+                <button class="font-bold acnt-upg" style=" width: 154px;height: 37px;" @onclick="ProfileViewModel.UpgradeSubscription"> Upgrade now</button>
             }
         </div>
     </div>
     <div class="manage-acc-sec font-medium">
         <div class="key-section">
-            <NavLink @attributes="accountViewModel.NavLinkAttributes()" @onclick="accountViewModel.ToggleKMPopup">
+            <NavLink @attributes="ProfileViewModel.NavLinkAttributes()" @onclick="ProfileViewModel.ToggleKMPopup">
                 <img class="kym-sec" src="images/default/IcoKMngmnt.svg" alt="go-back-img" />
                 <span>@Texts.KeyManagementToolStripMenuItemText</span>
                 <img class="next-arrow" />
             </NavLink>
         </div>
         <div class="key-section">
-            <NavLink class="nav-link" @onclick="(e) => accountViewModel.ChangePassphraseMenuItem_Click(e)">
+            <NavLink class="nav-link" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
                 <span>Password change</span>
             </NavLink>
         </div>
         <div class="key-section" disabled="@IsPasswordReset()">
-            <NavLink class="nav-link" @onclick="(e) => accountViewModel.PasswordReset_Click(e)">
+            <NavLink class="nav-link" @onclick="(e) => ProfileViewModel.PasswordReset_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
                 <span>Password Reset</span>
             </NavLink>
         </div>
         <div class="key-section">
-            <NavLink class="nav-link" @onclick="()=> accountViewModel.ClearAllSettingsAndRestartAsync()">
+            <NavLink class="nav-link" @onclick="()=> ProfileViewModel.ClearAllSettingsAndRestartAsync()">
                 <img class="" src="images/default/IcoClrSttngs.svg" alt="go-back-img" />
                 <span>@Texts.OptionsClearAllSettingsAndExitToolStripMenuItemText</span>
             </NavLink>
         </div>
         <div class="key-section">
-            <NavLink class="nav-link next-arrow" @onclick="accountViewModel.ToggleSubsDtlsPopup">
+            <NavLink class="nav-link next-arrow" @onclick="ProfileViewModel.ToggleSubsDtlsPopup">
                 <img class="" src="images/default/IcoSubsDetails.svg" alt="go-back-img" />
                 <span>@Texts.SubscriptionDetailsTitle</span>
             </NavLink>
         </div>
-        <NavLink class="nav-link" @onclick="accountViewModel.RedirectToMyAxCryptIDPage">
+        <NavLink class="nav-link" @onclick="ProfileViewModel.RedirectToMyAxCryptIDPage">
             <span>@Texts.DebugManageAccountToolStripMenuItemText</span>
             <img class="mng-accnt" src="" alt="go-back-img" style="float:right" />
         </NavLink>
-        <NavLink class="nav-link" @onclick="accountViewModel.ViewHelpMenuItemClick">
+        <NavLink class="nav-link" @onclick="ProfileViewModel.ViewHelpMenuItemClick">
             <span>@Texts.HelpToolStripMenuItemText</span>
             <img class="mng-accnt" src="" alt="go-back-img" style="float:right" />
         </NavLink>
         <NavLink class="nav-link" href="">
-            <span class="log-out-clr font-medium" @onclick="()=> accountViewModel.SignOut()">@Texts.LogOffText</span>
+            <span class="log-out-clr font-medium" @onclick="()=> ProfileViewModel.SignOut()">@Texts.LogOffText</span>
         </NavLink>
-        <NavLink class="nav-link" @onclick="(e)=> accountViewModel.ExitMenuItem_Click(e)">
+        <NavLink class="nav-link" @onclick="(e)=> ProfileViewModel.ExitMenuItem_Click(e)">
             <span class="font-medium">@Texts.ExitToolStripMenuItemText</span>
         </NavLink>
     </div>
 </div>
-@if (accountViewModel.keyMPopup)
+@if (ProfileViewModel.keyMPopup)
 {
     <div class="key-mngnt-Popup model-popup sub-pop1 hide-model-popup" id="">
         <div class="font-medium left-align">
-            <dd class="@accountViewModel.GetDisabledClass(!accountViewModel.Account.IsLoggedOn)" @onclick="()=>accountViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">Import Someone`s Public Sharing Key</dd>
-            <dd class="@accountViewModel.GetDisabledClass(!accountViewModel.Account.IsLoggedOn)" @onclick="()=>accountViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">Export My Public Sharing Key</dd>
-            <dd class="@accountViewModel.GetDisabledClass(accountViewModel.Account.IsLoggedOn)" @onclick="@(async() => {  await accountViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">Import AxCrypt ID with sharing and access keys</dd>
-            <dd class="@accountViewModel.GetDisabledClass(!accountViewModel.Account.IsLoggedOn)" @onclick="()=>accountViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">Export AxCrypt ID Secret and Sharing Key Pair</dd>
-            <dd class="@accountViewModel.GetDisabledClass(accountViewModel.Account.IsLoggedOn)" @onclick="@(async() => { await accountViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">Create AxCrypt ID</dd>
+            <dd class="@ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">Import Someone`s Public Sharing Key</dd>
+            <dd class="@ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">Export My Public Sharing Key</dd>
+            <dd class="@ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => {  await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">Import AxCrypt ID with sharing and access keys</dd>
+            <dd class="@ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">Export AxCrypt ID Secret and Sharing Key Pair</dd>
+            <dd class="@ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">Create AxCrypt ID</dd>
         </div>
     </div>
 }
-@if (accountViewModel.SubsDtlsPopup)
+@if (ProfileViewModel.SubsDtlsPopup)
 {
     <div class="subs-dtls-popup model-popup sub-pop2 hide-model-popup" id="">
-        <div class="close-img" @onclick="accountViewModel.ToggleSubsDtlsPopup"></div>
+        <div class="close-img" @onclick="ProfileViewModel.ToggleSubsDtlsPopup"></div>
         <div class="center-column" style="padding:0;">
             <div>
                 <img class="ico-user-dk" src="" alt="Ico-user" />
             </div>
             <div>
                 <span class="txt-clr">Subscription:</span>
-                <span class="font-bold">@accountViewModel.Account.SubscriptionLevel.ToString()</span><br />
-                @if (accountViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
+                <span class="font-bold">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
+                @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
                 {
                     <span class="txt-clr">Company:</span>
                     <span class="font-bold">AxCrypt</span> <br />
                 }
-                @if (accountViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
+                @if (ProfileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
                 {
                     <span class="txt-clr">Type:</span>
-                    <span class="font-bold">@accountViewModel.Account.Subscription</span> <br />
+                    <span class="font-bold">@ProfileViewModel.Account.Subscription</span> <br />
                 }
                 <span class="txt-clr">Valid until:</span>
-                <span class="font-bold">@accountViewModel.ValidFormatted</span>
+                <span class="font-bold">@ProfileViewModel.ValidFormatted</span>
             </div>
         </div>
     </div>
@@ -133,10 +141,9 @@
 </style>
 
 @code {
-
     protected override async Task OnInitializedAsync()
     {
-        await accountViewModel.InitializeAsync();
+        await ProfileViewModel.InitializeAsync();
 
         await base.OnInitializedAsync();
     }
@@ -160,7 +167,15 @@
 
     private string IsPasswordReset()
     {
-        bool isPasswordReset = accountViewModel.Account.IsLoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail);
+        bool isPasswordReset = ProfileViewModel.Account.IsLoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail);
         return isPasswordReset ? "" : "disabled";
+    }
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 }

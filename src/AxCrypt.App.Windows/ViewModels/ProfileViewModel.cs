@@ -77,15 +77,19 @@ public class ProfileViewModel
             case KeyManagement.ImportSomeonesSharingKey:
                 await ImportOthersSharingKeyMenuItem_Click();
                 break;
+
             case KeyManagement.ExportMySharingKey:
                 await ExportMySharingKey();
                 break;
+
             case KeyManagement.ImportAxCryptID:
                 _logOnViewModel.ImportPrivatePasswordDialog.Show();
                 break;
+
             case KeyManagement.ExportAxCryptIDAndSharingKeyPair:
                 await ExportMyPrivateKey();
                 break;
+
             case KeyManagement.CreateAxCryptID:
                 _logOnViewModel.CreateNewAccountDialog.Show();
                 break;

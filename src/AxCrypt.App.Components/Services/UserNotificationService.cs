@@ -12,10 +12,11 @@ namespace AxCrypt.App.Components.Services;
 public class UserNotificationService
 {
     private ProcessIndicatorService _ProcessIndicatorService;
-
-    public UserNotificationService(ProcessIndicatorService processIndicatorService)
+    private LogOnViewModel _logOnViewModel;
+    public UserNotificationService(ProcessIndicatorService processIndicatorService, LogOnViewModel logOnViewModel)
     {
         _ProcessIndicatorService = processIndicatorService;
+        _logOnViewModel = logOnViewModel;
         NotificationModel = new();
     }
 
@@ -33,7 +34,7 @@ public class UserNotificationService
     private async Task<IEnumerable<NotificationItemViewModel>> LoadNotificationsAsync()
     {
         AxCrypt.Core.Crypto.LogOnIdentity identity = New<KnownIdentities>().DefaultEncryptionIdentity;
-        string subscriptionLevel = New<AccountStatusViewModel>().SubscriptionLevel.ToString();
+        string subscriptionLevel = _logOnViewModel.SubscriptionLevel.ToString();
 
         IEnumerable<Api.Model.Notification.UserNotificationApiModel> notifications = await NotificationApiHelper.GetNotificationAsync(identity.UserEmail.Address, subscriptionLevel);
         return notifications.Select(nf => new NotificationItemViewModel(nf));

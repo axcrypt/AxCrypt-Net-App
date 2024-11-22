@@ -28,7 +28,7 @@
             <AxCrypt.App.Windows.Components.Pages.Login.LoginPage />
         }
     }
-    else
+    else if (LogOnViewModel.IsLoggedOn)
     {
         <HomePage />
     }
@@ -74,9 +74,18 @@
         base.OnInitialized();
         HomeUserService.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdatePageState;
+        LogOnViewModel.OnSubscriptionChanged += UpdatePageState;
     }
 
-    private void UpdatePageState(bool canShowSignInPage = true)
+    private void UpdatePageState(bool isShow = false)
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+    
+    private void UpdatePageState()
     {
         InvokeAsync(() =>
         {

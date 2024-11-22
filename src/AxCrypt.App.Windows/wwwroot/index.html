@@ -44,10 +44,11 @@
         }, { passive: false });
     </script>
     <script>
-        window.addCssFile = function (cssPath) {
+        window.addCssFile = function (cssFile) {
             var link = document.createElement("link");
-            link.href = cssPath;
             link.rel = "stylesheet";
+            link.type = "text/css";
+            link.href = cssFile;
             document.head.appendChild(link);
         };
     </script>

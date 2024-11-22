@@ -148,13 +148,14 @@
     {
         await base.OnInitializedAsync();
         RecentFilesViewModel.OnInitializedAsync();
+        RecentFilesViewModel.OnSubscriptionChanged += UpdatePageState;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            //RecentFilesViewModel.RecentFilesList = new ObservableCollection<FileDetails>(await RecentFilesViewModel.LoadRecentFiles());
+            await base.OnAfterRenderAsync(firstRender);
         }
         try
         {
@@ -170,6 +171,14 @@
     }
 
     private void UpdatePopupVisibility(bool updateList)
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void UpdatePageState()
     {
         InvokeAsync(() =>
         {
