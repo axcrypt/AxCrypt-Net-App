@@ -1,4 +1,5 @@
 ﻿using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Services;
 using AxCrypt.App.Components.Utility;
 using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Core.UI;
@@ -11,7 +12,7 @@ namespace AxCrypt.App.Windows.Infrastructure.Dialogs;
 public class VerifySignInPassword : VerifySignInPasswordBase
 {
     //private Page _parent;
-    private VerifyPasswordViewModel _verifyPasswordViewModel;
+    private VerifyPasswordViewModel? _verifyPasswordViewModel;
 
     //public VerifySignInPassword(Page parent)
     //{
@@ -20,15 +21,16 @@ public class VerifySignInPassword : VerifySignInPasswordBase
 
     protected override bool VerifyDialog(string description)
     {
-        _verifyPasswordViewModel = new VerifyPasswordViewModel(new LogOnViewModel());
+        ProcessIndicatorService processIndicatorService = new ProcessIndicatorService();
+        _verifyPasswordViewModel = new VerifyPasswordViewModel(new LogOnViewModel(processIndicatorService));
         VerifySignInPasswordViewModel viewModel = new VerifySignInPasswordViewModel(New<KnownIdentities>().DefaultEncryptionIdentity);
         _verifyPasswordViewModel.SetViewPassword(viewModel,description);
         //_logOnViewModel.VerifyPasswordDialog.Show();
 
-        while (_verifyPasswordViewModel.DialogResult == DialogResult.None)
-        {
-            Task.Delay(1000);
-        }
+        //while (_verifyPasswordViewModel.DialogResult == DialogResult.None)
+        //{
+        //    Task.Delay(1000);
+        //}
 
         return false;
         //trigger verify password dialog

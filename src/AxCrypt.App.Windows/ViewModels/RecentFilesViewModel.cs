@@ -17,47 +17,57 @@ using AxCrypt.Api.Model;
 using AxCrypt.Abstractions;
 using AxCrypt.Core.Crypto;
 using System.Globalization;
+using AxCrypt.App.Components.Utility;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class RecentFilesViewModel : ComponentBase
+public class RecentFilesViewModel : LogOnViewModel
 {
-    private LogOnViewModel _logOnViewModel;
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
-    private ProcessIndicatorService _ProcessIndicatorService;
+    private ProcessIndicatorService? _ProcessIndicatorService;
+    private ShareKeyViewModel? _sharekeyViewModel;
 
-    public RecentFilesViewModel(LogOnViewModel logOnViewModel)
+    public RecentFilesViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel, ProcessIndicatorService processIndicatorService) : base(processIndicatorService)
     {
-        _logOnViewModel = logOnViewModel;
+        LogOnViewModel = logOnViewModel;
         _mainViewModel = logOnViewModel.MainViewModel;
         _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
-        SubscriptionLevel = logOnViewModel.SubscriptionLevel;
+        _sharekeyViewModel = shareKeyViewModel;
     }
 
     public void OnInitializedAsync()
     {
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { UpdateRecentFilesList(_mainViewModel.RecentFiles); });
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
+        IsHideRecentFiles = New<UserSettings>().HideRecentFiles;
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { LogOnViewModel.License = license; LogOnViewModel.SubscriptionChanged(); } });
+        //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { UpdateRecentFilesList(_mainViewModel.RecentFiles); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFilesAsync(files); LogOnViewModel.UIStateChanged(); });
     }
 
-    public ShareKeyViewModel? SharekeysViewModel { get; set; }
+    public LogOnViewModel LogOnViewModel { get; set; }
 
-    public ObservableCollection<FileDetails> RecentFilesList { get; set; }
+    public ObservableCollection<FileDetails> RecentFilesList { get; set; } = new ObservableCollection<FileDetails>();
 
     public ObservableCollection<FileDetails> SelectedFiles = new ObservableCollection<FileDetails>();
 
     private FileDetails SelectedFile = new FileDetails();
 
-    public SubscriptionLevel SubscriptionLevel { get; set; }
+    public SubscriptionLevel SubscriptionLevel
+    {
+        get
+        {
+            return LogOnViewModel.License.GetLicenseStatus();
+        }
+    }
 
     public bool IsHeaderCheckboxChecked { get; set; } = false;
     public bool ContextMenu { get; set; } = false;
     public bool isNameAscending { get; set; }
     public bool isSizeAscending { get; set; }
     public bool isDateModifiedAscending { get; set; }
+    public bool IsHideRecentFiles { get; set; }
 
     public void ToggleAllCheckboxes(ChangeEventArgs e)
     {
@@ -170,24 +180,25 @@ public class RecentFilesViewModel : ComponentBase
         isDateModifiedAscending = !isDateModifiedAscending;
     }
 
-    private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
+    private async Task UpdateRecentFilesAsync(IEnumerable<ActiveFile> files)
     {
         using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
         {
-            if (RecentFilesList != null && files.Count() != RecentFilesList.Count)
+            if (New<UserSettings>().HideRecentFiles)
+            {
+                RecentFilesList.Clear();
+                return;
+            }
+
+            if (RecentFilesList == null)
             {
                 RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
                 return;
             }
 
-            if (RecentFilesList == null && files.Any())
-            {
-                RecentFilesList = new ObservableCollection<FileDetails>();
-                RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
-                return;
-            }
-
-            RecentFilesList = new ObservableCollection<FileDetails>();
+            RecentFilesList.Clear();
+            RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
+            return;
         }
     }
 
@@ -284,7 +295,7 @@ public class RecentFilesViewModel : ComponentBase
 
         IEnumerable<string> encryptedFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncrypted());
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        SharekeysViewModel.SetSelectedFilesOrFolders(fileNames, viewModel);
+        _sharekeyViewModel.SetSelectedFilesOrFolders(fileNames, viewModel);
 
         if (encryptableFileNames != null && encryptableFileNames.Any())
         {
@@ -294,6 +305,7 @@ public class RecentFilesViewModel : ComponentBase
         }
 
         await viewModel.ShareFiles.ExecuteAsync(null);
+        SelectedFiles.Clear();
     }
 
     private async void ShowInFolder()
@@ -322,7 +334,7 @@ public class RecentFilesViewModel : ComponentBase
             return;
         }
 
-        _logOnViewModel.UpgradeDialog.Show();
+        LogOnViewModel.UpgradeDialog.Show();
     }
 
     private void UpdateRecentFilesList(IEnumerable<ActiveFile> recentFiles)

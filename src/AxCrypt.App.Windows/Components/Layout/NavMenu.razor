@@ -63,18 +63,6 @@
         </div>
     </nav>
 </div>
-<div>
-    @if (aboutPopup)
-    {
-        <AxCrypt.App.Windows.Components.Pages.About />
-    }
-</div>
-<div>
-    @if (feedbackPopup)
-    {
-        <AxCrypt.App.Windows.Components.Pages.Feedback />
-    }
-</div>
 
 @code {
     private bool collapseNavMenu = true;
@@ -82,12 +70,10 @@
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private bool isSideMenuHide = false;
-    private bool aboutPopup = false;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        //LogOnViewModel.OnSubscriptionChanged += UpdateState;
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -105,20 +91,11 @@
 
     private void AboutPopup()
     {
-        aboutPopup = !aboutPopup;
+        LogOnViewModel.AboutDialog.Show();
     }
 
-    private bool feedbackPopup = false;
     private void FeedbackPopup()
     {
-        feedbackPopup = !feedbackPopup;
-    }
-
-    void UpdateState()
-    {
-        InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });
+        LogOnViewModel.FeedbackDialog.Show();
     }
 }

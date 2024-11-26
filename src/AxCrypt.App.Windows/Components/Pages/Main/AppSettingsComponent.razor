@@ -3,8 +3,8 @@
 
 @inject NavigationManager navigation
 
-@inject AppSettingsViewModel appSettingsViewModel
-@inject AdvancedOptionsViewModel viewModel
+@inject AppSettingsViewModel AppSettingsViewModel
+@inject AdvancedOptionsViewModel ViewModel
 
 <div class="desk-stngs-popup manage-acc-sec model-popup font-medium hide-model-popup">
     <span class="font-bold">@Texts.SettingsPageTitle</span>
@@ -15,9 +15,9 @@
         </div>
         <div style="float:right; padding-left:15px;">
             <label class="toggle">
-                <input type="checkbox" @bind="appSettingsViewModel.HideRecentFiles" @onclick="appSettingsViewModel.ToggleHideRecentFiles" />
+                <input type="checkbox" @bind="AppSettingsViewModel.HideRecentFiles" @onclick="AppSettingsViewModel.ToggleHideRecentFiles" />
                 <span class="slider round">
-                    @if (appSettingsViewModel.HideRecentFiles)
+                    @if (AppSettingsViewModel.HideRecentFiles)
                     {
                         <span class="on-off-text on-text">ON</span>
                         <span class="on-off-text off-text" style="display:none;">OFF</span>
@@ -38,9 +38,9 @@
         </div>
         <div style="float:right; padding-left:15px;">
             <label class="toggle">
-                <input type="checkbox" @bind="appSettingsViewModel.AutoUpgradeToAES256" @onclick="appSettingsViewModel.ToggleEncryptionUpgradeMode">
+                <input type="checkbox" @bind="AppSettingsViewModel.AutoUpgradeToAES256" @onclick="AppSettingsViewModel.ToggleEncryptionUpgradeMode">
                 <span class="slider round">
-                    @if (appSettingsViewModel.AutoUpgradeToAES256)
+                    @if (AppSettingsViewModel.AutoUpgradeToAES256)
                     {
                         <span class="on-off-text on-text">ON</span>
                         <span class="on-off-text off-text" style="display:none;">OFF</span>
@@ -61,9 +61,9 @@
         </div>
         <div style="float:right; padding-left:15px;">
             <label class="toggle">
-                <input type="checkbox" @bind="appSettingsViewModel.IncludeSubfolders" @onclick="async(e)=> appSettingsViewModel.ToggleIncludeSubfolders(e)">
+                <input type="checkbox" @bind="AppSettingsViewModel.IncludeSubfolders" @onclick="async(e)=> AppSettingsViewModel.ToggleIncludeSubfolders(e)">
                 <span class="slider round">
-                    @if (appSettingsViewModel.IncludeSubfolders)
+                    @if (AppSettingsViewModel.IncludeSubfolders)
                     {
                         <span class="on-off-text on-text">ON</span>
                         <span class="on-off-text off-text" style="display:none;">OFF</span>
@@ -78,19 +78,19 @@
         </div>
     </NavLink>
     <div class="key-section">
-        <NavLink @attributes="appSettingsViewModel.NavLinkAttributes1()" @onclick="appSettingsViewModel.InactSgnOutPopup">
+        <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" @onclick="AppSettingsViewModel.InactSgnOutPopup">
             <img class="sgn-out-img" src="images/default/IcoSngOut.svg" alt="go-back-img" />
             <span>@Texts.IdleSignOutToolStripMenuItemText</span>
         </NavLink>
     </div>
     <div class="key-section">
-        <NavLink class="nav-link" @onclick="(e)=> appSettingsViewModel.RestoreRename(e)">
+        <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.RestoreRename(e)">
             <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
             <span>Restore to original</span>
         </NavLink>
     </div>
     <div class="key-section">
-        <NavLink class="nav-link" @onclick="(e)=> appSettingsViewModel.ToggleAdvancedOption()">
+        <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.ToggleAdvancedOption()">
             <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
             <span>Advanced Option</span>
         </NavLink>
@@ -102,9 +102,9 @@
         </div>
         <div style="float:right; padding-left:15px;">
             <label class="toggle">
-                <input type="checkbox" @bind="appSettingsViewModel.AlwaysOffline" @onclick="(e)=> appSettingsViewModel.ToggleAlwaysOffline(e)">
+                <input type="checkbox" @bind="AppSettingsViewModel.AlwaysOffline" @onclick="(e)=> AppSettingsViewModel.ToggleAlwaysOffline(e)">
                 <span class="slider round">
-                    @if (appSettingsViewModel.AlwaysOffline)
+                    @if (AppSettingsViewModel.AlwaysOffline)
                     {
                         <span class="on-off-text on-text">ON</span>
                         <span class="on-off-text off-text" style="display:none;">OFF</span>
@@ -119,41 +119,43 @@
         </div>
     </NavLink>
     <div class="key-section">
-        <NavLink @attributes="appSettingsViewModel.NavLinkAttributes3()" @onclick="appSettingsViewModel.FileEncryptionProperty">
+        <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" @onclick="AppSettingsViewModel.FileEncryptionProperty">
             <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
             <span>Encryption File Properties</span>
         </NavLink>
     </div>
     <div class="key-section">
-        <NavLink class="nav-link" @onclick="(e)=> appSettingsViewModel.InviteUser(e)">
+        <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.InviteUser(e)">
             <img class="" src="images/default/IcoInvtFrnd1.svg" alt="go-back-img" />
             <span>@Texts.InviteUserToolStripMenuItemText</span>
         </NavLink>
     </div>
     <div class="key-section">
-        <NavLink class="debug" @attributes="appSettingsViewModel.NavLinkAttributes2()" @onclick="appSettingsViewModel.ToggleDebugPopup">
+        <NavLink class="debug" @attributes="AppSettingsViewModel.NavLinkAttributes2()" @onclick="AppSettingsViewModel.ToggleDebugPopup">
             <img class="dbg-img" src="images/default/IcoDbg.svg" alt="go-back-img" />
             <span>@Texts.DebugToolStripMenuItemText</span>
         </NavLink>
     </div>
 </div>
-@if (appSettingsViewModel.InactSgnOut)
+@if (AppSettingsViewModel.InactSgnOut)
 {
     <div class="model-popup sub-pop1 hide-model-popup">
         <div id="inactivity">
             <form id="inactivityForm">
-                @foreach (int timeout in appSettingsViewModel.InactivityTimeoutOptions)
+                @foreach (int timeout in AppSettingsViewModel.InactivityTimeoutOptions)
                 {
-                    <input type="radio" id="timeout-@timeout" name="inactivity" value="@timeout" 
-                    checked="@(timeout == appSettingsViewModel.InactivitySignOut)" 
-                    @onclick="(e) => appSettingsViewModel.OnInactivityContextMenu(timeout, e)" />
-                    <label for="timeout-@timeout">@((timeout == 0) ? "Disable" : $"{timeout} minutes")</label><br />
+                    <input type="radio" id="timeout-@timeout" name="inactivity" value="@timeout"
+                           checked="@(timeout == AppSettingsViewModel.InactivitySignOut)"
+                           @onclick="(e) => AppSettingsViewModel.OnInactivityContextMenu(timeout, e)" />
+                    <label for="timeout-@timeout">@((timeout == 0) ? "Disable" : $"{timeout} minutes")</label>
+
+                    <br />
                 }
             </form>
         </div>
     </div>
 }
-@if (appSettingsViewModel.FileEncryptionProperties)
+@if (AppSettingsViewModel.FileEncryptionProperties)
 {
     <div class="model-popup sub-pop1 hide-model-popup encrypt-pop">
         <div id="date-modified-toggle">
@@ -167,10 +169,10 @@
                     </div>
                     <div style="float:right; padding-left:15px;">
                         <label class="toggle">
-                            <input type="checkbox" @bind="@appSettingsViewModel.IsDateModifiedOn" @onclick="(e)=> appSettingsViewModel.FilePropertiesDateModified(e)">
+                            <input type="checkbox" @bind="@AppSettingsViewModel.IsDateModifiedOn" @onclick="(e)=> AppSettingsViewModel.FilePropertiesDateModified(e)">
 
                             <span class="slider round">
-                                @if (appSettingsViewModel.IsDateModifiedOn)
+                                @if (AppSettingsViewModel.IsDateModifiedOn)
                                 {
                                     <span class="on-off-text on-text">ON</span>
                                     <span class="on-off-text off-text" style="display:none;">OFF</span>
@@ -193,10 +195,10 @@
                     </span>
                     <div style="float:right; padding-left:15px;">
                         <label class="toggle">
-                            <input type="checkbox" @bind="@appSettingsViewModel.IsFileNameOn" @onclick="(e) => appSettingsViewModel.FilePropertiesFileName(e)">
+                            <input type="checkbox" @bind="@AppSettingsViewModel.IsFileNameOn" @onclick="(e) => AppSettingsViewModel.FilePropertiesFileName(e)">
 
                             <span class="slider round">
-                                @if (appSettingsViewModel.IsFileNameOn)
+                                @if (AppSettingsViewModel.IsFileNameOn)
                                 {
                                     <span class="on-off-text on-text">ON</span>
                                     <span class="on-off-text off-text" style="display:none;">OFF</span>
@@ -214,39 +216,39 @@
         </div>
     </div>
 }
-@if (appSettingsViewModel.DebugPopup)
+@if (AppSettingsViewModel.DebugPopup)
 {
     <div class="model-popup sub-pop2 font-medium hide-model-popup">
         <div class="manage-acc-sec">
-            <NavLink class="nav-link" @onclick="appSettingsViewModel.CheckAxCryptVersionAsync">
+            <NavLink class="nav-link" @onclick="AppSettingsViewModel.CheckAxCryptVersionAsync">
                 <img class="" src="images/default/IcoChckVrsn.svg" alt="go-back-img" />
                 <span>Check version now</span>
             </NavLink>
-            <NavLink class="nav-link" @onclick="appSettingsViewModel.OpenOptions">
+            <NavLink class="nav-link" @onclick="AppSettingsViewModel.OpenOptions">
                 <img class="" src="images/default/IcoExtrFtrs1.svg" alt="go-back-img" />
                 <span>Options</span>
             </NavLink>
-            <NavLink class="nav-link" @onclick="appSettingsViewModel.OnOpenLogViewerClicked">
+            <NavLink class="nav-link" @onclick="AppSettingsViewModel.OnOpenLogViewerClicked">
                 <img class="" src="images/default/IcoLgng.svg" alt="go-back-img" />
                 <span>Logging</span>
             </NavLink>
-            <NavLink class="nav-link" @onclick="appSettingsViewModel.OpenManageAxCryptID">
+            <NavLink class="nav-link" @onclick="AppSettingsViewModel.OpenManageAxCryptID">
                 <img class="" src="images/default/IcoUsers.svg" alt="go-back-img" />
                 <span>Manage AxCrypt ID</span>
             </NavLink>
-            <NavLink class="nav-link" @onclick="async ()=> appSettingsViewModel.OpenBrokenFiles()">
+            <NavLink class="nav-link" @onclick="async ()=> AppSettingsViewModel.OpenBrokenFiles()">
                 <img class="" src="images/default/IcoBrkFl.svg" alt="go-back-img" />
                 <span>Try broken file</span>
             </NavLink>
-            <NavLink class="nav-link" @onclick="async ()=> appSettingsViewModel.VerifyAxCryptFiles()">
+            <NavLink class="nav-link" @onclick="async ()=> AppSettingsViewModel.VerifyAxCryptFiles()">
                 <img class="" src="images/default/IcoChckVrsn1.svg" alt="go-back-img" />
                 <span>Check and verify file </span>
             </NavLink>
-            <NavLink class="nav-link" @onclick="async ()=> appSettingsViewModel.AxCryptFileFormatCheck()">
+            <NavLink class="nav-link" @onclick="async ()=> AppSettingsViewModel.AxCryptFileFormatCheck()">
                 <img class="" src="images/default/Frame1.svg" alt="go-back-img" />
                 <span>Check file</span>
             </NavLink>
-            <NavLink class="nav-link" @onclick="appSettingsViewModel.OpenReportAsync">
+            <NavLink class="nav-link" @onclick="AppSettingsViewModel.OpenReportAsync">
                 <img class="" src="images/default/XMLID_601.svg" alt="go-back-img" />
                 <span>Open error report snapshot</span>
             </NavLink>
@@ -254,7 +256,7 @@
     </div>
 }
 
-@if (appSettingsViewModel.ShowVersion)
+@if (AppSettingsViewModel.ShowVersion)
 {
     <div id="modal-dialog1" class="modalDialog" style="display: block;">
         <div class="invite-popup text-center">
@@ -262,7 +264,7 @@
                 <div tyle="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
                     <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
                     <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-                        @if (string.Compare(appSettingsViewModel.LatestVersion, appSettingsViewModel.CurrentVersion) > 0)
+                        @if (string.Compare(AppSettingsViewModel.LatestVersion, AppSettingsViewModel.CurrentVersion) > 0)
                         {
                             <span class="text-center" style="font-size: 20px; color: green;">A new version is available!</span>
 
@@ -276,22 +278,22 @@
                     </div>
                 </div>
                 <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-                    @if (string.Compare(appSettingsViewModel.LatestVersion, appSettingsViewModel.CurrentVersion) > 0)
+                    @if (string.Compare(AppSettingsViewModel.LatestVersion, AppSettingsViewModel.CurrentVersion) > 0)
                     {
                         <button class="button font-medium success btn-large" @onclick="()=> RedirectToDownload()">Update</button>
                     }
                     else
                     {
-                        <button class="button font-medium success btn-large" @onclick="()=> appSettingsViewModel.CloseSuccessPopup()">OK</button>
+                        <button class="button font-medium success btn-large" @onclick="()=> AppSettingsViewModel.CloseSuccessPopup()">OK</button>
                     }
-                    <button class="button font-medium success btn-large" @onclick="()=>appSettingsViewModel.CloseSuccessPopup()">Close</button>
+                    <button class="button font-medium success btn-large" @onclick="()=>AppSettingsViewModel.CloseSuccessPopup()">Close</button>
                 </div>
             </div>
         </div>
     </div>
 }
 
-@if (appSettingsViewModel.ShowOptions)
+@if (AppSettingsViewModel.ShowOptions)
 {
     <div id="modal-dialog1" class="modalDialog" style="display: block;">
         <div class="invite-popup text-center">
@@ -301,23 +303,23 @@
                 </div>
                 <div class="input-group">
                     <label for="restApiUrl">Rest Api Url:</label>
-                    <input type="text" id="restApiUrl" class="form-control email-img" @bind="@appSettingsViewModel.RestApiBaseUrl" />
+                    <input type="text" id="restApiUrl" class="form-control email-img" @bind="@AppSettingsViewModel.RestApiBaseUrl" />
                 </div>
                 <div class="input-group">
                     <label for="timeout">@Texts.DialogDebugOptionsRestApiTimeoutPrompt</label>
-                    <input type="text" id="timeout" class="form-control email-img" @bind="@appSettingsViewModel.TimeoutTimeSpan" />
+                    <input type="text" id="timeout" class="form-control email-img" @bind="@AppSettingsViewModel.TimeoutTimeSpan" />
                 </div>
 
                 <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-                    <button class="button font-medium success btn-large" @onclick="(e)=> appSettingsViewModel.SetOptionsToolStripMenuItem_Click(e)">OK</button>
-                    <button class="button font-medium success btn-large" @onclick="appSettingsViewModel.CloseOptions">Close</button>
+                    <button class="button font-medium success btn-large" @onclick="(e)=> AppSettingsViewModel.SetOptionsToolStripMenuItem_Click(e)">OK</button>
+                    <button class="button font-medium success btn-large" @onclick="AppSettingsViewModel.CloseOptions">Close</button>
                 </div>
             </div>
         </div>
     </div>
 }
 
-@if (appSettingsViewModel.ShowManageAxCryptID)
+@if (AppSettingsViewModel.ShowManageAxCryptID)
 {
     <div id="modal-dialog1" class="modalDialog" style="display: block;">
         <div class="invite-popup text-center">
@@ -328,38 +330,38 @@
                 </div>
             </div>
             <div>
-                <label for="userEmail">@appSettingsViewModel.EmailLabel</label>
+                <label for="userEmail">@AppSettingsViewModel.EmailLabel</label>
             </div>
             <div class="input-group">
                 <div>
-                    <textarea id="timeout" style="position:center;" class="form-control email-img" rows="4" cols="60" readonly>Timestamp: @appSettingsViewModel.CreatedTime </textarea>
+                    <textarea id="timeout" style="position:center;" class="form-control email-img" rows="4" cols="60" readonly>Timestamp: @AppSettingsViewModel.CreatedTime </textarea>
                 </div>
             </div>
             <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-                <button class="button font-medium success btn-large" @onclick="(e)=>appSettingsViewModel.ChangePassphraseButton_Click(e)">Change Password</button>
-                <button class="button font-medium success btn-large" @onclick="appSettingsViewModel.CloseManageAxCryptID">Close</button>
+                <button class="button font-medium success btn-large" @onclick="(e)=>AppSettingsViewModel.ChangePassphraseButton_Click(e)">Change Password</button>
+                <button class="button font-medium success btn-large" @onclick="AppSettingsViewModel.CloseManageAxCryptID">Close</button>
             </div>
         </div>
     </div>
 }
 
-@if (appSettingsViewModel.ShowAdvancedOptions)
+@if (AppSettingsViewModel.ShowAdvancedOptions)
 {
     <div id="modal-dialog1" class="modalDialog" style="display: block;">
         <div class="invite-popup text-center">
             <div>
                 <label>Application Config Path</label>
-                <input type="path" @bind="viewModel.AppConfigPath" />
+                <input type="path" @bind="ViewModel.AppConfigPath" />
             </div>
 
             <div>
                 <label>Temp File Path</label>
-                <input type="text" @bind="viewModel._tempConfigPath" />
-                <button @onclick="(e) => viewModel.BrowseButton_click(e)">Browse</button>
+                <input type="text" @bind="ViewModel.TempConfigPath" />
+                <button @onclick="(e) => ViewModel.BrowseButton_click(e)">Browse</button>
             </div>
             <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-                <button @onclick="(e)=> viewModel.ButtonOk_Click(e)">OK</button>
-                <button @onclick="appSettingsViewModel.ToggleAdvancedOption">Cancel</button>
+                <button @onclick="(e)=> ViewModel.ButtonOk_Click(e)">OK</button>
+                <button @onclick="(e)=> ViewModel.CancelButton_Click(e)">Cancel</button>
             </div>
         </div>
     </div>
@@ -385,15 +387,15 @@
 @code {
     protected override void OnInitialized()
     {
-        appSettingsViewModel.Initialized();
-        viewModel.Initialize();
+        AppSettingsViewModel.Initialized();
+        ViewModel.Initialize();
         base.OnInitialized();
     }
 
     private void RedirectToDownload()
     {
-        navigation.NavigateTo(appSettingsViewModel.DownloadVersion.ToString());
-        appSettingsViewModel.ShowVersion = !appSettingsViewModel.ShowVersion;
+        navigation.NavigateTo(AppSettingsViewModel.DownloadVersion.ToString());
+        AppSettingsViewModel.ShowVersion = false;
     }
 
     [Parameter]

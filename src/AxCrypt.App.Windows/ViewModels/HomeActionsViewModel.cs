@@ -28,8 +28,9 @@ public class HomeActionsViewModel : ComponentBase
     private MainViewModel? _mainViewModel;
     private FileSystemState? _fileSystemState;
     private IStatusAlertService _statusAlertService;
+    private ShareKeyViewModel? _sharekeyViewModel;
 
-    public ShareKeyViewModel? SharekeysViewModel { get; set; }
+    [Parameter]
     public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
     public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }
 
@@ -56,7 +57,7 @@ public class HomeActionsViewModel : ComponentBase
     public HomeActionsViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel, IStatusAlertService statusAlertService)
     {
         _logOnViewModel = logOnViewModel;
-        SharekeysViewModel = shareKeyViewModel;
+        _sharekeyViewModel = shareKeyViewModel;
         _statusAlertService = statusAlertService;
         KnownFoldersViewModel = New<KnownFoldersViewModel>();
     }
@@ -68,9 +69,7 @@ public class HomeActionsViewModel : ComponentBase
         _fileSystemState = Resolve.FileSystemState;
         Utility.OnIsMainMenuHiddenChanged += StateHasChanged;
 
-        //_logOnViewModel.BindPropertyChanged(nameof(_logOnViewModel.SubscriptionLevel), (LicenseCapabilities license) => {  });
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
-
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { _logOnViewModel.License = license; _logOnViewModel.SubscriptionChanged(); } });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); });
 
         KnownFoldersViewModel.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
@@ -107,8 +106,7 @@ public class HomeActionsViewModel : ComponentBase
 
     private async Task ShareKeysWithFileSelectionAsync(IEnumerable<FileDetails> fileNames)
     {
-        IEnumerable<string> selectedRecentFiles = null;
-        selectedRecentFiles = fileNames.Select(f => f.FilePath);
+        IEnumerable<string> selectedRecentFiles = fileNames?.Select(f => f.FilePath) ?? Enumerable.Empty<string>();
 
         if (selectedRecentFiles.Count() == 0)
         {
@@ -117,9 +115,11 @@ public class HomeActionsViewModel : ComponentBase
                 PickerTitle = "Please select files",
             });
 
-            if (pickResult.Any())
+            selectedRecentFiles = pickResult?.Select(f => f.FullPath).ToList() ?? Enumerable.Empty<string>();
+
+            if (!selectedRecentFiles.Any())
             {
-                selectedRecentFiles = pickResult.Select(f => f.FullPath).ToList();
+                return;
             }
         }
 
@@ -135,7 +135,7 @@ public class HomeActionsViewModel : ComponentBase
 
         IEnumerable<string> encryptedFileNames = selectedRecentFiles.Where(f => New<IDataStore>(f).IsEncrypted());
         SharingListViewModel sharingListViewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, New<KnownIdentities>().DefaultEncryptionIdentity);
-        SharekeysViewModel.SetSelectedFilesOrFolders(encryptedFileNames, sharingListViewModel);
+        _sharekeyViewModel.SetSelectedFilesOrFolders(encryptedFileNames, sharingListViewModel);
 
         if (encryptableFileNames != null && encryptableFileNames.Any())
         {
@@ -145,6 +145,7 @@ public class HomeActionsViewModel : ComponentBase
         }
 
         await sharingListViewModel.ShareFiles.ExecuteAsync(null);
+        SelectedRecentFiles.Clear();
     }
 
     public async void CleanAndRemoveOpenFilesButton_Click(EventArgs e)
@@ -206,13 +207,6 @@ public class HomeActionsViewModel : ComponentBase
     public async Task OnCloudServiceButtonClick(KnownFolder knownFolder)
     {
         await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(knownFolder.My.FullName);
-    }
-
-    public ObservableCollection<FileDetails> RecentFilesList { get; set; } = new ObservableCollection<FileDetails>();
-
-    private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
-    {
-        RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
     }
 
     public async void RandomRenameAsync(EventArgs e)

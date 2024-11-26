@@ -11,7 +11,7 @@
 
         <div>
             <label>Temp File Path</label>
-            <input type="path" @bind="viewModel._tempConfigPath" @oninput="(e)=> viewModel.BrowseButton_click(e)" />
+            <input type="path" @bind="viewModel.TempConfigPath" @oninput="(e)=> viewModel.BrowseButton_click(e)" />
         </div>
         <div class="button-container">
             <button @onclick="(e)=> viewModel.ButtonOk_Click(e)">OK</button>

@@ -44,9 +44,7 @@
     <main>
         @if (LogOnViewModel.IsLoggedOn && !CanShowSignInPage)
         {
-            <div>
-                <AxCrypt.App.Windows.Components.Pages.Main.TopMenu />
-            </div>
+            <AxCrypt.App.Windows.Components.Pages.Main.TopMenu />
             <AxCrypt.App.Windows.Components.Pages.PopupDialog.InvitePopup />
             <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
             <AxCrypt.App.Windows.Components.Pages.PopupDialog.ImportPrivatePasswordDialog />
@@ -56,6 +54,8 @@
             <AxCrypt.App.Windows.Components.Pages.PopupDialog.VerifyAccountDialog />
             <AxCrypt.App.Windows.Components.Pages.PopupDialog.VerifyPasswordDialog />
             <AxCrypt.App.Windows.Components.Pages.Shared.ShareKey />
+            <AxCrypt.App.Windows.Components.Pages.About />
+            <AxCrypt.App.Windows.Components.Pages.Feedback />
             <AxCrypt.App.Components.Pages.StatusAlertComponent />
         }
 

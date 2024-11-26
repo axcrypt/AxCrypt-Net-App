@@ -17,25 +17,28 @@ using AxCrypt.App.Windows.Models;
 using AxCrypt.App.Components.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Components.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class AppSettingsViewModel
+public class AppSettingsViewModel : LogOnViewModel
 {
     private LogOnViewModel _logOnViewModel;
     private MainViewModel? _mainViewModel;
     private FileOperationViewModel? _fileOperationViewModel;
     private ManageAccountViewModel? _viewModel;
     private IExportKeyManagementFile? ExportKeyFile;
+    private RecentFilesViewModel? _recentFilesViewModel;
     private bool hideRecentFiles;
     private bool isDateModifiedOn;
     private bool isFileNameOn;
 
-    public AppSettingsViewModel(LogOnViewModel logOnViewModel)
+    public AppSettingsViewModel(LogOnViewModel logOnViewModel, RecentFilesViewModel recentFilesViewModel, ProcessIndicatorService processIndicatorService) : base(processIndicatorService)
     {
         _logOnViewModel = logOnViewModel;
         _mainViewModel = _logOnViewModel.MainViewModel;
         _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
+        _recentFilesViewModel = recentFilesViewModel;
         AlwaysOffline = New<UserSettings>().OfflineMode;
         HideRecentFiles = New<UserSettings>().HideRecentFiles;
         InactivitySignOut = New<UserSettings>().InactivitySignOutTime.Minutes;
@@ -52,9 +55,9 @@ public class AppSettingsViewModel
 
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
+        //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); _logOnViewModel.UIStateChanged(); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { _userInitiatedUpdateCheckPending = true; await DisplayUpdateCheckPopups(); });
     }
-
-    public ObservableCollection<FileDetails> RecentFilesList { get; set; } = new ObservableCollection<FileDetails>();
 
     public List<int> InactivityTimeoutOptions { get; } = new List<int> { 0, 5, 15, 30, 60 };
 
@@ -75,7 +78,17 @@ public class AppSettingsViewModel
     public double SelectedOption { get; set; } = 0;
     public bool DebugPopup { get; set; }
 
-    public bool HideRecentFiles { get; set; }
+    private static bool _hideRecentFiles;
+
+    public bool HideRecentFiles
+    {
+        get => _hideRecentFiles;
+        set
+        {
+            _hideRecentFiles = value;
+            _logOnViewModel.UIStateChanged();
+        }
+    }
 
     public bool ShowAdvancedOptions { get; set; }
 
@@ -112,7 +125,7 @@ public class AppSettingsViewModel
 
     public void CloseSuccessPopup()
     {
-        ShowVersion = !ShowVersion;
+        ShowVersion = false;
     }
 
     private void SetRecentFilesHiddenState(bool hideRecentFiles)
@@ -121,11 +134,18 @@ public class AppSettingsViewModel
 
         if (!hideRecentFiles)
         {
-            RecentFilesList = new ObservableCollection<FileDetails>(_mainViewModel.RecentFiles.Select(f => new FileDetails(f)));
+            _recentFilesViewModel.RecentFilesList = new ObservableCollection<FileDetails>(_mainViewModel.RecentFiles.Select(f => new FileDetails(f)));
+            _logOnViewModel.UIStateChanged();
             return;
         }
 
-        RecentFilesList.Clear();
+        _recentFilesViewModel.RecentFilesList.Clear();
+        _logOnViewModel.UIStateChanged();
+    }
+
+    void UpdateRecentFiles(IEnumerable<ActiveFile> recentFiles)
+    {
+        _recentFilesViewModel.RecentFilesList = new ObservableCollection<FileDetails>(recentFiles.Select(f => new FileDetails(f)));
     }
 
     public void ToggleEncryptionUpgradeMode()
@@ -193,6 +213,7 @@ public class AppSettingsViewModel
         AlwaysOffline = !New<UserSettings>().OfflineMode;
         New<UserSettings>().OfflineMode = AlwaysOffline;
         New<AxCryptOnlineState>().IsOffline = AlwaysOffline;
+        _logOnViewModel.UIStateChanged();
     }
 
     public void FilePropertiesDateModified(EventArgs e)
@@ -217,7 +238,7 @@ public class AppSettingsViewModel
             return;
         }
 
-        ShowAdvancedOptions = !ShowAdvancedOptions;
+        ShowAdvancedOptions = true;
     }
 
     #region Debug Section
@@ -227,11 +248,18 @@ public class AppSettingsViewModel
     private ObservableCollection<ManageAccountModel> AccountEmailsList { get; set; } = new ObservableCollection<ManageAccountModel>();
     public string? EmailLabel { get; set; }
 
+    private bool _userInitiatedUpdateCheckPending = false;
+
     public async void CheckAxCryptVersionAsync()
     {
-        ShowVersion = !ShowVersion;
-
+        ShowVersion = true;
         await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
+    }
+
+    private async Task DisplayUpdateCheckPopups()
+    {
+        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel.DownloadVersion);
+        _userInitiatedUpdateCheckPending = false;
     }
 
     public void OpenOptions()
@@ -244,12 +272,12 @@ public class AppSettingsViewModel
         Resolve.UserSettings.RestApiBaseUrl = new Uri(RestApiBaseUrl);
         Resolve.UserSettings.ApiTimeout = TimeSpan.Parse(TimeoutTimeSpan);
 
-        ShowOptions = !ShowOptions;
+        ShowOptions = false;
     }
 
     public void CloseOptions()
     {
-        ShowOptions = !ShowOptions;
+        ShowOptions = false;
     }
 
     public void OnOpenLogViewerClicked()
@@ -283,17 +311,18 @@ public class AppSettingsViewModel
         }
 
         EmailLabel = emails.First().EmailAddress;
+        CreatedTime = emails.First().Timestamp;
     }
 
     public void ChangePassphraseButton_Click(EventArgs e)
     {
         New<UserSettings>().UserEmail.ProcessChangePassword();
-        ShowManageAxCryptID = !ShowManageAxCryptID;
+        ShowManageAxCryptID = false;
     }
 
     public void CloseManageAxCryptID()
     {
-        ShowManageAxCryptID = !ShowManageAxCryptID;
+        ShowManageAxCryptID = false;
     }
 
     public async void OpenBrokenFiles()

@@ -34,9 +34,34 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
         LastAccessedDate = file.DecryptedFileInfo.LastAccessTimeUtc.ToString();
         Algorithm = Resolve.CryptoFactory.Create(file.Properties.CryptoId).Name;
         FilePath = file.EncryptedFileInfo.FullName;
-        FileExt = GetFileExtention(file.DecryptedFileInfo.Name);
-        SharedWith = new List<string>();
-        LoadPropertiesAsync();
+        SharedWith = LoadPropertiesAsync(_activeFile);
+    }
+
+    private IReadOnlyCollection<string> LoadPropertiesAsync(ActiveFile activeFile)
+    {
+        if (!activeFile.IsShared && !activeFile.IsMasterKeyShared)
+        {
+            return new List<string>();
+        }
+
+        string ownAccount = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
+        EncryptedProperties properties = LoadProperties(activeFile.EncryptedFileInfo, activeFile.Identity);
+        if (properties == null)
+        {
+            return new List<string>();
+        }
+
+        return properties.SharedKeyHolders.Select(key => key.Email.Address).Where(address => address != ownAccount).ToList().Any() ? properties.SharedKeyHolders.Select(key => key.Email.Address).Where(address => address != ownAccount).ToList() : new List<string>();
+    }
+
+    public EncryptedProperties LoadProperties(IDataStore file, LogOnIdentity identity)
+    {
+        if (identity == LogOnIdentity.Empty)
+        {
+            identity = New<KnownIdentities>().DefaultEncryptionIdentity;
+        }
+
+        return EncryptedProperties.Create(file, identity);
     }
 
     public string FileName
@@ -141,8 +166,6 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
         }
     }
 
-    public string FileExt { get; set; } /*= GetFileExtention(FileName);*/
-
     public override bool Equals(object obj)
     {
         if (obj == null || GetType() != obj.GetType())
@@ -156,14 +179,5 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
     public override int GetHashCode()
     {
         return HashCode.Combine(FileName, FilePath);
-    }
-
-    public string GetFileExtention(string fileExt)
-    {
-        if (string.IsNullOrEmpty(fileExt)) return string.Empty;
-
-        string extention = Path.GetExtension(fileExt);
-
-        return extention.StartsWith(".") ? extention.Substring(1) : extention;
     }
 }

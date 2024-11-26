@@ -10,12 +10,11 @@
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject RecentFilesViewModel RecentFilesViewModel
-@inject AppSettingsViewModel SettingsViewModel
 @inject IJSRuntime JSRuntime
 
 @{
     int MaxAvatarsToShow = 4;
-    SettingsViewModel.HideRecentFiles = New<UserSettings>().HideRecentFiles;
+    RecentFilesViewModel.IsHideRecentFiles = New<UserSettings>().HideRecentFiles;
 }
 
 <div class="home-index">
@@ -49,54 +48,51 @@
                         </tr>
                     </thead>
                     <tbody class="row-sec">
-                        @if (!IsLoading)
+                        @if (RecentFilesViewModel.IsHideRecentFiles)
                         {
-                            @if (SettingsViewModel.HideRecentFiles)
+                            <tr><td colspan="7" style="padding: 20px 30px;"><span class="grey-clr">@Texts.HideRecentFilesListTabToolTipText</span></td></tr>
+                        }
+                        else if (RecentFilesViewModel.RecentFilesList.Any())
+                        {
+                            @for (int i = 0; i < RecentFilesViewModel.RecentFilesList.Count; i++)
                             {
-                                <tr><td colspan="7" style="padding: 20px 30px;"><span class="grey-clr">@Texts.HideRecentFilesListTabToolTipText</span></td></tr>
-                            }
-                            else if (RecentFilesViewModel.RecentFilesList.Any())
-                            {
-                                @for (int i = 0; i < RecentFilesViewModel.RecentFilesList.Count; i++)
-                                {
-                                    FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
-                                    <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails) ? "selected" : "")"
-                                        @onmousedown="(e) => RecentFilesViewModel.HandleFileClick(e, fileDetails)"
-                                        @oncontextmenu="e => RecentFilesViewModel.HandleContextMenu(e, fileDetails)"
-                                        @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, new List<FileDetails> { fileDetails })">
-                                        <td> <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectSingleFile(e, fileDetails)" checked="@RecentFilesViewModel.IsHeaderCheckboxChecked" /> </td>
-                                        @{
-                                            string imagefileSourceClass = !string.IsNullOrEmpty(fileDetails.FileExt) ? fileDetails.FileExt : "file-ext-def-icon";
-                                        }
-                                        <td class="fle-exton-img" style="display: flex; align-items: center;">
-                                            <img height="32" class="@imagefileSourceClass" src="" alt="file-image" />
-                                            <span class="fle-nme">@fileDetails.FileName</span>
-                                        </td>
-                                        <td>@fileDetails.FileSize</td>
-                                        <td>@fileDetails.Algorithm</td>
-                                        <td>@fileDetails.LastModifiedDate</td>
-                                        <td>
-                                            @if (fileDetails.SharedWith.Any())
-                                            {
-                                                <div style="display:flex;">
-                                                    @foreach (string sharedWith in fileDetails.SharedWith.Take(MaxAvatarsToShow))
-                                                    {
-                                                        <div class="info-prple">@sharedWith.Substring(0, 2).ToUpper()</div>
-                                                    }
-
-                                                    @if (fileDetails.SharedWith.Count() > MaxAvatarsToShow)
-                                                    {
-                                                        <div class="info-prple bdr-clr">+@((fileDetails.SharedWith.Count()) - MaxAvatarsToShow)</div>
-                                                    }
-                                                </div>
-                                            }
-                                        </td>
-                                        @if (RecentFilesViewModel.SubscriptionLevel != SubscriptionLevel.Free)
+                                FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
+                                <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails) ? "selected" : "")"
+                                    @onmousedown="(e) => RecentFilesViewModel.HandleFileClick(e, fileDetails)"
+                                    @oncontextmenu="e => RecentFilesViewModel.HandleContextMenu(e, fileDetails)"
+                                    @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, new List<FileDetails> { fileDetails })">
+                                    <td> <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectSingleFile(e, fileDetails)" checked="@RecentFilesViewModel.IsHeaderCheckboxChecked" /> </td>
+                                    @{
+                                        string imagefileSourceClass = !string.IsNullOrEmpty(fileDetails.FileExtension) ? fileDetails.FileExtension : "file-ext-def-icon";
+                                    }
+                                    <td class="fle-exton-img" style="display: flex; align-items: center;">
+                                        <img height="32" class="@imagefileSourceClass" src="" alt="file-image" />
+                                        <span class="fle-nme">@fileDetails.FileName</span>
+                                    </td>
+                                    <td>@fileDetails.FileSize</td>
+                                    <td>@fileDetails.Algorithm</td>
+                                    <td>@fileDetails.LastModifiedDate</td>
+                                    <td>
+                                        @if (fileDetails.SharedWith.Any())
                                         {
-                                            <td class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;">@fileDetails.FilePath</td>
+                                            <div style="display:flex;">
+                                                @foreach (string sharedWith in fileDetails.SharedWith.Take(MaxAvatarsToShow))
+                                                {
+                                                    <div class="info-prple">@sharedWith.Substring(0, 2).ToUpper()</div>
+                                                }
+
+                                                @if (fileDetails.SharedWith.Count() > MaxAvatarsToShow)
+                                                {
+                                                    <div class="info-prple bdr-clr">+@((fileDetails.SharedWith.Count()) - MaxAvatarsToShow)</div>
+                                                }
+                                            </div>
                                         }
-                                    </tr>
-                                }
+                                    </td>
+                                    @if (RecentFilesViewModel.SubscriptionLevel != SubscriptionLevel.Free)
+                                    {
+                                        <td class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;">@fileDetails.FilePath</td>
+                                    }
+                                </tr>
                             }
                         }
                     </tbody>
@@ -142,13 +138,11 @@
 </div>
 
 @code {
-    private bool IsLoading { get; set; } = true;
-
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         RecentFilesViewModel.OnInitializedAsync();
-        RecentFilesViewModel.OnSubscriptionChanged += UpdatePageState;
+        RecentFilesViewModel.LogOnViewModel.OnUIStateChanged += UpdatePageState;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -166,16 +160,8 @@
         }
         finally
         {
-            IsLoading = false;
+            //IsLoading = false;
         }
-    }
-
-    private void UpdatePopupVisibility(bool updateList)
-    {
-        InvokeAsync(() =>
-        {
-            StateHasChanged(); // Refresh UI
-        });
     }
 
     private void UpdatePageState()

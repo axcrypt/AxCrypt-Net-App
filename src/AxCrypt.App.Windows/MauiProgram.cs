@@ -10,7 +10,6 @@ using AxCrypt.App.Components.ViewModels.Feedback;
 using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Components.Pages.Password;
-using AxCrypt.App.Windows.Helpers;
 using AxCrypt.App.Windows.Infrastructure.Dialogs;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Windows.ViewModels;

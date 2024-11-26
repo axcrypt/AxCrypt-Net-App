@@ -9,15 +9,6 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Components.Models;
 
-public interface ILogOnDialogService
-{
-    event Action<bool>? OnLogOnDialogVisibilityChanged;
-
-    bool IsVisible { get; }
-
-    //void ShowDialog();
-}
-
 public class LogOnViewModel : ViewModelBase
 {
     private ProcessIndicatorService _processIndicatorService;
@@ -34,6 +25,8 @@ public class LogOnViewModel : ViewModelBase
         FilePasswordDialog = new CommonDialogService();
         VerifyAccountDialog = new CommonDialogService();
         VerifyPasswordDialog = new CommonDialogService();
+        AboutDialog = new CommonDialogService();
+        FeedbackDialog = new CommonDialogService();
         _processIndicatorService = processIndicatorService;
     }
 
@@ -79,6 +72,10 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService VerifyAccountDialog { get { return GetProperty<CommonDialogService>(nameof(VerifyAccountDialog)); } set { SetProperty(nameof(VerifyAccountDialog), value); } }
 
     public CommonDialogService VerifyPasswordDialog { get { return GetProperty<CommonDialogService>(nameof(VerifyPasswordDialog)); } set { SetProperty(nameof(VerifyPasswordDialog), value); } }
+
+    public CommonDialogService AboutDialog { get { return GetProperty<CommonDialogService>(nameof(AboutDialog)); } set { SetProperty(nameof(AboutDialog), value); } }
+
+    public CommonDialogService FeedbackDialog { get { return GetProperty<CommonDialogService>(nameof(FeedbackDialog)); } set { SetProperty(nameof(FeedbackDialog), value); } }
 
     public ProcessIndicator ProcessIndicator { get; set; }
 
@@ -130,6 +127,17 @@ public class LogOnViewModel : ViewModelBase
         OnLogOnOrLogOffAndLogOnAgain?.Invoke();
     }
 
+    public event Action? OnUIStateChanged;
+
+    public void UIStateChanged()
+    {
+        OnUIStateChanged?.Invoke();
+    }
+
+    public void SubscriptionChanged()
+    {
+        OnSubscriptionChanged?.Invoke();
+    }
 
     //public async Task HandleValidSubmit(LoginModel login)
     //{

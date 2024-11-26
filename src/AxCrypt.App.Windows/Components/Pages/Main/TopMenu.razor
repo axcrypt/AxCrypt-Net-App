@@ -110,6 +110,7 @@
         ViewModel.Initialize();
         model = notificationService.NotificationModel;
         await notificationService.LoadNotificationListAsync();
+        ViewModel.LogOnViewModel.OnSubscriptionChanged += UpdatePageState;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

@@ -43,8 +43,8 @@
                     </div>
                     <div>
                         <div class="add-txt-field" style="width: 100%;">
-                            <input type="email" @onclick="ShareKeyViewModel.showSyncPopup" value="@ShareKeyViewModel.RecipientEmail" @oninput="ShareKeyViewModel.OnEmailInput" placeholder="someone@example.com" class="" style="width: 78%; height: 29px; margin-right: 3%; margin-bottom:0px !important;" />
-                            @if (ShareKeyViewModel.showSuggestionDropdown && ShareKeyViewModel.EmailSuggestions.Any())
+                            <input type="email" @onclick="ShareKeyViewModel.ShowSyncPopup" value="@ShareKeyViewModel.RecipientEmail" @oninput="ShareKeyViewModel.OnEmailInput" placeholder="someone@example.com" class="" style="width: 78%; height: 29px; margin-right: 3%; margin-bottom:0px !important;" />
+                            @if (ShareKeyViewModel.ShowSuggestionDropdown && ShareKeyViewModel.EmailSuggestions.Any())
                             {
                                 <ul class="suggestion-list hide-model-popup">
                                     @foreach (ShareKeyViewModel.EmailSuggestion suggestion in ShareKeyViewModel.EmailSuggestions)
@@ -86,7 +86,7 @@
                                     <h3 class="font-extra-bold txt-clr">Sync contacts!</h3>
                                     <p style="color: #969696; font-size: 12px;text-align: left;">Do you allow AxCrypt Application <strong>access your contacts on phone?</strong></p>
                                     <input type="submit" class="button active btn-medium font-large" value="Allow" style="margin-right: 10px; padding: 5px 15px;" />
-                                    <input type="button" class="button border btn-medium font-large" value="No, thanks" @onclick="ShareKeyViewModel.closeSyncPopup" style="padding: 5px 15px;" />
+                                    <input type="button" class="button border btn-medium font-large" value="No, thanks" @onclick="ShareKeyViewModel.CloseSyncPopup" style="padding: 5px 15px;" />
                                 </div>
                             </div>
                         }
@@ -97,18 +97,8 @@
                             @foreach (string file in ShareKeyViewModel.SelectedFilesOrFolders)
                             {
                                 <div class="selected-file">
-                                    <img class="vdo-img" />
-                                    <span class="shre-fle-txt">
-                                        @if (File.Exists(file))
-                                        {
-                                            @Path.GetFileNameWithoutExtension(file)
-                                        }
-                                        else if (Directory.Exists(file))
-                                        {
-                                            DirectoryInfo directoryInfo = new DirectoryInfo(file);
-                                            @directoryInfo.Name
-                                        }
-                                    </span>
+                                    <img class="@GetIconForFile(file).ToLower()" src="" alt="File Icon" />
+                                    <span class="shre-fle-txt">@GetIconForFile(file)</span>
                                 </div>
                             }
                         </div>
@@ -123,7 +113,7 @@
                                 {
                                     <dl>
                                         <dd class="file-bgrnd">
-                                            @if (ShareKeyViewModel.isAxCryptUser)
+                                            @if (ShareKeyViewModel.IsAxCryptUser)
                                             {
                                                 <img class="axcrypt-icon" style="float:left;" src="" alt="img">
                                             }
@@ -145,7 +135,7 @@
                         {
                             <div class="file-box empty-list scroll-container" id="sharedUserList" style="margin-right:0px"></div>
                         }
-                        @if (ShareKeyViewModel.contextMenu)
+                        @if (ShareKeyViewModel.ContextMenu)
                         {
                             <div class="hide-model-popup context-menu">
                                 <dl>
@@ -153,7 +143,8 @@
                                         <img class="refresh-icon" src="~/images/business/IcoRefresh.svg" alt="Refresh" />
                                         <span> Refresh</span>
                                     </dd>
-                                    <dd @onclick="()=> ShareKeyViewModel.RemoveSharedKey()" style="cursor: pointer;">
+                                    <dd @onclick="()=>
+                                        ShareKeyViewModel.RemoveSharedKey()" style="cursor: pointer;">
                                         <img class="unshare-icon" src="~/images/business/IcoUnShare.svg" alt="Unshare" />
                                         <span> Unshare</span>
                                     </dd>
@@ -199,6 +190,7 @@
     {
         base.OnInitialized();
         ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.OnDialogVisibilityChanged += UpdateShareKeyDialogStateChanged;
+        ShareKeyViewModel.LogOnViewModel.OnUIStateChanged += UpdateStateChanged;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -229,8 +221,23 @@
         });
     }
 
+    void UpdateStateChanged()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+
     void Close()
     {
+        ShareKeyViewModel.RecipientEmail = "";
+        ShareKeyViewModel.CloseSyncPopup();
         ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.Close();
+    }
+
+    private string GetIconForFile(string file)
+    {
+        return File.Exists(file) ? Path.GetFileNameWithoutExtension(file) : Directory.Exists(file) ? new DirectoryInfo(file).Name : string.Empty;
     }
 }

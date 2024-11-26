@@ -14,6 +14,7 @@ using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Windows.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -47,7 +48,7 @@ public class ProfileViewModel
         Account.SubscriptionLevel = _logOnViewModel.SubscriptionLevel;
         Account.UserEmail = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
         Account.Subscription = await DetermineSubscriptionType();
-        //Account.DaysLeft = New<AccountStatusViewModel>().DaysLeft;
+        Account.DaysLeft = New<AccountStatusViewModel>().DaysLeft;
     }
 
     public async Task<string> DetermineSubscriptionType()
@@ -118,7 +119,9 @@ public class ProfileViewModel
         string serialized = Core.Resolve.Serializer.Serialize(userPublicKey);
 
         string filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + DefaultExt, Texts.FileFilterFileTypePublicSharingKeyFiles, Texts.FileFilterFileTypeAllFiles);
-        string savedPath = await ExportKeyFile.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, DefaultExt, filter, fileName);
+        
+        ExportKeyManagementFile exportKeyManagementFile = new ExportKeyManagementFile();
+        string savedPath = await exportKeyManagementFile.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, DefaultExt, filter, fileName);
 
         if (!string.IsNullOrEmpty(savedPath))
         {
@@ -136,7 +139,8 @@ public class ProfileViewModel
         string filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + New<IRuntimeEnvironment>().AxCryptExtension, Texts.FileFilterFileTypeAxCryptIdFiles, Texts.FileFilterFileTypeAllFiles);
         byte[] export = activeKeyPair.ToArray(Resolve.KnownIdentities.DefaultEncryptionIdentity.Passphrase);
 
-        string savedPath = await ExportKeyFile.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, New<IRuntimeEnvironment>().AxCryptExtension, filter, fileName);
+        ExportKeyManagementFile exportKeyManagementFile = new ExportKeyManagementFile();
+        string savedPath = await exportKeyManagementFile.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, New<IRuntimeEnvironment>().AxCryptExtension, filter, fileName);
 
         if (!string.IsNullOrEmpty(savedPath))
         {

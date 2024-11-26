@@ -1,39 +1,61 @@
 ﻿@page "/about"
 
+@using AxCrypt.App.Components.Models
 @using AxCrypt.App.Windows.ViewModels
 
 @inject AboutViewModel AboutViewModel
+@inject LogOnViewModel LogOnViewModel
 
-<div class="abt-axc-sec">
-    <div id="modal-dialog2" class="modalDialog" style="display: block;">
-        <div class="abt-axc text-center">
-            <div class="close-img" onclick="closeModalDialog('modal-dialog2')"></div>
-            <div class="align-items" style="gap: 4%;">
-                <div style="padding: 5% 3%;"><img src="images/default/axcrypt_icon_text.svg" alt="AxCrypt-icon" /></div>
-                <div style="text-align: left;">
-                    <label class="txt-clr">@AboutViewModel.ProductName</label><br />
-                    <label class="txt-clr">Version:</label>
-                    <span class="font-bold">@AboutViewModel.Version</span> <br />
-                    <label class="txt-clr">Subscription:</label>
-                    <span class="font-bold">@AboutViewModel.SubscriptionStatusAndExpiration</span><br />
-                    <label class="txt-clr">About us:</label>
-                    <a class="font-small" style="font-size: 10px;" href="https://www.axcrypt.net/information/axcrypt/">https://www.axcrypt.net/information/axcrypt/</a> <br />
-                    <label class="highlight-text">
-                        File security for You and Your Team by <span class="font-medium">AxCrypt AB</span>
-                        <br />
-                    </label>
-                    <span style="font-size: 12px;">Includes software from http://www.bouncycastle.org/.</span>
+@if (IsVisible)
+{
+    <div class="abt-axc-sec">
+        <div id="modal-dialog2" class="modalDialog" style="display: block;">
+            <div class="abt-axc text-center">
+                <div class="close-img" @onclick="CloseDialog"></div>
+                <div class="align-items" style="gap: 4%;">
+                    <div style="padding: 5% 3%;"><img src="images/default/axcrypt_icon_text.svg" alt="AxCrypt-icon" /></div>
+                    <div style="text-align: left;">
+                        <label class="txt-clr">@AboutViewModel.ProductName</label><br />
+                        <label class="txt-clr">Version:</label>
+                        <span class="font-bold">@AboutViewModel.Version</span> <br />
+                        <label class="txt-clr">Subscription:</label>
+                        <span class="font-bold">@AboutViewModel.SubscriptionStatusAndExpiration</span><br />
+                        <label class="txt-clr">About us:</label>
+                        <a class="font-small" style="font-size: 10px;" href="https://www.axcrypt.net/information/axcrypt/">https://www.axcrypt.net/information/axcrypt/</a> <br />
+                        <label class="highlight-text">
+                            File security for You and Your Team by <span class="font-medium">AxCrypt AB</span>
+                            <br />
+                        </label>
+                        <span style="font-size: 12px;">Includes software from http://www.bouncycastle.org/.</span>
+                    </div>
                 </div>
+                <span class="font-small grey-clr">@AboutViewModel.Copyright</span>
             </div>
-            <span class="font-small grey-clr">@AboutViewModel.Copyright</span>
         </div>
     </div>
-</div>
+}
 
 @code {
+    private bool IsVisible;
+
     protected override void OnInitialized()
     {
         AboutViewModel.InitializeProperties();
+        LogOnViewModel.AboutDialog.OnDialogVisibilityChanged += UpdateDialogState;
         base.OnInitialized();
+    }
+
+    void UpdateDialogState(bool canShowDialog)
+    {
+        InvokeAsync(() =>
+        {
+            IsVisible = canShowDialog;
+            StateHasChanged();
+        });
+    }
+
+    void CloseDialog()
+    {
+        LogOnViewModel.AboutDialog.Close();
     }
 }

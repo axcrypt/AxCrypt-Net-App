@@ -12,13 +12,13 @@ namespace AxCrypt.App.Windows.ViewModels;
 
 public class AdvancedOptionsViewModel : ComponentBase
 {
-    public string? _tempConfigPath { get; set; }
+    public string? TempConfigPath { get; set; }
     public string? AppConfigPath { get; set; }
 
     public void Initialize()
     {
         AppConfigPath = New<WorkFolder>().FileInfo.FullName;
-        _tempConfigPath = New<UserSettings>().TemporaryFilePath;
+        TempConfigPath = New<UserSettings>().TemporaryFilePath;
     }
 
     public async void BrowseButton_click(EventArgs e)
@@ -27,19 +27,19 @@ public class AdvancedOptionsViewModel : ComponentBase
         string selectedPath = await folderPicker.PickFolderAsync();
         if (selectedPath != null)
         {
-            _tempConfigPath = selectedPath;
+            TempConfigPath = selectedPath;
             StateHasChanged();
         }
     }
 
     public async void ButtonOk_Click(EventArgs e)
     {
-        if (string.IsNullOrEmpty(_tempConfigPath))
+        if (string.IsNullOrEmpty(TempConfigPath))
         {
             return;
         }
 
-        if (_tempConfigPath == New<UserSettings>().TemporaryFilePath)
+        if (TempConfigPath == New<UserSettings>().TemporaryFilePath)
         {
             return;
         }
@@ -56,7 +56,7 @@ public class AdvancedOptionsViewModel : ComponentBase
             return;
         }
 
-        New<UserSettings>().TemporaryFilePath = _tempConfigPath;
+        New<UserSettings>().TemporaryFilePath = TempConfigPath;
         await ShutDownAnd(New<IUIThread>().RestartApplication);
     }
 

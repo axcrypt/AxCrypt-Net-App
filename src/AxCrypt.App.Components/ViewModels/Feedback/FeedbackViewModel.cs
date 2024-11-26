@@ -1,4 +1,6 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Services;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Service;
@@ -7,14 +9,17 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Components.ViewModels.Feedback;
 
-public class FeedbackViewModel
+public class FeedbackViewModel : LogOnViewModel
 {
-    public FeedbackViewModel()
+    public FeedbackViewModel(LogOnViewModel logOnViewModel, ProcessIndicatorService processIndicatorService) : base(processIndicatorService)
     {
         AllSubject = Enum.GetValues(typeof(FeedbackSubject))
              .Cast<FeedbackSubject>()
              .ToList();
+        LogOnViewModel = logOnViewModel;
     }
+
+    public LogOnViewModel LogOnViewModel { get; set; }
 
     public string UserInput { get; set; } = string.Empty;
 
@@ -33,32 +38,25 @@ public class FeedbackViewModel
         {
             return;
         }
+
         // Perform form submission logic here
         //await SelectedSubjectChanged.InvokeAsync(SelectedSubject);
         // Optionally, reset form state or perform other actions
+
+        IAccountService accountService = New<LogOnIdentity, IAccountService>(New<KnownIdentities>().DefaultEncryptionIdentity);
         try
         {
-            IAccountService accountService = New<LogOnIdentity, IAccountService>(New<KnownIdentities>().DefaultEncryptionIdentity);
-            try
+            using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorFeedbackMessage, Texts.ProgressIndicatorWaitMessage))
             {
-                using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorFeedbackMessage, Texts.ProgressIndicatorWaitMessage))
-                {
-                    await accountService.SendFeedbackAsync(SelectedSubject.ToString(), UserInput);
-                }
-                UserInput = string.Empty;
+                await accountService.SendFeedbackAsync(SelectedSubject.ToString(), UserInput);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-        finally
-        {
-        }
-    }
 
-    public void CloseTextArea()
-    {
-        UserInput = string.Empty;
+            UserInput = string.Empty;
+            LogOnViewModel.FeedbackDialog.Close();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }

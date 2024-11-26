@@ -22,10 +22,8 @@ public class RecentFoldersViewModel : ComponentBase
     private readonly MainViewModel _mainViewModel;
     private readonly FileOperationViewModel _fileOperationViewModel;
     private ProcessIndicatorService _ProcessIndicatorService;
-
     private WatchedFoldersViewModel _viewModel;
-
-    public ShareKeyViewModel? SharekeysViewModel { get; set; }
+    private ShareKeyViewModel? _sharekeyViewModel;
 
     private bool _isDescending;
     private bool _folderContextMenu;
@@ -41,12 +39,13 @@ public class RecentFoldersViewModel : ComponentBase
         set => _folderContextMenu = value;
     }
 
-    public RecentFoldersViewModel(ProcessIndicatorService processIndicatorService, LogOnViewModel logOnViewModel)
+    public RecentFoldersViewModel(ProcessIndicatorService processIndicatorService, LogOnViewModel logOnViewModel, ShareKeyViewModel sharekeyViewModel)
     {
         _logOnViewModel = logOnViewModel;
         _mainViewModel = logOnViewModel.MainViewModel;
         _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
         _ProcessIndicatorService = processIndicatorService;
+        _sharekeyViewModel = sharekeyViewModel;
     }
 
     public async Task InitializeAsync()
@@ -171,7 +170,7 @@ public class RecentFoldersViewModel : ComponentBase
         if (!folderPaths.Any()) return;
 
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFoldersAsync(folderPaths, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        SharekeysViewModel.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel, true);
+        _sharekeyViewModel.SetSelectedFilesOrFolders(SelectedRecentFolders.Select(e => e), viewModel, true);
 
         await viewModel.ShareFolders.ExecuteAsync(null);
     }
