@@ -43,7 +43,7 @@ public class LogOnViewModel : ViewModelBase
 
         IsVisible = false;
 
-        mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { if (loggedOn) { ProcessIndicator?.Dispose(); }/* else { IsVisible = !loggedOn; }*/ });
+        mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { if (loggedOn) { ProcessIndicator?.Dispose(); OnSubscriptionChanged?.Invoke(); }/* else { IsVisible = !loggedOn; }*/ });
         mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnSubscriptionChanged?.Invoke(); } });
     }
 

@@ -23,14 +23,14 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class RecentFilesViewModel : LogOnViewModel
+public class RecentFilesViewModel : ViewModelBase
 {
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
     private ProcessIndicatorService? _ProcessIndicatorService;
     private ShareKeyViewModel? _sharekeyViewModel;
 
-    public RecentFilesViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel, ProcessIndicatorService processIndicatorService) : base(processIndicatorService)
+    public RecentFilesViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel)
     {
         LogOnViewModel = logOnViewModel;
         _mainViewModel = logOnViewModel.MainViewModel;

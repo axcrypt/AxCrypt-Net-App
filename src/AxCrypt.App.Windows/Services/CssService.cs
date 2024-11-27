@@ -1,5 +1,4 @@
 ﻿using AxCrypt.App.Components.Services.Interface;
-using Microsoft.JSInterop;
 
 namespace AxCrypt.App.Windows.Services;
 
@@ -7,7 +6,7 @@ public class CssService : ICssService
 {
     public string[] ApplySubscriptionCssAsync(string subscriptionLevel)
     {
-        string cssBasePath = subscriptionLevel.ToLower() switch
+        string cssBasePath = subscriptionLevel switch
         {
             "business" => "business",
             "premium" => "premium",

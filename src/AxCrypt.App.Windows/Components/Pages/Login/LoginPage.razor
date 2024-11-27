@@ -42,11 +42,11 @@
                     <div class="signup-link">
                         <div style="display:inline-flex; align-items:center;">
                             <span class="che-txt"> Don`t have an account?</span>
-                            <NavLink class="nav-link grn-clr" href="register">
+                            <NavLink class="nav-link grn-clr" @onclick="(e)=> CreateNewAccountLabel_LinkClicked(e)">
                                 <span>@Texts.PromptSignUp</span>
                             </NavLink>
                         </div><br />
-                        <NavLink class="nav-link grn-clr" href="register">
+                        <NavLink class="nav-link grn-clr" @onclick="(e)=> ForgetPassword_ButtonClicked(e)">
                             <span>Forgot password ?</span>
                         </NavLink>
                     </div>
@@ -138,13 +138,13 @@
         return true;
     }
 
-    private void createNewAccountLabel_LinkClicked(object sender, EventArgs e)
+    private void CreateNewAccountLabel_LinkClicked(EventArgs e)
     {
         BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToSignUpWebPage);
     }
 
-    private void SignUpSignInDialog_HelpButtonClicked(object sender, EventArgs e)
+    private void ForgetPassword_ButtonClicked(EventArgs e)
     {
-        BrowseUtility.RedirectTo(Texts.LinkToGettingStarted);
+        BrowseUtility.RedirectToAccountWebUrl(Texts.PasswordResetHyperLink);
     }
 }

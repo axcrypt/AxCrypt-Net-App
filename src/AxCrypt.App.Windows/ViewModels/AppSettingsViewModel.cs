@@ -17,11 +17,10 @@ using AxCrypt.App.Windows.Models;
 using AxCrypt.App.Components.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Components.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class AppSettingsViewModel : LogOnViewModel
+public class AppSettingsViewModel : ViewModelBase
 {
     private LogOnViewModel _logOnViewModel;
     private MainViewModel? _mainViewModel;
@@ -33,7 +32,7 @@ public class AppSettingsViewModel : LogOnViewModel
     private bool isDateModifiedOn;
     private bool isFileNameOn;
 
-    public AppSettingsViewModel(LogOnViewModel logOnViewModel, RecentFilesViewModel recentFilesViewModel, ProcessIndicatorService processIndicatorService) : base(processIndicatorService)
+    public AppSettingsViewModel(LogOnViewModel logOnViewModel, RecentFilesViewModel recentFilesViewModel)
     {
         _logOnViewModel = logOnViewModel;
         _mainViewModel = _logOnViewModel.MainViewModel;

@@ -54,6 +54,11 @@ public class VerifyAccountDialogViewModel
 
     public async void ButtonOk_Click(EventArgs e)
     {
+        if (string.IsNullOrEmpty(PassPhrase) && string.IsNullOrEmpty(ActivationCode) && string.IsNullOrEmpty(PassPhraseVerification))
+        {
+            return;
+        }
+
         _viewModel.VerificationCode = ActivationCode;
         _viewModel.Verification = PassPhraseVerification;
         _viewModel.PasswordText = PassPhrase;

@@ -16,30 +16,26 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                        <label>@verifyViewModel.PassPhrase</label>
-                    </div> 
-                    
-                    <div>
                         <label>Your password:</label>
-                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.PassPhrase"/>
+                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.PassPhrase" />
                     </div>
-                    
+
                     <div>
                         <label>Verify password:</label>
-                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.PassPhraseVerification"/>
-                    </div>
-                    
-                    <div>
-                        <label>Verification Code:</label>
-                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.ActivationCode" />
+                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.PassPhraseVerification" />
                     </div>
                     <div>
                         <input type="checkbox" checked="@verifyViewModel.ShowPassword" @onchange="ToggleShowPassword" />
                         <span class="grey-clr font-medium">Show password</span>
                     </div>
+
+                    <div>
+                        <label>Verification Code:</label>
+                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.ActivationCode" />
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="button-group-footer">
                 <button class="button success btn-small" @onclick="verifyViewModel.ButtonOk_Click">Ok</button>
                 <button class="button cancel btn-small" @onclick="verifyViewModel.ResendButton_Click">@Texts.ResendButtonText</button>
                 <button class="button cancel btn-small" @onclick="verifyViewModel.HelpButton_Click">@Texts.ButtonHelpText</button>
@@ -48,6 +44,15 @@
         </div>
     </div>
 }
+
+<style>
+    .button-group-footer {
+        border-top: none;
+        justify-content: center;
+        gap: 12px;
+        padding-left: 7%;
+    }
+</style>
 
 @code {
     private bool IsVisible;

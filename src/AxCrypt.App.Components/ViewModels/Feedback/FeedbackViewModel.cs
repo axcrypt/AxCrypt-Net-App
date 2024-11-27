@@ -1,6 +1,5 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Components.Models;
-using AxCrypt.App.Components.Services;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Service;
@@ -9,9 +8,9 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Components.ViewModels.Feedback;
 
-public class FeedbackViewModel : LogOnViewModel
+public class FeedbackViewModel
 {
-    public FeedbackViewModel(LogOnViewModel logOnViewModel, ProcessIndicatorService processIndicatorService) : base(processIndicatorService)
+    public FeedbackViewModel(LogOnViewModel logOnViewModel)
     {
         AllSubject = Enum.GetValues(typeof(FeedbackSubject))
              .Cast<FeedbackSubject>()

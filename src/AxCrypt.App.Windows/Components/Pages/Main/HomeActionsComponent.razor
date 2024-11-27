@@ -86,7 +86,7 @@
             } *@
             @if (viewModel.SubscriptionLevel == SubscriptionLevel.Business)
             {
-                <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("master key") )' @* @onmouseout="viewModel.HidePopup" *@ @onclick="viewModel.RedirectToAccountSite">
+                <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("master key") )' @onclick="viewModel.RedirectToAccountSite">
                     <img class="act-img mtrkey-act" src="" alt="mtrkey-img" /><span class="text-size">@Texts.MasterKeyTitle</span>
                     @if (viewModel.isHovered && viewModel.hoveredElement == "master key")
                     {
@@ -97,7 +97,7 @@
                 </div>
                 @if (Utility.IsMainMenuHidden)
                 {
-                    <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("create groups") )' @* @onmouseout="viewModel.HidePopup" *@ @onclick="viewModel.RedirectToAccountSite">
+                    <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("create groups") )' @onclick="viewModel.RedirectToAccountSite">
                         <img class="act-img grp-act" src="" alt="grp-img" /><span class="text-size">Create groups</span>
                         @if (viewModel.isHovered && viewModel.hoveredElement == "create groups")
                         {
@@ -110,7 +110,7 @@
             }
             @if (viewModel.isFilesPending)
             {
-                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => viewModel.ShowPopup("clean") )' @* @onmouseout="viewModel.HidePopup" *@ @onclick="(e) => viewModel.CleanAndRemoveOpenFilesButton_Click(e)">
+                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => viewModel.ShowPopup("clean") )' @onclick="(e) => viewModel.CleanAndRemoveOpenFilesButton_Click(e)">
                     <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">Clean</span>
                     @if (viewModel.isHovered && viewModel.hoveredElement == "clean")
                     {
@@ -180,15 +180,15 @@
             <div>
                 <label class="fle-nme fnt-sze" style="padding-bottom:20px;">Active subscriptions</label>
                 <div class="actv-subs align-items">
-                    <div class="battery">
+                    @* <div class="battery">
                         <div class="battery-head"> </div>
                         <div class="battery-body" id="battery-body">
                             <div class="charge-level">
                                 <span style="text-align: center; margin:auto auto;"> @viewModel.MembersCount/<span style="font-weight:bold;">@viewModel.TotalMembers</span></span>
                             </div>
                         </div>
-                    </div>
-                    <div style="margin-left:5px;">
+                    </div> *@
+                    <div class="center-column" style="margin-left: 47px;">
                         <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="viewModel.RedirectToAccountWebUrl">Renew<img class="rnw-btn" src="" alt="img" /></button>
                         <button class="subs-btn" style="background-color: #000;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">Add users<img class="add-usr" src="" alt="img" /></button>
                     </div>

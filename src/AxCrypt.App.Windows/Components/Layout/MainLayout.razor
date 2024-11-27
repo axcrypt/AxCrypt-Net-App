@@ -69,14 +69,14 @@
 
 @code {
     private bool CanShowSignInPage { get; set; }
-    private string SubscriptionLevel { get; set; }
+    private string? SubscriptionLevel { get; set; }
 
     protected override void OnInitialized()
     {
         CanShowSignInPage = LogOnViewModel.IsVisible;
-        SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString();
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdateSignInPageState;
         LogOnViewModel.OnSubscriptionChanged += UpdateSubscriptionState;
+        SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
         base.OnInitialized();
     }
 
@@ -93,8 +93,16 @@
     {
         InvokeAsync(async () =>
         {
-            string subscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
-            await AddCssAsync(subscriptionLevel);
+            SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
+            await AddCssAsync(SubscriptionLevel);
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void UpdateState()
+    {
+        InvokeAsync(async () =>
+        {
             StateHasChanged(); // Refresh UI
         });
     }

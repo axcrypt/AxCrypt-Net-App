@@ -7,36 +7,30 @@
 
 @inject LogOnViewModel viewModel
 
-<style>
-    .password-dialog .text-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        text-align: left;
-        font-size: 14px;
-        line-height: 1.6;
-        background-color: #f9f9f9;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-</style>
-
 @if (IsVisible)
 {
     <div id="modal-dialog6" class="modalDialog password-dialog">
-        <div class="text-content">
+        <div class="text-content" style="margin-bottom: 16px;">
             @((MarkupString)InitializeFeatureText())
-        </div>
-        <div class="button-group">
-            <button @onclick="RenewSubscriptionAsync">@Texts.BusinessSubscriptionRenewMenu</button>
-            <button @onclick="UpdateDoNotShowAgainOptions">@Texts.ButtonNotNow</button>
-            <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@IsCheckboxDontShowThisAgain" />
+            <div class="button-group center-column" style="padding-top:15px;">
+                <button class="button font-medium success btn-large" @onclick="RenewSubscriptionAsync">@Texts.BusinessSubscriptionRenewMenu</button>
+                <button class="btn-large font-medium button cancel" @onclick="UpdateDoNotShowAgainOptions">@Texts.ButtonNotNow</button>
+                <label> <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@IsCheckboxDontShowThisAgain" /> Do not show again </label>
+            </div>
         </div>
     </div>
 }
+
+<style>
+    .text-content {
+        margin-bottom: 16px;
+    }
+
+    .button-group {
+        margin-top: 0;
+        padding: 8px 0;
+    }
+</style>
 
 @code {
     private bool IsVisible;
@@ -55,14 +49,15 @@
 
     string InitializeFeatureText()
     {
-        string upgradeSubscriptionPromptText = Texts.UpgradeSubscriptionPromptText;
-        upgradeSubscriptionPromptText += "<br/><br/>";
+        string upgradeSubscriptionPromptText = Texts.UpgradeSubscriptionPromptText + "<br/>";
+        upgradeSubscriptionPromptText += "<br/>";
         string[] features = Texts.RenewSubscriptionDialogFeaturesList.Split('\n');
         upgradeSubscriptionPromptText += "<ul>";
         foreach (string feature in features)
         {
             upgradeSubscriptionPromptText += $"<li>{feature}</li>";
         }
+        upgradeSubscriptionPromptText += "</ul>";
 
         return upgradeSubscriptionPromptText;
     }

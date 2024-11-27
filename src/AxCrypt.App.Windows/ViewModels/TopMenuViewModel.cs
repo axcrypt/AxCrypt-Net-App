@@ -13,12 +13,12 @@ using System.Globalization;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class TopMenuViewModel : LogOnViewModel
+public class TopMenuViewModel : ViewModelBase
 {
     private readonly UserNotificationService _notificationService;
     private MainViewModel? _mainViewModel;
 
-    public TopMenuViewModel(UserNotificationService notificationService, LogOnViewModel logOnViewModel, ProcessIndicatorService processIndicatorService) : base(processIndicatorService)
+    public TopMenuViewModel(UserNotificationService notificationService, LogOnViewModel logOnViewModel)
     {
         LogOnViewModel = logOnViewModel;
         _notificationService = notificationService;

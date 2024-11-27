@@ -16,7 +16,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class ShareKeyViewModel : LogOnViewModel
+public class ShareKeyViewModel : ViewModelBase
 {
     private LogOnIdentity? _identity;
     public LogOnViewModel LogOnViewModel;
@@ -44,7 +44,7 @@ public class ShareKeyViewModel : LogOnViewModel
 
     public IEnumerable<string>? SelectedFilesOrFolders { get; set; }
 
-    public ShareKeyViewModel(LogOnViewModel logOnViewModel, ProcessIndicatorService processIndicatorService) : base(processIndicatorService)
+    public ShareKeyViewModel(LogOnViewModel logOnViewModel)
     {
         LogOnViewModel = logOnViewModel;
         SubscriptionLevel = logOnViewModel.SubscriptionLevel;

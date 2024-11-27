@@ -301,6 +301,8 @@ public partial class MainPage : ContentPage, ISignIn
         Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Resolve.UserSettings.CultureName);
     }
 
+    private DoNotShowAgainOptions _dontShowAgainFlag;
+
     private void ShowRenewSubscriptionDialog()
     {
         if (!_mainViewModel.LoggedOn || !AxCryptUserAccountViewModel.HadAnyPaidSubscription)
@@ -308,7 +310,15 @@ public partial class MainPage : ContentPage, ISignIn
             return;
         }
 
+        _dontShowAgainFlag = DoNotShowAgainOptions.UpgradeSubscriptionWarning;
+
+        if (_dontShowAgainFlag != DoNotShowAgainOptions.None && New<Core.UI.UserSettings>().DoNotShowAgain.HasFlag(_dontShowAgainFlag))
+        {
+            return;
+        }
+
         _logOnService.RenewSubscriptionDialog.Show();
+
         //using (RenewSubscriptionPromptDialog dialog = new RenewSubscriptionPromptDialog(this))
         //{
         //    if (dialog.HideDialog)
@@ -553,10 +563,5 @@ public partial class MainPage : ContentPage, ISignIn
     {
         //_optionsDebugToolStripMenuItem.Checked = enabled;
         //_debugToolStripMenuItem.Visible = enabled;
-    }
-
-    private void ImportMyPrivateKeyToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        _logOnService.ImportPrivatePasswordDialog.Show();
     }
 }
