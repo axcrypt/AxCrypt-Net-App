@@ -28,13 +28,13 @@
         <div class="">
             @if (!Utility.IsMainMenuHidden)
             {
-                <img class="hide-icon" src="" alt="image hide" @onclick="Utility.ToggleMainMenu" />
+                <img class="hide-icon" src="" alt="image hide" @onclick="()=> Utility.ToggleMainMenu()" />
                 <NavMenu />
             }
             else
             {
                 <div class="" style="width:100px;overflow:hidden; ">
-                    <img class="expbd-icon" src="" alt="image hide" @onclick="Utility.ToggleMainMenu" />
+                    <img class="expbd-icon" src="" alt="image hide" @onclick="()=> Utility.ToggleMainMenu()" />
                     <NavMenu />
                 </div>
             }
@@ -95,14 +95,6 @@
         {
             SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
             await AddCssAsync(SubscriptionLevel);
-            StateHasChanged(); // Refresh UI
-        });
-    }
-
-    private void UpdateState()
-    {
-        InvokeAsync(async () =>
-        {
             StateHasChanged(); // Refresh UI
         });
     }

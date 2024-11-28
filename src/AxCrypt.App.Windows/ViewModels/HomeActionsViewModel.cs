@@ -44,14 +44,14 @@ public class HomeActionsViewModel : ComponentBase
 
     public void ShowPopup(string element)
     {
-        //isHovered = true;
-        //hoveredElement = element;
+        isHovered = true;
+        hoveredElement = element;
     }
 
     public void HidePopup()
     {
-        //isHovered = false;
-        //hoveredElement = string.Empty;
+        isHovered = false;
+        hoveredElement = string.Empty;
     }
 
     public HomeActionsViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel, IStatusAlertService statusAlertService)
@@ -67,7 +67,6 @@ public class HomeActionsViewModel : ComponentBase
         _mainViewModel = _logOnViewModel.MainViewModel;
         _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
         _fileSystemState = Resolve.FileSystemState;
-        Utility.OnIsMainMenuHiddenChanged += StateHasChanged;
 
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { _logOnViewModel.License = license; _logOnViewModel.SubscriptionChanged(); } });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); });

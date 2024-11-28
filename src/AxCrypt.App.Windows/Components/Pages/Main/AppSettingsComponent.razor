@@ -33,7 +33,7 @@
     </NavLink>
     <NavLink class="nav-link center-column">
         <div>
-            <img class="" src="images/default/IcoEye.svg" alt="go-back-img" />
+            <img class="" src="images/default/Ico256.svg" alt="go-back-img" />
             <span class="grey-clr">@Texts.OptionsConvertMenuItemText</span>
         </div>
         <div style="float:right; padding-left:15px;">
@@ -54,40 +54,69 @@
             </label>
         </div>
     </NavLink>
-    <NavLink class="nav-link center-column">
-        <div>
-            <img class="" src="images/default/IcoOffln1.svg" alt="go-back-img" />
-            <span class="grey-clr">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
-        </div>
-        <div style="float:right; padding-left:15px;">
-            <label class="toggle">
-                <input type="checkbox" @bind="AppSettingsViewModel.IncludeSubfolders" @onclick="async(e)=> AppSettingsViewModel.ToggleIncludeSubfolders(e)">
-                <span class="slider round">
-                    @if (AppSettingsViewModel.IncludeSubfolders)
-                    {
-                        <span class="on-off-text on-text">ON</span>
-                        <span class="on-off-text off-text" style="display:none;">OFF</span>
-                    }
-                    else
-                    {
-                        <span class="on-off-text on-text" style="display:none;">ON</span>
-                        <span class="on-off-text off-text">OFF</span>
-                    }
-                </span>
-            </label>
-        </div>
-    </NavLink>
-    <div class="key-section">
+    <div @onmouseover='@(()=> ShowPopup("include"))'>
+        <NavLink class="nav-link center-column">
+            <div>
+                <img class="" src="images/default/IcoOffln1.svg" alt="go-back-img" />
+                <span class="grey-clr">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
+            </div>
+            <div style="float:right; padding-left:15px;">
+                <label class="toggle">
+                    <input type="checkbox" @bind="AppSettingsViewModel.IncludeSubfolders" @onclick="async(e)=> AppSettingsViewModel.ToggleIncludeSubfolders(e)">
+                    <span class="slider round">
+                        @if (AppSettingsViewModel.IncludeSubfolders)
+                        {
+                            <span class="on-off-text on-text">ON</span>
+                            <span class="on-off-text off-text" style="display:none;">OFF</span>
+                        }
+                        else
+                        {
+                            <span class="on-off-text on-text" style="display:none;">ON</span>
+                            <span class="on-off-text off-text">OFF</span>
+                        }
+                    </span>
+                </label>
+            </div>
+        </NavLink>
+        @if (AppSettingsViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
+        {
+            @if (isHovered && hoveredElement == "include")
+            {
+                <div class="home-hover text-center" style="background-color:#fff;">
+                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
+                </div>
+            }
+        }
+    </div>
+    <div class="key-section" @onmouseover='@(()=> ShowPopup("inactivity"))'>
         <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" @onclick="AppSettingsViewModel.InactSgnOutPopup">
             <img class="sgn-out-img" src="images/default/IcoSngOut.svg" alt="go-back-img" />
             <span>@Texts.IdleSignOutToolStripMenuItemText</span>
         </NavLink>
+        @if (AppSettingsViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
+        {
+            @if (isHovered && hoveredElement == "inactivity")
+            {
+                <div class="home-hover text-center" style="background-color:#fff;">
+                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
+                </div>
+            }
+        }
     </div>
-    <div class="key-section">
+    <div class="key-section" @onmouseover='@( () => ShowPopup("rename") )'>
         <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.RestoreRename(e)">
             <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
             <span>Restore to original</span>
         </NavLink>
+        @if (AppSettingsViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
+        {
+            @if (isHovered && hoveredElement == "rename")
+            {
+                <div class="home-hover text-center" style="background-color:#fff;">
+                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
+                </div>
+            }
+        }
     </div>
     <div class="key-section">
         <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.ToggleAdvancedOption()">
@@ -148,7 +177,6 @@
                            checked="@(timeout == AppSettingsViewModel.InactivitySignOut)"
                            @onclick="(e) => AppSettingsViewModel.OnInactivityContextMenu(timeout, e)" />
                     <label for="timeout-@timeout">@((timeout == 0) ? "Disable" : $"{timeout} minutes")</label>
-
                     <br />
                 }
             </form>
@@ -400,4 +428,13 @@
 
     [Parameter]
     public EventCallback CloseSettingsPopup { get; set; }
+
+    public string hoveredElement { get; set; } = string.Empty;
+    public bool isHovered { get; set; }
+
+    public void ShowPopup(string element)
+    {
+        isHovered = true;
+        hoveredElement = element;
+    }
 }

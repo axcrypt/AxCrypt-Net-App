@@ -17,6 +17,7 @@ using AxCrypt.App.Windows.Models;
 using AxCrypt.App.Components.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.Api.Model;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -56,6 +57,14 @@ public class AppSettingsViewModel : ViewModelBase
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); _logOnViewModel.UIStateChanged(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { _userInitiatedUpdateCheckPending = true; await DisplayUpdateCheckPopups(); });
+    }
+
+    public SubscriptionLevel SubscriptionLevel
+    {
+        get
+        {
+            return _logOnViewModel.SubscriptionLevel;
+        }
     }
 
     public List<int> InactivityTimeoutOptions { get; } = new List<int> { 0, 5, 15, 30, 60 };

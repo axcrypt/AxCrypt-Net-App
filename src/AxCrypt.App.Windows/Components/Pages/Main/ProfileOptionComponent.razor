@@ -1,6 +1,7 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Models
 @using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.Common
 @using AxCrypt.Content
 @using AxCrypt.Core
 @using AxCrypt.Core.UI
@@ -20,7 +21,7 @@
                 }
                 else
                 {
-                    <span></span> 
+                    <span></span>
                 }
             </h3>
         </div>
@@ -54,13 +55,14 @@
             </NavLink>
         </div>
         <div class="key-section">
-            <NavLink class="nav-link" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
+            <NavLink class="nav-link" disabled="@DisablePasswordChange()" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
                 <span>Password change</span>
             </NavLink>
         </div>
-        <div class="key-section" disabled="@IsPasswordReset()">
-            <NavLink class="nav-link" @onclick="(e) => ProfileViewModel.PasswordReset_Click(e)">
+        <div class="key-section">
+            <NavLink class="nav-link" disabled="@DisablePasswordReset()"
+                     @onclick="(e) => ProfileViewModel.PasswordReset_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
                 <span>Password Reset</span>
             </NavLink>
@@ -134,10 +136,19 @@
 }
 
 <style>
-    .disabled {
+    .nav-link-pass.disabled,
+    .nav-link-pass.disabled:hover,
+    .nav-link-pass.disabled.active {
         pointer-events: none;
-        opacity: 0.5;
+        background-color: transparent;
+        color: gray !important;
+        text-decoration: none;
     }
+
+    .key-section a.disabled.active {
+        background-color: transparent;
+    }
+
 </style>
 
 @code {
@@ -165,10 +176,16 @@
         ClosePopup.InvokeAsync(null);
     }
 
-    private string IsPasswordReset()
+    private bool DisablePasswordReset()
     {
-        bool isPasswordReset = ProfileViewModel.Account.IsLoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail);
-        return isPasswordReset ? "" : "disabled";
+        bool isPasswordReset = !ProfileViewModel.Account.IsLoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail);
+        return isPasswordReset;
+    }
+
+    private string DisablePasswordChange()
+    {
+        bool isPasswordChange = New<AxCryptOnlineState>().IsOnline;
+        return isPasswordChange ? "" : "disabled";
     }
 
     void UpdateState()

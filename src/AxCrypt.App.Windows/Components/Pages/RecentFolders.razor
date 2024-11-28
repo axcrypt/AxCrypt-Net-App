@@ -10,13 +10,15 @@
 }
 
 <link href="css/@RecentFoldersViewModel.SubscriptionLevel.ToString().ToLower()/index.css" rel="stylesheet" />
-<link href="css/login.min.css" rel="stylesheet" />
 
-<div @onclick="RecentFoldersViewModel.SortByDate">
-    <label class="font-medium">Sort by: <span class="txt-clr">Date</span></label>
-    <img class="arw-img" src="" alt="arrow-image" />
-    <img class="date-drpdwn" src="" alt="arrow-image" />
-</div>
+@if (RecentFoldersViewModel.RecentFoldersList.Any())
+{
+    <div @onclick="RecentFoldersViewModel.SortByDate">
+        <label class="font-medium">Sort by: <span class="txt-clr">Date</span></label>
+        <img class="arw-img" src="" alt="arrow-image" />
+        <img class="date-drpdwn" src="" alt="arrow-image" />
+    </div>
+}
 
 <div class="rcnt-fld-sec hgt-ovflw">
     @if (currentDevice != DeviceIdiom.Phone && RecentFoldersViewModel.SubscriptionLevel != SubscriptionLevel.Free)

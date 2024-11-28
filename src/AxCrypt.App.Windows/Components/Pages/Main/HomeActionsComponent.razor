@@ -60,7 +60,7 @@
                                 <span style="color:white;">
                                     Upgrade to access this <strong>feature!</strong>
                                 </span>
-                                <button class="upgrd-btn font-medium btn-medium" @onclick="() => viewModel.UpgradeToShare = Utility.ToggleUpgradePopup(viewModel.UpgradeToShare)">Upgrade</button>
+                                <button class="upgrd-btn font-medium btn-medium" @onclick="() => viewModel.UpgradeDialog()">Upgrade</button>
                             </div>
                         </div>
                     }
@@ -68,7 +68,7 @@
             }
             else
             {
-                <div class="act-box" @onclick="async(e)=> viewModel.ShareKeysAsync(e)">
+                <div class="act-box" @onclick="async(e)=> viewModel.ShareKeysAsync(e)" @onmouseover='@( () => viewModel.ShowPopup("share") )'>
                     <img class="act-img shrks-act" src="" alt="shrks-img" />
                     <span class="text-size">Share</span>
                     @if (viewModel.isHovered && viewModel.hoveredElement == "share")
@@ -181,13 +181,13 @@
                 <label class="fle-nme fnt-sze" style="padding-bottom:20px;">Active subscriptions</label>
                 <div class="actv-subs align-items">
                     @* <div class="battery">
-                        <div class="battery-head"> </div>
-                        <div class="battery-body" id="battery-body">
-                            <div class="charge-level">
-                                <span style="text-align: center; margin:auto auto;"> @viewModel.MembersCount/<span style="font-weight:bold;">@viewModel.TotalMembers</span></span>
-                            </div>
-                        </div>
-                    </div> *@
+                <div class="battery-head"> </div>
+                <div class="battery-body" id="battery-body">
+                <div class="charge-level">
+                <span style="text-align: center; margin:auto auto;"> @viewModel.MembersCount/<span style="font-weight:bold;">@viewModel.TotalMembers</span></span>
+                </div>
+                </div>
+                </div> *@
                     <div class="center-column" style="margin-left: 47px;">
                         <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="viewModel.RedirectToAccountWebUrl">Renew<img class="rnw-btn" src="" alt="img" /></button>
                         <button class="subs-btn" style="background-color: #000;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">Add users<img class="add-usr" src="" alt="img" /></button>
@@ -203,7 +203,7 @@
                     <label class="unlck-txt">
                         Unlock our amazing <span>features</span> developed to <span>empower your security!</span>
                     </label>
-                    <button class="upgrd-btn font-medium btn-large" @onclick="viewModel.UpgradeDialog" style="height: 37px;"> Upgrade now</button>
+                    <button class="upgrd-btn font-medium btn-large" @onclick="()=>viewModel.UpgradeDialog()" style="height: 37px;"> Upgrade now</button>
                 </div>
             </div>
         }
@@ -260,7 +260,7 @@
                     <img class="ico-invtfrd" src="" alt="hand-img" />
                     <span class="text-size text-style">Invite friend</span>
                 </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="viewModel.UpgradeDialog">
+                <div class="mre-actn-box atn-bgclr" @onclick="()=> viewModel.UpgradeDialog()">
                     <img class="ico-apikey" src="" alt="hand-img" />
                     <span class="text-size text-style">Upgrade files to AES-256</span>
                 </div>
@@ -292,6 +292,7 @@
     {
         viewModel.Initialized();
         viewModel.SelectedRecentFiles = SelectedRecentFiles;
+        Utility.OnIsMainMenuHiddenChanged += UpdateState;
         base.OnInitialized();
     }
 
@@ -326,7 +327,7 @@
         }
     }
 
-    void UpdateShareKeyDialog(bool showPopup = false)
+    void UpdateState()
     {
         InvokeAsync(() =>
         {

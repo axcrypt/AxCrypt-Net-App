@@ -26,11 +26,8 @@ public static class Utility
         get => _isMainMenuHidden;
         set
         {
-            if (_isMainMenuHidden != value)
-            {
-                _isMainMenuHidden = value;
-                OnIsMainMenuHiddenChanged?.Invoke();
-            }
+            _isMainMenuHidden = value;
+            OnIsMainMenuHiddenChanged?.Invoke();
         }
     }
 
