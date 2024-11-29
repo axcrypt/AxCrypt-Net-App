@@ -25,7 +25,7 @@
 <div class="page" dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (LogOnViewModel.IsLoggedOn && !CanShowSignInPage)
     {
-        <div class="">
+        <div class="sidebar">
             @if (!Utility.IsMainMenuHidden)
             {
                 <img class="hide-icon" src="" alt="image hide" @onclick="()=> Utility.ToggleMainMenu()" />
@@ -44,7 +44,14 @@
     <main>
         @if (LogOnViewModel.IsLoggedOn && !CanShowSignInPage)
         {
-            <AxCrypt.App.Windows.Components.Pages.Main.TopMenu />
+            <div class="top-menu-section">
+                <AxCrypt.App.Windows.Components.Pages.Main.TopMenu />
+            </div>
+            
+            <div class="body-content-section">
+                @Body
+            </div>
+
             <AxCrypt.App.Windows.Components.Pages.PopupDialog.InvitePopup />
             <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
             <AxCrypt.App.Windows.Components.Pages.PopupDialog.ImportPrivatePasswordDialog />
@@ -58,8 +65,12 @@
             <AxCrypt.App.Windows.Components.Pages.Feedback />
             <AxCrypt.App.Components.Pages.StatusAlertComponent />
         }
-
-        @Body
+        else 
+        {
+            <div id="body-section">
+                @Body
+            </div>
+        }
 
         <div>
             <AxCrypt.App.Components.Pages.ProcessIndicatorComponent />

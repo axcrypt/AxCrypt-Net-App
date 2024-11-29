@@ -14,48 +14,48 @@
 @if (LogOnViewModel.LogOnAccountModel != null)
 {
     <section class="content">
-        <div class="">
-            <article class="left-section" id="content-wrap">
-                <h1 class="login-title hg-img">@Texts.WelcomeBackTitle</h1>
-                <span class="sub-head">Log in</span>
-                <EditForm Model="@LogOnViewModel.LogOnAccountModel" OnValidSubmit="ButtonLogIn_Click" class="signup-sec">
-                    @if (!string.IsNullOrEmpty(LogOnViewModel.ErrorMessage))
-                    {
-                        <div class="alert alert-danger">@LogOnViewModel.ErrorMessage</div>
-                    }
-                    <div style="display:flex;">
-                        <div style="width:100%;">
-                            <label>@Texts.EmailLabel</label>
-                            <input type="text" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" />
-                        </div>
+        <article class="left-section" id="content-wrap">
+            <h1 class="login-title hg-img">@Texts.WelcomeBackTitle</h1>
+            <span class="sub-head">Log in</span>
+            <EditForm Model="@LogOnViewModel.LogOnAccountModel" OnValidSubmit="ButtonLogIn_Click" class="signup-sec">
+                @if (!string.IsNullOrEmpty(LogOnViewModel.ErrorMessage))
+                {
+                    <div class="alert alert-danger">@LogOnViewModel.ErrorMessage</div>
+                }
+                <div style="display:flex;">
+                    <div style="width:100%;">
+                        <label>@Texts.EmailLabel</label>
+                        <input type="text" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" />
                     </div>
-                    <div>
-                        <label>@Texts.PassphrasePrompt</label>
-                        <input type="password" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" />
-                    </div>
-                    <br />
-                    @*                 <div class="check-bx" style="margin: 15px 0px;">
+                </div>
+                <div>
+                    <label>@Texts.PassphrasePrompt</label>
+                    <input type="password" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" />
+                </div>
+                <br />
+                @* <div class="check-bx" style="margin: 15px 0px;">
                 <input type="checkbox" checked="@LogOnViewModel.RememberMe" @bind-value="LogOnViewModel.RememberMe" />
                 <span class="che-txt">@Texts.PromptKeepMeSignedIn</span>
                 </div> *@
-                    <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;">Log in</button>
-                    <div class="signup-link">
-                        <div style="display:inline-flex; align-items:center;">
-                            <span class="che-txt"> Don`t have an account?</span>
-                            <NavLink class="nav-link grn-clr" @onclick="(e)=> CreateNewAccountLabel_LinkClicked(e)">
-                                <span>@Texts.PromptSignUp</span>
-                            </NavLink>
-                        </div><br />
-                        <NavLink class="nav-link grn-clr" @onclick="(e)=> ForgetPassword_ButtonClicked(e)">
-                            <span>Forgot password ?</span>
+                <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;">Log in</button>
+                <div class="signup-link">
+                    <div style="display:inline-flex; align-items:center;">
+                        <span class="che-txt"> Don't have an account?</span>
+                        <NavLink class="nav-link grn-clr" href="https://account.axcrypt.net/en/Home/Login?Signup=True">
+                            <span>@Texts.PromptSignUp</span>
                         </NavLink>
-                    </div>
-                </EditForm>
-            </article>
-            <aside class="right-section">
-                <img class="sgnin-img" src="" alt="" />
-            </aside>
-        </div>
+                    </div><br />
+                    <NavLink class="nav-link grn-clr" href="https://account.axcrypt.net/Home/PasswordReset/">
+                        <span>@Texts.PasswordResetShortLink?</span>
+                    </NavLink>
+                </div>
+
+                <div class="che-txt text-center" style="color:#494949; margin-top:20px;">You agree to our <NavLink class="grn-clr" href="https://axcrypt.net/information/privacy-policy/">Privacy Policy</NavLink> and <NavLink class="grn-clr" href="https://axcrypt.net/information/terms-of-use/">Terms Of Use.</NavLink></div>
+            </EditForm>
+        </article>
+        <article class="right-section">
+            <div class="signin-right-img"></div>
+        </article>
     </section>
 }
 @code {
@@ -72,10 +72,19 @@
 
         if (!await AdHocValidationDueToMonoLimitations())
         {
+            await RefreshComponentAsync();
             return;
         }
 
         LogOnViewModel.PageResult = DialogResult.OK;
+    }
+
+    private async Task RefreshComponentAsync()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 
     private async Task<bool> AdHocValidationDueToMonoLimitations()

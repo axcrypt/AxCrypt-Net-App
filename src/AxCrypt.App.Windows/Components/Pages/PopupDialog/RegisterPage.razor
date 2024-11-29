@@ -8,43 +8,42 @@
 @using AxCrypt.Core.UI.ViewModel
 @using static AxCrypt.Abstractions.TypeResolve
 
-<link href="css/login.min.css" rel="stylesheet" />
 <section class="content">
     <article class="left-section reg-sec" id="content-wrap">
         <h1 class="reg-tle">Welcome to <span class="grn-clr">AxCrypt</span> world!</h1>
         <span style="margin-bottom: 10px;">Currently you are <b class="font-extra-bold">offline</b>. However, you still can <span class="grn-clr font-extra-bold"><b>Sign up!</b></span></span><br />
         <label class="sub-head">Sign up</label>
         <EditForm Model="@registerModel" class="signup-sec">
+            <div class="form-field">
+                <label>Your email</label>
+                <input type="email" @bind-value="registerModel.UserName" class="form-control email-img" placeholder="Enter your email" />
+            </div>
+            <div class="form-field">
+                <label>Create a password:</label>
+                <input type="@passwordFiledType" @bind-value="registerModel.Password" class="form-control pswd-img" placeholder="Create your password" />
+            </div>
             <div>
-                <div>
-                    <label>Your email</label>
-                    <input type="email" @bind-value="registerModel.UserName" class="form-control email-img" placeholder="Enter your email" />
-                </div>
-                <div>
-                    <label>Create a password:</label>
-                    <input type="password" @bind-value="registerModel.Password" class="form-control pswd-img" placeholder="Create your password" />
-                </div>
-                <div>
-                    <label>Verify password:</label>
-                    <input type="password" @bind-value="registerModel.VerifyPassword" class="form-control pswd-img" placeholder="Type your password one more time" />
-                </div>
-                <div class="check-bx">
-                    <input type="checkbox" />
-                    <span class="che-txt">Show password</span>
-                </div>
-                <button class="button grn-bg whte-clr" style="width:100%; margin: 20px 0px;" @onclick="ConfimationPopup">Sign Up </button>
-                <div class="signup-link">
-                    <NavLink class="nav-link" href="mailto:support@axcrypt.net">
-                        <span class="che-txt">Do you need any help?</span>
-                        <span class="grn-clr">Contact us!</span>
-                    </NavLink>
-                </div>
+                <label>Verify password:</label>
+                <input type="@passwordFiledType" @bind-value="registerModel.VerifyPassword" class="form-control pswd-img" placeholder="Type your password one more time" />
+            </div>
+            <div class="check-bx">
+                <input type="checkbox" style="margin-right: 5px !important;" @bind="canShowPassword" @onclick="async() => await ToggleShowPassword()"/>
+                <span class="che-txt">Show password</span>
+            </div>
+
+            <button class="button grn-bg whte-clr" style="width:100%; margin: 20px 0px;" @onclick="ConfimationPopup">Sign Up </button>
+
+            <div class="signup-link">
+                <NavLink class="nav-link" href="mailto:support@axcrypt.net">
+                    <span class="che-txt">Do you need any help?</span>
+                    <span class="grn-clr">Contact us!</span>
+                </NavLink>
             </div>
         </EditForm>
     </article>
-    <aside class="right-section">
-        <img class="sgnin-img" src="" alt="" />
-    </aside>
+    <article class="right-section">
+        <div class="signin-right-img"></div>
+    </article>
     @if (confimationPopup)
     {
         <ConfirmationDialog />
@@ -54,6 +53,8 @@
     RegisterModel registerModel = new();
     private CreateNewAccountViewModel _viewModel;
     private bool _isCreating = false;
+    private string passwordFiledType = "password";
+    bool canShowPassword = false;
 
     bool confimationPopup = false;
     void ConfimationPopup()
@@ -69,6 +70,14 @@
         // };
 
         //_viewModel.BindPropertyChanged(nameof(CreateNewAccountViewModel.ShowPassword), (bool show) => { PassphraseTextBox.UseSystemPasswordChar = VerifyPassphraseTextbox.UseSystemPasswordChar = !(ShowPassphraseCheckBox.Checked = show); });
+    }
+
+    private async Task RefreshComponentAsync()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 
     private async void _buttonOk_Click(object sender, EventArgs e)
@@ -169,5 +178,19 @@
     private void ClearErrorProviders()
     {
         registerModel.ErrorMessage = "";
+    }
+
+    async Task ToggleShowPassword()
+    {
+        canShowPassword = !canShowPassword;
+        if (canShowPassword)
+        {
+            passwordFiledType = "text";
+            await RefreshComponentAsync();
+            return;
+        }
+
+        passwordFiledType = "password";
+        await RefreshComponentAsync();
     }
 }

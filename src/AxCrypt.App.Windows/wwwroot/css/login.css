@@ -1,7 +1,6 @@
 ﻿#content-wrap {
-  width: 45%;
-  padding: 30px 5% 30px 4%;
-  margin: 5% auto;
+  margin: 8% auto 10%;
+  padding: 0 50px;
 }
 
 .reg-sec {
@@ -18,6 +17,7 @@
 .login-title {
   width: max-content;
   padding: 40px 45px 50px 0;
+  margin: 0 0 5% 0;
 }
 
 .reg-tle {
@@ -31,11 +31,7 @@
 }
 
 .check-bx {
-  display: flex;
-  justify-content: center;
-  float: left;
-  align-items: center;
-  gap: 5px;
+  width: 100%;
 }
 
 .signup-link {
@@ -45,10 +41,14 @@
   line-height: 16px;
 }
 
+.form-field {
+  display: grid;
+  margin: 1% 0 4%;
+}
+
 .signup-sec, input {
-  padding: 10px;
   color: #48772C;
-  margin: 2% 0 !important;
+  margin: 3% 10% 3% 0% !important;
 }
 
 .grn-clr {
@@ -61,16 +61,30 @@
 }
 
 .left-section {
-  width: 45%;
+  width: 42.3%;
   float: left;
   padding: 5px 20px;
 }
 
-.sgnin-img {
-  content: url(/images/premium/sgnin.svg);
-  width: 55%;
-  height: 100%;
+.right-section {
+  width: 57.7%;
+  float: right;
   margin: 0 auto;
+  max-width: 57.7%;
+}
+
+/*
+.sgnin-img {
+    content: url(/images/premium/sgnin.svg);
+    height: 100%;
+    margin: 0 auto; 
+}*/
+.signin-right-img {
+  background-image: url(/images/premium/sgnin.svg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .email-img, .pswd-img {
@@ -324,12 +338,12 @@
   }
 }
 @media (min-width: 769px) and (max-width: 1400px) {
-  #content-wrap {
-    width: 40% !important;
+  /*#content-wrap {
+      width: 40% !important;
   }
   .sgnin-img {
-    width: 60%;
-  }
+      width: 60%;
+  }*/
 }
 @media (min-width: 1500px) {
   .reg-tle {
