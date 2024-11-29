@@ -69,16 +69,34 @@ public class HomeActionsViewModel : ComponentBase
 
     public async Task OpenFile()
     {
-        await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(string.Empty);
+        if (SelectedRecentFiles.Any())
+        {
+            await _fileOperationViewModel.OpenFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
+            return;
+        }
+
+        await _fileOperationViewModel.OpenFiles.ExecuteAsync(null);
     }
 
     public async Task SecureFile()
     {
+        if (SelectedRecentFiles.Any())
+        {
+            await _fileOperationViewModel.EncryptFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
+            return;
+        }
+
         await _fileOperationViewModel.EncryptFiles.ExecuteAsync(null);
     }
 
     public async Task StopSecuringFile()
     {
+        if (SelectedRecentFiles.Any())
+        {
+            await _fileOperationViewModel.DecryptFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
+            return;
+        }
+
         await _fileOperationViewModel.DecryptFiles.ExecuteAsync(null);
     }
 
