@@ -55,13 +55,13 @@
             </NavLink>
         </div>
         <div class="key-section">
-            <NavLink class="nav-link" disabled="@DisablePasswordChange()" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
+            <NavLink class="@DisablePasswordChange()" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
                 <span>Password change</span>
             </NavLink>
         </div>
         <div class="key-section">
-            <NavLink class="nav-link" disabled="@DisablePasswordReset()"
+            <NavLink class="@DisablePasswordReset()"
                      @onclick="(e) => ProfileViewModel.PasswordReset_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
                 <span>Password Reset</span>
@@ -176,16 +176,19 @@
         ClosePopup.InvokeAsync(null);
     }
 
-    private bool DisablePasswordReset()
+    private string? IsDisabled { get; set; }
+
+    private string DisablePasswordReset()
     {
         bool isPasswordReset = !ProfileViewModel.Account.IsLoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail);
-        return isPasswordReset;
+        IsDisabled = isPasswordReset ? "Disable" : "";
+        return isPasswordReset ? "nav-link" : "nav-link disabled";
     }
 
     private string DisablePasswordChange()
     {
         bool isPasswordChange = New<AxCryptOnlineState>().IsOnline;
-        return isPasswordChange ? "" : "disabled";
+        return isPasswordChange ? "nav-link" : "nav-link disabled";
     }
 
     void UpdateState()
