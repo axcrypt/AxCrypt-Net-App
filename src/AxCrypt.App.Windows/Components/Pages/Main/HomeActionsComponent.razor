@@ -14,30 +14,30 @@
     <div style="display:block; margin-bottom: 25px;">
         <label class="fle-nme fnt-sze">Actions</label>
         <div class="" style="display:flex;">
-            <div class="act-box" @onclick="()=> viewModel.OpenFile()" @onmouseover='@( () => viewModel.ShowPopup("open") )'>
+            <div class="act-box" @onclick="()=> viewModel.OpenFile()" @onmouseover='@( () => ShowPopup("open") )' @onmouseout='@( () => HidePopup() )'>
                 <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
                 <span class="text-size">@Texts.McInfMenuOpen</span>
-                @if (viewModel.isHovered && viewModel.hoveredElement == "open")
+                @if (isHovered && hoveredElement == "open")
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
                         <span class="txt-clr font-medium">Click to open a secured files</span>
                     </div>
                 }
             </div>
-            <div class="act-box" @onclick="()=>viewModel.SecureFile()" @onmouseover='@( () => viewModel.ShowPopup("secure") )'>
+            <div class="act-box" @onclick="()=>viewModel.SecureFile()" @onmouseover='@( () => ShowPopup("secure") )' @onmouseout='@( () => HidePopup() )'>
                 <img class="act-img scr-act" src="" alt="scr-img" />
                 <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
-                @if (viewModel.isHovered && viewModel.hoveredElement == "secure")
+                @if (isHovered && hoveredElement == "secure")
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
                         <span class="txt-clr font-medium">Click to securely encrypt files</span>
                     </div>
                 }
             </div>
-            <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("stop") )' @onclick="()=>viewModel.StopSecuringFile()">
+            <div class="act-box" @onmouseover='@( () => ShowPopup("stop") )' @onmouseout='@( () => HidePopup() )' @onclick="()=>viewModel.StopSecuringFile()">
                 <img class="act-img stpscr-act" src="" alt="stpscr-img" />
                 <span class="text-size">Stop</span>
-                @if (viewModel.isHovered && viewModel.hoveredElement == "stop")
+                @if (isHovered && hoveredElement == "stop")
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
                         <span class="txt-clr font-medium">Click to stop securing files.</span>
@@ -47,13 +47,13 @@
             @if (viewModel.SubscriptionLevel == SubscriptionLevel.Free)
             {
                 <div class="popup-container">
-                    <div class="hover-trigger" @onmouseover='@( () => viewModel.ShowPopup("share") )'>
+                    <div class="hover-trigger" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
                         <div class="act-box shre-box" style="background-color:#D9D9D9;">
                             <img class="act-img vwr-shrks-act" src="" alt="shrks-img" /><span class="text-size">Share</span>
                         </div>
                     </div>
 
-                    @if (viewModel.isHovered && viewModel.hoveredElement == "share")
+                    @if (isHovered && hoveredElement == "share")
                     {
                         <div class="popup-section">
                             <div class="free-color" id="upgrade-sec" style="padding:10px; text-align:center; border-radius:5px;">
@@ -68,10 +68,10 @@
             }
             else
             {
-                <div class="act-box" @onclick="async(e)=> viewModel.ShareKeysAsync(e)" @onmouseover='@( () => viewModel.ShowPopup("share") )'>
+                <div class="act-box" @onclick="async(e)=> viewModel.ShareKeysAsync(e)" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
                     <img class="act-img shrks-act" src="" alt="shrks-img" />
                     <span class="text-size">Share</span>
-                    @if (viewModel.isHovered && viewModel.hoveredElement == "share")
+                    @if (isHovered && hoveredElement == "share")
                     {
                         <div class="home-hover text-center" style="background-color:#fff;">
                             <span class="txt-clr font-medium">Click to share access with your colleagues.</span>
@@ -86,9 +86,9 @@
             } *@
             @if (viewModel.SubscriptionLevel == SubscriptionLevel.Business)
             {
-                <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("master key") )' @onclick="viewModel.RedirectToAccountSite">
+                <div class="act-box" @onmouseover='@( () => ShowPopup("master key") )' @onmouseout='@( () => HidePopup() )' @onclick="viewModel.RedirectToAccountSite">
                     <img class="act-img mtrkey-act" src="" alt="mtrkey-img" /><span class="text-size">@Texts.MasterKeyTitle</span>
-                    @if (viewModel.isHovered && viewModel.hoveredElement == "master key")
+                    @if (isHovered && hoveredElement == "master key")
                     {
                         <div class="home-hover text-center" style="background-color:#fff;">
                             <span class="txt-clr font-medium">Go to Masterkey</span>
@@ -97,9 +97,9 @@
                 </div>
                 @if (Utility.IsMainMenuHidden)
                 {
-                    <div class="act-box" @onmouseover='@( () => viewModel.ShowPopup("create groups") )' @onclick="viewModel.RedirectToAccountSite">
+                    <div class="act-box" @onmouseover='@( () => ShowPopup("create groups") )' @onmouseout='@( () => HidePopup() )' @onclick="viewModel.RedirectToAccountSite">
                         <img class="act-img grp-act" src="" alt="grp-img" /><span class="text-size">Create groups</span>
-                        @if (viewModel.isHovered && viewModel.hoveredElement == "create groups")
+                        @if (isHovered && hoveredElement == "create groups")
                         {
                             <div class="home-hover text-center" style="background-color:#fff;">
                                 <span class="txt-clr font-medium">Go to Groups</span>
@@ -110,9 +110,9 @@
             }
             @if (viewModel.isFilesPending)
             {
-                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => viewModel.ShowPopup("clean") )' @onclick="(e) => viewModel.CleanAndRemoveOpenFilesButton_Click(e)">
+                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => ShowPopup("clean") )' @onmouseout='@( () => HidePopup() )' @onclick="(e) => viewModel.CleanAndRemoveOpenFilesButton_Click(e)">
                     <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">Clean</span>
-                    @if (viewModel.isHovered && viewModel.hoveredElement == "clean")
+                    @if (isHovered && hoveredElement == "clean")
                     {
                         <div class="home-hover text-center" style="background-color:#fff;">
                             <span class="txt-clr font-medium">Click to encrypt any opened files or new files in Secured Folders, but ensure they are not in use first.</span>
@@ -287,6 +287,8 @@
     public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; }
 
     public const string _ENABLEDTOOLSTRIPBACKCOLOR = "#FFFFFF";
+    public string hoveredElement { get; set; } = string.Empty;
+    public bool isHovered { get; set; }
 
     protected override void OnInitialized()
     {
@@ -325,6 +327,18 @@
         {
             throw new Exception(ex.Message, ex);
         }
+    }
+
+    public void ShowPopup(string element)
+    {
+        isHovered = true;
+        hoveredElement = element;
+    }
+
+    public void HidePopup()
+    {
+        isHovered = false;
+        hoveredElement = string.Empty;
     }
 
     void UpdateState()

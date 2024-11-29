@@ -37,22 +37,7 @@ public class HomeActionsViewModel : ComponentBase
     public int MembersCount { get; set; }
     public int TotalMembers { get; set; }
     public string? DisabledBackColor { get; set; }
-    public bool UpgradeToShare { get; set; }
-    public string hoveredElement { get; set; } = string.Empty;
-    public bool isHovered { get; set; }
     public bool isFilesPending { get; set; }
-
-    public void ShowPopup(string element)
-    {
-        isHovered = true;
-        hoveredElement = element;
-    }
-
-    public void HidePopup()
-    {
-        isHovered = false;
-        hoveredElement = string.Empty;
-    }
 
     public HomeActionsViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel, IStatusAlertService statusAlertService)
     {
@@ -68,7 +53,6 @@ public class HomeActionsViewModel : ComponentBase
         _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
         _fileSystemState = Resolve.FileSystemState;
 
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { _logOnViewModel.License = license; _logOnViewModel.SubscriptionChanged(); } });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); });
 
         KnownFoldersViewModel.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));

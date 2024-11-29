@@ -62,11 +62,8 @@
                                     @oncontextmenu="e => RecentFilesViewModel.HandleContextMenu(e, fileDetails)"
                                     @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, new List<FileDetails> { fileDetails })">
                                     <td> <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectSingleFile(e, fileDetails)" checked="@RecentFilesViewModel.IsHeaderCheckboxChecked" /> </td>
-                                    @{
-                                        string imagefileSourceClass = !string.IsNullOrEmpty(fileDetails.FileExtension) ? fileDetails.FileExtension : "file-ext-def-icon";
-                                    }
                                     <td class="fle-exton-img" style="display: flex; align-items: center;">
-                                        <img height="32" class="@imagefileSourceClass" src="" alt="file-image" />
+                                        <img height="32" class="@IconClass(fileDetails.FileExtension)" src="" alt="file-image" />
                                         <span class="fle-nme">@fileDetails.FileName</span>
                                     </td>
                                     <td>@fileDetails.FileSize</td>
@@ -162,6 +159,12 @@
         {
             //IsLoading = false;
         }
+    }
+
+    private string IconClass(string fileExtension)
+    {
+        string imagefileSourceClass = !string.IsNullOrEmpty(fileExtension) ? fileExtension.Replace(".", "") : "file-ext-def-icon";
+        return imagefileSourceClass;
     }
 
     private void UpdatePageState()

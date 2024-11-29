@@ -493,9 +493,4 @@ public class ShareKeyViewModel : ViewModelBase
         public string? GroupName { get; set; }
         public string? Type { get; set; }
     }
-
-    public class ShareKeyFile
-    {
-        public string Name { get; set; }
-    }
 }

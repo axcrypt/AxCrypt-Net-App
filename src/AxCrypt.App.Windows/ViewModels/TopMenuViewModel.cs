@@ -30,7 +30,6 @@ public class TopMenuViewModel : ViewModelBase
     public void Initialize()
     {
         TopMenuModel.UserEmail = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { LogOnViewModel.License = license; LogOnViewModel.SubscriptionChanged(); } });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
     }
 

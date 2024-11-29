@@ -41,7 +41,6 @@ public class RecentFilesViewModel : ViewModelBase
     public void OnInitializedAsync()
     {
         IsHideRecentFiles = New<UserSettings>().HideRecentFiles;
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { LogOnViewModel.License = license; LogOnViewModel.SubscriptionChanged(); } });
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { UpdateRecentFilesList(_mainViewModel.RecentFiles); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFilesAsync(files); LogOnViewModel.UIStateChanged(); });
     }

@@ -97,7 +97,7 @@
                             @foreach (string file in ShareKeyViewModel.SelectedFilesOrFolders)
                             {
                                 <div class="selected-file">
-                                    <img class="@GetIconForFile(file).ToLower()" src="" alt="File Icon" />
+                                    <img class="@Icon" src="~/images/default/AxCrypt_Icon.svg" alt="File Icon" />
                                     <span class="shre-fle-txt">@GetIconForFile(file)</span>
                                 </div>
                             }
@@ -178,6 +178,21 @@
     </div>
 }
 
+<style>
+    .popup {
+        position: absolute;
+        left: -150px; /* Adjust as per your requirement */
+        top: 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 8px;
+        z-index: 1000;
+        width: 200px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        pointer-events: none; /* Prevent interfering with hover logic */
+    }
+</style>
+
 @code {
     private bool IsVisible;
 
@@ -232,12 +247,27 @@
     void Close()
     {
         ShareKeyViewModel.RecipientEmail = "";
+        ShareKeyViewModel.SelectedFilesOrFolders = new List<string>();
         ShareKeyViewModel.CloseSyncPopup();
         ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.Close();
     }
 
+    private string? Icon { get; set; }
+
     private string GetIconForFile(string file)
     {
-        return File.Exists(file) ? Path.GetFileNameWithoutExtension(file) : Directory.Exists(file) ? new DirectoryInfo(file).Name : string.Empty;
+        string fileName = File.Exists(file) ? Path.GetFileNameWithoutExtension(file) : Directory.Exists(file) ? new DirectoryInfo(file).Name : string.Empty;
+
+        if (string.IsNullOrEmpty(fileName))
+        {
+            Icon = string.Empty;
+            return string.Empty;
+        }
+
+        int lastSpecialSymbolIndex = fileName.LastIndexOfAny(new[] { '.', '_', '-', '@', '#' });
+        string substring = lastSpecialSymbolIndex != -1 ? fileName.Substring(lastSpecialSymbolIndex + 1) : fileName;
+
+        Icon = substring.Length >= 5 ? substring.Substring(0, 5) : substring;
+        return fileName;
     }
 }

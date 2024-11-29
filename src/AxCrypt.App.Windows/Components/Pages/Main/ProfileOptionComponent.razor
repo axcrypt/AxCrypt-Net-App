@@ -176,12 +176,9 @@
         ClosePopup.InvokeAsync(null);
     }
 
-    private string? IsDisabled { get; set; }
-
     private string DisablePasswordReset()
     {
         bool isPasswordReset = !ProfileViewModel.Account.IsLoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail);
-        IsDisabled = isPasswordReset ? "Disable" : "";
         return isPasswordReset ? "nav-link" : "nav-link disabled";
     }
 
