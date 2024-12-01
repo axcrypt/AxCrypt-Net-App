@@ -24,6 +24,8 @@ using System.Text.RegularExpressions;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Components.Models;
+using Windows.Graphics;
+using AxCrypt.App.Windows.Code;
 
 namespace AxCrypt.App.Windows;
 
@@ -40,8 +42,11 @@ public partial class App : Application
 
     private KnownFoldersViewModel _knownFoldersViewModel;
 
-    public App(HomeUserService homeUserService, LogOnViewModel logOnService)
+    private readonly IDispatcher _dispatcher;
+
+    public App(IDispatcher dispatcher, HomeUserService homeUserService, LogOnViewModel logOnService)
     {
+        _dispatcher = dispatcher;
         InitializeComponent();
 
         InitializeContentResources();
@@ -74,7 +79,7 @@ public partial class App : Application
             catch (Exception ex)
             {
                 await new ApplicationManager().ClearAllSettings();
-                //MessageBox.Show(ex.Message, "AxCrypt failed to start. All Settings cleared.", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                await Application.Current?.MainPage?.DisplayAlert("AxCrypt failed to start. All Settings cleared.", ex.Message, "OK")!;
                 Quit();
             }
             finally
@@ -107,7 +112,6 @@ public partial class App : Application
         SetupPathFilters();
         IntializeControls();
         InitializeMouseDownFilter();
-        RestoreUserPreferences();
         //BindToViewModels();
         //BindToFileOperationViewModel();
         WireUpEvents();
@@ -136,7 +140,7 @@ public partial class App : Application
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It's not actually complex since it's just a registry.")]
     private void RegisterTypeFactories()
     {
-        TypeMap.Register.Singleton<IUIThread>(() => new UIThread(this));
+        TypeMap.Register.Singleton<IUIThread>(() => new UIThread(_dispatcher));
         TypeMap.Register.Singleton<IProgressBackground>(() => _progressBackgroundWorker);
         TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
         TypeMap.Register.Singleton<IDataItemSelection>(() => new FileFolderSelection());
@@ -285,9 +289,6 @@ public partial class App : Application
             return;
         }
         New<FileFilter>().AddForbiddenFolderFilters(folder.FullName);
-
-
-        //CoreWindowResizeManager coreWindowResizeManager = new CoreWindowResizeManager();
     }
 
     private void IntializeControls()
@@ -296,22 +297,6 @@ public partial class App : Application
         {
             InitializeNotifyIcon();
         }
-
-        //ResizeEnd += (sender, e) =>
-        //{
-        //    if (WindowState == FormWindowState.Normal)
-        //    {
-        //        Preferences.MainWindowHeight = Height;
-        //        Preferences.MainWindowWidth = Width;
-        //    }
-        //};
-        //Move += (sender, e) =>
-        //{
-        //    if (WindowState == FormWindowState.Normal)
-        //    {
-        //        Preferences.MainWindowLocation = Location;
-        //    }
-        //};
     }
 
     private void InitializeNotifyIcon()
@@ -382,13 +367,27 @@ public partial class App : Application
         New<InactivitySignOut>().RestartInactivityTimer();
     }
 
-    private void RestoreUserPreferences()
-    {
-        //Height = Preferences.MainWindowHeight.Fallback(Height);
-        //Width = Preferences.MainWindowWidth.Fallback(Width);
-        //Location = Preferences.MainWindowLocation.Fallback(Location).Safe();
 
-        //_mainViewModel.RecentFilesComparer = GetComparer(Preferences.RecentFilesSortColumn, !Preferences.RecentFilesAscending);
+    private void RestoreUserPreferences(Window currentAppWindow)
+    {
+        if (currentAppWindow != null)
+        {
+            double height = currentAppWindow.Height == double.NaN ? 0 : currentAppWindow.Height;
+            currentAppWindow.Height = AppPreferences.MainWindowHeight.Fallback(height);
+            double width = currentAppWindow.Width == double.NaN ? 0 : currentAppWindow.Width;
+            currentAppWindow.Width = AppPreferences.MainWindowWidth.Fallback(width);
+
+            PointInt32 currentLocation = new PointInt32(0, 0);
+            if (currentAppWindow.X != double.NaN)
+            {
+                currentLocation = new PointInt32((int)currentAppWindow.X, (int)currentAppWindow.Y);
+            }
+            PointInt32 location = AppPreferences.MainWindowLocation == default(PointInt32) ? currentLocation : AppPreferences.MainWindowLocation;
+            currentAppWindow.X = location.X;
+            currentAppWindow.Y = location.Y;
+        }
+
+        //_mainViewModel.RecentFilesComparer = GetComparer(AppPreferences.RecentFilesSortColumn, !AppPreferences.RecentFilesAscending);
         //_alwaysOfflineToolStripMenuItem.Checked = New<UserSettings>().OfflineMode;
 
         //ConfigureShowHideRecentFiles(New<UserSettings>().HideRecentFiles);
@@ -401,7 +400,7 @@ public partial class App : Application
         //_recentFilesTabPage.ToolTipText = hideRecentFiles ? Texts.HideRecentFilesListTabToolTipText : string.Empty;
     }
 
- 
+
     private DeviceLocking _deviceLocking;
 
     private void WireUpEvents()
@@ -460,7 +459,6 @@ public partial class App : Application
 
     private async Task SetWindowTitleTextAsync(bool isLoggedOn)
     {
-        //set app windowtitle
         await new Display().WindowTitleTextAsync(isLoggedOn);
     }
 
@@ -499,7 +497,7 @@ public partial class App : Application
             {
                 case CommandVerb.Show:
                     New<UserSettings>().RestoreFullWindow = true;
-                    //Styling.RestoreWindowWithFocus(this);
+                    //RestoreWindowWithFocus(this);
                     break;
 
                 case CommandVerb.ShowLogOn:
@@ -570,7 +568,7 @@ public partial class App : Application
                 break;
 
             case CommandVerb.Show:
-                //Styling.RestoreWindowWithFocus(this);
+                //RestoreWindowWithFocus(this);
                 break;
 
             case CommandVerb.SetOfflineMode:
@@ -703,20 +701,36 @@ public partial class App : Application
         });
     }
 
+    public static void RestoreWindowWithFocus()
+    {
+        //if (form == null)
+        //{
+        //    throw new ArgumentNullException(nameof(form));
+        //}
+
+        //form.Show();
+        //form.WindowState = FormWindowState.Normal;
+        //form.Activate();
+        //form.Focus();
+        //form.BringToFront();
+
+        //foreach (Form owned in form.OwnedForms)
+        //{
+        //    RestoreWindowWithFocus(owned);
+        //}
+    }
+
     protected override Window CreateWindow(IActivationState? activationState)
     {
         Window window = base.CreateWindow(activationState);
         if (window != null)
         {
             window.Title = "AxCrypt 2.0.0.0 Premium";
+
+            RestoreUserPreferences(window);
         }
 
         return window;
-    }
-
-    public override void CloseWindow(Window window)
-    {
-        base.CloseWindow(window);
     }
 
     protected override void OnAppLinkRequestReceived(Uri uri)

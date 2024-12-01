@@ -10,6 +10,7 @@ using AxCrypt.App.Components.ViewModels.Feedback;
 using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Components.Pages.Password;
+using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Infrastructure.Dialogs;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Windows.ViewModels;
@@ -46,83 +47,14 @@ namespace AxCrypt.App.Windows
                 lifecycle.AddWindows(lifecycleBuilder => lifecycleBuilder.OnWindowCreated(window =>
                 {
                     window.ExtendsContentIntoTitleBar = true;
-                    var handle = WinRT.Interop.WindowNative.GetWindowHandle(window);
-                    var id = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(handle);
-                    var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(id);
 
-                    appWindow.Closing += async (s, e) =>
-                    {
-                        e.Cancel = true;
-                        //var result = await Application.Current?.MainPage?.DisplayAlert(
-                        //    "App close",
-                        //    "Do you really want to quit?",
-                        //    "Close",
-                        //    "Minimize to system tray")!;
+                    nint handle = WinRT.Interop.WindowNative.GetWindowHandle(window);
+                    Microsoft.UI.WindowId id = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(handle);
+                    Microsoft.UI.Windowing.AppWindow appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(id);
 
-                        //if (result)
-                        //{
-                        //    Application.Current?.Quit();
-                        //}
-                        Task.Run(() => SetupTrayIcon());
-                        s.Hide();
-                        //MauiWindowsExtensions.MinimizeToTray();
-                    };
+                    new AppWindowExtension(appWindow).RegisterChangedEvents();
                 }));
             });
-
-            //            builder.ConfigureLifecycleEvents(lifecycle =>
-            //            {
-            //#if WINDOWS
-            //                //lifecycle
-            //                //    .AddWindows(windows =>
-            //                //        windows.OnNativeMessage((app, args) => {
-            //                //            if (WindowExtensions.Hwnd == IntPtr.Zero)
-            //                //            {
-            //                //                WindowExtensions.Hwnd = args.Hwnd;
-            //                //                WindowExtensions.SetIcon("Platforms/Windows/trayicon.ico");
-            //                //            }
-            //                //        }));
-
-            //                lifecycle.AddWindows(windows =>
-            //                {
-            //                    windows.OnWindowCreated((del) =>
-            //                    {
-            //                        del.ExtendsContentIntoTitleBar = true;
-            //                    });
-
-
-            //                    windows.OnVisibilityChanged((vis, fd) =>
-            //                    {
-            //                        // when minimized - vis.Visible = false
-            //                        if (vis.Visible == false)
-            //                        {
-            //                            vis.AppWindow.Hide();
-            //                            fd.Handled = true;
-            //                            //MauiWindowsExtensions.MinimizeToTray();
-            //                            //MauiWindowsExtensions.BringToFront();
-            //                            SetupTrayIcon();
-            //                        }
-            //                    });
-
-            //                    windows.OnClosed((wind, windArg) =>
-            //                    {
-            //                        wind.AppWindow.Hide();
-            //                        windArg.Handled = true;
-            //                        MauiWindowsExtensions.MinimizeToTray();
-            //                        //MauiWindowsExtensions.BringToFront();
-            //                        SetupTrayIcon();
-            //                    });
-
-            //                    //windows.OnVisibilityChanged((del) =>
-            //                    //{
-            //                    //    //del.AppWindow.
-            //                    //});
-
-
-            //                }
-            //                );
-            //#endif
-            //            });
 
 #if DEBUG
             services.AddBlazorWebViewDeveloperTools();
@@ -130,23 +62,6 @@ namespace AxCrypt.App.Windows
 #endif
 
             return builder.Build();
-        }
-
-        private static void SetupTrayIcon()
-        {
-            ITrayService trayService = new TrayService();
-            if (trayService != null)
-            {
-                trayService.Initialize();
-
-                INotificationService notificationService = new NotificationService();
-                notificationService
-                        ?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
-
-                trayService.ClickHandler = () =>
-                    notificationService
-                        ?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
-            }
         }
 
         private static void RegisterSingletons(IServiceCollection services)
