@@ -378,7 +378,7 @@ public partial class App : Application
             currentAppWindow.Width = AppPreferences.MainWindowWidth.Fallback(width);
 
             PointInt32 currentLocation = new PointInt32(0, 0);
-            if (currentAppWindow.X != double.NaN)
+            if (!double.IsNaN(currentAppWindow.X))
             {
                 currentLocation = new PointInt32((int)currentAppWindow.X, (int)currentAppWindow.Y);
             }
@@ -725,6 +725,8 @@ public partial class App : Application
         Window window = base.CreateWindow(activationState);
         if (window != null)
         {
+            window.MinimumHeight = AppPreferences.MinimumWindowHeight;
+            window.MinimumWidth = AppPreferences.MinimumWindowWidth;
             window.Title = "AxCrypt 2.0.0.0 Premium";
 
             RestoreUserPreferences(window);

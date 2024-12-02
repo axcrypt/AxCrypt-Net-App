@@ -1,15 +1,13 @@
 ﻿using AxCrypt.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Graphics;
 
 namespace AxCrypt.App.Windows.Code
 {
     internal static class AppPreferences
     {
+        public const int MinimumWindowWidth = 840;
+        public const int MinimumWindowHeight = 650;
+
         public static double MainWindowWidth
         { get { return Resolve.UserSettings.Load<double>(nameof(MainWindowWidth)); } set { Resolve.UserSettings.Store(nameof(MainWindowWidth), value); } }
 
@@ -17,7 +15,7 @@ namespace AxCrypt.App.Windows.Code
         { get { return Resolve.UserSettings.Load<double>(nameof(MainWindowHeight)); } set { Resolve.UserSettings.Store(nameof(MainWindowHeight), value); } }
 
         public static PointInt32 MainWindowLocation
-        { get { return new PointInt32(Resolve.UserSettings.Load<int>(nameof(MainWindowLocation)), Resolve.UserSettings.Load<int>(nameof(MainWindowLocation))); } set { Resolve.UserSettings.Store("MainWindowLocationX", value.X); Resolve.UserSettings.Store("MainWindowLocationY", value.Y); } }
+        { get { return new PointInt32(Resolve.UserSettings.Load<int>("MainWindowLocationX"), Resolve.UserSettings.Load<int>("MainWindowLocationY")); } set { Resolve.UserSettings.Store("MainWindowLocationX", value.X); Resolve.UserSettings.Store("MainWindowLocationY", value.Y); } }
 
         public static int RecentFilesMaxNumber
         { get { return Resolve.UserSettings.Load<int>(nameof(RecentFilesMaxNumber), 250); } set { Resolve.UserSettings.Store(nameof(RecentFilesMaxNumber), value); } }
