@@ -6,17 +6,17 @@ namespace AxCrypt.App.Windows.Infrastructure;
 
 public class UIThread : UIThreadBase
 {
-    private readonly App _app;
-    public UIThread(App app) : base()
+    private readonly IDispatcher _dispatcher;
+    public UIThread(IDispatcher dispatcher) : base()
     {
-        _app = app;
+        _dispatcher = dispatcher;
     }
 
     public override bool IsOn
     {
         get
         {
-            return SynchronizationContext.Current != null;
+            return _dispatcher.IsDispatchRequired;
         }
     }
 
@@ -27,8 +27,7 @@ public class UIThread : UIThreadBase
 
     public override void ExitApplication()
     {
-        _app.Quit();
-        //Application.Current?.Quit();
+        _dispatcher.GetSynchronizationContextAsync().Dispose();
         //Process.GetCurrentProcess().Kill();
     }
 
@@ -41,7 +40,7 @@ public class UIThread : UIThreadBase
         };
 
         Process.Start(processStartInfo);
-        _app.Quit();
+        _dispatcher.GetSynchronizationContextAsync().Dispose();
         //Process.GetCurrentProcess().Kill();
     }
 }

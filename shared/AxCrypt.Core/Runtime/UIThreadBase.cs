@@ -86,7 +86,7 @@ namespace AxCrypt.Core.Runtime
             }
 
             TaskCompletionSource<Exception> completion = new TaskCompletionSource<Exception>();
-            Context.Send(async (state) =>
+            Context.Post(async (state) =>
             {
                 try
                 {
