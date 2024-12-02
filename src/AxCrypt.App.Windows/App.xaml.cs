@@ -727,6 +727,8 @@ public partial class App : Application
         {
             window.MinimumHeight = AppPreferences.MinimumWindowHeight;
             window.MinimumWidth = AppPreferences.MinimumWindowWidth;
+            window.Height = AppPreferences.MinimumWindowHeight;
+            window.Width = AppPreferences.MinimumWindowWidth;
             window.Title = "AxCrypt 2.0.0.0 Premium";
 
             RestoreUserPreferences(window);

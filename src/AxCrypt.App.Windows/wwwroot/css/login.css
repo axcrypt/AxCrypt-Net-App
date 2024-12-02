@@ -73,18 +73,13 @@
   max-width: 57.7%;
 }
 
-/*
-.sgnin-img {
-    content: url(/images/premium/sgnin.svg);
-    height: 100%;
-    margin: 0 auto; 
-}*/
 .signin-right-img {
-  background-image: url(/images/premium/sgnin.svg);
+  background-image: url(/images/signin.svg);
   height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
+  background-color: #F5F5F5;
 }
 
 .email-img, .pswd-img {

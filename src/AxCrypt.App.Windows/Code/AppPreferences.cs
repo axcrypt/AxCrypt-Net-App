@@ -5,8 +5,8 @@ namespace AxCrypt.App.Windows.Code
 {
     internal static class AppPreferences
     {
-        public const int MinimumWindowWidth = 840;
-        public const int MinimumWindowHeight = 650;
+        public const int MinimumWindowWidth = 1156;
+        public const int MinimumWindowHeight = 770;
 
         public static double MainWindowWidth
         { get { return Resolve.UserSettings.Load<double>(nameof(MainWindowWidth)); } set { Resolve.UserSettings.Store(nameof(MainWindowWidth), value); } }

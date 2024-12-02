@@ -14,7 +14,11 @@
         IsVisible = isVisible;
         Title = ProcessIndicatorService.Title;
         Message = ProcessIndicatorService.Message;
-        StateHasChanged(); // Refresh UI
+
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 
     private void ClosePopup()
