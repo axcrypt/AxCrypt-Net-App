@@ -30,11 +30,9 @@ using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Extensions;
-using AxCrypt.Core.Header;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
-using AxCrypt.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,9 +127,10 @@ namespace AxCrypt.Core.UI.ViewModel
 
         public event EventHandler<FileSelectionEventArgs> SelectingFiles;
 
-        protected virtual void OnSelectingFiles(FileSelectionEventArgs e)
+        protected virtual async Task OnSelectingFiles(FileSelectionEventArgs e)
         {
-            SelectingFiles?.Invoke(this, e);
+            //SelectingFiles?.Invoke(this, e);
+            await Task.Run(() => { return New<IDataItemSelection>().HandleSelection(e); });
         }
 
         public event EventHandler<FileOperationEventArgs> FirstLegacyOpen;
@@ -155,7 +154,17 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task EncryptFilesActionAsync(IEnumerable<string> files)
         {
-            files = files ?? SelectFiles(FileSelectionType.Encrypt);
+            if (files == null || !files.Any())
+            {
+                files = await SelectFiles(FileSelectionType.Encrypt);
+            }
+
+            await EncryptFilesInternalActionAsync(files);
+        }
+        
+        private async Task EncryptFilesInternalActionAsync(IEnumerable<string> files)
+        {
+            files = files ?? await SelectFiles(FileSelectionType.Encrypt);
             if (!files.Any())
             {
                 return;
@@ -174,7 +183,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task DecryptFilesActionAsync(IEnumerable<string> files)
         {
-            files = files ?? SelectFiles(FileSelectionType.Decrypt);
+            files = files ?? await SelectFiles(FileSelectionType.Decrypt);
             if (!files.Any())
             {
                 return;
@@ -184,7 +193,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task WipeFilesActionAsync(IEnumerable<string> files)
         {
-            files = files ?? SelectFiles(FileSelectionType.Wipe);
+            files = files ?? await SelectFiles(FileSelectionType.Wipe);
             if (!files.Any())
             {
                 return;
@@ -194,7 +203,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private Task EncryptionUpgradeActionAsync(IEnumerable<IDataContainer> containers)
         {
-            containers = containers ?? SelectFiles(FileSelectionType.Folder).Select((fn) => New<IDataContainer>(fn));
+            containers = containers ?? (SelectFiles(FileSelectionType.Folder).GetAwaiter().GetResult()).Select((fn) => New<IDataContainer>(fn));
 
             if (!containers.Any())
             {
@@ -205,8 +214,8 @@ namespace AxCrypt.Core.UI.ViewModel
         }
 
         private async Task RandomRenameFilesActionAsync(IEnumerable<string> files)
-        {
-            files = files ?? SelectFiles(FileSelectionType.Rename);
+        { 
+            files = files ?? await SelectFiles(FileSelectionType.Rename);
             if (!files.Any())
             {
                 return;
@@ -216,7 +225,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task RestoreRandomRenameFilesActionAsync(IEnumerable<string> files)
         {
-            files = files ?? SelectFiles(FileSelectionType.Rename);
+            files = files ?? await SelectFiles(FileSelectionType.Rename);
             if (!files.Any())
             {
                 return;
@@ -224,13 +233,14 @@ namespace AxCrypt.Core.UI.ViewModel
             await _fileOperation.DoFilesAsync(files.Select(f => New<IDataStore>(f)).ToList(), RestoreRandomRenameFilesWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
         }
 
-        private IEnumerable<string> SelectFiles(FileSelectionType fileSelectionType)
+        private async Task<IEnumerable<string>> SelectFiles(FileSelectionType fileSelectionType)
         {
             FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new string[0])
             {
                 FileSelectionType = fileSelectionType,
             };
-            OnSelectingFiles(fileSelectionArgs);
+            await OnSelectingFiles(fileSelectionArgs);
+
             if (fileSelectionArgs.Cancel)
             {
                 return new string[0];
@@ -623,7 +633,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task TryBrokenFilesActionAsync(IEnumerable<string> files)
         {
-            files = files ?? SelectFiles(FileSelectionType.Decrypt);
+            files = files ?? await SelectFiles(FileSelectionType.Decrypt);
             if (!files.Any())
             {
                 return;
@@ -678,7 +688,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task VerifyFilesActionAsync(IEnumerable<string> files)
         {
-            files = files ?? SelectFiles(FileSelectionType.Decrypt);
+            files = files ?? await SelectFiles(FileSelectionType.Decrypt);
             if (!files.Any())
             {
                 return;
@@ -697,7 +707,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task IntegrityCheckFilesActionAsync(IEnumerable<string> files)
         {
-            files = files ?? SelectFiles(FileSelectionType.Decrypt);
+            files = files ?? await SelectFiles(FileSelectionType.Decrypt);
             if (!files.Any())
             {
                 return;

@@ -9,6 +9,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using PInvoke;
 
 namespace AxCrypt.App.Windows.Infrastructure;
 
@@ -25,26 +26,27 @@ public class FileFolderSelection : IDataItemSelection
 
     }
 
-    public Task HandleSelection(FileSelectionEventArgs e)
+    public async Task<bool> HandleSelection(FileSelectionEventArgs e)
     {
         if (e == null)
         {
             throw new ArgumentNullException(nameof(e));
         }
-
+        bool result = false;
         try
         {
             New<IMainUI>().DisableUI();
-            HandleSelectionInternal(e);
+            result = await HandleSelectionInternal(e);
         }
         finally
         {
             New<IMainUI>().RestoreUI();
         }
-        return Constant.CompletedTask;
+
+        return result;
     }
 
-    private void HandleSelectionInternal(FileSelectionEventArgs e)
+    private async Task<bool> HandleSelectionInternal(FileSelectionEventArgs e)
     {
         switch (e.FileSelectionType)
         {
@@ -58,16 +60,16 @@ public class FileFolderSelection : IDataItemSelection
                 break;
 
             case FileSelectionType.Folder:
-                HandleFolderSelection(e);
-                break;
+                return await HandleFolderSelection(e);
 
             default:
-                HandleOpenFileSelection(e);
-                break;
+                return await HandleOpenFileSelection(e);
         }
+
+        return false;
     }
 
-    private async void HandleFolderSelection(FileSelectionEventArgs e)
+    private async Task<bool> HandleFolderSelection(FileSelectionEventArgs e)
     {
         FolderPicker fldpik = new FolderPicker();
         fldpik.SettingsIdentifier = Texts.UpgradeLegacyFilesMenuToolTip;
@@ -86,10 +88,11 @@ public class FileFolderSelection : IDataItemSelection
         if (folders == null || string.IsNullOrEmpty(folders.Path))
         {
             e.Cancel = true;
-            return;
+            return true;
         }
 
         e.SelectedFiles.Add(folders?.Path);
+        return true;
     }
 
     private static void HandleWipeConfirm(FileSelectionEventArgs e)
@@ -105,7 +108,7 @@ public class FileFolderSelection : IDataItemSelection
         //}
     }
 
-    private static async void HandleOpenFileSelection(FileSelectionEventArgs e)
+    private static async Task<bool> HandleOpenFileSelection(FileSelectionEventArgs e)
     {
         if (e.SelectedFiles != null && e.SelectedFiles.Count > 0 && !String.IsNullOrEmpty(e.SelectedFiles[0]))
         {
@@ -116,6 +119,7 @@ public class FileFolderSelection : IDataItemSelection
             }
         }
 
+
         PickOptions pickOptions = new PickOptions();
         string defaultExt = New<IRuntimeEnvironment>().AxCryptExtension;
         string filterPattern = "";
@@ -125,13 +129,15 @@ public class FileFolderSelection : IDataItemSelection
         {
             case FileSelectionType.Decrypt:
                 pickOptions.PickerTitle = Texts.DecryptFileOpenDialogTitle;
-                filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
+                filterPattern = "." + defaultExt;
+                //filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
                 isMultiSelect = true;
                 break;
 
             case FileSelectionType.Rename:
                 pickOptions.PickerTitle = Texts.AnonymousRenameSelectFilesDialogTitle;
-                filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
+                filterPattern = "." + defaultExt;
+                //filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
                 isMultiSelect = true;
                 break;
 
@@ -144,7 +150,8 @@ public class FileFolderSelection : IDataItemSelection
             case FileSelectionType.Open:
                 pickOptions.PickerTitle = Texts.OpenEncryptedFileOpenDialogTitle;
                 isMultiSelect = false;
-                filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
+                filterPattern = "." + defaultExt;
+                //filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
                 //consider FileOpenPicker for read only selections
                 break;
 
@@ -157,19 +164,22 @@ public class FileFolderSelection : IDataItemSelection
             case FileSelectionType.ImportPublicKeys:
                 pickOptions.PickerTitle = Texts.ImportPublicKeysFileSelectionTitle;
                 isMultiSelect = true;
-                filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + ".txt", Texts.FileFilterFileTypePublicSharingKeyFiles, Texts.FileFilterFileTypeAllFiles);
+                filterPattern = ".txt";
+                //filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + ".txt", Texts.FileFilterFileTypePublicSharingKeyFiles, Texts.FileFilterFileTypeAllFiles);
                 break;
 
             case FileSelectionType.ImportPrivateKeys:
                 pickOptions.PickerTitle = Texts.ImportPrivateKeysFileSelectionTitle;
                 isMultiSelect = false;
-                filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptIdFiles, Texts.FileFilterFileTypeAllFiles);
+                filterPattern = "." + defaultExt;
+                //filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptIdFiles, Texts.FileFilterFileTypeAllFiles);
                 break;
 
             case FileSelectionType.KeySharing:
                 pickOptions.PickerTitle = Texts.ShareKeysFileOpenDialogTitle;
                 isMultiSelect = true;
-                filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
+                filterPattern = "." + defaultExt;
+                //filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + defaultExt, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
                 break;
 
             case FileSelectionType.KeySharingEncrypt:
@@ -205,19 +215,21 @@ public class FileFolderSelection : IDataItemSelection
             if (ofd == null || !ofd.Any())
             {
                 e.Cancel = true;
-                return;
+                return true;
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
-            return;
+            return false;
         }
 
         foreach (string fileName in ofd.Select(file => file.FullPath))
         {
             e.SelectedFiles?.Add(fileName);
         }
+
+        return true;
     }
 
     private static async void HandleSaveAsFileSelection(FileSelectionEventArgs e)

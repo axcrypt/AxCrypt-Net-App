@@ -1,7 +1,5 @@
 ﻿using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Password;
-using AxCrypt.Core.Crypto;
-using AxCrypt.Core.Secrets;
 using AxCrypt.Cryptor.Model;
 
 using static AxCrypt.Abstractions.TypeResolve;
@@ -13,6 +11,12 @@ namespace AxCrypt.App.Components.PasswordManager
     /// </summary>
     public static class SharedSecrets
     {
+        public static async Task<SecretClientCollection> SelectBySearch(string search)
+        {
+            SecretClientCollection secrets = await SelectBySearchInternal(search);
+            return secrets;
+        }
+
         private static async Task<SecretClientCollection> SelectBySearchInternal(string search)
         {
             SecretClientCollection allSecrets = await LoadActiveSharedWithSecretsAsync();
@@ -41,6 +45,11 @@ namespace AxCrypt.App.Components.PasswordManager
                 }
             }
             return secrets;
+        }
+
+        private static async Task<SecretClientCollection> LoadActiveSharedWithSecretsAsync(int pageCount = 20)
+        {
+            return await SecretsApiHelper.GetSharedWithSecretsAsync(New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity, pageCount);
         }
 
         private static void SearchInPasswords(string search, SecretClientCollection secrets, SecretClientModel secret)
@@ -115,39 +124,28 @@ namespace AxCrypt.App.Components.PasswordManager
             }
         }
 
-        public static async Task<SecretClientCollection> SelectBySearch(string search)
-        {
-            SecretClientCollection secrets = await SelectBySearchInternal(search);
-            return secrets;
-        }
+        //public static async Task<SecretClientCollection> SelectById(Guid id)
+        //{
+        //    SecretClientCollection secrets = new SecretClientCollection();
+        //    if (id == Guid.Empty)
+        //    {
+        //        return secrets;
+        //    }
+        //    SecretClientCollection allSecrets = await LoadSharedSecretByIdAsync(id);
+        //    secrets.OriginalCount = allSecrets.OriginalCount;
+        //    SecretClientModel theSecret = allSecrets[id];
+        //    secrets.Add(theSecret);
+        //    return secrets;
+        //}
 
-        public static async Task<SecretClientCollection> SelectById(Guid id)
-        {
-            SecretClientCollection secrets = new SecretClientCollection();
-            if (id == Guid.Empty)
-            {
-                return secrets;
-            }
-            SecretClientCollection allSecrets = await LoadSharedSecretByIdAsync(id);
-            secrets.OriginalCount = allSecrets.OriginalCount;
-            SecretClientModel theSecret = allSecrets[id];
-            secrets.Add(theSecret);
-            return secrets;
-        }
-
-        private static async Task<SecretClientCollection> LoadActiveSharedWithSecretsAsync(int pageCount = 20)
-        {
-            return await SecretsApiHelper.GetSharedWithSecretsAsync(New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity, pageCount);
-        }
-
-        public static async Task<SecretClientCollection> LoadSharedSecretByIdAsync(Guid secretId)
-        {
-            LogOnIdentity identity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
-            EncryptionKeyCollection keys = new EncryptionKeyCollection(null, identity.UserEmail.Address);
-            /*SecretClientCollection sharedSecrets = await SecretDataStoreProvider.FindSharedById(keys.UserName, keys, secretId);
-            return sharedSecrets;*/
-            return null;
-        }
+        //public static async Task<SecretClientCollection> LoadSharedSecretByIdAsync(Guid secretId)
+        //{
+        //    LogOnIdentity identity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
+        //    EncryptionKeyCollection keys = new EncryptionKeyCollection(null, identity.UserEmail.Address);
+        //    /*SecretClientCollection sharedSecrets = await SecretDataStoreProvider.FindSharedById(keys.UserName, keys, secretId);
+        //    return sharedSecrets;*/
+        //    return null;
+        //}
 
         /*public static async Task<bool> UpdateShareVisibility(SecretClientModel secret)
         {

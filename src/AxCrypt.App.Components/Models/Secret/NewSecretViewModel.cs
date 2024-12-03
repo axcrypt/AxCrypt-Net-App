@@ -17,7 +17,7 @@ namespace AxCrypt.App.Components.Models.Secret
     {
         private ProcessIndicatorService? _ProcessIndicatorService;
 
-        public NewSecretViewModel(SecretService secretService, ProcessIndicatorService processIndicatorService = null) : base(secretService)
+        public NewSecretViewModel(SecretService secretService, ProcessIndicatorService? processIndicatorService = null) : base(secretService)
         {
             _ProcessIndicatorService = processIndicatorService;
 
@@ -58,7 +58,7 @@ namespace AxCrypt.App.Components.Models.Secret
                 return false;
             }
 
-            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+            using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService!))
             {
                 if (!ViewModelHelper.CanAddNewSecret())
                 {

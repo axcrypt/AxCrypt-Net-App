@@ -80,7 +80,6 @@ namespace AxCrypt.App.Windows
 
             services.AddSingleton<ICssService, CssService>();
 
-            services.AddSingleton<LoginModel>();
             services.AddSingleton<MainPage>();
             services.AddSingleton<Home>();
             services.AddSingleton<HomeActionsComponent>();

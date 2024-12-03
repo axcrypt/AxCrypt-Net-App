@@ -79,7 +79,7 @@ namespace AxCrypt.App.Components.Models.Secret
 
         public string SharedSecretTitle { get; set; }
 
-        public async void AddUserToSharedListAsync()
+        public void AddUserToSharedListAsync()
         {
             if (!ViewModelHelper.IsAxCryptOnline())
             {
@@ -94,7 +94,7 @@ namespace AxCrypt.App.Components.Models.Secret
             }
 
             CanEnableAddShareSecret = false;
-            await AddUserEmailToSharedList(addedUserEmailAddress);
+            AddUserEmailToSharedList(addedUserEmailAddress);
             SecretSharingUserEmail = "";
         }
 
@@ -145,7 +145,7 @@ namespace AxCrypt.App.Components.Models.Secret
             return true;
         }
 
-        private async Task AddUserEmailToSharedList(EmailAddress addedUserEmailAddress)
+        private void AddUserEmailToSharedList(EmailAddress addedUserEmailAddress)
         {
             SecretShareVisibility parsedVisibility;
             if (!Enum.TryParse(VisibilityType, out parsedVisibility))

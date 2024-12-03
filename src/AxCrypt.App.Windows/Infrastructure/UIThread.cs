@@ -27,8 +27,8 @@ public class UIThread : UIThreadBase
 
     public override void ExitApplication()
     {
-        _dispatcher.GetSynchronizationContextAsync().Dispose();
-        //Process.GetCurrentProcess().Kill();
+        //_dispatcher.GetSynchronizationContextAsync().Dispose();
+        Process.GetCurrentProcess().Kill();
     }
 
     public override void RestartApplication()
@@ -40,7 +40,7 @@ public class UIThread : UIThreadBase
         };
 
         Process.Start(processStartInfo);
-        _dispatcher.GetSynchronizationContextAsync().Dispose();
-        //Process.GetCurrentProcess().Kill();
+        //_dispatcher.GetSynchronizationContextAsync().Dispose();
+        Process.GetCurrentProcess().Kill();
     }
 }

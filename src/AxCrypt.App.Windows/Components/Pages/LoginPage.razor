@@ -8,6 +8,7 @@
 @using AxCrypt.Core
 @using AxCrypt.Core.UI.ViewModel
 
+@inject IJSRuntime JSRuntime;
 @inject LogOnViewModel LogOnViewModel
 @inject ProcessIndicatorService processIndicatorService
 
@@ -25,27 +26,27 @@
                 <div style="display:flex;">
                     <div style="width:100%;">
                         <label>@Texts.EmailLabel</label>
-                        <input type="text" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" />
+                        <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" tabindex="1" />
                     </div>
                 </div>
                 <div>
                     <label>@Texts.PassphrasePrompt</label>
-                    <input type="password" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" />
+                    <input type="password" id="password-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" tabindex="2" />
                 </div>
                 <br />
                 @* <div class="check-bx" style="margin: 15px 0px;">
-                <input type="checkbox" checked="@LogOnViewModel.RememberMe" @bind-value="LogOnViewModel.RememberMe" />
-                <span class="che-txt">@Texts.PromptKeepMeSignedIn</span>
-                </div> *@
-                <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;">Log in</button>
+            <input type="checkbox" checked="@LogOnViewModel.RememberMe" @bind-value="LogOnViewModel.RememberMe" />
+            <span class="che-txt">@Texts.PromptKeepMeSignedIn</span>
+            </div> *@
+                <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;" tabindex="3">Log in</button>
                 <div class="signup-link">
                     <div style="display:inline-flex; align-items:center;">
                         <span class="che-txt"> Don't have an account?</span>
-                        <NavLink class="nav-link grn-clr" href="https://account.axcrypt.net/en/Home/Login?Signup=True">
+                        <NavLink class="nav-link grn-clr" href="https://account.axcrypt.net/en/Home/Login?Signup=True" tabindex="4">
                             <span>@Texts.PromptSignUp</span>
                         </NavLink>
                     </div><br />
-                    <NavLink class="nav-link grn-clr" href="https://account.axcrypt.net/Home/PasswordReset/">
+                    <NavLink class="nav-link grn-clr" href="https://account.axcrypt.net/Home/PasswordReset/" tabindex="5">
                         <span>@Texts.PasswordResetShortLink?</span>
                     </NavLink>
                 </div>
@@ -61,9 +62,18 @@
 @code {
     private bool isAlertVisible { get; set; }
 
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        string autoFocusFiled = string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? "useremail-txtbox" : "password-txtbox";
+        await JSRuntime.InvokeVoidAsync("loginFunctions.focusElement", autoFocusFiled);
     }
 
     private async void ButtonLogIn_Click()
@@ -156,4 +166,29 @@
     {
         BrowseUtility.RedirectToAccountWebUrl(Texts.PasswordResetHyperLink);
     }
+
+    // private string SetAutoFocus(string field)
+    // {
+    //     if (field == "useremail")
+    //     {
+    //         return string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? "autofocus" : "";
+    //     }
+
+    //     if (field == "password")
+    //     {
+    //         return !string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? "autofocus" : "";
+    //     }
+
+    //     return "";
+    // }
+
 }
+
+<script type="text/javascript">
+    window.loginFunctions = {
+        focusElement: function (id) {
+            const element = document.getElementById(id);
+            element.focus();
+        }
+    }
+</script>

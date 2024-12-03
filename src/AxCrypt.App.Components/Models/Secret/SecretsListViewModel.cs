@@ -551,7 +551,7 @@ namespace AxCrypt.App.Components.Models.Secret
                         sb.Append(secretViewModel.Password.Url.Trim());
                         sb.Append(Environment.NewLine);
                         sb.Append("Description: ");
-                        sb.Append(secretViewModel.Password.SecretDesc.Trim());
+                        sb.Append(secretViewModel.Password.SecretDesc?.Trim());
                         sb.Append(Environment.NewLine);
                         sb.Append("Username: ");
                         sb.Append(secretViewModel.Password.Username.Trim());
@@ -566,7 +566,7 @@ namespace AxCrypt.App.Components.Models.Secret
                         sb.Append(secretViewModel.Card.CardNumber.Trim());
                         sb.Append(Environment.NewLine);
                         sb.Append("Description: ");
-                        sb.Append(secretViewModel.Card.SecretDesc.Trim());
+                        sb.Append(secretViewModel.Card.SecretDesc?.Trim());
                         sb.Append(Environment.NewLine);
                         sb.Append("NameOnCard: ");
                         sb.Append(secretViewModel.Card.NameOnCard.Trim());
@@ -581,7 +581,7 @@ namespace AxCrypt.App.Components.Models.Secret
 
                     case SecretType.Note:
                         sb.Append("Description: ");
-                        sb.Append(secretViewModel.Note.SecretDesc.Trim());
+                        sb.Append(secretViewModel.Note.SecretDesc?.Trim());
                         sb.Append(Environment.NewLine);
                         sb.Append("Note: ");
                         sb.Append(secretViewModel.Note.Note.Trim());
@@ -599,14 +599,14 @@ namespace AxCrypt.App.Components.Models.Secret
             Stream xmlStream = await GetRawXML();
             if (xmlStream == Stream.Null && New<AxCryptOnlineState>().IsOffline)
             {
-                _StatusAlertService.Error("Could not download the file when offline.");
+                _StatusAlertService?.Error("Could not download the file when offline.");
                 return false;
             }
 
             string downloadsFolderPath = GetDownloadsFolderPath();
             if (downloadsFolderPath == null)
             {
-                await Application.Current.MainPage.DisplayAlert("Alert", "Could not determine the Downloads folder path.", "OK");
+                await Application.Current?.MainPage?.DisplayAlert("Alert", "Could not determine the Downloads folder path.", "OK")!;
                 return false;
             }
 

@@ -5,8 +5,6 @@ namespace AxCrypt.App.Components.Models.Notification
 {
     public class NotificationViewModel : Core.UI.ViewModel.ViewModelBase
     {
-        private readonly Action? _stateChangeCallback;
-
         public NotificationViewModel()
         {
             Notifications = new ObservableCollection<NotificationItemViewModel>();
@@ -23,8 +21,6 @@ namespace AxCrypt.App.Components.Models.Notification
                 SetProperty(nameof(Notifications), value);
             }
         }
-
-        public string? ErrorMessage { get; set; }
 
         public SortDirection DateSortDirection { get; set; } = SortDirection.Ascending;
 
