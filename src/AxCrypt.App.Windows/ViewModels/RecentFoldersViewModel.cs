@@ -46,6 +46,7 @@ public class RecentFoldersViewModel : ComponentBase
         _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
         _ProcessIndicatorService = processIndicatorService;
         _sharekeyViewModel = sharekeyViewModel;
+        RecentFoldersList = new ObservableCollection<string>();
     }
 
     public async Task InitializeAsync()

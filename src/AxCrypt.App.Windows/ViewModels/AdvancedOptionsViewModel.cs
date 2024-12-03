@@ -5,6 +5,7 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using AxCrypt.App.Components.Services.Interface;
 using Microsoft.AspNetCore.Components;
+using AxCrypt.App.Components.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -14,6 +15,13 @@ public class AdvancedOptionsViewModel : ComponentBase
 {
     public string? TempConfigPath { get; set; }
     public string? AppConfigPath { get; set; }
+
+    private LogOnViewModel _logOnViewModel;
+
+    public AdvancedOptionsViewModel(LogOnViewModel logOnViewModel)
+    {
+        _logOnViewModel = logOnViewModel;
+    }
 
     public void Initialize()
     {
@@ -28,8 +36,8 @@ public class AdvancedOptionsViewModel : ComponentBase
         if (selectedPath != null)
         {
             TempConfigPath = selectedPath;
-            StateHasChanged();
         }
+        _logOnViewModel.UIStateChanged();
     }
 
     public async void ButtonOk_Click(EventArgs e)
@@ -78,5 +86,13 @@ public class AdvancedOptionsViewModel : ComponentBase
     public void CancelButton_Click(EventArgs e)
     {
         return;
+    }
+
+    void Update()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 }

@@ -13,7 +13,6 @@ using System.Collections.ObjectModel;
 using AxCrypt.Common;
 using AxCrypt.Core.Extensions;
 using AxCrypt.App.Components.Services.Interface;
-using AxCrypt.App.Components.Data;
 using AxCrypt.Content;
 using AxCrypt.App.Components.Models;
 
@@ -37,7 +36,7 @@ public class HomeActionsViewModel : ComponentBase
     public int MembersCount { get; set; }
     public int TotalMembers { get; set; }
     public string? DisabledBackColor { get; set; }
-    public bool isFilesPending { get; set; }
+    public bool IsFilesPending { get; set; }
 
     public HomeActionsViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel, IStatusAlertService statusAlertService)
     {
@@ -53,7 +52,7 @@ public class HomeActionsViewModel : ComponentBase
         _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
         _fileSystemState = Resolve.FileSystemState;
 
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending(); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { IsFilesPending = areFilesPending; });
 
         KnownFoldersViewModel.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
         KnownFoldersViewModel.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
@@ -162,27 +161,6 @@ public class HomeActionsViewModel : ComponentBase
             await _mainViewModel.EncryptPendingFiles.ExecuteAsync(null);
             new ApplicationManager().WaitForBackgroundToComplete();
         }
-    }
-
-    public bool AreFilesPending()
-    {
-        IList<ActiveFile> openFiles = _fileSystemState.DecryptedActiveFiles;
-        if (openFiles.Count > 0)
-        {
-            return isFilesPending = true;
-        }
-
-        List<IDataStore> files = new List<IDataStore>();
-        foreach (IDataContainer container in Resolve.KnownIdentities.LoggedOnWatchedFolders.Select(wf => New<IDataContainer>(wf.Path)))
-        {
-            files.AddRange(container.ListOfFiles(_fileSystemState.WatchedFolders.Select(x => New<IDataContainer>(x.Path)), New<UserSettings>().FolderOperationMode.Policy()));
-        }
-        if (!New<UserSettings>().DoNotShowAgain.HasFlag(DoNotShowAgainOptions.IgnoreFileWarning))
-        {
-            return files.Where(ds => !ds.IsEncrypted()).Any();
-        }
-
-        return isFilesPending = files.Where(ds => ds.IsEncryptable()).Any();
     }
 
     private void UpdateKnownFolders(IEnumerable<KnownFolder> folders)

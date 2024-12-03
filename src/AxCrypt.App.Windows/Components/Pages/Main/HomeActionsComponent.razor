@@ -108,7 +108,7 @@
                     </div>
                 }
             }
-            @if (viewModel.isFilesPending)
+            @if (viewModel.IsFilesPending)
             {
                 <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => ShowPopup("clean") )' @onmouseout='@( () => HidePopup() )' @onclick="(e) => viewModel.CleanAndRemoveOpenFilesButton_Click(e)">
                     <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">Clean</span>
@@ -304,7 +304,6 @@
         {
             try
             {
-                viewModel.isFilesPending = viewModel.AreFilesPending();
             }
             catch (Exception ex)
             {

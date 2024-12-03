@@ -456,4 +456,10 @@
         isHovered = false;
         hoveredElement = string.Empty;
     }
+
+    public void CancelButton_Click(EventArgs e)
+    {
+        AppSettingsViewModel.ShowAdvancedOptions = false;
+        return;
+    }
 }

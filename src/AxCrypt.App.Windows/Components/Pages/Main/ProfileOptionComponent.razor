@@ -55,16 +55,9 @@
             </NavLink>
         </div>
         <div class="key-section">
-            <NavLink class="@DisablePasswordChange()" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
+            <NavLink class="nav-link" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
                 <span>Password change</span>
-            </NavLink>
-        </div>
-        <div class="key-section">
-            <NavLink class="@DisablePasswordReset()"
-                     @onclick="(e) => ProfileViewModel.PasswordReset_Click(e)">
-                <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
-                <span>Password Reset</span>
             </NavLink>
         </div>
         <div class="key-section">
@@ -135,22 +128,6 @@
     </div>
 }
 
-<style>
-    .nav-link-pass.disabled,
-    .nav-link-pass.disabled:hover,
-    .nav-link-pass.disabled.active {
-        pointer-events: none;
-        background-color: transparent;
-        color: gray !important;
-        text-decoration: none;
-    }
-
-    .key-section a.disabled.active {
-        background-color: transparent;
-    }
-
-</style>
-
 @code {
     protected override async Task OnInitializedAsync()
     {
@@ -174,18 +151,6 @@
     public void OnOptionClicked()
     {
         ClosePopup.InvokeAsync(null);
-    }
-
-    private string DisablePasswordReset()
-    {
-        bool isPasswordReset = !ProfileViewModel.Account.IsLoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail);
-        return isPasswordReset ? "nav-link" : "nav-link disabled";
-    }
-
-    private string DisablePasswordChange()
-    {
-        bool isPasswordChange = New<AxCryptOnlineState>().IsOnline;
-        return isPasswordChange ? "nav-link" : "nav-link disabled";
     }
 
     void UpdateState()
