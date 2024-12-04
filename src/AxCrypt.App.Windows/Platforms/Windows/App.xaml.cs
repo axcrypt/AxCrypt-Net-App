@@ -96,6 +96,7 @@ namespace AxCrypt.App.Windows.WinUI
                 throw;
             }
 
+            UnhandledException += CurrentDomain_UnhandledException;
             return _mauiApp;
         }
 
@@ -255,9 +256,17 @@ namespace AxCrypt.App.Windows.WinUI
             alertDialog.Title = "Unhandled Exception";
             alertDialog.Content = ex.Message;
             await alertDialog.ShowAsync();
-            //MessageBox.Show(ex.Message, "Unhandled Exception");
         }
 
+        private void CurrentDomain_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            if (e.Exception is ApplicationExitException)
+            {
+                Exit();
+            }
+            ExceptionMessageAndReport(e.Exception as Exception);
+        }     
+        
         private void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
         {
             if (e.ExceptionObject is ApplicationExitException)
