@@ -60,13 +60,13 @@
                                     @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, new List<FileDetails> { fileDetails })">
                                     <td> <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectSingleFile(e, fileDetails)" checked="@RecentFilesViewModel.IsHeaderCheckboxChecked" /> </td>
                                     <td class="fle-exton-img" style="display: flex; align-items: center;">
-                                        <img height="32" class="@IconClass(fileDetails.FileExtension)" src="" alt="file-image" />
+                                        <img style="width: 25px; height: 25px;" class="@IconClass(fileDetails.FileExtension)" src="" alt="file-image" />
                                         <span class="fle-nme">@fileDetails.FileName</span>
                                     </td>
                                     <td>@fileDetails.FileSize</td>
                                     <td>@fileDetails.Algorithm</td>
                                     <td>@fileDetails.LastModifiedDate</td>
-                                    <td>
+                                    <td style="text-align:center">
                                         @if (fileDetails.SharedWith.Any())
                                         {
                                             <div style="display:flex;">
@@ -80,6 +80,10 @@
                                                     <div class="info-prple bdr-clr">+@((fileDetails.SharedWith.Count()) - MaxAvatarsToShow)</div>
                                                 }
                                             </div>
+                                        }
+                                        else
+                                        {
+                                            <div style="display:flex;"> - </div>
                                         }
                                     </td>
                                     @if (RecentFilesViewModel.SubscriptionLevel != SubscriptionLevel.Free)
@@ -159,8 +163,7 @@
 
     private string IconClass(string fileExtension)
     {
-        string imagefileSourceClass = !string.IsNullOrEmpty(fileExtension) ? fileExtension.Replace(".", "") : "file-ext-def-icon";
-        return imagefileSourceClass;
+        return !string.IsNullOrEmpty(fileExtension) ? fileExtension.Replace(".", "") : "file-ext-def-icon";
     }
 
     private void UpdatePageState()

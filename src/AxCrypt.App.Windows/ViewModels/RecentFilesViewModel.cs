@@ -84,7 +84,6 @@ public class RecentFilesViewModel : ViewModelBase
 
         foreach (FileDetails fileDetails in RecentFilesList)
         {
-            fileDetails.IsChecked = IsHeaderCheckboxChecked;
             SelectedFiles.Add(fileDetails);
         }
     }
@@ -294,16 +293,16 @@ public class RecentFilesViewModel : ViewModelBase
 
         IEnumerable<string> encryptedFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncrypted());
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        _sharekeyViewModel.SetSelectedFilesOrFolders(fileNames, viewModel);
+        _sharekeyViewModel?.SetSelectedFilesOrFolders(fileNames, viewModel);
 
         if (encryptableFileNames != null && encryptableFileNames.Any())
         {
             _fileOperationViewModel.Recipients = viewModel.SharedWith;
             await _fileOperationViewModel.EncryptFiles.ExecuteAsync(encryptableFileNames);
-            _fileOperationViewModel.Recipients = null;
+            _fileOperationViewModel.Recipients = null!;
         }
 
-        await viewModel.ShareFiles.ExecuteAsync(null);
+        await viewModel.ShareFiles.ExecuteAsync(null!);
         SelectedFiles.Clear();
     }
 

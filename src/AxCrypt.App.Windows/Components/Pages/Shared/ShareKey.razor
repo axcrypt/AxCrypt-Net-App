@@ -98,7 +98,7 @@
                             {
                                 <div class="selected-file">
                                     <img class="@Icon" src="~/images/default/AxCrypt_Icon.svg" alt="File Icon" />
-                                    <span class="shre-fle-txt">@GetIconForFile(file)</span>
+                                    <span class="fle-nme">@GetIconForFile(file)</span>
                                 </div>
                             }
                         </div>
@@ -153,7 +153,7 @@
                         }
                     </div><br />
                     <div id="sharekey" class="shr-ky-ftr" style="margin: 20px 0px;">
-                        <NavLink href="mainpage">
+                        <NavLink href="/">
                             <input type="button" @onclick="Close" class="button border btn-small" value="Cancel" style="margin-right: 10px;" />
                         </NavLink>
                         @if (ShareKeyViewModel.IsWideScreen)
@@ -177,21 +177,6 @@
         </div>
     </div>
 }
-
-<style>
-    .popup {
-        position: absolute;
-        left: -150px; /* Adjust as per your requirement */
-        top: 0;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        padding: 8px;
-        z-index: 1000;
-        width: 200px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        pointer-events: none; /* Prevent interfering with hover logic */
-    }
-</style>
 
 @code {
     private bool IsVisible;
