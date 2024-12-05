@@ -399,7 +399,7 @@ public partial class MainPage : ContentPage, ISignIn
 
     private void HandleCreateNewAccount(LogOnEventArgs e)
     {
-        CreateNewAccountDialogViewModel createNewAccountDialogViewModel = new CreateNewAccountDialogViewModel(_logOnService);
+        CreateNewAccountDialogViewModel createNewAccountDialogViewModel = new CreateNewAccountDialogViewModel();
         createNewAccountDialogViewModel.SetCreateNewAccount(e.Passphrase.Text, e.Identity.UserEmail);
         //using (CreateNewAccountDialog dialog = new CreateNewAccountDialog(this, e.Passphrase.Text, EmailAddress.Empty))
         //{
@@ -429,7 +429,7 @@ public partial class MainPage : ContentPage, ISignIn
 
     private void HandleExistingLogOnForEncryptedFile(LogOnEventArgs e)
     {
-        FilePasswordDialogViewModel filePasswordDialogViewModel = new FilePasswordDialogViewModel(_logOnService);
+        FilePasswordDialogViewModel filePasswordDialogViewModel = new FilePasswordDialogViewModel();
         filePasswordDialogViewModel.SetFilePassword(e.EncryptedFileFullName);
         //using (FilePasswordDialog logOnDialog = new FilePasswordDialog(this, e.EncryptedFileFullName))
         //{

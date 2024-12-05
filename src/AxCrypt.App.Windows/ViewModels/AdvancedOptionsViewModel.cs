@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components;
 using AxCrypt.App.Components.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -18,9 +19,9 @@ public class AdvancedOptionsViewModel : ComponentBase
 
     private LogOnViewModel _logOnViewModel;
 
-    public AdvancedOptionsViewModel(LogOnViewModel logOnViewModel)
+    public AdvancedOptionsViewModel()
     {
-        _logOnViewModel = logOnViewModel;
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!; 
     }
 
     public void Initialize()

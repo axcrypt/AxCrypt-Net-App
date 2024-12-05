@@ -3,6 +3,7 @@ using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Services;
+using AxCrypt.App.Windows.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
@@ -44,10 +45,12 @@ public class ShareKeyViewModel : ViewModelBase
 
     public IEnumerable<string>? SelectedFilesOrFolders { get; set; }
 
-    public ShareKeyViewModel(LogOnViewModel logOnViewModel)
+    public ShareKeyViewModel()
     {
-        LogOnViewModel = logOnViewModel;
-        SubscriptionLevel = logOnViewModel.SubscriptionLevel;
+        LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
+        SubscriptionLevel = AxCServiceProvider.LogOnViewModel.SubscriptionLevel;
+        EmailSuggestions = new List<EmailSuggestion>();
+        AllSuggestions = new List<EmailSuggestion>();
     }
 
     public void SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel, bool isFolder = false)

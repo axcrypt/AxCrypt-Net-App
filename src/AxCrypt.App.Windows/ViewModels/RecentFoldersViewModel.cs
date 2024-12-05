@@ -13,6 +13,7 @@ using AxCrypt.Abstractions;
 using AxCrypt.App.Components.Utility.View;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -39,12 +40,11 @@ public class RecentFoldersViewModel : ComponentBase
         set => _folderContextMenu = value;
     }
 
-    public RecentFoldersViewModel(ProcessIndicatorService processIndicatorService, LogOnViewModel logOnViewModel, ShareKeyViewModel sharekeyViewModel)
+    public RecentFoldersViewModel(ShareKeyViewModel sharekeyViewModel)
     {
-        _logOnViewModel = logOnViewModel;
-        _mainViewModel = logOnViewModel.MainViewModel;
-        _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
-        _ProcessIndicatorService = processIndicatorService;
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!; 
+        _mainViewModel = AxCServiceProvider.LogOnViewModel!.MainViewModel;
+        _fileOperationViewModel = AxCServiceProvider.LogOnViewModel!.FileOperationViewModel;
         _sharekeyViewModel = sharekeyViewModel;
         RecentFoldersList = new ObservableCollection<string>();
     }

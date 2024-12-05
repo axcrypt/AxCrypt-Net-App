@@ -3,6 +3,7 @@ using AxCrypt.App.Components.Utility;
 using AxCrypt.Content;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.Extensions;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -12,9 +13,9 @@ public class FilePasswordDialogViewModel : ViewModelBase
     private string _fileName;
     private FilePasswordViewModel? _viewModel { get; set; }
 
-    public FilePasswordDialogViewModel(LogOnViewModel logOnViewModel)
+    public FilePasswordDialogViewModel()
     {
-        _logOnViewModel = logOnViewModel;
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
     }
 
     public void SetFilePassword(string encryptedFileFullName)

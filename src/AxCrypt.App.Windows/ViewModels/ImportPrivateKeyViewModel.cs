@@ -1,5 +1,6 @@
 ﻿using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Utility;
+using AxCrypt.App.Windows.Services;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -11,9 +12,9 @@ public class ImportPrivateKeyViewModel
     private ImportPrivateKeysViewModel _viewModel;
     private LogOnViewModel _logOnViewModel;
 
-    public ImportPrivateKeyViewModel(LogOnViewModel logOnViewModel)
+    public ImportPrivateKeyViewModel()
     {
-        _logOnViewModel = logOnViewModel;
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
     }
 
     public void ShowDialog(UserSettings userSettings, KnownIdentities knownIdentities)

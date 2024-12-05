@@ -7,7 +7,7 @@ namespace AxCrypt.App.Components.Utility
     {
         public static SubscriptionLevel GetLicenseStatus(this LicenseCapabilities licenseCapabilities)
         {
-            if (licenseCapabilities == null)
+            if (licenseCapabilities == null!)
             {
                 return SubscriptionLevel.Unknown;
             }

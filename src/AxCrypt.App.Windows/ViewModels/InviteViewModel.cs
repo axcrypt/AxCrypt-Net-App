@@ -5,6 +5,7 @@ using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.Core.Crypto.Asymmetric;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -12,9 +13,9 @@ public class InviteViewModel
 {
     private IStatusAlertService _alerService;
 
-    public InviteViewModel(IStatusAlertService statusAlertService)
+    public InviteViewModel()
     {
-        _alerService = statusAlertService;
+        _alerService = AxCServiceProvider.StatusAlertService!;
     }
 
     public string? ErrorMessage { get;  set; }

@@ -1,6 +1,7 @@
 ﻿using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Services;
 using AxCrypt.App.Windows.Models;
+using AxCrypt.App.Windows.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -18,13 +19,13 @@ public class TopMenuViewModel : ViewModelBase
     private readonly UserNotificationService _notificationService;
     private MainViewModel? _mainViewModel;
 
-    public TopMenuViewModel(UserNotificationService notificationService, LogOnViewModel logOnViewModel)
+    public TopMenuViewModel(UserNotificationService notificationService)
     {
-        LogOnViewModel = logOnViewModel;
+        LogOnViewModel = AxCServiceProvider.LogOnViewModel!; 
         _notificationService = notificationService;
-        _mainViewModel = logOnViewModel.MainViewModel;
+        _mainViewModel = AxCServiceProvider.LogOnViewModel!.MainViewModel;
         TopMenuModel = new TopMenuModel();
-        TopMenuModel.SubscriptionLevel = logOnViewModel.SubscriptionLevel;
+        TopMenuModel.SubscriptionLevel = AxCServiceProvider.LogOnViewModel!.SubscriptionLevel;
     }
 
     public void Initialize()
