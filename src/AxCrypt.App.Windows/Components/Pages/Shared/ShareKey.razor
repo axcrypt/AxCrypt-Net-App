@@ -49,7 +49,7 @@
                                 <ul class="suggestion-list hide-model-popup">
                                     @foreach (ShareKeyViewModel.EmailSuggestion suggestion in ShareKeyViewModel.EmailSuggestions)
                                     {
-                                        <li @onclick="() => ShareKeyViewModel.SelectSuggestion(suggestion.Email)">
+                                        <li @onclick="() => ShareKeyViewModel.SelectSuggestion(suggestion.Email!)">
                                             @if (suggestion.Type == "group")
                                             {
                                                 <span>@suggestion.GroupName</span>
@@ -109,7 +109,7 @@
                         @if (ShareKeyViewModel.ShareKeyUserList.Any())
                         {
                             <div class="user-list-bx share-list scroll-container " id="sharedUserList" style="margin-right:0px">
-                                @foreach (ShareKeyUser user in ShareKeyViewModel.ShareKeyUserList)
+                                @foreach (ShareKeyUser user in ShareKeyViewModel.ShareKeyUserList!)
                                 {
                                     <dl>
                                         <dd class="file-bgrnd">
@@ -189,7 +189,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.OnDialogVisibilityChanged += UpdateShareKeyDialogStateChanged;
+        ShareKeyViewModel!.LogOnViewModel.ShareKeyDialog.OnDialogVisibilityChanged += UpdateShareKeyDialogStateChanged;
         ShareKeyViewModel.LogOnViewModel.OnUIStateChanged += UpdateStateChanged;
     }
 
@@ -199,7 +199,7 @@
         {
             try
             {
-                ShareKeyViewModel.IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
+                ShareKeyViewModel!.IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
             }
             catch (Exception ex)
             {
@@ -231,7 +231,7 @@
 
     void Close()
     {
-        ShareKeyViewModel.RecipientEmail = "";
+        ShareKeyViewModel!.RecipientEmail = "";
         ShareKeyViewModel.SelectedFilesOrFolders = new List<string>();
         ShareKeyViewModel.CloseSyncPopup();
         ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.Close();

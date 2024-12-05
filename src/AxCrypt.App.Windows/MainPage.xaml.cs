@@ -409,9 +409,9 @@ public partial class MainPage : ContentPage, ISignIn
         //        e.Cancel = true;
         //        return;
         //    }
-        //    e.DisplayPassphrase = dialog.ShowPassphraseCheckBox.Checked;
-        //    e.Passphrase = new Passphrase(dialog.PassphraseTextBox.Text);
-        //    e.UserEmail = dialog.EmailTextBox.Text;
+        e.DisplayPassphrase = createNewAccountDialogViewModel.ShowPassword;
+        e.Passphrase = new Passphrase(createNewAccountDialogViewModel.PassphraseText);
+        e.UserEmail = createNewAccountDialogViewModel.UserEmail;
         //}
     }
 
@@ -419,7 +419,7 @@ public partial class MainPage : ContentPage, ISignIn
     {
         if (!string.IsNullOrEmpty(e.EncryptedFileFullName) && (string.IsNullOrEmpty(Resolve.UserSettings.UserEmail) || Resolve.KnownIdentities.IsLoggedOn))
         {
-            HandleExistingLogOnForEncryptedFile(e);
+            await HandleExistingLogOnForEncryptedFile(e);
         }
         else
         {
@@ -427,28 +427,25 @@ public partial class MainPage : ContentPage, ISignIn
         }
     }
 
-    private void HandleExistingLogOnForEncryptedFile(LogOnEventArgs e)
+    private async Task HandleExistingLogOnForEncryptedFile(LogOnEventArgs e)
     {
-        FilePasswordDialogViewModel filePasswordDialogViewModel = new FilePasswordDialogViewModel();
-        filePasswordDialogViewModel.SetFilePassword(e.EncryptedFileFullName);
-        //using (FilePasswordDialog logOnDialog = new FilePasswordDialog(this, e.EncryptedFileFullName))
-        //{
-        //    DialogResult dialogResult = logOnDialog.ShowDialog(this);
-        //    if (dialogResult == DialogResult.Retry)
-        //    {
-        //        e.Passphrase = logOnDialog.ViewModel.Passphrase;
-        //        e.IsAskingForPreviouslyUnknownPassphrase = true;
-        //        return;
-        //    }
+        FilePasswordDialogViewModel filePasswordDialog = AxCServiceProvider.GetService<FilePasswordDialogViewModel>();
+        filePasswordDialog.ShowFilePasswordDialog(e.EncryptedFileFullName);
 
-        //    if (dialogResult != DialogResult.OK || logOnDialog.ViewModel.Passphrase == Passphrase.Empty)
-        //    {
-        //        e.Cancel = true;
-        //        return;
-        //    }
-        //    e.Passphrase = logOnDialog.ViewModel.Passphrase;
-        //}
-        return;
+        if (filePasswordDialog.DialogResult == DialogResult.Retry)
+        {
+            e.Passphrase = filePasswordDialog.ViewModel!.Passphrase;
+            e.IsAskingForPreviouslyUnknownPassphrase = true;
+            return;
+        }
+
+        if (filePasswordDialog.DialogResult != DialogResult.OK || filePasswordDialog.ViewModel!.Passphrase == Passphrase.Empty)
+        {
+            e.Cancel = true;
+            return;
+        }
+
+        e.Passphrase = filePasswordDialog.ViewModel.Passphrase;
     }
 
     private async Task HandleExistingAccountLogOn(LogOnEventArgs e)
@@ -483,11 +480,7 @@ public partial class MainPage : ContentPage, ISignIn
         e.Passphrase = new Passphrase(_logOnService.LogOnAccountModel.PasswordText);
         e.UserEmail = _logOnService.LogOnAccountModel.UserEmail;
         _logOnService.PageResult = DialogResult.None;
-        //LogOnAccountViewModel viewModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
-        //using (SignUpSignInAccountDialog logOnDialog = new SignUpSignInAccountDialog(this, viewModel))
-        //{
-        //    DialogResult dialogResult = logOnDialog.ShowDialog(this);
-        //}
+
         return;
     }
 
