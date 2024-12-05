@@ -21,26 +21,31 @@ public class RecentFilesViewModel : ViewModelBase
 {
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
+    private ShareKeyViewModel? _sharekeyViewModel;
 
     private ProcessIndicatorService? _ProcessIndicatorService;
+    private readonly IDispatcher Dispatcher;
 
-    public RecentFilesViewModel(LogOnViewModel logOnViewModel)
+    public RecentFilesViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel? sharekeyViewModel, IDispatcher dispatcher)
     {
         LogOnViewModel = logOnViewModel;
+        _sharekeyViewModel = sharekeyViewModel;
         _mainViewModel = logOnViewModel.MainViewModel;
         _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
+
+        SelectedFiles = new List<string>();
+        RecentFilesList = new ObservableCollection<FileDetails>();
+        Dispatcher = dispatcher;
     }
 
     public void OnInitializedAsync()
     {
-        SelectedFiles = new List<string>();
-        RecentFilesList = new ObservableCollection<FileDetails>();
-
         IsHideRecentFiles = New<UserSettings>().HideRecentFiles;
         UpdateRecentFiles(_mainViewModel.RecentFiles);
 
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); LogOnViewModel.UIStateChanged(); });
-        BindPropertyChanged(nameof(SelectedFiles), (IEnumerable<string> files) => { _mainViewModel.SelectedRecentFiles = files; });
+        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.RecentFiles), async (IEnumerable<ActiveFile> files) => { await Task.Run(() => { UpdateRecentFiles(files); }); });
+        this.BindPropertyChanged(nameof(SelectedFiles), (IList<string> files) => { _mainViewModel.SelectedRecentFiles = files; });
+        this.BindPropertyChanged(nameof(RecentFilesList), (ObservableCollection<FileDetails> files) => { LogOnViewModel.UIStateChanged(); });
 
         //_recentFilesListView.DragOver += (sender, e) => { _mainViewModel.DragAndDropFiles = e.GetDragged(); e.Effect = GetEffectsForRecentFiles(e); };
         // _recentFilesListView.SelectedIndexChanged += (sender, e) => { _mainViewModel.SelectedRecentFiles = _recentFilesListView.SelectedItems.Cast<ListViewItem>().Select(lvi => EncryptedPath(lvi)); };
@@ -51,7 +56,8 @@ public class RecentFilesViewModel : ViewModelBase
 
     public ObservableCollection<FileDetails> RecentFilesList { get; set; }
 
-    public IList<string> SelectedFiles { get; set; } = new List<string>();
+    public IList<string> SelectedFiles { get { return GetProperty<IList<string>>(nameof(SelectedFiles)); } set { SetProperty(nameof(SelectedFiles), value.ToList()); } }
+
 
     //private FileDetails SelectedFile = new FileDetails();
 
@@ -110,6 +116,11 @@ public class RecentFilesViewModel : ViewModelBase
         }
 
         bool isChecked = Convert.ToBoolean(e.Value);
+        if (RecentFilesList.Count == 1)
+        {
+            SelectAllChecked = isChecked;
+        }
+
         UpdateSelectedFile(selectedFile, isChecked);
     }
 
@@ -305,32 +316,26 @@ public class RecentFilesViewModel : ViewModelBase
     private async void OpenSecured()
     {
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
-        // await _fileOperationViewModel.OpenFiles.ExecuteAsync(SelectedFiles.Select(f => f.FilePath));
     }
 
     public async void OpenSecuredMouseDoubleClick(EventArgs args, IEnumerable<FileDetails> selectedFiles)
     {
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
-        // await _fileOperationViewModel.OpenFiles.ExecuteAsync(selectedFiles.Select(f => f.FilePath));
     }
 
     private async void RemoveFromListKeepSecured()
     {
         await _mainViewModel.RemoveRecentFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
-
-        //await _mainViewModel.RemoveRecentFiles.ExecuteAsync(SelectedFiles.Select(f => f.FilePath));
     }
 
     private async void DecryptAndRemoveFromList()
     {
         await _fileOperationViewModel.DecryptFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
-        //await _fileOperationViewModel.DecryptFiles.ExecuteAsync(SelectedFiles.Select(f => f.FilePath));
     }
 
     private async void ShareKeyFromRecentFiles(EventArgs args)
     {
-        await ShareKeyService.ShareKeysWithFileSelectionAsync(_mainViewModel.SelectedRecentFiles);
-        //await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeysWithFileSelectionAsync(SelectedFiles.Select(f => f.FilePath).ToList()); }, null, args);
+        await ShareKeyService.ShareKeysAsync(_mainViewModel.SelectedRecentFiles, _sharekeyViewModel, _fileOperationViewModel);
     }
 
     private async void ShowInFolder()

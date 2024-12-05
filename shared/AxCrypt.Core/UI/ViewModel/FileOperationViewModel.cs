@@ -79,7 +79,7 @@ namespace AxCrypt.Core.UI.ViewModel
         {
             DecryptFiles = new AsyncDelegateAction<IEnumerable<string>>((files) => DecryptFilesActionAsync(files));
             EncryptFiles = new AsyncDelegateAction<IEnumerable<string>>((files) => EncryptFilesActionAsync(files));
-            OpenFiles = new AsyncDelegateAction<IEnumerable<string>>((files) => OpenFilesActionAsync(files));
+            OpenFiles = new AsyncDelegateAction<IEnumerable<string>>(async (files) => await OpenFilesActionAsync(files));
             DecryptFolders = new AsyncDelegateAction<IEnumerable<string>>((folders) => DecryptFoldersActionAsync(folders), (folders) => Task.FromResult(_knownIdentities.IsLoggedOn));
             WipeFiles = new AsyncDelegateAction<IEnumerable<string>>((files) => WipeFilesActionAsync(files));
             RandomRenameFiles = new AsyncDelegateAction<IEnumerable<string>>((files) => RandomRenameFilesActionAsync(files));
@@ -262,13 +262,13 @@ namespace AxCrypt.Core.UI.ViewModel
 
             operationsController.QueryDecryptionPassphrase = HandleQueryDecryptionPassphraseEventAsync;
 
-            operationsController.QuerySaveFileAs += (object sender, FileOperationEventArgs e) =>
+            operationsController.QuerySaveFileAs += async (object sender, FileOperationEventArgs e) =>
             {
                 FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new string[] { e.SaveFileFullName })
                 {
                     FileSelectionType = FileSelectionType.SaveAsDecrypted,
                 };
-                OnSelectingFiles(fileSelectionArgs);
+                await OnSelectingFiles(fileSelectionArgs);
                 if (fileSelectionArgs.Cancel)
                 {
                     e.Cancel = true;
@@ -311,13 +311,13 @@ namespace AxCrypt.Core.UI.ViewModel
         {
             FileOperationsController operationsController = new FileOperationsController(progress);
 
-            operationsController.WipeQueryConfirmation += (object sender, FileOperationEventArgs e) =>
+            operationsController.WipeQueryConfirmation += async (object sender, FileOperationEventArgs e) =>
             {
                 FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new string[] { file.FullName, })
                 {
                     FileSelectionType = FileSelectionType.WipeConfirm,
                 };
-                OnSelectingFiles(fileSelectionArgs);
+                await OnSelectingFiles(fileSelectionArgs);
                 e.Cancel = fileSelectionArgs.Cancel;
                 e.Skip = fileSelectionArgs.Skip;
                 e.ConfirmAll = fileSelectionArgs.ConfirmAll;
@@ -539,18 +539,18 @@ namespace AxCrypt.Core.UI.ViewModel
             return operationsController.VerifyEncryptedAsync(fullName);
         }
 
-        private Task OpenFilesFromFolderActionAsync(string folder)
+        private async Task OpenFilesFromFolderActionAsync(string folder)
         {
             FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new string[] { folder })
             {
                 FileSelectionType = FileSelectionType.Open,
             };
-            OnSelectingFiles(fileSelectionArgs);
+            await OnSelectingFiles(fileSelectionArgs);
             if (fileSelectionArgs.Cancel)
             {
-                return Constant.CompletedTask;
+                return;
             }
-            return OpenFilesActionAsync(fileSelectionArgs.SelectedFiles);
+            await OpenFilesActionAsync(fileSelectionArgs.SelectedFiles);
         }
 
         private async Task<FileOperationContext> DecryptFolderWorkAsync(IDataContainer folder, IProgressContext progress)

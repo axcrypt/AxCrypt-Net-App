@@ -31,7 +31,7 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
 
         FileExtension = Path.GetExtension(file.DecryptedFileInfo.Name);
         LastAccessedDate = file.Properties.LastActivityTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture);
-
+        SharedWith = new List<string>();
         InitializeOtherProperties(file);
     }
 
@@ -39,6 +39,10 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
     {
         LogOnIdentity decryptIdentity = ValidateActiveFileIdentity(activeFile.Identity);
         IAxCryptDocument document = activeFile.EncryptedFileInfo.GetAxCryptDocument(decryptIdentity);
+        if(document == null)
+        {
+            return;
+        }
 
         IEnumerable<string> keySharedUsers = document.AsymmetricRecipients.Select(ksr => ksr.Email.Address).Distinct().Skip(1);
         if (keySharedUsers.Any())

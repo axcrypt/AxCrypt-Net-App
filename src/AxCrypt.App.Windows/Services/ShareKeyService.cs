@@ -1,4 +1,5 @@
-﻿using AxCrypt.App.Windows.ViewModels;
+﻿using AxCrypt.App.Components.Models;
+using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
@@ -11,15 +12,7 @@ namespace AxCrypt.App.Windows.Services;
 
 public static class ShareKeyService
 {
-    private static FileOperationViewModel FileOperationViewModel
-    {
-        get
-        {
-            return New<FileOperationViewModel>();
-        }
-    }
-
-    public static async Task ShareKeysWithFileSelectionAsync(IEnumerable<string> selectedRecentFileNames)
+    public static async Task ShareKeysWithFileSelectionAsync(ShareKeyViewModel sharekeyViewModel, IEnumerable<string> selectedRecentFileNames, FileOperationViewModel fileOperationViewModel)
     {
         FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(selectedRecentFileNames)
         {
@@ -36,10 +29,10 @@ public static class ShareKeyService
             return;
         }
 
-        await ShareKeysAsync(fileSelectionArgs.SelectedFiles);
+        await ShareKeysAsync(fileSelectionArgs.SelectedFiles, sharekeyViewModel, fileOperationViewModel);
     }
 
-    private static async Task ShareKeysAsync(IEnumerable<string> fileNames)
+    public static async Task ShareKeysAsync(IEnumerable<string> fileNames, ShareKeyViewModel sharekeyViewModel, FileOperationViewModel fileOperationViewModel)
     {
         IEnumerable<string> encryptableFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncryptable());
         if (encryptableFileNames != null && encryptableFileNames.Any())
@@ -53,14 +46,13 @@ public static class ShareKeyService
 
         IEnumerable<string> encryptedFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncrypted());
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        ShareKeyViewModel shareKeyViewModel = new ShareKeyViewModel(new AxCrypt.App.Components.Models.LogOnViewModel(new AxCrypt.App.Components.Services.ProcessIndicatorService())); ;
-        shareKeyViewModel.SetSelectedFilesOrFolders(fileNames, viewModel);
+        sharekeyViewModel!.SetSelectedFilesOrFolders(encryptedFileNames, viewModel);
 
         if (encryptableFileNames != null && encryptableFileNames.Any())
         {
-            FileOperationViewModel.Recipients = viewModel.SharedWith;
-            await FileOperationViewModel.EncryptFiles.ExecuteAsync(encryptableFileNames);
-            FileOperationViewModel.Recipients = null;
+            fileOperationViewModel.Recipients = viewModel.SharedWith;
+            await fileOperationViewModel.EncryptFiles.ExecuteAsync(encryptableFileNames);
+            fileOperationViewModel.Recipients = null;
         }
 
         await viewModel.ShareFiles.ExecuteAsync(null);

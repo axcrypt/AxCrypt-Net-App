@@ -71,7 +71,7 @@ namespace AxCrypt.App.Windows
 
             services.AddSingleton<ITrayService, TrayService>();
             services.AddSingleton<INotificationService, NotificationService>();
-            
+
             services.AddSingleton<ILogging, Logging>();
             services.AddSingleton<IStatusChecker, StatusChecker>();
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();

@@ -1,7 +1,7 @@
 ﻿using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Windows.Code;
-using AxCrypt.App.Windows.Helpers;
 using AxCrypt.App.Windows.Services;
+using Microsoft.UI.Windowing;
 using Windows.Graphics;
 
 namespace AxCrypt.App.Windows.Infrastructure
@@ -49,14 +49,7 @@ namespace AxCrypt.App.Windows.Infrastructure
 
                 if (e.DidPositionChange)
                 {
-                    Window currentWindow = App.Current.Windows.FirstOrDefault();
-                    if (currentWindow != null)
-                    {
-                        AppPreferences.MainWindowLocation = new PointInt32((int)currentWindow.X, (int)currentWindow.Y);
-                        return;
-                    }
-
-                    AppPreferences.MainWindowLocation = s.Position;
+                    UpdateCurrentWindowPosition(s);
                     return;
                 }
 
@@ -70,17 +63,23 @@ namespace AxCrypt.App.Windows.Infrastructure
                     }
                     if(overlappedPresenter.State == Microsoft.UI.Windowing.OverlappedPresenterState.Maximized)
                     {
-                        Window currentWindow = App.Current.Windows.FirstOrDefault();
-                        if (currentWindow != null)
-                        {
-                            AppPreferences.MainWindowLocation = new PointInt32((int)currentWindow.X, (int)currentWindow.Y);
-                            return;
-                        }
-
+                        UpdateCurrentWindowPosition(s);
                     }
                     return;
                 }
             };
+        }
+
+        private static void UpdateCurrentWindowPosition(AppWindow s)
+        {
+            Window currentWindow = App.Current?.Windows.FirstOrDefault()!;
+            if (currentWindow != null)
+            {
+                AppPreferences.MainWindowLocation = new PointInt32((int)currentWindow.X, (int)currentWindow.Y);
+                return;
+            }
+
+            AppPreferences.MainWindowLocation = s.Position;
         }
 
         private static void SetupTrayIcon()

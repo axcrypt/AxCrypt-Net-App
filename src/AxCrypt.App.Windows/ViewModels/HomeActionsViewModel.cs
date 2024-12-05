@@ -69,46 +69,22 @@ public class HomeActionsViewModel : ComponentBase
 
     public async Task OpenFile()
     {
-        //if (SelectedRecentFiles.Any())
-        //{
-        //    await _fileOperationViewModel.OpenFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
-        //    return;
-        //}
-
-        //await _fileOperationViewModel.OpenFiles.ExecuteAsync(null);
-
         await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(string.Empty);
     }
 
     public async Task SecureFile()
     {
-        //if (SelectedRecentFiles.Any())
-        //{
-        //    await _fileOperationViewModel.EncryptFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
-        //    return;
-        //}
-
-        //await _fileOperationViewModel.EncryptFiles.ExecuteAsync(null);
         await _fileOperationViewModel.EncryptFiles.ExecuteAsync(null);
     }
 
     public async Task StopSecuringFile()
     {
-        //if (SelectedRecentFiles.Any())
-        //{
-        //    await _fileOperationViewModel.DecryptFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
-        //    return;
-        //}
-
-        //await _fileOperationViewModel.DecryptFiles.ExecuteAsync(null);
-        await _fileOperationViewModel.DecryptFiles.ExecuteAsync(null);
+        await _fileOperationViewModel.DecryptFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles);
     }
 
     public async void ShareKeysAsync(EventArgs e)
     {
-        //await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeysWithFileSelectionAsync(SelectedRecentFiles); }, null, e);
-
-        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeyService.ShareKeysWithFileSelectionAsync(_mainViewModel!.SelectedRecentFiles); }, null, e);
+        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeyService.ShareKeysWithFileSelectionAsync(_sharekeyViewModel, _mainViewModel!.SelectedRecentFiles, _fileOperationViewModel); }, null, e);
     }
 
     public async void CleanAndRemoveOpenFilesButton_Click(EventArgs e)

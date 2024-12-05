@@ -111,11 +111,11 @@
             @if (homeActionModel.IsFilesPending)
             {
                 <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => ShowPopup("clean") )' @onmouseout='@( () => HidePopup() )' @onclick="(e) => homeActionModel.CleanAndRemoveOpenFilesButton_Click(e)">
-                    <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">Clean</span>
+                    <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">@Texts.CleanUpPromptText</span>
                     @if (isHovered && hoveredElement == "clean")
                     {
                         <div class="home-hover text-center" style="background-color:#fff;">
-                            <span class="txt-clr font-medium">Click to encrypt any opened files or new files in Secured Folders, but ensure they are not in use first.</span>
+                            <span class="txt-clr font-medium">@Texts.CloseAndRemoveOpenFilesToolStripButtonToolTipText</span>
                         </div>
                     }
                 </div>
