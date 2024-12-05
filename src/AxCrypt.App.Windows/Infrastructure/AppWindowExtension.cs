@@ -68,7 +68,16 @@ namespace AxCrypt.App.Windows.Infrastructure
                         Task.Run(() => SetupTrayIcon());
                         s.Hide();
                     }
+                    if(overlappedPresenter.State == Microsoft.UI.Windowing.OverlappedPresenterState.Maximized)
+                    {
+                        Window currentWindow = App.Current.Windows.FirstOrDefault();
+                        if (currentWindow != null)
+                        {
+                            AppPreferences.MainWindowLocation = new PointInt32((int)currentWindow.X, (int)currentWindow.Y);
+                            return;
+                        }
 
+                    }
                     return;
                 }
             };

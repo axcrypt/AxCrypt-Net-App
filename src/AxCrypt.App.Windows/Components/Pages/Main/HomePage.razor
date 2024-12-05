@@ -20,7 +20,7 @@
         <img class="home-title" src="" alt="hand-img" />
     </div>
 
-    <HomeActionsComponent SelectedRecentFiles="RecentFilesViewModel.SelectedFiles" />
+    <HomeActionsComponent />
 
     <div>
         <div style="padding: 10px 0px;">
@@ -32,12 +32,13 @@
                 <table class="rcnt-fle-tbl" style="width:100%;">
                     <thead style="user-select: none;">
                         <tr>
-                            <th style="width:3%;"><input class="check-box" type="checkbox" @onchange="(e)=> RecentFilesViewModel.ToggleAllCheckboxes(e)" checked="@RecentFilesViewModel.IsHeaderCheckboxChecked" /></th>
-                            <th style="width:23%;" @onclick="RecentFilesViewModel.SortByName">@Texts.NameLabel<img class="arw-img" src="" alt="" /></th>
-                            <th @onclick="RecentFilesViewModel.SortBySize" style="width:11%;">@Texts.FileSizeColumnHeaderText<img class="arw-img" src="" alt="" /></th>
-                            <th style="width:11%;">@Texts.CryptoNameText</th>
-                            <th @onclick="RecentFilesViewModel.SortByDateModified" style="width:18%;">@Texts.LastModifiedTimeColumnHeaderText<img class="arw-img" src="" alt="" /></th>
+                            <th style="width:3%;"> <input class="check-box" type="checkbox" @onchange="(e)=> RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
+                            <th style="width:23%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(0)">@Texts.NameLabel<img class="arw-img" src="" alt="arrow img" /></th>
+                            <th style="width:11%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(1)">@Texts.FileSizeColumnHeaderText<img class="arw-img" src="" alt="arrow img" /></th>
+                            <th style="width:11%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(5)">@Texts.CryptoNameText<img class="arw-img" src="" alt="arrow img" /></th>
+                            <th style="width:18%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(2)">@Texts.LastModifiedTimeColumnHeaderText<img class="arw-img" src="" alt="arrow img" /></th>
                             <th style="width:13%;">@Texts.PromptSharedWith</th>
+
                             @if (RecentFilesViewModel.SubscriptionLevel != SubscriptionLevel.Free)
                             {
                                 <th class="scrd-sec">@Texts.EncryptedPathColumnHeaderText</th>
@@ -54,11 +55,12 @@
                             @for (int i = 0; i < RecentFilesViewModel.RecentFilesList.Count; i++)
                             {
                                 FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
-                                <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails) ? "selected" : "")"
-                                    @onmousedown="(e) => RecentFilesViewModel.HandleFileClick(e, fileDetails)"
-                                    @oncontextmenu="e => RecentFilesViewModel.HandleContextMenu(e, fileDetails)"
+                                <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails.FilePath) ? "selected" : "")"
+                                    @onmousedown="(e) => RecentFilesViewModel.HandleFileClick(e, fileDetails.FilePath)"
                                     @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, new List<FileDetails> { fileDetails })">
-                                    <td> <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectSingleFile(e, fileDetails)" checked="@RecentFilesViewModel.IsHeaderCheckboxChecked" /> </td>
+                                    <td>
+                                        <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectFile(e, fileDetails.FilePath)" checked="@RecentFilesViewModel.SelectAllChecked" />
+                                    </td>
                                     <td class="fle-exton-img" style="display: flex; align-items: center;">
                                         <img style="width: 25px; height: 25px;" class="@IconClass(fileDetails.FileExtension)" src="" alt="file-image" />
                                         <span class="fle-nme">@fileDetails.FileName</span>

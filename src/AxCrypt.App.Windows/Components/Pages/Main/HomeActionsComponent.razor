@@ -7,49 +7,49 @@
 @using AxCrypt.Core.UI
 @using System.Collections.ObjectModel
 
-@inject HomeActionsViewModel? viewModel
+@inject HomeActionsViewModel? homeActionModel
 @inject IJSRuntime jsRunTime
 
 <div class="home-body" style="margin-top: 15px;">
     <div style="display:block; margin-bottom: 25px;">
         <label class="fle-nme fnt-sze">Actions</label>
         <div class="" style="display:flex;">
-            <div class="act-box" @onclick="()=> viewModel.OpenFile()" @onmouseover='@( () => ShowPopup("open") )' @onmouseout='@( () => HidePopup() )'>
+            <div class="act-box" @onclick="()=> homeActionModel!.OpenFile()" @onmouseover='@( () => ShowPopup("open") )' @onmouseout='@( () => HidePopup() )'>
                 <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
-                <span class="text-size">@Texts.McInfMenuOpen</span>
+                <span class="text-size">@Texts.OpenEncryptedToolStripMenuItemText</span>
                 @if (isHovered && hoveredElement == "open")
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
-                        <span class="txt-clr font-medium">Click to open a secured files</span>
+                        <span class="txt-clr font-medium">@Texts.OpenToolStripButtonToolTipText</span>
                     </div>
                 }
             </div>
-            <div class="act-box" @onclick="()=>viewModel.SecureFile()" @onmouseover='@( () => ShowPopup("secure") )' @onmouseout='@( () => HidePopup() )'>
+            <div class="act-box" disabled="@homeActionModel!.EncryptButtonEnabled" @onclick="()=>homeActionModel!.SecureFile()" @onmouseover='@( () => ShowPopup("secure") )' @onmouseout='@( () => HidePopup() )'>
                 <img class="act-img scr-act" src="" alt="scr-img" />
                 <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
                 @if (isHovered && hoveredElement == "secure")
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
-                        <span class="txt-clr font-medium">Click to securely encrypt files</span>
+                        <span class="txt-clr font-medium">@Texts.EncryptToolStripButtonToolTipText</span>
                     </div>
                 }
             </div>
-            <div class="act-box" @onmouseover='@( () => ShowPopup("stop") )' @onmouseout='@( () => HidePopup() )' @onclick="()=>viewModel.StopSecuringFile()">
+            <div class="act-box" @onclick="()=>homeActionModel.StopSecuringFile()" @onmouseover='@( () => ShowPopup("stop") )' @onmouseout='@( () => HidePopup() )' >
                 <img class="act-img stpscr-act" src="" alt="stpscr-img" />
-                <span class="text-size">Stop</span>
+                <span class="text-size">@Texts.DecryptToolStripMenuItemText</span>
                 @if (isHovered && hoveredElement == "stop")
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
-                        <span class="txt-clr font-medium">Click to stop securing files.</span>
+                        <span class="txt-clr font-medium">@Texts.DecryptButtonTooltipText</span>
                     </div>
                 }
             </div>
-            @if (viewModel.SubscriptionLevel == SubscriptionLevel.Free)
+            @if (homeActionModel!.SubscriptionLevel == SubscriptionLevel.Free)
             {
-                <div class="popup-container">
+                <div class="popup-container" disabled="@homeActionModel.KeyShareButtonEnabled">
                     <div class="hover-trigger" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
                         <div class="act-box shre-box" style="background-color:#D9D9D9;">
-                            <img class="act-img vwr-shrks-act" src="" alt="shrks-img" /><span class="text-size">Share</span>
+                            <img class="act-img vwr-shrks-act" src="" alt="shrks-img" /><span class="text-size">@Texts.ShareKeysToolStripMenuItemText</span>
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                                 <span style="color:white;">
                                     Upgrade to access this <strong>feature!</strong>
                                 </span>
-                                <button class="upgrd-btn font-medium btn-medium" @onclick="() => viewModel.UpgradeDialog()">Upgrade</button>
+                                <button class="upgrd-btn font-medium btn-medium" @onclick="() => homeActionModel.UpgradeDialog()">Upgrade</button>
                             </div>
                         </div>
                     }
@@ -68,13 +68,13 @@
             }
             else
             {
-                <div class="act-box" @onclick="async(e)=> viewModel.ShareKeysAsync(e)" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
+                <div class="act-box" @onclick="async(e)=> homeActionModel.ShareKeysAsync(e)" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
                     <img class="act-img shrks-act" src="" alt="shrks-img" />
                     <span class="text-size">Share</span>
                     @if (isHovered && hoveredElement == "share")
                     {
                         <div class="home-hover text-center" style="background-color:#fff;">
-                            <span class="txt-clr font-medium">Click to share access with your colleagues.</span>
+                            <span class="txt-clr font-medium">@Texts.KeySharingToolTip</span>
                         </div>
                     }
                 </div>
@@ -84,9 +84,9 @@
             {
             <div class="act-box"><img class="act-img new-mssg" src="" alt="scr-img" /><span class="text-size">New message</span></div>
             } *@
-            @if (viewModel.SubscriptionLevel == SubscriptionLevel.Business)
+            @if (homeActionModel.SubscriptionLevel == SubscriptionLevel.Business)
             {
-                <div class="act-box" @onmouseover='@( () => ShowPopup("master key") )' @onmouseout='@( () => HidePopup() )' @onclick="viewModel.RedirectToAccountSite">
+                <div class="act-box" @onmouseover='@( () => ShowPopup("master key") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.RedirectToAccountSite">
                     <img class="act-img mtrkey-act" src="" alt="mtrkey-img" /><span class="text-size">@Texts.MasterKeyTitle</span>
                     @if (isHovered && hoveredElement == "master key")
                     {
@@ -97,7 +97,7 @@
                 </div>
                 @if (Utility.IsMainMenuHidden)
                 {
-                    <div class="act-box" @onmouseover='@( () => ShowPopup("create groups") )' @onmouseout='@( () => HidePopup() )' @onclick="viewModel.RedirectToAccountSite">
+                    <div class="act-box" @onmouseover='@( () => ShowPopup("create groups") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.RedirectToAccountSite">
                         <img class="act-img grp-act" src="" alt="grp-img" /><span class="text-size">Create groups</span>
                         @if (isHovered && hoveredElement == "create groups")
                         {
@@ -108,9 +108,9 @@
                     </div>
                 }
             }
-            @if (viewModel.IsFilesPending)
+            @if (homeActionModel.IsFilesPending)
             {
-                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => ShowPopup("clean") )' @onmouseout='@( () => HidePopup() )' @onclick="(e) => viewModel.CleanAndRemoveOpenFilesButton_Click(e)">
+                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => ShowPopup("clean") )' @onmouseout='@( () => HidePopup() )' @onclick="(e) => homeActionModel.CleanAndRemoveOpenFilesButton_Click(e)">
                     <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">Clean</span>
                     @if (isHovered && hoveredElement == "clean")
                     {
@@ -120,7 +120,7 @@
                     }
                 </div>
             }
-            @if (Utility.IsMainMenuHidden && viewModel.SubscriptionLevel == SubscriptionLevel.Free)
+            @if (Utility.IsMainMenuHidden && homeActionModel.SubscriptionLevel == SubscriptionLevel.Free)
             {
                 <div class="info-box" style="margin-top:17px; padding: 7px 5px;">
                     <table>
@@ -146,7 +146,7 @@
         </div>
     </div>
     <div>
-        @if (viewModel.SubscriptionLevel == SubscriptionLevel.Premium)
+        @if (homeActionModel.SubscriptionLevel == SubscriptionLevel.Premium)
         {
             <div style="display: block;">
                 <div style="display:flex; min-width: 331px;">
@@ -160,7 +160,7 @@
                             <br />
                             <span class="sub-text">For someone else</span>
                         </div>
-                        <button @onclick="viewModel.BuyForSomeoneElseLink" class="buy-button"> Buy</button>
+                        <button @onclick="homeActionModel.BuyForSomeoneElseLink" class="buy-button"> Buy</button>
                     </div>
                     <div class="sub-box" style="background-color: #000000; margin-left:15px;">
                         <div style="padding: 10px 20px; line-height:12px;">
@@ -170,12 +170,12 @@
                             <span class="sub-text">For organisations</span>
 
                         </div>
-                        <button @onclick="viewModel.ChangeSubscriptionToBusinessLink" class="buy-button"> Change</button>
+                        <button @onclick="homeActionModel.ChangeSubscriptionToBusinessLink" class="buy-button"> Change</button>
                     </div>
                 </div>
             </div>
         }
-        else if (viewModel.SubscriptionLevel == SubscriptionLevel.Business)
+        else if (homeActionModel.SubscriptionLevel == SubscriptionLevel.Business)
         {
             <div>
                 <label class="fle-nme fnt-sze" style="padding-bottom:20px;">Active subscriptions</label>
@@ -184,18 +184,18 @@
                 <div class="battery-head"> </div>
                 <div class="battery-body" id="battery-body">
                 <div class="charge-level">
-                <span style="text-align: center; margin:auto auto;"> @viewModel.MembersCount/<span style="font-weight:bold;">@viewModel.TotalMembers</span></span>
+                <span style="text-align: center; margin:auto auto;"> @homeActionModel.MembersCount/<span style="font-weight:bold;">@homeActionModel.TotalMembers</span></span>
                 </div>
                 </div>
                 </div> *@
                     <div class="center-column" style="margin-left: 47px;">
-                        <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="viewModel.RedirectToAccountWebUrl">Renew<img class="rnw-btn" src="" alt="img" /></button>
+                        <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="homeActionModel.RedirectToAccountWebUrl">Renew<img class="rnw-btn" src="" alt="img" /></button>
                         <button class="subs-btn" style="background-color: #000;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">Add users<img class="add-usr" src="" alt="img" /></button>
                     </div>
                 </div>
             </div>
         }
-        else if (viewModel.SubscriptionLevel == SubscriptionLevel.Free)
+        else if (homeActionModel.SubscriptionLevel == SubscriptionLevel.Free)
         {
             <div class="upgrd-box free-color">
                 <img class="img-upgrdpl" src="" alt="" />
@@ -203,7 +203,7 @@
                     <label class="unlck-txt">
                         Unlock our amazing <span>features</span> developed to <span>empower your security!</span>
                     </label>
-                    <button class="upgrd-btn font-medium btn-large" @onclick="()=>viewModel.UpgradeDialog()" style="height: 37px;"> Upgrade now</button>
+                    <button class="upgrd-btn font-medium btn-large" @onclick="()=>homeActionModel.UpgradeDialog()" style="height: 37px;"> Upgrade now</button>
                 </div>
             </div>
         }
@@ -211,18 +211,18 @@
 </div>
 
 <div class="mre-act-sec">
-    @if (viewModel.SubscriptionLevel != SubscriptionLevel.Free)
+    @if (homeActionModel.SubscriptionLevel != SubscriptionLevel.Free)
     {
         <div style="display:block;">
             <label class="fle-nme fnt-sze">Cloud services</label>
             <div style="display: flex;">
-                @foreach (KnownFolder? knownFolder in viewModel?.KnownFoldersViewModel?.KnownFolders)
+                @foreach (KnownFolder? knownFolder in homeActionModel?.KnownFoldersViewModel?.KnownFolders!)
                 {
                     <div>
-                        <button @onclick="() => viewModel.OnCloudServiceButtonClick(knownFolder)"
+                        <button @onclick="() => homeActionModel.OnCloudServiceButtonClick(knownFolder)"
                                 class="assets-box"
-                                style="background-color:@(knownFolder.Enabled ? _ENABLEDTOOLSTRIPBACKCOLOR : viewModel.DisabledBackColor)">
-                            <img class="icon @viewModel.GetIconClass(knownFolder.DisplayName)" src="" alt="@knownFolder.DisplayName" />
+                                style="background-color:@(knownFolder.Enabled ? _ENABLEDTOOLSTRIPBACKCOLOR : homeActionModel.DisabledBackColor)">
+                            <img class="icon @homeActionModel.GetIconClass(knownFolder.DisplayName)" src="" alt="@knownFolder.DisplayName" />
                         </button>
                     </div>
                 }
@@ -232,17 +232,17 @@
     <div class="medium-9" style="display:block;">
         <label class="fle-nme fnt-sze">More actions</label>
         <div style="display: flex; gap: 2%;">
-            @if (viewModel.SubscriptionLevel != SubscriptionLevel.Free)
+            @if (homeActionModel.SubscriptionLevel != SubscriptionLevel.Free)
             {
-                <div class="mre-actn-box" @onclick="(e)=> viewModel.RandomRenameAsync(e)">
+                <div class="mre-actn-box" @onclick="(e)=> homeActionModel.RandomRenameAsync(e)">
                     <img class="ico-eye-sml" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.AnonymousRenameMenuText</span>
                 </div>
-                <div class="mre-actn-box" @onclick="(e)=> viewModel.SecureWipeFiles(e)">
+                <div class="mre-actn-box" @onclick="(e)=> homeActionModel.SecureWipeFiles(e)">
                     <img class="ico-dlt" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
                 </div>
-                <div class="mre-actn-box" @onclick="viewModel.EncryptionUpgrade">
+                <div class="mre-actn-box" @onclick="homeActionModel.EncryptionUpgrade">
                     <img class="ico-apikey" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
                 </div>
@@ -252,15 +252,15 @@
             }
             else
             {
-                <div class="mre-actn-box atn-bgclr" @onclick="viewModel.AlwaysOfflineForFreeUser">
+                <div class="mre-actn-box atn-bgclr" @onclick="homeActionModel.AlwaysOfflineForFreeUser">
                     <img class="ico-offln" src="" alt="hand-img" />
                     <span class="text-size text-style">Always offline</span>
                 </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>viewModel.InviteUser(e)">
+                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>homeActionModel.InviteUser(e)">
                     <img class="ico-invtfrd" src="" alt="hand-img" />
                     <span class="text-size text-style">Invite friend</span>
                 </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="()=> viewModel.UpgradeDialog()">
+                <div class="mre-actn-box atn-bgclr" @onclick="()=> homeActionModel.UpgradeDialog()">
                     <img class="ico-apikey" src="" alt="hand-img" />
                     <span class="text-size text-style">Upgrade files to AES-256</span>
                 </div>
@@ -271,7 +271,7 @@
 <div>
     @if (Utility.IsMainMenuHidden)
     {
-        @if (viewModel.SubscriptionLevel != SubscriptionLevel.Free)
+        @if (homeActionModel.SubscriptionLevel != SubscriptionLevel.Free)
         {
             <AxCrypt.App.Windows.Components.Pages.PopupDialog.Suggestion />
         }
@@ -283,8 +283,8 @@
 </div>
 
 @code {
-    [Parameter]
-    public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; }
+    // [Parameter]
+    // public ObservableCollection<FileDetails>? SelectedRecentFiles { get; set; }
 
     public const string _ENABLEDTOOLSTRIPBACKCOLOR = "#FFFFFF";
     public string hoveredElement { get; set; } = string.Empty;
@@ -292,8 +292,8 @@
 
     protected override void OnInitialized()
     {
-        viewModel.Initialized();
-        viewModel.SelectedRecentFiles = SelectedRecentFiles;
+        homeActionModel?.Initialized();
+        //homeActionModel!.SelectedRecentFiles = SelectedRecentFiles!;
         Utility.OnIsMainMenuHiddenChanged += UpdateState;
         base.OnInitialized();
     }

@@ -33,10 +33,6 @@ using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 using static AxCrypt.Common.FrameworkTypeExtensions;
 
@@ -154,16 +150,16 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task EncryptFilesActionAsync(IEnumerable<string> files)
         {
-            if (files == null || !files.Any())
-            {
-                files = await SelectFiles(FileSelectionType.Encrypt);
-            }
+            //    if (files == null || !files.Any())
+            //    {
+            //        files = await SelectFiles(FileSelectionType.Encrypt);
+            //    }
 
-            await EncryptFilesInternalActionAsync(files);
-        }
-        
-        private async Task EncryptFilesInternalActionAsync(IEnumerable<string> files)
-        {
+            //    await EncryptFilesInternalActionAsync(files);
+            //}
+
+            //private async Task EncryptFilesInternalActionAsync(IEnumerable<string> files)
+            //{
             files = files ?? await SelectFiles(FileSelectionType.Encrypt);
             if (!files.Any())
             {
@@ -214,7 +210,7 @@ namespace AxCrypt.Core.UI.ViewModel
         }
 
         private async Task RandomRenameFilesActionAsync(IEnumerable<string> files)
-        { 
+        {
             files = files ?? await SelectFiles(FileSelectionType.Rename);
             if (!files.Any())
             {

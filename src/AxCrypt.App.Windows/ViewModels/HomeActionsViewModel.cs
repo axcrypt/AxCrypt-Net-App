@@ -1,21 +1,16 @@
 ﻿using AxCrypt.Api.Model;
-using AxCrypt.App.Components.ViewModels;
+using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Windows.Services;
+using AxCrypt.Common;
+using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
-using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
-using AxCrypt.Core;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components;
-using System.Collections.ObjectModel;
-using AxCrypt.Common;
-using AxCrypt.Core.Extensions;
-using AxCrypt.App.Components.Services.Interface;
-using AxCrypt.Content;
-using AxCrypt.App.Components.Models;
-
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
@@ -29,14 +24,17 @@ public class HomeActionsViewModel : ComponentBase
     private IStatusAlertService _statusAlertService;
     private ShareKeyViewModel? _sharekeyViewModel;
 
-    [Parameter]
-    public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
+    //public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
     public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }
 
     public int MembersCount { get; set; }
     public int TotalMembers { get; set; }
     public string? DisabledBackColor { get; set; }
     public bool IsFilesPending { get; set; }
+
+    public bool EncryptButtonEnabled { get; set; }
+
+    public bool KeyShareButtonEnabled { get; set; }
 
     public HomeActionsViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel, IStatusAlertService statusAlertService)
     {
@@ -52,6 +50,9 @@ public class HomeActionsViewModel : ComponentBase
         _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
         _fileSystemState = Resolve.FileSystemState;
 
+        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureKeyShareMenusAsync(license); });
+
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { EncryptButtonEnabled = enabled; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { IsFilesPending = areFilesPending; });
 
         KnownFoldersViewModel.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
@@ -68,89 +69,63 @@ public class HomeActionsViewModel : ComponentBase
 
     public async Task OpenFile()
     {
-        if (SelectedRecentFiles.Any())
-        {
-            await _fileOperationViewModel.OpenFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
-            return;
-        }
+        //if (SelectedRecentFiles.Any())
+        //{
+        //    await _fileOperationViewModel.OpenFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
+        //    return;
+        //}
 
-        await _fileOperationViewModel.OpenFiles.ExecuteAsync(null);
+        //await _fileOperationViewModel.OpenFiles.ExecuteAsync(null);
+
+        await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(string.Empty);
     }
 
     public async Task SecureFile()
     {
-        if (SelectedRecentFiles.Any())
-        {
-            await _fileOperationViewModel.EncryptFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
-            return;
-        }
+        //if (SelectedRecentFiles.Any())
+        //{
+        //    await _fileOperationViewModel.EncryptFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
+        //    return;
+        //}
 
+        //await _fileOperationViewModel.EncryptFiles.ExecuteAsync(null);
         await _fileOperationViewModel.EncryptFiles.ExecuteAsync(null);
     }
 
     public async Task StopSecuringFile()
     {
-        if (SelectedRecentFiles.Any())
-        {
-            await _fileOperationViewModel.DecryptFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
-            return;
-        }
+        //if (SelectedRecentFiles.Any())
+        //{
+        //    await _fileOperationViewModel.DecryptFiles.ExecuteAsync(SelectedRecentFiles.Select(fi => fi.FilePath));
+        //    return;
+        //}
 
+        //await _fileOperationViewModel.DecryptFiles.ExecuteAsync(null);
         await _fileOperationViewModel.DecryptFiles.ExecuteAsync(null);
     }
 
     public async void ShareKeysAsync(EventArgs e)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeysWithFileSelectionAsync(SelectedRecentFiles); }, null, e);
-    }
+        //await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeysWithFileSelectionAsync(SelectedRecentFiles); }, null, e);
 
-    private async Task ShareKeysWithFileSelectionAsync(IEnumerable<FileDetails> fileNames)
-    {
-        IEnumerable<string> selectedRecentFiles = fileNames?.Select(f => f.FilePath) ?? Enumerable.Empty<string>();
-
-        if (selectedRecentFiles.Count() == 0)
-        {
-            IEnumerable<FileResult> pickResult = await FilePicker.PickMultipleAsync(new PickOptions
-            {
-                PickerTitle = "Please select files",
-            });
-
-            selectedRecentFiles = pickResult?.Select(f => f.FullPath).ToList() ?? Enumerable.Empty<string>();
-
-            if (!selectedRecentFiles.Any())
-            {
-                return;
-            }
-        }
-
-        IEnumerable<string> encryptableFileNames = selectedRecentFiles.Where(f => New<IDataStore>(f).IsEncryptable());
-        if (encryptableFileNames != null && encryptableFileNames.Any())
-        {
-            PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "There are some unencrypted files also selected for key sharing. AxCrypt will encrypt and then key share the selected files. Would you like to continue to proceed?");
-            if (click != PopupButtons.Ok)
-            {
-                return;
-            }
-        }
-
-        IEnumerable<string> encryptedFileNames = selectedRecentFiles.Where(f => New<IDataStore>(f).IsEncrypted());
-        SharingListViewModel sharingListViewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, New<KnownIdentities>().DefaultEncryptionIdentity);
-        _sharekeyViewModel.SetSelectedFilesOrFolders(encryptedFileNames, sharingListViewModel);
-
-        if (encryptableFileNames != null && encryptableFileNames.Any())
-        {
-            _fileOperationViewModel.Recipients = sharingListViewModel.SharedWith;
-            await _fileOperationViewModel.EncryptFiles.ExecuteAsync(encryptableFileNames);
-            _fileOperationViewModel.Recipients = null;
-        }
-
-        await sharingListViewModel.ShareFiles.ExecuteAsync(null);
-        SelectedRecentFiles.Clear();
+        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeyService.ShareKeysWithFileSelectionAsync(_mainViewModel!.SelectedRecentFiles); }, null, e);
     }
 
     public async void CleanAndRemoveOpenFilesButton_Click(EventArgs e)
     {
         await EncryptPendingFiles();
+    }
+
+    private async Task ConfigureKeyShareMenusAsync(LicenseCapabilities license)
+    {
+        if (license.Has(LicenseCapability.KeySharing))
+        {
+            KeyShareButtonEnabled = true;
+        }
+        else
+        {
+            KeyShareButtonEnabled = false;
+        }
     }
 
     private async Task EncryptPendingFiles()

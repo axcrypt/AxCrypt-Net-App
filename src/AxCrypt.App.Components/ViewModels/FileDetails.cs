@@ -1,67 +1,60 @@
-﻿using AxCrypt.Abstractions;
+﻿using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
-using AxCrypt.Core.IO;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
+using System.Globalization;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Core;
 
 namespace AxCrypt.App.Components.ViewModels;
 
 public class FileDetails : Core.UI.ViewModel.ViewModelBase
 {
-    private ActiveFile _activeFile;
-    private LogOnIdentity _identity;
-
-    public FileDetails()
-    {
-        SharedWith = new List<string>();
-    }
-
     public FileDetails(ActiveFile file)
     {
         if (file == null)
         {
             throw new ArgumentNullException(nameof(file));
         }
-        _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
 
-        _activeFile = file;
+        InitializeListItemProperties(file);
+    }
+
+    private void InitializeListItemProperties(ActiveFile file)
+    {
         FileName = file.DecryptedFileInfo.Name;
-        FileSize = _activeFile.Size();
-        FileExtension = Path.GetExtension(file.DecryptedFileInfo.Name);
-        LastModifiedDate = file.Properties.LastActivityTimeUtc.ToString();
-        LastAccessedDate = file.DecryptedFileInfo.LastAccessTimeUtc.ToString();
+        FileSize = file.Size();
         Algorithm = Resolve.CryptoFactory.Create(file.Properties.CryptoId).Name;
+        LastModifiedDate = file.EncryptedFileInfo.LastWriteTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture);
         FilePath = file.EncryptedFileInfo.FullName;
-        SharedWith = LoadPropertiesAsync(_activeFile);
+        CleanUpNeeded = file.IsDecrypted;
+
+        FileExtension = Path.GetExtension(file.DecryptedFileInfo.Name);
+        LastAccessedDate = file.Properties.LastActivityTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture);
+
+        InitializeOtherProperties(file);
     }
 
-    private IReadOnlyCollection<string> LoadPropertiesAsync(ActiveFile activeFile)
+    private void InitializeOtherProperties(ActiveFile activeFile)
     {
-        if (!activeFile.IsShared && !activeFile.IsMasterKeyShared)
-        {
-            return new List<string>();
-        }
+        LogOnIdentity decryptIdentity = ValidateActiveFileIdentity(activeFile.Identity);
+        IAxCryptDocument document = activeFile.EncryptedFileInfo.GetAxCryptDocument(decryptIdentity);
 
-        string ownAccount = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
-        EncryptedProperties properties = LoadProperties(activeFile.EncryptedFileInfo, activeFile.Identity);
-        if (properties == null)
+        IEnumerable<string> keySharedUsers = document.AsymmetricRecipients.Select(ksr => ksr.Email.Address).Distinct().Skip(1);
+        if (keySharedUsers.Any())
         {
-            return new List<string>();
+            SharedWith = keySharedUsers.ToList();
         }
-
-        return properties.SharedKeyHolders.Select(key => key.Email.Address).Where(address => address != ownAccount).ToList().Any() ? properties.SharedKeyHolders.Select(key => key.Email.Address).Where(address => address != ownAccount).ToList() : new List<string>();
     }
 
-    public EncryptedProperties LoadProperties(IDataStore file, LogOnIdentity identity)
+    private static LogOnIdentity ValidateActiveFileIdentity(LogOnIdentity activeFileIdentity)
     {
-        if (identity == LogOnIdentity.Empty)
+        if (activeFileIdentity != LogOnIdentity.Empty)
         {
-            identity = New<KnownIdentities>().DefaultEncryptionIdentity;
+            return activeFileIdentity;
         }
 
-        return EncryptedProperties.Create(file, identity);
+        return New<KnownIdentities>().DefaultEncryptionIdentity;
     }
 
     public string FileName
@@ -76,34 +69,16 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
         set { SetProperty(nameof(FileSize), value); }
     }
 
-    public string FileSizeFormatted
+    public string Algorithm
     {
-        get { return GetProperty<string>(nameof(FileSizeFormatted)); }
-        set { SetProperty(nameof(FileSizeFormatted), value); }
-    }
-
-    public string FileExtension
-    {
-        get { return GetProperty<string>(nameof(FileExtension)); }
-        set { SetProperty(nameof(FileExtension), value); }
+        get { return GetProperty<string>(nameof(Algorithm)); }
+        set { SetProperty(nameof(Algorithm), value); }
     }
 
     public string LastModifiedDate
     {
         get { return GetProperty<string>(nameof(LastModifiedDate)); }
         set { SetProperty(nameof(LastModifiedDate), value); }
-    }
-
-    public string LastAccessedDate
-    {
-        get { return GetProperty<string>(nameof(LastAccessedDate)); }
-        set { SetProperty(nameof(LastAccessedDate), value); }
-    }
-
-    public string Algorithm
-    {
-        get { return GetProperty<string>(nameof(Algorithm)); }
-        set { SetProperty(nameof(Algorithm), value); }
     }
 
     public string FilePath
@@ -118,66 +93,42 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
         set { SetProperty(nameof(IsChecked), value); }
     }
 
+    public bool CleanUpNeeded
+    {
+        get { return GetProperty<bool>(nameof(CleanUpNeeded)); }
+        set { SetProperty(nameof(CleanUpNeeded), value); }
+    }
+
     public IReadOnlyCollection<string> SharedWith
     {
         get { return GetProperty<IReadOnlyCollection<string>>(nameof(SharedWith)); }
         set { SetProperty(nameof(SharedWith), value); }
     }
 
-    public ActiveFile ActiveFile
+    public string FileExtension
     {
-        get
-        {
-            return _activeFile;
-        }
+        get { return GetProperty<string>(nameof(FileExtension)); }
+        set { SetProperty(nameof(FileExtension), value); }
     }
 
-    private async void LoadPropertiesAsync()
+    public string LastAccessedDate
     {
-        if (!_activeFile.IsShared && !_activeFile.IsMasterKeyShared)
-        {
-            return;
-        }
-
-        string ownAccount = _identity.UserEmail.Address;
-        EncryptedProperties properties = await LoadPropertiesAsync(_activeFile.EncryptedFileInfo, _activeFile.Identity);
-        if (properties == null)
-        {
-            return;
-        }
-        SharedWith = properties.SharedKeyHolders.Select(key => key.Email.Address).Where(address => address != ownAccount).ToList().Any() ? properties.SharedKeyHolders.Select(key => key.Email.Address).Where(address => address != ownAccount).ToList() : new List<string>();
+        get { return GetProperty<string>(nameof(LastAccessedDate)); }
+        set { SetProperty(nameof(LastAccessedDate), value); }
     }
 
-    public async Task<EncryptedProperties> LoadPropertiesAsync(IDataStore file, LogOnIdentity identity)
-    {
-        try
-        {
-            if (identity == LogOnIdentity.Empty)
-            {
-                identity = New<KnownIdentities>().DefaultEncryptionIdentity;
-            }
+    //public override bool Equals(object obj)
+    //{
+    //    if (obj == null || GetType() != obj.GetType())
+    //    {
+    //        return false;
+    //    }
+    //    FileDetails other = (FileDetails)obj;
+    //    return FileName == other.FileName && FilePath == other.FilePath;
+    //}
 
-            return EncryptedProperties.Create(file, identity);
-        }
-        catch (Exception ex)
-        {
-            New<IReport>().Exception(ex);
-            return null;
-        }
-    }
-
-    public override bool Equals(object obj)
-    {
-        if (obj == null || GetType() != obj.GetType())
-        {
-            return false;
-        }
-        FileDetails other = (FileDetails)obj;
-        return FileName == other.FileName && FilePath == other.FilePath;
-    }
-
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(FileName, FilePath);
-    }
+    //public override int GetHashCode()
+    //{
+    //    return HashCode.Combine(FileName, FilePath);
+    //}
 }
