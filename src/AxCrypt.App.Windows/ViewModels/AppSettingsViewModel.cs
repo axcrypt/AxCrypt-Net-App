@@ -18,6 +18,7 @@ using AxCrypt.App.Components.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Api.Model;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -29,13 +30,14 @@ public class AppSettingsViewModel : ViewModelBase
     private ManageAccountViewModel? _viewModel;
     private IExportKeyManagementFile? ExportKeyFile;
     private RecentFilesViewModel? _recentFilesViewModel;
+
     private bool hideRecentFiles;
     private bool isDateModifiedOn;
     private bool isFileNameOn;
 
-    public AppSettingsViewModel(LogOnViewModel logOnViewModel, RecentFilesViewModel recentFilesViewModel)
+    public AppSettingsViewModel(RecentFilesViewModel recentFilesViewModel)
     {
-        _logOnViewModel = logOnViewModel;
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!; 
         _mainViewModel = _logOnViewModel.MainViewModel;
         _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
         _recentFilesViewModel = recentFilesViewModel;

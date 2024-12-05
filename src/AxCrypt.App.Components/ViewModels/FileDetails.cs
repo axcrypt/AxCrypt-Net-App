@@ -32,6 +32,8 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
         FileExtension = Path.GetExtension(file.DecryptedFileInfo.Name);
         LastAccessedDate = file.Properties.LastActivityTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture);
         SharedWith = new List<string>();
+
+        SetIconClass(file);
         InitializeOtherProperties(file);
     }
 
@@ -119,6 +121,25 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
     {
         get { return GetProperty<string>(nameof(LastAccessedDate)); }
         set { SetProperty(nameof(LastAccessedDate), value); }
+    }
+
+    public string IconClass
+    {
+        get { return GetProperty<string>(nameof(IconClass)); }
+        set { SetProperty(nameof(IconClass), value); }
+    }
+
+    private void SetIconClass(ActiveFile activeFile)
+    {
+        string fileExtension = Path.GetExtension(activeFile.DecryptedFileInfo.Name);
+
+        if (activeFile.IsDecrypted)
+        {
+            IconClass = "file-dec-icon";
+            return;
+        }
+
+        IconClass = !string.IsNullOrEmpty(fileExtension) ? fileExtension.Replace(".", "") : "file-ext-def-icon";
     }
 
     //public override bool Equals(object obj)

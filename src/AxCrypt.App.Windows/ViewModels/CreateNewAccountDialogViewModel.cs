@@ -1,5 +1,6 @@
 ﻿using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Utility;
+using AxCrypt.App.Windows.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Service;
@@ -16,9 +17,9 @@ public class CreateNewAccountDialogViewModel : ViewModelBase
     private LogOnViewModel _logOnViewModel;
     public bool IsCreating = false;
 
-    public CreateNewAccountDialogViewModel(LogOnViewModel logOnViewModel)
+    public CreateNewAccountDialogViewModel()
     {
-        _logOnViewModel = logOnViewModel;
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!; 
     }
 
     public void SetCreateNewAccount(string passPhrase, EmailAddress email)

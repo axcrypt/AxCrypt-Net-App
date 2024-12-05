@@ -22,7 +22,6 @@ public class LogOnViewModel : ViewModelBase
         ImportPrivatePasswordDialog = new CommonDialogService();
         RenewSubscriptionDialog = new CommonDialogService();
         CreateNewAccountDialog = new CommonDialogService();
-        FilePasswordDialog = new CommonDialogService();
         VerifyAccountDialog = new CommonDialogService();
         VerifyPasswordDialog = new CommonDialogService();
         AboutDialog = new CommonDialogService();
@@ -66,8 +65,6 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService RenewSubscriptionDialog { get { return GetProperty<CommonDialogService>(nameof(RenewSubscriptionDialog)); } set { SetProperty(nameof(RenewSubscriptionDialog), value); } }
 
     public CommonDialogService CreateNewAccountDialog { get { return GetProperty<CommonDialogService>(nameof(CreateNewAccountDialog)); } set { SetProperty(nameof(CreateNewAccountDialog), value); } }
-
-    public CommonDialogService FilePasswordDialog { get { return GetProperty<CommonDialogService>(nameof(FilePasswordDialog)); } set { SetProperty(nameof(FilePasswordDialog), value); } }
 
     public CommonDialogService VerifyAccountDialog { get { return GetProperty<CommonDialogService>(nameof(VerifyAccountDialog)); } set { SetProperty(nameof(VerifyAccountDialog), value); } }
 

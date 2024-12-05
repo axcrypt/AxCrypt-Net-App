@@ -62,7 +62,7 @@
                                         <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectFile(e, fileDetails.FilePath)" checked="@RecentFilesViewModel.SelectAllChecked" />
                                     </td>
                                     <td class="fle-exton-img" style="display: flex; align-items: center;">
-                                        <img style="width: 25px; height: 25px;" class="@IconClass(fileDetails.FileExtension)" src="" alt="file-image" />
+                                        <img style="width: 25px; height: 25px;" class="@fileDetails.IconClass" src="" alt="file-image" />
                                         <span class="fle-nme">@fileDetails.FileName</span>
                                     </td>
                                     <td>@fileDetails.FileSize</td>
@@ -161,11 +161,6 @@
         {
             //IsLoading = false;
         }
-    }
-
-    private string IconClass(string fileExtension)
-    {
-        return !string.IsNullOrEmpty(fileExtension) ? fileExtension.Replace(".", "") : "file-ext-def-icon";
     }
 
     private void UpdatePageState()

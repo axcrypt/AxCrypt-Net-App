@@ -12,6 +12,7 @@ using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -36,9 +37,10 @@ public class HomeActionsViewModel : ComponentBase
 
     public bool KeyShareButtonEnabled { get; set; }
 
-    public HomeActionsViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel, IStatusAlertService statusAlertService)
+    //public HomeActionsViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel, IStatusAlertService statusAlertService)
+    public HomeActionsViewModel(ShareKeyViewModel shareKeyViewModel, IStatusAlertService statusAlertService)
     {
-        _logOnViewModel = logOnViewModel;
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
         _sharekeyViewModel = shareKeyViewModel;
         _statusAlertService = statusAlertService;
         KnownFoldersViewModel = New<KnownFoldersViewModel>();

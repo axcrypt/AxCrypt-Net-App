@@ -32,9 +32,9 @@ public class ProfileViewModel
     public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<INow>().Utc.AddDays(Account.DaysLeft).ToString("dd MMM yyyy");
     public bool keyMPopup { get; set; }
 
-    public ProfileViewModel(LogOnViewModel logOnModel)
+    public ProfileViewModel()
     {
-        _logOnViewModel = logOnModel;
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
         Account = new AccountModel();
     }
 

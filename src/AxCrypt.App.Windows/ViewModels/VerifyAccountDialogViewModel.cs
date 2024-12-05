@@ -1,5 +1,6 @@
 ﻿using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Utility;
+using AxCrypt.App.Windows.Services;
 using AxCrypt.Content;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.UI;
@@ -15,9 +16,9 @@ public class VerifyAccountDialogViewModel
     private VerifyAccountViewModel _viewModel;
     private LogOnViewModel _logOnViewModel;
 
-    public VerifyAccountDialogViewModel(LogOnViewModel logOnViewModel)
+    public VerifyAccountDialogViewModel()
     {
-        _logOnViewModel = logOnViewModel;
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!; 
     }
 
     public void SetVerifyAccount(VerifyAccountViewModel viewModel)

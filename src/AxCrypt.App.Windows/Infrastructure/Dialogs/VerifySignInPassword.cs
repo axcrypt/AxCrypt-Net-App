@@ -22,7 +22,7 @@ public class VerifySignInPassword : VerifySignInPasswordBase
     protected override bool VerifyDialog(string description)
     {
         ProcessIndicatorService processIndicatorService = new ProcessIndicatorService();
-        _verifyPasswordViewModel = new VerifyPasswordViewModel(new LogOnViewModel(processIndicatorService));
+        _verifyPasswordViewModel = new VerifyPasswordViewModel();
         VerifySignInPasswordViewModel viewModel = new VerifySignInPasswordViewModel(New<KnownIdentities>().DefaultEncryptionIdentity);
         _verifyPasswordViewModel.SetViewPassword(viewModel,description);
         //_logOnViewModel.VerifyPasswordDialog.Show();
