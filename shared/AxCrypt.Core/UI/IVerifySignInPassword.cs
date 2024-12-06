@@ -6,6 +6,6 @@ namespace AxCrypt.Core.UI
 {
     public interface IVerifySignInPassword
     {
-        bool Verify(string description);
+        Task<bool> Verify(string description);
     }
 }

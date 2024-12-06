@@ -192,15 +192,15 @@ public class HomeActionsViewModel : ComponentBase
         New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/"));
     }
 
-    public void BuyForSomeoneElseLink()
-    {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/Premium/CreateSubscription"));
-    }
+    //public void BuyForSomeoneElseLink()
+    //{
+    //    //New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/Premium/CreateSubscription"));
+    //}
 
-    public void ChangeSubscriptionToBusinessLink()
-    {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/HomeBusiness/CreateSubscription"));
-    }
+    //public void ChangeSubscriptionToBusinessLink()
+    //{
+    //    New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/HomeBusiness/CreateSubscription"));
+    //}
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {

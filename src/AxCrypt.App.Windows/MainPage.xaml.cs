@@ -78,6 +78,7 @@ public partial class MainPage : ContentPage, ISignIn
 
         _logOnService.MainViewModel = _mainViewModel;
         _logOnService.FileOperationViewModel = _fileOperationViewModel;
+        //InitializeMouseDownFilter();
 
         await SignInAsync();
     }
@@ -127,12 +128,13 @@ public partial class MainPage : ContentPage, ISignIn
     {
         //_encryptToolStripButton.Tag = _fileOperationViewModel.EncryptFiles;
         _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
-        //_fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
-        _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await HandleLogOn(e);
+        _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
+        //_fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await HandleLogOn(e);
         _logOnService.OnLogOnOrLogOffAndLogOnAgain = async () => await New<IUIThread>().SendToAsync(async () => await LogOnOrLogOffAndLogOnAgainAsync());
+        //_logOnService.OnLogOnOrLogOffAndLogOnAgain = async () => await LogOnOrLogOffAndLogOnAgainAsync();
         _fileOperationViewModel.SelectingFiles += (sender, e) => New<IUIThread>().SendTo(async () => { bool fileSelected = await New<IDataItemSelection>().HandleSelection(e); });
 
-        _fileOperationViewModel.ToggleEncryptionUpgradeMode += (sender, e) => New<IUIThread>().SendTo(() => ToggleEncryptionUpgradeMode());
+        _fileOperationViewModel.ToggleEncryptionUpgradeMode += async (sender, e) => await ToggleEncryptionUpgradeMode();
         //_inviteUserToolStripMenuItem.Click += async (sender, e) => { await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await InviteUserAsync(); }, sender, e); };
         //_recentFilesListView.DragDrop += async (sender, e) => { await DropFilesOrFoldersInRecentFilesListViewAsync(); };
         //_secretsToolStripButton.Click += async (sender, e) => { await PremiumFeature_ClickAsync(LicenseCapability.PasswordManagement, (ss, ee) => { BrowseUtility.RedirectToSecretsUrl(Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address); return Task.FromResult<object>(null); }, sender, e); };
@@ -218,9 +220,7 @@ public partial class MainPage : ContentPage, ISignIn
         try
         {
             string windowTitle = await new Display().WindowTitleTextAsync(isLoggedOn);
-            //Application.Current.Windows.First().SetValue(Window.TitleProperty, windowTitle);
-            Application.Current.Windows.First().Title = windowTitle;
-            //App.Current.Windows.FirstOrDefault().Title = windowTitle;
+            Application.Current.Windows.FirstOrDefault().Title = windowTitle; 
         }
         catch (Exception ex)
         {
@@ -523,7 +523,7 @@ public partial class MainPage : ContentPage, ISignIn
         }
     }
 
-    private void ToggleEncryptionUpgradeMode()
+    private async Task ToggleEncryptionUpgradeMode()
     {
         if (_mainViewModel.EncryptionUpgradeMode == EncryptionUpgradeMode.AutoUpgrade)
         {
@@ -531,7 +531,7 @@ public partial class MainPage : ContentPage, ISignIn
             return;
         }
 
-        if (!New<IVerifySignInPassword>().Verify(Texts.LegacyConversionVerificationPrompt))
+        if (!await New<IVerifySignInPassword>().Verify(Texts.LegacyConversionVerificationPrompt))
         {
             return;
         }
@@ -552,4 +552,15 @@ public partial class MainPage : ContentPage, ISignIn
         //_optionsDebugToolStripMenuItem.Checked = enabled;
         //_debugToolStripMenuItem.Visible = enabled;
     }
+
+    private void InitializeMouseDownFilter()
+    {
+        New<MouseDownFilter>().FormClicked += AxCryptMainForm_ClickAsync;
+    }
+
+    private async void AxCryptMainForm_ClickAsync(object sender, EventArgs e)
+    {
+        New<InactivitySignOut>().RestartInactivityTimer();
+    }
+
 }

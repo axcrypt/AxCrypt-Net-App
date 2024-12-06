@@ -8,18 +8,17 @@ namespace AxCrypt.Core.UI
 {
     public abstract class VerifySignInPasswordBase : IVerifySignInPassword
     {
-        public bool Verify(string description)
+        public async Task<bool> Verify(string description)
         {
             if (!New<KnownIdentities>().IsLoggedOn)
             {
                 return false;
             }
 
-            bool isVerified = false;
-            New<IUIThread>().SendTo(() => isVerified = VerifyDialog(description));
+            bool isVerified = await VerifyDialog(description);
             return isVerified;
         }
 
-        protected abstract bool VerifyDialog(string description);
+        protected abstract Task<bool> VerifyDialog(string description);
     }
 }

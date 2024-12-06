@@ -245,7 +245,7 @@ public class ProfileViewModel
     {
         if (_mainViewModel.DecryptedFiles.Any())
         {
-            await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null); 
+            await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
             return;
         }
         await new ApplicationManager().ClearAllSettings();
@@ -285,15 +285,18 @@ public class ProfileViewModel
         BrowseUtility.RedirectTo(Resolve.UserSettings.AxCrypt2HelpUrl.ToString());
     }
 
-    public async void SignOut()
+    public async Task SignOut()
     {
-        if (_mainViewModel.DecryptedFiles.Any())
+        await Task.Run(async () =>
         {
-            await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
-            return;
-        }
+            if (_mainViewModel.DecryptedFiles.Any())
+            {
+                await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
+                return;
+            }
 
-        await _logOnViewModel.InvokeLogOnOrLogOffAndLogOnAgainAsync();
+            await _logOnViewModel.InvokeLogOnOrLogOffAndLogOnAgainAsync();
+        });
     }
 
     public async void ExitMenuItem_Click(EventArgs e)

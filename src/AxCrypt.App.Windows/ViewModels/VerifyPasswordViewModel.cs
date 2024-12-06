@@ -13,42 +13,35 @@ public class VerifyPasswordViewModel
 {
     private VerifySignInPasswordViewModel _viewModel;
 
-    private string _verifyInstructionText;
+    private string? _verifyInstructionText;
 
     public LogOnViewModel LogOnViewModel { get; set; }
 
     public VerifyPasswordViewModel()
     {
-        LogOnViewModel = AxCServiceProvider.LogOnViewModel!; 
+        LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
         _viewModel = new VerifySignInPasswordViewModel(New<KnownIdentities>().DefaultEncryptionIdentity);
     }
 
-    public bool SetViewPassword(VerifySignInPasswordViewModel viewModel, string verifyInstructionText)
+    public async Task<bool> SetViewPassword(string verifyInstructionText)
     {
-        _viewModel = viewModel;
         VerifyInstructionText = verifyInstructionText;
+
+        _viewModel.BindPropertyChanged(nameof(_viewModel.ShowPassword), (bool show) => { ShowPassphrase = show; });
 
         LogOnViewModel.VerifyPasswordDialog.Show();
 
-        VerifySignInPasswordDialog_Load();
+        while (DialogResult == DialogResult.None)
+        {
+            await Task.Delay(1000);
+        }
 
-        //while (DialogResult == DialogResult.None)
-        //{
-        //    Task.Delay(1000);
-        //}
-
-        bool result = DialogResult == DialogResult.OK;
-
-        return result;
+        LogOnViewModel.VerifyPasswordDialog.Close();
+        return DialogResult == DialogResult.OK;
     }
 
-    private void VerifySignInPasswordDialog_Load()
-    {
-        _viewModel.BindPropertyChanged(nameof(_viewModel.ShowPassword), (bool show) => { ShowPassphrase = show; });
-    }
-
-    public string ErrorMessage { get; set; }
-    public string PassphraseText { get; set; }
+    public string? ErrorMessage { get; set; }
+    public string? PassphraseText { get; set; }
     public bool ShowPassphrase { get; set; }
     public DialogResult DialogResult { get; set; }
     public string VerifyInstructionText { get; set; } = Texts.ChangeOptionGenericWarning;
@@ -64,7 +57,6 @@ public class VerifyPasswordViewModel
             return;
         }
         DialogResult = DialogResult.OK;
-        VerifyInstructionText = "";
     }
 
     private bool AdHocValidationDueToMonoLimitations()

@@ -53,7 +53,7 @@ public class AdvancedOptionsViewModel : ComponentBase
             return;
         }
 
-        if (!New<IVerifySignInPassword>().Verify(Texts.ChangeOptionGenericWarning))
+        if (!await New<IVerifySignInPassword>().Verify(Texts.ChangeOptionGenericWarning))
         {
             return;
         }

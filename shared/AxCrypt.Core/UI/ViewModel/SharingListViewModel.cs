@@ -362,6 +362,11 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private static void LoadAvailableGroupPublicKeysAsync(LogOnIdentity identity)
         {
+            if (identity.UserGroupKeyPairs == null)
+            {
+                return;
+            }
+
             try
             {
                 IEnumerable<GroupKeyPairApiModel> groups = identity.UserGroupKeyPairs;

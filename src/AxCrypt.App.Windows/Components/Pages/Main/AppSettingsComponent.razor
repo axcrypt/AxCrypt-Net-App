@@ -38,7 +38,7 @@
         </div>
         <div style="float:right; padding-left:15px;">
             <label class="toggle">
-                <input type="checkbox" @bind="AppSettingsViewModel.AutoUpgradeToAES256" @onclick="AppSettingsViewModel.ToggleEncryptionUpgradeMode">
+                <input type="checkbox" @bind="AppSettingsViewModel.AutoUpgradeToAES256" @onclick="async(e)=> await AppSettingsViewModel.ToggleEncryptionUpgradeMode()">
                 <span class="slider round">
                     @if (AppSettingsViewModel.AutoUpgradeToAES256)
                     {

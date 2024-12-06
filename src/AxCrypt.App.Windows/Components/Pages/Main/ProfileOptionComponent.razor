@@ -80,8 +80,8 @@
             <span>@Texts.HelpToolStripMenuItemText</span>
             <img class="mng-accnt" src="" alt="go-back-img" style="float:right" />
         </NavLink>
-        <NavLink class="nav-link" href="">
-            <span class="log-out-clr font-medium" @onclick="()=> ProfileViewModel.SignOut()">@Texts.LogOffText</span>
+        <NavLink class="nav-link" href="" @onclick="async (e)=> await ProfileViewModel.SignOut()">
+            <span class="log-out-clr font-medium">@Texts.LogOffText</span>
         </NavLink>
         <NavLink class="nav-link" @onclick="(e)=> ProfileViewModel.ExitMenuItem_Click(e)">
             <span class="font-medium">@Texts.ExitToolStripMenuItemText</span>

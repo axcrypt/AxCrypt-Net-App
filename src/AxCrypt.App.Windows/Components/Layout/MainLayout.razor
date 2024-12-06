@@ -109,12 +109,6 @@
     {
         CanShowSignInPage = canShowSignInPage;
         UpdateUIState();
-
-        // InvokeAsync(() =>
-        // {
-        //     CanShowSignInPage = canShowSignInPage;
-        //     StateHasChanged(); // Refresh UI
-        // });
     }
 
     private async void UpdateSubscriptionState()
@@ -122,13 +116,6 @@
         SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
         await AddCssAsync(SubscriptionLevel);
         UpdateUIState();
-
-        // InvokeAsync(async () =>
-        // {
-        //     SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
-        //     await AddCssAsync(SubscriptionLevel);
-        //     StateHasChanged(); // Refresh UI
-        // });
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -146,9 +133,9 @@
         UpdateUIState();
     }
 
-    private void UpdateUIState()
+    private async void UpdateUIState()
     {
-        InvokeAsync(() =>
+        await InvokeAsync(() =>
         {
             StateHasChanged();
         });

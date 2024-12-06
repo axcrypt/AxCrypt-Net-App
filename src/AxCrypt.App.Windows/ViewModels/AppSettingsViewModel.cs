@@ -158,7 +158,7 @@ public class AppSettingsViewModel : ViewModelBase
         _recentFilesViewModel.RecentFilesList = new ObservableCollection<FileDetails>(recentFiles.Select(f => new FileDetails(f)));
     }
 
-    public void ToggleEncryptionUpgradeMode()
+    public async Task ToggleEncryptionUpgradeMode()
     {
         if (_mainViewModel.EncryptionUpgradeMode == EncryptionUpgradeMode.AutoUpgrade)
         {
@@ -166,7 +166,7 @@ public class AppSettingsViewModel : ViewModelBase
             return;
         }
 
-        if (!New<IVerifySignInPassword>().Verify(Texts.LegacyConversionVerificationPrompt))
+        if (!await New<IVerifySignInPassword>().Verify(Texts.LegacyConversionVerificationPrompt))
         {
             return;
         }
@@ -188,7 +188,7 @@ public class AppSettingsViewModel : ViewModelBase
             return;
         }
 
-        if (!New<IVerifySignInPassword>().Verify(Texts.ChangeOptionGenericWarning))
+        if (!await New<IVerifySignInPassword>().Verify(Texts.ChangeOptionGenericWarning))
         {
             return;
         }

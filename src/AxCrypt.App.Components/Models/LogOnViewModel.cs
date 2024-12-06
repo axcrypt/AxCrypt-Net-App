@@ -108,7 +108,7 @@ public class LogOnViewModel : ViewModelBase
     {
         get
         {
-            return MainViewModel.LoggedOn;
+            return MainViewModel?.LoggedOn ?? false;
         }
     }
 
