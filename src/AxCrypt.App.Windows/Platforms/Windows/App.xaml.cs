@@ -252,10 +252,10 @@ namespace AxCrypt.App.Windows.WinUI
                 ex = ex.InnerException;
             }
 
-            AlertDialog alertDialog = new AlertDialog();
-            alertDialog.Title = "Unhandled Exception";
-            alertDialog.Content = ex.Message;
-            await alertDialog.ShowAsync();
+            //AlertDialog alertDialog = new AlertDialog();
+            //alertDialog.Title = "Unhandled Exception";
+            //alertDialog.Content = ex.Message;
+            //await alertDialog.ShowAsync();
         }
 
         private void CurrentDomain_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)

@@ -133,6 +133,21 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
     {
         string fileExtension = Path.GetExtension(activeFile.DecryptedFileInfo.Name);
 
+        if (activeFile.IsShared)
+        {
+            IconClass = "file-dec-icon";
+        }
+
+        if (activeFile.IsMasterKeyShared)
+        {
+            IconClass = "file-dec-icon";
+        }
+
+        if (activeFile.IsShared && activeFile.IsMasterKeyShared)
+        {
+            IconClass = "file-dec-icon";
+        }
+
         if (activeFile.IsDecrypted)
         {
             IconClass = "file-dec-icon";

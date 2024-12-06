@@ -56,12 +56,11 @@
                             {
                                 FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
                                 <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails.FilePath) ? "selected" : "")"
-                                    @onmousedown="(e) => RecentFilesViewModel.HandleFileClick(e, fileDetails.FilePath)"
-                                    @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, new List<FileDetails> { fileDetails })">
+                                    @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)">
                                     <td>
-                                        <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectFile(e, fileDetails.FilePath)" checked="@RecentFilesViewModel.SelectAllChecked" />
+                                        <input class="check-box" type="checkbox" @onchange="() => RecentFilesViewModel.HandleFileClick(!fileDetails.IsChecked, fileDetails.FilePath)" checked="@fileDetails.IsChecked" />
                                     </td>
-                                    <td class="fle-exton-img" style="display: flex; align-items: center;">
+                                    <td class="fle-exton-img" style="display: flex; align-items: center;" title="@fileDetails.FilePath">
                                         <img style="width: 25px; height: 25px;" class="@fileDetails.IconClass" src="" alt="file-image" />
                                         <span class="fle-nme">@fileDetails.FileName</span>
                                     </td>
@@ -140,7 +139,6 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        RecentFilesViewModel.OnInitializedAsync();
         RecentFilesViewModel.LogOnViewModel.OnUIStateChanged += UpdatePageState;
     }
 

@@ -7,65 +7,63 @@ using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
-using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
 public class HomeActionsViewModel : ComponentBase
 {
-    private LogOnViewModel _logOnViewModel;
     private FileOperationViewModel _fileOperationViewModel;
     private MainViewModel? _mainViewModel;
-    private FileSystemState? _fileSystemState;
+
     private IStatusAlertService _statusAlertService;
     private ShareKeyViewModel? _sharekeyViewModel;
 
-    //public ObservableCollection<FileDetails> SelectedRecentFiles { get; set; } = new ObservableCollection<FileDetails>();
+    public HomeActionsViewModel(ShareKeyViewModel shareKeyViewModel)
+    {
+        LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
+        _statusAlertService = AxCServiceProvider.StatusAlertService!;
+
+        _mainViewModel = LogOnViewModel.MainViewModel;
+        _fileOperationViewModel = LogOnViewModel.FileOperationViewModel;
+
+        _sharekeyViewModel = shareKeyViewModel;
+        KnownFoldersViewModel = New<KnownFoldersViewModel>();
+
+        Initialized();
+    }
+
+    public void Initialized()
+    {
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureKeyShareMenus(license); });
+
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { EncryptButtonEnabled = enabled; });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { IsFilesPending = areFilesPending; });
+
+        KnownFoldersViewModel!.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
+        KnownFoldersViewModel.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
+    }
+
     public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }
 
-    public int MembersCount { get; set; }
-    public int TotalMembers { get; set; }
     public string? DisabledBackColor { get; set; }
+
     public bool IsFilesPending { get; set; }
 
     public bool EncryptButtonEnabled { get; set; }
 
     public bool KeyShareButtonEnabled { get; set; }
 
-    //public HomeActionsViewModel(LogOnViewModel logOnViewModel, ShareKeyViewModel shareKeyViewModel, IStatusAlertService statusAlertService)
-    public HomeActionsViewModel(ShareKeyViewModel shareKeyViewModel, IStatusAlertService statusAlertService)
-    {
-        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
-        _sharekeyViewModel = shareKeyViewModel;
-        _statusAlertService = statusAlertService;
-        KnownFoldersViewModel = New<KnownFoldersViewModel>();
-    }
-
-    public void Initialized()
-    {
-        _mainViewModel = _logOnViewModel.MainViewModel;
-        _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
-        _fileSystemState = Resolve.FileSystemState;
-
-        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureKeyShareMenusAsync(license); });
-
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { EncryptButtonEnabled = enabled; });
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { IsFilesPending = areFilesPending; });
-
-        KnownFoldersViewModel.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
-        KnownFoldersViewModel.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
-    }
+    public LogOnViewModel LogOnViewModel { get; set; }
 
     public SubscriptionLevel SubscriptionLevel
     {
         get
         {
-            return _logOnViewModel.SubscriptionLevel;
+            return LogOnViewModel.SubscriptionLevel;
         }
     }
 
@@ -81,7 +79,7 @@ public class HomeActionsViewModel : ComponentBase
 
     public async Task StopSecuringFile()
     {
-        await _fileOperationViewModel.DecryptFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles);
+        await _fileOperationViewModel.DecryptFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null);
     }
 
     public async void ShareKeysAsync(EventArgs e)
@@ -94,7 +92,7 @@ public class HomeActionsViewModel : ComponentBase
         await EncryptPendingFiles();
     }
 
-    private async Task ConfigureKeyShareMenusAsync(LicenseCapabilities license)
+    private void ConfigureKeyShareMenus(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.KeySharing))
         {
@@ -143,12 +141,12 @@ public class HomeActionsViewModel : ComponentBase
 
     public async void RandomRenameAsync(EventArgs e)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(null); }, null, e);
+        await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null); }, null, e);
     }
 
     public async void SecureWipeFiles(EventArgs e)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.SecureWipe, async (ss, ee) => { await _fileOperationViewModel.WipeFiles.ExecuteAsync(null); }, null, e);
+        await PremiumFeature_ClickAsync(LicenseCapability.SecureWipe, async (ss, ee) => { await _fileOperationViewModel.WipeFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null); }, null, e);
     }
 
     public async void EncryptionUpgrade()
@@ -168,12 +166,12 @@ public class HomeActionsViewModel : ComponentBase
 
     public async void InviteUser(EventArgs e)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { _logOnViewModel.InviteDialog.Show(); }, null, e);
+        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { LogOnViewModel.InviteDialog.Show(); }, null, e);
     }
 
     public void UpgradeDialog()
     {
-        _logOnViewModel.UpgradeDialog.Show();
+        LogOnViewModel.UpgradeDialog.Show();
     }
 
     public async void RedirectToAccountWebUrl()
@@ -215,6 +213,6 @@ public class HomeActionsViewModel : ComponentBase
             return;
         }
 
-        _logOnViewModel.UpgradeDialog.Show();
+        LogOnViewModel.UpgradeDialog.Show();
     }
 }

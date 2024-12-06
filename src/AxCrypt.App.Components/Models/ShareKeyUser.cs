@@ -11,7 +11,7 @@ namespace AxCrypt.App.Components.Models
             Image = "";
             if (userAccountStatus == AccountStatus.Verified)
             {
-                Image = "~/images/default/Ico.svg";
+                Image = "individual";
             }
         }
 
@@ -19,7 +19,7 @@ namespace AxCrypt.App.Components.Models
         {
             UserEmail = userEmail.Address;
             GroupName = groupName;
-            Image = "~/images/business/IcoGrp.svg";
+            Image = "group";
         }
 
         public string UserEmail { get; set; }

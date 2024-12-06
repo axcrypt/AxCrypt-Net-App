@@ -283,18 +283,14 @@
 </div>
 
 @code {
-    // [Parameter]
-    // public ObservableCollection<FileDetails>? SelectedRecentFiles { get; set; }
-
     public const string _ENABLEDTOOLSTRIPBACKCOLOR = "#FFFFFF";
     public string hoveredElement { get; set; } = string.Empty;
     public bool isHovered { get; set; }
 
     protected override void OnInitialized()
     {
-        homeActionModel?.Initialized();
-        //homeActionModel!.SelectedRecentFiles = SelectedRecentFiles!;
         Utility.OnIsMainMenuHiddenChanged += UpdateState;
+        homeActionModel.LogOnViewModel.OnUIStateChanged += UpdateState;
         base.OnInitialized();
     }
 

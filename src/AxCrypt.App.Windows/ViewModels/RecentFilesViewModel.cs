@@ -11,7 +11,6 @@ using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using System.Collections.ObjectModel;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -26,26 +25,28 @@ public class RecentFilesViewModel : ViewModelBase
     private ProcessIndicatorService? _ProcessIndicatorService;
     private readonly IDispatcher Dispatcher;
 
-    public RecentFilesViewModel(IDispatcher dispatcher)
+    public RecentFilesViewModel(ShareKeyViewModel sharekeyViewModel, IDispatcher dispatcher)
     {
-		LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
+        LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
         _mainViewModel = AxCServiceProvider.LogOnViewModel!.MainViewModel;
         _fileOperationViewModel = AxCServiceProvider.LogOnViewModel!.FileOperationViewModel;
         _sharekeyViewModel = sharekeyViewModel;
 
+        SelectAllChecked = false;
         SelectedFiles = new List<string>();
         RecentFilesList = new ObservableCollection<FileDetails>();
         Dispatcher = dispatcher;
+
+        OnInitialized();
     }
 
-    public void OnInitializedAsync()
+    public void OnInitialized()
     {
         IsHideRecentFiles = New<UserSettings>().HideRecentFiles;
         UpdateRecentFiles(_mainViewModel.RecentFiles);
 
-        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.RecentFiles), async (IEnumerable<ActiveFile> files) => { await Task.Run(() => { UpdateRecentFiles(files); }); });
-        this.BindPropertyChanged(nameof(SelectedFiles), (IList<string> files) => { _mainViewModel.SelectedRecentFiles = files; });
-        this.BindPropertyChanged(nameof(RecentFilesList), (ObservableCollection<FileDetails> files) => { LogOnViewModel.UIStateChanged(); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
+        this.BindPropertyChanged(nameof(SelectedFiles), (IEnumerable<string> files) => { _mainViewModel.SelectedRecentFiles = files; });
 
         //_recentFilesListView.DragOver += (sender, e) => { _mainViewModel.DragAndDropFiles = e.GetDragged(); e.Effect = GetEffectsForRecentFiles(e); };
         // _recentFilesListView.SelectedIndexChanged += (sender, e) => { _mainViewModel.SelectedRecentFiles = _recentFilesListView.SelectedItems.Cast<ListViewItem>().Select(lvi => EncryptedPath(lvi)); };
@@ -56,10 +57,7 @@ public class RecentFilesViewModel : ViewModelBase
 
     public ObservableCollection<FileDetails> RecentFilesList { get; set; }
 
-    public IList<string> SelectedFiles { get { return GetProperty<IList<string>>(nameof(SelectedFiles)); } set { SetProperty(nameof(SelectedFiles), value.ToList()); } }
-
-
-    //private FileDetails SelectedFile = new FileDetails();
+    public IEnumerable<string> SelectedFiles { get { return GetProperty<IEnumerable<string>>(nameof(SelectedFiles)); } set { SetProperty(nameof(SelectedFiles), value); } }
 
     public SubscriptionLevel SubscriptionLevel
     {
@@ -69,30 +67,26 @@ public class RecentFilesViewModel : ViewModelBase
         }
     }
 
-    public bool SelectAllChecked { get; set; } = false;
-
-    public bool ContextMenu { get; set; } = false;
+    public bool SelectAllChecked { get; set; }
 
     public bool IsHideRecentFiles { get; set; }
-
-    public bool isNameAscending { get; set; }
-    public bool isSizeAscending { get; set; }
-    public bool isDateModifiedAscending { get; set; }
 
     private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
     {
         if (New<UserSettings>().HideRecentFiles)
         {
-            RecentFilesList.Clear();
+            RecentFilesList = new ObservableCollection<FileDetails>();
             return;
         }
 
         if (RecentFilesList != null)
         {
-            RecentFilesList.Clear();
+            RecentFilesList = new ObservableCollection<FileDetails>();
         }
 
         RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
+        AddToSelectedFileList();
+        Task.Run(() => { LogOnViewModel.UIStateChanged(); });
     }
 
     public void SelectAllFiles(ChangeEventArgs e)
@@ -100,7 +94,7 @@ public class RecentFilesViewModel : ViewModelBase
         SelectAllChecked = Convert.ToBoolean(e.Value);
         if (!SelectAllChecked)
         {
-            SelectedFiles.Clear();
+            SelectedFiles = new List<string>();
             UpdateRecentFiles(_mainViewModel.RecentFiles);
             return;
         }
@@ -108,46 +102,30 @@ public class RecentFilesViewModel : ViewModelBase
         SelectedFiles = RecentFilesList.Select(rf => { rf.IsChecked = SelectAllChecked; return rf.FilePath; }).ToList();
     }
 
-    public void SelectFile(ChangeEventArgs e, string selectedFile)
+    public void HandleFileClick(bool isChecked, string selectedFile)
     {
-        if (selectedFile == null)
-        {
-            throw new InvalidOperationException($"{nameof(selectedFile)} path should not empty!");
-        }
-
-        bool isChecked = Convert.ToBoolean(e.Value);
-        if (RecentFilesList.Count == 1)
-        {
-            SelectAllChecked = isChecked;
-        }
-
         UpdateSelectedFile(selectedFile, isChecked);
     }
 
     private void UpdateSelectedFile(string selectedFile, bool isChecked)
     {
         RecentFilesList.First(rf => rf.FilePath.Equals(selectedFile)).IsChecked = isChecked;
-        if (!isChecked)
-        {
-            SelectedFiles = SelectedFiles.Where(sf => !sf.Equals(selectedFile)).ToList();
-            return;
-        }
 
-        AddToSelectedFileList(selectedFile);
+        AddToSelectedFileList();
     }
 
-    private void AddToSelectedFileList(string selectedFilepath)
+    private void AddToSelectedFileList()
     {
-        if (!SelectedFiles.Contains(selectedFilepath))
-        {
-            SelectedFiles.Add(selectedFilepath);
-        }
-    }
+        SelectedFiles = RecentFilesList.Where(rf => rf.IsChecked).Select(rf => rf.FilePath).ToList();
 
-    public void HandleFileClick(MouseEventArgs e, string selectedFile)
-    {
-        //ContextMenu = false;
-        UpdateSelectedFile(selectedFile, true);
+        if (RecentFilesList.Count == SelectedFiles.Count())
+        {
+            SelectAllChecked = true;
+        }
+        else
+        {
+            SelectAllChecked = false;
+        }
     }
 
     public void SetSortOrder(int column)
@@ -198,17 +176,6 @@ public class RecentFilesViewModel : ViewModelBase
         return comparer;
     }
 
-    //public void HandleContextMenu(MouseEventArgs e, string selectedFilepath)
-    //{
-    //    try
-    //    {
-    //        AddToSelectedFileList(selectedFilepath);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        throw new Exception(ex.Message);
-    //    }
-    //}
     //public IEnumerable<string> GetDragged(this DragEventArgs e)
     //{
     //    IList<string> dropped = e.Data.GetData(DataFormats.FileDrop) as IList<string>;
@@ -240,45 +207,7 @@ public class RecentFilesViewModel : ViewModelBase
     //    }, () => { });
     //}
 
-    //public void SortByName()
-    //{
-    //    if (isNameAscending)
-    //    {
-    //        RecentFilesList = new ObservableCollection<FileDetails>(RecentFilesList.OrderBy(f => f.FileName).ToList());
-    //    }
-    //    else
-    //    {
-    //        RecentFilesList = new ObservableCollection<FileDetails>(RecentFilesList.OrderByDescending(f => f.FileName).ToList());
-    //    }
-    //    isNameAscending = !isNameAscending;
-    //}
-
-    //public void SortBySize()
-    //{
-    //    if (isSizeAscending)
-    //    {
-    //        RecentFilesList = new ObservableCollection<FileDetails>(RecentFilesList.OrderBy(f => f.FileSize).ToList());
-    //    }
-    //    else
-    //    {
-    //        RecentFilesList = new ObservableCollection<FileDetails>(RecentFilesList.OrderByDescending(f => f.FileSize).ToList());
-    //    }
-    //    isSizeAscending = !isSizeAscending;
-    //}
-
-    //public void SortByDateModified()
-    //{
-    //    if (isDateModifiedAscending)
-    //    {
-    //        RecentFilesList = new ObservableCollection<FileDetails>(RecentFilesList.OrderBy(f => f.LastModifiedDate).ToList());
-    //    }
-    //    else
-    //    {
-    //        RecentFilesList = new ObservableCollection<FileDetails>(RecentFilesList.OrderByDescending(f => f.LastModifiedDate).ToList());
-    //    }
-    //    isDateModifiedAscending = !isDateModifiedAscending;
-    //}
-
+ 
     public async Task OnContextMenuAction(EventArgs args, SecuredFilesContextMenu securedFilesContextMenu)
     {
         switch (securedFilesContextMenu)
@@ -318,9 +247,9 @@ public class RecentFilesViewModel : ViewModelBase
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
     }
 
-    public async void OpenSecuredMouseDoubleClick(EventArgs args, IEnumerable<FileDetails> selectedFiles)
+    public async void OpenSecuredMouseDoubleClick(EventArgs args, string selectedFilePath)
     {
-        await _fileOperationViewModel.OpenFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
+        await _fileOperationViewModel.OpenFiles.ExecuteAsync(selectedFilePath == null ? throw new NullReferenceException(nameof(selectedFilePath)) : new List<string> { selectedFilePath });
     }
 
     private async void RemoveFromListKeepSecured()
