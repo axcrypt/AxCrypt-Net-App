@@ -23,6 +23,7 @@ public class SupportViewModel
     {
         _supportService = supportService;
         _viewModel = viewModel;
+        Initialize();
     }
 
     public void Initialize()

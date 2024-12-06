@@ -8,10 +8,6 @@
 @inject ShareKeyViewModel ShareKeyViewModel
 @inject IJSRuntime JSRuntime
 
-@{
-    DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
-}
-
 @if (IsVisible)
 {
     <div class="modalDialog sharekey-popup" style="display: block;">

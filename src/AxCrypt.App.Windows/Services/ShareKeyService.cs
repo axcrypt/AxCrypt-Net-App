@@ -1,5 +1,4 @@
-﻿using AxCrypt.App.Components.Models;
-using AxCrypt.App.Windows.ViewModels;
+﻿using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;

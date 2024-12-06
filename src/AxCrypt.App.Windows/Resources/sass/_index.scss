@@ -272,8 +272,21 @@
     }
 }
 
-.file-dec-icon{
+.file-dec-icon {
     content: url(/images/IcoBroom.svg);
+}
+
+.file-masshk-icon {
+    content: url(/images/IcoMasShk.png);
+    filter: brightness(0.1);
+}
+
+.file-masKey-icon {
+    content: url(/images/IcoMasK.svg);
+}
+
+.file-keySh-icon {
+    content: url(/images/IcoKeySh.svg);
 }
 
 .file-ext-def-icon {
@@ -743,8 +756,8 @@
         padding: 5px 0px;
     }
 
-    .txt-clr{
-        font-weight:800;
+    .txt-clr {
+        font-weight: 800;
     }
 }
 

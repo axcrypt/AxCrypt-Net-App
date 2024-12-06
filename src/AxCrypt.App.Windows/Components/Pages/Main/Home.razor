@@ -12,10 +12,6 @@
 @inject NavigationManager navigation
 @inject IJSRuntime JSRuntime
 
-@{
-    DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
-}
-
 <div dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (LogOnViewModel.IsVisible)
     {

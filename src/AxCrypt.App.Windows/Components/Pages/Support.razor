@@ -15,10 +15,11 @@
         <span class="goback-text">Support</span>
     </NavLink>
 </div>
+<h2 class="page-title">@Texts.PromptSupport</h2>
+
 @if (SupportViewModel.Model.SubscriptionLevel == SubscriptionLevel.Free)
 {
     <div>
-        <h2 class="page-title">@Texts.PromptSupport</h2>
         <div class="label-text free-sec" style="text-align:center;">
             <label>Sorry,</label>
             <p class="SupWarngText">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
@@ -87,7 +88,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        SupportViewModel.Initialize();
         await base.OnInitializedAsync();
     }
 

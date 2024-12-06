@@ -5,12 +5,6 @@
 
 @inject RecentFoldersViewModel RecentFoldersViewModel
 
-@{
-    DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
-}
-
-<link href="css/@RecentFoldersViewModel.SubscriptionLevel.ToString().ToLower()/index.css" rel="stylesheet" />
-
 @if (RecentFoldersViewModel.RecentFoldersList.Any())
 {
     <div @onclick="RecentFoldersViewModel.SortByDate">
@@ -21,7 +15,7 @@
 }
 
 <div class="rcnt-fld-sec hgt-ovflw">
-    @if (currentDevice != DeviceIdiom.Phone && RecentFoldersViewModel.SubscriptionLevel != SubscriptionLevel.Free)
+    @if (RecentFoldersViewModel.SubscriptionLevel != SubscriptionLevel.Free)
     {
         <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="(ss) => RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label>Add or Drag Folder</label></div>
     }
@@ -38,8 +32,7 @@
         @foreach (string folder in RecentFoldersViewModel.RecentFoldersList)
         {
             string folderWithoutTrailingSlash = folder.TrimEnd('\\');
-            <div class="rcnt-fld-bx fld-dflt-cl" @onmousedown="(e) => RecentFoldersViewModel.HandleFolderClick(e)"
-                 @ondblclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShowInExplorer)"
+            <div class="rcnt-fld-bx fld-dflt-cl" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
                  @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
                 <img class="fldr-img" src="" /><br /><label>@Path.GetFileName(folderWithoutTrailingSlash)</label>
             </div>
@@ -85,8 +78,8 @@
 @code {
     protected override async Task OnInitializedAsync()
     {
-        await RecentFoldersViewModel.InitializeAsync();
         await base.OnInitializedAsync();
+        RecentFoldersViewModel.LogOnViewModel.OnUIStateChanged += UpdateStateChanged;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -104,6 +97,14 @@
         InvokeAsync(() =>
         {
             StateHasChanged(); // Refresh UI
+        });
+    }
+
+    void UpdateStateChanged()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
         });
     }
 }

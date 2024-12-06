@@ -10,10 +10,6 @@
 
 <link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/site.min.css" rel="stylesheet" />
 
-@{
-    DeviceIdiom currentDevice = GetCurrentDeviceIdiom();
-}
-
 @if (!IsLoading)
 {
     @if (IsWideScreen)
@@ -33,11 +29,6 @@ else
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-    }
-
-    private DeviceIdiom GetCurrentDeviceIdiom()
-    {
-        return DeviceInfo.Idiom;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

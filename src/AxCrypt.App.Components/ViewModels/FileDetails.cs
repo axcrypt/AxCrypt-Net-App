@@ -41,7 +41,7 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
     {
         LogOnIdentity decryptIdentity = ValidateActiveFileIdentity(activeFile.Identity);
         IAxCryptDocument document = activeFile.EncryptedFileInfo.GetAxCryptDocument(decryptIdentity);
-        if(document == null)
+        if (document == null)
         {
             return;
         }
@@ -135,17 +135,17 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
 
         if (activeFile.IsShared)
         {
-            IconClass = "file-dec-icon";
+            IconClass = "file-keySh-icon";
         }
 
         if (activeFile.IsMasterKeyShared)
         {
-            IconClass = "file-dec-icon";
+            IconClass = "file-masKey-icon";
         }
 
         if (activeFile.IsShared && activeFile.IsMasterKeyShared)
         {
-            IconClass = "file-dec-icon";
+            IconClass = "file-masshk-icon";
         }
 
         if (activeFile.IsDecrypted)
@@ -154,7 +154,10 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
             return;
         }
 
-        IconClass = !string.IsNullOrEmpty(fileExtension) ? fileExtension.Replace(".", "") : "file-ext-def-icon";
+        if (IconClass == null)
+        {
+            IconClass = !string.IsNullOrEmpty(fileExtension) ? fileExtension.Replace(".", "") : "file-ext-def-icon";
+        }
     }
 
     //public override bool Equals(object obj)
