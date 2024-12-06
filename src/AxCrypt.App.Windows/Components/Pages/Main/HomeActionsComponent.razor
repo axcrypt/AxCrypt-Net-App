@@ -12,7 +12,7 @@
 
 <div class="home-body" style="margin-top: 15px;">
     <div style="display:block; margin-bottom: 25px;">
-        <label class="fle-nme fnt-sze">Actions</label>
+        <h3 class="fle-nme fnt-sze">Actions</h3>
         <div class="" style="display:flex;">
             <div class="act-box" @onclick="()=> homeActionModel!.OpenFile()" @onmouseover='@( () => ShowPopup("open") )' @onmouseout='@( () => HidePopup() )'>
                 <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
@@ -149,12 +149,12 @@
         @if (homeActionModel.SubscriptionLevel == SubscriptionLevel.Premium)
         {
             <div style="display: block;">
-                <div style="display:flex; min-width: 331px;">
+                <div style="display:flex; min-width: 300px;">
                     <label class="fle-nme fnt-sze">Subscriptions</label><img class="ico-hidden" src="" @onclick="ToggleSection" alt="hand-img" id="toggleImageClosed" /><img class="ico-eye" src="" @onclick="ToggleSection" alt="hand-img" style="display: none;" id="toggleImageOpen" />
                 </div>
-                <div id="mySection" style="display: none; padding-top:8px;">
+                <div id="mySection" style="display: none; padding-top:8px;grid-template-columns: auto auto;">
                     <div class="sub-box" style="background-color: #48772C;">
-                        <div style="padding: 10px 20px; line-height:14px;">
+                        <div style="padding: 10px 12px; line-height:14px;">
                             <span class="subs-plan" style="line-height:10px;">Premium</span>
                             <img class="plan-prm-icon" src="" alt="premium-icon" />
                             <br />
@@ -163,14 +163,14 @@
                         <button @onclick="homeActionModel.BuyForSomeoneElseLink" class="buy-button"> Buy</button>
                     </div>
                     <div class="sub-box" style="background-color: #000000; margin-left:15px;">
-                        <div style="padding: 10px 20px; line-height:12px;">
+                        <div style="padding: 10px 12px; line-height:12px;">
                             <span class="subs-plan" style="line-height:10px;">Business</span>
                             <img class="plan-bus-icon" src="" alt="premium-icon" />
                             <br />
                             <span class="sub-text">For organisations</span>
 
                         </div>
-                        <button @onclick="homeActionModel.ChangeSubscriptionToBusinessLink" class="buy-button"> Change</button>
+                        <button @onclick="homeActionModel.ChangeSubscriptionToBusinessLink" class="buy-button">Upgrade</button>
                     </div>
                 </div>
             </div>
@@ -214,7 +214,7 @@
     @if (homeActionModel.SubscriptionLevel != SubscriptionLevel.Free)
     {
         <div style="display:block;">
-            <label class="fle-nme fnt-sze">Cloud services</label>
+            <h3 class="fle-nme fnt-sze">Cloud services</h3>
             <div style="display: flex;">
                 @foreach (KnownFolder? knownFolder in homeActionModel?.KnownFoldersViewModel?.KnownFolders!)
                 {
@@ -230,7 +230,7 @@
         </div>
     }
     <div class="medium-9" style="display:block;">
-        <label class="fle-nme fnt-sze">More actions</label>
+        <h3 class="fle-nme fnt-sze">More actions</h3>
         <div style="display: flex; gap: 2%;">
             @if (homeActionModel.SubscriptionLevel != SubscriptionLevel.Free)
             {

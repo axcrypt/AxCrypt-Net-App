@@ -12,6 +12,10 @@
         color: none !important;
         cursor: pointer;
     }
+    h3{
+        font-weight: 700;
+        font-size: 16px;
+    }
 }
 
 .head-sec {
@@ -133,7 +137,7 @@
 
 .sub-box {
     margin-top: 10px;
-    width: 158px;
+    width: 136px;
     height: 100px;
     border-radius: 8px;
     color: #FFFFFF;
@@ -154,10 +158,10 @@
 }
 
 .buy-button {
-    width: 110px !important;
+    width: 100px !important;
     height: 28px;
     padding: 2px 25px;
-    margin: 0px 20px;
+    margin: 0px 15px;
     background-color: white;
     color: darkgreen;
     border: none;
@@ -228,7 +232,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        padding-left: 15px;
     }
 
     .mp4, .MP4,
@@ -249,6 +252,8 @@
     .xlsx, .XLSX,
     .js, .JS,
     .cshtml, .CSHTML,
+    .cshtm, .CSHTM,
+    .scss,
     .htm, .HTM,
     .razor, .RAZOR {
         content: $IcoDcmnt;
@@ -330,11 +335,11 @@
 .rcnt-fle-tbl {
     thead tr th {
         color: $HdTxtClr;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
         border: none;
         padding-bottom: 15px;
-        padding-right: 2%;
+        padding: 7px 0px 7px 10px;
 
         img {
             padding-left: 5px;
@@ -346,8 +351,7 @@
         color: $colDsbl;
         font-size: 12px;
         font-weight: 700;
-        padding: 7px 0px;
-        padding-right: 2%;
+        padding: 7px 0px 7px 10px;
     }
 
     tbody tr:hover,
@@ -441,6 +445,8 @@
     padding: 3px 0px;
     border-radius: 15px;
     text-align: center;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .info-prple:nth-child(4n+1) {
@@ -522,11 +528,12 @@
     background: $FileBg;
     padding: 4px 7px;
     border-radius: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     display: flex;
+    width: 150px !important;
 }
 
-.file-box {
+.file-box, .user-list-bx {
     max-height: 195px;
     min-height: 195px;
     border: 0.2px solid #999999;
@@ -748,7 +755,7 @@
 .abt-axc-sec {
     .modalDialog > div {
         padding: 30px 15px !important;
-        width: 500px;
+        width: 550px;
     }
 
     label {
@@ -770,6 +777,7 @@
 
 .add-txt-field {
     display: flex;
+    padding-bottom: 10px;
 }
 
 .suggestion-list {
@@ -777,7 +785,7 @@
     border: 1px solid #232323;
     overflow-y: auto;
     padding: 0;
-    margin-top: 40px;
+    margin-top: 35px;
     position: absolute;
     width: 72%;
     background-color: white;
@@ -1052,7 +1060,11 @@
         .xls, .XLS,
         .xlsx, .XLSX,
         .js, .JS,
-        .cshtml, .CSHTML {
+        .cshtml, .CSHTML,
+        .cshtm, .CSHTM,
+        .scss,
+        .htm, .HTM,
+        .razor, .RAZOR {
             content: $IcoDocMb;
         }
 
@@ -1139,21 +1151,11 @@
 @media only screen and (max-width: 1370px) {
     .rcnt-fle-tbl {
         max-width: 850px;
-
-        tbody tr td {
-            font-size: 16px;
-            font-weight: 400;
-        }
     }
 
     .scrd-sec {
         display: none;
         visibility: hidden;
-    }
-
-    .info-prple {
-        font-size: 12px;
-        font-weight: 600;
     }
 }
 

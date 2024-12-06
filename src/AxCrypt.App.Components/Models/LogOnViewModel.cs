@@ -52,7 +52,15 @@ public class LogOnViewModel : ViewModelBase
 
     public DialogResult PageResult { get { return GetProperty<DialogResult>(nameof(PageResult)); } set { SetProperty(nameof(PageResult), value); } }
 
-    public LicenseCapabilities License { get { return GetProperty<LicenseCapabilities>(nameof(License)); } set { SetProperty(nameof(License), value); } }
+    public LicenseCapabilities License
+    {
+        get { return GetProperty<LicenseCapabilities>(nameof(License)); }
+        set
+        {
+            SetProperty(nameof(License), value);
+            _subscriptionLevel = License.GetLicenseStatus();
+        }
+    }
 
     public CommonDialogService InviteDialog { get { return GetProperty<CommonDialogService>(nameof(InviteDialog)); } set { SetProperty(nameof(InviteDialog), value); } }
 
@@ -81,17 +89,24 @@ public class LogOnViewModel : ViewModelBase
         ProcessIndicator = new ProcessIndicator(_processIndicatorService);
     }
 
+    private SubscriptionLevel _subscriptionLevel = SubscriptionLevel.Unknown;
+
     public SubscriptionLevel SubscriptionLevel
     {
         get
         {
-            return License.GetLicenseStatus();
+            if (_subscriptionLevel == SubscriptionLevel.Unknown)
+            {
+                _subscriptionLevel = License.GetLicenseStatus();
+            }
+
+            return _subscriptionLevel;
         }
     }
 
     public bool IsLoggedOn
     {
-        get 
+        get
         {
             return MainViewModel.LoggedOn;
         }

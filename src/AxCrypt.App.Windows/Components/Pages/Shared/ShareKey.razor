@@ -8,6 +8,11 @@
 @inject ShareKeyViewModel ShareKeyViewModel
 @inject IJSRuntime JSRuntime
 
+@{
+    DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
+    int MaxFilesToShow = 3;
+}
+
 @if (IsVisible)
 {
     <div class="modalDialog sharekey-popup" style="display: block;">
@@ -39,7 +44,7 @@
                     </div>
                     <div>
                         <div class="add-txt-field" style="width: 100%;">
-                            <input type="email" @onclick="ShareKeyViewModel.ShowSyncPopup" value="@ShareKeyViewModel.RecipientEmail" @oninput="ShareKeyViewModel.OnEmailInput" placeholder="someone@example.com" class="" style="width: 78%; height: 29px; margin-right: 3%; margin-bottom:0px !important;" />
+                            <input type="email" @onclick="ShareKeyViewModel.ShowSyncPopup" value="@ShareKeyViewModel.RecipientEmail" @oninput="ShareKeyViewModel.OnEmailInput" placeholder="someone@example.com" class="" style="width: 78%; margin-right: 3% ! IMPORTANT; margin: 0px;" />
                             @if (ShareKeyViewModel.ShowSuggestionDropdown && ShareKeyViewModel.EmailSuggestions.Any())
                             {
                                 <ul class="suggestion-list hide-model-popup">
@@ -89,17 +94,21 @@
                     </div>
                     @if (ShareKeyViewModel.SelectedFilesOrFolders != null && ShareKeyViewModel.SelectedFilesOrFolders.Any())
                     {
-                        <div class="center-column fle-exton-img" style="padding: 10px 0px;">
-                            @foreach (string file in ShareKeyViewModel.SelectedFilesOrFolders)
+                        <div class="center-column fle-exton-img" style="justify-content: flex-start; gap: 10px;">
+                            @foreach (string file in ShareKeyViewModel.SelectedFilesOrFolders.Take(MaxFilesToShow))
                             {
                                 <div class="selected-file">
-                                    <img class="@Icon" src="~/images/default/AxCrypt_Icon.svg" alt="File Icon" />
+                                    <img class="@Icon" src="/images/default/AxCrypt_Icon.svg" alt="File Icon" />
                                     <span class="fle-nme">@GetIconForFile(file)</span>
                                 </div>
                             }
+                            @if (ShareKeyViewModel.SelectedFilesOrFolders.Count() > MaxFilesToShow)
+                            {
+                                <div class="info-prple bdr-clr">+@((ShareKeyViewModel.SelectedFilesOrFolders.Count()) - MaxFilesToShow)</div>
+                            }
                         </div>
                     }
-                    <div>
+                    <div style="padding-top: 15px;">
                         <h3 class="txt-clr font-bold">All users with access in selected files (<span id="userCount">@ShareKeyViewModel.ShareKeyUserList.Count()</span>)</h3>
 
                         @if (ShareKeyViewModel.ShareKeyUserList.Any())
@@ -148,7 +157,7 @@
                             </div>
                         }
                     </div><br />
-                    <div id="sharekey" class="shr-ky-ftr" style="margin: 20px 0px;">
+                    <div id="sharekey" class="shr-ky-ftr" style="margin: 10px 0px;">
                         <NavLink href="/">
                             <input type="button" @onclick="Close" class="button border btn-small" value="Cancel" style="margin-right: 10px;" />
                         </NavLink>

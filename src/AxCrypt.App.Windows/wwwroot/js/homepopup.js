@@ -4,7 +4,7 @@
     var toggleImageOpen = document.getElementById("toggleImageOpen");
 
     if (section.style.display === "none" || section.style.display === "") {
-        section.style.display = "flex";
+        section.style.display = "grid";
         toggleImageClosed.style.display = "none";
         toggleImageOpen.style.display = "flex";
     }
