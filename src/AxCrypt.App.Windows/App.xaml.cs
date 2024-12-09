@@ -729,7 +729,8 @@ public partial class App : Application
             window.MinimumWidth = AppPreferences.MinimumWindowWidth;
             window.Height = AppPreferences.MinimumWindowHeight;
             window.Width = AppPreferences.MinimumWindowWidth;
-            window.Title = "AxCrypt 2.0.0.0 Premium";
+            //window.Title = $"AxCrypt 2.0.0.0 File encryption made easy";
+            window.Title = Task.Run(async () => { return await new Display().WindowTitleTextAsync(false); }).Result;
 
             RestoreUserPreferences(window);
         }
@@ -740,6 +741,11 @@ public partial class App : Application
     protected override void OnAppLinkRequestReceived(Uri uri)
     {
         base.OnAppLinkRequestReceived(uri);
+    }
+
+    public override void OpenWindow(Window window)
+    {
+        base.OpenWindow(window);
     }
 
     protected override void OnResume()

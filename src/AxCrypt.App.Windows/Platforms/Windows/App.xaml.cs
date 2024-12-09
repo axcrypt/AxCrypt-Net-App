@@ -298,7 +298,6 @@ namespace AxCrypt.App.Windows.WinUI
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            //args.
             base.OnLaunched(args);
         }
     }

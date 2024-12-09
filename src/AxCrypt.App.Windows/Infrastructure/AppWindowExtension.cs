@@ -1,6 +1,9 @@
-﻿using AxCrypt.App.Components.Services.Interface;
+﻿using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Windows.Code;
 using AxCrypt.App.Windows.Services;
+using AxCrypt.Core;
+using AxCrypt.Core.UI;
 using Microsoft.UI.Windowing;
 using Windows.Graphics;
 
@@ -8,7 +11,7 @@ namespace AxCrypt.App.Windows.Infrastructure
 {
     internal class AppWindowExtension
     {
-        private Microsoft.UI.Windowing.AppWindow _appWindow;
+        private static Microsoft.UI.Windowing.AppWindow _appWindow;
 
         public AppWindowExtension(Microsoft.UI.Windowing.AppWindow window)
         {
@@ -17,12 +20,16 @@ namespace AxCrypt.App.Windows.Infrastructure
 
         public void RegisterChangedEvents()
         {
-            _appWindow.Closing += async (s, e) =>
+            _appWindow.Closing += (s, e) =>
             {
-                e.Cancel = true;
-                await Task.Run(() => SetupTrayIcon());
-                s.Hide();
-                //MauiWindowsExtensions.MinimizeToTray();
+                LogOnViewModel logOnService = AxCServiceProvider.GetService<LogOnViewModel>();
+                if (logOnService.IsLoggedOn)
+                {
+                    e.Cancel = true;
+                    SetupTrayIcon();
+                    Resolve.UserSettings.RestoreFullWindow = false;
+                    s.Hide();
+                }
             };
 
             _appWindow.Changed += (s, e) =>
@@ -58,10 +65,11 @@ namespace AxCrypt.App.Windows.Infrastructure
                     Microsoft.UI.Windowing.OverlappedPresenter overlappedPresenter = ((Microsoft.UI.Windowing.OverlappedPresenter)s.Presenter);
                     if (overlappedPresenter.State == Microsoft.UI.Windowing.OverlappedPresenterState.Minimized)
                     {
-                        Task.Run(() => SetupTrayIcon());
+                        SetupTrayIcon();
+                        Resolve.UserSettings.RestoreFullWindow = false;
                         s.Hide();
                     }
-                    if(overlappedPresenter.State == Microsoft.UI.Windowing.OverlappedPresenterState.Maximized)
+                    if (overlappedPresenter.State == Microsoft.UI.Windowing.OverlappedPresenterState.Maximized)
                     {
                         UpdateCurrentWindowPosition(s);
                     }
@@ -84,19 +92,38 @@ namespace AxCrypt.App.Windows.Infrastructure
 
         private static void SetupTrayIcon()
         {
-            ITrayService trayService = new TrayService();
+            ITrayService trayService = AxCServiceProvider.GetService<ITrayService>();
             if (trayService != null)
             {
                 trayService.Initialize();
 
-                INotificationService notificationService = new NotificationService();
-                notificationService
-                        ?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
+                Task.Run(() =>
+                {
+                        INotificationService notificationService = new NotificationService();
+                    notificationService
+                            ?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
+                });
 
                 trayService.ClickHandler = () =>
-                    notificationService
-                        ?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
+                    RestoreWindowWithFocus();
             }
+        }
+
+        private static void RestoreWindowWithFocus()
+        {
+            Task.Run(() =>
+            {
+                if (_appWindow == null)
+                {
+                    throw new ArgumentNullException(nameof(_appWindow));
+                }
+
+                Resolve.UserSettings.RestoreFullWindow = true;
+
+                _appWindow.Show(true);
+                _appWindow.SetPresenter(AppWindowPresenterKind.Default);
+                _appWindow.MoveInZOrderAtTop();
+            });
         }
     }
 }

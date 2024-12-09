@@ -4,7 +4,7 @@ using AxCrypt.Api.Model;
 using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Utility;
 using AxCrypt.App.Windows.Code;
-using AxCrypt.App.Windows.Components.Pages.PopupDialog;
+using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Common;
@@ -127,8 +127,8 @@ public partial class MainPage : ContentPage, ISignIn
     {
         //_encryptToolStripButton.Tag = _fileOperationViewModel.EncryptFiles;
         _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
-        _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
-        //_fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await HandleLogOn(e);
+        //_fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
+        _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await HandleLogOn(e);
         _logOnService.OnLogOnOrLogOffAndLogOnAgain = async () => await New<IUIThread>().SendToAsync(async () => await LogOnOrLogOffAndLogOnAgainAsync());
         _fileOperationViewModel.SelectingFiles += (sender, e) => New<IUIThread>().SendTo(async () => { bool fileSelected = await New<IDataItemSelection>().HandleSelection(e); });
 

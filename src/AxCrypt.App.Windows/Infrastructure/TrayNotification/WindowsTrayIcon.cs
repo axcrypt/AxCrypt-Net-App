@@ -52,6 +52,7 @@ public class WindowsTrayIcon
         if (obj == MouseEvent.IconLeftMouseUp)
         {
             LeftClick?.Invoke();
+            RemoveTaskbarIcon();
         }
         else if (obj == MouseEvent.IconRightMouseUp)
         {
