@@ -67,7 +67,7 @@ else
             </div>
             <div>
                 <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Model.Body" tabindex=1>
-                                    </textarea>
+                                        </textarea>
             </div>
             <div class="btn-sec">
                 <input type="reset" class="button border btn-large font-medium btn-hide" value="@Texts.ButtonCancelText" />
@@ -111,8 +111,7 @@ else
     private async void SubmitSupportAsync()
     {
         await SupportViewModel.SubmitSupportAsync();
-        StateHasChanged();
 
-        _navigationManager.NavigateTo("/SupportIndex", true);
+        await InvokeAsync(() => StateHasChanged());
     }
 }
