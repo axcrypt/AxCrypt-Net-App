@@ -4,7 +4,6 @@
 @inject NavigationManager navigation
 
 @inject AppSettingsViewModel AppSettingsViewModel
-@inject AdvancedOptionsViewModel ViewModel
 
 <div class="desk-stngs-popup manage-acc-sec model-popup font-medium hide-model-popup">
     <span class="font-bold">@Texts.SettingsPageTitle</span>
@@ -373,24 +372,32 @@
     </div>
 }
 
-@if (AppSettingsViewModel.ShowAdvancedOptions)
+@if (AppSettingsViewModel.AdvancedOptionsViewModel.ShowAdvancedOptions)
 {
-    <div id="modal-dialog1" class="modalDialog" style="display: block;">
-        <div class="invite-popup text-center">
-            <div>
-                <label>Application Config Path</label>
-                <input type="path" @bind="ViewModel.AppConfigPath" />
+    <div id="modal-dialog6" class="modalDialog">
+        <div style="text-align: left;">
+            <div class="modal-header text-center" style="display:block; font-weight:600;">
+                <span>Advanced Option</span>
             </div>
-
-            <div>
+            <div class="modal-body">
+                <div style="padding-bottom: 15px;">
+                    <label>Application Config Path</label><br />
+                    <input type="path" @bind="AppSettingsViewModel.AdvancedOptionsViewModel.AppConfigPath" style="width:100%;" />
+                </div>
                 <label>Temp File Path</label>
-                <input type="text" @bind="ViewModel.TempConfigPath" />
-                <button @onclick="(e) => ViewModel.BrowseButton_click(e)">Browse</button>
+                <div class="center-column">
+                    <input type="path" @bind="AppSettingsViewModel.AdvancedOptionsViewModel.TempConfigPath" @oninput="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.BrowseButton_click(e)" style="width:75%;"/>
+                    <button class="button font-medium success btn-small" @onclick="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.BrowseButton_click(e)">Browse</button>
+                </div>
             </div>
-            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-                <button @onclick="(e)=> ViewModel.ButtonOk_Click(e)">OK</button>
-                <button @onclick="(e)=> ViewModel.CancelButton_Click(e)">Cancel</button>
+            <div class="modal-footer">
+                <button class="button font-medium success btn-small" @onclick="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.ButtonOk_Click(e)">@Texts.ButtonOkText</button>
+                <button class="btn-small font-medium button cancel" @onclick="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.CancelButton_Click(e)">@Texts.ButtonCancelText</button>
             </div>
+            @if (!string.IsNullOrEmpty(AppSettingsViewModel.AdvancedOptionsViewModel.ErrorMessage))
+            {
+                <div class="error-message"> @AppSettingsViewModel.AdvancedOptionsViewModel.ErrorMessage</div>
+            }
         </div>
     </div>
 }
@@ -429,13 +436,13 @@
     protected override void OnInitialized()
     {
         AppSettingsViewModel.Initialized();
-        ViewModel.Initialize();
+        AppSettingsViewModel.AdvancedOptionsViewModel.Initialize();
         base.OnInitialized();
     }
 
     private void RedirectToDownload()
     {
-        navigation.NavigateTo(AppSettingsViewModel.DownloadVersion.ToString());
+        navigation.NavigateTo(AppSettingsViewModel.DownloadVersion!.ToString());
         AppSettingsViewModel.ShowVersion = false;
     }
 
@@ -455,11 +462,5 @@
     {
         isHovered = false;
         hoveredElement = string.Empty;
-    }
-
-    public void CancelButton_Click(EventArgs e)
-    {
-        AppSettingsViewModel.ShowAdvancedOptions = false;
-        return;
     }
 }

@@ -7,9 +7,11 @@ namespace AxCrypt.Fake
 {
     public class FakeVerifySignInPassword : IVerifySignInPassword
     {
-        public bool Verify(string description)
+        public async Task<bool> Verify(string description)
         {
-            return true;
+            await Task.Delay(1000);
+            bool result = false;
+            return result;
         }
     }
 }

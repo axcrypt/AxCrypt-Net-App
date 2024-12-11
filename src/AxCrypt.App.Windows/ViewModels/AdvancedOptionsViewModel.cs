@@ -30,6 +30,9 @@ public class AdvancedOptionsViewModel : ComponentBase
         TempConfigPath = New<UserSettings>().TemporaryFilePath;
     }
 
+    public bool ShowAdvancedOptions { get; set; }
+    public string ErrorMessage { get; set; }
+
     public async void BrowseButton_click(EventArgs e)
     {
         IFolderPicker folderPicker = new Services.FolderPickerWindows();
@@ -45,11 +48,13 @@ public class AdvancedOptionsViewModel : ComponentBase
     {
         if (string.IsNullOrEmpty(TempConfigPath))
         {
+            ErrorMessage = "Temporary path cannot be null";
             return;
         }
 
         if (TempConfigPath == New<UserSettings>().TemporaryFilePath)
         {
+            ErrorMessage = "Given path is already selected";
             return;
         }
 
@@ -67,6 +72,7 @@ public class AdvancedOptionsViewModel : ComponentBase
 
         New<UserSettings>().TemporaryFilePath = TempConfigPath;
         await ShutDownAnd(New<IUIThread>().RestartApplication);
+        ShowAdvancedOptions = false;
     }
 
     private async Task ShutDownAnd(Action finalAction)
@@ -86,6 +92,7 @@ public class AdvancedOptionsViewModel : ComponentBase
 
     public void CancelButton_Click(EventArgs e)
     {
+        ShowAdvancedOptions = false;
         return;
     }
 

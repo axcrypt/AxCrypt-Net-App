@@ -37,7 +37,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     public AppSettingsViewModel(RecentFilesViewModel recentFilesViewModel)
     {
-        _logOnViewModel = AxCServiceProvider.LogOnViewModel!; 
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
         _mainViewModel = _logOnViewModel.MainViewModel;
         _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
         _recentFilesViewModel = recentFilesViewModel;
@@ -48,6 +48,7 @@ public class AppSettingsViewModel : ViewModelBase
         IsFileNameOn = New<UserSettings>().EncryptFilePropertiesFileName;
         IsDateModifiedOn = New<UserSettings>().EncryptFilePropertiesDateModified;
         IsFileNameOn = New<UserSettings>().EncryptFilePropertiesFileName;
+        AdvancedOptionsViewModel = new AdvancedOptionsViewModel();
     }
 
     public void Initialized()
@@ -60,6 +61,8 @@ public class AppSettingsViewModel : ViewModelBase
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); _logOnViewModel.UIStateChanged(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { _userInitiatedUpdateCheckPending = true; await DisplayUpdateCheckPopups(); });
     }
+
+    public AdvancedOptionsViewModel AdvancedOptionsViewModel { get; set; }
 
     public SubscriptionLevel SubscriptionLevel
     {
@@ -99,8 +102,6 @@ public class AppSettingsViewModel : ViewModelBase
             _logOnViewModel.UIStateChanged();
         }
     }
-
-    public bool ShowAdvancedOptions { get; set; }
 
     public int InactivitySignOut { get; set; }
 
@@ -248,7 +249,7 @@ public class AppSettingsViewModel : ViewModelBase
             return;
         }
 
-        ShowAdvancedOptions = true;
+        AdvancedOptionsViewModel.ShowAdvancedOptions = true;
     }
 
     #region Debug Section

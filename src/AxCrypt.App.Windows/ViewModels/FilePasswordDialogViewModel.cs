@@ -42,9 +42,9 @@ public class FilePasswordDialogViewModel : ViewModelBase
 
     private void BindPropertyChangedEvents()
     {
-        ViewModel.BindPropertyChanged(nameof(FilePasswordViewModel.ShowPassword), (bool show) => { FilePasswordDialog.Show(); });
-        ViewModel.BindPropertyChanged(nameof(FilePasswordViewModel.FileName), (string fileName) => { FilePasswordDialog.Show(); });
-        ViewModel.BindPropertyChanged(nameof(FilePasswordViewModel.IsLegacyFile), (bool isLegacy) => { IsShowMoreVisible = isLegacy; FilePasswordDialog.Show(); });
+        ViewModel.BindPropertyChanged(nameof(FilePasswordViewModel.ShowPassword), (bool show) => { FilePasswordDialog.Show(); DialogResult = DialogResult.None; });
+        ViewModel.BindPropertyChanged(nameof(FilePasswordViewModel.FileName), (string fileName) => { FilePasswordDialog.Show(); DialogResult = DialogResult.None; });
+        ViewModel.BindPropertyChanged(nameof(FilePasswordViewModel.IsLegacyFile), (bool isLegacy) => { IsShowMoreVisible = isLegacy; FilePasswordDialog.Show(); DialogResult = DialogResult.None; });
     }
 
     public void OkButton_Click(EventArgs e)

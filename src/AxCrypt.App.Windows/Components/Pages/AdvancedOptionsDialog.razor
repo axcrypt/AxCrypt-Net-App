@@ -1,24 +1,34 @@
 ﻿@using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.Content
 
 @inject AdvancedOptionsViewModel viewModel
 
-<div class="modal">
-    <div class="modal-content">
-        <div>
-            <label>Application Config Path</label>
-            <input type="path" @bind="viewModel.AppConfigPath" />
+<div id="modal-dialog6" class="modalDialog">
+    <div style="text-align: left;">
+        <div class="modal-header text-center" style="display:block; font-weight:600;">
+            <span>Advanced Option</span>
         </div>
-
-        <div>
-            <label>Temp File Path</label>
-            <input type="path" @bind="viewModel.TempConfigPath" @oninput="(e)=> viewModel.BrowseButton_click(e)" />
+        <div class="modal-body">
+            <div style="padding-bottom: 15px;">
+                <label>Application Config Path</label><br />
+                <input type="path" @bind="viewModel.AppConfigPath" />
+            </div>
+            <div>
+                <label>Temp File Path</label><br />
+                <input type="path" @bind="viewModel.TempConfigPath" @oninput="(e)=> viewModel.BrowseButton_click(e)" />
+            </div>
         </div>
-        <div class="button-container">
-            <button @onclick="(e)=> viewModel.ButtonOk_Click(e)">OK</button>
-            <button @onclick="(e)=> viewModel.CancelButton_Click(e)">Cancel</button>
+        <div class="modal-footer">
+            <button class="button font-medium success btn-small" @onclick="(e)=> viewModel.ButtonOk_Click(e)">@Texts.ButtonOkText</button>
+            <button class="btn-small font-medium button cancel" @onclick="(e)=> viewModel.CancelButton_Click(e)">@Texts.ButtonCancelText</button>
         </div>
+        @if (!string.IsNullOrEmpty(viewModel.ErrorMessage))
+        {
+            <div class="error-message"> @viewModel.ErrorMessage</div>
+        }
     </div>
 </div>
+
 @code {
     protected override void OnInitialized()
     {
