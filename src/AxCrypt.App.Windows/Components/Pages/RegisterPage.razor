@@ -1,0 +1,70 @@
+﻿@using AxCrypt.App.Components.Models
+@using AxCrypt.Content
+
+@inject RegisterViewModel Register
+
+<section class="content">
+    <article class="left-section reg-sec" id="content-wrap">
+        <h1 class="reg-tle">Welcome to <span class="grn-clr">AxCrypt</span> world!</h1>
+        <span style="margin-bottom: 10px;">Currently you are <b class="font-extra-bold">offline</b>. However, you still can <span class="grn-clr font-extra-bold"><b>Sign up!</b></span></span><br />
+        <label class="sub-head">@Texts.PromptSignUp</label>
+        <EditForm Model="@Register.CreateAccountModel" class="signup-sec">
+            <div class="form-field">
+                <label>Your email</label>
+                <input type="email" @bind-value="Register.CreateAccountModel.UserEmail" class="form-control email-img" placeholder="Enter your email" />
+            </div>
+            <div class="form-field">
+                <label>Create a password:</label>
+                <input type="@passwordFiledType" @bind-value="Register.CreateAccountModel.PasswordText" class="form-control pswd-img" placeholder="Create your password" />
+            </div>
+            <div>
+                <label>Verify password:</label>
+                <input type="@passwordFiledType" @bind-value="Register.CreateAccountModel.Verification" class="form-control pswd-img" placeholder="Type your password one more time" />
+            </div>
+            <div class="check-bx">
+                <input type="checkbox" style="margin-right: 5px !important;" @bind="canShowPassword" @onclick="async() => await ToggleShowPassword()"/>
+                <span class="che-txt">@Texts.ShowPasswordOptionPrompt</span>
+            </div>
+
+            <button class="button grn-bg whte-clr" style="width:100%; margin: 20px 0px;" @onclick="async(e) => await Register.ButtonOk_Click(e)">@Texts.PromptSignUp</button>
+
+            <div class="signup-link">
+                <NavLink class="nav-link" href="mailto:support@axcrypt.net">
+                    <span class="che-txt">Do you need any help?</span>
+                    <span class="grn-clr">@Texts.ContactUsHeading!</span>
+                </NavLink>
+            </div>
+        </EditForm>
+    </article>
+    <article class="right-section">
+        <div class="signin-right-img"></div>
+    </article>
+</section>
+
+@code {
+    private bool _isCreating = false;
+    private string passwordFiledType = "password";
+    bool canShowPassword = false;
+
+    private async Task RefreshComponentAsync()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    async Task ToggleShowPassword()
+    {
+        canShowPassword = !canShowPassword;
+        if (canShowPassword)
+        {
+            passwordFiledType = "text";
+            await RefreshComponentAsync();
+            return;
+        }
+
+        passwordFiledType = "password";
+        await RefreshComponentAsync();
+    }
+}

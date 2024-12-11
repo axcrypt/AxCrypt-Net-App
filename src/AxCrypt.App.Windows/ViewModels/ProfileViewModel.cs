@@ -21,6 +21,7 @@ namespace AxCrypt.App.Windows.ViewModels;
 public class ProfileViewModel
 {
     private LogOnViewModel _logOnViewModel;
+    private RegisterViewModel _registerViewModel;
     private FileOperationViewModel? _fileOperationViewModel;
     private MainViewModel? _mainViewModel;
     private IExportKeyManagementFile? ExportKeyFile;
@@ -35,6 +36,7 @@ public class ProfileViewModel
     public ProfileViewModel()
     {
         _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
+        _registerViewModel = AxCServiceProvider.RegisterViewModel!;
         Account = new AccountModel();
     }
 
@@ -92,7 +94,7 @@ public class ProfileViewModel
                 break;
 
             case KeyManagement.CreateAxCryptID:
-                _logOnViewModel.CreateNewAccountDialog.Show();
+                _registerViewModel.ShowDialog(string.Empty, EmailAddress.Empty);
                 break;
         }
     }

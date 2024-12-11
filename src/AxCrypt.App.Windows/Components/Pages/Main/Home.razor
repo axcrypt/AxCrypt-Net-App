@@ -8,21 +8,18 @@
 @using static AxCrypt.Abstractions.TypeResolve;
 
 @inject LogOnViewModel LogOnViewModel
-@inject HomeUserService HomeUserService
+@inject RegisterViewModel Register
 @inject NavigationManager navigation
 @inject IJSRuntime JSRuntime
 
 <div dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (LogOnViewModel.IsVisible)
     {
-        @if (ShowSignUp)
-        {
-            <AxCrypt.App.Windows.Components.Pages.Register />
-        }
-        else
-        {
-            <AxCrypt.App.Windows.Components.Pages.LoginPage />
-        }
+        <AxCrypt.App.Windows.Components.Pages.LoginPage />
+    }
+    else if (ShowSignUp)
+    {
+        <AxCrypt.App.Windows.Components.Pages.RegisterPage />
     }
     else if (LogOnViewModel.IsLoggedOn)
     {
@@ -33,57 +30,25 @@
 
 
 @code {
-    private bool IsLoading { get; set; }
-    private bool IsWideScreen { get; set; }
-
     public bool ShowSignUp { get; set; }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
-
-                if (New<AxCryptOnlineState>().IsOffline)
-                {
-                    navigation.NavigateTo("/register");
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error determining screen width: {ex.Message}");
-            }
-            finally
-            {
-                IsLoading = false;
-                //StateHasChanged();
-            }
-        }
-    }
 
     protected override void OnInitialized()
     {
+        ShowSignUp = Register.ShowSignUp;
         base.OnInitialized();
-        HomeUserService.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
+        Register.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdatePageState;
         LogOnViewModel.OnSubscriptionChanged += UpdatePageState;
     }
 
     private void UpdatePageState(bool isShow = false)
     {
-        InvokeAsync(() =>
-        {
-            StateHasChanged(); // Refresh UI
-        });
+        UpdatePageState();
     }
-    
-    private void UpdatePageState()
+
+    private async void UpdatePageState()
     {
-        InvokeAsync(() =>
+        await InvokeAsync(() =>
         {
             StateHasChanged(); // Refresh UI
         });
@@ -92,6 +57,6 @@
     private void UpdateSignUpPageVisibility(bool showSignUp)
     {
         ShowSignUp = showSignUp;
-        UpdatePageState(); // Refresh UI
+        UpdatePageState();
     }
 }

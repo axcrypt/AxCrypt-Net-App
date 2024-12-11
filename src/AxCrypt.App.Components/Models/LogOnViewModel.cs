@@ -21,7 +21,6 @@ public class LogOnViewModel : ViewModelBase
         ShareKeyDialog = new CommonDialogService();
         ImportPrivatePasswordDialog = new CommonDialogService();
         RenewSubscriptionDialog = new CommonDialogService();
-        CreateNewAccountDialog = new CommonDialogService();
         VerifyAccountDialog = new CommonDialogService();
         VerifyPasswordDialog = new CommonDialogService();
         AboutDialog = new CommonDialogService();
@@ -71,8 +70,6 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService ImportPrivatePasswordDialog { get { return GetProperty<CommonDialogService>(nameof(ImportPrivatePasswordDialog)); } set { SetProperty(nameof(ImportPrivatePasswordDialog), value); } }
 
     public CommonDialogService RenewSubscriptionDialog { get { return GetProperty<CommonDialogService>(nameof(RenewSubscriptionDialog)); } set { SetProperty(nameof(RenewSubscriptionDialog), value); } }
-
-    public CommonDialogService CreateNewAccountDialog { get { return GetProperty<CommonDialogService>(nameof(CreateNewAccountDialog)); } set { SetProperty(nameof(CreateNewAccountDialog), value); } }
 
     public CommonDialogService VerifyAccountDialog { get { return GetProperty<CommonDialogService>(nameof(VerifyAccountDialog)); } set { SetProperty(nameof(VerifyAccountDialog), value); } }
 
@@ -150,66 +147,4 @@ public class LogOnViewModel : ViewModelBase
     {
         OnSubscriptionChanged?.Invoke();
     }
-
-    //public async Task HandleValidSubmit(LoginModel login)
-    //{
-    //    Loading = true;
-    //    try
-    //    {
-    //        if (New<UserSettings>().RememberMe != login.RememberMe)
-    //        {
-    //            New<UserSettings>().RememberMe = login.RememberMe;
-    //        }
-
-    //        EmailAddress userEmail = ValidUserEmail(login);
-    //        if (userEmail == EmailAddress.Empty)
-    //        {
-    //            Loading = false;
-    //            return;
-    //        }
-
-    //        AccountStatus status = AccountStatus.Verified;
-    //        //AccountStatus status = await New<MainHomeViewModel>().SignIn(userEmail, login.Password);
-    //        switch (status)
-    //        {
-    //            case AccountStatus.Verified:
-    //            case AccountStatus.DefinedByServer:
-    //                NavigateToHomePage();
-    //                break;
-    //            default:
-    //                login.ErrorMessage = Texts.LoginError;
-    //                break;
-    //        }
-
-    //        Loading = false;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        throw new Exception(ex.Message, ex);
-    //    }
-    //}
-
-
-    //private EmailAddress ValidUserEmail(LoginModel loginModel)
-    //{
-    //    loginModel.Email = loginModel.Email.Trim();
-    //    if (string.IsNullOrEmpty(loginModel.Email))
-    //    {
-    //        loginModel.ErrorMessage = Texts.InvalidEmail;
-    //        return EmailAddress.Empty;
-    //    }
-
-    //    if (!EmailAddress.TryParse(loginModel.Email, out EmailAddress parsedEmail))
-    //    {
-    //        loginModel.ErrorMessage = Texts.InvalidEmail;
-    //        return EmailAddress.Empty;
-    //    }
-
-    //    if (New<UserSettings>().RememberMe)
-    //    {
-    //        New<UserSettings>().UserEmail = parsedEmail.Address;
-    //    }
-
-    //    return parsedEmail;
-    //}
 }

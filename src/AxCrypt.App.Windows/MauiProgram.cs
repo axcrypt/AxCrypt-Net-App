@@ -96,6 +96,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<NotificationPopup>();
 
             services.AddSingleton<LogOnViewModel>();
+            services.AddSingleton<RegisterViewModel>();
 
             services.AddSingleton<ProfileOptionComponent>();
             services.AddSingleton<SupportService>();
@@ -128,12 +129,9 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<AdvancedOptionsViewModel>();
             services.AddSingleton<RecentFilesViewModel>();
             services.AddSingleton<ImportPrivateKeyViewModel>();
-            services.AddSingleton<CreateNewAccountDialogViewModel>();
             services.AddSingleton<FilePasswordDialogViewModel>();
             services.AddSingleton<VerifyAccountDialogViewModel>();
             services.AddSingleton<VerifyPasswordViewModel>();
-
-            services.AddSingleton<HomeUserService>();
 
             TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
 

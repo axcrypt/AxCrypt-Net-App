@@ -26,6 +26,14 @@ public static class AxCServiceProvider
             return GetService<LogOnViewModel>();
         }
     }
+    
+    public static RegisterViewModel? RegisterViewModel
+    {
+        get
+        {
+            return GetService<RegisterViewModel>();
+        }
+    }
 
     public static ProcessIndicatorService? ProcessIndicatorService
     {

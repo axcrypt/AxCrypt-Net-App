@@ -22,10 +22,9 @@ namespace AxCrypt.App.Windows;
 
 public partial class MainPage : ContentPage, ISignIn
 {
-    //HomeViewModel viewModel;
     private ICustomNavigationService _navigationManager;
-    private HomeUserService _homeUserService;
     private LogOnViewModel _logOnService;
+    private RegisterViewModel _registerViewModel;
 
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
@@ -39,16 +38,13 @@ public partial class MainPage : ContentPage, ISignIn
         //new Styling(Resources.axcrypticon).Style(this, _recentFilesContextMenuStrip, _watchedFoldersContextMenuStrip);
     }
 
-    //public MainPage(NavigationManager navigationManager, HomeViewModel homeModel) : this()
-    public MainPage(HomeUserService homeUserService, LogOnViewModel logOnService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel) : this()
+    public MainPage(LogOnViewModel logOnService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel) : this()
     {
-        //_navigationManager = customNavigationService;
-        //_mainViewModel = New<MainViewModel>();
-        _homeUserService = homeUserService;
         _logOnService = logOnService;
         _mainViewModel = mainViewModel;
         _fileOperationViewModel = fileOperationViewModel;
         _knownFoldersViewModel = knownFoldersViewModel;
+        _registerViewModel = registerViewModel;
     }
 
     protected override void OnAppearing()
@@ -168,7 +164,7 @@ public partial class MainPage : ContentPage, ISignIn
 
     private async Task SignInAsync()
     {
-        SignUpSignIn signUpSignIn = new SignUpSignIn(_navigationManager, _homeUserService)
+        SignUpSignIn signUpSignIn = new SignUpSignIn(_navigationManager, _registerViewModel)
         {
             Version = _apiVersion,
             UserEmail = New<UserSettings>().UserEmail,
@@ -399,20 +395,17 @@ public partial class MainPage : ContentPage, ISignIn
 
     private void HandleCreateNewAccount(LogOnEventArgs e)
     {
-        CreateNewAccountDialogViewModel createNewAccountDialogViewModel = new CreateNewAccountDialogViewModel();
-        createNewAccountDialogViewModel.SetCreateNewAccount(e.Passphrase.Text, e.Identity.UserEmail);
-        //using (CreateNewAccountDialog dialog = new CreateNewAccountDialog(this, e.Passphrase.Text, EmailAddress.Empty))
-        //{
-        //    DialogResult dialogResult = dialog.ShowDialog(this);
-        //    if (dialogResult != DialogResult.OK)
-        //    {
-        //        e.Cancel = true;
-        //        return;
-        //    }
-        e.DisplayPassphrase = createNewAccountDialogViewModel.ShowPassword;
-        e.Passphrase = new Passphrase(createNewAccountDialogViewModel.PassphraseText);
-        e.UserEmail = createNewAccountDialogViewModel.UserEmail;
-        //}
+        _registerViewModel.ShowDialog(e.Passphrase.Text, e.Identity.UserEmail);
+        DialogResult result = _registerViewModel.DialogResult;
+        if (result != DialogResult.OK)
+        {
+            e.Cancel = true;
+            return;
+        }
+
+        e.DisplayPassphrase = _registerViewModel.CreateAccountModel.ShowPassword;
+        e.Passphrase = new Passphrase(_registerViewModel.CreateAccountModel.PasswordText);
+        e.UserEmail = _registerViewModel.CreateAccountModel.UserEmail;
     }
 
     private async Task HandleExistingLogOn(LogOnEventArgs e)
@@ -441,6 +434,7 @@ public partial class MainPage : ContentPage, ISignIn
 
         if (filePasswordDialog.DialogResult != DialogResult.OK || filePasswordDialog.ViewModel!.Passphrase == Passphrase.Empty)
         {
+
             e.Cancel = true;
             return;
         }

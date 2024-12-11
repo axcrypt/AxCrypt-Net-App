@@ -22,7 +22,6 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Components.Models;
 using Windows.Graphics;
 using AxCrypt.App.Windows.Code;
@@ -44,7 +43,7 @@ public partial class App : Application
 
     private readonly IDispatcher _dispatcher;
 
-    public App(IDispatcher dispatcher, HomeUserService homeUserService, LogOnViewModel logOnService)
+    public App(IDispatcher dispatcher, LogOnViewModel logOnService, RegisterViewModel registerViewModel)
     {
         _dispatcher = dispatcher;
         InitializeComponent();
@@ -57,10 +56,9 @@ public partial class App : Application
 
         SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent();
 
-        //HomeViewModel homeModel = new HomeViewModel(navigationManager);
         _progressBackgroundWorker = new ProgressBackgroundComponent(null);
 
-        MainPage = new MainPage(homeUserService, logOnService, _mainViewModel, _fileOperationViewModel, _knownFoldersViewModel);
+        MainPage = new MainPage(logOnService, _mainViewModel, _fileOperationViewModel, _knownFoldersViewModel, registerViewModel);
     }
 
     protected override void OnStart()

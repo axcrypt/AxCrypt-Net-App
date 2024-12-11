@@ -6,6 +6,8 @@ using AxCrypt.Core.UI;
 using Microsoft.AspNetCore.Components;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Windows.Services;
+using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Utility;
 
 namespace AxCrypt.App.Windows.Code;
 
@@ -18,12 +20,12 @@ internal class SignUpSignIn
     public ApiVersion Version { get; set; }
 
     private readonly ICustomNavigationService _navigationManager;
-    private readonly HomeUserService _homeUserService;
+    private readonly RegisterViewModel _registerModel;
 
-    public SignUpSignIn(ICustomNavigationService navigationManager, HomeUserService homeUserService)
+    public SignUpSignIn(ICustomNavigationService navigationManager, RegisterViewModel registerModel)
     {
         _navigationManager = navigationManager;
-        _homeUserService = homeUserService;
+        _registerModel = registerModel;
     }
 
     public async Task DialogsAsync(ISignIn signingInState)
@@ -40,9 +42,14 @@ internal class SignUpSignIn
 
         viewModel.CreateAccount = (e) =>
         {
-            _homeUserService.ShowSignUpPage();
-            //_navigationManager.NavigateTo($"/signup?UserEmail={UserEmail}");
-            return Task.CompletedTask;
+            _registerModel.ShowDialog(String.Empty, EmailAddress.Parse(UserEmail));
+            DialogResult result = _registerModel.DialogResult;
+            if (result != DialogResult.OK)
+            {
+                e.Cancel = true;
+            }
+
+            return Task.FromResult<object>(null);
         };
 
         viewModel.SignInCommandAsync = signingInState.SignIn;

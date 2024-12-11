@@ -1,9 +1,7 @@
 ﻿@page "/login"
-
 @using AxCrypt.App.Components.Models
 @using AxCrypt.App.Components.Services
 @using AxCrypt.App.Components.Utility
-@using AxCrypt.App.Components.Utility.View
 @using AxCrypt.Content
 @using AxCrypt.Core
 @using AxCrypt.Core.UI.ViewModel
@@ -166,22 +164,6 @@
     {
         BrowseUtility.RedirectToAccountWebUrl(Texts.PasswordResetHyperLink);
     }
-
-    // private string SetAutoFocus(string field)
-    // {
-    //     if (field == "useremail")
-    //     {
-    //         return string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? "autofocus" : "";
-    //     }
-
-    //     if (field == "password")
-    //     {
-    //         return !string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? "autofocus" : "";
-    //     }
-
-    //     return "";
-    // }
-
 }
 
 <script type="text/javascript">
