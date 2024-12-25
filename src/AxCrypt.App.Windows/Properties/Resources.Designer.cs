@@ -103,9 +103,9 @@ namespace AxCrypt.App.Windows.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] google_drive_40px {
+        internal static byte[] googledrive_40px {
             get {
-                object obj = ResourceManager.GetObject("google-drive_40px", resourceCulture);
+                object obj = ResourceManager.GetObject("googledrive_40px", resourceCulture);
                 return ((byte[])(obj));
             }
         }

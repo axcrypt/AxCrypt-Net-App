@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 
@@ -11,8 +10,12 @@
             The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
             either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
-
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.26100.0</TargetFrameworks>
         <OutputType>Exe</OutputType>
+
+		<SelfContained>true</SelfContained>
+		<!--<RuntimeIdentifier>win-arm64</RuntimeIdentifier>-->
+		
         <RootNamespace>AxCrypt.App.Windows</RootNamespace>
         <UseMaui>true</UseMaui>
         <SingleProject>true</SingleProject>
@@ -24,16 +27,28 @@
         <ApplicationTitle>AxCrypt</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.axcrypt.app.Windows</ApplicationId>
+        <ApplicationId>axcrypt</ApplicationId>
 
-        <!-- Versions -->
-        <ApplicationDisplayVersion>2.2.0</ApplicationDisplayVersion>
+		<!-- Versions -->
+        <ApplicationDisplayVersion>3.0.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
+        <!--<WindowsPackageType>None</WindowsPackageType>-->
 
-        <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
-        <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.26100.0</SupportedOSPlatformVersion>
+        <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+        <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+        <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+        <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+        <GenerateTestArtifacts>True</GenerateTestArtifacts>
+        <HoursBetweenUpdateChecks>24</HoursBetweenUpdateChecks>
+        <AppxPackageDir>C:\Projects\GitHub\AxCrypt.Net.App\src\AxCrypt.App.Windows\bin\Release\net8.0-windows10.0.26100.0\win10-arm64\</AppxPackageDir>
+
+		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+		<AppxPackageSigningTimestampDigestAlgorithm>SHA384</AppxPackageSigningTimestampDigestAlgorithm>
+		<PackageCertificateThumbprint>82395302B94909ECFD6829E9DC5504A8E7F65155</PackageCertificateThumbprint>
+
     </PropertyGroup>
-
+	
     <ItemGroup>
         <!-- App Icon -->
         <MauiIcon Include="Resources\AppIcon\appicon.svg" />
@@ -50,14 +65,6 @@
 
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="AxCryptWindowsForms\**" />
-      <Content Remove="AxCryptWindowsForms\**" />
-      <EmbeddedResource Remove="AxCryptWindowsForms\**" />
-      <MauiXaml Remove="AxCryptWindowsForms\**" />
-      <None Remove="AxCryptWindowsForms\**" />
     </ItemGroup>
 
    <ItemGroup>
@@ -84,45 +91,19 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="Components\Pages\Main\ProfileOptionComponent.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Main\FlagListComponent.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Main\Home.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Main\HomeActionsComponent.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Main\NotificationPopup.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Main\AppSettingsComponent.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Main\TopMenu.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Main\Upgrade.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Shared\AlertComponent.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Shared\ProgressBar.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Shared\ShareKey.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Feedback.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Components\Pages\Notification.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
+      <Content Update="Components\Pages\Main\ProfileOptionComponent.razor" />
+      <Content Update="Components\Pages\Main\FlagListComponent.razor" />
+      <Content Update="Components\Pages\Main\Home.razor" />
+      <Content Update="Components\Pages\Main\HomeActionsComponent.razor" />
+      <Content Update="Components\Pages\Main\NotificationPopup.razor" />
+      <Content Update="Components\Pages\Main\AppSettingsComponent.razor" />
+      <Content Update="Components\Pages\Main\TopMenu.razor" />
+      <Content Update="Components\Pages\Main\Upgrade.razor" />
+      <Content Update="Components\Pages\Shared\AlertComponent.razor" />
+      <Content Update="Components\Pages\Shared\ProgressBar.razor" />
+      <Content Update="Components\Pages\Shared\ShareKey.razor" />
+      <Content Update="Components\Pages\Feedback.razor" />
+      <Content Update="Components\Pages\Notification.razor" />
     </ItemGroup>
 
     <ItemGroup>
@@ -139,11 +120,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PRIResource Remove="AxCryptWindowsForms\**" />
-    </ItemGroup>
-
-
-    <ItemGroup>
+      <MauiImage Include="Platforms\Windows\axcryptappicon.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </MauiImage>
       <MauiImage Include="Resources\axcrypticon.ico" />
       <MauiImage Include="Resources\axcrypticon128.png" />
       <MauiImage Include="Resources\documents_white_40px.png" />

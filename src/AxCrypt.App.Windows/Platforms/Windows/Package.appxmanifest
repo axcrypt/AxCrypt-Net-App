@@ -6,41 +6,48 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity Name="maui-package-name-placeholder" Publisher="CN=User Name" Version="0.0.0.0" />
+	<Identity Name="AxCrypt" Publisher="CN=AxCrypt AB, O=AxCrypt AB, S=Stockholms län, C=SE" Version="3.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="B857801A-8A85-43F7-9532-643D0CE6B8A1" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+	<mp:PhoneIdentity PhoneProductId="B857801A-8A85-43F7-9532-643D0CE6B8A1" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
-  <Properties>
-    <DisplayName>$placeholder$</DisplayName>
-    <PublisherDisplayName>User Name</PublisherDisplayName>
-    <Logo>$placeholder$.png</Logo>
-  </Properties>
+	<Properties>
+		<DisplayName>AxCrypt - File Encryption Made Easy</DisplayName>
+		<PublisherDisplayName>AxCrypt AB</PublisherDisplayName>
+		<Logo>axcryptappicon.png</Logo>
+	</Properties>
 
-  <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
-    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
-  </Dependencies>
+	<Dependencies>
+		<TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0" />
+		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0" />
+	</Dependencies>
 
-  <Resources>
-    <Resource Language="x-generate" />
-  </Resources>
+	<Resources>
+		<Resource Language="x-generate" />
+	</Resources>
 
-  <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
-      <uap:VisualElements
-        DisplayName="$placeholder$"
-        Description="$placeholder$"
-        Square150x150Logo="$placeholder$.png"
-        Square44x44Logo="$placeholder$.png"
-        BackgroundColor="transparent">
-        <uap:DefaultTile Square71x71Logo="$placeholder$.png" Wide310x150Logo="$placeholder$.png" Square310x310Logo="$placeholder$.png" />
-        <uap:SplashScreen Image="$placeholder$.png" />
-      </uap:VisualElements>
-    </Application>
-  </Applications>
+	<Applications>
+		<Application Id="AxCrypt" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
+			<uap:VisualElements
+			  DisplayName="AxCrypt"
+			  Description="File encryption made easy"
+			  Square150x150Logo="axcryptappicon.png"
+			  Square44x44Logo="axcryptappicon.png"
+			  AppListEntry="default"
+			  BackgroundColor="transparent">
+				<uap:DefaultTile Square71x71Logo="axcryptappicon.png" Wide310x150Logo="axcryptappicon.png" Square310x310Logo="axcryptappicon.png" />
+				<uap:SplashScreen Image="axcryptappicon.png" />
+				<uap:InitialRotationPreference>
+					<uap:Rotation Preference="landscape"/>
+					<uap:Rotation Preference="portrait"/>
+					<uap:Rotation Preference="landscapeFlipped"/>
+					<uap:Rotation Preference="portraitFlipped"/>
+				</uap:InitialRotationPreference>
+			</uap:VisualElements>
+		</Application>
+	</Applications>
 
-  <Capabilities>
-    <rescap:Capability Name="runFullTrust" />
-  </Capabilities>
+	<Capabilities>
+		<rescap:Capability Name="runFullTrust" />
+	</Capabilities>
 
 </Package>

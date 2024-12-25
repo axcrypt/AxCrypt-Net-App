@@ -15,7 +15,7 @@ public class KnownFolderImageProvider : IKnownFolderImageProvider
                 return Resources.skydrive_40px;
 
             case KnownFolderKind.GoogleDrive:
-                return Resources.google_drive_40px;
+                return Resources.googledrive_40px;
 
             case KnownFolderKind.Dropbox:
                 return Resources.dropbox_40px;
