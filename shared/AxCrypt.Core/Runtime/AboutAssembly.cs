@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json.Linq;
 
 namespace AxCrypt.Core.Runtime
 {
@@ -47,7 +48,7 @@ namespace AxCrypt.Core.Runtime
                         return titleAttribute.Title;
                     }
                 }
-                return _assembly.GetName().Name;
+                return _assembly.GetName().Name!;
             }
         }
 
@@ -55,12 +56,8 @@ namespace AxCrypt.Core.Runtime
         {
             get
             {
-                IEnumerable<Attribute> attributes = _assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute));
-                if (!attributes.Any())
-                {
-                    return string.Empty;
-                }
-                return ((AssemblyInformationalVersionAttribute)attributes.First()).InformationalVersion;
+                AssemblyFileVersionAttribute versionAttribute = (AssemblyFileVersionAttribute)_assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false).FirstOrDefault()!;
+                return versionAttribute?.Version ?? string.Empty;
             }
         }
 
@@ -88,7 +85,7 @@ namespace AxCrypt.Core.Runtime
                 }
                 return ((AssemblyProductAttribute)attributes.First()).Product;
             }
-        }
+        }   
 
         public string AssemblyCopyright
         {

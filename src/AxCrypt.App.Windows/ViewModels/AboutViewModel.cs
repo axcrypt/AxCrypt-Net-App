@@ -11,7 +11,7 @@ public class AboutViewModel
     public string? Version { get; private set; }
     public string? Copyright { get; private set; }
 
-    public void InitializeProperties()
+    public AboutViewModel()
     {
         SubscriptionStatusAndExpiration = new Display().GetLicenseStatusAndExpiration();
         ProductName = New<AboutAssembly>().AssemblyProduct;

@@ -40,7 +40,6 @@
 
     protected override void OnInitialized()
     {
-        AboutViewModel.InitializeProperties();
         LogOnViewModel.AboutDialog.OnDialogVisibilityChanged += UpdateDialogState;
         base.OnInitialized();
     }
