@@ -3,10 +3,13 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap rescap">
+  xmlns:rescap3="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/3"
+  IgnorableNamespaces="uap mp uap2 uap3 rescap rescap3">
 
-	<Identity Name="AxCrypt" Publisher="CN=AxCrypt AB, O=AxCrypt AB, S=Stockholms län, C=SE" Version="3.0.0.0" />
+	<Identity Name="AxCrypt" Publisher="CN=AxCrypt AB, O=AxCrypt AB, S=Stockholms län, C=SE" Version="3.0.0.1" />
 
 	<mp:PhoneIdentity PhoneProductId="B857801A-8A85-43F7-9532-643D0CE6B8A1" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -28,7 +31,7 @@
 	<Applications>
 		<Application Id="AxCrypt" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
 			<uap:VisualElements
-			  DisplayName="AxCrypt"
+			  DisplayName="AxCrypt File Encryption"
 			  Description="File encryption made easy"
 			  Square150x150Logo="axcryptappicon.png"
 			  Square44x44Logo="axcryptappicon.png"
@@ -43,11 +46,27 @@
 					<uap:Rotation Preference="portraitFlipped"/>
 				</uap:InitialRotationPreference>
 			</uap:VisualElements>
+
+
+			<Extensions>
+				<uap3:Extension Category="windows.fileTypeAssociation">
+					<uap3:FileTypeAssociation Name="axx" Parameters="&quot;%1&quot;">
+						<uap:SupportedFileTypes>
+							<uap:FileType>.axx</uap:FileType>
+						</uap:SupportedFileTypes>
+						<uap2:SupportedVerbs>
+							<uap3:Verb Id="Show" Parameters="&quot;%1&quot;">Show</uap3:Verb>
+							<uap3:Verb Id="Open" Parameters="&quot;%1&quot;">Open</uap3:Verb>
+						</uap2:SupportedVerbs>
+					</uap3:FileTypeAssociation>
+				</uap3:Extension>
+			</Extensions>
+
 		</Application>
 	</Applications>
 
 	<Capabilities>
-		<rescap:Capability Name="runFullTrust" />
+		<Capability Name="internetClient" />
+		<rescap:Capability Name="runFullTrust"/>
 	</Capabilities>
-
 </Package>
