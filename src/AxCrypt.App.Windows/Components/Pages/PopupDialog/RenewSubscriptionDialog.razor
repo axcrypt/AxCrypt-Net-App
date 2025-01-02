@@ -15,7 +15,7 @@
             <div class="button-group center-column" style="padding-top:15px;">
                 <button class="button font-medium success btn-large" @onclick="RenewSubscriptionAsync">@Texts.BusinessSubscriptionRenewMenu</button>
                 <button class="btn-large font-medium button cancel" @onclick="UpdateDoNotShowAgainOptions">@Texts.ButtonNotNow</button>
-                <label> <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@IsCheckboxDontShowThisAgain" /> Do not show again </label>
+                <label> <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@IsCheckboxDontShowThisAgain" />@Texts.DontShowAgainCheckBoxText</label>
             </div>
         </div>
     </div>

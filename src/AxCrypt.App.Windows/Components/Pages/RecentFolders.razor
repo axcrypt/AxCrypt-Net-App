@@ -1,4 +1,5 @@
-﻿@using AxCrypt.Api.Model
+﻿@using AxCrypt.Content
+@using AxCrypt.Api.Model
 @using AxCrypt.App.Components.Data
 @using AxCrypt.App.Components.Utility.View
 @using AxCrypt.App.Windows.ViewModels
@@ -66,12 +67,12 @@
 
 <div id="securedContextMenu" class="hide-model-popup home-context-menu" style="display: none;">
     <dl class="font-medium" style="margin-bottom: 5px;">
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShareKey)">Share Keys</dd>
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptPermanently)">Decrypt Permanently </dd>
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptTemporarily)">Decrypt Temporarily </dd>
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.RemoveFromListButKeepSecured)">Remove from list but keep secured</dd>
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShowInExplorer)">Open Explore Here</dd>
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.AddSecuredFolder)">Add Secured Folder</dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptPermanently)">@Texts.MenuDecryptPermanentlyText</dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptTemporarily)">@Texts.MenuDecryptTemporarilyText</dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.RemoveFromListButKeepSecured)">@Texts.RemoveRecentFileToolStripMenuItemText</dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShowInExplorer)">@Texts.MenuOpenExplorerHereText</dd>
+        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.AddSecuredFolder)">@Texts.AddSecureFolderMenuItemText</dd>
     </dl>
 </div>
 

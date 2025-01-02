@@ -1,5 +1,6 @@
 ﻿@using AxCrypt.App.Components.Models
 @using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.Content
 
 @inject InviteViewModel InviteViewModel
 @inject LogOnViewModel LogOnModel
@@ -25,7 +26,7 @@
                         </span>
                     </div>
                     <div class="invite-text">
-                        <span class="grey-clr">Enter the email whom you want to invite:</span><br />
+                        <span class="grey-clr">@Texts.DialogInviteUserPromptLabelText</span><br />
                         <input type="text" id="inviteFriend" name="inviteFriend" placeholder="Type your friend's email here" @bind-value="@InviteViewModel.InvitedUser" @onfocus="InviteViewModel.OnInputFocus">
                         @if (!string.IsNullOrEmpty(InviteViewModel.ErrorMessage))
                         {
@@ -33,7 +34,7 @@
                         }
                     </div>
                     <div>
-                        <button class="button font-medium success btn-large" @onclick="()=> InviteViewModel.InviteFriend()">Invite!</button>
+                        <button class="button font-medium success btn-large" @onclick="()=> InviteViewModel.InviteFriend()">@Texts.Invite!</button>
                     </div>
                 </div>
             </div>
