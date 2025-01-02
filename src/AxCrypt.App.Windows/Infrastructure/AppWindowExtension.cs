@@ -119,10 +119,10 @@ namespace AxCrypt.App.Windows.Infrastructure
                 }
 
                 Resolve.UserSettings.RestoreFullWindow = true;
-
                 _appWindow.Show(true);
                 _appWindow.SetPresenter(AppWindowPresenterKind.Default);
                 _appWindow.MoveInZOrderAtTop();
+                //App.Current.MainPage.Focus();
             });
         }
     }

@@ -20,14 +20,22 @@
                 <div class="close-img" @onclick="ClosePopup"></div>
                 <div class="center-column">
                     <div>
-                        <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
+                        <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" />
+                        <br /><br />
                         <span class="text-center font-bold" style="font-size: 20px;">
                             Invite your friend to AxCrypt!
                         </span>
                     </div>
                     <div class="invite-text">
                         <span class="grey-clr">@Texts.DialogInviteUserPromptLabelText</span><br />
-                        <input type="text" id="inviteFriend" name="inviteFriend" placeholder="Type your friend's email here" @bind-value="@InviteViewModel.InvitedUser" @onfocus="InviteViewModel.OnInputFocus">
+                        @if (InviteViewModel.InviteUserDisabled)
+                        {
+                            <input type="text" id="inviteFriend" name="inviteFriend" placeholder="Type your friend's email here" @bind-value="@InviteViewModel.InvitedUser" disabled="disabled">
+                        }
+                        else
+                        {
+                            <input type="text" id="inviteFriend" name="inviteFriend" placeholder="Type your friend's email here" @bind-value="@InviteViewModel.InvitedUser">
+                        }
                         @if (!string.IsNullOrEmpty(InviteViewModel.ErrorMessage))
                         {
                             <div class="error-message" style="color:red;">@InviteViewModel.ErrorMessage</div>
@@ -42,7 +50,6 @@
     </div>
 }
 
-
 @code {
     private bool IsVisible;
 
@@ -56,6 +63,7 @@
     {
         InvokeAsync(() =>
         {
+            InviteViewModel.Initialize();
             IsVisible = canShowInviteDialog;
             StateHasChanged(); // Refresh UI
         });
@@ -63,8 +71,6 @@
 
     private void ClosePopup()
     {
-        InviteViewModel.InvitedUser = "";
-        InviteViewModel.ErrorMessage = "";
         LogOnModel.InviteDialog.Close();
     }
 }

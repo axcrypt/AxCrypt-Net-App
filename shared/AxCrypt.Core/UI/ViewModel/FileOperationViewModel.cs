@@ -34,7 +34,6 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
 using static AxCrypt.Abstractions.TypeResolve;
-using static AxCrypt.Common.FrameworkTypeExtensions;
 
 namespace AxCrypt.Core.UI.ViewModel
 {
@@ -125,7 +124,6 @@ namespace AxCrypt.Core.UI.ViewModel
 
         protected virtual async Task OnSelectingFiles(FileSelectionEventArgs e)
         {
-            //SelectingFiles?.Invoke(this, e);
             await Task.Run(() => { return New<IDataItemSelection>().HandleSelection(e); });
         }
 
@@ -197,16 +195,16 @@ namespace AxCrypt.Core.UI.ViewModel
             await _fileOperation.DoFilesAsync(files.Select(f => New<IDataStore>(f)).ToList(), WipeFileWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
         }
 
-        private Task EncryptionUpgradeActionAsync(IEnumerable<IDataContainer> containers)
+        private async Task EncryptionUpgradeActionAsync(IEnumerable<IDataContainer> containers)
         {
-            containers = containers ?? (SelectFiles(FileSelectionType.Folder).GetAwaiter().GetResult()).Select((fn) => New<IDataContainer>(fn));
+            containers = containers ?? (await SelectFiles(FileSelectionType.Folder)).Select((fn) => New<IDataContainer>(fn));
 
             if (!containers.Any())
             {
-                return CompletedTask;
+                return;
             }
 
-            return _fileOperation.DoFilesAsync(new DataContainerCollection(containers).Where((ds) => ds.IsEncrypted()), EncryptionUpgradeWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+            await _fileOperation.DoFilesAsync(new DataContainerCollection(containers).Where((ds) => ds.IsEncrypted()), EncryptionUpgradeWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
         }
 
         private async Task RandomRenameFilesActionAsync(IEnumerable<string> files)
@@ -239,7 +237,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
             if (fileSelectionArgs.Cancel)
             {
-                return new string[0];
+                return new string[] { };
             }
             return fileSelectionArgs.SelectedFiles;
         }

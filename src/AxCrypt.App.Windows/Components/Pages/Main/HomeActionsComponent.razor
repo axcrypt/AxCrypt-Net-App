@@ -155,7 +155,7 @@
                 <div id="mySection" style="display: none; padding-top:8px;grid-template-columns: auto auto;">
                     <div class="sub-box" style="background-color: #48772C;">
                         <div style="padding: 10px 12px; line-height:14px;">
-                            <span class="subs-plan" style="line-height:10px;">Premium</span>
+                            <span class="subs-plan" style="line-height:10px;">@Texts.PremiumAccountLabel</span>
                             <img class="plan-prm-icon" src="" alt="premium-icon" />
                             <br />
                             <span class="sub-text">For someone else</span>
@@ -234,35 +234,35 @@
         <div style="display: flex; gap: 2%;">
             @if (homeActionModel.SubscriptionLevel != SubscriptionLevel.Free)
             {
-                <div class="mre-actn-box" @onclick="(e)=> homeActionModel.RandomRenameAsync(e)">
+                <div class="mre-actn-box" @onclick="(e)=> homeActionModel.RandomRenameAsync(e)" title="@Texts.AnonymousRenameToolTip">
                     <img class="ico-eye-sml" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.AnonymousRenameMenuText</span>
                 </div>
-                <div class="mre-actn-box" @onclick="(e)=> homeActionModel.SecureWipeFiles(e)">
+                <div class="mre-actn-box" @onclick="(e)=> homeActionModel.SecureWipeFiles(e)" title="@Texts.SecureDeleteDialogTitle">
                     <img class="ico-dlt" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
                 </div>
-                <div class="mre-actn-box" @onclick="homeActionModel.EncryptionUpgrade">
+                <div class="mre-actn-box" @onclick="(e)=> homeActionModel.EncryptionUpgrade(e)" title="@Texts.UpgradeLegacyFilesMenuToolTip">
                     <img class="ico-apikey" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
                 </div>
                 @* <div class="mre-actn-box fade-clr" style="border:dotted;">
-            <span class="text-size text-style">Add action to the Home</span>
-            </div> *@
+                    <span class="text-size text-style">Add action to the Home</span>
+                </div> *@
             }
             else
             {
-                <div class="mre-actn-box atn-bgclr" @onclick="homeActionModel.AlwaysOfflineForFreeUser">
+                <div class="mre-actn-box atn-bgclr" @onclick="homeActionModel.AlwaysOfflineForFreeUser" title="@Texts.AlwaysOfflineToolTip">
                     <img class="ico-offln" src="" alt="hand-img" />
-                    <span class="text-size text-style">Always offline</span>
+                    <span class="text-size text-style">@Texts.AlwaysOffline</span>
                 </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>homeActionModel.InviteUser(e)">
+                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>homeActionModel.InviteUser(e)"  title="@Texts.InviteUserToolStripMenuItemText">
                     <img class="ico-invtfrd" src="" alt="hand-img" />
                     <span class="text-size text-style">Invite friend</span>
                 </div>
                 <div class="mre-actn-box atn-bgclr" @onclick="()=> homeActionModel.UpgradeDialog()">
                     <img class="ico-apikey" src="" alt="hand-img" />
-                    <span class="text-size text-style">Upgrade files to AES-256</span>
+                    <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
                 </div>
             }
         </div>

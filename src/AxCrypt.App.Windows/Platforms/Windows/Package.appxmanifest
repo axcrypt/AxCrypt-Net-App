@@ -33,12 +33,12 @@
 			<uap:VisualElements
 			  DisplayName="AxCrypt File Encryption"
 			  Description="File encryption made easy"
-			  Square150x150Logo="axcryptappicon.png"
-			  Square44x44Logo="axcryptappicon.png"
+			  Square150x150Logo="Resources/logos/axcrypt-icon-150x150.png"
+			  Square44x44Logo="Resources/logos/axcrypt-icon-44x44.png"
 			  AppListEntry="default"
-			  BackgroundColor="transparent">
-				<uap:DefaultTile Square71x71Logo="axcryptappicon.png" Wide310x150Logo="axcryptappicon.png" Square310x310Logo="axcryptappicon.png" />
-				<uap:SplashScreen Image="axcryptappicon.png" />
+			  BackgroundColor="white">
+				<uap:DefaultTile Square71x71Logo="Resources/logos/axcrypt-icon-71x71.png" Wide310x150Logo="Resources/logos/axcrypt-icon-310x150.png" Square310x310Logo="Resources/logos/axcrypt-icon-310x310.png" />
+				<uap:SplashScreen Image="Resources/logos/axcrypt-icon-150x150.png" BackgroundColor="white"/>
 				<uap:InitialRotationPreference>
 					<uap:Rotation Preference="landscape"/>
 					<uap:Rotation Preference="portrait"/>
@@ -46,22 +46,46 @@
 					<uap:Rotation Preference="portraitFlipped"/>
 				</uap:InitialRotationPreference>
 			</uap:VisualElements>
-
-
+			
 			<Extensions>
+				<!-- The following extension will re-route the taskbar pin and the start tile to point to the packaged app. This feature is only available in the Creators Update (build 15063). -->
+				<!-- Note: this extension is under rescap3, so you need to declare rescap3 in the xml namespaces and also IgnorableNamespaces (see xmlns under <package> above) -->
+				<rescap3:Extension Category="windows.desktopAppMigration">
+					<rescap3:DesktopAppMigration>
+						<!-- The shortcut path is the path to the previous app. You can easily obtain this by finding the installed app on the start menu, right-click, under more, Open file location -->
+						<!-- Make sure you use environment variables to build the path: %PROGRAMDATA%, %APPDATA%, %USERPROFILES% -->
+						<rescap3:DesktopApp ShortcutPath="%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\AxCrypt.lnk"/>
+					</rescap3:DesktopAppMigration>
+				</rescap3:Extension>
+				
 				<uap3:Extension Category="windows.fileTypeAssociation">
-					<uap3:FileTypeAssociation Name="axx" Parameters="&quot;%1&quot;">
+					<!--<uap3:FileTypeAssociation Name="axx" Parameters="&quot;%1&quot;">
+						<uap:Logo>Resources/logos/axcrypt-icon-44x44.png</uap:Logo>
 						<uap:SupportedFileTypes>
 							<uap:FileType>.axx</uap:FileType>
 						</uap:SupportedFileTypes>
 						<uap2:SupportedVerbs>
-							<uap3:Verb Id="Show" Parameters="&quot;%1&quot;">Show</uap3:Verb>
 							<uap3:Verb Id="Open" Parameters="&quot;%1&quot;">Open</uap3:Verb>
+							<uap3:Verb Id="Decrypt" Parameters="&quot;%1&quot;">Decrypt</uap3:Verb>
 						</uap2:SupportedVerbs>
+						
+					</uap3:FileTypeAssociation>-->
+
+					<uap3:FileTypeAssociation Name="axx">
+						<uap:SupportedFileTypes>
+							<uap:FileType>.axx</uap:FileType>
+						</uap:SupportedFileTypes>
+						<uap2:SupportedVerbs>
+							<uap3:Verb Id="Open" Parameters="&quot;%1&quot;">Open</uap3:Verb>
+							<uap3:Verb Id="Decrypt" Parameters="&quot;%1&quot;">Decrypt</uap3:Verb>
+						</uap2:SupportedVerbs>
+						
+						<!--<uap:InfoTip>AxCrypt encrypted file</uap:InfoTip>
+						<uap:Logo>Resources/logos/axcrypt-icon-44x44.png</uap:Logo>
+						<uap:DisplayName>AxCrypt</uap:DisplayName>-->
 					</uap3:FileTypeAssociation>
 				</uap3:Extension>
 			</Extensions>
-
 		</Application>
 	</Applications>
 

@@ -21,7 +21,6 @@ using AxCrypt.Core.Ipc;
 using Microsoft.Maui.Controls.Platform;
 using Microsoft.UI.Xaml.Controls;
 
-
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -87,7 +86,7 @@ namespace AxCrypt.App.Windows.WinUI
                 }
                 else
                 {
-                   // RunBackground(commandLine);
+                    // RunBackground(commandLine);
                 }
             }
             catch (Exception ex)
@@ -265,8 +264,8 @@ namespace AxCrypt.App.Windows.WinUI
                 Exit();
             }
             ExceptionMessageAndReport(e.Exception as Exception);
-        }     
-        
+        }
+
         private void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
         {
             if (e.ExceptionObject is ApplicationExitException)
@@ -298,8 +297,13 @@ namespace AxCrypt.App.Windows.WinUI
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
+            Microsoft.Windows.AppLifecycle.AppActivationArguments appActivationArguments = Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
+            if(appActivationArguments.Kind == Microsoft.Windows.AppLifecycle.ExtendedActivationKind.ToastNotification)
+            {
+                return;
+            }
+
             base.OnLaunched(args);
         }
     }
-
 }

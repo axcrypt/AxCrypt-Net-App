@@ -68,6 +68,11 @@
     </ItemGroup>
 
    <ItemGroup>
+   	<ProjectReference Include="..\..\shared\AxCrypt.Abstractions\AxCrypt.Abstractions.csproj" />
+   	<ProjectReference Include="..\..\shared\AxCrypt.Api\AxCrypt.Api.csproj" />
+   	<ProjectReference Include="..\..\shared\AxCrypt.Common\AxCrypt.Common.csproj" />
+   	<ProjectReference Include="..\..\shared\Axcrypt.Content\AxCrypt.Content.csproj" />
+   	<ProjectReference Include="..\..\shared\AxCrypt.Core\AxCrypt.Core.csproj" />
    	<ProjectReference Include="..\..\shared\AxCrypt.Cryptor\AxCrypt.Cryptor.csproj" />
    	<ProjectReference Include="..\..\shared\AxCrypt.Mono\AxCrypt.Mono.csproj" />
    	<ProjectReference Include="..\AxCrypt.App.Components\AxCrypt.App.Components.csproj" />
@@ -138,6 +143,21 @@
     <ItemGroup>
       <None Update="Resources\AppIcon\appicon.ico">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\logos\axcrypt-icon-150x150.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\logos\axcrypt-icon-310x150.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\logos\axcrypt-icon-310x310.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\logos\axcrypt-icon-44x44.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\logos\axcrypt-icon-71x71.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 

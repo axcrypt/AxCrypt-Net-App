@@ -3,9 +3,9 @@ using AxCrypt.Api.Model;
 using AxCrypt.Core.UI;
 using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.Core.Crypto.Asymmetric;
-
-using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Windows.Services;
+using AxCrypt.Content;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -13,62 +13,104 @@ public class InviteViewModel
 {
     private IStatusAlertService _alerService;
 
-    public InviteViewModel()
+    public InviteViewModel(IStatusAlertService alertService)
     {
-        _alerService = AxCServiceProvider.StatusAlertService!;
+        //_alerService = AxCServiceProvider.StatusAlertService!;
+        _alerService = alertService!;
     }
 
-    public string? ErrorMessage { get;  set; }
+    public string? ErrorMessage { get; set; }
+
+    public bool InviteUserDisabled { get; set; }
+
     public string? InvitedUser { get; set; }
-
-    public void OnInputFocus()
-    {
-        ErrorMessage = string.Empty;
-    }
 
     public async Task InviteFriend()
     {
-        ErrorMessage = string.Empty;
-
-        if (string.IsNullOrEmpty(InvitedUser))
+        if (InviteUserDisabled)
         {
-            ErrorMessage = "Please enter a valid email.";
             return;
         }
 
-        bool isInvited = await EnsureUserAccountStatusAndGetInvitedUserPublicKey();
-        if (isInvited)
+        if (!AdHocValidationDueToMonoLimitations())
         {
-            _alerService.Success($"You send invitation to {InvitedUser} successfully");
-            InvitedUser = "";
-            ErrorMessage = "";
+            return;
         }
 
-        return;
+        IEnumerable<UserPublicKey> userPublicKey = await EnsureUserAccountStatusAndGetInvitedUserPublicKey();
+        if (userPublicKey != null)
+        {
+            OnUserInviteCompleted();
+        }
     }
 
-    private async Task<bool> EnsureUserAccountStatusAndGetInvitedUserPublicKey()
+    private bool AdHocValidationDueToMonoLimitations()
     {
-        try
-        {
-            EmailAddress invitedEmail = EmailAddress.Parse(InvitedUser);
-            AccountStatus accountStatus = await invitedEmail.GetValidEmailAccountStatusAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
+        bool validated = AdHocValidateAllFieldsIndependently();
+        return validated;
+    }
 
-            IEnumerable<EmailAddress> invitedEmails = new EmailAddress[] { invitedEmail };
-            IEnumerable<UserPublicKey> inviteKey = await invitedEmails.ToAvailableKnownPublicKeysAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
-            if (inviteKey != null && inviteKey.Any())
-            {
-                return true;
-            }
+    private bool AdHocValidateAllFieldsIndependently()
+    {
+        return AdHocValidateUserEmail();
+    }
+
+    private bool AdHocValidateUserEmail()
+    {
+        ErrorMessage = "";
+        if (String.IsNullOrEmpty(InvitedUser) || !InvitedUser.IsValidEmail())
+        {
+            ErrorMessage = Texts.BadEmail;
+            return false;
+        }
+        return true;
+    }
+    private async Task<IEnumerable<UserPublicKey>> EnsureUserAccountStatusAndGetInvitedUserPublicKey()
+    {
+        EmailAddress invitedEmail = EmailAddress.Parse(InvitedUser);
+        AccountStatus accountStatus = await invitedEmail.GetValidEmailAccountStatusAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
+        if (!ShowInviteUserDialog(accountStatus))
+        {
+            return null;
         }
 
-        catch (Exception ex)
+        IEnumerable<EmailAddress> invitedEmails = new EmailAddress[] { invitedEmail };
+        return await invitedEmails.ToAvailableKnownPublicKeysAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
+    }
+
+    private bool ShowInviteUserDialog(AccountStatus accountStatus)
+    {
+        if (accountStatus == AccountStatus.Offline || accountStatus == AccountStatus.Unknown)
         {
-            ErrorMessage = $"{ex.Message}";
+            ShowOfflineOrLocalError();
             return false;
+        }
+        if (accountStatus != AccountStatus.NotFound)
+        {
+            return true;
         }
 
         return true;
+    }
+
+    private void ShowOfflineOrLocalError()
+    {
+        InviteUserDisabled = true;
+        InvitedUser = $"[{Texts.OfflineIndicatorText}]";
+        ErrorMessage = Texts.KeySharingOffline;
+    }
+
+    public void OnUserInviteCompleted()
+    {
+        _alerService.Success($"You send invitation to {InvitedUser} successfully");
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        InvitedUser = "";
+        ErrorMessage = "";
+        InviteUserDisabled = false;
     }
 }
 

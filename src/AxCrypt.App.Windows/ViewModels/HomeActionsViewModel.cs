@@ -149,7 +149,7 @@ public class HomeActionsViewModel : ComponentBase
         await PremiumFeature_ClickAsync(LicenseCapability.SecureWipe, async (ss, ee) => { await _fileOperationViewModel.WipeFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null); }, null, e);
     }
 
-    public async void EncryptionUpgrade()
+    public async void EncryptionUpgrade(EventArgs e)
     {
         await _fileOperationViewModel.AsyncEncryptionUpgrade.ExecuteAsync(null);
     }

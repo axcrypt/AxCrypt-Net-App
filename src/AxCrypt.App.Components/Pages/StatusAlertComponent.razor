@@ -4,6 +4,16 @@
 
 @inject IStatusAlertService StatusAlertService
 
+@if (IsVisible)
+{
+    <div class="medium-11 columns">
+        <div data-alert class="alert-box @NotificationStyleClass radius">
+            <span style="white-space: break-spaces;">@Body</span>
+            <a class="clse-img" style="float: right; color:white; cursor: pointer;" @onclick="ClosePopup">X</a>
+        </div>
+    </div>
+}
+
 @code {
     protected override void OnInitialized()
     {
@@ -14,7 +24,11 @@
     {
         IsVisible = isVisible;
         Body = StatusAlertService.Alert;
-        StateHasChanged(); // Refresh UI
+
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 
     private void ClosePopup()
@@ -33,14 +47,4 @@
 
     [Parameter]
     public string? Body { get; set; }
-}
-
-@if (IsVisible)
-{
-    <div class="medium-11 columns">
-        <div data-alert class="alert-box @NotificationStyleClass radius">
-            <span style="white-space: break-spaces;">@Body</span>
-            <a class="clse-img" style="float: right; color:white; cursor: pointer;" @onclick="ClosePopup">X</a>
-        </div>
-    </div>
 }
