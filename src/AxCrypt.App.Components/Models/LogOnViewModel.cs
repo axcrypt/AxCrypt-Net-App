@@ -3,6 +3,7 @@ using AxCrypt.App.Components.Services;
 using AxCrypt.App.Components.Services.UI;
 using AxCrypt.App.Components.Utility;
 using AxCrypt.App.Components.Utility.View;
+using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -128,6 +129,22 @@ public class LogOnViewModel : ViewModelBase
         {
             _isVisible = value;
             OnLogOnDialogVisibilityChanged?.Invoke(_isVisible);
+        }
+    }
+
+    public string SupportPageTitle
+    {
+        get
+        {
+            switch (SubscriptionLevel)
+            {
+                case SubscriptionLevel.Business:
+                    return Texts.PrioritySupportTitle;
+                case SubscriptionLevel.Premium:
+                    return Texts.SupportPageTitle;
+                default:
+                    return Texts.PromptSupport;
+            }
         }
     }
 

@@ -11,25 +11,20 @@ namespace AxCrypt.App.Components.ViewModels;
 public class SupportViewModel
 {
     private readonly SupportService? _supportService;
-    private LogOnViewModel _viewModel;
 
     public SupportModel? Model { get; set; }
-    public bool IsWideScreen { get; set; }
     public bool IsLoading { get; set; }
     public string? ErrorMessage { get; set; }
-    public bool SubmittedSuccess { get; set; }
 
-    public SupportViewModel(SupportService supportService, LogOnViewModel viewModel)
+    public SupportViewModel(SupportService supportService)
     {
         _supportService = supportService;
-        _viewModel = viewModel;
         Initialize();
     }
 
     public void Initialize()
     {
         Model = new SupportModel();
-        Model.SubscriptionLevel = _viewModel.SubscriptionLevel;
     }
 
     public async Task SubmitSupportAsync()

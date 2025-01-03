@@ -1,25 +1,29 @@
 ﻿@page "/SupportIndex"
 
 @using AxCrypt.Api.Model
-@using AxCrypt.App.Components.Data
 @using AxCrypt.App.Components.ViewModels
+@using AxCrypt.App.Components.Data
+@using AxCrypt.App.Components.Models
 @using AxCrypt.Content
 
 @inject SupportViewModel SupportViewModel
+@inject LogOnViewModel LogOnModel
+
 @inject IJSRuntime _jsRuntime
 @inject NavigationManager _navigationManager
 
 <div class="mb-sec">
     <NavLink class="mb-title flex-start" href="mainpagemobile" style="align-items: center;">
         <img class="back-btn" src="" alt="go-back-img" />
-        <span class="goback-text">Support</span>
+        <span class="goback-text">@Texts.PromptSupport</span>
     </NavLink>
 </div>
-<h2 class="page-title">@Texts.PromptSupport</h2>
 
-@if (SupportViewModel.Model.SubscriptionLevel == SubscriptionLevel.Free)
+@if (LogOnModel.SubscriptionLevel == SubscriptionLevel.Free)
 {
     <div>
+        <h2 class="page-title">@Texts.PromptSupport</h2>
+
         <div class="label-text free-sec" style="text-align:center;">
             <label>Sorry,</label>
             <p class="SupWarngText">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
@@ -32,13 +36,13 @@ else
     <div id="content-index" class="medium-12 columns support">
         <div class="">
             <h1 class="page-title">
-                @SupportViewModel.Model.PageTitle
+                @LogOnModel.SupportPageTitle
             </h1>
             <p class="hide-txt">@SupportViewModel.Model.PageDescription</p>
         </div>
         <div>
             <div class="label-text">
-                <label>How can we help you?</label>
+                <label>@Texts.SupportBodyPrompt</label>
             </div>
             <div style="display:flex; padding:8px 0px;">
                 <a style="text-decoration:none;" href="https://axcrypt.net/information/guides/get-started/">
@@ -67,7 +71,7 @@ else
             </div>
             <div>
                 <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Model.Body" tabindex=1>
-                                        </textarea>
+                    </textarea>
             </div>
             <div class="btn-sec">
                 <input type="reset" class="button border btn-large font-medium btn-hide" value="@Texts.ButtonCancelText" />
@@ -77,14 +81,9 @@ else
     </div>
 }
 
-@if (SupportViewModel.IsLoading)
-{
-    <p>Loading...</p>
-}
-
 @code {
-    private bool IsLoading { get; set; }
     private bool IsWideScreen { get; set; }
+    private bool IsLoading { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
