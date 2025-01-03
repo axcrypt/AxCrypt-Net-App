@@ -20,7 +20,7 @@
 <div style="width: 85%; margin-top: 80px;">
     <div class="page-heading">
             <h3 class="password-creation">
-                Add Note
+                @Texts.AddNoteTitle
             </h3>
     </div>
      <div>
@@ -37,12 +37,12 @@
                      <ValidationMessage For="@(() => newSecretViewModel.Secret.Note.SecretDesc)" />
                 </li>
                 <li>
-                    <label for="Note_Note">Note:</label>
+                    <label for="Note_Note">@Texts.NoteLabel:</label>
                     <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important;" placeholder="example" @bind="@newSecretViewModel.Secret.Note.Note"></textarea>
                 </li>
                 <li>
                     <div style=" gap:20px; ">
-                        <button type="submit" class="button btn-extra-small success" >Save</button>
+                        <button type="submit" class="button btn-extra-small success" >@Texts.ButtonSaveText</button>
                         <NavLink href="passwordManager">
                             <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
                         </NavLink>

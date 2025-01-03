@@ -60,7 +60,7 @@
                                 <span style="color:white;">
                                     Upgrade to access this <strong>feature!</strong>
                                 </span>
-                                <button class="upgrd-btn font-medium btn-medium" @onclick="() => homeActionModel.UpgradeDialog()">Upgrade</button>
+                                <button class="upgrd-btn font-medium btn-medium" @onclick="() => homeActionModel.UpgradeDialog()">@Texts.UpgradeText</button>
                             </div>
                         </div>
                     }
@@ -134,10 +134,10 @@
                             </tr>
                             <tr>
                                 <td rowspan="2"><img class="icoidea" src="" alt="grp-img" /></td>
-                                <td class="info-txt">Watch our video  to</td>
+                                <td class="info-txt">@Texts.SupportGetStartedVideoText</td>
                             </tr>
                             <tr>
-                                <td class="gt-stred-txt">Get started <img class="arwrgt-img" /></td>
+                                <td class="gt-stred-txt">@Texts.GetStartedLinkLabel <img class="arwrgt-img" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -150,7 +150,7 @@
         {
             <div style="display: block;">
                 <div style="display:flex; min-width: 300px;">
-                    <label class="fle-nme fnt-sze">Subscriptions</label><img class="ico-hidden" src="" @onclick="ToggleSection" alt="hand-img" id="toggleImageClosed" /><img class="ico-eye" src="" @onclick="ToggleSection" alt="hand-img" style="display: none;" id="toggleImageOpen" />
+                    <label class="fle-nme fnt-sze">@Texts.PromptSubscription</label><img class="ico-hidden" src="" @onclick="ToggleSection" alt="hand-img" id="toggleImageClosed" /><img class="ico-eye" src="" @onclick="ToggleSection" alt="hand-img" style="display: none;" id="toggleImageOpen" />
                 </div>
                 <div id="mySection" style="display: none; padding-top:8px;grid-template-columns: auto auto;">
                     <div class="sub-box" style="background-color: #48772C;">
@@ -170,7 +170,7 @@
                             <span class="sub-text">@Texts.ForOrganisationsLabel</span>
 
                         </div>
-                        <button onclick="location.href='https://account.axcrypt.net/en/HomeUser/CreateBusiness'" class="buy-button">Upgrade</button>
+                        <button onclick="location.href='https://account.axcrypt.net/en/HomeUser/CreateBusiness'" class="buy-button">@Texts.UpgradeText</button>
                     </div>
                 </div>
             </div>
@@ -189,8 +189,8 @@
                 </div>
                 </div> *@
                     <div class="center-column" style="margin-left: 47px;">
-                        <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="homeActionModel.RedirectToAccountWebUrl">Renew<img class="rnw-btn" src="" alt="img" /></button>
-                        <button class="subs-btn" style="background-color: #000;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">Add users<img class="add-usr" src="" alt="img" /></button>
+                        <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="homeActionModel.RedirectToAccountWebUrl">@Texts.BusinessSubscriptionRenewMenu<img class="rnw-btn" src="" alt="img" /></button>
+                        <button class="subs-btn" style="background-color: #000;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">@Texts.AddUsersText<img class="add-usr" src="" alt="img" /></button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 ﻿@using AxCrypt.App.Windows.ViewModels
 
 @using static AxCrypt.Abstractions.TypeResolve
+@using AxCrypt.Content
 
 @inject SuggestionViewModel viewModel
 
@@ -16,10 +17,10 @@
             <span> Have you tried our <bold class="text-style">Password Generator?</bold></span><br />
             <img class="pwdgnrt-img" src="" alt="hand-img" /><br />
             <button class="button learn-btn sub-lvl-clr" @onclick="viewModel.PasswordGeneratorLink" style="margin-right: 20px;">
-                <span>Try now</span>
+                <span>@Texts.TryNowLabel</span>
             </button>
             <button class="button learn-btn" @onclick="viewModel.LearnMore">
-                <span>Learn more</span>
+                <span>@Texts.LearnMoreLinkLabel</span>
             </button>
         </div>
     </div>

@@ -36,12 +36,12 @@ else
             <thead class="notify-pg-tbl-head">
                 <tr class="notification-text">
                     @* <th style="width: 5%;"></th> *@
-                    <th style="width: 50%;">Activity</th>
+                    <th style="width: 50%;">@Texts.ActivityText</th>
                     <th style="width:25%;" @onclick="SortByDate">
                         Date
                         <img class="notifiarrow" src="@(model.DateSortDirection == SortDirection.Ascending ? "/images/up-arrow.png" : "/images/down-arrow.png")" />
                     </th>
-                    <th style="width:15%;">Status</th>
+                    <th style="width:15%;">@Texts.ColumnStatusHeader</th>
                     <th style="width: 5%;"></th>
                 </tr>
             </thead>

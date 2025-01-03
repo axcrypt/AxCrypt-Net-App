@@ -21,7 +21,7 @@
 <div style="width: 85%; margin-top: 80px;">
     <div class="page-heading">
         <h3 class="password-creation">
-            Edit Note
+            @Texts.EditNoteTitle
         </h3>
     </div>
    <EditForm Model="@secretService.CurrentSecret.Note" OnValidSubmit="SavePassword">
@@ -29,18 +29,18 @@
             <div class="row">
                 <ul class="clean-up" style=" list-style:none">
                 <li>
-                    <label for="Password_SecretDesc">Description:</label><br />
+                    <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
                     <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;"  @bind="@secretService.CurrentSecret.Note.SecretDesc"></textarea>
                      <ValidationMessage For="@(() => secretService.CurrentSecret.Note.SecretDesc)" />
                 </li>
                 <li>
-                    <label for="Note_Note">Note:</label>
+                    <label for="Note_Note">@Texts.NoteLabel:</label>
                     <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important;"  @bind="@secretService.CurrentSecret.Note.Note" ></textarea>
                 <ValidationMessage For="@(() => secretService.CurrentSecret.Note.Note)" />
                 </li>
                 <li>
                 <div>
-                    <button type="submit" class="button btn-extra-small success" >Save</button>
+                    <button type="submit" class="button btn-extra-small success" >@Texts.ButtonSaveText</button>
                     <NavLink href="passwordManager">
                         <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
                     </NavLink>

@@ -20,7 +20,7 @@
 <div style="width: 85%; margin-top: 80px;">
     <div class="page-heading">
             <h3 class="password-creation">
-                Add Card
+                @Texts.AddCardTitle
             </h3>    
     </div>
     <div>
@@ -52,7 +52,7 @@
                             <ValidationMessage For="@(() => newSecretViewModel.Secret.Card.NameOnCard)" />
                         </div>
                         <div class="list-width">
-                            <label for="Card_SecurityCode">Security code:</label><br />
+                            <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
                             <div style="display:flex">
                                 <input id="Card_SecurityCode" maxlength="3" placeholder="000" @bind="newSecretViewModel.Secret.Card.SecurityCode"
                                         type="password" 
@@ -65,7 +65,7 @@
                     </li>
                     <li class="list-row">
                         <div class="list-width">
-                            <label for="Card_ExpirationDate">Expiration date:</label>
+                            <label for="Card_ExpirationDate">@Texts.ExpirationDatePrompt:</label>
                             <input id="Card_ExpirationDate" maxlength="7" placeholder="MM/YYYY" @bind="newSecretViewModel.Secret.Card.ExpirationDate"
                                     type="text" 
                                     class="form-control @(GetInputClass(nameof(newSecretViewModel.Secret.Card.ExpirationDate)))"
@@ -76,7 +76,7 @@
                     </li>
                     <li>
                         <div style=" gap:20px; ">
-                            <button type="submit" class="button btn-extra-small success" >Save</button>
+                            <button type="submit" class="button btn-extra-small success" >@Texts.ButtonSaveText</button>
                             <NavLink href="passwordManager">
                                 <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
                             </NavLink>

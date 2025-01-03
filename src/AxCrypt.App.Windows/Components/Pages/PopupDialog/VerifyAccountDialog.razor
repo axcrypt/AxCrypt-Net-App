@@ -12,7 +12,7 @@
             <div class="close-img" onclick="closeModalDialog('modal-dialog6')"></div>
             <div>
                 <div class="modal-header text-center">
-                    <span>Changing options may be dangerous. Only do this if you are sure you understand what this option does.</span>
+                    <span>@Texts.ChangeOptionGenericWarning</span>
                 </div>
                 <div class="modal-body">
                     <div>
@@ -21,25 +21,25 @@
                     </div>
 
                     <div>
-                        <label>Verify password:</label>
+                        <label>@Texts.VerifyPasswordPrompt:</label>
                         <input type="@(verifyViewModel.ShowPassword ? "text" : "password")" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.PassPhraseVerification" />
                     </div>
                     <div>
                         <input type="checkbox" checked="@verifyViewModel.ShowPassword" @onchange="ToggleShowPassword" />
-                        <span class="grey-clr font-medium">Show password</span>
+                        <span class="grey-clr font-medium">@Texts.ShowPasswordOptionPrompt</span>
                     </div>
 
                     <div>
-                        <label>Verification Code:</label>
+                        <label>@Texts.PromptActivationCode:</label>
                         <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.ActivationCode" />
                     </div>
                 </div>
             </div>
             <div class="button-group-footer">
-                <button class="button success btn-small" @onclick="verifyViewModel.ButtonOk_Click">Ok</button>
+                <button class="button success btn-small" @onclick="verifyViewModel.ButtonOk_Click">@Texts.ButtonOkText</button>
                 <button class="button cancel btn-small" @onclick="verifyViewModel.ResendButton_Click">@Texts.ResendButtonText</button>
                 <button class="button cancel btn-small" @onclick="verifyViewModel.HelpButton_Click">@Texts.ButtonHelpText</button>
-                <button class="button cancel btn-small" @onclick="Cancel">Cancel</button>
+                <button class="button cancel btn-small" @onclick="Cancel">@Texts.ButtonCancelText</button>
             </div>
         </div>
     </div>

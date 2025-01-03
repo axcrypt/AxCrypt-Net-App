@@ -21,7 +21,7 @@
 <div style="width: 85%; margin-top: 80px;">
     <div class="page-heading">
         <h3 class="password-creation">
-            Edit Card
+            @Texts.EditCardTitle
         </h3>
     </div>
     <EditForm Model="@secretService.CurrentSecret.Card" OnValidSubmit="SavePassword">
@@ -47,7 +47,7 @@
                         <ValidationMessage For="@(() => secretService.CurrentSecret.Card.NameOnCard)" />
                     </div>
                     <div class="list-width">
-                        <label for="Card_SecurityCode">Security code:</label><br />
+                        <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
                         <div style="display:flex">
                             <input maxlength="1000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.SecurityCode" name="Card.SecurityCode" type="text"
                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
@@ -68,7 +68,7 @@
                 </li>
                 <li>
                     <div>
-                        <button type="submit" class="button btn-extra-small success">Save</button>
+                        <button type="submit" class="button btn-extra-small success">@Texts.ButtonSaveText</button>
                         <NavLink href="passwordManager">
                             <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
                         </NavLink>

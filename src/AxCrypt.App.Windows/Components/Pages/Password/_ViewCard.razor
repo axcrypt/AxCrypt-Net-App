@@ -23,7 +23,7 @@
 <div style="margin-top: 80px;" class="page-max-height">
     <div class="page-heading">
         <h3 class="password-creation">
-            View Card
+            @Texts.ViewCardTitle
         </h3>
     </div>
     <form>
@@ -48,7 +48,7 @@
                         <input type="text" style="color:#494949 !important; background-color:#E2E2E2" @bind-value="@secretService.CurrentSecret.Card.NameOnCard" readonly="readonly">
                     </div>
                     <div class="list-width">
-                        <label for="Card_SecurityCode">Security code:</label><br />
+                        <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
                         <div style="display:flex; position: relative;">
                             <input id="securityCodeInput" maxlength="1000" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isSecurityCodeVisible, secretService.CurrentSecret.Card.SecurityCode)" readonly="readonly" type="text" @onclick="() => ToggleVisibility(ref isSecurityCodeVisible)">
                             <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="() => CopyToClipboard(secretService.CurrentSecret.Card.SecurityCode)">
@@ -88,7 +88,7 @@
             {
                 <div onclick="toggleClass()" class="sharetext-arrow">
                     <div class="sharewith-row" id="sharewith-expnd-collps">
-                        <span class="url-text">Shared With</span>
+                        <span class="url-text">@Texts.PromptSharedWith</span>
                         <img id="rotateImg" class="share-box share-image" src="/images/Vector.svg" alt="">
                     </div>
                 </div>

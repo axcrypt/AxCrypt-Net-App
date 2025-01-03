@@ -1,5 +1,6 @@
 ﻿@using AxCrypt.App.Components.Models.Notification
 @using AxCrypt.App.Components.Services
+@using AxCrypt.Content
 
 @inject NotificationViewModel model
 @inject UserNotificationService service
@@ -27,13 +28,13 @@
             }
         </table>
         <div>
-            <NavLink class="notifipopup-show" href="notification" id="noti">View All...</NavLink>
+            <NavLink class="notifipopup-show" href="notification" id="noti">@Texts.ViewAllText</NavLink>
         </div>
     }
     else
     {
         <div>
-            <span style="width: 160px; display: block; margin: 0 auto;">No new notifications!</span>
+            <span style="width: 160px; display: block; margin: 0 auto;">@Texts.NoNotificationsText</span>
         </div>
     }
 </div>

@@ -5,13 +5,14 @@
 @using AxCrypt.Content
 @using AxCrypt.Core
 @using AxCrypt.Core.UI
+@using AxCrypt.Content
 
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject ProfileViewModel? ProfileViewModel
 
 <div class="desk-acnt-popup model-popup hide-model-popup" id="" style="">
-    <span class="font-bold">Account</span>
+    <span class="font-bold">@Texts.AccountLabel</span>
     <div class="acc-subs">
         <div class="accnt-prfl">
             <h3 class="txt-clr">
@@ -36,9 +37,9 @@
             {
                 <div style="text-align:left;">
                     <img class="" src="images/default/IcoClndr.svg" alt="go-back-img" />
-                    <span class="grey-clr font-high" style="padding-left: 5px;">expire in <span class="txt-clr">@ProfileViewModel?.Account?.DaysLeft</span></span>
+                    <span class="grey-clr font-high" style="padding-left: 5px;">@Texts.ExpireInLabelFirstPart <span class="txt-clr">@ProfileViewModel?.Account?.DaysLeft</span></span>
                 </div>
-                <a class="can-subs" @onclick="ProfileViewModel.CancelSubscription">Cancel subscription</a>
+                <a class="can-subs" @onclick="ProfileViewModel.CancelSubscription">@Texts.CancelSubscriptionPrompt</a>
             }
             else
             {
@@ -93,10 +94,10 @@
     <div class="key-mngnt-Popup model-popup sub-pop1 hide-model-popup" id="">
         <div class="font-medium left-align">
             <dd class="@ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">Import Someone`s Public Sharing Key</dd>
-            <dd class="@ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">Export My Public Sharing Key</dd>
-            <dd class="@ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => {  await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">Import AxCrypt ID with sharing and access keys</dd>
-            <dd class="@ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">Export AxCrypt ID Secret and Sharing Key Pair</dd>
-            <dd class="@ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">Create AxCrypt ID</dd>
+            <dd class="@ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">@Texts.ExportSharingKeyToolStripMenuItemText</dd>
+            <dd class="@ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => {  await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">@Texts.ImportMyPrivateKeyToolStripMenuItemText</dd>
+            <dd class="@ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">@Texts.ExportMyPrivateKeyToolStripMenuItemText</dd>
+            <dd class="@ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">@Texts.CreateAccountToolStripMenuItemText</dd>
         </div>
     </div>
 }
@@ -109,7 +110,7 @@
                 <img class="ico-user-dk" src="" alt="Ico-user" />
             </div>
             <div>
-                <span class="txt-clr">Subscription:</span>
+                <span class="txt-clr">@Texts.PromptSubscription:</span>
                 <span class="font-bold">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
                 @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
                 {
