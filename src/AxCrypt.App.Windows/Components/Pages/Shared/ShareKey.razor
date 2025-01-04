@@ -39,7 +39,7 @@
                     <div class="mb-shre">
                         <NavLink class="mb-title flex-start" href="mainpagemobile" style="gap: 10px;">
                             <img class="back-arrow" src="" alt="go-back-img" />
-                            <span class="acc-txt">Share key </span>
+                                <span class="acc-txt">@Texts.ShareAccessTitle</span>
                             <img class="ico-info" src="" alt="ico-info" />
                         </NavLink>
                     </div>
@@ -98,9 +98,10 @@
                         <div class="center-column fle-exton-img" style="justify-content: flex-start; gap: 10px;">
                             @foreach (string file in ShareKeyViewModel.SelectedFilesOrFolders.Take(MaxFilesToShow))
                             {
+                                string selectedFileName = GetIconForFile(file);
                                 <div class="selected-file">
                                     <img class="@Icon" src="/images/default/AxCrypt_Icon.svg" alt="File Icon" />
-                                    <span class="fle-nme">@GetIconForFile(file)</span>
+                                    <span class="fle-nme" title="@selectedFileName">@selectedFileName</span>
                                 </div>
                             }
                             @if (ShareKeyViewModel.SelectedFilesOrFolders.Count() > MaxFilesToShow)
@@ -110,7 +111,7 @@
                         </div>
                     }
                     <div style="padding-top: 15px;">
-                        <h3 class="txt-clr font-bold">@string.Format(Texts.SharedKeyUserListTitle, "<span id='userCount'>"+@ShareKeyViewModel.ShareKeyUserList.Count+"</span>")</h3>
+                        <h3 class="txt-clr font-bold">@string.Format(Texts.SharedKeyUserListTitle, ShareKeyViewModel.ShareKeyUserList.Count)</h3>
 
                         @if (ShareKeyViewModel.ShareKeyUserList.Any())
                         {

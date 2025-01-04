@@ -27,7 +27,7 @@ public class SupportViewModel
         Model = new SupportModel();
     }
 
-    public async Task SubmitSupportAsync()
+    public async Task SubmitSupportAsync(SubscriptionLevel SubscriptionLevel)
     {
         if (New<AxCryptOnlineState>().IsOffline)
         {
@@ -44,19 +44,17 @@ public class SupportViewModel
         bool submitted = false;
         Model.Subject = Texts.PromptSupport;
 
-        if (Model.SubscriptionLevel == SubscriptionLevel.PasswordManager)
+        switch (SubscriptionLevel)
         {
-            Model.Subject = $"{nameof(SubscriptionLevel.PasswordManager)} {Texts.PromptSupport}";
-        }
-
-        if (Model.SubscriptionLevel == SubscriptionLevel.Premium)
-        {
-            Model.Subject = Texts.PrioritySupportTitle;
-        }
-
-        if (Model.SubscriptionLevel == SubscriptionLevel.Business)
-        {
-            Model.Subject = Texts.BusinessPrioritySupportTitle;
+            case SubscriptionLevel.Business:
+                Model.Subject = Texts.BusinessPrioritySupportTitle;
+                break;
+            case SubscriptionLevel.Premium:
+                Model.Subject = Texts.PrioritySupportTitle;
+                break;
+            case SubscriptionLevel.PasswordManager:
+                Model.Subject = $"{nameof(SubscriptionLevel.PasswordManager)} {Texts.PromptSupport}";
+                break;
         }
 
         submitted = await _supportService.SendPremiumSupportRequestEmail(Model.Subject, Model.Body);

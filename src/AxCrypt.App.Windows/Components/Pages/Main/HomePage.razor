@@ -73,7 +73,7 @@
                                             <div style="display:flex;">
                                                 @foreach (string sharedWith in fileDetails.SharedWith.Take(MaxAvatarsToShow))
                                                 {
-                                                    <div class="info-prple">@sharedWith.Substring(0, 2).ToUpper()</div>
+                                                    <div class="info-prple" title="@sharedWith">@sharedWith.Substring(0, 2).ToUpper()</div>
                                                 }
 
                                                 @if (fileDetails.SharedWith.Count() > MaxAvatarsToShow)

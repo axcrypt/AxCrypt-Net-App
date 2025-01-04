@@ -19,28 +19,17 @@
     </NavLink>
 </div>
 
-@if (LogOnModel.SubscriptionLevel == SubscriptionLevel.Free)
-{
-    <div>
-        <h2 class="page-title">@Texts.PromptSupport</h2>
-
-        <div class="label-text free-sec" style="text-align:center;">
-            <label>Sorry,</label>
-            <p class="SupWarngText">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
-            <img class="support-image" src="" alt="support-img" />
-        </div>
+<div id="content-index" class="medium-12 columns support">
+    <div class="">
+        <h1 class="page-title">
+            @LogOnModel.SupportPageTitle
+        </h1>
+        <p class="hide-txt">@(PageDescription)</p>
     </div>
-}
-else
-{
-    <div id="content-index" class="medium-12 columns support">
-        <div class="">
-            <h1 class="page-title">
-                @LogOnModel.SupportPageTitle
-            </h1>
-            <p class="hide-txt">@SupportViewModel.Model.PageDescription</p>
-        </div>
-        <div>
+
+    @if (LogOnModel.SubscriptionLevel != SubscriptionLevel.Free)
+    {
+        <div id="support-body-section">
             <div class="label-text">
                 <label>@Texts.SupportBodyPrompt</label>
             </div>
@@ -50,7 +39,17 @@ else
                         <img class="idea-img" src="" alt="idea-img" />
                         <div style="padding: 5px 0px; line-height: 16px;">
                             <span class="lable-txt">@Texts.SupportGetStartedVideoText</span><br />
-                            <span class="link-txt">@SupportViewModel.Model.LinkLabel</span>
+                            <span class="link-txt">@Texts.GuidesGetStartedLinkLabelWithPlatform</span>
+                            <img class="arrow-img" src="" alt="arrow-img" />
+                        </div>
+                    </div>
+                </a>
+                <a style="text-decoration:none;" href="https://axcrypt.net/helpcenter/">
+                    <div class="link-box" style="margin-left: 35px;">
+                        <img class="guides-img" src="" alt="guides-img" />
+                        <div style="padding: 5px 0px; line-height: 16px;">
+                            <span class="lable-txt">Let's explore our</span><br />
+                            <span class="link-txt">@Texts.GuidesLinkLabel</span>
                             <img class="arrow-img" src="" alt="arrow-img" />
                         </div>
                     </div>
@@ -59,7 +58,7 @@ else
                     <div class="link-box" style="margin-left: 35px;">
                         <img class="faq-img" src="" alt="faq-img" />
                         <div style="padding: 5px 0px; line-height: 16px;">
-                            <span class="lable-txt">Let`s check our</span><br />
+                            <span class="lable-txt">Let's check our</span><br />
                             <span class="link-txt">FAQ Page</span>
                             <img class="arrow-img" src="" alt="arrow-img" />
                         </div>
@@ -71,19 +70,48 @@ else
             </div>
             <div>
                 <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Model.Body" tabindex=1>
-                    </textarea>
+                            </textarea>
             </div>
             <div class="btn-sec">
                 <input type="reset" class="button border btn-large font-medium btn-hide" value="@Texts.ButtonCancelText" />
                 <input type="submit" class="button success btn-large font-medium" value="@Texts.ButtonSendText" @onclick="SubmitSupportAsync" />
             </div>
         </div>
-    </div>
-}
+    }
+    else
+    {
+        <div id="support-body-section">
+            <div class="label-text free-sec" style="text-align:center;">
+                <label>Sorry,</label>
+                <p class="SupWarngText">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
+                <img class="support-image" src="" alt="support-img" />
+            </div>
+        </div>
+    }
+
+</div>
 
 @code {
     private bool IsWideScreen { get; set; }
     private bool IsLoading { get; set; }
+
+    private string PageDescription
+    {
+        get
+        {
+            switch (LogOnModel.SubscriptionLevel)
+            {
+                case SubscriptionLevel.Business:
+                    return Texts.BusinessSupportInfo;
+                case SubscriptionLevel.Premium:
+                    return Texts.PremiumSupportInfo;
+                case SubscriptionLevel.PasswordManager:
+                    return Texts.SupportPremiumIntro;
+                default:
+                    return string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage);
+            }
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -109,7 +137,7 @@ else
 
     private async void SubmitSupportAsync()
     {
-        await SupportViewModel.SubmitSupportAsync();
+        await SupportViewModel.SubmitSupportAsync(LogOnModel.SubscriptionLevel);
 
         await InvokeAsync(() => StateHasChanged());
     }
