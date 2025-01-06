@@ -163,6 +163,7 @@
 
     private void UpdatePageState()
     {
+        RecentFilesViewModel.RefreshRecentFilesView();
         InvokeAsync(() =>
         {
             StateHasChanged(); // Refresh UI

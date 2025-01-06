@@ -39,11 +39,15 @@
                     <div class="mb-shre">
                         <NavLink class="mb-title flex-start" href="mainpagemobile" style="gap: 10px;">
                             <img class="back-arrow" src="" alt="go-back-img" />
-                                <span class="acc-txt">@Texts.ShareAccessTitle</span>
+                            <span class="acc-txt">@Texts.ShareAccessTitle</span>
                             <img class="ico-info" src="" alt="ico-info" />
                         </NavLink>
                     </div>
                     <div>
+                        @if (!string.IsNullOrEmpty(ShareKeyViewModel.ErrorMessage))
+                        {
+                            <div class="error-message" style="color:red;">@ShareKeyViewModel.ErrorMessage</div>
+                        }
                         <div class="add-txt-field" style="width: 100%;">
                             <input type="email" @onclick="ShareKeyViewModel.ShowSyncPopup" value="@ShareKeyViewModel.RecipientEmail" @oninput="ShareKeyViewModel.OnEmailInput" placeholder="someone@example.com" class="" style="width: 78%; margin-right: 3% ! IMPORTANT; margin: 0px;" />
                             @if (ShareKeyViewModel.ShowSuggestionDropdown && ShareKeyViewModel.EmailSuggestions.Any())
@@ -165,7 +169,7 @@
                         </NavLink>
                         @if (ShareKeyViewModel.IsWideScreen)
                         {
-                            <input type="submit" class="button success btn-small" @onclick="async ()=> await ShareKeyViewModel.ApplyShareKeys()" value="@Texts.ApplyLabel" style="padding: 6px 0px;" />
+                            <input type="button" class="button success btn-small" @onclick="async ()=> await ShareKeyViewModel.ApplyShareKeys()" value="@Texts.ApplyLabel" style="padding: 6px 0px;" />
                         }
                         @if (ShareKeyViewModel.WarngPopup)
                         {

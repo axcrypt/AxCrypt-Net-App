@@ -43,7 +43,8 @@ public class RecentFilesViewModel : ViewModelBase
     public void OnInitialized()
     {
         IsHideRecentFiles = New<UserSettings>().HideRecentFiles;
-        UpdateRecentFiles(_mainViewModel.RecentFiles);
+
+        //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { _recentFilesListView.UpdateRecentFiles(_mainViewModel.RecentFiles); });
 
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
         this.BindPropertyChanged(nameof(SelectedFiles), (IEnumerable<string> files) => { _mainViewModel.SelectedRecentFiles = files; });
@@ -71,6 +72,11 @@ public class RecentFilesViewModel : ViewModelBase
 
     public bool IsHideRecentFiles { get; set; }
 
+    internal void RefreshRecentFilesView()
+    {
+        UpdateRecentFiles(_mainViewModel.RecentFiles);
+    }
+
     private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
     {
         if (New<UserSettings>().HideRecentFiles)
@@ -86,7 +92,6 @@ public class RecentFilesViewModel : ViewModelBase
 
         RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
         AddToSelectedFileList();
-        Task.Run(() => { LogOnViewModel.UIStateChanged(); });
     }
 
     public void SelectAllFiles(ChangeEventArgs e)

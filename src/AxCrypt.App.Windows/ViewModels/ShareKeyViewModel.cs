@@ -50,7 +50,6 @@ public class ShareKeyViewModel : ViewModelBase
         LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
         SubscriptionLevel = AxCServiceProvider.LogOnViewModel!.SubscriptionLevel;
         EmailSuggestions = new List<EmailSuggestion>();
-        AllSuggestions = new List<EmailSuggestion>();
     }
 
     public void SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel, bool isFolder = false)
@@ -171,6 +170,7 @@ public class ShareKeyViewModel : ViewModelBase
         if (addedUserEmailAddress == EmailAddress.Empty && groupPublicKey == null!)
         {
             ErrorMessage = Texts.InvalidEmail;
+            LogOnViewModel.UIStateChanged();
             return;
         }
 
@@ -225,6 +225,11 @@ public class ShareKeyViewModel : ViewModelBase
 
     private UserPublicKey ValidShareKeyUserGroup()
     {
+        if (LogOnViewModel.SubscriptionLevel != SubscriptionLevel.Business)
+        {
+            return null;
+        }
+
         string shareUserText = RecipientEmail.Trim();
         return _viewModel!.GetValidGroupPublicKey(shareUserText);
     }
@@ -370,7 +375,10 @@ public class ShareKeyViewModel : ViewModelBase
 
         SelectedFilesOrFolders = Enumerable.Empty<string>();
         _isFolder = false;
+        ErrorMessage = "";
+        RecipientEmail = "";
         LogOnViewModel.ShareKeyDialog.Close();
+        LogOnViewModel.UIStateChanged();
     }
 
     public async Task RemoveSharedKey()
@@ -426,12 +434,10 @@ public class ShareKeyViewModel : ViewModelBase
 
     private void ClearErrorProviders()
     {
-        //ErrorMessage = "";
+        ErrorMessage = "";
     }
 
     public List<EmailSuggestion> EmailSuggestions { get; set; }
-
-    public List<EmailSuggestion> AllSuggestions { get; set; }
 
     public void OnEmailInput(ChangeEventArgs e)
     {
@@ -449,25 +455,14 @@ public class ShareKeyViewModel : ViewModelBase
 
     private void UpdateEmailSuggestions()
     {
-        AllSuggestions ??= new List<EmailSuggestion>();
-
         IEnumerable<ShareKeyUser> filteredUnSharedUsersList = SuggestNotSharedWithByText(RecipientEmail);
-        if (filteredUnSharedUsersList.Any())
+        if (filteredUnSharedUsersList != null)
         {
-            foreach (ShareKeyUser user in filteredUnSharedUsersList)
-            {
-                if (!AllSuggestions.Any(s => s.Email == user.UserEmail))
-                {
-                    AllSuggestions.Add(new EmailSuggestion { Email = user.UserEmail, GroupName = user.GroupName, Type = user.Image });
-                }
-            }
+            EmailSuggestions = filteredUnSharedUsersList.Select(user => new EmailSuggestion { Email = user.UserEmail, GroupName = user.GroupName, Type = user.Image }).ToList();
         }
 
-        EmailSuggestions = AllSuggestions.Where(s => s.Email?.Contains(RecipientEmail, StringComparison.OrdinalIgnoreCase) == true || s.GroupName?.Contains(RecipientEmail, StringComparison.OrdinalIgnoreCase) == true).ToList();
-
         ShowSuggestionDropdown = EmailSuggestions.Any();
-
-        //ClearErrorProviders();
+        ClearErrorProviders();
     }
 
     private void ClearEmailSuggestions()
