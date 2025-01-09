@@ -5,9 +5,11 @@ namespace AxCrypt.App.Components.Models.Notification
 {
     public class NotificationViewModel : Core.UI.ViewModel.ViewModelBase
     {
-        public NotificationViewModel()
+        private readonly LogOnViewModel? _logOnViewModel;
+        public NotificationViewModel(LogOnViewModel logOnViewModel)
         {
             Notifications = new ObservableCollection<NotificationItemViewModel>();
+            _logOnViewModel = logOnViewModel;
         }
 
         public ObservableCollection<NotificationItemViewModel> Notifications
@@ -19,6 +21,7 @@ namespace AxCrypt.App.Components.Models.Notification
             set
             {
                 SetProperty(nameof(Notifications), value);
+                _logOnViewModel?.UIStateChanged();
             }
         }
 

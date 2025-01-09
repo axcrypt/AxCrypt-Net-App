@@ -88,25 +88,27 @@
         <p>@AxCrypt.Content.Texts.LoadingText</p>
     }
 </div>
+
 @code {
     bool IsLoading { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         string currentCulture = Resolve.UserSettings.CultureName;
-        CultureOption cultureOption = localizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == currentCulture);
+        CultureOption cultureOption = localizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == currentCulture)!;
 
         if (cultureOption != null)
         {
             ViewModel.TopMenuModel.SelectedLanguage = cultureOption.Name;
-            ViewModel.TopMenuModel.SelectedLanguageImageUrl = cultureOption.ImageUrl;
-            ViewModel.TopMenuModel.SelectedLanguageDisplayName = cultureOption.DisplayName;
+            ViewModel.TopMenuModel.SelectedLanguageImageUrl = cultureOption.ImageUrl!;
+            ViewModel.TopMenuModel.SelectedLanguageDisplayName = cultureOption.DisplayName!;
         }
 
         ViewModel.Initialize();
         model = notificationService.NotificationModel;
         await notificationService.LoadNotificationListAsync();
         ViewModel.LogOnViewModel.OnSubscriptionChanged += UpdatePageState;
+        ViewModel.LogOnViewModel.OnUIStateChanged += UpdatePageState;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

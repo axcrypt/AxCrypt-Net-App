@@ -1,6 +1,7 @@
 ﻿using AxCrypt.App.Components.Helpers;
 using AxCrypt.App.Components.Models;
 using AxCrypt.App.Components.Models.Notification;
+using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Components.Utility.View;
 using AxCrypt.Core.UI;
 using System.Collections.ObjectModel;
@@ -11,13 +12,15 @@ namespace AxCrypt.App.Components.Services;
 
 public class UserNotificationService
 {
+    private IStatusAlertService? _statusAlertService;
     private ProcessIndicatorService _ProcessIndicatorService;
     private LogOnViewModel _logOnViewModel;
-    public UserNotificationService(ProcessIndicatorService processIndicatorService, LogOnViewModel logOnViewModel)
+    public UserNotificationService(ProcessIndicatorService processIndicatorService, IStatusAlertService statusAlertService ,LogOnViewModel logOnViewModel)
     {
         _ProcessIndicatorService = processIndicatorService;
+        _statusAlertService = statusAlertService;
         _logOnViewModel = logOnViewModel;
-        NotificationModel = new();
+        NotificationModel = new(logOnViewModel);
     }
 
     public NotificationViewModel NotificationModel { get; set; }
@@ -48,7 +51,19 @@ public class UserNotificationService
         }
         using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
         {
-            return await NotificationApiHelper.DeleteNotificationAsync(id);
+            bool result = await NotificationApiHelper.DeleteNotificationAsync(id);
+            await LoadNotificationListAsync();
+
+            if (result)
+            {
+                _statusAlertService?.Success("Your notification is deleted successfully!");
+            }
+            else
+            {
+                _statusAlertService?.Error("Failed to delete the notification. Please check your internet connection and try again.");
+            }
+
+            return result;
         }
     }
 

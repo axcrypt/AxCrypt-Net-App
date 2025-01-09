@@ -84,11 +84,12 @@ else
 }
 
 @code {
-    private NotificationViewModel model;
+    private NotificationViewModel? model;
 
     protected override async Task OnInitializedAsync()
     {
         model = notificationService.NotificationModel;
+        await notificationService.LoadNotificationListAsync();
 
         await base.OnInitializedAsync();
     }
@@ -105,7 +106,7 @@ else
 
     private async Task SortByDate()
     {
-        await notificationService.SortNotificationsByDate(model.DateSortDirection);
+        await notificationService.SortNotificationsByDate(model!.DateSortDirection);
         model.DateSortDirection = model.DateSortDirection == SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending;
     }
 
@@ -115,4 +116,3 @@ else
         navigation.NavigateTo("/notification");
     }
 }
-

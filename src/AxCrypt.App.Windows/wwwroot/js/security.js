@@ -1,8 +1,18 @@
 ﻿function toggleClass() {
-    var container = document.getElementById("container");
-    var img = document.getElementById("rotateImg");
-    container.classList.toggle("hidden");
-    img.classList.toggle("rotate");
+    const container = document.getElementById("container");
+    const img = document.getElementById("rotateImg");
+
+    if (!container) {
+        console.error("Element with ID 'container' not found.");
+    } else {
+        container.classList.toggle("hidden");
+    }
+
+    if (!img) {
+        console.error("Element with ID 'rotateImg' not found.");
+    } else {
+        img.classList.toggle("rotate");
+    }
 }
 
 function setupPopupHandlers() {

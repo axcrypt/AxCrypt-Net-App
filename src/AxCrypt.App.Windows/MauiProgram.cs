@@ -108,11 +108,11 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<ManageSecretViewModel>();
             services.AddSingleton<EditSecretViewModel>();
             services.AddSingleton<ViewSecretViewModel>();
+            services.AddSingleton<UserNotificationService>();
             services.AddSingleton<NotificationViewModel>();
             services.AddSingleton<NotificationItemViewModel>();
             services.AddSingleton<SecretsListViewModel>();
             services.AddSingleton<SecretServiceUtility>();
-            services.AddSingleton<UserNotificationService>();
 
             services.AddSingleton<HomeActionsViewModel>();
             services.AddSingleton<RecentFilesViewModel>();
