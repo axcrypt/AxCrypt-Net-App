@@ -59,7 +59,7 @@
                         <img class="faq-img" src="" alt="faq-img" />
                         <div style="padding: 5px 0px; line-height: 16px;">
                             <span class="lable-txt">@Texts.SupportFAQText</span><br />
-                            <span class="link-txt">@Texts.SupportFAQPageText</span>
+                            <span class="link-txt">@((MarkupString)Texts.SupportFAQPageText)</span>
                             <img class="arrow-img" src="" alt="arrow-img" />
                         </div>
                     </div>
@@ -81,9 +81,9 @@
     else
     {
         <div id="support-body-section">
-            <div class="label-text free-sec" style="text-align:center;">
+            <div class="label-text free-sec" style="text-align:left;">
                 <label>Sorry,</label>
-                <p class="SupWarngText">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
+                <p class="SupWarngText" style="text-align:left;">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
                 <img class="support-image" src="" alt="support-img" />
             </div>
         </div>
@@ -108,7 +108,7 @@
                 case SubscriptionLevel.PasswordManager:
                     return Texts.SupportPremiumIntro;
                 default:
-                    return string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage);
+                    return string.Empty;
             }
         }
     }
