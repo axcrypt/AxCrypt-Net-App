@@ -20,7 +20,6 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Mono;
 using System.Globalization;
 using System.Text.RegularExpressions;
-
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Components.Models;
 using Windows.Graphics;
@@ -89,18 +88,11 @@ public partial class App : Application
 
     private async Task InitializeProgram()
     {
-        //InitializeContentResources();
-        //RegisterTypeFactories();
-        //CheckLavasoftWebCompanionExistence();
-        //EnsureUiContextInitialized();
-        //EnsureFileAssociation();
+        if (!await new ApplicationManager().ValidateSettings())
+        {
+            return;
+        }
 
-        //if (!await new ApplicationManager().ValidateSettings())
-        //{
-        //    return;
-        //}
-
-        //SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent();
         CheckOfflineModeFirst();
         //await GetApiVersionAsync(); - moved
         //SetThisVersion(); - moved
@@ -457,7 +449,8 @@ public partial class App : Application
 
     private async Task SetWindowTitleTextAsync(bool isLoggedOn)
     {
-        await new Display().WindowTitleTextAsync(isLoggedOn);
+        string appTitle = await new Display().WindowTitleTextAsync(isLoggedOn);
+        SetAppWindowTitle(appTitle);
     }
 
     private static void WireDownEvents()
@@ -718,22 +711,35 @@ public partial class App : Application
         //}
     }
 
+    private static Window _window;
     protected override Window CreateWindow(IActivationState? activationState)
     {
-        Window window = base.CreateWindow(activationState);
-        if (window != null)
+        _window = base.CreateWindow(activationState);
+        if (_window != null)
         {
-            window.MinimumHeight = AppPreferences.MinimumWindowHeight;
-            window.MinimumWidth = AppPreferences.MinimumWindowWidth;
-            window.Height = AppPreferences.MinimumWindowHeight;
-            window.Width = AppPreferences.MinimumWindowWidth;
-            //window.Title = $"AxCrypt 2.0.0.0 File encryption made easy";
-            window.Title = Task.Run(async () => { return await new Display().WindowTitleTextAsync(false); }).Result;
+            _window.MinimumHeight = AppPreferences.MinimumWindowHeight;
+            _window.MinimumWidth = AppPreferences.MinimumWindowWidth;
+            _window.Height = AppPreferences.MinimumWindowHeight;
+            _window.Width = AppPreferences.MinimumWindowWidth;
 
-            RestoreUserPreferences(window);
+            RestoreUserPreferences(_window);
         }
 
-        return window;
+        return _window!;
+    }
+
+    public static void SetAppWindowTitle(string titleText)
+    {
+        if(_window == null)
+        {
+            return;
+        }
+
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            _window.SetValue(Window.TitleProperty, titleText);
+            _window.Title = titleText;
+        });
     }
 
     protected override void OnAppLinkRequestReceived(Uri uri)

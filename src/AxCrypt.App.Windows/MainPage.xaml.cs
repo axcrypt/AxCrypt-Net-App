@@ -6,7 +6,6 @@ using AxCrypt.App.Components.Utility;
 using AxCrypt.App.Windows.Code;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Services;
-using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -216,7 +215,7 @@ public partial class MainPage : ContentPage, ISignIn
         try
         {
             string windowTitle = await new Display().WindowTitleTextAsync(isLoggedOn);
-            Application.Current.Windows.FirstOrDefault().Title = windowTitle; 
+            App.SetAppWindowTitle(windowTitle);
         }
         catch (Exception ex)
         {
