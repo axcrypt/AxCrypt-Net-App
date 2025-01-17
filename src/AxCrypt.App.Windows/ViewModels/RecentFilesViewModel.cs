@@ -11,6 +11,7 @@ using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System.Collections.ObjectModel;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -72,11 +73,6 @@ public class RecentFilesViewModel : ViewModelBase
 
     public bool IsHideRecentFiles { get; set; }
 
-    internal void RefreshRecentFilesView()
-    {
-        UpdateRecentFiles(_mainViewModel.RecentFiles);
-    }
-
     private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
     {
         if (New<UserSettings>().HideRecentFiles)
@@ -92,6 +88,7 @@ public class RecentFilesViewModel : ViewModelBase
 
         RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
         AddToSelectedFileList();
+        UpdateViewState();
     }
 
     public void SelectAllFiles(ChangeEventArgs e)
@@ -212,7 +209,8 @@ public class RecentFilesViewModel : ViewModelBase
     //    }, () => { });
     //}
 
- 
+    string selectFileOnContextMenuClick;
+
     public async Task OnContextMenuAction(EventArgs args, SecuredFilesContextMenu securedFilesContextMenu)
     {
         switch (securedFilesContextMenu)
@@ -245,6 +243,11 @@ public class RecentFilesViewModel : ViewModelBase
                 ClearAllRecentFiles();
                 break;
         }
+
+        if (selectFileOnContextMenuClick != null)
+        {
+            HandleFileClick(false, selectFileOnContextMenuClick);
+        }
     }
 
     private async void OpenSecured()
@@ -252,9 +255,24 @@ public class RecentFilesViewModel : ViewModelBase
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
     }
 
-    public async void OpenSecuredMouseDoubleClick(EventArgs args, string selectedFilePath)
+    public async void OpenSecuredMouseDoubleClick(MouseEventArgs args, string selectedFilePath)
     {
-        await _fileOperationViewModel.OpenFiles.ExecuteAsync(selectedFilePath == null ? throw new NullReferenceException(nameof(selectedFilePath)) : new List<string> { selectedFilePath });
+        if (args == null)
+        {
+            return;
+        }
+
+        if (args.Type == "contextmenu")
+        {
+            selectFileOnContextMenuClick = selectedFilePath;
+            HandleFileClick(true, selectedFilePath);
+            return;
+        }
+
+        if (args.Type == "dblclick")
+        {
+            await _fileOperationViewModel.OpenFiles.ExecuteAsync(selectedFilePath == null ? throw new NullReferenceException(nameof(selectedFilePath)) : new List<string> { selectedFilePath });
+        }
     }
 
     private async void RemoveFromListKeepSecured()

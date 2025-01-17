@@ -210,5 +210,12 @@ namespace AxCrypt.Core.UI.ViewModel
         {
             return Task.FromResult(true);
         }
+
+        public event Action? OnUpdateViewState;
+
+        public void UpdateViewState()
+        {
+            OnUpdateViewState?.Invoke();
+        }
     }
 }

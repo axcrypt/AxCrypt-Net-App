@@ -56,7 +56,7 @@
                             {
                                 FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
                                 <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails.FilePath) ? "selected" : "")"
-                                    @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)">
+                                    @oncontextmenu="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)" @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)">
                                     <td>
                                         <input class="check-box" type="checkbox" @onchange="() => RecentFilesViewModel.HandleFileClick(!fileDetails.IsChecked, fileDetails.FilePath)" checked="@fileDetails.IsChecked" />
                                     </td>
@@ -139,7 +139,7 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        RecentFilesViewModel.LogOnViewModel.OnUIStateChanged += UpdatePageState;
+        RecentFilesViewModel.OnUpdateViewState += UpdatePageState;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -163,7 +163,6 @@
 
     private void UpdatePageState()
     {
-        RecentFilesViewModel.RefreshRecentFilesView();
         InvokeAsync(() =>
         {
             StateHasChanged(); // Refresh UI
