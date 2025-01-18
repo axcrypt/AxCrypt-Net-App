@@ -43,7 +43,6 @@ public class TopMenuViewModel : ViewModelBase
     public void ToggleAccountPopup() => TopMenuModel.AccountPopup = !TopMenuModel.AccountPopup;
     public void ToggleSettingsPopup() => TopMenuModel.SettingsPopup = !TopMenuModel.SettingsPopup;
     public void ToggleNotifyPopup() => TopMenuModel.NotifyPopup = !TopMenuModel.NotifyPopup;
-    public void ToggleDropdown() => TopMenuModel.ShowDropdown = !TopMenuModel.ShowDropdown;
     public string VersionHoverText { get; set; }
     public bool ShowUpdate { get; set; }
 

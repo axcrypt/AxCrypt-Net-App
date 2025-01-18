@@ -15,12 +15,12 @@
 <div class="top-menu">
     <div class="language-selector padding">
         <div class="dropdown">
-            <button class="dropbtn font-high @(ViewModel.TopMenuModel.ShowDropdown ? "active" : "")" @onclick="ViewModel.ToggleDropdown">
+            <button class="dropbtn font-high active" id="lang-dropdown-action-btn">
                 <img class="flag-icon" src="@ViewModel.TopMenuModel.SelectedLanguageImageUrl" alt="flag-icon" style="padding-right: 10px;" />
                 @ViewModel.TopMenuModel.SelectedLanguageDisplayName
-                <img class="drp-dwn down" src="" alt="dropdown-img" />
+                <img class="drp-dwn down" id="lang-action-btn-arw" src="" alt="dropdown-img" />
             </button>
-            <div class="hide-model-popup language-dropdown" style="display: @(ViewModel.TopMenuModel.ShowDropdown ? "block" : "none")">
+            <div class="language-dropdown" style="display: none" id="lang-dropdown-popup">
                 @foreach (CultureOption culture in localizationOptions.SupportedCultures)
                 {
                     <div class="dropdown-item-container">
@@ -141,7 +141,6 @@
         ViewModel.TopMenuModel.SelectedLanguageImageUrl = imageUrl;
         ViewModel.TopMenuModel.SelectedLanguageDisplayName = localizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == cultureName)?.DisplayName!;
         ViewModel.SetLanguageAsync(cultureName);
-        ViewModel.TopMenuModel.ShowDropdown = false;
         navigationManager.NavigateTo(navigationManager.Uri, forceLoad: true);
     }
 

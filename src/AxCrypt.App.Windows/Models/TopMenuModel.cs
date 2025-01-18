@@ -12,8 +12,6 @@ public class TopMenuModel
 
     public bool NotifyPopup { get; set; }
 
-    public bool ShowDropdown { get; set; }
-
     public bool IsWideScreen { get; set; }
 
     public bool IsLargeScreen { get; set; }

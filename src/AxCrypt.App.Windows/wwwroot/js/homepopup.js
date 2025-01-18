@@ -131,5 +131,33 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 });
             }
         }
+
+        //Handle show/hide the language dropdown popup
+        var langSelArrow = document.getElementById("lang-action-btn-arw");
+        var targetobj = e.target;
+        if (targetobj.id === "lang-dropdown-action-btn" || targetobj.parentElement.id === "lang-dropdown-action-btn") {
+            ShowHidePopup("lang-dropdown-popup");
+            langSelArrow.classList.toggle("down");
+        }
+        else {
+            HidePopup("lang-dropdown-popup");
+            if (langSelArrow !== undefined) {
+                langSelArrow.classList.add("down");
+            }
+        }
     });
 });
+
+function ShowHidePopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup !== undefined) {
+        popup.style.display = popup.style.display === 'block' ? 'none' : "block";
+    }
+}
+
+function HidePopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup !== undefined) {
+        popup.style.display = 'none';
+    }
+}
