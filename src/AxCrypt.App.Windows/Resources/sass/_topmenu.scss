@@ -196,6 +196,7 @@
         }
     }
 }
+
 #date-modified-toggle {
     img {
         padding-right: 5px;
@@ -285,6 +286,7 @@
         flex-wrap: wrap;
         right: 1%;
         top: 12%;
+        flex-direction: column;
 
         tr td {
             padding-right: 0px !important;
@@ -307,9 +309,9 @@
             text-decoration: underline;
         }
     }
-    .encrypt-pop {
-        top:58%;
 
+    .encrypt-pop {
+        top: 58%;
     }
 }
 
@@ -402,7 +404,7 @@
     display: block;
     position: absolute;
     top: -20px;
-    transform: translateX(50%); 
+    transform: translateX(50%);
     border-style: solid;
 }
 
@@ -461,6 +463,7 @@
         border: 1px solid #48772C;
         margin: 15px 0px 0px;
     }
+
     .text-overlfow {
         max-width: 190px;
         top: 8px;
@@ -728,6 +731,7 @@
             display: none;
         }
     }
+
     .notify-txt {
         font-Weight: 400;
         font-size: 12px;

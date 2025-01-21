@@ -76,6 +76,9 @@ public class ShareKeyViewModel : ViewModelBase
     }
 
     public bool ContextMenu { get; set; } = false;
+
+    public bool DisableAddUserButton { get; set; } = false;
+
     public bool ShowDialog { get; set; } = false;
     public bool SyncPopup { get; set; } = false;
     public bool WarngPopup { get; set; } = false;
@@ -160,6 +163,11 @@ public class ShareKeyViewModel : ViewModelBase
 
     public async void AddShareKeyUser()
     {
+        if (DisableAddUserButton)
+        {
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(RecipientEmail) || RecipientEmail == Texts.AddEmailPromptText)
         {
             return;
@@ -189,6 +197,7 @@ public class ShareKeyViewModel : ViewModelBase
             return;
         }
 
+        DisableAddUserButton = true;
         ShareKeyUser sharedUser = null!;
         if (groupPublicKey! == null!)
         {
@@ -210,6 +219,7 @@ public class ShareKeyViewModel : ViewModelBase
         }
 
         RecipientEmail = string.Empty;
+        DisableAddUserButton = false;
         LogOnViewModel.UIStateChanged();
     }
 

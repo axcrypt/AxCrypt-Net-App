@@ -56,7 +56,7 @@
     <div @onmouseover='@(()=> ShowPopup("include"))' @onmouseout='@( () => HidePopup() )'>
         <NavLink class="nav-link center-column">
             <div>
-                <img class="" src="images/default/IcoOffln1.svg" alt="go-back-img" />
+                <img class="" src="images/default/icoScrdFldr.svg" alt="include-subfolder-img" />
                 <span class="grey-clr">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
             </div>
             <div style="float:right; padding-left:15px;">
@@ -105,7 +105,7 @@
     <div class="key-section" @onmouseover='@( () => ShowPopup("rename") )' @onmouseout='@( () => HidePopup() )'>
         <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.RestoreRename(e)">
             <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
-            <span>Restore to original</span>
+            <span>@Texts.RestoreAnonymousNamesMenuText</span>
         </NavLink>
         @if (AppSettingsViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
         {
@@ -119,7 +119,7 @@
     </div>
     <div class="key-section">
         <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.ToggleAdvancedOption()">
-            <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
+            <img class="" src="/images/default/IcoExtrFtr.svg" alt="advanced-settings-img" />
             <span>Advanced Option</span>
         </NavLink>
     </div>
@@ -386,7 +386,7 @@
                 </div>
                 <label>Temp File Path</label>
                 <div class="center-column">
-                    <input type="path" @bind="AppSettingsViewModel.AdvancedOptionsViewModel.TempConfigPath" @oninput="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.BrowseButton_click(e)" style="width:75%;"/>
+                    <input type="path" @bind="AppSettingsViewModel.AdvancedOptionsViewModel.TempConfigPath" @oninput="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.BrowseButton_click(e)" style="width:75%;" />
                     <button class="button font-medium success btn-small" @onclick="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.BrowseButton_click(e)">Browse</button>
                 </div>
             </div>

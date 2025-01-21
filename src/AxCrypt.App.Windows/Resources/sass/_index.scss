@@ -239,7 +239,8 @@
     .mov, .MOV,
     .mkv, .MKV,
     .wmv, .WMV,
-    .flv, .FLV {
+    .flv, .FLV,
+    [class="3gp"], [class="3GP"] {
         content: $IcoVd;
     }
 
@@ -250,6 +251,7 @@
     .pdf, .PDF,
     .xls, .XLS,
     .xlsx, .XLSX,
+    .csv, .CSV,
     .js, .JS,
     .cshtml, .CSHTML,
     .cshtm, .CSHTM,

@@ -83,7 +83,7 @@
                                     }
                                 </ul>
                             }
-                            <input type="button" class="button active btn-small" value="@Texts.AddPromptText" @onclick="()=> ShareKeyViewModel.AddShareKeyUser()" disabled="@(string.IsNullOrEmpty(ShareKeyViewModel.RecipientEmail))" style="width: 15%;" />
+                            <input type="button" class="button active btn-small" value="@Texts.AddPromptText" @onclick="()=> ShareKeyViewModel.AddShareKeyUser()" disabled="@(ShareKeyViewModel.DisableAddUserButton)" style="width: 15%;" />
                         </div>
                         @if (ShareKeyViewModel.SyncPopup)
                         {
