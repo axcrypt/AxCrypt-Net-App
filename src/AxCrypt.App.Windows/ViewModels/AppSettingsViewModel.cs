@@ -58,7 +58,6 @@ public class AppSettingsViewModel : ViewModelBase
 
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
-        //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); _logOnViewModel.UIStateChanged(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { _userInitiatedUpdateCheckPending = true; await DisplayUpdateCheckPopups(); });
     }
 
@@ -146,17 +145,12 @@ public class AppSettingsViewModel : ViewModelBase
         if (!hideRecentFiles)
         {
             _recentFilesViewModel.RecentFilesList = new ObservableCollection<FileDetails>(_mainViewModel.RecentFiles.Select(f => new FileDetails(f)));
-            _logOnViewModel.UIStateChanged();
+            _recentFilesViewModel.UpdateViewState();
             return;
         }
 
         _recentFilesViewModel.RecentFilesList.Clear();
-        _logOnViewModel.UIStateChanged();
-    }
-
-    void UpdateRecentFiles(IEnumerable<ActiveFile> recentFiles)
-    {
-        _recentFilesViewModel.RecentFilesList = new ObservableCollection<FileDetails>(recentFiles.Select(f => new FileDetails(f)));
+        _recentFilesViewModel.UpdateViewState();
     }
 
     public async Task ToggleEncryptionUpgradeMode()
