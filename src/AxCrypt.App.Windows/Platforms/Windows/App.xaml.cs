@@ -55,7 +55,8 @@ namespace AxCrypt.App.Windows.WinUI
                 return null;
             }
 
-            _workFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"AxCrypt" + Path.DirectorySeparatorChar);
+            //_workFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"AxCrypt" + Path.DirectorySeparatorChar);
+            _workFolderPath = Path.Combine(FileSystem.Current.CacheDirectory, @"AxCrypt" + Path.DirectorySeparatorChar);
 
             TypeMap.Register.Singleton<INow>(() => new Now());
             TypeMap.Register.Singleton<IReport>(() => new Report(_workFolderPath, 1000000));
