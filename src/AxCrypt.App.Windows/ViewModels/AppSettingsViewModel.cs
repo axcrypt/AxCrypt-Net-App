@@ -1,24 +1,23 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.Api.Model;
+using AxCrypt.App.Components.Models;
+using AxCrypt.App.Components.Services.Interface;
 using AxCrypt.App.Components.ViewModels;
+using AxCrypt.App.Windows.Models;
+using AxCrypt.App.Windows.Services;
+using AxCrypt.Common;
+using AxCrypt.Content;
+using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Extensions;
+using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
-using AxCrypt.Core;
 using AxCrypt.Core.UI.ViewModel;
 using System.Collections.ObjectModel;
-using AxCrypt.Core.Extensions;
 using System.Globalization;
-using AxCrypt.Common;
-using AxCrypt.Content;
-using AxCrypt.App.Components.Services.Interface;
-using AxCrypt.Core.Runtime;
-using AxCrypt.App.Windows.Models;
-using AxCrypt.App.Components.Models;
-
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Api.Model;
-using AxCrypt.App.Windows.Services;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
@@ -104,13 +103,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     public int InactivitySignOut { get; set; }
 
-    public void ToggleDebugPopup() => DebugPopup = !DebugPopup;
-
     public void ToggleHideRecentFiles() => SetRecentFilesHiddenState(!New<UserSettings>().HideRecentFiles);
-
-    public void InactSgnOutPopup() => InactSgnOut = !InactSgnOut;
-
-    public void FileEncryptionProperty() => FileEncryptionProperties = !FileEncryptionProperties;
 
     public IDictionary<string, object> NavLinkAttributes1()
     {
@@ -180,11 +173,14 @@ public class AppSettingsViewModel : ViewModelBase
         {
             _mainViewModel.FolderOperationMode = FolderOperationMode.SingleFolder;
             IncludeSubfolders = false;
+            UpdateViewState();
             return;
         }
 
         if (!await New<IVerifySignInPassword>().Verify(Texts.ChangeOptionGenericWarning))
         {
+            IncludeSubfolders = false;
+            UpdateViewState();
             return;
         }
 
@@ -193,6 +189,7 @@ public class AppSettingsViewModel : ViewModelBase
         {
             _mainViewModel.FolderOperationMode = FolderOperationMode.IncludeSubfolders;
             IncludeSubfolders = true;
+            UpdateViewState();
         }
     }
 

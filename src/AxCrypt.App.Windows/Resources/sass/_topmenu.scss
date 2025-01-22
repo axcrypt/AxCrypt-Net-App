@@ -602,8 +602,12 @@
     /* Style the toggle switch for settings page */
     .desk-stngs-popup, .encrypt-pop {
         .toggle {
-            width: 58px;
+            max-width: 70px;
             height: 30px;
+        }
+
+        .slider {
+            padding: 0 6px !important;
         }
 
         .slider:before {
@@ -614,15 +618,15 @@
         }
 
         input:checked + .slider:before {
-            transform: translateX(26px);
+            transform: translateX(38px);
         }
 
         .on-text {
-            left: 0px;
+            left: 6px;
         }
 
         .off-text {
-            right: -3px;
+            right: 5px;
         }
     }
 

@@ -524,8 +524,11 @@
 @media (min-width: 1140px) {
   /* Style the toggle switch for settings page */
   .desk-stngs-popup .toggle, .encrypt-pop .toggle {
-    width: 58px;
+    max-width: 70px;
     height: 30px;
+  }
+  .desk-stngs-popup .slider, .encrypt-pop .slider {
+    padding: 0 6px !important;
   }
   .desk-stngs-popup .slider:before, .encrypt-pop .slider:before {
     position: absolute;
@@ -534,13 +537,13 @@
     height: 23px;
   }
   .desk-stngs-popup input:checked + .slider:before, .encrypt-pop input:checked + .slider:before {
-    transform: translateX(26px);
+    transform: translateX(38px);
   }
   .desk-stngs-popup .on-text, .encrypt-pop .on-text {
-    left: 0px;
+    left: 6px;
   }
   .desk-stngs-popup .off-text, .encrypt-pop .off-text {
-    right: -3px;
+    right: 5px;
   }
   .accnt-prfl {
     width: 40px;

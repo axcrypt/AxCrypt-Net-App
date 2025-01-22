@@ -68,7 +68,7 @@
             </NavLink>
         </div>
         <div class="key-section">
-            <NavLink class="nav-link next-arrow" @onclick="ProfileViewModel.ToggleSubsDtlsPopup">
+            <NavLink class="nav-link next-arrow" id="subscription-details-button-action">
                 <img class="" src="images/default/IcoSubsDetails.svg" alt="go-back-img" />
                 <span>@Texts.SubscriptionDetailsTitle</span>
             </NavLink>
@@ -101,33 +101,32 @@
         </div>
     </div>
 }
-@if (ProfileViewModel.SubsDtlsPopup)
-{
-    <div class="subs-dtls-popup model-popup sub-pop2 hide-model-popup" id="">
-        <div class="close-img" @onclick="ProfileViewModel.ToggleSubsDtlsPopup"></div>
-        <div class="center-column" style="padding:0;">
-            <div>
-                <img class="ico-user-dk" src="" alt="Ico-user" />
-            </div>
-            <div>
-                <span class="txt-clr">@Texts.PromptSubscription:</span>
-                <span class="font-bold">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
-                @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
-                {
-                    <span class="txt-clr">Company:</span>
-                    <span class="font-bold">AxCrypt</span> <br />
-                }
-                @if (ProfileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
-                {
-                    <span class="txt-clr">Type:</span>
-                    <span class="font-bold">@ProfileViewModel.Account.Subscription</span> <br />
-                }
-                <span class="txt-clr">Valid until:</span>
-                <span class="font-bold">@ProfileViewModel.ValidFormatted</span>
-            </div>
+
+<div class="subs-dtls-popup model-popup sub-pop2" style="display:none;" id="subscription-details-side-popup">
+   @*  <div class="close-img" @onclick="ProfileViewModel.ToggleSubsDtlsPopup"></div> *@
+    <div class="close-img"></div>
+    <div class="center-column" style="padding:0;">
+        <div>
+            <img class="ico-user-dk" src="" alt="Ico-user" />
+        </div>
+        <div>
+            <span class="txt-clr">@Texts.PromptSubscription:</span>
+            <span class="font-bold">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
+            @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
+            {
+                <span class="txt-clr">Company:</span>
+                <span class="font-bold">AxCrypt</span> <br />
+            }
+            @if (ProfileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
+            {
+                <span class="txt-clr">Type:</span>
+                <span class="font-bold">@ProfileViewModel.Account.Subscription</span> <br />
+            }
+            <span class="txt-clr">Valid until:</span>
+            <span class="font-bold">@ProfileViewModel.ValidFormatted</span>
         </div>
     </div>
-}
+</div>
 
 @code {
     protected override async Task OnInitializedAsync()

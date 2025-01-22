@@ -151,7 +151,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
             ShowHidePopup("settings-dropdown-popup");
         }
         else {
-            HidePopup("settings-dropdown-popup");
+            if (!IgnoreClosePopupOnPopupActions("settings-dropdown-popup", targetobj)) {
+                if (!IgnoreClosePopupOnPopupActions("inactivity-signout-side-popup", targetobj)) {
+                    if (!IgnoreClosePopupOnPopupActions("encryption-file-property-side-popup", targetobj)) {
+                        if (!IgnoreClosePopupOnPopupActions("debug-side-popup", targetobj)) {
+                            HidePopup("settings-dropdown-popup");
+                        }
+                    }
+                }
+            }
         }
 
         //Handle show/hide the notification menu dropdown popup
@@ -162,12 +170,56 @@ document.addEventListener('DOMContentLoaded', (event) => {
             HidePopup("notification-dropdown-popup");
         }
 
+        //Handle show/hide the inactivity sign out menu side popup
+        if (targetobj.id === "inactivity-signout-button-action" || targetobj.parentElement.id === "inactivity-signout-button-action") {
+            ShowHidePopup("inactivity-signout-side-popup");
+        }
+        else {
+            if (!IgnoreClosePopupOnPopupActions("inactivity-signout-side-popup", targetobj)) {
+                HidePopup("inactivity-signout-side-popup");
+            }
+        }
+
+        //Handle show/hide the encryption file property menu side popup
+        if (targetobj.id === "encryption-file-property-button-action" || targetobj.parentElement.id === "encryption-file-property-button-action") {
+            ShowHidePopup("encryption-file-property-side-popup");
+        }
+        else {
+            if (!IgnoreClosePopupOnPopupActions("encryption-file-property-side-popup", targetobj)) {
+                HidePopup("encryption-file-property-side-popup");
+            }
+        }
+
+        //Handle show/hide the debug menu side popup
+        if (targetobj.id === "debug-button-action" || targetobj.parentElement.id === "debug-button-action") {
+            ShowHidePopup("debug-side-popup");
+        }
+        else {
+            if (!IgnoreClosePopupOnPopupActions("debug-side-popup", targetobj)) {
+                HidePopup("debug-side-popup");
+            }
+        }
+
         //Handle show/hide the accounts menu dropdown popup
         if (targetobj.id === "accounts-dropdown-click-action" || targetobj.parentElement.id === "accounts-dropdown-click-action") {
             ShowHidePopup("accounts-dropdown-popup");
         }
         else {
-            HidePopup("accounts-dropdown-popup");
+            if (!IgnoreClosePopupOnPopupActions("accounts-dropdown-popup", targetobj)) {
+                if (!IgnoreClosePopupOnPopupActions("subscription-details-side-popup", targetobj)) {
+                    HidePopup("accounts-dropdown-popup");
+                }
+            }
+        }
+
+        //Handle show/hide the subscriptiondetails menu side popup
+        if (targetobj.id === "subscription-details-button-action" || targetobj.parentElement.id === "subscription-details-button-action") {
+            ShowHidePopup("subscription-details-side-popup");
+        }
+        else {
+            if (!IgnoreClosePopupOnPopupActions("subscription-details-side-popup", targetobj)) {
+                HidePopup("subscription-details-side-popup");
+            }
         }
     });
 });
@@ -183,5 +235,30 @@ function HidePopup(popupId) {
     const popup = document.getElementById(popupId);
     if (popup !== undefined) {
         popup.style.display = 'none';
+    }
+}
+
+function IgnoreClosePopupOnPopupActions(popupId, targetobj) {
+
+    if (targetobj.id === popupId || targetobj.parentElement.id === popupId) {
+        return true;
+    }
+
+    var offsetParent = targetobj.parentElement.offsetParent;
+    if (offsetParent === null) {
+        return false;
+    }
+
+    if (offsetParent.id === popupId) {
+        return true;
+    }
+
+    offsetParent = offsetParent.offsetParent;
+    if (offsetParent === null) {
+        return false;
+    }
+
+    if (offsetParent.id === popupId) {
+        return true;
     }
 }

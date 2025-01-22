@@ -88,7 +88,7 @@
         }
     </div>
     <div class="key-section" @onmouseover='@(()=> ShowPopup("inactivity"))' @onmouseout='@( () => HidePopup() )'>
-        <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" @onclick="AppSettingsViewModel.InactSgnOutPopup">
+        <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" id="inactivity-signout-button-action">
             <img class="sgn-out-img" src="images/default/IcoSngOut.svg" alt="go-back-img" />
             <span>@Texts.IdleSignOutToolStripMenuItemText</span>
         </NavLink>
@@ -147,7 +147,7 @@
         </div>
     </NavLink>
     <div class="key-section">
-        <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" @onclick="AppSettingsViewModel.FileEncryptionProperty">
+        <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" id="encryption-file-property-button-action">
             <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
             <span>@Texts.FilePropertiesToolStripMenuItemText</span>
         </NavLink>
@@ -159,129 +159,124 @@
         </NavLink>
     </div>
     <div class="key-section">
-        <NavLink class="debug" @attributes="AppSettingsViewModel.NavLinkAttributes2()" @onclick="AppSettingsViewModel.ToggleDebugPopup">
+        <NavLink class="debug" @attributes="AppSettingsViewModel.NavLinkAttributes2()" id="debug-button-action">
             <img class="dbg-img" src="images/default/IcoDbg.svg" alt="go-back-img" />
             <span>@Texts.DebugToolStripMenuItemText</span>
         </NavLink>
     </div>
 </div>
-@if (AppSettingsViewModel.InactSgnOut)
-{
-    <div class="model-popup sub-pop1 hide-model-popup">
-        <div id="inactivity">
-            <form id="inactivityForm">
-                @foreach (int timeout in AppSettingsViewModel.InactivityTimeoutOptions)
-                {
-                    <input type="radio" id="timeout-@timeout" name="inactivity" value="@timeout"
-                           checked="@(timeout == AppSettingsViewModel.InactivitySignOut)"
-                           @onclick="(e) => AppSettingsViewModel.OnInactivityContextMenu(timeout, e)" />
-                    <label for="timeout-@timeout">@((timeout == 0) ? "Disable" : $"{timeout} minutes")</label>
-                    <br />
-                }
-            </form>
-        </div>
-    </div>
-}
-@if (AppSettingsViewModel.FileEncryptionProperties)
-{
-    <div class="model-popup sub-pop1 hide-model-popup encrypt-pop">
-        <div id="date-modified-toggle">
-            <dl>
-                <dd class="center-column">
-                    <div>
-                        <img class="" src="images/default/Icodate.svg" alt="date-img" />
-                        <span class="font-medium grey-clr">
-                            @Texts.FilePropertiesDateModifiedToolStripMenuItem
-                        </span>
-                    </div>
-                    <div style="float:right; padding-left:15px;">
-                        <label class="toggle">
-                            <input type="checkbox" @bind="@AppSettingsViewModel.IsDateModifiedOn" @onclick="(e)=> AppSettingsViewModel.FilePropertiesDateModified(e)">
 
-                            <span class="slider round">
-                                @if (AppSettingsViewModel.IsDateModifiedOn)
-                                {
-                                    <span class="on-off-text on-text">ON</span>
-                                    <span class="on-off-text off-text" style="display:none;">OFF</span>
-                                }
-                                else
-                                {
-                                    <span class="on-off-text on-text" style="display:none;">ON</span>
-                                    <span class="on-off-text off-text">OFF</span>
-                                }
-                            </span>
-                        </label>
-                    </div>
-                </dd>
-            </dl>
-            <dl>
-                <dd>
-                    <img class="" src="images/default/IcoBtnEdit.svg" alt="btn-file-img" />
+<div class="model-popup sub-pop1" style="display:none;" id="inactivity-signout-side-popup">
+    <div id="inactivity">
+        <form id="inactivityForm">
+            @foreach (int timeout in AppSettingsViewModel.InactivityTimeoutOptions)
+            {
+                <input type="radio" id="timeout-@timeout" name="inactivity" value="@timeout"
+                       checked="@(timeout == AppSettingsViewModel.InactivitySignOut)"
+                       @onclick="(e) => AppSettingsViewModel.OnInactivityContextMenu(timeout, e)" />
+                <label for="timeout-@timeout">@((timeout == 0) ? "Disable" : $"{timeout} minutes")</label>
+                <br />
+            }
+        </form>
+    </div>
+</div>
+
+<div class="model-popup sub-pop1 encrypt-pop" style="display:none;" id="encryption-file-property-side-popup">
+    <div id="date-modified-toggle">
+        <dl>
+            <dd class="center-column">
+                <div>
+                    <img class="" src="images/default/Icodate.svg" alt="date-img" />
                     <span class="font-medium grey-clr">
-                        @Texts.FilePropertiesFileNameToolStripMenuItem
+                        @Texts.FilePropertiesDateModifiedToolStripMenuItem
                     </span>
-                    <div style="float:right; padding-left:15px;">
-                        <label class="toggle">
-                            <input type="checkbox" @bind="@AppSettingsViewModel.IsFileNameOn" @onclick="(e) => AppSettingsViewModel.FilePropertiesFileName(e)">
+                </div>
+                <div style="float:right; padding-left:15px;">
+                    <label class="toggle">
+                        <input type="checkbox" @bind="@AppSettingsViewModel.IsDateModifiedOn" @onclick="(e)=> AppSettingsViewModel.FilePropertiesDateModified(e)">
 
-                            <span class="slider round">
-                                @if (AppSettingsViewModel.IsFileNameOn)
-                                {
-                                    <span class="on-off-text on-text">ON</span>
-                                    <span class="on-off-text off-text" style="display:none;">OFF</span>
-                                }
-                                else
-                                {
-                                    <span class="on-off-text on-text" style="display:none;">ON</span>
-                                    <span class="on-off-text off-text">OFF</span>
-                                }
-                            </span>
-                        </label>
-                    </div>
-                </dd>
-            </dl>
-        </div>
+                        <span class="slider round">
+                            @if (AppSettingsViewModel.IsDateModifiedOn)
+                            {
+                                <span class="on-off-text on-text">ON</span>
+                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                            }
+                            else
+                            {
+                                <span class="on-off-text on-text" style="display:none;">ON</span>
+                                <span class="on-off-text off-text">OFF</span>
+                            }
+                        </span>
+                    </label>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dd>
+                <img class="" src="images/default/IcoBtnEdit.svg" alt="btn-file-img" />
+                <span class="font-medium grey-clr">
+                    @Texts.FilePropertiesFileNameToolStripMenuItem
+                </span>
+                <div style="float:right; padding-left:15px;">
+                    <label class="toggle">
+                        <input type="checkbox" @bind="@AppSettingsViewModel.IsFileNameOn" @onclick="(e) => AppSettingsViewModel.FilePropertiesFileName(e)">
+
+                        <span class="slider round">
+                            @if (AppSettingsViewModel.IsFileNameOn)
+                            {
+                                <span class="on-off-text on-text">ON</span>
+                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                            }
+                            else
+                            {
+                                <span class="on-off-text on-text" style="display:none;">ON</span>
+                                <span class="on-off-text off-text">OFF</span>
+                            }
+                        </span>
+                    </label>
+                </div>
+            </dd>
+        </dl>
     </div>
-}
-@if (AppSettingsViewModel.DebugPopup)
-{
-    <div class="model-popup sub-pop2 font-medium hide-model-popup">
-        <div class="manage-acc-sec">
-            <NavLink class="nav-link" @onclick="AppSettingsViewModel.CheckAxCryptVersionAsync">
-                <img class="" src="images/default/IcoChckVrsn.svg" alt="go-back-img" />
-                <span>@Texts.DebugCheckVersionNowToolStripMenuItemText</span>
-            </NavLink>
-            <NavLink class="nav-link" @onclick="AppSettingsViewModel.OpenOptions">
-                <img class="" src="images/default/IcoExtrFtrs1.svg" alt="go-back-img" />
-                <span>@Texts.DebugOptionsToolStripMenuItemText</span>
-            </NavLink>
-            <NavLink class="nav-link" @onclick="AppSettingsViewModel.OnOpenLogViewerClicked">
-                <img class="" src="images/default/IcoLgng.svg" alt="go-back-img" />
-                <span>@Texts.DebugLoggingToolStripMenuItemText</span>
-            </NavLink>
-            <NavLink class="nav-link" @onclick="AppSettingsViewModel.OpenManageAxCryptID">
-                <img class="" src="images/default/IcoUsers.svg" alt="go-back-img" />
-                <span>@Texts.DebugManageAccountToolStripMenuItemText</span>
-            </NavLink>
-            <NavLink class="nav-link" @onclick="async ()=> AppSettingsViewModel.OpenBrokenFiles()">
-                <img class="" src="images/default/IcoBrkFl.svg" alt="go-back-img" />
-                <span>@Texts.TryBrokenFileToolStripMenuItemText</span>
-            </NavLink>
-            <NavLink class="nav-link" @onclick="async ()=> AppSettingsViewModel.VerifyAxCryptFiles()">
-                <img class="" src="images/default/IcoChckVrsn1.svg" alt="go-back-img" />
-                <span>@Texts.VerifyFileToolStripMenuItem </span>
-            </NavLink>
-            <NavLink class="nav-link" @onclick="async ()=> AppSettingsViewModel.AxCryptFileFormatCheck()">
-                <img class="" src="images/default/Frame1.svg" alt="go-back-img" />
-                <span>@Texts.DebugFileFormatCheckToolStripMenuItemText</span>
-            </NavLink>
-            <NavLink class="nav-link" @onclick="AppSettingsViewModel.OpenReportAsync">
-                <img class="" src="images/default/XMLID_601.svg" alt="go-back-img" />
-                <span>@Texts.ReportSnapshotOpenMenuItem</span>
-            </NavLink>
-        </div>
+</div>
+
+<div class="model-popup sub-pop2 font-medium" style="display:none;" id="debug-side-popup">
+    <div class="manage-acc-sec">
+        <NavLink class="nav-link" @onclick="AppSettingsViewModel.CheckAxCryptVersionAsync">
+            <img class="" src="images/default/IcoChckVrsn.svg" alt="go-back-img" />
+            <span>@Texts.DebugCheckVersionNowToolStripMenuItemText</span>
+        </NavLink>
+        <NavLink class="nav-link" @onclick="AppSettingsViewModel.OpenOptions">
+            <img class="" src="images/default/IcoExtrFtrs1.svg" alt="go-back-img" />
+            <span>@Texts.DebugOptionsToolStripMenuItemText</span>
+        </NavLink>
+        <NavLink class="nav-link" @onclick="AppSettingsViewModel.OnOpenLogViewerClicked">
+            <img class="" src="images/default/IcoLgng.svg" alt="go-back-img" />
+            <span>@Texts.DebugLoggingToolStripMenuItemText</span>
+        </NavLink>
+        <NavLink class="nav-link" @onclick="AppSettingsViewModel.OpenManageAxCryptID">
+            <img class="" src="images/default/IcoUsers.svg" alt="go-back-img" />
+            <span>@Texts.DebugManageAccountToolStripMenuItemText</span>
+        </NavLink>
+        <NavLink class="nav-link" @onclick="async ()=> AppSettingsViewModel.OpenBrokenFiles()">
+            <img class="" src="images/default/IcoBrkFl.svg" alt="go-back-img" />
+            <span>@Texts.TryBrokenFileToolStripMenuItemText</span>
+        </NavLink>
+        <NavLink class="nav-link" @onclick="async ()=> AppSettingsViewModel.VerifyAxCryptFiles()">
+            <img class="" src="images/default/IcoChckVrsn1.svg" alt="go-back-img" />
+            <span>@Texts.VerifyFileToolStripMenuItem </span>
+        </NavLink>
+        <NavLink class="nav-link" @onclick="async ()=> AppSettingsViewModel.AxCryptFileFormatCheck()">
+            <img class="" src="images/default/Frame1.svg" alt="go-back-img" />
+            <span>@Texts.DebugFileFormatCheckToolStripMenuItemText</span>
+        </NavLink>
+        <NavLink class="nav-link" @onclick="AppSettingsViewModel.OpenReportAsync">
+            <img class="" src="images/default/XMLID_601.svg" alt="go-back-img" />
+            <span>@Texts.ReportSnapshotOpenMenuItem</span>
+        </NavLink>
     </div>
-}
+</div>
+
 
 @if (AppSettingsViewModel.ShowVersion)
 {
@@ -437,6 +432,8 @@
     {
         AppSettingsViewModel.Initialized();
         AppSettingsViewModel.AdvancedOptionsViewModel.Initialize();
+        AppSettingsViewModel.OnUpdateViewState += UpdatePageState;
+
         base.OnInitialized();
     }
 
@@ -462,5 +459,13 @@
     {
         isHovered = false;
         hoveredElement = string.Empty;
+    }
+
+    private void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 }
