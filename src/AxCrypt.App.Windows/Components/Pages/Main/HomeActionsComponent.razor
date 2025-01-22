@@ -34,7 +34,7 @@
                     </div>
                 }
             </div>
-            <div class="act-box" @onclick="()=>homeActionModel.StopSecuringFile()" @onmouseover='@( () => ShowPopup("stop") )' @onmouseout='@( () => HidePopup() )' >
+            <div class="act-box" @onclick="()=>homeActionModel.StopSecuringFile()" @onmouseover='@( () => ShowPopup("stop") )' @onmouseout='@( () => HidePopup() )'>
                 <img class="act-img stpscr-act" src="" alt="stpscr-img" />
                 <span class="text-size">@Texts.DecryptToolStripMenuItemText</span>
                 @if (isHovered && hoveredElement == "stop")
@@ -247,8 +247,8 @@
                     <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
                 </div>
                 @* <div class="mre-actn-box fade-clr" style="border:dotted;">
-                    <span class="text-size text-style">Add action to the Home</span>
-                </div> *@
+            <span class="text-size text-style">Add action to the Home</span>
+            </div> *@
             }
             else
             {
@@ -256,7 +256,7 @@
                     <img class="ico-offln" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.AlwaysOffline</span>
                 </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>homeActionModel.InviteUser(e)"  title="@Texts.InviteUserToolStripMenuItemText">
+                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>homeActionModel.InviteUser(e)" title="@Texts.InviteUserToolStripMenuItemText">
                     <img class="ico-invtfrd" src="" alt="hand-img" />
                     <span class="text-size text-style">Invite friend</span>
                 </div>
@@ -290,7 +290,7 @@
     protected override void OnInitialized()
     {
         Utility.OnIsMainMenuHiddenChanged += UpdateState;
-        homeActionModel.LogOnViewModel.OnUIStateChanged += UpdateState;
+        homeActionModel!.OnUpdateViewState += UpdateState;
         base.OnInitialized();
     }
 

@@ -14,7 +14,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.ViewModels;
 
-public class HomeActionsViewModel : ComponentBase
+public class HomeActionsViewModel : ViewModelBase
 {
     private FileOperationViewModel _fileOperationViewModel;
     private MainViewModel? _mainViewModel;
@@ -40,8 +40,8 @@ public class HomeActionsViewModel : ComponentBase
     {
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureKeyShareMenus(license); });
 
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { EncryptButtonEnabled = enabled; });
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { IsFilesPending = areFilesPending; });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { EncryptButtonEnabled = enabled;  });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { IsFilesPending = areFilesPending; UpdateViewState(); });
 
         KnownFoldersViewModel!.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
         KnownFoldersViewModel.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
@@ -102,6 +102,8 @@ public class HomeActionsViewModel : ComponentBase
         {
             KeyShareButtonEnabled = false;
         }
+
+        UpdateViewState();
     }
 
     private async Task EncryptPendingFiles()
@@ -112,6 +114,8 @@ public class HomeActionsViewModel : ComponentBase
             await _mainViewModel.EncryptPendingFiles.ExecuteAsync(null);
             new ApplicationManager().WaitForBackgroundToComplete();
         }
+
+        UpdateViewState();
     }
 
     private void UpdateKnownFolders(IEnumerable<KnownFolder> folders)
@@ -120,6 +124,8 @@ public class HomeActionsViewModel : ComponentBase
         {
             GetIconClass(folder.My.FullName);
         }
+
+        UpdateViewState();
     }
 
     public string GetIconClass(string displayName)

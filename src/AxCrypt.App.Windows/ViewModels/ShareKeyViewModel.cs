@@ -488,9 +488,9 @@ public class ShareKeyViewModel : ViewModelBase
         ShowSuggestionDropdown = false;
     }
 
-    public void GropuLink()
+    public void GoToCreateGroupLink()
     {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/"));
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/Group/"));
     }
 
     public class EmailSuggestion()

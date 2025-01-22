@@ -24,9 +24,8 @@ public class RecentFilesViewModel : ViewModelBase
     private ShareKeyViewModel? _sharekeyViewModel;
 
     private ProcessIndicatorService? _ProcessIndicatorService;
-    private readonly IDispatcher Dispatcher;
 
-    public RecentFilesViewModel(ShareKeyViewModel sharekeyViewModel, IDispatcher dispatcher)
+    public RecentFilesViewModel(ShareKeyViewModel sharekeyViewModel)
     {
         LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
         _mainViewModel = AxCServiceProvider.LogOnViewModel!.MainViewModel;
@@ -36,7 +35,6 @@ public class RecentFilesViewModel : ViewModelBase
         SelectAllChecked = false;
         SelectedFiles = new List<string>();
         RecentFilesList = new ObservableCollection<FileDetails>();
-        Dispatcher = dispatcher;
 
         OnInitialized();
     }

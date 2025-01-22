@@ -128,7 +128,6 @@
                 {
                     <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.RenameToOriginal)">@Texts.RestoreAnonymousNamesMenuText</dd>
                 }
-                @*<dd @onclick="UpdateAutoRenewalStatus">@Texts.ClearRecentFilesToolStripMenuItemText</dd>*@
                 <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ClearRecentFiles)">@Texts.ClearRecentFilesToolStripMenuItemText</dd>
             </dl>
         </div>
