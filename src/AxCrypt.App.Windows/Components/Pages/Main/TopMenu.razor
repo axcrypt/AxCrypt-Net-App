@@ -37,11 +37,13 @@
             </div>
         </div>
     </div>
-    <NavLink @onclick="ViewModel.ToggleSettingsPopup">
+
+    <NavLink id="settings-dropdown-click-action">
         <img class="sttng-icon padding" src="/images/default/IcoExtrFtr.svg" alt="settings-icon" />
     </NavLink>
-    <NavLink @onclick="ViewModel.ToggleNotifyPopup">
-        <div>
+
+    <NavLink id="notification-dropdown-click-action">
+        <div id="notification-dropdown-click-action">
             <a id="notification-bell">
                 <span class="notification-badge">
                     @notificationService.NotificationModel.Notifications.Count()
@@ -51,47 +53,18 @@
         </div>
     </NavLink>
     <NavLink class="update-btn padding" @onclick="ViewModel.CheckAxCryptVersionAsync">Update</NavLink>
-    <NavLink class="mb-prfle" @onclick="ViewModel.ToggleAccountPopup">
-        <span class="">
+    <NavLink class="mb-prfle" id="accounts-dropdown-click-action">
+        <span class="" id="accounts-dropdown-click-action">
             @(string.IsNullOrEmpty(ViewModel.TopMenuModel.UserEmail) ? "N/A" : ViewModel.TopMenuModel.UserEmail.Substring(0, Math.Min(2, ViewModel.TopMenuModel.UserEmail.Length)).ToUpper())
         </span>
     </NavLink>
-
-    @if (!IsLoading)
-    {
-        @if (ViewModel.TopMenuModel.AccountPopup)
-        {
-            @if (ViewModel.TopMenuModel.IsLargeScreen)
-            {
-                <AxCrypt.App.Windows.Components.Pages.Main.ProfileOptionComponent ClosePopup="ViewModel.CloseAccountPopup" />
-            }
-        }
-
-        @if (ViewModel.TopMenuModel.SettingsPopup)
-        {
-            @if (ViewModel.TopMenuModel.IsLargeScreen)
-            {
-                <AxCrypt.App.Windows.Components.Pages.Main.AppSettingsComponent CloseSettingsPopup="ViewModel.CloseSettingsPopup" />
-            }
-        }
-
-        @if (ViewModel.TopMenuModel.NotifyPopup)
-        {
-            @if (ViewModel.TopMenuModel.IsLargeScreen)
-            {
-                <AxCrypt.App.Windows.Components.Pages.Main.NotificationPopup />
-            }
-        }
-    }
-    else
-    {
-        <p>@AxCrypt.Content.Texts.LoadingText</p>
-    }
 </div>
 
-@code {
-    bool IsLoading { get; set; }
+<AxCrypt.App.Windows.Components.Pages.Main.AppSettingsComponent />
+<AxCrypt.App.Windows.Components.Pages.Main.NotificationPopup />
+<AxCrypt.App.Windows.Components.Pages.Main.ProfileOptionComponent />
 
+@code {
     protected override async Task OnInitializedAsync()
     {
         string currentCulture = Resolve.UserSettings.CultureName;
@@ -131,7 +104,6 @@
         }
         finally
         {
-            IsLoading = false;
         }
     }
 

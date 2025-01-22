@@ -40,9 +40,6 @@ public class TopMenuViewModel : ViewModelBase
 
     public DeviceIdiom GetCurrentDeviceIdiom() => DeviceInfo.Idiom;
 
-    public void ToggleAccountPopup() => TopMenuModel.AccountPopup = !TopMenuModel.AccountPopup;
-    public void ToggleSettingsPopup() => TopMenuModel.SettingsPopup = !TopMenuModel.SettingsPopup;
-    public void ToggleNotifyPopup() => TopMenuModel.NotifyPopup = !TopMenuModel.NotifyPopup;
     public string VersionHoverText { get; set; }
     public bool ShowUpdate { get; set; }
 
@@ -107,7 +104,4 @@ public class TopMenuViewModel : ViewModelBase
         await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel.DownloadVersion);
         _userInitiatedUpdateCheckPending = false;
     }
-
-    public void CloseAccountPopup() => TopMenuModel.AccountPopup = false;
-    public void CloseSettingsPopup() => TopMenuModel.SettingsPopup = false;
 }

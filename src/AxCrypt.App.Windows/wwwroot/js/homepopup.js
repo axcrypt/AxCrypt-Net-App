@@ -132,9 +132,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         }
 
+        var targetobj = e.target;
         //Handle show/hide the language dropdown popup
         var langSelArrow = document.getElementById("lang-action-btn-arw");
-        var targetobj = e.target;
         if (targetobj.id === "lang-dropdown-action-btn" || targetobj.parentElement.id === "lang-dropdown-action-btn") {
             ShowHidePopup("lang-dropdown-popup");
             langSelArrow.classList.toggle("down");
@@ -144,6 +144,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
             if (langSelArrow !== undefined) {
                 langSelArrow.classList.add("down");
             }
+        }
+
+        //Handle show/hide the settings menu dropdown popup
+        if (targetobj.id === "settings-dropdown-click-action" || targetobj.parentElement.id === "settings-dropdown-click-action") {
+            ShowHidePopup("settings-dropdown-popup");
+        }
+        else {
+            HidePopup("settings-dropdown-popup");
+        }
+
+        //Handle show/hide the notification menu dropdown popup
+        if (targetobj.id === "notification-dropdown-click-action" || targetobj.parentElement.id === "notification-dropdown-click-action") {
+            ShowHidePopup("notification-dropdown-popup");
+        }
+        else {
+            HidePopup("notification-dropdown-popup");
+        }
+
+        //Handle show/hide the accounts menu dropdown popup
+        if (targetobj.id === "accounts-dropdown-click-action" || targetobj.parentElement.id === "accounts-dropdown-click-action") {
+            ShowHidePopup("accounts-dropdown-popup");
+        }
+        else {
+            HidePopup("accounts-dropdown-popup");
         }
     });
 });

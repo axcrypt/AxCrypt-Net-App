@@ -5,7 +5,7 @@
 @inject NotificationViewModel model
 @inject UserNotificationService service
 
-<div class="notification-popup hide-model-popup" id="notify-popup">
+<div class="notification-popup" style="display:none;" id="notification-dropdown-popup">
     <label class="notif-popup-title">@Texts.PromptNotificationsText</label>
     @*<a id="noticlear" class="noticlearall font-medium">Clear all</a>*@
     @if (model.Notifications.Count() > 0)

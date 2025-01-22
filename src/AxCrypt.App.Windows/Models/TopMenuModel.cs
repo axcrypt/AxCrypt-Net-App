@@ -6,12 +6,6 @@ public class TopMenuModel
 {
     public SubscriptionLevel SubscriptionLevel { get; set; }
 
-    public bool AccountPopup { get; set; }
-
-    public bool SettingsPopup { get; set; }
-
-    public bool NotifyPopup { get; set; }
-
     public bool IsWideScreen { get; set; }
 
     public bool IsLargeScreen { get; set; }
