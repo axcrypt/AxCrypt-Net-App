@@ -1,0 +1,29 @@
+﻿@using AxCrypt.Content
+@using AxCrypt.App.Desktop.ViewModels.Main
+
+@inject HeaderComponentViewModel HCModel
+
+<div class="top-menu-section">
+    <AxCrypt.App.Desktop.Components.Main.Header.TopMenu />
+</div>
+
+<div class="hm-page-title head-sec">
+    <h1 class="fle-nme">"@Texts.WelcomeBackTitle"</h1>
+    <img class="home-title" src="" alt="hand-img" />
+</div>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        HCModel.OnUpdateViewState += UpdatePageState;
+    }
+
+    private void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+}

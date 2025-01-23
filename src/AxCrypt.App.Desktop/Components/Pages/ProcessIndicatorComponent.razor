@@ -1,0 +1,53 @@
+﻿@using AxCrypt.App.Shared.Services
+
+@inject ProcessIndicatorService ProcessIndicatorService
+
+@code {
+    protected override void OnInitialized()
+    {
+        ProcessIndicatorService.OnProcessIndicatorVisibilityChanged += UpdateIndicatorVisibility;
+    }
+
+    private void UpdateIndicatorVisibility(bool isVisible)
+    {
+        IsVisible = isVisible;
+        Title = ProcessIndicatorService.Title;
+        Message = ProcessIndicatorService.Message;
+
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void ClosePopup()
+    {
+        ProcessIndicatorService.Hide();
+    }
+
+    public bool IsVisible { get; set; }
+
+    public string? Title { get; set; }
+
+    public string? Message { get; set; }
+}
+
+@if (IsVisible)
+{
+    @* <div class="modalDialog" style="display: block;">
+        <div class="secrets-loading-content">
+            <h2>@Title</h2>
+            <div class="loading-content">
+                <img src="" alt="Loading..." />
+                <span>@Message</span>
+            </div>
+        </div>
+    </div> *@
+
+    <div class="secrets-loading-overlay">
+        <div class="loading-content">
+            <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
+            <span style="color:black ">@Message</span>
+        </div>
+    </div>
+}

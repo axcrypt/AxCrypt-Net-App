@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0</TargetFrameworks>
+        <!--<UseMaui>true</UseMaui>
+        <ImplicitUsings>enable</ImplicitUsings>-->
+        <Nullable>enable</Nullable>
+		<OutputType>Library</OutputType>
+    </PropertyGroup>
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	</ItemGroup>
+	
+    <ItemGroup>
+      <ProjectReference Include="..\..\shared\AxCrypt.Abstractions\AxCrypt.Abstractions.csproj" />
+      <ProjectReference Include="..\..\shared\AxCrypt.Api\AxCrypt.Api.csproj" />
+      <ProjectReference Include="..\..\shared\Axcrypt.Content\AxCrypt.Content.csproj" />
+      <ProjectReference Include="..\..\shared\AxCrypt.Core\AxCrypt.Core.csproj" />
+      <ProjectReference Include="..\AxCrypt.App.Shared\AxCrypt.App.Shared.csproj" />
+    </ItemGroup>
+
+</Project>

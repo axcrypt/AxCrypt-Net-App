@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Components\Home\HeaderComponent.razor" />
+    <None Remove="Components\Home\Header\TopMenu.razor" />
+    <None Remove="Components\Home\HomeMoreActionComponent.razor" />
+    <None Remove="Components\Home\RecentFilesView.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Components\Home\HeaderComponent.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Include="Components\Home\Header\TopMenu.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Include="Components\Home\HomeMoreActionComponent.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Include="Components\Home\RecentFilesView.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\shared\Axcrypt.Content\AxCrypt.Content.csproj" />
+  </ItemGroup>
+
+</Project>

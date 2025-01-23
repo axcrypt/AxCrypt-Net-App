@@ -1,8 +1,8 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Components.Models;
-using AxCrypt.App.Components.Services.Interface;
-using AxCrypt.App.Components.ViewModels;
+using AxCrypt.App.Desktop.Models;
+using AxCrypt.App.Desktop.Services.Interface;
+using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Windows.Models;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.Common;

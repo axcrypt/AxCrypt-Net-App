@@ -1,6 +1,6 @@
 ﻿@using AxCrypt.Api.Model
-@using AxCrypt.App.Components.Utility.View
-@using AxCrypt.App.Components.ViewModels
+@using AxCrypt.App.Desktop.Utility.View
+@using AxCrypt.App.Desktop.ViewModels
 @using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Content
 @using AxCrypt.Core.UI
@@ -8,131 +8,12 @@
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject RecentFilesViewModel RecentFilesViewModel
-@inject IJSRuntime JSRuntime
 
-@{
-    int MaxAvatarsToShow = 4;
-}
 
-<div class="home-index">
-    <div class="hm-page-title head-sec">
-        <h1 class="fle-nme">@Texts.WelcomeBackTitle</h1>
-        <img class="home-title" src="" alt="hand-img" />
-    </div>
 
-    <HomeActionsComponent />
-
-    <div>
-        <div style="padding: 10px 0px;">
-            <label class="text-style">@Texts.RecentFilesTabPageText</label>
-        </div>
-        <div class="file-max-hgt">
-            @if (RecentFilesViewModel.RecentFilesList.Any())
-            {
-                <table class="rcnt-fle-tbl" style="width:100%;">
-                    <thead style="user-select: none;">
-                        <tr>
-                            <th style="width:3%;"> <input class="check-box" type="checkbox" @onchange="(e)=> RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
-                            <th style="width:23%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(0)">@Texts.NameLabel<img class="arw-img" src="" alt="arrow img" /></th>
-                            <th style="width:11%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(1)">@Texts.FileSizeColumnHeaderText<img class="arw-img" src="" alt="arrow img" /></th>
-                            <th style="width:11%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(5)">@Texts.CryptoNameText<img class="arw-img" src="" alt="arrow img" /></th>
-                            <th style="width:18%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(2)">@Texts.LastModifiedTimeColumnHeaderText<img class="arw-img" src="" alt="arrow img" /></th>
-                            <th style="width:13%;">@Texts.PromptSharedWith</th>
-
-                            @if (RecentFilesViewModel.SubscriptionLevel != SubscriptionLevel.Free)
-                            {
-                                <th class="scrd-sec">@Texts.EncryptedPathColumnHeaderText</th>
-                            }
-                        </tr>
-                    </thead>
-                    <tbody class="row-sec">
-                        @if (RecentFilesViewModel.IsHideRecentFiles)
-                        {
-                            <tr><td colspan="7" style="padding: 20px 30px;"><span class="grey-clr">@Texts.HideRecentFilesListTabToolTipText</span></td></tr>
-                        }
-                        else if (RecentFilesViewModel.RecentFilesList.Any())
-                        {
-                            @for (int i = 0; i < RecentFilesViewModel.RecentFilesList.Count; i++)
-                            {
-                                FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
-                                <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails.FilePath) ? "selected" : "")"
-                                    @oncontextmenu="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)" @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)">
-                                    <td>
-                                        <input class="check-box" type="checkbox" @onchange="() => RecentFilesViewModel.HandleFileClick(!fileDetails.IsChecked, fileDetails.FilePath)" checked="@fileDetails.IsChecked" />
-                                    </td>
-                                    <td class="fle-exton-img" style="display: flex; align-items: center;" title="@fileDetails.FilePath">
-                                        <img style="width: 18px; height: 18px;" class="@fileDetails.IconClass" src="" alt="file-image" />
-                                        <span class="fle-nme">@fileDetails.FileName</span>
-                                    </td>
-                                    <td>@fileDetails.FileSize</td>
-                                    <td>@fileDetails.Algorithm</td>
-                                    <td>@fileDetails.LastModifiedDate</td>
-                                    <td style="text-align:center">
-                                        @if (fileDetails.SharedWith.Any())
-                                        {
-                                            <div style="display:flex;">
-                                                @foreach (string sharedWith in fileDetails.SharedWith.Take(MaxAvatarsToShow))
-                                                {
-                                                    <div class="info-prple" title="@sharedWith">@sharedWith.Substring(0, 2).ToUpper()</div>
-                                                }
-
-                                                @if (fileDetails.SharedWith.Count() > MaxAvatarsToShow)
-                                                {
-                                                    <div class="info-prple bdr-clr">+@((fileDetails.SharedWith.Count()) - MaxAvatarsToShow)</div>
-                                                }
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div style="display:flex;"> - </div>
-                                        }
-                                    </td>
-                                    @if (RecentFilesViewModel.SubscriptionLevel != SubscriptionLevel.Free)
-                                    {
-                                        <td class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;">@fileDetails.FilePath</td>
-                                    }
-                                </tr>
-                            }
-                        }
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <div class="text-center">
-                    <span class="empty-view-heading">Let`s start our journey!</span><br />
-                    <span>Add and secure your first file.</span><br />
-                    <img class="empty-rcnt-fle-img" alt="default file img" />
-                </div>
-            }
-        </div>
-        <div id="homeContextMenu" class="hide-model-popup home-context-menu" style="display: none;">
-            <dl class="font-medium" style="margin-bottom: 5px;">
-                <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.OpenSecured)">@Texts.McInfMenuOpen</dd>
-                <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.RemoveFromListButKeepSecured)">@Texts.RemoveRecentFileToolStripMenuItemText</dd>
-                <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.StopSecureAndRemoveFromList)">@Texts.DecryptAndRemoveFromListToolStripMenuItemText</dd>
-                @if (RecentFilesViewModel.SubscriptionLevel == SubscriptionLevel.Free)
-                {
-                    <dd class="grey-clr">@Texts.ShareKeysToolStripMenuItemText</dd>
-                }
-                else
-                {
-                    <dd @onclick="async (e)=>await RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</dd>
-                }
-                <dd @onclick="async (e)=> await RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ShowInFolder)">@Texts.ShowInFolderText</dd>
-                @if (RecentFilesViewModel.SubscriptionLevel == SubscriptionLevel.Free)
-                {
-                    <dd class="grey-clr">@Texts.RestoreAnonymousNamesMenuText</dd>
-                }
-                else
-                {
-                    <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.RenameToOriginal)">@Texts.RestoreAnonymousNamesMenuText</dd>
-                }
-                <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ClearRecentFiles)">@Texts.ClearRecentFilesToolStripMenuItemText</dd>
-            </dl>
-        </div>
-    </div>
-</div>
+<AxCrypt.App.Desktop.Components.Home.HeaderComponent />
+<HomeActionsComponent />
+<AxCrypt.App.Windows.Components.Pages.Home.RecentFilesView />
 
 @code {
     protected override async Task OnInitializedAsync()

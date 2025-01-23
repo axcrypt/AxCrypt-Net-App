@@ -10,7 +10,7 @@
             The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
             either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.26100.0</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.22621.0</TargetFrameworks>
         <OutputType>Exe</OutputType>
 
 		<SelfContained>true</SelfContained>
@@ -34,7 +34,7 @@
         <ApplicationVersion>1</ApplicationVersion>
         <!--<WindowsPackageType>None</WindowsPackageType>-->
 
-        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.26100.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
         <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
@@ -67,6 +67,23 @@
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
+	
+    <ItemGroup>
+      <Compile Remove="Components\Pages\Home\**" />
+      <Compile Remove="Components\Pages\Main\**" />
+      <Content Remove="Components\Pages\Home\**" />
+      <Content Remove="Components\Pages\Main\**" />
+      <EmbeddedResource Remove="Components\Pages\Home\**" />
+      <EmbeddedResource Remove="Components\Pages\Main\**" />
+      <MauiXaml Remove="Components\Pages\Home\**" />
+      <MauiXaml Remove="Components\Pages\Main\**" />
+      <None Remove="Components\Pages\Home\**" />
+      <None Remove="Components\Pages\Main\**" />
+    </ItemGroup>
+	
+    <ItemGroup>
+      <Compile Remove="ViewModels\ProfileViewModel.cs" />
+    </ItemGroup>
 
    <ItemGroup>
    	<ProjectReference Include="..\..\shared\AxCrypt.Abstractions\AxCrypt.Abstractions.csproj" />
@@ -76,7 +93,7 @@
    	<ProjectReference Include="..\..\shared\AxCrypt.Core\AxCrypt.Core.csproj" />
    	<ProjectReference Include="..\..\shared\AxCrypt.Cryptor\AxCrypt.Cryptor.csproj" />
    	<ProjectReference Include="..\..\shared\AxCrypt.Mono\AxCrypt.Mono.csproj" />
-   	<ProjectReference Include="..\AxCrypt.App.Components\AxCrypt.App.Components.csproj" />
+   	<ProjectReference Include="..\AxCrypt.App.Desktop\AxCrypt.App.Desktop.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -97,14 +114,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="Components\Pages\Main\ProfileOptionComponent.razor" />
-      <Content Update="Components\Pages\Main\FlagListComponent.razor" />
-      <Content Update="Components\Pages\Main\Home.razor" />
-      <Content Update="Components\Pages\Main\HomeActionsComponent.razor" />
-      <Content Update="Components\Pages\Main\NotificationPopup.razor" />
-      <Content Update="Components\Pages\Main\AppSettingsComponent.razor" />
-      <Content Update="Components\Pages\Main\TopMenu.razor" />
-      <Content Update="Components\Pages\Main\Upgrade.razor" />
       <Content Update="Components\Pages\Shared\AlertComponent.razor" />
       <Content Update="Components\Pages\Shared\ProgressBar.razor" />
       <Content Update="Components\Pages\Shared\ShareKey.razor" />
@@ -160,6 +169,14 @@
       <None Update="Resources\logos\axcrypt-icon-71x71.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PRIResource Remove="Components\Pages\Main\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PRIResource Remove="Components\Pages\Home\**" />
     </ItemGroup>
 
 </Project>

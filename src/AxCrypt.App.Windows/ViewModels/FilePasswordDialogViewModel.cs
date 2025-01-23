@@ -1,10 +1,10 @@
-﻿using AxCrypt.App.Components.Services.UI;
-using AxCrypt.App.Components.Utility;
+﻿using AxCrypt.App.Desktop.Services.UI;
+using AxCrypt.App.Desktop.Utility;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Content;
 using AxCrypt.Core.Extensions;
 
-namespace AxCrypt.App.Components.Models;
+namespace AxCrypt.App.Desktop.Models;
 
 public class FilePasswordDialogViewModel : ViewModelBase
 {
@@ -88,8 +88,8 @@ public class FilePasswordDialogViewModel : ViewModelBase
 
 
 
-//using AxCrypt.App.Components.Models;
-//using AxCrypt.App.Components.Utility;
+//using AxCrypt.App.Desktop.Models;
+//using AxCrypt.App.Desktop.Utility;
 //using AxCrypt.Content;
 //using AxCrypt.Core.UI.ViewModel;
 //using AxCrypt.Core.Extensions;

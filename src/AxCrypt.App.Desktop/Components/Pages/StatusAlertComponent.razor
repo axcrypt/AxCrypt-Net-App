@@ -1,0 +1,49 @@
+﻿@using AxCrypt.App.Shared.Services.Interface
+@using AxCrypt.App.Shared.Utility
+
+@inject IStatusAlertService StatusAlertService
+
+@if (IsVisible)
+{
+    <div class="medium-11 columns">
+        <div data-alert class="alert-box @NotificationStyleClass radius">
+            <span style="white-space: break-spaces;">@Body</span>
+            <a class="clse-img" style="float: right; color:white; cursor: pointer;" @onclick="ClosePopup">X</a>
+        </div>
+    </div>
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        StatusAlertService.OnPopupVisibilityChanged += UpdatePopupVisibility;
+    }
+
+    private void UpdatePopupVisibility(bool isVisible)
+    {
+        IsVisible = isVisible;
+        Body = StatusAlertService.Alert;
+
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void ClosePopup()
+    {
+        StatusAlertService.Hide();
+    }
+
+    public bool IsVisible { get; set; }
+
+    public string? NotificationStyleClass => StatusAlertService.Type switch
+    {
+        NotificationType.Success => "success",
+        NotificationType.Warning => "alert",
+        _ => "alert"
+    };
+
+    [Parameter]
+    public string? Body { get; set; }
+}

@@ -1,7 +1,7 @@
 ﻿using AxCrypt.Core.Extensions;
 using AxCrypt.Api.Model;
 using AxCrypt.Core.UI;
-using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Desktop.Services.Interface;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.Content;

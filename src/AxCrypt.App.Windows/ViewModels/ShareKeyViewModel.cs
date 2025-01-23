@@ -1,7 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Components.Models;
+using AxCrypt.App.Desktop.Models;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;

@@ -1,5 +1,4 @@
-﻿
-using AxCrypt.App.Components.Services.Interface;
+﻿using AxCrypt.App.Desktop.Services.Interface;
 using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace AxCrypt.App.Windows.Services;

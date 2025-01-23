@@ -6,11 +6,11 @@ using AxCrypt.Core.Session;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using AxCrypt.Core;
-using AxCrypt.App.Components.Models;
+using AxCrypt.App.Desktop.Models;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Runtime;
-using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Desktop.Services.Interface;
 using AxCrypt.App.Windows.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;

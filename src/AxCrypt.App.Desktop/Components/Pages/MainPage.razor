@@ -1,0 +1,53 @@
+﻿@using AxCrypt.App.Desktop.ViewModels
+@using Microsoft.JSInterop
+
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject RecentFilesViewModel RecentFilesViewModel
+@inject IJSRuntime JSRuntime
+
+@{
+    int MaxAvatarsToShow = 4;
+}
+
+<div class="home-index">
+    <AxCrypt.App.Desktop.Components.Main.HeaderComponent />
+    <AxCrypt.App.Desktop.Components.Main.ActionsComponent />
+    <AxCrypt.App.Desktop.Components.Main.SubActionsComponent />
+    <AxCrypt.App.Desktop.Components.Main.RecentFilesComponent />
+</div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        RecentFilesViewModel.OnUpdateViewState += UpdatePageState;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+        }
+        try
+        {
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error determining screen width: {ex.Message}");
+        }
+        finally
+        {
+            //IsLoading = false;
+        }
+    }
+
+    private void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+}

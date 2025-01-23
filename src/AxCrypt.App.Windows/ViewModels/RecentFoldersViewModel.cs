@@ -1,6 +1,6 @@
 ﻿using AxCrypt.Api.Model;
-using AxCrypt.App.Components.Models;
-using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Desktop.Models;
+using AxCrypt.App.Desktop.Services.Interface;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
@@ -8,7 +8,7 @@ using AxCrypt.Core;
 using System.Collections.ObjectModel;
 using Microsoft.AspNetCore.Components.Web;
 using AxCrypt.Abstractions;
-using AxCrypt.App.Components.Utility.View;
+using AxCrypt.App.Desktop.Utility.View;
 using AxCrypt.App.Windows.Services;
 
 using static AxCrypt.Abstractions.TypeResolve;

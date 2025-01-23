@@ -1,6 +1,6 @@
 ﻿@using AxCrypt.Api.Model
-@using AxCrypt.App.Components.Data
-@using AxCrypt.App.Components.ViewModels
+@using AxCrypt.App.Desktop.Data
+@using AxCrypt.App.Desktop.ViewModels
 @using AxCrypt.App.Windows.ViewModels
 @using AxCrypt.Content
 @using AxCrypt.Core
@@ -208,79 +208,22 @@
             </div>
         }
     </div>
-</div>
-
-<div class="mre-act-sec">
-    @if (homeActionModel.SubscriptionLevel != SubscriptionLevel.Free)
-    {
-        <div style="display:block;">
-            <h3 class="fle-nme fnt-sze">Cloud services</h3>
-            <div style="display: flex;">
-                @foreach (KnownFolder? knownFolder in homeActionModel?.KnownFoldersViewModel?.KnownFolders!)
-                {
-                    <div>
-                        <button @onclick="() => homeActionModel.OnCloudServiceButtonClick(knownFolder)"
-                                class="assets-box"
-                                style="background-color:@(knownFolder.Enabled ? _ENABLEDTOOLSTRIPBACKCOLOR : homeActionModel.DisabledBackColor)">
-                            <img class="icon @homeActionModel.GetIconClass(knownFolder.DisplayName)" src="" alt="@knownFolder.DisplayName" />
-                        </button>
-                    </div>
-                }
-            </div>
-        </div>
-    }
-    <div class="medium-9" style="display:block;">
-        <h3 class="fle-nme fnt-sze">More actions</h3>
-        <div style="display: flex; gap: 2%;">
+    <div>
+        @if (Utility.IsMainMenuHidden)
+        {
             @if (homeActionModel.SubscriptionLevel != SubscriptionLevel.Free)
             {
-                <div class="mre-actn-box" @onclick="(e)=> homeActionModel.RandomRenameAsync(e)" title="@Texts.AnonymousRenameToolTip">
-                    <img class="ico-eye-sml" src="" alt="hand-img" />
-                    <span class="text-size text-style">@Texts.AnonymousRenameMenuText</span>
-                </div>
-                <div class="mre-actn-box" @onclick="(e)=> homeActionModel.SecureWipeFiles(e)" title="@Texts.FeaturesFileWipeDescription">
-                    <img class="ico-dlt" src="" alt="hand-img" />
-                    <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
-                </div>
-                <div class="mre-actn-box" @onclick="(e)=> homeActionModel.EncryptionUpgrade(e)" title="@Texts.UpgradeLegacyFilesMenuToolTip">
-                    <img class="ico-apikey" src="" alt="hand-img" />
-                    <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
-                </div>
-                @* <div class="mre-actn-box fade-clr" style="border:dotted;">
-            <span class="text-size text-style">Add action to the Home</span>
-            </div> *@
+                <AxCrypt.App.Windows.Components.Pages.PopupDialog.Suggestion />
             }
             else
             {
-                <div class="mre-actn-box atn-bgclr" @onclick="homeActionModel.AlwaysOfflineForFreeUser" title="@Texts.AlwaysOfflineToolTip">
-                    <img class="ico-offln" src="" alt="hand-img" />
-                    <span class="text-size text-style">@Texts.AlwaysOffline</span>
-                </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>homeActionModel.InviteUser(e)" title="@Texts.InviteUserToolStripMenuItemText">
-                    <img class="ico-invtfrd" src="" alt="hand-img" />
-                    <span class="text-size text-style">Invite friend</span>
-                </div>
-                <div class="mre-actn-box atn-bgclr" @onclick="()=> homeActionModel.UpgradeDialog()">
-                    <img class="ico-apikey" src="" alt="hand-img" />
-                    <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
-                </div>
+                <AxCrypt.App.Windows.Components.Pages.PopupDialog.Subscription />
             }
-        </div>
+        }
     </div>
 </div>
-<div>
-    @if (Utility.IsMainMenuHidden)
-    {
-        @if (homeActionModel.SubscriptionLevel != SubscriptionLevel.Free)
-        {
-            <AxCrypt.App.Windows.Components.Pages.PopupDialog.Suggestion />
-        }
-        else
-        {
-            <AxCrypt.App.Windows.Components.Pages.PopupDialog.Subscription />
-        }
-    }
-</div>
+
+<AxCrypt.App.Windows.Components.Pages.Main.HomeView.HomeSubActionComponent />
 
 @code {
     public const string _ENABLEDTOOLSTRIPBACKCOLOR = "#FFFFFF";

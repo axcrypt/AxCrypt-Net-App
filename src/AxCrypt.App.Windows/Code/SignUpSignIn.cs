@@ -3,11 +3,10 @@ using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
-using Microsoft.AspNetCore.Components;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Windows.Services;
-using AxCrypt.App.Components.Models;
-using AxCrypt.App.Components.Utility;
+using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Utility;
 
 namespace AxCrypt.App.Windows.Code;
 

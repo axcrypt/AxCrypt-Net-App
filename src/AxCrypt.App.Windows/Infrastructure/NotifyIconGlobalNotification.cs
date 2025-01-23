@@ -1,5 +1,5 @@
 ﻿
-using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Desktop.Services.Interface;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.Core.UI;
 

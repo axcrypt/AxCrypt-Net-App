@@ -3,9 +3,9 @@ using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
-using AxCrypt.App.Components.Services.Interface;
+using AxCrypt.App.Desktop.Services.Interface;
 using Microsoft.AspNetCore.Components;
-using AxCrypt.App.Components.Models;
+using AxCrypt.App.Desktop.Models;
 
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Windows.Services;

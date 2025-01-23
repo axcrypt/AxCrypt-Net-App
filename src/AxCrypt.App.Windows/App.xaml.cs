@@ -21,9 +21,10 @@ using AxCrypt.Mono;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Components.Models;
 using Windows.Graphics;
 using AxCrypt.App.Windows.Code;
+using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.App.Shared.Models;
 
 namespace AxCrypt.App.Windows;
 
