@@ -1,19 +1,20 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Desktop.Data
-@using AxCrypt.App.Desktop.ViewModels
-@using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.App.Desktop.ViewModels.Home
 @using AxCrypt.Content
 @using AxCrypt.Core
 @using AxCrypt.Core.UI
 @using System.Collections.ObjectModel
+@using Microsoft.JSInterop
 
-@inject HomeActionsViewModel? homeActionModel
+@inject ActionsViewModel? homeActionModel
 @inject IJSRuntime jsRunTime
 
 <div class="home-body" style="margin-top: 15px;">
     <div style="display:block; margin-bottom: 25px;">
         <h3 class="fle-nme fnt-sze">Actions</h3>
         <div class="" style="display:flex;">
+
             <div class="act-box" @onclick="()=> homeActionModel!.OpenFile()" @onmouseover='@( () => ShowPopup("open") )' @onmouseout='@( () => HidePopup() )'>
                 <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
                 <span class="text-size">@Texts.OpenEncryptedToolStripMenuItemText</span>
@@ -24,6 +25,7 @@
                     </div>
                 }
             </div>
+
             <div class="act-box" disabled="@homeActionModel!.EncryptButtonEnabled" @onclick="()=>homeActionModel!.SecureFile()" @onmouseover='@( () => ShowPopup("secure") )' @onmouseout='@( () => HidePopup() )'>
                 <img class="act-img scr-act" src="" alt="scr-img" />
                 <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>

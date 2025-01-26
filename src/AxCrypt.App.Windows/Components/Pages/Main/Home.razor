@@ -2,6 +2,8 @@
 
 @using AxCrypt.App.Desktop.Data
 @using AxCrypt.App.Desktop.Models
+@using AxCrypt.App.Desktop.ViewModels
+@using AxCrypt.App.Shared.Models
 @using AxCrypt.App.Windows.Services
 @using AxCrypt.Common
 
@@ -23,7 +25,7 @@
     }
     else if (LogOnViewModel.IsLoggedOn)
     {
-        <AxCrypt.App.Desktop.Components.Pages.MainPage />
+        <AxCrypt.App.Desktop.Components.Pages.HomePage />
     }
 
 </div>

@@ -1,9 +1,9 @@
-﻿using AxCrypt.App.Desktop.Models;
-using AxCrypt.App.Desktop.Services.Interface;
+﻿using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Code;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.Core;
-using AxCrypt.Core.UI;
 using Microsoft.UI.Windowing;
 using Windows.Graphics;
 

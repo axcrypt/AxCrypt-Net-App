@@ -14,9 +14,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels.Main;
+namespace AxCrypt.App.Desktop.ViewModels.Home;
 
-public class HomeActionsViewModel : ViewModelBase
+public class ActionsViewModel : ViewModelBase
 {
     private FileOperationViewModel _fileOperationViewModel;
     private MainViewModel? _mainViewModel;
@@ -24,7 +24,7 @@ public class HomeActionsViewModel : ViewModelBase
     private IStatusAlertService _statusAlertService;
     private ShareKeyViewModel? _sharekeyViewModel;
 
-    public HomeActionsViewModel(ShareKeyViewModel shareKeyViewModel)
+    public ActionsViewModel(ShareKeyViewModel shareKeyViewModel)
     {
         LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
         _statusAlertService = AxCServiceProvider.StatusAlertService!;

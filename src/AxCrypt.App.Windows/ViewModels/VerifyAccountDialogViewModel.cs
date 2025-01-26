@@ -1,6 +1,6 @@
-﻿using AxCrypt.App.Desktop.Models;
-using AxCrypt.App.Desktop.Utility;
-using AxCrypt.App.Windows.Services;
+﻿using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.App.Shared.Utility;
 using AxCrypt.Content;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.UI;

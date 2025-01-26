@@ -25,6 +25,7 @@ using Windows.Graphics;
 using AxCrypt.App.Windows.Code;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Desktop.Services;
 
 namespace AxCrypt.App.Windows;
 
@@ -58,7 +59,25 @@ public partial class App : Application
 
         _progressBackgroundWorker = new ProgressBackgroundComponent(null);
 
+        InitializeServiceDependencyProvider();
+
         MainPage = new MainPage(logOnService, _mainViewModel, _fileOperationViewModel, _knownFoldersViewModel, registerViewModel);
+    }
+
+    private static void InitializeServiceDependencyProvider()
+    {
+        IServiceProvider _service;
+        #if WINDOWS10_0_17763_0_OR_GREATER
+            _service = MauiWinUIApplication.Current.Services;
+        #elif ANDROID
+            _service = MauiApplication.Current.Services;
+        #elif IOS || MACCATALYST
+            _service = MauiUIApplicationDelegate.Current.Services;
+        #else
+            _service = null;
+        #endif
+
+        new AxCServiceProvider(_service);
     }
 
     protected override void OnStart()

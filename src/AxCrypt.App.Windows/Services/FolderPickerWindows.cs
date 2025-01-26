@@ -1,11 +1,11 @@
-﻿using AxCrypt.App.Desktop.Services.Interface;
-using AxCrypt.Core.Runtime;
+﻿using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using System.Runtime.InteropServices;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
 using Windows.Storage;
 using WinRT.Interop;
+using AxCrypt.App.Windows.Services.Interface;
 
 using static AxCrypt.Abstractions.TypeResolve;
 

@@ -1,12 +1,9 @@
 ﻿@using AxCrypt.Api.Model
-@using AxCrypt.App.Components.Data
-@using AxCrypt.App.Windows.ViewModels
+@using AxCrypt.App.Desktop.ViewModels.Home
 @using AxCrypt.Core.UI
 @using AxCrypt.Content
 
-
-@inject HomeActionsViewModel? homeActionModel
-@inject IJSRuntime jsRunTime
+@inject ActionsViewModel? homeActionModel
 
 <div class="mre-act-sec">
     @if (homeActionModel!.SubscriptionLevel != SubscriptionLevel.Free)

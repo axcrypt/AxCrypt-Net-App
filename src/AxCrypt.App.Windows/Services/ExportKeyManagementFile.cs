@@ -1,7 +1,7 @@
-﻿using AxCrypt.App.Desktop.Services.Interface;
-using Windows.Storage.Pickers;
+﻿using Windows.Storage.Pickers;
 using Windows.Storage;
 using AxCrypt.App.Windows.Services;
+using AxCrypt.App.Shared.Services.Interface;
 
 [assembly: Dependency(typeof(ExportKeyManagementFile))]
 namespace AxCrypt.App.Windows.Services;

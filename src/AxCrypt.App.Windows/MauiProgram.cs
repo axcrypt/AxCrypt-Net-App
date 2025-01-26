@@ -1,18 +1,17 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Desktop.Models;
-using AxCrypt.App.Desktop.Models.Notification;
-using AxCrypt.App.Desktop.Models.Secret;
 using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Desktop.Services.Interface;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Desktop.ViewModels.Feedback;
+using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Components.Pages.Password;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Infrastructure.Dialogs;
 using AxCrypt.App.Windows.Services;
+using AxCrypt.App.Windows.Services.Interface;
 using AxCrypt.App.Windows.ViewModels;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
@@ -20,6 +19,12 @@ using AxCrypt.Cryptor.Model;
 using AxCrypt.Mono;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
+using AxCrypt.App.Desktop.ViewModels.Secret;
+using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Desktop.ViewModels.Notification;
+using AxCrypt.App.Shared.Models.Notification;
+using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.App.Desktop;
 
 namespace AxCrypt.App.Windows
 {
@@ -60,7 +65,6 @@ namespace AxCrypt.App.Windows
             services.AddBlazorWebViewDeveloperTools();
             builder.Logging.AddDebug();
 #endif
-
             return builder.Build();
         }
 
@@ -77,28 +81,21 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<IStatusChecker, StatusChecker>();
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
-            services.AddSingleton<AppLocalizationOptions>();
 
             services.AddSingleton<ICssService, CssService>();
 
             services.AddSingleton<MainPage>();
             services.AddSingleton<Home>();
-            services.AddSingleton<HomeActionsComponent>();
             services.AddSingleton<SecuredFolders>();
             services.AddSingleton<RecentFolders>();
             services.AddSingleton<PasswordManager>();
             services.AddSingleton<Feedback>();
             services.AddSingleton<About>();
             services.AddSingleton<Notification>();
-            services.AddSingleton<TopMenu>();
             services.AddSingleton<Support>();
-            services.AddSingleton<AppSettingsComponent>();
-            services.AddSingleton<NotificationPopup>();
 
-            services.AddSingleton<LogOnViewModel>();
-            services.AddSingleton<RegisterViewModel>();
+            DesktopFactory.RegisterSingletons(services);
 
-            services.AddSingleton<ProfileOptionComponent>();
             services.AddSingleton<SupportService>();
             services.AddSingleton<SecretClientModel>();
             services.AddSingleton<SecretsClientModel>();
@@ -114,8 +111,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SecretsListViewModel>();
             services.AddSingleton<SecretServiceUtility>();
 
-            services.AddSingleton<HomeActionsViewModel>();
-            services.AddSingleton<RecentFilesViewModel>();
             services.AddSingleton<ShareKeyViewModel>();
             services.AddSingleton<RecentFoldersViewModel>();
             services.AddSingleton<FeedbackViewModel>();
@@ -123,11 +118,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SupportViewModel>();
             services.AddSingleton<SuggestionViewModel>();
             services.AddSingleton<InviteViewModel>();
-            services.AddSingleton<TopMenuViewModel>();
-            services.AddSingleton<ProfileViewModel>();
-            services.AddSingleton<AppSettingsViewModel>();
-            services.AddSingleton<AdvancedOptionsViewModel>();
-            services.AddSingleton<RecentFilesViewModel>();
             services.AddSingleton<ImportPrivateKeyViewModel>();
             services.AddSingleton<FilePasswordDialogViewModel>();
             services.AddSingleton<VerifyAccountDialogViewModel>();

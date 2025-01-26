@@ -6,23 +6,20 @@ using System;
 
 namespace AxCrypt.App.Desktop.Services;
 
-public static class AxCServiceProvider
+public class AxCServiceProvider
 {
+    public AxCServiceProvider(IServiceProvider current)
+    {
+        Current = current;
+    }
+
     public static TService GetService<TService>() => Current.GetService<TService>()!;
 
+    private static IServiceProvider _currentServiceProvider;
     public static IServiceProvider Current
-        =>
-#if WINDOWS10_0_17763_0_OR_GREATER
-            MauiWinUIApplication.Current.Services;
-#elif ANDROID
-            MauiApplication.Current.Services;
-#elif IOS || MACCATALYST
-			MauiUIApplicationDelegate.Current.Services;
-#else
-            null;
-
-#endif
-
+    {
+        private set; get;
+    }
     public static LogOnViewModel? LogOnViewModel
     {
         get

@@ -1,4 +1,5 @@
 ﻿@using AxCrypt.App.Desktop.ViewModels
+@using AxCrypt.Content
 @using Microsoft.JSInterop
 
 @using static AxCrypt.Abstractions.TypeResolve
@@ -11,10 +12,14 @@
 }
 
 <div class="home-index">
-    <AxCrypt.App.Desktop.Components.Main.HeaderComponent />
-    <AxCrypt.App.Desktop.Components.Main.ActionsComponent />
-    <AxCrypt.App.Desktop.Components.Main.SubActionsComponent />
-    <AxCrypt.App.Desktop.Components.Main.RecentFilesComponent />
+    <div class="hm-page-title head-sec">
+        <h1 class="fle-nme">@Texts.WelcomeBackTitle</h1>
+        <img class="home-title" src="" alt="hand-img" />
+    </div>
+
+    <AxCrypt.App.Desktop.Components.Home.ActionsComponent />
+    <AxCrypt.App.Desktop.Components.Home.SubActionsComponent />
+    <AxCrypt.App.Desktop.Components.Home.RecentFilesComponent />
 </div>
 
 @code {

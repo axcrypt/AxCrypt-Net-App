@@ -1,4 +1,4 @@
-﻿using AxCrypt.App.Desktop.Services.Interface;
+﻿using AxCrypt.App.Shared.Services.Interface;
 
 namespace AxCrypt.App.Windows.Services;
 

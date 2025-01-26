@@ -70,15 +70,10 @@
 	
     <ItemGroup>
       <Compile Remove="Components\Pages\Home\**" />
-      <Compile Remove="Components\Pages\Main\**" />
       <Content Remove="Components\Pages\Home\**" />
-      <Content Remove="Components\Pages\Main\**" />
       <EmbeddedResource Remove="Components\Pages\Home\**" />
-      <EmbeddedResource Remove="Components\Pages\Main\**" />
       <MauiXaml Remove="Components\Pages\Home\**" />
-      <MauiXaml Remove="Components\Pages\Main\**" />
       <None Remove="Components\Pages\Home\**" />
-      <None Remove="Components\Pages\Main\**" />
     </ItemGroup>
 	
     <ItemGroup>
@@ -169,10 +164,6 @@
       <None Update="Resources\logos\axcrypt-icon-71x71.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <PRIResource Remove="Components\Pages\Main\**" />
     </ItemGroup>
 
     <ItemGroup>

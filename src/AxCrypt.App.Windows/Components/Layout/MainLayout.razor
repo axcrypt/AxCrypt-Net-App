@@ -1,6 +1,6 @@
 ﻿@using AxCrypt.App.Desktop.Data
-@using AxCrypt.App.Desktop.Models
-@using AxCrypt.App.Desktop.Services.Interface
+@using AxCrypt.App.Desktop.ViewModels
+@using AxCrypt.App.Shared.Services.Interface
 
 @inherits LayoutComponentBase
 @inject IJSRuntime JS
@@ -57,15 +57,13 @@
         <main>
             @if (LogOnViewModel.IsLoggedOn && !CanShowSignInPage)
             {
-                @* <div class="top-menu-section">
-                    <AxCrypt.App.Windows.Components.Pages.Main.TopMenu />
-                </div> *@
+                <AxCrypt.App.Desktop.Components.Main.HeaderComponent />
 
                 <div class="body-content-section">
                     @Body
                 </div>
 
-                <AxCrypt.App.Desktop.Pages.StatusAlertComponent />
+                <AxCrypt.App.Desktop.Components.Pages.StatusAlertComponent />
 
                 <AxCrypt.App.Windows.Components.Pages.PopupDialog.InvitePopup />
                 <AxCrypt.App.Windows.Components.Pages.Main.Upgrade />
@@ -85,7 +83,7 @@
                 </div>
             }
 
-            <AxCrypt.App.Desktop.Pages.ProcessIndicatorComponent />
+            <AxCrypt.App.Desktop.Components.Pages.ProcessIndicatorComponent />
         </main>
     }
 </div>
