@@ -41,8 +41,9 @@
 </div>
 
 @code {
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        await service.LoadNotificationListAsync();
         model = service.NotificationModel;
     }
 }

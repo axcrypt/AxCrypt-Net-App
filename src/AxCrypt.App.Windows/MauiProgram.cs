@@ -109,7 +109,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<NotificationViewModel>();
             services.AddSingleton<NotificationItemViewModel>();
             services.AddSingleton<SecretsListViewModel>();
-            services.AddSingleton<SecretServiceUtility>();
 
             services.AddSingleton<ShareKeyViewModel>();
             services.AddSingleton<RecentFoldersViewModel>();

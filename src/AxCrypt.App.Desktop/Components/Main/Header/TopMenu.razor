@@ -9,7 +9,6 @@
 @inject AppLocalizationOptions? localizationOptions
 @inject NavigationManager navigationManager
 @inject UserNotificationService notificationService
-@inject NotificationViewModel model
 @inject TopMenuViewModel ViewModel
 @inject IJSRuntime JSRuntime
 
@@ -79,7 +78,6 @@
         }
 
         ViewModel.Initialize();
-        model = notificationService.NotificationModel;
         await notificationService.LoadNotificationListAsync();
         ViewModel.LogOnViewModel.OnSubscriptionChanged += UpdatePageState;
         ViewModel.LogOnViewModel.OnUIStateChanged += UpdatePageState;

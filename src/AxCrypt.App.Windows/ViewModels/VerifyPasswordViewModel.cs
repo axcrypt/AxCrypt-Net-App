@@ -26,7 +26,7 @@ public class VerifyPasswordViewModel
     public async Task<bool> SetViewPassword(string verifyInstructionText)
     {
         VerifyInstructionText = verifyInstructionText;
-
+        DialogResult = DialogResult.None;
         _viewModel.BindPropertyChanged(nameof(_viewModel.ShowPassword), (bool show) => { ShowPassphrase = show; });
 
         LogOnViewModel.VerifyPasswordDialog.Show();
@@ -85,7 +85,7 @@ public class VerifyPasswordViewModel
     public void CancelButton_Click(EventArgs e)
     {
         DialogResult = DialogResult.Cancel;
-        VerifyInstructionText = "";
+        LogOnViewModel.VerifyPasswordDialog.Close();
     }
 
     public void ClearErrorProviders()

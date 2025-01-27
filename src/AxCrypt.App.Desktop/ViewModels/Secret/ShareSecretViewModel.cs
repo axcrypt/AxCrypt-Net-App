@@ -40,7 +40,17 @@ public class ShareSecretViewModel : ManageSecretViewModel
         VisibilityTypeList = ViewModelHelper.GetVisibilityTypeList();
     }
 
-    public ObservableCollection<SecretSharedUserViewModel> ShareSecretUserList { get; set; } = new ObservableCollection<SecretSharedUserViewModel>();
+    public ObservableCollection<SecretSharedUserViewModel> ShareSecretUserList
+    {
+        get
+        {
+            return GetProperty<ObservableCollection<SecretSharedUserViewModel>>(nameof(ShareSecretUserList));
+        }
+        set
+        {
+            SetProperty(nameof(ShareSecretUserList), value);
+        }
+    }
 
     public string VisibilityType
     { get { return GetProperty<string>(nameof(VisibilityType)); } set { SetProperty(nameof(VisibilityType), value); } }
@@ -61,13 +71,29 @@ public class ShareSecretViewModel : ManageSecretViewModel
         }
     }
 
-    public string AddedUsersTitle { get; set; }
+    public string AddedUsersTitle
+    {
+        get { return GetProperty<string>(nameof(AddedUsersTitle)); }
+        set { SetProperty(nameof(AddedUsersTitle), value); }
+    }
 
-    public bool IsAnyUsersAdded { get; set; }
+    public bool IsAnyUsersAdded
+    {
+        get { return GetProperty<bool>(nameof(IsAnyUsersAdded)); }
+        set { SetProperty(nameof(IsAnyUsersAdded), value); }
+    }
 
-    public bool NoUsersAdded { get; set; }
+    public bool NoUsersAdded
+    {
+        get { return GetProperty<bool>(nameof(NoUsersAdded)); }
+        set { SetProperty(nameof(NoUsersAdded), value); }
+    }
 
-    public bool CanEnableAddShareSecret { get; set; }
+    public bool CanEnableAddShareSecret
+    {
+        get { return GetProperty<bool>(nameof(CanEnableAddShareSecret)); }
+        set { SetProperty(nameof(CanEnableAddShareSecret), value); }
+    }
 
     public bool EnableApplyButton
     {
@@ -75,13 +101,29 @@ public class ShareSecretViewModel : ManageSecretViewModel
         set { SetProperty(nameof(EnableApplyButton), value); }
     }
 
-    public EmailAddress? UserEmailForContextMenuAction { get; set; }
+    public EmailAddress UserEmailForContextMenuAction
+    {
+        get { return GetProperty<EmailAddress>(nameof(UserEmailForContextMenuAction)); }
+        set { SetProperty(nameof(UserEmailForContextMenuAction), value); }
+    }
 
-    public bool CanEnableNewShareSecretUserEntry { get; set; }
+    public bool CanEnableNewShareSecretUserEntry
+    {
+        get { return GetProperty<bool>(nameof(CanEnableNewShareSecretUserEntry)); }
+        set { SetProperty(nameof(CanEnableNewShareSecretUserEntry), value); }
+    }
 
-    public bool CanContextMenuOpened { get; set; }
+    public bool CanContextMenuOpened
+    {
+        get { return GetProperty<bool>(nameof(CanContextMenuOpened)); }
+        set { SetProperty(nameof(CanContextMenuOpened), value); }
+    }
 
-    public string SharedSecretTitle { get; set; }
+    public string SharedSecretTitle
+    {
+        get { return GetProperty<string>(nameof(SharedSecretTitle)); }
+        set { SetProperty(nameof(SharedSecretTitle), value); }
+    }
 
     public void AddUserToSharedListAsync()
     {
@@ -97,9 +139,16 @@ public class ShareSecretViewModel : ManageSecretViewModel
             return;
         }
 
+        if(VisibilityType == "None")
+        {
+            ErrorMessage = "Visibility option cannot be selected none.";
+            return;
+        }
+
         CanEnableAddShareSecret = false;
         AddUserEmailToSharedList(addedUserEmailAddress);
         SecretSharingUserEmail = "";
+        VisibilityType = SecretShareVisibility.Forever.ToString();
     }
 
     private EmailAddress ValidSharingUserEmail()
@@ -131,16 +180,14 @@ public class ShareSecretViewModel : ManageSecretViewModel
             return false;
         }
 
-        if (Secret.SharedWith.Any(user => user.UserEmail == addedUserEmailAddress))
+        if (ShareSecretUserList.Any(user => user.UserEmail == addedUserEmailAddress))
         {
             ErrorMessage = "Email already exists!";
             return false;
         }
 
         int maxAllowedUsersCount = ViewModelHelper.MaxAllowedUsersCountToShare();
-        int currentUserCount = Secret.SharedWith.Count();
-
-        if (currentUserCount >= maxAllowedUsersCount)
+        if (ShareSecretUserList.Count >= maxAllowedUsersCount)
         {
             ErrorMessage = $"Cannot add more users. Maximum allowed is {maxAllowedUsersCount}.";
             return false;
@@ -158,17 +205,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
             return;
         }
 
-        if (Secret.SharedWith is List<SecretSharedUserViewModel> sharedWithList)
-        {
-            sharedWithList.Add(new SecretSharedUserViewModel(addedUserEmailAddress, parsedVisibility, _identity.UserEmail.Address));
-        }
-        else
-        {
-            List<SecretSharedUserViewModel> updatedList = Secret.SharedWith.ToList();
-            updatedList.Add(new SecretSharedUserViewModel(addedUserEmailAddress, parsedVisibility, _identity.UserEmail.Address));
-            Secret.SharedWith = updatedList;
-        }
-
+        ShareSecretUserList.Add(new SecretSharedUserViewModel(addedUserEmailAddress, parsedVisibility, _identity.UserEmail.Address));
         UpdateUIElementsOnChange();
     }
 
@@ -195,35 +232,15 @@ public class ShareSecretViewModel : ManageSecretViewModel
         UserEmailForContextMenuAction = EmailAddress.Empty;
     }
 
-    /*private void RemoveSharedUserInternal(EmailAddress addedUserEmailAddress)
-    {
-        SecretSharedUserViewModel selectedSharedKeyUser = _secretService.CurrentSecret.SharedWith.Single(ss => ss.UserEmail == addedUserEmailAddress);
-        if (selectedSharedKeyUser == null)
-        {
-            return;
-        }
-
-        _secretService.CurrentSecret.SharedWith.Remove(selectedSharedKeyUser);
-        UpdateUIElementsOnChange();
-    }*/
-
     private void RemoveSharedUserInternal(EmailAddress addedUserEmailAddress)
     {
-        List<SecretSharedUserViewModel> sharedWithList = Secret.SharedWith as List<SecretSharedUserViewModel>;
-
-        if (sharedWithList == null)
-        {
-            sharedWithList = Secret.SharedWith.ToList();
-            Secret.SharedWith = sharedWithList;
-        }
-
-        SecretSharedUserViewModel selectedSharedKeyUser = sharedWithList.SingleOrDefault(ss => ss.UserEmail == addedUserEmailAddress);
-        if (selectedSharedKeyUser == null)
+        SecretSharedUserViewModel selectedSharedKeyUser = ShareSecretUserList.Single(ss => ss.UserEmail == addedUserEmailAddress); 
+        if (selectedSharedKeyUser == null!)
         {
             return;
         }
 
-        sharedWithList.Remove(selectedSharedKeyUser);
+        ShareSecretUserList.Remove(selectedSharedKeyUser);
         UpdateUIElementsOnChange();
     }
 
@@ -247,18 +264,17 @@ public class ShareSecretViewModel : ManageSecretViewModel
 
         SecretClientModel theSecret = Secret.ToClientModel(Secret.SecretGuid);
 
-        IEnumerable<AxCrypt.Core.Secrets.SecretSharedUser> secretSharedUsers = Secret.SharedWith.Select(us => new SecretSharedUser(us.UserEmail, us.Visibility));
+        IEnumerable<AxCrypt.Core.Secrets.SecretSharedUser> secretSharedUsers = ShareSecretUserList.Select(us => new SecretSharedUser(us.UserEmail, us.Visibility));
         if (!secretSharedUsers.Any())
         {
             new List<AxCrypt.Core.Secrets.SecretSharedUser>();
         }
 
         theSecret.Share = new ShareSecret(secretSharedUsers, _identity.UserEmail.Address, New<INow>().Utc);
-        await PersonalSecrets.ShareAsync(theSecret);
-        Secret.SharedWith = Secret.SharedWith;
-        Secret = new SecretViewModel(theSecret);
+        bool isShared = await PersonalSecrets.ShareAsync(theSecret);
+        Secret.SharedWith = ShareSecretUserList; 
         ShareSecretUserList.Clear();
-        return true;
+        return isShared;
     }
 
     private void SetNewContactState()

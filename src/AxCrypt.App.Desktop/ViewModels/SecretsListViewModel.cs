@@ -147,14 +147,14 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         set { SetProperty(nameof(SelectedSecretListFilter), value); }
     }
 
-    public bool ShowSecretTypeCreateMenu { get; set; }
+    public bool ShowSecretTypeCreateMenu { get { return GetProperty<bool>(nameof(ShowSecretTypeCreateMenu)); } set { SetProperty(nameof(ShowSecretTypeCreateMenu), value); } }
 
-    public bool ShowSecretFilterMenu { get; set; }
+    public bool ShowSecretFilterMenu { get { return GetProperty<bool>(nameof(ShowSecretFilterMenu)); } set { SetProperty(nameof(ShowSecretFilterMenu), value); } }
 
     public bool HasPaidSubscription
     { get { return GetProperty<bool>(nameof(HasPaidSubscription)); } private set { SetProperty(nameof(HasPaidSubscription), value); } }
 
-    public bool HasNoSecretsCapability { get; set; }
+    public bool HasNoSecretsCapability { get { return GetProperty<bool>(nameof(HasNoSecretsCapability)); } private set { SetProperty(nameof(HasNoSecretsCapability), value); } }
 
     public bool ShowSecretsList
     { get { return GetProperty<bool>(nameof(ShowSecretsList)); } private set { SetProperty(nameof(ShowSecretsList), value); } }

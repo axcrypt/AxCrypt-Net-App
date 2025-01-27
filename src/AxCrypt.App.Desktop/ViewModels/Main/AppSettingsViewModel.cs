@@ -155,15 +155,21 @@ public class AppSettingsViewModel : ViewModelBase
         if (_mainViewModel.EncryptionUpgradeMode == EncryptionUpgradeMode.AutoUpgrade)
         {
             _mainViewModel.EncryptionUpgradeMode = EncryptionUpgradeMode.RetainWithoutUpgrade;
+            AutoUpgradeToAES256 = false;
+            UpdateViewState();
             return;
         }
 
         if (!await New<IVerifySignInPassword>().Verify(Texts.LegacyConversionVerificationPrompt))
         {
+            AutoUpgradeToAES256 = false;
+            UpdateViewState();
             return;
         }
 
         _mainViewModel.EncryptionUpgradeMode = EncryptionUpgradeMode.AutoUpgrade;
+        AutoUpgradeToAES256 = true;
+        UpdateViewState();
     }
 
     public async void ToggleIncludeSubfolders(EventArgs e)

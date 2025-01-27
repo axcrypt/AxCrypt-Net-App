@@ -11,18 +11,13 @@ public class ManageSecretViewModel : Core.UI.ViewModel.ViewModelBase
 {
     public ManageSecretViewModel(SecretService secretService)
     {
-        Secret = secretService.CurrentSecret;
+        Secret = secretService.CurrentSecret!;
 
         HasPaidSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
         ClearErrorFileds();
     }
 
-    public SecretViewModel Secret { get; set; }
-
-    public void SetSecretsForShare(SecretViewModel secrets)
-    {
-        Secret = secrets;
-    }
+    public SecretViewModel Secret { get { return GetProperty<SecretViewModel>(nameof(Secret)); } set { SetProperty(nameof(Secret), value); } }
 
     public string ErrorMessage
     {

@@ -24,7 +24,7 @@ public class UserNotificationService
         _ProcessIndicatorService = processIndicatorService;
         _statusAlertService = statusAlertService;
         _logOnViewModel = logOnViewModel;
-        NotificationModel = new(logOnViewModel);
+        NotificationModel = new();
     }
 
     public NotificationViewModel NotificationModel { get; set; }

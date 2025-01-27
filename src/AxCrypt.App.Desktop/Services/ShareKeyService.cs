@@ -48,7 +48,7 @@ public static class ShareKeyService
 
         IEnumerable<string> encryptedFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncrypted());
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        sharekeyViewModel!.SetSelectedFilesOrFolders(encryptedFileNames, viewModel);
+        sharekeyViewModel!.SetSelectedFilesOrFolders(fileNames, viewModel);
 
         if (encryptableFileNames != null && encryptableFileNames.Any())
         {
