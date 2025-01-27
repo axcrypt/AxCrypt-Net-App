@@ -30,11 +30,14 @@
             </label>
         </div>
     </NavLink>
-    <NavLink class="nav-link center-column">
-        <div>
-            <img class="" src="images/default/Ico256.svg" alt="go-back-img" />
-            <span class="grey-clr">@Texts.OptionsConvertMenuItemText</span>
-        </div>
+
+    @if(AppSettingsViewModel.EnableAutoUpgrade)
+    {
+      <NavLink class="nav-link center-column">
+          <div>
+             <img class="" src="images/default/Ico256.svg" alt="go-back-img" />
+             <span class="grey-clr">@Texts.OptionsConvertMenuItemText</span>
+         </div>
         <div style="float:right; padding-left:15px;">
             <label class="toggle">
                 <input type="checkbox" @bind="AppSettingsViewModel.AutoUpgradeToAES256" @onclick="async(e)=> await AppSettingsViewModel.ToggleEncryptionUpgradeMode()">
@@ -51,78 +54,166 @@
                     }
                 </span>
             </label>
-        </div>
-    </NavLink>
-    <div @onmouseover='@(()=> ShowPopup("include"))' @onmouseout='@( () => HidePopup() )'>
-        <NavLink class="nav-link center-column">
+         </div>
+      </NavLink>
+    }
+    else
+    { 
+        <div @onmouseover='@(()=> ShowPopup("autoupgrade"))' @onmouseout='@( () => HidePopup() )'>
+          <NavLink class="nav-link center-column" @onclick="AppSettingsViewModel.ShowUpgradePopup">
             <div>
-                <img class="" src="images/IcoIncldFldrs.svg" alt="include-subfolder-img" />
-                <span class="grey-clr">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
-            </div>
+               <img class="" src="images/default/Ico256.svg" alt="go-back-img" />
+               <span class="grey-clr">@Texts.OptionsConvertMenuItemText</span>
+             </div>
             <div style="float:right; padding-left:15px;">
-                <label class="toggle">
-                    <input type="checkbox" @bind="AppSettingsViewModel.IncludeSubfolders" @onclick="async(e)=> AppSettingsViewModel.ToggleIncludeSubfolders(e)">
-                    <span class="slider round">
-                        @if (AppSettingsViewModel.IncludeSubfolders)
-                        {
-                            <span class="on-off-text on-text">ON</span>
-                            <span class="on-off-text off-text" style="display:none;">OFF</span>
-                        }
-                        else
-                        {
-                            <span class="on-off-text on-text" style="display:none;">ON</span>
-                            <span class="on-off-text off-text">OFF</span>
-                        }
-                    </span>
+              <label class="toggle">
+                  <input type="checkbox" @bind="AppSettingsViewModel.AutoUpgradeToAES256" disabled="disabled">
+                   <span class="slider round">
+                      @if (AppSettingsViewModel.AutoUpgradeToAES256)
+                      {
+                        <span class="on-off-text on-text">ON</span>
+                        <span class="on-off-text off-text" style="display:none;">OFF</span>
+                      }
+                      else
+                      {
+                        <span class="on-off-text on-text" style="display:none;">ON</span>
+                        <span class="on-off-text off-text">OFF</span>
+                       }
+                  </span>
                 </label>
-            </div>
-        </NavLink>
-        @if (AppSettingsViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
-        {
+             </div>
+         </NavLink>
+          @if (isHovered && hoveredElement == "autoupgrade")
+            {
+                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
+                    <span class="txt-clr font-medium">This Feature requires a paid subscription plan!.</span>
+                </div>
+            }
+         </div>
+    }
+
+
+    @if (AppSettingsViewModel.EnableIncludeSubfolders)
+    {
+        <div @onmouseover='@(()=> ShowPopup("include"))' @onmouseout='@( () => HidePopup() )'>
+            <NavLink class="nav-link center-column">
+                <div>
+                    <img class="" src="images/IcoIncldFldrs.svg" alt="include-subfolder-img" />
+                    <span class="grey-clr">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
+                </div>
+                <div style="float:right; padding-left:15px;">
+                    <label class="toggle">
+                        <input type="checkbox" @bind="AppSettingsViewModel.IncludeSubfolders" @onclick="async(e)=> AppSettingsViewModel.ToggleIncludeSubfolders(e)">
+                        <span class="slider round">
+                            @if (AppSettingsViewModel.IncludeSubfolders)
+                            {
+                                <span class="on-off-text on-text">ON</span>
+                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                            }
+                            else
+                            {
+                                <span class="on-off-text on-text" style="display:none;">ON</span>
+                                <span class="on-off-text off-text">OFF</span>
+                            }
+                        </span>
+                    </label>
+                </div>
+            </NavLink>
+        </div>
+    }
+    else
+    {
+        <div @onmouseover='@(()=> ShowPopup("include"))' @onmouseout='@( () => HidePopup() )'>
+            <NavLink class="nav-link center-column" @onclick="AppSettingsViewModel.ShowUpgradePopup">
+                <div>
+                    <img class="" src="images/IcoIncldFldrs.svg" alt="include-subfolder-img" />
+                    <span class="grey-clr">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
+                </div>
+                <div style="float:right; padding-left:15px;">
+                    <label class="toggle">
+                        <input type="checkbox" @bind="AppSettingsViewModel.IncludeSubfolders" disabled="disabled" />
+                        <span class="slider round">
+                            @if (AppSettingsViewModel.IncludeSubfolders)
+                            {
+                                <span class="on-off-text on-text">ON</span>
+                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                            }
+                            else
+                            {
+                                <span class="on-off-text on-text" style="display:none;">ON</span>
+                                <span class="on-off-text off-text">OFF</span>
+                            }
+                        </span>
+                    </label>
+                </div>
+            </NavLink>
+
             @if (isHovered && hoveredElement == "include")
             {
-                <div class="home-hover text-center popup" style="background-color:#fff;">
+                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
                     <span class="txt-clr font-medium">Include Subfolders requires a paid subscription plan!.</span>
                 </div>
             }
-        }
-    </div>
-    <div class="key-section" @onmouseover='@(()=> ShowPopup("inactivity"))' @onmouseout='@( () => HidePopup() )'>
-        <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" id="inactivity-signout-button-action">
-            <img class="sgn-out-img" src="images/default/IcoSngOut.svg" alt="go-back-img" />
-            <span>@Texts.IdleSignOutToolStripMenuItemText</span>
-        </NavLink>
-        @if (AppSettingsViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
-        {
+        </div>
+    }
+
+    @if (AppSettingsViewModel.EnableInActivitySignOut)
+    {
+        <div class="key-section" @onmouseover='@(()=> ShowPopup("inactivity"))' @onmouseout='@( () => HidePopup() )'>
+            <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" id="inactivity-signout-button-action">
+                <img class="sgn-out-img" src="images/default/IcoSngOut.svg" alt="go-back-img" />
+                <span>@Texts.IdleSignOutToolStripMenuItemText</span>
+            </NavLink>
+        </div>
+    }
+    else
+    {
+        <div class="key-section" @onmouseover='@(()=> ShowPopup("inactivity"))' @onmouseout='@( () => HidePopup() )'>
+            <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
+                <img class="sgn-out-img" src="images/default/IcoSngOut.svg" alt="go-back-img" />
+                <span>@Texts.IdleSignOutToolStripMenuItemText</span>
+            </NavLink>
             @if (isHovered && hoveredElement == "inactivity")
             {
-                <div class="home-hover text-center popup" style="background-color:#fff;">
+                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
                     <span class="txt-clr font-medium"> Inactivity Signout requires a paid subscription plan!.</span>
                 </div>
             }
-        }
-    </div>
-    <div class="key-section" @onmouseover='@( () => ShowPopup("rename") )' @onmouseout='@( () => HidePopup() )'>
-        <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.RestoreRename(e)">
-            <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
-            <span>@Texts.RestoreAnonymousNamesMenuText</span>
-        </NavLink>
-        @if (AppSettingsViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
-        {
+        </div>
+    }
+
+    @if (AppSettingsViewModel.EnableRestoreRename)
+    {
+        <div class="key-section" @onmouseover='@( () => ShowPopup("rename") )' @onmouseout='@( () => HidePopup() )'>
+            <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.RestoreRename(e)">
+                <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
+                <span>@Texts.RestoreAnonymousNamesMenuText</span>
+            </NavLink>
+        </div>
+    }
+    else
+    {
+        <div class="key-section" @onmouseover='@( () => ShowPopup("rename") )' @onmouseout='@( () => HidePopup() )'>
+            <NavLink class="nav-link" @onclick="AppSettingsViewModel.ShowUpgradePopup">
+                <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
+                <span>@Texts.RestoreAnonymousNamesMenuText</span>
+            </NavLink>
             @if (isHovered && hoveredElement == "rename")
             {
-                <div class="home-hover text-center popup" style="background-color:#fff;">
+                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
                     <span class="txt-clr font-medium"> Restore to original requires a paid subscription plan!.</span>
                 </div>
             }
-        }
-    </div>
+        </div>
+    }
+
     <div class="key-section">
         <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.ToggleAdvancedOption()">
             <img class="" src="/images/IcoAdvancedOptions.svg" alt="advanced-settings-img" />
             <span>Advanced options</span>
         </NavLink>
     </div>
+
     <NavLink class="nav-link center-column">
         <div>
             <img class="" src="images/default/IcoOffln1.svg" alt="go-back-img" />
@@ -146,12 +237,32 @@
             </label>
         </div>
     </NavLink>
-    <div class="key-section">
-        <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" id="encryption-file-property-button-action">
-            <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
-            <span>@Texts.FilePropertiesToolStripMenuItemText</span>
-        </NavLink>
-    </div>
+
+    @if(AppSettingsViewModel.EnableEncryptionFileProperties)
+    {
+       <div class="key-section">
+           <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" id="encryption-file-property-button-action">
+              <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
+              <span>@Texts.FilePropertiesToolStripMenuItemText</span>
+           </NavLink>
+       </div>
+    }
+    else
+    {
+      <div class="key-section" @onmouseover='@( () => ShowPopup("encryptfileproperties") )' @onmouseout='@( () => HidePopup() )'>
+         <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
+             <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
+             <span>@Texts.FilePropertiesToolStripMenuItemText</span>
+         </NavLink>
+            @if (isHovered && hoveredElement == "encryptfileproperties")
+            {
+                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
+                    <span class="txt-clr font-medium">This feature requires a paid subscription plan!.</span>
+                </div>
+            }
+      </div>
+    }
+   
     <div class="key-section">
         <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.InviteUser(e)">
             <img class="" src="images/default/IcoInvtFrnd1.svg" alt="go-back-img" />

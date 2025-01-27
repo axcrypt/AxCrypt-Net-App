@@ -1,6 +1,7 @@
 ﻿using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Services.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -44,11 +45,11 @@ public class AxCServiceProvider
         }
     }
 
-    public static StatusAlertService? StatusAlertService
+    public static IStatusAlertService? StatusAlertService
     {
         get
         {
-            return GetService<StatusAlertService>();
+            return GetService<IStatusAlertService>();
         }
     }
 }

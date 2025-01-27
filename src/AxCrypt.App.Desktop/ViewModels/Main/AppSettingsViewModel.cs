@@ -59,6 +59,7 @@ public class AppSettingsViewModel : ViewModelBase
         RestApiBaseUrl = Resolve.UserSettings.RestApiBaseUrl.ToString();
         TimeoutTimeSpan = Resolve.UserSettings.ApiTimeout.ToString();
 
+        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { _userInitiatedUpdateCheckPending = true; await DisplayUpdateCheckPopups(); });
@@ -92,6 +93,16 @@ public class AppSettingsViewModel : ViewModelBase
     public DateTime CreatedTime { get; set; }
     public double SelectedOption { get; set; } = 0;
     public bool DebugPopup { get; set; }
+
+    public bool EnableIncludeSubfolders { get; set; }
+
+    public bool EnableInActivitySignOut { get; set; }
+
+    public bool EnableRestoreRename { get; set; }
+
+    public bool EnableAutoUpgrade { get; set; }
+
+    public bool EnableEncryptionFileProperties { get; set; }
 
     private static bool _hideRecentFiles;
 
@@ -357,7 +368,76 @@ public class AppSettingsViewModel : ViewModelBase
         New<IReport>().Open();
     }
 
-    #endregion
+    #endregion Debug Section
+
+    private async Task ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
+    {
+        await ConfigureAutoUpgradeMenuAsync(license);
+        await ConfigureIncludeSubfoldersMenuAsync(license);
+        await ConfigureInactivityTimeOutMenuAsync(license);
+        await ConfigureRestoreRenameMenuAsync(license);
+        await ConfigureEncryptionFilePropertiesMenuAsync(license);
+    }
+
+    private async Task ConfigureAutoUpgradeMenuAsync(LicenseCapabilities license)
+    {
+        if (license.Has(LicenseCapability.StrongerEncryption))
+        {
+            EnableAutoUpgrade = true;
+        }
+        else
+        {
+            EnableAutoUpgrade = false;
+        }
+    } 
+    
+    private async Task ConfigureIncludeSubfoldersMenuAsync(LicenseCapabilities license)
+    {
+        if (license.Has(LicenseCapability.IncludeSubfolders))
+        {
+            EnableIncludeSubfolders = true;
+        }
+        else
+        {
+            EnableIncludeSubfolders = false;
+        }
+    }
+
+    private async Task ConfigureInactivityTimeOutMenuAsync(LicenseCapabilities license)
+    {
+        if (license.Has(LicenseCapability.InactivitySignOut))
+        {
+            EnableInActivitySignOut = true;
+        }
+        else
+        {
+            EnableInActivitySignOut = false;
+        }
+    }
+
+    private async Task ConfigureRestoreRenameMenuAsync(LicenseCapabilities license)
+    {
+        if (license.Has(LicenseCapability.RandomRename))
+        {
+            EnableRestoreRename = true;
+        }
+        else
+        {
+            EnableRestoreRename = false;
+        }
+    }
+    
+    private async Task ConfigureEncryptionFilePropertiesMenuAsync(LicenseCapabilities license)
+    {
+        if (license.Has(LicenseCapability.RandomRename))
+        {
+            EnableEncryptionFileProperties = true;
+        }
+        else
+        {
+            EnableEncryptionFileProperties = false;
+        }
+    }
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {
@@ -370,6 +450,11 @@ public class AppSettingsViewModel : ViewModelBase
             return;
         }
 
+        _logOnViewModel.UpgradeDialog.Show();
+    }
+
+    public void ShowUpgradePopup()
+    {
         _logOnViewModel.UpgradeDialog.Show();
     }
 }
