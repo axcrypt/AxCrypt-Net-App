@@ -7,7 +7,6 @@ using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Components.Pages.Main;
-using AxCrypt.App.Windows.Components.Pages.Password;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Infrastructure.Dialogs;
 using AxCrypt.App.Windows.Services;
@@ -88,7 +87,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<Home>();
             services.AddSingleton<SecuredFolders>();
             services.AddSingleton<RecentFolders>();
-            services.AddSingleton<PasswordManager>();
+            services.AddSingleton<PasswordManagerComponent>();
             services.AddSingleton<Feedback>();
             services.AddSingleton<About>();
             services.AddSingleton<Notification>();
