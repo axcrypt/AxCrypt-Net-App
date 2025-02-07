@@ -30,10 +30,6 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -68,6 +64,19 @@ namespace AxCrypt.Core.UI
             get
             {
                 return DefaultEncryptionIdentity != LogOnIdentity.Empty;
+            }
+        }
+
+        public bool IsLoggedOnWithTFA
+        {
+            get
+            {
+                if (!IsTFAEnabled)
+                {
+                    return IsLoggedOn;
+                }
+
+                return DefaultEncryptionIdentity.ActiveTFAUniqueKey != null;
             }
         }
 
@@ -224,5 +233,9 @@ namespace AxCrypt.Core.UI
                 return _fileSystemState.WatchedFolders.Where(wf => wf.Tag.Matches(DefaultEncryptionIdentity.Tag));
             }
         }
+
+        public bool IsTFAEnabled { get; set; }
+
+        public string TFAUniqueKey { get; set; }
     }
 }

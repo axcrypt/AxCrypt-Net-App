@@ -60,6 +60,7 @@ namespace AxCrypt.App.Shared
 
             services.AddSingleton<ISecureMessagingService, SecureMessagingService>();
             services.AddSingleton<LogViewModel>();
+            services.AddSingleton<TwoFactorAuthViewModel>();
 
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
         }

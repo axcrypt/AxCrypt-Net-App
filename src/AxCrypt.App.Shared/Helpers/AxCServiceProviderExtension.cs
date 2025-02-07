@@ -55,5 +55,13 @@ public static class AxCServiceProviderExtension
         {
             return GetService<LogViewModel>();
         }
+    }  
+    
+    public static TwoFactorAuthViewModel? TwoFactorAuthViewModel
+    {
+        get
+        {
+            return GetService<TwoFactorAuthViewModel>();
+        }
     }
 }

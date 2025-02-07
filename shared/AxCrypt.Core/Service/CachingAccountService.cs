@@ -151,8 +151,8 @@ namespace AxCrypt.Core.Service
         {
             return await New<ICache>().UpdateItemAsync(() => _service.DeleteUserAsync(), _key).Free();
         }
-        
-         public async Task<IEnumerable<GroupKeyPairApiModel>> ListMembershipGroupsAsync()
+
+        public async Task<IEnumerable<GroupKeyPairApiModel>> ListMembershipGroupsAsync()
         {
             return await _service.ListMembershipGroupsAsync();
         }

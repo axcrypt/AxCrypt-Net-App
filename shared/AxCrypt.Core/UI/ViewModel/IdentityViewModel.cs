@@ -24,16 +24,15 @@
 */
 
 #endregion Coypright and License
+
 using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
+using AxCrypt.Core.Authenticator.Service;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.UI.ViewModel
@@ -105,10 +104,17 @@ namespace AxCrypt.Core.UI.ViewModel
 
         public Func<LogOnEventArgs, Task> LoggingOnAsync { get; set; }
 
+        public Func<LogOnEventArgs, Task> LoggingOnWithTOTPAsync { get; set; }
+
         protected virtual async Task OnLoggingOnAsync(LogOnEventArgs e)
         {
             StartSigningInWithOnlineStateRechecked();
             await (LoggingOnAsync?.Invoke(e) ?? Constant.CompletedTask);
+        }
+
+        protected virtual async Task OnLoggingOnWithTOTPAsync(LogOnEventArgs e)
+        {
+            await (LoggingOnWithTOTPAsync?.Invoke(e) ?? Constant.CompletedTask);
         }
 
         private static void StartSigningInWithOnlineStateRechecked()
@@ -134,6 +140,7 @@ namespace AxCrypt.Core.UI.ViewModel
             {
                 return LogOnIdentity.Empty;
             }
+
             foreach (UserPublicKey userPublicKey in logOnIdentity.PublicKeys)
             {
                 using (KnownPublicKeys knownPublicKeys = New<KnownPublicKeys>())
@@ -173,21 +180,27 @@ namespace AxCrypt.Core.UI.ViewModel
             return LogOnIdentityFromPassphrase(passphrase);
         }
 
-        private static async Task<LogOnIdentity> LogOnIdentityFromUserAsync(EmailAddress emailAddress, Passphrase passphrase)
+        private async Task<LogOnIdentity> LogOnIdentityFromUserAsync(EmailAddress emailAddress, Passphrase passphrase)
         {
             IAccountService accountService = New<LogOnIdentity, IAccountService>(new LogOnIdentity(emailAddress, passphrase));
             AccountStorage store = new AccountStorage(accountService);
-            if (await store.IsIdentityValidAsync())
+            if (!await store.IsIdentityValidAsync())
             {
-                LogOnIdentity logOnIdentity = new LogOnIdentity(await store.AllKeyPairsAsync(), passphrase);
-
-                UserAccount userAccount = await accountService.AccountAsync();
-                new AxCryptUserAccountViewModel().Initilaize(userAccount);
-                await AddUserGroupKeyPairsAsync(logOnIdentity, userAccount).Free();
-
-                return await AddMasterKeyInfo(logOnIdentity, userAccount);
+                return LogOnIdentity.Empty;
             }
-            return LogOnIdentity.Empty;
+
+            UserAccount userAccount = await accountService.AccountAsync();
+            LogOnIdentity logOnIdentity = new LogOnIdentity(await store.AllKeyPairsAsync(), passphrase);
+            _knownIdentities.IsTFAEnabled = userAccount.IsTwoFactorEnabled;
+            if (_knownIdentities.IsTFAEnabled)
+            {
+                _knownIdentities.TFAUniqueKey = userAccount.TwoFactorAuthInfo.UniqueKey;
+            }
+
+            new AxCryptUserAccountViewModel().Initilaize(userAccount);
+            await AddUserGroupKeyPairsAsync(logOnIdentity, userAccount).Free();
+
+            return await AddMasterKeyInfo(logOnIdentity, userAccount);
         }
 
         private static async Task<LogOnIdentity> AddMasterKeyInfo(LogOnIdentity logOnIdentity, UserAccount userAccount)
@@ -286,7 +299,36 @@ namespace AxCrypt.Core.UI.ViewModel
 
             _userSettings.DisplayEncryptPassphrase = logOnArgs.DisplayPassphrase;
 
-            return await LogOnIdentityFromCredentialsAsync(EmailAddress.Parse(logOnArgs.UserEmail), logOnArgs.Passphrase);
+            LogOnIdentity logOnIdentity = await LogOnIdentityFromCredentialsAsync(EmailAddress.Parse(logOnArgs.UserEmail), logOnArgs.Passphrase);
+            if (logOnIdentity == LogOnIdentity.Empty)
+            {
+                return LogOnIdentity.Empty;
+            }
+
+            if (!_knownIdentities.IsTFAEnabled)
+            {
+                return logOnIdentity;
+            }
+
+            return await AskForTFAVerify(logOnArgs, logOnIdentity);
+        }
+
+        private async Task<LogOnIdentity> AskForTFAVerify(LogOnEventArgs logOnArgs, LogOnIdentity logOnIdentity)
+        {
+            await OnLoggingOnWithTOTPAsync(logOnArgs);
+            if (logOnArgs.Cancel)
+            {
+                return LogOnIdentity.Empty;
+            }
+
+            bool IsTFAVerified = await New<ITwoFactorAuthenticateService>().VerifyTwoFactorAsync(logOnArgs.OneTimePassword, _knownIdentities.TFAUniqueKey);
+            if (!IsTFAVerified)
+            {
+                return LogOnIdentity.Empty;
+            }
+
+            logOnIdentity.SetActiveTFAUniqueKey(_knownIdentities.TFAUniqueKey);
+            return logOnIdentity;
         }
 
         private async Task<LogOnIdentity> AskForNewEncryptionPassphraseAsync(Passphrase defaultPassphrase, string encryptedFileFullName)

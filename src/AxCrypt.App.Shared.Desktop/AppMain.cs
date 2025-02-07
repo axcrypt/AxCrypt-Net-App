@@ -20,7 +20,6 @@ public class AppMain
 {
     //private ICustomNavigationService _navigationManager;
     private LogOnViewModel _logOnService;
-
     private RegisterViewModel _registerViewModel;
 
     private MainViewModel _mainViewModel;
@@ -33,7 +32,7 @@ public class AppMain
     }
 
     public void Initialize(LogOnViewModel logOnService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel)
-    {
+    { 
         _logOnService = logOnService;
         _mainViewModel = mainViewModel;
         _fileOperationViewModel = fileOperationViewModel;

@@ -1,14 +1,16 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
+using AxCrypt.App.Shared;
 using AxCrypt.App.Shared.Desktop;
-using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
+using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
@@ -35,8 +37,9 @@ public partial class MainPage : ContentPage, ISignIn
 
     private const string? _homePage = "/";
     private const string? _securedFolders = "/securedfolders";
+    private TwoFactorAuthViewModel? _twoFactorAuthViewModel;
 
-    private ApiVersion? _apiVersion;
+    private ApiVersion _apiVersion;
 
     public MainPage()
     {
@@ -191,6 +194,8 @@ public partial class MainPage : ContentPage, ISignIn
         //_encryptToolStripButton.Tag = _fileOperationViewModel.EncryptFiles;
         //_fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await HandleLogOn(e);
         _logOnService!.OnLogOnOrLogOffAndLogOnAgain = async () => await New<IUIThread>().SendToAsync(async () => await LogOnOrLogOffAndLogOnAgainAsync());
+        _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
+        _fileOperationViewModel.IdentityViewModel.LoggingOnWithTOTPAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleExistingAccountLogOnWithTOTP(e));
         //_logOnService.OnLogOnOrLogOffAndLogOnAgain = async () => await LogOnOrLogOffAndLogOnAgainAsync();
         //_inviteUserToolStripMenuItem.Click += async (sender, e) => { await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await InviteUserAsync(); }, sender, e); };
         //_recentFilesListView.DragDrop += async (sender, e) => { await DropFilesOrFoldersInRecentFilesListViewAsync(); };
@@ -402,6 +407,57 @@ public partial class MainPage : ContentPage, ISignIn
         {
             await aex.HandleApiExceptionAsync();
             _apiVersion = ApiVersion.Zero;
+        }
+    }
+
+    private async Task HandleExistingAccountLogOnWithTOTP(LogOnEventArgs e)
+    {
+        _twoFactorAuthViewModel = AxCServiceProviderExtension.TwoFactorAuthViewModel;
+        if (e.UserEmail == null || e.Passphrase == null)
+        {
+            return;
+        }
+
+        if (!_twoFactorAuthViewModel!.IsVisible)
+        {
+            _twoFactorAuthViewModel.ShowLogOnDialog();
+        }
+
+        if (_twoFactorAuthViewModel.PageResult == DialogResult.None)
+        {
+            return;
+        }
+
+        if (_twoFactorAuthViewModel.PageResult == DialogResult.Cancel)
+        {
+            e.Cancel = true;
+            return;
+        }
+
+        if (_twoFactorAuthViewModel.PageResult != DialogResult.OK || _twoFactorAuthViewModel!.OneTimePassword!.Length == 0)
+        {
+            e.Cancel = true;
+            return;
+        }
+
+        e.OneTimePassword = _twoFactorAuthViewModel.OneTimePassword;
+        _twoFactorAuthViewModel.PageResult = DialogResult.None;
+
+        return;
+    }
+
+    private static async Task SetLegacyOpenMode(FileOperationEventArgs e)
+    {
+        if (!Resolve.KnownIdentities.IsLoggedOn)
+        {
+            return;
+        }
+
+        PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle, Texts.LegacyOpenMessage);
+        if (click == PopupButtons.Cancel)
+        {
+            e.Cancel = true;
+            return;
         }
     }
 }

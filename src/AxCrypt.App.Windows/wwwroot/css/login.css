@@ -209,6 +209,58 @@ input[type=password] {
   cursor: pointer;
 }
 
+.tfa-sub-head {
+  font-weight: 800;
+  font-size: 36px;
+  margin: 0 5% 5% 0;
+}
+
+.login-section {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.login-section > .section-content-area {
+  padding: 4.5% 3%;
+}
+.login-section > .section-bgimg-area {
+  padding: 2.7% 0%;
+  background-color: #F5F5F5;
+}
+@media only screen and (max-width: 950px) {
+  .login-section {
+    text-align: center;
+  }
+  .login-section h2 {
+    font-size: 32px;
+  }
+  .login-section p {
+    font-size: 16px;
+  }
+}
+
+.recry-code-btn {
+  color: #87CA4E;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+}
+
+@media only screen and (max-width: 950px) {
+  .verify-code-txt {
+    margin: 8% 8%;
+  }
+}
+
+.sprt-code-btn:hover,
+.recry-code-btn:hover {
+  color: #87CA4E;
+}
+
+.sprt-code-btn {
+  text-decoration: none;
+}
+
 @media (max-width: 768px) {
   .login-btn {
     width: 100%;

@@ -72,5 +72,8 @@ namespace AxCrypt.Api.Model.User
 
         [JsonProperty("failedPwdAtmptWindStart")]
         public int FailedPwdAtmptWindStart { get; set; }
+
+        [JsonProperty("isEnabled")]
+        public bool IsEnabled { get; set; }
     }
 }

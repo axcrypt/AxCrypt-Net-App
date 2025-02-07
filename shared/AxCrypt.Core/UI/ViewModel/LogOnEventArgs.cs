@@ -38,6 +38,7 @@ namespace AxCrypt.Core.UI.ViewModel
             Passphrase = Passphrase.Empty;
             Identity = LogOnIdentity.Empty;
             UserEmail = String.Empty;
+            OneTimePassword = String.Empty;
         }
 
         public bool Cancel { get; set; }
@@ -58,6 +59,8 @@ namespace AxCrypt.Core.UI.ViewModel
         public string Name { get; set; }
 
         public string UserEmail { get; set; }
+
+        public string OneTimePassword { get; set; }
 
         public string EncryptedFileFullName { get; set; }
 

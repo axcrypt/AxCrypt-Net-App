@@ -330,9 +330,8 @@ namespace AxCrypt.Core.Service
 
             return await _apiClient.DeleteUserAsync();
         }
-        
-        
-         public async Task<IEnumerable<GroupKeyPairApiModel>> ListMembershipGroupsAsync()
+
+        public async Task<IEnumerable<GroupKeyPairApiModel>> ListMembershipGroupsAsync()
         {
             if (string.IsNullOrEmpty(_apiClient.Identity.User))
             {

@@ -159,8 +159,8 @@ namespace AxCrypt.Core.Service
         {
             return Task.FromResult(false);
         }
-        
-         public Task<IEnumerable<GroupKeyPairApiModel>> ListMembershipGroupsAsync()
+
+        public Task<IEnumerable<GroupKeyPairApiModel>> ListMembershipGroupsAsync()
         {
             return Task.FromResult((IEnumerable<GroupKeyPairApiModel>)null);
         }

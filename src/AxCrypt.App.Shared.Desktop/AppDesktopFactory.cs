@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.Core.Authenticator.Service;
 using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Components.Pages;
 using AxCrypt.App.Shared.Desktop.Services;
@@ -38,6 +39,6 @@ public static class AppDesktopFactory
         services.AddSingleton<CopyToClipboardUtility>();
 
         TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
-
+        TypeMap.Register.Singleton<ITwoFactorAuthenticateService>(() => new TwoFactorAuthService());
     }
 }

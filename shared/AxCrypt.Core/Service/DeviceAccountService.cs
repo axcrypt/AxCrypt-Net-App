@@ -411,7 +411,6 @@ namespace AxCrypt.Core.Service
 
             return await _localService.DeleteUserAsync().Free();
         }
-        
         public async Task<IEnumerable<GroupKeyPairApiModel>> ListMembershipGroupsAsync()
         {
             IEnumerable<GroupKeyPairApiModel> localKeys = await _localService.ListMembershipGroupsAsync().Free();

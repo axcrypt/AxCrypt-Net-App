@@ -378,8 +378,8 @@ namespace AxCrypt.Core.Service
         {
             throw new InvalidOperationException("Can't perform delete user account locally.");
         }
-        
-         public Task<IEnumerable<GroupKeyPairApiModel>> ListMembershipGroupsAsync()
+
+        public Task<IEnumerable<GroupKeyPairApiModel>> ListMembershipGroupsAsync()
         {
             IEnumerable<GroupKeyPairApiModel> result = new List<GroupKeyPairApiModel>();
             return Task.FromResult(result);

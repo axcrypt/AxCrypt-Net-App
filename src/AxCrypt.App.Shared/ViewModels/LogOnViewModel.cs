@@ -103,7 +103,7 @@ public class LogOnViewModel : ViewModelBase
 
     public ProcessIndicator ProcessIndicator { get; set; }
 
-    private void InitiateProgressIndicator()
+    public void InitiateProgressIndicator()
     {
         ProcessIndicator = new ProcessIndicator();
     }
@@ -156,6 +156,18 @@ public class LogOnViewModel : ViewModelBase
         set
         {
             _isVisible = value;
+            OnLogOnDialogVisibilityChanged?.Invoke(_isVisible);
+        }
+    }
+
+    private static bool _isTfaEnabled;
+
+    public bool IsTfaEnabled
+    {
+        get => _isTfaEnabled;
+        set
+        {
+            _isTfaEnabled = value;
             OnLogOnDialogVisibilityChanged?.Invoke(_isVisible);
         }
     }

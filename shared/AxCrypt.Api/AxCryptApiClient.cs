@@ -421,8 +421,6 @@ namespace AxCrypt.Api
             bool userAccountDeleted = Serializer.Deserialize<bool>(restResponse.Content);
             return userAccountDeleted;
         }
-        
-        
         /// <summary>
         /// Gets the user membered group keys.
         /// </summary>

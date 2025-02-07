@@ -4,12 +4,10 @@ using AxCrypt.App.Shared.Desktop.Services.Interface;
 using AxCrypt.App.Shared;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Components.Pages;
-using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
-using AxCrypt.App.Shared.Services;
 
 namespace AxCrypt.App.Windows
 {
@@ -54,14 +52,13 @@ namespace AxCrypt.App.Windows
 
         private static void RegisterSingletons(IServiceCollection services)
         {
-
             services.AddSingleton<ITrayService, TrayService>();
 
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
 
             services.AddSingleton<MainPage>();
-            services.AddSingleton<Home>();
+            services.AddSingleton<IndexPage>();
             services.AddSingleton<SecuredFolders>();
             services.AddSingleton<PasswordManagerComponent>();
             services.AddSingleton<Notification>();

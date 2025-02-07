@@ -17,6 +17,10 @@
     {
         <AxCrypt.App.Shared.Desktop.Components.LoginPage />
     }
+    else if (!LogOnViewModel.IsVisible && LogOnViewModel.IsTfaEnabled)
+    {
+        <AxCrypt.App.Shared.Desktop.Components.VerifyTFA />
+    }
     else if (ShowSignUp)
     {
         <AxCrypt.App.Shared.Desktop.Components.RegisterPage />

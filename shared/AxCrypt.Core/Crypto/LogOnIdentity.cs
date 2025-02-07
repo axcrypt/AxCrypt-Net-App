@@ -135,6 +135,13 @@ namespace AxCrypt.Core.Crypto
 
         public IEnumerable<GroupKeyPairApiModel> UserGroupKeyPairs { get; set; }
 
+        public string ActiveTFAUniqueKey { get; private set; }
+
+        public void SetActiveTFAUniqueKey(string activeTFAUniqueKey)
+        {
+            ActiveTFAUniqueKey = activeTFAUniqueKey;
+        }
+
         public bool Equals(LogOnIdentity other)
         {
             if ((object)other == null)

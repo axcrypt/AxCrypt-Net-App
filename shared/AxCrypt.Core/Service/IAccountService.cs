@@ -195,8 +195,8 @@ namespace AxCrypt.Core.Service
         ///  /// <c>true</c> if user account deleted; otherwise, <c>false</c>.
         /// </returns>
         Task<bool> DeleteUserAsync();
-        
-         /// <summary>
+
+        /// <summary>
         /// List all the user membered groups public/private keys.
         /// </summary>
         /// <returns>

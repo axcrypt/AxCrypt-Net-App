@@ -1,5 +1,4 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services.Interface;
