@@ -27,7 +27,7 @@ public class RegisterViewModel : ViewModelBase
         }
     }
 
-    public CreateNewAccountViewModel CreateAccountModel { get; set; }
+    public CreateNewAccountViewModel CreateAccountModel { get; set; } = new CreateNewAccountViewModel(string.Empty, EmailAddress.Empty);
 
     public DialogResult DialogResult
     { get { return GetProperty<DialogResult>(nameof(DialogResult)); } set { SetProperty(nameof(DialogResult), value); } }

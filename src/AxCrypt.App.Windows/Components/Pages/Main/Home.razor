@@ -17,11 +17,11 @@
 <div dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (LogOnViewModel.IsVisible)
     {
-        <AxCrypt.App.Windows.Components.Pages.LoginPage />
+        <AxCrypt.App.Desktop.Components.LoginPage />
     }
     else if (ShowSignUp)
     {
-        <AxCrypt.App.Windows.Components.Pages.RegisterPage />
+        <AxCrypt.App.Desktop.Components.RegisterPage />
     }
     else if (LogOnViewModel.IsLoggedOn)
     {

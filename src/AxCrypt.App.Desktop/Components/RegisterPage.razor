@@ -22,7 +22,7 @@
                 <input type="@passwordFiledType" @bind-value="Register.CreateAccountModel.Verification" class="form-control pswd-img" placeholder="Type your password one more time" />
             </div>
             <div class="check-bx">
-                <input type="checkbox" style="margin-right: 5px !important;" @bind="canShowPassword" @onclick="async() => await ToggleShowPassword()"/>
+                <input type="checkbox" style="margin-right: 5px !important;" @bind="canShowPassword" @onclick="async() => await ToggleShowPassword()" />
                 <span class="che-txt">@Texts.ShowPasswordOptionPrompt</span>
             </div>
 
@@ -45,6 +45,11 @@
     private bool _isCreating = false;
     private string passwordFiledType = "password";
     bool canShowPassword = false;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
 
     private async Task RefreshComponentAsync()
     {
