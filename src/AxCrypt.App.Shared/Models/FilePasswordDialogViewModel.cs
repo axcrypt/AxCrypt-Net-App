@@ -4,7 +4,7 @@ using AxCrypt.Core.Extensions;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.Services.UI;
 
-namespace AxCrypt.App.Desktop.Models;
+namespace AxCrypt.App.Shared.Models;
 
 public class FilePasswordDialogViewModel : ViewModelBase
 {

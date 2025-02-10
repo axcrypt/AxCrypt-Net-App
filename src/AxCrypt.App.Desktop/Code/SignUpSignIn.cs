@@ -10,7 +10,7 @@ using System;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Desktop.Services;
 
-namespace AxCrypt.App.Windows.Code;
+namespace AxCrypt.App.Desktop.Code;
 
 internal class SignUpSignIn
 {

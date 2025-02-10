@@ -1,8 +1,5 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Desktop.Models;
 using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Desktop.ViewModels;
-using AxCrypt.App.Desktop.ViewModels.Feedback;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Components.Pages;
@@ -18,12 +15,8 @@ using AxCrypt.Cryptor.Model;
 using AxCrypt.Mono;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
-using AxCrypt.App.Desktop.ViewModels.Secret;
-using AxCrypt.App.Shared.Helpers;
-using AxCrypt.App.Desktop.ViewModels.Notification;
-using AxCrypt.App.Shared.Models.Notification;
-using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Desktop;
+using AxCrypt.App.Shared;
 
 namespace AxCrypt.App.Windows
 {
@@ -93,37 +86,21 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<Notification>();
             services.AddSingleton<Support>();
 
+            SharedFactory.RegisterSingletons(services);
             DesktopFactory.RegisterSingletons(services);
 
-            services.AddSingleton<SupportService>();
             services.AddSingleton<SecretClientModel>();
             services.AddSingleton<SecretsClientModel>();
-            services.AddSingleton<NewSecretViewModel>();
-            services.AddSingleton<SecretService>();
-            services.AddSingleton<ShareSecretViewModel>();
-            services.AddSingleton<ManageSecretViewModel>();
-            services.AddSingleton<EditSecretViewModel>();
-            services.AddSingleton<ViewSecretViewModel>();
-            services.AddSingleton<UserNotificationService>();
-            services.AddSingleton<NotificationViewModel>();
-            services.AddSingleton<NotificationItemViewModel>();
-            services.AddSingleton<SecretsListViewModel>();
 
-            services.AddSingleton<ShareKeyViewModel>();
             services.AddSingleton<RecentFoldersViewModel>();
-            services.AddSingleton<FeedbackViewModel>();
             services.AddSingleton<AboutViewModel>();
-            services.AddSingleton<SupportViewModel>();
             services.AddSingleton<SuggestionViewModel>();
             services.AddSingleton<InviteViewModel>();
             services.AddSingleton<ImportPrivateKeyViewModel>();
-            services.AddSingleton<FilePasswordDialogViewModel>();
             services.AddSingleton<VerifyAccountDialogViewModel>();
             services.AddSingleton<VerifyPasswordViewModel>();
 
             TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
-
-            TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
         }
     }
 }
