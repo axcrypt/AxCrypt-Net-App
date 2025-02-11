@@ -54,9 +54,7 @@
     </NavLink>
     <NavLink class="update-btn padding" @onclick="ViewModel.CheckAxCryptVersionAsync">Update</NavLink>
     <NavLink class="mb-prfle" id="accounts-dropdown-click-action">
-        <span class="" id="accounts-dropdown-click-action">
-            @(string.IsNullOrEmpty(ViewModel.TopMenuModel.UserEmail) ? "N/A" : ViewModel.TopMenuModel.UserEmail.Substring(0, Math.Min(2, ViewModel.TopMenuModel.UserEmail.Length)).ToUpper())
-        </span>
+        <img class="" style="width:35px;height:auto!important;" src="@SubscriptionIcon()" alt="subs-level icon" />
     </NavLink>
 </div>
 
@@ -113,6 +111,30 @@
         ViewModel.TopMenuModel.SelectedLanguageDisplayName = localizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == cultureName)?.DisplayName!;
         ViewModel.SetLanguageAsync(cultureName);
         navigationManager.NavigateTo(navigationManager.Uri, forceLoad: true);
+    }
+
+    private string SubscriptionIcon()
+    {
+        string subscriptionLevel = ViewModel.LogOnViewModel.SubscriptionLevel.ToString();
+        switch (subscriptionLevel)
+        {
+            case "PasswordManager":
+                return "/images/PasswordManager/icoPM.svg";
+                break;
+
+            case "Premium":
+                return "/images/Premium/IcoPrm.svg";
+                break;
+
+            case "Business":
+                return "/images/Business/IcoBus.svg";
+                break;
+
+            default:
+                return "/images/free/IcoVwr.svg";
+                break;
+
+        }
     }
 
     private void UpdatePageState()

@@ -7,21 +7,6 @@
 @inject LogOnViewModel LogOnViewModel
 @inject ICssService CssService
 
-<link href="css/login.min.css" rel="stylesheet" />
-
-@if (SubscriptionLevel != null)
-{
-    <link href="css/@SubscriptionLevel/sidemenu.min.css" rel="stylesheet" />
-    <link href="css/@SubscriptionLevel/index.min.css" rel="stylesheet" />
-    <link href="css/@SubscriptionLevel/site.min.css" rel="stylesheet" />
-    <link href="css/@SubscriptionLevel/topmenu.min.css" rel="stylesheet" />
-    <link href="css/@SubscriptionLevel/notification.min.css" rel="stylesheet" />
-
-    <link href="css/@SubscriptionLevel/newsecret.min.css" rel="stylesheet" />
-    <link href="css/@SubscriptionLevel/secretlist.min.css" rel="stylesheet" />
-    <link href="css/@SubscriptionLevel/support.min.css" rel="stylesheet" />
-}
-
 <div class="page" dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (PageRendering)
     {
@@ -100,6 +85,7 @@
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdateSignInPageState;
         LogOnViewModel.OnSubscriptionChanged += UpdateSubscriptionState;
         SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
+        UpdateSubscriptionState();
         base.OnInitialized();
     }
 
@@ -126,7 +112,7 @@
 
     private async void InitiateDelayToRenderPage()
     {
-        await Task.Delay(4000);
+        await Task.Delay(1000);
         PageRendering = false;
         UpdateUIState();
     }

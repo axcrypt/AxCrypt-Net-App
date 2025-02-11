@@ -15,18 +15,10 @@
     <div class="acc-subs">
         <div class="accnt-prfl">
             <h3 class="txt-clr">
-                @if (!string.IsNullOrEmpty(ProfileViewModel.Account?.UserEmail) && ProfileViewModel.Account.UserEmail.Length >= 2)
-                {
-                    @ProfileViewModel.Account.UserEmail.Substring(0, 2).ToUpper()
-                }
-                else
-                {
-                    <span></span>
-                }
+                <img style="width:35px;height:auto!important;" src="@SubscriptionIcon()" alt="subs-level icon"/>
             </h3>
         </div>
 
-        <h3 class="subs-txt txt-clr">@ProfileViewModel?.Account?.SubscriptionLevel</h3>
         <div>
             <div style="text-align:left;">
                 <img class="" src="images/default/IcoMssg.svg" alt="go-back-img" />
@@ -46,6 +38,7 @@
             }
         </div>
     </div>
+
     <div class="manage-acc-sec font-medium">
         <div class="key-section">
             <NavLink @attributes="ProfileViewModel.NavLinkAttributes()" @onclick="ProfileViewModel.ToggleKMPopup">
@@ -150,6 +143,30 @@
     public void OnOptionClicked()
     {
         ClosePopup.InvokeAsync(null);
+    }
+
+    private string SubscriptionIcon()
+    {
+        string subscriptionLevel = ProfileViewModel?.Account?.SubscriptionLevel.ToString();
+        switch (subscriptionLevel)
+        {
+            case "PasswordManager":
+                return "/images/PasswordManager/icoPM.svg";
+                break;
+
+            case "Premium":
+                return "/images/Premium/IcoPrm.svg";
+                break;
+
+            case "Business":
+                return "/images/Business/IcoBus.svg";
+                break;
+
+            default:
+            return "/images/free/IcoVwr.svg";
+                break;
+                
+        }
     }
 
     void UpdateState()
