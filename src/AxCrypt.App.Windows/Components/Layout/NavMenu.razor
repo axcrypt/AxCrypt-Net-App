@@ -44,21 +44,24 @@
                 <span class="oi suprt" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@LogOnViewModel.SupportPageTitle</span>
             </NavLink>
         </div>
-        <div class="abt-sec nav-item px-3">
-            <div>
-                <NavLink class="nav-link" @onclick="FeedbackPopup">
-                    <span class="oi fdbck" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SendFeedbackTitle</span>
-                </NavLink>
-            </div>
-            <div>
-                <NavLink class="nav-link" @onclick="AboutPopup">
-                    <span class="oi info" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.AboutAxcryptLinkLabel</span>
-                </NavLink>
-            </div>
-        </div>
     </nav>
 
-    <AxCrypt.App.Desktop.Components.Shared.ProgressBar />
+    <div class="prgrs-bar-sec nav-item">
+        <AxCrypt.App.Desktop.Components.Shared.ProgressBar />
+    </div>
+
+    <div class="abt-sec nav-item px-3">
+        <div>
+            <NavLink class="nav-link" @onclick="FeedbackPopup">
+                <span class="oi fdbck" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SendFeedbackTitle</span>
+            </NavLink>
+        </div>
+        <div>
+            <NavLink class="nav-link" @onclick="AboutPopup">
+                <span class="oi info" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.AboutAxcryptLinkLabel</span>
+            </NavLink>
+        </div>
+    </div>
 </div>
 
 @code {
