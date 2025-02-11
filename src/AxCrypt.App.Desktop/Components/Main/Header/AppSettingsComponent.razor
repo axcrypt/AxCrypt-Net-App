@@ -61,9 +61,9 @@
     {
         <div @onmouseover='@(()=> ShowPopup("autoupgrade"))' @onmouseout='@( () => HidePopup() )'>
             <NavLink class="nav-link center-column" @onclick="AppSettingsViewModel.ShowUpgradePopup">
-                <div class="subs-required">
+                <div>
                     <img class="" src="images/default/Ico256.svg" alt="go-back-img" />
-                    <span class="grey-clr">@Texts.OptionsConvertMenuItemText</span>
+                    <span class="grey-clr subs-required">@Texts.OptionsConvertMenuItemText</span>
                 </div>
                 <div style="float:right; padding-left:15px;">
                     <label class="toggle">
@@ -125,9 +125,9 @@
     {
         <div @onmouseover='@(()=> ShowPopup("include"))' @onmouseout='@( () => HidePopup() )'>
             <NavLink class="nav-link center-column" @onclick="AppSettingsViewModel.ShowUpgradePopup">
-                <div class="subs-required">
+                <div>
                     <img class="" src="images/IcoIncldFldrs.svg" alt="include-subfolder-img" />
-                    <span class="grey-clr">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
+                    <span class="grey-clr subs-required">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
                 </div>
                 <div style="float:right; padding-left:15px;">
                     <label class="toggle">
@@ -170,9 +170,9 @@
     {
         <div class="key-section" @onmouseover='@(()=> ShowPopup("inactivity"))' @onmouseout='@( () => HidePopup() )'>
             <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
-                <div class="subs-required">
+                <div>
                     <img class="sgn-out-img" src="images/default/IcoSngOut.svg" alt="go-back-img" />
-                    <span>@Texts.IdleSignOutToolStripMenuItemText</span>
+                    <span class="subs-required">@Texts.IdleSignOutToolStripMenuItemText</span>
                 </div>
             </NavLink>
             @if (isHovered && hoveredElement == "inactivity")
@@ -197,9 +197,9 @@
     {
         <div class="key-section" @onmouseover='@( () => ShowPopup("rename") )' @onmouseout='@( () => HidePopup() )'>
             <NavLink class="nav-link" @onclick="AppSettingsViewModel.ShowUpgradePopup">
-                <div class="subs-required">
+                <div>
                     <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
-                    <span>@Texts.RestoreAnonymousNamesMenuText</span>
+                    <span class="subs-required">@Texts.RestoreAnonymousNamesMenuText</span>
                 </div>
             </NavLink>
             @if (isHovered && hoveredElement == "rename")
@@ -256,7 +256,7 @@
         <div class="key-section" @onmouseover='@( () => ShowPopup("encryptfileproperties") )' @onmouseout='@( () => HidePopup() )'>
             <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
                 <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
-                <span>@Texts.FilePropertiesToolStripMenuItemText</span>
+                <span class="subs-required">@Texts.FilePropertiesToolStripMenuItemText</span>
             </NavLink>
             @if (isHovered && hoveredElement == "encryptfileproperties")
             {
