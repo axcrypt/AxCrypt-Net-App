@@ -39,7 +39,6 @@
         base.OnInitialized();
         Register.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdatePageState;
-        LogOnViewModel.OnSubscriptionChanged += UpdatePageState;
     }
 
     private void UpdatePageState(bool isShow = false)
