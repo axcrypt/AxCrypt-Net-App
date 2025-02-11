@@ -7,6 +7,7 @@ using AxCrypt.App.Desktop.ViewModels.Main;
 using AxCrypt.App.Desktop.ViewModels.Notification;
 using AxCrypt.App.Desktop.ViewModels.Secret;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AxCrypt.App.Desktop;
@@ -15,6 +16,8 @@ public static class DesktopFactory
 {
     public static void RegisterSingletons(IServiceCollection services)
     {
+        services.AddSingleton<ProgressBarService>();
+
         services.AddSingleton<LogOnViewModel>();
         services.AddSingleton<RegisterViewModel>();
 

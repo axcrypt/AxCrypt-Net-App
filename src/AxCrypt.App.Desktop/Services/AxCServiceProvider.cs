@@ -52,4 +52,12 @@ public class AxCServiceProvider
             return GetService<IStatusAlertService>();
         }
     }
+
+    public static ProgressBarService? ProgressBarService
+    {
+        get
+        {
+            return GetService<ProgressBarService>();
+        }
+    }
 }

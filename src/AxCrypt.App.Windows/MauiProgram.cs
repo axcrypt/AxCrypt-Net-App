@@ -64,7 +64,6 @@ namespace AxCrypt.App.Windows
         {
             services.AddSingleton<IStatusAlertService, StatusAlertService>();
             services.AddSingleton<ProcessIndicatorService>();
-            services.AddSingleton<ProgressBarService>();
 
             services.AddSingleton<ITrayService, TrayService>();
             services.AddSingleton<INotificationService, NotificationService>();

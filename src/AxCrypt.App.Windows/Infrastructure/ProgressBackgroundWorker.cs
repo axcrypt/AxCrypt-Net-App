@@ -1,42 +1,35 @@
-﻿using AxCrypt.Core.UI;
+﻿using AxCrypt.App.Desktop.Services.UI;
+using AxCrypt.Core.UI;
 using System.ComponentModel;
-using Windows.Devices.Input;
-using IContainer = System.ComponentModel.IContainer;
 
 namespace AxCrypt.App.Windows.Infrastructure;
 
 public class ProgressBackgroundComponent : Component, IProgressBackground
 {
     private ProgressBackground _progressBackground = new ProgressBackground();
-
-    public ProgressBackgroundComponent(IContainer container)
+    public ProgressBackgroundComponent()
     {
-        if (container == null)
-        {
-            return;
-            //throw new ArgumentNullException("container");
-        }
-
-        container.Add(this);
-
         _progressBackground.OperationStarted += (sender, e) =>
         {
-            ProgressBar progressBar;
-            if (e.State != null)
+            CustomProgressBar progressBar = new CustomProgressBar();
+            IProgressContext progressContext = e.ProgressContext;
+            progressContext.Progressing += (ss, ee) =>
             {
-                progressBar = e.State as ProgressBar;
-                OnProgressBarCreated(new ControlEventArgs(progressBar));
-            }
+                progressBar.Percentage = ee.Percent;
+                progressBar.Filename = ee.Display;
+            };
 
-            progressBar = CreateProgressBar(e.ProgressContext);
             e.State = progressBar;
-            OnProgressBarCreated(new ControlEventArgs(progressBar));
         };
 
         _progressBackground.OperationCompleted += (sender, e) =>
         {
-            ProgressBar progressBar = e.State as ProgressBar;
-            progressBar.IsVisible = false;
+            if (e.State == null)
+            {
+                return;
+            }
+            CustomProgressBar progressBar = e.State as CustomProgressBar;
+            progressBar.Dispose();
         };
     }
 
@@ -57,36 +50,36 @@ public class ProgressBackgroundComponent : Component, IProgressBackground
     /// or other information. This is raised on the original thread, typically the
     /// GUI thread.
     /// </summary>
-    public event EventHandler<MouseEventArgs> ProgressBarClicked;
+    //public event EventHandler<MouseEventArgs> ProgressBarClicked;
 
-    protected virtual void OnProgressBarClicked(object sender, MouseEventArgs e)
-    {
-        ProgressBarClicked?.Invoke(sender, e);
-    }
+    //protected virtual void OnProgressBarClicked(object sender, MouseEventArgs e)
+    //{
+    //    ProgressBarClicked?.Invoke(sender, e);
+    //}
 
-    private ProgressBar CreateProgressBar(IProgressContext progress)
-    {
-        ProgressBar progressBar = new ProgressBar();
-        progressBar.Progress = 0;
-        progressBar.HorizontalOptions = LayoutOptions.Fill;
-        progressBar.Margin = new Thickness(0);
+    //private ProgressBar CreateProgressBar(IProgressContext progress)
+    //{
+    //    ProgressBar progressBar = new ProgressBar();
+    //    progressBar.Progress = 0;
+    //    progressBar.HorizontalOptions = LayoutOptions.Fill;
+    //    progressBar.Margin = new Thickness(0);
 
-        TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
-        tapGestureRecognizer.SetBinding(TapGestureRecognizer.CommandProperty, nameof(progressBar_MouseClick));
-        progressBar.GestureRecognizers.Add(tapGestureRecognizer);
+    //    TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
+    //    tapGestureRecognizer.SetBinding(TapGestureRecognizer.CommandProperty, nameof(progressBar_MouseClick));
+    //    progressBar.GestureRecognizers.Add(tapGestureRecognizer);
 
-        progress.Progressing += (ss, ee) =>
-        {
-            progressBar.Progress = ee.Percent;
-        };
+    //    progress.Progressing += (ss, ee) =>
+    //    {
+    //        progressBar.Progress = ee.Percent;
+    //    };
 
-        return progressBar;
-    }
+    //    return progressBar;
+    //}
 
-    private void progressBar_MouseClick(object sender, MouseEventArgs e)
-    {
-        OnProgressBarClicked(sender, e);
-    }
+    //private void progressBar_MouseClick(object sender, MouseEventArgs e)
+    //{
+    //    OnProgressBarClicked(sender, e);
+    //}
 
     public bool Busy
     {

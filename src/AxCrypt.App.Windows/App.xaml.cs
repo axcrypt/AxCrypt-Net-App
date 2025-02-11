@@ -57,9 +57,8 @@ public partial class App : Application
 
         SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent();
 
-        _progressBackgroundWorker = new ProgressBackgroundComponent(null);
-
         InitializeServiceDependencyProvider();
+        _progressBackgroundWorker = new ProgressBackgroundComponent();
 
         MainPage = new MainPage(logOnService, _mainViewModel, _fileOperationViewModel, _knownFoldersViewModel, registerViewModel);
     }

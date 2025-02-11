@@ -1,6 +1,4 @@
-﻿using AxCrypt.Content;
-
-namespace AxCrypt.App.Shared.Services;
+﻿namespace AxCrypt.App.Shared.Services;
 
 public class ProgressBarService
 {
@@ -18,14 +16,17 @@ public class ProgressBarService
         get => _isVisible;
         set
         {
-            _isVisible = value;
-            OnProgressBarVisibilityChanged?.Invoke(_isVisible);
+            if (_isVisible != value)
+            {
+                _isVisible = value;
+                OnProgressBarVisibilityChanged?.Invoke(_isVisible);
+            }
         }
     }
 
-    public string? Filename { get; set; }
+    public string? Filename { get; set; } = "";
 
-    private double _progress;
+    private double _progress = 0;
 
     public double Percentage
     {
@@ -35,15 +36,27 @@ public class ProgressBarService
         }
         set
         {
-            _progress = value;
-            OnProgressBarVisibilityChanged?.Invoke(_isVisible);
+            if (_progress != value)
+            {
+                _progress = value;
+                bool isVisible = (_progress == 100 || _progress == 0) ? _isVisible : true;
+                OnProgressBarVisibilityChanged?.Invoke(isVisible);
+            }
         }
     }
 
     public void Show()
     {
+        Filename = "";
         IsVisible = true;
     }
+
+    //public void UpdateOnProgress(string fileName, double progress, bool isVisible)
+    //{
+    //    Filename = fileName;
+    //    Percentage = progress;
+    //    OnProgressBarVisibilityChanged?.Invoke(isVisible);
+    //}
 
     public void Hide()
     {
