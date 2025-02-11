@@ -20,6 +20,8 @@ using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.Core.Ipc;
 using Microsoft.Maui.Controls.Platform;
 using Microsoft.UI.Xaml.Controls;
+using AxCrypt.App.Desktop;
+using AxCrypt.App.Desktop.Implementation;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.

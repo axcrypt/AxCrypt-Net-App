@@ -3,8 +3,12 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using static AxCrypt.Abstractions.TypeResolve;
+using System.IO;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 
-namespace AxCrypt.App.Windows.Desktop;
+namespace AxCrypt.App.Desktop.Implementation;
 
 public class FileWatcher : IFileWatcher
 {

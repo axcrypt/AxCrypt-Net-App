@@ -86,7 +86,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<Support>();
 
             SharedFactory.RegisterSingletons(services);
-            DesktopFactory.RegisterSingletons(services);
+            AppDesktopFactory.RegisterSingletons(services);
 
             services.AddSingleton<SecretClientModel>();
             services.AddSingleton<SecretsClientModel>();
