@@ -31,65 +31,65 @@
         </div>
     </NavLink>
 
-    @if(AppSettingsViewModel.EnableAutoUpgrade)
+    @if (AppSettingsViewModel.EnableAutoUpgrade)
     {
-      <NavLink class="nav-link center-column">
-          <div>
-             <img class="" src="images/default/Ico256.svg" alt="go-back-img" />
-             <span class="grey-clr">@Texts.OptionsConvertMenuItemText</span>
-         </div>
-        <div style="float:right; padding-left:15px;">
-            <label class="toggle">
-                <input type="checkbox" @bind="AppSettingsViewModel.AutoUpgradeToAES256" @onclick="async(e)=> await AppSettingsViewModel.ToggleEncryptionUpgradeMode()">
-                <span class="slider round">
-                    @if (AppSettingsViewModel.AutoUpgradeToAES256)
-                    {
-                        <span class="on-off-text on-text">ON</span>
-                        <span class="on-off-text off-text" style="display:none;">OFF</span>
-                    }
-                    else
-                    {
-                        <span class="on-off-text on-text" style="display:none;">ON</span>
-                        <span class="on-off-text off-text">OFF</span>
-                    }
-                </span>
-            </label>
-         </div>
-      </NavLink>
+        <NavLink class="nav-link center-column">
+            <div>
+                <img class="" src="images/default/Ico256.svg" alt="go-back-img" />
+                <span class="grey-clr">@Texts.OptionsConvertMenuItemText</span>
+            </div>
+            <div style="float:right; padding-left:15px;">
+                <label class="toggle">
+                    <input type="checkbox" @bind="AppSettingsViewModel.AutoUpgradeToAES256" @onclick="async(e)=> await AppSettingsViewModel.ToggleEncryptionUpgradeMode()">
+                    <span class="slider round">
+                        @if (AppSettingsViewModel.AutoUpgradeToAES256)
+                        {
+                            <span class="on-off-text on-text">ON</span>
+                            <span class="on-off-text off-text" style="display:none;">OFF</span>
+                        }
+                        else
+                        {
+                            <span class="on-off-text on-text" style="display:none;">ON</span>
+                            <span class="on-off-text off-text">OFF</span>
+                        }
+                    </span>
+                </label>
+            </div>
+        </NavLink>
     }
     else
-    { 
+    {
         <div @onmouseover='@(()=> ShowPopup("autoupgrade"))' @onmouseout='@( () => HidePopup() )'>
-          <NavLink class="nav-link center-column" @onclick="AppSettingsViewModel.ShowUpgradePopup">
-            <div>
-               <img class="" src="images/default/Ico256.svg" alt="go-back-img" />
-               <span class="grey-clr">@Texts.OptionsConvertMenuItemText</span>
-             </div>
-            <div style="float:right; padding-left:15px;">
-              <label class="toggle">
-                  <input type="checkbox" @bind="AppSettingsViewModel.AutoUpgradeToAES256" disabled="disabled">
-                   <span class="slider round">
-                      @if (AppSettingsViewModel.AutoUpgradeToAES256)
-                      {
-                        <span class="on-off-text on-text">ON</span>
-                        <span class="on-off-text off-text" style="display:none;">OFF</span>
-                      }
-                      else
-                      {
-                        <span class="on-off-text on-text" style="display:none;">ON</span>
-                        <span class="on-off-text off-text">OFF</span>
-                       }
-                  </span>
-                </label>
-             </div>
-         </NavLink>
-          @if (isHovered && hoveredElement == "autoupgrade")
+            <NavLink class="nav-link center-column" @onclick="AppSettingsViewModel.ShowUpgradePopup">
+                <div class="subs-required">
+                    <img class="" src="images/default/Ico256.svg" alt="go-back-img" />
+                    <span class="grey-clr">@Texts.OptionsConvertMenuItemText</span>
+                </div>
+                <div style="float:right; padding-left:15px;">
+                    <label class="toggle">
+                        <input type="checkbox" @bind="AppSettingsViewModel.AutoUpgradeToAES256" disabled="disabled">
+                        <span class="slider round">
+                            @if (AppSettingsViewModel.AutoUpgradeToAES256)
+                            {
+                                <span class="on-off-text on-text">ON</span>
+                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                            }
+                            else
+                            {
+                                <span class="on-off-text on-text" style="display:none;">ON</span>
+                                <span class="on-off-text off-text">OFF</span>
+                            }
+                        </span>
+                    </label>
+                </div>
+            </NavLink>
+            @if (isHovered && hoveredElement == "autoupgrade")
             {
                 <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
                     <span class="txt-clr font-medium">This Feature requires a paid subscription plan!.</span>
                 </div>
             }
-         </div>
+        </div>
     }
 
 
@@ -125,7 +125,7 @@
     {
         <div @onmouseover='@(()=> ShowPopup("include"))' @onmouseout='@( () => HidePopup() )'>
             <NavLink class="nav-link center-column" @onclick="AppSettingsViewModel.ShowUpgradePopup">
-                <div>
+                <div class="subs-required">
                     <img class="" src="images/IcoIncldFldrs.svg" alt="include-subfolder-img" />
                     <span class="grey-clr">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
                 </div>
@@ -170,8 +170,10 @@
     {
         <div class="key-section" @onmouseover='@(()=> ShowPopup("inactivity"))' @onmouseout='@( () => HidePopup() )'>
             <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
-                <img class="sgn-out-img" src="images/default/IcoSngOut.svg" alt="go-back-img" />
-                <span>@Texts.IdleSignOutToolStripMenuItemText</span>
+                <div class="subs-required">
+                    <img class="sgn-out-img" src="images/default/IcoSngOut.svg" alt="go-back-img" />
+                    <span>@Texts.IdleSignOutToolStripMenuItemText</span>
+                </div>
             </NavLink>
             @if (isHovered && hoveredElement == "inactivity")
             {
@@ -195,8 +197,10 @@
     {
         <div class="key-section" @onmouseover='@( () => ShowPopup("rename") )' @onmouseout='@( () => HidePopup() )'>
             <NavLink class="nav-link" @onclick="AppSettingsViewModel.ShowUpgradePopup">
-                <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
-                <span>@Texts.RestoreAnonymousNamesMenuText</span>
+                <div class="subs-required">
+                    <img class="" src="images/default/IcoRstr.svg" alt="go-back-img" />
+                    <span>@Texts.RestoreAnonymousNamesMenuText</span>
+                </div>
             </NavLink>
             @if (isHovered && hoveredElement == "rename")
             {
@@ -238,31 +242,31 @@
         </div>
     </NavLink>
 
-    @if(AppSettingsViewModel.EnableEncryptionFileProperties)
+    @if (AppSettingsViewModel.EnableEncryptionFileProperties)
     {
-       <div class="key-section">
-           <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" id="encryption-file-property-button-action">
-              <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
-              <span>@Texts.FilePropertiesToolStripMenuItemText</span>
-           </NavLink>
-       </div>
+        <div class="key-section">
+            <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" id="encryption-file-property-button-action">
+                <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
+                <span>@Texts.FilePropertiesToolStripMenuItemText</span>
+            </NavLink>
+        </div>
     }
     else
     {
-      <div class="key-section" @onmouseover='@( () => ShowPopup("encryptfileproperties") )' @onmouseout='@( () => HidePopup() )'>
-         <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
-             <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
-             <span>@Texts.FilePropertiesToolStripMenuItemText</span>
-         </NavLink>
+        <div class="key-section" @onmouseover='@( () => ShowPopup("encryptfileproperties") )' @onmouseout='@( () => HidePopup() )'>
+            <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
+                <img class="encrypt-file-prop-img" src="images/default/IcoFltr.svg" alt="encrypt-file-prop" />
+                <span>@Texts.FilePropertiesToolStripMenuItemText</span>
+            </NavLink>
             @if (isHovered && hoveredElement == "encryptfileproperties")
             {
                 <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
                     <span class="txt-clr font-medium">This feature requires a paid subscription plan!.</span>
                 </div>
             }
-      </div>
+        </div>
     }
-   
+
     <div class="key-section">
         <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.InviteUser(e)">
             <img class="" src="images/default/IcoInvtFrnd1.svg" alt="go-back-img" />

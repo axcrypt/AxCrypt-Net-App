@@ -12,6 +12,9 @@
     a {
         text-decoration: none;
         color: #494949;
+    }
+
+    a:hover {
         background: $HglhtTxt;
     }
 
@@ -741,4 +744,10 @@
         font-Weight: 400;
         font-size: 12px;
     }
+}
+
+.subs-required {
+    background: Url(/images/free/subs-req-sparkle.svg) no-repeat top right;
+    background-size: auto;
+    padding-right: 15px;
 }

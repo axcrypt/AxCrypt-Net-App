@@ -13,6 +13,9 @@
   text-decoration: none;
   color: #494949;
 }
+.desk-acnt-popup a:hover, .desk-stngs-popup a:hover, .notification-popup a:hover {
+  background: #B7B7B7;
+}
 .desk-acnt-popup img, .desk-stngs-popup img, .notification-popup img {
   height: 18px;
 }
@@ -637,4 +640,9 @@
     font-Weight: 400;
     font-size: 12px;
   }
+}
+.subs-required {
+  background: url(/images/free/subs-req-sparkle.svg) no-repeat top right;
+  background-size: auto;
+  padding-right: 15px;
 }

@@ -13,6 +13,9 @@
   text-decoration: none;
   color: #494949;
 }
+.desk-acnt-popup a:hover, .desk-stngs-popup a:hover, .notification-popup a:hover {
+  background: #E8FEDE;
+}
 .desk-acnt-popup img, .desk-stngs-popup img, .notification-popup img {
   height: 18px;
 }
@@ -101,7 +104,7 @@
 .sub-pop2 a:hover,
 .key-section a.active,
 .key-section a:hover {
-  background-color: #E8FEDE;
+  background-color: #C5CFC0;
   color: #48772C !important;
   padding: 10px 25px;
   margin: 0 -20px;
@@ -638,6 +641,12 @@
     font-size: 12px;
   }
 }
+.subs-required {
+  background: url(/images/free/subs-req-sparkle.svg) no-repeat top right;
+  background-size: auto;
+  padding-right: 15px;
+}
+
 .key-mngnt-Popup a:hover, .key-mngnt-Popup dd:hover, .manage-acc-sec a:hover, .manage-acc-sec dd:hover {
   background-image: url(/images/premium/IcoIndctr.svg);
   background-repeat: no-repeat;
