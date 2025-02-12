@@ -221,6 +221,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 HidePopup("subscription-details-side-popup");
             }
         }
+
+        if (targetobj.id === "close-subscription-details-side-popup") {
+            HidePopup("subscription-details-side-popup");
+        }
+        
     });
 });
 

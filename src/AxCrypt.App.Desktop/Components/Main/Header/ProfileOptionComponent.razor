@@ -15,7 +15,7 @@
     <div class="acc-subs">
         <div class="accnt-prfl">
             <h3 class="txt-clr">
-                <img style="width:35px;height:auto!important;" src="@SubscriptionIcon()" alt="subs-level icon"/>
+                <img style="width:35px;height:auto!important;" src="@SubscriptionIcon()" alt="subs-level icon" />
             </h3>
         </div>
 
@@ -28,9 +28,8 @@
             {
                 <div style="text-align:left;">
                     <img class="" src="images/default/IcoClndr.svg" alt="go-back-img" />
-                    <span class="grey-clr font-high" style="padding-left: 5px;">@Texts.ExpireInLabelFirstPart <span class="txt-clr">@ProfileViewModel?.Account?.DaysLeft</span></span>
+                    <span class="grey-clr font-high" style="padding-left: 5px;">@Texts.ExpireInLabelFirstPart <span class="txt-clr">@ProfileViewModel?.Account?.DaysLeft</span> days</span>
                 </div>
-                <a class="can-subs" @onclick="ProfileViewModel.CancelSubscription">@Texts.CancelSubscriptionPrompt</a>
             }
             else
             {
@@ -95,8 +94,7 @@
 }
 
 <div class="subs-dtls-popup model-popup sub-pop2" style="display:none;" id="subscription-details-side-popup">
-   @*  <div class="close-img" @onclick="ProfileViewModel.ToggleSubsDtlsPopup"></div> *@
-    <div class="close-img"></div>
+    <div class="close-img" id="close-subscription-details-side-popup"></div>
     <div class="center-column" style="padding:0;">
         <div>
             <img class="ico-user-dk" src="" alt="Ico-user" />
@@ -104,18 +102,22 @@
         <div>
             <span class="txt-clr">@Texts.PromptSubscription:</span>
             <span class="font-bold">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
-            @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
+@*             @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
             {
                 <span class="txt-clr">Company:</span>
                 <span class="font-bold">AxCrypt</span> <br />
-            }
+            } *@
+
             @if (ProfileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
             {
                 <span class="txt-clr">Type:</span>
                 <span class="font-bold">@ProfileViewModel.Account.Subscription</span> <br />
+
+                <span class="txt-clr">Valid until:</span>
+                <span class="font-bold">@ProfileViewModel.ValidFormatted</span> <br />
+
+                <a class="can-subs" @onclick="ProfileViewModel.CancelSubscription">@Texts.CancelSubscriptionPrompt</a>
             }
-            <span class="txt-clr">Valid until:</span>
-            <span class="font-bold">@ProfileViewModel.ValidFormatted</span>
         </div>
     </div>
 </div>
@@ -163,9 +165,9 @@
                 break;
 
             default:
-            return "/images/free/IcoVwr.svg";
+                return "/images/free/IcoVwr.svg";
                 break;
-                
+
         }
     }
 
