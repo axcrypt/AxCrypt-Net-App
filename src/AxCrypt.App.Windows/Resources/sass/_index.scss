@@ -203,7 +203,7 @@
 
 //temporary
 .default-icon {
-    content: $IcoDocMb;
+    content: url(/images/default/IcoIcld.svg);
 }
 
 .mre-actn-box {
@@ -234,49 +234,24 @@
         text-overflow: ellipsis;
     }
 
-    .mp4, .MP4,
-    .avi, .AVI,
-    .mov, .MOV,
-    .mkv, .MKV,
-    .wmv, .WMV,
-    .flv, .FLV,
-    [class="3gp"], [class="3GP"] {
+    .vid-type-ico {
         content: $IcoVd;
     }
 
-    .txt, .TXT,
-    .xml, .XML,
-    .doc, .DOC,
-    .docx, .DOCX,
-    .pdf, .PDF,
-    .xls, .XLS,
-    .xlsx, .XLSX,
-    .csv, .CSV,
-    .js, .JS,
-    .cshtml, .CSHTML,
-    .cshtm, .CSHTM,
-    .scss,
-    .htm, .HTM,
-    .razor, .RAZOR,
-    .zip, .ZIP {
+    .doc-type-ico {
         content: $IcoDcmnt;
     }
 
-    .mp3, .MP3,
-    .wav, .WAV,
-    .aac, .AAC,
-    .alac, .ALAC,
-    .flac, .FLAC {
+    .aud-type-ico {
         content: $IcoMsc;
     }
 
-    .png, .PNG,
-    .svg, .SVG,
-    .jpg, .JPG,
-    .jpeg, .JPEG,
-    .gif, .GIF,
-    .psd, .PSD {
+    .img-type-ico {
         content: $IcoPctr;
+    }
+
+    .default-type-ico {
+        content: $IcoDcmnt;
     }
 }
 
@@ -295,10 +270,6 @@
 
 .file-keySh-icon {
     content: url(/images/IcoKeySh.svg);
-}
-
-.file-ext-def-icon {
-    content: $IcoDcmnt;
 }
 
 .arw-img {

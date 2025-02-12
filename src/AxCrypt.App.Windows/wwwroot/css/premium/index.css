@@ -197,7 +197,7 @@
 }
 
 .default-icon {
-  content: url(/images/premium/mobile/IcoTextFile.svg);
+  content: url(/images/default/IcoIcld.svg);
 }
 
 .mre-actn-box {
@@ -225,46 +225,20 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.fle-exton-img .mp4, .fle-exton-img .MP4,
-.fle-exton-img .avi, .fle-exton-img .AVI,
-.fle-exton-img .mov, .fle-exton-img .MOV,
-.fle-exton-img .mkv, .fle-exton-img .MKV,
-.fle-exton-img .wmv, .fle-exton-img .WMV,
-.fle-exton-img .flv, .fle-exton-img .FLV,
-.fle-exton-img [class="3gp"], .fle-exton-img [class="3GP"] {
+.fle-exton-img .vid-type-ico {
   content: url(/images/premium/IcoVd.svg);
 }
-.fle-exton-img .txt, .fle-exton-img .TXT,
-.fle-exton-img .xml, .fle-exton-img .XML,
-.fle-exton-img .doc, .fle-exton-img .DOC,
-.fle-exton-img .docx, .fle-exton-img .DOCX,
-.fle-exton-img .pdf, .fle-exton-img .PDF,
-.fle-exton-img .xls, .fle-exton-img .XLS,
-.fle-exton-img .xlsx, .fle-exton-img .XLSX,
-.fle-exton-img .csv, .fle-exton-img .CSV,
-.fle-exton-img .js, .fle-exton-img .JS,
-.fle-exton-img .cshtml, .fle-exton-img .CSHTML,
-.fle-exton-img .cshtm, .fle-exton-img .CSHTM,
-.fle-exton-img .scss,
-.fle-exton-img .htm, .fle-exton-img .HTM,
-.fle-exton-img .razor, .fle-exton-img .RAZOR,
-.fle-exton-img .zip, .fle-exton-img .ZIP {
+.fle-exton-img .doc-type-ico {
   content: url(/images/premium/IcoDcmnt.svg);
 }
-.fle-exton-img .mp3, .fle-exton-img .MP3,
-.fle-exton-img .wav, .fle-exton-img .WAV,
-.fle-exton-img .aac, .fle-exton-img .AAC,
-.fle-exton-img .alac, .fle-exton-img .ALAC,
-.fle-exton-img .flac, .fle-exton-img .FLAC {
+.fle-exton-img .aud-type-ico {
   content: url(/images/premium/IcoMsc.svg);
 }
-.fle-exton-img .png, .fle-exton-img .PNG,
-.fle-exton-img .svg, .fle-exton-img .SVG,
-.fle-exton-img .jpg, .fle-exton-img .JPG,
-.fle-exton-img .jpeg, .fle-exton-img .JPEG,
-.fle-exton-img .gif, .fle-exton-img .GIF,
-.fle-exton-img .psd, .fle-exton-img .PSD {
+.fle-exton-img .img-type-ico {
   content: url(/images/premium/IcoPctr.svg);
+}
+.fle-exton-img .default-type-ico {
+  content: url(/images/premium/IcoDcmnt.svg);
 }
 
 .file-dec-icon {
@@ -282,10 +256,6 @@
 
 .file-keySh-icon {
   content: url(/images/IcoKeySh.svg);
-}
-
-.file-ext-def-icon {
-  content: url(/images/premium/IcoDcmnt.svg);
 }
 
 .arw-img {

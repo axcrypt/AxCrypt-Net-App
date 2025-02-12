@@ -1,4 +1,5 @@
-﻿using AxCrypt.Core;
+﻿using AxCrypt.App.Shared.Utility;
+using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Session;
@@ -131,8 +132,6 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
 
     private void SetIconClass(ActiveFile activeFile)
     {
-        string fileExtension = Path.GetExtension(activeFile.DecryptedFileInfo.Name);
-
         if (activeFile.IsShared)
         {
             IconClass = "file-keySh-icon";
@@ -156,7 +155,7 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
 
         if (IconClass == null)
         {
-            IconClass = !string.IsNullOrEmpty(fileExtension) ? fileExtension.Replace(".", "") : "file-ext-def-icon";
+            IconClass = activeFile.DecryptedFileInfo.Name.GetIcon();
         }
     }
 
