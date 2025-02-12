@@ -2,6 +2,7 @@
 @using AxCrypt.App.Desktop.Data
 @using AxCrypt.App.Desktop.ViewModels
 @using AxCrypt.App.Shared.Models
+@using AxCrypt.App.Shared.Utility
 @using AxCrypt.Content
 @using Microsoft.Maui.Devices
 
@@ -263,7 +264,7 @@
         int lastSpecialSymbolIndex = fileName.LastIndexOfAny(new[] { '.', '_', '-', '@', '#' });
         string substring = lastSpecialSymbolIndex != -1 ? fileName.Substring(lastSpecialSymbolIndex + 1) : fileName;
 
-        Icon = substring.Length >= 5 ? substring.Substring(0, 5) : substring;
+        Icon = fileName.GetIcon();
         return fileName;
     }
 }

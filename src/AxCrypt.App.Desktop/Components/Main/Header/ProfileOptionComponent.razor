@@ -39,29 +39,30 @@
     </div>
 
     <div class="manage-acc-sec font-medium">
-        <div class="key-section">
+        <div class="profile-option-container">
             <NavLink @attributes="ProfileViewModel.NavLinkAttributes()" @onclick="ProfileViewModel.ToggleKMPopup">
                 <img class="kym-sec" src="images/default/IcoKMngmnt.svg" alt="go-back-img" />
                 <span>@Texts.KeyManagementToolStripMenuItemText</span>
                 <img class="next-arrow" />
             </NavLink>
         </div>
-        <div class="key-section">
+        <div class="profile-option-container">
             <NavLink class="nav-link" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
                 <span>Password change</span>
             </NavLink>
         </div>
-        <div class="key-section">
+        <div class="profile-option-container">
             <NavLink class="nav-link" @onclick="()=> ProfileViewModel.ClearAllSettingsAndRestartAsync()">
                 <img class="" src="images/default/IcoClrSttngs.svg" alt="go-back-img" />
                 <span>@Texts.OptionsClearAllSettingsAndExitToolStripMenuItemText</span>
             </NavLink>
         </div>
-        <div class="key-section">
-            <NavLink class="nav-link next-arrow" id="subscription-details-button-action">
+        <div class="profile-option-container">
+            <NavLink class="nav-link" id="subscription-details-button-action">
                 <img class="" src="images/default/IcoSubsDetails.svg" alt="go-back-img" />
                 <span>@Texts.SubscriptionDetailsTitle</span>
+                <img class="next-arrow"/>
             </NavLink>
         </div>
         <NavLink class="nav-link" @onclick="ProfileViewModel.RedirectToMyAxCryptIDPage">

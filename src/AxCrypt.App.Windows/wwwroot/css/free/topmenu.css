@@ -8,13 +8,13 @@
   right: 2%;
   text-align: left;
   z-index: 1;
+  /*    a:hover {
+      background: $HglhtTxt;
+  }*/
 }
 .desk-acnt-popup a, .desk-stngs-popup a, .notification-popup a {
   text-decoration: none;
   color: #494949;
-}
-.desk-acnt-popup a:hover, .desk-stngs-popup a:hover, .notification-popup a:hover {
-  background: #B7B7B7;
 }
 .desk-acnt-popup img, .desk-stngs-popup img, .notification-popup img {
   height: 18px;
@@ -97,47 +97,181 @@
 .sub-pop2 {
   position: absolute;
   right: 19%;
-  top: 50%;
+  top: 44%;
 }
 
 .sub-pop2 a.active,
-.sub-pop2 a:hover,
-.key-section a.active,
-.key-section a:hover {
+.sub-pop2 a:hover {
   background-color: #D2DCCD;
   color: #86B96E !important;
   padding: 10px 25px;
   margin: 0 -20px;
 }
 
-.key-section a.active,
-.key-section a:hover {
+.settings-menu-item-container .stngs-menu-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  top: 90px;
+  left: 20px;
+}
+.settings-menu-item-container .stngs-menu-icon.IcoEye {
+  content: url(/images/default/IcoEye.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.Ico256 {
+  content: url(/images/default/Ico256.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoIncldFldrs24px {
+  content: url(/images/default/IcoIncldFldrs24px.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.Icoinactsign {
+  content: url(/images/default/IcoSlpMd.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoRstr {
+  content: url(/images/default/IcoRstr.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoAdvsSttns {
+  content: url(/images/default/IcoAdvsSttns.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoOffln {
+  content: url(/images/default/IcoOffln.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoEncrptSttgs {
+  content: url(/images/default/IcoEncrptSttgs.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoInvtFrnd {
+  content: url(/images/default/IcoInvtFrnd.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoDbg {
+  content: url(/images/default/IcoDbg.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoChckVrsn {
+  content: url(/images/default/IcoChckVrsn.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoOptns {
+  content: url(/images/default/IcoOptns.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoLgng {
+  content: url(/images/default/IcoLgng.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoUsers {
+  content: url(/images/default/IcoUsers.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoBrkFl {
+  content: url(/images/default/IcoBrkFl.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoChckVer {
+  content: url(/images/default/IcoChckVer.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoChckFl {
+  content: url(/images/default/IcoChckFl.svg);
+}
+.settings-menu-item-container .stngs-menu-icon.IcoErrRprt {
+  content: url(/images/default/IcoErrRprt.svg);
+}
+.settings-menu-item-container:hover, .settings-menu-item-container.selected {
+  background: #B7B7B7;
+  /*background-color: $colAvtr;
+  color: $TxtClr !important;*/
+  /*        padding: 10px 25px;
+  margin: 0 -20px;*/
+}
+.settings-menu-item-container:hover .IcoEye, .settings-menu-item-container.selected .IcoEye {
+  content: url(/images/free/IcoEye.svg);
+}
+.settings-menu-item-container:hover .Ico256, .settings-menu-item-container.selected .Ico256 {
+  content: url(/images/free/Ico256.svg);
+}
+.settings-menu-item-container:hover .IcoIncldFldrs24px, .settings-menu-item-container.selected .IcoIncldFldrs24px {
+  content: url(/images/free/IcoIncldFldrs24px.svg);
+}
+.settings-menu-item-container:hover .Icoinactsign, .settings-menu-item-container.selected .Icoinactsign {
+  content: url(/images/free/IcoSlpMd.svg);
+}
+.settings-menu-item-container:hover .IcoRstr, .settings-menu-item-container.selected .IcoRstr {
+  content: url(/images/free/IcoRstr.svg);
+}
+.settings-menu-item-container:hover .IcoAdvsSttns, .settings-menu-item-container.selected .IcoAdvsSttns {
+  content: url(/images/free/IcoAdvsSttns.svg);
+}
+.settings-menu-item-container:hover .IcoOffln, .settings-menu-item-container.selected .IcoOffln {
+  content: url(/images/free/IcoOffln.svg);
+}
+.settings-menu-item-container:hover .IcoEncrptSttgs, .settings-menu-item-container.selected .IcoEncrptSttgs {
+  content: url(/images/free/IcoEncrptSttgs.svg);
+}
+.settings-menu-item-container:hover .IcoInvtFrnd, .settings-menu-item-container.selected .IcoInvtFrnd {
+  content: url(/images/free/IcoInvtFrnd.svg);
+}
+.settings-menu-item-container:hover .IcoDbg, .settings-menu-item-container.selected .IcoDbg {
+  content: url(/images/free/IcoDbg.svg);
+}
+.settings-menu-item-container:hover .IcoErrRprt, .settings-menu-item-container.selected .IcoErrRprt {
+  content: url(/images/free/IcoErrRprt.svg);
+}
+.settings-menu-item-container:hover .IcoChckFl, .settings-menu-item-container.selected .IcoChckFl {
+  content: url(/images/free/IcoChckFl.svg);
+}
+.settings-menu-item-container:hover .IcoChckVer, .settings-menu-item-container.selected .IcoChckVer {
+  content: url(/images/free/IcoChckVer.svg);
+}
+.settings-menu-item-container:hover .IcoBrkFl, .settings-menu-item-container.selected .IcoBrkFl {
+  content: url(/images/free/IcoBrkFl.svg);
+}
+.settings-menu-item-container:hover .IcoUsers, .settings-menu-item-container.selected .IcoUsers {
+  content: url(/images/free/IcoUsers.svg);
+}
+.settings-menu-item-container:hover .IcoLgng, .settings-menu-item-container.selected .IcoLgng {
+  content: url(/images/free/IcoLgng.svg);
+}
+.settings-menu-item-container:hover .IcoOptns, .settings-menu-item-container.selected .IcoOptns {
+  content: url(/images/free/IcoOptns.svg);
+}
+.settings-menu-item-container:hover .IcoChckVrsn, .settings-menu-item-container.selected .IcoChckVrsn {
+  content: url(/images/free/IcoChckVrsn.svg);
+}
+.settings-menu-item-container:hover .next-arrow, .settings-menu-item-container.selected .next-arrow {
+  float: right;
+  content: url(/images/free/IcoDrpDwn.svg);
+  padding-top: 3px;
+  height: 14px;
+  margin: 5px 0px 0 20px;
+}
+
+.profile-option-container a.active,
+.profile-option-container a:hover {
   background-image: url(/images/free/IcoIndctr.svg);
   background-repeat: no-repeat;
   background-position: top left;
 }
-.key-section a.active .kym-sec,
-.key-section a:hover .kym-sec {
+.profile-option-container a.active .kym-sec,
+.profile-option-container a:hover .kym-sec {
   content: url(/images/free/IcoKMngmnt.svg);
 }
-.key-section a.active .next-arrow,
-.key-section a:hover .next-arrow {
+.profile-option-container a.active .next-arrow,
+.profile-option-container a:hover .next-arrow {
   float: right;
   content: url(/images/free/IcoDrpDwn.svg);
   padding-top: 5px;
   height: 14px;
 }
-.key-section a.active .sgn-out-img,
-.key-section a:hover .sgn-out-img {
+.profile-option-container a.active .sgn-out-img,
+.profile-option-container a:hover .sgn-out-img {
   content: url(/images/free/IcoSngOut.svg);
 }
-.key-section a.active .dbg-img,
-.key-section a:hover .dbg-img {
+.profile-option-container a.active .dbg-img,
+.profile-option-container a:hover .dbg-img {
   content: url(/images/free/IcoDbg.svg);
 }
-.key-section a.active .encrypt-file-prop-img,
-.key-section a:hover .encrypt-file-prop-img {
+.profile-option-container a.active .encrypt-file-prop-img,
+.profile-option-container a:hover .encrypt-file-prop-img {
   content: url(/images/free/BtnFltr.svg);
+}
+
+.subs-required {
+  background: url(/images/free/subs-req-sparkle.svg) no-repeat top right;
+  background-size: auto;
+  padding-right: 15px;
 }
 
 .dsbl-clr {
@@ -640,9 +774,4 @@
     font-Weight: 400;
     font-size: 12px;
   }
-}
-.subs-required {
-  background: url(/images/free/subs-req-sparkle.svg) no-repeat top right;
-  background-size: auto;
-  padding-right: 15px;
 }

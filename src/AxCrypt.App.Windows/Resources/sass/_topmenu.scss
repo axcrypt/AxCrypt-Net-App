@@ -13,10 +13,9 @@
         text-decoration: none;
         color: #494949;
     }
-
-    a:hover {
+    /*    a:hover {
         background: $HglhtTxt;
-    }
+    }*/
 
     img {
         height: 18px;
@@ -112,21 +111,189 @@
 .sub-pop2 {
     position: absolute;
     right: 19%;
-    top: 50%;
+    top: 44%;
 }
 
 .sub-pop2 a.active,
-.sub-pop2 a:hover,
-.key-section a.active,
-.key-section a:hover {
+.sub-pop2 a:hover {
     background-color: $colAvtr;
     color: $TxtClr !important;
     padding: 10px 25px;
     margin: 0 -20px;
 }
 
-.key-section a.active,
-.key-section a:hover {
+.settings-menu-item-container {
+    .stngs-menu-icon {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        top: 90px;
+        left: 20px;
+
+        &.IcoEye {
+            content: Url(/images/default/IcoEye.svg);
+        }
+
+        &.Ico256 {
+            content: Url(/images/default/Ico256.svg);
+        }
+
+        &.IcoIncldFldrs24px {
+            content: Url(/images/default/IcoIncldFldrs24px.svg);
+        }
+
+        &.Icoinactsign {
+            content: Url(/images/default/IcoSlpMd.svg);
+        }
+
+        &.IcoRstr {
+            content: Url(/images/default/IcoRstr.svg);
+        }
+
+        &.IcoAdvsSttns {
+            content: Url(/images/default/IcoAdvsSttns.svg);
+        }
+
+        &.IcoOffln {
+            content: Url(/images/default/IcoOffln.svg);
+        }
+
+        &.IcoEncrptSttgs {
+            content: Url(/images/default/IcoEncrptSttgs.svg);
+        }
+
+        &.IcoInvtFrnd {
+            content: Url(/images/default/IcoInvtFrnd.svg);
+        }
+
+        &.IcoDbg {
+            content: Url(/images/default/IcoDbg.svg);
+        }
+
+        &.IcoChckVrsn {
+            content: Url(/images/default/IcoChckVrsn.svg);
+        }
+
+        &.IcoOptns {
+            content: Url(/images/default/IcoOptns.svg);
+        }
+
+        &.IcoLgng {
+            content: Url(/images/default/IcoLgng.svg);
+        }
+
+        &.IcoUsers {
+            content: Url(/images/default/IcoUsers.svg);
+        }
+
+        &.IcoBrkFl {
+            content: Url(/images/default/IcoBrkFl.svg);
+        }
+
+        &.IcoChckVer {
+            content: Url(/images/default/IcoChckVer.svg);
+        }
+
+        &.IcoChckFl {
+            content: Url(/images/default/IcoChckFl.svg);
+        }
+
+        &.IcoErrRprt {
+            content: Url(/images/default/IcoErrRprt.svg);
+        }
+    }
+
+    &:hover, &.selected {
+        background: $HglhtTxt;
+        /*background-color: $colAvtr;
+        color: $TxtClr !important;*/
+        /*        padding: 10px 25px;
+        margin: 0 -20px;*/
+
+        .IcoEye {
+            content: $IcoEye;
+        }
+
+        .Ico256 {
+            content: $Ico256;
+        }
+
+        .IcoIncldFldrs24px {
+            content: $IcoIncldFldrs24px;
+        }
+
+        .Icoinactsign {
+            content: $IcoSlpMd;
+        }
+
+        .IcoRstr {
+            content: $IcoRstr;
+        }
+
+        .IcoAdvsSttns {
+            content: $IcoAdvsSttns;
+        }
+
+        .IcoOffln {
+            content: $IcoOffln;
+        }
+
+        .IcoEncrptSttgs {
+            content: $IcoEncrptSttgs;
+        }
+
+        .IcoInvtFrnd {
+            content: $IcoInvtFrnd;
+        }
+
+        .IcoDbg {
+            content: $IcoDbg;
+        }
+
+        .IcoErrRprt {
+            content: $IcoErrRprt;
+        }
+
+        .IcoChckFl {
+            content: $IcoChckFl;
+        }
+
+        .IcoChckVer {
+            content: $IcoChckVer;
+        }
+
+        .IcoBrkFl {
+            content: $IcoBrkFl;
+        }
+
+        .IcoUsers {
+            content: $IcoUsers;
+        }
+
+        .IcoLgng {
+            content: $IcoLgng;
+        }
+
+        .IcoOptns {
+            content: $IcoOptns;
+        }
+
+        .IcoChckVrsn {
+            content: $IcoChckVrsn;
+        }
+
+        .next-arrow {
+            float: right;
+            content: $IcoDrpDwn;
+            padding-top:3px;
+            height: 14px;
+            margin:5px 0px 0 20px;
+        }
+    }
+}
+
+.profile-option-container a.active,
+.profile-option-container a:hover {
     background-image: $IcoIndctr;
     background-repeat: no-repeat;
     background-position: top left;
@@ -153,6 +320,12 @@
     .encrypt-file-prop-img {
         content: $BtnFltrAct;
     }
+}
+
+.subs-required {
+    background: Url(/images/free/subs-req-sparkle.svg) no-repeat top right;
+    background-size: auto;
+    padding-right: 15px;
 }
 
 .dsbl-clr {
@@ -744,10 +917,4 @@
         font-Weight: 400;
         font-size: 12px;
     }
-}
-
-.subs-required {
-    background: Url(/images/free/subs-req-sparkle.svg) no-repeat top right;
-    background-size: auto;
-    padding-right: 15px;
 }
