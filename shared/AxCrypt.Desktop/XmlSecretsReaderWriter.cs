@@ -2,33 +2,32 @@
 #define CODE_ANALYSIS
 #endif
 
-#region License
+#region Coypright and License
 
 /*
- *  AxCrypt.Xecrets.Core - Xecrets Core and Reference Implementation
+ * AxCrypt AB - Copyright 2025, All Rights Reserved
  *
- *  Copyright (C) 2008 Svante Seleborg
+ * This file is part of AxCrypt.
  *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * AxCrypt is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * AxCrypt is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with AxCrypt.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  If you'd like to license this program under any other terms than the
- *  above, please contact the author and copyright holder.
- *
- *  Contact: mailto:svante@axantum.com
- */
+ * The source is maintained at https://github.com/axcrypt/axcrypt-net-app please visit for
+ * updates, contributions and contact with the author. You may also visit
+ * http://www.axcrypt.net for more information about the author.
+*/
 
-#endregion License
+#endregion Coypright and License
 
 using AxCrypt.Abstractions;
 using AxCrypt.Core.Crypto;
@@ -445,6 +444,7 @@ namespace AxCrypt.Desktop
                 return stream.ToArray();
             }
         }
+
         public SecretCollection SecretsFromXMLDoc(Api.Model.Secret.SecretsApiModel secretModel, IEnumerable<EncryptionKey> keys)
         {
             if (keys == null)
@@ -452,8 +452,8 @@ namespace AxCrypt.Desktop
                 throw new ArgumentNullException(nameof(keys));
             }
 
-            if(secretModel.SecretBody == null) 
-            { 
+            if (secretModel.SecretBody == null)
+            {
                 return new SecretCollection();
             }
 

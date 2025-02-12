@@ -2,7 +2,7 @@
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
 
-namespace AxCrypt.App.Windows.Desktop;
+namespace AxCrypt.App.Windows.Code;
 
 public class PopupService : IPopup
 {

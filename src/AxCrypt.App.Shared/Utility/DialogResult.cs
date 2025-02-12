@@ -8,5 +8,7 @@ public enum DialogResult
 
     Cancel,
 
-    Retry
+    Retry,
+
+    Abort
 }

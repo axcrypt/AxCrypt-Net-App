@@ -1,27 +1,26 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Core.Runtime;
-using AxCrypt.Core.Extensions;
-using AxCrypt.Core;
-using Microsoft.UI.Xaml;
-using System.Diagnostics;
 using AxCrypt.Abstractions.Algorithm;
 using AxCrypt.Api;
-using AxCrypt.App.Windows.Desktop;
+using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.Common;
+using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
+using AxCrypt.Core.Ipc;
+using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
-using AxCrypt.Mono.Portable;
+using AxCrypt.Desktop;
+using AxCrypt.Desktop.Cryptography;
 using AxCrypt.Mono;
+using AxCrypt.Mono.Portable;
+using Microsoft.Maui.Controls.Platform;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using System.Diagnostics;
 using System.Reflection;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Windows.Infrastructure;
-using AxCrypt.Core.Ipc;
-using Microsoft.Maui.Controls.Platform;
-using Microsoft.UI.Xaml.Controls;
-using AxCrypt.App.Desktop;
-using AxCrypt.App.Desktop.Implementation;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -112,7 +111,7 @@ namespace AxCrypt.App.Windows.WinUI
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.Title = "AxCrypt";
             alertDialog.Content = "You need .NET 4.5 or higher installed. Click OK to download.";
-            //alertDialog.PrimaryButtonClick += ((Microsoft.UI.Xaml.Controls.ContentDialog sender, Microsoft.UI.Xaml.Controls.ContentDialogButtonClickEventArgs args) => 
+            //alertDialog.PrimaryButtonClick += ((Microsoft.UI.Xaml.Controls.ContentDialog sender, Microsoft.UI.Xaml.Controls.ContentDialogButtonClickEventArgs args) =>
             //{
             //    if (!args.Cancel)
             //    {
@@ -242,6 +241,7 @@ namespace AxCrypt.App.Windows.WinUI
             finally
             {
                 AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
+                TaskScheduler.UnobservedTaskException -= Application_ThreadException;
                 //Application.ThreadException -= Application_ThreadException;
             }
         }
@@ -278,14 +278,14 @@ namespace AxCrypt.App.Windows.WinUI
             ExceptionMessageAndReport(e.ExceptionObject as Exception);
         }
 
-        //private void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
-        //{
-        //    if (e.Exception is ApplicationExitException)
-        //    {
-        //        Exit();
-        //    }
-        //    ExceptionMessageAndReport(e.Exception as Exception);
-        //}
+        private void Application_ThreadException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            if (e.Exception is ApplicationExitException)
+            {
+                Exit();
+            }
+            ExceptionMessageAndReport(e.Exception as Exception);
+        }
 
         private static void RunBackground(CommandLine commandLine)
         {
@@ -301,7 +301,7 @@ namespace AxCrypt.App.Windows.WinUI
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
             Microsoft.Windows.AppLifecycle.AppActivationArguments appActivationArguments = Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
-            if(appActivationArguments.Kind == Microsoft.Windows.AppLifecycle.ExtendedActivationKind.ToastNotification)
+            if (appActivationArguments.Kind == Microsoft.Windows.AppLifecycle.ExtendedActivationKind.ToastNotification)
             {
                 return;
             }

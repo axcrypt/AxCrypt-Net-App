@@ -1,6 +1,5 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
-using AxCrypt.App.Windows.Desktop;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Infrastructure.Dialogs;
 using AxCrypt.Common;
@@ -26,6 +25,7 @@ using AxCrypt.App.Windows.Code;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Desktop.Services;
+using AxCrypt.Desktop;
 
 namespace AxCrypt.App.Windows;
 
@@ -66,15 +66,15 @@ public partial class App : Application
     private static void InitializeServiceDependencyProvider()
     {
         IServiceProvider _service;
-        #if WINDOWS10_0_17763_0_OR_GREATER
-            _service = MauiWinUIApplication.Current.Services;
-        #elif ANDROID
+#if WINDOWS10_0_17763_0_OR_GREATER
+        _service = MauiWinUIApplication.Current.Services;
+#elif ANDROID
             _service = MauiApplication.Current.Services;
-        #elif IOS || MACCATALYST
+#elif IOS || MACCATALYST
             _service = MauiUIApplicationDelegate.Current.Services;
-        #else
+#else
             _service = null;
-        #endif
+#endif
 
         new AxCServiceProvider(_service);
     }
@@ -376,7 +376,6 @@ public partial class App : Application
         New<InactivitySignOut>().RestartInactivityTimer();
     }
 
-
     private void RestoreUserPreferences(Window currentAppWindow)
     {
         if (currentAppWindow != null)
@@ -408,7 +407,6 @@ public partial class App : Application
         //_recentFilesListView.Enabled = !hideRecentFiles;
         //_recentFilesTabPage.ToolTipText = hideRecentFiles ? Texts.HideRecentFilesListTabToolTipText : string.Empty;
     }
-
 
     private DeviceLocking _deviceLocking;
 
@@ -449,6 +447,7 @@ public partial class App : Application
         };
         New<AxCryptOnlineState>().RaiseOnlineStateChanged();
     }
+
     private async Task EncryptPendingFiles()
     {
         if (_mainViewModel != null)
@@ -458,6 +457,7 @@ public partial class App : Application
             new ApplicationManager().WaitForBackgroundToComplete();
         }
     }
+
     private async Task ShutDownAnd(Action finalAction)
     {
         await new ApplicationManager().ShutdownBackgroundSafe();
@@ -482,6 +482,7 @@ public partial class App : Application
         Resolve.CommandService.StartListening();
         New<CommandHandler>().CommandComplete += AxCryptMainForm_CommandComplete;
     }
+
     private void AxCryptMainForm_CommandComplete(object sender, CommandCompleteEventArgs e)
     {
         Resolve.UIThread.SendToAsync(async () => await DoRequestAsync(e));
@@ -731,6 +732,7 @@ public partial class App : Application
     }
 
     private static Window _window;
+
     protected override Window CreateWindow(IActivationState? activationState)
     {
         _window = base.CreateWindow(activationState);
@@ -749,7 +751,7 @@ public partial class App : Application
 
     public static void SetAppWindowTitle(string titleText)
     {
-        if(_window == null)
+        if (_window == null)
         {
             return;
         }

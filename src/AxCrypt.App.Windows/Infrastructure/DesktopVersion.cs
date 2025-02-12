@@ -1,8 +1,7 @@
 ﻿using AxCrypt.Core.Runtime;
-using System;
 using System.Reflection;
 
-namespace AxCrypt.App.Desktop.Implementation;
+namespace AxCrypt.App.Windows.Infrastructure;
 
 public class DesktopVersion : IVersion
 {

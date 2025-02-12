@@ -1,7 +1,5 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Windows.Desktop;
-using AxCrypt.App.Windows.Infrastructure.Dialogs;
-using AxCrypt.Core.Runtime;
+using AxCrypt.App.Windows.Code;
 using AxCrypt.Core.UI;
 
 namespace AxCrypt.App.Windows.Infrastructure;

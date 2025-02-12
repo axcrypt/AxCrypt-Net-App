@@ -1,5 +1,5 @@
-﻿using AxCrypt.App.Windows.Desktop;
-using AxCrypt.Core.UI;
+﻿using AxCrypt.Core.UI;
+using AxCrypt.Desktop;
 
 namespace AxCrypt.App.Windows.Infrastructure;
 
