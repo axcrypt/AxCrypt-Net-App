@@ -12,11 +12,11 @@
     <div id="modal-dialog6" class="modalDialog password-dialog">
         <div class="text-content" style="margin-bottom: 16px;">
             @((MarkupString)InitializeFeatureText())
-            <div class="button-group center-column" style="padding-top:15px;">
+            <div class="button-group center-column" style="padding-top:15px;justify-content:space-evenly;">
                 <button class="button font-medium success btn-large" @onclick="RenewSubscriptionAsync">@Texts.BusinessSubscriptionRenewMenu</button>
                 <button class="btn-large font-medium button cancel" @onclick="UpdateDoNotShowAgainOptions">@Texts.ButtonNotNow</button>
-                <label> <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@IsCheckboxDontShowThisAgain" />@Texts.DontShowAgainCheckBoxText</label>
             </div>
+            <label> <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@IsCheckboxDontShowThisAgain" />@Texts.DontShowAgainCheckBoxText</label>
         </div>
     </div>
 }

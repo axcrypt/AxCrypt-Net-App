@@ -44,7 +44,7 @@ public class VerifyPasswordViewModel
     public string? PassphraseText { get; set; }
     public bool ShowPassphrase { get; set; }
     public DialogResult DialogResult { get; set; }
-    public string VerifyInstructionText { get; set; } = Texts.ChangeOptionGenericWarning;
+    public string? VerifyInstructionText { get; set; } 
 
     public void ButtonOk_Click(EventArgs e)
     {

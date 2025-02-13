@@ -43,7 +43,7 @@ public class SupportViewModel
 
         if (string.IsNullOrEmpty(Body))
         {
-            ErrorMessage = "Fill the required(marked *) fields!";
+            ErrorMessage = "Fill the required field!";
             return;
         }
 

@@ -236,36 +236,39 @@ public class FileFolderSelection : IDataItemSelection
     {
         FileSavePicker fsp = new FileSavePicker();
         string filterPattern = "";
+        string extension = "";
 
         switch (e.FileSelectionType)
         {
             case FileSelectionType.SaveAsEncrypted:
                 fsp.SettingsIdentifier = Texts.EncryptFileSaveAsDialogTitle;
                 fsp.DefaultFileExtension = OS.Current.AxCryptExtension;
-                filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + OS.Current.AxCryptExtension, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
+                extension = OS.Current.AxCryptExtension;
+                //filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + OS.Current.AxCryptExtension, Texts.FileFilterFileTypeAxCryptFiles, Texts.FileFilterFileTypeAllFiles);
                 break;
 
             case FileSelectionType.SaveAsDecrypted:
                 fsp.SettingsIdentifier = Texts.DecryptedSaveAsFileDialogTitle;
-                string extension = Path.GetExtension(e.SelectedFiles[0]);
+                extension = Path.GetExtension(e.SelectedFiles[0]);
                 fsp.DefaultFileExtension = extension;
-                filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + extension, Texts.FileFilterFileTypeFiles, Texts.FileFilterFileTypeAllFiles);
+                //filterPattern = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + extension, Texts.FileFilterFileTypeFiles, Texts.FileFilterFileTypeAllFiles);
                 break;
         }
 
         fsp.SuggestedFileName = Path.GetFileName(e.SelectedFiles[0]);
-        fsp.SuggestedStartLocation = PickerLocationId.Unspecified;
+        fsp.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
         //Path.GetDirectoryName(e.SelectedFiles[0]);
 
-        foreach (string filPat in filterPattern.Split(' '))
-        {
-            string[] filterPaths = filPat.Split('|');
-            if (filterPaths.Length == 1)
-                fsp.FileTypeChoices.Add("", new List<string> { filterPaths[0] });
-            if (filterPaths.Length == 2)
-                fsp.FileTypeChoices.Add(filterPaths[0], new List<string> { filterPaths[1] });
-        }
+        //foreach (string filPat in filterPattern.Split('|'))
+        //{
+        //    string[] filterPaths = filPat.Split(' ');
+        //    if (filterPaths.Length > 0)
+        //        fsp.FileTypeChoices.Add("", new List<string> { filterPaths[0] });
 
+        //    if (filterPaths.Length > 1)
+        //        fsp.FileTypeChoices.Add(filterPaths[0], new List<string> { filterPaths[1] });
+        //}
+        fsp.FileTypeChoices.Add("", new List<string> { extension });
         nint hwnd = ((MauiWinUIWindow)Application.Current.Windows[0].Handler.PlatformView).WindowHandle;
         WinRT.Interop.InitializeWithWindow.Initialize(fsp, hwnd);
         StorageFile storageFile = await fsp.PickSaveFileAsync();

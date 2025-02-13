@@ -40,7 +40,6 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Portable;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
-using System.Text;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.UI.ViewModel
@@ -506,7 +505,6 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private Task AxCryptUpdateCheckAction(DateTime lastUpdateCheckUtc)
         {
-            _axCryptUpdateCheck = New<AxCryptUpdateCheck>();
             return _axCryptUpdateCheck.CheckInBackgroundAsync(lastUpdateCheckUtc, _userSettings.NewestKnownVersion, _userSettings.UpdateUrl, _userSettings.CultureName);
         }
 

@@ -1,4 +1,5 @@
-﻿using AxCrypt.Common;
+﻿using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
 using Microsoft.Maui.ApplicationModel;
@@ -73,7 +74,9 @@ public class CustomPopupService : IPopup
             case 1:
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    await Application.Current.MainPage.DisplayAlert(title, message, ConvertToString(activeButtons[0]));
+                    UpgradeVersionViewModel upgradeVersionViewModel = new UpgradeVersionViewModel();
+                    await upgradeVersionViewModel.ShowVersionDialog(activeButtons[0], title, message, doNotShowAgainOption);
+                    //await Application.Current.MainPage.DisplayAlert(title, message, ConvertToString(activeButtons[0]));
                 });
 
                 ShowPopup(activeButtons, title, message, doNotShowAgainOption);
@@ -87,7 +90,10 @@ public class CustomPopupService : IPopup
                 bool isAccepted = false;
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
+                    UpgradeVersionViewModel upgradeVersionViewModel = new UpgradeVersionViewModel();
+                    await upgradeVersionViewModel.ShowVersionDialog(activeButtons[0], title, message, doNotShowAgainOption);
+                    isAccepted = upgradeVersionViewModel.LogOnViewModel.PageResult == Shared.Utility.DialogResult.OK;
+                    //isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
                 });
 
                 if (isAccepted)

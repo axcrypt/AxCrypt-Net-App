@@ -4,10 +4,12 @@ using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
+using static AxCrypt.App.Desktop.ViewModels.UpgradeVersionViewModel;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 
@@ -25,6 +27,7 @@ public class LogOnViewModel : ViewModelBase
         VerifyPasswordDialog = new CommonDialogService();
         AboutDialog = new CommonDialogService();
         FeedbackDialog = new CommonDialogService();
+        UpgradeVersionDialog = new CommonDialogService();
     }
 
     public void ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
@@ -89,6 +92,9 @@ public class LogOnViewModel : ViewModelBase
 
     public CommonDialogService FeedbackDialog
     { get { return GetProperty<CommonDialogService>(nameof(FeedbackDialog)); } set { SetProperty(nameof(FeedbackDialog), value); } }
+    
+    public CommonDialogService UpgradeVersionDialog
+    { get { return GetProperty<CommonDialogService>(nameof(UpgradeVersionDialog)); } set { SetProperty(nameof(UpgradeVersionDialog), value); } }
 
     public ProcessIndicator ProcessIndicator { get; set; }
 
@@ -121,6 +127,10 @@ public class LogOnViewModel : ViewModelBase
     }
 
     public LogOnAccountViewModel LogOnAccountModel { get; set; }
+
+    public UpgradeVersionViewModel? UpgradeVersion { get; set; }
+
+    public PopupButtons PopupButtons { get; set; }
 
     public string ErrorMessage { get; set; }
 

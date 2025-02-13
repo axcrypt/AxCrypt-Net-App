@@ -1,6 +1,5 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Desktop.Components.Pages;
-using AxCrypt.App.Desktop.Components.PopupDialog;
 using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Desktop.ViewModels.Feedback;
@@ -50,6 +49,8 @@ public static class AppDesktopFactory
         services.AddSingleton<ImportPrivateKeyViewModel>();
         services.AddSingleton<VerifyAccountDialogViewModel>();
         services.AddSingleton<VerifyPasswordViewModel>();
+        services.AddSingleton<UpgradeVersionViewModel>();
+
         services.AddSingleton<NewSecretViewModel>();
         services.AddSingleton<ShareSecretViewModel>();
         services.AddSingleton<ManageSecretViewModel>();

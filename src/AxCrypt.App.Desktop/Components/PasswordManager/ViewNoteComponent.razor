@@ -5,6 +5,7 @@
 @using AxCrypt.Content
 @using AxCrypt.Core.UI
 @using Microsoft.Maui.Controls
+@using static AxCrypt.Abstractions.TypeResolve
 
 @inject IStatusAlertService StatusAlertService;
 @inject NavigationManager navigationManager
@@ -186,7 +187,10 @@
 
     private async Task DeleteSecret()
     {
-        bool isConfirmed = await Application.Current.MainPage.DisplayAlert("Alert!", "Are You sure want to delete this secret.", Texts.ButtonOkText, Texts.ButtonCancelText);
+        //bool isConfirmed = await Application.Current.MainPage.DisplayAlert("Alert!", "Are You sure want to delete this secret.", Texts.ButtonOkText, Texts.ButtonCancelText);
+        PopupButtons selectedButton = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, "Alert!", "Are You sure want to delete this secret.", Common.DoNotShowAgainOptions.None);
+        bool isConfirmed = selectedButton == PopupButtons.Ok;
+
         if (!isConfirmed)
         {
             return;

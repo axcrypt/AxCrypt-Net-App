@@ -319,11 +319,13 @@ namespace AxCrypt.Api
 
         public async Task<AxCryptVersion> AxCryptUpdateAsync(Version currentVersion, string cultureName, ClientPlatformKind platform)
         {
+            Uri downloadBaseUrl = new Uri("https://download.axcrypt.net/");
             string platformParameter = string.Empty;
             switch (platform)
             {
                 case ClientPlatformKind.WindowsDesktop:
-                    platformParameter = "windowsdesktop";
+                    //platformParameter = "windowsdesktop";
+                    platformParameter = "windows";
                     break;
 
                 case ClientPlatformKind.Mac:
@@ -335,14 +337,15 @@ namespace AxCrypt.Api
             }
 
             Uri resource;
-            if (Identity.IsEmpty)
-            {
-                resource = BaseUrl.PathCombine($"global/axcrypt/version/{platformParameter}?version={currentVersion?.ToString() ?? string.Empty}");
-            }
-            else
-            {
-                resource = BaseUrl.PathCombine($"users/axcrypt/version/{platformParameter}?version={currentVersion?.ToString() ?? string.Empty}&culture={cultureName}");
-            }
+            //if (Identity.IsEmpty)
+            //{
+            //resource = BaseUrl.PathCombine($"global/axcrypt/version/{platformParameter}?version={currentVersion?.ToString() ?? string.Empty}");
+            resource = downloadBaseUrl.PathCombine($"beta/{platformParameter}/version/?version={currentVersion?.ToString() ?? string.Empty}");
+            //}
+            //else
+            //{
+            //    resource = BaseUrl.PathCombine($"users/axcrypt/version/{platformParameter}?version={currentVersion?.ToString() ?? string.Empty}&culture={cultureName}");
+            //}
 
             if (New<AxCryptOnlineState>().IsOffline)
             {

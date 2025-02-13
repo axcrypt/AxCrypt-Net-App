@@ -9,7 +9,6 @@ using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.Maui.Devices;
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -66,11 +65,19 @@ public class TopMenuViewModel : ViewModelBase
         switch (_mainViewModel?.VersionUpdateStatus)
         {
             case VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck:
+            case VersionUpdateStatus.ShortTimeSinceLastSuccessfulCheck:
+            case VersionUpdateStatus.IsUpToDate:
+            case VersionUpdateStatus.Unknown:
+                _userInitiatedUpdateCheckPending = true;
                 await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
                 break;
 
             case VersionUpdateStatus.NewerVersionIsAvailable:
-                Process.Start(Resolve.UserSettings.UpdateUrl.ToString());
+                _userInitiatedUpdateCheckPending = true;
+                await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
+                break;
+
+            default:
                 break;
         }
     }

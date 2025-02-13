@@ -1,7 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
@@ -30,12 +29,8 @@ public class AppSettingsViewModel : ViewModelBase
     private MainViewModel? _mainViewModel;
     private FileOperationViewModel? _fileOperationViewModel;
     private ManageAccountViewModel? _viewModel;
-    private IExportKeyManagementFile? ExportKeyFile;
     private RecentFilesViewModel? _recentFilesViewModel;
-
-    private bool hideRecentFiles;
-    private bool isDateModifiedOn;
-    private bool isFileNameOn;
+    private bool _updateCheckTriggered = false;
 
     public AppSettingsViewModel(RecentFilesViewModel recentFilesViewModel)
     {
@@ -58,10 +53,10 @@ public class AppSettingsViewModel : ViewModelBase
         RestApiBaseUrl = Resolve.UserSettings.RestApiBaseUrl.ToString();
         TimeoutTimeSpan = Resolve.UserSettings.ApiTimeout.ToString();
 
-        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
+        _mainViewModel!.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { _userInitiatedUpdateCheckPending = true; await DisplayUpdateCheckPopups(); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
     }
 
     public AdvancedOptionsViewModel AdvancedOptionsViewModel { get; set; }
@@ -274,13 +269,41 @@ public class AppSettingsViewModel : ViewModelBase
 
     public async void CheckAxCryptVersionAsync()
     {
-        ShowVersion = true;
-        await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
+        _userInitiatedUpdateCheckPending = true;
+        await _mainViewModel!.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
+    }
+
+    public string VersionHoverText { get; set; }
+    public bool ShowUpdate { get; set; }
+
+    public async Task SetSoftwareStatus()
+    {
+        VersionUpdateStatus status = _mainViewModel.VersionUpdateStatus;
+
+        switch (status)
+        {
+            case VersionUpdateStatus.ShortTimeSinceLastSuccessfulCheck:
+            case VersionUpdateStatus.IsUpToDate:
+                ShowUpdate = false;
+                break;
+
+            case VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck:
+                VersionHoverText = Texts.OldVersionTooltip;
+                break;
+
+            case VersionUpdateStatus.NewerVersionIsAvailable:
+                VersionHoverText = Texts.NewVersionIsAvailableText.InvariantFormat(_mainViewModel.DownloadVersion.Version) + ' ' + Texts.ClickToDownloadText;
+                break;
+
+            case VersionUpdateStatus.Unknown:
+                VersionHoverText = Texts.ClickToCheckForNewerVersionTooltip;
+                break;
+        }
     }
 
     private async Task DisplayUpdateCheckPopups()
     {
-        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel.DownloadVersion);
+        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel!.DownloadVersion);
         _userInitiatedUpdateCheckPending = false;
     }
 

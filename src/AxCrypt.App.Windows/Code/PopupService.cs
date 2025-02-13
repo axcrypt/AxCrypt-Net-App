@@ -1,4 +1,6 @@
-﻿using AxCrypt.Common;
+﻿using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.App.Shared.Services;
+using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
 
@@ -6,6 +8,8 @@ namespace AxCrypt.App.Windows.Code;
 
 public class PopupService : IPopup
 {
+    private UpgradeVersionViewModel? _upgradeVersionViewModel;
+
     private static readonly PopupButtons[] possibleButtons = new PopupButtons[]
     {
         PopupButtons.Ok,
@@ -21,13 +25,16 @@ public class PopupService : IPopup
     public async Task<PopupButtons> ShowAsync(PopupButtons buttons, string title, string message, DoNotShowAgainOptions doNotShowAgainOption, string doNotShowAgainCustomText)
     {
         PopupButtons[] activeButtons = possibleButtons.Where(b => buttons.HasFlag(b)).ToArray();
+        bool isAccepted = false;
+        _upgradeVersionViewModel = AxCServiceProvider.GetService<UpgradeVersionViewModel>();
 
         switch (activeButtons.Length)
         {
             case 1:
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    await Application.Current.MainPage.DisplayAlert(title, message, ConvertToString(activeButtons[0]));
+                    await _upgradeVersionViewModel.ShowVersionDialog(activeButtons[0], title, message, doNotShowAgainOption);
+                    //await Application.Current.MainPage.DisplayAlert(title, message, ConvertToString(activeButtons[0]));
                 });
                 return activeButtons[0];
 
@@ -36,10 +43,12 @@ public class PopupService : IPopup
                 string leftButton = ConvertToString(actions.AcceptAction);
                 string rightButton = ConvertToString(actions.CancelAction);
 
-                bool isAccepted = false;
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
+                    await _upgradeVersionViewModel.ShowVersionDialog(activeButtons[0], title, message, doNotShowAgainOption);
+                    isAccepted = _upgradeVersionViewModel.LogOnViewModel!.PageResult == Shared.Utility.DialogResult.OK;
+
+                    //isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
                 });
 
                 if (isAccepted)
@@ -68,23 +77,29 @@ public class PopupService : IPopup
 
     public async Task<string> ShowAsync(string[] buttons, string title, string message, DoNotShowAgainOptions dontShowAgain)
     {
+        bool isAccepted = false;
         switch (buttons.Length)
         {
             case 1:
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    await Application.Current.MainPage.DisplayAlert(title, message, buttons[0]);
+                    //await Application.Current.MainPage.DisplayAlert(title, message, buttons[0]);
+                    _upgradeVersionViewModel = new UpgradeVersionViewModel();
+                    await _upgradeVersionViewModel.ShowVersionDialog(possibleButtons[0], title, message, dontShowAgain);
+                    isAccepted = _upgradeVersionViewModel.LogOnViewModel!.PageResult == Shared.Utility.DialogResult.OK;
                 });
                 return buttons[0];
 
             case 2:
                 string leftButton = buttons[0];
                 string rightButton = buttons[1];
-                bool isAccepted = false;
 
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
+                    //isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
+                    _upgradeVersionViewModel = new UpgradeVersionViewModel();
+                    await _upgradeVersionViewModel.ShowVersionDialog(possibleButtons[0], title, message, dontShowAgain);
+                    isAccepted = _upgradeVersionViewModel.LogOnViewModel!.PageResult == Shared.Utility.DialogResult.OK;
                 });
 
                 if (isAccepted)

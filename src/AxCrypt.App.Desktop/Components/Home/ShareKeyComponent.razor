@@ -27,7 +27,7 @@
                             <p class="bus-info">
                                 Add users or Groups with whom you want to share this secret. If you
                                 don`t know about our <b>Group Feature</b> yet, learn more and create your
-                                first one by the link <a style="color:#FFC50D" @onclick="ShareKeyViewModel.GoToCreateGroupLink">Create a Group!</a>
+                                first one by the link <a style="color:#FFC50D;text-decoration:underline;" @onclick="ShareKeyViewModel.GoToCreateGroupLink">Create a Group!</a>
                             </p>
                         }
                         else
@@ -253,16 +253,13 @@
 
     private string GetIconForFile(string file)
     {
-        string fileName = File.Exists(file) ? Path.GetFileNameWithoutExtension(file) : Directory.Exists(file) ? new DirectoryInfo(file).Name : string.Empty;
+        string fileName = File.Exists(file) ? Path.GetFileName(file) : Directory.Exists(file) ? new DirectoryInfo(file).FullName : string.Empty;
 
         if (string.IsNullOrEmpty(fileName))
         {
             Icon = string.Empty;
             return string.Empty;
         }
-
-        int lastSpecialSymbolIndex = fileName.LastIndexOfAny(new[] { '.', '_', '-', '@', '#' });
-        string substring = lastSpecialSymbolIndex != -1 ? fileName.Substring(lastSpecialSymbolIndex + 1) : fileName;
 
         Icon = fileName.GetIcon();
         return fileName;

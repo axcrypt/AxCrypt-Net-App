@@ -1,0 +1,70 @@
+﻿@using AxCrypt.App.Desktop.ViewModels
+@using AxCrypt.Common
+@using AxCrypt.Content
+@using AxCrypt.Core.UI
+
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject UpgradeVersionViewModel versionViewModel
+
+@if (IsVisible)
+{
+    <div id="modal-dialog1" class="modalDialog">
+        <div class="invite-popup">
+            <div class="modal-header">
+                <label for="title" class="modal-title">@versionViewModel.LogOnViewModel!.UpgradeVersion!.Title</label>
+            </div>
+            <div class="modal-body">
+                <div class="label-text-1">
+                    <label style="">@versionViewModel.LogOnViewModel.UpgradeVersion.MessageText</label>
+                </div>
+                <div class="modal-footer">
+                    <button class="button font-medium success btn-small" @onclick="versionViewModel.Button_OkClicked">@Texts.ButtonOkText</button>
+                    @if (versionViewModel.LogOnViewModel.UpgradeVersion.DontShowAgainOptions != DoNotShowAgainOptions.MasterKeyWarning)
+                    {
+                        <button class="btn-small font-medium button cancel" @onclick="versionViewModel.Button_CancelClicked">@Texts.ButtonCancelText</button>
+                    }
+                </div>
+                @if (versionViewModel.LogOnViewModel.UpgradeVersion.DontShowAgainOptions != DoNotShowAgainOptions.None)
+                {
+                    <div>
+                        <label> <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@versionViewModel.IsCheckboxDontShowThisAgain" />@Texts.DontShowAgainCheckBoxText</label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .label-text-1 {
+        font-size: 14px;
+        white-space: pre-wrap;
+        text-align: left;
+        max-height: 350px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
+</style>
+@code {
+    private bool IsVisible;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        versionViewModel.LogOnViewModel!.UpgradeVersionDialog.OnDialogVisibilityChanged += UpdateUpgradeVersionDialogState;
+    }
+
+    private void ToggleCheckbox(ChangeEventArgs e)
+    {
+        versionViewModel.IsCheckboxDontShowThisAgain = (bool)e.Value!;
+    }
+
+    void UpdateUpgradeVersionDialogState(bool isVisible)
+    {
+        InvokeAsync(() =>
+        {
+            IsVisible = isVisible;
+            StateHasChanged();
+        });
+    }
+}
