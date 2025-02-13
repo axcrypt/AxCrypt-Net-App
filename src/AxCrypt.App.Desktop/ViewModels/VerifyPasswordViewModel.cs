@@ -1,13 +1,13 @@
 ﻿using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-
+using System;
+using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Windows.ViewModels;
+namespace AxCrypt.App.Desktop.ViewModels;
 
 public class VerifyPasswordViewModel
 {

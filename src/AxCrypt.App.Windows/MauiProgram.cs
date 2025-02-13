@@ -9,6 +9,7 @@ using AxCrypt.App.Windows.Infrastructure.Dialogs;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.App.Windows.Services.Interface;
 using AxCrypt.App.Windows.ViewModels;
+using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;

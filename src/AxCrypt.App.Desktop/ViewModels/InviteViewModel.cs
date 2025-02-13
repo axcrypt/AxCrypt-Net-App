@@ -1,12 +1,17 @@
-﻿using AxCrypt.Core.Extensions;
-using AxCrypt.Api.Model;
-using AxCrypt.Core.UI;
-using AxCrypt.Core.Crypto.Asymmetric;
-using AxCrypt.Content;
-using static AxCrypt.Abstractions.TypeResolve;
+﻿using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.Content;
+using AxCrypt.Core.Crypto.Asymmetric;
+using AxCrypt.Core.Extensions;
+using AxCrypt.Core.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Windows.ViewModels;
+namespace AxCrypt.App.Desktop.ViewModels;
 
 public class InviteViewModel
 {
@@ -64,6 +69,7 @@ public class InviteViewModel
         }
         return true;
     }
+
     private async Task<IEnumerable<UserPublicKey>> EnsureUserAccountStatusAndGetInvitedUserPublicKey()
     {
         EmailAddress invitedEmail = EmailAddress.Parse(InvitedUser);
@@ -112,4 +118,3 @@ public class InviteViewModel
         InviteUserDisabled = false;
     }
 }
-

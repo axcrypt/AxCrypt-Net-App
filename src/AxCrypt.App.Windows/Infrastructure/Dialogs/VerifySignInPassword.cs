@@ -1,5 +1,5 @@
 ﻿using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Windows.ViewModels;
+using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.Core.UI;
 
 namespace AxCrypt.App.Windows.Infrastructure.Dialogs;

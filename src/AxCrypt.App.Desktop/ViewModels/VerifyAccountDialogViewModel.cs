@@ -1,15 +1,15 @@
 ﻿using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Content;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
+using System;
 using System.Diagnostics;
-
+using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Windows.ViewModels;
+namespace AxCrypt.App.Desktop.ViewModels;
 
 public class VerifyAccountDialogViewModel
 {
@@ -18,7 +18,7 @@ public class VerifyAccountDialogViewModel
 
     public VerifyAccountDialogViewModel()
     {
-        _logOnViewModel = AxCServiceProvider.LogOnViewModel!; 
+        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
     }
 
     public void SetVerifyAccount(VerifyAccountViewModel viewModel)
