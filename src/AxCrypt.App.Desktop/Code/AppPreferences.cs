@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace AxCrypt.App.Desktop.Code
 {
-    internal static class AppPreferences
+    public static class AppPreferences
     {
         public const int MinimumWindowWidth = 1156;
         public const int MinimumWindowHeight = 770;

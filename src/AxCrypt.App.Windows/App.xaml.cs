@@ -26,6 +26,7 @@ using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Desktop.Services;
 using AxCrypt.Desktop;
+using AxCrypt.App.Desktop.Code;
 
 namespace AxCrypt.App.Windows;
 
