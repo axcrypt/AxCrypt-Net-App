@@ -386,12 +386,12 @@ public partial class App : Application
             double width = currentAppWindow.Width == double.NaN ? 0 : currentAppWindow.Width;
             currentAppWindow.Width = AppPreferences.MainWindowWidth.Fallback(width);
 
-            PointInt32 currentLocation = new PointInt32(0, 0);
+            System.Drawing.Point currentLocation = new System.Drawing.Point(0, 0);
             if (!double.IsNaN(currentAppWindow.X))
             {
-                currentLocation = new PointInt32((int)currentAppWindow.X, (int)currentAppWindow.Y);
+                currentLocation = new System.Drawing.Point((int)currentAppWindow.X, (int)currentAppWindow.Y);
             }
-            PointInt32 location = AppPreferences.MainWindowLocation == default(PointInt32) ? currentLocation : AppPreferences.MainWindowLocation;
+            System.Drawing.Point location = AppPreferences.MainWindowLocation == default(System.Drawing.Point) ? currentLocation : AppPreferences.MainWindowLocation;
             currentAppWindow.X = location.X;
             currentAppWindow.Y = location.Y;
         }
