@@ -75,10 +75,6 @@
       <MauiXaml Remove="Components\Pages\Home\**" />
       <None Remove="Components\Pages\Home\**" />
     </ItemGroup>
-	
-    <ItemGroup>
-      <Compile Remove="ViewModels\ProfileViewModel.cs" />
-    </ItemGroup>
 
    <ItemGroup>
    	<ProjectReference Include="..\..\shared\AxCrypt.Abstractions\AxCrypt.Abstractions.csproj" />
@@ -110,8 +106,6 @@
 
     <ItemGroup>
       <Content Update="Components\Pages\Shared\AlertComponent.razor" />
-      <Content Update="Components\Pages\Shared\ShareKey.razor" />
-      <Content Update="Components\Pages\Feedback.razor" />
       <Content Update="Components\Pages\Notification.razor" />
     </ItemGroup>
 

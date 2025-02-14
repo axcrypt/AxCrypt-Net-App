@@ -1,6 +1,11 @@
 ﻿using AxCrypt.App.Shared.Services.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AxCrypt.App.Windows.Services;
+namespace AxCrypt.App.Desktop.Services;
 
 public class CssService : ICssService
 {

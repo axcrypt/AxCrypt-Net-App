@@ -1,19 +1,22 @@
-﻿using AxCrypt.Api.Model;
+﻿using AxCrypt.Abstractions;
+using AxCrypt.Api.Model;
+using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Desktop.Services.Interface;
+using AxCrypt.App.Shared.Utility.View;
+using AxCrypt.Core;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
-using AxCrypt.Core;
-using System.Collections.ObjectModel;
 using Microsoft.AspNetCore.Components.Web;
-using AxCrypt.Abstractions;
-
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Desktop.ViewModels;
-using AxCrypt.App.Shared.Utility.View;
-using AxCrypt.App.Windows.Services.Interface;
 
-namespace AxCrypt.App.Windows.ViewModels;
+namespace AxCrypt.App.Desktop.ViewModels;
 
 public class RecentFoldersViewModel : ViewModelBase
 {
@@ -135,7 +138,6 @@ public class RecentFoldersViewModel : ViewModelBase
             case SecuredFolderContextMenu.RemoveFromListButKeepSecured:
                 RemoveWatchedFolders();
                 break;
-
         }
     }
 
@@ -147,7 +149,7 @@ public class RecentFoldersViewModel : ViewModelBase
 
     private async void WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
     {
-        IFolderPicker folderPicker = new Services.FolderPickerWindows();
+        IFolderPicker folderPicker = AxCServiceProvider.Current.GetService<IFolderPicker>();
         string folder = await folderPicker.PickFolderAsync();
         if (string.IsNullOrEmpty(folder)) return;
 

@@ -1,0 +1,142 @@
+﻿@using AxCrypt.Api.Model
+@using AxCrypt.App.Desktop.Data
+@using AxCrypt.App.Desktop.ViewModels
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+
+@inject SupportViewModel SupportViewModel
+@inject LogOnViewModel LogOnModel
+
+@inject IJSRuntime _jsRuntime
+@inject NavigationManager _navigationManager
+
+<div class="mb-sec">
+    <NavLink class="mb-title flex-start" href="mainpagemobile" style="align-items: center;">
+        <img class="back-btn" src="" alt="go-back-img" />
+        <span class="goback-text">@Texts.PromptSupport</span>
+    </NavLink>
+</div>
+
+<div id="content-index" class="medium-12 columns support">
+    <div class="">
+        <h1 class="page-title">
+            @LogOnModel.SupportPageTitle
+        </h1>
+        <p class="hide-txt">@(PageDescription)</p>
+    </div>
+
+    @if (LogOnModel.SubscriptionLevel != SubscriptionLevel.Free)
+    {
+        <div id="support-body-section">
+            <div class="label-text">
+                <label>@Texts.SupportBodyPrompt</label>
+            </div>
+            <div style="display:flex; padding:8px 0px;">
+                <a style="text-decoration:none;" href="https://axcrypt.net/information/guides/get-started/">
+                    <div class="link-box">
+                        <img class="idea-img" src="" alt="idea-img" />
+                        <div style="padding: 5px 0px; line-height: 16px;">
+                            <span class="lable-txt">@Texts.SupportGetStartedVideoText</span><br />
+                            <span class="link-txt">@Texts.GuidesGetStartedLinkLabelWithPlatform</span>
+                            <img class="arrow-img" src="" alt="arrow-img" />
+                        </div>
+                    </div>
+                </a>
+                <a style="text-decoration:none;" href="https://axcrypt.net/helpcenter/">
+                    <div class="link-box" style="margin-left: 35px;">
+                        <img class="guides-img" src="" alt="guides-img" />
+                        <div style="padding: 5px 0px; line-height: 16px;">
+                            <span class="lable-txt">Let's explore our</span><br />
+                            <span class="link-txt">@Texts.GuidesLinkLabel</span>
+                            <img class="arrow-img" src="" alt="arrow-img" />
+                        </div>
+                    </div>
+                </a>
+                <a style="text-decoration:none;" href="https://axcrypt.net/information/faq/">
+                    <div class="link-box" style="margin-left: 35px;">
+                        <img class="faq-img" src="" alt="faq-img" />
+                        <div style="padding: 5px 0px; line-height: 16px;">
+                            <span class="lable-txt">@Texts.SupportFAQText</span><br />
+                            <span class="link-txt">@((MarkupString)Texts.SupportFAQPageText)</span>
+                            <img class="arrow-img" src="" alt="arrow-img" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div style="padding-top:30px;">
+                <span class="desc-txt">@Texts.SupportDescribeLabel</span>
+            </div>
+            <div>
+                <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Model.Body" tabindex=1>
+                                </textarea>
+            </div>
+            <div class="btn-sec">
+                <input type="reset" class="button border btn-large font-medium btn-hide" value="@Texts.ButtonCancelText" />
+                <input type="submit" class="button success btn-large font-medium" value="@Texts.ButtonSendText" @onclick="SubmitSupportAsync" />
+            </div>
+        </div>
+    }
+    else
+    {
+        <div id="support-body-section">
+            <div class="label-text free-sec" style="text-align:left;">
+                <label>Sorry,</label>
+                <p class="SupWarngText" style="text-align:left;">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
+                <img class="support-image" src="" alt="support-img" />
+            </div>
+        </div>
+    }
+
+</div>
+
+@code {
+    private bool IsWideScreen { get; set; }
+    private bool IsLoading { get; set; }
+
+    private string PageDescription
+    {
+        get
+        {
+            switch (LogOnModel.SubscriptionLevel)
+            {
+                case SubscriptionLevel.Business:
+                    return Texts.BusinessSupportInfo;
+                case SubscriptionLevel.Premium:
+                    return Texts.PremiumSupportInfo;
+                case SubscriptionLevel.PasswordManager:
+                    return Texts.SupportPremiumIntro;
+                default:
+                    return string.Empty;
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    public async Task InitializeScreenPropertiesAsync()
+    {
+        IsLoading = true;
+        try
+        {
+            IsWideScreen = await Utility.IsWideScreenAsync(_jsRuntime);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error determining screen width: {ex.Message}");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private async void SubmitSupportAsync()
+    {
+        await SupportViewModel.SubmitSupportAsync(LogOnModel.SubscriptionLevel);
+
+        await InvokeAsync(() => StateHasChanged());
+    }
+}

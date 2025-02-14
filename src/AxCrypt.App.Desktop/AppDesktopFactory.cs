@@ -1,4 +1,6 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Desktop.Components.Pages;
+using AxCrypt.App.Desktop.Components.PopupDialog;
 using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Desktop.ViewModels.Feedback;
@@ -42,6 +44,10 @@ public static class AppDesktopFactory
         services.AddSingleton<UserNotificationService>();
         services.AddSingleton<NotificationViewModel>();
         services.AddSingleton<SecretsListViewModel>();
+
+        services.AddSingleton<RecentFoldersComponent>();
+        services.AddSingleton<Feedback>();
+        services.AddSingleton<About>();
 
         TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
         //services.AddSingleton<AppSettingsComponent>();

@@ -1,6 +1,6 @@
 ﻿@using AxCrypt.App.Desktop.ViewModels
 @using static AxCrypt.Abstractions.TypeResolve
-
+@using AxCrypt.Abstractions;
 @inject LogOnViewModel LogOnModel
 
 @if (IsVisible)
@@ -36,7 +36,7 @@
 
     private void UpgradeSubscription()
     {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/"));
+        New<IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/"));
         ClosePopup();
     }
 
