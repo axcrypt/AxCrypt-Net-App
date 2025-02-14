@@ -7,10 +7,12 @@ using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Utility;
+using System.Threading.Tasks;
+using System;
 
-namespace AxCrypt.App.Windows.Code;
+namespace AxCrypt.App.Desktop.Code;
 
-internal class SignUpSignIn
+public class SignUpSignIn
 {
     public string UserEmail { get; set; }
 
