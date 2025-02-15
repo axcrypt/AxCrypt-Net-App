@@ -237,14 +237,16 @@ namespace AxCrypt.Core.Session
             {
                 if (_protectedName == null)
                 {
-                    _protectedName = New<IProtectedData>().Protect(Encoding.UTF8.GetBytes(Resolve.Portable.Path().GetFileName(DecryptedFileInfo.FullName)), null);
+                    byte[] key = Encoding.UTF8.GetBytes(Identity.Passphrase.Text);
+                    _protectedName = New<TransientProtectedData>().Protect(Resolve.Portable.Path().GetFileName(DecryptedFileInfo.FullName), key);
                 }
                 return _protectedName;
             }
             set
             {
-                byte[] bytes = New<IProtectedData>().Unprotect(value, null);
-                _decryptedName = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+                byte[] key = Encoding.UTF8.GetBytes(Identity.Passphrase.Text);
+                New<TransientProtectedData>().TryUnprotect(value, key, out _decryptedName);
+                //_decryptedName = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
                 _protectedName = (byte[])value.Clone();
             }
         }

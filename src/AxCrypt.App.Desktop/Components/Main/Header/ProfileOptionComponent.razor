@@ -62,7 +62,7 @@
             <NavLink class="nav-link" id="subscription-details-button-action">
                 <img class="" src="images/default/IcoSubsDetails.svg" alt="go-back-img" />
                 <span>@Texts.SubscriptionDetailsTitle</span>
-                <img class="next-arrow"/>
+                <img class="next-arrow" />
             </NavLink>
         </div>
         <NavLink class="nav-link" @onclick="ProfileViewModel.RedirectToMyAxCryptIDPage">
@@ -104,10 +104,10 @@
             <span class="txt-clr">@Texts.PromptSubscription:</span>
             <span class="font-bold">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
             @*             @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
-            {
-            <span class="txt-clr">Company:</span>
-            <span class="font-bold">AxCrypt</span> <br />
-            } *@
+                {
+                <span class="txt-clr">Company:</span>
+                <span class="font-bold">AxCrypt</span> <br />
+                } *@
 
             @if (ProfileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
             {

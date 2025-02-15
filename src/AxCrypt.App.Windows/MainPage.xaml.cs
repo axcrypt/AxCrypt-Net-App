@@ -1,10 +1,11 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
+using AxCrypt.App.Desktop;
+using AxCrypt.App.Desktop.Code;
 using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Desktop.Code;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.Common;
 using AxCrypt.Core;
@@ -14,8 +15,6 @@ using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System.Globalization;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Desktop;
-using AxCrypt.App.Desktop.Helpers;
 
 namespace AxCrypt.App.Windows;
 
@@ -30,7 +29,7 @@ public partial class MainPage : ContentPage, ISignIn
     private KnownFoldersViewModel _knownFoldersViewModel;
 
     private ApiVersion _apiVersion;
-    private AppMain _appMain;
+
     public MainPage()
     {
         InitializeComponent();
@@ -44,7 +43,7 @@ public partial class MainPage : ContentPage, ISignIn
         _fileOperationViewModel = fileOperationViewModel;
         _knownFoldersViewModel = knownFoldersViewModel;
         _registerViewModel = registerViewModel;
-        _appMain = new AppMain(logOnService, mainViewModel, fileOperationViewModel, knownFoldersViewModel, registerViewModel);
+        new AppMain().Initialize(logOnService, mainViewModel, fileOperationViewModel, knownFoldersViewModel, registerViewModel);
     }
 
     protected override void OnAppearing()
@@ -53,7 +52,6 @@ public partial class MainPage : ContentPage, ISignIn
 
         base.OnAppearing();
     }
-
 
     protected override void ChangeVisualState()
     {
@@ -128,7 +126,6 @@ public partial class MainPage : ContentPage, ISignIn
         //_recentFilesListView.DragDrop += async (sender, e) => { await DropFilesOrFoldersInRecentFilesListViewAsync(); };
         //_secretsToolStripButton.Click += async (sender, e) => { await PremiumFeature_ClickAsync(LicenseCapability.PasswordManagement, (ss, ee) => { BrowseUtility.RedirectToSecretsUrl(Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address); return Task.FromResult<object>(null); }, sender, e); };
     }
-
 
     private async Task LogOnOrLogOffAndLogOnAgainAsync()
     {
@@ -216,7 +213,6 @@ public partial class MainPage : ContentPage, ISignIn
             Console.WriteLine(ex.Message);
         }
     }
-
 
     private bool _userInitiatedUpdateCheckPending = false;
 
@@ -356,5 +352,4 @@ public partial class MainPage : ContentPage, ISignIn
     {
         New<InactivitySignOut>().RestartInactivityTimer();
     }
-
 }

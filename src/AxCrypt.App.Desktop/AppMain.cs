@@ -1,6 +1,4 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
@@ -22,6 +20,7 @@ public class AppMain
 {
     //private ICustomNavigationService _navigationManager;
     private LogOnViewModel _logOnService;
+
     private RegisterViewModel _registerViewModel;
 
     private MainViewModel _mainViewModel;
@@ -29,8 +28,11 @@ public class AppMain
     private KnownFoldersViewModel _knownFoldersViewModel;
 
     //private ApiVersion? _apiVersion;
+    public AppMain()
+    {
+    }
 
-    public AppMain(LogOnViewModel logOnService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel)
+    public void Initialize(LogOnViewModel logOnService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel)
     {
         _logOnService = logOnService;
         _mainViewModel = mainViewModel;
@@ -48,15 +50,13 @@ public class AppMain
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => await _knownFoldersViewModel.UpdateState.ExecuteAsync(null));
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await new Display().LocalSignInWarningPopUpAsync(loggedOn); });
-        
     }
 
     private void BindToFileOperationViewModel()
     {
         _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
         _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
-        _fileOperationViewModel.SelectingFiles += (sender, e) => New<IUIThread>().SendTo(async () => { bool fileSelected = await New<IDataItemSelection>().HandleSelection(e); });
-
+        _fileOperationViewModel.SelectingFilesAsync += async (sender, e) => await New<IUIThread>().SendToAsync(() => New<IDataItemSelection>().HandleSelection(e));
         _fileOperationViewModel.ToggleEncryptionUpgradeMode += async (sender, e) => await ToggleEncryptionUpgradeMode();
     }
 
@@ -191,7 +191,6 @@ public class AppMain
 
         if (filePasswordDialog.DialogResult != DialogResult.OK || filePasswordDialog.ViewModel!.Passphrase == Passphrase.Empty)
         {
-
             e.Cancel = true;
             return;
         }
@@ -204,7 +203,7 @@ public class AppMain
         if (!_logOnService.IsVisible)
         {
             LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
-            _logOnService.ShowLogOnDialog(logOnModel, _mainViewModel);
+            await _logOnService.ShowLogOnDialog(logOnModel, _mainViewModel);
         }
 
         if (_logOnService.PageResult == DialogResult.None)

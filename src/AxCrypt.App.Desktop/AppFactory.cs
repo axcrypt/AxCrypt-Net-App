@@ -16,6 +16,7 @@ using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Desktop;
 using AxCrypt.Mono;
+using AxCrypt.Mono.Cryptography;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ public class AppFactory
     public static void RegisterTypeFactories()
     {
         TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
+        TypeMap.Register.Singleton<TransientProtectedData>(() => new TransientProtectedData());
 
         TypeMap.Register.New<SessionNotificationHandler>(() => new SessionNotificationHandler(Resolve.FileSystemState, Resolve.KnownIdentities, New<ActiveFileAction>(), New<AxCryptFile>(), New<IStatusChecker>()));
         TypeMap.Register.New<IdentityViewModel>(() => new IdentityViewModel(Resolve.FileSystemState, Resolve.KnownIdentities, Resolve.UserSettings, Resolve.SessionNotify));

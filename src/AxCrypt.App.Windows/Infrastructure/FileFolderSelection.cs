@@ -1,15 +1,12 @@
 ﻿using AxCrypt.Content;
+using AxCrypt.Core;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
-using AxCrypt.Core;
-using AxCrypt.Abstractions;
-using AxCrypt.Core.Extensions;
-using Windows.Storage.Pickers;
 using Windows.Storage;
-
+using Windows.Storage.Pickers;
 using static AxCrypt.Abstractions.TypeResolve;
-using PInvoke;
 
 namespace AxCrypt.App.Windows.Infrastructure;
 
@@ -23,30 +20,26 @@ public class FileFolderSelection : IDataItemSelection
     //}
     public FileFolderSelection()
     {
-
     }
 
-    public async Task<bool> HandleSelection(FileSelectionEventArgs e)
+    public async Task HandleSelection(FileSelectionEventArgs e)
     {
         if (e == null)
         {
             throw new ArgumentNullException(nameof(e));
         }
-        bool result = false;
         try
         {
             New<IMainUI>().DisableUI();
-            result = await HandleSelectionInternal(e);
+            await HandleSelectionInternal(e);
         }
         finally
         {
             New<IMainUI>().RestoreUI();
         }
-
-        return result;
     }
 
-    private async Task<bool> HandleSelectionInternal(FileSelectionEventArgs e)
+    private async Task HandleSelectionInternal(FileSelectionEventArgs e)
     {
         switch (e.FileSelectionType)
         {
@@ -60,16 +53,18 @@ public class FileFolderSelection : IDataItemSelection
                 break;
 
             case FileSelectionType.Folder:
-                return await HandleFolderSelection(e);
+                await HandleFolderSelection(e);
+                break;
 
             default:
-                return await HandleOpenFileSelection(e);
+                await HandleOpenFileSelection(e);
+                break;
         }
 
-        return false;
+        return;
     }
 
-    private async Task<bool> HandleFolderSelection(FileSelectionEventArgs e)
+    private async Task HandleFolderSelection(FileSelectionEventArgs e)
     {
         FolderPicker fldpik = new FolderPicker();
         fldpik.SettingsIdentifier = Texts.UpgradeLegacyFilesMenuToolTip;
@@ -88,11 +83,11 @@ public class FileFolderSelection : IDataItemSelection
         if (folders == null || string.IsNullOrEmpty(folders.Path))
         {
             e.Cancel = true;
-            return true;
+            return;
         }
 
         e.SelectedFiles.Add(folders?.Path);
-        return true;
+        return;
     }
 
     private static void HandleWipeConfirm(FileSelectionEventArgs e)
@@ -108,7 +103,7 @@ public class FileFolderSelection : IDataItemSelection
         //}
     }
 
-    private static async Task<bool> HandleOpenFileSelection(FileSelectionEventArgs e)
+    private static async Task HandleOpenFileSelection(FileSelectionEventArgs e)
     {
         if (e.SelectedFiles != null && e.SelectedFiles.Count > 0 && !String.IsNullOrEmpty(e.SelectedFiles[0]))
         {
@@ -118,7 +113,6 @@ public class FileFolderSelection : IDataItemSelection
                 //ofd.InitialDirectory = initialFolder.FullName;
             }
         }
-
 
         PickOptions pickOptions = new PickOptions();
         string defaultExt = New<IRuntimeEnvironment>().AxCryptExtension;
@@ -215,13 +209,13 @@ public class FileFolderSelection : IDataItemSelection
             if (ofd == null || !ofd.Any())
             {
                 e.Cancel = true;
-                return true;
+                return;
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
-            return false;
+            return;
         }
 
         foreach (string fileName in ofd.Select(file => file.FullPath))
@@ -229,7 +223,7 @@ public class FileFolderSelection : IDataItemSelection
             e.SelectedFiles?.Add(fileName);
         }
 
-        return true;
+        return;
     }
 
     private static async void HandleSaveAsFileSelection(FileSelectionEventArgs e)

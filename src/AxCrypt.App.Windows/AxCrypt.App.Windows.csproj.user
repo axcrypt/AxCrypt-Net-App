@@ -15,11 +15,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Infrastructure\ProgressBackgroundWorker.cs">
-      <SubType>Component</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <MauiXaml Update="LogViewerWindow.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

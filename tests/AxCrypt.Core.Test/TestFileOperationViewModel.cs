@@ -37,12 +37,7 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Fake;
 using Moq;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 #pragma warning disable 3016 // Attribute-arguments as arrays are not CLS compliant. Ignore this here, it's how NUnit works.
@@ -115,7 +110,7 @@ namespace AxCrypt.Core.Test
             {
                 throw new InvalidOperationException("Log on should not be called in this scenario.");
             };
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Add(@"C:\Folder\File1.axx");
                 e.SelectedFiles.Add(@"C:\Folder\File2.axx");
@@ -129,7 +124,7 @@ namespace AxCrypt.Core.Test
         public async Task TestDecryptFilesWithCancel()
         {
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.Cancel = true;
             };
@@ -148,7 +143,7 @@ namespace AxCrypt.Core.Test
             {
                 throw new InvalidOperationException("Log on should not be called in this scenario.");
             };
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Add(@"C:\Folder\File1.axx");
                 e.SelectedFiles.Add(@"C:\Folder\File2.axx");
@@ -171,7 +166,7 @@ namespace AxCrypt.Core.Test
                 e.Passphrase = new Passphrase("a");
                 return Task.FromResult<object>(null);
             };
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Add(@"C:\Folder\File1.txt");
                 e.SelectedFiles.Add(@"C:\Folder\File2.txt");
@@ -187,7 +182,7 @@ namespace AxCrypt.Core.Test
         public async Task TestEncryptFilesWithCancel()
         {
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.Cancel = true;
             };
@@ -210,7 +205,7 @@ namespace AxCrypt.Core.Test
                 e.Passphrase = new Passphrase("a");
                 return Task.FromResult<object>(null);
             };
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Add(@"C:\Folder\File1.txt");
                 e.SelectedFiles.Add(@"C:\Folder\File2.txt");
@@ -326,7 +321,7 @@ namespace AxCrypt.Core.Test
         public async Task TestWipeFilesInteractively()
         {
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Add(@"C:\Folder\File1.txt");
                 e.SelectedFiles.Add(@"C:\Folder\File2.txt");
@@ -341,7 +336,7 @@ namespace AxCrypt.Core.Test
         public async Task TestWipeFilesWithCancel()
         {
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.Cancel = true;
             };
@@ -355,7 +350,7 @@ namespace AxCrypt.Core.Test
         public async Task TestWipeFilesWithListTask()
         {
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Add(@"C:\Folder\File1.txt");
                 e.SelectedFiles.Add(@"C:\Folder\File2.txt");
@@ -372,7 +367,7 @@ namespace AxCrypt.Core.Test
             await Resolve.KnownIdentities.SetDefaultEncryptionIdentity(new LogOnIdentity("b"));
 
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.Cancel = true;
             };
@@ -388,7 +383,7 @@ namespace AxCrypt.Core.Test
             await Resolve.KnownIdentities.SetDefaultEncryptionIdentity(new LogOnIdentity("c"));
 
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Clear();
                 e.SelectedFiles.Add(@"C:\Folder\File1.axx");
@@ -411,7 +406,7 @@ namespace AxCrypt.Core.Test
             TypeMap.Register.New<AxCryptFile>(() => axCryptFileMock.Object);
 
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Add(@"C:\Folder\File1.txt");
                 e.SelectedFiles.Add(@"C:\Folder\File2.txt");
@@ -441,7 +436,7 @@ namespace AxCrypt.Core.Test
             TypeMap.Register.New<AxCryptFile>(() => axCryptFileMock.Object);
 
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Add(@"C:\Folder\File1.txt");
             };
@@ -470,7 +465,7 @@ namespace AxCrypt.Core.Test
             TypeMap.Register.New<AxCryptFile>(() => axCryptFileMock.Object);
 
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Add(@"C:\Folder\Copy of File1-txt.axx");
             };
@@ -568,7 +563,7 @@ namespace AxCrypt.Core.Test
             TypeMap.Register.New<AxCryptFactory>(() => axCryptFactoryMock.Object);
 
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Add(@"C:\Folder\File1-txt.axx");
                 e.SelectedFiles.Add(@"C:\Folder\File2-txt.axx");
@@ -617,7 +612,7 @@ namespace AxCrypt.Core.Test
             TypeMap.Register.New<AxCryptFile>(() => axCryptFileMock.Object);
 
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.SelectedFiles.Clear();
                 e.SelectedFiles.Add(@"C:\Folder\Copy of File1.txt".NormalizeFilePath());
@@ -654,7 +649,7 @@ namespace AxCrypt.Core.Test
             TypeMap.Register.New<AxCryptFile>(() => axCryptFileMock.Object);
 
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 e.Cancel = true;
             };
@@ -773,7 +768,7 @@ namespace AxCrypt.Core.Test
             TypeMap.Register.New<AxCryptFile>(() => axCryptFileMock.Object);
 
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
             };
 
@@ -794,7 +789,7 @@ namespace AxCrypt.Core.Test
             TypeMap.Register.New<AxCryptFile>(() => axCryptFileMock.Object);
 
             FileOperationViewModel mvm = New<FileOperationViewModel>();
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 if (e.SelectedFiles[0].Contains("File2"))
                 {
@@ -829,7 +824,7 @@ namespace AxCrypt.Core.Test
             int callTimes = 0;
             FileOperationViewModel mvm = New<FileOperationViewModel>();
             string selectedFile = string.Empty;
-            mvm.SelectingFiles += (sender, e) =>
+            mvm.SelectingFilesAsync += async (sender, e) =>
             {
                 ++callTimes;
                 if (callTimes == 2)

@@ -30,14 +30,14 @@ public class LogOnViewModel : ViewModelBase
         UpgradeVersionDialog = new CommonDialogService();
     }
 
-    public void ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
+    public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
     {
         LogOnAccountModel = logOnAccountModel;
         IsVisible = true;
 
         while (PageResult == DialogResult.None)
         {
-            Task.Delay(1000);
+            await Task.Delay(1000);
         }
         InitiateProgressIndicator();
 

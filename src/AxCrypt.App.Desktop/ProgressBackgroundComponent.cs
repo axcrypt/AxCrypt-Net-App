@@ -1,8 +1,11 @@
-﻿using AxCrypt.App.Desktop.Services.UI;
+﻿using System;
 using AxCrypt.Core.UI;
 using System.ComponentModel;
+using System.Threading.Tasks;
+using AxCrypt.App.Desktop.Services.UI;
+using Microsoft.Maui.Controls;
 
-namespace AxCrypt.App.Windows.Infrastructure;
+namespace AxCrypt.App.Desktop;
 
 public class ProgressBackgroundComponent : Component, IProgressBackground
 {

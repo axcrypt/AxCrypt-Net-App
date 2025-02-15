@@ -4,6 +4,6 @@ namespace AxCrypt.Core.UI
 {
     public interface IDataItemSelection
     {
-        Task<bool> HandleSelection(FileSelectionEventArgs e);
+        Task HandleSelection(FileSelectionEventArgs e);
     }
 }

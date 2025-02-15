@@ -206,13 +206,20 @@ namespace AxCrypt.Mono
 
         private static HttpClient CreateHttpClient()
         {
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.Proxy = WebRequest.DefaultWebProxy;
-            clientHandler.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+            try
+            {
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                //clientHandler.Proxy = WebRequest.DefaultWebProxy;
+                //clientHandler.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
 #if DEBUG
-            clientHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+                clientHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 #endif
-            return new HttpClient(clientHandler);
+                return new HttpClient(clientHandler);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

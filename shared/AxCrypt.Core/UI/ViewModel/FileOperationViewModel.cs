@@ -120,11 +120,29 @@ namespace AxCrypt.Core.UI.ViewModel
 
         public IAsyncAction IntegrityCheckFiles { get; private set; }
 
-        public event EventHandler<FileSelectionEventArgs> SelectingFiles;
+        public event Func<object, FileSelectionEventArgs, Task> SelectingFilesAsync;
 
-        protected virtual async Task OnSelectingFiles(FileSelectionEventArgs e)
+        // Async method to trigger the event
+        protected virtual async Task OnSelectingFilesAsync(FileSelectionEventArgs e)
         {
-            await Task.Run(() => { return New<IDataItemSelection>().HandleSelection(e); });
+            if (SelectingFilesAsync != null)
+            {
+                Delegate[] eventHandlers = SelectingFilesAsync.GetInvocationList();
+
+                foreach (Delegate handler in eventHandlers)
+                {
+                    Func<object, FileSelectionEventArgs, Task> asyncHandler = (Func<object, FileSelectionEventArgs, Task>)handler;
+                    try
+                    {
+                        await asyncHandler(this, e);  // Await the async handler
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle exception (optional)
+                        Console.WriteLine($"Error invoking event handler: {ex.Message}");
+                    }
+                }
+            }
         }
 
         public event EventHandler<FileOperationEventArgs> FirstLegacyOpen;
@@ -148,16 +166,6 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task EncryptFilesActionAsync(IEnumerable<string> files)
         {
-            //    if (files == null || !files.Any())
-            //    {
-            //        files = await SelectFiles(FileSelectionType.Encrypt);
-            //    }
-
-            //    await EncryptFilesInternalActionAsync(files);
-            //}
-
-            //private async Task EncryptFilesInternalActionAsync(IEnumerable<string> files)
-            //{
             files = files ?? await SelectFiles(FileSelectionType.Encrypt);
             if (!files.Any())
             {
@@ -233,7 +241,7 @@ namespace AxCrypt.Core.UI.ViewModel
             {
                 FileSelectionType = fileSelectionType,
             };
-            await OnSelectingFiles(fileSelectionArgs);
+            await OnSelectingFilesAsync(fileSelectionArgs);
 
             if (fileSelectionArgs.Cancel)
             {
@@ -266,7 +274,7 @@ namespace AxCrypt.Core.UI.ViewModel
                 {
                     FileSelectionType = FileSelectionType.SaveAsDecrypted,
                 };
-                await OnSelectingFiles(fileSelectionArgs);
+                await OnSelectingFilesAsync(fileSelectionArgs);
                 if (fileSelectionArgs.Cancel)
                 {
                     e.Cancel = true;
@@ -315,7 +323,7 @@ namespace AxCrypt.Core.UI.ViewModel
                 {
                     FileSelectionType = FileSelectionType.WipeConfirm,
                 };
-                await OnSelectingFiles(fileSelectionArgs);
+                await OnSelectingFilesAsync(fileSelectionArgs);
                 e.Cancel = fileSelectionArgs.Cancel;
                 e.Skip = fileSelectionArgs.Skip;
                 e.ConfirmAll = fileSelectionArgs.ConfirmAll;
@@ -543,7 +551,7 @@ namespace AxCrypt.Core.UI.ViewModel
             {
                 FileSelectionType = FileSelectionType.Open,
             };
-            await OnSelectingFiles(fileSelectionArgs);
+            await OnSelectingFilesAsync(fileSelectionArgs);
             if (fileSelectionArgs.Cancel)
             {
                 return;
@@ -649,13 +657,13 @@ namespace AxCrypt.Core.UI.ViewModel
 
             operationsController.QueryDecryptionPassphrase = HandleQueryDecryptionPassphraseEventAsync;
 
-            operationsController.QuerySaveFileAs += (object sender, FileOperationEventArgs e) =>
+            operationsController.QuerySaveFileAs += async (object sender, FileOperationEventArgs e) =>
             {
                 FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new string[] { e.SaveFileFullName })
                 {
                     FileSelectionType = FileSelectionType.SaveAsDecrypted,
                 };
-                OnSelectingFiles(fileSelectionArgs);
+                await OnSelectingFilesAsync(fileSelectionArgs);
                 if (fileSelectionArgs.Cancel)
                 {
                     e.Cancel = true;

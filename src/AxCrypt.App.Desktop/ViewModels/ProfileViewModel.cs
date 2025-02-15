@@ -1,22 +1,22 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.Content;
+using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
+using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
-using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
-using AxCrypt.Core;
-using AxCrypt.Content;
-using AxCrypt.Core.Runtime;
-using AxCrypt.App.Shared.Models;
-using System.Threading.Tasks;
+using AxCrypt.Core.UI.ViewModel;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Shared.Services.Interface;
-using AxCrypt.App.Desktop.Helpers;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 

@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.Core.UI;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 
@@ -57,7 +58,13 @@ public class RecentFoldersViewModel : ViewModelBase
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.WatchedFolders), (IEnumerable<string> folders) => { UpdateWatchedFolders(folders); });
-        this.BindPropertyChanged(nameof(SelectedRecentFolders), (IEnumerable<string> files) => { _mainViewModel.SelectedWatchedFolders = files; });
+        this.BindPropertyChanged(nameof(SelectedRecentFolders), (IEnumerable<string> files) =>
+        {
+            if (files != null)
+            {
+                _mainViewModel.SelectedWatchedFolders = files;
+            }
+        });
     }
 
     private async Task ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
@@ -151,11 +158,18 @@ public class RecentFoldersViewModel : ViewModelBase
 
     private async void WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
     {
-        IFolderPicker folderPicker = AxCServiceProviderExtension.GetService<IFolderPicker>();
-        string folder = await folderPicker.PickFolderAsync();
-        if (string.IsNullOrEmpty(folder)) return;
+        FileSelectionEventArgs eventArgs = new FileSelectionEventArgs(new string[] { })
+        {
+            FileSelectionType = FileSelectionType.Folder
+        };
 
-        await _mainViewModel.AddWatchedFolders.ExecuteAsync(new string[] { folder });
+        await New<IDataItemSelection>().HandleSelection(eventArgs);
+        if (eventArgs.SelectedFiles == null || !eventArgs.SelectedFiles.Any())
+        {
+            return;
+        }
+
+        await _mainViewModel.AddWatchedFolders.ExecuteAsync(eventArgs.SelectedFiles);
     }
 
     private async void WatchedFolderKeySharing(EventArgs args)
