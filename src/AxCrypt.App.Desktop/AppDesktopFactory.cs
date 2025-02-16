@@ -18,6 +18,8 @@ public static class AppDesktopFactory
 {
     public static void RegisterSingletons(IServiceCollection services)
     {
+        services.AddSingleton<Shared.Services.Interface.ICssService, CssService>();
+
         services.AddSingleton<ProgressBarService>();
 
         services.AddSingleton<LogOnViewModel>();

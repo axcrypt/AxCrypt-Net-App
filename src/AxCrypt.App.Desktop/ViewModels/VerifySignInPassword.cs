@@ -1,8 +1,8 @@
 ﻿using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.Core.UI;
+using System.Threading.Tasks;
 
-namespace AxCrypt.App.Windows.Infrastructure.Dialogs;
+namespace AxCrypt.App.Desktop.ViewModels;
 
 public class VerifySignInPassword : VerifySignInPasswordBase
 {

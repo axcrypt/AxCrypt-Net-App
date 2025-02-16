@@ -1,11 +1,10 @@
-﻿using AxCrypt.App.Desktop.Services;
+﻿using AxCrypt.App.Desktop.Code;
+using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Services.Interface;
-using AxCrypt.App.Windows.Code;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.Core;
 using Microsoft.UI.Windowing;
-using Windows.Graphics;
 
 namespace AxCrypt.App.Windows.Infrastructure
 {
@@ -83,11 +82,11 @@ namespace AxCrypt.App.Windows.Infrastructure
             Window currentWindow = App.Current?.Windows.FirstOrDefault()!;
             if (currentWindow != null)
             {
-                AppPreferences.MainWindowLocation = new PointInt32((int)currentWindow.X, (int)currentWindow.Y);
+                AppPreferences.MainWindowLocation = new System.Drawing.Point((int)currentWindow.X, (int)currentWindow.Y);
                 return;
             }
 
-            AppPreferences.MainWindowLocation = s.Position;
+            AppPreferences.MainWindowLocation = new System.Drawing.Point((int)s.Position.X, (int)s.Position.Y);
         }
 
         private static void SetupTrayIcon()

@@ -69,7 +69,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<INotificationService, NotificationService>();
 
             services.AddSingleton<ILogging, Logging>();
-            services.AddSingleton<IStatusChecker, StatusChecker>();
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
 
