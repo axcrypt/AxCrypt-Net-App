@@ -1,4 +1,4 @@
-﻿using AxCrypt.App.Desktop.Services;
+﻿using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
@@ -19,7 +19,7 @@ public class VerifyPasswordViewModel
 
     public VerifyPasswordViewModel()
     {
-        LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
+        LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
         _viewModel = new VerifySignInPasswordViewModel(New<KnownIdentities>().DefaultEncryptionIdentity);
     }
 

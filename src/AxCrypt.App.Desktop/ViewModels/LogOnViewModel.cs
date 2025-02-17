@@ -1,5 +1,4 @@
 ﻿using AxCrypt.Api.Model;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.UI;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.Utility.View;
@@ -14,9 +13,7 @@ namespace AxCrypt.App.Desktop.ViewModels;
 
 public class LogOnViewModel : ViewModelBase
 {
-    private ProcessIndicatorService _processIndicatorService;
-
-    public LogOnViewModel(ProcessIndicatorService processIndicatorService)
+    public LogOnViewModel()
     {
         License = New<LicensePolicy>().Capabilities;
         InviteDialog = new CommonDialogService();
@@ -28,7 +25,6 @@ public class LogOnViewModel : ViewModelBase
         VerifyPasswordDialog = new CommonDialogService();
         AboutDialog = new CommonDialogService();
         FeedbackDialog = new CommonDialogService();
-        _processIndicatorService = processIndicatorService;
     }
 
     public void ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
@@ -98,7 +94,7 @@ public class LogOnViewModel : ViewModelBase
 
     private void InitiateProgressIndicator()
     {
-        ProcessIndicator = new ProcessIndicator(_processIndicatorService);
+        ProcessIndicator = new ProcessIndicator();
     }
 
     private SubscriptionLevel _subscriptionLevel = SubscriptionLevel.Unknown;

@@ -1,7 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Desktop.Services.Interface;
+using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Core;
 using AxCrypt.Core.IO;
@@ -30,9 +30,9 @@ public class RecentFoldersViewModel : ViewModelBase
 
     public RecentFoldersViewModel(ShareKeyViewModel sharekeyViewModel)
     {
-        LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
-        _mainViewModel = AxCServiceProvider.LogOnViewModel!.MainViewModel;
-        _fileOperationViewModel = AxCServiceProvider.LogOnViewModel!.FileOperationViewModel;
+        LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
+        _mainViewModel = AxCServiceProviderExtension.LogOnViewModel!.MainViewModel;
+        _fileOperationViewModel = AxCServiceProviderExtension.LogOnViewModel!.FileOperationViewModel;
         _sharekeyViewModel = sharekeyViewModel;
         RecentFoldersList = new ObservableCollection<string>();
         SelectedRecentFolders = new List<string>();
@@ -149,7 +149,7 @@ public class RecentFoldersViewModel : ViewModelBase
 
     private async void WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
     {
-        IFolderPicker folderPicker = AxCServiceProvider.Current.GetService<IFolderPicker>();
+        IFolderPicker folderPicker = AxCServiceProviderExtension.GetService<IFolderPicker>();
         string folder = await folderPicker.PickFolderAsync();
         if (string.IsNullOrEmpty(folder)) return;
 

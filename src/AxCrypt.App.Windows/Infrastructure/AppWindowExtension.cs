@@ -1,6 +1,6 @@
 ﻿using AxCrypt.App.Desktop.Code;
-using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.Core;
@@ -21,7 +21,7 @@ namespace AxCrypt.App.Windows.Infrastructure
         {
             _appWindow.Closing += (s, e) =>
             {
-                LogOnViewModel logOnService = AxCServiceProvider.GetService<LogOnViewModel>();
+                LogOnViewModel logOnService = AxCServiceProviderExtension.LogOnViewModel;
                 if (logOnService.IsLoggedOn)
                 {
                     e.Cancel = true;
@@ -91,7 +91,7 @@ namespace AxCrypt.App.Windows.Infrastructure
 
         private static void SetupTrayIcon()
         {
-            ITrayService trayService = AxCServiceProvider.GetService<ITrayService>();
+            ITrayService trayService = AxCServiceProviderExtension.GetService<ITrayService>();
             if (trayService != null)
             {
                 trayService.Initialize();

@@ -1,5 +1,5 @@
 ﻿using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Common;
 using AxCrypt.Core.Runtime;
@@ -21,10 +21,10 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
 
         public SubActionViewModel()
         {
-            LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
+            LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
             _mainViewModel = LogOnViewModel.MainViewModel;
             _fileOperationViewModel = LogOnViewModel.FileOperationViewModel;
-            _statusAlertService = AxCServiceProvider.StatusAlertService!;
+            _statusAlertService = AxCServiceProviderExtension.StatusAlertService!;
 
             KnownFoldersViewModel = New<KnownFoldersViewModel>();
 

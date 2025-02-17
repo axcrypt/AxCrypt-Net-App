@@ -6,11 +6,11 @@ public class ProcessIndicator : IDisposable
 {
     private readonly ProcessIndicatorService? _processIndicatorService;
 
-    public ProcessIndicator(ProcessIndicatorService processIndicatorService)
+    public ProcessIndicator()
     {
         try
         {
-            _processIndicatorService = processIndicatorService;
+            _processIndicatorService = AxCServiceProvider.GetService<ProcessIndicatorService>();
             if (_processIndicatorService != null)
             {
                 _processIndicatorService.Show();

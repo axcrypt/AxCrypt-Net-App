@@ -4,7 +4,6 @@ using AxCrypt.App.Desktop.Data;
 using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
@@ -18,12 +17,8 @@ namespace AxCrypt.App.Desktop.ViewModels.Secret;
 
 public class NewSecretViewModel : ManageSecretViewModel
 {
-    private ProcessIndicatorService? _ProcessIndicatorService;
-
-    public NewSecretViewModel(SecretService secretService, ProcessIndicatorService? processIndicatorService = null) : base(secretService)
+    public NewSecretViewModel(SecretService secretService) : base(secretService)
     {
-        _ProcessIndicatorService = processIndicatorService;
-
         Secret = Initialize(secretService.SecretType);
 
         switch (secretService.SecretType)
@@ -61,7 +56,7 @@ public class NewSecretViewModel : ManageSecretViewModel
             return false;
         }
 
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService!))
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             if (!ViewModelHelper.CanAddNewSecret())
             {

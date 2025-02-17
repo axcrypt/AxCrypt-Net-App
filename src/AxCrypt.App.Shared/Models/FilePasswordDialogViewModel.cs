@@ -106,7 +106,7 @@ public class FilePasswordDialogViewModel : ViewModelBase
 
 //    public FilePasswordDialogViewModel()
 //    {
-//        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
+//        _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
 //    }
 
 //    public void SetFilePassword(string encryptedFileFullName)

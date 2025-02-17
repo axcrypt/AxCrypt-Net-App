@@ -1,4 +1,4 @@
-﻿using AxCrypt.App.Desktop.Services;
+﻿using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.Core.UI;
 using System.Threading.Tasks;
 
@@ -8,7 +8,7 @@ public class VerifySignInPassword : VerifySignInPasswordBase
 {
     protected override async Task<bool> VerifyDialog(string description)
     {
-        VerifyPasswordViewModel verifyPasswordViewModel = AxCServiceProvider.GetService<VerifyPasswordViewModel>();
+        VerifyPasswordViewModel verifyPasswordViewModel = AxCServiceProviderExtension.GetService<VerifyPasswordViewModel>();
         bool result = await verifyPasswordViewModel.SetViewPassword(description);
         return result;
     }

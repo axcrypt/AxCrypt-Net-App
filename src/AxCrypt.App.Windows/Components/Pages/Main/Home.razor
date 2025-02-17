@@ -2,11 +2,14 @@
 
 @using AxCrypt.App.Desktop.ViewModels
 @using AxCrypt.App.Shared.Models
+@using AxCrypt.App.Shared.Utility.View
 
 @inject LogOnViewModel LogOnViewModel
 @inject RegisterViewModel Register
 @inject NavigationManager navigation
 @inject IJSRuntime JSRuntime
+
+<AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
 
 <div dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (LogOnViewModel.IsVisible)
@@ -24,16 +27,18 @@
 
 </div>
 
-
 @code {
     public bool ShowSignUp { get; set; }
 
     protected override void OnInitialized()
     {
-        ShowSignUp = Register.ShowSignUp;
-        base.OnInitialized();
-        Register.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
-        LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdatePageState;
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
+        {
+            ShowSignUp = Register.ShowSignUp;
+            base.OnInitialized();
+            Register.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
+            LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdatePageState;
+        }
     }
 
     private void UpdatePageState(bool isShow = false)

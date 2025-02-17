@@ -1,4 +1,4 @@
-﻿using AxCrypt.App.Desktop.Services;
+﻿using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Content;
 using AxCrypt.Core.Extensions;
@@ -18,7 +18,7 @@ public class VerifyAccountDialogViewModel
 
     public VerifyAccountDialogViewModel()
     {
-        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
+        _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
     }
 
     public void SetVerifyAccount(VerifyAccountViewModel viewModel)

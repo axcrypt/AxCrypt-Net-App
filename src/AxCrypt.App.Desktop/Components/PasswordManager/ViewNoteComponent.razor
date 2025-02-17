@@ -1,5 +1,4 @@
-﻿@using AxCrypt.App.Desktop.ViewModels
-@using AxCrypt.App.Desktop.ViewModels.Secret
+﻿@using AxCrypt.App.Desktop.ViewModels.Secret
 @using AxCrypt.App.Shared.Helpers
 @using AxCrypt.App.Shared.Models.Secret
 @using AxCrypt.App.Shared.Services.Interface
@@ -11,12 +10,7 @@
 @inject NavigationManager navigationManager
 @inject SecretService secretService
 @inject ViewSecretViewModel viewSecretViewModel
-@inject LogOnViewModel LogOnViewModel
 @inject IJSRuntime jsRuntime
-
-<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/secretlist.min.css" rel="stylesheet" />
-<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/newsecret.min.css" rel="stylesheet" />
-<link href="css/@LogOnViewModel.SubscriptionLevel.ToString().ToLower()/sharesecret.min.css" rel="stylesheet" />
 
 <div style="margin-top: 80px;" class="page-max-height">
     <div class="page-heading">

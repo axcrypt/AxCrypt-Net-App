@@ -6,7 +6,6 @@ using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.App.Shared.Password;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Common;
@@ -39,13 +38,11 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     private LogOnIdentity _identity;
 
     private IStatusAlertService? _StatusAlertService;
-    private ProcessIndicatorService _ProcessIndicatorService;
 
-    public SecretsListViewModel(IStatusAlertService statusAlertService, ProcessIndicatorService processIndicatorService)
+    public SecretsListViewModel(IStatusAlertService statusAlertService)
     {
         _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
         _StatusAlertService = statusAlertService;
-        _ProcessIndicatorService = processIndicatorService;
 
         Initialize();
     }
@@ -257,7 +254,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     /// <returns>SecretCollection containing found secrets</returns>
     public async Task<ObservableCollection<SecretViewModel>> FindSecrets()
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             ClearFilterAndCachedSecrets();
 
@@ -294,7 +291,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     private async Task FindSharedWithSecrets()
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             if (_CachedSecrets.ContainsKey(SecretFilterOption.Shared))
             {
@@ -315,7 +312,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         {
             return;
         }
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             SelectedSecretFilter = type;
 
@@ -325,7 +322,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     public async Task ApplyFilterOnSecrets()
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             await Task.Run(() =>
             {
@@ -400,7 +397,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     public async Task FilterSecretsBy(SecretFilterOption secretFilter)
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             if (SelectedSecretListFilter == secretFilter)
             {
@@ -417,7 +414,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     public async Task FilterSharedSecrets(SecretFilterOption secretFilter)
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             _activateSharedListFilter = true;
             if (SelectedSecretListFilter == secretFilter)

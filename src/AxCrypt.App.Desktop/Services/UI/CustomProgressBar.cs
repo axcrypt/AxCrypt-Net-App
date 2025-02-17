@@ -1,4 +1,5 @@
-﻿using AxCrypt.App.Shared.Services;
+﻿using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Services;
 using System;
 
 namespace AxCrypt.App.Desktop.Services.UI;
@@ -11,7 +12,7 @@ public class CustomProgressBar : IDisposable
     {
         try
         {
-            _progressBarService = AxCServiceProvider.ProgressBarService;
+            _progressBarService = AxCServiceProviderExtension.ProgressBarService;
             if (_progressBarService != null)
             {
                 _progressBarService.Show();

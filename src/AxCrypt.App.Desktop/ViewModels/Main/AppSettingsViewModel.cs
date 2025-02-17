@@ -1,7 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
@@ -22,6 +22,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Desktop.Helpers;
 
 namespace AxCrypt.App.Desktop.ViewModels.Main;
 
@@ -40,7 +41,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     public AppSettingsViewModel(RecentFilesViewModel recentFilesViewModel)
     {
-        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
+        _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
         _mainViewModel = _logOnViewModel.MainViewModel;
         _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
         _recentFilesViewModel = recentFilesViewModel;

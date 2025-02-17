@@ -1,8 +1,9 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
@@ -51,8 +52,8 @@ public class ShareKeyViewModel : ViewModelBase
 
     public ShareKeyViewModel()
     {
-        LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
-        SubscriptionLevel = AxCServiceProvider.LogOnViewModel!.SubscriptionLevel;
+        LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
+        SubscriptionLevel = AxCServiceProviderExtension.LogOnViewModel!.SubscriptionLevel;
         EmailSuggestions = new List<EmailSuggestion>();
     }
 

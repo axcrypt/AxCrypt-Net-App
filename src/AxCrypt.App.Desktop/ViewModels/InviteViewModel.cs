@@ -19,7 +19,7 @@ public class InviteViewModel
 
     public InviteViewModel(IStatusAlertService alertService)
     {
-        //_alerService = AxCServiceProvider.StatusAlertService!;
+        //_alerService = AxCServiceProviderExtension.StatusAlertService!;
         _alerService = alertService!;
     }
 

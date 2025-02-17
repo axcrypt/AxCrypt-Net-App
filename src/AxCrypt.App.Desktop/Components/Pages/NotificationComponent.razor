@@ -9,6 +9,8 @@
 
 <link href="css/login.min.css" rel="stylesheet" />
 
+<AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
+
 <div id="content-index" class="medium-12 columns">
     <div class="head-sec">
         <div class="row">
@@ -88,8 +90,6 @@ else
     protected override async Task OnInitializedAsync()
     {
         model = notificationService.NotificationModel;
-        await notificationService.LoadNotificationListAsync();
-
         await base.OnInitializedAsync();
     }
 
@@ -98,6 +98,7 @@ else
         if (firstRender)
         {
             await notificationService.LoadNotificationListAsync();
+            UpdateUIState();
         }
 
         await base.OnAfterRenderAsync(firstRender);
@@ -113,5 +114,13 @@ else
     {
         await notificationService.DeleteSecretAsync(id);
         navigation.NavigateTo("/notification");
+    }
+
+    void UpdateUIState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 }

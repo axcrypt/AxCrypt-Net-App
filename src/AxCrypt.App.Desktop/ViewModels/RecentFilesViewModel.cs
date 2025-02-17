@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Desktop.Helpers;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 
@@ -26,13 +27,11 @@ public class RecentFilesViewModel : ViewModelBase
     private FileOperationViewModel _fileOperationViewModel;
     private ShareKeyViewModel? _sharekeyViewModel;
 
-    private ProcessIndicatorService? _ProcessIndicatorService;
-
     public RecentFilesViewModel(ShareKeyViewModel sharekeyViewModel)
     {
-        LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
-        _mainViewModel = AxCServiceProvider.LogOnViewModel!.MainViewModel;
-        _fileOperationViewModel = AxCServiceProvider.LogOnViewModel!.FileOperationViewModel;
+        LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
+        _mainViewModel = AxCServiceProviderExtension.LogOnViewModel!.MainViewModel;
+        _fileOperationViewModel = AxCServiceProviderExtension.LogOnViewModel!.FileOperationViewModel;
         _sharekeyViewModel = sharekeyViewModel;
 
         SelectAllChecked = false;

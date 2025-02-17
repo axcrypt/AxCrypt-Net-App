@@ -45,7 +45,8 @@ public static class AppDesktopFactory
         services.AddSingleton<ViewSecretViewModel>();
         services.AddSingleton<UserNotificationService>();
         services.AddSingleton<NotificationViewModel>();
-        services.AddSingleton<SecretsListViewModel>();
+
+        services.AddTransient<SecretsListViewModel>();
 
         services.AddSingleton<RecentFoldersComponent>();
         services.AddSingleton<Feedback>();

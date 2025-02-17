@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Api.Model;
 using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Common;
 using AxCrypt.Core;
@@ -9,7 +10,7 @@ using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System;
-using System.Collections.Generic;
+using AxCrypt.App.Desktop.Helpers;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -26,8 +27,8 @@ public class ActionsViewModel : ViewModelBase
 
     public ActionsViewModel(ShareKeyViewModel shareKeyViewModel)
     {
-        LogOnViewModel = AxCServiceProvider.LogOnViewModel!;
-        _statusAlertService = AxCServiceProvider.StatusAlertService!;
+        LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
+        _statusAlertService = AxCServiceProviderExtension.StatusAlertService!;
 
         _mainViewModel = LogOnViewModel.MainViewModel;
         _fileOperationViewModel = LogOnViewModel.FileOperationViewModel;

@@ -1,9 +1,4 @@
 ﻿using AxCrypt.App.Shared.Services.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AxCrypt.App.Desktop.Services;
 
@@ -28,7 +23,8 @@ public class CssService : ICssService
             $"css/{cssBasePath}/notification.min.css",
             $"css/{cssBasePath}/newsecret.min.css",
             $"css/{cssBasePath}/secretlist.min.css",
-            $"css/{cssBasePath}/support.min.css"
+            $"css/{cssBasePath}/support.min.css",
+            $"css/{cssBasePath}/sharesecret.min.css"
         };
 
         return cssFiles;

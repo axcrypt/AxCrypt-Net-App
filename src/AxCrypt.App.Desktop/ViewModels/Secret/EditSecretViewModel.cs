@@ -1,10 +1,8 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Secret;
 using AxCrypt.App.Desktop.Data;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Password;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
@@ -15,14 +13,8 @@ namespace AxCrypt.App.Desktop.ViewModels.Secret;
 
 public class EditSecretViewModel : ManageSecretViewModel
 {
-    public SubscriptionLevel SubscriptionLevel { get; set; }
-
-    private ProcessIndicatorService? _ProcessIndicatorService;
-
-    public EditSecretViewModel(SecretService secretService, ProcessIndicatorService processIndicatorService) : base(secretService)
+    public EditSecretViewModel(SecretService secretService) : base(secretService)
     {
-        _ProcessIndicatorService = processIndicatorService;
-
         switch (Secret.SecretType)
         {
             case Api.Model.Secret.SecretType.Legacy:
@@ -59,7 +51,7 @@ public class EditSecretViewModel : ManageSecretViewModel
             return false;
         }
 
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             if (Secret == null)
             {

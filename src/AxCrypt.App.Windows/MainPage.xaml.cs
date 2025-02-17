@@ -17,6 +17,7 @@ using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System.Globalization;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Desktop.Helpers;
 
 namespace AxCrypt.App.Windows;
 
@@ -422,7 +423,7 @@ public partial class MainPage : ContentPage, ISignIn
 
     private async Task HandleExistingLogOnForEncryptedFile(LogOnEventArgs e)
     {
-        FilePasswordDialogViewModel filePasswordDialog = AxCServiceProvider.GetService<FilePasswordDialogViewModel>();
+        FilePasswordDialogViewModel filePasswordDialog = AxCServiceProviderExtension.GetService<FilePasswordDialogViewModel>();
         filePasswordDialog.ShowFilePasswordDialog(e.EncryptedFileFullName);
 
         if (filePasswordDialog.DialogResult == DialogResult.Retry)

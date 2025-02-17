@@ -2,7 +2,6 @@
 using AxCrypt.App.Desktop.ViewModels.Notification;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Notification;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Core.UI;
@@ -17,11 +16,9 @@ namespace AxCrypt.App.Desktop.Services;
 public class UserNotificationService
 {
     private IStatusAlertService? _statusAlertService;
-    private ProcessIndicatorService _ProcessIndicatorService;
     private LogOnViewModel _logOnViewModel;
-    public UserNotificationService(ProcessIndicatorService processIndicatorService, IStatusAlertService statusAlertService, LogOnViewModel logOnViewModel)
+    public UserNotificationService(IStatusAlertService statusAlertService, LogOnViewModel logOnViewModel)
     {
-        _ProcessIndicatorService = processIndicatorService;
         _statusAlertService = statusAlertService;
         _logOnViewModel = logOnViewModel;
         NotificationModel = new();
@@ -31,7 +28,7 @@ public class UserNotificationService
 
     public async Task LoadNotificationListAsync()
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             IEnumerable<NotificationItemViewModel> notificationItems = await LoadNotificationsAsync();
             NotificationModel.Notifications = new ObservableCollection<NotificationItemViewModel>(notificationItems);
@@ -53,7 +50,7 @@ public class UserNotificationService
         {
             return false;
         }
-        using (ProcessIndicator processIndicator = new ProcessIndicator(_ProcessIndicatorService))
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             bool result = await NotificationApiHelper.DeleteNotificationAsync(id);
             await LoadNotificationListAsync();

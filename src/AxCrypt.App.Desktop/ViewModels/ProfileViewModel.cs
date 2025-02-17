@@ -10,7 +10,6 @@ using AxCrypt.Content;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Runtime;
 using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Desktop.Services;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
@@ -20,6 +19,7 @@ using Microsoft.Maui.Storage;
 using Microsoft.Maui.Devices;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Desktop.Helpers;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 
@@ -40,8 +40,8 @@ public class ProfileViewModel
 
     public ProfileViewModel()
     {
-        _logOnViewModel = AxCServiceProvider.LogOnViewModel!;
-        _registerViewModel = AxCServiceProvider.RegisterViewModel!;
+        _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
+        _registerViewModel = AxCServiceProviderExtension.RegisterViewModel!;
         Account = new AccountModel();
     }
 

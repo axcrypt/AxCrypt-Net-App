@@ -5,9 +5,9 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using Microsoft.AspNetCore.Components;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Desktop.Services;
 using System;
 using System.Threading.Tasks;
+using AxCrypt.App.Desktop.Helpers;
 
 namespace AxCrypt.App.Desktop.ViewModels.Main;
 
@@ -20,7 +20,7 @@ public class AdvancedOptionsViewModel : ComponentBase
 
     public AdvancedOptionsViewModel()
     {
-        _logOnViewModel = AxCServiceProvider.LogOnViewModel!; 
+        _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!; 
     }
 
     public void Initialize()

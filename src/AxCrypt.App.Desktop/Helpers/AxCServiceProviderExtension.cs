@@ -1,26 +1,14 @@
 ﻿using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+using AxCrypt.App.Shared.Services;
 
-namespace AxCrypt.App.Desktop.Services;
+namespace AxCrypt.App.Desktop.Helpers;
 
-public class AxCServiceProvider
+public static class AxCServiceProviderExtension
 {
-    public AxCServiceProvider(IServiceProvider current)
-    {
-        Current = current;
-    }
+    public static TService GetService<TService>() => AxCServiceProvider.GetService<TService>()!;
 
-    public static TService GetService<TService>() => Current.GetService<TService>()!;
-
-    private static IServiceProvider _currentServiceProvider;
-    public static IServiceProvider Current
-    {
-        private set; get;
-    }
     public static LogOnViewModel? LogOnViewModel
     {
         get
