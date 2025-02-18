@@ -62,7 +62,7 @@ public class ProfileViewModel
     {
         Account.CreatedTime = await GetManageAxCryptID();
         double totalDays = (New<INow>().Utc - Account.CreatedTime).TotalDays + Account.DaysLeft;
-        return totalDays > 31 ? "Yearly" : (totalDays >= 25 && totalDays <= 35 ? "Monthly" : "Unknown");
+        return totalDays <= 30 ? "Monthly" : "Yearly";
     }
 
     public async Task<DateTime> GetManageAxCryptID()

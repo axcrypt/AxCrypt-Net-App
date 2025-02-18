@@ -15,14 +15,14 @@
     <div class="acc-subs">
         <div class="accnt-prfl">
             <h3 class="txt-clr">
-                <img style="width:35px;height:auto!important;" src="@SubscriptionIcon()" alt="subs-level icon" />
+                <img style="max-width:30px;width:30px;height:30px !important;" src="@SubscriptionIcon()" alt="subs-level icon" />
             </h3>
         </div>
 
         <div>
             <div style="text-align:left;">
                 <img class="" src="images/default/IcoMssg.svg" alt="go-back-img" />
-                <span class="grey-clr font-high text-overlfow">@ProfileViewModel?.Account?.UserEmail</span>
+                <span class="grey-clr font-high text-overlfow" title="@ProfileViewModel?.Account?.UserEmail">@ProfileViewModel?.Account?.UserEmail</span>
             </div>
             @if (ProfileViewModel?.Account?.SubscriptionLevel != SubscriptionLevel.Free)
             {
@@ -102,10 +102,10 @@
         <div>
             <span class="txt-clr">@Texts.PromptSubscription:</span>
             <span class="font-bold">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
-@*             @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
+            @*             @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
             {
-                <span class="txt-clr">Company:</span>
-                <span class="font-bold">AxCrypt</span> <br />
+            <span class="txt-clr">Company:</span>
+            <span class="font-bold">AxCrypt</span> <br />
             } *@
 
             @if (ProfileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
