@@ -17,28 +17,28 @@
             @Texts.EditNoteTitle
         </h3>
     </div>
-   <EditForm Model="@secretService.CurrentSecret.Note" OnValidSubmit="SavePassword">
+    <EditForm Model="@secretService.CurrentSecret.Note" OnValidSubmit="SavePassword">
         <DataAnnotationsValidator />
-            <div class="row">
-                <ul class="clean-up" style=" list-style:none">
+        <div class="row">
+            <ul class="clean-up" style=" list-style:none">
                 <li>
                     <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
-                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;"  @bind="@secretService.CurrentSecret.Note.SecretDesc"></textarea>
-                     <ValidationMessage For="@(() => secretService.CurrentSecret.Note.SecretDesc)" />
+                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Note.SecretDesc"></textarea>
+                    <ValidationMessage For="@(() => secretService.CurrentSecret.Note.SecretDesc)" />
                 </li>
                 <li>
                     <label for="Note_Note">@Texts.NoteLabel:</label>
-                    <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important;"  @bind="@secretService.CurrentSecret.Note.Note" ></textarea>
-                <ValidationMessage For="@(() => secretService.CurrentSecret.Note.Note)" />
+                    <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Note.Note"></textarea>
+                    <ValidationMessage For="@(() => secretService.CurrentSecret.Note.Note)" />
                 </li>
                 <li>
-                <div>
-                    <button type="submit" class="button btn-extra-small success" >@Texts.ButtonSaveText</button>
-                    <NavLink href="passwordManager">
-                        <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
-                    </NavLink>
-                </div>
-            </li>
+                    <div class="btn-sec-new-edit">
+                        <button type="submit" class="button btn-extra-small success">@Texts.ButtonSaveText</button>
+                        <NavLink href="passwordManager">
+                            <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
+                        </NavLink>
+                    </div>
+                </li>
             </ul>
         </div>
     </EditForm>
@@ -81,7 +81,7 @@
     {
         contextMenu = !contextMenu;
     }
-  
+
     bool isFirstClick = true;
     bool SyncPopup { get; set; }
 
@@ -108,5 +108,5 @@
     {
         secretService.CurrentSecret.Note.SecretDesc = args.Value.ToString();
     }
-   
+
 }

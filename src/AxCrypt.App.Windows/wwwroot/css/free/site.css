@@ -29,12 +29,16 @@
   font-weight: 700;
 }
 
+.padding {
+  margin: 0 3px;
+}
+
 .top-menu {
   float: right;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 5px;
 }
 .top-menu a {
   text-decoration: none;
@@ -66,14 +70,23 @@
   font-size: 31px;
 }
 
+.app-top-menu.active, .app-top-menu:hover {
+  background-color: #D2DCCD;
+  border-radius: 5px;
+}
+
 .sttng-icon, .notif-icon {
   height: 20px;
 }
 
-.top-menu a.active .notif-icon {
+.app-top-menu {
+  padding: 10px;
+}
+
+.top-menu a.active .notif-icon, .top-menu a:hover .notif-icon {
   content: url(/images/free/mobile/IcoNtfctnActv.svg);
 }
-.top-menu a.active .sttng-icon {
+.top-menu a.active .sttng-icon, .top-menu a:hover .sttng-icon {
   content: url(/images/free/IcoSttngsActv.svg);
 }
 

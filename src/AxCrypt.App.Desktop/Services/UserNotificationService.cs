@@ -5,6 +5,7 @@ using AxCrypt.App.Shared.Models.Notification;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,7 +14,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Desktop.Services;
 
-public class UserNotificationService
+public class UserNotificationService : ViewModelBase
 {
     private IStatusAlertService? _statusAlertService;
     private LogOnViewModel _logOnViewModel;
@@ -24,7 +25,19 @@ public class UserNotificationService
         NotificationModel = new();
     }
 
-    public NotificationViewModel NotificationModel { get; set; }
+    private NotificationViewModel _notificationModel;
+    public NotificationViewModel NotificationModel
+    {
+        get
+        {
+            return _notificationModel;
+        }
+        set
+        {
+            _notificationModel = value;
+            UpdateViewState();
+        }
+    }
 
     public async Task LoadNotificationListAsync()
     {

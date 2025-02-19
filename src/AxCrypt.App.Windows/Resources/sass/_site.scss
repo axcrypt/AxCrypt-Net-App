@@ -30,12 +30,16 @@
     font-weight: 700;
 }
 
+.padding {
+    margin: 0 3px;
+}
+
 .top-menu {
     float: right;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 5px;
 
     a {
         text-decoration: none;
@@ -68,11 +72,21 @@
     font-size: 31px;
 }
 
+
+.app-top-menu.active, .app-top-menu:hover {
+    background-color: $PflBg;
+    border-radius: 5px;
+}
+
 .sttng-icon, .notif-icon {
     height: 20px;
 }
 
-.top-menu a.active {
+.app-top-menu {
+    padding: 10px;
+}
+
+.top-menu a.active, .top-menu a:hover {
     .notif-icon {
         content: $IcoNotifsublvl;
     }
@@ -98,7 +112,6 @@
     display: flex;
     justify-content: flex-start;
 }
-
 //font-styles
 .font-small {
     font-size: 8px;
@@ -146,7 +159,6 @@
 .bold-highlight span {
     font-weight: 700;
 }
-
 //center popup
 .modalDialog.open {
     opacity: 1;
@@ -187,7 +199,6 @@
     cursor: pointer;
     position: relative;
 }
-
 //Beside popup
 .model-popup {
     border: 1px solid $BorderClr;
@@ -197,7 +208,6 @@
     z-index: 1;
     box-shadow: 12px 12px 20px 0px #23232340;
 }
-
 //hover popup
 .hover-popup, .home-hover {
     width: 162px;
@@ -237,7 +247,6 @@
     top: auto !important;
     margin-top: -5px;
 }
-
 //toggle button
 .toggle {
     position: relative;
@@ -291,7 +300,6 @@ input:focus + .slider {
 input:checked + .slider:before {
     transform: translateX(48px);
 }
-
 /* Rounded sliders */
 .slider.round {
     border-radius: 40px;
@@ -326,7 +334,6 @@ input:checked + .slider:before {
 .toggle input:checked + .slider .off-text {
     color: white;
 }
-
 //button
 .btn-large {
     width: 154px;
@@ -554,7 +561,6 @@ input:checked + .slider:before {
     margin-left: 0;
     margin-right: 0;
 }
-
 /* Alert boxes*/
 .alert-box {
     font-size: 14px;
@@ -577,7 +583,6 @@ input:checked + .slider:before {
     background-color: $BgrndCol;
     border: 1px solid #6a9d53;
 }
-
 /*for input validation*/
 .input-error {
     border: 1px solid red !important;
@@ -696,6 +701,7 @@ input:checked + .slider:before {
     .padding-size {
         padding: 0px 15px;
     }
+
     .page-title, h1 {
         font-size: 32px !important;
     }

@@ -6,7 +6,7 @@
 @inject SubActionViewModel? subActionModel
 
 <div class="mre-act-sec">
-    @if (subActionModel!.SubscriptionLevel != SubscriptionLevel.Free)
+    @if (subActionModel!.EnableCloudServices)
     {
         <div style="display:block;">
             <h3 class="fle-nme fnt-sze">Cloud services</h3>

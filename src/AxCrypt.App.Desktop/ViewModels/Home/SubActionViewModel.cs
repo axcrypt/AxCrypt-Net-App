@@ -43,6 +43,8 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
 
         public LogOnViewModel LogOnViewModel { get; set; }
 
+        public bool EnableCloudServices { get; set; }
+
         public bool EnableRandomRename { get; set; }
 
         public bool EnableSecureWipeFiles { get; set; }
@@ -65,6 +67,7 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
 
         private async Task ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
         {
+            await ConfigureCloudServiceAsync(license);
             await ConfigureAnonymousRenameAsync(license);
             await ConfigureSecureWipeAsync(license);
             await ConfigureStrongEncryptionAsync(license);
@@ -109,6 +112,18 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
                 EnableEncryptionUpgrade = false;
             }
         }
+        
+        private async Task ConfigureCloudServiceAsync(LicenseCapabilities license)
+        {
+            if (license.Has(LicenseCapability.CloudStorageAwareness))
+            {
+                EnableCloudServices = true;
+            }
+            else
+            {
+                EnableCloudServices = false;
+            }
+        }
 
         public async Task OnCloudServiceButtonClick(KnownFolder knownFolder)
         {
@@ -148,6 +163,7 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
 
             string alert = alwaysOnline ? "Offline mode is enabled." : "Offline mode is disabled.";
             _statusAlertService.Success(alert);
+            UpdateViewState();
         }
 
         private void UpdateKnownFolders(IEnumerable<KnownFolder> folders)

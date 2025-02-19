@@ -45,7 +45,7 @@ public class RecentFilesViewModel : ViewModelBase
     {
         IsHideRecentFiles = New<UserSettings>().HideRecentFiles;
 
-        //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { _recentFilesListView.UpdateRecentFiles(_mainViewModel.RecentFiles); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenus(license); });
 
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
         this.BindPropertyChanged(nameof(SelectedFiles), (IEnumerable<string> files) => { _mainViewModel.SelectedRecentFiles = files; });
@@ -73,6 +73,16 @@ public class RecentFilesViewModel : ViewModelBase
     public bool SelectAllChecked { get; set; }
 
     public bool IsHideRecentFiles { get; set; }
+
+    public bool HasNoSubscription { get; set; }
+
+    private void ConfigureMenus(LicenseCapabilities license)
+    {
+        HasNoSubscription = license.Has(LicenseCapability.Viewer);
+
+        UpdateViewState();
+    }
+
 
     private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
     {

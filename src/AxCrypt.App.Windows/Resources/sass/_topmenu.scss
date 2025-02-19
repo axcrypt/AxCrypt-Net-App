@@ -76,9 +76,15 @@
     .act-clr {
         color: #000;
         display: block;
+
+        &.disabled {
+            color: #aaa;
+            pointer-events: none;
+            background-color: transparent;
+        }
     }
 
-    .act-clr:hover {
+    .act-clr:not(.disabled):hover {
         background-color: $colAvtr;
         color: $TxtClr !important;
         margin: 0 -20px;
@@ -285,9 +291,9 @@
         .next-arrow {
             float: right;
             content: $IcoDrpDwn;
-            padding-top:3px;
+            padding-top: 3px;
             height: 14px;
-            margin:5px 0px 0 20px;
+            margin: 5px 0px 0 20px;
         }
     }
 }

@@ -43,7 +43,15 @@
 @code {
     protected override async Task OnInitializedAsync()
     {
-        await service.LoadNotificationListAsync();
         model = service.NotificationModel;
+        service.OnUpdateViewState += UpdateState;
+    }
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 }

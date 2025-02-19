@@ -91,7 +91,10 @@ public class ProfileViewModel
                 break;
 
             case KeyManagement.ImportAxCryptID:
-                _logOnViewModel.ImportPrivatePasswordDialog.Show();
+                if (!_logOnViewModel.IsLoggedOn)
+                {
+                    _logOnViewModel.ImportPrivatePasswordDialog.Show();
+                }
                 break;
 
             case KeyManagement.ExportAxCryptIDAndSharingKeyPair:
@@ -99,7 +102,10 @@ public class ProfileViewModel
                 break;
 
             case KeyManagement.CreateAxCryptID:
-                _registerViewModel.ShowDialog(string.Empty, EmailAddress.Empty);
+                if (!_logOnViewModel.IsLoggedOn)
+                {
+                    _registerViewModel.ShowDialog(string.Empty, EmailAddress.Empty);
+                }
                 break;
         }
     }

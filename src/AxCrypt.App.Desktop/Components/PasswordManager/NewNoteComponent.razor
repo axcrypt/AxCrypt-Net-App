@@ -11,39 +11,39 @@
 
 <div style="width: 85%; margin-top: 80px;">
     <div class="page-heading">
-            <h3 class="password-creation">
-                @Texts.AddNoteTitle
-            </h3>
+        <h3 class="password-creation">
+            @Texts.AddNoteTitle
+        </h3>
     </div>
-     <div>
-           <EditForm Model="@newSecretViewModel.Secret.Note" OnValidSubmit="SavePassword" @ref="editForm">
-        <DataAnnotationsValidator />
-        <div class="row">
-            <ul class="clean-up" style=" list-style:none; ">
-                <li>
-                    <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
-                    <textarea id="pwd-desc-inp"
-                    placeholder="example" maxlength="100000"
-                    style="color:#494949 !important;" @bind="@newSecretViewModel.Secret.Note.SecretDesc" rows="2"
-                    class="@GetInputClass(nameof(newSecretViewModel.Secret.Note.SecretDesc))"></textarea>
-                     <ValidationMessage For="@(() => newSecretViewModel.Secret.Note.SecretDesc)" />
-                </li>
-                <li>
-                    <label for="Note_Note">@Texts.NoteLabel:</label>
-                    <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important;" placeholder="example" @bind="@newSecretViewModel.Secret.Note.Note"></textarea>
-                </li>
-                <li>
-                    <div style=" gap:20px; ">
-                        <button type="submit" class="button btn-extra-small success" >@Texts.ButtonSaveText</button>
-                        <NavLink href="passwordManager">
-                            <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
-                        </NavLink>
-                    </div>
-                </li>
-            </ul>
-        </div>
-   </EditForm>  
-     </div>
+    <div>
+        <EditForm Model="@newSecretViewModel.Secret.Note" OnValidSubmit="SavePassword" @ref="editForm">
+            <DataAnnotationsValidator />
+            <div class="row">
+                <ul class="clean-up" style=" list-style:none; ">
+                    <li>
+                        <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
+                        <textarea id="pwd-desc-inp"
+                                  placeholder="example" maxlength="100000"
+                                  style="color:#494949 !important;" @bind="@newSecretViewModel.Secret.Note.SecretDesc" rows="2"
+                                  class="@GetInputClass(nameof(newSecretViewModel.Secret.Note.SecretDesc))"></textarea>
+                        <ValidationMessage For="@(() => newSecretViewModel.Secret.Note.SecretDesc)" />
+                    </li>
+                    <li>
+                        <label for="Note_Note">@Texts.NoteLabel:</label>
+                        <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important;" placeholder="example" @bind="@newSecretViewModel.Secret.Note.Note"></textarea>
+                    </li>
+                    <li>
+                        <div class="btn-sec-new-edit">
+                            <button type="submit" class="button btn-extra-small success">@Texts.ButtonSaveText</button>
+                            <NavLink href="passwordManager">
+                                <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
+                            </NavLink>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </EditForm>
+    </div>
 </div>
 
 @code {
@@ -54,7 +54,7 @@
         FieldIdentifier fieldIdentifier = new FieldIdentifier(newSecretViewModel.Secret.Note, propertyName);
         bool isFieldValid = editForm.EditContext.GetValidationMessages(fieldIdentifier).Any();
 
-        return isFieldValid ? "input-error" : string.Empty; 
+        return isFieldValid ? "input-error" : string.Empty;
     }
 
     protected override void OnInitialized()

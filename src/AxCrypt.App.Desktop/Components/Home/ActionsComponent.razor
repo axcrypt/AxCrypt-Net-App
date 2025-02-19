@@ -46,7 +46,7 @@
                     </div>
                 }
             </div>
-            @if (homeActionModel!.SubscriptionLevel == SubscriptionLevel.Free)
+            @if (!homeActionModel!.KeyShareButtonEnabled)
             {
                 <div class="popup-container" disabled="@homeActionModel.KeyShareButtonEnabled">
                     <div class="hover-trigger" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
@@ -86,7 +86,7 @@
             {
             <div class="act-box"><img class="act-img new-mssg" src="" alt="scr-img" /><span class="text-size">New message</span></div>
             } *@
-            @if (homeActionModel.SubscriptionLevel == SubscriptionLevel.Business)
+            @if (homeActionModel.HasBusiness)
             {
                 <div class="act-box" @onmouseover='@( () => ShowPopup("master key") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.RedirectToAccountSite">
                     <img class="act-img mtrkey-act" src="" alt="mtrkey-img" /><span class="text-size">@Texts.MasterKeyTitle</span>
@@ -122,7 +122,7 @@
                     }
                 </div>
             }
-            @if (Utility.IsMainMenuHidden && homeActionModel.SubscriptionLevel == SubscriptionLevel.Free)
+            @if (Utility.IsMainMenuHidden && homeActionModel.HasNoSubscription)
             {
                 <div class="info-box" style="margin-top:17px; padding: 7px 5px;">
                     <table>
@@ -148,7 +148,7 @@
         </div>
     </div>
     <div>
-        @if (homeActionModel.SubscriptionLevel == SubscriptionLevel.Premium)
+        @if (homeActionModel.HasPremium)
         {
             <div style="display: block;">
                 <div style="display:flex; min-width: 300px;">
@@ -177,7 +177,7 @@
                 </div>
             </div>
         }
-        else if (homeActionModel.SubscriptionLevel == SubscriptionLevel.Business)
+        else if (homeActionModel.HasBusiness)
         {
             <div>
                 <label class="fle-nme fnt-sze" style="padding-bottom:20px;">Active subscriptions</label>
@@ -197,7 +197,7 @@
                 </div>
             </div>
         }
-        else if (homeActionModel.SubscriptionLevel == SubscriptionLevel.Free)
+        else if (homeActionModel.HasNoSubscription)
         {
             <div class="upgrd-box free-color">
                 <img class="img-upgrdpl" src="" alt="" />
@@ -213,7 +213,7 @@
     <div>
         @if (Utility.IsMainMenuHidden)
         {
-            @if (homeActionModel.SubscriptionLevel != SubscriptionLevel.Free)
+            @if (homeActionModel.HasBusiness || homeActionModel.HasPremium)
             {
                 <AxCrypt.App.Windows.Components.Pages.PopupDialog.Suggestion />
             }

@@ -31,7 +31,7 @@
                     <th style="width:18%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(2)">@Texts.LastModifiedTimeColumnHeaderText<img class="arw-img" src="" alt="arrow img" /></th>
                     <th style="width:13%;">@Texts.PromptSharedWith</th>
 
-                    @if (RecentFilesViewModel.SubscriptionLevel != SubscriptionLevel.Free)
+                    @if (!RecentFilesViewModel.HasNoSubscription)
                     {
                         <th class="scrd-sec">@Texts.EncryptedPathColumnHeaderText</th>
                     }
@@ -79,7 +79,7 @@
                                     <div style="display:flex;"> - </div>
                                 }
                             </td>
-                            @if (RecentFilesViewModel.SubscriptionLevel != SubscriptionLevel.Free)
+                            @if (!RecentFilesViewModel.HasNoSubscription)
                             {
                                 <td class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;">@fileDetails.FilePath</td>
                             }
@@ -104,7 +104,7 @@
         <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.OpenSecured)">@Texts.McInfMenuOpen</dd>
         <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.RemoveFromListButKeepSecured)">@Texts.RemoveRecentFileToolStripMenuItemText</dd>
         <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.StopSecureAndRemoveFromList)">@Texts.DecryptAndRemoveFromListToolStripMenuItemText</dd>
-        @if (RecentFilesViewModel.SubscriptionLevel == SubscriptionLevel.Free)
+        @if (RecentFilesViewModel.HasNoSubscription)
         {
             <dd class="grey-clr">@Texts.ShareKeysToolStripMenuItemText</dd>
         }
@@ -113,7 +113,7 @@
             <dd @onclick="async (e)=>await RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</dd>
         }
         <dd @onclick="async (e)=> await RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ShowInFolder)">@Texts.ShowInFolderText</dd>
-        @if (RecentFilesViewModel.SubscriptionLevel == SubscriptionLevel.Free)
+        @if (RecentFilesViewModel.HasNoSubscription)
         {
             <dd class="grey-clr">@Texts.RestoreAnonymousNamesMenuText</dd>
         }

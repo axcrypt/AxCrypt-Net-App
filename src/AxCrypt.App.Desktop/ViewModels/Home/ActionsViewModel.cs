@@ -40,7 +40,7 @@ public class ActionsViewModel : ViewModelBase
 
     public void Initialized()
     {
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureKeyShareMenus(license); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
 
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { EncryptButtonEnabled = enabled; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { IsFilesPending = areFilesPending; UpdateViewState(); });
@@ -51,6 +51,12 @@ public class ActionsViewModel : ViewModelBase
     public bool EncryptButtonEnabled { get; set; }
 
     public bool KeyShareButtonEnabled { get; set; }
+
+    public bool HasBusiness { get; set; }
+
+    public bool HasPremium { get; set; }
+
+    public bool HasNoSubscription { get; set; }
 
     public LogOnViewModel LogOnViewModel { get; set; }
 
@@ -87,6 +93,12 @@ public class ActionsViewModel : ViewModelBase
         await EncryptPendingFiles();
     }
 
+    private void ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
+    {
+        ConfigureKeyShareMenus(license);
+        ConfigureMenus(license);
+    }
+
     private void ConfigureKeyShareMenus(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.KeySharing))
@@ -97,6 +109,15 @@ public class ActionsViewModel : ViewModelBase
         {
             KeyShareButtonEnabled = false;
         }
+
+        UpdateViewState();
+    }
+
+    private void ConfigureMenus(LicenseCapabilities license)
+    {
+        HasBusiness = license.Has(LicenseCapability.Business);
+        HasPremium = license.Has(LicenseCapability.Premium);
+        HasNoSubscription = license.Has(LicenseCapability.Viewer);
 
         UpdateViewState();
     }

@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Event listener for secured folders context menu
     document.addEventListener('contextmenu', function (e) {
-        handleContextMenu(e, 'securedContextMenu', '.rcnt-fld-bx');
+        handleContextMenu(e, 'securedContextMenu', '.recent-folder-action-cls');
     });
 
     document.addEventListener('click', function (e) {
@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         //Handle show/hide the settings menu dropdown popup
         if (targetobj.id === "settings-dropdown-click-action" || targetobj.parentElement.id === "settings-dropdown-click-action") {
+            document.getElementById("settings-dropdown-click-action").classList.toggle("active");
             ShowHidePopup("settings-dropdown-popup");
         }
         else {
@@ -155,6 +156,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 if (!IgnoreClosePopupOnPopupActions("inactivity-signout-side-popup", targetobj)) {
                     if (!IgnoreClosePopupOnPopupActions("encryption-file-property-side-popup", targetobj)) {
                         if (!IgnoreClosePopupOnPopupActions("debug-side-popup", targetobj)) {
+                            document.getElementById("settings-dropdown-click-action").classList.remove("active");
                             HidePopup("settings-dropdown-popup");
                         }
                     }
@@ -164,9 +166,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         //Handle show/hide the notification menu dropdown popup
         if (targetobj.id === "notification-dropdown-click-action" || targetobj.parentElement.id === "notification-dropdown-click-action") {
+            document.getElementById("notification-dropdown-click-action").classList.toggle("active");
             ShowHidePopup("notification-dropdown-popup");
         }
         else {
+            document.getElementById("notification-dropdown-click-action").classList.remove("active");
             HidePopup("notification-dropdown-popup");
         }
 

@@ -25,6 +25,11 @@ public static class UIHelperUtility
         {
             return "aud-type-ico";
         }
+        
+        if (CompressedFileTypes!.Contains(fileExtension))
+        {
+            return "comprz-type-ico";
+        }
 
         return "default-type-ico";
     }
@@ -81,8 +86,6 @@ public static class UIHelperUtility
         ".HTM",
         ".razor",
         ".RAZOR",
-        ".zip",
-        ".ZIP"
     };
     private static readonly string[] ImgFileTypes = {
         ".png",
@@ -111,5 +114,12 @@ public static class UIHelperUtility
         ".flac",
         ".FLAC"
     };
-
+    private static readonly string[] CompressedFileTypes = {
+        ".zip",
+        ".ZIP",
+        ".7Z",
+        ".7z",
+        ".rar",
+        ".RAR",
+    };
 }
