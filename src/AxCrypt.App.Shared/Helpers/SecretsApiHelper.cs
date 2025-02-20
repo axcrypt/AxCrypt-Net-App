@@ -82,7 +82,7 @@ public static class SecretsApiHelper
             };
 
             IEnumerable<SecretClientModel> secrets = TextCryptor.GetClientSecrets(logOnIdentity, encryptedSecret);
-            SecretClientModel sharedSecret = secrets.FirstOrDefault();
+            SecretClientModel sharedSecret = secrets.FirstOrDefault()!;
             if (sharedSecret != null)
             {
                 IEnumerable<SecretSharedUser> secretSharedUsers = shareSecret.SharedWith.Select(sw => new SecretSharedUser(EmailAddress.Parse(sw.UserEmail), (SecretShareVisibility)Enum.Parse(typeof(SecretShareVisibility), sw.VisibilityType)));

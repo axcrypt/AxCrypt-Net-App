@@ -91,21 +91,21 @@ public class EditSecretViewModel : ManageSecretViewModel
             case SecretType.Password:
                 secrets[0].Password.Title = Secret.Password.Title;
                 secrets[0].Password.Url = Secret.Password.Url;
-                secrets[0].Password.Description = Secret.Password.SecretDesc;
+                secrets[0].Password.Description = Secret.Password.SecretDesc!;
                 secrets[0].Password.Username = Secret.Password.Username;
                 secrets[0].Password.TheSecret = Secret.Password.SecretValue;
                 break;
 
             case SecretType.Card:
                 secrets[0].Card.Number = Secret.Card.CardNumber;
-                secrets[0].Card.Description = Secret.Card.SecretDesc;
+                secrets[0].Card.Description = Secret.Card.SecretDesc!;
                 secrets[0].Card.NameOnCard = Secret.Card.NameOnCard;
                 secrets[0].Card.SecurityCode = Secret.Card.SecurityCode.ToString();
                 secrets[0].Card.ExpirationDate = Secret.Card.ExpirationDate;
                 break;
 
             case SecretType.Note:
-                secrets[0].Note.Description = Secret.Note.SecretDesc;
+                secrets[0].Note.Description = Secret.Note.SecretDesc!;
                 secrets[0].Note.Note = Secret.Note.Note;
                 break;
         }
@@ -118,51 +118,4 @@ public class EditSecretViewModel : ManageSecretViewModel
         }
         return true;
     }
-
-    //public bool ValidModel()
-    //{
-    //    switch (Secret.SecretType)
-    //    {
-    //        case Api.Model.Secret.SecretType.Legacy:
-    //        case Api.Model.Secret.SecretType.Password:
-    //            return ValidPasswordModel();
-
-    //        case Api.Model.Secret.SecretType.Card:
-    //            return ValidCardModel();
-
-    //        case Api.Model.Secret.SecretType.Note:
-    //            return ValidNoteModel();
-    //    }
-    //    return false;
-    //}
-
-    //private bool ValidNoteModel()
-    //{
-    //    if (string.IsNullOrEmpty(Secret.Note.SecretDesc))
-    //    {
-    //        ErrorMessage = "Fill all the required(marked *) fields!";
-    //        return false;
-    //    }
-    //    return true;
-    //}
-
-    //private bool ValidCardModel()
-    //{
-    //    if (string.IsNullOrEmpty(Secret.Card.CardNumber) || string.IsNullOrEmpty(Secret.Card.SecretDesc) || string.IsNullOrEmpty(Secret.Card.ExpirationDate) || string.IsNullOrEmpty(Secret.Card.NameOnCard) || string.IsNullOrEmpty(Secret.Card.SecurityCode))
-    //    {
-    //        ErrorMessage = "Fill all the required(marked *) fields!";
-    //        return false;
-    //    }
-    //    return true;
-    //}
-
-    //private bool ValidPasswordModel()
-    //{
-    //    if (string.IsNullOrEmpty(Secret.Password.SecretDesc) || string.IsNullOrEmpty(Secret.Password.SecretValue))
-    //    {
-    //        ErrorMessage = "Fill all the required(marked *) fields!";
-    //        return false;
-    //    }
-    //    return true;
-    //}
 }

@@ -28,7 +28,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
 
         SetNewContactState();
 
-        SharedSecretTitle = Secret.SecretTitle;
+        SharedSecretTitle = Secret.SecretTitle!;
         ShareSecretUserList = new ObservableCollection<SecretSharedUserViewModel>(Secret.SharedWith.Select(user => new SecretSharedUserViewModel(user.UserEmail, user.Visibility, user.OwnerEmail, AccountStatus.Verified)));
 
         CanEnableAddShareSecret = true;
@@ -75,18 +75,6 @@ public class ShareSecretViewModel : ManageSecretViewModel
     {
         get { return GetProperty<string>(nameof(AddedUsersTitle)); }
         set { SetProperty(nameof(AddedUsersTitle), value); }
-    }
-
-    public bool IsAnyUsersAdded
-    {
-        get { return GetProperty<bool>(nameof(IsAnyUsersAdded)); }
-        set { SetProperty(nameof(IsAnyUsersAdded), value); }
-    }
-
-    public bool NoUsersAdded
-    {
-        get { return GetProperty<bool>(nameof(NoUsersAdded)); }
-        set { SetProperty(nameof(NoUsersAdded), value); }
     }
 
     public bool CanEnableAddShareSecret

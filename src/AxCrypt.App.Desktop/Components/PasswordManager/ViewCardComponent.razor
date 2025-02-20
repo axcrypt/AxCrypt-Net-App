@@ -64,19 +64,23 @@
                                     <input type="submit" class="button cancel btn-extra-small" value="Back" />
                                 </NavLink>
                             </div>
-                            <div>
-                                <input id="secret-delete" type="button" class="button btn-extra-small alert" value="@Texts.ButtonDeleteText" @onclick="async () => await DeleteSecret()" />
-                            </div>
+                            @if (viewSecretViewModel.HasPaidSubscription)
+                            {
+                                <div>
+                                    <input id="secret-delete" type="button" class="button btn-extra-small alert" value="@Texts.ButtonDeleteText" @onclick="async () => await DeleteSecret()" />
+                                </div>
+                                <div>
+                                    <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" />
+                                </div>
+                            }
                         </div>
-                        @if (!IsSharedView)
-                        {
-                            <div>
-                                <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" />
-                            </div>
-                        }
                     </div>
                 </li>
             </ul>
+            @if (!string.IsNullOrEmpty(shareSecretViewModel!.ErrorMessage))
+            {
+                <div class="error-message">@shareSecretViewModel.ErrorMessage</div>
+            }
             @if (!IsSharedView)
             {
                 <div onclick="toggleClass()" class="sharetext-arrow">
@@ -105,7 +109,7 @@
                                 </div>
                             </div>
                             <div class="">
-                                    <h3 class="select-files font-bold">Added users with access (<span id="userCount">@shareSecretViewModel.ShareSecretUserList?.Count()</span>)</h3>
+                                <h3 class="select-files font-bold">Added users with access (<span id="userCount">@shareSecretViewModel.ShareSecretUserList?.Count()</span>)</h3>
                                 @if (shareSecretViewModel.ShareSecretUserList!.Any())
                                 {
                                     <div class="row">

@@ -56,8 +56,6 @@ public static class ViewModelHelper
             return false;
         }
         return New<IInternetState>().Connected;
-        //NetworkAccess current = Connectivity.Current.NetworkAccess;
-        //return current == NetworkAccess.Internet;
     }
 
     public static readonly int MaxAllowedSecretsCount = 10;

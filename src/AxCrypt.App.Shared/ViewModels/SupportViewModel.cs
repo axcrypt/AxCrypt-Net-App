@@ -5,26 +5,32 @@ using AxCrypt.Common;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services.Interface;
 
 namespace AxCrypt.App.Shared.ViewModels;
 
 public class SupportViewModel
 {
     private readonly SupportService? _supportService;
+    private readonly IStatusAlertService statusAlertService;
 
-    public SupportModel? Model { get; set; }
+    public string Body { get; set; } = "";
+
+    public string Subject { get; set; }
+
     public bool IsLoading { get; set; }
+
     public string? ErrorMessage { get; set; }
 
     public SupportViewModel(SupportService supportService)
     {
         _supportService = supportService;
+        statusAlertService = AxCServiceProvider.GetService<IStatusAlertService>();
         Initialize();
     }
 
     public void Initialize()
     {
-        Model = new SupportModel();
     }
 
     public async Task SubmitSupportAsync(SubscriptionLevel SubscriptionLevel)
@@ -35,29 +41,37 @@ public class SupportViewModel
             return;
         }
 
-        if (string.IsNullOrEmpty(Model.Body))
+        if (string.IsNullOrEmpty(Body))
         {
             ErrorMessage = "Fill the required(marked *) fields!";
             return;
         }
 
         bool submitted = false;
-        Model.Subject = Texts.PromptSupport;
+        Subject = Texts.PromptSupport;
 
         switch (SubscriptionLevel)
         {
             case SubscriptionLevel.Business:
-                Model.Subject = Texts.BusinessPrioritySupportTitle;
+                Subject = Texts.BusinessPrioritySupportTitle;
                 break;
             case SubscriptionLevel.Premium:
-                Model.Subject = Texts.PrioritySupportTitle;
+                Subject = Texts.PrioritySupportTitle;
                 break;
             case SubscriptionLevel.PasswordManager:
-                Model.Subject = $"{nameof(SubscriptionLevel.PasswordManager)} {Texts.PromptSupport}";
+                Subject = $"{nameof(SubscriptionLevel.PasswordManager)} {Texts.PromptSupport}";
                 break;
         }
 
-        submitted = await _supportService.SendPremiumSupportRequestEmail(Model.Subject, Model.Body);
-        Model.Body = string.Empty;
+        submitted = await _supportService.SendPremiumSupportRequestEmail(Subject, Body);
+        if (submitted) 
+        {
+            statusAlertService.Success("Successfully send the mail to Premium support");
+        }
+        else
+        {
+            statusAlertService.Error("There are some error, Please try again!");
+        }
+        Body = string.Empty;
     }
 }

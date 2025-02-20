@@ -47,98 +47,102 @@
                                     <input type="submit" class="button cancel btn-extra-small" value="Back" />
                                 </NavLink>
                             </div>
-                             <div>
-                                <input id="secret-delete" type="button" class="button btn-extra-small alert" value="@Texts.ButtonDeleteText" @onclick="async () => await DeleteSecret()" />
-                            </div> 
+                            @if (viewSecretViewModel.HasPaidSubscription)
+                            {
+                                <div>
+                                    <input id="secret-delete" type="button" class="button btn-extra-small alert" value="@Texts.ButtonDeleteText" @onclick="async () => await DeleteSecret()" />
+                                </div>
+                                <div>
+                                    <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" />
+                                </div>
+                            }
                         </div>
-                        @if (!IsSharedView)
-                        {
-                            <div>
-                                <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" />
-                            </div>
-                        }
                     </div>
                 </li>
             </ul>
-             @if (!IsSharedView)
-             {
-            <div onclick="toggleClass()" class="sharetext-arrow">
-                <div class="sharewith-row" id="sharewith-expnd-collps">
-                    <span class="url-text">@Texts.PromptSharedWith</span>
-                    <img id="rotateImg" class="share-box share-image" src="/images/Vector.svg" alt="">
-                </div>
-            </div>
-            <div id="container" class="container">
-                <form id="temp-add-share-user">
-                    <div class="sharewith-box" style="padding: 20px; ">
-                        <div style="margin:auto; justify-content:flex-start; flex-wrap:wrap; justify-content:space-around; width:100% " class="row">
-                            <div class="small-8 columns">
-                                <input type="text" id="new-member-email" name="memberEmail" placeholder="someone@email.example" @onclick="showSyncPopup" @bind="@shareSecretViewModel.SecretSharingUserEmail" style="width: 100%; height: 40px; border-radius:5px ">
-                            </div>
-                            <div class="small-2">
-                                <select style="height: 35px; border-radius:5px" id="shareVisibilityOptions" name="Visibility" title="Visibility" @bind="shareSecretViewModel.VisibilityType">
-                                    @foreach (SecretShareVisibility visibility in Enum.GetValues(typeof(SecretShareVisibility)))
-                                {
-                                    <option value="@visibility">@visibility</option>
-                                }
-                                </select>
-                            </div>
-                           <div class="small-2 columns">
-                            <input style=" margin-top:4%; width: 90px; margin-left: 20px;" id="Add-Share-Users" type="button" class="button active btn-small " @onclick= "shareSecretViewModel.AddUserToSharedListAsync" value="Add" />
-                        </div>
-                        </div>
-                        <div class="">
-                            <h3 class="select-files font-bold">Added users with access (<span id="userCount">@shareSecretViewModel.ShareSecretUserList?.Count()</span>)</h3>
-                             @if (shareSecretViewModel.ShareSecretUserList!.Any())
-                            {
-                                <div class="row">
-                                    <div class="file-box-desktop scroll-container" id="sharedUserList" style="margin-bottom:0px; margin-right:5px;">
-                                       @foreach (SecretSharedUserViewModel user in shareSecretViewModel.ShareSecretUserList!)
-                                        {
-                                        <dl>
-                                        <dd class="list-bgrnd">
-                                            @if (isAxCryptUser)
-                                            {
-                                                <img class="axcrypt-icons" style="float:left; margin-top:5px;" src="/images/default/AxCrypt_Icon.svg" alt="img">
-                                            }
-                                            else
-                                            {
-                                                <img class="contact-icon" style="float:left;" src="" alt="img">
-                                            }
-                                            <div style="display:inline-block; ">
-                                                <span class="shared-text">@user.UserEmail</span><br />
-                                                <span style="padding-left:8px; display: block;" class="share-visibility">@user.Visibility</span>
-                                            </div>
-                                            <img class="menu-image" src="/images/Group160.svg" alt="img" @onclick="() => shareSecretViewModel.UpdatedSelectedUser(user)">
-                                            <hr style="width:100%;">
-                                        </dd>
-                                    </dl>
-                                        }
-                                    </div>
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="file-box-desktop file-box-empty scroll-container" id="sharedUserList" style="margin-right:0px; margin-right:5px;"></div>
-                            }
-                            @if (shareSecretViewModel.CanContextMenuOpened)
-                            {
-                                <div class="hide-model-popup context-menu">
-                                    <dl>
-                                        <dd>
-                                            <img class="unshare-icon" src="/images/IcoUnShare.svg" alt="" />
-                                            <span @onclick="shareSecretViewModel.RemoveSelectedSharedUser">@Texts.UnSharePromptText</span>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            }
-                        </div>
+            @if (!string.IsNullOrEmpty(shareSecretViewModel!.ErrorMessage))
+            {
+                <div class="error-message">@shareSecretViewModel.ErrorMessage</div>
+            }
+            @if (!IsSharedView)
+            {
+                <div onclick="toggleClass()" class="sharetext-arrow">
+                    <div class="sharewith-row" id="sharewith-expnd-collps">
+                        <span class="url-text">@Texts.PromptSharedWith</span>
+                        <img id="rotateImg" class="share-box share-image" src="/images/Vector.svg" alt="">
                     </div>
-                    <div style="margin-left: 0px !important;">
-                    <input type="submit" class="button success btn-extra-small" @onclick="ApplyShare" value="Apply" disabled="@(!shareSecretViewModel.EnableApplyButton)" />
                 </div>
-                </form>
-            </div>
+                <div id="container" class="container">
+                    <form id="temp-add-share-user">
+                        <div class="sharewith-box" style="padding: 20px; ">
+                            <div style="margin:auto; justify-content:flex-start; flex-wrap:wrap; justify-content:space-around; width:100% " class="row">
+                                <div class="small-8 columns">
+                                    <input type="text" id="new-member-email" name="memberEmail" placeholder="someone@email.example" @onclick="showSyncPopup" @bind="@shareSecretViewModel.SecretSharingUserEmail" style="width: 100%; height: 40px; border-radius:5px ">
+                                </div>
+                                <div class="small-2">
+                                    <select style="height: 35px; border-radius:5px" id="shareVisibilityOptions" name="Visibility" title="Visibility" @bind="shareSecretViewModel.VisibilityType">
+                                        @foreach (SecretShareVisibility visibility in Enum.GetValues(typeof(SecretShareVisibility)))
+                                        {
+                                            <option value="@visibility">@visibility</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="small-2 columns">
+                                    <input style=" margin-top:4%; width: 90px; margin-left: 20px;" id="Add-Share-Users" type="button" class="button active btn-small " @onclick="shareSecretViewModel.AddUserToSharedListAsync" value="Add" />
+                                </div>
+                            </div>
+                            <div class="">
+                                <h3 class="select-files font-bold">Added users with access (<span id="userCount">@shareSecretViewModel.ShareSecretUserList?.Count()</span>)</h3>
+                                @if (shareSecretViewModel.ShareSecretUserList!.Any())
+                                {
+                                    <div class="row">
+                                        <div class="file-box-desktop scroll-container" id="sharedUserList" style="margin-bottom:0px; margin-right:5px;">
+                                            @foreach (SecretSharedUserViewModel user in shareSecretViewModel.ShareSecretUserList!)
+                                            {
+                                                <dl>
+                                                    <dd class="list-bgrnd">
+                                                        @if (isAxCryptUser)
+                                                        {
+                                                            <img class="axcrypt-icons" style="float:left; margin-top:5px;" src="/images/default/AxCrypt_Icon.svg" alt="img">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img class="contact-icon" style="float:left;" src="" alt="img">
+                                                        }
+                                                        <div style="display:inline-block; ">
+                                                            <span class="shared-text">@user.UserEmail</span><br />
+                                                            <span style="padding-left:8px; display: block;" class="share-visibility">@user.Visibility</span>
+                                                        </div>
+                                                        <img class="menu-image" src="/images/Group160.svg" alt="img" @onclick="() => shareSecretViewModel.UpdatedSelectedUser(user)">
+                                                        <hr style="width:100%;">
+                                                    </dd>
+                                                </dl>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="file-box-desktop file-box-empty scroll-container" id="sharedUserList" style="margin-right:0px; margin-right:5px;"></div>
+                                }
+                                @if (shareSecretViewModel.CanContextMenuOpened)
+                                {
+                                    <div class="hide-model-popup context-menu">
+                                        <dl>
+                                            <dd>
+                                                <img class="unshare-icon" src="/images/IcoUnShare.svg" alt="" />
+                                                <span @onclick="shareSecretViewModel.RemoveSelectedSharedUser">@Texts.UnSharePromptText</span>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div style="margin-left: 0px !important;">
+                            <input type="submit" class="button success btn-extra-small" @onclick="ApplyShare" value="Apply" disabled="@(!shareSecretViewModel.EnableApplyButton)" />
+                        </div>
+                    </form>
+                </div>
             }
         </div>
     </form>
@@ -175,7 +179,7 @@
             return;
         }
 
-        bool deleted =await viewSecretViewModel.DeleteSecretAsync();
+        bool deleted = await viewSecretViewModel.DeleteSecretAsync();
         if (deleted)
         {
             StatusAlertService.Success("Your secret has been deleted!.");

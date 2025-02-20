@@ -37,20 +37,6 @@ public class ViewSecretViewModel : ManageSecretViewModel
         base.ShowSecretByType(Secret.SecretType);
     }
 
-    public bool HidePassword
-    {
-        get { return GetProperty<bool>(nameof(HidePassword)); }
-        private set { SetProperty(nameof(HidePassword), value); }
-    }
-
-    public bool ShowCopiedToClipboardIndicator
-    {
-        get { return GetProperty<bool>(nameof(ShowCopiedToClipboardIndicator)); }
-        private set { SetProperty(nameof(ShowCopiedToClipboardIndicator), value); }
-    }
-
-    public SubscriptionLevel SubscriptionLevel { get; set; }
-
     public string? UserEmail { get; set; }
 
     public string GetValue(bool isVisible, string value)

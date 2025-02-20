@@ -213,17 +213,17 @@ public static class PersonalSecrets
         {
             case SecretType.Legacy:
             case SecretType.Password:
-                AxCrypt.Core.Secrets.SecretPassword secretPassword = new AxCrypt.Core.Secrets.SecretPassword(secret.Password.Title, secret.Password.Url, secret.Password.SecretDesc, secret.Password.Username, secret.Password.SecretValue);
+                AxCrypt.Core.Secrets.SecretPassword secretPassword = new AxCrypt.Core.Secrets.SecretPassword(secret.Password.Title, secret.Password.Url, secret.Password.SecretDesc!, secret.Password.Username, secret.Password.SecretValue);
                 secretClientmodel = new SecretClientModel(guid, secretPassword);
                 break;
 
             case SecretType.Card:
-                AxCrypt.Core.Secrets.SecretCard secretCard = new AxCrypt.Core.Secrets.SecretCard(secret.Card.CardNumber, secret.Card.SecretDesc, secret.Card.NameOnCard, secret.Card.SecurityCode, secret.Card.ExpirationDate);
+                AxCrypt.Core.Secrets.SecretCard secretCard = new AxCrypt.Core.Secrets.SecretCard(secret.Card.CardNumber, secret.Card.SecretDesc!, secret.Card.NameOnCard, secret.Card.SecurityCode, secret.Card.ExpirationDate);
                 secretClientmodel = new SecretClientModel(guid, secretCard);
                 break;
 
             case SecretType.Note:
-                AxCrypt.Core.Secrets.SecretNote secretNote = new AxCrypt.Core.Secrets.SecretNote(secret.Note.SecretDesc, secret.Note.Note);
+                AxCrypt.Core.Secrets.SecretNote secretNote = new AxCrypt.Core.Secrets.SecretNote(secret.Note.SecretDesc!, secret.Note.Note);
                 secretClientmodel = new SecretClientModel(guid, secretNote);
                 break;
 

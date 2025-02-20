@@ -7,6 +7,7 @@ namespace AxCrypt.Core.UI
     public enum SecretsSortOrder
     {
         None,
-        ByContent
+        ByContent,
+        ByDate
     }
 }

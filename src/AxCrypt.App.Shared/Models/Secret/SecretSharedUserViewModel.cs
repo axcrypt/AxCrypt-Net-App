@@ -23,16 +23,16 @@ public class SecretSharedUserViewModel : IEquatable<SecretSharedUserViewModel>
     public string ImageSource { get; set; }
     public string DotImage { get; } = "DotsIcon.png";
 
-    public bool Equals(SecretSharedUserViewModel other)
+    public bool Equals(SecretSharedUserViewModel? other)
     {
-        if ((object)other == null)
+        if ((object)other! == null)
         {
             return false;
         }
         return UserEmail == other.UserEmail && ImageSource == other.ImageSource && DotImage == other.DotImage;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj == null || typeof(SecretSharedUserViewModel) != obj.GetType())
         {

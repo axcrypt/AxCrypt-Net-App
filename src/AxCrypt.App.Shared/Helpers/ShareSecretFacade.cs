@@ -82,7 +82,7 @@ public static class ShareSecretFacade
     {
         if (!secretModel.Any())
         {
-            return null;
+            return null!;
         }
         UserKeyPair currentKeyPair = await New<LogOnIdentity, IAccountService>(identity).CurrentKeyPairAsync();
 
@@ -104,7 +104,7 @@ public static class ShareSecretFacade
             };
 
             IEnumerable<SecretClientModel> sharedSecrets = TextCryptor.GetClientSecrets(identity, encryptedSecret);
-            SecretClientModel secret = sharedSecrets.FirstOrDefault();
+            SecretClientModel secret = sharedSecrets.FirstOrDefault()!;
             if (secret != null)
             {
                 IEnumerable<SecretSharedUser> secretSharedUsers = shareSecret.SharedWith.Select(sw => new SecretSharedUser(AxCrypt.Core.UI.EmailAddress.Parse(sw.UserEmail), (SecretShareVisibility)Enum.Parse(typeof(SecretShareVisibility), sw.VisibilityType)));
@@ -116,7 +116,7 @@ public static class ShareSecretFacade
         return secrets;
     }
 
-    public static async Task<bool> UpdateSharedVisibilityAsync(SecretClientModel secret, LogOnIdentity identity = null)
+    public static async Task<bool> UpdateSharedVisibilityAsync(SecretClientModel secret, LogOnIdentity identity = null!)
     {
         if (secret.Share == null)
         {

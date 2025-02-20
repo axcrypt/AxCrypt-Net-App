@@ -36,6 +36,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     private readonly string _sortOptionShared = Texts.PromptSharedWith;
     private bool _activateSharedListFilter = false;
     private LogOnIdentity _identity;
+    private LogOnViewModel _logOnViewModel;
 
     private IStatusAlertService? _StatusAlertService;
 
@@ -43,6 +44,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     {
         _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
         _StatusAlertService = statusAlertService;
+        _logOnViewModel = AxCServiceProviderExtension.GetService<LogOnViewModel>();
 
         Initialize();
     }
@@ -69,6 +71,15 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         ShowSecretFilterMenu = false;
     }
 
+    public void UpgradeFreeUser()
+    {
+        if (!HasPaidSubscription)
+        {
+            _logOnViewModel.UpgradeDialog.Show();
+            return;
+        }
+    }
+
     public ObservableCollection<SecretViewModel> Secrets
     {
         get
@@ -85,7 +96,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
             }
 
             SelectedSecretListFilter = SelectedSecretListFilter == SecretFilterOption.None ? SecretFilterOption.All : SelectedSecretListFilter;
-            if (_CachedSecrets.ContainsKey(SelectedSecretListFilter))
+            if (_CachedSecrets!.ContainsKey(SelectedSecretListFilter))
             {
                 _CachedSecrets.Remove(SelectedSecretListFilter);
             }
@@ -93,7 +104,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         }
     }
 
-    private IDictionary<SecretFilterOption, ObservableCollection<SecretViewModel>> _CachedSecrets;
+    private IDictionary<SecretFilterOption, ObservableCollection<SecretViewModel>>? _CachedSecrets;
 
     public ObservableCollection<SecretViewModel> FilteredSecrets
     {
@@ -156,8 +167,6 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     public bool ShowSecretsList
     { get { return GetProperty<bool>(nameof(ShowSecretsList)); } private set { SetProperty(nameof(ShowSecretsList), value); } }
 
-    public int SecretListHeightRequest { get; set; }
-
     public string SortOptionAllText
     { get { return GetProperty<string>(nameof(SortOptionAllText)); } private set { SetProperty(nameof(SortOptionAllText), value); } }
 
@@ -212,7 +221,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     public async Task SortSecrets(ChangeEventArgs e)
     {
-        if (Enum.TryParse<SecretsSortOrder>(e.Value.ToString(), out var sortOrder))
+        if (Enum.TryParse<SecretsSortOrder>(e.Value!.ToString(), out var sortOrder))
         {
             SelectedSortOrder = sortOrder;
         }
@@ -258,7 +267,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         {
             ClearFilterAndCachedSecrets();
 
-            if (_CachedSecrets.ContainsKey(SecretFilterOption.All))
+            if (_CachedSecrets!.ContainsKey(SecretFilterOption.All))
             {
                 Secrets = _CachedSecrets[SecretFilterOption.All];
                 ApplyFilter();
@@ -276,7 +285,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     {
         _activateSharedListFilter = false;
 
-        _CachedSecrets.Clear();
+        _CachedSecrets!.Clear();
         Secrets.Clear();
     }
 
@@ -293,7 +302,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     {
         using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
-            if (_CachedSecrets.ContainsKey(SecretFilterOption.Shared))
+            if (_CachedSecrets!.ContainsKey(SecretFilterOption.Shared))
             {
                 Secrets = _CachedSecrets[SecretFilterOption.Shared];
                 ApplyFilter();
@@ -456,7 +465,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     private void LoadCachedSecretsByFilter(SecretFilterOption filterOption)
     {
-        if (_CachedSecrets.ContainsKey(filterOption))
+        if (_CachedSecrets!.ContainsKey(filterOption))
         {
             Secrets = _CachedSecrets[filterOption];
         }
@@ -535,7 +544,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         FilterSecretsByType();
         if (FilteredSecrets == null || FilteredSecrets.Count == 0)
         {
-            return null;
+            return null!;
         }
 
         StringBuilder sb = new StringBuilder();

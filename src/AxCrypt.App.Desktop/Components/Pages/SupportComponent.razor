@@ -24,7 +24,10 @@
         </h1>
         <p class="hide-txt">@(PageDescription)</p>
     </div>
-
+    @if (!string.IsNullOrEmpty(SupportViewModel.ErrorMessage))
+    {
+        <div class="error-message">@SupportViewModel.ErrorMessage</div>
+    }
     @if (LogOnModel.SubscriptionLevel != SubscriptionLevel.Free)
     {
         <div id="support-body-section">
@@ -66,14 +69,16 @@
             <div style="padding-top:30px;">
                 <span class="desc-txt">@Texts.SupportDescribeLabel</span>
             </div>
-            <div>
-                <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Model.Body" tabindex=1>
-                                </textarea>
-            </div>
-            <div class="btn-sec">
-                <input type="reset" class="button border btn-large font-medium btn-hide" value="@Texts.ButtonCancelText" />
-                <input type="submit" class="button success btn-large font-medium" value="@Texts.ButtonSendText" @onclick="SubmitSupportAsync" />
-            </div>
+            <EditForm Model="@SupportViewModel" OnValidSubmit="SubmitSupportAsync">
+                <div>
+                    <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Body" tabindex=1>
+                                        </textarea>
+                </div>
+                <div class="btn-sec">
+                    <input type="reset" class="button border btn-large font-medium btn-hide" value="Reset" @onclick="ResetSupport" />
+                    <input type="submit" class="button success btn-large font-medium" value="@Texts.ButtonSendText" />
+                </div>
+            </EditForm>
         </div>
     }
     else
@@ -136,7 +141,13 @@
     private async void SubmitSupportAsync()
     {
         await SupportViewModel.SubmitSupportAsync(LogOnModel.SubscriptionLevel);
-
+        ResetSupport();
         await InvokeAsync(() => StateHasChanged());
+    }
+
+    private void ResetSupport()
+    {
+        SupportViewModel.Body = "";
+        SupportViewModel.Subject = "";
     }
 }
