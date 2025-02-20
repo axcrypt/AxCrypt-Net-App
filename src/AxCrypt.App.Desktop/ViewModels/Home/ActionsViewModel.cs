@@ -68,6 +68,11 @@ public class ActionsViewModel : ViewModelBase
         }
     }
 
+    public void OpenFeedbackPopup()
+    {
+        LogOnViewModel.FeedbackDialog.Show();
+    }
+
     public async Task OpenFile()
     {
         await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(string.Empty);
@@ -117,7 +122,7 @@ public class ActionsViewModel : ViewModelBase
     {
         HasBusiness = license.Has(LicenseCapability.Business);
         HasPremium = license.Has(LicenseCapability.Premium);
-        HasNoSubscription = license.Has(LicenseCapability.Viewer);
+        HasNoSubscription = license.CryptoPolicy.Name == "Free";
 
         UpdateViewState();
     }

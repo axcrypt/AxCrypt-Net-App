@@ -25,6 +25,7 @@
             <thead style="user-select: none;">
                 <tr>
                     <th style="width:3%;"> <input class="check-box" type="checkbox" @onchange="(e)=> RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
+                    <th style="width:3%;"></th>
                     <th style="width:23%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(0)">@Texts.NameLabel<img class="arw-img" src="" alt="arrow img" /></th>
                     <th style="width:11%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(1)">@Texts.FileSizeColumnHeaderText<img class="arw-img" src="" alt="arrow img" /></th>
                     <th style="width:11%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(5)">@Texts.CryptoNameText<img class="arw-img" src="" alt="arrow img" /></th>
@@ -52,8 +53,10 @@
                             <td>
                                 <input class="check-box" type="checkbox" @onchange="() => RecentFilesViewModel.HandleFileClick(!fileDetails.IsChecked, fileDetails.FilePath)" checked="@fileDetails.IsChecked" />
                             </td>
+                            <td class="fle-exton-img">
+                                <img style="max-width: 32px;max-height: 32px;" class="@fileDetails.IconClass" src="" alt="file-image" />
+                            </td>
                             <td class="fle-exton-img" style="display: flex; align-items: center;" title="@fileDetails.FilePath">
-                                <img style="width: 18px; height: 18px;" class="@fileDetails.IconClass" src="" alt="file-image" />
                                 <span class="fle-nme">@fileDetails.FileName</span>
                             </td>
                             <td>@fileDetails.FileSize</td>
@@ -81,7 +84,7 @@
                             </td>
                             @if (!RecentFilesViewModel.HasNoSubscription)
                             {
-                                <td class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;">@fileDetails.FilePath</td>
+                                <td class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;" title="@fileDetails.FilePath">@fileDetails.FilePath</td>
                             }
                         </tr>
                     }
@@ -106,7 +109,7 @@
         <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.StopSecureAndRemoveFromList)">@Texts.DecryptAndRemoveFromListToolStripMenuItemText</dd>
         @if (RecentFilesViewModel.HasNoSubscription)
         {
-            <dd class="grey-clr">@Texts.ShareKeysToolStripMenuItemText</dd>
+            <dd class="grey-clr subs-required" style="background-position: top left;" @onclick="RecentFilesViewModel.UpgradePopup">@Texts.ShareKeysToolStripMenuItemText</dd>
         }
         else
         {
@@ -115,7 +118,7 @@
         <dd @onclick="async (e)=> await RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ShowInFolder)">@Texts.ShowInFolderText</dd>
         @if (RecentFilesViewModel.HasNoSubscription)
         {
-            <dd class="grey-clr">@Texts.RestoreAnonymousNamesMenuText</dd>
+            <dd class="grey-clr subs-required" style="background-position: top left;" @onclick="RecentFilesViewModel.UpgradePopup">@Texts.RestoreAnonymousNamesMenuText</dd>
         }
         else
         {

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 
 public class SuggestionViewModel
 {
-    public bool showSugPopup { get; set; }
+    public bool showSugPopup { get; set; } = true;
 
     public DateTime lastClosedTime { get; set; }
 

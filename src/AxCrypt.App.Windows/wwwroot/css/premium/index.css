@@ -215,15 +215,17 @@
 }
 
 .fle-exton-img img {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
 }
 .fle-exton-img .fle-nme {
+  font-size: 14px;
   display: inline-block;
-  max-width: 200px;
+  max-width: 210px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 2% 0;
 }
 .fle-exton-img .vid-type-ico {
   content: url(/images/premium/IcoVd.svg);
@@ -301,7 +303,7 @@
   font-weight: 600;
   border: none;
   padding-bottom: 15px;
-  padding: 7px 0px 7px 10px;
+  padding: 6px 0 6px 10px;
 }
 .rcnt-fle-tbl thead tr th img {
   padding-left: 5px;
@@ -311,7 +313,7 @@
   color: #A4A4A4;
   font-size: 12px;
   font-weight: 700;
-  padding: 7px 0px 7px 10px;
+  padding: 4px 0px 4px 10px;
 }
 .rcnt-fle-tbl tbody tr:hover,
 .rcnt-fle-tbl tbody tr.active,
@@ -321,7 +323,7 @@
 }
 
 .file-max-hgt {
-  height: 50vh;
+  height: 47vh;
   overflow-y: scroll;
 }
 
@@ -593,7 +595,7 @@
 }
 .home-context-menu dd:hover {
   color: #48772C;
-  background-color: #C5CFC0;
+  background-color: #E8FEDE;
   margin: 4px -10px;
   padding: 4px 20px;
   background-image: url(/images/premium/IcoIndctr.svg);

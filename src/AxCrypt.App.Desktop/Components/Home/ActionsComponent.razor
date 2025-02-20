@@ -131,15 +131,17 @@
                                 <td rowspan="2"><img class="icosrv" src="" alt="grp-img" /></td>
                                 <td class="info-txt">Tell us what you think</td>
                             </tr>
-                            <tr>
-                                <td class="gt-stred-txt">Submit now <img class="arwrgt-img" /></td>
+                            <tr @onclick="homeActionModel.OpenFeedbackPopup">
+                                <td class="gt-stred-txt" style="cursor:pointer">Submit now <img class="arwrgt-img" /></td>
                             </tr>
                             <tr>
                                 <td rowspan="2"><img class="icoidea" src="" alt="grp-img" /></td>
                                 <td class="info-txt">@Texts.SupportGetStartedVideoText</td>
                             </tr>
                             <tr>
-                                <td class="gt-stred-txt">@Texts.GetStartedLinkLabel <img class="arwrgt-img" /></td>
+                                <a style="text-decoration:none;" href="https://axcrypt.net/information/guides/get-started/">
+                                <td class="gt-stred-txt" style="cursor:pointer">@Texts.GetStartedLinkLabel <img class="arwrgt-img" /></td>
+                                </a>
                             </tr>
                         </tbody>
                     </table>
@@ -148,7 +150,27 @@
         </div>
     </div>
     <div>
-        @if (homeActionModel.HasPremium)
+        @if (homeActionModel.HasBusiness)
+        {
+            <div>
+                <label class="fle-nme fnt-sze" style="padding-bottom:20px;">Active subscriptions</label>
+                <div class="actv-subs align-items">
+                    @* <div class="battery">
+                <div class="battery-head"> </div>
+                <div class="battery-body" id="battery-body">
+                <div class="charge-level">
+                <span style="text-align: center; margin:auto auto;"> @homeActionModel.MembersCount/<span style="font-weight:bold;">@homeActionModel.TotalMembers</span></span>
+                </div>
+                </div>
+                </div> *@
+                    <div class="center-column" style="margin-left: 47px;">
+                        <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="homeActionModel.RedirectToAccountWebUrl">@Texts.BusinessSubscriptionRenewMenu<img class="rnw-btn" src="" alt="img" /></button>
+                        <button class="subs-btn" style="background-color: #000;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">@Texts.AddUsersText<img class="add-usr" src="" alt="img" /></button>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (homeActionModel.HasPremium)
         {
             <div style="display: block;">
                 <div style="display:flex; min-width: 300px;">
@@ -177,26 +199,6 @@
                 </div>
             </div>
         }
-        else if (homeActionModel.HasBusiness)
-        {
-            <div>
-                <label class="fle-nme fnt-sze" style="padding-bottom:20px;">Active subscriptions</label>
-                <div class="actv-subs align-items">
-                    @* <div class="battery">
-                <div class="battery-head"> </div>
-                <div class="battery-body" id="battery-body">
-                <div class="charge-level">
-                <span style="text-align: center; margin:auto auto;"> @homeActionModel.MembersCount/<span style="font-weight:bold;">@homeActionModel.TotalMembers</span></span>
-                </div>
-                </div>
-                </div> *@
-                    <div class="center-column" style="margin-left: 47px;">
-                        <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="homeActionModel.RedirectToAccountWebUrl">@Texts.BusinessSubscriptionRenewMenu<img class="rnw-btn" src="" alt="img" /></button>
-                        <button class="subs-btn" style="background-color: #000;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">@Texts.AddUsersText<img class="add-usr" src="" alt="img" /></button>
-                    </div>
-                </div>
-            </div>
-        }
         else if (homeActionModel.HasNoSubscription)
         {
             <div class="upgrd-box free-color">
@@ -215,17 +217,15 @@
         {
             @if (homeActionModel.HasBusiness || homeActionModel.HasPremium)
             {
-                <AxCrypt.App.Windows.Components.Pages.PopupDialog.Suggestion />
+                <AxCrypt.App.Desktop.Components.PopupDialog.Suggestion />
             }
             else
             {
-                <AxCrypt.App.Windows.Components.Pages.PopupDialog.Subscription />
+                <AxCrypt.App.Desktop.Components.PopupDialog.Subscription />
             }
         }
     </div>
 </div>
-
-<AxCrypt.App.Windows.Components.Pages.Main.HomeView.HomeSubActionComponent />
 
 @code {
     public const string _ENABLEDTOOLSTRIPBACKCOLOR = "#FFFFFF";

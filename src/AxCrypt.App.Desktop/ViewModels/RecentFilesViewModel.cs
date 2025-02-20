@@ -1,7 +1,6 @@
 using AxCrypt.Api.Model;
 using AxCrypt.App.Desktop.Code;
 using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels;
@@ -76,9 +75,14 @@ public class RecentFilesViewModel : ViewModelBase
 
     public bool HasNoSubscription { get; set; }
 
+    public void UpgradePopup()
+    {
+        LogOnViewModel.UpgradeDialog.Show();
+    }
+
     private void ConfigureMenus(LicenseCapabilities license)
     {
-        HasNoSubscription = license.Has(LicenseCapability.Viewer);
+        HasNoSubscription = license.CryptoPolicy.Name == "Free";
 
         UpdateViewState();
     }

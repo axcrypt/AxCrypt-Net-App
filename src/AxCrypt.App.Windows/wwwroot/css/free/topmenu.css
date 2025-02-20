@@ -4,7 +4,7 @@
 
 .desk-acnt-popup, .desk-stngs-popup, .notification-popup {
   position: absolute;
-  top: 90px !important;
+  top: 110px !important;
   right: 2%;
   text-align: left;
   z-index: 1;
@@ -113,6 +113,13 @@
   margin: 0 -20px;
 }
 
+.desk-stngs-popup.model-popup {
+  padding: 20px 0 !important;
+}
+
+.settings-menu-item-container {
+  padding: 0 20px;
+}
 .settings-menu-item-container .stngs-menu-icon {
   display: inline-block;
   width: 30px;
@@ -175,7 +182,7 @@
   content: url(/images/default/IcoErrRprt.svg);
 }
 .settings-menu-item-container:hover, .settings-menu-item-container.selected {
-  background: #B7B7B7;
+  background: #EEF7E9;
   /*background-color: $colAvtr;
   color: $TxtClr !important;*/
   /*        padding: 10px 25px;
@@ -327,8 +334,8 @@
 
 .notification-badge {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -337,8 +344,8 @@
   border-radius: 50%;
   background: #48772C;
   position: absolute;
-  font-size: 6px;
-  margin-left: 8px;
+  font-size: 8px;
+  margin-left: 18px;
 }
 
 @media (min-width: 1139px) {
@@ -535,7 +542,7 @@
 
 .desk-stngs-popup:after,
 .desk-stngs-popup:before {
-  right: 58% !important;
+  right: 66% !important;
 }
 
 @media (max-width: 768px) {

@@ -222,16 +222,18 @@
 
 .fle-exton-img {
     img {
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
     }
 
     .fle-nme {
+        font-size: 14px;
         display: inline-block;
-        max-width: 200px;
+        max-width: 210px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        margin: 2% 0;
     }
 
     .vid-type-ico {
@@ -317,7 +319,7 @@
         font-weight: 600;
         border: none;
         padding-bottom: 15px;
-        padding: 7px 0px 7px 10px;
+        padding: 6px 0 6px 10px;
 
         img {
             padding-left: 5px;
@@ -329,7 +331,7 @@
         color: $colDsbl;
         font-size: 12px;
         font-weight: 700;
-        padding: 7px 0px 7px 10px;
+        padding: 4px 0px 4px 10px;
     }
 
     tbody tr:hover,
@@ -341,7 +343,7 @@
 }
 
 .file-max-hgt {
-    height: 50vh;
+    height: 47vh;
     overflow-y: scroll;
 }
 
@@ -624,7 +626,7 @@
 
     dd:hover {
         color: $TxtClr;
-        background-color: $PflBg;
+        background-color: $HglhtTxt;
         margin: 4px -10px;
         padding: 4px 20px;
         background-image: $IcoIndctr;
