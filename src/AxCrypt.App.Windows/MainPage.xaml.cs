@@ -4,19 +4,17 @@ using AxCrypt.Api.Model;
 using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Desktop.Code;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.Common;
-using AxCrypt.Content;
 using AxCrypt.Core;
-using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System.Globalization;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Desktop;
 using AxCrypt.App.Desktop.Helpers;
 
 namespace AxCrypt.App.Windows;
@@ -32,7 +30,7 @@ public partial class MainPage : ContentPage, ISignIn
     private KnownFoldersViewModel _knownFoldersViewModel;
 
     private ApiVersion _apiVersion;
-
+    private AppMain _appMain;
     public MainPage()
     {
         InitializeComponent();
@@ -46,6 +44,7 @@ public partial class MainPage : ContentPage, ISignIn
         _fileOperationViewModel = fileOperationViewModel;
         _knownFoldersViewModel = knownFoldersViewModel;
         _registerViewModel = registerViewModel;
+        _appMain = new AppMain(logOnService, mainViewModel, fileOperationViewModel, knownFoldersViewModel, registerViewModel);
     }
 
     protected override void OnAppearing()
@@ -66,7 +65,7 @@ public partial class MainPage : ContentPage, ISignIn
         New<IRuntimeEnvironment>().FirstInstanceIsReady();
 
         await GetApiVersionAsync();
-        SetThisVersion();
+        //SetThisVersion();
 
         UpdateArabicStyle();
 
@@ -85,7 +84,6 @@ public partial class MainPage : ContentPage, ISignIn
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
     private void BindToViewModels()
     {
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DebugMode), (bool enabled) => { UpdateDebugMode(enabled); });
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DecryptFileEnabled), (bool enabled) => { _decryptToolStripMenuItem.Enabled = enabled; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { _encryptToolStripButton.Enabled = enabled; ConfigureEncryptMenu(enabled); });
@@ -98,9 +96,7 @@ public partial class MainPage : ContentPage, ISignIn
         //_mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureLinkLabelAsync(New<KnownIdentities>().DefaultEncryptionIdentity); });
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await SetWindowTitleTextAsync(_mainViewModel.LoggedOn); });
         //_mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await ConfigureLinkLabelAsync(New<KnownIdentities>().DefaultEncryptionIdentity); });
-        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await SetSignInSignOutStatusAsync(loggedOn); });
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await new Display().LocalSignInWarningPopUpAsync(loggedOn); });
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.OpenEncryptedEnabled), (bool enabled) => { _openEncryptedToolStripMenuItem.Enabled = enabled; });
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RandomRenameEnabled), (bool enabled) => { _renameToolStripMenuItem.Enabled = enabled; });
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.WatchedFoldersEnabled), (bool enabled) => { ConfigureWatchedFoldersMenus(enabled); });
@@ -125,14 +121,9 @@ public partial class MainPage : ContentPage, ISignIn
     private void BindToFileOperationViewModel()
     {
         //_encryptToolStripButton.Tag = _fileOperationViewModel.EncryptFiles;
-        _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
-        _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
         //_fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await HandleLogOn(e);
         _logOnService.OnLogOnOrLogOffAndLogOnAgain = async () => await New<IUIThread>().SendToAsync(async () => await LogOnOrLogOffAndLogOnAgainAsync());
         //_logOnService.OnLogOnOrLogOffAndLogOnAgain = async () => await LogOnOrLogOffAndLogOnAgainAsync();
-        _fileOperationViewModel.SelectingFiles += (sender, e) => New<IUIThread>().SendTo(async () => { bool fileSelected = await New<IDataItemSelection>().HandleSelection(e); });
-
-        _fileOperationViewModel.ToggleEncryptionUpgradeMode += async (sender, e) => await ToggleEncryptionUpgradeMode();
         //_inviteUserToolStripMenuItem.Click += async (sender, e) => { await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await InviteUserAsync(); }, sender, e); };
         //_recentFilesListView.DragDrop += async (sender, e) => { await DropFilesOrFoldersInRecentFilesListViewAsync(); };
         //_secretsToolStripButton.Click += async (sender, e) => { await PremiumFeature_ClickAsync(LicenseCapability.PasswordManagement, (ss, ee) => { BrowseUtility.RedirectToSecretsUrl(Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address); return Task.FromResult<object>(null); }, sender, e); };
@@ -224,6 +215,15 @@ public partial class MainPage : ContentPage, ISignIn
         {
             Console.WriteLine(ex.Message);
         }
+    }
+
+
+    private bool _userInitiatedUpdateCheckPending = false;
+
+    private async Task DisplayUpdateCheckPopups()
+    {
+        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel.DownloadVersion);
+        _userInitiatedUpdateCheckPending = false;
     }
 
     private async Task SetLanguageAsync(string cultureName)
@@ -345,208 +345,6 @@ public partial class MainPage : ContentPage, ISignIn
         {
             //GetIconClass(folder.My.FullName);
         }
-    }
-
-    private async Task HandleLogOn(LogOnEventArgs e)
-    {
-        if (e.IsAskingForPreviouslyUnknownPassphrase)
-        {
-            HandleCreateNewLogOn(e);
-        }
-        else
-        {
-            await HandleExistingLogOn(e);
-        }
-        if (New<UserSettings>().RestoreFullWindow)
-        {
-            //Styling.RestoreWindowWithFocus(this);
-        }
-    }
-
-    private void HandleCreateNewLogOn(LogOnEventArgs e)
-    {
-        if (!String.IsNullOrEmpty(e.EncryptedFileFullName))
-        {
-            HandleCreateNewLogOnForEncryptedFile(e);
-        }
-        else
-        {
-            HandleCreateNewAccount(e);
-        }
-    }
-
-    private void HandleCreateNewLogOnForEncryptedFile(LogOnEventArgs e)
-    {
-        NewPasswordViewModel viewModel = new NewPasswordViewModel(e.Passphrase.Text, e.EncryptedFileFullName);
-
-        //using (NewPassphraseDialog passphraseDialog = new NewPassphraseDialog(this, Texts.NewPassphraseDialogTitle, viewModel))
-        //{
-        //    viewModel.ShowPassword = e.DisplayPassphrase;
-        //    DialogResult dialogResult = passphraseDialog.ShowDialog(this);
-        //    e.DisplayPassphrase = viewModel.ShowPassword;
-        //    if (dialogResult != DialogResult.OK || viewModel.PasswordText.Length == 0)
-        //    {
-        //        e.Cancel = true;
-        //        return;
-        //    }
-        //    e.Passphrase = new Passphrase(viewModel.PasswordText);
-        //    e.Name = String.Empty;
-        //}
-        return;
-    }
-
-    private void HandleCreateNewAccount(LogOnEventArgs e)
-    {
-        _registerViewModel.ShowDialog(e.Passphrase.Text, e.Identity.UserEmail);
-        DialogResult result = _registerViewModel.DialogResult;
-        if (result != DialogResult.OK)
-        {
-            e.Cancel = true;
-            return;
-        }
-
-        e.DisplayPassphrase = _registerViewModel.CreateAccountModel.ShowPassword;
-        e.Passphrase = new Passphrase(_registerViewModel.CreateAccountModel.PasswordText);
-        e.UserEmail = _registerViewModel.CreateAccountModel.UserEmail;
-    }
-
-    private async Task HandleExistingLogOn(LogOnEventArgs e)
-    {
-        if (!string.IsNullOrEmpty(e.EncryptedFileFullName) && (string.IsNullOrEmpty(Resolve.UserSettings.UserEmail) || Resolve.KnownIdentities.IsLoggedOn))
-        {
-            await HandleExistingLogOnForEncryptedFile(e);
-        }
-        else
-        {
-            await HandleExistingAccountLogOn(e);
-        }
-    }
-
-    private async Task HandleExistingLogOnForEncryptedFile(LogOnEventArgs e)
-    {
-        FilePasswordDialogViewModel filePasswordDialog = AxCServiceProviderExtension.GetService<FilePasswordDialogViewModel>();
-        filePasswordDialog.ShowFilePasswordDialog(e.EncryptedFileFullName);
-
-        if (filePasswordDialog.DialogResult == DialogResult.Retry)
-        {
-            e.Passphrase = filePasswordDialog.ViewModel!.Passphrase;
-            e.IsAskingForPreviouslyUnknownPassphrase = true;
-            return;
-        }
-
-        if (filePasswordDialog.DialogResult != DialogResult.OK || filePasswordDialog.ViewModel!.Passphrase == Passphrase.Empty)
-        {
-
-            e.Cancel = true;
-            return;
-        }
-
-        e.Passphrase = filePasswordDialog.ViewModel.Passphrase;
-    }
-
-    private async Task HandleExistingAccountLogOn(LogOnEventArgs e)
-    {
-        if (!_logOnService.IsVisible)
-        {
-            LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
-            _logOnService.ShowLogOnDialog(logOnModel, _mainViewModel);
-        }
-
-        if (_logOnService.PageResult == DialogResult.None)
-        {
-            return;
-        }
-
-        if (_logOnService.PageResult == DialogResult.Retry)
-        {
-            await ResetAllSettingsAndRestart();
-        }
-
-        if (_logOnService.PageResult == DialogResult.Cancel)
-        {
-            await new ApplicationManager().StopAndExit();
-        }
-
-        if (_logOnService.PageResult != DialogResult.OK || _logOnService.LogOnAccountModel.PasswordText.Length == 0)
-        {
-            e.Cancel = true;
-            return;
-        }
-
-        e.Passphrase = new Passphrase(_logOnService.LogOnAccountModel.PasswordText);
-        e.UserEmail = _logOnService.LogOnAccountModel.UserEmail;
-        _logOnService.PageResult = DialogResult.None;
-
-        return;
-    }
-
-    private static void SetThisVersion()
-    {
-        New<UserSettings>().ThisVersion = New<IVersion>().Current.ToString();
-    }
-    private async Task ResetAllSettingsAndRestart()
-    {
-        if (_mainViewModel.DecryptedFiles.Any())
-        {
-            await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
-            return;
-        }
-
-        PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle, Texts.ResetAllSettingsWarningText);
-        if (result == PopupButtons.Ok)
-        {
-            new ApplicationManager().WaitForBackgroundToComplete();
-            await new ApplicationManager().ClearAllSettings();
-            await new ApplicationManager().ShutdownBackgroundSafe();
-
-            New<IUIThread>().RestartApplication();
-        }
-    }
-
-
-    private static async Task SetLegacyOpenMode(FileOperationEventArgs e)
-    {
-        if (!Resolve.KnownIdentities.IsLoggedOn)
-        {
-            return;
-        }
-
-        PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle, Texts.LegacyOpenMessage);
-        if (click == PopupButtons.Cancel)
-        {
-            e.Cancel = true;
-            return;
-        }
-    }
-
-    private async Task ToggleEncryptionUpgradeMode()
-    {
-        if (_mainViewModel.EncryptionUpgradeMode == EncryptionUpgradeMode.AutoUpgrade)
-        {
-            _mainViewModel.EncryptionUpgradeMode = EncryptionUpgradeMode.RetainWithoutUpgrade;
-            return;
-        }
-
-        if (!await New<IVerifySignInPassword>().Verify(Texts.LegacyConversionVerificationPrompt))
-        {
-            return;
-        }
-
-        _mainViewModel.EncryptionUpgradeMode = EncryptionUpgradeMode.AutoUpgrade;
-    }
-
-    private bool _userInitiatedUpdateCheckPending = false;
-
-    private async Task DisplayUpdateCheckPopups()
-    {
-        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel.DownloadVersion);
-        _userInitiatedUpdateCheckPending = false;
-    }
-
-    private void UpdateDebugMode(bool enabled)
-    {
-        //_optionsDebugToolStripMenuItem.Checked = enabled;
-        //_debugToolStripMenuItem.Visible = enabled;
     }
 
     private void InitializeMouseDownFilter()

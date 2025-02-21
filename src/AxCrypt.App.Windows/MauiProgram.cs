@@ -35,8 +35,6 @@ namespace AxCrypt.App.Windows
             IServiceCollection services = builder.Services;
             RegisterSingletons(services);
 
-            services.AddSingleton<ICustomNavigationService, CustomNavigationService>();
-
             services.AddMauiBlazorWebView();
 
             builder.ConfigureLifecycleEvents(lifecycle =>
@@ -62,8 +60,6 @@ namespace AxCrypt.App.Windows
 
         private static void RegisterSingletons(IServiceCollection services)
         {
-            services.AddSingleton<IStatusAlertService, StatusAlertService>();
-            services.AddSingleton<ProcessIndicatorService>();
 
             services.AddSingleton<ITrayService, TrayService>();
             services.AddSingleton<INotificationService, NotificationService>();
@@ -71,8 +67,6 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<ILogging, Logging>();
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
-
-            services.AddSingleton<ICssService, CssService>();
 
             services.AddSingleton<MainPage>();
             services.AddSingleton<Home>();
@@ -84,18 +78,6 @@ namespace AxCrypt.App.Windows
             SharedFactory.RegisterSingletons(services);
             AppDesktopFactory.RegisterSingletons(services);
 
-            services.AddSingleton<SecretClientModel>();
-            services.AddSingleton<SecretsClientModel>();
-
-            services.AddSingleton<RecentFoldersViewModel>();
-            services.AddSingleton<AboutViewModel>();
-            services.AddSingleton<SuggestionViewModel>();
-            services.AddSingleton<InviteViewModel>();
-            services.AddSingleton<ImportPrivateKeyViewModel>();
-            services.AddSingleton<VerifyAccountDialogViewModel>();
-            services.AddSingleton<VerifyPasswordViewModel>();
-
-            TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
         }
     }
 }

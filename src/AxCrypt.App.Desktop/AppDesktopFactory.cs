@@ -10,6 +10,9 @@ using AxCrypt.App.Desktop.ViewModels.Notification;
 using AxCrypt.App.Desktop.ViewModels.Secret;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.Core.UI;
+using AxCrypt.Cryptor.Model;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AxCrypt.App.Desktop;
@@ -18,14 +21,17 @@ public static class AppDesktopFactory
 {
     public static void RegisterSingletons(IServiceCollection services)
     {
+        services.AddSingleton<ICustomNavigationService, CustomNavigationService>();
         services.AddSingleton<Shared.Services.Interface.ICssService, CssService>();
-
+        services.AddSingleton<IStatusAlertService, StatusAlertService>();
+        services.AddSingleton<ProcessIndicatorService>();
         services.AddSingleton<ProgressBarService>();
 
         services.AddSingleton<LogOnViewModel>();
         services.AddSingleton<RegisterViewModel>();
 
         services.AddSingleton<AppLocalizationOptions>();
+
         services.AddSingleton<TopMenuViewModel>();
         services.AddSingleton<AppSettingsViewModel>();
         services.AddSingleton<AdvancedOptionsViewModel>();
@@ -37,7 +43,13 @@ public static class AppDesktopFactory
         services.AddSingleton<NotificationViewModel>();
         services.AddSingleton<ShareKeyViewModel>();
         services.AddSingleton<FeedbackViewModel>();
-
+        services.AddSingleton<RecentFoldersViewModel>();
+        services.AddSingleton<AboutViewModel>();
+        services.AddSingleton<SuggestionViewModel>();
+        services.AddSingleton<InviteViewModel>();
+        services.AddSingleton<ImportPrivateKeyViewModel>();
+        services.AddSingleton<VerifyAccountDialogViewModel>();
+        services.AddSingleton<VerifyPasswordViewModel>();
         services.AddSingleton<NewSecretViewModel>();
         services.AddSingleton<ShareSecretViewModel>();
         services.AddSingleton<ManageSecretViewModel>();
@@ -49,17 +61,14 @@ public static class AppDesktopFactory
         services.AddTransient<SecretsListViewModel>();
 
         services.AddSingleton<RecentFoldersComponent>();
-        services.AddSingleton<Feedback>();
-        services.AddSingleton<About>();
 
+        services.AddSingleton<SecretClientModel>();
+        services.AddSingleton<SecretsClientModel>();
+
+        TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
         TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
-        //services.AddSingleton<AppSettingsComponent>();
-        //services.AddSingleton<NotificationPopup>();
-        //services.AddSingleton<ProfileOptionComponent>();
-        //services.AddSingleton<TopMenu>();
-        //services.AddSingleton<HeaderComponent>();
-        //services.AddSingleton<ActionsComponent>();
-        //services.AddSingleton<SubActionsComponent>();
+       
+
     }
 
     public static void RegisterTypeFactories()

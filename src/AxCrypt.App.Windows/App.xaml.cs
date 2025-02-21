@@ -1,5 +1,4 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Infrastructure.Dialogs;
 using AxCrypt.Common;
@@ -7,24 +6,19 @@ using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
-using AxCrypt.Core.IO;
 using AxCrypt.Core.Ipc;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
-using AxCrypt.Core.Service;
-using AxCrypt.Core.Service.Secrets;
-using AxCrypt.Core.Service.UserNotification;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using AxCrypt.Mono;
 using System.Globalization;
-using System.Text.RegularExpressions;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.Desktop;
 using AxCrypt.App.Desktop.Code;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Desktop;
 
 namespace AxCrypt.App.Windows;
 
@@ -50,9 +44,9 @@ public partial class App : Application
 
         InitializeContentResources();
         RegisterTypeFactories();
-        CheckLavasoftWebCompanionExistence();
+        AppFactory.CheckLavasoftWebCompanionExistence();
         EnsureUiContextInitialized();
-        EnsureFileAssociation();
+        AppFactory.EnsureFileAssociation();
 
         SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent();
 
@@ -114,10 +108,10 @@ public partial class App : Application
         CheckOfflineModeFirst();
         //await GetApiVersionAsync(); - moved
         //SetThisVersion(); - moved
-        StartKeyPairService();
+        AppFactory.StartKeyPairService();
         AttachLogListener();
         //ConfigureUiOptions();
-        SetupPathFilters();
+        AppFactory.SetupPathFilters();
         IntializeControls();
         InitializeMouseDownFilter();
         //BindToViewModels();
@@ -125,7 +119,7 @@ public partial class App : Application
         WireUpEvents();
         SetupCommandService();
         await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.SessionStart));
-        StartupProcessMonitor();
+        AppFactory.StartupProcessMonitor();
         ExecuteCommandLine();
     }
 
@@ -150,55 +144,24 @@ public partial class App : Application
     {
         TypeMap.Register.Singleton<IUIThread>(() => new UIThread(_dispatcher));
         TypeMap.Register.Singleton<IProgressBackground>(() => _progressBackgroundWorker);
-        TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
         TypeMap.Register.Singleton<IDataItemSelection>(() => new FileFolderSelection());
         TypeMap.Register.Singleton<IDeviceLocked>(() => new DeviceLocked());
-        TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
-        TypeMap.Register.Singleton<InstallationVerifier>(() => new InstallationVerifier());
         TypeMap.Register.Singleton<IKnownFolderImageProvider>(() => new KnownFolderImageProvider());
-        TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
         //TypeMap.Register.Singleton<MouseDownFilter>(() => new MouseDownFilter(this));
         TypeMap.Register.Singleton<IGlobalNotification>(() => new NotifyIconGlobalNotification());
 
-        TypeMap.Register.New<SessionNotificationHandler>(() => new SessionNotificationHandler(Resolve.FileSystemState, Resolve.KnownIdentities, New<ActiveFileAction>(), New<AxCryptFile>(), New<IStatusChecker>()));
-        TypeMap.Register.New<IdentityViewModel>(() => new IdentityViewModel(Resolve.FileSystemState, Resolve.KnownIdentities, Resolve.UserSettings, Resolve.SessionNotify));
-        TypeMap.Register.New<FileOperationViewModel>(() => new FileOperationViewModel(Resolve.FileSystemState, Resolve.SessionNotify, Resolve.KnownIdentities, Resolve.ParallelFileOperation, New<IStatusChecker>(), New<IdentityViewModel>()));
-        TypeMap.Register.New<MainViewModel>(() => new MainViewModel(Resolve.FileSystemState, Resolve.UserSettings));
-        TypeMap.Register.New<KnownFoldersViewModel>(() => new KnownFoldersViewModel(Resolve.FileSystemState, Resolve.SessionNotify, Resolve.KnownIdentities));
-        TypeMap.Register.New<WatchedFoldersViewModel>(() => new WatchedFoldersViewModel(Resolve.FileSystemState));
-
         //TypeMap.Register.Singleton<IVersion>(() => new DesktopVersion());
-        TypeMap.Register.New<LogOnIdentity, AdditionalUserSettings>((LogOnIdentity identity) => new AdditionalUserSettings(identity));
-        TypeMap.Register.New<LogOnIdentity, IAccountService>((LogOnIdentity identity) => new CachingAccountService(new DeviceAccountService(new LocalAccountService(identity, Resolve.WorkFolder.FileInfo), new ApiAccountService(new AxCryptApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
-        TypeMap.Register.New<LogOnIdentity, ISecretsService>((LogOnIdentity identity) => new DeviceSecretsService(new LocalSecretsService(identity, Resolve.WorkFolder.FileInfo), new NullSecretsService(identity)));
-        TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new DeviceNotificationService(new LocalNotificationService(), new NullNotificationService(identity)));
-        TypeMap.Register.New<LogOnIdentity, ISecretsService>((LogOnIdentity identity) => new CachingSecretsService(new DeviceSecretsService(new LocalSecretsService(identity, Resolve.WorkFolder.FileInfo), new ApiSecretsService(new AxSecretsApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
-        TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new CachingNotificationService(new DeviceNotificationService(new LocalNotificationService(), new ApiNotificationService(new AxNotificationApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
 
         //TypeMap.Register.New<AboutBox>(() => new AboutBox());
+        AppFactory.RegisterTypeFactories();
 
         FormsTypes.Register(this);
     }
 
-    private static void CheckLavasoftWebCompanionExistence()
-    {
-        if (New<InstallationVerifier>().IsLavasoftApplicationInstalled)
-        {
-            Texts.LavasoftWebCompanionExistenceWarning.ShowWarning(Texts.WarningTitle, DoNotShowAgainOptions.LavasoftWebCompanionExistenceWarning);
-        }
-    }
 
     private static void EnsureUiContextInitialized()
     {
         New<IUIThread>().Yield();
-    }
-
-    private static void EnsureFileAssociation()
-    {
-        if (New<InstallationVerifier>().IsApplicationInstalled && !New<InstallationVerifier>().IsFileAssociationOk)
-        {
-            Texts.FileAssociationBrokenWarning.ShowWarning(Texts.WarningTitle, DoNotShowAgainOptions.FileAssociationBrokenWarning);
-        }
     }
 
     private void SetupViewModelsAndNotificationsBeforeAnyNotificationsAreSent()
@@ -218,15 +181,6 @@ public partial class App : Application
         }
     }
 
-    private static void StartKeyPairService()
-    {
-        if (!String.IsNullOrEmpty(Resolve.UserSettings.UserEmail))
-        {
-            return;
-        }
-        New<KeyPairService>().Start();
-    }
-
     private void AttachLogListener()
     {
         Resolve.Log.Logged += (logger, loggingEventArgs) =>
@@ -241,62 +195,6 @@ public partial class App : Application
                 _debugOutput.AppendText(formatted);
             });
         };
-    }
-
-    //private void ConfigureUiOptions()
-    //{
-    //    MessageBoxOptions = RightToLeft == RightToLeft.Yes ? MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading : 0;
-    //}
-
-    private static void SetupPathFilters()
-    {
-        if (OS.Current.Platform != Core.Runtime.Platform.WindowsDesktop)
-        {
-            return;
-        }
-
-        New<FileFilter>().AddUnencryptable(new Regex(@"\\\.dropbox$"));
-        New<FileFilter>().AddUnencryptable(new Regex(@"\\desktop\.ini$"));
-        New<FileFilter>().AddUnencryptable(new Regex(@".*\.tmp$"));
-        New<FileFilter>().AddUnencryptable(new Regex(@"^.*\\~\$[^\\]*$"));
-
-        AddEnvironmentVariableBasedFilePathFilter(@"^{0}(?!Temp$)", "SystemRoot");
-        AddEnvironmentVariableBasedFilePathFilter(@"^{0}(?!Temp$)", "windir");
-        AddEnvironmentVariableBasedFilePathFilter(@"^{0}", "ProgramFiles");
-        AddEnvironmentVariableBasedFilePathFilter(@"^{0}", "ProgramFiles(x86)");
-        AddEnvironmentVariableBasedFilePathFilter(@"^{0}$", "SystemDrive");
-
-        New<FileFilter>().AddPlatformIndependent();
-
-        AddEnvironmentVariableBasedFolderPathFilter("ProgramData");
-        AddEnvironmentVariableBasedFolderPathFilter("ProgramFiles(x86)");
-        AddEnvironmentVariableBasedFolderPathFilter("ProgramFiles");
-        AddEnvironmentVariableBasedFolderPathFilter("SystemRoot");
-        AddEnvironmentVariableBasedFolderPathFilter("APPDATA");
-        AddEnvironmentVariableBasedFolderPathFilter("LOCALAPPDATA");
-        AddEnvironmentVariableBasedFolderPathFilter("windir");
-        AddEnvironmentVariableBasedFolderPathFilter("ProgramW6432");
-    }
-
-    private static void AddEnvironmentVariableBasedFilePathFilter(string formatRegularExpression, string name)
-    {
-        IDataContainer folder = name.FolderFromEnvironment();
-        if (folder == null)
-        {
-            return;
-        }
-        string escapedPath = folder.FullName.Replace(@"\", @"\\");
-        New<FileFilter>().AddUnencryptable(new Regex(formatRegularExpression.InvariantFormat(escapedPath)));
-    }
-
-    private static void AddEnvironmentVariableBasedFolderPathFilter(string name)
-    {
-        IDataContainer folder = name.FolderFromEnvironment();
-        if (folder == null)
-        {
-            return;
-        }
-        New<FileFilter>().AddForbiddenFolderFilters(folder.FullName);
     }
 
     private void IntializeControls()
@@ -373,31 +271,6 @@ public partial class App : Application
     private async void AxCryptMainForm_ClickAsync(object sender, EventArgs e)
     {
         New<InactivitySignOut>().RestartInactivityTimer();
-    }
-
-    private void RestoreUserPreferences(Window currentAppWindow)
-    {
-        if (currentAppWindow != null)
-        {
-            double height = currentAppWindow.Height == double.NaN ? 0 : currentAppWindow.Height;
-            currentAppWindow.Height = AppPreferences.MainWindowHeight.Fallback(height);
-            double width = currentAppWindow.Width == double.NaN ? 0 : currentAppWindow.Width;
-            currentAppWindow.Width = AppPreferences.MainWindowWidth.Fallback(width);
-
-            System.Drawing.Point currentLocation = new System.Drawing.Point(0, 0);
-            if (!double.IsNaN(currentAppWindow.X))
-            {
-                currentLocation = new System.Drawing.Point((int)currentAppWindow.X, (int)currentAppWindow.Y);
-            }
-            System.Drawing.Point location = AppPreferences.MainWindowLocation == default(System.Drawing.Point) ? currentLocation : AppPreferences.MainWindowLocation;
-            currentAppWindow.X = location.X;
-            currentAppWindow.Y = location.Y;
-        }
-
-        //_mainViewModel.RecentFilesComparer = GetComparer(AppPreferences.RecentFilesSortColumn, !AppPreferences.RecentFilesAscending);
-        //_alwaysOfflineToolStripMenuItem.Checked = New<UserSettings>().OfflineMode;
-
-        //ConfigureShowHideRecentFiles(New<UserSettings>().HideRecentFiles);
     }
 
     private void ConfigureShowHideRecentFiles(bool hideRecentFiles)
@@ -511,7 +384,7 @@ public partial class App : Application
                     break;
 
                 case CommandVerb.ShowLogOn:
-                    RestoreFormConditionally();
+                    AppFactory.RestoreFormConditionally();
                     break;
             }
 
@@ -552,7 +425,7 @@ public partial class App : Application
 
         if (wasSignedIn)
         {
-            await ShowSignedInInformationAsync(e.Verb, e.Arguments);
+            await AppFactory.ShowSignedInInformationAsync(e.Verb, e.Arguments);
         }
 
         switch (e.Verb)
@@ -601,15 +474,6 @@ public partial class App : Application
         }
     }
 
-    private void RestoreFormConditionally()
-    {
-        if (!New<UserSettings>().RestoreFullWindow)
-        {
-            return;
-        }
-        //Styling.RestoreWindowWithFocus(this);
-    }
-
     private async Task SignInAsync()
     {
         //SignUpSignIn signUpSignIn = new SignUpSignIn()
@@ -648,38 +512,7 @@ public partial class App : Application
         //this.RightToLeft = RightToLeft.No;
     }
 
-    private static Task ShowSignedInInformationAsync(CommandVerb verb, IEnumerable<string> files)
-    {
-        if (New<UserSettings>().DoNotShowAgain.HasFlag(DoNotShowAgainOptions.SignedInSoNoPasswordRequired))
-        {
-            return Constant.CompletedTask;
-        }
-
-        switch (verb)
-        {
-            case CommandVerb.Encrypt:
-                return ShowSignedInInformationAlert();
-
-            case CommandVerb.Decrypt:
-            case CommandVerb.Open:
-                bool isAnyFileKeyKnown = files.Select(f => New<IDataStore>(f)).IsAnyFileKeyKnown();
-                if (isAnyFileKeyKnown)
-                {
-                    return ShowSignedInInformationAlert();
-                }
-                break;
-
-            default:
-                break;
-        }
-        return Constant.CompletedTask;
-    }
-
-    private static Task ShowSignedInInformationAlert()
-    {
-        return New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.InformationTitle, Texts.NoPasswordRequiredInformationText, DoNotShowAgainOptions.SignedInSoNoPasswordRequired);
-    }
-
+  
     private async Task PremiumFeatureActionAsync(LicenseCapability requiredCapability, Func<Task> realHandler)
     {
         if (_mainViewModel.License.Has(requiredCapability))
@@ -689,12 +522,6 @@ public partial class App : Application
         }
 
         await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.PremiumFeatureToolTipText);
-    }
-
-    private static void StartupProcessMonitor()
-    {
-        TypeMap.Register.Singleton(() => new ProcessMonitor());
-        New<ProcessMonitor>();
     }
 
     private void ExecuteCommandLine()
@@ -742,7 +569,7 @@ public partial class App : Application
             _window.Height = AppPreferences.MinimumWindowHeight;
             _window.Width = AppPreferences.MinimumWindowWidth;
 
-            RestoreUserPreferences(_window);
+            AppFactory.RestoreUserPreferences(_window);
         }
 
         return _window!;
