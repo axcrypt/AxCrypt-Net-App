@@ -77,6 +77,7 @@
         ViewModel.Initialize();
         await notificationService.LoadNotificationListAsync();
         ViewModel.LogOnViewModel.OnSubscriptionChanged += UpdatePageState;
+        notificationService.OnUpdateViewState += UpdatePageState;
         ViewModel.LogOnViewModel.OnUIStateChanged += UpdatePageState;
     }
 

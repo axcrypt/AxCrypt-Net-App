@@ -12,7 +12,7 @@
 @inject ViewSecretViewModel viewSecretViewModel
 @inject IJSRuntime jsRuntime
 
-<div style="margin-top: 80px;" class="page-max-height">
+<div style="margin-top: 90px;" class="page-max-height">
     <div class="page-heading">
         <h3 class="password-creation">
             @Texts.ViewNoteTitle
@@ -52,6 +52,9 @@
                                 <div>
                                     <input id="secret-delete" type="button" class="button btn-extra-small alert" value="@Texts.ButtonDeleteText" @onclick="async () => await DeleteSecret()" />
                                 </div>
+                            }
+                            @if (viewSecretViewModel.HasPaidSubscription && secretService.CurrentSecret.OwnerEmail == viewSecretViewModel.UserEmail)
+                            {
                                 <div>
                                     <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" />
                                 </div>
@@ -138,9 +141,18 @@
                                 }
                             </div>
                         </div>
-                        <div style="margin-left: 0px !important;">
-                            <input type="submit" class="button success btn-extra-small" @onclick="ApplyShare" value="Apply" disabled="@(!shareSecretViewModel.EnableApplyButton)" />
-                        </div>
+                        @if (!shareSecretViewModel.EnableApplyButton)
+                        {
+                            <div style="margin-left: 0px !important;">
+                                <input type="button" class="button success btn-extra-small" value="Apply" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="margin-left: 0px !important;">
+                                <input type="@(shareSecretViewModel.EnableApplyButton ? "submit" : "button")" class="button success btn-extra-small" @onclick="ApplyShare" value="Apply" />
+                            </div>
+                        }
                     </form>
                 </div>
             }
@@ -164,6 +176,7 @@
         viewSecretViewModel.Secret = secretService.CurrentSecret!;
         IsSharedView = secretService.CurrentSecret?.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail;
         shareSecretViewModel = new ShareSecretViewModel(secretService);
+        shareSecretViewModel.OnUpdateViewState += UpdateStateChanged;
     }
 
     private async Task OnAfterRenderAsync()
@@ -194,12 +207,12 @@
 
     private void HandleOnChange(ChangeEventArgs args)
     {
-        secretService.CurrentSecret.Note.SecretDesc = args?.Value?.ToString();
+        secretService.CurrentSecret!.Note.SecretDesc = args?.Value?.ToString();
     }
 
     private void NavigateToEdit()
     {
-        SecretViewModel secret = secretService.CurrentSecret;
+        SecretViewModel secret = secretService.CurrentSecret!;
         if (secret != null)
         {
             string url = secret.SecretType switch
@@ -215,8 +228,11 @@
 
     private async Task ApplyShare()
     {
-        await shareSecretViewModel.ApplyShareSecret();
-        navigationManager.NavigateTo("/passwordManager");
+        if (shareSecretViewModel!.EnableApplyButton)
+        {
+            await shareSecretViewModel!.ApplyShareSecret();
+            navigationManager.NavigateTo("/passwordManager");
+        }
     }
 
     bool isFirstClick = true;
@@ -239,5 +255,13 @@
             openSyncPopup();
             isFirstClick = false;
         }
+    }
+
+    void UpdateStateChanged()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 }

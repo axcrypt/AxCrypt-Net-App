@@ -137,6 +137,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
         AddUserEmailToSharedList(addedUserEmailAddress);
         SecretSharingUserEmail = "";
         VisibilityType = SecretShareVisibility.Forever.ToString();
+        EnableApplyButton = true;
     }
 
     private EmailAddress ValidSharingUserEmail()
@@ -205,6 +206,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
         //NoUsersAdded = ShareSecretUserList.Count == 0;
 
         //AddedUsersTitle = $"Added users with access ({ShareSecretUserList.Count})";
+        UpdateViewState();
     }
 
     public void UpdatedSelectedUser(SecretSharedUserViewModel user)

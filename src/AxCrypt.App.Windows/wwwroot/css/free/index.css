@@ -387,7 +387,7 @@
 
 .sugg-popup.active {
   display: block;
-  top: 48%;
+  top: 47%;
   right: 3%;
   position: fixed;
   background-color: white;
@@ -624,6 +624,7 @@
   margin-bottom: 20px;
   position: relative;
   display: inline-block;
+  margin-right: 10px;
 }
 .rcnt-fld-bx label {
   max-width: 150px;
@@ -755,6 +756,10 @@
 .suggestion-list hr {
   margin: 8px 0px 0px;
   background-color: #232323;
+}
+
+.free-color {
+  background-color: #86B96E;
 }
 
 @media (max-width: 768px) {
@@ -1091,10 +1096,6 @@
   font-weight: 700;
 }
 
-.free-color {
-  background-color: #86B96E;
-}
-
 .AES256-img {
   content: url(/images/free/ImgAES256.svg);
   padding: 20px;
@@ -1179,6 +1180,7 @@
   top: 295px;
   right: 4%;
   position: absolute;
+  overflow-x: auto;
 }
 
 .empty-rcnt-fle-img {

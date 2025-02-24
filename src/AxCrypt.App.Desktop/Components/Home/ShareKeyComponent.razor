@@ -136,7 +136,7 @@
                                             <div style="display:inline-block;">
                                                 <span class="shared-text">@user.UserEmail</span><br>
                                             </div>
-                                            <img class="ico-optn" src="" alt="img" @onclick="(e)=> ShareKeyViewModel.contextMenuPopup(user.UserEmail)" style="float:right;">
+                                            <img class="menu-image" src="/images/Group160.svg" alt="img" @onclick="(e)=> ShareKeyViewModel.contextMenuPopup(user.UserEmail)" style="float:right;">
                                             <hr style="width: 100%;">
                                         </dd>
                                     </dl>
@@ -170,7 +170,7 @@
                         </NavLink>
                         @if (ShareKeyViewModel.IsWideScreen)
                         {
-                            <input type="button" class="button success btn-small" @onclick="async ()=> await ShareKeyViewModel.ApplyShareKeys()" value="@Texts.ApplyLabel" style="padding: 6px 0px;" />
+                            <input disabled="@(ShareKeyViewModel.EnableApplyButton ? null : "disabled")" type="button" class="button success btn-small" @onclick="async ()=> await ShareKeyViewModel.ApplyShareKeys()" value="@Texts.ApplyLabel" style="padding: 6px 0px;" />
                         }
                         @if (ShareKeyViewModel.WarngPopup)
                         {

@@ -10,8 +10,12 @@
             <div class="close-img" @onclick="Close"></div>
             <img class="fdbck-img" src="feedback-img" />
             <p class="bold-highlight">Please let us know if you experience any <span>difficulties</span> with AxCrypt, have <span>questions, ideas or praises</span> to share! </p>
+            @if (!string.IsNullOrEmpty(FeedbackViewModel.ErrorMessage))
+            {
+                <div class="error-message" style="color:red;">@FeedbackViewModel.ErrorMessage</div>
+            }
             <form id="feedback-form" @onsubmit="FeedbackViewModel.HandleFormSubmit">
-                <div class="flex-start" style="margin-bottom: -12px;">
+                <div class="flex-start" style="margin-bottom: -15px;">
                     @foreach (FeedbackSubject subject in FeedbackViewModel.AllSubject)
                     {
                         <button class="button btn-small @(subject == FeedbackViewModel.SelectedSubject ? "highlighted font-medium" : "")"

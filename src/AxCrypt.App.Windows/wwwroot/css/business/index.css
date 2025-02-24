@@ -41,7 +41,7 @@
   width: 80px;
   height: 80px;
   border-radius: 4px;
-  background-color: #494949;
+  background-color: #232323;
   color: #FFF;
   text-align: center;
   line-height: 16px;
@@ -387,7 +387,7 @@
 
 .sugg-popup.active {
   display: block;
-  top: 48%;
+  top: 47%;
   right: 3%;
   position: fixed;
   background-color: white;
@@ -624,6 +624,7 @@
   margin-bottom: 20px;
   position: relative;
   display: inline-block;
+  margin-right: 10px;
 }
 .rcnt-fld-bx label {
   max-width: 150px;
@@ -754,6 +755,10 @@
 
 .suggestion-list hr {
   margin: 8px 0px 0px;
+  background-color: #232323;
+}
+
+.free-color {
   background-color: #232323;
 }
 

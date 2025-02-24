@@ -1,7 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
@@ -14,7 +13,6 @@ using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -378,6 +376,7 @@ public class AppSettingsViewModel : ViewModelBase
         await ConfigureInactivityTimeOutMenuAsync(license);
         await ConfigureRestoreRenameMenuAsync(license);
         await ConfigureEncryptionFilePropertiesMenuAsync(license);
+        UpdateViewState();
     }
 
     private async Task ConfigureAutoUpgradeMenuAsync(LicenseCapabilities license)

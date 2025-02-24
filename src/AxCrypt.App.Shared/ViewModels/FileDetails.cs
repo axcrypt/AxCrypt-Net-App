@@ -51,6 +51,7 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
         if (keySharedUsers.Any())
         {
             SharedWith = keySharedUsers.ToList();
+            UpdateViewState();
         }
     }
 

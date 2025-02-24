@@ -35,7 +35,6 @@ public class UserNotificationService : ViewModelBase
         set
         {
             _notificationModel = value;
-            UpdateViewState();
         }
     }
 
@@ -45,6 +44,7 @@ public class UserNotificationService : ViewModelBase
         {
             IEnumerable<NotificationItemViewModel> notificationItems = await LoadNotificationsAsync();
             NotificationModel.Notifications = new ObservableCollection<NotificationItemViewModel>(notificationItems);
+            UpdateViewState();
         }
     }
 

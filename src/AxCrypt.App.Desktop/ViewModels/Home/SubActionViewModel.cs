@@ -33,10 +33,10 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
 
         public void Initialized()
         {
-            _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
+            _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
+            KnownFoldersViewModel!.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
 
             KnownFoldersViewModel!.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
-            KnownFoldersViewModel.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
         }
 
         public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }

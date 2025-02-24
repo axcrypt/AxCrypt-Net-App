@@ -1,5 +1,4 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
 using AxCrypt.App.Desktop.Services.Interface;
 using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Utility.View;
@@ -8,7 +7,6 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,21 +44,25 @@ public class RecentFoldersViewModel : ViewModelBase
 
     public IEnumerable<string> SelectedRecentFolders { get; set; }
 
-    public SubscriptionLevel SubscriptionLevel { get; set; }
-
     public bool FolderContextMenu
     {
         get => _folderContextMenu;
         set => _folderContextMenu = value;
     }
 
+    public bool HasNoSubscription { get; set; }
+
     public void Initialize()
     {
-        SubscriptionLevel = LogOnViewModel.SubscriptionLevel;
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
-
+        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.WatchedFolders), (IEnumerable<string> folders) => { UpdateWatchedFolders(folders); });
         this.BindPropertyChanged(nameof(SelectedRecentFolders), (IEnumerable<string> files) => { _mainViewModel.SelectedWatchedFolders = files; });
+    }
+
+    private async Task ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
+    {
+        HasNoSubscription = license.CryptoPolicy.Name == "Free";
     }
 
     public void SortByDate()
@@ -70,7 +72,7 @@ public class RecentFoldersViewModel : ViewModelBase
             IEnumerable<IDataContainer> dataContainers = RecentFoldersList.Select(f => New<IDataContainer>(f));
             IEnumerable<IDataStore> data = dataContainers.Select(rf => rf.FileItemInfo(rf.FullName));
 
-            RecentFoldersList = new ObservableCollection<string>(data.Where(rf => rf != null).OrderBy(rf => _isDescending ? rf.CreationTimeUtc : rf.CreationTimeUtc).Select(f => f.FullName));
+            RecentFoldersList = new ObservableCollection<string>(_isDescending ? data.Where(rf => rf != null).OrderByDescending(rf => rf.LastWriteTimeUtc).Select(f => f.FullName) : data.Where(rf => rf != null).OrderBy(rf => rf.LastWriteTimeUtc).Select(f => f.FullName));
 
             _isDescending = !_isDescending;
         }
@@ -85,7 +87,7 @@ public class RecentFoldersViewModel : ViewModelBase
 
         RecentFoldersList = new ObservableCollection<string>(folders.Select(fld => fld));
 
-        Task.Run(() => { LogOnViewModel.UIStateChanged(); });
+        UpdateViewState();
     }
 
     public void SecuredContextMenu(MouseEventArgs e, string folderPath)

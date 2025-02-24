@@ -5,17 +5,9 @@ namespace AxCrypt.App.Desktop.ViewModels;
 
 public class SuggestionViewModel
 {
-    public bool showSugPopup { get; set; } = true;
+    public bool showSugPopup { get; set; }
 
     public DateTime lastClosedTime { get; set; }
-
-    public void TogglePopup()
-    {
-        if ((DateTime.Now - lastClosedTime).TotalMinutes >= 5)
-        {
-            showSugPopup = !showSugPopup;
-        }
-    }
 
     public void ClosePopup()
     {

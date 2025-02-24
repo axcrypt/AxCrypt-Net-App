@@ -3,7 +3,6 @@ using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
@@ -83,6 +82,7 @@ public class ShareKeyViewModel : ViewModelBase
     public bool ContextMenu { get; set; } = false;
 
     public bool DisableAddUserButton { get; set; } = false;
+    public bool EnableApplyButton { get; set; }
 
     public bool ShowDialog { get; set; } = false;
     public bool SyncPopup { get; set; } = false;
@@ -225,6 +225,7 @@ public class ShareKeyViewModel : ViewModelBase
 
         RecipientEmail = string.Empty;
         DisableAddUserButton = false;
+        EnableApplyButton = true;
         LogOnViewModel.UIStateChanged();
     }
 
@@ -407,6 +408,7 @@ public class ShareKeyViewModel : ViewModelBase
             ShareKeyUserList!.Remove(selectedSharedKeyUser);
         }
 
+        EnableApplyButton = true;
         CloseContextMenu();
     }
 
@@ -432,6 +434,7 @@ public class ShareKeyViewModel : ViewModelBase
         }
 
         await _viewModel.RefreshKnownContact.ExecuteAsync(new List<EmailAddress>() { UserEmailForContextMenuAction! });
+        EnableApplyButton = true;
     }
 
     private void ShowHideOfflineError()

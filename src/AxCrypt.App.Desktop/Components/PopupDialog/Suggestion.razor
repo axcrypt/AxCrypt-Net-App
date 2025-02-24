@@ -4,7 +4,7 @@
 @inject SuggestionViewModel viewModel
 
 <div class="suggestion">
-    <div class="sugg-popup @(viewModel.showSugPopup ? "active" : "")" @onclick="viewModel.TogglePopup" id="popup-part">
+    <div class="sugg-popup @(viewModel.showSugPopup ? "active" : "")">
         <span @onclick="viewModel.DownloadMobileAppLink">Do you have our <bold class="text-style">Mobile Application ?</bold></span>
         <img class="close-img" @onclick="viewModel.ClosePopup" style="right: -10px; top: -10px;" />
         <div class="dwnld-sec" style="margin: 18px 0px 20px;">
@@ -27,5 +27,6 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        viewModel.showSugPopup = true;
     }
 }

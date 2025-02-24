@@ -66,7 +66,7 @@
 }
 
 .ico-eye-sml {
-        content: url(/images/premium/IcoEye.svg);
+    content: url(/images/premium/IcoEye.svg);
 }
 
 .arwrgt-img {
@@ -83,10 +83,6 @@
     color: $TxtClr;
     font-size: 12px;
     font-weight: 700;
-}
-
-.free-color {
-    background-color: $ActnBgClr;
 }
 
 .AES256-img {
@@ -181,6 +177,7 @@
     top: 295px;
     right: 4%;
     position: absolute;
+    overflow-x: auto;
 }
 
 .empty-rcnt-fle-img {

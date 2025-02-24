@@ -26,6 +26,8 @@ public class FeedbackViewModel
 
     public string UserInput { get; set; } = string.Empty;
 
+    public string ErrorMessage { get; set; }
+
     public FeedbackSubject SelectedSubject { get; set; }
 
     public List<FeedbackSubject> AllSubject { get; private set; }
@@ -39,6 +41,7 @@ public class FeedbackViewModel
     {
         if (string.IsNullOrEmpty(UserInput))
         {
+            ErrorMessage = "Please add something before submitting!";
             return;
         }
 

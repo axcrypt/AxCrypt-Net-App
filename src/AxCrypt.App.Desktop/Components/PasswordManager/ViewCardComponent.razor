@@ -13,7 +13,7 @@
 @inject ViewSecretViewModel viewSecretViewModel
 @inject IJSRuntime JSRuntime
 
-<div style="margin-top: 80px;" class="page-max-height">
+<div style="margin-top: 90px;" class="page-max-height">
     <div class="page-heading">
         <h3 class="password-creation">
             @Texts.ViewCardTitle
@@ -56,6 +56,16 @@
                         <input id="card-exp-date-inp" style="color:#494949 !important; background-color:#E2E2E2" @bind-value="@secretService.CurrentSecret.Card.ExpirationDate" type="text" readonly="readonly">
                     </div>
                 </li>
+                @if (secretService.CurrentSecret.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
+                {
+
+                    <li class="list-row">
+                        <div class="list-width">
+                            <label for="Card_ExpirationDate">Owner Email:</label>
+                            <input id="card-exp-date-inp" style="color:#494949 !important; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.OwnerEmail" type="text" readonly="readonly">
+                        </div>
+                    </li>
+                }
                 <li>
                     <div style="display:flex; justify-content:space-around; width:100%;">
                         <div style="display:flex; justify-content:flex-start; gap:20px; width:100%;">
@@ -69,6 +79,9 @@
                                 <div>
                                     <input id="secret-delete" type="button" class="button btn-extra-small alert" value="@Texts.ButtonDeleteText" @onclick="async () => await DeleteSecret()" />
                                 </div>
+                            }
+                            @if (viewSecretViewModel.HasPaidSubscription && secretService.CurrentSecret.OwnerEmail == viewSecretViewModel.UserEmail)
+                            {
                                 <div>
                                     <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" />
                                 </div>
@@ -155,9 +168,18 @@
                                 }
                             </div>
                         </div>
-                        <div style="margin-left: 0px !important;">
-                            <input type="submit" class="button success btn-extra-small" @onclick="ApplyShare" value="Apply" />
-                        </div>
+                        @if (!shareSecretViewModel.EnableApplyButton)
+                        {
+                            <div style="margin-left: 0px !important;">
+                                <input type="button" class="button success btn-extra-small" value="Apply" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="margin-left: 0px !important;">
+                                <input type="@(shareSecretViewModel.EnableApplyButton ? "submit" : "button")" class="button success btn-extra-small" @onclick="ApplyShare" value="Apply" />
+                            </div>
+                        }
                     </form>
                 </div>
             }
@@ -168,7 +190,7 @@
 @code {
     bool IsSharedView { get; set; }
     bool isAxCryptUser = true;
-    ShareSecretViewModel shareSecretViewModel;
+    ShareSecretViewModel? shareSecretViewModel;
 
     protected override void OnInitialized()
     {
@@ -182,6 +204,7 @@
         viewSecretViewModel.Secret = secretService.CurrentSecret!;
         IsSharedView = secretService.CurrentSecret?.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail;
         shareSecretViewModel = new ShareSecretViewModel(secretService);
+        shareSecretViewModel.OnUpdateViewState += UpdateStateChanged;
     }
 
     private async Task OnAfterRenderAsync()
@@ -227,13 +250,16 @@
 
     private async Task HandleOnChange(ChangeEventArgs args)
     {
-        secretService.CurrentSecret.Card.SecretDesc = args?.Value?.ToString();
+        secretService.CurrentSecret!.Card.SecretDesc = args?.Value?.ToString();
     }
 
     private async Task ApplyShare()
     {
-        await shareSecretViewModel.ApplyShareSecret();
-        navigationManager.NavigateTo("/passwordManager");
+        if (shareSecretViewModel!.EnableApplyButton)
+        {
+            await shareSecretViewModel.ApplyShareSecret();
+            navigationManager.NavigateTo("/passwordManager");
+        }
     }
 
     private bool isCardNumberVisible = false;
@@ -298,5 +324,13 @@
             openSyncPopup();
             isFirstClick = false;
         }
+    }
+
+    void UpdateStateChanged()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 }

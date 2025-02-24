@@ -1,5 +1,4 @@
-﻿using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Data;
+﻿using AxCrypt.App.Desktop.Data;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Password;
 using AxCrypt.App.Shared.Utility.View;

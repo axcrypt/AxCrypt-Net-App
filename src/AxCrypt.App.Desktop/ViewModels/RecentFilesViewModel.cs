@@ -1,7 +1,5 @@
-using AxCrypt.Api.Model;
 using AxCrypt.App.Desktop.Code;
 using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core.Runtime;
@@ -60,14 +58,6 @@ public class RecentFilesViewModel : ViewModelBase
 
     public IEnumerable<string> SelectedFiles
     { get { return GetProperty<IEnumerable<string>>(nameof(SelectedFiles)); } set { SetProperty(nameof(SelectedFiles), value); } }
-
-    public SubscriptionLevel SubscriptionLevel
-    {
-        get
-        {
-            return LogOnViewModel.License.GetLicenseStatus();
-        }
-    }
 
     public bool SelectAllChecked { get; set; }
 
