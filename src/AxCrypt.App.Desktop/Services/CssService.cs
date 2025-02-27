@@ -10,6 +10,7 @@ public class CssService : ICssService
         {
             "business" => "business",
             "premium" => "premium",
+            "passwordmanager" => "free",
             "free" => "free",
             _ => "default"
         };

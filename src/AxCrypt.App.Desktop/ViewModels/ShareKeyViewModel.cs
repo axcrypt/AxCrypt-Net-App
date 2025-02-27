@@ -377,6 +377,11 @@ public class ShareKeyViewModel : ViewModelBase
 
     public async Task ApplyShareKeys()
     {
+        if (!EnableApplyButton)
+        {
+            return;
+        }
+
         switch (_isFolder)
         {
             case true:

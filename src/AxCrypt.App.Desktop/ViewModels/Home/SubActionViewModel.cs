@@ -112,7 +112,7 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
                 EnableEncryptionUpgrade = false;
             }
         }
-        
+
         private async Task ConfigureCloudServiceAsync(LicenseCapabilities license)
         {
             if (license.Has(LicenseCapability.CloudStorageAwareness))
@@ -127,7 +127,11 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
 
         public async Task OnCloudServiceButtonClick(KnownFolder knownFolder)
         {
-            await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(knownFolder.My.FullName);
+            //await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(knownFolder.My.FullName);
+
+            //We are opening the Explorer not the File picker with default folder for Cloud services
+            _mainViewModel.SelectedWatchedFolders = new List<string> { knownFolder.My.FullName };
+            _mainViewModel.OpenSelectedFolder.Execute(_mainViewModel.SelectedWatchedFolders.First());
         }
 
         public async void RandomRenameAsync(EventArgs e)
