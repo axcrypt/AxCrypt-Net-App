@@ -7,19 +7,16 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using AxCrypt.Core;
 using AxCrypt.Content;
-using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Runtime;
 using AxCrypt.App.Shared.Models;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.IO;
-using Microsoft.Maui.Storage;
-using Microsoft.Maui.Devices;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Desktop.Helpers;
+using System.IO;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 
@@ -42,6 +39,7 @@ public class ProfileViewModel
     {
         _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
         _registerViewModel = AxCServiceProviderExtension.RegisterViewModel!;
+        ExportKeyFile = AxCServiceProviderExtension.GetService<IExportKeyManagementFile>()!;
         Account = new AccountModel();
     }
 
@@ -87,7 +85,7 @@ public class ProfileViewModel
                 break;
 
             case KeyManagement.ExportMySharingKey:
-                await ExportMySharingKey();
+                await ExportMySharingKeyToolStripMenuItem_Click();
                 break;
 
             case KeyManagement.ImportAxCryptID:
@@ -98,7 +96,7 @@ public class ProfileViewModel
                 break;
 
             case KeyManagement.ExportAxCryptIDAndSharingKeyPair:
-                await ExportMyPrivateKey();
+                await ImportMyPrivateKeyToolStripMenuItem_Click();
                 break;
 
             case KeyManagement.CreateAxCryptID:
@@ -112,132 +110,55 @@ public class ProfileViewModel
 
     private async Task ImportOthersSharingKeyMenuItem_Click()
     {
-        FileSelectionViewModel fileSelection = new FileSelectionViewModel();
-        fileSelection.SelectFiles.Execute(FileSelectionType.ImportPublicKeys);
-        IList<string> selectedFiles = await FileImportSelectionOperation();
+        FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new List<string>())
+        {
+            FileSelectionType = FileSelectionType.ImportPublicKeys,
+        };
+        await New<IDataItemSelection>().HandleSelection(fileSelectionArgs);
 
         ImportPublicKeysViewModel importPublicKeys = new ImportPublicKeysViewModel(New<KnownPublicKeys>);
-        importPublicKeys.ImportFiles.Execute(selectedFiles);
+        importPublicKeys.ImportFiles.Execute(fileSelectionArgs.SelectedFiles);
     }
 
-    private async Task ExportMySharingKey()
+    private async Task ExportMySharingKeyToolStripMenuItem_Click()
     {
         UserKeyPair activeKeyPair = Resolve.KnownIdentities.DefaultEncryptionIdentity.ActiveEncryptionKeyPair;
         EmailAddress userEmail = activeKeyPair.UserEmail;
-        IAsymmetricPublicKey publicKey = activeKeyPair.KeyPair.PublicKey;
+        Core.Crypto.Asymmetric.IAsymmetricPublicKey publicKey = activeKeyPair.KeyPair.PublicKey;
 
         string fileName = $"{Texts.DialogExportSharingKeyFileName.InvariantFormat(userEmail.Address, publicKey.Tag)}";
+        Core.Crypto.Asymmetric.UserPublicKey userPublicKey = new Core.Crypto.Asymmetric.UserPublicKey(userEmail, publicKey);
 
-        UserPublicKey userPublicKey = new UserPublicKey(userEmail, publicKey);
-        string serialized = Core.Resolve.Serializer.Serialize(userPublicKey);
+        string serialized = Resolve.Serializer.Serialize(userPublicKey);
 
         string filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + DefaultExt, Texts.FileFilterFileTypePublicSharingKeyFiles, Texts.FileFilterFileTypeAllFiles);
 
-        //ExportKeyManagementFile exportKeyManagementFile = new ExportKeyManagementFile();
-        //string savedPath = await exportKeyManagementFile.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, DefaultExt, filter, fileName);
-        string savedPath = "";
+        string savedPath = await ExportKeyFile!.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, DefaultExt, filter, fileName);
+
         if (!string.IsNullOrEmpty(savedPath))
         {
             await File.WriteAllTextAsync(savedPath, serialized);
         }
     }
 
-    private async Task ExportMyPrivateKey()
+    private async Task ImportMyPrivateKeyToolStripMenuItem_Click()
     {
         UserKeyPair activeKeyPair = Resolve.KnownIdentities.DefaultEncryptionIdentity.ActiveEncryptionKeyPair;
         EmailAddress userEmail = activeKeyPair.UserEmail;
-        IAsymmetricPublicKey publicKey = activeKeyPair.KeyPair.PublicKey;
+        Core.Crypto.Asymmetric.IAsymmetricPublicKey publicKey = activeKeyPair.KeyPair.PublicKey;
 
         string fileName = $"{Texts.DialogExportAxCryptIdFileName.InvariantFormat(activeKeyPair.UserEmail, publicKey.Tag)}";
         string filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + New<IRuntimeEnvironment>().AxCryptExtension, Texts.FileFilterFileTypeAxCryptIdFiles, Texts.FileFilterFileTypeAllFiles);
         byte[] export = activeKeyPair.ToArray(Resolve.KnownIdentities.DefaultEncryptionIdentity.Passphrase);
 
-        //ExportKeyManagementFile exportKeyManagementFile = new ExportKeyManagementFile();
-        //string savedPath = await exportKeyManagementFile.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, New<IRuntimeEnvironment>().AxCryptExtension, filter, fileName);
-        string savedPath = "";
+        string data = Convert.ToBase64String(export);
+
+        string savedPath = await ExportKeyFile!.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, New<IRuntimeEnvironment>().AxCryptExtension, filter, fileName);
+
         if (!string.IsNullOrEmpty(savedPath))
         {
             await File.WriteAllBytesAsync(savedPath, export);
         }
-    }
-
-    public static async Task<IList<string>> FileImportSelectionOperation()
-    {
-        FileSelectionEventArgs fileSelectionEventArgs = new FileSelectionEventArgs(new string[0])
-        {
-            FileSelectionType = FileSelectionType.ImportPublicKeys,
-        };
-
-        IEnumerable<FileResult> selectedFiles = await InternalFileSelectionAsync(fileSelectionEventArgs);
-
-        if (fileSelectionEventArgs.Cancel)
-        {
-            return new List<string>();
-        }
-
-        foreach (string file in selectedFiles.Select(e => e.FullPath))
-        {
-            fileSelectionEventArgs.SelectedFiles.Add(file);
-        }
-
-        return fileSelectionEventArgs.SelectedFiles;
-    }
-
-    private static async Task<IEnumerable<FileResult>> InternalFileSelectionAsync(FileSelectionEventArgs e)
-    {
-        IDictionary<DevicePlatform, IEnumerable<string>> fileTypes = GetFileTypesForSelectionType(e.FileSelectionType);
-
-        FilePickerFileType customFileType = new FilePickerFileType(fileTypes);
-        IEnumerable<FileResult> pickResult = await FilePicker.PickMultipleAsync(new PickOptions
-        {
-            PickerTitle = "Please select files",
-            FileTypes = customFileType,
-        });
-
-        if (!pickResult.Any())
-        {
-            e.Cancel = true;
-        }
-
-        return pickResult;
-    }
-
-    public static IDictionary<DevicePlatform, IEnumerable<string>> GetFileTypesForSelectionType(FileSelectionType selectionType)
-    {
-        Dictionary<DevicePlatform, IEnumerable<string>> fileTypes = new Dictionary<DevicePlatform, IEnumerable<string>>();
-        IRuntimeEnvironment runtimeEnvironment = New<IRuntimeEnvironment>();
-
-        switch (selectionType)
-        {
-            case FileSelectionType.Open:
-            case FileSelectionType.Decrypt:
-                fileTypes.Add(DevicePlatform.WinUI, new[] { "." + runtimeEnvironment.AxCryptExtension });
-                fileTypes.Add(DevicePlatform.iOS, new string[] { });
-                fileTypes.Add(DevicePlatform.Android, new string[] { });
-                break;
-
-            case FileSelectionType.Encrypt:
-            case FileSelectionType.Rename:
-            case FileSelectionType.KeySharing:
-            case FileSelectionType.KeySharingEncrypt:
-            case FileSelectionType.Wipe:
-                fileTypes.Add(DevicePlatform.WinUI, new string[] { });
-                fileTypes.Add(DevicePlatform.iOS, new string[] { });
-                fileTypes.Add(DevicePlatform.Android, new string[] { });
-                break;
-
-            case FileSelectionType.ImportPublicKeys:
-            case FileSelectionType.ImportPrivateKeys:
-                fileTypes.Add(DevicePlatform.WinUI, new[] { ".txt", "." + runtimeEnvironment.AxCryptExtension });
-                fileTypes.Add(DevicePlatform.iOS, new string[] { });
-                fileTypes.Add(DevicePlatform.Android, new string[] { });
-                break;
-
-            default:
-                throw new NotImplementedException("File selection type not supported.");
-        }
-
-        return fileTypes;
     }
 
     public void ChangePassphraseMenuItem_Click(EventArgs e)
