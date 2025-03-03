@@ -1,31 +1,28 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Core.Crypto;
-using AxCrypt.Core.Service.Secrets;
-using AxCrypt.Core.Service;
-using AxCrypt.Core.Session;
-using AxCrypt.Core.UI.ViewModel;
-using AxCrypt.Core.UI;
-using AxCrypt.Core;
-using AxCrypt.Core.Extensions;
-using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Core.Service.UserNotification;
-using INotificationService = AxCrypt.Core.Service.UserNotification.INotificationService;
 using AxCrypt.Api;
-using AxCrypt.Core.Runtime;
-using AxCrypt.Desktop;
-using System.Threading;
+using AxCrypt.App.Desktop.Code;
 using AxCrypt.Common;
 using AxCrypt.Content;
-using System;
+using AxCrypt.Core;
+using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
-using System.Text.RegularExpressions;
-using AxCrypt.App.Desktop.Code;
-using Microsoft.Maui.Controls;
 using AxCrypt.Core.Ipc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
+using AxCrypt.Core.Service;
+using AxCrypt.Core.Service.Secrets;
+using AxCrypt.Core.Service.UserNotification;
+using AxCrypt.Core.Session;
+using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
+using AxCrypt.Desktop;
 using AxCrypt.Mono;
+using Microsoft.Maui.Controls;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using static AxCrypt.Abstractions.TypeResolve;
+using INotificationService = AxCrypt.Core.Service.UserNotification.INotificationService;
 
 namespace AxCrypt.App.Desktop;
 
@@ -36,9 +33,6 @@ public class AppFactory
     public static void RegisterTypeFactories()
     {
         TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
-        TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
-        TypeMap.Register.Singleton<InstallationVerifier>(() => new InstallationVerifier());
-        TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
 
         TypeMap.Register.New<SessionNotificationHandler>(() => new SessionNotificationHandler(Resolve.FileSystemState, Resolve.KnownIdentities, New<ActiveFileAction>(), New<AxCryptFile>(), New<IStatusChecker>()));
         TypeMap.Register.New<IdentityViewModel>(() => new IdentityViewModel(Resolve.FileSystemState, Resolve.KnownIdentities, Resolve.UserSettings, Resolve.SessionNotify));
@@ -53,14 +47,6 @@ public class AppFactory
         TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new DeviceNotificationService(new LocalNotificationService(), new NullNotificationService(identity)));
         TypeMap.Register.New<LogOnIdentity, ISecretsService>((LogOnIdentity identity) => new CachingSecretsService(new DeviceSecretsService(new LocalSecretsService(identity, Resolve.WorkFolder.FileInfo), new ApiSecretsService(new AxSecretsApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
         TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new CachingNotificationService(new DeviceNotificationService(new LocalNotificationService(), new ApiNotificationService(new AxNotificationApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
-    }
-
-    public static void CheckLavasoftWebCompanionExistence()
-    {
-        if (New<InstallationVerifier>().IsLavasoftApplicationInstalled)
-        {
-            Texts.LavasoftWebCompanionExistenceWarning.ShowWarning(Texts.WarningTitle, DoNotShowAgainOptions.LavasoftWebCompanionExistenceWarning);
-        }
     }
 
     public static void EnsureFileAssociation()
@@ -78,57 +64,6 @@ public class AppFactory
             return;
         }
         New<KeyPairService>().Start();
-    }
-
-    public static void SetupPathFilters()
-    {
-        if (OS.Current.Platform != Core.Runtime.Platform.WindowsDesktop)
-        {
-            return;
-        }
-
-        New<FileFilter>().AddUnencryptable(new Regex(@"\\\.dropbox$"));
-        New<FileFilter>().AddUnencryptable(new Regex(@"\\desktop\.ini$"));
-        New<FileFilter>().AddUnencryptable(new Regex(@".*\.tmp$"));
-        New<FileFilter>().AddUnencryptable(new Regex(@"^.*\\~\$[^\\]*$"));
-
-        AddEnvironmentVariableBasedFilePathFilter(@"^{0}(?!Temp$)", "SystemRoot");
-        AddEnvironmentVariableBasedFilePathFilter(@"^{0}(?!Temp$)", "windir");
-        AddEnvironmentVariableBasedFilePathFilter(@"^{0}", "ProgramFiles");
-        AddEnvironmentVariableBasedFilePathFilter(@"^{0}", "ProgramFiles(x86)");
-        AddEnvironmentVariableBasedFilePathFilter(@"^{0}$", "SystemDrive");
-
-        New<FileFilter>().AddPlatformIndependent();
-
-        AddEnvironmentVariableBasedFolderPathFilter("ProgramData");
-        AddEnvironmentVariableBasedFolderPathFilter("ProgramFiles(x86)");
-        AddEnvironmentVariableBasedFolderPathFilter("ProgramFiles");
-        AddEnvironmentVariableBasedFolderPathFilter("SystemRoot");
-        AddEnvironmentVariableBasedFolderPathFilter("APPDATA");
-        AddEnvironmentVariableBasedFolderPathFilter("LOCALAPPDATA");
-        AddEnvironmentVariableBasedFolderPathFilter("windir");
-        AddEnvironmentVariableBasedFolderPathFilter("ProgramW6432");
-    }
-
-    private static void AddEnvironmentVariableBasedFilePathFilter(string formatRegularExpression, string name)
-    {
-        IDataContainer folder = name.FolderFromEnvironment();
-        if (folder == null)
-        {
-            return;
-        }
-        string escapedPath = folder.FullName.Replace(@"\", @"\\");
-        New<FileFilter>().AddUnencryptable(new Regex(formatRegularExpression.InvariantFormat(escapedPath)));
-    }
-
-    private static void AddEnvironmentVariableBasedFolderPathFilter(string name)
-    {
-        IDataContainer folder = name.FolderFromEnvironment();
-        if (folder == null)
-        {
-            return;
-        }
-        New<FileFilter>().AddForbiddenFolderFilters(folder.FullName);
     }
 
     public static void RestoreUserPreferences(Window currentAppWindow)

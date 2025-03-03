@@ -1,6 +1,12 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Desktop;
+using AxCrypt.App.Desktop.Code;
+using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Infrastructure.Dialogs;
+using AxCrypt.App.Windows.Platforms.Windows.Implementation;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -11,14 +17,9 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
+using AxCrypt.Desktop;
 using System.Globalization;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Desktop.ViewModels;
-using AxCrypt.App.Shared.Models;
-using AxCrypt.Desktop;
-using AxCrypt.App.Desktop.Code;
-using AxCrypt.App.Shared.Services;
-using AxCrypt.App.Desktop;
 
 namespace AxCrypt.App.Windows;
 
@@ -44,7 +45,7 @@ public partial class App : Application
 
         InitializeContentResources();
         RegisterTypeFactories();
-        AppFactory.CheckLavasoftWebCompanionExistence();
+        PlatformInitializer.CheckLavasoftWebCompanionExistence();
         EnsureUiContextInitialized();
         AppFactory.EnsureFileAssociation();
 
@@ -111,7 +112,7 @@ public partial class App : Application
         AppFactory.StartKeyPairService();
         AttachLogListener();
         //ConfigureUiOptions();
-        AppFactory.SetupPathFilters();
+        PlatformInitializer.SetupPathFilters();
         IntializeControls();
         InitializeMouseDownFilter();
         //BindToViewModels();
@@ -153,6 +154,7 @@ public partial class App : Application
         //TypeMap.Register.Singleton<IVersion>(() => new DesktopVersion());
 
         //TypeMap.Register.New<AboutBox>(() => new AboutBox());
+        PlatformInitializer.RegisterTypeFactories();
         AppFactory.RegisterTypeFactories();
 
         FormsTypes.Register(this);
