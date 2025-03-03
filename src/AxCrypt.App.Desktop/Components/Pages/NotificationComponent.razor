@@ -9,8 +9,6 @@
 
 <link href="css/login.min.css" rel="stylesheet" />
 
-<AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
-
 <div id="content-index" class="medium-12 columns">
     <div class="head-sec">
         <div class="row">
@@ -32,7 +30,8 @@
 }
 else
 {
-    <div class="medium-12 columns" style="max-height: 635px;overflow-y: scroll;">
+    <div class="medium-12 columns parent-container" style="max-height: 635px; overflow-y: scroll;">
+        <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
         <table class="notification-table curved-table">
             <thead class="notify-pg-tbl-head">
                 <tr class="notification-text">

@@ -694,6 +694,17 @@ input:checked + .slider:before {
     font-size: 40px !important;
   }
 }
+.body-content-section .secrets-loading-overlay {
+  align-items: normal;
+  padding: 10% 20px;
+}
+
+.parent-container {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+
 @media (min-width: 1155px) {
   .page {
     background: #F9F9F9;

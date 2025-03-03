@@ -131,11 +131,11 @@
 
 /* Full-page overlay */
 .secrets-loading-overlay {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background: conic-gradient(from 10.99deg at 98.18% 128.62%,#FFFEE8 0deg,rgba(200, 199, 180, 0.8) 353.48deg,#F5FFF0 360deg);
-    z-index: 9999;
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
