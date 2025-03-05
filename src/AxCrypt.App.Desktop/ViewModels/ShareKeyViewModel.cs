@@ -3,6 +3,7 @@ using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Utility;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
@@ -49,6 +50,8 @@ public class ShareKeyViewModel : ViewModelBase
 
     public IEnumerable<string>? SelectedFilesOrFolders { get; set; }
 
+    public DialogResult PageResult { get { return GetProperty<DialogResult>(nameof(PageResult)); } set { SetProperty(nameof(PageResult), value); } }
+
     public ShareKeyViewModel()
     {
         LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
@@ -56,9 +59,9 @@ public class ShareKeyViewModel : ViewModelBase
         EmailSuggestions = new List<EmailSuggestion>();
     }
 
-    public void SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel, bool isFolder = false)
+    public async Task SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel)
     {
-        _isFolder = isFolder;
+        PageResult = DialogResult.None;
         SelectedFilesOrFolders = filesOrFoldersPath;
         _viewModel = sharingListViewModel;
         _viewModel.BindPropertyChanged<IEnumerable<UserPublicKey>>(nameof(SharingListViewModel.SharedWith), (aks) =>
@@ -77,6 +80,13 @@ public class ShareKeyViewModel : ViewModelBase
         _viewModel.BindPropertyChanged<bool>(nameof(SharingListViewModel.IsOnline), (bool isOnline) => { SetNewContactState(); });
 
         LogOnViewModel.ShareKeyDialog.Show();
+
+        while (PageResult == DialogResult.None)
+        {
+            await Task.Delay(1000);
+        }
+
+        LogOnViewModel.ShareKeyDialog.Close();
     }
 
     public bool ContextMenu { get; set; } = false;
@@ -373,8 +383,6 @@ public class ShareKeyViewModel : ViewModelBase
         return true;
     }
 
-    private bool _isFolder;
-
     public async Task ApplyShareKeys()
     {
         if (!EnableApplyButton)
@@ -382,24 +390,7 @@ public class ShareKeyViewModel : ViewModelBase
             return;
         }
 
-        switch (_isFolder)
-        {
-            case true:
-
-                await _viewModel!.ShareFolders.ExecuteAsync(_viewModel.SharedWith);
-                break;
-
-            case false:
-                await _viewModel!.ShareFiles.ExecuteAsync(_viewModel.SharedWith);
-                break;
-        }
-
-        SelectedFilesOrFolders = Enumerable.Empty<string>();
-        _isFolder = false;
-        ErrorMessage = "";
-        RecipientEmail = "";
-        LogOnViewModel.ShareKeyDialog.Close();
-        LogOnViewModel.UIStateChanged();
+        PageResult = DialogResult.OK;
     }
 
     public async Task RemoveSharedKey()
