@@ -34,6 +34,7 @@ namespace AxCrypt.App.Windows
 
             IServiceCollection services = builder.Services;
             RegisterSingletons(services);
+            TypeMap.Register.Singleton<INotificationService>(() => new NotificationService());
 
             services.AddMauiBlazorWebView();
 
@@ -62,7 +63,6 @@ namespace AxCrypt.App.Windows
         {
 
             services.AddSingleton<ITrayService, TrayService>();
-            services.AddSingleton<INotificationService, NotificationService>();
 
             services.AddSingleton<ILogging, Logging>();
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();

@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
 using AxCrypt.App.Desktop.Code;
+using AxCrypt.App.Desktop.Data;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -8,6 +9,7 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Ipc;
+using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.Service.UserNotification;
@@ -16,7 +18,6 @@ using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Desktop;
 using AxCrypt.Mono;
-using AxCrypt.Mono.Cryptography;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
@@ -33,8 +34,12 @@ public class AppFactory
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It's not actually complex since it's just a registry.")]
     public static void RegisterTypeFactories()
     {
+        TypeMap.Register.Singleton<IGlobalNotification>(() => new NotifyIconGlobalNotification());
+        TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
         TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
-        TypeMap.Register.Singleton<TransientProtectedData>(() => new TransientProtectedData());
+
+        TypeMap.Register.Singleton<SecretSecureStorage>(() => new SecretSecureStorage());
+        TypeMap.Register.Singleton<IProtectedData>(() => new TransientProtectedData(New<SecretSecureStorage>().AppUserSecretKey));
 
         TypeMap.Register.New<SessionNotificationHandler>(() => new SessionNotificationHandler(Resolve.FileSystemState, Resolve.KnownIdentities, New<ActiveFileAction>(), New<AxCryptFile>(), New<IStatusChecker>()));
         TypeMap.Register.New<IdentityViewModel>(() => new IdentityViewModel(Resolve.FileSystemState, Resolve.KnownIdentities, Resolve.UserSettings, Resolve.SessionNotify));
@@ -139,5 +144,4 @@ public class AppFactory
         TypeMap.Register.Singleton(() => new ProcessMonitor());
         New<ProcessMonitor>();
     }
-
 }

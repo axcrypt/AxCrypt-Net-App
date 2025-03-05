@@ -2,7 +2,7 @@
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
-using AxCrypt.App.Windows.Services;
+using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Core;
 using Microsoft.UI.Windowing;
 
@@ -98,9 +98,7 @@ namespace AxCrypt.App.Windows.Infrastructure
 
                 Task.Run(() =>
                 {
-                        INotificationService notificationService = new NotificationService();
-                    notificationService
-                            ?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
+                    New<INotificationService>()?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
                 });
 
                 trayService.ClickHandler = () =>

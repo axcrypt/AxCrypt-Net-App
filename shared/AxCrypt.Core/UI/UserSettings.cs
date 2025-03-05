@@ -359,7 +359,7 @@ namespace AxCrypt.Core.UI
             get { return Load(nameof(RememberMe), false); }
             set { Store(nameof(RememberMe), value); }
         }
-        
+
         public string TemporaryFilePath
         {
             get { return Load(nameof(TemporaryFilePath), string.Empty); }

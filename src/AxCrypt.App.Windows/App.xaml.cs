@@ -149,7 +149,6 @@ public partial class App : Application
         TypeMap.Register.Singleton<IDeviceLocked>(() => new DeviceLocked());
         TypeMap.Register.Singleton<IKnownFolderImageProvider>(() => new KnownFolderImageProvider());
         //TypeMap.Register.Singleton<MouseDownFilter>(() => new MouseDownFilter(this));
-        TypeMap.Register.Singleton<IGlobalNotification>(() => new NotifyIconGlobalNotification());
 
         //TypeMap.Register.Singleton<IVersion>(() => new DesktopVersion());
 

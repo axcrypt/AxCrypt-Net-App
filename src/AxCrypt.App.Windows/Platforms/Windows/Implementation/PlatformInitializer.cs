@@ -18,7 +18,6 @@ public class PlatformInitializer
     {
         TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
         TypeMap.Register.Singleton<InstallationVerifier>(() => new InstallationVerifier());
-        TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
     }
 
     public static void CheckLavasoftWebCompanionExistence()

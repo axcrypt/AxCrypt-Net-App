@@ -29,8 +29,7 @@
 #endregion License
 
 using AxCrypt.Abstractions;
-using System;
-using System.Text;
+using System.Security.Cryptography;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Crypto;
@@ -40,131 +39,73 @@ namespace AxCrypt.Core.Crypto;
 /// only be decryptable within the life-time of the AppDomain. If the AppDomain is restarted, new entropy is generated and old values are
 /// no longer possible to decrypt.
 /// </summary>
-public class TransientProtectedData
+public class TransientProtectedData : IProtectedData
 {
-/// <summary>
-/// This is what makes the encryption unique to this instance of the AppDomain.
-/// </summary>
-///
-private readonly object _entropyLock = new object();
+    /// <summary>
+    /// This is what makes the encryption unique to this instance of the AppDomain.
+    /// </summary>
+    ///
+    private readonly object _entropyLock = new object();
 
-private byte[] _entropy;
+    private byte[] _entropy;
+    private byte[] _key;
 
-private byte[] Entropy()
-{
-    lock (_entropyLock)
+    public TransientProtectedData(byte[] key)
     {
-        if (_entropy == null)
+        Entropy();
+        _key = key;
+    }
+
+    private byte[] Entropy()
+    {
+        lock (_entropyLock)
         {
-            _entropy = New<IRandomGenerator>().Generate(16);
+            if (_entropy == null)
+            {
+                _entropy = New<IRandomGenerator>().Generate(16);
+            }
+        }
+        return _entropy;
+    }
+
+    public void Entropy(byte[] value)
+    {
+        lock (_entropyLock)
+        {
+            if (value != null)
+            {
+                throw new ArgumentException("Only resetting is supported, this will invalidate all previous encryptions.", "value");
+            }
+            _entropy = value;
         }
     }
-    return _entropy;
-}
 
-public void Entropy(byte[] value)
-{
-    lock (_entropyLock)
+    public byte[] Protect(byte[] userData, byte[] key)
     {
-        if (value != null)
+        key = key ?? _key;
+        byte[] protectedBytes = CustomAesEncryption.EncryptData(userData, key, _entropy);
+        Array.Clear(userData, 0, userData.Length);
+        return protectedBytes;
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+    public byte[] Unprotect(byte[] encryptedData, byte[] key)
+    {
+        byte[] bytes;
+        try
         {
-            throw new ArgumentException("Only resetting is supported, this will invalidate all previous encryptions.", "value");
+            key = key ?? _key;
+            if (!CustomAesEncryption.TryUnprotect(encryptedData, key, _entropy, out bytes))
+            {
+                return null;
+            }
+
+            return bytes;
         }
-        _entropy = value;
-    }
-}
-
-public byte[] Protect(string value)
-{
-    byte[] bytes = Encoding.Unicode.GetBytes(value);
-    byte[] protectedBytes = Protect(bytes);
-    Array.Clear(bytes, 0, bytes.Length);
-    return protectedBytes;
-}
-
-public byte[] Protect(string value, byte[] key)
-{
-    byte[] bytes = Encoding.Unicode.GetBytes(value);
-    byte[] protectedBytes = CustomAesEncryption.EncryptData(bytes, key, Entropy());
-    Array.Clear(bytes, 0, bytes.Length);
-    return protectedBytes;
-}
-
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-public bool TryUnprotect(byte[] protectedValue, byte[] key, out string value)
-{
-    value = null;
-    byte[] bytes;
-    if (!CustomAesEncryption.TryUnprotect(protectedValue, key, _entropy, out bytes))
-    {
-        return false;
-    }
-    try
-    {
-        value = Encoding.Unicode.GetString(bytes, 0, bytes.Length);
-    }
-    catch
-    {
-        return false;
-    }
-    finally
-    {
-        if (bytes != null)
+        catch (CryptographicException cex)
         {
-            Array.Clear(bytes, 0, bytes.Length);
+            New<IReport>().Exception(cex);
+            return null;
         }
     }
-    return true;
-}
-
-public byte[] Protect(byte[] value)
-{
-    byte[] protectedBytes = New<IProtectedData>().Protect(value, Entropy());
-    return protectedBytes;
-}
-
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-public bool TryUnprotect(byte[] protectedValue, out string value)
-{
-    value = null;
-    byte[] bytes;
-    if (!TryUnprotect(protectedValue, out bytes))
-    {
-        return false;
-    }
-    try
-    {
-        value = Encoding.Unicode.GetString(bytes, 0, bytes.Length);
-    }
-    catch
-    {
-        return false;
-    }
-    finally
-    {
-        if (bytes != null)
-        {
-            Array.Clear(bytes, 0, bytes.Length);
-        }
-    }
-    return true;
-}
-
-public bool TryUnprotect(byte[] protectedValue, out byte[] bytes)
-{
-    bytes = null;
-    try
-    {
-        bytes = New<IProtectedData>().Unprotect(protectedValue, _entropy);
-    }
-    catch (AxCryptException)
-    {
-        return false;
-    }
-    catch (FormatException)
-    {
-        return false;
-    }
-    return bytes != null;
-}
 }

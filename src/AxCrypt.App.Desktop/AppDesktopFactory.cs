@@ -68,15 +68,5 @@ public static class AppDesktopFactory
 
         TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
         TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
-       
-
-    }
-
-    public static void RegisterTypeFactories()
-    {
-    }
-
-    public static void RegisterSingletonFactories(IServiceCollection services)
-    {
     }
 }
