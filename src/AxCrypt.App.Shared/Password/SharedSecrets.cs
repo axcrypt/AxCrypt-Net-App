@@ -1,4 +1,5 @@
-﻿using AxCrypt.App.Shared.Helpers;
+﻿using AxCrypt.Api.Shared.Helper;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.Cryptor.Model;
 
 using static AxCrypt.Abstractions.TypeResolve;
@@ -146,7 +147,7 @@ public static class SharedSecrets
     //    return null;
     //}
 
-    /*public static async Task<bool> UpdateShareVisibility(SecretClientModel secret)
+    public static async Task<bool> UpdateShareVisibility(SecretClientModel secret)
     {
         return await ShareSecretFacade.UpdateSharedVisibilityAsync(secret);
     }
@@ -154,5 +155,5 @@ public static class SharedSecrets
     public static async Task<bool> DeleteSharedWithAsync(SecretClientModel secret)
     {
         return await ShareSecretFacade.DeleteSharedWithAsync(secret);
-    }*/
+    }
 }

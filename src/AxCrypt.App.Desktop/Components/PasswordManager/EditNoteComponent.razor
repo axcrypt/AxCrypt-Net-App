@@ -44,8 +44,6 @@
     </EditForm>
 </div>
 @code {
-    bool isAxCryptUser = true;
-
     protected override void OnInitialized()
     {
         if (secretService.CurrentSecret == null)
@@ -71,8 +69,6 @@
         {
             StatusAlertService.Error(editSecretViewModel.ErrorMessage);
         }
-
-        navigationManager.NavigateTo("/passwordManager");
     }
 
     bool contextMenu = false;

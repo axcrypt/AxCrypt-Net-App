@@ -8,10 +8,10 @@ public class SecretSharedUserViewModel : IEquatable<SecretSharedUserViewModel>
     public SecretSharedUserViewModel(EmailAddress userEmail, SecretShareVisibility visibility, string ownerEmail, AccountStatus userAccountStatus = AccountStatus.Unknown)
     {
         UserEmail = userEmail;
-        ImageSource = "ContactsIcon.png";
+        ImageSource = "contact-icon";
         if (userAccountStatus == AccountStatus.Verified)
         {
-            ImageSource = "icon.png";
+            ImageSource = "axcrypt-icons";
         }
         OwnerEmail = ownerEmail;
         Visibility = visibility;

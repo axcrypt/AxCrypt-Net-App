@@ -141,13 +141,12 @@
     private async void SubmitSupportAsync()
     {
         await SupportViewModel.SubmitSupportAsync(LogOnModel.SubscriptionLevel);
-        ResetSupport();
-        await InvokeAsync(() => StateHasChanged());
     }
 
     private void ResetSupport()
     {
         SupportViewModel.Body = "";
         SupportViewModel.Subject = "";
+        SupportViewModel.ErrorMessage = "";
     }
 }
