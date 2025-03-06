@@ -329,7 +329,7 @@ namespace AxCrypt.Api
                     break;
 
                 case ClientPlatformKind.Mac:
-                    platformParameter = "mac";
+                    platformParameter = "macos";
                     break;
 
                 default:
