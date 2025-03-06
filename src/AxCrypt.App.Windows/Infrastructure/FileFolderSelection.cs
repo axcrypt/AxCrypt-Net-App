@@ -72,7 +72,7 @@ public class FileFolderSelection : IDataItemSelection
         fldpik.SuggestedStartLocation = PickerLocationId.ComputerFolder;
         //fbd.User = _owner;
 
-        //folderPicker.FileTypeFilter.Add("*");
+        fldpik.FileTypeFilter.Add("*");
         //folderPicker.ViewMode = PickerViewMode.Thumbnail;
 
         nint hwnd = ((MauiWinUIWindow)MauiWinUIApplication.Current.Application.Windows[0].Handler.PlatformView).WindowHandle;
