@@ -68,7 +68,7 @@ public static class ShareSecretFacade
         string encryptedSecret = "";
         if (encryptedData.Cipher != null)
         {
-            encryptedSecret = encryptedData.Cipher.GetCipherBytes();
+            encryptedSecret = encryptedData.Cipher.GetCipherString();
         }
         LogOnIdentity logOnIdentity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
 
@@ -98,7 +98,7 @@ public static class ShareSecretFacade
         {
             EncryptedSecretApiModel encryptedSecret = new EncryptedSecretApiModel
             {
-                Cipher = shareSecret.EncryptedSecret.GetCipherString(),
+                Cipher = shareSecret.EncryptedSecret.GetCipherBytes(),
                 UserEmail = identity.UserEmail.Address,
                 CreatedUtc = shareSecret.CreatedUtc,
             };

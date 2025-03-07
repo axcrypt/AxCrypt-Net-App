@@ -22,9 +22,15 @@
         Viewer,
         Business,
         PasswordManager,
+
         ShareSecretFree,
         ShareSecretPasswordManager,
         ShareSecretPremium,
         ShareSecretBusiness,
+
+        CreateUnlimitedPasswords,
+
+        GroupSharing,
+        SendUnlimitedMessages,
     }
 }

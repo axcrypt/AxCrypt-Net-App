@@ -79,11 +79,13 @@ namespace AxCrypt.Core.Runtime
             LicenseCapability.Premium,
             LicenseCapability.InactivitySignOut,
             LicenseCapability.ShareSecretPremium,
+            LicenseCapability.SendUnlimitedMessages,
         }));
 
         protected static readonly HashSet<LicenseCapability> BusinessCapabilitySet = new HashSet<LicenseCapability>(PremiumCapabilitySet.Concat(new LicenseCapability[]
         {
             LicenseCapability.Business,
+            LicenseCapability.GroupSharing,
         }));
 
         public LicensePolicy() : this(true)

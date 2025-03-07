@@ -1,0 +1,230 @@
+﻿@using AxCrypt.App.Desktop.Data
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.Services.Interface
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.App.Desktop.ViewModels.SecuredMessenger
+@using AxCrypt.Content;
+@using AxCrypt.Core.UI
+
+@inject IStatusAlertService StatusAlertService
+@inject NewSecMsgrViewModel newSecMsgrViewModel
+@inject SecuredMessengerListViewModel SecuredMessengerListModel
+@inject IJSRuntime jsRuntime
+
+<div>
+    <EditForm Model="newSecMsgrViewModel" OnValidSubmit="async () => await SendAsync(newSecMsgrViewModel)" id="send-new-message-form" class="new-message-form">
+        <div class="main-padding">
+            <input type="hidden" id="reply-message-id-hidden" name="messengerId" @bind="newSecMsgrViewModel.ParentId" />
+            <input type="hidden" id="new-member-email-hidden" name="ReceiverEmails" @bind="newSecMsgrViewModel.ReceiverEmails" />
+
+            <div class="new-page">
+                <div class="medium-12 dk-hide" style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
+                    <NavLink href="messagelist"><img class="ico-close" src="" alt="close-img" /></NavLink>
+                    <span class="mb-page-title text-center">New Message</span>
+                    <button type="submit" class="snd-mb snd-dk" style="background-color: transparent; margin-bottom: 0px; padding-right: 0px;">
+                    </button>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <input type="submit" class="button success btn-large fnt-small btn-size snd-dk" id="send-button-desktop" value="Send" />
+                    <img class="dlt-img" style="float: right;" onclick="onDeleteDraftbtnClick('@newSecMsgrViewModel.Id')" alt="Clear" title="Delete draft" />
+                </div>
+                <div class="" style="display:flex;padding:0 5px;">
+                    <label class="grey-clr" style="display: inline-block; padding-right: 5px;">To:</label>
+                    <div class="email-input-container">
+                        <div id="email-tags">
+                            @foreach (var email in ReceiverEmails)
+                            {
+                                <span class="email-tag"><span class="email-text" title="@email">@email</span> <span class="remove-email" @onclick="() => RemoveEmail(email)">x</span></span>
+                            }
+                        </div>
+                        <input @bind="EmailAddress"
+                        @onkeypress="HandleKeyPress"
+                        placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
+                        type="text"
+                        id="new-member-email" />
+                    </div>
+                </div>
+                <hr class="dk-hide" />
+                @if (Utility.IsBusinessUser)
+                {
+                    <div class="grp-info dk-hide">
+                        Add users or Groups with whom you want to share this secret. If you don`t know about our <strong>Group Feature</strong> yet, learn more and create your first one by the link <NavLink href="/group">Create a Group !</NavLink>
+                    </div>
+                    <hr class="dk-hide" />
+                }
+            </div>
+        </div>
+        <div class="grey-clr">
+            Visibility:
+            <select style="height: 35px; border-radius:5px" id="shareVisibilityOptions"
+            class="button visble-button fnt-medium"
+            @bind="newSecMsgrViewModel.Visibility">
+                @foreach (var visibility in newSecMsgrViewModel.MessageVisibilityList)
+                {
+                    <option value="@visibility">@visibility</option>
+                }
+            </select>
+
+            <img class="" src="/images/default/IcoInfOld.svg" alt="" />
+        </div>
+        <div class="text-msg">
+            <InputTextArea @bind-Value="newSecMsgrViewModel.EncryptedMessage"
+            id="secured-mess-body"
+            maxlength="100000"
+            autofocus
+            placeholder="Type your message here" />
+
+        </div>
+    </EditForm>
+</div>
+
+@code {
+
+    private string EmailAddress { get; set; } = "";
+    private List<string> ReceiverEmails { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        newSecMsgrViewModel.OnUpdateViewState += UpdateState;
+        base.OnInitialized();
+    }
+
+    private void HandleKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == ",")
+        {
+            if (!string.IsNullOrWhiteSpace(EmailAddress))
+            {
+                string trimmedEmail = EmailAddress.Trim();
+
+                if (!IsValidEmail(trimmedEmail))
+                {
+                    Console.WriteLine("Invalid email format: " + trimmedEmail);
+                    return;
+                }
+
+                if (ReceiverEmails == null)
+                {
+                    ReceiverEmails = new List<string>();
+                }
+
+                if (ReceiverEmails.Contains(trimmedEmail, StringComparer.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("Email already exists: " + trimmedEmail);
+                    return;
+                }
+
+                ReceiverEmails.Add(trimmedEmail);
+                newSecMsgrViewModel.ReceiverEmails = string.Join(",", ReceiverEmails);
+                EmailAddress = "";
+            }
+        }
+    }
+
+    private bool IsValidEmail(string email)
+    {
+        try
+        {
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private void RemoveEmail(string email)
+    {
+        ReceiverEmails.Remove(email);
+    }
+
+    private async Task SendAsync(NewSecMsgrViewModel newSecMsgrViewModel)
+    {
+        if (!string.IsNullOrWhiteSpace(EmailAddress))
+        {
+            ReceiverEmails.Add(EmailAddress.Trim());
+            EmailAddress = "";
+        }
+
+        if (newSecMsgrViewModel == null || !ReceiverEmails.Any() || string.IsNullOrWhiteSpace(newSecMsgrViewModel.EncryptedMessage))
+        {
+            StatusAlertService.Error("Failed to create a new message");
+            return;
+        }
+
+        newSecMsgrViewModel.ReceiverEmails = string.Join(",", ReceiverEmails);
+
+        bool success = await newSecMsgrViewModel.SentMessageAsync(newSecMsgrViewModel);
+        if (success)
+        {
+            StatusAlertService.Success(@Texts.NewSecretSuccess);
+            newSecMsgrViewModel.EncryptedMessage = "";
+            ReceiverEmails = new List<string>();
+
+            await SetSentTabActive();
+            SecuredMessengerListModel.UpdateViewState();
+            return;
+        }
+    }
+
+    private async Task SetSentTabActive()
+    {
+        await SecuredMessengerListModel.GetMessagesList(Api.SecuredMessenger.SecureMsgrFilterTab.Sent);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        try
+        {
+            if (firstRender)
+            {
+                await jsRuntime.InvokeVoidAsync("SemScript");
+                await jsRuntime.InvokeVoidAsync("setDotNetHelperNew", DotNetObjectReference.Create(this));
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    [JSInvokable]
+    public async Task UpdateReplyValuesFromJs(string parentId, string messageId, string receiverEmails)
+    {
+        Console.WriteLine($"Received ParentId: {parentId}, MessageId: {messageId}, Emails: {receiverEmails}");
+
+        if (Guid.TryParse(parentId, out var parsedParentId) && Guid.TryParse(messageId, out var parsedMessageId))
+        {
+            this.newSecMsgrViewModel.ParentId = parsedParentId;
+            this.newSecMsgrViewModel.ReceiverEmails = receiverEmails;
+            await LoadReceiverEmailsFromJs();
+            await InvokeAsync(StateHasChanged);
+        }
+        else
+        {
+            Console.WriteLine("Invalid GUID format received from JS.");
+        }
+    }
+
+    private async Task LoadReceiverEmailsFromJs()
+    {
+        var emailFromHiddenField = await jsRuntime.InvokeAsync<string>("getHiddenFieldValue", "new-member-email-hidden");
+
+        if (!string.IsNullOrWhiteSpace(emailFromHiddenField))
+        {
+            ReceiverEmails = emailFromHiddenField.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                                 .Select(email => email.Trim())
+                                                 .ToList();
+            Console.WriteLine($"Updated ReceiverEmails: {string.Join(", ", ReceiverEmails)}");
+        }
+    }
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+}

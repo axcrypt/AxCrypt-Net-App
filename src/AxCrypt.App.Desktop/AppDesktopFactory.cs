@@ -10,6 +10,8 @@ using AxCrypt.App.Desktop.ViewModels.Secret;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Desktop.ViewModels.SecuredMessenger;
+using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,6 +60,13 @@ public static class AppDesktopFactory
         services.AddSingleton<ViewSecretViewModel>();
         services.AddSingleton<UserNotificationService>();
         services.AddSingleton<NotificationViewModel>();
+
+        services.AddSingleton<SecuredMessengerListViewModel>();
+        services.AddSingleton<ViewSecMsgrViewModel>();
+        services.AddSingleton<NewSecMsgrViewModel>();
+        services.AddSingleton<SecuredMessengerModel>();
+        services.AddSingleton<SecuredMessage>();
+        services.AddSingleton<ISecureMessagingService, SecureMessagingService>();
 
         services.AddTransient<SecretsListViewModel>();
 

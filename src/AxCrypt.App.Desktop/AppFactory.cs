@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
+using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.App.Desktop.Code;
 using AxCrypt.App.Desktop.Data;
 using AxCrypt.Common;
@@ -12,6 +13,7 @@ using AxCrypt.Core.Ipc;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Service.Secrets;
+using AxCrypt.Core.Service.SecuredMessenger;
 using AxCrypt.Core.Service.UserNotification;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
@@ -51,9 +53,11 @@ public class AppFactory
         TypeMap.Register.New<LogOnIdentity, AdditionalUserSettings>((LogOnIdentity identity) => new AdditionalUserSettings(identity));
         TypeMap.Register.New<LogOnIdentity, IAccountService>((LogOnIdentity identity) => new CachingAccountService(new DeviceAccountService(new LocalAccountService(identity, Resolve.WorkFolder.FileInfo), new ApiAccountService(new AxCryptApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
         TypeMap.Register.New<LogOnIdentity, ISecretsService>((LogOnIdentity identity) => new DeviceSecretsService(new LocalSecretsService(identity, Resolve.WorkFolder.FileInfo), new NullSecretsService(identity)));
-        TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new DeviceNotificationService(new LocalNotificationService(), new NullNotificationService(identity)));
         TypeMap.Register.New<LogOnIdentity, ISecretsService>((LogOnIdentity identity) => new CachingSecretsService(new DeviceSecretsService(new LocalSecretsService(identity, Resolve.WorkFolder.FileInfo), new ApiSecretsService(new AxSecretsApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
+        TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new DeviceNotificationService(new LocalNotificationService(), new NullNotificationService(identity)));
         TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new CachingNotificationService(new DeviceNotificationService(new LocalNotificationService(), new ApiNotificationService(new AxNotificationApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
+        TypeMap.Register.New<LogOnIdentity, ISecuredMessengerService>((LogOnIdentity identity) => new DeviceSecuredMessengerService(new LocalSecuredMessengerService(identity, Resolve.WorkFolder.FileInfo), new NullSecuredMessengerService(identity)));
+        TypeMap.Register.New<LogOnIdentity, ISecuredMessengerService>((LogOnIdentity identity) => new CachingSecuredMessengerService(new DeviceSecuredMessengerService(new LocalSecuredMessengerService(identity, Resolve.WorkFolder.FileInfo), new ApiSecuredMessengerService(new SecureMsgrDbApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
     }
 
     public static void EnsureFileAssociation()

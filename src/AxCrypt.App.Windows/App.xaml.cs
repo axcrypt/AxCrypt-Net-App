@@ -153,7 +153,6 @@ public partial class App : Application
         FormsTypes.Register(this);
     }
 
-
     private static void EnsureUiContextInitialized()
     {
         New<IUIThread>().Yield();
@@ -486,7 +485,6 @@ public partial class App : Application
         //this.RightToLeft = RightToLeft.No;
     }
 
-  
     private async Task PremiumFeatureActionAsync(LicenseCapability requiredCapability, Func<Task> realHandler)
     {
         if (_mainViewModel.License.Has(requiredCapability))

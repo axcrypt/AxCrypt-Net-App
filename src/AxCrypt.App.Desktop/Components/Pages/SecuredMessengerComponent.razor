@@ -1,0 +1,112 @@
+﻿@using AxCrypt.Api.SecuredMessenger
+@using AxCrypt.App.Desktop.ViewModels.SecuredMessenger
+@using AxCrypt.Content
+
+@inject SecuredMessengerListViewModel SecuredMessengerListModel
+@inject IJSRuntime jsRuntime
+
+@* @{
+    int messageCount = SecuredMessengerListModel.Messenger.Messages.Count();
+} *@
+<div class="secured-messenger">
+    <div class="row">
+        <div class="medium-12 columns" style="margin:0 auto;">
+            <NavLink href="messagelist">
+                <img class=" left go-back-arrow" src="" alt="go-back-img" />
+            </NavLink>
+            <h2 class="page-title">Secured Messenger</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="medium-12 columns" id="sec-msg-search-section">
+            <EditForm Model="SecuredMessengerListModel.Messenger" OnValidSubmit="SearchList" id="search-msg-form">
+                <input type="hidden" name="SecMessengerFilterTab" @bind="SecuredMessengerListModel.Messenger.SecMessengerFilterTab" id="sec-messenger-filter-tab" />
+                <InputText @bind-Value="SecuredMessengerListModel.Messenger.Keyword"
+                id="messenger-keyword"
+                placeholder=@Texts.PromptXecretsSearchText
+                class="search-box columns"
+                tabindex="1"
+                style="width: 80%;" />
+                <select style="width: 13%;" name="Visibility" title="Visibility" id="search-filter-dropdown" class="search-dropdown medium-2 columns">
+                    @foreach (string visibility in SecuredMessengerListModel.Messenger.SecMesgFilterOptions)
+                    {
+                        <option value="@visibility">@visibility</option>
+                    }
+                </select>
+                <button type="submit" id="message-search-btn" class="button msg-search-btn" title="Search"></button>
+            </EditForm>
+
+        </div>
+        <div class="medium-12 columns">
+            <div id="All" class="tabcontent">
+                <div class="row">
+                    <div class="tab tab-sec medium-9 columns">
+                        <a class="sub-head-link unread-text @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "active" : "")"
+                        @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox)" id="inbox-tab">
+                            Inbox @* <span id="inbox-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? messageCount : ""))</span> *@
+                        </a>
+                        <a class="sub-head-link @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "active" : "")"
+                        @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent)" id="sent-tab">
+                            Sent @* <span id="sent-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? messageCount : ""))</span> *@
+                        </a>
+                        <a class="sub-head-link unread-text @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "active" : "")"
+                        @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread)" id="unread-tab">
+                            Unread @* <span id="unread-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? messageCount : ""))</span> *@
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="search-message-list">
+                <AxCrypt.App.Desktop.Components.SecuredMessenger.Body Model="@SecuredMessengerListModel" />
+            </div>
+            <div class="mb-new-msg" id="mb-new-message">
+                <img class="" src="/images/default/IcoNwMssg.svg" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private SecureMsgrFilterTab activeTab = SecureMsgrFilterTab.Inbox;
+
+    protected override async Task OnInitializedAsync()
+    {
+        SecuredMessengerListModel.OnUpdateViewState += UpdatePageState;
+        SecuredMessengerListModel.Messenger.SecMessengerFilterTab = activeTab;
+        await SecuredMessengerListModel.GetMessagesList(activeTab);
+        StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsync("SemScript");
+        }
+    }
+
+    private async Task SetActiveTab(SecureMsgrFilterTab securedMessengerFilterTab)
+    {
+        activeTab = securedMessengerFilterTab;
+        await SecuredMessengerListModel.GetMessagesList(securedMessengerFilterTab);
+        _ = jsRuntime.InvokeVoidAsync("RestoreLoadMoreButton");
+        UpdatePageState();
+    }
+
+    private async Task SearchList()
+    {
+        await jsRuntime.InvokeVoidAsync("showLoadingEffect");
+
+        await SecuredMessengerListModel.SearchList(SecuredMessengerListModel.Messenger);
+        await jsRuntime.InvokeVoidAsync("hideLoadingEffect");
+    }
+
+    private void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+}

@@ -26,6 +26,7 @@ public class CssService : ICssService
             $"css/{cssBasePath}/notification.min.css",
             $"css/{cssBasePath}/newsecret.min.css",
             $"css/{cssBasePath}/secretlist.min.css",
+            $"css/{cssBasePath}/securedmessenger.min.css",
             $"css/{cssBasePath}/support.min.css",
         };
 

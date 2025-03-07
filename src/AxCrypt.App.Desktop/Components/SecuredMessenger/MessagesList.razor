@@ -1,0 +1,63 @@
+﻿@using AxCrypt.App.Desktop.ViewModels.SecuredMessenger
+@using AxCrypt.Core.SecuredMessenger;
+
+@inject IJSRuntime jsRuntime
+
+<div class="row">
+    <div class="medium-12 columns">
+        <div class="inbox-section no-margin" id="load-message-list">
+            @if (Model?.Messenger?.Messages == null || !Model.Messenger.Messages.Any())
+            {
+                <label class="center-column" id="noMoreNewMessagesText" style="margin: 10% 20%;">(No messages found.)</label>
+            }
+            else
+            {
+                @foreach (SecuredMessage messenger in Model.Messenger.Messages)
+                {
+                    <AxCrypt.App.Desktop.Components.SecuredMessenger.Messages Model="@messenger" SecMessengerFilterTab="@Model.Messenger.SecMessengerFilterTab" />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public SecuredMessengerListViewModel? Model { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        try
+        {
+            if (firstRender)
+            {
+                await jsRuntime.InvokeVoidAsync("SemScript");
+                await jsRuntime.InvokeVoidAsync("setDotNetHelperLoad", DotNetObjectReference.Create(this));
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    [JSInvokable("EnableLoadMoreAction")]
+    public async Task<bool> EnableLoadMoreAction(int pageNumberCount)
+    {
+        SecuredMessengerModel messengerModel = await Model.LoadMore(pageNumberCount, Model.Messenger.SecMessengerFilterTab);
+
+        if (Model.Messenger.Messages != null && messengerModel == null && messengerModel!.Messages.Any())
+        {
+            Model!.Messenger.Messages = Model.Messenger.Messages.Concat(messengerModel!.Messages).ToList();
+            StateHasChanged();
+            return true;
+        }
+        return false;
+    }
+}

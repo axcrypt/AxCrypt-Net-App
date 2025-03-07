@@ -74,6 +74,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<PasswordManagerComponent>();
             services.AddSingleton<Notification>();
             services.AddSingleton<Support>();
+            services.AddSingleton<SecuredMessengerComponent>();
 
             SharedFactory.RegisterSingletons(services);
             AppDesktopFactory.RegisterSingletons(services);

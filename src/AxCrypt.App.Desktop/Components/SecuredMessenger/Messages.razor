@@ -1,0 +1,99 @@
+﻿@using AxCrypt.App.Desktop.Data
+@using AxCrypt.Core.SecuredMessenger
+@using AxCrypt.Core.UI
+
+@using static AxCrypt.Abstractions.TypeResolve;
+
+@inject IJSRuntime jsRuntime
+
+@if (Model.Message?.TheMessage != null && Model.Message.TheMessage.Any())
+{
+    DateTime read = Model.Message.ReceiverList.LastOrDefault(sec => sec.User == currentUser) == null ? DateTime.MinValue : Model.Message.ReceiverList.LastOrDefault(sec => sec.User == currentUser).Read;
+    string messageToListText = Model.Message.Username;
+    IEnumerable<string> messageToList = new List<string>();
+    if (SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
+    {
+        messageToList = Model.Message.ReceiverList.Select(re => re.User);
+        messageToListText = string.Join(", ", messageToList.Take(Utility.MaxReceiversToDisplay));
+
+        read = DateTime.MinValue;
+    }
+    string shortUserText = messageToListText.Substring(0, 2).ToUpper();
+
+    string fontClass = read != DateTime.MinValue ? "" : "read-text";
+    string icoRead = read == DateTime.MinValue ? "ico-unread" : "";
+
+    Guid messageSelectionId = Model.ParentId == Guid.Empty ? Model.Id : Model.ParentId;
+    <div id="unread-message-@messageSelectionId" class="unread-message @fontClass" data-id="@Model.Id" data-parent="@Model.ParentId">
+        <div>
+            <table class="hover-table">
+                <tbody>
+                    <tr>
+                        <td rowspan="2" class="first" style="width: 12%;">
+                            <div class="acc-prfl-container">
+                                <div class="@icoRead dsk-hide"></div>
+                                <div class="acc-prfl fnt-small second">@shortUserText</div>
+                                <input type="checkbox" class="hover-checkbox" style="display: none;" data-id="@messageSelectionId">
+                            </div>
+                        </td>
+
+                        <td class="text-fnt-size second" style="max-width: 150px; line-height: normal;">
+                            <span class="email-txt-ovflw">
+                                @messageToListText
+                                @if (messageToList.Count() > Utility.MaxReceiversToDisplay)
+                                {
+                                    <span class="">+@(messageToList.Count() - Utility.MaxReceiversToDisplay)</span>
+                                }
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="second">
+                            <img class="clck-img" src="images/default/IcoClock.svg" />
+                            <span class="grey-clr text-fnt-size">Visible until:</span>
+                            <span class="text-fnt-size">
+                                @(Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Forever ? "Forever" :
+                                    Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Once ? "Once" :
+                                    Utility.ToDateString(Model.Message.VisibleUntil.ToLocalTime()))
+                            </span>
+                        </td>
+                        <td class="grey-clr text-size" style="vertical-align: top;">@Utility.ToDateString(Model.CreatedUtc.ToLocalTime())</td>
+
+                        <td class="mob-hide">
+                            <div class="@icoRead"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<EditForm Model="Model" id="message-selection-form">
+    <input id="selected-message-id-hidden" type="hidden" />
+    <input type="hidden" name="SecMessengerFilterTab" @bind="SecMessengerFilterTab" id="sec-messenger-filter-tab" />
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab SecMessengerFilterTab { get; set; } = new();
+
+    [Parameter]
+    public SecuredMessage Model { get; set; } = new();
+
+    string currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address.ToString();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsync("SemScript");
+        }
+    }
+}

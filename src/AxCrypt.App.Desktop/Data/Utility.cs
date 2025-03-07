@@ -1,8 +1,10 @@
+using AxCrypt.Abstractions;
 using AxCrypt.App.Desktop.ViewModels.Notification;
 using Microsoft.JSInterop;
 using Microsoft.Maui.Devices;
 using System;
 using System.Threading.Tasks;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Desktop.Data;
 
@@ -94,8 +96,8 @@ public static class Utility
     public static DeviceIdiom GetCurrentDeviceIdiom()
     {
         return DeviceInfo.Idiom;
-    } 
-    
+    }
+
     public static DevicePlatform GetCurrentPlatform()
     {
         return DeviceInfo.Platform;
@@ -104,5 +106,28 @@ public static class Utility
     public static bool ToggleUpgradePopup(bool currentState)
     {
         return !currentState;
+    }
+
+    public static int MaxReceiversToDisplay = 2;
+
+    public static string ToDateString(DateTime dateTime)
+    {
+        DateTime utcNow = New<INow>().Utc;
+        if (dateTime.Year != utcNow.Year)
+        {
+            return dateTime.ToString("dd/MMM/yyyy");
+        }
+
+        if (dateTime.Month != utcNow.Month)
+        {
+            return dateTime.ToString("dd/MMM");
+        }
+
+        if (dateTime.AddDays(7) < utcNow.AddDays(-7))
+        {
+            return dateTime.ToString("dd/MMM");
+        }
+
+        return dateTime.ToString("ddd hh:mm tt");
     }
 }
