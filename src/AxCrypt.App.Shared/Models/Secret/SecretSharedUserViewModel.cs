@@ -5,16 +5,17 @@ namespace AxCrypt.App.Shared.Models.Secret;
 
 public class SecretSharedUserViewModel : IEquatable<SecretSharedUserViewModel>
 {
-    public SecretSharedUserViewModel(EmailAddress userEmail, SecretShareVisibility visibility, string ownerEmail, AccountStatus userAccountStatus = AccountStatus.Unknown)
+    public SecretSharedUserViewModel(EmailAddress userEmail, SecretShareVisibility visibility, string ownerEmail, string groupName = "", AccountStatus userAccountStatus = AccountStatus.Unknown)
     {
         UserEmail = userEmail;
         ImageSource = "contact-icon";
-        if (userAccountStatus == AccountStatus.Verified)
+        if (userAccountStatus == AccountStatus.Verified || !string.IsNullOrEmpty(groupName))
         {
             ImageSource = "axcrypt-icons";
         }
         OwnerEmail = ownerEmail;
         Visibility = visibility;
+        GroupName = groupName;
     }
 
     public EmailAddress UserEmail { get; set; }
@@ -22,6 +23,14 @@ public class SecretSharedUserViewModel : IEquatable<SecretSharedUserViewModel>
     public SecretShareVisibility Visibility { get; set; }
     public string ImageSource { get; set; }
     public string DotImage { get; } = "DotsIcon.png";
+    public string GroupName { get; set; }
+    public string DisplayText
+    {
+        get
+        {
+            return !string.IsNullOrEmpty(GroupName) ? GroupName : UserEmail.Address;
+        }
+    }
 
     public bool Equals(SecretSharedUserViewModel? other)
     {
