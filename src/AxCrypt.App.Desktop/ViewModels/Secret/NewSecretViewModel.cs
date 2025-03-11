@@ -56,30 +56,25 @@ public class NewSecretViewModel : ManageSecretViewModel
             return false;
         }
 
+        if (Secret == null)
+        {
+            return false;
+        }
+
+        if (!ValidModel())
+        {
+            return false;
+        }
+
         using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
-            if (!ViewModelHelper.CanAddNewSecret())
-            {
-                ErrorMessage = Texts.SaveSecretErrorIsReadOnly;
-                return false;
-            }
-            if (Secret == null)
-            {
-                return false;
-            }
-            if (!ValidModel())
-            {
-                return false;
-            }
-
-            SecretClientModel newSecret;
-
-            newSecret = Secret.ToClientModel(Guid.NewGuid());
+            SecretClientModel newSecret = Secret.ToClientModel(Guid.NewGuid());
             if (newSecret == null)
             {
                 ErrorMessage = string.Format(Texts.FileOperationFailed, $"to create {Secret.SecretType.ToString()}");
                 return false;
             }
+
             newSecret.Type = Secret.SecretType;
             newSecret.CreatedUtc = New<INow>().Utc;
             newSecret.UpdatedUtc = New<INow>().Utc;

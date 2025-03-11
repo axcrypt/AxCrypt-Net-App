@@ -206,6 +206,38 @@ public static class PersonalSecrets
         return deleted || deletedshare;
     }
 
+    public static async Task<SecretClientCollection> SelectSharedSecretById(Guid id)
+    {
+        SecretClientCollection secrets = new SecretClientCollection();
+        if (id == Guid.Empty)
+        {
+            return secrets;
+        }
+        SecretClientCollection allSecrets = await LoadActiveSharedWithSecretsAsync();
+        secrets.OriginalCount = allSecrets.OriginalCount;
+        if (!allSecrets.Contains(id))
+        {
+            return secrets;
+        }
+        SecretClientModel theSecret = allSecrets[id];
+        secrets.Add(theSecret);
+        //if (AppSwitch.Instance.TraceInfo)
+        //{
+        //    AppSwitch.Instance.Information("Searched for and found secret with id {0} for user {1}", theSecret.Id.ToString("D", CultureInfo.InvariantCulture), UserContext.Name);
+        //}
+        return secrets;
+    }
+
+    private static async Task<SecretClientCollection> LoadActiveSharedWithSecretsAsync()
+    {
+        if (string.IsNullOrEmpty(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address))
+        {
+            new SecretCollection();
+        }
+
+        return await SecretsApiHelper.GetSharedWithSecretsAsync(New<KnownIdentities>().DefaultEncryptionIdentity, 20);
+    }
+
     public static SecretClientModel ToClientModel(this SecretViewModel secret, Guid guid)
     {
         SecretClientModel secretClientmodel;

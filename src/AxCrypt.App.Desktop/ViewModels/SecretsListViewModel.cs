@@ -198,17 +198,6 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         set { SetProperty(nameof(CanShowErrorMessage), value); }
     }
 
-    public async void OnTabOpened()
-    {
-        if (_activateSharedListFilter)
-        {
-            return;
-        }
-
-        _CachedSecrets = new Dictionary<SecretFilterOption, ObservableCollection<SecretViewModel>>();
-        await FindSecrets();
-    }
-
     public SecretsSortOrder SelectedSortOrder { get; set; } = SecretsSortOrder.None;
     public SecretFilterOption Filter { get; set; } = SecretFilterOption.All;
     public SecretsFilter SelectedFilter { get; set; } = SecretsFilter.All;
@@ -261,32 +250,23 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     /// </summary>
     /// <param name="keyword">Keyword to search with</param>
     /// <returns>SecretCollection containing found secrets</returns>
-    public async Task<ObservableCollection<SecretViewModel>> FindSecrets()
-    {
-        using (ProcessIndicator processIndicator = new ProcessIndicator())
-        {
-            ClearFilterAndCachedSecrets();
-
-            if (_CachedSecrets!.ContainsKey(SecretFilterOption.All))
-            {
-                Secrets = _CachedSecrets[SecretFilterOption.All];
-                ApplyFilter();
-                return Secrets;
-            }
-
-            IEnumerable<SecretViewModel> secrets = await LoadSecrets(() => PersonalSecrets.SelectBySearch(Keyword ?? ""));
-            Secrets = new ObservableCollection<SecretViewModel>(secrets);
-            ApplyFilter();
-            return Secrets;
-        }
-    }
-
-    private void ClearFilterAndCachedSecrets()
+    public async Task FindSecrets()
     {
         _activateSharedListFilter = false;
 
-        _CachedSecrets!.Clear();
-        Secrets.Clear();
+        if (_CachedSecrets!.ContainsKey(SecretFilterOption.All))
+        {
+            Secrets = _CachedSecrets[SecretFilterOption.All];
+            ApplyFilter();
+            return;
+        }
+
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
+        {
+            IEnumerable<SecretViewModel> secrets = await LoadSecrets(() => PersonalSecrets.SelectBySearch(Keyword ?? ""));
+            Secrets = new ObservableCollection<SecretViewModel>(secrets);
+            ApplyFilter();
+        }
     }
 
     private async Task<IEnumerable<SecretViewModel>> LoadSecrets(Func<Task<SecretClientCollection>> SelectBySearchFuncAsync)
@@ -300,15 +280,15 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     private async Task FindSharedWithSecrets()
     {
+        if (_CachedSecrets!.ContainsKey(SecretFilterOption.Shared))
+        {
+            Secrets = _CachedSecrets[SecretFilterOption.Shared];
+            ApplyFilter();
+            return;
+        }
+
         using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
-            if (_CachedSecrets!.ContainsKey(SecretFilterOption.Shared))
-            {
-                Secrets = _CachedSecrets[SecretFilterOption.Shared];
-                ApplyFilter();
-                return;
-            }
-
             IEnumerable<SecretViewModel> sharedWithSecrets = await LoadSecrets(() => SharedSecrets.SelectBySearch(Keyword ?? ""));
             Secrets = new ObservableCollection<SecretViewModel>(sharedWithSecrets);
             ApplyFilter();
@@ -319,14 +299,11 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     {
         if (SelectedSecretFilter == type)
         {
-            return;
+            type = 0;
         }
-        using (ProcessIndicator processIndicator = new ProcessIndicator())
-        {
-            SelectedSecretFilter = type;
 
-            await ApplyFilterOnSecrets();
-        }
+        SelectedSecretFilter = type;
+        await ApplyFilterOnSecrets();
     }
 
     public async Task ApplyFilterOnSecrets()
@@ -406,39 +383,32 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     public async Task FilterSecretsBy(SecretFilterOption secretFilter)
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator())
+        if (SelectedSecretListFilter == secretFilter)
         {
-            if (SelectedSecretListFilter == secretFilter)
-            {
-                return;
-            }
-            SelectedSecretListFilter = secretFilter;
-            UpdateSecretListFilterStyle(secretFilter);
-
-            await FindSecrets();
-            await ApplyFilterOnSecrets();
             return;
         }
+
+        SelectedSecretListFilter = secretFilter;
+        UpdateSecretListFilterStyle(secretFilter);
+
+        await FindSecrets();
+        await ApplyFilterOnSecrets();
     }
 
     public async Task FilterSharedSecrets(SecretFilterOption secretFilter)
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator())
+        _activateSharedListFilter = true;
+        if (SelectedSecretListFilter == secretFilter)
         {
-            _activateSharedListFilter = true;
-            if (SelectedSecretListFilter == secretFilter)
-            {
-                return;
-            }
-
-            SelectedSecretListFilter = secretFilter;
-            UpdateSecretListFilterStyle(secretFilter);
-
-            await FindSharedWithSecrets();
-
-            await ApplyFilterOnSecrets();
             return;
         }
+
+        SelectedSecretListFilter = secretFilter;
+        UpdateSecretListFilterStyle(secretFilter);
+
+        await FindSharedWithSecrets();
+
+        await ApplyFilterOnSecrets();
     }
 
     private void UpdateSecretListFilterStyle(SecretFilterOption secretFilter = SecretFilterOption.None)

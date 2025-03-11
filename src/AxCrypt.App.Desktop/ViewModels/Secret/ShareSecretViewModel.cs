@@ -224,7 +224,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
 
     private void RemoveSharedUserInternal(EmailAddress addedUserEmailAddress)
     {
-        SecretSharedUserViewModel selectedSharedKeyUser = ShareSecretUserList.Single(ss => ss.UserEmail == addedUserEmailAddress); 
+        SecretSharedUserViewModel selectedSharedKeyUser = ShareSecretUserList.Single(ss => ss.UserEmail == addedUserEmailAddress);
         if (selectedSharedKeyUser == null!)
         {
             return;
@@ -261,10 +261,8 @@ public class ShareSecretViewModel : ManageSecretViewModel
         }
 
         theSecret.Share = new ShareSecret(secretSharedUsers, _identity.UserEmail.Address, New<INow>().Utc);
-        bool isShared = await PersonalSecrets.ShareAsync(theSecret);
         Secret.SharedWith = ShareSecretUserList; 
-        ShareSecretUserList.Clear();
-        return isShared;
+        return await PersonalSecrets.ShareAsync(theSecret);
     }
 
     private void SetNewContactState()
