@@ -6,13 +6,11 @@ using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Common;
 using AxCrypt.Content;
-using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Maui.Networking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,14 +22,10 @@ namespace AxCrypt.App.Desktop.ViewModels;
 
 public class ShareKeyViewModel : ViewModelBase
 {
-    private LogOnIdentity? _identity;
     public LogOnViewModel LogOnViewModel;
     private SharingListViewModel? _viewModel;
     private EmailAddress? UserEmailForContextMenuAction;
-    private FileOperationViewModel? _fileOperationViewModel;
     private IEnumerable<string>? _shareKeyFileNameList;
-
-    public bool ShowSuggestionDropdown { get; set; }
 
     public SubscriptionLevel SubscriptionLevel { get; set; }
     public bool IsWideScreen { get; set; }
@@ -55,8 +49,8 @@ public class ShareKeyViewModel : ViewModelBase
     public ShareKeyViewModel()
     {
         LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
-        SubscriptionLevel = AxCServiceProviderExtension.LogOnViewModel!.SubscriptionLevel;
-        EmailSuggestions = new List<EmailSuggestion>();
+        SubscriptionLevel = LogOnViewModel!.SubscriptionLevel;
+        SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>();
     }
 
     public async Task SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel)
@@ -91,24 +85,28 @@ public class ShareKeyViewModel : ViewModelBase
 
     public bool ContextMenu { get; set; } = false;
 
-    public bool DisableAddUserButton { get; set; } = false;
+    public bool DisableAddUserButton { get; set; }
     public bool EnableApplyButton { get; set; }
-
-    public bool ShowDialog { get; set; } = false;
     public bool SyncPopup { get; set; } = false;
     public bool WarngPopup { get; set; } = false;
     public bool IsFirstClick { get; set; } = true;
     public bool IsAxCryptUser { get; set; } = true;
     public string? ErrorMessage { get; set; }
 
-    public string RecipientEmail
+    public string KeySharingUserEmail
     {
-        get { return GetProperty<string>(nameof(RecipientEmail)); }
+        get { return GetProperty<string>(nameof(KeySharingUserEmail)); }
         set
         {
-            SetProperty(nameof(RecipientEmail), value);
-            UpdateNewKeyShareUser();
+            SetProperty(nameof(KeySharingUserEmail), value);
+            UpdateNewKeyShare();
         }
+    }
+
+    public bool ShowUserSuggestion
+    {
+        get { return GetProperty<bool>(nameof(ShowUserSuggestion)); }
+        set { SetProperty(nameof(ShowUserSuggestion), value); }
     }
 
     public ObservableCollection<ShareKeyUser> SuggestedUnSharedUsers
@@ -158,9 +156,26 @@ public class ShareKeyViewModel : ViewModelBase
         WarngPopup = false;
     }
 
-    private void UpdateNewKeyShareUser()
+    private void PerformSearchSuggestions(string query)
     {
-        _viewModel!.NewKeyShare = RecipientEmail.Trim();
+        SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>();
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            IEnumerable<ShareKeyUser> filteredGroupList = _viewModel.NotSharedWith.Distinct().ToArray().Select(user => new ShareKeyUser(user.Email, user.GroupName)).ToList();
+            SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>(filteredGroupList);
+            return;
+        }
+
+        IEnumerable<ShareKeyUser> filteredUnSharedUsersList = SuggestNotSharedWithByText(query);
+        if (!filteredUnSharedUsersList.Any())
+        {
+            ShowUserSuggestion = false;
+            ClearErrorProviders();
+            return;
+        }
+
+        ShowUserSuggestion = true;
+        SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>(filteredUnSharedUsersList);
         ClearErrorProviders();
     }
 
@@ -183,7 +198,7 @@ public class ShareKeyViewModel : ViewModelBase
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(RecipientEmail) || RecipientEmail == Texts.AddEmailPromptText)
+        if (string.IsNullOrWhiteSpace(KeySharingUserEmail) || KeySharingUserEmail == Texts.AddEmailPromptText)
         {
             return;
         }
@@ -229,11 +244,11 @@ public class ShareKeyViewModel : ViewModelBase
             _viewModel!.NewKeyShare = groupPublicKey.Email.Address;
             await _viewModel.AddNewKeyShare.ExecuteAsync(_viewModel.NewKeyShare);
 
-            string shareGroupText = RecipientEmail.Trim();
+            string shareGroupText = KeySharingUserEmail.Trim();
             sharedUser = new ShareKeyUser(groupPublicKey.Email, shareGroupText);
         }
 
-        RecipientEmail = string.Empty;
+        KeySharingUserEmail = string.Empty;
         DisableAddUserButton = false;
         EnableApplyButton = true;
         LogOnViewModel.UIStateChanged();
@@ -241,7 +256,7 @@ public class ShareKeyViewModel : ViewModelBase
 
     private EmailAddress ShareKeyUserEmailAddress()
     {
-        if (EmailAddress.TryParse(RecipientEmail.Trim(), out EmailAddress addedUserEmailAddress))
+        if (EmailAddress.TryParse(KeySharingUserEmail.Trim(), out EmailAddress addedUserEmailAddress))
         {
             return addedUserEmailAddress;
         }
@@ -256,7 +271,7 @@ public class ShareKeyViewModel : ViewModelBase
             return null;
         }
 
-        string shareUserText = RecipientEmail.Trim();
+        string shareUserText = KeySharingUserEmail.Trim();
         return _viewModel!.GetValidGroupPublicKey(shareUserText);
     }
 
@@ -281,17 +296,11 @@ public class ShareKeyViewModel : ViewModelBase
     {
         if (!New<LicensePolicy>().Capabilities.Has(LicenseCapability.KeySharing))
         {
-            RecipientEmail = $"[{Texts.PremiumFeatureToolTipText}]";
+            KeySharingUserEmail = $"[{Texts.PremiumFeatureToolTipText}]";
             return;
         }
 
-        //RecipientEmail = Texts.AddEmailPromptText;
-    }
-
-    public static bool IsConnected()
-    {
-        NetworkAccess current = Connectivity.Current.NetworkAccess;
-        return current == NetworkAccess.Internet;
+        //KeySharingUserEmail = Texts.AddEmailPromptText;
     }
 
     private async Task<AccountStatus> ShareNewContactAsync()
@@ -330,7 +339,7 @@ public class ShareKeyViewModel : ViewModelBase
             {
                 ShowHideOfflineError();
                 await DisplayOfflineWarningMessageAsync();
-                RecipientEmail = string.Empty;
+                KeySharingUserEmail = string.Empty;
             }
         }
         catch (BadRequestApiException braex)
@@ -381,6 +390,12 @@ public class ShareKeyViewModel : ViewModelBase
         }
 
         return true;
+    }
+
+    private void UpdateNewKeyShare()
+    {
+        _viewModel!.NewKeyShare = KeySharingUserEmail.Trim();
+        ClearErrorProviders();
     }
 
     public async Task ApplyShareKeys()
@@ -435,14 +450,14 @@ public class ShareKeyViewModel : ViewModelBase
 
     private void ShowHideOfflineError()
     {
-        if (!IsConnected())
+        if (!New<IInternetState>().Connected)
         {
-            RecipientEmail = $"[{Texts.OfflineIndicatorText}]";
-            //ErrorMessage = Texts.KeySharingOffline;
+            KeySharingUserEmail = $"[{Texts.OfflineIndicatorText}]";
+            ErrorMessage = Texts.KeySharingOffline;
             return;
         }
 
-        RecipientEmail = "";
+        KeySharingUserEmail = "";
         ClearErrorProviders();
     }
 
@@ -451,15 +466,11 @@ public class ShareKeyViewModel : ViewModelBase
         ErrorMessage = "";
     }
 
-    public List<EmailSuggestion> EmailSuggestions { get; set; }
-
     public void OnEmailInput(ChangeEventArgs e)
     {
-        RecipientEmail = e.Value?.ToString()!;
-
-        if (!string.IsNullOrEmpty(RecipientEmail))
+        if (!string.IsNullOrEmpty(e.Value?.ToString()!))
         {
-            UpdateEmailSuggestions();
+            PerformSearchSuggestions(e.Value?.ToString()!);
         }
         else
         {
@@ -467,40 +478,26 @@ public class ShareKeyViewModel : ViewModelBase
         }
     }
 
-    private void UpdateEmailSuggestions()
-    {
-        IEnumerable<ShareKeyUser> filteredUnSharedUsersList = SuggestNotSharedWithByText(RecipientEmail);
-        if (filteredUnSharedUsersList != null)
-        {
-            EmailSuggestions = filteredUnSharedUsersList.Select(user => new EmailSuggestion { Email = user.UserEmail, GroupName = user.GroupName, Type = user.Image }).ToList();
-        }
-
-        ShowSuggestionDropdown = EmailSuggestions.Any();
-        ClearErrorProviders();
-    }
-
     private void ClearEmailSuggestions()
     {
-        ShowSuggestionDropdown = false;
-        EmailSuggestions.Clear();
+        ShowUserSuggestion = false;
+        SuggestedUnSharedUsers.Clear();
         ClearErrorProviders();
     }
 
     public void SelectSuggestion(string suggestion)
     {
-        RecipientEmail = suggestion;
-        ShowSuggestionDropdown = false;
+        KeySharingUserEmail = suggestion;
+        ShowUserSuggestion = false;
+    }
+
+    public void GoToLearmoreLink()
+    {
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://axcrypt.net/information/group/"));
     }
 
     public void GoToCreateGroupLink()
     {
         New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/Group/"));
-    }
-
-    public class EmailSuggestion()
-    {
-        public string? Email { get; set; }
-        public string? GroupName { get; set; }
-        public string? Type { get; set; }
     }
 }

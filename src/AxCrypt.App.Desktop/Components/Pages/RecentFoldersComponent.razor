@@ -32,7 +32,7 @@
         @foreach (string folder in RecentFoldersViewModel.RecentFoldersList)
         {
             string folderWithoutTrailingSlash = folder.TrimEnd('\\');
-            <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
+            <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls" style="white-space: nowrap" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
                  @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
                 <img class="fldr-img" src="" /><br /><label>@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
             </div>
@@ -101,14 +101,10 @@
         });
     }
 
-    static string GetBeforeLastFolderName(string path)
+    string GetBeforeLastFolderName(string path)
     {
-        DirectoryInfo dir = new DirectoryInfo(Path.GetDirectoryName(path));
-        if (dir?.Parent != null)
-        {
-            return dir.Name;
-        }
-        return string.Empty;
+        string[] parts = path.TrimEnd(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
+        return parts.Length >= 2 ? $"{parts[^2]}{Path.DirectorySeparatorChar}{parts[^1]}" : path;
     }
 
     void UpdateStateChanged()

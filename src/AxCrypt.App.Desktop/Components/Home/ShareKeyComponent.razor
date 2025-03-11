@@ -18,7 +18,7 @@
 {
     <div class="modalDialog sharekey-popup" style="display: block;">
         <div id="sharekey">
-            <form>
+            <form @onsubmit="async ()=> await ShareKeyViewModel.ApplyShareKeys()">
                 <h3 class="font-bold text-center shr-key-title dk-shre">@Texts.ShareAccessTitle</h3>
                 <div class="sharekey-content">
                     <div class="dk-shre">
@@ -26,7 +26,7 @@
                         {
                             <p class="bus-info">
                                 Add users or Groups with whom you want to share this secret. If you
-                                don`t know about our <b>Group Feature</b> yet, learn more and create your
+                                don`t know about our <b>Group Feature</b> yet, <a style="color:#FFC50D;" @onclick="ShareKeyViewModel.GoToLearmoreLink">learn more</a> and create your
                                 first one by the link <a style="color:#FFC50D;text-decoration:underline;" @onclick="ShareKeyViewModel.GoToCreateGroupLink">Create a Group!</a>
                             </p>
                         }
@@ -50,33 +50,22 @@
                             <div class="error-message" style="color:red;">@ShareKeyViewModel.ErrorMessage</div>
                         }
                         <div class="add-txt-field" style="width: 100%;">
-                            <input type="email" @onclick="ShareKeyViewModel.ShowSyncPopup" value="@ShareKeyViewModel.RecipientEmail" @oninput="ShareKeyViewModel.OnEmailInput" placeholder="someone@example.com" class="" style="width: 78%; margin-right: 3% ! IMPORTANT; margin: 0px;" />
-                            @if (ShareKeyViewModel.ShowSuggestionDropdown && ShareKeyViewModel.EmailSuggestions.Any())
+                            <input type="email" @onclick="ShareKeyViewModel.ShowSyncPopup" value="@ShareKeyViewModel.KeySharingUserEmail" @oninput="ShareKeyViewModel.OnEmailInput" @onkeydown="HandleKeyDown" placeholder="someone@example.com" class="" style="width: 78%; margin-right: 3% ! IMPORTANT; margin: 0px;" />
+                            @if (ShareKeyViewModel.ShowUserSuggestion && ShareKeyViewModel.SuggestedUnSharedUsers.Any())
                             {
                                 <ul class="suggestion-list hide-model-popup">
-                                    @foreach (ShareKeyViewModel.EmailSuggestion suggestion in ShareKeyViewModel.EmailSuggestions)
+                                    @foreach (ShareKeyUser suggestion in ShareKeyViewModel.SuggestedUnSharedUsers)
                                     {
-                                        <li @onclick="() => ShareKeyViewModel.SelectSuggestion(suggestion.Email!)">
-                                            @if (suggestion.Type == "group")
+                                        <li @onclick="() => ShareKeyViewModel.SelectSuggestion(suggestion.GroupName ?? suggestion.UserEmail!)">
+                                            @if (!string.IsNullOrEmpty(suggestion.GroupName))
                                             {
                                                 <span>@suggestion.GroupName</span>
                                                 <img src="images/business/IcoGrp.svg" alt="Group Icon" style="float: right;" />
                                             }
                                             else
                                             {
-                                                <span>@suggestion.Email</span>
-                                                @switch (suggestion.Type)
-                                                {
-                                                    case "individual":
-                                                        <img class="contact-icon" src="" alt="Individual Icon" style="float: right;" />
-                                                        break;
-                                                    case "admin":
-                                                        <img class="" src="images/default/AxCrypt_Icon.svg" alt="Admin Icon" style="float: right;" />
-                                                        break;
-                                                    case "desktop-contact":
-                                                        <img class="sync-icon" src="" alt="Desktop Contact Icon" style="float: right;" />
-                                                        break;
-                                                }
+                                                <span>@suggestion.UserEmail</span>
+                                                <img class="contact-icon" src="" alt="Individual Icon" style="float: right;" />
                                             }
                                             <hr />
                                         </li>
@@ -92,7 +81,7 @@
                                     <img class="sync-img" src="" alt="sync-img" /><br />
                                     <h3 class="font-extra-bold txt-clr">Sync contacts!</h3>
                                     <p style="color: #969696; font-size: 12px;text-align: left;">Do you allow AxCrypt Application <strong>access your contacts on phone?</strong></p>
-                                    <input type="submit" class="button active btn-medium font-large" value="Allow" style="margin-right: 10px; padding: 5px 15px;" />
+                                    <input type="button" class="button active btn-medium font-large" value="Allow" style="margin-right: 10px; padding: 5px 15px;" />
                                     <input type="button" class="button border btn-medium font-large" value="No, thanks" @onclick="ShareKeyViewModel.CloseSyncPopup" style="padding: 5px 15px;" />
                                 </div>
                             </div>
@@ -116,8 +105,7 @@
                         </div>
                     }
                     <div style="padding-top: 15px;">
-                        <h3 class="txt-clr font-bold">@string.Format(Texts.SharedKeyUserListTitle, ShareKeyViewModel.ShareKeyUserList.Count)</h3>
-
+                        <h3 class="txt-clr font-bold">@string.Format(Texts.SharedKeyUserListTitle, ShareKeyViewModel.ShareKeyUserList!.Count)</h3>
                         @if (ShareKeyViewModel.ShareKeyUserList.Any())
                         {
                             <div class="user-list-bx share-list scroll-container " id="sharedUserList" style="margin-right:0px">
@@ -134,7 +122,7 @@
                                                 <img class="contact-icon" style="float:left;" src="" alt="img">
                                             }
                                             <div style="display:inline-block;">
-                                                <span class="shared-text">@user.UserEmail</span><br>
+                                                <span class="shared-text">@GetUserDisplayName(user)</span><br>
                                             </div>
                                             <img class="menu-image" src="/images/Group160.svg" alt="img" @onclick="(e)=> ShareKeyViewModel.contextMenuPopup(user.UserEmail)" style="float:right;">
                                             <hr style="width: 100%;">
@@ -241,9 +229,14 @@
         });
     }
 
+    string GetUserDisplayName(ShareKeyUser user)
+    {
+        return user.GroupName ?? user.UserEmail!;
+    }
+
     void Close()
     {
-        ShareKeyViewModel!.RecipientEmail = "";
+        ShareKeyViewModel!.KeySharingUserEmail = "";
         ShareKeyViewModel.SelectedFilesOrFolders = new List<string>();
         ShareKeyViewModel.CloseSyncPopup();
         ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.Close();
@@ -263,5 +256,15 @@
 
         Icon = fileName.GetIcon();
         return fileName;
+    }
+
+    private void HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(ShareKeyViewModel.KeySharingUserEmail))
+        {
+            ShareKeyViewModel.AddShareKeyUser();
+        }
+
+        return;
     }
 }
