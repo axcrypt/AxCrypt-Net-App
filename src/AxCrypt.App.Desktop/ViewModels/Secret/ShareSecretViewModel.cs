@@ -365,7 +365,6 @@ public class ShareSecretViewModel : ManageSecretViewModel
     private void ClearEmailSuggestions()
     {
         ShowUserSuggestion = false;
-        SuggestedUnSharedUsers.Clear();
         ClearErrorProviders();
     }
 
