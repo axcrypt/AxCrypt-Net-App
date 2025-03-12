@@ -6,13 +6,17 @@ using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Secrets;
+using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -29,7 +33,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
         SetNewContactState();
 
         SharedSecretTitle = Secret.SecretTitle!;
-        ShareSecretUserList = new ObservableCollection<SecretSharedUserViewModel>(Secret.SharedWith.Select(user => new SecretSharedUserViewModel(user.UserEmail, user.Visibility, user.OwnerEmail, AccountStatus.Verified)));
+        ShareSecretUserList = new ObservableCollection<SecretSharedUserViewModel>(Secret.SharedWith.Select(user => new SecretSharedUserViewModel(user.UserEmail, user.Visibility, user.OwnerEmail, "", AccountStatus.Verified)));
 
         CanEnableAddShareSecret = true;
         EnableApplyButton = false;
@@ -38,6 +42,9 @@ public class ShareSecretViewModel : ManageSecretViewModel
         VisibilityType = SecretShareVisibility.Forever.ToString();
         PageTitle = Texts.ShareAccessTitle;
         VisibilityTypeList = ViewModelHelper.GetVisibilityTypeList();
+
+        Secret.LoadAvailableGroupPublicKeysAsync(_identity);
+        Secret.SetSharedAndNotSharedWith();
     }
 
     public ObservableCollection<SecretSharedUserViewModel> ShareSecretUserList
@@ -121,20 +128,29 @@ public class ShareSecretViewModel : ManageSecretViewModel
             return;
         }
 
+        string shareGroupText = string.Empty;
+        UserPublicKey groupPublicKey = ValidShareKeyUserGroup();
         EmailAddress addedUserEmailAddress = ValidSharingUserEmail();
+        
+        if (groupPublicKey != null!)
+        {
+            addedUserEmailAddress = groupPublicKey.Email;
+            shareGroupText = SecretSharingUserEmail.Trim();
+        }
+
         if (!ValidUserToShareSecret(addedUserEmailAddress))
         {
             return;
         }
 
-        if(VisibilityType == "None")
+        if (VisibilityType == "None")
         {
             ErrorMessage = "Visibility option cannot be selected none.";
             return;
         }
 
         CanEnableAddShareSecret = false;
-        AddUserEmailToSharedList(addedUserEmailAddress);
+        AddUserEmailToSharedList(addedUserEmailAddress, shareGroupText);
         SecretSharingUserEmail = "";
         VisibilityType = SecretShareVisibility.Forever.ToString();
         EnableApplyButton = true;
@@ -185,7 +201,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
         return true;
     }
 
-    private void AddUserEmailToSharedList(EmailAddress addedUserEmailAddress)
+    private void AddUserEmailToSharedList(EmailAddress addedUserEmailAddress, string shareGroupText)
     {
         SecretShareVisibility parsedVisibility;
         if (!Enum.TryParse(VisibilityType, out parsedVisibility))
@@ -194,7 +210,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
             return;
         }
 
-        ShareSecretUserList.Add(new SecretSharedUserViewModel(addedUserEmailAddress, parsedVisibility, _identity.UserEmail.Address));
+        ShareSecretUserList.Add(new SecretSharedUserViewModel(addedUserEmailAddress, parsedVisibility, _identity.UserEmail.Address, shareGroupText));
         UpdateUIElementsOnChange();
     }
 
@@ -288,4 +304,100 @@ public class ShareSecretViewModel : ManageSecretViewModel
     {
         ErrorMessage = "";
     }
+
+    #region Suggest popup for Secrets
+
+    public ObservableCollection<SecretSharedUserViewModel> SuggestedUnSharedUsers
+    {
+        get
+        {
+            return GetProperty<ObservableCollection<SecretSharedUserViewModel>>(nameof(SuggestedUnSharedUsers));
+        }
+        set
+        {
+            SetProperty(nameof(SuggestedUnSharedUsers), value);
+        }
+    }
+
+    public bool ShowUserSuggestion
+    {
+        get { return GetProperty<bool>(nameof(ShowUserSuggestion)); }
+        set { SetProperty(nameof(ShowUserSuggestion), value); }
+    }
+
+    private void PerformSearch(string query)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            return;
+        }
+
+        IEnumerable<SecretSharedUserViewModel> filteredUnSharedUsersList = SuggestNotSharedWithByText(query.ToLower());
+        if (!filteredUnSharedUsersList.Any())
+        {
+            ShowUserSuggestion = false;
+            ClearErrorProviders();
+            return;
+        }
+
+        ShowUserSuggestion = true;
+        SuggestedUnSharedUsers = new ObservableCollection<SecretSharedUserViewModel>(filteredUnSharedUsersList);
+    }
+
+    public void OnItemTapped(SecretSharedUserViewModel selectedItem)
+    {
+        SecretSharingUserEmail = selectedItem.DisplayText;
+        ShowUserSuggestion = false;
+    }
+
+    public void OnEmailInput(ChangeEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(e.Value?.ToString()!))
+        {
+            PerformSearch(e.Value?.ToString()!);
+        }
+        else
+        {
+            ClearEmailSuggestions();
+        }
+    }
+
+    private void ClearEmailSuggestions()
+    {
+        ShowUserSuggestion = false;
+        SuggestedUnSharedUsers.Clear();
+        ClearErrorProviders();
+    }
+
+    private IEnumerable<SecretSharedUserViewModel> SuggestNotSharedWithByText(string suggestingText)
+    {
+        suggestingText = suggestingText.ToLower();
+        IEnumerable<UserPublicKey> filteredUserList = Secret.NotSharedWith.Where(nsw => string.IsNullOrEmpty(nsw.GroupName) && nsw.Email.Address.Contains(suggestingText));
+        List<SecretSharedUserViewModel> filteredUnSharedUsersList = filteredUserList.Distinct(UserPublicKey.EmailComparer).ToArray().Select(user => new SecretSharedUserViewModel(user.Email, SecretShareVisibility.None, _identity.UserEmail.Address, "", AccountStatus.Verified)).ToList();
+
+        IEnumerable<UserPublicKey> filteredGroupList = Secret.NotSharedWith.Where(nsw => !string.IsNullOrEmpty(nsw.GroupName) && nsw.GroupName.ToLower().Contains(suggestingText));
+        IEnumerable<SecretSharedUserViewModel> filteredUnSharedGroupsList = filteredGroupList.Distinct().ToArray().Select(user => new SecretSharedUserViewModel(user.Email, SecretShareVisibility.None, _identity.UserEmail.Address, user.GroupName)).ToList();
+
+        filteredUnSharedUsersList.AddRange(filteredUnSharedGroupsList);
+        return filteredUnSharedUsersList;
+    }
+
+    private UserPublicKey ValidShareKeyUserGroup()
+    {
+        string shareUserText = SecretSharingUserEmail.Trim();
+        return Secret.GetValidGroupPublicKey(shareUserText);
+    }
+
+    private static void UpdateKnownKeys(IEnumerable<UserPublicKey> sharedWith)
+    {
+        using (KnownPublicKeys knownPublicKeys = New<KnownPublicKeys>())
+        {
+            IEnumerable<UserPublicKey> previouslyUnknown = sharedWith.Where(shared => !knownPublicKeys.PublicKeys.Any(known => known.Email == shared.Email));
+            foreach (UserPublicKey newPublicKey in previouslyUnknown)
+            {
+                knownPublicKeys.AddOrReplace(newPublicKey);
+            }
+        }
+    }
+    #endregion
 }

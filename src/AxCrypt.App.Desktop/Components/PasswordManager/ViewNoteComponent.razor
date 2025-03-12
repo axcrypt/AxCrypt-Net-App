@@ -13,7 +13,7 @@
 @inject ViewSecretViewModel viewSecretViewModel
 @inject IJSRuntime jsRuntime
 
-<div style="margin-top: 90px;" class="page-max-height">
+<div class="page-max-height">
     <div class="page-heading">
         <h3 class="password-creation">
             @Texts.ViewNoteTitle
@@ -93,9 +93,30 @@
                                 </div>
                                 <div class="small-2 columns">
                                     <input style=" margin-top:4%; width: 90px; margin-left: 20px;" id="Add-Share-Users" type="button" class="button active btn-small " @onclick="shareSecretViewModel.AddUserToSharedListAsync" value="Add" />
+                                    @if (shareSecretViewModel.ShowUserSuggestion && shareSecretViewModel.SuggestedUnSharedUsers.Any())
+                                    {
+                                        <ul class="share-suggestion-list hide-popup-modal">
+                                            @foreach (SecretSharedUserViewModel suggestion in shareSecretViewModel.SuggestedUnSharedUsers)
+                                            {
+                                                <li @onclick="() => shareSecretViewModel.OnItemTapped(suggestion)" style="margin-top: 5px;">
+                                                    @if (!string.IsNullOrEmpty(suggestion.GroupName))
+                                                    {
+                                                        <span>@suggestion.DisplayText</span>
+                                                        <img src="images/business/IcoGrp.svg" alt="Group Icon" style="float: right;margin: 4px 10px;" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>@suggestion.UserEmail</span>
+                                                        <img class="contact-icon" src="" alt="Individual Icon" style="float: right;margin: 4px 10px;" />
+                                                    }
+                                                    <hr style="margin:0.5rem 0;" />
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
                                 </div>
                             </div>
-                            <div class="">
+                            <div class="" style="position: relative; display: flow;">
                                 <h3 class="select-files font-bold">Added users with access (<span id="userCount">@shareSecretViewModel.ShareSecretUserList?.Count()</span>)</h3>
                                 @if (shareSecretViewModel.ShareSecretUserList!.Any())
                                 {
@@ -107,7 +128,7 @@
                                                     <dd class="list-bgrnd">
                                                         <img class="@user.ImageSource" style="float:left; margin-top:5px;" src="@SharedUserImageSource(user.ImageSource)" alt="img">
                                                         <div style="display:inline-block; ">
-                                                            <span class="shared-text">@user.UserEmail</span><br />
+                                                            <span class="shared-text">@user.DisplayText</span><br />
                                                             <span style="padding-left:8px; display: block;" class="share-visibility">@user.Visibility</span>
                                                         </div>
                                                         <img class="menu-image" src="/images/Group160.svg" alt="img" @onclick="() => shareSecretViewModel.UpdatedSelectedUser(user)">
