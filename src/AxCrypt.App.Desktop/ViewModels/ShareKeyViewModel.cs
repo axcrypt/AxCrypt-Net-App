@@ -400,6 +400,11 @@ public class ShareKeyViewModel : ViewModelBase
 
     public async Task ApplyShareKeys()
     {
+        if (!string.IsNullOrEmpty(KeySharingUserEmail))
+        {
+            return;
+        }
+
         if (!EnableApplyButton)
         {
             return;

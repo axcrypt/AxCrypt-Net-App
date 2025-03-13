@@ -180,7 +180,7 @@ public class AppMain
     private async Task HandleExistingLogOnForEncryptedFile(LogOnEventArgs e)
     {
         FilePasswordDialogViewModel filePasswordDialog = AxCServiceProvider.GetService<FilePasswordDialogViewModel>();
-        filePasswordDialog.ShowFilePasswordDialog(e.EncryptedFileFullName);
+        await filePasswordDialog.ShowFilePasswordDialog(e.EncryptedFileFullName);
 
         if (filePasswordDialog.DialogResult == DialogResult.Retry)
         {

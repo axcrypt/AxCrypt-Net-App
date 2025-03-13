@@ -50,7 +50,7 @@
                             <div class="error-message" style="color:red;">@ShareKeyViewModel.ErrorMessage</div>
                         }
                         <div class="add-txt-field" style="width: 100%;">
-                            <input type="email" @onclick="ShareKeyViewModel.ShowSyncPopup" value="@ShareKeyViewModel.KeySharingUserEmail" @oninput="ShareKeyViewModel.OnEmailInput" @onkeydown="HandleKeyDown" placeholder="someone@example.com" class="" style="width: 78%; margin-right: 3% ! IMPORTANT; margin: 0px;" />
+                            <input type="email" @onclick="ShareKeyViewModel.ShowSyncPopup" @bind="@ShareKeyViewModel.KeySharingUserEmail" @oninput="ShareKeyViewModel.OnEmailInput" @onkeydown="HandleKeyDown" placeholder="someone@example.com" class="" style="width: 78%; margin-right: 3% ! IMPORTANT; margin: 0px;" />
                             @if (ShareKeyViewModel.ShowUserSuggestion && ShareKeyViewModel.SuggestedUnSharedUsers.Any())
                             {
                                 <ul class="suggestion-list hide-model-popup">

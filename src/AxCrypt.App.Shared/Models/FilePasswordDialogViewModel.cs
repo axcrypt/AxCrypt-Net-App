@@ -25,7 +25,7 @@ public class FilePasswordDialogViewModel : ViewModelBase
 
     public CommonDialogService FilePasswordDialog { get { return GetProperty<CommonDialogService>(nameof(FilePasswordDialog)); } set { SetProperty(nameof(FilePasswordDialog), value); } }
 
-    public void ShowFilePasswordDialog(string encryptedFileFullName)
+    public async Task ShowFilePasswordDialog(string encryptedFileFullName)
     {
         ViewModel = new FilePasswordViewModel(encryptedFileFullName);
         BindPropertyChangedEvents();
@@ -34,7 +34,7 @@ public class FilePasswordDialogViewModel : ViewModelBase
 
         while (DialogResult == DialogResult.None)
         {
-            Task.Delay(1000);
+            await Task.Delay(1000);
         }
 
         FilePasswordDialog.Close();
