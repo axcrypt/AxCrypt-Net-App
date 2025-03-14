@@ -216,6 +216,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         }
 
+        //Handle show/hide the key management popup
+        if (targetobj.id === "key-management-button-action" || targetobj.parentElement.id === "key-management-button-action") {
+            ShowHidePopup("key-management-popup");
+        }
+        else {
+            if (IgnoreClosePopupOnPopupActions("key-management-popup", targetobj)) {
+                HidePopup("key-management-popup");
+            }
+        }
+     
         //Handle show/hide the subscriptiondetails menu side popup
         if (targetobj.id === "subscription-details-button-action" || targetobj.parentElement.id === "subscription-details-button-action") {
             ShowHidePopup("subscription-details-side-popup");

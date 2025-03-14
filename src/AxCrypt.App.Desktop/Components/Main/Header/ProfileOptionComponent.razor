@@ -40,7 +40,7 @@
 
     <div class="manage-acc-sec font-medium">
         <div class="profile-option-container">
-            <NavLink @attributes="ProfileViewModel.NavLinkAttributes()" @onclick="ProfileViewModel.ToggleKMPopup">
+            <NavLink class="nav-link" id="key-management-button-action">
                 <img class="kym-sec" src="images/default/IcoKMngmnt.svg" alt="go-back-img" />
                 <span>@Texts.KeyManagementToolStripMenuItemText</span>
                 <img class="next-arrow" />
@@ -81,18 +81,16 @@
         </NavLink>
     </div>
 </div>
-@if (ProfileViewModel.keyMPopup)
-{
-    <div class="key-mngnt-Popup model-popup sub-pop1 hide-model-popup" id="">
-        <div class="font-medium left-align">
-            <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">Import Someone`s Public Sharing Key</dd>
-            <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">@Texts.ExportSharingKeyToolStripMenuItemText</dd>
-            <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => {  await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">@Texts.ImportMyPrivateKeyToolStripMenuItemText</dd>
-            <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">@Texts.ExportMyPrivateKeyToolStripMenuItemText</dd>
-            <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">@Texts.CreateAccountToolStripMenuItemText</dd>
-        </div>
+
+<div class="key-mngnt-Popup model-popup sub-pop1" style="display:none;" id="key-management-popup">
+    <div class="font-medium left-align" id="key-management-popup">
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">Import Someone`s Public Sharing Key</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">@Texts.ExportSharingKeyToolStripMenuItemText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => {  await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">@Texts.ImportMyPrivateKeyToolStripMenuItemText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">@Texts.ExportMyPrivateKeyToolStripMenuItemText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">@Texts.CreateAccountToolStripMenuItemText</dd>
     </div>
-}
+</div>
 
 <div class="subs-dtls-popup model-popup sub-pop2" style="display:none;" id="subscription-details-side-popup">
     <div class="close-img" id="close-subscription-details-side-popup"></div>
@@ -126,7 +124,7 @@
 @code {
     protected override async Task OnInitializedAsync()
     {
-        await ProfileViewModel.InitializeAsync();
+        await ProfileViewModel!.InitializeAsync();
 
         await base.OnInitializedAsync();
     }
@@ -140,17 +138,9 @@
         }
     }
 
-    [Parameter]
-    public EventCallback ClosePopup { get; set; }
-
-    public void OnOptionClicked()
-    {
-        ClosePopup.InvokeAsync(null);
-    }
-
     private string SubscriptionIcon()
     {
-        string subscriptionLevel = ProfileViewModel?.Account?.SubscriptionLevel.ToString();
+        string subscriptionLevel = ProfileViewModel?.Account?.SubscriptionLevel.ToString()!;
         switch (subscriptionLevel)
         {
             case "PasswordManager":

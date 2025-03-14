@@ -72,7 +72,8 @@
 .notifi-img .PaymentSuccessful,
 .notifi-img .KeyShared,
 .notifi-img .MasterKeyShared,
-.notifi-img .ShareSecret {
+.notifi-img .ShareSecret,
+.notifi-img .SentSecureMessenger {
   Content: url(/images/default/IcoClbrtn.svg);
 }
 .notifi-img .SubscriptionExpiresSoon,
@@ -84,6 +85,12 @@
 .notifi-img .SubscriptionCancelled,
 .notifi-img .PaymentFailure {
   Content: url(/images/default/IcoErrr.svg);
+}
+.notifi-img .SecuredMessageSent {
+  content: url(/images/business/IcoScrdMssngr.svg);
+}
+.notifi-img .InviteUser {
+  content: url(/images/business/IcoInvtFrnd.svg);
 }
 
 .deletebin {
