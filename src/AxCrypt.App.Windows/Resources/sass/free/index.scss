@@ -177,7 +177,6 @@
     top: 295px;
     right: 4%;
     position: absolute;
-    overflow-x: auto;
 }
 
 .empty-rcnt-fle-img {
@@ -248,5 +247,11 @@
 @media only screen and (max-width: 1370px) {
     .rcnt-fle-tbl {
         max-width: 850px;
+    }
+
+    .feat-tab {
+        tr td {
+            padding: 1% 4%;
+        }
     }
 }

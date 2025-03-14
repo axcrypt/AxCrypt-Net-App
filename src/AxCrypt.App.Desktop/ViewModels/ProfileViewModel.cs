@@ -33,7 +33,6 @@ public class ProfileViewModel
     public bool SubsDtlsPopup { get; set; }
     public bool IsDialogOpen { get; set; } = false;
     public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<INow>().Utc.AddDays(Account.DaysLeft).ToString("dd MMM yyyy");
-    public bool keyMPopup { get; set; }
 
     public ProfileViewModel()
     {
@@ -204,11 +203,6 @@ public class ProfileViewModel
         }
     }
 
-    public void ToggleSubsDtlsPopup()
-    {
-        SubsDtlsPopup = !SubsDtlsPopup;
-    }
-
     public void RedirectToMyAxCryptIDPage()
     {
         BrowseUtility.RedirectToMyAxCryptIDPage();
@@ -249,18 +243,6 @@ public class ProfileViewModel
         return isDisabled ? "disabled" : string.Empty;
     }
 
-    public void ToggleKMPopup()
-    {
-        keyMPopup = !keyMPopup;
-    }
-
-    public IDictionary<string, object> NavLinkAttributes()
-    {
-        Dictionary<string, object> attributes = new Dictionary<string, object>();
-        attributes["class"] = "nav-link next-arrow" + (keyMPopup ? " active" : "");
-        return attributes;
-    }
-
     public void CancelSubscription()
     {
         New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/Home/Login"));
@@ -269,15 +251,5 @@ public class ProfileViewModel
     public void UpgradeSubscription()
     {
         New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/"));
-    }
-
-    public void HandleDialogClose(bool isOpen)
-    {
-        IsDialogOpen = isOpen;
-    }
-
-    public void HandleCreateDialogClose(bool isOpen)
-    {
-        IsDialogOpen = isOpen;
     }
 }

@@ -762,6 +762,11 @@
   background-color: #86B96E;
 }
 
+@media only screen and (max-width: 1285px) {
+  .mre-actn-box {
+    width: 20%;
+  }
+}
 @media (max-width: 768px) {
   .dk-shre {
     display: none;
@@ -1180,7 +1185,6 @@
   top: 295px;
   right: 4%;
   position: absolute;
-  overflow-x: auto;
 }
 
 .empty-rcnt-fle-img {
@@ -1243,5 +1247,8 @@
 @media only screen and (max-width: 1370px) {
   .rcnt-fle-tbl {
     max-width: 850px;
+  }
+  .feat-tab tr td {
+    padding: 1% 4%;
   }
 }

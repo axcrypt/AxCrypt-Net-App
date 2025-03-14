@@ -90,7 +90,8 @@
     .PaymentSuccessful,
     .KeyShared,
     .MasterKeyShared,
-    .ShareSecret {
+    .ShareSecret,
+    .SentSecureMessenger {
         Content: Url(/images/default/IcoClbrtn.svg);
     }
 
@@ -104,6 +105,14 @@
     .SubscriptionCancelled,
     .PaymentFailure {
         Content: Url(/images/default/IcoErrr.svg);
+    }
+
+    .SecuredMessageSent {
+        content: $IcoScrdMssngr;
+    }
+
+    .InviteUser {
+        content: $IcoInvtFrnd;
     }
 }
 
