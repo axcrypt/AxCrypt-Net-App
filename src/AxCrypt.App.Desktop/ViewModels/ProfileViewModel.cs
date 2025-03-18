@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -24,8 +25,8 @@ public class ProfileViewModel
 {
     private LogOnViewModel _logOnViewModel;
     private RegisterViewModel _registerViewModel;
-    private FileOperationViewModel? _fileOperationViewModel;
     private MainViewModel? _mainViewModel;
+    private IStatusAlertService? _statusAlertService;
     private IExportKeyManagementFile? ExportKeyFile;
     private string DefaultExt = ".txt";
 
@@ -38,6 +39,7 @@ public class ProfileViewModel
     {
         _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
         _registerViewModel = AxCServiceProviderExtension.RegisterViewModel!;
+        _statusAlertService = AxCServiceProviderExtension.StatusAlertService;
         ExportKeyFile = AxCServiceProviderExtension.GetService<IExportKeyManagementFile>()!;
         Account = new AccountModel();
     }
@@ -47,7 +49,6 @@ public class ProfileViewModel
         _mainViewModel = _logOnViewModel.MainViewModel;
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
         Account.IsLoggedOn = _mainViewModel.LoggedOn;
-        _fileOperationViewModel = _logOnViewModel.FileOperationViewModel;
 
         Account.SubscriptionLevel = _logOnViewModel.SubscriptionLevel;
         Account.UserEmail = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
@@ -95,7 +96,7 @@ public class ProfileViewModel
                 break;
 
             case KeyManagement.ExportAxCryptIDAndSharingKeyPair:
-                await ImportMyPrivateKeyToolStripMenuItem_Click();
+                await ExportMyPrivateKeyToolStripMenuItem_Click();
                 break;
 
             case KeyManagement.CreateAxCryptID:
@@ -133,14 +134,25 @@ public class ProfileViewModel
         string filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + DefaultExt, Texts.FileFilterFileTypePublicSharingKeyFiles, Texts.FileFilterFileTypeAllFiles);
 
         string savedPath = await ExportKeyFile!.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, DefaultExt, filter, fileName);
+        if (string.IsNullOrEmpty(savedPath))
+        {
+            _statusAlertService!.Error($"Failed to export your AxCrypt sharing key to the selected filepath!");
+            return;
+        }
 
-        if (!string.IsNullOrEmpty(savedPath))
+        try
         {
             await File.WriteAllTextAsync(savedPath, serialized);
+            _statusAlertService!.Success($"Your AxCrypt sharing key pairs are saved to {savedPath}.");
+        }
+        catch (Exception ex)
+        {
+            _statusAlertService!.Error($"Failed to export your AxCrypt sharing key to the selected filepath due to {ex.Message}!");
+            return;
         }
     }
 
-    private async Task ImportMyPrivateKeyToolStripMenuItem_Click()
+    private async Task ExportMyPrivateKeyToolStripMenuItem_Click()
     {
         UserKeyPair activeKeyPair = Resolve.KnownIdentities.DefaultEncryptionIdentity.ActiveEncryptionKeyPair;
         EmailAddress userEmail = activeKeyPair.UserEmail;
@@ -150,13 +162,22 @@ public class ProfileViewModel
         string filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + New<IRuntimeEnvironment>().AxCryptExtension, Texts.FileFilterFileTypeAxCryptIdFiles, Texts.FileFilterFileTypeAllFiles);
         byte[] export = activeKeyPair.ToArray(Resolve.KnownIdentities.DefaultEncryptionIdentity.Passphrase);
 
-        string data = Convert.ToBase64String(export);
-
         string savedPath = await ExportKeyFile!.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, New<IRuntimeEnvironment>().AxCryptExtension, filter, fileName);
+        if (string.IsNullOrEmpty(savedPath))
+        {
+            _statusAlertService!.Error($"Failed to export the your AxCrypt ID and sharing key pairs to the selected filepath!");
+            return;
+        }
 
-        if (!string.IsNullOrEmpty(savedPath))
+        try
         {
             await File.WriteAllBytesAsync(savedPath, export);
+            _statusAlertService!.Success($"Your AxCrypt ID and sharing key pairs are saved to {savedPath}.");
+        }
+        catch (Exception ex)
+        {
+            _statusAlertService!.Error($"Failed to export the file to the selected filepath due to {ex.Message}!");
+            return;
         }
     }
 
