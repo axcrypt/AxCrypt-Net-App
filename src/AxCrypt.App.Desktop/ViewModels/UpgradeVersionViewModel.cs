@@ -35,7 +35,7 @@ public class UpgradeVersionViewModel
     public async Task<PopupButtons> ShowVersionDialog(PopupButtons buttons, string title, string message, DoNotShowAgainOptions dontShowAgain)
     {
         LogOnViewModel!.UpgradeVersion = new UpgradeVersionViewModel(title, message, dontShowAgain);
-        LogOnViewModel.PageResult = DialogResult.None;
+        LogOnViewModel.PopupResult = DialogResult.None;
 
         DoNotShowAgainOptions savedFlags = New<UserSettings>().DoNotShowAgain;
         DoNotShowAgainOptions currentFlags = LogOnViewModel.UpgradeVersion.DontShowAgainOptions;
@@ -47,7 +47,7 @@ public class UpgradeVersionViewModel
 
         LogOnViewModel.UpgradeVersionDialog.Show();
 
-        while (LogOnViewModel.PageResult == DialogResult.None)
+        while (LogOnViewModel.PopupResult == DialogResult.None)
         {
             await Task.Delay(1000);
         }
@@ -63,7 +63,7 @@ public class UpgradeVersionViewModel
             New<UserSettings>().DoNotShowAgain = New<UserSettings>().DoNotShowAgain | LogOnViewModel.UpgradeVersion.DontShowAgainOptions!;
         }
 
-        LogOnViewModel!.PageResult = DialogResult.OK;
+        LogOnViewModel!.PopupResult = DialogResult.OK;
         LogOnViewModel.PopupButtons = PopupButtons.Ok;
     }
 
@@ -74,7 +74,7 @@ public class UpgradeVersionViewModel
             New<UserSettings>().DoNotShowAgain = (DoNotShowAgainOptions)(New<UserSettings>().DoNotShowAgain | LogOnViewModel.UpgradeVersion.DontShowAgainOptions)!;
         }
 
-        LogOnViewModel!.PageResult = DialogResult.Cancel;
+        LogOnViewModel!.PopupResult = DialogResult.Cancel;
         LogOnViewModel.PopupButtons = PopupButtons.Cancel;
     }
 }

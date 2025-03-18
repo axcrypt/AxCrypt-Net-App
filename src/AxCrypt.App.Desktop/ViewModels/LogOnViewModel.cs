@@ -132,6 +132,9 @@ public class LogOnViewModel : ViewModelBase
 
     public PopupButtons PopupButtons { get; set; }
 
+    public DialogResult PopupResult
+    { get { return GetProperty<DialogResult>(nameof(PopupResult)); } set { SetProperty(nameof(PopupResult), value); } }
+
     public string ErrorMessage { get; set; }
 
     public event Action? OnSubscriptionChanged;

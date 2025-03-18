@@ -46,7 +46,7 @@ public class PopupService : IPopup
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     await _upgradeVersionViewModel.ShowVersionDialog(activeButtons[0], title, message, doNotShowAgainOption);
-                    isAccepted = _upgradeVersionViewModel.LogOnViewModel!.PageResult == Shared.Utility.DialogResult.OK;
+                    isAccepted = _upgradeVersionViewModel.LogOnViewModel!.PopupResult == Shared.Utility.DialogResult.OK;
 
                     //isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
                 });
@@ -86,7 +86,7 @@ public class PopupService : IPopup
                     //await Application.Current.MainPage.DisplayAlert(title, message, buttons[0]);
                     _upgradeVersionViewModel = new UpgradeVersionViewModel();
                     await _upgradeVersionViewModel.ShowVersionDialog(possibleButtons[0], title, message, dontShowAgain);
-                    isAccepted = _upgradeVersionViewModel.LogOnViewModel!.PageResult == Shared.Utility.DialogResult.OK;
+                    isAccepted = _upgradeVersionViewModel.LogOnViewModel!.PopupResult == Shared.Utility.DialogResult.OK;
                 });
                 return buttons[0];
 
@@ -99,7 +99,7 @@ public class PopupService : IPopup
                     //isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
                     _upgradeVersionViewModel = new UpgradeVersionViewModel();
                     await _upgradeVersionViewModel.ShowVersionDialog(possibleButtons[0], title, message, dontShowAgain);
-                    isAccepted = _upgradeVersionViewModel.LogOnViewModel!.PageResult == Shared.Utility.DialogResult.OK;
+                    isAccepted = _upgradeVersionViewModel.LogOnViewModel!.PopupResult == Shared.Utility.DialogResult.OK;
                 });
 
                 if (isAccepted)
