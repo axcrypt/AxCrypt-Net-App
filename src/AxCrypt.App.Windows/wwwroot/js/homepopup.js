@@ -211,7 +211,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         else {
             if (!IgnoreClosePopupOnPopupActions("accounts-dropdown-popup", targetobj)) {
                 if (!IgnoreClosePopupOnPopupActions("subscription-details-side-popup", targetobj)) {
-                    HidePopup("accounts-dropdown-popup");
+                    if (!IgnoreClosePopupOnPopupActions("key-management-popup", targetobj)) {
+                        HidePopup("accounts-dropdown-popup");
+                    }
                 }
             }
         }
@@ -221,7 +223,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             ShowHidePopup("key-management-popup");
         }
         else {
-            if (IgnoreClosePopupOnPopupActions("key-management-popup", targetobj)) {
+            if (!IgnoreClosePopupOnPopupActions("key-management-popup", targetobj)) {
                 HidePopup("key-management-popup");
             }
         }

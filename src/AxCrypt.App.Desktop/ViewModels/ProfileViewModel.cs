@@ -136,18 +136,17 @@ public class ProfileViewModel
         string savedPath = await ExportKeyFile!.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, DefaultExt, filter, fileName);
         if (string.IsNullOrEmpty(savedPath))
         {
-            _statusAlertService!.Error($"Failed to export your AxCrypt sharing key to the selected filepath!");
             return;
         }
 
         try
         {
             await File.WriteAllTextAsync(savedPath, serialized);
-            _statusAlertService!.Success($"Your AxCrypt sharing key pairs are saved to {savedPath}.");
+            _statusAlertService!.Success($"Your AxCrypt sharing key pairs are saved in {savedPath}.");
         }
         catch (Exception ex)
         {
-            _statusAlertService!.Error($"Failed to export your AxCrypt sharing key to the selected filepath due to {ex.Message}!");
+            _statusAlertService!.Error($"Failed to export your AxCrypt sharing key, due to {ex.Message}!");
             return;
         }
     }
@@ -165,18 +164,17 @@ public class ProfileViewModel
         string savedPath = await ExportKeyFile!.ShowSaveFileDialogAsync(Texts.DialogExportAxCryptIdTitle, New<IRuntimeEnvironment>().AxCryptExtension, filter, fileName);
         if (string.IsNullOrEmpty(savedPath))
         {
-            _statusAlertService!.Error($"Failed to export the your AxCrypt ID and sharing key pairs to the selected filepath!");
             return;
         }
 
         try
         {
             await File.WriteAllBytesAsync(savedPath, export);
-            _statusAlertService!.Success($"Your AxCrypt ID and sharing key pairs are saved to {savedPath}.");
+            _statusAlertService!.Success($"Your AxCrypt ID and sharing key pairs are saved in {savedPath}.");
         }
         catch (Exception ex)
         {
-            _statusAlertService!.Error($"Failed to export the file to the selected filepath due to {ex.Message}!");
+            _statusAlertService!.Error($"Failed to export the AxCrypt ID and sharing key pairs, due to {ex.Message}!");
             return;
         }
     }
