@@ -14,6 +14,7 @@ public class ManageSecretViewModel : Core.UI.ViewModel.ViewModelBase
         Secret = secretService.CurrentSecret!;
 
         HasPaidSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
+        HasBusinessSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
         ClearErrorFileds();
     }
 
@@ -45,6 +46,12 @@ public class ManageSecretViewModel : Core.UI.ViewModel.ViewModelBase
     {
         get { return GetProperty<bool>(nameof(HasPaidSubscription)); }
         set { SetProperty(nameof(HasPaidSubscription), value); }
+    }
+    
+    public bool HasBusinessSubscription
+    {
+        get { return GetProperty<bool>(nameof(HasBusinessSubscription)); }
+        set { SetProperty(nameof(HasBusinessSubscription), value); }
     }
 
     public string PageTitle

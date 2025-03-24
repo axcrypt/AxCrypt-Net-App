@@ -8,3 +8,9 @@
     height: 32px;
     transform: rotate(0deg);
 }
+
+@media (max-width: 1350px) {
+    .page-title::before {
+        top: 3px;
+    }
+}

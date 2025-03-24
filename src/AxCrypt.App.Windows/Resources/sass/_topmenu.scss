@@ -5,7 +5,7 @@
 .desk-acnt-popup, .desk-stngs-popup, .notification-popup {
     position: absolute;
     top: 110px !important;
-    right: 2%;
+    right: 2.5%;
     text-align: left;
     z-index: 1;
 
@@ -49,7 +49,6 @@
     background: none;
 }
 
-
 .manage-acc-sec {
     img {
         padding-right: 10px;
@@ -85,10 +84,9 @@
     }
 
     .act-clr:not(.disabled):hover {
-        background-color: $colAvtr;
         color: $TxtClr !important;
-        margin: 0 -20px;
-        padding: 4px 22px;
+        margin: 0 -19px;
+        padding: 5px 24px;
     }
 }
 
@@ -117,7 +115,7 @@
 .sub-pop2 {
     position: absolute;
     right: 19%;
-    top: 44%;
+    top: 39%;
 }
 
 .sub-pop2 a.active,
@@ -127,9 +125,11 @@
     padding: 10px 25px;
     margin: 0 -20px;
 }
+
 .desk-stngs-popup.model-popup {
     padding: 20px 0 !important;
 }
+
 .settings-menu-item-container {
     padding: 0 20px;
 
@@ -215,10 +215,6 @@
 
     &:hover, &.selected {
         background: $HglhtTxt;
-        /*background-color: $colAvtr;
-        color: $TxtClr !important;*/
-        /*        padding: 10px 25px;
-        margin: 0 -20px;*/
 
         .IcoEye {
             content: $IcoEye;
@@ -304,10 +300,6 @@
 
 .profile-option-container a.active,
 .profile-option-container a:hover {
-    background-image: $IcoIndctr;
-    background-repeat: no-repeat;
-    background-position: top left;
-
     .kym-sec {
         content: $IcoKMngmnt;
     }
@@ -330,6 +322,42 @@
     .encrypt-file-prop-img {
         content: $BtnFltrAct;
     }
+}
+
+.key-mngnt-Popup a:hover, .key-mngnt-Popup dd:hover, .manage-acc-sec a:hover, .manage-acc-sec dd:hover {
+    background-image: $IcoIndctr;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-color: $HglhtTxt;
+    color: $TxtClr !important;
+}
+
+.key-mngnt-Popup a:hover .log-out-clr, .key-mngnt-Popup dd:hover .log-out-clr, .manage-acc-sec a:hover .log-out-clr, .manage-acc-sec dd:hover .log-out-clr {
+    opacity: 0.8;
+}
+
+.key-mngnt-Popup a:hover, .manage-acc-sec a:hover {
+    padding: 10px 25px;
+    padding: 10px 25px;
+    margin: 0 -20px;
+}
+
+.key-mngnt-Popup dd, .manage-acc-sec dd {
+    padding: 5px;
+    margin-bottom: 0px;
+}
+
+.key-mngnt-Popup dd:hover, .manage-acc-sec dd:hover {
+    padding: 5px 25px;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.acnt-upg {
+    color: #48772C;
+    background-color: #fff;
+    border: 1px solid #48772C;
+    margin: 10px auto;
 }
 
 .subs-required {
@@ -401,10 +429,10 @@
     align-content: center;
     justify-content: center;
     border-radius: 50%;
-    background: $colBg;
+    background: $Colsublvl;
     position: absolute;
     font-size: 8px;
-    margin-left: 18px;
+    margin-left: 12px;
 }
 
 //for the notification popup//
@@ -451,7 +479,7 @@
         display: inline-block;
         width: 100%;
         padding: 15px 120px;
-        margin: 0 20%;
+        text-align: center;
     }
 
     .bgrnd-clr {
@@ -471,7 +499,7 @@
         box-shadow: 12px 12px 20px 0px #23232340;
         background-color: #ffffff;
         flex-wrap: wrap;
-        right: 1%;
+        right: 2.5%;
         top: 12%;
         flex-direction: column;
 
@@ -515,12 +543,11 @@
     font-size: 14px;
     display: flex;
     align-items: center;
-    width: 130px;
     color: $colDsbl;
 }
 
 .dropbtn.active {
-    border-radius: 0px 4px 0px 0px;
+    border-radius: 4px;
     border: 1px solid #000000;
     color: $TxtClr;
 
@@ -613,17 +640,17 @@
 
 .notification-popup:after,
 .notification-popup:before {
-    right: 39% !important;
+    right: 42% !important;
 }
 
 .desk-acnt-popup:after,
 .desk-acnt-popup:before {
-    right: 12% !important;
+    right: 25px !important;
 }
 
 .desk-stngs-popup:after,
 .desk-stngs-popup:before {
-    right: 66% !important;
+    right: 240px !important;
 }
 
 @media (max-width: 768px) {
@@ -644,13 +671,6 @@
         font-weight: 800;
     }
 
-    .acnt-upg {
-        color: #48772C;
-        background-color: #fff;
-        border: 1px solid #48772C;
-        margin: 15px 0px 0px;
-    }
-
     .text-overlfow {
         max-width: 190px;
         top: 8px;
@@ -658,7 +678,6 @@
 }
 
 @media (min-width: 769px) and (max-width: 1139px) {
-
     .main-back-arrow, .acc-txt {
         display: none !important;
         visibility: hidden !important;
@@ -711,7 +730,6 @@
     }
 
     .acc-subs, .manage-acc-sec {
-
         label {
             font-size: 16px;
             font-weight: 700;
@@ -733,7 +751,6 @@
 
             td {
                 padding: 10px 0px;
-
 
                 img {
                     padding-right: 20px;
@@ -837,7 +854,6 @@
     }
 }
 
-
 //mobile app notification  code
 @media (max-width: 1140px) {
     .notif-mbl {
@@ -926,5 +942,11 @@
     .notify-txt {
         font-Weight: 400;
         font-size: 12px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .top-menu {
+        gap: 15px;
     }
 }

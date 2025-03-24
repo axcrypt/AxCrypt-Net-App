@@ -1,10 +1,15 @@
+:root {
+    --window-min-height: 660px;
+    --window-min-width: 1165px;
+}
+
 .page {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-width: 1155px;
-    min-height: 660px;
+    min-width: var(--window-min-width);
+    min-height: var(--window-min-height);
     user-select: none;
     height: 100vh;
     background-color: white;

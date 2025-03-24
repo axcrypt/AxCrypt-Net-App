@@ -473,21 +473,15 @@
     <div id="modal-dialog1" class="modalDialog" style="display: block;">
         <div class="invite-popup text-center">
             <label for="title">@Texts.DebugManageAccountToolStripMenuItemText</label>
-            <div class="center-column">
-                <div>
-                    <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
-                </div>
-            </div>
-            <div>
+            <div class="modal-body">
+                <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
                 <label for="userEmail">@AppSettingsViewModel.EmailLabel</label>
+                <input type="text" id="timeout" class="form-control email-img" readonly value="Timestamp: @AppSettingsViewModel.CreatedTime">
             </div>
-            <div class="input-group">
-                <div>
-                    <textarea id="timeout" style="position:center;" class="form-control email-img" rows="4" cols="60" readonly>Timestamp: @AppSettingsViewModel.CreatedTime </textarea>
-                </div>
-            </div>
-            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-                <button class="button font-medium success btn-large" @onclick="(e)=>AppSettingsViewModel.ChangePassphraseButton_Click(e)">Change Password</button>
+            <div class="modal-footer">
+                <button class="button font-medium success btn-large" @onclick="(e)=>AppSettingsViewModel.ChangePassphraseButton_Click(e)" style="width: max-content; max-width: 165px;">
+                    Change Password
+                </button>
                 <button class="button font-medium success btn-large" @onclick="AppSettingsViewModel.CloseManageAxCryptID">@Texts.ButtonCloseText</button>
             </div>
         </div>

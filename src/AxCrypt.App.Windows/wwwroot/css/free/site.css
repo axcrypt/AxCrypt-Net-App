@@ -1,4 +1,8 @@
-﻿.page-title {
+﻿.page-title-container {
+  display: inline-flex;
+}
+
+.page-title {
   position: relative;
   padding-right: 20px;
   width: max-content;
@@ -10,7 +14,7 @@
 .page-title::before {
   content: "";
   position: absolute;
-  background-image: url(/images/premium/IcoPrm.svg);
+  background-image: none;
   background-size: contain;
   background-repeat: no-repeat;
   transform-origin: center center;
@@ -38,7 +42,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 24px;
 }
 .top-menu a {
   text-decoration: none;
@@ -70,17 +74,8 @@
   font-size: 31px;
 }
 
-.app-top-menu.active, .app-top-menu:hover {
-  background-color: #D2DCCD;
-  border-radius: 5px;
-}
-
 .sttng-icon, .notif-icon {
   height: 25px;
-}
-
-.app-top-menu {
-  padding: 10px;
 }
 
 .top-menu a.active .notif-icon, .top-menu a:hover .notif-icon {
@@ -682,6 +677,9 @@ input:checked + .slider:before {
   }
 }
 @media (min-width: 769px) and (max-width: 1350px) {
+  .page-title-container {
+    width: 90%;
+  }
   .padding-size {
     padding: 0px 15px;
   }
@@ -689,7 +687,15 @@ input:checked + .slider:before {
     font-size: 32px !important;
   }
 }
-@media (min-width: 1351px) {
+@media (min-width: 769px) and (max-width: 1290px) {
+  .page-title-container {
+    width: 71%;
+  }
+  .page-title, h1 {
+    font-size: 26px !important;
+  }
+}
+@media (min-width: 1450px) {
   .page-title, h1 {
     font-size: 40px !important;
   }

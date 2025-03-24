@@ -24,9 +24,8 @@
         <table class="rcnt-fle-tbl" style="width:100%;">
             <thead style="user-select: none;">
                 <tr>
-                    <th style="width:3%;"> <input class="check-box" type="checkbox" @onchange="(e)=> RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
-                    <th style="width:3%;"></th>
-                    <th style="width:23%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(0)">@Texts.NameLabel<img class="arw-img" src="" alt="arrow img" /></th>
+                    <th style="width:3%; padding-left: 0px;"> <input class="check-box" type="checkbox" @onchange="(e)=> RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
+                    <th colspan="2" style="width:23%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(0)">@Texts.NameLabel<img class="arw-img" src="" alt="arrow img" /></th>
                     <th style="width:11%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(1)">@Texts.FileSizeColumnHeaderText<img class="arw-img" src="" alt="arrow img" /></th>
                     <th style="width:11%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(5)">@Texts.CryptoNameText<img class="arw-img" src="" alt="arrow img" /></th>
                     <th style="width:18%;" @onclick="()=>RecentFilesViewModel.SetSortOrder(2)">@Texts.LastModifiedTimeColumnHeaderText<img class="arw-img" src="" alt="arrow img" /></th>
@@ -50,10 +49,10 @@
                         FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
                         <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails.FilePath) ? "selected" : "")"
                             @oncontextmenu="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)" @ondblclick="(e) => RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)">
-                            <td>
+                            <td style="padding-left: 0px;">
                                 <input class="check-box" type="checkbox" @onchange="() => RecentFilesViewModel.HandleFileClick(!fileDetails.IsChecked, fileDetails.FilePath)" checked="@fileDetails.IsChecked" />
                             </td>
-                            <td class="fle-exton-img">
+                            <td class="fle-exton-img" style="width:5%;">
                                 <img style="max-width: 32px;max-height: 32px;" class="@fileDetails.IconClass" src="" alt="file-image" />
                             </td>
                             <td class="fle-exton-img" style="display: flex; align-items: center;" title="@fileDetails.FilePath">

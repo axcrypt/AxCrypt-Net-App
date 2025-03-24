@@ -153,9 +153,7 @@
                         }
                     </div><br />
                     <div id="sharekey" class="shr-ky-ftr" style="margin: 10px 0px;">
-                        <NavLink href="/">
-                            <input type="button" @onclick="Close" class="button border btn-small" value="@Texts.ButtonCancelText" style="margin-right: 10px;" />
-                        </NavLink>
+                         <input type="button" @onclick="Close" class="button border btn-small" value="@Texts.ButtonCancelText" style="margin-right: 10px;" />
                         @if (ShareKeyViewModel.IsWideScreen)
                         {
                             <input disabled="@(ShareKeyViewModel.EnableApplyButton ? null : "disabled")" type="button" class="button success btn-small" @onclick="async ()=> await ShareKeyViewModel.ApplyShareKeys()" value="@Texts.ApplyLabel" style="padding: 6px 0px;" />

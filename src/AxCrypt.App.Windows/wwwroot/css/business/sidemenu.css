@@ -17,7 +17,7 @@
 
 .scrdfldr {
   content: url(/images/default/icoScrdFldr.svg);
-  height: 20px;
+  height: 23px;
   width: 17.6px;
 }
 
@@ -67,6 +67,9 @@
 }
 .nav-item span {
   margin-right: 20px;
+}
+.nav-item .nav-text {
+  vertical-align: super;
 }
 
 .nav-item .one.active,
@@ -206,6 +209,7 @@
 
 .nav-link {
   overflow: hidden;
+  padding: 5px;
 }
 
 .fdbck-img {
@@ -220,6 +224,7 @@
   width: 100%;
   padding: 10px;
   margin-top: 10px;
+  border-radius: 0 4px 4px 4px;
 }
 
 .flex-start .button {

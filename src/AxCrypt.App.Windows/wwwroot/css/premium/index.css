@@ -17,8 +17,8 @@
 
 .head-sec {
   display: inline-flex;
-  gap: 10px;
-  align-items: flex-start;
+  gap: 5px;
+  align-items: baseline;
 }
 
 .home-body {
@@ -47,6 +47,7 @@
   line-height: 16px;
   box-shadow: 0px 4px 6px 0px rgba(49, 73, 35, 0.25);
   cursor: pointer;
+  line-height: 14px;
 }
 
 .opnscrd-act {
@@ -96,6 +97,7 @@
 .act-img {
   margin: auto auto;
   display: block;
+  padding-bottom: 4px;
 }
 
 .text-size, .act-txt-sze {
@@ -123,20 +125,21 @@
 
 .ico-eye {
   content: url(/images/premium/IcoEye.svg);
-  padding: 5px;
+  width: 20px;
 }
 
 .ico-hidden {
   content: url(/images/premium/IcoHiddenPassword.svg);
-  padding: 5px;
 }
 
 .sub-box {
   margin-top: 10px;
-  width: 136px;
+  min-width: 158px;
   height: 100px;
   border-radius: 8px;
   color: #FFFFFF;
+  text-align: center;
+  box-shadow: 0 4px 6px 0 rgba(49, 73, 35, 0.25);
 }
 .sub-box .subs-plan {
   font-size: 20px;
@@ -153,10 +156,10 @@
 }
 
 .buy-button {
-  width: 100px !important;
+  min-width: 100px !important;
   height: 28px;
-  padding: 2px 25px;
-  margin: 0px 15px;
+  padding: 1% 10%;
+  margin: 0px auto;
   background-color: white;
   color: darkgreen;
   border: none;
@@ -173,7 +176,7 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 4px;
-  margin: 10px 20px 20px 0px;
+  margin: 12px 20px 18px 0;
   padding: 3px;
   border: 1px solid #48772C;
   box-shadow: 0px 2px 4px 0px rgba(35, 35, 35, 0.25);
@@ -201,6 +204,7 @@
 }
 
 .mre-actn-box {
+  width: 188px;
   height: 40px;
   border-radius: 4px;
   margin: 1.5% 0;
@@ -208,10 +212,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
-  max-width: 188px;
   padding: 5px 0px;
   cursor: pointer;
+  line-height: 12px;
+}
+
+.mre-actn-box:hover {
+  background-color: #EEF7E9 !important;
 }
 
 .fle-exton-img img {
@@ -270,16 +277,19 @@
 .ico-eye-sml {
   content: url(/images/premium/IcoEye.svg);
   padding: 5px;
+  width: 28px;
 }
 
 .ico-dlt {
   content: url(/images/premium/IcoDlt.svg);
   padding: 5px;
+  width: 22px;
 }
 
 .ico-apikey {
   content: url(/images/premium/IcoAPIKey16px.svg);
   padding: 5px;
+  width: 28px;
 }
 
 .ico-offln {
@@ -630,6 +640,7 @@
   max-width: 150px;
   text-overflow: ellipsis;
   overflow: hidden;
+  padding-top: 5px;
 }
 
 .rcnt-fld-bx.selected {
@@ -646,6 +657,7 @@
 
 .add-fldr-img {
   content: url(/images/premium/IcoFldrAdd.svg);
+  vertical-align: top;
 }
 
 .add-fldr {
@@ -689,6 +701,7 @@
 
 .fldr-img {
   content: url(/images/premium/IcoFldr.svg);
+  vertical-align: top;
 }
 
 .tmpr-img {
@@ -762,11 +775,6 @@
   background-color: #48772C;
 }
 
-@media only screen and (max-width: 1285px) {
-  .mre-actn-box {
-    width: 20%;
-  }
-}
 @media (max-width: 768px) {
   .dk-shre {
     display: none;
@@ -1016,6 +1024,11 @@
   }
   .fle-exton-img .fle-nme {
     padding-left: 3%;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .dwnld-sec {
+    display: none;
   }
 }
 .empty-rcnt-fle-img {

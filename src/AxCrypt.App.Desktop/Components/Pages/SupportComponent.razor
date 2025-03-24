@@ -17,20 +17,24 @@
     </NavLink>
 </div>
 
-<div id="content-index" class="medium-12 columns support page-max-height">
-    <div class="">
+<div class="row">
+    <div class="medium-12 columns page-title-container">
         <h1 class="page-title">
             @LogOnModel.SupportPageTitle
         </h1>
-        <p class="hide-txt">@(PageDescription)</p>
     </div>
+</div>
+
+<div class="medium-12 columns support">
+     <p class="hide-txt">@(PageDescription)</p>
+
     @if (!string.IsNullOrEmpty(SupportViewModel.ErrorMessage))
     {
         <div class="error-message">@SupportViewModel.ErrorMessage</div>
     }
     @if (LogOnModel.SubscriptionLevel != SubscriptionLevel.Free)
     {
-        <div id="support-body-section">
+        <div id="support-body-section" class="suprt-max-height">
             <div class="label-text">
                 <label>@Texts.SupportBodyPrompt</label>
             </div>
@@ -84,9 +88,9 @@
     else
     {
         <div id="support-body-section">
-            <div class="label-text free-sec" style="text-align:left;">
+            <div class="label-text free-sec">
                 <label>Sorry,</label>
-                <p class="SupWarngText" style="text-align:left;">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
+                <p class="SupWarngText">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
                 <img class="support-image" src="" alt="support-img" />
             </div>
         </div>

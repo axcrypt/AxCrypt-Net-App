@@ -13,7 +13,7 @@ public class SecretNoteViewModel : SecretBaseViewModel
         Note = note;
     }
 
-    [StringLength(1000)]
+    [StringLength(100000)]
     [Display(Name = nameof(Texts.NoteContentPrompt), ResourceType = typeof(Content.Resource))]
     public string Note { get; set; }
 }

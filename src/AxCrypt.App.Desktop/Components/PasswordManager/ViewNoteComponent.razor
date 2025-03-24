@@ -28,7 +28,7 @@
                 </li>
                 <li>
                     <label for="Note_Note">@Texts.NoteLabel</label>
-                    <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Note.Note" readonly="readonly"></textarea>
+                    <textarea type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949 !important; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Note.Note" readonly="readonly"></textarea>
                 </li>
                 @if (secretService.CurrentSecret.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
                 {
@@ -41,24 +41,20 @@
                     </li>
                 }
                 <li>
-                    <div style="display:flex; justify-content:space-around; width:100%;">
-                        <div style="display:flex; justify-content:flex-start; gap:20px; width:100%;">
-                            <div>
-                                <NavLink href="passwordManager">
-                                    <input type="submit" class="button cancel btn-extra-small" value="Back" />
-                                </NavLink>
-                            </div>
+                    <div class="center-column" style="gap: 20px;">
+                        <div>
+                            <NavLink href="passwordManager">
+                                <input type="submit" class="button cancel btn-extra-small" value="Back" />
+                            </NavLink>
+                        </div>
+                        <div>
                             @if (viewSecretViewModel.HasPaidSubscription)
                             {
-                                <div>
-                                    <input id="secret-delete" type="button" class="button btn-extra-small alert" value="@Texts.ButtonDeleteText" @onclick="async () => await DeleteSecret()" />
-                                </div>
+                                <input id="secret-delete" type="button" class="button btn-extra-small alert" value="@Texts.ButtonDeleteText" @onclick="async () => await DeleteSecret()" />
                             }
                             @if (viewSecretViewModel.HasPaidSubscription && secretService.CurrentSecret.OwnerEmail == viewSecretViewModel.UserEmail)
                             {
-                                <div>
-                                    <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" />
-                                </div>
+                                <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" style="margin-left:20px;" />
                             }
                         </div>
                     </div>
@@ -77,6 +73,18 @@
                     </div>
                 </div>
                 <div id="container" class="container">
+                    @if (viewSecretViewModel.HasBusinessSubscription)
+                    {
+                        <p class="bus-info">
+                            Add users or Groups with whom you want to share this secret. If you
+                            don`t know about our <b>Group Feature</b> yet, <a style="color:#FFC50D;text-decoration:underline;" @onclick="viewSecretViewModel.GoToLearmoreLink">learn more</a> and create your
+                            first one by the link <a style="color:#FFC50D;text-decoration:underline;" @onclick="viewSecretViewModel.GoToCreateGroupLink">Create a Group!</a>
+                        </p>
+                    }
+                    else
+                    {
+                        <p>Add recipients to the list of people who you want to share this secret with</p>
+                    }
                     <form id="temp-add-share-user" @onsubmit="ApplyShare">
                         <div class="sharewith-box" style="padding: 20px; ">
                             <div style="margin:auto; justify-content:flex-start; flex-wrap:wrap; justify-content:space-around; width:100% " class="row">

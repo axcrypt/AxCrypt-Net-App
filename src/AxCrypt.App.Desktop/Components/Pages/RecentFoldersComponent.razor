@@ -7,7 +7,7 @@
 
 @if (RecentFoldersViewModel.RecentFoldersList.Any())
 {
-    <div @onclick="RecentFoldersViewModel.SortByDate">
+    <div @onclick="RecentFoldersViewModel.SortByDate" style="padding-bottom: 20px;">
         <label class="font-medium">@Texts.SecretsSortOrderLabel: <span class="txt-clr">@Texts.InvoiceDateHeadline</span></label>
         <img class="arw-img" src="" alt="arrow-image" />
         <img class="date-drpdwn" src="" alt="arrow-image" />

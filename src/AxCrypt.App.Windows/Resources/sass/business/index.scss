@@ -2,7 +2,8 @@
 @import "../_index";
 
 .actv-subs {
-    width: 216px;
+    min-width: 190px;
+    width: max-content;
     height: 100px;
     flex-shrink: 0;
     border-radius: 8px;
@@ -10,6 +11,7 @@
     background: $WhtBgClr;
     box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.25);
 }
+
 .battery {
     float: left;
     padding: 5px 5px 5px 20px;
@@ -40,7 +42,7 @@
 .charge-level {
     width: 45px;
     background-color: #494949;
-    height:50px;
+    height: 50px;
     margin: 4px;
     border-bottom-right-radius: 2px;
     border-bottom-left-radius: 2px;
@@ -58,9 +60,11 @@
 
 .subs-btn {
     color: $WhtTxtClr !important;
-    width: 112px;
+    width: fit-content;
+    min-width: 112px;
     font-size: 12px;
     font-weight: 700;
+    text-align: center;
 }
 
 .empty-rcnt-fle-img {

@@ -16,7 +16,7 @@
 
 .login-title {
     width: max-content;
-    padding: 40px 45px 50px 0;
+    padding: 45px 55px 50px 0;
     margin: 0 0 5% 0;
 }
 
@@ -53,7 +53,7 @@
 
 .grn-clr {
     color: #48772C;
-}  
+}
 
 .fnt-wgt {
     font-weight: 800;
@@ -155,6 +155,21 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+}
+
+.login-lang-drpdwn {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+
+    .language-dropdown {
+        right: 0px;
+        min-width: 54px;
+
+        img {
+            padding: 0;
+        }
+    }
 }
 
 @media (max-width: 768px) {
@@ -373,6 +388,7 @@
         background-color: #48772C;
     }
 }
+
 @media (min-width: 769px) and (max-width: 1400px) {
     /*#content-wrap {
         width: 40% !important;

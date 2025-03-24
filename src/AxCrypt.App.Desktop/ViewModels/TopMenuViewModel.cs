@@ -1,13 +1,11 @@
-﻿using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Desktop.Helpers;
+﻿using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Desktop.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using Microsoft.Maui.Devices;
 using System;
 using System.Globalization;
 using System.Threading;
@@ -17,38 +15,39 @@ namespace AxCrypt.App.Desktop.ViewModels;
 
 public class TopMenuViewModel : ViewModelBase
 {
-    private readonly UserNotificationService _notificationService;
     private MainViewModel? _mainViewModel;
 
     public TopMenuViewModel(UserNotificationService notificationService)
     {
         LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
-        _notificationService = notificationService;
         _mainViewModel = AxCServiceProviderExtension.LogOnViewModel!.MainViewModel;
-        TopMenuModel = new TopMenuModel();
-        TopMenuModel.SubscriptionLevel = AxCServiceProviderExtension.LogOnViewModel!.SubscriptionLevel;
     }
 
     public void Initialize()
     {
-        TopMenuModel.UserEmail = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
     }
 
-    public TopMenuModel TopMenuModel { get; set; }
+    public bool IsWideScreen { get; set; }
+
+    public bool IsLargeScreen { get; set; }
+
+    public string? SelectedLanguage { get; set; } = "en";
+
+    public string SelectedLanguageImageUrl { get; set; } = "images/flag/FrmEng.svg";
+
+    public string SelectedLanguageDisplayName { get; set; } = Texts.EnglishLanguageToolStripMenuItemText;
 
     public LogOnViewModel LogOnViewModel { get; set; }
 
-    public DeviceIdiom GetCurrentDeviceIdiom() => DeviceInfo.Idiom;
-
     public string VersionHoverText { get; set; }
+
     public bool ShowUpdate { get; set; }
 
     public void SetLanguageAsync(string cultureName)
     {
         Resolve.UserSettings.CultureName = cultureName;
         SetCulture();
-        InitializeContentResources();
     }
 
     private void SetCulture()
@@ -57,8 +56,6 @@ public class TopMenuViewModel : ViewModelBase
         Thread.CurrentThread.CurrentUICulture = cultureInfo;
         Content.Resource.Culture = cultureInfo;
     }
-
-    private void InitializeContentResources() => SetCulture();
 
     public async Task CheckAxCryptVersionAsync(EventArgs e)
     {

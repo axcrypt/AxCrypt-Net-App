@@ -8,7 +8,7 @@ public class AppLocalizationOptions
     {
         SupportedCultures = new List<CultureOption>
             {
-                new CultureOption { Name = "en", DisplayName = "Eng(US)", ImageUrl = "images/flag/FrmEng.svg" },
+                new CultureOption { Name = "en", DisplayName = "English", ImageUrl = "images/flag/FrmEng.svg" },
                 new CultureOption { Name = "ar", DisplayName = "Arabic", ImageUrl = "images/flag/FrmArbc.svg" },
                 new CultureOption { Name = "de", DisplayName = "Deutsch", ImageUrl = "images/flag/FrmGrmn.svg" },
                 new CultureOption { Name = "fr", DisplayName = "Français", ImageUrl = "images/flag/FrmFrnc.svg" },

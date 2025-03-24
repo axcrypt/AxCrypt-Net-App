@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
+using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
@@ -19,7 +20,6 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Desktop.Helpers;
 
 namespace AxCrypt.App.Desktop.ViewModels.Main;
 
@@ -335,8 +335,8 @@ public class AppSettingsViewModel : ViewModelBase
     {
         AccountStorage userKeyPairs = new AccountStorage(New<LogOnIdentity, IAccountService>(Resolve.KnownIdentities.DefaultEncryptionIdentity));
         _viewModel = await ManageAccountViewModel.CreateAsync(userKeyPairs);
-        _viewModel.BindPropertyChanged<IEnumerable<AccountProperties>>(nameof(ManageAccountViewModel.AccountProperties), ListAccountEmails);
-
+        //_viewModel.BindPropertyChanged<IEnumerable<AccountProperties>>(nameof(ManageAccountViewModel.AccountProperties), ListAccountEmails);
+        ListAccountEmails(_viewModel.AccountProperties);
         ShowManageAxCryptID = true;
     }
 
@@ -412,8 +412,8 @@ public class AppSettingsViewModel : ViewModelBase
         {
             EnableAutoUpgrade = false;
         }
-    } 
-    
+    }
+
     private async Task ConfigureIncludeSubfoldersMenuAsync(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.IncludeSubfolders))
@@ -449,7 +449,7 @@ public class AppSettingsViewModel : ViewModelBase
             EnableRestoreRename = false;
         }
     }
-    
+
     private async Task ConfigureEncryptionFilePropertiesMenuAsync(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.RandomRename))

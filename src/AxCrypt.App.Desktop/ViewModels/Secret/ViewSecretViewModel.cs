@@ -10,6 +10,7 @@ using AxCrypt.Core.Secrets;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -145,5 +146,15 @@ public class ViewSecretViewModel : ManageSecretViewModel
             bool isDeleted = await SharedSecrets.DeleteSharedWithAsync(secrets[0]);
             return isDeleted;
         }
+    }
+
+    public void GoToLearmoreLink()
+    {
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://axcrypt.net/information/group/"));
+    }
+
+    public void GoToCreateGroupLink()
+    {
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/Group/Index"));
     }
 }

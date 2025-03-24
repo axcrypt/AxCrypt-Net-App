@@ -28,13 +28,13 @@
                 </li>
                 <li>
                     <label for="Note_Note">@Texts.NoteLabel:</label>
-                    <textarea type="text" class="secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Note.Note"></textarea>
+                    <textarea type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Note.Note"></textarea>
                     <ValidationMessage For="@(() => secretService.CurrentSecret.Note.Note)" />
                 </li>
                 <li>
                     <div class="btn-sec-new-edit">
                         <button type="submit" class="button btn-extra-small success">@Texts.ButtonSaveText</button>
-                        <NavLink href="passwordManager">
+                        <NavLink href="viewnote">
                             <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
                         </NavLink>
                     </div>
@@ -64,6 +64,7 @@
         if (saveResult)
         {
             StatusAlertService.Success("Your new password entry has been Updated!.");
+            navigationManager.NavigateTo("/viewnote");
         }
         else
         {

@@ -503,6 +503,6 @@ public class ShareKeyViewModel : ViewModelBase
 
     public void GoToCreateGroupLink()
     {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/Group/"));
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/Group/Index"));
     }
 }

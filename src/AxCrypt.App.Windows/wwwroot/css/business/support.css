@@ -7,6 +7,10 @@
 
 .free-sec {
   margin: 0 20%;
+  text-align: center;
+}
+.free-sec label {
+  color: #86B96E;
 }
 
 .support-image {
@@ -15,8 +19,9 @@
 }
 
 .link-box {
-  width: 165px;
-  height: auto;
+  min-width: 165px;
+  width: auto;
+  height: 70px;
   border: 1px solid #000000;
   border-radius: 4px;
   display: flex;
@@ -89,6 +94,11 @@
   display: none;
 }
 
+.suprt-max-height {
+  max-height: 565px;
+  overflow-y: scroll;
+}
+
 @media only screen and (max-width: 768px) {
   .link-box {
     width: auto;
@@ -121,6 +131,11 @@
   }
   .btn-hide {
     display: none;
+  }
+}
+@media only screen and (max-width: 1220px) {
+  .suprt-max-height {
+    max-height: 520px;
   }
 }
 @media only screen and (max-width: 280px) {

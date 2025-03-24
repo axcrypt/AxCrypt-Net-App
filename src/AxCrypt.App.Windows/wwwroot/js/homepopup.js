@@ -156,7 +156,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 if (!IgnoreClosePopupOnPopupActions("inactivity-signout-side-popup", targetobj)) {
                     if (!IgnoreClosePopupOnPopupActions("encryption-file-property-side-popup", targetobj)) {
                         if (!IgnoreClosePopupOnPopupActions("debug-side-popup", targetobj)) {
-                            document.getElementById("settings-dropdown-click-action").classList.remove("active");
+                            if (document.getElementById("settings-dropdown-click-action") != undefined) {
+                                document.getElementById("settings-dropdown-click-action").classList.remove("active");
+                            }
                             HidePopup("settings-dropdown-popup");
                         }
                     }
@@ -170,7 +172,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             ShowHidePopup("notification-dropdown-popup");
         }
         else {
-            document.getElementById("notification-dropdown-click-action").classList.remove("active");
+            if (document.getElementById("notification-dropdown-click-action") != undefined) {
+                document.getElementById("notification-dropdown-click-action").classList.remove("active");
+            }
             HidePopup("notification-dropdown-popup");
         }
 
@@ -254,7 +258,7 @@ function ShowHidePopup(popupId) {
 
 function HidePopup(popupId) {
     const popup = document.getElementById(popupId);
-    if (popup !== undefined) {
+    if (popup !== undefined && popup !== null) {
         popup.style.display = 'none';
     }
 }

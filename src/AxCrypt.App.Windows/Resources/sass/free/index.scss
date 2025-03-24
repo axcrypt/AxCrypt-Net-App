@@ -21,7 +21,6 @@
     text-align: left;
     font-size: 12px;
     font-weight: 700;
-    padding-right: 35px;
     color: $WhtTxtClr;
 
     span {
@@ -48,7 +47,7 @@
 }
 
 .info-box {
-    width: 144px;
+    width: fit-content;
     height: 80px;
     border-radius: 4px;
     border: 1px solid #86B96E;
@@ -136,20 +135,20 @@
 }
 
 .title-img {
-    padding-left: 5px;
+    padding: 0px 5px;
 }
 
 .feat-tab {
     tr td {
         font-size: 70%;
         font-weight: 400;
-        padding: 2% 5%;
+        padding: 1.5% 5%;
     }
 }
 
 .subs-feat {
     display: block;
-    width: 110%;
+    width: 218px;
     padding-bottom: 8%;
     border-radius: 8px;
 }
@@ -157,6 +156,7 @@
 .sub-head-sec {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     line-height: normal;
     padding: 5% 10%;
@@ -171,11 +171,11 @@
 .free-sugtn {
     display: flex;
     align-items: flex-start;
-    gap: 5%;
+    gap: 10px;
     float: right;
     bottom: 5px;
-    top: 295px;
-    right: 4%;
+    top: 310px;
+    right: 3%;
     position: absolute;
 }
 
@@ -187,6 +187,17 @@
 .empty-rcnt-fld-img {
     content: url(/images/free/ImgNoFldrs.svg);
     padding-top: 20px;
+}
+
+.upgrd-btn {
+    text-align: center;
+    color: #48772C;
+    border: 1px solid #48772C;
+    margin-top: 10px;
+}
+
+.home-body {
+    align-items: flex-end;
 }
 
 @media (max-width: 768px) {
@@ -253,5 +264,14 @@
         tr td {
             padding: 1% 4%;
         }
+    }
+
+    .sub-head-sec {
+        padding: 3% 10%;
+        gap: 2px;
+    }
+
+    .free-sugtn {
+        top: 295px;
     }
 }
