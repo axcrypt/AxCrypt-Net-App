@@ -7,7 +7,14 @@
 <div class="side-menu">
     <div class="navbar" style="margin-top: 10px;">
         <div class="container-fluid">
-            <a href=""> <img class="axc-icon" src="" alt="" style="max-width: @(Utility.IsMainMenuHidden?"":"100%")" /></a>
+            @if (!Utility.IsMainMenuHidden)
+            {
+                <a href=""> <img class="axc-icon" src="" alt="AxCrypt_Icon" /></a>
+            }
+            else
+            {
+                <a href=""> <img class="" src="images/axcryptIcon.svg" alt="AxCrypt_Icon" style="height: 70px;" /></a>
+            }
         </div>
     </div>
 </div>

@@ -7,7 +7,11 @@
 @inject LogOnViewModel LogOnViewModel
 @inject ICssService CssService
 
-<div class="page" dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
+@{
+    string arabic = Core.Resolve.UserSettings.CultureName == "ar" ? "arabic-class" : "";
+}
+
+<div class="page @arabic" dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
     @if (PageRendering)
     {
         <main>

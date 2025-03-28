@@ -1026,11 +1026,6 @@
     padding-left: 3%;
   }
 }
-@media only screen and (max-width: 1300px) {
-  .dwnld-sec {
-    display: none;
-  }
-}
 .shre-box {
   background-image: url(/images/premium/IcoPrm.svg);
   background-repeat: no-repeat;
@@ -1281,5 +1276,10 @@
   }
   .free-sugtn {
     top: 295px;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .dwnld-sec {
+    display: none;
   }
 }

@@ -711,6 +711,176 @@ input:checked + .slider:before {
   min-height: 100%;
 }
 
+.arabic-class .page-title {
+  padding-right: 0px;
+}
+.arabic-class .page-title::before {
+  right: unset;
+  left: -18px;
+  transform: rotate(-25deg);
+}
+.arabic-class .top-menu {
+  float: left !important;
+}
+.arabic-class .top-menu .tick-icon {
+  right: unset;
+  left: 0;
+}
+.arabic-class .top-menu .dropbtn {
+  gap: 25px;
+}
+.arabic-class .top-menu .language-item img {
+  padding-left: 10px;
+}
+.arabic-class .top-menu-section .desk-stngs-popup {
+  right: unset;
+  left: 12.5%;
+}
+.arabic-class .top-menu-section .notification-popup {
+  right: unset;
+  left: 2.5%;
+}
+.arabic-class .top-menu-section .desk-acnt-popup {
+  right: unset;
+  left: 2.5%;
+}
+.arabic-class .top-menu-section .notification-popup:after, .arabic-class .top-menu-section .notification-popup:before {
+  right: 58% !important;
+}
+.arabic-class .top-menu-section .desk-acnt-popup:after, .arabic-class .top-menu-section .desk-acnt-popup:before {
+  right: 200px !important;
+}
+.arabic-class .top-menu-section .sub-pop1 {
+  right: unset;
+  left: 28%;
+}
+.arabic-class .top-menu-section .sub-pop2 {
+  right: unset;
+  left: 30%;
+}
+.arabic-class .top-menu-section .key-mngnt-Popup, .arabic-class .top-menu-section .subs-dtls-popup {
+  left: 17%;
+}
+.arabic-class .top-menu-section .key-mngnt-Popup dd {
+  margin-inline-start: -10px;
+  padding: 5px 15px;
+}
+.arabic-class .top-menu-section .key-mngnt-Popup dd :hover {
+  padding: 5px -20px;
+}
+.arabic-class .email-img, .arabic-class .pswd-img {
+  background-position: right 7px center;
+}
+.arabic-class .manage-acc-sec a {
+  display: flex;
+  gap: 5px;
+}
+.arabic-class .manage-acc-sec img {
+  padding-left: 10px;
+  padding-right: unset;
+}
+.arabic-class .flex-column .nav-link.active.one, .arabic-class .flex-column .nav-link.active.two, .arabic-class .flex-column .nav-link.active.three, .arabic-class .flex-column .nav-link.active.four, .arabic-class .flex-column .nav-link.active.five {
+  background-position: top 4px left;
+}
+.arabic-class .sidebar .hide-icon {
+  float: left;
+  margin-left: -12px;
+}
+.arabic-class .sidebar .expbd-icon {
+  left: -15px;
+}
+.arabic-class .acc-subs div:nth-child(2) {
+  width: 185px;
+}
+.arabic-class .modal-body label {
+  float: right;
+}
+.arabic-class .modal-body .center-column {
+  margin-top: 25px;
+}
+.arabic-class #date-modified-toggle .center-column {
+  gap: 10px;
+  margin-inline-start: 0px;
+}
+.arabic-class #date-modified-toggle .center-column div {
+  float: left;
+}
+.arabic-class .invite-text {
+  text-align: right !important;
+}
+.arabic-class .notification-table th {
+  text-align: right;
+}
+.arabic-class .notify-pg-tbl-head th {
+  padding-right: 15px;
+}
+.arabic-class .abt-axc .center-column div:nth-child(2) {
+  text-align: right !important;
+}
+.arabic-class .sharekey-content input[type=email], .arabic-class #secrets-keyword {
+  background-position: top 10px left 10px;
+}
+.arabic-class .sharekey-content .fle-exton-img img {
+  margin-left: 10px;
+}
+.arabic-class .sugg-popup.active {
+  right: unset;
+  left: 3%;
+}
+.arabic-class .nav-item span {
+  margin-right: 0px;
+  margin-left: 20px;
+}
+.arabic-class .sharedwith-box {
+  transform: translateX(9%);
+}
+.arabic-class #cp-sec-pwd-clipbrd {
+  right: unset !important;
+  left: 10px;
+}
+.arabic-class .menu-image {
+  float: left;
+}
+.arabic-class .axcrypt-icons, .arabic-class .contact-icon {
+  float: right !important;
+}
+.arabic-class .sharedwith-box ul {
+  padding-inline-start: 0px;
+}
+.arabic-class .sharedwith-box ul li {
+  gap: 5px;
+}
+.arabic-class .password-create-dropdown-content dd, .arabic-class .context-menu dd {
+  margin-inline-start: 0px;
+}
+.arabic-class .context-menu {
+  right: unset;
+  left: 40px;
+}
+.arabic-class .left-section {
+  float: right;
+}
+.arabic-class .right-section {
+  float: left;
+}
+.arabic-class .signup-sec, .arabic-class .signup-sec input {
+  margin: 3% 0% 3% 0% !important;
+}
+.arabic-class .close-img {
+  float: left;
+}
+.arabic-class .free-sugtn {
+  left: 3%;
+  right: unset;
+}
+.arabic-class .info-box {
+  margin-right: 15px;
+}
+.arabic-class .tick-icon {
+  left: 0;
+  right: unset;
+}
+
 @media (min-width: 1155px) {
   .page {
     background: #F9F9F9;

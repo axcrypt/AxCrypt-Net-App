@@ -732,3 +732,250 @@ input:checked + .slider:before {
     width: 100%;
     min-height: 100%;
 }
+
+//Arabic styles
+
+.arabic-class {
+    .page-title {
+        padding-right: 0px;
+    }
+
+    .page-title::before {
+        right: unset;
+        left: -18px;
+        transform: rotate(-25deg);
+    }
+
+    .top-menu {
+        float: left !important;
+
+        .tick-icon {
+            right: unset;
+            left: 0;
+        }
+
+        .dropbtn {
+            gap: 25px;
+        }
+
+        .language-item img {
+            padding-left: 10px;
+        }
+    }
+
+    .top-menu-section {
+        .desk-stngs-popup {
+            right: unset;
+            left: 12.5%;
+        }
+
+        .notification-popup {
+            right: unset;
+            left: 2.5%;
+        }
+
+        .desk-acnt-popup {
+            right: unset;
+            left: 2.5%;
+        }
+
+        .notification-popup:after, .notification-popup:before {
+            right: 58% !important;
+        }
+
+        .desk-acnt-popup:after, .desk-acnt-popup:before {
+            right: 200px !important;
+        }
+
+        .sub-pop1 {
+            right: unset;
+            left: 28%;
+        }
+
+        .sub-pop2 {
+            right: unset;
+            left: 30%;
+        }
+
+        .key-mngnt-Popup, .subs-dtls-popup {
+            left: 17%;
+        }
+
+        .key-mngnt-Popup {
+            dd {
+                margin-inline-start: -10px;
+                padding: 5px 15px;
+
+                :hover {
+                    padding: 5px -20px;
+                }
+            }
+        }
+    }
+
+    .email-img, .pswd-img {
+        background-position: right 7px center;
+    }
+
+    .manage-acc-sec {
+        a {
+            display: flex;
+            gap: 5px;
+        }
+
+        img {
+            padding-left: 10px;
+            padding-right: unset;
+        }
+    }
+
+    .flex-column .nav-link.active.one, .flex-column .nav-link.active.two, .flex-column .nav-link.active.three, .flex-column .nav-link.active.four, .flex-column .nav-link.active.five {
+        background-position: top 4px left;
+    }
+
+    .sidebar {
+        .hide-icon {
+            float: left;
+            margin-left: -12px;
+        }
+
+        .expbd-icon {
+            left: -15px;
+        }
+    }
+
+    .acc-subs {
+        div:nth-child(2) {
+            width: 185px;
+        }
+    }
+
+    .modal-body {
+        label {
+            float: right;
+        }
+
+        .center-column {
+            margin-top: 25px;
+        }
+    }
+
+    #date-modified-toggle {
+        .center-column {
+            gap: 10px;
+            margin-inline-start: 0px;
+
+            div {
+                float: left;
+            }
+        }
+    }
+
+    .invite-text {
+        text-align: right !important;
+    }
+
+    .notification-table th {
+        text-align: right;
+    }
+
+    .notify-pg-tbl-head th {
+        padding-right: 15px;
+    }
+
+    .abt-axc {
+        .center-column div:nth-child(2) {
+            text-align: right !important;
+        }
+    }
+
+    .sharekey-content input[type=email], #secrets-keyword {
+        background-position: top 10px left 10px;
+    }
+
+    .sharekey-content .fle-exton-img img {
+        margin-left: 10px;
+    }
+
+    .sugg-popup.active {
+        right: unset;
+        left: 3%;
+    }
+
+    .nav-item span {
+        margin-right: 0px;
+        margin-left: 20px;
+    }
+
+    .axc-icon {
+        // margin-right: -222px;
+    }
+
+    .sharedwith-box {
+        transform: translateX(9%);
+    }
+
+    #cp-sec-pwd-clipbrd {
+        right: unset !important;
+        left: 10px;
+    }
+
+    .menu-image {
+        float: left;
+    }
+
+    .axcrypt-icons, .contact-icon {
+        float: right !important;
+    }
+
+    .sharedwith-box {
+        ul {
+            padding-inline-start: 0px;
+
+            li {
+                gap: 5px;
+            }
+        }
+    }
+
+    .password-create-dropdown-content, .context-menu {
+        dd {
+            margin-inline-start: 0px;
+        }
+    }
+
+    .context-menu {
+        right: unset;
+        left: 40px;
+    }
+
+    .left-section {
+        float: right;
+    }
+
+    .right-section {
+        float: left;
+    }
+
+    .signup-sec, .signup-sec input {
+        margin: 3% 0% 3% 0% !important;
+    }
+
+    .close-img {
+        float: left;
+    }
+
+    .free-sugtn {
+        left: 3%;
+        right: unset;
+    }
+
+    .info-box {
+        margin-right: 15px;
+    }
+
+    .tick-icon {
+        left: 0;
+        right: unset;
+    }
+}
