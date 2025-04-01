@@ -54,6 +54,7 @@ public class AppSettingsViewModel : ViewModelBase
         TimeoutTimeSpan = Resolve.UserSettings.ApiTimeout.ToString();
 
         _mainViewModel!.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
+        _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), (bool isLoggedOn) => { if (isLoggedOn) { StartInactivitySignOut(); } });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
@@ -215,9 +216,20 @@ public class AppSettingsViewModel : ViewModelBase
             SelectedOption = duration;
             New<UserSettings>().InactivitySignOutTime = TimeSpan.FromMinutes(int.Parse(duration.ToString()));
             InactivitySignOut = New<UserSettings>().InactivitySignOutTime.Minutes;
-            TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
-            New<InactivitySignOut>().RestartInactivityTimer();
         }, null, e);
+
+        StartInactivitySignOut();
+    }
+
+    private void StartInactivitySignOut()
+    {
+        if (!_mainViewModel.License.Has(LicenseCapability.InactivitySignOut))
+        {
+            return;
+        }
+
+        TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime, _fileOperationViewModel.IdentityViewModel));
+        New<InactivitySignOut>().RestartInactivityTimer();
     }
 
     public async void RestoreRename(EventArgs args)

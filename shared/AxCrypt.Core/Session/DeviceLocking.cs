@@ -20,13 +20,13 @@ namespace AxCrypt.Core.Session
             _temporaryLocking = temporaryLocking;
             _permanentLocking = permanentLocking;
 
-            New<IDeviceLocked>().DeviceWasLocked += DeviceWasLocked;
+            New<IDeviceLocked>().DeviceWasLockedAsync += async (sender, e) => await DeviceWasLocked(sender, e);
             New<IDeviceLocked>().Start(null);
         }
 
         private DeviceLockReason _currentLock = DeviceLockReason.None;
 
-        private async void DeviceWasLocked(object sender, DeviceLockedEventArgs e)
+        private async Task DeviceWasLocked(object sender, DeviceLockedEventArgs e)
         {
             if (!New<IUIThread>().IsOn)
             {
@@ -88,7 +88,7 @@ namespace AxCrypt.Core.Session
                 return;
             }
 
-            New<IDeviceLocked>().DeviceWasLocked -= DeviceWasLocked;
+            New<IDeviceLocked>().DeviceWasLockedAsync -= async (sender, e) => await DeviceWasLocked(sender, e);
             _disposed = true;
             GC.SuppressFinalize(this);
         }

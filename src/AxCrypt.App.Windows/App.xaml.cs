@@ -107,16 +107,11 @@ public partial class App : Application
         }
 
         CheckOfflineModeFirst();
-        //await GetApiVersionAsync(); - moved
-        //SetThisVersion(); - moved
         AppFactory.StartKeyPairService();
         AttachLogListener();
         //ConfigureUiOptions();
         PlatformInitializer.SetupPathFilters();
         IntializeControls();
-        InitializeMouseDownFilter();
-        //BindToViewModels();
-        //BindToFileOperationViewModel();
         WireUpEvents();
         SetupCommandService();
         await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.SessionStart));
@@ -148,7 +143,6 @@ public partial class App : Application
         TypeMap.Register.Singleton<IDataItemSelection>(() => new FileFolderSelection());
         TypeMap.Register.Singleton<IDeviceLocked>(() => new DeviceLocked());
         TypeMap.Register.Singleton<IKnownFolderImageProvider>(() => new KnownFolderImageProvider());
-        //TypeMap.Register.Singleton<MouseDownFilter>(() => new MouseDownFilter(this));
 
         //TypeMap.Register.Singleton<IVersion>(() => new DesktopVersion());
 
@@ -264,23 +258,6 @@ public partial class App : Application
         //Hide();
     }
 
-    private void InitializeMouseDownFilter()
-    {
-        //New<MouseDownFilter>().FormClicked += AxCryptMainForm_ClickAsync;
-    }
-
-    private async void AxCryptMainForm_ClickAsync(object sender, EventArgs e)
-    {
-        New<InactivitySignOut>().RestartInactivityTimer();
-    }
-
-    private void ConfigureShowHideRecentFiles(bool hideRecentFiles)
-    {
-        //_optionsHideRecentFilesToolStripMenuItem.Checked = hideRecentFiles;
-        //_recentFilesListView.Enabled = !hideRecentFiles;
-        //_recentFilesTabPage.ToolTipText = hideRecentFiles ? Texts.HideRecentFilesListTabToolTipText : string.Empty;
-    }
-
     private DeviceLocking _deviceLocking;
 
     private void WireUpEvents()
@@ -290,9 +267,9 @@ public partial class App : Application
             {
                 await EncryptPendingFiles();
 
-                if (await _fileOperationViewModel.IdentityViewModel.LogOff.CanExecuteAsync(null))
+                if (await _fileOperationViewModel.IdentityViewModel.LogOffLogOn.CanExecuteAsync(null))
                 {
-                    await _fileOperationViewModel.IdentityViewModel.LogOff.ExecuteAsync(null);
+                    await _fileOperationViewModel.IdentityViewModel.LogOffLogOn.ExecuteAsync(null);
                 }
             },
             async () =>
@@ -343,10 +320,6 @@ public partial class App : Application
     {
         string appTitle = await new Display().WindowTitleTextAsync(isLoggedOn);
         SetAppWindowTitle(appTitle);
-    }
-
-    private static void WireDownEvents()
-    {
     }
 
     private void SetupCommandService()

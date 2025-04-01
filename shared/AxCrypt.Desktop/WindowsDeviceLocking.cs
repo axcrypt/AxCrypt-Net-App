@@ -1,21 +1,15 @@
 ﻿using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static AxCrypt.Desktop.NativeMethods;
 using static AxCrypt.Abstractions.TypeResolve;
 using System.Runtime.InteropServices;
-using AxCrypt.Abstractions;
 
 namespace AxCrypt.Desktop
 {
     public class WindowsDeviceLocking : IDisposable
     {
-        public event EventHandler<DeviceLockedEventArgs> DeviceWasLocked;
+        public event Func<object, DeviceLockedEventArgs, Task> DeviceWasLockedAsync;
 
         private IDelayTimer _timer = New<IDelayTimer>();
 
@@ -23,12 +17,12 @@ namespace AxCrypt.Desktop
 
         public WindowsDeviceLocking()
         {
-            SystemEvents.SessionEnding += SystemEvents_SessionEnding;
-            SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
-            SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
+            SystemEvents.SessionEnding += async (sender, e) => await SystemEvents_SessionEnding(sender, e);
+            SystemEvents.SessionSwitch += async (sender, e) => await SystemEvents_SessionSwitch(sender, e);
+            SystemEvents.PowerModeChanged += async (sender, e) => await SystemEvents_PowerModeChanged(sender, e);
 
             _timer.SetInterval(TimeSpan.FromSeconds(2));
-            _timer.Elapsed += PollScreenSaverState;
+            _timer.Elapsed += async (sender, e) => await PollScreenSaverState(sender, e);
         }
 
         /// <summary>
@@ -44,7 +38,7 @@ namespace AxCrypt.Desktop
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "w")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Param")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "l")]
-        public void Message(int msg, IntPtr wParam, IntPtr lParam)
+        public async Task Message(int msg, IntPtr wParam, IntPtr lParam)
         {
             if (msg != WM_POWERBROADCAST)
             {
@@ -69,17 +63,17 @@ namespace AxCrypt.Desktop
             IntPtr pData = IntPtr.Add(lParam, Marshal.SizeOf(ps));
 
             Int32 iData = (Int32)Marshal.PtrToStructure(pData, typeof(Int32));
-            Notify(iData == 0);
+            await Notify(iData == 0);
         }
 
-        private void Notify(bool monitorIsOff)
+        private async Task Notify(bool monitorIsOff)
         {
             if (!DidScreenTurnOff(monitorIsOff))
             {
                 return;
             }
 
-            OnDeviceWasLocked(new DeviceLockedEventArgs(DeviceLockReason.Temporary));
+            await OnDeviceWasLockedAsync(new DeviceLockedEventArgs(DeviceLockReason.Temporary));
         }
 
         private IntPtr _handleToPowerOnNotificationRegistration;
@@ -92,13 +86,13 @@ namespace AxCrypt.Desktop
             _handleToMonitorStateNotificationRegistration = NativeMethods.RegisterPowerSettingNotification(handle, ref NativeMethods.GUID_CONSOLE_DISPLAY_STATE, NativeMethods.DEVICE_NOTIFY_WINDOW_HANDLE);
         }
 
-        private void PollScreenSaverState(object sender, EventArgs e)
+        private async Task PollScreenSaverState(object sender, EventArgs e)
         {
-            PollScreenSaverState();
+            await PollScreenSaverState();
             _timer.Start();
         }
 
-        private void PollScreenSaverState()
+        private async Task PollScreenSaverState()
         {
             const int SPI_GETSCREENSAVERRUNNING = 114;
             bool screenSaverIsRunning = false;
@@ -113,7 +107,7 @@ namespace AxCrypt.Desktop
                 return;
             }
 
-            OnDeviceWasLocked(new DeviceLockedEventArgs(DeviceLockReason.Temporary));
+            await OnDeviceWasLockedAsync(new DeviceLockedEventArgs(DeviceLockReason.Temporary));
         }
 
         private bool DidScreenTurnOff(bool isScreenOff)
@@ -132,17 +126,34 @@ namespace AxCrypt.Desktop
             return isScreenOff;
         }
 
-        protected virtual void OnDeviceWasLocked(DeviceLockedEventArgs e)
+        protected virtual async Task OnDeviceWasLockedAsync(DeviceLockedEventArgs e)
         {
-            New<IUIThread>().PostTo(() => DeviceWasLocked?.Invoke(this, e));
+            if (DeviceWasLockedAsync != null)
+            {
+                Delegate[] eventHandlers = DeviceWasLockedAsync.GetInvocationList();
+
+                foreach (Delegate handler in eventHandlers)
+                {
+                    Func<object, DeviceLockedEventArgs, Task> asyncHandler = (Func<object, DeviceLockedEventArgs, Task>)handler;
+                    try
+                    {
+                        await asyncHandler(this, e);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error invoking event handler: {ex.Message}");
+                    }
+                }
+            }
         }
 
-        private void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
+
+        private async Task SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
             switch (e.Mode)
             {
                 case PowerModes.Suspend:
-                    OnDeviceWasLocked(new DeviceLockedEventArgs(DeviceLockReason.Temporary));
+                    await OnDeviceWasLockedAsync(new DeviceLockedEventArgs(DeviceLockReason.Temporary));
                     break;
 
                 default:
@@ -150,14 +161,14 @@ namespace AxCrypt.Desktop
             }
         }
 
-        private void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
+        private async Task SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
         {
             switch (e.Reason)
             {
                 case SessionSwitchReason.ConsoleDisconnect:
                 case SessionSwitchReason.RemoteDisconnect:
                 case SessionSwitchReason.SessionLock:
-                    OnDeviceWasLocked(new DeviceLockedEventArgs(DeviceLockReason.Temporary));
+                    await OnDeviceWasLockedAsync(new DeviceLockedEventArgs(DeviceLockReason.Temporary));
                     break;
 
                 default:
@@ -165,14 +176,14 @@ namespace AxCrypt.Desktop
             }
         }
 
-        private void SystemEvents_SessionEnding(object sender, SessionEndingEventArgs e)
+        private async Task SystemEvents_SessionEnding(object sender, SessionEndingEventArgs e)
         {
             switch (e.Reason)
             {
                 case SessionEndReasons.Logoff:
                 case SessionEndReasons.SystemShutdown:
                     e.Cancel = true;
-                    OnDeviceWasLocked(new DeviceLockedEventArgs(DeviceLockReason.Permanent));
+                    await OnDeviceWasLockedAsync(new DeviceLockedEventArgs(DeviceLockReason.Permanent));
                     break;
 
                 default:
@@ -197,9 +208,9 @@ namespace AxCrypt.Desktop
                 return;
             }
 
-            SystemEvents.SessionEnding -= SystemEvents_SessionEnding;
-            SystemEvents.SessionSwitch -= SystemEvents_SessionSwitch;
-            SystemEvents.PowerModeChanged -= SystemEvents_PowerModeChanged;
+            SystemEvents.SessionEnding -= async (sender, e) => await SystemEvents_SessionEnding(sender, e);
+            SystemEvents.SessionSwitch -= async (sender, e) => await SystemEvents_SessionSwitch(sender, e);
+            SystemEvents.PowerModeChanged -= async (sender, e) => await SystemEvents_PowerModeChanged(sender, e);
 
             if (_timer != null)
             {

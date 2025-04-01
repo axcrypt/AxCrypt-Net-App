@@ -189,4 +189,9 @@ public class LogOnViewModel : ViewModelBase
     {
         OnSubscriptionChanged?.Invoke();
     }
+
+    public async Task AxCryptMainForm_ClickAsync(EventArgs e)
+    {
+        New<InactivitySignOut>().RestartInactivityTimer();
+    }
 }

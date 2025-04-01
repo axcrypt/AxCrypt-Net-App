@@ -35,7 +35,7 @@ public class AppFactory
     public static void RegisterTypeFactories()
     {
         TypeMap.Register.Singleton<IGlobalNotification>(() => new NotifyIconGlobalNotification());
-        TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime));
+        TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime, null));
         TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
 
         TypeMap.Register.Singleton<SecretSecureStorage>(() => new SecretSecureStorage());

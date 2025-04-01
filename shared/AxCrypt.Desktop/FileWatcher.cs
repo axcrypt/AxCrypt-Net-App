@@ -52,7 +52,7 @@ namespace AxCrypt.Desktop
             }
 
             _delayedAction = delayedAction;
-            _delayedAction.Action += (sender, e) => { OnDelayedNotification(); };
+            _delayedAction.ActionAsync += async () => { OnDelayedNotification(); };
 
             _fileInfo = New<IDataStore>(path);
             _fileSystemWatcher = new FileSystemWatcher(_fileInfo.FullName);

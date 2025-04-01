@@ -41,11 +41,11 @@ namespace AxCrypt.Core.Runtime
         /// <summary>
         /// The action to perform after the specified idle time.
         /// </summary>
-        public event EventHandler Action;
-
-        protected virtual void OnAction()
+        public event Func<Task> ActionAsync;
+        
+        protected virtual async Task OnActionAsync()
         {
-            Action?.Invoke(this, new EventArgs());
+            await ActionAsync();
         }
 
         /// <summary>
@@ -61,14 +61,14 @@ namespace AxCrypt.Core.Runtime
 
             _timer = timer;
             _timer.SetInterval(minimumIdleTime);
-            _timer.Elapsed += HandleTimerElapsedEvent;
+            _timer.Elapsed += async (sender, e) => await HandleTimerElapsedEvent(sender, e);
         }
 
-        private void HandleTimerElapsedEvent(object sender, EventArgs e)
+        private async Task HandleTimerElapsedEvent(object sender, EventArgs e)
         {
             if (_timer != null)
             {
-                OnAction();
+                await OnActionAsync();
             }
         }
 

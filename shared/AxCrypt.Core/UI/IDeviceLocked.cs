@@ -8,7 +8,7 @@ namespace AxCrypt.Core.UI
 {
     public interface IDeviceLocked
     {
-        event EventHandler<DeviceLockedEventArgs> DeviceWasLocked;
+        event Func<object, DeviceLockedEventArgs, Task> DeviceWasLockedAsync;
 
         void Start(object state);
     }

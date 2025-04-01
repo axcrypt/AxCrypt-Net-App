@@ -72,7 +72,6 @@ public partial class MainPage : ContentPage, ISignIn
 
         _logOnService.MainViewModel = _mainViewModel;
         _logOnService.FileOperationViewModel = _fileOperationViewModel;
-        //InitializeMouseDownFilter();
 
         await SignInAsync();
     }
@@ -333,23 +332,5 @@ public partial class MainPage : ContentPage, ISignIn
             await aex.HandleApiExceptionAsync();
             _apiVersion = ApiVersion.Zero;
         }
-    }
-
-    private void UpdateKnownFolders(IEnumerable<KnownFolder> folders)
-    {
-        foreach (KnownFolder folder in folders)
-        {
-            //GetIconClass(folder.My.FullName);
-        }
-    }
-
-    private void InitializeMouseDownFilter()
-    {
-        New<MouseDownFilter>().FormClicked += AxCryptMainForm_ClickAsync;
-    }
-
-    private async void AxCryptMainForm_ClickAsync(object sender, EventArgs e)
-    {
-        New<InactivitySignOut>().RestartInactivityTimer();
     }
 }

@@ -5,52 +5,44 @@ namespace AxCrypt.App.Windows.Infrastructure;
 
 public class DeviceLocked : IDeviceLocked, IDisposable
 {
-    private class BroadcastReceiverForm
-    //private class BroadcastReceiverForm : Form
-    {
-        private WindowsDeviceLocking _deviceLocking;
-
-        public BroadcastReceiverForm(WindowsDeviceLocking deviceLocking)
-        {
-            _deviceLocking = deviceLocking;
-        }
-
-        //protected override void WndProc(ref Message m)
-        //{
-        //    base.WndProc(ref m);
-        //    _deviceLocking.Message(m.Msg, m.WParam, m.LParam);
-        //}
-
-        //protected override void OnLoad(EventArgs e)
-        //{
-        //    base.OnLoad(e);
-        //    Visible = false;
-        //}
-    }
-
     private WindowsDeviceLocking _deviceLocking = new WindowsDeviceLocking();
 
-    public event EventHandler<DeviceLockedEventArgs> DeviceWasLocked;
+    public event Func<object, DeviceLockedEventArgs, Task> DeviceWasLockedAsync;
 
     public DeviceLocked()
     {
-        _deviceLocking.DeviceWasLocked += DeviceLocked_DeviceWasLocked;
+        _deviceLocking.DeviceWasLockedAsync += async (sender, e) => await DeviceLocked_DeviceWasLocked(sender, e);
     }
 
-    private void DeviceLocked_DeviceWasLocked(object sender, DeviceLockedEventArgs e)
+    private async Task DeviceLocked_DeviceWasLocked(object sender, DeviceLockedEventArgs e)
     {
-        DeviceWasLocked?.Invoke(this, e);
+        if (DeviceWasLockedAsync != null)
+        {
+            Delegate[] eventHandlers = DeviceWasLockedAsync.GetInvocationList();
+
+            foreach (Delegate handler in eventHandlers)
+            {
+                Func<object, DeviceLockedEventArgs, Task> asyncHandler = (Func<object, DeviceLockedEventArgs, Task>)handler;
+                try
+                {
+                    await asyncHandler(this, e); 
+                }
+                catch (Exception ex)
+                {
+                    // Handle exception (optional)
+                    Console.WriteLine($"Error invoking event handler: {ex.Message}");
+                }
+            }
+        }
     }
 
-    //private Form _form;
 
     /// <summary>
     /// Starts this instance. Must be called on the main UI thread.
     /// </summary>
     public void Start(object state)
     {
-        //_form = new BroadcastReceiverForm(_deviceLocking);
-        //_deviceLocking.Start(_form.Handle);
+        _deviceLocking.Start(0);
     }
 
     private bool _disposed;
@@ -72,17 +64,10 @@ public class DeviceLocked : IDeviceLocked, IDisposable
 
         if (_deviceLocking != null)
         {
-            _deviceLocking.DeviceWasLocked -= DeviceLocked_DeviceWasLocked;
+            _deviceLocking.DeviceWasLockedAsync -= async (sender, e) => await DeviceLocked_DeviceWasLocked(sender, e);
             _deviceLocking.Dispose();
             _deviceLocking = null;
         }
-
-        //if (_form != null)
-        //{
-        //    _form.Close();
-        //    _form.Dispose();
-        //    _form = null;
-        //}
 
         _disposed = true;
     }

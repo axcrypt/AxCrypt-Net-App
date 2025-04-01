@@ -60,6 +60,15 @@ namespace AxCrypt.Core.UI.ViewModel
             LogOnAsync = new AsyncDelegateAction<object>(async (o) => { if (!_knownIdentities.IsLoggedOn) { LogOnIdentity = await LogOnActionAsync(); } });
             LogOff = new AsyncDelegateAction<object>(async (p) => { await LogOffAction(); LogOnIdentity = LogOnIdentity.Empty; }, (o) => Task.FromResult(_knownIdentities.IsLoggedOn));
             LogOnLogOff = new AsyncDelegateAction<object>(async (o) => LogOnIdentity = await LogOnLogOffActionAsync());
+            LogOffLogOn = new AsyncDelegateAction<object>(async (o) => 
+            { 
+                await LogOffAction(); 
+                LogOnIdentity = LogOnIdentity.Empty; 
+                if (!_knownIdentities.IsLoggedOn) 
+                { 
+                    LogOnIdentity = await LogOnActionAsync(); 
+                }
+            }, (o) => Task.FromResult(_knownIdentities.IsLoggedOn));
             AskForDecryptPassphrase = new AsyncDelegateAction<string>(async (name) => LogOnIdentity = await AskForDecryptPassphraseActionAsync(name));
             AskForLogOnPassphrase = new AsyncDelegateAction<LogOnIdentity>(async (id) => LogOnIdentity = await AskForLogOnPassphraseActionAsync(id, String.Empty));
 
@@ -87,6 +96,8 @@ namespace AxCrypt.Core.UI.ViewModel
         public AsyncDelegateAction<object> LogOff { get; private set; }
 
         public IAsyncAction LogOnLogOff { get; private set; }
+
+        public IAsyncAction LogOffLogOn { get; private set; }
 
         public IAsyncAction AskForDecryptPassphrase { get; private set; }
 

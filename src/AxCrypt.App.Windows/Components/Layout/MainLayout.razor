@@ -11,7 +11,7 @@
     string arabic = Core.Resolve.UserSettings.CultureName == "ar" ? "arabic-class" : "";
 }
 
-<div class="page @arabic" dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
+<div class="page @arabic" dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")" @onclick="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)" @onmousemove="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)">
     @if (PageRendering)
     {
         <main>
@@ -67,7 +67,6 @@
             }
             else
             {
-
                 <div id="body-section">
                     @Body
                 </div>

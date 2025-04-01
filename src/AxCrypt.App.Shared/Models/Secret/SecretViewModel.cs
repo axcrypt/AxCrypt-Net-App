@@ -141,6 +141,11 @@ public class SecretViewModel : ViewModelBase
         try
         {
             IEnumerable<GroupKeyPairApiModel> groups = identity.UserGroupKeyPairs;
+            if (groups == null)
+            {
+                return;
+            }
+
             foreach (GroupKeyPairApiModel group in groups)
             {
                 if (string.IsNullOrEmpty(group.Public))

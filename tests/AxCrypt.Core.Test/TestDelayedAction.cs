@@ -57,7 +57,7 @@ namespace AxCrypt.Core.Test
             FakeSleep fakeSleep = new FakeSleep();
             using (DelayedAction delayedAction = new DelayedAction(new FakeDelayTimer(fakeSleep), new TimeSpan(0, 0, 0, 0, 1)))
             {
-                delayedAction.Action += (sender, e) => wasHere = true;
+                delayedAction.ActionAsync += async () => wasHere = true;
                 fakeSleep.Time(new TimeSpan(0, 0, 0, 0, 50));
                 Assert.That(wasHere, Is.False, "The event should not be triggered until started.");
             }
@@ -70,7 +70,7 @@ namespace AxCrypt.Core.Test
             FakeSleep fakeSleep = new FakeSleep();
             using (DelayedAction delayedAction = new DelayedAction(new FakeDelayTimer(fakeSleep), new TimeSpan(0, 0, 0, 0, 1)))
             {
-                delayedAction.Action += (sender, e) => wasHere = true;
+                delayedAction.ActionAsync += async () => wasHere = true;
                 delayedAction.StartIdleTimer();
                 fakeSleep.Time(new TimeSpan(0, 0, 0, 0, 50));
                 Assert.That(wasHere, Is.True, "The event should be triggered once started.");
@@ -87,7 +87,7 @@ namespace AxCrypt.Core.Test
             FakeSleep fakeSleep = new FakeSleep();
             using (DelayedAction delayedAction = new DelayedAction(new FakeDelayTimer(fakeSleep), new TimeSpan(0, 0, 0, 0, 5)))
             {
-                delayedAction.Action += (sender, e) => ++eventCount;
+                delayedAction.ActionAsync += async () => ++eventCount;
                 for (int i = 0; i < 10; ++i)
                 {
                     delayedAction.StartIdleTimer();
@@ -106,7 +106,7 @@ namespace AxCrypt.Core.Test
             FakeSleep fakeSleep = new FakeSleep();
             using (DelayedAction delayedAction = new DelayedAction(new FakeDelayTimer(fakeSleep), new TimeSpan(0, 0, 0, 0, 1)))
             {
-                delayedAction.Action += (sender, e) => wasHere = true;
+                delayedAction.ActionAsync += async () => wasHere = true;
                 delayedAction.StartIdleTimer();
                 Assert.That(wasHere, Is.False, "The event should not be triggered immediately.");
             }

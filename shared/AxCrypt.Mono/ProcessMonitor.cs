@@ -26,11 +26,11 @@ namespace AxCrypt.Mono
             _action = new DelayedAction(New<IDelayTimer>(), TimeSpan.FromMilliseconds(500));
             _currentSessionId = Process.GetCurrentProcess().SessionId;
             _processIds = GetCurrentIds();
-            _action.Action += CheckProcesses;
+            _action.ActionAsync += async ()=> await CheckProcesses(this, new EventArgs());
             _action.StartIdleTimer();
         }
 
-        private async void CheckProcesses(object sender, EventArgs e)
+        private async Task CheckProcesses(object sender, EventArgs e)
         {
             bool processHasExited = false;
             processHasExited = CheckForExitedProcesses();
