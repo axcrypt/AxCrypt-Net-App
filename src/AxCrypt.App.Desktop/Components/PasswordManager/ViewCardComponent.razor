@@ -116,7 +116,7 @@
                     <form id="temp-add-share-user" @onsubmit="ApplyShare">
                         <div class="sharewith-box" style="padding: 20px; ">
                             <div style="margin:auto; justify-content:flex-start; flex-wrap:wrap; justify-content:space-around; width:100% " class="row">
-                                <div class="small-8 columns">
+                                <div class="small-7 columns">
                                     <input type="text" id="new-member-email" name="memberEmail" placeholder="someone@email.example" @onclick="showSyncPopup" @oninput="shareSecretViewModel.OnEmailInput" @bind="@shareSecretViewModel.SecretSharingUserEmail" @onkeydown="HandleKeyDown" style="width: 100%; height: 40px; border-radius:5px ">
                                     @if (shareSecretViewModel.ShowUserSuggestion && shareSecretViewModel.SuggestedUnSharedUsers.Any())
                                     {
@@ -140,7 +140,7 @@
                                         </ul>
                                     }
                                 </div>
-                                <div class="small-2">
+                                <div class="small-3">
                                     <select style="height: 35px; border-radius:5px" id="shareVisibilityOptions" name="Visibility" title="Visibility" @bind="shareSecretViewModel.VisibilityType">
                                         @foreach (SecretShareVisibility visibility in Enum.GetValues(typeof(SecretShareVisibility)))
                                         {
@@ -149,7 +149,7 @@
                                     </select>
                                 </div>
                                 <div class="small-2 columns">
-                                    <input style=" margin-top:4%; width: 90px; margin-left: 20px;" id="Add-Share-Users" type="button" class="button active btn-small " @onclick="shareSecretViewModel.AddUserToSharedListAsync" value="Add" />
+                                    <input style=" margin-top:4%; max-width: 90px; width: 80%;float: right;" id="Add-Share-Users" type="button" class="button active btn-small " @onclick="shareSecretViewModel.AddUserToSharedListAsync" value="Add" />
                                 </div>
                             </div>
                             <div class="" style="position: relative; display: flow;">

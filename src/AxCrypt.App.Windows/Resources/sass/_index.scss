@@ -139,7 +139,7 @@
 
 .sub-box {
     margin-top: 10px;
-    min-width: 158px;
+    width: 158px;
     height: 100px;
     border-radius: 8px;
     color: #FFFFFF;
@@ -1117,5 +1117,25 @@
 
     .fle-exton-img .fle-nme {
         padding-left: 3%;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .sub-box {
+        width: 145px;
+    }
+
+    .act-box {
+        width: 75px;
+        height: 75px;
+        padding: 10px 5px;
+    }
+
+    .mre-actn-box {
+        width: 178px;
+    }
+
+    #mySection {
+        gap: 0px !important;
     }
 }

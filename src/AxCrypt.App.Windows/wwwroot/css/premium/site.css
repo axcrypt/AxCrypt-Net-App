@@ -38,6 +38,8 @@
 }
 
 .top-menu {
+  position: absolute;
+  right: 40px;
   float: right;
   cursor: pointer;
   display: flex;
@@ -689,10 +691,15 @@ input:checked + .slider:before {
 }
 @media (min-width: 769px) and (max-width: 1290px) {
   .page-title-container {
-    width: 71%;
+    width: 43%;
   }
   .page-title, h1 {
     font-size: 26px !important;
+  }
+}
+@media (min-width: 1291px) and (max-width: 1510px) {
+  .page-title-container {
+    width: 46%;
   }
 }
 @media (min-width: 1450px) {
@@ -721,6 +728,8 @@ input:checked + .slider:before {
 }
 .arabic-class .top-menu {
   float: left !important;
+  right: unset;
+  left: 40px;
 }
 .arabic-class .top-menu .tick-icon {
   right: unset;

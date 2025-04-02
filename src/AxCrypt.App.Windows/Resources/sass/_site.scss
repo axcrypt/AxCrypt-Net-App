@@ -39,6 +39,8 @@
 }
 
 .top-menu {
+    position: absolute;
+    right: 40px;
     float: right;
     cursor: pointer;
     display: flex;
@@ -706,11 +708,16 @@ input:checked + .slider:before {
 
 @media (min-width: 769px) and (max-width: 1290px) {
     .page-title-container {
-        width: 71%;
+        width: 43%;
     }
 
     .page-title, h1 {
         font-size: 26px !important;
+    }
+}
+@media (min-width: 1291px) and (max-width: 1510px) {
+    .page-title-container {
+        width: 46%;
     }
 }
 
@@ -748,6 +755,8 @@ input:checked + .slider:before {
 
     .top-menu {
         float: left !important;
+        right: unset;
+        left: 40px;
 
         .tick-icon {
             right: unset;
