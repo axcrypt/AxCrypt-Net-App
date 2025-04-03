@@ -1,4 +1,6 @@
 ﻿using AxCrypt.App.Shared.Services.Interface;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AxCrypt.App.Desktop.Services;
 
@@ -15,7 +17,7 @@ public class CssService : ICssService
             _ => "default"
         };
 
-        string[] cssFiles = new[]
+        IList<string> cssFiles = new List<string>
         {
             $"css/{cssBasePath}/sidemenu.min.css",
             $"css/{cssBasePath}/index.min.css",
@@ -25,9 +27,11 @@ public class CssService : ICssService
             $"css/{cssBasePath}/newsecret.min.css",
             $"css/{cssBasePath}/secretlist.min.css",
             $"css/{cssBasePath}/support.min.css",
-            $"css/{cssBasePath}/sharesecret.min.css"
         };
 
-        return cssFiles;
+        if (subscriptionLevel != "free")
+            cssFiles.Add($"css/{cssBasePath}/sharesecret.min.css");
+
+        return cssFiles.ToArray();
     }
 }

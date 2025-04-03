@@ -45,8 +45,26 @@
             }
         }, { passive: false });
     </script>
-    <script>
+    <script type="text/javascript">
+        function isCssFileAdded(cssFilePath) {
+            // Get all the <link> elements in the <head>
+            const links = document.getElementsByTagName('link');
+
+            // Loop through each <link> element
+            for (let i = 0; i < links.length; i++) {
+                if (links[i].rel === 'stylesheet' && links[i].href === window.location.origin + "/" + cssFilePath) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         window.addCssFile = function (cssFile) {
+            if (isCssFileAdded(cssFile)) {
+                return;
+            }
+
             var link = document.createElement("link");
             link.rel = "stylesheet";
             link.type = "text/css";
@@ -76,7 +94,7 @@
 <script src="js/popup.js"></script>
 <script src="js/devicetype.js"></script>
 <script src="js/swipearea.js"></script>
-<script src="js/supportblur.js"></script>
+<!--<script src="js/supportblur.js"></script>-->
 <script src="js/security.js"></script>
 <script src="js/secretsEdit.js"></script>
 <script src="js/secretsList.js"></script>

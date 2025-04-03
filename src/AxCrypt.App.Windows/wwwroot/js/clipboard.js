@@ -1,6 +1,12 @@
 function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function () {
-        console.log('Copied to clipboard successfully!');
+    navigator.clipboard.writeText(text).then(() => {
+        const copiedMessageElement = document.getElementById("copiedMessage");
+        if (copiedMessageElement) {
+            copiedMessageElement.style.display = "block"; // Show the message
+            setTimeout(() => {
+                copiedMessageElement.style.display = "none"; // Hide after 2 seconds
+            }, 2000);
+        }
     }, function (err) {
         console.error('Could not copy text: ', err);
     });

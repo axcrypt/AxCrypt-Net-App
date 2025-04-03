@@ -68,6 +68,7 @@
                         </div>
                     </li>
                 }
+                <span id="copiedMessage" style="display:none; color: green; font-weight: bold;">Copied!</span>
                 <li>
                     <div class="center-column" style="gap: 20px;">
                         <div>
@@ -297,6 +298,7 @@
         if (isShared)
         {
             StatusAlertService.Success(Texts.ShareSecretSuccess);
+            shareSecretViewModel!.EnableApplyButton = false;
         }
     }
 

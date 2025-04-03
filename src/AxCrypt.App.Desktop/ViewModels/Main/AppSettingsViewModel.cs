@@ -30,7 +30,6 @@ public class AppSettingsViewModel : ViewModelBase
     private FileOperationViewModel? _fileOperationViewModel;
     private ManageAccountViewModel? _viewModel;
     private RecentFilesViewModel? _recentFilesViewModel;
-    private bool _updateCheckTriggered = false;
 
     public AppSettingsViewModel(RecentFilesViewModel recentFilesViewModel)
     {

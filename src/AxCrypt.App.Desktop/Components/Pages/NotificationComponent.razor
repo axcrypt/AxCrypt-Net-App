@@ -26,7 +26,7 @@
 }
 else
 {
-    <div class="medium-12 columns parent-container" style="min-height:50vh; max-height: 635px; overflow-y: scroll;">
+    <div class="medium-12 columns parent-container" style="min-height:50vh;height: 84vh;overflow-y: scroll;">
         <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
         <table class="notification-table curved-table">
             <thead class="notify-pg-tbl-head">
@@ -35,7 +35,7 @@ else
                     <th style="width: 50%;">@Texts.ActivityText</th>
                     <th style="width:25%;" @onclick="SortByDate">
                         Date
-                        <img class="notifiarrow" src="@(model.DateSortDirection == SortDirection.Ascending ? "/images/up-arrow.png" : "/images/down-arrow.png")" />
+                        <img class="notifiarrow" src="" />
                     </th>
                     <th style="width:15%;">@Texts.ColumnStatusHeader</th>
                     <th style="width: 5%;"></th>

@@ -133,6 +133,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
 
         var targetobj = e.target;
+        if (targetobj == null) {
+            return;
+        }
         //Handle show/hide the language dropdown popup
         var langSelArrow = document.getElementById("lang-action-btn-arw");
         if (targetobj.id === "lang-dropdown-action-btn" || targetobj.parentElement.id === "lang-dropdown-action-btn") {

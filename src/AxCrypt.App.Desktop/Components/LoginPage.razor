@@ -23,18 +23,25 @@
                 <div style="display:flex;">
                     <div style="width:100%;">
                         <label>@Texts.EmailLabel</label>
-                        <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" tabindex="1" />
+                        <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" tabindex="1" readonly="@(string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? null : "readonly")" />
                     </div>
                 </div>
+                @if (!string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail))
+                {
+                    <div style="width:100%;">
+                        <a href="" class="nav-link grn-clr" style="float:right;" tabindex="3" @onclick="@LogOnViewModel.ClearAllSettingsAndRestartAsync">@Texts.SwitchUserButtonText</a>
+                    </div>
+                }
                 <div>
                     <label>@Texts.PassphrasePrompt</label>
                     <input type="password" id="password-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" tabindex="2" />
                 </div>
                 <br />
                 @* <div class="check-bx" style="margin: 15px 0px;">
-                    <input type="checkbox" checked="@LogOnViewModel.RememberMe" @bind-value="LogOnViewModel.RememberMe" />
-                    <span class="che-txt">@Texts.PromptKeepMeSignedIn</span>
-                    </div> *@
+            <input type="checkbox" checked="@LogOnViewModel.RememberMe" @bind-value="LogOnViewModel.RememberMe" />
+            <span class="che-txt">@Texts.PromptKeepMeSignedIn</span>
+            </div> *@
+
                 <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;" tabindex="3">Log in</button>
                 <div class="signup-link">
                     <div style="display:inline-flex; align-items:center;">

@@ -1,4 +1,4 @@
-export function initializeFileDropZone(dropZoneElement, inputFile) {
+function initializeFileDropZone(dropZoneElement, inputFile) {
     function onDragHover(e) {
         e.preventDefault();
         dropZoneElement.classList.add("hover");

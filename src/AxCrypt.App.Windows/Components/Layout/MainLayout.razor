@@ -6,6 +6,7 @@
 @inject IJSRuntime JS
 @inject LogOnViewModel LogOnViewModel
 @inject ICssService CssService
+@inject NavigationManager navigationManager
 
 @{
     string arabic = Core.Resolve.UserSettings.CultureName == "ar" ? "arabic-class" : "";
@@ -90,6 +91,7 @@
         LogOnViewModel.OnSubscriptionChanged += UpdateSubscriptionState;
         SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
         UpdateSubscriptionState();
+
         base.OnInitialized();
     }
 
@@ -103,6 +105,11 @@
     {
         SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
         await AddCssAsync(SubscriptionLevel);
+        string currentURi = navigationManager.Uri;
+        if (!LogOnViewModel.IsLoggedOn && currentURi.Replace(navigationManager.BaseUri, "") != "")
+        {
+            navigationManager.NavigateTo("/", true);
+        }
         UpdateUIState();
     }
 

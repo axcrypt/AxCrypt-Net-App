@@ -34,7 +34,7 @@
     }
     @if (LogOnModel.SubscriptionLevel != SubscriptionLevel.Free)
     {
-        <div id="support-body-section" class="suprt-max-height">
+        <div id="support-body-section" class="suprt-max-height" style="min-height:50vh;max-height:82vh;">
             <div class="label-text">
                 <label>@Texts.SupportBodyPrompt</label>
             </div>
@@ -75,7 +75,7 @@
             </div>
             <EditForm Model="@SupportViewModel" OnValidSubmit="SubmitSupportAsync">
                 <div>
-                    <textarea class="sup-text-blur" style="border-radius: 16px; min-height: 300px; width: 100%; padding:20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Body" tabindex=1>
+                    <textarea class="sup-text-blur" style="border-radius: 16px;min-height: 35vh;width: 100%;max-height: 50vh;padding:10px 20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Body" tabindex=1>
                                         </textarea>
                 </div>
                 <div class="btn-sec">

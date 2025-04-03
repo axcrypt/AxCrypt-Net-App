@@ -9,7 +9,6 @@ using AxCrypt.Core.UI.ViewModel;
 using System;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
-using static AxCrypt.App.Desktop.ViewModels.UpgradeVersionViewModel;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 
@@ -43,7 +42,7 @@ public class LogOnViewModel : ViewModelBase
 
         IsVisible = false;
 
-        mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { if (loggedOn) { ProcessIndicator?.Dispose(); OnSubscriptionChanged?.Invoke(); }/* else { IsVisible = !loggedOn; }*/ });
+        mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { if (loggedOn) { ProcessIndicator?.Dispose(); OnSubscriptionChanged?.Invoke(); } });
         mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnSubscriptionChanged?.Invoke(); } });
     }
 
@@ -193,5 +192,12 @@ public class LogOnViewModel : ViewModelBase
     public async Task AxCryptMainForm_ClickAsync(EventArgs e)
     {
         New<InactivitySignOut>().RestartInactivityTimer();
+    }
+
+    public async void ClearAllSettingsAndRestartAsync()
+    {
+        await new ApplicationManager().ClearAllSettings();
+        LogOnAccountModel = new LogOnAccountViewModel(Core.Resolve.UserSettings, "");
+        OnLogOnDialogVisibilityChanged?.Invoke(_isVisible);
     }
 }

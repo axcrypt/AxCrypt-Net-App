@@ -34,15 +34,13 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     private readonly string _sortOptionAll = Texts.SecretsAllItems;
     private readonly string _sortOptionRecent = Texts.SecretsRecentlyAdded;
     private readonly string _sortOptionShared = Texts.PromptSharedWith;
-    private bool _activateSharedListFilter = false;
-    private LogOnIdentity _identity;
+
     private LogOnViewModel _logOnViewModel;
 
     private IStatusAlertService? _StatusAlertService;
 
     public SecretsListViewModel(IStatusAlertService statusAlertService)
     {
-        _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
         _StatusAlertService = statusAlertService;
         _logOnViewModel = AxCServiceProviderExtension.GetService<LogOnViewModel>();
 
@@ -252,8 +250,6 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
     /// <returns>SecretCollection containing found secrets</returns>
     public async Task FindSecrets()
     {
-        _activateSharedListFilter = false;
-
         if (_CachedSecrets!.ContainsKey(SecretFilterOption.All))
         {
             Secrets = _CachedSecrets[SecretFilterOption.All];
@@ -397,7 +393,6 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     public async Task FilterSharedSecrets(SecretFilterOption secretFilter)
     {
-        _activateSharedListFilter = true;
         if (SelectedSecretListFilter == secretFilter)
         {
             return;
