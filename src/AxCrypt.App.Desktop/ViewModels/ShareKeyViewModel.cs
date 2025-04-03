@@ -55,6 +55,7 @@ public class ShareKeyViewModel : ViewModelBase
 
     public async Task SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel)
     {
+        EnableApplyButton = false;
         PageResult = DialogResult.None;
         SelectedFilesOrFolders = filesOrFoldersPath;
         _viewModel = sharingListViewModel;
@@ -400,12 +401,12 @@ public class ShareKeyViewModel : ViewModelBase
 
     public async Task ApplyShareKeys()
     {
-        if (!string.IsNullOrEmpty(KeySharingUserEmail))
+        if (!EnableApplyButton)
         {
             return;
         }
 
-        if (!EnableApplyButton)
+        if (EnableApplyButton && !string.IsNullOrEmpty(KeySharingUserEmail))
         {
             return;
         }

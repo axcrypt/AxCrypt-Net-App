@@ -13,7 +13,7 @@
             <div style="display: flex;">
                 @foreach (KnownFolder? knownFolder in subActionModel?.KnownFoldersViewModel?.KnownFolders!)
                 {
-                    <div>
+                    <div title="@knownFolder.DisplayName">
                         <button @onclick="() => subActionModel.OnCloudServiceButtonClick(knownFolder)"
                                 class="assets-box"
                                 style="background-color:@(knownFolder.Enabled ? _ENABLEDTOOLSTRIPBACKCOLOR : subActionModel.DisabledBackColor)">
@@ -84,6 +84,7 @@
 
     protected override void OnInitialized()
     {
+        new SubActionViewModel();
         subActionModel!.OnUpdateViewState += UpdateState;
         base.OnInitialized();
     }

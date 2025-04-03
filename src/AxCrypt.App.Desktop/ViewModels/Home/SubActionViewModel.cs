@@ -7,6 +7,7 @@ using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -26,13 +27,13 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
             _fileOperationViewModel = LogOnViewModel.FileOperationViewModel;
             _statusAlertService = AxCServiceProviderExtension.StatusAlertService!;
 
-            KnownFoldersViewModel = New<KnownFoldersViewModel>();
-
             Initialized();
         }
 
         public void Initialized()
         {
+            KnownFoldersViewModel = New<KnownFoldersViewModel>();
+
             _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
             KnownFoldersViewModel!.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
 
@@ -128,6 +129,11 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
         public async Task OnCloudServiceButtonClick(KnownFolder knownFolder)
         {
             //await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(knownFolder.My.FullName);
+            if (!Directory.Exists(knownFolder.My.FullName))
+            {
+                _statusAlertService.Error("Folder is not exist");
+                return;
+            }
 
             //We are opening the Explorer not the File picker with default folder for Cloud services
             _mainViewModel.SelectedWatchedFolders = new List<string> { knownFolder.My.FullName };
