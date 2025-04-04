@@ -27,7 +27,7 @@
                 <li>
                     <label for="Card_CardNumber">@Texts.CardNumberPrompt</label>
                     <div style="position: relative;">
-                        <input id="cardNumberInput" maxlength="19" minlength="12" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isCardNumberVisible, secretService.CurrentSecret.Card.CardNumber)" readonly="readonly" type="text" @onclick="() => ToggleVisibility(ref isCardNumberVisible)">
+                        <input id="cardNumberInput" maxlength="19" minlength="12" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isCardNumberVisible, secretService.CurrentSecret.Card.CardNumber)" readonly="readonly" type="text" @onclick="ShowCardNumber">
                         <div id="cp-card-number-clipbrd" style="position: absolute; right: 10px; top:2px;cursor: pointer;" class="copy-to-clipbrd" @onclick="() => CopyToClipboard(secretService.CurrentSecret.Card.CardNumber)">
                             <img class="clipbrd" src="" alt="copy-clp-brd">
                         </div>
@@ -45,7 +45,7 @@
                     <div class="list-width">
                         <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
                         <div style="display:flex; position: relative;">
-                            <input id="securityCodeInput" maxlength="1000" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isSecurityCodeVisible, secretService.CurrentSecret.Card.SecurityCode)" readonly="readonly" type="text" @onclick="() => ToggleVisibility(ref isSecurityCodeVisible)">
+                            <input id="securityCodeInput" maxlength="1000" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isSecurityCodeVisible, secretService.CurrentSecret.Card.SecurityCode)" readonly="readonly" type="text" @onclick="ShowSecurityCode">
                             <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="() => CopyToClipboard(secretService.CurrentSecret.Card.SecurityCode)">
                                 <img class="clipbrd" src="" alt="copy-clp-brd">
                             </div>
@@ -333,9 +333,26 @@
         StateHasChanged();
     }
 
-    private void ToggleVisibility(ref bool isVisible)
+    private void ShowCardNumber()
     {
-        isVisible = !isVisible;
+        VisibleReadOnlySecret("cardNumberInput", true);
+    }
+
+    private void ShowSecurityCode()
+    {
+        VisibleReadOnlySecret("securityCodeInput", true);
+    }
+
+    private void VisibleReadOnlySecret(string fieldId, bool isVisible)
+    {
+        if (fieldId == "cardNumberInput")
+        {
+            isCardNumberVisible = isVisible;
+        }
+        else if (fieldId == "securityCodeInput")
+        {
+            isSecurityCodeVisible = isVisible;
+        }
         StateHasChanged();
     }
 

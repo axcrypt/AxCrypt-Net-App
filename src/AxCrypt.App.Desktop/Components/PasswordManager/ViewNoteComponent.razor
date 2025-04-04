@@ -28,7 +28,12 @@
                 </li>
                 <li>
                     <label for="Note_Note">@Texts.NoteLabel</label>
-                    <textarea type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949 !important; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Note.Note" readonly="readonly"></textarea>
+                    <div style="display:flex; position: relative;">
+                        <textarea id="noteInput" type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isNoteVisible, secretService.CurrentSecret.Note.Note)" readonly="readonly" @onclick="()=> VisibleReadOnlySecret(true)"></textarea>
+                        <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="()=> CopyToClipboard(secretService.CurrentSecret!.Note.Note)">
+                            <img class="clipbrd" src="" alt="copy-clp-brd">
+                        </div>
+                    </div>
                 </li>
                 @if (secretService.CurrentSecret.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
                 {
@@ -206,9 +211,14 @@
         shareSecretViewModel.OnUpdateViewState += UpdateStateChanged;
     }
 
-    private async Task OnAfterRenderAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await jsRuntime.InvokeVoidAsync("toggleClass");
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsync("toggleClass");
+
+            await jsRuntime.InvokeVoidAsync("addClickListenerOutside", DotNetObjectReference.Create(this), "noteInput");
+        }
     }
 
     private async Task DeleteSecret()
@@ -310,6 +320,34 @@
     string SharedUserImageSource(string imageSource)
     {
         return imageSource == "contact-icon" ? "" : "/images/default/AxCrypt_Icon.svg";
+    }
+
+    private async Task CopyToClipboard(string note)
+    {
+        await jsRuntime.InvokeVoidAsync("copyToClipboard", note);
+    }
+
+    private bool isNoteVisible = false;
+
+    [JSInvokable]
+    public void HideField(string fieldId)
+    {
+        if (fieldId == "noteInput" && isNoteVisible)
+        {
+            isNoteVisible = false;
+        }
+        StateHasChanged();
+    }
+
+    private void VisibleReadOnlySecret(bool isVisible)
+    {
+        isNoteVisible = isVisible;
+        StateHasChanged();
+    }
+
+    private string GetValue(bool isVisible, string value)
+    {
+        return isVisible ? value : "**click to show**";
     }
 
     void UpdateStateChanged()
