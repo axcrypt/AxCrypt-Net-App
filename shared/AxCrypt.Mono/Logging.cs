@@ -43,21 +43,21 @@ namespace AxCrypt.Mono
             Trace.Listeners.Add(new DelegateTraceListener("ILoggingListener", TraceMessage));
         }
 
-        private void TraceMessage(string message)
+        private async void TraceMessage(string message)
         {
-            OnLogging(new LoggingEventArgs(message));
+            await OnLoggingAsync(new LoggingEventArgs(message));
         }
 
         #region ILogging Members
 
-        public event EventHandler<LoggingEventArgs> Logged;
+        public event Func<LoggingEventArgs, Task> LoggedAsync;
 
-        protected virtual void OnLogging(LoggingEventArgs e)
+        protected virtual async Task OnLoggingAsync(LoggingEventArgs e)
         {
-            EventHandler<LoggingEventArgs> handler = Logged;
+            Func<LoggingEventArgs, Task> handler = LoggedAsync;
             if (handler != null)
             {
-                handler(this, e);
+                await handler(e);
             }
         }
 

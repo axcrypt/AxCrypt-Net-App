@@ -35,14 +35,14 @@ namespace AxCrypt.Fake
     {
         #region ILogging Members
 
-        public event EventHandler<LoggingEventArgs> Logged;
+        public event Func<LoggingEventArgs, Task> LoggedAsync;
 
-        protected virtual void OnLogged(string message)
+        protected virtual async Task OnLoggedAsync(string message)
         {
-            EventHandler<LoggingEventArgs> handler = Logged;
+            Func<LoggingEventArgs, Task> handler = LoggedAsync;
             if (handler != null)
             {
-                handler(this, new LoggingEventArgs(message));
+                await handler(new LoggingEventArgs(message));
             }
         }
 
@@ -75,29 +75,29 @@ namespace AxCrypt.Fake
             get { return true; }
         }
 
-        public void LogFatal(string fatalLog)
+        public async void LogFatal(string fatalLog)
         {
-            OnLogged(fatalLog);
+            await OnLoggedAsync(fatalLog);
         }
 
-        public void LogError(string errorLog)
+        public async void LogError(string errorLog)
         {
-            OnLogged(errorLog);
+            await OnLoggedAsync(errorLog);
         }
 
-        public void LogWarning(string warningLog)
+        public async void LogWarning(string warningLog)
         {
-            OnLogged(warningLog);
+            await OnLoggedAsync(warningLog);
         }
 
-        public void LogInfo(string infoLog)
+        public async void LogInfo(string infoLog)
         {
-            OnLogged(infoLog);
+            await OnLoggedAsync(infoLog);
         }
 
-        public void LogDebug(string debugLog)
+        public async void LogDebug(string debugLog)
         {
-            OnLogged(debugLog);
+            await OnLoggedAsync(debugLog);
         }
 
         #endregion ILogging Members

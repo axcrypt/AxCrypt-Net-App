@@ -75,6 +75,8 @@ public static class AppDesktopFactory
         services.AddSingleton<SecretClientModel>();
         services.AddSingleton<SecretsClientModel>();
 
+        services.AddSingleton<LogViewModel>();
+
         TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
         TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
     }

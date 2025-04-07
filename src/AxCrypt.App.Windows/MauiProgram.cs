@@ -9,7 +9,6 @@ using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Infrastructure;
-using AxCrypt.App.Windows.Infrastructure.Dialogs;
 using AxCrypt.App.Windows.Services;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
@@ -64,7 +63,6 @@ namespace AxCrypt.App.Windows
 
             services.AddSingleton<ITrayService, TrayService>();
 
-            services.AddSingleton<ILogging, Logging>();
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
 

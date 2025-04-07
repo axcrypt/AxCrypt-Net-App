@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
@@ -30,6 +31,7 @@ public class AppSettingsViewModel : ViewModelBase
     private FileOperationViewModel? _fileOperationViewModel;
     private ManageAccountViewModel? _viewModel;
     private RecentFilesViewModel? _recentFilesViewModel;
+    private LogViewModel? _logViewModel;
 
     public AppSettingsViewModel(RecentFilesViewModel recentFilesViewModel)
     {
@@ -45,6 +47,7 @@ public class AppSettingsViewModel : ViewModelBase
         IsDateModifiedOn = New<UserSettings>().EncryptFilePropertiesDateModified;
         IsFileNameOn = New<UserSettings>().EncryptFilePropertiesFileName;
         AdvancedOptionsViewModel = new AdvancedOptionsViewModel();
+        _logViewModel = AxCServiceProviderExtension.LogViewModel;
     }
 
     public void Initialized()
@@ -57,6 +60,7 @@ public class AppSettingsViewModel : ViewModelBase
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DebugMode), (bool enabled) => { UpdateDebugMode(enabled); });
     }
 
     public AdvancedOptionsViewModel AdvancedOptionsViewModel { get; set; }
@@ -125,6 +129,7 @@ public class AppSettingsViewModel : ViewModelBase
     {
         Dictionary<string, object> attributes = new Dictionary<string, object>();
         attributes["class"] = "nav-link" + (DebugPopup ? " active" : "");
+        UpdateDebugMode(true);
         return attributes;
     }
 
@@ -271,6 +276,15 @@ public class AppSettingsViewModel : ViewModelBase
 
     #region Debug Section
 
+    public bool CanEnableDebug { get; set; }
+
+    public void UpdateDebugMode(bool enabled)
+    {
+        Resolve.Log.SetLevel(enabled ? LogLevel.Debug : LogLevel.Error);
+        OS.Current.DebugMode(enabled);
+        New<UserSettings>().DebugMode = enabled;
+    }
+
     public string? RestApiBaseUrl { get; set; }
     public string? TimeoutTimeSpan { get; set; }
     private ObservableCollection<ManageAccountModel> AccountEmailsList { get; set; } = new ObservableCollection<ManageAccountModel>();
@@ -338,8 +352,8 @@ public class AppSettingsViewModel : ViewModelBase
 
     public void OnOpenLogViewerClicked()
     {
-        //Window newWindow = new Window(new LogViewerWindow());
-        //Application.Current?.OpenWindow(newWindow);
+        LogWindowService.ShowLogWindow();
+        _logViewModel!.IsVisible = true;
     }
 
     public async void OpenManageAxCryptID()

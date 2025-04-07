@@ -50,7 +50,7 @@ namespace AxCrypt.Core.Test
         public static void TestSimpleLogging()
         {
             string s = null;
-            Resolve.Log.Logged += (sender, e) =>
+            Resolve.Log.LoggedAsync += async (e) =>
             {
                 s = e.Message;
             };

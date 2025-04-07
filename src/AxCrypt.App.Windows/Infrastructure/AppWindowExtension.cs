@@ -14,7 +14,10 @@ namespace AxCrypt.App.Windows.Infrastructure
 
         public AppWindowExtension(Microsoft.UI.Windowing.AppWindow window)
         {
-            _appWindow = window;
+            if (_appWindow == null)
+            {
+                _appWindow = window;
+            }
         }
 
         public void RegisterChangedEvents()

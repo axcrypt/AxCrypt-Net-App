@@ -25,6 +25,7 @@
 
 #endregion Coypright and License
 
+using AxCrypt.Core.UI;
 using System;
 using System.Linq;
 
@@ -32,7 +33,7 @@ namespace AxCrypt.Core.Runtime
 {
     public interface ILogging : IDisposable
     {
-        event EventHandler<LoggingEventArgs> Logged;
+        event Func<LoggingEventArgs, Task> LoggedAsync;
 
         void SetLevel(LogLevel level);
 

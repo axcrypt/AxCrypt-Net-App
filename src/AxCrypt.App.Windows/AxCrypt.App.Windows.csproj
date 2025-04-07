@@ -117,12 +117,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <MauiXaml Update="LogViewerWindow.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </MauiXaml>
-    </ItemGroup>
-
-    <ItemGroup>
       <MauiImage Include="Platforms\Windows\axcryptappicon.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </MauiImage>

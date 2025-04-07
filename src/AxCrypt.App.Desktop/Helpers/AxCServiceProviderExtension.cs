@@ -2,6 +2,7 @@
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Desktop.Services;
 
 namespace AxCrypt.App.Desktop.Helpers;
 
@@ -46,6 +47,14 @@ public static class AxCServiceProviderExtension
         get
         {
             return GetService<ProgressBarService>();
+        }
+    }
+    
+    public static LogViewModel? LogViewModel
+    {
+        get
+        {
+            return GetService<LogViewModel>();
         }
     }
 }

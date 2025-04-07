@@ -1,11 +1,11 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Desktop;
 using AxCrypt.App.Desktop.Code;
+using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Windows.Infrastructure;
-using AxCrypt.App.Windows.Infrastructure.Dialogs;
 using AxCrypt.App.Windows.Platforms.Windows.Implementation;
 using AxCrypt.Common;
 using AxCrypt.Content;
@@ -26,7 +26,6 @@ namespace AxCrypt.App.Windows;
 public partial class App : Application
 {
     private readonly ProgressBackgroundComponent _progressBackgroundWorker;
-    private DebugLogOutputDialog _debugOutput;
 
     private bool _isInitializing = true;
     private CommandLine _commandLine;
@@ -35,12 +34,14 @@ public partial class App : Application
     private FileOperationViewModel _fileOperationViewModel;
 
     private KnownFoldersViewModel _knownFoldersViewModel;
+    private LogViewModel _logService;
 
     private readonly IDispatcher _dispatcher;
 
-    public App(IDispatcher dispatcher, LogOnViewModel logOnService, RegisterViewModel registerViewModel)
+    public App(IDispatcher dispatcher, LogOnViewModel logOnService, RegisterViewModel registerViewModel, LogViewModel logService)
     {
         _dispatcher = dispatcher;
+        _logService = logService;
         InitializeComponent();
 
         InitializeContentResources();
@@ -108,7 +109,7 @@ public partial class App : Application
 
         CheckOfflineModeFirst();
         AppFactory.StartKeyPairService();
-        AttachLogListener();
+        await AttachLogListener();
         //ConfigureUiOptions();
         PlatformInitializer.SetupPathFilters();
         IntializeControls();
@@ -175,19 +176,16 @@ public partial class App : Application
         }
     }
 
-    private void AttachLogListener()
+    private async Task AttachLogListener()
     {
-        Resolve.Log.Logged += (logger, loggingEventArgs) =>
+        Resolve.Log.LoggedAsync += async (loggingEventArgs) =>
         {
-            Resolve.UIThread.PostTo(() =>
+            if (_logService == null || !_logService.IsVisible)
             {
-                if (_debugOutput == null || !_debugOutput.IsVisible)
-                {
-                    return;
-                }
-                string formatted = "{0} {1}".InvariantFormat(New<INow>().Utc.ToString("o", CultureInfo.InvariantCulture), loggingEventArgs.Message.TrimLogMessage());
-                _debugOutput.AppendText(formatted);
-            });
+                return;
+            }
+            string formatted = "{0} {1}".InvariantFormat(New<INow>().Utc.ToString("o", CultureInfo.InvariantCulture), loggingEventArgs.Message.TrimLogMessage());
+            await _logService.AddLogAsync(formatted);
         };
     }
 
