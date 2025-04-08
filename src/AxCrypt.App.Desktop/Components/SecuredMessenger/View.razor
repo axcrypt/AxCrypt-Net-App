@@ -49,7 +49,8 @@
         string replyMesssageReceivers = string.Join(", ", replyUserList);
 
         <div id="view-message-box">
-            <img class="rpl-img-wht" src="" alt="rply-icons" id="reply-icon2" data-id="@messenger.Id" onclick="replyMessage(this, '@parentId', '@messenger.Id', '@replyMesssageReceivers')" />            <div class="view-section" id="expand-view-sec">
+            <img class="rpl-img-wht" src="" alt="rply-icons" id="reply-icon2" data-id="@messenger.Id" onclick="replyMessage(this, '@parentId', '@messenger.Id', '@replyMesssageReceivers')" /> 
+            <div class="view-section" id="expand-view-sec">
                 <table>
                     <tbody onclick="window.OnMessageAction(event, '@messenger.Id','@parentId', '@replyMesssageReceivers')" style="cursor:pointer;">
                         <tr>
@@ -59,14 +60,14 @@
                                     <label>From:</label>
                                     <span class="email-txt-ovflw">@messenger.Message.Username</span>
                                 </div>
-                                <div style="display: flex; align-items: center; gap: 5px">
+                                <div style="display: flex; align-items: center; gap: 5px; padding-top: 5px;">
                                     <label>To:</label>
-                                    <span class="" style="font-size: 12px; word-wrap:unset; padding-left:18px;">
+                                    <span class="email-txt-ovflw" style="padding-left:18px;">
                                         @string.Join(", ", messageToList.Take(Utility.MaxReceiversToDisplay))
 
                                         @if (messageToList.Count() > Utility.MaxReceiversToDisplay)
                                         {
-                                            <span class="fnt-medium" style="padding-left: 10px;">+@(messageToList.Count() - Utility.MaxReceiversToDisplay) others</span>
+                                            <span class="fnt-medium mre-user-txt">+@(messageToList.Count() - Utility.MaxReceiversToDisplay) others</span>
                                         }
                                     </span>
                                 </div>
