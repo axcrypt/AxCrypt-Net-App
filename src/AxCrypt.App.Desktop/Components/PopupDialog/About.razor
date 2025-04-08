@@ -23,7 +23,7 @@
                         <br />
 
                         <label class="txt-clr">@AxCrypt.Content.Texts.AboutUsLinkLabel:</label>
-                        <a class="font-small" style="font-size: 12px;" href="https://www.axcrypt.net/information/axcrypt/">https://www.axcrypt.net/information/axcrypt/</a> <br />
+                        <a class="font-small" style="font-size: 12px;" @onclick="OpenAboutPage">https://www.axcrypt.net/information/axcrypt/</a> <br />
 
                         <span class="grey-clr" style="font-size:13px;">@AboutViewModel.Copyright</span>
                         <br />
@@ -62,5 +62,11 @@
     void CloseDialog()
     {
         LogOnViewModel.AboutDialog.Close();
+    }
+
+
+    public void OpenAboutPage()
+    {
+        Core.BrowseUtility.RedirectTo("https://www.axcrypt.net/information/axcrypt/");
     }
 }

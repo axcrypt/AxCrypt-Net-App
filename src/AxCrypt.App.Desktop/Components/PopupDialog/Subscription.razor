@@ -58,7 +58,7 @@
                 </tr>
             </table>
             <div class="text-center" style="margin-top:10px;">
-                <NavLink class="text-size grn-clr whte-bg" href="https://www.axcrypt.net/premium/" style="text-decoration:none; padding: 10px 31px;border-radius: 8px;">
+                <NavLink class="text-size grn-clr whte-bg" @onclick="OpenPremiumPage" style="text-decoration:none; padding: 10px 31px;border-radius: 8px;">
                     @Texts.LearnMoreLinkLabel
                 </NavLink>
             </div>
@@ -114,7 +114,7 @@
                 </tr>
             </table>
             <div class="text-center" style="margin-top:10px;">
-                <NavLink class="text-size grn-clr whte-bg" href="https://www.axcrypt.net/business/" style="text-decoration:none; padding: 10px 31px;border-radius: 8px;">
+                <NavLink class="text-size grn-clr whte-bg" @onclick="OpenBusinessPage" style="text-decoration:none; padding: 10px 31px;border-radius: 8px;">
                     @Texts.LearnMoreLinkLabel
                 </NavLink>
             </div>
@@ -126,6 +126,16 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
+    }
+
+    public void OpenBusinessPage()
+    {
+        Core.BrowseUtility.RedirectTo("https://www.axcrypt.net/business/");
+    }
+
+    public void OpenPremiumPage()
+    {
+        Core.BrowseUtility.RedirectTo("https://www.axcrypt.net/premium/");
     }
 
     public void DownloadAndroidApp()

@@ -83,9 +83,9 @@
             }
 
             @* @if (Utility.IsMainMenuHidden && SubscriptionLevel == SubscriptionLevel.Premium)
-            {
-            <div class="act-box"><img class="act-img new-mssg" src="" alt="scr-img" /><span class="text-size">New message</span></div>
-            } *@
+                {
+                <div class="act-box"><img class="act-img new-mssg" src="" alt="scr-img" /><span class="text-size">New message</span></div>
+                } *@
             @if (homeActionModel.HasBusiness)
             {
                 <div class="act-box" @onmouseover='@( () => ShowPopup("master key") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.RedirectToAccountSite">
@@ -139,7 +139,7 @@
                                 <td class="info-txt">@Texts.SupportGetStartedVideoText</td>
                             </tr>
                             <tr>
-                                <a style="text-decoration:none;" href="https://axcrypt.net/information/guides/get-started/">
+                                <a style="text-decoration:none;" @onclick="OpenGuidesGetStartedPage">
                                 <td class="gt-stred-txt" style="cursor:pointer">@Texts.GetStartedLinkLabel <img class="arwrgt-img" /></td>
                                 </a>
                             </tr>
@@ -156,13 +156,13 @@
             <label class="fle-nme fnt-sze" style="padding-bottom:20px;">Active subscriptions</label>
             <div class="actv-subs">
                 @* <div class="battery">
-            <div class="battery-head"> </div>
-            <div class="battery-body" id="battery-body">
-            <div class="charge-level">
-            <span style="text-align: center; margin:auto auto;"> @homeActionModel.MembersCount/<span style="font-weight:bold;">@homeActionModel.TotalMembers</span></span>
-            </div>
-            </div>
-            </div> *@
+                    <div class="battery-head"> </div>
+                    <div class="battery-body" id="battery-body">
+                    <div class="charge-level">
+                    <span style="text-align: center; margin:auto auto;"> @homeActionModel.MembersCount/<span style="font-weight:bold;">@homeActionModel.TotalMembers</span></span>
+                    </div>
+                    </div>
+                    </div> *@
                 <div class="center-column" style="flex-direction: column;padding: 10px;">
                     <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="homeActionModel.RedirectToAccountWebUrl">@Texts.BusinessSubscriptionRenewMenu<img class="rnw-btn" src="" alt="img" /></button>
                     <button class="subs-btn" style="background-color: #000;  margin-bottom: 0px;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">@Texts.AddUsersText<img class="add-usr" src="" alt="img" /></button>
@@ -187,7 +187,7 @@
                         <br />
                         <span class="sub-text">For someone else</span>
                     </div>
-                    <button onclick="location.href='https://account.axcrypt.net/en/HomeUser/CreatePremium'" class="buy-button">@Texts.BuyText</button>
+                    <button @onclick="OpenBuyForSomeOneElsePage" class="buy-button">@Texts.BuyText</button>
                 </div>
                 <div class="sub-box" style="background-color: #000000;">
                     <div style="padding: 10px 12px; line-height:12px;">
@@ -197,7 +197,7 @@
                         <span class="sub-text">@Texts.ForOrganisationsLabel</span>
 
                     </div>
-                    <button onclick="location.href='https://account.axcrypt.net/en/HomeUser/CreateBusiness'" class="buy-button">@Texts.UpgradeText</button>
+                    <button @onclick="OpenCreateBusinessPage" class="buy-button">@Texts.UpgradeText</button>
                 </div>
             </div>
         </div>
@@ -232,7 +232,6 @@
     public const string _ENABLEDTOOLSTRIPBACKCOLOR = "#FFFFFF";
     public string hoveredElement { get; set; } = string.Empty;
     public bool isHovered { get; set; }
-
     protected override void OnInitialized()
     {
         Utility.OnIsMainMenuHiddenChanged += UpdateState;
@@ -288,5 +287,20 @@
         {
             StateHasChanged(); // Refresh UI
         });
+    }
+
+    private void OpenBuyForSomeOneElsePage()
+    {
+        Core.BrowseUtility.RedirectToAccountWebUrl("{0}Home/Index");
+    }
+
+    private void OpenCreateBusinessPage()
+    {
+        Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/CreateBusiness");
+    }
+
+    private void OpenGuidesGetStartedPage()
+    {
+        Core.BrowseUtility.RedirectTo("https://axcrypt.net/information/guides/get-started/");
     }
 }

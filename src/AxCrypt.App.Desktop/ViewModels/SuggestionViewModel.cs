@@ -17,12 +17,12 @@ public class SuggestionViewModel
 
     public void DownloadMobileAppLink()
     {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://axcrypt.net/download/"));
+        Core.BrowseUtility.RedirectTo("https://axcrypt.net/download/");
     }
 
     public void PasswordGeneratorLink()
     {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://axcrypt.net/information/password-generator/"));
+        Core.BrowseUtility.RedirectTo("https://axcrypt.net/information/password-generator/");
     }
 
     public void DownloadAndroidApp()
@@ -37,6 +37,6 @@ public class SuggestionViewModel
 
     public void LearnMore()
     {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://axcrypt.net/information/requirements/"));
+        Core.BrowseUtility.RedirectTo("https://axcrypt.net/features/");
     }
 }
