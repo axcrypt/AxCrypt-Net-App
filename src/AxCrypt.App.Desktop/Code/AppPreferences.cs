@@ -5,7 +5,7 @@ namespace AxCrypt.App.Desktop.Code
 {
     public static class AppPreferences
     {
-        public const int MinimumWindowWidth = 1156;
+        public const int MinimumWindowWidth = 1165;
         public const int MinimumWindowHeight = 770;
 
         public static double MainWindowWidth

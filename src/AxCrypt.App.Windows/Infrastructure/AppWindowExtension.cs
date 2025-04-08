@@ -48,6 +48,8 @@ namespace AxCrypt.App.Windows.Infrastructure
                     {
                         AppPreferences.MainWindowHeight = currentWindow.Height < AppPreferences.MinimumWindowHeight ? AppPreferences.MinimumWindowHeight : currentWindow.Height;
                         AppPreferences.MainWindowWidth = currentWindow.Width < AppPreferences.MinimumWindowWidth ? AppPreferences.MinimumWindowWidth : currentWindow.Width;
+                        currentWindow.Height = AppPreferences.MainWindowHeight;
+                        currentWindow.Width = AppPreferences.MainWindowWidth;
                         return;
                     }
 
