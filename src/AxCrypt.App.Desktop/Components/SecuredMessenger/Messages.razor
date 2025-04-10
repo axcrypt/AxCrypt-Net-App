@@ -20,8 +20,14 @@
     }
     string shortUserText = messageToListText.Substring(0, 2).ToUpper();
 
-    string fontClass = read != DateTime.MinValue ? "" : "read-text";
-    string icoRead = read == DateTime.MinValue ? "ico-unread" : "";
+    string fontClass = "";
+    string icoRead = "";
+
+    if (SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
+    {
+         fontClass = read != DateTime.MinValue ? "" : "read-text";
+         icoRead = read == DateTime.MinValue ? "ico-unread" : "";
+    }
 
     Guid messageSelectionId = Model.ParentId == Guid.Empty ? Model.Id : Model.ParentId;
     <div id="unread-message-@messageSelectionId" class="unread-message @fontClass" data-id="@Model.Id" data-parent="@Model.ParentId">

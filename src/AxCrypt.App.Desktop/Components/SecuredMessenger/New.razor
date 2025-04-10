@@ -38,10 +38,10 @@
                             }
                         </div>
                         <input @bind="EmailAddress"
-                        @onkeypress="HandleKeyPress"
+                               @onkeydown="HandleKeyPress"
                         placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
                         type="text"
-                        id="new-member-email" />
+                               id="new-member-email" />
                     </div>
                 </div>
                 <hr class="dk-hide" />
@@ -91,7 +91,7 @@
 
     private void HandleKeyPress(KeyboardEventArgs e)
     {
-        if (e.Key == ",")
+        if (e.Key == "," || e.Key == "Enter")
         {
             if (!string.IsNullOrWhiteSpace(EmailAddress))
             {
@@ -99,18 +99,14 @@
 
                 if (!IsValidEmail(trimmedEmail))
                 {
-                    Console.WriteLine("Invalid email format: " + trimmedEmail);
                     return;
                 }
 
                 if (ReceiverEmails == null)
-                {
                     ReceiverEmails = new List<string>();
-                }
 
                 if (ReceiverEmails.Contains(trimmedEmail, StringComparer.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine("Email already exists: " + trimmedEmail);
                     return;
                 }
 
@@ -175,12 +171,15 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        await jsRuntime.InvokeVoidAsync("attachValidationOnKey", "new-member-email");
+
         try
         {
             if (firstRender)
             {
                 await jsRuntime.InvokeVoidAsync("SemScript");
                 await jsRuntime.InvokeVoidAsync("setDotNetHelperNew", DotNetObjectReference.Create(this));
+                await jsRuntime.InvokeVoidAsync("preventFormSubmit");
             }
         }
         catch (Exception ex)

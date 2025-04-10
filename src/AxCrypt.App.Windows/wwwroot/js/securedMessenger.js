@@ -15,6 +15,7 @@ window.SemScript = function () {
         $(".sub-head-link").removeClass("active");
         $(this).addClass("active");
         updateButtonText();
+        $("#new-message-section").hide();
     });
 
     $('.view-section').hide();
@@ -33,6 +34,10 @@ window.SemScript = function () {
 
     var emptyId = "";
     $(".unread-message").on("click", function (event) {
+        if ($(event.target).is(':checkbox')) {
+            return;
+        }
+
         $("#new-message-section").hide();
         $("#mb-new-message").hide();
 
@@ -49,8 +54,20 @@ window.SemScript = function () {
         $(".empty-sec").hide();
         $("#messenger-loading-section").show();
 
+        ToggleMessageActive(parentId != emptyId ? parentId : messageId);
+
         OnMessageSelected(messageId);
     });
+
+    function ToggleMessageActive(selectedMsgId) {
+        $(".unread-message").each(function () {
+            if ($(this).find("table.active").length > 0) {
+                $(this).find("table").removeClass('active');
+            }
+        });
+
+        $("#unread-message-" + selectedMsgId + " table").addClass("active");
+    }
 
     function OnMessageSelected(messageId) {
         $(".view-section").show();
@@ -472,4 +489,58 @@ window.initSearchEvents = () => {
         window.searchTimeout = setTimeout(() => form.submit(), 300);
     });
     form.addEventListener("submit", showLoadingEffect);
+};
+
+window.preventFormSubmit = () => {
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            const activeEl = document.activeElement;
+            if (activeEl?.tagName === "INPUT" && activeEl.type === "text") {
+                e.preventDefault();
+            }
+        }
+    });
+};
+
+const addedEmails = Array.from(document.querySelectorAll('.email-text'))
+    .map(el => el.textContent.trim().toLowerCase());
+
+window.attachValidationOnKey = function (elementId) {
+    const input = document.getElementById(elementId);
+
+    if (input) {
+        input.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === "," || event.code === "Comma" || event.keyCode === 188) {
+                let value = input.value.trim().toLowerCase();
+
+                if (value.endsWith(",")) {
+                    value = value.slice(0, -1).trim();
+                }
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailRegex.test(value)) {
+                    window.showValidationError(elementId, "Please enter a valid email address.");
+                } else if (addedEmails.includes(value)) {
+                    window.showValidationError(elementId, "This email is already added.");
+                } else {
+                    addedEmails.push(value);
+                    input.value = "";
+                }
+            }
+        });
+    }
+};
+
+window.showValidationError = function (elementId, message) {
+    const input = document.getElementById(elementId);
+    if (input) {
+        input.setCustomValidity(message);
+        input.reportValidity();
+
+        setTimeout(() => {
+            input.setCustomValidity("");
+            input.reportValidity();
+        }, 1000);
+    }
 };
