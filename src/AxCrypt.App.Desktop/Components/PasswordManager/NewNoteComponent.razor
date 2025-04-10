@@ -15,7 +15,8 @@
             @Texts.AddNoteTitle
         </h3>
     </div>
-    <div>
+    <div class="parent-container">
+        <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
         <EditForm Model="@newSecretViewModel.Secret.Note" OnValidSubmit="SavePassword" @ref="editForm">
             <DataAnnotationsValidator />
             <div class="row">

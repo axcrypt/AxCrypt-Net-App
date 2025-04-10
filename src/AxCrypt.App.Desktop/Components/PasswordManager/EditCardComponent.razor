@@ -11,12 +11,13 @@
 
 @inject IJSRuntime jsRuntime
 
-<div style="width: 100%;" class="page-max-height">
+<div style="width: 100%;" class="page-max-height parent-container">
     <div class="page-heading">
         <h3 class="password-creation">
             @Texts.EditCardTitle
         </h3>
     </div>
+    <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
     <EditForm Model="@secretService.CurrentSecret.Card" OnValidSubmit="SavePassword">
         <DataAnnotationsValidator />
         <div class="row">

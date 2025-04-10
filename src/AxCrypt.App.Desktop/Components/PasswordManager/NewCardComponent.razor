@@ -15,7 +15,8 @@
             @Texts.AddCardTitle
         </h3>
     </div>
-    <div>
+    <div class="parent-container">
+        <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
         <EditForm Model="@newSecretViewModel.Secret.Card" OnValidSubmit="SavePassword" @ref="editForm">
             <DataAnnotationsValidator />
             <div class="row">
