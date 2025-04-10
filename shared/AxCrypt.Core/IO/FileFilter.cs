@@ -57,6 +57,12 @@ namespace AxCrypt.Core.IO
             {
                 throw new ArgumentNullException("folder");
             }
+
+            if (folder == Resolve.UserSettings.TemporaryFilePath)
+            {
+                return true;
+            }
+
             foreach (string filter in forbiddenFolderFilters)
             {
                 if (folder.NormalizeFolderPath().ToLower().StartsWith(filter))

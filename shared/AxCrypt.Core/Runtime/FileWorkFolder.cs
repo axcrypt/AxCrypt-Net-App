@@ -25,32 +25,12 @@
 
 #endregion Coypright and License
 
-using AxCrypt.Abstractions;
-using AxCrypt.Core.IO;
-using System;
-using System.Linq;
-
-using static AxCrypt.Abstractions.TypeResolve;
-
 namespace AxCrypt.Core.Runtime
 {
-    public class WorkFolder
+    public class FileWorkFolder : WorkFolder
     {
-        public WorkFolder(string path)
+        public FileWorkFolder(string path) : base(path)
         {
-            FileInfo = New<IDataContainer>(path);
-            FileInfo.CreateFolder();
-        }
-
-        public IDataContainer FileInfo { get; private set; }
-
-        public virtual IDataContainer CreateTemporaryFolder()
-        {
-            string destinationFolder = Resolve.Portable.Path().Combine(New<FileWorkFolder>().FileInfo.FullName, Resolve.Portable.Path().GetFileNameWithoutExtension(Resolve.Portable.Path().GetRandomFileName()) + Resolve.Portable.Path().DirectorySeparatorChar);
-            IDataContainer destinationFolderInfo = New<IDataContainer>(destinationFolder);
-            destinationFolderInfo.CreateFolder();
-
-            return destinationFolderInfo;
         }
     }
 }

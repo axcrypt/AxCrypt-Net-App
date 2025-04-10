@@ -3,24 +3,24 @@ using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
-using Microsoft.AspNetCore.Components;
-using static AxCrypt.Abstractions.TypeResolve;
 using System;
 using System.Threading.Tasks;
 using AxCrypt.App.Desktop.Helpers;
+using System.Linq;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Desktop.ViewModels.Main;
 
-public class AdvancedOptionsViewModel : ComponentBase
+public class AdvancedOptionsViewModel : ViewModelBase
 {
     public string? TempConfigPath { get; set; }
     public string? AppConfigPath { get; set; }
 
-    private LogOnViewModel _logOnViewModel;
+    public LogOnViewModel LogOnViewModel { get; set; }
 
     public AdvancedOptionsViewModel()
     {
-        _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!; 
+        LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
     }
 
     public void Initialize()
@@ -29,18 +29,28 @@ public class AdvancedOptionsViewModel : ComponentBase
         TempConfigPath = New<UserSettings>().TemporaryFilePath;
     }
 
-    public bool ShowAdvancedOptions { get; set; }
-    public string ErrorMessage { get; set; }
+    public string? ErrorMessage { get; set; }
 
     public async void BrowseButton_click(EventArgs e)
     {
-        //IFolderPicker folderPicker = new Services.FolderPickerWindows();
-        //string selectedPath = await folderPicker.PickFolderAsync();
-        //if (selectedPath != null)
-        //{
-        //    TempConfigPath = selectedPath;
-        //}
-        _logOnViewModel.UIStateChanged();
+        FileSelectionEventArgs eventArgs = new FileSelectionEventArgs(new string[] { })
+        {
+            FileSelectionType = FileSelectionType.Folder
+        };
+
+        await New<IDataItemSelection>().HandleSelection(eventArgs);
+        if (eventArgs.SelectedFiles == null || !eventArgs.SelectedFiles.Any())
+        {
+            return;
+        }
+
+        string selectedPath = eventArgs.SelectedFiles.First();
+        if (selectedPath != null)
+        {
+            TempConfigPath = selectedPath;
+        }
+
+        UpdateViewState();
     }
 
     public async void ButtonOk_Click(EventArgs e)
@@ -57,6 +67,8 @@ public class AdvancedOptionsViewModel : ComponentBase
             return;
         }
 
+        LogOnViewModel.AdvancedOptionsDialog.Close();
+
         if (!await New<IVerifySignInPassword>().Verify(Texts.ChangeOptionGenericWarning))
         {
             return;
@@ -71,7 +83,6 @@ public class AdvancedOptionsViewModel : ComponentBase
 
         New<UserSettings>().TemporaryFilePath = TempConfigPath;
         await ShutDownAnd(New<IUIThread>().RestartApplication);
-        ShowAdvancedOptions = false;
     }
 
     private async Task ShutDownAnd(Action finalAction)
@@ -91,15 +102,11 @@ public class AdvancedOptionsViewModel : ComponentBase
 
     public void CancelButton_Click(EventArgs e)
     {
-        ShowAdvancedOptions = false;
+        ErrorMessage = "";
+        TempConfigPath = "";
+        new AdvancedOptionsViewModel();
+        LogOnViewModel.AdvancedOptionsDialog.Close();
+        UpdateViewState();
         return;
-    }
-
-    void Update()
-    {
-        InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });
     }
 }

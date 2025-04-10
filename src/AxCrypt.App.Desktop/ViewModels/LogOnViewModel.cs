@@ -27,6 +27,7 @@ public class LogOnViewModel : ViewModelBase
         AboutDialog = new CommonDialogService();
         FeedbackDialog = new CommonDialogService();
         UpgradeVersionDialog = new CommonDialogService();
+        AdvancedOptionsDialog = new CommonDialogService();
     }
 
     public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
@@ -94,6 +95,9 @@ public class LogOnViewModel : ViewModelBase
     
     public CommonDialogService UpgradeVersionDialog
     { get { return GetProperty<CommonDialogService>(nameof(UpgradeVersionDialog)); } set { SetProperty(nameof(UpgradeVersionDialog), value); } }
+    
+    public CommonDialogService AdvancedOptionsDialog
+    { get { return GetProperty<CommonDialogService>(nameof(AdvancedOptionsDialog)); } set { SetProperty(nameof(AdvancedOptionsDialog), value); } }
 
     public ProcessIndicator ProcessIndicator { get; set; }
 

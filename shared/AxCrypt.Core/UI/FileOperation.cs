@@ -249,7 +249,7 @@ namespace AxCrypt.Core.UI
         {
             if (decryptedContainer == null)
             {
-                decryptedContainer = New<WorkFolder>().CreateTemporaryFolder();
+                decryptedContainer = New<FileWorkFolder>().CreateTemporaryFolder();
             }
 
             string destinationName = document.FileName;
@@ -262,7 +262,7 @@ namespace AxCrypt.Core.UI
 
         public static string GetTemporaryDestinationName(string fileName)
         {
-            string destinationFolder = Resolve.Portable.Path().Combine(New<WorkFolder>().FileInfo.FullName, Resolve.Portable.Path().GetFileNameWithoutExtension(Resolve.Portable.Path().GetRandomFileName()) + Resolve.Portable.Path().DirectorySeparatorChar);
+            string destinationFolder = Resolve.Portable.Path().Combine(New<FileWorkFolder>().FileInfo.FullName, Resolve.Portable.Path().GetFileNameWithoutExtension(Resolve.Portable.Path().GetRandomFileName()) + Resolve.Portable.Path().DirectorySeparatorChar);
             return Resolve.Portable.Path().Combine(destinationFolder, Resolve.Portable.Path().GetFileName(fileName));
         }
 

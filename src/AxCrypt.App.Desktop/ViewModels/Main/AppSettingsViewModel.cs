@@ -271,7 +271,7 @@ public class AppSettingsViewModel : ViewModelBase
             return;
         }
 
-        AdvancedOptionsViewModel.ShowAdvancedOptions = true;
+        _logOnViewModel.AdvancedOptionsDialog.Show();
     }
 
     #region Debug Section

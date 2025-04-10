@@ -59,6 +59,7 @@ namespace AxCrypt.Core
 
             TypeMap.Register.Singleton<WorkFolderWatcher>(() => new WorkFolderWatcher());
             TypeMap.Register.Singleton<WorkFolder>(() => new WorkFolder(workFolderPath), () => New<WorkFolderWatcher>());
+            TypeMap.Register.Singleton<FileWorkFolder>(() => new FileWorkFolder(Resolve.UserSettings.TemporaryFilePath), () => New<WorkFolderWatcher>());
             TypeMap.Register.New<KnownPublicKeys>(() => KnownPublicKeys.Load(Resolve.WorkFolder.FileInfo.FileItemInfo("UserPublicKeys.txt"), New<IStringSerializer>()));
             TypeMap.Register.Singleton<FileSystemState>(() => FileSystemState.Create(Resolve.WorkFolder.FileInfo.FileItemInfo("FileSystemState.txt")));
         }

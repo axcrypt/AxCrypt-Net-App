@@ -488,36 +488,6 @@
     </div>
 }
 
-@if (AppSettingsViewModel.AdvancedOptionsViewModel.ShowAdvancedOptions)
-{
-    <div id="modal-dialog6" class="modalDialog">
-        <div style="text-align: left;">
-            <div class="modal-header text-center" style="display:block; font-weight:600;">
-                <span>Advanced Option</span>
-            </div>
-            <div class="modal-body">
-                <div style="padding-bottom: 15px;">
-                    <label>Application Config Path</label><br />
-                    <input type="path" @bind="AppSettingsViewModel.AdvancedOptionsViewModel.AppConfigPath" style="width:100%;" />
-                </div>
-                <label>Temp File Path</label>
-                <div class="center-column">
-                    <input type="path" @bind="AppSettingsViewModel.AdvancedOptionsViewModel.TempConfigPath" @oninput="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.BrowseButton_click(e)" style="width:75%;" />
-                    <button class="button font-medium success btn-small" @onclick="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.BrowseButton_click(e)">Browse</button>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="button font-medium success btn-small" @onclick="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.ButtonOk_Click(e)">@Texts.ButtonOkText</button>
-                <button class="btn-small font-medium button cancel" @onclick="(e)=> AppSettingsViewModel.AdvancedOptionsViewModel.CancelButton_Click(e)">@Texts.ButtonCancelText</button>
-            </div>
-            @if (!string.IsNullOrEmpty(AppSettingsViewModel.AdvancedOptionsViewModel.ErrorMessage))
-            {
-                <div class="error-message"> @AppSettingsViewModel.AdvancedOptionsViewModel.ErrorMessage</div>
-            }
-        </div>
-    </div>
-}
-
 <style>
     .input-group {
         display: flex;
