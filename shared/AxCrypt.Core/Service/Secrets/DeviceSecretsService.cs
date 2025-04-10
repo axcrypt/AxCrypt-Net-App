@@ -79,6 +79,31 @@ namespace AxCrypt.Core.Service.Secrets
             return localUserSecrets;
         }
 
+        public async Task<string> ExportXMLSecretsAsync(SecretsListRequestOptions requestOptions)
+        {
+            if (!New<AxCryptOnlineState>().IsOnline || Identity == LogOnIdentity.Empty)
+            {
+                return string.Empty;
+            }
+
+            try
+            {
+                string remoteSecrets = await _remoteService.ExportXMLSecretsAsync(requestOptions).Free();
+                if (remoteSecrets == null)
+                {
+                    return string.Empty;
+                }
+
+                return remoteSecrets;
+            }
+            catch (ApiException aex)
+            {
+                await aex.HandleApiExceptionAsync();
+            }
+
+            return string.Empty;
+        }
+
         public async Task<bool> SaveSecretsAsync(EncryptedSecretApiModel encSecrets)
         {
             if (New<AxCryptOnlineState>().IsOnline)

@@ -613,14 +613,15 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         {
             GetRawXml = true
         };
-        EncryptedSecretApiModel userSecrets = await New<LogOnIdentity, ISecretsService>(identity).GetSecretsAsync(requestOptions);
 
-        if (userSecrets.SecretBody == null)
+        string userSecrets = await New<LogOnIdentity, ISecretsService>(identity).ExportXMLSecretsAsync(requestOptions);
+
+        if (userSecrets == null)
         {
             return Stream.Null;
         }
 
-        byte[] byteArray = Encoding.UTF8.GetBytes(userSecrets.SecretBody);
+        byte[] byteArray = Encoding.UTF8.GetBytes(userSecrets);
         Stream stream = new MemoryStream(byteArray);
         return stream;
     }

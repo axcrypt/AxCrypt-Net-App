@@ -243,5 +243,23 @@ namespace AxCrypt.Core.Service.Secrets
                 throw new PasswordException("Credentials are not valid for server access.", uaex);
             }
         }
+
+        public async Task<string> ExportXMLSecretsAsync(SecretsListRequestOptions requestOptions)
+        {
+            if (string.IsNullOrEmpty(_apiClient.Identity.User))
+            {
+                throw new InvalidOperationException("The account service requires a user.");
+            }
+
+            try
+            {
+                string userSecrets = await _apiClient.GetXMLSecretsAsync(requestOptions).Free();
+                return userSecrets;
+            }
+            catch (UnauthorizedException)
+            {
+                return string.Empty;
+            }
+        }
     }
 }

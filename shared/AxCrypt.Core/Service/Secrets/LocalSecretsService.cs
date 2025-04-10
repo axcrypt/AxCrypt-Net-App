@@ -104,6 +104,11 @@ namespace AxCrypt.Core.Service.Secrets
             return Task.FromResult(userSecrets);
         }
 
+        public Task<string> ExportXMLSecretsAsync(SecretsListRequestOptions requestOptions)
+        {
+            return Task.FromResult(string.Empty);
+        }
+
         public async Task<bool> SaveSecretsAsync(EncryptedSecretApiModel secretsModel)
         {
             if (Identity.UserEmail == EmailAddress.Empty)

@@ -58,6 +58,11 @@ namespace AxCrypt.Core.Service.Secrets
             return Task.FromResult(EncryptedSecretApiModel.Empty);
         }
 
+        public Task<string> ExportXMLSecretsAsync(SecretsListRequestOptions requestOptions)
+        {
+            return Task.FromResult(string.Empty);
+        }
+
         public Task<bool> SaveSecretsAsync(EncryptedSecretApiModel secrets)
         {
             return _completedTask;

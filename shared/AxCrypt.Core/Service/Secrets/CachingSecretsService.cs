@@ -46,6 +46,11 @@ namespace AxCrypt.Core.Service.Secrets
             return await New<ICache>().UpdateItemAsync(async () => await _service.GetSecretsAsync(requestOptions)).Free();
         }
 
+        public async Task<string> ExportXMLSecretsAsync(SecretsListRequestOptions requestOptions)
+        {
+            return await New<ICache>().UpdateItemAsync(async () => await _service.ExportXMLSecretsAsync(requestOptions)).Free();
+        }
+
         public async Task<bool> SaveSecretsAsync(EncryptedSecretApiModel secretsApiModel)
         {
             return await New<ICache>().UpdateItemAsync(async () => await _service.SaveSecretsAsync(secretsApiModel), _key).Free();

@@ -57,6 +57,8 @@ namespace AxCrypt.Core.Service.Secrets
         /// </summary>
         /// <returns>A combination of flags for offers used.</returns>
         Task<EncryptedSecretApiModel> GetSecretsAsync(SecretsListRequestOptions requestOptions);
+        
+        Task<string> ExportXMLSecretsAsync(SecretsListRequestOptions requestOptions);
 
         Task<bool> SaveSecretsAsync(EncryptedSecretApiModel secrets);
 

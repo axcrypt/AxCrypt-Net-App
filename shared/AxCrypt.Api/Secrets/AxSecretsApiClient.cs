@@ -42,12 +42,22 @@ namespace AxCrypt.Api
         {
             Uri resource = BaseUrl.PathCombine("secrets/get");
 
-            // RestContent content = new RestContent(Serializer.Serialize(requestOptions));
             RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("GET", resource, Timeout)).Free();
             ApiCaller.EnsureStatusOk(restResponse);
 
             EncryptedSecretApiModel userSecrets = Serializer.Deserialize<EncryptedSecretApiModel>(restResponse.Content);
             return userSecrets;
+        }
+
+        public async Task<string> GetXMLSecretsAsync(SecretsListRequestOptions requestOptions)
+        {
+            Uri resource = BaseUrl.PathCombine("secrets/export/xml");
+
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("GET", resource, Timeout)).Free();
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            SecretsApiModel userSecrets = Serializer.Deserialize<SecretsApiModel>(restResponse.Content);
+            return userSecrets.SecretBody;
         }
 
         public async Task<bool> PostSaveSecretsAsync(EncryptedSecretApiModel secretsModel)
