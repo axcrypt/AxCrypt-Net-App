@@ -445,7 +445,7 @@ window.SemScript = function () {
 
         allMessagesItems.forEach(item => {
             item.addEventListener('click', function () {
-                hideAllMessages();
+                //hideAllMessages();
                 if (window.innerWidth <= 979) {
                     topDesign.style.display = 'block';
                     topDesign.classList.add('active');

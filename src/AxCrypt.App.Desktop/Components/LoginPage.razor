@@ -23,7 +23,13 @@
                 <div style="display:flex;">
                     <div style="width:100%;">
                         <label>@Texts.EmailLabel</label>
-                        <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" tabindex="1" readonly="@(string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? null : "readonly")" />
+                        @if (!IsEmailReadOnly)
+                        {
+                            <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" tabindex="1" />
+                        }
+                        else {
+                            <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" tabindex="1" readonly="readonly" />
+                        }
                     </div>
                 </div>
                 @if (!string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail))
@@ -46,9 +52,9 @@
                 <div class="signup-link">
                     <div style="display:inline-flex; align-items:center;">
                         <span class="che-txt"> Don't have an account?</span>
-                            <NavLink class="nav-link grn-clr" @onclick="CreateNewAccountLabel_LinkClicked" tabindex="4">
-                                <span>@Texts.PromptSignUp</span>
-                            </NavLink>
+                        <NavLink class="nav-link grn-clr" @onclick="CreateNewAccountLabel_LinkClicked" tabindex="4">
+                            <span>@Texts.PromptSignUp</span>
+                        </NavLink>
                     </div><br />
                     <NavLink class="nav-link grn-clr" @onclick="ForgetPassword_ButtonClicked" tabindex="5">
                         <span>@Texts.PasswordResetShortLink?</span>
@@ -68,8 +74,11 @@
     </section>
 }
 @code {
+    public bool IsEmailReadOnly { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
+        IsEmailReadOnly = !string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail);
         await base.OnInitializedAsync();
     }
 

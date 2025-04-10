@@ -23,11 +23,11 @@
             <EditForm Model="SecuredMessengerListModel.Messenger" OnValidSubmit="SearchList" id="search-msg-form">
                 <input type="hidden" name="SecMessengerFilterTab" @bind="SecuredMessengerListModel.Messenger.SecMessengerFilterTab" id="sec-messenger-filter-tab" />
                 <InputText @bind-Value="SecuredMessengerListModel.Messenger.Keyword"
-                id="messenger-keyword"
-                placeholder=@Texts.PromptXecretsSearchText
-                class="search-box columns"
-                tabindex="1"
-                style="width: 80%;" />
+                           id="messenger-keyword"
+                           placeholder=@Texts.PromptXecretsSearchText
+                           class="search-box columns"
+                           tabindex="1"
+                           style="width: 80%;" />
                 <select style="width: 13%;" name="Visibility" title="Visibility" id="search-filter-dropdown" class="search-dropdown medium-2 columns">
                     @foreach (string visibility in SecuredMessengerListModel.Messenger.SecMesgFilterOptions)
                     {
@@ -43,21 +43,23 @@
                 <div class="row">
                     <div class="tab tab-sec medium-9 columns">
                         <a class="sub-head-link unread-text @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "active" : "")"
-                        @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox)" id="inbox-tab">
+                           @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox)" id="inbox-tab">
                             Inbox @* <span id="inbox-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? messageCount : ""))</span> *@
                         </a>
                         <a class="sub-head-link @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "active" : "")"
-                        @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent)" id="sent-tab">
+                           @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent)" id="sent-tab">
                             Sent @* <span id="sent-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? messageCount : ""))</span> *@
                         </a>
                         <a class="sub-head-link unread-text @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "active" : "")"
-                        @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread)" id="unread-tab">
+                           @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread)" id="unread-tab">
                             Unread @* <span id="unread-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? messageCount : ""))</span> *@
                         </a>
                     </div>
                 </div>
             </div>
-            <div id="search-message-list">
+            <div id="search-message-list" class="parent-container">
+                <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
+
                 <AxCrypt.App.Desktop.Components.SecuredMessenger.Body Model="@SecuredMessengerListModel" />
             </div>
             <div class="mb-new-msg" id="mb-new-message">
@@ -74,7 +76,6 @@
     {
         SecuredMessengerListModel.OnUpdateViewState += UpdatePageState;
         SecuredMessengerListModel.Messenger.SecMessengerFilterTab = activeTab;
-        await SecuredMessengerListModel.GetMessagesList(activeTab);
         StateHasChanged();
     }
 
@@ -82,6 +83,7 @@
     {
         if (firstRender)
         {
+            await SecuredMessengerListModel.GetMessagesList(activeTab);
             await jsRuntime.InvokeVoidAsync("SemScript");
         }
     }

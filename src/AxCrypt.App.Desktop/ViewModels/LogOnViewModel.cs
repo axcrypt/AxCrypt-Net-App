@@ -1,4 +1,5 @@
-﻿using AxCrypt.Api.Model;
+﻿using AxCrypt.Abstractions;
+using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Services.UI;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.Utility.View;
@@ -201,7 +202,12 @@ public class LogOnViewModel : ViewModelBase
     public async void ClearAllSettingsAndRestartAsync()
     {
         await new ApplicationManager().ClearAllSettings();
-        LogOnAccountModel = new LogOnAccountViewModel(Core.Resolve.UserSettings, "");
-        OnLogOnDialogVisibilityChanged?.Invoke(_isVisible);
+        await ShutDownAnd(New<IUIThread>().RestartApplication);
+    }
+
+    private async Task ShutDownAnd(Action finalAction)
+    {
+        await new ApplicationManager().ShutdownBackgroundSafe();
+        finalAction();
     }
 }

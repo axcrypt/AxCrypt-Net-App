@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Core.UI.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -24,22 +25,25 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
         /// </summary>
         public async Task GetMessagesList(SecureMsgrFilterTab secMessengerFilterTab)
         {
-            switch (secMessengerFilterTab)
+            using (ProcessIndicator processIndicator = new ProcessIndicator())
             {
-                case SecureMsgrFilterTab.Inbox:
-                    Messenger = await _messageService.GetModelForList();
-                    break;
+                switch (secMessengerFilterTab)
+                {
+                    case SecureMsgrFilterTab.Inbox:
+                        Messenger = await _messageService.GetModelForList();
+                        break;
 
-                case SecureMsgrFilterTab.Sent:
-                    Messenger = await _messageService.GetModelSentList();
-                    break;
+                    case SecureMsgrFilterTab.Sent:
+                        Messenger = await _messageService.GetModelSentList();
+                        break;
 
-                case SecureMsgrFilterTab.Unread:
-                    Messenger = await _messageService.GetModelForUnreadList();
-                    break;
+                    case SecureMsgrFilterTab.Unread:
+                        Messenger = await _messageService.GetModelForUnreadList();
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
         }
 
