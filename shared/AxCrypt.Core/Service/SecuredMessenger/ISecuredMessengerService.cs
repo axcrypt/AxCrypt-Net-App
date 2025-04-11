@@ -60,6 +60,10 @@ namespace AxCrypt.Core.Service.SecuredMessenger
 
         Task<IEnumerable<SecuredMessengerRootApiModel>> GetSecMsgWithSearchFiltersAsync(SecureMsgrFilterTab securedMessengerFilterTab, RequestOptions requestOptions);
 
-        Task<UserPublicKey> OtherPublicKeyAsync(EmailAddress email);
+        Task<UserPublicKey> OtherPublicKeyAsync(EmailAddress email);       
+
+        Task<long> GetFreeUserSecuredMessengerLimit(string userEmail);
+
+        Task<bool> UpdateFreeUserSecuredMessengerLimit(string userEmail);
     }
 }

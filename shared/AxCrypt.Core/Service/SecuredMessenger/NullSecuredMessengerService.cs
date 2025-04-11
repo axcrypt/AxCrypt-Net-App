@@ -110,5 +110,15 @@ namespace AxCrypt.Core.Service.SecuredMessenger
         {
             return Task.FromResult((UserPublicKey)null);
         }
+
+        public Task<long> GetFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

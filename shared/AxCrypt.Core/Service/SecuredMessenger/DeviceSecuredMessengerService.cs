@@ -305,5 +305,41 @@ namespace AxCrypt.Core.Service.SecuredMessenger
             }
             throw new OfflineApiException("Can't find other non-cached public key when offline.");
         }
+
+        private readonly long _maxAllowedSecretsCount = 10;
+
+        public async Task<long> GetFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            if (New<AxCryptOnlineState>().IsOnline)
+            {
+                try
+                {
+                    return await _remoteService.GetFreeUserSecuredMessengerLimit(userEmail).Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                }
+            }
+
+            return _maxAllowedSecretsCount;
+        }
+
+        public async Task<bool> UpdateFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            if (New<AxCryptOnlineState>().IsOnline)
+            {
+                try
+                {
+                    return await _remoteService.UpdateFreeUserSecuredMessengerLimit(userEmail).Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                }
+            }
+
+            return false;
+        }
     }
 }

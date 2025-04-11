@@ -1,10 +1,9 @@
 ﻿using AxCrypt.Api;
 using AxCrypt.Api.Model;
-using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
-using AxCrypt.Core.Service.SecuredMessenger;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Utility;
@@ -49,14 +48,22 @@ public static class SecMessengerUtility
             return true;
         }
 
-        IEnumerable<SecuredMessengerApiModel> messages = new List<SecuredMessengerApiModel>();
-        Task.Run(async () =>
+        if (New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).FreeUserSendMessageCount < MaxMessageCreationAllowed)
         {
-            AxCrypt.Core.Crypto.LogOnIdentity identity = New<KnownIdentities>().DefaultEncryptionIdentity;
-            messages = await New<LogOnIdentity, ISecuredMessengerService>(identity).GetSentListAsync(GetRequestOptions());
-        }).Wait();
+            return true;
+        }
 
-        if (messages.Count() < MaxMessageCreationAllowed)
+        return false;
+    }
+
+    public static bool CanUpdateFreeUserCount()
+    {
+        if (New<LicensePolicy>().Capabilities.Has(LicenseCapability.SendUnlimitedMessages))
+        {
+            return false;
+        }
+
+        if (New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).FreeUserSendMessageCount < MaxMessageCreationAllowed)
         {
             return true;
         }

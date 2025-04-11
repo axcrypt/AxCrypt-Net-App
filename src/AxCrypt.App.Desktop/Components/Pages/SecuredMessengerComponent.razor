@@ -2,6 +2,7 @@
 @using AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 @using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.Content
+@using static AxCrypt.Abstractions.TypeResolve
 
 @inject SecuredMessengerListViewModel SecuredMessengerListModel
 @inject ViewSecMsgrViewModel ViewSecMsgrViewModel
@@ -86,6 +87,11 @@
         {
             await SecuredMessengerListModel.GetMessagesList(activeTab);
             //await jsRuntime.InvokeVoidAsync("SemScript");
+        }
+
+        if (New<AxCrypt.Common.AxCryptOnlineState>().IsOffline)
+        {
+            await New<Core.UI.IPopup>().ShowAsync(Core.UI.PopupButtons.Ok, Texts.MessageErrorTitle, Texts.NoInternetErrorMessage);
         }
     }
 

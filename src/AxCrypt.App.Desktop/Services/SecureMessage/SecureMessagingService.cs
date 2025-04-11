@@ -1,23 +1,20 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Api.Shared.Helper;
-using AxCrypt.App.Shared.Utility;
+using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Desktop.ViewModels.SecuredMessenger;
+using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.Utility;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-
-using static AxCrypt.Abstractions.TypeResolve;
 using System.Linq;
-using AxCrypt.App.Desktop.ViewModels;
-using AxCrypt.App.Shared.Services.Interface;
-using AxCrypt.Content;
-using AxCrypt.Core.Runtime;
+using System.Threading.Tasks;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Desktop.Services
 {
@@ -96,7 +93,8 @@ namespace AxCrypt.App.Desktop.Services
                 return false;
             }
 
-            if (!SecMessengerUtility.AllowAddNewMessage(_logOnViewModel.SubscriptionLevel))
+            bool allowToAdd = SecMessengerUtility.AllowAddNewMessage(_logOnViewModel.SubscriptionLevel);
+            if (!allowToAdd)
             {
                 //_statusAlertService.Error(Texts.SendSecuredMessageFailure);
                 _statusAlertService.Error("Maximum count (10) reached to send a secured message. Please upgrade your subscription!");
@@ -118,6 +116,11 @@ namespace AxCrypt.App.Desktop.Services
             if (!saved)
             {
                 return false;
+            }
+
+            if (SecMessengerUtility.CanUpdateFreeUserCount())
+            {
+                New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).UpdateFreeUserSecretsCount();
             }
 
             // await NotificationLogger.PushAsync(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address, NotificationType.SecuredMessageSent, Texts.SentSecuredMessageNotificationText, viewModel.ReceiverList.Select(sem => sem.EmailAddress).ToArray(), null);

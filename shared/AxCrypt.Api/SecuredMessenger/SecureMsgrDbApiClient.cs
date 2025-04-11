@@ -156,6 +156,37 @@ namespace AxCrypt.Api.SecuredMessenger
             return accountKey;
         }
 
+        public async Task<long> GetFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            if (userEmail == null)
+            {
+                throw new ArgumentNullException(nameof(userEmail));
+            }
+
+            Uri resource = BaseUrl.PathCombine($"securedmessenger/nonpayinguser/sendlimit?userEmail=" + ApiCaller.PathSegmentEncode(userEmail));
+
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest(resource, Timeout)).Free();
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            return Serializer.Deserialize<long>(restResponse.Content);
+        }
+
+        public async Task<bool> UpdateFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            if (userEmail == null)
+            {
+                throw new ArgumentNullException(nameof(userEmail));
+            }
+
+            Uri resource = BaseUrl.PathCombine($"securedmessenger/nonpayinguser/sendlimit?userEmail=" + ApiCaller.PathSegmentEncode(userEmail));
+
+            RestContent content = new RestContent(Serializer.Serialize(userEmail));
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("POST", resource, Timeout, content)).Free();
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            return Serializer.Deserialize<bool>(restResponse.Content);
+        }
+
         #region Private helpers
 
         private static IStringSerializer Serializer

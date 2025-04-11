@@ -96,5 +96,15 @@ namespace AxCrypt.Core.Service.Secrets
         {
             return await New<ICache>().GetItemAsync(_key.Subkey(email.Address).Subkey(nameof(OtherPublicKeyAsync)), async () => await _service.OtherPublicKeyAsync(email)).Free();
         }
+
+        public async Task<long> GetFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            return await New<ICache>().UpdateItemAsync(async () => await _service.GetFreeUserSecuredMessengerLimit(userEmail), _key).Free();
+        }
+
+        public async Task<bool> UpdateFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            return await New<ICache>().UpdateItemAsync(async () => await _service.UpdateFreeUserSecuredMessengerLimit(userEmail), _key).Free();
+        }
     }
 }

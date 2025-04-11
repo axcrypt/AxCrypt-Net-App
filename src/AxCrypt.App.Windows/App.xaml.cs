@@ -1,4 +1,6 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.Api;
+using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.App.Desktop;
 using AxCrypt.App.Desktop.Code;
 using AxCrypt.App.Desktop.Services;
@@ -14,6 +16,10 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Ipc;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.Service;
+using AxCrypt.Core.Service.Secrets;
+using AxCrypt.Core.Service.SecuredMessenger;
+using AxCrypt.Core.Service.UserNotification;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;

@@ -211,5 +211,37 @@ namespace AxCrypt.Core.Service.SecuredMessenger
         {
             return (await _apiClient.GetAllAccountsOtherUserPublicKeyAsync(email.Address).Free()).ToUserPublicKey();
         }
+
+        public async Task<long> GetFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            if (string.IsNullOrEmpty(_apiClient.Identity.User))
+            {
+                throw new InvalidOperationException("The account service requires a user.");
+            }
+            try
+            {
+                return await _apiClient.GetFreeUserSecuredMessengerLimit(userEmail).Free();
+            }
+            catch (UnauthorizedException)
+            {
+                return 0;
+            }
+        }
+
+        public async Task<bool> UpdateFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            if (string.IsNullOrEmpty(_apiClient.Identity.User))
+            {
+                throw new InvalidOperationException("The account service requires a user.");
+            }
+            try
+            {
+                return await _apiClient.UpdateFreeUserSecuredMessengerLimit(userEmail).Free();
+            }
+            catch (UnauthorizedException)
+            {
+                return false;
+            }
+        }
     }
 }

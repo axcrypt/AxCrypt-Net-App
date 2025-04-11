@@ -185,6 +185,18 @@ namespace AxCrypt.Core.Service.SecuredMessenger
             }).Free();
         }
 
+        private readonly long _maxAllowedSecretsCount = 10;
+
+        public Task<long> GetFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            return Task.FromResult(_maxAllowedSecretsCount);
+        }
+
+        public Task<bool> UpdateFreeUserSecuredMessengerLimit(string userEmail)
+        {
+            return Task.FromResult(false);
+        }
+
         #region internal helper methods
 
         private IEnumerable<SecuredMessengerApiModel> LoadMessages()
