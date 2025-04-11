@@ -1,9 +1,11 @@
 ﻿@using AxCrypt.App.Desktop.Data
+@using AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 @using AxCrypt.Core.SecuredMessenger
 @using AxCrypt.Core.UI
 
 @using static AxCrypt.Abstractions.TypeResolve;
 
+@inject ViewSecMsgrViewModel ViewSecMsgrViewModel
 @inject IJSRuntime jsRuntime
 
 @if (Model.Message?.TheMessage != null && Model.Message.TheMessage.Any())
@@ -30,7 +32,7 @@
     }
 
     Guid messageSelectionId = Model.ParentId == Guid.Empty ? Model.Id : Model.ParentId;
-    <div id="unread-message-@messageSelectionId" class="unread-message @fontClass" data-id="@Model.Id" data-parent="@Model.ParentId">
+    <div id="unread-message-@messageSelectionId" class="unread-message @fontClass" data-id="@Model.Id" data-parent="@Model.ParentId" @onclick="async ()=> await ViewSecMsgrViewModel.ViewMessageReplies(messageSelectionId, SecMessengerFilterTab)">
         <div>
             <table class="hover-table">
                 <tbody>
@@ -39,7 +41,7 @@
                             <div class="acc-prfl-container">
                                 <div class="@icoRead dsk-hide"></div>
                                 <div class="acc-prfl fnt-small second">@shortUserText</div>
-                                <input type="checkbox" class="hover-checkbox" style="display: none;" data-id="@messageSelectionId">
+                                @* <input type="checkbox" class="hover-checkbox" style="display: none;" data-id="@messageSelectionId"> *@
                             </div>
                         </td>
 
@@ -64,10 +66,6 @@
                             </span>
                         </td>
                         <td class="grey-clr text-size" style="vertical-align: top;">@Utility.ToDateString(Model.CreatedUtc.ToLocalTime())</td>
-
-                        <td class="mob-hide">
-                            <div class="@icoRead"></div>
-                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -99,7 +97,7 @@
     {
         if (firstRender)
         {
-            await jsRuntime.InvokeVoidAsync("SemScript");
+            //await jsRuntime.InvokeVoidAsync("SemScript");
         }
     }
 }

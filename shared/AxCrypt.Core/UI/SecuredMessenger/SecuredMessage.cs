@@ -143,6 +143,19 @@ namespace AxCrypt.Core.SecuredMessenger
             set { _deletedUtc = value; }
         }
 
+        private bool _showLoadingWheel;
+        public bool ShowLoadingWheel
+        {
+            get
+            {
+                return _showLoadingWheel;
+            }
+            set
+            {
+                _showLoadingWheel = value;
+            }
+        }
+
         #region IEquatable<Message> Members
 
         public bool Equals(SecuredMessage other)

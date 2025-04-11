@@ -37,27 +37,13 @@
         {
             if (firstRender)
             {
-                await jsRuntime.InvokeVoidAsync("SemScript");
-                await jsRuntime.InvokeVoidAsync("setDotNetHelperLoad", DotNetObjectReference.Create(this));
+                // await jsRuntime.InvokeVoidAsync("SemScript");
+                // await jsRuntime.InvokeVoidAsync("setDotNetHelperLoad", DotNetObjectReference.Create(this));
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
-    }
-
-    [JSInvokable("EnableLoadMoreAction")]
-    public async Task<bool> EnableLoadMoreAction(int pageNumberCount)
-    {
-        SecuredMessengerModel messengerModel = await Model.LoadMore(pageNumberCount, Model.Messenger.SecMessengerFilterTab);
-
-        if (Model.Messenger.Messages != null && messengerModel == null && messengerModel!.Messages.Any())
-        {
-            Model!.Messenger.Messages = Model.Messenger.Messages.Concat(messengerModel!.Messages).ToList();
-            StateHasChanged();
-            return true;
-        }
-        return false;
     }
 }

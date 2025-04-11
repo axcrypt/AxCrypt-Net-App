@@ -17,15 +17,26 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             _msgService = msgService;
         }
 
+        public void Initialize()
+        {
+            Id = Guid.Empty;
+            ParentId = Guid.Empty;
+            ReceiverEmails = "";
+            ReceiverList = new List<MessengerReceiverViewModel>();
+            Visibility = SecureMsgrVisibility.Forever;
+            EncryptedMessage = "";
+        }
+
+        public string UserEmail { get; set; }
+
         public Guid Id { get; set; } = Guid.Empty;
 
         public Guid ParentId { get; set; } = Guid.Empty;
 
         [Required]
-        [Display(Name = "ReceiverList")]
         public string ReceiverEmails { get; set; }
 
-        public IEnumerable<MessengerReceiverViewModel> ReceiverList { get; set; } = new List<MessengerReceiverViewModel>();
+        public IList<MessengerReceiverViewModel> ReceiverList { get; set; } = new List<MessengerReceiverViewModel>();
 
         public IEnumerable<string> MessageVisibilityList
         {
@@ -35,12 +46,25 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             }
         }
 
-        [Display(Name = "Visibility")]
         public SecureMsgrVisibility Visibility { get; set; }
 
         [Required(ErrorMessage = "The message field is required.")]
-        [Display(Name = "Encrypted Message")]
+
         public string EncryptedMessage { get; set; }
+
+        private bool _isVisible;
+        public bool IsVisible
+        {
+            get
+            {
+                return _isVisible;
+            }
+            set
+            {
+                _isVisible = value;
+                UpdateViewState();
+            }
+        }
 
         public async Task<bool> SentMessageAsync(NewSecMsgrViewModel newSecMsgrViewModel)
         {

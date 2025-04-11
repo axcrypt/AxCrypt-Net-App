@@ -1,78 +1,137 @@
-﻿using AxCrypt.Api.SecuredMessenger;
+﻿using AxCrypt.Abstractions;
+using AxCrypt.Api.SecuredMessenger;
+using AxCrypt.App.Desktop.Components.SecuredMessenger;
 using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.Common;
+using AxCrypt.Content;
 using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 {
     public class ViewSecMsgrViewModel : ViewModelBase
     {
         ISecureMessagingService _msgService { get; set; }
+        IStatusAlertService _statusAlertService { get; set; }
 
-        public ViewSecMsgrViewModel(ISecureMessagingService msgService)
+        private NewSecMsgrViewModel _newSecMsgrViewModel;
+
+        public ViewSecMsgrViewModel(ISecureMessagingService msgService, IStatusAlertService statusAlertService, NewSecMsgrViewModel newSecMsgrViewModel)
         {
             _msgService = msgService;
+            _statusAlertService = statusAlertService;
+            _newSecMsgrViewModel = newSecMsgrViewModel;
         }
 
         public SecuredMessengerModel Messenger { get; set; } = new SecuredMessengerModel();
 
-        public async Task ViewMessage(Guid id, SecureMsgrFilterTab securedMessengerFilterTab)
+        private bool _showLoadingWheel;
+        public bool ShowLoadingWheel
         {
-            if (id == Guid.Empty)
+            get
+            {
+                return _showLoadingWheel;
+            }
+            set
+            {
+                _showLoadingWheel = value;
+                UpdateViewState();
+            }
+        }
+
+        public async Task ViewMessageReplies(Guid messageId, SecureMsgrFilterTab securedMessengerFilterTab)
+        {
+            if (messageId == Guid.Empty)
             {
                 return;
             }
 
-            Messenger = await _msgService.GetModelForViewMessage(id, securedMessengerFilterTab);
+            Messenger = new SecuredMessengerModel();
+
+            ShowLoadingWheel = true;
+            Messenger = await _msgService.GetModelForViewMessage(messageId, securedMessengerFilterTab);
             Messenger.SecMessengerFilterTab = securedMessengerFilterTab;
+            ShowLoadingWheel = false;
         }
 
-        public async Task<bool> Delete(Guid messengerId, Guid parentId, SecureMsgrFilterTab secMessengerFilterTab)
+        public async Task DeleteMessageById(Guid messengerId, Guid parentId, SecureMsgrFilterTab secMessengerFilterTab)
         {
             if (messengerId == Guid.Empty)
             {
-                Console.WriteLine("Messenger ID is empty.");
-                return false;
+                _statusAlertService.Error(Texts.DeletionFailed);
+                return;
             }
+
+            SecuredMessage messengerMsg = Messenger.Messages.FirstOrDefault(mg => mg.Id == messengerId);
+            if (messengerMsg == null)
+            {
+                return;
+            }
+
+            messengerMsg.ShowLoadingWheel = true;
+            UpdateViewState();
             IEnumerable<Guid> selectedMessengerList = new List<Guid> { messengerId };
-
-            if (!selectedMessengerList.Any())
+            bool deleted = await _msgService.DeleteMessagesByIds(selectedMessengerList, secMessengerFilterTab);
+            if (deleted)
             {
-                Console.WriteLine("No valid GUIDs found.");
-                return false;
+                _statusAlertService.Success(string.Format(Texts.DeletionSuccess, "Message"));
             }
-
-            await _msgService.DeleteMessagesByIds(selectedMessengerList, secMessengerFilterTab);
-
-            if (parentId != Guid.Empty)
+            else
             {
+                _statusAlertService.Error(string.Format(Texts.DeletionFailed, "Message"));
             }
-
-            return true;
+            messengerMsg.ShowLoadingWheel = false;
+            UpdateViewState();
         }
 
-        public async Task<SecuredMessage> ViewMessageById(Guid messageId)
+        public async Task ReplyMessage(Guid messengerId, Guid parentId, string recipients)
+        {
+            if (!New<AxCryptOnlineState>().IsOnline)
+            {
+                _statusAlertService.Error(Texts.NoInternetErrorMessage);
+                return;
+            }
+
+            _newSecMsgrViewModel.Initialize();
+            _newSecMsgrViewModel.Id = messengerId;
+            _newSecMsgrViewModel.ParentId = parentId;
+            _newSecMsgrViewModel.ReceiverEmails = recipients;
+            _newSecMsgrViewModel.ReceiverList = recipients.Split(",").Select(ru => new MessengerReceiverViewModel { EmailAddress = ru, Read = DateTime.MinValue }).ToList();
+
+            _newSecMsgrViewModel.IsVisible = true;
+        }
+
+        public async Task ViewMessageById(Guid messageId)
         {
             if (messageId == Guid.Empty)
             {
-                Console.WriteLine("Message ID is empty.");
-                return new SecuredMessage();
+                return;
+            }
+            SecuredMessage messengerMsg = Messenger.Messages.FirstOrDefault(mg => mg.Id == messageId);
+            if (messengerMsg == null)
+            {
+                return;
             }
 
+            messengerMsg.ShowLoadingWheel = true;
+            UpdateViewState();
             SecuredMessage message = await _msgService.GetMessageByIdAsync(messageId);
-
             if (message == null)
             {
-                Console.WriteLine($"No message found for ID: {messageId}");
-                return new SecuredMessage();
+                messengerMsg.ShowLoadingWheel = false;
+                UpdateViewState();
+                return;
             }
 
-            Console.WriteLine($"Message found: {message}");
-            return message;
+            messengerMsg.Message = message.Message;
+            messengerMsg.ShowLoadingWheel = false;
+            UpdateViewState();
         }
     }
 }

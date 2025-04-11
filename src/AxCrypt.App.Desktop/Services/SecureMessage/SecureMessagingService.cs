@@ -103,7 +103,7 @@ namespace AxCrypt.App.Desktop.Services
                 return false;
             }
 
-            viewModel.ReceiverList = ReceiverListFrom(viewModel);
+            viewModel.ReceiverList = ReceiverListFrom(viewModel).ToList();
 
             int maxSendUserCount = SecMessengerUtility.MaxSendUserCount(_logOnViewModel.SubscriptionLevel);
             if (viewModel.ReceiverList.Count() > maxSendUserCount)

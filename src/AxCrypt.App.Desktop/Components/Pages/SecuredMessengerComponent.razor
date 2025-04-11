@@ -1,8 +1,10 @@
 ﻿@using AxCrypt.Api.SecuredMessenger
 @using AxCrypt.App.Desktop.ViewModels.SecuredMessenger
+@using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.Content
 
 @inject SecuredMessengerListViewModel SecuredMessengerListModel
+@inject ViewSecMsgrViewModel ViewSecMsgrViewModel
 @inject IJSRuntime jsRuntime
 
 @* @{
@@ -28,7 +30,7 @@
                            class="search-box columns"
                            tabindex="1"
                            style="width: 80%;" />
-                <select style="width: 13%;" name="Visibility" title="Visibility" id="search-filter-dropdown" class="search-dropdown medium-2 columns">
+                <select style="width: 13%;" name="Visibility" @bind="SecuredMessengerListModel.Messenger.SecMsgSearchFilters" title="Visibility" id="search-filter-dropdown" class="search-dropdown medium-2 columns">
                     @foreach (string visibility in SecuredMessengerListModel.Messenger.SecMesgFilterOptions)
                     {
                         <option value="@visibility">@visibility</option>
@@ -62,9 +64,6 @@
 
                 <AxCrypt.App.Desktop.Components.SecuredMessenger.Body Model="@SecuredMessengerListModel" />
             </div>
-            <div class="mb-new-msg" id="mb-new-message">
-                <img class="" src="/images/default/IcoNwMssg.svg" />
-            </div>
         </div>
     </div>
 </div>
@@ -74,9 +73,11 @@
 
     protected override async Task OnInitializedAsync()
     {
+        ViewSecMsgrViewModel.Messenger = new SecuredMessengerModel();
+        ViewSecMsgrViewModel.UpdateViewState();
+
         SecuredMessengerListModel.OnUpdateViewState += UpdatePageState;
         SecuredMessengerListModel.Messenger.SecMessengerFilterTab = activeTab;
-        StateHasChanged();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -84,24 +85,29 @@
         if (firstRender)
         {
             await SecuredMessengerListModel.GetMessagesList(activeTab);
-            await jsRuntime.InvokeVoidAsync("SemScript");
+            //await jsRuntime.InvokeVoidAsync("SemScript");
         }
     }
 
     private async Task SetActiveTab(SecureMsgrFilterTab securedMessengerFilterTab)
     {
+        ViewSecMsgrViewModel.Messenger = new SecuredMessengerModel();
+        ViewSecMsgrViewModel.UpdateViewState();
+
         activeTab = securedMessengerFilterTab;
         await SecuredMessengerListModel.GetMessagesList(securedMessengerFilterTab);
         _ = jsRuntime.InvokeVoidAsync("RestoreLoadMoreButton");
-        UpdatePageState();
     }
 
     private async Task SearchList()
     {
-        await jsRuntime.InvokeVoidAsync("showLoadingEffect");
+        using (ProcessIndicator progress = new ProcessIndicator())
+        {
+            ViewSecMsgrViewModel.Messenger = new SecuredMessengerModel();
+            ViewSecMsgrViewModel.UpdateViewState();
 
-        await SecuredMessengerListModel.SearchList(SecuredMessengerListModel.Messenger);
-        await jsRuntime.InvokeVoidAsync("hideLoadingEffect");
+            await SecuredMessengerListModel.SearchList(SecuredMessengerListModel.Messenger);
+        }
     }
 
     private void UpdatePageState()

@@ -1,16 +1,11 @@
-﻿@using AxCrypt.Api.SecuredMessenger
-@using AxCrypt.App.Desktop.Data
-@using AxCrypt.App.Desktop.ViewModels
-@using AxCrypt.App.Shared.Services.Interface
-@using AxCrypt.App.Shared.ViewModels
+﻿@using AxCrypt.App.Desktop.Data
 @using AxCrypt.App.Desktop.ViewModels.SecuredMessenger
-@using AxCrypt.Content;
 @using AxCrypt.Core.SecuredMessenger
 @using AxCrypt.Core.UI
+
 @using static AxCrypt.Abstractions.TypeResolve;
 
 @inject ViewSecMsgrViewModel ViewSecMsgrViewModel
-@inject IStatusAlertService StatusAlertService;
 @inject IJSRuntime jsRuntime
 
 @if (ViewSecMsgrViewModel.Messenger != null && ViewSecMsgrViewModel.Messenger.Messages != null)
@@ -49,10 +44,9 @@
         string replyMesssageReceivers = string.Join(", ", replyUserList);
 
         <div id="view-message-box">
-            <img class="rpl-img-wht" src="" alt="rply-icons" id="reply-icon2" data-id="@messenger.Id" onclick="replyMessage(this, '@parentId', '@messenger.Id', '@replyMesssageReceivers')" /> 
             <div class="view-section" id="expand-view-sec">
                 <table>
-                    <tbody onclick="window.OnMessageAction(event, '@messenger.Id','@parentId', '@replyMesssageReceivers')" style="cursor:pointer;">
+                    <tbody @onclick="async()=>await ViewSecMsgrViewModel.ViewMessageById(messenger.Id)" style="cursor:pointer;">
                         <tr>
                             <td> <div class="acc-prfl fnt-small">@senderShortCode</div></td>
                             <td style="line-height: normal; max-width: 235px; padding-left: 5px;">
@@ -75,15 +69,15 @@
                             <td class="right-align" style="vertical-align: top;">
                                 <input type="button" class="rply-icon" id="reply-button-@messenger.Id"
                                        data-id="@messenger.Id"
-                                       onclick="window.OnMessageAction(event, '@messenger.Id', '@messenger.ParentId', '@replyUserList')"
+                                       @onclick="async()=>await ViewSecMsgrViewModel.ReplyMessage(messenger.Id, parentId, replyMesssageReceivers)"
                                        value="Reply" name="reply-button" />
 
                                 <input type="button" name="delete-button" class="dlt-icon" value="Delete"
                                        data-id="@messenger.Id"
-                                       onclick="window.OnMessageAction(event, '@messenger.Id')"
+                                       @onclick="async()=>await ViewSecMsgrViewModel.DeleteMessageById(messenger.Id, parentId, Model.Messenger.SecMessengerFilterTab)"
                                        style="background-color: transparent; border: none;" /> <br />
 
-                                <label class="right-align grey-clr" style="font-size: 12px; font-weight: 600; padding-top: 5px;">@Utility.ToDateString(messenger.CreatedUtc)</label>
+                                <label class="right-align grey-clr" style="font-size: 12px; font-weight: 600; padding-top: 5px;">@Utility.ToDateString(messenger.CreatedUtc.ToLocalTime())</label>
                             </td>
                         </tr>
                         <tr>
@@ -91,7 +85,7 @@
                                 @if (messenger.Message.VisibleUntil != DateTime.MaxValue)
                                 {
                                     <span>Visible until:</span>
-                                    <span class="">@Utility.ToDateString(messenger.Message.VisibleUntil)</span>
+                                    <span class="">@Utility.ToDateString(messenger.Message.VisibleUntil.ToLocalTime())</span>
                                 }
                             </td>
                         </tr>
@@ -103,9 +97,12 @@
                         <textarea name="encryptedMessage" id="secured-mess-body" maxlength="100000" @bind="messenger.Message.TheMessage" readonly autofocus></textarea>
                     }
                 </div>
-                <div class="text-msg message-content messager-loading" style="display:none;" id="messenger-view-loading-section-@messenger.Id">
-                    <span>Loading...</span>
-                </div>
+                @if (messenger.ShowLoadingWheel)
+                {
+                    <div class="text-msg message-content messager-loading" id="messenger-view-loading-section-@messenger.Id">
+                        <span>Loading...</span>
+                    </div>
+                }
             </div>
         </div>
 
@@ -113,26 +110,9 @@
     }
 }
 
-<EditForm Model="ViewSecMsgrViewModel" id="message-delete-form">
-    <input type="hidden" id="messenger-id-hidden" name="messengerId" value="" />
-    <input type="hidden" id="messenger-parentid-hidden" name="parentId" value="" />
-    <input type="hidden" id="sec-messenger-filter-tab" name="SecMessengerFilterTab" @bind="Model.Messenger.SecMessengerFilterTab" />
-</EditForm>
-
-<EditForm Model="Model" id="new-message-form">
-    @* this form is used for validating the data - not used to submit/send messages *@
-    <input type="hidden" id="parent-message-id-new-message-hidden" name="parentMsgrId" />
-    <input type="hidden" id="message-id-new-message-hidden" name="messengerId" value="Guid.Empty" />
-    <input type="hidden" id="message-reply-users-hidden" name="replyUsers" value="Guid.Empty" />
-</EditForm>
-
-<EditForm Model="@ViewSecMsgrViewModel" id="view-selected-msg-form">
-    <input type="hidden" id="message-id-view-message-hidden" name="id" />
-</EditForm>
-
 @code {
 
-    string currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address.ToString();
+    string currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address;
 
     [Parameter]
     public Guid messageId { get; set; }
@@ -143,6 +123,7 @@
 
     protected override void OnInitialized()
     {
+        ViewSecMsgrViewModel.OnUpdateViewState += UpdatePageState;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -151,8 +132,8 @@
         {
             if (firstRender)
             {
-                await jsRuntime.InvokeVoidAsync("SemScript");
-                await jsRuntime.InvokeVoidAsync("setDotNetHelperView", DotNetObjectReference.Create(this));
+                // await jsRuntime.InvokeVoidAsync("SemScript");
+                // await jsRuntime.InvokeVoidAsync("setDotNetHelperView", DotNetObjectReference.Create(this));
             }
         }
         catch (Exception ex)
@@ -161,56 +142,11 @@
         }
     }
 
-    [JSInvokable]
-    public async Task FetchMessageDetails(Guid messageId)
+    private void UpdatePageState()
     {
-        if (messageId == Guid.Empty)
+        InvokeAsync(() =>
         {
-            return;
-        }
-
-        await ViewSecMsgrViewModel.ViewMessage(messageId, Model.Messenger.SecMessengerFilterTab);
-        await InvokeAsync(StateHasChanged);
-    }
-
-    [JSInvokable]
-    public async Task DeleteMessage(Guid messageId, Guid parentId)
-    {
-        if (messageId == Guid.Empty)
-        {
-            Console.WriteLine("Message ID is empty.");
-            return;
-        }
-
-        bool isDeleted = await ViewSecMsgrViewModel.Delete(messageId, parentId, Model.Messenger.SecMessengerFilterTab);
-        if (isDeleted)
-        {
-            StatusAlertService.Success(@Texts.DeletionSuccess);
-            await InvokeAsync(StateHasChanged);
-        }
-        else
-        {
-            StatusAlertService.Error(@Texts.DeletionFailed);
-        }
-    }
-
-    [JSInvokable]
-    public async Task<SecuredMessage> ViewMessageById(Guid messageId)
-    {
-        if (messageId == Guid.Empty)
-        {
-            Console.WriteLine("Message ID is empty.");
-            return new SecuredMessage();
-        }
-
-        SecuredMessage message = await ViewSecMsgrViewModel.ViewMessageById(messageId);
-        if (message == null)
-        {
-            Console.WriteLine($"No message found for ID: {messageId}");
-            return new SecuredMessage();
-        }
-
-        Console.WriteLine($"Message found: {message}");
-        return message;
+            StateHasChanged(); // Refresh UI
+        });
     }
 }
