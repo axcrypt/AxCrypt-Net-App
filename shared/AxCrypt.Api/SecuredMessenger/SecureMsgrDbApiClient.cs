@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Abstractions.Rest;
+using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Common;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -137,6 +138,22 @@ namespace AxCrypt.Api.SecuredMessenger
             ApiCaller.EnsureStatusOk(restResponse);
 
             return Serializer.Deserialize<IEnumerable<SecuredMessengerRootApiModel>>(restResponse.Content);
+        }
+
+        /// <summary>
+        /// Gets the public key of any user. If the user does not exist, he or she is invited by the current user.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <returns></returns>
+        public async Task<AccountKey> GetAllAccountsOtherUserPublicKeyAsync(string userName)
+        {
+            Uri resource = BaseUrl.PathCombine($"securedmessenger/useraccount/{ApiCaller.EncodePathParams(userName)}/key");
+
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("GET", resource, Timeout)).Free();
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            AccountKey accountKey = Serializer.Deserialize<AccountKey>(restResponse.Content);
+            return accountKey;
         }
 
         #region Private helpers

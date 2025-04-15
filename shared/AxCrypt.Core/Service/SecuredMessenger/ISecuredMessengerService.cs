@@ -2,6 +2,8 @@ using AxCrypt.Api;
 using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Crypto.Asymmetric;
+using AxCrypt.Core.UI;
 
 #region Coypright and License
 
@@ -57,5 +59,7 @@ namespace AxCrypt.Core.Service.SecuredMessenger
         Task<bool> DeleteAsync(IEnumerable<Guid> ids, string user, SecureMsgrFilterTab securedMessengerFilter);
 
         Task<IEnumerable<SecuredMessengerRootApiModel>> GetSecMsgWithSearchFiltersAsync(SecureMsgrFilterTab securedMessengerFilterTab, RequestOptions requestOptions);
+
+        Task<UserPublicKey> OtherPublicKeyAsync(EmailAddress email);
     }
 }

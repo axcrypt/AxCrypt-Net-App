@@ -29,6 +29,8 @@ using AxCrypt.Api;
 using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Crypto.Asymmetric;
+using AxCrypt.Core.UI;
 
 namespace AxCrypt.Core.Service.SecuredMessenger
 {
@@ -102,6 +104,11 @@ namespace AxCrypt.Core.Service.SecuredMessenger
         public Task<IEnumerable<SecuredMessengerRootApiModel>> GetSecMsgWithSearchFiltersAsync(SecureMsgrFilterTab securedMessengerFilterTab, RequestOptions requestOptions)
         {
             throw new NotImplementedException();
+        }
+
+        public Task<UserPublicKey> OtherPublicKeyAsync(EmailAddress email)
+        {
+            return Task.FromResult((UserPublicKey)null);
         }
     }
 }

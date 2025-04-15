@@ -4,7 +4,9 @@ using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Service.SecuredMessenger;
+using AxCrypt.Core.UI;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Service.Secrets
@@ -88,6 +90,11 @@ namespace AxCrypt.Core.Service.Secrets
         public async Task<IEnumerable<SecuredMessengerRootApiModel>> GetSecMsgWithSearchFiltersAsync(SecureMsgrFilterTab securedMessengerFilterTab, RequestOptions requestOptions)
         {
             return await New<ICache>().UpdateItemAsync(async () => await _service.GetSecMsgWithSearchFiltersAsync(securedMessengerFilterTab, requestOptions), _key).Free();
+        }
+
+        public async Task<UserPublicKey> OtherPublicKeyAsync(EmailAddress email)
+        {
+            return await New<ICache>().GetItemAsync(_key.Subkey(email.Address).Subkey(nameof(OtherPublicKeyAsync)), async () => await _service.OtherPublicKeyAsync(email)).Free();
         }
     }
 }

@@ -30,7 +30,9 @@ using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.Extensions;
 
 namespace AxCrypt.Core.Service.SecuredMessenger
 {
@@ -203,6 +205,11 @@ namespace AxCrypt.Core.Service.SecuredMessenger
             {
             }
             return new List<SecuredMessengerRootApiModel>();
+        }
+
+        public async Task<UserPublicKey> OtherPublicKeyAsync(EmailAddress email)
+        {
+            return (await _apiClient.GetAllAccountsOtherUserPublicKeyAsync(email.Address).Free()).ToUserPublicKey();
         }
     }
 }

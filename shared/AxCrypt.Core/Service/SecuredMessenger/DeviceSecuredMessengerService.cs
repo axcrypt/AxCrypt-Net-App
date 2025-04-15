@@ -3,7 +3,10 @@ using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Extensions;
+using AxCrypt.Core.Session;
+using AxCrypt.Core.UI;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Service.SecuredMessenger
@@ -263,6 +266,44 @@ namespace AxCrypt.Core.Service.SecuredMessenger
             }
 
             return await _localService.GetSecMsgWithSearchFiltersAsync(securedMessengerFilterTab, requestOptions).Free();
+        }
+
+        public async Task<UserPublicKey> OtherPublicKeyAsync(EmailAddress email)
+        {
+            return await OtherUserPublicKeysAsync(() => _localService.OtherPublicKeyAsync(email), () => _remoteService.OtherPublicKeyAsync(email)).Free();
+        }
+
+        private async Task<UserPublicKey> OtherUserPublicKeysAsync(Func<Task<UserPublicKey>> localServiceOtherUserPublicKey, Func<Task<UserPublicKey>> remoteServiceOtherUserPublicKey)
+        {
+            UserPublicKey publicKey = await localServiceOtherUserPublicKey().Free();
+            if (New<AxCryptOnlineState>().IsOffline)
+            {
+                return NonNullPublicKey(publicKey);
+            }
+
+            try
+            {
+                publicKey = await remoteServiceOtherUserPublicKey().Free();
+                using (KnownPublicKeys knownPublicKeys = New<KnownPublicKeys>())
+                {
+                    knownPublicKeys.AddOrReplace(publicKey);
+                }
+            }
+            catch (ApiException aex)
+            {
+                await aex.HandleApiExceptionAsync();
+            }
+
+            return publicKey;
+        }
+
+        private static UserPublicKey NonNullPublicKey(UserPublicKey publicKey)
+        {
+            if (publicKey != null)
+            {
+                return publicKey;
+            }
+            throw new OfflineApiException("Can't find other non-cached public key when offline.");
         }
     }
 }

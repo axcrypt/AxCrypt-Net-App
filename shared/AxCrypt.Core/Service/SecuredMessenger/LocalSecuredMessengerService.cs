@@ -31,8 +31,11 @@ using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.IO;
+using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
+using AxCrypt.Common;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Service.SecuredMessenger
@@ -163,6 +166,23 @@ namespace AxCrypt.Core.Service.SecuredMessenger
             }
 
             return await Task.Run(() => InternalSaveMessages(rootApiModel));
+        }
+
+        public async Task<UserPublicKey> OtherPublicKeyAsync(EmailAddress email)
+        {
+            if (Identity.UserEmail == EmailAddress.Empty)
+            {
+                throw new InvalidOperationException("The account service requires a user.");
+            }
+
+            return await Task.Run(() =>
+            {
+                using (KnownPublicKeys knowPublicKeys = New<KnownPublicKeys>())
+                {
+                    UserPublicKey publicKey = knowPublicKeys.PublicKeys.Where(pk => pk.Email == email).FirstOrDefault();
+                    return publicKey;
+                }
+            }).Free();
         }
 
         #region internal helper methods

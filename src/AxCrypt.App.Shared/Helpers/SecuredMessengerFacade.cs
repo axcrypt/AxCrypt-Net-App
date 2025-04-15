@@ -115,7 +115,7 @@ namespace AxCrypt.Api.Shared.Helper
         {
             try
             {
-                return await New<LogOnIdentity, IAccountService>(Identity()).OtherPublicKeyAsync(EmailAddress.Parse(adminUser.User));//EmailAddress.parse
+                return await New<LogOnIdentity, ISecuredMessengerService>(Identity()).OtherPublicKeyAsync(EmailAddress.Parse(adminUser.User));//EmailAddress.parse
             }
             catch (Exception ex)
             {
