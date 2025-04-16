@@ -2,14 +2,6 @@
 @using AxCrypt.Content
 
 @inject InviteViewModel InviteViewModel
-@inject LogOnViewModel LogOnModel
-
-<style>
-    .error-message {
-        color: red;
-        margin-top: 5px;
-    }
-</style>
 
 @if (IsVisible)
 {
@@ -55,7 +47,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        LogOnModel.InviteDialog.OnDialogVisibilityChanged += UpdateInviteDialogState;
+        InviteViewModel.LogOnViewModel.InviteDialog.OnDialogVisibilityChanged += UpdateInviteDialogState;
     }
 
     private void UpdateInviteDialogState(bool canShowInviteDialog)
@@ -70,6 +62,7 @@
 
     private void ClosePopup()
     {
-        LogOnModel.InviteDialog.Close();
+        InviteViewModel.Initialize();
+        InviteViewModel.LogOnViewModel.InviteDialog.Close();
     }
 }

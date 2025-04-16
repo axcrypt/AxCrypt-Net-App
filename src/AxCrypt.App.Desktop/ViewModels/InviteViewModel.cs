@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto.Asymmetric;
@@ -6,8 +7,6 @@ using AxCrypt.Core.Extensions;
 using AxCrypt.Core.UI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -16,12 +15,13 @@ namespace AxCrypt.App.Desktop.ViewModels;
 public class InviteViewModel
 {
     private IStatusAlertService _alerService;
-
     public InviteViewModel(IStatusAlertService alertService)
     {
-        //_alerService = AxCServiceProviderExtension.StatusAlertService!;
+        LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
         _alerService = alertService!;
     }
+
+    public LogOnViewModel LogOnViewModel { get; set; }
 
     public string? ErrorMessage { get; set; }
 
@@ -109,6 +109,7 @@ public class InviteViewModel
     {
         _alerService.Success($"You send invitation to {InvitedUser} successfully");
         Initialize();
+        LogOnViewModel.InviteDialog.Close();
     }
 
     public void Initialize()
