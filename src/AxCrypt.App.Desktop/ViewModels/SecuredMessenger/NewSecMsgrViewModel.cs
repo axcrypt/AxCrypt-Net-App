@@ -1,4 +1,5 @@
 ﻿using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System;
@@ -73,7 +74,10 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
                 return false;
             }
 
-            return await _msgService.SentMessageAsync(newSecMsgrViewModel);
+            using (ProcessIndicator indicator = new ProcessIndicator())
+            {
+                return await _msgService.SentMessageAsync(newSecMsgrViewModel);
+            }
         }
     }
 
