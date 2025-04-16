@@ -52,8 +52,8 @@ public class AppSettingsViewModel : ViewModelBase
 
     public void Initialized()
     {
-        RestApiBaseUrl = Resolve.UserSettings.RestApiBaseUrl.ToString();
-        TimeoutTimeSpan = Resolve.UserSettings.ApiTimeout.ToString();
+        RestApiBaseUrlInput = Resolve.UserSettings.RestApiBaseUrl.ToString();
+        TimeoutInput = Resolve.UserSettings.ApiTimeout.ToString();
 
         _mainViewModel!.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
         _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), (bool isLoggedOn) => { if (isLoggedOn) { StartInactivitySignOut(); } });
@@ -285,8 +285,12 @@ public class AppSettingsViewModel : ViewModelBase
         New<UserSettings>().DebugMode = enabled;
     }
 
-    public string? RestApiBaseUrl { get; set; }
-    public string? TimeoutTimeSpan { get; set; }
+    public string? ErrorMessage { get; set; }
+    public string TimeoutInput { get; set; } = string.Empty;
+    public TimeSpan TimeoutTimeSpan { get; private set; }
+    public string? RestApiBaseUrlInput { get; set; }
+    public Uri? RestApiBaseUrl { get; private set; }
+
     private ObservableCollection<ManageAccountModel> AccountEmailsList { get; set; } = new ObservableCollection<ManageAccountModel>();
     public string? EmailLabel { get; set; }
 
@@ -337,17 +341,49 @@ public class AppSettingsViewModel : ViewModelBase
         ShowOptions = true;
     }
 
+    public bool TryValidateInputs()
+    {
+        if (string.IsNullOrWhiteSpace(RestApiBaseUrlInput) || !Uri.TryCreate(RestApiBaseUrlInput, UriKind.RelativeOrAbsolute, out var uri))
+        {
+            ErrorMessage = "Invalid API base URL.";
+            return false;
+        }
+
+        if (!TimeSpan.TryParse(TimeoutInput, out TimeSpan timeout))
+        {
+            ErrorMessage = "Invalid timeout format. Use format like 00:02:30 for 2 mins 30 secs.";
+            return false;
+        }
+
+        RestApiBaseUrl = uri;
+        TimeoutTimeSpan = timeout;
+
+        return true;
+    }
+
     public void SetOptionsToolStripMenuItem_Click(EventArgs e)
     {
-        Resolve.UserSettings.RestApiBaseUrl = new Uri(RestApiBaseUrl);
-        Resolve.UserSettings.ApiTimeout = TimeSpan.Parse(TimeoutTimeSpan);
+        if (!TryValidateInputs())
+        {
+            return;
+        }
 
+        Resolve.UserSettings.RestApiBaseUrl = RestApiBaseUrl!;
+        Resolve.UserSettings.ApiTimeout = TimeoutTimeSpan;
+
+        ErrorMessage = string.Empty;
         ShowOptions = false;
+        UpdateViewState();
     }
 
     public void CloseOptions()
     {
+        RestApiBaseUrlInput = Resolve.UserSettings.RestApiBaseUrl.ToString();
+        TimeoutInput = Resolve.UserSettings.ApiTimeout.ToString();
+
+        ErrorMessage = string.Empty;
         ShowOptions = false;
+        UpdateViewState();
     }
 
     public void OnOpenLogViewerClicked()

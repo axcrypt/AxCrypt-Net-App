@@ -450,13 +450,17 @@
                 <div>
                     <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
                 </div>
+                @if (!string.IsNullOrEmpty(AppSettingsViewModel!.ErrorMessage))
+                {
+                    <div class="error-message" style="color:red;">@AppSettingsViewModel.ErrorMessage</div>
+                }
                 <div class="input-group">
                     <label for="restApiUrl">Rest Api Url:</label>
-                    <input type="text" id="restApiUrl" class="form-control email-img" @bind="@AppSettingsViewModel.RestApiBaseUrl" />
+                    <input type="text" id="restApiUrl" class="form-control" @bind="@AppSettingsViewModel.RestApiBaseUrlInput" />
                 </div>
                 <div class="input-group">
                     <label for="timeout">@Texts.DialogDebugOptionsRestApiTimeoutPrompt</label>
-                    <input type="text" id="timeout" class="form-control email-img" @bind="@AppSettingsViewModel.TimeoutTimeSpan" />
+                    <input type="text" id="timeout" class="form-control" @bind="@AppSettingsViewModel.TimeoutInput" />
                 </div>
 
                 <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
