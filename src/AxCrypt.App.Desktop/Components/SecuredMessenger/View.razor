@@ -41,6 +41,9 @@
             }
         }
 
+        bool showDeleteButton = (Model.Messenger.SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom == currentUser) ||
+        (Model.Messenger.SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom != currentUser);
+
         string replyMesssageReceivers = string.Join(", ", replyUserList);
 
         <div id="view-message-box">
@@ -72,11 +75,14 @@
                                        @onclick="async()=>await ViewSecMsgrViewModel.ReplyMessage(messenger.Id, parentId, replyMesssageReceivers)"
                                        value="Reply" name="reply-button" />
 
-                                <input type="button" name="delete-button" class="dlt-icon" value="Delete"
-                                       data-id="@messenger.Id"
-                                       @onclick="async()=>await ViewSecMsgrViewModel.DeleteMessageById(messenger.Id, parentId, Model.Messenger.SecMessengerFilterTab)"
-                                       style="background-color: transparent; border: none;" /> <br />
-
+                                @if (showDeleteButton)
+                                {
+                                    <input type="button" name="delete-button" class="dlt-icon" value="Delete"
+                                           data-id="@messenger.Id"
+                                           @onclick="async()=>await ViewSecMsgrViewModel.DeleteMessageById(messenger.Id, parentId, Model.Messenger.SecMessengerFilterTab)"
+                                           style="background-color: transparent; border: none;" />
+                                }
+                                <br />
                                 <label class="right-align grey-clr" style="font-size: 12px; font-weight: 600; padding-top: 5px;">@Utility.ToDateString(messenger.CreatedUtc.ToLocalTime())</label>
                             </td>
                         </tr>
