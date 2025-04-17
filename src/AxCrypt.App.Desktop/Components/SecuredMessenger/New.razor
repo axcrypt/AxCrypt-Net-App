@@ -12,7 +12,7 @@
 @if (newSecMsgrViewModel.IsVisible)
 {
     <div class="new-section" id="new-message-section">
-        <EditForm Model="newSecMsgrViewModel" OnValidSubmit="async () => await SendAsync(newSecMsgrViewModel)" id="send-new-message-form" class="new-message-form">
+        <div id="send-new-message-form" class="new-message-form">
             <div class="main-padding">
                 <input type="hidden" id="reply-message-id-hidden" name="messengerId" @bind="newSecMsgrViewModel.ParentId" />
                 <input type="hidden" id="new-member-email-hidden" name="ReceiverEmails" @bind="newSecMsgrViewModel.ReceiverEmails" />
@@ -21,12 +21,12 @@
                     <div class="medium-12 dk-hide" style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
                         <NavLink href="messagelist"><img class="ico-close" src="" alt="close-img" /></NavLink>
                         <span class="mb-page-title text-center">New Message</span>
-                        <button type="submit" class="snd-mb snd-dk" style="background-color: transparent; margin-bottom: 0px; padding-right: 0px;">
+                        <button type="button" class="snd-mb snd-dk" style="background-color: transparent; margin-bottom: 0px; padding-right: 0px;">
                         </button>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <input type="submit" class="button success btn-large fnt-small btn-size snd-dk" id="send-button-desktop" value="Send" />
-                        <img class="dlt-img" style="float: right;" @onclick="()=>{ newSecMsgrViewModel.IsVisible = !newSecMsgrViewModel.IsVisible; }" alt="Clear" title="Delete draft" />
+                        <input type="button" class="button success btn-large fnt-small btn-size snd-dk" id="send-button-desktop" value="Send" @onclick="async () => await SendAsync(newSecMsgrViewModel)" />
+                        <img class="dlt-img" style="float: right;" @onclick="DeleteDraftMessage" alt="Clear" title="Delete draft" />
                     </div>
                     <div class="" style="display:flex;padding:0 5px;">
                         <label class="grey-clr" style="display: inline-block; padding-right: 5px;">To:</label>
@@ -39,11 +39,16 @@
                             </div>
                             <input @bind="newSecMsgrViewModel.UserEmail"
                                    @onkeydown="HandleKeyPress"
+                                   @oninput="OnEmailInput"
                                    placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
                                    type="text"
                                    id="new-member-email" />
                         </div>
                     </div>
+                    @if (!string.IsNullOrEmpty(ErrorMessage))
+                    {
+                        <div class="error-message" style="padding-bottom: 5px;color: red;"> @ErrorMessage </div>
+                    }
                     <hr class="dk-hide" />
                     @if (Utility.IsBusinessUser)
                     {
@@ -59,7 +64,7 @@
                 <select style="height: 35px; border-radius:5px" id="shareVisibilityOptions"
                         class="button visble-button fnt-medium"
                         @bind="newSecMsgrViewModel.Visibility">
-                    @foreach (var visibility in newSecMsgrViewModel.MessageVisibilityList)
+                    @foreach (string visibility in newSecMsgrViewModel.MessageVisibilityList)
                     {
                         <option value="@visibility">@visibility</option>
                     }
@@ -75,14 +80,29 @@
                                placeholder="Type your message here" />
 
             </div>
-        </EditForm>
+        </div>
     </div>
 }
 @code {
+    private string ErrorMessage { get; set; } = null!;
+
     protected override void OnInitialized()
     {
         newSecMsgrViewModel.OnUpdateViewState += UpdateState;
         base.OnInitialized();
+    }
+
+    private void OnEmailInput(ChangeEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(e.Value?.ToString()!))
+        {
+            return;
+        }
+
+        if (!string.IsNullOrWhiteSpace(ErrorMessage))
+        {
+            ErrorMessage = null;
+        }
     }
 
     private void HandleKeyPress(KeyboardEventArgs e)
@@ -92,11 +112,6 @@
             if (!string.IsNullOrWhiteSpace(newSecMsgrViewModel.UserEmail))
             {
                 string trimmedEmail = newSecMsgrViewModel.UserEmail.Trim();
-
-                if (!IsValidEmail(trimmedEmail))
-                {
-                    return;
-                }
 
                 AddEmail(trimmedEmail);
             }
@@ -129,8 +144,15 @@
 
     private void AddEmail(string email)
     {
+        if (!IsValidEmail(email))
+        {
+            ErrorMessage = "Please, provide valid email address!";
+            return;
+        }
+
         if (newSecMsgrViewModel.ReceiverList.Any(su => su.EmailAddress.ToLower() == email.ToLower()))
         {
+            ErrorMessage = $"{email} is already added.";
             return;
         }
 
@@ -166,6 +188,13 @@
             await SetSentTabActive();
             return;
         }
+    }
+
+    private void DeleteDraftMessage()
+    {
+        newSecMsgrViewModel.UserEmail = "";
+        ErrorMessage = "";
+        newSecMsgrViewModel.IsVisible = !newSecMsgrViewModel.IsVisible;
     }
 
     private async Task SetSentTabActive()
