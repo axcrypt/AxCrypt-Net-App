@@ -48,7 +48,7 @@
                     @if (Utility.IsBusinessUser)
                     {
                         <div class="grp-info dk-hide">
-                            Add users or Groups with whom you want to share this secret. If you don`t know about our <strong>Group Feature</strong> yet, learn more and create your first one by the link <NavLink href="/group">Create a Group !</NavLink>
+                            Add users or Groups with whom you want to share this secret. If you don`t know about our <strong><NavLink @onclick="OpenGroupPage">Group Feature</NavLink></strong> yet, learn more and create your first one by the link <NavLink @onclick="OpenGroupCreationPage">Create a Group !</NavLink>
                         </div>
                         <hr class="dk-hide" />
                     }
@@ -172,6 +172,17 @@
     {
         await securedMessengerListViewModel.GetMessagesList(Api.SecuredMessenger.SecureMsgrFilterTab.Sent);
     }
+
+    private void OpenGroupCreationPage()
+    {
+        Core.BrowseUtility.RedirectToAccountWebUrl("{0}Group/Index");
+    }
+
+    private void OpenGroupPage()
+    {
+        Core.BrowseUtility.RedirectTo("https://axcrypt.net/information/group/");
+    }
+
 
     // protected override async Task OnAfterRenderAsync(bool firstRender)
     // {

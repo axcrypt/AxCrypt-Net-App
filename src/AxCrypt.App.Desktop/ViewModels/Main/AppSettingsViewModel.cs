@@ -343,7 +343,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     public bool TryValidateInputs()
     {
-        if (string.IsNullOrWhiteSpace(RestApiBaseUrlInput) || !Uri.TryCreate(RestApiBaseUrlInput, UriKind.RelativeOrAbsolute, out var uri))
+        if (string.IsNullOrWhiteSpace(RestApiBaseUrlInput) || !Uri.TryCreate(RestApiBaseUrlInput, UriKind.RelativeOrAbsolute, out Uri uri))
         {
             ErrorMessage = "Invalid API base URL.";
             return false;

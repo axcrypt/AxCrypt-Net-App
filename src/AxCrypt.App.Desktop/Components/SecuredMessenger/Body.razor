@@ -12,7 +12,7 @@
         <div class="center-column">
             <button class="button fnt-high" style="text-align: left; height: 44px;">
                 @* <input type="checkbox" class="multi-chckbx" title="Select All" /> *@
-                <span class="mutli-slct-btn">Inbox</span>
+                <span class="mutli-slct-btn">@TabTitleText</span>
                 @*                 <div class="slct-actions">
                 <img class="select-option" src="/images/default/IcoSelect.svg" alt="delete-img" title="Select" />
                 <img class="multi-dlt" src="" alt="delete-img" title="Delete" onclick="window.multiAction('MultiActionDelete')" />
@@ -91,6 +91,24 @@
         {
             // await jsRuntime.InvokeVoidAsync("SemScript");
             // await jsRuntime.InvokeVoidAsync("setDotNetHelper", DotNetObjectReference.Create(this));
+        }
+    }
+
+    private string TabTitleText
+    {
+        get
+        {
+            switch (Model!.Messenger.SecMessengerFilterTab)
+            {
+                case SecureMsgrFilterTab.Inbox:
+                    return "Inbox";
+                case SecureMsgrFilterTab.Sent:
+                    return "Sent";
+                case SecureMsgrFilterTab.Unread:
+                    return "Unread";
+                default:
+                    return "";
+            }
         }
     }
 

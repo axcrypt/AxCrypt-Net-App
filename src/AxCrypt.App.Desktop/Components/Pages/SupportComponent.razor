@@ -39,7 +39,7 @@
                 <label>@Texts.SupportBodyPrompt</label>
             </div>
             <div style="display:flex; padding:8px 0px; gap: 40px;">
-                <a style="text-decoration:none;" href="https://axcrypt.net/information/guides/get-started/">
+                <a style="text-decoration:none;" @onclick='() => OpenWebPage("https://axcrypt.net/information/guides/get-started/")'>
                     <div class="link-box">
                         <img class="idea-img" src="" alt="idea-img" />
                         <div style="padding: 5px 0px; line-height: 16px;">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </a>
-                <a style="text-decoration:none;" href="https://axcrypt.net/helpcenter/">
+                <a style="text-decoration:none;" @onclick='() => OpenWebPage("https://axcrypt.net/helpcenter/")'>
                     <div class="link-box">
                         <img class="guides-img" src="" alt="guides-img" />
                         <div style="padding: 5px 0px; line-height: 16px;">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </a>
-                <a style="text-decoration:none;" href="https://axcrypt.net/information/faq/">
+                <a style="text-decoration:none;" @onclick='() => OpenWebPage("https://axcrypt.net/information/faq/")'>
                     <div class="link-box">
                         <img class="faq-img" src="" alt="faq-img" />
                         <div style="padding: 5px 0px; line-height: 16px;">
@@ -145,6 +145,11 @@
     private async void SubmitSupportAsync()
     {
         await SupportViewModel.SubmitSupportAsync(LogOnModel.SubscriptionLevel);
+    }
+
+    private void OpenWebPage(string url)
+    {
+        Core.BrowseUtility.RedirectTo(url);
     }
 
     private void ResetSupport()
