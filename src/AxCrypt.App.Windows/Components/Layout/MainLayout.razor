@@ -99,6 +99,13 @@
     private void UpdateSignInPageState(bool canShowSignInPage)
     {
         CanShowSignInPage = canShowSignInPage;
+        string currentURi = navigationManager.Uri;
+        if (CanShowSignInPage && currentURi.Replace(navigationManager.BaseUri, "") != "")
+        {
+            navigationManager.NavigateTo("/", true);
+            return;
+        }
+
         UpdateUIState();
     }
 
@@ -110,6 +117,7 @@
         if (!LogOnViewModel.IsLoggedOn && currentURi.Replace(navigationManager.BaseUri, "") != "")
         {
             navigationManager.NavigateTo("/", true);
+            return;
         }
         UpdateUIState();
     }

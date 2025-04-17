@@ -41,7 +41,7 @@ public class AppFactory
         TypeMap.Register.Singleton<IStatusChecker>(() => new StatusChecker());
 
         TypeMap.Register.Singleton<SecretSecureStorage>(() => new SecretSecureStorage());
-        TypeMap.Register.Singleton<IProtectedData>(() => new TransientProtectedData(New<SecretSecureStorage>().AppUserSecretKey));
+        TypeMap.Register.Singleton<TransientProtectedData>(() => new TransientProtectedData(New<SecretSecureStorage>().AppUserSecretKey));
 
         TypeMap.Register.New<SessionNotificationHandler>(() => new SessionNotificationHandler(Resolve.FileSystemState, Resolve.KnownIdentities, New<ActiveFileAction>(), New<AxCryptFile>(), New<IStatusChecker>()));
         TypeMap.Register.New<IdentityViewModel>(() => new IdentityViewModel(Resolve.FileSystemState, Resolve.KnownIdentities, Resolve.UserSettings, Resolve.SessionNotify));

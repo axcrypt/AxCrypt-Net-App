@@ -39,7 +39,7 @@ namespace AxCrypt.Core.Crypto;
 /// only be decryptable within the life-time of the AppDomain. If the AppDomain is restarted, new entropy is generated and old values are
 /// no longer possible to decrypt.
 /// </summary>
-public class TransientProtectedData : IProtectedData
+public class TransientProtectedData
 {
     /// <summary>
     /// This is what makes the encryption unique to this instance of the AppDomain.
@@ -95,7 +95,7 @@ public class TransientProtectedData : IProtectedData
         try
         {
             key = key ?? _key;
-            if (!CustomAesEncryption.TryUnprotect(encryptedData, key, _entropy, out bytes))
+            if (!CustomAesEncryption.TryUnprotect(encryptedData, key, out bytes))
             {
                 return null;
             }

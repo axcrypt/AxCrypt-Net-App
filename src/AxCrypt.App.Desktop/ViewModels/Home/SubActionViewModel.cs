@@ -178,24 +178,26 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
 
         private void UpdateKnownFolders(IEnumerable<KnownFolder> folders)
         {
-            foreach (KnownFolder folder in folders)
-            {
-                GetIconClass(folder.My.FullName);
-            }
+            //foreach (KnownFolder folder in folders)
+            //{
+            //    GetIconClass(folder.My.FullName);
+            //}
 
             UpdateViewState();
         }
 
         public string GetIconClass(string displayName)
         {
-            return displayName.ToLower() switch
-            {
-                "onedrive" => "onedrv-icon",
-                "documents" => "cld-icon",
-                "google drive" => "ggldrv-icon",
-                "dropbox" => "drpbx-icon",
-                _ => "default-icon"
-            };
+            if (displayName.ToLower().Contains("onedrive"))
+                return "onedrv-icon";
+            if (displayName.ToLower().Contains("com~apple~clouddocs"))
+                return "cld-icon";
+            if (displayName.ToLower().Contains("google drive"))
+                return "ggldrv-icon";
+            if (displayName.ToLower().Contains("dropbox"))
+                return "ggldrv-icon";
+
+            return "default-icon";
         }
 
         private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)

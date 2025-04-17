@@ -29,7 +29,9 @@ using AxCrypt.Abstractions;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
+using AxCrypt.Core.UI;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Text;
@@ -224,6 +226,7 @@ namespace AxCrypt.Core.Session
             }
         }
 
+
         private string _decryptedName;
 
         private byte[] _protectedName;
@@ -236,15 +239,23 @@ namespace AxCrypt.Core.Session
             {
                 if (_protectedName == null)
                 {
-                    _protectedName = New<IProtectedData>().Protect(Encoding.UTF8.GetBytes(Resolve.Portable.Path().GetFileName(DecryptedFileInfo.FullName)), null);
+                    _protectedName = New<TransientProtectedData>().Protect(Encoding.UTF8.GetBytes(Resolve.Portable.Path().GetFileName(DecryptedFileInfo.FullName)), null);
                 }
+
                 return _protectedName;
             }
             set
             {
-                byte[] bytes = New<IProtectedData>().Unprotect(value, null);
-                _decryptedName = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-                _protectedName = (byte[])value.Clone();
+                try
+                {
+                    byte[] bytes = New<TransientProtectedData>().Unprotect(value, null);
+                    _decryptedName = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+                    _protectedName = (byte[])value.Clone();
+                }
+                catch(Exception exp)
+                {
+                    Console.WriteLine(exp.Message);
+                }
             }
         }
 

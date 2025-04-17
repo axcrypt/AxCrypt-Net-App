@@ -40,6 +40,7 @@ public class ProgressBarService
             {
                 _progress = value;
                 bool isVisible = (_progress == 100 || _progress == 0) ? _isVisible : true;
+                isVisible = isVisible && !string.IsNullOrEmpty(Filename);
                 OnProgressBarVisibilityChanged?.Invoke(isVisible);
             }
         }

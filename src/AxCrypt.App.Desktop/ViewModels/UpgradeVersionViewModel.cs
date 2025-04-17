@@ -65,6 +65,7 @@ public class UpgradeVersionViewModel
 
         LogOnViewModel!.PopupResult = DialogResult.OK;
         LogOnViewModel.PopupButtons = PopupButtons.Ok;
+        OpenBetaDownladPage();
     }
 
     public void Button_CancelClicked()
@@ -76,5 +77,10 @@ public class UpgradeVersionViewModel
 
         LogOnViewModel!.PopupResult = DialogResult.Cancel;
         LogOnViewModel.PopupButtons = PopupButtons.Cancel;
+    }
+
+    private void OpenBetaDownladPage()
+    {
+        Core.BrowseUtility.RedirectTo("https://axcrypt.net/betadownload/");
     }
 }

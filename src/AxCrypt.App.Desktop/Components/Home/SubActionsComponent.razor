@@ -17,7 +17,7 @@
                         <button @onclick="() => subActionModel.OnCloudServiceButtonClick(knownFolder)"
                                 class="assets-box"
                                 style="background-color:@(knownFolder.Enabled ? _ENABLEDTOOLSTRIPBACKCOLOR : subActionModel.DisabledBackColor)">
-                            <img class="icon @subActionModel.GetIconClass(knownFolder.DisplayName)" src="" alt="@knownFolder.DisplayName" />
+                            <img class="icon @subActionModel.GetIconClass(knownFolder.My.FullName)" style="width:32px;height:32px;" src="" alt="@knownFolder.DisplayName" />
                         </button>
                     </div>
                 }

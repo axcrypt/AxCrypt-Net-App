@@ -9,9 +9,9 @@
 @inject NavigationManager navigation
 @inject IJSRuntime JSRuntime
 
-<AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
-
 <div dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
+    <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
+
     @if (LogOnViewModel.IsVisible)
     {
         <AxCrypt.App.Desktop.Components.LoginPage />

@@ -152,7 +152,7 @@ namespace AxCrypt.App.Windows.WinUI
             Resolve.RegisterTypeFactories(_workFolderPath, extraAssemblies);
             DesktopFactory.RegisterTypeFactories();
 
-            //TypeMap.Register.New<IProtectedData>(() => new ProtectedDataImplementation(System.Security.Cryptography.DataProtectionScope.CurrentUser));
+            TypeMap.Register.New<IProtectedData>(() => new ProtectedDataImplementation(System.Security.Cryptography.DataProtectionScope.CurrentUser));
             TypeMap.Register.New<Core.Runtime.ILauncher>(() => new Mono.Launcher());
             TypeMap.Register.New<AxCryptHMACSHA1>(() => PortableFactory.AxCryptHMACSHA1());
             TypeMap.Register.New<HMACSHA512>(() => new Mono.Cryptography.HMACSHA512Wrapper(new HMACSHA512CryptoServiceProvider()));

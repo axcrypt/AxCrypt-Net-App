@@ -199,7 +199,15 @@ namespace AxCrypt.Core.UI.ViewModel
 
             BindPropertyChanged(nameof(DebugMode), (bool enabled) => { UpdateDebugMode(enabled); });
             BindPropertyChanged(nameof(LoggedOn), (bool loggedOn) => EncryptFileEnabled = loggedOn || !License.Has(LicenseCapability.EncryptNewFiles));
-            BindPropertyChanged(nameof(License), async (LicenseCapabilities policy) => await SetWatchedFoldersAsync());
+            BindPropertyChanged(nameof(License), async (LicenseCapabilities policy) => 
+            { 
+                if (LoggedOn)
+                {
+                    _fileSystemState.InitializeFileSystem();
+                }
+
+                await SetWatchedFoldersAsync();
+            });
             BindPropertyChanged(nameof(EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => Resolve.UserSettings.EncryptionUpgradeMode = mode);
             BindPropertyChanged(nameof(FolderOperationMode), async (FolderOperationMode mode) => await SetFolderOperationMode(mode));
         }

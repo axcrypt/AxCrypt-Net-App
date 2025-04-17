@@ -267,11 +267,8 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     private async Task<IEnumerable<SecretViewModel>> LoadSecrets(Func<Task<SecretClientCollection>> SelectBySearchFuncAsync)
     {
-        return await Task.Run(async () =>
-        {
-            IEnumerable<SecretClientModel> secrets = await SelectBySearchFuncAsync();
-            return secrets.Select(sc => { return new SecretViewModel(sc); });
-        });
+        IEnumerable<SecretClientModel> secrets = await SelectBySearchFuncAsync();
+        return secrets.Select(sc => { return new SecretViewModel(sc); });
     }
 
     private async Task FindSharedWithSecrets()

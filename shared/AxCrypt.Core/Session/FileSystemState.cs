@@ -448,10 +448,10 @@ namespace AxCrypt.Core.Session
                 throw new ArgumentNullException("path");
             }
 
-            if (path.IsAvailable)
-            {
-                return CreateFileSystemState(path);
-            }
+            //if (path.IsAvailable)
+            //{
+            //    return CreateFileSystemState(path);
+            //}
 
             FileSystemState fileSystemState = new FileSystemState()
             {
@@ -500,6 +500,28 @@ namespace AxCrypt.Core.Session
             }
             fileSystemState._dataStore = path;
             return fileSystemState;
+        }
+
+        public void InitializeFileSystem()
+        {
+            if (_dataStore == null)
+            {
+                throw new ArgumentNullException("path");
+            }
+
+            FileSystemState fileSystemState = new FileSystemState()
+            {
+                _dataStore = _dataStore,
+            };
+
+            if (_dataStore.IsAvailable)
+            {
+                fileSystemState = CreateFileSystemState(_dataStore);
+            }
+
+            ActiveFilesForSerialization = fileSystemState.ActiveFilesForSerialization;
+            _watchedFolders = fileSystemState._watchedFolders;
+            KnownPassphrases = fileSystemState.KnownPassphrases;
         }
 
         public virtual async Task Save()
