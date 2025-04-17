@@ -120,7 +120,7 @@ namespace AxCrypt.App.Desktop.Services
 
             if (SecMessengerUtility.CanUpdateFreeUserCount())
             {
-                New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).UpdateFreeUserSecretsCount();
+                New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).UpdateFreeUserSecuredMessengerLimit();
             }
 
             // await NotificationLogger.PushAsync(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address, NotificationType.SecuredMessageSent, Texts.SentSecuredMessageNotificationText, viewModel.ReceiverList.Select(sem => sem.EmailAddress).ToArray(), null);
