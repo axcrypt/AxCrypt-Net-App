@@ -180,7 +180,7 @@ namespace AxCrypt.App.Desktop.Services
         {
             if (messengerListViewModel.SecMsgSearchFilters == SecureMsgrSearchFilters.None)
             {
-                return null;
+                return messengerListViewModel!;
             }
 
             IEnumerable<SecuredMessage> messages = await SecuredMessengerFacade.GetSecMsgSearchFilterAsync(messengerListViewModel.SecMessengerFilterTab, messengerListViewModel.SecMsgSearchFilters);

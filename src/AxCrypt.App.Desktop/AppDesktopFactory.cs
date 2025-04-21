@@ -51,7 +51,7 @@ public static class AppDesktopFactory
         services.AddSingleton<ImportPrivateKeyViewModel>();
         services.AddSingleton<VerifyAccountDialogViewModel>();
         services.AddSingleton<VerifyPasswordViewModel>();
-        services.AddSingleton<UpgradeVersionViewModel>();
+        services.AddSingleton<GlobalDialogViewModel>();
 
         services.AddSingleton<NewSecretViewModel>();
         services.AddSingleton<ShareSecretViewModel>();

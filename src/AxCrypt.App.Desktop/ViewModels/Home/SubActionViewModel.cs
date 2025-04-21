@@ -195,7 +195,7 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
             if (displayName.ToLower().Contains("google drive"))
                 return "ggldrv-icon";
             if (displayName.ToLower().Contains("dropbox"))
-                return "ggldrv-icon";
+                return "drpbx-icon";
 
             return "default-icon";
         }

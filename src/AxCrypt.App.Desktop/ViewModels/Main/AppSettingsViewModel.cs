@@ -59,7 +59,6 @@ public class AppSettingsViewModel : ViewModelBase
         _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), (bool isLoggedOn) => { if (isLoggedOn) { StartInactivitySignOut(); } });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DebugMode), (bool enabled) => { UpdateDebugMode(enabled); });
     }
 
@@ -328,12 +327,6 @@ public class AppSettingsViewModel : ViewModelBase
                 VersionHoverText = Texts.ClickToCheckForNewerVersionTooltip;
                 break;
         }
-    }
-
-    private async Task DisplayUpdateCheckPopups()
-    {
-        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel!.DownloadVersion);
-        _userInitiatedUpdateCheckPending = false;
     }
 
     public void OpenOptions()

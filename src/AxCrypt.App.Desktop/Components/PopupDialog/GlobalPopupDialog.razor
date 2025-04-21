@@ -5,27 +5,27 @@
 
 @using static AxCrypt.Abstractions.TypeResolve
 
-@inject UpgradeVersionViewModel versionViewModel
+@inject GlobalDialogViewModel versionViewModel
 
 @if (IsVisible)
 {
-    <div id="modal-dialog1" class="modalDialog">
+    <div id="modal-dialog6" class="modalDialog">
         <div class="invite-popup">
             <div class="modal-header">
-                <label for="title" class="modal-title">@versionViewModel.LogOnViewModel!.UpgradeVersion!.Title</label>
+                <label for="title" class="modal-title">@versionViewModel.LogOnViewModel!.GlobalViewModel!.Title</label>
             </div>
             <div class="modal-body">
                 <div class="label-text-1">
-                    <label style="">@versionViewModel.LogOnViewModel.UpgradeVersion.MessageText</label>
+                    <label style="">@versionViewModel.LogOnViewModel.GlobalViewModel.MessageText</label>
                 </div>
                 <div class="modal-footer">
                     <button class="button font-medium success btn-small" @onclick="versionViewModel.Button_OkClicked">@Texts.ButtonOkText</button>
-                    @if (versionViewModel.LogOnViewModel.UpgradeVersion.DontShowAgainOptions != DoNotShowAgainOptions.MasterKeyWarning)
+                    @if (versionViewModel.LogOnViewModel.GlobalViewModel.DontShowAgainOptions != DoNotShowAgainOptions.MasterKeyWarning)
                     {
                         <button class="btn-small font-medium button cancel" @onclick="versionViewModel.Button_CancelClicked">@Texts.ButtonCancelText</button>
                     }
                 </div>
-                @if (versionViewModel.LogOnViewModel.UpgradeVersion.DontShowAgainOptions != DoNotShowAgainOptions.None)
+                @if (versionViewModel.LogOnViewModel.GlobalViewModel.DontShowAgainOptions != DoNotShowAgainOptions.None)
                 {
                     <div>
                         <label> <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@versionViewModel.IsCheckboxDontShowThisAgain" />@Texts.DontShowAgainCheckBoxText</label>
@@ -51,7 +51,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        versionViewModel.LogOnViewModel!.UpgradeVersionDialog.OnDialogVisibilityChanged += UpdateUpgradeVersionDialogState;
+        versionViewModel.LogOnViewModel!.GlobalPopupDialog.OnDialogVisibilityChanged += UpdateUpgradeVersionDialogState;
     }
 
     private void ToggleCheckbox(ChangeEventArgs e)

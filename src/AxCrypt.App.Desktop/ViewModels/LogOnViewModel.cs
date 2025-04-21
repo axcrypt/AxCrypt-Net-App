@@ -27,7 +27,7 @@ public class LogOnViewModel : ViewModelBase
         VerifyPasswordDialog = new CommonDialogService();
         AboutDialog = new CommonDialogService();
         FeedbackDialog = new CommonDialogService();
-        UpgradeVersionDialog = new CommonDialogService();
+        GlobalPopupDialog = new CommonDialogService();
         AdvancedOptionsDialog = new CommonDialogService();
     }
 
@@ -94,8 +94,8 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService FeedbackDialog
     { get { return GetProperty<CommonDialogService>(nameof(FeedbackDialog)); } set { SetProperty(nameof(FeedbackDialog), value); } }
     
-    public CommonDialogService UpgradeVersionDialog
-    { get { return GetProperty<CommonDialogService>(nameof(UpgradeVersionDialog)); } set { SetProperty(nameof(UpgradeVersionDialog), value); } }
+    public CommonDialogService GlobalPopupDialog
+    { get { return GetProperty<CommonDialogService>(nameof(GlobalPopupDialog)); } set { SetProperty(nameof(GlobalPopupDialog), value); } }
     
     public CommonDialogService AdvancedOptionsDialog
     { get { return GetProperty<CommonDialogService>(nameof(AdvancedOptionsDialog)); } set { SetProperty(nameof(AdvancedOptionsDialog), value); } }
@@ -132,7 +132,7 @@ public class LogOnViewModel : ViewModelBase
 
     public LogOnAccountViewModel LogOnAccountModel { get; set; }
 
-    public UpgradeVersionViewModel? UpgradeVersion { get; set; }
+    public GlobalDialogViewModel? GlobalViewModel { get; set; }
 
     public PopupButtons PopupButtons { get; set; }
 

@@ -7,15 +7,15 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 
-public class UpgradeVersionViewModel
+public class GlobalDialogViewModel
 {
-    public UpgradeVersionViewModel()
+    public GlobalDialogViewModel()
     {
         LogOnViewModel = AxCServiceProviderExtension.GetService<LogOnViewModel>();
         LogOnViewModel.PopupButtons = PopupButtons.None;
     }
 
-    public UpgradeVersionViewModel(string title, string message, DoNotShowAgainOptions dontShowAgain)
+    public GlobalDialogViewModel(string title, string message, DoNotShowAgainOptions dontShowAgain)
     {
         Title = title;
         MessageText = message;
@@ -34,53 +34,47 @@ public class UpgradeVersionViewModel
 
     public async Task<PopupButtons> ShowVersionDialog(PopupButtons buttons, string title, string message, DoNotShowAgainOptions dontShowAgain)
     {
-        LogOnViewModel!.UpgradeVersion = new UpgradeVersionViewModel(title, message, dontShowAgain);
+        LogOnViewModel!.GlobalViewModel = new GlobalDialogViewModel(title, message, dontShowAgain);
         LogOnViewModel.PopupResult = DialogResult.None;
 
         DoNotShowAgainOptions savedFlags = New<UserSettings>().DoNotShowAgain;
-        DoNotShowAgainOptions currentFlags = LogOnViewModel.UpgradeVersion.DontShowAgainOptions;
+        DoNotShowAgainOptions currentFlags = LogOnViewModel.GlobalViewModel.DontShowAgainOptions;
 
         if ((savedFlags & currentFlags) != 0)
         {
             return LogOnViewModel.PopupButtons; 
         }
 
-        LogOnViewModel.UpgradeVersionDialog.Show();
+        LogOnViewModel.GlobalPopupDialog.Show();
 
         while (LogOnViewModel.PopupResult == DialogResult.None)
         {
             await Task.Delay(1000);
         }
 
-        LogOnViewModel.UpgradeVersionDialog.Close();
+        LogOnViewModel.GlobalPopupDialog.Close();
         return LogOnViewModel.PopupButtons;
     }
 
     public void Button_OkClicked()
     {
-        if (LogOnViewModel.UpgradeVersion!.DontShowAgainOptions != DoNotShowAgainOptions.None && IsCheckboxDontShowThisAgain)
+        if (LogOnViewModel.GlobalViewModel!.DontShowAgainOptions != DoNotShowAgainOptions.None && IsCheckboxDontShowThisAgain)
         {
-            New<UserSettings>().DoNotShowAgain = New<UserSettings>().DoNotShowAgain | LogOnViewModel.UpgradeVersion.DontShowAgainOptions!;
+            New<UserSettings>().DoNotShowAgain = New<UserSettings>().DoNotShowAgain | LogOnViewModel.GlobalViewModel.DontShowAgainOptions!;
         }
 
         LogOnViewModel!.PopupResult = DialogResult.OK;
         LogOnViewModel.PopupButtons = PopupButtons.Ok;
-        OpenBetaDownladPage();
     }
 
     public void Button_CancelClicked()
     {
-        if (LogOnViewModel.UpgradeVersion!.DontShowAgainOptions != DoNotShowAgainOptions.None && IsCheckboxDontShowThisAgain)
+        if (LogOnViewModel.GlobalViewModel!.DontShowAgainOptions != DoNotShowAgainOptions.None && IsCheckboxDontShowThisAgain)
         {
-            New<UserSettings>().DoNotShowAgain = (DoNotShowAgainOptions)(New<UserSettings>().DoNotShowAgain | LogOnViewModel.UpgradeVersion.DontShowAgainOptions)!;
+            New<UserSettings>().DoNotShowAgain = (DoNotShowAgainOptions)(New<UserSettings>().DoNotShowAgain | LogOnViewModel.GlobalViewModel.DontShowAgainOptions)!;
         }
 
         LogOnViewModel!.PopupResult = DialogResult.Cancel;
         LogOnViewModel.PopupButtons = PopupButtons.Cancel;
-    }
-
-    private void OpenBetaDownladPage()
-    {
-        Core.BrowseUtility.RedirectTo("https://axcrypt.net/betadownload/");
     }
 }
