@@ -21,9 +21,9 @@ namespace AxCrypt.App.Desktop.Services
 
         Task<SecuredMessage> GetMessageByIdAsync(Guid id);
 
-        Task<bool> SetReadMessageStatusAsync(string id);
+        Task<bool> SetReadMessageStatusAsync(IEnumerable<Guid> selectedMessengerList);
 
-        Task<bool> SetUnreadMessageStatusAsync(string id);
+        Task<bool> SetUnreadMessageStatusAsync(IEnumerable<Guid> selectedMessengerList);
 
         Task<bool> SentMessageAsync(NewSecMsgrViewModel model);
 

@@ -29,10 +29,6 @@ using AxCrypt.Abstractions;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace AxCrypt.Mono
 {
@@ -229,6 +225,15 @@ namespace AxCrypt.Mono
             get
             {
                 return new Uri(_info.FullName).IsUnc;
+            }
+        }
+
+        public override DateTime LastAccessTime
+        {
+            get
+            {
+                _info.Refresh();
+                return _info.LastAccessTimeUtc;
             }
         }
     }

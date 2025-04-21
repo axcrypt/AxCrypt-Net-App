@@ -7,6 +7,7 @@
     content: $IcoAxCryptGrn;
     padding: 10px 5px;
     overflow: hidden;
+    max-width: 100%;
 }
 
 .account {
@@ -324,7 +325,6 @@
     color: $TxtClr;
 }
 
-
 @media (max-width: 768px) {
     .account {
         filter: brightness(1);
@@ -504,7 +504,6 @@
     }
 
     .flex-start {
-
         a {
             text-decoration: underline;
             text-underline-offset: 3.5px;

@@ -296,6 +296,12 @@
             margin: 5px 0px 0 20px;
         }
     }
+
+    a:hover {
+        span {
+            color: $TxtClr !important;
+        }
+    }
 }
 
 .profile-option-container a.active,
@@ -325,9 +331,9 @@
 }
 
 .key-mngnt-Popup a:hover, .key-mngnt-Popup dd:hover, .manage-acc-sec a:hover, .manage-acc-sec dd:hover {
-    background-image: $IcoIndctr;
+    background-image: $IcoSttngIndctr;
     background-repeat: no-repeat;
-    background-position: top left;
+    background-position: top 50% left;
     background-color: $HglhtTxt;
     color: $TxtClr !important;
 }
@@ -533,7 +539,7 @@
 //languages dropdown
 .drp-dwn {
     content: $IcoBack;
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
     width: 8px;
     margin-left: 18px;
 }
@@ -552,7 +558,7 @@
     color: $TxtClr;
 
     .down {
-        transform: rotate(90deg);
+        transform: rotate(-90deg);
     }
 }
 

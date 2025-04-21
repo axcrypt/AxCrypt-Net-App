@@ -6,7 +6,6 @@
 
 @inject SecuredMessengerListViewModel SecuredMessengerListModel
 @inject ViewSecMsgrViewModel ViewSecMsgrViewModel
-@inject IJSRuntime jsRuntime
 
 @* @{
     int messageCount = SecuredMessengerListModel.Messenger.Messages.Count();
@@ -17,7 +16,7 @@
             <NavLink href="messagelist">
                 <img class=" left go-back-arrow" src="" alt="go-back-img" />
             </NavLink>
-            <h2 class="page-title">Secured Messenger</h2>
+            <h2 class="page-title">@Texts.SecuredMessengerLinkLabel</h2>
         </div>
     </div>
 
@@ -63,7 +62,7 @@
             <div id="search-message-list" class="parent-container">
                 <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
 
-                <AxCrypt.App.Desktop.Components.SecuredMessenger.Body Model="@SecuredMessengerListModel" />
+                <AxCrypt.App.Desktop.Components.SecuredMessenger.Body SecMessengerFilterTab="@activeTab" />
             </div>
         </div>
     </div>
@@ -83,12 +82,6 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
-        {
-            await SecuredMessengerListModel.GetMessagesList(activeTab);
-            //await jsRuntime.InvokeVoidAsync("SemScript");
-        }
-
         if (New<AxCrypt.Common.AxCryptOnlineState>().IsOffline)
         {
             await New<Core.UI.IPopup>().ShowAsync(Core.UI.PopupButtons.Ok, Texts.MessageErrorTitle, Texts.NoInternetErrorMessage);
@@ -97,12 +90,9 @@
 
     private async Task SetActiveTab(SecureMsgrFilterTab securedMessengerFilterTab)
     {
-        ViewSecMsgrViewModel.Messenger = new SecuredMessengerModel();
-        ViewSecMsgrViewModel.UpdateViewState();
-
         activeTab = securedMessengerFilterTab;
-        await SecuredMessengerListModel.GetMessagesList(securedMessengerFilterTab);
-        _ = jsRuntime.InvokeVoidAsync("RestoreLoadMoreButton");
+        ViewSecMsgrViewModel.Messenger = new SecuredMessengerModel();
+        UpdatePageState();
     }
 
     private async Task SearchList()

@@ -26,10 +26,6 @@
 #endregion Coypright and License
 
 using AxCrypt.Core.IO;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Mono
@@ -92,6 +88,11 @@ namespace AxCrypt.Mono
         }
 
         public abstract bool IsNetworkPath
+        {
+            get;
+        }
+
+        public abstract DateTime LastAccessTime
         {
             get;
         }

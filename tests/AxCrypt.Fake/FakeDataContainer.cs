@@ -28,11 +28,6 @@
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace AxCrypt.Fake
 {
@@ -150,6 +145,11 @@ namespace AxCrypt.Fake
         public bool IsNetworkPath
         {
             get { return _fileInfo.IsNetworkPath; }
+        }
+
+        public DateTime LastAccessTime
+        {
+            get { return _fileInfo.LastAccessTime; }
         }
     }
 }

@@ -1,9 +1,5 @@
 ﻿using AxCrypt.Core.IO;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
 
 namespace AxCrypt.Fake
 {
@@ -123,6 +119,12 @@ namespace AxCrypt.Fake
         }
 
         public bool IsNetworkPath
+        {
+            get;
+            set;
+        }
+
+        public DateTime LastAccessTime
         {
             get;
             set;

@@ -30,11 +30,7 @@ using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Fake
@@ -47,6 +43,7 @@ namespace AxCrypt.Fake
             public string FullName;
             public DateTime CreationTimeUtc;
             public DateTime LastAccessTimeUtc;
+            public DateTime LastAccessTime;
             public DateTime LastWriteTimeUtc;
             public Stream Stream;
         }
@@ -480,6 +477,11 @@ namespace AxCrypt.Fake
                 }
                 return false;
             }
+        }
+
+        public DateTime LastAccessTime
+        {
+            get { return _file.LastAccessTime; }
         }
     }
 }

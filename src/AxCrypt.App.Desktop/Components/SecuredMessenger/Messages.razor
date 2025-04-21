@@ -5,8 +5,7 @@
 
 @using static AxCrypt.Abstractions.TypeResolve;
 
-@inject ViewSecMsgrViewModel ViewSecMsgrViewModel
-@inject IJSRuntime jsRuntime
+@inject ViewSecMsgrViewModel ManageSecMgrViewModel
 
 @if (Model.Message?.TheMessage != null && Model.Message.TheMessage.Any())
 {
@@ -20,7 +19,7 @@
 
         read = DateTime.MinValue;
     }
-    string shortUserText = messageToListText.Substring(0, 2).ToUpper();
+    string shortUserText = Model.IsSelected ? "" : messageToListText.Substring(0, 2).ToUpper();
 
     string fontClass = "";
     string icoRead = "";
@@ -32,16 +31,25 @@
     }
 
     Guid messageSelectionId = Model.ParentId == Guid.Empty ? Model.Id : Model.ParentId;
-    <div id="unread-message-@messageSelectionId" class="unread-message @fontClass" data-id="@Model.Id" data-parent="@Model.ParentId" @onclick="async ()=> await ViewSecMsgrViewModel.ViewMessageReplies(messageSelectionId, SecMessengerFilterTab)">
+    <div id="unread-message-@messageSelectionId" class="unread-message @fontClass" data-id="@Model.Id" data-parent="@Model.ParentId" @onclick="async (e)=> await ManageSecMgrViewModel.ViewMessageReplies(messageSelectionId, SecMessengerFilterTab, e)">
         <div>
-            <table class="hover-table">
+            <table class="hover-table @((Model.IsSelected || ManageSecMgrViewModel.SelectedMessageId == messageSelectionId) ? "msg-selected" : "")">
                 <tbody>
                     <tr>
                         <td rowspan="2" class="first" style="width: 12%;">
                             <div class="acc-prfl-container">
                                 <div class="@icoRead dsk-hide"></div>
-                                <div class="acc-prfl fnt-small second">@shortUserText</div>
-                                @* <input type="checkbox" class="hover-checkbox" style="display: none;" data-id="@messageSelectionId"> *@
+                                <div class="acc-prfl fnt-small second" style="@(Model.IsSelected ? "display: none;" : "display: block;")">
+                                    @shortUserText
+                                </div>
+                                <input type="checkbox"
+                                       class="hover-checkbox"
+                                       style="@(Model.IsSelected ? "display: block;" : "display: none;")"
+                                       checked="@Model.IsSelected"
+                                       bind-checked="@Model.IsSelected"
+                                       @onclick:stopPropagation="true"
+                                       @onchange="() => ManageSecMgrViewModel.SelectMessagesForActions(Model)"
+                                       data-id="@messageSelectionId" />
                             </div>
                         </td>
 
@@ -54,9 +62,12 @@
                                 }
                             </span>
                         </td>
+                        <td class="mob-hide">
+                            <div class="@icoRead"></div>
+                        </td>
                     </tr>
                     <tr>
-                        <td rowspan="2" class="second">
+                        <td rowspan="2" class="second" style="font-size:12px;">
                             <img class="clck-img" src="images/default/IcoClock.svg" />
                             <span class="grey-clr text-fnt-size">Visible until:</span>
                             <span class="text-fnt-size">
@@ -65,18 +76,15 @@
                                     Utility.ToDateString(Model.Message.VisibleUntil.ToLocalTime()))
                             </span>
                         </td>
-                        <td class="grey-clr text-size" style="vertical-align: top;">@Utility.ToDateString(Model.CreatedUtc.ToLocalTime())</td>
+                        <td class="grey-clr text-size" style="text-align: right; padding-right: 10px;font-size:11px;">
+                            @Utility.ToDateString(Model.CreatedUtc.ToLocalTime())
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 }
-
-<EditForm Model="Model" id="message-selection-form">
-    <input id="selected-message-id-hidden" type="hidden" />
-    <input type="hidden" name="SecMessengerFilterTab" @bind="SecMessengerFilterTab" id="sec-messenger-filter-tab" />
-</EditForm>
 
 @code {
 
@@ -86,18 +94,29 @@
     [Parameter]
     public SecuredMessage Model { get; set; } = new();
 
-    string currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address.ToString();
+    string currentUser = "";
 
     protected override void OnInitialized()
     {
+        currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address;
         base.OnInitialized();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+    }
+
+    private void OnMessageCheckboxChanged(ChangeEventArgs e)
+    {
+        UpdateState();
+    }
+
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
         {
-            //await jsRuntime.InvokeVoidAsync("SemScript");
-        }
+            StateHasChanged();
+        });
     }
 }

@@ -30,10 +30,6 @@ using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -371,6 +367,15 @@ namespace AxCrypt.Mono
             get
             {
                 return new Uri(_file.FullName).IsUnc;
+            }
+        }
+
+        public override DateTime LastAccessTime
+        {
+            get
+            {
+                _file.Refresh();
+                return _file.LastAccessTime;
             }
         }
     }

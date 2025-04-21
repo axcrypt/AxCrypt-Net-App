@@ -109,14 +109,6 @@
     font-weight: 700;
 }
 
-.read-txt-size {
-    .read-text {
-        .text-fnt-size {
-            font-weight: 700 !important;
-        }
-    }
-}
-
 .btn-size {
     width: 124px;
 }
@@ -129,12 +121,15 @@
     background-color: $colMbrDisable;
 }
 
-.read-txt-size {
-    .ico-unread {
-        content: $IcoUnread;
-        float: right;
-        padding-right: 15px;
-    }
+.read-text {
+    font-weight: 700 !important;
+}
+
+.ico-unread {
+    content: $IcoUnread;
+    float: right;
+    padding-right: 15px;
+    padding-top: 5px;
 }
 
 .inbox-img {
@@ -373,6 +368,10 @@
     background-color: $colHovrbox !important;
 }
 
+.msg-selected {
+    background-color: $colHovrbox;
+}
+
 .show-all .acc-prfl {
     display: none;
 }
@@ -435,7 +434,7 @@ textarea[readonly] {
 }
 
 .multi-chckbx {
-    margin: 0px !important;
+    margin-right: 5% !important;
 }
 
 .multi-dlt {
@@ -624,13 +623,11 @@ textarea[readonly] {
         left: -30px;
     }
 
-    .read-txt-size {
-        .ico-unread {
-            float: left;
-            position: absolute;
-            left: -18px;
-            margin-top: 7px;
-        }
+    .ico-unread {
+        float: left;
+        position: absolute;
+        left: -18px;
+        margin-top: 7px;
     }
 
     .secured-messenger {

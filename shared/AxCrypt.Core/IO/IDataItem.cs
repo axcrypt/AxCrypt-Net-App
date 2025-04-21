@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace AxCrypt.Core.IO
+﻿namespace AxCrypt.Core.IO
 {
     public interface IDataItem
     {
@@ -54,5 +49,7 @@ namespace AxCrypt.Core.IO
         void Delete();
 
         bool IsNetworkPath { get; }
+
+        DateTime LastAccessTime { get; }
     }
 }

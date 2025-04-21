@@ -144,6 +144,7 @@ namespace AxCrypt.Core.SecuredMessenger
         }
 
         private bool _showLoadingWheel;
+
         public bool ShowLoadingWheel
         {
             get
@@ -155,6 +156,8 @@ namespace AxCrypt.Core.SecuredMessenger
                 _showLoadingWheel = value;
             }
         }
+
+        public bool IsSelected { get; set; }
 
         #region IEquatable<Message> Members
 

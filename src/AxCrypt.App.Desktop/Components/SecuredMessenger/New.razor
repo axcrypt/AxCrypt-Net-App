@@ -171,6 +171,7 @@
         bool success = await newSecMsgrViewModel.SentMessageAsync(newSecMsgrViewModel);
         if (success)
         {
+            //            StatusAlertService.Success(Texts.SendSecuredMessageSuccess);
             StatusAlertService.Success("Your message has been sent!");
             newSecMsgrViewModel.IsVisible = false;
             await SetSentTabActive();

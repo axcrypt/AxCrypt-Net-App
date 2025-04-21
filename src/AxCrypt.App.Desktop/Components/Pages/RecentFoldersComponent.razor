@@ -7,10 +7,13 @@
 
 @if (RecentFoldersViewModel.RecentFoldersList.Any())
 {
-    <div @onclick="RecentFoldersViewModel.SortByDate" style="padding-bottom: 20px;">
-        <label class="font-medium">@Texts.SecretsSortOrderLabel: <span class="txt-clr">@Texts.InvoiceDateHeadline</span></label>
-        <img class="arw-img" src="" alt="arrow-image" />
-        <img class="date-drpdwn" src="" alt="arrow-image" />
+    <div style="padding-bottom: 20px;">
+        <label class="font-medium">@Texts.SecretsSortOrderLabel</label>
+        <select id="FoldersSortOrderOptions" name="FoldersSortOrder" @onchange="RecentFoldersViewModel.HandleSortChange"
+                style="width:110px; height: 31px; padding: 3px; border-radius: 4px; margin: 0%">
+            <option value="Date">@Texts.InvoiceDateHeadline</option>
+            <option value="Content">@Texts.SecretsSortOrderOptionByContent</option>
+        </select>
     </div>
 }
 
@@ -34,7 +37,7 @@
             string folderWithoutTrailingSlash = folder.TrimEnd('\\');
             <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls" style="white-space: nowrap" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
                  @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
-                <img class="fldr-img" src="" /><br /><label title="@folderWithoutTrailingSlash" style="display: inline;">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
+                <img class="fldr-img" src="" /><br /><label title="@folderWithoutTrailingSlash">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
                 <span style="font-size:8px; display: block; padding-top: 0px;">@folderWithoutTrailingSlash</span>
             </div>
         }

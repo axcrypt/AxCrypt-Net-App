@@ -244,6 +244,9 @@
   height: 14px;
   margin: 5px 0px 0 20px;
 }
+.settings-menu-item-container a:hover span {
+  color: #48772C !important;
+}
 
 .profile-option-container a.active .kym-sec,
 .profile-option-container a:hover .kym-sec {
@@ -272,7 +275,7 @@
 .key-mngnt-Popup a:hover, .key-mngnt-Popup dd:hover, .manage-acc-sec a:hover, .manage-acc-sec dd:hover {
   background-image: url(/images/premium/IcoIndctr.svg);
   background-repeat: no-repeat;
-  background-position: top left;
+  background-position: top 50% left;
   background-color: #E8FEDE;
   color: #48772C !important;
 }
@@ -452,7 +455,7 @@
 }
 .drp-dwn {
   content: url(/images/premium/BtnBack.svg);
-  transform: rotate(-90deg);
+  transform: rotate(90deg);
   width: 8px;
   margin-left: 18px;
 }
@@ -471,7 +474,7 @@
   color: #48772C;
 }
 .dropbtn.active .down {
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
 }
 
 .tick-icon {

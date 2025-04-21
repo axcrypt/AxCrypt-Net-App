@@ -1,12 +1,15 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.SecuredMessenger;
-using AxCrypt.App.Desktop.Components.SecuredMessenger;
 using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.SecuredMessenger;
+using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,21 +20,26 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 {
     public class ViewSecMsgrViewModel : ViewModelBase
     {
-        ISecureMessagingService _msgService { get; set; }
-        IStatusAlertService _statusAlertService { get; set; }
+        private ISecureMessagingService _messageService { get; set; }
+        private IStatusAlertService _statusAlertService { get; set; }
 
-        private NewSecMsgrViewModel _newSecMsgrViewModel;
+        public DateTime IsRead { get; set; } = DateTime.MinValue;
 
         public ViewSecMsgrViewModel(ISecureMessagingService msgService, IStatusAlertService statusAlertService, NewSecMsgrViewModel newSecMsgrViewModel)
         {
-            _msgService = msgService;
+            _messageService = msgService;
             _statusAlertService = statusAlertService;
-            _newSecMsgrViewModel = newSecMsgrViewModel;
+            NewSecMsgrViewModel = newSecMsgrViewModel;
         }
 
         public SecuredMessengerModel Messenger { get; set; } = new SecuredMessengerModel();
 
+        public IList<SecuredMessage> Messages { get; set; } = new List<SecuredMessage>();
+
+        public Guid? SelectedMessageId { get; set; } = Guid.Empty;
+
         private bool _showLoadingWheel;
+
         public bool ShowLoadingWheel
         {
             get
@@ -45,17 +53,25 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             }
         }
 
-        public async Task ViewMessageReplies(Guid messageId, SecureMsgrFilterTab securedMessengerFilterTab)
+        public bool SelectAllMessages { get; set; }
+
+        public NewSecMsgrViewModel NewSecMsgrViewModel { get; set; }
+
+        public async Task ViewMessageReplies(Guid messageId, SecureMsgrFilterTab securedMessengerFilterTab, MouseEventArgs e)
         {
             if (messageId == Guid.Empty)
             {
                 return;
             }
 
+            SelectedMessageId = messageId;
+
             Messenger = new SecuredMessengerModel();
+            NewSecMsgrViewModel.IsVisible = false;
 
             ShowLoadingWheel = true;
-            Messenger = await _msgService.GetModelForViewMessage(messageId, securedMessengerFilterTab);
+            IsRead = DateTime.MaxValue;
+            Messenger = await _messageService.GetModelForViewMessage(messageId, securedMessengerFilterTab);
             Messenger.SecMessengerFilterTab = securedMessengerFilterTab;
             ShowLoadingWheel = false;
         }
@@ -77,7 +93,7 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             messengerMsg.ShowLoadingWheel = true;
             UpdateViewState();
             IEnumerable<Guid> selectedMessengerList = new List<Guid> { messengerId };
-            bool deleted = await _msgService.DeleteMessagesByIds(selectedMessengerList, secMessengerFilterTab);
+            bool deleted = await _messageService.DeleteMessagesByIds(selectedMessengerList, secMessengerFilterTab);
             if (deleted)
             {
                 _statusAlertService.Success(string.Format(Texts.DeletionSuccess, "Message"));
@@ -98,13 +114,13 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
                 return;
             }
 
-            _newSecMsgrViewModel.Initialize();
-            _newSecMsgrViewModel.Id = messengerId;
-            _newSecMsgrViewModel.ParentId = parentId;
-            _newSecMsgrViewModel.ReceiverEmails = recipients;
-            _newSecMsgrViewModel.ReceiverList = recipients.Split(",").Select(ru => new MessengerReceiverViewModel { EmailAddress = ru, Read = DateTime.MinValue }).ToList();
+            NewSecMsgrViewModel.Initialize();
+            NewSecMsgrViewModel.Id = messengerId;
+            NewSecMsgrViewModel.ParentId = parentId;
+            NewSecMsgrViewModel.ReceiverEmails = recipients;
+            NewSecMsgrViewModel.ReceiverList = recipients.Split(",").Select(ru => new MessengerReceiverViewModel { EmailAddress = ru, Read = DateTime.MinValue }).ToList();
 
-            _newSecMsgrViewModel.IsVisible = true;
+            NewSecMsgrViewModel.IsVisible = true;
         }
 
         public async Task ViewMessageById(Guid messageId)
@@ -121,7 +137,7 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 
             messengerMsg.ShowLoadingWheel = true;
             UpdateViewState();
-            SecuredMessage message = await _msgService.GetMessageByIdAsync(messageId);
+            SecuredMessage message = await _messageService.GetMessageByIdAsync(messageId);
             if (message == null)
             {
                 messengerMsg.ShowLoadingWheel = false;
@@ -132,6 +148,111 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             messengerMsg.Message = message.Message;
             messengerMsg.ShowLoadingWheel = false;
             UpdateViewState();
+        }
+
+        public bool isMultiCheckboxVisible = false;
+
+        public void ToggleMultiCheckbox()
+        {
+            isMultiCheckboxVisible = !isMultiCheckboxVisible;
+        }
+
+        internal void ComposeNewMessage()
+        {
+            if (!New<AxCryptOnlineState>().IsOnline)
+            {
+                _statusAlertService.Error(Texts.NoInternetErrorMessage);
+                return;
+            }
+
+            NewSecMsgrViewModel.Initialize();
+            NewSecMsgrViewModel.IsVisible = true;
+        }
+
+        internal void SelectMessagesForActions(SecuredMessage message)
+        {
+            message.IsSelected = !message.IsSelected;
+        }
+
+        private IEnumerable<Guid> GetSelectedMessagesList()
+        {
+            return Messages.Where(msg => msg.IsSelected)?.Select(m => m.Id) ?? new List<Guid>();
+        }
+
+        internal async Task MultiActionAsync(string actionType)
+        {
+            IEnumerable<Guid> selectedMessengerList = GetSelectedMessagesList();
+            if (!selectedMessengerList.Any())
+            {
+                return;
+            }
+
+            bool updated = false;
+            using (ProcessIndicator progress = new ProcessIndicator())
+            {
+                switch (actionType)
+                {
+                    case "delete":
+                        await DeleteSelectedMessagesAsync(selectedMessengerList);
+                        break;
+
+                    case "read":
+                        updated = await _messageService.SetReadMessageStatusAsync(selectedMessengerList);
+                        if (updated)
+                        {
+                            SetReadOrUnreadMessage(selectedMessengerList, New<INow>().Utc);
+                        }
+                        break;
+
+                    case "unread":
+                        updated = await _messageService.SetUnreadMessageStatusAsync(selectedMessengerList);
+                        if (updated)
+                        {
+                            SetReadOrUnreadMessage(selectedMessengerList, DateTime.MinValue);
+                        }
+                        break;
+
+                    default:
+                        Console.WriteLine($"Invalid action type {actionType}");
+                        break;
+                }
+
+                SelectAllMessages = false;
+                UpdateViewState();
+            }
+        }
+
+        private async Task DeleteSelectedMessagesAsync(IEnumerable<Guid> selectedMessengerList)
+        {
+            bool updated = await _messageService.DeleteMessagesByIds(selectedMessengerList, Messenger.SecMessengerFilterTab);
+            if (!updated)
+            {
+                _statusAlertService.Error(string.Format(Texts.DeletionFailed, "Message"));
+                return;
+            }
+
+            Messages = Messages.Where(msg => !selectedMessengerList.Contains(msg.Id)).ToList();
+            _statusAlertService.Success(string.Format(Texts.DeletionSuccess, "Message"));
+        }
+
+        private void SetReadOrUnreadMessage(IEnumerable<Guid> selectedMessengerList, DateTime visibility)
+        {
+            List<SecuredMessage> mess = Messages.Where(msg => selectedMessengerList.Contains(msg.Id)).ToList();
+            mess.ForEach(msg =>
+            {
+                msg.IsSelected = false;
+                msg.Message.ReceiverList.FirstOrDefault(ru => ru.User == New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address)!.Read = visibility;
+            });
+        }
+
+        internal void ToggleAllMessages(ChangeEventArgs e)
+        {
+            bool isChecked = Convert.ToBoolean(e.Value);
+            SelectAllMessages = isChecked;
+            foreach (SecuredMessage msg in Messages)
+            {
+                msg.IsSelected = isChecked;
+            }
         }
     }
 }

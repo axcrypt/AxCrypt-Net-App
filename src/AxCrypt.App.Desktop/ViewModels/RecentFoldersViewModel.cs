@@ -1,11 +1,11 @@
-﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Desktop.Services.Interface;
-using AxCrypt.App.Desktop.Helpers;
+﻿using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Core;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Core.UI;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 
@@ -81,6 +80,40 @@ public class RecentFoldersViewModel : ViewModelBase
 
             RecentFoldersList = new ObservableCollection<string>(_isDescending ? data.Where(rf => rf != null).OrderByDescending(rf => rf.LastWriteTimeUtc).Select(f => f.FullName) : data.Where(rf => rf != null).OrderBy(rf => rf.LastWriteTimeUtc).Select(f => f.FullName));
 
+            _isDescending = !_isDescending;
+        }
+    }
+
+    public void HandleSortChange(ChangeEventArgs e)
+    {
+        string selectedValue = e.Value?.ToString();
+        if (!string.IsNullOrEmpty(selectedValue))
+        {
+            SortBy(selectedValue);
+            UpdateViewState();
+        }
+    }
+
+    public void SortBy(string sortOption)
+    {
+        if (RecentFoldersList.Any())
+        {
+            IEnumerable<IDataContainer> dataContainers = RecentFoldersList.Select(f => New<IDataContainer>(f));
+            IEnumerable<IDataContainer> sortedData = sortOption switch
+            {
+                "Date" =>
+                   _isDescending
+                        ? dataContainers.Where(rf => rf != null).OrderByDescending(rf => rf.LastAccessTime)
+                        : dataContainers.Where(rf => rf != null).OrderBy(rf => rf.LastAccessTime),
+
+                "Content" => _isDescending
+                    ? dataContainers.OrderByDescending(rf => rf.Name)
+                    : dataContainers.OrderBy(rf => rf.Name),
+
+                _ => dataContainers
+            };
+
+            RecentFoldersList = new ObservableCollection<string>(sortedData.Select(f => f.FullName));
             _isDescending = !_isDescending;
         }
     }

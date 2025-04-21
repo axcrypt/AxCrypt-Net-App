@@ -244,6 +244,9 @@
   height: 14px;
   margin: 5px 0px 0 20px;
 }
+.settings-menu-item-container a:hover span {
+  color: #86B96E !important;
+}
 
 .profile-option-container a.active .kym-sec,
 .profile-option-container a:hover .kym-sec {
@@ -270,9 +273,9 @@
 }
 
 .key-mngnt-Popup a:hover, .key-mngnt-Popup dd:hover, .manage-acc-sec a:hover, .manage-acc-sec dd:hover {
-  background-image: url(/images/free/IcoIndctr.svg);
+  background-image: url(/images/free/IcoIndctrGreen.svg);
   background-repeat: no-repeat;
-  background-position: top left;
+  background-position: top 50% left;
   background-color: #EEF7E9;
   color: #86B96E !important;
 }
@@ -452,7 +455,7 @@
 }
 .drp-dwn {
   content: url(/images/free/BtnBack.svg);
-  transform: rotate(-90deg);
+  transform: rotate(90deg);
   width: 8px;
   margin-left: 18px;
 }
@@ -471,7 +474,7 @@
   color: #86B96E;
 }
 .dropbtn.active .down {
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
 }
 
 .tick-icon {
@@ -809,7 +812,4 @@
   .top-menu {
     gap: 15px;
   }
-}
-.key-mngnt-Popup a:hover, .key-mngnt-Popup dd:hover, .manage-acc-sec a:hover, .manage-acc-sec dd:hover {
-  background-image: url(/images/free/IcoIndctrGreen.svg) !important;
 }

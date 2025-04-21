@@ -127,9 +127,8 @@ namespace AxCrypt.App.Desktop.Services
             return true;
         }
 
-        public async Task<bool> SetReadMessageStatusAsync(string messengerId)
+        public async Task<bool> SetReadMessageStatusAsync(IEnumerable<Guid> selectedMessengerList)
         {
-            IEnumerable<Guid> selectedMessengerList = messengerId.Split(',').Select(mid => new Guid(mid));
             if (selectedMessengerList == null)
             {
                 return false;
@@ -138,9 +137,8 @@ namespace AxCrypt.App.Desktop.Services
             return await New<LogOnIdentity, Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).UpdateAsync(selectedMessengerList, New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address);
         }
 
-        public async Task<bool> SetUnreadMessageStatusAsync(string messengerId)
+        public async Task<bool> SetUnreadMessageStatusAsync(IEnumerable<Guid> selectedMessengerList)
         {
-            IEnumerable<Guid> selectedMessengerList = messengerId.Split(',').Select(mid => new Guid(mid));
             if (selectedMessengerList == null)
             {
                 return false;

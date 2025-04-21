@@ -1,39 +1,45 @@
 ﻿@using AxCrypt.Api.SecuredMessenger
 @using AxCrypt.App.Shared.Services
 @using AxCrypt.App.Desktop.ViewModels.SecuredMessenger
+@using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.Content;
 @using AxCrypt.Core.SecuredMessenger
+@using AxCrypt.Api.Extension
 
-@inject ViewSecMsgrViewModel ViewSecMsgrViewModel
-@inject IJSRuntime jsRuntime
+@inject ViewSecMsgrViewModel ManageSecMgrViewModel
+@inject SecuredMessengerListViewModel Model
 
 <div class="row">
     <div class="medium-5 all-msg" style="padding: 0;">
         <div class="center-column">
             <button class="button fnt-high" style="text-align: left; height: 44px;">
-                @* <input type="checkbox" class="multi-chckbx" title="Select All" /> *@
-                <span class="mutli-slct-btn">@TabTitleText</span>
-                @*                 <div class="slct-actions">
-                <img class="select-option" src="/images/default/IcoSelect.svg" alt="delete-img" title="Select" />
-                <img class="multi-dlt" src="" alt="delete-img" title="Delete" onclick="window.multiAction('MultiActionDelete')" />
-                @if (Model.Messenger.SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
+                @if (ManageSecMgrViewModel.isMultiCheckboxVisible)
                 {
-                <img class="multi-read" src="" alt="read-img" title="Read" onclick="window.multiAction('MultiActionRead')" />
-                <img class="multi-unread" src="" alt="unread-img" title="Unread" onclick="window.multiAction('MultiActionUnread')" />
+                    <input type="checkbox" class="multi-chckbx" title="Select All" checked="@ManageSecMgrViewModel.SelectAllMessages" bind-checked="@ManageSecMgrViewModel.SelectAllMessages" @onchange="ManageSecMgrViewModel.ToggleAllMessages" />
                 }
-                </div> *@
+                <span class="mutli-slct-btn">@TabTitleText</span>
+                <div class="slct-actions">
+
+                    <img class="select-option" src="/images/default/IcoSelect.svg" alt="delete-img" title="Select" @onclick="@ManageSecMgrViewModel.ToggleMultiCheckbox" />
+                    <img class="multi-dlt" src="delete-icon.svg" alt="Delete" title="Delete" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("delete"))" />
+                    @if (Model.Messenger.SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
+                    {
+                        <img class="multi-read" src="read-icon.svg" alt="Mark Read" title="Read" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("read"))" />
+                        <img class="multi-unread" src="unread-icon.svg" alt="Mark Unread" title="Unread" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("unread"))" />
+                    }
+                </div>
             </button>
-            <button class="button success new-btn fnt-small" id="create-new-message" @onclick="Model.ComposeNewMessage">
+            <button class="button success new-btn fnt-small" id="create-new-message" @onclick="()=>{ ManageSecMgrViewModel.Messenger = new SecuredMessengerModel(); ManageSecMgrViewModel.ComposeNewMessage(); }">
                 New Message
             </button>
         </div>
         <div id="all-message-list" class="message-list-section">
-            <AxCrypt.App.Desktop.Components.SecuredMessenger.MessagesList Model="@Model" />
+            <AxCrypt.App.Desktop.Components.SecuredMessenger.MessagesList Messages="@ManageSecMgrViewModel.Messages" SecMessengerFilterTab="@SecMessengerFilterTab" />
         </div>
         <a href="javascript:void(0);" id="load-more-btn" @onclick="()=>EnableLoadMoreAction(Model.Messenger.PageNumber)" class="loadMoreActionlnk"> Load More </a>
     </div>
-    <div class="medium-7 columns flex-direction" style="padding:2px 8px; height:auto; max-height:520px; overflow-y:scroll;">
-        @if ((ViewSecMsgrViewModel.Messenger == null || !ViewSecMsgrViewModel.Messenger.Messages.Any()) && !ViewSecMsgrViewModel.ShowLoadingWheel && !Model.NewSecMsgrViewModel.IsVisible)
+    <div class="medium-7 columns flex-direction" style="padding:2px 8px; height:auto; max-height:520px; overflow-y:auto;">
+        @if ((ManageSecMgrViewModel.Messenger == null || !ManageSecMgrViewModel.Messenger.Messages.Any()) && !ManageSecMgrViewModel.ShowLoadingWheel && !ManageSecMgrViewModel.NewSecMsgrViewModel.IsVisible)
         {
             <div class="text-center empty-sec">
                 <span class="fnt-medium">Select an item to read</span><br />
@@ -42,10 +48,10 @@
             </div>
         }
         <div>
-            @if (ViewSecMsgrViewModel.ShowLoadingWheel)
+            @if (ManageSecMgrViewModel.ShowLoadingWheel)
             {
                 <div class="view-section messager-loading" id="messenger-loading-section">
-                    <span>Loading...</span>
+                    <span>@Texts.LoadingText</span>
                 </div>
             }
             <AxCrypt.App.Desktop.Components.SecuredMessenger.New />
@@ -56,19 +62,6 @@
     </div>
 </div>
 
-<EditForm Model="Model.Messenger" id="delete-form">
-    <input type="hidden" id="ids-input-dlt" name="messengerId" value="" />
-    <input type="hidden" id="sec-messenger-filter-tab" name="SecMessengerFilterTab" @bind="Model.Messenger.SecMessengerFilterTab" />
-</EditForm>
-
-<EditForm Model="Model.Messenger" id="read-form">
-    <input type="hidden" id="ids-input-read" name="messengerId" value="" />
-</EditForm>
-
-<EditForm Model="Model.Messenger" id="unread-form">
-    <input type="hidden" id="ids-input-unread" name="messengerId" value="" />
-</EditForm>
-
 <EditForm Model="Model" id="loadmore-button-click">
     <input type="hidden" id="pagenumber-id-hidden" name="pageNumber" value="@Model.Messenger.PageNumber" />
     <input type="hidden" id="sec-messenger-filter-tab" name="secMessengerFilterTab" value="@Model.Messenger.SecMessengerFilterTab" />
@@ -76,21 +69,22 @@
 
 @code {
     [Parameter]
-    public SecuredMessengerListViewModel? Model { get; set; }
+    public SecureMsgrFilterTab SecMessengerFilterTab { get; set; }
 
     protected override void OnInitialized()
     {
         Model.OnUpdateViewState += UpdateState;
-        ViewSecMsgrViewModel.OnUpdateViewState += UpdateState;
+        ManageSecMgrViewModel.OnUpdateViewState += UpdateState;
         base.OnInitialized();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (firstRender || Model.Messenger.SecMessengerFilterTab != SecMessengerFilterTab)
         {
-            // await jsRuntime.InvokeVoidAsync("SemScript");
-            // await jsRuntime.InvokeVoidAsync("setDotNetHelper", DotNetObjectReference.Create(this));
+            await Model.GetMessagesList(SecMessengerFilterTab);
+            ManageSecMgrViewModel.Messages = Model.Messenger.Messages.ToList();
+            ManageSecMgrViewModel.Messenger.SecMessengerFilterTab = SecMessengerFilterTab;
         }
     }
 
@@ -98,7 +92,7 @@
     {
         get
         {
-            switch (Model!.Messenger.SecMessengerFilterTab)
+            switch (SecMessengerFilterTab)
             {
                 case SecureMsgrFilterTab.Inbox:
                     return "Inbox";
@@ -110,50 +104,6 @@
                     return "";
             }
         }
-    }
-
-    [JSInvokable]
-    public async Task MultiActionDelete(string[] checkedIds)
-    {
-        await PerformAction(checkedIds, "delete");
-    }
-
-    [JSInvokable]
-    public async Task MultiActionRead(string[] checkedIds)
-    {
-        await PerformAction(checkedIds, "read");
-    }
-
-    [JSInvokable]
-    public async Task MultiActionUnread(string[] checkedIds)
-    {
-        await PerformAction(checkedIds, "unread");
-    }
-
-    private async Task PerformAction(string[] checkedIds, string actionType)
-    {
-        if (checkedIds == null || checkedIds.Length == 0)
-        {
-            Console.WriteLine("No messages selected.");
-            return;
-        }
-
-        string messengerId = string.Join(",", checkedIds);
-
-        switch (actionType)
-        {
-            case "delete":
-                await Model.DeleteSelection(messengerId, Model.Messenger.SecMessengerFilterTab);
-                break;
-            case "read":
-                await Model.Read(messengerId);
-                break;
-            case "unread":
-                await Model.Unread(messengerId);
-                break;
-        }
-
-        UpdateState();
     }
 
     public async Task<bool> EnableLoadMoreAction(int pageNumberCount)
@@ -173,7 +123,7 @@
     {
         InvokeAsync(() =>
         {
-            StateHasChanged();
+            StateHasChanged(); // Refresh UI
         });
     }
 }
