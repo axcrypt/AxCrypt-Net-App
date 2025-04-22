@@ -116,6 +116,11 @@ public class RecentFilesViewModel : ViewModelBase
 
     private void UpdateSelectedFile(string selectedFile, bool isChecked)
     {
+        if (RecentFilesList == null || !RecentFilesList.Any())
+        {
+            return;
+        }
+
         RecentFilesList.First(rf => rf.FilePath.Equals(selectedFile)).IsChecked = isChecked;
 
         AddToSelectedFileList();

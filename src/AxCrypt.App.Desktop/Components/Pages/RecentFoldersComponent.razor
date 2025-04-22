@@ -17,7 +17,7 @@
 <div class="file-max-hgt hgt-ovflw">
     @if (!RecentFoldersViewModel.HasNoSubscription)
     {
-        <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="(ss) => RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label>Add or Drag Folder</label></div>
+        <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="async (ss) => await RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label>Add or Drag Folder</label></div>
     }
     @if (!RecentFoldersViewModel.RecentFoldersList.Any())
     {
@@ -34,7 +34,8 @@
             string folderWithoutTrailingSlash = folder.TrimEnd('\\');
             <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls" style="white-space: nowrap" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
                  @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
-                <img class="fldr-img" src="" /><br /><label>@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
+                <img class="fldr-img" src="" /><br /><label title="@folderWithoutTrailingSlash">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
+                <p style="font-size:8px;">@folderWithoutTrailingSlash</p>
             </div>
         }
     }
@@ -104,7 +105,8 @@
     string GetBeforeLastFolderName(string path)
     {
         string[] parts = path.TrimEnd(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
-        return parts.Length >= 2 ? $"{parts[^2]}{Path.DirectorySeparatorChar}{parts[^1]}" : path;
+        //return parts.Length >= 2 ? $"{parts[^2]}{Path.DirectorySeparatorChar}{parts[^1]}" : path;
+        return parts.Length >= 1 ? parts[^1] : path;
     }
 
     void UpdateStateChanged()

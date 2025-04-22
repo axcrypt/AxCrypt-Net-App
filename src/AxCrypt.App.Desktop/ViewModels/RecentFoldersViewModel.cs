@@ -153,10 +153,10 @@ public class RecentFoldersViewModel : ViewModelBase
     public async Task AddSecuredFolder(EventArgs eventArgs)
     {
         FolderContextMenu = false;
-        await PremiumFeature_ClickAsync(LicenseCapability.SecureFolders, (ss, ee) => { WatchedFoldersAddSecureFolderMenuItem_Click(ss, ee); return Constant.CompletedTask; }, null, eventArgs);
+        await PremiumFeature_ClickAsync(LicenseCapability.SecureFolders, async (ss, ee) => { await WatchedFoldersAddSecureFolderMenuItem_Click(ss, ee); }, null, eventArgs);
     }
 
-    private async void WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
+    private async Task WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
     {
         FileSelectionEventArgs eventArgs = new FileSelectionEventArgs(new string[] { })
         {
