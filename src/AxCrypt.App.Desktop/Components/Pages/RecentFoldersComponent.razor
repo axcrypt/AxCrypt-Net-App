@@ -14,7 +14,7 @@
     </div>
 }
 
-<div class="file-max-hgt hgt-ovflw">
+<div class="file-max-hgt hgt-ovflw" style="display: flex; flex-wrap: wrap;">
     @if (!RecentFoldersViewModel.HasNoSubscription)
     {
         <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="async (ss) => await RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label>Add or Drag Folder</label></div>
@@ -34,8 +34,8 @@
             string folderWithoutTrailingSlash = folder.TrimEnd('\\');
             <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls" style="white-space: nowrap" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
                  @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
-                <img class="fldr-img" src="" /><br /><label title="@folderWithoutTrailingSlash">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
-                <p style="font-size:8px;">@folderWithoutTrailingSlash</p>
+                <img class="fldr-img" src="" /><br /><label title="@folderWithoutTrailingSlash" style="display: inline;">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
+                <span style="font-size:8px; display: block; padding-top: 0px;">@folderWithoutTrailingSlash</span>
             </div>
         }
     }
