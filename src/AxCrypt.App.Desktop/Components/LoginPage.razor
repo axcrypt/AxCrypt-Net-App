@@ -40,7 +40,10 @@
                 }
                 <div>
                     <label>@Texts.PassphrasePrompt</label>
-                    <input type="password" id="password-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" tabindex="2" />
+                    <div style="position: relative;">
+                        <input type="@PasswordInputType" id="password-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" tabindex="2" />
+                        <i class="@PasswordIconClass" @onclick="TogglePassword"></i>
+                    </div>
                 </div>
                 <br />
                 @* <div class="check-bx" style="margin: 15px 0px;">
@@ -74,6 +77,19 @@
     </section>
 }
 @code {
+
+    private bool isPasswordVisible = false;
+
+    private string PasswordInputType => isPasswordVisible ? "text" : "password";
+
+    private string PasswordIconClass =>
+        isPasswordVisible ? "fa-eye-slash" : "fa-eye";
+
+    private void TogglePassword()
+    {
+        isPasswordVisible = !isPasswordVisible;
+    }
+
     public bool IsEmailReadOnly { get; set; }
 
     protected override async Task OnInitializedAsync()

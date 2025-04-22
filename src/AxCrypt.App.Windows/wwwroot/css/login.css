@@ -170,6 +170,33 @@
   padding: 0;
 }
 
+input[type=password]::-ms-reveal,
+input[type=password]::-ms-clear {
+  display: none;
+}
+
+input[type=password]::-webkit-credentials-auto-fill-button,
+input[type=password]::-webkit-textfield-decoration-container {
+  display: none !important;
+}
+
+.fa-eye {
+  content: url(/images/premium/IcoEye.svg);
+}
+
+.fa-eye-slash {
+  content: url(/images/premium/IcoHiddenPassword.svg);
+}
+
+.fa-eye, .fa-eye-slash {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
 @media (max-width: 768px) {
   .login-btn {
     width: 100%;
@@ -346,12 +373,9 @@
   }
 }
 @media (min-width: 769px) and (max-width: 1400px) {
-  /*#content-wrap {
-      width: 40% !important;
+  .fa-eye, .fa-eye-slash {
+    top: 26px;
   }
-  .sgnin-img {
-      width: 60%;
-  }*/
 }
 @media (min-width: 1500px) {
   .reg-tle {
