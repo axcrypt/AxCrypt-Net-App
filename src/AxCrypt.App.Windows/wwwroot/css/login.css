@@ -170,14 +170,28 @@
   padding: 0;
 }
 
+/* For Edge (Chromium & Legacy) */
 input[type=password]::-ms-reveal,
 input[type=password]::-ms-clear {
   display: none;
 }
 
+/* For Safari and Chrome (WebKit-based) */
 input[type=password]::-webkit-credentials-auto-fill-button,
-input[type=password]::-webkit-textfield-decoration-container {
+input[type=password]::-webkit-textfield-decoration-container,
+input[type=password]::-webkit-clear-button {
   display: none !important;
+}
+
+/* General autofill styling reset (optional) */
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
+/* Firefox-specific (not usually needed, but fallback) */
+input[type=password]::-moz-focus-inner {
+  border: 0;
 }
 
 .fa-eye {
@@ -190,11 +204,12 @@ input[type=password]::-webkit-textfield-decoration-container {
 
 .fa-eye, .fa-eye-slash {
   position: absolute;
-  top: 30px;
   right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
   cursor: pointer;
-  width: 24px;
-  height: 24px;
 }
 
 @media (max-width: 768px) {
@@ -370,11 +385,6 @@ input[type=password]::-webkit-textfield-decoration-container {
   .active-indicator {
     color: #48772C;
     background-color: #48772C;
-  }
-}
-@media (min-width: 769px) and (max-width: 1400px) {
-  .fa-eye, .fa-eye-slash {
-    top: 26px;
   }
 }
 @media (min-width: 1500px) {

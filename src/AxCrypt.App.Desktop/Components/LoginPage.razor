@@ -40,9 +40,9 @@
                 }
                 <div>
                     <label>@Texts.PassphrasePrompt</label>
-                    <div style="position: relative;">
-                        <input type="@PasswordInputType" id="password-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" tabindex="2" />
+                    <div style="position:relative; display:inline-block; width:100%;">
                         <i class="@PasswordIconClass" @onclick="TogglePassword"></i>
+                        <input type="@PasswordInputType" id="password-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" tabindex="2" />
                     </div>
                 </div>
                 <br />
