@@ -33,8 +33,7 @@ public class ProfileViewModel
     public AccountModel Account { get; set; }
     public bool SubsDtlsPopup { get; set; }
     public bool IsDialogOpen { get; set; } = false;
-    public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<INow>().Utc.AddDays(Account.DaysLeft).ToString("dd MMM yyyy");
-
+    public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<LicensePolicy>().Expiration.ToString("dd MMMM yyyy", System.Globalization.CultureInfo.CurrentCulture);
     public ProfileViewModel()
     {
         _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;

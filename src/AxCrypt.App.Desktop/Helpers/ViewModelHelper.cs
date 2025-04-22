@@ -29,26 +29,25 @@ public static class ViewModelHelper
 
     public static int MaxAllowedUsersCountToShare()
     {
-        PlanState planState = New<AccountStatusViewModel>().PlanState;
-        switch (planState)
+        LicenseCapabilities Capability = New<LicensePolicy>().Capabilities;
+
+        if (Capability.Has(LicenseCapability.Business))
         {
-            case PlanState.NoPremium:
-                return MaxShareUsersAllowedFree;
-
-            case PlanState.HasPasswordManager:
-                return MaxShareUsersAllowedPremium;
-
-            case PlanState.HasPremium:
-                return MaxShareUsersAllowedPremium;
-
-            case PlanState.HasBusiness:
-                return MaxShareUsersAllowedBusiness;
-
-            default:
-                throw new ArgumentException("Invalid subscription level.", planState.ToString());
+            return MaxShareUsersAllowedBusiness;
         }
-    }
 
+        if (Capability.Has(LicenseCapability.ShareSecretPremium) || Capability.Has(LicenseCapability.ShareSecretPasswordManager))
+        {
+            return MaxShareUsersAllowedPremium;
+        }
+
+        if (Capability.Has(LicenseCapability.ShareSecretFree))
+        {
+            return MaxShareUsersAllowedFree;
+        }
+
+        return 0;
+    }
     public static bool IsAxCryptOnline()
     {
         if (New<AxCryptOnlineState>().IsOffline)

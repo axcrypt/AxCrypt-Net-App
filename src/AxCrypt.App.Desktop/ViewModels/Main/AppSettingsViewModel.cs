@@ -298,7 +298,8 @@ public class AppSettingsViewModel : ViewModelBase
     public async void CheckAxCryptVersionAsync()
     {
         _userInitiatedUpdateCheckPending = true;
-        await _mainViewModel!.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
+        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel.DownloadVersion);
+        _userInitiatedUpdateCheckPending = false;
     }
 
     public string VersionHoverText { get; set; }

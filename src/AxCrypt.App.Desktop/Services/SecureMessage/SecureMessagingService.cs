@@ -97,7 +97,7 @@ namespace AxCrypt.App.Desktop.Services
             if (!allowToAdd)
             {
                 //_statusAlertService.Error(Texts.SendSecuredMessageFailure);
-                _statusAlertService.Error("Maximum count (10) reached to send a secured message. Please upgrade your subscription!");
+                _statusAlertService.Error("Maximum count reached to send a secured message. Please upgrade your subscription!");
                 return false;
             }
 
@@ -107,7 +107,7 @@ namespace AxCrypt.App.Desktop.Services
             if (viewModel.ReceiverList.Count() > maxSendUserCount)
             {
                 //StatusAlertService.Error(Texts.SendSecuredMessageFailure);
-                _statusAlertService.Error("Maximum recipients count (10) reached to send a secured message. Please upgrade your subscription!");
+                _statusAlertService.Error($"Maximum recipients count{maxSendUserCount} reached to send a secured message. Please upgrade your subscription!");
                 return false;
             }
 

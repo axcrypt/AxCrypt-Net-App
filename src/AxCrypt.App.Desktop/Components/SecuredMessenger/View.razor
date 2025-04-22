@@ -72,6 +72,7 @@
                             <td class="right-align" style="vertical-align: top;">
                                 <input type="button" class="rply-icon" id="reply-button-@messenger.Id"
                                        data-id="@messenger.Id"
+                                       @onclick:stopPropagation="true"
                                        @onclick="async()=>await ViewSecMsgrViewModel.ReplyMessage(messenger.Id, parentId, replyMesssageReceivers)"
                                        value="Reply" name="reply-button" />
 
@@ -79,6 +80,7 @@
                                 {
                                     <input type="button" name="delete-button" class="dlt-icon" value="Delete"
                                            data-id="@messenger.Id"
+                                           @onclick:stopPropagation="true"
                                            @onclick="async()=>await ViewSecMsgrViewModel.DeleteMessageById(messenger.Id, parentId, Model.Messenger.SecMessengerFilterTab)"
                                            style="background-color: transparent; border: none;" />
                                 }

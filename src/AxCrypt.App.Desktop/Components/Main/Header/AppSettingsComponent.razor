@@ -480,7 +480,7 @@
             <div class="modal-body">
                 <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" /><br /><br />
                 <label for="userEmail">@AppSettingsViewModel.EmailLabel</label>
-                <input type="text" id="timeout" class="form-control email-img" readonly value="Timestamp: @AppSettingsViewModel.CreatedTime">
+                <input type="text" id="timeout" class="form-control" readonly value="Timestamp: @AppSettingsViewModel.CreatedTime">
             </div>
             <div class="modal-footer">
                 <button class="button font-medium success btn-large" @onclick="(e)=>AppSettingsViewModel.ChangePassphraseButton_Click(e)" style="width: max-content; max-width: 165px;">

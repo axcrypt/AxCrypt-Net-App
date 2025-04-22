@@ -118,19 +118,6 @@
         }
     }
 
-    private bool IsValidEmail(string email)
-    {
-        try
-        {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == email;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
     private void RemoveEmail(string email)
     {
         if (!newSecMsgrViewModel.ReceiverList.Any(su => su.EmailAddress.ToLower() == email.ToLower()))
@@ -144,7 +131,8 @@
 
     private void AddEmail(string email)
     {
-        if (!IsValidEmail(email))
+        AxCrypt.Core.UI.EmailAddress emailAddress;
+        if (!AxCrypt.Core.UI.EmailAddress.TryParse(email, out emailAddress))
         {
             ErrorMessage = "Please, provide valid email address!";
             return;
@@ -170,7 +158,7 @@
 
         if (newSecMsgrViewModel == null || !newSecMsgrViewModel.ReceiverEmails.Any() || string.IsNullOrWhiteSpace(newSecMsgrViewModel.EncryptedMessage))
         {
-            StatusAlertService.Error("Failed to create a new message");
+            StatusAlertService.Error("Failed to sent a new message!");
             return;
         }
 
@@ -183,7 +171,7 @@
         bool success = await newSecMsgrViewModel.SentMessageAsync(newSecMsgrViewModel);
         if (success)
         {
-            StatusAlertService.Success(@Texts.NewSecretSuccess);
+            StatusAlertService.Success("Your message has been sent!");
             newSecMsgrViewModel.IsVisible = false;
             await SetSentTabActive();
             return;
@@ -211,57 +199,6 @@
     {
         Core.BrowseUtility.RedirectTo("https://axcrypt.net/information/group/");
     }
-
-
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     //await jsRuntime.InvokeVoidAsync("attachValidationOnKey", "new-member-email");
-
-    //     try
-    //     {
-    //         if (firstRender)
-    //         {
-    //             await jsRuntime.InvokeVoidAsync("SemScript");
-    //             await jsRuntime.InvokeVoidAsync("setDotNetHelperNew", DotNetObjectReference.Create(this));
-    //             await jsRuntime.InvokeVoidAsync("preventFormSubmit");
-    //         }
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         Console.WriteLine(ex.Message);
-    //     }
-    // }
-
-    // [JSInvokable]
-    // public async Task UpdateReplyValuesFromJs(string parentId, string messageId, string receiverEmails)
-    // {
-    //     Console.WriteLine($"Received ParentId: {parentId}, MessageId: {messageId}, Emails: {receiverEmails}");
-
-    //     if (Guid.TryParse(parentId, out var parsedParentId) && Guid.TryParse(messageId, out var parsedMessageId))
-    //     {
-    //         this.newSecMsgrViewModel.ParentId = parsedParentId;
-    //         this.newSecMsgrViewModel.ReceiverEmails = receiverEmails;
-    //         await LoadReceiverEmailsFromJs();
-    //         await InvokeAsync(StateHasChanged);
-    //     }
-    //     else
-    //     {
-    //         Console.WriteLine("Invalid GUID format received from JS.");
-    //     }
-    // }
-
-    // private async Task LoadReceiverEmailsFromJs()
-    // {
-    //     var emailFromHiddenField = await jsRuntime.InvokeAsync<string>("getHiddenFieldValue", "new-member-email-hidden");
-
-    //     if (!string.IsNullOrWhiteSpace(emailFromHiddenField))
-    //     {
-    //         ReceiverEmails = emailFromHiddenField.Split(',', StringSplitOptions.RemoveEmptyEntries)
-    //                                              .Select(email => email.Trim())
-    //                                              .ToList();
-    //         Console.WriteLine($"Updated ReceiverEmails: {string.Join(", ", ReceiverEmails)}");
-    //     }
-    // }
 
     void UpdateState()
     {
