@@ -42,7 +42,7 @@ public class RecentFilesViewModel : ViewModelBase
     {
         IsHideRecentFiles = New<UserSettings>().HideRecentFiles;
 
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenus(license); });
+        LogOnViewModel.BindPropertyChanged(nameof(LogOnViewModel.License), (LicenseCapabilities license) => { ConfigureMenus(license); });
 
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
         this.BindPropertyChanged(nameof(SelectedFiles), (IEnumerable<string> files) => { _mainViewModel.SelectedRecentFiles = files; });
@@ -317,7 +317,7 @@ public class RecentFilesViewModel : ViewModelBase
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {
-        if (_mainViewModel.License.Has(requiredCapability))
+        if (LogOnViewModel.License.Has(requiredCapability))
         {
             if (realHandler != null)
             {

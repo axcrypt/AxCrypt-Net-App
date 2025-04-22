@@ -55,8 +55,8 @@ public class AppSettingsViewModel : ViewModelBase
         RestApiBaseUrlInput = Resolve.UserSettings.RestApiBaseUrl.ToString();
         TimeoutInput = Resolve.UserSettings.ApiTimeout.ToString();
 
-        _mainViewModel!.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
-        _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), (bool isLoggedOn) => { if (isLoggedOn) { StartInactivitySignOut(); } });
+        _logOnViewModel!.BindPropertyAsyncChanged(nameof(_logOnViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
+        _logOnViewModel!.BindPropertyChanged(nameof(_logOnViewModel.IsLoggedOn), (bool isLoggedOn) => { if (isLoggedOn) { StartInactivitySignOut(); } });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DebugMode), (bool enabled) => { UpdateDebugMode(enabled); });
@@ -226,7 +226,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     private void StartInactivitySignOut()
     {
-        if (!_mainViewModel.License.Has(LicenseCapability.InactivitySignOut))
+        if (!_logOnViewModel.License.Has(LicenseCapability.InactivitySignOut))
         {
             return;
         }
@@ -519,7 +519,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {
-        if (_mainViewModel.License.Has(requiredCapability))
+        if (_logOnViewModel.License.Has(requiredCapability))
         {
             if (realHandler != null)
             {

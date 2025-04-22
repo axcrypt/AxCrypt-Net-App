@@ -56,7 +56,7 @@ public class RecentFoldersViewModel : ViewModelBase
     public void Initialize()
     {
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
-        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
+        LogOnViewModel.BindPropertyAsyncChanged(nameof(LogOnViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.WatchedFolders), (IEnumerable<string> folders) => { UpdateWatchedFolders(folders); });
         this.BindPropertyChanged(nameof(SelectedRecentFolders), (IEnumerable<string> files) =>
         {
@@ -209,7 +209,7 @@ public class RecentFoldersViewModel : ViewModelBase
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {
-        if (_mainViewModel.License.Has(requiredCapability))
+        if (LogOnViewModel.License.Has(requiredCapability))
         {
             if (realHandler != null)
             {

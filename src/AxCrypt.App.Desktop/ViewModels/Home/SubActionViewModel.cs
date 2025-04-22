@@ -34,7 +34,7 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
         {
             KnownFoldersViewModel = New<KnownFoldersViewModel>();
 
-            _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
+            LogOnViewModel!.BindPropertyChanged(nameof(LogOnViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
             KnownFoldersViewModel!.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
 
             KnownFoldersViewModel!.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
@@ -202,7 +202,7 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
 
         private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
         {
-            if (_mainViewModel.License.Has(requiredCapability))
+            if (LogOnViewModel.License.Has(requiredCapability))
             {
                 if (realHandler != null)
                 {
