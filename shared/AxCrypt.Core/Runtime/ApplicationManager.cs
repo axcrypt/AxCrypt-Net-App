@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.Core.Service.Secrets;
+using AxCrypt.Core.Service.SecuredMessenger;
 
 namespace AxCrypt.Core.Runtime
 {
@@ -34,6 +36,10 @@ namespace AxCrypt.Core.Runtime
             Resolve.UserSettings.Clear();
             Resolve.FileSystemState.Delete();
             Resolve.WorkFolder.FileInfo.FileItemInfo(LocalAccountService.FileName).Delete();
+            Resolve.WorkFolder.FileInfo.FileItemInfo(LocalSecretsService.SecretsFileName).Delete();
+            Resolve.WorkFolder.FileInfo.FileItemInfo(LocalSecretsService.SharedSecretsFileName).Delete();
+            Resolve.WorkFolder.FileInfo.FileItemInfo(LocalSecuredMessengerService.InboxMessageFileName).Delete();
+            Resolve.WorkFolder.FileInfo.FileItemInfo(LocalSecuredMessengerService.SentMessageFileName).Delete();
             New<KnownPublicKeys>().Delete();
             Resolve.UserSettings.SettingsVersion = New<UserSettingsVersion>().Current;
         }
