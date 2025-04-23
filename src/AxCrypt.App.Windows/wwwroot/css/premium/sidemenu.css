@@ -249,7 +249,7 @@
   margin-right: 1.5rem;
   height: 80px;
   background: #E8FEDE;
-  padding: 15px 20px;
+  padding: 15px 10px;
   border-radius: 8px;
 }
 
@@ -269,6 +269,10 @@
 }
 .fist-rw div:nth-child(2) {
   font-weight: 700;
+  font-size: 11px;
+}
+.fist-rw label {
+  font-size: 12px;
 }
 
 .progress-container {
@@ -305,9 +309,10 @@
 
 .progres-fle-txt {
   display: inline-block;
-  max-width: 190px;
+  max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .progress-circle-sec {

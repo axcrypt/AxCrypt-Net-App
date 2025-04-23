@@ -13,10 +13,6 @@ public class CustomProgressBar : IDisposable
         try
         {
             _progressBarService = AxCServiceProviderExtension.ProgressBarService;
-            if (_progressBarService != null)
-            {
-                _progressBarService.Show();
-            }
         }
         catch (Exception exp)
         {

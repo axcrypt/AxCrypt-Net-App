@@ -234,6 +234,7 @@ namespace AxCrypt.Core
                 progress.AddTotal(files.Count());
                 foreach (IDataStore file in files)
                 {
+                    progress.Display = file.Name;
                     await EncryptFileUniqueWithBackupAndWipeAsync(file, encryptionParameters, progress);
                     progress.AddCount(1);
                     progress.Totals.AddFileCount(1);
@@ -498,6 +499,11 @@ namespace AxCrypt.Core
                 {
                     return true;
                 }
+            }
+
+            if (encryptedProperties.DecryptionParameter.CryptoId.IsStandardAndHasStrongerCapability())
+            {
+                return true;
             }
 
             return false;

@@ -16,11 +16,8 @@ public class ProgressBarService
         get => _isVisible;
         set
         {
-            if (_isVisible != value)
-            {
-                _isVisible = value;
-                OnProgressBarVisibilityChanged?.Invoke(_isVisible);
-            }
+            _isVisible = value;
+            OnProgressBarVisibilityChanged?.Invoke(_isVisible);
         }
     }
 
@@ -36,28 +33,12 @@ public class ProgressBarService
         }
         set
         {
-            if (_progress != value)
-            {
-                _progress = value;
-                bool isVisible = (_progress == 100 || _progress == 0) ? _isVisible : true;
-                isVisible = isVisible && !string.IsNullOrEmpty(Filename);
-                OnProgressBarVisibilityChanged?.Invoke(isVisible);
-            }
+            _progress = value;
+            bool isVisible = (_progress == 100 || _progress == 0) ? _isVisible : true;
+            isVisible = isVisible && !string.IsNullOrEmpty(Filename);
+            IsVisible = isVisible;
         }
     }
-
-    public void Show()
-    {
-        Filename = "";
-        IsVisible = true;
-    }
-
-    //public void UpdateOnProgress(string fileName, double progress, bool isVisible)
-    //{
-    //    Filename = fileName;
-    //    Percentage = progress;
-    //    OnProgressBarVisibilityChanged?.Invoke(isVisible);
-    //}
 
     public void Hide()
     {

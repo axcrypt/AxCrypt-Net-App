@@ -190,7 +190,7 @@ namespace AxCrypt.Core.Extensions
             return cryptoId == new V1Aes128CryptoFactory().CryptoId;
         }
 
-        private static bool IsStandardAndHasStrongerCapability(Guid cryptoId)
+        public static bool IsStandardAndHasStrongerCapability(this Guid cryptoId)
         {
             if (cryptoId != new V2Aes128CryptoFactory().CryptoId)
             {
@@ -206,7 +206,7 @@ namespace AxCrypt.Core.Extensions
 
         public static bool ShouldUpgradeEncryption(this Guid cryptoId)
         {
-            if (!IsLegacy(cryptoId) && !IsStandardAndHasStrongerCapability(cryptoId))
+            if (!IsLegacy(cryptoId) && !cryptoId.IsStandardAndHasStrongerCapability())
             {
                 return false;
             }
