@@ -115,9 +115,9 @@
     {
         pageNumberCount += 1;
         SecuredMessengerModel messengerModel = await Model.LoadMore(pageNumberCount, Model.Messenger.SecMessengerFilterTab);
-        if (Model.Messenger.Messages != null && messengerModel == null && messengerModel!.Messages.Any())
+        if (Model.Messenger.Messages != null && messengerModel != null && messengerModel!.Messages.Any())
         {
-            Model!.Messenger.Messages = Model.Messenger.Messages.Concat(messengerModel!.Messages).ToList();
+            ManageSecMgrViewModel.Messages = Model.Messenger.Messages.Concat(messengerModel!.Messages).ToList();
             UpdateState();
             return true;
         }
