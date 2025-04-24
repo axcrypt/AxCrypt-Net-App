@@ -9,23 +9,28 @@
 @inject ViewSecMsgrViewModel ManageSecMgrViewModel
 @inject SecuredMessengerListViewModel Model
 
+
+@{
+    string activeClass = ManageSecMgrViewModel.AnySelected ? "active-btn" : "";
+}
+
 <div class="row">
     <div class="medium-5 all-msg" style="padding: 0;">
         <div class="center-column">
             <button class="button fnt-high" style="text-align: left; height: 44px;">
-                @if (ManageSecMgrViewModel.isMultiCheckboxVisible)
+                @if (ManageSecMgrViewModel.isMultiCheckboxVisible || ManageSecMgrViewModel.AnySelected)
                 {
                     <input type="checkbox" class="multi-chckbx" title="Select All" checked="@ManageSecMgrViewModel.SelectAllMessages" bind-checked="@ManageSecMgrViewModel.SelectAllMessages" @onchange="ManageSecMgrViewModel.ToggleAllMessages" />
                 }
                 <span class="mutli-slct-btn">@TabTitleText</span>
-                <div class="slct-actions">
+                <div class="slct-actions @activeClass">
 
                     <img class="select-option" src="/images/default/IcoSelect.svg" alt="delete-img" title="Select" @onclick="@ManageSecMgrViewModel.ToggleMultiCheckbox" />
-                    <img class="multi-dlt" src="delete-icon.svg" alt="Delete" title="Delete" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("delete"))" />
+                    <img class="multi-dlt" src="" alt="Delete" title="Delete" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("delete"))" />
                     @if (Model.Messenger.SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
                     {
-                        <img class="multi-read" src="read-icon.svg" alt="Mark Read" title="Read" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("read"))" />
-                        <img class="multi-unread" src="unread-icon.svg" alt="Mark Unread" title="Unread" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("unread"))" />
+                        <img class="multi-read" src="" alt="Mark Read" title="Read" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("read"))" />
+                        <img class="multi-unread" src="" alt="Mark Unread" title="Unread" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("unread"))" />
                     }
                 </div>
             </button>

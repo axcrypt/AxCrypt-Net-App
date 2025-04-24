@@ -38,6 +38,9 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 
         public Guid? SelectedMessageId { get; set; } = Guid.Empty;
 
+        public bool AnySelected => Messages.Any(m => m.IsSelected);
+
+
         private bool _showLoadingWheel;
 
         public bool ShowLoadingWheel
@@ -172,6 +175,7 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
         internal void SelectMessagesForActions(SecuredMessage message)
         {
             message.IsSelected = !message.IsSelected;
+            UpdateViewState();
         }
 
         private IEnumerable<Guid> GetSelectedMessagesList()

@@ -322,7 +322,7 @@
   display: none;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 27%;
   transform: translate(-50%, -50%);
 }
 
@@ -383,7 +383,7 @@ textarea[readonly] {
 
 .slct-actions {
   display: inline-flex;
-  gap: 18%;
+  gap: 15%;
   float: right;
   justify-content: right;
   height: 16px;
@@ -401,7 +401,7 @@ textarea[readonly] {
 }
 
 .multi-chckbx {
-  margin-right: 5% !important;
+  margin: 0 4% 0 1% !important;
 }
 
 .multi-dlt {
@@ -416,15 +416,15 @@ textarea[readonly] {
   content: url(/images/default/IcoUnreadGray.svg);
 }
 
-.slct-actions.checkbox-checked .multi-dlt {
+.active-btn .multi-dlt {
   content: url(/images/business/IcoDlt.svg);
 }
 
-.slct-actions.checkbox-checked .multi-read {
+.active-btn .multi-read {
   content: url(/images/business/IcoRd.svg);
 }
 
-.slct-actions.checkbox-checked .multi-unread {
+.active-btn .multi-unread {
   content: url(/images/business/IcoUnrd.svg);
 }
 
@@ -745,9 +745,15 @@ textarea[readonly] {
   }
 }
 @media only screen and (max-width: 1250px) {
+  .slct-actions {
+    gap: 12%;
+  }
   .slct-actions img {
     height: 13px;
     margin-top: 4px;
+  }
+  .mutli-slct-btn {
+    font-size: 14px;
   }
   .message-list-section {
     max-height: 400px !important;

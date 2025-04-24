@@ -352,7 +352,7 @@
     display: none;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 27%;
     transform: translate(-50%, -50%);
 }
 
@@ -415,7 +415,7 @@ textarea[readonly] {
 
 .slct-actions {
     display: inline-flex;
-    gap: 18%;
+    gap: 15%;
     float: right;
     justify-content: right;
     height: 16px;
@@ -434,7 +434,7 @@ textarea[readonly] {
 }
 
 .multi-chckbx {
-    margin-right: 5% !important;
+    margin: 0 4% 0 1% !important;
 }
 
 .multi-dlt {
@@ -449,15 +449,15 @@ textarea[readonly] {
     content: $IcoUnreadGray;
 }
 
-.slct-actions.checkbox-checked .multi-dlt {
+.active-btn .multi-dlt {
     content: $IcoDlt;
 }
 
-.slct-actions.checkbox-checked .multi-read {
+.active-btn .multi-read {
     content: $IcoRd;
 }
 
-.slct-actions.checkbox-checked .multi-unread {
+.active-btn .multi-unread {
     content: $IcoUnrd;
 }
 
@@ -846,9 +846,17 @@ textarea[readonly] {
 }
 
 @media only screen and (max-width: 1250px) {
-    .slct-actions img {
-        height: 13px;
-        margin-top: 4px;
+    .slct-actions {
+        gap: 12%;
+
+        img {
+            height: 13px;
+            margin-top: 4px;
+        }
+    }
+
+    .mutli-slct-btn {
+        font-size: 14px;
     }
 
     .message-list-section {

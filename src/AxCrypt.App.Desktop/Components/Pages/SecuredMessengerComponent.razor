@@ -110,6 +110,7 @@
     {
         InvokeAsync(() =>
         {
+            ViewSecMsgrViewModel.SelectedMessageId = Guid.Empty;
             StateHasChanged(); // Refresh UI
         });
     }
