@@ -1,8 +1,6 @@
 ﻿using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
-using AxCrypt.Common;
 using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
@@ -10,10 +8,11 @@ using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System;
-using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Helpers;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Shared.ViewModels;
 
 namespace AxCrypt.App.Desktop.ViewModels.Home;
 
@@ -42,7 +41,7 @@ public class ActionsViewModel : ViewModelBase
     {
         LogOnViewModel.BindPropertyChanged(nameof(LogOnViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
 
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { EncryptButtonEnabled = enabled; });
+        _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { EncryptButtonEnabled = enabled; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { IsFilesPending = areFilesPending; UpdateViewState(); });
     }
 
@@ -85,12 +84,12 @@ public class ActionsViewModel : ViewModelBase
 
     public async Task StopSecuringFile()
     {
-        await _fileOperationViewModel.DecryptFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null);
+        await _fileOperationViewModel.DecryptFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null!);
     }
 
     public async void ShareKeysAsync(EventArgs e)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeyService.ShareKeysWithFileSelectionAsync(_sharekeyViewModel, _mainViewModel!.SelectedRecentFiles, _fileOperationViewModel); }, null, e);
+        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeyService.ShareKeysWithFileSelectionAsync(_sharekeyViewModel!, _mainViewModel!.SelectedRecentFiles, _fileOperationViewModel); }, null!, e);
     }
 
     public async void CleanAndRemoveOpenFilesButton_Click(EventArgs e)
@@ -132,7 +131,7 @@ public class ActionsViewModel : ViewModelBase
         if (_mainViewModel != null)
         {
             new ApplicationManager().WaitForBackgroundToComplete();
-            await _mainViewModel.EncryptPendingFiles.ExecuteAsync(null);
+            await _mainViewModel.EncryptPendingFiles.ExecuteAsync(null!);
             new ApplicationManager().WaitForBackgroundToComplete();
         }
 
@@ -174,7 +173,7 @@ public class ActionsViewModel : ViewModelBase
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {
-        if (_mainViewModel.License.Has(requiredCapability))
+        if (_mainViewModel!.License.Has(requiredCapability))
         {
             if (realHandler != null)
             {

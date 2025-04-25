@@ -2,7 +2,7 @@
 using AxCrypt.Core.UI;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels;
+namespace AxCrypt.App.Shared.ViewModels;
 
 public class AboutViewModel
 {

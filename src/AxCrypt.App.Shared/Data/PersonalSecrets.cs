@@ -1,7 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model.Secret;
 using AxCrypt.Api.Shared.Helper;
-using AxCrypt.App.Desktop.Helpers;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.App.Shared.Password;
@@ -10,13 +9,9 @@ using AxCrypt.Core.Secrets;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Cryptor.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.Data;
+namespace AxCrypt.App.Shared.Data;
 
 /// <summary>
 /// Gateway class to use as a ObjectDataSource

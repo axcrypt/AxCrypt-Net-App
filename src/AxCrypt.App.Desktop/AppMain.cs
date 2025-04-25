@@ -1,5 +1,5 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility;

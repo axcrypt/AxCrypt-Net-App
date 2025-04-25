@@ -1,5 +1,5 @@
 ﻿@using AxCrypt.Core.SecuredMessenger;
-@using AxCrypt.App.Desktop.ViewModels.SecuredMessenger;
+@using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
 
 @inject ManageSecMsgrViewModel ManageSecMgrViewModel
 
@@ -24,6 +24,8 @@
 @code {
     protected override void OnInitialized()
     {
+        ManageSecMgrViewModel.Messenger.Messages = new List<SecuredMessage>();
+        ManageSecMgrViewModel.Messenger.ChildMessages = new List<SecuredMessage>();
         ManageSecMgrViewModel.OnUpdateViewState += UpdatePageState;
         base.OnInitialized();
     }

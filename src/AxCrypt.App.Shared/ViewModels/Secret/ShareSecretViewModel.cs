@@ -1,7 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Data;
-using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Data;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.Content;
@@ -12,15 +11,10 @@ using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Security.Principal;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels.Secret;
+namespace AxCrypt.App.Shared.ViewModels.Secret;
 
 public class ShareSecretViewModel : ManageSecretViewModel
 {

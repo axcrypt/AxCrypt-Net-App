@@ -1,4 +1,5 @@
-﻿using AxCrypt.App.Desktop.Helpers;
+﻿using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Content;
 using AxCrypt.Core.Extensions;
@@ -13,7 +14,7 @@ namespace AxCrypt.App.Desktop.ViewModels;
 
 public class VerifyAccountDialogViewModel
 {
-    private VerifyAccountViewModel _viewModel;
+    private VerifyAccountViewModel? _viewModel;
     private LogOnViewModel _logOnViewModel;
 
     public VerifyAccountDialogViewModel()
@@ -35,23 +36,23 @@ public class VerifyAccountDialogViewModel
         //_activationCode.TextChanged += (sender, e) => { _viewModel.VerificationCode = _activationCode.Text; ClearErrorProviders(); };
         //_showPassphrase.CheckedChanged += (sender, e) => { _viewModel.ShowPassword = ShowPassword; };
 
-        _viewModel.BindPropertyChanged(nameof(VerifyAccountViewModel.ShowPassword), (bool show) => { ShowPassword = show; });
+        _viewModel!.BindPropertyChanged(nameof(VerifyAccountViewModel.ShowPassword), (bool show) => { ShowPassword = show; });
         _viewModel.BindPropertyChanged(nameof(VerifyAccountViewModel.UserEmail), (string u) => { PromptUserEmail = Texts.MessageSigningUpText.InvariantFormat(u); });
     }
 
-    public string ErrorMessage { get; set; }
+    public string? ErrorMessage { get; set; }
 
     public bool ShowPassword { get; set; }
 
-    public string ActivationCode { get; set; }
+    public string? ActivationCode { get; set; }
 
-    public string PassPhrase { get; set; }
+    public string? PassPhrase { get; set; }
 
-    public string PassPhraseVerification { get; set; }
+    public string? PassPhraseVerification { get; set; }
 
     public DialogResult DialogResult { get; set; }
 
-    public string PromptUserEmail { get; set; }
+    public string? PromptUserEmail { get; set; }
 
     public async void ButtonOk_Click(EventArgs e)
     {
@@ -60,9 +61,9 @@ public class VerifyAccountDialogViewModel
             return;
         }
 
-        _viewModel.VerificationCode = ActivationCode;
-        _viewModel.Verification = PassPhraseVerification;
-        _viewModel.PasswordText = PassPhrase;
+        _viewModel!.VerificationCode = ActivationCode!;
+        _viewModel.Verification = PassPhraseVerification!;
+        _viewModel.PasswordText = PassPhrase!;
 
         DialogResult = DialogResult.None;
         if (await IsAllValid())
@@ -73,7 +74,7 @@ public class VerifyAccountDialogViewModel
 
     private async Task<bool> IsAllValid()
     {
-        await _viewModel.CheckAccountStatus.ExecuteAsync(null);
+        await _viewModel!.CheckAccountStatus.ExecuteAsync(null!);
         if (_viewModel.AlreadyVerified)
         {
             return true;
@@ -84,7 +85,7 @@ public class VerifyAccountDialogViewModel
             return false;
         }
 
-        await _viewModel.VerifyAccount.ExecuteAsync(null);
+        await _viewModel.VerifyAccount.ExecuteAsync(null!);
         if (!VerifyCode())
         {
             return false;
@@ -107,7 +108,7 @@ public class VerifyAccountDialogViewModel
     private bool AdHocValidatePassphrase()
     {
         ErrorMessage = "";
-        if (_viewModel[nameof(VerifyAccountViewModel.PasswordText)].Length > 0)
+        if (_viewModel![nameof(VerifyAccountViewModel.PasswordText)].Length > 0)
         {
             ErrorMessage = Texts.PasswordPolicyViolation;
             return false;
@@ -118,7 +119,7 @@ public class VerifyAccountDialogViewModel
     private bool AdHocValidatePassphraseVerification()
     {
         ErrorMessage = "";
-        if (_viewModel[nameof(VerifyAccountViewModel.Verification)].Length > 0)
+        if (_viewModel![nameof(VerifyAccountViewModel.Verification)].Length > 0)
         {
             ErrorMessage = Texts.PassphraseVerificationMismatch;
             return false;
@@ -129,7 +130,7 @@ public class VerifyAccountDialogViewModel
     private bool AdHocValidateCode()
     {
         ErrorMessage = "";
-        if (_viewModel[nameof(VerifyAccountViewModel.VerificationCode)].Length > 0)
+        if (_viewModel![nameof(VerifyAccountViewModel.VerificationCode)].Length > 0)
         {
             ErrorMessage = Texts.WrongVerificationCodeFormat;
             return false;
@@ -140,7 +141,7 @@ public class VerifyAccountDialogViewModel
     private bool VerifyCode()
     {
         ErrorMessage = "";
-        if (_viewModel[nameof(VerifyAccountDialogViewModel.ErrorMessage)].Length > 0)
+        if (_viewModel![nameof(VerifyAccountDialogViewModel.ErrorMessage)].Length > 0)
         {
             ErrorMessage = Texts.WrongVerificationCode;
             return false;
@@ -151,7 +152,7 @@ public class VerifyAccountDialogViewModel
     public void ResendButton_Click(EventArgs e)
     {
         UriBuilder url = new UriBuilder(Texts.ResendActivationHyperLink);
-        url.Query = $"email={_viewModel.UserEmail}";
+        url.Query = $"email={_viewModel!.UserEmail}";
         Process.Start(url.ToString());
     }
 

@@ -1,16 +1,13 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.Helpers;
+namespace AxCrypt.App.Shared.Helpers;
 
 public static class ViewModelHelper
 {

@@ -1,11 +1,9 @@
 ﻿using AxCrypt.Content;
 using AxCrypt.Api.Model;
 using AxCrypt.Common;
-
-using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Shared.Services;
-using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services.Interface;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.ViewModels;
 

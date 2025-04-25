@@ -1,6 +1,6 @@
 ﻿@using AxCrypt.App.Desktop.Data
-@using AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 @using AxCrypt.App.Shared.Services.Interface
+@using AxCrypt.App.Shared.ViewModels.SecuredMessenger
 @using AxCrypt.Content
 @using static AxCrypt.Abstractions.TypeResolve
 
@@ -69,7 +69,7 @@
                     }
                 </select>
 
-                <img class="" src="/images/default/IcoInfOld.svg" alt="" />
+                @* <img class="" src="/images/default/IcoInfOld.svg" alt="" /> *@
             </div>
             <div class="text-msg">
                 <InputTextArea @bind-Value="newSecMsgrViewModel.EncryptedMessage"

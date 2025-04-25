@@ -7,30 +7,30 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Devices;
-using System;
-using System.Threading.Tasks;
+//using Microsoft.Maui.Controls;
+//using Microsoft.Maui.Devices;
+//using System;
+//using System.Threading.Tasks;
 using System.Windows.Input;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels;
+namespace AxCrypt.App.Shared.ViewModels;
 
 public class AccountStatusViewModel : ViewModelBase
 {
     public AccountStatusViewModel()
     {
-        RefreshAccountInfoCommand = new Command(async () => await LoadAccountStatusAsync());
-        InitializeBuyPremiumCommand = new Command(InitiateBuyPremiumAction);
+        //RefreshAccountInfoCommand = new Command(async () => await LoadAccountStatusAsync());
+        //InitializeBuyPremiumCommand = new Command(InitiateBuyPremiumAction);
         //SignOutCommand = new Command(SignOut);
-        OpenGetStartedPageCommand = new Command(OpenGetStartedPage);
+        //OpenGetStartedPageCommand = new Command(OpenGetStartedPage);
         StartLoadAccountStatus();
     }
 
     public PlanState PlanState { get; private set; }
     private static bool CanTryPremiumSubscription { get; set; }
-    public Command RefreshAccountInfoCommand { get; private set; }
-    public Command InitializeBuyPremiumCommand { get; private set; }
+    //public Command RefreshAccountInfoCommand { get; private set; }
+    //public Command InitializeBuyPremiumCommand { get; private set; }
     public ICommand SignOutCommand { get; private set; }
     public ICommand OpenGetStartedPageCommand { get; private set; }
 
@@ -129,11 +129,11 @@ public class AccountStatusViewModel : ViewModelBase
     public async void InitiateBuyPremiumAction()
     {
         LogOnIdentity identity = New<KnownIdentities>().DefaultEncryptionIdentity;
-        if (DeviceInfo.Platform == DevicePlatform.iOS)
-        {
-            //ShowInAppPurchasePage(identity);
-            return;
-        }
+        //if (DeviceInfo.Platform == DevicePlatform.iOS)
+        //{
+        //    //ShowInAppPurchasePage(identity);
+        //    return;
+        //}
         await New<PremiumManager>().BuyPremium(identity);
     }
 

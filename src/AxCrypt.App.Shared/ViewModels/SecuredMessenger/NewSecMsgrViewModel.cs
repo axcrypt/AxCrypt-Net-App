@@ -1,18 +1,16 @@
 ﻿using AxCrypt.Api.SecuredMessenger;
-using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
+namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 {
     public class NewSecMsgrViewModel: ViewModelBase
     {

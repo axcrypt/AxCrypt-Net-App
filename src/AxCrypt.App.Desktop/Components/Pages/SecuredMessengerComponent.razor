@@ -1,5 +1,5 @@
 ﻿@using AxCrypt.Api.SecuredMessenger
-@using AxCrypt.App.Desktop.ViewModels.SecuredMessenger
+@using AxCrypt.App.Shared.ViewModels.SecuredMessenger
 @using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.Content
 @using static AxCrypt.Abstractions.TypeResolve
@@ -142,6 +142,11 @@
 
     private async Task SearchList()
     {
+        if (New<AxCrypt.Common.AxCryptOnlineState>().IsOffline)
+        {
+            return;
+        }
+
         using (ProcessIndicator progress = new ProcessIndicator())
         {
             SecMsgrViewModel.Messenger.Messages = new List<Core.SecuredMessenger.SecuredMessage>();

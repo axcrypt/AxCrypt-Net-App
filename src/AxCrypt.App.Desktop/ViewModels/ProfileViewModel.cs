@@ -1,8 +1,8 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
@@ -186,7 +186,7 @@ public class ProfileViewModel
 
     public void PasswordReset_Click(EventArgs e)
     {
-        if (!_mainViewModel.LoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail))
+        if (!_mainViewModel!.LoggedOn && !string.IsNullOrEmpty(New<UserSettings>().UserEmail))
         {
             BrowseUtility.RedirectToAccountWebUrl(Texts.PasswordResetHyperLink);
         }
@@ -194,7 +194,7 @@ public class ProfileViewModel
 
     public async void ClearAllSettingsAndRestartAsync()
     {
-        if (_mainViewModel.DecryptedFiles.Any())
+        if (_mainViewModel!.DecryptedFiles.Any())
         {
             await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
             return;
@@ -235,7 +235,7 @@ public class ProfileViewModel
     {
         await Task.Run(async () =>
         {
-            if (_mainViewModel.DecryptedFiles.Any())
+            if (_mainViewModel!.DecryptedFiles.Any())
             {
                 await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
                 return;
@@ -247,7 +247,7 @@ public class ProfileViewModel
 
     public async void ExitMenuItem_Click(EventArgs e)
     {
-        if (_mainViewModel.LoggedOn && _mainViewModel.DecryptedFiles.Any())
+        if (_mainViewModel!.LoggedOn && _mainViewModel.DecryptedFiles.Any())
         {
             await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
             return;

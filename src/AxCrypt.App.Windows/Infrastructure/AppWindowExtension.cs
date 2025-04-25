@@ -1,6 +1,6 @@
 ﻿using AxCrypt.App.Desktop.Code;
-using AxCrypt.App.Desktop.Helpers;
-using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Core;
 using Microsoft.UI.Windowing;

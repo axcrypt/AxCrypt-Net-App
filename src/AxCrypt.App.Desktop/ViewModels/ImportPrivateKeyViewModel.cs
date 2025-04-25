@@ -1,5 +1,6 @@
-﻿using AxCrypt.App.Desktop.Helpers;
+﻿using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Utility;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -11,7 +12,7 @@ namespace AxCrypt.App.Desktop.ViewModels;
 
 public class ImportPrivateKeyViewModel
 {
-    private ImportPrivateKeysViewModel _viewModel;
+    private ImportPrivateKeysViewModel? _viewModel;
     private LogOnViewModel _logOnViewModel;
 
     public ImportPrivateKeyViewModel()
@@ -26,11 +27,11 @@ public class ImportPrivateKeyViewModel
 
     private void Initialized()
     {
-        _viewModel.BindPropertyChanged<bool>(nameof(_viewModel.ImportSuccessful), (ok) => { if (!ok) { ErrorMessage = Texts.FailedPrivateImport; } });
+        _viewModel!.BindPropertyChanged<bool>(nameof(_viewModel.ImportSuccessful), (ok) => { if (!ok) { ErrorMessage = Texts.FailedPrivateImport; } });
         _viewModel.BindPropertyChanged<bool>(nameof(_viewModel.ShowPassword), (show) => { ShowPassPhrase = show; });
     }
 
-    public string ErrorMessage { get; set; }
+    public string? ErrorMessage { get; set; }
     public bool ShowPassPhrase { get; set; }
     public string? PrivateKeyFileName { get; set; }
     public string? PasswordText { get; set; }
@@ -44,8 +45,8 @@ public class ImportPrivateKeyViewModel
             return;
         }
 
-        _viewModel.PasswordText = PasswordText;
-        await _viewModel.ImportFile.ExecuteAsync(null);
+        _viewModel!.PasswordText = PasswordText!;
+        await _viewModel.ImportFile.ExecuteAsync(null!);
         if (!_viewModel.ImportSuccessful)
         {
             PageResult = DialogResult.None;
@@ -58,7 +59,7 @@ public class ImportPrivateKeyViewModel
     {
         bool validated = true;
 
-        if (_viewModel[nameof(ImportPrivateKeysViewModel.PasswordText)].Length > 0)
+        if (_viewModel![nameof(ImportPrivateKeysViewModel.PasswordText)].Length > 0)
         {
             ErrorMessage = Texts.WrongPassphrase;
             validated = false;
@@ -108,7 +109,7 @@ public class ImportPrivateKeyViewModel
         if (fileResult != null)
         {
             PrivateKeyFileName = fileResult.FullPath;
-            _viewModel.PrivateKeyFileName = fileResult.FullPath;
+            _viewModel!.PrivateKeyFileName = fileResult.FullPath;
         }
     }
 

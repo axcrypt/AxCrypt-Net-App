@@ -2,7 +2,7 @@
 using AxCrypt.App.Shared.Utility.View;
 using System.Collections.ObjectModel;
 
-namespace AxCrypt.App.Desktop.ViewModels.Notification
+namespace AxCrypt.App.Shared.ViewModels.Notification
 {
     public class NotificationViewModel : Core.UI.ViewModel.ViewModelBase
     {

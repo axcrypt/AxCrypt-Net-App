@@ -1,5 +1,6 @@
-﻿using AxCrypt.App.Desktop.Helpers;
-using AxCrypt.App.Desktop.Services;
+﻿using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -25,7 +26,7 @@ public class TopMenuViewModel : ViewModelBase
 
     public void Initialize()
     {
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
+        _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
     }
 
     public bool IsWideScreen { get; set; }
@@ -40,7 +41,7 @@ public class TopMenuViewModel : ViewModelBase
 
     public LogOnViewModel LogOnViewModel { get; set; }
 
-    public string VersionHoverText { get; set; }
+    public string? VersionHoverText { get; set; }
 
     public bool ShowUpdate { get; set; }
 
@@ -81,7 +82,7 @@ public class TopMenuViewModel : ViewModelBase
 
     public async Task SetSoftwareStatus()
     {
-        VersionUpdateStatus status = _mainViewModel.VersionUpdateStatus;
+        VersionUpdateStatus status = _mainViewModel!.VersionUpdateStatus;
 
         switch (status)
         {
@@ -108,7 +109,7 @@ public class TopMenuViewModel : ViewModelBase
 
     private async Task DisplayUpdateCheckPopups()
     {
-        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel.DownloadVersion);
+        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel!.DownloadVersion);
         _userInitiatedUpdateCheckPending = false;
     }
 }

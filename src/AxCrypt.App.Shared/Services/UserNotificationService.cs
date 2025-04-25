@@ -1,18 +1,15 @@
-﻿using AxCrypt.App.Desktop.ViewModels;
-using AxCrypt.App.Desktop.ViewModels.Notification;
+﻿using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.App.Shared.ViewModels.Notification;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Notification;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.Services;
+namespace AxCrypt.App.Shared.Services;
 
 public class UserNotificationService : ViewModelBase
 {
@@ -25,12 +22,12 @@ public class UserNotificationService : ViewModelBase
         NotificationModel = new();
     }
 
-    private NotificationViewModel _notificationModel;
+    private NotificationViewModel? _notificationModel;
     public NotificationViewModel NotificationModel
     {
         get
         {
-            return _notificationModel;
+            return _notificationModel!;
         }
         set
         {

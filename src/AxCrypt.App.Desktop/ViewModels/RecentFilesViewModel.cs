@@ -1,5 +1,5 @@
 using AxCrypt.App.Desktop.Code;
-using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core.Runtime;
@@ -14,7 +14,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Helpers;
 
 namespace AxCrypt.App.Desktop.ViewModels;
 
@@ -219,7 +219,7 @@ public class RecentFilesViewModel : ViewModelBase
     //    }, () => { });
     //}
 
-    private string selectFileOnContextMenuClick;
+    private string? selectFileOnContextMenuClick;
 
     public async Task OnContextMenuAction(EventArgs args, SecuredFilesContextMenu securedFilesContextMenu)
     {
@@ -297,7 +297,7 @@ public class RecentFilesViewModel : ViewModelBase
 
     private async void ShareKeyFromRecentFiles(EventArgs args)
     {
-        await ShareKeyService.ShareKeysAsync(_mainViewModel.SelectedRecentFiles, _sharekeyViewModel, _fileOperationViewModel);
+        await ShareKeyService.ShareKeysAsync(_mainViewModel.SelectedRecentFiles, _sharekeyViewModel!, _fileOperationViewModel);
     }
 
     private async void ShowInFolder()

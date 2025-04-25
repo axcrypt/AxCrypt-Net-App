@@ -1,8 +1,6 @@
 ﻿using AxCrypt.Api;
-using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Secret;
-using AxCrypt.App.Desktop.Data;
-using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Data;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.App.Shared.Password;
@@ -16,17 +14,11 @@ using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor.Model;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Maui.Controls;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels;
+namespace AxCrypt.App.Shared.ViewModels;
 
 public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 {
@@ -482,7 +474,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         string downloadsFolderPath = GetDownloadsFolderPath();
         if (downloadsFolderPath == null)
         {
-            await Application.Current.MainPage.DisplayAlert("Alert", "Could not determine the Downloads folder path.", "OK");
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, "Alert", "Could not determine the Downloads folder path.");
             return false;
         }
 
@@ -580,7 +572,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         string downloadsFolderPath = GetDownloadsFolderPath();
         if (downloadsFolderPath == null)
         {
-            await Application.Current?.MainPage?.DisplayAlert("Alert", "Could not determine the Downloads folder path.", "OK")!;
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, "Alert", "Could not determine the Downloads folder path.");
             return false;
         }
 

@@ -1,10 +1,9 @@
-﻿using AxCrypt.App.Desktop.ViewModels;
-using AxCrypt.App.Shared.Models;
+﻿using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Services;
-using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.ViewModels;
 
-namespace AxCrypt.App.Desktop.Helpers;
+namespace AxCrypt.App.Shared.Helpers;
 
 public static class AxCServiceProviderExtension
 {

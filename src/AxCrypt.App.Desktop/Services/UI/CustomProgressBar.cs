@@ -1,4 +1,4 @@
-﻿using AxCrypt.App.Desktop.Helpers;
+﻿using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services;
 using System;
 

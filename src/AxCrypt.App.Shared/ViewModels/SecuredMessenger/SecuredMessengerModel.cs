@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
+namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 {
     public class SecuredMessengerModel
     {

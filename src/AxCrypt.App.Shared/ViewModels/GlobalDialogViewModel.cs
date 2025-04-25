@@ -1,11 +1,10 @@
-﻿using AxCrypt.App.Desktop.Helpers;
+﻿using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Common;
 using AxCrypt.Core.UI;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels;
+namespace AxCrypt.App.Shared.ViewModels;
 
 public class GlobalDialogViewModel
 {

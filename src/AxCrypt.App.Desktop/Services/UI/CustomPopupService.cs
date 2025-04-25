@@ -1,4 +1,5 @@
 ﻿using AxCrypt.App.Desktop.ViewModels;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;

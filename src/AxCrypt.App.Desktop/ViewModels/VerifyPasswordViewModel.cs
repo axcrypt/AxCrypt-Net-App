@@ -1,4 +1,5 @@
-﻿using AxCrypt.App.Desktop.Helpers;
+﻿using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
@@ -49,7 +50,7 @@ public class VerifyPasswordViewModel
 
     public void ButtonOk_Click(EventArgs e)
     {
-        _viewModel.PasswordText = PassphraseText;
+        _viewModel.PasswordText = PassphraseText!;
         _viewModel.ShowPassword = ShowPassphrase;
 
         if (!AdHocValidationDueToMonoLimitations())

@@ -1,11 +1,8 @@
 ﻿using AxCrypt.Api.SecuredMessenger;
-using AxCrypt.App.Desktop.ViewModels.SecuredMessenger;
+using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
 using AxCrypt.Core.SecuredMessenger;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace AxCrypt.App.Desktop.Services
+namespace AxCrypt.App.Shared.Services
 {
     public interface ISecureMessagingService
     {

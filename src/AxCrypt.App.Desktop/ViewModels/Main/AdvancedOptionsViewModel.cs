@@ -5,10 +5,10 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using System;
 using System.Threading.Tasks;
-using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Helpers;
 using System.Linq;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Core;
+using AxCrypt.App.Shared.ViewModels;
 
 namespace AxCrypt.App.Desktop.ViewModels.Main;
 
@@ -97,7 +97,7 @@ public class AdvancedOptionsViewModel : ViewModelBase
     private async Task EncryptPendingFiles()
     {
         new ApplicationManager().WaitForBackgroundToComplete();
-        await New<MainViewModel>().EncryptPendingFiles.ExecuteAsync(null);
+        await New<MainViewModel>().EncryptPendingFiles.ExecuteAsync(null!);
         new ApplicationManager().WaitForBackgroundToComplete();
     }
 

@@ -1,7 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Common;
@@ -11,14 +11,10 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels;
+namespace AxCrypt.App.Shared.ViewModels;
 
 public class ShareKeyViewModel : ViewModelBase
 {
@@ -162,7 +158,7 @@ public class ShareKeyViewModel : ViewModelBase
         SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>();
         if (string.IsNullOrWhiteSpace(query))
         {
-            IEnumerable<ShareKeyUser> filteredGroupList = _viewModel.NotSharedWith.Distinct().ToArray().Select(user => new ShareKeyUser(user.Email, user.GroupName)).ToList();
+            IEnumerable<ShareKeyUser> filteredGroupList = _viewModel!.NotSharedWith.Distinct().ToArray().Select(user => new ShareKeyUser(user.Email, user.GroupName)).ToList();
             SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>(filteredGroupList);
             return;
         }
@@ -269,7 +265,7 @@ public class ShareKeyViewModel : ViewModelBase
     {
         if (LogOnViewModel.SubscriptionLevel != SubscriptionLevel.Business)
         {
-            return null;
+            return null!;
         }
 
         string shareUserText = KeySharingUserEmail.Trim();

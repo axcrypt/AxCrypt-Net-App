@@ -4,13 +4,9 @@ using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels.Feedback;
+namespace AxCrypt.App.Shared.ViewModels.Feedback;
 
 public class FeedbackViewModel
 {

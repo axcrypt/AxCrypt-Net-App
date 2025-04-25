@@ -1,7 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Helpers;
-using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
@@ -57,7 +57,7 @@ public class AppSettingsViewModel : ViewModelBase
 
         _logOnViewModel!.BindPropertyAsyncChanged(nameof(_logOnViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
         _logOnViewModel!.BindPropertyChanged(nameof(_logOnViewModel.IsLoggedOn), (bool isLoggedOn) => { if (isLoggedOn) { StartInactivitySignOut(); } });
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
+        _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DebugMode), (bool enabled) => { UpdateDebugMode(enabled); });
     }
@@ -150,18 +150,18 @@ public class AppSettingsViewModel : ViewModelBase
 
         if (!hideRecentFiles)
         {
-            _recentFilesViewModel.RecentFilesList = new ObservableCollection<FileDetails>(_mainViewModel.RecentFiles.Select(f => new FileDetails(f)));
+            _recentFilesViewModel!.RecentFilesList = new ObservableCollection<FileDetails>(_mainViewModel!.RecentFiles.Select(f => new FileDetails(f)));
             _recentFilesViewModel.UpdateViewState();
             return;
         }
 
-        _recentFilesViewModel.RecentFilesList.Clear();
+        _recentFilesViewModel!.RecentFilesList.Clear();
         _recentFilesViewModel.UpdateViewState();
     }
 
     public async Task ToggleEncryptionUpgradeMode()
     {
-        if (_mainViewModel.EncryptionUpgradeMode == EncryptionUpgradeMode.AutoUpgrade)
+        if (_mainViewModel!.EncryptionUpgradeMode == EncryptionUpgradeMode.AutoUpgrade)
         {
             _mainViewModel.EncryptionUpgradeMode = EncryptionUpgradeMode.RetainWithoutUpgrade;
             AutoUpgradeToAES256 = false;
@@ -183,12 +183,12 @@ public class AppSettingsViewModel : ViewModelBase
 
     public async void ToggleIncludeSubfolders(EventArgs e)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.IncludeSubfolders, (ss, ee) => { return ToggleIncludeSubfoldersOption(); }, null, e);
+        await PremiumFeature_ClickAsync(LicenseCapability.IncludeSubfolders, (ss, ee) => { return ToggleIncludeSubfoldersOption(); }, null!, e);
     }
 
     private async Task ToggleIncludeSubfoldersOption()
     {
-        if (_mainViewModel.FolderOperationMode == FolderOperationMode.IncludeSubfolders)
+        if (_mainViewModel!.FolderOperationMode == FolderOperationMode.IncludeSubfolders)
         {
             _mainViewModel.FolderOperationMode = FolderOperationMode.SingleFolder;
             IncludeSubfolders = false;
@@ -222,7 +222,7 @@ public class AppSettingsViewModel : ViewModelBase
             SelectedOption = duration;
             New<UserSettings>().InactivitySignOutTime = TimeSpan.FromMinutes(int.Parse(duration.ToString()));
             InactivitySignOut = New<UserSettings>().InactivitySignOutTime.Minutes;
-        }, null, e);
+        }, null!, e);
 
         StartInactivitySignOut();
     }
@@ -234,13 +234,13 @@ public class AppSettingsViewModel : ViewModelBase
             return;
         }
 
-        TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime, _fileOperationViewModel.IdentityViewModel));
+        TypeMap.Register.Singleton<InactivitySignOut>(() => new InactivitySignOut(New<UserSettings>().InactivitySignOutTime, _fileOperationViewModel!.IdentityViewModel));
         New<InactivitySignOut>().RestartInactivityTimer();
     }
 
     public async void RestoreRename(EventArgs args)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(null); }, null, args);
+        await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel!.RestoreRandomRenameFiles.ExecuteAsync(null!); }, null!, args);
     }
 
     public void ToggleAlwaysOffline(EventArgs e)
@@ -263,12 +263,12 @@ public class AppSettingsViewModel : ViewModelBase
 
     public async void InviteUser(EventArgs e)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { _logOnViewModel.InviteDialog.Show(); }, null, e);
+        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { _logOnViewModel.InviteDialog.Show(); }, null!, e);
     }
 
     public async Task ToggleAdvancedOption()
     {
-        if (!_mainViewModel.LoggedOn)
+        if (!_mainViewModel!.LoggedOn)
         {
             return;
         }
@@ -301,16 +301,16 @@ public class AppSettingsViewModel : ViewModelBase
     public async void CheckAxCryptVersionAsync()
     {
         _userInitiatedUpdateCheckPending = true;
-        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel.DownloadVersion);
+        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel!.DownloadVersion);
         _userInitiatedUpdateCheckPending = false;
     }
 
-    public string VersionHoverText { get; set; }
+    public string? VersionHoverText { get; set; }
     public bool ShowUpdate { get; set; }
 
     public async Task SetSoftwareStatus()
     {
-        VersionUpdateStatus status = _mainViewModel.VersionUpdateStatus;
+        VersionUpdateStatus status = _mainViewModel!.VersionUpdateStatus;
 
         switch (status)
         {
@@ -340,7 +340,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     public bool TryValidateInputs()
     {
-        if (string.IsNullOrWhiteSpace(RestApiBaseUrlInput) || !Uri.TryCreate(RestApiBaseUrlInput, UriKind.RelativeOrAbsolute, out Uri uri))
+        if (string.IsNullOrWhiteSpace(RestApiBaseUrlInput) || !Uri.TryCreate(RestApiBaseUrlInput, UriKind.RelativeOrAbsolute, out Uri? uri))
         {
             ErrorMessage = "Invalid API base URL.";
             return false;
@@ -430,17 +430,17 @@ public class AppSettingsViewModel : ViewModelBase
 
     public async void OpenBrokenFiles()
     {
-        await _fileOperationViewModel.TryBrokenFiles.ExecuteAsync(null);
+        await _fileOperationViewModel!.TryBrokenFiles.ExecuteAsync(null!);
     }
 
     public async void VerifyAxCryptFiles()
     {
-        await _fileOperationViewModel.VerifyFiles.ExecuteAsync(null);
+        await _fileOperationViewModel!.VerifyFiles.ExecuteAsync(null!);
     }
 
     public async void AxCryptFileFormatCheck()
     {
-        await _fileOperationViewModel.IntegrityCheckFiles.ExecuteAsync(null);
+        await _fileOperationViewModel!.IntegrityCheckFiles.ExecuteAsync(null!);
     }
 
     public void OpenReportAsync()

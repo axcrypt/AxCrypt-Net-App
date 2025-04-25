@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Extensions;
@@ -72,11 +73,11 @@ public class InviteViewModel
 
     private async Task<IEnumerable<UserPublicKey>> EnsureUserAccountStatusAndGetInvitedUserPublicKey()
     {
-        EmailAddress invitedEmail = EmailAddress.Parse(InvitedUser);
+        EmailAddress invitedEmail = EmailAddress.Parse(InvitedUser!);
         AccountStatus accountStatus = await invitedEmail.GetValidEmailAccountStatusAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
         if (!ShowInviteUserDialog(accountStatus))
         {
-            return null;
+            return null!;
         }
 
         IEnumerable<EmailAddress> invitedEmails = new EmailAddress[] { invitedEmail };

@@ -1,15 +1,14 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model.Secret;
-using AxCrypt.App.Desktop.Data;
+using AxCrypt.App.Shared.Data;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Password;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels.Secret;
+namespace AxCrypt.App.Shared.ViewModels.Secret;
 
 public class EditSecretViewModel : ManageSecretViewModel
 {

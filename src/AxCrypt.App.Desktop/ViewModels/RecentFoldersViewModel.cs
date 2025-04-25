@@ -1,5 +1,6 @@
-﻿using AxCrypt.App.Desktop.Helpers;
+﻿using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Utility.View;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
@@ -20,7 +21,7 @@ public class RecentFoldersViewModel : ViewModelBase
 {
     private readonly MainViewModel _mainViewModel;
     private readonly FileOperationViewModel _fileOperationViewModel;
-    private WatchedFoldersViewModel _viewModel;
+    private WatchedFoldersViewModel? _viewModel;
     private ShareKeyViewModel? _sharekeyViewModel;
 
     private bool _isDescending;
@@ -86,7 +87,7 @@ public class RecentFoldersViewModel : ViewModelBase
 
     public void HandleSortChange(ChangeEventArgs e)
     {
-        string selectedValue = e.Value?.ToString();
+        string? selectedValue = e.Value?.ToString();
         if (!string.IsNullOrEmpty(selectedValue))
         {
             SortBy(selectedValue);
@@ -186,7 +187,7 @@ public class RecentFoldersViewModel : ViewModelBase
     public async Task AddSecuredFolder(EventArgs eventArgs)
     {
         FolderContextMenu = false;
-        await PremiumFeature_ClickAsync(LicenseCapability.SecureFolders, async (ss, ee) => { await WatchedFoldersAddSecureFolderMenuItem_Click(ss, ee); }, null, eventArgs);
+        await PremiumFeature_ClickAsync(LicenseCapability.SecureFolders, async (ss, ee) => { await WatchedFoldersAddSecureFolderMenuItem_Click(ss, ee); }, null!, eventArgs);
     }
 
     private async Task WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
@@ -207,7 +208,7 @@ public class RecentFoldersViewModel : ViewModelBase
 
     private async void WatchedFolderKeySharing(EventArgs args)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, (ss, ee) => { return WatchedFoldersKeySharingAsync(_mainViewModel.SelectedWatchedFolders); }, null, args);
+        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, (ss, ee) => { return WatchedFoldersKeySharingAsync(_mainViewModel.SelectedWatchedFolders); }, null!, args);
     }
 
     private async Task WatchedFoldersKeySharingAsync(IEnumerable<string> folderPaths)
@@ -215,9 +216,9 @@ public class RecentFoldersViewModel : ViewModelBase
         if (!folderPaths.Any()) return;
 
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFoldersAsync(folderPaths, Resolve.KnownIdentities.DefaultEncryptionIdentity);
-        await _sharekeyViewModel.SetSelectedFilesOrFolders(_mainViewModel.SelectedWatchedFolders.Select(e => e), viewModel);
+        await _sharekeyViewModel!.SetSelectedFilesOrFolders(_mainViewModel.SelectedWatchedFolders.Select(e => e), viewModel);
 
-        await viewModel.ShareFolders.ExecuteAsync(null);
+        await viewModel.ShareFolders.ExecuteAsync(null!);
     }
 
     private async void DecryptPermanently()

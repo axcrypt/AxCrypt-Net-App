@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Common;
 using AxCrypt.Core.Runtime;
@@ -136,28 +137,28 @@ namespace AxCrypt.App.Desktop.ViewModels.Home
             }
 
             //We are opening the Explorer not the File picker with default folder for Cloud services
-            _mainViewModel.SelectedWatchedFolders = new List<string> { knownFolder.My.FullName };
+            _mainViewModel!.SelectedWatchedFolders = new List<string> { knownFolder.My.FullName };
             _mainViewModel.OpenSelectedFolder.Execute(_mainViewModel.SelectedWatchedFolders.First());
         }
 
         public async void RandomRenameAsync(EventArgs e)
         {
-            await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null); }, null, e);
+            await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null!); }, null!, e);
         }
 
         public async void SecureWipeFiles(EventArgs e)
         {
-            await PremiumFeature_ClickAsync(LicenseCapability.SecureWipe, async (ss, ee) => { await _fileOperationViewModel.WipeFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null); }, null, e);
+            await PremiumFeature_ClickAsync(LicenseCapability.SecureWipe, async (ss, ee) => { await _fileOperationViewModel.WipeFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null!); }, null!, e);
         }
 
         public async void EncryptionUpgrade(EventArgs e)
         {
-            await _fileOperationViewModel.AsyncEncryptionUpgrade.ExecuteAsync(null);
+            await _fileOperationViewModel!.AsyncEncryptionUpgrade.ExecuteAsync(null!);
         }
 
         public async void InviteUser(EventArgs e)
         {
-            await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { LogOnViewModel.InviteDialog.Show(); }, null, e);
+            await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { LogOnViewModel.InviteDialog.Show(); }, null!, e);
         }
 
         public void UpgradeDialog()

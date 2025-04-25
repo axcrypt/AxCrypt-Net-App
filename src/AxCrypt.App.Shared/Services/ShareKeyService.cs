@@ -1,16 +1,13 @@
-﻿using AxCrypt.App.Desktop.ViewModels;
+﻿using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.Services;
+namespace AxCrypt.App.Shared.Services;
 
 public static class ShareKeyService
 {

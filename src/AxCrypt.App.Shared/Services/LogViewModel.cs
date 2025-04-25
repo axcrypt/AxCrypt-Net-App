@@ -1,10 +1,6 @@
 ﻿using AxCrypt.Core.UI.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace AxCrypt.App.Desktop.Services
+namespace AxCrypt.App.Shared.Services
 {
     public class LogViewModel : ViewModelBase
     {

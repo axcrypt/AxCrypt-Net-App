@@ -1,10 +1,9 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Desktop;
 using AxCrypt.App.Desktop.Code;
-using AxCrypt.App.Desktop.Services;
-using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Platforms.Windows.Implementation;
 using AxCrypt.Common;

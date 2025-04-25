@@ -1,11 +1,12 @@
 ﻿using AxCrypt.Api.Model.Secret;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core.Runtime;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels.Secret;
+namespace AxCrypt.App.Shared.ViewModels.Secret;
 
 public class ManageSecretViewModel : Core.UI.ViewModel.ViewModelBase
 {

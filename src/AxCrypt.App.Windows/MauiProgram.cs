@@ -1,19 +1,12 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Desktop;
-using AxCrypt.App.Desktop.Services;
 using AxCrypt.App.Desktop.Services.Interface;
-using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Services;
-using AxCrypt.Core.Runtime;
-using AxCrypt.Core.UI;
-using AxCrypt.Cryptor.Model;
-using AxCrypt.Mono;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 

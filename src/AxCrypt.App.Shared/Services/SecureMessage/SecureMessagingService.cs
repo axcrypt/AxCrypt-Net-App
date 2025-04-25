@@ -3,22 +3,18 @@ using AxCrypt.Api;
 using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Api.Shared.Helper;
-using AxCrypt.App.Desktop.ViewModels;
-using AxCrypt.App.Desktop.ViewModels.SecuredMessenger;
-using AxCrypt.App.Shared.PushNotification;
+using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Shared.PushNotification;
 
-namespace AxCrypt.App.Desktop.Services
+namespace AxCrypt.App.Shared.Services
 {
     public class SecureMessagingService : ISecureMessagingService
     {

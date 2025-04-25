@@ -1,5 +1,5 @@
 using AxCrypt.Abstractions;
-using AxCrypt.App.Desktop.ViewModels.Notification;
+using AxCrypt.App.Shared.ViewModels.Notification;
 using Microsoft.JSInterop;
 using Microsoft.Maui.Devices;
 using System;

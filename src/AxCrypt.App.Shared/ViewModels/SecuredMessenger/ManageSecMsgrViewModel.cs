@@ -1,6 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.SecuredMessenger;
-using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Common;
@@ -9,14 +9,9 @@ using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
+namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 {
     public class ManageSecMsgrViewModel : ViewModelBase
     {
@@ -116,7 +111,7 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             return await _messageService.GetLoadMoreSEMAsync(pageNumber, secMessengerFilterTab);
         }
 
-        public async Task ViewMessageReplies(Guid messageId, SecureMsgrFilterTab securedMessengerFilterTab, MouseEventArgs e)
+        public async Task ViewMessageReplies(Guid messageId, SecureMsgrFilterTab securedMessengerFilterTab)
         {
             if (messageId == Guid.Empty)
             {
@@ -135,9 +130,35 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             if (Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox)
             {
                 ReadSelectedMessage(messageId);
+                RefreshVisibleMessages(messageId);
             }
 
             ShowLoadingWheel = false;
+        }
+
+        private void RefreshVisibleMessages(Guid messageId)
+        {
+            DateTime currentUtc = New<INow>().Utc;
+            Messenger.ChildMessages = Messenger.ChildMessages.Where(rm => (rm.Message.Visibility == SecureMsgrVisibility.Once && rm.Message.ReceiverList.First(ru => ru.User == New<UserSettings>().UserEmail).Read == DateTime.MinValue) || rm.Message.Visibility != SecureMsgrVisibility.Once && rm.Message.VisibleUntil > currentUtc).ToList();
+
+            SecuredMessage? secMsg = Messenger.ChildMessages.FirstOrDefault();
+            if (secMsg == null)
+            {
+                return;
+            }
+
+            if (secMsg.Message.Visibility == SecureMsgrVisibility.Once)
+            {
+                secMsg.Message.VisibleUntil = currentUtc;
+
+                SecuredMessage? rootSecMsg = Messenger.Messages.FirstOrDefault(cm => cm.Id == messageId);
+                if (rootSecMsg != null)
+                {
+                    rootSecMsg.Message.VisibleUntil = currentUtc;
+                }
+            }
+
+            Messenger.Messages = Messenger.Messages.Where(rm => rm.Message.VisibleUntil > currentUtc).ToList();
         }
 
         private void ResetMessageView()
@@ -213,7 +234,7 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             {
                 return;
             }
-            SecuredMessage messengerMsg = Messenger.Messages.FirstOrDefault(mg => mg.Id == messageId);
+            SecuredMessage? messengerMsg = Messenger.ChildMessages.FirstOrDefault(mg => mg.Id == messageId);
             if (messengerMsg == null)
             {
                 return;
@@ -241,7 +262,7 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             isMultiCheckboxVisible = !isMultiCheckboxVisible;
         }
 
-        internal void ComposeNewMessage()
+        public void ComposeNewMessage()
         {
             if (!New<AxCryptOnlineState>().IsOnline)
             {
@@ -254,9 +275,10 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             SelectedMessageId = new Guid();
             NewSecMsgrViewModel.IsVisible = true;
             NewSecMsgrViewModel.UpdateViewState();
+            UpdateViewState();
         }
 
-        internal void SelectMessagesForActions(SecuredMessage message)
+        public void SelectMessagesForActions(SecuredMessage message)
         {
             message.IsSelected = !message.IsSelected;
             UpdateViewState();
@@ -267,7 +289,7 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             return Messenger.Messages.Where(msg => msg.IsSelected)?.Select(m => m.Id) ?? new List<Guid>();
         }
 
-        internal async Task MultiActionAsync(string actionType)
+        public async Task MultiActionAsync(string actionType)
         {
             IEnumerable<Guid> selectedMessengerList = GetSelectedMessagesList();
             if (!selectedMessengerList.Any())
@@ -335,7 +357,7 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             });
         }
 
-        internal void ToggleAllMessages(ChangeEventArgs e)
+        public void ToggleAllMessages(ChangeEventArgs e)
         {
             bool isChecked = Convert.ToBoolean(e.Value);
             SelectAllMessages = isChecked;
