@@ -29,9 +29,6 @@
         <!-- App Identifier -->
         <ApplicationId>axcrypt.net.app.windows</ApplicationId>
 		
-		<!-- Versions -->
-		<ApplicationDisplayVersion>3.0.0.0</ApplicationDisplayVersion>
-		<ApplicationVersion>3.0.0.0</ApplicationVersion>
         <!--<WindowsPackageType>None</WindowsPackageType>-->
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
@@ -45,10 +42,19 @@
 		<Copyright>Copyright © 2012-2025 AxCrypt AB</Copyright>
     </PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Debug'">
+		<ApplicationDisplayVersion>3.0.0.0</ApplicationDisplayVersion>
+		<ApplicationVersion>3.0.0.0</ApplicationVersion>
 		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
 		<GenerateTestArtifacts>True</GenerateTestArtifacts>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
+		<!-- Versions -->
+		<_AxCryptMajor>3</_AxCryptMajor>
+		<AxMinorVersion Condition =" '$(AxMinorVersion)' == '' ">0</AxMinorVersion>
+		<AxBuildNumber Condition=" '$(AxBuildNumber)' == '' ">1</AxBuildNumber>
+		<FinalAppVersion>$(_AxCryptMajor).$(AxMinorVersion).0.$(AxBuildNumber)</FinalAppVersion>
+		<ApplicationDisplayVersion>$(FinalAppVersion)</ApplicationDisplayVersion>
+		<ApplicationVersion>$(FinalAppVersion)</ApplicationVersion>
 		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
 		<GenerateTestArtifacts>False</GenerateTestArtifacts>
 	</PropertyGroup>
@@ -162,5 +168,9 @@
     <ItemGroup>
       <PRIResource Remove="Components\Pages\Home\**" />
     </ItemGroup>
+
+	<PropertyGroup>
+		<AppxManifestFile>$(MSBuildThisFileDirectory)Platforms\Windows\Package.appxmanifest</AppxManifestFile>
+	</PropertyGroup>
 	<Import Project="..\SolutionItems\AxCrypt.Net.App.Build.targets" />
 </Project>

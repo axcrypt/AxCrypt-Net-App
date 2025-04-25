@@ -4,32 +4,41 @@
   </Target>
 	
 	<PropertyGroup>
-		<_AxCryptMajor>3</_AxCryptMajor>
-		<AxMinorVersion Condition =" '$(AxMinorVersion)' == '' ">0</AxMinorVersion>
-		<AxBuildNumber Condition=" '$(AxBuildNumber)' == '' ">1</AxBuildNumber>
-		<_AxCanonicalName>AxCrypt.App.Windows</_AxCanonicalName>
+		<_AxCanonicalAssemblyName>AxCrypt.App.Windows</_AxCanonicalAssemblyName>
+		<_AxCanonicalName>AxCrypt</_AxCanonicalName>
 		<_AppDefaultPlatform>x64</_AppDefaultPlatform>
-		<_AxMergedBaseFileName>$(_AxCanonicalName)_3.0.0.0_$(_AppDefaultPlatform)</_AxMergedBaseFileName>
-		<AppOutputPath>$(AppxPackageDir)$(_AxCanonicalName)_$(ApplicationDisplayVersion)_Test\</AppOutputPath>
+		<_AxMergedBaseFileName>$(_AxCanonicalAssemblyName)_$(FinalAppVersion)_$(_AppDefaultPlatform)</_AxMergedBaseFileName>
+		<AppOutputPath>$(AppxPackageDir)$(_AxCanonicalAssemblyName)_$(FinalAppVersion)_Test\</AppOutputPath>
 		<PackageCertificateThumbprint>B3E2D8EB3B9AC1E60F5B2D581F9A2B1D1372701C</PackageCertificateThumbprint>
 		<_AxTimeStampUrl>http://time.certum.pl</_AxTimeStampUrl>
 	</PropertyGroup>
-	
+
 	<Target Name="_AxSetVersionedFileName">
 		<PropertyGroup Condition=" '$(AxBuildNumber)' != '' ">
-			<_AxVersionedFileName>$(_AxCanonicalName)_$(_AxCryptMajor).$(AxMinorVersion).0.$(AxBuildNumber)_$(_AppDefaultPlatform).msix</_AxVersionedFileName>
+			<_AxVersionedDefaultFileName>$(AppOutputPath)$(_AxMergedBaseFileName).msix</_AxVersionedDefaultFileName>
+			<!--<_AxVersionedFileName>$(_AxCanonicalAssemblyName)_$(FinalAppVersion)_$(_AppDefaultPlatform).msix</_AxVersionedFileName>-->
+			<_AxVersionedFileName>$(_AxCanonicalName)-$(FinalAppVersion).msix</_AxVersionedFileName>
 		</PropertyGroup>
 	</Target>
 	<Target Name="_AxCopyToVersionedFileName"
-		Inputs="$(AppOutputPath)$(_AxMergedBaseFileName).msix"
+		Inputs="$(_AxVersionedDefaultFileName)"
 		Outputs="$(AppOutputPath)$(_AxVersionedFileName)"
 		Condition=" '$(_AxVersionedFileName)' != '' ">
-		<Copy SourceFiles="$(AppOutputPath)$(_AxMergedBaseFileName).msix"
+		<Copy SourceFiles="$(_AxVersionedDefaultFileName)"
 			  DestinationFiles="$(AppOutputPath)$(_AxVersionedFileName)"
 			  SkipUnchangedFiles="true" />
 		<ItemGroup>
 			<FileWrites Include="$(AppOutputPath)$(_AxVersionedFileName)" />
 		</ItemGroup>
+	</Target>
+
+	<Target Name="_UpdateAppxManifestVersion" BeforeTargets="_GenerateAppxPackageFile">
+		<Message Importance="high" Text="Updating Package.appxmanifest version to $(FinalAppVersion)" />
+
+		<XmlPoke
+			XmlInputPath="$(AppxManifestFile)"
+			Query="/*[local-name()='Package']/*[local-name()='Identity']/@Version"
+			Value="$(FinalAppVersion)" />
 	</Target>
 
 	<Target Name="_AxSetRevisionAndCopyToVersionedFileName" AfterTargets="_GenerateAppxPackageFile"
@@ -39,6 +48,8 @@
 
 	<!-- 🔐 Signing target -->
 	<Target Name="SignMSIXAfterPublish" AfterTargets="_GenerateAppxPackageFile">
+		<Exec Command='&quot;$(MSBuildThisFileDirectory)signtool.exe&quot; sign /sha1 $(PackageCertificateThumbprint) /fd sha256 /td sha256 /tr &quot;$(_AxTimeStampUrl)&quot; &quot;$(_AxVersionedDefaultFileName)&quot;'
+				Condition=" '$(PackageCertificateThumbprint)' != '' "/>
 		<Exec Command='&quot;$(MSBuildThisFileDirectory)signtool.exe&quot; sign /sha1 $(PackageCertificateThumbprint) /fd sha256 /td sha256 /tr &quot;$(_AxTimeStampUrl)&quot; &quot;$(AppOutputPath)$(_AxVersionedFileName)&quot;'
 			  Condition=" '$(PackageCertificateThumbprint)' != '' "/>
 	</Target>
