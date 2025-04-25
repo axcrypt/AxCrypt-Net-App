@@ -11,7 +11,7 @@
             either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.22621.0</TargetFrameworks>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
 
 		<SelfContained>true</SelfContained>
 		<!--<RuntimeIdentifier>win-arm64</RuntimeIdentifier>-->
@@ -27,28 +27,34 @@
         <ApplicationTitle>AxCrypt</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>axcrypt</ApplicationId>
-
+        <ApplicationId>axcrypt.net.app.windows</ApplicationId>
+		
 		<!-- Versions -->
-        <ApplicationDisplayVersion>3.0.0.1</ApplicationDisplayVersion>
-        <ApplicationVersion>1</ApplicationVersion>
+		<ApplicationDisplayVersion>3.0.0.0</ApplicationDisplayVersion>
+		<ApplicationVersion>3.0.0.0</ApplicationVersion>
         <!--<WindowsPackageType>None</WindowsPackageType>-->
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-        <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
         <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
         <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-        <GenerateTestArtifacts>True</GenerateTestArtifacts>
         <HoursBetweenUpdateChecks>24</HoursBetweenUpdateChecks>
-        <AppxPackageDir>C:\Projects\GitHub\AxCrypt.Net.App\src\AxCrypt.App.Windows\bin\Release\net8.0-windows10.0.26100.0\win10-arm64\</AppxPackageDir>
+		<AppxPackageDir>$(BaseOutputPath)bin\ReleaseAppPackages\</AppxPackageDir>
 
-		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-		<AppxPackageSigningTimestampDigestAlgorithm>SHA384</AppxPackageSigningTimestampDigestAlgorithm>
-		<PackageCertificateThumbprint>82395302B94909ECFD6829E9DC5504A8E7F65155</PackageCertificateThumbprint>
 		<AssemblyName>AxCrypt</AssemblyName>
 		<Copyright>Copyright © 2012-2025 AxCrypt AB</Copyright>
     </PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Debug'">
+		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+		<GenerateTestArtifacts>True</GenerateTestArtifacts>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
+		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+		<GenerateTestArtifacts>False</GenerateTestArtifacts>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
+		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
+	</PropertyGroup>
 	
     <ItemGroup>
         <!-- App Icon -->
@@ -156,5 +162,5 @@
     <ItemGroup>
       <PRIResource Remove="Components\Pages\Home\**" />
     </ItemGroup>
-
+	<Import Project="..\SolutionItems\AxCrypt.Net.App.Build.targets" />
 </Project>

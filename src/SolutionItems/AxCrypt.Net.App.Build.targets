@@ -1,0 +1,45 @@
+<Project>
+  <!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
+  <Target Name="CustomAfterBuildTarget" BeforeTargets="Build">
+  </Target>
+	
+	<PropertyGroup>
+		<_AxCryptMajor>3</_AxCryptMajor>
+		<AxMinorVersion Condition =" '$(AxMinorVersion)' == '' ">0</AxMinorVersion>
+		<AxBuildNumber Condition=" '$(AxBuildNumber)' == '' ">1</AxBuildNumber>
+		<_AxCanonicalName>AxCrypt.App.Windows</_AxCanonicalName>
+		<_AppDefaultPlatform>x64</_AppDefaultPlatform>
+		<_AxMergedBaseFileName>$(_AxCanonicalName)_3.0.0.0_$(_AppDefaultPlatform)</_AxMergedBaseFileName>
+		<AppOutputPath>$(AppxPackageDir)$(_AxCanonicalName)_$(ApplicationDisplayVersion)_Test\</AppOutputPath>
+		<PackageCertificateThumbprint>B3E2D8EB3B9AC1E60F5B2D581F9A2B1D1372701C</PackageCertificateThumbprint>
+		<_AxTimeStampUrl>http://time.certum.pl</_AxTimeStampUrl>
+	</PropertyGroup>
+	
+	<Target Name="_AxSetVersionedFileName">
+		<PropertyGroup Condition=" '$(AxBuildNumber)' != '' ">
+			<_AxVersionedFileName>$(_AxCanonicalName)_$(_AxCryptMajor).$(AxMinorVersion).0.$(AxBuildNumber)_$(_AppDefaultPlatform).msix</_AxVersionedFileName>
+		</PropertyGroup>
+	</Target>
+	<Target Name="_AxCopyToVersionedFileName"
+		Inputs="$(AppOutputPath)$(_AxMergedBaseFileName).msix"
+		Outputs="$(AppOutputPath)$(_AxVersionedFileName)"
+		Condition=" '$(_AxVersionedFileName)' != '' ">
+		<Copy SourceFiles="$(AppOutputPath)$(_AxMergedBaseFileName).msix"
+			  DestinationFiles="$(AppOutputPath)$(_AxVersionedFileName)"
+			  SkipUnchangedFiles="true" />
+		<ItemGroup>
+			<FileWrites Include="$(AppOutputPath)$(_AxVersionedFileName)" />
+		</ItemGroup>
+	</Target>
+
+	<Target Name="_AxSetRevisionAndCopyToVersionedFileName" AfterTargets="_GenerateAppxPackageFile"
+			DependsOnTargets="_AxSetVersionedFileName;_AxCopyToVersionedFileName"
+			Condition=" '$(Configuration)' == 'Release'">
+	</Target>
+
+	<!-- 🔐 Signing target -->
+	<Target Name="SignMSIXAfterPublish" AfterTargets="_GenerateAppxPackageFile">
+		<Exec Command='&quot;$(MSBuildThisFileDirectory)signtool.exe&quot; sign /sha1 $(PackageCertificateThumbprint) /fd sha256 /td sha256 /tr &quot;$(_AxTimeStampUrl)&quot; &quot;$(AppOutputPath)$(_AxVersionedFileName)&quot;'
+			  Condition=" '$(PackageCertificateThumbprint)' != '' "/>
+	</Target>
+</Project>
