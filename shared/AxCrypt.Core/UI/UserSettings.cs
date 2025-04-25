@@ -29,6 +29,7 @@ using AxCrypt.Abstractions;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
+using AxCrypt.Core.Runtime;
 using Newtonsoft.Json;
 using System.Globalization;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -362,7 +363,7 @@ namespace AxCrypt.Core.UI
 
         public string TemporaryFilePath
         {
-            get { return Load(nameof(TemporaryFilePath), string.Empty); }
+            get { return Load(nameof(TemporaryFilePath), New<WorkFolder>().FileInfo?.FullName ?? ""); }
             set { Store(nameof(TemporaryFilePath), value); }
         }
 

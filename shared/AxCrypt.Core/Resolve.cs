@@ -43,6 +43,7 @@ using AxCrypt.Abstractions.Rest;
 using AxCrypt.Api.Implementation;
 using AxCrypt.Core.IO;
 using static AxCrypt.Abstractions.TypeResolve;
+using System.IO;
 
 namespace AxCrypt.Core
 {

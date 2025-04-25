@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AxCrypt.App.Desktop.Helpers;
 using System.Linq;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.Core;
 
 namespace AxCrypt.App.Desktop.ViewModels.Main;
 
