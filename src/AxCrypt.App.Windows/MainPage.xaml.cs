@@ -20,15 +20,15 @@ namespace AxCrypt.App.Windows;
 
 public partial class MainPage : ContentPage, ISignIn
 {
-    private ICustomNavigationService _navigationManager;
-    private LogOnViewModel _logOnService;
-    private RegisterViewModel _registerViewModel;
+    private ICustomNavigationService? _navigationManager;
+    private LogOnViewModel? _logOnService;
+    private RegisterViewModel? _registerViewModel;
 
-    private MainViewModel _mainViewModel;
-    private FileOperationViewModel _fileOperationViewModel;
-    private KnownFoldersViewModel _knownFoldersViewModel;
+    private MainViewModel? _mainViewModel;
+    private FileOperationViewModel? _fileOperationViewModel;
+    private KnownFoldersViewModel? _knownFoldersViewModel;
 
-    private ApiVersion _apiVersion;
+    private ApiVersion? _apiVersion;
 
     public MainPage()
     {
@@ -70,8 +70,8 @@ public partial class MainPage : ContentPage, ISignIn
         BindToViewModels();
         BindToFileOperationViewModel();
 
-        _logOnService.MainViewModel = _mainViewModel;
-        _logOnService.FileOperationViewModel = _fileOperationViewModel;
+        _logOnService!.MainViewModel = _mainViewModel!;
+        _logOnService.FileOperationViewModel = _fileOperationViewModel!;
 
         await SignInAsync();
     }
@@ -87,8 +87,8 @@ public partial class MainPage : ContentPage, ISignIn
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { _encryptToolStripMenuItem.Enabled = enabled; });
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool filesArePending) => { _cleanDecryptedToolStripMenuItem.Enabled = filesArePending; });
         //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool filesArePending) => { _closeAndRemoveOpenFilesToolStripButton.Visible = filesArePending; _closeAndRemoveOpenFilesToolStripButton.ToolTipText = filesArePending ? Texts.CloseAndRemoveOpenFilesToolStripButtonToolTipText : string.Empty; });
-        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => await _knownFoldersViewModel.UpdateState.ExecuteAsync(null));
-        _knownFoldersViewModel.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
+        _mainViewModel!.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => await _knownFoldersViewModel!.UpdateState.ExecuteAsync(null!));
+        _knownFoldersViewModel!.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
         //_mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
         //_mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await ConfigureLinkLabelAsync(New<KnownIdentities>().DefaultEncryptionIdentity); });
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { await SetWindowTitleTextAsync(_mainViewModel.LoggedOn); });
@@ -119,7 +119,7 @@ public partial class MainPage : ContentPage, ISignIn
     {
         //_encryptToolStripButton.Tag = _fileOperationViewModel.EncryptFiles;
         //_fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await HandleLogOn(e);
-        _logOnService.OnLogOnOrLogOffAndLogOnAgain = async () => await New<IUIThread>().SendToAsync(async () => await LogOnOrLogOffAndLogOnAgainAsync());
+        _logOnService!.OnLogOnOrLogOffAndLogOnAgain = async () => await New<IUIThread>().SendToAsync(async () => await LogOnOrLogOffAndLogOnAgainAsync());
         //_logOnService.OnLogOnOrLogOffAndLogOnAgain = async () => await LogOnOrLogOffAndLogOnAgainAsync();
         //_inviteUserToolStripMenuItem.Click += async (sender, e) => { await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await InviteUserAsync(); }, sender, e); };
         //_recentFilesListView.DragDrop += async (sender, e) => { await DropFilesOrFoldersInRecentFilesListViewAsync(); };
@@ -131,7 +131,7 @@ public partial class MainPage : ContentPage, ISignIn
         bool wasLoggedOn = Resolve.KnownIdentities.IsLoggedOn;
         if (wasLoggedOn)
         {
-            await _fileOperationViewModel.IdentityViewModel.LogOnLogOff.ExecuteAsync(null);
+            await _fileOperationViewModel!.IdentityViewModel.LogOnLogOff.ExecuteAsync(null!);
         }
         else
         {
@@ -148,14 +148,14 @@ public partial class MainPage : ContentPage, ISignIn
 
     public async Task SignIn()
     {
-        await _fileOperationViewModel.IdentityViewModel.LogOnAsync.ExecuteAsync(null);
+        await _fileOperationViewModel!.IdentityViewModel.LogOnAsync.ExecuteAsync(null!);
     }
 
     private async Task SignInAsync()
     {
-        SignUpSignIn signUpSignIn = new SignUpSignIn(_navigationManager, _registerViewModel)
+        SignUpSignIn signUpSignIn = new SignUpSignIn(_navigationManager!, _registerViewModel!)
         {
-            Version = _apiVersion,
+            Version = _apiVersion!,
             UserEmail = New<UserSettings>().UserEmail,
         };
 
@@ -169,7 +169,7 @@ public partial class MainPage : ContentPage, ISignIn
             return;
         }
 
-        await SetSignInSignOutStatusAsync(_mainViewModel.LoggedOn);
+        await SetSignInSignOutStatusAsync(_mainViewModel!.LoggedOn);
         if (_mainViewModel.LoggedOn && Thread.CurrentThread.CurrentUICulture.Name != Resolve.UserSettings.CultureName)
         {
             await SetLanguageAsync(Resolve.UserSettings.CultureName);
@@ -217,7 +217,7 @@ public partial class MainPage : ContentPage, ISignIn
 
     private async Task DisplayUpdateCheckPopups()
     {
-        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel.DownloadVersion);
+        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel!.DownloadVersion);
         _userInitiatedUpdateCheckPending = false;
     }
 
@@ -232,7 +232,7 @@ public partial class MainPage : ContentPage, ISignIn
         UpdateArabicStyle();
 
         InitializeContentResources();
-        await SetWindowTitleTextAsync(_mainViewModel.LoggedOn);
+        await SetWindowTitleTextAsync(_mainViewModel!.LoggedOn);
         //_daysLeftPremiumLabel.UpdateText();
         await SetSoftwareStatus();
     }
@@ -293,7 +293,7 @@ public partial class MainPage : ContentPage, ISignIn
 
     private void ShowRenewSubscriptionDialog()
     {
-        if (!_mainViewModel.LoggedOn || !AxCryptUserAccountViewModel.HadAnyPaidSubscription)
+        if (_mainViewModel!.LoggedOn || !AxCryptUserAccountViewModel.HadAnyPaidSubscription)
         {
             return;
         }
@@ -305,7 +305,7 @@ public partial class MainPage : ContentPage, ISignIn
             return;
         }
 
-        _logOnService.RenewSubscriptionDialog.Show();
+        _logOnService!.RenewSubscriptionDialog.Show();
 
         //using (RenewSubscriptionPromptDialog dialog = new RenewSubscriptionPromptDialog(this))
         //{

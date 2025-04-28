@@ -38,6 +38,8 @@ namespace Org.BouncyCastle.Asn1
          * @exception ArgumentException if the tagged object cannot
          *              be converted.
          */
+
+        [Obsolete]
         public static DerBmpString GetInstance(
             Asn1TaggedObject	obj,
             bool				isExplicit)

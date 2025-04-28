@@ -73,7 +73,7 @@
                                 <input type="button" class="rply-icon" id="reply-button-@messenger.Id"
                                        data-id="@messenger.Id"
                                        @onclick:stopPropagation="true"
-                                       @onclick="async()=>await ViewSecMsgrViewModel.ReplyMessage(messenger.Id, parentId, replyMesssageReceivers)"
+                                       @onclick="() => ViewSecMsgrViewModel.ReplyMessage(messenger.Id, parentId, replyMesssageReceivers)"
                                        value="Reply" name="reply-button" />
 
                                 @if (showDeleteButton)

@@ -9,6 +9,7 @@ namespace Org.BouncyCastle.Asn1.X9
     {
         private readonly Asn1Object _params;
 
+        [Obsolete]
 		public static X962Parameters GetInstance(
 			object obj)
 		{

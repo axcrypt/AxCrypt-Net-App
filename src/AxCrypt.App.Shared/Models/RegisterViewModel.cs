@@ -32,7 +32,7 @@ public class RegisterViewModel : ViewModelBase
     public DialogResult DialogResult
     { get { return GetProperty<DialogResult>(nameof(DialogResult)); } set { SetProperty(nameof(DialogResult), value); } }
 
-    public string ErrorMessage { get; set; }
+    public string ErrorMessage { get; set; } = string.Empty;
 
     public void ShowDialog(string passphrase, EmailAddress email)
     {
@@ -47,7 +47,7 @@ public class RegisterViewModel : ViewModelBase
         ShowSignUp = false;
     }
 
-    public ProcessIndicator ProcessIndicator { get; set; }
+    public ProcessIndicator? ProcessIndicator { get; set; }
 
     public async Task ButtonOk_Click(EventArgs e)
     {

@@ -29,7 +29,7 @@ public class FolderPickerWindows : IFolderPicker
             WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
 
             StorageFolder folders = await folderPicker.PickSingleFolderAsync();
-            return folders?.Path;
+            return folders?.Path ?? string.Empty;
         }
         catch (Exception ex)
         {

@@ -12,6 +12,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
             return (ContentInfo[])info.Clone();
         }
 
+        [Obsolete]
         public static AuthenticatedSafe GetInstance(object obj)
         {
             if (obj is AuthenticatedSafe)
@@ -25,7 +26,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
         private readonly bool isBer;
 
         [Obsolete("Use 'GetInstance' instead")]
-		public AuthenticatedSafe(
+        public AuthenticatedSafe(
             Asn1Sequence seq)
         {
             info = new ContentInfo[seq.Count];
@@ -38,14 +39,14 @@ namespace Org.BouncyCastle.Asn1.Pkcs
             isBer = seq is BerSequence;
         }
 
-		public AuthenticatedSafe(
+        public AuthenticatedSafe(
             ContentInfo[] info)
         {
             this.info = Copy(info);
             this.isBer = true;
         }
 
-		public ContentInfo[] GetContentInfo()
+        public ContentInfo[] GetContentInfo()
         {
             return Copy(info);
         }

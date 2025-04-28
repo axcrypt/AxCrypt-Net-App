@@ -9,7 +9,7 @@ public class DesktopVersion : IVersion
     {
         get
         {
-            return Assembly.GetExecutingAssembly().GetName().Version;
+            return Assembly.GetExecutingAssembly().GetName()?.Version ?? Version.Parse("");
         }
     }
 }

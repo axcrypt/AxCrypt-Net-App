@@ -27,6 +27,7 @@ namespace crypto
         /// <param name="text">Provided key text</param>
         /// <param name="salt">Base64 encoded string representing the salt</param>
         /// <returns></returns>
+        [Obsolete]
         public static string ComputeHash(string text, string salt)
         {
             byte[] data = Encoding.UTF8.GetBytes(text);

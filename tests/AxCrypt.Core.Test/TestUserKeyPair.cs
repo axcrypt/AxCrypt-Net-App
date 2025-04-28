@@ -46,12 +46,12 @@ namespace AxCrypt.Core.Test
         [Test]
         public void TestEquals()
         {
-            UserKeyPair userKeyPair1 = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
+            UserKeyPair userKeyPair1 = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
             UserKeyPair userKeyPair1Copy = new UserKeyPair(userKeyPair1.UserEmail, userKeyPair1.Timestamp, userKeyPair1.KeyPair);
 
             Assert.That(userKeyPair1, Is.EqualTo(userKeyPair1Copy));
 
-            UserKeyPair userKeyPair2 = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
+            UserKeyPair userKeyPair2 = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
             Assert.That(userKeyPair1, Is.Not.EqualTo(userKeyPair2));
         }
     }

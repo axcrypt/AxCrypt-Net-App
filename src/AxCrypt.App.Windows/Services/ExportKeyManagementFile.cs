@@ -19,7 +19,7 @@ public class ExportKeyManagementFile : IExportKeyManagementFile
         WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
 
         StorageFile file = await picker.PickSaveFileAsync();
-        return file?.Path;
+        return file?.Path ?? string.Empty;
     }
 
     public async Task ExportToFileAsync(string filePath, string data)

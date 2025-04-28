@@ -21,6 +21,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
         protected AlgorithmIdentifier		sigAlgId;
         protected DerBitString				sigBits;
 
+        [Obsolete]
 		public static CertificationRequest GetInstance(
 			object obj)
 		{

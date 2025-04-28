@@ -108,6 +108,7 @@ namespace Org.BouncyCastle.Math.EC
             return new Config(this, this.m_coord, this.m_endomorphism, this.m_multiplier);
         }
 
+        [Obsolete]
         public virtual ECPoint ValidatePoint(BigInteger x, BigInteger y)
         {
             ECPoint p = CreatePoint(x, y);
@@ -129,6 +130,7 @@ namespace Org.BouncyCastle.Math.EC
             return p;
         }
 
+        [Obsolete]
         public virtual ECPoint CreatePoint(BigInteger x, BigInteger y)
         {
             return CreatePoint(x, y, false);
@@ -221,6 +223,7 @@ namespace Org.BouncyCastle.Math.EC
             }
         }
 
+        [Obsolete]
         public virtual ECPoint ImportPoint(ECPoint p)
         {
             if (this == p.Curve)
@@ -452,6 +455,8 @@ namespace Org.BouncyCastle.Math.EC
          * <code>F<sub>p</sub></code> (X9.62 s 4.2.1 pg 17).
          * @return The decoded point.
          */
+
+        [Obsolete]
         public virtual ECPoint DecodePoint(byte[] encoded)
         {
             ECPoint p = null;
@@ -686,6 +691,7 @@ namespace Org.BouncyCastle.Math.EC
         {
         }
 
+        [Obsolete]
         public FpCurve(BigInteger q, BigInteger a, BigInteger b, BigInteger order, BigInteger cofactor)
             : base(q)
         {
@@ -706,6 +712,7 @@ namespace Org.BouncyCastle.Math.EC
         {
         }
 
+        [Obsolete]
         protected FpCurve(BigInteger q, BigInteger r, ECFieldElement a, ECFieldElement b, BigInteger order, BigInteger cofactor)
             : base(q)
         {
@@ -769,6 +776,7 @@ namespace Org.BouncyCastle.Math.EC
             return new FpPoint(this, x, y, zs, withCompression);
         }
 
+        [Obsolete]
         public override ECPoint ImportPoint(ECPoint p)
         {
             if (this != p.Curve && this.CoordinateSystem == COORD_JACOBIAN && !p.IsInfinity)
@@ -1124,6 +1132,8 @@ namespace Org.BouncyCastle.Math.EC
          * @param cofactor The cofactor of the elliptic curve, i.e.
          * <code>#E<sub>a</sub>(F<sub>2<sup>m</sup></sub>) = h * n</code>.
          */
+
+        [Obsolete]
         public F2mCurve(
             int			m, 
             int			k, 
@@ -1190,6 +1200,8 @@ namespace Org.BouncyCastle.Math.EC
          * @param cofactor The cofactor of the elliptic curve, i.e.
          * <code>#E<sub>a</sub>(F<sub>2<sup>m</sup></sub>) = h * n</code>.
          */
+
+        [Obsolete]
         public F2mCurve(
             int			m, 
             int			k1, 

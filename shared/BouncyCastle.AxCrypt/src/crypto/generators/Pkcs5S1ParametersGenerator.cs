@@ -62,6 +62,8 @@ namespace Org.BouncyCastle.Crypto.Generators
 		* @return a KeyParameter object.
 		* @exception ArgumentException if the key length larger than the base hash size.
 		*/
+
+        [Obsolete]
 		public override ICipherParameters GenerateDerivedParameters(
 			int keySize)
 		{
@@ -95,6 +97,8 @@ namespace Org.BouncyCastle.Crypto.Generators
 		* @return a ParametersWithIV object.
 		* @exception ArgumentException if keySize + ivSize is larger than the base hash size.
 		*/
+
+        [Obsolete]
 		public override ICipherParameters GenerateDerivedParameters(
 			int	keySize,
 			int	ivSize)

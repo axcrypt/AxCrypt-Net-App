@@ -109,7 +109,7 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             UpdateViewState();
         }
 
-        public async Task ReplyMessage(Guid messengerId, Guid parentId, string recipients)
+        public void ReplyMessage(Guid messengerId, Guid parentId, string recipients)
         {
             if (!New<AxCryptOnlineState>().IsOnline)
             {

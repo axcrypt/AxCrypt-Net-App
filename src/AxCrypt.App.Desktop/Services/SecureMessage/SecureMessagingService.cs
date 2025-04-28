@@ -80,6 +80,11 @@ namespace AxCrypt.App.Desktop.Services
 
         public async Task<SecuredMessage> GetMessageByIdAsync(Guid messageId)
         {
+            if (messageId == Guid.Empty)
+            {
+                return null;
+            }
+
             return await SecuredMessengerFacade.GetMessageAsync(messageId);
         }
 

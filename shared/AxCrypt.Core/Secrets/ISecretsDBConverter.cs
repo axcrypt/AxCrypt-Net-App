@@ -6,7 +6,7 @@ using System;
 /*
  *  AxCrypt.Xecrets.Core - Xecrets Core and Reference Implementation
  *
- *  Copyright (C) 2008 Svante Seleborg
+ *  Copyright (C) 2025 AxCrypt AB
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ using System;
  *  If you'd like to license this program under any other terms than the
  *  above, please contact the author and copyright holder.
  *
- *  Contact: mailto:svante@axantum.com
+ *  Contact: mailto:support@axcrypt.net
  */
 
 #endregion License

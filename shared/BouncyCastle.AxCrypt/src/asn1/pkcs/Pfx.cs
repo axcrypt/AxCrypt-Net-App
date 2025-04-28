@@ -11,6 +11,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
     public class Pfx
         : Asn1Encodable
     {
+        [Obsolete]
         public static Pfx GetInstance(object obj)
         {
             if (obj is Pfx)

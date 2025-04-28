@@ -1,6 +1,4 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api;
-using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.App.Desktop;
 using AxCrypt.App.Desktop.Code;
 using AxCrypt.App.Desktop.Services;
@@ -16,10 +14,6 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Ipc;
 using AxCrypt.Core.Runtime;
-using AxCrypt.Core.Service;
-using AxCrypt.Core.Service.Secrets;
-using AxCrypt.Core.Service.SecuredMessenger;
-using AxCrypt.Core.Service.UserNotification;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -33,8 +27,9 @@ public partial class App : Application
 {
     private readonly ProgressBackgroundComponent _progressBackgroundWorker;
 
-    private bool _isInitializing = true;
+    //private bool _isInitializing = true;
     private CommandLine _commandLine;
+
     private MainViewModel _mainViewModel;
 
     private FileOperationViewModel _fileOperationViewModel;
@@ -101,7 +96,7 @@ public partial class App : Application
             }
             finally
             {
-                _isInitializing = false;
+                //_isInitializing = false;
             }
         });
     }
@@ -533,7 +528,7 @@ public partial class App : Application
         //}
     }
 
-    private static Window _window;
+    private static Window? _window;
 
     protected override Window CreateWindow(IActivationState? activationState)
     {

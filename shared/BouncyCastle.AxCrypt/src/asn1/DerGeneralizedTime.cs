@@ -62,6 +62,8 @@ namespace Org.BouncyCastle.Asn1
          * @param time the time string.
          * @exception ArgumentException if string is an illegal format.
          */
+
+        [Obsolete]
         public DerGeneralizedTime(
             string time)
         {
@@ -120,6 +122,8 @@ namespace Org.BouncyCastle.Asn1
          * To read in the time and Get a date which is compatible with our local
          * time zone.</p>
          */
+
+        [Obsolete]
         public string GetTime()
         {
             //
@@ -158,6 +162,7 @@ namespace Org.BouncyCastle.Asn1
             return time + CalculateGmtOffset();
         }
 
+        [Obsolete]
         private string CalculateGmtOffset()
         {
             char sign = '+';
@@ -198,6 +203,7 @@ namespace Org.BouncyCastle.Asn1
             return time.ToString();
         }
 
+        [Obsolete]
         public DateTime ToDateTime()
         {
             string formatStr;

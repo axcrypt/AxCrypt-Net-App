@@ -25,7 +25,7 @@
  *  If you'd like to license this program under any other terms than the
  *  above, please contact the author and copyright holder.
  *
- *  Contact: mailto:svante@axantum.com
+ *  Contact: mailto:support@axcrypt.net
  */
 
 #endregion License

@@ -7,6 +7,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
     public class SafeBag
         : Asn1Encodable
     {
+        [Obsolete]
         public static SafeBag GetInstance(object obj)
         {
             if (obj is SafeBag)
@@ -20,19 +21,19 @@ namespace Org.BouncyCastle.Asn1.Pkcs
         private readonly Asn1Object bagValue;
         private readonly Asn1Set bagAttributes;
 
-		public SafeBag(
-            DerObjectIdentifier	oid,
-            Asn1Object			obj)
+        public SafeBag(
+            DerObjectIdentifier oid,
+            Asn1Object obj)
         {
             this.bagID = oid;
             this.bagValue = obj;
             this.bagAttributes = null;
         }
 
-		public SafeBag(
-            DerObjectIdentifier	oid,
-            Asn1Object			obj,
-            Asn1Set				bagAttributes)
+        public SafeBag(
+            DerObjectIdentifier oid,
+            Asn1Object obj,
+            Asn1Set bagAttributes)
         {
             this.bagID = oid;
             this.bagValue = obj;
@@ -40,7 +41,7 @@ namespace Org.BouncyCastle.Asn1.Pkcs
         }
 
         [Obsolete("Use 'GetInstance' instead")]
-		public SafeBag(
+        public SafeBag(
             Asn1Sequence seq)
         {
             this.bagID = (DerObjectIdentifier)seq[0];
@@ -51,20 +52,20 @@ namespace Org.BouncyCastle.Asn1.Pkcs
             }
         }
 
-		public DerObjectIdentifier BagID
-		{
-			get { return bagID; }
-		}
+        public DerObjectIdentifier BagID
+        {
+            get { return bagID; }
+        }
 
-		public Asn1Object BagValue
-		{
-			get { return bagValue; }
-		}
+        public Asn1Object BagValue
+        {
+            get { return bagValue; }
+        }
 
-		public Asn1Set BagAttributes
-		{
-			get { return bagAttributes; }
-		}
+        public Asn1Set BagAttributes
+        {
+            get { return bagAttributes; }
+        }
 
         public override Asn1Object ToAsn1Object()
         {

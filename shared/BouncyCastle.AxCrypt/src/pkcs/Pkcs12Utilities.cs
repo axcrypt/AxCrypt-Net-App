@@ -19,6 +19,8 @@ namespace Org.BouncyCastle.Pkcs
 		 * @return a byte array representing the DER encoding of the PFX structure
 		 * @throws IOException
 		 */
+
+        [Obsolete]
 		public static byte[] ConvertToDefiniteLength(
 			byte[] berPkcs12File)
 		{
@@ -36,6 +38,8 @@ namespace Org.BouncyCastle.Pkcs
 		* @return a byte array representing the DER encoding of the PFX structure.
 		* @throws IOException on parsing, encoding errors.
 		*/
+
+        [Obsolete]
 		public static byte[] ConvertToDefiniteLength(
 			byte[]	berPkcs12File,
 			char[]	passwd)

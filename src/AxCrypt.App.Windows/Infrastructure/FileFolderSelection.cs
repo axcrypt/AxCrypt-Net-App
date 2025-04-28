@@ -75,7 +75,7 @@ public class FileFolderSelection : IDataItemSelection
         fldpik.FileTypeFilter.Add("*");
         //folderPicker.ViewMode = PickerViewMode.Thumbnail;
 
-        nint hwnd = ((MauiWinUIWindow)MauiWinUIApplication.Current.Application.Windows[0].Handler.PlatformView).WindowHandle;
+        nint hwnd = ((MauiWinUIWindow)MauiWinUIApplication.Current.Application.Windows[0].Handler!.PlatformView!).WindowHandle;
         WinRT.Interop.InitializeWithWindow.Initialize(fldpik, hwnd);
 
         StorageFolder folders = await fldpik.PickSingleFolderAsync();
@@ -86,7 +86,7 @@ public class FileFolderSelection : IDataItemSelection
             return;
         }
 
-        e.SelectedFiles.Add(folders?.Path);
+        e.SelectedFiles.Add(folders.Path);
         return;
     }
 

@@ -14,9 +14,8 @@ public class WindowsTrayIcon
     /// </summary>
     private readonly WindowMessageSink messageSink;
 
-    public Action LeftClick { get; set; }
-    public Action RightClick { get; set; }
-
+    public Action LeftClick { get; set; } = () => { };
+    public Action RightClick { get; set; } = () => { };
 
     public bool IsTaskbarIconCreated { get; private set; }
 

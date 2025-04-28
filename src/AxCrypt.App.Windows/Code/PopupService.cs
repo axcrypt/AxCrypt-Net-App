@@ -22,7 +22,7 @@ public class PopupService : IPopup
         return ShowAsync(buttons, title, message, DoNotShowAgainOptions.None);
     }
 
-    public async Task<PopupButtons> ShowAsync(PopupButtons buttons, string title, string message, DoNotShowAgainOptions doNotShowAgainOption, string doNotShowAgainCustomText)
+    public async Task<PopupButtons> ShowAsync(PopupButtons buttons, string title, string message, DoNotShowAgainOptions doNotShowAgainOption, string? doNotShowAgainCustomText)
     {
         PopupButtons[] activeButtons = possibleButtons.Where(b => buttons.HasFlag(b)).ToArray();
         bool isAccepted = false;

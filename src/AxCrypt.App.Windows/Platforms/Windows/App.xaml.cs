@@ -32,7 +32,7 @@ namespace AxCrypt.App.Windows.WinUI
     /// </summary>
     public partial class App : MauiWinUIApplication
     {
-        private static string _workFolderPath;
+        private static string _workFolderPath = "";
 
         private MauiApp _mauiApp;
 

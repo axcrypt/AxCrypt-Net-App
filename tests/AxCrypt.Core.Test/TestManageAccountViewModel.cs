@@ -72,8 +72,8 @@ namespace AxCrypt.Core.Test
         [Test]
         public async Task TestManageAccountViewModelChangePassword()
         {
-            UserKeyPair key1 = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
-            UserKeyPair key2 = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
+            UserKeyPair key1 = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
+            UserKeyPair key2 = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
 
             var mockUserAsymmetricKeysStore = new Mock<AccountStorage>((IAccountService)null);
             mockUserAsymmetricKeysStore.Setup<Task<IEnumerable<UserKeyPair>>>(f => f.AllKeyPairsAsync()).Returns(Task.FromResult((IEnumerable<UserKeyPair>)new UserKeyPair[] { key1, key2 }));
@@ -88,8 +88,8 @@ namespace AxCrypt.Core.Test
             IEnumerable<AccountProperties> emailsList = null;
             viewModel.BindPropertyChanged(nameof(ManageAccountViewModel.AccountProperties), (IEnumerable<AccountProperties> emails) => emailsList = emails);
             Assert.That(emailsList.Count(), Is.EqualTo(2), "There should be two accounts now.");
-            Assert.That(emailsList.First().EmailAddress, Is.EqualTo("svante@axantum.com"), "The first should be 'svante@axantum.com'");
-            Assert.That(emailsList.Last().EmailAddress, Is.EqualTo("svante@axantum.com"), "The last should be 'svante@axantum.com'");
+            Assert.That(emailsList.First().EmailAddress, Is.EqualTo("testcase@axcrypt.net"), "The first should be 'testcase@axcrypt.net'");
+            Assert.That(emailsList.Last().EmailAddress, Is.EqualTo("testcase@axcrypt.net"), "The last should be 'testcase@axcrypt.net'");
 
             await viewModel.ChangePassphraseAsync.ExecuteAsync("allan").Free();
             Assert.That(passphraseUsed, Is.EqualTo("allan"));

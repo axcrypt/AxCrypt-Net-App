@@ -1,16 +1,16 @@
 ﻿using AxCrypt.App.Desktop.Code;
-using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Desktop.Helpers;
+using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Shared.Services.Interface;
-using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Core;
 using Microsoft.UI.Windowing;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.Infrastructure
 {
     internal class AppWindowExtension
     {
-        private static Microsoft.UI.Windowing.AppWindow _appWindow;
+        private static Microsoft.UI.Windowing.AppWindow? _appWindow = null;
 
         public AppWindowExtension(Microsoft.UI.Windowing.AppWindow window)
         {
@@ -22,9 +22,14 @@ namespace AxCrypt.App.Windows.Infrastructure
 
         public void RegisterChangedEvents()
         {
+            if (_appWindow == null)
+            {
+                return;
+            }
+
             _appWindow.Closing += (s, e) =>
             {
-                LogOnViewModel logOnService = AxCServiceProviderExtension.LogOnViewModel;
+                LogOnViewModel logOnService = AxCServiceProviderExtension.LogOnViewModel!;
                 if (logOnService.IsLoggedOn)
                 {
                     e.Cancel = true;
@@ -43,7 +48,7 @@ namespace AxCrypt.App.Windows.Infrastructure
 
                 if (e.DidSizeChange)
                 {
-                    Window currentWindow = App.Current.Windows.FirstOrDefault();
+                    Window? currentWindow = App.Current!.Windows.FirstOrDefault();
                     if (currentWindow != null)
                     {
                         AppPreferences.MainWindowHeight = currentWindow.Height < AppPreferences.MinimumWindowHeight ? AppPreferences.MinimumWindowHeight : currentWindow.Height;

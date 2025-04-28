@@ -27,7 +27,7 @@ internal class Popup : IPopup
         return ShowAsync(buttons, title, message, dontShowAgainFlag, null);
     }
 
-    public async Task<PopupButtons> ShowAsync(PopupButtons buttons, string title, string message, DoNotShowAgainOptions dontShowAgainFlag, string doNotShowAgainCustomText)
+    public async Task<PopupButtons> ShowAsync(PopupButtons buttons, string title, string message, DoNotShowAgainOptions dontShowAgainFlag, string? doNotShowAgainCustomText)
     {
         string[] stringButtons = GetStringButtons(buttons);
         string popupResult = await ShowAsync(stringButtons, title, message, dontShowAgainFlag, doNotShowAgainCustomText);

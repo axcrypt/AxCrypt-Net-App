@@ -34,11 +34,7 @@ using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Fake;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 #pragma warning disable 3016 // Attribute-arguments as arrays are not CLS compliant. Ignore this here, it's how NUnit works.
@@ -78,8 +74,8 @@ namespace AxCrypt.Core.Test
         {
             FakeDataStore.AddFolder(@"C:\Temp");
             IDataContainer workFolder = New<IDataContainer>(@"C:\Temp");
-            AccountStorage store = new AccountStorage(new LocalAccountService(new LogOnIdentity(EmailAddress.Parse(@"svante@axantum.com"), new Passphrase("secret")), workFolder));
-            UserKeyPair userKeyPair = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
+            AccountStorage store = new AccountStorage(new LocalAccountService(new LogOnIdentity(EmailAddress.Parse(@"testcase@axcrypt.net"), new Passphrase("secret")), workFolder));
+            UserKeyPair userKeyPair = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
 
             await store.ImportAsync(userKeyPair);
             Assert.That((await store.AllKeyPairsAsync()).First().KeyPair.PrivateKey, Is.Not.Null);
@@ -91,8 +87,8 @@ namespace AxCrypt.Core.Test
         {
             FakeDataStore.AddFolder(@"C:\Temp");
             IDataContainer workFolder = New<IDataContainer>(@"C:\Temp\");
-            AccountStorage store = new AccountStorage(new LocalAccountService(new LogOnIdentity(EmailAddress.Parse(@"svante@axantum.com"), new Passphrase("secret")), workFolder));
-            UserKeyPair userKeyPair = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
+            AccountStorage store = new AccountStorage(new LocalAccountService(new LogOnIdentity(EmailAddress.Parse(@"testcase@axcrypt.net"), new Passphrase("secret")), workFolder));
+            UserKeyPair userKeyPair = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
 
             await store.ImportAsync(userKeyPair);
             Assert.That((await store.AllKeyPairsAsync()).First().KeyPair.PrivateKey, Is.Not.Null);
@@ -100,7 +96,7 @@ namespace AxCrypt.Core.Test
 
             IAsymmetricKeyPair keyPair = (await store.AllKeyPairsAsync()).First().KeyPair;
 
-            store = new AccountStorage(new LocalAccountService(new LogOnIdentity(EmailAddress.Parse(@"svante@axantum.com"), new Passphrase("secret")), workFolder));
+            store = new AccountStorage(new LocalAccountService(new LogOnIdentity(EmailAddress.Parse(@"testcase@axcrypt.net"), new Passphrase("secret")), workFolder));
 
             Assert.That((await store.AllKeyPairsAsync()).First().KeyPair.PrivateKey.ToString(), Is.EqualTo(keyPair.PrivateKey.ToString()));
             Assert.That((await store.AllKeyPairsAsync()).First().KeyPair.PublicKey.ToString(), Is.EqualTo(keyPair.PublicKey.ToString()));
@@ -111,16 +107,16 @@ namespace AxCrypt.Core.Test
         {
             FakeDataStore.AddFolder(@"C:\Temp");
             IDataContainer workFolder = New<IDataContainer>(@"C:\Temp\");
-            AccountStorage store = new AccountStorage(new LocalAccountService(new LogOnIdentity(EmailAddress.Parse(@"svante@axantum.com"), new Passphrase("secret")), workFolder));
+            AccountStorage store = new AccountStorage(new LocalAccountService(new LogOnIdentity(EmailAddress.Parse(@"testcase@axcrypt.net"), new Passphrase("secret")), workFolder));
             await Resolve.KnownIdentities.SetDefaultEncryptionIdentity(new LogOnIdentity("secret"));
-            UserKeyPair userKeyPair = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
+            UserKeyPair userKeyPair = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
 
             await store.ImportAsync(userKeyPair);
 
             string text = "AxCrypt encryption rules!";
             byte[] encryptedBytes = (await store.AllKeyPairsAsync()).First().KeyPair.PublicKey.Transform(Encoding.UTF8.GetBytes(text));
 
-            store = new AccountStorage(new LocalAccountService(new LogOnIdentity(EmailAddress.Parse(@"svante@axantum.com"), new Passphrase("secret")), workFolder));
+            store = new AccountStorage(new LocalAccountService(new LogOnIdentity(EmailAddress.Parse(@"testcase@axcrypt.net"), new Passphrase("secret")), workFolder));
 
             byte[] decryptedBytes = (await store.AllKeyPairsAsync()).First().KeyPair.PrivateKey.Transform(encryptedBytes);
             Assert.That(decryptedBytes != null);

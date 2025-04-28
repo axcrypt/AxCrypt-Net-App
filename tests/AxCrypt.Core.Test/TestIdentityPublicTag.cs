@@ -53,8 +53,8 @@ namespace AxCrypt.Core.Test
         [Test]
         public void TestSimpleAsymmetricIdentityMatches()
         {
-            UserKeyPair key1 = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
-            UserKeyPair key2 = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
+            UserKeyPair key1 = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
+            UserKeyPair key2 = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
 
             IdentityPublicTag tag1 = new IdentityPublicTag(new LogOnIdentity(new UserKeyPair[] { key1 }, new Passphrase("allan")));
             IdentityPublicTag tag2 = new IdentityPublicTag(new LogOnIdentity(new UserKeyPair[] { key2 }, new Passphrase("allan")));
@@ -68,8 +68,8 @@ namespace AxCrypt.Core.Test
         [Test]
         public void TestAsymmetricIdentityButDifferentPassphraseMatches()
         {
-            UserKeyPair key1 = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
-            UserKeyPair key2 = new UserKeyPair(EmailAddress.Parse("svante@axantum.com"), 512);
+            UserKeyPair key1 = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
+            UserKeyPair key2 = new UserKeyPair(EmailAddress.Parse("testcase@axcrypt.net"), 512);
 
             IdentityPublicTag tag1 = new IdentityPublicTag(new LogOnIdentity(new UserKeyPair[] { key1 }, new Passphrase("allan")));
             IdentityPublicTag tag2 = new IdentityPublicTag(new LogOnIdentity(new UserKeyPair[] { key2 }, new Passphrase("niklas")));

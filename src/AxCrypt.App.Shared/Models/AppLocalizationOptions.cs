@@ -2,7 +2,7 @@
 
 public class AppLocalizationOptions
 {
-    public List<CultureOption> SupportedCultures { get; set; }
+    public List<CultureOption> SupportedCultures { get; set; } = new List<CultureOption>();
 
     public AppLocalizationOptions()
     {

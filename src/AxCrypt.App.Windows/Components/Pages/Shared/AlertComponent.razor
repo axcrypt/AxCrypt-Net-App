@@ -18,10 +18,10 @@
     public bool IsVisible { get; set; }
 
     [Parameter]
-    public string Title { get; set; }
+    public string Title { get; set; } = "";
 
     [Parameter]
-    public string Message { get; set; }
+    public string Message { get; set; } = "";
 
     [Parameter]
     public EventCallback OnClose { get; set; }

@@ -106,6 +106,8 @@ namespace Org.BouncyCastle.Crypto.Generators
         * @param keySize the size of the key we want (in bits)
         * @return a KeyParameter object.
         */
+
+        [Obsolete]
         public override ICipherParameters GenerateDerivedParameters(
             int keySize)
         {
@@ -132,6 +134,8 @@ namespace Org.BouncyCastle.Crypto.Generators
         * @param ivSize the size of the iv we want (in bits)
         * @return a ParametersWithIV object.
         */
+
+        [Obsolete]
         public override ICipherParameters GenerateDerivedParameters(
             int	keySize,
             int	ivSize)
