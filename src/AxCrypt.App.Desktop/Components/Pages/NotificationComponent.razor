@@ -17,73 +17,76 @@
     </div>
 </div>
 
-@if (!model.Notifications.Any())
-{
-    <div class="text-center" style="margin: 10% auto;">
-        <span class="empty-view-heading">@Texts.NoNotificationsText</span><br />
-        <img class="empty-notify-img" alt="default notification img" />
-    </div>
-}
-else
-{
-    <div class="medium-12 columns parent-container" style="min-height:50vh;height: 84vh;overflow-y: auto;">
-        <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
-        <table class="notification-table curved-table">
-            <thead class="notify-pg-tbl-head">
-                <tr class="notification-text">
-                    @* <th style="width: 5%;"></th> *@
-                    <th style="width: 50%;">@Texts.ActivityText</th>
-                    <th style="width:25%;" @onclick="SortByDate">
-                        Date
-                        <img class="notifiarrow" src="" />
-                    </th>
-                    <th style="width:15%;">@Texts.ColumnStatusHeader</th>
-                    <th style="width: 5%;"></th>
-                </tr>
-            </thead>
-
-            <tbody id="notilist" class="notify-pg-tbl-body">
-                @foreach (NotificationItemViewModel notification in model.Notifications)
-                {
-                    <tr>
-                        @*  <td><img class="notification-unread-button" src="" alt=""></td> *@
-                        <td>
-                            @if (notification.PushNotify)
-                            {
-                                <strong>@notification.PushNotif_Title</strong>
-                                <br />
-                                <span style="font-size:11px;">@notification.Content</span>
-                            }
-                            else
-                            {
-                                @((MarkupString)notification.Content)
-                            }
-                        </td>
-                        @{
-                            string imageSourceClass = !string.IsNullOrEmpty(notification.EventType) ? notification.EventType : "notif-def-icon";
-                        }
-                        <td>@notification.CreatedDate </td>
-                        <td class="notifi-img">
-                            <img height="24" class="@imageSourceClass" src="" alt="ico-@notification.EventType" />
-                        </td>
-                        <td>
-                            @if (!notification.PushNotify)
-                            {
-                                <input class="deletebin" src="" alt="delete" style="border-style: hidden; background-color: transparent !important;" value="" @onclick="async () => await DeleteNotification(notification.Id)" />
-                            }
-                        </td>
+<div class="parent-container" style="min-height:50vh;height: 84vh;overflow-y: auto;">
+    <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
+    @if (!model.Notifications.Any())
+    {
+        <div class="text-center" style="margin: 10% auto;">
+            <span class="empty-view-heading">@Texts.NoNotificationsText</span><br />
+            <img class="empty-notify-img" alt="default notification img" />
+        </div>
+    }
+    else
+    {
+        <div class="medium-12 columns">
+            <table class="notification-table curved-table">
+                <thead class="notify-pg-tbl-head">
+                    <tr class="notification-text">
+                        @* <th style="width: 5%;"></th> *@
+                        <th style="width: 50%;">@Texts.ActivityText</th>
+                        <th style="width:25%;" @onclick="SortByDate">
+                            Date
+                            <img class="notifiarrow" src="" />
+                        </th>
+                        <th style="width:15%;">@Texts.ColumnStatusHeader</th>
+                        <th style="width: 5%;"></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
+                </thead>
+
+                <tbody id="notilist" class="notify-pg-tbl-body">
+                    @foreach (NotificationItemViewModel notification in model.Notifications)
+                    {
+                        <tr>
+                            @*  <td><img class="notification-unread-button" src="" alt=""></td> *@
+                            <td>
+                                @if (notification.PushNotify)
+                                {
+                                    <strong>@notification.PushNotif_Title</strong>
+                                    <br />
+                                    <span style="font-size:11px;">@notification.Content</span>
+                                }
+                                else
+                                {
+                                    @((MarkupString)notification.Content)
+                                }
+                            </td>
+                            @{
+                                string imageSourceClass = !string.IsNullOrEmpty(notification.EventType) ? notification.EventType : "notif-def-icon";
+                            }
+                            <td>@notification.CreatedDate </td>
+                            <td class="notifi-img">
+                                <img height="24" class="@imageSourceClass" src="" alt="ico-@notification.EventType" />
+                            </td>
+                            <td>
+                                @if (!notification.PushNotify)
+                                {
+                                    <input class="deletebin" src="" alt="delete" style="border-style: hidden; background-color: transparent !important;" value="" @onclick="async () => await DeleteNotification(notification.Id)" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
 
 @code {
     private NotificationViewModel? model;
 
     protected override async Task OnInitializedAsync()
     {
+        notificationService.NotificationModel = new();
         model = notificationService.NotificationModel;
         await base.OnInitializedAsync();
     }
