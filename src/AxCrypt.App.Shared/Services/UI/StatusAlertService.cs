@@ -28,17 +28,17 @@ public class StatusAlertService : IStatusAlertService
 
     public string? Alert { get; set; }
 
-    public NotificationType Type { get; set; }
+    public AlertNotificationType Type { get; set; }
 
     public void Success(string alert)
     {
-        Type = NotificationType.Success;
+        Type = AlertNotificationType.Success;
         Show(alert);
     }
 
     public void Error(string alert)
     {
-        Type = NotificationType.Warning;
+        Type = AlertNotificationType.Warning;
         Show(alert);
     }
 

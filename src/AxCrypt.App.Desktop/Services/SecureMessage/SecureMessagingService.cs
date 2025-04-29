@@ -4,6 +4,7 @@ using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Api.Shared.Helper;
 using AxCrypt.App.Desktop.ViewModels;
 using AxCrypt.App.Desktop.ViewModels.SecuredMessenger;
+using AxCrypt.App.Shared.PushNotification;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Core.Crypto;
@@ -78,11 +79,6 @@ namespace AxCrypt.App.Desktop.Services
 
         public async Task<SecuredMessage> GetMessageByIdAsync(Guid messageId)
         {
-            if (messageId == null)
-            {
-                return null;
-            }
-
             return await SecuredMessengerFacade.GetMessageAsync(messageId);
         }
 
@@ -96,8 +92,7 @@ namespace AxCrypt.App.Desktop.Services
             bool allowToAdd = SecMessengerUtility.AllowAddNewMessage(_logOnViewModel.SubscriptionLevel);
             if (!allowToAdd)
             {
-                //_statusAlertService.Error(Texts.SendSecuredMessageFailure);
-                _statusAlertService.Error("Maximum count reached to send a secured message. Please upgrade your subscription!");
+                _statusAlertService!.Error("Maximum count reached to send a secured message. Please upgrade your subscription!");
                 return false;
             }
 
@@ -106,8 +101,7 @@ namespace AxCrypt.App.Desktop.Services
             int maxSendUserCount = SecMessengerUtility.MaxSendUserCount(_logOnViewModel.SubscriptionLevel);
             if (viewModel.ReceiverList.Count() > maxSendUserCount)
             {
-                //StatusAlertService.Error(Texts.SendSecuredMessageFailure);
-                _statusAlertService.Error($"Maximum recipients count{maxSendUserCount} reached to send a secured message. Please upgrade your subscription!");
+                _statusAlertService!.Error($"Maximum recipients count{maxSendUserCount} reached to send a secured message. Please upgrade your subscription!");
                 return false;
             }
 
@@ -123,7 +117,7 @@ namespace AxCrypt.App.Desktop.Services
                 New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).UpdateFreeUserSecuredMessengerLimit();
             }
 
-            // await NotificationLogger.PushAsync(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address, NotificationType.SecuredMessageSent, Texts.SentSecuredMessageNotificationText, viewModel.ReceiverList.Select(sem => sem.EmailAddress).ToArray(), null);
+            await NotificationLogger.PushAsync(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address, NotificationType.SecuredMessageSent, Content.Texts.SentSecuredMessageNotificationText, viewModel.ReceiverList.Select(sem => sem.EmailAddress).ToArray(), null!);
             return true;
         }
 

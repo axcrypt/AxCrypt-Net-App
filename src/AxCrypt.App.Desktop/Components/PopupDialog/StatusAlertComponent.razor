@@ -39,8 +39,8 @@
 
     public string? NotificationStyleClass => StatusAlertService.Type switch
     {
-        NotificationType.Success => "success",
-        NotificationType.Warning => "alert",
+        AlertNotificationType.Success => "success",
+        AlertNotificationType.Warning => "alert",
         _ => "alert"
     };
 

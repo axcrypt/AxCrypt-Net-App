@@ -29,6 +29,27 @@ public class NotificationApiHelper
         }
     }
 
+    public static async Task<bool> InsertNotificationAsync(IEnumerable<NotificationApiModel> notificationModel)
+    {
+        LogOnIdentity logOnIdentity = New<KnownIdentities>().DefaultEncryptionIdentity;
+
+        try
+        {
+            return await New<LogOnIdentity, INotificationService>(logOnIdentity).InsertUserNotificationAsync(notificationModel);
+        }
+        catch (Exception ex)
+        {
+            New<IReport>().Exception(ex);
+
+            if (New<AxCryptOnlineState>().IsOffline)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, Texts.NoInternetErrorMessage);
+            }
+
+            return false;
+        }
+    }
+
     public static async Task<bool> DeleteNotificationAsync(long id)
     {
         LogOnIdentity logOnIdentity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;

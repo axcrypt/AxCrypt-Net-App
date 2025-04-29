@@ -3,6 +3,7 @@ using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Secret;
 using AxCrypt.Api.Shared.Helper;
 using AxCrypt.App.Shared.Password;
+using AxCrypt.App.Shared.PushNotification;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Secrets;
 using AxCrypt.Core.Service.Secrets;
@@ -111,6 +112,7 @@ public static class SecretsApiHelper
         }
 
         await ShareSecretFacade.ShareSecret(shareSecret, New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity);
+        await NotificationLogger.PushAsync(shareSecret.Share.OwnerEmail, NotificationType.ShareSecret, "A secret has been shared with you!", shareSecret.Share.SharedWith.Select(ssw => ssw.UserEmail.Address).ToArray(), null);
 
         return true;
         //// Log each new secret insertion for now. This may be too much in the future.

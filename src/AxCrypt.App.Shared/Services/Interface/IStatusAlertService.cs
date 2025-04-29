@@ -8,7 +8,7 @@ public interface IStatusAlertService
 
     string Alert { get; }
 
-    NotificationType Type { get; }
+    AlertNotificationType Type { get; }
 
     void Success(string alert);
 
