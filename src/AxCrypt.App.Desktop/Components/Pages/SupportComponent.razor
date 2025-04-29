@@ -26,7 +26,7 @@
 </div>
 
 <div class="medium-12 columns support">
-     <p class="hide-txt">@(PageDescription)</p>
+     <p class="sub-head-clr hide-txt">@(PageDescription)</p>
 
     @if (!string.IsNullOrEmpty(SupportViewModel.ErrorMessage))
     {
@@ -39,7 +39,7 @@
                 <label>@Texts.SupportBodyPrompt</label>
             </div>
             <div style="display:flex; padding:8px 0px; gap: 40px;">
-                <a style="text-decoration:none;" @onclick='() => OpenWebPage("https://axcrypt.net/information/guides/get-started/")'>
+                <a style="text-decoration:none;" @onclick='() => OpenWebPage("https://axcrypt.net/information/guides/get-started/desktop/")'>
                     <div class="link-box">
                         <img class="idea-img" src="" alt="idea-img" />
                         <div style="padding: 5px 0px; line-height: 16px;">

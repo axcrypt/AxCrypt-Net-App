@@ -66,7 +66,7 @@
   padding: 4px;
 }
 .key-mngnt-Popup .act-clr {
-  color: #000;
+  color: #494949;
   display: block;
 }
 .key-mngnt-Popup .act-clr.disabled {
@@ -318,19 +318,19 @@
   color: #CACACA;
 }
 
-#inactivity input[type=radio] {
-  width: 16px;
-  height: 16px;
-}
-
 #inactivity input[type=radio] + label {
   color: #CACACA;
   font-size: 12px;
   padding: 2px 5px;
+  cursor: pointer;
+}
+
+#inactivity input[type=radio] + label:hover {
+  color: #494949;
 }
 
 #inactivity input[type=radio]:checked + label {
-  color: #000;
+  color: #494949;
 }
 
 .invite-text {
@@ -570,6 +570,16 @@
 .desk-stngs-popup:after,
 .desk-stngs-popup:before {
   right: 240px !important;
+}
+
+.encrypt-pop img {
+  width: 30px;
+}
+.encrypt-pop dl dd {
+  cursor: pointer;
+}
+.encrypt-pop :hover {
+  color: #48772C;
 }
 
 @media (max-width: 768px) {

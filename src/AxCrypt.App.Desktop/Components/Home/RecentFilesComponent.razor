@@ -102,7 +102,7 @@
 </div>
 
 <div id="homeContextMenu" class="hide-model-popup home-context-menu" style="display: none;">
-    <dl class="font-medium" style="margin-bottom: 5px;">
+    <dl class="font-medium fle-nme" style="margin-bottom: 5px;">
         <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.OpenSecured)">@Texts.McInfMenuOpen</dd>
         <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.RemoveFromListButKeepSecured)">@Texts.RemoveRecentFileToolStripMenuItemText</dd>
         <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.StopSecureAndRemoveFromList)">@Texts.DecryptAndRemoveFromListToolStripMenuItemText</dd>

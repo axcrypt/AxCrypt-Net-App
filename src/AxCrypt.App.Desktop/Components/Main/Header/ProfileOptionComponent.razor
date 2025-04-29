@@ -100,7 +100,7 @@
         </div>
         <div>
             <span class="txt-clr">@Texts.PromptSubscription:</span>
-            <span class="font-bold">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
+            <span class="font-bold sub-head-clr">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
             @*             @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
                 {
                 <span class="txt-clr">Company:</span>
@@ -110,10 +110,10 @@
             @if (ProfileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
             {
                 <span class="txt-clr">Type:</span>
-                <span class="font-bold">@ProfileViewModel.Account.Subscription</span> <br />
+                <span class="font-bold sub-head-clr">@ProfileViewModel.Account.Subscription</span> <br />
 
                 <span class="txt-clr">Valid until:</span>
-                <span class="font-bold">@ProfileViewModel.ValidFormatted</span> <br />
+                <span class="font-bold sub-head-clr">@ProfileViewModel.ValidFormatted</span> <br />
 
                 <a class="can-subs" @onclick="ProfileViewModel.CancelSubscription">@Texts.CancelSubscriptionPrompt</a>
             }

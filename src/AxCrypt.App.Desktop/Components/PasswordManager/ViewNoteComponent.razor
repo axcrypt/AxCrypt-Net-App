@@ -21,7 +21,7 @@
     </div>
     <form>
         <div class="row">
-            <ul class="clean-up" style=" list-style:none">
+            <ul class="clean-up sub-head-clr" style=" list-style:none">
                 <li>
                     <label for="Password_SecretDesc">@Texts.DescriptionLabel</label><br />
                     <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Note.SecretDesc" @bind:event="HandleOnChange" readonly="readonly"></textarea>
@@ -74,14 +74,14 @@
             {
                 <div onclick="toggleClass()" class="sharetext-arrow">
                     <div class="sharewith-row" id="sharewith-expnd-collps">
-                        <span class="url-text">@Texts.PromptSharedWith</span>
+                        <span class="url-text sub-head-clr">@Texts.PromptSharedWith</span>
                         <img id="rotateImg" class="share-box share-image" src="/images/Vector.svg" alt="">
                     </div>
                 </div>
                 <div id="container" class="container">
                     @if (viewSecretViewModel.HasBusinessSubscription)
                     {
-                        <p class="bus-info">
+                        <p class="bus-info sub-head-clr">
                             Add users or Groups with whom you want to share this secret. If you
                             don`t know about our <b>Group Feature</b> yet, <a style="color:#FFC50D;text-decoration:underline;" @onclick="viewSecretViewModel.GoToLearmoreLink">learn more</a> and create your
                             first one by the link <a style="color:#FFC50D;text-decoration:underline;" @onclick="viewSecretViewModel.GoToCreateGroupLink">Create a Group!</a>

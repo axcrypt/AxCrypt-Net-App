@@ -20,7 +20,7 @@
         <EditForm Model="@newSecretViewModel.Secret.Note" OnValidSubmit="SavePassword" @ref="editForm">
             <DataAnnotationsValidator />
             <div class="row">
-                <ul class="clean-up" style=" list-style:none; ">
+                <ul class="clean-up sub-head-clr" style=" list-style:none; ">
                     <li>
                         <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
                         <textarea id="pwd-desc-inp"

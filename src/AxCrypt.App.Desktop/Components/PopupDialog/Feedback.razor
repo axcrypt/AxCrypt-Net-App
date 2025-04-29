@@ -9,7 +9,7 @@
         <div class="text-center">
             <div class="close-img" @onclick="Close"></div>
             <img class="fdbck-img" src="feedback-img" />
-            <p class="bold-highlight">Please let us know if you experience any <span>difficulties</span> with AxCrypt, have <span>questions, ideas or praises</span> to share! </p>
+            <p class="bold-highlight sub-head-clr">Please let us know if you experience any <span>difficulties</span> with AxCrypt, have <span>questions, ideas or praises</span> to share! </p>
             @if (!string.IsNullOrEmpty(FeedbackViewModel.ErrorMessage))
             {
                 <div class="error-message">@FeedbackViewModel.ErrorMessage</div>

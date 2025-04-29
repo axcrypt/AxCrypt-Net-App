@@ -73,7 +73,7 @@
     }
 
     .act-clr {
-        color: #000;
+        color: $colTxtRglrBd;
         display: block;
 
         &.disabled {
@@ -376,19 +376,19 @@
     color: $colTxtDsbl;
 }
 
-#inactivity input[type="radio"] {
-    width: 16px;
-    height: 16px;
-}
-
 #inactivity input[type="radio"] + label {
     color: $colTxtDsbl;
     font-size: 12px;
     padding: 2px 5px;
+    cursor: pointer;
+}
+
+#inactivity input[type="radio"] + label:hover {
+    color: $HdTxtClr;
 }
 
 #inactivity input[type="radio"]:checked + label {
-    color: #000;
+    color: $HdTxtClr;
 }
 
 .invite-text {
@@ -657,6 +657,20 @@
 .desk-stngs-popup:after,
 .desk-stngs-popup:before {
     right: 240px !important;
+}
+
+.encrypt-pop {
+    img {
+        width: 30px;
+    }
+
+    dl dd {
+        cursor: pointer;
+    }
+
+    :hover {
+        color: $TxtClr;
+    }
 }
 
 @media (max-width: 768px) {

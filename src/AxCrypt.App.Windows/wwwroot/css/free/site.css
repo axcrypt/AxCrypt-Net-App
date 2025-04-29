@@ -630,6 +630,31 @@ input:checked + .slider:before {
   font-weight: 600;
 }
 
+.sub-head-clr {
+  color: #494949;
+}
+
+.deflt-txt-clr {
+  color: #494949;
+}
+
+input[type=radio] {
+  width: 16px;
+  height: 16px;
+  accent-color: #86B96E;
+  vertical-align: middle;
+}
+
+.tab-selected {
+  border: 3px solid #86B96E;
+  border-radius: 10px;
+  margin-right: 30px;
+  display: block !important;
+  width: 100%;
+  margin: 0;
+  opacity: 1;
+}
+
 @media (max-width: 768px) {
   .button.success {
     background-color: #86B96E !important;

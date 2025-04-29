@@ -7,8 +7,8 @@
 
 @if (RecentFoldersViewModel.RecentFoldersList.Any())
 {
-    <div style="padding-bottom: 20px;">
-        <label class="font-medium">@Texts.SecretsSortOrderLabel</label>
+    <div class="fle-nme" style="padding-bottom: 20px;">
+        <label class="font-high">@Texts.SecretsSortOrderLabel</label>
         <select id="FoldersSortOrderOptions" name="FoldersSortOrder" @onchange="RecentFoldersViewModel.HandleSortChange"
                 style="width:110px; height: 31px; padding: 3px; border-radius: 4px; margin: 0%">
             <option value="Date">@Texts.InvoiceDateHeadline</option>
@@ -20,13 +20,13 @@
 <div class="file-max-hgt hgt-ovflw" style="display: flex; flex-wrap: wrap;">
     @if (!RecentFoldersViewModel.HasNoSubscription)
     {
-        <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="async (ss) => await RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label>Add or Drag Folder</label></div>
+        <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="async (ss) => await RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label class="fle-nme">Add or Drag Folder</label></div>
     }
     @if (!RecentFoldersViewModel.RecentFoldersList.Any())
     {
         <div class="text-center" style="padding-top: 20px;">
             <span class="empty-view-heading">Let`s start our journey!</span><br />
-            <span>Add and secure your first folder.</span><br />
+            <span class="fle-nme">Add and secure your first folder.</span><br />
             <img class="empty-rcnt-fld-img" alt="default folder img" />
         </div>
     }
@@ -35,9 +35,9 @@
         @foreach (string folder in RecentFoldersViewModel.RecentFoldersList)
         {
             string folderWithoutTrailingSlash = folder.TrimEnd('\\');
-            <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls" style="white-space: nowrap" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
+            <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls fle-nme" style="white-space: nowrap" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
                  @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
-                <img class="fldr-img" src="" /><br /><label title="@folderWithoutTrailingSlash">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
+                <img class="fldr-img" src="" /><br /><label  title="@folderWithoutTrailingSlash">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
                 <span style="font-size:8px; display: block; padding-top: 0px;">@folderWithoutTrailingSlash</span>
             </div>
         }
@@ -69,7 +69,7 @@
 </div>
 
 <div id="securedContextMenu" class="hide-model-popup home-context-menu" style="display: none;">
-    <dl class="font-medium" style="margin-bottom: 5px;">
+    <dl class="font-medium fle-nme" style="margin-bottom: 5px;">
         <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</dd>
         <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptPermanently)">@Texts.MenuDecryptPermanentlyText</dd>
         <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptTemporarily)">@Texts.MenuDecryptTemporarilyText</dd>

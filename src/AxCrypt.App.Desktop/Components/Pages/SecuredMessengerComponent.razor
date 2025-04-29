@@ -29,33 +29,42 @@
                            placeholder=@Texts.PromptXecretsSearchText
                            class="search-box columns"
                            tabindex="1"
-                           style="width: 80%;" />
-                <select style="width: 13%;" name="Visibility" @bind="SecuredMessengerListModel.Messenger.SecMsgSearchFilters" title="Visibility" id="search-filter-dropdown" class="search-dropdown medium-2 columns">
+                           style="width: 76%;" />
+                <select style="width: 17%;" name="Visibility" @bind="SecuredMessengerListModel.Messenger.SecMsgSearchFilters" title="Visibility" id="search-filter-dropdown" class="search-dropdown medium-2 columns">
                     @foreach (string visibility in SecuredMessengerListModel.Messenger.SecMesgFilterOptions)
                     {
                         <option value="@visibility">@visibility</option>
                     }
                 </select>
-                <button type="submit" id="message-search-btn" class="button msg-search-btn" title="Search"></button>
+                <button type="submit" id="message-search-btn" class="button success msg-search-btn" title="Search"></button>
             </EditForm>
 
         </div>
         <div class="medium-12 columns">
             <div id="All" class="tabcontent">
                 <div class="row">
-                    <div class="tab tab-sec medium-9 columns">
-                        <a class="sub-head-link unread-text @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "active" : "")"
-                           @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox)" id="inbox-tab">
-                            Inbox @* <span id="inbox-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? messageCount : ""))</span> *@
-                        </a>
-                        <a class="sub-head-link @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "active" : "")"
-                           @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent)" id="sent-tab">
-                            Sent @* <span id="sent-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? messageCount : ""))</span> *@
-                        </a>
-                        <a class="sub-head-link unread-text @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "active" : "")"
-                           @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread)" id="unread-tab">
-                            Unread @* <span id="unread-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? messageCount : ""))</span> *@
-                        </a>
+                    <div class="tab-sec medium-9 columns">
+                        <div id="tab-header">
+                            <a class="sub-head-link unread-text @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "active" : "")"
+                               @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox)" id="inbox-tab">
+                                Inbox @* <span id="inbox-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? messageCount : ""))</span> *@
+                            </a>
+                            <hr style="display:none;" class="@(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "tab-selected" : "")">
+                        </div>
+                        <div id="tab-header">
+                            <a class="sub-head-link @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "active" : "")"
+                               @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent)" id="sent-tab">
+                                Sent @* <span id="sent-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? messageCount : ""))</span> *@
+                            </a>
+                            <hr style="display:none;" class="@(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "tab-selected" : "")">
+                        </div>
+                        <div id="tab-header">
+                            <a class="sub-head-link unread-text @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "active" : "")"
+                               @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread)" id="unread-tab">
+                                Unread @* <span id="unread-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? messageCount : ""))</span> *@
+                            </a>
+                            <hr style="display:none;" class="@(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "tab-selected" : "")">
+                        </div>
                     </div>
                 </div>
             </div>
