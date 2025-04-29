@@ -628,6 +628,11 @@ input:checked + .slider:before {
     gap: 20px;
 }
 
+.error-message {
+    color: red;
+    font-weight:600;
+}
+
 @media (max-width: 768px) {
     .button.success {
         background-color: $BgrndCol !important;
@@ -715,6 +720,7 @@ input:checked + .slider:before {
         font-size: 26px !important;
     }
 }
+
 @media (min-width: 1291px) and (max-width: 1510px) {
     .page-title-container {
         width: 46%;

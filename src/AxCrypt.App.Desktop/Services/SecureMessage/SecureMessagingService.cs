@@ -101,7 +101,8 @@ namespace AxCrypt.App.Desktop.Services
             int maxSendUserCount = SecMessengerUtility.MaxSendUserCount(_logOnViewModel.SubscriptionLevel);
             if (viewModel.ReceiverList.Count() > maxSendUserCount)
             {
-                _statusAlertService!.Error($"Maximum recipients count{maxSendUserCount} reached to send a secured message. Please upgrade your subscription!");
+                //StatusAlertService.Error(Texts.SendSecuredMessageFailure);
+                _statusAlertService.Error($"Maximum recipients count {maxSendUserCount} reached to send a secured message. Please upgrade your subscription!");
                 return false;
             }
 

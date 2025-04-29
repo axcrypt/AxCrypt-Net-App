@@ -26,13 +26,12 @@ public class PopupService : IPopup
     {
         PopupButtons[] activeButtons = possibleButtons.Where(b => buttons.HasFlag(b)).ToArray();
         bool isAccepted = false;
-        _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
 
         switch (activeButtons.Length)
         {
             case 1:
+                _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
                 await _globalViewModel.ShowVersionDialog(activeButtons[0], title, message, doNotShowAgainOption);
-                //await Application.Current.MainPage.DisplayAlert(title, message, ConvertToString(activeButtons[0]));
                 return activeButtons[0];
 
             case 2:
@@ -40,10 +39,9 @@ public class PopupService : IPopup
                 string leftButton = ConvertToString(actions.AcceptAction);
                 string rightButton = ConvertToString(actions.CancelAction);
 
+                _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
                 await _globalViewModel.ShowVersionDialog(activeButtons[0], title, message, doNotShowAgainOption);
                 isAccepted = _globalViewModel.LogOnViewModel!.PopupResult == Shared.Utility.DialogResult.OK;
-
-                //isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
 
                 if (isAccepted)
                 {
@@ -72,11 +70,12 @@ public class PopupService : IPopup
     public async Task<string> ShowAsync(string[] buttons, string title, string message, DoNotShowAgainOptions dontShowAgain)
     {
         bool isAccepted = false;
+        _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
+
         switch (buttons.Length)
         {
             case 1:
-                //await Application.Current.MainPage.DisplayAlert(title, message, buttons[0]);
-                _globalViewModel = new GlobalDialogViewModel();
+                _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
                 await _globalViewModel.ShowVersionDialog(possibleButtons[0], title, message, dontShowAgain);
                 isAccepted = _globalViewModel.LogOnViewModel!.PopupResult == Shared.Utility.DialogResult.OK;
                 return buttons[0];
@@ -85,8 +84,7 @@ public class PopupService : IPopup
                 string leftButton = buttons[0];
                 string rightButton = buttons[1];
 
-                //isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
-                _globalViewModel = new GlobalDialogViewModel();
+                _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
                 await _globalViewModel.ShowVersionDialog(possibleButtons[0], title, message, dontShowAgain);
                 isAccepted = _globalViewModel.LogOnViewModel!.PopupResult == Shared.Utility.DialogResult.OK;
 

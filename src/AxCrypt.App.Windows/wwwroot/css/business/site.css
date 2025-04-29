@@ -625,6 +625,11 @@ input:checked + .slider:before {
   gap: 20px;
 }
 
+.error-message {
+  color: red;
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .button.success {
     background-color: #232323 !important;

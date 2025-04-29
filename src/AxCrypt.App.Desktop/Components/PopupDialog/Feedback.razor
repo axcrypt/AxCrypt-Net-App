@@ -12,7 +12,7 @@
             <p class="bold-highlight">Please let us know if you experience any <span>difficulties</span> with AxCrypt, have <span>questions, ideas or praises</span> to share! </p>
             @if (!string.IsNullOrEmpty(FeedbackViewModel.ErrorMessage))
             {
-                <div class="error-message" style="color:red;">@FeedbackViewModel.ErrorMessage</div>
+                <div class="error-message">@FeedbackViewModel.ErrorMessage</div>
             }
             <form id="feedback-form" @onsubmit="FeedbackViewModel.HandleFormSubmit">
                 <div class="flex-start" style="min-height:32px;">
