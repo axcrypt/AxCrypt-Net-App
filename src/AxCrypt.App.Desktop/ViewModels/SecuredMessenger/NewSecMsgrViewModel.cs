@@ -1,29 +1,38 @@
-﻿using AxCrypt.App.Desktop.Services;
+﻿using AxCrypt.Api.SecuredMessenger;
+using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility.View;
+using AxCrypt.Content;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 {
-    public class NewSecMsgrViewModel : ViewModelBase
+    public class NewSecMsgrViewModel: ViewModelBase
     {
-        ISecureMessagingService _msgService { get; set; }
+        private ISecureMessagingService _msgService { get; set; }
 
-        public NewSecMsgrViewModel(ISecureMessagingService msgService)
+        private IStatusAlertService _StatusAlertService { get; set; }
+
+        public NewSecMsgrViewModel(ISecureMessagingService msgService, IStatusAlertService statusAlertService)
         {
             _msgService = msgService;
+            _StatusAlertService = statusAlertService;
         }
 
-        public void Initialize()
+        public void Initialize(SecureMsgrFilterTab selectedTab)
         {
+            SelectedTab = selectedTab;
             Id = Guid.Empty;
             ParentId = Guid.Empty;
             ReceiverEmails = "";
-            ReceiverList = new List<MessengerReceiverViewModel>();
+            ReceiverList = new List<MessengerReceiver>();
             Visibility = SecureMsgrVisibility.Forever;
             EncryptedMessage = "";
         }
@@ -37,7 +46,7 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
         [Required]
         public string ReceiverEmails { get; set; }
 
-        public IList<MessengerReceiverViewModel> ReceiverList { get; set; } = new List<MessengerReceiverViewModel>();
+        public IList<MessengerReceiver> ReceiverList { get; set; } = new List<MessengerReceiver>();
 
         public IEnumerable<string> MessageVisibilityList
         {
@@ -49,11 +58,13 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 
         public SecureMsgrVisibility Visibility { get; set; }
 
-        [Required(ErrorMessage = "The message field is required.")]
+        public SecureMsgrFilterTab SelectedTab { get; set; }
 
+        [Required(ErrorMessage = "The message field is required.")]
         public string EncryptedMessage { get; set; }
 
         private bool _isVisible;
+
         public bool IsVisible
         {
             get
@@ -63,25 +74,50 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
             set
             {
                 _isVisible = value;
-                UpdateViewState();
             }
         }
 
-        public async Task<bool> SentMessageAsync(NewSecMsgrViewModel newSecMsgrViewModel)
+        public event Action<SecureMsgrFilterTab>? OnTabUpdateViewState;
+
+        public void TapUpdateViewState()
         {
-            if (newSecMsgrViewModel == null)
+            OnTabUpdateViewState?.Invoke(SelectedTab);
+        }
+
+        public async Task SentMessageAsync(NewSecMsgrViewModel newSecMsgrViewModel)
+        {
+            if (newSecMsgrViewModel == null || !newSecMsgrViewModel.ReceiverEmails.Any() || string.IsNullOrWhiteSpace(newSecMsgrViewModel.EncryptedMessage))
             {
-                return false;
+                _StatusAlertService.Error(Texts.SendSecuredMessageFailure);
+                return;
             }
 
+            if (!New<Common.AxCryptOnlineState>().IsOnline)
+            {
+                _StatusAlertService.Error(@Texts.NoInternetErrorMessage);
+                return;
+            }
+
+            bool result = false;
             using (ProcessIndicator indicator = new ProcessIndicator())
             {
-                return await _msgService.SentMessageAsync(newSecMsgrViewModel);
+                result = await _msgService.SentMessageAsync(newSecMsgrViewModel);
             }
+
+            if (result)
+            {
+                _StatusAlertService.Success(Texts.SendSecuredMessageSuccess);
+                SelectedTab = SecureMsgrFilterTab.Sent;
+                newSecMsgrViewModel.IsVisible = false;
+                TapUpdateViewState();
+                return;
+            }
+
+            _StatusAlertService.Error(Texts.SendSecuredMessageFailure);
         }
     }
 
-    public class MessengerReceiverViewModel : ViewModelBase
+    public class MessengerReceiver
     {
         public string EmailAddress { get; set; } = "";
 

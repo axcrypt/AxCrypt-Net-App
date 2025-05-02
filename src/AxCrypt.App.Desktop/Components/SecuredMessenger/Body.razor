@@ -6,9 +6,7 @@
 @using AxCrypt.Core.SecuredMessenger
 @using AxCrypt.Api.Extension
 
-@inject ViewSecMsgrViewModel ManageSecMgrViewModel
-@inject SecuredMessengerListViewModel Model
-
+@inject ManageSecMsgrViewModel ManageSecMgrViewModel
 
 @{
     string activeClass = ManageSecMgrViewModel.AnySelected ? "active-btn" : "";
@@ -23,28 +21,27 @@
                     <input type="checkbox" class="multi-chckbx" title="Select All" checked="@ManageSecMgrViewModel.SelectAllMessages" bind-checked="@ManageSecMgrViewModel.SelectAllMessages" @onchange="ManageSecMgrViewModel.ToggleAllMessages" />
                 }
                 <span class="mutli-slct-btn">@TabTitleText</span>
+                <img class="select-option" src="/images/default/IcoSelect.svg" alt="delete-img" title="Select" @onclick="@ManageSecMgrViewModel.ToggleMultiCheckbox" />
                 <div class="slct-actions @activeClass">
-
-                    <img class="select-option" src="/images/default/IcoSelect.svg" alt="delete-img" title="Select" @onclick="@ManageSecMgrViewModel.ToggleMultiCheckbox" />
                     <img class="multi-dlt" src="" alt="Delete" title="Delete" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("delete"))" />
-                    @if (Model.Messenger.SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
+                    @if (SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
                     {
                         <img class="multi-read" src="" alt="Mark Read" title="Read" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("read"))" />
                         <img class="multi-unread" src="" alt="Mark Unread" title="Unread" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("unread"))" />
                     }
                 </div>
             </button>
-            <button class="button success new-btn fnt-small" id="create-new-message" @onclick="()=>{ ManageSecMgrViewModel.Messenger = new SecuredMessengerModel(); ManageSecMgrViewModel.ComposeNewMessage(); }">
+            <button class="button success new-btn fnt-small" id="create-new-message" @onclick="()=>{ ManageSecMgrViewModel.ComposeNewMessage(); }">
                 New Message
             </button>
         </div>
         <div id="all-message-list" class="message-list-section">
-            <AxCrypt.App.Desktop.Components.SecuredMessenger.MessagesList Messages="@ManageSecMgrViewModel.Messages" SecMessengerFilterTab="@SecMessengerFilterTab" />
+            <AxCrypt.App.Desktop.Components.SecuredMessenger.MessagesList />
         </div>
-        <a href="javascript:void(0);" id="load-more-btn" @onclick="()=>EnableLoadMoreAction(Model.Messenger.PageNumber)" class="loadMoreActionlnk"> Load More </a>
+        <a href="javascript:void(0);" id="load-more-btn" @onclick="()=>EnableLoadMoreAction(ManageSecMgrViewModel.Messenger.PageNumber)" class="loadMoreActionlnk"> Load More </a>
     </div>
     <div class="medium-7 columns flex-direction" style="padding:2px 8px; height:auto; max-height:520px; overflow-y:auto;">
-        @if ((ManageSecMgrViewModel.Messenger == null || !ManageSecMgrViewModel.Messenger.Messages.Any()) && !ManageSecMgrViewModel.ShowLoadingWheel && !ManageSecMgrViewModel.NewSecMsgrViewModel.IsVisible)
+        @if ((ManageSecMgrViewModel.Messenger == null || !ManageSecMgrViewModel.Messenger.ChildMessages.Any()) && !ManageSecMgrViewModel.ShowLoadingWheel && !ManageSecMgrViewModel.NewSecMsgrViewModel.IsVisible)
         {
             <div class="text-center empty-sec">
                 <span class="fnt-medium deflt-txt-clr">Select an item to read</span><br />
@@ -61,35 +58,37 @@
             }
             <AxCrypt.App.Desktop.Components.SecuredMessenger.New />
             <div id="viewer-messenger-section">
-                <AxCrypt.App.Desktop.Components.SecuredMessenger.View Model="@Model" />
+                <AxCrypt.App.Desktop.Components.SecuredMessenger.View />
             </div>
         </div>
     </div>
 </div>
 
-<EditForm Model="Model" id="loadmore-button-click">
-    <input type="hidden" id="pagenumber-id-hidden" name="pageNumber" value="@Model.Messenger.PageNumber" />
-    <input type="hidden" id="sec-messenger-filter-tab" name="secMessengerFilterTab" value="@Model.Messenger.SecMessengerFilterTab" />
+<EditForm Model="ManageSecMgrViewModel" id="loadmore-button-click">
+    <input type="hidden" id="pagenumber-id-hidden" name="pageNumber" value="@ManageSecMgrViewModel.Messenger.PageNumber" />
+    <input type="hidden" id="sec-messenger-filter-tab" name="secMessengerFilterTab" value="@SecMessengerFilterTab" />
 </EditForm>
 
 @code {
-    [Parameter]
+
     public SecureMsgrFilterTab SecMessengerFilterTab { get; set; }
 
     protected override void OnInitialized()
     {
-        Model.OnUpdateViewState += UpdateState;
+        SecMessengerFilterTab = ManageSecMgrViewModel.Messenger.SecMessengerFilterTab;
+        ManageSecMgrViewModel.NewSecMsgrViewModel.IsVisible = false;
+        ManageSecMgrViewModel.ShowLoadingWheel = false;
+
         ManageSecMgrViewModel.OnUpdateViewState += UpdateState;
+        ManageSecMgrViewModel.NewSecMsgrViewModel.OnTabUpdateViewState += async (selectedTab) => await UpdateTabState(selectedTab);
+
         base.OnInitialized();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender || Model.Messenger.SecMessengerFilterTab != SecMessengerFilterTab)
+        if (firstRender)
         {
-            await Model.GetMessagesList(SecMessengerFilterTab);
-            ManageSecMgrViewModel.Messages = Model.Messenger.Messages.ToList();
-            ManageSecMgrViewModel.Messenger.SecMessengerFilterTab = SecMessengerFilterTab;
         }
     }
 
@@ -114,18 +113,28 @@
     public async Task<bool> EnableLoadMoreAction(int pageNumberCount)
     {
         pageNumberCount += 1;
-        SecuredMessengerModel messengerModel = await Model.LoadMore(pageNumberCount, Model.Messenger.SecMessengerFilterTab);
-        if (Model.Messenger.Messages != null && messengerModel != null && messengerModel!.Messages.Any())
+        SecuredMessengerModel messengerModel = await ManageSecMgrViewModel.LoadMore(pageNumberCount, ManageSecMgrViewModel.Messenger.SecMessengerFilterTab);
+        if (ManageSecMgrViewModel.Messenger.Messages != null && messengerModel != null && messengerModel!.Messages.Any())
         {
-            ManageSecMgrViewModel.Messages = Model.Messenger.Messages.Concat(messengerModel!.Messages).ToList();
-            UpdateState();
+            ManageSecMgrViewModel.Messenger.Messages = ManageSecMgrViewModel.Messenger.Messages.Concat(messengerModel!.Messages).ToList();
+            ManageSecMgrViewModel.UpdateViewState();
             return true;
         }
         return false;
     }
 
+
+    private async Task UpdateTabState(SecureMsgrFilterTab securedMessengerFilterTab)
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
     void UpdateState()
     {
+        SecMessengerFilterTab = ManageSecMgrViewModel.Messenger.SecMessengerFilterTab;
         InvokeAsync(() =>
         {
             StateHasChanged(); // Refresh UI

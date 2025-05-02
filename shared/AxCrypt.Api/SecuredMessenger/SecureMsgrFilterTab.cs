@@ -2,6 +2,7 @@
 {
     public enum SecureMsgrFilterTab
     {
+        None,
         Inbox,
         Sent,
         Unread

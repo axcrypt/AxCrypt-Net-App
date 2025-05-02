@@ -4,9 +4,8 @@
 @using AxCrypt.Content
 @using static AxCrypt.Abstractions.TypeResolve
 
-@inject IStatusAlertService StatusAlertService
 @inject NewSecMsgrViewModel newSecMsgrViewModel
-@inject SecuredMessengerListViewModel securedMessengerListViewModel
+
 @inject IJSRuntime jsRuntime
 
 @if (newSecMsgrViewModel.IsVisible)
@@ -32,17 +31,17 @@
                         <label class="grey-clr" style="display: inline-block; padding-right: 5px;">To:</label>
                         <div class="email-input-container">
                             <div id="email-tags">
-                                @foreach (MessengerReceiverViewModel receiver in newSecMsgrViewModel.ReceiverList)
+                                @foreach (MessengerReceiver receiver in newSecMsgrViewModel.ReceiverList)
                                 {
                                     <span class="email-tag"><span class="email-text" title="@receiver.EmailAddress">@receiver.EmailAddress</span> <span class="remove-email" @onclick="() => RemoveEmail(receiver.EmailAddress)">x</span></span>
                                 }
                             </div>
                             <input @bind="newSecMsgrViewModel.UserEmail"
-                                   @onkeydown="HandleKeyPress"
-                                   @oninput="OnEmailInput"
-                                   placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
-                                   type="text"
-                                   id="new-member-email" />
+                            @onkeydown="HandleKeyPress"
+                            @oninput="OnEmailInput"
+                            placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
+                            type="text"
+                            id="new-member-email" />
                         </div>
                     </div>
                     @if (!string.IsNullOrEmpty(ErrorMessage))
@@ -62,8 +61,8 @@
             <div class="grey-clr">
                 Visibility:
                 <select style="height: 35px; border-radius:5px" id="shareVisibilityOptions"
-                        class="button visble-button fnt-medium"
-                        @bind="newSecMsgrViewModel.Visibility">
+                class="button visble-button fnt-medium"
+                @bind="newSecMsgrViewModel.Visibility">
                     @foreach (string visibility in newSecMsgrViewModel.MessageVisibilityList)
                     {
                         <option value="@visibility">@visibility</option>
@@ -74,10 +73,10 @@
             </div>
             <div class="text-msg">
                 <InputTextArea @bind-Value="newSecMsgrViewModel.EncryptedMessage"
-                               id="secured-mess-body"
-                               maxlength="100000"
-                               autofocus
-                               placeholder="Type your message here" />
+                id="secured-mess-body"
+                maxlength="100000"
+                autofocus
+                placeholder="Type your message here" />
 
             </div>
         </div>
@@ -144,7 +143,7 @@
             return;
         }
 
-        newSecMsgrViewModel.ReceiverList.Add(new MessengerReceiverViewModel { EmailAddress = email, Read = DateTime.MinValue });
+        newSecMsgrViewModel.ReceiverList.Add(new MessengerReceiver { EmailAddress = email, Read = DateTime.MinValue });
         newSecMsgrViewModel.ReceiverEmails = string.Join(",", newSecMsgrViewModel.ReceiverList.Select(su => su.EmailAddress));
         newSecMsgrViewModel.UserEmail = "";
     }
@@ -156,27 +155,7 @@
             AddEmail(newSecMsgrViewModel.UserEmail);
         }
 
-        if (newSecMsgrViewModel == null || !newSecMsgrViewModel.ReceiverEmails.Any() || string.IsNullOrWhiteSpace(newSecMsgrViewModel.EncryptedMessage))
-        {
-            StatusAlertService.Error("Failed to sent a new message!");
-            return;
-        }
-
-        if (!New<Common.AxCryptOnlineState>().IsOnline)
-        {
-            StatusAlertService.Error(@Texts.NoInternetErrorMessage);
-            return;
-        }
-
-        bool success = await newSecMsgrViewModel.SentMessageAsync(newSecMsgrViewModel);
-        if (success)
-        {
-            //            StatusAlertService.Success(Texts.SendSecuredMessageSuccess);
-            StatusAlertService.Success("Your message has been sent!");
-            newSecMsgrViewModel.IsVisible = false;
-            await SetSentTabActive();
-            return;
-        }
+        await newSecMsgrViewModel.SentMessageAsync(newSecMsgrViewModel);
     }
 
     private void DeleteDraftMessage()
@@ -184,11 +163,7 @@
         newSecMsgrViewModel.UserEmail = "";
         ErrorMessage = "";
         newSecMsgrViewModel.IsVisible = !newSecMsgrViewModel.IsVisible;
-    }
-
-    private async Task SetSentTabActive()
-    {
-        await securedMessengerListViewModel.GetMessagesList(Api.SecuredMessenger.SecureMsgrFilterTab.Sent);
+        newSecMsgrViewModel.TapUpdateViewState();
     }
 
     private void OpenGroupCreationPage()

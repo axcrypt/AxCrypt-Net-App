@@ -61,8 +61,7 @@ public static class AppDesktopFactory
         services.AddSingleton<UserNotificationService>();
         services.AddSingleton<NotificationViewModel>();
 
-        services.AddSingleton<SecuredMessengerListViewModel>();
-        services.AddSingleton<ViewSecMsgrViewModel>();
+        services.AddSingleton<ManageSecMsgrViewModel>();
         services.AddSingleton<NewSecMsgrViewModel>();
         services.AddSingleton<SecuredMessengerModel>();
         services.AddSingleton<SecuredMessage>();

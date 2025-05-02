@@ -5,13 +5,13 @@
 
 @using static AxCrypt.Abstractions.TypeResolve;
 
-@inject ViewSecMsgrViewModel ViewSecMsgrViewModel
+@inject ManageSecMsgrViewModel ViewSecMsgrViewModel
 @inject IJSRuntime jsRuntime
 
-@if (ViewSecMsgrViewModel.Messenger != null && ViewSecMsgrViewModel.Messenger.Messages != null)
+@if (ViewSecMsgrViewModel.Messenger != null && ViewSecMsgrViewModel.Messenger.ChildMessages != null && ViewSecMsgrViewModel.Messenger.ChildMessages.Any())
 {
     int replyIndex = 0; string LatestMessageStyle = "";
-    @foreach (SecuredMessage messenger in ViewSecMsgrViewModel.Messenger.Messages)
+    @foreach (SecuredMessage messenger in ViewSecMsgrViewModel.Messenger.ChildMessages)
     {
         LatestMessageStyle = "display:none;";
         if (!string.IsNullOrEmpty(messenger.Message.TheMessage))
@@ -27,7 +27,7 @@
 
         string senderShortCode = messageFrom.Substring(0, 2).ToUpper();
         IList<string> replyUserList = new List<string>();
-        if (Model.Messenger.SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent || messageFrom == currentUser)
+        if (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent || messageFrom == currentUser)
         {
             senderShortCode = messageToListText.Substring(0, 2).ToUpper();
             replyUserList = new List<string> { messageFrom };
@@ -41,8 +41,8 @@
             }
         }
 
-        bool showDeleteButton = (Model.Messenger.SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom == currentUser) ||
-        (Model.Messenger.SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom != currentUser);
+        bool showDeleteButton = (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom == currentUser) ||
+        (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom != currentUser);
 
         string replyMesssageReceivers = string.Join(", ", replyUserList);
 
@@ -81,7 +81,7 @@
                                     <input type="button" name="delete-button" class="dlt-icon" value="Delete"
                                            data-id="@messenger.Id"
                                            @onclick:stopPropagation="true"
-                                           @onclick="async()=>await ViewSecMsgrViewModel.DeleteMessageById(messenger.Id, parentId, Model.Messenger.SecMessengerFilterTab)"
+                                           @onclick="async()=>await ViewSecMsgrViewModel.DeleteMessageById(messenger.Id, parentId, ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab)"
                                            style="background-color: transparent; border: none;" />
                                 }
                                 <br />
@@ -108,7 +108,7 @@
                 @if (messenger.ShowLoadingWheel)
                 {
                     <div class="text-msg message-content messager-loading" id="messenger-view-loading-section-@messenger.Id">
-                        <span>@AxCrypt.Content.Texts.ProgressIndicatorDecryptingMessage</span>
+                        <span>@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage</span>
                     </div>
                 }
             </div>
@@ -122,13 +122,6 @@
 
     string currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address;
 
-    [Parameter]
-    public Guid messageId { get; set; }
-
-    [Parameter]
-    public SecuredMessengerListViewModel? Model { get; set; }
-
-
     protected override void OnInitialized()
     {
         ViewSecMsgrViewModel.OnUpdateViewState += UpdatePageState;
@@ -136,17 +129,8 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        try
+        if (firstRender)
         {
-            if (firstRender)
-            {
-                // await jsRuntime.InvokeVoidAsync("SemScript");
-                // await jsRuntime.InvokeVoidAsync("setDotNetHelperView", DotNetObjectReference.Create(this));
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
         }
     }
 

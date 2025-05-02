@@ -135,7 +135,7 @@ namespace AxCrypt.Core.Service.SecuredMessenger
 
         public Task<bool> UpdateAsync(IEnumerable<Guid> ids, string userEmail, bool isUnread = false)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(false);
         }
 
         public Task<SecuredMessengerRootApiModel> GetAsync(Guid id, string userEmail)

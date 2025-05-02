@@ -33,7 +33,7 @@ namespace AxCrypt.App.Desktop.Services
             _statusAlertService = statusAlertService;
         }
 
-        public async Task<SecuredMessengerModel> GetModelForList(string keyword = "")
+        public async Task<SecuredMessengerModel> GetListForInboxAsync(string keyword = "")
         {
             SecuredMessengerModel model = await InboxSecuredMesssengerFrom(_pageNumber);
             model.Keyword = keyword;
@@ -41,7 +41,7 @@ namespace AxCrypt.App.Desktop.Services
             return model;
         }
 
-        public async Task<SecuredMessengerModel> GetModelForUnreadList(string keyword = "")
+        public async Task<SecuredMessengerModel> GetListForUnreadAsync(string keyword = "")
         {
             SecuredMessengerModel model = await UnreadSecuredMessengerFrom(_pageNumber);
             model.Keyword = keyword;
@@ -49,7 +49,7 @@ namespace AxCrypt.App.Desktop.Services
             return model;
         }
 
-        public async Task<SecuredMessengerModel> GetModelSentList(string keyword = "")
+        public async Task<SecuredMessengerModel> GetListForSentAsync(string keyword = "")
         {
             SecuredMessengerModel model = await SentSecuredMessengerFrom(_pageNumber);
             model.Keyword = keyword;
@@ -57,25 +57,23 @@ namespace AxCrypt.App.Desktop.Services
             return model;
         }
 
-        public async Task<SecuredMessengerModel> GetModelForViewMessage(Guid messageId, SecureMsgrFilterTab SecMessengerFilterTab)
+        public async Task<IList<SecuredMessage>> ViewMessageWithRepliesAsync(Guid messageId, SecureMsgrFilterTab SecMessengerFilterTab)
         {
-            SecuredMessengerModel model = new SecuredMessengerModel();
             IEnumerable<SecuredMessage> replies = await SecuredMessengerFacade.GetMessageRepliesAsync(messageId);
             if (replies == null)
             {
-                model.ErrorMessage = "Failed to fetch the root message.";
-                return model;
+                return null;
             }
-
-            model.Messages = replies;
 
             if (SecMessengerFilterTab == SecureMsgrFilterTab.Sent)
             {
-                return model;
+                return replies.ToList();
             }
 
-            await UpdateVisibilityStatusAsync(model);
-            return model;
+            Task updateStatustask = new Task(async () => await UpdateVisibilityStatusAsync(replies));
+            updateStatustask.Start();
+
+            return replies.ToList();
         }
 
         public async Task<SecuredMessage> GetMessageByIdAsync(Guid messageId)
@@ -156,7 +154,7 @@ namespace AxCrypt.App.Desktop.Services
 
         public async Task<SecuredMessengerModel> GetLoadMoreSEMAsync(int pageNo, SecureMsgrFilterTab securedMessengerFilter)
         {
-            SecuredMessengerModel model = new SecuredMessengerModel();
+            SecuredMessengerModel model = new SecuredMessengerModel(securedMessengerFilter);
             model.PageNumber = pageNo;
             if (securedMessengerFilter == SecureMsgrFilterTab.Inbox)
             {
@@ -177,11 +175,6 @@ namespace AxCrypt.App.Desktop.Services
 
         public async Task<SecuredMessengerModel> GetSecMsgSearchFilterAsync(string keyword, SecuredMessengerModel messengerListViewModel)
         {
-            if (messengerListViewModel.SecMsgSearchFilters == SecureMsgrSearchFilters.None)
-            {
-                return messengerListViewModel!;
-            }
-
             RequestOptions options = new RequestOptions();
             options.UserName = Identity().UserEmail.ToString();
             options.StartDate = messengerListViewModel.StartDate;
@@ -195,7 +188,7 @@ namespace AxCrypt.App.Desktop.Services
                             (m.Message.Username?.IndexOf(keyword ?? messengerListViewModel.UserName, StringComparison.OrdinalIgnoreCase) >= 0) ||
                             (m.Message.TheMessage?.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0));
 
-            messengerListViewModel.Messages = filteredMessages;
+            messengerListViewModel.Messages = filteredMessages.ToList();
 
             return messengerListViewModel;
         }
@@ -230,16 +223,15 @@ namespace AxCrypt.App.Desktop.Services
 
         private SecuredMessengerModel CreateMessengerListViewModel(IEnumerable<SecuredMessage> messages, SecureMsgrFilterTab selectedTab)
         {
-            return new SecuredMessengerModel
+            return new SecuredMessengerModel(selectedTab)
             {
-                Messages = messages,
-                SecMessengerFilterTab = selectedTab
+                Messages = messages.ToList(),
             };
         }
 
-        private static IEnumerable<MessengerReceiverViewModel> ReceiverListFrom(NewSecMsgrViewModel viewModel)
+        private static IEnumerable<MessengerReceiver> ReceiverListFrom(NewSecMsgrViewModel viewModel)
         {
-            IList<MessengerReceiverViewModel> messengerReceiverViewModels = new List<MessengerReceiverViewModel>();
+            IList<MessengerReceiver> messengerReceiverViewModels = new List<MessengerReceiver>();
             IEnumerable<string> receiversList = viewModel.ReceiverEmails.Split(',').Distinct();
             foreach (string receiver in receiversList)
             {
@@ -249,7 +241,7 @@ namespace AxCrypt.App.Desktop.Services
                     continue;
                 }
 
-                messengerReceiverViewModels.Add(new MessengerReceiverViewModel { EmailAddress = receiverEmail.Address });
+                messengerReceiverViewModels.Add(new MessengerReceiver { EmailAddress = receiverEmail.Address });
             }
 
             return messengerReceiverViewModels;
@@ -281,9 +273,10 @@ namespace AxCrypt.App.Desktop.Services
             return apiModel;
         }
 
-        private static async Task UpdateVisibilityStatusAsync(SecuredMessengerModel model)
+        private static async Task UpdateVisibilityStatusAsync(IEnumerable<SecuredMessage> messages)
         {
-            foreach (SecuredMessage msg in model.Messages)
+            IList<Guid> messageIds = new List<Guid>();
+            foreach (SecuredMessage msg in messages)
             {
                 bool updateRead = msg.Message.ReceiverList.Any(mr => mr.User == New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address && mr.Read == DateTime.MinValue);
                 if (!updateRead)
@@ -291,9 +284,10 @@ namespace AxCrypt.App.Desktop.Services
                     continue;
                 }
 
-                IEnumerable<Guid> messageIds = new List<Guid>() { msg.Id };
-                await New<LogOnIdentity, Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).UpdateAsync(messageIds, New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address);
+                messageIds.Add(msg.Id);
             }
+
+            await New<LogOnIdentity, Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).UpdateAsync(messageIds, New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address);
         }
 
         private static DateTime GetVisibleUntil(SecureMsgrVisibility visibility)

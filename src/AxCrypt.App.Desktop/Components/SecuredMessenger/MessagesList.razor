@@ -1,17 +1,20 @@
 ﻿@using AxCrypt.Core.SecuredMessenger;
+@using AxCrypt.App.Desktop.ViewModels.SecuredMessenger;
+
+@inject ManageSecMsgrViewModel ManageSecMgrViewModel
 
 <div class="row">
     <div class="medium-12 columns">
         <div class="inbox-section no-margin" id="load-message-list">
-            @if (Messages == null || !Messages.Any())
+            @if (ManageSecMgrViewModel.Messenger.Messages == null || !ManageSecMgrViewModel.Messenger.Messages.Any())
             {
                 <label class="center-column" id="noMoreNewMessagesText" style="margin: 10% 20%;">(No messages found.)</label>
             }
             else
             {
-                @foreach (SecuredMessage messenger in Messages)
+                @foreach (SecuredMessage messenger in ManageSecMgrViewModel.Messenger.Messages)
                 {
-                    <AxCrypt.App.Desktop.Components.SecuredMessenger.Messages Model="@messenger" SecMessengerFilterTab="@SecMessengerFilterTab" />
+                    <AxCrypt.App.Desktop.Components.SecuredMessenger.Messages Model="@messenger" SecMessengerFilterTab="@ManageSecMgrViewModel.Messenger.SecMessengerFilterTab" />
                 }
             }
         </div>
@@ -19,16 +22,22 @@
 </div>
 
 @code {
-
-    [Parameter]
-    public IEnumerable<SecuredMessage>? Messages { get; set; }
-
-    [Parameter]
-    public AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab SecMessengerFilterTab { get; set; }
-
     protected override void OnInitialized()
     {
-        Messages = new List<SecuredMessage>();
+        ManageSecMgrViewModel.OnUpdateViewState += UpdatePageState;
         base.OnInitialized();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+    }
+
+    void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 }

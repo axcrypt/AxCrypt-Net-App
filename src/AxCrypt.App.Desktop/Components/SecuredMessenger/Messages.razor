@@ -5,7 +5,7 @@
 
 @using static AxCrypt.Abstractions.TypeResolve;
 
-@inject ViewSecMsgrViewModel ManageSecMgrViewModel
+@inject ManageSecMsgrViewModel ManageSecMgrViewModel
 
 @if (Model.Message?.TheMessage != null && Model.Message.TheMessage.Any())
 {
@@ -26,8 +26,8 @@
 
     if (SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
     {
-         fontClass = read != DateTime.MinValue ? "" : "read-text";
-         icoRead = read == DateTime.MinValue ? "ico-unread" : "";
+        fontClass = read != DateTime.MinValue ? "" : "read-text";
+        icoRead = read == DateTime.MinValue ? "ico-unread" : "";
     }
 
     Guid messageSelectionId = Model.ParentId == Guid.Empty ? Model.Id : Model.ParentId;
@@ -53,7 +53,7 @@
                             </div>
                         </td>
 
-                        <td class="text-fnt-size second" style="max-width: 150px; line-height: normal;">
+                        <td class="text-fnt-size second" style="max-width: 250px; line-height: normal;">
                             <span class="email-txt-ovflw">
                                 @messageToListText
                                 @if (messageToList.Count() > Utility.MaxReceiversToDisplay)
@@ -67,18 +67,23 @@
                         </td>
                     </tr>
                     <tr>
-                        <td rowspan="2" class="second" style="font-size:12px;">
-                            <img class="clck-img" src="images/default/IcoClock.svg" />
-                            <span class="grey-clr">Visible until:</span>
-                            <span class="text-fnt-size">
-                                @(Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Forever ? "Forever" :
-                                    Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Once ? "Once" :
-                                    Utility.ToDateString(Model.Message.VisibleUntil.ToLocalTime()))
-                            </span>
+                        <td colspan="2" class="second" style="font-size:12px;">
+                            <div style="display:inline-block;">
+                                <img class="clck-img" src="images/default/IcoClock.svg" />
+                                <span class="grey-clr">Visible until:</span>
+                                <span class="text-fnt-size">
+                                    @(Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Forever ? "Forever" :
+                                        Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Once ? "Once" :
+                                        Utility.ToDateString(Model.Message.VisibleUntil.ToLocalTime()))
+                                </span>
+                            </div>
+                            <div style="display:inline-block;float:right;">
+                                <span class="grey-clr text-size" style="padding-right: 10px;font-size:11px;">
+                                    @Utility.ToDateString(Model.CreatedUtc.ToLocalTime())
+                                </span>
+                            </div>
                         </td>
-                        <td class="grey-clr text-size" style="text-align: right; padding-right: 10px;font-size:11px;">
-                            @Utility.ToDateString(Model.CreatedUtc.ToLocalTime())
-                        </td>
+
                     </tr>
                 </tbody>
             </table>
@@ -99,6 +104,8 @@
     protected override void OnInitialized()
     {
         currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address;
+        ManageSecMgrViewModel.OnUpdateViewState += UpdateState;
+
         base.OnInitialized();
     }
 

@@ -4,11 +4,10 @@
 @using AxCrypt.Content
 @using static AxCrypt.Abstractions.TypeResolve
 
-@inject SecuredMessengerListViewModel SecuredMessengerListModel
-@inject ViewSecMsgrViewModel ViewSecMsgrViewModel
+@inject ManageSecMsgrViewModel SecMsgrViewModel
 
 @* @{
-    int messageCount = SecuredMessengerListModel.Messenger.Messages.Count();
+    int messageCount = SecMsgrViewModel.Messenger.Messages.Count();
 } *@
 <div class="secured-messenger">
     <div class="row">
@@ -22,45 +21,45 @@
 
     <div class="row">
         <div class="medium-12 columns filter-tab-wrapper" id="sec-msg-search-section">
-            <EditForm Model="SecuredMessengerListModel.Messenger" OnValidSubmit="SearchList" id="search-msg-form">
-                <input type="hidden" name="SecMessengerFilterTab" @bind="SecuredMessengerListModel.Messenger.SecMessengerFilterTab" id="sec-messenger-filter-tab" />
-                <InputText @bind-Value="SecuredMessengerListModel.Messenger.Keyword"
-                           id="messenger-keyword"
-                           placeholder=@Texts.PromptXecretsSearchText
-                           class="search-box columns"
-                           tabindex="1"
-                           style="width: 98%;" />
+            <EditForm Model="SecMsgrViewModel.Messenger" OnValidSubmit="SearchList" id="search-msg-form">
+                <input type="hidden" name="SecMessengerFilterTab" @bind="SecMsgrViewModel.Messenger.SecMessengerFilterTab" id="sec-messenger-filter-tab" />
+                <InputText @bind-Value="SecMsgrViewModel.Messenger.Keyword"
+                id="messenger-keyword"
+                placeholder=@Texts.PromptXecretsSearchText
+                class="search-box columns"
+                tabindex="1"
+                style="width: 98%;" />
 
                 <img class="filter-trigger" src="" alt="filter-image" title="Filters" @onclick="ToggleFilterPopup" />
                 <div class="filter-popup hide-model-popup" style="@GetFilterPopupStyle()">
                     <label>From</label>
-                    <InputText @bind-Value="SecuredMessengerListModel.Messenger.UserName"
-                               placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
-                               type="email"
-                               style="width: 50%;"
-                               name="from"
-                               id="" />
+                    <InputText @bind-Value="SecMsgrViewModel.Messenger.UserName"
+                    placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
+                    type="email"
+                    style="width: 50%;"
+                    name="from"
+                    id="" />
                     <br />
                     <label>To</label>
-                    <InputText @bind-Value="SecuredMessengerListModel.Messenger.ReceiverName"
-                               placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
-                               type="email"
-                               style="width: 50%;"
-                               name="to"
-                               id="" />
+                    <InputText @bind-Value="SecMsgrViewModel.Messenger.ReceiverName"
+                    placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
+                    type="email"
+                    style="width: 50%;"
+                    name="to"
+                    id="" />
                     <div>
                         <label>Date from</label>
-                        <InputDate @bind-Value="SecuredMessengerListModel.Messenger.StartDate" style="width: 23%;" name="date-from" />
+                        <InputDate @bind-Value="SecMsgrViewModel.Messenger.StartDate" style="width: 23%;" name="date-from" />
                         <span class="font-high" style="padding: 10px;">to</span>
-                        <InputDate @bind-Value="SecuredMessengerListModel.Messenger.EndDate" style="width: 23%;" name="date-to" />
+                        <InputDate @bind-Value="SecMsgrViewModel.Messenger.EndDate" style="width: 23%;" name="date-to" />
 
                     </div>
                     <div style="display: flex; float: right; padding-top: 20px;">
-                        <button type="reset" class="button border btn-large font-medium" style="margin-right: 30px;">Clear all</button>
-                        <button type="submit" class="button success btn-large font-medium" @onclick="ApplyFilters">Apply</button>
+                        <button type="reset" class="button border btn-large font-medium" style="margin-right: 30px;">@Texts.ClearAllText</button>
+                        <button type="submit" class="button success btn-large font-medium" @onclick="ApplyFilters">@Texts.ApplyLabel</button>
                     </div>
                 </div>
-                <button type="submit" id="message-search-btn" class="button success msg-search-btn" title="Search"></button>
+                <button type="submit" id="message-search-btn" class="button success msg-search-btn" title="@Texts.SearchText"></button>
                 <div class="searched-filters">
                     @foreach (FilterItem filter in appliedFilters)
                     {
@@ -81,25 +80,25 @@
                 <div class="row">
                     <div class="tab-sec medium-9 columns">
                         <div id="tab-header">
-                            <a class="sub-head-link unread-text @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "active" : "")"
-                               @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox)" id="inbox-tab">
+                            <a class="sub-head-link unread-text @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "active" : "")"
+                            @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox)" id="inbox-tab">
                                 Inbox @* <span id="inbox-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? messageCount : ""))</span> *@
                             </a>
-                            <hr style="display:none;" class="@(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "tab-selected" : "")">
+                            <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "tab-selected" : "")">
                         </div>
                         <div id="tab-header">
-                            <a class="sub-head-link @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "active" : "")"
-                               @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent)" id="sent-tab">
+                            <a class="sub-head-link @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "active" : "")"
+                            @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent)" id="sent-tab">
                                 Sent @* <span id="sent-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? messageCount : ""))</span> *@
                             </a>
-                            <hr style="display:none;" class="@(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "tab-selected" : "")">
+                            <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "tab-selected" : "")">
                         </div>
                         <div id="tab-header">
-                            <a class="sub-head-link unread-text @(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "active" : "")"
-                               @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread)" id="unread-tab">
+                            <a class="sub-head-link unread-text @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "active" : "")"
+                            @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread)" id="unread-tab">
                                 Unread @* <span id="unread-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? messageCount : ""))</span> *@
                             </a>
-                            <hr style="display:none;" class="@(SecuredMessengerListModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "tab-selected" : "")">
+                            <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "tab-selected" : "")">
                         </div>
                     </div>
                 </div>
@@ -107,7 +106,7 @@
             <div id="search-message-list" class="parent-container">
                 <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
 
-                <AxCrypt.App.Desktop.Components.SecuredMessenger.Body SecMessengerFilterTab="@activeTab" />
+                <AxCrypt.App.Desktop.Components.SecuredMessenger.Body />
             </div>
         </div>
     </div>
@@ -116,13 +115,10 @@
 @code {
     private SecureMsgrFilterTab activeTab = SecureMsgrFilterTab.Inbox;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        ViewSecMsgrViewModel.Messenger = new SecuredMessengerModel();
-        ViewSecMsgrViewModel.UpdateViewState();
-
-        SecuredMessengerListModel.OnUpdateViewState += UpdatePageState;
-        SecuredMessengerListModel.Messenger.SecMessengerFilterTab = activeTab;
+        SecMsgrViewModel.OnUpdateViewState += UpdatePageState;
+        SecMsgrViewModel.NewSecMsgrViewModel.OnTabUpdateViewState += async (SecureMsgrFilterTab selectedtab) => await UpdateTabState(selectedtab);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -131,23 +127,28 @@
         {
             await New<Core.UI.IPopup>().ShowAsync(Core.UI.PopupButtons.Ok, Texts.MessageErrorTitle, Texts.NoInternetErrorMessage);
         }
+
+        if (firstRender)
+        {
+            await SetActiveTab(activeTab);
+        }
     }
 
     private async Task SetActiveTab(SecureMsgrFilterTab securedMessengerFilterTab)
     {
         activeTab = securedMessengerFilterTab;
-        ViewSecMsgrViewModel.Messenger = new SecuredMessengerModel();
-        UpdatePageState();
+        await SecMsgrViewModel.SetSelectedTabActive(securedMessengerFilterTab);
     }
 
     private async Task SearchList()
     {
         using (ProcessIndicator progress = new ProcessIndicator())
         {
-            ViewSecMsgrViewModel.Messenger = new SecuredMessengerModel();
-            ViewSecMsgrViewModel.UpdateViewState();
+            SecMsgrViewModel.Messenger.Messages = new List<Core.SecuredMessenger.SecuredMessage>();
+            SecMsgrViewModel.UpdateViewState();
 
-            await SecuredMessengerListModel.SearchList(SecuredMessengerListModel.Messenger);
+            await SecMsgrViewModel.SearchList(SecMsgrViewModel.Messenger, activeTab);
+            SecMsgrViewModel.UpdateViewState();
         }
     }
 
@@ -166,24 +167,24 @@
     {
         appliedFilters.Clear();
 
-        if (!string.IsNullOrWhiteSpace(SecuredMessengerListModel.Messenger.UserName))
+        if (!string.IsNullOrWhiteSpace(SecMsgrViewModel.Messenger.UserName))
         {
-            appliedFilters.Add(new FilterItem("From", SecuredMessengerListModel.Messenger.UserName));
+            appliedFilters.Add(new FilterItem("From", SecMsgrViewModel.Messenger.UserName));
         }
 
-        if (!string.IsNullOrWhiteSpace(SecuredMessengerListModel.Messenger.ReceiverName))
+        if (!string.IsNullOrWhiteSpace(SecMsgrViewModel.Messenger.ReceiverName))
         {
-            appliedFilters.Add(new FilterItem("To", SecuredMessengerListModel.Messenger.ReceiverName));
+            appliedFilters.Add(new FilterItem("To", SecMsgrViewModel.Messenger.ReceiverName));
         }
 
-        if (SecuredMessengerListModel.Messenger.StartDate != null)
+        if (SecMsgrViewModel.Messenger.StartDate != DateTime.MinValue)
         {
-            appliedFilters.Add(new FilterItem("Date from", SecuredMessengerListModel.Messenger.StartDate.ToShortDateString()));
+            appliedFilters.Add(new FilterItem("Date from", SecMsgrViewModel.Messenger.StartDate.ToShortDateString()));
         }
 
-        if (SecuredMessengerListModel.Messenger.EndDate != null)
+        if (SecMsgrViewModel.Messenger.EndDate != DateTime.MinValue)
         {
-            appliedFilters.Add(new FilterItem("to", SecuredMessengerListModel.Messenger.EndDate.ToShortDateString()));
+            appliedFilters.Add(new FilterItem("to", SecMsgrViewModel.Messenger.EndDate.ToShortDateString()));
         }
 
         showFilterPopup = false;
@@ -201,11 +202,25 @@
         }
     }
 
+    private async Task UpdateTabState(SecureMsgrFilterTab securedMessengerFilterTab)
+    {
+        if (securedMessengerFilterTab != SecureMsgrFilterTab.None && activeTab != securedMessengerFilterTab)
+        {
+            await SetActiveTab(securedMessengerFilterTab);
+        }
+
+        await InvokeAsync(() =>
+        {
+            SecMsgrViewModel.SelectedMessageId = Guid.Empty;
+            StateHasChanged(); // Refresh UI
+        });
+    }
+    
     private void UpdatePageState()
     {
         InvokeAsync(() =>
         {
-            ViewSecMsgrViewModel.SelectedMessageId = Guid.Empty;
+            SecMsgrViewModel.SelectedMessageId = Guid.Empty;
             StateHasChanged(); // Refresh UI
         });
     }

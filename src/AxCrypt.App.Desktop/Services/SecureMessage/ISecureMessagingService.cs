@@ -9,15 +9,15 @@ namespace AxCrypt.App.Desktop.Services
 {
     public interface ISecureMessagingService
     {
-        Task<SecuredMessengerModel> GetModelForList(string keyword = "");
+        Task<SecuredMessengerModel> GetListForInboxAsync(string keyword = "");
 
-        Task<SecuredMessengerModel> GetModelForUnreadList(string keyword = "");
+        Task<SecuredMessengerModel> GetListForUnreadAsync(string keyword = "");
 
-        Task<SecuredMessengerModel> GetModelSentList(string keyword = "");
+        Task<SecuredMessengerModel> GetListForSentAsync(string keyword = "");
 
         Task<SecuredMessengerModel> GetLoadMoreSEMAsync(int pageNo, SecureMsgrFilterTab securedMessengerFilterTab);
 
-        Task<SecuredMessengerModel> GetModelForViewMessage(Guid id, SecureMsgrFilterTab SecMessengerFilterTab);
+        Task<IList<SecuredMessage>> ViewMessageWithRepliesAsync(Guid id, SecureMsgrFilterTab SecMessengerFilterTab);
 
         Task<SecuredMessage> GetMessageByIdAsync(Guid id);
 

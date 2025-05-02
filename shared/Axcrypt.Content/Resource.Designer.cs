@@ -59004,7 +59004,7 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
-        public static string searchText {
+        public static string SearchText {
             get {
                 return ResourceManager.GetString("searchText", resourceCulture);
             }

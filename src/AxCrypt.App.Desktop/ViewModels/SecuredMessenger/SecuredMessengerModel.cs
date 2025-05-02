@@ -1,24 +1,32 @@
-﻿using AxCrypt.Api.SecuredMessenger;
+﻿using AxCrypt.Abstractions;
+using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 {
     public class SecuredMessengerModel
     {
-        public IEnumerable<SecuredMessage> Messages { get; set; } = Enumerable.Empty<SecuredMessage>();
+        private const int _defaultSearchFilerDays = 7;
+        public SecuredMessengerModel(SecureMsgrFilterTab secMessengerFilterTab)
+        {
+            SecMessengerFilterTab = secMessengerFilterTab;
+            StartDate = New<INow>().Utc.AddDays(-_defaultSearchFilerDays).ToLocalTime();
+            EndDate = New<INow>().Utc.ToLocalTime();
+        }
+
+        public IList<SecuredMessage> Messages { get; set; } = new List<SecuredMessage>();
+
+        public IList<SecuredMessage> ChildMessages { get; set; } = new List<SecuredMessage>();
 
         public SecureMsgrFilterTab SecMessengerFilterTab { get; set; }
 
         public int PageNumber { get; set; } = 0;
 
         public string Keyword { get; set; }
-
-        public SecureMsgrSearchFilters SecMsgSearchFilters { get; set; } = SecureMsgrSearchFilters.OneWeek;
 
         public DateTime StartDate { get; set; }
 
