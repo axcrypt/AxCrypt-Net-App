@@ -48,13 +48,16 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
 
         public async Task SearchList(SecuredMessengerModel messengerModel)
         {
+            if (messengerModel != null || !string.IsNullOrWhiteSpace(messengerModel.Keyword))
+            {
+                Messenger = await _messageService.GetSecMsgSearchFilterAsync(messengerModel.Keyword, messengerModel);
+            }
+
             if (messengerModel == null || string.IsNullOrWhiteSpace(messengerModel.Keyword))
             {
                 await GetMessagesList(messengerModel.SecMessengerFilterTab);
                 return;
-            }
-
-            Messenger = await _messageService.GetSecMsgSearchFilterAsync(messengerModel.Keyword, messengerModel);
+            }            
         }
 
         public async Task<SecuredMessengerModel> LoadMore(int pageNumber, SecureMsgrFilterTab secMessengerFilterTab)

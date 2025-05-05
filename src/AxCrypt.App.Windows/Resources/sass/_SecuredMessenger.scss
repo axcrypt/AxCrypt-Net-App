@@ -20,10 +20,11 @@
     background-position: center center;
     background-size: 15px;
     background-color: $ActnBgClr !important;
-    min-width: 6%;
+    width: 40px;
     height: 40px;
-    float: right;
-    margin-top: 5px;
+    position: absolute;
+    top: 0px;
+    right: 0;
 }
 
 #messenger-keyword {
@@ -580,6 +581,75 @@ textarea[readonly] {
     color: $TxtClr;
 }
 
+.filter-tab-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.filter-trigger {
+    position: absolute;
+    right: 50px;
+    padding: 14px 5px 14px 5px;
+    cursor: pointer;
+    content: $ScrtFilterImg;
+}
+
+.filter-popup {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 17px 30px 17px 17px;
+    display: none;
+    z-index: 100;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid $HdTxtClr;
+    box-shadow: 0px 4px 8.6px 0px #D3D3D3;
+
+    label {
+        width: 72px;
+    }
+
+    input {
+        border: 1px solid $colDsbl !important;
+    }
+
+    input[type=date] {
+        text-indent: 5px;
+        padding-right: 8px;
+    }
+}
+
+.slct-filt-box {
+    max-width: 128px;
+    min-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 3px 10px;
+    height: 32px;
+    color: $TxtClr;
+    background-color: $HglhtTxt;
+    border-radius: 5px;
+    border: 1px solid $BorderClr;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.searched-filters {
+    display: flex;
+    gap: 16px;
+}
+
+.filter-items {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 20px;
+}
+
 @media only screen and (max-width: 979px) {
     .dsk-hide {
         display: block;
@@ -889,10 +959,6 @@ textarea[readonly] {
     max-height: 440px;
     overflow-y: auto;
     overflow-x: hidden;
-}
-
-.search-dropdown {
-    text-align: center;
 }
 
 .email-txt-ovflw {

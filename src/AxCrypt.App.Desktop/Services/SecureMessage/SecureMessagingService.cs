@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.Api;
 using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Api.Shared.Helper;
@@ -176,12 +177,17 @@ namespace AxCrypt.App.Desktop.Services
                 return messengerListViewModel!;
             }
 
-            IEnumerable<SecuredMessage> messages = await SecuredMessengerFacade.GetSecMsgSearchFilterAsync(messengerListViewModel.SecMessengerFilterTab, messengerListViewModel.SecMsgSearchFilters);
+            RequestOptions options = new RequestOptions();
+            options.UserName = Identity().UserEmail.ToString();
+            options.StartDate = messengerListViewModel.StartDate;
+            options.EndDate = messengerListViewModel.EndDate;
+
+            IEnumerable<SecuredMessage> messages = await SecuredMessengerFacade.GetSecMsgSearchFilterAsync(messengerListViewModel.SecMessengerFilterTab, options);
 
             keyword = keyword.Trim().ToLower();
             IEnumerable<SecuredMessage> filteredMessages = messages
-                .Where(m => (m.Message.ReceiverList.Any(rl => rl.User.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)) ||
-                            (m.Message.Username?.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                .Where(m => (m.Message.ReceiverList.Any(rl => rl.User.IndexOf(keyword ?? messengerListViewModel.ReceiverName, StringComparison.OrdinalIgnoreCase) >= 0)) ||
+                            (m.Message.Username?.IndexOf(keyword ?? messengerListViewModel.UserName, StringComparison.OrdinalIgnoreCase) >= 0) ||
                             (m.Message.TheMessage?.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0));
 
             messengerListViewModel.Messages = filteredMessages;

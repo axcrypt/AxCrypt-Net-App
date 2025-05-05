@@ -1,5 +1,4 @@
-﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model.SecuredMessenger;
+﻿using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Core.Crypto;
@@ -73,10 +72,10 @@ namespace AxCrypt.Api.Shared.Helper
             return await New<LogOnIdentity, ISecuredMessengerService>(Identity()).CreateAsync(messengerApiModel);
         }
 
-        public static async Task<IEnumerable<SecuredMessage>> GetSecMsgSearchFilterAsync(SecureMsgrFilterTab securedMessengerFilterTab, SecureMsgrSearchFilters secMsgSearchFilters)
+        public static async Task<IEnumerable<SecuredMessage>> GetSecMsgSearchFilterAsync(SecureMsgrFilterTab securedMessengerFilterTab, RequestOptions requestOptions)
         {
             List<SecuredMessage> messengers = new List<SecuredMessage>();
-            IEnumerable<SecuredMessengerRootApiModel> allSecuredUserMessages = await New<LogOnIdentity, ISecuredMessengerService>(Identity()).GetSecMsgWithSearchFiltersAsync(securedMessengerFilterTab, GetRequestOptions(secMsgSearchFilters));
+            IEnumerable<SecuredMessengerRootApiModel> allSecuredUserMessages = await New<LogOnIdentity, ISecuredMessengerService>(Identity()).GetSecMsgWithSearchFiltersAsync(securedMessengerFilterTab, requestOptions);
             for (int i = 0; i < allSecuredUserMessages.Count(); i++)
             {
                 SecuredMessengerRootApiModel message = allSecuredUserMessages.ElementAt(i);
@@ -145,49 +144,8 @@ namespace AxCrypt.Api.Shared.Helper
             options.PageCount = SecMessengerUtility.SecuredMessagePageCount;
             options.PageNumber = pageNumber;
 
-            if (secMsgSearchFilters == SecureMsgrSearchFilters.None)
-            {
-                return options;
-            }
-
-            return GetRequestOptionWithFilters(pageNumber, secMsgSearchFilters, options);
-        }
-
-        private static RequestOptions GetRequestOptionWithFilters(int pageNumber, SecureMsgrSearchFilters secMsgSearchFilters, RequestOptions requestOptions)
-        {
-            DateTime currentTime = New<INow>().Utc;
-
-            switch (secMsgSearchFilters)
-            {
-                case SecureMsgrSearchFilters.OneWeek:
-                    requestOptions.StartDate = currentTime.AddDays(-7).Date;
-                    requestOptions.EndDate = currentTime;
-                    return requestOptions;
-
-                case SecureMsgrSearchFilters.OneMonth:
-                    requestOptions.StartDate = currentTime.AddMonths(-1).Date;
-                    requestOptions.EndDate = currentTime;
-                    return requestOptions;
-
-                case SecureMsgrSearchFilters.ThreeMonth:
-                    requestOptions.StartDate = currentTime.AddMonths(-3).Date;
-                    requestOptions.EndDate = currentTime;
-                    return requestOptions;
-
-                case SecureMsgrSearchFilters.SixMonth:
-                    requestOptions.StartDate = currentTime.AddMonths(-6).Date;
-                    requestOptions.EndDate = currentTime;
-                    return requestOptions;
-
-                //case SecMsgSearchFilters.OneYear:
-                //    requestOptions.StartDate = currentTime.AddYears(1).Date;
-                //    requestOptions.EndDate = currentTime;
-                //    return requestOptions;
-
-                default:
-                    return null;
-            }
-        }
+            return options;
+        }       
 
         private static async Task<IEnumerable<SecuredMessage>> LoadMessageInfoAsync(SecuredMessengerRootApiModel rootMessage, bool isForSearch = false, Guid? messageId = null)
         {

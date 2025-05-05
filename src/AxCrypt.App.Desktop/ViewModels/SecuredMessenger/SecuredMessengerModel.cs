@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,14 @@ namespace AxCrypt.App.Desktop.ViewModels.SecuredMessenger
         public string Keyword { get; set; }
 
         public SecureMsgrSearchFilters SecMsgSearchFilters { get; set; } = SecureMsgrSearchFilters.OneWeek;
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
+        public string UserName { get; set; }
+
+        public string ReceiverName { get; set; }
 
         public IEnumerable<string> SecMesgFilterOptions
         {
