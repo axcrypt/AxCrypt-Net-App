@@ -204,12 +204,15 @@ public class AppSettingsViewModel : ViewModelBase
         }
 
         PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.IncludeSubfoldersConfirmationTitle, Texts.IncludeSubfoldersConfirmationBody);
+        IncludeSubfolders = false;
         if (result == PopupButtons.Ok)
         {
             _mainViewModel.FolderOperationMode = FolderOperationMode.IncludeSubfolders;
             IncludeSubfolders = true;
             UpdateViewState();
         }
+
+        UpdateViewState();
     }
 
     public async Task OnInactivityContextMenu(int duration, EventArgs e)
