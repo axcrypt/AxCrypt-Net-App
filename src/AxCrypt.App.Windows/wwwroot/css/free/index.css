@@ -273,6 +273,9 @@
 .arw-img {
   content: url(/images/default/Arrow.svg);
 }
+.arw-img .rotate {
+  transform: rotate(180deg);
+}
 
 .ico-eye-sml {
   content: url(/images/free/IcoEye.svg);

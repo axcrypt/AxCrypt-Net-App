@@ -288,6 +288,10 @@
 
 .arw-img {
     content: url(/images/default/Arrow.svg);
+
+    .rotate {
+        transform: rotate(180deg);
+    }
 }
 
 .ico-eye-sml {

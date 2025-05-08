@@ -33,14 +33,14 @@ namespace AxCrypt.Api.Shared.Helper
             return messages.Select(m => m.CovertToMessengerModel());
         }
 
-        public static async Task<IEnumerable<SecuredMessage>> GetMessageRepliesAsync(Guid messageId)
+        public static async Task<IEnumerable<SecuredMessage>> GetMessageRepliesAsync(Guid messageId, SecureMsgrFilterTab secMessengerFilterTab)
         {
             SecuredMessengerRootApiModel rootMessage = await New<LogOnIdentity, ISecuredMessengerService>(Identity()).GetAsync(messageId, Identity().UserEmail.Address);
             if (rootMessage.Message == null && rootMessage.Replies == null)
             {
                 return new List<SecuredMessage>();
             }
-            return await LoadMessageInfoAsync(rootMessage);
+            return await LoadMessageInfoAsync(rootMessage, false, null, secMessengerFilterTab);
         }
 
         public static async Task<SecuredMessage> GetMessageAsync(Guid messageId)
@@ -145,9 +145,9 @@ namespace AxCrypt.Api.Shared.Helper
             options.PageNumber = pageNumber;
 
             return options;
-        }       
+        }
 
-        private static async Task<IEnumerable<SecuredMessage>> LoadMessageInfoAsync(SecuredMessengerRootApiModel rootMessage, bool isForSearch = false, Guid? messageId = null)
+        private static async Task<IEnumerable<SecuredMessage>> LoadMessageInfoAsync(SecuredMessengerRootApiModel rootMessage, bool isForSearch = false, Guid? messageId = null, SecureMsgrFilterTab securedMessengerFilterTab = SecureMsgrFilterTab.None)
         {
             IList<SecuredMessage> messengers = new List<SecuredMessage>();
             if (rootMessage == null)
@@ -157,6 +157,11 @@ namespace AxCrypt.Api.Shared.Helper
 
             int msgIndex = 0;
             bool canDecryptMessage = false;
+
+            if (securedMessengerFilterTab == SecureMsgrFilterTab.Inbox)
+            {
+                rootMessage.Replies = rootMessage.Replies.Where(rm => (rm.Visibility == nameof(SecureMsgrVisibility.Once) && rm.Receiver.First(ru => ru.User == New<UserSettings>().UserEmail).Read == DateTime.MinValue) || rm.Visibility != nameof(SecureMsgrVisibility.Once) && rm.VisibleUntil > New<Abstractions.INow>().Utc);
+            }
 
             foreach (SecuredMessengerApiModel messenger in rootMessage.Replies)
             {

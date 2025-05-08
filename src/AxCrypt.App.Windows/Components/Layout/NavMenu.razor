@@ -4,6 +4,7 @@
 @using AxCrypt.Content
 
 @inject LogOnViewModel LogOnViewModel
+@inject NavigationManager navigationManager
 
 <div class="side-menu">
     <div class="navbar" style="margin-top: 10px;">
@@ -33,7 +34,7 @@
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link three" href="passwordManager">
+            <NavLink class="@($"nav-link three {GetClassByActiveTab("passwordManager")}")" href="passwordManager">
                 <span class="oi scrts" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.Introduction2MailText16</span>
             </NavLink>
         </div>
@@ -60,12 +61,12 @@
 
     <div class="abt-sec nav-item px-3">
         <div>
-            <NavLink class="nav-link" @onclick="FeedbackPopup">
+            <NavLink class="@($"nav-link {GetClassByActiveTab("FeedbackPopup")}")" @onclick="FeedbackPopup">
                 <span class="oi fdbck" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SendFeedbackTitle</span>
             </NavLink>
         </div>
         <div>
-            <NavLink class="nav-link" @onclick="AboutPopup">
+            <NavLink class="@($"nav-link {GetClassByActiveTab("AboutPopup")}")" @onclick="AboutPopup">
                 <span class="oi info" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.AboutAxcryptLinkLabel</span>
             </NavLink>
         </div>
@@ -73,8 +74,29 @@
 </div>
 
 @code {
+
+    string TabActive = "";
+
+    string VisitedUrl = "";
+
+    string[] SecretNavUrls = new[]
+    {
+        "/editpassword",
+        "/editnote",
+        "/editcard",
+        "/viewcard",
+        "/viewnote",
+        "/viewpassword",
+        "/AddCard",
+        "/AddNote",
+        "/AddPassword"
+    };
+
     protected override void OnInitialized()
     {
+        navigationManager.LocationChanged += OnLocationChanged;
+        LogOnViewModel.AboutDialog.OnDialogVisibilityChanged += UpdateUIState;
+        LogOnViewModel.FeedbackDialog.OnDialogVisibilityChanged += UpdateUIState;
         base.OnInitialized();
     }
 
@@ -86,13 +108,50 @@
         }
     }
 
+    private void OnLocationChanged(object? obj, LocationChangedEventArgs args)
+    {
+        UpdateActiveTabByNavigation();
+        UpdateUIState(true);
+    }
+
+    private void UpdateActiveTabByNavigation()
+    {
+        TabActive = "";
+        if (SecretNavUrls.Contains(navigationManager.Uri.Replace(navigationManager.BaseUri, "/")))
+        {
+            TabActive = "passwordManager";
+            return;
+        }
+    }
+
     private void AboutPopup()
     {
+        TabActive = "AboutPopup";
         LogOnViewModel.AboutDialog.Show();
     }
 
     private void FeedbackPopup()
     {
+        TabActive = "FeedbackPopup";
         LogOnViewModel.FeedbackDialog.Show();
+    }
+
+    private string GetClassByActiveTab(string activeTab)
+    {
+        return TabActive == activeTab ? "active" : "";
+    }
+
+    void UpdateUIState(bool result)
+    {
+        if (!result)
+        {
+            TabActive = "";
+            UpdateActiveTabByNavigation();
+        }
+
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 }

@@ -95,6 +95,11 @@
                                     <span>Visible until:</span>
                                     <span class="">@Utility.ToDateString(messenger.Message.VisibleUntil.ToLocalTime())</span>
                                 }
+                                else if (messenger.Message.Visibility == SecureMsgrVisibility.Once)
+                                {
+                                    <span>Visibility:</span>
+                                    <span class="">@messenger.Message.Visibility.ToString()</span>
+                                }
                             </td>
                         </tr>
                     </tbody>

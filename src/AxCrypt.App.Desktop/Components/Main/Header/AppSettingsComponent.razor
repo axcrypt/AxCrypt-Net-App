@@ -455,12 +455,12 @@
                     <div class="error-message">@AppSettingsViewModel.ErrorMessage</div>
                 }
                 <div class="input-group">
-                    <label for="restApiUrl">Rest Api Url:</label>
-                    <input type="text" id="restApiUrl" class="form-control" @bind="@AppSettingsViewModel.RestApiBaseUrlInput" />
+                    <label for="restApiUrl">@Texts.DialogDebugOptionsRestApiUrlPrompt</label>
+                    <input type="text" id="restApiUrl" class="form-control" @bind="@AppSettingsViewModel.RestApiBaseUrlInput" style="text-indent: 0px;" />
                 </div>
                 <div class="input-group">
                     <label for="timeout">@Texts.DialogDebugOptionsRestApiTimeoutPrompt</label>
-                    <input type="text" id="timeout" class="form-control" @bind="@AppSettingsViewModel.TimeoutInput" />
+                    <input type="text" id="timeout" class="form-control" @bind="@AppSettingsViewModel.TimeoutInput" style="text-indent: 0px;" />
                 </div>
 
                 <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">

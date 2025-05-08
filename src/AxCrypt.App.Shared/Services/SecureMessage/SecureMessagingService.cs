@@ -53,15 +53,15 @@ namespace AxCrypt.App.Shared.Services
             return model;
         }
 
-        public async Task<IList<SecuredMessage>> ViewMessageWithRepliesAsync(Guid messageId, SecureMsgrFilterTab SecMessengerFilterTab)
+        public async Task<IList<SecuredMessage>> ViewMessageWithRepliesAsync(Guid messageId, SecureMsgrFilterTab secMessengerFilterTab)
         {
-            IEnumerable<SecuredMessage> replies = await SecuredMessengerFacade.GetMessageRepliesAsync(messageId);
+            IEnumerable<SecuredMessage> replies = await SecuredMessengerFacade.GetMessageRepliesAsync(messageId, secMessengerFilterTab);
             if (replies == null)
             {
                 return null;
             }
 
-            if (SecMessengerFilterTab == SecureMsgrFilterTab.Sent)
+            if (secMessengerFilterTab == SecureMsgrFilterTab.Sent)
             {
                 return replies.ToList();
             }

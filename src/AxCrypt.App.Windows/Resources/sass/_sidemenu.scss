@@ -126,6 +126,10 @@
 .abt-sec {
     position: absolute;
     bottom: 3vh;
+
+    .nav-link.active {
+        color: $SdeMnuTxtClr;
+    }
 }
 
 .prgrs-bar-sec {
