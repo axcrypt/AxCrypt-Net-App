@@ -226,23 +226,23 @@ public class RecentFilesViewModel : ViewModelBase
         switch (securedFilesContextMenu)
         {
             case SecuredFilesContextMenu.OpenSecured:
-                OpenSecured();
+                await OpenSecured();
                 break;
 
             case SecuredFilesContextMenu.RemoveFromListButKeepSecured:
-                RemoveFromListKeepSecured();
+                await RemoveFromListKeepSecured();
                 break;
 
             case SecuredFilesContextMenu.StopSecureAndRemoveFromList:
-                DecryptAndRemoveFromList();
+                await DecryptAndRemoveFromList();
                 break;
 
             case SecuredFilesContextMenu.ShareKey:
-                ShareKeyFromRecentFiles(args);
+                await ShareKeyFromRecentFiles(args);
                 break;
 
             case SecuredFilesContextMenu.ShowInFolder:
-                ShowInFolder();
+                await ShowInFolder();
                 break;
 
             case SecuredFilesContextMenu.RenameToOriginal:
@@ -250,7 +250,7 @@ public class RecentFilesViewModel : ViewModelBase
                 break;
 
             case SecuredFilesContextMenu.ClearRecentFiles:
-                ClearAllRecentFiles();
+                await ClearAllRecentFiles();
                 break;
         }
 
@@ -260,12 +260,12 @@ public class RecentFilesViewModel : ViewModelBase
         }
     }
 
-    private async void OpenSecured()
+    private async Task OpenSecured()
     {
         await _fileOperationViewModel.OpenFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
     }
 
-    public async void OpenSecuredMouseDoubleClick(MouseEventArgs args, string selectedFilePath)
+    public async Task OpenSecuredMouseDoubleClick(MouseEventArgs args, string selectedFilePath)
     {
         if (args == null)
         {
@@ -285,22 +285,22 @@ public class RecentFilesViewModel : ViewModelBase
         }
     }
 
-    private async void RemoveFromListKeepSecured()
+    private async Task RemoveFromListKeepSecured()
     {
         await _mainViewModel.RemoveRecentFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
     }
 
-    private async void DecryptAndRemoveFromList()
+    private async Task DecryptAndRemoveFromList()
     {
         await _fileOperationViewModel.DecryptFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
     }
 
-    private async void ShareKeyFromRecentFiles(EventArgs args)
+    private async Task ShareKeyFromRecentFiles(EventArgs args)
     {
         await ShareKeyService.ShareKeysAsync(_mainViewModel.SelectedRecentFiles, _sharekeyViewModel!, _fileOperationViewModel);
     }
 
-    private async void ShowInFolder()
+    private async Task ShowInFolder()
     {
         await _fileOperationViewModel.ShowInFolder.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
     }
@@ -310,7 +310,7 @@ public class RecentFilesViewModel : ViewModelBase
         await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles); }, null, e);
     }
 
-    private async void ClearAllRecentFiles()
+    private async Task ClearAllRecentFiles()
     {
         await _mainViewModel.RemoveRecentFiles.ExecuteAsync(_mainViewModel.RecentFiles.Select(files => files.EncryptedFileInfo.FullName));
     }

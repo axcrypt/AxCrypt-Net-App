@@ -15,7 +15,7 @@
         <h3 class="fle-nme fnt-sze">Actions</h3>
         <div class="" style="display:flex;">
 
-            <div class="act-box" @onclick="()=> homeActionModel!.OpenFile()" @onmouseover='@( () => ShowPopup("open") )' @onmouseout='@( () => HidePopup() )'>
+            <div class="act-box" @onclick="async ()=> await homeActionModel!.OpenFile()" @onmouseover='@(() => ShowPopup("open"))' @onmouseout='@(() => HidePopup())'>
                 <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
                 <span class="text-size">@Texts.OpenEncryptedToolStripMenuItemText</span>
                 @if (isHovered && hoveredElement == "open")
@@ -26,7 +26,7 @@
                 }
             </div>
 
-            <div class="act-box" disabled="@homeActionModel!.EncryptButtonEnabled" @onclick="()=>homeActionModel!.SecureFile()" @onmouseover='@( () => ShowPopup("secure") )' @onmouseout='@( () => HidePopup() )'>
+            <div class="act-box" disabled="@homeActionModel!.EncryptButtonEnabled" @onclick="async ()=> await homeActionModel!.SecureFile()" @onmouseover='@(() => ShowPopup("secure"))' @onmouseout='@(() => HidePopup())'>
                 <img class="act-img scr-act" src="" alt="scr-img" />
                 <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
                 @if (isHovered && hoveredElement == "secure")
@@ -36,7 +36,7 @@
                     </div>
                 }
             </div>
-            <div class="act-box" @onclick="()=>homeActionModel.StopSecuringFile()" @onmouseover='@( () => ShowPopup("stop") )' @onmouseout='@( () => HidePopup() )'>
+            <div class="act-box" @onclick="async ()=> await homeActionModel.StopSecuringFile()" @onmouseover='@(() => ShowPopup("stop") )' @onmouseout='@(() => HidePopup() )'>
                 <img class="act-img stpscr-act" src="" alt="stpscr-img" />
                 <span class="text-size">@Texts.DecryptToolStripMenuItemText</span>
                 @if (isHovered && hoveredElement == "stop")
@@ -70,7 +70,7 @@
             }
             else
             {
-                <div class="act-box" @onclick="async(e)=> homeActionModel.ShareKeysAsync(e)" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
+                <div class="act-box" @onclick="async(e)=> await homeActionModel.ShareKeysAsync(e)" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
                     <img class="act-img shrks-act" src="" alt="shrks-img" />
                     <span class="text-size">Share</span>
                     @if (isHovered && hoveredElement == "share")
@@ -112,7 +112,7 @@
             }
             @if (homeActionModel.IsFilesPending)
             {
-                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => ShowPopup("clean") )' @onmouseout='@( () => HidePopup() )' @onclick="(e) => homeActionModel.CleanAndRemoveOpenFilesButton_Click(e)">
+                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => ShowPopup("clean") )' @onmouseout='@( () => HidePopup() )' @onclick="async (e) => await homeActionModel.CleanAndRemoveOpenFilesButton_Click(e)">
                     <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">@Texts.CleanUpPromptText</span>
                     @if (isHovered && hoveredElement == "clean")
                     {

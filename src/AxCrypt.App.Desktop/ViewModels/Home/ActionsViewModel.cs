@@ -87,12 +87,12 @@ public class ActionsViewModel : ViewModelBase
         await _fileOperationViewModel.DecryptFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null!);
     }
 
-    public async void ShareKeysAsync(EventArgs e)
+    public async Task ShareKeysAsync(EventArgs e)
     {
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await ShareKeyService.ShareKeysWithFileSelectionAsync(_sharekeyViewModel!, _mainViewModel!.SelectedRecentFiles, _fileOperationViewModel); }, null!, e);
     }
 
-    public async void CleanAndRemoveOpenFilesButton_Click(EventArgs e)
+    public async Task CleanAndRemoveOpenFilesButton_Click(EventArgs e)
     {
         await EncryptPendingFiles();
     }
