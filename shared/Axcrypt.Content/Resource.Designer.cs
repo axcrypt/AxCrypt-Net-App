@@ -1581,6 +1581,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approved.
+        /// </summary>
+        public static string ApprovedMasterKeyStatus {
+            get {
+                return ResourceManager.GetString("ApprovedMasterKeyStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Master key can&apos;t be enabled while being part of more than one business. Please leave any other businesses you&apos;re part of before enabling master key..
         /// </summary>
         public static string ApproveMasterKeyMoreThanOneBusinessError {
@@ -1678,6 +1687,15 @@ namespace AxCrypt.Content {
         public static string AsResellerHeading {
             get {
                 return ResourceManager.GetString("AsResellerHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select at least one message to.
+        /// </summary>
+        public static string AtleastOneMessageText {
+            get {
+                return ResourceManager.GetString("AtleastOneMessageText", resourceCulture);
             }
         }
         
@@ -8463,7 +8481,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_BSTSSCE_H1_SH4_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Premium and business customers have access to our extra strong encryption method: AES-256. The Advanced Encryption Standard (AES) 256 is adopted by federal agencies like the National Security Agency (NSA) where national security is involved. AES-256  is the strongest, most secure and most efficient encryption algorithm available nowadays. AES uses symmetric key encryption: one secret key is used to cipher and decipher. Symmetric keys are better suited to internal encryption, faster and in need of less compu [rest of string was truncated]&quot;;.
         /// </summary>
@@ -10209,7 +10227,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_DEVFE_H2_SH1_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Full disk encryption (FDE) is, as the name implies, encryption at the disk level. When data is written to or read from a disc, it is automatically encrypted. It encrypts all files on the hard drive, including the operating system and file system. It&apos;s only used to keep files safe while they&apos;re in storage or not in transit. Full disk encryption works in a similar way to locking a house&apos;s outer doors but not its internal rooms. Of course, it&apos;s a good idea to secure the front entrance so that attackers can&apos;t e [rest of string was truncated]&quot;;.
         /// </summary>
@@ -10866,7 +10884,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_EAB_H1_Text2", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to It is possible to do what mobile device manufacturers do, to use internal trusted hardware as the guardian of the secret keys which will only release the secrets if authenticated by for example a fingerprint. This is how Apple Touch ID works. But, remember the caveats of biometric authentication mentioned above. The internal trusted hardware can always be fooled by a sufficiently well made device or artifact, and frequently the required fingerprint is even found all over the device itself!.
         /// </summary>
@@ -12414,7 +12432,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_EIBM_H5_SH3_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Compliant with domestic and international regulations that companies should and must need, it bypasses breaches every time the market fluctuates, displays company’s relevant information when internal controls occur as only approved individuals have access to it and sidestep the considerable fines associated with non-compliance..
         /// </summary>
@@ -17904,7 +17922,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_HSBCPTFGCT_H4_Text4", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;Cybersecurity Newsletters:&lt;/b&gt; Regular updates through emails or internal newsletters keep cybersecurity top of mind for employees, helping to reinforce good practices.&lt;/li&gt;.
         /// </summary>
@@ -20136,7 +20154,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_HTSCER_H1_Text2", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;ol style=&apos;list-style-position: inside;display: grid;gap: 20%;&apos;&gt;&lt;li&gt;A screen shot of the situation, error message or similar.&lt;/li&gt;&lt;li&gt;The AxCrypt configuration files and internal error log.&lt;/li&gt;&lt;li&gt;Your Windows Event Log. This is a log of all errors reported by Windows recently.&lt;/li&gt;&lt;/ol&gt;.
         /// </summary>
@@ -22935,7 +22953,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_MEWRECY_H1_SubHeading1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to During the projected period, the global mobile encryption market is predicted to grow at a CAGR of 30.55 percent, to USD 5,931.23 million by 2026. Encryption deployments have increased in quantity and scope in big corporations as organizations have reacted to increasingly prevalent regulatory and compliance obligations and more strict internal policies..
         /// </summary>
@@ -25357,7 +25375,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_TBFEBSBF_H1_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Confidential business communications are frequently targeted by cybercriminals. Encrypting emails, messages, and file attachments ensures that sensitive business discussions remain private and protected from interception. This form of encrypted communication is vital for protecting both internal and external business correspondence..
         /// </summary>
@@ -25438,7 +25456,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_TBFEBSBF_H4_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Not all employees need access to all data. Encryption helps control access by restricting sensitive files to authorized personnel only. With strong encryption measures in place, businesses can ensure that only those with the correct decryption key can open and modify files. This added layer of protection minimizes the risk of internal data leaks..
         /// </summary>
@@ -25654,7 +25672,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_TIEDTC_H1_SH1_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Every firm will have, in one way or another, information on customers, supplier contracts in detail, and documents about bids and tenders, to name a few commercial data kinds. Regulations governing the protection of customer information are applicable to all industries, but the banking and healthcare sectors are particularly sensitive to them. The relevance of this kind of information is frequently undermined and neglected. Every time information is shared, as well as when it is sent to and from internal sy [rest of string was truncated]&quot;;.
         /// </summary>
@@ -29614,7 +29632,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_WICE_H1_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;li style=&quot;list-style-type: &apos;\2714&apos;;&quot;&gt; It’s not only external access we have to be alert of, but also internal data theft. Business partners or contractors or even employees with malicious intention can either damage or even engage in data breach. Cloud encryption protects and helps prevent employees from harming business..
         /// </summary>
@@ -29650,7 +29668,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_WICE_H1_Text5", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;li style=&quot;list-style-type: &apos;\2714&apos;;&quot;&gt; Cloud encryption is not just a secure solution for sharing and storing data. It is also configured to meet internal organizational constraints and relevant regulatory authorities, such as the Federal Information Security Management Act (FISMA), Federal Information Processing Standards (FIPS), Health Insurance Portability and Accountability Act (HIPAA), and Payment Card Industry Data Security Standard (PCI/DSS)..
         /// </summary>
@@ -32494,7 +32512,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_ZTCS_Conclusion_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Due to the pandemic, Zero Trust has stepped up its game. Since now companies have begun to decentralize their data, assets, applications, and services (DAAS) to different individuals through cloud infrastructure providers. And the fact that internal factors are responsible for 30% of data breaches today, the Zero Trust framework was created, to assist digital businesses in securing valuable assets. As per the Zero Trust model, trust is vulnerability. It indicates that no user, even if they are an employee,  [rest of string was truncated]&quot;;.
         /// </summary>
@@ -34952,7 +34970,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("ChangeEmailExistMailSubject", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Email change failed due to an internal error, please try again later or contact our support..
         /// </summary>
@@ -35565,6 +35583,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a Group !.
+        /// </summary>
+        public static string CreateGroupInfoTexts {
+            get {
+                return ResourceManager.GetString("CreateGroupInfoTexts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create group.
         /// </summary>
         public static string CreateGroupText {
@@ -36112,7 +36139,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("CustomerStoriesParagraph5", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to CARPE DIEM sought a reliable solution to protect both internal and client data. With AxCrypt, they were able to encrypt sensitive information, ensuring its security even in the event of theft. The transition to the paid version allowed the company to take advantage of the networked version, enabling multiple users to access encrypted data while keeping it secure. AxCrypt&apos;s competitive pricing further solidified it as the ideal solution..
         /// </summary>
@@ -37876,6 +37903,15 @@ namespace AxCrypt.Content {
         public static string EducationTitleText {
             get {
                 return ResourceManager.GetString("EducationTitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email already exist(s).
+        /// </summary>
+        public static string EmailAlreadyExistTexts {
+            get {
+                return ResourceManager.GetString("EmailAlreadyExistTexts", resourceCulture);
             }
         }
         
@@ -40076,6 +40112,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forever.
+        /// </summary>
+        public static string ForeverText {
+            get {
+                return ResourceManager.GetString("ForeverText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For everyone.
         /// </summary>
         public static string ForEveryoneLabel {
@@ -40199,6 +40244,15 @@ namespace AxCrypt.Content {
         public static string FreeTrialLabel {
             get {
                 return ResourceManager.GetString("FreeTrialLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From:.
+        /// </summary>
+        public static string FromText {
+            get {
+                return ResourceManager.GetString("FromText", resourceCulture);
             }
         }
         
@@ -41720,6 +41774,15 @@ namespace AxCrypt.Content {
         public static string GroupFeatureDescriptionText1 {
             get {
                 return ResourceManager.GetString("GroupFeatureDescriptionText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add users or Groups with whom you want to share this secret. If you don`t know about our &lt;strong&gt;Group Feature&lt;/strong&gt; yet, learn more and create your first one by the link.
+        /// </summary>
+        public static string GroupFeatureInfoText {
+            get {
+                return ResourceManager.GetString("GroupFeatureInfoText", resourceCulture);
             }
         }
         
@@ -43665,6 +43728,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inbox.
+        /// </summary>
+        public static string InboxText {
+            get {
+                return ResourceManager.GetString("InboxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are about to enable a dangerous option. If you are not careful, you may affect more data than you intend causing operations to take very long time, or breaking other softwares including the operating system. Are you sure?.
         /// </summary>
         public static string IncludeSubfoldersConfirmationBody {
@@ -45597,7 +45669,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can’t find the right role? Email your resume to &lt;a href=&quot;mailto:support@axcrypt.net&quot; style=&quot;color: #87CA4E; font-weight: 600&quot;&gt;apply@axcrypt.net&lt;/a&gt; to be considered for new positions in the future..
+        ///   Looks up a localized string similar to Can’t find the right role? Email your resume to &lt;a href=&quot;mailto:apply@axcrypt.net&quot; style=&quot;color: #87CA4E; font-weight: 600&quot;&gt;apply@axcrypt.net&lt;/a&gt; to be considered for new positions in the future..
         /// </summary>
         public static string Job_cant_find {
             get {
@@ -46620,6 +46692,15 @@ namespace AxCrypt.Content {
         public static string LoadMoreStoriesText {
             get {
                 return ResourceManager.GetString("LoadMoreStoriesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load More.
+        /// </summary>
+        public static string LoadMoreText {
+            get {
+                return ResourceManager.GetString("LoadMoreText", resourceCulture);
             }
         }
         
@@ -51461,6 +51542,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Message.
+        /// </summary>
+        public static string NewMessageText {
+            get {
+                return ResourceManager.GetString("NewMessageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a New Password.
         /// </summary>
         public static string NewPassphraseDialogTitle {
@@ -51920,11 +52010,29 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No items selected.
+        /// </summary>
+        public static string NoItemsSelectedText {
+            get {
+                return ResourceManager.GetString("NoItemsSelectedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string NoLabel {
             get {
                 return ResourceManager.GetString("NoLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (No messages found.).
+        /// </summary>
+        public static string NoMessagesFoundText {
+            get {
+                return ResourceManager.GetString("NoMessagesFoundText", resourceCulture);
             }
         }
         
@@ -52151,6 +52259,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Once.
+        /// </summary>
+        public static string OnceText {
+            get {
+                return ResourceManager.GetString("OnceText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1 free month.
         /// </summary>
         public static string OneFreeMonthLabel {
@@ -52363,6 +52480,15 @@ namespace AxCrypt.Content {
         public static string OtherPlatformsLabel {
             get {
                 return ResourceManager.GetString("OtherPlatformsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to others.
+        /// </summary>
+        public static string OthersText {
+            get {
+                return ResourceManager.GetString("OthersText", resourceCulture);
             }
         }
         
@@ -53556,6 +53682,15 @@ namespace AxCrypt.Content {
         public static string PCMagEditorsChoice2024 {
             get {
                 return ResourceManager.GetString("PCMagEditorsChoice2024", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PendingForApproval.
+        /// </summary>
+        public static string PendingForApprovalMasterKeyStatus {
+            get {
+                return ResourceManager.GetString("PendingForApprovalMasterKeyStatus", resourceCulture);
             }
         }
         
@@ -55369,7 +55504,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("PrivacyPolicyBlock1Text5", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to We also log some additional specific events that are determined by the server access and internal procedures. This includes:.
         /// </summary>
@@ -57095,6 +57230,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to read.
+        /// </summary>
+        public static string ReadText {
+            get {
+                return ResourceManager.GetString("ReadText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We urge you to re-attempt the payment ASAP to protect your sensitive data and continue enjoying the paid features..
         /// </summary>
         public static string ReAttemptPaymentText {
@@ -58471,6 +58615,114 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sales Enablement Tools.
+        /// </summary>
+        public static string ResellerHelpGuideHead1 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Marketing Collateral.
+        /// </summary>
+        public static string ResellerHelpGuideHead2 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brand Assets.
+        /// </summary>
+        public static string ResellerHelpGuideHead3 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Press &amp; Media.
+        /// </summary>
+        public static string ResellerHelpGuideHead4 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideHead4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guides &amp; Checklists.
+        /// </summary>
+        public static string ResellerHelpGuideHead5 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideHead5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual Assets.
+        /// </summary>
+        public static string ResellerHelpGuideHead6 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideHead6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A complete set of resources to present AxCrypt confidently; includes sales scripts, pitch ideas, objection handling tips, &amp; ready-to-use templates..
+        /// </summary>
+        public static string ResellerHelpGuideText1 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Includes brochures, use cases, &amp; testimonials, everything you need to communicate AxCrypt’s benefits clearly &amp; effectively to your target audience..
+        /// </summary>
+        public static string ResellerHelpGuideText2 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access official AxCrypt logos, partner-exclusive branding, &amp; visual guidelines to ensure your promotions are professional &amp; aligned with our identity..
+        /// </summary>
+        public static string ResellerHelpGuideText3 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Explore recent, press mentions, interviews &amp; testimonials that reinforce AxCrypt’s credibility &amp; reputation in the encryption space..
+        /// </summary>
+        public static string ResellerHelpGuideText4 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access helpful guides and checklists to simplify your sales process and assist with NIS2-aligned practices..
+        /// </summary>
+        public static string ResellerHelpGuideText5 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready-to-use graphics &amp; templates, including banner ads &amp; demos, to simplify campaign creation &amp; visual communication..
+        /// </summary>
+        public static string ResellerHelpGuideText6 {
+            get {
+                return ResourceManager.GetString("ResellerHelpGuideText6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reseller Help.
         /// </summary>
         public static string ResellerHelpLinkLabel {
@@ -58480,7 +58732,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do not edit the images without our permission..
+        ///   Looks up a localized string similar to Do not modify or edit the logos without prior written permission..
         /// </summary>
         public static string ResellerHelpMarketingBlock1ListItem1 {
             get {
@@ -58489,7 +58741,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Leave an empty space of 25% of the logotype dimensions from adjacent images or graphical elements..
+        ///   Looks up a localized string similar to Maintain a clear space around the logo equal to &lt;b&gt;25% of its height and width&lt;/b&gt;, free from any text, images, or graphic elements..
         /// </summary>
         public static string ResellerHelpMarketingBlock1ListItem2 {
             get {
@@ -58498,7 +58750,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You may use the reseller’s logo or AxCrypt’s regular logo in your own publications or website. You are free to do so as you comply to the following regulations:.
+        ///   Looks up a localized string similar to You may use either the AxCrypt logo or the Reseller logo in your own publications or on your website, provided the following guidelines are met:.
         /// </summary>
         public static string ResellerHelpMarketingBlock1Text1 {
             get {
@@ -58561,7 +58813,25 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authorized reseller logo.
+        ///   Looks up a localized string similar to Get Reseller Kit.
+        /// </summary>
+        public static string ResellerHelpMarketingKitLable {
+            get {
+                return ResourceManager.GetString("ResellerHelpMarketingKitLable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download sales scripts, branding assets, and marketing content to support your sales conversations and client outreach..
+        /// </summary>
+        public static string ResellerHelpMarketingParagraph {
+            get {
+                return ResourceManager.GetString("ResellerHelpMarketingParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sell &lt;label&gt;confidently&lt;/label&gt; &lt;b&gt;with &lt;/b&gt;&lt;span&gt;AxCrypt&lt;/span&gt;!.
         /// </summary>
         public static string ResellerHelpMarketingSubTitle {
             get {
@@ -59006,7 +59276,7 @@ namespace AxCrypt.Content {
         /// </summary>
         public static string SearchText {
             get {
-                return ResourceManager.GetString("searchText", resourceCulture);
+                return ResourceManager.GetString("SearchText", resourceCulture);
             }
         }
         
@@ -59659,11 +59929,29 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select all.
+        /// </summary>
+        public static string SelectAllText {
+            get {
+                return ResourceManager.GetString("SelectAllText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a group.
         /// </summary>
         public static string SelectGroupText {
             get {
                 return ResourceManager.GetString("SelectGroupText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an item to read.
+        /// </summary>
+        public static string SelectItemReadText {
+            get {
+                return ResourceManager.GetString("SelectItemReadText", resourceCulture);
             }
         }
         
@@ -62262,6 +62550,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To:.
+        /// </summary>
+        public static string ToText {
+            get {
+                return ResourceManager.GetString("ToText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transaction history.
         /// </summary>
         public static string TransactionHistoryTitle {
@@ -62745,6 +63042,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type your message here.
+        /// </summary>
+        public static string TypeYourMessageHerePlaceHolderText {
+            get {
+                return ResourceManager.GetString("TypeYourMessageHerePlaceHolderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Typography.
         /// </summary>
         public static string TypographyLabel {
@@ -62822,6 +63128,15 @@ namespace AxCrypt.Content {
         public static string UnlockMagicalFeaturesTitle {
             get {
                 return ResourceManager.GetString("UnlockMagicalFeaturesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to unread.
+        /// </summary>
+        public static string UnReadText {
+            get {
+                return ResourceManager.GetString("UnReadText", resourceCulture);
             }
         }
         
@@ -63515,6 +63830,24 @@ namespace AxCrypt.Content {
         public static string ViewPasswordTitle {
             get {
                 return ResourceManager.GetString("ViewPasswordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visibility:.
+        /// </summary>
+        public static string VisibilityText {
+            get {
+                return ResourceManager.GetString("VisibilityText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visible until:.
+        /// </summary>
+        public static string VisibleUntilText {
+            get {
+                return ResourceManager.GetString("VisibleUntilText", resourceCulture);
             }
         }
         
