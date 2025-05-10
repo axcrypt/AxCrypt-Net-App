@@ -1,14 +1,28 @@
 ﻿.sidebar {
   background: #FFFFFF;
   height: 100%;
-  max-width: 396px;
+  max-width: 100%;
 }
 
-.axc-icon {
+.navbar {
+  padding: 0 !important;
+}
+.navbar .container-fluid {
+  padding: 0 !important;
+}
+
+.sidemenu-axc-logo {
+  margin: 36px 66px 0 44px;
+  max-width: 286px;
+  max-height: 71px;
   content: url(/images/axcrypt_text.png);
-  padding: 10px 5px;
-  overflow: hidden;
-  max-width: 100%;
+}
+
+.sidemenu-axc-no-text-logo {
+  margin: 36px 20px 0 19px;
+  max-width: 65px;
+  max-height: 70px;
+  content: url(/images/axcryptIcon.png);
 }
 
 .account {
