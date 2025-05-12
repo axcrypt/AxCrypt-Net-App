@@ -39,13 +39,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.Fake", "..\tests\Ax
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.Mono.Test", "..\tests\AxCrypt.Mono.Test\AxCrypt.Mono.Test.csproj", "{5D5A8C9A-2081-4362-937C-695395D05152}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.App.Desktop", "AxCrypt.App.Desktop\AxCrypt.App.Desktop.csproj", "{6B54458A-0351-486B-82C0-F12E344E64E0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.App.Mobile", "AxCrypt.App.Mobile\AxCrypt.App.Mobile.csproj", "{57205477-12A7-4D47-951C-64A288A9D3DC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.App.Shared", "AxCrypt.App.Shared\AxCrypt.App.Shared.csproj", "{D89D70BD-82B4-4126-AE3C-204CC2229F85}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolutionItems", "SolutionItems\SolutionItems.csproj", "{B0E35A71-4431-4BD0-AB54-DE90590641EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.App.Shared.Desktop", "AxCrypt.App.Shared.Desktop\AxCrypt.App.Shared.Desktop.csproj", "{84D3C588-4193-413D-BEF1-44F2E6C7B3C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,18 +117,6 @@ Global
 		{5D5A8C9A-2081-4362-937C-695395D05152}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D5A8C9A-2081-4362-937C-695395D05152}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D5A8C9A-2081-4362-937C-695395D05152}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B54458A-0351-486B-82C0-F12E344E64E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B54458A-0351-486B-82C0-F12E344E64E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B54458A-0351-486B-82C0-F12E344E64E0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{6B54458A-0351-486B-82C0-F12E344E64E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B54458A-0351-486B-82C0-F12E344E64E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B54458A-0351-486B-82C0-F12E344E64E0}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{57205477-12A7-4D47-951C-64A288A9D3DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57205477-12A7-4D47-951C-64A288A9D3DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57205477-12A7-4D47-951C-64A288A9D3DC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{57205477-12A7-4D47-951C-64A288A9D3DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57205477-12A7-4D47-951C-64A288A9D3DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57205477-12A7-4D47-951C-64A288A9D3DC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{D89D70BD-82B4-4126-AE3C-204CC2229F85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D89D70BD-82B4-4126-AE3C-204CC2229F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D89D70BD-82B4-4126-AE3C-204CC2229F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -139,6 +125,10 @@ Global
 		{B0E35A71-4431-4BD0-AB54-DE90590641EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0E35A71-4431-4BD0-AB54-DE90590641EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0E35A71-4431-4BD0-AB54-DE90590641EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D3C588-4193-413D-BEF1-44F2E6C7B3C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D3C588-4193-413D-BEF1-44F2E6C7B3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D3C588-4193-413D-BEF1-44F2E6C7B3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D3C588-4193-413D-BEF1-44F2E6C7B3C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

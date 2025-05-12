@@ -1,0 +1,149 @@
+﻿@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.ViewModels.SecuredMessenger
+@using AxCrypt.Core.SecuredMessenger
+@using AxCrypt.Core.UI
+
+@using static AxCrypt.Abstractions.TypeResolve;
+
+@inject ManageSecMsgrViewModel ViewSecMsgrViewModel
+@inject IJSRuntime jsRuntime
+
+@if (ViewSecMsgrViewModel.Messenger != null && ViewSecMsgrViewModel.Messenger.ChildMessages != null && ViewSecMsgrViewModel.Messenger.ChildMessages.Any())
+{
+    int replyIndex = 0; string LatestMessageStyle = "";
+    @foreach (SecuredMessage messenger in ViewSecMsgrViewModel.Messenger.ChildMessages)
+    {
+        LatestMessageStyle = "display:none;";
+        if (!string.IsNullOrEmpty(messenger.Message.TheMessage))
+        {
+            LatestMessageStyle = "display:block;";
+        }
+
+        Guid parentId = messenger.ParentId == Guid.Empty ? messenger.Id : messenger.ParentId;
+
+        string messageFrom = messenger.Message.Username;
+        IEnumerable<string> messageToList = messenger.Message.ReceiverList.Select(re => re.User);
+        string messageToListText = string.Join(", ", messageToList);
+
+        string senderShortCode = messageFrom.Substring(0, 2).ToUpper();
+        IList<string> replyUserList = new List<string>();
+        if (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent || messageFrom == currentUser)
+        {
+            senderShortCode = messageToListText.Substring(0, 2).ToUpper();
+            replyUserList = new List<string> { messageFrom };
+        }
+        else
+        {
+            replyUserList = messageToList.Where(re => !re.Equals(currentUser)).ToList();
+            if (!replyUserList.Any(ru => ru == messageFrom))
+            {
+                replyUserList.Add(messageFrom);
+            }
+        }
+
+        bool showDeleteButton = (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom == currentUser) ||
+        (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom != currentUser);
+
+        string replyMesssageReceivers = string.Join(", ", replyUserList);
+
+        <div id="view-message-box">
+            <div class="view-section" id="expand-view-sec">
+                <table>
+                    <tbody @onclick="async()=>await ViewSecMsgrViewModel.ViewMessageById(messenger.Id)" style="cursor:pointer;">
+                        <tr>
+                            <td> <div class="acc-prfl fnt-small">@senderShortCode</div></td>
+                            <td style="line-height: normal; max-width: 235px; padding-left: 5px;">
+                                <div style="display: flex; align-items: center; gap: 5px ">
+                                    <label>From:</label>
+                                    <span class="email-txt-ovflw">@messenger.Message.Username</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 5px; padding-top: 5px;">
+                                    <label>To:</label>
+                                    <span class="email-txt-ovflw" style="padding-left:18px;">
+                                        @string.Join(", ", messageToList.Take(Utility.MaxReceiversToDisplay))
+
+                                        @if (messageToList.Count() > Utility.MaxReceiversToDisplay)
+                                        {
+                                            <span class="fnt-medium mre-user-txt">+@(messageToList.Count() - Utility.MaxReceiversToDisplay) others</span>
+                                        }
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="right-align" style="vertical-align: top;">
+                                <input type="button" class="rply-icon" id="reply-button-@messenger.Id"
+                                       data-id="@messenger.Id"
+                                       @onclick:stopPropagation="true"
+                                       @onclick="() => ViewSecMsgrViewModel.ReplyMessage(messenger.Id, parentId, replyMesssageReceivers)"
+                                       value="Reply" name="reply-button" />
+
+                                @if (showDeleteButton)
+                                {
+                                    <input type="button" name="delete-button" class="dlt-icon" value="Delete"
+                                           data-id="@messenger.Id"
+                                           @onclick:stopPropagation="true"
+                                           @onclick="async()=>await ViewSecMsgrViewModel.DeleteMessageById(messenger.Id, parentId, ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab)"
+                                           style="background-color: transparent; border: none;" />
+                                }
+                                <br />
+                                <label class="right-align grey-clr" style="font-size: 12px; font-weight: 600; padding-top: 5px;">@Utility.ToDateString(messenger.CreatedUtc.ToLocalTime())</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="visiblity-text fnt-small" colspan="2">
+                                @if (messenger.Message.VisibleUntil != DateTime.MaxValue)
+                                {
+                                    <span>Visible until:</span>
+                                    <span class="">@Utility.ToDateString(messenger.Message.VisibleUntil.ToLocalTime())</span>
+                                }
+                                else if (messenger.Message.Visibility == SecureMsgrVisibility.Once)
+                                {
+                                    <span>Visibility:</span>
+                                    <span class="">@messenger.Message.Visibility.ToString()</span>
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-msg message-content" id="secured-messenger-view-@messenger.Id" style="@LatestMessageStyle">
+                    @if (messenger.Message.TheMessage != null)
+                    {
+                        <textarea name="encryptedMessage" id="secured-mess-body" maxlength="100000" @bind="messenger.Message.TheMessage" readonly autofocus></textarea>
+                    }
+                </div>
+                @if (messenger.ShowLoadingWheel)
+                {
+                    <div class="text-msg message-content messager-loading" id="messenger-view-loading-section-@messenger.Id">
+                        <span>@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage</span>
+                    </div>
+                }
+            </div>
+        </div>
+
+        replyIndex++;
+    }
+}
+
+@code {
+
+    string currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address;
+
+    protected override void OnInitialized()
+    {
+        ViewSecMsgrViewModel.OnUpdateViewState += UpdatePageState;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+        }
+    }
+
+    private void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+}

@@ -5,7 +5,7 @@ using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
 using Windows.Storage;
 using WinRT.Interop;
-using AxCrypt.App.Desktop.Services.Interface;
+using AxCrypt.App.Shared.Desktop.Services.Interface;
 
 using static AxCrypt.Abstractions.TypeResolve;
 

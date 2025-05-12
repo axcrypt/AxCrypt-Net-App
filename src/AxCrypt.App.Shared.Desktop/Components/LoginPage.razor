@@ -1,0 +1,220 @@
+﻿@page "/login"
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.App.Shared.Utility
+@using AxCrypt.App.Shared.Utility.View
+@using AxCrypt.Content
+@using AxCrypt.Core
+@using AxCrypt.Core.UI.ViewModel
+
+@inject IJSRuntime JSRuntime;
+@inject LogOnViewModel LogOnViewModel
+
+@if (LogOnViewModel.LogOnAccountModel != null)
+{
+    <section class="content">
+        <article class="left-section" id="content-wrap">
+            <h1 class="login-title hg-img">@Texts.WelcomeBackTitle</h1>
+            <span class="sub-head">Log in</span>
+            <EditForm Model="@LogOnViewModel.LogOnAccountModel" OnValidSubmit="ButtonLogIn_Click" class="signup-sec">
+                @if (!string.IsNullOrEmpty(LogOnViewModel.ErrorMessage))
+                {
+                    <div class="alert alert-danger">@LogOnViewModel.ErrorMessage</div>
+                }
+                <div style="display:flex;">
+                    <div style="width:100%;">
+                        <label>@Texts.EmailLabel</label>
+                        @if (!IsEmailReadOnly)
+                        {
+                            <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" tabindex="1" />
+                        }
+                        else {
+                            <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" tabindex="1" readonly="readonly" />
+                        }
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail))
+                {
+                    <div style="width:100%;">
+                        <a href="" class="nav-link grn-clr" style="float:right;" tabindex="3" @onclick="@LogOnViewModel.ClearAllSettingsAndRestartAsync">@Texts.SwitchUserButtonText</a>
+                    </div>
+                }
+                <div>
+                    <label>@Texts.PassphrasePrompt</label>
+                    <div style="position:relative; display:inline-block; width:100%;">
+                        <i class="@PasswordIconClass" @onclick="TogglePassword"></i>
+                        <input type="@PasswordInputType" id="password-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" tabindex="2" />
+                    </div>
+                </div>
+                <br />
+                @* <div class="check-bx" style="margin: 15px 0px;">
+            <input type="checkbox" checked="@LogOnViewModel.RememberMe" @bind-value="LogOnViewModel.RememberMe" />
+            <span class="che-txt">@Texts.PromptKeepMeSignedIn</span>
+            </div> *@
+
+                <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;" tabindex="3">Log in</button>
+                <div class="signup-link">
+                    <div style="display:inline-flex; align-items:center;">
+                        <span class="che-txt"> Don't have an account?</span>
+                        <NavLink class="nav-link grn-clr" @onclick="CreateNewAccountLabel_LinkClicked" tabindex="4">
+                            <span>@Texts.PromptSignUp</span>
+                        </NavLink>
+                    </div><br />
+                    <NavLink class="nav-link grn-clr" @onclick="ForgetPassword_ButtonClicked" tabindex="5">
+                        <span>@Texts.PasswordResetShortLink?</span>
+                    </NavLink>
+                </div>
+
+                <div class="che-txt text-center" style="color:#494949; margin-top:20px;">You agree to our <NavLink class="grn-clr" @onclick="RedirectToPrivacyPolicy">Privacy Policy</NavLink> and <NavLink class="grn-clr" @onclick="RedirectToTermsOfUse">Terms Of Use.</NavLink></div>
+            </EditForm>
+        </article>
+        <article class="right-section">
+            <div class="signin-right-img">
+                <div class="login-lang-drpdwn">
+                    <AxCrypt.App.Shared.Desktop.Components.Main.Header.LanguagesComponent />
+                </div>
+            </div>
+        </article>
+    </section>
+}
+@code {
+
+    private bool isPasswordVisible = false;
+
+    private string PasswordInputType => isPasswordVisible ? "text" : "password";
+
+    private string PasswordIconClass =>
+        isPasswordVisible ? "fa-eye-slash" : "fa-eye";
+
+    private void TogglePassword()
+    {
+        isPasswordVisible = !isPasswordVisible;
+    }
+
+    public bool IsEmailReadOnly { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        IsEmailReadOnly = !string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail);
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        string autoFocusFiled = string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? "useremail-txtbox" : "password-txtbox";
+        await JSRuntime.InvokeVoidAsync("loginFunctions.focusElement", autoFocusFiled);
+    }
+
+    private async void ButtonLogIn_Click()
+    {
+        LogOnViewModel.PageResult = DialogResult.None;
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
+        {
+            if (!await AdHocValidationDueToMonoLimitations())
+            {
+                await RefreshComponentAsync();
+                return;
+            }
+        }
+
+        LogOnViewModel.PageResult = DialogResult.OK;
+    }
+
+    private async Task RefreshComponentAsync()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private async Task<bool> AdHocValidationDueToMonoLimitations()
+    {
+        if (!AdHocValidateUserEmail())
+        {
+            return false;
+        }
+
+        if (!string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.EncryptedFileFullName))
+        {
+            return await AdHocValidatePassphraseForFile();
+        }
+
+        if (!await AdHocValidatePassphrase())
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool AdHocValidateUserEmail()
+    {
+        LogOnViewModel.ErrorMessage = "";
+        if (string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail))
+        {
+            LogOnViewModel.ErrorMessage = Texts.BadEmail;
+            return false;
+        }
+
+        if (LogOnViewModel.LogOnAccountModel[nameof(AccountEmailViewModel.UserEmail)].Length > 0)
+        {
+            LogOnViewModel.ErrorMessage = Texts.BadEmail;
+            return false;
+        }
+
+        return true;
+    }
+
+    private async Task<bool> AdHocValidatePassphrase()
+    {
+        LogOnViewModel.ErrorMessage = "";
+        if (!await LogOnViewModel.LogOnAccountModel.ValidateItemAsync(nameof(LogOnViewModel.LogOnAccountModel.PasswordText)))
+        {
+            LogOnViewModel.ErrorMessage = Texts.WrongPassphrase;
+            return false;
+        }
+        return true;
+    }
+
+    private async Task<bool> AdHocValidatePassphraseForFile()
+    {
+        LogOnViewModel.ErrorMessage = "";
+        if (!await LogOnViewModel.LogOnAccountModel.ValidateItemAsync(nameof(LogOnViewModel.LogOnAccountModel.EncryptedFileFullName)))
+        {
+            LogOnViewModel.ErrorMessage = Texts.WrongPassphrase;
+            return false;
+        }
+        return true;
+    }
+
+    private void CreateNewAccountLabel_LinkClicked(EventArgs e)
+    {
+        BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToSignUpWebPage);
+    }
+
+    private void ForgetPassword_ButtonClicked(EventArgs e)
+    {
+        BrowseUtility.RedirectToAccountWebUrl(Texts.PasswordResetHyperLink);
+    }
+
+    private void RedirectToTermsOfUse(EventArgs e)
+    {
+        BrowseUtility.RedirectTo("https://axcrypt.net/information/terms-of-use/");
+    }
+
+    private void RedirectToPrivacyPolicy(EventArgs e)
+    {
+        BrowseUtility.RedirectTo("https://axcrypt.net/information/privacy-policy/");
+    }
+}
+
+<script type="text/javascript">
+    window.loginFunctions = {
+        focusElement: function (id) {
+            const element = document.getElementById(id);
+            element.focus();
+        }
+    }
+</script>

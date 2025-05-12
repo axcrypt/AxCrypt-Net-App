@@ -1,0 +1,161 @@
+﻿@using AxCrypt.Api.Model
+@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+
+@inject SupportViewModel SupportViewModel
+@inject LogOnViewModel LogOnModel
+
+@inject IJSRuntime _jsRuntime
+@inject NavigationManager _navigationManager
+
+<div class="mb-sec">
+    <NavLink class="mb-title flex-start" href="mainpagemobile" style="align-items: center;">
+        <img class="back-btn" src="" alt="go-back-img" />
+        <span class="goback-text">@Texts.PromptSupport</span>
+    </NavLink>
+</div>
+
+<div class="row">
+    <div class="medium-12 columns page-title-container">
+        <h1 class="page-title">
+            @LogOnModel.SupportPageTitle
+        </h1>
+    </div>
+</div>
+
+<div class="medium-12 columns support">
+     <p class="sub-head-clr hide-txt">@(PageDescription)</p>
+
+    @if (!string.IsNullOrEmpty(SupportViewModel.ErrorMessage))
+    {
+        <div class="error-message">@SupportViewModel.ErrorMessage</div>
+    }
+    @if (LogOnModel.SubscriptionLevel != SubscriptionLevel.Free)
+    {
+        <div id="support-body-section" class="suprt-max-height" style="min-height:50vh;max-height:82vh;">
+            <div class="label-text">
+                <label>@Texts.SupportBodyPrompt</label>
+            </div>
+            <div style="display:flex; padding:8px 0px; gap: 40px;">
+                <a style="text-decoration:none;" @onclick='() => OpenWebPage("https://axcrypt.net/information/guides/get-started/desktop/")'>
+                    <div class="link-box">
+                        <img class="idea-img" src="" alt="idea-img" />
+                        <div style="padding: 5px 0px; line-height: 16px;">
+                            <span class="lable-txt">@Texts.SupportGetStartedVideoText</span><br />
+                            <span class="link-txt">@Texts.GuidesGetStartedLinkLabelWithPlatform</span>
+                            <img class="arrow-img" src="" alt="arrow-img" />
+                        </div>
+                    </div>
+                </a>
+                <a style="text-decoration:none;" @onclick='() => OpenWebPage("https://axcrypt.net/helpcenter/")'>
+                    <div class="link-box">
+                        <img class="guides-img" src="" alt="guides-img" />
+                        <div style="padding: 5px 0px; line-height: 16px;">
+                            <span class="lable-txt">Let's explore our</span><br />
+                            <span class="link-txt">@Texts.GuidesLinkLabel</span>
+                            <img class="arrow-img" src="" alt="arrow-img" />
+                        </div>
+                    </div>
+                </a>
+                <a style="text-decoration:none;" @onclick='() => OpenWebPage("https://axcrypt.net/information/faq/")'>
+                    <div class="link-box">
+                        <img class="faq-img" src="" alt="faq-img" />
+                        <div style="padding: 5px 0px; line-height: 16px;">
+                            <span class="lable-txt">@Texts.SupportFAQText</span><br />
+                            <span class="link-txt">@((MarkupString)Texts.SupportFAQPageText)</span>
+                            <img class="arrow-img" src="" alt="arrow-img" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div style="padding-top:30px;">
+                <span class="desc-txt">@Texts.SupportDescribeLabel</span>
+            </div>
+            <EditForm Model="@SupportViewModel" OnValidSubmit="SubmitSupportAsync">
+                <div>
+                    <textarea class="sup-text-blur" style="border-radius: 16px;min-height: 35vh;width: 100%;max-height: 50vh;padding:10px 20px;" placeholder="@Texts.SupportBodyPlaceholderText" @bind="SupportViewModel.Body" tabindex=1>
+                                        </textarea>
+                </div>
+                <div class="btn-sec">
+                    <input type="reset" class="button border btn-large font-medium btn-hide" value="Reset" @onclick="ResetSupport" />
+                    <input type="submit" class="button success btn-large font-medium" value="@Texts.ButtonSendText" />
+                </div>
+            </EditForm>
+        </div>
+    }
+    else
+    {
+        <div id="support-body-section">
+            <div class="label-text free-sec">
+                <label>Sorry,</label>
+                <p class="SupWarngText">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
+                <img class="support-image" src="" alt="support-img" />
+            </div>
+        </div>
+    }
+
+</div>
+
+@code {
+    private bool IsWideScreen { get; set; }
+    private bool IsLoading { get; set; }
+
+    private string PageDescription
+    {
+        get
+        {
+            switch (LogOnModel.SubscriptionLevel)
+            {
+                case SubscriptionLevel.Business:
+                    return Texts.BusinessSupportInfo;
+                case SubscriptionLevel.Premium:
+                    return Texts.PremiumSupportInfo;
+                case SubscriptionLevel.PasswordManager:
+                    return Texts.SupportPremiumIntro;
+                default:
+                    return string.Empty;
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    public async Task InitializeScreenPropertiesAsync()
+    {
+        IsLoading = true;
+        try
+        {
+            IsWideScreen = await Utility.IsWideScreenAsync(_jsRuntime);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error determining screen width: {ex.Message}");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private async void SubmitSupportAsync()
+    {
+        await SupportViewModel.SubmitSupportAsync(LogOnModel.SubscriptionLevel);
+    }
+
+    private void OpenWebPage(string url)
+    {
+        Core.BrowseUtility.RedirectTo(url);
+    }
+
+    private void ResetSupport()
+    {
+        SupportViewModel.Body = "";
+        SupportViewModel.Subject = "";
+        SupportViewModel.ErrorMessage = "";
+    }
+}

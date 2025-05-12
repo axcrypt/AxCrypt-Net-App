@@ -96,8 +96,8 @@ public class FilePasswordDialogViewModel : ViewModelBase
 
 
 
-//using AxCrypt.App.Desktop.Models;
-//using AxCrypt.App.Desktop.Utility;
+//using AxCrypt.App.Shared.Desktop.Models;
+//using AxCrypt.App.Shared.Desktop.Utility;
 //using AxCrypt.Content;
 //using AxCrypt.Core.UI.ViewModel;
 //using AxCrypt.Core.Extensions;

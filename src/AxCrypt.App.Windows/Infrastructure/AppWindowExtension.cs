@@ -1,4 +1,4 @@
-﻿using AxCrypt.App.Desktop.Code;
+﻿using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.Interface;

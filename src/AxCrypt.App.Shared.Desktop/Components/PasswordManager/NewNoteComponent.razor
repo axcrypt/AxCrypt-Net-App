@@ -1,0 +1,79 @@
+﻿@using AxCrypt.Api.Model.Secret
+@using AxCrypt.App.Shared.ViewModels.Secret
+@using AxCrypt.App.Shared.Helpers
+@using AxCrypt.App.Shared.Services.Interface
+@using AxCrypt.Content
+
+@inject IStatusAlertService StatusAlertService;
+@inject NewSecretViewModel newSecretViewModel
+@inject NavigationManager navigationManager;
+@inject SecretService secretService
+
+<div class="page-max-height" style="width: 100%;">
+    <div class="page-heading">
+        <h3 class="password-creation">
+            @Texts.AddNoteTitle
+        </h3>
+    </div>
+    <div class="parent-container">
+        <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
+        <EditForm Model="@newSecretViewModel.Secret.Note" OnValidSubmit="SavePassword" @ref="editForm">
+            <DataAnnotationsValidator />
+            <div class="row">
+                <ul class="clean-up sub-head-clr" style=" list-style:none; ">
+                    <li>
+                        <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
+                        <textarea id="pwd-desc-inp"
+                                  placeholder="example" maxlength="100000"
+                                  style="color:#494949 !important;" @bind="@newSecretViewModel.Secret.Note.SecretDesc" rows="2"
+                                  class="@GetInputClass(nameof(newSecretViewModel.Secret.Note.SecretDesc))"></textarea>
+                        <ValidationMessage For="@(() => newSecretViewModel.Secret.Note.SecretDesc)" />
+                    </li>
+                    <li>
+                        <label for="Note_Note">@Texts.NoteLabel:</label>
+                        <textarea type="text" class="secret-note-section secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949 !important;" placeholder="example" @bind="@newSecretViewModel.Secret.Note.Note"></textarea>
+                    </li>
+                    <li>
+                        <div class="btn-sec-new-edit">
+                            <button type="submit" class="button btn-extra-small success">@Texts.ButtonSaveText</button>
+                            <NavLink href="passwordManager">
+                                <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
+                            </NavLink>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private EditForm editForm;
+
+    private string GetInputClass(string propertyName)
+    {
+        FieldIdentifier fieldIdentifier = new FieldIdentifier(newSecretViewModel.Secret.Note, propertyName);
+        bool isFieldValid = editForm.EditContext.GetValidationMessages(fieldIdentifier).Any();
+
+        return isFieldValid ? "input-error" : string.Empty;
+    }
+
+    protected override void OnInitialized()
+    {
+        secretService.SecretType = SecretType.Note;
+        newSecretViewModel = new NewSecretViewModel(secretService);
+    }
+
+    private async Task SavePassword()
+    {
+        bool success = await newSecretViewModel.SaveSecretAsync();
+        if (success)
+        {
+            StatusAlertService.Success("Your new Note entry has been saved.");
+            navigationManager.NavigateTo("/passwordManager");
+            return;
+        }
+
+        StatusAlertService.Error(newSecretViewModel.ErrorMessage);
+    }
+}

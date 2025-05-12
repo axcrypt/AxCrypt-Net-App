@@ -1,0 +1,168 @@
+﻿@using AxCrypt.Api.Model
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Models
+@using AxCrypt.Common
+@using AxCrypt.Content
+@using AxCrypt.Core
+@using AxCrypt.Core.UI
+
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject ProfileViewModel? ProfileViewModel
+
+<div class="desk-acnt-popup model-popup" style="display:none;" id="accounts-dropdown-popup">
+    <span class="font-bold">@Texts.AccountLabel</span>
+    <div class="acc-subs">
+        <div class="accnt-prfl">
+            <h3 class="txt-clr">
+                <img style="max-width:30px;width:30px;height:30px !important;" src="@SubscriptionIcon()" alt="subs-level icon" />
+            </h3>
+        </div>
+
+        <div>
+            <div style="text-align:left;">
+                <img class="" src="images/default/IcoMssg.svg" alt="go-back-img" />
+                <span class="grey-clr font-high text-overlfow" title="@ProfileViewModel?.Account?.UserEmail">@ProfileViewModel?.Account?.UserEmail</span>
+            </div>
+            @if (ProfileViewModel?.Account?.SubscriptionLevel != SubscriptionLevel.Free)
+            {
+                <div style="text-align:left;">
+                    <img class="" src="images/default/IcoClndr.svg" alt="go-back-img" />
+                    <span class="grey-clr font-high" style="padding-left: 5px;">@Texts.ExpireInLabelFirstPart <span class="txt-clr">@ProfileViewModel?.Account?.DaysLeft</span> days</span>
+                </div>
+            }
+            else
+            {
+                <button class="font-bold acnt-upg" style="width: 154px;height: 37px;text-align: center;" @onclick="ProfileViewModel.UpgradeSubscription"> Upgrade now</button>
+            }
+        </div>
+    </div>
+
+    <div class="manage-acc-sec font-medium">
+        <div class="profile-option-container">
+            <NavLink class="nav-link" id="key-management-button-action">
+                <img class="kym-sec" src="images/default/IcoKMngmnt.svg" alt="go-back-img" />
+                <span>@Texts.KeyManagementToolStripMenuItemText</span>
+                <img class="next-arrow" />
+            </NavLink>
+        </div>
+        <div class="profile-option-container">
+            <NavLink class="nav-link" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
+                <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
+                <span>Password change</span>
+            </NavLink>
+        </div>
+        <div class="profile-option-container">
+            <NavLink class="nav-link" @onclick="()=> ProfileViewModel.ClearAllSettingsAndRestartAsync()">
+                <img class="" src="images/default/IcoClrSttngs.svg" alt="go-back-img" />
+                <span>@Texts.OptionsClearAllSettingsAndExitToolStripMenuItemText</span>
+            </NavLink>
+        </div>
+        <div class="profile-option-container">
+            <NavLink class="nav-link" id="subscription-details-button-action">
+                <img class="" src="images/default/IcoSubsDetails.svg" alt="go-back-img" />
+                <span>@Texts.SubscriptionDetailsTitle</span>
+                <img class="next-arrow" />
+            </NavLink>
+        </div>
+        <NavLink class="nav-link" @onclick="ProfileViewModel.RedirectToMyAxCryptIDPage">
+            <span>@Texts.DebugManageAccountToolStripMenuItemText</span>
+            <img class="mng-accnt" src="" alt="go-back-img" style="float:right" />
+        </NavLink>
+        <NavLink class="nav-link" @onclick="ProfileViewModel.ViewHelpMenuItemClick">
+            <span>@Texts.HelpToolStripMenuItemText</span>
+            <img class="mng-accnt" src="" alt="go-back-img" style="float:right" />
+        </NavLink>
+        <NavLink class="nav-link" href="" @onclick="async (e)=> await ProfileViewModel.SignOut()">
+            <span class="log-out-clr font-medium">@Texts.LogOffText</span>
+        </NavLink>
+        <NavLink class="nav-link" @onclick="(e)=> ProfileViewModel.ExitMenuItem_Click(e)">
+            <span class="font-medium">@Texts.ExitToolStripMenuItemText</span>
+        </NavLink>
+    </div>
+</div>
+
+<div class="key-mngnt-Popup model-popup sub-pop1" style="display:none;" id="key-management-popup">
+    <div class="font-medium left-align" id="key-management-popup">
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">Import Someone`s Public Sharing Key</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">@Texts.ExportSharingKeyToolStripMenuItemText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => {  await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">@Texts.ImportMyPrivateKeyToolStripMenuItemText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">@Texts.ExportMyPrivateKeyToolStripMenuItemText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">@Texts.CreateAccountToolStripMenuItemText</dd>
+    </div>
+</div>
+
+<div class="subs-dtls-popup model-popup sub-pop2" style="display:none;" id="subscription-details-side-popup">
+    <div class="close-img" id="close-subscription-details-side-popup"></div>
+    <div class="center-column" style="padding:0;">
+        <div>
+            <img class="ico-user-dk" src="" alt="Ico-user" />
+        </div>
+        <div>
+            <span class="txt-clr">@Texts.PromptSubscription:</span>
+            <span class="font-bold sub-head-clr">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
+            @*             @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
+                {
+                <span class="txt-clr">Company:</span>
+                <span class="font-bold">AxCrypt</span> <br />
+                } *@
+
+            @if (ProfileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
+            {
+                <span class="txt-clr">Type:</span>
+                <span class="font-bold sub-head-clr">@ProfileViewModel.Account.Subscription</span> <br />
+
+                <span class="txt-clr">Valid until:</span>
+                <span class="font-bold sub-head-clr">@ProfileViewModel.ValidFormatted</span> <br />
+
+                <a class="can-subs" @onclick="ProfileViewModel.CancelSubscription">@Texts.CancelSubscriptionPrompt</a>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await ProfileViewModel!.InitializeAsync();
+
+        await base.OnInitializedAsync();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            base.OnAfterRender(firstRender);
+            //StateHasChanged();
+        }
+    }
+
+    private string SubscriptionIcon()
+    {
+        string subscriptionLevel = ProfileViewModel?.Account?.SubscriptionLevel.ToString()!;
+        switch (subscriptionLevel)
+        {
+            case "PasswordManager":
+                return "/images/PasswordManager/icoPM.svg";
+
+            case "Premium":
+                return "/images/Premium/IcoPrm.svg";
+
+            case "Business":
+                return "/images/Business/IcoBus.svg";
+
+            default:
+                return "/images/free/IcoVwr.svg";
+
+        }
+    }
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+}

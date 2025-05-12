@@ -1,0 +1,62 @@
+﻿@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.Services
+
+@inject ProgressBarService ProgressBarService
+
+@if (IsVisible)
+{
+    @if (Utility.IsMainMenuHidden)
+    {
+        <div class="progress-circle-sec">
+@*             <span>Click</span>
+ *@            <div class="progress-wrapper">
+                <svg class="progress-circle" width="64" height="64" viewBox="0 0 64 64">
+                    <circle class="progress-background" cx="32" cy="32" r="28" />
+                    <circle class="progress-value" cx="32" cy="32" r="28"
+                            style="stroke-dasharray: 175.8; stroke-dashoffset:@(175.8 - (@ProgressBarService.Percentage * 1.758))" />
+                </svg>
+                <div class="progress-text">@ProgressBarService.Percentage%</div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="progres-sec">
+            <div class="fist-rw">
+                <div class=""><label class="progres-fle-txt" title="@ProgressBarService.Filename">@ProgressBarService.Filename</label></div>
+                <div>
+                    <label style="margin-right: 0 !important;">@ProgressBarService.Percentage%</label>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bubble-start" style="left:@ProgressBarService.Percentage%;"></div>
+                <div class="progress-bar" style="width:@ProgressBarService.Percentage%"></div>
+                <div class="progress-bubble-end"></div>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    public bool IsVisible { get; set; }
+
+    protected override void OnInitialized()
+    {
+        ProgressBarService.OnProgressBarVisibilityChanged += UpdateIndicatorVisibility;
+    }
+
+    private void UpdateIndicatorVisibility(bool isVisible)
+    {
+        IsVisible = isVisible;
+
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void ClosePopup()
+    {
+        ProgressBarService.Hide();
+    }
+}

@@ -11,6 +11,8 @@ namespace AxCrypt.App.Shared.ViewModels;
 
 public class FileDetails : Core.UI.ViewModel.ViewModelBase
 {
+    private ActiveFile _activeFile;
+
     public FileDetails(ActiveFile file)
     {
         if (file == null)
@@ -63,6 +65,14 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
         }
 
         return New<KnownIdentities>().DefaultEncryptionIdentity;
+    }
+
+    public ActiveFile ActiveFile
+    {
+        get
+        {
+            return _activeFile;
+        }
     }
 
     public string FileName

@@ -1,0 +1,306 @@
+﻿@using AxCrypt.Api.Model
+@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.Desktop.ViewModels.Home
+@using AxCrypt.Content
+@using AxCrypt.Core
+@using AxCrypt.Core.UI
+@using System.Collections.ObjectModel
+@using Microsoft.JSInterop
+
+@inject ActionsViewModel? homeActionModel
+@inject IJSRuntime jsRunTime
+
+<div class="home-body" style="margin-top: 15px;">
+    <div style="display:block; margin-bottom: 28px; width:63%">
+        <h3 class="fle-nme fnt-sze">Actions</h3>
+        <div class="" style="display:flex;">
+
+            <div class="act-box" @onclick="async ()=> await homeActionModel!.OpenFile()" @onmouseover='@(() => ShowPopup("open"))' @onmouseout='@(() => HidePopup())'>
+                <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
+                <span class="text-size">@Texts.OpenEncryptedToolStripMenuItemText</span>
+                @if (isHovered && hoveredElement == "open")
+                {
+                    <div class="home-hover text-center" style="background-color:#fff;">
+                        <span class="txt-clr font-medium">@Texts.OpenToolStripButtonToolTipText</span>
+                    </div>
+                }
+            </div>
+
+            <div class="act-box" disabled="@homeActionModel!.EncryptButtonEnabled" @onclick="async ()=> await homeActionModel!.SecureFile()" @onmouseover='@(() => ShowPopup("secure"))' @onmouseout='@(() => HidePopup())'>
+                <img class="act-img scr-act" src="" alt="scr-img" />
+                <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
+                @if (isHovered && hoveredElement == "secure")
+                {
+                    <div class="home-hover text-center" style="background-color:#fff;">
+                        <span class="txt-clr font-medium">@Texts.EncryptToolStripButtonToolTipText</span>
+                    </div>
+                }
+            </div>
+            <div class="act-box" @onclick="async ()=> await homeActionModel.StopSecuringFile()" @onmouseover='@(() => ShowPopup("stop") )' @onmouseout='@(() => HidePopup() )'>
+                <img class="act-img stpscr-act" src="" alt="stpscr-img" />
+                <span class="text-size">@Texts.DecryptToolStripMenuItemText</span>
+                @if (isHovered && hoveredElement == "stop")
+                {
+                    <div class="home-hover text-center" style="background-color:#fff;">
+                        <span class="txt-clr font-medium">@Texts.DecryptButtonTooltipText</span>
+                    </div>
+                }
+            </div>
+            @if (!homeActionModel!.KeyShareButtonEnabled)
+            {
+                <div class="popup-container" disabled="@homeActionModel.KeyShareButtonEnabled">
+                    <div class="hover-trigger" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
+                        <div class="act-box shre-box" style="background-color:#D9D9D9;">
+                            <img class="act-img vwr-shrks-act" src="" alt="shrks-img" /><span class="text-size">@Texts.ShareKeysToolStripMenuItemText</span>
+                        </div>
+                    </div>
+
+                    @if (isHovered && hoveredElement == "share")
+                    {
+                        <div class="popup-section">
+                            <div class="free-color" id="upgrade-sec" style="padding:10px; text-align:center; border-radius:5px;">
+                                <span style="color:white;">
+                                    Upgrade to access this <strong>feature!</strong>
+                                </span>
+                                <button class="upgrd-btn font-medium btn-medium" @onclick="() => homeActionModel.UpgradeDialog()" style="margin: 0 auto;">@Texts.UpgradeText</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="act-box" @onclick="async(e)=> await homeActionModel.ShareKeysAsync(e)" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
+                    <img class="act-img shrks-act" src="" alt="shrks-img" />
+                    <span class="text-size">Share</span>
+                    @if (isHovered && hoveredElement == "share")
+                    {
+                        <div class="home-hover text-center" style="background-color:#fff;">
+                            <span class="txt-clr font-medium">@Texts.KeySharingToolTip</span>
+                        </div>
+                    }
+                </div>
+            }
+
+            @* @if (Utility.IsMainMenuHidden && SubscriptionLevel == SubscriptionLevel.Premium)
+                {
+                <div class="act-box"><img class="act-img new-mssg" src="" alt="scr-img" /><span class="text-size">New message</span></div>
+                } *@
+            @if (homeActionModel.HasBusiness)
+            {
+                <div class="act-box" @onmouseover='@( () => ShowPopup("master key") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.RedirectToAccountSite">
+                    <img class="act-img mtrkey-act" src="" alt="mtrkey-img" /><span class="text-size">@Texts.MasterKeyTitle</span>
+                    @if (isHovered && hoveredElement == "master key")
+                    {
+                        <div class="home-hover text-center" style="background-color:#fff;">
+                            <span class="txt-clr font-medium">Go to Masterkey</span>
+                        </div>
+                    }
+                </div>
+                @if (Utility.IsMainMenuHidden)
+                {
+                    <div class="act-box" @onmouseover='@( () => ShowPopup("create groups") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.RedirectToAccountSite">
+                        <img class="act-img grp-act" src="" alt="grp-img" /><span class="text-size">Create groups</span>
+                        @if (isHovered && hoveredElement == "create groups")
+                        {
+                            <div class="home-hover text-center" style="background-color:#fff;">
+                                <span class="txt-clr font-medium">Go to Groups</span>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+            @if (homeActionModel.IsFilesPending)
+            {
+                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => ShowPopup("clean") )' @onmouseout='@( () => HidePopup() )' @onclick="async (e) => await homeActionModel.CleanAndRemoveOpenFilesButton_Click(e)">
+                    <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">@Texts.CleanUpPromptText</span>
+                    @if (isHovered && hoveredElement == "clean")
+                    {
+                        <div class="home-hover text-center" style="background-color:#fff;">
+                            <span class="txt-clr font-medium">@Texts.CloseAndRemoveOpenFilesToolStripButtonToolTipText</span>
+                        </div>
+                    }
+                </div>
+            }
+            @if (Utility.IsMainMenuHidden && homeActionModel.HasNoSubscription)
+            {
+                <div class="info-box" style="margin-top:21px; padding: 7px 5px;">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2"><img class="icosrv" src="" alt="grp-img" /></td>
+                                <td class="info-txt">Tell us what you think</td>
+                            </tr>
+                            <tr @onclick="homeActionModel.OpenFeedbackPopup">
+                                <td class="gt-stred-txt" style="cursor:pointer">Submit now <img class="arwrgt-img" /></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2"><img class="icoidea" src="" alt="grp-img" /></td>
+                                <td class="info-txt">@Texts.SupportGetStartedVideoText</td>
+                            </tr>
+                            <tr>
+                                <a style="text-decoration:none;" @onclick="OpenGuidesGetStartedPage">
+                                <td class="gt-stred-txt" style="cursor:pointer">@Texts.GetStartedLinkLabel <img class="arwrgt-img" /></td>
+                                </a>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    @if (homeActionModel.HasBusiness)
+    {
+        <div>
+            <label class="fle-nme fnt-sze" style="padding-bottom:20px;">Active subscriptions</label>
+            <div class="actv-subs">
+                @* <div class="battery">
+                    <div class="battery-head"> </div>
+                    <div class="battery-body" id="battery-body">
+                    <div class="charge-level">
+                    <span style="text-align: center; margin:auto auto;"> @homeActionModel.MembersCount/<span style="font-weight:bold;">@homeActionModel.TotalMembers</span></span>
+                    </div>
+                    </div>
+                    </div> *@
+                <div class="center-column" style="flex-direction: column;padding: 10px;">
+                    <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="homeActionModel.RedirectToAccountWebUrl">@Texts.BusinessSubscriptionRenewMenu<img class="rnw-btn" src="" alt="img" /></button>
+                    <button class="subs-btn" style="background-color: #000;  margin-bottom: 0px;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">@Texts.AddUsersText<img class="add-usr" src="" alt="img" /></button>
+                </div>
+            </div>
+        </div>
+    }
+    else if (homeActionModel.HasPremium)
+    {
+        <div style="display: block;">
+            <div style="display:flex; min-width: 340px; gap: 10px;">
+                <label class="fle-nme fnt-sze">@Texts.PromptSubscription</label>
+                <img class="ico-hidden" src="" @onclick="ToggleSection" alt="hand-img" style="display: none;" id="toggleImageClosed" />
+                <img class="ico-eye" src="" @onclick="ToggleSection" alt="hand-img" style="display: block;" id="toggleImageOpen" />
+            </div>
+
+            <div id="mySection" style="display: grid; padding-top:8px;grid-template-columns: auto auto; gap: 24px;">
+                <div class="sub-box" style="background-color: #48772C;">
+                    <div style="padding: 10px 12px; line-height:14px;">
+                        <span class="subs-plan" style="line-height:10px;">@Texts.PremiumAccountLabel</span>
+                        <img class="plan-prm-icon" src="" alt="premium-icon" />
+                        <br />
+                        <span class="sub-text">For someone else</span>
+                    </div>
+                    <button @onclick="OpenBuyForSomeOneElsePage" class="buy-button">@Texts.BuyText</button>
+                </div>
+                <div class="sub-box" style="background-color: #000000;">
+                    <div style="padding: 10px 12px; line-height:12px;">
+                        <span class="subs-plan" style="line-height:10px;">@Texts.BusinessAccountLabel</span>
+                        <img class="plan-bus-icon" src="" alt="premium-icon" />
+                        <br />
+                        <span class="sub-text">@Texts.ForOrganisationsLabel</span>
+
+                    </div>
+                    <button @onclick="OpenCreateBusinessPage" class="buy-button">@Texts.UpgradeText</button>
+                </div>
+            </div>
+        </div>
+    }
+    else if (homeActionModel.HasNoSubscription)
+    {
+        <div class="upgrd-box free-color">
+            <img class="img-upgrdpl" src="" alt="" />
+            <div>
+                <label class="unlck-txt">
+                    Unlock our amazing <span>features</span> developed to <span>empower your security!</span>
+                </label>
+                <button class="upgrd-btn font-medium btn-large" @onclick="()=>homeActionModel.UpgradeDialog()" style="height: 37px;"> Upgrade now</button>
+            </div>
+        </div>
+    }
+
+    @if (Utility.IsMainMenuHidden)
+    {
+        @if (homeActionModel.HasBusiness || homeActionModel.HasPremium)
+        {
+            <AxCrypt.App.Shared.Desktop.Components.PopupDialog.Suggestion />
+        }
+        else
+        {
+            <AxCrypt.App.Shared.Desktop.Components.PopupDialog.Subscription />
+        }
+    }
+</div>
+
+@code {
+    public const string _ENABLEDTOOLSTRIPBACKCOLOR = "#FFFFFF";
+    public string hoveredElement { get; set; } = string.Empty;
+    public bool isHovered { get; set; }
+    protected override void OnInitialized()
+    {
+        Utility.OnIsMainMenuHiddenChanged += UpdateState;
+        homeActionModel!.OnUpdateViewState += UpdateState;
+        base.OnInitialized();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error determining screen width: {ex.Message}");
+            }
+            finally
+            {
+                //StateHasChanged();
+            }
+        }
+    }
+
+    public async Task ToggleSection()
+    {
+        try
+        {
+            await jsRunTime.InvokeVoidAsync("toggleSection", "mySection", "toggleImageClosed", "toggleImageOpen");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+    }
+
+    public void ShowPopup(string element)
+    {
+        isHovered = true;
+        hoveredElement = element;
+    }
+
+    public void HidePopup()
+    {
+        isHovered = false;
+        hoveredElement = string.Empty;
+    }
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void OpenBuyForSomeOneElsePage()
+    {
+        Core.BrowseUtility.RedirectToAccountWebUrl("{0}Home/Index");
+    }
+
+    private void OpenCreateBusinessPage()
+    {
+        Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/CreateBusiness");
+    }
+
+    private void OpenGuidesGetStartedPage()
+    {
+        Core.BrowseUtility.RedirectTo("https://axcrypt.net/information/guides/get-started/desktop/");
+    }
+}

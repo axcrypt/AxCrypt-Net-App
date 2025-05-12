@@ -1,0 +1,138 @@
+﻿@using AxCrypt.App.Shared.ViewModels.Secret
+@using AxCrypt.App.Shared.Helpers
+@using AxCrypt.App.Shared.Services.Interface
+@using AxCrypt.Content
+@using Microsoft.JSInterop
+
+@inject IStatusAlertService StatusAlertService;
+@inject NavigationManager navigationManager
+@inject SecretService secretService
+@inject EditSecretViewModel editSecretViewModel
+
+@inject IJSRuntime jsRuntime
+
+<div style="width: 100%;" class="page-max-height parent-container">
+    <div class="page-heading">
+        <h3 class="password-creation">
+            @Texts.EditCardTitle
+        </h3>
+    </div>
+    <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
+    <EditForm Model="@secretService.CurrentSecret.Card" OnValidSubmit="SavePassword">
+        <DataAnnotationsValidator />
+        <div class="row">
+
+            <ul class="clean-up sub-head-clr" style=" list-style:none">
+                <li>
+                    <label for="Card_CardNumber">@Texts.CardNumberPrompt</label>
+                    <input maxlength="19" minlength="12" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.CardNumber" type="text"
+                           onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                    <ValidationMessage For="@(() => secretService.CurrentSecret.Card.CardNumber)" />
+                </li>
+                <li>
+                    <label for="Card_SecretDesc">@Texts.DescriptionLabel:</label>
+                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.SecretDesc"></textarea>
+                    <ValidationMessage For="@(() => secretService.CurrentSecret.Card.SecretDesc)" />
+                </li>
+                <li class="list-row">
+                    <div class="list-width">
+                        <label for="Card_NameOnCard">@Texts.NameOnCardPrompt</label>
+                        <input type="text" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.NameOnCard">
+                        <ValidationMessage For="@(() => secretService.CurrentSecret.Card.NameOnCard)" />
+                    </div>
+                    <div class="list-width">
+                        <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
+                        <div style="display:flex">
+                            <input maxlength="1000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Card.SecurityCode" name="Card.SecurityCode" type="text"
+                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                   oninput="this.value = this.value.replace(/\D/g, '').substring(0, 3)">
+                            <ValidationMessage For="@(() => secretService.CurrentSecret.Card.SecurityCode)" />
+                        </div>
+                    </div>
+                </li>
+                <li class="list-row">
+                    <div class="list-width">
+                        <label for="Card_ExpirationDate">@Texts.ExpirationDatePrompt</label>
+                        <input id="card-exp-date-inp" style="color:#494949 !important; " @bind="@secretService.CurrentSecret.Card.ExpirationDate"
+                               type="text" class="form-control"
+                               onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                               oninput="this.value = this.value.replace(/\D/g, '').substring(0, 6).replace(/(\d{2})(\d{2})/, '$1/$2')">
+                        <ValidationMessage For="@(() => secretService.CurrentSecret.Card.ExpirationDate)" />
+                    </div>
+                </li>
+                <li>
+                    <div class="btn-sec-new-edit">
+                        <button type="submit" class="button btn-extra-small success">@Texts.ButtonSaveText</button>
+                        <NavLink href="viewcard">
+                            <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
+                        </NavLink>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        if (secretService.CurrentSecret == null)
+        {
+            navigationManager.NavigateTo("/error");
+        }
+    }
+
+    private async Task OnAfterRenderAsync()
+    {
+        await jsRuntime.InvokeVoidAsync("toggleClass");
+    }
+
+    private async Task SavePassword()
+    {
+        editSecretViewModel.Secret = secretService.CurrentSecret;
+        bool saveResult = await editSecretViewModel.SaveSecretAsync();
+        if (saveResult)
+        {
+            StatusAlertService.Success("Your new password entry has been Updated!.");
+            navigationManager.NavigateTo("/viewcard");
+        }
+        else
+        {
+            StatusAlertService.Error(editSecretViewModel.ErrorMessage);
+        }
+    }
+
+    private void HandleOnChange(ChangeEventArgs args)
+    {
+        secretService.CurrentSecret.Card.SecretDesc = args?.Value?.ToString();
+    }
+
+    bool contextMenu = false;
+
+    void contextMenuPopup()
+    {
+        contextMenu = !contextMenu;
+    }
+
+    bool isFirstClick = true;
+    bool SyncPopup { get; set; }
+
+    void openSyncPopup()
+    {
+        SyncPopup = true;
+    }
+
+    void closeSyncPopup()
+    {
+        SyncPopup = false;
+    }
+
+    void showSyncPopup()
+    {
+        if (isFirstClick)
+        {
+            openSyncPopup();
+            isFirstClick = false;
+        }
+    }
+}

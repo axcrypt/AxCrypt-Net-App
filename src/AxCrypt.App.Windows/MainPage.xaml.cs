@@ -1,9 +1,9 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Desktop;
-using AxCrypt.App.Desktop.Code;
-using AxCrypt.App.Desktop.Services;
+using AxCrypt.App.Shared.Desktop;
+using AxCrypt.App.Shared.Desktop.Code;
+using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;

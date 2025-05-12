@@ -1,0 +1,129 @@
+﻿@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.ViewModels.SecuredMessenger
+@using AxCrypt.Core.SecuredMessenger
+@using AxCrypt.Core.UI
+
+@using static AxCrypt.Abstractions.TypeResolve;
+
+@inject ManageSecMsgrViewModel ManageSecMgrViewModel
+
+@if (Model.Message?.TheMessage != null && Model.Message.TheMessage.Any())
+{
+    DateTime read = Model.Message.ReceiverList.LastOrDefault(sec => sec.User == currentUser) == null ? DateTime.MinValue : Model.Message.ReceiverList.LastOrDefault(sec => sec.User == currentUser).Read;
+    string messageToListText = Model.Message.Username;
+    IEnumerable<string> messageToList = new List<string>();
+    if (SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
+    {
+        messageToList = Model.Message.ReceiverList.Select(re => re.User);
+        messageToListText = string.Join(", ", messageToList.Take(Utility.MaxReceiversToDisplay));
+
+        read = DateTime.MinValue;
+    }
+    string shortUserText = Model.IsSelected ? "" : messageToListText.Substring(0, 2).ToUpper();
+
+    string fontClass = "";
+    string icoRead = "";
+
+    if (SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
+    {
+        fontClass = read != DateTime.MinValue ? "" : "read-text";
+        icoRead = read == DateTime.MinValue ? "ico-unread" : "";
+    }
+
+    Guid messageSelectionId = Model.ParentId == Guid.Empty ? Model.Id : Model.ParentId;
+    <div id="unread-message-@messageSelectionId" class="unread-message @fontClass" data-id="@Model.Id" data-parent="@Model.ParentId" @onclick="async (e)=> await ManageSecMgrViewModel.ViewMessageReplies(messageSelectionId, SecMessengerFilterTab)">
+        <div>
+            <table class="hover-table @((Model.IsSelected || ManageSecMgrViewModel.SelectedMessageId == messageSelectionId) ? "msg-selected" : "")">
+                <tbody>
+                    <tr>
+                        <td rowspan="2" class="first" style="width: 12%;">
+                            <div class="acc-prfl-container">
+                                <div class="@icoRead dsk-hide"></div>
+                                <div class="acc-prfl fnt-small second" style="@(Model.IsSelected ? "display: none;" : "display: block;")">
+                                    @shortUserText
+                                </div>
+                                <input type="checkbox"
+                                       class="hover-checkbox"
+                                       style="@(Model.IsSelected ? "display: block;" : "display: none;")"
+                                       checked="@Model.IsSelected"
+                                       bind-checked="@Model.IsSelected"
+                                       @onclick:stopPropagation="true"
+                                       @onchange="() => ManageSecMgrViewModel.SelectMessagesForActions(Model)"
+                                       data-id="@messageSelectionId" />
+                            </div>
+                        </td>
+
+                        <td class="text-fnt-size second" style="max-width: 250px; line-height: normal;">
+                            <span class="email-txt-ovflw">
+                                @messageToListText
+                                @if (messageToList.Count() > Utility.MaxReceiversToDisplay)
+                                {
+                                    <span class="mre-user-txt">+@(messageToList.Count() - Utility.MaxReceiversToDisplay) others</span>
+                                }
+                            </span>
+                        </td>
+                        <td class="mob-hide">
+                            <div class="@icoRead"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="second" style="font-size:12px;">
+                            <div style="display:inline-block;">
+                                <img class="clck-img" src="images/default/IcoClock.svg" />
+                                <span class="grey-clr">Visible until:</span>
+                                <span class="text-fnt-size">
+                                    @(Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Forever ? "Forever" :
+                                        Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Once ? "Once" :
+                                        Utility.ToDateString(Model.Message.VisibleUntil.ToLocalTime()))
+                                </span>
+                            </div>
+                            <div style="display:inline-block;float:right;">
+                                <span class="grey-clr text-size" style="padding-right: 10px;font-size:11px;">
+                                    @Utility.ToDateString(Model.CreatedUtc.ToLocalTime())
+                                </span>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab SecMessengerFilterTab { get; set; } = new();
+
+    [Parameter]
+    public SecuredMessage Model { get; set; } = new();
+
+    string currentUser = "";
+
+    protected override void OnInitialized()
+    {
+        currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address;
+        ManageSecMgrViewModel.OnUpdateViewState += UpdateState;
+
+        base.OnInitialized();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+    }
+
+    private void OnMessageCheckboxChanged(ChangeEventArgs e)
+    {
+        UpdateState();
+    }
+
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+}

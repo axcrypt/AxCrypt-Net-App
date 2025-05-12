@@ -1,0 +1,184 @@
+﻿@using AxCrypt.Api.Model
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Utility.View
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+@using AxCrypt.Core.UI
+@using Microsoft.JSInterop
+
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject RecentFilesViewModel RecentFilesViewModel
+@inject IJSRuntime JSRuntime
+
+@{
+    int MaxAvatarsToShow = 4;
+}
+
+<div style="padding: 10px 0px;">
+    <label class="text-style">@Texts.RecentFilesTabPageText</label>
+</div>
+<div class="file-max-hgt">
+    @if (RecentFilesViewModel.RecentFilesList.Any())
+    {
+        <table class="rcnt-fle-tbl" style="width:100%;">
+            <thead style="user-select: none;">
+                <tr>
+                    <th style="width:3%; padding-left: 0px;"> <input class="check-box" type="checkbox" @onchange="(e)=> RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
+                    <th colspan="2" style="width:23%;" @onclick="()=>SetSortOrder(0)">@Texts.NameLabel<img class="@($"arw-img {GetClassByActiveSortOrderIndex(0)}")" src="" alt="arrow img" /></th>
+                    <th style="width:11%;" @onclick="()=>SetSortOrder(1)">@Texts.FileSizeColumnHeaderText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(1)}")" src="" alt="arrow img" /></th>
+                    <th style="width:11%;" @onclick="()=>SetSortOrder(5)">@Texts.CryptoNameText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(5)}")" src="" alt="arrow img" /></th>
+                    <th style="width:18%;" @onclick="()=>SetSortOrder(2)">@Texts.LastModifiedTimeColumnHeaderText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(2)}")" src="" alt="arrow img" /></th>
+                    <th style="width:13%;">@Texts.PromptSharedWith</th>
+
+                    @if (!RecentFilesViewModel.HasNoSubscription)
+                    {
+                        <th class="scrd-sec">@Texts.EncryptedPathColumnHeaderText</th>
+                    }
+                </tr>
+            </thead>
+            <tbody class="row-sec">
+                @if (RecentFilesViewModel.IsHideRecentFiles)
+                {
+                    <tr><td colspan="7" style="padding: 20px 30px;"><span class="grey-clr">@Texts.HideRecentFilesListTabToolTipText</span></td></tr>
+                }
+                else if (RecentFilesViewModel.RecentFilesList.Any())
+                {
+                    @for (int i = 0; i < RecentFilesViewModel.RecentFilesList.Count; i++)
+                    {
+                        FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
+                        <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails.FilePath) ? "selected" : "")"
+                            @oncontextmenu="async (e) => await RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)" @ondblclick="async (e) => await RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)">
+                            <td style="padding-left: 0px;">
+                                <input class="check-box" type="checkbox" @onchange="() => RecentFilesViewModel.HandleFileClick(!fileDetails.IsChecked, fileDetails.FilePath)" checked="@fileDetails.IsChecked" />
+                            </td>
+                            <td class="fle-exton-img" style="width:5%;">
+                                <img style="max-width: 32px;max-height: 32px;" class="@fileDetails.IconClass" src="" alt="file-image" />
+                            </td>
+                            <td class="fle-exton-img" style="display: flex; align-items: center;" title="@fileDetails.FilePath">
+                                <span class="fle-nme">@fileDetails.FileName</span>
+                            </td>
+                            <td>@fileDetails.FileSize</td>
+                            <td>@fileDetails.Algorithm</td>
+                            <td>@fileDetails.LastModifiedDate</td>
+                            <td style="text-align:center">
+                                @if (fileDetails.SharedWith.Any())
+                                {
+                                    <div style="display:flex;">
+                                        @foreach (string sharedWith in fileDetails.SharedWith.Take(MaxAvatarsToShow))
+                                        {
+                                            <div class="info-prple" title="@sharedWith">@sharedWith.Substring(0, 2).ToUpper()</div>
+                                        }
+
+                                        @if (fileDetails.SharedWith.Count() > MaxAvatarsToShow)
+                                        {
+                                            <div class="info-prple bdr-clr">+@((fileDetails.SharedWith.Count()) - MaxAvatarsToShow)</div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="display:flex;"> - </div>
+                                }
+                            </td>
+                            @if (!RecentFilesViewModel.HasNoSubscription)
+                            {
+                                <td class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;" title="@fileDetails.FilePath">@fileDetails.FilePath</td>
+                            }
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="text-center">
+            <span class="empty-view-heading">Let`s start our journey!</span><br />
+            <span>Add and secure your first file.</span><br />
+            <img class="empty-rcnt-fle-img" alt="default file img" />
+        </div>
+    }
+</div>
+
+<div id="homeContextMenu" class="hide-model-popup home-context-menu" style="display: none;">
+    <dl class="font-medium fle-nme" style="margin-bottom: 5px;">
+        <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.OpenSecured)">@Texts.McInfMenuOpen</dd>
+        <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.RemoveFromListButKeepSecured)">@Texts.RemoveRecentFileToolStripMenuItemText</dd>
+        <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.StopSecureAndRemoveFromList)">@Texts.DecryptAndRemoveFromListToolStripMenuItemText</dd>
+        @if (RecentFilesViewModel.HasNoSubscription)
+        {
+            <dd class="grey-clr subs-required" style="background-position: top left;" @onclick="RecentFilesViewModel.UpgradePopup">@Texts.ShareKeysToolStripMenuItemText</dd>
+        }
+        else
+        {
+            <dd @onclick="async (e)=>await RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</dd>
+        }
+        <dd @onclick="async (e)=> await RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ShowInFolder)">@Texts.ShowInFolderText</dd>
+        @if (RecentFilesViewModel.HasNoSubscription)
+        {
+            <dd class="grey-clr subs-required" style="background-position: top left;" @onclick="RecentFilesViewModel.UpgradePopup">@Texts.RestoreAnonymousNamesMenuText</dd>
+        }
+        else
+        {
+            <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.RenameToOriginal)">@Texts.RestoreAnonymousNamesMenuText</dd>
+        }
+        <dd @onclick="(e)=> RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ClearRecentFiles)">@Texts.ClearRecentFilesToolStripMenuItemText</dd>
+    </dl>
+</div>
+
+@code {
+    private int ActiveSortOrderIndex = -1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        RecentFilesViewModel.OnUpdateViewState += UpdatePageState;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+        }
+        try
+        {
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error determining screen width: {ex.Message}");
+        }
+        finally
+        {
+            //IsLoading = false;
+        }
+    }
+
+    private void SetSortOrder(int tabIndex)
+    {
+        if (ActiveSortOrderIndex != tabIndex)
+        {
+            ActiveSortOrderIndex = tabIndex;
+        }
+        else
+        {
+            ActiveSortOrderIndex = -1;
+        }
+
+        RecentFilesViewModel.SetSortOrder(tabIndex);
+    }
+
+    private string GetClassByActiveSortOrderIndex(int currentSortOrderIndex)
+    {
+        return ActiveSortOrderIndex == currentSortOrderIndex ? "rotate" : "";
+    }
+
+    private void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+}

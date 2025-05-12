@@ -1,0 +1,268 @@
+﻿@using AxCrypt.Api.Model
+@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.App.Shared.Models
+@using AxCrypt.App.Shared.Utility
+@using AxCrypt.Content
+@using Microsoft.Maui.Devices
+
+@inject ShareKeyViewModel ShareKeyViewModel
+@inject IJSRuntime JSRuntime
+
+@{
+    DeviceIdiom currentDevice = Utility.GetCurrentDeviceIdiom();
+    int MaxFilesToShow = 3;
+}
+
+@if (IsVisible)
+{
+    <div class="modalDialog sharekey-popup" style="display: block;">
+        <div id="sharekey">
+            <form @onsubmit="async ()=> await ShareKeyViewModel.ApplyShareKeys()">
+                <h3 class="font-bold text-center shr-key-title dk-shre">@Texts.ShareAccessTitle</h3>
+                <div class="sharekey-content">
+                    <div class="dk-shre">
+                        @if (ShareKeyViewModel.SubscriptionLevel == SubscriptionLevel.Business)
+                        {
+                            <p class="bus-info">
+                                Add users or Groups with whom you want to share this secret. If you
+                                don`t know about our <b>Group Feature</b> yet, <a style="color:#FFC50D;" @onclick="ShareKeyViewModel.GoToLearmoreLink">learn more</a> and create your
+                                first one by the link <a style="color:#FFC50D;text-decoration:underline;" @onclick="ShareKeyViewModel.GoToCreateGroupLink">Create a Group!</a>
+                            </p>
+                        }
+                        else
+                        {
+                            <p>@Texts.ShareKeyInformationText</p>
+                        }
+                        <span class="font-bold">@Texts.AddUserPromptText</span>
+                    </div>
+                    <div class="mb-shre">
+                        <NavLink class="mb-title flex-start" href="mainpagemobile" style="gap: 10px;">
+                            <img class="back-arrow" src="" alt="go-back-img" />
+                            <span class="acc-txt">@Texts.ShareAccessTitle</span>
+                            <span class="acc-txt">@Texts.ShareKeysToolStripMenuItemText </span>
+                            <img class="ico-info" src="" alt="ico-info" />
+                        </NavLink>
+                    </div>
+                    <div>
+                        @if (!string.IsNullOrEmpty(ShareKeyViewModel.ErrorMessage))
+                        {
+                            <div class="error-message">@ShareKeyViewModel.ErrorMessage</div>
+                        }
+                        <div class="add-txt-field" style="width: 100%;">
+                            <input type="email" @onclick="ShareKeyViewModel.ShowSyncPopup" @bind="@ShareKeyViewModel.KeySharingUserEmail" @oninput="ShareKeyViewModel.OnEmailInput" @onkeydown="HandleKeyDown" placeholder="someone@example.com" class="" style="width: 78%; margin-right: 3% ! IMPORTANT; margin: 0px;" />
+                            @if (ShareKeyViewModel.ShowUserSuggestion && ShareKeyViewModel.SuggestedUnSharedUsers.Any())
+                            {
+                                <ul class="suggestion-list hide-model-popup">
+                                    @foreach (ShareKeyUser suggestion in ShareKeyViewModel.SuggestedUnSharedUsers)
+                                    {
+                                        <li @onclick="() => ShareKeyViewModel.SelectSuggestion(suggestion.GroupName ?? suggestion.UserEmail!)">
+                                            @if (!string.IsNullOrEmpty(suggestion.GroupName))
+                                            {
+                                                <span>@suggestion.GroupName</span>
+                                                <img src="images/business/IcoGrp.svg" alt="Group Icon" style="float: right;" />
+                                            }
+                                            else
+                                            {
+                                                <span>@suggestion.UserEmail</span>
+                                                <img class="contact-icon" src="" alt="Individual Icon" style="float: right;" />
+                                            }
+                                            <hr />
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            <input type="button" class="button active btn-small" value="@Texts.AddPromptText" @onclick="()=> ShareKeyViewModel.AddShareKeyUser()" disabled="@(ShareKeyViewModel.DisableAddUserButton)" style="width: 15%;" />
+                        </div>
+                        @if (ShareKeyViewModel.SyncPopup)
+                        {
+                            <div class="modalDialog sync-popup">
+                                <div class="text-center">
+                                    <img class="sync-img" src="" alt="sync-img" /><br />
+                                    <h3 class="font-extra-bold txt-clr">Sync contacts!</h3>
+                                    <p style="color: #969696; font-size: 12px;text-align: left;">Do you allow AxCrypt Application <strong>access your contacts on phone?</strong></p>
+                                    <input type="button" class="button active btn-medium font-large" value="Allow" style="margin-right: 10px; padding: 5px 15px;" />
+                                    <input type="button" class="button border btn-medium font-large" value="No, thanks" @onclick="ShareKeyViewModel.CloseSyncPopup" style="padding: 5px 15px;" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @if (ShareKeyViewModel.SelectedFilesOrFolders != null && ShareKeyViewModel.SelectedFilesOrFolders.Any())
+                    {
+                        <div class="center-column fle-exton-img" style="justify-content: flex-start; gap: 10px;">
+                            @foreach (string file in ShareKeyViewModel.SelectedFilesOrFolders.Take(MaxFilesToShow))
+                            {
+                                string selectedFileName = GetIconForFile(file);
+                                <div class="selected-file">
+                                    <img class="@Icon" src="/images/default/AxCrypt_Icon.svg" alt="File Icon" />
+                                    <span class="fle-nme" title="@selectedFileName">@selectedFileName</span>
+                                </div>
+                            }
+                            @if (ShareKeyViewModel.SelectedFilesOrFolders.Count() > MaxFilesToShow)
+                            {
+                                <div class="info-prple bdr-clr">+@((ShareKeyViewModel.SelectedFilesOrFolders.Count()) - MaxFilesToShow)</div>
+                            }
+                        </div>
+                    }
+                    <div style="padding-top: 15px;">
+                        <h3 class="txt-clr font-bold">@string.Format(Texts.SharedKeyUserListTitle, ShareKeyViewModel.ShareKeyUserList!.Count)</h3>
+                        @if (ShareKeyViewModel.ShareKeyUserList.Any())
+                        {
+                            <div class="user-list-bx share-list scroll-container " id="sharedUserList" style="margin-right:0px">
+                                @foreach (ShareKeyUser user in ShareKeyViewModel.ShareKeyUserList!)
+                                {
+                                    <dl>
+                                        <dd class="file-bgrnd">
+                                            @if (ShareKeyViewModel.IsAxCryptUser)
+                                            {
+                                                <img class="axcrypt-icon" style="float:left;" src="" alt="img">
+                                            }
+                                            else
+                                            {
+                                                <img class="contact-icon" style="float:left;" src="" alt="img">
+                                            }
+                                            <div style="display:inline-block;">
+                                                <span class="shared-text">@GetUserDisplayName(user)</span><br>
+                                            </div>
+                                            <img class="menu-image" src="/images/Group160.svg" alt="img" @onclick="(e)=> ShareKeyViewModel.contextMenuPopup(user.UserEmail)" style="float:right;">
+                                            <hr style="width: 100%;">
+                                        </dd>
+                                    </dl>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="file-box empty-list scroll-container" id="sharedUserList" style="margin-right:0px"></div>
+                        }
+                        @if (ShareKeyViewModel.ContextMenu)
+                        {
+                            <div class="hide-model-popup context-menu">
+                                <dl>
+                                    <dd @onclick="ShareKeyViewModel.RefreshShare" style="cursor: pointer;">
+                                        <img class="refresh-icon" src="~/images/business/IcoRefresh.svg" alt="Refresh" />
+                                        <span> Refresh</span>
+                                    </dd>
+                                    <dd @onclick="()=>
+                                        ShareKeyViewModel.RemoveSharedKey()" style="cursor: pointer;">
+                                        <img class="unshare-icon" src="~/images/business/IcoUnShare.svg" alt="Unshare" />
+                                        <span> Unshare</span>
+                                    </dd>
+                                </dl>
+                            </div>
+                        }
+                    </div><br />
+                    <div id="sharekey" class="shr-ky-ftr" style="margin: 10px 0px;">
+                         <input type="button" @onclick="Close" class="button border btn-small" value="@Texts.ButtonCancelText" style="margin-right: 10px;" />
+                        @if (ShareKeyViewModel.IsWideScreen)
+                        {
+                            <input disabled="@(ShareKeyViewModel.EnableApplyButton ? null : "disabled")" type="button" class="button success btn-small" @onclick="async ()=> await ShareKeyViewModel.ApplyShareKeys()" value="@Texts.ApplyLabel" style="padding: 6px 0px;" />
+                        }
+                        @if (ShareKeyViewModel.WarngPopup)
+                        {
+                            <div class="modalDialog sync-popup">
+                                <div class="text-center">
+                                    <img class="sd-img" src="" alt="sync-img" /><br />
+                                    <h3 class="font-extra-bold txt-clr">Oh, no!</h3>
+                                    <p style="color: #969696; font-size: 12px;text-align: left;">It looks like the file you want to share is not <strong>encrypted.....</strong></p>
+                                    <input type="button" class="button active btn-medium font-large" @onclick="ShareKeyViewModel.closeWarngPopup" value="@Texts.ButtonCloseText" style="padding: 5px 15px;" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+@code {
+    private bool IsVisible;
+
+    private async Task closeSharePopup()
+    {
+        await JSRuntime.InvokeVoidAsync("closeSharePopup");
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ShareKeyViewModel!.LogOnViewModel.ShareKeyDialog.OnDialogVisibilityChanged += UpdateShareKeyDialogStateChanged;
+        ShareKeyViewModel.LogOnViewModel.OnUIStateChanged += UpdateStateChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                ShareKeyViewModel!.IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error determining screen width: {ex.Message}");
+            }
+            finally
+            {
+                StateHasChanged();
+            }
+        }
+    }
+
+    void UpdateShareKeyDialogStateChanged(bool isVisible)
+    {
+        InvokeAsync(() =>
+        {
+            IsVisible = isVisible;
+            StateHasChanged();
+        });
+    }
+
+    void UpdateStateChanged()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+
+    string GetUserDisplayName(ShareKeyUser user)
+    {
+        return user.GroupName ?? user.UserEmail!;
+    }
+
+    void Close()
+    {
+        ShareKeyViewModel!.KeySharingUserEmail = "";
+        ShareKeyViewModel.SelectedFilesOrFolders = new List<string>();
+        ShareKeyViewModel.CloseSyncPopup();
+        ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.Close();
+    }
+
+    private string? Icon { get; set; }
+
+    private string GetIconForFile(string file)
+    {
+        string fileName = File.Exists(file) ? Path.GetFileName(file) : Directory.Exists(file) ? new DirectoryInfo(file).FullName : string.Empty;
+
+        if (string.IsNullOrEmpty(fileName))
+        {
+            Icon = string.Empty;
+            return string.Empty;
+        }
+
+        Icon = fileName.GetIcon();
+        return fileName;
+    }
+
+    private void HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(ShareKeyViewModel.KeySharingUserEmail))
+        {
+            ShareKeyViewModel.AddShareKeyUser();
+        }
+
+        return;
+    }
+}

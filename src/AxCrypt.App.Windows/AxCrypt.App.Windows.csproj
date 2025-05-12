@@ -50,7 +50,7 @@
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
 		<!-- Versions -->
 		<_AxCryptMajor>3</_AxCryptMajor>
-		<AxMinorVersion Condition =" '$(AxMinorVersion)' == '' ">0</AxMinorVersion>
+		<AxMinorVersion Condition=" '$(AxMinorVersion)' == '' ">0</AxMinorVersion>
 		<AxBuildNumber Condition=" '$(AxBuildNumber)' == '' ">1</AxBuildNumber>
 		<FinalAppVersion>$(_AxCryptMajor).$(AxMinorVersion).0.$(AxBuildNumber)</FinalAppVersion>
 		<ApplicationDisplayVersion>$(FinalAppVersion)</ApplicationDisplayVersion>
@@ -96,7 +96,7 @@
    	<ProjectReference Include="..\..\shared\AxCrypt.Core\AxCrypt.Core.csproj" />
    	<ProjectReference Include="..\..\shared\AxCrypt.Cryptor\AxCrypt.Cryptor.csproj" />
    	<ProjectReference Include="..\..\shared\AxCrypt.Mono\AxCrypt.Mono.csproj" />
-   	<ProjectReference Include="..\AxCrypt.App.Desktop\AxCrypt.App.Desktop.csproj" />
+   	<ProjectReference Include="..\AxCrypt.App.Shared.Desktop\AxCrypt.App.Shared.Desktop.csproj" />
     </ItemGroup>
 
     <ItemGroup>

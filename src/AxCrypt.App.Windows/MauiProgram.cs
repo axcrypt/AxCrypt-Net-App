@@ -1,6 +1,6 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Desktop;
-using AxCrypt.App.Desktop.Services.Interface;
+using AxCrypt.App.Shared.Desktop;
+using AxCrypt.App.Shared.Desktop.Services.Interface;
 using AxCrypt.App.Shared;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Components.Pages;

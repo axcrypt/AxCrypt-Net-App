@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-@using AxCrypt.App.Desktop.ViewModels
+@using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Models
 @using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.App.Shared.ViewModels
@@ -11,19 +11,19 @@
 @inject IJSRuntime JSRuntime
 
 <div dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
-    <AxCrypt.App.Desktop.Components.Shared.ProcessIndicatorComponent />
+    <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
 
     @if (LogOnViewModel.IsVisible)
     {
-        <AxCrypt.App.Desktop.Components.LoginPage />
+        <AxCrypt.App.Shared.Desktop.Components.LoginPage />
     }
     else if (ShowSignUp)
     {
-        <AxCrypt.App.Desktop.Components.RegisterPage />
+        <AxCrypt.App.Shared.Desktop.Components.RegisterPage />
     }
     else if (LogOnViewModel.IsLoggedOn)
     {
-        <AxCrypt.App.Desktop.Components.Pages.HomePage />
+        <AxCrypt.App.Shared.Desktop.Components.Pages.HomePage />
     }
 
 </div>

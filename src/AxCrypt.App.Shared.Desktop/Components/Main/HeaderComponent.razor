@@ -1,0 +1,25 @@
+﻿@using AxCrypt.Content
+@using AxCrypt.App.Shared.Desktop.ViewModels.Main
+
+@inject HeaderComponentViewModel HCModel
+
+<div class="top-menu-section" style="margin: 40px 40px;">
+    <AxCrypt.App.Shared.Desktop.Components.Main.Header.TopMenu />
+</div>
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        HCModel.OnUpdateViewState += UpdatePageState;
+    }
+
+    private void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+}
