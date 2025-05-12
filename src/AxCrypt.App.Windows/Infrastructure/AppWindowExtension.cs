@@ -128,8 +128,8 @@ namespace AxCrypt.App.Windows.Infrastructure
                 Resolve.UserSettings.RestoreFullWindow = true;
                 _appWindow.Show(true);
                 _appWindow.SetPresenter(AppWindowPresenterKind.Default);
-                _appWindow.MoveInZOrderAtTop();
-                //App.Current.MainPage.Focus();
+                Microsoft.UI.Windowing.OverlappedPresenter overlappedPresenter = ((Microsoft.UI.Windowing.OverlappedPresenter)_appWindow.Presenter);
+                overlappedPresenter.Restore(true);
             });
         }
     }
