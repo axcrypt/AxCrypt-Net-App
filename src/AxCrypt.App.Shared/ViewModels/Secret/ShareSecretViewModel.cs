@@ -3,6 +3,7 @@ using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Data;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
+using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
@@ -261,18 +262,20 @@ public class ShareSecretViewModel : ManageSecretViewModel
             ShowHideOfflineError(false);
             return false;
         }
-
-        SecretClientModel theSecret = Secret.ToClientModel(Secret.SecretGuid);
-
-        IEnumerable<AxCrypt.Core.Secrets.SecretSharedUser> secretSharedUsers = ShareSecretUserList.Select(us => new SecretSharedUser(us.UserEmail, us.Visibility));
-        if (!secretSharedUsers.Any())
+        using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
-            new List<AxCrypt.Core.Secrets.SecretSharedUser>();
-        }
+            SecretClientModel theSecret = Secret.ToClientModel(Secret.SecretGuid);
 
-        theSecret.Share = new ShareSecret(secretSharedUsers, _identity.UserEmail.Address, New<INow>().Utc);
-        Secret.SharedWith = ShareSecretUserList; 
-        return await PersonalSecrets.ShareAsync(theSecret);
+            IEnumerable<AxCrypt.Core.Secrets.SecretSharedUser> secretSharedUsers = ShareSecretUserList.Select(us => new SecretSharedUser(us.UserEmail, us.Visibility));
+            if (!secretSharedUsers.Any())
+            {
+                new List<AxCrypt.Core.Secrets.SecretSharedUser>();
+            }
+
+            theSecret.Share = new ShareSecret(secretSharedUsers, _identity.UserEmail.Address, New<INow>().Utc);
+            Secret.SharedWith = ShareSecretUserList;
+            return await PersonalSecrets.ShareAsync(theSecret);
+        }
     }
 
     private void SetNewContactState()

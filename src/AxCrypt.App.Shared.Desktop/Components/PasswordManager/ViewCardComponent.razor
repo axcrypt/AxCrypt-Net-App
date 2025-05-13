@@ -90,12 +90,7 @@
                     </div>
                 </li>
             </ul>
-            @if (!string.IsNullOrEmpty(shareSecretViewModel!.ErrorMessage))
-            {
-                <div class="error-message">@shareSecretViewModel.ErrorMessage</div>
-            }
-
-                <ShareSecretComponent />
+            <ShareSecretComponent />
         </div>
     </form>
 </div>

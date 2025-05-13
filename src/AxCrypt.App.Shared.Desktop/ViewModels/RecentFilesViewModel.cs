@@ -92,7 +92,7 @@ public class RecentFilesViewModel : ViewModelBase
         }
 
         RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
-        AddToSelectedFileList();
+        UpdateSelectedFileList();
         UpdateViewState();
     }
 
@@ -121,12 +121,16 @@ public class RecentFilesViewModel : ViewModelBase
             return;
         }
 
-        RecentFilesList.First(rf => rf.FilePath.Equals(selectedFile)).IsChecked = isChecked;
+        FileDetails? file = RecentFilesList.FirstOrDefault(rf => rf.FilePath.Equals(selectedFile));
+        if (file != null)
+        {
+            file.IsChecked = isChecked;
+        }
 
-        AddToSelectedFileList();
+        UpdateSelectedFileList();
     }
 
-    private void AddToSelectedFileList()
+    private void UpdateSelectedFileList()
     {
         SelectedFiles = RecentFilesList.Where(rf => rf.IsChecked).Select(rf => rf.FilePath).ToList();
 
