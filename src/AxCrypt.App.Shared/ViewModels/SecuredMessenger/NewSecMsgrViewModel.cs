@@ -12,7 +12,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 {
-    public class NewSecMsgrViewModel: ViewModelBase
+    public class NewSecMsgrViewModel : ViewModelBase
     {
         private ISecureMessagingService _msgService { get; set; }
 
@@ -105,8 +105,11 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
             if (result)
             {
                 _StatusAlertService.Success(Texts.SendSecuredMessageSuccess);
-                SelectedTab = SecureMsgrFilterTab.Sent;
                 newSecMsgrViewModel.IsVisible = false;
+                if (ParentId == Guid.Empty)
+                {
+                    SelectedTab = SecureMsgrFilterTab.Sent;
+                }
                 TapUpdateViewState();
                 return;
             }

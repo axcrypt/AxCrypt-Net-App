@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 HidePopup("key-management-popup");
             }
         }
-     
+
         //Handle show/hide the subscriptiondetails menu side popup
         if (targetobj.id === "subscription-details-button-action" || targetobj.parentElement.id === "subscription-details-button-action") {
             ShowHidePopup("subscription-details-side-popup");
@@ -248,7 +248,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (targetobj.id === "close-subscription-details-side-popup") {
             HidePopup("subscription-details-side-popup");
         }
-        
+
+        //Handle show/hide the advanced filter popup
+        if (targetobj.id === "advanced-filter-popup-button-action" || targetobj.parentElement.id === "advanced-filter-popup-button-action") {
+            ShowHidePopup("advanced-filter-popup");
+        }
+        else {
+            if (!IgnoreClosePopupOnPopupActions("advanced-filter-popup", targetobj) || targetobj.id === "apply-search-filter") {
+                HidePopup("advanced-filter-popup");
+            }
+        }
     });
 });
 

@@ -74,12 +74,17 @@ namespace AxCrypt.Api.Shared.Helper
 
         public static async Task<IEnumerable<SecuredMessage>> GetSecMsgSearchFilterAsync(SecureMsgrFilterTab securedMessengerFilterTab, RequestOptions requestOptions)
         {
+            bool isForSearch = true;
+            if (requestOptions.QueryString == string.Empty)
+            {
+                isForSearch = false;
+            }
             List<SecuredMessage> messengers = new List<SecuredMessage>();
             IEnumerable<SecuredMessengerRootApiModel> allSecuredUserMessages = await New<LogOnIdentity, ISecuredMessengerService>(Identity()).GetSecMsgWithSearchFiltersAsync(securedMessengerFilterTab, requestOptions);
             for (int i = 0; i < allSecuredUserMessages.Count(); i++)
             {
                 SecuredMessengerRootApiModel message = allSecuredUserMessages.ElementAt(i);
-                messengers.AddRange(await LoadMessageInfoAsync(message));
+                messengers.AddRange(await LoadMessageInfoAsync(message, isForSearch));
             }
 
             return messengers;

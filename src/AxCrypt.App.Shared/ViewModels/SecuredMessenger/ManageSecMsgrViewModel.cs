@@ -85,6 +85,12 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 
         public async Task SetSelectedTabActive(SecureMsgrFilterTab secMessengerFilterTab)
         {
+            if (NewSecMsgrViewModel.ParentId != Guid.Empty)
+            {
+                await ViewMessageReplies(NewSecMsgrViewModel.ParentId, secMessengerFilterTab);
+                return;
+            }
+
             Messenger = new SecuredMessengerModel(secMessengerFilterTab);
             if (Messenger.ChildMessages != null && Messenger.ChildMessages.Any())
             {
@@ -96,13 +102,11 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 
         public async Task SearchList(SecuredMessengerModel messengerModel, SecureMsgrFilterTab secMessengerFilterTab)
         {
-            if (messengerModel == null || string.IsNullOrWhiteSpace(messengerModel.Keyword))
-            {
-                await GetMessagesList(secMessengerFilterTab);
-                return;
-            }
-
             Messenger = await _messageService.GetSecMsgSearchFilterAsync(messengerModel.Keyword, messengerModel);
+            if (Messenger.ChildMessages != null && Messenger.ChildMessages.Any())
+            {
+                Messenger.ChildMessages = new List<AxCrypt.Core.SecuredMessenger.SecuredMessage>();
+            }
             UpdateViewState();
         }
 

@@ -842,6 +842,11 @@ textarea[readonly] {
     max-height: 400px !important;
   }
 }
+@media screen and (min-width: 1251px) and (max-width: 1536px) {
+  .message-list-section {
+    max-height: 55vh !important;
+  }
+}
 .loadMoreActionlnk {
   background-color: white;
   display: block;

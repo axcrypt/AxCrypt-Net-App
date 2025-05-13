@@ -81,6 +81,7 @@
 
         ManageSecMgrViewModel.OnUpdateViewState += UpdateState;
         ManageSecMgrViewModel.NewSecMsgrViewModel.OnTabUpdateViewState += async (selectedTab) => await UpdateTabState(selectedTab);
+        ManageSecMgrViewModel.NewSecMsgrViewModel.OnUpdateViewState += UpdateState;
 
         base.OnInitialized();
     }
