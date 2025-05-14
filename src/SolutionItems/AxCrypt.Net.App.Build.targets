@@ -4,6 +4,11 @@
   </Target>
 	
 	<PropertyGroup>
+		<_AxCryptMajor>3</_AxCryptMajor>
+		<AxMinorVersion Condition=" '$(AxMinorVersion)' == '' ">0</AxMinorVersion>
+		<AxBuildNumber Condition=" '$(AxBuildNumber)' == '' ">1</AxBuildNumber>
+		<FinalAppVersion>$(_AxCryptMajor).$(AxMinorVersion).0.$(AxBuildNumber)</FinalAppVersion>
+		
 		<_AxCanonicalAssemblyName>AxCrypt.App.Windows</_AxCanonicalAssemblyName>
 		<_AxCanonicalName>AxCrypt</_AxCanonicalName>
 		<_AppDefaultPlatform>x64</_AppDefaultPlatform>
@@ -32,7 +37,7 @@
 		</ItemGroup>
 	</Target>
 
-	<Target Name="_UpdateAppxManifestVersion" BeforeTargets="_GenerateAppxPackageFile">
+	<Target Name="RestoreManifest">
 		<Message Importance="high" Text="Updating Package.appxmanifest version to $(FinalAppVersion)" />
 
 		<XmlPoke
