@@ -18,7 +18,7 @@
 
     <NavLink id="notification-dropdown-click-action" class="app-top-menu">
         <span class="notification-badge">
-            @notificationService.NotificationModel.Notifications.Count()
+            @NotificationCount
         </span>
         <img class="notif-icon padding" src="/images/default/IcoNtfctns.svg" alt="notify-icon" />
     </NavLink>
@@ -33,10 +33,12 @@
 <AxCrypt.App.Shared.Desktop.Components.Main.Header.ProfileOptionComponent />
 
 @code {
+    int NotificationCount = 0;
     protected override async Task OnInitializedAsync()
     {
         ViewModel.Initialize();
         await notificationService.LoadNotificationListAsync();
+        NotificationCount = notificationService.NotificationModel.Notifications.Count();
         ViewModel.LogOnViewModel.OnSubscriptionChanged += UpdatePageState;
         notificationService.OnUpdateViewState += UpdatePageState;
         ViewModel.LogOnViewModel.OnUIStateChanged += UpdatePageState;

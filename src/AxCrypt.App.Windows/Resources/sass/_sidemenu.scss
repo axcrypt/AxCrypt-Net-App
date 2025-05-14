@@ -101,7 +101,8 @@
 .nav-item .five.active,
 .nav-item a:hover,
 .footer-menu a.active,
-.footer-menu a:hover {
+.footer-menu a:hover,
+.abt-sec .nav-link.active {
     background-color: $SdeMnubgndClr;
     color: $SdeMnuTxtClr;
     width: 98%;
@@ -142,10 +143,6 @@
 .abt-sec {
     position: absolute;
     bottom: 3vh;
-
-    .nav-link.active {
-        color: $SdeMnuTxtClr;
-    }
 }
 
 .prgrs-bar-sec {

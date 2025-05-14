@@ -95,7 +95,8 @@
 .nav-item .five.active,
 .nav-item a:hover,
 .footer-menu a.active,
-.footer-menu a:hover {
+.footer-menu a:hover,
+.abt-sec .nav-link.active {
   background-color: #86B96E;
   color: #FFFFFF;
   width: 98%;
@@ -107,7 +108,8 @@
 .nav-item .five.active .account,
 .nav-item a:hover .account,
 .footer-menu a.active .account,
-.footer-menu a:hover .account {
+.footer-menu a:hover .account,
+.abt-sec .nav-link.active .account {
   content: url(/images/free/IcoVwr1.svg);
 }
 .nav-item .one.active .scrdfldr,
@@ -117,7 +119,8 @@
 .nav-item .five.active .scrdfldr,
 .nav-item a:hover .scrdfldr,
 .footer-menu a.active .scrdfldr,
-.footer-menu a:hover .scrdfldr {
+.footer-menu a:hover .scrdfldr,
+.abt-sec .nav-link.active .scrdfldr {
   content: url(/images/free/icoScrdFldr.svg);
 }
 .nav-item .one.active .scrts,
@@ -127,7 +130,8 @@
 .nav-item .five.active .scrts,
 .nav-item a:hover .scrts,
 .footer-menu a.active .scrts,
-.footer-menu a:hover .scrts {
+.footer-menu a:hover .scrts,
+.abt-sec .nav-link.active .scrts {
   content: url(/images/free/IcoScrts.svg);
 }
 .nav-item .one.active .scrdmssngr,
@@ -137,7 +141,8 @@
 .nav-item .five.active .scrdmssngr,
 .nav-item a:hover .scrdmssngr,
 .footer-menu a.active .scrdmssngr,
-.footer-menu a:hover .scrdmssngr {
+.footer-menu a:hover .scrdmssngr,
+.abt-sec .nav-link.active .scrdmssngr {
   content: url(/images/free/IcoScrdMssngr.svg);
 }
 .nav-item .one.active .notifctn,
@@ -147,7 +152,8 @@
 .nav-item .five.active .notifctn,
 .nav-item a:hover .notifctn,
 .footer-menu a.active .notifctn,
-.footer-menu a:hover .notifctn {
+.footer-menu a:hover .notifctn,
+.abt-sec .nav-link.active .notifctn {
   content: url(/images/premium/IcoActivity.svg);
 }
 .nav-item .one.active .suprt,
@@ -157,7 +163,8 @@
 .nav-item .five.active .suprt,
 .nav-item a:hover .suprt,
 .footer-menu a.active .suprt,
-.footer-menu a:hover .suprt {
+.footer-menu a:hover .suprt,
+.abt-sec .nav-link.active .suprt {
   content: url(/images/premium/IcoSupport.svg);
 }
 .nav-item .one.active .fdbck,
@@ -167,7 +174,8 @@
 .nav-item .five.active .fdbck,
 .nav-item a:hover .fdbck,
 .footer-menu a.active .fdbck,
-.footer-menu a:hover .fdbck {
+.footer-menu a:hover .fdbck,
+.abt-sec .nav-link.active .fdbck {
   content: url(/images/premium/IcoFdbck.svg);
 }
 .nav-item .one.active .info,
@@ -177,16 +185,14 @@
 .nav-item .five.active .info,
 .nav-item a:hover .info,
 .footer-menu a.active .info,
-.footer-menu a:hover .info {
+.footer-menu a:hover .info,
+.abt-sec .nav-link.active .info {
   content: url(/images/premium/IcoInfOld.svg);
 }
 
 .abt-sec {
   position: absolute;
   bottom: 3vh;
-}
-.abt-sec .nav-link.active {
-  color: #FFFFFF;
 }
 
 .prgrs-bar-sec {

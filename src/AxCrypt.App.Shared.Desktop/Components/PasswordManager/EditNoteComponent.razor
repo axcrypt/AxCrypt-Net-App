@@ -1,4 +1,5 @@
-﻿@using AxCrypt.App.Shared.ViewModels.Secret
+﻿@using AxCrypt.App.Shared.Models.Secret
+@using AxCrypt.App.Shared.ViewModels.Secret
 @using AxCrypt.App.Shared.Helpers
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.Content
@@ -18,19 +19,19 @@
         </h3>
     </div>
     <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
-    <EditForm Model="@secretService.CurrentSecret.Note" OnValidSubmit="SavePassword">
+    <EditForm Model="@NoteViewModel" OnValidSubmit="SavePassword">
         <DataAnnotationsValidator />
         <div class="row">
             <ul class="clean-up sub-head-clr" style=" list-style:none">
                 <li>
                     <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
-                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Note.SecretDesc"></textarea>
-                    <ValidationMessage For="@(() => secretService.CurrentSecret.Note.SecretDesc)" />
+                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;" @bind="@NoteViewModel.SecretDesc"></textarea>
+                    <ValidationMessage For="@(() => NoteViewModel.SecretDesc)" />
                 </li>
                 <li>
                     <label for="Note_Note">@Texts.NoteLabel:</label>
-                    <textarea type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949 !important;" @bind="@secretService.CurrentSecret.Note.Note"></textarea>
-                    <ValidationMessage For="@(() => secretService.CurrentSecret.Note.Note)" />
+                    <textarea type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949 !important;" @bind="@NoteViewModel.Note"></textarea>
+                    <ValidationMessage For="@(() => NoteViewModel.Note)" />
                 </li>
                 <li>
                     <div class="btn-sec-new-edit">
@@ -45,8 +46,10 @@
     </EditForm>
 </div>
 @code {
+    SecretNoteViewModel NoteViewModel;
     protected override void OnInitialized()
     {
+        NoteViewModel = new SecretNoteViewModel(secretService.CurrentSecret.Note.SecretDesc, secretService.CurrentSecret.Note.Note);
         if (secretService.CurrentSecret == null)
         {
             navigationManager.NavigateTo("/error");
@@ -60,7 +63,7 @@
 
     private async Task SavePassword()
     {
-        editSecretViewModel.Secret = secretService.CurrentSecret;
+        editSecretViewModel.Secret.Note = NoteViewModel;
         bool saveResult = await editSecretViewModel.SaveSecretAsync();
         if (saveResult)
         {
@@ -106,5 +109,4 @@
     {
         secretService.CurrentSecret.Note.SecretDesc = args.Value.ToString();
     }
-
 }

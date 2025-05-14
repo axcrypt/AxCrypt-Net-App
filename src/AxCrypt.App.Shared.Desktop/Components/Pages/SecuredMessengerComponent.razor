@@ -21,29 +21,29 @@
             <EditForm Model="SecMsgrViewModel.Messenger" OnValidSubmit="SearchList" id="search-msg-form">
                 <input type="hidden" name="SecMessengerFilterTab" @bind="SecMsgrViewModel.Messenger.SecMessengerFilterTab" id="sec-messenger-filter-tab" />
                 <InputText @bind-Value="SecMsgrViewModel.Messenger.Keyword"
-                           id="messenger-keyword"
-                           placeholder=@Texts.PromptXecretsSearchText
-                           class="search-box columns"
-                           tabindex="1"
-                           style="width: 98%;" />
+                id="messenger-keyword"
+                placeholder=@Texts.PromptXecretsSearchText
+                class="search-box columns"
+                tabindex="1"
+                style="width: 98%;" />
 
                 <img class="filter-trigger" src="" alt="filter-image" title="Filters" id="advanced-filter-popup-button-action" @onclick="OnApplyFilter" />
                 <div class="filter-popup model-popup" id="advanced-filter-popup">
                     <label>From</label>
                     <InputText @bind-Value="SecMsgrViewModel.Messenger.UserName"
-                               placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
-                               type="email"
-                               style="width: 50%;"
-                               name="from"
-                               id="" />
+                    placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
+                    type="email"
+                    style="width: 50%;"
+                    name="from"
+                    id="" />
                     <br />
                     <label>To</label>
                     <InputText @bind-Value="SecMsgrViewModel.Messenger.ReceiverName"
-                               placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
-                               type="email"
-                               style="width: 50%;"
-                               name="to"
-                               id="" />
+                    placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
+                    type="email"
+                    style="width: 50%;"
+                    name="to"
+                    id="" />
                     <div>
                         <label>Date from</label>
                         <InputDate @bind-Value="SecMsgrViewModel.Messenger.StartDate" style="width: 23%;" name="date-from" />
@@ -52,7 +52,7 @@
                     </div>
                     <div style="display: flex; float: right; padding-top: 20px;">
                         <button type="reset" class="button border btn-large font-medium" style="margin-right: 30px;" @onclick="ClearAllFilters">@Texts.ClearAllText</button>
-                        <button type="submit" class="button success btn-large font-medium" id="apply-search-filter" @onclick="ApplyFilters">@Texts.ApplyLabel</button>
+                        <button type="submit" class="button success btn-large font-medium" id="apply-search-filter">@Texts.ApplyLabel</button>
                     </div>
                 </div>
                 <button type="submit" id="message-search-btn" class="button success msg-search-btn" title="@Texts.SearchText"></button>
@@ -77,21 +77,21 @@
                     <div class="tab-sec medium-9 columns">
                         <div id="tab-header">
                             <a class="sub-head-link unread-text @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "active" : "")"
-                               @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox, Guid.Empty)" id="inbox-tab">
+                            @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox, Guid.Empty)" id="inbox-tab">
                                 Inbox @* <span id="inbox-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? messageCount : ""))</span> *@
                             </a>
                             <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "tab-selected" : "")">
                         </div>
                         <div id="tab-header">
                             <a class="sub-head-link @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "active" : "")"
-                               @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent, Guid.Empty)" id="sent-tab">
+                            @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent, Guid.Empty)" id="sent-tab">
                                 Sent @* <span id="sent-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? messageCount : ""))</span> *@
                             </a>
                             <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "tab-selected" : "")">
                         </div>
                         <div id="tab-header">
                             <a class="sub-head-link unread-text @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "active" : "")"
-                               @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread, Guid.Empty)" id="unread-tab">
+                            @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread, Guid.Empty)" id="unread-tab">
                                 Unread @* <span id="unread-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? messageCount : ""))</span> *@
                             </a>
                             <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "tab-selected" : "")">
@@ -143,6 +143,8 @@
         {
             return;
         }
+
+        ApplyFilters();
 
         using (ProcessIndicator progress = new ProcessIndicator())
         {
