@@ -148,10 +148,10 @@
 
     async Task AddCssAsync(string subscriptionLevel)
     {
-        string[] list = CssService.ApplySubscriptionCssAsync(subscriptionLevel);
-        foreach (string cssFile in list)
+        IList<KeyValuePair<string, string>> cssFileList = CssService.ApplySubscriptionCssAsync(subscriptionLevel);
+        foreach (KeyValuePair<string, string> cssFile in cssFileList)
         {
-            await JS.InvokeVoidAsync("addCssFile", cssFile);
+            await JS.InvokeVoidAsync("addCssFile", cssFile.Key, cssFile.Value);
         }
     }
 }

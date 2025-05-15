@@ -45,13 +45,14 @@
         }, { passive: false });
     </script>
     <script type="text/javascript">
-        function isCssFileAdded(cssFilePath) {
+        function isCssFileAdded(fileName, cssFilePath) {
             // Get all the <link> elements in the <head>
             const links = document.getElementsByTagName('link');
 
             // Loop through each <link> element
             for (let i = 0; i < links.length; i++) {
-                if (links[i].rel === 'stylesheet' && links[i].href === window.location.origin + "/" + cssFilePath) {
+                if (links[i].rel === 'stylesheet' && links[i].href.endsWith(fileName)) {
+                    links[i].href = cssFilePath;
                     return true;
                 }
             }
@@ -59,8 +60,9 @@
             return false;
         }
 
-        window.addCssFile = function (cssFile) {
-            if (isCssFileAdded(cssFile)) {
+        window.addCssFile = function (subsLvl, cssFileName) {
+            var cssFile = "css/" + subsLvl + "/" + cssFileName;
+            if (isCssFileAdded(cssFileName, cssFile)) {
                 return;
             }
 

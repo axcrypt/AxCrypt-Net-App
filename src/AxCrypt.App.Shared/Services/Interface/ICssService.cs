@@ -2,5 +2,5 @@
 
 public interface ICssService
 {
-    string[] ApplySubscriptionCssAsync(string subscriptionLevel);
+    IList<KeyValuePair<string, string>> ApplySubscriptionCssAsync(string subscriptionLevel);
 }

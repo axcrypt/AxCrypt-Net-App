@@ -36,7 +36,7 @@
                         <th style="width: 50%;">@Texts.ActivityText</th>
                         <th style="width:25%;" @onclick="SortByDate">
                             Date
-                            <img class="notifiarrow" src="" />
+                            <img class="notifiarrow @DateSortStyle" src="" />
                         </th>
                         <th style="width:15%;">@Texts.ColumnStatusHeader</th>
                         <th style="width: 5%;"></th>
@@ -84,6 +84,8 @@
 @code {
     private NotificationViewModel? model;
 
+    private string DateSortStyle = "";
+
     protected override async Task OnInitializedAsync()
     {
         notificationService.NotificationModel = new();
@@ -106,6 +108,7 @@
     {
         await notificationService.SortNotificationsByDate(model!.DateSortDirection);
         model.DateSortDirection = model.DateSortDirection == SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending;
+        DateSortStyle = model.DateSortDirection == SortDirection.Ascending ? "" : "rotate";
     }
 
     private async Task DeleteNotification(long id)

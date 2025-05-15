@@ -99,6 +99,7 @@
         if (saveResult)
         {
             StatusAlertService.Success("Your new password entry has been Updated!.");
+            secretService.CurrentSecret.Card = CardViewModel;
             navigationManager.NavigateTo("/viewcard");
         }
         else

@@ -1,12 +1,11 @@
 ﻿using AxCrypt.App.Shared.Services.Interface;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AxCrypt.App.Shared.Desktop.Services;
 
 public class CssService : ICssService
 {
-    public string[] ApplySubscriptionCssAsync(string subscriptionLevel)
+    public IList<KeyValuePair<string, string>> ApplySubscriptionCssAsync(string subscriptionLevel)
     {
         string cssBasePath = subscriptionLevel switch
         {
@@ -17,22 +16,24 @@ public class CssService : ICssService
             _ => "default"
         };
 
-        IList<string> cssFiles = new List<string>
+        IList<KeyValuePair<string, string>> cssFiles = new List<KeyValuePair<string, string>>()
         {
-            $"css/{cssBasePath}/sidemenu.min.css",
-            $"css/{cssBasePath}/index.min.css",
-            $"css/{cssBasePath}/site.min.css",
-            $"css/{cssBasePath}/topmenu.min.css",
-            $"css/{cssBasePath}/notification.min.css",
-            $"css/{cssBasePath}/newsecret.min.css",
-            $"css/{cssBasePath}/secretlist.min.css",
-            $"css/{cssBasePath}/securedmessenger.min.css",
-            $"css/{cssBasePath}/support.min.css",
+            new KeyValuePair<string, string>(cssBasePath, "sidemenu.min.css"),
+            new KeyValuePair<string, string>(cssBasePath, "index.min.css"),
+            new KeyValuePair<string, string>(cssBasePath, "site.min.css"),
+            new KeyValuePair<string, string>(cssBasePath, "topmenu.min.css"),
+            new KeyValuePair<string, string>(cssBasePath, "notification.min.css"),
+            new KeyValuePair<string, string>(cssBasePath, "newsecret.min.css"),
+            new KeyValuePair<string, string>(cssBasePath, "secretlist.min.css"),
+            new KeyValuePair<string, string>(cssBasePath, "securedmessenger.min.css"),
+            new KeyValuePair<string, string>(cssBasePath, "support.min.css")
         };
 
         if (subscriptionLevel != "free")
-            cssFiles.Add($"css/{cssBasePath}/sharesecret.min.css");
+        {
+            cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "sharesecret.min.css"));
+        }
 
-        return cssFiles.ToArray();
+        return cssFiles;
     }
 }

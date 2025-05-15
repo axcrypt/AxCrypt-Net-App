@@ -105,8 +105,8 @@
                         </div>
                     }
                     <div style="padding-top: 15px;">
-                        <h3 class="txt-clr font-bold">@string.Format(Texts.SharedKeyUserListTitle, ShareKeyViewModel.ShareKeyUserList!.Count)</h3>
-                        @if (ShareKeyViewModel.ShareKeyUserList.Any())
+                        <h3 class="txt-clr font-bold">@string.Format(Texts.SharedKeyUserListTitle, ShareKeyViewModel.ShareKeyUserList?.Count ?? 0)</h3>
+                        @if (ShareKeyViewModel.ShareKeyUserList != null && ShareKeyViewModel.ShareKeyUserList.Any())
                         {
                             <div class="user-list-bx share-list scroll-container " id="sharedUserList" style="margin-right:0px">
                                 @foreach (ShareKeyUser user in ShareKeyViewModel.ShareKeyUserList!)
