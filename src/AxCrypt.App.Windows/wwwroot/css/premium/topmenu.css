@@ -452,6 +452,9 @@
   .encrypt-pop {
     top: 58%;
   }
+  .advanced-popup {
+    top: 56%;
+  }
 }
 .drp-dwn {
   content: url(/images/premium/BtnBack.svg);
@@ -582,6 +585,16 @@
   color: #48772C;
 }
 
+.advanced-popup img {
+  width: 25px;
+}
+.advanced-popup dl dd {
+  cursor: pointer;
+}
+.advanced-popup :hover {
+  color: #48772C;
+}
+
 @media (max-width: 768px) {
   .manage-acc-sec {
     display: flex;
@@ -703,26 +716,26 @@
 }
 @media (min-width: 1140px) {
   /* Style the toggle switch for settings page */
-  .desk-stngs-popup .toggle, .encrypt-pop .toggle {
+  .desk-stngs-popup .toggle, .encrypt-pop .toggle, .advanced-popup .toggle {
     max-width: 70px;
     height: 30px;
   }
-  .desk-stngs-popup .slider, .encrypt-pop .slider {
+  .desk-stngs-popup .slider, .encrypt-pop .slider, .advanced-popup .slider {
     padding: 0 6px !important;
   }
-  .desk-stngs-popup .slider:before, .encrypt-pop .slider:before {
+  .desk-stngs-popup .slider:before, .encrypt-pop .slider:before, .advanced-popup .slider:before {
     position: absolute;
     content: "";
     width: 24px;
     height: 23px;
   }
-  .desk-stngs-popup input:checked + .slider:before, .encrypt-pop input:checked + .slider:before {
+  .desk-stngs-popup input:checked + .slider:before, .encrypt-pop input:checked + .slider:before, .advanced-popup input:checked + .slider:before {
     transform: translateX(38px);
   }
-  .desk-stngs-popup .on-text, .encrypt-pop .on-text {
+  .desk-stngs-popup .on-text, .encrypt-pop .on-text, .advanced-popup .on-text {
     left: 6px;
   }
-  .desk-stngs-popup .off-text, .encrypt-pop .off-text {
+  .desk-stngs-popup .off-text, .encrypt-pop .off-text, .advanced-popup .off-text {
     right: 5px;
   }
   .accnt-prfl {

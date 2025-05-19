@@ -81,6 +81,7 @@
 
     private void UpdatePageState()
     {
+        NotificationCount = notificationService.NotificationModel.Notifications.Count();
         InvokeAsync(() =>
         {
             StateHasChanged(); // Refresh UI

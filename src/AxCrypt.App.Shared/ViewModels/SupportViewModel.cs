@@ -14,7 +14,7 @@ public class SupportViewModel
 
     public string Body { get; set; } = "";
 
-    public string Subject { get; set; }
+    public string? Subject { get; set; }
 
     public bool IsLoading { get; set; }
 
@@ -64,7 +64,7 @@ public class SupportViewModel
         submitted = await _supportService.SendPremiumSupportRequestEmail(Subject, Body);
         if (submitted) 
         {
-            statusAlertService.Success("Successfully send the mail to Premium support");
+            statusAlertService.Success("Send successfully");
         }
         else
         {

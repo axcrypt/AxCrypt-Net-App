@@ -11,7 +11,7 @@
 @inject NavigationManager _navigationManager
 
 <div class="mb-sec">
-    <NavLink class="mb-title flex-start" href="mainpagemobile" style="align-items: center;">
+    <NavLink class="mb-title flex-start" href="/" style="align-items: center;">
         <img class="back-btn" src="" alt="go-back-img" />
         <span class="goback-text">@Texts.PromptSupport</span>
     </NavLink>
@@ -145,6 +145,7 @@
     private async void SubmitSupportAsync()
     {
         await SupportViewModel.SubmitSupportAsync(LogOnModel.SubscriptionLevel);
+        UpdateState();
     }
 
     private void OpenWebPage(string url)
@@ -157,5 +158,13 @@
         SupportViewModel.Body = "";
         SupportViewModel.Subject = "";
         SupportViewModel.ErrorMessage = "";
+    }
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
     }
 }

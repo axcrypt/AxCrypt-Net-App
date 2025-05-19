@@ -4,18 +4,34 @@
 @inject AdvancedOptionsViewModel viewModel
 
 @if (IsVisible)
-{   
+{
     <div id="modal-dialog6" class="modalDialog">
         <div style="text-align: left;">
             <div class="modal-header text-center" style="display:block; font-weight:600;">
-                <span>Advanced Option</span>
+                <span>Application configuration</span>
             </div>
             <div class="modal-body">
                 <div style="padding-bottom: 15px;">
-                    <label>Application Config Path</label><br />
+                    <label>Application Configuration Path</label>
+                    <span class="info-tooltip" style="margin:0px 2px -2px 4px;">
+                        <img src="/images/default/IcoInfOld.svg" alt="info"/>
+                        <span class="tooltip-text">
+                            Directory storing AxCrypt’s settings, user preferences,<br />
+                            and session data to preserve user-specific<br />
+                            configurations across sessions and ensure personalized functionality.
+                        </span>
+                    </span><br />
                     <input type="path" @bind="viewModel.AppConfigPath" readonly="readonly" style="width:100%;" />
                 </div>
-                <label>Temp File Path</label>
+                <label>Temporary File Path</label>
+                <span class="info-tooltip" style="margin:0px 2px -2px 4px;">
+                    <img src="/images/default/IcoInfOld.svg" alt="info" />
+                    <span class="tooltip-text">
+                        This path temporarily stores decrypted versions of encrypted files when opened by the user.<br />
+                        Files are automatically re-encrypted or safely removed after being closed<br />
+                        to maintain security and prevent exposure of sensitive data.
+                    </span>
+                </span>
                 <div class="center-column">
                     <input type="path" @bind="viewModel.TempConfigPath" @oninput="(e)=> viewModel.BrowseButton_click(e)" style="width:75%;" />
                     <button class="button font-medium success btn-small" @onclick="(e)=> viewModel.BrowseButton_click(e)">Browse</button>
@@ -32,6 +48,41 @@
         </div>
     </div>
 }
+<style>
+    .info-tooltip {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+        .info-tooltip img {
+            width: 16px;
+            height: 16px;
+        }
+
+    .tooltip-text {
+        visibility: hidden;
+        width: 260px;
+        background-color: #333;
+        color: #fff;
+        text-align: left;
+        padding: 8px;
+        border-radius: 5px;
+        position: absolute;
+        z-index: 10;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: normal;
+        line-height: 1.4;
+        font-size: 13px;
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-tooltip:hover .tooltip-text {
+        visibility: visible;
+    }
+</style>
 @code {
     private bool IsVisible { get; set; }
 

@@ -289,7 +289,6 @@ namespace AxCrypt.App.Shared.Services
         private static DateTime GetVisibleUntil(SecureMsgrVisibility visibility)
         {
             DateTime currentDateTime = New<INow>().Utc;
-
             switch (visibility)
             {
                 case SecureMsgrVisibility.Once:
@@ -300,16 +299,16 @@ namespace AxCrypt.App.Shared.Services
                     return currentDateTime.AddHours(1);
 
                 case SecureMsgrVisibility.OneDay:
-                    return currentDateTime.AddDays(1).Date;
+                    return currentDateTime.AddDays(1);
 
                 case SecureMsgrVisibility.OneWeek:
-                    return currentDateTime.AddDays(7).Date;
+                    return currentDateTime.AddDays(7);
 
                 case SecureMsgrVisibility.OneMonth:
-                    return currentDateTime.AddMonths(1).Date;
+                    return currentDateTime.AddMonths(1);
 
                 case SecureMsgrVisibility.OneYear:
-                    return currentDateTime.AddYears(1).Date;
+                    return currentDateTime.AddYears(1);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(visibility), visibility, null);

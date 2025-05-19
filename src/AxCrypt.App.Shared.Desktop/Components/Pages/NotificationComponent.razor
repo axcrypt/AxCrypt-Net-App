@@ -46,7 +46,7 @@
                 <tbody id="notilist" class="notify-pg-tbl-body">
                     @foreach (NotificationItemViewModel notification in model.Notifications)
                     {
-                        <tr>
+                        <tr class="context-menu-target">
                             @*  <td><img class="notification-unread-button" src="" alt=""></td> *@
                             <td>
                                 @if (notification.PushNotify)
@@ -70,7 +70,7 @@
                             <td>
                                 @if (!notification.PushNotify)
                                 {
-                                    <input class="deletebin" src="" alt="delete" style="border-style: hidden; background-color: transparent !important;" value="" @onclick="async () => await DeleteNotification(notification.Id)" />
+                                    <button class="deletebin" src="" alt="delete" style="border-style: hidden; background-color: transparent !important;" value="" @onclick="async () => await DeleteNotification(notification.Id)" />
                                 }
                             </td>
                         </tr>

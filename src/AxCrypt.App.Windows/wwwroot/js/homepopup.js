@@ -158,11 +158,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             if (!IgnoreClosePopupOnPopupActions("settings-dropdown-popup", targetobj)) {
                 if (!IgnoreClosePopupOnPopupActions("inactivity-signout-side-popup", targetobj)) {
                     if (!IgnoreClosePopupOnPopupActions("encryption-file-property-side-popup", targetobj)) {
-                        if (!IgnoreClosePopupOnPopupActions("debug-side-popup", targetobj)) {
-                            if (document.getElementById("settings-dropdown-click-action") != undefined) {
-                                document.getElementById("settings-dropdown-click-action").classList.remove("active");
+                        if (!IgnoreClosePopupOnPopupActions("advanced-options-side-popup", targetobj)) {
+                            if (!IgnoreClosePopupOnPopupActions("debug-side-popup", targetobj)) {
+                                if (document.getElementById("settings-dropdown-click-action") != undefined) {
+                                    document.getElementById("settings-dropdown-click-action").classList.remove("active");
+                                }
+                                HidePopup("settings-dropdown-popup");
                             }
-                            HidePopup("settings-dropdown-popup");
                         }
                     }
                 }
@@ -198,6 +200,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         else {
             if (!IgnoreClosePopupOnPopupActions("encryption-file-property-side-popup", targetobj)) {
                 HidePopup("encryption-file-property-side-popup");
+            }
+        }
+
+        //Handle show/hide the advanced option menu side popup
+        if (targetobj.id === "advanced-options-button-action" || targetobj.parentElement.id === "advanced-options-button-action") {
+            ShowHidePopup("advanced-options-side-popup");
+        }
+        else {
+            if (!IgnoreClosePopupOnPopupActions("advanced-options-side-popup", targetobj)) {
+                HidePopup("advanced-options-side-popup");
             }
         }
 

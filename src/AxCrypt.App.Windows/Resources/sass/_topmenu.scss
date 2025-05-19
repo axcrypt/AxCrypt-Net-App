@@ -534,6 +534,10 @@
     .encrypt-pop {
         top: 58%;
     }
+    
+    .advanced-popup {
+        top: 56%;
+    }
 }
 
 //languages dropdown
@@ -662,6 +666,20 @@
 .encrypt-pop {
     img {
         width: 30px;
+    }
+
+    dl dd {
+        cursor: pointer;
+    }
+
+    :hover {
+        color: $TxtClr;
+    }
+}
+
+.advanced-popup {
+    img {
+        width: 25px;
     }
 
     dl dd {
@@ -824,7 +842,7 @@
 
 @media (min-width: 1140px) {
     /* Style the toggle switch for settings page */
-    .desk-stngs-popup, .encrypt-pop {
+    .desk-stngs-popup, .encrypt-pop, .advanced-popup {
         .toggle {
             max-width: 70px;
             height: 30px;

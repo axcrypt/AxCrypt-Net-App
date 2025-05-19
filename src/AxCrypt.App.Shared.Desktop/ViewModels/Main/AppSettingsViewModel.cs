@@ -1,5 +1,4 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Models;
@@ -48,6 +47,7 @@ public class AppSettingsViewModel : ViewModelBase
         IsFileNameOn = New<UserSettings>().EncryptFilePropertiesFileName;
         AdvancedOptionsViewModel = new AdvancedOptionsViewModel();
         _logViewModel = AxCServiceProviderExtension.LogViewModel;
+        EnableDebugPopup = New<UserSettings>().DebugMode;
     }
 
     public void Initialized()
@@ -63,14 +63,6 @@ public class AppSettingsViewModel : ViewModelBase
     }
 
     public AdvancedOptionsViewModel AdvancedOptionsViewModel { get; set; }
-
-    public SubscriptionLevel SubscriptionLevel
-    {
-        get
-        {
-            return _logOnViewModel.SubscriptionLevel;
-        }
-    }
 
     public List<int> InactivityTimeoutOptions { get; } = new List<int> { 0, 5, 15, 30, 60 };
 
@@ -90,6 +82,7 @@ public class AppSettingsViewModel : ViewModelBase
     public DateTime CreatedTime { get; set; }
     public double SelectedOption { get; set; } = 0;
     public bool DebugPopup { get; set; }
+    public bool EnableDebugPopup { get; set; }
 
     public bool EnableIncludeSubfolders { get; set; }
 
@@ -128,7 +121,6 @@ public class AppSettingsViewModel : ViewModelBase
     {
         Dictionary<string, object> attributes = new Dictionary<string, object>();
         attributes["class"] = "nav-link" + (DebugPopup ? " active" : "");
-        UpdateDebugMode(true);
         return attributes;
     }
 
@@ -251,6 +243,8 @@ public class AppSettingsViewModel : ViewModelBase
         _logOnViewModel.UIStateChanged();
     }
 
+    public void ToggleDebug() => UpdateDebugMode(!New<UserSettings>().DebugMode);
+
     public void FilePropertiesDateModified(EventArgs e)
     {
         New<UserSettings>().EncryptFilePropertiesDateModified = !IsDateModifiedOn;
@@ -278,12 +272,8 @@ public class AppSettingsViewModel : ViewModelBase
 
     #region Debug Section
 
-    public bool CanEnableDebug { get; set; }
-
     public void UpdateDebugMode(bool enabled)
     {
-        Resolve.Log.SetLevel(enabled ? LogLevel.Debug : LogLevel.Error);
-        OS.Current.DebugMode(enabled);
         New<UserSettings>().DebugMode = enabled;
     }
 

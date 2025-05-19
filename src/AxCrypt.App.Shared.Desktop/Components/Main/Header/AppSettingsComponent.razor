@@ -219,9 +219,9 @@
     }
 
     <div class="settings-menu-item-container">
-        <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.ToggleAdvancedOption()">
+        <NavLink class="nav-link" @attributes="AppSettingsViewModel.NavLinkAttributes2()" id="advanced-options-button-action">
             <img class="stngs-menu-icon IcoAdvsSttns" alt="IcoAdvsSttns" />
-            <span>Advanced options</span>
+            <span>Advanced settings</span>
         </NavLink>
     </div>
 
@@ -284,13 +284,17 @@
             <span>@Texts.InviteUserToolStripMenuItemText</span>
         </NavLink>
     </div>
-    <div class="settings-menu-item-container">
-        <NavLink class="debug" @attributes="AppSettingsViewModel.NavLinkAttributes2()" id="debug-button-action">
-            <img class="stngs-menu-icon IcoDbg" alt="IcoDbg" />
-            <span>@Texts.DebugToolStripMenuItemText</span>
-            <img class="next-arrow" />
-        </NavLink>
-    </div>
+
+    @if (AppSettingsViewModel.EnableDebugPopup)
+    {
+        <div class="settings-menu-item-container">
+            <NavLink class="debug" @attributes="AppSettingsViewModel.NavLinkAttributes2()" id="debug-button-action">
+                <img class="stngs-menu-icon IcoDbg" alt="IcoDbg" />
+                <span>@Texts.DebugToolStripMenuItemText</span>
+                <img class="next-arrow" />
+            </NavLink>
+        </div>
+    }
 </div>
 
 <div class="model-popup sub-pop1" style="display:none;" id="inactivity-signout-side-popup">
@@ -404,7 +408,6 @@
     </div>
 </div>
 
-
 @if (AppSettingsViewModel.ShowVersion)
 {
     <div id="modal-dialog1" class="modalDialog" style="display: block;">
@@ -491,6 +494,45 @@
         </div>
     </div>
 }
+
+<div class="model-popup sub-pop1 advanced-popup" style="display:none;" id="advanced-options-side-popup">
+    <div id="toggle">
+        <dl>
+            <dd class="center-column" style="cursor:pointer">
+                <div @onclick="(e)=> AppSettingsViewModel.ToggleAdvancedOption()">
+                    <img class="" src="/images/default/IcoAdvsSttns.svg" alt="IcoAdvsSttns" />
+                    <span class="font-medium grey-clr">App configuration </span>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dd class="center-column">
+                <img class="" src="/images/default/IcoDbg.svg" alt="IcoDbg" style="margin-right:5px;" />
+                <span class="font-medium grey-clr">
+                    @Texts.DebugToolStripMenuItemText
+                </span>
+                <div style="float:right; padding-left:15px;">
+                    <label class="toggle">
+                        <input type="checkbox" @bind="@AppSettingsViewModel.EnableDebugPopup" @onclick="AppSettingsViewModel.ToggleDebug">
+
+                        <span class="slider round">
+                            @if (AppSettingsViewModel.EnableDebugPopup)
+                            {
+                                <span class="on-off-text on-text">ON</span>
+                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                            }
+                            else
+                            {
+                                <span class="on-off-text on-text" style="display:none;">ON</span>
+                                <span class="on-off-text off-text">OFF</span>
+                            }
+                        </span>
+                    </label>
+                </div>
+            </dd>
+        </dl>
+    </div>
+</div>
 
 <style>
     .input-group {

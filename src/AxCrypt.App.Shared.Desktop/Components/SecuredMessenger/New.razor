@@ -156,6 +156,8 @@
         }
 
         await newSecMsgrViewModel.SentMessageAsync(newSecMsgrViewModel);
+        ErrorMessage = "";
+        newSecMsgrViewModel.UserEmail = "";
     }
 
     private void DeleteDraftMessage()

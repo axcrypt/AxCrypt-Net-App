@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services.Interface;
@@ -31,13 +32,13 @@ public class ProfileViewModel
     private string DefaultExt = ".txt";
 
     public AccountModel Account { get; set; }
-    public bool SubsDtlsPopup { get; set; }
-    public bool IsDialogOpen { get; set; } = false;
+
     public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<LicensePolicy>().Expiration.ToString("dd MMMM yyyy", System.Globalization.CultureInfo.CurrentCulture);
     public ProfileViewModel()
     {
         _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
         _registerViewModel = AxCServiceProviderExtension.RegisterViewModel!;
+        _mainViewModel = _logOnViewModel.MainViewModel;
         _statusAlertService = AxCServiceProviderExtension.StatusAlertService;
         ExportKeyFile = AxCServiceProviderExtension.GetService<IExportKeyManagementFile>()!;
         Account = new AccountModel();
@@ -46,8 +47,7 @@ public class ProfileViewModel
     public async Task InitializeAsync()
     {
         _mainViewModel = _logOnViewModel.MainViewModel;
-        _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
-        Account.IsLoggedOn = _mainViewModel.LoggedOn;
+        Account.IsLoggedOn = New<KnownIdentities>().IsLoggedOn;
 
         Account.SubscriptionLevel = _logOnViewModel.SubscriptionLevel;
         Account.UserEmail = Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
