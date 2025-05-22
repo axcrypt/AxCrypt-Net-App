@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Components.Pages;
 using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Desktop.ViewModels;
@@ -40,7 +41,9 @@ public static class AppDesktopFactory
         services.AddSingleton<SecuredMessage>();
 
         services.AddSingleton<RecentFoldersComponent>();
+        services.AddSingleton<CopyToClipboardUtility>();
 
-        TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());    
+        TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
+
     }
 }

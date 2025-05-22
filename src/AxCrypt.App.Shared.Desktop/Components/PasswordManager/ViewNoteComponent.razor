@@ -4,13 +4,14 @@
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.Content
 @using AxCrypt.Core.UI
-@using Microsoft.Maui.Controls
+@using AxCrypt.App.Shared.Desktop.Code
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject IStatusAlertService StatusAlertService;
 @inject NavigationManager navigationManager
 @inject SecretService secretService
 @inject ViewSecretViewModel viewSecretViewModel
+@inject CopyToClipboardUtility CopyToClipboardUtility
 @inject IJSRuntime jsRuntime
 
 <div class="page-max-height">
@@ -31,10 +32,11 @@
                     <label for="Note_Note">@Texts.NoteLabel</label>
                     <div style="display:flex; position: relative;">
                         <textarea id="noteInput" type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isNoteVisible, secretService.CurrentSecret.Note.Note)" readonly="readonly" @onclick="()=> VisibleReadOnlySecret(true)"></textarea>
-                        <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="()=> CopyToClipboard(secretService.CurrentSecret!.Note.Note)">
+                        <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="async ()=> await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret!.Note.Note)">
                             <img class="clipbrd" src="" alt="copy-clp-brd">
                         </div>
                     </div>
+                    <span id="copiedMessage" style="color: green; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
                 </li>
                 @if (secretService.CurrentSecret.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
                 {
@@ -46,7 +48,6 @@
                         </div>
                     </li>
                 }
-                <span id="copiedMessage" style="display:none; color: green; font-weight: bold;">Copied!</span>
                 <li>
                     <div class="center-column" style="gap: 20px;">
                         <div>
@@ -143,11 +144,6 @@
                 navigationManager.NavigateTo(url);
             }
         }
-    }
-
-    private async Task CopyToClipboard(string note)
-    {
-        await jsRuntime.InvokeVoidAsync("copyToClipboard", note);
     }
 
     private bool isNoteVisible = false;

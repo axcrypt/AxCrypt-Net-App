@@ -28,7 +28,7 @@
             return;
 
         if ($(e.target).is('#copy-to-clipboard'))
-            CopyToClipboard();
+            //CopyToClipboard();
 
         hidePassword();
     }
@@ -38,7 +38,7 @@
             return;
 
         if ($(e.target).is('#card-exp-copy-to-cpbd'))
-            CardCopyToClipboard();
+            //CardCopyToClipboard();
 
         hideCardSecCode();
     }
@@ -67,15 +67,15 @@ function hideCardSecCode() {
     $('#card-exp-display-value').html('*** Click to show ***');
 }
 
-function CopyToClipboard() {
-    showSecret();
-    document.execCommand("copy");
-}
+//function CopyToClipboard() {
+//    showSecret();
+//    document.execCommand("copy");
+//}
 
-function CardCopyToClipboard() {
-    showCardSecret();
-    document.execCommand("copy");
-}
+//function CardCopyToClipboard() {
+//    showCardSecret();
+//    document.execCommand("copy");
+//}
 
 function showSecret() {
     $('#secret-display-value').html($('#secret-value').val());

@@ -46,9 +46,9 @@
                     id="" />
                     <div>
                         <label>Date from</label>
-                        <InputDate @bind-Value="SecMsgrViewModel.Messenger.StartDate" style="width: 23%;" name="date-from" />
+                        <InputDate @bind-Value="SecMsgrViewModel.Messenger.StartDate" style="width: 23%; color:#000;" name="date-from" />
                         <span class="font-high" style="padding: 10px;">to</span>
-                        <InputDate @bind-Value="SecMsgrViewModel.Messenger.EndDate" style="width: 23%;" name="date-to" />
+                        <InputDate @bind-Value="SecMsgrViewModel.Messenger.EndDate" style="width: 23%; color: #000;" name="date-to" />
                     </div>
                     <div style="display: flex; float: right; padding-top: 20px;">
                         <button type="reset" class="button border btn-large font-medium" style="margin-right: 30px;" @onclick="ClearAllFilters">@Texts.ClearAllText</button>

@@ -1,18 +1,18 @@
 ﻿@using AxCrypt.App.Shared.ViewModels.Secret
 @using AxCrypt.App.Shared.Helpers
-@using AxCrypt.App.Shared.Models.Secret
+@using AxCrypt.App.Shared.Desktop.Code
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.Content
 @using AxCrypt.Core
 @using AxCrypt.Core.UI
-@using Microsoft.Maui.Controls
-@using Microsoft.Maui.Devices
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject IStatusAlertService StatusAlertService;
 @inject NavigationManager navigationManager
 @inject SecretService secretService
 @inject ViewSecretViewModel viewSecretViewModel
+@inject CopyToClipboardUtility CopyToClipboardUtility
+
 @inject IJSRuntime JSRuntime
 
 <div class="page-max-height">
@@ -29,7 +29,7 @@
                     <label for="Card_CardNumber">@Texts.CardNumberPrompt</label>
                     <div style="position: relative;">
                         <input id="cardNumberInput" maxlength="19" minlength="12" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isCardNumberVisible, secretService.CurrentSecret.Card.CardNumber)" readonly="readonly" type="text" @onclick="ShowCardNumber">
-                        <div id="cp-card-number-clipbrd" style="position: absolute; right: 10px; top:2px;cursor: pointer;" class="copy-to-clipbrd" @onclick="() => CopyToClipboard(secretService.CurrentSecret.Card.CardNumber)">
+                        <div id="cp-card-number-clipbrd" style="position: absolute; right: 10px; top:2px;cursor: pointer;" class="copy-to-clipbrd" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret.Card.CardNumber)">
                             <img class="clipbrd" src="" alt="copy-clp-brd">
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
                         <div style="display:flex; position: relative;">
                             <input id="securityCodeInput" maxlength="1000" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isSecurityCodeVisible, secretService.CurrentSecret.Card.SecurityCode)" readonly="readonly" type="text" @onclick="ShowSecurityCode">
-                            <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="() => CopyToClipboard(secretService.CurrentSecret.Card.SecurityCode)">
+                            <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret.Card.SecurityCode)">
                                 <img class="clipbrd" src="" alt="copy-clp-brd">
                             </div>
                         </div>
@@ -59,6 +59,7 @@
                         <input id="card-exp-date-inp" style="color:#494949 !important; background-color:#E2E2E2" @bind-value="@secretService.CurrentSecret.Card.ExpirationDate" type="text" readonly="readonly">
                     </div>
                 </li>
+                <span id="copiedMessage" style="color: green; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
                 @if (secretService.CurrentSecret.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
                 {
 
@@ -69,7 +70,6 @@
                         </div>
                     </li>
                 }
-                <span id="copiedMessage" style="display:none; color: green; font-weight: bold;">Copied!</span>
                 <li>
                     <div class="center-column" style="gap: 20px;">
                         <div>
@@ -211,11 +211,6 @@
             isSecurityCodeVisible = isVisible;
         }
         StateHasChanged();
-    }
-
-    private async Task CopyToClipboard(string value)
-    {
-        await JSRuntime.InvokeVoidAsync("copyToClipboard", value);
     }
 
     void UpdateStateChanged()

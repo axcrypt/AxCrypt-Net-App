@@ -156,14 +156,11 @@
         }
 
         await newSecMsgrViewModel.SentMessageAsync(newSecMsgrViewModel);
-        ErrorMessage = "";
-        newSecMsgrViewModel.UserEmail = "";
     }
 
     private void DeleteDraftMessage()
     {
         newSecMsgrViewModel.UserEmail = "";
-        ErrorMessage = "";
         newSecMsgrViewModel.IsVisible = !newSecMsgrViewModel.IsVisible;
         newSecMsgrViewModel.UpdateViewState();
     }
@@ -180,6 +177,8 @@
 
     void UpdateState()
     {
+        ErrorMessage = "";
+
         InvokeAsync(() =>
         {
             StateHasChanged();

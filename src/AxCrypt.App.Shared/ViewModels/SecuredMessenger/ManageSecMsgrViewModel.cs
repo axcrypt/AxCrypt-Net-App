@@ -228,6 +228,7 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
             NewSecMsgrViewModel.ReceiverEmails = recipients;
             NewSecMsgrViewModel.ReceiverList = recipients.Split(",").Select(ru => new MessengerReceiver { EmailAddress = ru, Read = DateTime.MinValue }).ToList();
 
+            NewSecMsgrViewModel.UserEmail = "";
             NewSecMsgrViewModel.IsVisible = true;
             NewSecMsgrViewModel.UpdateViewState();
         }
@@ -278,6 +279,8 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
             NewSecMsgrViewModel.Initialize(Messenger.SecMessengerFilterTab);
             SelectedMessageId = new Guid();
             NewSecMsgrViewModel.IsVisible = true;
+            NewSecMsgrViewModel.UserEmail = "";
+
             NewSecMsgrViewModel.UpdateViewState();
             UpdateViewState();
         }
