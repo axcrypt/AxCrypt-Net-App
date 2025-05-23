@@ -46,19 +46,10 @@ public class FeedbackViewModel
         // Optionally, reset form state or perform other actions
 
         IAccountService accountService = New<LogOnIdentity, IAccountService>(New<KnownIdentities>().DefaultEncryptionIdentity);
-        try
-        {
-            using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorFeedbackMessage, Texts.ProgressIndicatorWaitMessage))
-            {
-                await accountService.SendFeedbackAsync(SelectedSubject.ToString(), UserInput);
-            }
+        await accountService.SendFeedbackAsync(SelectedSubject.ToString(), UserInput);
 
-            UserInput = string.Empty;
-            LogOnViewModel.FeedbackDialog.Close();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        ErrorMessage = string.Empty;
+        UserInput = string.Empty;
+        LogOnViewModel.FeedbackDialog.Close();
     }
 }

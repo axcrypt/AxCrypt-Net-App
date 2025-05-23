@@ -3,7 +3,6 @@
 @using AxCrypt.App.Shared.Models.Notification
 @using AxCrypt.Content
 
-@inject NotificationViewModel model
 @inject UserNotificationService service
 
 <div class="notification-popup" style="display:none;" id="notification-dropdown-popup">
@@ -41,7 +40,9 @@
 </div>
 
 @code {
-    protected override async Task OnInitializedAsync()
+    private NotificationViewModel? model { get; set; } = null;
+
+    protected override void OnInitialized()
     {
         model = service.NotificationModel;
         service.OnUpdateViewState += UpdateState;
@@ -49,6 +50,7 @@
 
     void UpdateState()
     {
+        model = service.NotificationModel;
         InvokeAsync(() =>
         {
             StateHasChanged(); // Refresh UI

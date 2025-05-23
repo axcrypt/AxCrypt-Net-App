@@ -14,7 +14,7 @@
             {
                 <div class="error-message">@FeedbackViewModel.ErrorMessage</div>
             }
-            <form id="feedback-form" @onsubmit="FeedbackViewModel.HandleFormSubmit">
+            <div>
                 <div class="flex-start" style="min-height:32px;">
                     @foreach (FeedbackSubject subject in FeedbackViewModel.AllSubject)
                     {
@@ -28,9 +28,9 @@
                 <div class="align-items" style="gap: 4%;">
                     <textarea id="userInput" @bind="FeedbackViewModel.UserInput" rows="5" cols="30" style="margin-top: 0px;"></textarea>
                 </div>
-                <input type="submit" id="submit-button" class="button success btn-medium font-medium" value="Submit" style="margin-right: 15px; padding: 6px 0px;" />
+                <input type="button" @onclick="FeedbackViewModel.HandleFormSubmit" class="button success btn-medium font-medium" value="Submit" style="margin-right: 15px; padding: 6px 0px;" />
                 <input type="button" @onclick="Close" class="button border btn-medium font-medium" value="Cancel" style="" />
-            </form>
+            </div>
         </div>
     </div>
 }
@@ -56,6 +56,7 @@
     void Close()
     {
         FeedbackViewModel.UserInput = "";
+        FeedbackViewModel.ErrorMessage = "";
         FeedbackViewModel.LogOnViewModel.FeedbackDialog.Close();
     }
 }

@@ -104,8 +104,7 @@ public class AdvancedOptionsViewModel : ViewModelBase
     public void CancelButton_Click(EventArgs e)
     {
         ErrorMessage = "";
-        TempConfigPath = "";
-        new AdvancedOptionsViewModel();
+        TempConfigPath = New<UserSettings>().TemporaryFilePath;
         LogOnViewModel.AdvancedOptionsDialog.Close();
         UpdateViewState();
         return;

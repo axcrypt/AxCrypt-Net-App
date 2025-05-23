@@ -1,6 +1,7 @@
 ﻿@page "/debuglog"
 @using AxCrypt.Abstractions
 @using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.Core
 @using AxCrypt.Core.Extensions
 @using Microsoft.Extensions.Logging
@@ -8,9 +9,9 @@
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject LogViewModel LogService
+@inject IStatusAlertService StatusAlerService
 
 <div style="padding:8px;">
-    <span style="text-align:center;font-weight:600;">Debug Log Viewer</span>
     <button @onclick="ExportLogs" style="float: right; margin:1px 5px 1px 0px;" class="button font-medium success btn-small">Export</button>
     <button style="float: right;margin:1px 5px 1px 0px;" class="button" @onclick="ClearLogs">Clear Logs</button>
 </div>
@@ -37,12 +38,10 @@
 
 @code {
     string DebugFileName = $"DebugLogs_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
-    
-    [Inject] 
-    IJSRuntime? JS { get; set; }
 
     protected override void OnInitialized()
     {
+        LogService.ClearLogs();
         LogService.OnUpdateViewState += UpdateState;
     }
 
@@ -53,17 +52,39 @@
 
     private async Task ExportLogs()
     {
-        string logs = string.Join(Environment.NewLine, LogService.Logs);
-        string fileName = DebugFileName;
+        try
+        {
+            string logs = string.Join(Environment.NewLine, LogService.Logs);
+            string fileName = DebugFileName;
 
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(logs));
-        using DotNetStreamReference streamRef = new DotNetStreamReference(stream);
-        await JS!.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(logs);
+
+            string downloadsFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+            string filePath = Path.Combine(downloadsFolderPath, fileName);
+
+            int count = 1;
+            while (File.Exists(filePath))
+            {
+                string tempFileName = $"DebugLogs_{DateTime.Now:yyyyMMdd_HHmmss}.{count}.txt";
+                filePath = Path.Combine(downloadsFolderPath, tempFileName);
+                count++;
+            }
+
+            await File.WriteAllBytesAsync(filePath, bytes);
+            StatusAlerService.Success("Exported successfully!");
+        }
+
+        catch (Exception ex)
+        {
+            await New<Core.UI.IPopup>().ShowAsync(Core.UI.PopupButtons.Ok, AxCrypt.Content.Texts.MessageErrorTitle, ex.Message);
+            StatusAlerService.Error("Failed to export!");
+        }
     }
 
-    private async Task ClearLogs()
+    private void ClearLogs()
     {
-        await JS.InvokeVoidAsync("clearLoggerView");
+        LogService.ClearLogs();
+        UpdateState();
     }
 
     void UpdateState()
@@ -74,34 +95,3 @@
         });
     }
 }
-
-<script type="text/javascript">
-    var AppendMessageOnLogger = (logText) => {
-        var appendHtml = document.createElement("pre");
-        appendHtml.textContent = logText;
-
-        var loggerSectionElement = document.getElementById("logger_log_section");
-        if (loggerSectionElement !== undefined && loggerSectionElement !== null) {
-            loggerSectionElement.appendChild(appendHtml);
-        }
-    };
-
-    window.downloadFileFromStream = async (fileName, contentStreamReference) => {
-        const arrayBuffer = await contentStreamReference.arrayBuffer();
-        const blob = new Blob([arrayBuffer]);
-        const url = URL.createObjectURL(blob);
-        const anchorElement = document.createElement('a');
-        anchorElement.href = url;
-        anchorElement.download = fileName ?? 'log.txt';
-        anchorElement.click();
-        anchorElement.remove();
-        URL.revokeObjectURL(url);
-    };
-
-    window.clearLoggerView = () => {
-        const loggerSectionElement = document.getElementById("logger_log_section");
-        if (loggerSectionElement) {
-            loggerSectionElement.innerHTML = ""; // Clears all logs from the DOM
-        }
-    };
-</script>

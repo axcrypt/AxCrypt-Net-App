@@ -34,5 +34,13 @@ namespace AxCrypt.App.Shared.Services
         {
             UpdateViewState(); // Calls StateHasChanged via base class
         }
+
+        public void ClearLogs()
+        {
+            lock (_lock)
+            {
+                _logs.Clear();
+            }
+        }
     }
 }

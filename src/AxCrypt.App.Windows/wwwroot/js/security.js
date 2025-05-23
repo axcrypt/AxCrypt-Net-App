@@ -148,3 +148,15 @@ function showCards() {
     document.getElementById('recentshowPasswords').style.display = 'none';
     document.getElementById('showdefaultPage').style.display = 'none';
 }
+
+function addClickListenerOutside(dotNetHelper, inputId) {
+    document.addEventListener('click', function (event) {
+        var input = document.getElementById(inputId);
+        if (!input) return;
+        var withinBoundaries = event.composedPath().includes(input);
+
+        if (!withinBoundaries) {
+            dotNetHelper.invokeMethodAsync('HideField', inputId);
+        }
+    });
+}

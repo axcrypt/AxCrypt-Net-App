@@ -568,7 +568,6 @@
     protected override void OnInitialized()
     {
         AppSettingsViewModel.Initialized();
-        AppSettingsViewModel.AdvancedOptionsViewModel.Initialize();
         AppSettingsViewModel.OnUpdateViewState += UpdatePageState;
 
         base.OnInitialized();

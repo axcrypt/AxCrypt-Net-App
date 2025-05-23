@@ -253,6 +253,7 @@ public class ProfileViewModel
             return;
         }
 
+        LogWindowService.CloseLogWindow();
         await ShutDownAnd(New<IUIThread>().ExitApplication);
     }
 
