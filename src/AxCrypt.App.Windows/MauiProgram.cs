@@ -9,6 +9,7 @@ using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
+using AxCrypt.App.Shared.Services;
 
 namespace AxCrypt.App.Windows
 {
@@ -58,6 +59,7 @@ namespace AxCrypt.App.Windows
 
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
+            services.AddSingleton<FileDropService>();
 
             services.AddSingleton<MainPage>();
             services.AddSingleton<Home>();

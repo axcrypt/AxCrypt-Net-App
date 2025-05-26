@@ -6,6 +6,7 @@ using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Core;
@@ -14,12 +15,16 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System.Globalization;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage;
 using static AxCrypt.Abstractions.TypeResolve;
+using DataPackageOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation;
 
 namespace AxCrypt.App.Windows;
 
 public partial class MainPage : ContentPage, ISignIn
 {
+    private readonly FileDropService _fileDropService;
     private ICustomNavigationService? _navigationManager;
     private LogOnViewModel? _logOnService;
     private RegisterViewModel? _registerViewModel;
@@ -27,6 +32,9 @@ public partial class MainPage : ContentPage, ISignIn
     private MainViewModel? _mainViewModel;
     private FileOperationViewModel? _fileOperationViewModel;
     private KnownFoldersViewModel? _knownFoldersViewModel;
+
+    private const string? _homePage = "/";
+    private const string? _securedFolders = "/securedfolders";
 
     private ApiVersion? _apiVersion;
 
@@ -36,7 +44,7 @@ public partial class MainPage : ContentPage, ISignIn
         //new Styling(Resources.axcrypticon).Style(this, _recentFilesContextMenuStrip, _watchedFoldersContextMenuStrip);
     }
 
-    public MainPage(LogOnViewModel logOnService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel) : this()
+    public MainPage(LogOnViewModel logOnService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel, FileDropService fileDropService) : this()
     {
         _logOnService = logOnService;
         _mainViewModel = mainViewModel;
@@ -44,6 +52,69 @@ public partial class MainPage : ContentPage, ISignIn
         _knownFoldersViewModel = knownFoldersViewModel;
         _registerViewModel = registerViewModel;
         new AppMain().Initialize(logOnService, mainViewModel, fileOperationViewModel, knownFoldersViewModel, registerViewModel);
+
+        _fileDropService = fileDropService;
+
+#if WINDOWS
+        Microsoft.Maui.Handlers.PageHandler.Mapper.AppendToMapping("DragDrop", (handler, view) =>
+        {
+            Microsoft.Maui.Platform.ContentPanel nativeView = handler.PlatformView;
+            nativeView.AllowDrop = true;
+
+            nativeView.DragOver += (sender, e) =>
+            {
+                string? currentPage = _fileDropService.CurrentPage;
+                switch (currentPage)
+                {
+                    case _homePage:
+                    case _securedFolders:
+                        e.AcceptedOperation = DataPackageOperation.Move;
+                        break;
+                    default:
+                        e.AcceptedOperation = DataPackageOperation.None;
+                        break;
+                }
+                e.Handled = true;
+            };
+
+            nativeView.Drop += async (sender, e) =>
+            {
+                e.Handled = true;
+                string? currentPage = _fileDropService.CurrentPage;
+                if (currentPage is not (_homePage or _securedFolders)) return;
+
+                if (e.DataView.Contains(StandardDataFormats.StorageItems))
+                {
+                    IReadOnlyList<IStorageItem> items = await e.DataView.GetStorageItemsAsync();
+                    List<string> filePaths = new List<string>();
+                    List<string> folders = new List<string>();
+
+                    foreach (IStorageItem item in items)
+                    {
+                        if (item is StorageFile file)
+                        {
+                            filePaths.Add(file.Path);
+                        }
+
+                        else if (item is StorageFolder folder)
+                        {
+                            folders.Add(item.Path);
+                        }
+                    }
+
+                    if (filePaths.Any())
+                    {
+                        _fileDropService.NotifyFilesDropped(filePaths);
+                    }
+
+                    else if (folders.Any())
+                    {
+                        _fileDropService.NotifyFoldersDropped(folders);
+                    }
+                }
+            };
+        });
+#endif
     }
 
     protected override void OnAppearing()

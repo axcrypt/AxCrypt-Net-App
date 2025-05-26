@@ -184,6 +184,33 @@ public class RecentFoldersViewModel : ViewModelBase
         }
     }
 
+    private FileSelectionEventArgs AddedFoldersEvent { get; set; }
+
+    public async Task EncryptDroppedFolders(List<string> folders)
+    {
+        AddedFoldersEvent = new FileSelectionEventArgs(new string[] { })
+        {
+            FileSelectionType = FileSelectionType.Folder
+        };
+
+        for (int i = 0; i < folders.Count; i++)
+        {
+            AddedFoldersEvent.SelectedFiles.Add(folders[i]);
+        }
+
+        await PremiumFeature_ClickAsync(LicenseCapability.SecureFolders, async (ss, ee) => { await DragAndDroppedToSecureFolderAsync(ss, ee); }, null!, AddedFoldersEvent);
+    }
+
+    private async Task DragAndDroppedToSecureFolderAsync(object sender, EventArgs e)
+    {
+        if (AddedFoldersEvent.SelectedFiles == null || !AddedFoldersEvent.SelectedFiles.Any())
+        {
+            return;
+        }
+
+        await _mainViewModel.AddWatchedFolders.ExecuteAsync(AddedFoldersEvent.SelectedFiles);
+    }
+
     public async Task AddSecuredFolder(EventArgs eventArgs)
     {
         FolderContextMenu = false;

@@ -1,10 +1,12 @@
 ﻿@using AxCrypt.App.Shared.Desktop.Data
 @using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Services
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Content
 
 @inject LogOnViewModel LogOnViewModel
 @inject NavigationManager navigationManager
+@inject FileDropService FileDropService
 
 <div class="side-menu">
     <div class="navbar">
@@ -94,6 +96,7 @@
 
     protected override void OnInitialized()
     {
+        FileDropService.CurrentPage = navigationManager.Uri.Replace(navigationManager.BaseUri, "/");
         navigationManager.LocationChanged += OnLocationChanged;
         LogOnViewModel.AboutDialog.OnDialogVisibilityChanged += UpdateUIState;
         LogOnViewModel.FeedbackDialog.OnDialogVisibilityChanged += UpdateUIState;
@@ -122,17 +125,21 @@
             TabActive = "passwordManager";
             return;
         }
+
+        FileDropService.CurrentPage = navigationManager.Uri.Replace(navigationManager.BaseUri, "/");
     }
 
     private void AboutPopup()
     {
         TabActive = "AboutPopup";
+        FileDropService.CurrentPage = TabActive;
         LogOnViewModel.AboutDialog.Show();
     }
 
     private void FeedbackPopup()
     {
         TabActive = "FeedbackPopup";
+        FileDropService.CurrentPage = TabActive;
         LogOnViewModel.FeedbackDialog.Show();
     }
 

@@ -6,6 +6,7 @@ using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Platforms.Windows.Implementation;
+using AxCrypt.App.Windows.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -24,6 +25,8 @@ namespace AxCrypt.App.Windows;
 
 public partial class App : Application
 {
+    private readonly FileDropService _fileDropService;
+
     private readonly ProgressBackgroundComponent _progressBackgroundWorker;
 
     //private bool _isInitializing = true;
@@ -38,7 +41,7 @@ public partial class App : Application
 
     private readonly IDispatcher _dispatcher;
 
-    public App(IDispatcher dispatcher, LogOnViewModel logOnService, RegisterViewModel registerViewModel, LogViewModel logService)
+    public App(IDispatcher dispatcher, LogOnViewModel logOnService, RegisterViewModel registerViewModel, LogViewModel logService, FileDropService fileDropService)
     {
         _dispatcher = dispatcher;
         _logService = logService;
@@ -55,7 +58,7 @@ public partial class App : Application
         InitializeServiceDependencyProvider();
         _progressBackgroundWorker = new ProgressBackgroundComponent();
 
-        MainPage = new MainPage(logOnService, _mainViewModel, _fileOperationViewModel, _knownFoldersViewModel, registerViewModel);
+        MainPage = new MainPage(logOnService, _mainViewModel, _fileOperationViewModel, _knownFoldersViewModel, registerViewModel, fileDropService);
     }
 
     private static void InitializeServiceDependencyProvider()
