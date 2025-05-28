@@ -3,6 +3,7 @@ using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Models.Notification;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.ViewModels.Feedback;
 using AxCrypt.App.Shared.ViewModels.Notification;
@@ -17,6 +18,11 @@ namespace AxCrypt.App.Shared
     {
         public static void RegisterSingletons(IServiceCollection services)
         {
+            services.AddSingleton<ICssService, CssService>();
+            services.AddSingleton<IStatusAlertService, StatusAlertService>();
+            services.AddSingleton<ProcessIndicatorService>();
+            services.AddSingleton<ProgressBarService>();
+
             services.AddSingleton<FileDetails>();
             services.AddSingleton<SupportViewModel>();
             services.AddSingleton<NotificationItemViewModel>();

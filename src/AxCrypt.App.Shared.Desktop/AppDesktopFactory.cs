@@ -5,8 +5,6 @@ using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Desktop.ViewModels;
 using AxCrypt.App.Shared.Desktop.ViewModels.Home;
 using AxCrypt.App.Shared.Desktop.ViewModels.Main;
-using AxCrypt.App.Shared.Services;
-using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,10 +15,6 @@ public static class AppDesktopFactory
     public static void RegisterSingletons(IServiceCollection services)
     {
         services.AddSingleton<ICustomNavigationService, CustomNavigationService>();
-        services.AddSingleton<ICssService, CssService>();
-        services.AddSingleton<IStatusAlertService, StatusAlertService>();
-        services.AddSingleton<ProcessIndicatorService>();
-        services.AddSingleton<ProgressBarService>();
 
         services.AddSingleton<TopMenuViewModel>();
         services.AddSingleton<AppSettingsViewModel>();

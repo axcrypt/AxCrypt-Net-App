@@ -4,13 +4,11 @@ using AxCrypt.Content;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Core.UI;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Utility;
-using System.Threading.Tasks;
 using System;
 
-namespace AxCrypt.App.Shared.Desktop.Code;
+namespace AxCrypt.App.Shared.Helpers;
 
 public class SignUpSignIn
 {
@@ -20,12 +18,10 @@ public class SignUpSignIn
 
     public ApiVersion Version { get; set; }
 
-    private readonly ICustomNavigationService _navigationManager;
     private readonly RegisterViewModel _registerModel;
 
-    public SignUpSignIn(ICustomNavigationService navigationManager, RegisterViewModel registerModel)
+    public SignUpSignIn(RegisterViewModel registerModel)
     {
-        _navigationManager = navigationManager;
         _registerModel = registerModel;
     }
 

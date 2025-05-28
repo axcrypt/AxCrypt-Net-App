@@ -1,7 +1,7 @@
 ﻿using AxCrypt.App.Shared.Services.Interface;
 using System.Collections.Generic;
 
-namespace AxCrypt.App.Shared.Desktop.Services;
+namespace AxCrypt.App.Shared.Services;
 
 public class CssService : ICssService
 {
