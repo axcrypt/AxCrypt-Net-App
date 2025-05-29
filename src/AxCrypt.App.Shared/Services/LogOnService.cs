@@ -31,6 +31,7 @@ namespace AxCrypt.App.Shared.Services
             _mainViewModel = logOnViewModel.MainViewModel;
             _registerViewModel = registerViewModel;
             _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
+            _apiVersion = new ApiVersion();
         }
 
         public async Task SignInAsync()
