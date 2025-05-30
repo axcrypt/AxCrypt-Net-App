@@ -33,6 +33,10 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 
         public bool AnySelected => Messenger.Messages.Any(m => m.IsSelected);
 
+        public bool _showActions;
+
+        public bool viewActions;
+
         private bool _showLoadingWheel;
 
         public bool ShowLoadingWheel

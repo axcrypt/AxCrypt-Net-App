@@ -81,4 +81,63 @@ public static class SecMessengerUtility
             PageCount = SecuredMessagePageCount
         };
     }
+
+    public static int MaxReceiversToDisplay = 2;
+
+    public static string ToDateString(DateTime dateTime)
+    {
+        DateTime utcNow = New<Abstractions.INow>().Utc;
+        if (dateTime.Year != utcNow.Year)
+        {
+            return dateTime.ToString("dd/MMM/yyyy");
+        }
+
+        if (dateTime.Month != utcNow.Month)
+        {
+            return dateTime.ToString("dd/MMM");
+        }
+
+        if (dateTime.AddDays(7) < utcNow.AddDays(-7))
+        {
+            return dateTime.ToString("dd/MMM");
+        }
+
+        return dateTime.ToString("ddd hh:mm tt");
+    }
+
+    public static bool IsBusinessUser
+    {
+        get
+        {
+            //    if (IsUserAuthorized())
+            //    {
+            //        return New<IXecretsUserGateway>(UserContext.Name).UserSubscriptionLevel == SubscriptionLevel.Business;
+            //    }
+            return false;
+        }
+    }
+
+    public static bool IsPremiumUser
+    {
+        get
+        {
+            //if (IsUserAuthorized())
+            {
+                //return New<IXecretsUserGateway>(UserContext.Name).UserSubscriptionLevel == SubscriptionLevel.Premium;
+            }
+            return false;
+        }
+    }
+
+    public static bool IsPasswordManager
+    {
+        get
+        {
+            //if (IsUserAuthorized())
+            //{
+            //    return New<IXecretsUserGateway>(UserContext.Name).UserSubscriptionLevel == SubscriptionLevel.PasswordManager;
+            //}
+            return false;
+        }
+    }
 }
