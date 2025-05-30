@@ -54,7 +54,7 @@ public class UserNotificationService : ViewModelBase
         return notifications.Select(nf => new NotificationItemViewModel(nf));
     }
 
-    public async Task<bool> DeleteSecretAsync(long id)
+    public async Task<bool> DeleteNotificationAsync(long id)
     {
         if (id == 0)
         {

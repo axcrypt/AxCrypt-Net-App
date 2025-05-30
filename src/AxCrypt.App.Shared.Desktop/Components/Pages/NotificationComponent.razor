@@ -113,7 +113,7 @@
 
     private async Task DeleteNotification(long id)
     {
-        await notificationService.DeleteSecretAsync(id);
+        await notificationService.DeleteNotificationAsync(id);
         navigation.NavigateTo("/notification");
     }
 

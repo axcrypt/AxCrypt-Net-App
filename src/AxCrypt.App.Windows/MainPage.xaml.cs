@@ -4,6 +4,7 @@ using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Desktop;
 using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Services;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
@@ -152,7 +153,7 @@ public partial class MainPage : ContentPage, ISignIn
 
     private async Task SignInAsync()
     {
-        SignUpSignIn signUpSignIn = new SignUpSignIn(_navigationManager!, _registerViewModel!)
+        SignUpSignIn signUpSignIn = new SignUpSignIn(_registerViewModel!)
         {
             Version = _apiVersion!,
             UserEmail = New<UserSettings>().UserEmail,
