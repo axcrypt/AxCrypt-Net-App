@@ -179,10 +179,18 @@ namespace AxCrypt.App.Shared.Services
             IEnumerable<SecuredMessage> messages = await SecuredMessengerFacade.GetSecMsgSearchFilterAsync(messengerListViewModel.SecMessengerFilterTab, options);
 
             keyword = keyword.Trim().ToLower();
-            IEnumerable<SecuredMessage> filteredMessages = messages
-                .Where(m => (m.Message.ReceiverList.Any(rl => rl.User.IndexOf(keyword ?? messengerListViewModel.ReceiverName, StringComparison.OrdinalIgnoreCase) >= 0)) ||
-                            (m.Message.Username?.IndexOf(keyword ?? messengerListViewModel.UserName, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                            (m.Message.TheMessage?.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0));
+            IEnumerable<SecuredMessage> filteredMessages = messages.Where(m =>
+                (string.IsNullOrWhiteSpace(keyword) ||
+                    (m.Message.ReceiverList.Any(rl => rl.User.Contains(keyword, StringComparison.OrdinalIgnoreCase)) ||
+                     m.Message.Username?.Contains(keyword, StringComparison.OrdinalIgnoreCase) == true ||
+                     m.Message.TheMessage?.Contains(keyword, StringComparison.OrdinalIgnoreCase) == true)) &&
+
+                (string.IsNullOrWhiteSpace(messengerListViewModel.ReceiverName) ||
+                    m.Message.ReceiverList.Any(rl => rl.User.Contains(messengerListViewModel.ReceiverName, StringComparison.OrdinalIgnoreCase))) &&
+
+                (string.IsNullOrWhiteSpace(messengerListViewModel.UserName) ||
+                    m.Message.Username?.Contains(messengerListViewModel.UserName, StringComparison.OrdinalIgnoreCase) == true)
+            );
 
             messengerListViewModel.Messages = filteredMessages.ToList();
 
