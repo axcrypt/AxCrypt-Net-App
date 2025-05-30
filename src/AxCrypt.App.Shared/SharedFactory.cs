@@ -33,7 +33,6 @@ namespace AxCrypt.App.Shared
 
             services.AddSingleton<SecretService>();
             services.AddSingleton<SupportService>();
-            services.AddSingleton<AppSettingsViewModel>();
             services.AddSingleton<LogOnViewModel>();
             services.AddSingleton<NotificationViewModel>();
             services.AddSingleton<FeedbackViewModel>();

@@ -31,6 +31,8 @@ public class LogOnViewModel : ViewModelBase
 
     public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
     {
+        ShowGetStartedCarousel = AxCrypt.Core.Resolve.UserSettings.IsFirstSignIn;
+
         LogOnAccountModel = logOnAccountModel;
         IsVisible = true;
 
@@ -40,6 +42,7 @@ public class LogOnViewModel : ViewModelBase
         }
         InitiateProgressIndicator();
 
+        ShowGetStartedCarousel = false;
         IsVisible = false;
 
         mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { if (loggedOn) { ProcessIndicator?.Dispose(); OnSubscriptionChanged?.Invoke(); } });
@@ -174,6 +177,8 @@ public class LogOnViewModel : ViewModelBase
             }
         }
     }
+
+    public bool ShowGetStartedCarousel { get; set; }
 
     public async Task InvokeLogOnOrLogOffAndLogOnAgainAsync()
     {
