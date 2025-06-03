@@ -51,7 +51,7 @@
                         <InputDate @bind-Value="SecMsgrViewModel.Messenger.EndDate" style="width: 23%; color: #000;" name="date-to" />
                     </div>
                     <div style="display: flex; float: right; padding-top: 20px;">
-                        <button type="reset" class="button border btn-large font-medium" style="margin-right: 30px;" @onclick="ClearAllFilters">@Texts.ClearAllText</button>
+                        <button type="reset" class="button border btn-large font-medium" style="margin-right: 30px;" @onclick="()=> ClearAllFilters()">@Texts.ClearAllText</button>
                         <button type="submit" class="button success btn-large font-medium" id="apply-search-filter">@Texts.ApplyLabel</button>
                     </div>
                 </div>
@@ -203,13 +203,14 @@
         SecMsgrViewModel.Messenger.Keyword = string.Empty;
     }
 
-    private void ClearAllFilters()
+    private async Task ClearAllFilters()
     {
         appliedFilters.Clear();
         SecMsgrViewModel.Messenger.UserName = "";
         SecMsgrViewModel.Messenger.ReceiverName = "";
         SecMsgrViewModel.Messenger.StartDate = DateTime.MinValue;
         SecMsgrViewModel.Messenger.EndDate = DateTime.MinValue;
+        await SetActiveTab(activeTab, Guid.Empty);
     }
 
     private class FilterItem

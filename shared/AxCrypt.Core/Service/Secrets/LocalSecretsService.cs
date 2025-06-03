@@ -152,9 +152,14 @@ namespace AxCrypt.Core.Service.Secrets
             }).Free();
         }
 
-        public Task<bool> ShareSecretsAsync(ShareSecretApiModel sharedSecret)
+        public async Task<bool> ShareSecretsAsync(ShareSecretApiModel sharedSecret)
         {
-            return Task.FromResult(false);
+            if (Identity.UserEmail == EmailAddress.Empty)
+            {
+                throw new InvalidOperationException("The account service requies a user.");
+            }
+
+            return await Task.Run(() => InternalSaveSharedSecret(sharedSecret));
         }
 
         public async Task<bool> UpdateSecretSharedWithAsync(ShareSecretApiModel sharedSecret)

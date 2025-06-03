@@ -266,7 +266,12 @@ public class RecentFilesViewModel : ViewModelBase
 
     public async Task EncryptDroppedFiles(List<string> files)
     {
-        await _fileOperationViewModel.AddRecentFiles.ExecuteAsync(files);
+        if (!files.Any())
+        {
+            return;
+        }
+
+        await _fileOperationViewModel.EncryptFiles.ExecuteAsync(files);
     }
 
     private async Task OpenSecured()

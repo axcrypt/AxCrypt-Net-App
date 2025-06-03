@@ -16,4 +16,11 @@ public class FileDropService
     {
         OnFoldersDropped?.Invoke(paths);
     }
+
+    public void ResetOnDropped()
+    {
+        OnFilesDropped = null;
+        OnFoldersDropped = null;
+    }
+
 }

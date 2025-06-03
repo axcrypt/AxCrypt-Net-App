@@ -135,7 +135,7 @@ public class LogOnViewModel : ViewModelBase
 
     public GlobalDialogViewModel? GlobalViewModel { get; set; }
 
-    public PopupButtons PopupButtons { get; set; }
+    public PopupButtons[] PopupButtons { get; set; }
 
     public DialogResult PopupResult
     { get { return GetProperty<DialogResult>(nameof(PopupResult)); } set { SetProperty(nameof(PopupResult), value); } }

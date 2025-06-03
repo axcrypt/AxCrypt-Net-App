@@ -137,8 +137,8 @@
     {
         await base.OnInitializedAsync();
         RecentFilesViewModel.OnUpdateViewState += UpdatePageState;
-
-        FileDropService.OnFilesDropped += HandleDroppedFiles;
+        FileDropService.ResetOnDropped();
+        FileDropService.OnFilesDropped += async (files) => await HandleDroppedFiles(files);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -187,7 +187,7 @@
         });
     }
 
-    private async void HandleDroppedFiles(List<string> files)
+    private async Task HandleDroppedFiles(List<string> files)
     {
         await RecentFilesViewModel.EncryptDroppedFiles(files);
     }
