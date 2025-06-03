@@ -13,7 +13,7 @@ namespace AxCrypt.App.Shared.Models.Secret;
 
 public class SecretViewModel : ViewModelBase
 {
-    private LogOnIdentity? _identity;
+    private LogOnIdentity? _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
 
     public SecretViewModel(Cryptor.Model.SecretClientModel secret)
     {
@@ -23,7 +23,6 @@ public class SecretViewModel : ViewModelBase
         CreatedUtc = secret.CreatedUtc;
         UpdatedUtc = secret.UpdatedUtc;
         SharedWith = secret.Share?.SharedWith?.Select(ss => new SecretSharedUserViewModel(ss.UserEmail, ss.VisibilityType, secret.Share.OwnerEmail)) ?? new List<SecretSharedUserViewModel>();
-        _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
         OwnerEmail = !string.IsNullOrEmpty(secret.Share?.OwnerEmail) ? secret.Share.OwnerEmail : _identity.UserEmail.Address;
 
         switch (secret.Type)

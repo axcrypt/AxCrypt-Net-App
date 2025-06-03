@@ -1,6 +1,8 @@
 ﻿using AxCrypt.App.Shared.Desktop.Components.Pages.LogPage;
+using AxCrypt.Core.UI;
 using Microsoft.AspNetCore.Components.WebView.Maui;
 using Microsoft.Maui.Controls;
+using static AxCrypt.Abstractions.TypeResolve;
 
 public static class LogWindowService
 {
@@ -10,7 +12,7 @@ public static class LogWindowService
     {
         if (_logWindow != null)
         {
-            Application.Current!.OpenWindow(_logWindow);
+            New<IPopup>().ShowAsync(PopupButtons.Ok, AxCrypt.Content.Texts.InformationTitle, "Log window is already open!");
             return;
         }
 
