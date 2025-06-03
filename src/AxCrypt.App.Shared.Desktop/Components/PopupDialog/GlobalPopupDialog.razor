@@ -19,10 +19,14 @@
                     <label style="">@versionViewModel.LogOnViewModel.GlobalViewModel.MessageText</label>
                 </div>
                 <div class="modal-footer">
-                    <button class="button font-medium success btn-small" @onclick="versionViewModel.Button_OkClicked">@Texts.ButtonOkText</button>
-                    @if (versionViewModel.LogOnViewModel.GlobalViewModel.DontShowAgainOptions != DoNotShowAgainOptions.MasterKeyWarning)
+                    @if (versionViewModel.LogOnViewModel.PopupButtons.Contains(PopupButtons.Ok))
                     {
-                        <button class="btn-small font-medium button cancel" @onclick="versionViewModel.Button_CancelClicked">@Texts.ButtonCancelText</button>
+                        <button class="button font-medium success btn-small" @onclick="versionViewModel.Button_OkClicked"> @Texts.ButtonOkText </button>
+                    }
+
+                    @if (versionViewModel.LogOnViewModel.PopupButtons.Contains(PopupButtons.Cancel))
+                    {
+                        <button class="btn-small font-medium button cancel" @onclick="versionViewModel.Button_CancelClicked"> @Texts.ButtonCancelText </button>
                     }
                 </div>
                 @if (versionViewModel.LogOnViewModel.GlobalViewModel.DontShowAgainOptions != DoNotShowAgainOptions.None)

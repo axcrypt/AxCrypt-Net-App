@@ -87,8 +87,9 @@
         await base.OnInitializedAsync();
         RecentFoldersViewModel.OnUpdateViewState += UpdateStateChanged;
         RecentFoldersViewModel.LogOnViewModel.OnUIStateChanged += UpdateStateChanged;
+        FileDropService.ResetOnDropped();
+        FileDropService.OnFoldersDropped += async (folders) => await HandleDroppedFolders(folders);
 
-        FileDropService.OnFoldersDropped += HandleDroppedFolders;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -116,7 +117,7 @@
         return parts.Length >= 1 ? parts[^1] : path;
     }
 
-    private async void HandleDroppedFolders(List<string> folders)
+    private async Task HandleDroppedFolders(List<string> folders)
     {
         await RecentFoldersViewModel.EncryptDroppedFolders(folders);
     }

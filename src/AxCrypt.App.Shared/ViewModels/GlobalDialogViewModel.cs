@@ -11,7 +11,7 @@ public class GlobalDialogViewModel
     public GlobalDialogViewModel()
     {
         LogOnViewModel = AxCServiceProviderExtension.GetService<LogOnViewModel>();
-        LogOnViewModel.PopupButtons = PopupButtons.None;
+        LogOnViewModel.PopupButtons = [PopupButtons.None];
     }
 
     public GlobalDialogViewModel(string title, string message, DoNotShowAgainOptions dontShowAgain)
@@ -31,17 +31,18 @@ public class GlobalDialogViewModel
 
     public LogOnViewModel? LogOnViewModel { get; set; }
 
-    public async Task<PopupButtons> ShowVersionDialog(PopupButtons buttons, string title, string message, DoNotShowAgainOptions dontShowAgain)
+    public async Task<PopupButtons[]> ShowVersionDialog(PopupButtons[] buttons, string title, string message, DoNotShowAgainOptions dontShowAgain)
     {
         LogOnViewModel!.GlobalViewModel = new GlobalDialogViewModel(title, message, dontShowAgain);
         LogOnViewModel.PopupResult = DialogResult.None;
+        LogOnViewModel.PopupButtons = buttons;
 
         DoNotShowAgainOptions savedFlags = New<UserSettings>().DoNotShowAgain;
         DoNotShowAgainOptions currentFlags = LogOnViewModel.GlobalViewModel.DontShowAgainOptions;
 
         if ((savedFlags & currentFlags) != 0)
         {
-            return LogOnViewModel.PopupButtons; 
+            return LogOnViewModel.PopupButtons;
         }
 
         LogOnViewModel.GlobalPopupDialog.Show();
@@ -63,7 +64,7 @@ public class GlobalDialogViewModel
         }
 
         LogOnViewModel!.PopupResult = DialogResult.OK;
-        LogOnViewModel.PopupButtons = PopupButtons.Ok;
+        LogOnViewModel.PopupButtons = [PopupButtons.Ok];
     }
 
     public void Button_CancelClicked()
@@ -74,6 +75,6 @@ public class GlobalDialogViewModel
         }
 
         LogOnViewModel!.PopupResult = DialogResult.Cancel;
-        LogOnViewModel.PopupButtons = PopupButtons.Cancel;
+        LogOnViewModel.PopupButtons = [PopupButtons.Cancel];
     }
 }

@@ -76,7 +76,7 @@ public class CustomPopupService : IPopup
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     GlobalDialogViewModel upgradeVersionViewModel = new GlobalDialogViewModel();
-                    await upgradeVersionViewModel.ShowVersionDialog(activeButtons[0], title, message, doNotShowAgainOption);
+                    await upgradeVersionViewModel.ShowVersionDialog(activeButtons, title, message, doNotShowAgainOption);
                     //await Application.Current.MainPage.DisplayAlert(title, message, ConvertToString(activeButtons[0]));
                 });
 
@@ -92,7 +92,7 @@ public class CustomPopupService : IPopup
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     GlobalDialogViewModel upgradeVersionViewModel = new GlobalDialogViewModel();
-                    await upgradeVersionViewModel.ShowVersionDialog(activeButtons[0], title, message, doNotShowAgainOption);
+                    await upgradeVersionViewModel.ShowVersionDialog(activeButtons, title, message, doNotShowAgainOption);
                     isAccepted = upgradeVersionViewModel.LogOnViewModel.PageResult == Shared.Utility.DialogResult.OK;
                     //isAccepted = await Application.Current.MainPage.DisplayAlert(title, message, leftButton, rightButton);
                 });
