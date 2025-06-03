@@ -2,7 +2,7 @@
 
 namespace AxCrypt.App.Shared.Utility.View;
 
-public class ProcessIndicator : IDisposable
+public class ProcessIndicator : IDisposable, IAsyncDisposable
 {
     private readonly ProcessIndicatorService? _processIndicatorService;
 
@@ -23,6 +23,11 @@ public class ProcessIndicator : IDisposable
     }
 
     public void Dispose()
+    {
+        _processIndicatorService?.Hide();
+    }
+
+    public async ValueTask DisposeAsync()
     {
         _processIndicatorService?.Hide();
     }

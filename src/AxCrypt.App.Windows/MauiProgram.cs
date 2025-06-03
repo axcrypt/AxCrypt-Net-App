@@ -59,7 +59,6 @@ namespace AxCrypt.App.Windows
 
             services.AddSingleton<IFolderPicker, FolderPickerWindows>();
             services.AddSingleton<IExportKeyManagementFile, ExportKeyManagementFile>();
-            services.AddSingleton<FileDropService>();
 
             services.AddSingleton<MainPage>();
             services.AddSingleton<Home>();

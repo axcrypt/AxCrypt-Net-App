@@ -249,18 +249,13 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
             return;
         }
 
-        using (ProcessIndicator processIndicator = new ProcessIndicator())
+        SecretClientCollection secrets;
+        await using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
-            IEnumerable<SecretViewModel> secrets = await LoadSecrets(() => PersonalSecrets.SelectBySearch(Keyword ?? ""));
-            Secrets = new ObservableCollection<SecretViewModel>(secrets);
-            ApplyFilter();
+            secrets = await PersonalSecrets.SelectBySearch(Keyword ?? "");
         }
-    }
 
-    private async Task<IEnumerable<SecretViewModel>> LoadSecrets(Func<Task<SecretClientCollection>> SelectBySearchFuncAsync)
-    {
-        IEnumerable<SecretClientModel> secrets = await SelectBySearchFuncAsync();
-        return secrets.Select(sc => { return new SecretViewModel(sc); });
+        InitializeSecrets(secrets);
     }
 
     private async Task FindSharedWithSecrets()
@@ -272,12 +267,20 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
             return;
         }
 
-        using (ProcessIndicator processIndicator = new ProcessIndicator())
+        SecretClientCollection sharedWithSecrets;
+        await using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
-            IEnumerable<SecretViewModel> sharedWithSecrets = await LoadSecrets(() => SharedSecrets.SelectBySearch(Keyword ?? ""));
-            Secrets = new ObservableCollection<SecretViewModel>(sharedWithSecrets);
-            ApplyFilter();
+            sharedWithSecrets = await SharedSecrets.SelectBySearch(Keyword ?? "");
         }
+
+        InitializeSecrets(sharedWithSecrets);
+    }
+
+    private void InitializeSecrets(SecretClientCollection secrets)
+    {
+        IEnumerable<SecretViewModel> secretsList = secrets.Select(sc => { return new SecretViewModel(sc); }).ToList();
+        Secrets = new ObservableCollection<SecretViewModel>(secretsList);
+        ApplyFilter();
     }
 
     public async Task FilterSecretsBy(SecretsFilter type)
