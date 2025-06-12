@@ -8,9 +8,9 @@ namespace AxCrypt.Core.IO
 {
     public class FilePickerItemModel : ViewModelBase
     {
-        private string _encryptedAxCryptFileImage = "icon.png";
-        private string _fileImage = "FileIcon.png";
-        private string _folderImage = "FolderIcon.png";
+        private string _encryptedAxCryptFileImage = "axcicon";
+        private string _fileImage = "fileimg";
+        private string _folderImage = "icofldr";
 
         private const string AXCRYPT_FILE_EXTENSION = "axx";
 
