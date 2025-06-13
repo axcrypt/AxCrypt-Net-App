@@ -121,6 +121,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 
+    window.registerOutsideClick = (inputEl, popupId, dotNetRef) => {
+        const handler = (e) => {
+            var popupEl = document.getElementById(popupId);
+            if (!inputEl.contains(e.target) && popupEl != undefined && !popupEl.contains(e.target)) {
+                dotNetRef.invokeMethodAsync('HideSuggestions');//invoke c# method
+                document.removeEventListener('click', handler);
+            }
+        };
+        document.addEventListener('click', handler);
+    };
+
+
     document.addEventListener('click', function (e) {
         let securedContextMenu = document.getElementById('securedContextMenu');
         if (securedContextMenu !== null) {
