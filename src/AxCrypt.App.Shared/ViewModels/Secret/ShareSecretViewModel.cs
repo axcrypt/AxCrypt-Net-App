@@ -2,6 +2,7 @@
 using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Data;
 using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Content;
@@ -10,6 +11,7 @@ using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Secrets;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Cryptor.Model;
 using Microsoft.AspNetCore.Components;
 using System.Collections.ObjectModel;
@@ -322,7 +324,37 @@ public class ShareSecretViewModel : ManageSecretViewModel
         set { SetProperty(nameof(ShowUserSuggestion), value); }
     }
 
-    private void PerformSearch(string query)
+    public void HideUnSharedUsersSuggestionPopup()
+    {
+        ShowUserSuggestion = false;
+        SuggestedUnSharedUsers = new ObservableCollection<SecretSharedUserViewModel>();
+    }
+
+    public void ShowUnSharedUsersSuggestionPopup()
+    {
+        ShowUserSuggestion = true;
+        IEnumerable<SecretSharedUserViewModel> filteredUnSharedUsersList = Secret!.NotSharedWith.Distinct().ToArray().Select(user => new SecretSharedUserViewModel(user.Email, SecretShareVisibility.None, user.GroupName)).ToList();
+        if (!filteredUnSharedUsersList.Any())
+        {
+            ShowUserSuggestion = false;
+            return;
+        }
+        SuggestedUnSharedUsers = new ObservableCollection<SecretSharedUserViewModel>(filteredUnSharedUsersList);
+    }
+
+    public void SelectSuggestion(string selectedGroup, string selectedEmail)
+    {
+        ShowUserSuggestion = false;
+        if (!string.IsNullOrEmpty(selectedGroup))
+        {
+            SecretSharingUserEmail = selectedGroup;
+            return;
+        }
+
+        SecretSharingUserEmail = selectedEmail;
+    }
+
+    public void PerformSearch(string query)
     {
         if (string.IsNullOrWhiteSpace(query))
         {

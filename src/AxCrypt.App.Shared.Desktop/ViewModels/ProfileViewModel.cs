@@ -109,14 +109,23 @@ public class ProfileViewModel
 
     private async Task ImportOthersSharingKeyMenuItem_Click()
     {
-        FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new List<string>())
+        try
         {
-            FileSelectionType = FileSelectionType.ImportPublicKeys,
-        };
-        await New<IDataItemSelection>().HandleSelection(fileSelectionArgs);
+            FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new List<string>())
+            {
+                FileSelectionType = FileSelectionType.ImportPublicKeys,
+            };
+            await New<IDataItemSelection>().HandleSelection(fileSelectionArgs);
 
-        ImportPublicKeysViewModel importPublicKeys = new ImportPublicKeysViewModel(New<KnownPublicKeys>);
-        importPublicKeys.ImportFiles.Execute(fileSelectionArgs.SelectedFiles);
+            ImportPublicKeysViewModel importPublicKeys = new ImportPublicKeysViewModel(New<KnownPublicKeys>);
+            importPublicKeys.ImportFiles.Execute(fileSelectionArgs.SelectedFiles);
+
+            _statusAlertService!.Success($"Imported successfully!.");
+        }
+        catch (Exception ex) 
+        {
+            _statusAlertService!.Error($"Failed to import key, due to {ex.Message}!");
+        }
     }
 
     private async Task ExportMySharingKeyToolStripMenuItem_Click()
