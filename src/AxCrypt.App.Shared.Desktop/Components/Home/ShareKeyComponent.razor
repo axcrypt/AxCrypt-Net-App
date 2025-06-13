@@ -50,13 +50,14 @@
                             <div class="error-message">@ShareKeyViewModel.ErrorMessage</div>
                         }
                         <div class="add-txt-field" style="width: 100%;">
-                            <input type="email" @onclick="ShareKeyViewModel.ShowSyncPopup" @bind="@ShareKeyViewModel.KeySharingUserEmail" @oninput="ShareKeyViewModel.OnEmailInput" @onkeydown="HandleKeyDown" placeholder="someone@example.com" class="" style="width: 78%; margin-right: 3% ! IMPORTANT; margin: 0px;" />
-                            @if (ShareKeyViewModel.ShowUserSuggestion && ShareKeyViewModel.SuggestedUnSharedUsers.Any())
+                            <input type="email" id="share-key-user-group-inp" @ref="inputRef" @bind="ShareKeyViewModel.KeySharingUserEmail" @oninput="SuggestUsers" @onfocus="ShowSuggestions" @onkeydown="HandleKeyDown" placeholder="someone@example.com" class="" style="width: 78%; margin-right: 3% ! IMPORTANT; margin: 0px;" />
+                            @if (ShareKeyViewModel.ShowUserSuggestion)
                             {
-                                <ul class="suggestion-list hide-model-popup">
+                                <ul class="suggestion-list" id="share-key-suggestion-popup">
+
                                     @foreach (ShareKeyUser suggestion in ShareKeyViewModel.SuggestedUnSharedUsers)
                                     {
-                                        <li @onclick="() => ShareKeyViewModel.SelectSuggestion(suggestion.GroupName ?? suggestion.UserEmail!)">
+                                        <li @onclick="() => ShareKeyViewModel.SelectSuggestion(suggestion.GroupName, suggestion.UserEmail!)">
                                             @if (!string.IsNullOrEmpty(suggestion.GroupName))
                                             {
                                                 <span>@suggestion.GroupName</span>
@@ -72,7 +73,7 @@
                                     }
                                 </ul>
                             }
-                            <input type="button" class="button active btn-small" value="@Texts.AddPromptText" @onclick="()=> ShareKeyViewModel.AddShareKeyUser()" disabled="@(ShareKeyViewModel.DisableAddUserButton)" style="width: 15%;" />
+                            <input type="button" class="button active btn-small" value="@Texts.AddPromptText" @onclick="() => ShareKeyViewModel.AddShareKeyUser()" disabled="@(ShareKeyViewModel.DisableAddUserButton)" style="width: 15%;" />
                         </div>
                         @if (ShareKeyViewModel.SyncPopup)
                         {
@@ -153,7 +154,7 @@
                         }
                     </div><br />
                     <div id="sharekey" class="shr-ky-ftr" style="margin: 10px 0px;">
-                         <input type="button" @onclick="Close" class="button border btn-small" value="@Texts.ButtonCancelText" style="margin-right: 10px;" />
+                        <input type="button" @onclick="Close" class="button border btn-small" value="@Texts.ButtonCancelText" style="margin-right: 10px;" />
                         @if (ShareKeyViewModel.IsWideScreen)
                         {
                             <input disabled="@(ShareKeyViewModel.EnableApplyButton ? null : "disabled")" type="button" class="button success btn-small" @onclick="async ()=> await ShareKeyViewModel.ApplyShareKeys()" value="@Texts.ApplyLabel" style="padding: 6px 0px;" />
@@ -178,91 +179,119 @@
 
 @code {
     private bool IsVisible;
+        private ElementReference inputRef;
 
-    private async Task closeSharePopup()
-    {
-        await JSRuntime.InvokeVoidAsync("closeSharePopup");
-    }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        ShareKeyViewModel!.LogOnViewModel.ShareKeyDialog.OnDialogVisibilityChanged += UpdateShareKeyDialogStateChanged;
-        ShareKeyViewModel.LogOnViewModel.OnUIStateChanged += UpdateStateChanged;
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
+        private async Task closeSharePopup()
         {
-            try
+            await JSRuntime.InvokeVoidAsync("closeSharePopup");
+        }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            ShareKeyViewModel!.LogOnViewModel.ShareKeyDialog.OnDialogVisibilityChanged += UpdateShareKeyDialogStateChanged;
+            ShareKeyViewModel.LogOnViewModel.OnUIStateChanged += UpdateStateChanged;
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
             {
-                ShareKeyViewModel!.IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
+                try
+                {
+                    ShareKeyViewModel!.IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error determining screen width: {ex.Message}");
+                }
+                finally
+                {
+                    StateHasChanged();
+                }
             }
-            catch (Exception ex)
+        }
+
+        void UpdateShareKeyDialogStateChanged(bool isVisible)
+        {
+            InvokeAsync(() =>
             {
-                Console.WriteLine($"Error determining screen width: {ex.Message}");
-            }
-            finally
+                IsVisible = isVisible;
+                StateHasChanged();
+            });
+        }
+
+        void UpdateStateChanged()
+        {
+            InvokeAsync(() =>
             {
                 StateHasChanged();
+            });
+        }
+
+        string GetUserDisplayName(ShareKeyUser user)
+        {
+            return user.GroupName ?? user.UserEmail!;
+        }
+
+        void Close()
+        {
+            ShareKeyViewModel!.KeySharingUserEmail = "";
+            ShareKeyViewModel.SelectedFilesOrFolders = new List<string>();
+            ShareKeyViewModel.CloseSyncPopup();
+            ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.Close();
+        }
+
+        private string? Icon { get; set; }
+
+        private string GetIconForFile(string file)
+        {
+            string fileName = File.Exists(file) ? Path.GetFileName(file) : Directory.Exists(file) ? new DirectoryInfo(file).FullName : string.Empty;
+
+            if (string.IsNullOrEmpty(fileName))
+            {
+                Icon = string.Empty;
+                return string.Empty;
             }
-        }
-    }
 
-    void UpdateShareKeyDialogStateChanged(bool isVisible)
-    {
-        InvokeAsync(() =>
+            Icon = fileName.GetIcon();
+            return fileName;
+        }
+
+        private void HandleKeyDown(KeyboardEventArgs e)
         {
-            IsVisible = isVisible;
+            if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(ShareKeyViewModel.KeySharingUserEmail))
+            {
+                ShareKeyViewModel.AddShareKeyUser();
+            }
+
+            return;
+        }
+
+        private async Task ShowSuggestions()
+        {
+            if (!string.IsNullOrEmpty(ShareKeyViewModel.KeySharingUserEmail))
+            {
+                ShareKeyViewModel.PerformSearchSuggestions(ShareKeyViewModel.KeySharingUserEmail);
+            }
+            else
+            {
+                ShareKeyViewModel.ShowUnSharedUsersSuggestionPopup();
+            }
+
+            await JSRuntime.InvokeVoidAsync("registerOutsideClick", inputRef, "share-key-suggestion-popup", DotNetObjectReference.Create(this));
+        }
+
+        private async Task SuggestUsers(ChangeEventArgs e)
+        {
+            await ShowSuggestions();
+            ShareKeyViewModel.PerformSearchSuggestions(e.Value?.ToString()!.ToLower() ?? string.Empty);
+        }
+
+        [JSInvokable]
+        public void HideSuggestions()
+        {
+            ShareKeyViewModel.HideUnSharedUsersSuggestionPopup();
             StateHasChanged();
-        });
-    }
-
-    void UpdateStateChanged()
-    {
-        InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });
-    }
-
-    string GetUserDisplayName(ShareKeyUser user)
-    {
-        return user.GroupName ?? user.UserEmail!;
-    }
-
-    void Close()
-    {
-        ShareKeyViewModel!.KeySharingUserEmail = "";
-        ShareKeyViewModel.SelectedFilesOrFolders = new List<string>();
-        ShareKeyViewModel.CloseSyncPopup();
-        ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.Close();
-    }
-
-    private string? Icon { get; set; }
-
-    private string GetIconForFile(string file)
-    {
-        string fileName = File.Exists(file) ? Path.GetFileName(file) : Directory.Exists(file) ? new DirectoryInfo(file).FullName : string.Empty;
-
-        if (string.IsNullOrEmpty(fileName))
-        {
-            Icon = string.Empty;
-            return string.Empty;
         }
-
-        Icon = fileName.GetIcon();
-        return fileName;
     }
-
-    private void HandleKeyDown(KeyboardEventArgs e)
-    {
-        if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(ShareKeyViewModel.KeySharingUserEmail))
-        {
-            ShareKeyViewModel.AddShareKeyUser();
-        }
-
-        return;
-    }
-}

@@ -70,6 +70,9 @@ public class ShareKeyViewModel : ViewModelBase
 
         _viewModel.BindPropertyChanged<bool>(nameof(SharingListViewModel.IsOnline), (bool isOnline) => { SetNewContactState(); });
 
+        IEnumerable<ShareKeyUser> filteredGroupList = _viewModel!.NotSharedWith.Distinct().ToArray().Select(user => new ShareKeyUser(user.Email, user.GroupName)).ToList();
+        SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>(filteredGroupList);
+
         LogOnViewModel.ShareKeyDialog.Show();
 
         while (PageResult == DialogResult.None)
@@ -140,6 +143,8 @@ public class ShareKeyViewModel : ViewModelBase
 
     public void ShowSyncPopup()
     {
+        ShowUnSharedUsersSuggestionPopup();
+
         IsFirstClick = false;
         if (IsFirstClick)
         {
@@ -153,9 +158,41 @@ public class ShareKeyViewModel : ViewModelBase
         WarngPopup = false;
     }
 
-    private void PerformSearchSuggestions(string query)
+    public void HideUnSharedUsersSuggestionPopup()
     {
+        ShowUserSuggestion = false;
         SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>();
+    }
+
+    public void ShowUnSharedUsersSuggestionPopup()
+    {
+        ShowUserSuggestion = true;
+        IEnumerable<ShareKeyUser> filteredUnSharedUsersList = _viewModel!.NotSharedWith.Distinct().ToArray().Select(user => new ShareKeyUser(user.Email, user.GroupName)).ToList();
+        if (!filteredUnSharedUsersList.Any())
+        {
+            ShowUserSuggestion = false;
+            return;
+        }
+        SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>(filteredUnSharedUsersList);
+    }
+
+    public void SelectSuggestion(string selectedGroup, string selectedEmail)
+    {
+        ShowUserSuggestion = false;
+        if (!string.IsNullOrEmpty(selectedGroup))
+        {
+            KeySharingUserEmail = selectedGroup;
+            return;
+        }
+
+        KeySharingUserEmail = selectedEmail;
+    }
+
+    public void PerformSearchSuggestions(string query)
+    {
+        ClearErrorProviders();
+        SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>();
+        ShowUserSuggestion = true;
         if (string.IsNullOrWhiteSpace(query))
         {
             IEnumerable<ShareKeyUser> filteredGroupList = _viewModel!.NotSharedWith.Distinct().ToArray().Select(user => new ShareKeyUser(user.Email, user.GroupName)).ToList();
@@ -167,13 +204,10 @@ public class ShareKeyViewModel : ViewModelBase
         if (!filteredUnSharedUsersList.Any())
         {
             ShowUserSuggestion = false;
-            ClearErrorProviders();
             return;
         }
 
-        ShowUserSuggestion = true;
         SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>(filteredUnSharedUsersList);
-        ClearErrorProviders();
     }
 
     private IEnumerable<ShareKeyUser> SuggestNotSharedWithByText(string suggestingText)
@@ -466,31 +500,6 @@ public class ShareKeyViewModel : ViewModelBase
     private void ClearErrorProviders()
     {
         ErrorMessage = "";
-    }
-
-    public void OnEmailInput(ChangeEventArgs e)
-    {
-        if (!string.IsNullOrEmpty(e.Value?.ToString()!))
-        {
-            PerformSearchSuggestions(e.Value?.ToString()!);
-        }
-        else
-        {
-            ClearEmailSuggestions();
-        }
-    }
-
-    private void ClearEmailSuggestions()
-    {
-        ShowUserSuggestion = false;
-        SuggestedUnSharedUsers.Clear();
-        ClearErrorProviders();
-    }
-
-    public void SelectSuggestion(string suggestion)
-    {
-        KeySharingUserEmail = suggestion;
-        ShowUserSuggestion = false;
     }
 
     public void GoToLearmoreLink()
