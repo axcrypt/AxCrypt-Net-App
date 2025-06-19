@@ -4559,7 +4559,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How to install AxCrypt &lt;span&gt;Beta?&lt;/span&gt;.
+        ///   Looks up a localized string similar to How to install AxCrypt Desktop &lt;span&gt;Beta?&lt;/span&gt;.
         /// </summary>
         public static string BetaTrialHeading3 {
             get {
@@ -4717,6 +4717,15 @@ namespace AxCrypt.Content {
         public static string BetaTrialHeading6Text1 {
             get {
                 return ResourceManager.GetString("BetaTrialHeading6Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How to install AxCrypt Android &lt;span&gt;Beta?&lt;/span&gt;.
+        /// </summary>
+        public static string BetaTrialMobileHeading {
+            get {
+                return ResourceManager.GetString("BetaTrialMobileHeading", resourceCulture);
             }
         }
         
@@ -8571,7 +8580,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_BSTSSCE_H1_SH4_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Premium and business customers have access to our extra strong encryption method: AES-256. The Advanced Encryption Standard (AES) 256 is adopted by federal agencies like the National Security Agency (NSA) where national security is involved. AES-256  is the strongest, most secure and most efficient encryption algorithm available nowadays. AES uses symmetric key encryption: one secret key is used to cipher and decipher. Symmetric keys are better suited to internal encryption, faster and in need of less compu [rest of string was truncated]&quot;;.
         /// </summary>
@@ -10317,7 +10326,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_DEVFE_H2_SH1_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Full disk encryption (FDE) is, as the name implies, encryption at the disk level. When data is written to or read from a disc, it is automatically encrypted. It encrypts all files on the hard drive, including the operating system and file system. It&apos;s only used to keep files safe while they&apos;re in storage or not in transit. Full disk encryption works in a similar way to locking a house&apos;s outer doors but not its Public rooms. Of course, it&apos;s a good idea to secure the front entrance so that attackers can&apos;t e [rest of string was truncated]&quot;;.
         /// </summary>
@@ -10974,7 +10983,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_EAB_H1_Text2", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to It is possible to do what mobile device manufacturers do, to use internal trusted hardware as the guardian of the secret keys which will only release the secrets if authenticated by for example a fingerprint. This is how Apple Touch ID works. But, remember the caveats of biometric authentication mentioned above. The internal trusted hardware can always be fooled by a sufficiently well made device or artifact, and frequently the required fingerprint is even found all over the device itself!.
         /// </summary>
@@ -10983,7 +10992,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_EAB_H1_Text3", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Happy AxCrypting!.
         /// </summary>
@@ -12522,7 +12531,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_EIBM_H5_SH3_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Compliant with domestic and international regulations that companies should and must need, it bypasses breaches every time the market fluctuates, displays company’s relevant information when internal controls occur as only approved individuals have access to it and sidestep the considerable fines associated with non-compliance..
         /// </summary>
@@ -18012,7 +18021,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_HSBCPTFGCT_H4_Text4", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;Cybersecurity Newsletters:&lt;/b&gt; Regular updates through emails or internal newsletters keep cybersecurity top of mind for employees, helping to reinforce good practices.&lt;/li&gt;.
         /// </summary>
@@ -20244,7 +20253,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_HTSCER_H1_Text2", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;ol style=&apos;list-style-position: inside;display: grid;gap: 20%;&apos;&gt;&lt;li&gt;A screen shot of the situation, error message or similar.&lt;/li&gt;&lt;li&gt;The AxCrypt configuration files and internal error log.&lt;/li&gt;&lt;li&gt;Your Windows Event Log. This is a log of all errors reported by Windows recently.&lt;/li&gt;&lt;/ol&gt;.
         /// </summary>
@@ -22505,7 +22514,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Educational institutes have become more exposed to cyberattacks as a result of the greater use of technology for teaching and learning. According to reports( Instead of adding a link to a resource, mention the name here. Eg according to the Oxford study type), the education sector accounted for 62% of the approximately 5.8 million malware cases reported..
+        ///   Looks up a localized string similar to Educational institutes have become more exposed to cyberattacks as a result of the greater use of technology for teaching and learning. According to reports, the education sector accounted for 62% of the approximately 5.8 million malware cases reported..
         /// </summary>
         public static string Blog_ITESBETFC_Text1 {
             get {
@@ -23027,6 +23036,195 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Protect Business Data with AxCrypt’s Encrypted File Security.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Conclusion_Heading {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Conclusion_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This time, the blackout may not have been a cyberattack. But next time, we may not be so lucky..
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Conclusion_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Conclusion_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protect your business from digital threats. Try &lt;a href=&apos;https://axcrypt.net/blog/best-encryption-software-for-business-data-the-ultimate-guide/&apos;&gt;&lt;b&gt;AxCrypt for Business&lt;/b&gt;&lt;/a&gt; today; your first line of defense for encrypted file security and business data protection..
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Conclusion_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Conclusion_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login&apos;&gt;&lt;b&gt;TRY AXCRYPT FOR BUSINESSES AND PERSONAL FILES&lt;/b&gt;&lt;/a&gt;.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Conclusion_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Conclusion_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Experts believe that even if this incident wasn’t an attack, it speaks volumes about the rising cyber threats to infrastructure. Modern grids rely heavily on digitized systems, making them more vulnerable to hackers. A single point of failure; whether from malware or manipulated data can trigger nationwide outages..
+        /// </summary>
+        public static string Blog_MEPGFCCIC_H1_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_H1_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And it’s not just critical infrastructure at risk. In May 2025, &lt;b&gt;Coinbase Global, the leading American cryptocurrency exchange&lt;/b&gt;, &lt;a href=&apos;https://mashable.com/article/coinbase-data-breach-70k-members-ransom&apos;&gt;&lt;b&gt;experienced a massive insider-assisted data breach&lt;/b&gt;&lt;/a&gt; involving over 69,000 customers. A few overseas support agents were bribed to share sensitive public data, which included personal identifiers, ID images, and account balances. While passwords and private keys remained safe, the leaked [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_H1_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_H1_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This breach wasn’t caused by malware, but by insiders. It signifies how trusted access can be exploited to devastating effect. If it can happen in a highly regulated, security-aware environment like a cryptocurrency exchange, the energy sector must ask: are we truly prepared for a similar breach?.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_H1_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_H1_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This isn&apos;t a distant fear. In Ukraine, on December 23, 2015, hackers used malware known as BlackEnergy 3 to take &lt;a href=&apos;https://www.reuters.com/article/world/ukraines-power-outage-was-a-cyber-attack-ukrenergo-idUSKBN1521BB/&apos;&gt;&lt;b&gt;control of SCADA (Supervisory Control and Data Acquisition) systems&lt;/b&gt;&lt;/a&gt;, cutting power to over 230,000 people. That attack, attributed to the Russian group “Sandworm”, was the first confirmed cyberattack on a power grid, and it changed how the world views &lt;b&gt;SCADA system securi [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_H2_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_H2_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These attacks typically begin with phishing or infected files, giving attackers access to corporate networks. From there, they move into operational technology systems, where they can disable substations, disrupt communications, and destroy recovery tools..
+        /// </summary>
+        public static string Blog_MEPGFCCIC_H2_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_H2_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cyberattacks don’t always begin with external breaches. The Coinbase data breach is a perfect case study . The attackers didn’t need malware or network infiltration. Instead, they &lt;a href =&apos;https://www.theregister.com/2025/05/21/coinbase_confirms_insider_breach_affects/&apos;&gt;&lt;b&gt;bribed support staff&lt;/b&gt;&lt;/a&gt; who had legitimate access to public systems. Over months, they quietly siphoned off sensitive information that could fuel identity theft, scams, and extortion..
+        /// </summary>
+        public static string Blog_MEPGFCCIC_H3_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_H3_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This same scenario, applied to critical infrastructure, could result in manipulated control systems, delayed incident detection, or even a denial of recovery. It’s a sobering reminder that securing critical infrastructure isn’t just about firewalls and malware detection, it’s about controlling access, encrypting data, and monitoring human behavior..
+        /// </summary>
+        public static string Blog_MEPGFCCIC_H3_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_H3_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To combat such threats, &lt;b&gt;encryption for businesses&lt;/b&gt; is crucial. It ensures that &lt;a href=&apos;https://axcrypt.net/blog/how-to-choose-the-right-encryption-for-your-sensitive-data/&apos;&gt;&lt;b&gt;sensitive data and system commands&lt;/b&gt;&lt;/a&gt; remain secure, even if networks are compromised. Encryption blocks unauthorized access and tampering, forming a critical layer of defense. It also verifies the authenticity of control messages, preventing hackers from injecting malicious commands. Additionally, &lt;b&gt;encrypted file securi [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_H4_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_H4_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For organizations in the energy sector, investing in &lt;b&gt;cybersecurity solutions for the energy sector&lt;/b&gt; and strong &lt;b&gt;business data protection&lt;/b&gt; measures is no longer optional—it’s essential..
+        /// </summary>
+        public static string Blog_MEPGFCCIC_H4_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_H4_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why Critical Infrastructure Cybersecurity Can’t Be Ignored.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Heading1 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Heading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Historic Power Grid Cyber Attacks: A Warning from Ukraine.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Heading2 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Heading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insider Threats are Silent Saboteurs.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Heading3 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Heading3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How Encryption is a Key Strategy for Preventing Power Grid Cyber Attacks.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Heading4 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Heading4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On April 28, 2025, a massive power outage struck Spain, Portugal, and parts of France, disrupting life across the Iberian Peninsula. The blackout began at 12:33 CEST and led to the sudden loss of 15 gigawatts of electricity, causing cascading failures across interconnected grids. While power was restored to most areas within 10 hours, some regions remained down for nearly 22 hours, with full recovery in Spain by 11:00 CEST on April 29. Portugal’s grid was also stabilized by early the next day using hydropow [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Summary {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On April 28, 2025, a massive &lt;a href=&apos;https://www.theolivepress.es/spain-news/2025/04/28/a-blackout-of-this-magnitude-can-only-be-caused-by-a-cyberattack-is-a-hostile-actor-really-to-blame-for-spains-unprecedented-blackout/&apos;&gt;&lt;/b&gt;power outage&lt;/b&gt;&lt;/a&gt; struck Spain, Portugal, and parts of France, disrupting life across the Iberian Peninsula. The blackout began at 12:33 CEST and led to the sudden loss of 15 gigawatts of electricity, causing cascading failures across interconnected grids. While power was restore [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Even though initial logs led Red Eléctrica and REN to &lt;a href=&apos;https://m.economictimes.com/news/international/world-news/spain-portugal-france-hit-by-power-outage-transport-communications-and-payments-disrupted/amp_podcast/120701374.cms&apos;&gt;&lt;b&gt;dismiss the likelihood&lt;/b&gt;&lt;/a&gt; of a power grid cyberattack, one must question how conclusive such findings truly are. Digital manipulation knows few limits, and skepticism remains warranted. Cybersecurity for power grids has never been more crucial..
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Massive European Power Grid Failure Calls for Critical Infrastructure Cybersecurity.
+        /// </summary>
+        public static string Blog_MEPGFCCIC_Title {
+            get {
+                return ResourceManager.GetString("Blog_MEPGFCCIC_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to By making data unreadable by others, mobile encryption ensures that customers&apos; data remains private and safe. Data that has been encrypted cannot be retrieved, making it more difficult in the current situation. The data on the phone can still be recovered even if the owner deletes everything on it to resell it. The only way to decrypt data once after encryption is to factory reset the phone. Furthermore, the expansion of digital payments, enhanced applications, and information interchange via mobile devices [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Blog_MEWRECY_H1_SH1_Text1 {
@@ -23043,7 +23241,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_MEWRECY_H1_SubHeading1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to During the projected period, the global mobile encryption market is predicted to grow at a CAGR of 30.55 percent, to USD 5,931.23 million by 2026. Encryption deployments have increased in quantity and scope in big corporations as organizations have reacted to increasingly prevalent regulatory and compliance obligations and more strict internal policies..
         /// </summary>
@@ -25465,7 +25663,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_TBFEBSBF_H1_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Confidential business communications are frequently targeted by cybercriminals. Encrypting emails, messages, and file attachments ensures that sensitive business discussions remain private and protected from interception. This form of encrypted communication is vital for protecting both internal and external business correspondence..
         /// </summary>
@@ -25546,7 +25744,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_TBFEBSBF_H4_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Not all employees need access to all data. Encryption helps control access by restricting sensitive files to authorized personnel only. With strong encryption measures in place, businesses can ensure that only those with the correct decryption key can open and modify files. This added layer of protection minimizes the risk of internal data leaks..
         /// </summary>
@@ -25762,7 +25960,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_TIEDTC_H1_SH1_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Every firm will have, in one way or another, information on customers, supplier contracts in detail, and documents about bids and tenders, to name a few commercial data kinds. Regulations governing the protection of customer information are applicable to all industries, but the banking and healthcare sectors are particularly sensitive to them. The relevance of this kind of information is frequently undermined and neglected. Every time information is shared, as well as when it is sent to and from internal sy [rest of string was truncated]&quot;;.
         /// </summary>
@@ -29722,7 +29920,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_WICE_H1_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;li style=&quot;list-style-type: &apos;\2714&apos;;&quot;&gt; It’s not only external access we have to be alert of, but also internal data theft. Business partners or contractors or even employees with malicious intention can either damage or even engage in data breach. Cloud encryption protects and helps prevent employees from harming business..
         /// </summary>
@@ -29758,7 +29956,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_WICE_H1_Text5", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;li style=&quot;list-style-type: &apos;\2714&apos;;&quot;&gt; Cloud encryption is not just a secure solution for sharing and storing data. It is also configured to meet internal organizational constraints and relevant regulatory authorities, such as the Federal Information Security Management Act (FISMA), Federal Information Processing Standards (FIPS), Health Insurance Portability and Accountability Act (HIPAA), and Payment Card Industry Data Security Standard (PCI/DSS)..
         /// </summary>
@@ -32064,6 +32262,258 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Final Thoughts: Business Needs Business-Grade Encryption.
+        /// </summary>
+        public static string Blog_WYONTABE_Conclusion_Heading {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Conclusion_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you&apos;re running a team, department, or full organization, relying on Free or Premium plans isn&apos;t just inadequate- it’s non-compliant to AxCrypt policies. AxCrypt Business gives you everything you need to protect files, manage access, and collaborate securely across platforms..
+        /// </summary>
+        public static string Blog_WYONTABE_Conclusion_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Conclusion_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt offers one of the best encryption software for business, trusted by companies worldwide for its simplicity, strength, and team-focused features. Whether you’re a startup or a growing enterprise, our encryption software for small businesses helps ensure your data protection is secure, centralized, and compliant..
+        /// </summary>
+        public static string Blog_WYONTABE_Conclusion_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Conclusion_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Need help upgrading or setting up your business account? Contact our support team or &lt;a href=&apos;https://axcrypt.net/business/&apos;&gt;&lt;b&gt;start your Business trial today&lt;/b&gt;&lt;/a&gt;..
+        /// </summary>
+        public static string Blog_WYONTABE_Conclusion_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Conclusion_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt File Encryption has Free and Premium versions which are cross-platform solutions (available on Windows, macOS, Android, and iOS) created for individual users. While they offer essential encryption tools, they don’t include &lt;a href= &apos;https://axcrypt.net/pt/blog/top-ten-benefits-of-file-encryption-for-businesses-secure-business-files/&apos;&gt;&lt;b&gt;features needed for teams&lt;/b&gt;&lt;/a&gt; or companies. Most importantly:.
+        /// </summary>
+        public static string Blog_WYONTABE_H1_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H1_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;They’re licensed for &lt;b&gt;personal use only&lt;/b&gt;.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WYONTABE_H1_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H1_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;They lack &lt;b&gt;group management, master key access, and centralized key control&lt;/b&gt;.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WYONTABE_H1_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H1_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;The Premium plan, though powerful, is &lt;b&gt;not allowed for organizational use.&lt;/b&gt;&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WYONTABE_H1_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H1_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔒 &lt;b&gt;Note:&lt;/b&gt; If you&apos;re part of a business, using Premium or Free plans violates &lt;a href= &apos;https://axcrypt.net/information/terms-of-use/&apos;&gt;licensing terms&lt;/a&gt; and may lead to inefficient or unsecured encryption workflows..
+        /// </summary>
+        public static string Blog_WYONTABE_H1_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H1_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Business is designed as a powerful, user-friendly data encryption software with organizations in mind. Whether you&apos;re managing sensitive customer data or public team files, the Business encryption plan provides the features and flexibility you need. That’s why AxCrypt is often ranked among the &lt;b&gt;best encryption software for small business&lt;/b&gt; and growing companies alike. These are the key features that make AxCrypt Business stand out: .
+        /// </summary>
+        public static string Blog_WYONTABE_H2_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H2_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;Group Management and Access Control&lt;/b&gt;&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WYONTABE_H2_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H2_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Take full control over  user access with &lt;a href=&apos;https://axcrypt.net/blog/fundamentals-of-key-management/&apos;&gt;Group Management&lt;/a&gt;  support. Assign, manage, or revoke access securely from a central place; ideal for IT admins and compliance teams. Whether you&apos;re onboarding new team members, adjusting access levels, or responding to a security event, Group Management gives you the visibility and authority to act swiftly and securely..
+        /// </summary>
+        public static string Blog_WYONTABE_H2_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H2_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;User Groups for Successful Collaboration&lt;/b&gt;&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WYONTABE_H2_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H2_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create and &lt;a href=&apos;https://axcrypt.net/information/group/&apos;&gt;manage user groups&lt;/a&gt; within your business to organize teams and simplify access control. With group-based file sharing, you can securely share encrypted files with all members of a group in one go. Each member automatically gets access, ensuring everyone stays in sync. You can also assign a unique &lt;a href=&apos;https://axcrypt.net/blog/master-key/&apos;&gt;Group Master Key&lt;/a&gt; to each group, offering granular control over who can access what. With equal acces [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blog_WYONTABE_H2_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H2_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;Master Key Access for Admins&lt;/b&gt;&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WYONTABE_H2_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H2_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retain the ability to decrypt all encrypted files within your organization, regardless of forgotten passwords or employee turnover. As an administrator, the &lt;a href=&apos;https://axcrypt.net/information/master-key/&apos;&gt;Master Key feature&lt;/a&gt; empowers you to maintain continuous access to business-critical data. It safeguards against data loss, reinforces compliance, and ensures that no file is ever inaccessible due to user error or staffing changes..
+        /// </summary>
+        public static string Blog_WYONTABE_H2_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H2_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;Built-in Password Manager&lt;/b&gt;&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WYONTABE_H2_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H2_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Business includes a &lt;a href=&apos;https://axcrypt.net/blog/what-is-a-password-manager-how-secure-is-password-manager-software/&apos;&gt;password manager&lt;/a&gt; to safely store and share login credentials, streamlining access while improving security. It keeps all your team’s credentials encrypted and organized in one secure vault, reducing the risk of password-related breaches..
+        /// </summary>
+        public static string Blog_WYONTABE_H2_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H2_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While you won’t be able to encrypt or edit files without an active Business subscription, you can still securely access your data using AxCrypt Viewer. Available on Windows, macOS, Android, and iOS, the Viewer allows you to open and read .axx encrypted files even after your subscription expires..
+        /// </summary>
+        public static string Blog_WYONTABE_H3_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H3_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Although team features are not available in this mode, Viewer access ensures uninterrupted, read-only visibility, making it ideal when businesses share encrypted files with customers who need to view information without editing or decryption capabilities..
+        /// </summary>
+        public static string Blog_WYONTABE_H3_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_H3_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🚫 Why Free &amp; Premium Plans Aren’t for Business Use.
+        /// </summary>
+        public static string Blog_WYONTABE_Heading1 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Heading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why the AxCrypt Business Plan Is Built for Teams.
+        /// </summary>
+        public static string Blog_WYONTABE_Heading2 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Heading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What About Viewer Access?.
+        /// </summary>
+        public static string Blog_WYONTABE_Heading3 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Heading3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔍 Comparing AxCrypt Plans.
+        /// </summary>
+        public static string Blog_WYONTABE_Heading4 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Heading4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running a business is competitive. Every decision, every step forward, brings new opportunities, and new risks. Without encryption in place, your business files could be exposed to threats at any time. That’s why business encryption isn’t optional. If you&apos;re working with a team, protecting your data means protecting your people, and your progress..
+        /// </summary>
+        public static string Blog_WYONTABE_Summary {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running a business is competitive. Every decision, every step forward, brings new opportunities, and new risks. Without encryption in place, your business files could be exposed to threats at any time. That’s why &lt;a href= &apos;https://axcrypt.net/business/&apos;&gt;&lt;b&gt;business encryption&lt;/b&gt;&lt;/a&gt; isn’t optional. If you&apos;re working with a team,  &lt;a href= &apos;https://axcrypt.net/pt/blog/5-reasons-why-encryption-is-important-for-small-businesses/&apos;&gt;&lt;b&gt;protecting your data&lt;/b&gt;&lt;/a&gt; means protecting your people, and your progress..
+        /// </summary>
+        public static string Blog_WYONTABE_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you&apos;re wondering whether your business can get by using the AxCrypt Free version or an expired &lt;/b&gt;Premium account&lt;/b&gt;, the short answer is &lt;b&gt;no&lt;/b&gt;. Organizations are required to use the AxCrypt Business plan to encrypt and share files professionally and securely..
+        /// </summary>
+        public static string Blog_WYONTABE_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why Your Organization Needs the AxCrypt Business Encryption.
+        /// </summary>
+        public static string Blog_WYONTABE_Title {
+            get {
+                return ResourceManager.GetString("Blog_WYONTABE_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AxCrypt 2 no longer supports a feature called Self Decrypting Files that was supported in AxCrypt 1.x. What’s a Self Decrypting File? It’s a two things in one: It’s a self-contained executable program (a .exe), with secured data (a .axx file) embedded or appended to it..
         /// </summary>
         public static string Blog_WYSASDF_Summary {
@@ -32602,7 +33052,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_ZTCS_Conclusion_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Due to the pandemic, Zero Trust has stepped up its game. Since now companies have begun to decentralize their data, assets, applications, and services (DAAS) to different individuals through cloud infrastructure providers. And the fact that internal factors are responsible for 30% of data breaches today, the Zero Trust framework was created, to assist digital businesses in securing valuable assets. As per the Zero Trust model, trust is vulnerability. It indicates that no user, even if they are an employee,  [rest of string was truncated]&quot;;.
         /// </summary>
@@ -35060,7 +35510,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("ChangeEmailExistMailSubject", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Email change failed due to an internal error, please try again later or contact our support..
         /// </summary>
@@ -46314,6 +46764,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Legacy Downloads..
+        /// </summary>
+        public static string LegacyDownloadsHeading {
+            get {
+                return ResourceManager.GetString("LegacyDownloadsHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How to Verify a Download.
         /// </summary>
         public static string LegacyDownloadsHowToVerifyHeading {
@@ -46337,6 +46796,15 @@ namespace AxCrypt.Content {
         public static string LegacyDownloadsLinkLabel {
             get {
                 return ResourceManager.GetString("LegacyDownloadsLinkLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Need an older version? Download a previous release of AxCrypt for macOS..
+        /// </summary>
+        public static string LegacyDownloadsParagraph {
+            get {
+                return ResourceManager.GetString("LegacyDownloadsParagraph", resourceCulture);
             }
         }
         
@@ -49148,6 +49616,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The April 2025 blackout in Spain, Portugal, and France, along with a major Coinbase data breach, underscores growing cybersecurity risks to financial systems and critical infrastructure..
+        /// </summary>
+        public static string Meta_Description_Blog_MEPGFCCIC {
+            get {
+                return ResourceManager.GetString("Meta-Description-Blog-MEPGFCCIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discover how mobile encryption is expanding to keep up with growing security demands. Learn why it’s vital for protecting mobile data..
         /// </summary>
         public static string Meta_Description_Blog_METWREICY {
@@ -49481,6 +49958,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Discover why the AxCrypt Business plan is a must for companies. Learn the risks of using Free or Premium versions and the benefits of secure, compliant team encryption..
+        /// </summary>
+        public static string Meta_Description_Blog_WYONTABE {
+            get {
+                return ResourceManager.GetString("Meta-Description-Blog-WYONTABE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Learn why self-decrypting files can pose serious security risks. Protect your sensitive data by using proper encryption methods instead..
         /// </summary>
         public static string Meta_Description_Blog_WYSASF {
@@ -49497,7 +49983,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Meta-Description-Blog-ZKEEIST", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Learn about Zero Trust cyber security and how this model ensures comprehensive protection against internal and external threats..
         /// </summary>
@@ -50840,6 +51326,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Coinbase Data Breach and European Blackout Highlight Critical Cybersecurity Threats.
+        /// </summary>
+        public static string Meta_Title_Blog_MEPGFCCIC {
+            get {
+                return ResourceManager.GetString("Meta-Title-Blog-MEPGFCCIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile Encryption: A Growing Trend for Enhanced Security.
         /// </summary>
         public static string Meta_Title_Blog_METWREICY {
@@ -51169,6 +51664,15 @@ namespace AxCrypt.Content {
         public static string Meta_Title_Blog_WUE {
             get {
                 return ResourceManager.GetString("Meta-Title-Blog-WUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why AxCrypt Business Is Essential for Secure File Encryption in Organizations.
+        /// </summary>
+        public static string Meta_Title_Blog_WYONTABE {
+            get {
+                return ResourceManager.GetString("Meta-Title-Blog-WYONTABE", resourceCulture);
             }
         }
         
@@ -52939,6 +53443,15 @@ namespace AxCrypt.Content {
         public static string OTPCodeValidationText {
             get {
                 return ResourceManager.GetString("OTPCodeValidationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your AxCrypt OTP for Secure Login.
+        /// </summary>
+        public static string OTPCodeVerificationText {
+            get {
+                return ResourceManager.GetString("OTPCodeVerificationText", resourceCulture);
             }
         }
         
@@ -55963,7 +56476,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("PrivacyPolicyBlock1Text5", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to We also log some additional specific events that are determined by the server access and internal procedures. This includes:.
         /// </summary>
