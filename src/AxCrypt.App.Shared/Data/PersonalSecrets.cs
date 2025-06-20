@@ -1,6 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model.Secret;
-using AxCrypt.Api.Shared.Helper;
+using AxCrypt.App.Shared.Facades;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.App.Shared.Password;
@@ -167,7 +167,7 @@ public static class PersonalSecrets
             new SecretCollection();
         }
 
-        return await SecretsApiHelper.GetSecrets(New<KnownIdentities>().DefaultEncryptionIdentity);
+        return await SecretsFacade.GetSecrets(New<KnownIdentities>().DefaultEncryptionIdentity);
     }
 
     public static async Task<bool> InsertAsync(SecretClientModel secret)
@@ -176,7 +176,8 @@ public static class PersonalSecrets
         {
             return false;
         }
-        await SecretsApiHelper.Insert(new List<SecretClientModel> { secret });
+
+        await SecretsFacade.ProtectAsync(secret);
         if (ViewModelHelper.CanUpdateFreeUserNewSecretCount())
         {
             New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).UpdateFreeUserSecretsCount();
@@ -191,12 +192,12 @@ public static class PersonalSecrets
 
     public static async Task<bool> UpdateAsync(SecretClientModel secret)
     {
-        return await SecretsApiHelper.Update(new List<SecretClientModel> { secret });
+        return await SecretsFacade.Update(new List<SecretClientModel> { secret });
     }
 
     public static async Task<bool> DeleteAsync(SecretClientModel secret)
     {
-        bool deleted = await SecretsApiHelper.Delete(new List<SecretClientModel> { secret });
+        bool deleted = await SecretsFacade.Delete(new List<SecretClientModel> { secret });
         bool deletedshare = await ShareSecretFacade.DeleteSecretsSharedAsync(secret);
         return deleted || deletedshare;
     }
@@ -230,7 +231,7 @@ public static class PersonalSecrets
             new SecretCollection();
         }
 
-        return await SecretsApiHelper.GetSharedWithSecretsAsync(New<KnownIdentities>().DefaultEncryptionIdentity, 20);
+        return await SecretsFacade.GetSharedWithSecretsAsync(New<KnownIdentities>().DefaultEncryptionIdentity, 20);
     }
 
     public static SecretClientModel ToClientModel(this SecretViewModel secret, Guid guid)

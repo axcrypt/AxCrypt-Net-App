@@ -1,5 +1,4 @@
-﻿using AxCrypt.Api.Shared.Helper;
-using AxCrypt.App.Shared.Helpers;
+﻿using AxCrypt.App.Shared.Facades;
 using AxCrypt.Cryptor.Model;
 
 using static AxCrypt.Abstractions.TypeResolve;
@@ -49,7 +48,7 @@ public static class SharedSecrets
 
     private static async Task<SecretClientCollection> LoadActiveSharedWithSecretsAsync(int pageCount = 20)
     {
-        return await SecretsApiHelper.GetSharedWithSecretsAsync(New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity, pageCount);
+        return await SecretsFacade.GetSharedWithSecretsAsync(New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity, pageCount);
     }
 
     private static void SearchInPasswords(string search, SecretClientCollection secrets, SecretClientModel secret)
@@ -123,29 +122,6 @@ public static class SharedSecrets
             return;
         }
     }
-
-    //public static async Task<SecretClientCollection> SelectById(Guid id)
-    //{
-    //    SecretClientCollection secrets = new SecretClientCollection();
-    //    if (id == Guid.Empty)
-    //    {
-    //        return secrets;
-    //    }
-    //    SecretClientCollection allSecrets = await LoadSharedSecretByIdAsync(id);
-    //    secrets.OriginalCount = allSecrets.OriginalCount;
-    //    SecretClientModel theSecret = allSecrets[id];
-    //    secrets.Add(theSecret);
-    //    return secrets;
-    //}
-
-    //public static async Task<SecretClientCollection> LoadSharedSecretByIdAsync(Guid secretId)
-    //{
-    //    LogOnIdentity identity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
-    //    EncryptionKeyCollection keys = new EncryptionKeyCollection(null, identity.UserEmail.Address);
-    //    /*SecretClientCollection sharedSecrets = await SecretDataStoreProvider.FindSharedById(keys.UserName, keys, secretId);
-    //    return sharedSecrets;*/
-    //    return null;
-    //}
 
     public static async Task<bool> UpdateShareVisibility(SecretClientModel secret)
     {

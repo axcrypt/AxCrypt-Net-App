@@ -2,18 +2,17 @@
 using AxCrypt.Api.Extension;
 using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Secret;
-using AxCrypt.App.Shared.Password;
+using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Secrets;
-using AxCrypt.Core.Service;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor;
 using AxCrypt.Cryptor.Model;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.Api.Shared.Helper;
+namespace AxCrypt.App.Shared.Facades;
 
 public static class ShareSecretFacade
 {
@@ -54,13 +53,23 @@ public static class ShareSecretFacade
 
     private static async Task<EncryptedSecretApiModel> EncryptSecretAsync(SecretClientModel secret, IList<UserPublicKey> usersPublicKeys, LogOnIdentity identity)
     {
-        SecretsClientModel secretJson = new SecretsClientModel()
+        SecretsClientModel secretsClientModel = new SecretsClientModel()
         {
             Secrets = new List<SecretClientModel> { secret },
         };
 
-        EncryptedSecretApiModel encryptedData = await TextCryptor.EncryptAsync(identity, secretJson, usersPublicKeys);
-        return encryptedData;
+        EncryptionParameters encryptionParameters = await CreateEncryptionParameters(identity, usersPublicKeys);
+        string serializedText = Serializer.Serialize(secretsClientModel);
+        byte[] encryptedSecrets = TextEncryption.Encrypt(encryptionParameters, serializedText);
+
+        string userEmail = identity.UserEmail.Address;
+        EncryptedSecretApiModel encryptedSecret = new EncryptedSecretApiModel()
+        {
+            UserEmail = userEmail,
+            Cipher = encryptedSecrets,
+            CreatedUtc = New<INow>().Utc
+        };
+        return encryptedSecret;
     }
 
     private static async Task ShareSecretAsync(SecretClientModel secret, IList<SecretSharedUser> sharedWithUsers, EncryptedSecretApiModel encryptedData)
@@ -76,44 +85,6 @@ public static class ShareSecretFacade
         ShareSecretApiModel shareSecretModel = new ShareSecretApiModel(0, logOnIdentity.UserEmail.Address, secret.Id, encryptedSecret, sharedUserApiModelList, New<INow>().Utc, New<INow>().Utc, null);
 
         await New<LogOnIdentity, ISecretsService>(logOnIdentity).ShareSecretsAsync(shareSecretModel);
-    }
-
-    public static async Task<SecretClientCollection> GetSharedSecretsListAsync(IEnumerable<ShareSecretApiModel> secretModel, IEnumerable<EncryptionKey> keys, LogOnIdentity identity)
-    {
-        if (!secretModel.Any())
-        {
-            return null!;
-        }
-        UserKeyPair currentKeyPair = await New<LogOnIdentity, IAccountService>(identity).CurrentKeyPairAsync();
-
-        identity = new LogOnIdentity(new List<UserKeyPair>() { currentKeyPair }, identity.Passphrase);
-
-        return GetSecretCollection(secretModel, identity);
-    }
-
-    private static SecretClientCollection GetSecretCollection(IEnumerable<ShareSecretApiModel> secretModel, LogOnIdentity identity)
-    {
-        SecretClientCollection secrets = new SecretClientCollection();
-        foreach (ShareSecretApiModel shareSecret in secretModel)
-        {
-            EncryptedSecretApiModel encryptedSecret = new EncryptedSecretApiModel
-            {
-                Cipher = shareSecret.EncryptedSecret.GetCipherBytes(),
-                UserEmail = identity.UserEmail.Address,
-                CreatedUtc = shareSecret.CreatedUtc,
-            };
-
-            IEnumerable<SecretClientModel> sharedSecrets = TextCryptor.GetClientSecrets(identity, encryptedSecret);
-            SecretClientModel secret = sharedSecrets.FirstOrDefault()!;
-            if (secret != null)
-            {
-                IEnumerable<SecretSharedUser> secretSharedUsers = shareSecret.SharedWith.Select(sw => new SecretSharedUser(AxCrypt.Core.UI.EmailAddress.Parse(sw.UserEmail), (SecretShareVisibility)Enum.Parse(typeof(SecretShareVisibility), sw.VisibilityType)));
-                secret.Share = new ShareSecret(secretSharedUsers, shareSecret.OwnerEmail, shareSecret.CreatedUtc);
-                secrets.Add(secret);
-            }
-        }
-
-        return secrets;
     }
 
     public static async Task<bool> UpdateSharedVisibilityAsync(SecretClientModel secret, LogOnIdentity identity = null!)
@@ -156,5 +127,36 @@ public static class ShareSecretFacade
     private static LogOnIdentity Identity()
     {
         return New<KnownIdentities>().DefaultEncryptionIdentity;
+    }
+
+    private static async Task<EncryptionParameters> CreateEncryptionParameters(LogOnIdentity identity, IEnumerable<UserPublicKey> sharedKeyHolders = null)
+    {
+        Guid cryptoId = Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId;
+        EncryptionParameters encryptionParameters = new EncryptionParameters(cryptoId, identity);
+        if (sharedKeyHolders != null)
+        {
+            await AddSharingParameters(encryptionParameters, sharedKeyHolders);
+        }
+
+        return encryptionParameters;
+    }
+
+    private static async Task AddSharingParameters(EncryptionParameters parameters, IEnumerable<UserPublicKey> sharedKeyHolders)
+    {
+        if (sharedKeyHolders == null || !sharedKeyHolders.Any())
+        {
+            return;
+        }
+
+        await parameters.AddAsync(sharedKeyHolders);
+    }
+
+
+    private static IStringSerializer Serializer
+    {
+        get
+        {
+            return New<IStringSerializer>();
+        }
     }
 }
