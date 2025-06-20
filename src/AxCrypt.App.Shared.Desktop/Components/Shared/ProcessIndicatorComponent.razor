@@ -32,19 +32,24 @@
     public string? Message { get; set; }
 }
 
+<style>
+    .page-loading-wheel-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: conic-gradient(from 10.99deg at 98.18% 128.62%, #fffee8 0deg, rgba(200, 199, 180, .8) 353.48deg, #f5fff0 360deg);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+    }
+</style>
+
 @if (IsVisible)
 {
-    @* <div class="modalDialog" style="display: block;">
-        <div class="secrets-loading-content">
-            <h2>@Title</h2>
-            <div class="loading-content">
-                <img src="" alt="Loading..." />
-                <span>@Message</span>
-            </div>
-        </div>
-    </div> *@
-
-    <div class="secrets-loading-overlay">
+    <div class="page-loading-wheel-overlay">
         <div class="loading-content">
             <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
             <span style="color:black ">@Message</span>

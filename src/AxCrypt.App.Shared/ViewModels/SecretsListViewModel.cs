@@ -267,6 +267,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
             return;
         }
 
+        FilteredSecrets = new ObservableCollection<SecretViewModel>();
         SecretClientCollection sharedWithSecrets;
         await using (ProcessIndicator processIndicator = new ProcessIndicator())
         {

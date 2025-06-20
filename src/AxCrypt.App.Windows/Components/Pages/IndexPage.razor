@@ -29,6 +29,17 @@
     {
         <AxCrypt.App.Shared.Desktop.Components.Pages.HomePage />
     }
+    else
+    {
+        LogOnViewModel.ProcessIndicator?.Dispose();
+
+        <div class="secrets-loading-overlay">
+            <div class="loading-content">
+                <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
+                <span style="color:black ">@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage</span>
+            </div>
+        </div>
+    }
 
 </div>
 
@@ -37,13 +48,10 @@
 
     protected override void OnInitialized()
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator())
-        {
-            ShowSignUp = Register.ShowSignUp;
-            base.OnInitialized();
-            Register.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
-            LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdatePageState;
-        }
+        ShowSignUp = Register.ShowSignUp;
+        base.OnInitialized();
+        Register.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
+        LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdatePageState;
     }
 
     private void UpdatePageState(bool isShow = false)

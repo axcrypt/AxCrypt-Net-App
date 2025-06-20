@@ -22,7 +22,7 @@ namespace AxCrypt.Cryptor
                 throw new ArgumentNullException(nameof(plainText));
             }
             // Avoid working with files in UI thread.
-            return await Task.Run(async () =>
+            return await Task.Run(() =>
             {
                 return InternalEncryptTextAsync(encryptionParameters, plainText);
 
@@ -66,7 +66,7 @@ namespace AxCrypt.Cryptor
             }
 
             // Avoid working with files in UI thread.
-            return await Task.Run(async () =>
+            return await Task.Run(() =>
             {
                 return InternalDecryptText(decryptionParameters, encryptedData);
             });

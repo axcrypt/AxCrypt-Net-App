@@ -1,9 +1,9 @@
 ﻿using AxCrypt.Core.Authenticator.Service;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Utility;
-using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
+using System.ComponentModel.DataAnnotations;
 
 namespace AxCrypt.App.Shared
 {
@@ -24,6 +24,7 @@ namespace AxCrypt.App.Shared
             AxCServiceProviderExtension.LogOnViewModel!.InitiateProgressIndicator();
         }
 
+        [RegularExpression("^[0-9]{6}$", ErrorMessage = "Please enter valid code.")]
         public string? OneTimePassword { get; set; }
 
         public string ErrorMessage

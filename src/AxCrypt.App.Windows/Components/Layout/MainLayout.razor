@@ -112,8 +112,16 @@
 
     private async void UpdateSubscriptionState()
     {
+        if (SubscriptionLevel == LogOnViewModel.SubscriptionLevel.ToString().ToLower())
+        {
+            return;
+        }
+
         SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
-        await AddCssAsync(SubscriptionLevel);
+        if (LogOnViewModel.IsLoggedOn)
+        {
+            await AddCssAsync(SubscriptionLevel);
+        }
         string currentURi = navigationManager.Uri;
         if (!LogOnViewModel.IsLoggedOn && currentURi.Replace(navigationManager.BaseUri, "") != "")
         {

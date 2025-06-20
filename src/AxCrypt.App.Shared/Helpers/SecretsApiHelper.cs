@@ -1,7 +1,6 @@
 ﻿using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Secret;
-using AxCrypt.Api.Shared.Helper;
 using AxCrypt.App.Shared.Facades;
 using AxCrypt.App.Shared.PushNotification;
 using AxCrypt.Core.Crypto;

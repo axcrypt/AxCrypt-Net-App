@@ -13,6 +13,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Shared.Helpers;
 
 namespace AxCrypt.App.Shared.Desktop;
 
@@ -26,13 +27,15 @@ public class AppMain
     private FileOperationViewModel _fileOperationViewModel;
     private KnownFoldersViewModel _knownFoldersViewModel;
 
+    private TwoFactorAuthViewModel? _twoFactorAuthViewModel;
+
     //private ApiVersion? _apiVersion;
     public AppMain()
     {
     }
 
     public void Initialize(LogOnViewModel logOnService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel)
-    { 
+    {
         _logOnService = logOnService;
         _mainViewModel = mainViewModel;
         _fileOperationViewModel = fileOperationViewModel;
@@ -55,6 +58,8 @@ public class AppMain
     {
         _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
         _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
+        _fileOperationViewModel.IdentityViewModel.LoggingOnWithTOTPAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleExistingAccountLogOnWithTOTP(e));
+
         _fileOperationViewModel.SelectingFilesAsync += async (sender, e) => await New<IUIThread>().SendToAsync(() => New<IDataItemSelection>().HandleSelection(e));
         _fileOperationViewModel.ToggleEncryptionUpgradeMode += async (sender, e) => await ToggleEncryptionUpgradeMode();
     }
@@ -229,6 +234,44 @@ public class AppMain
         e.Passphrase = new Passphrase(_logOnService.LogOnAccountModel.PasswordText);
         e.UserEmail = _logOnService.LogOnAccountModel.UserEmail;
         _logOnService.PageResult = DialogResult.None;
+
+        return;
+    }
+
+    private async Task HandleExistingAccountLogOnWithTOTP(LogOnEventArgs e)
+    {
+        _twoFactorAuthViewModel = AxCServiceProviderExtension.TwoFactorAuthViewModel;
+        if (e.UserEmail == null || e.Passphrase == null)
+        {
+            return;
+        }
+
+        if (!_twoFactorAuthViewModel!.IsVisible)
+        {
+            _twoFactorAuthViewModel.ShowLogOnDialog();
+        }
+
+        if (_twoFactorAuthViewModel.PageResult == DialogResult.None)
+        {
+            return;
+        }
+
+        if (_twoFactorAuthViewModel.PageResult == DialogResult.Cancel)
+        {
+            e.Cancel = true;
+            _twoFactorAuthViewModel.PageResult = DialogResult.None;
+
+            return;
+        }
+
+        if (_twoFactorAuthViewModel.PageResult != DialogResult.OK || _twoFactorAuthViewModel!.OneTimePassword!.Length == 0)
+        {
+            e.Cancel = true;
+            return;
+        }
+
+        e.OneTimePassword = _twoFactorAuthViewModel.OneTimePassword;
+        _twoFactorAuthViewModel.PageResult = DialogResult.None;
 
         return;
     }

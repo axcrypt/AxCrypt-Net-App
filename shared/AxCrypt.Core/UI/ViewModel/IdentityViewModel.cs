@@ -59,13 +59,13 @@ namespace AxCrypt.Core.UI.ViewModel
             LogOnAsync = new AsyncDelegateAction<object>(async (o) => { if (!_knownIdentities.IsLoggedOn) { LogOnIdentity = await LogOnActionAsync(); } });
             LogOff = new AsyncDelegateAction<object>(async (p) => { await LogOffAction(); LogOnIdentity = LogOnIdentity.Empty; }, (o) => Task.FromResult(_knownIdentities.IsLoggedOn));
             LogOnLogOff = new AsyncDelegateAction<object>(async (o) => LogOnIdentity = await LogOnLogOffActionAsync());
-            LogOffLogOn = new AsyncDelegateAction<object>(async (o) => 
-            { 
-                await LogOffAction(); 
-                LogOnIdentity = LogOnIdentity.Empty; 
-                if (!_knownIdentities.IsLoggedOn) 
-                { 
-                    LogOnIdentity = await LogOnActionAsync(); 
+            LogOffLogOn = new AsyncDelegateAction<object>(async (o) =>
+            {
+                await LogOffAction();
+                LogOnIdentity = LogOnIdentity.Empty;
+                if (!_knownIdentities.IsLoggedOn)
+                {
+                    LogOnIdentity = await LogOnActionAsync();
                 }
             }, (o) => Task.FromResult(_knownIdentities.IsLoggedOn));
             AskForDecryptPassphrase = new AsyncDelegateAction<string>(async (name) => LogOnIdentity = await AskForDecryptPassphraseActionAsync(name));
@@ -318,7 +318,7 @@ namespace AxCrypt.Core.UI.ViewModel
             await OnLoggingOnWithTOTPAsync(logOnArgs);
             if (logOnArgs.Cancel)
             {
-                return LogOnIdentity.Empty;
+                return await AskForLogOnAsync(logOnIdentity, logOnArgs.EncryptedFileFullName);
             }
 
             bool IsTFAVerified = await New<ITwoFactorAuthenticateService>().VerifyTwoFactorAsync(logOnArgs.OneTimePassword, _knownIdentities.TFAUniqueKey);

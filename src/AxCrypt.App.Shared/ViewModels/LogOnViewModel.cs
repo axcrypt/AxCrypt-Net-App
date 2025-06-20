@@ -31,6 +31,7 @@ public class LogOnViewModel : ViewModelBase
 
     public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
     {
+        ProcessIndicator?.Dispose();
         ShowGetStartedCarousel = AxCrypt.Core.Resolve.UserSettings.IsFirstSignIn;
 
         LogOnAccountModel = logOnAccountModel;

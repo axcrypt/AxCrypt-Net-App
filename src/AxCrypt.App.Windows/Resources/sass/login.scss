@@ -162,13 +162,67 @@
     right: 32px;
     top: 32px;
 
-    .language-dropdown {
+    .drp-dwn {
+        content: url(/images/free/BtnBack.svg);
+        transform: rotate(90deg);
+        width: 8px;
+        margin-left: 18px;
+    }
+
+    .dropbtn {
+        background-color: #ffffff;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        color: #D9D9D9;
+        gap: 15px !important;
+    }
+
+    .dropbtn.active {
+        border-radius: 4px;
+        border: 1px solid #000000;
+        color: #86B96E;
+
+        .down {
+            transform: rotate(-90deg);
+        }
+    }
+
+    .tick-icon {
+        content: url(/images/free/TickMark.svg);
+        position: absolute;
         right: 0px;
-        min-width: 54px;
+    }
+
+    .language-dropdown {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 60px;
+        box-shadow: 4px 4px 4px 0px #00000040;
+        z-index: 1;
+        height: 255px;
+        overflow-y: auto;
+        border: 1px solid #86B96E;
+        border-radius: 0px 0px 4px 4px;
+        right: 0px;
 
         img {
             padding: 0;
         }
+
+        a.active, a:hover {
+            color: #86B96E;
+        }
+    }
+
+    .language-item {
+        color: #D9D9D9;
+        padding: 7px 10px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
     }
 }
 
