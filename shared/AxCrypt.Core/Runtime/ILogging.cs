@@ -25,7 +25,7 @@
 
 #endregion Coypright and License
 
-using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.FileActivity;
 using System;
 using System.Linq;
 
@@ -47,6 +47,8 @@ namespace AxCrypt.Core.Runtime
 
         bool IsDebugEnabled { get; }
 
+        bool IsUserActivityEnabled { get; }
+
         void LogFatal(string fatalLog);
 
         void LogError(string errorLog);
@@ -56,5 +58,7 @@ namespace AxCrypt.Core.Runtime
         void LogInfo(string infoLog);
 
         void LogDebug(string debugLog);
+
+        void LogInfo(string infoLog, string fileSource, UserActivityLog fileActivityLogItem);
     }
 }

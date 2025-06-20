@@ -367,6 +367,12 @@ namespace AxCrypt.Core.UI
             set { Store(nameof(TemporaryFilePath), value); }
         }
 
+        public bool UserActivityMode
+        {
+            get { return Load(nameof(UserActivityMode), false); }
+            set { Store(nameof(UserActivityMode), value); }
+        }
+
         public T? Load<T>(string key)
         {
             return Load(key, default(T));

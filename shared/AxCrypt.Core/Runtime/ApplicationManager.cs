@@ -40,6 +40,7 @@ namespace AxCrypt.Core.Runtime
             Resolve.WorkFolder.FileInfo.FileItemInfo(LocalSecretsService.SharedSecretsFileName).Delete();
             Resolve.WorkFolder.FileInfo.FileItemInfo(LocalSecuredMessengerService.InboxMessageFileName).Delete();
             Resolve.WorkFolder.FileInfo.FileItemInfo(LocalSecuredMessengerService.SentMessageFileName).Delete();
+            Resolve.WorkFolder.FileInfo.FileItemInfo(UI.FileActivity.FileActivityStore.FileActivityLogFileName).Delete();
             New<KnownPublicKeys>().Delete();
             Resolve.UserSettings.SettingsVersion = New<UserSettingsVersion>().Current;
         }

@@ -166,6 +166,9 @@
 .settings-menu-item-container .stngs-menu-icon.IcoLgng {
   content: url(/images/default/IcoLgng.svg);
 }
+.settings-menu-item-container .stngs-menu-icon.IcoFileLgng {
+  content: url(/images/default/IcoFileLgng.svg);
+}
 .settings-menu-item-container .stngs-menu-icon.IcoUsers {
   content: url(/images/default/IcoUsers.svg);
 }
@@ -234,6 +237,9 @@
 }
 .settings-menu-item-container:hover .IcoOptns, .settings-menu-item-container.selected .IcoOptns {
   content: url(/images/business/IcoOptns.svg);
+}
+.settings-menu-item-container:hover .IcoFileLgng, .settings-menu-item-container.selected .IcoFileLgng {
+  content: url(/images/business/IcoFileLgng.svg);
 }
 .settings-menu-item-container:hover .IcoChckVrsn, .settings-menu-item-container.selected .IcoChckVrsn {
   content: url(/images/business/IcoChckVrsn.svg);

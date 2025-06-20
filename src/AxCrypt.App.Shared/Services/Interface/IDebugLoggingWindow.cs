@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AxCrypt.App.Shared.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,9 @@ namespace AxCrypt.App.Shared.Services.Interface;
 
 public interface IDebugLoggingWindow
 {
-    void ShowLogWindow();
+    void ShowLogWindow(LogType logType);
 
-    void CloseLogWindow();
+    void CloseLogWindow(LogType logType);
+
+    void CloseAllLogWindows();
 }

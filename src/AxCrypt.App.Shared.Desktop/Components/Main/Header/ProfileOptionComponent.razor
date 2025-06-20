@@ -52,8 +52,18 @@
                 <span>@Texts.PasswordChangeText</span>
             </NavLink>
         </div>
+        @if (ProfileViewModel!.IsUserActivityEnabled)
+        {
+            <div class="profile-option-container">
+                <NavLink class="nav-link"
+                         @onclick="() => ProfileViewModel!.OnOpenLogViewerClicked(Utility.LogType.FileActivity)">
+                    <img class="" src="images/default/IcoFileLgng.svg" alt="IcoFileLgng" />
+                    <span>User Activity</span>
+                </NavLink>
+            </div>
+        }
         <div class="profile-option-container">
-            <NavLink class="nav-link" @onclick="async ()=> await ProfileViewModel!.ClearAllSettingsAndRestartAsync()">
+            <NavLink class="nav-link" @onclick="async () => await ProfileViewModel!.ClearAllSettingsAndRestartAsync()">
                 <img class="" src="images/default/IcoClrSttngs.svg" alt="go-back-img" />
                 <span>@Texts.OptionsClearAllSettingsAndExitToolStripMenuItemText</span>
             </NavLink>
@@ -73,10 +83,10 @@
             <span>@Texts.HelpToolStripMenuItemText</span>
             <img class="mng-accnt" src="" alt="go-back-img" style="float:right" />
         </NavLink>
-        <NavLink class="nav-link" href="" @onclick="async (e)=> await ProfileViewModel.SignOut()">
+        <NavLink class="nav-link" href="" @onclick="async (e) => await ProfileViewModel.SignOut()">
             <span class="log-out-clr font-medium">@Texts.LogOffText</span>
         </NavLink>
-        <NavLink class="nav-link" @onclick="async (e)=> await ProfileViewModel.ExitMenuItem_Click(e)">
+        <NavLink class="nav-link" @onclick="async (e) => await ProfileViewModel.ExitMenuItem_Click(e)">
             <span class="font-medium">@Texts.ExitToolStripMenuItemText</span>
         </NavLink>
     </div>
@@ -84,11 +94,11 @@
 
 <div class="key-mngnt-Popup model-popup sub-pop1" style="display:none;" id="key-management-popup">
     <div class="font-medium left-align" id="key-management-popup">
-        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">@Texts.ImportSomeonesPublicSharingKeyText</dd>
-        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">@Texts.ExportSharingKeyToolStripMenuItemText</dd>
-        <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => {  await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">@Texts.ImportMyPrivateKeyToolStripMenuItemText</dd>
-        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">@Texts.ExportMyPrivateKeyToolStripMenuItemText</dd>
-        <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">@Texts.CreateAccountToolStripMenuItemText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="() => ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">@Texts.ImportSomeonesPublicSharingKeyText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="() => ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">@Texts.ExportSharingKeyToolStripMenuItemText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async () => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">@Texts.ImportMyPrivateKeyToolStripMenuItemText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="() => ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">@Texts.ExportMyPrivateKeyToolStripMenuItemText</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async () => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">@Texts.CreateAccountToolStripMenuItemText</dd>
     </div>
 </div>
 
@@ -110,10 +120,14 @@
             @if (ProfileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
             {
                 <span class="txt-clr">@Texts.TypeText</span>
-                <span class="font-bold sub-head-clr">@ProfileViewModel.Account.Subscription</span> <br />
+                <span class="font-bold sub-head-clr">@ProfileViewModel.Account.Subscription</span>
+
+                <br />
 
                 <span class="txt-clr">@Texts.ValidUntilText</span>
-                <span class="font-bold sub-head-clr">@ProfileViewModel.ValidFormatted</span> <br />
+                <span class="font-bold sub-head-clr">@ProfileViewModel.ValidFormatted</span>
+
+                <br />
 
                 <a class="can-subs" @onclick="ProfileViewModel.CancelSubscription">@Texts.CancelSubscriptionPrompt</a>
             }
@@ -125,7 +139,7 @@
     protected override async Task OnInitializedAsync()
     {
         await ProfileViewModel!.InitializeAsync();
-
+        ProfileViewModel.OnUpdateViewState += UpdateState;
         await base.OnInitializedAsync();
     }
 

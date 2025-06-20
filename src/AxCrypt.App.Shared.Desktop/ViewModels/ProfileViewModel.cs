@@ -22,7 +22,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels;
 
-public class ProfileViewModel
+public class ProfileViewModel : ViewModelBase
 {
     private LogOnViewModel _logOnViewModel;
     private RegisterViewModel _registerViewModel;
@@ -32,6 +32,14 @@ public class ProfileViewModel
     private string DefaultExt = ".txt";
 
     public AccountModel Account { get; set; }
+
+    public bool IsUserActivityEnabled
+    {
+        get
+        {
+            return New<UserSettings>().UserActivityMode;
+        }
+    }
 
     public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<LicensePolicy>().Expiration.ToString("dd MMMM yyyy", System.Globalization.CultureInfo.CurrentCulture);
     public ProfileViewModel()
@@ -73,6 +81,11 @@ public class ProfileViewModel
         }
 
         return Account.CreatedTime;
+    }
+
+    public void OnOpenLogViewerClicked(LogType logType)
+    {
+        New<IDebugLoggingWindow>().ShowLogWindow(logType);
     }
 
     public async Task HandleImportAndExportKeys(KeyManagement keyManagement)

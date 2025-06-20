@@ -28,6 +28,7 @@
 using AxCrypt.Api.Model;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
@@ -186,6 +187,10 @@ namespace AxCrypt.Core.UI
                 _defaultEncryptionIdentity = LogOnIdentity.Empty;
                 await _notificationMonitor.NotifyAsync(new SessionNotification(SessionNotificationType.SignOut, oldIdentity, oldCapabilities)).Free();
                 await _notificationMonitor.SynchronizeAsync().Free();
+                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+                {
+                    Resolve.Log.LogInfo("'{0}' Signed out.".InvariantFormat(oldIdentity.UserEmail), oldIdentity.UserEmail.Address, FileActivity.UserActivityLog.SignOut);
+                }
             }
 
             if (value == LogOnIdentity.Empty)
@@ -200,6 +205,10 @@ namespace AxCrypt.Core.UI
             if (knownKeysChanged)
             {
                 await _notificationMonitor.NotifyAsync(new SessionNotification(SessionNotificationType.KnownKeyChange, _defaultEncryptionIdentity)).Free();
+            }
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+            {
+                Resolve.Log.LogInfo("'{0}' Signed in.".InvariantFormat(value.UserEmail), value.UserEmail.Address, FileActivity.UserActivityLog.SignIn);
             }
         }
 

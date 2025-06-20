@@ -33,6 +33,7 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Portable;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.FileActivity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -467,9 +468,9 @@ namespace AxCrypt.Core.Session
             }
             New<AxCryptFile>().Wipe(fileLock, progress);
 
-            if (Resolve.Log.IsInfoEnabled)
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
             {
-                Resolve.Log.LogInfo("Wiped '{0}'.".InvariantFormat(fileLock.DataStore.FullName));
+                Resolve.Log.LogInfo("Wiped '{0}'.".InvariantFormat(fileLock.DataStore.FullName, fileLock.DataStore.FullName, UserActivityLog.SecureDelete));
             }
         }
     }

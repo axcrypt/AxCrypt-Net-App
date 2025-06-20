@@ -32,7 +32,7 @@ namespace AxCrypt.App.Shared.Utility
                 return;
             }
 
-            New<IDebugLoggingWindow>().CloseLogWindow();
+            New<IDebugLoggingWindow>().CloseAllLogWindows();
             await ShutDownAnd(New<IUIThread>().ExitApplication);
         }
 
@@ -48,13 +48,14 @@ namespace AxCrypt.App.Shared.Utility
             PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle, Texts.ResetAllSettingsWarningText);
             if (result == PopupButtons.Ok)
             {
-                New<IDebugLoggingWindow>().CloseLogWindow();
+                New<IDebugLoggingWindow>().CloseAllLogWindows();
 
                 new ApplicationManager().WaitForBackgroundToComplete();
                 await new ApplicationManager().ClearAllSettings();
                 await ShutDownAnd(New<IUIThread>().RestartApplication);
             }
         }
+
         private static async Task<bool> WarnIfAnyPendingFiles(LogOnViewModel logOnViewModel)
         {
             if (logOnViewModel!.IsLoggedOn && logOnViewModel!.MainViewModel!.DecryptedFiles.Any())

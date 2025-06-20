@@ -31,6 +31,7 @@ using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
+using AxCrypt.Core.UI.FileActivity;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -213,9 +214,9 @@ namespace AxCrypt.Core.UI
                 }
             }
 
-            if (Resolve.Log.IsInfoEnabled)
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
             {
-                Resolve.Log.LogInfo("Launched and opened '{0}'.".InvariantFormat(decryptedLock.DataStore.FullName));
+                Resolve.Log.LogInfo("Launched and opened '{0}'.".InvariantFormat(decryptedLock.DataStore.FullName), decryptedLock.DataStore.FullName, UserActivityLog.Open);
             }
 
             destinationActiveFile = new ActiveFile(destinationActiveFile, status);
@@ -330,9 +331,9 @@ namespace AxCrypt.Core.UI
                 }
             }
 
-            if (Resolve.Log.IsInfoEnabled)
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
             {
-                Resolve.Log.LogInfo("Launched container for '{0}'.".InvariantFormat(fileFullName));
+                Resolve.Log.LogInfo("Launched container for '{0}'.".InvariantFormat(fileFullName), fileFullName, UserActivityLog.Open);
             }
 
             return new FileOperationContext(String.Empty, ErrorStatus.Success);

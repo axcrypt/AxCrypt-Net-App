@@ -5576,7 +5576,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ensure all public documents, client data, and contracts are encrypted with software like AxCrypt..
+        ///   Looks up a localized string similar to Ensure all internal documents, client data, and contracts are encrypted with software like AxCrypt..
         /// </summary>
         public static string Blog_6BCLWYSISS_H1_SH2_Text6 {
             get {
@@ -23664,9 +23664,9 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_MEPGFCCIC_H1_Text1", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to And it’s not just critical infrastructure at risk. In May 2025, &lt;b&gt;Coinbase Global, the leading American cryptocurrency exchange&lt;/b&gt;, &lt;a href=&apos;https://mashable.com/article/coinbase-data-breach-70k-members-ransom&apos;&gt;&lt;b&gt;experienced a massive insider-assisted data breach&lt;/b&gt;&lt;/a&gt; involving over 69,000 customers. A few overseas support agents were bribed to share sensitive public data, which included personal identifiers, ID images, and account balances. While passwords and private keys remained safe, the leaked d [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to And it’s not just critical infrastructure at risk. In May 2025, &lt;b&gt;Coinbase Global, the leading American cryptocurrency exchange&lt;/b&gt;, &lt;a href=&apos;https://mashable.com/article/coinbase-data-breach-70k-members-ransom&apos;&gt;&lt;b&gt;experienced a massive insider-assisted data breach&lt;/b&gt;&lt;/a&gt; involving over 69,000 customers. A few overseas support agents were bribed to share sensitive internal data, which included personal identifiers, ID images, and account balances. While passwords and private keys remained safe, the leaked [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Blog_MEPGFCCIC_H1_Text2 {
             get {
@@ -23702,7 +23702,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cyberattacks don’t always begin with external breaches. The Coinbase data breach is a perfect case study . The attackers didn’t need malware or network infiltration. Instead, they &lt;a href =&apos;https://www.theregister.com/2025/05/21/coinbase_confirms_insider_breach_affects/&apos;&gt;&lt;b&gt;bribed support staff&lt;/b&gt;&lt;/a&gt; who had legitimate access to public systems. Over months, they quietly siphoned off sensitive information that could fuel identity theft, scams, and extortion..
+        ///   Looks up a localized string similar to Cyberattacks don’t always begin with external breaches. The Coinbase data breach is a perfect case study . The attackers didn’t need malware or network infiltration. Instead, they &lt;a href =&apos;https://www.theregister.com/2025/05/21/coinbase_confirms_insider_breach_affects/&apos;&gt;&lt;b&gt;bribed support staff&lt;/b&gt;&lt;/a&gt; who had legitimate access to internal systems. Over months, they quietly siphoned off sensitive information that could fuel identity theft, scams, and extortion..
         /// </summary>
         public static string Blog_MEPGFCCIC_H3_Text1 {
             get {
@@ -32928,7 +32928,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Business is designed as a powerful, user-friendly data encryption software with organizations in mind. Whether you&apos;re managing sensitive customer data or public team files, the Business encryption plan provides the features and flexibility you need. That’s why AxCrypt is often ranked among the &lt;b&gt;best encryption software for small business&lt;/b&gt; and growing companies alike. These are the key features that make AxCrypt Business stand out: .
+        ///   Looks up a localized string similar to AxCrypt Business is designed as a powerful, user-friendly data encryption software with organizations in mind. Whether you&apos;re managing sensitive customer data or internal team files, the Business encryption plan provides the features and flexibility you need. That’s why AxCrypt is often ranked among the &lt;b&gt;best encryption software for small business&lt;/b&gt; and growing companies alike. These are the key features that make AxCrypt Business stand out: .
         /// </summary>
         public static string Blog_WYONTABE_H2_Text1 {
             get {
@@ -65768,9 +65768,9 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Surname: .
         /// </summary>
-        public static string SurnameLabel {
+        public static string SurnameLabel_ {
             get {
-                return ResourceManager.GetString("SurnameLabel", resourceCulture);
+                return ResourceManager.GetString("SurnameLabel ", resourceCulture);
             }
         }
         

@@ -183,7 +183,7 @@ public partial class App : Application
     {
         Resolve.Log.LoggedAsync += async (loggingEventArgs) =>
         {
-            if (_logViewModel == null || !_logViewModel.IsVisible)
+            if (_logViewModel == null || !_logViewModel.IsDebugLogsVisible)
             {
                 return;
             }

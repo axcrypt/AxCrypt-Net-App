@@ -622,6 +622,11 @@ namespace AxCrypt.Core.Extensions
             }
             await encryptionParameters.AddAsync(await publicKeys.GetKnownPublicKeysAsync(logOnIdentity));
             await ChangeEncryptionAsync(files, encryptionParameters);
+
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+            {
+                Resolve.Log.LogInfo("Key shared files(s) {0}".InvariantFormat(string.Join(", ", files)), string.Join(", ", files), UI.FileActivity.UserActivityLog.ShareKey);
+            }
         }
 
         public static async Task<EncryptionParameters> AddMasterKeyParameter(this LogOnIdentity logOnIdentity, EncryptionParameters encryptionParameters, bool isShowMasterKeyWarning)

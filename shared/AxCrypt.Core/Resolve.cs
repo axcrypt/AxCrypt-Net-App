@@ -44,6 +44,7 @@ using AxCrypt.Api.Implementation;
 using AxCrypt.Core.IO;
 using static AxCrypt.Abstractions.TypeResolve;
 using System.IO;
+using AxCrypt.Core.UI.FileActivity;
 
 namespace AxCrypt.Core
 {
@@ -63,6 +64,9 @@ namespace AxCrypt.Core
             TypeMap.Register.Singleton<FileWorkFolder>(() => new FileWorkFolder(Resolve.UserSettings.TemporaryFilePath), () => New<WorkFolderWatcher>());
             TypeMap.Register.New<KnownPublicKeys>(() => KnownPublicKeys.Load(Resolve.WorkFolder.FileInfo.FileItemInfo("UserPublicKeys.txt"), New<IStringSerializer>()));
             TypeMap.Register.Singleton<FileSystemState>(() => FileSystemState.Create(Resolve.WorkFolder.FileInfo.FileItemInfo("FileSystemState.txt")));
+
+            TypeMap.Register.New<string, UserActivityLogger>((user) => new UserActivityLogger(user));
+            TypeMap.Register.Singleton<FileActivityStore>(() => new FileActivityStore());
         }
 
         public static void RegisterTypeFactories(IEnumerable<Assembly> assemblies)

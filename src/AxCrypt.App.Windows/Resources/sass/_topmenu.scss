@@ -193,6 +193,10 @@
             content: Url(/images/default/IcoLgng.svg);
         }
 
+        &.IcoFileLgng {
+            content: Url(/images/default/IcoFileLgng.svg);
+        }
+
         &.IcoUsers {
             content: Url(/images/default/IcoUsers.svg);
         }
@@ -283,6 +287,10 @@
 
         .IcoOptns {
             content: $IcoOptns;
+        }
+
+        .IcoFileLgng {
+            content: $IcoFileLgng;
         }
 
         .IcoChckVrsn {

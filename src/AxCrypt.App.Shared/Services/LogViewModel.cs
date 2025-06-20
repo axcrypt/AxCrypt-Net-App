@@ -7,7 +7,7 @@ namespace AxCrypt.App.Shared.Services
         private readonly object _lock = new();
         private readonly List<string> _logs = new();
 
-        public bool IsVisible { get; set; }
+        public bool IsDebugLogsVisible { get; set; }
 
         public IReadOnlyList<string> Logs
         {

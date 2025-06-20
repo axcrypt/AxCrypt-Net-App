@@ -26,6 +26,7 @@
 #endregion Coypright and License
 
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.UI.FileActivity;
 using System;
 using System.Linq;
 
@@ -75,6 +76,11 @@ namespace AxCrypt.Fake
             get { return true; }
         }
 
+        public bool IsUserActivityEnabled
+        {
+            get { return true; }
+        }
+
         public async void LogFatal(string fatalLog)
         {
             await OnLoggedAsync(fatalLog);
@@ -98,6 +104,11 @@ namespace AxCrypt.Fake
         public async void LogDebug(string debugLog)
         {
             await OnLoggedAsync(debugLog);
+        }
+
+        public void LogInfo(string infoLog, string fileSource, UserActivityLog fileActivityLogItem)
+        {
+            LogInfo(infoLog);
         }
 
         #endregion ILogging Members

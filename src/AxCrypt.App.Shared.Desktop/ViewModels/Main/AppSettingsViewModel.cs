@@ -3,6 +3,7 @@ using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
@@ -48,6 +49,7 @@ public class AppSettingsViewModel : ViewModelBase
         IsFileNameOn = New<UserSettings>().EncryptFilePropertiesFileName;
         AdvancedOptionsViewModel = new AdvancedOptionsViewModel();
         _logViewModel = AxCServiceProviderExtension.LogViewModel;
+        EnableUserActivity = New<UserSettings>().UserActivityMode;
     }
 
     public void Initialized()
@@ -246,6 +248,10 @@ public class AppSettingsViewModel : ViewModelBase
 
     public void ToggleDebug() => UpdateDebugMode(!_mainViewModel.DebugMode);
 
+    public bool EnableUserActivity { get; set; }
+
+    public void ToggleUserActivity() => UpdateUserActivityMode(!New<UserSettings>().UserActivityMode);
+
     public void FilePropertiesDateModified(EventArgs e)
     {
         New<UserSettings>().EncryptFilePropertiesDateModified = !IsDateModifiedOn;
@@ -277,6 +283,13 @@ public class AppSettingsViewModel : ViewModelBase
     {
         EnableDebugPopup = enabled;
         _mainViewModel!.DebugMode = enabled;
+    }
+
+    private void UpdateUserActivityMode(bool enabled)
+    {
+        Resolve.Log.SetLevel(enabled ? LogLevel.FileActivity : LogLevel.Error);
+        New<UserSettings>().UserActivityMode = enabled;
+        AxCServiceProvider.GetService<ProfileViewModel>().UpdateViewState();
     }
 
     public string? ErrorMessage { get; set; }
@@ -350,10 +363,10 @@ public class AppSettingsViewModel : ViewModelBase
         UpdateViewState();
     }
 
-    public void OnOpenLogViewerClicked()
+    public void OnOpenLogViewerClicked(LogType logType)
     {
-        New<IDebugLoggingWindow>().ShowLogWindow();
-        _logViewModel!.IsVisible = true;
+        _logViewModel!.IsDebugLogsVisible = true;
+        New<IDebugLoggingWindow>().ShowLogWindow(logType);
     }
 
     public async void OpenManageAxCryptID()

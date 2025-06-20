@@ -111,7 +111,6 @@ public class SecretsFacade
             return new SecretClientCollection();
         }
 
-
         SecretClientCollection secretCollection = new SecretClientCollection();
         IEnumerable<DecryptionParameter> decryptionParameters = logOnIdentity.TextDecryptionParameters();
         IEnumerable<SecretClientModel> secretClientModels = await GetClientSecretsAsync(decryptionParameters, encryptedSecret);

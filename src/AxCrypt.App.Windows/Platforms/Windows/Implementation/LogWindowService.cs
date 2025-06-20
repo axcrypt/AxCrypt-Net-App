@@ -1,5 +1,6 @@
 ﻿using AxCrypt.App.Shared.Desktop.Components.Pages.LogPage;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.Utility;
 using AxCrypt.Core.UI;
 using Microsoft.AspNetCore.Components.WebView.Maui;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -8,17 +9,29 @@ namespace AxCrypt.App.Windows.Platforms.Windows.Implementation;
 
 public class LogWindowService : IDebugLoggingWindow
 {
-    private Window? _logWindow;
+    private readonly Dictionary<LogType, Window> _logWindows = new();
 
-    public void ShowLogWindow()
+    public void ShowLogWindow(LogType logType)
     {
-        if (_logWindow != null)
+        if (_logWindows.ContainsKey(logType))
         {
-            New<IPopup>().ShowAsync(PopupButtons.Ok, AxCrypt.Content.Texts.InformationTitle, "Log window is already open!");
+            New<IPopup>().ShowAsync(PopupButtons.Ok, AxCrypt.Content.Texts.InformationTitle, $"{logType} Log window is already open!");
             return;
         }
 
-        _logWindow = new Window
+        Type? rootWindow = logType switch
+        {
+            LogType.Debug => typeof(DebugLogOutput),
+            LogType.FileActivity => typeof(UserActivityLog),
+            _ => null
+        };
+
+        if (rootWindow == null)
+        {
+            return;
+        }
+
+        Window window = new Window
         {
             Page = new ContentPage
             {
@@ -27,25 +40,39 @@ public class LogWindowService : IDebugLoggingWindow
                     HostPage = "wwwroot/index.html",
                     RootComponents =
                     {
-                        new RootComponent { Selector = "#app", ComponentType = typeof(DebugLogOutput) }
+                        new RootComponent { Selector = "#app", ComponentType = rootWindow },
                     }
                 }
             },
-            Title = "AxCrypt Debug Log Output"
+            Title = $"AxCrypt {logType} Log Output"
         };
 
-        _logWindow.Destroying += (sender, args) =>
+        window.Destroying += (sender, args) =>
         {
-            Application.Current!.CloseWindow(_logWindow);
-            _logWindow = null; // Clear reference
+            Application.Current!.CloseWindow(window);
+            _logWindows.Remove(logType);
         };
 
-        Application.Current!.OpenWindow(_logWindow);
+        _logWindows[logType] = window;
+        Application.Current!.OpenWindow(window);
     }
 
-    public void CloseLogWindow()
+    public void CloseLogWindow(LogType logType)
     {
-        Application.Current!.CloseWindow(_logWindow!);
-        _logWindow = null;
+        if (_logWindows.TryGetValue(logType, out var window))
+        {
+            Application.Current!.CloseWindow(window);
+            _logWindows.Remove(logType);
+        }
+    }
+
+    public void CloseAllLogWindows()
+    {
+        foreach (Window window in _logWindows.Values.ToList()) // ToList to avoid collection modification
+        {
+            Application.Current!.CloseWindow(window);
+        }
+
+        _logWindows.Clear();
     }
 }

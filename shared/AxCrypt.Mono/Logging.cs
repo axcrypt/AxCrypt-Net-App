@@ -25,12 +25,17 @@
 
 #endregion Coypright and License
 
+using AxCrypt.Core;
+using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.FileActivity;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Mono
 {
@@ -82,6 +87,7 @@ namespace AxCrypt.Mono
                     break;
 
                 case LogLevel.Debug:
+                case LogLevel.FileActivity:
                     _switch.Level = TraceLevel.Verbose;
                     break;
 
@@ -111,6 +117,11 @@ namespace AxCrypt.Mono
         }
 
         public bool IsDebugEnabled
+        {
+            get { return _switch != null && _switch.Level >= TraceLevel.Verbose; }
+        }
+
+        public bool IsUserActivityEnabled
         {
             get { return _switch != null && _switch.Level >= TraceLevel.Verbose; }
         }
@@ -147,6 +158,18 @@ namespace AxCrypt.Mono
             }
         }
 
+        public void LogInfo(string infoLog, string source, UserActivityLog fileActivityLogItem)
+        {
+            LogInfo(infoLog);
+
+            if (IsUserActivityEnabled)
+            {
+                string userEmail = string.IsNullOrEmpty(Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address) ? source : Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
+
+                New<UserActivityLogger>(userEmail).AppendActivity(source, fileActivityLogItem);
+            }
+        }
+
         public void LogDebug(string debugLog)
         {
             if (IsDebugEnabled)
@@ -154,6 +177,7 @@ namespace AxCrypt.Mono
                 Trace.WriteLine("{1} Debug: {0}".InvariantFormat(debugLog, AppName));
             }
         }
+
 
         #endregion ILogging Members
 

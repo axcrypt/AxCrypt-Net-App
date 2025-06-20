@@ -34,6 +34,7 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.FileActivity;
 using System.Runtime.ExceptionServices;
 using System.Text;
 
@@ -141,6 +142,10 @@ namespace AxCrypt.Core
                     document.LastWriteTimeUtc = sourceFile.LastWriteTimeUtc;
 
                     document.EncryptTo(sourceStream, destinationStream, options);
+                }
+                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+                {
+                    Resolve.Log.LogInfo("Encrypted File '{0}'.".InvariantFormat(sourceFile.FullName), sourceFile.FullName, UserActivityLog.Encrypt);
                 }
             }
         }
@@ -662,9 +667,9 @@ namespace AxCrypt.Core
                     document.DecryptTo(destinationStream);
                 }
 
-                if (Resolve.Log.IsInfoEnabled)
+                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
                 {
-                    Resolve.Log.LogInfo("Decrypted to '{0}'.".InvariantFormat(destinationStore.Name));
+                    Resolve.Log.LogInfo("Decrypted File to '{0}'.".InvariantFormat(destinationStore.Name), destinationStore.FullName, UserActivityLog.Decrypt);
                 }
             }
             catch (Exception)
@@ -884,9 +889,9 @@ namespace AxCrypt.Core
                     document.DecryptTo(destinationStream);
                 }
 
-                if (Resolve.Log.IsInfoEnabled)
+                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
                 {
-                    Resolve.Log.LogInfo("Decrypted to '{0}'.".InvariantFormat(decryptedFileInfo.Name));
+                    Resolve.Log.LogInfo("Decrypted File to '{0}'.".InvariantFormat(decryptedFileInfo.Name), decryptedFileInfo.FullName, UserActivityLog.DecryptBrokenFile);
                 }
             }
             finally

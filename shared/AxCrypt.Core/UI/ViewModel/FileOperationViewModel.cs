@@ -33,6 +33,7 @@ using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
+using AxCrypt.Core.UI.FileActivity;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.UI.ViewModel
@@ -338,6 +339,10 @@ namespace AxCrypt.Core.UI.ViewModel
                 }
                 if (e.Status.ErrorStatus == ErrorStatus.Success)
                 {
+                    if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+                    {
+                        Resolve.Log.LogInfo("Securely Deleted File {0}".InvariantFormat(file.FullName), file.FullName, UserActivityLog.SecureDelete);
+                    }
                     await New<ActiveFileAction>().RemoveRecentFiles(new IDataStore[] { New<IDataStore>(e.SaveFileFullName) }, progress);
                 }
             };
