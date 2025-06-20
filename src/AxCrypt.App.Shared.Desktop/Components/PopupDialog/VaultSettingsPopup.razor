@@ -1,0 +1,66 @@
+﻿@using AxCrypt.App.Shared.Desktop.ViewModels.Main
+
+@inject VaultSettingsViewModel VaultSettingsViewModel
+
+@if (IsVisible)
+{
+    <div class="vault-body modalDialog">
+        <div style="">
+            <div style="text-align:center;margin-bottom:18px;">
+                <img src="" class="vlt-title-img" alt="Vault encrypion settings" />
+                <br />
+                <label style="color: #494949;font-size: 20px;font-weight:800;">Vault Encryption Settings</label>
+            </div>
+
+            <span class="vault-question">Where should we store your encrypyed data?</span>
+            <div class="vault-store-location-sec">
+                <input class="input1" type="text" id="text-box" name="" @bind-value="VaultSettingsViewModel.VaultEncryptDataPath">
+                <input class="input2" type="button" id="search" value="Browse" name="" @onclick="async (e) => await VaultSettingsViewModel.AddSecuredFolder(e)">
+            </div>
+
+            <div class="vault-auto-enc-toggle-sec">
+                <span class="vault-question">Auto-encrypt opened Vault when exiting?</span>
+                <input id="check" type="checkbox" @bind="VaultSettingsViewModel.AutoVaultEncryptSigninFiles">
+                <label for="check" class="vault-auto-enc-toggle-chckbx"></label>
+            </div>
+
+            <div class="vault-hide-filename-toggle-sec">
+                <span class="vault-question">Hide file name on encryption?</span>
+                <input id="check-2" type="checkbox" @bind="VaultSettingsViewModel.VaultEncryptionFiles">
+                <label for="check-2" class="vault-hide-filename-toggle-chckbx"></label>
+            </div>
+
+            <div style="text-align:center;margin:20px;">
+                <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => await VaultSettingsViewModel.SaveVaultSetting()" />
+                <input type="button" class="input1 onbuttom-cancel" id="sbox" value="Cancel" name="" @onclick="VaultSettingsViewModel.Cancel" />
+            </div>
+
+        </div>
+    </div>
+}
+
+@code {
+    private bool IsVisible { get; set; }
+
+    protected override void OnInitialized()
+    {
+        VaultSettingsViewModel.OnUpdateViewState += async ()=> await UpdateState();
+        VaultSettingsViewModel.VaultSettingsDialog.OnDialogVisibilityChanged += async (isVisible) => await UpdateAdvancedOptionsState(isVisible);
+
+        base.OnInitialized();
+    }
+
+    async Task UpdateAdvancedOptionsState(bool isVisible)
+    {
+        IsVisible = isVisible;
+        await UpdateState();
+    }
+
+    async Task UpdateState()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+}

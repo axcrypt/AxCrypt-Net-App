@@ -67,7 +67,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     public AdvancedOptionsViewModel AdvancedOptionsViewModel { get; set; }
 
-    public List<int> InactivityTimeoutOptions { get; } = new List<int> { 0, 5, 15, 30, 60 };
+    public IEnumerable<int> InactivityTimeoutOptions { get; } = new List<int> { 0, 5, 15, 30, 60 };
 
     public bool FileEncryptionProperties { get; set; }
     public bool IsDateModifiedOn { get; set; }
@@ -275,7 +275,7 @@ public class AppSettingsViewModel : ViewModelBase
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { _logOnViewModel.InviteDialog.Show(); }, null!, e);
     }
 
-    public async Task ToggleAdvancedOption()
+    public void ToggleAdvancedOption()
     {
         if (!_mainViewModel!.LoggedOn)
         {
@@ -283,6 +283,16 @@ public class AppSettingsViewModel : ViewModelBase
         }
 
         _logOnViewModel.AdvancedOptionsDialog.Show();
+    }
+
+    public void ToggleVaultSettings()
+    {
+        if (!_mainViewModel!.LoggedOn)
+        {
+            return;
+        }
+
+        AxCServiceProvider.GetService<VaultSettingsViewModel>().VaultSettingsDialog.Show();
     }
 
     #region Debug Section

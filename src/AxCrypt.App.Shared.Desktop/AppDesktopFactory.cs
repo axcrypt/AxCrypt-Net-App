@@ -26,6 +26,7 @@ public static class AppDesktopFactory
         services.AddSingleton<RecentFilesViewModel>();
         services.AddSingleton<ProfileViewModel>();
         services.AddSingleton<RecentFoldersViewModel>();
+        services.AddSingleton<VaultSettingsViewModel>();
 
         services.AddSingleton<SuggestionViewModel>();
         services.AddSingleton<InviteViewModel>();

@@ -25,7 +25,6 @@ namespace AxCrypt.Cryptor
             return await Task.Run(() =>
             {
                 return InternalEncryptTextAsync(encryptionParameters, plainText);
-
             });
         }
 
