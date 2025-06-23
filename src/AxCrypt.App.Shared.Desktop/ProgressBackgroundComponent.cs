@@ -2,8 +2,8 @@
 using AxCrypt.Core.UI;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using AxCrypt.App.Shared.Desktop.Services.UI;
 using Microsoft.Maui.Controls;
+using AxCrypt.App.Shared.Services.UI;
 
 namespace AxCrypt.App.Shared.Desktop;
 
