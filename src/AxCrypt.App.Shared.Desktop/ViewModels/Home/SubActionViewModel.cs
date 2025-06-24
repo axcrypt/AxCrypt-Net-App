@@ -193,7 +193,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
                 return "onedrv-icon";
             if (displayName.ToLower().Contains("com~apple~clouddocs"))
                 return "cld-icon";
-            if (displayName.ToLower().Contains("google drive"))
+            if (displayName.ToLower().Contains("google drive") || displayName.ToLower().Contains("my drive"))
                 return "ggldrv-icon";
             if (displayName.ToLower().Contains("dropbox"))
                 return "drpbx-icon";

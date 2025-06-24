@@ -30,6 +30,7 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using Microsoft.Win32;
+using System.Runtime.InteropServices;
 using static AxCrypt.Abstractions.TypeResolve;
 using Texts = AxCrypt.Content.Texts;
 
@@ -131,6 +132,12 @@ namespace AxCrypt.Desktop
         private static void CheckGoogleDrive(IList<KnownFolder> knownFolders)
         {
             string googleDriveFolder = Path.Combine(Environment.GetEnvironmentVariable("HOMEDRIVE") + Environment.GetEnvironmentVariable("HOMEPATH"), "Google Drive");
+
+            if (String.IsNullOrEmpty(googleDriveFolder) || !Directory.Exists(googleDriveFolder))
+            {
+                googleDriveFolder = DetectGoogleDrive();
+            }
+
             if (String.IsNullOrEmpty(googleDriveFolder) || !Directory.Exists(googleDriveFolder))
             {
                 return;
@@ -141,6 +148,48 @@ namespace AxCrypt.Desktop
             IDataContainer googleDriveFolderInfo = New<IDataContainer>(googleDriveFolder);
             KnownFolder knownFolder = new KnownFolder(googleDriveFolderInfo, MyAxCryptFolderName, KnownFolderKind.GoogleDrive, url, Texts.KnownFolderNameGoogleDrive);
             knownFolders.Add(knownFolder);
+        }
+
+        public static string DetectGoogleDrive()
+        {
+            string googleDrivePath = "";
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                // Try to detect mount point via .shortcut-targets-by-id
+                foreach (DriveInfo drive in DriveInfo.GetDrives())
+                {
+                    if (!drive.IsReady) continue;
+                    string shortcutPath = Path.Combine(drive.RootDirectory.FullName, ".shortcut-targets-by-id");
+                    string myDrivePath = Path.Combine(drive.RootDirectory.FullName, "My Drive");
+                    if (Directory.Exists(shortcutPath) && Directory.Exists(myDrivePath))
+                    {
+                        googleDrivePath = myDrivePath;
+                        break;
+                    }
+                }
+
+                return googleDrivePath;
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                string mountPath = "/Volumes/GoogleDrive";
+                string driveFsDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Library", "Application Support", "Google", "DriveFS");
+
+                if (Directory.Exists(Path.Combine(mountPath, "My Drive")))
+                {
+                    googleDrivePath = mountPath;
+                }
+
+                if (Directory.Exists(driveFsDataPath))
+                {
+                    googleDrivePath = driveFsDataPath;
+                }
+
+                googleDrivePath = "/Applications/Google Drive.app"; // default macOS location
+            }
+
+            return googleDrivePath;
         }
     }
 }
