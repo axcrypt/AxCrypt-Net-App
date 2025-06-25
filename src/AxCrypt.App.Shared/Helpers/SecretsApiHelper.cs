@@ -13,9 +13,8 @@ namespace AxCrypt.App.Shared.Helpers;
 
 public static class SecretsApiHelper
 {
-    public static async Task<EncryptedSecretApiModel> GetSecrets(LogOnIdentity logOnIdentity)
+    public static async Task<EncryptedSecretApiModel> GetSecrets(LogOnIdentity identity)
     {
-        LogOnIdentity identity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
         SecretsListRequestOptions requestOptions = new SecretsListRequestOptions(identity.UserEmail.Address);
         EncryptedSecretApiModel userSecrets = await New<LogOnIdentity, ISecretsService>(identity).GetSecretsAsync(requestOptions);
         if (userSecrets.Cipher == null)

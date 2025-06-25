@@ -10,7 +10,7 @@ namespace AxCrypt.Cryptor
 {
     public static class TextEncryption
     {
-        public static byte[] Encrypt(EncryptionParameters encryptionParameters, string plainText)
+        public static async Task<byte[]> EncryptAsync(EncryptionParameters encryptionParameters, string plainText)
         {
             if (encryptionParameters is null)
             {
@@ -22,11 +22,11 @@ namespace AxCrypt.Cryptor
                 throw new ArgumentNullException(nameof(plainText));
             }
             // Avoid working with files in UI thread.
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
                 return InternalEncryptTextAsync(encryptionParameters, plainText);
 
-            return InternalEncryptTextAsync(encryptionParameters, plainText);
+            });
         }
 
         private static byte[] InternalEncryptTextAsync(EncryptionParameters encryptionParameters, string plainText)
@@ -58,7 +58,7 @@ namespace AxCrypt.Cryptor
             return encryptedText;
         }
 
-        public static string DecryptAsync(IEnumerable<DecryptionParameter> decryptionParameters, byte[] encryptedData)
+        public static async Task<string> DecryptAsync(IEnumerable<DecryptionParameter> decryptionParameters, byte[] encryptedData)
         {
             if (decryptionParameters is null)
             {
@@ -66,13 +66,13 @@ namespace AxCrypt.Cryptor
             }
 
             // Avoid working with files in UI thread.
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
                 return InternalDecryptText(decryptionParameters, encryptedData);
             });
         }
 
-        private static string InternalDecryptTextAsync(IEnumerable<DecryptionParameter> decryptionParameters, byte[] encryptedData)
+        private static string InternalDecryptText(IEnumerable<DecryptionParameter> decryptionParameters, byte[] encryptedData)
         {
             string decryptedText = "";
             using (MemoryStream sourceStream = new MemoryStream(encryptedData))

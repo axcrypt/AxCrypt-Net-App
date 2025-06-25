@@ -162,12 +162,13 @@ public static class PersonalSecrets
 
     private static async Task<SecretClientCollection> LoadActiveSecretsAsync()
     {
-        if (string.IsNullOrEmpty(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address))
+        LogOnIdentity logOnIdentity = New<KnownIdentities>().DefaultEncryptionIdentity;
+        if (string.IsNullOrEmpty(logOnIdentity.UserEmail.Address))
         {
             new SecretCollection();
         }
 
-        return await SecretsFacade.GetSecrets(New<KnownIdentities>().DefaultEncryptionIdentity);
+        return await SecretsFacade.GetSecrets(logOnIdentity);
     }
 
     public static async Task<bool> InsertAsync(SecretClientModel secret)

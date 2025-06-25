@@ -60,7 +60,7 @@ public static class ShareSecretFacade
 
         EncryptionParameters encryptionParameters = await CreateEncryptionParameters(identity, usersPublicKeys);
         string serializedText = Serializer.Serialize(secretsClientModel);
-        byte[] encryptedSecrets = TextEncryption.Encrypt(encryptionParameters, serializedText);
+        byte[] encryptedSecrets = await TextEncryption.EncryptAsync(encryptionParameters, serializedText);
 
         string userEmail = identity.UserEmail.Address;
         EncryptedSecretApiModel encryptedSecret = new EncryptedSecretApiModel()

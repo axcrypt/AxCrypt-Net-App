@@ -68,20 +68,30 @@ public class SecretsFacade
         SecretClientCollection secretList = await GetSecrets(logOnIdentity);
         secretList.AddRange(nonEmptySecrets);
 
-        SecretsClientModel secretsClientModel = new SecretsClientModel()
-        {
-            Secrets = secretList.ToList(),
-        };
-
-        return await SaveSecrets(logOnIdentity, secretsClientModel);
+        return await EncryptSaveSecretsAsync(logOnIdentity, secretList);
     }
 
-    private static async Task<bool> SaveSecrets(LogOnIdentity logOnIdentity, SecretsClientModel secretsClientModel)
+    private static async Task<bool> EncryptSaveSecretsAsync(LogOnIdentity logOnIdentity, SecretClientCollection secretCollection)
+    {
+        SecretsClientModel secretsClientModel = new SecretsClientModel()
+        {
+            Secrets = secretCollection.ToList(),
+        };
+
+        byte[] encryptedSecrets = await EncryptSecretsAsync(logOnIdentity, secretsClientModel);
+        return await SaveSecretsAsync(logOnIdentity, encryptedSecrets);
+    }
+
+
+    private static async Task<byte[]> EncryptSecretsAsync(LogOnIdentity logOnIdentity, SecretsClientModel secretsClientModel)
     {
         EncryptionParameters encryptionParameters = await CreateEncryptionParameters(logOnIdentity);
         string serializedText = Serializer.Serialize(secretsClientModel);
-        byte[] encryptedSecrets = TextEncryption.Encrypt(encryptionParameters, serializedText);
+        return await TextEncryption.EncryptAsync(encryptionParameters, serializedText);
+    }
 
+    private static async Task<bool> SaveSecretsAsync(LogOnIdentity logOnIdentity, byte[] encryptedSecrets)
+    {
         string userEmail = logOnIdentity.UserEmail.Address;
         EncryptedSecretApiModel encryptedSecret = new EncryptedSecretApiModel()
         {
@@ -104,7 +114,7 @@ public class SecretsFacade
 
         SecretClientCollection secretCollection = new SecretClientCollection();
         IEnumerable<DecryptionParameter> decryptionParameters = logOnIdentity.TextDecryptionParameters();
-        IEnumerable<SecretClientModel> secretClientModels = GetClientSecrets(logOnIdentity, decryptionParameters, encryptedSecret);
+        IEnumerable<SecretClientModel> secretClientModels = await GetClientSecretsAsync(decryptionParameters, encryptedSecret);
         if (!secretClientModels.Any())
         {
             return secretCollection;
@@ -128,7 +138,7 @@ public class SecretsFacade
                 CreatedUtc = shareSecret.CreatedUtc,
             };
 
-            IEnumerable<SecretClientModel> secrets = GetClientSecrets(logOnIdentity, decryptionParameters, encryptedSecret);
+            IEnumerable<SecretClientModel> secrets = await GetClientSecretsAsync(decryptionParameters, encryptedSecret);
             SecretClientModel sharedSecret = secrets.FirstOrDefault()!;
             if (sharedSecret != null)
             {
@@ -141,17 +151,15 @@ public class SecretsFacade
         return secretCollection;
     }
 
-    private static IEnumerable<SecretClientModel> GetClientSecrets(LogOnIdentity logOnIdentity, IEnumerable<DecryptionParameter> decryptionParameters, EncryptedSecretApiModel encryptedSecret)
+    private static async Task<IEnumerable<SecretClientModel>> GetClientSecretsAsync(IEnumerable<DecryptionParameter> decryptionParameters, EncryptedSecretApiModel encryptedSecret)
     {
-        string decryptedText = TextEncryption.DecryptAsync(decryptionParameters, encryptedSecret.Cipher);
+        string decryptedText = await TextEncryption.DecryptAsync(decryptionParameters, encryptedSecret.Cipher);
         SecretsClientModel secretsList = Serializer.Deserialize<SecretsClientModel>(decryptedText);
         if (secretsList == null)
         {
             return new SecretClientCollection();
         }
 
-        EncryptionKey encryptionKey = new EncryptionKey(logOnIdentity.Passphrase.Text);
-        secretsList.Secrets.Select(sec => GetSecret(sec, encryptionKey));
         return secretsList.Secrets;
     }
 
@@ -160,45 +168,35 @@ public class SecretsFacade
     {
         LogOnIdentity logOnIdentity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
 
-        SecretClientCollection newSecrets = await GetSecrets(logOnIdentity);
+        SecretClientCollection secretsList = await GetSecrets(logOnIdentity);
         foreach (SecretClientModel secret in secrets)
         {
-            int index = newSecrets.IndexOf(secret);
+            int index = secretsList.IndexOf(secret);
 
             if ((secret.Type <= AxCrypt.Api.Model.Secret.SecretType.Password && secret.Password.IsEmpty) || (secret.Type == AxCrypt.Api.Model.Secret.SecretType.Card && secret.Card.IsEmpty) || (secret.Type == AxCrypt.Api.Model.Secret.SecretType.Note && secret.Note.IsEmpty))
             {
-                newSecrets.RemoveAt(index);
+                secretsList.RemoveAt(index);
             }
             else
             {
-                newSecrets[index] = secret;
-                newSecrets[index].UpdatedUtc = New<Abstractions.INow>().Utc;
+                secretsList[index] = secret;
+                secretsList[index].UpdatedUtc = New<Abstractions.INow>().Utc;
             }
         }
 
-        SecretsClientModel secretsClientModel = new SecretsClientModel()
-        {
-            Secrets = newSecrets.ToList(),
-        };
-
-        return await SaveSecrets(logOnIdentity, secretsClientModel);
+        return await EncryptSaveSecretsAsync(logOnIdentity, secretsList);
     }
 
     public static async Task<bool> Delete(IEnumerable<SecretClientModel> secrets)
     {
         LogOnIdentity logOnIdentity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
-        SecretClientCollection newSecrets = await GetSecrets(logOnIdentity);
+        SecretClientCollection secretsList = await GetSecrets(logOnIdentity);
         foreach (SecretClientModel secret in secrets)
         {
-            newSecrets.Remove(secret);
+            secretsList.Remove(secret);
         }
 
-        SecretsClientModel secretsClientModel = new SecretsClientModel()
-        {
-            Secrets = newSecrets.ToList(),
-        };
-
-        return await SaveSecrets(logOnIdentity, secretsClientModel);
+        return await EncryptSaveSecretsAsync(logOnIdentity, secretsList);
     }
 
     private static ICollection<SecretClientModel> FilterEmptySecrets(IEnumerable<SecretClientModel> secrets)
