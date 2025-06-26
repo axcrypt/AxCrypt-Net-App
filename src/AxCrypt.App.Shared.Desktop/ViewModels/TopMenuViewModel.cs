@@ -11,6 +11,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels;
 
@@ -26,7 +27,7 @@ public class TopMenuViewModel : ViewModelBase
 
     public void Initialize()
     {
-        _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
+        //_mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
     }
 
     public bool IsWideScreen { get; set; }
@@ -60,6 +61,12 @@ public class TopMenuViewModel : ViewModelBase
 
     public async Task CheckAxCryptVersionAsync(EventArgs e)
     {
+        if (New<AxCryptOnlineState>().IsOffline)
+        {
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.InformationTitle, "Update check requires internet.");
+            return;
+        }
+
         switch (_mainViewModel?.VersionUpdateStatus)
         {
             case VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck:

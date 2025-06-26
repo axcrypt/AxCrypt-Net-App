@@ -21,12 +21,12 @@
                 <div class="modal-footer">
                     @if (versionViewModel.LogOnViewModel.PopupButtons.Contains(PopupButtons.Ok))
                     {
-                        <button class="button font-medium success btn-small" @onclick="versionViewModel.Button_OkClicked"> @Texts.ButtonOkText </button>
+                        <button class="button font-medium success btn-small" @onclick="Button_OkClicked"> @Texts.ButtonOkText </button>
                     }
 
                     @if (versionViewModel.LogOnViewModel.PopupButtons.Contains(PopupButtons.Cancel))
                     {
-                        <button class="btn-small font-medium button cancel" @onclick="versionViewModel.Button_CancelClicked"> @Texts.ButtonCancelText </button>
+                        <button class="btn-small font-medium button cancel" @onclick="Button_CancelClicked"> @Texts.ButtonCancelText </button>
                     }
                 </div>
                 @if (versionViewModel.LogOnViewModel.GlobalViewModel.DontShowAgainOptions != DoNotShowAgainOptions.None)
@@ -70,5 +70,17 @@
             IsVisible = isVisible;
             StateHasChanged();
         });
+    }
+
+    private void Button_OkClicked(MouseEventArgs e)
+    {
+        versionViewModel.LogOnViewModel!.GlobalPopupDialog.Close();
+        versionViewModel.Button_OkClicked();
+    } 
+    
+    private void Button_CancelClicked(MouseEventArgs e)
+    {
+        versionViewModel.LogOnViewModel!.GlobalPopupDialog.Close();
+        versionViewModel.Button_CancelClicked();
     }
 }

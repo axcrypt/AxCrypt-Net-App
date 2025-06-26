@@ -27,7 +27,7 @@
                 <li>
                     <label for="Card_CardNumber">@Texts.CardNumberPrompt</label>
                     <input maxlength="19" minlength="12" style="color:#494949 !important;" @bind="@CardViewModel.CardNumber" type="text"
-                    onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                           onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                     <ValidationMessage For="@(() => CardViewModel.CardNumber)" />
                 </li>
                 <li>
@@ -45,8 +45,8 @@
                         <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
                         <div style="display:flex">
                             <input maxlength="1000" style="color:#494949 !important;" @bind="@CardViewModel.SecurityCode" name="Card.SecurityCode" type="text"
-                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                            oninput="this.value = this.value.replace(/\D/g, '').substring(0, 3)">
+                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                   oninput="this.value = this.value.replace(/\D/g, '').substring(0, 3)">
                             <ValidationMessage For="@(() => CardViewModel.SecurityCode)" />
                         </div>
                     </div>
@@ -55,9 +55,9 @@
                     <div class="list-width">
                         <label for="Card_ExpirationDate">@Texts.ExpirationDatePrompt</label>
                         <input id="card-exp-date-inp" style="color:#494949 !important; " @bind="@CardViewModel.ExpirationDate"
-                        type="text" class="form-control"
-                        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                        oninput="this.value = this.value.replace(/\D/g, '').substring(0, 6).replace(/(\d{2})(\d{2})/, '$1/$2')">
+                               type="text" class="form-control"
+                               onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                               oninput="this.value = this.value.replace(/\D/g, '').substring(0, 6).replace(/(\d{2})(\d{2})/, '$1/$2')">>
                         <ValidationMessage For="@(() => CardViewModel.ExpirationDate)" />
                     </div>
                 </li>
@@ -75,11 +75,11 @@
 </div>
 
 @code {
-    SecretCardViewModel CardViewModel;
+    SecretCardViewModel? CardViewModel;
     protected override void OnInitialized()
     {
-        SecretCardViewModel currentCardModel = secretService.CurrentSecret.Card;
-        CardViewModel = new SecretCardViewModel(currentCardModel.CardNumber, currentCardModel.SecretDesc, currentCardModel.NameOnCard, currentCardModel.SecurityCode, currentCardModel.ExpirationDate);
+        SecretCardViewModel currentCardModel = secretService.CurrentSecret!.Card;
+        CardViewModel = new SecretCardViewModel(currentCardModel.CardNumber, currentCardModel.SecretDesc!, currentCardModel.NameOnCard, currentCardModel.SecurityCode, currentCardModel.ExpirationDate);
 
         if (secretService.CurrentSecret == null)
         {
@@ -94,12 +94,12 @@
 
     private async Task SavePassword()
     {
-        editSecretViewModel.Secret.Card = CardViewModel;
+        editSecretViewModel.Secret.Card = CardViewModel!;
         bool saveResult = await editSecretViewModel.SaveSecretAsync();
         if (saveResult)
         {
             StatusAlertService.Success("Your new password entry has been Updated!.");
-            secretService.CurrentSecret.Card = CardViewModel;
+            secretService.CurrentSecret!.Card = CardViewModel!;
             navigationManager.NavigateTo("/viewcard");
         }
         else
@@ -110,35 +110,6 @@
 
     private void HandleOnChange(ChangeEventArgs args)
     {
-        secretService.CurrentSecret.Card.SecretDesc = args?.Value?.ToString();
-    }
-
-    bool contextMenu = false;
-
-    void contextMenuPopup()
-    {
-        contextMenu = !contextMenu;
-    }
-
-    bool isFirstClick = true;
-    bool SyncPopup { get; set; }
-
-    void openSyncPopup()
-    {
-        SyncPopup = true;
-    }
-
-    void closeSyncPopup()
-    {
-        SyncPopup = false;
-    }
-
-    void showSyncPopup()
-    {
-        if (isFirstClick)
-        {
-            openSyncPopup();
-            isFirstClick = false;
-        }
+        secretService.CurrentSecret!.Card.SecretDesc = args?.Value?.ToString();
     }
 }

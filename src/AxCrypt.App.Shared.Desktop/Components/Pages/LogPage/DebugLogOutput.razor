@@ -9,7 +9,7 @@
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject LogViewModel LogService
-@inject IStatusAlertService StatusAlerService
+@inject IStatusAlertService StatusAlertService
 
 <div style="padding:8px;">
     <button @onclick="ExportLogs" style="float: right; margin:1px 5px 1px 0px;" class="button font-medium success btn-small">Export</button>
@@ -52,6 +52,12 @@
 
     private async Task ExportLogs()
     {
+        if (LogService.Logs.Count == 0)
+        {
+            StatusAlertService.Error("There is no log to export!");
+            return;
+        }
+
         try
         {
             string logs = string.Join(Environment.NewLine, LogService.Logs);
@@ -71,18 +77,24 @@
             }
 
             await File.WriteAllBytesAsync(filePath, bytes);
-            StatusAlerService.Success("Exported successfully!");
+            StatusAlertService.Success("Exported successfully!");
         }
 
         catch (Exception ex)
         {
             await New<Core.UI.IPopup>().ShowAsync(Core.UI.PopupButtons.Ok, AxCrypt.Content.Texts.MessageErrorTitle, ex.Message);
-            StatusAlerService.Error("Failed to export!");
+            StatusAlertService.Error("Failed to export!");
         }
     }
 
     private void ClearLogs()
     {
+        if (LogService.Logs.Count == 0)
+        {
+            StatusAlertService.Error("There is no log to clear!");
+            return;
+        }
+
         LogService.ClearLogs();
         UpdateState();
     }

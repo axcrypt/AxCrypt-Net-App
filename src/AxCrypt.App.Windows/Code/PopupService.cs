@@ -30,7 +30,7 @@ public class PopupService : IPopup
         {
             case 1:
                 _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
-                await _globalViewModel.ShowVersionDialog(activeButtons, title, message, doNotShowAgainOption);
+                await _globalViewModel.ShowPopupDialog(activeButtons, title, message, doNotShowAgainOption);
                 return activeButtons[0];
 
             case 2:
@@ -39,7 +39,7 @@ public class PopupService : IPopup
                 string rightButton = ConvertToString(actions.CancelAction);
 
                 _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
-                await _globalViewModel.ShowVersionDialog(activeButtons, title, message, doNotShowAgainOption);
+                await _globalViewModel.ShowPopupDialog(activeButtons, title, message, doNotShowAgainOption);
                 isAccepted = _globalViewModel.LogOnViewModel!.PopupResult == Shared.Utility.DialogResult.OK;
 
                 if (isAccepted)
@@ -75,7 +75,7 @@ public class PopupService : IPopup
         {
             case 1:
                 _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
-                await _globalViewModel.ShowVersionDialog(possibleButtons, title, message, dontShowAgain);
+                await _globalViewModel.ShowPopupDialog(possibleButtons, title, message, dontShowAgain);
                 isAccepted = _globalViewModel.LogOnViewModel!.PopupResult == Shared.Utility.DialogResult.OK;
                 return buttons[0];
 
@@ -84,7 +84,7 @@ public class PopupService : IPopup
                 string rightButton = buttons[1];
 
                 _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
-                await _globalViewModel.ShowVersionDialog(possibleButtons, title, message, dontShowAgain);
+                await _globalViewModel.ShowPopupDialog(possibleButtons, title, message, dontShowAgain);
                 isAccepted = _globalViewModel.LogOnViewModel!.PopupResult == Shared.Utility.DialogResult.OK;
 
                 if (isAccepted)

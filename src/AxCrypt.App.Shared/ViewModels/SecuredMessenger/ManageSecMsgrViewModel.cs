@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
@@ -147,7 +148,15 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
         private void RefreshVisibleMessages(Guid messageId)
         {
             DateTime currentUtc = New<INow>().Utc;
-            Messenger.ChildMessages = Messenger.ChildMessages.Where(rm => (rm.Message.Visibility == SecureMsgrVisibility.Once && rm.Message.ReceiverList.First(ru => ru.User == New<UserSettings>().UserEmail).Read == DateTime.MinValue) || rm.Message.Visibility != SecureMsgrVisibility.Once && rm.Message.VisibleUntil > currentUtc).ToList();
+            Messenger.ChildMessages = Messenger.ChildMessages.Where(rm =>
+            {
+                if (rm.Message.Visibility == SecureMsgrVisibility.Once)
+                {
+                    MessengerReceiverApiModel? receiver = rm.Message.ReceiverList.FirstOrDefault(ru => ru.User == New<UserSettings>().UserEmail);
+                    return receiver != null && receiver.Read == DateTime.MinValue;
+                }
+                return rm.Message.VisibleUntil > currentUtc;
+            }).ToList();
 
             SecuredMessage? secMsg = Messenger.ChildMessages.FirstOrDefault();
             if (secMsg == null)

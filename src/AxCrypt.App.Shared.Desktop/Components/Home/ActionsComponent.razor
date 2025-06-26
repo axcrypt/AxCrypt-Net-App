@@ -88,7 +88,7 @@
                 } *@
             @if (homeActionModel.HasBusiness)
             {
-                <div class="act-box" @onmouseover='@( () => ShowPopup("master key") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.RedirectToAccountSite">
+                <div class="act-box" @onmouseover='@( () => ShowPopup("master key") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.NavigateToMasterKeyPage">
                     <img class="act-img mtrkey-act" src="" alt="mtrkey-img" /><span class="text-size">@Texts.MasterKeyTitle</span>
                     @if (isHovered && hoveredElement == "master key")
                     {
@@ -99,7 +99,7 @@
                 </div>
                 @if (Utility.IsMainMenuHidden)
                 {
-                    <div class="act-box" @onmouseover='@( () => ShowPopup("create groups") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.RedirectToAccountSite">
+                    <div class="act-box" @onmouseover='@( () => ShowPopup("create groups") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.NavigateToCreateGroupsPage">
                         <img class="act-img grp-act" src="" alt="grp-img" /><span class="text-size">Create groups</span>
                         @if (isHovered && hoveredElement == "create groups")
                         {
@@ -164,8 +164,8 @@
                     </div>
                     </div> *@
                 <div class="center-column" style="flex-direction: column;padding: 10px;">
-                    <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="homeActionModel.RedirectToAccountWebUrl">@Texts.BusinessSubscriptionRenewMenu<img class="rnw-btn" src="" alt="img" /></button>
-                    <button class="subs-btn" style="background-color: #000;  margin-bottom: 0px;" @onclick="()=> BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToBusinessTopupPage)">@Texts.AddUsersText<img class="add-usr" src="" alt="img" /></button>
+                    <button class="subs-btn" style="background-color: rgba(73, 73, 73, 0.50); margin-bottom: 5px;" @onclick="homeActionModel.NavigateToBusinessRenewalPage">@Texts.BusinessSubscriptionRenewMenu<img class="rnw-btn" src="" alt="img" /></button>
+                    <button class="subs-btn" style="background-color: #000;  margin-bottom: 0px;" @onclick="homeActionModel.NavigateToBusinessTopupPage">@Texts.AddUsersText<img class="add-usr" src="" alt="img" /></button>
                 </div>
             </div>
         </div>

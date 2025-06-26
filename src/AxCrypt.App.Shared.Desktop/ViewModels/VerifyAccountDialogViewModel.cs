@@ -15,17 +15,16 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels;
 public class VerifyAccountDialogViewModel
 {
     private VerifyAccountViewModel? _viewModel;
-    private LogOnViewModel _logOnViewModel;
 
     public VerifyAccountDialogViewModel()
     {
-        _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
+        LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
     }
 
     public void SetVerifyAccount(VerifyAccountViewModel viewModel)
     {
         _viewModel = viewModel;
-        _logOnViewModel.VerifyAccountDialog.Show();
+        LogOnViewModel.VerifyAccountDialog.Show();
     }
 
     private void VerifyAccountDialog_Load(object s, EventArgs ee)
@@ -39,6 +38,8 @@ public class VerifyAccountDialogViewModel
         _viewModel!.BindPropertyChanged(nameof(VerifyAccountViewModel.ShowPassword), (bool show) => { ShowPassword = show; });
         _viewModel.BindPropertyChanged(nameof(VerifyAccountViewModel.UserEmail), (string u) => { PromptUserEmail = Texts.MessageSigningUpText.InvariantFormat(u); });
     }
+
+    public LogOnViewModel LogOnViewModel { get; set; }
 
     public string? ErrorMessage { get; set; }
 

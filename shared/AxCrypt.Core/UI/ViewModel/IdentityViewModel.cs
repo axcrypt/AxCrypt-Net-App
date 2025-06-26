@@ -34,6 +34,7 @@ using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.Core.Extensions;
 
 namespace AxCrypt.Core.UI.ViewModel
 {
@@ -190,7 +191,6 @@ namespace AxCrypt.Core.UI.ViewModel
             }
 
             UserAccount userAccount = await accountService.AccountAsync();
-            LogOnIdentity logOnIdentity = new LogOnIdentity(await store.AllKeyPairsAsync(), passphrase);
             _knownIdentities.IsTFAEnabled = userAccount.IsTwoFactorEnabled;
             if (_knownIdentities.IsTFAEnabled)
             {
@@ -198,12 +198,14 @@ namespace AxCrypt.Core.UI.ViewModel
             }
 
             new AxCryptUserAccountViewModel().Initilaize(userAccount);
-            await AddUserGroupKeyPairsAsync(logOnIdentity, userAccount).Free();
 
-            return await AddMasterKeyInfo(logOnIdentity, userAccount);
+            IEnumerable<UserKeyPair> userKeyPairs = userAccount.AccountKeys.Select(k => k.ToUserKeyPair(passphrase));
+            LogOnIdentity logOnIdentity = new LogOnIdentity(userKeyPairs, passphrase);
+            await AddUserGroupKeyPairsAsync(logOnIdentity, userAccount).Free();
+            return AddMasterKeyInfo(logOnIdentity, userAccount);
         }
 
-        private static async Task<LogOnIdentity> AddMasterKeyInfo(LogOnIdentity logOnIdentity, UserAccount userAccount)
+        private static LogOnIdentity AddMasterKeyInfo(LogOnIdentity logOnIdentity, UserAccount userAccount)
         {
             if (userAccount.SubscriptionLevel != SubscriptionLevel.Business)
             {

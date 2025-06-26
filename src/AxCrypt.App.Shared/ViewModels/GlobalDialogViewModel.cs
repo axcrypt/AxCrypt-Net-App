@@ -8,6 +8,9 @@ namespace AxCrypt.App.Shared.ViewModels;
 
 public class GlobalDialogViewModel
 {
+    private readonly Queue<PopupRequest> _popupQueue = new();
+    private bool _isPopupActive = false;
+
     public GlobalDialogViewModel()
     {
         LogOnViewModel = AxCServiceProviderExtension.GetService<LogOnViewModel>();
@@ -31,34 +34,80 @@ public class GlobalDialogViewModel
 
     public LogOnViewModel? LogOnViewModel { get; set; }
 
-    public async Task<PopupButtons[]> ShowVersionDialog(PopupButtons[] buttons, string title, string message, DoNotShowAgainOptions dontShowAgain)
+    public Task<PopupButtons> ShowPopupDialog(PopupButtons[] buttons, string title, string message, DoNotShowAgainOptions dontShowAgain)
     {
-        LogOnViewModel!.GlobalViewModel = new GlobalDialogViewModel(title, message, dontShowAgain);
-        LogOnViewModel.PopupResult = DialogResult.None;
-        LogOnViewModel.PopupButtons = buttons;
-
-        DoNotShowAgainOptions savedFlags = New<UserSettings>().DoNotShowAgain;
-        DoNotShowAgainOptions currentFlags = LogOnViewModel.GlobalViewModel.DontShowAgainOptions;
-
-        if ((savedFlags & currentFlags) != 0)
+        PopupRequest request = new PopupRequest
         {
-            return LogOnViewModel.PopupButtons;
+            Buttons = buttons,
+            Title = title,
+            Message = message,
+            DoNotShow = dontShowAgain
+        };
+
+        lock (_popupQueue)
+        {
+            _popupQueue.Enqueue(request);
         }
 
-        LogOnViewModel.GlobalPopupDialog.Show();
+        _ = ProcessPopupQueueAsync();
 
-        while (LogOnViewModel.PopupResult == DialogResult.None)
+        return request.Completion.Task;
+    }
+
+    private async Task ProcessPopupQueueAsync()
+    {
+        if (_isPopupActive)
+            return;
+
+        while (true)
         {
-            await Task.Delay(1000);
-        }
+            PopupRequest? nextRequest = null;
 
-        LogOnViewModel.GlobalPopupDialog.Close();
-        return LogOnViewModel.PopupButtons;
+            lock (_popupQueue)
+            {
+                if (_popupQueue.Count == 0)
+                {
+                    _isPopupActive = false;
+                    return;
+                }
+
+                _isPopupActive = true;
+                nextRequest = _popupQueue.Dequeue();
+            }
+
+            try
+            {
+                LogOnViewModel!.GlobalViewModel = new GlobalDialogViewModel(nextRequest.Title, nextRequest.Message, nextRequest.DoNotShow);
+                LogOnViewModel.PopupResult = DialogResult.None;
+                LogOnViewModel.PopupButtons = nextRequest.Buttons;
+
+                if ((New<UserSettings>().DoNotShowAgain & nextRequest.DoNotShow) != 0)
+                {
+                    nextRequest.Completion.TrySetResult(nextRequest.Buttons[0]);
+                    continue;
+                }
+
+                LogOnViewModel.GlobalPopupDialog.Show();
+
+                while (LogOnViewModel.PopupResult == DialogResult.None)
+                {
+                    await Task.Delay(1000); 
+                }
+
+                LogOnViewModel.GlobalPopupDialog.Close();
+
+                nextRequest.Completion.TrySetResult(LogOnViewModel.PopupButtons!.FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                nextRequest?.Completion.TrySetException(ex);
+            }
+        }
     }
 
     public void Button_OkClicked()
     {
-        if (LogOnViewModel.GlobalViewModel!.DontShowAgainOptions != DoNotShowAgainOptions.None && IsCheckboxDontShowThisAgain)
+        if (LogOnViewModel!.GlobalViewModel!.DontShowAgainOptions != DoNotShowAgainOptions.None && IsCheckboxDontShowThisAgain)
         {
             New<UserSettings>().DoNotShowAgain = New<UserSettings>().DoNotShowAgain | LogOnViewModel.GlobalViewModel.DontShowAgainOptions!;
         }
@@ -69,12 +118,21 @@ public class GlobalDialogViewModel
 
     public void Button_CancelClicked()
     {
-        if (LogOnViewModel.GlobalViewModel!.DontShowAgainOptions != DoNotShowAgainOptions.None && IsCheckboxDontShowThisAgain)
+        if (LogOnViewModel!.GlobalViewModel!.DontShowAgainOptions != DoNotShowAgainOptions.None && IsCheckboxDontShowThisAgain)
         {
             New<UserSettings>().DoNotShowAgain = (DoNotShowAgainOptions)(New<UserSettings>().DoNotShowAgain | LogOnViewModel.GlobalViewModel.DontShowAgainOptions)!;
         }
 
         LogOnViewModel!.PopupResult = DialogResult.Cancel;
         LogOnViewModel.PopupButtons = [PopupButtons.Cancel];
+    }
+
+    private class PopupRequest
+    {
+        public TaskCompletionSource<PopupButtons> Completion { get; set; } = new();
+        public PopupButtons[]? Buttons { get; set; }
+        public string? Title { get; set; }
+        public string? Message { get; set; }
+        public DoNotShowAgainOptions DoNotShow { get; set; }
     }
 }

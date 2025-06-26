@@ -98,6 +98,7 @@
         InitiateDelayToRenderPage();
         CanShowSignInPage = LogOnViewModel.IsVisible;
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdateSignInPageState;
+        LogOnViewModel.OnTFADialogVisibilityChanged += UpdateSignInPageState;
         LogOnViewModel.OnSubscriptionChanged += UpdateSubscriptionState;
         SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
         await AddCssAsync(SubscriptionLevel);
@@ -123,7 +124,7 @@
     {
         if (SubscriptionLevel == LogOnViewModel.SubscriptionLevel.ToString().ToLower())
         {
-            UpdateUIState();
+            //UpdateUIState();
             return;
         }
 

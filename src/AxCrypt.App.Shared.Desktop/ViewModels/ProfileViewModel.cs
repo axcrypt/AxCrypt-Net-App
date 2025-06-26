@@ -2,7 +2,6 @@
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services.Interface;
-using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -13,7 +12,6 @@ using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using Microsoft.Maui.ApplicationModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -249,22 +247,22 @@ public class ProfileViewModel
         //{
         //await Task.Delay(2000); // simulate work
 
-        await MainThread.InvokeOnMainThreadAsync(async () =>
-        {
-            using (ProcessIndicator processIndicator = new ProcessIndicator())
-            {
-                if (_mainViewModel!.DecryptedFiles.Any())
-                {
-                    await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
-                    return;
-                }
+            //await MainThread.InvokeOnMainThreadAsync(async () =>
+            //{
+                //using (ProcessIndicator processIndicator = new ProcessIndicator())
+                //{
+                    if (_mainViewModel!.DecryptedFiles.Any())
+                    {
+                        await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
+                        return;
+                    }
 
-                await _logOnViewModel.InvokeLogOnOrLogOffAndLogOnAgainAsync();
-            }
-        });
-        // });
-        // Task.Delay(1000);
-        // }
+                    await _logOnViewModel.InvokeLogOnOrLogOffAndLogOnAgainAsync();
+                //}
+            //});
+            // });
+            // Task.Delay(1000);
+       // }
     }
 
     public async void ExitMenuItem_Click(EventArgs e)

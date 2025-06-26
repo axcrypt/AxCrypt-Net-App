@@ -109,16 +109,16 @@ namespace AxCrypt.Core.Session
                     progress.NotifyLevelStart();
                     try
                     {
+                        encryptionParameters = new EncryptionParameters(Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId, notification.Identity);
+                        if (New<LicensePolicy>().Capabilities.Has(LicenseCapability.Business))
+                        {
+                            encryptionParameters = await notification.Identity.AddMasterKeyParameter(encryptionParameters, true);
+                        }
+
                         foreach (string fullName in notification.FullNames)
                         {
                             WatchedFolder watchedFolder = _fileSystemState.WatchedFolders.First(wf => wf.Path == fullName);
-
-                            encryptionParameters = new EncryptionParameters(Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId, notification.Identity);
                             await encryptionParameters.AddAsync(await watchedFolder.KeyShares.ToAvailableKnownPublicKeysAsync(notification.Identity));
-                            if (New<LicensePolicy>().Capabilities.Has(LicenseCapability.Business))
-                            {
-                                encryptionParameters = await notification.Identity.AddMasterKeyParameter(encryptionParameters, true);
-                            }
 
                             IDataContainer container = New<IDataContainer>(watchedFolder.Path);
                             progress.Display = container.Name;

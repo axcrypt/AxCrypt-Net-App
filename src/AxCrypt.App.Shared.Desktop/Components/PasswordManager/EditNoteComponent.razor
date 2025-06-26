@@ -77,35 +77,6 @@
         }
     }
 
-    bool contextMenu = false;
-
-    void contextMenuPopup()
-    {
-        contextMenu = !contextMenu;
-    }
-
-    bool isFirstClick = true;
-    bool SyncPopup { get; set; }
-
-    void openSyncPopup()
-    {
-        SyncPopup = true;
-    }
-
-    void closeSyncPopup()
-    {
-        SyncPopup = false;
-    }
-
-    void showSyncPopup()
-    {
-        if (isFirstClick)
-        {
-            openSyncPopup();
-            isFirstClick = false;
-        }
-    }
-
     private async Task HandleOnChange(ChangeEventArgs args)
     {
         secretService.CurrentSecret.Note.SecretDesc = args.Value.ToString();

@@ -1,19 +1,25 @@
 ﻿using AxCrypt.Core.Authenticator.Service;
-using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
 using System.ComponentModel.DataAnnotations;
+using AxCrypt.App.Shared.ViewModels;
 
 namespace AxCrypt.App.Shared
 {
     public class TwoFactorAuthViewModel : ViewModelBase
     {
+        private LogOnViewModel _logOnViewModel;  
+        public TwoFactorAuthViewModel(LogOnViewModel logOnViewModel)
+        {          
+            _logOnViewModel = logOnViewModel;   
+        }
+
         public void ShowLogOnDialog()
         {
             OneTimePassword = "";
             IsVisible = true;
-            AxCServiceProviderExtension.LogOnViewModel!.ProcessIndicator.Dispose();
+            _logOnViewModel!.ProcessIndicator.Dispose();
 
             while (PageResult == DialogResult.None)
             {
@@ -21,7 +27,7 @@ namespace AxCrypt.App.Shared
             }
 
             IsVisible = false;
-            AxCServiceProviderExtension.LogOnViewModel!.InitiateProgressIndicator();
+            _logOnViewModel!.InitiateProgressIndicator();
         }
 
         [RegularExpression("^[0-9]{6}$", ErrorMessage = "Please enter valid code.")]
@@ -44,7 +50,7 @@ namespace AxCrypt.App.Shared
             set
             {
                 _isVisible = value;
-                AxCServiceProviderExtension.LogOnViewModel!.IsTfaEnabled = value;
+                _logOnViewModel!.IsTfaEnabled = value;
                 UpdateViewState();
             }
         }

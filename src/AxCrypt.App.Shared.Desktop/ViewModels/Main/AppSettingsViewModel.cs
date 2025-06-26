@@ -47,7 +47,6 @@ public class AppSettingsViewModel : ViewModelBase
         IsFileNameOn = New<UserSettings>().EncryptFilePropertiesFileName;
         AdvancedOptionsViewModel = new AdvancedOptionsViewModel();
         _logViewModel = AxCServiceProviderExtension.LogViewModel;
-        EnableDebugPopup = New<UserSettings>().DebugMode;
     }
 
     public void Initialized()
@@ -274,6 +273,9 @@ public class AppSettingsViewModel : ViewModelBase
 
     public void UpdateDebugMode(bool enabled)
     {
+        EnableDebugPopup = enabled;
+        Resolve.Log.SetLevel(enabled ? LogLevel.Debug : LogLevel.Error);
+        OS.Current.DebugMode(enabled);
         New<UserSettings>().DebugMode = enabled;
     }
 
@@ -297,31 +299,6 @@ public class AppSettingsViewModel : ViewModelBase
 
     public string? VersionHoverText { get; set; }
     public bool ShowUpdate { get; set; }
-
-    public async Task SetSoftwareStatus()
-    {
-        VersionUpdateStatus status = _mainViewModel!.VersionUpdateStatus;
-
-        switch (status)
-        {
-            case VersionUpdateStatus.ShortTimeSinceLastSuccessfulCheck:
-            case VersionUpdateStatus.IsUpToDate:
-                ShowUpdate = false;
-                break;
-
-            case VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck:
-                VersionHoverText = Texts.OldVersionTooltip;
-                break;
-
-            case VersionUpdateStatus.NewerVersionIsAvailable:
-                VersionHoverText = Texts.NewVersionIsAvailableText.InvariantFormat(_mainViewModel.DownloadVersion.Version) + ' ' + Texts.ClickToDownloadText;
-                break;
-
-            case VersionUpdateStatus.Unknown:
-                VersionHoverText = Texts.ClickToCheckForNewerVersionTooltip;
-                break;
-        }
-    }
 
     public void OpenOptions()
     {

@@ -2,8 +2,7 @@
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Content
 
-@inject LogOnViewModel LogOnModel
-@inject VerifyAccountDialogViewModel verifyViewModel
+@inject VerifyAccountDialogViewModel VerifyAccountViewModel
 
 @if (IsVisible)
 {
@@ -17,28 +16,28 @@
                 <div class="modal-body">
                     <div>
                         <label>Your password:</label>
-                        <input type="@(verifyViewModel.ShowPassword ? "text" : "password")" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.PassPhrase" />
+                        <input type="@(VerifyAccountViewModel.ShowPassword ? "text" : "password")" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@VerifyAccountViewModel.PassPhrase" />
                     </div>
 
                     <div>
                         <label>@Texts.VerifyPasswordPrompt:</label>
-                        <input type="@(verifyViewModel.ShowPassword ? "text" : "password")" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.PassPhraseVerification" />
+                        <input type="@(VerifyAccountViewModel.ShowPassword ? "text" : "password")" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@VerifyAccountViewModel.PassPhraseVerification" />
                     </div>
                     <div>
-                        <input type="checkbox" checked="@verifyViewModel.ShowPassword" @onchange="ToggleShowPassword" />
+                        <input type="checkbox" checked="@VerifyAccountViewModel.ShowPassword" @onchange="ToggleShowPassword" />
                         <span class="grey-clr font-medium">@Texts.ShowPasswordOptionPrompt</span>
                     </div>
 
                     <div>
                         <label>@Texts.PromptActivationCode:</label>
-                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@verifyViewModel.ActivationCode" />
+                        <input type="password" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@VerifyAccountViewModel.ActivationCode" />
                     </div>
                 </div>
             </div>
             <div class="button-group-footer">
-                <button class="button success btn-small" @onclick="verifyViewModel.ButtonOk_Click">@Texts.ButtonOkText</button>
-                <button class="button cancel btn-small" @onclick="verifyViewModel.ResendButton_Click">@Texts.ResendButtonText</button>
-                <button class="button cancel btn-small" @onclick="verifyViewModel.HelpButton_Click">@Texts.ButtonHelpText</button>
+                <button class="button success btn-small" @onclick="VerifyAccountViewModel.ButtonOk_Click">@Texts.ButtonOkText</button>
+                <button class="button cancel btn-small" @onclick="VerifyAccountViewModel.ResendButton_Click">@Texts.ResendButtonText</button>
+                <button class="button cancel btn-small" @onclick="VerifyAccountViewModel.HelpButton_Click">@Texts.ButtonHelpText</button>
                 <button class="button cancel btn-small" @onclick="Cancel">@Texts.ButtonCancelText</button>
             </div>
         </div>
@@ -61,12 +60,12 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        LogOnModel.VerifyAccountDialog.OnDialogVisibilityChanged += UpdateVerifyAccountDialogState;
+        VerifyAccountViewModel.LogOnViewModel.VerifyAccountDialog.OnDialogVisibilityChanged += UpdateVerifyAccountDialogState;
     }
 
     void ToggleShowPassword(ChangeEventArgs e)
     {
-        verifyViewModel.ShowPassword = (bool)e.Value;
+        VerifyAccountViewModel.ShowPassword = (bool)e.Value!;
     }
 
     private void UpdateVerifyAccountDialogState(bool canShowVerifyAccountDialog)
@@ -80,6 +79,6 @@
 
     private void Cancel()
     {
-        LogOnModel.VerifyAccountDialog.Close();
+        VerifyAccountViewModel.LogOnViewModel.VerifyAccountDialog.Close();
     }
 }

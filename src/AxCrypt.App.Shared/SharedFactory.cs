@@ -9,13 +9,21 @@ using AxCrypt.App.Shared.ViewModels.Feedback;
 using AxCrypt.App.Shared.ViewModels.Notification;
 using AxCrypt.App.Shared.ViewModels.Secret;
 using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
+using AxCrypt.Common;
+using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Cryptor.Model;
 using Microsoft.Extensions.DependencyInjection;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared
 {
     public static class SharedFactory
     {
+        private static MainViewModel? _mainViewModel;
+
+        private static bool _userInitiatedUpdateCheckPending = false;
+
         public static void RegisterSingletons(IServiceCollection services)
         {
             services.AddSingleton<ICssService, CssService>();
@@ -63,6 +71,19 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<TwoFactorAuthViewModel>();
 
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
+        }
+
+        public static void LoadUpdateCheck(MainViewModel mainViewModel)
+        {
+            _mainViewModel = mainViewModel;
+            _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) await mainViewModel.AxCryptUpdateCheck.ExecuteAsync(New<UserSettings>().LastUpdateCheckUtc); });
+            _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { if (_mainViewModel.LoggedOn) _userInitiatedUpdateCheckPending = true; await DisplayUpdateCheckPopups(); });
+        }
+
+        private static async Task DisplayUpdateCheckPopups()
+        {
+            await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel!.DownloadVersion);
+            _userInitiatedUpdateCheckPending = false;
         }
     }
 }

@@ -51,15 +51,16 @@
         ShowSignUp = Register.ShowSignUp;
         base.OnInitialized();
         Register.OnVisibilityOfUserSignUpChanged += UpdateSignUpPageVisibility;
-        LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdatePageState;
+        LogOnViewModel.OnLogOnDialogVisibilityChanged += async (bool isVisible) => await UpdatePageState(isVisible);
+        LogOnViewModel.OnTFADialogVisibilityChanged += async (bool isVisible) => await UpdatePageState(isVisible);
     }
 
-    private void UpdatePageState(bool isShow = false)
+    private async Task UpdatePageState(bool isShow = false)
     {
-        UpdatePageState();
+        await UpdatePageState();
     }
 
-    private async void UpdatePageState()
+    private async Task UpdatePageState()
     {
         await InvokeAsync(() =>
         {

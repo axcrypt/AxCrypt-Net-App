@@ -63,7 +63,7 @@
                                    type="text"
                                    class="form-control @(GetInputClass(nameof(newSecretViewModel.Secret.Card.ExpirationDate)))"
                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                   oninput="this.value = this.value.replace(/\D/g, '').substring(0, 6).replace(/(\d{2})(\d{2})/, '$1/$2')" />
+                                   oninput="this.value = this.value.replace(/\D/g, '').substring(0, 6).replace(/(\d{2})(\d{2})/, '$1/$2')">>
                             <ValidationMessage For="@(() => newSecretViewModel.Secret.Card.ExpirationDate)" />
                         </div>
                     </li>

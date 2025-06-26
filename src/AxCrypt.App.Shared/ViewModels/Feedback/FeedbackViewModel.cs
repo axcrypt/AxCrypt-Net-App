@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.Utility;
+using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Service;
@@ -35,6 +36,12 @@ public class FeedbackViewModel
 
     public async Task HandleFormSubmit()
     {
+        if (New<AxCryptOnlineState>().IsOffline)
+        {
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.InformationTitle, "Send feedback need internet connection.");
+            return;
+        }
+
         if (string.IsNullOrEmpty(UserInput))
         {
             ErrorMessage = "Please add something before submitting!";

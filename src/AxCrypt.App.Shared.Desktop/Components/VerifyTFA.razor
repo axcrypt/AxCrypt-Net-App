@@ -1,12 +1,13 @@
 ﻿@using AxCrypt.Abstractions
 @using AxCrypt.App.Shared.Desktop.Data
 @using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Content
 @using AxCrypt.App.Shared.Utility
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject IJSRuntime JSRuntime
-@inject TwoFactorAuthViewModel TwoFactorModel
+@inject LogOnViewModel LogOnViewModel
 @inject NavigationManager NavigationManager
 
 <section class="content">
@@ -19,14 +20,14 @@
             <DataAnnotationsValidator />
             <div class="verify-code-txt">
                 <input type="tel" inputmode="numeric" pattern="[0-9]*" id="verify-code-txtbox" class="form-control @(IsOtpInvalid ? "input-invalid" : "")"
-                       placeholder="Verification code" maxlength="6" @ref="OtpInputRef" @bind="TwoFactorModel.OneTimePassword"
+                       placeholder="Verification code" maxlength="6" @ref="OtpInputRef" @bind="LogOnViewModel.TwoFactorAuthViewModel.OneTimePassword"
                        @oninput="ValidateCode" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                <ValidationMessage style="font-size: 13px;color: #f00;display: block;position: relative;font-weight: 700;" For="@(() => TwoFactorModel.OneTimePassword)" />
+                <ValidationMessage style="font-size: 13px;color: #f00;display: block;position: relative;font-weight: 700;" For="@(() => LogOnViewModel.TwoFactorAuthViewModel.OneTimePassword)" />
             </div>
 
-            @if (!string.IsNullOrEmpty(TwoFactorModel.ErrorMessage))
+            @if (!string.IsNullOrEmpty(LogOnViewModel.TwoFactorAuthViewModel.ErrorMessage))
             {
-                <div class="error-message">@TwoFactorModel.ErrorMessage</div>
+                <div class="alert alert-danger">@LogOnViewModel.TwoFactorAuthViewModel.ErrorMessage</div>
             }
 
             <button type="submit" class="button success grn-bg whte-clr" style="width:100%; margin:20px 0 0;" disabled="@(!IsCodeValid())">Login</button>
@@ -59,13 +60,13 @@
     private ElementReference OtpInputRef;
     private EditContext? editContext;
 
-    private bool IsCodeValid() => TwoFactorModel.OneTimePassword?.Length == 6 && TwoFactorModel.OneTimePassword.All(char.IsDigit);
+    private bool IsCodeValid() => LogOnViewModel.TwoFactorAuthViewModel.OneTimePassword?.Length == 6 && LogOnViewModel.TwoFactorAuthViewModel.OneTimePassword.All(char.IsDigit);
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        TwoFactorModel.OnUpdateViewState += UpdatePageState;
-        editContext = new EditContext(TwoFactorModel);
+        LogOnViewModel.TwoFactorAuthViewModel.OnUpdateViewState += UpdatePageState;
+        editContext = new EditContext(LogOnViewModel.TwoFactorAuthViewModel);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -92,22 +93,22 @@
                 return;
             }
 
-            TwoFactorModel.OneTimePassword = value;
+            LogOnViewModel.TwoFactorAuthViewModel.OneTimePassword = value;
             await HandleValidSubmit();
         }
     }
 
     private async Task HandleValidSubmit()
     {
-        TwoFactorModel.ErrorMessage = null;
-        await TwoFactorModel.TwoFactorVerifiedTaskAsync(TwoFactorModel.OneTimePassword!);
+        LogOnViewModel.TwoFactorAuthViewModel.ErrorMessage = null;
+        await LogOnViewModel.TwoFactorAuthViewModel.TwoFactorVerifiedTaskAsync(LogOnViewModel.TwoFactorAuthViewModel.OneTimePassword!);
     }
 
     private void OnCancelClick()
     {
-        TwoFactorModel.OneTimePassword = "";
-        TwoFactorModel.ErrorMessage = "";
-        TwoFactorModel.PageResult = DialogResult.Cancel;
+        LogOnViewModel.TwoFactorAuthViewModel.OneTimePassword = "";
+        LogOnViewModel.TwoFactorAuthViewModel.ErrorMessage = "";
+        LogOnViewModel.TwoFactorAuthViewModel.PageResult = DialogResult.Cancel;
     }
 
     private void UpdatePageState()

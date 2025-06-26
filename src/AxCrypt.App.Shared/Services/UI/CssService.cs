@@ -13,7 +13,7 @@ public class CssService : ICssService
             "premium" => "premium",
             "passwordmanager" => "free",
             "free" => "free",
-            _ => "default"
+            _ => "free"
         };
 
         IList<KeyValuePair<string, string>> cssFiles = new List<KeyValuePair<string, string>>()

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.Content;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels.Home;
 
@@ -143,22 +144,24 @@ public class ActionsViewModel : ViewModelBase
         LogOnViewModel.UpgradeDialog.Show();
     }
 
-    public async void RedirectToAccountWebUrl()
+    public void NavigateToBusinessRenewalPage()
     {
-        LogOnIdentity identity = New<KnownIdentities>().DefaultEncryptionIdentity;
-        string tag = string.Empty;
-        if (New<KnownIdentities>().IsLoggedOn)
-        {
-            IAccountService accountService = New<LogOnIdentity, IAccountService>(identity);
-            tag = (await accountService.AccountAsync()).Tag ?? string.Empty;
-        }
-
-        BrowseUtility.RedirectToPurchasePage(identity.UserEmail.Address, true, tag);
+        BrowseUtility.RedirectToAccountWebUrl("{0}Business/SubscriptionDetails#renew-bus-section");
     }
 
-    public void RedirectToAccountSite()
+    public void NavigateToBusinessTopupPage()
     {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/"));
+        BrowseUtility.RedirectToAccountWebUrl("{0}Business/SubscriptionDetails#addmorelicns-bus-section");
+    }
+
+    public void NavigateToMasterKeyPage()
+    {
+        BrowseUtility.RedirectToAccountWebUrl("{0}MasterKey/Index");
+    }
+    
+    public void NavigateToCreateGroupsPage()
+    {
+        BrowseUtility.RedirectToAccountWebUrl("{0}Group/Index");
     }
 
     //public void BuyForSomeoneElseLink()

@@ -27,8 +27,6 @@ public class AppMain
     private FileOperationViewModel _fileOperationViewModel;
     private KnownFoldersViewModel _knownFoldersViewModel;
 
-    private TwoFactorAuthViewModel? _twoFactorAuthViewModel;
-
     //private ApiVersion? _apiVersion;
     public AppMain()
     {
@@ -52,14 +50,15 @@ public class AppMain
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => await _knownFoldersViewModel.UpdateState.ExecuteAsync(null));
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await new Display().LocalSignInWarningPopUpAsync(loggedOn); });
+
+        SharedFactory.LoadUpdateCheck(_mainViewModel);
     }
 
     private void BindToFileOperationViewModel()
     {
         _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
-        _fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
+        _fileOperationViewModel.IdentityViewModel.LoggingOnAsync += async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
         _fileOperationViewModel.IdentityViewModel.LoggingOnWithTOTPAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleExistingAccountLogOnWithTOTP(e));
-
         _fileOperationViewModel.SelectingFilesAsync += async (sender, e) => await New<IUIThread>().SendToAsync(() => New<IDataItemSelection>().HandleSelection(e));
         _fileOperationViewModel.ToggleEncryptionUpgradeMode += async (sender, e) => await ToggleEncryptionUpgradeMode();
     }
@@ -240,38 +239,37 @@ public class AppMain
 
     private async Task HandleExistingAccountLogOnWithTOTP(LogOnEventArgs e)
     {
-        _twoFactorAuthViewModel = AxCServiceProviderExtension.TwoFactorAuthViewModel;
         if (e.UserEmail == null || e.Passphrase == null)
         {
             return;
         }
 
-        if (!_twoFactorAuthViewModel!.IsVisible)
+        if (!_logOnService.TwoFactorAuthViewModel!.IsVisible)
         {
-            _twoFactorAuthViewModel.ShowLogOnDialog();
+            _logOnService.TwoFactorAuthViewModel.ShowLogOnDialog();
         }
 
-        if (_twoFactorAuthViewModel.PageResult == DialogResult.None)
+        if (_logOnService.TwoFactorAuthViewModel.PageResult == DialogResult.None)
         {
             return;
         }
 
-        if (_twoFactorAuthViewModel.PageResult == DialogResult.Cancel)
+        if (_logOnService.TwoFactorAuthViewModel.PageResult == DialogResult.Cancel)
         {
             e.Cancel = true;
-            _twoFactorAuthViewModel.PageResult = DialogResult.None;
+            _logOnService.TwoFactorAuthViewModel.PageResult = DialogResult.None;
 
             return;
         }
 
-        if (_twoFactorAuthViewModel.PageResult != DialogResult.OK || _twoFactorAuthViewModel!.OneTimePassword!.Length == 0)
+        if (_logOnService.TwoFactorAuthViewModel.PageResult != DialogResult.OK || _logOnService.TwoFactorAuthViewModel!.OneTimePassword!.Length == 0)
         {
             e.Cancel = true;
             return;
         }
 
-        e.OneTimePassword = _twoFactorAuthViewModel.OneTimePassword;
-        _twoFactorAuthViewModel.PageResult = DialogResult.None;
+        e.OneTimePassword = _logOnService.TwoFactorAuthViewModel.OneTimePassword;
+        _logOnService.TwoFactorAuthViewModel.PageResult = DialogResult.None;
 
         return;
     }
