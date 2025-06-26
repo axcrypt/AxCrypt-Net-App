@@ -1,7 +1,9 @@
 ﻿using AxCrypt.App.Shared.Desktop.Code;
-using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.App.Shared.Desktop.Services.Interface;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.Utility;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core;
 using Microsoft.UI.Windowing;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -76,7 +78,7 @@ namespace AxCrypt.App.Windows.Infrastructure
                     {
                         SetupTrayIcon();
                         Resolve.UserSettings.RestoreFullWindow = false;
-                        s.Hide();
+                        s?.Hide();
                     }
                     if (overlappedPresenter.State == Microsoft.UI.Windowing.OverlappedPresenterState.Maximized)
                     {
@@ -111,8 +113,26 @@ namespace AxCrypt.App.Windows.Infrastructure
                     New<INotificationService>()?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
                 });
 
-                trayService.ClickHandler = () =>
-                    RestoreWindowWithFocus();
+                trayService.ClickHandler = (action) =>
+                {
+                    switch (action)
+                    {
+                        case ContextMenuItem.Advanced:
+                            RestoreWindowWithFocus();
+                            break;
+
+                        case ContextMenuItem.SignOut:
+                            Task.Run(async () => await AppLifecycleHandler.SignOutSignIn());
+                            RestoreWindowWithFocus();
+                            break;
+                        case ContextMenuItem.Exit:
+                            Task.Run(async () => await AppLifecycleHandler.ExitApplication());
+                            break;
+
+                        default:
+                            break;
+                    }
+                };
             }
         }
 

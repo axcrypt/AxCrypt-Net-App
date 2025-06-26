@@ -2,6 +2,7 @@
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -202,38 +203,7 @@ public class ProfileViewModel
 
     public async Task ClearAllSettingsAndRestartAsync()
     {
-        if (_mainViewModel!.DecryptedFiles.Any())
-        {
-            await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
-            return;
-        }
-
-        PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle, Texts.ResetAllSettingsWarningText);
-        if (result == PopupButtons.Cancel)
-        {
-            return;
-        }
-
-        await new ApplicationManager().ClearAllSettings();
-        await ShutDownAnd(New<IUIThread>().RestartApplication);
-    }
-
-    private async Task ShutDownAnd(Action finalAction)
-    {
-        await new ApplicationManager().ShutdownBackgroundSafe();
-        await EncryptPendingFiles();
-
-        finalAction();
-    }
-
-    private async Task EncryptPendingFiles()
-    {
-        if (_mainViewModel != null)
-        {
-            new ApplicationManager().WaitForBackgroundToComplete();
-            await _mainViewModel.EncryptPendingFiles.ExecuteAsync(null);
-            new ApplicationManager().WaitForBackgroundToComplete();
-        }
+        await AppLifecycleHandler.RestartApplication();
     }
 
     public void RedirectToMyAxCryptIDPage()
@@ -248,28 +218,12 @@ public class ProfileViewModel
 
     public async Task SignOut()
     {
-        await Task.Run(async () =>
-        {
-            if (_mainViewModel!.DecryptedFiles.Any())
-            {
-                await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
-                return;
-            }
-
-            await _logOnViewModel.InvokeLogOnOrLogOffAndLogOnAgainAsync();
-        });
+        await AppLifecycleHandler.SignOutSignIn();
     }
 
-    public async void ExitMenuItem_Click(EventArgs e)
+    public async Task ExitMenuItem_Click(EventArgs e)
     {
-        if (_mainViewModel!.LoggedOn && _mainViewModel.DecryptedFiles.Any())
-        {
-            await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
-            return;
-        }
-
-        New<IDebugLoggingWindow>().CloseLogWindow();
-        await ShutDownAnd(New<IUIThread>().ExitApplication);
+        await AppLifecycleHandler.ExitApplication();
     }
 
     public string GetDisabledClass(bool isDisabled)

@@ -47,13 +47,13 @@
             </NavLink>
         </div>
         <div class="profile-option-container">
-            <NavLink class="nav-link" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
+            <NavLink class="nav-link" @onclick="(e) => ProfileViewModel!.ChangePassphraseMenuItem_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
                 <span>@Texts.PasswordChangeText</span>
             </NavLink>
         </div>
         <div class="profile-option-container">
-            <NavLink class="nav-link" @onclick="()=> ProfileViewModel.ClearAllSettingsAndRestartAsync()">
+            <NavLink class="nav-link" @onclick="async ()=> await ProfileViewModel!.ClearAllSettingsAndRestartAsync()">
                 <img class="" src="images/default/IcoClrSttngs.svg" alt="go-back-img" />
                 <span>@Texts.OptionsClearAllSettingsAndExitToolStripMenuItemText</span>
             </NavLink>
@@ -65,7 +65,7 @@
                 <img class="next-arrow" />
             </NavLink>
         </div>
-        <NavLink class="nav-link" @onclick="ProfileViewModel.RedirectToMyAxCryptIDPage">
+        <NavLink class="nav-link" @onclick="ProfileViewModel!.RedirectToMyAxCryptIDPage">
             <span>@Texts.DebugManageAccountToolStripMenuItemText</span>
             <img class="mng-accnt" src="" alt="go-back-img" style="float:right" />
         </NavLink>
@@ -76,7 +76,7 @@
         <NavLink class="nav-link" href="" @onclick="async (e)=> await ProfileViewModel.SignOut()">
             <span class="log-out-clr font-medium">@Texts.LogOffText</span>
         </NavLink>
-        <NavLink class="nav-link" @onclick="(e)=> ProfileViewModel.ExitMenuItem_Click(e)">
+        <NavLink class="nav-link" @onclick="async (e)=> await ProfileViewModel.ExitMenuItem_Click(e)">
             <span class="font-medium">@Texts.ExitToolStripMenuItemText</span>
         </NavLink>
     </div>

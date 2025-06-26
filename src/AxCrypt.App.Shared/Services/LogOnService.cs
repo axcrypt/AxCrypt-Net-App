@@ -230,13 +230,7 @@ namespace AxCrypt.App.Shared.Services
 
         private async Task ResetAllSettingsAndRestart()
         {
-            if (_mainViewModel.DecryptedFiles.Any())
-            {
-                await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
-                return;
-            }
-
-            await _logOnViewModel.ClearAllSettingsAndRestartAsync();
+            await AppLifecycleHandler.RestartApplication();
         }
 
         public async Task SignIn()

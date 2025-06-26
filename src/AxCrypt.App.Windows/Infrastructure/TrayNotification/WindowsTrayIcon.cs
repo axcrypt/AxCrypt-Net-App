@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+﻿using AxCrypt.App.Shared.Desktop.Code;
+using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Windows.Infrastructure.TrayNotification;
+using AxCrypt.Content;
+using System.Diagnostics;
 
 namespace AxCrypt.App.Windows.Infrastructure;
 
@@ -14,10 +18,10 @@ public class WindowsTrayIcon
     /// </summary>
     private readonly WindowMessageSink messageSink;
 
-    public Action LeftClick { get; set; } = () => { };
-    public Action RightClick { get; set; } = () => { };
+    public Action<ContextMenuItem>? OnMenuItemClicked { get; set; }
 
     public bool IsTaskbarIconCreated { get; private set; }
+    private bool _isTrayIconRegistered = false;
 
     public WindowsTrayIcon(string iconFile)
     {
@@ -26,23 +30,17 @@ public class WindowsTrayIcon
         // init icon data structure
         iconData = NotifyIconData.CreateDefault(messageSink.MessageWindowHandle, iconFile);
 
-        //IntPtr hIcon = PInvoke.User32.LoadImage(IntPtr.Zero, "dotnetbot.ico",
-        //    PInvoke.User32.ImageType.IMAGE_ICON, 16, 16, PInvoke.User32.LoadImageFlags.LR_LOADFROMFILE);
-
-        //PInvoke.User32.SendMessage(iconData.WindowHandle, PInvoke.User32.WindowMessage.WM_SETICON, (IntPtr)0, hIcon);
-
         // create the taskbar icon
         CreateTaskbarIcon();
 
         // register event listeners
         messageSink.MouseEventReceived += MessageSink_MouseEventReceived;
         messageSink.TaskbarCreated += MessageSink_TaskbarCreated;
-        //messageSink.ChangeToolTipStateRequest += OnToolTipChange;
     }
 
     private void MessageSink_TaskbarCreated()
     {
-        RemoveTaskbarIcon();
+        DisposeTrayIcon();
         CreateTaskbarIcon();
     }
 
@@ -50,12 +48,12 @@ public class WindowsTrayIcon
     {
         if (obj == MouseEvent.IconLeftMouseUp)
         {
-            LeftClick?.Invoke();
-            RemoveTaskbarIcon();
+            OnMenuItemClicked?.Invoke(ContextMenuItem.Advanced);
+            DisposeTrayIcon();
         }
         else if (obj == MouseEvent.IconRightMouseUp)
         {
-            RightClick?.Invoke();
+            ShowTrayContextMenu();
         }
     }
 
@@ -63,7 +61,7 @@ public class WindowsTrayIcon
     {
         lock (lockObject)
         {
-            if (IsTaskbarIconCreated)
+            if (IsTaskbarIconCreated || _isTrayIconRegistered)
             {
                 return;
             }
@@ -88,6 +86,7 @@ public class WindowsTrayIcon
             //messageSink.Version = (NotifyIconVersion)iconData.VersionOrTimeout;
 
             IsTaskbarIconCreated = true;
+            _isTrayIconRegistered = true;
         }
     }
 
@@ -104,6 +103,7 @@ public class WindowsTrayIcon
 
             WriteIconData(ref iconData, NotifyCommand.Delete, IconDataMembers.Message);
             IsTaskbarIconCreated = false;
+            _isTrayIconRegistered = false;
         }
     }
 
@@ -154,5 +154,58 @@ public class WindowsTrayIcon
         {
             return WinApi.Shell_NotifyIcon(command, ref data);
         }
+    }
+
+    private void ShowTrayContextMenu()
+    {
+        IntPtr hMenu = WinApiContext.CreatePopupMenu();
+
+        bool isLoggedOn = AxCServiceProviderExtension.LogOnViewModel!.MainViewModel.LoggedOn;
+
+        uint uId = 1;
+        WinApiContext.AppendMenu(hMenu, 0, (uint)uId, Texts.McInfMenuShow);
+        if (isLoggedOn)
+        {
+            uId++;
+            WinApiContext.AppendMenu(hMenu, 0, (uint)uId, Texts.PromptSignOut);
+        }
+        uId++;
+        WinApiContext.AppendMenu(hMenu, 0, (uint)uId, Texts.ButtonExitText);
+
+        // Get current cursor position
+        WinApiContext.GetCursorPos(out WinApiContext.POINT pt);
+        pt.Y -= 2;
+
+        if (iconData.WindowHandle != IntPtr.Zero && WinApiContext.IsWindow(iconData.WindowHandle))
+        {
+            WinApiContext.SetForegroundWindow(iconData.WindowHandle);
+        }
+
+        int cmd = WinApiContext.TrackPopupMenu(hMenu, WinApiContext.TPM_LEFTALIGN | WinApiContext.TPM_BOTTOMALIGN | WinApiContext.TPM_RETURNCMD, pt.X, pt.Y, 0, iconData.WindowHandle, IntPtr.Zero);
+        switch (cmd)
+        {
+            case 1:
+                OnMenuItemClicked?.Invoke(ContextMenuItem.Advanced);
+                DisposeTrayIcon();
+                break;
+            case 2 when isLoggedOn:
+                OnMenuItemClicked?.Invoke(ContextMenuItem.SignOut);
+                DisposeTrayIcon();
+                break;
+            case 2 when !isLoggedOn:
+            case 3:
+                OnMenuItemClicked?.Invoke(ContextMenuItem.Exit);
+                break;
+
+            default:
+                OnMenuItemClicked?.Invoke(ContextMenuItem.None);
+                break;
+        }
+    }
+
+    public void DisposeTrayIcon()
+    {
+        RemoveTaskbarIcon();
+        messageSink?.Dispose();
     }
 }
