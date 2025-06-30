@@ -68,7 +68,7 @@
         <div class="settings-menu-item-container" @onmouseover='@(()=> ShowPopup("autoupgrade"))' @onmouseout='@( () => HidePopup() )'>
             <NavLink class="nav-link center-column" @onclick="AppSettingsViewModel.ShowUpgradePopup">
                 <div>
-                    <img class="stngs-menu-icon Ico256" alt="Ico256" />
+                    @* <img class="stngs-menu-icon Ico256" alt="Ico256" /> *@
                     <span class="grey-clr subs-required">@Texts.OptionsConvertMenuItemText</span>
                 </div>
                 <div style="float:right; padding-left:15px;">
@@ -131,7 +131,7 @@
         <div class="settings-menu-item-container" @onmouseover='@(()=> ShowPopup("include"))' @onmouseout='@( () => HidePopup() )'>
             <NavLink class="nav-link center-column" @onclick="AppSettingsViewModel.ShowUpgradePopup">
                 <div>
-                    <img class="stngs-menu-icon IcoIncldFldrs24px" alt="IcoIncldFldrs24px" />
+                    @* <img class="stngs-menu-icon IcoIncldFldrs24px" alt="IcoIncldFldrs24px" /> *@
                     <span class="grey-clr subs-required">@Texts.OptionsIncludeSubfoldersToolStripMenuItemText</span>
                 </div>
                 <div style="float:right; padding-left:15px;">
@@ -177,7 +177,7 @@
         <div class="settings-menu-item-container" @onmouseover='@(()=> ShowPopup("inactivity"))' @onmouseout='@( () => HidePopup() )'>
             <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
                 <div>
-                    <img class="stngs-menu-icon Icoinactsign" alt="Icoinactsign" />
+                   @*  <img class="stngs-menu-icon Icoinactsign" alt="Icoinactsign" /> *@
                     <span class="subs-required">@Texts.IdleSignOutToolStripMenuItemText</span>
                     <img class="next-arrow" />
                 </div>
@@ -205,7 +205,7 @@
         <div class="settings-menu-item-container" @onmouseover='@( () => ShowPopup("rename") )' @onmouseout='@( () => HidePopup() )'>
             <NavLink class="nav-link" @onclick="AppSettingsViewModel.ShowUpgradePopup">
                 <div>
-                    <img class="stngs-menu-icon IcoRstr" alt="IcoRstr" />
+                   @*  <img class="stngs-menu-icon IcoRstr" alt="IcoRstr" /> *@
                     <span class="subs-required">@Texts.RestoreAnonymousNamesMenuText</span>
                 </div>
             </NavLink>
@@ -266,7 +266,7 @@
     {
         <div class="settings-menu-item-container" @onmouseover='@( () => ShowPopup("encryptfileproperties") )' @onmouseout='@( () => HidePopup() )'>
             <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
-                <img class="stngs-menu-icon IcoEncrptSttgs" alt="IcoEncrptSttgs" />
+                @* <img class="stngs-menu-icon IcoEncrptSttgs" alt="IcoEncrptSttgs" /> *@
                 <span class="subs-required">@Texts.FilePropertiesToolStripMenuItemText</span>
                 <img class="next-arrow" />
             </NavLink>

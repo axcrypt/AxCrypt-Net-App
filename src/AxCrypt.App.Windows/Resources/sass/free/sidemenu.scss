@@ -1,6 +1,38 @@
 ﻿@import "_variables";
 @import "../_sidemenu";
 
+.sidebar {
+    margin-top: 20px;
+}
+
+.top-menu-section {
+    margin: 60px 40px !important;
+}
+
+.nav-item .three,
+.nav-item .two {
+    color: #B5CEA9 !important;
+}
+
+.nav-subs-upg {
+    content: Url(/images/free/IcoRedSparkle.svg);
+    height: 17px;
+    padding-right: 30px;
+    right: 10px;
+}
+
+.nav-item .three.active,
+.nav-item .two.active,
+.nav-item a.three:hover,
+.nav-item a.two:hover {
+    background-color: #daead3 !important;
+    color: #B5CEA9 !important;
+}
+
+.scrts, .scrdmssngr, .scrdfldr {
+    opacity: 0.5;
+}
+
 @media (max-width: 768px) {
     .footer-popup {
         margin: auto 25%;

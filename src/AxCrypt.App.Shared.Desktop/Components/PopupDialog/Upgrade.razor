@@ -1,6 +1,8 @@
 ﻿@using AxCrypt.App.Shared.ViewModels
 @using static AxCrypt.Abstractions.TypeResolve
 @using AxCrypt.Abstractions;
+@using AxCrypt.Content;
+@using System.Web
 @inject LogOnViewModel LogOnModel
 
 @if (IsVisible)
@@ -11,14 +13,17 @@
             <div>
                 <img class="AES256-img" src="" alt="premium-icon" /><br />
                 <p style="padding-top:15px;">
-                    Upgrade to have <strong>higher security level!</strong>
+                    <strong>@Texts.UpgradeSubscriptionTitle</strong>
+                </p>
+                <p>
+                    @((MarkupString)Texts.UnlockFeatures)
                 </p>
                 <div class="center-column" style="padding-top:15px;">
-                    <button class="btn-large font-medium grn-bg whte-clr" @onclick="UpgradeSubscription">
-                        @AxCrypt.Content.Texts.UpgradeText
+                    <button class="btn-large font-medium grn-bg whte-clr" @onclick="OpenPremiumPage">
+                        @Texts.UpgradePromptText
                     </button>
-                    <button class="btn-large font-medium button cancel" @onclick="ClosePopup">
-                        Later
+                    <button class="btn-large font-medium button blck-bg whte-clr" @onclick="OpenBusinessPage" style="width: 160px;">
+                        @Texts.CreateBusinessText
                     </button>
                 </div>
             </div>
@@ -34,9 +39,15 @@
         LogOnModel.UpgradeDialog.OnDialogVisibilityChanged += UpdateUpgradeDialogState;
     }
 
-    private void UpgradeSubscription()
+    public void OpenBusinessPage()
     {
-        Core.BrowseUtility.RedirectToPurchasePage(LogOnModel.LogOnAccountModel.UserEmail, true, "");
+        Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/Login?eff=1&reqFrom=Business");
+        ClosePopup();
+    }
+
+    public void OpenPremiumPage()
+    {
+        Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/Login?eff=1&reqFrom=Premium");
         ClosePopup();
     }
 

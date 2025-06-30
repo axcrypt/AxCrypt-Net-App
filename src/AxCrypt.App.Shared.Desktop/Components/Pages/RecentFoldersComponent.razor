@@ -7,80 +7,97 @@
 @inject RecentFoldersViewModel RecentFoldersViewModel
 @inject FileDropService FileDropService
 
-@if (RecentFoldersViewModel.RecentFoldersList.Any())
-{
-    <div class="fle-nme" style="padding-bottom: 20px;">
-        <label class="font-high">@Texts.SecretsSortOrderLabel</label>
-        <select id="FoldersSortOrderOptions" name="FoldersSortOrder" @onchange="RecentFoldersViewModel.HandleSortChange"
-                style="width:110px; height: 31px; padding: 3px; border-radius: 4px; margin: 0%">
-            <option value="Date">@Texts.InvoiceDateHeadline</option>
-            <option value="Content">@Texts.SecretsSortOrderOptionByContent</option>
-        </select>
-    </div>
-}
 
-<div class="file-max-hgt hgt-ovflw" style="display: flex; flex-wrap: wrap;">
-    @if (!RecentFoldersViewModel.HasNoSubscription)
-    {
-        <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="async (ss) => await RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label class="fle-nme">Add or Drag Folder</label></div>
-    }
-    @if (!RecentFoldersViewModel.RecentFoldersList.Any())
-    {
-        <div class="text-center" style="padding-top: 20px;">
-            <span class="empty-view-heading">Let`s start our journey!</span><br />
-            <span class="fle-nme">Add and secure your first folder.</span><br />
-            <img class="empty-rcnt-fld-img" alt="default folder img" />
+<div class="home-index">
+    <div>
+        <div class="page-title">
+            <h1 class="">@Texts.WatchedFoldersTabPageText</h1>
         </div>
-    }
-    else
-    {
-        @foreach (string folder in RecentFoldersViewModel.RecentFoldersList)
-        {
-            string folderWithoutTrailingSlash = folder.TrimEnd('\\');
-            <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls fle-nme" style="white-space: nowrap" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
-                 @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
-                <img class="fldr-img" src="" /><br /><label  title="@folderWithoutTrailingSlash">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
-                <span style="font-size:8px; display: block; padding-top: 0px;">@folderWithoutTrailingSlash</span>
+    </div>
+    <AxCrypt.App.Shared.Desktop.Components.Home.ActionsComponent />
+    <div>
+        <div style="padding: 10px 0px 15px;">
+            <label class="text-style font-bold">Recent Folders</label>
+        </div>
+        <div>
+
+            @if (RecentFoldersViewModel.RecentFoldersList.Any())
+            {
+                <div class="fle-nme" style="padding-bottom: 20px;">
+                    <label class="font-high">@Texts.SecretsSortOrderLabel</label>
+                    <select id="FoldersSortOrderOptions" name="FoldersSortOrder" @onchange="RecentFoldersViewModel.HandleSortChange"
+                            style="width:110px; height: 31px; padding: 3px; border-radius: 4px; margin: 0%">
+                        <option value="Date">@Texts.InvoiceDateHeadline</option>
+                        <option value="Content">@Texts.SecretsSortOrderOptionByContent</option>
+                    </select>
+                </div>
+            }
+
+            <div class="file-max-hgt hgt-ovflw" style="display: flex; flex-wrap: wrap;">
+                @if (!RecentFoldersViewModel.HasNoSubscription)
+                {
+                    <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="async (ss) => await RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label class="fle-nme">Add or Drag Folder</label></div>
+                }
+                @if (!RecentFoldersViewModel.RecentFoldersList.Any())
+                {
+                    <div class="text-center" style="padding-top: 20px;">
+                        <span class="empty-view-heading">Let`s start our journey!</span><br />
+                        <span class="fle-nme">Add and secure your first folder.</span><br />
+                        <img class="empty-rcnt-fld-img" alt="default folder img" />
+                    </div>
+                }
+                else
+                {
+                    @foreach (string folder in RecentFoldersViewModel.RecentFoldersList)
+                    {
+                        string folderWithoutTrailingSlash = folder.TrimEnd('\\');
+                        <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls fle-nme" style="white-space: nowrap" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
+                             @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
+                            <img class="fldr-img" src="" /><br /><label title="@folderWithoutTrailingSlash">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
+                            <span style="font-size:8px; display: block; padding-top: 0px;">@folderWithoutTrailingSlash</span>
+                        </div>
+                    }
+                }
+                @* <div class="rcnt-fld-bx tmpr-img whte-clr fld-tem-cl" @onmouseover="ShowTempPopup" @onmouseout="HideTempPopup">
+                <img class="" src="images/default/IcoFldrwhte.svg" /><br /><label>Netflix</label>
+                @if (isTempHovered && currentDevice == DeviceIdiom.Desktop)
+                {
+                <div class="hover-popup text-center">
+                <span style="color:white;">
+                Folder is temporary <strong>decrypted!</strong>
+                </span><br />
+                <img class="" src="/images/default/IcoOpnScrd.svg" alt="IcoOpnScrd" />
+                </div>
+                }
+                </div>
+                <div class="rcnt-fld-bx fld-ntfnd-cl grey-clr" @onmouseover="ShwNotfndPop" @onmouseout="HdeNotfndPop">
+                <img class="" src="images/default/IcoFldrGry.svg" /><br /><label>Videos</label>
+                @if (isNtFundHovered && currentDevice == DeviceIdiom.Desktop)
+                {
+                <div class="hover-popup text-center">
+                <span style="color:white;">
+                Path is not  <strong>found!</strong>
+                </span><br />
+                <img class="" src="images/default/Icolstcnnct.svg" />
+                </div>
+                }
+                </div> *@
             </div>
-        }
-    }
-    @* <div class="rcnt-fld-bx tmpr-img whte-clr fld-tem-cl" @onmouseover="ShowTempPopup" @onmouseout="HideTempPopup">
-    <img class="" src="images/default/IcoFldrwhte.svg" /><br /><label>Netflix</label>
-    @if (isTempHovered && currentDevice == DeviceIdiom.Desktop)
-    {
-    <div class="hover-popup text-center">
-    <span style="color:white;">
-    Folder is temporary <strong>decrypted!</strong>
-    </span><br />
-    <img class="" src="/images/default/IcoOpnScrd.svg" alt="IcoOpnScrd" />
-    </div>
-    }
-    </div>
-    <div class="rcnt-fld-bx fld-ntfnd-cl grey-clr" @onmouseover="ShwNotfndPop" @onmouseout="HdeNotfndPop">
-    <img class="" src="images/default/IcoFldrGry.svg" /><br /><label>Videos</label>
-    @if (isNtFundHovered && currentDevice == DeviceIdiom.Desktop)
-    {
-    <div class="hover-popup text-center">
-    <span style="color:white;">
-    Path is not  <strong>found!</strong>
-    </span><br />
-    <img class="" src="images/default/Icolstcnnct.svg" />
-    </div>
-    }
-    </div> *@
-</div>
 
-<div id="securedContextMenu" class="hide-model-popup home-context-menu" style="display: none;">
-    <dl class="font-medium fle-nme" style="margin-bottom: 5px;">
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</dd>
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptPermanently)">@Texts.MenuDecryptPermanentlyText</dd>
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptTemporarily)">@Texts.MenuDecryptTemporarilyText</dd>
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.RemoveFromListButKeepSecured)">@Texts.RemoveRecentFileToolStripMenuItemText</dd>
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShowInExplorer)">@Texts.MenuOpenExplorerHereText</dd>
-        <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.AddSecuredFolder)">@Texts.AddSecureFolderMenuItemText</dd>
-    </dl>
-</div>
+            <div id="securedContextMenu" class="hide-model-popup home-context-menu" style="display: none;">
+                <dl class="font-medium fle-nme" style="margin-bottom: 5px;">
+                    <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</dd>
+                    <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptPermanently)">@Texts.MenuDecryptPermanentlyText</dd>
+                    <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptTemporarily)">@Texts.MenuDecryptTemporarilyText</dd>
+                    <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.RemoveFromListButKeepSecured)">@Texts.RemoveRecentFileToolStripMenuItemText</dd>
+                    <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShowInExplorer)">@Texts.MenuOpenExplorerHereText</dd>
+                    <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.AddSecuredFolder)">@Texts.AddSecureFolderMenuItemText</dd>
+                </dl>
+            </div>
 
+        </div>
+    </div>
+</div>
 @code {
     protected override async Task OnInitializedAsync()
     {
@@ -89,7 +106,6 @@
         RecentFoldersViewModel.LogOnViewModel.OnUIStateChanged += UpdateStateChanged;
         FileDropService.ResetOnDropped();
         FileDropService.OnFoldersDropped += async (folders) => await HandleDroppedFolders(folders);
-
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

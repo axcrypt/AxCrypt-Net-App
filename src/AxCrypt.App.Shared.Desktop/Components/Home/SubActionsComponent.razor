@@ -27,51 +27,52 @@
     <div class="medium-9" style="display:block;">
         <h3 class="fle-nme fnt-sze">More actions</h3>
         <div style="display: flex; gap: 2%;">
-               @if (subActionModel.EnableRandomRename)
-               {
-                  <div class="mre-actn-box" @onclick="(e)=> subActionModel.RandomRenameAsync(e)" title="@Texts.AnonymousRenameToolTip">
+            @if (subActionModel.EnableRandomRename)
+            {
+                <div class="mre-actn-box" @onclick="(e)=> subActionModel.RandomRenameAsync(e)" title="@Texts.AnonymousRenameToolTip">
                     <img class="ico-eye-sml" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.AnonymousRenameMenuText</span>
-                  </div>
-               }
-               else
-               {
-                   <div class="mre-actn-box atn-bgclr" @onclick="subActionModel.AlwaysOfflineForFreeUser" title="@Texts.AlwaysOfflineToolTip">
-                     <img class="ico-offln" src="" alt="hand-img" />
-                     <span class="text-size text-style">@Texts.AlwaysOffline</span>
-                  </div>
-                }
+                </div>
+            }
+            else
+            {
+                <div class="mre-actn-box atn-bgclr" @onclick="subActionModel.AlwaysOfflineForFreeUser" title="@Texts.AlwaysOfflineToolTip">
+                    <img class="ico-offln" src="" alt="hand-img" />
+                    <span class="text-size text-style">@Texts.AlwaysOffline</span>
+                </div>
+            }
 
-                @if(subActionModel.EnableSecureWipeFiles)
-                {
-                    <div class="mre-actn-box" @onclick="(e)=> subActionModel.SecureWipeFiles(e)" title="@Texts.FeaturesFileWipeDescription">
-                         <img class="ico-dlt" src="" alt="hand-img" />
-                         <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
-                    </div>
-                }
-                else
-                {
-                   <div class="mre-actn-box atn-bgclr" @onclick="(e)=>subActionModel.InviteUser(e)" title="@Texts.InviteUserToolStripMenuItemText">
-                     <img class="ico-invtfrd" src="" alt="hand-img" />
-                     <span class="text-size text-style">Invite friend</span>
-                   </div>
-                }
+            @if (subActionModel.EnableSecureWipeFiles)
+            {
+                <div class="mre-actn-box" @onclick="(e)=> subActionModel.SecureWipeFiles(e)" title="@Texts.FeaturesFileWipeDescription">
+                    <img class="ico-dlt" src="" alt="hand-img" />
+                    <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
+                </div>
+            }
+            else
+            {
+                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>subActionModel.InviteUser(e)" title="@Texts.InviteUserToolStripMenuItemText">
+                    <img class="ico-invtfrd" src="" alt="hand-img" />
+                    <span class="text-size text-style">Invite friend</span>
+                </div>
+            }
 
-                @if(subActionModel.EnableEncryptionUpgrade)
-                {
-                  <div class="mre-actn-box" @onclick="(e)=> subActionModel.EncryptionUpgrade(e)" title="@Texts.UpgradeLegacyFilesMenuToolTip">
+            @if (subActionModel.EnableEncryptionUpgrade)
+            {
+                <div class="mre-actn-box" @onclick="(e)=> subActionModel.EncryptionUpgrade(e)" title="@Texts.UpgradeLegacyFilesMenuToolTip">
                     <img class="ico-apikey" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
-                  </div>
-                }
-                else
-                {
-                  <div class="mre-actn-box atn-bgclr" @onclick="()=> subActionModel.UpgradeDialog()">
-                     <img class="ico-apikey" src="" alt="hand-img" />
-                     <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
-                  </div>
-                }
-               @* <div class="mre-actn-box fade-clr" style="border:dotted;">
+                </div>
+            }
+            else
+            {
+                <div class="mre-actn-box atn-bgclr" style="background-color: #D9D9D9 !important;" @onclick="()=> subActionModel.UpgradeDialog()" title="@Texts.PremiumFeatureToolTipText">
+                    <img class="ico-apikey" src="" alt="hand-img" style="filter: grayscale(100%);" />
+                    <span class="text-size text-style" style="color: white !important;">@Texts.UpgradeLegacyFilesMenuItemText</span>
+                    <img class="nav-subs-upg" src="" alt="paid_required_img" style="padding-right:0px !important;" />
+                </div>
+            }
+            @* <div class="mre-actn-box fade-clr" style="border:dotted;">
             <span class="text-size text-style">Add action to the Home</span>
             </div> *@
         </div>
@@ -88,7 +89,7 @@
         subActionModel!.OnUpdateViewState += UpdateState;
         base.OnInitialized();
     }
-  
+
     void UpdateState()
     {
         InvokeAsync(() =>

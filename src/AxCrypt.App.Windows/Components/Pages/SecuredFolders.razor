@@ -1,26 +1,3 @@
 ﻿@page "/securedfolders"
-@using AxCrypt.Content
 
-<link href="css/login.min.css" rel="stylesheet" />
-<div class="home-index">
-    <div>
-        <div class="page-title">
-            <h1 class="">@Texts.WatchedFoldersTabPageText</h1>
-        </div>
-    </div>
-    <AxCrypt.App.Shared.Desktop.Components.Home.ActionsComponent />
-    <div>
-        <div style="padding: 10px 0px 15px;">
-            <label class="text-style font-bold">Recent Folders</label>
-        </div>
-        <div>
-            <AxCrypt.App.Shared.Desktop.Components.Pages.RecentFoldersComponent />
-        </div>
-    </div>
-</div>
-@code {
-    protected override async Task OnInitializedAsync()
-    {
-        await base.OnInitializedAsync();
-    }
-}
+<AxCrypt.App.Shared.Desktop.Components.Pages.RecentFoldersComponent />

@@ -630,7 +630,7 @@ input:checked + .slider:before {
 
 .error-message {
     color: red;
-    font-weight:600;
+    font-weight: 600;
 }
 
 .sub-head-clr {
@@ -656,6 +656,24 @@ input[type="radio"] {
     width: 100%;
     margin: 0;
     opacity: 1;
+}
+
+.warning-message {
+    font-size: 14px;
+    color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #e95e47;
+    border: 1px solid #cf2a0e;
+    /*    display: flex;
+    justify-content: space-between;
+    align-items: center;*/
+
+    a {
+        color: $colHglhgt;
+        text-decoration: underline;
+        pointer-events: auto;
+    }
 }
 
 @media (max-width: 768px) {

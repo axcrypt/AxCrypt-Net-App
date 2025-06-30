@@ -245,26 +245,26 @@ public class ProfileViewModel
     {
         //using (ProcessIndicator processIndicator = new ProcessIndicator())
         //{
-            //await Task.Run(async () =>
-            //{
-            //await Task.Delay(2000); // simulate work
+        //await Task.Run(async () =>
+        //{
+        //await Task.Delay(2000); // simulate work
 
-            await MainThread.InvokeOnMainThreadAsync(async () =>
+        await MainThread.InvokeOnMainThreadAsync(async () =>
+        {
+            using (ProcessIndicator processIndicator = new ProcessIndicator())
             {
-                using (ProcessIndicator processIndicator = new ProcessIndicator())
+                if (_mainViewModel!.DecryptedFiles.Any())
                 {
-                    if (_mainViewModel!.DecryptedFiles.Any())
-                    {
-                        await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
-                        return;
-                    }
-
-                    await _logOnViewModel.InvokeLogOnOrLogOffAndLogOnAgainAsync();
+                    await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
+                    return;
                 }
-            });
-            // });
-            // Task.Delay(1000);
-       // }
+
+                await _logOnViewModel.InvokeLogOnOrLogOffAndLogOnAgainAsync();
+            }
+        });
+        // });
+        // Task.Delay(1000);
+        // }
     }
 
     public async void ExitMenuItem_Click(EventArgs e)
@@ -286,11 +286,11 @@ public class ProfileViewModel
 
     public void CancelSubscription()
     {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/Home/Login"));
+        BrowseUtility.RedirectToMyAxCryptIDPage();
     }
 
     public void UpgradeSubscription()
     {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/"));
+        BrowseUtility.RedirectToPurchasePage(Account.UserEmail, true, "");
     }
 }

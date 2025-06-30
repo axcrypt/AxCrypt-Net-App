@@ -655,6 +655,23 @@ input[type=radio] {
   opacity: 1;
 }
 
+.warning-message {
+  font-size: 14px;
+  color: #fff;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #e95e47;
+  border: 1px solid #cf2a0e;
+  /*    display: flex;
+  justify-content: space-between;
+  align-items: center;*/
+}
+.warning-message a {
+  color: #FFDA00;
+  text-decoration: underline;
+  pointer-events: auto;
+}
+
 @media (max-width: 768px) {
   .button.success {
     background-color: #48772C !important;

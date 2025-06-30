@@ -118,6 +118,7 @@
 
 .settings-menu-item-container {
   padding: 0 20px;
+  min-height: 40px;
 }
 .settings-menu-item-container .stngs-menu-icon {
   display: inline-block;
@@ -311,7 +312,7 @@
 .subs-required {
   background: url(/images/free/subs-req-sparkle.svg) no-repeat top right;
   background-size: auto;
-  padding-right: 15px;
+  padding-left: 33px;
 }
 
 .dsbl-clr {
@@ -835,4 +836,11 @@
   .top-menu {
     gap: 15px;
   }
+}
+.subs-required {
+  background: url(/images/free/IcoRedSparkle.svg) no-repeat top left !important;
+  background-size: 17px !important;
+  padding-left: 33px;
+  display: inline-block;
+  color: #B5CEA9 !important;
 }

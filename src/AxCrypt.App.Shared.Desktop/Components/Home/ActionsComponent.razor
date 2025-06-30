@@ -48,7 +48,7 @@
             </div>
             @if (!homeActionModel!.KeyShareButtonEnabled)
             {
-                <div class="popup-container" disabled="@homeActionModel.KeyShareButtonEnabled">
+                <div class="popup-container" disabled="@homeActionModel.KeyShareButtonEnabled" @onclick="() => homeActionModel.UpgradeDialog()">
                     <div class="hover-trigger" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
                         <div class="act-box shre-box" style="background-color:#D9D9D9;">
                             <img class="act-img vwr-shrks-act" src="" alt="shrks-img" /><span class="text-size">@Texts.ShareKeysToolStripMenuItemText</span>
@@ -208,7 +208,8 @@
             <img class="img-upgrdpl" src="" alt="" />
             <div>
                 <label class="unlck-txt">
-                    Unlock our amazing <span>features</span> developed to <span>empower your security!</span>
+                    @* Unlock our amazing <span>features</span> developed to <span>empower your security!</span> *@
+                    <strong>Upgrade to unlock full encryption features!</strong>
                 </label>
                 <button class="upgrd-btn font-medium btn-large" @onclick="()=>homeActionModel.UpgradeDialog()" style="height: 37px;"> Upgrade now</button>
             </div>

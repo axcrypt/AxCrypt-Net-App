@@ -71,7 +71,11 @@ namespace AxCrypt.Core
             UriBuilder url = new UriBuilder(link);
             if (New<UserSettings>().UserEmail != null)
             {
-                url.Query = $"email={New<UserSettings>().UserEmail}";
+                if (!string.IsNullOrEmpty(url.Query))
+                {
+                    url.Query += "&";
+                }
+                url.Query += $"email={New<UserSettings>().UserEmail}";
             }
 
             New<IBrowser>().OpenUri(url.Uri);

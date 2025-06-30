@@ -95,10 +95,10 @@ public class LogOnViewModel : ViewModelBase
 
     public CommonDialogService FeedbackDialog
     { get { return GetProperty<CommonDialogService>(nameof(FeedbackDialog)); } set { SetProperty(nameof(FeedbackDialog), value); } }
-    
+
     public CommonDialogService GlobalPopupDialog
     { get { return GetProperty<CommonDialogService>(nameof(GlobalPopupDialog)); } set { SetProperty(nameof(GlobalPopupDialog), value); } }
-    
+
     public CommonDialogService AdvancedOptionsDialog
     { get { return GetProperty<CommonDialogService>(nameof(AdvancedOptionsDialog)); } set { SetProperty(nameof(AdvancedOptionsDialog), value); } }
 
@@ -142,6 +142,14 @@ public class LogOnViewModel : ViewModelBase
     { get { return GetProperty<DialogResult>(nameof(PopupResult)); } set { SetProperty(nameof(PopupResult), value); } }
 
     public string ErrorMessage { get; set; }
+
+    public bool ShowUpgradeStrongerEncryptionWarning
+    {
+        get
+        {
+            return !License.Has(LicenseCapability.StrongerEncryption);
+        }
+    }
 
     public event Action? OnSubscriptionChanged;
 

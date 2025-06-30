@@ -1,0 +1,25 @@
+﻿@using static AxCrypt.Abstractions.TypeResolve
+
+@if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.ShowUpgradeStrongerEncryptionWarning)
+{
+    <div class="row site-warning" style="@PopupStyle">
+        <div class="warning-message alert radius">
+            <span>Your current basic plan uses AES-128 encryption - <strong><a class="grn-clr" href="javascript:void(0);" @onclick="RedirectToPurchasePage">Upgrade to unlock advanced encryption & more features</a></strong>.</span>
+            @*   <a @onclick="ClosePopup" class="close" style="float: right; color: #fff;">X</a> *@
+        </div>
+    </div>
+}
+
+@code {
+    private string PopupStyle = "position:fixed;text-align:center;z-index:10;width:100%;";
+
+    private void ClosePopup()
+    {
+        PopupStyle = "display: none;";
+    }
+
+    private void RedirectToPurchasePage()
+    {
+        Core.BrowseUtility.RedirectToPurchasePage(New<Core.UI.KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address, true, "");
+    }
+}
