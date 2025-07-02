@@ -36,7 +36,7 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<SupportViewModel>();
             services.AddSingleton<NotificationItemViewModel>();
             services.AddSingleton<FilePasswordDialogViewModel>();
-            
+
             services.AddSingleton<RegisterViewModel>();
             services.AddSingleton<AppLocalizationOptions>();
 
@@ -77,13 +77,23 @@ namespace AxCrypt.App.Shared
         {
             _mainViewModel = mainViewModel;
             _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) await mainViewModel.AxCryptUpdateCheck.ExecuteAsync(New<UserSettings>().LastUpdateCheckUtc); });
-            _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { if (_mainViewModel.LoggedOn) _userInitiatedUpdateCheckPending = true; await DisplayUpdateCheckPopups(); });
+            _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) =>
+            {
+                if (_userInitiatedUpdateCheckPending)
+                    return;
+
+                if (_mainViewModel.LoggedOn)
+                {
+                    _userInitiatedUpdateCheckPending = true;
+                    await DisplayUpdateCheckPopups();
+                }
+            });
         }
 
         private static async Task DisplayUpdateCheckPopups()
         {
             await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel!.DownloadVersion);
-            _userInitiatedUpdateCheckPending = false;
+            //_userInitiatedUpdateCheckPending = false;
         }
     }
 }

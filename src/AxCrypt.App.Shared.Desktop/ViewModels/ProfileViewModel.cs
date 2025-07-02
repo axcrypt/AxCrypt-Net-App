@@ -241,28 +241,16 @@ public class ProfileViewModel
 
     public async Task SignOut()
     {
-        //using (ProcessIndicator processIndicator = new ProcessIndicator())
-        //{
-        //await Task.Run(async () =>
-        //{
-        //await Task.Delay(2000); // simulate work
+        await Task.Run(async () =>
+        {
+            if (_mainViewModel!.DecryptedFiles.Any())
+            {
+                await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
+                return;
+            }
 
-            //await MainThread.InvokeOnMainThreadAsync(async () =>
-            //{
-                //using (ProcessIndicator processIndicator = new ProcessIndicator())
-                //{
-                    if (_mainViewModel!.DecryptedFiles.Any())
-                    {
-                        await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
-                        return;
-                    }
-
-                    await _logOnViewModel.InvokeLogOnOrLogOffAndLogOnAgainAsync();
-                //}
-            //});
-            // });
-            // Task.Delay(1000);
-       // }
+            await _logOnViewModel.InvokeLogOnOrLogOffAndLogOnAgainAsync();
+        });
     }
 
     public async void ExitMenuItem_Click(EventArgs e)
