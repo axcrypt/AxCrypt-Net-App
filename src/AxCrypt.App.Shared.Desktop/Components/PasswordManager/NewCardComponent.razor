@@ -1,11 +1,15 @@
 ﻿@using AxCrypt.Api.Model.Secret
+@using AxCrypt.App.Shared.Models.Secret
 @using AxCrypt.App.Shared.ViewModels.Secret
 @using AxCrypt.App.Shared.Helpers
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.Content
+@using System.Globalization
+@using AxCrypt.App.Shared.Utility
+@using static AxCrypt.Abstractions.TypeResolve
 
-@inject IStatusAlertService StatusAlertService;
-@inject NavigationManager navigationManager;
+@inject IStatusAlertService StatusAlertService
+@inject NavigationManager navigationManager
 @inject NewSecretViewModel newSecretViewModel
 @inject SecretService secretService
 
@@ -17,54 +21,57 @@
     </div>
     <div class="parent-container">
         <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
-        <EditForm Model="@newSecretViewModel.Secret.Card" OnValidSubmit="SavePassword" @ref="editForm">
+        <EditForm Model="@CardViewModel" OnValidSubmit="SavePassword" @ref="editForm">
             <DataAnnotationsValidator />
             <div class="row">
                 <ul class="clean-up sub-head-clr" style=" list-style:none ">
                     <li>
                         <label for="Card_CardNumber">@Texts.CardNumberPrompt</label>
                         <input maxlength="19" minlength="12" style="color:#494949 !important;" placeholder="XXXX XXXX XXXX XXXX"
-                               @bind="newSecretViewModel.Secret.Card.CardNumber" type="text"
-                               class="form-control @(GetInputClass(nameof(newSecretViewModel.Secret.Card.CardNumber)))"
+                               @bind="CardViewModel!.CardNumber" type="text"
+                               class="form-control @(GetInputClass(nameof(CardViewModel.CardNumber)))"
                                onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                        <ValidationMessage For="@(() => newSecretViewModel.Secret.Card.CardNumber)" />
+                        <ValidationMessage For="@(() => CardViewModel.CardNumber)" />
                     </li>
                     <li>
                         <label for="Card_SecretDesc">@Texts.DescriptionLabel:</label>
                         <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;" placeholder="example"
-                                  @bind="newSecretViewModel.Secret.Card.SecretDesc"
-                                  class="@(GetInputClass(nameof(newSecretViewModel.Secret.Card.SecretDesc)))"></textarea>
-                        <ValidationMessage For="@(() => newSecretViewModel.Secret.Card.SecretDesc)" />
+                                  @bind="CardViewModel.SecretDesc"
+                                  class="@(GetInputClass(nameof(CardViewModel.SecretDesc)))"></textarea>
+                        <ValidationMessage For="@(() => CardViewModel.SecretDesc)" />
                     </li>
                     <li class="list-row">
                         <div class="list-width">
                             <label for="Card_NameOnCard">@Texts.NameOnCardPrompt</label>
                             <input type="text" style="color:#494949 !important;" placeholder="Name and Surname"
-                                   @bind="newSecretViewModel.Secret.Card.NameOnCard"
-                                   class="@(GetInputClass(nameof(newSecretViewModel.Secret.Card.NameOnCard)))" />
-                            <ValidationMessage For="@(() => newSecretViewModel.Secret.Card.NameOnCard)" />
+                                   @bind="CardViewModel.NameOnCard"
+                                   class="@(GetInputClass(nameof(CardViewModel.NameOnCard)))" />
+                            <ValidationMessage For="@(() => CardViewModel.NameOnCard)" />
                         </div>
                         <div class="list-width">
                             <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
                             <div style="display:flex">
-                                <input id="Card_SecurityCode" maxlength="3" placeholder="000" @bind="newSecretViewModel.Secret.Card.SecurityCode"
+                                <input id="Card_SecurityCode" maxlength="3" placeholder="000" @bind="CardViewModel.SecurityCode"
                                        type="password"
-                                       class="form-control @(GetInputClass(nameof(newSecretViewModel.Secret.Card.SecurityCode)))"
-                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                       oninput="this.value = this.value.replace(/\D/g, '').substring(0, 3)" />
-                                <ValidationMessage For="@(() => newSecretViewModel.Secret.Card.SecurityCode)" />
+                                       class="form-control @(GetInputClass(nameof(CardViewModel.SecurityCode)))"
+                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                <ValidationMessage For="@(() => CardViewModel.SecurityCode)" />
                             </div>
                         </div>
                     </li>
                     <li class="list-row">
                         <div class="list-width">
                             <label for="Card_ExpirationDate">@Texts.ExpirationDatePrompt:</label>
-                            <input id="Card_ExpirationDate" maxlength="7" placeholder="MM/YYYY" @bind="newSecretViewModel.Secret.Card.ExpirationDate"
+                            <input id="Card_ExpirationDate" maxlength="7" placeholder="MM/YYYY" @bind="CardViewModel.ExpirationDate"
                                    type="text"
-                                   class="form-control @(GetInputClass(nameof(newSecretViewModel.Secret.Card.ExpirationDate)))"
+                                   class="form-control @(GetInputClass(nameof(CardViewModel.ExpirationDate)))"
                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                   oninput="this.value = this.value.replace(/\D/g, '').substring(0, 6).replace(/(\d{2})(\d{2})/, '$1/$2')">
-                            <ValidationMessage For="@(() => newSecretViewModel.Secret.Card.ExpirationDate)" />
+                                   @oninput="(e) => CardViewModel.OnExpirationDateInput(e)">
+                            <ValidationMessage For="@(() => CardViewModel.ExpirationDate)" />
+                            @if (!string.IsNullOrEmpty(CardViewModel.ExpirationDateError))
+                            {
+                                <div class="eror-message" style="color:red;font-weight:500;">@CardViewModel.ExpirationDateError</div>
+                            }
                         </div>
                     </li>
                     <li>
@@ -83,11 +90,12 @@
 
 @code {
     private EditForm? editForm;
+    private SecretCardViewModel? CardViewModel = new SecretCardViewModel(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
 
     private string GetInputClass(string propertyName)
     {
-        FieldIdentifier fieldIdentifier = new FieldIdentifier(newSecretViewModel.Secret.Card, propertyName);
-        bool isFieldValid = editForm.EditContext.GetValidationMessages(fieldIdentifier).Any();
+        FieldIdentifier fieldIdentifier = new FieldIdentifier(newSecretViewModel!.Secret.Card, propertyName);
+        bool isFieldValid = editForm!.EditContext!.GetValidationMessages(fieldIdentifier).Any();
 
         return isFieldValid ? "input-error" : string.Empty;
     }
@@ -100,7 +108,13 @@
 
     private async Task SavePassword()
     {
-        bool success = await newSecretViewModel.SaveSecretAsync();
+        if (CardViewModel!.ExpirationDateError != null)
+        {
+            return;
+        }
+
+        newSecretViewModel!.Secret.Card = CardViewModel;
+        bool success = await newSecretViewModel!.SaveSecretAsync();
         if (success)
         {
             StatusAlertService.Success("Your new Card entry has been saved.");

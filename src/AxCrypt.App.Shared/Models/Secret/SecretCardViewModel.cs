@@ -34,4 +34,6 @@ public class SecretCardViewModel : SecretBaseViewModel
     [RegularExpression("([0-9/]+)")]
     [Display(Name = nameof(Texts.ExpirationDatePrompt), ResourceType = typeof(Content.Resource))]
     public string ExpirationDate { get; set; }
+
+    public string ExpirationDateError { get; set; } = null;
 }

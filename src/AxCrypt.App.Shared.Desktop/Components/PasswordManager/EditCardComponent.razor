@@ -4,6 +4,9 @@
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.Content
 @using Microsoft.JSInterop
+@using System.Globalization
+@using static AxCrypt.Abstractions.TypeResolve
+@using AxCrypt.App.Shared.Utility
 
 @inject IStatusAlertService StatusAlertService;
 @inject NavigationManager navigationManager
@@ -57,8 +60,12 @@
                         <input id="card-exp-date-inp" style="color:#494949 !important; " @bind="@CardViewModel.ExpirationDate"
                                type="text" class="form-control"
                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                               oninput="this.value = this.value.replace(/\D/g, '').substring(0, 6).replace(/(\d{2})(\d{2})/, '$1/$2')">
+                               @oninput="(e) => CardViewModel.OnExpirationDateInput(e)">
                         <ValidationMessage For="@(() => CardViewModel.ExpirationDate)" />
+                        @if (!string.IsNullOrEmpty(CardViewModel.ExpirationDateError))
+                        {
+                            <div class="eror-message" style="color:red;font-weight:600;">@CardViewModel.ExpirationDateError</div>
+                        }
                     </div>
                 </li>
                 <li>
@@ -76,6 +83,7 @@
 
 @code {
     SecretCardViewModel? CardViewModel;
+
     protected override void OnInitialized()
     {
         SecretCardViewModel currentCardModel = secretService.CurrentSecret!.Card;
@@ -94,7 +102,12 @@
 
     private async Task SavePassword()
     {
-        editSecretViewModel.Secret.Card = CardViewModel!;
+        if (CardViewModel.ExpirationDateError != null)
+        {
+            return;
+        }
+
+        editSecretViewModel.Secret.Card = CardViewModel;
         bool saveResult = await editSecretViewModel.SaveSecretAsync();
         if (saveResult)
         {
@@ -110,6 +123,6 @@
 
     private void HandleOnChange(ChangeEventArgs args)
     {
-        secretService.CurrentSecret!.Card.SecretDesc = args?.Value?.ToString();
+        secretService.CurrentSecret.Card.SecretDesc = args?.Value?.ToString();
     }
 }
