@@ -3,15 +3,16 @@ using AxCrypt.Api.Model.Notification;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Notification;
 using AxCrypt.Core.Service.UserNotification;
 using AxCrypt.Core.UI;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Helpers;
 
-public class NotificationApiHelper
+public class UserNotificationApiService : IUserNotificationService
 {
-    public static async Task<IEnumerable<UserNotificationApiModel>> GetNotificationAsync(string useremail, string subslevel)
+    public async Task<IEnumerable<UserNotificationApiModel>> GetNotificationAsync(string useremail, string subslevel)
     {
         LogOnIdentity logOnIdentity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
         try
@@ -29,7 +30,7 @@ public class NotificationApiHelper
         }
     }
 
-    public static async Task<bool> InsertNotificationAsync(IEnumerable<NotificationApiModel> notificationModel)
+    public async Task<bool> InsertNotificationAsync(IEnumerable<NotificationApiModel> notificationModel)
     {
         LogOnIdentity logOnIdentity = New<KnownIdentities>().DefaultEncryptionIdentity;
 
@@ -50,7 +51,7 @@ public class NotificationApiHelper
         }
     }
 
-    public static async Task<bool> DeleteNotificationAsync(long id)
+    public async Task<bool> DeleteNotificationAsync(long id)
     {
         LogOnIdentity logOnIdentity = New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity;
         try

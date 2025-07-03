@@ -12,7 +12,7 @@ using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Shared.PushNotification;
+using AxCrypt.Core.Notification;
 
 namespace AxCrypt.App.Shared.Services
 {

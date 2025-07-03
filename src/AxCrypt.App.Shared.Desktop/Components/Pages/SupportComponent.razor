@@ -24,7 +24,7 @@
 </div>
 
 <div class="medium-12 columns support">
-     <p class="sub-head-clr hide-txt">@(PageDescription)</p>
+    <p class="sub-head-clr hide-txt">@(PageDescription)</p>
 
     @if (!string.IsNullOrEmpty(SupportViewModel.ErrorMessage))
     {
@@ -88,7 +88,9 @@
         <div id="support-body-section">
             <div class="label-text free-sec">
                 <label>Sorry,</label>
-                <p class="SupWarngText">@((MarkupString)(string.Format(Texts.FreeSupportInfo, Texts.LinkToFeedbackWebPage)))</p>
+                <p class="SupWarngText">
+                    We offer direct support to <a href="javascript:void(0);" @onclick="OpenPremiumPage">Premium</a> and <a href="javascript:void(0);" @onclick="OpenBusinessPage">Business</a> customers. Please visit our <a href="javascript:void(0);" @onclick="() => OpenWebPage(Texts.LinkToFeedbackWebPage)">community support</a>
+                </p>
                 <img class="support-image" src="" alt="support-img" />
             </div>
         </div>
@@ -150,6 +152,17 @@
     {
         Core.BrowseUtility.RedirectTo(url);
     }
+
+    public void OpenBusinessPage()
+    {
+        Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/Login?eff=1&reqFrom=Business");
+    }
+
+    public void OpenPremiumPage()
+    {
+        Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/Login?eff=1&reqFrom=Premium");
+    }
+
 
     private void ResetSupport()
     {

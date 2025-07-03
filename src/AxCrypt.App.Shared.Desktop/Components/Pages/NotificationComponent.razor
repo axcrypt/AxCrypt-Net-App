@@ -48,7 +48,7 @@
                     {
                         <tr class="context-menu-target">
                             @*  <td><img class="notification-unread-button" src="" alt=""></td> *@
-                            <td>
+                            <td @onclick="()=> notificationService.HandleNotificationAction(notification.EventType)">
                                 @if (notification.PushNotify)
                                 {
                                     <strong>@notification.PushNotif_Title</strong>

@@ -177,7 +177,7 @@
         <div class="settings-menu-item-container" @onmouseover='@(()=> ShowPopup("inactivity"))' @onmouseout='@( () => HidePopup() )'>
             <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
                 <div>
-                   @*  <img class="stngs-menu-icon Icoinactsign" alt="Icoinactsign" /> *@
+                    @*  <img class="stngs-menu-icon Icoinactsign" alt="Icoinactsign" /> *@
                     <span class="subs-required">@Texts.IdleSignOutToolStripMenuItemText</span>
                     <img class="next-arrow" />
                 </div>
@@ -205,7 +205,7 @@
         <div class="settings-menu-item-container" @onmouseover='@( () => ShowPopup("rename") )' @onmouseout='@( () => HidePopup() )'>
             <NavLink class="nav-link" @onclick="AppSettingsViewModel.ShowUpgradePopup">
                 <div>
-                   @*  <img class="stngs-menu-icon IcoRstr" alt="IcoRstr" /> *@
+                    @*  <img class="stngs-menu-icon IcoRstr" alt="IcoRstr" /> *@
                     <span class="subs-required">@Texts.RestoreAnonymousNamesMenuText</span>
                 </div>
             </NavLink>
@@ -279,12 +279,31 @@
         </div>
     }
 
-    <div class="settings-menu-item-container">
-        <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.InviteUser(e)">
-            <img class="stngs-menu-icon IcoInvtFrnd" alt="IcoInvtFrnd" />
-            <span>@Texts.InviteUserToolStripMenuItemText</span>
-        </NavLink>
-    </div>
+    @if (AppSettingsViewModel.EnableInviteFriend)
+    {
+        <div class="settings-menu-item-container">
+            <NavLink class="nav-link" @onclick="(e)=> AppSettingsViewModel.InviteUser(e)">
+                <img class="stngs-menu-icon IcoInvtFrnd" alt="IcoInvtFrnd" />
+                <span>@Texts.InviteUserToolStripMenuItemText</span>
+            </NavLink>
+        </div>
+    }
+    else
+    {
+        <div class="settings-menu-item-container" @onmouseover='@( () => ShowPopup("invitefriend") )' @onmouseout='@( () => HidePopup() )'>
+            <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes3()" @onclick="AppSettingsViewModel.ShowUpgradePopup">
+                @*<img class="stngs-menu-icon IcoInvtFrnd" alt="IcoInvtFrnd" />*@
+                <span class="subs-required">@Texts.InviteUserToolStripMenuItemText</span>
+                <img class="next-arrow" />
+            </NavLink>
+            @if (isHovered && hoveredElement == "invitefriend")
+            {
+                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
+                    <span class="txt-clr font-medium">This feature requires a paid subscription plan!.</span>
+                </div>
+            }
+        </div>
+    }
 
     @if (AppSettingsViewModel.EnableDebugPopup)
     {

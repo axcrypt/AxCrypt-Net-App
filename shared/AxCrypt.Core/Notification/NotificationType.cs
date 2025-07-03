@@ -1,4 +1,4 @@
-﻿namespace AxCrypt.App.Shared.PushNotification;
+﻿namespace AxCrypt.Core.Notification;
 
 public enum NotificationType
 {

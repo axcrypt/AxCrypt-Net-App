@@ -33,4 +33,10 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Notification\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Notification\" />
+  </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@ using AxCrypt.App.Shared.ViewModels.Notification;
 using AxCrypt.App.Shared.ViewModels.Secret;
 using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
 using AxCrypt.Common;
+using AxCrypt.Core.Notification;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Cryptor.Model;
@@ -71,6 +72,7 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<TwoFactorAuthViewModel>();
 
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
+            TypeMap.Register.Singleton<IUserNotificationService>(() => new UserNotificationApiService());
         }
 
         public static void LoadUpdateCheck(MainViewModel mainViewModel)

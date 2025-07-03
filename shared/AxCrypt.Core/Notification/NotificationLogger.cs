@@ -1,6 +1,4 @@
-﻿using AxCrypt.App.Shared.Utility;
-
-namespace AxCrypt.App.Shared.PushNotification;
+﻿namespace AxCrypt.Core.Notification;
 
 public class NotificationLogger
 {

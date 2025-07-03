@@ -1,10 +1,8 @@
 ﻿using AxCrypt.Api.Model.Notification;
-using AxCrypt.App.Shared.Helpers;
-using AxCrypt.App.Shared.Utility;
 using AxCrypt.Common;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Shared.PushNotification;
+namespace AxCrypt.Core.Notification;
 
 public class NotificationLog
 {
@@ -50,7 +48,7 @@ public class NotificationLog
             notificationApiModels.Add(notification);
         }
 
-        bool inserted = await NotificationApiHelper.InsertNotificationAsync(notificationApiModels);
+        bool inserted = await New<IUserNotificationService>().InsertNotificationAsync(notificationApiModels);
         return inserted;
     }
 

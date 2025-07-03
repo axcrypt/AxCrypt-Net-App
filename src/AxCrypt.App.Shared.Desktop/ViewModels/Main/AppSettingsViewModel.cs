@@ -54,7 +54,7 @@ public class AppSettingsViewModel : ViewModelBase
         RestApiBaseUrlInput = Resolve.UserSettings.RestApiBaseUrl.ToString();
         TimeoutInput = Resolve.UserSettings.ApiTimeout.ToString();
 
-        _logOnViewModel!.BindPropertyAsyncChanged(nameof(_logOnViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
+        _logOnViewModel!.BindPropertyAsyncChanged(nameof(_logOnViewModel.License), async (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
         _logOnViewModel!.BindPropertyChanged(nameof(_logOnViewModel.IsLoggedOn), (bool isLoggedOn) => { if (isLoggedOn) { StartInactivitySignOut(); } });
         _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
@@ -92,6 +92,7 @@ public class AppSettingsViewModel : ViewModelBase
     public bool EnableAutoUpgrade { get; set; }
 
     public bool EnableEncryptionFileProperties { get; set; }
+    public bool EnableInviteFriend { get; set; }
 
     private static bool _hideRecentFiles;
 
@@ -417,17 +418,18 @@ public class AppSettingsViewModel : ViewModelBase
 
     #endregion Debug Section
 
-    private async Task ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
+    private void ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
     {
-        await ConfigureAutoUpgradeMenuAsync(license);
-        await ConfigureIncludeSubfoldersMenuAsync(license);
-        await ConfigureInactivityTimeOutMenuAsync(license);
-        await ConfigureRestoreRenameMenuAsync(license);
-        await ConfigureEncryptionFilePropertiesMenuAsync(license);
+        ConfigureAutoUpgradeMenuAsync(license);
+        ConfigureIncludeSubfoldersMenuAsync(license);
+        ConfigureInactivityTimeOutMenuAsync(license);
+        ConfigureRestoreRenameMenu(license);
+        ConfigureEncryptionFilePropertiesMenu(license);
+        ConfigureInviteFrientMenu(license);
         UpdateViewState();
     }
 
-    private async Task ConfigureAutoUpgradeMenuAsync(LicenseCapabilities license)
+    private void ConfigureAutoUpgradeMenuAsync(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.StrongerEncryption))
         {
@@ -439,7 +441,7 @@ public class AppSettingsViewModel : ViewModelBase
         }
     }
 
-    private async Task ConfigureIncludeSubfoldersMenuAsync(LicenseCapabilities license)
+    private void ConfigureIncludeSubfoldersMenuAsync(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.IncludeSubfolders))
         {
@@ -451,7 +453,7 @@ public class AppSettingsViewModel : ViewModelBase
         }
     }
 
-    private async Task ConfigureInactivityTimeOutMenuAsync(LicenseCapabilities license)
+    private void ConfigureInactivityTimeOutMenuAsync(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.InactivitySignOut))
         {
@@ -463,7 +465,7 @@ public class AppSettingsViewModel : ViewModelBase
         }
     }
 
-    private async Task ConfigureRestoreRenameMenuAsync(LicenseCapabilities license)
+    private void ConfigureRestoreRenameMenu(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.RandomRename))
         {
@@ -475,7 +477,7 @@ public class AppSettingsViewModel : ViewModelBase
         }
     }
 
-    private async Task ConfigureEncryptionFilePropertiesMenuAsync(LicenseCapabilities license)
+    private void ConfigureEncryptionFilePropertiesMenu(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.RandomRename))
         {
@@ -484,6 +486,18 @@ public class AppSettingsViewModel : ViewModelBase
         else
         {
             EnableEncryptionFileProperties = false;
+        }
+    }
+
+    private void ConfigureInviteFrientMenu(LicenseCapabilities license)
+    {
+        if (license.Has(LicenseCapability.KeySharing))
+        {
+            EnableInviteFriend = true;
+        }
+        else
+        {
+            EnableInviteFriend = false;
         }
     }
 

@@ -2,8 +2,8 @@
 using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Secret;
 using AxCrypt.App.Shared.Facades;
-using AxCrypt.App.Shared.PushNotification;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Notification;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Cryptor.Model;
 using static AxCrypt.Abstractions.TypeResolve;
