@@ -1,10 +1,18 @@
 ﻿@using static AxCrypt.Abstractions.TypeResolve
+@using Microsoft.Maui.Devices
 
 @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.ShowUpgradeStrongerEncryptionWarning)
 {
     <div class="row site-warning" style="@PopupStyle">
         <div class="warning-message alert radius">
-            <span>Your current basic plan uses AES-128 encryption - <strong><a class="grn-clr" href="javascript:void(0);" @onclick="RedirectToPurchasePage">Upgrade to unlock advanced encryption & more features</a></strong>.</span>
+            @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.License.Has(Core.Runtime.LicenseCapability.Viewer))
+            {
+                <span>Your current viewer plan only allows viewing and decryption - <strong><a class="grn-clr" href="javascript:void(0);" @onclick="RedirectToPurchasePage">Upgrade to unlock advanced encryption & more features</a></strong>.</span>
+            }
+            else
+            {
+                <span>Your current basic plan uses AES-128 encryption - <strong><a class="grn-clr" href="javascript:void(0);" @onclick="RedirectToPurchasePage">Upgrade to unlock advanced encryption & more features</a></strong>.</span>
+            }
             @*   <a @onclick="ClosePopup" class="close" style="float: right; color: #fff;">X</a> *@
         </div>
     </div>

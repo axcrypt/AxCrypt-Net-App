@@ -2,18 +2,13 @@
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Core;
-using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
-using AxCrypt.Core.Service;
-using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System;
 using AxCrypt.App.Shared.Helpers;
 using System.Linq;
 using System.Threading.Tasks;
-using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.App.Shared.ViewModels;
-using AxCrypt.Content;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels.Home;
 
@@ -78,9 +73,9 @@ public class ActionsViewModel : ViewModelBase
         await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(string.Empty);
     }
 
-    public async Task SecureFile()
+    public async Task SecureFile(EventArgs e)
     {
-        await _fileOperationViewModel.EncryptFiles.ExecuteAsync(null);
+        await PremiumFeature_ClickAsync(LicenseCapability.EncryptNewFiles, async (ss, ee) => { await _fileOperationViewModel.EncryptFiles.ExecuteAsync(null); }, null!, e);
     }
 
     public async Task StopSecuringFile()

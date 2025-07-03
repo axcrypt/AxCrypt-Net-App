@@ -13,6 +13,7 @@ namespace AxCrypt.Core.Runtime
             LicenseCapability.AccountKeyBackup,
             LicenseCapability.CommunitySupport,
             LicenseCapability.Viewer,
+            LicenseCapability.ShareSecretFree,
         });
 
         protected override LicenseCapabilities FreeCapabilities

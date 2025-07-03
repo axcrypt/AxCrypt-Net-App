@@ -26,16 +26,43 @@
                 }
             </div>
 
-            <div class="act-box" disabled="@homeActionModel!.EncryptButtonEnabled" @onclick="async ()=> await homeActionModel!.SecureFile()" @onmouseover='@(() => ShowPopup("secure"))' @onmouseout='@(() => HidePopup())'>
-                <img class="act-img scr-act" src="" alt="scr-img" />
-                <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
-                @if (isHovered && hoveredElement == "secure")
-                {
-                    <div class="home-hover text-center" style="background-color:#fff;">
-                        <span class="txt-clr font-medium">@Texts.EncryptToolStripButtonToolTipText</span>
+            @if (!homeActionModel!.EncryptButtonEnabled)
+            {
+                <div class="popup-container" disabled="@(!homeActionModel.EncryptButtonEnabled)" @onclick="() => homeActionModel.UpgradeDialog()">
+                    <div class="hover-trigger" @onmouseover='@( () => ShowPopup("secure") )' @onmouseout='@( () => HidePopup() )'>
+                        <div class="act-box shre-box" style="background-color:#D9D9D9;">
+                            <img class="act-img scr-act" src="" alt="scr-img" />
+                            <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
+                        </div>
                     </div>
-                }
-            </div>
+
+                    @if (isHovered && hoveredElement == "secure")
+                    {
+                        <div class="popup-section">
+                            <div class="free-color" id="upgrade-sec" style="padding:10px; text-align:center; border-radius:5px;">
+                                <span style="color:white;">
+                                    Upgrade to access this <strong>feature!</strong>
+                                </span>
+                                <button class="upgrd-btn font-medium btn-medium" @onclick="() => homeActionModel.UpgradeDialog()" style="margin: 0 auto;">@Texts.UpgradeText</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="act-box" disabled="@(!homeActionModel!.EncryptButtonEnabled)" @onclick="async (e) => await homeActionModel!.SecureFile(e)" @onmouseover='@(() => ShowPopup("secure"))' @onmouseout='@(() => HidePopup())'>
+                    <img class="act-img scr-act" src="" alt="scr-img" />
+                    <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
+                    @if (isHovered && hoveredElement == "secure")
+                    {
+                        <div class="home-hover text-center" style="background-color:#fff;">
+                            <span class="txt-clr font-medium">@Texts.EncryptToolStripButtonToolTipText</span>
+                        </div>
+                    }
+                </div>
+            }
+
             <div class="act-box" @onclick="async ()=> await homeActionModel.StopSecuringFile()" @onmouseover='@(() => ShowPopup("stop") )' @onmouseout='@(() => HidePopup() )'>
                 <img class="act-img stpscr-act" src="" alt="stpscr-img" />
                 <span class="text-size">@Texts.DecryptToolStripMenuItemText</span>

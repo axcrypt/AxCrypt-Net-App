@@ -198,7 +198,7 @@ namespace AxCrypt.Core.UI.ViewModel
             BindPropertyChangedInternal(nameof(LoggedOn), async (bool loggedOn) => { if (loggedOn) await AxCryptUpdateCheck.ExecuteAsync(_userSettings.LastUpdateCheckUtc); });
 
             BindPropertyChanged(nameof(DebugMode), (bool enabled) => { UpdateDebugMode(enabled); });
-            BindPropertyChanged(nameof(LoggedOn), (bool loggedOn) => EncryptFileEnabled = loggedOn || !License.Has(LicenseCapability.EncryptNewFiles));
+            BindPropertyChanged(nameof(LoggedOn), (bool loggedOn) => EncryptFileEnabled = loggedOn && License.Has(LicenseCapability.EncryptNewFiles));
             BindPropertyChanged(nameof(License), async (LicenseCapabilities policy) => 
             { 
                 if (LoggedOn)
