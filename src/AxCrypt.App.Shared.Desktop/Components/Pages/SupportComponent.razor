@@ -30,7 +30,7 @@
     {
         <div class="error-message">@SupportViewModel.ErrorMessage</div>
     }
-    @if (LogOnModel.SubscriptionLevel != SubscriptionLevel.Free)
+    @if (LogOnModel.UserHas(Core.Runtime.LicenseCapability.DirectSupport))
     {
         <div id="support-body-section" class="suprt-max-height" style="min-height:50vh;max-height:82vh;">
             <div class="label-text">

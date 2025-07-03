@@ -51,7 +51,7 @@ public class AppMain
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await new Display().LocalSignInWarningPopUpAsync(loggedOn); });
 
-        SharedFactory.LoadUpdateCheck(_mainViewModel);
+        SharedFactory.LoadUpdateCheck(_mainViewModel, _logOnService);
     }
 
     private void BindToFileOperationViewModel()

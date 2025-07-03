@@ -10,6 +10,8 @@ using AxCrypt.App.Shared.ViewModels.Notification;
 using AxCrypt.App.Shared.ViewModels.Secret;
 using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
 using AxCrypt.Common;
+using AxCrypt.Content;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Notification;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -22,8 +24,7 @@ namespace AxCrypt.App.Shared
     public static class SharedFactory
     {
         private static MainViewModel? _mainViewModel;
-
-        private static bool _userInitiatedUpdateCheckPending = false;
+        private static LogOnViewModel? _logOnViewModel;
 
         public static void RegisterSingletons(IServiceCollection services)
         {
@@ -75,27 +76,23 @@ namespace AxCrypt.App.Shared
             TypeMap.Register.Singleton<IUserNotificationService>(() => new UserNotificationApiService());
         }
 
-        public static void LoadUpdateCheck(MainViewModel mainViewModel)
+        public static void LoadUpdateCheck(MainViewModel mainViewModel, LogOnViewModel logOnViewModel)
         {
             _mainViewModel = mainViewModel;
+            _logOnViewModel = logOnViewModel;
             _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) await mainViewModel.AxCryptUpdateCheck.ExecuteAsync(New<UserSettings>().LastUpdateCheckUtc); });
-            _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) =>
-            {
-                if (_userInitiatedUpdateCheckPending)
-                    return;
-
-                if (_mainViewModel.LoggedOn)
-                {
-                    _userInitiatedUpdateCheckPending = true;
-                    await DisplayUpdateCheckPopups();
-                }
-            });
+            _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await DisplayUpdateCheckPopups(); });
         }
 
         private static async Task DisplayUpdateCheckPopups()
         {
-            await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel!.DownloadVersion);
-            //_userInitiatedUpdateCheckPending = false;
+            if (_mainViewModel!.VersionUpdateStatus == VersionUpdateStatus.NewerVersionIsAvailable)
+            {
+                _logOnViewModel.UserInitiatedUpdateCheckPending = true;
+            }
+
+            await new Display().UpdateCheckPopups(_logOnViewModel.UserInitiatedUpdateCheckPending, _mainViewModel!.DownloadVersion);
+            _logOnViewModel.UserInitiatedUpdateCheckPending = false;
         }
     }
 }

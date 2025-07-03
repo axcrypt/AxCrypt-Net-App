@@ -153,6 +153,13 @@ public class LogOnViewModel : ViewModelBase
         }
     }
 
+    public bool UserHas(LicenseCapability capability)
+    {
+        return License.Has(capability);
+    }
+
+    public bool UserInitiatedUpdateCheckPending { get ; set; }  
+
     public TwoFactorAuthViewModel TwoFactorAuthViewModel { get; set; }
 
     public event Action? OnSubscriptionChanged;

@@ -27,7 +27,7 @@ public class TopMenuViewModel : ViewModelBase
 
     public void Initialize()
     {
-        //_mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); await DisplayUpdateCheckPopups(); });
+        _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); });
     }
 
     public bool IsWideScreen { get; set; }
@@ -73,12 +73,12 @@ public class TopMenuViewModel : ViewModelBase
             case VersionUpdateStatus.ShortTimeSinceLastSuccessfulCheck:
             case VersionUpdateStatus.IsUpToDate:
             case VersionUpdateStatus.Unknown:
-                _userInitiatedUpdateCheckPending = true;
+                LogOnViewModel.UserInitiatedUpdateCheckPending = true;
                 await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
                 break;
 
             case VersionUpdateStatus.NewerVersionIsAvailable:
-                _userInitiatedUpdateCheckPending = true;
+                LogOnViewModel.UserInitiatedUpdateCheckPending = true;
                 await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
                 break;
 
@@ -110,13 +110,5 @@ public class TopMenuViewModel : ViewModelBase
                 VersionHoverText = Texts.ClickToCheckForNewerVersionTooltip;
                 break;
         }
-    }
-
-    private bool _userInitiatedUpdateCheckPending = false;
-
-    private async Task DisplayUpdateCheckPopups()
-    {
-        await new Display().UpdateCheckPopups(_userInitiatedUpdateCheckPending, _mainViewModel!.DownloadVersion);
-        _userInitiatedUpdateCheckPending = false;
     }
 }
