@@ -222,7 +222,7 @@ public class ShareKeyViewModel : ViewModelBase
         return filteredUnSharedUsersList;
     }
 
-    public async void AddShareKeyUser()
+    public async Task AddShareKeyUser()
     {
         if (DisableAddUserButton)
         {
@@ -431,7 +431,7 @@ public class ShareKeyViewModel : ViewModelBase
 
     public async Task ApplyShareKeys()
     {
-        if (!EnableApplyButton)
+        if (!EnableApplyButton && !_viewModel!.SharedWith.Any())
         {
             return;
         }
