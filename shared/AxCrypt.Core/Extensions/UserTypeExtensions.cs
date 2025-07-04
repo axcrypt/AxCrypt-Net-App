@@ -733,6 +733,10 @@ namespace AxCrypt.Core.Extensions
             {
                 return false;
             }
+            if (left.KeySharedRecipients != right.KeySharedRecipients)
+            {
+                return false;
+            }
             if (left.IsMasterKeyShared != right.IsMasterKeyShared)
             {
                 return false;
