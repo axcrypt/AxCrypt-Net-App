@@ -46,7 +46,6 @@ public class AppMain
 
     private void BindToViewModels()
     {
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DebugMode), (bool enabled) => { UpdateDebugMode(enabled); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => await _knownFoldersViewModel.UpdateState.ExecuteAsync(null));
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await new Display().LocalSignInWarningPopUpAsync(loggedOn); });
@@ -61,12 +60,6 @@ public class AppMain
         _fileOperationViewModel.IdentityViewModel.LoggingOnWithTOTPAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleExistingAccountLogOnWithTOTP(e));
         _fileOperationViewModel.SelectingFilesAsync += async (sender, e) => await New<IUIThread>().SendToAsync(() => New<IDataItemSelection>().HandleSelection(e));
         _fileOperationViewModel.ToggleEncryptionUpgradeMode += async (sender, e) => await ToggleEncryptionUpgradeMode();
-    }
-
-    private void UpdateDebugMode(bool enabled)
-    {
-        //_optionsDebugToolStripMenuItem.Checked = enabled;
-        //_debugToolStripMenuItem.Visible = enabled;
     }
 
     private static void SetThisVersion()

@@ -1,14 +1,16 @@
 ﻿using AxCrypt.App.Shared.Desktop.Components.Pages.LogPage;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Core.UI;
 using Microsoft.AspNetCore.Components.WebView.Maui;
-using Microsoft.Maui.Controls;
 using static AxCrypt.Abstractions.TypeResolve;
 
-public static class LogWindowService
-{
-    private static Window? _logWindow;
+namespace AxCrypt.App.Windows.Platforms.Windows.Implementation;
 
-    public static void ShowLogWindow()
+public class LogWindowService : IDebugLoggingWindow
+{
+    private Window? _logWindow;
+
+    public void ShowLogWindow()
     {
         if (_logWindow != null)
         {
@@ -41,7 +43,7 @@ public static class LogWindowService
         Application.Current!.OpenWindow(_logWindow);
     }
 
-    public static void CloseLogWindow()
+    public void CloseLogWindow()
     {
         Application.Current!.CloseWindow(_logWindow!);
         _logWindow = null;

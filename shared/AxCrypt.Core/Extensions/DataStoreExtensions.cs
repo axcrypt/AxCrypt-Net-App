@@ -129,7 +129,7 @@ namespace AxCrypt.Core.Extensions
         {
             if (document == null)
             {
-                return null;
+                return new List<EmailAddress>();
             }
 
             return document.AsymmetricRecipients.Select(ar => ar.Email).Distinct().Skip(1);

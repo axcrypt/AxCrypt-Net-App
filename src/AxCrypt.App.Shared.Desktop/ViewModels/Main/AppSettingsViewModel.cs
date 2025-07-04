@@ -1,7 +1,8 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.Helpers;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
@@ -243,7 +244,7 @@ public class AppSettingsViewModel : ViewModelBase
         _logOnViewModel.UIStateChanged();
     }
 
-    public void ToggleDebug() => UpdateDebugMode(!New<UserSettings>().DebugMode);
+    public void ToggleDebug() => UpdateDebugMode(!_mainViewModel.DebugMode);
 
     public void FilePropertiesDateModified(EventArgs e)
     {
@@ -275,9 +276,7 @@ public class AppSettingsViewModel : ViewModelBase
     public void UpdateDebugMode(bool enabled)
     {
         EnableDebugPopup = enabled;
-        Resolve.Log.SetLevel(enabled ? LogLevel.Debug : LogLevel.Error);
-        OS.Current.DebugMode(enabled);
-        New<UserSettings>().DebugMode = enabled;
+        _mainViewModel!.DebugMode = enabled;
     }
 
     public string? ErrorMessage { get; set; }
@@ -353,7 +352,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     public void OnOpenLogViewerClicked()
     {
-        LogWindowService.ShowLogWindow();
+        New<IDebugLoggingWindow>().ShowLogWindow();
         _logViewModel!.IsVisible = true;
     }
 

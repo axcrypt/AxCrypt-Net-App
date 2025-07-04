@@ -261,7 +261,7 @@ public class ProfileViewModel
             return;
         }
 
-        LogWindowService.CloseLogWindow();
+        New<IDebugLoggingWindow>().CloseLogWindow();
         await ShutDownAnd(New<IUIThread>().ExitApplication);
     }
 

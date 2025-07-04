@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -18,6 +19,7 @@ public class PlatformInitializer
     {
         TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
         TypeMap.Register.Singleton<InstallationVerifier>(() => new InstallationVerifier());
+        TypeMap.Register.Singleton<IDebugLoggingWindow>(() => new LogWindowService());
     }
 
     public static void CheckLavasoftWebCompanionExistence()
