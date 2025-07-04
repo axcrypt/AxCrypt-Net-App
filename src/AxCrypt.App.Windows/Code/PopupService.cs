@@ -30,7 +30,7 @@ public class PopupService : IPopup
         {
             case 1:
                 _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
-                await _globalViewModel.ShowPopupDialog(activeButtons, title, message, doNotShowAgainOption);
+                activeButtons = await _globalViewModel.ShowPopupDialog(activeButtons, title, message, doNotShowAgainOption);
                 return activeButtons[0];
 
             case 2:
@@ -39,8 +39,8 @@ public class PopupService : IPopup
                 string rightButton = ConvertToString(actions.CancelAction);
 
                 _globalViewModel = AxCServiceProvider.GetService<GlobalDialogViewModel>();
-                await _globalViewModel.ShowPopupDialog(activeButtons, title, message, doNotShowAgainOption);
-                isAccepted = _globalViewModel.LogOnViewModel!.PopupResult == Shared.Utility.DialogResult.OK;
+                activeButtons = await _globalViewModel.ShowPopupDialog(activeButtons, title, message, doNotShowAgainOption);
+                isAccepted = activeButtons[0] == PopupButtons.Ok;
 
                 if (isAccepted)
                 {

@@ -80,7 +80,6 @@ namespace AxCrypt.App.Shared
         {
             _mainViewModel = mainViewModel;
             _logOnViewModel = logOnViewModel;
-            _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) await mainViewModel.AxCryptUpdateCheck.ExecuteAsync(New<UserSettings>().LastUpdateCheckUtc); });
             _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await DisplayUpdateCheckPopups(); });
         }
 

@@ -286,12 +286,13 @@ public partial class App : Application
                 New<IInternetState>().Clear();
 
                 await New<SessionNotify>().NotifyAsync(new SessionNotification(SessionNotificationType.RefreshLicensePolicy, New<KnownIdentities>().DefaultEncryptionIdentity));
-                await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
+
+                if (_mainViewModel.LoggedOn)
+                    await _mainViewModel.AxCryptUpdateCheck.ExecuteAsync(DateTime.MinValue);
             }
             New<IUIThread>().PostTo(async () =>
             {
                 await SetWindowTitleTextAsync(_mainViewModel.LoggedOn);
-                //await _daysLeftPremiumLabel.ConfigureAsync(New<KnownIdentities>().DefaultEncryptionIdentity);
             });
         };
         New<AxCryptOnlineState>().RaiseOnlineStateChanged();

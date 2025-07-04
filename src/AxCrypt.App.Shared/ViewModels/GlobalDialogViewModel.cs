@@ -8,13 +8,10 @@ namespace AxCrypt.App.Shared.ViewModels;
 
 public class GlobalDialogViewModel
 {
-    private readonly Queue<PopupRequest> _popupQueue = new();
-    private bool _isPopupActive = false;
-
     public GlobalDialogViewModel()
     {
-        LogOnViewModel = AxCServiceProviderExtension.GetService<LogOnViewModel>();
-        LogOnViewModel.PopupButtons = [PopupButtons.None];
+        LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel;
+        LogOnViewModel!.PopupButtons = [PopupButtons.None];
     }
 
     public GlobalDialogViewModel(string title, string message, DoNotShowAgainOptions dontShowAgain)
@@ -34,75 +31,26 @@ public class GlobalDialogViewModel
 
     public LogOnViewModel? LogOnViewModel { get; set; }
 
-    public Task<PopupButtons> ShowPopupDialog(PopupButtons[] buttons, string title, string message, DoNotShowAgainOptions dontShowAgain)
+    public async Task<PopupButtons[]> ShowPopupDialog(PopupButtons[] buttons, string title, string message, DoNotShowAgainOptions dontShowAgain)
     {
-        PopupRequest request = new PopupRequest
-        {
-            Buttons = buttons,
-            Title = title,
-            Message = message,
-            DoNotShow = dontShowAgain
-        };
+        LogOnViewModel!.GlobalViewModel = new GlobalDialogViewModel(title, message, dontShowAgain);
+        LogOnViewModel.PopupResult = DialogResult.None;
+        LogOnViewModel.PopupButtons = buttons;
 
-        lock (_popupQueue)
+        if ((New<UserSettings>().DoNotShowAgain & dontShowAgain) != 0)
         {
-            _popupQueue.Enqueue(request);
+            return LogOnViewModel.PopupButtons;
         }
 
-        _ = ProcessPopupQueueAsync();
+        LogOnViewModel.GlobalPopupDialog.Show();
 
-        return request.Completion.Task;
-    }
-
-    private async Task ProcessPopupQueueAsync()
-    {
-        if (_isPopupActive)
-            return;
-
-        while (true)
+        while (LogOnViewModel.PopupResult == DialogResult.None)
         {
-            PopupRequest? nextRequest = null;
-
-            lock (_popupQueue)
-            {
-                if (_popupQueue.Count == 0)
-                {
-                    _isPopupActive = false;
-                    return;
-                }
-
-                _isPopupActive = true;
-                nextRequest = _popupQueue.Dequeue();
-            }
-
-            try
-            {
-                LogOnViewModel!.GlobalViewModel = new GlobalDialogViewModel(nextRequest.Title, nextRequest.Message, nextRequest.DoNotShow);
-                LogOnViewModel.PopupResult = DialogResult.None;
-                LogOnViewModel.PopupButtons = nextRequest.Buttons;
-
-                if ((New<UserSettings>().DoNotShowAgain & nextRequest.DoNotShow) != 0)
-                {
-                    nextRequest.Completion.TrySetResult(nextRequest.Buttons[0]);
-                    continue;
-                }
-
-                LogOnViewModel.GlobalPopupDialog.Show();
-
-                while (LogOnViewModel.PopupResult == DialogResult.None)
-                {
-                    await Task.Delay(1000); 
-                }
-
-                LogOnViewModel.GlobalPopupDialog.Close();
-
-                nextRequest.Completion.TrySetResult(LogOnViewModel.PopupButtons!.FirstOrDefault());
-            }
-            catch (Exception ex)
-            {
-                nextRequest?.Completion.TrySetException(ex);
-            }
+            await Task.Delay(1000);
         }
+
+        LogOnViewModel.GlobalPopupDialog.Close();
+        return LogOnViewModel.PopupButtons;
     }
 
     public void Button_OkClicked()
