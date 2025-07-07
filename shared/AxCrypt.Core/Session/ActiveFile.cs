@@ -175,8 +175,8 @@ namespace AxCrypt.Core.Session
             Properties = new ActiveFileProperties(New<INow>().Utc, properties.LastEncryptionWriteTimeUtc, properties.CryptoId);
 
             IAxCryptDocument document = EncryptedFileInfo.GetAxCryptDocument(Identity);
-            IsShared = document.IsKeyShared();
-            KeySharedRecipients = document.AsymmetricRecipients.Select(rpk => string.IsNullOrEmpty(rpk.GroupName) ? rpk.Email.Address : rpk.GroupName);
+            KeySharedRecipients = document.KeySharedRecipients();
+            IsShared = KeySharedRecipients.Any();
             IsMasterKeyShared = document.IsMasterKeyShared();
         }
 
@@ -282,7 +282,7 @@ namespace AxCrypt.Core.Session
 
         public bool IsShared { get; private set; }
 
-        public IEnumerable<string> KeySharedRecipients { get; private set; }
+        public IEnumerable<EmailAddress> KeySharedRecipients { get; private set; }
 
         public bool IsMasterKeyShared { get; private set; }
 

@@ -125,14 +125,14 @@ namespace AxCrypt.Core.Extensions
             }
         }
 
-        public static bool IsKeyShared(this IAxCryptDocument document)
+        public static IEnumerable<EmailAddress> KeySharedRecipients(this IAxCryptDocument document)
         {
             if (document == null)
             {
-                return false;
+                return null;
             }
 
-            return document.AsymmetricRecipients.Select(ar => ar.Email).Distinct().Skip(1).Any();
+            return document.AsymmetricRecipients.Select(ar => ar.Email).Distinct().Skip(1);
         }
 
         public static bool IsMasterKeyShared(this IAxCryptDocument document)
