@@ -1,5 +1,5 @@
 ﻿using AxCrypt.Api.Model.Masterkey;
-using AxCrypt.Api.Model.User;
+using AxCrypt.Api.Model.MFA;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -138,11 +138,12 @@ namespace AxCrypt.Api.Model
         [JsonProperty("hadAnyPaidSubscription")]
         public bool HadAnyPaidSubscription { get; set; }
 
-        [JsonProperty("isTwoFactorEnabled")]
-        public bool IsTwoFactorEnabled { get; set; }
+        [JsonProperty("isMultiFactorEnabled")]
+        public bool IsMultiFactorEnabled { get; set; }
 
-        [JsonProperty("twoFactorAuthInfo")]
-        public TwoFactorAuthApiModel TwoFactorAuthInfo { get; set; }
+        [JsonProperty("multiFactorAuthInfo")]
+        public MultiFactorAuthApiModel MultiFactorAuthInfo { get; set; }
+
         public bool Equals(UserAccount other)
         {
             if ((object)other == null)

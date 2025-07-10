@@ -408,8 +408,8 @@ namespace AxCrypt.Core.Extensions
                 IsMasterKeyEnabled = highPriorityAccount.IsMasterKeyEnabled,
                 BusinessAdmin = highPriorityAccount.BusinessAdmin,
                 HadAnyPaidSubscription = highPriorityAccount.HadAnyPaidSubscription,
-                IsTwoFactorEnabled = highPriorityAccount.IsTwoFactorEnabled,
-                TwoFactorAuthInfo = highPriorityAccount.TwoFactorAuthInfo,
+                IsMultiFactorEnabled = highPriorityAccount.IsMultiFactorEnabled,
+                MultiFactorAuthInfo = highPriorityAccount.MultiFactorAuthInfo,
             };
             return merged;
         }

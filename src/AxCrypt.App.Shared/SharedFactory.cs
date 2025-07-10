@@ -10,14 +10,11 @@ using AxCrypt.App.Shared.ViewModels.Notification;
 using AxCrypt.App.Shared.ViewModels.Secret;
 using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
 using AxCrypt.Common;
-using AxCrypt.Content;
-using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Notification;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Cryptor.Model;
 using Microsoft.Extensions.DependencyInjection;
-using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared
 {

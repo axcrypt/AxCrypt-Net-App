@@ -71,7 +71,7 @@ namespace AxCrypt.Core.UI
         {
             get
             {
-                if (!IsTFAEnabled)
+                if (!IsMFAEnabled)
                 {
                     return IsLoggedOn;
                 }
@@ -234,8 +234,8 @@ namespace AxCrypt.Core.UI
             }
         }
 
-        public bool IsTFAEnabled { get; set; }
+        public bool IsMFAEnabled { get; set; }
 
-        public string TFAUniqueKey { get; set; }
+        public string MFAUniqueKey { get; set; }
     }
 }

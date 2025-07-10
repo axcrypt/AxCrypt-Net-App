@@ -191,10 +191,10 @@ namespace AxCrypt.Core.UI.ViewModel
             }
 
             UserAccount userAccount = await accountService.AccountAsync();
-            _knownIdentities.IsTFAEnabled = userAccount.IsTwoFactorEnabled;
-            if (_knownIdentities.IsTFAEnabled)
+            _knownIdentities.IsMFAEnabled = userAccount.IsMultiFactorEnabled;
+            if (_knownIdentities.IsMFAEnabled)
             {
-                _knownIdentities.TFAUniqueKey = userAccount.TwoFactorAuthInfo.UniqueKey;
+                _knownIdentities.MFAUniqueKey = userAccount.MultiFactorAuthInfo.UniqueKey;
             }
 
             new AxCryptUserAccountViewModel().Initilaize(userAccount);
@@ -307,7 +307,7 @@ namespace AxCrypt.Core.UI.ViewModel
                 return LogOnIdentity.Empty;
             }
 
-            if (!_knownIdentities.IsTFAEnabled)
+            if (!_knownIdentities.IsMFAEnabled)
             {
                 return logOnIdentity;
             }
@@ -323,13 +323,13 @@ namespace AxCrypt.Core.UI.ViewModel
                 return await AskForLogOnAsync(logOnIdentity, logOnArgs.EncryptedFileFullName);
             }
 
-            bool IsTFAVerified = await New<ITwoFactorAuthenticateService>().VerifyTwoFactorAsync(logOnArgs.OneTimePassword, _knownIdentities.TFAUniqueKey);
+            bool IsTFAVerified = await New<ITwoFactorAuthenticateService>().VerifyTwoFactorAsync(logOnArgs.OneTimePassword, _knownIdentities.MFAUniqueKey);
             if (!IsTFAVerified)
             {
                 return LogOnIdentity.Empty;
             }
 
-            logOnIdentity.SetActiveTFAUniqueKey(_knownIdentities.TFAUniqueKey);
+            logOnIdentity.SetActiveTFAUniqueKey(_knownIdentities.MFAUniqueKey);
             return logOnIdentity;
         }
 

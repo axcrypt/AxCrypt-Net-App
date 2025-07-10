@@ -28,4 +28,10 @@
     <ProjectReference Include="..\AxCrypt.Common\AxCrypt.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Model\MFA\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\MFA\" />
+  </ItemGroup>
 </Project>

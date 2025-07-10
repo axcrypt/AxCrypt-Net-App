@@ -73,7 +73,7 @@ namespace AxCrypt.App.Shared
 
         public async Task<bool> ValidateAsync(string oneTimeCode)
         {
-            return await New<ITwoFactorAuthenticateService>().VerifyTwoFactorAsync(oneTimeCode, AxCrypt.Core.Resolve.KnownIdentities.TFAUniqueKey);
+            return await New<ITwoFactorAuthenticateService>().VerifyTwoFactorAsync(oneTimeCode, AxCrypt.Core.Resolve.KnownIdentities.MFAUniqueKey);
         }
     }
 }
