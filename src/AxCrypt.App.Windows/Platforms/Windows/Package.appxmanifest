@@ -74,34 +74,12 @@
 					</uap3:FileTypeAssociation>
 				</uap3:Extension>
 
-				<uap3:Extension Category="windows.fileTypeAssociation">
-					<uap3:FileTypeAssociation Name="allothertypes">
-						<uap:SupportedFileTypes>
-							<uap:FileType>.txt</uap:FileType>
-							<uap:FileType>.pdf</uap:FileType>
-							<uap:FileType>.jpg</uap:FileType>
-							<uap:FileType>.jpeg</uap:FileType>
-							<uap:FileType>.png</uap:FileType>
-							<uap:FileType>.svg</uap:FileType>
-							<uap:FileType>.mp4</uap:FileType>
-							<uap:FileType>.doc</uap:FileType>
-							<uap:FileType>.docx</uap:FileType>
-							<uap:FileType>.csv</uap:FileType>
-							<uap:FileType>.zip</uap:FileType>
-							<uap:FileType>.rar</uap:FileType>
-							<uap:FileType>.xml</uap:FileType>
-							<uap:FileType>.json</uap:FileType>
-							<uap:FileType>.html</uap:FileType>
-							<uap:FileType>.js</uap:FileType>
-						</uap:SupportedFileTypes>
-						<uap2:SupportedVerbs>
-							<uap3:Verb Id="Encrypt" Parameters="&quot;%1&quot;">Encrypt with AxCrypt</uap3:Verb>
-							<uap3:Verb Id="Decrypt" Parameters="&quot;%1&quot;">Decrypt with AxCrypt</uap3:Verb>
-							<uap3:Verb Id="RandomRename" Parameters="&quot;%1&quot;">Random Rename with AxCrypt</uap3:Verb>
-							<uap3:Verb Id="SecureDelete" Parameters="&quot;%1&quot;">Secure Delete with AxCrypt</uap3:Verb>
-						</uap2:SupportedVerbs>
-					</uap3:FileTypeAssociation>
-				</uap3:Extension>
+				<uap:Extension Category="windows.protocol">
+					<uap:Protocol Name="axcrypt">
+					<uap:DisplayName>AxCrypt Protocol</uap:DisplayName>
+					</uap:Protocol>
+				</uap:Extension>
+
 			</Extensions>
 		</Application>
 	</Applications>

@@ -17,6 +17,8 @@ using AxCrypt.Mono;
 using AxCrypt.Mono.Portable;
 using Microsoft.Maui.Controls.Platform;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.AppLifecycle;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
@@ -306,44 +308,74 @@ namespace AxCrypt.App.Windows.WinUI
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             Microsoft.Windows.AppLifecycle.AppActivationArguments appActivationArguments = Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
-            if (appActivationArguments.Kind == Microsoft.Windows.AppLifecycle.ExtendedActivationKind.ToastNotification)
+
+            switch (appActivationArguments.Kind)
             {
-                return;
-            }
+                case ExtendedActivationKind.ToastNotification:
+                    return;
 
-            if (appActivationArguments.Kind == Microsoft.Windows.AppLifecycle.ExtendedActivationKind.File)
-            {
-                CreateMauiApp();
+                case ExtendedActivationKind.File:
+                    HandleFileActivation(appActivationArguments.Data as IFileActivatedEventArgs);
+                    return;
 
-                IFileActivatedEventArgs fileActivatedArgs = (IFileActivatedEventArgs)appActivationArguments.Data;
-                string verb = fileActivatedArgs?.Verb ?? "";
-                string[] files = fileActivatedArgs?.Files.Select(file => file.Path).ToArray() ?? [];
-                switch (verb)
-                {
-                    case "Open":
-                        Resolve.CommandService.Call(CommandVerb.Open, 0, files);
-                        break;
-                    case "Decrypt":
-                        Resolve.CommandService.Call(CommandVerb.Decrypt, 1, files);
-                        break;
-                    case "Encrypt":
-                        Resolve.CommandService.Call(CommandVerb.Encrypt, 2, files);
-                        break;
-                    case "SecureDelete":
-                        Resolve.CommandService.Call(CommandVerb.Wipe, 3, files);
-                        break;
-                    case "RandomRename":
-                        Resolve.CommandService.Call(CommandVerb.RandomRename, 3, files);
-                        break;
-
-                    default:
-                        Resolve.CommandService.Call(CommandVerb.Open, 4, files);
-                        break;
-                }
-                return;
+                case ExtendedActivationKind.Protocol:
+                    HandleProtocolActivation(appActivationArguments.Data as IProtocolActivatedEventArgs);
+                    return;
             }
 
             base.OnLaunched(args);
+        }
+
+        private void HandleFileActivation(IFileActivatedEventArgs? fileArgs)
+        {
+            if (fileArgs == null) return;
+
+            string verb = fileArgs.Verb ?? string.Empty;
+            string[] files = fileArgs.Files.Select(f => f.Path).ToArray();
+
+            ExecuteCommand(verb, files);
+        }
+
+        private void HandleProtocolActivation(IProtocolActivatedEventArgs? protocolArgs)
+        {
+            if (protocolArgs?.Uri == null) return;
+
+            Uri uri = protocolArgs.Uri;
+            string verb = uri.Host.ToLowerInvariant();
+
+            NameValueCollection query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+            string[]? filePath = query.GetValues("file");
+
+            if (filePath == null || filePath.Length == 0) return;
+
+            string[] files = filePath.Where(f => !string.IsNullOrWhiteSpace(f)).ToArray();
+
+            if (files.Length == 0) return;
+
+            ExecuteCommand(verb, files);
+        }
+
+        private void ExecuteCommand(string? verb, string[] files)
+        {
+            if (files == null || files.Length == 0) return;
+
+            CreateMauiApp();
+
+            (CommandVerb cmdVerb, int index) = ResolveVerb(verb ?? string.Empty);
+            Resolve.CommandService.Call(cmdVerb, index, files);
+        }
+
+        private (CommandVerb verb, int index) ResolveVerb(string verb)
+        {
+            return verb.ToLowerInvariant() switch
+            {
+                "open" => (CommandVerb.Open, 0),
+                "decrypt" => (CommandVerb.Decrypt, 1),
+                "encrypt" => (CommandVerb.Encrypt, 2),
+                "securedelete" => (CommandVerb.Wipe, 3),
+                "randomrename" => (CommandVerb.RandomRename, 3),
+                _ => (CommandVerb.Open, 4)
+            };
         }
     }
 }
