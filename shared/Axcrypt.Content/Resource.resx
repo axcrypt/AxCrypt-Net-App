@@ -634,6 +634,9 @@ Please sign in using the same password you used then.</value>
     <value>When enabled, Internet access is never used or required, until disabled.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
   </data>
+  <data name="AndText" xml:space="preserve">
+    <value>and</value>
+  </data>
   <data name="AnnualMonthlySwitcherAnnualButtonLabel" xml:space="preserve">
     <value>Annual 20% off</value>
   </data>
@@ -1149,6 +1152,12 @@ Updates to the subscription will be reflected here within a few minutes.</value>
     <value>File Security For You and Your Team by AxCrypt AB
 
 Includes software from http://www.bouncycastle.org/ .</value>
+  </data>
+  <data name="AxCryptAboutDescription1" xml:space="preserve">
+    <value> File security for You and Your Team by &lt;span class="font-medium"&gt;AxCrypt AB&lt;/span&gt;</value>
+  </data>
+  <data name="AxCryptAboutDescription2" xml:space="preserve">
+    <value>Includes software from http://www.bouncycastle.org/.</value>
   </data>
   <data name="AxCryptAffiliateHeading" xml:space="preserve">
     <value>Become an AxCrypt’s &lt;span&gt;Affiliate&lt;/span&gt;!</value>
@@ -12488,6 +12497,9 @@ If you do not accept our temporary session cookies you cannot sign in and the si
   <data name="CustomerReadHeading" xml:space="preserve">
     <value>Read AxCrypt &lt;label&gt;Customers Stories&lt;/label&gt;</value>
   </data>
+  <data name="CustomersText" xml:space="preserve">
+    <value>customers</value>
+  </data>
   <data name="CustomerStoriesHead1" xml:space="preserve">
     <value>IPTWINS S.A.S. Secures Sensitive Documents with Ease</value>
   </data>
@@ -12930,6 +12942,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   </data>
   <data name="DifferentWayPayText" xml:space="preserve">
     <value>Different way(s) to pay?</value>
+  </data>
+  <data name="DirectSupportText" xml:space="preserve">
+    <value>We offer direct support to</value>
   </data>
   <data name="DisableAccessText" xml:space="preserve">
     <value>Disable Access</value>
@@ -14802,6 +14817,9 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   <data name="GroupFeatureInfoText" xml:space="preserve">
     <value>Add users or Groups with whom you want to share this secret. If you don`t know about our &lt;strong&gt;Group Feature&lt;/strong&gt; yet, learn more and create your first one by the link</value>
   </data>
+  <data name="GroupFeatureText" xml:space="preserve">
+    <value>Group Feature</value>
+  </data>
   <data name="GroupFileSharingHeading" xml:space="preserve">
     <value>Group File Sharing</value>
   </data>
@@ -15029,6 +15047,15 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   </data>
   <data name="GroupGuidesTitle" xml:space="preserve">
     <value>&lt;label&gt;Maximize&lt;/label&gt; Business Security and Team Efficiency with &lt;span&gt;AxCrypt's&lt;/span&gt; &lt;strong&gt;Group Feature&lt;/strong&gt;!</value>
+  </data>
+  <data name="GroupInfoText" xml:space="preserve">
+    <value>Add users or Groups with whom you want to share this secret. If you don`t know about our</value>
+  </data>
+  <data name="GroupInfoText1" xml:space="preserve">
+    <value>create your first one by the link</value>
+  </data>
+  <data name="GroupInfoText2" xml:space="preserve">
+    <value>yet, learn more and create your first one by the link</value>
   </data>
   <data name="GroupManagementHeading" xml:space="preserve">
     <value>Group Management</value>
@@ -16027,6 +16054,9 @@ Sign in to AxCrypt with {2}, enter the 6-digit verification code and set your se
   <data name="InviteFriendAxCryptText" xml:space="preserve">
     <value>Invite your friend to AxCrypt!</value>
   </data>
+  <data name="InviteFriendText" xml:space="preserve">
+    <value>Invite friend</value>
+  </data>
   <data name="InviteUserNotifyEventText" xml:space="preserve">
     <value>You've been invited to use AxCrypt!</value>
   </data>
@@ -16433,7 +16463,7 @@ Enable automatic conversion of AxCrypt 1.x files (recommended)?</value>
   <data name="LegalLinkLabel" xml:space="preserve">
     <value>Legal</value>
   </data>
-  <data name="Let'sExploreOurText" xml:space="preserve">
+  <data name="LetsExploreOurText" xml:space="preserve">
     <value>Let's explore our</value>
   </data>
   <data name="LetsGetStartedTitle" xml:space="preserve">
@@ -18270,6 +18300,21 @@ This program is licensed according to the agreement.
   <data name="MFAMailSubject" xml:space="preserve">
     <value>Your AxCrypt OTP for Secure Login</value>
   </data>
+  <data name="MfaRecoveryCodeText" xml:space="preserve">
+    <value>Use a</value>
+  </data>
+  <data name="MfaRecoveryCodeText1" xml:space="preserve">
+    <value>recovery code</value>
+  </data>
+  <data name="MfaRecoveryCodeText2" xml:space="preserve">
+    <value>to access your account.</value>
+  </data>
+  <data name="MFAText" xml:space="preserve">
+    <value>MFA</value>
+  </data>
+  <data name="MfaText1" xml:space="preserve">
+    <value>Your account is protected with</value>
+  </data>
   <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>How to Enable MFA in AxCrypt?</value>
   </data>
@@ -18457,7 +18502,7 @@ This program is licensed according to the agreement.
     <value>Mobile App</value>
   </data>
   <data name="MobileApplicationText" xml:space="preserve">
-    <value>Do you have our &lt;bold class="text-style"&gt;Mobile Application ?&lt;/bold&gt;&lt;/span&gt;</value>
+    <value>Do you have our &lt;bold class="text-style"&gt;Mobile Application ?&lt;/bold&gt;</value>
   </data>
   <data name="MobileAppText" xml:space="preserve">
     <value>Android 4.0.3 or later, iOS 8.0 or later.</value>
@@ -18796,7 +18841,7 @@ To return to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
     <value>You're offline so we can't check your subscription plan. Please go online so we can update your status!</value>
   </data>
   <data name="OfflineSignupText" xml:space="preserve">
-    <value>Currently you are &lt;b class="font-extra-bold"&gt;offline&lt;/b&gt;. However, you still can &lt;span class="grn-clr font-extra-bold"&gt;&lt;b&gt;Sign up!&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;</value>
+    <value>Currently you are &lt;b class="font-extra-bold"&gt;offline&lt;/b&gt;. However, you still can &lt;span class="grn-clr font-extra-bold"&gt;&lt;b&gt;Sign up!&lt;/b&gt;&lt;/span&gt;</value>
   </data>
   <data name="OFFText" xml:space="preserve">
     <value>OFF</value>
@@ -22625,9 +22670,6 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   <data name="TfaPhoneText" xml:space="preserve">
     <value>Don't have your phone?</value>
   </data>
-  <data name="TfaRecoveryCodeText" xml:space="preserve">
-    <value>recovery code &lt;/a&gt; to access your account</value>
-  </data>
   <data name="ThanksChoosingAxCryptBusinessTitle" xml:space="preserve">
     <value>Thank you for choosing AxCrypt Business</value>
   </data>
@@ -22668,6 +22710,9 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   </data>
   <data name="ToText" xml:space="preserve">
     <value>To:</value>
+  </data>
+  <data name="ToText1" xml:space="preserve">
+    <value>to</value>
   </data>
   <data name="TransactionHistoryTitle" xml:space="preserve">
     <value>Transaction history</value>
@@ -22839,9 +22884,6 @@ The AxCrypt Team</value>
   <data name="TwoFactorAuthentificationText" xml:space="preserve">
     <value>Two-factor authentification</value>
   </data>
-  <data name="TwofaText1" xml:space="preserve">
-    <value>Your account is protected with &lt;span class="two-fa-text"&gt;2FA.</value>
-  </data>
   <data name="TwoMinutesLabel" xml:space="preserve">
     <value>2 Mins</value>
   </data>
@@ -22920,6 +22962,9 @@ The AxCrypt Team</value>
   </data>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} updated successfully.</value>
+  </data>
+  <data name="UpdateText" xml:space="preserve">
+    <value>Update</value>
   </data>
   <data name="UpdateUserRolesHeading" xml:space="preserve">
     <value>Update User Roles</value>
@@ -23135,11 +23180,11 @@ To complete your AxCrypt login enter the one-time passcode (OTP) in the authenti
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>Check and Verify File</value>
   </data>
+  <data name="VerifyMfaText" xml:space="preserve">
+    <value>Multi-factor verification</value>
+  </data>
   <data name="VerifyPasswordPrompt" xml:space="preserve">
     <value>Verify Password</value>
-  </data>
-  <data name="VerifyTfaText" xml:space="preserve">
-    <value>Two-factor verification</value>
   </data>
   <data name="ViewAllText" xml:space="preserve">
     <value>View All..</value>
@@ -23158,6 +23203,9 @@ To complete your AxCrypt login enter the one-time passcode (OTP) in the authenti
   </data>
   <data name="VisibleUntilText" xml:space="preserve">
     <value>Visible until:</value>
+  </data>
+  <data name="VisitOur" xml:space="preserve">
+    <value>Please visit our</value>
   </data>
   <data name="WarningTitle" xml:space="preserve">
     <value>Warning!</value>
@@ -23548,6 +23596,9 @@ no prompts. By default UI and all prompts are displayed.
   </data>
   <data name="YesLabel" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="YetText" xml:space="preserve">
+    <value>yet,</value>
   </data>
   <data name="YourEmailText" xml:space="preserve">
     <value>Your email</value>

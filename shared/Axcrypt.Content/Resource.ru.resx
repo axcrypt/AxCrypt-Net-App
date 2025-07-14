@@ -250,7 +250,10 @@
   <data name="AcceptTermsOfServicesText" xml:space="preserve">
     <value>Я принимаю &lt;a href='{0}'&gt;Privacy Policy&lt;/a&gt; &amp; &lt;a href='{1}'&gt;Terms of Services&lt;/a&gt; AxCrypt</value>
   </data>
-  <data name="AccountLabel" xml:space="preserve">
+  <data name="AccessYourContactsPhoneText" xml:space="preserve">
+    <value>Разрешаете ли вы приложению AxCrypt &lt;strong&gt;доступ к вашим контактам на телефоне?&lt;/strong&gt;</value>
+  </data>
+  <data name="AccountLabel">
     <value>Учетная запись</value>
   </data>
   <data name="AccountLoggedOnStatusText" xml:space="preserve">
@@ -286,6 +289,9 @@
   </data>
   <data name="AccountStatusPremiumTrial" xml:space="preserve">
     <value>AxCrypt Premium (пробный)</value>
+  </data>
+  <data name="ActionsText" xml:space="preserve">
+    <value>Действия</value>
   </data>
   <data name="ActivateErrorEmailOrCode" xml:space="preserve">
     <value>Предоставленный адрес электронный почты или верификационный код ошибочные.</value>
@@ -382,14 +388,23 @@
   <data name="ActiveSubscriptionPromptText" xml:space="preserve">
     <value>Ваша подписка активна. Нет необходимости в продлении.</value>
   </data>
+  <data name="ActiveSubscriptionsText" xml:space="preserve">
+    <value>Активные подписки</value>
+  </data>
   <data name="ActiveSubscriptionText" xml:space="preserve">
     <value>У этого аккаунта есть активная подписка.</value>
   </data>
   <data name="ActivityText" xml:space="preserve">
     <value>Активность</value>
   </data>
+  <data name="AddAndSecureYourFirstFileText" xml:space="preserve">
+    <value>Добавьте и защитите свой первый файл.</value>
+  </data>
   <data name="AddCardTitle" xml:space="preserve">
     <value>Добавить карту</value>
+  </data>
+  <data name="AddedUsersAccessText" xml:space="preserve">
+    <value>Добавлены пользователи с доступом</value>
   </data>
   <data name="AddEmailPromptText" xml:space="preserve">
     <value>Добавить эмейл</value>
@@ -397,6 +412,12 @@
   <data name="AddFileLabel" xml:space="preserve">
     <value>Откройте файл AxCrypt</value>
     <comment>Tooltip for "AddFile" button in mobile application</comment>
+  </data>
+  <data name="AddFirstFolderText" xml:space="preserve">
+    <value>Добавьте и защитите свою первую папку.</value>
+  </data>
+  <data name="AddFirstPasswordText" xml:space="preserve">
+    <value>Добавьте и защитите свой первый пароль.</value>
   </data>
   <data name="AdditionalUnsubscribedConfirmation" xml:space="preserve">
     <value>Мы по-прежнему можем прислать Вам электронное письмо, если это необходимо для работы и безопасности AxCrypt.</value>
@@ -448,7 +469,10 @@
   <data name="AdminLabel" xml:space="preserve">
     <value>Администратор </value>
   </data>
-  <data name="AffiliateAdvantagesHeading" xml:space="preserve">
+  <data name="AdvancedSettingsText" xml:space="preserve">
+    <value>Расширенные настройки</value>
+  </data>
+  <data name="AffiliateAdvantagesHeading">
     <value>Преимущества Партнерского маркетинга AxCrypt</value>
   </data>
   <data name="AffiliateAdvantagesSubHeading" xml:space="preserve">
@@ -544,6 +568,12 @@
   <data name="AffiliateRevenueText6" xml:space="preserve">
     <value>Доступ к персональному менеджеру по работе с клиентами</value>
   </data>
+  <data name="AgreeOurText" xml:space="preserve">
+    <value>Вы соглашаетесь с нашими</value>
+  </data>
+  <data name="AlertText" xml:space="preserve">
+    <value>Внимание!</value>
+  </data>
   <data name="AllLabel" xml:space="preserve">
     <value>Все</value>
   </data>
@@ -588,6 +618,18 @@
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>Верификация AxCrypt ID [{0}]</value>
+  </data>
+  <data name="AppConfigurationText" xml:space="preserve">
+    <value>Настройка приложения</value>
+  </data>
+  <data name="ApplicationConfigurationPathText" xml:space="preserve">
+    <value>Схема настройки приложения</value>
+  </data>
+  <data name="ApplicationConfigurationSettingsText" xml:space="preserve">
+    <value>Каталог, в котором хранятся настройки AxCrypt, пользовательские предпочтения&lt;br /&gt; и данные сеанса для сохранения пользовательских&lt;br /&gt; конфигураций в разных сеансах и обеспечения персонализированной функциональности.</value>
+  </data>
+  <data name="ApplicationConfigurationText" xml:space="preserve">
+    <value>Конфигурация приложения</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>AxCrypt</value>
@@ -12165,6 +12207,9 @@
   <data name="ClearAllText" xml:space="preserve">
     <value>Очистить все</value>
   </data>
+  <data name="ClearLogsText" xml:space="preserve">
+    <value>Очистка журналов</value>
+  </data>
   <data name="ClearRecentFilesToolStripMenuItemText" xml:space="preserve">
     <value>Очистить последние файлы</value>
   </data>
@@ -12177,10 +12222,16 @@
   <data name="ClickToDownloadText" xml:space="preserve">
     <value>Нажмите для скачивания.</value>
   </data>
+  <data name="ClickToShowText" xml:space="preserve">
+    <value>**нажмите, чтобы показать**</value>
+  </data>
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>Нажмите для кодирования всех открытых файлов или новых файлов в защищённых папках. Однако вначале убедитесь, что они не в использовании.</value>
   </data>
-  <data name="ColorPaletteLabel" xml:space="preserve">
+  <data name="CloudServicesText" xml:space="preserve">
+    <value>Облачные сервисы</value>
+  </data>
+  <data name="ColorPaletteLabel">
     <value>Цветовая палитра</value>
   </data>
   <data name="ColumnAmountPaidHeader" xml:space="preserve">
@@ -12307,6 +12358,9 @@
   <data name="CreateGroupInfoTexts" xml:space="preserve">
     <value>Создайте группу !</value>
   </data>
+  <data name="CreateGroupsText" xml:space="preserve">
+    <value>Создавайте группы</value>
+  </data>
   <data name="CreateGroupText" xml:space="preserve">
     <value>Создать группу</value>
   </data>
@@ -12321,6 +12375,9 @@
   </data>
   <data name="CreatePasswordPrompt" xml:space="preserve">
     <value>Создайте свой пароль</value>
+  </data>
+  <data name="CreatePasswordText" xml:space="preserve">
+    <value>Создайте пароль</value>
   </data>
   <data name="CreatePremiumSuccess" xml:space="preserve">
     <value>Поздравляем и добро пожаловать в AxCrypt Business!</value>
@@ -12589,6 +12646,9 @@
   <data name="DataIntegrityText" xml:space="preserve">
     <value>Защищенные файлы не могут быть изменены без их обнаружения.</value>
   </data>
+  <data name="DateFromText" xml:space="preserve">
+    <value>Датировано</value>
+  </data>
   <data name="DaysLeftPluralWarningPattern" xml:space="preserve">
     <value>{0} дней</value>
   </data>
@@ -12683,6 +12743,9 @@
   </data>
   <data name="DeleteSecretSuccess" xml:space="preserve">
     <value>Ваш пароль был удалён.</value>
+  </data>
+  <data name="DeleteSecretText" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить этот секрет.</value>
   </data>
   <data name="DeletionFailed" xml:space="preserve">
     <value>{0} Удаление не удалось.</value>
@@ -12901,6 +12964,9 @@
   <data name="DoneTitle" xml:space="preserve">
     <value>Готово!</value>
   </data>
+  <data name="DontaccountText" xml:space="preserve">
+    <value>У вас нет аккаунта?</value>
+  </data>
   <data name="DontLikeRecurringFlowText" xml:space="preserve">
     <value>Не нравятся повторяющиеся подписки</value>
   </data>
@@ -13078,6 +13144,9 @@
   </data>
   <data name="EducationTitleText" xml:space="preserve">
     <value>&lt;span class='img1'&gt;Мощная защита данных&lt;/span&gt; &lt;span class='img2'&gt;для вашего образовательного&lt;br/&gt; учреждение. &lt;/span&gt; &lt;span class='img3'&gt;Защита записей учащихся&lt;/span&gt;,&lt;br/&gt;&lt;span class='img4'&gt;научно-исследовательских работ&lt;/span&gt;, академического&lt;br/&gt; контента и многого другого.&lt;span class='img6'&gt;&lt;/span&gt;</value>
+  </data>
+  <data name="EmailAlreadyAddedText" xml:space="preserve">
+    <value>${0} уже добавлено.</value>
   </data>
   <data name="EmailAlreadyExistTexts" xml:space="preserve">
     <value>Электронная почта уже существует</value>
@@ -13338,6 +13407,9 @@
     <value>Истекает через</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
+  <data name="ExportedSuccessfullyText" xml:space="preserve">
+    <value>Успешно экспортировано!</value>
+  </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemText" xml:space="preserve">
     <value>Экспортировать AxCrypt ID Засекреченный и Совместного Пользования Ключи</value>
   </data>
@@ -13353,7 +13425,10 @@
   <data name="FailedPrivateImport" xml:space="preserve">
     <value>Импорт не удался. Возможно причина в недействительном файле AxCrypt ID.</value>
   </data>
-  <data name="FaqAccessDenied" xml:space="preserve">
+  <data name="FailedToExportText" xml:space="preserve">
+    <value>Не удалось экспортировать!</value>
+  </data>
+  <data name="FaqAccessDenied">
     <value>Почему я получаю "в доступе отказано" и/или имена файлов отображаются зеленым текстом?</value>
   </data>
   <data name="FaqAccessDeniedAnswer1" xml:space="preserve">
@@ -13788,6 +13863,9 @@
     <value>Обратная связь от пользователя через приложение</value>
     <comment>The mail subject used when an email is sent to us as a result of user feedback via an app</comment>
   </data>
+  <data name="FeedbackText" xml:space="preserve">
+    <value>Пожалуйста, дайте нам знать, если у вас возникнут &lt;span&gt;какие-либо трудности&lt;/span&gt; с AxCrypt, у вас есть &lt;span&gt;вопросы, идеи или похвалы&lt;/span&gt;, которыми вы можете поделиться!</value>
+  </data>
   <data name="FeedbackTextPrompt" xml:space="preserve">
     <value>Ваша обратная связь</value>
     <comment>Text displayed in feedback content textbox when it is empty</comment>
@@ -13807,6 +13885,9 @@
   </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>Файл '{0}' не существует.</value>
+  </data>
+  <data name="FileEncryptionEasyText" xml:space="preserve">
+    <value>Шифрование файлов стало проще!</value>
   </data>
   <data name="FileFilterDialogFilterPatternWin" xml:space="preserve">
     <value>{1} (*{0})|*{0}|{2} (*.*)|*.*</value>
@@ -13850,6 +13931,9 @@
   <data name="FilePasswordDialogHeader" xml:space="preserve">
     <value>Пожалуйста, введите первоначальный пароль для данного файла.</value>
     <comment>The header text for the file password dialog.</comment>
+  </data>
+  <data name="FilePasswordHereText" xml:space="preserve">
+    <value>Введите пароль от файла здесь</value>
   </data>
   <data name="FilePropertiesDateModifiedToolStripMenuItem" xml:space="preserve">
     <value>Дата изменения</value>
@@ -13967,7 +14051,10 @@
   <data name="ForOrganisationsText" xml:space="preserve">
     <value>Для ОРГАНИЗАЦИИ</value>
   </data>
-  <data name="ForumsLinkLabel" xml:space="preserve">
+  <data name="ForSomeoneElseText" xml:space="preserve">
+    <value>Для кого-то другого</value>
+  </data>
+  <data name="ForumsLinkLabel">
     <value>Форумы</value>
   </data>
   <data name="ForWhomHeadline" xml:space="preserve">
@@ -13997,6 +14084,9 @@
   </data>
   <data name="FreeTrialLabel" xml:space="preserve">
     <value>БЕСПЛАТНО</value>
+  </data>
+  <data name="FriendsEmailText" xml:space="preserve">
+    <value>Введите адрес электронной почты вашего друга здесь</value>
   </data>
   <data name="FromText" xml:space="preserve">
     <value>От:</value>
@@ -14571,6 +14661,12 @@
   <data name="GetSubscriptionLoginRequiredInfoText" xml:space="preserve">
     <value>Пожалуйста, войдите в систему, чтобы оформить подписку! Если у вас еще нет учетной записи, вам сначала нужно &lt;a href="{0}Home/Register/"&gt;зарегестрироваться&lt;/a&gt;.</value>
   </data>
+  <data name="GoToGroupsText" xml:space="preserve">
+    <value>Перейти в Группы</value>
+  </data>
+  <data name="GoToMasterkeyText" xml:space="preserve">
+    <value>Перейти к Мастер-ключу</value>
+  </data>
   <data name="GoToMyAxCryptPrompt" xml:space="preserve">
     <value>Перейти в мой AxCrypt</value>
   </data>
@@ -14601,7 +14697,10 @@
   <data name="GroupFeatureInfoText" xml:space="preserve">
     <value>Добавьте пользователей или группы, с которыми вы хотите поделиться этим секретом. Если вы еще не знаете о нашей &lt;strong&gt;функции группы&lt;/strong&gt;, узнайте больше и создайте свою первую по ссылке</value>
   </data>
-  <data name="GroupFileSharingHeading" xml:space="preserve">
+  <data name="GroupFeatureText" xml:space="preserve">
+    <value>Функция Группы</value>
+  </data>
+  <data name="GroupFileSharingHeading">
     <value>Групповой обмен файлами</value>
   </data>
   <data name="GroupFileSharingParagraph" xml:space="preserve">
@@ -14835,7 +14934,16 @@
   <data name="GroupManagementLinkLabel" xml:space="preserve">
     <value>Управление группой</value>
   </data>
-  <data name="GroupManagementParagraph" xml:space="preserve">
+  <data name="GroupInfoText2" xml:space="preserve">
+    <value>ещё, узнайте больше и создайте свою первую по ссылке</value>
+  </data>
+  <data name="GroupManagementHeading">
+    <value>Управление группой</value>
+  </data>
+  <data name="GroupManagementLinkLabel">
+    <value>Управление группой</value>
+  </data>
+  <data name="GroupManagementParagraph">
     <value>С легкостью добавляйте и удаляйте участников группы, назначайте администраторов группы и управляйте доступом к файлам.</value>
   </data>
   <data name="GroupMasterKeyHeading" xml:space="preserve">
@@ -15255,6 +15363,12 @@
   <data name="ImportPublicKeysFileSelectionTitle" xml:space="preserve">
     <value>Выберите Файлы с Ключом Совместного Использования</value>
   </data>
+  <data name="ImportSomeonesPublicSharingKeyText" xml:space="preserve">
+    <value>Импорт чужого ключа общего доступа</value>
+  </data>
+  <data name="InactivitySignoutToolTipText" xml:space="preserve">
+    <value>Для выхода из режима «Неактивность» требуется платный план подписки!</value>
+  </data>
   <data name="InboxText" xml:space="preserve">
     <value>Входящие</value>
   </data>
@@ -15269,6 +15383,9 @@
 
 Данное действие может вызвать медленное осуществление некоторых операций. Пожалуйста, будьте внимательны при выборе папки с подпапками, указанными ниже, которые вы не хотите закодировать.</value>
     <comment>A short text in a few sentences describing what the Include Subfolders option does.</comment>
+  </data>
+  <data name="IncludeSubfoldersToolTipText" xml:space="preserve">
+    <value>Для включения подпапок требуется платный план подписки!.</value>
   </data>
   <data name="InconsistentState" xml:space="preserve">
     <value>Несоответствующее состояние с '{0}'.</value>
@@ -15811,6 +15928,12 @@
   <data name="Invite" xml:space="preserve">
     <value>Пригласить пользователя</value>
   </data>
+  <data name="InviteFriendAxCryptText" xml:space="preserve">
+    <value>Пригласите своего друга в AxCrypt!</value>
+  </data>
+  <data name="InviteFriendText" xml:space="preserve">
+    <value>Пригласить друга</value>
+  </data>
   <data name="InviteUserNotifyEventText" xml:space="preserve">
     <value>Вас пригласили в AxCrypt!</value>
   </data>
@@ -16185,8 +16308,14 @@ SE-114 29 Стокгольм
   <data name="LegalLinkLabel" xml:space="preserve">
     <value>Правовая помощь</value>
   </data>
+  <data name="LetsExploreOurText" xml:space="preserve">
+    <value>Давайте исследуем наши</value>
+  </data>
   <data name="LetsGetStartedTitle" xml:space="preserve">
     <value>Давайте начнем!</value>
+  </data>
+  <data name="LetsStartOurJourneyText" xml:space="preserve">
+    <value>Давайте начнем наше путешествие!</value>
   </data>
   <data name="LicenseBusinessNameText" xml:space="preserve">
     <value>Business</value>
@@ -16262,7 +16391,10 @@ SE-114 29 Стокгольм
   <data name="LoginPurchaseError" xml:space="preserve">
     <value>Что-то пошло не так при обработке Вашей заявки на проведение оплаты. Пожалуйста, попробуйте ещё раз.</value>
   </data>
-  <data name="LogoAndIconLabel" xml:space="preserve">
+  <data name="LogInText" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="LogoAndIconLabel">
     <value>Логотип и иконка</value>
   </data>
   <data name="LogOffText" xml:space="preserve">
@@ -17883,7 +18015,28 @@ SE-114 29 Стокгольм
   <data name="MetadataRetentionText" xml:space="preserve">
     <value>Сохраняет исходное имя файла и информацию о защищенном файле.</value>
   </data>
-  <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
+  <data name="MFAInvalidUserError" xml:space="preserve">
+    <value>Не удалось включить/отключить многофакторную аутентификацию из-за неправильного пароля</value>
+  </data>
+  <data name="MFAMailSubject" xml:space="preserve">
+    <value>Ваш одноразовый пароль AxCrypt для безопасного входа в систему</value>
+  </data>
+  <data name="MfaRecoveryCodeText" xml:space="preserve">
+    <value>Используйте</value>
+  </data>
+  <data name="MfaRecoveryCodeText1" xml:space="preserve">
+    <value>Код восстановления</value>
+  </data>
+  <data name="MfaRecoveryCodeText2" xml:space="preserve">
+    <value>, чтобы получить доступ к своей учетной записи.</value>
+  </data>
+  <data name="MFAText" xml:space="preserve">
+    <value>MFA</value>
+  </data>
+  <data name="MfaText1" xml:space="preserve">
+    <value>Ваша учетная запись защищена с помощью</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead1">
     <value>Как включить MFA в AxCrypt?</value>
   </data>
   <data name="MFAuthenticationCaroselHead2" xml:space="preserve">
@@ -18069,7 +18222,10 @@ SE-114 29 Стокгольм
   <data name="MobileAppLabel" xml:space="preserve">
     <value>Мобильное приложение</value>
   </data>
-  <data name="MobileAppText" xml:space="preserve">
+  <data name="MobileApplicationText" xml:space="preserve">
+    <value>У вас есть наше &lt;bold class="text-style"&gt;мобильное приложение?&lt;/bold&gt;</value>
+  </data>
+  <data name="MobileAppText">
     <value>Android 4.0.3, iOS 8.0 или более позднии версии.</value>
   </data>
   <data name="MobileCustomFilepickerPromptTitle" xml:space="preserve">
@@ -18092,6 +18248,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="MonthlySubscriptionTitle" xml:space="preserve">
     <value>Ежемесячно</value>
+  </data>
+  <data name="MoreActionsText" xml:space="preserve">
+    <value>Больше действий</value>
   </data>
   <data name="MoreButtonText" xml:space="preserve">
     <value>Больше...</value>
@@ -18132,8 +18291,14 @@ SE-114 29 Стокгольм
   <data name="NavigationPaneHome" xml:space="preserve">
     <value>Стартовая Страница</value>
   </data>
+  <data name="NeedAnyHelpText" xml:space="preserve">
+    <value>Вам нужна помощь?</value>
+  </data>
   <data name="NeedProductForProjectText" xml:space="preserve">
     <value>Я использовал его временно для проекта</value>
+  </data>
+  <data name="NewCardSavedText" xml:space="preserve">
+    <value>Ваша новая запись о карте была сохранена.</value>
   </data>
   <data name="NewMessageText" xml:space="preserve">
     <value>Новое сообщение</value>
@@ -18141,11 +18306,17 @@ SE-114 29 Стокгольм
   <data name="NewPassphraseDialogTitle" xml:space="preserve">
     <value>Создать Новый Пароль</value>
   </data>
+  <data name="NewPasswordUpdatedText" xml:space="preserve">
+    <value>Ваш новый пароль был обновлен!</value>
+  </data>
   <data name="NewSecretSuccess" xml:space="preserve">
     <value>Ваш ввод нового пароля был сохранён.</value>
   </data>
   <data name="NewTrialButton" xml:space="preserve">
     <value>Сохраняйте, управляйте и безопасно делитесь ими с помощью &lt;span&gt;менеджера паролей AxCrypt.&lt;/span&gt; Вы также можете защитить &lt;span&gt; данные кредитной карты и заметки.&lt;/span&gt; Попробуйте бесплатно в течение 30 дней.</value>
+  </data>
+  <data name="NewVersionAvailableText" xml:space="preserve">
+    <value>Доступна новая версия!</value>
   </data>
   <data name="NewVersionIsAvailableText" xml:space="preserve">
     <value>Доступна версия {0}!</value>
@@ -18298,6 +18469,12 @@ SE-114 29 Стокгольм
   <data name="NoLabel" xml:space="preserve">
     <value>Нет</value>
   </data>
+  <data name="NoLogToClearText" xml:space="preserve">
+    <value>Нет журнала, который нужно очистить!</value>
+  </data>
+  <data name="NoLogToExportText" xml:space="preserve">
+    <value>Нет журнала для экспорта!</value>
+  </data>
   <data name="NoMessagesFoundText" xml:space="preserve">
     <value>(Сообщения не найдены.)</value>
   </data>
@@ -18380,6 +18557,15 @@ SE-114 29 Стокгольм
   <data name="OfflineNoPremiumWarning" xml:space="preserve">
     <value>Вы находитесь в режиме оффлайн, поэтому мы не можем проверить Вашу подписку. Пожалуйста, перейдите в режим онлайн, чтобы мы смогли обновить Ваш статус!</value>
   </data>
+  <data name="OfflineSignupText" xml:space="preserve">
+    <value>В настоящее время вы &lt;b class="font-extra-bold"&gt;не в сети&lt;/b&gt;. Тем не менее вы все еще можете &lt;span class="grn-clr font-extra-bold"&gt;&lt;b&gt;зарегистрироваться!&lt;/b&gt;&lt;/span&gt;</value>
+  </data>
+  <data name="OFFText" xml:space="preserve">
+    <value>ВЫКЛ</value>
+  </data>
+  <data name="OhnoText" xml:space="preserve">
+    <value>О, нет!</value>
+  </data>
   <data name="OldVersionTooltip" xml:space="preserve">
     <value>Ваша версия устарела. Пожалуйста, нажмите для проверки на новую версию.</value>
   </data>
@@ -18391,6 +18577,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="OnlyAdminOnActiveBusinessSubscriptionError" xml:space="preserve">
     <value>Удаление пользователей  не удалось из-за того, что они являются единственным администратором активной business-подписки, поэтому они должны либо сначала отменить подписку, либо назначить другого администратора.</value>
+  </data>
+  <data name="ONText" xml:space="preserve">
+    <value>ВКЛ</value>
   </data>
   <data name="OpenEncryptedFileOpenDialogTitle" xml:space="preserve">
     <value>Выберите защищённый файл для его открытия</value>
@@ -18478,7 +18667,10 @@ SE-114 29 Стокгольм
   <data name="OurVisionLabel" xml:space="preserve">
     <value>Наше видение</value>
   </data>
-  <data name="PAGE_LEGACY_TR1_TITLE_TEXT2" xml:space="preserve">
+  <data name="OwnerEmailText" xml:space="preserve">
+    <value>Адрес электронной почты владельца:</value>
+  </data>
+  <data name="PAGE_LEGACY_TR1_TITLE_TEXT2">
     <value>AxCrypt Legacy</value>
   </data>
   <data name="PAGE_LEGACY_TR1_TITLE_TEXT3" xml:space="preserve">
@@ -18685,7 +18877,10 @@ SE-114 29 Стокгольм
   <data name="PassphraseVerificationMismatch" xml:space="preserve">
     <value>Пароли не совпадают</value>
   </data>
-  <data name="PasswordEasyText" xml:space="preserve">
+  <data name="PasswordChangeText" xml:space="preserve">
+    <value>Сменить пароль</value>
+  </data>
+  <data name="PasswordEasyText">
     <value>Легкий</value>
   </data>
   <data name="PasswordGeneratorButtonLabel" xml:space="preserve">
@@ -18706,7 +18901,10 @@ SE-114 29 Стокгольм
   <data name="PasswordGeneratorSubHeading2" xml:space="preserve">
     <value>Сохраняйте, управляйте и безопасно делитесь с помощью &lt;span class="italic-text"&gt;отмеченного наградами и простого в использовании программного обеспечения для шифрования!&lt;/span&gt; Вы также можете защитить &lt;strong&gt;данные кредитной карты и заметки. Попробуйте &lt;span&gt;подписки AxCrypt&lt;/span&gt; бесплатно в течение 30 дней.&lt;/strong&gt;</value>
   </data>
-  <data name="PasswordGeneratorText1" xml:space="preserve">
+  <data name="PasswordGeneratorText" xml:space="preserve">
+    <value>Вы пробовали наш &lt;bold class="text-style"&gt;генератор паролей?&lt;/bold&gt;</value>
+  </data>
+  <data name="PasswordGeneratorText1">
     <value>Создавать хорошие пароли очень сложно. В интернете есть много советов и трюков о том, как сделать это вручную, а также есть автоматические генераторы паролей. Некоторые из них хороши, а некоторые нет.</value>
   </data>
   <data name="PasswordGeneratorText2" xml:space="preserve">
@@ -19176,6 +19374,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="PremiumTrialInstructionsLinkText" xml:space="preserve">
     <value>Нажмите &lt;a href="https://www.axcrypt.net/pricing/" target="_blank"&gt;here&lt;/a&gt; для получения дополнительной информации о подписках.</value>
+  </data>
+  <data name="PreparingAxCryptText" xml:space="preserve">
+    <value>Подготовка AxCrypt...</value>
   </data>
   <data name="PressAndHoldLabel" xml:space="preserve">
     <value>Нажмите и удерживайте, чтобы увидеть больше</value>
@@ -19983,6 +20184,9 @@ SE-114 29 Стокгольм
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>Недавние Файлы</value>
   </data>
+  <data name="RecentFoldersText" xml:space="preserve">
+    <value>Последние папки</value>
+  </data>
   <data name="RecentLabel" xml:space="preserve">
     <value>Последние</value>
   </data>
@@ -20632,6 +20836,9 @@ SE-114 29 Стокгольм
   <data name="RestoreMasterKeyText" xml:space="preserve">
     <value>Восстановить Мастер-ключ</value>
   </data>
+  <data name="RestoreToOriginalToolTipText" xml:space="preserve">
+    <value>Для восстановления исходного плана требуется платная подписка!</value>
+  </data>
   <data name="RetryPaymentText" xml:space="preserve">
     <value>Повторите попытку оплаты</value>
   </data>
@@ -20666,6 +20873,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="SecAxcryptApplicationText" xml:space="preserve">
     <value>Приложение AxCrypt</value>
+  </data>
+  <data name="SecretDeletedText" xml:space="preserve">
+    <value>Ваш секрет был удален!</value>
   </data>
   <data name="SecretsAllItems" xml:space="preserve">
     <value>Все пункты</value>
@@ -21213,6 +21423,9 @@ SE-114 29 Стокгольм
   <data name="ShareKeysToolStripMenuItemText" xml:space="preserve">
     <value>Поделиться Ключами</value>
   </data>
+  <data name="ShareNotEncryptedText" xml:space="preserve">
+    <value>Похоже, что файл, которым вы хотите поделиться &lt;strong&gt;, не зашифрован.....&lt;/strong&gt;</value>
+  </data>
   <data name="ShareSecretFailed" xml:space="preserve">
     <value>Не удалось поделиться паролем!</value>
   </data>
@@ -21309,6 +21522,9 @@ SE-114 29 Стокгольм
     <value>Обновить сейчас!</value>
     <comment>A short label prompting the user to update AxCrypt now!</comment>
   </data>
+  <data name="SorryText" xml:space="preserve">
+    <value>Извините,</value>
+  </data>
   <data name="SpanishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Испанский </value>
     <comment>Do Not Translate</comment>
@@ -21323,7 +21539,16 @@ SE-114 29 Стокгольм
     <value>Необходимо Безопасное Соединение</value>
     <comment>The page title for the "A Secure Connection is required" page.</comment>
   </data>
-  <data name="StandardsBasedLabel" xml:space="preserve">
+  <data name="StandardEncryptionWarning" xml:space="preserve">
+    <value>Ваш текущий Viewer план разрешает только просмотр и расшифровку</value>
+  </data>
+  <data name="StandardEncryptionWarningText1" xml:space="preserve">
+    <value>Обновите план, чтобы получить доступ к расширенному шифрованию и дополнительным функциям</value>
+  </data>
+  <data name="StandardEncryptionWarningText2" xml:space="preserve">
+    <value>Ваш текущий базовый план использует шифрование AES-128</value>
+  </data>
+  <data name="StandardsBasedLabel">
     <value>Стандартная криптография </value>
   </data>
   <data name="StandardsBasedText" xml:space="preserve">
@@ -21390,7 +21615,10 @@ SE-114 29 Стокгольм
     <value>AxCrypt Mobile</value>
     <comment>Title of "Strong encryption" slide on Onboarding screen in mobile application.</comment>
   </data>
-  <data name="StrongPasswordLabel" xml:space="preserve">
+  <data name="StrongerProtectionText" xml:space="preserve">
+    <value>Обновите систему для более надежной защиты!</value>
+  </data>
+  <data name="StrongPasswordLabel">
     <value>Сложный пароль</value>
   </data>
   <data name="StudentCommunityText" xml:space="preserve">
@@ -21487,6 +21715,9 @@ SE-114 29 Стокгольм
   <data name="SubmitLabel" xml:space="preserve">
     <value>Подтвердить </value>
   </data>
+  <data name="SubmitNowText" xml:space="preserve">
+    <value>Отправить сейчас</value>
+  </data>
   <data name="SubscriptionAutoRenewOn" xml:space="preserve">
     <value>Ваша подписка будет обновлена &lt;b&gt;{0}&lt;/b&gt;.</value>
   </data>
@@ -21573,6 +21804,9 @@ SE-114 29 Стокгольм
   <data name="SubscriptionValidUntilText" xml:space="preserve">
     <value>Подписка действительна до</value>
   </data>
+  <data name="SuccessText" xml:space="preserve">
+    <value>успешно</value>
+  </data>
   <data name="SummaryTitle" xml:space="preserve">
     <value>Отчет</value>
   </data>
@@ -21621,6 +21855,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Шведский</value>
+  </data>
+  <data name="SyncContactsText" xml:space="preserve">
+    <value>Синхронизируйте контакты!</value>
   </data>
   <data name="SyntheticWordsSuccessActivate" xml:space="preserve">
     <value>Культура была успешно активирована.</value>
@@ -21703,6 +21940,15 @@ SE-114 29 Стокгольм
   </data>
   <data name="TelLabel" xml:space="preserve">
     <value>Тел</value>
+  </data>
+  <data name="TellUsWhatYouThinkText" xml:space="preserve">
+    <value>Расскажите нам, что вы думаете</value>
+  </data>
+  <data name="TemporarilyStoresText" xml:space="preserve">
+    <value>По этому пути временно хранятся расшифрованные версии зашифрованных файлов, которые открываются пользователем.&lt;br /&gt; Файлы автоматически повторно шифруются или безопасно удаляются после закрытия&lt;br /&gt; для поддержания безопасности и предотвращения раскрытия конфиденциальных данных.</value>
+  </data>
+  <data name="TemporaryFilePathText" xml:space="preserve">
+    <value>Путь к временному файлу</value>
   </data>
   <data name="TermsAndConditionsLink" xml:space="preserve">
     <value>Регистрируясь на AxCrypt, Вы подтверждаете Ваше согласие с нашими &lt;a&gt;Правилами иamp; Условиями &lt;/a&gt;</value>
@@ -21962,6 +22208,12 @@ SE-114 29 Стокгольм
   <data name="TextPreferenceUpdate" xml:space="preserve">
     <value>Обновление - Получать уведомления о всех AxCrypt обновлениях</value>
   </data>
+  <data name="TfaCodeGeneratedText" xml:space="preserve">
+    <value>Чтобы завершить вход в систему, введите 6-значный код, сгенерированный приложением для аутентификации.</value>
+  </data>
+  <data name="TfaPhoneText" xml:space="preserve">
+    <value>У вас нет телефона рядом?</value>
+  </data>
   <data name="ThanksChoosingAxCryptBusinessTitle" xml:space="preserve">
     <value>Спасибо, что выбрали AxCrypt Business</value>
   </data>
@@ -21996,6 +22248,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="ToText" xml:space="preserve">
     <value>Кому:</value>
+  </data>
+  <data name="ToText1" xml:space="preserve">
+    <value>до</value>
   </data>
   <data name="TransactionHistoryTitle" xml:space="preserve">
     <value>История трансакций</value>
@@ -22170,10 +22425,22 @@ SE-114 29 Стокгольм
   <data name="TwoMinutesLabel" xml:space="preserve">
     <value>2 минуты</value>
   </data>
+  <data name="TypeText" xml:space="preserve">
+    <value>Тип:</value>
+  </data>
+  <data name="TypeYourEmailPlaceHolderText" xml:space="preserve">
+    <value>Введите свой адрес электронной почты</value>
+  </data>
   <data name="TypeYourMessageHerePlaceHolderText" xml:space="preserve">
     <value>Введите сообщение здесь</value>
   </data>
-  <data name="TypographyLabel" xml:space="preserve">
+  <data name="TypeYourPasswordPlaceHolderText" xml:space="preserve">
+    <value>Введите пароль</value>
+  </data>
+  <data name="TypeYourPasswordText" xml:space="preserve">
+    <value>Введите пароль еще раз</value>
+  </data>
+  <data name="TypographyLabel">
     <value>Типографика</value>
   </data>
   <data name="UnknownCrypto" xml:space="preserve">
@@ -22234,17 +22501,26 @@ SE-114 29 Стокгольм
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} Успешно обновлено.</value>
   </data>
-  <data name="UpdateUserRolesHeading" xml:space="preserve">
+  <data name="UpdateText" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="UpdateUserRolesHeading">
     <value>Обновление ролей пользователей</value>
   </data>
   <data name="UpdatingStatus" xml:space="preserve">
     <value>Обновление Статуса</value>
+  </data>
+  <data name="UpgradeFeatureText" xml:space="preserve">
+    <value>Обновитесь, чтобы получить доступ к этой &lt;strong&gt;функции!&lt;/strong&gt;</value>
   </data>
   <data name="UpgradeLegacyFilesMenuItemText" xml:space="preserve">
     <value>Обновить файлы: AES-256</value>
   </data>
   <data name="UpgradeLegacyFilesMenuToolTip" xml:space="preserve">
     <value>Выберите папку с файлами AES-128 и обновите их.</value>
+  </data>
+  <data name="UpgradeNowText" xml:space="preserve">
+    <value>Обновить сейчас</value>
   </data>
   <data name="UpgradePromptText" xml:space="preserve">
     <value>Приобрести Premium!</value>
@@ -22256,8 +22532,14 @@ SE-114 29 Стокгольм
   <data name="UpgradeText" xml:space="preserve">
     <value>Обновления</value>
   </data>
+  <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
+    <value>&lt;strong&gt;Обновитесь, чтобы разблокировать все функции шифрования!&lt;/strong&gt;</value>
+  </data>
   <data name="UpsellBusinessForNotStandardPremiumUsersText" xml:space="preserve">
     <value>Похоже, вы пришли из бизнеса. Рассмотрите возможность использования нашего бизнес-уровня для получения таких функций, как мастер-ключ, бизнес-администрирование и т.д.</value>
+  </data>
+  <data name="UpToDateText" xml:space="preserve">
+    <value>Все обновлено!</value>
   </data>
   <data name="UsageOtherText" xml:space="preserve">
     <value>Другое</value>
@@ -22406,6 +22688,12 @@ SE-114 29 Стокгольм
   <data name="usingText" xml:space="preserve">
     <value>используя</value>
   </data>
+  <data name="ValidEmailAddressText" xml:space="preserve">
+    <value>Пожалуйста, укажите действующий адрес электронной почты!</value>
+  </data>
+  <data name="ValidUntilText" xml:space="preserve">
+    <value>Доступно до:</value>
+  </data>
   <data name="VerificationEmailSentTitle" xml:space="preserve">
     <value>Верификационный Код Отправлен</value>
     <comment>The title of the page stating that a verification email has been sent.</comment>
@@ -22423,6 +22711,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>Пожалуйста, проверьте и подтвердите файл</value>
+  </data>
+  <data name="VerifyMfaText" xml:space="preserve">
+    <value>Многофакторная проверка подлинности</value>
   </data>
   <data name="VerifyPasswordPrompt" xml:space="preserve">
     <value>Подтвердить Пароль</value>
@@ -22478,6 +22769,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="WelcomeMailSubject" xml:space="preserve">
     <value>Добро пожаловать на AxCrypt!</value>
+  </data>
+  <data name="WelcomeText" xml:space="preserve">
+    <value>Добро пожаловать в мир &lt;span class="grn-clr"&gt;AxCrypt&lt;/span&gt;!</value>
   </data>
   <data name="WelcomeToAxCrypt" xml:space="preserve">
     <value>Добро пожаловать на AxCrypt!
@@ -22829,7 +23123,16 @@ SE-114 29 Стокгольм
   <data name="YesLabel" xml:space="preserve">
     <value>Да</value>
   </data>
-  <data name="YourSecurityMattersHeading" xml:space="preserve">
+  <data name="YetText" xml:space="preserve">
+    <value>ещё,</value>
+  </data>
+  <data name="YourEmailText" xml:space="preserve">
+    <value>Ваш адрес электронной почты </value>
+  </data>
+  <data name="YourPasswordText" xml:space="preserve">
+    <value>Ваш пароль:</value>
+  </data>
+  <data name="YourSecurityMattersHeading">
     <value>Ваша &lt;span&gt;безопасность&lt;/span&gt; имеет значение</value>
   </data>
   <data name="YourSecurityMattersText1" xml:space="preserve">

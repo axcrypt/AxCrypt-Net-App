@@ -1554,6 +1554,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to and.
+        /// </summary>
+        public static string AndText {
+            get {
+                return ResourceManager.GetString("AndText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Annual 20% off.
         /// </summary>
         public static string AnnualMonthlySwitcherAnnualButtonLabel {
@@ -3075,6 +3084,24 @@ namespace AxCrypt.Content {
         public static string AxCryptAboutDescription {
             get {
                 return ResourceManager.GetString("AxCryptAboutDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  File security for You and Your Team by &lt;span class=&quot;font-medium&quot;&gt;AxCrypt AB&lt;/span&gt;.
+        /// </summary>
+        public static string AxCryptAboutDescription1 {
+            get {
+                return ResourceManager.GetString("AxCryptAboutDescription1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Includes software from http://www.bouncycastle.org/..
+        /// </summary>
+        public static string AxCryptAboutDescription2 {
+            get {
+                return ResourceManager.GetString("AxCryptAboutDescription2", resourceCulture);
             }
         }
         
@@ -11514,7 +11541,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_EAB_H1_Text2", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to It is possible to do what mobile device manufacturers do, to use internal trusted hardware as the guardian of the secret keys which will only release the secrets if authenticated by for example a fingerprint. This is how Apple Touch ID works. But, remember the caveats of biometric authentication mentioned above. The internal trusted hardware can always be fooled by a sufficiently well made device or artifact, and frequently the required fingerprint is even found all over the device itself!.
         /// </summary>
@@ -11523,7 +11550,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_EAB_H1_Text3", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Happy AxCrypting!.
         /// </summary>
@@ -36861,6 +36888,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to customers.
+        /// </summary>
+        public static string CustomersText {
+            get {
+                return ResourceManager.GetString("CustomersText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IPTWINS S.A.S. Secures Sensitive Documents with Ease.
         /// </summary>
         public static string CustomerStoriesHead1 {
@@ -38173,6 +38209,15 @@ namespace AxCrypt.Content {
         public static string DifferentWayPayText {
             get {
                 return ResourceManager.GetString("DifferentWayPayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We offer direct support to.
+        /// </summary>
+        public static string DirectSupportText {
+            get {
+                return ResourceManager.GetString("DirectSupportText", resourceCulture);
             }
         }
         
@@ -43704,6 +43749,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Group Feature.
+        /// </summary>
+        public static string GroupFeatureText {
+            get {
+                return ResourceManager.GetString("GroupFeatureText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group File Sharing.
         /// </summary>
         public static string GroupFileSharingHeading {
@@ -44384,6 +44438,33 @@ namespace AxCrypt.Content {
         public static string GroupGuidesTitle {
             get {
                 return ResourceManager.GetString("GroupGuidesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add users or Groups with whom you want to share this secret. If you don`t know about our.
+        /// </summary>
+        public static string GroupInfoText {
+            get {
+                return ResourceManager.GetString("GroupInfoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to create your first one by the link.
+        /// </summary>
+        public static string GroupInfoText1 {
+            get {
+                return ResourceManager.GetString("GroupInfoText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to yet, learn more and create your first one by the link.
+        /// </summary>
+        public static string GroupInfoText2 {
+            get {
+                return ResourceManager.GetString("GroupInfoText2", resourceCulture);
             }
         }
         
@@ -47329,6 +47410,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invite friend.
+        /// </summary>
+        public static string InviteFriendText {
+            get {
+                return ResourceManager.GetString("InviteFriendText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You&apos;ve been invited to use AxCrypt!.
         /// </summary>
         public static string InviteUserNotifyEventText {
@@ -48471,9 +48561,9 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Let&apos;s explore our.
         /// </summary>
-        public static string Let_sExploreOurText {
+        public static string LetsExploreOurText {
             get {
-                return ResourceManager.GetString("Let\'sExploreOurText", resourceCulture);
+                return ResourceManager.GetString("LetsExploreOurText", resourceCulture);
             }
         }
         
@@ -53801,6 +53891,51 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use a.
+        /// </summary>
+        public static string MfaRecoveryCodeText {
+            get {
+                return ResourceManager.GetString("MfaRecoveryCodeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to recovery code.
+        /// </summary>
+        public static string MfaRecoveryCodeText1 {
+            get {
+                return ResourceManager.GetString("MfaRecoveryCodeText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to to access your account..
+        /// </summary>
+        public static string MfaRecoveryCodeText2 {
+            get {
+                return ResourceManager.GetString("MfaRecoveryCodeText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MFA.
+        /// </summary>
+        public static string MFAText {
+            get {
+                return ResourceManager.GetString("MFAText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your account is protected with.
+        /// </summary>
+        public static string MfaText1 {
+            get {
+                return ResourceManager.GetString("MfaText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How to Enable MFA in AxCrypt?.
         /// </summary>
         public static string MFAuthenticationCaroselHead1 {
@@ -54359,7 +54494,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you have our &lt;bold class=&quot;text-style&quot;&gt;Mobile Application ?&lt;/bold&gt;&lt;/span&gt;.
+        ///   Looks up a localized string similar to Do you have our &lt;bold class=&quot;text-style&quot;&gt;Mobile Application ?&lt;/bold&gt;.
         /// </summary>
         public static string MobileApplicationText {
             get {
@@ -55328,7 +55463,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Currently you are &lt;b class=&quot;font-extra-bold&quot;&gt;offline&lt;/b&gt;. However, you still can &lt;span class=&quot;grn-clr font-extra-bold&quot;&gt;&lt;b&gt;Sign up!&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;.
+        ///   Looks up a localized string similar to Currently you are &lt;b class=&quot;font-extra-bold&quot;&gt;offline&lt;/b&gt;. However, you still can &lt;span class=&quot;grn-clr font-extra-bold&quot;&gt;&lt;b&gt;Sign up!&lt;/b&gt;&lt;/span&gt;.
         /// </summary>
         public static string OfflineSignupText {
             get {
@@ -66483,15 +66618,6 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to recovery code &lt;/a&gt; to access your account.
-        /// </summary>
-        public static string TfaRecoveryCodeText {
-            get {
-                return ResourceManager.GetString("TfaRecoveryCodeText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Thank you for choosing AxCrypt Business.
         /// </summary>
         public static string ThanksChoosingAxCryptBusinessTitle {
@@ -66605,6 +66731,15 @@ namespace AxCrypt.Content {
         public static string ToText {
             get {
                 return ResourceManager.GetString("ToText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to to.
+        /// </summary>
+        public static string ToText1 {
+            get {
+                return ResourceManager.GetString("ToText1", resourceCulture);
             }
         }
         
@@ -67083,15 +67218,6 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your account is protected with &lt;span class=&quot;two-fa-text&quot;&gt;2FA..
-        /// </summary>
-        public static string TwofaText1 {
-            get {
-                return ResourceManager.GetString("TwofaText1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 2 Mins.
         /// </summary>
         public static string TwoMinutesLabel {
@@ -67322,6 +67448,15 @@ namespace AxCrypt.Content {
         public static string UpdateSuccess {
             get {
                 return ResourceManager.GetString("UpdateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string UpdateText {
+            get {
+                return ResourceManager.GetString("UpdateText", resourceCulture);
             }
         }
         
@@ -67957,20 +68092,20 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Multi-factor verification.
+        /// </summary>
+        public static string VerifyMfaText {
+            get {
+                return ResourceManager.GetString("VerifyMfaText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verify Password.
         /// </summary>
         public static string VerifyPasswordPrompt {
             get {
                 return ResourceManager.GetString("VerifyPasswordPrompt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Two-factor verification.
-        /// </summary>
-        public static string VerifyTfaText {
-            get {
-                return ResourceManager.GetString("VerifyTfaText", resourceCulture);
             }
         }
         
@@ -68025,6 +68160,15 @@ namespace AxCrypt.Content {
         public static string VisibleUntilText {
             get {
                 return ResourceManager.GetString("VisibleUntilText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please visit our.
+        /// </summary>
+        public static string VisitOur {
+            get {
+                return ResourceManager.GetString("VisitOur", resourceCulture);
             }
         }
         
@@ -69106,6 +69250,15 @@ namespace AxCrypt.Content {
         public static string YesLabel {
             get {
                 return ResourceManager.GetString("YesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to yet,.
+        /// </summary>
+        public static string YetText {
+            get {
+                return ResourceManager.GetString("YetText", resourceCulture);
             }
         }
         

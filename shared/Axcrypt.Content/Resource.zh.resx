@@ -250,6 +250,9 @@
   <data name="AcceptTermsOfServicesText" xml:space="preserve">
     <value>我接受 AxCrypt 的 &lt;a href='{0}'&gt;Privacy Policy&lt;/a&gt; &amp; &lt;a href='{1}'&gt;Terms of Services&lt;/a&gt;</value>
   </data>
+  <data name="AccessYourContactsPhoneText" xml:space="preserve">
+    <value>您是否允许 AxCrypt 应用程序 &lt;strong&gt;访问您在手机上的联系人？&lt;/strong&gt;</value>
+  </data>
   <data name="AccountLabel">
     <value>帐户</value>
   </data>
@@ -288,6 +291,9 @@
     <value>AxCrypt Premium 审判</value>
   </data>
   <data name="ActionLabel" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="ActionsText" xml:space="preserve">
     <value>行动</value>
   </data>
   <data name="ActivateErrorEmailOrCode" xml:space="preserve">
@@ -386,14 +392,23 @@
   <data name="ActiveSubscriptionPromptText" xml:space="preserve">
     <value>您的订阅处于活动状态。 无需续订。</value>
   </data>
+  <data name="ActiveSubscriptionsText" xml:space="preserve">
+    <value>有效订阅</value>
+  </data>
   <data name="ActiveSubscriptionText" xml:space="preserve">
     <value>这个帐户有一个活跃的订阅。</value>
   </data>
   <data name="ActivityText" xml:space="preserve">
     <value>活动</value>
   </data>
+  <data name="AddAndSecureYourFirstFileText" xml:space="preserve">
+    <value>添加并保护您的第一个文件。</value>
+  </data>
   <data name="AddCardTitle" xml:space="preserve">
     <value>添加银行卡</value>
+  </data>
+  <data name="AddedUsersAccessText" xml:space="preserve">
+    <value>添加具有访问权限的用户</value>
   </data>
   <data name="AddEmailPromptText" xml:space="preserve">
     <value>添加电子邮件</value>
@@ -401,6 +416,12 @@
   <data name="AddFileLabel" xml:space="preserve">
     <value>打开AxCrypt文件</value>
     <comment>Tooltip for "AddFile" button in mobile application</comment>
+  </data>
+  <data name="AddFirstFolderText" xml:space="preserve">
+    <value>添加并保护您的第一个文件夹。</value>
+  </data>
+  <data name="AddFirstPasswordText" xml:space="preserve">
+    <value>添加并保护您的第一个密码。</value>
   </data>
   <data name="AdditionalUnsubscribedConfirmation" xml:space="preserve">
     <value>如果AxCrypt的功能或安全性至关重要，我们仍然可能会向您发送电子邮件。</value>
@@ -451,6 +472,9 @@
   </data>
   <data name="AdminLabel" xml:space="preserve">
     <value>行政主任</value>
+  </data>
+  <data name="AdvancedSettingsText" xml:space="preserve">
+    <value>高级设置</value>
   </data>
   <data name="AffiliateAdvantagesHeading">
     <value>AxCrypt联盟营销优势</value>
@@ -548,8 +572,14 @@
   <data name="AffiliateRevenueText6">
     <value>访问专门的客户经理</value>
   </data>
+  <data name="AgreeOurText" xml:space="preserve">
+    <value>您同意我们的</value>
+  </data>
   <data name="AgreePasswordResetNotRegainAccess" xml:space="preserve">
     <value>我明白，这不会重新访问我的加密文件</value>
+  </data>
+  <data name="AlertText" xml:space="preserve">
+    <value>警报！</value>
   </data>
   <data name="AllLabel" xml:space="preserve">
     <value>所有</value>
@@ -595,6 +625,18 @@
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>AxCrypt ID验证[{0} ]</value>
+  </data>
+  <data name="AppConfigurationText" xml:space="preserve">
+    <value>应用程序配置</value>
+  </data>
+  <data name="ApplicationConfigurationPathText" xml:space="preserve">
+    <value>应用程序配置路径</value>
+  </data>
+  <data name="ApplicationConfigurationSettingsText" xml:space="preserve">
+    <value>存储 AxCrypt 设置、用户首选项、&lt;br /&gt;和会话数据，以保留特定于用户的&lt;br /&gt; 跨会话的配置，并确保个性化功能。</value>
+  </data>
+  <data name="ApplicationConfigurationText" xml:space="preserve">
+    <value>应用程序配置</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>AxCrypt</value>
@@ -1075,6 +1117,12 @@
     <value>文件安全为您和您的团队由AxCrypt AB
 
 包括软件http://www.bouncycastle.org/。</value>
+  </data>
+  <data name="AxCryptAboutDescription1" xml:space="preserve">
+    <value>&lt;span class="font-medium"&gt;AxCrypt AB&lt;/span&gt; 为您和您的团队提供文件安全</value>
+  </data>
+  <data name="AxCryptAboutDescription2" xml:space="preserve">
+    <value>包括 http://www.bouncycastle.org/ 的软件。</value>
   </data>
   <data name="AxCryptAffiliateHeading">
     <value>成为AxCrypt &lt;span&gt;的会员&lt;/span&gt;！</value>
@@ -11345,6 +11393,9 @@
   <data name="BrandToneLabel">
     <value>品牌基调</value>
   </data>
+  <data name="BrowseText" xml:space="preserve">
+    <value>浏览</value>
+  </data>
   <data name="BruteForceResistantLabel">
     <value>耐蛮力</value>
   </data>
@@ -12199,6 +12250,9 @@
   <data name="ClearAllText" xml:space="preserve">
     <value>全部清除</value>
   </data>
+  <data name="ClearLogsText" xml:space="preserve">
+    <value>清除日志</value>
+  </data>
   <data name="ClearRecentFilesToolStripMenuItemText" xml:space="preserve">
     <value>清除最近的文件</value>
   </data>
@@ -12211,8 +12265,14 @@
   <data name="ClickToDownloadText" xml:space="preserve">
     <value>点击下载。</value>
   </data>
+  <data name="ClickToShowText" xml:space="preserve">
+    <value>**点击显示**</value>
+  </data>
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>单击此项可对安全文件夹中打开的任何文件或新文件进行加密，但请确保它们首先未被使用。</value>
+  </data>
+  <data name="CloudServicesText" xml:space="preserve">
+    <value>云服务</value>
   </data>
   <data name="ColorPaletteLabel">
     <value>调色板</value>
@@ -12344,6 +12404,9 @@
   <data name="CreateGroupInfoTexts" xml:space="preserve">
     <value>创建组 ！</value>
   </data>
+  <data name="CreateGroupsText" xml:space="preserve">
+    <value>创建群组</value>
+  </data>
   <data name="CreateGroupText" xml:space="preserve">
     <value>创建组</value>
   </data>
@@ -12358,6 +12421,9 @@
   </data>
   <data name="CreatePasswordPrompt" xml:space="preserve">
     <value>创建您的密码</value>
+  </data>
+  <data name="CreatePasswordText" xml:space="preserve">
+    <value>创建密码</value>
   </data>
   <data name="CreatePremiumSuccess" xml:space="preserve">
     <value>祝贺和欢迎AxCrypt Business！</value>
@@ -12626,6 +12692,9 @@
   <data name="DataIntegrityText">
     <value>如果没有检测，则无法修改受保护的文件。</value>
   </data>
+  <data name="DateFromText" xml:space="preserve">
+    <value>日期从</value>
+  </data>
   <data name="DaysLeftPluralWarningPattern" xml:space="preserve">
     <value>{0}天</value>
   </data>
@@ -12723,6 +12792,9 @@
   </data>
   <data name="DeleteSecretSuccess" xml:space="preserve">
     <value>您的密码已被删除。</value>
+  </data>
+  <data name="DeleteSecretText" xml:space="preserve">
+    <value>是否确实要删除此密钥。</value>
   </data>
   <data name="DeletionFailed" xml:space="preserve">
     <value>{0} 删除失败。</value>
@@ -12944,6 +13016,9 @@
   <data name="DoneTitle" xml:space="preserve">
     <value>完成！</value>
   </data>
+  <data name="DontaccountText" xml:space="preserve">
+    <value>没有帐户？</value>
+  </data>
   <data name="DontLikeRecurringFlowText" xml:space="preserve">
     <value>不喜欢定期订阅</value>
   </data>
@@ -13120,6 +13195,9 @@
   </data>
   <data name="EducationTitleText" xml:space="preserve">
     <value>&lt;span class='img1'&gt;强大的数据安全性&lt;/span&gt; &lt;span class='img2'&gt;为您的教育&lt;br/&gt; 机构。 &lt;/span&gt; &lt;span class='img3'&gt;保护学生记录&lt;/span&gt;，&lt;br/&gt;&lt;span class='img4'&gt;学术研究论文&lt;/span&gt;&lt;br/&gt; 内容等。&lt;span class='img6'&gt;&lt;/span&gt;</value>
+  </data>
+  <data name="EmailAlreadyAddedText" xml:space="preserve">
+    <value>${0} 已添加。</value>
   </data>
   <data name="EmailAlreadyExistTexts" xml:space="preserve">
     <value>电子邮件已存在</value>
@@ -13380,6 +13458,9 @@
     <value>过期</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
+  <data name="ExportedSuccessfullyText" xml:space="preserve">
+    <value>导出成功！</value>
+  </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemText" xml:space="preserve">
     <value>导出AxCrypt Id密钥和共享密钥对</value>
   </data>
@@ -13394,6 +13475,9 @@
   </data>
   <data name="FailedPrivateImport" xml:space="preserve">
     <value>导入失败。 可能不是有效的AxCrypt ID文件。</value>
+  </data>
+  <data name="FailedToExportText" xml:space="preserve">
+    <value>导出失败！</value>
   </data>
   <data name="FaqAccessDenied">
     <value>为什么我得到'拒绝访问'和/或我的文件名是绿色的文本？</value>
@@ -13830,6 +13914,9 @@
     <value>通过应用程序从用户反馈</value>
     <comment>The mail subject used when an email is sent to us as a result of user feedback via an app</comment>
   </data>
+  <data name="FeedbackText" xml:space="preserve">
+    <value>如果您在使用AxCrypt时遇到任何&lt;span&gt;困难&lt;/span&gt;，请告诉我们&lt;span&gt;问题，想法或赞美&lt;/span&gt;分享！</value>
+  </data>
   <data name="FeedbackTextPrompt" xml:space="preserve">
     <value>您的反馈</value>
     <comment>Text displayed in feedback content textbox when it is empty</comment>
@@ -13849,6 +13936,9 @@
   </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>文件'{0}'不存在。</value>
+  </data>
+  <data name="FileEncryptionEasyText" xml:space="preserve">
+    <value>文件加密变得简单！</value>
   </data>
   <data name="FileFilterDialogFilterPatternWin" xml:space="preserve">
     <value>{1} (*{0})|*{0}|{2} (*.*)|*.*</value>
@@ -13892,6 +13982,9 @@
   <data name="FilePasswordDialogHeader" xml:space="preserve">
     <value>请提供此文件的原始密码。</value>
     <comment>The header text for the file password dialog.</comment>
+  </data>
+  <data name="FilePasswordHereText" xml:space="preserve">
+    <value>在此处输入您的文件密码</value>
   </data>
   <data name="FilePropertiesDateModifiedToolStripMenuItem" xml:space="preserve">
     <value>修改日期</value>
@@ -14009,6 +14102,9 @@
   <data name="ForOrganisationsText" xml:space="preserve">
     <value>对于组织</value>
   </data>
+  <data name="ForSomeoneElseText" xml:space="preserve">
+    <value>对于其他人</value>
+  </data>
   <data name="ForumsLinkLabel">
     <value>论坛</value>
   </data>
@@ -14039,6 +14135,9 @@
   </data>
   <data name="FreeTrialLabel" xml:space="preserve">
     <value>免费试用</value>
+  </data>
+  <data name="FriendsEmailText" xml:space="preserve">
+    <value>在此处输入您朋友的电子邮件</value>
   </data>
   <data name="FromText" xml:space="preserve">
     <value>从：</value>
@@ -14613,6 +14712,12 @@
   <data name="GetSubscriptionLoginRequiredInfoText" xml:space="preserve">
     <value>请登录以获取您的订阅！ 如果您还没有帐户，您首先需要&lt;a href="{0}Home/Register/"&gt;注册&lt;/a&gt;。</value>
   </data>
+  <data name="GoToGroupsText" xml:space="preserve">
+    <value>转到组</value>
+  </data>
+  <data name="GoToMasterkeyText" xml:space="preserve">
+    <value>转到主密钥</value>
+  </data>
   <data name="GoToMyAxCryptPrompt" xml:space="preserve">
     <value>转到我的AxCrypt</value>
   </data>
@@ -14642,6 +14747,9 @@
   </data>
   <data name="GroupFeatureInfoText" xml:space="preserve">
     <value>添加要与之共享此密钥的用户或组。如果您还不了解我们的群组功能，请了解更多信息并通过链接创建您的第一个&lt;strong&gt;群组功能&lt;/strong&gt;</value>
+  </data>
+  <data name="GroupFeatureText" xml:space="preserve">
+    <value>组功能</value>
   </data>
   <data name="GroupFileSharingHeading">
     <value>群组文件共享</value>
@@ -14870,6 +14978,15 @@
   </data>
   <data name="GroupGuidesTitle">
     <value>&lt;label&gt;最大化&lt;/label&gt; 使用&lt;span&gt;AxCrypt的&lt;/span&gt;&lt;strong&gt;群组功能&lt;/strong&gt;实现业务安全性和团队效率！</value>
+  </data>
+  <data name="GroupInfoText" xml:space="preserve">
+    <value>添加要与之共享此密钥的用户或组。如果您不知道我们的</value>
+  </data>
+  <data name="GroupInfoText1" xml:space="preserve">
+    <value>通过链接创建您的第一个</value>
+  </data>
+  <data name="GroupInfoText2" xml:space="preserve">
+    <value>但是，请了解更多信息并通过链接创建您的第一个</value>
   </data>
   <data name="GroupManagementHeading">
     <value>集团管理</value>
@@ -15296,6 +15413,12 @@
   <data name="ImportPublicKeysFileSelectionTitle" xml:space="preserve">
     <value>选择共享密钥文件</value>
   </data>
+  <data name="ImportSomeonesPublicSharingKeyText" xml:space="preserve">
+    <value>导入某人的公共共享密钥</value>
+  </data>
+  <data name="InactivitySignoutToolTipText" xml:space="preserve">
+    <value>非活动登录需要付费订阅计划！</value>
+  </data>
   <data name="InboxText" xml:space="preserve">
     <value>收件箱</value>
   </data>
@@ -15310,6 +15433,9 @@
 
 这可能会导致某些操作需要很长时间。 请注意，不要选择文件夹下面的文件夹不应该被加密。</value>
     <comment>A short text in a few sentences describing what the Include Subfolders option does.</comment>
+  </data>
+  <data name="IncludeSubfoldersToolTipText" xml:space="preserve">
+    <value>包括子文件夹需要付费订阅计划！</value>
   </data>
   <data name="InconsistentState" xml:space="preserve">
     <value>与'{0}'不一致的状态。</value>
@@ -15852,6 +15978,12 @@
   <data name="Invite" xml:space="preserve">
     <value>要邀请的用户</value>
   </data>
+  <data name="InviteFriendAxCryptText" xml:space="preserve">
+    <value>邀请您的朋友加入 AxCrypt！</value>
+  </data>
+  <data name="InviteFriendText" xml:space="preserve">
+    <value>邀请好友</value>
+  </data>
   <data name="InviteUserNotifyEventText" xml:space="preserve">
     <value>您已被邀请使用AxCrypt！</value>
   </data>
@@ -16250,8 +16382,14 @@ SE-114 29 斯德哥尔摩
   <data name="LegalLinkLabel" xml:space="preserve">
     <value>法律</value>
   </data>
+  <data name="LetsExploreOurText" xml:space="preserve">
+    <value>让我们来探索一下我们的</value>
+  </data>
   <data name="LetsGetStartedTitle" xml:space="preserve">
     <value>我们开始吧！</value>
+  </data>
+  <data name="LetsStartOurJourneyText" xml:space="preserve">
+    <value>让我们开始我们的旅程吧！</value>
   </data>
   <data name="LicenseBusinessNameText" xml:space="preserve">
     <value>Business</value>
@@ -16326,6 +16464,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="LoginPurchaseError" xml:space="preserve">
     <value>处理您的付款请求时出现问题。 请再试一次。</value>
+  </data>
+  <data name="LogInText" xml:space="preserve">
+    <value>登录</value>
   </data>
   <data name="LogoAndIconLabel">
     <value>标志和图标</value>
@@ -18041,6 +18182,27 @@ SE-114 29 斯德哥尔摩
   <data name="MetadataRetentionText">
     <value>保留原始文件名和安全文件的信息。</value>
   </data>
+  <data name="MFAInvalidUserError" xml:space="preserve">
+    <value>由于密码错误，无法启用/禁用多重身份验证</value>
+  </data>
+  <data name="MFAMailSubject" xml:space="preserve">
+    <value>用于安全登录的 AxCrypt一次性密码</value>
+  </data>
+  <data name="MfaRecoveryCodeText" xml:space="preserve">
+    <value>使用</value>
+  </data>
+  <data name="MfaRecoveryCodeText1" xml:space="preserve">
+    <value>恢复代码</value>
+  </data>
+  <data name="MfaRecoveryCodeText2" xml:space="preserve">
+    <value>以访问您的账户。</value>
+  </data>
+  <data name="MFAText" xml:space="preserve">
+    <value>MFA</value>
+  </data>
+  <data name="MfaText1" xml:space="preserve">
+    <value>您的帐户受到</value>
+  </data>
   <data name="MFAuthenticationCaroselHead1">
     <value>如何在 AxCrypt 中启用 MFA？</value>
   </data>
@@ -18227,6 +18389,9 @@ SE-114 29 斯德哥尔摩
   <data name="MobileAppLabel">
     <value>移动应用</value>
   </data>
+  <data name="MobileApplicationText" xml:space="preserve">
+    <value>您有我们的 &lt;bold class="text-style"&gt;移动应用程序吗？&lt;/bold&gt;</value>
+  </data>
   <data name="MobileAppText">
     <value>Android4.0.3或更高版本，iOS8.0或更高版本。</value>
   </data>
@@ -18250,6 +18415,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="MonthlySubscriptionTitle" xml:space="preserve">
     <value>每月</value>
+  </data>
+  <data name="MoreActionsText" xml:space="preserve">
+    <value>更多操作</value>
   </data>
   <data name="MoreButtonText" xml:space="preserve">
     <value>更多...</value>
@@ -18290,8 +18458,14 @@ SE-114 29 斯德哥尔摩
   <data name="NavigationPaneHome" xml:space="preserve">
     <value>首页</value>
   </data>
+  <data name="NeedAnyHelpText" xml:space="preserve">
+    <value>您需要任何帮助吗？</value>
+  </data>
   <data name="NeedProductForProjectText" xml:space="preserve">
     <value>我暂时将它用于一个项目</value>
+  </data>
+  <data name="NewCardSavedText" xml:space="preserve">
+    <value>您的新卡条目已保存。</value>
   </data>
   <data name="NewMessageText" xml:space="preserve">
     <value>新消息</value>
@@ -18299,11 +18473,17 @@ SE-114 29 斯德哥尔摩
   <data name="NewPassphraseDialogTitle" xml:space="preserve">
     <value>创建新密码</value>
   </data>
+  <data name="NewPasswordUpdatedText" xml:space="preserve">
+    <value>您的新密码条目已更新！</value>
+  </data>
   <data name="NewSecretSuccess" xml:space="preserve">
     <value>您的新密码输入已保存。</value>
   </data>
   <data name="NewTrialButton">
     <value>使用 &lt;span&gt;AxCrypt 的密码管理器&lt;/span&gt; 保存、管理和安全地共享它们。您还可以保护 &lt;span&gt; 信用卡详细信息和备注。&lt;/span&gt; 免费试用 30 天。</value>
+  </data>
+  <data name="NewVersionAvailableText" xml:space="preserve">
+    <value>新版本可用！</value>
   </data>
   <data name="NewVersionIsAvailableText" xml:space="preserve">
     <value>版本{0}可用！</value>
@@ -18456,6 +18636,12 @@ SE-114 29 斯德哥尔摩
   <data name="NoLabel">
     <value>否</value>
   </data>
+  <data name="NoLogToClearText" xml:space="preserve">
+    <value>没有日志需要清理！</value>
+  </data>
+  <data name="NoLogToExportText" xml:space="preserve">
+    <value>没有要导出的日志！</value>
+  </data>
   <data name="NoMessagesFoundText" xml:space="preserve">
     <value>（未找到任何消息。)</value>
   </data>
@@ -18543,6 +18729,15 @@ SE-114 29 斯德哥尔摩
   <data name="OfflineNoPremiumWarning" xml:space="preserve">
     <value>您处于离线状态，因此我们无法检查您的订阅计划。 请上网，我们可以更新您的状态！</value>
   </data>
+  <data name="OfflineSignupText" xml:space="preserve">
+    <value>当前您处于 &lt;b class="font-extra-bold"&gt;脱机&lt;/b&gt;状态。但是，您仍然可以 &lt;span class="grn-clr font-extra-bold"&gt;&lt;b&gt;注册！&lt;/b&gt;&lt;/span&gt;</value>
+  </data>
+  <data name="OFFText" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="OhnoText" xml:space="preserve">
+    <value>哦不！</value>
+  </data>
   <data name="OldVersionTooltip" xml:space="preserve">
     <value>你的版本是旧的。 请点击查看新版本。</value>
   </data>
@@ -18554,6 +18749,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="OnlyAdminOnActiveBusinessSubscriptionError" xml:space="preserve">
     <value>无法删除用户，因为他们是Business订阅的唯一管理员。 取消订阅或提名其他管理员。</value>
+  </data>
+  <data name="ONText" xml:space="preserve">
+    <value>开启</value>
   </data>
   <data name="OpenEncryptedFileOpenDialogTitle" xml:space="preserve">
     <value>选择要打开的安全文件</value>
@@ -18640,6 +18838,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="OurVisionLabel" xml:space="preserve">
     <value>我们的愿景</value>
+  </data>
+  <data name="OwnerEmailText" xml:space="preserve">
+    <value>所有者电子邮件：</value>
   </data>
   <data name="PAGE_LEGACY_TR1_TITLE_TEXT2">
     <value>AxCrypt Legacy</value>
@@ -18848,6 +19049,9 @@ SE-114 29 斯德哥尔摩
   <data name="PassphraseVerificationMismatch" xml:space="preserve">
     <value>密码不匹配</value>
   </data>
+  <data name="PasswordChangeText" xml:space="preserve">
+    <value>密码更改</value>
+  </data>
   <data name="PasswordEasyText">
     <value>容易</value>
   </data>
@@ -18868,6 +19072,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="PasswordGeneratorSubHeading2">
     <value>使用 &lt;span class="italic-text"&gt;屡获殊荣且易于使用的加密软件&lt;/span&gt; 保存、管理和安全地共享！您还可以保护 &lt;strong&gt;信用卡详细信息和备注。免费试用 &lt;span&gt;AxCrypt 的订阅计划&lt;/span&gt; 30天。&lt;/strong&gt;</value>
+  </data>
+  <data name="PasswordGeneratorText" xml:space="preserve">
+    <value>您试用过我们的 &lt;bold class="text-style"&gt;密码生成器吗？&lt;/bold&gt;</value>
   </data>
   <data name="PasswordGeneratorText1">
     <value>创建好的密码很难。 有很多技巧和技巧在互联网上如何手动做到这一点，也有可用的自动密码生成器。 有些是好的，有些则不如此。</value>
@@ -19345,6 +19552,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="PremiumTrialInstructionsLinkText" xml:space="preserve">
     <value>点击&lt;a href="https://www.axcrypt.net/pricing/"target="_blank"&gt;这里&lt;/a&gt;有关订阅的更多信息。</value>
+  </data>
+  <data name="PreparingAxCryptText" xml:space="preserve">
+    <value>正在准备 AxCrypt...</value>
   </data>
   <data name="PressAndHoldLabel" xml:space="preserve">
     <value>按住查看更多</value>
@@ -20164,6 +20374,9 @@ SE-114 29 斯德哥尔摩
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>最近的文件</value>
   </data>
+  <data name="RecentFoldersText" xml:space="preserve">
+    <value>最近使用的文件夹</value>
+  </data>
   <data name="RecentLabel" xml:space="preserve">
     <value>最近</value>
   </data>
@@ -20797,6 +21010,9 @@ SE-114 29 斯德哥尔摩
   <data name="RestoreMasterKeyText" xml:space="preserve">
     <value>恢复主密钥</value>
   </data>
+  <data name="RestoreToOriginalToolTipText" xml:space="preserve">
+    <value>恢复到原始状态需要付费订阅计划！</value>
+  </data>
   <data name="RetryPaymentText" xml:space="preserve">
     <value>重试付款</value>
   </data>
@@ -20831,6 +21047,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="SecAxcryptApplicationText" xml:space="preserve">
     <value>AxCrypt 应用程序</value>
+  </data>
+  <data name="SecretDeletedText" xml:space="preserve">
+    <value>您的密钥已删除！</value>
   </data>
   <data name="SecretsAllItems" xml:space="preserve">
     <value>所有项目</value>
@@ -21381,6 +21600,9 @@ SE-114 29 斯德哥尔摩
   <data name="ShareKeysToolStripMenuItemText" xml:space="preserve">
     <value>共享密钥</value>
   </data>
+  <data name="ShareNotEncryptedText" xml:space="preserve">
+    <value>您要共享的文件似乎未 &lt;strong&gt;加密.....&lt;/strong&gt;</value>
+  </data>
   <data name="ShareSecretFailed" xml:space="preserve">
     <value>密码共享失败！</value>
   </data>
@@ -21477,6 +21699,9 @@ SE-114 29 斯德哥尔摩
     <value>现在更新！</value>
     <comment>A short label prompting the user to update AxCrypt now!</comment>
   </data>
+  <data name="SorryText" xml:space="preserve">
+    <value>对不起，</value>
+  </data>
   <data name="SpanishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>西班牙语</value>
     <comment>Do Not Translate</comment>
@@ -21490,6 +21715,15 @@ SE-114 29 斯德哥尔摩
   <data name="SslRequiredTitle" xml:space="preserve">
     <value>需要安全连接</value>
     <comment>The page title for the "A Secure Connection is required" page.</comment>
+  </data>
+  <data name="StandardEncryptionWarning" xml:space="preserve">
+    <value>您当前的查看器计划仅允许查看和解密</value>
+  </data>
+  <data name="StandardEncryptionWarningText1" xml:space="preserve">
+    <value>升级以解锁高级加密和更多功能</value>
+  </data>
+  <data name="StandardEncryptionWarningText2" xml:space="preserve">
+    <value>您当前的基本计划使用 AES-128 加密</value>
   </data>
   <data name="StandardsBasedLabel">
     <value>基于标准的加密</value>
@@ -21557,6 +21791,9 @@ SE-114 29 斯德哥尔摩
   <data name="StrongEncryptionTitle" xml:space="preserve">
     <value>AxCrypt移动</value>
     <comment>Title of "Strong encryption" slide on Onboarding screen in mobile application.</comment>
+  </data>
+  <data name="StrongerProtectionText" xml:space="preserve">
+    <value>升级以获得更强大的保护！</value>
   </data>
   <data name="StrongPasswordLabel">
     <value>强密码</value>
@@ -21655,6 +21892,9 @@ SE-114 29 斯德哥尔摩
   <data name="SubmitLabel">
     <value>提交</value>
   </data>
+  <data name="SubmitNowText" xml:space="preserve">
+    <value>立即提交</value>
+  </data>
   <data name="SubscriptionAutoRenewOn" xml:space="preserve">
     <value>您的订阅将在&lt;b&gt;{0}&lt;/b&gt;续订。</value>
   </data>
@@ -21744,6 +21984,9 @@ SE-114 29 斯德哥尔摩
   <data name="SubscriptionValidUntilText" xml:space="preserve">
     <value>订阅有效期至</value>
   </data>
+  <data name="SuccessText" xml:space="preserve">
+    <value>成功</value>
+  </data>
   <data name="SummaryTitle" xml:space="preserve">
     <value>摘要</value>
   </data>
@@ -21792,6 +22035,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>瑞典语</value>
+  </data>
+  <data name="SyncContactsText" xml:space="preserve">
+    <value>同步联系人！</value>
   </data>
   <data name="SyntheticWordsSuccessActivate" xml:space="preserve">
     <value>区域性成功激活。</value>
@@ -21874,6 +22120,15 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="TelLabel">
     <value>电话号码</value>
+  </data>
+  <data name="TellUsWhatYouThinkText" xml:space="preserve">
+    <value>告诉我们您的想法</value>
+  </data>
+  <data name="TemporarilyStoresText" xml:space="preserve">
+    <value>此路径在用户打开时临时存储加密文件的解密版本。&lt;br /&gt;文件在关闭后会自动重新加密或安全删除&lt;br /&gt;维护安全并防止敏感数据泄露。</value>
+  </data>
+  <data name="TemporaryFilePathText" xml:space="preserve">
+    <value>临时文件路径</value>
   </data>
   <data name="TermsAndConditionsLink" xml:space="preserve">
     <value>通过注册AxCrypt，您同意我们的&lt;a&gt;条款和条件&lt;/a&gt;</value>
@@ -22133,6 +22388,12 @@ SE-114 29 斯德哥尔摩
   <data name="TextPreferenceUpdate" xml:space="preserve">
     <value>更新  获取所有AxCrypt更新的通知</value>
   </data>
+  <data name="TfaCodeGeneratedText" xml:space="preserve">
+    <value>要完成登录，请输入您的身份验证应用程序生成的 6 位数代码。</value>
+  </data>
+  <data name="TfaPhoneText" xml:space="preserve">
+    <value>没有手机？</value>
+  </data>
   <data name="ThanksChoosingAxCryptBusinessTitle" xml:space="preserve">
     <value>感谢您选择AxCrypt Business</value>
   </data>
@@ -22167,6 +22428,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="ToText" xml:space="preserve">
     <value>自：</value>
+  </data>
+  <data name="ToText1" xml:space="preserve">
+    <value>到</value>
   </data>
   <data name="TransactionHistoryTitle" xml:space="preserve">
     <value>交易历史</value>
@@ -22341,8 +22605,20 @@ AxCrypt团队</value>
   <data name="TwoMinutesLabel">
     <value>2 分钟</value>
   </data>
+  <data name="TypeText" xml:space="preserve">
+    <value>类型：</value>
+  </data>
+  <data name="TypeYourEmailPlaceHolderText" xml:space="preserve">
+    <value>输入您的电子邮件</value>
+  </data>
   <data name="TypeYourMessageHerePlaceHolderText" xml:space="preserve">
     <value>在此处键入邮件</value>
+  </data>
+  <data name="TypeYourPasswordPlaceHolderText" xml:space="preserve">
+    <value>键入密码</value>
+  </data>
+  <data name="TypeYourPasswordText" xml:space="preserve">
+    <value>再次输入您的密码</value>
   </data>
   <data name="TypographyLabel">
     <value>排版</value>
@@ -22405,17 +22681,26 @@ AxCrypt团队</value>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} 已成功更新。</value>
   </data>
+  <data name="UpdateText" xml:space="preserve">
+    <value>更新</value>
+  </data>
   <data name="UpdateUserRolesHeading">
     <value>更新用户角色</value>
   </data>
   <data name="UpdatingStatus" xml:space="preserve">
     <value>更新状态</value>
   </data>
+  <data name="UpgradeFeatureText" xml:space="preserve">
+    <value>升级以访问 &lt;strong&gt;此功能！&lt;/strong&gt;</value>
+  </data>
   <data name="UpgradeLegacyFilesMenuItemText" xml:space="preserve">
     <value>升级1.x和AES-128文件</value>
   </data>
   <data name="UpgradeLegacyFilesMenuToolTip" xml:space="preserve">
     <value>选择一个包含AES-128文件的文件夹并对其进行升级</value>
+  </data>
+  <data name="UpgradeNowText" xml:space="preserve">
+    <value>立即升级</value>
   </data>
   <data name="UpgradePromptText" xml:space="preserve">
     <value>获得Premium!</value>
@@ -22430,8 +22715,14 @@ AxCrypt团队</value>
   <data name="UpgradeText" xml:space="preserve">
     <value>升级</value>
   </data>
+  <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
+    <value>&lt;strong&gt;升级以解锁完整的加密功能！&lt;/strong&gt;</value>
+  </data>
   <data name="UpsellBusinessForNotStandardPremiumUsersText" xml:space="preserve">
     <value>看起来您来自一个企业。 考虑使用我们的业务层来获得主密钥，业务管理等功能。</value>
+  </data>
+  <data name="UpToDateText" xml:space="preserve">
+    <value>您是最新的！</value>
   </data>
   <data name="UsageOtherText" xml:space="preserve">
     <value>其他</value>
@@ -22580,6 +22871,12 @@ AxCrypt团队</value>
   <data name="usingText" xml:space="preserve">
     <value>用</value>
   </data>
+  <data name="ValidEmailAddressText" xml:space="preserve">
+    <value>请提供有效的电子邮件地址！</value>
+  </data>
+  <data name="ValidUntilText" xml:space="preserve">
+    <value>有效期至：</value>
+  </data>
   <data name="VerificationEmailSentTitle" xml:space="preserve">
     <value>验证链接已发送</value>
     <comment>The title of the page stating that a verification email has been sent.</comment>
@@ -22597,6 +22894,9 @@ AxCrypt团队</value>
   </data>
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>检查和核实文件</value>
+  </data>
+  <data name="VerifyMfaText" xml:space="preserve">
+    <value>多因素验证</value>
   </data>
   <data name="VerifyPasswordPrompt" xml:space="preserve">
     <value>验证密码</value>
@@ -22652,6 +22952,9 @@ AxCrypt团队</value>
   </data>
   <data name="WelcomeMailSubject" xml:space="preserve">
     <value>欢迎到AxCrypt!</value>
+  </data>
+  <data name="WelcomeText" xml:space="preserve">
+    <value>欢迎来到 &lt;span class="grn-clr"&gt;AxCrypt&lt;/span&gt; 世界！</value>
   </data>
   <data name="WelcomeToAxCrypt" xml:space="preserve">
     <value>欢迎到AxCrypt!
@@ -23004,6 +23307,15 @@ AxCrypt团队</value>
   </data>
   <data name="YesLabel">
     <value>是</value>
+  </data>
+  <data name="YetText" xml:space="preserve">
+    <value>还</value>
+  </data>
+  <data name="YourEmailText" xml:space="preserve">
+    <value>您的电子邮件</value>
+  </data>
+  <data name="YourPasswordText" xml:space="preserve">
+    <value>您的密码：</value>
   </data>
   <data name="YourSecurityMattersHeading">
     <value>您的 &lt;span&gt;安全&lt;/span&gt; 至关重要</value>
