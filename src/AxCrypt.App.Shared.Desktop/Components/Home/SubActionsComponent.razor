@@ -9,7 +9,7 @@
     @if (subActionModel!.EnableCloudServices)
     {
         <div style="display:block;">
-            <h3 class="fle-nme fnt-sze">Cloud services</h3>
+            <h3 class="fle-nme fnt-sze">@Texts.CloudServicesText</h3>
             <div style="display: flex;">
                 @foreach (KnownFolder? knownFolder in subActionModel?.KnownFoldersViewModel?.KnownFolders!)
                 {
@@ -25,7 +25,7 @@
         </div>
     }
     <div class="medium-9" style="display:block;">
-        <h3 class="fle-nme fnt-sze">More actions</h3>
+        <h3 class="fle-nme fnt-sze">@Texts.MoreActionsText</h3>
         <div style="display: flex; gap: 2%;">
             @if (subActionModel.EnableRandomRename)
             {
@@ -55,6 +55,9 @@
                     <img class="ico-dlt" src="" alt="secured-delete-img" style="filter: brightness(2);" />
                     <span class="text-size text-style" style="color: white !important;">@Texts.SecureDeleteToolStripMenuItemText</span>
                     <img class="nav-subs-upg" src="" alt="paid_required_img" style="padding-right:0px !important;" />
+                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>subActionModel.InviteUser(e)" title="@Texts.InviteUserToolStripMenuItemText">
+                    <img class="ico-invtfrd" src="" alt="hand-img" />
+                    <span class="text-size text-style">@Texts.InviteFriendText</span>
                 </div>
             }
 

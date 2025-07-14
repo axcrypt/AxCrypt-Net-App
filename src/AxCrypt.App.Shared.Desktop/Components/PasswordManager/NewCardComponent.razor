@@ -117,7 +117,7 @@
         bool success = await newSecretViewModel!.SaveSecretAsync();
         if (success)
         {
-            StatusAlertService.Success("Your new Card entry has been saved.");
+            StatusAlertService.Success(Texts.NewCardSavedText);
             navigationManager.NavigateTo("/passwordManager");
             return;
         }

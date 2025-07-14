@@ -14,7 +14,7 @@
     <section class="content">
         <article class="left-section" id="content-wrap">
             <h1 class="login-title hg-img">@Texts.WelcomeBackTitle</h1>
-            <span class="sub-head">Log in</span>
+            <span class="sub-head">@Texts.LogInText</span>
             <EditForm Model="@LogOnViewModel.LogOnAccountModel" OnValidSubmit="ButtonLogIn_Click" class="signup-sec">
                 @if (!string.IsNullOrEmpty(LogOnViewModel.ErrorMessage))
                 {
@@ -25,7 +25,7 @@
                         <label>@Texts.EmailLabel</label>
                         @if (!IsEmailReadOnly)
                         {
-                            <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder="Type your email" tabindex="1" />
+                            <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder=@Texts.TypeYourEmailPlaceHolderText tabindex="1" />
                         }
                         else {
                             <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" tabindex="1" readonly="readonly" />
@@ -42,7 +42,7 @@
                     <label>@Texts.PassphrasePrompt</label>
                     <div style="position:relative; display:inline-block; width:100%;">
                         <i class="@PasswordIconClass" @onclick="TogglePassword"></i>
-                        <input type="@PasswordInputType" id="password-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder="Type your password" tabindex="2" />
+                        <input type="@PasswordInputType" id="password-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder=@Texts.TypeYourPasswordPlaceHolderText tabindex="2" />
                     </div>
                 </div>
                 <br />
@@ -54,7 +54,7 @@
                 <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;" tabindex="3">Log in</button>
                 <div class="signup-link">
                     <div style="display:inline-flex; align-items:center;">
-                        <span class="che-txt"> Don't have an account?</span>
+                        <span class="che-txt">@Texts.DontaccountText</span>
                         <NavLink class="nav-link grn-clr" @onclick="CreateNewAccountLabel_LinkClicked" tabindex="4">
                             <span>@Texts.PromptSignUp</span>
                         </NavLink>
@@ -64,7 +64,7 @@
                     </NavLink>
                 </div>
 
-                <div class="che-txt text-center" style="color:#494949; margin-top:20px;">You agree to our <NavLink class="grn-clr" @onclick="RedirectToPrivacyPolicy">Privacy Policy</NavLink> and <NavLink class="grn-clr" @onclick="RedirectToTermsOfUse">Terms Of Use.</NavLink></div>
+                <div class="che-txt text-center" style="color:#494949; margin-top:20px;">@Texts.AgreeOurText <NavLink class="grn-clr" @onclick="RedirectToPrivacyPolicy">@Texts.PrivacyPolicyLinkLabel</NavLink> @Texts.AndText <NavLink class="grn-clr" @onclick="RedirectToTermsOfUse">@Texts.TermsOfUseLinkLabel</NavLink></div>
             </EditForm>
         </article>
         <article class="right-section">

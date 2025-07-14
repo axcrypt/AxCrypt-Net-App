@@ -1,5 +1,6 @@
 ﻿@using AxCrypt.Core.SecuredMessenger;
 @using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
+@using AxCrypt.Content
 
 @inject ManageSecMsgrViewModel ManageSecMgrViewModel
 
@@ -8,7 +9,7 @@
         <div class="inbox-section no-margin" id="load-message-list">
             @if (ManageSecMgrViewModel.Messenger.Messages == null || !ManageSecMgrViewModel.Messenger.Messages.Any())
             {
-                <label class="center-column" id="noMoreNewMessagesText" style="margin: 10% 20%;">(No messages found.)</label>
+                <label class="center-column" id="noMoreNewMessagesText" style="margin: 10% 20%;">@Texts.NoMessagesFoundText</label>
             }
             else
             {

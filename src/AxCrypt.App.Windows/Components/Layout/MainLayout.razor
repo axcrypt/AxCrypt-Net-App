@@ -2,6 +2,7 @@
 @using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
 
 @inherits LayoutComponentBase
 @inject IJSRuntime JS
@@ -20,7 +21,7 @@
             <div class="secrets-loading-overlay">
                 <div class="loading-content">
                     <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
-                    <span style="color:black ">Preparing AxCrypt...</span>
+                    <span style="color:black ">@Texts.PreparingAxCryptText</span>
                 </div>
             </div>
         </main>

@@ -21,13 +21,13 @@
                     <span class="slider round">
                         @if (AppSettingsViewModel.HideRecentFiles)
                         {
-                            <span class="on-off-text on-text">ON</span>
-                            <span class="on-off-text off-text" style="display:none;">OFF</span>
+                            <span class="on-off-text on-text">@Texts.ONText</span>
+                            <span class="on-off-text off-text" style="display:none;">@Texts.OFFText</span>
                         }
                         else
                         {
-                            <span class="on-off-text on-text" style="display:none;">ON</span>
-                            <span class="on-off-text off-text">OFF</span>
+                            <span class="on-off-text on-text" style="display:none;">@Texts.ONText</span>
+                            <span class="on-off-text off-text">@Texts.OFFText</span>
                         }
                     </span>
                 </label>
@@ -49,13 +49,13 @@
                         <span class="slider round">
                             @if (AppSettingsViewModel.AutoUpgradeToAES256)
                             {
-                                <span class="on-off-text on-text">ON</span>
-                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                                <span class="on-off-text on-text">@Texts.ONText</span>
+                                <span class="on-off-text off-text" style="display:none;">@Texts.OFFText</span>
                             }
                             else
                             {
-                                <span class="on-off-text on-text" style="display:none;">ON</span>
-                                <span class="on-off-text off-text">OFF</span>
+                                <span class="on-off-text on-text" style="display:none;">@Texts.ONText</span>
+                                <span class="on-off-text off-text">@Texts.OFFText</span>
                             }
                         </span>
                     </label>
@@ -77,13 +77,13 @@
                         <span class="slider round">
                             @if (AppSettingsViewModel.AutoUpgradeToAES256)
                             {
-                                <span class="on-off-text on-text">ON</span>
-                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                                <span class="on-off-text on-text">@Texts.ONText</span>
+                                <span class="on-off-text off-text" style="display:none;">@Texts.OFFText</span>
                             }
                             else
                             {
-                                <span class="on-off-text on-text" style="display:none;">ON</span>
-                                <span class="on-off-text off-text">OFF</span>
+                                <span class="on-off-text on-text" style="display:none;">@Texts.ONText</span>
+                                <span class="on-off-text off-text">@Texts.OFFText</span>
                             }
                         </span>
                     </label>
@@ -92,7 +92,7 @@
             @if (isHovered && hoveredElement == "autoupgrade")
             {
                 <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium">This Feature requires a paid subscription plan!.</span>
+                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
                 </div>
             }
         </div>
@@ -112,13 +112,13 @@
                         <span class="slider round">
                             @if (AppSettingsViewModel.IncludeSubfolders)
                             {
-                                <span class="on-off-text on-text">ON</span>
-                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                                <span class="on-off-text on-text">@Texts.ONText</span>
+                                <span class="on-off-text off-text" style="display:none;">@Texts.OFFText</span>
                             }
                             else
                             {
-                                <span class="on-off-text on-text" style="display:none;">ON</span>
-                                <span class="on-off-text off-text">OFF</span>
+                                <span class="on-off-text on-text" style="display:none;">@Texts.ONText</span>
+                                <span class="on-off-text off-text">@Texts.OFFText</span>
                             }
                         </span>
                     </label>
@@ -140,13 +140,13 @@
                         <span class="slider round">
                             @if (AppSettingsViewModel.IncludeSubfolders)
                             {
-                                <span class="on-off-text on-text">ON</span>
-                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                                <span class="on-off-text on-text">@Texts.ONText</span>
+                                <span class="on-off-text off-text" style="display:none;">@Texts.OFFText</span>
                             }
                             else
                             {
-                                <span class="on-off-text on-text" style="display:none;">ON</span>
-                                <span class="on-off-text off-text">OFF</span>
+                                <span class="on-off-text on-text" style="display:none;">@Texts.ONText</span>
+                                <span class="on-off-text off-text">@Texts.OFFText</span>
                             }
                         </span>
                     </label>
@@ -156,7 +156,7 @@
             @if (isHovered && hoveredElement == "include")
             {
                 <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium">Include Subfolders requires a paid subscription plan!.</span>
+                    <span class="txt-clr font-medium">@Texts.IncludeSubfoldersToolTipText</span>
                 </div>
             }
         </div>
@@ -185,7 +185,7 @@
             @if (isHovered && hoveredElement == "inactivity")
             {
                 <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium"> Inactivity Signout requires a paid subscription plan!.</span>
+                    <span class="txt-clr font-medium">@Texts.InactivitySignoutToolTipText</span>
                 </div>
             }
         </div>
@@ -212,7 +212,7 @@
             @if (isHovered && hoveredElement == "rename")
             {
                 <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium"> Restore to original requires a paid subscription plan!.</span>
+                    <span class="txt-clr font-medium"> @Texts.RestoreToOriginalToolTipText</span>
                 </div>
             }
         </div>
@@ -221,7 +221,7 @@
     <div class="settings-menu-item-container">
         <NavLink class="nav-link" @attributes="AppSettingsViewModel.NavLinkAttributes2()" id="advanced-options-button-action">
             <img class="stngs-menu-icon IcoAdvsSttns" alt="IcoAdvsSttns" />
-            <span>Advanced settings</span>
+            <span>@Texts.AdvancedSettingsText</span>
             <img class="next-arrow" />
         </NavLink>
     </div>
@@ -238,13 +238,13 @@
                     <span class="slider round">
                         @if (AppSettingsViewModel.AlwaysOffline)
                         {
-                            <span class="on-off-text on-text">ON</span>
-                            <span class="on-off-text off-text" style="display:none;">OFF</span>
+                            <span class="on-off-text on-text">@Texts.ONText</span>
+                            <span class="on-off-text off-text" style="display:none;">@Texts.OFFText</span>
                         }
                         else
                         {
-                            <span class="on-off-text on-text" style="display:none;">ON</span>
-                            <span class="on-off-text off-text">OFF</span>
+                            <span class="on-off-text on-text" style="display:none;">@Texts.ONText</span>
+                            <span class="on-off-text off-text">@Texts.OFFText</span>
                         }
                     </span>
                 </label>
@@ -273,7 +273,7 @@
             @if (isHovered && hoveredElement == "encryptfileproperties")
             {
                 <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium">This feature requires a paid subscription plan!.</span>
+                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
                 </div>
             }
         </div>
@@ -299,7 +299,7 @@
             @if (isHovered && hoveredElement == "invitefriend")
             {
                 <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium">This feature requires a paid subscription plan!.</span>
+                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
                 </div>
             }
         </div>
@@ -349,13 +349,13 @@
                         <span class="slider round">
                             @if (AppSettingsViewModel.IsDateModifiedOn)
                             {
-                                <span class="on-off-text on-text">ON</span>
-                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                                <span class="on-off-text on-text">@Texts.ONText</span>
+                                <span class="on-off-text off-text" style="display:none;">@Texts.OFFText</span>
                             }
                             else
                             {
-                                <span class="on-off-text on-text" style="display:none;">ON</span>
-                                <span class="on-off-text off-text">OFF</span>
+                                <span class="on-off-text on-text" style="display:none;">@Texts.ONText</span>
+                                <span class="on-off-text off-text">@Texts.OFFText</span>
                             }
                         </span>
                     </label>
@@ -375,13 +375,13 @@
                         <span class="slider round">
                             @if (AppSettingsViewModel.IsFileNameOn)
                             {
-                                <span class="on-off-text on-text">ON</span>
-                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                                <span class="on-off-text on-text">@Texts.ONText</span>
+                                <span class="on-off-text off-text" style="display:none;">@Texts.OFFText</span>
                             }
                             else
                             {
-                                <span class="on-off-text on-text" style="display:none;">ON</span>
-                                <span class="on-off-text off-text">OFF</span>
+                                <span class="on-off-text on-text" style="display:none;">@Texts.ONText</span>
+                                <span class="on-off-text off-text">@Texts.OFFText</span>
                             }
                         </span>
                     </label>
@@ -438,21 +438,21 @@
                     <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
                         @if (string.Compare(AppSettingsViewModel.LatestVersion, AppSettingsViewModel.CurrentVersion) > 0)
                         {
-                            <span class="text-center" style="font-size: 20px; color: green;">A new version is available!</span>
+                            <span class="text-center" style="font-size: 20px; color: green;">@Texts.NewVersionAvailableText</span>
 
                             <br />
                             @* <span class="text-center font-bold" style="font-size: 15px;"> Latest Version : @LatestVersion </span> *@
                         }
                         else
                         {
-                            <span class="text-center" style="font-size: 20px; color: green;">You are up to date!</span>
+                            <span class="text-center" style="font-size: 20px; color: green;">@Texts.UpToDateText</span>
                         }
                     </div>
                 </div>
                 <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
                     @if (string.Compare(AppSettingsViewModel.LatestVersion, AppSettingsViewModel.CurrentVersion) > 0)
                     {
-                        <button class="button font-medium success btn-large" @onclick="()=> RedirectToDownload()">Update</button>
+                        <button class="button font-medium success btn-large" @onclick="()=> RedirectToDownload()">@Texts.UpdateText</button>
                     }
                     else
                     {
@@ -507,7 +507,7 @@
             </div>
             <div class="modal-footer">
                 <button class="button font-medium success btn-large" @onclick="(e)=>AppSettingsViewModel.ChangePassphraseButton_Click(e)" style="width: max-content; max-width: 165px;">
-                    Change Password
+                    @Texts.ChangePassphraseDialogTitle
                 </button>
                 <button class="button font-medium success btn-large" @onclick="AppSettingsViewModel.CloseManageAxCryptID">@Texts.ButtonCloseText</button>
             </div>
@@ -521,7 +521,7 @@
             <dd class="center-column" style="cursor:pointer">
                 <div @onclick="(e)=> AppSettingsViewModel.ToggleAdvancedOption()">
                     <img class="" src="/images/default/IcoAdvsSttns.svg" alt="IcoAdvsSttns" />
-                    <span class="font-medium grey-clr">App configuration </span>
+                    <span class="font-medium grey-clr">@Texts.AppConfigurationText </span>
                 </div>
             </dd>
         </dl>
@@ -538,13 +538,13 @@
                         <span class="slider round">
                             @if (AppSettingsViewModel.EnableDebugPopup)
                             {
-                                <span class="on-off-text on-text">ON</span>
-                                <span class="on-off-text off-text" style="display:none;">OFF</span>
+                                <span class="on-off-text on-text">@Texts.ONText</span>
+                                <span class="on-off-text off-text" style="display:none;">@Texts.OFFText</span>
                             }
                             else
                             {
-                                <span class="on-off-text on-text" style="display:none;">ON</span>
-                                <span class="on-off-text off-text">OFF</span>
+                                <span class="on-off-text on-text" style="display:none;">@Texts.ONText</span>
+                                <span class="on-off-text off-text">@Texts.OFFText</span>
                             }
                         </span>
                     </label>

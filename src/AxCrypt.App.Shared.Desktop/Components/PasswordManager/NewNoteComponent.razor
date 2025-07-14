@@ -69,7 +69,7 @@
         bool success = await newSecretViewModel.SaveSecretAsync();
         if (success)
         {
-            StatusAlertService.Success("Your new Note entry has been saved.");
+            StatusAlertService.Success(Texts.NewCardSavedText);
             navigationManager.NavigateTo("/passwordManager");
             return;
         }

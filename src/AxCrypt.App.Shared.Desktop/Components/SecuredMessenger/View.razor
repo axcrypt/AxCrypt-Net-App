@@ -2,6 +2,7 @@
 @using AxCrypt.App.Shared.ViewModels.SecuredMessenger
 @using AxCrypt.Core.SecuredMessenger
 @using AxCrypt.Core.UI
+@using AxCrypt.Content
 
 @using static AxCrypt.Abstractions.TypeResolve;
 
@@ -54,11 +55,11 @@
                             <td> <div class="acc-prfl fnt-small">@senderShortCode</div></td>
                             <td style="line-height: normal; max-width: 235px; padding-left: 5px;">
                                 <div style="display: flex; align-items: center; gap: 5px ">
-                                    <label>From:</label>
+                                    <label>@Texts.FromText</label>
                                     <span class="email-txt-ovflw">@messenger.Message.Username</span>
                                 </div>
                                 <div style="display: flex; align-items: center; gap: 5px; padding-top: 5px;">
-                                    <label>To:</label>
+                                    <label>@Texts.ToText</label>
                                     <span class="email-txt-ovflw" style="padding-left:18px;">
                                         @string.Join(", ", messageToList.Take(Utility.MaxReceiversToDisplay))
 
@@ -92,12 +93,12 @@
                             <td class="visiblity-text fnt-small" colspan="2">
                                 @if (messenger.Message.VisibleUntil != DateTime.MaxValue)
                                 {
-                                    <span>Visible until:</span>
+                                    <span>@Texts.VisibleUntilText</span>
                                     <span class="">@Utility.ToDateString(messenger.Message.VisibleUntil.ToLocalTime())</span>
                                 }
                                 else if (messenger.Message.Visibility == SecureMsgrVisibility.Once)
                                 {
-                                    <span>Visibility:</span>
+                                    <span>@Texts.VisibilityText</span>
                                     <span class="">@messenger.Message.Visibility.ToString()</span>
                                 }
                             </td>

@@ -32,20 +32,20 @@
                 </div>
             </button>
             <button class="button success new-btn fnt-small" id="create-new-message" @onclick="()=>{ ManageSecMgrViewModel.ComposeNewMessage(); }">
-                New Message
+                @Texts.NewMessageText
             </button>
         </div>
         <div id="all-message-list" class="message-list-section">
             <AxCrypt.App.Shared.Desktop.Components.SecuredMessenger.MessagesList />
         </div>
-        <a href="javascript:void(0);" id="load-more-btn" @onclick="()=>EnableLoadMoreAction(ManageSecMgrViewModel.Messenger.PageNumber)" class="loadMoreActionlnk"> Load More </a>
+        <a href="javascript:void(0);" id="load-more-btn" @onclick="()=>EnableLoadMoreAction(ManageSecMgrViewModel.Messenger.PageNumber)" class="loadMoreActionlnk"> @Texts.LoadMoreText </a>
     </div>
     <div class="medium-7 columns flex-direction" style="padding:2px 8px; height:auto; max-height:520px; overflow-y:auto;">
         @if ((ManageSecMgrViewModel.Messenger == null || !ManageSecMgrViewModel.Messenger.ChildMessages.Any()) && !ManageSecMgrViewModel.ShowLoadingWheel && !ManageSecMgrViewModel.NewSecMsgrViewModel.IsVisible)
         {
             <div class="text-center empty-sec">
-                <span class="fnt-medium deflt-txt-clr">Select an item to read</span><br />
-                <span class="fnt-medium grey-clr">No items selected</span><br />
+                <span class="fnt-medium deflt-txt-clr">@Texts.SelectItemReadText</span><br />
+                <span class="fnt-medium grey-clr">@Texts.NoItemsSelectedText</span><br />
                 <img class="inbox-img" src="" alt="inbox-img" />
             </div>
         }

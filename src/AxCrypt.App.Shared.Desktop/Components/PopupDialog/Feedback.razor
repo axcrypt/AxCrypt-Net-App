@@ -1,5 +1,6 @@
 ﻿@using AxCrypt.App.Shared.ViewModels.Feedback
 @using AxCrypt.App.Shared.Utility
+@using AxCrypt.Content
 
 @inject FeedbackViewModel FeedbackViewModel
 
@@ -9,7 +10,7 @@
         <div class="text-center">
             <div class="close-img" @onclick="Close"></div>
             <img class="fdbck-img" src="" alt="feedback-img" />
-            <p class="bold-highlight sub-head-clr">Please let us know if you experience any <span>difficulties</span> with AxCrypt, have <span>questions, ideas or praises</span> to share! </p>
+            <p class="bold-highlight sub-head-clr"> @((MarkupString)(string.Format(Texts.FeedbackText)))</p>
             @if (!string.IsNullOrEmpty(FeedbackViewModel.ErrorMessage))
             {
                 <div class="error-message">@FeedbackViewModel.ErrorMessage</div>

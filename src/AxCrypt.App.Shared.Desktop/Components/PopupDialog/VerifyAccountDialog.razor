@@ -16,12 +16,12 @@
                 <div class="modal-body">
                     <div>
                         <label>Your password:</label>
-                        <input type="@(VerifyAccountViewModel.ShowPassword ? "text" : "password")" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@VerifyAccountViewModel.PassPhrase" />
+                        <input type="@(VerifyAccountViewModel.ShowPassword ? "text" : "password")" class="form-control pswd-img" placeholder=@Texts.TypeYourPasswordText @bind-value="@VerifyAccountViewModel.PassPhrase" />
                     </div>
 
                     <div>
                         <label>@Texts.VerifyPasswordPrompt:</label>
-                        <input type="@(VerifyAccountViewModel.ShowPassword ? "text" : "password")" class="form-control pswd-img" placeholder="Type your password one more time" @bind-value="@VerifyAccountViewModel.PassPhraseVerification" />
+                        <input type="@(VerifyAccountViewModel.ShowPassword ? "text" : "password")" class="form-control pswd-img" placeholder=@Texts.TypeYourPasswordText @bind-value="@VerifyAccountViewModel.PassPhraseVerification" />
                     </div>
                     <div>
                         <input type="checkbox" checked="@VerifyAccountViewModel.ShowPassword" @onchange="ToggleShowPassword" />

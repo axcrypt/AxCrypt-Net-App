@@ -1,4 +1,5 @@
 ﻿@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
 
 @inject AboutViewModel AboutViewModel
 @inject LogOnViewModel LogOnViewModel
@@ -13,7 +14,7 @@
                     <div style="padding: 5% 3%;"><img src="images/default/axcrypt_icon_text.svg" alt="AxCrypt-icon" /></div>
                     <div style="text-align: left; word-break:break-word;">
                         <h3 class="txt-clr">@AboutViewModel.ProductName</h3>
-                        <h4 style="font-size:18px">File encryption made easy!</h4>
+                        <h4 style="font-size:18px">@Texts.FileEncryptionEasyText</h4>
 
                         <label class="txt-clr">Version:</label>
                         <span class="font-bold sub-head-clr">@AboutViewModel.Version</span> <br />
@@ -29,11 +30,11 @@
                         <br />
 
                         <label class="highlight-text">
-                            File security for You and Your Team by <span class="font-medium">AxCrypt AB</span>
+                            @((MarkupString)(string.Format(Texts.AxCryptAboutDescription1)))
                         </label>
                         <br />
 
-                        <span style="font-size: 12px;">Includes software from http://www.bouncycastle.org/.</span>
+                        <span style="font-size: 12px;">@Texts.AxCryptAboutDescription2</span>
                     </div>
                 </div>
             </div>

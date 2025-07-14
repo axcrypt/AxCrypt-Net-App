@@ -4,6 +4,7 @@
 @using AxCrypt.App.Shared.Models
 @using AxCrypt.Core
 @using Microsoft.JSInterop
+@using AxCrypt.Content
 
 @inject UserNotificationService notificationService
 @inject TopMenuViewModel ViewModel
@@ -22,7 +23,7 @@
         </span>
         <img class="notif-icon padding" src="/images/default/IcoNtfctns.svg" alt="notify-icon" />
     </NavLink>
-    <NavLink class="update-btn" @onclick="ViewModel.CheckAxCryptVersionAsync" title="@ViewModel.VersionHoverText">Update</NavLink>
+    <NavLink class="update-btn" @onclick="ViewModel.CheckAxCryptVersionAsync" title="@ViewModel.VersionHoverText">@Texts.UpdateText</NavLink>
     <NavLink class="mb-prfle" id="accounts-dropdown-click-action">
         <img style="max-width:30px;width:30px;height:30px !important;" src="@SubscriptionIcon()" alt="subs-level icon" />
     </NavLink>

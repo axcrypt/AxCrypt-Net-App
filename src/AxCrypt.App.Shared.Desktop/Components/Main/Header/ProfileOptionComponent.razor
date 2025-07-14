@@ -33,7 +33,7 @@
             }
             else
             {
-                <button class="font-bold acnt-upg" style="width: 154px;height: 37px;text-align: center;" @onclick="ProfileViewModel.UpgradeSubscription"> Upgrade now</button>
+                <button class="font-bold acnt-upg" style="width: 154px;height: 37px;text-align: center;" @onclick="ProfileViewModel.UpgradeSubscription"> @Texts.UpgradeNowText</button>
             }
         </div>
     </div>
@@ -49,7 +49,7 @@
         <div class="profile-option-container">
             <NavLink class="nav-link" @onclick="(e) => ProfileViewModel.ChangePassphraseMenuItem_Click(e)">
                 <img class="" src="images/default/IcoRstPsswrd.svg" alt="go-back-img" />
-                <span>Password change</span>
+                <span>@Texts.PasswordChangeText</span>
             </NavLink>
         </div>
         <div class="profile-option-container">
@@ -84,7 +84,7 @@
 
 <div class="key-mngnt-Popup model-popup sub-pop1" style="display:none;" id="key-management-popup">
     <div class="font-medium left-align" id="key-management-popup">
-        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">Import Someone`s Public Sharing Key</dd>
+        <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">@Texts.ImportSomeonesPublicSharingKeyText</dd>
         <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">@Texts.ExportSharingKeyToolStripMenuItemText</dd>
         <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async() => {  await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">@Texts.ImportMyPrivateKeyToolStripMenuItemText</dd>
         <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="()=>ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">@Texts.ExportMyPrivateKeyToolStripMenuItemText</dd>
@@ -109,10 +109,10 @@
 
             @if (ProfileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
             {
-                <span class="txt-clr">Type:</span>
+                <span class="txt-clr">@Texts.TypeText</span>
                 <span class="font-bold sub-head-clr">@ProfileViewModel.Account.Subscription</span> <br />
 
-                <span class="txt-clr">Valid until:</span>
+                <span class="txt-clr">@Texts.ValidUntilText</span>
                 <span class="font-bold sub-head-clr">@ProfileViewModel.ValidFormatted</span> <br />
 
                 <a class="can-subs" @onclick="ProfileViewModel.CancelSubscription">@Texts.CancelSubscriptionPrompt</a>

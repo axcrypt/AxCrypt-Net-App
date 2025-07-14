@@ -2,6 +2,7 @@
 @using AxCrypt.App.Shared.ViewModels.SecuredMessenger
 @using AxCrypt.Core.SecuredMessenger
 @using AxCrypt.Core.UI
+@using AxCrypt.Content
 
 @using static AxCrypt.Abstractions.TypeResolve;
 
@@ -70,7 +71,7 @@
                         <td colspan="2" class="second" style="font-size:12px;">
                             <div style="display:inline-block;">
                                 <img class="clck-img" src="images/default/IcoClock.svg" />
-                                <span class="grey-clr">Visible until:</span>
+                                <span class="grey-clr">@Texts.VisibleUntilText</span>
                                 <span class="text-fnt-size">
                                     @(Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Forever ? "Forever" :
                                         Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Once ? "Once" :

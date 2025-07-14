@@ -14,18 +14,18 @@
                         <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" />
                         <br /><br />
                         <span class="text-center font-bold" style="font-size: 20px;">
-                            Invite your friend to AxCrypt!
+                            @Texts.InviteFriendAxCryptText
                         </span>
                     </div>
                     <div class="invite-text">
                         <span class="grey-clr">@Texts.DialogInviteUserPromptLabelText</span><br />
                         @if (InviteViewModel.InviteUserDisabled)
                         {
-                            <input type="text" id="inviteFriend" name="inviteFriend" placeholder="Type your friend's email here" @bind-value="@InviteViewModel.InvitedUser" disabled="disabled">
+                            <input type="text" id="inviteFriend" name="inviteFriend" placeholder=@Texts.FriendsEmailText @bind-value="@InviteViewModel.InvitedUser" disabled="disabled">
                         }
                         else
                         {
-                            <input type="text" id="inviteFriend" name="inviteFriend" placeholder="Type your friend's email here" @bind-value="@InviteViewModel.InvitedUser">
+                            <input type="text" id="inviteFriend" name="inviteFriend" placeholder=@Texts.FriendsEmailText @bind-value="@InviteViewModel.InvitedUser">
                         }
                         @if (!string.IsNullOrEmpty(InviteViewModel.ErrorMessage))
                         {

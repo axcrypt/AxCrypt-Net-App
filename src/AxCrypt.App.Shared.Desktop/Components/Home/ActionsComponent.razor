@@ -12,7 +12,7 @@
 
 <div class="home-body" style="margin-top: 15px;">
     <div style="display:block; margin-bottom: 28px; width:63%">
-        <h3 class="fle-nme fnt-sze">Actions</h3>
+        <h3 class="fle-nme fnt-sze">@Texts.ActionsText</h3>
         <div class="" style="display:flex;">
 
             <div class="act-box" @onclick="async ()=> await homeActionModel!.OpenFile()" @onmouseover='@(() => ShowPopup("open"))' @onmouseout='@(() => HidePopup())'>
@@ -41,7 +41,7 @@
                         <div class="popup-section">
                             <div class="free-color" id="upgrade-sec" style="padding:10px; text-align:center; border-radius:5px;">
                                 <span style="color:white;">
-                                    Upgrade to access this <strong>feature!</strong>
+                                    @((MarkupString)(string.Format(Texts.UpgradeFeatureText)))
                                 </span>
                                 <button class="upgrd-btn font-medium btn-medium" @onclick="() => homeActionModel.UpgradeDialog()" style="margin: 0 auto;">@Texts.UpgradeText</button>
                             </div>
@@ -87,7 +87,7 @@
                         <div class="popup-section">
                             <div class="free-color" id="upgrade-sec" style="padding:10px; text-align:center; border-radius:5px;">
                                 <span style="color:white;">
-                                    Upgrade to access this <strong>feature!</strong>
+                                    @((MarkupString)(string.Format(Texts.UpgradeFeatureText)))
                                 </span>
                                 <button class="upgrd-btn font-medium btn-medium" @onclick="() => homeActionModel.UpgradeDialog()" style="margin: 0 auto;">@Texts.UpgradeText</button>
                             </div>
@@ -120,7 +120,7 @@
                     @if (isHovered && hoveredElement == "master key")
                     {
                         <div class="home-hover text-center" style="background-color:#fff;">
-                            <span class="txt-clr font-medium">Go to Masterkey</span>
+                            <span class="txt-clr font-medium">@Texts.GoToMasterkeyText</span>
                         </div>
                     }
                 </div>
@@ -131,7 +131,7 @@
                         @if (isHovered && hoveredElement == "create groups")
                         {
                             <div class="home-hover text-center" style="background-color:#fff;">
-                                <span class="txt-clr font-medium">Go to Groups</span>
+                                <span class="txt-clr font-medium">@Texts.GoToGroupsText</span>
                             </div>
                         }
                     </div>
@@ -156,10 +156,10 @@
                         <tbody>
                             <tr>
                                 <td rowspan="2"><img class="icosrv" src="" alt="grp-img" /></td>
-                                <td class="info-txt">Tell us what you think</td>
+                                <td class="info-txt">@Texts.TellUsWhatYouThinkText</td>
                             </tr>
                             <tr @onclick="homeActionModel.OpenFeedbackPopup">
-                                <td class="gt-stred-txt" style="cursor:pointer">Submit now <img class="arwrgt-img" /></td>
+                                <td class="gt-stred-txt" style="cursor:pointer">@Texts.SubmitNowText <img class="arwrgt-img" /></td>
                             </tr>
                             <tr>
                                 <td rowspan="2"><img class="icoidea" src="" alt="grp-img" /></td>
@@ -180,7 +180,7 @@
     @if (homeActionModel.HasBusiness)
     {
         <div>
-            <label class="fle-nme fnt-sze" style="padding-bottom:20px;">Active subscriptions</label>
+            <label class="fle-nme fnt-sze" style="padding-bottom:20px;">@Texts.ActiveSubscriptionsText</label>
             <div class="actv-subs">
                 @* <div class="battery">
                     <div class="battery-head"> </div>
@@ -212,7 +212,7 @@
                         <span class="subs-plan" style="line-height:10px;">@Texts.PremiumAccountLabel</span>
                         <img class="plan-prm-icon" src="" alt="premium-icon" />
                         <br />
-                        <span class="sub-text">For someone else</span>
+                        <span class="sub-text">@Texts.ForSomeoneElseText</span>
                     </div>
                     <button @onclick="OpenBuyForSomeOneElsePage" class="buy-button">@Texts.BuyText</button>
                 </div>
@@ -236,9 +236,9 @@
             <div>
                 <label class="unlck-txt">
                     @* Unlock our amazing <span>features</span> developed to <span>empower your security!</span> *@
-                    <strong>Upgrade to unlock full encryption features!</strong>
+                    @((MarkupString)(string.Format(Texts.UpgradeToUnlockFullEncryptionFeaturesText)))
                 </label>
-                <button class="upgrd-btn font-medium btn-large" @onclick="()=>homeActionModel.UpgradeDialog()" style="height: 37px;"> Upgrade now</button>
+                <button class="upgrd-btn font-medium btn-large" @onclick="()=>homeActionModel.UpgradeDialog()" style="height: 37px;"> @Texts.UpgradeNowText</button>
             </div>
         </div>
     }

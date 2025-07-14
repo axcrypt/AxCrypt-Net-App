@@ -5,16 +5,16 @@
 
 <section class="content">
     <article class="left-section reg-sec" id="content-wrap">
-        <h1 class="reg-tle">Welcome to <span class="grn-clr">AxCrypt</span> world!</h1>
-        <span style="margin-bottom: 10px;">Currently you are <b class="font-extra-bold">offline</b>. However, you still can <span class="grn-clr font-extra-bold"><b>Sign up!</b></span></span><br />
+        <h1 class="reg-tle">@((MarkupString)(string.Format(@Texts.WelcomeText)))</h1>
+        <span style="margin-bottom: 10px;">@((MarkupString)(string.Format(@Texts.OfflineSignupText)))</span><br />
         <label class="sub-head">@Texts.PromptSignUp</label>
         <EditForm Model="@Register.CreateAccountModel" class="signup-sec">
             <div class="form-field">
-                <label>Your email</label>
+                <label>@Texts.YourEmailText</label>
                 <input type="email" @bind-value="Register.CreateAccountModel.UserEmail" class="form-control email-img" placeholder="Enter your email" />
             </div>
             <div class="form-field">
-                <label>Create a password:</label>
+                <label>@Texts.CreatePasswordText:</label>
                 <input type="@passwordFiledType" @bind-value="Register.CreateAccountModel.PasswordText" class="form-control pswd-img" placeholder="Create your password" />
             </div>
             <div>

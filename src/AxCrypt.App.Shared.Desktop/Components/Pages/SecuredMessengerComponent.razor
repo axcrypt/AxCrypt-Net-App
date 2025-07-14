@@ -29,7 +29,7 @@
 
                 <img class="filter-trigger" src="" alt="filter-image" title="Filters" id="advanced-filter-popup-button-action" @onclick="OnApplyFilter" />
                 <div class="filter-popup model-popup" id="advanced-filter-popup">
-                    <label>From</label>
+                    <label>@Texts.FromText</label>
                     <InputText @bind-Value="SecMsgrViewModel.Messenger.UserName"
                     placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
                     type="email"
@@ -37,7 +37,7 @@
                     name="from"
                     id="" />
                     <br />
-                    <label>To</label>
+                    <label>@Texts.ToText</label>
                     <InputText @bind-Value="SecMsgrViewModel.Messenger.ReceiverName"
                     placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
                     type="email"
@@ -45,9 +45,9 @@
                     name="to"
                     id="" />
                     <div>
-                        <label>Date from</label>
+                        <label>@Texts.DateFromText</label>
                         <InputDate @bind-Value="SecMsgrViewModel.Messenger.StartDate" style="width: 23%; color:#000;" name="date-from" />
-                        <span class="font-high" style="padding: 10px;">to</span>
+                        <span class="font-high" style="padding: 10px;">@Texts.ToText1</span>
                         <InputDate @bind-Value="SecMsgrViewModel.Messenger.EndDate" style="width: 23%; color: #000;" name="date-to" />
                     </div>
                     <div style="display: flex; float: right; padding-top: 20px;">
