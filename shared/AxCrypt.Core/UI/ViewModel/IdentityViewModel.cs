@@ -195,6 +195,7 @@ namespace AxCrypt.Core.UI.ViewModel
             if (_knownIdentities.IsMFAEnabled)
             {
                 _knownIdentities.MFAUniqueKey = userAccount.MultiFactorAuthInfo.UniqueKey;
+                _knownIdentities.MultiFactorAuthType = (MultiFactorAuthType)Enum.Parse(typeof(MultiFactorAuthType), userAccount.MultiFactorAuthInfo.MfaEnabledTypes);
             }
 
             new AxCryptUserAccountViewModel().Initilaize(userAccount);
@@ -312,10 +313,10 @@ namespace AxCrypt.Core.UI.ViewModel
                 return logOnIdentity;
             }
 
-            return await AskForTFAVerify(logOnArgs, logOnIdentity);
+            return await AskForMFAVerify(logOnArgs, logOnIdentity);
         }
 
-        private async Task<LogOnIdentity> AskForTFAVerify(LogOnEventArgs logOnArgs, LogOnIdentity logOnIdentity)
+        private async Task<LogOnIdentity> AskForMFAVerify(LogOnEventArgs logOnArgs, LogOnIdentity logOnIdentity)
         {
             await OnLoggingOnWithTOTPAsync(logOnArgs);
             if (logOnArgs.Cancel)
@@ -323,13 +324,13 @@ namespace AxCrypt.Core.UI.ViewModel
                 return await AskForLogOnAsync(logOnIdentity, logOnArgs.EncryptedFileFullName);
             }
 
-            bool IsTFAVerified = await New<ITwoFactorAuthenticateService>().VerifyTwoFactorAsync(logOnArgs.OneTimePassword, _knownIdentities.MFAUniqueKey);
-            if (!IsTFAVerified)
+            bool IsMFAVerified = await New<IMultiFactorAuthService>().VerifyMultiFactorAuthAsync(logOnArgs.OneTimePassword, _knownIdentities.MFAUniqueKey, logOnArgs.MFAType);
+            if (!IsMFAVerified)
             {
                 return LogOnIdentity.Empty;
             }
 
-            logOnIdentity.SetActiveTFAUniqueKey(_knownIdentities.MFAUniqueKey);
+            logOnIdentity.SetActiveMFAUniqueKey(_knownIdentities.MFAUniqueKey);
             return logOnIdentity;
         }
 

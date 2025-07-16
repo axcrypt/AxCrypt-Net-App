@@ -10,10 +10,9 @@
             The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
             either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.22621.0</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.22621.0</TargetFrameworks>
         <OutputType>WinExe</OutputType>
 
-		<SelfContained>true</SelfContained>
 		<!--<RuntimeIdentifier>win-arm64</RuntimeIdentifier>-->
 		
         <RootNamespace>AxCrypt.App.Windows</RootNamespace>
@@ -31,11 +30,11 @@
 		
         <!--<WindowsPackageType>None</WindowsPackageType>-->
 
-        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-        <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
+        <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
         <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
         <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-        <HoursBetweenUpdateChecks>24</HoursBetweenUpdateChecks>
+        <!--<HoursBetweenUpdateChecks>24</HoursBetweenUpdateChecks>-->
 		<AppxPackageDir>$(BaseOutputPath)bin\ReleaseAppPackages\</AppxPackageDir>
 
 		<AssemblyName>AxCrypt</AssemblyName>
@@ -57,6 +56,7 @@
 		<ApplicationVersion>$(FinalAppVersion)</ApplicationVersion>
 		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
 		<GenerateTestArtifacts>False</GenerateTestArtifacts>
+		<PublishSelfContained>true</PublishSelfContained>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
 		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
@@ -100,10 +100,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.92" />
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.92" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="8.0.92" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.90" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.90" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="9.0.90" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.7" />
         <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
         <PackageReference Include="PInvoke.User32" Version="0.7.124" />
     </ItemGroup>

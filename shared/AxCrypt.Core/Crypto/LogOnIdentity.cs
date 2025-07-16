@@ -1,9 +1,12 @@
-﻿using AxCrypt.Api.Model.Groups;
+﻿using AxCrypt.Abstractions;
+using AxCrypt.Api.Model;
+using AxCrypt.Api.Model.Groups;
 using AxCrypt.Api.Model.Masterkey;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Crypto
 {
@@ -135,11 +138,39 @@ namespace AxCrypt.Core.Crypto
 
         public IEnumerable<GroupKeyPairApiModel> UserGroupKeyPairs { get; set; }
 
-        public string ActiveTFAUniqueKey { get; private set; }
+        public string ActiveMFAUniqueKey { get; private set; }
 
-        public void SetActiveTFAUniqueKey(string activeTFAUniqueKey)
+        public string CurrentMFAOtp { get; private set; }
+
+        public DateTime? MFAOTPExpiration { get; private set; }
+
+        public void SetActiveMFAUniqueKey(string activeTFAUniqueKey)
         {
-            ActiveTFAUniqueKey = activeTFAUniqueKey;
+            ActiveMFAUniqueKey = activeTFAUniqueKey;
+        }
+        
+        public void SetMFAOnetimeCode(string uniqueOTPKey, DateTime expiration)
+        {
+            CurrentMFAOtp = uniqueOTPKey;
+            MFAOTPExpiration = expiration;
+        }
+
+        public string ActiveMFAOneTimeCode
+        {
+            get
+            {
+                if (!MFAOTPExpiration.HasValue)
+                {
+                    return null;
+                }
+
+                if (New<INow>().Utc > MFAOTPExpiration.Value)
+                {
+                    return null;
+                }
+
+                return CurrentMFAOtp;
+            }
         }
 
         public bool Equals(LogOnIdentity other)

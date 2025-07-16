@@ -36,6 +36,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 using AxCrypt.Api.Model.Groups;
+using AxCrypt.Api.Model.MFA;
 
 namespace AxCrypt.Core.Service
 {
@@ -168,6 +169,11 @@ namespace AxCrypt.Core.Service
         public Task PrioritySupportAsync(string subject, string message)
         {
             return Task.FromResult(default(object));
+        }
+
+        public Task<MultiFactorAuthOTPApiModel> SendMFAOtpAsync(string userEmail)
+        {
+            return null;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.UI;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.Utility.View;
@@ -46,7 +45,7 @@ public class LogOnViewModel : ViewModelBase
 
         ShowGetStartedCarousel = false;
         IsVisible = false;
-        TwoFactorAuthViewModel = new TwoFactorAuthViewModel(this);
+        MultiFactorAuthViewModel = new MultiFactorAuthViewModel();
 
         mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { if (loggedOn) { ProcessIndicator?.Dispose(); OnSubscriptionChanged?.Invoke(); } });
         mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnSubscriptionChanged?.Invoke(); } });
@@ -160,7 +159,7 @@ public class LogOnViewModel : ViewModelBase
 
     public bool UserInitiatedUpdateCheckPending { get ; set; }  
 
-    public TwoFactorAuthViewModel TwoFactorAuthViewModel { get; set; }
+    public MultiFactorAuthViewModel MultiFactorAuthViewModel { get; set; }
 
     public event Action? OnSubscriptionChanged;
 
@@ -181,15 +180,15 @@ public class LogOnViewModel : ViewModelBase
         }
     }
 
-    private static bool _isTfaEnabled;
+    private static bool _isMfaEnabled;
 
-    public bool IsTfaEnabled
+    public bool IsMfaEnabled
     {
-        get => _isTfaEnabled;
+        get => _isMfaEnabled;
         set
         {
-            _isTfaEnabled = value;
-            OnTFADialogVisibilityChanged?.Invoke(_isTfaEnabled);
+            _isMfaEnabled = value;
+            OnTFADialogVisibilityChanged?.Invoke(_isMfaEnabled);
         }
     }
 

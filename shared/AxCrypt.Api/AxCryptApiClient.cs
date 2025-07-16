@@ -2,6 +2,7 @@
 using AxCrypt.Abstractions.Rest;
 using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Groups;
+using AxCrypt.Api.Model.MFA;
 using AxCrypt.Common;
 using System;
 using System.Collections.Generic;
@@ -463,6 +464,21 @@ namespace AxCrypt.Api
             RestContent content = new RestContent(Serializer.Serialize(prioritySupport));
             RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("POST", resource, Timeout, content)).Free();
             ApiCaller.EnsureStatusOk(restResponse);
+        }
+
+        public async Task<MultiFactorAuthOTPApiModel> SendMFAOTPAsync(string userName)
+        {
+            if (userName == null)
+            {
+                throw new ArgumentNullException(nameof(userName));
+            }
+            Uri resource = BaseUrl.PathCombine($"users/mfauth/sendotp");
+
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("POST", resource, Timeout)).Free();
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            MultiFactorAuthOTPApiModel authOTPApiModel = Serializer.Deserialize<MultiFactorAuthOTPApiModel>(restResponse.Content);
+            return authOTPApiModel;
         }
 
         private static IStringSerializer Serializer

@@ -17,7 +17,7 @@ namespace AxCrypt.App.Shared.Services
 {
     public class LogOnService : ISignIn
 	{
-        LogOnViewModel _logOnService;
+        LogOnViewModel _logOnViewModel;
         MainViewModel _mainViewModel;
         RegisterViewModel _registerViewModel;
         FileOperationViewModel _fileOperationViewModel;
@@ -27,7 +27,7 @@ namespace AxCrypt.App.Shared.Services
 
         public LogOnService(LogOnViewModel logOnViewModel, RegisterViewModel registerViewModel)
         {
-            _logOnService = logOnViewModel;
+            _logOnViewModel = logOnViewModel;
             _mainViewModel = logOnViewModel.MainViewModel;
             _registerViewModel = registerViewModel;
             _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
@@ -158,36 +158,36 @@ namespace AxCrypt.App.Shared.Services
 
         private async Task HandleExistingAccountLogOn(LogOnEventArgs e)
         {
-            if (!_logOnService.IsVisible)
+            if (!_logOnViewModel.IsVisible)
             {
                 LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
-                await _logOnService.ShowLogOnDialog(logOnModel, _mainViewModel);
+                await _logOnViewModel.ShowLogOnDialog(logOnModel, _mainViewModel);
             }
 
-            if (_logOnService.PageResult == DialogResult.None)
+            if (_logOnViewModel.PageResult == DialogResult.None)
             {
                 return;
             }
 
-            if (_logOnService.PageResult == DialogResult.Retry)
+            if (_logOnViewModel.PageResult == DialogResult.Retry)
             {
                 await ResetAllSettingsAndRestart();
             }
 
-            if (_logOnService.PageResult == DialogResult.Cancel)
+            if (_logOnViewModel.PageResult == DialogResult.Cancel)
             {
                 await new ApplicationManager().StopAndExit();
             }
 
-            if (_logOnService.PageResult != DialogResult.OK || _logOnService.LogOnAccountModel.PasswordText.Length == 0)
+            if (_logOnViewModel.PageResult != DialogResult.OK || _logOnViewModel.LogOnAccountModel.PasswordText.Length == 0)
             {
                 e.Cancel = true;
                 return;
             }
 
-            e.Passphrase = new Passphrase(_logOnService.LogOnAccountModel.PasswordText);
-            e.UserEmail = _logOnService.LogOnAccountModel.UserEmail;
-            _logOnService.PageResult = DialogResult.None;
+            e.Passphrase = new Passphrase(_logOnViewModel.LogOnAccountModel.PasswordText);
+            e.UserEmail = _logOnViewModel.LogOnAccountModel.UserEmail;
+            _logOnViewModel.PageResult = DialogResult.None;
 
             return;
         }
@@ -199,32 +199,33 @@ namespace AxCrypt.App.Shared.Services
                 return;
             }
 
-            if (!_logOnService.TwoFactorAuthViewModel!.IsVisible)
+            if (!_logOnViewModel.MultiFactorAuthViewModel!.IsVisible)
             {
-                await _logOnService.TwoFactorAuthViewModel.ShowLogOnDialog();
+                await _logOnViewModel.MultiFactorAuthViewModel.ShowLogOnDialog(EmailAddress.Parse(e.UserEmail), e.Passphrase);
             }
 
-            if (_logOnService.TwoFactorAuthViewModel.PageResult == DialogResult.None)
+            if (_logOnViewModel.MultiFactorAuthViewModel.PageResult == DialogResult.None)
             {
                 return;
             }
 
-            if (_logOnService.TwoFactorAuthViewModel.PageResult == DialogResult.Cancel)
+            if (_logOnViewModel.MultiFactorAuthViewModel.PageResult == DialogResult.Cancel)
             {
                 e.Cancel = true;
-                _logOnService.TwoFactorAuthViewModel.PageResult = DialogResult.None;
+                _logOnViewModel.MultiFactorAuthViewModel.PageResult = DialogResult.None;
 
                 return;
             }
 
-            if (_logOnService.TwoFactorAuthViewModel.PageResult != DialogResult.OK || _logOnService.TwoFactorAuthViewModel!.OneTimePassword!.Length == 0)
+            if (_logOnViewModel.MultiFactorAuthViewModel.PageResult != DialogResult.OK || _logOnViewModel.MultiFactorAuthViewModel!.OneTimePassword!.Length == 0)
             {
                 e.Cancel = true;
                 return;
             }
 
-            e.OneTimePassword = _logOnService.TwoFactorAuthViewModel.OneTimePassword;
-            _logOnService.TwoFactorAuthViewModel.PageResult = DialogResult.None;
+            e.OneTimePassword = _logOnViewModel.MultiFactorAuthViewModel.OneTimePassword;
+            e.MFAType = _logOnViewModel.MultiFactorAuthViewModel.MultiFactorAuthType;
+            _logOnViewModel.MultiFactorAuthViewModel.PageResult = DialogResult.None;
 
             return;
         }

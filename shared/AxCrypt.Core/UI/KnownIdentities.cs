@@ -25,6 +25,7 @@
 
 #endregion Coypright and License
 
+using AxCrypt.Api.Model;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
@@ -67,7 +68,7 @@ namespace AxCrypt.Core.UI
             }
         }
 
-        public bool IsLoggedOnWithTFA
+        public bool IsLoggedOnWithMFA
         {
             get
             {
@@ -76,7 +77,7 @@ namespace AxCrypt.Core.UI
                     return IsLoggedOn;
                 }
 
-                return DefaultEncryptionIdentity.ActiveTFAUniqueKey != null;
+                return DefaultEncryptionIdentity.ActiveMFAUniqueKey != null;
             }
         }
 
@@ -235,6 +236,8 @@ namespace AxCrypt.Core.UI
         }
 
         public bool IsMFAEnabled { get; set; }
+
+        public MultiFactorAuthType MultiFactorAuthType { get; set; }
 
         public string MFAUniqueKey { get; set; }
     }

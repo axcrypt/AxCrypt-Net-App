@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Groups;
+using AxCrypt.Api.Model.MFA;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
@@ -160,6 +161,11 @@ namespace AxCrypt.Core.Service
         public async Task PrioritySupportAsync(string subject, string message)
         {
             await New<ICache>().UpdateItemAsync(async () => await _service.PrioritySupportAsync(subject, message), _key).Free();
+        }
+
+        public async Task<MultiFactorAuthOTPApiModel> SendMFAOtpAsync(string userEmail)
+        {
+            return await New<ICache>().UpdateItemAsync(async () => await _service.SendMFAOtpAsync(userEmail), _key).Free();
         }
     }
 }

@@ -1,0 +1,234 @@
+﻿@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+@using AxCrypt.App.Shared.Utility
+@using AxCrypt.Api.Model
+
+@inject IJSRuntime JSRuntime
+@inject LogOnViewModel LogOnViewModel
+@inject NavigationManager NavigationManager
+
+@{
+    EnabledTypes = @LogOnViewModel.MultiFactorAuthViewModel.MultiFactorAuthType;
+    SelectMethod(MultiFactorAuthType.None);
+}
+
+<section class="content">
+    <article class="left-section" id="content-wrap" style="margin-top:10%;">
+        <span class="tfa-sub-head">Multi-factor verification</span>
+        <p style="margin-top: 16px;">Your account is protected with <a href="" @onclick="RedirectToMFAGuidePage" class="recry-code-btn"><span>MFA. </span></a>Please select your authentication method.</p>
+        <div>
+            @if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.Authenticator && IsAuthenticatorEnabled)
+            {
+                <label class="otp-option">
+                    <input type="radio" checked @onclick="() => SelectMethod(MultiFactorAuthType.Authenticator)" />
+                    <p class="two-fa-text">Authenticator App</p>
+                </label>
+            }
+            else if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.Email && IsEmailEnabled)
+            {
+                <label class="otp-option">
+                    <input type="radio" checked @onclick="() => SelectMethod(MultiFactorAuthType.Email)" />
+                    <p class="two-fa-text">Email</p>
+                </label>
+            }
+            else if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.SMS && IsSmsEnabled)
+            {
+                <label class="otp-option">
+                    <input type="radio" checked @onclick="() => SelectMethod(MultiFactorAuthType.SMS)" />
+                    <p class="two-fa-text">SMS</p>
+                </label>
+            }            
+
+            @if (MoreThanOneEnabled && !ShowOtherOptions)
+            {
+                <a href="#" @onclick="ShowOtherOptionsMenu" class="show-other-optn">
+                    <span>Try other MFA options</span>
+                    <img class="expd-colps-submnu-arw down" src="" alt="expnd-colps-arrow-img"  />
+                </a>
+            }
+
+            @if (ShowOtherOptions)
+            {
+                <div id="other-options">
+                    @if (IsAuthenticatorEnabled && LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType != MultiFactorAuthType.Authenticator)
+                    {
+                        <label class="otp-option">
+                            <input type="radio" @onclick="() => SelectMethod(MultiFactorAuthType.Authenticator)" />
+                            <p class="two-fa-text">Authenticator App</p>
+                        </label>
+                    }
+                    @if (IsEmailEnabled && LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType != MultiFactorAuthType.Email)
+                    {
+                        <label class="otp-option">
+                            <input type="radio" @onclick="() => SelectMethod(MultiFactorAuthType.Email)" />
+                            <p class="two-fa-text">Email</p>
+                        </label>
+                    }
+                    @if (IsSmsEnabled && LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType != MultiFactorAuthType.SMS)
+                    {
+                        <label class="otp-option">
+                            <input type="radio" @onclick="() => SelectMethod(MultiFactorAuthType.SMS)" />
+                            <p class="two-fa-text">SMS</p>
+                        </label>
+                    }
+                </div>
+            } 
+            
+            @if (ShowGenerateButton)
+            {
+                <button type="button" @onclick="GenerateOTP" class="generate-btn success left">
+                    Generate
+                </button>
+            }
+        </div>
+
+        <EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit" class="signup-sec">
+            <DataAnnotationsValidator />
+            <div class="verify-code-txt">
+                <input type="tel" inputmode="numeric" pattern="[0-9]*" id="verify-code-txtbox" class="form-control @(IsOtpInvalid ? "input-invalid" : "")"
+                placeholder="Verification code" maxlength="6" @ref="OtpInputRef" @bind="LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword"
+                @oninput="ValidateCode" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+                <ValidationMessage style="font-size: 13px;color: #f00;display: block;position: relative;font-weight: 700;" For="@(() => LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword)" />
+            </div>
+
+            @if (!string.IsNullOrEmpty(LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage))
+            {
+                <div class="alert alert-danger">@LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage</div>
+            }
+
+            <button type="submit" class="button success grn-bg whte-clr" style="width:100%; margin:20px 0 0;" disabled="@(!IsCodeValid())">Login</button>
+            <button type="button" @onclick="OnCancelClick" class="button cancel whte-clr" style="width:100%; margin:20px 0 30px;">@Texts.ButtonCancelText</button>
+
+            <div class="text-center" style="margin-top:2rem;">
+                <p><strong>Don't have your phone?</strong></p>
+                <p>Use a <a href="" @onclick="RedirectToMyRecoverTwoFactorPage" class="recry-code-btn"> recovery code </a> to access your account.</p>
+                @* <p>Or <a href="https://account.axcrypt.net/en/Home/RecoverTwoFactor" class="recry-code-btn">enter an email to get OTP </a> to access your account.</p> *@
+            </div>
+        </EditForm>
+
+    </article>
+    <article class="right-section">
+        <div class="signin-right-img"></div>
+    </article>
+</section>
+
+<script type="text/javascript">
+    window.verifyFunctions = {
+        focusElement: function (id) {
+            const element = document.getElementById(id);
+            element.focus();
+        }
+    }
+</script>
+
+@code {
+    private bool IsWideScreen { get; set; }
+    private ElementReference OtpInputRef;
+    private EditContext? editContext;
+
+    public MultiFactorAuthType EnabledTypes { get; set; }
+    private bool ShowOtherOptions { get; set; }
+    private bool IsAuthenticatorEnabled => EnabledTypes.HasFlag(MultiFactorAuthType.Authenticator);
+    private bool IsEmailEnabled => EnabledTypes.HasFlag(MultiFactorAuthType.Email);
+    private bool IsSmsEnabled => EnabledTypes.HasFlag(MultiFactorAuthType.SMS);
+    private bool MoreThanOneEnabled => (IsAuthenticatorEnabled ? 1 : 0) + (IsEmailEnabled ? 1 : 0) + (IsSmsEnabled ? 1 : 0) > 1;
+    private bool ShowGenerateButton => LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.Email || LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.SMS;
+
+    private void ShowOtherOptionsMenu()
+    {
+        ShowOtherOptions = !ShowOtherOptions;
+    }
+
+    private async void SelectMethod(MultiFactorAuthType method)
+    {
+        if (method == MultiFactorAuthType.None)
+        {
+            if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType != MultiFactorAuthType.None)
+                return;
+
+            if (EnabledTypes.HasFlag(MultiFactorAuthType.Authenticator))
+                LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType = MultiFactorAuthType.Authenticator;
+            else if (EnabledTypes.HasFlag(MultiFactorAuthType.Email))
+                LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType = MultiFactorAuthType.Email;
+            else if (EnabledTypes.HasFlag(MultiFactorAuthType.SMS))
+                LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType = MultiFactorAuthType.SMS;
+            else
+                LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType = MultiFactorAuthType.None;
+        }
+        else
+        {
+            LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType = method;
+            ShowOtherOptions = false;
+        }
+    }
+
+    private bool IsCodeValid() => LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword?.Length == 6 && LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword.All(char.IsDigit);
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        LogOnViewModel.MultiFactorAuthViewModel.OnUpdateViewState += UpdatePageState;
+        editContext = new EditContext(LogOnViewModel.MultiFactorAuthViewModel);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        await JSRuntime.InvokeVoidAsync("verifyFunctions.focusElement", "verify-code-txtbox");
+    }
+
+    public void RedirectToMyRecoverTwoFactorPage()
+    {
+        Core.BrowseUtility.RedirectToAccountWebUrl("{0}Home/RecoverTwoFactor");
+    }
+
+    public void RedirectToMFAGuidePage()
+    {
+        Core.BrowseUtility.RedirectTo("https://axcrypt.net/information/guides/multifacor-authentication/");
+    }
+
+    private bool IsOtpInvalid;
+
+    private async void ValidateCode(ChangeEventArgs e)
+    {
+        string value = e.Value?.ToString() ?? "";
+        if (value!.Length == 6 && value.All(char.IsDigit) && editContext is not null)
+        {
+            bool isValid = editContext.Validate();
+            if (!isValid)
+            {
+                return;
+            }
+
+            LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword = value;
+            await HandleValidSubmit();
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage = "";
+        await LogOnViewModel.MultiFactorAuthViewModel.VerifyMFAOtpAsync(LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword!, LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType);
+    }
+
+    private async Task GenerateOTP()
+    {
+        LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage = "";
+        await LogOnViewModel.MultiFactorAuthViewModel.SendOTPAsync();
+    }
+
+    private void OnCancelClick()
+    {
+        LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword = "";
+        LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage = "";
+        LogOnViewModel.MultiFactorAuthViewModel.PageResult = DialogResult.Cancel;
+    }
+
+    private void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+}

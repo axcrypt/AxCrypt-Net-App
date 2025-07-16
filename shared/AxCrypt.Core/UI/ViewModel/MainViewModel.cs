@@ -327,7 +327,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
                 case SessionNotificationType.SignIn:
                 case SessionNotificationType.SignOut:
-                    LoggedOn = Resolve.KnownIdentities.IsLoggedOn && Resolve.KnownIdentities.IsLoggedOnWithTFA;
+                    LoggedOn = Resolve.KnownIdentities.IsLoggedOn && Resolve.KnownIdentities.IsLoggedOnWithMFA;
                     break;
 
                 case SessionNotificationType.WatchedFolderChange:

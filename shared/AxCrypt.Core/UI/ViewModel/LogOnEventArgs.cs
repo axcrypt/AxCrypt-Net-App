@@ -25,6 +25,7 @@
 
 #endregion Coypright and License
 
+using AxCrypt.Api.Model;
 using AxCrypt.Core.Crypto;
 using System;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace AxCrypt.Core.UI.ViewModel
             Identity = LogOnIdentity.Empty;
             UserEmail = String.Empty;
             OneTimePassword = String.Empty;
+            MFAType = MultiFactorAuthType.None;
         }
 
         public bool Cancel { get; set; }
@@ -61,6 +63,8 @@ namespace AxCrypt.Core.UI.ViewModel
         public string UserEmail { get; set; }
 
         public string OneTimePassword { get; set; }
+
+        public MultiFactorAuthType MFAType { get; set; }
 
         public string EncryptedFileFullName { get; set; }
 

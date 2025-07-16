@@ -9,7 +9,7 @@ namespace AxCrypt.Core.Authenticator
         SHA1, SHA256, SHA512
     }
 
-    public class TwoFactorAuth
+    public class MFAAuthApp
     {
         //private static readonly DateTime _epoch = New<INow>().Utc;
         private static readonly DateTime _epoch =
@@ -21,17 +21,17 @@ namespace AxCrypt.Core.Authenticator
 
         private readonly int timeStep;
 
-        public TwoFactorAuth() : this(HashType.SHA1)
+        public MFAAuthApp() : this(HashType.SHA1)
         { }
 
-        public TwoFactorAuth(HashType hashType) : this(hashType, 30)
+        public MFAAuthApp(HashType hashType) : this(hashType, 30)
         {
         }
 
-        public TwoFactorAuth(int timeStep) : this(HashType.SHA1, timeStep)
+        public MFAAuthApp(int timeStep) : this(HashType.SHA1, timeStep)
         { }
 
-        public TwoFactorAuth(HashType hashType, int timeStep)
+        public MFAAuthApp(HashType hashType, int timeStep)
         {
             HashType = hashType;
             DefaultClockDriftTolerance = TimeSpan.FromMinutes(5);

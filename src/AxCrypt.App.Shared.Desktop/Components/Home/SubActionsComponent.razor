@@ -45,29 +45,30 @@
             @if (subActionModel.EnableSecureWipeFiles)
             {
                 <div class="mre-actn-box" @onclick="(e)=> subActionModel.SecureWipeFiles(e)" title="@Texts.FeaturesFileWipeDescription">
-                    <img class="ico-dlt" src="" alt="hand-img" />
+                    <img class="ico-dlt" src="" alt="secured-delete-img" />
                     <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
                 </div>
             }
             else
             {
-                <div class="mre-actn-box atn-bgclr" @onclick="(e)=>subActionModel.InviteUser(e)" title="@Texts.InviteUserToolStripMenuItemText">
-                    <img class="ico-invtfrd" src="" alt="hand-img" />
-                    <span class="text-size text-style">Invite friend</span>
+                <div class="mre-actn-box atn-bgclr" style="background-color: #D9D9D9 !important;" @onclick="() => subActionModel.UpgradeDialog()" title="@Texts.PremiumFeatureToolTipText">
+                    <img class="ico-dlt" src="" alt="secured-delete-img" style="filter: brightness(2);" />
+                    <span class="text-size text-style" style="color: white !important;">@Texts.SecureDeleteToolStripMenuItemText</span>
+                    <img class="nav-subs-upg" src="" alt="paid_required_img" style="padding-right:0px !important;" />
                 </div>
             }
 
             @if (subActionModel.EnableEncryptionUpgrade)
             {
                 <div class="mre-actn-box" @onclick="(e)=> subActionModel.EncryptionUpgrade(e)" title="@Texts.UpgradeLegacyFilesMenuToolTip">
-                    <img class="ico-apikey" src="" alt="hand-img" />
+                    <img class="ico-apikey" src="" alt="upgrade-enc-img" />
                     <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
                 </div>
             }
             else
             {
                 <div class="mre-actn-box atn-bgclr" style="background-color: #D9D9D9 !important;" @onclick="()=> subActionModel.UpgradeDialog()" title="@Texts.PremiumFeatureToolTipText">
-                    <img class="ico-apikey" src="" alt="hand-img" style="filter: grayscale(100%);" />
+                    <img class="ico-apikey" src="" alt="upgrade-enc-img" style="filter: brightness(2);" />
                     <span class="text-size text-style" style="color: white !important;">@Texts.UpgradeLegacyFilesMenuItemText</span>
                     <img class="nav-subs-upg" src="" alt="paid_required_img" style="padding-right:0px !important;" />
                 </div>

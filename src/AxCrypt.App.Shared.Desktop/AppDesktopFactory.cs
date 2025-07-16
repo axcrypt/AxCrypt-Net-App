@@ -39,6 +39,6 @@ public static class AppDesktopFactory
         services.AddSingleton<CopyToClipboardUtility>();
 
         TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
-        TypeMap.Register.Singleton<ITwoFactorAuthenticateService>(() => new TwoFactorAuthService());
+        TypeMap.Register.Singleton<IMultiFactorAuthService>(() => new MultiFactorAuthService());
     }
 }

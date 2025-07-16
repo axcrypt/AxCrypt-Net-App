@@ -28,6 +28,7 @@
 using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Groups;
+using AxCrypt.Api.Model.MFA;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
@@ -388,6 +389,11 @@ namespace AxCrypt.Core.Service
         public Task PrioritySupportAsync(string subject, string message)
         {
             throw new InvalidOperationException("Contacting support can't be performed locally.");
+        }
+
+        public Task<MultiFactorAuthOTPApiModel> SendMFAOtpAsync(string userEmail)
+        {
+            return null;
         }
     }
 }

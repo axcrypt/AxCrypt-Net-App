@@ -2,6 +2,7 @@
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Groups;
+using AxCrypt.Api.Model.MFA;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
@@ -461,6 +462,24 @@ namespace AxCrypt.Core.Service
             }
 
             await _localService.PrioritySupportAsync(subject, message).Free();
+        }
+
+        public async Task<MultiFactorAuthOTPApiModel> SendMFAOtpAsync(string userEmail)
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                try
+                {
+                    return await _remoteService.SendMFAOtpAsync(userEmail).Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                    return null;
+                }
+            }
+
+            return await _localService.SendMFAOtpAsync(userEmail).Free();
         }
     }
 }
