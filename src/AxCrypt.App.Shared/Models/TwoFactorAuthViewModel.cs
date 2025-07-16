@@ -15,7 +15,7 @@ namespace AxCrypt.App.Shared
             _logOnViewModel = logOnViewModel;   
         }
 
-        public void ShowLogOnDialog()
+        public async Task ShowLogOnDialog()
         {
             OneTimePassword = "";
             IsVisible = true;
@@ -23,7 +23,7 @@ namespace AxCrypt.App.Shared
 
             while (PageResult == DialogResult.None)
             {
-                Task.Delay(1000);
+                await Task.Delay(1000);
             }
 
             IsVisible = false;

@@ -192,6 +192,43 @@ namespace AxCrypt.App.Shared.Services
             return;
         }
 
+        public async Task HandleExistingAccountLogOnWithTOTP(LogOnEventArgs e)
+        {
+            if (e.UserEmail == null || e.Passphrase == null)
+            {
+                return;
+            }
+
+            if (!_logOnService.TwoFactorAuthViewModel!.IsVisible)
+            {
+                await _logOnService.TwoFactorAuthViewModel.ShowLogOnDialog();
+            }
+
+            if (_logOnService.TwoFactorAuthViewModel.PageResult == DialogResult.None)
+            {
+                return;
+            }
+
+            if (_logOnService.TwoFactorAuthViewModel.PageResult == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+                _logOnService.TwoFactorAuthViewModel.PageResult = DialogResult.None;
+
+                return;
+            }
+
+            if (_logOnService.TwoFactorAuthViewModel.PageResult != DialogResult.OK || _logOnService.TwoFactorAuthViewModel!.OneTimePassword!.Length == 0)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            e.OneTimePassword = _logOnService.TwoFactorAuthViewModel.OneTimePassword;
+            _logOnService.TwoFactorAuthViewModel.PageResult = DialogResult.None;
+
+            return;
+        }
+
         private async Task ResetAllSettingsAndRestart()
         {
             if (_mainViewModel.DecryptedFiles.Any())

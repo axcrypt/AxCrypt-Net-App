@@ -13,28 +13,27 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Shared.Helpers;
 
 namespace AxCrypt.App.Shared.Desktop;
 
 public class AppMain
 {
-    //private ICustomNavigationService _navigationManager;
-    private LogOnViewModel _logOnService;
+    private LogOnViewModel _logOnViewModel;
     private RegisterViewModel _registerViewModel;
 
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
     private KnownFoldersViewModel _knownFoldersViewModel;
 
-    //private ApiVersion? _apiVersion;
+    public LogOnService _logOnService;
+
     public AppMain()
     {
     }
 
     public void Initialize(LogOnViewModel logOnService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel)
     {
-        _logOnService = logOnService;
+        _logOnViewModel = logOnService;
         _mainViewModel = mainViewModel;
         _fileOperationViewModel = fileOperationViewModel;
         _knownFoldersViewModel = knownFoldersViewModel;
@@ -42,6 +41,8 @@ public class AppMain
         SetThisVersion();
         BindToViewModels();
         BindToFileOperationViewModel();
+
+        _logOnService = new LogOnService(logOnService, _registerViewModel);
     }
 
     private void BindToViewModels()
@@ -50,14 +51,14 @@ public class AppMain
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await new Display().LocalSignInWarningPopUpAsync(loggedOn); });
 
-        SharedFactory.LoadUpdateCheck(_mainViewModel, _logOnService);
+        SharedFactory.LoadUpdateCheck(_mainViewModel, _logOnViewModel);
     }
 
     private void BindToFileOperationViewModel()
     {
         _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
         _fileOperationViewModel.IdentityViewModel.LoggingOnAsync += async (e) => await New<IUIThread>().SendToAsync(async () => await HandleLogOn(e));
-        _fileOperationViewModel.IdentityViewModel.LoggingOnWithTOTPAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await HandleExistingAccountLogOnWithTOTP(e));
+        _fileOperationViewModel.IdentityViewModel.LoggingOnWithTOTPAsync = async (e) => await New<IUIThread>().SendToAsync(async () => await _logOnService.HandleExistingAccountLogOnWithTOTP(e));
         _fileOperationViewModel.SelectingFilesAsync += async (sender, e) => await New<IUIThread>().SendToAsync(() => New<IDataItemSelection>().HandleSelection(e));
         _fileOperationViewModel.ToggleEncryptionUpgradeMode += async (sender, e) => await ToggleEncryptionUpgradeMode();
     }
@@ -196,73 +197,36 @@ public class AppMain
 
     private async Task HandleExistingAccountLogOn(LogOnEventArgs e)
     {
-        if (!_logOnService.IsVisible)
+        if (!_logOnViewModel.IsVisible)
         {
             LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
-            await _logOnService.ShowLogOnDialog(logOnModel, _mainViewModel);
+            await _logOnViewModel.ShowLogOnDialog(logOnModel, _mainViewModel);
         }
 
-        if (_logOnService.PageResult == DialogResult.None)
+        if (_logOnViewModel.PageResult == DialogResult.None)
         {
             return;
         }
 
-        if (_logOnService.PageResult == DialogResult.Retry)
+        if (_logOnViewModel.PageResult == DialogResult.Retry)
         {
             await ResetAllSettingsAndRestart();
         }
 
-        if (_logOnService.PageResult == DialogResult.Cancel)
+        if (_logOnViewModel.PageResult == DialogResult.Cancel)
         {
             await new ApplicationManager().StopAndExit();
         }
 
-        if (_logOnService.PageResult != DialogResult.OK || _logOnService.LogOnAccountModel.PasswordText.Length == 0)
+        if (_logOnViewModel.PageResult != DialogResult.OK || _logOnViewModel.LogOnAccountModel.PasswordText.Length == 0)
         {
             e.Cancel = true;
             return;
         }
 
-        e.Passphrase = new Passphrase(_logOnService.LogOnAccountModel.PasswordText);
-        e.UserEmail = _logOnService.LogOnAccountModel.UserEmail;
-        _logOnService.PageResult = DialogResult.None;
-
-        return;
-    }
-
-    private async Task HandleExistingAccountLogOnWithTOTP(LogOnEventArgs e)
-    {
-        if (e.UserEmail == null || e.Passphrase == null)
-        {
-            return;
-        }
-
-        if (!_logOnService.TwoFactorAuthViewModel!.IsVisible)
-        {
-            _logOnService.TwoFactorAuthViewModel.ShowLogOnDialog();
-        }
-
-        if (_logOnService.TwoFactorAuthViewModel.PageResult == DialogResult.None)
-        {
-            return;
-        }
-
-        if (_logOnService.TwoFactorAuthViewModel.PageResult == DialogResult.Cancel)
-        {
-            e.Cancel = true;
-            _logOnService.TwoFactorAuthViewModel.PageResult = DialogResult.None;
-
-            return;
-        }
-
-        if (_logOnService.TwoFactorAuthViewModel.PageResult != DialogResult.OK || _logOnService.TwoFactorAuthViewModel!.OneTimePassword!.Length == 0)
-        {
-            e.Cancel = true;
-            return;
-        }
-
-        e.OneTimePassword = _logOnService.TwoFactorAuthViewModel.OneTimePassword;
-        _logOnService.TwoFactorAuthViewModel.PageResult = DialogResult.None;
+        e.Passphrase = new Passphrase(_logOnViewModel.LogOnAccountModel.PasswordText);
+        e.UserEmail = _logOnViewModel.LogOnAccountModel.UserEmail;
+        _logOnViewModel.PageResult = DialogResult.None;
 
         return;
     }
