@@ -5,7 +5,7 @@ using AxCrypt.App.Shared.Facades;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Notification;
 using AxCrypt.Core.Service.Secrets;
-using AxCrypt.Cryptor.Model;
+using AxCrypt.App.Shared.Models.Secret;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Helpers;

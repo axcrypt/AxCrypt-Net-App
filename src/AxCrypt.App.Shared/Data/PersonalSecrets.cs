@@ -8,7 +8,6 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Secrets;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using AxCrypt.Cryptor.Model;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Data;

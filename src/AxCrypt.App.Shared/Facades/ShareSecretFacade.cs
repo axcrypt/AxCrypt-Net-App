@@ -9,7 +9,7 @@ using AxCrypt.Core.Secrets;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor;
-using AxCrypt.Cryptor.Model;
+using AxCrypt.App.Shared.Models.Secret;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Facades;

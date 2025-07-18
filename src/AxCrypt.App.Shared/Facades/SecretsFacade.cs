@@ -10,9 +10,9 @@ using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Secrets;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor;
-using AxCrypt.Cryptor.Model;
-using System.Diagnostics.CodeAnalysis;
+using AxCrypt.App.Shared.Models.Secret;
 using static AxCrypt.Abstractions.TypeResolve;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AxCrypt.App.Shared.Facades;
 public class SecretsFacade

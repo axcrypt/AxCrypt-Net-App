@@ -1,5 +1,5 @@
 ﻿using AxCrypt.App.Shared.Facades;
-using AxCrypt.Cryptor.Model;
+using AxCrypt.App.Shared.Models.Secret;
 
 using static AxCrypt.Abstractions.TypeResolve;
 

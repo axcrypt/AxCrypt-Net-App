@@ -1,4 +1,4 @@
-﻿using AxCrypt.Cryptor.Model;
+﻿using AxCrypt.App.Shared.Models.Secret;
 using System.Collections.ObjectModel;
 
 namespace AxCrypt.App.Shared.Password;

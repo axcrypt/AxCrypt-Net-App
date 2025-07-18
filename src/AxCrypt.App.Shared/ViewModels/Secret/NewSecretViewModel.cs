@@ -6,7 +6,6 @@ using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
-using AxCrypt.Cryptor.Model;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.ViewModels.Secret;

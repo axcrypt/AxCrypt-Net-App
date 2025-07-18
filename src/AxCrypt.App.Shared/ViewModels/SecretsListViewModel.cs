@@ -12,7 +12,6 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.UI;
-using AxCrypt.Cryptor.Model;
 using Microsoft.AspNetCore.Components;
 using System.Collections.ObjectModel;
 using System.Text;

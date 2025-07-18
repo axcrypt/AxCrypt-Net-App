@@ -2,7 +2,6 @@
 using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Data;
 using AxCrypt.App.Shared.Helpers;
-using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Content;
@@ -11,8 +10,6 @@ using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Secrets;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
-using AxCrypt.Core.UI.ViewModel;
-using AxCrypt.Cryptor.Model;
 using Microsoft.AspNetCore.Components;
 using System.Collections.ObjectModel;
 using static AxCrypt.Abstractions.TypeResolve;

@@ -15,7 +15,7 @@ public class SecretViewModel : ViewModelBase
 {
     private LogOnIdentity? _identity = New<KnownIdentities>().DefaultEncryptionIdentity;
 
-    public SecretViewModel(Cryptor.Model.SecretClientModel secret)
+    public SecretViewModel(SecretClientModel secret)
     {
         SecretGuid = secret.Id;
         DBId = secret.DBId;

@@ -13,7 +13,7 @@ using AxCrypt.Common;
 using AxCrypt.Core.Notification;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using AxCrypt.Cryptor.Model;
+using AxCrypt.App.Shared.Models.Secret;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AxCrypt.App.Shared
