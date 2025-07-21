@@ -1,0 +1,82 @@
+﻿@using AxCrypt.App.Shared.Helpers
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.Utility
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+@using AxCrypt.Core.UI
+
+@inject LogOnViewModel LogOnViewModel
+
+@if (IsVisible)
+{
+    <div id="modal-dialog5" class="modalDialog">
+        <div id="UpgradePopup" class="upg-popup text-center">
+            <div class="close-img" @onclick="Button_CancelClicked"></div>
+            <div>
+                <img style="margin: 0px 0px 0px 40px !important;" src="images/ImgUpgrd.svg" alt="upgrade-icon" /><br />
+                <p style="padding-top:15px;">
+                    <strong>@LogOnViewModel.UpgradeVersionViewModel!.Title</strong>
+                </p>
+                @if (LogOnViewModel.UpgradeVersionViewModel.AvailablePopupButtons!.Length > 1)
+                {
+                    <p>
+                        Do you want to download it now or on the next launch?
+                    </p>
+                    <div class="modal-footer" style="padding-top:15px;">
+                        <input type="button" class="btn-large font-medium grn-bg whte-clr" @onclick="Button_OkClicked" value="Yes, download now!" style="text-align: center;padding: 10px 0px;" />
+                        <input type="button" class="btn-large font-medium whte-bg grn-clr" @onclick="Button_CancelClicked" style="text-align: center;padding: 10px 0px;border-block-color: green;border: solid;" value="No, later" />
+                    </div>
+                }
+                else
+                {
+                    <div class="modal-footer" style="padding-top:15px;">
+                        <button class="button font-medium success btn-small" @onclick="Button_OkClicked">
+                            @Texts.ButtonOkText
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+@code {
+    private bool IsVisible;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        LogOnViewModel!.UpgradeVersionDialog.OnDialogVisibilityChanged += UpdateUpgradeDialogState;
+    }
+
+    public void Button_OkClicked()
+    {
+        LogOnViewModel!.UpgradeVersionDialog.Close();
+
+        LogOnViewModel!.UpgradeVersionViewModel!.SelectedButton = PopupButtons.Ok;
+        LogOnViewModel!.UpgradeVersionViewModel.PopupResult = DialogResult.OK;
+    }
+
+    public void Button_CancelClicked()
+    {
+        LogOnViewModel!.UpgradeVersionDialog.Close();
+
+        LogOnViewModel!.UpgradeVersionViewModel!.SelectedButton = PopupButtons.Cancel;
+        LogOnViewModel!.UpgradeVersionViewModel.PopupResult = DialogResult.Cancel;
+    }
+    private void UpdateUpgradeDialogState(bool canShowUpgradeDialog)
+    {
+        InvokeAsync(() =>
+        {
+            IsVisible = canShowUpgradeDialog;
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+}

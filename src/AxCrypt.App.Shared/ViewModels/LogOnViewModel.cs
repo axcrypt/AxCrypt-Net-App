@@ -27,6 +27,7 @@ public class LogOnViewModel : ViewModelBase
         FeedbackDialog = new CommonDialogService();
         GlobalPopupDialog = new CommonDialogService();
         AdvancedOptionsDialog = new CommonDialogService();
+        UpgradeVersionDialog = new CommonDialogService();
     }
 
     public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
@@ -103,6 +104,9 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService AdvancedOptionsDialog
     { get { return GetProperty<CommonDialogService>(nameof(AdvancedOptionsDialog)); } set { SetProperty(nameof(AdvancedOptionsDialog), value); } }
 
+    public CommonDialogService UpgradeVersionDialog
+    { get { return GetProperty<CommonDialogService>(nameof(UpgradeVersionDialog)); } set { SetProperty(nameof(UpgradeVersionDialog), value); } }
+
     public ProcessIndicator ProcessIndicator { get; set; }
 
     public void InitiateProgressIndicator()
@@ -141,6 +145,8 @@ public class LogOnViewModel : ViewModelBase
 
     public DialogResult PopupResult
     { get { return GetProperty<DialogResult>(nameof(PopupResult)); } set { SetProperty(nameof(PopupResult), value); } }
+
+    public UpgradeVersionViewModel? UpgradeVersionViewModel { get; set; }
 
     public string ErrorMessage { get; set; }
 

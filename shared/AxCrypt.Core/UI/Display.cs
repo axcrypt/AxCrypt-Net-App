@@ -47,7 +47,7 @@ namespace AxCrypt.Core.UI
                 return false;
             }
 
-            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, msg);
+            await New<IUpgradeVersionService>().ShowDialogAsync(PopupButtons.Ok, Texts.WarningTitle, msg);
             BrowseUtility.RedirectTo(Resolve.UserSettings.UpdateUrl.ToString());
             return true;
         }
@@ -79,7 +79,7 @@ namespace AxCrypt.Core.UI
             }
             New<UserSettings>().MostRecentVersionInformed = version.ToString();
 
-            PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, Texts.NewVersionIsAvailableText.InvariantFormat(version));
+            PopupButtons result = await New<IUpgradeVersionService>().ShowDialogAsync(PopupButtons.OkCancel, Texts.InformationTitle, Texts.NewVersionIsAvailableText.InvariantFormat(version));
             if (result == PopupButtons.Ok)
             {
                 BrowseUtility.RedirectTo(Resolve.UserSettings.UpdateUrl.ToString());
@@ -99,7 +99,7 @@ namespace AxCrypt.Core.UI
                 return false;
             }
 
-            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.InformationTitle, Texts.LatestVersionAlreadyPresentText);
+            await New<IUpgradeVersionService>().ShowDialogAsync(PopupButtons.Ok, Texts.InformationTitle, Texts.LatestVersionAlreadyPresentText);
             return false;
         }
 
