@@ -29,7 +29,7 @@ namespace AxCrypt.Content {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public Resource() {
+        internal Resource() {
         }
         
         /// <summary>
@@ -1840,6 +1840,15 @@ namespace AxCrypt.Content {
         public static string AuthenticationError {
             get {
                 return ResourceManager.GetString("AuthenticationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authenticator App.
+        /// </summary>
+        public static string AuthenticatorAppText {
+            get {
+                return ResourceManager.GetString("AuthenticatorAppText", resourceCulture);
             }
         }
         
@@ -10884,9 +10893,9 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_DEVFE_H2_SH1_Text1", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Full disk encryption (FDE) is, as the name implies, encryption at the disk level. When data is written to or read from a disc, it is automatically encrypted. It encrypts all files on the hard drive, including the operating system and file system. It&apos;s only used to keep files safe while they&apos;re in storage or not in transit. Full disk encryption works in a similar way to locking a house&apos;s outer doors but not its Public rooms. Of course, it&apos;s a good idea to secure the front entrance so that attackers can&apos;t e [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Full disk encryption (FDE) is, as the name implies, encryption at the disk level. When data is written to or read from a disc, it is automatically encrypted. It encrypts all files on the hard drive, including the operating system and file system. It&apos;s only used to keep files safe while they&apos;re in storage or not in transit. Full disk encryption works in a similar way to locking a house&apos;s outer doors but not its internal rooms. Of course, it&apos;s a good idea to secure the front entrance so that attackers can&apos;t e [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Blog_DEVFE_H2_SH2_Text1 {
             get {
@@ -11545,7 +11554,7 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to It is possible to do what mobile device manufacturers do, to use internal trusted hardware as the guardian of the secret keys which will only release the secrets if authenticated by for example a fingerprint. This is how Apple Touch ID works. But, remember the caveats of biometric authentication mentioned above. The internal trusted hardware can always be fooled by a sufficiently well made device or artifact, and frequently the required fingerprint is even found all over the device itself!.
         /// </summary>
-        internal static string Blog_EAB_H1_Text3 {
+        public static string Blog_EAB_H1_Text3 {
             get {
                 return ResourceManager.GetString("Blog_EAB_H1_Text3", resourceCulture);
             }
@@ -11554,7 +11563,7 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Happy AxCrypting!.
         /// </summary>
-        internal static string Blog_EAB_H1_Text4 {
+        public static string Blog_EAB_H1_Text4 {
             get {
                 return ResourceManager.GetString("Blog_EAB_H1_Text4", resourceCulture);
             }
@@ -23639,7 +23648,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to And it’s not just critical infrastructure at risk. In May 2025, &lt;b&gt;Coinbase Global, the leading American cryptocurrency exchange&lt;/b&gt;, &lt;a href=&apos;https://mashable.com/article/coinbase-data-breach-70k-members-ransom&apos;&gt;&lt;b&gt;experienced a massive insider-assisted data breach&lt;/b&gt;&lt;/a&gt; involving over 69,000 customers. A few overseas support agents were bribed to share sensitive public data, which included personal identifiers, ID images, and account balances. While passwords and private keys remained safe, the leaked [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to And it’s not just critical infrastructure at risk. In May 2025, &lt;b&gt;Coinbase Global, the leading American cryptocurrency exchange&lt;/b&gt;, &lt;a href=&apos;https://mashable.com/article/coinbase-data-breach-70k-members-ransom&apos;&gt;&lt;b&gt;experienced a massive insider-assisted data breach&lt;/b&gt;&lt;/a&gt; involving over 69,000 customers. A few overseas support agents were bribed to share sensitive public data, which included personal identifiers, ID images, and account balances. While passwords and private keys remained safe, the leaked d [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Blog_MEPGFCCIC_H1_Text2 {
             get {
@@ -53936,6 +53945,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select your authentication method..
+        /// </summary>
+        public static string MFAText2 {
+            get {
+                return ResourceManager.GetString("MFAText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How to Enable MFA in AxCrypt?.
         /// </summary>
         public static string MFAuthenticationCaroselHead1 {
@@ -55720,6 +55738,15 @@ namespace AxCrypt.Content {
         public static string OtherDetailsText {
             get {
                 return ResourceManager.GetString("OtherDetailsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try other MFA options.
+        /// </summary>
+        public static string OtherMFAOptionsText {
+            get {
+                return ResourceManager.GetString("OtherMFAOptionsText", resourceCulture);
             }
         }
         
@@ -64500,6 +64527,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SMS.
+        /// </summary>
+        public static string SMSText {
+            get {
+                return ResourceManager.GetString("SMSText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Follow us on social media.
         /// </summary>
         public static string SocialMediaFollowText {
@@ -65531,9 +65567,9 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Surname: .
         /// </summary>
-        public static string SurnameLabel {
+        public static string SurnameLabel_ {
             get {
-                return ResourceManager.GetString("SurnameLabel", resourceCulture);
+                return ResourceManager.GetString("SurnameLabel ", resourceCulture);
             }
         }
         
