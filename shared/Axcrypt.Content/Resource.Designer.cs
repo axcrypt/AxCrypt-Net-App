@@ -1480,6 +1480,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All done!.
+        /// </summary>
+        public static string AllDoneText {
+            get {
+                return ResourceManager.GetString("AllDoneText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
         public static string AllLabel {
@@ -1768,6 +1777,15 @@ namespace AxCrypt.Content {
         public static string AppStoreCancelSubscriptionInformationText {
             get {
                 return ResourceManager.GetString("AppStoreCancelSubscriptionInformationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App.
+        /// </summary>
+        public static string AppText {
+            get {
+                return ResourceManager.GetString("AppText", resourceCulture);
             }
         }
         
@@ -23646,7 +23664,7 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("Blog_MEPGFCCIC_H1_Text1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to And it’s not just critical infrastructure at risk. In May 2025, &lt;b&gt;Coinbase Global, the leading American cryptocurrency exchange&lt;/b&gt;, &lt;a href=&apos;https://mashable.com/article/coinbase-data-breach-70k-members-ransom&apos;&gt;&lt;b&gt;experienced a massive insider-assisted data breach&lt;/b&gt;&lt;/a&gt; involving over 69,000 customers. A few overseas support agents were bribed to share sensitive public data, which included personal identifiers, ID images, and account balances. While passwords and private keys remained safe, the leaked d [rest of string was truncated]&quot;;.
         /// </summary>
@@ -39149,6 +39167,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email authentication.
+        /// </summary>
+        public static string EmailAuthenticationText {
+            get {
+                return ResourceManager.GetString("EmailAuthenticationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Template not found..
         /// </summary>
         public static string EmailErrorTemplateNotFound {
@@ -39757,6 +39784,15 @@ namespace AxCrypt.Content {
         public static string EnterGroupNamePlaceHolder {
             get {
                 return ResourceManager.GetString("EnterGroupNamePlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter OTP.
+        /// </summary>
+        public static string EnterOTPPlaceHolderText {
+            get {
+                return ResourceManager.GetString("EnterOTPPlaceHolderText", resourceCulture);
             }
         }
         
@@ -53882,6 +53918,80 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have already used all the recovery codes!..
+        /// </summary>
+        public static string MFAAlreadyRecoveryCodesText {
+            get {
+                return ResourceManager.GetString("MFAAlreadyRecoveryCodesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To avoid losing access and generate new codes, reconfigure two-factor authentication with
+        ///an authenticator app..
+        /// </summary>
+        public static string MFAAvoidLosingText {
+            get {
+                return ResourceManager.GetString("MFAAvoidLosingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can now use backup codes to sign in to your account if you don`t have access
+        ///to the authenticator app. &lt;strong&gt; Each code can only be used once.&lt;/strong&gt;.
+        /// </summary>
+        public static string MFABackupCodesTexts {
+            get {
+                return ResourceManager.GetString("MFABackupCodesTexts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Consider these codes like passwords&lt;/strong&gt; and store them securely in &lt;strong&gt;Password Manager&lt;/strong&gt;..
+        /// </summary>
+        public static string MFABackupCodesTexts1 {
+            get {
+                return ResourceManager.GetString("MFABackupCodesTexts1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multi-factor authentication is an enhanced security measure. When enabled, logging into AxCrypt will require two forms of identification.
+        /// </summary>
+        public static string MFADescriptionText {
+            get {
+                return ResourceManager.GetString("MFADescriptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable secure login with any authenticator app, &lt;br /&gt;including &lt;strong&gt;Microsoft and Google Authenticator&lt;/strong&gt;..
+        /// </summary>
+        public static string MFADescriptionText1 {
+            get {
+                return ResourceManager.GetString("MFADescriptionText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To enable email authentication we need to send a verification code to your email id..
+        /// </summary>
+        public static string MFAEmailAuthentication {
+            get {
+                return ResourceManager.GetString("MFAEmailAuthentication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To enable multi-factor authentication, install any authenticator app (for example, Microsoft, Google, etc.).
+        /// </summary>
+        public static string MFAInitialSetupText {
+            get {
+                return ResourceManager.GetString("MFAInitialSetupText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to enable/disable multi factor authentication due to wrong password.
         /// </summary>
         public static string MFAInvalidUserError {
@@ -53896,6 +54006,52 @@ namespace AxCrypt.Content {
         public static string MFAMailSubject {
             get {
                 return ResourceManager.GetString("MFAMailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Each code can only be used once. To avoid losing access and generate new codes, reconfigure multi-factor authentication with
+        ///an any multifactor type(Authenticator app, Email and SMS)..
+        /// </summary>
+        public static string MFAMultifactorTypeText {
+            get {
+                return ResourceManager.GetString("MFAMultifactorTypeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multi factor authentication is not enabled for this account! This page will redirect to home page in few seconds..
+        /// </summary>
+        public static string MFANotEnabledText {
+            get {
+                return ResourceManager.GetString("MFANotEnabledText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive a one-time verification code sent to your registered &lt;br /&gt; email address..
+        /// </summary>
+        public static string MFAOneTimeVerificationText {
+            get {
+                return ResourceManager.GetString("MFAOneTimeVerificationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your AxCrypt account password to confirm.
+        /// </summary>
+        public static string MFAPasswordConfirmText {
+            get {
+                return ResourceManager.GetString("MFAPasswordConfirmText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have used one of the recovery code to sign in..
+        /// </summary>
+        public static string MFARecoveryCodeSignInText {
+            get {
+                return ResourceManager.GetString("MFARecoveryCodeSignInText", resourceCulture);
             }
         }
         
@@ -53923,6 +54079,42 @@ namespace AxCrypt.Content {
         public static string MfaRecoveryCodeText2 {
             get {
                 return ResourceManager.GetString("MfaRecoveryCodeText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan the QR code from the authenticator app.
+        /// </summary>
+        public static string MFAScanQRCodeText {
+            get {
+                return ResourceManager.GetString("MFAScanQRCodeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Or copy the below code and paste in the authenticator app..
+        /// </summary>
+        public static string MFAScanQRCodeText1 {
+            get {
+                return ResourceManager.GetString("MFAScanQRCodeText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You’re all set to use.
+        /// </summary>
+        public static string MFASuccessText {
+            get {
+                return ResourceManager.GetString("MFASuccessText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to authentication for future logins..
+        /// </summary>
+        public static string MFASuccessText1 {
+            get {
+                return ResourceManager.GetString("MFASuccessText1", resourceCulture);
             }
         }
         
@@ -54490,6 +54682,15 @@ namespace AxCrypt.Content {
         public static string MFAuthenticationSec4Paragraph2 {
             get {
                 return ResourceManager.GetString("MFAuthenticationSec4Paragraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter 6-digital verification code from the {0}.
+        /// </summary>
+        public static string MFAVerificationCode {
+            get {
+                return ResourceManager.GetString("MFAVerificationCode", resourceCulture);
             }
         }
         
@@ -65567,9 +65768,9 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Surname: .
         /// </summary>
-        public static string SurnameLabel_ {
+        public static string SurnameLabel {
             get {
-                return ResourceManager.GetString("SurnameLabel ", resourceCulture);
+                return ResourceManager.GetString("SurnameLabel", resourceCulture);
             }
         }
         
