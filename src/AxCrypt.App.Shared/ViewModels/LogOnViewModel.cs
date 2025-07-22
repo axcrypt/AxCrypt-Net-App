@@ -163,7 +163,7 @@ public class LogOnViewModel : ViewModelBase
         return License.Has(capability);
     }
 
-    public bool UserInitiatedUpdateCheckPending { get ; set; }  
+    public bool UserInitiatedUpdateCheckPending { get; set; }
 
     public MultiFactorAuthViewModel MultiFactorAuthViewModel { get; set; }
 
@@ -240,15 +240,18 @@ public class LogOnViewModel : ViewModelBase
         New<InactivitySignOut>().RestartInactivityTimer();
     }
 
-    public async void ClearAllSettingsAndRestartAsync()
+    public async Task ClearAllSettingsAndRestartAsync()
     {
-        await new ApplicationManager().ClearAllSettings();
-        await ShutDownAnd(New<IUIThread>().RestartApplication);
-    }
+        PopupButtons result = await New<IPopup>().ShowAsync(Core.UI.PopupButtons.OkCancel, Texts.WarningTitle, Texts.ResetAllSettingsWarningText);
+        if (result == Core.UI.PopupButtons.Cancel)
+        {
+            return;
+        }
 
-    private async Task ShutDownAnd(Action finalAction)
-    {
+        new ApplicationManager().WaitForBackgroundToComplete();
+        await new ApplicationManager().ClearAllSettings();
         await new ApplicationManager().ShutdownBackgroundSafe();
-        finalAction();
+
+        New<IUIThread>().RestartApplication();
     }
 }

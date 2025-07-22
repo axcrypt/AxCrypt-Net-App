@@ -38,7 +38,7 @@
             {
                 <div class="mre-actn-box atn-bgclr" @onclick="subActionModel.AlwaysOfflineForFreeUser" title="@Texts.AlwaysOfflineToolTip">
                     <img class="ico-offln" src="" alt="hand-img" />
-                    <span class="text-size text-style">@Texts.AlwaysOffline</span>
+                    <span class="text-size text-style">@subActionModel.SetInternetStateText()</span>
                 </div>
             }
 

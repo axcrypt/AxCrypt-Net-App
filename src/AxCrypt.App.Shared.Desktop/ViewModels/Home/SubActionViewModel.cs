@@ -1,8 +1,9 @@
 ﻿using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Helpers;
-using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
+using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -175,6 +176,11 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             string alert = alwaysOnline ? "Offline mode is enabled." : "Offline mode is disabled.";
             _statusAlertService.Success(alert);
             UpdateViewState();
+        }
+
+        public string SetInternetStateText()
+        {
+            return New<UserSettings>().OfflineMode ? "Switch to Online" : "Switch to Offline";
         }
 
         private void UpdateKnownFolders(IEnumerable<KnownFolder> folders)

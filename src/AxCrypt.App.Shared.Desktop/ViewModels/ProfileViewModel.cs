@@ -200,13 +200,20 @@ public class ProfileViewModel
         }
     }
 
-    public async void ClearAllSettingsAndRestartAsync()
+    public async Task ClearAllSettingsAndRestartAsync()
     {
         if (_mainViewModel!.DecryptedFiles.Any())
         {
             await _mainViewModel.WarnIfAnyDecryptedFiles.ExecuteAsync(null);
             return;
         }
+
+        PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle, Texts.ResetAllSettingsWarningText);
+        if (result == PopupButtons.Cancel)
+        {
+            return;
+        }
+
         await new ApplicationManager().ClearAllSettings();
         await ShutDownAnd(New<IUIThread>().RestartApplication);
     }

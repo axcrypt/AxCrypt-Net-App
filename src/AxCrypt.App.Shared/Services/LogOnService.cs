@@ -1,11 +1,9 @@
 ﻿using System;
-using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
-using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
@@ -25,10 +23,10 @@ namespace AxCrypt.App.Shared.Services
 
         public bool IsSigningIn { get; set; }
 
-        public LogOnService(LogOnViewModel logOnViewModel, RegisterViewModel registerViewModel)
+        public LogOnService(LogOnViewModel logOnViewModel, RegisterViewModel registerViewModel, MainViewModel mainViewModel)
         {
             _logOnViewModel = logOnViewModel;
-            _mainViewModel = logOnViewModel.MainViewModel;
+            _mainViewModel = mainViewModel;
             _registerViewModel = registerViewModel;
             _fileOperationViewModel = logOnViewModel.FileOperationViewModel;
             _apiVersion = new ApiVersion();
@@ -238,15 +236,7 @@ namespace AxCrypt.App.Shared.Services
                 return;
             }
 
-            PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle, Texts.ResetAllSettingsWarningText);
-            if (result == PopupButtons.Ok)
-            {
-                new ApplicationManager().WaitForBackgroundToComplete();
-                await new ApplicationManager().ClearAllSettings();
-                await new ApplicationManager().ShutdownBackgroundSafe();
-
-                New<IUIThread>().RestartApplication();
-            }
+            await _logOnViewModel.ClearAllSettingsAndRestartAsync();
         }
 
         public async Task SignIn()

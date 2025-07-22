@@ -35,7 +35,7 @@
                 @if (!string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail))
                 {
                     <div style="width:100%;">
-                        <a href="" class="nav-link grn-clr" style="float:right;" tabindex="3" @onclick="@LogOnViewModel.ClearAllSettingsAndRestartAsync">@Texts.SwitchUserButtonText</a>
+                        <a href="" class="nav-link grn-clr" style="float:right;" tabindex="3" @onclick="async ()=> await LogOnViewModel.ClearAllSettingsAndRestartAsync()">@Texts.SwitchUserButtonText</a>
                     </div>
                 }
                 <div>
@@ -46,12 +46,8 @@
                     </div>
                 </div>
                 <br />
-                @* <div class="check-bx" style="margin: 15px 0px;">
-            <input type="checkbox" checked="@LogOnViewModel.RememberMe" @bind-value="LogOnViewModel.RememberMe" />
-            <span class="che-txt">@Texts.PromptKeepMeSignedIn</span>
-            </div> *@
 
-                <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;" tabindex="3">Log in</button>
+                <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;" tabindex="3">@Texts.LogInText</button>
                 <div class="signup-link">
                     <div style="display:inline-flex; align-items:center;">
                         <span class="che-txt">@Texts.DontaccountText</span>
@@ -64,7 +60,10 @@
                     </NavLink>
                 </div>
 
-                <div class="che-txt text-center" style="color:#494949; margin-top:20px;">@Texts.AgreeOurText <NavLink class="grn-clr" @onclick="RedirectToPrivacyPolicy">@Texts.PrivacyPolicyLinkLabel</NavLink> @Texts.AndText <NavLink class="grn-clr" @onclick="RedirectToTermsOfUse">@Texts.TermsOfUseLinkLabel</NavLink></div>
+                <div class="che-txt text-center" style="color:#494949; margin-top:20px;">
+                    @Texts.AgreeOurText <NavLink class="grn-clr" @onclick="RedirectToPrivacyPolicy">@Texts.PrivacyPolicyLinkLabel</NavLink> @Texts.AndText 
+                    <NavLink class="grn-clr" @onclick="RedirectToTermsOfUse">@Texts.TermsOfUseLinkLabel</NavLink>
+                </div>
             </EditForm>
         </article>
         <article class="right-section">

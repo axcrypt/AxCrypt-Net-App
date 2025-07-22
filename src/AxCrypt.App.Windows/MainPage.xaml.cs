@@ -25,7 +25,7 @@ public partial class MainPage : ContentPage, ISignIn
 {
     private readonly FileDropService _fileDropService;
     private ICustomNavigationService? _navigationManager;
-    private LogOnViewModel? _logOnService;
+    private LogOnViewModel? _logOnViewModel;
     private RegisterViewModel? _registerViewModel;
 
     private MainViewModel? _mainViewModel;
@@ -43,14 +43,14 @@ public partial class MainPage : ContentPage, ISignIn
         //new Styling(Resources.axcrypticon).Style(this, _recentFilesContextMenuStrip, _watchedFoldersContextMenuStrip);
     }
 
-    public MainPage(LogOnViewModel logOnService, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel, FileDropService fileDropService) : this()
+    public MainPage(LogOnViewModel logOnViewModel, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel, FileDropService fileDropService) : this()
     {
-        _logOnService = logOnService;
+        _logOnViewModel = logOnViewModel;
         _mainViewModel = mainViewModel;
         _fileOperationViewModel = fileOperationViewModel;
         _knownFoldersViewModel = knownFoldersViewModel;
         _registerViewModel = registerViewModel;
-        new AppMain().Initialize(logOnService, mainViewModel, fileOperationViewModel, knownFoldersViewModel, registerViewModel);
+        new AppMain().Initialize(logOnViewModel, mainViewModel, fileOperationViewModel, knownFoldersViewModel, registerViewModel);
 
         _fileDropService = fileDropService;
 
@@ -140,8 +140,8 @@ public partial class MainPage : ContentPage, ISignIn
         BindToViewModels();
         BindToFileOperationViewModel();
 
-        _logOnService!.MainViewModel = _mainViewModel!;
-        _logOnService.FileOperationViewModel = _fileOperationViewModel!;
+        _logOnViewModel!.MainViewModel = _mainViewModel!;
+        _logOnViewModel.FileOperationViewModel = _fileOperationViewModel!;
 
         await SignInAsync();
     }
@@ -189,7 +189,7 @@ public partial class MainPage : ContentPage, ISignIn
     {
         //_encryptToolStripButton.Tag = _fileOperationViewModel.EncryptFiles;
         //_fileOperationViewModel.IdentityViewModel.LoggingOnAsync = async (e) => await HandleLogOn(e);
-        _logOnService!.OnLogOnOrLogOffAndLogOnAgain = async () => await New<IUIThread>().SendToAsync(async () => await LogOnOrLogOffAndLogOnAgainAsync());
+        _logOnViewModel!.OnLogOnOrLogOffAndLogOnAgain = async () => await New<IUIThread>().SendToAsync(async () => await LogOnOrLogOffAndLogOnAgainAsync());
         //_logOnService.OnLogOnOrLogOffAndLogOnAgain = async () => await LogOnOrLogOffAndLogOnAgainAsync();
         //_inviteUserToolStripMenuItem.Click += async (sender, e) => { await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { await InviteUserAsync(); }, sender, e); };
         //_recentFilesListView.DragDrop += async (sender, e) => { await DropFilesOrFoldersInRecentFilesListViewAsync(); };
@@ -375,7 +375,7 @@ public partial class MainPage : ContentPage, ISignIn
             return;
         }
 
-        _logOnService!.RenewSubscriptionDialog.Show();
+        _logOnViewModel!.RenewSubscriptionDialog.Show();
 
         //using (RenewSubscriptionPromptDialog dialog = new RenewSubscriptionPromptDialog(this))
         //{
