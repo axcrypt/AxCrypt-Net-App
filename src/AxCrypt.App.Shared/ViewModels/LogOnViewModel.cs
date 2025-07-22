@@ -170,7 +170,8 @@ public class LogOnViewModel : ViewModelBase
     public event Action? OnSubscriptionChanged;
 
     public event Action<bool>? OnLogOnDialogVisibilityChanged;
-    public event Action<bool>? OnTFADialogVisibilityChanged;
+
+    public event Action<bool>? OnMFADialogVisibilityChanged;
 
     public Func<Task>? OnLogOnOrLogOffAndLogOnAgain;
 
@@ -194,7 +195,7 @@ public class LogOnViewModel : ViewModelBase
         set
         {
             _isMfaEnabled = value;
-            OnTFADialogVisibilityChanged?.Invoke(_isMfaEnabled);
+            OnMFADialogVisibilityChanged?.Invoke(_isMfaEnabled);
         }
     }
 
