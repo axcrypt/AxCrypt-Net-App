@@ -211,6 +211,11 @@ namespace AxCrypt.App.Windows.WinUI
                     New<IReport>().Exception(flex);
                     continue;
                 }
+                catch (Exception flex)
+                {
+                    New<IReport>().Exception(flex);
+                    continue;
+                }
             }
             return assemblies;
         }
