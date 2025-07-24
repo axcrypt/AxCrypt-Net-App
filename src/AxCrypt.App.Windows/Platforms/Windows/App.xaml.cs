@@ -16,10 +16,10 @@ using AxCrypt.Desktop.Cryptography;
 using AxCrypt.Mono;
 using AxCrypt.Mono.Portable;
 using Microsoft.Maui.Controls.Platform;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Diagnostics;
 using System.Reflection;
+using Windows.ApplicationModel.Activation;
 using static AxCrypt.Abstractions.TypeResolve;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -88,7 +88,7 @@ namespace AxCrypt.App.Windows.WinUI
                 }
                 else
                 {
-                    // RunBackground(commandLine);
+                    //RunBackground(commandLine);
                 }
             }
             catch (Exception ex)
@@ -298,11 +298,43 @@ namespace AxCrypt.App.Windows.WinUI
             new ExplorerRefresh().Notify();
         }
 
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             Microsoft.Windows.AppLifecycle.AppActivationArguments appActivationArguments = Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
             if (appActivationArguments.Kind == Microsoft.Windows.AppLifecycle.ExtendedActivationKind.ToastNotification)
             {
+                return;
+            }
+
+            if (appActivationArguments.Kind == Microsoft.Windows.AppLifecycle.ExtendedActivationKind.File)
+            {
+                CreateMauiApp();
+
+                IFileActivatedEventArgs fileActivatedArgs = (IFileActivatedEventArgs)appActivationArguments.Data;
+                string verb = fileActivatedArgs?.Verb ?? "";
+                string[] files = fileActivatedArgs?.Files.Select(file => file.Path).ToArray() ?? [];
+                switch (verb)
+                {
+                    case "Open":
+                        Resolve.CommandService.Call(CommandVerb.Open, 0, files);
+                        break;
+                    case "Decrypt":
+                        Resolve.CommandService.Call(CommandVerb.Decrypt, 1, files);
+                        break;
+                    case "Encrypt":
+                        Resolve.CommandService.Call(CommandVerb.Encrypt, 2, files);
+                        break;
+                    case "SecureDelete":
+                        Resolve.CommandService.Call(CommandVerb.Wipe, 3, files);
+                        break;
+                    case "RandomRename":
+                        Resolve.CommandService.Call(CommandVerb.RandomRename, 3, files);
+                        break;
+
+                    default:
+                        Resolve.CommandService.Call(CommandVerb.Open, 4, files);
+                        break;
+                }
                 return;
             }
 

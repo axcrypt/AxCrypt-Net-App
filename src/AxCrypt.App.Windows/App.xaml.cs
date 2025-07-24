@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.Desktop;
 using AxCrypt.App.Shared.Desktop.Code;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.ViewModels;
@@ -36,14 +37,14 @@ public partial class App : Application
     private FileOperationViewModel _fileOperationViewModel;
 
     private KnownFoldersViewModel _knownFoldersViewModel;
-    private LogViewModel _logService;
+    private LogViewModel _logViewModel;
 
     private readonly IDispatcher _dispatcher;
 
-    public App(IDispatcher dispatcher, LogOnViewModel logOnService, RegisterViewModel registerViewModel, LogViewModel logService, FileDropService fileDropService)
+    public App(IDispatcher dispatcher, LogOnViewModel logOnViewModel, RegisterViewModel registerViewModel, LogViewModel logService, FileDropService fileDropService)
     {
         _dispatcher = dispatcher;
-        _logService = logService;
+        _logViewModel = logService;
         InitializeComponent();
 
         InitializeContentResources();
@@ -57,7 +58,7 @@ public partial class App : Application
         InitializeServiceDependencyProvider();
         _progressBackgroundWorker = new ProgressBackgroundComponent();
 
-        MainPage = new MainPage(logOnService, _mainViewModel, _fileOperationViewModel, _knownFoldersViewModel, registerViewModel, fileDropService);
+        MainPage = new MainPage(logOnViewModel, _mainViewModel, _fileOperationViewModel, _knownFoldersViewModel, registerViewModel, fileDropService);
     }
 
     private static void InitializeServiceDependencyProvider()
@@ -182,12 +183,12 @@ public partial class App : Application
     {
         Resolve.Log.LoggedAsync += async (loggingEventArgs) =>
         {
-            if (_logService == null || !_logService.IsVisible)
+            if (_logViewModel == null || !_logViewModel.IsVisible)
             {
                 return;
             }
             string formatted = "{0} {1}".InvariantFormat(New<INow>().Utc.ToString("o", CultureInfo.InvariantCulture), loggingEventArgs.Message.TrimLogMessage());
-            await _logService.AddLogAsync(formatted);
+            await _logViewModel.AddLogAsync(formatted);
         };
     }
 
@@ -360,6 +361,11 @@ public partial class App : Application
                 case CommandVerb.ShowLogOn:
                     AppFactory.RestoreFormConditionally();
                     break;
+            }
+
+            while (AxCServiceProviderExtension.LogOnViewModel!.IsVisible || !AxCServiceProviderExtension.LogOnViewModel!.IsLoggedOn)
+            {
+                await Task.Delay(1000);
             }
 
             switch (e.Verb)

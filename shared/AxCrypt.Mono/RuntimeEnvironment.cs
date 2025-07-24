@@ -232,7 +232,16 @@ namespace AxCrypt.Mono
 
         public virtual void RunApp(string arguments)
         {
-            Process.Start(AppPath, arguments);
+            //Process.Start(AppPath, arguments);
+
+            ProcessStartInfo processStartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = Process.GetCurrentProcess()?.MainModule?.FileName,
+                UseShellExecute = false,
+                Arguments = arguments
+            };
+
+            Process.Start(processStartInfo);
         }
     }
 }

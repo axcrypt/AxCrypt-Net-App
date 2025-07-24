@@ -50,39 +50,56 @@
 			<Extensions>
 				<!-- The following extension will re-route the taskbar pin and the start tile to point to the packaged app. This feature is only available in the Creators Update (build 15063). -->
 				<!-- Note: this extension is under rescap3, so you need to declare rescap3 in the xml namespaces and also IgnorableNamespaces (see xmlns under <package> above) -->
-				<rescap3:Extension Category="windows.desktopAppMigration">
+				<!--<rescap3:Extension Category="windows.desktopAppMigration">
 					<rescap3:DesktopAppMigration>
-						<!-- The shortcut path is the path to the previous app. You can easily obtain this by finding the installed app on the start menu, right-click, under more, Open file location -->
-						<!-- Make sure you use environment variables to build the path: %PROGRAMDATA%, %APPDATA%, %USERPROFILES% -->
+						--><!-- The shortcut path is the path to the previous app. You can easily obtain this by finding the installed app on the start menu, right-click, under more, Open file location --><!--
+						--><!-- Make sure you use environment variables to build the path: %PROGRAMDATA%, %APPDATA%, %USERPROFILES% --><!--
 						<rescap3:DesktopApp ShortcutPath="%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\AxCrypt.lnk"/>
 					</rescap3:DesktopAppMigration>
-				</rescap3:Extension>
-				
-				<uap3:Extension Category="windows.fileTypeAssociation">
-					<!--<uap3:FileTypeAssociation Name="axx" Parameters="&quot;%1&quot;">
-						<uap:Logo>Resources/logos/axcrypt-icon-44x44.png</uap:Logo>
-						<uap:SupportedFileTypes>
-							<uap:FileType>.axx</uap:FileType>
-						</uap:SupportedFileTypes>
-						<uap2:SupportedVerbs>
-							<uap3:Verb Id="Open" Parameters="&quot;%1&quot;">Open</uap3:Verb>
-							<uap3:Verb Id="Decrypt" Parameters="&quot;%1&quot;">Decrypt</uap3:Verb>
-						</uap2:SupportedVerbs>
-						
-					</uap3:FileTypeAssociation>-->
+				</rescap3:Extension>-->
 
-					<uap3:FileTypeAssociation Name="axx">
+				<!-- .axx only -->
+				<uap3:Extension Category="windows.fileTypeAssociation">
+					<uap3:FileTypeAssociation Name="axcfile">
+						<uap:DisplayName>AxCrypt Encrypted File</uap:DisplayName>
 						<uap:SupportedFileTypes>
 							<uap:FileType>.axx</uap:FileType>
 						</uap:SupportedFileTypes>
 						<uap2:SupportedVerbs>
-							<uap3:Verb Id="Open" Parameters="&quot;%1&quot;">Open</uap3:Verb>
-							<uap3:Verb Id="Decrypt" Parameters="&quot;%1&quot;">Decrypt</uap3:Verb>
+							<uap3:Verb Id="Open" Parameters="&quot;%1&quot;">Open with AxCrypt</uap3:Verb>
+							<uap3:Verb Id="Decrypt" Parameters="&quot;%1&quot;">Decrypt with AxCrypt</uap3:Verb>
+							<!--<uap3:Verb Id="RandomRename" Parameters="&quot;%1&quot;">Random Rename with AxCrypt</uap3:Verb>
+							<uap3:Verb Id="SecureDelete" Parameters="&quot;%1&quot;">Secure Delete with AxCrypt</uap3:Verb>-->
 						</uap2:SupportedVerbs>
-						
-						<!--<uap:InfoTip>AxCrypt encrypted file</uap:InfoTip>
-						<uap:Logo>Resources/logos/axcrypt-icon-44x44.png</uap:Logo>
-						<uap:DisplayName>AxCrypt</uap:DisplayName>-->
+					</uap3:FileTypeAssociation>
+				</uap3:Extension>
+
+				<uap3:Extension Category="windows.fileTypeAssociation">
+					<uap3:FileTypeAssociation Name="allothertypes">
+						<uap:SupportedFileTypes>
+							<uap:FileType>.txt</uap:FileType>
+							<uap:FileType>.pdf</uap:FileType>
+							<uap:FileType>.jpg</uap:FileType>
+							<uap:FileType>.jpeg</uap:FileType>
+							<uap:FileType>.png</uap:FileType>
+							<uap:FileType>.svg</uap:FileType>
+							<uap:FileType>.mp4</uap:FileType>
+							<uap:FileType>.doc</uap:FileType>
+							<uap:FileType>.docx</uap:FileType>
+							<uap:FileType>.csv</uap:FileType>
+							<uap:FileType>.zip</uap:FileType>
+							<uap:FileType>.rar</uap:FileType>
+							<uap:FileType>.xml</uap:FileType>
+							<uap:FileType>.json</uap:FileType>
+							<uap:FileType>.html</uap:FileType>
+							<uap:FileType>.js</uap:FileType>
+						</uap:SupportedFileTypes>
+						<uap2:SupportedVerbs>
+							<uap3:Verb Id="Encrypt" Parameters="&quot;%1&quot;">Encrypt with AxCrypt</uap3:Verb>
+							<uap3:Verb Id="Decrypt" Parameters="&quot;%1&quot;">Decrypt with AxCrypt</uap3:Verb>
+							<uap3:Verb Id="RandomRename" Parameters="&quot;%1&quot;">Random Rename with AxCrypt</uap3:Verb>
+							<uap3:Verb Id="SecureDelete" Parameters="&quot;%1&quot;">Secure Delete with AxCrypt</uap3:Verb>
+						</uap2:SupportedVerbs>
 					</uap3:FileTypeAssociation>
 				</uap3:Extension>
 			</Extensions>

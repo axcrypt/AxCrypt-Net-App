@@ -254,6 +254,19 @@ namespace AxCrypt.Core.UI.ViewModel
             };
             await OnLoggingOnAsync(logOnArgs);
 
+            LogOnIdentity logOnIdentity = await LogOnIdentityFromCredentialsAsync(EmailAddress.Parse(logOnArgs.UserEmail), logOnArgs.Passphrase);
+            if (logOnIdentity == LogOnIdentity.Empty)
+            {
+                return LogOnIdentity.Empty;
+            }
+
+            if (!_knownIdentities.IsMFAEnabled)
+            {
+                return logOnIdentity;
+            }
+
+            logOnIdentity = await AskForMFAVerify(logOnArgs, logOnIdentity);
+
             LogOnIdentity identy = await AddKnownIdentityFromEventAsync(logOnArgs);
             if (!_knownIdentities.IsLoggedOn && identy.UserEmail != EmailAddress.Empty)
             {
