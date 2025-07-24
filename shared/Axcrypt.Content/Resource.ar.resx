@@ -1,102 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
-		Microsoft ResX Schema
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-		Version 1.3
-
-		The primary goals of this format is to allow a simple XML format 
-		that is mostly human readable. The generation and parsing of the 
-		various data types are done through the TypeConverter classes 
-		associated with the data types.
-
-		Example:
-
-		... ado.net/XML headers & schema ...
-		<resheader name="resmimetype">text/microsoft-resx</resheader>
-		<resheader name="version">1.3</resheader>
-		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-		<data name="Name1">this is my long string</data>
-		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-			[base64 mime encoded serialized .NET Framework object]
-		</data>
-		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-			[base64 mime encoded string representing a byte array form of the .NET Framework object]
-		</data>
-
-		There are any number of "resheader" rows that contain simple 
-		name/value pairs.
-
-		Each data row contains a name, and value. The row also contains a 
-		type or mimetype. Type corresponds to a .NET class that support 
-		text/value conversion through the TypeConverter architecture. 
-		Classes that don't support this are serialized and stored with the 
-		mimetype set.
-
-		The mimetype is used for serialized objects, and tells the 
-		ResXResourceReader how to depersist the object. This is currently not 
-		extensible. For a given mimetype the value must be set accordingly:
-
-		Note - application/x-microsoft.net.object.binary.base64 is the format 
-		that the ResXResourceWriter will generate, however the reader can 
-		read any of the formats listed below.
-
-		mimetype: application/x-microsoft.net.object.binary.base64
-		value   : The object must be serialized with 
-			: System.Serialization.Formatters.Binary.BinaryFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.soap.base64
-		value   : The object must be serialized with 
-			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.bytearray.base64
-		value   : The object must be serialized into a byte array 
-			: using a System.ComponentModel.TypeConverter
-			: and then encoded with base64 encoding.
-	-->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <data name="AaaUtfDummy" xml:space="preserve">
     <value>جزيرتان هما برا.</value>
     <comment>A text containing non-Ansi characters to make Phraseapp download behave. Does not need translation, but should be there.</comment>
@@ -720,6 +740,9 @@
   </data>
   <data name="AutoDeletionMailSubject" xml:space="preserve">
     <value>سيتم حذف حساب معرف اكسكربت الخاص بك قريبًا!</value>
+  </data>
+  <data name="AutomatedMessageText" xml:space="preserve">
+    <value>هذه رسالة آلية. يرجى عدم الرد مباشرة على هذا البريد الإلكتروني.</value>
   </data>
   <data name="AutomaticFileUpdatingLabel" xml:space="preserve">
     <value>التحديث التلقائي للملف</value>
@@ -4727,9 +4750,6 @@
   <data name="Blog_EODAGDFWBES_H3_Text1" xml:space="preserve">
     <value>على غرار عملية جوجل درايف ، يقوم اكسكربت بتشفير ملفات ون درايف في تسلسل يسمح بتشفير الملف قبل مزامنة الملف مع السحابة.</value>
   </data>
-  <data name="Blog_EODAGDFWBES_H4_Text1" xml:space="preserve">
-    <value>يعد تشفير ملفات جوجل درايف و ون درايف طريقة ذكية لحماية بياناتك من الوصول غير المصرح به أو السرقة أو الفقدان. يضيف التشفير طبقة إضافية من الأمان لملفاتك بجعلها غير قابلة للقراءة لأي شخص ليس لديه المفتاح أو كلمة المرور الصحيحة. هذا يعني أنه حتى إذا اخترق شخص ما حساب التخزين السحابي الخاص بك أو سرق جهازك ، فلن يتمكن من الوصول إلى معلوماتك الحساسة.</value>
-  </data>
   <data name="Blog_EODAGDFWBES_H4_Text2" xml:space="preserve">
     <value>يساعدك التشفير أيضا على الامتثال لقوانين ولوائح خصوصية البيانات التي قد تنطبق على البيانات المهنية في مؤسستك. يمكنك أيضا الاستمتاع براحة ومرونة التخزين السحابي دون المساس بأمان بياناتك.</value>
   </data>
@@ -4762,12 +4782,6 @@
   </data>
   <data name="Blog_EODAGDFWBES_Text1" xml:space="preserve">
     <value>هل تساءلت يوما عن مدى أمان ملفاتك الشخصية الحساسة وبيانات عملك على التخزين السحابي في جوجل درايف و ون درايف؟ يعد الاحتفاظ بالملفات في السحابة طريقة ممتازة لتخزين بياناتك والوصول إليها ونسخها احتياطيا ، ولكنها قد لا تكون دائما الطريقة الأكثر خصوصية وأمانا للقيام بذلك.</value>
-  </data>
-  <data name="Blog_EODAGDFWBES_Text2" xml:space="preserve">
-    <value>وفقا لما ورد في &lt;a href='https://support.google.com/drive/answer/10375054?hl=en.'&gt;جوجل&lt;/b&gt;&lt;/a&gt;، فإنه "يعالج" بياناتك المخزنة تعزيز تجربة المستخدم. وهذا يعني أن Google تحتفظ بإمكانية الوصول إلى ملفاتك ولديها القدرة على عرضها وفقًا لتقديرها. عندما يتعلق الأمر ببياناتك الحساسة، لا يمكنك المخاطرة. يجب أن يكون لديك السيطرة الكاملة عليه.</value>
-  </data>
-  <data name="Blog_EODAGDFWBES_Text3" xml:space="preserve">
-    <value>يعد تشفير بياناتك وملفاتك أثناء عدم وجودها وقبل وصولها إلى السحابة أحد الإجراءات الأكثر أمانا لضمان بقائها آمنة في جميع الأوقات، حتى إذا كان مزود التخزين السحابي لديه حق الوصول إليها أو عندما تقع الملفات في أيدي برنامج ضار مهاجم.</value>
   </data>
   <data name="Blog_EODAGDFWBES_Tittle" xml:space="preserve">
     <value>تشفير ملفات ون درايف وجوجل درايف باستخدام أفضل برامج التشفير في العالم</value>
@@ -7870,7 +7884,49 @@
   <data name="Blog_MDSCBF_Title" xml:space="preserve">
     <value>تحديات أمن البيانات الرئيسية التي تواجهها الشركات في عام 2022</value>
   </data>
-  <data name="Blog_MEWRECY_H1_SH1_Text1" xml:space="preserve">
+  <data name="Blog_MEPGFCCIC_H1_Text1">
+    <value>يعتقد الخبراء أنه حتى إذا لم يكن هذا الحادث ناتجًا عن هجوم، فإنه يُعَد مؤشراً قوياً على تصاعد التهديدات السيبرانية التي تستهدف البنية التحتية. فالشبكات الكهربائية الحديثة تعتمد بشكل كبير على أنظمة رقمية، مما يجعلها أكثر عرضة لهجمات القراصنة. نقطة ضعف واحدة فقط – سواء كانت نتيجة لبرمجيات خبيثة أو بيانات تم التلاعب بها – يمكن أن تؤدي إلى انقطاعات كهربائية على مستوى وطني.</value>
+  </data>
+  <data name="Blog_MEPGFCCIC_H1_Text2">
+    <value>وليس الأمر مقتصرًا على البنية التحتية الحيوية فحسب. ففي مايو 2025، تعرضت شركة كوين بيس العالمية، وهي أكبر منصة أمريكية لتبادل العملات المشفرة، لاختراق ضخم للبيانات بمساعدة من داخل الشركة، شمل أكثر من 69,000 عميل.
+
+حيث تم رشوة عدد من وكلاء الدعم الفني في الخارج لتسريب بيانات داخلية حساسة، تضمنت معلومات تعريف شخصية، وصور بطاقات الهوية، وأرصدة الحسابات. وعلى الرغم من أن كلمات المرور والمفاتيح الخاصة بقيت آمنة، فإن البيانات المُسربة عرضت المستخدمين لتهديدات خطيرة مثل هجمات التصيّد الاحتيالي، وانتحال الهوية، بل وحتى مخاطر محتملة على السلامة الجسدية.
+
+وقد طالب القراصنة بفدية وصلت إلى 20 مليون دولار.</value>
+  </data>
+  <data name="Blog_MEPGFCCIC_H1_Text3">
+    <value>هذا الاختراق لم يكن نتيجة برمجيات خبيثة، بل تم تنفيذه من قبل أشخاص من داخل الشركة. وهو يُظهر بوضوح كيف يمكن إساءة استخدام الوصول الموثوق به لتحقيق نتائج كارثية.
+
+وإذا كان ذلك ممكنًا في بيئة شديدة التنظيم وواعية أمنيًا مثل منصة لتبادل العملات المشفرة، فعلى قطاع الطاقة أن يطرح على نفسه السؤال: هل نحن مستعدون حقًا لمواجهة اختراق مشابه؟</value>
+  </data>
+  <data name="Blog_MEPGFCCIC_H2_Text1">
+    <value>هذا ليس مجرد خوف بعيد أو نظري. ففي أوكرانيا، في 23 ديسمبر 2015، استخدم القراصنة برمجية خبيثة تُعرف باسم BlackEnergy 3 للسيطرة على أنظمة SCADA (التحكم الإشرافي وجمع البيانات)، مما أدى إلى انقطاع التيار الكهربائي عن أكثر من 230,000 شخص.
+
+وقد نُسب هذا الهجوم إلى المجموعة الروسية المعروفة باسم "ساندوورم" (Sandworm)، ويُعد أول هجوم إلكتروني مؤكد على شبكة كهرباء في العالم.
+
+لقد غيّر هذا الحادث جذريًا الطريقة التي ينظر بها العالم إلى أمن أنظمة SCADA وأهمية منع الهجمات السيبرانية على البنى التحتية الوطنية.</value>
+  </data>
+  <data name="Blog_MEPGFCCIC_Heading1">
+    <value>لماذا لا يمكن تجاهل الأمن السيبراني للبنية التحتية الحيوية</value>
+  </data>
+  <data name="Blog_MEPGFCCIC_Heading2">
+    <value>الهجمات الإلكترونية التاريخية على شبكة الطاقة: تحذير من أوكرانيا</value>
+  </data>
+  <data name="Blog_MEPGFCCIC_Summary">
+    <value>في 28 أبريل 2025، ضرب انقطاع كهربائي هائل كلاً من إسبانيا والبرتغال وأجزاء من فرنسا، مما أدى إلى اضطراب الحياة في جميع أنحاء شبه الجزيرة الأيبيرية. بدأ الانقطاع في الساعة 12:33 ظهرًا بتوقيت وسط أوروبا الصيفي، وأسفر عن فقدان مفاجئ لـ 15 غيغاواط من الكهرباء، مما تسبب في أعطال متسلسلة في الشبكات المترابطة. وعلى الرغم من إعادة التيار الكهربائي إلى معظم المناطق خلال 10 ساعات، إلا أن بعض المناطق بقيت دون كهرباء لما يقرب من 22 ساعة، وتمت استعادة الكهرباء بالكامل في إسبانيا بحلول الساعة 11:00 صباحًا من يوم 29 أبريل. كما استُقرت شبكة الكهرباء في البرتغال أيضًا في وقت مبكر من اليوم التالي باستخدام الطاقة الكهرومائية، والتوربينات الغازية، والاستيراد الطارئ من المغرب وفرنسا.</value>
+  </data>
+  <data name="Blog_MEPGFCCIC_Text1">
+    <value>في 28 أبريل 2025، ضرب انقطاع كهربائي هائل مصدر كلاً من إسبانيا والبرتغال وأجزاء من فرنسا، مما أدى إلى اضطراب الحياة في جميع أنحاء شبه الجزيرة الأيبيرية. بدأ الانقطاع في الساعة 12:33 ظهرًا بتوقيت وسط أوروبا الصيفي (CEST)، وأسفر عن فقدان مفاجئ لـ 15 غيغاواط من الكهرباء، مما تسبب في أعطال متسلسلة في الشبكات الكهربائية المترابطة.
+
+وعلى الرغم من إعادة التيار إلى معظم المناطق خلال 10 ساعات، فقد بقيت بعض المناطق دون كهرباء لما يقرب من 22 ساعة، وتمت استعادة الخدمة بالكامل في إسبانيا بحلول الساعة 11:00 صباحًا من يوم 29 أبريل. كما تم استقرار شبكة الكهرباء في البرتغال في وقت مبكر من اليوم التالي باستخدام الطاقة الكهرومائية، والتوربينات الغازية، والاستيرادات الطارئة من المغرب وفرنسا.</value>
+  </data>
+  <data name="Blog_MEPGFCCIC_Text2">
+    <value>على الرغم من أن السجلات الأولية دفعت شركتي "ريد إليكتريكا" و"رين" إلى استبعاد احتمال وقوع هجوم إلكتروني على شبكة الكهرباء، إلا أنه لا بد من التساؤل عن مدى حسم هذه النتائج فعليًا. فالتلاعب الرقمي لا يعرف حدودًا كثيرة، ولا يزال الشك مبررًا. لم يكن أمن الشبكات الكهربائية السيبراني يومًا أكثر أهمية مما هو عليه الآن.</value>
+  </data>
+  <data name="Blog_MEPGFCCIC_Title">
+    <value>فشل هائل في شبكة الكهرباء الأوروبية يستدعي تعزيز أمن البنية التحتية الحيوية ضد الهجمات الإلكترونية</value>
+  </data>
+  <data name="Blog_MEWRECY_H1_SH1_Text1">
     <value>من خلال جعل البيانات غير قابلة للقراءة من قبل الآخرين ، يضمن تشفير الهاتف المحمول أن تظل بيانات العملاء خاصة وآمنة. لا يمكن استرجاع البيانات التي تم تشفيرها ، مما يجعل الأمر أكثر صعوبة في الوضع الحالي. لا يزال من الممكن استعادة البيانات الموجودة على الهاتف حتى إذا قام المالك بحذف كل شيء على الهاتف لإعادة بيعه. الطريقة الوحيدة لفك تشفير البيانات مرة واحدة بعد التشفير هي إعادة ضبط الهاتف إلى إعدادات المصنع. علاوة على ذلك ، فإن التوسع في المدفوعات الرقمية والتطبيقات المحسنة وتبادل المعلومات عبر الأجهزة المحمولة تولد كمية كبيرة من البيانات التي يجب حمايتها من التهديدات السيبرانية. نتيجة لذلك ، يمكن حماية البيانات من هذه الجرائم باستخدام برامج تشفير الهاتف المحمول ، ودفع السوق إلى الأمام.</value>
   </data>
   <data name="Blog_MEWRECY_H1_SubHeading1" xml:space="preserve">
@@ -10909,6 +10965,110 @@
   </data>
   <data name="Blog_WUE_Title" xml:space="preserve">
     <value>لماذا نستخدم التشفير؟</value>
+  </data>
+  <data name="Blog_WYONTABE_Conclusion_Heading">
+    <value>الخلاصة: الأعمال تحتاج إلى تشفير بدرجة أمان مخصصة للأعمال</value>
+  </data>
+  <data name="Blog_WYONTABE_Conclusion_Text1">
+    <value>إذا كنت تدير فريقاً أو قسماً أو مؤسسة كاملة، فإن الاعتماد على الخطط المجانية أو المميزة لا يُعد غير كافٍ فحسب، بل يُعد أيضاً مخالفاً لسياسات أكسكريبت. توفر لك خطة أكسكريبت للأعمال كل ما تحتاجه لحماية الملفات، وإدارة الوصول، والتعاون الآمن عبر مختلف المنصات.</value>
+  </data>
+  <data name="Blog_WYONTABE_Conclusion_Text2">
+    <value>تقدم أكسكريبت واحدة من أفضل برامج التشفير للأعمال، وتُعتمد من قبل شركات حول العالم بفضل بساطتها، وقوتها، وميزاتها المخصصة للفرق. سواء كنت شركة ناشئة أو مؤسسة في طور النمو، يساعدك برنامج التشفير الخاص بنا للشركات الصغيرة على ضمان حماية بياناتك بشكل آمن، ومركزي، ومتوافق مع المعايير.</value>
+  </data>
+  <data name="Blog_WYONTABE_Conclusion_Text3">
+    <value>تحتاج إلى مساعدة في الترقية أو إعداد حساب أعمالك؟ تواصل مع فريق الدعم لدينا أو &lt;a href='https://axcrypt.net/business/'&gt;&lt;b&gt;ابدأ تجربتك المجانية لخطة الأعمال اليوم&lt;/b&gt;&lt;/a&gt;.</value>
+  </data>
+  <data name="Blog_WYONTABE_H1_Text1">
+    <value>تقدم أكسكريبت لتشفير الملفات نسختين: مجانية ومميزة (Premium)، وهما حلول متعددة المنصات (متوفرة على أنظمة Windows وmacOS وAndroid وiOS) تم تطويرها للمستخدمين الأفراد.
+ورغم أنها توفر أدوات أساسية للتشفير، إلا أنها لا تتضمن الميزات المطلوبة للفرق أو الشركات.
+والأهم من ذلك:</value>
+  </data>
+  <data name="Blog_WYONTABE_H1_Text2" xml:space="preserve">
+    <value>&lt;li&gt;يتم ترخيصها للاستخدام &lt;b&gt;الشخصي فقط&lt;/b&gt;.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WYONTABE_H1_Text3" xml:space="preserve">
+    <value>&lt;li&gt;تفتقر إلى &lt;b&gt;إدارة المجموعات، والوصول باستخدام المفتاح الرئيسي، والتحكم المركزي بالمفاتيح&lt;/b&gt;.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WYONTABE_H1_Text4" xml:space="preserve">
+    <value>&lt;li&gt;رغم أن خطة Premium قوية، إلا أنها &lt;b&gt;غير مسموح باستخدامها للأغراض التنظيمية أو المؤسساتية.&lt;/b&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WYONTABE_H1_Text5" xml:space="preserve">
+    <value>ملاحظة:
+
+إذا كنت جزءًا من شركة أو مؤسسة تجارية، فإن استخدام خطط Premium أو Free يُعد انتهاكًا لشروط الترخيص، وقد يؤدي إلى سير عمل تشفير غير فعال أو غير آمن.
+للاطلاع على التفاصيل، راجع شروط الاستخدام.</value>
+  </data>
+  <data name="Blog_WYONTABE_H2_Text1">
+    <value>تم تصميم AxCrypt Business كبرنامج قوي وسهل الاستخدام لتشفير البيانات، مع التركيز على احتياجات المؤسسات. سواء كنت تدير بيانات حساسة للعملاء أو ملفات داخلية للفريق، فإن خطة التشفير الخاصة بالأعمال توفر الميزات والمرونة التي تحتاجها. ولهذا السبب غالبًا ما يُصنَّف AxCrypt ضمن أفضل برامج التشفير للشركات الصغيرة والشركات النامية على حد سواء.
+فيما يلي الميزات الرئيسية التي تميز AxCrypt Business:</value>
+  </data>
+  <data name="Blog_WYONTABE_H2_Text2">
+    <value>&lt;li&gt;&lt;b&gt;إدارة المجموعات والتحكم في الوصول&lt;/b&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WYONTABE_H2_Text3">
+    <value>تحكّم بالكامل في وصول المستخدمين من خلال دعم إدارة المجموعات. يمكنك تعيين الصلاحيات أو إدارتها أو إلغاؤها بأمان من مكان مركزي واحد، مما يجعلها مثالية لمسؤولي تكنولوجيا المعلومات وفرق الامتثال. سواء كنت تقوم بإضافة أعضاء جدد إلى الفريق، أو تعديل مستويات الوصول، أو الاستجابة لحالة أمنية، تمنحك إدارة المجموعات الرؤية والسلطة لاتخاذ الإجراءات بسرعة وأمان.</value>
+  </data>
+  <data name="Blog_WYONTABE_H2_Text4">
+    <value>&lt;li&gt;&lt;b&gt;مجموعات المستخدمين من أجل تعاون ناجح&lt;/b&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WYONTABE_H2_Text5" xml:space="preserve">
+    <value>أنشئ و&lt;a href='https://axcrypt.net/information/group/'&gt;قم بإدارة مجموعات المستخدمين&lt;/a&gt; داخل مؤسستك لتنظيم الفرق وتبسيط التحكم في الوصول.
+من خلال مشاركة الملفات المشفّرة حسب المجموعات، يمكنك مشاركة الملفات المشفرة بأمان مع جميع أعضاء المجموعة دفعة واحدة.
+يحصل كل عضو على حق الوصول تلقائيًا، مما يضمن بقاء الجميع على اطلاع ومزامنة.
+كما يمكنك تعيين &lt;a href='https://axcrypt.net/blog/master-key/'&gt;مفتاح رئيسي خاص بالمجموعة&lt;/a&gt; لكل مجموعة، مما يوفر تحكمًا دقيقًا في من يمكنه الوصول إلى ماذا.
+ومع تساوي حقوق الوصول بين أعضاء المجموعة، يصبح التعاون سلسًا، وتبقى الحماية قائمة، وتصبح إدارة الصلاحيات أسهل من أي وقت مضى.</value>
+  </data>
+  <data name="Blog_WYONTABE_H2_Text6" xml:space="preserve">
+    <value>&lt;li&gt;&lt;b&gt;وصول المفتاح الرئيسي للمسؤولين&lt;/b&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WYONTABE_H2_Text7">
+    <value>احتفظ بالقدرة على فك تشفير جميع الملفات المشفّرة داخل مؤسستك، بغض النظر عن نسيان كلمات المرور أو تغيّر الموظفين. كمسؤول، تتيح لك ميزة المفتاح الرئيسي الوصول المستمر إلى البيانات الحساسة للأعمال. فهي تحمي من فقدان البيانات، وتعزز الامتثال، وتضمن ألا يصبح أي ملف غير قابل للوصول بسبب خطأ من المستخدم أو تغييرات في الطاقم.</value>
+  </data>
+  <data name="Blog_WYONTABE_H2_Text8">
+    <value>&lt;li&gt;&lt;b&gt;مدير كلمات مرور مدمج&lt;/b&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WYONTABE_H2_Text9" xml:space="preserve">
+    <value>تتضمن خطة أكسكريبت للأعمال مدير كلمات مرور لتخزين ومشاركة بيانات تسجيل الدخول بأمان، مما يُسهل الوصول ويحسّن مستوى الأمان.
+يقوم بحفظ جميع بيانات اعتماد الفريق بشكل مشفر ومنظم داخل خزنة آمنة واحدة، مما يقلل من مخاطر الاختراقات المرتبطة بكلمات المرور.</value>
+  </data>
+  <data name="Blog_WYONTABE_H3_Text1">
+    <value>بينما لن تتمكن من تشفير أو تعديل الملفات بدون اشتراك فعّال في خطة الأعمال، لا يزال بإمكانك الوصول الآمن إلى بياناتك باستخدام أكسكريبت Viewer. يتوفر البرنامج على أنظمة Windows وmacOS وAndroid وiOS، ويتيح لك فتح وقراءة الملفات المشفّرة بصيغة .axx حتى بعد انتهاء اشتراكك.</value>
+  </data>
+  <data name="Blog_WYONTABE_H3_Text2">
+    <value>على الرغم من أن ميزات الفريق غير متوفرة في هذا الوضع، يضمن وضع "المُشاهد" وصولاً مستمراً بصلاحية القراءة فقط، مما يجعله مثالياً عندما تشارك الشركات ملفات مشفّرة مع العملاء الذين يحتاجون إلى عرض المعلومات دون إمكانية التعديل أو فك التشفير.</value>
+  </data>
+  <data name="Blog_WYONTABE_Heading1">
+    <value>لماذا لا تصلح الخطط المجانية والمميزة (Premium) للاستخدام التجاري؟</value>
+  </data>
+  <data name="Blog_WYONTABE_Heading2">
+    <value>لماذا تم تصميم خطة الأعمال لـ أكسكريبت خصيصًا للفرق؟</value>
+  </data>
+  <data name="Blog_WYONTABE_Heading3">
+    <value>ماذا عن صلاحية العرض فقط (Viewer Access)؟</value>
+  </data>
+  <data name="Blog_WYONTABE_Heading4">
+    <value>مقارنة خطط أكسكريبت</value>
+  </data>
+  <data name="Blog_WYONTABE_Summary">
+    <value>إدارة الأعمال مليئة بالمنافسة. كل قرار تتخذه، وكل خطوة إلى الأمام، تجلب معها فرصًا جديدة، وكذلك مخاطر جديدة.
+ومن دون وجود نظام تشفير، قد تكون ملفات عملك معرضة للتهديدات في أي وقت. ولهذا السبب، فإن تشفير الأعمال لم يعد خيارًا إضافيًا.
+إذا كنت تعمل مع فريق، فإن حماية بياناتك تعني حماية فريقك، وحماية تقدمك.</value>
+  </data>
+  <data name="Blog_WYONTABE_Text1" xml:space="preserve">
+    <value>إدارة الأعمال مليئة بالمنافسة. كل قرار تتخذه، وكل خطوة إلى الأمام، تجلب معها فرصًا جديدة ومخاطر جديدة.
+ومن دون وجود تشفير، قد تكون ملفات عملك معرضة للتهديدات في أي وقت. ولهذا فإن
+&lt;a href='https://axcrypt.net/business/'&gt;&lt;b&gt;تشفير الأعمال&lt;/b&gt;&lt;/a&gt; ليس خيارًا إضافيًا.
+إذا كنت تعمل مع فريق، فإن
+&lt;a href='https://axcrypt.net/pt/blog/5-reasons-why-encryption-is-important-for-small-businesses/'&gt;&lt;b&gt;حماية بياناتك&lt;/b&gt;&lt;/a&gt; تعني حماية فريقك، وحماية تقدمك.</value>
+  </data>
+  <data name="Blog_WYONTABE_Text2" xml:space="preserve">
+    <value>إذا كنت تتساءل عما إذا كان بإمكان عملك الاعتماد على الإصدار المجاني من أكسكريبت أو على حساب Premium منتهي الصلاحية، فالإجابة القصيرة هي لا.
+تُطلب من المؤسسات استخدام خطة أكسكريبت للأعمال (Business) لتشفير الملفات ومشاركتها بطريقة احترافية وآمنة.
+
+</value>
+  </data>
+  <data name="Blog_WYONTABE_Title" xml:space="preserve">
+    <value>لماذا تحتاج مؤسستك إلى تشفير أكسكريبت للأعمال؟</value>
   </data>
   <data name="Blog_WYSASDF_Summary" xml:space="preserve">
     <value>لم يعد اكسكربت 2 يدعم ميزة تسمى ملفات فك التشفير الذاتي التي تم دعمها في اكسكربت 1.x. ما هو ملف فك التشفير الذاتي؟ إنه شيئين في أحدهما: إنه برنامج مستقل قابل للتنفيذ (a .exe) ، مع تضمين بيانات مؤمنة (ملف .axx) أو إلحاقه به.</value>
@@ -15815,7 +15975,10 @@ SE-114 29 ستوكهولم
   <data name="LegacyDownloadsDescription" xml:space="preserve">
     <value>هذه تنزيلات Legacy AxCrypt 1.x. نحن لا نصادق عليها ونحثك على عدم تنزيلها واستخدامها ، ما لم تكن لديك حاجة خاصة إليها. &lt;strong&gt; الملفات الجديدة المشفرة باستخدام اكسكربت 2.x غير متوافقة مع اكسكربت 1.x القديم! &lt;/ strong&gt; يمكن فك تشفير الملفات المشفرة باستخدام اكسكربت 1.x القديم بواسطة اكسكربت 2.x.</value>
   </data>
-  <data name="LegacyDownloadsHowToVerifyHeading" xml:space="preserve">
+  <data name="LegacyDownloadsHeading">
+    <value>التنزيلات القديمة</value>
+  </data>
+  <data name="LegacyDownloadsHowToVerifyHeading">
     <value>كيفية التحقق من التنزيل</value>
   </data>
   <data name="LegacyDownloadsHowToVerifyText" xml:space="preserve">
@@ -15824,7 +15987,10 @@ SE-114 29 ستوكهولم
   <data name="LegacyDownloadsLinkLabel" xml:space="preserve">
     <value>التنزيلات القديمة</value>
   </data>
-  <data name="LegacyDownloadsWarning" xml:space="preserve">
+  <data name="LegacyDownloadsParagraph">
+    <value>تحتاج إلى إصدار أقدم؟ قم بتنزيل إصدار سابق من أكسكريبت لنظام macOS.</value>
+  </data>
+  <data name="LegacyDownloadsWarning">
     <value>هذا الإصدار قديم ولا نقدم الدعم له. لا يتم الاحتفاظ بـ اكسكربت 1.x ولا يجب عليك تنزيله ، إلا إذا لزم الأمر على وجه التحديد. استخدامه على مسؤوليتك الخاصة.</value>
   </data>
   <data name="LegacyFaq1" xml:space="preserve">
@@ -16915,6 +17081,9 @@ SE-114 29 ستوكهولم
   <data name="Meta-Description-Blog-WUE" xml:space="preserve">
     <value>التشفير هو المفتاح لحماية بياناتك الحساسة. تعرّف على سبب أهمية استخدام التشفير لمنع الوصول غير المصرح به والانتهاكات الأمنية.</value>
   </data>
+  <data name="Meta-Description-Blog-WYONTABE">
+    <value>اكتشف لماذا تُعد خطة أكسكريبت للأعمال ضرورية للشركات. تعرّف على المخاطر المرتبطة باستخدام الإصدارات المجانية أو المميزة، وعلى الفوائد التي يوفرها التشفير الآمن والمتوافق للفرق.</value>
+  </data>
   <data name="Meta-Description-Blog-WYSASF" xml:space="preserve">
     <value>تعرّف على سبب كون الملفات ذاتية فك التشفير تشكّل مخاطر أمنية خطيرة. احمِ بياناتك الحساسة من خلال استخدام أساليب التشفير المناسبة بدلاً من ذلك.</value>
   </data>
@@ -17160,26 +17329,340 @@ SE-114 29 ستوكهولم
   <data name="Meta-Title-Blog" xml:space="preserve">
     <value>مدونة أكسكريبت – مصدرك لأخبار أمان الملفات والتشفير</value>
   </data>
+  <data name="Meta-Title-Blog-5KFOESYSBAO" xml:space="preserve">
+    <value>5 ميزات أساسية يجب أن تتوفر في كل برنامج تشفير</value>
+  </data>
   <data name="Meta-Title-Blog-5RWEISB" xml:space="preserve">
     <value>٥ أسباب تجعل التشفير مهماً للشركات الصغيرة في عام ٢٠٢٥</value>
+  </data>
+  <data name="Meta-Title-Blog-AAP" xml:space="preserve">
+    <value>انضم إلى برنامج الشراكة مع أكسكريبت واربح من خلال التشفير الآمن</value>
   </data>
   <data name="Meta-Title-Blog-AESDES" xml:space="preserve">
     <value>معيار التشفير المتقدم مقابل معيار تشفير البيانات | ايه اي اس vs. ديس</value>
   </data>
+  <data name="Meta-Title-Blog-AESVDES" xml:space="preserve">
+    <value>‏AES مقابل DES: أي معيار تشفير هو الأفضل؟</value>
+  </data>
+  <data name="Meta-Title-Blog-AFSTTKYDSDTHSWA" xml:space="preserve">
+    <value>احمِ بياناتك خلال العطلات باستخدام تشفير أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-AMEIFH" xml:space="preserve">
+    <value>تشفير أكسكريبت للأجهزة المحمولة: احمِ بياناتك أثناء التنقل</value>
+  </data>
   <data name="Meta-Title-Blog-ANYANEFSWA" xml:space="preserve">
     <value>أكسكريبت: الجيل القادم من تشفير الملفات لأمان بيانات شامل</value>
+  </data>
+  <data name="Meta-Title-Blog-AOVO" xml:space="preserve">
+    <value>أكسكريبت عبر الإنترنت مقابل غير المتصل: أي الخيارين يناسب احتياجاتك؟</value>
+  </data>
+  <data name="Meta-Title-Blog-ARWMBBGDM" xml:space="preserve">
+    <value>أكس كريبت تحصل على شارة أفضل برنامج تشفير من جارتنر لعام 2024</value>
+  </data>
+  <data name="Meta-Title-Blog-BAFESFW" xml:space="preserve">
+    <value>أفضل برامج التشفير التلقائي للملفات على نظام ويندوز في عام 2024</value>
+  </data>
+  <data name="Meta-Title-Blog-BAWIT" xml:space="preserve">
+    <value>كونكِ امرأة في مجال التكنولوجيا: التغلب على التحديات وتحقيق النجاح</value>
+  </data>
+  <data name="Meta-Title-Blog-BESFBDTUG" xml:space="preserve">
+    <value>أفضل برامج التشفير للأعمال في عام 2025: دليل أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-BOMYP" xml:space="preserve">
+    <value>كيف يُعزّز الإدارة الصحيحة لكلمات المرور مستوى الأمان الخاص بك</value>
+  </data>
+  <data name="Meta-Title-Blog-BSTSSCE" xml:space="preserve">
+    <value>احمِ بياناتك خلال موسم العطلات هذا باستخدام التشفير</value>
+  </data>
+  <data name="Meta-Title-Blog-BTSOHDGE" xml:space="preserve">
+    <value>ما وراء كواليس تشفير البيانات: كيف يعمل؟</value>
+  </data>
+  <data name="Meta-Title-Blog-CEAYNTK" xml:space="preserve">
+    <value>تشفير السحابة: دليل أساسي لحماية بياناتك السحابية</value>
+  </data>
+  <data name="Meta-Title-Blog-CEMDWYRNTK" xml:space="preserve">
+    <value>دحض الخرافات الشائعة حول التشفير: حقائق أساسية لعام 2025</value>
+  </data>
+  <data name="Meta-Title-Blog-CFE" xml:space="preserve">
+    <value>نصائح الأمن السيبراني التي يجب أن يعرفها كل موظف</value>
+  </data>
+  <data name="Meta-Title-Blog-CHHTSSO" xml:space="preserve">
+    <value>النظافة السيبرانية: عادات أساسية للبقاء آمناً على الإنترنت</value>
+  </data>
+  <data name="Meta-Title-Blog-CRI" xml:space="preserve">
+    <value>أهمية المرونة السيبرانية في حماية البيانات</value>
+  </data>
+  <data name="Meta-Title-Blog-CWIELTI" xml:space="preserve">
+    <value>لماذا يُعد التشفير أمرًا بالغ الأهمية لأمان العملات المشفرة</value>
+  </data>
+  <data name="Meta-Title-Blog-DARATAIUIS" xml:space="preserve">
+    <value>أمان البيانات: فهم البيانات أثناء السكون، وأثناء النقل، وأثناء الاستخدام</value>
+  </data>
+  <data name="Meta-Title-Blog-DEVFE" xml:space="preserve">
+    <value>تشفير القرص مقابل تشفير الملفات: أيهما الأفضل لك؟</value>
+  </data>
+  <data name="Meta-Title-Blog-DGTE" xml:space="preserve">
+    <value>الدليل الكامل لتشفير البيانات: حماية معلوماتك الحساسة</value>
+  </data>
+  <data name="Meta-Title-Blog-DLHRYSDTT" xml:space="preserve">
+    <value>احمِ بياناتك في عيد الشكر هذا باستخدام تشفير أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-EAB" xml:space="preserve">
+    <value>التشفير والقياسات الحيوية: تعزيز أمان البيانات باستخدام التكنولوجيا</value>
+  </data>
+  <data name="Meta-Title-Blog-EDITKFAPNY" xml:space="preserve">
+    <value>ابدأ العام الجديد براحة بال بال: قم بتشفير بياناتك</value>
+  </data>
+  <data name="Meta-Title-Blog-EFTFPAECT" xml:space="preserve">
+    <value>مستقبل التشفير: الحماية من التهديدات السيبرانية الناشئة</value>
+  </data>
+  <data name="Meta-Title-Blog-EGTEOFUTUAA" xml:space="preserve">
+    <value>تشفير ملفات OneDrive باستخدام تشفير AES-256: دليل سهل ومبسط</value>
+  </data>
+  <data name="Meta-Title-Blog-EIAWII" xml:space="preserve">
+    <value>ما هو قانون "Earn It"؟ فهم الإطار الأمني للتشريع</value>
+  </data>
+  <data name="Meta-Title-Blog-EITBM" xml:space="preserve">
+    <value>كيف يحمي التشفير البيانات الحساسة في القطاع المصرفي</value>
+  </data>
+  <data name="Meta-Title-Blog-EITHI" xml:space="preserve">
+    <value>لماذا التشفير ضروري لأمن بيانات الرعاية الصحية</value>
+  </data>
+  <data name="Meta-Title-Blog-EITLI" xml:space="preserve">
+    <value>كيف يحمي التشفير البيانات الحساسة في قطاع القانون</value>
+  </data>
+  <data name="Meta-Title-Blog-EITPITS" xml:space="preserve">
+    <value>التشفير: الحل لتحديات أمان بياناتك</value>
+  </data>
+  <data name="Meta-Title-Blog-EOAGFUWBE" xml:space="preserve">
+    <value>تشفير ملفات OneDrive وGoogle Drive باستخدام تشفير AES-256 من أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-ES" xml:space="preserve">
+    <value>أفضل برامج التشفير لحماية بياناتك الحساسة</value>
+  </data>
+  <data name="Meta-Title-Blog-EVA" xml:space="preserve">
+    <value>التشفير مقابل المصادقة: فهم الفروقات الرئيسية</value>
   </data>
   <data name="Meta-Title-Blog-FEFBI" xml:space="preserve">
     <value>تعرف على كيفية حماية قطاع البنوك من خلال تشفير AES-256 من أكسكريبت.</value>
   </data>
+  <data name="Meta-Title-Blog-FOKM" xml:space="preserve">
+    <value>إدارة المفاتيح: أمر أساسي لتشفير بيانات قوي</value>
+  </data>
+  <data name="Meta-Title-Blog-GABEWA" xml:space="preserve">
+    <value>احصل على تشفير AES-256 بت لأقصى درجات الأمان مع أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-HAAVTYB" xml:space="preserve">
+    <value>كيف يعزّز أكسكريبت أمان وكفاءة عملك؟</value>
+  </data>
   <data name="Meta-Title-Blog-HACEESCSDP" xml:space="preserve">
     <value>تخزين سحابي آمن مع تشفير AES-256 من أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-HAPYD" xml:space="preserve">
+    <value>كيف يحمي أكسكريبت بياناتك الحساسة باستخدام التشفير المتقدم</value>
+  </data>
+  <data name="Meta-Title-Blog-HDSHTPMDWE" xml:space="preserve">
+    <value>حماية بيانات الرعاية الصحية: استراتيجيات التشفير للسجلات الطبية</value>
+  </data>
+  <data name="Meta-Title-Blog-HETIDS" xml:space="preserve">
+    <value>كيف تؤثر الأخطاء البشرية على أمان البيانات وكيفية الوقاية منها</value>
+  </data>
+  <data name="Meta-Title-Blog-HFMICTTESAOOLTAP" xml:space="preserve">
+    <value>كيف يُشكّل برنامج التشفير مستقبل إدارة الملفات</value>
+  </data>
+  <data name="Meta-Title-Blog-HOA" xml:space="preserve">
+    <value>تاريخ أكسكريبت: رحلة نحو التميز في أمان البيانات</value>
+  </data>
+  <data name="Meta-Title-Blog-HQCAHCYP" xml:space="preserve">
+    <value>كم من الوقت يحتاجه الهاكر لاختراق كلمة مرورك؟</value>
+  </data>
+  <data name="Meta-Title-Blog-HSBCPTFGCT" xml:space="preserve">
+    <value>احمِ عملك الصغير من التهديدات السيبرانية في عام 2025</value>
+  </data>
+  <data name="Meta-Title-Blog-HTCTREAFYSD" xml:space="preserve">
+    <value>كيفية اختيار أفضل خوارزمية تشفير لبياناتك</value>
+  </data>
+  <data name="Meta-Title-Blog-HTCTREFYSD" xml:space="preserve">
+    <value>اختيار التشفير المناسب للبيانات الحساسة في عام 2025</value>
+  </data>
+  <data name="Meta-Title-Blog-HTCWHER" xml:space="preserve">
+    <value>الامتثال لمتطلبات تشفير HIPAA: دليل خطوة بخطوة</value>
+  </data>
+  <data name="Meta-Title-Blog-HTEDOYAAIPI2" xml:space="preserve">
+    <value>تشفير الملفات على أجهزة أندرويد وiOS في عام 2024 باستخدام أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-HTEFIGDSBSI2" xml:space="preserve">
+    <value>تشفير ملفات Google Drive في عام 2025 باستخدام أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-HTEFOWAWA" xml:space="preserve">
+    <value>قم بتشفير الملفات تلقائيًا على نظام ويندوز باستخدام أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-HTPDOYMPI2" xml:space="preserve">
+    <value>How to Secure Your Mobile Phone Data in 2022</value>
+  </data>
+  <data name="Meta-Title-Blog-HTPYBFC" xml:space="preserve">
+    <value>احمِ عملك من التهديدات السيبرانية من خلال تدابير أمنية فعّالة</value>
+  </data>
+  <data name="Meta-Title-Blog-HTSACER" xml:space="preserve">
+    <value>
+كيفية إرسال تقرير خطأ إلى دعم أكسكريبت
+
+</value>
+  </data>
+  <data name="Meta-Title-Blog-HTSPWESBSI2" xml:space="preserve">
+    <value>تأمين ملفات PDF باستخدام التشفير بكلمة مرور عبر أكسكريبت في عام 2024</value>
+  </data>
+  <data name="Meta-Title-Blog-HTSRWWE" xml:space="preserve">
+    <value>تأمين العمل عن بُعد باستخدام تشفير AES 256 | AxCrypt
+
+</value>
+  </data>
+  <data name="Meta-Title-Blog-HTSSFWAUA" xml:space="preserve">
+    <value>مشاركة الملفات بأمان باستخدام أكسكريبت: دليل خطوة بخطوة</value>
+  </data>
+  <data name="Meta-Title-Blog-HTSSPWYFC" xml:space="preserve">
+    <value>مشاركة كلمات المرور بأمان باستخدام مدير كلمات المرور من أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-IOCITHRS" xml:space="preserve">
+    <value>لماذا تُعدّ الأمن السيبراني أمرًا بالغ الأهمية في حماية بيانات الموارد البشرية؟</value>
+  </data>
+  <data name="Meta-Title-Blog-ITESBAETFC" xml:space="preserve">
+    <value>هل تُعد المدارس والجامعات أهدافًا سهلة للهجمات السيبرانية؟</value>
+  </data>
+  <data name="Meta-Title-Blog-ITTROLPPAVU" xml:space="preserve">
+    <value>حماية الصور ومقاطع الفيديو الشخصية من سرقة الهوية</value>
+  </data>
+  <data name="Meta-Title-Blog-LYCWAR" xml:space="preserve">
+    <value>هل من الآمن ترك برنامج أكسكريبت يعمل على جهاز الكمبيوتر الخاص بك؟</value>
+  </data>
+  <data name="Meta-Title-Blog-MDPNST" xml:space="preserve">
+    <value>الأجهزة المحمولة: تهديد متزايد لأمن البيانات</value>
+  </data>
+  <data name="Meta-Title-Blog-MDSCBAFI2" xml:space="preserve">
+    <value>أهم تحديات أمان البيانات التي تواجهها الشركات في عام 2022</value>
+  </data>
+  <data name="Meta-Title-Blog-METWREICY" xml:space="preserve">
+    <value>تشفير الهواتف المحمولة: اتجاه متزايد لتعزيز الأمان</value>
+  </data>
+  <data name="Meta-Title-Blog-MK" xml:space="preserve">
+    <value>ما هي "المفتاح الرئيسي" وكيف يعزز أمان البيانات؟</value>
+  </data>
+  <data name="Meta-Title-Blog-PECA" xml:space="preserve">
+    <value>أكس كريبت يحصل على جائزة اختيار المحررين من PCMag لأفضل برنامج تشفير</value>
+  </data>
+  <data name="Meta-Title-Blog-PRAA" xml:space="preserve">
+    <value>كيفية إعادة تعيين كلمة مرور أكسكريبت بأمان</value>
+  </data>
+  <data name="Meta-Title-Blog-PYDFTCG" xml:space="preserve">
+    <value>احمِ بياناتك من لص الكريسماس باستخدام التشفير</value>
+  </data>
+  <data name="Meta-Title-Blog-ROOACP" xml:space="preserve">
+    <value>لماذا يُعد تنظيم كلمات مرور الشركة أمرًا ضروريًا للأمان؟</value>
+  </data>
+  <data name="Meta-Title-Blog-SCMAE" xml:space="preserve">
+    <value>تفنيد الخرافات الشائعة حول التشفير: ما تحتاج إلى معرفته</value>
+  </data>
+  <data name="Meta-Title-Blog-SD" xml:space="preserve">
+    <value>المعضلة الاجتماعية: حماية بياناتك في العصر الرقمي</value>
+  </data>
+  <data name="Meta-Title-Blog-SSINAG" xml:space="preserve">
+    <value>أمان الهواتف الذكية: كيفية حماية جهازك من التهديدات</value>
+  </data>
+  <data name="Meta-Title-Blog-STUCTREDSA" xml:space="preserve">
+    <value>تأمين بطولة أمم أوروبا 2024: دور أكسكريبت في حماية البيانات</value>
+  </data>
+  <data name="Meta-Title-Blog-SVAE" xml:space="preserve">
+    <value>التشفير المتماثل مقابل التشفير غير المتماثل: شرح الفروقات الرئيسية</value>
+  </data>
+  <data name="Meta-Title-Blog-SVL" xml:space="preserve">
+    <value>الاشتراك في أكسكريبت مقابل الترخيص: أيهما الأفضل لك؟</value>
+  </data>
+  <data name="Meta-Title-Blog-T3PTFWFH" xml:space="preserve">
+    <value>أفضل نصائح الخصوصية للعمل عن بُعد: ابقَ آمنًا ومحمياً</value>
+  </data>
+  <data name="Meta-Title-Blog-TAODSITDE" xml:space="preserve">
+    <value>إتقان أمان البيانات في المشهد الرقمي الحالي</value>
   </data>
   <data name="Meta-Title-Blog-TBFEBSBF" xml:space="preserve">
     <value>أفضل 10 فوائد لتشفير الملفات للشركات</value>
   </data>
+  <data name="Meta-Title-Blog-TIOEADITC" xml:space="preserve">
+    <value>لماذا يُعدّ تشفير جميع بيانات الشركة أمرًا بالغ الأهمية للحماية؟</value>
+  </data>
+  <data name="Meta-Title-Blog-TSTOE" xml:space="preserve">
+    <value>أكثر أنواع التشفير أمانًا: تشفير AES-256 لأقصى درجات الحماية</value>
+  </data>
+  <data name="Meta-Title-Blog-TTAYOBS" xml:space="preserve">
+    <value>نحتفل بعام من تعزيز أمان البيانات مع أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-TUGTFEVDEWOIBFY" xml:space="preserve">
+    <value>تشفير الملفات مقابل تشفير الأقراص: أيهما الأنسب لك؟</value>
+  </data>
+  <data name="Meta-Title-Blog-UODPCH" xml:space="preserve">
+    <value>لماذا قد يكون استخدام كلمات مرور مختلفة ضارًا بأمانك؟</value>
+  </data>
+  <data name="Meta-Title-Blog-WATPOI" xml:space="preserve">
+    <value>ويكيليكس: دور التشفير في حماية المعلومات</value>
+  </data>
   <data name="Meta-Title-Blog-WAYAFC" xml:space="preserve">
     <value>أكسكريبت: حليفك ضد الهجمات السيبرانية في عام 2025</value>
+  </data>
+  <data name="Meta-Title-Blog-WCSBYTP" xml:space="preserve">
+    <value>الأمن السيبراني في عام 2025: أهم الأسباب لإعطاء الأولوية لحماية البيانات</value>
+  </data>
+  <data name="Meta-Title-Blog-WDMME" xml:space="preserve">
+    <value>لماذا فك التشفير لا يقل أهمية عن التشفير</value>
+  </data>
+  <data name="Meta-Title-Blog-WDSPOG" xml:space="preserve">
+    <value>احمِ بياناتك في أولمبياد باريس 2024 باستخدام أكسكريبت</value>
+  </data>
+  <data name="Meta-Title-Blog-WERIA" xml:space="preserve">
+    <value>ما هو التشفير وكيف يحمي بياناتك؟</value>
+  </data>
+  <data name="Meta-Title-Blog-WIAAI" xml:space="preserve">
+    <value>ما هو معرف أكسكريبت وكيف يُعزز أمانك؟</value>
+  </data>
+  <data name="Meta-Title-Blog-WIABFAAHTPI" xml:space="preserve">
+    <value>ما هو هجوم القوة الغاشمة (Brute Force) وكيف يمكن منعه؟</value>
+  </data>
+  <data name="Meta-Title-Blog-WIAPMHSIPMS" xml:space="preserve">
+    <value>أمان مديري كلمات المرور: هل استخدامها آمن؟</value>
+  </data>
+  <data name="Meta-Title-Blog-WIC" xml:space="preserve">
+    <value>فهم الأمن السيبراني: حماية بياناتك من التهديدات</value>
+  </data>
+  <data name="Meta-Title-Blog-WICCAICT" xml:space="preserve">
+    <value>الحوسبة السحابية: فهم المخاطر والتهديدات الأمنية</value>
+  </data>
+  <data name="Meta-Title-Blog-WIENITTI" xml:space="preserve">
+    <value>لماذا يُعد التشفير أمرًا ضروريًا لأمن بيانات صناعة التكنولوجيا؟</value>
+  </data>
+  <data name="Meta-Title-Blog-WINAIMCR" xml:space="preserve">
+    <value>فهم الامتثال لتوجيه NIS2: المتطلبات الرئيسية لعام 2025</value>
+  </data>
+  <data name="Meta-Title-Blog-WIPTFI2E" xml:space="preserve">
+    <value>لماذا تعتمد الصناعات على التشفير بمعدل 256 بت؟</value>
+  </data>
+  <data name="Meta-Title-Blog-WRDBTUAE" xml:space="preserve">
+    <value>دروس من الانتهاكات الأخيرة للبيانات: أهمية التشفير</value>
+  </data>
+  <data name="Meta-Title-Blog-WSYPYPI" xml:space="preserve">
+    <value>أهمية حماية معلوماتك الخاصة</value>
+  </data>
+  <data name="Meta-Title-Blog-WUE" xml:space="preserve">
+    <value>لماذا يُعد التشفير أمرًا ضروريًا لأمان البيانات وخصوصيتها؟</value>
+  </data>
+  <data name="Meta-Title-Blog-WYONTABE">
+    <value>لماذا تُعد أكسكريبت للأعمال ضرورية لتشفير الملفات بشكل آمن في المؤسسات؟</value>
+  </data>
+  <data name="Meta-Title-Blog-WYSASF" xml:space="preserve">
+    <value>مخاطر الملفات التي تقوم بفك التشفير تلقائيًا ولماذا يجب عليك تجنبها</value>
+  </data>
+  <data name="Meta-Title-Blog-ZKEEIST" xml:space="preserve">
+    <value>فهم التشفير عديم المعرفة (Zero-Knowledge): دليل مبسّط</value>
+  </data>
+  <data name="Meta-Title-Blog-ZTCS" xml:space="preserve">
+    <value>فهم الأمن السيبراني بمبدأ الثقة المعدومة: نهج جديد للحماية</value>
   </data>
   <data name="Meta-Title-Business" xml:space="preserve">
     <value>أكسكريبت للشركات والفرق | تشفير الملفات للأعمال مع الوصول الجماعي وإمكانيات التحكم</value>
@@ -17775,6 +18258,12 @@ SE-114 29 ستوكهولم
   </data>
   <data name="OthersText" xml:space="preserve">
     <value>آخرون</value>
+  </data>
+  <data name="OTPCodeValidationText" xml:space="preserve">
+    <value>هذا الرمز صالح لمدة &lt;strong&gt;{{mfa_otp_expiration_mins}} دقيقة&lt;/strong&gt; ويمكن استخدامه مرة واحدة فقط.</value>
+  </data>
+  <data name="OTPVerificationText" xml:space="preserve">
+    <value>رمز المرور لمرة واحدة (OTP) الخاص بك: {{user_mfa_otp}}</value>
   </data>
   <data name="OurProductLinkLabel" xml:space="preserve">
     <value>منتوجنا </value>
@@ -20502,6 +20991,10 @@ SE-114 29 ستوكهولم
     <value>تابعنا على وسائل التواصل الإجتماعي</value>
     <comment>Text telling readers to follow us on social media, typically with a number of icons below.</comment>
   </data>
+  <data name="SocialMediaText" xml:space="preserve">
+    <value>تابع حساباتنا على وسائل التواصل الاجتماعي
+&lt;br /&gt;للتعرف على الميزات والعروض القادمة!</value>
+  </data>
   <data name="SoftwareIsUpToDateLabel" xml:space="preserve">
     <value>حتى الآن</value>
     <comment>Short label stating that the software is up to date.</comment>
@@ -21642,6 +22135,14 @@ SE-114 29 ستوكهولم
   <data name="VerificationEmailSentTitle" xml:space="preserve">
     <value>تم إرسال رابط التحقق</value>
     <comment>The title of the page stating that a verification email has been sent.</comment>
+  </data>
+  <data name="VerificationMailSubject" xml:space="preserve">
+    <value>أنت تتلقى هذا البريد الإلكتروني كجزء من محاولة تسجيل الدخول إلى حسابك في أكسكريبت.
+لإكمال تسجيل الدخول إلى أكسكريبت، أدخل رمز المرور لمرة واحدة (OTP) في نافذة المصادقة:</value>
+  </data>
+  <data name="VerificationMailSubjectText1" xml:space="preserve">
+    <value>إذا لم تقم بمحاولة تسجيل الدخول إلى حسابك، يرجى التواصل معنا فورًا عبر البريد الإلكتروني التالي:
+&lt;a style="color: #87CA4E; font-weight: 700; text-decoration: none" href="mailto:support@axcrypt.net"&gt;support@axcrypt.net&lt;/a&gt;.</value>
   </data>
   <data name="VerifyAccountLabel" xml:space="preserve">
     <value>يرجى التحقق من حسابك الجديد</value>

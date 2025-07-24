@@ -1,102 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
-		Microsoft ResX Schema
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-		Version 1.3
-
-		The primary goals of this format is to allow a simple XML format 
-		that is mostly human readable. The generation and parsing of the 
-		various data types are done through the TypeConverter classes 
-		associated with the data types.
-
-		Example:
-
-		... ado.net/XML headers & schema ...
-		<resheader name="resmimetype">text/microsoft-resx</resheader>
-		<resheader name="version">1.3</resheader>
-		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-		<data name="Name1">this is my long string</data>
-		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-			[base64 mime encoded serialized .NET Framework object]
-		</data>
-		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-			[base64 mime encoded string representing a byte array form of the .NET Framework object]
-		</data>
-
-		There are any number of "resheader" rows that contain simple 
-		name/value pairs.
-
-		Each data row contains a name, and value. The row also contains a 
-		type or mimetype. Type corresponds to a .NET class that support 
-		text/value conversion through the TypeConverter architecture. 
-		Classes that don't support this are serialized and stored with the 
-		mimetype set.
-
-		The mimetype is used for serialized objects, and tells the 
-		ResXResourceReader how to depersist the object. This is currently not 
-		extensible. For a given mimetype the value must be set accordingly:
-
-		Note - application/x-microsoft.net.object.binary.base64 is the format 
-		that the ResXResourceWriter will generate, however the reader can 
-		read any of the formats listed below.
-
-		mimetype: application/x-microsoft.net.object.binary.base64
-		value   : The object must be serialized with 
-			: System.Serialization.Formatters.Binary.BinaryFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.soap.base64
-		value   : The object must be serialized with 
-			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.bytearray.base64
-		value   : The object must be serialized into a byte array 
-			: using a System.ComponentModel.TypeConverter
-			: and then encoded with base64 encoding.
-	-->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <data name="AbortedFileStatus" xml:space="preserve">
     <value>Status 'Abgebrochen' ({0}).</value>
   </data>
@@ -574,6 +594,9 @@ Wählen Sie etwas, das schwer zu erraten ist, da das Passwort all Ihre Passwört
   <data name="AlertText" xml:space="preserve">
     <value>Warnung!</value>
   </data>
+  <data name="AllDoneText" xml:space="preserve">
+    <value>Fertig!</value>
+  </data>
   <data name="AllLabel" xml:space="preserve">
     <value>ganz</value>
   </data>
@@ -597,6 +620,9 @@ Bitte loggen Sie sich mit dem selben Passwort ein, welches Sie zuvor benutzt hab
   <data name="AlwaysOfflineToolTip" xml:space="preserve">
     <value>Solange diese Funktion aktiviert ist, wird der Internetzugang nie genutzt noch ist er erforderlich.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
+  </data>
+  <data name="AndText" xml:space="preserve">
+    <value>und</value>
   </data>
   <data name="AnnualMonthlySwitcherAnnualButtonLabel" xml:space="preserve">
     <value>Jährliche 20% Rabatt</value>
@@ -662,6 +688,9 @@ Bitte loggen Sie sich mit dem selben Passwort ein, welches Sie zuvor benutzt hab
 
 Aktualisierungen des Abonnements werden hier innerhalb weniger Minuten angezeigt.</value>
   </data>
+  <data name="AppText" xml:space="preserve">
+    <value>App</value>
+  </data>
   <data name="AppVersionLabel" xml:space="preserve">
     <value>Version {0}</value>
     <comment>Text containing information about current application version.</comment>
@@ -686,6 +715,9 @@ Aktualisierungen des Abonnements werden hier innerhalb weniger Minuten angezeigt
   </data>
   <data name="AuthenticationError" xml:space="preserve">
     <value>Die Seite, die Sie besuchen wollen benötigt eine Authentifizierung. Bitte melden Sie sich an um fortzufahren.</value>
+  </data>
+  <data name="AuthenticatorAppText" xml:space="preserve">
+    <value>Authentifikator-App</value>
   </data>
   <data name="AutoDeletionEmailOutro" xml:space="preserve">
     <value>Sie müssen Sie nicht antworten oder anderweitig reagieren. Wenn Sie nichts tun, werden keine E-Mails mehr verschickt und ihr AxCrypt ID Account wird permanent gelöscht.</value>
@@ -4831,9 +4863,9 @@ Sie wurden gewarnt, jetzt genießen!
     <value>Ähnlich wie beim Google Drive-Prozess verschlüsselt AxCrypt die OneDrive-Dateien in einer Reihenfolge, die die Verschlüsselung der Datei ermöglicht, bevor die Datei mit der Cloud synchronisiert wird.</value>
   </data>
   <data name="Blog_EODAGDFWBES_H4_Text1" xml:space="preserve">
-    <value>Die Verschlüsselung Ihrer Google Drive- und OneDrive-Dateien ist eine intelligente Methode, um Ihre Daten vor unbefugtem Zugriff, Diebstahl oder Verlust zu schützen. Die Verschlüsselung fügt Ihren Dateien eine zusätzliche Sicherheitsebene hinzu, indem sie sie für jeden unlesbar macht, der nicht über den richtigen Schlüssel oder das richtige Passwort verfügt. Dies bedeutet, dass selbst wenn sich jemand in Ihr Cloud-Speicherkonto einhackt oder Ihr Gerät stiehlt, er nicht auf Ihre vertraulichen Informationen zugreifen kann.</value>
+    <value>Die Verschlüsselung von Google Drive und OneDrive ist eine clevere Möglichkeit, Ihre Daten vor unbefugtem Zugriff, Diebstahl oder Verlust zu schützen. Die Verschlüsselung fügt Ihren Dateien eine zusätzliche Sicherheitsebene hinzu, indem sie sie für jeden unlesbar macht, der nicht über den richtigen Schlüssel oder das richtige Passwort verfügt. Das bedeutet, dass, selbst wenn sich jemand in Ihr Cloud-Speicherkonto hackt oder Ihr Gerät stiehlt, er nicht auf Ihre sensiblen Informationen zugreifen kann.</value>
   </data>
-  <data name="Blog_EODAGDFWBES_H4_Text2" xml:space="preserve">
+  <data name="Blog_EODAGDFWBES_H4_Text2">
     <value>Die Verschlüsselung hilft Ihnen auch bei der Einhaltung von Datenschutzgesetzen und -vorschriften, die für berufliche Daten in Ihrem Unternehmen gelten können. Sie können auch den Komfort und die Flexibilität des Cloud-Speichers genießen, ohne Ihre Datensicherheit zu beeinträchtigen.</value>
   </data>
   <data name="Blog_EODAGDFWBES_H5_Conclusion_Text1" xml:space="preserve">
@@ -4867,12 +4899,12 @@ Sie wurden gewarnt, jetzt genießen!
     <value>Haben Sie sich jemals gefragt, wie sicher Ihre sensiblen persönlichen Dateien und Ihre Geschäftsdaten im Cloud-Speicher von Google Drive und OneDrive sind? Das Aufbewahren von Dateien in der Cloud ist eine hervorragende Möglichkeit, Ihre Daten zu speichern, darauf zuzugreifen und zu sichern, aber es ist möglicherweise nicht immer die privateste und sicherste Möglichkeit, dies zu tun.</value>
   </data>
   <data name="Blog_EODAGDFWBES_Text2" xml:space="preserve">
-    <value>Nach &lt;a href='https://support.google.com/drive/answer/10375054?hl=en .'&gt;&lt;b&gt;Google&lt;/b&gt;&lt;/a&gt;, es "verarbeitet" Ihre gespeicherten Daten, um die Nutzererfahrung zu verbessern. Dies bedeutet, dass Google den Zugriff auf Ihre Dateien behält und diese nach eigenem Ermessen anzeigen kann. Wenn es um Ihre sensiblen Daten geht, können Sie es sich nicht leisten, Risiken einzugehen. Sie müssen die volle Kontrolle darüber haben.</value>
+    <value>Laut &lt;a href='https://support.google.com/drive/answer/10375054?hl=en.'&gt;&lt;b&gt;Google&lt;/b&gt;&lt;/a&gt; "verarbeitet" es Ihre gespeicherten Daten, um das Nutzererlebnis zu verbessern. Dies bedeutet, dass Google weiterhin Zugriff auf Ihre Dateien hat und diese nach eigenem Ermessen einsehen kann. Wenn es um Ihre sensiblen Daten geht, können Sie es sich nicht leisten, Risiken einzugehen. Sie müssen die volle Kontrolle darüber haben, was bedeutet, dass Sie eine Google Drive-Verschlüsselung benötigen.</value>
   </data>
   <data name="Blog_EODAGDFWBES_Text3" xml:space="preserve">
-    <value>Die Verschlüsselung Ihrer ruhenden Daten und Dateien und bevor sie die Cloud erreichen, ist eine der sichersten Maßnahmen, um sicherzustellen, dass sie jederzeit sicher bleiben, auch wenn ein Cloud-Speicheranbieter Zugriff darauf hat oder wenn die Dateien in die Hände eines böswilligen Angreifers gelangen.</value>
+    <value>OneDrive verfügt auch über einen Personal Vault-Funktion, die wichtige Elemente wie IDs oder Finanzunterlagen mit AES-256 im Ruhezustand und TLS während der Übertragung verschlüsselt. Microsoft verwaltet jedoch die Verschlüsselungsschlüssel, was bedeutet, dass sie möglicherweise auf Ihre Dateien zugreifen können, wenn sie gesetzlich dazu gezwungen werden oder während einer Sicherheitsverletzung. Synchronisierte Dateien unter Windows 10/11 verwenden BitLocker, aber der Datenschutz ist nicht garantiert. Daher ist die OneDrive-Verschlüsselung robust, gewährleistet aber keine vollständige Privatsphäre, also verschlüsseln Sie sensible Daten vor dem Hochladen.</value>
   </data>
-  <data name="Blog_EODAGDFWBES_Tittle" xml:space="preserve">
+  <data name="Blog_EODAGDFWBES_Tittle">
     <value>Verschlüsseln Sie OneDrive- und Google Drive-Dateien mit der weltweit besten Verschlüsselungssoftware</value>
   </data>
   <data name="Blog_ES_conclusion" xml:space="preserve">
@@ -12430,6 +12462,9 @@ Wenn Sie unsere temporären Session-Cookies nicht akzeptieren, können Sie sich 
   <data name="CustomerReadHeading" xml:space="preserve">
     <value>AxCrypt lesen &lt;label&gt;Kundengeschichten&lt;/label&gt;</value>
   </data>
+  <data name="CustomersText" xml:space="preserve">
+    <value>Kunden</value>
+  </data>
   <data name="CustomerStoriesHead1" xml:space="preserve">
     <value>IPTWINS S.A.S. Sichert sensible Dokumente mit Leichtigkeit</value>
   </data>
@@ -12867,6 +12902,9 @@ Wir bedauern Sie gehen zu sehen und hoffen, dass Sie Ihre Zeit mit AxCrypt genos
   <data name="DifferentWayPayText" xml:space="preserve">
     <value>Unterschiedliche Zahlungsweise(n)?</value>
   </data>
+  <data name="DirectSupportText" xml:space="preserve">
+    <value>Wir bieten direkte Unterstützung für</value>
+  </data>
   <data name="DisableAccessText" xml:space="preserve">
     <value>Deaktivieren des Zugriffs</value>
   </data>
@@ -13172,6 +13210,9 @@ Wir bedauern Sie gehen zu sehen und hoffen, dass Sie Ihre Zeit mit AxCrypt genos
     <value>Gehe zu E-Mail</value>
     <comment>Text of link for opening mail application.</comment>
   </data>
+  <data name="EmailAuthenticationText" xml:space="preserve">
+    <value>E-Mail-Authentifizierung</value>
+  </data>
   <data name="EmailErrorTemplateNotFound" xml:space="preserve">
     <value>Vorlage nicht gefunden.</value>
   </data>
@@ -13373,6 +13414,9 @@ Wir bedauern Sie gehen zu sehen und hoffen, dass Sie Ihre Zeit mit AxCrypt genos
   </data>
   <data name="EnterGroupNamePlaceHolder" xml:space="preserve">
     <value>Gruppenname eingeben</value>
+  </data>
+  <data name="EnterOTPPlaceHolderText" xml:space="preserve">
+    <value>OTP eingeben</value>
   </data>
   <data name="EnterPassphraseForIdentityPrompt" xml:space="preserve">
     <value>Identität '{0}' Passwort</value>
@@ -18021,11 +18065,53 @@ Ohne Premium können Sie nur  verschlüsselte Dateien sehen und dauerhaft entsch
   <data name="MetadataRetentionText" xml:space="preserve">
     <value>Behält den ursprünglichen Dateinamen und die Informationen einer gesicherten Datei bei.</value>
   </data>
+  <data name="MFAAlreadyRecoveryCodesText" xml:space="preserve">
+    <value>Sie haben bereits alle Wiederherstellungscodes verwendet!</value>
+  </data>
+  <data name="MFAAvoidLosingText" xml:space="preserve">
+    <value>Um den Verlust des Zugriffs zu vermeiden und neue Codes zu generieren, konfigurieren Sie die Zwei-Faktor-Authentifizierung mit 
+einer Authentifizierungs-App neu.</value>
+  </data>
+  <data name="MFABackupCodesTexts" xml:space="preserve">
+    <value>Sie können sich jetzt mit Backup-Codes in Ihr Konto einloggen, wenn Sie keinen Zugriff
+auf die Authentifizierungs-App haben. &lt;strong&gt;Jeder Code kann nur einmal verwendet werden. &lt;/strong&gt;</value>
+  </data>
+  <data name="MFABackupCodesTexts1" xml:space="preserve">
+    <value>&lt;strong&gt;Betrachten Sie diese Codes wie Passwörter&lt;/strong&gt; und speichern Sie sie sicher in &lt;strong&gt;Passwort-Manager&lt;/strong&gt;.</value>
+  </data>
+  <data name="MFADescriptionText" xml:space="preserve">
+    <value>Die Multi-Faktor-Authentifizierung ist eine erweiterte Sicherheitsmaßnahme. Wenn diese Option aktiviert ist, sind für die Anmeldung bei AxCrypt zwei Formen der Identifizierung erforderlich.</value>
+  </data>
+  <data name="MFADescriptionText1" xml:space="preserve">
+    <value>Aktivieren Sie die sichere Anmeldung mit einer beliebigen Authentifizierungs-App, &lt;br /&gt;einschließlich &lt;strong&gt;Microsoft und Google Authenticator&lt;/strong&gt;.</value>
+  </data>
+  <data name="MFAEmailAuthentication" xml:space="preserve">
+    <value>Um die E-Mail-Authentifizierung zu aktivieren, müssen wir einen Bestätigungscode an Ihre E-Mail-ID senden.</value>
+  </data>
+  <data name="MFAInitialSetupText" xml:space="preserve">
+    <value>Um die Multi-Faktor-Authentifizierung zu aktivieren, installieren Sie eine beliebige Authentifizierungs-App (z. B. Microsoft, Google usw.)</value>
+  </data>
   <data name="MFAInvalidUserError" xml:space="preserve">
     <value>Fehler beim Aktivieren/Deaktivieren der Multi-Faktor-Authentifizierung aufgrund eines falschen Kennworts</value>
   </data>
   <data name="MFAMailSubject" xml:space="preserve">
     <value>Ihr AxCrypt OTP für die sichere Anmeldung</value>
+  </data>
+  <data name="MFAMultifactorTypeText" xml:space="preserve">
+    <value>Jeder Code kann nur einmal verwendet werden. Um den Zugriff nicht zu verlieren und neue Codes zu generieren, konfigurieren Sie die Multi-Faktor-Authentifizierung mit
+einen beliebigen Multifaktor-Typ (Authenticator-App, E-Mail und SMS).</value>
+  </data>
+  <data name="MFANotEnabledText" xml:space="preserve">
+    <value>Die Multi-Faktor-Authentifizierung ist für dieses Konto nicht aktiviert! Diese Seite wird in wenigen Sekunden zur Startseite weitergeleitet.</value>
+  </data>
+  <data name="MFAOneTimeVerificationText" xml:space="preserve">
+    <value>Erhalten Sie einen einmaligen Verifizierungscode, der an Ihren registrierten &lt;br /&gt; E-Mail-Adresse.</value>
+  </data>
+  <data name="MFAPasswordConfirmText" xml:space="preserve">
+    <value>Geben Sie zur Bestätigung das Passwort Ihres AxCrypt-Kontos ein</value>
+  </data>
+  <data name="MFARecoveryCodeSignInText" xml:space="preserve">
+    <value>Sie haben einen der Wiederherstellungscodes verwendet, um sich anzumelden.</value>
   </data>
   <data name="MfaRecoveryCodeText" xml:space="preserve">
     <value>Verwenden Sie eine</value>
@@ -18036,11 +18122,26 @@ Ohne Premium können Sie nur  verschlüsselte Dateien sehen und dauerhaft entsch
   <data name="MfaRecoveryCodeText2" xml:space="preserve">
     <value>, um auf Ihr Konto zuzugreifen.</value>
   </data>
+  <data name="MFAScanQRCodeText" xml:space="preserve">
+    <value>Scannen Sie den QR-Code aus der Authentifizierungs-App</value>
+  </data>
+  <data name="MFAScanQRCodeText1" xml:space="preserve">
+    <value>Oder kopieren Sie den folgenden Code, und fügen Sie ihn in die Authentifizierungs-App ein.</value>
+  </data>
+  <data name="MFASuccessText" xml:space="preserve">
+    <value>Sie können sofort loslegen</value>
+  </data>
+  <data name="MFASuccessText1" xml:space="preserve">
+    <value>Authentifizierung für zukünftige Anmeldungen.</value>
+  </data>
   <data name="MFAText" xml:space="preserve">
     <value>MFA</value>
   </data>
   <data name="MfaText1" xml:space="preserve">
     <value>Ihr Konto ist geschützt durch</value>
+  </data>
+  <data name="MFAText2" xml:space="preserve">
+    <value>Bitte wählen Sie Ihre Authentifizierungsmethode aus.</value>
   </data>
   <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>Wie aktiviere ich MFA in AxCrypt?</value>
@@ -18221,6 +18322,9 @@ Ohne Premium können Sie nur  verschlüsselte Dateien sehen und dauerhaft entsch
   </data>
   <data name="MFAuthenticationSec4Paragraph2" xml:space="preserve">
     <value>Wenn Sie Ihre reguläre MFA-Methode während der Anmeldung nicht verwenden können, werden Sie aufgefordert, einen Ihrer Wiederherstellungscodes einzugeben. Dadurch wird die Notwendigkeit Ihrer üblichen Authentifizierungsmethode umgangen und Sie können sicher auf Ihr Konto zugreifen.&lt;br/&gt;&lt;br/&gt; Jeder Code kann nur einmal verwendet werden und sollte sicher aufbewahrt werden.</value>
+  </data>
+  <data name="MFAVerificationCode" xml:space="preserve">
+    <value>Geben Sie den 6-stelligen Verifizierungscode aus dem Feld {0}</value>
   </data>
   <data name="MissingFeaturesText" xml:space="preserve">
     <value>Fehlende Funktionen</value>
@@ -18652,6 +18756,9 @@ Um zur Startseite zurückzukehren, klicken Sie &lt;a href="{1}"&gt;hier&lt;/a&gt
   </data>
   <data name="OrText" xml:space="preserve">
     <value>Oder</value>
+  </data>
+  <data name="OtherMFAOptionsText" xml:space="preserve">
+    <value>Probieren Sie andere MFA-Optionen aus</value>
   </data>
   <data name="OtherPlatformsLabel" xml:space="preserve">
     <value>Andere Plattformen</value>
@@ -21545,6 +21652,9 @@ Bitte ziehen Sie es in Erwägung '{0}' direkt über die AxCrypt Datensicherheit 
   <data name="SixMonthsPromtText" xml:space="preserve">
     <value>6 Monate</value>
   </data>
+  <data name="SMSText" xml:space="preserve">
+    <value>SMS</value>
+  </data>
   <data name="SocialMediaFollowText" xml:space="preserve">
     <value>Folgen Sie uns auf sozialen Medien</value>
     <comment>Text telling readers to follow us on social media, typically with a number of icons below.</comment>
@@ -22770,6 +22880,9 @@ Um Ihre AxCrypt-Anmeldung abzuschließen, geben Sie den Einmal-Passcode (OTP) in
   </data>
   <data name="VisibleUntilText" xml:space="preserve">
     <value>Sichtbar bis:</value>
+  </data>
+  <data name="VisitOur" xml:space="preserve">
+    <value>Besuchen Sie unsere</value>
   </data>
   <data name="WarningTitle" xml:space="preserve">
     <value>Warnung!</value>

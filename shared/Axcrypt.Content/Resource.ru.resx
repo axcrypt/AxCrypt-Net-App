@@ -1,102 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
-		Microsoft ResX Schema
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-		Version 1.3
-
-		The primary goals of this format is to allow a simple XML format 
-		that is mostly human readable. The generation and parsing of the 
-		various data types are done through the TypeConverter classes 
-		associated with the data types.
-
-		Example:
-
-		... ado.net/XML headers & schema ...
-		<resheader name="resmimetype">text/microsoft-resx</resheader>
-		<resheader name="version">1.3</resheader>
-		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-		<data name="Name1">this is my long string</data>
-		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-			[base64 mime encoded serialized .NET Framework object]
-		</data>
-		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-			[base64 mime encoded string representing a byte array form of the .NET Framework object]
-		</data>
-
-		There are any number of "resheader" rows that contain simple 
-		name/value pairs.
-
-		Each data row contains a name, and value. The row also contains a 
-		type or mimetype. Type corresponds to a .NET class that support 
-		text/value conversion through the TypeConverter architecture. 
-		Classes that don't support this are serialized and stored with the 
-		mimetype set.
-
-		The mimetype is used for serialized objects, and tells the 
-		ResXResourceReader how to depersist the object. This is currently not 
-		extensible. For a given mimetype the value must be set accordingly:
-
-		Note - application/x-microsoft.net.object.binary.base64 is the format 
-		that the ResXResourceWriter will generate, however the reader can 
-		read any of the formats listed below.
-
-		mimetype: application/x-microsoft.net.object.binary.base64
-		value   : The object must be serialized with 
-			: System.Serialization.Formatters.Binary.BinaryFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.soap.base64
-		value   : The object must be serialized with 
-			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.bytearray.base64
-		value   : The object must be serialized into a byte array 
-			: using a System.ComponentModel.TypeConverter
-			: and then encoded with base64 encoding.
-	-->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <data name="AbortedFileStatus" xml:space="preserve">
     <value>Статус 'Прерван'</value>
   </data>
@@ -253,7 +273,7 @@
   <data name="AccessYourContactsPhoneText" xml:space="preserve">
     <value>Разрешаете ли вы приложению AxCrypt &lt;strong&gt;доступ к вашим контактам на телефоне?&lt;/strong&gt;</value>
   </data>
-  <data name="AccountLabel">
+  <data name="AccountLabel" xml:space="preserve">
     <value>Учетная запись</value>
   </data>
   <data name="AccountLoggedOnStatusText" xml:space="preserve">
@@ -472,7 +492,7 @@
   <data name="AdvancedSettingsText" xml:space="preserve">
     <value>Расширенные настройки</value>
   </data>
-  <data name="AffiliateAdvantagesHeading">
+  <data name="AffiliateAdvantagesHeading" xml:space="preserve">
     <value>Преимущества Партнерского маркетинга AxCrypt</value>
   </data>
   <data name="AffiliateAdvantagesSubHeading" xml:space="preserve">
@@ -574,6 +594,9 @@
   <data name="AlertText" xml:space="preserve">
     <value>Внимание!</value>
   </data>
+  <data name="AllDoneText" xml:space="preserve">
+    <value>Готово!</value>
+  </data>
   <data name="AllLabel" xml:space="preserve">
     <value>Все</value>
   </data>
@@ -597,6 +620,9 @@
   <data name="AlwaysOfflineToolTip" xml:space="preserve">
     <value>После активирования доступ к Интернету больше не нужен и не требуется до момента дезактивирования.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
+  </data>
+  <data name="AndText" xml:space="preserve">
+    <value>и</value>
   </data>
   <data name="AnnualMonthlySwitcherAnnualButtonLabel" xml:space="preserve">
     <value>Скидка 20% при оформлении годовой подписки</value>
@@ -662,6 +688,9 @@
 
 Обновление подписки будет отражено здесь в течение нескольких минут.</value>
   </data>
+  <data name="AppText" xml:space="preserve">
+    <value>Приложение</value>
+  </data>
   <data name="AppVersionLabel" xml:space="preserve">
     <value>Версия {0}</value>
     <comment>Text containing information about current application version.</comment>
@@ -686,6 +715,9 @@
   </data>
   <data name="AuthenticationError" xml:space="preserve">
     <value>Страница, которую Вы пытались посетить, требует идентификации. Пожалуйста, войдите в систему для продолжения.</value>
+  </data>
+  <data name="AuthenticatorAppText" xml:space="preserve">
+    <value>Приложение-аутентификатор</value>
   </data>
   <data name="AutoDeletionEmailOutro" xml:space="preserve">
     <value>Вам не требуется отвечать или предпринимать что-либо. Если Вы ничего не предпримите, мы больше не будем отправлять электронные письма, и Ваш AxCrypt ID аккаунт будет удален окончательно.</value>
@@ -1101,6 +1133,12 @@
     <value>Безопасность Файлов Для Вас и Вашей Группы от AxCrypt AB
 
 Содержит программное обеспечение от http://www.bouncycastle.org/ .</value>
+  </data>
+  <data name="AxCryptAboutDescription1" xml:space="preserve">
+    <value>Безопасность файлов для Вас и Вашей команды от &lt;span class="font-medium"&gt;AxCrypt AB&lt;/span&gt;</value>
+  </data>
+  <data name="AxCryptAboutDescription2" xml:space="preserve">
+    <value>Включает в себя программное обеспечение от http://www.bouncycastle.org/.</value>
   </data>
   <data name="AxCryptAffiliateHeading" xml:space="preserve">
     <value>&lt;span&gt;Станьте партнером&lt;/span&gt; AxCrypt!</value>
@@ -4820,9 +4858,9 @@
     <value>Подобно процессу Google Диска, AxCrypt шифрует файлы OneDrive в последовательности, которая позволяет шифровать файл до того, как файл будет синхронизирован с облаком.</value>
   </data>
   <data name="Blog_EODAGDFWBES_H4_Text1" xml:space="preserve">
-    <value>Шифрование файлов на Google Диске и OneDrive — это разумный способ защитить данные от несанкционированного доступа, кражи или потери. Шифрование добавляет дополнительный уровень безопасности к вашим файлам, делая их нечитаемыми для всех, у кого нет правильного ключа или пароля. Это означает, что даже если кто-то взломает вашу учетную запись облачного хранилища или украдет ваше устройство, он не сможет получить доступ к вашей конфиденциальной информации.</value>
+    <value>Шифрование Google Drive и OneDrive — это разумный способ защитить данные от несанкционированного доступа, кражи или потери. Шифрование добавляет дополнительный уровень безопасности к вашим файлам, делая их нечитаемыми для тех, у кого нет правильного ключа или пароля. Это означает, что даже если кто-то взломает вашу учетную запись облачного хранилища или украдет ваше устройство, он не сможет получить доступ к вашей конфиденциальной информации.</value>
   </data>
-  <data name="Blog_EODAGDFWBES_H4_Text2" xml:space="preserve">
+  <data name="Blog_EODAGDFWBES_H4_Text2">
     <value>Шифрование также помогает соблюдать законы и нормативные акты о конфиденциальности данных, которые могут применяться к профессиональным данным в вашей организации. Вы также можете наслаждаться удобством и гибкостью облачного хранилища без ущерба для безопасности ваших данных.</value>
   </data>
   <data name="Blog_EODAGDFWBES_H5_Conclusion_Text1" xml:space="preserve">
@@ -4856,12 +4894,12 @@
     <value>Вы когда-нибудь задумывались, насколько защищены ваши конфиденциальные личные файлы и бизнес-данные в облачном хранилище Google Диска и OneDrive? Хранение файлов в облаке — отличный способ хранения, доступа и резервного копирования ваших данных, но это не всегда может быть самым конфиденциальным и безопасным способом сделать это.</value>
   </data>
   <data name="Blog_EODAGDFWBES_Text2" xml:space="preserve">
-    <value>Согласно &lt;a href='https://support.google.com/drive/answer/10375054?hl=en.'&gt;&lt;b&gt;Google&lt;/b&gt;&lt;/a&gt;, он «обрабатывает» ваши сохраненные данные для улучшения взаимодействия с пользователем. Это означает, что Google сохраняет доступ к вашим файлам и имеет возможность просматривать их по своему усмотрению. Когда дело доходит до ваших конфиденциальных данных, вы не можете позволить себе рисковать. Вы должны иметь полный контроль над ним.</value>
+    <value>По словам &lt;a href='https://support.google.com/drive/answer/10375054?hl=en.'&gt;&lt;b&gt;Google&lt;/b&gt;&lt;/a&gt;, он «обрабатывает» ваши сохраненные данные для улучшения пользовательского опыта. Это подразумевает, что Google сохраняет доступ к вашим файлам и имеет возможность просматривать их по своему усмотрению. Когда дело доходит до ваших конфиденциальных данных, вы не можете позволить себе рисковать. Вы должны иметь полный контроль над ним, а это значит, что вам нужно шифрование Google Drive.</value>
   </data>
   <data name="Blog_EODAGDFWBES_Text3" xml:space="preserve">
-    <value>Шифрование ваших данных и файлов при хранении и до того, как они попадут в облако, является одной из самых безопасных мер для обеспечения их постоянной безопасности, даже если поставщик облачного хранилища имеет к ним доступ или когда файлы попадают в руки злоумышленника.</value>
+    <value>В OneDrive также есть функция «Личное хранилище», которая шифрует важные данные, такие как удостоверения личности или финансовые записи, с помощью AES-256 при хранении и TLS при передаче. Тем не менее, Microsoft управляет ключами шифрования, а это означает, что они потенциально могут получить доступ к вашим файлам в случае законного требования или во время нарушения безопасности. Синхронизированные файлы в Windows 10/11 используют BitLocker, но конфиденциальность не гарантируется. Таким образом, шифрование OneDrive надежно, но не гарантирует полную конфиденциальность, поэтому шифруйте конфиденциальные данные перед загрузкой.</value>
   </data>
-  <data name="Blog_EODAGDFWBES_Tittle" xml:space="preserve">
+  <data name="Blog_EODAGDFWBES_Tittle">
     <value>Шифруйте файлы OneDrive и Google Диска с помощью лучшего в мире программного обеспечения для шифрования</value>
   </data>
   <data name="Blog_ES_conclusion" xml:space="preserve">
@@ -11368,6 +11406,9 @@
   <data name="BrandToneLabel" xml:space="preserve">
     <value>Фирменный стиль</value>
   </data>
+  <data name="BrowseText" xml:space="preserve">
+    <value>Просмотреть</value>
+  </data>
   <data name="BruteForceResistantLabel" xml:space="preserve">
     <value>Устойчивость к грубому воздействию</value>
   </data>
@@ -12231,7 +12272,7 @@
   <data name="CloudServicesText" xml:space="preserve">
     <value>Облачные сервисы</value>
   </data>
-  <data name="ColorPaletteLabel">
+  <data name="ColorPaletteLabel" xml:space="preserve">
     <value>Цветовая палитра</value>
   </data>
   <data name="ColumnAmountPaidHeader" xml:space="preserve">
@@ -12411,6 +12452,9 @@
   </data>
   <data name="CustomerReadHeading" xml:space="preserve">
     <value>Читать &lt;label&gt;истории клиентов&lt;/label&gt; AxCrypt</value>
+  </data>
+  <data name="CustomersText" xml:space="preserve">
+    <value>клиенты</value>
   </data>
   <data name="CustomerStoriesHead1" xml:space="preserve">
     <value>IPTWINS S.A.S. с легкостью защищает конфиденциальные документы</value>
@@ -12849,6 +12893,9 @@
   <data name="DifferentWayPayText" xml:space="preserve">
     <value>Другие способ(ы) оплаты?</value>
   </data>
+  <data name="DirectSupportText" xml:space="preserve">
+    <value>Мы предлагаем прямую поддержку</value>
+  </data>
   <data name="DisableAccessText" xml:space="preserve">
     <value>Отключить доступ</value>
   </data>
@@ -13155,6 +13202,9 @@
     <value>Перейти к электронной почте</value>
     <comment>Text of link for opening mail application.</comment>
   </data>
+  <data name="EmailAuthenticationText" xml:space="preserve">
+    <value>Аутентификация по электронной почте</value>
+  </data>
   <data name="EmailErrorTemplateNotFound" xml:space="preserve">
     <value>Шаблон не найден.</value>
   </data>
@@ -13360,6 +13410,9 @@
   <data name="EnterGroupNamePlaceHolder" xml:space="preserve">
     <value>Введите название группы</value>
   </data>
+  <data name="EnterOTPPlaceHolderText" xml:space="preserve">
+    <value>Введите одноразовый пароль</value>
+  </data>
   <data name="EnterPassphraseForIdentityPrompt" xml:space="preserve">
     <value>Введите пароль для '{0}'</value>
   </data>
@@ -13428,7 +13481,7 @@
   <data name="FailedToExportText" xml:space="preserve">
     <value>Не удалось экспортировать!</value>
   </data>
-  <data name="FaqAccessDenied">
+  <data name="FaqAccessDenied" xml:space="preserve">
     <value>Почему я получаю "в доступе отказано" и/или имена файлов отображаются зеленым текстом?</value>
   </data>
   <data name="FaqAccessDeniedAnswer1" xml:space="preserve">
@@ -14054,7 +14107,7 @@
   <data name="ForSomeoneElseText" xml:space="preserve">
     <value>Для кого-то другого</value>
   </data>
-  <data name="ForumsLinkLabel">
+  <data name="ForumsLinkLabel" xml:space="preserve">
     <value>Форумы</value>
   </data>
   <data name="ForWhomHeadline" xml:space="preserve">
@@ -14700,7 +14753,7 @@
   <data name="GroupFeatureText" xml:space="preserve">
     <value>Функция Группы</value>
   </data>
-  <data name="GroupFileSharingHeading">
+  <data name="GroupFileSharingHeading" xml:space="preserve">
     <value>Групповой обмен файлами</value>
   </data>
   <data name="GroupFileSharingParagraph" xml:space="preserve">
@@ -14928,16 +14981,22 @@
   <data name="GroupGuidesTitle" xml:space="preserve">
     <value>&lt;label&gt;Максимизируйте&lt;/label&gt; Безопасность бизнеса и эффективность команды с &lt;strong&gt;функцией Группы&lt;/strong&gt; &lt;span&gt;AxCrypt&lt;/span&gt;!</value>
   </data>
+  <data name="GroupInfoText" xml:space="preserve">
+    <value>Добавьте пользователей или группы, с которыми вы хотите поделиться этим секретом. Если вы не знаете о наших</value>
+  </data>
+  <data name="GroupInfoText1" xml:space="preserve">
+    <value>создайте свою первую по ссылке</value>
+  </data>
+  <data name="GroupInfoText2" xml:space="preserve">
+    <value>ещё, узнайте больше и создайте свою первую по ссылке</value>
+  </data>
   <data name="GroupManagementHeading" xml:space="preserve">
     <value>Управление группой</value>
   </data>
   <data name="GroupManagementLinkLabel" xml:space="preserve">
     <value>Управление группой</value>
   </data>
-  <data name="GroupInfoText2" xml:space="preserve">
-    <value>ещё, узнайте больше и создайте свою первую по ссылке</value>
-  </data>
-  <data name="GroupManagementParagraph">
+  <data name="GroupManagementParagraph" xml:space="preserve">
     <value>С легкостью добавляйте и удаляйте участников группы, назначайте администраторов группы и управляйте доступом к файлам.</value>
   </data>
   <data name="GroupMasterKeyHeading" xml:space="preserve">
@@ -16388,7 +16447,7 @@ SE-114 29 Стокгольм
   <data name="LogInText" xml:space="preserve">
     <value>Войти</value>
   </data>
-  <data name="LogoAndIconLabel">
+  <data name="LogoAndIconLabel" xml:space="preserve">
     <value>Логотип и иконка</value>
   </data>
   <data name="LogOffText" xml:space="preserve">
@@ -18009,11 +18068,53 @@ SE-114 29 Стокгольм
   <data name="MetadataRetentionText" xml:space="preserve">
     <value>Сохраняет исходное имя файла и информацию о защищенном файле.</value>
   </data>
+  <data name="MFAAlreadyRecoveryCodesText" xml:space="preserve">
+    <value>Вы уже использовали все коды восстановления!</value>
+  </data>
+  <data name="MFAAvoidLosingText" xml:space="preserve">
+    <value>Чтобы избежать потери доступа и генерации новых кодов, перенастройте двухфакторную аутентификацию с помощью
+приложения для аутентификации.</value>
+  </data>
+  <data name="MFABackupCodesTexts" xml:space="preserve">
+    <value>Теперь вы можете использовать резервные коды для входа в свою учетную запись, если у вас нет доступа
+к приложению-аутентификатору. &lt;strong&gt; Каждый код может быть использован только один раз.&lt;/strong&gt;</value>
+  </data>
+  <data name="MFABackupCodesTexts1" xml:space="preserve">
+    <value>&lt;strong&gt;Считайте эти коды паролями&lt;/strong&gt; и храните их в безопасном месте в &lt;strong&gt;Менеджере паролей&lt;/strong&gt;.</value>
+  </data>
+  <data name="MFADescriptionText" xml:space="preserve">
+    <value>Многофакторная аутентификация — это усиленная мера безопасности. Когда эта опция включена, для входа в AxCrypt потребуются две формы идентификации</value>
+  </data>
+  <data name="MFADescriptionText1" xml:space="preserve">
+    <value>Включите безопасный вход в систему с помощью любого приложения для аутентификации, &lt;br /&gt;включая &lt;strong&gt;Microsoft и Google Authenticator&lt;/strong&gt;.</value>
+  </data>
+  <data name="MFAEmailAuthentication" xml:space="preserve">
+    <value>Чтобы включить аутентификацию по электронной почте, нам нужно отправить код подтверждения на ваш адрес электронной почты.</value>
+  </data>
+  <data name="MFAInitialSetupText" xml:space="preserve">
+    <value>Чтобы включить многофакторную аутентификацию, установите любое приложение для аутентификации (например, Microsoft, Google и т.д.)</value>
+  </data>
   <data name="MFAInvalidUserError" xml:space="preserve">
     <value>Не удалось включить/отключить многофакторную аутентификацию из-за неправильного пароля</value>
   </data>
   <data name="MFAMailSubject" xml:space="preserve">
     <value>Ваш одноразовый пароль AxCrypt для безопасного входа в систему</value>
+  </data>
+  <data name="MFAMultifactorTypeText" xml:space="preserve">
+    <value>Каждый код можно использовать только один раз. Чтобы избежать потери доступа и создания новых кодов, перенастройте многофакторную проверку подлинности с помощью
+любого мультифактора (приложение для аутентификации, электронная почта и SMS).</value>
+  </data>
+  <data name="MFANotEnabledText" xml:space="preserve">
+    <value>Многофакторная аутентификация не включена для этой учетной записи! Эта страница перенаправит на главную через несколько секунд.</value>
+  </data>
+  <data name="MFAOneTimeVerificationText" xml:space="preserve">
+    <value>Получите одноразовый код подтверждения, отправленный на ваш зарегистрированный &lt;br /&gt; адрес электронной почты.</value>
+  </data>
+  <data name="MFAPasswordConfirmText" xml:space="preserve">
+    <value>Введите пароль от учетной записи AxCrypt для подтверждения</value>
+  </data>
+  <data name="MFARecoveryCodeSignInText" xml:space="preserve">
+    <value>Вы использовали один из кодов восстановления для входа в систему.</value>
   </data>
   <data name="MfaRecoveryCodeText" xml:space="preserve">
     <value>Используйте</value>
@@ -18024,13 +18125,28 @@ SE-114 29 Стокгольм
   <data name="MfaRecoveryCodeText2" xml:space="preserve">
     <value>, чтобы получить доступ к своей учетной записи.</value>
   </data>
+  <data name="MFAScanQRCodeText" xml:space="preserve">
+    <value>Отсканируйте QR-код из приложения-аутентификатора</value>
+  </data>
+  <data name="MFAScanQRCodeText1" xml:space="preserve">
+    <value>Или скопируйте приведенный ниже код и вставьте его в приложение для аутентификации.</value>
+  </data>
+  <data name="MFASuccessText" xml:space="preserve">
+    <value>Вы готовы к использованию</value>
+  </data>
+  <data name="MFASuccessText1" xml:space="preserve">
+    <value>аутентификации для будущих входов в систему.</value>
+  </data>
   <data name="MFAText" xml:space="preserve">
     <value>MFA</value>
   </data>
   <data name="MfaText1" xml:space="preserve">
     <value>Ваша учетная запись защищена с помощью</value>
   </data>
-  <data name="MFAuthenticationCaroselHead1">
+  <data name="MFAText2" xml:space="preserve">
+    <value>Пожалуйста, выберите способ аутентификации.</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>Как включить MFA в AxCrypt?</value>
   </data>
   <data name="MFAuthenticationCaroselHead2" xml:space="preserve">
@@ -18210,6 +18326,9 @@ SE-114 29 Стокгольм
   <data name="MFAuthenticationSec4Paragraph2" xml:space="preserve">
     <value>Если вы не можете использовать обычный метод MFA во время входа в систему, вам будет предложено ввести один из кодов восстановления. Это позволяет обойти необходимость в обычном методе аутентификации и обеспечить безопасный доступ к вашей учетной записи.&lt;br/&gt;&lt;br/&gt; Каждый код может быть использован только один раз и должен храниться в надежном месте.</value>
   </data>
+  <data name="MFAVerificationCode" xml:space="preserve">
+    <value>Введите 6-значный код подтверждения из {0}</value>
+  </data>
   <data name="MissingFeaturesText" xml:space="preserve">
     <value>Отсутствующие функции</value>
   </data>
@@ -18219,7 +18338,7 @@ SE-114 29 Стокгольм
   <data name="MobileApplicationText" xml:space="preserve">
     <value>У вас есть наше &lt;bold class="text-style"&gt;мобильное приложение?&lt;/bold&gt;</value>
   </data>
-  <data name="MobileAppText">
+  <data name="MobileAppText" xml:space="preserve">
     <value>Android 4.0.3, iOS 8.0 или более позднии версии.</value>
   </data>
   <data name="MobileCustomFilepickerPromptTitle" xml:space="preserve">
@@ -18637,6 +18756,9 @@ SE-114 29 Стокгольм
   <data name="OrText" xml:space="preserve">
     <value>Или</value>
   </data>
+  <data name="OtherMFAOptionsText" xml:space="preserve">
+    <value>Попробуйте другие варианты MFA</value>
+  </data>
   <data name="OtherPlatformsLabel" xml:space="preserve">
     <value>Другие платформы</value>
   </data>
@@ -18664,7 +18786,7 @@ SE-114 29 Стокгольм
   <data name="OwnerEmailText" xml:space="preserve">
     <value>Адрес электронной почты владельца:</value>
   </data>
-  <data name="PAGE_LEGACY_TR1_TITLE_TEXT2">
+  <data name="PAGE_LEGACY_TR1_TITLE_TEXT2" xml:space="preserve">
     <value>AxCrypt Legacy</value>
   </data>
   <data name="PAGE_LEGACY_TR1_TITLE_TEXT3" xml:space="preserve">
@@ -18874,7 +18996,7 @@ SE-114 29 Стокгольм
   <data name="PasswordChangeText" xml:space="preserve">
     <value>Сменить пароль</value>
   </data>
-  <data name="PasswordEasyText">
+  <data name="PasswordEasyText" xml:space="preserve">
     <value>Легкий</value>
   </data>
   <data name="PasswordGeneratorButtonLabel" xml:space="preserve">
@@ -18898,7 +19020,7 @@ SE-114 29 Стокгольм
   <data name="PasswordGeneratorText" xml:space="preserve">
     <value>Вы пробовали наш &lt;bold class="text-style"&gt;генератор паролей?&lt;/bold&gt;</value>
   </data>
-  <data name="PasswordGeneratorText1">
+  <data name="PasswordGeneratorText1" xml:space="preserve">
     <value>Создавать хорошие пароли очень сложно. В интернете есть много советов и трюков о том, как сделать это вручную, а также есть автоматические генераторы паролей. Некоторые из них хороши, а некоторые нет.</value>
   </data>
   <data name="PasswordGeneratorText2" xml:space="preserve">
@@ -21501,6 +21623,9 @@ SE-114 29 Стокгольм
   <data name="SixMonthsPromtText" xml:space="preserve">
     <value>6 месяцев</value>
   </data>
+  <data name="SMSText" xml:space="preserve">
+    <value>SMS</value>
+  </data>
   <data name="SocialMediaFollowText" xml:space="preserve">
     <value>Следите за нами в соц.сетях</value>
     <comment>Text telling readers to follow us on social media, typically with a number of icons below.</comment>
@@ -21542,7 +21667,7 @@ SE-114 29 Стокгольм
   <data name="StandardEncryptionWarningText2" xml:space="preserve">
     <value>Ваш текущий базовый план использует шифрование AES-128</value>
   </data>
-  <data name="StandardsBasedLabel">
+  <data name="StandardsBasedLabel" xml:space="preserve">
     <value>Стандартная криптография </value>
   </data>
   <data name="StandardsBasedText" xml:space="preserve">
@@ -21612,7 +21737,7 @@ SE-114 29 Стокгольм
   <data name="StrongerProtectionText" xml:space="preserve">
     <value>Обновите систему для более надежной защиты!</value>
   </data>
-  <data name="StrongPasswordLabel">
+  <data name="StrongPasswordLabel" xml:space="preserve">
     <value>Сложный пароль</value>
   </data>
   <data name="StudentCommunityText" xml:space="preserve">
@@ -22434,7 +22559,7 @@ SE-114 29 Стокгольм
   <data name="TypeYourPasswordText" xml:space="preserve">
     <value>Введите пароль еще раз</value>
   </data>
-  <data name="TypographyLabel">
+  <data name="TypographyLabel" xml:space="preserve">
     <value>Типографика</value>
   </data>
   <data name="UnknownCrypto" xml:space="preserve">
@@ -22498,7 +22623,7 @@ SE-114 29 Стокгольм
   <data name="UpdateText" xml:space="preserve">
     <value>Обновить</value>
   </data>
-  <data name="UpdateUserRolesHeading">
+  <data name="UpdateUserRolesHeading" xml:space="preserve">
     <value>Обновление ролей пользователей</value>
   </data>
   <data name="UpdatingStatus" xml:space="preserve">
@@ -22729,6 +22854,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="VisibleUntilText" xml:space="preserve">
     <value>Видно до:</value>
+  </data>
+  <data name="VisitOur" xml:space="preserve">
+    <value>Пожалуйста, посетите наш</value>
   </data>
   <data name="WarningTitle" xml:space="preserve">
     <value>Внимание!</value>
@@ -23126,7 +23254,7 @@ SE-114 29 Стокгольм
   <data name="YourPasswordText" xml:space="preserve">
     <value>Ваш пароль:</value>
   </data>
-  <data name="YourSecurityMattersHeading">
+  <data name="YourSecurityMattersHeading" xml:space="preserve">
     <value>Ваша &lt;span&gt;безопасность&lt;/span&gt; имеет значение</value>
   </data>
   <data name="YourSecurityMattersText1" xml:space="preserve">

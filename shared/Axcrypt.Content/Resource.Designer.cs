@@ -14270,7 +14270,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Encrypting your Google Drive and OneDrive files is a smart way to protect your data from unauthorized access, theft, or loss. Encryption adds an extra layer of security to your files by making them unreadable to anyone who does not have the correct key or password. This means that even if someone hacks into your cloud storage account or steals your device, they will not be able to access your sensitive information..
+        ///   Looks up a localized string similar to Google Drive and OneDrive encryption is a smart way to protect your data from unauthorized access, theft, or loss. Encryption adds an extra layer of security to your files by making them unreadable to anyone who does not have the correct key or password. This means that even if someone hacks into your cloud storage account or steals your device, they will not be able to access your sensitive information..
         /// </summary>
         public static string Blog_EODAGDFWBES_H4_Text1 {
             get {
@@ -14378,7 +14378,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to According to &lt;a href=&apos;https://support.google.com/drive/answer/10375054?hl=en.&apos;&gt;&lt;b&gt;Google&lt;/b&gt;&lt;/a&gt;, it “processes” your stored data to enhance the user experience. This implies that Google maintains access to your files and has the ability to view them at its discretion. When it comes to your sensitive data, you cannot afford to take chances. You need to have full control over it..
+        ///   Looks up a localized string similar to According to &lt;a href=&apos;https://support.google.com/drive/answer/10375054?hl=en.&apos;&gt;&lt;b&gt;Google&lt;/b&gt;&lt;/a&gt;, it “processes” your stored data to enhance the user experience. This implies that Google maintains access to your files and has the ability to view them at its discretion. When it comes to your sensitive data, you cannot afford to take chances. You need to have full control over it, which means you need google drive encryption..
         /// </summary>
         public static string Blog_EODAGDFWBES_Text2 {
             get {
@@ -14387,7 +14387,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Encrypting your data and files at rest and before they reach the cloud is one of the safest measures to ensure that they remain secure at all times, even if a cloud storage provider has access to them or when the files get into the hands of a malicious attacker..
+        ///   Looks up a localized string similar to OneDrive also has a Personal Vault feature that encrypts essentials like IDs or financial records with AES-256 at rest and TLS in transit. However, Microsoft manages the encryption keys, meaning they could potentially access your files if legally compelled or during a security breach. Synced files on Windows 10/11 use BitLocker, but privacy isn’t guaranteed. Hence, OneDrive encryption is robust but doesn’t ensure complete privacy, so encrypt sensitive data before uploading..
         /// </summary>
         public static string Blog_EODAGDFWBES_Text3 {
             get {
