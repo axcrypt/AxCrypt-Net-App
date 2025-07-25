@@ -48,7 +48,7 @@
                     }
                     <div class="add-txt-field" style="width: 100%;">
                         <form @onsubmit="async () => await ShareKeyViewModel.AddShareKeyUser()" style="width:100%;">
-                            <input type="email" id="share-key-user-group-inp" @ref="inputRef" @bind="ShareKeyViewModel.KeySharingUserEmail" @oninput="SuggestUsers" @onfocus="ShowSuggestions" @onkeydown="HandleKeyDown" placeholder="someone@example.com" class="" style="width: 84%;margin: 0px;" />
+                            <input type="text" id="share-key-user-group-inp" @ref="inputRef" @bind="ShareKeyViewModel.KeySharingUserEmail" @oninput="SuggestUsers" @onfocus="ShowSuggestions" @onkeydown="HandleKeyDown" placeholder="someone@example.com" class="" style="width: 84%;margin: 0px;" />
                             @if (ShareKeyViewModel.ShowUserSuggestion)
                             {
                                 <ul class="suggestion-list" id="share-key-suggestion-popup">

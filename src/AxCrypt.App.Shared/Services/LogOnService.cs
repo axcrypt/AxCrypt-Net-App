@@ -222,7 +222,7 @@ namespace AxCrypt.App.Shared.Services
             }
 
             e.OneTimePassword = _logOnViewModel.MultiFactorAuthViewModel.OneTimePassword;
-            e.MFAType = _logOnViewModel.MultiFactorAuthViewModel.MultiFactorAuthType;
+            e.MFAType = _logOnViewModel.MultiFactorAuthViewModel.SelectedMFAType;
             _logOnViewModel.MultiFactorAuthViewModel.PageResult = DialogResult.None;
 
             return;

@@ -108,7 +108,7 @@
 
     private async Task SavePassword()
     {
-        if (CardViewModel!.ExpirationDateError != null)
+        if (CardViewModel.ValidateExpirationDate())
         {
             return;
         }
