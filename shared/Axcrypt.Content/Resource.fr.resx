@@ -18324,6 +18324,48 @@ Ce logiciel est livré d'après la licence.
   <data name="MetadataRetentionText" xml:space="preserve">
     <value>Garde le nom original d'un fichier et les informations d'un fichier sécurisé</value>
   </data>
+  <data name="MFAuthenticationLinkLable">
+    <value>Authentification multi- factorielle (MFA)</value>
+  </data>
+  <data name="MFAuthenticationSec1Heading">
+    <value>Qu’est-ce que &lt;span&gt;Authentification multi-facteur(MFA)?&lt;/span&gt;</value>
+  </data>
+  <data name="MFAuthenticationSec1Paragraph1">
+    <value>Seule le mots de passe n’est toujours pas suffisants à sécuriser vos données sensibles. L’authentification multi- facteur augument la sécurité par une étape où vous auriez besoin d’une deuxième vérification, du coup, on est rassuré que seule les utilisateurs autorisés puissent avoir accès aux leurs comptes.</value>
+  </data>
+  <data name="MFAuthenticationSec1Paragraph2">
+    <value>Lorsque MFA est activée, la connexion vous nécessite de générer également votre mot de passe et one-time code, via l’application authenticateur ou le email ou le mobile téléphone.  La couche de protection celle-ci réduit considérablement la risque d’avoir accès non autorisé, même si votre mot de passe soit compromis. &lt;/br&gt;&lt;/br&gt; MFA est un mesure de sécurité essentielle de manière à ce que vos fichiers cryptés restent sûrs, subséquemment, en rendant AxCrypt de plus en plus digne de confiance à l’usage business et personnel.</value>
+  </data>
+  <data name="MFAuthenticationSec1Paragraph3">
+    <value>&lt;strong&gt;Application d’athenticateur&lt;/strong&gt;: Utilisez-vous un Time-based One-Time Password (TOTP) générée via une application d’authenticateur inscrite.</value>
+  </data>
+  <data name="MFAuthenticationSec1Paragraph4">
+    <value>&lt;strong&gt;Email&lt;/strong&gt;:obtiendrez un code de vérification par votre e-mail.</value>
+  </data>
+  <data name="MFAuthenticationSec1Paragraph5">
+    <value>&lt;strong&gt;SMS&lt;/strong&gt;: recevez un One-Time Password via SMS.</value>
+  </data>
+  <data name="MFAuthenticationSec1Text1">
+    <value>&lt;strong&gt;Option de vérification multiple&lt;/strong&gt;</value>
+  </data>
+  <data name="MFAuthenticationSec2Heading">
+    <value>Un aperçu d’AxCrypt &lt;span&gt;L’aunthenfication multi-facteur(MFA)&lt;/span&gt;</value>
+  </data>
+  <data name="MFAuthenticationSec2SubHead1">
+    <value>Sécurisez la connexion avec plusieurs facteurs</value>
+  </data>
+  <data name="MFAuthenticationSec2SubHead2">
+    <value>Les codes de sauvegarde cryptés pour un accès à l’urgence</value>
+  </data>
+  <data name="MFAuthenticationSec2SubHead3">
+    <value>GDPR-Traitement de donnés compatibles</value>
+  </data>
+  <data name="MFAuthenticationSec2Text1">
+    <value>Le MFA d’AxCrypt nécessite les utilisateurs de vérifier leur identité en utilisant deux ou plus des facteurs d’authentification - la chose qu’il connaît (mot de passe) ou bien qu’ il ait (l’application d’authenticateur ou code)</value>
+  </data>
+  <data name="MFAuthenticationSec2Text2">
+    <value>Pendant le paramétrage, les utilisateurs reçoivent les codes de sauvegarde cryptés pour rassurer l’ accès à la compte, même si l’appareil primaire soit perdu. Ces codes doivent-elles gardées sûrement par l’utilisateur.</value>
+  </data>
   <data name="MissingFeaturesText" xml:space="preserve">
     <value>fonctionnalités manquantes</value>
   </data>
@@ -21190,7 +21232,16 @@ Sujet : Rapport instantané AxCrypt</value>
   <data name="SecuredMessageParaStep1" xml:space="preserve">
     <value>Se connecter à votre AxCrypt &lt;a href='https://account.axcrypt.net/en/Home/Login'&gt;&lt;b&gt;account&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
-  <data name="SecuredMessageParaStep14" xml:space="preserve">
+  <data name="SecuredMessageParaStep10">
+    <value>Ouvrez-vous&lt;strong&gt;La messagerie sécurisée d’AxCrypt&lt;/strong&gt; sur le plate-forme q’ importe (site internet, portable mobile, le bureau)</value>
+  </data>
+  <data name="SecuredMessageParaStep12">
+    <value>Dans le champ &lt;strong&gt;'To'&lt;/strong&gt;,faire entrer plusieurs adresses email, séparés par les virgules.</value>
+  </data>
+  <data name="SecuredMessageParaStep13">
+    <value>Tapez votre message et définissez la durée de la visibilité préférée.</value>
+  </data>
+  <data name="SecuredMessageParaStep14">
     <value>Cliquez &lt;strong&gt;Send&lt;/strong&gt; pour délivrer votre message crypté en sécurité aux destinataires.</value>
   </data>
   <data name="SecuredMessageParaStep15" xml:space="preserve">
@@ -21220,16 +21271,61 @@ Sujet : Rapport instantané AxCrypt</value>
   <data name="SecuredMessageParaStep23" xml:space="preserve">
     <value>&lt;strong&gt;Select / Multi-Select Actions&lt;/strong*</value>
   </data>
-  <data name="SecuredMessageParaStep3" xml:space="preserve">
+  <data name="SecuredMessageParaStep24">
+    <value>Cliquez sur la case à cocher selon le message unique ou plusieurs</value>
+  </data>
+  <data name="SecuredMessageParaStep25">
+    <value>Éffectuez les actions par le lot:</value>
+  </data>
+  <data name="SecuredMessageParaStep26">
+    <value>Notez comme lu</value>
+  </data>
+  <data name="SecuredMessageParaStep27">
+    <value>Notez comme non lu</value>
+  </data>
+  <data name="SecuredMessageParaStep28">
+    <value>&lt;strong&gt;Supprimez un message&lt;/strong&gt;</value>
+  </data>
+  <data name="SecuredMessageParaStep3">
     <value>Cliquez sur le &lt;strong g&gt;'New Message'&lt;/strong&gt;bouton.</value>
   </data>
-  <data name="SecuredMessageParaStep34" xml:space="preserve">
+  <data name="SecuredMessageParaStep30">
+    <value>Sélectionnez le/les message (s)</value>
+  </data>
+  <data name="SecuredMessageParaStep31">
+    <value>Cliquez sur supprimer</value>
+  </data>
+  <data name="SecuredMessageParaStep32">
+    <value>Les messages supprimés ne sont plus visibles à vous mais vous serrez toujours rester accessible à la destinataire, en fonction de paramettrage, concernant les messages où vous avez les optés visibles.</value>
+  </data>
+  <data name="SecuredMessageParaStep33">
+    <value>Utilisez-vous la &lt;strong&gt;barre de recherche &lt;/strong&gt;située en haut du filtre d’affichage de la messagerie sécurisé, basé au mot clé.</value>
+  </data>
+  <data name="SecuredMessageParaStep34">
     <value>Cliquez sur l’icône de filtre avancé pour effectuer une recherche par destinataire/envoyer email, mots-clef ou l’intervalle de date.</value>
   </data>
-  <data name="SecuredMessageParaStep4" xml:space="preserve">
+  <data name="SecuredMessageParaStep35">
+    <value>Les filtres vous aident à limiter par l’onglet (boîte de réception, messages envoyés, supprimer)</value>
+  </data>
+  <data name="SecuredMessageParaStep4">
     <value>Entrez le &lt;strong&gt;l’adresse email de destinataire.&lt;/strong&gt;</value>
   </data>
-  <data name="SecuredMessengerFaq1" xml:space="preserve">
+  <data name="SecuredMessageParaStep5">
+    <value>Sélectionnez le message &lt;strong&gt;visibilité&lt;/strong&gt;durée: Pour toujours, Une fois, Une heure, Un jour, Une semaine, un mois, une année </value>
+  </data>
+  <data name="SecuredMessageParaStep6">
+    <value>Tapez votre message sur le champ de texte prévu</value>
+  </data>
+  <data name="SecuredMessageParaStep7">
+    <value>Cliquez &lt;strong&gt;Envoyez.&lt;/strong&gt;</value>
+  </data>
+  <data name="SecuredMessageParaStep8">
+    <value>Maintenant, votre message est &lt;strong&gt;AES-256 crypté&lt;/strong&gt; et délivré en toute sécurité.</value>
+  </data>
+  <data name="SecuredMessageParaStep9">
+    <value>Vous pouvez facilement envoyer un message sécurisé aux plusieurs personnes en ajoutant leurs adresse email sur le champ &lt;strong&gt;’To'&lt;/strong&gt;, séparé &lt;strong&gt;par virgule.&lt;/strong&gt; Suivez-vous les étapes suivantes:</value>
+  </data>
+  <data name="SecuredMessengerFaq1">
     <value>Qu’est-ce que la messagerie sécurisée d’ AxCrypt?</value>
   </data>
   <data name="SecuredMessengerFaq1Ans" xml:space="preserve">
@@ -21301,7 +21397,10 @@ Sujet : Rapport instantané AxCrypt</value>
   <data name="SecuredMessengerGlanceText4" xml:space="preserve">
     <value>Pour AES Key Wrap, l' éncapsulation de clé du message est effectuée par la spécification NIST.  La clé dérivée du message avec PBKDF2-SHA512 est utilisée comme une clé de cryptage.</value>
   </data>
-  <data name="SecuredMessengerLinkLabel" xml:space="preserve">
+  <data name="SecuredMessengerGuidesNote">
+    <value>AxCrypt vous offre un cryptage fort sans aucune porte dérobée. Au cas où vous vous oubliez votre mot de passe, vos messages cryptés restent inaccessibles. Puisque les messages sont enfermés par votre mot de passe original et qu’on ni le garde ni y ait accès, on est dans l’impossibilité de récupérer ou même décrypter vos fichiers.</value>
+  </data>
+  <data name="SecuredMessengerLinkLabel">
     <value>Messagerie sécurisée</value>
   </data>
   <data name="SecuredMessengerSec1Heading" xml:space="preserve">
