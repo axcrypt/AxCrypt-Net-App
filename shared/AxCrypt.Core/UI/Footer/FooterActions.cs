@@ -11,6 +11,7 @@ namespace AxCrypt.Core.UI.Footer
         None,
         Home,
         PasswordManager,
+        SecuredMessenger,
         Support
     }
 }

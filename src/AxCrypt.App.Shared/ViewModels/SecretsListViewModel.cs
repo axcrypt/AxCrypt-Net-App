@@ -199,7 +199,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     public async Task SortSecrets(ChangeEventArgs e)
     {
-        if (Enum.TryParse<SecretsSortOrder>(e.Value!.ToString(), out var sortOrder))
+        if (Enum.TryParse<SecretsSortOrder>(e.Value!.ToString(), out SecretsSortOrder sortOrder))
         {
             SelectedSortOrder = sortOrder;
         }
@@ -278,7 +278,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     private void InitializeSecrets(SecretClientCollection secrets)
     {
-        IEnumerable<SecretViewModel> secretsList = secrets.Select(sc => { return new SecretViewModel(sc); }).ToList();
+        IEnumerable<SecretViewModel> secretsList = secrets.Select(sc => { return new SecretViewModel(sc); });
         Secrets = new ObservableCollection<SecretViewModel>(secretsList);
         ApplyFilter();
     }
@@ -296,7 +296,7 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     public async Task ApplyFilterOnSecrets()
     {
-        using (ProcessIndicator processIndicator = new ProcessIndicator())
+        await using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             await Task.Run(() =>
             {
