@@ -48,6 +48,8 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<AboutViewModel>();
             services.AddSingleton<GlobalDialogViewModel>();
             services.AddSingleton<ShareKeyViewModel>();
+            services.AddSingleton<FolderSettingsViewModel>();
+            services.AddSingleton<UserPromptViewModel>();
 
             services.AddSingleton<SecretClientModel>();
             services.AddSingleton<SecretsClientModel>();

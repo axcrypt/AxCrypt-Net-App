@@ -216,7 +216,7 @@ namespace AxCrypt.Core
             }
         }
 
-        public virtual async Task EncryptFoldersUniqueWithBackupAndWipeAsync(IEnumerable<IDataContainer> containers, EncryptionParameters encryptionParameters, IProgressContext progress)
+        public virtual async Task EncryptFoldersUniqueWithBackupAndWipeAsync(IEnumerable<IDataContainer> containers, EncryptionParameters encryptionParameters, IProgressContext progress, IEnumerable<IDataContainer>? ignoredFolders = null)
         {
             if (containers == null)
             {
@@ -227,13 +227,20 @@ namespace AxCrypt.Core
                 throw new ArgumentNullException("progress");
             }
 
+            List<IDataContainer> ignoredFolderList = new List<IDataContainer>();
+            if (ignoredFolders != null && ignoredFolders.Any())
+            {
+                ignoredFolderList = ignoredFolders.ToList();
+            }
+            ignoredFolderList.AddRange(containers);
+
             progress.NotifyLevelStart();
             try
             {
                 List<IDataStore> files = new List<IDataStore>();
                 foreach (IDataContainer container in containers)
                 {
-                    files.AddRange(await container.ListEncryptableWithWarningAsync(containers, New<UserSettings>().FolderOperationMode.Policy()));
+                    files.AddRange(await container.ListEncryptableWithWarningAsync(ignoredFolderList, New<UserSettings>().FolderOperationMode.Policy()));
                 }
 
                 progress.AddTotal(files.Count());

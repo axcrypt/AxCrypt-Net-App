@@ -416,9 +416,12 @@ namespace AxCrypt.Core.UI.ViewModel
             }
 
             List<IDataStore> files = new List<IDataStore>();
-            foreach (IDataContainer container in Resolve.KnownIdentities.LoggedOnWatchedFolders.Select(wf => New<IDataContainer>(wf.Path)))
+            foreach (WatchedFolder wf in Resolve.KnownIdentities.LoggedOnWatchedFolders)
             {
-                files.AddRange(container.ListOfFiles(_fileSystemState.WatchedFolders.Select(x => New<IDataContainer>(x.Path)), New<UserSettings>().FolderOperationMode.Policy()));
+                IDataContainer container = New<IDataContainer>(wf.Path);
+                List<IDataContainer> ignoredFolders = _fileSystemState.WatchedFolders.Select(x => New<IDataContainer>(x.Path)).ToList();
+                ignoredFolders.AddRange(wf.IgnoredFolders.Select(ignf => New<IDataContainer>(ignf)));
+                files.AddRange(container.ListOfFiles(ignoredFolders, New<UserSettings>().FolderOperationMode.Policy()));
             }
             if (!New<UserSettings>().DoNotShowAgain.HasFlag(DoNotShowAgainOptions.IgnoreFileWarning))
             {

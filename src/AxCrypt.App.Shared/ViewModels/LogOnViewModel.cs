@@ -28,6 +28,8 @@ public class LogOnViewModel : ViewModelBase
         GlobalPopupDialog = new CommonDialogService();
         AdvancedOptionsDialog = new CommonDialogService();
         UpgradeVersionDialog = new CommonDialogService();
+        FolderSettingsDialog = new CommonDialogService();
+        UserPromptDialog = new CommonDialogService();
     }
 
     public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
@@ -93,7 +95,10 @@ public class LogOnViewModel : ViewModelBase
     { get { return GetProperty<CommonDialogService>(nameof(VerifyPasswordDialog)); } set { SetProperty(nameof(VerifyPasswordDialog), value); } }
 
     public CommonDialogService AboutDialog
-    { get { return GetProperty<CommonDialogService>(nameof(AboutDialog)); } set { SetProperty(nameof(AboutDialog), value); } }
+    { 
+        get { return GetProperty<CommonDialogService>(nameof(AboutDialog)); } 
+        set { SetProperty(nameof(AboutDialog), value); } 
+    }
 
     public CommonDialogService FeedbackDialog
     { get { return GetProperty<CommonDialogService>(nameof(FeedbackDialog)); } set { SetProperty(nameof(FeedbackDialog), value); } }
@@ -106,6 +111,12 @@ public class LogOnViewModel : ViewModelBase
 
     public CommonDialogService UpgradeVersionDialog
     { get { return GetProperty<CommonDialogService>(nameof(UpgradeVersionDialog)); } set { SetProperty(nameof(UpgradeVersionDialog), value); } }
+
+    public CommonDialogService FolderSettingsDialog
+    { get { return GetProperty<CommonDialogService>(nameof(FolderSettingsDialog)); } set { SetProperty(nameof(FolderSettingsDialog), value); } }
+
+    public CommonDialogService UserPromptDialog
+    { get { return GetProperty<CommonDialogService>(nameof(UserPromptDialog)); } set { SetProperty(nameof(UserPromptDialog), value); } }
 
     public ProcessIndicator ProcessIndicator { get; set; }
 

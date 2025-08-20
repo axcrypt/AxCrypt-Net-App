@@ -51,7 +51,7 @@ namespace AxCrypt.Core.Test
 
         public Func<IEnumerable<IDataContainer>, EncryptionParameters, IProgressContext, Task> EncryptFilesUniqueWithBackupAndWipeMockAsync { get; set; }
 
-        public override Task EncryptFoldersUniqueWithBackupAndWipeAsync(IEnumerable<IDataContainer> folderInfos, EncryptionParameters encryptionParameters, IProgressContext progress)
+        public override Task EncryptFoldersUniqueWithBackupAndWipeAsync(IEnumerable<IDataContainer> folderInfos, EncryptionParameters encryptionParameters, IProgressContext progress, IEnumerable<IDataContainer>? ignoredFolders = null)
         {
             return EncryptFilesUniqueWithBackupAndWipeMockAsync(folderInfos, encryptionParameters, progress);
         }

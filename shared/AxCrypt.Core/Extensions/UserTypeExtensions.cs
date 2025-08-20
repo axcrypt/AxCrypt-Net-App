@@ -444,6 +444,13 @@ namespace AxCrypt.Core.Extensions
             return sharedWithEmailAddresses;
         }
 
+        public static IEnumerable<string> IgnoredFolders(this IEnumerable<WatchedFolder> watchedFolders)
+        {
+            IEnumerable<string> ignoredFolders = watchedFolders.SelectMany(wf => wf.IgnoredFolders).Distinct();
+
+            return ignoredFolders;
+        }
+
         public static WatchedFolder FindOrDefault(this IEnumerable<WatchedFolder> watchedFolders, IDataStore fileMaybeWatched)
         {
             string fileFolderPath = fileMaybeWatched.Container.FullName;

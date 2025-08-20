@@ -1,8 +1,8 @@
 ﻿using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.Content;
 using AxCrypt.Core;
-using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
@@ -22,18 +22,21 @@ public class RecentFoldersViewModel : ViewModelBase
 {
     private readonly MainViewModel _mainViewModel;
     private readonly FileOperationViewModel _fileOperationViewModel;
-    private WatchedFoldersViewModel? _viewModel;
     private ShareKeyViewModel? _sharekeyViewModel;
+    private FolderSettingsViewModel? _folderSettingsViewModel;
+    private UserPromptViewModel _userPromptViewModel;
 
     private bool _isDescending;
     private bool _folderContextMenu;
 
-    public RecentFoldersViewModel(ShareKeyViewModel sharekeyViewModel)
+    public RecentFoldersViewModel(ShareKeyViewModel sharekeyViewModel, FolderSettingsViewModel folderSettingsViewModel, UserPromptViewModel userPromptVM)
     {
         LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
         _mainViewModel = AxCServiceProviderExtension.LogOnViewModel!.MainViewModel;
         _fileOperationViewModel = AxCServiceProviderExtension.LogOnViewModel!.FileOperationViewModel;
         _sharekeyViewModel = sharekeyViewModel;
+        _folderSettingsViewModel = folderSettingsViewModel;
+        _userPromptViewModel = userPromptVM;
         RecentFoldersList = new ObservableCollection<string>();
         SelectedRecentFolders = new List<string>();
 
@@ -159,6 +162,10 @@ public class RecentFoldersViewModel : ViewModelBase
 
         switch (contextMenu)
         {
+            case SecuredFolderContextMenu.FolderSettings:
+                await FolderSettings(arg);
+                break;
+
             case SecuredFolderContextMenu.AddSecuredFolder:
                 await AddSecuredFolder(arg);
                 break;
@@ -185,7 +192,7 @@ public class RecentFoldersViewModel : ViewModelBase
         }
     }
 
-    private FileSelectionEventArgs AddedFoldersEvent { get; set; }
+    private FileSelectionEventArgs? AddedFoldersEvent { get; set; }
 
     public async Task EncryptDroppedFolders(IList<string> folders)
     {
@@ -209,7 +216,7 @@ public class RecentFoldersViewModel : ViewModelBase
 
     private async Task DragAndDroppedToSecureFolderAsync(object sender, EventArgs e)
     {
-        if (AddedFoldersEvent.SelectedFiles == null || !AddedFoldersEvent.SelectedFiles.Any())
+        if (AddedFoldersEvent!.SelectedFiles == null || !AddedFoldersEvent.SelectedFiles.Any())
         {
             return;
         }
@@ -221,6 +228,12 @@ public class RecentFoldersViewModel : ViewModelBase
     {
         FolderContextMenu = false;
         await PremiumFeature_ClickAsync(LicenseCapability.SecureFolders, async (ss, ee) => { await WatchedFoldersAddSecureFolderMenuItem_Click(ss, ee); }, null!, eventArgs);
+    }
+
+    public async Task FolderSettings(EventArgs eventArgs)
+    {
+        FolderContextMenu = false;
+        await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, (ss, ee) => { return WatchedFoldersSettingsAsync(_mainViewModel.SelectedWatchedFolders); }, null!, eventArgs);
     }
 
     private async Task WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
@@ -252,6 +265,26 @@ public class RecentFoldersViewModel : ViewModelBase
         await _sharekeyViewModel!.SetSelectedFilesOrFolders(_mainViewModel.SelectedWatchedFolders.Select(e => e), viewModel);
 
         await viewModel.ShareFolders.ExecuteAsync(null!);
+    }
+
+    private async Task WatchedFoldersSettingsAsync(IEnumerable<string> folderPaths)
+    {
+        if (!folderPaths.Any()) return;
+
+        FolderSettingViewModel viewModel = FolderSettingViewModel.CreateForSetting(folderPaths, Resolve.KnownIdentities.DefaultEncryptionIdentity);
+        await _folderSettingsViewModel!.SetFolderSettings(_mainViewModel.SelectedWatchedFolders.Select(e => e), viewModel, async () =>
+        {
+            await viewModel.SaveFolderSetings.ExecuteAsync(null!);
+            
+            if (viewModel.IgnoredFolders.Count() > 0 && New<UserSettings>().FolderOperationMode == Common.FolderOperationMode.IncludeSubfolders)
+            {
+                await _userPromptViewModel.SetUserPrompt(Texts.UserPromptOnAddingExcludeFolder, [Texts.YesDecryptText, Texts.NoKeepEncryptedText], "/Images/UserPromptUnSecureExcludedFolder.svg", async () =>
+                {
+                    await viewModel.DecryptFilesInExcludedFolderTask.ExecuteAsync(null);
+                });
+            }
+
+        });
     }
 
     private async void DecryptPermanently()

@@ -1037,6 +1037,65 @@
     gap: 0px !important;
   }
 }
+.modalDialog.folderSettings-popup > div {
+  margin: 8% auto;
+  padding-top: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  min-width: 667px !important;
+  max-width: 667px;
+}
+
+.folderSettings-content {
+  border-radius: 10px;
+  padding: 10px 70px !important;
+}
+.folderSettings-content input[type=email] {
+  border: 1px solid #999999;
+  background-image: url(/images/default/IcoSearch.svg);
+  background-repeat: no-repeat;
+  background-position: top 10px right 10px;
+  background-size: 18px;
+}
+.folderSettings-content .fle-exton-img img {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+}
+.folderSettings-content a {
+  text-decoration: none;
+}
+
+.folderSettings-title {
+  width: 100%;
+  padding: 7px 0px !important;
+  color: #FFF;
+  background-color: #232323;
+}
+
+.folderSettings-ftr {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 15px;
+}
+.folderSettings-ftr .btn-small {
+  width: 100%;
+}
+
+.removeCmd {
+  color: #CE3733;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  cursor: default;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .actv-subs {
   min-width: 190px;
   width: max-content;

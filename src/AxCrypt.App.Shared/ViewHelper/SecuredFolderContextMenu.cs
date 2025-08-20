@@ -14,5 +14,7 @@ public enum SecuredFolderContextMenu
 
     ShowInExplorer,
 
-    RemoveFromListButKeepSecured
+    RemoveFromListButKeepSecured,
+
+    FolderSettings,
 }

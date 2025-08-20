@@ -60,6 +60,7 @@ namespace AxCrypt.Core.Session
         {
             Tag = IdentityPublicTag.Empty;
             KeyShares = new List<EmailAddress>();
+            IgnoredFolders = new List<string>();
         }
 
         public WatchedFolder(string path, IdentityPublicTag publicTag)
@@ -88,8 +89,24 @@ namespace AxCrypt.Core.Session
 
             Path = watchedFolder.Path;
             Tag = watchedFolder.Tag;
-
+            IgnoredFolders = watchedFolder.IgnoredFolders;
             KeyShares = keyShares.Select(ks => ks.Email).ToArray();
+
+            InitializeFileWatcher();
+        }
+
+        public WatchedFolder(WatchedFolder watchedFolder, IEnumerable<string> ignoredFolders)
+        {
+            if (watchedFolder == null)
+            {
+                throw new ArgumentNullException(nameof(watchedFolder));
+            }
+
+            Path = watchedFolder.Path;
+            Tag = watchedFolder.Tag;
+            KeyShares = watchedFolder.KeyShares;
+
+            IgnoredFolders = ignoredFolders.ToArray();
 
             InitializeFileWatcher();
         }
@@ -103,6 +120,13 @@ namespace AxCrypt.Core.Session
 
         [JsonProperty("keyShares")]
         public IEnumerable<EmailAddress> KeyShares
+        {
+            get;
+            private set;
+        }
+
+        [JsonProperty("ignoredFolders")]
+        public IEnumerable<string> IgnoredFolders
         {
             get;
             private set;

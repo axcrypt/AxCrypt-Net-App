@@ -1,0 +1,76 @@
+﻿@using AxCrypt.App.Shared.Utility
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+
+@inject LogOnViewModel LogOnViewModel
+@inject UserPromptViewModel UserPromptViewModel
+
+@if (IsVisible)
+{
+    <div id="modal-dialog5" class="modalDialog">
+        <div id="UpgradePopup" class="upg-popup text-center">
+            <div class="close-img" @onclick="Button_CancelClicked"></div>
+            <div>
+                <img style="margin: 0px 0px 0px 40px !important;" src="@UserPromptViewModel.PromptIcon" alt="upgrade-icon" /><br />
+                <p style="padding-top:15px;">
+                    <strong>@UserPromptViewModel.UserPrompt</strong>
+                </p>
+                @if (UserPromptViewModel.PromptActions.Length > 1)
+                {
+                    <div class="modal-footer" style="padding-top:15px;">
+                        <input type="button" class="btn-large font-medium free-color whte-clr" @onclick="Button_OkClicked" value="@UserPromptViewModel.PromptActions[0]" style="text-align: center;padding: 10px 0px;border-color: transparent !important;" />
+                        <input type="button" class="btn-large font-medium whte-bg" @onclick="Button_CancelClicked" value="@UserPromptViewModel.PromptActions[1]" />
+                    </div>
+                }
+                else
+                {
+                    <div class="modal-footer" style="padding-top:15px;">
+                        <button class="button font-medium success btn-small" @onclick="Button_OkClicked">
+                            @Texts.ButtonOkText
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+@code {
+    private bool IsVisible;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        LogOnViewModel!.UserPromptDialog.OnDialogVisibilityChanged += UpdateUpgradeDialogState;
+    }
+
+    public void Button_OkClicked()
+    {
+        CloseDialog(DialogResult.OK);
+    }
+
+    public void Button_CancelClicked()
+    {
+        CloseDialog(DialogResult.Cancel);
+    }
+    private void UpdateUpgradeDialogState(bool canShowUpgradeDialog)
+    {
+        InvokeAsync(() =>
+        {
+            IsVisible = canShowUpgradeDialog;
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    void UpdateState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+    void CloseDialog(DialogResult result)
+    {
+        UserPromptViewModel.PageResult = result;
+        LogOnViewModel!.UserPromptDialog.Close();
+    }
+}

@@ -45,5 +45,6 @@ namespace AxCrypt.Core.Session
         WatchedFolderOptionsChanged,
         WatchedFolderChange,
         WorkFolderChange,
+        WatchedFolderExcludedFolder,
     }
 }

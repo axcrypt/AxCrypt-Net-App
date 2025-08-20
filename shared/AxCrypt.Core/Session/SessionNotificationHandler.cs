@@ -121,9 +121,10 @@ namespace AxCrypt.Core.Session
                             await encryptionParameters.AddAsync(await watchedFolder.KeyShares.ToAvailableKnownPublicKeysAsync(notification.Identity));
 
                             IDataContainer container = New<IDataContainer>(watchedFolder.Path);
+                            IDataContainer[] ignoredFolders = watchedFolder.IgnoredFolders.Select(X => New<IDataContainer>(X)).ToArray();
                             progress.Display = container.Name;
                             IDataContainer[] dc = new IDataContainer[] { container };
-                            await _axCryptFile.EncryptFoldersUniqueWithBackupAndWipeAsync(dc, encryptionParameters, progress);
+                            await _axCryptFile.EncryptFoldersUniqueWithBackupAndWipeAsync(dc, encryptionParameters, progress, ignoredFolders);
                         }
                     }
                     finally
@@ -131,6 +132,18 @@ namespace AxCrypt.Core.Session
                         progress.NotifyLevelFinished();
                     }
                     progress.Totals.ShowNotification();
+                    break;
+
+                case SessionNotificationType.WatchedFolderExcludedFolder:
+                    foreach (string fullName in notification.FullNames)
+                    {
+                        IDataContainer removedFolderInfo = New<IDataContainer>(fullName);
+                        progress.Display = removedFolderInfo.Name;
+                        if (removedFolderInfo.IsAvailable)
+                        {
+                            await _axCryptFile.DecryptFilesInsideFolderUniqueWithWipeOfOriginalAsync(removedFolderInfo, notification.Identity, _statusChecker, progress).Free();
+                        }
+                    }
                     break;
 
                 case SessionNotificationType.WatchedFolderRemoved:
@@ -202,8 +215,9 @@ namespace AxCrypt.Core.Session
                     encryptionParameters = await identity.AddMasterKeyParameter(encryptionParameters, false);
                 }
                 IDataContainer folder = New<IDataContainer>(watchedFolder.Path);
+                IDataContainer[] ignoredFolders = watchedFolder.IgnoredFolders.Select(X => New<IDataContainer>(X)).ToArray();
                 progress.Display = folder.Name;
-                await _axCryptFile.EncryptFoldersUniqueWithBackupAndWipeAsync(new IDataContainer[] { folder }, encryptionParameters, progress);
+                await _axCryptFile.EncryptFoldersUniqueWithBackupAndWipeAsync(new IDataContainer[] { folder }, encryptionParameters, progress, ignoredFolders);
             }
         }
     }
