@@ -1418,7 +1418,7 @@ Vous êtes prévenus, profitez-en bien !</value>
     <value>Vous souhaitez plonger plus profondément dans les meilleures pratiques en matière de cryptage ? Découvrez notre blog : &lt;a href='/blog/'&gt;&lt;b&gt;Blogs sur l'outil de cryptage facile à utiliser en 128 bits et 256 bits (axcrypt.net)&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
   <data name="AxCWhatsNextGuideText1" xml:space="preserve">
-    <value>Découvrez d'autres guides AxCrypt : &lt;a href='https://axcrypt.net/information/guides/get-started/'&gt;&lt;b&gt;Guides AxCrypt | Votre guide des solutions de cybersécurité&lt;/b&gt;&lt;/a&gt;</value>
+    <value>Découvrez d'autres guides AxCrypt : &lt;a href='https://axcrypt.net/helpcenter/'&gt;&lt;b&gt;Guides AxCrypt | Votre guide des solutions de cybersécurité&lt;/b&gt;&lt;/a&gt;</value>
   </data>
   <data name="AxCWhatsNextPricingText1" xml:space="preserve">
     <value>Découvrez nos plans et tarifs pour comparer et choisir le meilleur plan pour vous : &lt;a href='/pricing/'&gt;&lt;b&gt;Plan tarifaire AxCrypt | Logiciel de cryptage abordable et facile à utiliser&lt;/b&gt;&lt;/a&gt;.</value>
@@ -8830,7 +8830,7 @@ AxCrypt est un service de cryptage universellement utilisé avec plus de deux d�
     <value>AxCrypt est multilingue et, cette année, nous avons ajouté la prise en charge du mandarin. Pour rendre l’expérience utilisateur plus pratique, nous avons également commencé à publier nos blogs dans Français.</value>
   </data>
   <data name="Blog_TAYBS_H1_SH5_Text1" xml:space="preserve">
-    <value>Pour vous assurer de tirer le meilleur parti de l’utilisation d’AxCrypt, nous avons publié de nouveaux tutoriels qui vous aideront à démarrer plus rapidement. Ils couvrent les principales caractéristiques de votre compte, &lt;a href='https://www.axcrypt.net/information/guides/get-started'&gt;ainsi que quelques conseils très pratiques &lt;/a&gt;</value>
+    <value>Pour vous assurer de tirer le meilleur parti de l’utilisation d’AxCrypt, nous avons publié de nouveaux tutoriels qui vous aideront à démarrer plus rapidement. Ils couvrent les principales caractéristiques de votre compte, &lt;a href='https://axcrypt.net/information/guides/getstarted/'&gt;ainsi que quelques conseils très pratiques &lt;/a&gt;</value>
   </data>
   <data name="Blog_TAYBS_H1_SH6_Text1" xml:space="preserve">
     <value>Nous avons également annoncé notre segment industriel en 2021, qui aide les utilisateurs à mieux comprendre comment nous servons diverses industries. Nous comprenons à quel point il est vital d'avoir une idée de l'expérience d'AxCrypt auprès de quelqu'un qui l'a déjà utilisé. Par conséquent, nous avons inclus des témoignages supplémentaires cette année pour vous aider à en savoir plus sur notre application. &lt;a href='https://www.axcrypt.net/industries'&gt; Vous pouvez obtenir plus d'informations ici &lt;/a&gt;</value>
@@ -15123,7 +15123,7 @@ facilement avec des minimums de clics</value>
     <value>Si vous souhaitez gérer vos factures et licences, consultez notre &lt;a href='/information/axcrypt-business/'&gt;Guide de configuration des entreprises&lt;/a&gt;</value>
   </data>
   <data name="GroupGuidesHeading8Paragraph2" xml:space="preserve">
-    <value>Pour en savoir plus sur les autres produits AxCrypt, consultez les autres guides AxCrypt : &lt;a href='/information/guides/get-started/'&gt;Guides AxCrypt&lt;/a&gt;</value>
+    <value>Pour en savoir plus sur les autres produits AxCrypt, consultez les autres guides AxCrypt : &lt;a href='https://axcrypt.net/helpcenter/'&gt;Guides AxCrypt&lt;/a&gt;</value>
   </data>
   <data name="GroupGuidesTitle" xml:space="preserve">
     <value>&lt;label&gt;Maximiser&lt;/label&gt; la sécurité de l’entreprise et l’efficacité de l’équipe avec &lt;span&gt;AxCrypt&lt;/span&gt; &lt;strong&gt;Fonctionnalité de groupe&lt;/strong&gt; !</value>
@@ -16568,6 +16568,9 @@ Activer la conversion automatique des fichiers AxCrypt 1.x (recommandé)?</value
   </data>
   <data name="LinkToAxCryptPremiumPurchasePage" xml:space="preserve">
     <value>{0}Home/Login?purchase=true&amp;email={1}&amp;tag={2}</value>
+  </data>
+  <data name="LinkToGettingStarted" xml:space="preserve">
+    <value>https://axcrypt.net/information/guides/getstarted/</value>
   </data>
   <data name="LinkToManageAccountText" xml:space="preserve">
     <value>Pour gérer votre compte, &lt;a&gt;cliquez ici&lt;/a&gt;</value>
@@ -18324,47 +18327,77 @@ Ce logiciel est livré d'après la licence.
   <data name="MetadataRetentionText" xml:space="preserve">
     <value>Garde le nom original d'un fichier et les informations d'un fichier sécurisé</value>
   </data>
-  <data name="MFAuthenticationLinkLable">
+  <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
+    <value>Comment activer MFA dans L’AxCrypt?</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead2" xml:space="preserve">
+    <value>Application d’authentification</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead3" xml:space="preserve">
+    <value>L’authentification des email et SMS</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead4" xml:space="preserve">
+    <value>Gardez-vous le Code de sauvegarde</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead5" xml:space="preserve">
+    <value>Comment se connecter avec MFA autorisé?</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead6" xml:space="preserve">
+    <value>Comment désactiver le MFA?</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph1" xml:space="preserve">
+    <value>Se connecter à votre compte AxCrypt &lt;a href='https://account.axcrypt.net/en/'&gt;&lt;b&gt;account&lt;/b&gt;&lt;/a&gt;.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph2" xml:space="preserve">
+    <value>Aller à &lt;strong&gt;Security &gt; Multi-Factor Authentication.&lt;/strong&gt;</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph3" xml:space="preserve">
+    <value>Choisissez-vous votre méthode de vérification préférée (Application d’authentification’ email ou SMS).</value>
+  </data>
+  <data name="MFAuthenticationLinkLable" xml:space="preserve">
     <value>Authentification multi- factorielle (MFA)</value>
   </data>
-  <data name="MFAuthenticationSec1Heading">
+  <data name="MFAuthenticationSec1Heading" xml:space="preserve">
     <value>Qu’est-ce que &lt;span&gt;Authentification multi-facteur(MFA)?&lt;/span&gt;</value>
   </data>
-  <data name="MFAuthenticationSec1Paragraph1">
+  <data name="MFAuthenticationSec1Paragraph1" xml:space="preserve">
     <value>Seule le mots de passe n’est toujours pas suffisants à sécuriser vos données sensibles. L’authentification multi- facteur augument la sécurité par une étape où vous auriez besoin d’une deuxième vérification, du coup, on est rassuré que seule les utilisateurs autorisés puissent avoir accès aux leurs comptes.</value>
   </data>
-  <data name="MFAuthenticationSec1Paragraph2">
+  <data name="MFAuthenticationSec1Paragraph2" xml:space="preserve">
     <value>Lorsque MFA est activée, la connexion vous nécessite de générer également votre mot de passe et one-time code, via l’application authenticateur ou le email ou le mobile téléphone.  La couche de protection celle-ci réduit considérablement la risque d’avoir accès non autorisé, même si votre mot de passe soit compromis. &lt;/br&gt;&lt;/br&gt; MFA est un mesure de sécurité essentielle de manière à ce que vos fichiers cryptés restent sûrs, subséquemment, en rendant AxCrypt de plus en plus digne de confiance à l’usage business et personnel.</value>
   </data>
-  <data name="MFAuthenticationSec1Paragraph3">
+  <data name="MFAuthenticationSec1Paragraph3" xml:space="preserve">
     <value>&lt;strong&gt;Application d’athenticateur&lt;/strong&gt;: Utilisez-vous un Time-based One-Time Password (TOTP) générée via une application d’authenticateur inscrite.</value>
   </data>
-  <data name="MFAuthenticationSec1Paragraph4">
+  <data name="MFAuthenticationSec1Paragraph4" xml:space="preserve">
     <value>&lt;strong&gt;Email&lt;/strong&gt;:obtiendrez un code de vérification par votre e-mail.</value>
   </data>
-  <data name="MFAuthenticationSec1Paragraph5">
+  <data name="MFAuthenticationSec1Paragraph5" xml:space="preserve">
     <value>&lt;strong&gt;SMS&lt;/strong&gt;: recevez un One-Time Password via SMS.</value>
   </data>
-  <data name="MFAuthenticationSec1Text1">
+  <data name="MFAuthenticationSec1Text1" xml:space="preserve">
     <value>&lt;strong&gt;Option de vérification multiple&lt;/strong&gt;</value>
   </data>
-  <data name="MFAuthenticationSec2Heading">
+  <data name="MFAuthenticationSec2Heading" xml:space="preserve">
     <value>Un aperçu d’AxCrypt &lt;span&gt;L’aunthenfication multi-facteur(MFA)&lt;/span&gt;</value>
   </data>
-  <data name="MFAuthenticationSec2SubHead1">
+  <data name="MFAuthenticationSec2SubHead1" xml:space="preserve">
     <value>Sécurisez la connexion avec plusieurs facteurs</value>
   </data>
-  <data name="MFAuthenticationSec2SubHead2">
+  <data name="MFAuthenticationSec2SubHead2" xml:space="preserve">
     <value>Les codes de sauvegarde cryptés pour un accès à l’urgence</value>
   </data>
-  <data name="MFAuthenticationSec2SubHead3">
+  <data name="MFAuthenticationSec2SubHead3" xml:space="preserve">
     <value>GDPR-Traitement de donnés compatibles</value>
   </data>
-  <data name="MFAuthenticationSec2Text1">
+  <data name="MFAuthenticationSec2Text1" xml:space="preserve">
     <value>Le MFA d’AxCrypt nécessite les utilisateurs de vérifier leur identité en utilisant deux ou plus des facteurs d’authentification - la chose qu’il connaît (mot de passe) ou bien qu’ il ait (l’application d’authenticateur ou code)</value>
   </data>
-  <data name="MFAuthenticationSec2Text2">
+  <data name="MFAuthenticationSec2Text2" xml:space="preserve">
     <value>Pendant le paramétrage, les utilisateurs reçoivent les codes de sauvegarde cryptés pour rassurer l’ accès à la compte, même si l’appareil primaire soit perdu. Ces codes doivent-elles gardées sûrement par l’utilisateur.</value>
+  </data>
+  <data name="MFAuthenticationSec2Text3" xml:space="preserve">
+    <value>Toutes les données concernants MFA sont traitées en concordance avec des normes GDPR et d’autres standards privées, ainsi, en vous rassurant que toutes les données d’utilisateurs restent sécurisées </value>
   </data>
   <data name="MissingFeaturesText" xml:space="preserve">
     <value>fonctionnalités manquantes</value>
@@ -21010,7 +21043,7 @@ Sujet : Rapport instantané AxCrypt</value>
     <value>Abonnement Business : &lt;a href='https://www.axcrypt.net/information/axcrypt-business'&gt;https://www.axcrypt.net/information/axcrypt-business&lt;/a&gt;</value>
   </data>
   <data name="ResellerHelpSupportBlock1ListItem3" xml:space="preserve">
-    <value>Pour démarrer : &lt;a href='https://www.axcrypt.net/information/guides/get-started'&gt;https://www.axcrypt.net/information/guides/get-started&lt;/a&gt;</value>
+    <value>Pour démarrer : &lt;a href='https://axcrypt.net/information/guides/getstarted/'&gt;https://axcrypt.net/information/guides/getstarted&lt;/a&gt;</value>
   </data>
   <data name="ResellerHelpSupportBlock1ListItem4" xml:space="preserve">
     <value>Conseils d'utilisation: &lt;a href='https://www.axcrypt.net/information/usage-tips'&gt;https://www.axcrypt.net/information/usage-tips&lt;/a&gt;</value>
@@ -21232,16 +21265,16 @@ Sujet : Rapport instantané AxCrypt</value>
   <data name="SecuredMessageParaStep1" xml:space="preserve">
     <value>Se connecter à votre AxCrypt &lt;a href='https://account.axcrypt.net/en/Home/Login'&gt;&lt;b&gt;account&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
-  <data name="SecuredMessageParaStep10">
+  <data name="SecuredMessageParaStep10" xml:space="preserve">
     <value>Ouvrez-vous&lt;strong&gt;La messagerie sécurisée d’AxCrypt&lt;/strong&gt; sur le plate-forme q’ importe (site internet, portable mobile, le bureau)</value>
   </data>
-  <data name="SecuredMessageParaStep12">
+  <data name="SecuredMessageParaStep12" xml:space="preserve">
     <value>Dans le champ &lt;strong&gt;'To'&lt;/strong&gt;,faire entrer plusieurs adresses email, séparés par les virgules.</value>
   </data>
-  <data name="SecuredMessageParaStep13">
+  <data name="SecuredMessageParaStep13" xml:space="preserve">
     <value>Tapez votre message et définissez la durée de la visibilité préférée.</value>
   </data>
-  <data name="SecuredMessageParaStep14">
+  <data name="SecuredMessageParaStep14" xml:space="preserve">
     <value>Cliquez &lt;strong&gt;Send&lt;/strong&gt; pour délivrer votre message crypté en sécurité aux destinataires.</value>
   </data>
   <data name="SecuredMessageParaStep15" xml:space="preserve">
@@ -21271,61 +21304,61 @@ Sujet : Rapport instantané AxCrypt</value>
   <data name="SecuredMessageParaStep23" xml:space="preserve">
     <value>&lt;strong&gt;Select / Multi-Select Actions&lt;/strong*</value>
   </data>
-  <data name="SecuredMessageParaStep24">
+  <data name="SecuredMessageParaStep24" xml:space="preserve">
     <value>Cliquez sur la case à cocher selon le message unique ou plusieurs</value>
   </data>
-  <data name="SecuredMessageParaStep25">
+  <data name="SecuredMessageParaStep25" xml:space="preserve">
     <value>Éffectuez les actions par le lot:</value>
   </data>
-  <data name="SecuredMessageParaStep26">
+  <data name="SecuredMessageParaStep26" xml:space="preserve">
     <value>Notez comme lu</value>
   </data>
-  <data name="SecuredMessageParaStep27">
+  <data name="SecuredMessageParaStep27" xml:space="preserve">
     <value>Notez comme non lu</value>
   </data>
-  <data name="SecuredMessageParaStep28">
+  <data name="SecuredMessageParaStep28" xml:space="preserve">
     <value>&lt;strong&gt;Supprimez un message&lt;/strong&gt;</value>
   </data>
-  <data name="SecuredMessageParaStep3">
+  <data name="SecuredMessageParaStep3" xml:space="preserve">
     <value>Cliquez sur le &lt;strong g&gt;'New Message'&lt;/strong&gt;bouton.</value>
   </data>
-  <data name="SecuredMessageParaStep30">
+  <data name="SecuredMessageParaStep30" xml:space="preserve">
     <value>Sélectionnez le/les message (s)</value>
   </data>
-  <data name="SecuredMessageParaStep31">
+  <data name="SecuredMessageParaStep31" xml:space="preserve">
     <value>Cliquez sur supprimer</value>
   </data>
-  <data name="SecuredMessageParaStep32">
+  <data name="SecuredMessageParaStep32" xml:space="preserve">
     <value>Les messages supprimés ne sont plus visibles à vous mais vous serrez toujours rester accessible à la destinataire, en fonction de paramettrage, concernant les messages où vous avez les optés visibles.</value>
   </data>
-  <data name="SecuredMessageParaStep33">
+  <data name="SecuredMessageParaStep33" xml:space="preserve">
     <value>Utilisez-vous la &lt;strong&gt;barre de recherche &lt;/strong&gt;située en haut du filtre d’affichage de la messagerie sécurisé, basé au mot clé.</value>
   </data>
-  <data name="SecuredMessageParaStep34">
+  <data name="SecuredMessageParaStep34" xml:space="preserve">
     <value>Cliquez sur l’icône de filtre avancé pour effectuer une recherche par destinataire/envoyer email, mots-clef ou l’intervalle de date.</value>
   </data>
-  <data name="SecuredMessageParaStep35">
+  <data name="SecuredMessageParaStep35" xml:space="preserve">
     <value>Les filtres vous aident à limiter par l’onglet (boîte de réception, messages envoyés, supprimer)</value>
   </data>
-  <data name="SecuredMessageParaStep4">
+  <data name="SecuredMessageParaStep4" xml:space="preserve">
     <value>Entrez le &lt;strong&gt;l’adresse email de destinataire.&lt;/strong&gt;</value>
   </data>
-  <data name="SecuredMessageParaStep5">
+  <data name="SecuredMessageParaStep5" xml:space="preserve">
     <value>Sélectionnez le message &lt;strong&gt;visibilité&lt;/strong&gt;durée: Pour toujours, Une fois, Une heure, Un jour, Une semaine, un mois, une année </value>
   </data>
-  <data name="SecuredMessageParaStep6">
+  <data name="SecuredMessageParaStep6" xml:space="preserve">
     <value>Tapez votre message sur le champ de texte prévu</value>
   </data>
-  <data name="SecuredMessageParaStep7">
+  <data name="SecuredMessageParaStep7" xml:space="preserve">
     <value>Cliquez &lt;strong&gt;Envoyez.&lt;/strong&gt;</value>
   </data>
-  <data name="SecuredMessageParaStep8">
+  <data name="SecuredMessageParaStep8" xml:space="preserve">
     <value>Maintenant, votre message est &lt;strong&gt;AES-256 crypté&lt;/strong&gt; et délivré en toute sécurité.</value>
   </data>
-  <data name="SecuredMessageParaStep9">
+  <data name="SecuredMessageParaStep9" xml:space="preserve">
     <value>Vous pouvez facilement envoyer un message sécurisé aux plusieurs personnes en ajoutant leurs adresse email sur le champ &lt;strong&gt;’To'&lt;/strong&gt;, séparé &lt;strong&gt;par virgule.&lt;/strong&gt; Suivez-vous les étapes suivantes:</value>
   </data>
-  <data name="SecuredMessengerFaq1">
+  <data name="SecuredMessengerFaq1" xml:space="preserve">
     <value>Qu’est-ce que la messagerie sécurisée d’ AxCrypt?</value>
   </data>
   <data name="SecuredMessengerFaq1Ans" xml:space="preserve">
@@ -21397,10 +21430,10 @@ Sujet : Rapport instantané AxCrypt</value>
   <data name="SecuredMessengerGlanceText4" xml:space="preserve">
     <value>Pour AES Key Wrap, l' éncapsulation de clé du message est effectuée par la spécification NIST.  La clé dérivée du message avec PBKDF2-SHA512 est utilisée comme une clé de cryptage.</value>
   </data>
-  <data name="SecuredMessengerGuidesNote">
+  <data name="SecuredMessengerGuidesNote" xml:space="preserve">
     <value>AxCrypt vous offre un cryptage fort sans aucune porte dérobée. Au cas où vous vous oubliez votre mot de passe, vos messages cryptés restent inaccessibles. Puisque les messages sont enfermés par votre mot de passe original et qu’on ni le garde ni y ait accès, on est dans l’impossibilité de récupérer ou même décrypter vos fichiers.</value>
   </data>
-  <data name="SecuredMessengerLinkLabel">
+  <data name="SecuredMessengerLinkLabel" xml:space="preserve">
     <value>Messagerie sécurisée</value>
   </data>
   <data name="SecuredMessengerSec1Heading" xml:space="preserve">
@@ -23045,7 +23078,7 @@ Pour plus d'informations, cliquez sur OK pour ouvrir un navigateur web et notre 
     <value>Qu'est ce qui est inclus ?</value>
   </data>
   <data name="WhatsNextMasterKeyParagraph1" xml:space="preserve">
-    <value>Découvrez d'autres guides AxCrypt : &lt;a href='https://axcrypt.net/information/guides/get-started/'&gt;&lt;span&gt;&lt;strong&gt;Guides AxCrypt | Votre guide pour les solutions de cybersécurité&lt;/strong&gt;&lt;/span&gt;&lt;/a&gt;</value>
+    <value>Découvrez d'autres guides AxCrypt : &lt;a href='https://axcrypt.net/helpcenter/'&gt;&lt;span&gt;&lt;strong&gt;Guides AxCrypt | Votre guide pour les solutions de cybersécurité&lt;/strong&gt;&lt;/span&gt;&lt;/a&gt;</value>
   </data>
   <data name="WhyAxCryptBusiness" xml:space="preserve">
     <value>Pourquoi AxCrypt Business ?</value>

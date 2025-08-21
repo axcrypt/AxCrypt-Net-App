@@ -1376,7 +1376,7 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
     <value>¿Desea profundizar en las mejores prácticas de cifrado? Echa un vistazo a nuestro blog: &lt;a href='/blog/'&gt;&lt;b&gt;Blogs sobre herramientas de cifrado de 128 bits y 256 bits fáciles de usar (axcrypt.net)&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
   <data name="AxCWhatsNextGuideText1" xml:space="preserve">
-    <value>Consulte otras guías de AxCrypt: &lt;a href='https://axcrypt.net/information/guides/get-started/'&gt;&lt;b&gt;Guías de AxCrypt | Tu guía de soluciones de ciberseguridad&lt;/a&gt;&lt;/b&gt;</value>
+    <value>Consulte otras guías de AxCrypt: &lt;a href='https://axcrypt.net/helpcenter/'&gt;&lt;b&gt;Guías de AxCrypt | Tu guía de soluciones de ciberseguridad&lt;/a&gt;&lt;/b&gt;</value>
   </data>
   <data name="AxCWhatsNextPricingText1" xml:space="preserve">
     <value>Echa un vistazo a nuestros planes y precios para comparar y elegir el mejor plan para ti: &lt;a href='/pricing/'&gt;&lt;b&gt;Plan de precios de AxCrypt | Software de cifrado asequible y fácil de usar&lt;/b&gt;&lt;/a&gt;.</value>
@@ -1414,43 +1414,58 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="BeneficiaryNoAccount" xml:space="preserve">
     <value>{0} no tiene una cuenta con nosotros. Envía una invitación para que se registre y continúe.</value>
   </data>
-  <data name="BetaGuidesHeading">
+  <data name="BetaGuidesHeading" xml:space="preserve">
     <value>&lt;label&gt;Guías&lt;/label&gt; rápidas</value>
   </data>
-  <data name="BetaQuickGuidesHead1">
+  <data name="BetaQuickGuidesHead1" xml:space="preserve">
     <value>¿Cómo cifrar archivos?</value>
   </data>
-  <data name="BetaQuickGuidesHead2">
+  <data name="BetaQuickGuidesHead2" xml:space="preserve">
     <value>¿Cómo descifrar archivos?</value>
   </data>
-  <data name="BetaQuickGuidesHead3">
+  <data name="BetaQuickGuidesHead3" xml:space="preserve">
     <value>¿Cómo dejar de proteger archivos?</value>
   </data>
-  <data name="BetaQuickGuidesHead4">
+  <data name="BetaQuickGuidesHead4" xml:space="preserve">
     <value>¿Cómo compartir claves de cifrado para archivos?</value>
   </data>
-  <data name="BetaQuickGuidesHead5">
+  <data name="BetaQuickGuidesHead5" xml:space="preserve">
     <value>¿Cómo proteger carpetas?</value>
   </data>
-  <data name="BetaQuickGuidesParaStep10">
+  <data name="BetaQuickGuidesHead6" xml:space="preserve">
+    <value>¿Cómo administrar las contraseñas?</value>
+  </data>
+  <data name="BetaQuickGuidesParaStep1" xml:space="preserve">
+    <value>Inicia sesión en la aplicación.</value>
+  </data>
+  <data name="BetaQuickGuidesParaStep10" xml:space="preserve">
     <value>Selecciona &lt;strong&gt;"Detener la protección y eliminar de la lista"&lt;/strong&gt;.</value>
   </data>
-  <data name="BetaQuickGuidesParaStep11">
+  <data name="BetaQuickGuidesParaStep11" xml:space="preserve">
     <value>Haz clic en el botón &lt;img class='stop-icon'/&gt; y selecciona tus archivos para detener la protección.</value>
   </data>
-  <data name="BetaQuickGuidesParaStep12">
+  <data name="BetaQuickGuidesParaStep12" xml:space="preserve">
     <value>Selecciona la casilla &lt;img class='right-click-icon'/&gt; de el/los archivo(s) en la lista de archivos recientes que desea compartir.</value>
   </data>
-  <data name="BetaQuickGuidesParaStep13">
+  <data name="BetaQuickGuidesParaStep13" xml:space="preserve">
     <value>Añadir o seleccionar contacto.</value>
   </data>
-  <data name="BetaQuickGuidesParaStep14">
+  <data name="BetaQuickGuidesParaStep14" xml:space="preserve">
     <value>Selecciona &lt;strong&gt;"Aplicar"&lt;/&lt;strong&gt;.</value>
   </data>
-  <data name="BetaQuickGuidesParaStep15">
+  <data name="BetaQuickGuidesParaStep15" xml:space="preserve">
     <value>Envía el archivo real al destinatario.</value>
   </data>
-  <data name="BetaTrialFaq1">
+  <data name="BetaQuickGuidesParaStep17" xml:space="preserve">
+    <value>Ve al menú &lt;strong&gt;"Archivos protegidos".&lt;/strong&gt;</value>
+  </data>
+  <data name="BetaQuickGuidesParaStep18" xml:space="preserve">
+    <value>Haz clic en &lt;strong&gt;"Añadir o arrastrar carpeta"&lt;/strong&gt; &lt;img class='drag-icon'/&gt;</value>
+  </data>
+  <data name="BetaQuickGuidesParaStep19" xml:space="preserve">
+    <value>Selecciona las carpetas que deseas proteger.</value>
+  </data>
+  <data name="BetaTrialFaq1" xml:space="preserve">
     <value>¿Cuáles son los principales objetivos de la prueba beta?</value>
   </data>
   <data name="BetaTrialFaq1Ans" xml:space="preserve">
@@ -1521,6 +1536,9 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   </data>
   <data name="BetaTrialHeading3SubHead1" xml:space="preserve">
     <value>Descargar el instalador</value>
+  </data>
+  <data name="BetaTrialHeading3SubHead1Text1" xml:space="preserve">
+    <value>&lt;a href='#beta-appdownload-section'&gt;Haz clic en el enlace para descargar&lt;/a&gt; el instalador beta de la aplicación AxCrypt.</value>
   </data>
   <data name="BetaTrialHeading3SubHead2" xml:space="preserve">
     <value>Ejecutar el instalador</value>
@@ -1702,13 +1720,13 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_5RWEISB_H4_Text1" xml:space="preserve">
     <value>El cambio hacia el trabajo remoto y las operaciones basadas en la nube ha aumentado la necesidad de medidas de seguridad sólidas. Los empleados acceden con frecuencia a los datos de la empresa desde varias ubicaciones y dispositivos, por lo que es importante proteger la información en reposo y en tránsito. El cifrado para pequeñas empresas garantiza que los archivos confidenciales almacenados en la nube o compartidos en línea permanezcan protegidos contra el acceso no autorizado. Con el 51% de las pequeñas empresas sin medidas de seguridad digitales y el 43% sin un plan de recuperación, el cifrado se vuelve aún más crítico para salvaguardar las operaciones.</value>
   </data>
-  <data name="Blog_5RWEISB_H5_Text1">
+  <data name="Blog_5RWEISB_H5_Text1" xml:space="preserve">
     <value>Una filtración de datos puede dañar gravemente la reputación de una PYME, lo que provoca la pérdida de confianza de los clientes y contratiempos financieros. Los estudios muestran que, en promedio, las pymes pierden 25.000 $ debido a los ataques cibernéticos, y al 78% de las PYMES les preocupa que un ataque cibernético grave pueda dejarlas fuera del negocio. La implementación del cifrado demuestra un compromiso con la protección de la información confidencial, el fomento de la confianza y la mejora de la credibilidad de la marca. Las empresas que &lt;a href='https://brilliancesecuritymagazine.com/cybersecurity/enhancing-customer-trust-through-security-measures/'&gt;invierten en medidas de seguridad&lt;/a&gt; tienen más probabilidades de atraer y retener clientes en un entorno cada vez más consciente de los datos.</value>
   </data>
-  <data name="Blog_5RWEISB_H5_Text2">
+  <data name="Blog_5RWEISB_H5_Text2" xml:space="preserve">
     <value>AxCrypt proporciona las mejores soluciones de cifrado con funciones avanzadas para PYMES. Con &lt;a href='https://axcrypt.net/information/group/?srsltid=AfmBOoonTi4lF-Y9LdRPIHlj7oxrZC-Qpvcds_oPzb-Jp4i11BNhmMfh'&gt;la gestión de grupos&lt;/a&gt;, las empresas pueden gestionar eficazmente el acceso de los usuarios. &lt;a href='https://www.youtube.com/watch?v=hO3XmPw3omU&amp;pp=ygUaI2Vhcm5mcmVlY3J5cHRvdXNpbmdtb2JpbGU%3D'&gt;El uso compartido de claves&lt;/a&gt; garantiza una colaboración segura sin exponer contraseñas. La gestión centralizada de claves simplifica el cifrado para los equipos, lo que reduce la complejidad y mejora la seguridad. Al elegir AxCrypt, las PYMES obtienen una herramienta de cifrado potente pero fácil de usar para proteger los datos confidenciales de manera efectiva. Invertir en cifrado hoy asegurará tu negocio para el futuro.</value>
   </data>
-  <data name="Blog_5RWEISB_Heading1">
+  <data name="Blog_5RWEISB_Heading1" xml:space="preserve">
     <value>1. Aumento de las amenazas a la ciberseguridad</value>
   </data>
   <data name="Blog_5RWEISB_Heading2" xml:space="preserve">
@@ -2425,7 +2443,7 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_BAFESFW_H2_Text1" xml:space="preserve">
     <value>Ahora que sabes cómo cifrar automáticamente archivos en tu PC con el &lt;a href='https://axcrypt.net/'&gt;&lt;b&gt;software de cifrado&lt;/b&gt;&lt;/a&gt; de AxCrypt, veamos algunos de los beneficios clave de cifrar automáticamente archivos en tu PC con Windows con el fuerte algoritmo &lt;b&gt;AES 256-Bit&lt;/b&gt; .</value>
   </data>
-  <data name="Blog_BAFESFW_H3_Text1">
+  <data name="Blog_BAFESFW_H3_Text1" xml:space="preserve">
     <value>En un mundo orientado a los datos, donde la privacidad y la seguridad de los datos son primordiales, el cifrado automático de archivos cumple una función crucial en la protección de la información confidencial y puede suponer un cambio radical en los requisitos de protección de datos y ciberseguridad. El software de cifrado &lt;b&gt;AxCrypt&lt;/b&gt; para Windows ofrece una solución integral de cifrado de archivos que combina simplicidad, seguridad y eficacia.</value>
   </data>
   <data name="Blog_BAFESFW_H3_Text2" xml:space="preserve">
@@ -2446,7 +2464,7 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_BAFESFW_Text1" xml:space="preserve">
     <value>En la era de la &lt;a href='https://axcrypt.net/industries/'&gt;&lt;b&gt;Industria 4.0&lt;/b&gt;&lt;/a&gt; , donde los datos son el nuevo petróleo y todo está impulsado por el análisis, la seguridad y el cifrado de datos se convierten en las necesidades indispensables para proteger tus datos de infracciones, amenazas de malware, ataques a la privacidad y errores humanos. Cifrar tus datos en tu PC con Windows garantiza que permanezcan protegidos e inaccesibles para personas no autorizadas, lo que brinda una capa adicional de seguridad y tranquilidad.</value>
   </data>
-  <data name="Blog_BAFESFW_Text2">
+  <data name="Blog_BAFESFW_Text2" xml:space="preserve">
     <value>&lt;a href='https://axcrypt.net/download/'&gt;&lt;b&gt;AxCrypt&lt;/b&gt;&lt;/a&gt; es un software de cifrado simple, potente, fácil de usar, y 'El mejor software de cifrado en 2023' para Windows - que te permite cifrar cualquier archivo o archivos dentro de una carpeta en tu PC con Windows con tan solo unos clics. Una vez configurado, puede cifrar &lt;b&gt;automáticamente&lt;/b&gt; archivos nuevos, modificados y arrastrados en una carpeta determinada.</value>
   </data>
   <data name="Blog_BAFESFW_Text3" xml:space="preserve">
@@ -2623,7 +2641,7 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_BESFBDTUG_H2_Text13" xml:space="preserve">
     <value>Con la función de &lt;a href='https://axcrypt.net/information/master-key/'&gt;&lt;b&gt;Llave Maestra de AxCrypt&lt;/b&gt;&lt;/a&gt; , los empresarios y gerentes pueden administrar fácilmente licencias individuales y acceder a cuentas cifradas con un solo clic. La llave maestra puede descifrar cualquier archivo cifrado dentro de las cuentas subordinadas y proporciona la capacidad de limitar o revocar el acceso a esas cuentas. Esto garantiza que los archivos se puedan descifrar en casos de pérdida de claves, salida de empleados o pérdida de credenciales.</value>
   </data>
-  <data name="Blog_BESFBDTUG_H2_Text14">
+  <data name="Blog_BESFBDTUG_H2_Text14" xml:space="preserve">
     <value>Por ejemplo, consideremos un escenario en el que el informe de ingresos anuales, creado por el equipo financiero anterior, fue encriptado con credenciales que ahora no están disponibles para el nuevo equipo. El nuevo equipo financiero no pudo acceder al informe cuando lo necesitaron para el análisis anual.</value>
   </data>
   <data name="Blog_BESFBDTUG_H2_Text15" xml:space="preserve">
@@ -2695,7 +2713,7 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_BESFBDTUG_Text5" xml:space="preserve">
     <value>El software de cifrado de AxCrypt es la &lt;a href='https://axcrypt.net/blog/how-axcrypt-adds-value-to-your-business/'&gt;&lt;b&gt;solución perfecta para las empresas&lt;/b&gt;&lt;/a&gt; que buscan un cifrado robusto para sus &lt;b&gt;datos comerciales confidenciales.&lt;/b&gt; Con características como el cifrado en la nube, el cifrado automático, el uso compartido de claves y la funcionalidad de llave maestra, AxCrypt ofrece una protección integral.</value>
   </data>
-  <data name="Blog_BESFBDTUG_Text6">
+  <data name="Blog_BESFBDTUG_Text6" xml:space="preserve">
     <value>Cifre sus datos almacenados en la nube, abra y trabaje en archivos cifrados sin problemas y comparta de forma segura archivos cifrados para la colaboración. ¡Con AxCrypt, sus datos confidenciales permanecen protegidos durante todas sus operaciones comerciales!</value>
   </data>
   <data name="Blog_BESFBDTUG_Title" xml:space="preserve">
@@ -2707,7 +2725,7 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_BMYP_H1_SH1_Text1" xml:space="preserve">
     <value>Con un administrador de contraseñas, puedes &lt;a href='https://axcrypt.net/blog/how-to-securely-share-passwords-with-your-friends-and-colleagues/'&gt;&lt;b&gt;compartir contraseñas y notas de manera&lt;/b&gt;&lt;/a&gt; simple y segura con cualquier persona, especialmente cuando alguna información confidencial no debe enviarse por SMS. Gestionar quién tiene acceso a qué cuentas puede ser difícil para muchas empresas, especialmente cuando un gran número de empleados requiere acceso a una sola cuenta. Puedes administrar y modificar la contraseña de manera efectiva con la ayuda de un administrador de contraseñas.</value>
   </data>
-  <data name="Blog_BMYP_H1_SH2_Text1">
+  <data name="Blog_BMYP_H1_SH2_Text1" xml:space="preserve">
     <value>El hecho de que no necesites tener una excelente memoria es la verdadera ventaja de usar un administrador de contraseñas para aumentar tu seguridad en línea. Esto implica que todos pueden aplicar los consejos de seguridad de contraseñas más recientes.</value>
   </data>
   <data name="Blog_BMYP_H1_SH3_Text1" xml:space="preserve">
@@ -2758,7 +2776,7 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_BSOHDGE_H2_Text1" xml:space="preserve">
     <value>El cifrado utiliza intrincados procedimientos matemáticos llamados &lt;a href='https://axcrypt.net/blog/how-to-choose-the-right-encryption-algorithm-for-your-sensitive-data/'&gt;&lt;strong&gt; "algoritmos de cifrado"&lt;/strong&gt;&lt;/a&gt; junto con claves digitales para codificar datos. Estas claves de cifrado se pueden producir manualmente o mediante un software que aplica un algoritmo para codificar datos y crear una clave de cifrado única.</value>
   </data>
-  <data name="Blog_BSOHDGE_H2_Text2">
+  <data name="Blog_BSOHDGE_H2_Text2" xml:space="preserve">
     <value>La codificación del texto se produce mediante el algoritmo de cifrado &lt;strong&gt;(cifrado)&lt;/strong&gt;, cuando utiliza la clave de cifrado para aplicar la conversión de datos basada en las ecuaciones matemáticas de la clave, para convertirlo en texto cifrado. Este texto cifrado puede luego transmitirse a un destinatario y decodificarse nuevamente en el valor original usando el mismo cifrado y clave o diferentes.</value>
   </data>
   <data name="Blog_BSOHDGE_H2_Text3" xml:space="preserve">
@@ -2783,7 +2801,7 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_BSOHDGE_H4_Text1" xml:space="preserve">
     <value>AxCrypt permite a los usuarios cifrar fácilmente sus datos en &lt;a href='https://axcrypt.net/download/'&gt;&lt;b&gt;múltiples dispositivos&lt;/b&gt;&lt;/a&gt;. El software proporciona un cifrado fuerte utilizando &lt;strong&gt;AES 256-Bit,&lt;/strong&gt; lo que garantiza que los datos permanezcan protegidos contra el acceso no autorizado. Los usuarios pueden simplemente seleccionar los archivos que desean cifrar y AxCrypt aplicará automáticamente el proceso de cifrado, lo que facilita su uso para aquellos que no estén familiarizados con el cifrado.</value>
   </data>
-  <data name="Blog_BSOHDGE_H4_Text2">
+  <data name="Blog_BSOHDGE_H4_Text2" xml:space="preserve">
     <value>AxCrypt también ofrece el intercambio seguro de archivos, lo que permite a los usuarios enviar archivos cifrados a otros por correo electrónico o servicios de almacenamiento en la nube como Dropbox o Google Drive. Luego, los destinatarios pueden descifrar fácilmente los archivos utilizando su propio software AxCrypt, lo que lo convierte en una forma conveniente y segura de compartir información confidencial.
 </value>
   </data>
@@ -4997,6 +5015,18 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_HACEESCSDP_H2_Text15" xml:space="preserve">
     <value>&lt;b&gt;Cómo cifrar archivos en la nube en dispositivos móviles&lt;/b&gt;</value>
   </data>
+  <data name="Blog_HACEESCSDP_H2_Text16" xml:space="preserve">
+    <value>1. &lt;b&gt;Instala AxCrypt para móviles&lt;/b&gt;: Descarga AxCrypt desde Google Play Store o Apple App Store e inicia sesión.</value>
+  </data>
+  <data name="Blog_HACEESCSDP_H2_Text17" xml:space="preserve">
+    <value>2. &lt;b&gt;Conecta tu almacenamiento en la nube&lt;/b&gt;:</value>
+  </data>
+  <data name="Blog_HACEESCSDP_H2_Text18" xml:space="preserve">
+    <value>&lt;li&gt;Haz click en "Proteger."&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_HACEESCSDP_H2_Text19" xml:space="preserve">
+    <value>&lt;li&gt;Selecciona un proveedor de almacenamiento en la nube (Google Drive, OneDrive o Dropbox).&lt;/li&gt;</value>
+  </data>
   <data name="Blog_HACEESCSDP_H2_Text2" xml:space="preserve">
     <value>1. &lt;b&gt;Instala AxCrypt&lt;/b&gt;: Descarga e instala AxCrypt, después crea una cuenta y establece una contraseña maestra segura.</value>
   </data>
@@ -5017,6 +5047,9 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   </data>
   <data name="Blog_HACEESCSDP_H2_Text4" xml:space="preserve">
     <value>3. &lt;b&gt;Protege tu carpeta en la nube&lt;/b&gt;: Agrega una carpeta dedicada en la nube a la lista de "carpetas seguras" de AxCrypt.</value>
+  </data>
+  <data name="Blog_HACEESCSDP_H2_Text5" xml:space="preserve">
+    <value>4. &lt;b&gt;Cifrar archivos&lt;/b&gt;: Arrastra los archivos a la carpeta segura o haz clic con el botón derecho en los archivos y selecciona Cifrar.</value>
   </data>
   <data name="Blog_HACEESCSDP_H2_Text6" xml:space="preserve">
     <value>5. &lt;b&gt;Sincronizar con la nube&lt;/b&gt;: Una vez encriptados, tus archivos se sincronizan con la nube mientras permanecen inaccesibles para usuarios no autorizados.</value>
@@ -5054,10 +5087,10 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_HACEESCSDP_Text1" xml:space="preserve">
     <value>El almacenamiento en la nube ha transformado la forma en que almacenamos y accedemos a los datos, ofreciendo comodidad y flexibilidad. Sin embargo, estas ventajas conllevan riesgos de seguridad, como filtraciones de datos, accesos no autorizados y fugas de credenciales. Para garantizar que tu información confidencial permanezca protegida, el cifrado en la nube AxCrypt proporciona una solución de cifrado robusta diseñada para una perfecta integración con las plataformas de almacenamiento en la nube.pe</value>
   </data>
-  <data name="Blog_HACEESCSDP_Title">
+  <data name="Blog_HACEESCSDP_Title" xml:space="preserve">
     <value>Cómo el cifrado en la nube de AxCrypt garantiza un almacenamiento seguro en la nube y la protección de datos</value>
   </data>
-  <data name="Blog_HAPYD_Conclusion_Heading1">
+  <data name="Blog_HAPYD_Conclusion_Heading1" xml:space="preserve">
     <value>Entonces, ¿cuáles son los elementos específicos que se deben tener en cuenta al seleccionar un software de cifrado de datos?</value>
   </data>
   <data name="Blog_HAPYD_CS_H1_SH1_Text1" xml:space="preserve">
@@ -6481,6 +6514,12 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_HTEFIGDSBSI2_H2_SH1_Text5" xml:space="preserve">
     <value>&lt;strong&gt;PASO 5:&lt;/strong&gt;Una vez vinculado, cualquier archivo que encriptes con AxCrypt se almacenará de forma segura en tu Google Drive.</value>
   </data>
+  <data name="Blog_HTEFIGDSBSI2_H2_SH1_Text7" xml:space="preserve">
+    <value>&lt;strong&gt;PASO 7:&lt;/strong&gt;Para abrir un archivo cifrado, selecciónalo usando la opción "Abrir protegidos", lo que te permite ver o editar el archivo temporalmente.</value>
+  </data>
+  <data name="Blog_HTEFIGDSBSI2_H2_SH1_Text8" xml:space="preserve">
+    <value>&lt;strong&gt;PASO 8:&lt;/strong&gt;Para descifrar permanentemente un archivo, haz clic en la opción "Dejar de proteger" y selecciona el archivo que quieras dejar de proteger.</value>
+  </data>
   <data name="Blog_HTEFIGDSBSI2_H2_SH2_Text1" xml:space="preserve">
     <value>Mira el video tutorial paso a paso:</value>
   </data>
@@ -6493,11 +6532,23 @@ Ya fuiste notificado, así que ¡ahora disfruta!</value>
   <data name="Blog_HTEFIGDSBSI2_H2_SH2_Text4" xml:space="preserve">
     <value>&lt;strong&gt;PASO 3:&lt;/strong&gt; Busca y selecciona los archivos que deseas cifrar. Mantén pulsado para seleccionar varios archivos. Una vez encriptados, los iconos de los archivos cambiarán al logotipo de AxCrypt y su extensión de archivo pasará a ser &lt;strong&gt;.axx&lt;/strong&gt;.</value>
   </data>
+  <data name="Blog_HTEFIGDSBSI2_H2_SH2_Text5" xml:space="preserve">
+    <value>&lt;strong&gt;PASO 4:&lt;/strong&gt; Para ver o editar un archivo, selecciónalo usando la opción "Abrir protegidos".</value>
+  </data>
+  <data name="Blog_HTEFIGDSBSI2_H2_SH2_Text6" xml:space="preserve">
+    <value>&lt;strong&gt;PASO 5:&lt;/strong&gt; Para descifrar permanentemente un archivo, haz click en "Dejar de proteger" y selecciona el archivo cifrado que desea descifrar.</value>
+  </data>
+  <data name="Blog_HTEFIGDSBSI2_H2_SH2_Text7" xml:space="preserve">
+    <value>AxCrypt se integra a la perfección con las principales plataformas de almacenamiento en la nube, incluidas Google Drive Encryption, OneDrive y Dropbox, lo que garantiza una experiencia segura de almacenamiento en la nube.</value>
+  </data>
   <data name="Blog_HTEFIGDSBSI2_H2_SubHeading1" xml:space="preserve">
     <value>&lt;strong&gt;Pasos para encriptar automáticamente los archivos de Google Drive en Windows y Mac&lt;/strong&gt;</value>
   </data>
   <data name="Blog_HTEFIGDSBSI2_H2_SubHeading2" xml:space="preserve">
     <value>&lt;strong&gt;Pasos para cifrar archivos de Google Drive en Android e iOS&lt;/strong&gt;</value>
+  </data>
+  <data name="Blog_HTEFIGDSBSI2_H2_Text1" xml:space="preserve">
+    <value>AxCrypt cifra automáticamente los archivos dentro de las carpetas de tu ordenador local y luego los sincroniza con tu cuenta de Google Drive. Esto garantiza que solo tú tengas acceso absoluto para cifrar y descifrar los archivos antes de subirlos. AxCrypt para almacenamiento en la nube proporciona una capa adicional de seguridad más allá del cifrado integrado de Google.</value>
   </data>
   <data name="Blog_HTEFIGDSBSI2_H2_Text2" xml:space="preserve">
     <value>Todo el proceso pasa por el siguiente flujo:</value>
@@ -8347,7 +8398,7 @@ Sigue los sencillos pasos de la página de la guía para comenzar a generar y pr
     <value>AxCrypt es multilingüe y este año agregamos compatibilidad con el chino mandarín. Para que la experiencia del usuario sea más conveniente, también comenzamos a publicar nuestros blogs en francés.</value>
   </data>
   <data name="Blog_TAYBS_H1_SH5_Text1" xml:space="preserve">
-    <value>Para asegurarnos de que aprovechen al máximo el uso de AxCrypt, hemos publicado nuevos tutoriales que les ayudarán a comenzar más rápido. Estos videos abarcan las funciones clave de su cuenta y &lt;a href='https://www.axcrypt.net/information/guides/get-started'&gt;algunos tips de ayuda muy útiles &lt;/a&gt;.</value>
+    <value>Para asegurarnos de que aprovechen al máximo el uso de AxCrypt, hemos publicado nuevos tutoriales que les ayudarán a comenzar más rápido. Estos videos abarcan las funciones clave de su cuenta y &lt;a href='https://axcrypt.net/information/guides/getstarted/'&gt;algunos tips de ayuda muy útiles &lt;/a&gt;.</value>
   </data>
   <data name="Blog_TAYBS_H1_SH6_Text1" xml:space="preserve">
     <value>También anunciamos nuestro segmento de industria en 2021, que ayuda a los usuarios a comprender mejor cómo prestamos servicios a varias industrias. Entendemos lo vital que es tener una idea de la experiencia de AxCrypt de alguien que lo haya usado anteriormente. Como resultado, hemos incluido testimonios adicionales este año para ayudarles a obtener más información sobre nuestra aplicación.&lt;a href='https://www.axcrypt.net/industries'&gt; Haz clic aquí para obtener más información&lt;/a&gt;</value>
@@ -8409,34 +8460,34 @@ Sigue los sencillos pasos de la página de la guía para comenzar a generar y pr
   <data name="Blog_TAYBS_Title" xml:space="preserve">
     <value>¡Brindemos por otro año de estar protegidos!</value>
   </data>
-  <data name="Blog_TBFEBSBF_Conclusion_Heading">
+  <data name="Blog_TBFEBSBF_Conclusion_Heading" xml:space="preserve">
     <value>Refuerza la seguridad empresarial con AxCrypt</value>
   </data>
-  <data name="Blog_TBFEBSBF_Conclusion_Text1">
+  <data name="Blog_TBFEBSBF_Conclusion_Text1" xml:space="preserve">
     <value>El cifrado ya no es opcional; es una necesidad. Protege los datos de tu empresa con el cifrado AES-256 de AxCrypt, líder en la industria; el intercambio de archivos sin complicaciones y la gestión segura de claves. Protege tus archivos confidenciales hoy con AxCrypt.</value>
   </data>
-  <data name="Blog_TBFEBSBF_H1_Text1">
+  <data name="Blog_TBFEBSBF_H1_Text1" xml:space="preserve">
     <value>Las empresas manejan información confidencial a diario, incluidos registros financieros, datos de clientes y propiedad intelectual. La protección de datos a través del cifrado de archivos garantiza que, incluso si se interceptan los datos empresariales, permanezcan ilegibles sin la clave de descifrado correcta. Esto protege tanto los datos de la empresa como los de los clientes del acceso no autorizado y el uso indebido.</value>
   </data>
   <data name="Blog_TBFEBSBF_H10_Text1" xml:space="preserve">
     <value>Las comunicaciones empresariales confidenciales suelen ser el objetivo de los ciberdelincuentes. El cifrado de correos electrónicos, mensajes y archivos adjuntos garantiza que las conversaciones comerciales confidenciales permanezcan privadas y protegidas contra la interceptación. Esta forma de comunicación encriptada es vital para proteger la correspondencia empresarial interna y externa.</value>
   </data>
-  <data name="Blog_TBFEBSBF_H11_Text1">
+  <data name="Blog_TBFEBSBF_H11_Text1" xml:space="preserve">
     <value>Para maximizar la seguridad, las empresas deben considerar:</value>
   </data>
-  <data name="Blog_TBFEBSBF_H11_Text2">
+  <data name="Blog_TBFEBSBF_H11_Text2" xml:space="preserve">
     <value>✅ Cifrado &lt;a href='https://axcrypt.net/blog/advanced-encryption-standard-vs-data-encryption-standard/'&gt;&lt;b&gt;AES-256&lt;/b&gt;&lt;/a&gt; para una protección robusta</value>
   </data>
-  <data name="Blog_TBFEBSBF_H11_Text3">
+  <data name="Blog_TBFEBSBF_H11_Text3" xml:space="preserve">
     <value>✅ &lt;a href='https://axcrypt.net/blog/what-is-nis2-and-its-minimal-compliance-requirements/'&gt;&lt;b&gt;Cumplimiento&lt;/b&gt;&lt;/a&gt; de la normativa del sector</value>
   </data>
-  <data name="Blog_TBFEBSBF_H11_Text4">
+  <data name="Blog_TBFEBSBF_H11_Text4" xml:space="preserve">
     <value>✅  &lt;a href='https://axcrypt.net/blog/fundamentals-of-key-management/'&gt;&lt;b&gt;Gestión segura de claves&lt;/b&gt;&lt;/a&gt; para evitar el acceso no autorizado</value>
   </data>
-  <data name="Blog_TBFEBSBF_H11_Text5">
+  <data name="Blog_TBFEBSBF_H11_Text5" xml:space="preserve">
     <value>✅ Integración impecable con la infraestructura de TI existente</value>
   </data>
-  <data name="Blog_TBFEBSBF_H2_Text1">
+  <data name="Blog_TBFEBSBF_H2_Text1" xml:space="preserve">
     <value>Una filtración de datos puede ser devastadora desde el punto de vista financiero y de reputación para una empresa. Las sanciones legales, la desconfianza de los clientes y las interrupciones operativas siguen a un fallo de seguridad. Los beneficios del cifrado de archivos reducen significativamente el riesgo al garantizar que, incluso si los hackers obtienen acceso a los datos comerciales, no puedan usarlos sin las claves de cifrado. Por ejemplo, empresas como Equifax, que experimentó una filtración de datos con grandes repercusiones, podrían haber evitado pérdidas significativas si hubieran implementado mejores prácticas de cifrado. Con el aumento de la ciberdelincuencia dirigida a las empresas, el cifrado es un paso fundamental para protegerse contra el acceso no autorizado.</value>
   </data>
   <data name="Blog_TBFEBSBF_H3_Text1" xml:space="preserve">
@@ -8466,10 +8517,10 @@ Sigue los sencillos pasos de la página de la guía para comenzar a generar y pr
   <data name="Blog_TBFEBSBF_Heading10" xml:space="preserve">
     <value>10. Permite la comunicación segura</value>
   </data>
-  <data name="Blog_TBFEBSBF_Heading11">
+  <data name="Blog_TBFEBSBF_Heading11" xml:space="preserve">
     <value>Elegir el cifrado adecuado para tu negocio</value>
   </data>
-  <data name="Blog_TBFEBSBF_Heading2">
+  <data name="Blog_TBFEBSBF_Heading2" xml:space="preserve">
     <value>2. Minimiza el riesgo de filtraciones de datos</value>
   </data>
   <data name="Blog_TBFEBSBF_Heading3" xml:space="preserve">
@@ -9035,22 +9086,34 @@ Sigue los sencillos pasos de la página de la guía para comenzar a generar y pr
   <data name="Blog_WAYAFC_H6_Text2" xml:space="preserve">
     <value>&lt;li&gt;&lt;b&gt;Pon parches a tus sistemas con regularidad&lt;/b&gt;: Las vulnerabilidades son como ventanas abiertas para los hackers. Las actualizaciones periódicas actúan como candados.&lt;/li&gt;</value>
   </data>
-  <data name="Blog_WAYAFC_H6_Text3">
+  <data name="Blog_WAYAFC_H6_Text3" xml:space="preserve">
     <value>&lt;li&gt;&lt;b&gt;Forma a tu equipo&lt;/b&gt;: la ingeniería social y los ataques de phishing engañan incluso a los empleados más inteligentes. La formación regular en ciberseguridad puede evitar errores costosos.&lt;/li&gt;</value>
   </data>
-  <data name="Blog_WAYAFC_H6_Text4">
+  <data name="Blog_WAYAFC_H6_Text4" xml:space="preserve">
     <value>&lt;li&gt;&lt;b&gt;Adopta un modelo de confianza cero&lt;/b&gt;: no asumas que ningún usuario o dispositivo es seguro. Verifica todo, todo el tiempo.&lt;/li&gt;</value>
   </data>
-  <data name="Blog_WAYAFC_H6_Text5">
+  <data name="Blog_WAYAFC_H6_Text5" xml:space="preserve">
     <value>Por ejemplo, en 2017, el ransomware WannaCry cifró archivos en miles de ordenadores en 150 países, haciéndolos inaccesibles. Las organizaciones con copias de seguridad adecuadas y sistemas actualizados se recuperaron rápidamente, mientras que otras se enfrentaron a semanas de interrupción.</value>
   </data>
-  <data name="Blog_WAYAFC_H7_Text1">
+  <data name="Blog_WAYAFC_H7_Text1" xml:space="preserve">
     <value>Los gobiernos ya no se quedan al margen. Están intensificando las regulaciones, sanciones y colaboraciones para combatir el cibercrimen.</value>
   </data>
-  <data name="Blog_WAYAFC_H8_Text2">
+  <data name="Blog_WAYAFC_H7_Text2" xml:space="preserve">
+    <value>&lt;li&gt;&lt;b&gt;Sanciones para los hackers&lt;/b&gt;: Después del ataque de &lt;b&gt;China&lt;/b&gt;, están aumentando los debates sobre la penalización de las entidades involucradas en los recientes ataques cibernéticos de China.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WAYAFC_H7_Text3" xml:space="preserve">
+    <value>&lt;li&gt;&lt;b&gt;Cooperación transfronteriza&lt;/b&gt;: Los países están trabajando juntos para compartir inteligencia y rastrear a los ciberdelincuentes.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WAYAFC_H7_Text4" xml:space="preserve">
+    <value>&lt;li&gt;&lt;b&gt;Leyes más estrictas&lt;/b&gt;: Regulaciones como GDPR y CCPA responsabilizan a las empresas de salvaguardar los datos de los clientes.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WAYAFC_H8_Text1" xml:space="preserve">
+    <value>Entonces, ¿qué puede hacer tu empresa para evitar convertirse en el próximo titular?</value>
+  </data>
+  <data name="Blog_WAYAFC_H8_Text2" xml:space="preserve">
     <value>1. &lt;b&gt;Invierte en una herramienta de cifrado para PYMES&lt;/b&gt;: herramientas como AxCrypt y su formato de archivo seguro .axx garantizan que tus archivos estén encriptados, haciéndolos inútiles incluso si los hackers acceden a ellos.</value>
   </data>
-  <data name="Blog_WAYAFC_H8_Text3">
+  <data name="Blog_WAYAFC_H8_Text3" xml:space="preserve">
     <value>2. &lt;b&gt;Copias de seguridad, copias de seguridad, copias de seguridad&lt;/b&gt;: mantén siempre copias de seguridad seguras de los datos críticos. Si el ransomware te bloquea, seguirás teniendo acceso.</value>
   </data>
   <data name="Blog_WAYAFC_H8_Text4" xml:space="preserve">
@@ -9110,10 +9173,13 @@ Sigue los sencillos pasos de la página de la guía para comenzar a generar y pr
   <data name="Blog_WAYAFC_Heading6" xml:space="preserve">
     <value>¿Qué podemos aprender de estos incidentes?</value>
   </data>
-  <data name="Blog_WAYAFC_Heading7">
+  <data name="Blog_WAYAFC_Heading7" xml:space="preserve">
     <value>Los gobiernos entran en juego</value>
   </data>
-  <data name="Blog_WAYAFC_Heading9">
+  <data name="Blog_WAYAFC_Heading8" xml:space="preserve">
+    <value>Medidas que las empresas deben tomar ahora</value>
+  </data>
+  <data name="Blog_WAYAFC_Heading9" xml:space="preserve">
     <value>Por qué AxCrypt es tu aliado de ciberseguridad</value>
   </data>
   <data name="Blog_WAYAFC_Summary" xml:space="preserve">
@@ -11118,10 +11184,10 @@ Sigue los sencillos pasos de la página de la guía para comenzar a generar y pr
   <data name="BusinessProductKeyParagraph10" xml:space="preserve">
     <value>Cifra y descifra tus archivos directamente en Android e iOS, manteniendo tus datos seguros mientras viajas. En el escritorio, sincroniza archivos con carpetas en la nube como Google Drive, OneDrive, iCloud y Dropbox, con AxCrypt cifrándolos automáticamente antes de cargarlos. Esto garantiza que sus datos permanezcan seguros, ya sea que se acceda desde dispositivos móviles, computadoras de escritorio o la nube.</value>
   </data>
-  <data name="BusinessProductKeyParagraph11">
+  <data name="BusinessProductKeyParagraph11" xml:space="preserve">
     <value>Mejora la seguridad de las comunicaciones empresariales con el cifrado AES-256, lo que garantiza que los mensajes confidenciales permanezcan protegidos en la web, el escritorio y los dispositivos móviles. Con Secured Messenger for Business, solo los miembros autorizados del equipo pueden acceder a los mensajes, protegiendo los datos corporativos confidenciales del acceso no autorizado.</value>
   </data>
-  <data name="BusinessProductKeyParagraph2">
+  <data name="BusinessProductKeyParagraph2" xml:space="preserve">
     <value>Organice a los usuarios en grupos de manera eficiente y administre su acceso con la administración centralizada de claves. Esto garantiza permisos coherentes en toda la organización, lo que permite a los administradores administrar y proteger el acceso de grupo a los datos críticos.</value>
   </data>
   <data name="BusinessProductKeyParagraph3" xml:space="preserve">
@@ -14192,7 +14258,7 @@ Grupo &lt;span&gt;Clave maestra&lt;/span&gt;</value>
     <value>Si desea administrar su facturación, facturas y licencias, consulte nuestra guía de configuración de empresas &lt;a href='/information/axcrypt-business/'&gt;Business Setup Guide&lt;/a&gt;</value>
   </data>
   <data name="GroupGuidesHeading8Paragraph2" xml:space="preserve">
-    <value>Para obtener más información sobre otros productos de AxCrypt, consulte otras guías de AxCrypt: &lt;a href='/information/guides/get-started/'&gt;AxCrypt Guides&lt;/a&gt;</value>
+    <value>Para obtener más información sobre otros productos de AxCrypt, consulte otras guías de AxCrypt: &lt;a href='https://axcrypt.net/helpcenter/'&gt;AxCrypt Guides&lt;/a&gt;</value>
   </data>
   <data name="GroupGuidesTitle" xml:space="preserve">
     <value>&lt;label&gt;Maximiza&lt;/label&gt; la seguridad empresarial y la eficiencia del equipo con &lt;span&gt;AxCrypt's&lt;/span&gt; &lt;strong&gt;Característica de grupo&lt;/strong&gt;!</value>
@@ -14563,7 +14629,7 @@ Si, por alguna razón, no recuerdas la contraseña, deberás restablecerla.</val
   <data name="HomeSellingPointStrongEncryptionHeading" xml:space="preserve">
     <value>Cifrado fuerte y acceso seguro</value>
   </data>
-  <data name="HomeStayInTouchHeading">
+  <data name="HomeStayInTouchHeading" xml:space="preserve">
     <value>Sigamos conectados</value>
   </data>
   <data name="HomeStayInTouchParagraph" xml:space="preserve">
@@ -15610,6 +15676,9 @@ Puedes abrir archivos AxCrypt 1.x heredados, pero a menos que sean convertidos, 
   </data>
   <data name="LinkToAxCryptPremiumPurchasePage" xml:space="preserve">
     <value>{0}Home/Login?purchase=true&amp;email={1}&amp;tag={2}</value>
+  </data>
+  <data name="LinkToGettingStarted" xml:space="preserve">
+    <value>https://axcrypt.net/information/guides/getstarted/</value>
   </data>
   <data name="LinkToManageAccountText" xml:space="preserve">
     <value>Para administrar tu cuenta, &lt;a&gt;haz clic aquí&lt;/a&gt;</value>
@@ -17448,7 +17517,7 @@ Los espacios en blanco, y partes que sean iguales a contraseñas comunes son ign
   <data name="premiumproductkeyparagraph8" xml:space="preserve">
     <value>Nuestro equipo de soporte dedicado está disponible para ayudarlo con cualquier pregunta o problema, asegurándose de que siempre pueda aprovechar al máximo AxCrypt Premium y mantener sus archivos seguros. También lo guiaremos a través de guías y tutoriales fáciles de seguir para garantizar que pueda aprovechar al máximo nuestras características.</value>
   </data>
-  <data name="PremiumProductKeyParagraph9">
+  <data name="PremiumProductKeyParagraph9" xml:space="preserve">
     <value>Mejora la seguridad de las comunicaciones con el cifrado AES-256, lo que garantiza que los mensajes permanezcan privados en la web, el escritorio y los dispositivos móviles. Con Secured Messenger, solo los destinatarios previstos pueden acceder a los mensajes, protegiendo la información confidencial del acceso no autorizado.</value>
   </data>
   <data name="PremiumRequiredBuyNowPopup" xml:space="preserve">
@@ -18887,7 +18956,7 @@ Asunto: Reporte resumido de AxCrypt</value>
     <value>Suscripción Business: &lt;a href='https://www.axcrypt.net/information/axcrypt-business'&gt;https://www.axcrypt.net/information/axcrypt-business&lt;/a&gt;</value>
   </data>
   <data name="ResellerHelpSupportBlock1ListItem3" xml:space="preserve">
-    <value>Cómo empezar: &lt;a href='https://www.axcrypt.net/information/guides/get-started'&gt;https://www.axcrypt.net/information/guides/get-started&lt;/a&gt;</value>
+    <value>Cómo empezar: &lt;a href='https://axcrypt.net/information/guides/getstarted/'&gt;https://axcrypt.net/information/guides/getstarted&lt;/a&gt;</value>
   </data>
   <data name="ResellerHelpSupportBlock1ListItem4" xml:space="preserve">
     <value>Consejos de uso: &lt;a href='https://www.axcrypt.net/information/usage-tips'&gt;https://www.axcrypt.net/information/usage-tips&lt;/a&gt;</value>
@@ -19059,13 +19128,13 @@ Asunto: Reporte resumido de AxCrypt</value>
   <data name="SecuredMessageInvalidReceiverError" xml:space="preserve">
     <value>Este mensaje debe tener al menos un destinatario.</value>
   </data>
-  <data name="SecuredMessengerLinkLabel">
+  <data name="SecuredMessengerLinkLabel" xml:space="preserve">
     <value>Mensajería protegida</value>
   </data>
-  <data name="SecuredMessengerText">
+  <data name="SecuredMessengerText" xml:space="preserve">
     <value>Garantiza una comunicación privada y segura entre dispositivos con cifrado AES-256 para los destinatarios previstos.</value>
   </data>
-  <data name="SecurityBlock1Heading">
+  <data name="SecurityBlock1Heading" xml:space="preserve">
     <value>¿Por qué AxCrypt es seguro?</value>
   </data>
   <data name="SecurityBlock1Text" xml:space="preserve">
@@ -20616,7 +20685,7 @@ Para más información, haz clic en OK para abrir nuestra página web en un expl
     <value>¿Qué incluye?</value>
   </data>
   <data name="WhatsNextMasterKeyParagraph1" xml:space="preserve">
-    <value>Consulte otras guías de AxCrypt: &lt;a href='https://axcrypt.net/information/guides/get-started/'&gt;&lt;span&gt;&lt;strong&gt;Guías de AxCrypt | Su guía para soluciones de ciberseguridad&lt;/a&gt;&lt;/span&gt;&lt;/strong&gt;</value>
+    <value>Consulte otras guías de AxCrypt: &lt;a href='https://axcrypt.net/helpcenter/'&gt;&lt;span&gt;&lt;strong&gt;Guías de AxCrypt | Su guía para soluciones de ciberseguridad&lt;/a&gt;&lt;/span&gt;&lt;/strong&gt;</value>
   </data>
   <data name="WhyAxCryptBusiness" xml:space="preserve">
     <value>¿Por qué AxCrypt Business?</value>

@@ -43137,6 +43137,42 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🔒 &lt;strong&gt;Encrypt &amp; Decrypt Files Easily&lt;/strong&gt; – Follow our &lt;a href=&apos;https://axcrypt.net/information/guides/encryption-decryption/&apos;&gt;[Step-by-Step AxCrypt Guide]&lt;/a&gt;..
+        /// </summary>
+        public static string GetStartedGuideWhatsNextText {
+            get {
+                return ResourceManager.GetString("GetStartedGuideWhatsNextText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 👥 &lt;strong&gt;Manage Teams &amp; Business Access&lt;/strong&gt; – Simplify collaboration with our &lt;a href=&apos;https://axcrypt.net/information/axcrypt-business/&apos;&gt;[Business Setup Guide]&lt;/a&gt;..
+        /// </summary>
+        public static string GetStartedGuideWhatsNextText1 {
+            get {
+                return ResourceManager.GetString("GetStartedGuideWhatsNextText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔐 &lt;strong&gt;Why Choose AxCrypt for Security&lt;/strong&gt; – Discover the algorithms and protections on our &lt;a href=&apos;https://axcrypt.net/information/security/&apos;&gt;[Security Page]&lt;/a&gt;..
+        /// </summary>
+        public static string GetStartedGuideWhatsNextText2 {
+            get {
+                return ResourceManager.GetString("GetStartedGuideWhatsNextText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 📘 &lt;strong&gt;Encryption Best Practices&lt;/strong&gt; – Explore our &lt;a href=&apos;https://axcrypt.net/blog/&apos;&gt;[Blogs on easy-to-use 128-bit and 256-bit encryption]&lt;/a&gt;..
+        /// </summary>
+        public static string GetStartedGuideWhatsNextText3 {
+            get {
+                return ResourceManager.GetString("GetStartedGuideWhatsNextText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How to Use.
         /// </summary>
         public static string GetStartedHowToUseHeading {
@@ -65768,9 +65804,9 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Surname: .
         /// </summary>
-        public static string SurnameLabel_ {
+        public static string SurnameLabel {
             get {
-                return ResourceManager.GetString("SurnameLabel ", resourceCulture);
+                return ResourceManager.GetString("SurnameLabel", resourceCulture);
             }
         }
         
