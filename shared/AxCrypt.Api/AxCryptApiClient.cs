@@ -4,11 +4,8 @@ using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Groups;
 using AxCrypt.Api.Model.MFA;
 using AxCrypt.Common;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Api
@@ -375,14 +372,30 @@ namespace AxCrypt.Api
             return subscriptionCreatedSuccessfully;
         }
 
-        public async Task<PurchaseSettings> GetInAppPurchaSettingsAsync()
+        public async Task<bool> PostSubscriptionByGooglePaymentAsync(GooglePurchaseInfo googlePaymentTrans)
+        {
+            if (googlePaymentTrans == null)
+            {
+                throw new ArgumentNullException(nameof(googlePaymentTrans));
+            }
+
+            Uri resource = BaseUrl.PathCombine("purchase/googlepayment/create/subscription");
+            RestContent content = new RestContent(Serializer.Serialize(googlePaymentTrans));
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("POST", resource, Timeout, content)).Free();
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            bool subscriptionCreatedSuccessfully = Serializer.Deserialize<bool>(restResponse.Content);
+            return subscriptionCreatedSuccessfully;
+        }
+
+        public async Task<PurchaseSettings> GetInAppPurchaSettingsAsync(string eventType)
         {
             if (string.IsNullOrEmpty(Identity.User) || string.IsNullOrEmpty(Identity.Password))
             {
                 throw new InvalidOperationException("There must be an identity and password to attempt to get in app purchase information.");
             }
 
-            Uri resource = BaseUrl.PathCombine("purchase/inapppurchase/settings");
+            Uri resource = BaseUrl.PathCombine($"purchase/inapppurchase/settings?eventtype={eventType}");
 
             RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest(resource, Timeout)).Free();
             ApiCaller.EnsureStatusOk(restResponse);
@@ -422,6 +435,7 @@ namespace AxCrypt.Api
             bool userAccountDeleted = Serializer.Deserialize<bool>(restResponse.Content);
             return userAccountDeleted;
         }
+
         /// <summary>
         /// Gets the user membered group keys.
         /// </summary>

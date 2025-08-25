@@ -1,7 +1,4 @@
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace AxCrypt.Api.Model
 {
@@ -23,35 +20,35 @@ namespace AxCrypt.Api.Model
         [JsonProperty("provider")]
         public string Provider { get; private set; }
 
-        [JsonProperty("premium_product_ids")]
+        [JsonProperty("premiumProductIds")]
         public string PremiumProductIdsWithAmount { get; set; }
 
-        [JsonProperty("business_product_ids")]
+        [JsonProperty("businessProductIds")]
         public string BusinessProductIdsWithAmount { get; set; }
 
-        [JsonProperty("passwordmanager_product_id")]
+        [JsonProperty("passwordManagerProductId")]
         public string PasswordManagerProductId { get; set; }
 
-        [JsonProperty("yearly_discount_percent")]
+        [JsonProperty("yearlyDiscountPercent")]
         public int YearlyDiscountPercentage { get; set; }
 
-        [JsonProperty("tax_rates")]
+        [JsonProperty("taxRates")]
         public string TaxRates { get; set; }
 
-        [JsonProperty("micro_payment_product_id")]
+        [JsonProperty("microPaymentProductId")]
         public string MicroPaymentProductId { get; set; }
 
-        public IEnumerable<string> PremiumProductIdList
+        public IDictionary<string, string> PremiumProductIdList
         {
             get
             {
                 if (PremiumProductIdsWithAmount == null)
                 {
-                    return new List<string>();
+                    return null;
                 }
 
-                string[] productIdsWithAmount = PremiumProductIdsWithAmount.Split(",".ToCharArray());
-                return productIdsWithAmount.Select(product => product.Split("=".ToCharArray())[0]);
+                string[] productIdsWithAmount = PremiumProductIdsWithAmount.Split(",", StringSplitOptions.RemoveEmptyEntries);
+                return productIdsWithAmount.Select(product => product.Split("=")).ToDictionary(kv => kv[0], kv => kv.Length > 1 ? kv[1] : string.Empty);
             }
         }
 

@@ -3,51 +3,52 @@
 namespace AxCrypt.Api.Model
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class StoreKitTransaction
+    public class GooglePurchaseInfo
     {
-        public StoreKitTransaction()
+        public GooglePurchaseInfo()
         {
         }
 
-        public StoreKitTransaction(string productId, string receiptData, string paidBy, string paidFor, string transactionId, string currencyPaid, decimal amountPaid, DateTime dateTimeUtc, string paymentStatus)
+        public GooglePurchaseInfo(string productId, string paidBy, string paidFor, string transactionId, string currencyPaid, decimal amountPaid, string paymentStatus, string startTimeUtc, string expiryTimeUtc, string purchaseToken)
         {
             ProductId = productId;
-            ReceiptData = receiptData;
             PaidBy = paidBy;
             PaidFor = paidFor;
             TransactionId = transactionId;
             CurrencyPaid = currencyPaid;
             AmountPaid = amountPaid;
-            DateTimeUtc = dateTimeUtc;
             PaymentStatus = paymentStatus;
+            StartTimeUtc = startTimeUtc;
+            ExpirationTimeUtc = expiryTimeUtc;
+            PurchaseToken = purchaseToken;
         }
 
-        [JsonProperty("receipt-data")]
-        public string ReceiptData { get; }
-
         [JsonProperty("product_id")]
-        public string ProductId { get; }
+        public string ProductId { get; set; }
 
         [JsonProperty("paid_by")]
-        public string PaidBy { get; }
+        public string PaidBy { get; set; }
 
         [JsonProperty("paid_for")]
-        public string PaidFor { get; }
+        public string PaidFor { get; set; }
 
         [JsonProperty("txn_id")]
-        public string TransactionId { get; }
+        public string TransactionId { get; set; }
 
         [JsonProperty("currency_paid")]
-        public string CurrencyPaid { get; }
+        public string CurrencyPaid { get; set; }
 
         [JsonProperty("amount_paid")]
-        public decimal AmountPaid { get; }
+        public decimal AmountPaid { get; set; }
 
-        [JsonProperty("datetime")]
-        public DateTime DateTimeUtc { get; }
+        [JsonProperty("starttimeutc")]
+        public string StartTimeUtc { get; set; }
+
+        [JsonProperty("expirationtimeutc")]
+        public string ExpirationTimeUtc { get; set; }
 
         [JsonProperty("payment_status")]
-        public string PaymentStatus { get; }
+        public string PaymentStatus { get; set; }
 
         [JsonProperty("item_name")]
         public string ItemName { get; set; }
@@ -63,5 +64,11 @@ namespace AxCrypt.Api.Model
 
         [JsonProperty("discount_code")]
         public string AppliedDiscountCode { get; set; } = string.Empty;
+
+        [JsonProperty("istrialperiod")]
+        public bool IsTrialPeriod { get; set; }
+
+        [JsonProperty("purchasetoken")]
+        public string PurchaseToken { get; set; }
     }
 }

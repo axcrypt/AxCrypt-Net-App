@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-#region Coypright and License
+﻿#region Coypright and License
 
 /*
  * AxCrypt AB- Copyright 2016, All Rights Reserved
@@ -29,14 +26,12 @@ using System.Linq;
 #endregion Coypright and License
 
 using AxCrypt.Api.Model;
+using AxCrypt.Api.Model.Groups;
+using AxCrypt.Api.Model.MFA;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.UI;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Threading.Tasks;
-using AxCrypt.Api.Model.Groups;
-using AxCrypt.Api.Model.MFA;
 
 namespace AxCrypt.Core.Service
 {
@@ -146,7 +141,7 @@ namespace AxCrypt.Core.Service
             return Task.FromResult(false);
         }
 
-        public Task<PurchaseSettings> GetInAppPurchaseSettingsAsync()
+        public Task<PurchaseSettings> GetInAppPurchaseSettingsAsync(string eventType)
         {
             return Task.FromResult((PurchaseSettings)null);
         }
@@ -174,6 +169,11 @@ namespace AxCrypt.Core.Service
         public Task<MultiFactorAuthOTPApiModel> SendMFAOtpAsync(string userEmail)
         {
             return null;
+        }
+
+        public Task<bool> CreateSubscriptionByGooglePaymentAsync(GooglePurchaseInfo googlePaymentTrans)
+        {
+            return Task.FromResult(false);
         }
     }
 }

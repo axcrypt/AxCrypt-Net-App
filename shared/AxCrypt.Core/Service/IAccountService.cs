@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 #region Coypright and License
 
 /*
@@ -29,14 +26,12 @@ using System.Linq;
 #endregion Coypright and License
 
 using AxCrypt.Api.Model;
+using AxCrypt.Api.Model.Groups;
+using AxCrypt.Api.Model.MFA;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.UI;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Threading.Tasks;
-using AxCrypt.Api.Model.Groups;
-using AxCrypt.Api.Model.MFA;
 
 namespace AxCrypt.Core.Service
 {
@@ -179,7 +174,7 @@ namespace AxCrypt.Core.Service
         /// Get the in app purchase settings.
         /// </summary>
         /// <returns>The InAppPurchase product ids and discount information, or null if the service can't connect.</returns>
-        Task<PurchaseSettings> GetInAppPurchaseSettingsAsync();
+        Task<PurchaseSettings> GetInAppPurchaseSettingsAsync(string eventType);
 
         /// <summary>
         /// Get a user auto renewal subscription status.
@@ -214,5 +209,14 @@ namespace AxCrypt.Core.Service
         Task PrioritySupportAsync(string subject, string message);
 
         Task<MultiFactorAuthOTPApiModel> SendMFAOtpAsync(string mfaType);
+
+        /// <summary>
+        /// Creates a subscription for the GooglePayment InAppPurchase transaction.
+        /// </summary>
+        /// <param name="googlePamentTrans">The GooglePayment IAP transaction(s).</param>
+        /// <returns>
+        ///  /// <c>true</c> if subscription created; otherwise, <c>false</c>.
+        ///  </returns>
+        Task<bool> CreateSubscriptionByGooglePaymentAsync(GooglePurchaseInfo googlePamentTrans);
     }
 }

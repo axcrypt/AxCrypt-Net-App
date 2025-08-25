@@ -35,11 +35,7 @@ using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AxCrypt.Core.Service
 {
@@ -302,14 +298,14 @@ namespace AxCrypt.Core.Service
             return await _apiClient.PostCreateSubscriptionAsync(skTransactions);
         }
 
-        public async Task<PurchaseSettings> GetInAppPurchaseSettingsAsync()
+        public async Task<PurchaseSettings> GetInAppPurchaseSettingsAsync(string eventType)
         {
             if (string.IsNullOrEmpty(_apiClient.Identity.User))
             {
                 throw new InvalidOperationException("The account service requires a user.");
             }
 
-            return await _apiClient.GetInAppPurchaSettingsAsync();
+            return await _apiClient.GetInAppPurchaSettingsAsync(eventType);
         }
 
         public async Task<bool> AutoRenewalStatusAsync()
@@ -368,6 +364,16 @@ namespace AxCrypt.Core.Service
             }
 
             return await _apiClient.SendMFAOTPAsync(userEmail).Free();
+        }
+
+        public async Task<bool> CreateSubscriptionByGooglePaymentAsync(GooglePurchaseInfo googlePaymentTrans)
+        {
+            if (string.IsNullOrEmpty(_apiClient.Identity.User))
+            {
+                throw new InvalidOperationException("The account service requires a user.");
+            }
+
+            return await _apiClient.PostSubscriptionByGooglePaymentAsync(googlePaymentTrans);
         }
     }
 }

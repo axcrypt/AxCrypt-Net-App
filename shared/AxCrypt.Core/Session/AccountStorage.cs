@@ -31,10 +31,6 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AxCrypt.Core.Session
 {
@@ -122,9 +118,9 @@ namespace AxCrypt.Core.Session
             return await _service.OtherUserInvitePublicKeyAsync(email, customParameters).Free();
         }
 
-        public async Task<PurchaseSettings> GetInAppPurchaseSettingsAsync()
+        public async Task<PurchaseSettings> GetInAppPurchaseSettingsAsync(string eventType)
         {
-            return await _service.GetInAppPurchaseSettingsAsync().Free();
+            return await _service.GetInAppPurchaseSettingsAsync(eventType).Free();
         }
 
         public async Task<bool> AutoRenewalStatusAsync()

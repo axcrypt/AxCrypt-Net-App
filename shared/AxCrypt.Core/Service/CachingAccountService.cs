@@ -6,11 +6,7 @@ using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.UI;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Service
@@ -138,9 +134,9 @@ namespace AxCrypt.Core.Service
             return await New<ICache>().UpdateItemAsync(() => _service.CreateSubscriptionAsync(skTransactions), _key).Free();
         }
 
-        public async Task<PurchaseSettings> GetInAppPurchaseSettingsAsync()
+        public async Task<PurchaseSettings> GetInAppPurchaseSettingsAsync(string eventType)
         {
-            return await New<ICache>().UpdateItemAsync(() => _service.GetInAppPurchaseSettingsAsync(), _key).Free();
+            return await New<ICache>().UpdateItemAsync(() => _service.GetInAppPurchaseSettingsAsync(eventType), _key).Free();
         }
 
         public async Task<bool> AutoRenewalStatusAsync()
@@ -166,6 +162,11 @@ namespace AxCrypt.Core.Service
         public async Task<MultiFactorAuthOTPApiModel> SendMFAOtpAsync(string userEmail)
         {
             return await New<ICache>().UpdateItemAsync(async () => await _service.SendMFAOtpAsync(userEmail), _key).Free();
+        }
+
+        public async Task<bool> CreateSubscriptionByGooglePaymentAsync(GooglePurchaseInfo googlePaymenttrans)
+        {
+            return await New<ICache>().UpdateItemAsync(() => _service.CreateSubscriptionByGooglePaymentAsync(googlePaymenttrans), _key).Free();
         }
     }
 }

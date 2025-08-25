@@ -36,13 +36,8 @@ using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -364,7 +359,7 @@ namespace AxCrypt.Core.Service
             throw new InvalidOperationException("Premium creation cannot be started locally.");
         }
 
-        public Task<PurchaseSettings> GetInAppPurchaseSettingsAsync()
+        public Task<PurchaseSettings> GetInAppPurchaseSettingsAsync(string eventType)
         {
             throw new InvalidOperationException("In app purchase member cannot be getting locally.");
         }
@@ -394,6 +389,11 @@ namespace AxCrypt.Core.Service
         public Task<MultiFactorAuthOTPApiModel> SendMFAOtpAsync(string userEmail)
         {
             return null;
+        }
+
+        public Task<bool> CreateSubscriptionByGooglePaymentAsync(GooglePurchaseInfo googlePaymentTrans)
+        {
+            throw new InvalidOperationException("Premium creation cannot be started locally.");
         }
     }
 }

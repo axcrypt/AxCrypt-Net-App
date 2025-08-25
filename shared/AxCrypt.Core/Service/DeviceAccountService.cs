@@ -10,11 +10,7 @@ using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -383,14 +379,14 @@ namespace AxCrypt.Core.Service
             return await _localService.CreateSubscriptionAsync(skTransactions).Free();
         }
 
-        public async Task<PurchaseSettings> GetInAppPurchaseSettingsAsync()
+        public async Task<PurchaseSettings> GetInAppPurchaseSettingsAsync(string eventType)
         {
             if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
             {
-                return await _remoteService.GetInAppPurchaseSettingsAsync().Free();
+                return await _remoteService.GetInAppPurchaseSettingsAsync(eventType).Free();
             }
 
-            return await _localService.GetInAppPurchaseSettingsAsync().Free();
+            return await _localService.GetInAppPurchaseSettingsAsync(eventType).Free();
         }
 
         public async Task<bool> AutoRenewalStatusAsync()
@@ -412,6 +408,7 @@ namespace AxCrypt.Core.Service
 
             return await _localService.DeleteUserAsync().Free();
         }
+
         public async Task<IEnumerable<GroupKeyPairApiModel>> ListMembershipGroupsAsync()
         {
             IEnumerable<GroupKeyPairApiModel> localKeys = await _localService.ListMembershipGroupsAsync().Free();
@@ -480,6 +477,16 @@ namespace AxCrypt.Core.Service
             }
 
             return await _localService.SendMFAOtpAsync(userEmail).Free();
+        }
+
+        public async Task<bool> CreateSubscriptionByGooglePaymentAsync(GooglePurchaseInfo googlePaymentTrans)
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                return await _remoteService.CreateSubscriptionByGooglePaymentAsync(googlePaymentTrans).Free();
+            }
+
+            return await _localService.CreateSubscriptionByGooglePaymentAsync(googlePaymentTrans).Free();
         }
     }
 }
