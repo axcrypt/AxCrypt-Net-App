@@ -343,16 +343,19 @@ namespace AxCrypt.App.Windows.WinUI
             Uri uri = protocolArgs.Uri;
             string verb = uri.Host.ToLowerInvariant();
 
-            NameValueCollection query = System.Web.HttpUtility.ParseQueryString(uri.Query);
-            string[]? filePath = query.GetValues("file");
+            NameValueCollection qs = System.Web.HttpUtility.ParseQueryString(uri.Query);
+            string? filePath = qs.Get("file");
 
-            if (filePath == null || filePath.Length == 0) return;
+            if (!string.IsNullOrEmpty(filePath) && Directory.Exists(filePath))
+            {
+                string[] allFiles = Directory.GetFiles(filePath, "*.*", SearchOption.AllDirectories);
+                ExecuteCommand(verb, allFiles);
+            }
 
-            string[] files = filePath.Where(f => !string.IsNullOrWhiteSpace(f)).ToArray();
-
-            if (files.Length == 0) return;
-
-            ExecuteCommand(verb, files);
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            {
+                ExecuteCommand(verb, new[] { filePath });
+            }
         }
 
         private void ExecuteCommand(string? verb, string[] files)
