@@ -4,13 +4,13 @@ using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Platforms.Windows.Implementation;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
-using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Ipc;
 using AxCrypt.Core.Runtime;
@@ -25,8 +25,6 @@ namespace AxCrypt.App.Windows;
 
 public partial class App : Application
 {
-    private readonly FileDropService _fileDropService;
-
     private readonly ProgressBackgroundComponent _progressBackgroundWorker;
 
     //private bool _isInitializing = true;
@@ -38,6 +36,7 @@ public partial class App : Application
 
     private KnownFoldersViewModel _knownFoldersViewModel;
     private LogViewModel _logViewModel;
+    private LogOnViewModel _logOnViewModel;
 
     private readonly IDispatcher _dispatcher;
 
@@ -45,6 +44,7 @@ public partial class App : Application
     {
         _dispatcher = dispatcher;
         _logViewModel = logService;
+        _logOnViewModel = logOnViewModel;
         InitializeComponent();
 
         InitializeContentResources();
@@ -58,7 +58,7 @@ public partial class App : Application
         InitializeServiceDependencyProvider();
         _progressBackgroundWorker = new ProgressBackgroundComponent();
 
-        MainPage = new MainPage(logOnViewModel, _mainViewModel, _fileOperationViewModel, _knownFoldersViewModel, registerViewModel, fileDropService);
+        MainPage = new MainPage(logOnViewModel, _mainViewModel!, _fileOperationViewModel!, _knownFoldersViewModel!, registerViewModel, fileDropService);
     }
 
     private static void InitializeServiceDependencyProvider()
@@ -340,7 +340,7 @@ public partial class App : Application
         switch (e.Verb)
         {
             case CommandVerb.About:
-                //New<AboutBox>().ShowNow();
+                _logOnViewModel.AboutDialog.Show();
                 return;
 
             case CommandVerb.Exit:
@@ -441,7 +441,7 @@ public partial class App : Application
             case CommandVerb.SignOut:
                 if (New<KnownIdentities>().IsLoggedOn)
                 {
-                    await New<KnownIdentities>().SetDefaultEncryptionIdentity(LogOnIdentity.Empty);
+                    await AppLifecycleHandler.SignOutSignIn();
                 }
                 break;
 

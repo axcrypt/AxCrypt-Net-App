@@ -18,7 +18,6 @@ using AxCrypt.Mono.Portable;
 using Microsoft.Maui.Controls.Platform;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.AppLifecycle;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
@@ -326,14 +325,16 @@ namespace AxCrypt.App.Windows.WinUI
             base.OnLaunched(args);
         }
 
-        private void HandleFileActivation(IFileActivatedEventArgs? fileArgs)
+        private void HandleFileActivation(IFileActivatedEventArgs? fileActivatedArgs)
         {
-            if (fileArgs == null) return;
+            CreateMauiApp();
 
-            string verb = fileArgs.Verb ?? string.Empty;
-            string[] files = fileArgs.Files.Select(f => f.Path).ToArray();
+            string verb = fileActivatedArgs?.Verb.ToLowerInvariant() ?? "";
+            string[] files = fileActivatedArgs?.Files.Select(file => file.Path).ToArray() ?? [];
+            ResolveVerb(verb, files);
 
-            ExecuteCommand(verb, files);
+            Environment.Exit(0);
+            return;
         }
 
         private void HandleProtocolActivation(IProtocolActivatedEventArgs? protocolArgs)
@@ -343,42 +344,58 @@ namespace AxCrypt.App.Windows.WinUI
             Uri uri = protocolArgs.Uri;
             string verb = uri.Host.ToLowerInvariant();
 
-            NameValueCollection qs = System.Web.HttpUtility.ParseQueryString(uri.Query);
-            string? filePath = qs.Get("file");
-
-            if (!string.IsNullOrEmpty(filePath) && Directory.Exists(filePath))
+            string? filePath = System.Web.HttpUtility.ParseQueryString(uri.Query).Get("file");
+            if (string.IsNullOrEmpty(filePath))
             {
-                string[] allFiles = Directory.GetFiles(filePath, "*.*", SearchOption.AllDirectories);
-                ExecuteCommand(verb, allFiles);
+                return;
             }
 
-            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
-            {
-                ExecuteCommand(verb, new[] { filePath });
-            }
-        }
+            string[] files = Directory.Exists(filePath) ? Directory.GetFiles(filePath, "*.*", SearchOption.AllDirectories) : File.Exists(filePath) ? new[] { filePath } : Array.Empty<string>();
 
-        private void ExecuteCommand(string? verb, string[] files)
-        {
-            if (files == null || files.Length == 0) return;
+            if (files.Length == 0)
+            {
+                return;
+            }
 
             CreateMauiApp();
+            ResolveVerb(verb, files);
 
-            (CommandVerb cmdVerb, int index) = ResolveVerb(verb ?? string.Empty);
-            Resolve.CommandService.Call(cmdVerb, index, files);
+            Environment.Exit(0);
         }
 
-        private (CommandVerb verb, int index) ResolveVerb(string verb)
+        private static void ResolveVerb(string? verb, string[] files)
         {
-            return verb.ToLowerInvariant() switch
+            switch (verb)
             {
-                "open" => (CommandVerb.Open, 0),
-                "decrypt" => (CommandVerb.Decrypt, 1),
-                "encrypt" => (CommandVerb.Encrypt, 2),
-                "securedelete" => (CommandVerb.Wipe, 3),
-                "randomrename" => (CommandVerb.RandomRename, 3),
-                _ => (CommandVerb.Open, 4)
-            };
+                case "open":
+                    Resolve.CommandService.Call(CommandVerb.Open, 0, files);
+                    break;
+                case "decrypt":
+                    Resolve.CommandService.Call(CommandVerb.Decrypt, 1, files);
+                    break;
+                case "encrypt":
+                    Resolve.CommandService.Call(CommandVerb.Encrypt, 2, files);
+                    break;
+                case "securedelete":
+                    Resolve.CommandService.Call(CommandVerb.Wipe, 3, files);
+                    break;
+                case "randomrename":
+                    Resolve.CommandService.Call(CommandVerb.RandomRename, 3, files);
+                    break;
+                case "about":
+                    Resolve.CommandService.Call(CommandVerb.About, 5, new string[] { });
+                    break;
+                case "advanced":
+                    Resolve.CommandService.Call(CommandVerb.Show, 6, new string[] { });
+                    break;
+                case "signout":
+                    Resolve.CommandService.Call(CommandVerb.SignOut, 7, new string[] { });
+                    break;
+
+                default:
+                    Resolve.CommandService.Call(CommandVerb.Open, 4, files);
+                    break;
+            }
         }
     }
 }
