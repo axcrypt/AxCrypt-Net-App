@@ -30,6 +30,9 @@ public static class AppDesktopFactory
         services.AddSingleton<RecentFoldersViewModel>();
         services.AddSingleton<VaultSettingsViewModel>();
 
+        
+        services.AddSingleton<SwitchUserViewModel>();
+
         services.AddSingleton<SuggestionViewModel>();
         services.AddSingleton<InviteViewModel>();
         services.AddSingleton<ImportPrivateKeyViewModel>();

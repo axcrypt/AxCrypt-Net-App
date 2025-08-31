@@ -132,10 +132,12 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await base.OnInitializedAsync();
+        RecentFilesViewModel.OnInitialized();
         RecentFilesViewModel.OnUpdateViewState += UpdatePageState;
         FileDropService.ResetOnDropped();
         FileDropService.OnFilesDropped += async (files) => await HandleDroppedFiles(files);
+
+        await base.OnInitializedAsync();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

@@ -67,6 +67,7 @@ namespace AxCrypt.Core.UI.ViewModel
             EncryptedFileFullName = encryptedFileFullName;
             PasswordText = String.Empty;
             ShowPassword = New<UserSettings>().DisplayDecryptPassphrase;
+            ReadOnlyUserEmail = !string.IsNullOrEmpty(userEmail);
         }
 
         private void BindPropertyChangedEvents()
@@ -76,6 +77,8 @@ namespace AxCrypt.Core.UI.ViewModel
         }
 
         public bool ShowPassword { get { return GetProperty<bool>(nameof(ShowPassword)); } set { SetProperty(nameof(ShowPassword), value); } }
+
+        public bool ReadOnlyUserEmail { get { return GetProperty<bool>(nameof(ReadOnlyUserEmail)); } set { SetProperty(nameof(ReadOnlyUserEmail), value); } }
 
         public string PasswordText { get { return GetProperty<string>(nameof(PasswordText)); } set { SetProperty(nameof(PasswordText), value); } }
 

@@ -34,8 +34,6 @@ public class RecentFilesViewModel : ViewModelBase
         SelectAllChecked = false;
         SelectedFiles = new List<string>();
         RecentFilesList = new ObservableCollection<FileDetails>();
-
-        OnInitialized();
     }
 
     public void OnInitialized()

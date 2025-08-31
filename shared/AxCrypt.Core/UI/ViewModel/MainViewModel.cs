@@ -25,12 +25,6 @@
 
 #endregion Coypright and License
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using AxCrypt.Abstractions;
 using AxCrypt.Common;
 using AxCrypt.Content;
@@ -40,6 +34,7 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Portable;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
+using System.Text;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.UI.ViewModel
@@ -198,16 +193,16 @@ namespace AxCrypt.Core.UI.ViewModel
             BindPropertyChangedInternal(nameof(LoggedOn), async (bool loggedOn) => { if (loggedOn) await AxCryptUpdateCheck.ExecuteAsync(_userSettings.LastUpdateCheckUtc); });
 
             BindPropertyChanged(nameof(DebugMode), (bool enabled) => { UpdateDebugMode(enabled); });
-            BindPropertyChanged(nameof(LoggedOn), (bool loggedOn) => EncryptFileEnabled = loggedOn && License.Has(LicenseCapability.EncryptNewFiles));
-            BindPropertyChanged(nameof(License), async (LicenseCapabilities policy) => 
-            { 
-                if (LoggedOn)
+            BindPropertyChanged(nameof(LoggedOn), (bool loggedOn) =>
+            {
+                if (loggedOn)
                 {
                     _fileSystemState.InitializeFileSystem();
                 }
 
-                await SetWatchedFoldersAsync();
+                EncryptFileEnabled = loggedOn && License.Has(LicenseCapability.EncryptNewFiles);
             });
+            BindPropertyChanged(nameof(License), async (LicenseCapabilities policy) => await SetWatchedFoldersAsync());
             BindPropertyChanged(nameof(EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => Resolve.UserSettings.EncryptionUpgradeMode = mode);
             BindPropertyChanged(nameof(FolderOperationMode), async (FolderOperationMode mode) => await SetFolderOperationMode(mode));
         }

@@ -7,6 +7,7 @@ using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.User;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -158,6 +159,7 @@ namespace AxCrypt.App.Shared.Services
             if (!_logOnViewModel.IsVisible)
             {
                 _logOnViewModel.PageResult = DialogResult.None;
+                Resolve.UserSettings.UserEmail = WorkUserProfile.UserEmail;
                 LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
                 await _logOnViewModel.ShowLogOnDialog(logOnModel, _mainViewModel);
             }

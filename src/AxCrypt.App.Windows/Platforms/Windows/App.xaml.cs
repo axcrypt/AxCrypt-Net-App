@@ -1,16 +1,19 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Abstractions.Algorithm;
 using AxCrypt.Api;
+using AxCrypt.Api.Implementation;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.Common;
 using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Ipc;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.User;
 using AxCrypt.Desktop;
 using AxCrypt.Desktop.Cryptography;
 using AxCrypt.Mono;
@@ -60,8 +63,15 @@ namespace AxCrypt.App.Windows.WinUI
             _workFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"AxCrypt" + Path.DirectorySeparatorChar);
             //_workFolderPath = Path.Combine(FileSystem.Current.CacheDirectory, @"AxCrypt" + Path.DirectorySeparatorChar);
 
+            RuntimeEnvironment.RegisterTypeFactories();
+            TypeMap.Register.Singleton<FileLocker>(() => new FileLocker());
+            TypeMap.Register.Singleton<IUserProfilesStore>(() => new UserProfilesStore(new DataStore(Path.Combine(_workFolderPath, "UserProfiles.txt"))));
+            TypeMap.Register.New<IStringSerializer>(() => new StringSerializer(New<IAsymmetricFactory>().GetSerializers()));
+            TypeMap.Register.Singleton<IAsymmetricFactory>(() => new BouncyCastleAsymmetricFactory());
             TypeMap.Register.Singleton<INow>(() => new Now());
             TypeMap.Register.Singleton<IReport>(() => new Report(_workFolderPath, 1000000));
+
+            _workFolderPath = WorkUserProfile.GetUserWorkFolderOnAppStart(_workFolderPath) ?? throw new ApplicationException("App failed to start with invalid user work folder!");
 
             EmbeddedResourceManager.Initialize();
 
@@ -146,8 +156,8 @@ namespace AxCrypt.App.Windows.WinUI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Dependency registration, not real complexity")]
         private static void RegisterTypeFactories(string startPath)
         {
-            RuntimeEnvironment.RegisterTypeFactories();
-            TypeMap.Register.Singleton<FileLocker>(() => new FileLocker());
+            //RuntimeEnvironment.RegisterTypeFactories();
+            //TypeMap.Register.Singleton<FileLocker>(() => new FileLocker());
 
             IEnumerable<Assembly> extraAssemblies = LoadFromFiles(new DirectoryInfo(Path.GetDirectoryName(startPath)).GetFiles("*.dll"));
             Resolve.RegisterTypeFactories(_workFolderPath, extraAssemblies);
@@ -306,23 +316,35 @@ namespace AxCrypt.App.Windows.WinUI
 
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            Microsoft.Windows.AppLifecycle.AppActivationArguments appActivationArguments = Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
-
-            switch (appActivationArguments.Kind)
+            try
             {
-                case ExtendedActivationKind.ToastNotification:
-                    return;
+                Microsoft.Windows.AppLifecycle.AppActivationArguments appActivationArguments = Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().GetActivatedEventArgs();
 
-                case ExtendedActivationKind.File:
-                    HandleFileActivation(appActivationArguments.Data as IFileActivatedEventArgs);
-                    return;
+                switch (appActivationArguments.Kind)
+                {
+                    case ExtendedActivationKind.ToastNotification:
+                        return;
 
-                case ExtendedActivationKind.Protocol:
-                    HandleProtocolActivation(appActivationArguments.Data as IProtocolActivatedEventArgs);
-                    return;
+                    case ExtendedActivationKind.File:
+                        HandleFileActivation(appActivationArguments.Data as IFileActivatedEventArgs);
+                        return;
+
+                    case ExtendedActivationKind.Protocol:
+                        HandleProtocolActivation(appActivationArguments.Data as IProtocolActivatedEventArgs);
+                        return;
+                }
+
+                base.OnLaunched(args);
             }
+            catch (Exception ex)
+            {
+                if (ex is ApplicationExitException)
+                {
+                    Exit();
+                }
 
-            base.OnLaunched(args);
+                ExceptionMessageAndReport(ex);
+            }
         }
 
         private void HandleFileActivation(IFileActivatedEventArgs? fileActivatedArgs)

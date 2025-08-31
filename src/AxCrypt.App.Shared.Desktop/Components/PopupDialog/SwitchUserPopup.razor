@@ -1,0 +1,269 @@
+﻿@using AxCrypt.Abstractions
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.Core.UI
+@using AxCrypt.Core.UI.User
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject SwitchUserViewModel SwitchUserViewModel
+@inject NavigationManager navigationManager
+
+<style>
+    .SwitchUser-popup {
+        position: fixed;
+        margin: 10% auto;
+        display: inline-block;
+        width: 400px;
+        min-height: 429px;
+        max-height: 520px;
+        border-radius: 16px;
+        border: solid 1px;
+        background-color: white;
+    }
+
+    .popup-image-paragraph {
+        text-align: center;
+        margin: 30px 0 10px 0;
+    }
+
+    .popup-image {
+        width: 138px;
+        height: 133px;
+        top: 30px;
+        left: 131px;
+    }
+
+    .popup-paragraph {
+        width: 321px;
+        height: 32px;
+        top: 179px;
+        left: 40px;
+    }
+
+    .SwitchUser-popup-backgroundColor {
+        margin-right: 46px;
+        margin-top: 5px;
+    }
+
+    .SwitchUser-popup-backgroundImage {
+        width: 400px;
+        height: 34px;
+        background-color: #E8FEDE;
+        border-radius: 3px;
+        top: 221px;
+    }
+
+    .popup-select-emails {
+        line-height: 34px;
+        padding: 0 5px;
+    }
+
+        .popup-select-emails:hover,
+        .popup-select-emails.active {
+            background-color: #E8FEDE !important;
+            cursor: pointer;
+        }
+
+        .popup-select-emails.active {
+            background: url(images/TickMark.svg) no-repeat center right 35px;
+        }
+
+            .popup-select-emails:hover .select-email,
+            .popup-select-emails.active .select-email {
+                color: #48772C;
+                font-weight: 700 !important;
+            }
+
+    .icon-email {
+        width: 20px;
+        height: 20px;
+    }
+
+    /*         .icon-email.active {
+                                content: url(images/IcoPrmAvtrDsk.svg);
+                            }
+
+                        .backg-email {
+                            content: url(images/IconSU.svg);
+                        }
+
+                            .backg-email.active {
+                                content: url(images/IcoBusAvtr.svg);
+                            } */
+
+    .select-email {
+        font-weight: 400;
+        font-size: 14px;
+        margin-left: 5px;
+    }
+
+    .switch-user-action-section {
+        margin: 0px 34px auto !important;
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        padding: 11px 0px 15px 0px;
+    }
+
+    .switch-user-action-btn {
+        text-align: center;
+        width: 153px;
+        height: 36.65px;
+        border-radius: 10px;
+    }
+
+        .switch-user-action-btn.confirm {
+            background-color: #48772C;
+            color: #FFF;
+            border: none;
+        }
+
+        .switch-user-action-btn.cancel {
+            background-color: #FFF;
+            border: 1px solid #86B96E;
+            color: #000;
+        }
+
+    .user-avatar {
+        content: url(images/default/AxCrypt_Icon.svg);
+    }
+
+    /*    .premium-sw-icon {
+                            content: url(images/IconSU.svg);
+                        }
+
+                            .premium-sw-icon.active {
+                                content: url(images/IcoPrmAvtrDsk.svg);
+                            }
+
+                        .premium-sw-icons {
+                            content: url(images/IconSU.svg);
+                        }
+
+                            .premium-sw-icons.active {
+                                content: url(images/IcoPrmAvtrDsk.svg);
+                            }
+
+                        .business-sw-icon {
+                            content: url(images/Icon-3.svg);
+                        }
+
+                            .business-sw-icon.active {
+                                content: url(images/IcoBusAccnt.svg);
+                            }
+
+                        .password-em-icon {
+                            content: url(images/IcoPswMngAccnt.svg);
+                        }
+
+                            .password-em-icon.active {
+                                content: url(images/IcoPswMngAccnt-icon.svg);
+                            }
+
+                        .free-em-icon {
+                            content: url(images/IcoVwrAccnt.svg);
+                        }
+
+                            .free-em-icon.active {
+                                content: url(images/IcoVwrAccnt-icon.svg);
+                            } */
+
+</style>
+
+@if (IsVisible)
+{
+    <div class="SwitchUser-popup">
+        <div class="popup-image-paragraph">
+            <img class="popup-image" src="images/prfls_1.svg" alt="Switch user" style="display:block; margin:30px auto 16px auto;">
+            <span class="popup-paragraph" style="font-size:14px;">Choose the <b>account</b> to which you want to switch </span>
+        </div>
+        <div style="max-height: 220px;min-height: 100px;overflow-y:auto;margin: 0 30px;">
+            @for (int i = 0; i < SwitchUserViewModel.UserProfilesList.Where(up => up.UserEmail != "").Count(); i++)
+            {
+                UserProfile email = SwitchUserViewModel.UserProfilesList.ElementAt(i);
+                <div class="popup-select-emails @(email.Active ? "active" : "")"
+                     @onclick="@(() => SelectEmail(email.UserEmail, email.SubsType))">
+                    <img class="@ActiveEmailIcon(email.SubsType) @(email.Active ? "active" : "")" alt="@email.SubsType" />
+                    <span class="select-email">@email.UserEmail</span>
+                    <span title="Remove user profile" style="color:red;float: right;font-weight: 800;" @onclick="() => SwitchUserViewModel.RemoveButton_Click(email.UserEmail)">&#x2715</span>
+                </div>
+            }
+
+            @if (SwitchUserViewModel.UserProfilesList.Count() < SwitchUserViewModel.MaxUserProfileLimit)
+            {
+                <div class="popup-select-emails" style="margin-top: 6px;" @onclick="async () => await SwitchUserViewModel.OnNewEmail_Clicked()">
+                    <img class="" src="images/Icon-4.svg" alt="" />
+                    <span class="select-email">Add new email</span>
+                </div>
+            }
+        </div>
+        <div class="switch-user-action-section">
+            <input class="switch-user-action-btn confirm" type="button" value="Confirm" @onclick="async () => await SwitchUserViewModel.OnConfirm_Clicked()" />
+            <input class="switch-user-action-btn cancel" type="button" value="Cancel" @onclick="SwitchUserViewModel.OnCancel_Clicked" />
+        </div>
+    </div>
+}
+
+@code {
+    private bool IsVisible { get; set; }
+
+    protected override void OnInitialized()
+    {
+        SwitchUserViewModel.InitializeUserProfiles();
+
+        UserProfile? userProfile = SwitchUserViewModel.UserProfilesList.FirstOrDefault(ue => ue.Active);
+        if (userProfile != null)
+        {
+            SwitchUserViewModel.SelectedProfileUserEmail = userProfile.UserEmail;
+            SelectEmail(SwitchUserViewModel.SelectedProfileUserEmail, userProfile.SubsType);
+        }
+
+        SwitchUserViewModel.OnUpdateViewState += async () => await UpdateState();
+        SwitchUserViewModel.LogOnViewModel.SwitchUserDialog.OnDialogVisibilityChanged += async (isVisible) => await UpdateAdvancedOptionsState(isVisible);
+
+        base.OnInitialized();
+    }
+
+    private void SelectEmail(string userEmail, string subsType)
+    {
+        SwitchUserViewModel.SwitchUser(userEmail);
+    }
+
+    string ActiveEmailIcon(string subscription)
+    {
+        return "user-avatar";
+        // string imageClass = string.Empty;
+        // switch (subscription)
+        // {
+        //     case "Premium":
+        //         return imageClass = "premium-sw-icon";
+        //     case "Premium-email":
+        //         return imageClass = "premium-sw-icons";
+        //     case "Business":
+        //         return imageClass = "business-sw-icon";
+        //     case "PasswordManager":
+        //         return imageClass = "password-em-icon";
+
+        //     case "Free":
+        //         return imageClass = "free-em-icon";
+
+        //     default:
+        //         break;
+        // }
+
+        // return imageClass;
+    }
+
+    async Task UpdateAdvancedOptionsState(bool isVisible)
+    {
+        IsVisible = isVisible;
+        await UpdateState();
+    }
+
+    async Task UpdateState()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+}

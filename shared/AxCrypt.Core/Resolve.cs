@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt - Copyright 2025, AxCrypt AB, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -23,7 +23,6 @@
  * http://www.axcrypt.net for more information about the author.
 */
 
-using System.Collections.Generic;
 using System.Reflection;
 
 #endregion Coypright and License
@@ -35,17 +34,14 @@ using AxCrypt.Core.Portable;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
-using System;
-using System.Linq;
 using System.Diagnostics.CodeAnalysis;
 using AxCrypt.Abstractions;
 using AxCrypt.Abstractions.Rest;
-using AxCrypt.Api.Implementation;
 using AxCrypt.Core.IO;
 using static AxCrypt.Abstractions.TypeResolve;
-using System.IO;
 using AxCrypt.Core.UI.FileActivity;
 using AxCrypt.Core.UI.FindFilesActivity;
+using AxCrypt.Api.Implementation;
 
 namespace AxCrypt.Core
 {

@@ -15,7 +15,7 @@
 @inject LogOnViewModel LogOnViewModel
 @inject RegisterViewModel RegisterModel
 @inject ProfileViewModel profileViewModel
-
+@inject SwitchUserViewModel SwitchUserModel
 
 @inject NavigationManager navigationManager
 
@@ -33,23 +33,22 @@
                 <div style="display:flex;">
                     <div style="width:100%;">
                         <label>@Texts.EmailLabel</label>
-                        @if (!IsEmailReadOnly)
+                        @if (!LogOnViewModel.LogOnAccountModel.ReadOnlyUserEmail)
                         {
                             <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail"
-                                class="form-control email-img" placeholder=@Texts.TypeYourEmailPlaceHolderText tabindex="1" />
+                                   class="form-control email-img" placeholder=@Texts.TypeYourEmailPlaceHolderText tabindex="1" />
                         }
                         else
                         {
                             <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail"
-                                class="form-control email-img" tabindex="1" readonly="readonly" />
+                                   class="form-control email-img" tabindex="1" readonly="readonly" />
                         }
                     </div>
                 </div>
-                @if (!string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail))
+                @if (!string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) || SwitchUserModel.UserProfilesList.Any(up => up.UserEmail != ""))
                 {
                     <div style="width:100%;">
-                        <a href="" class="nav-link grn-clr" style="float:right;" tabindex="3"
-                            @onclick="async () => await LogOnViewModel.ClearAllSettingsAndRestartAsync()">@Texts.SwitchUserButtonText</a>
+                        <a href="" class="nav-link grn-clr" style="float:right;" tabindex="3" @onclick="LogOnViewModel.ShowSwitchUserDialog">@Texts.SwitchUserButtonText</a>
                     </div>
                 }
                 <div>
@@ -57,14 +56,16 @@
                     <div style="position:relative; display:inline-block; width:100%;">
                         <i class="@PasswordIconClass" @onclick="TogglePassword"></i>
                         <input type="@PasswordInputType" id="password-txtbox"
-                            @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img"
-                            placeholder=@Texts.TypeYourPasswordPlaceHolderText tabindex="2" />
+                               @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img"
+                               placeholder=@Texts.TypeYourPasswordPlaceHolderText tabindex="2" />
                     </div>
                 </div>
                 <br />
 
                 <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;"
-                    tabindex="3">@Texts.LogInText</button>
+                        tabindex="3">
+                    @Texts.LogInText
+                </button>
             </EditForm>
 
             <div style="display: flex;align-items: flex-start; width: 90%;">
@@ -76,17 +77,17 @@
                 <div class="dropdown" style="padding-bottom: 10px;">
                     <div class="action-buttons" style="display: inline-flex;">
                         <button @onclick="ToggleDropdown"
-                            style="width: 310px; color:  #48772c;font-weight: 600;text-align: center;">
+                                style="width: 310px; color:  #48772c;font-weight: 600;text-align: center;">
                             Other log in options
                             <img class="drp-dwn up" id="lang-action-btn-arw" src="" alt="dropdown-img"
-                                style="max-height: 15px;" />
+                                 style="max-height: 15px;" />
                         </button>
                     </div>
                     @if (showDropdown)
                     {
                         <div class="dropup-content hide-model-popup">
                             <a @onclick="async () => await InitiateImportAxCryptIdOnSignIn()"
-                                style="padding: 8px;">@Texts.ImportMyPrivateKeyToolStripMenuItemText</a>
+                               style="padding: 8px;">@Texts.ImportMyPrivateKeyToolStripMenuItemText</a>
                             <a @onclick="OpenCreateAxCryptIdOnSignIn" style="padding: 8px;">@Texts.TitleCreateAxCryptIdTitle</a>
                         </div>
                     }
@@ -107,7 +108,8 @@
 
             <div class="che-txt text-center" style="color:#494949; margin-top:20px;">
                 @Texts.AgreeOurText <NavLink class="grn-clr" @onclick="RedirectToPrivacyPolicy">
-                    @Texts.PrivacyPolicyLinkLabel</NavLink> @Texts.AndText
+                    @Texts.PrivacyPolicyLinkLabel
+                </NavLink> @Texts.AndText
                 <NavLink class="grn-clr" @onclick="RedirectToTermsOfUse">@Texts.TermsOfUseLinkLabel</NavLink>
             </div>
 
@@ -119,6 +121,8 @@
                 </div>
             </div>
         </article>
+
+        <AxCrypt.App.Shared.Desktop.Components.PopupDialog.SwitchUserPopup />
     </section>
 }
 @code {
@@ -146,7 +150,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        IsEmailReadOnly = !string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail);
+        LogOnViewModel.OnUpdateViewState += async () => await RefreshComponentAsync();
         await base.OnInitializedAsync();
     }
 
@@ -202,6 +206,7 @@
             return false;
         }
 
+        bool created = SwitchUserModel.AddNewUser(LogOnViewModel.LogOnAccountModel.UserEmail, LogOnViewModel.SubscriptionLevel.ToString());
         return true;
     }
 

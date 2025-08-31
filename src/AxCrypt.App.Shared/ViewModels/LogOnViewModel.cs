@@ -1,11 +1,11 @@
-﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
+﻿using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Services.UI;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.User;
 using AxCrypt.Core.UI.ViewModel;
 
 using static AxCrypt.Abstractions.TypeResolve;
@@ -32,6 +32,7 @@ public class LogOnViewModel : ViewModelBase
         FolderSettingsDialog = new CommonDialogService();
         UserPromptDialog = new CommonDialogService();
         FindFiles = new CommonDialogService();
+        SwitchUserDialog = new CommonDialogService();
     }
 
     public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
@@ -48,7 +49,7 @@ public class LogOnViewModel : ViewModelBase
         mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnSubscriptionChanged?.Invoke(); } });
 
         ProcessIndicator?.Dispose();
-        ShowGetStartedCarousel = AxCrypt.Core.Resolve.UserSettings.IsFirstSignIn;
+        ShowGetStartedCarousel = WorkUserProfile.IsFirstSignIn;
 
         LogOnAccountModel = logOnAccountModel;
         IsVisible = true;
@@ -116,7 +117,7 @@ public class LogOnViewModel : ViewModelBase
 
     public CommonDialogService FeedbackDialog
     { get { return GetProperty<CommonDialogService>(nameof(FeedbackDialog)); } set { SetProperty(nameof(FeedbackDialog), value); } }
-   
+
     public CommonDialogService FindFiles
     { get { return GetProperty<CommonDialogService>(nameof(FindFiles)); } set { SetProperty(nameof(FindFiles), value); } }
 
@@ -136,6 +137,9 @@ public class LogOnViewModel : ViewModelBase
     { get { return GetProperty<CommonDialogService>(nameof(UserPromptDialog)); } set { SetProperty(nameof(UserPromptDialog), value); } }
 
     public ProcessIndicator ProcessIndicator { get; set; } = new ProcessIndicator();
+
+    public CommonDialogService SwitchUserDialog
+    { get { return GetProperty<CommonDialogService>(nameof(SwitchUserDialog)); } set { SetProperty(nameof(SwitchUserDialog), value); } }
 
     public void InitiateProgressIndicator()
     {
@@ -271,18 +275,8 @@ public class LogOnViewModel : ViewModelBase
         New<InactivitySignOut>().RestartInactivityTimer();
     }
 
-    public async Task ClearAllSettingsAndRestartAsync()
+    public void ShowSwitchUserDialog()
     {
-        PopupButtons result = await New<IPopup>().ShowAsync(Core.UI.PopupButtons.OkCancel, Texts.WarningTitle, Texts.ResetAllSettingsWarningText);
-        if (result == Core.UI.PopupButtons.Cancel)
-        {
-            return;
-        }
-
-        new ApplicationManager().WaitForBackgroundToComplete();
-        await new ApplicationManager().ClearAllSettings();
-        await new ApplicationManager().ShutdownBackgroundSafe();
-
-        New<IUIThread>().RestartApplication();
+        SwitchUserDialog.Show();
     }
 }
