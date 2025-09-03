@@ -373,6 +373,12 @@ namespace AxCrypt.Core.UI
             set { Store(nameof(UserActivityMode), value); }
         }
 
+        public bool FindFileMode
+        {
+            get { return Load(nameof(FindFileMode), false); }
+            set { Store(nameof(FindFileMode), value); }
+        }
+
         public T? Load<T>(string key)
         {
             return Load(key, default(T));

@@ -629,7 +629,7 @@ namespace AxCrypt.Core.Extensions
             await encryptionParameters.AddAsync(await publicKeys.GetKnownPublicKeysAsync(logOnIdentity));
             await ChangeEncryptionAsync(files, encryptionParameters);
 
-            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
             {
                 Resolve.Log.LogInfo("Key shared files(s) {0}".InvariantFormat(string.Join(", ", files)), string.Join(", ", files), UI.FileActivity.UserActivityLog.ShareKey);
             }

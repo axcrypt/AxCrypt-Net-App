@@ -41,6 +41,14 @@ public class ProfileViewModel : ViewModelBase
         }
     }
 
+    public bool FindFileEnabled
+    {
+        get
+        {
+            return New<UserSettings>().FindFileMode;
+        }
+    }
+
     public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<LicensePolicy>().Expiration.ToString("dd MMMM yyyy", System.Globalization.CultureInfo.CurrentCulture);
     public ProfileViewModel()
     {

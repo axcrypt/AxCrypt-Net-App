@@ -214,7 +214,7 @@ namespace AxCrypt.Core.UI
                 }
             }
 
-            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
             {
                 Resolve.Log.LogInfo("Launched and opened '{0}'.".InvariantFormat(decryptedLock.DataStore.FullName), decryptedLock.DataStore.FullName, UserActivityLog.Open);
             }
@@ -331,7 +331,7 @@ namespace AxCrypt.Core.UI
                 }
             }
 
-            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
             {
                 Resolve.Log.LogInfo("Launched container for '{0}'.".InvariantFormat(fileFullName), fileFullName, UserActivityLog.Open);
             }

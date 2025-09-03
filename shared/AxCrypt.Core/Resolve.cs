@@ -45,6 +45,7 @@ using AxCrypt.Core.IO;
 using static AxCrypt.Abstractions.TypeResolve;
 using System.IO;
 using AxCrypt.Core.UI.FileActivity;
+using AxCrypt.Core.UI.FindFilesActivity;
 
 namespace AxCrypt.Core
 {
@@ -67,6 +68,8 @@ namespace AxCrypt.Core
 
             TypeMap.Register.New<string, UserActivityLogger>((user) => new UserActivityLogger(user));
             TypeMap.Register.Singleton<FileActivityStore>(() => new FileActivityStore());
+
+            TypeMap.Register.Singleton<FindFilesStore>(() => new FindFilesStore());
         }
 
         public static void RegisterTypeFactories(IEnumerable<Assembly> assemblies)

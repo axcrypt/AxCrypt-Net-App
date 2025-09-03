@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.Service.SecuredMessenger;
+using AxCrypt.Core.UI.FindFilesActivity;
 
 namespace AxCrypt.Core.Runtime
 {
@@ -41,6 +42,7 @@ namespace AxCrypt.Core.Runtime
             Resolve.WorkFolder.FileInfo.FileItemInfo(LocalSecuredMessengerService.InboxMessageFileName).Delete();
             Resolve.WorkFolder.FileInfo.FileItemInfo(LocalSecuredMessengerService.SentMessageFileName).Delete();
             Resolve.WorkFolder.FileInfo.FileItemInfo(UI.FileActivity.FileActivityStore.FileActivityLogFileName).Delete();
+            Resolve.WorkFolder.FileInfo.FileItemInfo(FindFilesStore.FINDFILESLOGFILENAME).Delete();
             New<KnownPublicKeys>().Delete();
             Resolve.UserSettings.SettingsVersion = New<UserSettingsVersion>().Current;
         }

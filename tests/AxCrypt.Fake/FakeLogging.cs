@@ -76,7 +76,7 @@ namespace AxCrypt.Fake
             get { return true; }
         }
 
-        public bool IsUserActivityEnabled
+        public bool IsCustomLogEnabled
         {
             get { return true; }
         }

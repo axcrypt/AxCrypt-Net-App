@@ -1,0 +1,261 @@
+﻿@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+@using AxCrypt.Core.UI.FindFilesActivity
+
+@inject IJSRuntime JSRuntime
+@inject FindFilesViewModel ViewModel
+@inject NavigationManager Navigation
+
+@if (ViewModel.HasFindFilesCapability)
+{
+    <div class="findfiles-modalDialog">
+        <div>
+            <div class="findfiles-modal-body" @onclick="async () => await HideContextMenu()">
+                <div class="close-img" style="margin-top:15px;margin-right:20px;" @onclick="CloseWindow"></div>
+
+                <div>
+                    <img class="Imgfindfiles" alt="find_files_img" />
+                </div>
+
+                <div style="margin-bottom:5px;">
+                    <label for="title" title="@Texts.FindFilesFeatureTooltip" style="font-size:20px;">@Texts.FindFileFeatureTitle</label>
+                    <p>@Texts.FindFilesFeatureDescription</p>
+                </div>
+
+                <div class="search-box">
+                    <input id="searchKeyword"
+                           name="searchKeyword"
+                           type="text"
+                           @bind="SearchText"
+                           placeholder="@Texts.FindFilesSearchPlaceholder"
+                           @oninput="async (eargs) => await OnSearchChanged(eargs)" />
+
+                    <div class="search-btn"
+                         alt="search"
+                         @onclick="() => ViewModel.FilterSecuredFiles(SearchText)">
+                        <img src="/images/default/IcoSearchWht.svg" alt="search-icon" style="padding: 12px;" />
+                    </div>
+                </div>
+
+                @if (ViewModel.FindFilesCount > 0)
+                {
+                    <div class="content-area">
+                        <div class="findfiles-dir-content" @onclick:stopPropagation id="user_files_section" @onclick="async () => await HideContextMenu()">
+                            <div class="header-bar">
+                                @if (isListView)
+                                {
+                                    <div class="div-file-header">
+                                        <span>@Texts.NameLabel</span>
+                                        <span>@Texts.FindPathTitle</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="div-file-header">
+                                        <span>@Texts.NameLabel</span>
+                                    </div>
+                                }
+
+                                <div class="display-type">
+                                    <img src="/images/default/IcoList.svg"
+                                         class="@((isListView ? "selected" : ""))"
+                                         @onclick="() => SetView(true)"
+                                         alt="List View" />
+
+                                    <img src="/images/default/IcoGrid.svg"
+                                         class="@((!isListView ? "selected" : ""))"
+                                         @onclick="() => SetView(false)"
+                                         alt="Grid View" />
+                                </div>
+                            </div>
+
+                            <div class="files-section @(isListView ? "list-view" : "grid-view")">
+                                @if (isListView)
+                                {
+                                    <ul class="file-list">
+                                        @foreach (FindFilesLog file in ViewModel.FindFilesList)
+                                        {
+                                            string fileName = System.IO.Path.GetFileName(file.FilePath);
+                                            <li class="file-list-item @(ViewModel.SelectedFile == fileName ? "selected-list" : "")" @onclick="async () => await SelectFile(fileName, file.FilePath)"
+                                                @oncontextmenu="(e) => ShowContextMenu(e, fileName, file.FilePath)">
+                                                <div class="file-details">
+                                                    <img src="/images/default/AxCrypt_Icon.svg" alt="File Icon" class="list-file-icon" />
+                                                    <span class="file-name @(ViewModel.SelectedFile == fileName ? "selected-text" : "")">
+                                                        @((MarkupString)HighlightMatch(fileName))
+                                                    </span>
+                                                    <span class="file-path @(ViewModel.SelectedFile == fileName ? "selected-path" : "")">
+                                                        @((MarkupString)HighlightMatch(file.FilePath))
+                                                    </span>
+                                                </div>
+                                                <span class="file-action" @onclick="(e) => ShowContextMenu(e, fileName, file.FilePath)" @onclick:stopPropagation>⋮</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <div class="file-grid">
+                                        @foreach (FindFilesLog file in ViewModel.FindFilesList)
+                                        {
+                                            string fileName = System.IO.Path.GetFileName(file.FilePath);
+                                            <div class="file-grid-item @(ViewModel.SelectedFile == fileName ? "selected-grid" : "")"
+                                                 @onclick="async () => await SelectFile(fileName, file.FilePath)"
+                                                 @oncontextmenu="(e) => ShowContextMenu(e, fileName, file.FilePath)">
+                                                <img src="/images/default/AxCrypt_Icon.svg" alt="File Icon" class="grid-file-icon" />
+                                                <span class="file-name-grid  @(ViewModel.SelectedFile == fileName ? "selected-text" : "")">@((MarkupString)HighlightMatch(fileName))</span>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+
+                                @if (IsContextMenuVisible)
+                                {
+                                    <div class="context-menu-action" style="position: fixed; top: @(ContextMenuY)px;left: @(ContextMenuX)px;">
+                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Open", ViewModel.SelectedFilePath)'>@Texts.RecentFilesOpenToolStripMenuItemText</span>
+                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Decrypt", ViewModel.SelectedFilePath)'>@Texts.DecryptToolStripMenuItemText</span>
+                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Reveal", ViewModel.SelectedFilePath)'>@Texts.ShowInFolderText</span>
+                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("RenameAnonymously", ViewModel.SelectedFilePath)'>@Texts.AnonymousRenameMenuText</span>
+                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("RenameOriginal", ViewModel.SelectedFilePath)'>@Texts.RestoreAnonymousNamesMenuText</span>
+                                    </div>
+                                }
+
+                                @if (!isListView && ViewModel.SelectedFile != null)
+                                {
+                                    <div class="detail-section">
+                                        <img src="/images/default/AxCrypt_Icon.svg" alt="Preview" class="detail-image" />
+                                        <span class="detail-label">@Texts.FilePropertiesFileNameToolStripMenuItem</span>
+                                        <span class="detail-filename">@ViewModel.SelectedFile</span>
+                                        <span class="detail-label">@Texts.FindPathTitle</span>
+                                        <span class="detail-filename">@ViewModel.SelectedFilePath</span>
+                                    </div>
+                                }
+                                else if (!isListView)
+                                {
+                                    <div class="select-file">
+                                        <span>@Texts.SelectFileToViewFileInfoText </span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="file-notfound">
+                        <span>@Texts.NoFilesFoundText </span>
+                        <img src="/images/default/filenotfound.svg" />
+                    </div>
+                }
+
+                <div class="modal-footer">
+                    <button class="Close-btn" @onclick="CloseWindow">
+                        @Texts.WixFailureCloseButton
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.scrollToFirstMatch = function () {
+            const el = document.getElementById("firstMatch");
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        };
+    </script>
+}
+
+@code {
+
+    private bool isListView { get; set; } = true;
+    public bool IsContextMenuVisible { get; set; } = false;
+    public double ContextMenuX { get; set; }
+    public double ContextMenuY { get; set; }
+
+    private string SearchText = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        ViewModel.OnUpdateViewState += async () => await UpdateUIState();
+        base.OnInitialized();
+    }
+
+    private void CloseWindow()
+    {
+        Navigation.NavigateTo("/");
+    }
+
+    private string HighlightMatch(string input)
+    {
+        if (string.IsNullOrWhiteSpace(SearchText))
+            return System.Net.WebUtility.HtmlEncode(input);
+
+        string pattern = System.Text.RegularExpressions.Regex.Escape(SearchText);
+        System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        int matchCount = 0;
+        string highlighted = regex.Replace(System.Net.WebUtility.HtmlEncode(input), match =>
+        {
+            matchCount++;
+            string spanId = matchCount == 1 ? "id='firstMatch'" : "";
+            return $"<span class=\"highlight\" {spanId}>{match.Value}</span>";
+        });
+
+        return highlighted;
+    }
+
+    private async Task OnSearchChanged(ChangeEventArgs e)
+    {
+        SearchText = e.Value?.ToString() ?? "";
+        await Task.Yield();
+        await JSRuntime.InvokeVoidAsync("scrollToFirstMatch");
+    }
+
+    private void SetView(bool listView)
+    {
+        isListView = listView;
+        ViewModel.SelectedFile = null;
+        IsContextMenuVisible = false;
+    }
+
+    private async Task SelectFile(string fileName, string filePath)
+    {
+        ViewModel.SelectedFile = fileName;
+        ViewModel.SelectedFilePath = filePath;
+        await HideContextMenu();
+    }
+
+    private async Task ShowContextMenu(MouseEventArgs e, string fileName, string filePath)
+    {
+        ViewModel.SelectedFile = fileName;
+        ViewModel.SelectedFilePath = filePath;
+        ContextMenuX = e.PageX;
+        ContextMenuY = e.PageY;
+
+        IsContextMenuVisible = true;
+        await UpdateUIState();
+    }
+
+    private async Task HideContextMenu()
+    {
+        IsContextMenuVisible = false;
+        await UpdateUIState();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            JSRuntime.InvokeVoidAsync("document.addEventListener", "click", EventCallback.Factory.Create<MouseEventArgs>(this, HideContextMenu));
+        }
+    }
+
+    async Task UpdateUIState()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+}

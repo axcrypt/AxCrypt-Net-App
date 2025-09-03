@@ -60655,16 +60655,17 @@ namespace AxCrypt.Content {
                 return ResourceManager.GetString("PromptNewPasswordText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Notifications.
         /// </summary>
-        public static string PromptNotificationsText {
+        public static string PromptNotificationsText
+        {
             get {
                 return ResourceManager.GetString("PromptNotificationsText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Password Manager.
         /// </summary>

@@ -32,5 +32,7 @@
 
         GroupSharing,
         SendUnlimitedMessages,
+
+        FindFiles,
     }
 }

@@ -31,6 +31,7 @@ public class LogOnViewModel : ViewModelBase
         UpgradeVersionDialog = new CommonDialogService();
         FolderSettingsDialog = new CommonDialogService();
         UserPromptDialog = new CommonDialogService();
+        FindFiles = new CommonDialogService();
     }
 
     public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
@@ -111,6 +112,9 @@ public class LogOnViewModel : ViewModelBase
 
     public CommonDialogService FeedbackDialog
     { get { return GetProperty<CommonDialogService>(nameof(FeedbackDialog)); } set { SetProperty(nameof(FeedbackDialog), value); } }
+   
+    public CommonDialogService FindFiles
+    { get { return GetProperty<CommonDialogService>(nameof(FindFiles)); } set { SetProperty(nameof(FindFiles), value); } }
 
     public CommonDialogService GlobalPopupDialog
     { get { return GetProperty<CommonDialogService>(nameof(GlobalPopupDialog)); } set { SetProperty(nameof(GlobalPopupDialog), value); } }

@@ -18,5 +18,10 @@ public enum UserActivityLog
 
     SecureDelete,
 
-    DecryptBrokenFile
+    DecryptBrokenFile,
+
+    AnonymousRename,
+
+    RestoreRenameToOriginal,
+
 }

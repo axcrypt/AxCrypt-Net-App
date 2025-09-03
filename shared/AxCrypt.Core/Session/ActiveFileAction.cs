@@ -468,7 +468,7 @@ namespace AxCrypt.Core.Session
             }
             New<AxCryptFile>().Wipe(fileLock, progress);
 
-            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
             {
                 Resolve.Log.LogInfo("Wiped '{0}'.".InvariantFormat(fileLock.DataStore.FullName, fileLock.DataStore.FullName, UserActivityLog.SecureDelete));
             }

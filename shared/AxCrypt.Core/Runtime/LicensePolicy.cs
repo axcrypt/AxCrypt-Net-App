@@ -80,6 +80,7 @@ namespace AxCrypt.Core.Runtime
             LicenseCapability.InactivitySignOut,
             LicenseCapability.ShareSecretPremium,
             LicenseCapability.SendUnlimitedMessages,
+            LicenseCapability.FindFiles,
         }));
 
         protected static readonly HashSet<LicenseCapability> BusinessCapabilitySet = new HashSet<LicenseCapability>(PremiumCapabilitySet.Concat(new LicenseCapability[]

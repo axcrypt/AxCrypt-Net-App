@@ -187,7 +187,7 @@ namespace AxCrypt.Core.UI
                 _defaultEncryptionIdentity = LogOnIdentity.Empty;
                 await _notificationMonitor.NotifyAsync(new SessionNotification(SessionNotificationType.SignOut, oldIdentity, oldCapabilities)).Free();
                 await _notificationMonitor.SynchronizeAsync().Free();
-                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
                 {
                     Resolve.Log.LogInfo("'{0}' Signed out.".InvariantFormat(oldIdentity.UserEmail), oldIdentity.UserEmail.Address, FileActivity.UserActivityLog.SignOut);
                 }
@@ -206,7 +206,7 @@ namespace AxCrypt.Core.UI
             {
                 await _notificationMonitor.NotifyAsync(new SessionNotification(SessionNotificationType.KnownKeyChange, _defaultEncryptionIdentity)).Free();
             }
-            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
             {
                 Resolve.Log.LogInfo("'{0}' Signed in.".InvariantFormat(value.UserEmail), value.UserEmail.Address, FileActivity.UserActivityLog.SignIn);
             }

@@ -1,14 +1,11 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Desktop.ViewModels.Main
 @using AxCrypt.App.Shared.Models
-@using AxCrypt.Common
 @using AxCrypt.Content
-@using AxCrypt.Core
-@using AxCrypt.Core.UI
-
-@using static AxCrypt.Abstractions.TypeResolve
 
 @inject ProfileViewModel? ProfileViewModel
+@inject AppSettingsViewModel AppSettingsViewModel
 
 <div class="desk-acnt-popup model-popup" style="display:none;" id="accounts-dropdown-popup">
     <span class="font-bold">@Texts.AccountLabel</span>
@@ -62,6 +59,40 @@
                 </NavLink>
             </div>
         }
+
+        @if (ProfileViewModel!.FindFileEnabled)
+        {
+            if (AppSettingsViewModel.EnableFindFilesMenuOption)
+            {
+                <div class="profile-option-container">
+                    <NavLink class="nav-link" href="findfiles">
+                        <img class="" src="images/default/IcoFileLgng.svg" alt="IcoFileLgng" />
+                        <span>@Texts.FindFileFeatureTitle</span>
+                    </NavLink>
+                </div>
+            }
+            else
+            {
+                <div class="profile-option-container"
+                     @onmouseover='@(() => ShowPopup("findfiles"))'
+                     @onmouseout='@(() => HidePopup())'>
+
+                    <NavLink class="nav-link"
+                             @onclick="() => AppSettingsViewModel.ShowUpgradePopup()">
+                        <img class="" src="images/default/IcoFileLgng.svg" alt="IcoFileLgng" />
+                        <span>@Texts.FindFileFeatureTitle</span>
+                    </NavLink>
+
+                    @if (isHovered && hoveredElement == "findfiles")
+                    {
+                        <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
+                            <span class="txt-clr font-medium">Find files required paid plan</span>
+                        </div>
+                    }
+                </div>
+            }
+        }
+
         <div class="profile-option-container">
             <NavLink class="nav-link" @onclick="async () => await ProfileViewModel!.ClearAllSettingsAndRestartAsync()">
                 <img class="" src="images/default/IcoClrSttngs.svg" alt="go-back-img" />
@@ -111,7 +142,7 @@
         <div>
             <span class="txt-clr">@Texts.PromptSubscription:</span>
             <span class="font-bold sub-head-clr">@ProfileViewModel.Account.SubscriptionLevel.ToString()</span><br />
-            @*             @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
+            @*  @if (ProfileViewModel.Account.SubscriptionLevel == SubscriptionLevel.Business)
                 {
                 <span class="txt-clr">Company:</span>
                 <span class="font-bold">AxCrypt</span> <br />
@@ -178,5 +209,20 @@
         {
             StateHasChanged();
         });
+    }
+
+    public string hoveredElement { get; set; } = string.Empty;
+    public bool isHovered { get; set; }
+
+    public void ShowPopup(string element)
+    {
+        isHovered = true;
+        hoveredElement = element;
+    }
+
+    private void HidePopup()
+    {
+        isHovered = false;
+        hoveredElement = string.Empty;
     }
 }

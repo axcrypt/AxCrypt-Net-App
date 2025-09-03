@@ -39,6 +39,5 @@ namespace AxCrypt.Core.Runtime
         Warning,
         Info,
         Debug,
-        FileActivity
     }
 }

@@ -50,6 +50,7 @@ public class AppSettingsViewModel : ViewModelBase
         AdvancedOptionsViewModel = new AdvancedOptionsViewModel();
         _logViewModel = AxCServiceProviderExtension.LogViewModel;
         EnableUserActivity = New<UserSettings>().UserActivityMode;
+        EnableFindFiles = New<UserSettings>().FindFileMode;
     }
 
     public void Initialized()
@@ -95,7 +96,10 @@ public class AppSettingsViewModel : ViewModelBase
     public bool EnableAutoUpgrade { get; set; }
 
     public bool EnableEncryptionFileProperties { get; set; }
+
     public bool EnableInviteFriend { get; set; }
+
+    public bool EnableFindFilesMenuOption { get; set; }
 
     private static bool _hideRecentFiles;
 
@@ -252,6 +256,10 @@ public class AppSettingsViewModel : ViewModelBase
 
     public void ToggleUserActivity() => UpdateUserActivityMode(!New<UserSettings>().UserActivityMode);
 
+    public bool EnableFindFiles { get; set; }
+
+    public void ToggleFindFiles() => UpdateFindFileMode(!New<UserSettings>().FindFileMode);
+
     public void FilePropertiesDateModified(EventArgs e)
     {
         New<UserSettings>().EncryptFilePropertiesDateModified = !IsDateModifiedOn;
@@ -287,8 +295,13 @@ public class AppSettingsViewModel : ViewModelBase
 
     private void UpdateUserActivityMode(bool enabled)
     {
-        Resolve.Log.SetLevel(enabled ? LogLevel.FileActivity : LogLevel.Error);
         New<UserSettings>().UserActivityMode = enabled;
+        AxCServiceProvider.GetService<ProfileViewModel>().UpdateViewState();
+    }
+
+    private void UpdateFindFileMode(bool enabled)
+    {
+        New<UserSettings>().FindFileMode = enabled;
         AxCServiceProvider.GetService<ProfileViewModel>().UpdateViewState();
     }
 
@@ -438,6 +451,7 @@ public class AppSettingsViewModel : ViewModelBase
         ConfigureRestoreRenameMenu(license);
         ConfigureEncryptionFilePropertiesMenu(license);
         ConfigureInviteFrientMenu(license);
+        ConfigureFindFilesMenu(license);
         UpdateViewState();
     }
 
@@ -510,6 +524,18 @@ public class AppSettingsViewModel : ViewModelBase
         else
         {
             EnableInviteFriend = false;
+        }
+    }
+
+    private void ConfigureFindFilesMenu(LicenseCapabilities license)
+    {
+        if (license.Has(LicenseCapability.FindFiles))
+        {
+            EnableFindFilesMenuOption = true;
+        }
+        else
+        {
+            EnableFindFilesMenuOption = false;
         }
     }
 

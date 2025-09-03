@@ -47,7 +47,7 @@ namespace AxCrypt.Core.Runtime
 
         bool IsDebugEnabled { get; }
 
-        bool IsUserActivityEnabled { get; }
+        bool IsCustomLogEnabled { get; }
 
         void LogFatal(string fatalLog);
 

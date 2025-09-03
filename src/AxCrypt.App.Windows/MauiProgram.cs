@@ -1,7 +1,7 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Shared;
 using AxCrypt.App.Shared.Desktop;
 using AxCrypt.App.Shared.Desktop.Services.Interface;
-using AxCrypt.App.Shared;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Components.Pages;
 using AxCrypt.App.Windows.Infrastructure;
@@ -67,6 +67,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SecuredFolders>();
             services.AddSingleton<PasswordManagerComponent>();
             services.AddSingleton<Notification>();
+            services.AddSingleton<FindFiles>();
             services.AddSingleton<Support>();
             services.AddSingleton<SecuredMessengerComponent>();
 

@@ -1,12 +1,9 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
-using AxCrypt.Core.Runtime;
-using AxCrypt.Core.UI;
 using AxCrypt.Desktop;
 using System.Text.RegularExpressions;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -43,6 +40,7 @@ public class PlatformInitializer
 
         AddEnvironmentVariableBasedFilePathFilter(@"^{0}(?!Temp$)", "SystemRoot");
         AddEnvironmentVariableBasedFilePathFilter(@"^{0}(?!Temp$)", "windir");
+        AddEnvironmentVariableBasedFilePathFilter(@"^{0}", "ProgramData");
         AddEnvironmentVariableBasedFilePathFilter(@"^{0}", "ProgramFiles");
         AddEnvironmentVariableBasedFilePathFilter(@"^{0}", "ProgramFiles(x86)");
         AddEnvironmentVariableBasedFilePathFilter(@"^{0}$", "SystemDrive");

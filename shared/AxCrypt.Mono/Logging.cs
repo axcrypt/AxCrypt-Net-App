@@ -26,11 +26,11 @@
 #endregion Coypright and License
 
 using AxCrypt.Core;
-using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.FileActivity;
+using AxCrypt.Core.UI.FindFilesActivity;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -87,7 +87,6 @@ namespace AxCrypt.Mono
                     break;
 
                 case LogLevel.Debug:
-                case LogLevel.FileActivity:
                     _switch.Level = TraceLevel.Verbose;
                     break;
 
@@ -121,9 +120,19 @@ namespace AxCrypt.Mono
             get { return _switch != null && _switch.Level >= TraceLevel.Verbose; }
         }
 
-        public bool IsUserActivityEnabled
+        public bool IsCustomLogEnabled
         {
-            get { return _switch != null && _switch.Level >= TraceLevel.Verbose; }
+            get { return _userSettings != null && (_userSettings.FindFileMode || _userSettings.UserActivityMode); }
+        }
+
+        private bool IsUserActivityEnabled
+        {
+            get { return _userSettings != null && _userSettings.UserActivityMode; }
+        }
+
+        private bool IsFindFileEnabled
+        {
+            get { return _userSettings != null && _userSettings.FindFileMode; }
         }
 
         public virtual void LogFatal(string fatalLog)
@@ -162,11 +171,25 @@ namespace AxCrypt.Mono
         {
             LogInfo(infoLog);
 
+            LogUserActivityInfo(source, fileActivityLogItem);
+
+            LogFindFilesInfo(source, fileActivityLogItem);
+        }
+
+        private void LogUserActivityInfo(string source, UserActivityLog fileActivityLogItem)
+        {
             if (IsUserActivityEnabled)
             {
                 string userEmail = string.IsNullOrEmpty(Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address) ? source : Resolve.KnownIdentities.DefaultEncryptionIdentity.UserEmail.Address;
-
                 New<UserActivityLogger>(userEmail).AppendActivity(source, fileActivityLogItem);
+            }
+        }
+
+        private void LogFindFilesInfo(string source, UserActivityLog fileActivityLogItem)
+        {
+            if (IsFindFileEnabled)
+            {
+                FindFilesLogger.Log(source, fileActivityLogItem);
             }
         }
 
@@ -178,11 +201,13 @@ namespace AxCrypt.Mono
             }
         }
 
-
         #endregion ILogging Members
+
+        private static UserSettings? _userSettings { get; set; }
 
         private static TraceSwitch InitializeTraceSwitch()
         {
+            _userSettings = Resolve.UserSettings;
             TraceSwitch traceSwitch = new TraceSwitch("axCryptSwitch", "Logging levels for AxCrypt");
             traceSwitch.Level = TraceLevel.Error;
             return traceSwitch;

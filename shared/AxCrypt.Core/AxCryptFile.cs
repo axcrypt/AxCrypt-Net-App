@@ -143,10 +143,6 @@ namespace AxCrypt.Core
 
                     document.EncryptTo(sourceStream, destinationStream, options);
                 }
-                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
-                {
-                    Resolve.Log.LogInfo("Encrypted File '{0}'.".InvariantFormat(sourceFile.FullName), sourceFile.FullName, UserActivityLog.Encrypt);
-                }
             }
         }
 
@@ -674,7 +670,7 @@ namespace AxCrypt.Core
                     document.DecryptTo(destinationStream);
                 }
 
-                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
                 {
                     Resolve.Log.LogInfo("Decrypted File to '{0}'.".InvariantFormat(destinationStore.Name), destinationStore.FullName, UserActivityLog.Decrypt);
                 }
@@ -896,7 +892,7 @@ namespace AxCrypt.Core
                     document.DecryptTo(destinationStream);
                 }
 
-                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
                 {
                     Resolve.Log.LogInfo("Decrypted File to '{0}'.".InvariantFormat(decryptedFileInfo.Name), decryptedFileInfo.FullName, UserActivityLog.DecryptBrokenFile);
                 }
@@ -1044,6 +1040,11 @@ namespace AxCrypt.Core
                     using (Stream temporaryStream = lockedTemporary.DataStore.OpenWrite())
                     {
                         await encryptFileStreamTo(temporaryStream);
+                    }
+
+                    if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
+                    {
+                        Resolve.Log.LogInfo("Encrypted File '{0}'.".InvariantFormat(destinationFileLock.DataStore.FullName), destinationFileLock.DataStore.FullName, UserActivityLog.Encrypt);
                     }
                 }
                 catch (Exception ex)

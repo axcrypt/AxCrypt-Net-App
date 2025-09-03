@@ -339,7 +339,7 @@ namespace AxCrypt.Core.UI.ViewModel
                 }
                 if (e.Status.ErrorStatus == ErrorStatus.Success)
                 {
-                    if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsUserActivityEnabled)
+                    if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
                     {
                         Resolve.Log.LogInfo("Securely Deleted File {0}".InvariantFormat(file.FullName), file.FullName, UserActivityLog.SecureDelete);
                     }
@@ -378,6 +378,10 @@ namespace AxCrypt.Core.UI.ViewModel
         {
             file.RandomRename();
 
+            if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
+            {
+                Resolve.Log.LogInfo("Rename the file to '{0}'.".InvariantFormat(file.FullName), file.FullName, UserActivityLog.AnonymousRename);
+            }
             return Task.FromResult(new FileOperationContext(file.FullName, ErrorStatus.Success));
         }
 
@@ -393,9 +397,16 @@ namespace AxCrypt.Core.UI.ViewModel
 
             operationsController.Completed += (object sender, FileOperationEventArgs e) =>
             {
-                if (e.Status.ErrorStatus == ErrorStatus.Success)
+                if (e.Status.ErrorStatus != ErrorStatus.Success)
                 {
-                    file.RestoreRandomRename(e.LogOnIdentity);
+                    return;
+                }
+
+                file.RestoreRandomRename(e.LogOnIdentity);
+
+                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
+                {
+                    Resolve.Log.LogInfo("Restore filename to original '{0}'.".InvariantFormat(file.FullName), file.FullName, UserActivityLog.RestoreRenameToOriginal);
                 }
             };
 
