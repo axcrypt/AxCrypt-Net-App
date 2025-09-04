@@ -9,7 +9,7 @@ namespace AxCrypt.Api.Model
         {
         }
 
-        public GooglePurchaseInfo(string productId, string paidBy, string paidFor, string transactionId, string currencyPaid, decimal amountPaid, string paymentStatus, string startTimeUtc, string expiryTimeUtc, string purchaseToken)
+        public GooglePurchaseInfo(string productId, string paidBy, string paidFor, string transactionId, string currencyPaid, decimal amountPaid, GooglePaymentState paymentStatus, string startTimeUtc, string expiryTimeUtc, string purchaseToken)
         {
             ProductId = productId;
             PaidBy = paidBy;
@@ -48,7 +48,7 @@ namespace AxCrypt.Api.Model
         public string ExpirationTimeUtc { get; set; }
 
         [JsonProperty("paymentStatus")]
-        public string PaymentStatus { get; set; }
+        public GooglePaymentState PaymentStatus { get; set; }
 
         [JsonProperty("itemName")]
         public string ItemName { get; set; }
@@ -70,5 +70,13 @@ namespace AxCrypt.Api.Model
 
         [JsonProperty("purchaseToken")]
         public string PurchaseToken { get; set; }
+    }
+
+    public enum GooglePaymentState
+    {
+        SUBSCRIPTION_STATE_PENDING,
+        SUBSCRIPTION_STATE_IN_GRACE_PERIOD,
+        SUBSCRIPTION_STATE_ON_HOLD,
+        SUBSCRIPTION_STATE_ACTIVE,
     }
 }
