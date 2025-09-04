@@ -23,52 +23,52 @@ namespace AxCrypt.Api.Model
             PurchaseToken = purchaseToken;
         }
 
-        [JsonProperty("product_id")]
+        [JsonProperty("productId")]
         public string ProductId { get; set; }
 
-        [JsonProperty("paid_by")]
+        [JsonProperty("paidBy")]
         public string PaidBy { get; set; }
 
-        [JsonProperty("paid_for")]
+        [JsonProperty("paidFor")]
         public string PaidFor { get; set; }
 
-        [JsonProperty("txn_id")]
+        [JsonProperty("transactionId")]
         public string TransactionId { get; set; }
 
-        [JsonProperty("currency_paid")]
+        [JsonProperty("currencyPaid")]
         public string CurrencyPaid { get; set; }
 
-        [JsonProperty("amount_paid")]
+        [JsonProperty("amountPaid")]
         public decimal AmountPaid { get; set; }
 
-        [JsonProperty("starttimeutc")]
+        [JsonProperty("starttimeUtc")]
         public string StartTimeUtc { get; set; }
 
-        [JsonProperty("expirationtimeutc")]
+        [JsonProperty("expirationtimeUtc")]
         public string ExpirationTimeUtc { get; set; }
 
-        [JsonProperty("payment_status")]
+        [JsonProperty("paymentStatus")]
         public string PaymentStatus { get; set; }
 
-        [JsonProperty("item_name")]
+        [JsonProperty("itemName")]
         public string ItemName { get; set; }
 
-        [JsonProperty("country_code")]
+        [JsonProperty("countryCode")]
         public string CountryCode { get; set; }
 
-        [JsonProperty("amount_fee")]
+        [JsonProperty("amountFee")]
         public decimal AmountFee { get; set; }
 
-        [JsonProperty("amount_vat")]
+        [JsonProperty("amountVat")]
         public decimal AmountVat { get; set; }
 
-        [JsonProperty("discount_code")]
+        [JsonProperty("discountCode")]
         public string AppliedDiscountCode { get; set; } = string.Empty;
 
-        [JsonProperty("istrialperiod")]
+        [JsonProperty("istrialPeriod")]
         public bool IsTrialPeriod { get; set; }
 
-        [JsonProperty("purchasetoken")]
+        [JsonProperty("purchaseToken")]
         public string PurchaseToken { get; set; }
     }
 }
