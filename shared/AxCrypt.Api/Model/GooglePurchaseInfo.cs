@@ -9,7 +9,7 @@ namespace AxCrypt.Api.Model
         {
         }
 
-        public GooglePurchaseInfo(string productId, string paidBy, string paidFor, string transactionId, string currencyPaid, decimal amountPaid, GooglePaymentState paymentStatus, string startTimeUtc, string expiryTimeUtc, string purchaseToken)
+        public GooglePurchaseInfo(string productId, string paidBy, string paidFor, string transactionId, string currencyPaid, decimal amountPaid, GooglePaymentState paymentStatus, string startTimeUtc, string expiryTimeUtc, string purchaseToken, string countryCode)
         {
             ProductId = productId;
             PaidBy = paidBy;
@@ -21,6 +21,7 @@ namespace AxCrypt.Api.Model
             StartTimeUtc = startTimeUtc;
             ExpirationTimeUtc = expiryTimeUtc;
             PurchaseToken = purchaseToken;
+            CountryCode = countryCode;
         }
 
         [JsonProperty("productId")]
