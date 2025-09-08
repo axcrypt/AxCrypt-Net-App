@@ -49,7 +49,6 @@ public class WindowsTrayIcon
         if (obj == MouseEvent.IconLeftMouseUp)
         {
             OnMenuItemClicked?.Invoke(ContextMenuItem.Advanced);
-            DisposeTrayIcon();
         }
         else if (obj == MouseEvent.IconRightMouseUp)
         {
@@ -95,7 +94,6 @@ public class WindowsTrayIcon
         lock (lockObject)
         {
             // make sure we didn't schedule a creation
-
             if (!IsTaskbarIconCreated)
             {
                 return;
@@ -107,6 +105,23 @@ public class WindowsTrayIcon
         }
     }
 
+    public void EnsureVisible()
+    {
+        if (!IsTaskbarIconCreated || !_isTrayIconRegistered)
+        {
+            ShowTrayIcon();
+        }
+    }
+
+    public void ShowTrayIcon()
+    {
+        CreateTaskbarIcon();
+    }
+
+    public void HideTrayIcon()
+    {
+        RemoveTaskbarIcon();
+    }
 
     private void SetVersion()
     {
@@ -186,11 +201,9 @@ public class WindowsTrayIcon
         {
             case 1:
                 OnMenuItemClicked?.Invoke(ContextMenuItem.Advanced);
-                DisposeTrayIcon();
                 break;
             case 2 when isLoggedOn:
                 OnMenuItemClicked?.Invoke(ContextMenuItem.SignOut);
-                DisposeTrayIcon();
                 break;
             case 2 when !isLoggedOn:
             case 3:

@@ -104,36 +104,39 @@ namespace AxCrypt.App.Windows.Infrastructure
         private static void SetupTrayIcon()
         {
             ITrayService trayService = AxCServiceProviderExtension.GetService<ITrayService>();
-            if (trayService != null)
+            if (trayService == null)
+                return;
+
+            if (trayService.Created)
+                return;
+
+            trayService.Initialize();
+
+            Task.Run(() =>
             {
-                trayService.Initialize();
+                New<INotificationService>()?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
+            });
 
-                Task.Run(() =>
+            trayService.ClickHandler = (action) =>
+            {
+                switch (action)
                 {
-                    New<INotificationService>()?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
-                });
+                    case ContextMenuItem.Advanced:
+                        RestoreWindowWithFocus();
+                        break;
 
-                trayService.ClickHandler = (action) =>
-                {
-                    switch (action)
-                    {
-                        case ContextMenuItem.Advanced:
-                            RestoreWindowWithFocus();
-                            break;
+                    case ContextMenuItem.SignOut:
+                        Task.Run(async () => await AppLifecycleHandler.SignOutSignIn());
+                        RestoreWindowWithFocus();
+                        break;
+                    case ContextMenuItem.Exit:
+                        Task.Run(async () => await AppLifecycleHandler.ExitApplication());
+                        break;
 
-                        case ContextMenuItem.SignOut:
-                            Task.Run(async () => await AppLifecycleHandler.SignOutSignIn());
-                            RestoreWindowWithFocus();
-                            break;
-                        case ContextMenuItem.Exit:
-                            Task.Run(async () => await AppLifecycleHandler.ExitApplication());
-                            break;
-
-                        default:
-                            break;
-                    }
-                };
-            }
+                    default:
+                        break;
+                }
+            };
         }
 
         private static void RestoreWindowWithFocus()

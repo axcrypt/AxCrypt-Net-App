@@ -8,6 +8,7 @@ using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Platforms.Windows.Implementation;
+using AxCrypt.App.Windows.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -341,6 +342,7 @@ public partial class App : Application
         {
             case CommandVerb.About:
                 _logOnViewModel.AboutDialog.Show();
+                AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus(); 
                 return;
 
             case CommandVerb.Exit:
@@ -355,11 +357,12 @@ public partial class App : Application
             {
                 case CommandVerb.Show:
                     New<UserSettings>().RestoreFullWindow = true;
-                    //RestoreWindowWithFocus(this);
+                    AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
                     break;
 
                 case CommandVerb.ShowLogOn:
                     AppFactory.RestoreFormConditionally();
+                    AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
                     break;
             }
 
@@ -431,7 +434,7 @@ public partial class App : Application
                 break;
 
             case CommandVerb.Show:
-                //RestoreWindowWithFocus(this);
+                AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
                 break;
 
             case CommandVerb.SetOfflineMode:
@@ -439,6 +442,7 @@ public partial class App : Application
                 break;
 
             case CommandVerb.SignOut:
+                AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
                 if (New<KnownIdentities>().IsLoggedOn)
                 {
                     await AppLifecycleHandler.SignOutSignIn();

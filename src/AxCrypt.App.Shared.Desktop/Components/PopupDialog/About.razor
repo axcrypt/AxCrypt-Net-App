@@ -55,6 +55,7 @@
     {
         InvokeAsync(() =>
         {
+            AboutViewModel = new AboutViewModel();
             IsVisible = canShowDialog;
             StateHasChanged();
         });

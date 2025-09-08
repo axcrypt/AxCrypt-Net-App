@@ -9,5 +9,11 @@ public interface ITrayService
 
     Action<ContextMenuItem> ClickHandler { get; set; }
 
+    bool Created { get; }
+
+    void Hide();
+
+    void EnsureVisible();
+
     void Dispose();
 }

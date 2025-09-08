@@ -1,6 +1,5 @@
 ﻿using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Services.Interface;
-using AxCrypt.App.Windows.Helpers;
 using AxCrypt.App.Windows.Infrastructure;
 
 namespace AxCrypt.App.Windows.Services;
@@ -13,23 +12,19 @@ public class TrayService : ITrayService
 
     public void Initialize()
     {
+        if (tray != null) return;
+
         tray = new WindowsTrayIcon("Resources/AppIcon/appicon.ico");
-        tray.OnMenuItemClicked = (contextMenuItem) =>
-        {
-            switch (contextMenuItem)
-            {
-                case ContextMenuItem.Advanced:
-                    ClickHandler?.Invoke(ContextMenuItem.Advanced);
-                    break;
-                case ContextMenuItem.SignOut:
-                    ClickHandler?.Invoke(ContextMenuItem.SignOut);
-                    break;
-                case ContextMenuItem.Exit:
-                    ClickHandler?.Invoke(ContextMenuItem.Exit);
-                    break;
-            }
-        };
+        tray.OnMenuItemClicked = (contextMenuItem) => ClickHandler?.Invoke(contextMenuItem);
+
+        tray.EnsureVisible();
     }
+
+    public bool Created => tray?.IsTaskbarIconCreated ?? false;
+
+    public void Hide() => tray?.HideTrayIcon();
+
+    public void EnsureVisible() => tray?.EnsureVisible();
 
     public void Dispose()
     {

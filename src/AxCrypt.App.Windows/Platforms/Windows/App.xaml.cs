@@ -327,12 +327,17 @@ namespace AxCrypt.App.Windows.WinUI
 
         private void HandleFileActivation(IFileActivatedEventArgs? fileActivatedArgs)
         {
-            CreateMauiApp();
-
             string verb = fileActivatedArgs?.Verb.ToLowerInvariant() ?? "";
             string[] files = fileActivatedArgs?.Files.Select(file => file.Path).ToArray() ?? [];
-            ResolveVerb(verb, files);
 
+            if (files.Length == 0)
+            {
+                return;
+            }
+
+            CreateMauiApp();
+
+            ResolveVerb(verb, files);
             Environment.Exit(0);
             return;
         }
@@ -359,7 +364,6 @@ namespace AxCrypt.App.Windows.WinUI
 
             CreateMauiApp();
             ResolveVerb(verb, files);
-
             Environment.Exit(0);
         }
 

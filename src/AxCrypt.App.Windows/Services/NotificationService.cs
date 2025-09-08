@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.Desktop.Services.Interface;
 using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Microsoft.UI.Windowing;
@@ -22,6 +23,9 @@ public class NotificationService : INotificationService
         ToastNotification? notification = new ToastNotification(toast.GetXml());
         notification.Activated += ToastActivated;
 
+        notification.Dismissed += ToastDismissed;
+        notification.Failed += ToastFailed;
+
         notifier.Show(notification);
     }
 
@@ -29,16 +33,31 @@ public class NotificationService : INotificationService
     {
         try
         {
-            App.Current?.Dispatcher?.Dispatch(() =>
-            {
-                Microsoft.UI.Xaml.Window? window = Application.Current.Windows[0].Handler.PlatformView as Microsoft.UI.Xaml.Window;
-                window.AppWindow.Show(true);
-                window.AppWindow.SetPresenter(AppWindowPresenterKind.Default);
-                Microsoft.UI.Windowing.OverlappedPresenter overlappedPresenter = ((Microsoft.UI.Windowing.OverlappedPresenter)window.AppWindow.Presenter);
-                overlappedPresenter.Restore(true);
+            AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
+        }
+        catch (Exception ex)
+        {
+            New<IReport>().Exception(ex);
+        }
+    }
 
-                AxCServiceProviderExtension.GetService<ITrayService>()?.Dispose();
-            });
+    private void ToastDismissed(ToastNotification sender, ToastDismissedEventArgs args)
+    {
+        try
+        {
+            AxCServiceProvider.GetService<ITrayService>()?.EnsureVisible();
+        }
+        catch (Exception ex)
+        {
+            New<IReport>().Exception(ex);
+        }
+    }
+
+    private void ToastFailed(ToastNotification sender, ToastFailedEventArgs args)
+    {
+        try
+        {
+            AxCServiceProvider.GetService<ITrayService>()?.EnsureVisible();
         }
         catch (Exception ex)
         {
