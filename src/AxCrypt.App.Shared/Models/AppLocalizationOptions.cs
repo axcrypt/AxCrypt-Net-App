@@ -1,8 +1,10 @@
-﻿namespace AxCrypt.App.Shared.Models;
+﻿using System.Globalization;
+
+namespace AxCrypt.App.Shared.Models;
 
 public class AppLocalizationOptions
 {
-    public List<CultureOption> SupportedCultures { get; set; } = new List<CultureOption>();
+    public IEnumerable<CultureOption> SupportedCultures { get; set; } = new List<CultureOption>();
 
     public AppLocalizationOptions()
     {
@@ -23,6 +25,13 @@ public class AppLocalizationOptions
                 new CultureOption { Name = "sv", DisplayName = "Swedish", ImageUrl = "images/flag/FrmSwdn.svg" },
                 new CultureOption { Name = "tr", DisplayName = "Türkçe", ImageUrl = "images/flag/FrmTrk.svg" }
             };
+    }
+
+    public void SetLanguage()
+    {
+        CultureInfo cultureInfo = new CultureInfo(AxCrypt.Core.Resolve.UserSettings.CultureName);
+        Thread.CurrentThread.CurrentUICulture = cultureInfo;
+        Content.Resource.Culture = cultureInfo;
     }
 }
 

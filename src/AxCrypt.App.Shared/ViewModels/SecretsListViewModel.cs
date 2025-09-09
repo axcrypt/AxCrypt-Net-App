@@ -28,11 +28,11 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
 
     private LogOnViewModel _logOnViewModel;
 
-    private IStatusAlertService? _StatusAlertService;
+    private IStatusAlertService _StatusAlertService;
 
-    public SecretsListViewModel(IStatusAlertService statusAlertService)
+    public SecretsListViewModel()
     {
-        _StatusAlertService = statusAlertService;
+        _StatusAlertService = AxCServiceProviderExtension.StatusAlertService!;
         _logOnViewModel = AxCServiceProviderExtension.GetService<LogOnViewModel>();
 
         Initialize();
