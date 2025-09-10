@@ -2,17 +2,17 @@
 
 public class FileDropService
 {
-    public event Action<List<string>>? OnFilesDropped;
-    public event Action<List<string>>? OnFoldersDropped;
+    public event Action<IList<string>>? OnFilesDropped;
+    public event Action<IList<string>>? OnFoldersDropped;
 
     public string? CurrentPage { get; set; } = "";
 
-    public void NotifyFilesDropped(List<string> paths)
+    public void NotifyFilesDropped(IList<string> paths)
     {
         OnFilesDropped?.Invoke(paths);
     }
 
-    public void NotifyFoldersDropped(List<string> paths)
+    public void NotifyFoldersDropped(IList<string> paths)
     {
         OnFoldersDropped?.Invoke(paths);
     }

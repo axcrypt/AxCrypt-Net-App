@@ -187,7 +187,7 @@
         });
     }
 
-    private async Task HandleDroppedFiles(List<string> files)
+    private async Task HandleDroppedFiles(IList<string> files)
     {
         await RecentFilesViewModel.EncryptDroppedFiles(files);
     }

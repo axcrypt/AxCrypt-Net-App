@@ -8,12 +8,14 @@ using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
+using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -82,34 +84,46 @@ public partial class MainPage : ContentPage, ISignIn
                 string? currentPage = _fileDropService.CurrentPage;
                 if (currentPage is not (_homePage or _securedFolders)) return;
 
-                if (e.DataView.Contains(StandardDataFormats.StorageItems))
+                if (!e.DataView.Contains(StandardDataFormats.StorageItems))
                 {
-                    IReadOnlyList<IStorageItem> items = await e.DataView.GetStorageItemsAsync();
-                    List<string> filePaths = new List<string>();
-                    List<string> folders = new List<string>();
+                    return;
+                }
 
-                    foreach (IStorageItem item in items)
+                IReadOnlyList<IStorageItem> items = await e.DataView.GetStorageItemsAsync();
+                IEnumerable<IStorageItem> draggedItems = items.Where(itm => itm is StorageFile || itm is StorageFolder).ToList();
+                if (!draggedItems.Any())
+                {
+                    return;
+                }
+
+                IList<string> filePaths = new List<string>();
+                IList<string> folders = new List<string>();
+
+                foreach (IStorageItem item in items)
+                {
+                    switch (item)
                     {
-                        if (item is StorageFile file)
-                        {
+                        case StorageFile file when !string.IsNullOrWhiteSpace(file.Path):
                             filePaths.Add(file.Path);
-                        }
+                            break;
 
-                        else if (item is StorageFolder folder)
-                        {
-                            folders.Add(item.Path);
-                        }
-                    }
+                        case StorageFolder folder when !string.IsNullOrWhiteSpace(folder.Path):
+                            folders.Add(folder.Path);
+                            break;
 
-                    if (filePaths.Any())
-                    {
-                        _fileDropService.NotifyFilesDropped(filePaths);
+                        default:
+                            break;
                     }
+                }
 
-                    else if (folders.Any())
-                    {
-                        _fileDropService.NotifyFoldersDropped(folders);
-                    }
+                if (filePaths.Any())
+                {
+                    _fileDropService.NotifyFilesDropped(filePaths);
+                }
+
+                else if (folders.Any())
+                {
+                    _fileDropService.NotifyFoldersDropped(folders);
                 }
             };
         });

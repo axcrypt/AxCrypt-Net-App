@@ -187,7 +187,7 @@ public class RecentFoldersViewModel : ViewModelBase
 
     private FileSelectionEventArgs AddedFoldersEvent { get; set; }
 
-    public async Task EncryptDroppedFolders(List<string> folders)
+    public async Task EncryptDroppedFolders(IList<string> folders)
     {
         if (!folders.Any())
         {

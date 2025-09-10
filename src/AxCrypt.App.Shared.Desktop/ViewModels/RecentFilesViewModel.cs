@@ -264,7 +264,7 @@ public class RecentFilesViewModel : ViewModelBase
         }
     }
 
-    public async Task EncryptDroppedFiles(List<string> files)
+    public async Task EncryptDroppedFiles(IList<string> files)
     {
         if (!files.Any())
         {

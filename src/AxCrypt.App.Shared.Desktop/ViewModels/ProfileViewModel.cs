@@ -122,23 +122,28 @@ public class ProfileViewModel : ViewModelBase
 
     private async Task ImportOthersSharingKeyMenuItem_Click()
     {
-        try
+        FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new List<string>())
         {
-            FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new List<string>())
-            {
-                FileSelectionType = FileSelectionType.ImportPublicKeys,
-            };
-            await New<IDataItemSelection>().HandleSelection(fileSelectionArgs);
+            FileSelectionType = FileSelectionType.ImportPublicKeys,
+        };
+        await New<IDataItemSelection>().HandleSelection(fileSelectionArgs);
 
-            ImportPublicKeysViewModel importPublicKeys = new ImportPublicKeysViewModel(New<KnownPublicKeys>);
-            importPublicKeys.ImportFiles.Execute(fileSelectionArgs.SelectedFiles);
+        ImportPublicKeysViewModel importPublicKeys = new ImportPublicKeysViewModel(New<KnownPublicKeys>);
 
-            _statusAlertService!.Success($"Imported successfully!.");
-        }
-        catch (Exception ex)
+        if (!fileSelectionArgs.SelectedFiles.Any())
         {
-            _statusAlertService!.Error($"Failed to import key, due to {ex.Message}!");
+            return;
         }
+
+        importPublicKeys.ImportFiles.Execute(fileSelectionArgs.SelectedFiles);
+
+        if (importPublicKeys.FailedFiles.Any())
+        {
+            _statusAlertService!.Error($"Failed to import key!");
+            return;
+        }
+
+        _statusAlertService!.Success($"Imported successfully!.");
     }
 
     private async Task ExportMySharingKeyToolStripMenuItem_Click()
