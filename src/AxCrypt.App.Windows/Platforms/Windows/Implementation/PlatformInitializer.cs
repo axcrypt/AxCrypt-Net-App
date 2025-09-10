@@ -19,7 +19,6 @@ public class PlatformInitializer
     {
         TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
         TypeMap.Register.Singleton<InstallationVerifier>(() => new InstallationVerifier());
-        TypeMap.Register.Singleton<IDebugLoggingWindow>(() => new LogWindowService());
     }
 
     public static void CheckLavasoftWebCompanionExistence()

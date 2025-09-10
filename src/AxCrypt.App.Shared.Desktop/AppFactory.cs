@@ -3,6 +3,8 @@ using AxCrypt.Api;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Data;
+using AxCrypt.App.Shared.Desktop.Services;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -58,6 +60,8 @@ public class AppFactory
         TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new CachingNotificationService(new DeviceNotificationService(new LocalNotificationService(), new ApiNotificationService(new AxNotificationApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
         TypeMap.Register.New<LogOnIdentity, ISecuredMessengerService>((LogOnIdentity identity) => new DeviceSecuredMessengerService(new LocalSecuredMessengerService(identity, Resolve.WorkFolder.FileInfo), new NullSecuredMessengerService(identity)));
         TypeMap.Register.New<LogOnIdentity, ISecuredMessengerService>((LogOnIdentity identity) => new CachingSecuredMessengerService(new DeviceSecuredMessengerService(new LocalSecuredMessengerService(identity, Resolve.WorkFolder.FileInfo), new ApiSecuredMessengerService(new SecureMsgrDbApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
+
+        TypeMap.Register.Singleton<IDebugLoggingWindow>(() => new LogWindowService());
     }
 
     public static void EnsureFileAssociation()
