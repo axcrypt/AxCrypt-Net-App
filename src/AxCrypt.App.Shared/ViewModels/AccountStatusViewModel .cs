@@ -7,10 +7,6 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-//using Microsoft.Maui.Controls;
-//using Microsoft.Maui.Devices;
-//using System;
-//using System.Threading.Tasks;
 using System.Windows.Input;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -28,10 +24,12 @@ public class AccountStatusViewModel : ViewModelBase
     }
 
     public PlanState PlanState { get; private set; }
-    private static bool CanTryPremiumSubscription { get; set; }
+    public bool CanTryPremiumSubscription { get; set; }
+
     //public Command RefreshAccountInfoCommand { get; private set; }
     //public Command InitializeBuyPremiumCommand { get; private set; }
     public ICommand SignOutCommand { get; private set; }
+
     public ICommand OpenGetStartedPageCommand { get; private set; }
 
     public SubscriptionLevel SubscriptionLevel
@@ -61,6 +59,7 @@ public class AccountStatusViewModel : ViewModelBase
 
     public string UserEmail { get; set; } = string.Empty;
     public int DaysLeft { get; set; } = 0;
+
     public string ValidFormatted
     {
         get
