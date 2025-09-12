@@ -28,6 +28,7 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<ICssService, CssService>();
             services.AddSingleton<IStatusAlertService, StatusAlertService>();
             services.AddSingleton<ProcessIndicatorService>();
+            services.AddSingleton<FileOperationProcessIndicatorService>();
             services.AddSingleton<ProgressBarService>();
             services.AddSingleton<FileDropService>();
 

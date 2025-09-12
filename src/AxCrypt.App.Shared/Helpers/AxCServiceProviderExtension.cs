@@ -56,4 +56,12 @@ public static class AxCServiceProviderExtension
             return GetService<LogViewModel>();
         }
     }
+
+    public static FileOperationProcessIndicatorService? FileOperationProcessIndicatorService
+    {
+        get
+        {
+            return GetService<FileOperationProcessIndicatorService>();
+        }
+    }
 }
