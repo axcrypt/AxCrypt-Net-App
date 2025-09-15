@@ -15,7 +15,7 @@
 }
 
 <div class="page @arabic" dir="@(Core.Resolve.UserSettings.CultureName == "ar" ? "rtl" : "ltr")" @onclick="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)" @onmousemove="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)">
-    @if (PageRendering)
+    @if (PageRendering || PageStyleRendering)
     {
         <main>
             <div class="secrets-loading-overlay">
@@ -92,6 +92,7 @@
 
 @code {
     private bool PageRendering { get; set; } = true;
+    private bool PageStyleRendering { get; set; } = true;
     private bool CanShowSignInPage { get; set; }
     private string? SubscriptionLevel { get; set; }
 
@@ -134,11 +135,16 @@
             return;
         }
 
+        PageStyleRendering = true;
+
         SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
         if (LogOnViewModel.IsLoggedOn)
         {
             await AddCssAsync(SubscriptionLevel);
         }
+
+        PageStyleRendering = false;
+
         string currentURi = navigationManager.Uri;
         if (!LogOnViewModel.IsLoggedOn && currentURi.Replace(navigationManager.BaseUri, "") != "")
         {
