@@ -8,6 +8,7 @@ using AxCrypt.Core.UI.ViewModel;
 using System.Collections.ObjectModel;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Core.Notification;
+using AxCrypt.Common;
 
 namespace AxCrypt.App.Shared.Services;
 
@@ -37,6 +38,12 @@ public class UserNotificationService : ViewModelBase
 
     public async Task LoadNotificationListAsync()
     {
+        if (!New<AxCryptOnlineState>().IsOnline)
+        {
+            NotificationModel = new NotificationViewModel();
+            return;
+        }
+
         using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             IEnumerable<NotificationItemViewModel> notificationItems = await LoadNotificationsAsync();
