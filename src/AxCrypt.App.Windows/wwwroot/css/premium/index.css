@@ -588,7 +588,6 @@
   width: 417px;
   padding: 10px;
   background-color: white;
-  position: absolute;
   display: none;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   z-index: 10;
@@ -610,9 +609,6 @@
 
 .home-context-menu::after {
   content: "";
-  position: absolute;
-  top: 60%;
-  left: 20px;
   transform: translateY(-60%) rotate(90deg);
   width: 0;
   height: 0;

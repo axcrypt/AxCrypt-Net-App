@@ -6,7 +6,7 @@
 
 @inject RecentFoldersViewModel RecentFoldersViewModel
 @inject FileDropService FileDropService
-
+@inject IJSRuntime JSRuntime
 
 <div class="home-index">
     <div>
@@ -52,7 +52,7 @@
                     {
                         string folderWithoutTrailingSlash = folder.TrimEnd('\\');
                         <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls fle-nme" style="white-space: nowrap" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
-                             @oncontextmenu="e => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
+                             @oncontextmenu="(e) => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
                             <img class="fldr-img" src="" /><br /><label title="@folderWithoutTrailingSlash">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
                             <span style="font-size:8px; display: block; padding-top: 0px;">@folderWithoutTrailingSlash</span>
                         </div>
@@ -84,7 +84,7 @@
                 </div> *@
             </div>
 
-            <div id="securedContextMenu" class="hide-model-popup home-context-menu" style="display: none;">
+            <div id="securedContextMenu" class="hide-model-popup home-context-menu" style="display: none;position:fixed;">
                 <dl class="font-medium fle-nme" style="margin-bottom: 5px;">
                     <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</dd>
                     <dd @onclick="(arg) => RecentFoldersViewModel.OnContextMenuAction(arg, SecuredFolderContextMenu.DecryptPermanently)">@Texts.MenuDecryptPermanentlyText</dd>

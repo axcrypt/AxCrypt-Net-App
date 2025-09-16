@@ -17,7 +17,7 @@
 @if (IsVisible)
 {
     <div class="modalDialog sharekey-popup" style="display: block;">
-        <div id="sharekey">
+        <div id="sharekey" @onclick="HideContextMenu">
             <h3 class="font-bold text-center shr-key-title dk-shre">@Texts.ShareAccessTitle</h3>
             <div class="sharekey-content">
                 <div class="dk-shre">
@@ -124,7 +124,7 @@
                                         <div style="display:inline-block;">
                                             <span class="shared-text">@GetUserDisplayName(user)</span><br>
                                         </div>
-                                        <img class="menu-image" src="/images/Group160.svg" alt="img" @onclick="(e) => ShareKeyViewModel.contextMenuPopup(user.UserEmail)" style="float:right;">
+                                        <img class="menu-image" src="/images/Group160.svg" alt="img" @onclick="(e) => ShowContextMenu(e,user.UserEmail)" style="float:right;cursor:pointer;" @onclick:stopPropagation>
                                         <hr style="width: 100%;">
                                     </dd>
                                 </dl>
@@ -137,7 +137,7 @@
                     }
                     @if (ShareKeyViewModel.ContextMenu)
                     {
-                        <div class="hide-model-popup context-menu">
+                        <div class="context-menu" style="position:fixed;top: @(posY);left: @(posX);">
                             <dl>
                                 <dd @onclick="ShareKeyViewModel.RefreshShare" style="cursor: pointer;">
                                     <img class="refresh-icon" src="~/images/business/IcoRefresh.svg" alt="Refresh" />
@@ -290,5 +290,24 @@
     {
         ShareKeyViewModel.HideUnSharedUsersSuggestionPopup();
         StateHasChanged();
+    }
+
+    private string posX = "0px";
+    private string posY = "0px";
+
+    private void ShowContextMenu(MouseEventArgs e, string email)
+    {
+        posX = e.ClientX + "px"; 
+        posY = e.ClientY + "px";
+        ShareKeyViewModel.contextMenuPopup(email);
+    }
+
+    private void HideContextMenu()
+    {
+        if (ShareKeyViewModel.ContextMenu)
+        {
+            ShareKeyViewModel.ContextMenu = false;
+        }
+        
     }
 }

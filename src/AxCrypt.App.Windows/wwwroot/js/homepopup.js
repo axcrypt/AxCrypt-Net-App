@@ -85,28 +85,43 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
             target.classList.add('selected');
             let contextMenu = document.getElementById(menuId);
+
+            if (!contextMenu) return;
+            contextMenu.style.visibility = "visible";
             contextMenu.style.display = 'block';
-            let rect = target.getBoundingClientRect();
-            let distance = 10;
-            let maxRightSpace = 100;
-            let maxTopSpace = 40;
 
-            let leftPosition = Math.min(rect.right + distance, window.innerWidth - maxRightSpace - contextMenu.offsetWidth);
-            let bottomPosition = Math.min(rect.top + distance, window.innerHeight - maxTopSpace - contextMenu.offsetHeight);
+            let contextMenuWidth = contextMenu.offsetWidth;
+            let contextMenuHeight = contextMenu.offsetHeight;
 
-            contextMenu.style.left = leftPosition + 'px';
-            contextMenu.style.top = bottomPosition + 'px';
+            let windowWidth = window.innerWidth;
+            let windowHeight = window.innerHeight;
+            let padding = 5;
+
+            let posX = e.clientX;
+            let posY = e.clientY;
+
+            if (posX + contextMenuWidth + padding > windowWidth) {
+                posX = windowWidth - contextMenuWidth - padding;
+            }
+            if (posX < padding) posX = padding;
+
+            if (posY + contextMenuHeight + padding > windowHeight) {
+                posY = windowHeight - contextMenuHeight - padding;
+            }
+            if (posY < padding) posY = padding;
+
+            contextMenu.style.left = posX + "px";
+            contextMenu.style.top = posY + "px";
+            
         }
     }
 
-    // Event listener for recent files context menu
     document.addEventListener('contextmenu', function (e) {
-        handleContextMenu(e, 'homeContextMenu', 'tr.context-menu-target');
-    });
-
-    // Event listener for secured folders context menu
-    document.addEventListener('contextmenu', function (e) {
-        handleContextMenu(e, 'securedContextMenu', '.recent-folder-action-cls');
+        if (e.target.closest('tr.context-menu-target')) {
+            handleContextMenu(e, 'homeContextMenu', 'tr.context-menu-target');
+        } else if (e.target.closest('.recent-folder-action-cls')) {
+            handleContextMenu(e, 'securedContextMenu', '.recent-folder-action-cls');
+        }
     });
 
     document.addEventListener('click', function (e) {
