@@ -1808,6 +1808,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        public static string AreYouSureText {
+            get {
+                return ResourceManager.GetString("AreYouSureText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;span&gt;As a&lt;/span&gt; Affiliate.
         /// </summary>
         public static string AsAffiliateHeading {
@@ -3974,7 +3983,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check out other AxCrypt guides: &lt;a href=&apos;https://axcrypt.net/information/guides/get-started/&apos;&gt;&lt;b&gt;AxCrypt Guides | Your guide to cybersecurity solutions&lt;/a&gt;&lt;/b&gt;.
+        ///   Looks up a localized string similar to Check out other AxCrypt guides: &lt;a href=&apos;https://axcrypt.net/helpcenter/&apos;&gt;&lt;b&gt;AxCrypt Guides | Your guide to cybersecurity solutions&lt;/a&gt;&lt;/b&gt;.
         /// </summary>
         public static string AxCWhatsNextGuideText1 {
             get {
@@ -26034,7 +26043,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To make sure you get the most out of using AxCrypt, we have released new tutorials that will help you get started faster. They cover key features of your account, &lt;a href=&apos;https://www.axcrypt.net/information/guides/get-started&apos;&gt;plus some super handy tips &lt;/a&gt;.
+        ///   Looks up a localized string similar to To make sure you get the most out of using AxCrypt, we have released new tutorials that will help you get started faster. They cover key features of your account, &lt;a href=&apos;https://axcrypt.net/information/guides/getstarted/&apos;&gt;plus some super handy tips &lt;/a&gt;.
         /// </summary>
         public static string Blog_TAYBS_H1_SH5_Text1 {
             get {
@@ -32883,7 +32892,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt File Encryption has Free and Premium versions which are cross-platform solutions (available on Windows, macOS, Android, and iOS) created for individual users. While they offer essential encryption tools, they don’t include &lt;a href= &apos;https://axcrypt.net/pt/blog/top-ten-benefits-of-file-encryption-for-businesses-secure-business-files/&apos;&gt;&lt;b&gt;features needed for teams&lt;/b&gt;&lt;/a&gt; or companies. Most importantly:.
+        ///   Looks up a localized string similar to AxCrypt File Encryption has Free and Premium versions which are cross-platform solutions (available on Windows, macOS, Android, and iOS) created for individual users. While they offer essential encryption tools, they don’t include &lt;a href= &apos;https://axcrypt.net/blog/top-ten-benefits-of-file-encryption-for-businesses-secure-business-files/&apos;&gt;&lt;b&gt;features needed for teams&lt;/b&gt;&lt;/a&gt; or companies. Most importantly:.
         /// </summary>
         public static string Blog_WYONTABE_H1_Text1 {
             get {
@@ -33072,7 +33081,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Running a business is competitive. Every decision, every step forward, brings new opportunities, and new risks. Without encryption in place, your business files could be exposed to threats at any time. That’s why &lt;a href= &apos;https://axcrypt.net/business/&apos;&gt;&lt;b&gt;business encryption&lt;/b&gt;&lt;/a&gt; isn’t optional. If you&apos;re working with a team,  &lt;a href= &apos;https://axcrypt.net/pt/blog/5-reasons-why-encryption-is-important-for-small-businesses/&apos;&gt;&lt;b&gt;protecting your data&lt;/b&gt;&lt;/a&gt; means protecting your people, and your progress..
+        ///   Looks up a localized string similar to Running a business is competitive. Every decision, every step forward, brings new opportunities, and new risks. Without encryption in place, your business files could be exposed to threats at any time. That’s why &lt;a href= &apos;https://axcrypt.net/business/&apos;&gt;&lt;b&gt;business encryption&lt;/b&gt;&lt;/a&gt; isn’t optional. If you&apos;re working with a team,  &lt;a href= &apos;https://axcrypt.net/blog/5-reasons-why-encryption-is-important-for-small-businesses/&apos;&gt;&lt;b&gt;protecting your data&lt;/b&gt;&lt;/a&gt; means protecting your people, and your progress..
         /// </summary>
         public static string Blog_WYONTABE_Text1 {
             get {
@@ -39896,6 +39905,33 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Excluded folders remain unencrypted.
+        /// </summary>
+        public static string ExcludedFolderNotificationText {
+            get {
+                return ResourceManager.GetString("ExcludedFolderNotificationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excluded folders:.
+        /// </summary>
+        public static string ExcludedFoldersText {
+            get {
+                return ResourceManager.GetString("ExcludedFoldersText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude Folder.
+        /// </summary>
+        public static string ExcludeFolderText {
+            get {
+                return ResourceManager.GetString("ExcludeFolderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         public static string ExitToolStripMenuItemText {
@@ -41363,6 +41399,24 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to decrypt File &apos;{0}&apos;. Reason: {1}.
+        /// </summary>
+        public static string FileDecryptionFailedAlertMsg {
+            get {
+                return ResourceManager.GetString("FileDecryptionFailedAlertMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File &apos;{0}&apos; has been decrypted successfully..
+        /// </summary>
+        public static string FileDecryptionSuccessAlertMsg {
+            get {
+                return ResourceManager.GetString("FileDecryptionSuccessAlertMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File &apos;{0}&apos; does not exist..
         /// </summary>
         public static string FileDoesNotExist {
@@ -41480,6 +41534,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to open file &apos;{0}&apos;. Reason: {1}.
+        /// </summary>
+        public static string FileOpenFailedAlertMsg {
+            get {
+                return ResourceManager.GetString("FileOpenFailedAlertMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed &apos;{0}&apos;..
         /// </summary>
         public static string FileOperationFailed {
@@ -41530,6 +41593,42 @@ namespace AxCrypt.Content {
         public static string FilePropertiesToolStripMenuItemText {
             get {
                 return ResourceManager.GetString("FilePropertiesToolStripMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to rename file &apos;{0}&apos; anonymously. Reason: {1}.
+        /// </summary>
+        public static string FileRenameFailedAlertMsg {
+            get {
+                return ResourceManager.GetString("FileRenameFailedAlertMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File &apos;{0}&apos; has been renamed anonymously..
+        /// </summary>
+        public static string FileRenameSuccessAlertMsg {
+            get {
+                return ResourceManager.GetString("FileRenameSuccessAlertMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to restore original name for file &apos;{0}&apos;. Reason: {1}.
+        /// </summary>
+        public static string FileRestoreRenameFailedAlertMsg {
+            get {
+                return ResourceManager.GetString("FileRestoreRenameFailedAlertMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File &apos;{0}&apos; has been restored to its original name..
+        /// </summary>
+        public static string FileRestoreRenameSuccessAlertMsg {
+            get {
+                return ResourceManager.GetString("FileRestoreRenameSuccessAlertMsg", resourceCulture);
             }
         }
         
@@ -41597,6 +41696,51 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Find files.
+        /// </summary>
+        public static string FindFileFeatureTitle {
+            get {
+                return ResourceManager.GetString("FindFileFeatureTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage all encrypted file references in one place, with options to view, rename, delete, or decrypt..
+        /// </summary>
+        public static string FindFilesFeatureDescription {
+            get {
+                return ResourceManager.GetString("FindFilesFeatureDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One place to manage encrypted files.
+        /// </summary>
+        public static string FindFilesFeatureTooltip {
+            get {
+                return ResourceManager.GetString("FindFilesFeatureTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type to find a file....
+        /// </summary>
+        public static string FindFilesSearchPlaceholder {
+            get {
+                return ResourceManager.GetString("FindFilesSearchPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File path.
+        /// </summary>
+        public static string FindPathTitle {
+            get {
+                return ResourceManager.GetString("FindPathTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First name.
         /// </summary>
         public static string FirstNameLabel {
@@ -41615,11 +41759,38 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to open folder for &apos;{0}&apos;. Reason: {1}.
+        /// </summary>
+        public static string FolderOpenFailedAlertMsg {
+            get {
+                return ResourceManager.GetString("FolderOpenFailedAlertMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a folder.
         /// </summary>
         public static string FolderSelectTitle {
             get {
                 return ResourceManager.GetString("FolderSelectTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude subfolder.
+        /// </summary>
+        public static string FolderSettingsText {
+            get {
+                return ResourceManager.GetString("FolderSettingsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secured folder settings.
+        /// </summary>
+        public static string FolderSettingsTitle {
+            get {
+                return ResourceManager.GetString("FolderSettingsTitle", resourceCulture);
             }
         }
         
@@ -44505,7 +44676,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To learn about other AxCrypt products, check out other AxCrypt guides: &lt;a href=&apos;/information/guides/get-started/&apos;&gt;AxCrypt Guides&lt;/a&gt;.
+        ///   Looks up a localized string similar to To learn about other AxCrypt products, check out other AxCrypt guides: &lt;a href=&apos;https://axcrypt.net/helpcenter/&apos;&gt;AxCrypt Guides&lt;/a&gt;.
         /// </summary>
         public static string GroupGuidesHeading8Paragraph2 {
             get {
@@ -47406,6 +47577,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid folder path.
+        /// </summary>
+        public static string InvalidFolder {
+            get {
+                return ResourceManager.GetString("InvalidFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid key for &apos;{0}&apos;..
         /// </summary>
         public static string InvalidKey {
@@ -47429,6 +47609,15 @@ namespace AxCrypt.Content {
         public static string InvalidSelectionErrorMessage {
             get {
                 return ResourceManager.GetString("InvalidSelectionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected folder not a valid subfolder.
+        /// </summary>
+        public static string InvalidSubFolder {
+            get {
+                return ResourceManager.GetString("InvalidSubFolder", resourceCulture);
             }
         }
         
@@ -48793,7 +48982,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://www.axcrypt.net/information/guides/get-started.
+        ///   Looks up a localized string similar to https://axcrypt.net/information/guides/getstarted/.
         /// </summary>
         public static string LinkToGettingStarted {
             get {
@@ -54065,7 +54254,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Receive a one-time verification code sent to your registered &lt;br /&gt; email address..
+        ///   Looks up a localized string similar to Receive a one-time verification code sent to your registered &lt;br/&gt; email address..
         /// </summary>
         public static string MFAOneTimeVerificationText {
             get {
@@ -55451,6 +55640,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No file found.
+        /// </summary>
+        public static string NoFilesFoundText {
+            get {
+                return ResourceManager.GetString("NoFilesFoundText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t connect to server right now, please check your internet connection..
         /// </summary>
         public static string NoInternetErrorMessage {
@@ -55465,6 +55663,15 @@ namespace AxCrypt.Content {
         public static string NoItemsSelectedText {
             get {
                 return ResourceManager.GetString("NoItemsSelectedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No, keep encrypted.
+        /// </summary>
+        public static string NoKeepEncryptedText {
+            get {
+                return ResourceManager.GetString("NoKeepEncryptedText", resourceCulture);
             }
         }
         
@@ -57159,6 +57366,15 @@ namespace AxCrypt.Content {
         public static string PastIncidentsHeading {
             get {
                 return ResourceManager.GetString("PastIncidentsHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path:.
+        /// </summary>
+        public static string PathText {
+            get {
+                return ResourceManager.GetString("PathText", resourceCulture);
             }
         }
         
@@ -61238,6 +61454,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string RemoveText {
+            get {
+                return ResourceManager.GetString("RemoveText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is an active recurring subscription on this account. Recurring Business subscriptions do not have to be renewed manually..
         /// </summary>
         public static string RenewActiveBusinessSubscriptionWarning {
@@ -62452,7 +62677,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get started: &lt;a href=&apos;https://www.axcrypt.net/information/guides/get-started&apos;&gt;https://www.axcrypt.net/information/guides/get-started&lt;/a&gt;.
+        ///   Looks up a localized string similar to Get started: &lt;a href=&apos;https://axcrypt.net/information/guides/getstarted/&apos;&gt;https://axcrypt.net/information/guides/getstarted&lt;/a&gt;.
         /// </summary>
         public static string ResellerHelpSupportBlock1ListItem3 {
             get {
@@ -64230,6 +64455,15 @@ namespace AxCrypt.Content {
         public static string SelectAllText {
             get {
                 return ResourceManager.GetString("SelectAllText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select file to view file information.
+        /// </summary>
+        public static string SelectFileToViewFileInfoText {
+            get {
+                return ResourceManager.GetString("SelectFileToViewFileInfoText", resourceCulture);
             }
         }
         
@@ -68283,6 +68517,24 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to decrypt the files inside the excluded subfolder?.
+        /// </summary>
+        public static string UserPromptOnAddingExcludeFolder {
+            get {
+                return ResourceManager.GetString("UserPromptOnAddingExcludeFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected folder is currently in the excluded list. Do you want to secure it instead?.
+        /// </summary>
+        public static string UserPromptOnRemovingExcludeFolder {
+            get {
+                return ResourceManager.GetString("UserPromptOnRemovingExcludeFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have updated AxCrypt. Unfortunately, your configuration must be reset. After restarting, your preferences and settings will unfortunately be lost. We apologize for the inconvenience. Your encrypted files are still safe and ok..
         /// </summary>
         public static string UserSettingsFormatChangeNeedsReset {
@@ -68629,7 +68881,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check out other AxCrypt guides: &lt;a href=&apos;https://axcrypt.net/information/guides/get-started/&apos;&gt;&lt;span&gt;&lt;strong&gt;AxCrypt Guides | Your guide to cybersecurity solutions&lt;/a&gt;&lt;/span&gt;&lt;/strong&gt;.
+        ///   Looks up a localized string similar to Check out other AxCrypt guides: &lt;a href=&apos;https://axcrypt.net/helpcenter/&apos;&gt;&lt;span&gt;&lt;strong&gt;AxCrypt Guides | Your guide to cybersecurity solutions&lt;/a&gt;&lt;/span&gt;&lt;/strong&gt;.
         /// </summary>
         public static string WhatsNextMasterKeyParagraph1 {
             get {
@@ -69514,6 +69766,15 @@ namespace AxCrypt.Content {
         public static string YearlySubscriptionTitle {
             get {
                 return ResourceManager.GetString("YearlySubscriptionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, decrypt.
+        /// </summary>
+        public static string YesDecryptText {
+            get {
+                return ResourceManager.GetString("YesDecryptText", resourceCulture);
             }
         }
         
