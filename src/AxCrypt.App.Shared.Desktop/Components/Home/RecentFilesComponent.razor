@@ -28,10 +28,10 @@
             <thead style="user-select: none;">
                 <tr>
                     <th style="width:3%; padding-left: 0px;"> <input class="check-box" type="checkbox" @onchange="(e)=> RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
-                    <th colspan="2" style="width:23%;" @onclick="()=>SetSortOrder(0)">@Texts.NameLabel<img class="@($"arw-img {GetClassByActiveSortOrderIndex(0)}")" src="" alt="arrow img" /></th>
-                    <th style="width:11%;" @onclick="()=>SetSortOrder(1)">@Texts.FileSizeColumnHeaderText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(1)}")" src="" alt="arrow img" /></th>
-                    <th style="width:11%;" @onclick="()=>SetSortOrder(5)">@Texts.CryptoNameText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(5)}")" src="" alt="arrow img" /></th>
-                    <th style="width:18%;" @onclick="()=>SetSortOrder(2)">@Texts.LastModifiedTimeColumnHeaderText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(2)}")" src="" alt="arrow img" /></th>
+                    <th colspan="2" style="width:20%;" @onclick="()=>SetSortOrder(0)">@Texts.NameLabel<img class="@($"arw-img {GetClassByActiveSortOrderIndex(0)}")" src="" alt="arrow img" /></th>
+                    <th style="width:12%;" @onclick="()=>SetSortOrder(1)">@Texts.FileSizeColumnHeaderText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(1)}")" src="" alt="arrow img" /></th>
+                    <th style="width:12%;" @onclick="()=>SetSortOrder(5)">@Texts.CryptoNameText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(5)}")" src="" alt="arrow img" /></th>
+                    <th style="width:19%;" @onclick="()=>SetSortOrder(2)">@Texts.LastModifiedTimeColumnHeaderText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(2)}")" src="" alt="arrow img" /></th>
                     <th style="width:13%;">@Texts.PromptSharedWith</th>
 
                     @if (!RecentFilesViewModel.HasNoSubscription)
