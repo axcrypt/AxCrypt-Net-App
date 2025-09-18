@@ -315,12 +315,6 @@
   margin: 10px auto;
 }
 
-.subs-required {
-  background: url(/images/free/subs-req-sparkle.svg) no-repeat top right;
-  background-size: auto;
-  padding-left: 33px;
-}
-
 .dsbl-clr {
   color: #CACACA;
 }
@@ -844,9 +838,23 @@
   }
 }
 .subs-required {
-  background: url(/images/free/IcoRedSparkle.svg) no-repeat top left !important;
-  background-size: 17px !important;
-  padding-left: 33px;
+  display: inline-flex;
+  align-items: center;
+  color: #B5CEA9 !important;
+}
+
+.subs-required::after {
+  content: "";
   display: inline-block;
+  background: url(/images/free/IcoRedSparkle.svg) no-repeat center;
+  background-size: 17px;
+  width: 17px;
+  height: 17px;
+  margin-left: 8px;
+}
+
+.subs-required:hover {
+  background: none !important;
+  background-color: transparent !important;
   color: #B5CEA9 !important;
 }
