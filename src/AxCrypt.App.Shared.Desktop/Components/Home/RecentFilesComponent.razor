@@ -24,20 +24,20 @@
 <div class="file-max-hgt">
     @if (RecentFilesViewModel.RecentFilesList.Any())
     {
-        <table class="rcnt-fle-tbl" style="width:100%;">
+        <table class="rcnt-fle-tbl" style="width:100%;table-layout: fixed;">
             <thead style="user-select: none;">
                 <tr>
-                    <th style="width:3%; padding-left: 0px;"> <input class="check-box" type="checkbox" @onchange="(e)=> RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
-                    <th colspan="2" style="width:20%;" @onclick="()=>SetSortOrder(0)">@Texts.NameLabel<img class="@($"arw-img {GetClassByActiveSortOrderIndex(0)}")" src="" alt="arrow img" /></th>
-                    <th style="width:12%;" @onclick="()=>SetSortOrder(1)">@Texts.FileSizeColumnHeaderText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(1)}")" src="" alt="arrow img" /></th>
-                    <th style="width:12%;" @onclick="()=>SetSortOrder(5)">@Texts.CryptoNameText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(5)}")" src="" alt="arrow img" /></th>
+                    <th style="width:3%;"> <input class="check-box" type="checkbox" @onchange="(e)=> RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
+                    <th style="width:40%;" @onclick="() => SetSortOrder(0)">@Texts.NameLabel<img class="@($"arw-img {GetClassByActiveSortOrderIndex(0)}")" src="" alt="arrow img" /></th>
+                    <th style="width:9%;" @onclick="()=>SetSortOrder(1)">@Texts.FileSizeColumnHeaderText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(1)}")" src="" alt="arrow img" /></th>
+                    <th style="width:13%;" @onclick="()=>SetSortOrder(5)">@Texts.CryptoNameText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(5)}")" src="" alt="arrow img" /></th>
                     <th style="width:19%;" @onclick="()=>SetSortOrder(2)">@Texts.LastModifiedTimeColumnHeaderText<img class="@($"arw-img {GetClassByActiveSortOrderIndex(2)}")" src="" alt="arrow img" /></th>
-                    <th style="width:13%;">@Texts.PromptSharedWith</th>
+                    <th style="width:15%;">@Texts.PromptSharedWith</th>
 
-                    @if (!RecentFilesViewModel.HasNoSubscription)
+                    @* @if (!RecentFilesViewModel.HasNoSubscription)
                     {
                         <th class="scrd-sec">@Texts.EncryptedPathColumnHeaderText</th>
-                    }
+                    } *@
                 </tr>
             </thead>
             <tbody class="row-sec">
@@ -52,14 +52,15 @@
                         FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
                         <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails.FilePath) ? "selected" : "")"
                             @oncontextmenu="async (e) => await RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)" @ondblclick="async (e) => await RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)">
-                            <td style="padding-left: 0px;">
+                            <td>
                                 <input class="check-box" type="checkbox" @onchange="() => RecentFilesViewModel.HandleFileClick(!fileDetails.IsChecked, fileDetails.FilePath)" checked="@fileDetails.IsChecked" />
                             </td>
-                            <td class="fle-exton-img" style="width:5%;">
-                                <img style="max-width: 32px;max-height: 32px;" class="@fileDetails.IconClass" src="" alt="file-image" />
-                            </td>
-                            <td class="fle-exton-img" style="display: flex; align-items: center;" title="@fileDetails.FilePath">
-                                <span class="fle-nme">@fileDetails.FileName</span>
+                            <td class="fle-exton-img" title="@fileDetails.FilePath" style="display: grid; grid-template-columns: 55px 1fr; gap: 0;">
+                                <img class="@fileDetails.IconClass" style="width: 50px; height: 45px;" src="" alt="file-image" />
+                                <div style="display: flex; flex-direction: column; line-height: 20px; overflow: hidden;" rowspan="2">
+                                    <span class="fle-nme" style="padding-left: 0 !important;">@fileDetails.FileName</span>
+                                    <span class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 200 !important; font-size: 10px;" title="@fileDetails.FilePath">@fileDetails.FilePath</span>
+                                </div>
                             </td>
                             <td>@fileDetails.FileSize</td>
                             <td>@fileDetails.Algorithm</td>
@@ -84,10 +85,6 @@
                                     <div style="display:flex;"> - </div>
                                 }
                             </td>
-                            @if (!RecentFilesViewModel.HasNoSubscription)
-                            {
-                                <td class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;" title="@fileDetails.FilePath">@fileDetails.FilePath</td>
-                            }
                         </tr>
                     }
                 }

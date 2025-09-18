@@ -227,12 +227,10 @@
 }
 .fle-exton-img .fle-nme {
   font-size: 14px;
-  display: inline-block;
-  max-width: 210px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 2% 0;
+  margin: 2% 0 0 0;
 }
 .fle-exton-img .vid-type-ico {
   content: url(/images/premium/IcoVd.svg);
@@ -1003,10 +1001,6 @@
 @media only screen and (max-width: 1370px) {
   .rcnt-fle-tbl {
     max-width: 850px;
-  }
-  .scrd-sec {
-    display: none;
-    visibility: hidden;
   }
 }
 @media (min-width: 769px) and (max-width: 1370px) {
