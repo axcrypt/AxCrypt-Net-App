@@ -95,9 +95,9 @@ public class LogOnViewModel : ViewModelBase
     { get { return GetProperty<CommonDialogService>(nameof(VerifyPasswordDialog)); } set { SetProperty(nameof(VerifyPasswordDialog), value); } }
 
     public CommonDialogService AboutDialog
-    { 
-        get { return GetProperty<CommonDialogService>(nameof(AboutDialog)); } 
-        set { SetProperty(nameof(AboutDialog), value); } 
+    {
+        get { return GetProperty<CommonDialogService>(nameof(AboutDialog)); }
+        set { SetProperty(nameof(AboutDialog), value); }
     }
 
     public CommonDialogService FeedbackDialog
@@ -160,6 +160,8 @@ public class LogOnViewModel : ViewModelBase
     public UpgradeVersionViewModel? UpgradeVersionViewModel { get; set; }
 
     public string ErrorMessage { get; set; }
+
+    public string CurrentUserDevice { get; set; }
 
     public bool ShowUpgradeStrongerEncryptionWarning
     {

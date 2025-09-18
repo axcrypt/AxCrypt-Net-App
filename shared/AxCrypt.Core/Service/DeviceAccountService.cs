@@ -488,5 +488,15 @@ namespace AxCrypt.Core.Service
 
             return await _localService.CreateSubscriptionByGooglePaymentAsync(googlePaymentTrans).Free();
         }
+
+        public async Task<bool> UpdateRememberMeOnMFAInfoAsync(MultiFactorAuthApiModel multiFactorAuthApi)
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                return await _remoteService.UpdateRememberMeOnMFAInfoAsync(multiFactorAuthApi).Free();
+            }
+
+            return await _localService.UpdateRememberMeOnMFAInfoAsync(multiFactorAuthApi).Free();
+        }
     }
 }

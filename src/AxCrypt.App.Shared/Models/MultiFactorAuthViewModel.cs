@@ -1,18 +1,23 @@
-﻿using AxCrypt.Core.Authenticator.Service;
-using AxCrypt.App.Shared.Utility;
-using AxCrypt.Core.UI.ViewModel;
-using static AxCrypt.Abstractions.TypeResolve;
-using System.ComponentModel.DataAnnotations;
+﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
+using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.Utility;
+using AxCrypt.Core.Authenticator.Service;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.UI;
-using AxCrypt.App.Shared.Helpers;
+using AxCrypt.Core.UI.ViewModel;
+using System.ComponentModel.DataAnnotations;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared
 {
     public class MultiFactorAuthViewModel : ViewModelBase
     {
         private LogOnIdentity? _LogOnIdentity { get; set; }
+
+        public MultiFactorAuthViewModel()
+        {
+        }
 
         public async Task ShowLogOnDialog(EmailAddress userEmail, Passphrase passphrase)
         {
@@ -75,6 +80,9 @@ namespace AxCrypt.App.Shared
                 return;
             }
 
+            MFARememberIn mFARememberIn = (MFARememberIn)Enum.Parse(typeof(MFARememberIn), MFARememberInOption);
+            RememberUntil = RememberMFAUntill(mFARememberIn);
+
             if (!await ValidateMFAOtpAsync(oneTimeCode, multiFactorAuthType))
             {
                 ErrorMessage = "Invalid code! please try again";
@@ -92,6 +100,40 @@ namespace AxCrypt.App.Shared
         public async Task<bool> SendOTPAsync()
         {
             return await New<IMultiFactorAuthService>().SendMFAOTPAsync(_LogOnIdentity);
+        }
+
+        public bool RememberMeOnMFA { get; set; }
+
+        public string UserDevice { get; set; }
+
+        public DateTime RememberUntil { get; set; }
+
+        public string MFARememberInOption { get; set; } = MFARememberIn.OneHour.ToString();
+
+        public IEnumerable<KeyValuePair<string, string>> RememberMFAUntillList()
+        {
+            return new[]
+            {
+                new KeyValuePair<string, string>("1 Hour", (MFARememberIn.OneHour).ToString()),
+                new KeyValuePair<string, string>("3 Hours", (MFARememberIn.ThreeHours).ToString()),
+                new KeyValuePair<string, string>("6 Hours", (MFARememberIn.SixHours).ToString()),
+                new KeyValuePair<string, string>("12 Hours", (MFARememberIn.TwelveHours).ToString()),
+                new KeyValuePair<string, string>("1 Day", (MFARememberIn.OneDay).ToString())
+            };
+        }
+
+        private DateTime RememberMFAUntill(MFARememberIn rememberUntil)
+        {
+            DateTime expiryTimeofMFA = New<INow>().Utc;
+            switch (rememberUntil)
+            {
+                case MFARememberIn.OneHour: return expiryTimeofMFA.AddHours(1);
+                case MFARememberIn.ThreeHours: return expiryTimeofMFA.AddHours(3);
+                case MFARememberIn.SixHours: return expiryTimeofMFA.AddHours(6);
+                case MFARememberIn.TwelveHours: return expiryTimeofMFA.AddHours(12);
+                case MFARememberIn.OneDay: return expiryTimeofMFA.AddDays(1);
+                default: throw new ArgumentOutOfRangeException(nameof(rememberUntil));
+            }
         }
     }
 }

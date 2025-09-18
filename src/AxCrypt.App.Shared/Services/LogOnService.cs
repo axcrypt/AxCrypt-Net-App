@@ -1,5 +1,4 @@
-﻿using System;
-using AxCrypt.Api.Model;
+﻿using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Utility;
@@ -14,12 +13,12 @@ using static AxCrypt.Abstractions.TypeResolve;
 namespace AxCrypt.App.Shared.Services
 {
     public class LogOnService : ISignIn
-	{
-        LogOnViewModel _logOnViewModel;
-        MainViewModel _mainViewModel;
-        RegisterViewModel _registerViewModel;
-        FileOperationViewModel _fileOperationViewModel;
-        ApiVersion _apiVersion;
+    {
+        private LogOnViewModel _logOnViewModel;
+        private MainViewModel _mainViewModel;
+        private RegisterViewModel _registerViewModel;
+        private FileOperationViewModel _fileOperationViewModel;
+        private ApiVersion _apiVersion;
 
         public bool IsSigningIn { get; set; }
 
@@ -185,6 +184,7 @@ namespace AxCrypt.App.Shared.Services
 
             e.Passphrase = new Passphrase(_logOnViewModel.LogOnAccountModel.PasswordText);
             e.UserEmail = _logOnViewModel.LogOnAccountModel.UserEmail;
+            e.UserDevice = _logOnViewModel.CurrentUserDevice;
             _logOnViewModel.PageResult = DialogResult.None;
 
             return;
@@ -223,6 +223,9 @@ namespace AxCrypt.App.Shared.Services
 
             e.OneTimePassword = _logOnViewModel.MultiFactorAuthViewModel.OneTimePassword;
             e.MFAType = _logOnViewModel.MultiFactorAuthViewModel.SelectedMFAType;
+            e.UserDevice = _logOnViewModel.MultiFactorAuthViewModel.UserDevice;
+            e.RememberUntil = _logOnViewModel.MultiFactorAuthViewModel.RememberUntil;
+            e.RememberMeOnMFA = _logOnViewModel.MultiFactorAuthViewModel.RememberMeOnMFA;
             _logOnViewModel.MultiFactorAuthViewModel.PageResult = DialogResult.None;
 
             return;
@@ -239,4 +242,3 @@ namespace AxCrypt.App.Shared.Services
         }
     }
 }
-

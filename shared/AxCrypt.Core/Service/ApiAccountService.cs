@@ -375,5 +375,15 @@ namespace AxCrypt.Core.Service
 
             return await _apiClient.PostSubscriptionByGooglePaymentAsync(googlePaymentTrans);
         }
+
+        public async Task<bool> UpdateRememberMeOnMFAInfoAsync(MultiFactorAuthApiModel multiFactorAuthApi)
+        {
+            if (string.IsNullOrEmpty(_apiClient.Identity.User))
+            {
+                throw new InvalidOperationException("The account service requires a user.");
+            }
+
+            return await _apiClient.UpdateRememberMeOnMFAInfoAsync(multiFactorAuthApi).Free();
+        }
     }
 }

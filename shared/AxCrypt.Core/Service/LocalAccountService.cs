@@ -395,5 +395,16 @@ namespace AxCrypt.Core.Service
         {
             throw new InvalidOperationException("Premium creation cannot be started locally.");
         }
+
+        public async Task<bool> UpdateRememberMeOnMFAInfoAsync(MultiFactorAuthApiModel multiFactorAuthApi)
+        {
+            UserAccount localAccount = await AccountAsync().Free();
+            localAccount.MultiFactorAuthInfo.RememberUntil = multiFactorAuthApi.RememberUntil;
+            localAccount.MultiFactorAuthInfo.UserDevice = multiFactorAuthApi.UserDevice;
+            localAccount.MultiFactorAuthInfo.UpdatedUtc = multiFactorAuthApi.UpdatedUtc;
+
+            await SaveAsync(localAccount);
+            return true;
+        }
     }
 }

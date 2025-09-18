@@ -175,5 +175,10 @@ namespace AxCrypt.Core.Service
         {
             return Task.FromResult(false);
         }
+
+        public Task<bool> UpdateRememberMeOnMFAInfoAsync(MultiFactorAuthApiModel multiFactorAuthApi)
+        {
+            return Task.FromResult(false);
+        }
     }
 }

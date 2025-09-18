@@ -2,6 +2,9 @@
 @using AxCrypt.Content
 @using AxCrypt.App.Shared.Utility
 @using AxCrypt.Api.Model
+@using AxCrypt.Core.UI
+@using Microsoft.Maui.Devices
+@using Microsoft.Maui.ApplicationModel
 
 @inject IJSRuntime JSRuntime
 @inject LogOnViewModel LogOnViewModel
@@ -14,7 +17,7 @@
 <section class="content">
     <article class="left-section" id="content-wrap" style="margin-top:10%;">
         <span class="tfa-sub-head">@Texts.VerifyMfaText</span>
-        <p style="margin-top: 16px;">@Texts.MfaText1 <a href="" @onclick="RedirectToMFAGuidePage" class="recry-code-btn"><span>@Texts.MFAText. </span></a>@Texts.MFAText2.</p>
+        <p style="margin-top: 16px;">@Texts.MfaText1 <a href="" @onclick="RedirectToMFAGuidePage" class="recry-code-btn"><span>@Texts.MFAText. </span></a>@Texts.MFAText2</p>
         <div>
             @if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.Authenticator && IsAuthenticatorEnabled)
             {
@@ -36,13 +39,13 @@
                     <input type="radio" checked @onclick="() => SelectMethod(MultiFactorAuthType.SMS)" />
                     <p class="two-fa-text">@Texts.SMSText</p>
                 </label>
-            }            
+            }
 
             @if (MoreThanOneEnabled && !ShowOtherOptions)
             {
                 <a href="#" @onclick="ShowOtherOptionsMenu" class="show-other-optn">
                     <span>@Texts.OtherMFAOptionsText</span>
-                    <img class="expd-colps-submnu-arw down" src="" alt="expnd-colps-arrow-img"  />
+                    <img class="expd-colps-submnu-arw down" src="" alt="expnd-colps-arrow-img" />
                 </a>
             }
 
@@ -71,8 +74,8 @@
                         </label>
                     }
                 </div>
-            } 
-            
+            }
+
             @if (ShowGenerateButton)
             {
                 <button type="button" @onclick="GenerateOTP" class="generate-btn success left">
@@ -85,9 +88,19 @@
             <DataAnnotationsValidator />
             <div class="verify-code-txt">
                 <input type="tel" inputmode="numeric" pattern="[0-9]*" id="verify-code-txtbox" class="form-control @(IsOtpInvalid ? "input-invalid" : "")"
-                placeholder="Verification code" maxlength="6" @ref="OtpInputRef" @bind="LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword"
-                @oninput="ValidateCode" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+                       placeholder="Verification code" maxlength="6" @ref="OtpInputRef" @bind="LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword"
+                       @oninput="ValidateCode" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
                 <ValidationMessage style="font-size: 13px;color: #f00;display: block;position: relative;font-weight: 700;" For="@(() => LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword)" />
+            </div>
+            <div class="remember-mfa">
+                <input type="checkbox" style="margin:0 !important" id="click-checkbox" @bind="LogOnViewModel.MultiFactorAuthViewModel.RememberMeOnMFA" />
+                <label class="remember-txt">@Texts.DontAskAgainText</label>
+                <select id="expireMFAOptions" class="remember-drpdwn" name="Visibility" title="Visibility" @bind="LogOnViewModel.MultiFactorAuthViewModel.MFARememberInOption">
+                    @foreach (KeyValuePair<string, string> item in LogOnViewModel.MultiFactorAuthViewModel.RememberMFAUntillList())
+                    {
+                        <option value="@item.Value">@item.Key</option>
+                    }
+                </select>
             </div>
 
             @if (!string.IsNullOrEmpty(LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage))
@@ -126,6 +139,7 @@
     private EditContext? editContext;
 
     public MultiFactorAuthType EnabledTypes { get; set; }
+
     private bool ShowOtherOptions { get; set; }
     private bool IsAuthenticatorEnabled => EnabledTypes.HasFlag(MultiFactorAuthType.Authenticator);
     private bool IsEmailEnabled => EnabledTypes.HasFlag(MultiFactorAuthType.Email);
@@ -200,12 +214,16 @@
             }
 
             LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword = value;
-            await HandleValidSubmit();
         }
     }
 
     private async Task HandleValidSubmit()
     {
+        if (LogOnViewModel.MultiFactorAuthViewModel.RememberMeOnMFA)
+        {
+            LogOnViewModel.MultiFactorAuthViewModel.UserDevice = AxCrypt.App.Shared.Desktop.Data.Utility.GetCurrentDevice();
+        }
+
         LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage = "";
         await LogOnViewModel.MultiFactorAuthViewModel.VerifyMFAOtpAsync(LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword!, LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType);
     }

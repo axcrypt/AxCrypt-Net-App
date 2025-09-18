@@ -27,14 +27,14 @@
 
 using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
-using AxCrypt.Core.Authenticator.Service;
 using AxCrypt.Common;
+using AxCrypt.Core.Authenticator.Service;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Core.Extensions;
 
 namespace AxCrypt.Core.UI.ViewModel
 {
@@ -171,17 +171,17 @@ namespace AxCrypt.Core.UI.ViewModel
             return LogOnIdentity.Empty;
         }
 
-        private async Task<LogOnIdentity> LogOnIdentityFromCredentialsAsync(EmailAddress emailAddress, Passphrase passphrase)
+        private async Task<LogOnIdentity> LogOnIdentityFromCredentialsAsync(EmailAddress emailAddress, Passphrase passphrase, string userDevice = "")
         {
             if (emailAddress != EmailAddress.Empty)
             {
-                return await LogOnIdentityFromUserAsync(emailAddress, passphrase);
+                return await LogOnIdentityFromUserAsync(emailAddress, passphrase, userDevice);
             }
 
             return LogOnIdentityFromPassphrase(passphrase);
         }
 
-        private async Task<LogOnIdentity> LogOnIdentityFromUserAsync(EmailAddress emailAddress, Passphrase passphrase)
+        private async Task<LogOnIdentity> LogOnIdentityFromUserAsync(EmailAddress emailAddress, Passphrase passphrase, string userDevice)
         {
             IAccountService accountService = New<LogOnIdentity, IAccountService>(new LogOnIdentity(emailAddress, passphrase));
             AccountStorage store = new AccountStorage(accountService);
@@ -191,7 +191,8 @@ namespace AxCrypt.Core.UI.ViewModel
             }
 
             UserAccount userAccount = await accountService.AccountAsync();
-            _knownIdentities.IsMFAEnabled = userAccount.IsMultiFactorEnabled;
+            MultiFactorAuthType mfaEnabledType = await UserMultiFactorAuthHandler.GetMultiFactorStatusAsync(emailAddress.Address, userDevice, async (user) => { return await Task.FromResult(userAccount.MultiFactorAuthInfo); });
+            _knownIdentities.IsMFAEnabled = mfaEnabledType != MultiFactorAuthType.None;
             if (_knownIdentities.IsMFAEnabled)
             {
                 _knownIdentities.MFAUniqueKey = userAccount.MultiFactorAuthInfo.UniqueKey;
@@ -254,7 +255,8 @@ namespace AxCrypt.Core.UI.ViewModel
             };
             await OnLoggingOnAsync(logOnArgs);
 
-            if (!_knownIdentities.IsLoggedOn) {
+            if (!_knownIdentities.IsLoggedOn)
+            {
                 LogOnIdentity logOnIdentity = await LogOnIdentityFromCredentialsAsync(EmailAddress.Parse(logOnArgs.UserEmail), logOnArgs.Passphrase);
                 if (logOnIdentity == LogOnIdentity.Empty)
                 {
@@ -317,7 +319,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
             _userSettings.DisplayEncryptPassphrase = logOnArgs.DisplayPassphrase;
 
-            LogOnIdentity logOnIdentity = await LogOnIdentityFromCredentialsAsync(EmailAddress.Parse(logOnArgs.UserEmail), logOnArgs.Passphrase);
+            LogOnIdentity logOnIdentity = await LogOnIdentityFromCredentialsAsync(EmailAddress.Parse(logOnArgs.UserEmail), logOnArgs.Passphrase, logOnArgs.UserDevice);
             if (logOnIdentity == LogOnIdentity.Empty)
             {
                 return LogOnIdentity.Empty;
@@ -343,6 +345,11 @@ namespace AxCrypt.Core.UI.ViewModel
             if (!IsMFAVerified)
             {
                 return LogOnIdentity.Empty;
+            }
+
+            if (logOnArgs.RememberMeOnMFA)
+            {
+                await New<IMultiFactorAuthService>().SaveDeviceAndExpiryInfo(logOnArgs);
             }
 
             logOnIdentity.SetActiveMFAUniqueKey(_knownIdentities.MFAUniqueKey);

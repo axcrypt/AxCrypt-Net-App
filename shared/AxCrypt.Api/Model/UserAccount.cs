@@ -2,10 +2,6 @@
 using AxCrypt.Api.Model.MFA;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AxCrypt.Api.Model
 {
@@ -137,9 +133,6 @@ namespace AxCrypt.Api.Model
 
         [JsonProperty("hadAnyPaidSubscription")]
         public bool HadAnyPaidSubscription { get; set; }
-
-        [JsonProperty("isMultiFactorEnabled")]
-        public bool IsMultiFactorEnabled { get; set; }
 
         [JsonProperty("multiFactorAuthInfo")]
         public MultiFactorAuthApiModel MultiFactorAuthInfo { get; set; }

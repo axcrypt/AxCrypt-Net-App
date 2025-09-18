@@ -168,5 +168,10 @@ namespace AxCrypt.Core.Service
         {
             return await New<ICache>().UpdateItemAsync(() => _service.CreateSubscriptionByGooglePaymentAsync(googlePaymenttrans), _key).Free();
         }
+
+        public async Task<bool> UpdateRememberMeOnMFAInfoAsync(MultiFactorAuthApiModel multiFactorAuthApi)
+        {
+            return await New<ICache>().UpdateItemAsync(() => _service.UpdateRememberMeOnMFAInfoAsync(multiFactorAuthApi), _key).Free();
+        }
     }
 }

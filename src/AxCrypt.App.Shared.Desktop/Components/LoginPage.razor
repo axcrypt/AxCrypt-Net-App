@@ -5,6 +5,8 @@
 @using AxCrypt.Content
 @using AxCrypt.Core
 @using AxCrypt.Core.UI.ViewModel
+@using Microsoft.Maui.ApplicationModel
+@using Microsoft.Maui.Devices
 
 @inject IJSRuntime JSRuntime
 @inject LogOnViewModel LogOnViewModel
@@ -168,6 +170,7 @@
 
     private async Task<bool> AdHocValidatePassphrase()
     {
+        LogOnViewModel.CurrentUserDevice = AxCrypt.App.Shared.Desktop.Data.Utility.GetCurrentDevice();
         LogOnViewModel.ErrorMessage = "";
         if (!await LogOnViewModel.LogOnAccountModel.ValidateItemAsync(nameof(LogOnViewModel.LogOnAccountModel.PasswordText)))
         {

@@ -27,8 +27,6 @@
 
 using AxCrypt.Api.Model;
 using AxCrypt.Core.Crypto;
-using System;
-using System.Linq;
 
 namespace AxCrypt.Core.UI.ViewModel
 {
@@ -41,6 +39,7 @@ namespace AxCrypt.Core.UI.ViewModel
             UserEmail = String.Empty;
             OneTimePassword = String.Empty;
             MFAType = MultiFactorAuthType.None;
+            UserDevice = String.Empty;
         }
 
         public bool Cancel { get; set; }
@@ -69,5 +68,11 @@ namespace AxCrypt.Core.UI.ViewModel
         public string EncryptedFileFullName { get; set; }
 
         public LogOnIdentity Identity { get; set; }
+
+        public bool RememberMeOnMFA { get; set; }
+
+        public string UserDevice { get; set; }
+
+        public DateTime RememberUntil { get; set; }
     }
 }

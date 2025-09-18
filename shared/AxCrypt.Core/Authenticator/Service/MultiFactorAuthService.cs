@@ -1,8 +1,11 @@
-﻿using AxCrypt.Api.Model;
+﻿using AxCrypt.Abstractions;
+using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.MFA;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
+using System.Text;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Authenticator.Service;
@@ -32,6 +35,29 @@ public class MultiFactorAuthService : IMultiFactorAuthService
 
             New<KnownIdentities>().DefaultEncryptionIdentity.SetMFAOnetimeCode(authOTPApiModel.Otp, authOTPApiModel.Expiration);
             return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+    public async Task<bool> SaveDeviceAndExpiryInfo(LogOnEventArgs eventArgs)
+    {
+        LogOnIdentity logOnIdentity = New<KnownIdentities>().DefaultEncryptionIdentity;
+        string deviceInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(eventArgs.UserDevice));
+        try
+        {
+            IAccountService accountService = New<LogOnIdentity, IAccountService>(logOnIdentity);
+            MultiFactorAuthApiModel multiFactorAuthApi = new MultiFactorAuthApiModel
+            {
+                UserEmail = logOnIdentity.UserEmail.Address,
+                UserDevice = deviceInfo,
+                RememberUntil = eventArgs.RememberUntil,
+                UpdatedUtc = New<INow>().Utc,
+            };
+
+            return await accountService.UpdateRememberMeOnMFAInfoAsync(multiFactorAuthApi);
         }
         catch (Exception ex)
         {

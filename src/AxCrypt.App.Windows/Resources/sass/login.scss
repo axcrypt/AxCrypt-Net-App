@@ -601,6 +601,31 @@ input[type="password"] {
     }
 }
 
+.remember-mfa {
+    display: flex;
+    margin-top: 8px;
+    font-weight: 600;
+
+    > .remember-txt {
+        padding: 19px 10px 0;
+        font-weight: 600;
+    }
+
+    > .remember-drpdwn {
+        width: 22%;
+        height: 30px !important;
+        line-height: normal;
+        font-size: 14px !important;
+        padding: 5px;
+        text-indent: 0px !important;
+        margin-top: 12px;
+
+        @media only screen and (max-width: 950px) {
+            width: 36%;
+        }
+    }
+}
+
 @media (min-width: 1500px) {
     .reg-tle {
         width: max-content;

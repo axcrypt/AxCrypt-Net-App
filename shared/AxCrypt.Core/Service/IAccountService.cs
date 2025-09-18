@@ -218,5 +218,7 @@ namespace AxCrypt.Core.Service
         ///  /// <c>true</c> if subscription created; otherwise, <c>false</c>.
         ///  </returns>
         Task<bool> CreateSubscriptionByGooglePaymentAsync(GooglePurchaseInfo googlePamentTrans);
+
+        Task<bool> UpdateRememberMeOnMFAInfoAsync(MultiFactorAuthApiModel multiFactorAuthApi);
     }
 }

@@ -25,5 +25,11 @@ namespace AxCrypt.Api.Model.MFA
 
         [JsonProperty("mfaenabledtypes")]
         public string MfaEnabledTypes { get; set; }
+
+        [JsonProperty("userdevice")]
+        public string UserDevice { get; set; }
+
+        [JsonProperty("rememberuntil")]
+        public DateTime? RememberUntil { get; set; }
     }
 }

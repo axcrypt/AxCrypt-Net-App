@@ -1,6 +1,7 @@
 using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.ViewModels.Notification;
 using Microsoft.JSInterop;
+using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Devices;
 using System;
 using System.Threading.Tasks;
@@ -129,5 +130,14 @@ public static class Utility
         }
 
         return dateTime.ToString("ddd hh:mm tt");
+    }
+
+    public static string GetCurrentDevice()
+    {
+        string os = $"{DeviceInfo.Platform} {DeviceInfo.VersionString}";
+        string appVersion = AppInfo.VersionString;
+        string deviceModel = $"{DeviceInfo.Manufacturer} {DeviceInfo.Model}";
+
+        return $"{os}|{appVersion}|{deviceModel}";
     }
 }

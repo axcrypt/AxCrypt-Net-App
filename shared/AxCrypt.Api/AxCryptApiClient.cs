@@ -495,6 +495,22 @@ namespace AxCrypt.Api
             return authOTPApiModel;
         }
 
+        public async Task<bool> UpdateRememberMeOnMFAInfoAsync(MultiFactorAuthApiModel multiFactorAuthApi)
+        {
+            if (multiFactorAuthApi == null)
+            {
+                throw new ArgumentNullException(nameof(multiFactorAuthApi));
+            }
+            Uri resource = BaseUrl.PathCombine($"users/mfauth/saveremember");
+            RestContent content = new RestContent(Serializer.Serialize(multiFactorAuthApi));
+
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("POST", resource, Timeout, content)).Free();
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            bool updated = Serializer.Deserialize<bool>(restResponse.Content);
+            return updated;
+        }
+
         private static IStringSerializer Serializer
         {
             get
