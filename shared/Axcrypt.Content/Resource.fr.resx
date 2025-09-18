@@ -277,6 +277,9 @@
   <data name="AcceptTermsOfServicesText" xml:space="preserve">
     <value>J'accepte la &lt;a href='{0}'&gt;Politique de confidentialité&lt;/a&gt; &amp; &lt;a href='{1}'&gt;Conditions d'utilisation&lt;/a&gt; d'AxCrypt.</value>
   </data>
+  <data name="AccessYourContactsPhoneText" xml:space="preserve">
+    <value>Autorisez-vous l’application d’AxCrypt &lt;strong&gt;access your contacts on phone?&lt;/strong&gt;</value>
+  </data>
   <data name="AccountLabel" xml:space="preserve">
     <value>Compte</value>
   </data>
@@ -316,6 +319,9 @@
   </data>
   <data name="ActionLabel" xml:space="preserve">
     <value>Action</value>
+  </data>
+  <data name="ActionsText" xml:space="preserve">
+    <value>Les actions</value>
   </data>
   <data name="ActivateErrorEmailOrCode" xml:space="preserve">
     <value>L'e-mail ou le code de vérification fourni est incorrect.</value>
@@ -412,14 +418,23 @@ Choisissez un mot de passe difficile à deviner. Il sera utiliser pour protéger
   <data name="ActiveSubscriptionPromptText" xml:space="preserve">
     <value>Votre abonnement est Actif. Il n'est pas nécessaire de Renouveler.</value>
   </data>
+  <data name="ActiveSubscriptionsText" xml:space="preserve">
+    <value>Abonnements actifs</value>
+  </data>
   <data name="ActiveSubscriptionText" xml:space="preserve">
     <value>Ce compte possède déjà un abonnement actif.</value>
   </data>
   <data name="ActivityText" xml:space="preserve">
     <value>activité</value>
   </data>
+  <data name="AddAndSecureYourFirstFileText" xml:space="preserve">
+    <value>Ajoutez et sécurisez votre premier fichier</value>
+  </data>
   <data name="AddCardTitle" xml:space="preserve">
     <value>Ajouter une Carte</value>
+  </data>
+  <data name="AddedUsersAccessText" xml:space="preserve">
+    <value>Ajoutez-vous d’utilisateurs avec accès </value>
   </data>
   <data name="AddEmailPromptText" xml:space="preserve">
     <value>Ajouter un e-mail</value>
@@ -427,6 +442,12 @@ Choisissez un mot de passe difficile à deviner. Il sera utiliser pour protéger
   <data name="AddFileLabel" xml:space="preserve">
     <value>Ouvrir un fichier AxCrypt</value>
     <comment>Tooltip for "AddFile" button in mobile application</comment>
+  </data>
+  <data name="AddFirstFolderText" xml:space="preserve">
+    <value>Ajoutez et sécurisez votre premier dossier.</value>
+  </data>
+  <data name="AddFirstPasswordText" xml:space="preserve">
+    <value>Ajoutez et sécurisez votre premier mot de passe.</value>
   </data>
   <data name="AdditionalUnsubscribedConfirmation" xml:space="preserve">
     <value>Nous pouvons malgré tout vous envoyer un email si cela est nécessaire au fonctionnement ou à la sécurité d'AxCrypt.</value>
@@ -477,6 +498,9 @@ Choisissez un mot de passe difficile à deviner. Il sera utiliser pour protéger
   </data>
   <data name="AdminLabel" xml:space="preserve">
     <value>Administrateur</value>
+  </data>
+  <data name="AdvancedSettingsText" xml:space="preserve">
+    <value>Paramétrages avancés</value>
   </data>
   <data name="AffiliateAdvantagesHeading" xml:space="preserve">
     <value>Avantages du Marketing d'Affiliation d'AxCrypt</value>
@@ -590,8 +614,17 @@ Choisissez un mot de passe difficile à deviner. Il sera utiliser pour protéger
     <value>Accès à un gestionnaire de compte dédié
 </value>
   </data>
+  <data name="AgreeOurText" xml:space="preserve">
+    <value>Vous acceptez à notre</value>
+  </data>
   <data name="AgreePasswordResetNotRegainAccess" xml:space="preserve">
     <value>J'accepte que cela ne me rendra pas l'accès à mes fichiers chiffrés</value>
+  </data>
+  <data name="AlertText" xml:space="preserve">
+    <value>Alerte !</value>
+  </data>
+  <data name="AllDoneText" xml:space="preserve">
+    <value>Tout est réglé ! </value>
   </data>
   <data name="AllLabel" xml:space="preserve">
     <value>Tous</value>
@@ -623,6 +656,9 @@ S'il vous plait, connectez-vous en utilisant le même mot de passe que vous avie
     <value>Quand activé, l'accès à Internet n'est jamais utilisé ou nécessaire, jusqu'à la désactivation.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
   </data>
+  <data name="AndText" xml:space="preserve">
+    <value>Et</value>
+  </data>
   <data name="AnnualMonthlySwitcherAnnualButtonLabel" xml:space="preserve">
     <value>20% de remise par an</value>
   </data>
@@ -643,6 +679,19 @@ S'il vous plait, connectez-vous en utilisant le même mot de passe que vous avie
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>Vérification de l'AxCrypt ID [ {0} ]</value>
+  </data>
+  <data name="AppConfigurationText" xml:space="preserve">
+    <value>Configuration d’application </value>
+  </data>
+  <data name="ApplicationConfigurationPathText" xml:space="preserve">
+    <value>Le chemin d’accès à l’application de configuration </value>
+  </data>
+  <data name="ApplicationConfigurationSettingsText" xml:space="preserve">
+    <value>Le Répertoire qui sauvegarde les paramètres  
+d ’AxCrypt, les préférences d’utilisateurs, &lt;br /&gt;and session data to preserve user-specific&lt;br /&gt; les configurations à travers les sessions et vous rassure fonctionnalité personnalisée.</value>
+  </data>
+  <data name="ApplicationConfigurationText" xml:space="preserve">
+    <value>Configuration d’application </value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>AxCrypt</value>
@@ -681,6 +730,9 @@ S'il vous plait, connectez-vous en utilisant le même mot de passe que vous avie
 
 La mise à jour de votre abonnement sera visible ici d'ici quelques minutes.</value>
   </data>
+  <data name="AppText" xml:space="preserve">
+    <value>L’application </value>
+  </data>
   <data name="AppVersionLabel" xml:space="preserve">
     <value>Version {0}</value>
     <comment>Text containing information about current application version.</comment>
@@ -709,6 +761,9 @@ La mise à jour de votre abonnement sera visible ici d'ici quelques minutes.</va
   </data>
   <data name="AuthenticationError" xml:space="preserve">
     <value>La page à laquelle vous souhaitez accéder requière une authentification. S'il vous plait, connectez-vous pour poursuivre.</value>
+  </data>
+  <data name="AuthenticatorAppText" xml:space="preserve">
+    <value>L’application d’authenticateur </value>
   </data>
   <data name="AutoAnonymousRenameMenuItemText" xml:space="preserve">
     <value>Renommer anonymement et automatiquement</value>
@@ -1128,6 +1183,12 @@ La mise à jour de votre abonnement sera visible ici d'ici quelques minutes.</va
     <value>Protection de Fichiers Pour Vous et Votre Equipe par Axcrypt AB
 
 Certaines parties de ce logiciel proviennent de http://www.bouncycastle.org/ .</value>
+  </data>
+  <data name="AxCryptAboutDescription1" xml:space="preserve">
+    <value>La sécurité de fichier pour vous et votre équipe par &lt;span class="font-medium"&gt;AxCrypt AB&lt;/span&gt;</value>
+  </data>
+  <data name="AxCryptAboutDescription2" xml:space="preserve">
+    <value>Intégré le logiciel de http://www.bouncycastle.org/.</value>
   </data>
   <data name="AxCryptAffiliateHeading" xml:space="preserve">
     <value>Devenez un &lt;span&gt;affilié&lt;/span&gt; d’AxCrypt !
@@ -4861,6 +4922,10 @@ Vous êtes prévenus, profitez-en bien !</value>
   <data name="Blog_EODAGDFWBES_H3_Text1" xml:space="preserve">
     <value>Semblable au processus Google Drive, AxCrypt crypte les fichiers OneDrive dans une séquence qui permet le cryptage du fichier avant que le fichier ne soit synchronisé sur le cloud.</value>
   </data>
+  <data name="Blog_EODAGDFWBES_H4_Text1" xml:space="preserve">
+    <value>Le cryptage de Google Drive et OneDrive est un  moyen intelligent de protéger vos données contre l’accès non autorisé, le vol ou la perte. Le cryptage ajoute une couche de sécurité 
+ supplémentaire à vos fichiers, en les rendant illisible à quiconque, si il n’a pas la clé correcte ou bien le mot de passe. Cela signifie que même si quelqu'un vous fasse pirater votre compte lié au stockage en cloud ou vole votre appareil, ils n’auront pas accès à vos données sensibles.</value>
+  </data>
   <data name="Blog_EODAGDFWBES_H4_Text2" xml:space="preserve">
     <value>Le chiffrement vous aide également à vous conformer aux lois et réglementations sur la confidentialité des données qui peuvent s'appliquer aux données professionnelles de votre organisation. Vous pouvez aussi profiter de la commodité et de la flexibilité du stockage sur le cloud sans compromettre la sécurité de vos données.</value>
   </data>
@@ -4893,6 +4958,12 @@ Vous êtes prévenus, profitez-en bien !</value>
   </data>
   <data name="Blog_EODAGDFWBES_Text1" xml:space="preserve">
     <value>Vous êtes-vous déjà demandé dans quelle mesure vos fichiers personnels sensibles et vos données professionnelles sont sécurisés sur les stockages cloud Google Drive et OneDrive ? Conserver des fichiers dans le cloud est un excellent moyen de stocker, d'accéder et de sauvegarder vos données, mais ce n'est pas toujours le moyen le plus privé et le plus sûr de le faire.</value>
+  </data>
+  <data name="Blog_EODAGDFWBES_Text2" xml:space="preserve">
+    <value>Selon à &lt;a href='https://support.google.com/drive/answer/10375054?hl=en.'&gt;&lt;b&gt;Google&lt;/b&gt;&lt;/a&gt;, il "traite" vos données stockées pour renforcer l’expérience d’utilisateur. Cela implique que Google maintient l'accès à vos fichiers et ait la capacité à y voir à sa discrétion. En ce qui concerne à vos données sensibles,vous ne pouvez pas prendre la risque. Il vous faut d’y prendre la commande, ce qui insiste le cryptage de Google Drive.</value>
+  </data>
+  <data name="Blog_EODAGDFWBES_Text3" xml:space="preserve">
+    <value>OneDrive possède également d’une fonctionnalité de coffre-fort personnel, lequel crypte les essentiels tel que des identités ou des registres financiers avec AES-256 pendant la pause ou au passage. Ce pendant, Microsoft gère les clés de cryptage, cela veut-dire que le dernier peut potentiellement avoir accès à vos fichiers si tenue légalement ou bien durant la rupture de sécurité. Les fichiers synchronisés sur Windows 10/11 utilisent BitLocker, mais on vous garantit pas la discrétion. De ce fait, le cryptage d’ OneDrive est robust mais cela ne vous rassure pas une confidentialité complète, et alors afin de télécharger vos données sensibles, cryptés-les.</value>
   </data>
   <data name="Blog_EODAGDFWBES_Tittle" xml:space="preserve">
     <value>Crypter les Fichiers OneDrive et Google Drive à l'Aide du Meilleur Logiciel de Cryptage au Monde</value>
@@ -11204,7 +11275,7 @@ Les deux secteurs suivants sont couverts par les obligations du NIS2.</value>
   <data name="Blog_WYONTABE_Conclusion_Text3" xml:space="preserve">
     <value>Vous avez besoin d’aide pour mettre à niveau ou créer votre compte professionnel? Contactez notre équipe de soutien ou &lt;a href='https://axcrypt.net/business/'&gt;&lt;b&gt;commencez votre essai dès aujourd’hui&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
-  <data name="Blog_WYONTABE_H1_Text1">
+  <data name="Blog_WYONTABE_H1_Text1" xml:space="preserve">
     <value>AxCrypt File Encryption a des versions Free et Premium qui sont des solutions multi-plateformes (disponibles sur Windows, macOS, Android et iOS) créées pour les utilisateurs individuels. Bien qu’ils offrent des outils de chiffrement essentiels, ils n’incluent pas &lt;a href= 'https://axcrypt.net/blog/top-ten-benefits-of-file-encryption-for-businesses-secure-business-files/&gt;&lt;b&gt;les fonctionnalités nécessaires pour les équipes&lt;/b&gt;&lt;/a&gt; ou les entreprises. Plus important :
 </value>
   </data>
@@ -11287,7 +11358,7 @@ Les deux secteurs suivants sont couverts par les obligations du NIS2.</value>
     <value>La gestion d’une entreprise est compétitive. Chaque décision, chaque pas en avant, apporte de nouvelles opportunités et de nouveaux risques. En l’absence de chiffrement, vos fichiers professionnels pourraient être exposés à des menaces à tout moment. C’est pourquoi le chiffrement professionnel n’est pas facultatif. Si vous travaillez en équipe, protéger vos données signifie protéger votre personnel et votre progrès.
 </value>
   </data>
-  <data name="Blog_WYONTABE_Text1">
+  <data name="Blog_WYONTABE_Text1" xml:space="preserve">
     <value>La gestion d’une entreprise est compétitive. Chaque décision, chaque pas en avant, apporte de nouvelles opportunités et de nouveaux risques. Sans chiffrement, vos fichiers professionnels pourraient être exposés à des menaces à tout moment. C’est pourquoi le &lt;a href= 'https://axcrypt.net/business/'&gt;&lt;b&gt;chiffrement des données commerciales&lt;/b&gt;&lt;/a&gt; n’est pas facultatif. Si vous travaillez avec une équipe, &lt;a href= 'https://axcrypt.net/blog/5-reasons-why-encryption-is-important-for-small-entreprises/'&gt;&lt;b&gt;protéger vos données&lt;/b&gt;&lt;/a&gt; signifie protéger votre personnel et votre progrès.
 </value>
   </data>
@@ -11571,6 +11642,9 @@ Les deux secteurs suivants sont couverts par les obligations du NIS2.</value>
   </data>
   <data name="BrandToneLabel" xml:space="preserve">
     <value>Ton de la marque</value>
+  </data>
+  <data name="BrowseText" xml:space="preserve">
+    <value>Naviguez </value>
   </data>
   <data name="BruteForceResistantLabel" xml:space="preserve">
     <value>Résistant à la force brute</value>
@@ -12429,6 +12503,9 @@ Vous devez effectuer ces étapes pour terminer le processus.</value>
   <data name="ClearAllText" xml:space="preserve">
     <value>Effacer toutes</value>
   </data>
+  <data name="ClearLogsText" xml:space="preserve">
+    <value>Éffacez les journaux </value>
+  </data>
   <data name="ClearRecentFilesToolStripMenuItemText" xml:space="preserve">
     <value>Effacer les fichiers récents</value>
   </data>
@@ -12441,8 +12518,14 @@ Vous devez effectuer ces étapes pour terminer le processus.</value>
   <data name="ClickToDownloadText" xml:space="preserve">
     <value>Cliquez ici pour télécharger.</value>
   </data>
+  <data name="ClickToShowText" xml:space="preserve">
+    <value>**click to show**</value>
+  </data>
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>Cliquez ici pour chiffrer des fichiers ouverts ou des nouveaux fichiers dans des dossiers sécurisés, assurez-vous auparavant qu'ils ne soient pas en cours d'utilisation.</value>
+  </data>
+  <data name="CloudServicesText" xml:space="preserve">
+    <value>Les services clouds</value>
   </data>
   <data name="ColorPaletteLabel" xml:space="preserve">
     <value>Palette de couleurs</value>
@@ -12574,6 +12657,9 @@ Si vous n'acceptez pas nos cookies de session temporaires, vous ne pouvez pas vo
   <data name="CreateGroupInfoTexts" xml:space="preserve">
     <value>Créer un groupe !</value>
   </data>
+  <data name="CreateGroupsText" xml:space="preserve">
+    <value>Créer les groupes </value>
+  </data>
   <data name="CreateGroupText" xml:space="preserve">
     <value>Créer un groupe</value>
   </data>
@@ -12588,6 +12674,9 @@ Si vous n'acceptez pas nos cookies de session temporaires, vous ne pouvez pas vo
   </data>
   <data name="CreatePasswordPrompt" xml:space="preserve">
     <value>Créez votre mot de passe</value>
+  </data>
+  <data name="CreatePasswordText" xml:space="preserve">
+    <value>Créez un mot de passe</value>
   </data>
   <data name="CreatePremiumSuccess" xml:space="preserve">
     <value>Félicitations et bienvenue sur AxCrypt Business !</value>
@@ -12621,6 +12710,9 @@ Si vous n'acceptez pas nos cookies de session temporaires, vous ne pouvez pas vo
   </data>
   <data name="CustomerReadHeading" xml:space="preserve">
     <value>Lire les &lt;label&gt;histoires de clients&lt;/label&gt; d’AxCrypt</value>
+  </data>
+  <data name="CustomersText" xml:space="preserve">
+    <value>Clients </value>
   </data>
   <data name="CustomerStoriesHead1" xml:space="preserve">
     <value>IPTWINS S.A.S. sécurise ses documents sensibles en toute simplicité</value>
@@ -12856,6 +12948,9 @@ Si vous n'acceptez pas nos cookies de session temporaires, vous ne pouvez pas vo
   <data name="DataIntegrityText" xml:space="preserve">
     <value>Les fichiers sécurisés ne peuvent pas être modifiés sans détection.</value>
   </data>
+  <data name="DateFromText" xml:space="preserve">
+    <value>La date à partir de</value>
+  </data>
   <data name="DaysLeftPluralWarningPattern" xml:space="preserve">
     <value>{0} jours</value>
   </data>
@@ -12953,6 +13048,9 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
   </data>
   <data name="DeleteSecretSuccess" xml:space="preserve">
     <value>Votre mot de passe a été supprimé.</value>
+  </data>
+  <data name="DeleteSecretText" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer ce secret.</value>
   </data>
   <data name="DeletionFailed" xml:space="preserve">
     <value>{0} suppression a échoué.</value>
@@ -13058,6 +13156,9 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
   </data>
   <data name="DifferentWayPayText" xml:space="preserve">
     <value>Différentes façons de payer?</value>
+  </data>
+  <data name="DirectSupportText" xml:space="preserve">
+    <value>On vous offre un support direct à</value>
   </data>
   <data name="DisableAccessText" xml:space="preserve">
     <value>Désactiver l'accès</value>
@@ -13176,6 +13277,9 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
   </data>
   <data name="DoneTitle" xml:space="preserve">
     <value>C'est terminé !</value>
+  </data>
+  <data name="DontaccountText" xml:space="preserve">
+    <value>Vous n’avez pas d’une compte ? </value>
   </data>
   <data name="DontLikeRecurringFlowText" xml:space="preserve">
     <value>N’aimez pas les abonnements récurrents</value>
@@ -13358,12 +13462,18 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
   <data name="EducationTitleText" xml:space="preserve">
     <value>&lt;span class='img1'&gt;Puissante sécurité des données&lt;/span&gt; &lt;span class='img2'&gt;pour votre établissement d'enseignement&lt;br/&gt;. &lt;/span&gt; &lt;span class='img3'&gt;Dossiers sécurisés des étudiants&lt;/span&gt;,&lt;br/&gt; &lt;span class='img4'&gt;documents de recherche&lt;/span&gt;, contenu académique &lt;br/&gt; et bien plus encore.&lt;span class='img6'&gt;&lt;/span&gt;</value>
   </data>
+  <data name="EmailAlreadyAddedText" xml:space="preserve">
+    <value>${0} est déjà ajouté.</value>
+  </data>
   <data name="EmailAlreadyExistTexts" xml:space="preserve">
     <value>Courriel déjà en place</value>
   </data>
   <data name="EmailAppLink" xml:space="preserve">
     <value>Aller à email</value>
     <comment>Text of link for opening mail application.</comment>
+  </data>
+  <data name="EmailAuthenticationText" xml:space="preserve">
+    <value>L’authentification de e-mail </value>
   </data>
   <data name="EmailErrorTemplateNotFound" xml:space="preserve">
     <value>Modèle introuvable.</value>
@@ -13570,6 +13680,9 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
   <data name="EnterGroupNamePlaceHolder" xml:space="preserve">
     <value>Nom du groupe</value>
   </data>
+  <data name="EnterOTPPlaceHolderText" xml:space="preserve">
+    <value>Entrez l’ OTP</value>
+  </data>
   <data name="EnterPassphraseForIdentityPrompt" xml:space="preserve">
     <value>Saisissez le mot de passe pour '{0}'</value>
   </data>
@@ -13620,6 +13733,9 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
     <value>Expire en</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
+  <data name="ExportedSuccessfullyText" xml:space="preserve">
+    <value>Exporté avec succès </value>
+  </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemText" xml:space="preserve">
     <value>Exporter Clef Secrète et Clef de Partage</value>
   </data>
@@ -13634,6 +13750,9 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
   </data>
   <data name="FailedPrivateImport" xml:space="preserve">
     <value>Echec de l'importation. Le fichier n'est probablement pas un AxCrypt ID valide.</value>
+  </data>
+  <data name="FailedToExportText" xml:space="preserve">
+    <value>Échouer à l’exportation!</value>
   </data>
   <data name="FaqAccessDenied" xml:space="preserve">
     <value>Pourquoi est-il marqué "Accès Refusé" et/ou les noms de mes fichiers sont écrits en vert ?</value>
@@ -14076,6 +14195,10 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
     <value>Commentaires de l'utilisateurs via l'application</value>
     <comment>The mail subject used when an email is sent to us as a result of user feedback via an app</comment>
   </data>
+  <data name="FeedbackText" xml:space="preserve">
+    <value>Veuillez nous faire savoir si vous rencontrez des&lt;span&gt;difficulties&lt;/span&gt; avec AxCrypt, 
+vous devez &lt;span&gt;questions, ideas or praises&lt;/span&gt;nous en partager.</value>
+  </data>
   <data name="FeedbackTextPrompt" xml:space="preserve">
     <value>Vos commentaires</value>
     <comment>Text displayed in feedback content textbox when it is empty</comment>
@@ -14095,6 +14218,9 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
   </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>Le fichier '{0}' n'existe pas.</value>
+  </data>
+  <data name="FileEncryptionEasyText" xml:space="preserve">
+    <value>Votre cryptage des fichiers en toute simplicité ! </value>
   </data>
   <data name="FileFilterDialogFilterPatternWin" xml:space="preserve">
     <value>{1} (*{0})|*{0}|{2} (*.*)|*.*</value>
@@ -14141,6 +14267,9 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
   <data name="FilePasswordDialogHeader" xml:space="preserve">
     <value>S'il vous plait, donnez le mot de passe d'origine pour ce fichier.</value>
     <comment>The header text for the file password dialog.</comment>
+  </data>
+  <data name="FilePasswordHereText" xml:space="preserve">
+    <value>Entrez le mot de passe de vos fichiers ici</value>
   </data>
   <data name="FilePropertiesDateModifiedToolStripMenuItem" xml:space="preserve">
     <value>Date Modifiée</value>
@@ -14258,6 +14387,9 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
   <data name="ForOrganisationsText" xml:space="preserve">
     <value>Pour ORGANISATION</value>
   </data>
+  <data name="ForSomeoneElseText" xml:space="preserve">
+    <value>Pour quel qu’un d’autre</value>
+  </data>
   <data name="ForumsLinkLabel" xml:space="preserve">
     <value>Forums</value>
   </data>
@@ -14288,6 +14420,9 @@ Veuillez consulter notre &lt;a href="{0}"&gt;assistance communautaire&lt;/a&gt;.
   </data>
   <data name="FreeTrialLabel" xml:space="preserve">
     <value>ESSAI GRATUIT</value>
+  </data>
+  <data name="FriendsEmailText" xml:space="preserve">
+    <value>Tapez l’adresse email de votre ami ici</value>
   </data>
   <data name="FromText" xml:space="preserve">
     <value>De:</value>
@@ -14687,6 +14822,18 @@ facilement avec des minimums de clics</value>
   <data name="GetStartedGuideUseText5" xml:space="preserve">
     <value>Bien adapté à l’usage personnel et business</value>
   </data>
+  <data name="GetStartedGuideWhatsNextText" xml:space="preserve">
+    <value>&lt;strong&gt;Encrypt &amp; Decrypt Files Easily&lt;/strong&gt; – Suivez notre &lt;a href='https://axcrypt.net/information/guides/encryption-decryption/'&gt;[Step-by-Step AxCrypt Guide]&lt;/a&gt;.</value>
+  </data>
+  <data name="GetStartedGuideWhatsNextText1" xml:space="preserve">
+    <value>&lt;strong&gt;Manage Teams &amp; Business Access&lt;/strong&gt; – Simplifiez la collaboration avec notre &lt;a href='https://axcrypt.net/information/axcrypt-business/'&gt;[Business Setup Guide]&lt;/a&gt;.</value>
+  </data>
+  <data name="GetStartedGuideWhatsNextText2" xml:space="preserve">
+    <value>&lt;strong&gt;Why Choose AxCrypt for Security&lt;/strong&gt; – Decouvrez les algorithms et des protections sur notre &lt;a href='https://axcrypt.net/information/security/'&gt;[Security Page]&lt;/a&gt;.</value>
+  </data>
+  <data name="GetStartedGuideWhatsNextText3" xml:space="preserve">
+    <value>&lt;strong&gt;Encryption Best Practices&lt;/strong&gt; – Explorez notre &lt;a href='https://axcrypt.net/blog/'&gt;[Blogs on easy-to-use 128-bit and 256-bit encryption]&lt;/a&gt;.</value>
+  </data>
   <data name="GetStartedHowToUseHeading" xml:space="preserve">
     <value>Comment l'utiliser</value>
   </data>
@@ -14864,6 +15011,12 @@ facilement avec des minimums de clics</value>
   <data name="GetSubscriptionLoginRequiredInfoText" xml:space="preserve">
     <value>Veuillez vous connecter pour accéder à votre abonnement ! Si vous n'avez pas encore de compte, vous devez d'abord vous &lt;a href="{0}Home/Register/"&gt;inscrire&lt;/a&gt;.</value>
   </data>
+  <data name="GoToGroupsText" xml:space="preserve">
+    <value>Aller aux groupes</value>
+  </data>
+  <data name="GoToMasterkeyText" xml:space="preserve">
+    <value>Aller à clé de passe-partout </value>
+  </data>
   <data name="GoToMyAxCryptPrompt" xml:space="preserve">
     <value>Aller vers Mon AxCrypt</value>
   </data>
@@ -14899,6 +15052,9 @@ facilement avec des minimums de clics</value>
   </data>
   <data name="GroupFeatureInfoText" xml:space="preserve">
     <value>Ajoutez des utilisateurs ou des groupes avec lesquels vous souhaitez partager ce secret. Si vous ne connaissez pas encore notre &lt;strong&gt;fonction de groupe&lt;/strong&gt;, apprenez-en davantage et créez votre première fonction en suivant le lien</value>
+  </data>
+  <data name="GroupFeatureText" xml:space="preserve">
+    <value>Fonctionnalité de groupe </value>
   </data>
   <data name="GroupFileSharingHeading" xml:space="preserve">
     <value>Partage de fichiers en groupe</value>
@@ -15127,6 +15283,15 @@ facilement avec des minimums de clics</value>
   </data>
   <data name="GroupGuidesTitle" xml:space="preserve">
     <value>&lt;label&gt;Maximiser&lt;/label&gt; la sécurité de l’entreprise et l’efficacité de l’équipe avec &lt;span&gt;AxCrypt&lt;/span&gt; &lt;strong&gt;Fonctionnalité de groupe&lt;/strong&gt; !</value>
+  </data>
+  <data name="GroupInfoText" xml:space="preserve">
+    <value>Ajoutez les utilisateurs ou des groupes avec lesquels vous souhaitez partager ce secret. Si vous n’est pas au courant de notre</value>
+  </data>
+  <data name="GroupInfoText1" xml:space="preserve">
+    <value>Créez votre premier par le lien</value>
+  </data>
+  <data name="GroupInfoText2" xml:space="preserve">
+    <value>Cependant, apprenez-en de plus et créez votre premier par le lien</value>
   </data>
   <data name="GroupManagementHeading" xml:space="preserve">
     <value>Gestion de groupe</value>
@@ -15560,8 +15725,14 @@ Si vous voulez visionner ou mettre à jour le contenu de ce document, veuillez l
   <data name="ImportPublicKeysFileSelectionTitle" xml:space="preserve">
     <value>Choisissez un Fichier de Clef de Partage</value>
   </data>
+  <data name="ImportSomeonesPublicSharingKeyText" xml:space="preserve">
+    <value>Importez la clé de partage publique de quelqu'un d’autre</value>
+  </data>
   <data name="ImproveOurServiceCommentText" xml:space="preserve">
     <value>Que nous recommanderiez-vous pour améliorer notre service ?</value>
+  </data>
+  <data name="InactivitySignoutToolTipText" xml:space="preserve">
+    <value>La déconnexion au cas où qu’il soit inactive, cela vous nécessite un plan d’abonnement payant!.</value>
   </data>
   <data name="InboxText" xml:space="preserve">
     <value>Boîte de réception</value>
@@ -15577,6 +15748,9 @@ Si vous voulez visionner ou mettre à jour le contenu de ce document, veuillez l
 
 Cela peut faire prendre très longtemps à certaines opérations pour se réaliser. Veuillez être prudent et ne pas choisir un dossier comprenant des sous-dossiers ne devant pas être cryptés.</value>
     <comment>A short text in a few sentences describing what the Include Subfolders option does.</comment>
+  </data>
+  <data name="IncludeSubfoldersToolTipText" xml:space="preserve">
+    <value>À inclure les sous dossiers on vous oblige un plan d’abonnement payant!.</value>
   </data>
   <data name="InconsistentState" xml:space="preserve">
     <value>Problème de cohérence avec {0}'{0}'.</value>
@@ -16127,6 +16301,12 @@ Connectez-vous à AxCrypt avec {2}, entrez le code de vérification à 6 chiffre
   <data name="Invite" xml:space="preserve">
     <value>Utilisateur à inviter</value>
   </data>
+  <data name="InviteFriendAxCryptText" xml:space="preserve">
+    <value>Invitez votre ami à AxCrypt </value>
+  </data>
+  <data name="InviteFriendText" xml:space="preserve">
+    <value>Invitez votre ami</value>
+  </data>
   <data name="InviteUserNotifyEventText" xml:space="preserve">
     <value>Vous avez été invité à utiliser AxCrypt !</value>
   </data>
@@ -16533,8 +16713,14 @@ Activer la conversion automatique des fichiers AxCrypt 1.x (recommandé)?</value
   <data name="LegalLinkLabel" xml:space="preserve">
     <value>Légalité</value>
   </data>
+  <data name="LetsExploreOurText" xml:space="preserve">
+    <value>Explorons notre</value>
+  </data>
   <data name="LetsGetStartedTitle" xml:space="preserve">
     <value>Commençons!</value>
+  </data>
+  <data name="LetsStartOurJourneyText" xml:space="preserve">
+    <value>C’est parti!</value>
   </data>
   <data name="LicenseBusinessNameText" xml:space="preserve">
     <value>Business</value>
@@ -16615,6 +16801,9 @@ Activer la conversion automatique des fichiers AxCrypt 1.x (recommandé)?</value
   </data>
   <data name="LoginPurchaseError" xml:space="preserve">
     <value>Echec du paiement. Veuillez réessayer.</value>
+  </data>
+  <data name="LogInText" xml:space="preserve">
+    <value>Se connecter </value>
   </data>
   <data name="LogoAndIconLabel" xml:space="preserve">
     <value>Logo et image</value>
@@ -18255,6 +18444,9 @@ Ce logiciel est livré d'après la licence.
   <data name="Meta-Title-Legal" xml:space="preserve">
     <value>AxCrypt for Legal Industry – Crypter les fichiers clients et les documents juridiques sensibles</value>
   </data>
+  <data name="Meta-Title-MultiFactor-Authentication" xml:space="preserve">
+    <value>AxCrypt l’authentification multi-factorelle </value>
+  </data>
   <data name="Meta-Title-Nis2" xml:space="preserve">
     <value>Conformité AxCrypt NIS2 – Sécurisation des données avec chiffrement AES-256</value>
   </data>
@@ -18327,6 +18519,82 @@ Ce logiciel est livré d'après la licence.
   <data name="MetadataRetentionText" xml:space="preserve">
     <value>Garde le nom original d'un fichier et les informations d'un fichier sécurisé</value>
   </data>
+  <data name="MFAAlreadyRecoveryCodesText" xml:space="preserve">
+    <value>Vous avez déjà utilisé tous les codes de récupération !.</value>
+  </data>
+  <data name="MFAAvoidLosingText" xml:space="preserve">
+    <value>Pour éviter la perte de l’accès et de générer des nouveaux codes, reconfigurez l’authentification à deux-facteurs avec une application d’authenticateur.</value>
+  </data>
+  <data name="MFABackupCodesTexts" xml:space="preserve">
+    <value>Vous pouvez désormais utiliser des codes de sauvegardes pour se connecter à votre compte au cas où vous n avez pas l’accès à l’application de authenticateur. &lt;strong&gt; Each code can only be used once.&lt;/strong&gt;
+</value>
+  </data>
+  <data name="MFABackupCodesTexts1" xml:space="preserve">
+    <value>&lt;strong&gt;Consider these codes like passwords&lt;/strong&gt; et les sauvegardez en sécurité à &lt;strong&gt;Password Manager&lt;/strong&gt;.</value>
+  </data>
+  <data name="MFADescriptionText" xml:space="preserve">
+    <value>L’authentification multi-factorelle est une mesure de sécurité renforcée. À son activation, la connexion à AxCrypt vous oblige l’identification à deux manières </value>
+  </data>
+  <data name="MFADescriptionText1" xml:space="preserve">
+    <value>Activez-vous la connexion sécurisée avec n’importe quelle application d’authenticateur, &lt;br /&gt;including &lt;strong&gt;Microsoft and Google Authenticator&lt;/strong&gt;.</value>
+  </data>
+  <data name="MFAEmailAuthentication" xml:space="preserve">
+    <value>Pour activer l’authentification d’email, il nous faut de vous envoyer un code vérification à votre e-mail.</value>
+  </data>
+  <data name="MFAInitialSetupText" xml:space="preserve">
+    <value>Pour activer l’authentification multi-factorelle, installez vous l’application d’authenticateur q’importe (par exemple, Microsoft, Google,  etc.)</value>
+  </data>
+  <data name="MFAInvalidUserError" xml:space="preserve">
+    <value>Échec à activer/désactiver authentification multi-factorelle à cause de mauvais mot de passe</value>
+  </data>
+  <data name="MFAMailSubject" xml:space="preserve">
+    <value>Votre AxCrypt pour une connexion sécurisée </value>
+  </data>
+  <data name="MFAMultifactorTypeText" xml:space="preserve">
+    <value>Chaque code ne peut être utilisé que une seule fois. Pour éviter la perte de l’accès ou de générer des nouveaux codes, reconfigurez l’authentification multi-factorelle avec n’importe  quelle type multi-factorelle ( l’application d’authenticateur,e-mail et SMS)</value>
+  </data>
+  <data name="MFANotEnabledText" xml:space="preserve">
+    <value>L’authenticateur multi-factorelle n’est pas activé pour cette compte. Cette page va vous  réorienter ver la page dans quelques secondes</value>
+  </data>
+  <data name="MFAOneTimeVerificationText" xml:space="preserve">
+    <value>Recevez  un code de vérification à l’usage unique envoyée à votre address e-mail &lt;br/&gt; enregistré </value>
+  </data>
+  <data name="MFAPasswordConfirmText" xml:space="preserve">
+    <value>Entrez votre mot de passe de compte d’AxCrypt  pour confirmer</value>
+  </data>
+  <data name="MFARecoveryCodeSignInText" xml:space="preserve">
+    <value>Vous avez utilisé l’un de codes de récupération pour vous connecter </value>
+  </data>
+  <data name="MfaRecoveryCodeText" xml:space="preserve">
+    <value>Utilisez-vous une</value>
+  </data>
+  <data name="MfaRecoveryCodeText1" xml:space="preserve">
+    <value>Code de récupération </value>
+  </data>
+  <data name="MfaRecoveryCodeText2" xml:space="preserve">
+    <value>Pour accèder à votre compte.</value>
+  </data>
+  <data name="MFAScanQRCodeText" xml:space="preserve">
+    <value>Scannez le code QR à partir de l’application de authenticateur </value>
+  </data>
+  <data name="MFAScanQRCodeText1" xml:space="preserve">
+    <value>Ou bien copiez le code ci-dessous et le collez dedans l’application d’authenticateur</value>
+  </data>
+  <data name="MFASuccessText" xml:space="preserve">
+    <value>Vous êtes tout prêt à utiliser</value>
+  </data>
+  <data name="MFASuccessText1" xml:space="preserve">
+    <value>L’authentification pour la connexion future</value>
+  </data>
+  <data name="MFAText" xml:space="preserve">
+    <value>MFA</value>
+  </data>
+  <data name="MfaText1" xml:space="preserve">
+    <value>Votre compte et protégé avec</value>
+  </data>
+  <data name="MFAText2" xml:space="preserve">
+    <value>Veuillez sélectionner votre méthode de authentification.</value>
+  </data>
   <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>Comment activer MFA dans L’AxCrypt?</value>
   </data>
@@ -18348,37 +18616,106 @@ Ce logiciel est livré d'après la licence.
   <data name="MFAuthenticationCaroselParagraph1" xml:space="preserve">
     <value>Se connecter à votre compte AxCrypt &lt;a href='https://account.axcrypt.net/en/'&gt;&lt;b&gt;account&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
-  <data name="MFAuthenticationCaroselParagraph10">
+  <data name="MFAuthenticationCaroselParagraph10" xml:space="preserve">
     <value>Vérifiez votre téléphone portable pour le  ́SMS’ reçu (ou) la boîte de réception pour 6-chiffres code de vérification par  ́Email’.</value>
   </data>
-  <data name="MFAuthenticationCaroselParagraph11">
+  <data name="MFAuthenticationCaroselParagraph11" xml:space="preserve">
     <value>Entrez la code pour vérifier et activer l’authentification multi-factorelle, basée sur le SMS/email.</value>
   </data>
-  <data name="MFAuthenticationCaroselParagraph2">
+  <data name="MFAuthenticationCaroselParagraph12" xml:space="preserve">
+    <value>Une fois que la méthode de vérification soit authentifiée avec un OTP, à la suite, une collection de codes va être affichées sur votre écran. Sécuriez-les et utilisez ces codes de sauvegarde pour se connecter à votre compte, au cas </value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph13" xml:space="preserve">
+    <value>Entrez votre e-mail et mot de passe d’AxCrypt sur votre page de se connecter.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph14" xml:space="preserve">
+    <value>Vérifiez si une code à l’usage unique a été envoyée par votre choix - l’application d’authenticateur, Email ou SMS. Si&lt;strong&gt;Authenticator App&lt;/strong&gt; est sélectionnée, obteniez la code à partir de l’application, ou bien vérifiez la code à l’usage unique envoyée à votre &lt;strong&gt;Email or SMS&lt;/strong&gt;, votre choix quiconque.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph15" xml:space="preserve">
+    <value>Entrez la code de vérification lorsque vous en est demandée.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph16" xml:space="preserve">
+    <value>Accédez à votre compte,de même aux fichiers en toute sécurité </value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph17" xml:space="preserve">
+    <value>Si l’ OTP pour authentification ne soit pas disponible, terminez le processus à se connecter en s’appuyant sur la code de récupération ou de sauvegarde.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph18" xml:space="preserve">
+    <value>Cliquez-vous sur la méthode d’authentification multi-factorelle précise, la quelle que vous aimeriez désactiver.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph19" xml:space="preserve">
+    <value>Confirmez votre décision en fournissant le mot de passe de votre compte, lorsque vous y serez demandé.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph2" xml:space="preserve">
     <value>Aller à &lt;strong&gt;Security &gt; Multi-Factor Authentication.&lt;/strong&gt;</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph20" xml:space="preserve">
+    <value>Une fois que toutes les méthodes de authentification soient désactivées, pendant la connexion, AxCrypt ne vous demande plus à la vérification One-Time. Toutefois, on vous recommande en gardant MFA actif pour avoir maximum de sécurité.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph21" xml:space="preserve">
+    <value>Chaque fois une nouvelle méthode de vérification est activée, une ensemble de codes de secours est générée. Pendant que utilisez-vous les codes de secours, vous recevrez une notification. Au cas où vous utiliserez toutes vos codes de secours, MFA sera-t-il désactivé pour votre compte et vous allez être obligé de le reconfiguré.</value>
   </data>
   <data name="MFAuthenticationCaroselParagraph3" xml:space="preserve">
     <value>Choisissez-vous votre méthode de vérification préférée (Application d’authentification’ email ou SMS).</value>
   </data>
-  <data name="MFAuthenticationCaroselParagraph4">
+  <data name="MFAuthenticationCaroselParagraph4" xml:space="preserve">
     <value>Entrez-vous votre mot de passe afin de confirmer et compléter le processus d’authentification.</value>
   </data>
-  <data name="MFAuthenticationCaroselParagraph5">
+  <data name="MFAuthenticationCaroselParagraph5" xml:space="preserve">
     <value>Pour activer l’authentification à deux facteurs, installez-vous n’importe quelle application d’authenicateur ( par exemple: Microsoft, Google, etc)</value>
   </data>
-  <data name="MFAuthenticationCaroselParagraph6">
+  <data name="MFAuthenticationCaroselParagraph6" xml:space="preserve">
     <value>À partir de l’application d’authenticateur, scannez la code QR, donnée à l’écran ou bien, copiez la code depuis la fenêtre et collez à l’application d’authenticateur.</value>
   </data>
-  <data name="MFAuthenticationCaroselParagraph7">
+  <data name="MFAuthenticationCaroselParagraph7" xml:space="preserve">
     <value>Appuyez sur continuer et puis, ajoutez l’OTP, provenant de l’application d’authenticateur.</value>
   </data>
-  <data name="MFAuthenticationCaroselParagraph8">
+  <data name="MFAuthenticationCaroselParagraph8" xml:space="preserve">
     <value>Entrez votre numéro de portable, au cas où vous avait sélectionné  ́SMS’, si non, confirmez ou entrez votre adresse email liée à votre compte d’AxCrypt, si votre choix soit  ́Email’.</value>
   </data>
-  <data name="MFAuthenticationCaroselParagraph9">
+  <data name="MFAuthenticationCaroselParagraph9" xml:space="preserve">
     <value>Cliquez&lt;strong&gt;Send Code.&lt;/strong&gt;</value>
   </data>
-  <data name="MFAuthenticationLinkLable">
+  <data name="MFAuthenticationFaq1" xml:space="preserve">
+    <value>Puis-je utiliser les plusieurs méthodes de MFA tout de suite ? </value>
+  </data>
+  <data name="MFAuthenticationFaq1Ans" xml:space="preserve">
+    <value>Oui, AxCrypt prend en charge l’activation de  toutes les méthodes primaire de MFA en même temps ( l’application d’authenticateur, email ou SMS). Toute de même, vous pouvez en sélectionner entre autre pendant la connexion.</value>
+  </data>
+  <data name="MFAuthenticationFaq2" xml:space="preserve">
+    <value>Que passe-t-il si je désinstalle mon application d’authenticateur ? </value>
+  </data>
+  <data name="MFAuthenticationFaq2Ans" xml:space="preserve">
+    <value>Si vous désinstallez votre l’application d’authenticateur ou bien paramettez votre téléphone,vous auriez besoin de &lt;strong&gt;backup code&lt;/strong&gt; ou une méthode de vérification secondaire (tels que email/ SMS si activée) pour se connecter. En dépit de ces éléments, la reprise vous nécessite  à contacter &lt;a href="mailto:support@axcrypt.net"&gt;&lt;b&gt;AxCrypt Support&lt;/b&gt;&lt;/a&gt; pour vérifier  votre identité.</value>
+  </data>
+  <data name="MFAuthenticationFaq3" xml:space="preserve">
+    <value>Puis-je utilise MFA tout en être hors ligne?</value>
+  </data>
+  <data name="MFAuthenticationFaq3Ans" xml:space="preserve">
+    <value>Oui, au cas où vous utiliserez une &lt;strong&gt;authenticator app&lt;/strong&gt;, cela marchera sans une connexion d’internet. Quand-même, &lt;strong&gt;SMS and email-based MFA&lt;/strong&gt; Vous nécessite d’avoir un réseau internet ou bien un réseau mobile pour recevoir la code de vérification.</value>
+  </data>
+  <data name="MFAuthenticationFaq4" xml:space="preserve">
+    <value>Puis-je accéder à mes fichiers si je me suis bloqué en raison des problèmes de MFA?</value>
+  </data>
+  <data name="MFAuthenticationFaq4Ans" xml:space="preserve">
+    <value>Vos fichiers restent cryptés et en sécurité. Toutefois, &lt;strong&gt;without account access&lt;/strong&gt;, vous ne pourrez plus décrypter ou gérer via AxCrypt. En raison de ça les sauvegarder &lt;strong&gt;backup codes&lt;/strong&gt; sont cruciales.</value>
+  </data>
+  <data name="MFAuthenticationFaq5" xml:space="preserve">
+    <value>Mes données de MFA sont-elles sécurisées?</value>
+  </data>
+  <data name="MFAuthenticationFaq5Ans" xml:space="preserve">
+    <value>Absolument, AxCrypt respecte à &lt;strong&gt;GDPR&lt;/strong&gt; et &lt;strong&gt;NIS2&lt;/strong&gt; compliance. Les données liées à MFA sont traitées en toute sécurité et sauvegarder au serveur d’AxCrypt au format crypté et seulement ses utilisateurs peuvent y décrypter.</value>
+  </data>
+  <data name="MFAuthenticationFaq6" xml:space="preserve">
+    <value>MFA, est-il disponible à tous les utilisateurs ? </value>
+  </data>
+  <data name="MFAuthenticationFaq6Ans" xml:space="preserve">
+    <value>Oui, MFA est disponible pour les utilisateurs &lt;strong&gt;Free, Premium, and Business&lt;/strong&gt; </value>
+  </data>
+  <data name="MFAuthenticationGuideNote" xml:space="preserve">
+    <value>Une fois que l’authentication multi-factorelle soit activée, AxCrypt vous demandera pour une code de vérification pendant la connexion, chaque fois, ainsi, une couche de sécurité est ajoutée pour votre compte.</value>
+  </data>
+  <data name="MFAuthenticationLinkLable" xml:space="preserve">
     <value>Authentification multi- factorielle (MFA)</value>
   </data>
   <data name="MFAuthenticationSec1Heading" xml:space="preserve">
@@ -18423,11 +18760,32 @@ Ce logiciel est livré d'après la licence.
   <data name="MFAuthenticationSec2Text3" xml:space="preserve">
     <value>Toutes les données concernants MFA sont traitées en concordance avec des normes GDPR et d’autres standards privées, ainsi, en vous rassurant que toutes les données d’utilisateurs restent sécurisées </value>
   </data>
+  <data name="MFAuthenticationSec3Heading" xml:space="preserve">
+    <value>Que passe-t-il si vous perdez l’accès à &lt;span&gt;All MFA Options&lt;/span&gt;?</value>
+  </data>
+  <data name="MFAuthenticationSec3Paragraph" xml:space="preserve">
+    <value>Au cas où vous perdez l’accès à votre méthode  de MFA et même ne possède plus les codes ou bien les options de sauvegardes (SMS ou vérification email), la reprise de votre compte devient considérablement difficile et la vérification de l’identité peut vous demander à la refaire manuellement ou contactez &lt;a href="mailto:support@axcrypt.net"&gt;&lt;b&gt;AxCrypt Support&lt;/b&gt;&lt;/a&gt; for more help.</value>
+  </data>
+  <data name="MFAuthenticationSec4Heading" xml:space="preserve">
+    <value>En quoi les codes de récupération ou de sauvegardes sont-ils utiles?</value>
+  </data>
+  <data name="MFAuthenticationSec4Paragraph1" xml:space="preserve">
+    <value>Après avoir activer MFA, téléchargez ou copiez  vos codes de sauvegardes. Les codes de récupération ou de sauvegardes sont une ensembles de codes fournis lors de la configuration d’ authentification à deux facteurs (2FA). Ces codes-ci agir en fonction de votre méthode primaire 2FA pour accèder à votre compte - telle que une application de authenticateur soit indisponible ( par exemple, une téléphone perdue, un SMS ou un email indisponible, une application desinstallée, etc.).</value>
+  </data>
+  <data name="MFAuthenticationSec4Paragraph2" xml:space="preserve">
+    <value>Si vous ne pouvez pas utiliser votre méthode de MFA habituelle pendant la connexion, vous serrez incité à y entrer votre code de récupération. Ceci dépasse votre besoin de la méthode d’authentication habituelle et même vous donne l’accès à votre compte en toute sécurité.&lt;br/&gt;&lt;br/&gt; Chaque code peut être utilisée seulement une fois et cela doit être gardée en sécurité.</value>
+  </data>
+  <data name="MFAVerificationCode" xml:space="preserve">
+    <value>Entrez-vous le code de vérification à 6 chiffres à partir de {0}</value>
+  </data>
   <data name="MissingFeaturesText" xml:space="preserve">
     <value>fonctionnalités manquantes</value>
   </data>
   <data name="MobileAppLabel" xml:space="preserve">
     <value>Application mobile</value>
+  </data>
+  <data name="MobileApplicationText" xml:space="preserve">
+    <value>Avez- vous notre &lt;bold class="text-style"&gt;Mobile Application ?&lt;/bold&gt;</value>
   </data>
   <data name="MobileAppText" xml:space="preserve">
     <value>Android 4.0.3 ou plus récent, iOS 8.0 ou plus récent</value>
@@ -18452,6 +18810,9 @@ Ce logiciel est livré d'après la licence.
   </data>
   <data name="MonthlySubscriptionTitle" xml:space="preserve">
     <value>Mensuel</value>
+  </data>
+  <data name="MoreActionsText" xml:space="preserve">
+    <value>Plus d’actions</value>
   </data>
   <data name="MoreButtonText" xml:space="preserve">
     <value>Plus...</value>
@@ -18492,8 +18853,14 @@ Ce logiciel est livré d'après la licence.
   <data name="NavigationPaneHome" xml:space="preserve">
     <value>Accueil</value>
   </data>
+  <data name="NeedAnyHelpText" xml:space="preserve">
+    <value>Abez-vous besoin de l’aide?</value>
+  </data>
   <data name="NeedProductForProjectText" xml:space="preserve">
     <value>Je l’utilisais temporairement pour un projet</value>
+  </data>
+  <data name="NewCardSavedText" xml:space="preserve">
+    <value>Votre saisie de nouvelle carte à été enregistrée.</value>
   </data>
   <data name="NewMessageText" xml:space="preserve">
     <value>nouveau message</value>
@@ -18501,11 +18868,17 @@ Ce logiciel est livré d'après la licence.
   <data name="NewPassphraseDialogTitle" xml:space="preserve">
     <value>Créer un nouveau mot de passe</value>
   </data>
+  <data name="NewPasswordUpdatedText" xml:space="preserve">
+    <value>Votre saisie de nouveau mot de passe est mise à jour!.</value>
+  </data>
   <data name="NewSecretSuccess" xml:space="preserve">
     <value>Votre nouvelle entrée de mot de passe a été enregistrée.</value>
   </data>
   <data name="NewTrialButton" xml:space="preserve">
     <value>Enregistrez, gérez et partagez-les en toute sécurité avec le gestionnaire de mots de passe d’AxCrypt.&lt;/span&gt; Vous pouvez également protéger les détails et notes de votre carte de crédit &lt;span&gt;. &lt;/span&gt; Essayez-le gratuitement pendant 30 jours.</value>
+  </data>
+  <data name="NewVersionAvailableText" xml:space="preserve">
+    <value>Une nouvelle version soit disponible ! </value>
   </data>
   <data name="NewVersionIsAvailableText" xml:space="preserve">
     <value>La version {0} est disponible !</value>
@@ -18658,6 +19031,12 @@ Ce logiciel est livré d'après la licence.
   <data name="NoLabel" xml:space="preserve">
     <value>Non</value>
   </data>
+  <data name="NoLogToClearText" xml:space="preserve">
+    <value>I'l n’y a pas de journal à éffacer</value>
+  </data>
+  <data name="NoLogToExportText" xml:space="preserve">
+    <value>Il n’y a pas de journal à exporter ! </value>
+  </data>
   <data name="NoMessagesFoundText" xml:space="preserve">
     <value>(Aucun message trouvé.)</value>
   </data>
@@ -18744,6 +19123,15 @@ Pour revenir à la page d'accueil, cliquez &lt;a href="{1}"&gt;ici&lt;/a&gt;</va
   <data name="OfflineNoPremiumWarning" xml:space="preserve">
     <value>Vous êtes hors ligne et nous ne pouvons donc pas vérifier votre abonnement Premium.  Veuillez vous connecter pour que nous puissions mettre à jour le statut de votre abonnement !</value>
   </data>
+  <data name="OfflineSignupText" xml:space="preserve">
+    <value>Vous êtes actuellement &lt;b class="font-extra-bold"&gt;offline&lt;/b&gt;. Quand-même, vous pouvez toujours &lt;span class="grn-clr font-extra-bold"&gt;&lt;b&gt;Sign up!&lt;/b&gt;&lt;/span&gt;</value>
+  </data>
+  <data name="OFFText" xml:space="preserve">
+    <value>Éteindre </value>
+  </data>
+  <data name="OhnoText" xml:space="preserve">
+    <value>Mais non!</value>
+  </data>
   <data name="OldVersionTooltip" xml:space="preserve">
     <value>Votre version n'est pas à jour. Cliquez ici pour rechercher une mise à jour.</value>
   </data>
@@ -18755,6 +19143,9 @@ Pour revenir à la page d'accueil, cliquez &lt;a href="{1}"&gt;ici&lt;/a&gt;</va
   </data>
   <data name="OnlyAdminOnActiveBusinessSubscriptionError" xml:space="preserve">
     <value>L'utilisateur n'a pas pu être supprimé parce qu'il est l'unique administrateur de l'abonnement Business. Veuillez annuler l'abonnement ou nommer un autre administrateur.</value>
+  </data>
+  <data name="ONText" xml:space="preserve">
+    <value>Allumer</value>
   </data>
   <data name="OpenEncryptedFileOpenDialogTitle" xml:space="preserve">
     <value>Choisissez un fichier protégé à ouvrir</value>
@@ -18821,6 +19212,9 @@ Pour revenir à la page d'accueil, cliquez &lt;a href="{1}"&gt;ici&lt;/a&gt;</va
   <data name="OtherDetailsText" xml:space="preserve">
     <value>Si vous avez choisi une autre raison, veuillez nous donner plus de détails</value>
   </data>
+  <data name="OtherMFAOptionsText" xml:space="preserve">
+    <value>Essayez-vous d’autres options de MFA</value>
+  </data>
   <data name="OtherPlatformsLabel" xml:space="preserve">
     <value>Autres plateformes</value>
   </data>
@@ -18846,6 +19240,9 @@ Pour revenir à la page d'accueil, cliquez &lt;a href="{1}"&gt;ici&lt;/a&gt;</va
   </data>
   <data name="OurVisionLabel" xml:space="preserve">
     <value>Notre vision</value>
+  </data>
+  <data name="OwnerEmailText" xml:space="preserve">
+    <value>Email du propriétaire:</value>
   </data>
   <data name="PAGE_LEGACY_TR1_TITLE_TEXT2" xml:space="preserve">
     <value>AxCrypt Legacy</value>
@@ -19087,6 +19484,9 @@ Pour revenir à la page d'accueil, cliquez &lt;a href="{1}"&gt;ici&lt;/a&gt;</va
   <data name="PassphraseVerificationMismatch" xml:space="preserve">
     <value>Les mots de passe ne correspondent pas</value>
   </data>
+  <data name="PasswordChangeText" xml:space="preserve">
+    <value>Changez le mot de passe</value>
+  </data>
   <data name="PasswordEasyText" xml:space="preserve">
     <value>Facile</value>
   </data>
@@ -19107,6 +19507,9 @@ Pour revenir à la page d'accueil, cliquez &lt;a href="{1}"&gt;ici&lt;/a&gt;</va
   </data>
   <data name="PasswordGeneratorSubHeading2" xml:space="preserve">
     <value>Enregistrez, gérez et partagez en toute sécurité avec un &lt;span class="italic-text"&gt;logiciel de cryptage primé et facile à utiliser !&lt;/span&gt; Vous pouvez également protéger &lt;strong&gt;les détails et les notes de votre carte de crédit. Essayez &lt;span&gt;l'abonnement à AxCrypt &lt;/span&gt; gratuits pendant 30 jours.&lt;/strong&gt;</value>
+  </data>
+  <data name="PasswordGeneratorText" xml:space="preserve">
+    <value>Avez-vous essayé notre &lt;bold class="text-style"&gt;Password Generator?&lt;/bold&gt;</value>
   </data>
   <data name="PasswordGeneratorText1" xml:space="preserve">
     <value>Il est difficile de créer de bons mots de passe. Sur Internet, on trouve beaucoup de conseils et d'astuces sur comment le faire manuellement, et il existe aussi des générateurs automatiques de mots de passe. Certains sont bons, d'autres moins.</value>
@@ -19596,6 +19999,9 @@ Les espaces et les associations présentes dans les mots de passe les plus commu
   </data>
   <data name="PremiumTrialInstructionsLinkText" xml:space="preserve">
     <value>Cliquez &lt;a href="https://www.axcrypt.net/pricing/" target="_blank"&gt;ici&lt;/a&gt; pour plus d'informations sur les abonnements.</value>
+  </data>
+  <data name="PreparingAxCryptText" xml:space="preserve">
+    <value>La préparation d’AxCrypt...</value>
   </data>
   <data name="PressAndHoldLabel" xml:space="preserve">
     <value>Cliquez et maintenez pour voir plus</value>
@@ -20508,6 +20914,9 @@ Les entreprises et associations doivent créer un &lt;a href="https://account.ax
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>Fichiers récents</value>
   </data>
+  <data name="RecentFoldersText" xml:space="preserve">
+    <value>Dossiers récents </value>
+  </data>
   <data name="RecentLabel" xml:space="preserve">
     <value>Récent</value>
   </data>
@@ -21134,9 +21543,6 @@ Sujet : Rapport instantané AxCrypt</value>
     <value>Démos de produits gratuits et guides techniques
 </value>
   </data>
-  <data name="ResellerSubscriptionExpiredWarning" xml:space="preserve">
-    <value>!!Votre abonnement a expiré depuis {0}. Veuillez contacter le &lt;a href="mailto:reseller@axcrypt.net"&gt;support&lt;/a&gt; pour le renouveler.</value>
-  </data>
   <data name="ResellingLabel" xml:space="preserve">
     <value>Revente</value>
   </data>
@@ -21176,6 +21582,9 @@ Sujet : Rapport instantané AxCrypt</value>
   <data name="RestoreMasterKeyText" xml:space="preserve">
     <value>Restaurer la clé maîtresse</value>
   </data>
+  <data name="RestoreToOriginalToolTipText" xml:space="preserve">
+    <value>Restaurer à l’original vous oblige un plan d’abonnement payant!.</value>
+  </data>
   <data name="RetryPaymentText" xml:space="preserve">
     <value>Réessayez votre paiement</value>
   </data>
@@ -21208,11 +21617,8 @@ Sujet : Rapport instantané AxCrypt</value>
   <data name="SearchText" xml:space="preserve">
     <value>Recherche</value>
   </data>
-  <data name="SecAnotherEmailText" xml:space="preserve">
-    <value>!!un autre courriel</value>
-  </data>
-  <data name="SecAxcryptApplicationText" xml:space="preserve">
-    <value>!!Application AxCrypt</value>
+  <data name="SecretDeletedText" xml:space="preserve">
+    <value>Votre secret à été supprimé !</value>
   </data>
   <data name="SecretsAllItems" xml:space="preserve">
     <value>Tous les articles</value>
@@ -21240,18 +21646,6 @@ Sujet : Rapport instantané AxCrypt</value>
   </data>
   <data name="SecretsWarningIsSoonExpired" xml:space="preserve">
     <value>Votre abonnement Premium expire bientôt, on {0}. Par la suite, vous aurez à prolonger votre abonnement Premium pour pouvoir modifier ou créer de nouvelles entrées de mot de passe. Vous conservez l'accès en lecture seule indéfiniment.</value>
-  </data>
-  <data name="SecSmsRecoveryText" xml:space="preserve">
-    <value>!!récupération de SMS</value>
-  </data>
-  <data name="SecTwoFacAuthenConText1" xml:space="preserve">
-    <value>!!Utilisez l’application mobile AxCrypt pour générer une notification push sur votre appareil</value>
-  </data>
-  <data name="SecTwoFacAuthenConText2" xml:space="preserve">
-    <value>!!Utilisez votre autre adresse e-mail pour recevoir le lien de vérification</value>
-  </data>
-  <data name="SecTwoFacAuthenConText3" xml:space="preserve">
-    <value>!!Utilisez votre téléphone mobile pour recevoir le code de sécurité</value>
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>Effaçage sécurisé AxCrypt</value>
@@ -21766,6 +22160,9 @@ Il peut être nécessaire de renseigner '{0}' directement sur la protection de f
   <data name="ShareKeysToolStripMenuItemText" xml:space="preserve">
     <value>Partager clefs</value>
   </data>
+  <data name="ShareNotEncryptedText" xml:space="preserve">
+    <value>Il semble que le fichier vous aimeriez partager ne soit pas &lt;strong&gt;encrypted.....&lt;/strong&gt;</value>
+  </data>
   <data name="ShareSecretFailed" xml:space="preserve">
     <value>Le partage du mot de passe a échoué !</value>
   </data>
@@ -21848,6 +22245,9 @@ Il peut être nécessaire de renseigner '{0}' directement sur la protection de f
   <data name="SixMonthsPromtText" xml:space="preserve">
     <value>Six mois</value>
   </data>
+  <data name="SMSText" xml:space="preserve">
+    <value>SMS</value>
+  </data>
   <data name="SocialMediaFollowText" xml:space="preserve">
     <value>Suivez-nous sur les réseaux sociaux</value>
     <comment>Text telling readers to follow us on social media, typically with a number of icons below.</comment>
@@ -21864,6 +22264,9 @@ Il peut être nécessaire de renseigner '{0}' directement sur la protection de f
     <value>Mettre à jour maintenant !</value>
     <comment>A short label prompting the user to update AxCrypt now!</comment>
   </data>
+  <data name="SorryText" xml:space="preserve">
+    <value>Pardon,</value>
+  </data>
   <data name="SpanishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Español (Espagnol)</value>
     <comment>Do Not Translate</comment>
@@ -21877,6 +22280,15 @@ Pour aller à la page d'accueil, cliquer &lt;a href="{1}"&gt;ici&lt;/a&gt;.</val
   <data name="SslRequiredTitle" xml:space="preserve">
     <value>Connexion sécurisée requise</value>
     <comment>The page title for the "A Secure Connection is required" page.</comment>
+  </data>
+  <data name="StandardEncryptionWarning" xml:space="preserve">
+    <value>Votre plan de visionnaire actuelle vous permet seulement aux visualisation et décryptage </value>
+  </data>
+  <data name="StandardEncryptionWarningText1" xml:space="preserve">
+    <value>Mise à niveau pour débloquer le cryptage avancé et d’autres options en plus</value>
+  </data>
+  <data name="StandardEncryptionWarningText2" xml:space="preserve">
+    <value>Votre plan élémentaire s’appuie au cryptage AES-128</value>
   </data>
   <data name="StandardsBasedLabel" xml:space="preserve">
     <value>Cryptographie basée sur les standards</value>
@@ -21951,6 +22363,9 @@ Pour aller à la page d'accueil, cliquer &lt;a href="{1}"&gt;ici&lt;/a&gt;.</val
   <data name="StrongEncryptionTitle" xml:space="preserve">
     <value>AxCrypt Mobile</value>
     <comment>Title of "Strong encryption" slide on Onboarding screen in mobile application.</comment>
+  </data>
+  <data name="StrongerProtectionText" xml:space="preserve">
+    <value>Mettez à niveau pour une protection renforcée ! </value>
   </data>
   <data name="StrongPasswordLabel" xml:space="preserve">
     <value>Mot de passe fort</value>
@@ -22048,6 +22463,9 @@ Pour aller à la page d'accueil, cliquer &lt;a href="{1}"&gt;ici&lt;/a&gt;.</val
   </data>
   <data name="SubmitLabel" xml:space="preserve">
     <value>Soumettre</value>
+  </data>
+  <data name="SubmitNowText" xml:space="preserve">
+    <value>Soumettre maintenant </value>
   </data>
   <data name="SubscribeForFreeForFullFunctionalityText" xml:space="preserve">
     <value>Essayez l'abonnement gratuit pour toutes les fonctionnalités !</value>
@@ -22150,6 +22568,9 @@ Pour aller à la page d'accueil, cliquer &lt;a href="{1}"&gt;ici&lt;/a&gt;.</val
   <data name="SubscriptionValidUntilText" xml:space="preserve">
     <value>Abonnement valable jusqu'au</value>
   </data>
+  <data name="SuccessText" xml:space="preserve">
+    <value>Réussi </value>
+  </data>
   <data name="SummaryTitle" xml:space="preserve">
     <value>Récapitulatif</value>
   </data>
@@ -22190,10 +22611,6 @@ Pour aller à la page d'accueil, cliquer &lt;a href="{1}"&gt;ici&lt;/a&gt;.</val
   <data name="SupportWarningOnlyPremium" xml:space="preserve">
     <value>Désolé, le support direct n'est utilisable que par les utilisateurs qui payent, s'il vous plaît visitez notre &lt;a href="{0}"&gt;support de communauté&lt;/a&gt;</value>
   </data>
-  <data name="SupWarningFreeUserText" xml:space="preserve">
-    <value>!!Nous offrons un soutien direct aux clients Premium et Business
-Veuillez consulter notre &lt;a href="{0}"&gt;support communautaire&lt;/a&gt;.</value>
-  </data>
   <data name="SurnameLabel " xml:space="preserve">
     <value>Prénom:</value>
   </data>
@@ -22202,6 +22619,9 @@ Veuillez consulter notre &lt;a href="{0}"&gt;support communautaire&lt;/a&gt;.</v
   </data>
   <data name="SwitchUserButtonText" xml:space="preserve">
     <value>Changer d'utilisateur</value>
+  </data>
+  <data name="SyncContactsText" xml:space="preserve">
+    <value>Synchronisez vos contacts!</value>
   </data>
   <data name="SyntheticWordsSuccessActivate" xml:space="preserve">
     <value>La culture a été activée avec succès.</value>
@@ -22284,6 +22704,15 @@ Veuillez consulter notre &lt;a href="{0}"&gt;support communautaire&lt;/a&gt;.</v
   </data>
   <data name="TelLabel" xml:space="preserve">
     <value>Tel</value>
+  </data>
+  <data name="TellUsWhatYouThinkText" xml:space="preserve">
+    <value>Dites-nous ce que vous en pensez </value>
+  </data>
+  <data name="TemporarilyStoresText" xml:space="preserve">
+    <value>Ce chemin d’accès sauvegarde temporairement des fichiers cryptés à la version décryptée lors de l’overture par l’utilisateur.&lt;br /&gt;Files are automatically re-encrypted or safely removed after being closed&lt;br /&gt; pour maintenir ses sécurité et d’éviter la divulgation des données sensibles.</value>
+  </data>
+  <data name="TemporaryFilePathText" xml:space="preserve">
+    <value>Le chemin d’accès aux fichiers temporaires </value>
   </data>
   <data name="TermsAndConditionsLink" xml:space="preserve">
     <value>En vous inscrivant à AxCrypt vous acceptez vos &lt;a&gt;Terms &amp;amp; Conditions &lt;/a&gt;</value>
@@ -22543,6 +22972,12 @@ Veuillez consulter notre &lt;a href="{0}"&gt;support communautaire&lt;/a&gt;.</v
   <data name="TextPreferenceUpdate" xml:space="preserve">
     <value>Mise à jour - Soyez informé de toutes les mises à jour AxCrypt</value>
   </data>
+  <data name="TfaCodeGeneratedText" xml:space="preserve">
+    <value>Pour compléter la connexion, entrez les codes aux 6 chiffres générées par votre l’application d’authenticateur.</value>
+  </data>
+  <data name="TfaPhoneText" xml:space="preserve">
+    <value>Vous n’avez pas votre téléphone portable ? </value>
+  </data>
   <data name="ThanksChoosingAxCryptBusinessTitle" xml:space="preserve">
     <value>Merci d'avoir choisi AxCrypt Business</value>
   </data>
@@ -22577,6 +23012,9 @@ Veuillez consulter notre &lt;a href="{0}"&gt;support communautaire&lt;/a&gt;.</v
   </data>
   <data name="ToText" xml:space="preserve">
     <value>À :</value>
+  </data>
+  <data name="ToText1" xml:space="preserve">
+    <value>À</value>
   </data>
   <data name="TransactionHistoryTitle" xml:space="preserve">
     <value>Historique des transactions</value>
@@ -22751,8 +23189,20 @@ L'équipe AxCrypt</value>
   <data name="TwoMinutesLabel" xml:space="preserve">
     <value>2 Minutes</value>
   </data>
+  <data name="TypeText" xml:space="preserve">
+    <value>Tapez:</value>
+  </data>
+  <data name="TypeYourEmailPlaceHolderText" xml:space="preserve">
+    <value>Tapez votre e-mail </value>
+  </data>
   <data name="TypeYourMessageHerePlaceHolderText" xml:space="preserve">
     <value>Saisissez votre message ici</value>
+  </data>
+  <data name="TypeYourPasswordPlaceHolderText" xml:space="preserve">
+    <value>Tapez votre mot de passe</value>
+  </data>
+  <data name="TypeYourPasswordText" xml:space="preserve">
+    <value>Tapez votre mot de passe une autre fois</value>
   </data>
   <data name="TypographyLabel" xml:space="preserve">
     <value>Typographie</value>
@@ -22815,17 +23265,26 @@ L'équipe AxCrypt</value>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} mis à jour avec succès.</value>
   </data>
+  <data name="UpdateText" xml:space="preserve">
+    <value>Mise à jour</value>
+  </data>
   <data name="UpdateUserRolesHeading" xml:space="preserve">
     <value>Mettre à jour les rôles des utilisateurs</value>
   </data>
   <data name="UpdatingStatus" xml:space="preserve">
     <value>Mise à jour de l'Etat du fichier</value>
   </data>
+  <data name="UpgradeFeatureText" xml:space="preserve">
+    <value>Mettez-vous à niveau pour accéder à cette &lt;strong&gt;feature!&lt;/strong&gt;</value>
+  </data>
   <data name="UpgradeLegacyFilesMenuItemText" xml:space="preserve">
     <value>Mettre à jour les fichiers AES-256.</value>
   </data>
   <data name="UpgradeLegacyFilesMenuToolTip" xml:space="preserve">
     <value>Choisissez un dossier rempli de documents AES-128 et mettez-le à jour.</value>
+  </data>
+  <data name="UpgradeNowText" xml:space="preserve">
+    <value>Mettez à jour maintenant</value>
   </data>
   <data name="UpgradePromptText" xml:space="preserve">
     <value>Obtenez Premium!</value>
@@ -22840,8 +23299,14 @@ L'équipe AxCrypt</value>
   <data name="UpgradeText" xml:space="preserve">
     <value>mise à niveau</value>
   </data>
+  <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
+    <value>&lt;strong&gt;Upgrade to unlock full encryption features!&lt;/strong&gt;</value>
+  </data>
   <data name="UpsellBusinessForNotStandardPremiumUsersText" xml:space="preserve">
     <value>Il semble que vous veniez d'une entreprise. Envisagez d'utiliser notre niveau entreprise pour obtenir des fonctionnalités telles que la clé maîtresse, l'administration commerciale, etc.</value>
+  </data>
+  <data name="UpToDateText" xml:space="preserve">
+    <value>Vous êtes au courant!</value>
   </data>
   <data name="UsageOtherText" xml:space="preserve">
     <value>autre</value>
@@ -22993,6 +23458,12 @@ L'équipe AxCrypt</value>
   <data name="usingText" xml:space="preserve">
     <value>en utilisant</value>
   </data>
+  <data name="ValidEmailAddressText" xml:space="preserve">
+    <value>Veuillez fournir une adresse email valable!</value>
+  </data>
+  <data name="ValidUntilText" xml:space="preserve">
+    <value>Valable jusqu’au</value>
+  </data>
   <data name="VerificationEmailSentTitle" xml:space="preserve">
     <value>Lien de vérification envoyé</value>
     <comment>The title of the page stating that a verification email has been sent.</comment>
@@ -23011,6 +23482,9 @@ Pour terminer votre connexion à AxCrypt, entrez le mot de passe unique (OTP) da
   </data>
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>Vérifier et valider le document</value>
+  </data>
+  <data name="VerifyMfaText" xml:space="preserve">
+    <value>La vérification multi-factorelle </value>
   </data>
   <data name="VerifyPasswordPrompt" xml:space="preserve">
     <value>Vérifier Mot de Passe</value>
@@ -23032,6 +23506,9 @@ Pour terminer votre connexion à AxCrypt, entrez le mot de passe unique (OTP) da
   </data>
   <data name="VisibleUntilText" xml:space="preserve">
     <value>Visible jusqu’à :</value>
+  </data>
+  <data name="VisitOur" xml:space="preserve">
+    <value>Veuillez visiter notre</value>
   </data>
   <data name="WarningTitle" xml:space="preserve">
     <value>Attention!</value>
@@ -23066,6 +23543,9 @@ Pour terminer votre connexion à AxCrypt, entrez le mot de passe unique (OTP) da
   </data>
   <data name="WelcomeMailSubject" xml:space="preserve">
     <value>Bienvenue sur AxCrypt!</value>
+  </data>
+  <data name="WelcomeText" xml:space="preserve">
+    <value>Bienvenue au &lt;span class="grn-clr"&gt;AxCrypt&lt;/span&gt; monde !</value>
   </data>
   <data name="WelcomeToAxCrypt" xml:space="preserve">
     <value>Bienvenue à AxCrypt!
@@ -23430,6 +23910,15 @@ sans invite. Par défaut, l'interface utilisateur et les invites sont supprimée
   </data>
   <data name="YesLabel" xml:space="preserve">
     <value>Oui</value>
+  </data>
+  <data name="YetText" xml:space="preserve">
+    <value>Néanmoins,</value>
+  </data>
+  <data name="YourEmailText" xml:space="preserve">
+    <value>Votre e-mail </value>
+  </data>
+  <data name="YourPasswordText" xml:space="preserve">
+    <value>Votre mot de passe:</value>
   </data>
   <data name="YourSecurityMattersHeading" xml:space="preserve">
     <value>Votre &lt;span&gt;sécurité&lt;/span&gt; compte</value>
