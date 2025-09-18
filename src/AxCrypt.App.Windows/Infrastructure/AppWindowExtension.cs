@@ -4,7 +4,9 @@ using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.Common;
 using AxCrypt.Core;
+using AxCrypt.Core.Extensions;
 using Microsoft.UI.Windowing;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -141,18 +143,32 @@ namespace AxCrypt.App.Windows.Infrastructure
 
         private static void RestoreWindowWithFocus()
         {
-            Task.Run(() =>
+            Task.Run(async () =>
             {
-                if (_appWindow == null)
+                try
                 {
-                    throw new ArgumentNullException(nameof(_appWindow));
-                }
+                    if (_appWindow == null)
+                    {
+                        throw new ArgumentNullException(nameof(_appWindow));
+                    }
 
-                Resolve.UserSettings.RestoreFullWindow = true;
-                _appWindow.Show(true);
-                _appWindow.SetPresenter(AppWindowPresenterKind.Default);
-                Microsoft.UI.Windowing.OverlappedPresenter overlappedPresenter = ((Microsoft.UI.Windowing.OverlappedPresenter)_appWindow.Presenter);
-                overlappedPresenter.Restore(true);
+                    Resolve.UserSettings.RestoreFullWindow = true;
+                    _appWindow.SetPresenter(AppWindowPresenterKind.Default);
+                    if (_appWindow.Presenter is Microsoft.UI.Windowing.OverlappedPresenter overlapped)
+                    {
+                        if (overlapped.State == OverlappedPresenterState.Maximized)
+                        {
+                            overlapped.Maximize();
+                            return;
+                        }
+                        overlapped.Restore();
+                    }
+                    _appWindow.Show(true);
+                }
+                catch (ApiException aex)
+                {
+                     await aex.HandleApiExceptionAsync();
+                }
             });
         }
     }
