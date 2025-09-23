@@ -26,6 +26,8 @@ namespace AxCrypt.App.Shared.ViewModels
 
         public async Task SetFolderSettings(IEnumerable<string> filesOrFoldersPath, FolderSettingViewModel viewModel, Action OkAction)
         {
+            ClearErrorProviders();
+            FoldersInput = "";
             PageResult = DialogResult.None;
             _selectedFilesOrFolders = new List<string>(filesOrFoldersPath);
 
