@@ -241,21 +241,12 @@ namespace AxCrypt.Core.Service.Secrets
 
         private bool InternalSaveSharedSecret(ShareSecretApiModel sharedSecretModel)
         {
-            IList<ShareSecretApiModel> userSharedSecrets = LoadSharedSecretAsync().ToList();
-            ShareSecretApiModel existingSharedSecretApiModel = userSharedSecrets.FirstOrDefault(uss => uss.SecretId == sharedSecretModel.SecretId);
-            if (existingSharedSecretApiModel == null)
-            {
-                userSharedSecrets.Add(sharedSecretModel);
-            }
-            else
-            {
-                userSharedSecrets.Remove(existingSharedSecretApiModel);
-                userSharedSecrets.Add(sharedSecretModel);
-            }
+            if (sharedSecretModel == null)
+                return true;
 
             using (StreamWriter writer = new StreamWriter(AxSharedSecretsStore.OpenWrite()))
             {
-                SerializeShareSecretsTo(writer, userSharedSecrets);
+                SerializeShareSecretsTo(writer, new List<ShareSecretApiModel>() { sharedSecretModel });
             }
 
             return true;

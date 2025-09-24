@@ -29,7 +29,7 @@ public class WindowsTrayIcon
 
         // init icon data structure
         iconData = NotifyIconData.CreateDefault(messageSink.MessageWindowHandle, iconFile);
-
+        iconData.ToolTipText = Texts.WixMsiDescription;
         // create the taskbar icon
         CreateTaskbarIcon();
 
