@@ -740,6 +740,9 @@ La mise à jour de votre abonnement sera visible ici d'ici quelques minutes.</va
   <data name="ArabicLanguageSelectionText" xml:space="preserve">
     <value>عربي(arabe)</value>
   </data>
+  <data name="AreYouSureText" xml:space="preserve">
+    <value>Êtes-vous sûr?</value>
+  </data>
   <data name="AsAffiliateHeading" xml:space="preserve">
     <value>&lt;span&gt;En tant que&lt;/span&gt; affilié
 </value>
@@ -13717,6 +13720,15 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
     <value>Exception au cours du traitement de '{0}'.</value>
     <comment>@Invariant</comment>
   </data>
+  <data name="ExcludedFolderNotificationText" xml:space="preserve">
+    <value>Les dossiers exclus restent non cryptés </value>
+  </data>
+  <data name="ExcludedFoldersText" xml:space="preserve">
+    <value>Les dossiers exclus:</value>
+  </data>
+  <data name="ExcludeFolderText" xml:space="preserve">
+    <value>Excluez le dossier</value>
+  </data>
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>Quitter</value>
   </data>
@@ -14216,6 +14228,12 @@ vous devez &lt;span&gt;questions, ideas or praises&lt;/span&gt;nous en partager.
     <value>Le double-clique pour ouvrir les fichiers AxCrypt en dehors d'AxCrypt peut ne pas fonctionner correctement. L'association de fichiers du système d'exploitation pour l'extension ".axx" semble être interrompue. Contactez votre support informatique ou recherchez une solution sur Internet.</value>
     <comment>A text that is shown to users starting the association with .axx file is broken. It should not mention "Windows", or "Mac" etc so it can be used in all environments.</comment>
   </data>
+  <data name="FileDecryptionFailedAlertMsg" xml:space="preserve">
+    <value>Impossible de décrypter le fichier {0}'. La raison {1}</value>
+  </data>
+  <data name="FileDecryptionSuccessAlertMsg" xml:space="preserve">
+    <value>Le fichier '{0}' ont été décrypté avec succès.</value>
+  </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>Le fichier '{0}' n'existe pas.</value>
   </data>
@@ -14261,6 +14279,9 @@ vous devez &lt;span&gt;questions, ideas or praises&lt;/span&gt;nous en partager.
   <data name="FileNotFound" xml:space="preserve">
     <value>Fichier inexistant.</value>
   </data>
+  <data name="FileOpenFailedAlertMsg" xml:space="preserve">
+    <value>Impossible d’ouvrir le fichier '{0}'. La raison: {1}</value>
+  </data>
   <data name="FileOperationFailed" xml:space="preserve">
     <value>Erreur avec '{0}'.</value>
   </data>
@@ -14283,6 +14304,18 @@ vous devez &lt;span&gt;questions, ideas or praises&lt;/span&gt;nous en partager.
     <value>Propriétés du Fichier</value>
     <comment>A menu text for selecting file properties for encryption.</comment>
   </data>
+  <data name="FileRenameFailedAlertMsg" xml:space="preserve">
+    <value>Impossible de renommer le fichier '{0}' anonymement. La raison {1}</value>
+  </data>
+  <data name="FileRenameSuccessAlertMsg" xml:space="preserve">
+    <value>Le fichier '{0}' ont été renommé anonymement.</value>
+  </data>
+  <data name="FileRestoreRenameFailedAlertMsg" xml:space="preserve">
+    <value>Impossible à restaurer le nom original du fichier {0}. La raison {1}</value>
+  </data>
+  <data name="FileRestoreRenameSuccessAlertMsg" xml:space="preserve">
+    <value>Le fichier '{0}' ont été restauré à son nom original </value>
+  </data>
   <data name="FileSizeColumnHeaderText" xml:space="preserve">
     <value>Taille</value>
   </data>
@@ -14304,15 +14337,39 @@ vous devez &lt;span&gt;questions, ideas or praises&lt;/span&gt;nous en partager.
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>Financier</value>
   </data>
+  <data name="FindFileFeatureTitle" xml:space="preserve">
+    <value>Trouvez les fichiers </value>
+  </data>
+  <data name="FindFilesFeatureDescription" xml:space="preserve">
+    <value>Gérez tous les références de fichiers cryptés dans un seul endroit, avec des options à voir, renommer,  supprimer ou bien décrypter.</value>
+  </data>
+  <data name="FindFilesFeatureTooltip" xml:space="preserve">
+    <value>Un seul endroit pour gérer les fichiers cryptés </value>
+  </data>
+  <data name="FindFilesSearchPlaceholder" xml:space="preserve">
+    <value>Taper pour trouver un fichier...</value>
+  </data>
+  <data name="FindPathTitle" xml:space="preserve">
+    <value>Le chemin de fichier</value>
+  </data>
   <data name="FirstNameLabel" xml:space="preserve">
     <value>Prénom</value>
   </data>
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>Le dossier '{0}' est déjà protégé.</value>
   </data>
+  <data name="FolderOpenFailedAlertMsg" xml:space="preserve">
+    <value>Impossible d’ouvrir le dossier pour '{0}'.La raison: {1}</value>
+  </data>
   <data name="FolderSelectTitle" xml:space="preserve">
     <value>Sélectionner un dossier</value>
     <comment>A prompt or title in a folder selection dialog, prompting the user to select a folder.</comment>
+  </data>
+  <data name="FolderSettingsText" xml:space="preserve">
+    <value>Excluez le sous dossier</value>
+  </data>
+  <data name="FolderSettingsTitle" xml:space="preserve">
+    <value>Le paramètres des dossiers sécurisés </value>
   </data>
   <data name="FollowUsTitle" xml:space="preserve">
     <value>Suivez-nous</value>
@@ -16272,6 +16329,9 @@ Votre mot de passe n'est pas stocké sur nos serveurs, et la connexion est toujo
   <data name="InvalidEmail" xml:space="preserve">
     <value>Adresse email non valide.</value>
   </data>
+  <data name="InvalidFolder" xml:space="preserve">
+    <value>Le chemin d’accès au dossier non valide</value>
+  </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>Clef incorrecte pour '{0}'.</value>
   </data>
@@ -16280,6 +16340,9 @@ Votre mot de passe n'est pas stocké sur nos serveurs, et la connexion est toujo
   </data>
   <data name="InvalidSelectionErrorMessage" xml:space="preserve">
     <value>Veuillez sélectionner au moins un message.</value>
+  </data>
+  <data name="InvalidSubFolder" xml:space="preserve">
+    <value>Le dossier sélectionné n’est pas un sous-dossier valide</value>
   </data>
   <data name="InvitationMailBodyIntro" xml:space="preserve">
     <value>Vous avez été invité à AxCrypt File Security par &lt;b&gt;{0}&lt;/b&gt;. Pour commencer à sécuriser vos fichiers &lt;a href="{1}" style="color: #86b96e; text-decoration: none;"&gt;télécharger&lt;/a&gt; et installer AxCrypt. Se connecter à AxCrypt avec &lt;b&gt;{2}&lt;/b&gt;, entrer le code de vérification et définir votre mot de passe.</value>
@@ -19021,12 +19084,18 @@ Ce logiciel est livré d'après la licence.
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>Vous êtes déconnecté. Cliquez ici pour vous connecter.</value>
   </data>
+  <data name="NoFilesFoundText" xml:space="preserve">
+    <value>Aucun de fichier trouvé</value>
+  </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>Ne peut pas se connecter au serveur maintenant, veuillez vérifier votre connexion Internet.</value>
     <comment>Message which is displayed when device doesn't have internet connection.</comment>
   </data>
   <data name="NoItemsSelectedText" xml:space="preserve">
     <value>Aucun élément sélectionné</value>
+  </data>
+  <data name="NoKeepEncryptedText" xml:space="preserve">
+    <value>Non, retenez encrypté</value>
   </data>
   <data name="NoLabel" xml:space="preserve">
     <value>Non</value>
@@ -19662,6 +19731,9 @@ Les espaces et les associations présentes dans les mots de passe les plus commu
   </data>
   <data name="PastIncidentsHeading" xml:space="preserve">
     <value>Incidents précédents</value>
+  </data>
+  <data name="PathText" xml:space="preserve">
+    <value>Le chemin:</value>
   </data>
   <data name="PaymentCancelledNotifyEventText" xml:space="preserve">
     <value>Votre récente tentative d'achat de l'abonnement AxCrypt a échoué !</value>
@@ -21051,6 +21123,9 @@ Vous obtiendrez 30 jours d'essai gratuit que vous pouvez annuler n'importe quand
     <value>Retirer de la liste mais conserver la protection du fichier</value>
     <comment>This text is used in the context menu option, which will help the users to remove the file from the recent files list and remove the folder from the secured folders list.</comment>
   </data>
+  <data name="RemoveText" xml:space="preserve">
+    <value>Retirez </value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>Ce compte possède déjà un abonnement actif et récurrent. Les abonnements Business récurrents se renouvellent automatiquement.</value>
   </data>
@@ -22054,6 +22129,9 @@ Sujet : Rapport instantané AxCrypt</value>
   </data>
   <data name="SelectAllText" xml:space="preserve">
     <value>sélectionner tous</value>
+  </data>
+  <data name="SelectFileToViewFileInfoText" xml:space="preserve">
+    <value>Sélectionnez un fichier pour y voir es informations </value>
   </data>
   <data name="SelectGroupText" xml:space="preserve">
     <value>Sélectionnez un groupe</value>
@@ -23452,6 +23530,12 @@ L'équipe AxCrypt</value>
   <data name="UserNamePrompt" xml:space="preserve">
     <value>Nom d'utilisateur</value>
   </data>
+  <data name="UserPromptOnAddingExcludeFolder" xml:space="preserve">
+    <value>Voulez-vous aimer décrypter les fichiers qui se situe à l'intérieur de sous dossier exclus?</value>
+  </data>
+  <data name="UserPromptOnRemovingExcludeFolder" xml:space="preserve">
+    <value>Le dossier sélectionné se trouve actuellement dans la liste excluse. Est-ce vous aimeriez le sécuriser plutôt?</value>
+  </data>
   <data name="UserSettingsFormatChangeNeedsReset" xml:space="preserve">
     <value>Vous avez mis à jour AxCrypt. Ceci nécessite une remise à zéro de vos paramètres. Nous vous prions d'accepter nos excuses pour la gène occasionnée. Vos fichiers restent protégés.</value>
   </data>
@@ -23907,6 +23991,9 @@ sans invite. Par défaut, l'interface utilisateur et les invites sont supprimée
   </data>
   <data name="YearlySubscriptionTitle" xml:space="preserve">
     <value>Annuel</value>
+  </data>
+  <data name="YesDecryptText" xml:space="preserve">
+    <value>Oui, Décryptez </value>
   </data>
   <data name="YesLabel" xml:space="preserve">
     <value>Oui</value>

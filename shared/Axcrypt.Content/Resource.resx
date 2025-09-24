@@ -723,6 +723,9 @@ Updates to the subscription will be reflected here within a few minutes.</value>
   <data name="ArabicLanguageSelectionText" xml:space="preserve">
     <value>عربي(Arabic)</value>
   </data>
+  <data name="AreYouSureText" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
   <data name="AsAffiliateHeading" xml:space="preserve">
     <value>&lt;span&gt;As a&lt;/span&gt; Affiliate</value>
   </data>
@@ -13511,6 +13514,15 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
     <value>Exception during processing of '{0}'.</value>
     <comment>@Invariant</comment>
   </data>
+  <data name="ExcludedFolderNotificationText" xml:space="preserve">
+    <value>Excluded folders remain unencrypted</value>
+  </data>
+  <data name="ExcludedFoldersText" xml:space="preserve">
+    <value>Excluded folders:</value>
+  </data>
+  <data name="ExcludeFolderText" xml:space="preserve">
+    <value>Exclude Folder</value>
+  </data>
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>Exit</value>
   </data>
@@ -14009,6 +14021,12 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
     <value>Double-click to open AxCrypt files outside of AxCrypt may not function correctly. The operating system file association for extension ".axx" appears to be broken. Contact your IT support  or search for a solution on the Internet.</value>
     <comment>A text that is shown to users starting the association with .axx file is broken. It should not mention "Windows", or "Mac" etc so it can be used in all environments.</comment>
   </data>
+  <data name="FileDecryptionFailedAlertMsg" xml:space="preserve">
+    <value>Unable to decrypt File '{0}'. Reason: {1}</value>
+  </data>
+  <data name="FileDecryptionSuccessAlertMsg" xml:space="preserve">
+    <value>File '{0}' has been decrypted successfully.</value>
+  </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>File '{0}' does not exist.</value>
   </data>
@@ -14054,6 +14072,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   <data name="FileNotFound" xml:space="preserve">
     <value>File does not exist.</value>
   </data>
+  <data name="FileOpenFailedAlertMsg" xml:space="preserve">
+    <value>Unable to open file '{0}'. Reason: {1}</value>
+  </data>
   <data name="FileOperationFailed" xml:space="preserve">
     <value>Failed '{0}'.</value>
   </data>
@@ -14076,6 +14097,18 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
     <value>Encryption File Properties</value>
     <comment>A menu text for selecting file properties for encryption.</comment>
   </data>
+  <data name="FileRenameFailedAlertMsg" xml:space="preserve">
+    <value>Unable to rename file '{0}' anonymously. Reason: {1}</value>
+  </data>
+  <data name="FileRenameSuccessAlertMsg" xml:space="preserve">
+    <value>File '{0}' has been renamed anonymously.</value>
+  </data>
+  <data name="FileRestoreRenameFailedAlertMsg" xml:space="preserve">
+    <value>Unable to restore original name for file '{0}'. Reason: {1}</value>
+  </data>
+  <data name="FileRestoreRenameSuccessAlertMsg" xml:space="preserve">
+    <value>File '{0}' has been restored to its original name.</value>
+  </data>
   <data name="FileSizeColumnHeaderText" xml:space="preserve">
     <value>Size</value>
   </data>
@@ -14097,15 +14130,39 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>Financial</value>
   </data>
+  <data name="FindFileFeatureTitle" xml:space="preserve">
+    <value>Find files</value>
+  </data>
+  <data name="FindFilesFeatureDescription" xml:space="preserve">
+    <value>Manage all encrypted file references in one place, with options to view, rename, delete, or decrypt.</value>
+  </data>
+  <data name="FindFilesFeatureTooltip" xml:space="preserve">
+    <value>One place to manage encrypted files</value>
+  </data>
+  <data name="FindFilesSearchPlaceholder" xml:space="preserve">
+    <value>Type to find a file...</value>
+  </data>
+  <data name="FindPathTitle" xml:space="preserve">
+    <value>File path</value>
+  </data>
   <data name="FirstNameLabel" xml:space="preserve">
     <value>First name</value>
   </data>
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>Folder '{0}' already secured.</value>
   </data>
+  <data name="FolderOpenFailedAlertMsg" xml:space="preserve">
+    <value>Unable to open folder for '{0}'. Reason: {1}</value>
+  </data>
   <data name="FolderSelectTitle" xml:space="preserve">
     <value>Select a folder</value>
     <comment>A prompt or title in a folder selection dialog, prompting the user to select a folder.</comment>
+  </data>
+  <data name="FolderSettingsText" xml:space="preserve">
+    <value>Exclude subfolder</value>
+  </data>
+  <data name="FolderSettingsTitle" xml:space="preserve">
+    <value>Secured folder settings</value>
   </data>
   <data name="FollowUsTitle" xml:space="preserve">
     <value>Follow us</value>
@@ -14801,6 +14858,9 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   </data>
   <data name="GetSubscriptionLoginRequiredInfoText" xml:space="preserve">
     <value>Please login to get your subscription! If you don’t have an account yet, you first need to &lt;a href="{0}Home/Register/"&gt;sign up&lt;/a&gt;.</value>
+  </data>
+  <data name="GettheLatestAxCryptText" xml:space="preserve">
+    <value>Get the Latest AxCrypt Version 2 Releases Here</value>
   </data>
   <data name="GoToGroupsText" xml:space="preserve">
     <value>Go to Groups</value>
@@ -16049,6 +16109,9 @@ Your password is not stored on our servers, and the connection is always encrypt
   <data name="InvalidEmail" xml:space="preserve">
     <value>Incorrect format for an email address.</value>
   </data>
+  <data name="InvalidFolder" xml:space="preserve">
+    <value>Invalid folder path</value>
+  </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>Invalid key for '{0}'.</value>
   </data>
@@ -16057,6 +16120,9 @@ Your password is not stored on our servers, and the connection is always encrypt
   </data>
   <data name="InvalidSelectionErrorMessage" xml:space="preserve">
     <value>Please select at least one message.</value>
+  </data>
+  <data name="InvalidSubFolder" xml:space="preserve">
+    <value>The selected folder not a valid subfolder</value>
   </data>
   <data name="InvitationMailBodyIntro" xml:space="preserve">
     <value>You have been invited to AxCrypt File Security by &lt;b&gt;{0}&lt;/b&gt;. To start securing your files just &lt;a href="{1}" style="color: #86b96e; text-decoration: none;"&gt;download&lt;/a&gt; and install AxCrypt. Sign in to AxCrypt with &lt;b&gt;{2}&lt;/b&gt;, enter the verification code and set your secret password.</value>
@@ -16389,6 +16455,9 @@ Please specify the language to use in the invitation and an optional personal me
     <value>After files are converted they will only open with the current AxCrypt password. Please verify your password.
 
 Do not forget this password!</value>
+  </data>
+  <data name="LegacyDownloadsContent" xml:space="preserve">
+    <value>Need an older version? Download previous AxCrypt releases for compatibility with earlier systems.</value>
   </data>
   <data name="LegacyDownloadsDescription" xml:space="preserve">
     <value>These are Legacy AxCrypt 1.x downloads. We do not endorse them and urge you not to download and use these, unless you have a specific need for it. &lt;strong&gt;New files encrypted with AxCrypt 2.x are not compatible with legacy AxCrypt 1.x!&lt;/strong&gt; Files encrypted with legacy AxCrypt 1.x are decryptable by AxCrypt 2.x.</value>
@@ -18825,12 +18894,18 @@ an any multifactor type(Authenticator app, Email and SMS).</value>
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>You are Signed Out. Click to Sign In.</value>
   </data>
+  <data name="NoFilesFoundText" xml:space="preserve">
+    <value>No file found</value>
+  </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>Can't connect to server right now, please check your internet connection.</value>
     <comment>Message which is displayed when device doesn't have internet connection.</comment>
   </data>
   <data name="NoItemsSelectedText" xml:space="preserve">
     <value>No items selected</value>
+  </data>
+  <data name="NoKeepEncryptedText" xml:space="preserve">
+    <value>No, keep encrypted</value>
   </data>
   <data name="NoLabel" xml:space="preserve">
     <value>No</value>
@@ -19437,6 +19512,9 @@ White space, and parts that are equal to common passwords are ignored and do not
   </data>
   <data name="PastIncidentsHeading" xml:space="preserve">
     <value>Past incidents</value>
+  </data>
+  <data name="PathText" xml:space="preserve">
+    <value>Path:</value>
   </data>
   <data name="PaymentCancelledNotifyEventText" xml:space="preserve">
     <value>Your recent attempt to purchase the AxCrypt subscription was unsuccessful!</value>
@@ -20832,6 +20910,9 @@ Please &lt;a href="mailto:premium@axcrypt.net"&gt;contact us&lt;/a&gt; and we wi
     <value>Remove from list but keep secured</value>
     <comment>This text is used in the context menu option, which will help the users to remove the file from the recent files list and remove the folder from the secured folders list.</comment>
   </data>
+  <data name="RemoveText" xml:space="preserve">
+    <value>Remove</value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>There is an active recurring subscription on this account. Recurring Business subscriptions do not have to be renewed manually.</value>
   </data>
@@ -21845,6 +21926,9 @@ Subject: AxCrypt Report Snapshot</value>
   </data>
   <data name="SelectAllText" xml:space="preserve">
     <value>Select all</value>
+  </data>
+  <data name="SelectFileToViewFileInfoText" xml:space="preserve">
+    <value>Select file to view file information</value>
   </data>
   <data name="SelectGroupText" xml:space="preserve">
     <value>Select a group</value>
@@ -23243,6 +23327,12 @@ The AxCrypt Team</value>
   <data name="UserNamePrompt" xml:space="preserve">
     <value>Username</value>
   </data>
+  <data name="UserPromptOnAddingExcludeFolder" xml:space="preserve">
+    <value>Do you want to decrypt the files inside the excluded subfolder?</value>
+  </data>
+  <data name="UserPromptOnRemovingExcludeFolder" xml:space="preserve">
+    <value>The selected folder is currently in the excluded list. Do you want to secure it instead?</value>
+  </data>
   <data name="UserSettingsFormatChangeNeedsReset" xml:space="preserve">
     <value>You have updated AxCrypt. Unfortunately, your configuration must be reset. After restarting, your preferences and settings will unfortunately be lost. We apologize for the inconvenience. Your encrypted files are still safe and ok.</value>
   </data>
@@ -23687,6 +23777,9 @@ no prompts. By default UI and all prompts are displayed.
   <data name="YearlySubscriptionTitle" xml:space="preserve">
     <value>Yearly</value>
   </data>
+  <data name="YesDecryptText" xml:space="preserve">
+    <value>Yes, decrypt</value>
+  </data>
   <data name="YesLabel" xml:space="preserve">
     <value>Yes</value>
   </data>
@@ -23704,92 +23797,5 @@ no prompts. By default UI and all prompts are displayed.
   </data>
   <data name="YourSecurityMattersText1" xml:space="preserve">
     <value>We prioritize your privacy. All feedback and data during this beta trial will be handled securely and confidentially.</value>
-  </data>
-  <data name="AreYouSureText" xml:space="preserve">
-    <value>Are you sure?</value>
-  </data>
-  <data name="ExcludedFolderNotificationText" xml:space="preserve">
-    <value>Excluded folders remain unencrypted</value>
-  </data>
-  <data name="ExcludedFoldersText" xml:space="preserve">
-    <value>Excluded folders:</value>
-  </data>
-  <data name="ExcludeFolderText" xml:space="preserve">
-    <value>Exclude Folder</value>
-  </data>
-  <data name="FileDecryptionFailedAlertMsg" xml:space="preserve">
-    <value>Unable to decrypt File '{0}'. Reason: {1}</value>
-  </data>
-  <data name="FileDecryptionSuccessAlertMsg" xml:space="preserve">
-    <value>File '{0}' has been decrypted successfully.</value>
-  </data>
-  <data name="FileOpenFailedAlertMsg" xml:space="preserve">
-    <value>Unable to open file '{0}'. Reason: {1}</value>
-  </data>
-  <data name="FileRenameFailedAlertMsg" xml:space="preserve">
-    <value>Unable to rename file '{0}' anonymously. Reason: {1}</value>
-  </data>
-  <data name="FileRenameSuccessAlertMsg" xml:space="preserve">
-    <value>File '{0}' has been renamed anonymously.</value>
-  </data>
-  <data name="FileRestoreRenameFailedAlertMsg" xml:space="preserve">
-    <value>Unable to restore original name for file '{0}'. Reason: {1}</value>
-  </data>
-  <data name="FileRestoreRenameSuccessAlertMsg" xml:space="preserve">
-    <value>File '{0}' has been restored to its original name.</value>
-  </data>
-  <data name="FindFileFeatureTitle" xml:space="preserve">
-    <value>Find files</value>
-  </data>
-  <data name="FindFilesFeatureDescription" xml:space="preserve">
-    <value>Manage all encrypted file references in one place, with options to view, rename, delete, or decrypt.</value>
-  </data>
-  <data name="FindFilesFeatureTooltip" xml:space="preserve">
-    <value>One place to manage encrypted files</value>
-  </data>
-  <data name="FindFilesSearchPlaceholder" xml:space="preserve">
-    <value>Type to find a file...</value>
-  </data>
-  <data name="FindPathTitle" xml:space="preserve">
-    <value>File path</value>
-  </data>
-  <data name="FolderOpenFailedAlertMsg" xml:space="preserve">
-    <value>Unable to open folder for '{0}'. Reason: {1}</value>
-  </data>
-  <data name="FolderSettingsText" xml:space="preserve">
-    <value>Exclude subfolder</value>
-  </data>
-  <data name="FolderSettingsTitle" xml:space="preserve">
-    <value>Secured folder settings</value>
-  </data>
-  <data name="InvalidFolder" xml:space="preserve">
-    <value>Invalid folder path</value>
-  </data>
-  <data name="InvalidSubFolder" xml:space="preserve">
-    <value>The selected folder not a valid subfolder</value>
-  </data>
-  <data name="NoFilesFoundText" xml:space="preserve">
-    <value>No file found</value>
-  </data>
-  <data name="NoKeepEncryptedText" xml:space="preserve">
-    <value>No, keep encrypted</value>
-  </data>
-  <data name="PathText" xml:space="preserve">
-    <value>Path:</value>
-  </data>
-  <data name="RemoveText" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="SelectFileToViewFileInfoText" xml:space="preserve">
-    <value>Select file to view file information</value>
-  </data>
-  <data name="UserPromptOnAddingExcludeFolder" xml:space="preserve">
-    <value>Do you want to decrypt the files inside the excluded subfolder?</value>
-  </data>
-  <data name="UserPromptOnRemovingExcludeFolder" xml:space="preserve">
-    <value>The selected folder is currently in the excluded list. Do you want to secure it instead?</value>
-  </data>
-  <data name="YesDecryptText" xml:space="preserve">
-    <value>Yes, decrypt</value>
   </data>
 </root>

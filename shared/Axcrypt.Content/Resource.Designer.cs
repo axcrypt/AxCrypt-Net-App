@@ -43875,6 +43875,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Get the Latest AxCrypt Version 2 Releases Here.
+        /// </summary>
+        public static string GettheLatestAxCryptText {
+            get {
+                return ResourceManager.GetString("GettheLatestAxCryptText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to Groups.
         /// </summary>
         public static string GoToGroupsText {
@@ -48533,6 +48542,15 @@ namespace AxCrypt.Content {
         public static string LegacyConversionVerificationPrompt {
             get {
                 return ResourceManager.GetString("LegacyConversionVerificationPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Need an older version? Download previous AxCrypt releases for compatibility with earlier systems..
+        /// </summary>
+        public static string LegacyDownloadsContent {
+            get {
+                return ResourceManager.GetString("LegacyDownloadsContent", resourceCulture);
             }
         }
         
