@@ -44,9 +44,10 @@ public class MultiFactorAuthService : IMultiFactorAuthService
 
     public async Task<bool> SaveDeviceAndExpiryInfo(LogOnEventArgs eventArgs, LogOnIdentity logOnIdentity)
     {
-        string deviceInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(eventArgs.UserDevice));
         try
         {
+            string deviceInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(eventArgs.UserDevice));
+
             IAccountService accountService = New<LogOnIdentity, IAccountService>(logOnIdentity);
             MultiFactorAuthApiModel multiFactorAuthApi = new MultiFactorAuthApiModel
             {
