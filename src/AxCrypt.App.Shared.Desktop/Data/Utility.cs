@@ -132,6 +132,11 @@ public static class Utility
         return dateTime.ToString("ddd hh:mm tt");
     }
 
+    public static string ToLocalFullDateString(DateTime dateTime)
+    {
+        return dateTime.ToLocalTime().ToString("dd/MMM/yyyy ddd hh:mm tt");
+    }
+
     public static string GetCurrentDevice()
     {
         string os = $"{DeviceInfo.Platform} {DeviceInfo.VersionString}";
