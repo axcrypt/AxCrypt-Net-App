@@ -462,23 +462,5 @@ namespace AxCrypt.Core.UI
         {
             _settingsStore[key] = Convert.ToString(value, CultureInfo.InvariantCulture);
         }
-
-        public bool RememberMeOnMFA
-        {
-            get { return Load(nameof(RememberMeOnMFA), false); }
-            set { Store(nameof(RememberMeOnMFA), value); }
-        }
-
-        public DateTime RemembermeUntil
-        {
-            get { return Load(nameof(RemembermeUntil), DateTime.MinValue); }
-            set {Store(nameof(RemembermeUntil), value); }
-        }
-
-        public string DeviceInfo 
-        {
-            get {return Load(nameof(DeviceInfo), string.Empty); }
-            set {Store(nameof(DeviceInfo), value); } 
-        }
     }
 }

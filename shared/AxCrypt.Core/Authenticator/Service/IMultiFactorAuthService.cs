@@ -10,5 +10,5 @@ public interface IMultiFactorAuthService
 
     Task<bool> VerifyMultiFactorAuthAsync(string oneTimeCode, string activeTFAUniqueKey, MultiFactorAuthType multiFactorAuthType);
 
-    Task<bool> SaveDeviceAndExpiryInfo(LogOnEventArgs eventArgs);
+    Task<bool> SaveDeviceAndExpiryInfo(LogOnEventArgs eventArgs, LogOnIdentity logOnIdentity);
 }

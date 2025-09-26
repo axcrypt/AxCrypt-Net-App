@@ -42,16 +42,15 @@ public class MultiFactorAuthService : IMultiFactorAuthService
         }
     }
 
-    public async Task<bool> SaveDeviceAndExpiryInfo(LogOnEventArgs eventArgs)
+    public async Task<bool> SaveDeviceAndExpiryInfo(LogOnEventArgs eventArgs, LogOnIdentity logOnIdentity)
     {
-        LogOnIdentity logOnIdentity = New<KnownIdentities>().DefaultEncryptionIdentity;
         string deviceInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(eventArgs.UserDevice));
         try
         {
             IAccountService accountService = New<LogOnIdentity, IAccountService>(logOnIdentity);
             MultiFactorAuthApiModel multiFactorAuthApi = new MultiFactorAuthApiModel
             {
-                UserEmail = logOnIdentity.UserEmail.Address,
+                UserEmail = eventArgs.UserEmail,
                 UserDevice = deviceInfo,
                 RememberUntil = eventArgs.RememberUntil,
                 UpdatedUtc = New<INow>().Utc,

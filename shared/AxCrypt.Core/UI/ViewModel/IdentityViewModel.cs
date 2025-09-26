@@ -349,7 +349,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
             if (logOnArgs.RememberMeOnMFA)
             {
-                await New<IMultiFactorAuthService>().SaveDeviceAndExpiryInfo(logOnArgs);
+                await New<IMultiFactorAuthService>().SaveDeviceAndExpiryInfo(logOnArgs, logOnIdentity);
             }
 
             logOnIdentity.SetActiveMFAUniqueKey(_knownIdentities.MFAUniqueKey);
