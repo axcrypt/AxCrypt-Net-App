@@ -25,7 +25,10 @@ public class AppLocalizationOptions
                 new CultureOption { Name = "sv", DisplayName = "Swedish", ImageUrl = "images/flag/FrmSwdn.svg" },
                 new CultureOption { Name = "tr", DisplayName = "Türkçe", ImageUrl = "images/flag/FrmTrk.svg" }
             };
+        DefaultLanguage = SupportedCultures.FirstOrDefault();
     }
+
+    public CultureOption DefaultLanguage { get; private set; }
 
     public void SetLanguage()
     {
