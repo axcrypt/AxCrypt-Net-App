@@ -94,7 +94,7 @@
                                 @if (messenger.Message.VisibleUntil != DateTime.MaxValue)
                                 {
                                     <span>@Texts.VisibleUntilText</span>
-                                    <span class="">@Utility.ToDateString(messenger.Message.VisibleUntil.ToLocalTime())</span>
+                                    <span class="" title="@Utility.ToLocalFullDateString(messenger.Message.VisibleUntil.ToLocalTime())">@Utility.ToDateString(messenger.Message.VisibleUntil.ToLocalTime())</span>
                                 }
                                 else if (messenger.Message.Visibility == SecureMsgrVisibility.Once)
                                 {
