@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
@@ -20,7 +21,6 @@ public class AccountStatusViewModel : ViewModelBase
         //InitializeBuyPremiumCommand = new Command(InitiateBuyPremiumAction);
         //SignOutCommand = new Command(SignOut);
         //OpenGetStartedPageCommand = new Command(OpenGetStartedPage);
-        StartLoadAccountStatus();
     }
 
     public PlanState PlanState { get; private set; }
@@ -52,7 +52,7 @@ public class AccountStatusViewModel : ViewModelBase
         }
     }
 
-    private async void StartLoadAccountStatus()
+    private async Task StartLoadAccountStatus()
     {
         await LoadAccountStatusAsync();
     }

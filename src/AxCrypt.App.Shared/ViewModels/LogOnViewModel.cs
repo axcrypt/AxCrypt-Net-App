@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.UI;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.Utility.View;
@@ -50,7 +51,15 @@ public class LogOnViewModel : ViewModelBase
         IsVisible = false;
         MultiFactorAuthViewModel = new MultiFactorAuthViewModel();
 
-        mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), (bool loggedOn) => { if (loggedOn) { ProcessIndicator?.Dispose(); OnSubscriptionChanged?.Invoke(); } });
+        mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), async (bool loggedOn) =>
+        {
+            if (loggedOn)
+            {
+                ProcessIndicator?.Dispose();
+                OnSubscriptionChanged?.Invoke();
+                await New<AccountStatusViewModel>().LoadAccountStatusAsync();
+            }
+        });
         mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnSubscriptionChanged?.Invoke(); } });
     }
 
