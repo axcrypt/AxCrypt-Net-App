@@ -58,7 +58,12 @@ public class AccountStatusViewModel : ViewModelBase
     }
 
     public string UserEmail { get; set; } = string.Empty;
+
     public int DaysLeft { get; set; } = 0;
+
+    public bool SubscribedFromPlayStore { get; set; } = false;
+
+    public bool SubscribedFromAppStore { get; set; } = false;
 
     public string ValidFormatted
     {
@@ -87,6 +92,8 @@ public class AccountStatusViewModel : ViewModelBase
         PlanState = pi.PlanState;
         DaysLeft = pi.DaysLeft;
         CanTryPremiumSubscription = pi.CanTryPremiumSubscription;
+        SubscribedFromAppStore = pi.SubscribedFromAppStore;
+        SubscribedFromPlayStore = pi.SubscribedFromPlayStore;
     }
 
     private string GetStatusText(PlanState planState)

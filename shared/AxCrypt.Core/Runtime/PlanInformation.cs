@@ -3,7 +3,6 @@ using AxCrypt.Api.Model;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
-using AxCrypt.Core.Service;
 using System;
 using System.Threading.Tasks;
 
@@ -13,7 +12,7 @@ namespace AxCrypt.Core.Runtime
 {
     public class PlanInformation : IEquatable<PlanInformation>
     {
-        public static readonly PlanInformation Empty = new PlanInformation(PlanState.Unknown, -1, false, false, false);
+        public static readonly PlanInformation Empty = new PlanInformation(PlanState.Unknown, -1, false, false, false, false);
 
         public PlanState PlanState { get; }
 
@@ -23,17 +22,19 @@ namespace AxCrypt.Core.Runtime
 
         public bool SubscribedFromAppStore { get; } = false;
 
+        public bool SubscribedFromPlayStore { get; } = false;
+
         public bool BusinessAdmin { get; } = false;
 
         public static async Task<PlanInformation> CreateAsync(LogOnIdentity identity)
         {
             if (identity == LogOnIdentity.Empty)
             {
-                return new PlanInformation(PlanState.NoPremium, 0, false, false, false);
+                return new PlanInformation(PlanState.NoPremium, 0, false, false,false, false);
             }
             if (New<AxCryptOnlineState>().IsOffline)
             {
-                return new PlanInformation(PlanState.OfflineNoPremium, 0, false, false, false);
+                return new PlanInformation(PlanState.OfflineNoPremium, 0, false, false, false, false);
             }
 
             await UserAccountInfo.LoadAsync(identity).Free();
@@ -52,27 +53,28 @@ namespace AxCrypt.Core.Runtime
                     return NoPremiumOrCanTryAsync(userAccount);
 
                 case SubscriptionLevel.Business:
-                    return new PlanInformation(PlanState.HasBusiness, GetDaysLeft(userAccount.LevelExpiration), false, userAccount.ActiveSubscriptionFromAppStore, userAccount.BusinessAdmin);
+                    return new PlanInformation(PlanState.HasBusiness, GetDaysLeft(userAccount.LevelExpiration), false, userAccount.ActiveSubscriptionFromAppStore, userAccount.ActiveSubscriptionFromPlayStore, userAccount.BusinessAdmin);
 
                 case SubscriptionLevel.Premium:
-                    return new PlanInformation(PlanState.HasPremium, GetDaysLeft(userAccount.LevelExpiration), false, userAccount.ActiveSubscriptionFromAppStore, userAccount.BusinessAdmin);
+                    return new PlanInformation(PlanState.HasPremium, GetDaysLeft(userAccount.LevelExpiration), false, userAccount.ActiveSubscriptionFromAppStore, userAccount.ActiveSubscriptionFromPlayStore, userAccount.BusinessAdmin);
 
                 case SubscriptionLevel.PasswordManager:
-                    return new PlanInformation(PlanState.HasPasswordManager, GetDaysLeft(userAccount.LevelExpiration), false, userAccount.ActiveSubscriptionFromAppStore, userAccount.BusinessAdmin);
+                    return new PlanInformation(PlanState.HasPasswordManager, GetDaysLeft(userAccount.LevelExpiration), false, userAccount.ActiveSubscriptionFromAppStore, userAccount.ActiveSubscriptionFromPlayStore, userAccount.BusinessAdmin);
 
                 case SubscriptionLevel.DefinedByServer:
                 case SubscriptionLevel.Undisclosed:
                 default:
-                    return new PlanInformation(PlanState.NoPremium, 0, false, false, false);
+                    return new PlanInformation(PlanState.NoPremium, 0, false, false, false, false);
             }
         }
 
-        private PlanInformation(PlanState planStatus, int daysLeft, bool canTryPremiumSubscription, bool subscribedFromAppStore, bool businessAdmin)
+        private PlanInformation(PlanState planStatus, int daysLeft, bool canTryPremiumSubscription, bool subscribedFromAppStore, bool subscribedFromPlayStore, bool businessAdmin)
         {
             PlanState = planStatus;
             DaysLeft = daysLeft;
             CanTryPremiumSubscription = canTryPremiumSubscription;
             SubscribedFromAppStore = subscribedFromAppStore;
+            SubscribedFromPlayStore = subscribedFromPlayStore;
             BusinessAdmin = businessAdmin;
         }
 
@@ -101,10 +103,10 @@ namespace AxCrypt.Core.Runtime
 
             if (!offers.HasFlag(Offers.AxCryptTrial))
             {
-                return new PlanInformation(PlanState.CanTryPremium, 0, userAccount.CanTryAppStorePremiumTrial, false, userAccount.BusinessAdmin);
+                return new PlanInformation(PlanState.CanTryPremium, 0, userAccount.CanTryAppStorePremiumTrial || userAccount.CanTryPlayStorePremiumTrial, false, false, userAccount.BusinessAdmin);
             }
 
-            return new PlanInformation(PlanState.NoPremium, 0, userAccount.CanTryAppStorePremiumTrial, false, userAccount.BusinessAdmin);
+            return new PlanInformation(PlanState.NoPremium, 0, userAccount.CanTryAppStorePremiumTrial || userAccount.CanTryPlayStorePremiumTrial, false, false, userAccount.BusinessAdmin);
         }
 
         public bool Equals(PlanInformation other)

@@ -23,7 +23,9 @@ namespace AxCrypt.Api.Model
             Signature = string.Empty;
             AccountSource = AccountSource.Unknown;
             CanTryAppStorePremiumTrial = false;
+            CanTryPlayStorePremiumTrial = false;
             ActiveSubscriptionFromAppStore = false;
+            ActiveSubscriptionFromPlayStore = false;
         }
 
         public UserAccount(string userName, SubscriptionLevel level, DateTime expiration, AccountStatus status, Offers offers)
@@ -114,8 +116,14 @@ namespace AxCrypt.Api.Model
         [JsonProperty("canTryAppStorePremiumTrial")]
         public bool CanTryAppStorePremiumTrial { get; set; }
 
+        [JsonProperty("canTryPlayStorePremiumTrial")]
+        public bool CanTryPlayStorePremiumTrial { get; set; }
+
         [JsonProperty("activeSubscriptionFromAppStore")]
         public bool ActiveSubscriptionFromAppStore { get; set; }
+
+        [JsonProperty("activeSubscriptionFromPlayStore")]
+        public bool ActiveSubscriptionFromPlayStore { get; set; }
 
         [JsonProperty("isMasterKeyEnabled")]
         public bool IsMasterKeyEnabled { get; set; }
