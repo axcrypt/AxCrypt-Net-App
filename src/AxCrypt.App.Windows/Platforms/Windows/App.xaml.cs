@@ -157,7 +157,7 @@ namespace AxCrypt.App.Windows.WinUI
             TypeMap.Register.New<Core.Runtime.ILauncher>(() => new Mono.Launcher());
             TypeMap.Register.New<AxCryptHMACSHA1>(() => PortableFactory.AxCryptHMACSHA1());
             TypeMap.Register.New<HMACSHA512>(() => new Mono.Cryptography.HMACSHA512Wrapper(new HMACSHA512CryptoServiceProvider()));
-            TypeMap.Register.New<Aes>(() => new AxCrypt.Mono.Cryptography.AesWrapper(new System.Security.Cryptography.AesCryptoServiceProvider()));
+            TypeMap.Register.New<Aes>(() => new AxCrypt.Mono.Cryptography.AesWrapper(System.Security.Cryptography.Aes.Create()));
             TypeMap.Register.New<Sha1>(() => PortableFactory.SHA1Managed());
             TypeMap.Register.New<Sha256>(() => PortableFactory.SHA256Managed());
             TypeMap.Register.New<CryptoStreamBase>(() => PortableFactory.CryptoStream());

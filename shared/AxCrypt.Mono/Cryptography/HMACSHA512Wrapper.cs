@@ -38,7 +38,7 @@ namespace AxCrypt.Mono.Cryptography
             {
                 return key;
             }
-            return new System.Security.Cryptography.SHA512Managed().ComputeHash(key);
+            return System.Security.Cryptography.SHA512.Create().ComputeHash(key);
         }
 
         public override byte[] ComputeHash(byte[] buffer)

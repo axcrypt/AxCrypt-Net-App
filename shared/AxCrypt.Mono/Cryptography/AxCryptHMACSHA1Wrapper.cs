@@ -1,34 +1,23 @@
 ﻿using AxCrypt.Abstractions.Algorithm;
-using AxCrypt.Core.Algorithm;
-using AxCrypt.Core.Crypto;
-using AxCrypt.Mono.Portable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AxCrypt.Mono.Cryptography
 {
-    internal class AxCryptHMACSHA1Wrapper : Abstractions.Algorithm.AxCryptHMACSHA1
+    internal class AxCryptHMACSHA1Wrapper : AxCryptHMACSHA1
     {
-        private System.Security.Cryptography.HMAC _hmac;
+        private System.Security.Cryptography.KeyedHashAlgorithm _hmac;
 
-        public AxCryptHMACSHA1Wrapper()
+        public AxCryptHMACSHA1Wrapper(System.Security.Cryptography.KeyedHashAlgorithm hmac)
         {
-            _hmac = AxCrypt.Mono.Cryptography.AxCryptHMACSHA1.Create();
+            _hmac = hmac;
+            _hashName = nameof(AxCryptHMACSHA1Wrapper);
         }
 
-        public override string HashName
-        {
-            get
-            {
-                return _hmac.HashName;
-            }
-            set
-            {
-                _hmac.HashName = value;
-            }
-        }
+        private string _hashName;
+
+        public override string HashName { get { return _hashName; } set { _hashName = value; } }
 
         public override byte[] Key()
         {
@@ -37,7 +26,16 @@ namespace AxCrypt.Mono.Cryptography
 
         public override void SetKey(byte[] value)
         {
-            _hmac.Key = value;
+            _hmac.Key = EnsureBlockSizeForKeyDueToBugInMonoKeyPropertySetter(value);
+        }
+
+        private static byte[] EnsureBlockSizeForKeyDueToBugInMonoKeyPropertySetter(byte[] key)
+        {
+            if (key.Length <= 20)
+            {
+                return key;
+            }
+            return System.Security.Cryptography.SHA1.Create().ComputeHash(key);
         }
 
         public override byte[] ComputeHash(byte[] buffer)
@@ -77,8 +75,8 @@ namespace AxCrypt.Mono.Cryptography
                 throw new ArgumentNullException("key");
             }
 
-            _hmac.Key = key.GetBytes();
-            _hmac.Initialize();
+            Initialize();
+            SetKey(key.GetBytes());
             return this;
         }
 

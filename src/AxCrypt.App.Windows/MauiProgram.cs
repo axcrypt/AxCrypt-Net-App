@@ -8,6 +8,7 @@ using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
+using System.Text;
 
 namespace AxCrypt.App.Windows
 {
@@ -15,6 +16,9 @@ namespace AxCrypt.App.Windows
     {
         public static MauiApp CreateMauiApp()
         {
+            // Register support for Windows-specific encodings
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             MauiAppBuilder builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()

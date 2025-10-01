@@ -144,7 +144,7 @@ namespace AxCrypt.Core.Test
                 case CryptoImplementation.WindowsDesktop:
                     TypeMap.Register.New<AxCryptHMACSHA1>(() => PortableFactory.AxCryptHMACSHA1());
                     TypeMap.Register.New<HMACSHA512>(() => new Mono.Cryptography.HMACSHA512Wrapper(new AxCrypt.Desktop.Cryptography.HMACSHA512CryptoServiceProvider()));
-                    TypeMap.Register.New<Aes>(() => new Mono.Cryptography.AesWrapper(new System.Security.Cryptography.AesCryptoServiceProvider()));
+                    TypeMap.Register.New<Aes>(() => new Mono.Cryptography.AesWrapper(System.Security.Cryptography.Aes.Create()));
                     TypeMap.Register.New<CryptoStreamBase>(() => PortableFactory.CryptoStream());
                     TypeMap.Register.New<Sha1>(() => PortableFactory.SHA1Managed());
                     TypeMap.Register.New<Sha256>(() => PortableFactory.SHA256Managed());

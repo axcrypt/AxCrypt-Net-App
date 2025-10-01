@@ -175,9 +175,9 @@ namespace AxCrypt.Core.Session
             Properties = new ActiveFileProperties(New<INow>().Utc, properties.LastEncryptionWriteTimeUtc, properties.CryptoId);
 
             IAxCryptDocument document = EncryptedFileInfo.GetAxCryptDocument(Identity);
-            KeySharedRecipients = document.KeySharedRecipients();
+            KeySharedRecipients = document?.KeySharedRecipients() ?? new List<EmailAddress>();
             IsShared = KeySharedRecipients.Any();
-            IsMasterKeyShared = document.IsMasterKeyShared();
+            IsMasterKeyShared = document?.IsMasterKeyShared() ?? false;
         }
 
         public IDataStore DecryptedFileInfo

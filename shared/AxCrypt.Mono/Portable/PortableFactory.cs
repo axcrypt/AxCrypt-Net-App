@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt - Copyright 2025, AxCrypt AB, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -35,34 +35,34 @@ namespace AxCrypt.Mono.Portable
 {
     public class PortableFactory : IPortableFactory
     {
-        public static Abstractions.Algorithm.AxCryptHMACSHA1 AxCryptHMACSHA1()
+        public static AxCryptHMACSHA1 AxCryptHMACSHA1()
         {
-            return new AxCryptHMACSHA1Wrapper();
+            return new AxCryptHMACSHA1Wrapper(new HMACSHA1CryptoServiceProvider());
         }
 
         public static HMACSHA512 HMACSHA512()
         {
-            return new Mono.Cryptography.HMACSHA512Wrapper(new System.Security.Cryptography.HMACSHA512());
+            return new HMACSHA512Wrapper(new System.Security.Cryptography.HMACSHA512());
         }
 
         public static Aes AesManaged()
         {
-            return new Mono.Cryptography.AesWrapper(System.Security.Cryptography.Aes.Create());
+            return new AesWrapper(System.Security.Cryptography.Aes.Create());
         }
 
         public static CryptoStreamBase CryptoStream()
         {
-            return new Mono.Cryptography.CryptoStreamWrapper();
+            return new CryptoStreamWrapper();
         }
 
         public static Sha1 SHA1Managed()
         {
-            return new Mono.Cryptography.Sha1Wrapper(System.Security.Cryptography.SHA1.Create());
+            return new Sha1Wrapper(System.Security.Cryptography.SHA1.Create());
         }
 
         public static Sha256 SHA256Managed()
         {
-            return new Mono.Cryptography.Sha256Wrapper(System.Security.Cryptography.SHA256.Create());
+            return new Sha256Wrapper(System.Security.Cryptography.SHA256.Create());
         }
 
         public static RandomNumberGenerator RandomNumberGenerator()
@@ -72,7 +72,7 @@ namespace AxCrypt.Mono.Portable
 
         public ISemaphore Semaphore(int initialCount, int maximumCount)
         {
-            return new PortableSemaphoreWrapper(new System.Threading.Semaphore(initialCount, maximumCount));
+            return new PortableSemaphoreWrapper(new Semaphore(initialCount, maximumCount));
         }
 
         public IPath Path()

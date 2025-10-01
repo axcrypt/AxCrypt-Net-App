@@ -31,8 +31,8 @@ namespace AxCrypt.Desktop.Cryptography
     {
         public HMACSHA512CryptoServiceProvider()
         {
-            SetHash1(new System.Security.Cryptography.SHA512CryptoServiceProvider());
-            SetHash2(new System.Security.Cryptography.SHA512CryptoServiceProvider());
+            SetHash1(System.Security.Cryptography.SHA512.Create());
+            SetHash2(System.Security.Cryptography.SHA512.Create());
             HashSizeValue = 512;
             BlockSizeValue = 128;
         }

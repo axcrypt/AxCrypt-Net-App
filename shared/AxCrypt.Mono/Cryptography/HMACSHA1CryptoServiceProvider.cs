@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt AB - Copyright 2025, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -18,22 +18,23 @@
  * You should have received a copy of the GNU General Public License
  * along with AxCrypt.  If not, see <http://www.gnu.org/licenses/>.
  *
- * The source is maintained at http://bitbucket.org/AxCrypt-net please visit for
+ * The source is maintained at https://github.com/axcrypt/axcrypt-net-app please visit for
  * updates, contributions and contact with the author. You may also visit
  * http://www.axcrypt.net for more information about the author.
 */
 
 #endregion Coypright and License
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-
-namespace AxCrypt.Abstractions.Algorithm
+namespace AxCrypt.Mono.Cryptography
 {
-    public abstract class AxCryptHMACSHA1 : HMAC
+    public class HMACSHA1CryptoServiceProvider : AxCrypt.Mono.Cryptography.HMACBase
     {
+        public HMACSHA1CryptoServiceProvider()
+        {
+            SetHash1(System.Security.Cryptography.SHA1.Create());
+            SetHash2(System.Security.Cryptography.SHA1.Create());
+            HashSizeValue = 160;
+            BlockSizeValue = 20;
+        }
     }
 }
