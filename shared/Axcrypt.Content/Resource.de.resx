@@ -698,6 +698,9 @@ Aktualisierungen des Abonnements werden hier innerhalb weniger Minuten angezeigt
   <data name="ArabicLanguageSelectionText" xml:space="preserve">
     <value>عربي(Arabisch)</value>
   </data>
+  <data name="AreYouSureText" xml:space="preserve">
+    <value>Sind Sie sicher?</value>
+  </data>
   <data name="AsAffiliateHeading" xml:space="preserve">
     <value>&lt;span&gt;Als&lt;/span&gt; Affiliate</value>
   </data>
@@ -11070,7 +11073,7 @@ Sie wurden gewarnt, jetzt genießen!
   <data name="Blog_WYONTABE_Conclusion_Text3" xml:space="preserve">
     <value>Benötigen Sie Hilfe beim Upgrade oder Einrichten Ihres Geschäftskontos? Kontaktieren Sie unser Support-Team oder &lt;a href='https://axcrypt.net/business/'&gt;&lt;b&gt;start your Business trial today&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
-  <data name="Blog_WYONTABE_H1_Text1">
+  <data name="Blog_WYONTABE_H1_Text1" xml:space="preserve">
     <value>AxCrypt File Encryption verfügt über kostenlose und Premium-Versionen, bei denen es sich um plattformübergreifende Lösungen (verfügbar unter Windows, macOS, Android und iOS) handelt, die für einzelne Benutzer erstellt wurden. Sie bieten zwar wichtige Verschlüsselungstools, enthalten jedoch keine &lt;a href= 'https://axcrypt.net/blog/top-ten-benefits-of-file-encryption-for-businesses-secure-business-files/'&gt;&lt;b&gt;features needed for teams&lt;/b&gt;&lt;/a&gt; oder Unternehmen benötigt werden. Am wichtigsten ist:</value>
   </data>
   <data name="Blog_WYONTABE_H1_Text2" xml:space="preserve">
@@ -11133,7 +11136,7 @@ Sie wurden gewarnt, jetzt genießen!
   <data name="Blog_WYONTABE_Summary" xml:space="preserve">
     <value>Ein Unternehmen zu führen ist wettbewerbsfähig. Jede Entscheidung, jeder Schritt nach vorne bringt neue Chancen und neue Risiken mit sich. Ohne Verschlüsselung könnten Ihre Geschäftsdateien jederzeit Bedrohungen ausgesetzt sein. Aus diesem Grund ist die Geschäftsverschlüsselung nicht optional. Wenn Sie mit einem Team arbeiten, bedeutet der Schutz Ihrer Daten den Schutz Ihrer Mitarbeiter und Ihres Fortschritts.</value>
   </data>
-  <data name="Blog_WYONTABE_Text1">
+  <data name="Blog_WYONTABE_Text1" xml:space="preserve">
     <value>Ein Unternehmen zu führen, ist wettbewerbsfähig. Jede Entscheidung, jeder Schritt nach vorne bringt neue Chancen und neue Risiken mit sich. Ohne Verschlüsselung können Ihre Geschäftsdateien jederzeit Bedrohungen ausgesetzt sein. Aus diesem Grund ist &lt;a href='https://axcrypt.net/business/'&gt;&lt;b&gt;business encryption&lt;/b&gt;&lt;/a&gt; nicht optional. Wenn Sie mit einem Team arbeiten, bedeutet  &lt;a href='https://axcrypt.net/blog/5-reasons-why-encryption-is-important-for-small-businesses/'&gt;&lt;b&gt;protecting your data&lt;/b&gt;&lt;/a&gt;, dass Sie Ihre Mitarbeiter und Ihren Fortschritt schützen müssen.</value>
   </data>
   <data name="Blog_WYONTABE_Text2" xml:space="preserve">
@@ -12023,9 +12026,6 @@ Sie wurden gewarnt, jetzt genießen!
   </data>
   <data name="BuyMorePasswordManagerSubscriptionWarning" xml:space="preserve">
     <value>Für dieses Konto ist ein aktives Abonnement vorhanden. Passwort-Manager-Abonnements können nicht zweimal mit demselben AxCrypt-Konto erworben werden.</value>
-  </data>
-  <data name="BuyMorePremiumSubscriptionWarning" xml:space="preserve">
-    <value>Es gibt ein aktives Abonnement für dieses Konto. Premium-Abonnements können nicht zweimal mit demselben AxCrypt-Konto erworben werden.</value>
   </data>
   <data name="BuyPasswordManagerText" xml:space="preserve">
     <value>Geben Sie die E-Mail-Adresse des Benutzers ein, für den Sie eine Password Manager-Lizenz erwerben:</value>
@@ -13023,6 +13023,9 @@ Wir bedauern Sie gehen zu sehen und hoffen, dass Sie Ihre Zeit mit AxCrypt genos
   <data name="DontaccountText" xml:space="preserve">
     <value>Sie haben noch kein Konto?</value>
   </data>
+  <data name="DontAskAgainText" xml:space="preserve">
+    <value>Fragen Sie nicht noch einmal nach</value>
+  </data>
   <data name="DontLikeRecurringFlowText" xml:space="preserve">
     <value>Mögen keine wiederkehrenden Abonnements</value>
   </data>
@@ -13448,6 +13451,15 @@ Wir bedauern Sie gehen zu sehen und hoffen, dass Sie Ihre Zeit mit AxCrypt genos
   <data name="Exception" xml:space="preserve">
     <value>Ausnahme bei der Verarbeitung von '{0}'.</value>
     <comment>@Invariant</comment>
+  </data>
+  <data name="ExcludedFolderNotificationText" xml:space="preserve">
+    <value>Ausgeschlossene Ordner bleiben unverschlüsselt</value>
+  </data>
+  <data name="ExcludedFoldersText" xml:space="preserve">
+    <value>Ausgeschlossene Ordner:</value>
+  </data>
+  <data name="ExcludeFolderText" xml:space="preserve">
+    <value>Ordner ausschließen</value>
   </data>
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>Verlassen</value>
@@ -13941,6 +13953,12 @@ Wir bedauern Sie gehen zu sehen und hoffen, dass Sie Ihre Zeit mit AxCrypt genos
     <value>Das Öffnen von AxCrypt Dateien per Doppelklick außerhalb von AxCrypt funktioniert vielleicht nicht richtig. Die Dateizuordnung von Windows für die Erweiterung ".axx" scheint nicht richtig zu sein. Kontaktieren Sie Ihren IT-Support oder suchen Sie im Internet nach einer Lösung.</value>
     <comment>A text that is shown to users starting the association with .axx file is broken. It should not mention "Windows", or "Mac" etc so it can be used in all environments.</comment>
   </data>
+  <data name="FileDecryptionFailedAlertMsg" xml:space="preserve">
+    <value>Datei kann nicht entschlüsselt werden '{0}'. Grund: {1}</value>
+  </data>
+  <data name="FileDecryptionSuccessAlertMsg" xml:space="preserve">
+    <value>Datei '{0}' wurde erfolgreich entschlüsselt.</value>
+  </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>Die Datei '{0}' existiert nicht.</value>
   </data>
@@ -13983,6 +14001,9 @@ Wir bedauern Sie gehen zu sehen und hoffen, dass Sie Ihre Zeit mit AxCrypt genos
   <data name="FileNotFound" xml:space="preserve">
     <value>Datei existiert nicht.</value>
   </data>
+  <data name="FileOpenFailedAlertMsg" xml:space="preserve">
+    <value>Datei kann nicht geöffnet werden '{0}'. Grund: {1}</value>
+  </data>
   <data name="FileOperationFailed" xml:space="preserve">
     <value>'{0}' Fehlgeschlagen.</value>
   </data>
@@ -14005,6 +14026,18 @@ Wir bedauern Sie gehen zu sehen und hoffen, dass Sie Ihre Zeit mit AxCrypt genos
     <value>Dateieigenschaften</value>
     <comment>A menu text for selecting file properties for encryption.</comment>
   </data>
+  <data name="FileRenameFailedAlertMsg" xml:space="preserve">
+    <value>Datei kann nicht umbenannt werden '{0}' anonym. Grund: {1}</value>
+  </data>
+  <data name="FileRenameSuccessAlertMsg" xml:space="preserve">
+    <value>Datei '{0}' wurde anonym umbenannt.</value>
+  </data>
+  <data name="FileRestoreRenameFailedAlertMsg" xml:space="preserve">
+    <value>Der ursprüngliche Name für die Datei kann nicht wiederhergestellt werden '{0}'. Grund: {1}</value>
+  </data>
+  <data name="FileRestoreRenameSuccessAlertMsg" xml:space="preserve">
+    <value>Datei '{0}' wurde wieder in seinen ursprünglichen Namen versetzt.</value>
+  </data>
   <data name="FileSizeColumnHeaderText" xml:space="preserve">
     <value>Größe</value>
   </data>
@@ -14026,15 +14059,39 @@ Wir bedauern Sie gehen zu sehen und hoffen, dass Sie Ihre Zeit mit AxCrypt genos
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>Finanziell</value>
   </data>
+  <data name="FindFileFeatureTitle" xml:space="preserve">
+    <value>Dateien suchen</value>
+  </data>
+  <data name="FindFilesFeatureDescription" xml:space="preserve">
+    <value>Verwalten Sie alle verschlüsselten Dateiverweise an einem Ort, mit Optionen zum Anzeigen, Umbenennen, Löschen oder Entschlüsseln.</value>
+  </data>
+  <data name="FindFilesFeatureTooltip" xml:space="preserve">
+    <value>Ein zentraler Ort zum Verwalten verschlüsselter Dateien</value>
+  </data>
+  <data name="FindFilesSearchPlaceholder" xml:space="preserve">
+    <value>Geben Sie ein, um eine Datei zu finden…</value>
+  </data>
+  <data name="FindPathTitle" xml:space="preserve">
+    <value>Dateipfad</value>
+  </data>
   <data name="FirstNameLabel" xml:space="preserve">
     <value>Vorname</value>
   </data>
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>Ordner '{0}' bereits gesichert.</value>
   </data>
+  <data name="FolderOpenFailedAlertMsg" xml:space="preserve">
+    <value>Der Ordner kann nicht geöffnet werden für '{0}'. Grund: {1}</value>
+  </data>
   <data name="FolderSelectTitle" xml:space="preserve">
     <value>Ordner wählen</value>
     <comment>A prompt or title in a folder selection dialog, prompting the user to select a folder.</comment>
+  </data>
+  <data name="FolderSettingsText" xml:space="preserve">
+    <value>Unterordner ausschließen</value>
+  </data>
+  <data name="FolderSettingsTitle" xml:space="preserve">
+    <value>Einstellungen für gesicherte Ordner</value>
   </data>
   <data name="FollowUsTitle" xml:space="preserve">
     <value>Folgen Sie uns</value>
@@ -14542,19 +14599,19 @@ Bitte besuchen Sie unseren &lt;a href="{0}"&gt;community support&lt;/a&gt;.</val
   <data name="GetStartedGuideUseText5" xml:space="preserve">
     <value>Ideal für den privaten und geschäftlichen Gebrauch</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText">
+  <data name="GetStartedGuideWhatsNextText" xml:space="preserve">
     <value>🔒 &lt;strong&gt;Dateien einfach verschlüsseln und entschlüsseln&lt;/strong&gt; – Folgen Sie unserer &lt;a href='https://axcrypt.net/information/guides/encryption-decryption/'&gt;[Step-by-Step AxCrypt Guide]&lt;/a&gt;.</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText1">
+  <data name="GetStartedGuideWhatsNextText1" xml:space="preserve">
     <value>👥 &lt;strong&gt;Verwalten Sie Teams und Business Access&lt;/strong&gt; – Vereinfachen Sie die Zusammenarbeit mit unserem &lt;a href='https://axcrypt.net/information/axcrypt-business/'&gt;[Business Setup Guide]&lt;/a&gt;.</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText2">
+  <data name="GetStartedGuideWhatsNextText2" xml:space="preserve">
     <value>🔐 &lt;strong&gt;Warum sollten Sie sich für AxCrypt für die Sicherheit entscheiden&lt;/strong&gt; – Entdecken Sie die Algorithmen und Schutzmaßnahmen auf unserer &lt;a href='https://axcrypt.net/information/security/'&gt;[Security Page]&lt;/a&gt;.</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText3">
+  <data name="GetStartedGuideWhatsNextText3" xml:space="preserve">
     <value>📘 &lt;strong&gt;Best Practices für die Verschlüsselung&lt;/strong&gt; – Entdecken Sie unsere &lt;a href='https://axcrypt.net/blog/'&gt;[Blogs on easy-to-use 128-bit and 256-bit encryption].&lt;/a&gt;</value>
   </data>
-  <data name="GetStartedHowToUseHeading">
+  <data name="GetStartedHowToUseHeading" xml:space="preserve">
     <value>Wie zu Verwenden</value>
   </data>
   <data name="GetStartedHowToUseIngress" xml:space="preserve">
@@ -14730,6 +14787,9 @@ Bitte besuchen Sie unseren &lt;a href="{0}"&gt;community support&lt;/a&gt;.</val
   </data>
   <data name="GetSubscriptionLoginRequiredInfoText" xml:space="preserve">
     <value>Bitte melden Sie sich an, um Ihr Abonnement zu erhalten! Wenn Sie noch kein Konto haben, müssen Sie sich zuerst &lt;a href="{0}Home/Register/"&gt;anmelden&lt;/a&gt;.</value>
+  </data>
+  <data name="GettheLatestAxCryptText" xml:space="preserve">
+    <value>Holen Sie sich hier die neuesten Versionen von AxCrypt Version 2</value>
   </data>
   <data name="GoToGroupsText" xml:space="preserve">
     <value>Zu Gruppen</value>
@@ -15969,6 +16029,9 @@ Ihr Passwort wird nicht auf dem Server gespeichert und die Verbindung ist immer 
   <data name="InvalidEmail" xml:space="preserve">
     <value>Falsches Format für eine E-Mail Adresse.</value>
   </data>
+  <data name="InvalidFolder" xml:space="preserve">
+    <value>Ungültiger Ordnerpfad</value>
+  </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>Ungültiger Schlüssel für '{0}'.</value>
   </data>
@@ -15977,6 +16040,9 @@ Ihr Passwort wird nicht auf dem Server gespeichert und die Verbindung ist immer 
   </data>
   <data name="InvalidSelectionErrorMessage" xml:space="preserve">
     <value>Bitte wählen Sie mindestens eine Meldung aus.</value>
+  </data>
+  <data name="InvalidSubFolder" xml:space="preserve">
+    <value>Der ausgewählte Ordner ist kein gültiger Unterordner</value>
   </data>
   <data name="InvitationMailBodyIntro" xml:space="preserve">
     <value>Sie wurden von &lt;b&gt;{0}&lt;/b&gt; zur Benutzung von AxCrypt eingeladen. Um mit dem Sichern Ihrer Dateien zu beginnen &lt;a href="{1}" style="color: #86b96e; text-decoration: none;"&gt;download&lt;/a&gt; und installieren Sie AxCrypt. Melden Sie sich mit &lt;b&gt;{2}&lt;/b&gt; an, geben Sie den Bestätigungscode an und legen Sie Ihr geheimes Passwort fest.</value>
@@ -16277,6 +16343,9 @@ Bitte geben Sie die Sprache an, die in der Einladung verwendet werden soll, und 
     <value>Nachdem Dateien vom AxCrypt 1.x Format konvertiert wurden, müssen Sie das neue Log In Passwort nutzen um diese zu öffnen. Daher überprüfen Sie Ihr Passwort bitte hier. 
 
 Vergessen Sie dieses Passwort nicht!</value>
+  </data>
+  <data name="LegacyDownloadsContent" xml:space="preserve">
+    <value>Benötigen Sie eine ältere Version? Laden Sie frühere AxCrypt-Versionen herunter, um die Kompatibilität mit früheren Systemen zu gewährleisten.</value>
   </data>
   <data name="LegacyDownloadsDescription" xml:space="preserve">
     <value>Dies sind Ältere AxCrypt 1.x-Downloads. Wir unterstützen Sie nicht und fordern Sie auf, diese nicht download und zu verwenden, es sei denn, Sie haben einen besonderen Bedarf dafür. &lt;strong&gt;Neue verschlüsselte Dateien mit AxCrypt 2.x sind nicht kompatibel mit Legacy AxCrypt 1.x!&lt;/strong&gt;verschlüsselte  Dateien mit Legacy AxCrypt 1.x sind von AxCrypt 2 entschlüsselbar.die x.</value>
@@ -18584,12 +18653,18 @@ einen beliebigen Multifaktor-Typ (Authenticator-App, E-Mail und SMS).</value>
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>Sie sind abgemeldet. Klicken Sie zum anmelden.</value>
   </data>
+  <data name="NoFilesFoundText" xml:space="preserve">
+    <value>Keine Datei gefunden</value>
+  </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>Kann im Moment keine Verbindung zum Server herstellen, bitte überprüfen Sie Ihre Internetverbindung</value>
     <comment>Message which is displayed when device doesn't have internet connection.</comment>
   </data>
   <data name="NoItemsSelectedText" xml:space="preserve">
     <value>Keine Artikel ausgewählt</value>
+  </data>
+  <data name="NoKeepEncryptedText" xml:space="preserve">
+    <value>Nein, verschlüsselt halten</value>
   </data>
   <data name="NoLabel" xml:space="preserve">
     <value>Nein</value>
@@ -19182,6 +19257,9 @@ Leerraum und Teile, die gleich zu üblichen Passwörtern sind werden ignoriert u
   </data>
   <data name="PastIncidentsHeading" xml:space="preserve">
     <value>Vergangene Vorfälle</value>
+  </data>
+  <data name="PathText" xml:space="preserve">
+    <value>Pfad:</value>
   </data>
   <data name="PaymentCancelledNotifyEventText" xml:space="preserve">
     <value>Ihr letzter Versuch, das AxCrypt-Abonnement zu erwerben, war nicht erfolgreich!</value>
@@ -20473,6 +20551,9 @@ Erhalten Sie 30 Tage kostenlos und stornieren Sie jederzeit!</value>
     <value>Entfernen von der Liste, aber Ordner gesichert lassen.</value>
     <comment>This text is used in the context menu option, which will help the users to remove the file from the recent files list and remove the folder from the secured folders list.</comment>
   </data>
+  <data name="RemoveText" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>Es gibt ein aktives wiederkehrendes Abonnement für dieses Konto. Wiederkehrende Business-abonnements müssen nicht manuell erneuert werden.</value>
   </data>
@@ -21480,6 +21561,9 @@ Natürlich wird Ihnen keine Lizenz zugewiesen.</value>
   <data name="SelectAllText" xml:space="preserve">
     <value>Alle auswählen</value>
   </data>
+  <data name="SelectFileToViewFileInfoText" xml:space="preserve">
+    <value>Datei auswählen, um Dateiinformationen anzuzeigen</value>
+  </data>
   <data name="SelectGroupText" xml:space="preserve">
     <value>Wählen Sie eine Gruppe aus</value>
   </data>
@@ -22372,7 +22456,7 @@ Bitte besuchen Sie unseren &lt;a href="{0}"&gt;community support&lt;/a&gt;.</val
     <value>Update - Erhalten Sie über alle AxCrypt Updates Benachrichtigungen</value>
   </data>
   <data name="TfaCodeGeneratedText" xml:space="preserve">
-    <value>Um die Anmeldung abzuschließen, geben Sie den 6-stelligen Code ein, der von Ihrer Authentifizierungs-App generiert wurde.</value>
+    <value>Um die Anmeldung abzuschließen, geben Sie den 6-stelligen Bestätigungscode der ausgewählten Authentifizierungsmethode ein.</value>
   </data>
   <data name="TfaPhoneText" xml:space="preserve">
     <value>Sie haben Ihr Telefon nicht?</value>
@@ -22842,6 +22926,12 @@ Das AxCrypt Team</value>
   <data name="UserNamePrompt" xml:space="preserve">
     <value>Benutzernamen</value>
   </data>
+  <data name="UserPromptOnAddingExcludeFolder" xml:space="preserve">
+    <value>Möchten Sie die Dateien im ausgeschlossenen Unterordner entschlüsseln?</value>
+  </data>
+  <data name="UserPromptOnRemovingExcludeFolder" xml:space="preserve">
+    <value>Der ausgewählte Ordner befindet sich derzeit in der Liste der ausgeschlossenen Ordner. Möchten Sie es stattdessen sichern?</value>
+  </data>
   <data name="UserSettingsFormatChangeNeedsReset" xml:space="preserve">
     <value>Sie haben AxCrypt aktualisiert. Unglücklicherweise muss Ihre Konfiguration zurückgesetzt werden. Nach dem Neustart werden Ihre Einstellungen und Präferenzen leider verloren sein. Wir entschuldigen uns für diese Unannehmlichkeiten. Ihre verschlüsselten Dateien sind immer noch sicher und in Ordnung.</value>
   </data>
@@ -23240,7 +23330,7 @@ Für mehr Informationen klicken Sie auf OK um einen Webbrowser zu unserer Websit
     <value>Falsches Passwort. Bitte versuchen Sie es erneut.</value>
   </data>
   <data name="WrongVerificationCode" xml:space="preserve">
-    <value>Falscher Aktivierungscode. Bitte überprüfen Sie Ihre E-Mail erneut.</value>
+    <value>Falscher Verifizierungscode. Bitte versuchen Sie es erneut.</value>
   </data>
   <data name="WrongVerificationCodeFormat" xml:space="preserve">
     <value>Der Bestätigungscode muss genau 6 Zeichen haben.</value>
@@ -23283,6 +23373,9 @@ Für mehr Informationen klicken Sie auf OK um einen Webbrowser zu unserer Websit
   </data>
   <data name="YearlySubscriptionTitle" xml:space="preserve">
     <value>Jährlich</value>
+  </data>
+  <data name="YesDecryptText" xml:space="preserve">
+    <value>Ja, entschlüsseln</value>
   </data>
   <data name="YesLabel" xml:space="preserve">
     <value>Ja</value>

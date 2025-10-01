@@ -698,6 +698,9 @@
   <data name="ArabicLanguageSelectionText" xml:space="preserve">
     <value>عربي(Арабский)</value>
   </data>
+  <data name="AreYouSureText" xml:space="preserve">
+    <value>Вы уверены?</value>
+  </data>
   <data name="AsAffiliateHeading" xml:space="preserve">
     <value>&lt;span&gt;В качестве&lt;/span&gt; Партнера</value>
   </data>
@@ -11061,7 +11064,7 @@
   <data name="Blog_WYONTABE_Conclusion_Text3" xml:space="preserve">
     <value>Нужна помощь в обновлении или настройке бизнес-аккаунта? Свяжитесь с нашей службой поддержки или &lt;a href='https://axcrypt.net/business/'&gt;&lt;b&gt;start your Business trial today&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
-  <data name="Blog_WYONTABE_H1_Text1">
+  <data name="Blog_WYONTABE_H1_Text1" xml:space="preserve">
     <value>AxCrypt File Encryption имеет версии Free и Premium, которые представляют собой кроссплатформенные решения (доступны на Windows, macOS, Android и iOS), созданные для индивидуальных пользователей. Хотя они предлагают основные инструменты шифрования, они не включают &lt;a href='https://axcrypt.net/blog/top-ten-benefits-of-file-encryption-for-businesses-secure-business-files/'&gt;&lt;b&gt;features needed for teams&lt;/b&gt;&lt;/a&gt; или компаний. Самое главное:</value>
   </data>
   <data name="Blog_WYONTABE_H1_Text2" xml:space="preserve">
@@ -11124,7 +11127,7 @@
   <data name="Blog_WYONTABE_Summary" xml:space="preserve">
     <value>Ведение бизнеса – это конкурентная борьба. Каждое решение, каждый шаг вперед приносит новые возможности и новые риски. Без шифрования ваши бизнес-файлы могут быть подвержены угрозам в любое время. Вот почему шифрование бизнеса является обязательным. Если вы работаете в команде, защита ваших данных означает защиту ваших сотрудников и вашего прогресса.</value>
   </data>
-  <data name="Blog_WYONTABE_Text1">
+  <data name="Blog_WYONTABE_Text1" xml:space="preserve">
     <value>Ведение бизнеса – это конкурентная борьба. Каждое решение, каждый шаг вперед приносит новые возможности и новые риски. Без шифрования ваши бизнес-файлы могут быть подвержены угрозам в любое время. Вот почему &lt;a href='https://axcrypt.net/business/'&gt;&lt;b&gt;business encryption&lt;/b&gt;&lt;/a&gt; не является необязательным. Если вы работаете в команде,  &lt;a href='https://axcrypt.net/blog/5-reasons-why-encryption-is-important-for-small-businesses/'&gt;&lt;b&gt;protecting your data&lt;/b&gt;&lt;/a&gt; означает защиту ваших сотрудников и вашего прогресса.</value>
   </data>
   <data name="Blog_WYONTABE_Text2" xml:space="preserve">
@@ -12014,9 +12017,6 @@
   </data>
   <data name="BuyMorePasswordManagerSubscriptionWarning" xml:space="preserve">
     <value>На этом аккаунте есть активная подписка. Подписки на Менеджер паролей не могут быть приобретены дважды с одной и той же учетной записью AxCrypt.</value>
-  </data>
-  <data name="BuyMorePremiumSubscriptionWarning" xml:space="preserve">
-    <value>У этого аккаунта есть активная подписка. Подписку Premium нельзя приобрести дважды с одного аккаунта AxCrypt.</value>
   </data>
   <data name="BuyPasswordManagerText" xml:space="preserve">
     <value>Введите адрес электронной почты пользователя, для которого вы покупаете лицензию Password Manager:</value>
@@ -13014,6 +13014,9 @@
   <data name="DontaccountText" xml:space="preserve">
     <value>У вас нет аккаунта?</value>
   </data>
+  <data name="DontAskAgainText" xml:space="preserve">
+    <value>Больше не спрашивать</value>
+  </data>
   <data name="DontLikeRecurringFlowText" xml:space="preserve">
     <value>Не нравятся повторяющиеся подписки</value>
   </data>
@@ -13443,6 +13446,15 @@
   <data name="Exception" xml:space="preserve">
     <value>Исключение во время обработки '{0}'.</value>
     <comment>@Invariant</comment>
+  </data>
+  <data name="ExcludedFolderNotificationText" xml:space="preserve">
+    <value>Исключенные папки остаются незашифрованными</value>
+  </data>
+  <data name="ExcludedFoldersText" xml:space="preserve">
+    <value>Исключенные папки:</value>
+  </data>
+  <data name="ExcludeFolderText" xml:space="preserve">
+    <value>Исключить папку</value>
   </data>
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>Выход</value>
@@ -13936,6 +13948,12 @@
     <value>Нажатие два раза для открытия AxCrypt файлов , находящихся вне AxCrypt, может неправильно сработать. Операционная система ассоциации файлов для продления ".axx" кажется сломана. Свяжитесь с Вашей IT поддержкой или введите запрос на разрешение данной проблемы в поисковике в Интернете.</value>
     <comment>A text that is shown to users starting the association with .axx file is broken. It should not mention "Windows", or "Mac" etc so it can be used in all environments.</comment>
   </data>
+  <data name="FileDecryptionFailedAlertMsg" xml:space="preserve">
+    <value>Не удается расшифровать файл '{0}'. Причина: {1}</value>
+  </data>
+  <data name="FileDecryptionSuccessAlertMsg" xml:space="preserve">
+    <value>Файл '{0}' был успешно расшифрован.</value>
+  </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>Файл '{0}' не существует.</value>
   </data>
@@ -13978,6 +13996,9 @@
   <data name="FileNotFound" xml:space="preserve">
     <value>Файл не существует.</value>
   </data>
+  <data name="FileOpenFailedAlertMsg" xml:space="preserve">
+    <value>Не удается открыть файл '{0}'. Причина: {1}</value>
+  </data>
   <data name="FileOperationFailed" xml:space="preserve">
     <value>Неудавшаяся попытка '{0}'.</value>
   </data>
@@ -14000,6 +14021,18 @@
     <value>Свойства шифрования файла</value>
     <comment>A menu text for selecting file properties for encryption.</comment>
   </data>
+  <data name="FileRenameFailedAlertMsg" xml:space="preserve">
+    <value>Не удается анонимно переименовать файл '{0}'. Причина: {1}</value>
+  </data>
+  <data name="FileRenameSuccessAlertMsg" xml:space="preserve">
+    <value>Файл '{0}' был анонимно переименован.</value>
+  </data>
+  <data name="FileRestoreRenameFailedAlertMsg" xml:space="preserve">
+    <value>Не удается восстановить исходное имя файла '{0}'. Причина: {1}</value>
+  </data>
+  <data name="FileRestoreRenameSuccessAlertMsg" xml:space="preserve">
+    <value>Файл '{0}' было восстановлено его первоначальное название.</value>
+  </data>
   <data name="FileSizeColumnHeaderText" xml:space="preserve">
     <value>Размер</value>
   </data>
@@ -14021,15 +14054,39 @@
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>Финансы</value>
   </data>
+  <data name="FindFileFeatureTitle" xml:space="preserve">
+    <value>Поиск файлов</value>
+  </data>
+  <data name="FindFilesFeatureDescription" xml:space="preserve">
+    <value>Управляйте всеми зашифрованными ссылками на файлы в одном месте, с возможностью просмотра, переименования, удаления или расшифровки.</value>
+  </data>
+  <data name="FindFilesFeatureTooltip" xml:space="preserve">
+    <value>Одно место для управления зашифрованными файлами</value>
+  </data>
+  <data name="FindFilesSearchPlaceholder" xml:space="preserve">
+    <value>Напишите, чтобы найти файл...</value>
+  </data>
+  <data name="FindPathTitle" xml:space="preserve">
+    <value>Путь к файлу</value>
+  </data>
   <data name="FirstNameLabel" xml:space="preserve">
     <value>Имя</value>
   </data>
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>Папка '{0}' уже защищена.</value>
   </data>
+  <data name="FolderOpenFailedAlertMsg" xml:space="preserve">
+    <value>Не удается открыть папку для '{0}'. Причина: {1}</value>
+  </data>
   <data name="FolderSelectTitle" xml:space="preserve">
     <value>Выберите папку</value>
     <comment>A prompt or title in a folder selection dialog, prompting the user to select a folder.</comment>
+  </data>
+  <data name="FolderSettingsText" xml:space="preserve">
+    <value>Исключить подпапку</value>
+  </data>
+  <data name="FolderSettingsTitle" xml:space="preserve">
+    <value>Настройки защищенной папки</value>
   </data>
   <data name="FollowUsTitle" xml:space="preserve">
     <value>Подписывайтесь на нас</value>
@@ -14537,19 +14594,19 @@
   <data name="GetStartedGuideUseText5" xml:space="preserve">
     <value>Идеально подходит для личного и делового использования</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText">
+  <data name="GetStartedGuideWhatsNextText" xml:space="preserve">
     <value>🔒 &lt;strong&gt;Легко шифруйте и расшифровывайте файлы&lt;/strong&gt; – Следуйте нашему &lt;a href='https://axcrypt.net/information/guides/encryption-decryption/'&gt;[Step-by-Step AxCrypt Guide]&lt;/a&gt;.</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText1">
+  <data name="GetStartedGuideWhatsNextText1" xml:space="preserve">
     <value>👥 &lt;strong&gt;Управляйте командами и доступом к бизнесу&lt;/strong&gt; — Упростите совместную работу с помощью нашего &lt;a href='https://axcrypt.net/information/axcrypt-business/'&gt;[Business Setup Guide]&lt;/a&gt;.</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText2">
+  <data name="GetStartedGuideWhatsNextText2" xml:space="preserve">
     <value>🔐 &lt;strong&gt;Почему стоит выбрать AxCrypt для обеспечения безопасности&lt;/strong&gt; – Узнайте об алгоритмах и средствах защиты на нашей &lt;a href='https://axcrypt.net/information/security/'&gt;[Security Page]&lt;/a&gt;.</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText3">
+  <data name="GetStartedGuideWhatsNextText3" xml:space="preserve">
     <value>📘 &lt;strong&gt;Лучшие практики шифрования&lt;/strong&gt; – Ознакомьтесь с нашими &lt;a href='https://axcrypt.net/blog/'&gt;[Blogs on easy-to-use 128-bit and 256-bit encryption]&lt;/a&gt;.</value>
   </data>
-  <data name="GetStartedHowToUseHeading">
+  <data name="GetStartedHowToUseHeading" xml:space="preserve">
     <value>Как использовать</value>
   </data>
   <data name="GetStartedHowToUseIngress" xml:space="preserve">
@@ -14725,6 +14782,9 @@
   </data>
   <data name="GetSubscriptionLoginRequiredInfoText" xml:space="preserve">
     <value>Пожалуйста, войдите в систему, чтобы оформить подписку! Если у вас еще нет учетной записи, вам сначала нужно &lt;a href="{0}Home/Register/"&gt;зарегестрироваться&lt;/a&gt;.</value>
+  </data>
+  <data name="GettheLatestAxCryptText" xml:space="preserve">
+    <value>Получите последние версии AxCrypt 2 здесь</value>
   </data>
   <data name="GoToGroupsText" xml:space="preserve">
     <value>Перейти в Группы</value>
@@ -15964,6 +16024,9 @@
   <data name="InvalidEmail" xml:space="preserve">
     <value>Неправильный формат адреса электронной почты.</value>
   </data>
+  <data name="InvalidFolder" xml:space="preserve">
+    <value>Неверный путь к папке</value>
+  </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>Недействующий ключ для '{0}'.</value>
   </data>
@@ -15972,6 +16035,9 @@
   </data>
   <data name="InvalidSelectionErrorMessage" xml:space="preserve">
     <value>Пожалуйста, выберите хотя бы одно сообщение.</value>
+  </data>
+  <data name="InvalidSubFolder" xml:space="preserve">
+    <value>Выбранная папка не является допустимой подпапкой</value>
   </data>
   <data name="InvitationMailBodyIntro" xml:space="preserve">
     <value>Вы были приглашены &lt;b&gt;{0}&lt;/b&gt;  в AxCrypt File Security. Для начала обеспечения безопасности Вашим файлам просто &lt;a href="{1}" style="color: #86b96e; text-decoration: none;"&gt;загрузите&lt;/a&gt;и установите AxCrypt. Войдите в систему AxCrypt с &lt;b&gt;{2}&lt;/b&gt;, введите верификационный код и установите Ваш секретный пароль.</value>
@@ -16272,6 +16338,9 @@ SE-114 29 Стокгольм
     <value>После конвертации файлов они будут открыты только с помощью текущего пароля AxCrypt. Пожалуйста, подтвердите свой пароль. 
 
 Не забудьте этот пароль!</value>
+  </data>
+  <data name="LegacyDownloadsContent" xml:space="preserve">
+    <value>Нужна более старая версия? Загрузите предыдущие выпуски AxCrypt для совместимости с более ранними системами.</value>
   </data>
   <data name="LegacyDownloadsDescription" xml:space="preserve">
     <value>Это устаревшие загрузки AxCrypt 1.x. Мы не поддерживаем их и призываем вас не скачать и не использовать их, если у вас нет для этого особой необходимости. &lt;strong&gt;Новые файлы, зашифрованные с AxCrypt 2.х не совместимы с устаревшими AxCrypt 1.х!&lt;/strong&gt; Файлы, зашифрованные с устаревшими AxCrypt 1.х можно расшифровать с AxCrypt 2.х.</value>
@@ -18587,12 +18656,18 @@ SE-114 29 Стокгольм
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>Вы выполнили Выход Из Системы. Нажмите для Входа В Систему.</value>
   </data>
+  <data name="NoFilesFoundText" xml:space="preserve">
+    <value>Файл не найден</value>
+  </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>На данный момент невозможно подключиться к серверу, пожалуйста, проверьте Ваш доступ к Интернету.</value>
     <comment>Message which is displayed when device doesn't have internet connection.</comment>
   </data>
   <data name="NoItemsSelectedText" xml:space="preserve">
     <value>Статьи не выбраны</value>
+  </data>
+  <data name="NoKeepEncryptedText" xml:space="preserve">
+    <value>Нет, оставить зашифрованной</value>
   </data>
   <data name="NoLabel" xml:space="preserve">
     <value>Нет</value>
@@ -19180,6 +19255,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="PastIncidentsHeading" xml:space="preserve">
     <value>Инциденты в прошлом</value>
+  </data>
+  <data name="PathText" xml:space="preserve">
+    <value>Путь:</value>
   </data>
   <data name="PaymentCancelledNotifyEventText" xml:space="preserve">
     <value>Ваша недавняя попытка приобрести подписку AxCrypt оказалась неудачной!</value>
@@ -20446,6 +20524,9 @@ SE-114 29 Стокгольм
     <value>Удалить из списка, но оставить защищённым</value>
     <comment>This text is used in the context menu option, which will help the users to remove the file from the recent files list and remove the folder from the secured folders list.</comment>
   </data>
+  <data name="RemoveText" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>На эту учетную запись действует активная повторная подписка. Повторные Business подписки не нужно продлевать вручную.</value>
   </data>
@@ -21449,6 +21530,9 @@ SE-114 29 Стокгольм
   <data name="SelectAllText" xml:space="preserve">
     <value>Выбрать все</value>
   </data>
+  <data name="SelectFileToViewFileInfoText" xml:space="preserve">
+    <value>Выберите файл для просмотра информации о файле</value>
+  </data>
   <data name="SelectGroupText" xml:space="preserve">
     <value>Выберите группу</value>
   </data>
@@ -22343,7 +22427,7 @@ SE-114 29 Стокгольм
     <value>Обновление - Получать уведомления о всех AxCrypt обновлениях</value>
   </data>
   <data name="TfaCodeGeneratedText" xml:space="preserve">
-    <value>Чтобы завершить вход в систему, введите 6-значный код, сгенерированный приложением для аутентификации.</value>
+    <value>Чтобы завершить вход в систему, введите 6-значный код подтверждения из выбранного способа аутентификации.</value>
   </data>
   <data name="TfaPhoneText" xml:space="preserve">
     <value>У вас нет телефона рядом?</value>
@@ -22816,6 +22900,12 @@ SE-114 29 Стокгольм
   <data name="UserNamePrompt" xml:space="preserve">
     <value>Имя пользователя</value>
   </data>
+  <data name="UserPromptOnAddingExcludeFolder" xml:space="preserve">
+    <value>Вы хотите расшифровать файлы внутри исключенной подпапки?</value>
+  </data>
+  <data name="UserPromptOnRemovingExcludeFolder" xml:space="preserve">
+    <value>Выбранная папка в данный момент находится в списке исключенных. Хотите защитить?</value>
+  </data>
   <data name="UserSettingsFormatChangeNeedsReset" xml:space="preserve">
     <value>Вы обновили AxCrypt. К сожалению, Ваши настройки должны быть аннулированы. После перезапуска Ваши предпочтения и настройки будут, к сожалению, утрачены. Однако Ваши закодированные файлы в безопасности.</value>
   </data>
@@ -23213,7 +23303,7 @@ SE-114 29 Стокгольм
     <value>Неправильный Пароль. Пожалуйста, попробуйте ещё раз.</value>
   </data>
   <data name="WrongVerificationCode" xml:space="preserve">
-    <value>Неправильный верификационный код. Пожалуйста, перепроверьте Вашу электронную почту.</value>
+    <value>Неверный код верификации. Пожалуйста, повторите попытку.</value>
   </data>
   <data name="WrongVerificationCodeFormat" xml:space="preserve">
     <value>Верификационный код должен быть 6-значным.</value>
@@ -23256,6 +23346,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="YearlySubscriptionTitle" xml:space="preserve">
     <value>В год</value>
+  </data>
+  <data name="YesDecryptText" xml:space="preserve">
+    <value>Да, расшифровать</value>
   </data>
   <data name="YesLabel" xml:space="preserve">
     <value>Да</value>

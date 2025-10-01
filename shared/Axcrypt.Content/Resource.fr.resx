@@ -12270,9 +12270,6 @@ Les deux secteurs suivants sont couverts par les obligations du NIS2.</value>
   <data name="BuyMorePasswordManagerSubscriptionWarning" xml:space="preserve">
     <value>Il y a un abonnement actif sur ce compte. Les abonnements au gestionnaire de mots de passe ne peuvent pas être achetés deux fois avec le même compte AxCrypt.</value>
   </data>
-  <data name="BuyMorePremiumSubscriptionWarning" xml:space="preserve">
-    <value>Ce compte possède déjà un abonnement actif. Vous ne pouvez pas acheter plus d'un abonnement Premium avec le même compte.</value>
-  </data>
   <data name="BuyPasswordManagerText" xml:space="preserve">
     <value>Saisissez l'adresse e-mail de l'utilisateur pour lequel vous achetez une licence pour le gestionnaire de mots de passe :</value>
   </data>
@@ -13283,6 +13280,9 @@ Nous sommes désolés de vous voir partir, mais espérons néanmoins qu'AxCrypt 
   </data>
   <data name="DontaccountText" xml:space="preserve">
     <value>Vous n’avez pas d’une compte ? </value>
+  </data>
+  <data name="DontAskAgainText" xml:space="preserve">
+    <value>Ne demandez plus à</value>
   </data>
   <data name="DontLikeRecurringFlowText" xml:space="preserve">
     <value>N’aimez pas les abonnements récurrents</value>
@@ -15068,6 +15068,9 @@ facilement avec des minimums de clics</value>
   <data name="GetSubscriptionLoginRequiredInfoText" xml:space="preserve">
     <value>Veuillez vous connecter pour accéder à votre abonnement ! Si vous n'avez pas encore de compte, vous devez d'abord vous &lt;a href="{0}Home/Register/"&gt;inscrire&lt;/a&gt;.</value>
   </data>
+  <data name="GettheLatestAxCryptText" xml:space="preserve">
+    <value>Prenez la dernière sortie d’AxCrypt Version 2 ici</value>
+  </data>
   <data name="GoToGroupsText" xml:space="preserve">
     <value>Aller aux groupes</value>
   </data>
@@ -16675,6 +16678,9 @@ Veuillez choisir la langue souhaitée pour l'invitation, et ajoutez un message p
     <value>Une fois les fichiers convertis, ils s'ouvriront uniquement avec votre mot de passe AxCrypt actuel. Veuillez confirmer votre mot de passe.
 
 N'oubliez pas ce mot de passe !</value>
+  </data>
+  <data name="LegacyDownloadsContent" xml:space="preserve">
+    <value>Vous avez besoin d'une ancienne version? Téléchargez la précédente version d’AxCrypt pour avoir de la compatibilité avec le système du passé</value>
   </data>
   <data name="LegacyDownloadsDescription" xml:space="preserve">
     <value>Ce sont des téléchargements hérités de AxCrypt 1.x. Nous n'en prenons pas la responsabilité et vous encourageons à ne pas les télécharger ni les utiliser, sauf si vous en avez véritablement besoin. &lt;strong&gt;Les nouveaux documents chiffrés avec AxCrypt 2.x ne sont pas compatibles avec la version héritée d'AxCrypt 1.x !&lt;/strong&gt; Les documents chiffrés avec la version héritée d'AxCrypt 1 sont déchiffrables avec AxCrypt 2.x.</value>
@@ -23051,7 +23057,7 @@ Pour aller à la page d'accueil, cliquer &lt;a href="{1}"&gt;ici&lt;/a&gt;.</val
     <value>Mise à jour - Soyez informé de toutes les mises à jour AxCrypt</value>
   </data>
   <data name="TfaCodeGeneratedText" xml:space="preserve">
-    <value>Pour compléter la connexion, entrez les codes aux 6 chiffres générées par votre l’application d’authenticateur.</value>
+    <value>À terminer la connexion, entrez le code de vérification à 6 chiffres depuis la méthode d'authentification sélectionnée.</value>
   </data>
   <data name="TfaPhoneText" xml:space="preserve">
     <value>Vous n’avez pas votre téléphone portable ? </value>
@@ -23948,7 +23954,7 @@ sans invite. Par défaut, l'interface utilisateur et les invites sont supprimée
     <value>Mauvais mot de passe. S'il vous plait, essayer à nouveau.</value>
   </data>
   <data name="WrongVerificationCode" xml:space="preserve">
-    <value>Mauvais code de vérification. S'il vous plait, vérifiez de nouveau votre e-mail.</value>
+    <value>Le code de vérification incorrecte. Veuillez réessayer.</value>
   </data>
   <data name="WrongVerificationCodeFormat" xml:space="preserve">
     <value>Le code de vérification doit être de 6 chiffres exactement.</value>

@@ -711,6 +711,9 @@
   <data name="ArabicLanguageSelectionText" xml:space="preserve">
     <value>عربي(阿拉伯语)</value>
   </data>
+  <data name="AreYouSureText" xml:space="preserve">
+    <value>是否确定？</value>
+  </data>
   <data name="AsAffiliateHeading" xml:space="preserve">
     <value>&lt;span&gt;作为一个&lt;/span&gt; 联盟</value>
   </data>
@@ -11080,7 +11083,7 @@
   <data name="Blog_WYONTABE_Conclusion_Text3" xml:space="preserve">
     <value>需要有关升级或设置企业帐户的帮助？联系我们的支持团队或 &lt;a href='https://axcrypt.net/business/'&gt;&lt;b&gt;start your Business trial today&lt;/b&gt;&lt;/a&gt;。</value>
   </data>
-  <data name="Blog_WYONTABE_H1_Text1">
+  <data name="Blog_WYONTABE_H1_Text1" xml:space="preserve">
     <value>AxCrypt文件加密具有免费和高级版本，这些版本是为个人用户创建的跨平台解决方案（可在Windows，macOS，Android和iOS上使用）。 虽然它们提供基本的加密工具，但它们不包括&lt;a href='https://axcrypt.net/blog/top-ten-benefits-of-file-encryption-for-businesses-secure-business-files/'&gt;&lt;b&gt;features needed for teams&lt;/b&gt;&lt;/a&gt;或公司所需的功能。 最重要的是:</value>
   </data>
   <data name="Blog_WYONTABE_H1_Text2" xml:space="preserve">
@@ -11143,7 +11146,7 @@
   <data name="Blog_WYONTABE_Summary" xml:space="preserve">
     <value>经营企业是有竞争力的。每一个决定，每一步前进，都会带来新的机遇和新的风险。如果不进行加密，您的业务文件可能随时面临威胁。这就是为什么企业加密不是可有可无的原因。如果您与团队合作，保护您的数据意味着保护您的员工和您的进度。</value>
   </data>
-  <data name="Blog_WYONTABE_Text1">
+  <data name="Blog_WYONTABE_Text1" xml:space="preserve">
     <value>经营企业是有竞争力的。每一个决定，每一步前进，都会带来新的机遇和新的风险。如果不进行加密，您的业务文件可能随时面临威胁。这就是为什么 &lt;a href='https://axcrypt.net/business/'&gt;&lt;b&gt;business encryption&lt;/b&gt;&lt;/a&gt; 不是可有可无的原因。如果您与团队合作，  &lt;a href='https://axcrypt.net/blog/5-reasons-why-encryption-is-important-for-small-businesses/'&gt;&lt;b&gt;protecting your data&lt;/b&gt;&lt;/a&gt; 意味着保护您的员工和您的进度。</value>
   </data>
   <data name="Blog_WYONTABE_Text2" xml:space="preserve">
@@ -12048,9 +12051,6 @@
   </data>
   <data name="BuyMorePasswordManagerSubscriptionWarning" xml:space="preserve">
     <value>此帐户上有一个有效的订阅。密码管理器订阅不能使用同一个AxCrypt帐户购买两次。</value>
-  </data>
-  <data name="BuyMorePremiumSubscriptionWarning" xml:space="preserve">
-    <value>这个帐户有一个活跃的订阅。 Premium订阅不能使用相同的AxCrypt帐户购买两次。</value>
   </data>
   <data name="BuyPasswordManagerText" xml:space="preserve">
     <value>输入您为其购买密码管理器许可证的用户电子邮件：</value>
@@ -13057,6 +13057,9 @@
   <data name="DontaccountText" xml:space="preserve">
     <value>没有帐户？</value>
   </data>
+  <data name="DontAskAgainText" xml:space="preserve">
+    <value>不要再要求了</value>
+  </data>
   <data name="DontLikeRecurringFlowText" xml:space="preserve">
     <value>不喜欢定期订阅</value>
   </data>
@@ -13485,6 +13488,15 @@
   <data name="Exception" xml:space="preserve">
     <value>处理'{0}'时出现异常。</value>
     <comment>@Invariant</comment>
+  </data>
+  <data name="ExcludedFolderNotificationText" xml:space="preserve">
+    <value>排除的文件夹保持未加密状态</value>
+  </data>
+  <data name="ExcludedFoldersText" xml:space="preserve">
+    <value>排除的文件夹：</value>
+  </data>
+  <data name="ExcludeFolderText" xml:space="preserve">
+    <value>排除文件夹</value>
   </data>
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>退出</value>
@@ -13978,6 +13990,12 @@
     <value>双击打开AxCrypt之外的AxCrypt文件可能无法正常工作。 操作系统文件关联扩展名".axx"似乎被打破。 请联系您的IT支持或在互联网上搜索解决方案。</value>
     <comment>A text that is shown to users starting the association with .axx file is broken. It should not mention "Windows", or "Mac" etc so it can be used in all environments.</comment>
   </data>
+  <data name="FileDecryptionFailedAlertMsg" xml:space="preserve">
+    <value>无法解密文件 '{0}'。原因：{1}</value>
+  </data>
+  <data name="FileDecryptionSuccessAlertMsg" xml:space="preserve">
+    <value>文件 '{0}' 已成功解密。</value>
+  </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>文件'{0}'不存在。</value>
   </data>
@@ -14020,6 +14038,9 @@
   <data name="FileNotFound" xml:space="preserve">
     <value>文件不存在。</value>
   </data>
+  <data name="FileOpenFailedAlertMsg" xml:space="preserve">
+    <value>无法打开文件 '{0}'。原因：{1}</value>
+  </data>
   <data name="FileOperationFailed" xml:space="preserve">
     <value>失败'{0}'。</value>
   </data>
@@ -14042,6 +14063,18 @@
     <value>加密文件属性</value>
     <comment>A menu text for selecting file properties for encryption.</comment>
   </data>
+  <data name="FileRenameFailedAlertMsg" xml:space="preserve">
+    <value>无法重命名文件 '{0}' 匿名。原因：{1}</value>
+  </data>
+  <data name="FileRenameSuccessAlertMsg" xml:space="preserve">
+    <value>文件 '{0}' 已匿名重命名。</value>
+  </data>
+  <data name="FileRestoreRenameFailedAlertMsg" xml:space="preserve">
+    <value>无法恢复文件的原始名称 '{0}'。原因：{1}</value>
+  </data>
+  <data name="FileRestoreRenameSuccessAlertMsg" xml:space="preserve">
+    <value>文件 '{0}' 已恢复原名。</value>
+  </data>
   <data name="FileSizeColumnHeaderText" xml:space="preserve">
     <value>大小</value>
   </data>
@@ -14063,15 +14096,39 @@
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>财务</value>
   </data>
+  <data name="FindFileFeatureTitle" xml:space="preserve">
+    <value>查找文件</value>
+  </data>
+  <data name="FindFilesFeatureDescription" xml:space="preserve">
+    <value>在一个地方管理所有加密文件引用，并提供查看、重命名、删除或解密选项。</value>
+  </data>
+  <data name="FindFilesFeatureTooltip" xml:space="preserve">
+    <value>一站式管理加密文件</value>
+  </data>
+  <data name="FindFilesSearchPlaceholder" xml:space="preserve">
+    <value>键入以查找文件...</value>
+  </data>
+  <data name="FindPathTitle" xml:space="preserve">
+    <value>文件路径</value>
+  </data>
   <data name="FirstNameLabel" xml:space="preserve">
     <value>名字</value>
   </data>
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>文件夹'{0}'已被保护。</value>
   </data>
+  <data name="FolderOpenFailedAlertMsg" xml:space="preserve">
+    <value>无法打开的文件夹 '{0}'。原因：{1}</value>
+  </data>
   <data name="FolderSelectTitle" xml:space="preserve">
     <value>选择文件夹</value>
     <comment>A prompt or title in a folder selection dialog, prompting the user to select a folder.</comment>
+  </data>
+  <data name="FolderSettingsText" xml:space="preserve">
+    <value>排除子文件夹</value>
+  </data>
+  <data name="FolderSettingsTitle" xml:space="preserve">
+    <value>安全文件夹设置</value>
   </data>
   <data name="FollowUsTitle" xml:space="preserve">
     <value>关注我们</value>
@@ -14579,19 +14636,19 @@
   <data name="GetStartedGuideUseText5" xml:space="preserve">
     <value>非常适合个人和企业使用</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText">
+  <data name="GetStartedGuideWhatsNextText" xml:space="preserve">
     <value>🔒 &lt;strong&gt;轻松加密和解密文件&lt;/strong&gt; – 请按照我们的 &lt;a href='https://axcrypt.net/information/guides/encryption-decryption/'&gt;[Step-by-Step AxCrypt Guide]&lt;/a&gt;。</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText1">
+  <data name="GetStartedGuideWhatsNextText1" xml:space="preserve">
     <value>👥 &lt;strong&gt;管理团队和业务访问&lt;/strong&gt; – 使用我们的 &lt;a href='https://axcrypt.net/information/axcrypt-business/'&gt;[Business Setup Guide]&lt;/a&gt; 简化协作。</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText2">
+  <data name="GetStartedGuideWhatsNextText2" xml:space="preserve">
     <value>🔐 &lt;strong&gt;为什么选择 AxCrypt 进行安全保护&lt;/strong&gt; – 在我们的 &lt;a href='https://axcrypt.net/information/security/'&gt;[Security Page]&lt;/a&gt; 上发现算法和保护。</value>
   </data>
-  <data name="GetStartedGuideWhatsNextText3">
+  <data name="GetStartedGuideWhatsNextText3" xml:space="preserve">
     <value>📘 &lt;strong&gt;加密最佳实践&lt;/strong&gt; – 探索我们的 &lt;a href='https://axcrypt.net/blog/'&gt;[Blogs on easy-to-use 128-bit and 256-bit encryption]。&lt;/a&gt;</value>
   </data>
-  <data name="GetStartedHowToUseHeading">
+  <data name="GetStartedHowToUseHeading" xml:space="preserve">
     <value>如何使用</value>
   </data>
   <data name="GetStartedHowToUseIngress" xml:space="preserve">
@@ -14767,6 +14824,9 @@
   </data>
   <data name="GetSubscriptionLoginRequiredInfoText" xml:space="preserve">
     <value>请登录以获取您的订阅！ 如果您还没有帐户，您首先需要&lt;a href="{0}Home/Register/"&gt;注册&lt;/a&gt;。</value>
+  </data>
+  <data name="GettheLatestAxCryptText" xml:space="preserve">
+    <value>在此处获取最新的 AxCrypt 版本 2 版本</value>
   </data>
   <data name="GoToGroupsText" xml:space="preserve">
     <value>转到组</value>
@@ -16005,6 +16065,9 @@
   <data name="InvalidEmail" xml:space="preserve">
     <value>电子邮件地址格式不正确。</value>
   </data>
+  <data name="InvalidFolder" xml:space="preserve">
+    <value>文件夹路径无效</value>
+  </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>"{0}"的密钥无效。</value>
   </data>
@@ -16013,6 +16076,9 @@
   </data>
   <data name="InvalidSelectionErrorMessage" xml:space="preserve">
     <value>请至少选择一条消息。</value>
+  </data>
+  <data name="InvalidSubFolder" xml:space="preserve">
+    <value>所选文件夹不是有效的子文件夹</value>
   </data>
   <data name="InvitationMailBodyIntro" xml:space="preserve">
     <value>您已被&lt;b&gt;{0}&lt;/b&gt;邀请到AxCrypt文件安全性。 要开始保护您的文件，只需&lt;a href="{1}"style="color:#86b96e;text-decoration:none;"&gt;下载&lt;/a&gt;并安装AxCrypt。 使用&lt;b&gt;{2}&lt;/b&gt;登录AxCrypt，输入验证码并设置您的秘密密码。</value>
@@ -16337,6 +16403,9 @@ SE-114 29 斯德哥尔摩
     <value>转换文件后，它们只会使用当前的AxCrypt密码打开。 请验证您的密码。 
 
 不要忘记这个密码！</value>
+  </data>
+  <data name="LegacyDownloadsContent" xml:space="preserve">
+    <value>需要旧版本吗？下载以前的 AxCrypt 版本以与早期系统兼容。</value>
   </data>
   <data name="LegacyDownloadsDescription" xml:space="preserve">
     <value>这些是传统的AxCrypt1.x下载. 我们不认可它们，并敦促您不要下载和使用这些，除非您有特定的需要。&lt;strong&gt; 使用AxCrypt2.x加密的新文件与传统AxCrypt1.x不兼容!&lt;/strong&gt; 使用传统AxCrypt1.x加密的文件是由AxCrypt2.x解密。</value>
@@ -18745,12 +18814,18 @@ SE-114 29 斯德哥尔摩
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>你被注销了。 点击登录。</value>
   </data>
+  <data name="NoFilesFoundText" xml:space="preserve">
+    <value>找不到文件</value>
+  </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>现在无法连接到服务器，请检查您的互联网连接。</value>
     <comment>Message which is displayed when device doesn't have internet connection.</comment>
   </data>
   <data name="NoItemsSelectedText" xml:space="preserve">
     <value>未选择任何项目</value>
+  </data>
+  <data name="NoKeepEncryptedText" xml:space="preserve">
+    <value>不，保持加密</value>
   </data>
   <data name="NoLabel" xml:space="preserve">
     <value>否</value>
@@ -19346,6 +19421,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="PastIncidentsHeading" xml:space="preserve">
     <value>过去的事件</value>
+  </data>
+  <data name="PathText" xml:space="preserve">
+    <value>路径:</value>
   </data>
   <data name="PaymentCancelledNotifyEventText" xml:space="preserve">
     <value>您最近尝试购买 AxCrypt 订阅未成功！</value>
@@ -20627,6 +20705,9 @@ SE-114 29 斯德哥尔摩
     <value>从列表中删除，但保持安全</value>
     <comment>This text is used in the context menu option, which will help the users to remove the file from the recent files list and remove the folder from the secured folders list.</comment>
   </data>
+  <data name="RemoveText" xml:space="preserve">
+    <value>删除</value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>此帐户上有一个活跃的定期订阅。 无需手动续订定期Business订阅。</value>
   </data>
@@ -21617,6 +21698,9 @@ SE-114 29 斯德哥尔摩
   <data name="SelectAllText" xml:space="preserve">
     <value>选择全部</value>
   </data>
+  <data name="SelectFileToViewFileInfoText" xml:space="preserve">
+    <value>选择文件查看文件信息</value>
+  </data>
   <data name="SelectGroupText" xml:space="preserve">
     <value>选择一个组</value>
   </data>
@@ -22514,7 +22598,7 @@ SE-114 29 斯德哥尔摩
     <value>更新  获取所有AxCrypt更新的通知</value>
   </data>
   <data name="TfaCodeGeneratedText" xml:space="preserve">
-    <value>要完成登录，请输入您的身份验证应用程序生成的 6 位数代码。</value>
+    <value>要完成登录，请输入所选身份验证方法中的 6 位验证码。</value>
   </data>
   <data name="TfaPhoneText" xml:space="preserve">
     <value>没有手机？</value>
@@ -23389,7 +23473,7 @@ AxCrypt团队</value>
     <value>密码错误 请再试一次。</value>
   </data>
   <data name="WrongVerificationCode" xml:space="preserve">
-    <value>验证码错误。 请重新检查您的电子邮件。</value>
+    <value>验证码不正确。请重试。</value>
   </data>
   <data name="WrongVerificationCodeFormat" xml:space="preserve">
     <value>验证代码必须准确为6位数字。</value>
@@ -23432,6 +23516,9 @@ AxCrypt团队</value>
   </data>
   <data name="YearlySubscriptionTitle" xml:space="preserve">
     <value>每年</value>
+  </data>
+  <data name="YesDecryptText" xml:space="preserve">
+    <value>是的，解密</value>
   </data>
   <data name="YesLabel" xml:space="preserve">
     <value>是</value>

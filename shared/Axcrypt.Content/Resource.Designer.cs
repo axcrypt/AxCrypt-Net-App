@@ -35620,7 +35620,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is an active subscription on this account. Premium subscriptions can&apos;t be purchased twice with the same AxCrypt account..
+        ///   Looks up a localized string similar to This AxCrypt account already has an active recurring subscription. There is no need to purchase it again. To start a new subscription, cancel the current one first..
         /// </summary>
         public static string BuyMorePremiumSubscriptionWarning {
             get {
