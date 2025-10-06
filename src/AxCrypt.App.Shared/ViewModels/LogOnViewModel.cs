@@ -176,7 +176,7 @@ public class LogOnViewModel : ViewModelBase
     {
         get
         {
-            return !License.Has(LicenseCapability.StrongerEncryption);
+            return IsLoggedOn && !License.Has(LicenseCapability.StrongerEncryption);
         }
     }
 

@@ -54,6 +54,7 @@ public class ProfileViewModel : ViewModelBase
 
     public async Task InitializeAsync()
     {
+        await New<AccountStatusViewModel>().LoadAccountStatusAsync();
         _mainViewModel = _logOnViewModel.MainViewModel;
         Account.IsLoggedOn = New<KnownIdentities>().IsLoggedOn;
 

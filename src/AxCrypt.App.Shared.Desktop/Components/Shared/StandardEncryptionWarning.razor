@@ -1,8 +1,11 @@
 ﻿@using static AxCrypt.Abstractions.TypeResolve
+@using AxCrypt.App.Shared.ViewModels
 @using Microsoft.Maui.Devices
 @using AxCrypt.Content
 
-@if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.ShowUpgradeStrongerEncryptionWarning)
+@inject LogOnViewModel LogOnViewModel
+
+@if (LogOnViewModel!.ShowUpgradeStrongerEncryptionWarning)
 {
     <div class="row site-warning" style="@PopupStyle">
         <div class="warning-message alert radius">

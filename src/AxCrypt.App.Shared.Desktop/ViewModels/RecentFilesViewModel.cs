@@ -80,6 +80,7 @@ public class RecentFilesViewModel : ViewModelBase
 
     private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
     {
+         ConfigureMenus(LogOnViewModel.License);
         if (New<UserSettings>().HideRecentFiles)
         {
             RecentFilesList = new ObservableCollection<FileDetails>();
