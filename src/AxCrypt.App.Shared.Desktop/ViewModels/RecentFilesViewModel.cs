@@ -42,7 +42,7 @@ public class RecentFilesViewModel : ViewModelBase
     {
         IsHideRecentFiles = New<UserSettings>().HideRecentFiles;
 
-        LogOnViewModel.BindPropertyChanged(nameof(LogOnViewModel.License), (LicenseCapabilities license) => { ConfigureMenus(license); });
+        ConfigureMenus(LogOnViewModel.License);
 
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
         this.BindPropertyChanged(nameof(SelectedFiles), (IEnumerable<string> files) => { _mainViewModel.SelectedRecentFiles = files; });
