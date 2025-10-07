@@ -68517,6 +68517,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Activity.
+        /// </summary>
+        public static string UserActivityTitle {
+            get {
+                return ResourceManager.GetString("UserActivityTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your account email has been successfully changed!.
         /// </summary>
         public static string UserEmailChangedNotifyEventText {
@@ -68594,6 +68603,15 @@ namespace AxCrypt.Content {
         public static string ValidUntilText {
             get {
                 return ResourceManager.GetString("ValidUntilText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vault Settings.
+        /// </summary>
+        public static string VaultSettingsTitle {
+            get {
+                return ResourceManager.GetString("VaultSettingsTitle", resourceCulture);
             }
         }
         
