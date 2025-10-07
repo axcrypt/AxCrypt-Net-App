@@ -1,123 +1,125 @@
-﻿.vlt-title-img {
-    content: $ImgVaultSttng;
-    width: 348px;
-    height: 187px;
-    top: 28px;
-    left: 66px;
-}
+﻿#vault-settings-modalDialog {
+    .vlt-title-img {
+        content: $ImgVaultSttng;
+        width: 348px;
+        height: 187px;
+        top: 28px;
+        left: 66px;
+    }
 
-.vault-body {
-    margin: 1% auto;
-    width: 480px;
-    height: 508px;
-}
+    .vault-body {
+        margin: 1% auto;
+        width: 480px;
+        height: 508px;
+    }
 
-.input1 {
-    width: 300px;
-    height: 32px;
-    top: 315px;
-    left: 32px;
-    gap: 8px;
-    border-radius: 5px;
-}
+    .input1 {
+        width: 300px;
+        height: 32px;
+        top: 315px;
+        left: 32px;
+        gap: 8px;
+        border-radius: 5px;
+    }
 
-.input2 {
-    background-color: #232323;
-    color: #ffffff;
-    width: 96px;
-    height: 37px;
-    top: 313px;
-    left: 352px;
-    margin-left: 15px;
-    border-radius: 5px;
-}
+    .input2 {
+        background-color: #232323;
+        color: #ffffff;
+        width: 96px;
+        height: 37px;
+        top: 313px;
+        left: 352px;
+        margin-left: 15px;
+        border-radius: 5px;
+    }
 
-.vault-question {
-    color: #494949;
-    font-size: 16px;
-    line-height: 22px;
-    font-weight: 400;
-}
+    .vault-question {
+        color: #494949;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 400;
+    }
 
-.on {
-    /* input:checked + .slider */
-}
+    .on {
+        /* input:checked + .slider */
+    }
 
-.off {
-    display: none;
-}
+    .off {
+        display: none;
+    }
 
-.vault-auto-enc-toggle-sec,
-.vault-hide-filename-toggle-sec,
-.vault-store-location-sec {
-    display: flex;
-    position: relative;
-    justify-content: space-between;
-    margin-top: 18px;
-}
+    .vault-auto-enc-toggle-sec,
+    .vault-hide-filename-toggle-sec,
+    .vault-store-location-sec {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        margin-top: 18px;
+    }
 
-.vault-auto-enc-toggle-chckbx,
-.vault-hide-filename-toggle-chckbx {
-    width: 55px;
-    height: 24px;
-    background-color: #c1c1c1;
-    border-radius: 100px;
-}
+    .vault-auto-enc-toggle-chckbx,
+    .vault-hide-filename-toggle-chckbx {
+        width: 55px;
+        height: 24px;
+        background-color: #c1c1c1;
+        border-radius: 100px;
+    }
 
-.vault-auto-enc-toggle-chckbx:after,
-.vault-hide-filename-toggle-chckbx::after {
-    content: "OFF";
-    font-size: 13px;
-    position: absolute;
-    margin: 3px 0px 3px 25px;
-}
+    .vault-auto-enc-toggle-chckbx:after,
+    .vault-hide-filename-toggle-chckbx::after {
+        content: "OFF";
+        font-size: 13px;
+        position: absolute;
+        margin: 3px 0px 3px 25px;
+    }
 
-.vault-auto-enc-toggle-chckbx::before,
-.vault-hide-filename-toggle-chckbx::before {
-    position: absolute;
-    content: "";
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    margin: 2px;
-}
+    .vault-auto-enc-toggle-chckbx::before,
+    .vault-hide-filename-toggle-chckbx::before {
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        margin: 2px;
+    }
 
-input[type="checkbox"] {
-    display: none;
-}
+    input[type="checkbox"] {
+        display: none;
+    }
 
-input:checked + .vault-auto-enc-toggle-chckbx,
-input:checked + .vault-hide-filename-toggle-chckbx {
-    background-color: #000;
-}
+    input:checked + .vault-auto-enc-toggle-chckbx,
+    input:checked + .vault-hide-filename-toggle-chckbx {
+        background-color: #000;
+    }
 
-input:checked + .vault-auto-enc-toggle-chckbx::before,
-input:checked + .vault-hide-filename-toggle-chckbx::before {
-    transform: translateX(32px);
-}
+    input:checked + .vault-auto-enc-toggle-chckbx::before,
+    input:checked + .vault-hide-filename-toggle-chckbx::before {
+        transform: translateX(32px);
+    }
 
-input:checked + .vault-auto-enc-toggle-chckbx::after,
-input:checked + .vault-hide-filename-toggle-chckbx::after {
-    content: "ON";
-    font-size: 13px;
-    color: #fff;
-    position: absolute;
-    margin: 3px 7px;
-}
+    input:checked + .vault-auto-enc-toggle-chckbx::after,
+    input:checked + .vault-hide-filename-toggle-chckbx::after {
+        content: "ON";
+        font-size: 13px;
+        color: #fff;
+        position: absolute;
+        margin: 3px 7px;
+    }
 
-.onbutton-confirm {
-    width: 154px;
-    height: 36.65px;
-    background-color: #969696;
-    margin-right: 20px;
-    color: #FFFFFF;
-    border-radius: 10px;
-}
+    .onbutton-confirm {
+        width: 154px;
+        height: 36.65px;
+        background-color: #969696;
+        margin-right: 20px;
+        color: #FFFFFF;
+        border-radius: 10px;
+    }
 
-.onbuttom-cancel {
-    width: 154px;
-    height: 36.65px;
-    background-color: #FFFFFF;
-    border-radius: 10px;
+    .onbuttom-cancel {
+        width: 154px;
+        height: 36.65px;
+        background-color: #FFFFFF;
+        border-radius: 10px;
+    }
 }

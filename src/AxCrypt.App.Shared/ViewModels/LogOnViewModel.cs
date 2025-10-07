@@ -130,7 +130,7 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService UserPromptDialog
     { get { return GetProperty<CommonDialogService>(nameof(UserPromptDialog)); } set { SetProperty(nameof(UserPromptDialog), value); } }
 
-    public ProcessIndicator ProcessIndicator { get; set; }
+    public ProcessIndicator ProcessIndicator { get; set; } = new ProcessIndicator();
 
     public void InitiateProgressIndicator()
     {

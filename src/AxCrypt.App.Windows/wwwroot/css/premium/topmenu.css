@@ -837,21 +837,19 @@
     gap: 15px;
   }
 }
-.vlt-title-img {
+#vault-settings-modalDialog .vlt-title-img {
   content: url(/images/premium/ImgVaultSttngPrm.svg);
   width: 348px;
   height: 187px;
   top: 28px;
   left: 66px;
 }
-
-.vault-body {
+#vault-settings-modalDialog .vault-body {
   margin: 1% auto;
   width: 480px;
   height: 508px;
 }
-
-.input1 {
+#vault-settings-modalDialog .input1 {
   width: 300px;
   height: 32px;
   top: 315px;
@@ -859,8 +857,7 @@
   gap: 8px;
   border-radius: 5px;
 }
-
-.input2 {
+#vault-settings-modalDialog .input2 {
   background-color: #232323;
   color: #ffffff;
   width: 96px;
@@ -870,49 +867,42 @@
   margin-left: 15px;
   border-radius: 5px;
 }
-
-.vault-question {
+#vault-settings-modalDialog .vault-question {
   color: #494949;
   font-size: 16px;
   line-height: 22px;
   font-weight: 400;
 }
-
-.on {
+#vault-settings-modalDialog .on {
   /* input:checked + .slider */
 }
-
-.off {
+#vault-settings-modalDialog .off {
   display: none;
 }
-
-.vault-auto-enc-toggle-sec,
-.vault-hide-filename-toggle-sec,
-.vault-store-location-sec {
+#vault-settings-modalDialog .vault-auto-enc-toggle-sec,
+#vault-settings-modalDialog .vault-hide-filename-toggle-sec,
+#vault-settings-modalDialog .vault-store-location-sec {
   display: flex;
   position: relative;
   justify-content: space-between;
   margin-top: 18px;
 }
-
-.vault-auto-enc-toggle-chckbx,
-.vault-hide-filename-toggle-chckbx {
+#vault-settings-modalDialog .vault-auto-enc-toggle-chckbx,
+#vault-settings-modalDialog .vault-hide-filename-toggle-chckbx {
   width: 55px;
   height: 24px;
   background-color: #c1c1c1;
   border-radius: 100px;
 }
-
-.vault-auto-enc-toggle-chckbx:after,
-.vault-hide-filename-toggle-chckbx::after {
+#vault-settings-modalDialog .vault-auto-enc-toggle-chckbx:after,
+#vault-settings-modalDialog .vault-hide-filename-toggle-chckbx::after {
   content: "OFF";
   font-size: 13px;
   position: absolute;
   margin: 3px 0px 3px 25px;
 }
-
-.vault-auto-enc-toggle-chckbx::before,
-.vault-hide-filename-toggle-chckbx::before {
+#vault-settings-modalDialog .vault-auto-enc-toggle-chckbx::before,
+#vault-settings-modalDialog .vault-hide-filename-toggle-chckbx::before {
   position: absolute;
   content: "";
   width: 20px;
@@ -921,31 +911,26 @@
   border-radius: 10px;
   margin: 2px;
 }
-
-input[type=checkbox] {
+#vault-settings-modalDialog input[type=checkbox] {
   display: none;
 }
-
-input:checked + .vault-auto-enc-toggle-chckbx,
-input:checked + .vault-hide-filename-toggle-chckbx {
+#vault-settings-modalDialog input:checked + .vault-auto-enc-toggle-chckbx,
+#vault-settings-modalDialog input:checked + .vault-hide-filename-toggle-chckbx {
   background-color: #000;
 }
-
-input:checked + .vault-auto-enc-toggle-chckbx::before,
-input:checked + .vault-hide-filename-toggle-chckbx::before {
+#vault-settings-modalDialog input:checked + .vault-auto-enc-toggle-chckbx::before,
+#vault-settings-modalDialog input:checked + .vault-hide-filename-toggle-chckbx::before {
   transform: translateX(32px);
 }
-
-input:checked + .vault-auto-enc-toggle-chckbx::after,
-input:checked + .vault-hide-filename-toggle-chckbx::after {
+#vault-settings-modalDialog input:checked + .vault-auto-enc-toggle-chckbx::after,
+#vault-settings-modalDialog input:checked + .vault-hide-filename-toggle-chckbx::after {
   content: "ON";
   font-size: 13px;
   color: #fff;
   position: absolute;
   margin: 3px 7px;
 }
-
-.onbutton-confirm {
+#vault-settings-modalDialog .onbutton-confirm {
   width: 154px;
   height: 36.65px;
   background-color: #969696;
@@ -953,8 +938,7 @@ input:checked + .vault-hide-filename-toggle-chckbx::after {
   color: #FFFFFF;
   border-radius: 10px;
 }
-
-.onbuttom-cancel {
+#vault-settings-modalDialog .onbuttom-cancel {
   width: 154px;
   height: 36.65px;
   background-color: #FFFFFF;
