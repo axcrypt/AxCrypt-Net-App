@@ -49,23 +49,15 @@ public class EditSecretViewModel : ManageSecretViewModel
             ErrorMessage = Texts.SaveSecretErrorIsReadOnly;
             return false;
         }
+        
+        if (Secret == null)
+        {
+            return false;
+        }
 
         using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
-            if (Secret == null)
-            {
-                return false;
-            }
-
-            bool updated = false;
-
-            updated = await UpdateSecretAsync();
-
-            if (!updated)
-            {
-                return false;
-            }
-            return true;
+            return await UpdateSecretAsync();
         }
     }
 

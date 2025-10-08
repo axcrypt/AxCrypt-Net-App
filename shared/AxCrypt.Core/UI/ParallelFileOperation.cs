@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt - Copyright 2025, AxCrypt AB, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -54,7 +54,6 @@ namespace AxCrypt.Core.UI
         /// <param name="files">The files to operation on.</param>
         /// <param name="work">The work to do for each file.</param>
         /// <param name="allComplete">The completion callback after *all* files have been processed.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public virtual Task DoFilesAsync<TDataItem>(IEnumerable<TDataItem> files, Func<TDataItem, IProgressContext, Task<FileOperationContext>> work, Func<FileOperationContext, Task> allComplete)
             where TDataItem : IDataItem
         {
