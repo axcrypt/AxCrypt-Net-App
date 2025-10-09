@@ -21,8 +21,6 @@ namespace AxCrypt.App.Shared.ViewModels
             _fileOperationViewModel = New<FileOperationViewModel>();
             //_fileOperationViewModel = AxCServiceProviderExtension.LogOnViewModel!.FileOperationViewModel;
             _statusAlertService = StatusAlerService;
-
-            LoadSecuredFilesList();
         }
 
         public string? SelectedFile { get; set; }
@@ -41,7 +39,7 @@ namespace AxCrypt.App.Shared.ViewModels
 
         public bool HasFindFilesCapability { get; set; }
 
-        private void LoadSecuredFilesList()
+        public void LoadSecuredFilesList()
         {
             FindFilesList = New<FindFilesStore>()?.GetFindFilesLogs()!;
             HasFindFilesCapability = AxCServiceProviderExtension.LogOnViewModel!.License.Has(Core.Runtime.LicenseCapability.FindFiles);
@@ -86,6 +84,17 @@ namespace AxCrypt.App.Shared.ViewModels
                     catch (Exception ex)
                     {
                         _statusAlertService.Error(Texts.FileOpenFailedAlertMsg.InvariantFormat(Path.GetFileName(filePath), ex.Message));
+                    }
+                    break;
+                case "Delete":
+                    try
+                    {
+                        New<FindFilesStore>().PurgeIfExists(filePath);
+                        _statusAlertService.Success(Texts.DeletionSuccess.InvariantFormat(Path.GetFileName(filePath)));
+                    }
+                    catch (Exception ex)
+                    {
+                        _statusAlertService.Error(Texts.DeletionFailed.InvariantFormat(Path.GetFileName(filePath), ex.Message));
                     }
                     break;
 

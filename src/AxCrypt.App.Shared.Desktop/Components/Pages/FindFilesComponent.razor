@@ -112,6 +112,7 @@
                                 {
                                     <div class="context-menu-action" style="position: fixed; top: @(ContextMenuY)px;left: @(ContextMenuX)px;">
                                         <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Open", ViewModel.SelectedFilePath)'>@Texts.RecentFilesOpenToolStripMenuItemText</span>
+                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Delete", ViewModel.SelectedFilePath)'>@Texts.RemoveRecentFileToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Decrypt", ViewModel.SelectedFilePath)'>@Texts.DecryptToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Reveal", ViewModel.SelectedFilePath)'>@Texts.ShowInFolderText</span>
                                         <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("RenameAnonymously", ViewModel.SelectedFilePath)'>@Texts.AnonymousRenameMenuText</span>
@@ -178,6 +179,7 @@
     protected override void OnInitialized()
     {
         ViewModel.OnUpdateViewState += async () => await UpdateUIState();
+        ViewModel.LoadSecuredFilesList();
         base.OnInitialized();
     }
 

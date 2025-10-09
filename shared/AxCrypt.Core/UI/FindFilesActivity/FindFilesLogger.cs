@@ -13,6 +13,7 @@ public class FindFilesLogger
             case UserActivityLog.Encrypt:
             case UserActivityLog.AnonymousRename:
             case UserActivityLog.RestoreRenameToOriginal:
+            case UserActivityLog.Open:
                 InternalLog(filePath);
                 break;
 

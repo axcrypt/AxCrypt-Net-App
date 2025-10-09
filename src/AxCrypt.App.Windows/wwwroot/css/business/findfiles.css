@@ -33,7 +33,6 @@
   width: 63vw;
   min-height: 320px;
   max-height: 485px;
-  overflow-y: scroll;
   text-align: left;
   margin: 15px;
   margin-bottom: 5px;
@@ -102,7 +101,7 @@
   overflow-y: auto;
   padding: 5px;
   box-sizing: border-box;
-  max-height: 300px;
+  max-height: 270px;
 }
 .findfiles-modalDialog .grid-view .detail-section {
   width: 27%;
@@ -114,8 +113,9 @@
 .findfiles-modalDialog .file-list {
   list-style: none;
   padding: 0;
-  max-height: 290px;
+  max-height: 270px;
   margin-bottom: 0;
+  overflow-y: scroll;
 }
 .findfiles-modalDialog .file-list li {
   padding: 6px;

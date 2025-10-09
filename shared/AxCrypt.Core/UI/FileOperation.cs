@@ -216,7 +216,7 @@ namespace AxCrypt.Core.UI
 
             if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
             {
-                Resolve.Log.LogInfo("Launched and opened '{0}'.".InvariantFormat(decryptedLock.DataStore.FullName), decryptedLock.DataStore.FullName, UserActivityLog.Open);
+                Resolve.Log.LogInfo("Launched and opened '{0}'.".InvariantFormat(decryptedLock.DataStore.FullName), destinationActiveFile.EncryptedFileInfo.FullName, UserActivityLog.Open);
             }
 
             destinationActiveFile = new ActiveFile(destinationActiveFile, status);
