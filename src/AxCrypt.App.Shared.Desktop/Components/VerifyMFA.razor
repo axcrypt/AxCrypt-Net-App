@@ -15,7 +15,7 @@
 }
 
 <section class="content">
-    <article class="left-section" id="content-wrap" style="margin-top:10%;">
+    <article class="left-section" id="content-wrap" style="margin: 7% auto!important;">
         <span class="tfa-sub-head">@Texts.VerifyMfaText</span>
         <p style="margin-top: 16px;">@Texts.MfaText1 <a href="" @onclick="RedirectToMFAGuidePage" class="recry-code-btn"><span>@Texts.MFAText. </span></a>@Texts.MFAText2</p>
         <div>
@@ -112,7 +112,7 @@
             <button type="button" @onclick="OnCancelClick" class="button cancel whte-clr" style="width:100%; margin:20px 0 30px;">@Texts.ButtonCancelText</button>
 
             <div class="text-center" style="margin-top:2rem;">
-                <p><strong>@Texts.TfaPhoneText</strong></p>
+                <span><strong>@Texts.TfaPhoneText</strong></span>
                 <p>@Texts.MfaRecoveryCodeText <a href="" @onclick="RedirectToMyRecoverTwoFactorPage" class="recry-code-btn"> @Texts.MfaRecoveryCodeText1 </a> @Texts.MfaRecoveryCodeText2</p>
                 @* <p>Or <a href="https://account.axcrypt.net/en/Home/RecoverTwoFactor" class="recry-code-btn">enter an email to get OTP </a> to access your account.</p> *@
             </div>
