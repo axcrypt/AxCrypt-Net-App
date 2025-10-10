@@ -26,7 +26,7 @@ public class FileDetails : Core.UI.ViewModel.ViewModelBase
     private void InitializeListItemProperties(ActiveFile file)
     {
         FileName = file.DecryptedFileInfo.Name;
-        FileSize = file.Size();
+        FileSize = file.EncryptedFileInfo.IsAvailable ? file.Size() : "0 bytes";
         Algorithm = Resolve.CryptoFactory.Create(file.Properties.CryptoId).Name;
         LastModifiedDate = file.EncryptedFileInfo.LastWriteTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture);
         FilePath = file.EncryptedFileInfo.FullName;
