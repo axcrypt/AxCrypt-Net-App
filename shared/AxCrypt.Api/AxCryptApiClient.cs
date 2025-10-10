@@ -315,36 +315,24 @@ namespace AxCrypt.Api
             return tip;
         }
 
-        public async Task<AxCryptVersion> AxCryptUpdateAsync(Version currentVersion, string cultureName, ClientPlatformKind platform)
+        public async Task<AxCryptVersion> AxCryptUpdateAsync(Version currentVersion, string cultureName, ClientPlatformKind platform, string appEnvironment)
         {
-            Uri downloadBaseUrl = new Uri("https://download.axcrypt.net/");
             string platformParameter = string.Empty;
             switch (platform)
             {
                 case ClientPlatformKind.WindowsDesktop:
-                    //platformParameter = "windowsdesktop";
                     platformParameter = "windows";
                     break;
 
                 case ClientPlatformKind.Mac:
-                    platformParameter = "macos";
+                    platformParameter = "mac";
                     break;
 
                 default:
                     throw new NotSupportedException($"App doesn't support updating on {platform} platform");
             }
 
-            Uri resource;
-            //if (Identity.IsEmpty)
-            //{
-            //resource = BaseUrl.PathCombine($"global/axcrypt/version/{platformParameter}?version={currentVersion?.ToString() ?? string.Empty}");
-            resource = downloadBaseUrl.PathCombine($"beta/{platformParameter}/version/?version={currentVersion?.ToString() ?? string.Empty}");
-            //}
-            //else
-            //{
-            //    resource = BaseUrl.PathCombine($"users/axcrypt/version/{platformParameter}?version={currentVersion?.ToString() ?? string.Empty}&culture={cultureName}");
-            //}
-
+            Uri resource = BaseUrl.PathCombine($"users/appversion/{platformParameter}?version={currentVersion?.ToString() ?? string.Empty}&culture={cultureName}&appEnvironment={appEnvironment}");
             if (New<AxCryptOnlineState>().IsOffline)
             {
                 return AxCryptVersion.Empty;

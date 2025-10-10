@@ -56,7 +56,7 @@ namespace AxCrypt.Core.UI
         /// raised, regardless of response and result. If a check is already in progress, the
         /// later call is ignored and only one check is performed.
         /// </summary>
-        public virtual async Task CheckInBackgroundAsync(DateTime lastCheckTimeUtc, string newestKnownVersion, Uri updateWebpageUrl, string cultureName)
+        public virtual async Task CheckInBackgroundAsync(DateTime lastCheckTimeUtc, string newestKnownVersion, Uri updateWebpageUrl, string cultureName, string appEnvironment)
         {
             if (newestKnownVersion == null)
             {
@@ -90,7 +90,7 @@ namespace AxCrypt.Core.UI
             _inProgress = true;
             try
             {
-                DownloadVersion newVersion = await CheckWebForNewVersionAsync(updateWebpageUrl, cultureName).Free();
+                DownloadVersion newVersion = await CheckWebForNewVersionAsync(updateWebpageUrl, cultureName, appEnvironment).Free();
                 if (newVersion.Url != null)
                 {
                     OnVersionUpdate(new VersionEventArgs(newVersion, lastCheckTimeUtc));
@@ -103,7 +103,7 @@ namespace AxCrypt.Core.UI
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is one case where anything could go wrong and it is still required to continue.")]
-        private async Task<DownloadVersion> CheckWebForNewVersionAsync(Uri updateWebpageUrl, string cultureName)
+        private async Task<DownloadVersion> CheckWebForNewVersionAsync(Uri updateWebpageUrl, string cultureName, string appEnvironment)
         {
             Version newVersion = DownloadVersion.VersionUnknown;
             try
@@ -123,7 +123,7 @@ namespace AxCrypt.Core.UI
                         throw new NotSupportedException($"App doesn't support updating on {OS.Current.Platform} platform");
                 }
 
-                AxCryptVersion axCryptVersion = await New<AxCryptApiClient>().AxCryptUpdateAsync(_currentVersion, cultureName, platform).Free();
+                AxCryptVersion axCryptVersion = await New<AxCryptApiClient>().AxCryptUpdateAsync(_currentVersion, cultureName, platform, appEnvironment).Free();
 
                 if (!axCryptVersion.IsEmpty)
                 {

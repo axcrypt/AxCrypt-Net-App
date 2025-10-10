@@ -2,20 +2,17 @@
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Desktop;
-using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
-using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System.Globalization;
-using System.Runtime.InteropServices;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -26,7 +23,6 @@ namespace AxCrypt.App.Windows;
 public partial class MainPage : ContentPage, ISignIn
 {
     private readonly FileDropService _fileDropService;
-    private ICustomNavigationService? _navigationManager;
     private LogOnViewModel? _logOnViewModel;
     private RegisterViewModel? _registerViewModel;
 

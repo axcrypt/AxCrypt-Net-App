@@ -75,7 +75,7 @@ namespace AxCrypt.Core.Test
             {
                 eventArgs = e;
             };
-            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, String.Empty);
+            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, string.Empty, string.Empty);
 
             Assert.That(eventArgs, Is.Not.Null, "The VersionUpdate event should be called with non-null VersionEventArgs.");
             Assert.That(eventArgs.DownloadVersion.CalculateStatus(thisVersion, utcNow, eventArgs.LastUpdateCheck), Is.EqualTo(VersionUpdateStatus.NewerVersionIsAvailable), "The new version was newer.");
@@ -102,7 +102,7 @@ namespace AxCrypt.Core.Test
                 {
                     eventArgs = e;
                 };
-            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, String.Empty);
+            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, string.Empty, string.Empty);
 
             Assert.That(eventArgs, Is.Not.Null, "The VersionUpdate event should be called with non-null VersionEventArgs.");
             Assert.That(eventArgs.DownloadVersion.CalculateStatus(thisVersion, utcNow, eventArgs.LastUpdateCheck), Is.EqualTo(VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck), "This is not a successful check, and it was DateTime.MinValue since the last.");
@@ -119,7 +119,7 @@ namespace AxCrypt.Core.Test
                 {
                     eventArgs = e;
                 };
-            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, String.Empty);
+            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, string.Empty, string.Empty);
 
             Assert.That(eventArgs, Is.Not.Null, "The VersionUpdate event should be called with non-null VersionEventArgs.");
             Assert.That(eventArgs.DownloadVersion.CalculateStatus(thisVersion, utcNow, eventArgs.LastUpdateCheck), Is.EqualTo(VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck), "This is not a successful check, and it was DateTime.MinValue since the last.");
@@ -136,8 +136,8 @@ namespace AxCrypt.Core.Test
             Version newVersion = new Version(2, 0, 307, 0);
             Uri updateWebPageUrl = new Uri("http://www.axantum.com/");
             AxCryptUpdateCheck updateCheck = new AxCryptUpdateCheck(thisVersion);
-            Assert.ThrowsAsync<ArgumentNullException>(async () => { await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, nullVersion, updateWebPageUrl, String.Empty); }, "Null argument should throw.");
-            Assert.ThrowsAsync<ArgumentNullException>(async () => { await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, newVersion.ToString(), nullUrl, String.Empty); }, "Null argument should throw.");
+            Assert.ThrowsAsync<ArgumentNullException>(async () => { await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, nullVersion, updateWebPageUrl, string.Empty, string.Empty); }, "Null argument should throw.");
+            Assert.ThrowsAsync<ArgumentNullException>(async () => { await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, newVersion.ToString(), nullUrl, string.Empty, string.Empty); }, "Null argument should throw.");
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace AxCrypt.Core.Test
                 {
                     eventArgs = e;
                 };
-            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, String.Empty);
+            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, string.Empty, string.Empty);
 
             Assert.That(eventArgs, Is.Not.Null, "The VersionUpdate event should be called with non-null VersionEventArgs.");
             Assert.That(eventArgs.DownloadVersion.CalculateStatus(thisVersion, utcNow, eventArgs.LastUpdateCheck), Is.EqualTo(VersionUpdateStatus.IsUpToDate), "The new version was older, so this version is up to date.");
@@ -186,7 +186,7 @@ namespace AxCrypt.Core.Test
                 {
                     eventArgs = e;
                 };
-            await updateCheck.CheckInBackgroundAsync(utcNow.AddDays(-2), DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, String.Empty);
+            await updateCheck.CheckInBackgroundAsync(utcNow.AddDays(-2), DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, string.Empty, string.Empty);
 
             Assert.That(eventArgs, Is.Not.Null, "The VersionUpdate event should be called with non-null VersionEventArgs.");
             Assert.That(eventArgs.DownloadVersion.CalculateStatus(thisVersion, utcNow, eventArgs.LastUpdateCheck), Is.EqualTo(VersionUpdateStatus.IsUpToDate), "The new version was the same and we checked recently.");
@@ -215,7 +215,7 @@ namespace AxCrypt.Core.Test
                 {
                     eventArgs = e;
                 };
-            await updateCheck.CheckInBackgroundAsync(utcNow.AddHours(-1), thisVersion.ToString(), updateWebPageUrl, String.Empty);
+            await updateCheck.CheckInBackgroundAsync(utcNow.AddHours(-1), thisVersion.ToString(), updateWebPageUrl, string.Empty, string.Empty);
 
             Assert.That(eventArgs, Is.Not.Null, "The VersionUpdate event should be called with non-null VersionEventArgs.");
             Assert.That(eventArgs.DownloadVersion.CalculateStatus(thisVersion, utcNow, eventArgs.LastUpdateCheck), Is.EqualTo(VersionUpdateStatus.IsUpToDate), "No check should be made, and it is assumed this version is up to date.");
@@ -247,8 +247,8 @@ namespace AxCrypt.Core.Test
                 {
                     eventArgs = e;
                 };
-            Task t1 = updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, String.Empty);
-            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, String.Empty);
+            Task t1 = updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, string.Empty, string.Empty);
+            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, string.Empty, string.Empty);
             wait.Set();
             await t1;
 
@@ -279,7 +279,7 @@ namespace AxCrypt.Core.Test
                 {
                     eventArgs = e;
                 };
-            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, String.Empty);
+            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, string.Empty, string.Empty);
 
             Assert.That(eventArgs, Is.Not.Null, "The VersionUpdate event should be called with non-null VersionEventArgs.");
             Assert.That(eventArgs.DownloadVersion.CalculateStatus(thisVersion, utcNow, eventArgs.LastUpdateCheck), Is.EqualTo(VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck), "No check could be made, and it was a long time since a check was made.");
@@ -307,7 +307,7 @@ namespace AxCrypt.Core.Test
                 {
                     eventArgs = e;
                 };
-            await updateCheck.CheckInBackgroundAsync(utcNow.AddDays(-2), DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, String.Empty);
+            await updateCheck.CheckInBackgroundAsync(utcNow.AddDays(-2), DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, string.Empty, string.Empty);
 
             Assert.That(eventArgs, Is.Not.Null, "The VersionUpdate event should be called with non-null VersionEventArgs.");
             Assert.That(eventArgs.DownloadVersion.CalculateStatus(thisVersion, utcNow, eventArgs.LastUpdateCheck), Is.EqualTo(VersionUpdateStatus.ShortTimeSinceLastSuccessfulCheck), "Although the check failed, a check was recently made a short time ago.");
@@ -333,7 +333,7 @@ namespace AxCrypt.Core.Test
                 {
                     eventArgs = e;
                 };
-            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, String.Empty);
+            await updateCheck.CheckInBackgroundAsync(DateTime.MinValue, DownloadVersion.VersionUnknown.ToString(), updateWebPageUrl, string.Empty, string.Empty);
 
             Assert.That(eventArgs, Is.Not.Null, "The VersionUpdate event should be called even when an invalid version is returned.");
             Assert.That(eventArgs.DownloadVersion.CalculateStatus(thisVersion, utcNow, eventArgs.LastUpdateCheck), Is.EqualTo(VersionUpdateStatus.LongTimeSinceLastSuccessfulCheck), "No check has been performed previously and no new version is known.");

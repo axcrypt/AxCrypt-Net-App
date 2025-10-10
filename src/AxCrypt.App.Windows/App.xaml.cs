@@ -151,7 +151,6 @@ public partial class App : Application
 
         //TypeMap.Register.Singleton<IVersion>(() => new DesktopVersion());
 
-        //TypeMap.Register.New<AboutBox>(() => new AboutBox());
         PlatformInitializer.RegisterTypeFactories();
         AppFactory.RegisterTypeFactories();
 
@@ -342,7 +341,7 @@ public partial class App : Application
         {
             case CommandVerb.About:
                 _logOnViewModel.AboutDialog.Show();
-                AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus(); 
+                AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
                 return;
 
             case CommandVerb.Exit:
