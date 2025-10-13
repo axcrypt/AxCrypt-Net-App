@@ -27,12 +27,12 @@ public class CssService : ICssService
             new KeyValuePair<string, string>(cssBasePath, "secretlist.min.css"),
             new KeyValuePair<string, string>(cssBasePath, "securedmessenger.min.css"),
             new KeyValuePair<string, string>(cssBasePath, "support.min.css"),
-            new KeyValuePair<string, string>(cssBasePath, "findfiles.min.css")
         };
 
         if (subscriptionLevel != "free")
         {
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "sharesecret.min.css"));
+            cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "findfiles.min.css"));
         }
 
         return cssFiles;

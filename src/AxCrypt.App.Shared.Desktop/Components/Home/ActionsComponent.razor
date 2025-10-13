@@ -99,7 +99,7 @@
             {
                 <div class="act-box" @onclick="async(e)=> await homeActionModel.ShareKeysAsync(e)" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
                     <img class="act-img shrks-act" src="" alt="shrks-img" />
-                    <span class="text-size">Share</span>
+                    <span class="text-size">@Texts.ShareKeysToolStripMenuItemText</span>
                     @if (isHovered && hoveredElement == "share")
                     {
                         <div class="home-hover text-center" style="background-color:#fff;">
