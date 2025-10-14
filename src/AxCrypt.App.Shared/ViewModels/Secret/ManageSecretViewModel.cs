@@ -140,7 +140,7 @@ public class ManageSecretViewModel : Core.UI.ViewModel.ViewModelBase
 
     private bool ValidPasswordModel()
     {
-        if (string.IsNullOrEmpty(Secret.Password.Url) || string.IsNullOrEmpty(Secret.Password.SecretDesc) || string.IsNullOrEmpty(Secret.Password.Username) || string.IsNullOrEmpty(Secret.Password.SecretValue))
+        if (string.IsNullOrEmpty(Secret.Password.SecretDesc) || string.IsNullOrEmpty(Secret.Password.SecretValue))
         {
             ErrorMessage = "Fill all the required(marked *) fields!";
             return false;
