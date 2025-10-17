@@ -12722,6 +12722,9 @@
   <data name="DecryptFileOpenDialogTitle" xml:space="preserve">
     <value>حدد ملفًا لإيقاف تأمينه</value>
   </data>
+  <data name="DecryptGuideHead">
+    <value>فك التشفير</value>
+  </data>
   <data name="DecryptToolStripMenuItemText" xml:space="preserve">
     <value>توقف عن تأمين</value>
   </data>
@@ -13216,6 +13219,16 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="EnableMasterKeyPrompt" xml:space="preserve">
     <value>تفعيل المفتاح الرئيسي</value>
+  </data>
+  <data name="EncryptandDecryptLinkLable">
+    <value>التشفير وفك التشفير</value>
+  </data>
+  <data name="EncryptDecryptGuideCarouselHead1">
+    <value>تشفير الملفات باستخدام أكسكريبت على سطح المكتب</value>
+  </data>
+  <data name="EncryptDecryptGuideCarouselHead2">
+    <value>تشفير الملفات باستخدام أكسكريبت على الجهاز المحمول
+</value>
   </data>
   <data name="EncryptedFoldersToolStripMenuItemText" xml:space="preserve">
     <value>مجلدات مؤمنة</value>
@@ -14271,7 +14284,61 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="GetStartedEasyAccessText" xml:space="preserve">
     <value>بنقرة بسيطة ، يمكنك الوصول إلى إدارة كلمات المرور عبر الإنترنت من اكسكربت ، والتي تخزن جميع كلمات المرور الخاصة بك في أرشيف مشفر بشكل آمن عبر الإنترنت.</value>
   </data>
-  <data name="GetStartedGuideUseText2" xml:space="preserve">
+  <data name="GetStartedGuideCarouselHead1">
+    <value>تحميل وتثبيت</value>
+  </data>
+  <data name="GetStartedGuideCarouselHead2">
+    <value>سجِّل بريدك الإلكتروني</value>
+  </data>
+  <data name="GetStartedGuideCarouselHead3">
+    <value>قم بإعداد اشتراكك</value>
+  </data>
+  <data name="GetStartedGuideCarouselHead4">
+    <value>5. تم! تهانينا ومرحبًا بك في أكسكريبت.</value>
+  </data>
+  <data name="GetStartedGuideCarouselHead5">
+    <value>خصص الإعدادات:</value>
+  </data>
+  <data name="GetStartedGuideCarouselText2">
+    <value>يمكنك تنزيل أكسكريبت من:</value>
+  </data>
+  <data name="GetStartedGuideCarouselText3">
+    <value>في صفحة التسجيل، اختر الخطة حسب استخدامك وأدخل عنوان بريدك الإلكتروني. تحقق من صندوق الوارد لديك للعثور على رابط التحقق — انقر عليه لتفعيل حسابك.</value>
+  </data>
+  <data name="GetStartedGuideCarouselText6">
+    <value>لا يقوم أكسكريبت بتخزين كلمة المرور الخاصة بك.
+لا تنسَ كلمة المرور!
+بدون كلمة المرور، ستفقد ملفاتك نهائيًا.</value>
+  </data>
+  <data name="GetStartedGuideHeading">
+    <value>البدء باستخدام أكسكريبت</value>
+  </data>
+  <data name="GetStartedGuideNoteText2">
+    <value>فعِّل المصادقة متعددة العوامل</value>
+  </data>
+  <data name="GetStartedGuideNoteText3">
+    <value>قم بتحديث أكسكريبت بانتظام للحصول على أحدث الميزات</value>
+  </data>
+  <data name="GetStartedGuideNoteText4">
+    <value>لا تشارك كلمة مرور أكسكريبت الخاصة بك مع الآخرين</value>
+  </data>
+  <data name="GetStartedGuideSecHeading1">
+    <value>ما هو AxCrypt؟</value>
+  </data>
+  <data name="GetStartedGuideSecHeading2">
+    <value>هل تريد البدء باستخدام برنامج أكسكريبت؟</value>
+  </data>
+  <data name="GetStartedGuideSecText1">
+    <value>يُعد أكسكريبت برنامجًا قويًا لتشفير الملفات، صُمم لحماية بياناتك الحساسة وضمان سريّتها. يستخدم تشفيرًا قويًا بمعيار AES-256 بت، ويتيح لك حماية ملفاتك بسهولة من خلال بضع نقرات فقط.</value>
+  </data>
+  <data name="GetStartedGuideSecText2">
+    <value>قم بتأمين ملفاتك خلال دقائق عن طريق إنشاء معرّف أكسكريبت الخاص بك.
+اتبع هذه الخطوات البسيطة.</value>
+  </data>
+  <data name="GetStartedGuideUseText1">
+    <value>قم بتأمين ملفاتك ومجلداتك باستخدام تشفير بمعيار الصناعة.</value>
+  </data>
+  <data name="GetStartedGuideUseText2">
     <value>حماية المستندات السرية من الوصول غير المصرح به</value>
   </data>
   <data name="GetStartedGuideUseText3" xml:space="preserve">
@@ -14280,7 +14347,10 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="GetStartedGuideUseText4" xml:space="preserve">
     <value>دعم متعدد المنصات: ويندوز، ماك، أندرويد، وiOS</value>
   </data>
-  <data name="GetStartedHowToUseHeading" xml:space="preserve">
+  <data name="GetStartedGuideUseText5">
+    <value>مثالي للاستخدام الشخصي والتجاري</value>
+  </data>
+  <data name="GetStartedHowToUseHeading">
     <value>كيف تستعمل</value>
   </data>
   <data name="GetStartedHowToUseIngress" xml:space="preserve">
@@ -14777,6 +14847,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="GuidesLinkQuoteLabel5" xml:space="preserve">
     <value>الدردشة المباشرة</value>
+  </data>
+  <data name="GuidesLinkQuoteLabel6">
+    <value>التشفير وفك التشفير</value>
   </data>
   <data name="HaveAccountInfo" xml:space="preserve">
     <value>رائعة! لديك بالفعل حساب معرّف اكسكربت لـ "{0}".
