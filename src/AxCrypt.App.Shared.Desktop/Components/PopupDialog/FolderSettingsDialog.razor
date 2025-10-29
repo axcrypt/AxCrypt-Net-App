@@ -68,7 +68,8 @@
                 </div>
                 <div id="folderSetting" class="folderSettings-ft" style="margin: 10px 0px; float:right;">
                     <input type="button" @onclick="Close" class="button border btn-small" value="@Texts.ButtonCancelText" style="margin-right: 10px;" />
-                    <input type="button" class="button success btn-small" @onclick="() => FolderSettingsViewModel.ApplyFolderSettings()" value="@Texts.ApplyLabel" style="padding: 6px 0px;" />
+                    <input type="button" class="button btn-small active" @onclick="() => FolderSettingsViewModel.ApplyFolderSettings()"
+                           value="@Texts.ApplyLabel" style="padding: 6px 0px;" disabled="@(!FolderSettingsViewModel.HasFolderChanges)" />
                 </div>
             </div>
         </div>
@@ -84,7 +85,6 @@
         FolderSettingsViewModel.LogOnViewModel.FolderSettingsDialog.OnDialogVisibilityChanged += UpdateDialogStateChnged;
         FolderSettingsViewModel.LogOnViewModel.OnUIStateChanged += UpdateDialogStateChnged;
     }
-    
     void UpdateDialogStateChnged(bool canShowDialog)
     {
         InvokeAsync(() =>
@@ -104,8 +104,8 @@
 
     void Close()
     {
-        FolderSettingsViewModel.ApplyFolderSettings();
         FolderSettingsViewModel.PageResult = Utility.DialogResult.Cancel;
+        UpdateDialogStateChnged();
     }
 
     private string? Icon { get; set; }

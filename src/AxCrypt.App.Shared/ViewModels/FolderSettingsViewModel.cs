@@ -15,6 +15,8 @@ namespace AxCrypt.App.Shared.ViewModels
 
         private IList<string> _selectedFilesOrFolders = new List<string>();
         private IList<string> _ignoredFoldersList = new List<string>();
+        private IList<string> _originalFoldersList = new List<string>();
+
         private FolderSettingViewModel? _viewModel;
 
         public FolderSettingsViewModel()
@@ -22,7 +24,8 @@ namespace AxCrypt.App.Shared.ViewModels
             LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
         }
 
-        public DialogResult PageResult { get { return GetProperty<DialogResult>(nameof(PageResult)); } set { SetProperty(nameof(PageResult), value); } }
+        public DialogResult PageResult
+        { get { return GetProperty<DialogResult>(nameof(PageResult)); } set { SetProperty(nameof(PageResult), value); } }
 
         public async Task SetFolderSettings(IEnumerable<string> filesOrFoldersPath, FolderSettingViewModel viewModel, Action OkAction)
         {
@@ -36,7 +39,7 @@ namespace AxCrypt.App.Shared.ViewModels
             {
                 IgnoredFoldersList = aks.Distinct().ToList();
             });
-
+            _originalFoldersList = IgnoredFoldersList;
             LogOnViewModel.FolderSettingsDialog.Show();
 
             while (PageResult == DialogResult.None)
@@ -78,10 +81,26 @@ namespace AxCrypt.App.Shared.ViewModels
             }
         }
 
+        public bool HasFolderChanges
+        {
+            get
+            {
+                return !_ignoredFoldersList.SequenceEqual(_originalFoldersList);
+            }
+        }
+
         public string? ErrorMessage { get; set; }
 
         public void ApplyFolderSettings()
         {
+            if (!HasFolderChanges)
+            {
+                ErrorMessage = "No changes detected";
+                return;
+            }
+
+            _originalFoldersList = _ignoredFoldersList;
+            LogOnViewModel.UIStateChanged();
             PageResult = DialogResult.OK;
         }
 
@@ -109,7 +128,6 @@ namespace AxCrypt.App.Shared.ViewModels
             FileSelectionEventArgs eventArgs = new FileSelectionEventArgs(new string[] { })
             {
                 FileSelectionType = FileSelectionType.Folder,
-
             };
             await New<IDataItemSelection>().HandleSelection(eventArgs);
             if (eventArgs.SelectedFiles == null || !eventArgs.SelectedFiles.Any())
