@@ -603,6 +603,9 @@ Lägg till Kort</value>
   <data name="AlertText" xml:space="preserve">
     <value>Varning!</value>
   </data>
+  <data name="AllDoneText" xml:space="preserve">
+    <value>Allt klart!</value>
+  </data>
   <data name="AllLabel" xml:space="preserve">
     <value>Alla</value>
   </data>
@@ -632,6 +635,9 @@ Logga nu in med samma lösenord som du angav då.</value>
   <data name="AlwaysOfflineToolTip" xml:space="preserve">
     <value>Om Alltid Frånkopplad aktiveras, kommer ingen Internetåtkomst att krävas eller användas tills funktionen avaktiveras.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
+  </data>
+  <data name="AndText" xml:space="preserve">
+    <value>Och</value>
   </data>
   <data name="AnnualMonthlySwitcherAnnualButtonLabel" xml:space="preserve">
     <value>Årlig 20% rabatt</value>
@@ -703,12 +709,18 @@ Logga nu in med samma lösenord som du angav då.</value>
 
 Ändringar till prenumerationen som görs där kommer uppdateras här inom några minuter.</value>
   </data>
+  <data name="AppText" xml:space="preserve">
+    <value>App</value>
+  </data>
   <data name="AppVersionLabel" xml:space="preserve">
     <value>Version {0}</value>
     <comment>Text containing information about current application version.</comment>
   </data>
   <data name="ArabicLanguageSelectionText" xml:space="preserve">
     <value>عربي(Arabiska)</value>
+  </data>
+  <data name="AreYouSureText" xml:space="preserve">
+    <value>Är du säker?</value>
   </data>
   <data name="AsAffiliateHeading" xml:space="preserve">
     <value>&lt;span&gt;Som en&lt;/span&gt; Partner</value>
@@ -727,6 +739,9 @@ Logga nu in med samma lösenord som du angav då.</value>
   </data>
   <data name="AuthenticationError" xml:space="preserve">
     <value>Sidan kräver inloggning, vänligen logga in och fortsätt.</value>
+  </data>
+  <data name="AuthenticatorAppText" xml:space="preserve">
+    <value>App för autentisering</value>
   </data>
   <data name="AutoAnonymousRenameMenuItemText" xml:space="preserve">
     <value>Automatisk Anonym Namnändring</value>
@@ -1145,6 +1160,12 @@ Logga nu in med samma lösenord som du angav då.</value>
     <value>Filskydd För Dig och Ditt Team från AxCrypt AB
 
 Innehåller programvara från http://www.bouncycastle.org/ .</value>
+  </data>
+  <data name="AxCryptAboutDescription1" xml:space="preserve">
+    <value>Filsäkerhet för Dig och Ditt Team av &lt;span class="font-medium"&gt;AxCrypt AB&lt;/span&gt;</value>
+  </data>
+  <data name="AxCryptAboutDescription2" xml:space="preserve">
+    <value>Inkluderar programvara från http://www.bouncycastle.org/.</value>
   </data>
   <data name="AxCryptAffiliateHeading" xml:space="preserve">
     <value>Bli en av AxCrypt's&lt;span&gt; Affiliate Partners&lt;/span&gt;!</value>
@@ -13095,6 +13116,9 @@ Om du inte accepterar våra temporära sessionscookies kan du inte logga in och 
   <data name="CustomerReadHeading" xml:space="preserve">
     <value>Läs AxCrypt &lt;label&gt;Kundberättelser&lt;/label&gt;</value>
   </data>
+  <data name="CustomersText" xml:space="preserve">
+    <value>kunder</value>
+  </data>
   <data name="CustomerStoriesHead1" xml:space="preserve">
     <value>IPTWINS S.A.S. Säkrar Känsliga Dokument med Lätthet</value>
   </data>
@@ -13538,6 +13562,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   <data name="DifferentWayPayText" xml:space="preserve">
     <value>Olika tillvägagångssätt för betalning?</value>
   </data>
+  <data name="DirectSupportText" xml:space="preserve">
+    <value>Vi erbjuder direkt support till</value>
+  </data>
   <data name="DisableAccessText" xml:space="preserve">
     <value>Inaktivera åtkomst</value>
   </data>
@@ -13850,6 +13877,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
     <value>Öppna e-post</value>
     <comment>Text of link for opening mail application.</comment>
   </data>
+  <data name="EmailAuthenticationText" xml:space="preserve">
+    <value>Autentisering via e-post</value>
+  </data>
   <data name="EmailErrorTemplateNotFound" xml:space="preserve">
     <value>Mallen hittades inte.</value>
   </data>
@@ -14055,6 +14085,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   <data name="EnterGroupNamePlaceHolder" xml:space="preserve">
     <value>Ange gruppnamn</value>
   </data>
+  <data name="EnterOTPPlaceHolderText" xml:space="preserve">
+    <value>Ange engångskod</value>
+  </data>
   <data name="EnterPassphraseForIdentityPrompt" xml:space="preserve">
     <value>Ange lösenord för '{0}'</value>
   </data>
@@ -14088,6 +14121,15 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   <data name="Exception" xml:space="preserve">
     <value>Exception during processing of '{0}'.</value>
     <comment>@Invariant</comment>
+  </data>
+  <data name="ExcludedFolderNotificationText" xml:space="preserve">
+    <value>Uteslutna mappar förblir okrypterade</value>
+  </data>
+  <data name="ExcludedFoldersText" xml:space="preserve">
+    <value>Uteslutna mappar:</value>
+  </data>
+  <data name="ExcludeFolderText" xml:space="preserve">
+    <value>Undanta mapp</value>
   </data>
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>Avsluta</value>
@@ -14587,6 +14629,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
     <value>Dubbelklick för att öppna AxCrypt-filer utanför AxCrypt kanske inte fungerar. Filassocieringen för ändelsen ".axx" verkar trasig. Kontakta din IT-support eller sök efter lösningar på Internet.</value>
     <comment>A text that is shown to users starting the association with .axx file is broken. It should not mention "Windows", or "Mac" etc so it can be used in all environments.</comment>
   </data>
+  <data name="FileDecryptionSuccessAlertMsg" xml:space="preserve">
+    <value>Fil '{0}' har dekrypterats.</value>
+  </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>Filen '{0}' finns inte.</value>
   </data>
@@ -14632,6 +14677,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   <data name="FileNotFound" xml:space="preserve">
     <value>Filen finns inte.</value>
   </data>
+  <data name="FileOpenFailedAlertMsg" xml:space="preserve">
+    <value>Det går inte att öppna filen '{0}'. Orsak: {1}</value>
+  </data>
   <data name="FileOperationFailed" xml:space="preserve">
     <value>Fel med '{0}'.</value>
   </data>
@@ -14654,6 +14702,18 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
     <value>Egenskaper för krypteringsfiler</value>
     <comment>A menu text for selecting file properties for encryption.</comment>
   </data>
+  <data name="FileRenameFailedAlertMsg" xml:space="preserve">
+    <value>Det går inte att byta namn på filen '{0}" anonymt. Orsak: {1}</value>
+  </data>
+  <data name="FileRenameSuccessAlertMsg" xml:space="preserve">
+    <value>Fil '{0}" har bytt namn anonymt.</value>
+  </data>
+  <data name="FileRestoreRenameFailedAlertMsg" xml:space="preserve">
+    <value>Det gick inte att återställa det ursprungliga namnet för filen '{0}'. Orsak: {1}</value>
+  </data>
+  <data name="FileRestoreRenameSuccessAlertMsg" xml:space="preserve">
+    <value>Fil '{0}" har återställts till sitt ursprungliga namn.</value>
+  </data>
   <data name="FileSizeColumnHeaderText" xml:space="preserve">
     <value>Storlek</value>
   </data>
@@ -14675,15 +14735,39 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>Finansiellt</value>
   </data>
+  <data name="FindFileFeatureTitle" xml:space="preserve">
+    <value>Söka efter filer</value>
+  </data>
+  <data name="FindFilesFeatureDescription" xml:space="preserve">
+    <value>Hantera alla krypterade filreferenser på ett ställe, med alternativ för att visa, byta namn på, ta bort eller dekryptera.</value>
+  </data>
+  <data name="FindFilesFeatureTooltip" xml:space="preserve">
+    <value>En plats för att hantera krypterade filer</value>
+  </data>
+  <data name="FindFilesSearchPlaceholder" xml:space="preserve">
+    <value>Skriv för att hitta en fil...</value>
+  </data>
+  <data name="FindPathTitle" xml:space="preserve">
+    <value>Filväg</value>
+  </data>
   <data name="FirstNameLabel" xml:space="preserve">
     <value>Förnamn</value>
   </data>
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>Mappen '{0}' är redan skyddad.</value>
   </data>
+  <data name="FolderOpenFailedAlertMsg" xml:space="preserve">
+    <value>Det går inte att öppna mappen för '{0}'. Orsak: {1}</value>
+  </data>
   <data name="FolderSelectTitle" xml:space="preserve">
     <value>Välj mapp</value>
     <comment>A prompt or title in a folder selection dialog, prompting the user to select a folder.</comment>
+  </data>
+  <data name="FolderSettingsText" xml:space="preserve">
+    <value>Exkludera undermapp</value>
+  </data>
+  <data name="FolderSettingsTitle" xml:space="preserve">
+    <value>Inställningar för skyddad mapp</value>
   </data>
   <data name="FollowUsTitle" xml:space="preserve">
     <value>Följ oss</value>
@@ -15191,6 +15275,18 @@ Besök vår &lt;a href="{0}"&gt;gruppsupport&lt;/a&gt;.</value>
   <data name="GetStartedGuideUseText5" xml:space="preserve">
     <value>Perfekt för personligt och affärsmässigt bruk</value>
   </data>
+  <data name="GetStartedGuideWhatsNextText" xml:space="preserve">
+    <value>🔒 &lt;strong&gt;Kryptera och dekryptera filer enkelt&lt;/strong&gt; – följ vår &lt;a href='https://axcrypt.net/information/guides/encryption-decryption/'&gt;[Steg-för-steg AxCrypt Guide].&lt;/a&gt;</value>
+  </data>
+  <data name="GetStartedGuideWhatsNextText1" xml:space="preserve">
+    <value>👥 &lt;strong&gt;Hantera Teams och Företagsåtkomst &lt;/strong&gt; – Förenkla samarbetet med vår &lt;a href='https://axcrypt.net/information/axcrypt-business/'&gt;[Guide för företagsinställning]&lt;/a&gt;.</value>
+  </data>
+  <data name="GetStartedGuideWhatsNextText2" xml:space="preserve">
+    <value>🔐 &lt;strong&gt;Varför välja AxCrypt för säkerhet&lt;/strong&gt; – Upptäck algoritmerna och skydden på vår &lt;a href='https://axcrypt.net/information/security/'&gt;[Säkerhetssida]&lt;/a&gt;.</value>
+  </data>
+  <data name="GetStartedGuideWhatsNextText3" xml:space="preserve">
+    <value>📘 &lt;strong&gt;Bästa praxis för kryptering&lt;/strong&gt; - Utforska våra &lt;a href='https://axcrypt.net/blog/'&gt;[Bloggar om lättanvänd 128-bitars och 256-bitars kryptering].&lt;/a&gt;</value>
+  </data>
   <data name="GetStartedHowToUseHeading" xml:space="preserve">
     <value>Hur man använder</value>
   </data>
@@ -15409,6 +15505,9 @@ Besök vår &lt;a href="{0}"&gt;gruppsupport&lt;/a&gt;.</value>
   </data>
   <data name="GroupFeatureInfoText" xml:space="preserve">
     <value>Lägg till användare eller grupper som ni vill dela den här hemligheten med. Om ni inte känner till vår &lt;strong&gt;Gruppfunktion&lt;/strong&gt; ännu kan ni läsa mer och skapa er första via länken</value>
+  </data>
+  <data name="GroupFeatureText" xml:space="preserve">
+    <value>Grupp-funktion</value>
   </data>
   <data name="GroupFileSharingHeading" xml:space="preserve">
     <value>Gruppladdning av filer</value>
@@ -15637,6 +15736,15 @@ Besök vår &lt;a href="{0}"&gt;gruppsupport&lt;/a&gt;.</value>
   </data>
   <data name="GroupGuidesTitle" xml:space="preserve">
     <value>&lt;label&gt;Maximera&lt;/label&gt; Företagssäkerhet och teameffektivitet med &lt;span&gt;AxCrypts&lt;/span&gt; &lt;strong&gt;gruppfunktion&lt;/strong&gt;!</value>
+  </data>
+  <data name="GroupInfoText" xml:space="preserve">
+    <value>Lägg till användare eller Grupper som du vill dela den här hemligheten med. Om du inte känner till våra</value>
+  </data>
+  <data name="GroupInfoText1" xml:space="preserve">
+    <value>Skapa din första via länken</value>
+  </data>
+  <data name="GroupInfoText2" xml:space="preserve">
+    <value>Men läs mer och skapa din första via länken</value>
   </data>
   <data name="GroupManagementHeading" xml:space="preserve">
     <value>Grupphantering</value>
@@ -16605,6 +16713,9 @@ Ditt lösenord lagras inte hos oss, och anslutningen är alltid krypterad.</valu
   <data name="InvalidEmail" xml:space="preserve">
     <value>Felaktigt angiven e-postadress.</value>
   </data>
+  <data name="InvalidFolder" xml:space="preserve">
+    <value>Ogiltig mappsökväg</value>
+  </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>Felaktig krypteringsnyckel för '{0}'.</value>
   </data>
@@ -16613,6 +16724,9 @@ Ditt lösenord lagras inte hos oss, och anslutningen är alltid krypterad.</valu
   </data>
   <data name="InvalidSelectionErrorMessage" xml:space="preserve">
     <value>Vänligen välj minst ett meddelande.</value>
+  </data>
+  <data name="InvalidSubFolder" xml:space="preserve">
+    <value>Den valda mappen är inte en giltig undermapp</value>
   </data>
   <data name="InvitationMailBodyIntro" xml:space="preserve">
     <value>Du har blivit inbjuden till AxCrypt av &lt;b&gt;{0}&lt;/b&gt;.
@@ -16638,6 +16752,9 @@ Logga in till AxCrypt med {2}, ange den 6-siffriga verifieringskoden och sätt d
   </data>
   <data name="InviteFriendAxCryptText" xml:space="preserve">
     <value>Bjud in din vän till AxCrypt!</value>
+  </data>
+  <data name="InviteFriendText" xml:space="preserve">
+    <value>Bjud in en vän</value>
   </data>
   <data name="InviteUserNotifyEventText" xml:space="preserve">
     <value>Du har blivit inbjuden att använda AxCrypt!</value>
@@ -18827,6 +18944,84 @@ ladda ner krypteringsprogramvara,Kryptera filer,dekryptera filer,256-bitars kryp
   <data name="MetadataRetentionText" xml:space="preserve">
     <value>Behåller det ursprungliga filnamnet och informationen om en säker fil.</value>
   </data>
+  <data name="MFAAlreadyRecoveryCodesText" xml:space="preserve">
+    <value>Du har redan använt alla återställningskoder!.</value>
+  </data>
+  <data name="MFAAvoidLosingText" xml:space="preserve">
+    <value>För att undvika att förlora åtkomst och generera nya koder, konfigurera om tvåfaktorsautentisering med
+en autentiseringsapp.</value>
+  </data>
+  <data name="MFABackupCodesTexts" xml:space="preserve">
+    <value>Du kan nu använda reservkoder för att logga in på ditt konto om du inte har åtkomst
+till autentiseringsappen. &lt;strong&gt; Varje kod kan bara användas en gång.&lt;/strong&gt;</value>
+  </data>
+  <data name="MFABackupCodesTexts1" xml:space="preserve">
+    <value>&lt;strong&gt;Betrakta dessa koder som lösenord&lt;/strong&gt; och lagra dem säkert i &lt;strong&gt;Lösenordshanteraren&lt;/strong&gt;.</value>
+  </data>
+  <data name="MFADescriptionText" xml:space="preserve">
+    <value>Multifaktorautentisering är en förbättrad säkerhetsåtgärd. När det här alternativet är aktiverat krävs två typer av identifiering för att logga in på AxCrypt</value>
+  </data>
+  <data name="MFADescriptionText1" xml:space="preserve">
+    <value>Aktivera säker inloggning med valfri autentiseringsapp, &lt;br /&gt;inklusive &lt;strong&gt;Microsoft och Google Authenticator&lt;/strong&gt;.</value>
+  </data>
+  <data name="MFAEmailAuthentication" xml:space="preserve">
+    <value>För att aktivera e-postautentisering behöver vi skicka en verifieringskod till din e-postadress.</value>
+  </data>
+  <data name="MFAInitialSetupText" xml:space="preserve">
+    <value>Om du vill aktivera multifaktorautentisering installerar du valfri autentiseringsapp (till exempel Microsoft, Google osv.)</value>
+  </data>
+  <data name="MFAInvalidUserError" xml:space="preserve">
+    <value>Det gick inte att aktivera/inaktivera multifaktorautentisering på grund av fel lösenord</value>
+  </data>
+  <data name="MFAMailSubject" xml:space="preserve">
+    <value>Din AxCrypt OTP för Säker Inloggning</value>
+  </data>
+  <data name="MFAMultifactorTypeText" xml:space="preserve">
+    <value>Varje kod kan endast användas en gång. För att undvika att förlora åtkomst och generera nya koder, konfigurera om multifaktorautentisering med
+valfri metod(Authenticator-app, e-post och SMS).</value>
+  </data>
+  <data name="MFANotEnabledText" xml:space="preserve">
+    <value>Multifaktorautentisering är inte aktiverat för det här kontot! Den här sidan kommer att omdirigera till startsidan om några sekunder.</value>
+  </data>
+  <data name="MFAOneTimeVerificationText" xml:space="preserve">
+    <value>Få en engångsverifieringskod skickad till din registrerade &lt;br/&gt; e-postadress.</value>
+  </data>
+  <data name="MFAPasswordConfirmText" xml:space="preserve">
+    <value>Ange lösenordet till ditt AxCrypt-konto för att bekräfta</value>
+  </data>
+  <data name="MFARecoveryCodeSignInText" xml:space="preserve">
+    <value>Du har använt en av återställningskoderna för att logga in.</value>
+  </data>
+  <data name="MfaRecoveryCodeText" xml:space="preserve">
+    <value>Använd en</value>
+  </data>
+  <data name="MfaRecoveryCodeText1" xml:space="preserve">
+    <value>Återställningskod</value>
+  </data>
+  <data name="MfaRecoveryCodeText2" xml:space="preserve">
+    <value>för att komma åt ditt konto.</value>
+  </data>
+  <data name="MFAScanQRCodeText" xml:space="preserve">
+    <value>Skanna QR-koden från autentiseringsappen</value>
+  </data>
+  <data name="MFAScanQRCodeText1" xml:space="preserve">
+    <value>Eller kopiera koden nedan och klistra in i autentiseringsappen.</value>
+  </data>
+  <data name="MFASuccessText" xml:space="preserve">
+    <value>Du är redo att använda</value>
+  </data>
+  <data name="MFASuccessText1" xml:space="preserve">
+    <value>Autentisering för framtida inloggningar.</value>
+  </data>
+  <data name="MFAText" xml:space="preserve">
+    <value>MFA</value>
+  </data>
+  <data name="MfaText1" xml:space="preserve">
+    <value>Ditt konto är skyddat med</value>
+  </data>
+  <data name="MFAText2" xml:space="preserve">
+    <value>Välj din autentiseringsmetod.</value>
+  </data>
   <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>Hur aktiverar jag MFA i AxCrypt?</value>
   </data>
@@ -19006,6 +19201,9 @@ ladda ner krypteringsprogramvara,Kryptera filer,dekryptera filer,256-bitars kryp
   </data>
   <data name="MFAuthenticationSec4Paragraph2" xml:space="preserve">
     <value>Om du inte kan använda en vanlig MFA metod när du loggar in, kommer du uppmanas att använda en av dina säkerhetskoder. Detta gör att du kan kringå den vanliga autentiseringsmetoden och låter dig få tillgång till ditt konto på ett säkert sätt.&lt;br/&gt;&lt;br/&gt; Varje kod kan endast användas en gång och bör förvaras säkert.</value>
+  </data>
+  <data name="MFAVerificationCode" xml:space="preserve">
+    <value>Ange sexsiffriga verifieringskoden från {0}</value>
   </data>
   <data name="MissingFeaturesText" xml:space="preserve">
     <value>Saknade funktioner</value>
@@ -19257,6 +19455,9 @@ ladda ner krypteringsprogramvara,Kryptera filer,dekryptera filer,256-bitars kryp
   <data name="NoItemsSelectedText" xml:space="preserve">
     <value>Inga objekt markerade</value>
   </data>
+  <data name="NoKeepEncryptedText" xml:space="preserve">
+    <value>Nej, behåll krypterat</value>
+  </data>
   <data name="NoLabel" xml:space="preserve">
     <value>Nej</value>
   </data>
@@ -19441,6 +19642,9 @@ För att återgå till startsidan klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</va
   </data>
   <data name="OtherDetailsText" xml:space="preserve">
     <value>Vänligen uppge detaljer, om annat</value>
+  </data>
+  <data name="OtherMFAOptionsText" xml:space="preserve">
+    <value>Prova andra MFA-alternativ</value>
   </data>
   <data name="OtherPlatformsLabel" xml:space="preserve">
     <value>Andra plattformar</value>
@@ -19857,6 +20061,9 @@ Mellanslag och delar av ordet som består av vanliga lösenord bortses ifrån oc
   </data>
   <data name="PastIncidentsHeading" xml:space="preserve">
     <value>Tidigare incidenter</value>
+  </data>
+  <data name="PathText" xml:space="preserve">
+    <value>Sökväg:</value>
   </data>
   <data name="PaymentCancelledNotifyEventText" xml:space="preserve">
     <value>Ditt senaste försök att köpa AxCrypt-prenumerationen misslyckades!</value>
@@ -21245,6 +21452,9 @@ En provperiod på 30 dagar ingår alltid och du kan påbörja den när som helst
     <value>Ta Bort men Behåll Skydd</value>
     <comment>This text is used in the context menu option, which will help the users to remove the file from the recent files list and remove the folder from the secured folders list.</comment>
   </data>
+  <data name="RemoveText" xml:space="preserve">
+    <value>Ta bort</value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>Det finns en aktiv återkommande prenumeration på detta konto. Återkommande Business-prenumerationer behöver inte förnyas manuellt.</value>
   </data>
@@ -22241,6 +22451,9 @@ Till: support@axcrypt.net
   <data name="SelectAllText" xml:space="preserve">
     <value>Välj alla</value>
   </data>
+  <data name="SelectFileToViewFileInfoText" xml:space="preserve">
+    <value>Välj fil för att visa filinformation</value>
+  </data>
   <data name="SelectGroupText" xml:space="preserve">
     <value>Välj en grupp</value>
   </data>
@@ -22429,6 +22642,9 @@ Det kan vara lämpligt att informera '{0}' direkt om AxCrypt filskydd.</value>
   </data>
   <data name="SixMonthsPromtText" xml:space="preserve">
     <value>6 månader</value>
+  </data>
+  <data name="SMSText" xml:space="preserve">
+    <value>SMS</value>
   </data>
   <data name="SocialMediaFollowText" xml:space="preserve">
     <value>Följ oss på sociala media</value>
@@ -23187,6 +23403,9 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   <data name="ToText" xml:space="preserve">
     <value>Till:</value>
   </data>
+  <data name="ToText1" xml:space="preserve">
+    <value>till</value>
+  </data>
   <data name="TransactionHistoryTitle" xml:space="preserve">
     <value>Transaktionshistorik</value>
   </data>
@@ -23441,6 +23660,9 @@ AxCrypt-teamet</value>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} Uppdaterades framgångsrikt.</value>
   </data>
+  <data name="UpdateText" xml:space="preserve">
+    <value>Uppdatering</value>
+  </data>
   <data name="UpdateUserRolesHeading" xml:space="preserve">
     <value>Uppdatera användarroller</value>
   </data>
@@ -23625,6 +23847,12 @@ AxCrypt-teamet</value>
   <data name="UserNamePrompt" xml:space="preserve">
     <value>Användarnamn</value>
   </data>
+  <data name="UserPromptOnAddingExcludeFolder" xml:space="preserve">
+    <value>Vill du dekryptera filerna i den uteslutna undermappen?</value>
+  </data>
+  <data name="UserPromptOnRemovingExcludeFolder" xml:space="preserve">
+    <value>Den valda mappen finns för närvarande i listan över uteslutna mappar. Vill du säkra den i stället?</value>
+  </data>
   <data name="UserSettingsFormatChangeNeedsReset" xml:space="preserve">
     <value>Du har uppdaterat AxCrypt. Dessfärre måste dina inställningar återställas. Efter omstart av AxCrypt kommer inställningarna återgå till utgångsläget. Vi ber om ursäkt för besväret. Dina skyddade filer är lika säkra som alltd.</value>
   </data>
@@ -23655,6 +23883,9 @@ Slutför inloggningen med AxCrypt genom att ange engångslösenordet (OTP) i aut
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>Verifiera</value>
   </data>
+  <data name="VerifyMfaText" xml:space="preserve">
+    <value>Multifaktorautentisering</value>
+  </data>
   <data name="VerifyPasswordPrompt" xml:space="preserve">
     <value>Verifiera Lösenord</value>
   </data>
@@ -23675,6 +23906,9 @@ Slutför inloggningen med AxCrypt genom att ange engångslösenordet (OTP) i aut
   </data>
   <data name="VisibleUntilText" xml:space="preserve">
     <value>Synlig till:</value>
+  </data>
+  <data name="VisitOur" xml:space="preserve">
+    <value>Besök gärna vår</value>
   </data>
   <data name="WarningTitle" xml:space="preserve">
     <value>Varning!</value>
@@ -24064,8 +24298,14 @@ i %TEMP%.</value>
   <data name="YearlySubscriptionTitle" xml:space="preserve">
     <value>Årlig</value>
   </data>
+  <data name="YesDecryptText" xml:space="preserve">
+    <value>Ja, dekryptera</value>
+  </data>
   <data name="YesLabel" xml:space="preserve">
     <value>Ja</value>
+  </data>
+  <data name="YetText" xml:space="preserve">
+    <value>ännu</value>
   </data>
   <data name="YourEmailText" xml:space="preserve">
     <value>Din e-postadress</value>
