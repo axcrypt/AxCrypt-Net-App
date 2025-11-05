@@ -565,11 +565,26 @@ public partial class App : Application
             return;
         }
 
+        string titlePrefix = GetBuildTypeTitle();
+        string appTitle = $"{titlePrefix}{titleText}";
+
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            _window.SetValue(Window.TitleProperty, titleText);
-            _window.Title = titleText;
+            _window.SetValue(Window.TitleProperty, appTitle);
+            _window.Title = appTitle;
         });
+    }
+
+    private static string GetBuildTypeTitle()
+    {
+#if AX_DEBUG_BUILD
+        string buildType = "Debug";
+#elif AX_BETA_BUILD
+        string buildType = "Beta";
+#else
+        string buildType = "";
+#endif
+        return string.IsNullOrWhiteSpace(buildType) ? "" : $"[{buildType}] ";
     }
 
     protected override void OnAppLinkRequestReceived(Uri uri)

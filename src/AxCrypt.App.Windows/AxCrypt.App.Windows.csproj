@@ -45,6 +45,7 @@
 		<ApplicationVersion>3.0.0.0</ApplicationVersion>
 		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
 		<GenerateTestArtifacts>True</GenerateTestArtifacts>
+		<AxBuildType>Debug</AxBuildType>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
 		<!-- Versions -->
@@ -57,6 +58,13 @@
 		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
 		<GenerateTestArtifacts>False</GenerateTestArtifacts>
 		<PublishSelfContained>true</PublishSelfContained>
+		<AxBuildType Condition=" '$(AxBuildType)' != '' ">$(AxBuildType)</AxBuildType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(AxBuildType)' == 'Debug'">
+		<DefineConstants>$(DefineConstants);AX_DEBUG_BUILD</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(AxBuildType)' == 'Beta'">
+		<DefineConstants>$(DefineConstants);AX_BETA_BUILD</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
 		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
