@@ -63,6 +63,7 @@ public class FilePasswordDialogViewModel : ViewModelBase
         DialogResult = DialogResult.Cancel;
         ViewModel = new FilePasswordViewModel("");
         ErrorMessage = "";
+        FilePasswordDialog.Close();
     }
 
     private bool AdHocValidationDueToMonoLimitations()

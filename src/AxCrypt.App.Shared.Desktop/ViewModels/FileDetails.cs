@@ -4,10 +4,14 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Shared.ViewModels;
+namespace AxCrypt.App.Shared.Desktop.ViewModels;
 
 public class FileDetails : Core.UI.ViewModel.ViewModelBase
 {

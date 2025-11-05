@@ -17,6 +17,8 @@ public static class AppDesktopFactory
     {
         services.AddSingleton<ICustomNavigationService, CustomNavigationService>();
 
+        services.AddSingleton<FileDetails>();
+
         services.AddSingleton<TopMenuViewModel>();
         services.AddSingleton<AppSettingsViewModel>();
         services.AddSingleton<AdvancedOptionsViewModel>();
