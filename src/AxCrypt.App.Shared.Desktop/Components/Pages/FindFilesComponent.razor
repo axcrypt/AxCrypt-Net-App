@@ -76,14 +76,14 @@
                                         @foreach (FindFilesLog file in ViewModel.FindFilesList)
                                         {
                                             string fileName = System.IO.Path.GetFileName(file.FilePath);
-                                            <li class="file-list-item @(ViewModel.SelectedFile == fileName ? "selected-list" : "")" @onclick="async () => await SelectFile(fileName, file.FilePath)"
+                                            <li class="file-list-item @(ViewModel.SelectedFilePath == file.FilePath ? "selected-list" : "")" @onclick="async () => await SelectFile(fileName, file.FilePath)"
                                                 @oncontextmenu="(e) => ShowContextMenu(e, fileName, file.FilePath)">
                                                 <div class="file-details">
                                                     <img src="/images/default/AxCrypt_Icon.svg" alt="File Icon" class="list-file-icon" />
-                                                    <span class="file-name @(ViewModel.SelectedFile == fileName ? "selected-text" : "")">
+                                                    <span class="file-name @(ViewModel.SelectedFilePath == file.FilePath ? "selected-text" : "")">
                                                         @((MarkupString)HighlightMatch(fileName))
                                                     </span>
-                                                    <span class="file-path @(ViewModel.SelectedFile == fileName ? "selected-path" : "")">
+                                                    <span class="file-path @(ViewModel.SelectedFilePath == file.FilePath ? "selected-path" : "")">
                                                         @((MarkupString)HighlightMatch(file.FilePath))
                                                     </span>
                                                 </div>
@@ -98,11 +98,11 @@
                                         @foreach (FindFilesLog file in ViewModel.FindFilesList)
                                         {
                                             string fileName = System.IO.Path.GetFileName(file.FilePath);
-                                            <div class="file-grid-item @(ViewModel.SelectedFile == fileName ? "selected-grid" : "")"
+                                            <div class="file-grid-item @(ViewModel.SelectedFilePath == file.FilePath ? "selected-grid" : "")"
                                                  @onclick="async () => await SelectFile(fileName, file.FilePath)"
                                                  @oncontextmenu="(e) => ShowContextMenu(e, fileName, file.FilePath)">
                                                 <img src="/images/default/AxCrypt_Icon.svg" alt="File Icon" class="grid-file-icon" />
-                                                <span class="file-name-grid  @(ViewModel.SelectedFile == fileName ? "selected-text" : "")">@((MarkupString)HighlightMatch(fileName))</span>
+                                                <span class="file-name-grid  @(ViewModel.SelectedFilePath == file.FilePath ? "selected-text" : "")">@((MarkupString)HighlightMatch(fileName))</span>
                                             </div>
                                         }
                                     </div>
@@ -110,7 +110,7 @@
 
                                 @if (IsContextMenuVisible)
                                 {
-                                    <div class="context-menu-action" style="position: fixed; top: @(ContextMenuY)px;left: @(ContextMenuX)px;">
+                                    <div class="context-menu-action" style="position: fixed; top: @(ContextMenuY)px;left: @(ContextMenuX)px;transform-origin:@(flipContextMenu) ;transform:@(flipTransform);">
                                         <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Open", ViewModel.SelectedFilePath)'>@Texts.RecentFilesOpenToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Delete", ViewModel.SelectedFilePath)'>@Texts.RemoveRecentFileToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Decrypt", ViewModel.SelectedFilePath)'>@Texts.DecryptToolStripMenuItemText</span>
@@ -164,6 +164,8 @@
                 el.scrollIntoView({ behavior: "smooth", block: "center" });
             }
         };
+
+         window.getWindowHeight = () => window.innerHeight;
     </script>
 }
 
@@ -173,6 +175,9 @@
     public bool IsContextMenuVisible { get; set; } = false;
     public double ContextMenuX { get; set; }
     public double ContextMenuY { get; set; }
+    private string flipContextMenu { get; set; } = "top left";
+    private string flipTransform { get; set; } = "translateY(0)";
+    private double ContextMenuHeight { get; set; } = 210;
 
     private string SearchText = string.Empty;
 
@@ -234,6 +239,16 @@
         ViewModel.SelectedFilePath = filePath;
         ContextMenuX = e.PageX;
         ContextMenuY = e.PageY;
+
+        double windowHeight = await JSRuntime.InvokeAsync<double>("getWindowHeight");
+
+        flipContextMenu = "top left";
+        flipTransform = "translateY(0)";
+        if (ContextMenuY + ContextMenuHeight > windowHeight)
+        {
+            flipContextMenu = "bottom left";
+            flipTransform = $"translateY(-{ContextMenuHeight}px)";
+        }
 
         IsContextMenuVisible = true;
         await UpdateUIState();
