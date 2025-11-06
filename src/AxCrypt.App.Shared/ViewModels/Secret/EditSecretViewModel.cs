@@ -76,7 +76,7 @@ public class EditSecretViewModel : ManageSecretViewModel
         }
 
         // If a secret was found the user does have permission to update it
-        switch (Secret.SecretType)
+        switch (secrets[0].Type)
         {
             case SecretType.Legacy:
             case SecretType.Password:
