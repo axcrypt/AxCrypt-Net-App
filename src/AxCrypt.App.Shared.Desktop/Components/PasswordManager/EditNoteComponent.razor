@@ -49,11 +49,14 @@
     SecretNoteViewModel NoteViewModel;
     protected override void OnInitialized()
     {
-        NoteViewModel = new SecretNoteViewModel(secretService.CurrentSecret.Note.SecretDesc, secretService.CurrentSecret.Note.Note);
         if (secretService.CurrentSecret == null)
         {
             navigationManager.NavigateTo("/error");
+            return;
         }
+
+        NoteViewModel = new SecretNoteViewModel(secretService.CurrentSecret.Note.SecretDesc, secretService.CurrentSecret.Note.Note);
+        editSecretViewModel.Secret.SecretGuid = secretService.CurrentSecret!.SecretGuid;
     }
 
     private async Task OnAfterRenderAsync()

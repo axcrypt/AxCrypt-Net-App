@@ -86,13 +86,15 @@
 
     protected override void OnInitialized()
     {
-        SecretCardViewModel currentCardModel = secretService.CurrentSecret!.Card;
-        CardViewModel = new SecretCardViewModel(currentCardModel.CardNumber, currentCardModel.SecretDesc!, currentCardModel.NameOnCard, currentCardModel.SecurityCode, currentCardModel.ExpirationDate);
-
         if (secretService.CurrentSecret == null)
         {
             navigationManager.NavigateTo("/error");
+            return;
         }
+
+        SecretCardViewModel currentCardModel = secretService.CurrentSecret!.Card;
+        CardViewModel = new SecretCardViewModel(currentCardModel.CardNumber, currentCardModel.SecretDesc!, currentCardModel.NameOnCard, currentCardModel.SecurityCode, currentCardModel.ExpirationDate);
+        editSecretViewModel.Secret.SecretGuid = secretService.CurrentSecret!.SecretGuid;
     }
 
     private async Task OnAfterRenderAsync()
