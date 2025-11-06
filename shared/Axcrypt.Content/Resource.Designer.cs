@@ -51911,7 +51911,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Experience AxCrypt Beta with enhanced AES-256 encryption, modern UI, and integrated password manager. Download now for Windows &amp; macOS..
+        ///   Looks up a localized string similar to Try AxCrypt Beta with upgraded AES-256 encryption, sleek new design, and built-in password manager. Download now for Windows and macOS..
         /// </summary>
         public static string Meta_Description_Beta_Download {
             get {
@@ -52973,7 +52973,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Encrypt business files with AxCrypt. Enable secure group sharing, team access control, and centralized encryption management with AES-256 protection..
+        ///   Looks up a localized string similar to Protect company data with AxCrypt Business. Get AES-256 encryption, team access control, and secure group file sharing. Manage all users from one dashboard..
         /// </summary>
         public static string Meta_Description_Business {
             get {
@@ -53000,7 +53000,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt for Windows, Mac, Android &amp; iOS. Protect files with AES-256 encryption, password manager, and secure cloud sharing..
+        ///   Looks up a localized string similar to Download AxCrypt for Windows, Mac, Android, and iOS. Encrypt files with AES-256 security, manage passwords, and share data safely across devices..
         /// </summary>
         public static string Meta_Description_Download {
             get {
@@ -53009,7 +53009,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Protect student records, research, and academic data with AxCrypt. Secure file sharing and encryption for educational institutions. Try it for free..
+        ///   Looks up a localized string similar to Protect student records, research files, and academic data with AxCrypt. Enable AES-256 encryption and secure sharing for schools and universities..
         /// </summary>
         public static string Meta_Description_Education {
             get {
@@ -53027,7 +53027,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Explore AxCrypt&apos;s powerful features: AES-256 encryption, password manager, cloud integration, key sharing, mobile access, and secure file deletion..
+        ///   Looks up a localized string similar to Discover AxCrypt’s top features: AES-256 encryption, password manager, cloud sync, secure file sharing, and mobile access for complete data protection..
         /// </summary>
         public static string Meta_Description_Features {
             get {
@@ -53036,7 +53036,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ensure secure transactions and financial data protection with AxCrypt. AES-256 encryption for secure file sharing, client data, and regulatory compliance..
+        ///   Looks up a localized string similar to Protect financial data and client records with AxCrypt. Get AES-256 encryption, secure file sharing, and compliance-ready protection for transactions..
         /// </summary>
         public static string Meta_Description_Financial {
             get {
@@ -53063,7 +53063,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Protect business data with AxCrypt&apos;s AES-256 encryption, group key sharing, and master key recovery. Manage teams and licenses with ease..
+        ///   Looks up a localized string similar to Protect business files with AxCrypt’s AES-256 encryption. Enable group sharing, master key recovery, and centralized team management for secure collaboration..
         /// </summary>
         public static string Meta_Description_Getstarted_Axcrypt_Business {
             get {
@@ -53072,7 +53072,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn how to install AxCrypt on Windows or Mac, encrypt files, share securely, and manage passwords. Follow our step-by-step desktop setup guide..
+        ///   Looks up a localized string similar to Set up AxCrypt on Windows or Mac with this step-by-step guide. Learn how to encrypt files, share securely, and manage passwords with AxCrypt Desktop..
         /// </summary>
         public static string Meta_Description_Getstarted_Desktop {
             get {
@@ -53090,7 +53090,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Streamline team collaboration with AxCrypt&apos;s Group Feature. Assign roles, manage access, and securely share encrypted files using the Group Masterkey..
+        ///   Looks up a localized string similar to Simplify team collaboration with AxCrypt Group Feature. Manage roles, control access, and share encrypted files securely using a centralized master key..
         /// </summary>
         public static string Meta_Description_Getstarted_Group {
             get {
@@ -53099,7 +53099,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Take full control of your data security with AxCrypt&apos;s Master Key feature. Efficiently manage, encrypt, and decrypt subordinate accounts for seamless data protection..
+        ///   Looks up a localized string similar to Enable the AxCrypt Master Key to let admins recover encrypted files. Maintain data access, security, and continuity if users forget passwords or leave..
         /// </summary>
         public static string Meta_Description_Getstarted_Master_Key {
             get {
@@ -53117,7 +53117,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn how to install AxCrypt on Android or iOS, encrypt files, share securely, and manage passwords. Follow our step-by-step mobile setup guide..
+        ///   Looks up a localized string similar to Install AxCrypt on Android or iOS to encrypt and share files securely. Follow our step-by-step mobile guide to manage passwords and protect data anywhere..
         /// </summary>
         public static string Meta_Description_Getstarted_Mobile {
             get {
@@ -53126,7 +53126,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn how to become an AxCrypt reseller. Set up your account, manage clients, and offer AES-256 encrypted file security solutions with flexible pricing..
+        ///   Looks up a localized string similar to Become an AxCrypt reseller today. Learn how to set up your account, manage clients, and sell AES-256 encrypted file security solutions with ease..
         /// </summary>
         public static string Meta_Description_Getstarted_Reseller_Help {
             get {
@@ -53171,7 +53171,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Secure government documents and sensitive data with AxCrypt. AES-256 encryption ensures compliance, confidentiality, and secure file sharing..
+        ///   Looks up a localized string similar to Protect classified and government data with AxCrypt. AES-256 encryption ensures confidentiality, compliance, and secure document sharing across agencies..
         /// </summary>
         public static string Meta_Description_Government {
             get {
@@ -53189,7 +53189,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn how to use AxCrypt&apos;s Key Sharing feature to securely share encrypted files without sharing passwords. Collaborate safely with AES-256 encryption..
+        ///   Looks up a localized string similar to Learn how to use AxCrypt Key Sharing to share encrypted files safely without revealing passwords. Collaborate securely with AES-256 encryption protection..
         /// </summary>
         public static string Meta_Description_guide_keyshare {
             get {
@@ -53198,7 +53198,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn to use AxCrypt&apos;s Password Manager to securely store and share passwords, card details, and notes with AES-256 encryption. Access across all devices..
+        ///   Looks up a localized string similar to Learn how to use AxCrypt Password Manager to store and share passwords, cards, and notes securely. Enjoy AES-256 encryption and access across all devices..
         /// </summary>
         public static string Meta_Description_guides_passwordmanager {
             get {
@@ -53207,7 +53207,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ensure patient confidentiality and regulatory compliance in healthcare with AxCrypt. Securely encrypt medical records and share them with AES-256 encryption..
+        ///   Looks up a localized string similar to Secure patient records and ensure compliance with AxCrypt. Use AES-256 encryption for medical data protection, safe sharing, and healthcare privacy..
         /// </summary>
         public static string Meta_Description_Healthcare {
             get {
@@ -53216,7 +53216,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find detailed guides, video tutorials, and FAQs in the AxCrypt Help Center. Get support on file encryption and password management..
+        ///   Looks up a localized string similar to Need help with AxCrypt? Explore FAQs, step-by-step guides, and tutorials for file encryption, password management, and secure file sharing support..
         /// </summary>
         public static string Meta_Description_HelpCenter {
             get {
@@ -53243,7 +53243,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Protect your sensitive files with AxCrypt&apos;s award-winning encryption software. Trusted by millions, offering AES-256 encryption, password management, and secure file sharing across devices..
+        ///   Looks up a localized string similar to Secure your files easily with AxCrypt. Enjoy AES-256 encryption, built-in password manager, and safe file sharing. Protect your data across devices today!.
         /// </summary>
         public static string Meta_Description_Home {
             get {
@@ -53252,7 +53252,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Discover AxCrypt’s tailored encryption solutions for various industries including tech, education, healthcare, legal, finance, and government. Protect your data today..
+        ///   Looks up a localized string similar to Protect sensitive data across industries with AxCrypt. Secure solutions for tech, education, healthcare, legal, finance, and government sectors..
         /// </summary>
         public static string Meta_Description_Industries {
             get {
@@ -53288,11 +53288,20 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Protect sensitive legal documents with AxCrypt. Ensure secure file sharing, AES-256 encryption, and client confidentiality in the legal industry..
+        ///   Looks up a localized string similar to Safeguard confidential legal documents with AxCrypt. Enable AES-256 encryption, secure file sharing, and client data protection for law firms and professionals..
         /// </summary>
         public static string Meta_Description_Legal {
             get {
                 return ResourceManager.GetString("Meta-Description-Legal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Learn how to enable and use Multi-Factor Authentication (MFA) in AxCrypt for enhanced account security..
+        /// </summary>
+        public static string Meta_Description_MultiFactor_Authentication {
+            get {
+                return ResourceManager.GetString("Meta-Description-MultiFactor-Authentication", resourceCulture);
             }
         }
         
@@ -53324,7 +53333,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Safely store and share passwords, credit card details, and notes with AxCrypt&apos;s AES-256 encrypted Password Manager. Access across devices with offline support..
+        ///   Looks up a localized string similar to Manage and share passwords, cards, and notes securely with AxCrypt Password Manager. Enjoy AES-256 encryption, cross-device sync, and offline access..
         /// </summary>
         public static string Meta_Description_PasswordManager {
             get {
@@ -53333,7 +53342,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Protect your data with AxCrypt Premium: strong encryption, secure sharing, password manager, and mobile access. Start your free trial today..
+        ///   Looks up a localized string similar to Secure your personal files with AxCrypt Premium. Get AES-256 encryption, password manager, cloud sync, and mobile access. Start your free trial today!.
         /// </summary>
         public static string Meta_Description_Premium {
             get {
@@ -53351,7 +53360,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Explore AxCrypt&apos;s affordable plans: Free Viewer, Premium, and Business. Get AES-256 encryption, password manager, and secure sharing. Try 1-month free..
+        ///   Looks up a localized string similar to Compare AxCrypt’s Free, Premium, and Business plans. Get AES-256 encryption, password manager, and secure file sharing. Start your 1-month free trial today!.
         /// </summary>
         public static string Meta_Description_Pricing {
             get {
@@ -53441,6 +53450,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Protect business communication with AxCrypt’s Secured Messenger. End-to-end encryption, AES-256 security, EU-based servers, and full GDPR &amp; NIS2 compliance..
+        /// </summary>
+        public static string Meta_Description_Securedmessenger {
+            get {
+                return ResourceManager.GetString("Meta-Description-Securedmessenger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Explore AxCrypt&apos;s robust security: AES-256 encryption, HMAC-SHA512 integrity, password best practices, and open-source transparency for trusted file protection..
         /// </summary>
         public static string Meta_Description_Security {
@@ -53459,7 +53477,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to With AxCrypt Student Plan you can secure your educational files online, automatically encrypt them with advanced encryption standard..
+        ///   Looks up a localized string similar to Get up to 50% off AxCrypt Premium for students. Secure academic files with AES-256 encryption, cloud sync, and safe file sharing across devices..
         /// </summary>
         public static string Meta_Description_Student {
             get {
@@ -53468,7 +53486,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Secure tech industry data with AxCrypt. Protect source code, software builds, and sensitive information with AES-256 encryption. Try it now for your team..
+        ///   Looks up a localized string similar to Protect your tech projects with AxCrypt. Encrypt source code, software builds, and confidential data using AES-256 encryption. Try it for your team today!.
         /// </summary>
         public static string Meta_Description_Tech {
             get {
@@ -53675,7 +53693,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt Beta – Try New File Encryption Features for Windows &amp; Mac.
+        ///   Looks up a localized string similar to Download AxCrypt Beta – New File Encryption for Windows &amp; Mac.
         /// </summary>
         public static string Meta_Title_Beta_Download {
             get {
@@ -54737,7 +54755,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt for Teams &amp; Companies | Business File Encryption with Group Access &amp; Control.
+        ///   Looks up a localized string similar to AxCrypt for Business – Secure Team File Encryption Software.
         /// </summary>
         public static string Meta_Title_Business {
             get {
@@ -54764,7 +54782,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt – File Encryption for Windows, Mac, Android &amp; iOS | Secure &amp; Easy.
+        ///   Looks up a localized string similar to Download AxCrypt – Secure File Encryption for All Devices.
         /// </summary>
         public static string Meta_Title_Download {
             get {
@@ -54773,7 +54791,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt for Education – Secure Student Data &amp; Research with AES-256 Encryption.
+        ///   Looks up a localized string similar to AxCrypt for Education – Secure Student &amp; Research Data.
         /// </summary>
         public static string Meta_Title_Education {
             get {
@@ -54800,7 +54818,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Features – AES-256 Encryption, Password Manager, Cloud Sync &amp; Secure Sharing.
+        ///   Looks up a localized string similar to AxCrypt Features – Powerful File Encryption &amp; Secure Sharing.
         /// </summary>
         public static string Meta_Title_Features {
             get {
@@ -54809,7 +54827,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt for Financial Industry – AES-256 Encryption for Secure Transactions &amp; Data.
+        ///   Looks up a localized string similar to AxCrypt for Finance – Secure Financial Data Encryption.
         /// </summary>
         public static string Meta_Title_Financial {
             get {
@@ -54836,7 +54854,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Business – Secure File Encryption &amp; Group Collaboration Tools.
+        ///   Looks up a localized string similar to AxCrypt Business – Secure File Encryption for Teams.
         /// </summary>
         public static string Meta_Title_Getstarted_Axcrypt_Business {
             get {
@@ -54845,7 +54863,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Started with AxCrypt Desktop – Encrypt &amp; Share Files Securely.
+        ///   Looks up a localized string similar to Get Started with AxCrypt Desktop – Encrypt &amp; Share Files.
         /// </summary>
         public static string Meta_Title_Getstarted_Desktop {
             get {
@@ -54863,7 +54881,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Group Feature – Manage Team Access &amp; Secure File Sharing.
+        ///   Looks up a localized string similar to AxCrypt Group Feature – Secure Team Access &amp; File Sharing.
         /// </summary>
         public static string Meta_Title_Getstarted_Group {
             get {
@@ -54872,7 +54890,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Master Key | Manage, Encrypt, and Decrypt Subordinate Accounts.
+        ///   Looks up a localized string similar to AxCrypt Master Key – Admin Access to Encrypted Files.
         /// </summary>
         public static string Meta_Title_Getstarted_Master_Key {
             get {
@@ -54890,7 +54908,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Started with AxCrypt Mobile – Encrypt &amp; Share Files Securely.
+        ///   Looks up a localized string similar to Get Started with AxCrypt Mobile – Secure Files on the Go.
         /// </summary>
         public static string Meta_Title_Getstarted_Mobile {
             get {
@@ -54944,7 +54962,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt for Government – Protect Sensitive Data with AES-256 Encryption.
+        ///   Looks up a localized string similar to AxCrypt for Government – Secure Sensitive Data Encryption.
         /// </summary>
         public static string Meta_Title_Government {
             get {
@@ -54962,7 +54980,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Key Sharing Guide – Securely Share Encrypted Files with Others.
+        ///   Looks up a localized string similar to AxCrypt Key Sharing Guide – Securely Share Encrypted Files.
         /// </summary>
         public static string Meta_Title_guide_keyshare {
             get {
@@ -54971,7 +54989,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Password Manager Guide – Securely Manage &amp; Share Passwords.
+        ///   Looks up a localized string similar to AxCrypt Password Manager Guide – Secure &amp; Share Passwords.
         /// </summary>
         public static string Meta_Title_guides_passwordmanager {
             get {
@@ -54980,7 +54998,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt for Healthcare – Secure Patient Data &amp; Compliance with AES-256 Encryption.
+        ///   Looks up a localized string similar to AxCrypt for Healthcare – Protect Patient Data Securely.
         /// </summary>
         public static string Meta_Title_Healthcare {
             get {
@@ -54989,7 +55007,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Customer Support | Welcome to AxCrypt Helpcenter.
+        ///   Looks up a localized string similar to AxCrypt Help Center – File Encryption FAQs &amp; Support.
         /// </summary>
         public static string Meta_Title_HelpCenter {
             get {
@@ -55016,7 +55034,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt – Easy-to-Use File Encryption &amp; Password Manager.
+        ///   Looks up a localized string similar to AxCrypt: Best File Encryption &amp; Password Manager Software.
         /// </summary>
         public static string Meta_Title_Home {
             get {
@@ -55025,7 +55043,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt for Industries – Secure File Encryption Solutions for Every Sector.
+        ///   Looks up a localized string similar to AxCrypt for Industries – Data Encryption for Every Sector.
         /// </summary>
         public static string Meta_Title_Industries {
             get {
@@ -55106,7 +55124,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt for Legal Industry – Encrypt Client Files &amp; Sensitive Legal Documents.
+        ///   Looks up a localized string similar to AxCrypt for Legal – Secure Client Files &amp; Documents.
         /// </summary>
         public static string Meta_Title_Legal {
             get {
@@ -55115,7 +55133,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Multi-Factor Authentication.
+        ///   Looks up a localized string similar to How to Enable Multi-Factor Authentication (MFA) | AxCrypt Guide.
         /// </summary>
         public static string Meta_Title_MultiFactor_Authentication {
             get {
@@ -55151,7 +55169,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to xCrypt Password Manager – Securely Manage &amp; Share Passwords, Cards &amp; Notes.
+        ///   Looks up a localized string similar to AxCrypt Password Manager – Secure Password &amp; Data Storage.
         /// </summary>
         public static string Meta_Title_PasswordManager {
             get {
@@ -55160,7 +55178,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Premium – Secure Personal Files with AES-256 &amp; Cloud Integration.
+        ///   Looks up a localized string similar to AxCrypt Premium – Advanced File Encryption for Individuals.
         /// </summary>
         public static string Meta_Title_Premium {
             get {
@@ -55178,7 +55196,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Pricing – Secure File Encryption Plans for Individuals &amp; Businesses.
+        ///   Looks up a localized string similar to AxCrypt Pricing – File Encryption Plans for All Users.
         /// </summary>
         public static string Meta_Title_Pricing {
             get {
@@ -55268,6 +55286,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Secured Messenger | End-to-End Encrypted Messaging for Complete Privacy.
+        /// </summary>
+        public static string Meta_Title_Securedmessenger {
+            get {
+                return ResourceManager.GetString("Meta-Title-Securedmessenger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AxCrypt Security – AES-256 Encryption &amp; Best Practices.
         /// </summary>
         public static string Meta_Title_Security {
@@ -55277,7 +55304,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Student Plan | Secure educational files on Windows, Mac, Android and iPhone.
+        ///   Looks up a localized string similar to AxCrypt Student Plan – 50% Off Premium File Encryption.
         /// </summary>
         public static string Meta_Title_Student {
             get {
@@ -55286,7 +55313,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt for Tech Industry – Protect Sensitive Data with AES-256 Encryption.
+        ///   Looks up a localized string similar to AxCrypt for Tech – Secure Source Code &amp; Data Encryption.
         /// </summary>
         public static string Meta_Title_Tech {
             get {
