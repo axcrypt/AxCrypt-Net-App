@@ -145,6 +145,18 @@ namespace AxCrypt.Core.UI
 #endif
         }
 
+        public string AppEnvironment
+        {
+            get
+            {
+#if AX_BETA_BUILD
+                return "Beta";
+#else
+                return "";
+#endif
+            }
+        }
+
         public DateTime LastUpdateCheckUtc
         {
             get { return Load(nameof(LastUpdateCheckUtc), DateTime.MinValue); }
@@ -372,7 +384,7 @@ namespace AxCrypt.Core.UI
             get { return Load(nameof(UserActivityMode), false); }
             set { Store(nameof(UserActivityMode), value); }
         }
-        
+
         public string VaultEncryptDataPath
         {
             get { return Load(nameof(VaultEncryptDataPath), New<WorkFolder>().FileInfo?.FullName ?? ""); }
