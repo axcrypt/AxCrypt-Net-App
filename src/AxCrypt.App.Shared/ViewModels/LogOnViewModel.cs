@@ -35,6 +35,17 @@ public class LogOnViewModel : ViewModelBase
 
     public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
     {
+        mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), async (bool loggedOn) =>
+        {
+            if (loggedOn)
+            {
+                ProcessIndicator?.Dispose();
+                OnSubscriptionChanged?.Invoke();
+                await New<AccountStatusViewModel>().LoadAccountStatusAsync();
+            }
+        });
+        mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnSubscriptionChanged?.Invoke(); } });
+
         ProcessIndicator?.Dispose();
         ShowGetStartedCarousel = AxCrypt.Core.Resolve.UserSettings.IsFirstSignIn;
 
@@ -50,17 +61,6 @@ public class LogOnViewModel : ViewModelBase
         ShowGetStartedCarousel = false;
         IsVisible = false;
         MultiFactorAuthViewModel = new MultiFactorAuthViewModel();
-
-        mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), async (bool loggedOn) =>
-        {
-            if (loggedOn)
-            {
-                ProcessIndicator?.Dispose();
-                OnSubscriptionChanged?.Invoke();
-                await New<AccountStatusViewModel>().LoadAccountStatusAsync();
-            }
-        });
-        mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnSubscriptionChanged?.Invoke(); } });
     }
 
     public MainViewModel MainViewModel

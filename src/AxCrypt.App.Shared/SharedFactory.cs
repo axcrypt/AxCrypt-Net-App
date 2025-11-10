@@ -56,7 +56,7 @@ namespace AxCrypt.App.Shared
 
             services.AddSingleton<NewSecretViewModel>();
             services.AddSingleton<ShareSecretViewModel>();
-            services.AddSingleton<ManageSecretViewModel>();
+            services.AddScoped<ManageSecretViewModel>();
             services.AddSingleton<EditSecretViewModel>();
             services.AddSingleton<ViewSecretViewModel>();
             services.AddSingleton<UserNotificationService>();

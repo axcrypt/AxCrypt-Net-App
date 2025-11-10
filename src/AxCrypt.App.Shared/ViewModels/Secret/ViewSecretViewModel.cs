@@ -1,14 +1,15 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Shared.Data;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.App.Shared.Password;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
+using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Secrets;
 using AxCrypt.Core.UI;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Shared.Data;
 
 namespace AxCrypt.App.Shared.ViewModels.Secret;
 
@@ -140,6 +141,12 @@ public class ViewSecretViewModel : ManageSecretViewModel
             bool isDeleted = await SharedSecrets.DeleteSharedWithAsync(secrets[0]);
             return isDeleted;
         }
+    }
+
+    public void InitializeUserSubscription()
+    {
+        HasPaidSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
+        HasBusinessSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
     }
 
     public void GoToLearmoreLink()
