@@ -66,6 +66,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<IndexPage>();
             services.AddSingleton<SecuredFolders>();
             services.AddSingleton<PasswordManagerComponent>();
+            services.AddSingleton<TextEncryption>();
             services.AddSingleton<Notification>();
             services.AddSingleton<FindFiles>();
             services.AddSingleton<Support>();

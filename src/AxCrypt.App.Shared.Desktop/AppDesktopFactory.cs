@@ -38,7 +38,8 @@ public static class AppDesktopFactory
         services.AddSingleton<ImportPrivateKeyViewModel>();
         services.AddSingleton<VerifyAccountDialogViewModel>();
         services.AddSingleton<VerifyPasswordViewModel>();
-   
+        services.AddSingleton<TextEncryptionViewModel>();
+
         services.AddSingleton<SecuredMessage>();
 
         services.AddSingleton<RecentFoldersComponent>();

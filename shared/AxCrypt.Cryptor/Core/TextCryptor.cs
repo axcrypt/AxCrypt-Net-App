@@ -4,48 +4,12 @@ using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Extensions;
-using AxCrypt.Core.Secrets;
-using System.Diagnostics.CodeAnalysis;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Cryptor
 {
     public static class TextCryptor
     {
-        #region Private classes
-
-        private class InternalSecret : Secret
-        {
-            public InternalSecret(Secret secret)
-                : base(secret)
-            {
-            }
-
-            private DateTime _lastUpdateUtc;
-
-            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "The getter is currently unused but should still be there.")]
-            public DateTime LastUpdateUtc
-            {
-                get { return _lastUpdateUtc; }
-                set { _lastUpdateUtc = value; }
-            }
-        }
-
-        private class InternalEncryptionKey : EncryptionKey
-        {
-            public InternalEncryptionKey(EncryptionKey key)
-                : base(key)
-            {
-            }
-
-            public new string DecryptPassphrase()
-            {
-                return base.DecryptPassphrase();
-            }
-        }
-
-        #endregion Private classes
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "displayContext")]
         private static IAxCryptDocument Document(Stream source, LogOnIdentity identity)
         {
@@ -58,7 +22,7 @@ namespace AxCrypt.Cryptor
             return document;
         }
 
-        public static async Task<string> EncryptTextAsync(LogOnIdentity identity, string messageJson, IEnumerable<UserPublicKey> sharedKeyHolders)
+        public static async Task<string> EncryptTextAsync(LogOnIdentity identity, string messageJson, IEnumerable<UserPublicKey>? sharedKeyHolders)
         {
             if (identity is null)
             {
@@ -73,7 +37,7 @@ namespace AxCrypt.Cryptor
             return await InternalEncryptTextAsync(identity, messageJson, sharedKeyHolders);
         }
 
-        private static async Task<string> InternalEncryptTextAsync(LogOnIdentity identity, string plainText, IEnumerable<UserPublicKey> sharedKeyHolders = null)
+        private static async Task<string> InternalEncryptTextAsync(LogOnIdentity identity, string plainText, IEnumerable<UserPublicKey>? sharedKeyHolders = null)
         {
             Guid cryptoId = Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId;
             EncryptionParameters encryptionParameters = new EncryptionParameters(cryptoId, identity);
@@ -120,7 +84,7 @@ namespace AxCrypt.Cryptor
             await parameters.AddAsync(sharedKeyHolders);
         }
 
-        public static string DecryptTextAsync(LogOnIdentity identity, string encryptedText, AxCrypt.Core.Service.UserKeyPair userKeyPair = null)
+        public static string? DecryptText(LogOnIdentity identity, string encryptedText, AxCrypt.Core.Service.UserKeyPair? userKeyPair = null)
         {
             if (identity is null)
             {
@@ -130,7 +94,7 @@ namespace AxCrypt.Cryptor
             return InternalDecryptTextAsync(identity, encryptedText, userKeyPair);
         }
 
-        private static string InternalDecryptTextAsync(LogOnIdentity identity, string encryptedText, AxCrypt.Core.Service.UserKeyPair userKeyPair)
+        private static string? InternalDecryptTextAsync(LogOnIdentity identity, string encryptedText, AxCrypt.Core.Service.UserKeyPair? userKeyPair)
         {
             string decryptedText = "";
             using (MemoryStream sourceStream = new MemoryStream(encryptedText.GetCipherBytes()))

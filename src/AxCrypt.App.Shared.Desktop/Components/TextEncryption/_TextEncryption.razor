@@ -1,0 +1,116 @@
+﻿@using AxCrypt.App.Shared.Desktop.Code
+@using AxCrypt.App.Shared.Desktop.ViewModels;
+@using AxCrypt.Content
+
+@inject TextEncryptionViewModel TextEncryptionViewModel
+@inject CopyToClipboardUtility CopyToClipboardUtility
+@inject IJSRuntime JSRuntime
+
+@if (!string.IsNullOrEmpty(TextEncryptionViewModel.ErrorMessage))
+{
+    <div class="alert alert-danger">@TextEncryptionViewModel.ErrorMessage</div>
+}
+
+<div>
+    <label style="display: block;">Input text:</label>
+    <textarea required rows="5" class="entr-txt-box" @bind="TextEncryptionViewModel.InputText" placeholder="Enter text to encrypt" maxlength="@TextEncryptionViewModel.MaxAllowedCharators" @oninput="ValidateLength"></textarea>
+
+    <div id="custom-pwd-section">
+        <label>
+            <input class="che-box" type="checkbox" id="userchoice" @onclick=TextEncryptionViewModel.ShowHideCustomPassword />
+            <span>Use Custom Password</span>
+        </label>
+        <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16" @onmouseover='@(() => TextEncryptionViewModel.ShowPopup("open"))' @onmouseout='@(() => TextEncryptionViewModel.HidePopup())'>
+
+        @if (TextEncryptionViewModel.IsHovered && TextEncryptionViewModel.HoveredElement == "open")
+        {
+            <div class="custom-password-help-hoverpopup text-center" style="background-color:#fff;">
+                <span class="txt-clr font-medium">Use a custom password that is strong & easy to remember, to encrypt the text.</span>
+            </div>
+        }
+        @if (TextEncryptionViewModel.IsCustomPasswordMode)
+        {
+            <br />
+            <label>Password:</label>
+
+            <div class="password-container">
+                <i class="@TextEncryptionViewModel.PasswordIconClass" style="top:40% !important;" @onclick="TextEncryptionViewModel.TogglePassword"></i>
+                <input type="@TextEncryptionViewModel.PasswordInputType" id="passwordbox" min="8" @bind="TextEncryptionViewModel.Password">
+            </div>
+        }
+    </div>
+
+    <div class="encryp-and-reset-btn">
+        <button class="button success btn-large font-medium active" @onclick=TextEncryptionViewModel.EncryptText>Encrypt</button>
+        <button class="button border btn-large font-medium btn-hide" @onclick=TextEncryptionViewModel.ResetBtn>Reset</button>
+    </div>
+</div>
+
+<div>
+    <label>Encrypted text:</label>
+    <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText" placeholder="Encrypted text appears here"></textarea>
+</div>
+
+<div class="multi-btn">
+    <button class="multi-actn-btn" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(TextEncryptionViewModel.EncryptedText)">
+        <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy encrypted text to clipboard" width="16" height="16" />
+        @Texts.SecretsCopytoClipboard
+    </button>
+
+    <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.ExportTextAsync>
+        <img class="download-ico" alt="download ico" title="Download encrypted text as txt file" width="16" height="16" />
+        Download as.TXT
+    </button>
+
+    <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.EncryptSendEmailBtn>
+        <img class="email-ico" alt="email ico" title="Compose a new email with encrypted text" width="16" height="16" />
+        Send via Email
+    </button>
+
+    @*     <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.EncryptShareLinkBtn>
+        <img class="sharelink-ico" alt="share as link ico" title="Share encrypted text as link" width="16" height="16" />
+        Share as Link
+    </button> *@
+</div>
+
+<div>
+    <span id="copiedMessage" style="color: #48772C; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        TextEncryptionViewModel.Initialize();
+        TextEncryptionViewModel.SelectedTap = "TextEncryption";
+        TextEncryptionViewModel.ResetBtn();
+        base.OnInitialized();
+    }
+
+    private async Task DownloadEncryptedText()
+    {
+        if (string.IsNullOrWhiteSpace(TextEncryptionViewModel.EncryptedText))
+            return;
+
+        string? textContent = TextEncryptionViewModel.EncryptedText;
+        byte[]? bytes = System.Text.Encoding.UTF8.GetBytes(textContent);
+
+        string? fileName = "EncryptedText.txt";
+
+        await using MemoryStream? stream = new MemoryStream(bytes);
+        using DotNetStreamReference? streamRef = new Microsoft.JSInterop.DotNetStreamReference(stream);
+
+        await JSRuntime.InvokeVoidAsync(identifier: "downloadFileFromStream", fileName, streamRef);
+    }
+
+    private bool IsValid = true;
+
+    private void ValidateLength(ChangeEventArgs e)
+    {
+        TextEncryptionViewModel.InputText = e.Value?.ToString() ?? "";
+
+        if (TextEncryptionViewModel.InputText.Length > TextEncryptionViewModel.MaxAllowedCharators)
+        {
+            TextEncryptionViewModel.ErrorMessage = $"Maximum {TextEncryptionViewModel.MaxAllowedCharators} characters allowed!";
+        }
+    }
+}

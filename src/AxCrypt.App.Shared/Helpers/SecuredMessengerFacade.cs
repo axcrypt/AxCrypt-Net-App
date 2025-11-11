@@ -138,7 +138,7 @@ namespace AxCrypt.Api.Shared.Helper
             IEnumerable<UserKeyPair> currentKeyPairs = await New<LogOnIdentity, IAccountService>(identity).ListAsync();
             identity = new LogOnIdentity(currentKeyPairs, identity.Passphrase);
 
-            return TextCryptor.DecryptTextAsync(identity, encryptedMessage);
+            return TextCryptor.DecryptText(identity, encryptedMessage);
         }
 
         private static RequestOptions GetRequestOptions(SecureMsgrSearchFilters secMsgSearchFilters, int pageNumber = 0)

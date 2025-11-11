@@ -1,0 +1,78 @@
+﻿@using AxCrypt.App.Shared.Desktop.Code
+@using AxCrypt.Content
+
+@inject AxCrypt.App.Shared.Desktop.ViewModels.TextEncryptionViewModel TextEncryptionViewModel
+@inject CopyToClipboardUtility CopyToClipboardUtility
+
+@if (!string.IsNullOrEmpty(TextEncryptionViewModel.ErrorMessage))
+{
+    <div class="alert alert-danger">@TextEncryptionViewModel.ErrorMessage</div>
+}
+
+<div>
+    <label style="display: block;">Encrypted text:</label>
+    <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText" placeholder="Enter text to encrypt"></textarea><br>
+
+    <div id="custom-pwd-section">
+        <label>
+            <input class="che-box" type="checkbox" id="userchoice" @onclick=TextEncryptionViewModel.ShowHideCustomPassword />
+            <span>Use Custom Password</span>
+        </label>
+        <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16" @onmouseover='@(() => TextEncryptionViewModel.ShowPopup("open"))' @onmouseout='@(() => TextEncryptionViewModel.HidePopup())'>
+
+        @if (TextEncryptionViewModel.IsHovered && TextEncryptionViewModel.HoveredElement == "open")
+        {
+            <div class="custom-password-help-hoverpopup text-center" style="background-color:#fff;">
+                <span class="txt-clr font-medium">Use the same custom password that was used to encrypt the text, for decryption.</span>
+            </div>
+        }
+
+        @if (TextEncryptionViewModel.IsCustomPasswordMode)
+        {
+            <br />
+            <label>Password:</label>
+
+            <div class="password-container">
+                <i class="@TextEncryptionViewModel.PasswordIconClass" style="top:40% !important;" @onclick="TextEncryptionViewModel.TogglePassword"></i>
+                <input type="@TextEncryptionViewModel.PasswordInputType" id="passwordbox" @bind="TextEncryptionViewModel.Password"><br>
+            </div>
+        }
+    </div>
+
+
+    <div class="encryp-and-reset-btn">
+        <button class="button success btn-large font-medium active" @onclick=TextEncryptionViewModel.DecryptText>Decrypt</button>
+        <button class="button border btn-large font-medium btn-hide" @onclick=TextEncryptionViewModel.ResetBtn>Reset</button>
+    </div>
+</div>
+
+<div>
+    <label style="display: block;">Original text:</label>
+    <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.InputText" placeholder="Enter text to encrypt"></textarea><br>
+</div>
+
+<div class="multi-btn">
+    <button class="multi-actn-btn" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(TextEncryptionViewModel.InputText)">
+        <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy original text to clipboard" width="16" height="16" />
+        @Texts.SecretsCopytoClipboard
+    </button>
+
+    <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.ExportTextAsync>
+        <img class="download-ico" alt="download ico" title="Download original text as txt file" width="16" height="16" />
+        Download as.TXT
+    </button>
+</div>
+
+<div>
+    <span id="copiedMessage" style="color: #48772C; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
+</div>
+
+
+@code {
+    protected override void OnInitialized()
+    {
+        TextEncryptionViewModel.SelectedTap = "TextDecryption";
+        TextEncryptionViewModel.ResetBtn();
+        base.OnInitialized();
+    }
+}

@@ -34,5 +34,8 @@
         SendUnlimitedMessages,
 
         FindFiles,
+
+        TextEncryptionPremium,
+        TextEncryptionBusiness
     }
 }

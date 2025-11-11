@@ -50,6 +50,12 @@
     width: 17.6px;
 }
 
+.txtencrpt {
+    content: $IcoTxtEncryptDefault;
+    height: 20px;
+    width: 17.6px;
+}
+       
 .notifctn {
     content: $IcoActivityDefault;
     width: 20px;
@@ -99,6 +105,7 @@
 .nav-item .three.active,
 .nav-item .four.active,
 .nav-item .five.active,
+.nav-item .six.active,
 .nav-item a:hover,
 .footer-menu a.active,
 .footer-menu a:hover,
@@ -121,6 +128,10 @@
 
     .scrdmssngr {
         content: $IcoScrdMssngr;
+    }
+
+    .txtencrpt {
+        content: $IcoTxtEncrpt;
     }
 
     .notifctn {
@@ -154,7 +165,8 @@
 .flex-column .nav-link.active.two,
 .flex-column .nav-link.active.three,
 .flex-column .nav-link.active.four,
-.flex-column .nav-link.active.five {
+.flex-column .nav-link.active.five,
+.flex-column .nav-link.active.six{
     background-image: $IcoIndctr;
     background-repeat: no-repeat;
     background-position: top 4px right;

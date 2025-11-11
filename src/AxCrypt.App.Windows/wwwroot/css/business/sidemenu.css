@@ -49,6 +49,12 @@
   width: 17.6px;
 }
 
+.txtencrpt {
+  content: url(/images/default/IcoTxtEncrypt.svg);
+  height: 20px;
+  width: 17.6px;
+}
+
 .notifctn {
   content: url(/images/default/IcoActivity.svg);
   width: 20px;
@@ -93,6 +99,7 @@
 .nav-item .three.active,
 .nav-item .four.active,
 .nav-item .five.active,
+.nav-item .six.active,
 .nav-item a:hover,
 .footer-menu a.active,
 .footer-menu a:hover,
@@ -106,6 +113,7 @@
 .nav-item .three.active .account,
 .nav-item .four.active .account,
 .nav-item .five.active .account,
+.nav-item .six.active .account,
 .nav-item a:hover .account,
 .footer-menu a.active .account,
 .footer-menu a:hover .account,
@@ -117,6 +125,7 @@
 .nav-item .three.active .scrdfldr,
 .nav-item .four.active .scrdfldr,
 .nav-item .five.active .scrdfldr,
+.nav-item .six.active .scrdfldr,
 .nav-item a:hover .scrdfldr,
 .footer-menu a.active .scrdfldr,
 .footer-menu a:hover .scrdfldr,
@@ -128,6 +137,7 @@
 .nav-item .three.active .scrts,
 .nav-item .four.active .scrts,
 .nav-item .five.active .scrts,
+.nav-item .six.active .scrts,
 .nav-item a:hover .scrts,
 .footer-menu a.active .scrts,
 .footer-menu a:hover .scrts,
@@ -139,17 +149,31 @@
 .nav-item .three.active .scrdmssngr,
 .nav-item .four.active .scrdmssngr,
 .nav-item .five.active .scrdmssngr,
+.nav-item .six.active .scrdmssngr,
 .nav-item a:hover .scrdmssngr,
 .footer-menu a.active .scrdmssngr,
 .footer-menu a:hover .scrdmssngr,
 .abt-sec .nav-link.active .scrdmssngr {
   content: url(/images/business/IcoScrdMssngr.svg);
 }
+.nav-item .one.active .txtencrpt,
+.nav-item .two.active .txtencrpt,
+.nav-item .three.active .txtencrpt,
+.nav-item .four.active .txtencrpt,
+.nav-item .five.active .txtencrpt,
+.nav-item .six.active .txtencrpt,
+.nav-item a:hover .txtencrpt,
+.footer-menu a.active .txtencrpt,
+.footer-menu a:hover .txtencrpt,
+.abt-sec .nav-link.active .txtencrpt {
+  content: url(/images/business/IcoTxtEncrypt.svg);
+}
 .nav-item .one.active .notifctn,
 .nav-item .two.active .notifctn,
 .nav-item .three.active .notifctn,
 .nav-item .four.active .notifctn,
 .nav-item .five.active .notifctn,
+.nav-item .six.active .notifctn,
 .nav-item a:hover .notifctn,
 .footer-menu a.active .notifctn,
 .footer-menu a:hover .notifctn,
@@ -161,6 +185,7 @@
 .nav-item .three.active .suprt,
 .nav-item .four.active .suprt,
 .nav-item .five.active .suprt,
+.nav-item .six.active .suprt,
 .nav-item a:hover .suprt,
 .footer-menu a.active .suprt,
 .footer-menu a:hover .suprt,
@@ -172,6 +197,7 @@
 .nav-item .three.active .fdbck,
 .nav-item .four.active .fdbck,
 .nav-item .five.active .fdbck,
+.nav-item .six.active .fdbck,
 .nav-item a:hover .fdbck,
 .footer-menu a.active .fdbck,
 .footer-menu a:hover .fdbck,
@@ -183,6 +209,7 @@
 .nav-item .three.active .info,
 .nav-item .four.active .info,
 .nav-item .five.active .info,
+.nav-item .six.active .info,
 .nav-item a:hover .info,
 .footer-menu a.active .info,
 .footer-menu a:hover .info,
@@ -204,7 +231,8 @@
 .flex-column .nav-link.active.two,
 .flex-column .nav-link.active.three,
 .flex-column .nav-link.active.four,
-.flex-column .nav-link.active.five {
+.flex-column .nav-link.active.five,
+.flex-column .nav-link.active.six {
   background-image: url(/images/business/IcoIndctr.svg);
   background-repeat: no-repeat;
   background-position: top 4px right;
