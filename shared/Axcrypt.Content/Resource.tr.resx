@@ -1568,6 +1568,13 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="BetaQuickGuidesParaStep2" xml:space="preserve">
     <value>Tıkla &lt;strong&gt;“Secure”&lt;/strong&gt; button &lt;img class='secure-icon' /&gt;</value>
   </data>
+  <data name="BetaQuickGuidesParaStep20" xml:space="preserve">
+    <value>Alt klasörleri de güvence altına almak istiyorsanız, &lt;strong&gt;Settings&lt;/strong&gt; -&gt; &lt;strong&gt;Include Sub-Folders&lt;/strong&gt; &lt;img class='include-sub-icon'/&gt; seçeneğini etkinleştirin.
+</value>
+  </data>
+  <data name="BetaQuickGuidesParaStep21" xml:space="preserve">
+    <value>&lt;strong&gt;“Password Manager”&lt;/strong&gt; menüsüne git.</value>
+  </data>
   <data name="BetaQuickGuidesParaStep22" xml:space="preserve">
     <value>Tıkla &lt;strong&gt;“All items”&lt;/strong&gt; tüm parolalarınızı görüntülemek için.
 
@@ -1580,6 +1587,26 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="BetaQuickGuidesParaStep24" xml:space="preserve">
     <value>Tıkla &lt;strong&gt;“Shared With”&lt;/strong&gt; Sizinle paylaşılan tüm parolaları görüntülemek için.
 
+</value>
+  </data>
+  <data name="BetaQuickGuidesParaStep25" xml:space="preserve">
+    <value>Yeni bir Şifre, Kart veya Not eklemek için &lt;img class='add-icon'/&gt; öğesine tıkla.
+</value>
+  </data>
+  <data name="BetaQuickGuidesParaStep26" xml:space="preserve">
+    <value>Şifrelerini dışa aktarmak için &lt;img class='upload-icon'/&gt; öğesine tıkla.
+</value>
+  </data>
+  <data name="BetaQuickGuidesParaStep27" xml:space="preserve">
+    <value>Şifrelerini Tarih/İçeriğe göre sıralamak için &lt;img class='content-icon'/&gt; öğesini kullanabilirsin.
+</value>
+  </data>
+  <data name="BetaQuickGuidesParaStep28" xml:space="preserve">
+    <value>Şifrelerini şifre türüne göre filtrelemek için &lt;img class='filter-icon'/&gt; öğesini kullanabilirsin.
+</value>
+  </data>
+  <data name="BetaQuickGuidesParaStep29" xml:space="preserve">
+    <value>Veya dosyayı &lt;strong&gt;“Recent Files“&lt;/strong&gt; listesinden seç, sağ tıkla ve &lt;strong&gt;Open&lt;/strong&gt; seçeneğini seç.
 </value>
   </data>
   <data name="BetaQuickGuidesParaStep3" xml:space="preserve">
@@ -21602,7 +21629,7 @@ AxCrypt Ekibi</value>
     <value>'{0}' için {1}</value>
   </data>
   <data name="UnregisterMailBody1" xml:space="preserve">
-    <value>Bu, AxCrypt kimliğinin &lt;a href="{0}" style="color: #86b96e; text-decoration: none;"&gt;AxCrypt.net&lt;/a&gt; üzerinde başarıyla silindiğinin onayıdır.</value>
+    <value>Bu, AxCrypt kimliğinin &lt;a href="{{user_email}}" style="color: #86b96e; text-decoration: none;"&gt;{{user_email}}&lt;/a&gt; üzerinde başarıyla silindiğinin onayıdır.</value>
   </data>
   <data name="UnregisterMailBody2" xml:space="preserve">
     <value>Gidişin için üzgünüz ve bizimle geçen vaktinden keyif aldığını umarız!</value>

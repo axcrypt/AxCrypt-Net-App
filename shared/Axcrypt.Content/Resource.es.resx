@@ -21187,7 +21187,7 @@ El Equipo de AxCrypt</value>
     <value>{1} por '{0}'.</value>
   </data>
   <data name="UnregisterMailBody1" xml:space="preserve">
-    <value>Esta es una confirmación de que tu cuenta en &lt;a href="{0}" style="color: #86b96e; text-decoration: none;"&gt;AxCrypt.net&lt;/a&gt; se ha eliminado correctamente.</value>
+    <value>Esta es una confirmación de que tu cuenta en &lt;a href="{{user_email}}" style="color: #86b96e; text-decoration: none;"&gt;{{user_email}}&lt;/a&gt; se ha eliminado correctamente.</value>
   </data>
   <data name="UnregisterMailBody2" xml:space="preserve">
     <value>Nos entristece que te vayas. ¡Esperamos que hayas disfrutado con nosotros!</value>

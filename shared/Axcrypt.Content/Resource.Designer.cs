@@ -27978,6 +27978,357 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to THE BEST PART?.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Conclusion_Heading {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Conclusion_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ✅No loose unencrypted back-ups floating around.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Conclusion_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Conclusion_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ✅Encrypt your sensitive information on ZERO KNOWLEDGE APP.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Conclusion_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Conclusion_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ✅You get an extra layer of security with MFA.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Conclusion_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Conclusion_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Start your free trial with AxCrypt today and encrypt now.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Conclusion_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Conclusion_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;There were about 213 ransomware attacks that were recorded on Healthcare providers in the first 9 months of 2025.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_SH1_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_SH1_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;In addition to this, nearly 130 attacks were carried out, and the main targets for these were healthcare-related vendors and business associates such as billing companies, IT providers, and service partners.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_SH1_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_SH1_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;These attacks result in a breach of nearly 7.42 million patient records, with an average ransom demand reaching 514,000 US Dollars per incident.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_SH1_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_SH1_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;As for vendors and other third-party businesses, there was a breach of nearly 6.05 million records with an average ransom demand of nearly 532,000 US dollars.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_SH1_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_SH1_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;In comparison to 2024, the attacks on vendors and service partners increased by a good 30%.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_SH1_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_SH1_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here are some key statistics and evidence about the trend:.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_SubHeading1 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_SubHeading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ransomware attacks are a form of digital extortion where attackers hijack a company’s network, restrict access to critical data, and demand a ransom in exchange for its release. Ransomware attacks never happen randomly..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No resistance, no one remembers, and easy to manipulate. And that is why all the data and information that the healthcare industry carries is like a sitting duck to attack..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to They are well-planned. These hackers study you over time, understand your organisation&apos;s weak digital security gaps, spot outdated systems, and exploit them. They especially target those enterprises that cannot afford downtime and will do anything to regain control and access..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The healthcare industry is one such victim, a rather easy and more lucrative option for them, rather..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This industry carries copious amounts of patient care information, insurance records, access to the records of deceased patients, medical histories, research files, and studies, and above all, sensitive financial and proprietary information that could be heavily misused..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;For instance, not so long ago, a report by &lt;a href=&apos;https://www.techtarget.com/healthtechsecurity/news/366594333/New-Mexico-Department-of-Health-Data-Breach-Exposes-Decedent-Health-Information&apos;&gt;TechTarget on how the New Mexico Department of Health Data Breach Exposed Decedent Health Information&lt;/a&gt; claims that this very breach has impacted 49,000 individuals. This report proves that even ‘dead data’ is an open target and quite a temptation for criminals to attack.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And so when there are ransomware incidents, much like the &lt;a href=&apos;https://techcrunch.com/2024/06/21/change-healthcare-confirms-ransomware-hackers-stole-medical-records-on-a-substantial-proportion-of-americans/&apos;&gt;&lt;b&gt;February 2024 Change Healthcare attack&lt;/b&gt;&lt;/a&gt;, which is known as one of the largest ever known digital thefts of the US medical records, sources state that the hackers broke into the network using a set of stolen credentials to an internal system..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That was not protected by a multi-factor authenticator. This one, an additional feature, could have prevented malicious actors from misusing stolen passwords..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While there are no official claims about ransomware groups weaponising deceased patient data information, there is untold evidence about how the dark web has listings that such files exist and how they are already being traded..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For these criminals, this kind of information is GOLD!.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H1_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H1_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At this point, it is extremely clear that ransomware is not just a security problem, but it is a loophole in the system through which your organisation or your enterprise could be compromised by external or internal factors..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H2_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H2_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CISOs, IT heads, and our dear decision makers in the healthcare industry, you could potentially be the next in headlines for a data breach incident. This is your wake-up call to fix these gaps. Ransomware is not just a breach of data, but a breach of trust, a stain on your reputation, a lack and lapse in your judgment, and above all, a silent disregard for human dignity and information..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H2_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H2_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to So why leave loose ends when you can opt for a real line of digital defence, and that is encryption. We are talking about a robust and to end uncompromised channel for sharing your files and information securely without anyone intercepting it without your knowledge..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H2_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H2_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;With AxCrypt’s AES-256-bit encryption, your data is airtight. This means you get military-grade protection on a file level, one that is HIPAA compliant, GDPR aligned, and meets the global standard of digital security..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H2_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H2_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available on desktop and mobile, the AxCrypt app offers an intuitive interface, secure sharing, MFA, and a cloud safe integration, helping you collaborate with teams and work simultaneously without compromising on your security.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_H2_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_H2_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to But What Are Ransomware Attacks, And Why Are They Targeting the Health Sector In Particular?.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Heading1 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Heading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conclusion: Encryption As The Ultimate Antidote..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Heading2 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Heading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Things were just fine at this major US-based healthcare system. Doctors were making their usual rounds, nurses were reviewing their patient charts, and administrators were processing registrations. But beneath the everyday rhythm of operations, an invisible breach was unfolding. Nearly 5.6 million patients were affected by a digital heist carried out by an unauthorized user. This was the story of the Yale New Haven Health Breach..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Summary {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Things were just fine at this major US-based healthcare system. Doctors were making their usual rounds, nurses were reviewing their patient charts, and administrators were processing registrations. But beneath the everyday rhythm of operations, an invisible breach was unfolding. Nearly 5.6 million patients were affected by a digital heist carried out by an unauthorized user. This was the story of the &lt;a href=&apos;https://www.ctinsider.com/business/article/yale-new-haven-health-data-breach-20292710.php&apos;&gt;Yale  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This very incident, later, was termed the largest healthcare data incident of the year..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As for the frontline staff —nurses, physicians, and other health professionals —this may have been insignificant news, something one would hear and go about their daily routine. But in reality, the truth was that &lt;b&gt;all it takes is to be a tad bit careless and a weak cog in the wheel, only to put millions of patients data and information at risk&lt;/b&gt;..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Over the years, cyber attacks on the healthcare industry have surged significantly. And in recent times, this has also become a business model among criminals, where criminals are offering pre-packaged tools and services to other criminal groups to exfiltrate data and information in exchange for ransoms..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While Yale New Haven Health was one such casualty in the deluge of healthcare cyberattacks, another such victim was DaVita..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In August this year, a Denver-based healthcare provider that specialised in kidney care was another victim of ransomware attacks. This attack affected more than 1 million individuals. &lt;a href=&apos;https://www.hipaajournal.com/davita-ransomware-attack/&apos;&gt;DaVita&lt;/a&gt; confirmed that the hackers gained access to the network, exfiltrated sensitive data, and then went on to encrypt parts of the network that led to crippling their day-to-day operations..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;DaVita previously confirmed that this ransomware group had tapped into the laboratory database, hijacking critical patient data and information of nearly 2,689,826 individuals.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What this goes to say is: we are making it extremely easy for ransomware groups to tap into critical information by simply assuming “It would never happen to us.” .
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is not that you, as an organisation, are not maintaining data security standards, but the fact that most parts of the healthcare industry have not updated their security and data protection measures..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Ransomware Epidemic and How Data Encryption is the Only Cure..
+        /// </summary>
+        public static string Blog_TREAHDEITOC_Title {
+            get {
+                return ResourceManager.GetString("Blog_TREAHDEITOC_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Try a one-month free trial, Download for Android or IOS users:.
         /// </summary>
         public static string Blog_Try_Download_Mobile_App_Text {
@@ -52748,6 +53099,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ransomware attacks are rising fast. Learn how strong data encryption can protect your files and stop cybercriminals in their tracks..
+        /// </summary>
+        public static string Meta_Description_Blog_TREAHDEITOC {
+            get {
+                return ResourceManager.GetString("Meta-Description-Blog-TREAHDEITOC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Learn about the safest type of encryption—AES-256. Discover why it’s the industry standard for securing sensitive data across sectors..
         /// </summary>
         public static string Meta_Description_Blog_TSTOE {
@@ -54526,6 +54886,15 @@ namespace AxCrypt.Content {
         public static string Meta_Title_Blog_TIOEADITC {
             get {
                 return ResourceManager.GetString("Meta-Title-Blog-TIOEADITC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Ransomware Epidemic: Why Data Encryption Is the Only Cure.
+        /// </summary>
+        public static string Meta_Title_Blog_TREAHDEITOC {
+            get {
+                return ResourceManager.GetString("Meta-Title-Blog-TREAHDEITOC", resourceCulture);
             }
         }
         
@@ -69102,7 +69471,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is confirmation that your AxCrypt ID on &lt;a href=&quot;{0}&quot; style=&quot;color: #86b96e; text-decoration: none;&quot;&gt;AxCrypt.net&lt;/a&gt; has been successfully deleted..
+        ///   Looks up a localized string similar to This is confirmation that your AxCrypt ID on &lt;a href=&quot;{{user_email}}&quot; style=&quot;color: #86b96e; text-decoration: none;&quot;&gt;{{user_email}}&lt;/a&gt; has been successfully deleted..
         /// </summary>
         public static string UnregisterMailBody1 {
             get {

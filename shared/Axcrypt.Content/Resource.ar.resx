@@ -304,6 +304,9 @@
   <data name="AcceptTermsOfServicesText" xml:space="preserve">
     <value>أوافق على &lt;a href='{0}'&gt;سياسة الخصوصية&lt;/a&gt; و&lt;a href='{1}'&gt;شروط الخدمة&lt;/a&gt; الخاصة بـ أكسكريبت.</value>
   </data>
+  <data name="AccessYourContactsPhoneText" xml:space="preserve">
+    <value>هل تسمح لتطبيق أكسكريبت بالوصول إلى جهات الاتصال على هاتفك؟</value>
+  </data>
   <data name="AccountLabel" xml:space="preserve">
     <value>الحساب</value>
   </data>
@@ -343,6 +346,9 @@
   </data>
   <data name="ActionLabel" xml:space="preserve">
     <value>عمل</value>
+  </data>
+  <data name="ActionsText" xml:space="preserve">
+    <value>الإجراءات</value>
   </data>
   <data name="ActivateErrorEmailOrCode" xml:space="preserve">
     <value>البريد الإلكتروني أو رمز التحقق المقدم غير صحيحين.</value>
@@ -439,14 +445,23 @@
   <data name="ActiveSubscriptionPromptText" xml:space="preserve">
     <value>اشتراكك نشط. ليست هناك حاجة للتجديد.</value>
   </data>
+  <data name="ActiveSubscriptionsText" xml:space="preserve">
+    <value>الاشتراكات النشطة</value>
+  </data>
   <data name="ActiveSubscriptionText" xml:space="preserve">
     <value>هناك اشتراك نشط في هذا الحساب.</value>
   </data>
   <data name="ActivityText" xml:space="preserve">
     <value>النشاط</value>
   </data>
+  <data name="AddAndSecureYourFirstFileText" xml:space="preserve">
+    <value>أضف أول ملف لك وقم بتأمينه.</value>
+  </data>
   <data name="AddCardTitle" xml:space="preserve">
     <value>إضافة بطاقة</value>
+  </data>
+  <data name="AddedUsersAccessText" xml:space="preserve">
+    <value>المستخدمون الذين تم منحهم حق الوصول</value>
   </data>
   <data name="AddEmailPromptText" xml:space="preserve">
     <value>أضف بريدًا إلكترونيًا</value>
@@ -454,6 +469,12 @@
   <data name="AddFileLabel" xml:space="preserve">
     <value>افتح ملف اكسكربت</value>
     <comment>Tooltip for "AddFile" button in mobile application</comment>
+  </data>
+  <data name="AddFirstFolderText" xml:space="preserve">
+    <value>أضف أول مجلد وقم بتأمينه.</value>
+  </data>
+  <data name="AddFirstPasswordText" xml:space="preserve">
+    <value>أضف أول كلمة مرور وقم بتأمينها.</value>
   </data>
   <data name="AdditionalUnsubscribedConfirmation" xml:space="preserve">
     <value>قد لا نزال نرسل إليك بريدًا إلكترونيًا إذا كان ذلك ضروريًا لوظيفة أو أمان اكسكربت.</value>
@@ -504,6 +525,9 @@
   </data>
   <data name="AdminLabel" xml:space="preserve">
     <value>مسؤل</value>
+  </data>
+  <data name="AdvancedSettingsText" xml:space="preserve">
+    <value>الإعدادات المتقدمة</value>
   </data>
   <data name="AffiliateAdvantagesHeading" xml:space="preserve">
     <value>مزايا التسويق التابعة لاكسكربت</value>
@@ -601,8 +625,17 @@
   <data name="AffiliateRevenueText6" xml:space="preserve">
     <value>الوصول إلى مدير حساب مخصص</value>
   </data>
+  <data name="AgreeOurText" xml:space="preserve">
+    <value>أنت توافق على</value>
+  </data>
   <data name="AgreePasswordResetNotRegainAccess" xml:space="preserve">
     <value>أفهم أن هذا لن يستعيد الوصول إلى ملفاتي المشفرة</value>
+  </data>
+  <data name="AlertText" xml:space="preserve">
+    <value>تنبيه!</value>
+  </data>
+  <data name="AllDoneText" xml:space="preserve">
+    <value>تم الانتهاء!</value>
   </data>
   <data name="AllLabel" xml:space="preserve">
     <value>الجميع</value>
@@ -635,6 +668,9 @@
     <value>عند التمكين ، لا يتم استخدام الوصول إلى الإنترنت مطلقًا أو مطلوبًا ، حتى يتم تعطيله.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
   </data>
+  <data name="AndText" xml:space="preserve">
+    <value>و</value>
+  </data>
   <data name="AnnualMonthlySwitcherAnnualButtonLabel" xml:space="preserve">
     <value>20٪ خصم سنوي</value>
   </data>
@@ -655,6 +691,15 @@
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>التحقق من معرف اكسكربت [{0}]</value>
+  </data>
+  <data name="AppConfigurationText" xml:space="preserve">
+    <value>تكوين التطبيق</value>
+  </data>
+  <data name="ApplicationConfigurationPathText" xml:space="preserve">
+    <value>مسار تكوين التطبيق</value>
+  </data>
+  <data name="ApplicationConfigurationText" xml:space="preserve">
+    <value>تكوين التطبيق</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>AxCrypt</value>
@@ -693,12 +738,18 @@
 
 ستنعكس تحديثات الاشتراك هنا في غضون بضع دقائق.</value>
   </data>
+  <data name="AppText" xml:space="preserve">
+    <value>التطبيق</value>
+  </data>
   <data name="AppVersionLabel" xml:space="preserve">
     <value>الإصدار {0}</value>
     <comment>Text containing information about current application version.</comment>
   </data>
   <data name="ArabicLanguageSelectionText" xml:space="preserve">
     <value>عربي(Arabic)</value>
+  </data>
+  <data name="AreYouSureText" xml:space="preserve">
+    <value>هل أنت متأكد؟</value>
   </data>
   <data name="AsAffiliateHeading" xml:space="preserve">
     <value>&lt;span&gt;كأ&lt;/span&gt; التابعه</value>
@@ -717,6 +768,9 @@
   </data>
   <data name="AuthenticationError" xml:space="preserve">
     <value>الصفحة التي حاولت زيارتها تتطلب المصادقة. الرجاء تسجيل الدخول للمتابعة.</value>
+  </data>
+  <data name="AuthenticatorAppText" xml:space="preserve">
+    <value>تطبيق المصادقة</value>
   </data>
   <data name="AutoAnonymousRenameMenuItemText" xml:space="preserve">
     <value>إعادة تسمية مجهول تلقائي</value>
@@ -1136,6 +1190,9 @@
     <value>تأمين الملفات لك ولفريقك بواسطة اكسكربت AB
 
 يتضمن برنامجًا من http://www.bouncycastle.org/.</value>
+  </data>
+  <data name="AxCryptAboutDescription2" xml:space="preserve">
+    <value>يتضمن برمجيات من الموقع: http://www.bouncycastle.org/.</value>
   </data>
   <data name="AxCryptAffiliateHeading" xml:space="preserve">
     <value>كن &lt;span&gt;تابعا&lt;/span&gt; لاكسكربت !</value>
@@ -4838,6 +4895,9 @@
   <data name="Blog_EODAGDFWBES_H3_Text1" xml:space="preserve">
     <value>على غرار عملية جوجل درايف ، يقوم اكسكربت بتشفير ملفات ون درايف في تسلسل يسمح بتشفير الملف قبل مزامنة الملف مع السحابة.</value>
   </data>
+  <data name="Blog_EODAGDFWBES_H4_Text1" xml:space="preserve">
+    <value>تشفير Google Drive وOneDrive هو طريقة ذكية لحماية بياناتك من الوصول غير المصرح به أو السرقة أو الفقدان. يضيف التشفير طبقة أمان إضافية لملفاتك من خلال جعلها غير قابلة للقراءة لأي شخص لا يملك المفتاح أو كلمة المرور الصحيحة. هذا يعني أنه حتى إذا تمكن شخص ما من اختراق حساب التخزين السحابي الخاص بك أو سرق جهازك، فلن يكون قادرًا على الوصول إلى معلوماتك الحساسة.</value>
+  </data>
   <data name="Blog_EODAGDFWBES_H4_Text2" xml:space="preserve">
     <value>يساعدك التشفير أيضا على الامتثال لقوانين ولوائح خصوصية البيانات التي قد تنطبق على البيانات المهنية في مؤسستك. يمكنك أيضا الاستمتاع براحة ومرونة التخزين السحابي دون المساس بأمان بياناتك.</value>
   </data>
@@ -5189,6 +5249,18 @@
   </data>
   <data name="Blog_FOKM_Title" xml:space="preserve">
     <value>أساسيات الإدارة الرئيسية</value>
+  </data>
+  <data name="Blog_FVPES_Heading1" xml:space="preserve">
+    <value>هل التشفير المجاني آمن؟</value>
+  </data>
+  <data name="Blog_FVPES_Summary" xml:space="preserve">
+    <value>أصبح التشفير أمرًا أساسيًا لحماية المعلومات الحساسة، سواء كانت شخصية أو مهنية. ولكن عند المقارنة بين برامج التشفير المجانية والمدفوعة، يتساءل الكثيرون: هل التشفير المجاني آمن، أم أنه من الأفضل الدفع للحصول على ميزات أمان إضافية؟</value>
+  </data>
+  <data name="Blog_FVPES_Text1" xml:space="preserve">
+    <value>أصبح التشفير أمرًا أساسيًا لحماية المعلومات الحساسة، سواء كانت شخصية أو مهنية. ولكن عند مقارنة برامج التشفير المجانية مقابل المدفوع، يتساءل الكثيرون: هل التشفير المجاني آمن، أم يستحق الدفع للحصول على ميزات أمان إضافية؟</value>
+  </data>
+  <data name="Blog_FVPES_Title" xml:space="preserve">
+    <value>البرمجيات المجانية مقابل المدفوعة للتشفير: هل تحتاج فعلاً للدفع من أجل الأمان؟</value>
   </data>
   <data name="Blog_GAES256BEWA_Conclusion_Text1" xml:space="preserve">
     <value>اكسكربت هو تأمين ضد انتهاكات البيانات المحتملة. يمكن أن يصبح الأمان أحد الأصول باستخدام أدوات إدارة الصخور والتشفير على مستوى المؤسسات وكلمات المرور. يمكنك الحصول على خيار الانتقال إلى السحابة العامة. إذا كنت مهتمًا بمعرفة المزيد حول التشفير ، &lt;a href='https://www.axcrypt.net/'&gt; فابدأ من هنا &lt;/a&gt;</value>
@@ -11457,6 +11529,9 @@
   <data name="BrandToneLabel" xml:space="preserve">
     <value>نغمة العلامة التجارية</value>
   </data>
+  <data name="BrowseText" xml:space="preserve">
+    <value>تصفح</value>
+  </data>
   <data name="BruteForceResistantLabel" xml:space="preserve">
     <value>مقاومة القوة الغاشمة</value>
   </data>
@@ -12078,6 +12153,9 @@
   <data name="BuyMorePasswordManagerSubscriptionWarning" xml:space="preserve">
     <value>هناك اشتراك نشط على هذا الحساب. لا يمكن شراء اشتراكات مدير كلمات المرور مرتين بنفس حساب اكسكربت.</value>
   </data>
+  <data name="BuyMorePremiumSubscriptionWarning" xml:space="preserve">
+    <value>حساب أكسكريبت هذا لديه اشتراك دوري نشط بالفعل. لا حاجة لشرائه مرة أخرى. لبدء اشتراك جديد، قم أولاً بإلغاء الاشتراك الحالي.</value>
+  </data>
   <data name="BuyPasswordManagerText" xml:space="preserve">
     <value>أدخل البريد الإلكتروني للمستخدم الذي تشتري له ترخيص مدير كلمات المرور:</value>
   </data>
@@ -12313,6 +12391,9 @@
   <data name="ClearAllText" xml:space="preserve">
     <value>مسح الكل</value>
   </data>
+  <data name="ClearLogsText" xml:space="preserve">
+    <value>مسح السجلات</value>
+  </data>
   <data name="ClearRecentFilesToolStripMenuItemText" xml:space="preserve">
     <value>امسح الملفات الأخيرة</value>
   </data>
@@ -12325,8 +12406,14 @@
   <data name="ClickToDownloadText" xml:space="preserve">
     <value>اضغط للتحميل.</value>
   </data>
+  <data name="ClickToShowText" xml:space="preserve">
+    <value>انقر للعرض</value>
+  </data>
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>انقر لتشفير أي ملفات مفتوحة أو ملفات جديدة في مجلدات مؤمنة ، ولكن تأكد من أنها ليست قيد الاستخدام أولاً.</value>
+  </data>
+  <data name="CloudServicesText" xml:space="preserve">
+    <value>خدمات السحابة</value>
   </data>
   <data name="ColorPaletteLabel" xml:space="preserve">
     <value>لوحة الألوان</value>
@@ -12458,6 +12545,9 @@
   <data name="CreateGroupInfoTexts" xml:space="preserve">
     <value>أنشئ مجموعة!</value>
   </data>
+  <data name="CreateGroupsText" xml:space="preserve">
+    <value>إنشاء مجموعات</value>
+  </data>
   <data name="CreateGroupText" xml:space="preserve">
     <value>إنشاء مجموعة</value>
   </data>
@@ -12472,6 +12562,9 @@
   </data>
   <data name="CreatePasswordPrompt" xml:space="preserve">
     <value>أنشئ كلمة المرور الخاصة بك</value>
+  </data>
+  <data name="CreatePasswordText" xml:space="preserve">
+    <value>أنشئ كلمة مرور</value>
   </data>
   <data name="CreatePremiumSuccess" xml:space="preserve">
     <value>تهانينا ومرحبًا بك في اكسكربت الممتازة!</value>
@@ -12505,6 +12598,9 @@
   </data>
   <data name="CustomerReadHeading" xml:space="preserve">
     <value>اقرأ &lt;label&gt;قصص عملاء&lt;/label&gt; أكسكريبت</value>
+  </data>
+  <data name="CustomersText" xml:space="preserve">
+    <value>العملاء</value>
   </data>
   <data name="CustomerStoriesHead1" xml:space="preserve">
     <value>شركة IPTWINS S.A.S. تؤمّن المستندات الحساسة بسهولة</value>
@@ -12745,6 +12841,9 @@
   <data name="DataIntegrityText" xml:space="preserve">
     <value>لا يمكن تعديل الملفات المؤمنة بدون الكشف عنها.</value>
   </data>
+  <data name="DateFromText" xml:space="preserve">
+    <value>التاريخ من</value>
+  </data>
   <data name="DaysLeftPluralWarningPattern" xml:space="preserve">
     <value>{0} يوم</value>
   </data>
@@ -12841,6 +12940,9 @@
   </data>
   <data name="DeleteSecretSuccess" xml:space="preserve">
     <value>تم حذف كلمة المرور الخاصة بك.</value>
+  </data>
+  <data name="DeleteSecretText" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد حذف هذا السر؟</value>
   </data>
   <data name="DeletionFailed" xml:space="preserve">
     <value>{0} فشل الحذف.</value>
@@ -12946,6 +13048,9 @@
   </data>
   <data name="DifferentWayPayText" xml:space="preserve">
     <value>طريقة (طرق) مختلفة للدفع؟</value>
+  </data>
+  <data name="DirectSupportText" xml:space="preserve">
+    <value>نحن نقدم دعمًا مباشرًا لـ</value>
   </data>
   <data name="DisableAccessText" xml:space="preserve">
     <value>تعطيل الوصول</value>
@@ -13064,6 +13169,12 @@
   </data>
   <data name="DoneTitle" xml:space="preserve">
     <value>فعله!</value>
+  </data>
+  <data name="DontaccountText" xml:space="preserve">
+    <value>ليس لديك حساب؟</value>
+  </data>
+  <data name="DontAskAgainText" xml:space="preserve">
+    <value>عدم السؤال مرة أخرى عن</value>
   </data>
   <data name="DontLikeRecurringFlowText" xml:space="preserve">
     <value>لا أحب الاشتراكات المتكررة</value>
@@ -13246,12 +13357,18 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="EducationTitleText" xml:space="preserve">
     <value>&lt;span class='img1'&gt;أمان قوي للبيانات&lt;/span&gt; &lt;span class='img2'&gt;لتعليمك&lt;br/&gt; المؤسسه. &lt;/span&gt; &lt;span class='img3'&gt;تأمين سجلات الطلاب&lt;/span&gt; ،&lt;br/&gt;&lt;span class='img4'&gt;أوراق بحثية&lt;/span&gt;, أكاديمية&lt;br/&gt; المحتوى والمزيد.&lt;span class='img6'&gt;&lt;/span&gt;</value>
   </data>
+  <data name="EmailAlreadyAddedText" xml:space="preserve">
+    <value>${0} تمت إضافته بالفعل.</value>
+  </data>
   <data name="EmailAlreadyExistTexts" xml:space="preserve">
     <value>البريد الإلكتروني موجود بالفعل</value>
   </data>
   <data name="EmailAppLink" xml:space="preserve">
     <value>اذهب إلى البريد الإلكتروني</value>
     <comment>Text of link for opening mail application.</comment>
+  </data>
+  <data name="EmailAuthenticationText" xml:space="preserve">
+    <value>المصادقة عبر البريد الإلكتروني</value>
   </data>
   <data name="EmailErrorTemplateNotFound" xml:space="preserve">
     <value>القالب غير موجود.</value>
@@ -13439,6 +13556,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="EnterGroupNamePlaceHolder" xml:space="preserve">
     <value>أدخل اسم المجموعة</value>
   </data>
+  <data name="EnterOTPPlaceHolderText" xml:space="preserve">
+    <value>أدخل رمز التحقق (OTP)</value>
+  </data>
   <data name="EnterPassphraseForIdentityPrompt" xml:space="preserve">
     <value>كلمة مرور الهوية "{0}"</value>
   </data>
@@ -13473,6 +13593,15 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
     <value>استثناء أثناء معالجة "{0}".</value>
     <comment>@Invariant</comment>
   </data>
+  <data name="ExcludedFolderNotificationText" xml:space="preserve">
+    <value>المجلدات المستبعدة تظل غير مشفّرة.</value>
+  </data>
+  <data name="ExcludedFoldersText" xml:space="preserve">
+    <value>المجلدات المستبعدة:</value>
+  </data>
+  <data name="ExcludeFolderText" xml:space="preserve">
+    <value>استثناء المجلد</value>
+  </data>
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>خروج</value>
   </data>
@@ -13489,6 +13618,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
     <value>تنتهي الصلاحية</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
+  <data name="ExportedSuccessfullyText" xml:space="preserve">
+    <value>تم التصدير بنجاح!</value>
+  </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemText" xml:space="preserve">
     <value>تصدير سر معرف اكسكربت ومشاركة زوج المفاتيح</value>
   </data>
@@ -13503,6 +13635,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="FailedPrivateImport" xml:space="preserve">
     <value>فشل الاستيراد. ربما لا يكون ملف معرف اكسكربت صالحًا.</value>
+  </data>
+  <data name="FailedToExportText" xml:space="preserve">
+    <value>فشل التصدير!</value>
   </data>
   <data name="FaqAccessDenied" xml:space="preserve">
     <value>لماذا أحصل على "رفض الوصول" و / أو أسماء ملفاتي مكتوبة بنص أخضر؟</value>
@@ -13964,8 +14099,17 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
     <value>انقر نقرا مزدوجا لفتح ملفات اكسكربت خارج اكسكربت قد لا تعمل بشكل صحيح. يبدو أن اقتران ملف نظام التشغيل الخاص بالملحق ".axx" معطل. اتصل بدعم تكنولوجيا المعلومات لديك أو ابحث عن حل على الإنترنت.</value>
     <comment>A text that is shown to users starting the association with .axx file is broken. It should not mention "Windows", or "Mac" etc so it can be used in all environments.</comment>
   </data>
+  <data name="FileDecryptionFailedAlertMsg" xml:space="preserve">
+    <value>غير قادر على فك تشفير الملف '{0}'. السبب: {1}</value>
+  </data>
+  <data name="FileDecryptionSuccessAlertMsg" xml:space="preserve">
+    <value>تم فك تشفير الملف '{0}' بنجاح.</value>
+  </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>الملف "{0}" غير موجود.</value>
+  </data>
+  <data name="FileEncryptionEasyText" xml:space="preserve">
+    <value>تشفير الملفات أصبح سهلاً!</value>
   </data>
   <data name="FileFilterDialogFilterPatternWin" xml:space="preserve">
     <value>{1} (*{0})|*{0}|{2} (*.*)|*.*</value>
@@ -14006,12 +14150,18 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="FileNotFound" xml:space="preserve">
     <value>الملف غير موجود.</value>
   </data>
+  <data name="FileOpenFailedAlertMsg" xml:space="preserve">
+    <value>غير قادر على فتح الملف '{0}'. السبب: {1}</value>
+  </data>
   <data name="FileOperationFailed" xml:space="preserve">
     <value>فشل "{0}".</value>
   </data>
   <data name="FilePasswordDialogHeader" xml:space="preserve">
     <value>يرجى تقديم كلمة المرور الأصلية لهذا الملف.</value>
     <comment>The header text for the file password dialog.</comment>
+  </data>
+  <data name="FilePasswordHereText" xml:space="preserve">
+    <value>أدخل كلمة مرور ملفك هنا</value>
   </data>
   <data name="FilePropertiesDateModifiedToolStripMenuItem" xml:space="preserve">
     <value>تاريخ التعديل</value>
@@ -14024,6 +14174,18 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="FilePropertiesToolStripMenuItemText" xml:space="preserve">
     <value>خصائص ملف التشفير</value>
     <comment>A menu text for selecting file properties for encryption.</comment>
+  </data>
+  <data name="FileRenameFailedAlertMsg" xml:space="preserve">
+    <value>غير قادر على إعادة تسمية الملف '{0}' بشكل مجهول. السبب: {1}</value>
+  </data>
+  <data name="FileRenameSuccessAlertMsg" xml:space="preserve">
+    <value>تم إعادة تسمية الملف '{0}' بشكل مجهول.</value>
+  </data>
+  <data name="FileRestoreRenameFailedAlertMsg" xml:space="preserve">
+    <value>غير قادر على استعادة الاسم الأصلي للملف '{0}'. السبب: {1}</value>
+  </data>
+  <data name="FileRestoreRenameSuccessAlertMsg" xml:space="preserve">
+    <value>تمت استعادة اسم الملف '{0}' إلى اسمه الأصلي.</value>
   </data>
   <data name="FileSizeColumnHeaderText" xml:space="preserve">
     <value>حجم</value>
@@ -14046,15 +14208,39 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>الأمور المالية</value>
   </data>
+  <data name="FindFileFeatureTitle" xml:space="preserve">
+    <value>ابحث عن الملفات</value>
+  </data>
+  <data name="FindFilesFeatureDescription" xml:space="preserve">
+    <value>قم بإدارة جميع ملفاتك المشفّرة في مكان واحد، مع خيارات للعرض أو إعادة التسمية أو الحذف أو فك التشفير.</value>
+  </data>
+  <data name="FindFilesFeatureTooltip" xml:space="preserve">
+    <value>مكان واحد لإدارة الملفات المشفّرة</value>
+  </data>
+  <data name="FindFilesSearchPlaceholder" xml:space="preserve">
+    <value>اكتب للبحث عن ملف...</value>
+  </data>
+  <data name="FindPathTitle" xml:space="preserve">
+    <value>مسار الملف</value>
+  </data>
   <data name="FirstNameLabel" xml:space="preserve">
     <value>الاسم الأول</value>
   </data>
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>المجلد "{0}" مؤمن بالفعل.</value>
   </data>
+  <data name="FolderOpenFailedAlertMsg" xml:space="preserve">
+    <value>غير قادر على فتح المجلد الخاص بـ '{0}'. السبب: {1}</value>
+  </data>
   <data name="FolderSelectTitle" xml:space="preserve">
     <value>حدد مجلدًا</value>
     <comment>A prompt or title in a folder selection dialog, prompting the user to select a folder.</comment>
+  </data>
+  <data name="FolderSettingsText" xml:space="preserve">
+    <value>استثناء المجلدات الفرعية</value>
+  </data>
+  <data name="FolderSettingsTitle" xml:space="preserve">
+    <value>إعدادات المجلد المحمي</value>
   </data>
   <data name="FollowUsTitle" xml:space="preserve">
     <value>تابعنا</value>
@@ -14129,6 +14315,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="ForOrganisationsText" xml:space="preserve">
     <value>للمنظمة</value>
   </data>
+  <data name="ForSomeoneElseText" xml:space="preserve">
+    <value>لشخص آخر</value>
+  </data>
   <data name="ForumsLinkLabel" xml:space="preserve">
     <value>المنتديات</value>
   </data>
@@ -14159,6 +14348,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="FreeTrialLabel" xml:space="preserve">
     <value>تجربة مجانية</value>
+  </data>
+  <data name="FriendsEmailText" xml:space="preserve">
+    <value>اكتب بريد صديقك الإلكتروني هنا</value>
   </data>
   <data name="FromText" xml:space="preserve">
     <value>من:</value>
@@ -14728,6 +14920,15 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="GetSubscriptionLoginRequiredInfoText" xml:space="preserve">
     <value>الرجاء تسجيل الدخول للحصول على اشتراكك! إذا لم يكن لديك حساب حتى الآن ، فأنت بحاجة أولاً إلى &lt;a href="{0}Home/Register/"&gt; الاشتراك &lt;/a&gt;.</value>
   </data>
+  <data name="GettheLatestAxCryptText" xml:space="preserve">
+    <value>احصل على أحدث إصدارات أكسكريبت النسخة 2 من هنا</value>
+  </data>
+  <data name="GoToGroupsText" xml:space="preserve">
+    <value>اذهب إلى المجموعات</value>
+  </data>
+  <data name="GoToMasterkeyText" xml:space="preserve">
+    <value>اذهب إلى المفتاح الرئيسي (Masterkey)</value>
+  </data>
   <data name="GoToMyAxCryptPrompt" xml:space="preserve">
     <value>اذهب إلى اكسكربت الخاص بي</value>
   </data>
@@ -14763,6 +14964,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="GroupFeatureInfoText" xml:space="preserve">
     <value>أضف المستخدمين أو المجموعات الذين ترغب في مشاركة هذا السر معهم. إذا لم تكن على دراية بميزة &lt;strong&gt;المجموعات&lt;/strong&gt; لدينا بعد، تعرّف عليها وأنشئ أول مجموعة لك من خلال هذا الرابط.</value>
+  </data>
+  <data name="GroupFeatureText" xml:space="preserve">
+    <value>ميزة المجموعات</value>
   </data>
   <data name="GroupFileSharingHeading" xml:space="preserve">
     <value>مشاركة ملفات المجموعة</value>
@@ -14991,6 +15195,15 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="GroupGuidesTitle" xml:space="preserve">
     <value>&lt;label&gt;تعظيم&lt;/label&gt;أمن الأعمال وكفاءة الفريق مع &lt;strong&gt;ميزة مجموعة&lt;/strong&gt; &lt;span&gt;اكسكربت&lt;/span&gt;!</value>
+  </data>
+  <data name="GroupInfoText" xml:space="preserve">
+    <value>أضف المستخدمين أو المجموعات الذين ترغب في مشاركة هذا السر معهم. إذا كنت لا تعرف عن خدمتنا</value>
+  </data>
+  <data name="GroupInfoText1" xml:space="preserve">
+    <value>أنشئ أول مجموعة لك عبر الرابط</value>
+  </data>
+  <data name="GroupInfoText2" xml:space="preserve">
+    <value>حتى الآن، تعرّف على المزيد وأنشئ أول مجموعة لك عبر الرابط</value>
   </data>
   <data name="GroupManagementHeading" xml:space="preserve">
     <value>إدارة المجموعة</value>
@@ -15418,8 +15631,14 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="ImportPublicKeysFileSelectionTitle" xml:space="preserve">
     <value>حدد مشاركة ملفات المفاتيح</value>
   </data>
+  <data name="ImportSomeonesPublicSharingKeyText" xml:space="preserve">
+    <value>استيراد المفتاح العام للمشاركة لشخص ما</value>
+  </data>
   <data name="ImproveOurServiceCommentText" xml:space="preserve">
     <value>بماذا تنصحنا لتحسين خدماتنا؟</value>
+  </data>
+  <data name="InactivitySignoutToolTipText" xml:space="preserve">
+    <value>تسجيل الخروج عند الخمول يتطلب خطة اشتراك مدفوعة!</value>
   </data>
   <data name="InboxText" xml:space="preserve">
     <value>الوارد</value>
@@ -15435,6 +15654,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
 
 قد يتسبب هذا في أن تستغرق بعض العمليات وقتًا طويلاً جدًا. يرجى الحرص على عدم تحديد مجلد يحتوي على مجلدات أدناه والتي لا ينبغي تشفيرها.</value>
     <comment>A short text in a few sentences describing what the Include Subfolders option does.</comment>
+  </data>
+  <data name="IncludeSubfoldersToolTipText" xml:space="preserve">
+    <value>يتطلب تضمين المجلدات الفرعية اشتراكًا مدفوعًا!</value>
   </data>
   <data name="InconsistentState" xml:space="preserve">
     <value>حالة غير متسقة مع "{0}".</value>
@@ -15948,6 +16170,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="InvalidEmail" xml:space="preserve">
     <value>تنسيق غير صحيح لعنوان بريد إلكتروني.</value>
   </data>
+  <data name="InvalidFolder" xml:space="preserve">
+    <value>مسار المجلد غير صالح</value>
+  </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>مفتاح غير صالح لـ "{0}".</value>
   </data>
@@ -15956,6 +16181,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="InvalidSelectionErrorMessage" xml:space="preserve">
     <value>يرجى تحديد رسالة واحدة على الأقل.</value>
+  </data>
+  <data name="InvalidSubFolder" xml:space="preserve">
+    <value>المجلد المحدد ليس مجلدًا فرعيًا صالحًا.</value>
   </data>
   <data name="InvitationMailBodyIntro" xml:space="preserve">
     <value>لقد تمت دعوتك إلى أمن الملفات اكسكربت  بواسطة &lt;b&gt; {0} &lt;/b&gt;. لبدء تأمين ملفاتك ، ما عليك سوى &lt;a href="{1}" style="color: #86b96e؛ text-decoration: none؛"&gt; تنزيل &lt;/a&gt; وتثبيت اكسكربت. قم بتسجيل الدخول إلى اكسكربت باستخدام &lt;b&gt; {2} &lt;/b&gt; ، وأدخل رمز التحقق وقم بتعيين كلمة المرور السرية الخاصة بك.</value>
@@ -15977,6 +16205,12 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="Invite" xml:space="preserve">
     <value>مستخدم للدعوة</value>
+  </data>
+  <data name="InviteFriendAxCryptText" xml:space="preserve">
+    <value>ادعُ صديقك إلى أكسكريبت!</value>
+  </data>
+  <data name="InviteFriendText" xml:space="preserve">
+    <value>دعوة صديق</value>
   </data>
   <data name="InviteUserNotifyEventText" xml:space="preserve">
     <value>لقد تمت دعوتك لاستخدام اكسكربت!</value>
@@ -16284,6 +16518,9 @@ SE-114 29 ستوكهولم
 
 لا تنسى كلمة المرور هذه!</value>
   </data>
+  <data name="LegacyDownloadsContent" xml:space="preserve">
+    <value>تحتاج إلى نسخة أقدم؟ قم بتنزيل إصدارات  أكسكريبت السابقة للتوافق مع الأنظمة الأقدم.</value>
+  </data>
   <data name="LegacyDownloadsDescription" xml:space="preserve">
     <value>هذه تنزيلات Legacy AxCrypt 1.x. نحن لا نصادق عليها ونحثك على عدم تنزيلها واستخدامها ، ما لم تكن لديك حاجة خاصة إليها. &lt;strong&gt; الملفات الجديدة المشفرة باستخدام اكسكربت 2.x غير متوافقة مع اكسكربت 1.x القديم! &lt;/ strong&gt; يمكن فك تشفير الملفات المشفرة باستخدام اكسكربت 1.x القديم بواسطة اكسكربت 2.x.</value>
   </data>
@@ -16389,8 +16626,14 @@ SE-114 29 ستوكهولم
   <data name="LegalLinkLabel" xml:space="preserve">
     <value>قانوني</value>
   </data>
+  <data name="LetsExploreOurText" xml:space="preserve">
+    <value>هيا نستكشف الـ...</value>
+  </data>
   <data name="LetsGetStartedTitle" xml:space="preserve">
     <value>لنبدأ!</value>
+  </data>
+  <data name="LetsStartOurJourneyText" xml:space="preserve">
+    <value>هيا نبدأ رحلتنا!</value>
   </data>
   <data name="LicenseBusinessNameText" xml:space="preserve">
     <value>بيزنس</value>
@@ -16468,6 +16711,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="LoginPurchaseError" xml:space="preserve">
     <value>حدث خطأ ما عند التعامل مع طلب الدفع الخاص بك. حاول مرة اخرى.</value>
+  </data>
+  <data name="LogInText" xml:space="preserve">
+    <value>تسجيل الدخول</value>
   </data>
   <data name="LogoAndIconLabel" xml:space="preserve">
     <value>الشعار والأيقونة</value>
@@ -18051,6 +18297,228 @@ SE-114 29 ستوكهولم
   <data name="MetadataRetentionText" xml:space="preserve">
     <value>يحتفظ باسم الملف الأصلي ومعلومات الملف الآمن.</value>
   </data>
+  <data name="MFAAlreadyRecoveryCodesText" xml:space="preserve">
+    <value>لقد استخدمت جميع رموز الاستعادة بالفعل!</value>
+  </data>
+  <data name="MFAAvoidLosingText" xml:space="preserve">
+    <value>لتجنب فقدان الوصول وإنشاء رموز جديدة، أعد تكوين المصادقة الثنائية باستخدام تطبيق المصادقة.</value>
+  </data>
+  <data name="MFABackupCodesTexts" xml:space="preserve">
+    <value>يمكنك الآن استخدام رموز النسخ الاحتياطي لتسجيل الدخول إلى حسابك إذا لم يكن لديك وصول إلى تطبيق المصادقة.
+&lt;strong&gt;يمكن استخدام كل رمز مرة واحدة فقط.</value>
+  </data>
+  <data name="MFADescriptionText" xml:space="preserve">
+    <value>المصادقة متعددة العوامل هي إجراء أمني محسّن. عند تفعيلها، سيتطلب تسجيل الدخول إلى أكسكريبت إدخال شكلين من أشكال التحقق.</value>
+  </data>
+  <data name="MFADescriptionText1" xml:space="preserve">
+    <value>قم بتمكين تسجيل الدخول الآمن باستخدام أي تطبيق مصادقة، بما في ذلك Microsoft وGoogle Authenticator.</value>
+  </data>
+  <data name="MFAEmailAuthentication" xml:space="preserve">
+    <value>لتمكين المصادقة عبر البريد الإلكتروني، نحتاج إلى إرسال رمز التحقق إلى عنوان بريدك الإلكتروني.</value>
+  </data>
+  <data name="MFAInitialSetupText" xml:space="preserve">
+    <value>لتمكين المصادقة متعددة العوامل، قم بتثبيت أي تطبيق مصادقة (مثل Microsoft Authenticator أو Google Authenticator أو غيرهما).</value>
+  </data>
+  <data name="MFAInvalidUserError" xml:space="preserve">
+    <value>فشل تمكين/تعطيل المصادقة متعددة العوامل بسبب كلمة مرور غير صحيحة</value>
+  </data>
+  <data name="MFAMailSubject" xml:space="preserve">
+    <value>رمز التحقق (OTP) الخاص بك من أكسكريبت لتسجيل الدخول الآمن</value>
+  </data>
+  <data name="MFAMultifactorTypeText" xml:space="preserve">
+    <value>يمكن استخدام كل رمز مرة واحدة فقط. لتجنب فقدان الوصول وإنشاء رموز جديدة، أعد تكوين المصادقة متعددة العوامل باستخدام أي نوع من أنواع المصادقة المتعددة (تطبيق المصادقة، البريد الإلكتروني، أو الرسائل القصيرة).</value>
+  </data>
+  <data name="MFANotEnabledText" xml:space="preserve">
+    <value>المصادقة متعددة العوامل غير مفعلة لهذا الحساب! سيتم إعادة توجيهك إلى الصفحة الرئيسية خلال ثوانٍ قليلة.</value>
+  </data>
+  <data name="MFAOneTimeVerificationText" xml:space="preserve">
+    <value>استلم رمز التحقق لمرة واحدة المرسل إلى عنوان بريدك الإلكتروني المسجل.</value>
+  </data>
+  <data name="MFAPasswordConfirmText" xml:space="preserve">
+    <value>أدخل كلمة مرور حساب أكسكريبت الخاص بك للتأكيد</value>
+  </data>
+  <data name="MFARecoveryCodeSignInText" xml:space="preserve">
+    <value>لقد استخدمت أحد رموز الاستعادة لتسجيل الدخول.</value>
+  </data>
+  <data name="MfaRecoveryCodeText" xml:space="preserve">
+    <value>استخدم</value>
+  </data>
+  <data name="MfaRecoveryCodeText1" xml:space="preserve">
+    <value>رمز الاستعادة</value>
+  </data>
+  <data name="MfaRecoveryCodeText2" xml:space="preserve">
+    <value>للوصول إلى حسابك.</value>
+  </data>
+  <data name="MFAScanQRCodeText" xml:space="preserve">
+    <value>امسح رمز الاستجابة السريعة (QR) من تطبيق المصادقة</value>
+  </data>
+  <data name="MFAScanQRCodeText1" xml:space="preserve">
+    <value>أو انسخ الرمز أدناه والصقه في تطبيق المصادقة.</value>
+  </data>
+  <data name="MFASuccessText" xml:space="preserve">
+    <value>أنت جاهز الآن لاستخدام</value>
+  </data>
+  <data name="MFASuccessText1" xml:space="preserve">
+    <value>أنت جاهز الآن لاستخدام المصادقة لتسجيل الدخول في المستقبل.</value>
+  </data>
+  <data name="MFAText" xml:space="preserve">
+    <value>المصادقة متعددة العوامل (MFA)</value>
+  </data>
+  <data name="MfaText1" xml:space="preserve">
+    <value>تم تأمين حسابك باستخدام</value>
+  </data>
+  <data name="MFAText2" xml:space="preserve">
+    <value>يرجى اختيار طريقة المصادقة الخاصة بك.</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
+    <value>كيفية تفعيل المصادقة متعددة العوامل (MFA) في أكسكريبت؟</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead2" xml:space="preserve">
+    <value>تطبيق المصادقة</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead3" xml:space="preserve">
+    <value>المصادقة عبر البريد الإلكتروني والرسائل القصيرة (SMS)</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead4" xml:space="preserve">
+    <value>حفظ رمز النسخ الاحتياطي</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead5" xml:space="preserve">
+    <value>كيفية تسجيل الدخول عند تفعيل المصادقة متعددة العوامل (MFA)</value>
+  </data>
+  <data name="MFAuthenticationCaroselHead6" xml:space="preserve">
+    <value>كيفية تعطيل المصادقة متعددة العوامل (MFA)</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph10" xml:space="preserve">
+    <value>تحقّق من هاتفك للحصول على رمز التحقق المكوّن من 6 أرقام في حالة SMS،
+أو من صندوق البريد الوارد في حالة البريد الإلكتروني.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph11" xml:space="preserve">
+    <value>أدخل الرمز للتحقق وتفعيل المصادقة متعددة العوامل المستندة إلى الرسائل القصيرة (SMS) أو البريد الإلكتروني.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph12" xml:space="preserve">
+    <value>بمجرد التحقق من طريقة التحقق المفضلة باستخدام رمز التحقق (OTP)، ستظهر مجموعة من الرموز على الشاشة في الخطوة التالية.
+احفظها بشكل آمن، ويمكنك استخدام هذه الرموز الاحتياطية لتسجيل الدخول إلى حسابك في حال عدم توفر تطبيق المصادقة أو أي طريقة أخرى.
+يمكن استخدام كل رمز مرة واحدة فقط.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph13" xml:space="preserve">
+    <value>أدخل بريدك الإلكتروني وكلمة المرور الخاصة بـ أكسكريبت في شاشة تسجيل الدخول.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph15" xml:space="preserve">
+    <value>أدخل رمز التحقق عندما يُطلب منك.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph16" xml:space="preserve">
+    <value>ادخل إلى حسابك وملفاتك المشفّرة بأمان.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph17" xml:space="preserve">
+    <value>استخدم رمز الاسترداد أو النسخ الاحتياطي لإكمال عملية تسجيل الدخول إذا لم يكن رمز التحقق (OTP) متاحًا.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph18" xml:space="preserve">
+    <value>انقر على طريقة المصادقة متعددة العوامل التي تريد تعطيلها.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph19" xml:space="preserve">
+    <value>أكد قرارك عن طريق إدخال كلمة مرور حسابك عند الطلب.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph20" xml:space="preserve">
+    <value>بمجرد تعطيل جميع طرق المصادقة، لن يطلب  أكسكريبت بعد ذلك رمز تحقق لمرة واحدة عند تسجيل الدخول.
+ومع ذلك، نوصي بالاحتفاظ بتفعيل المصادقة متعددة العوامل (MFA) لأقصى درجات الأمان.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph21" xml:space="preserve">
+    <value>يتم إنشاء مجموعة من رموز النسخ الاحتياطي في كل مرة يتم فيها تفعيل طريقة مصادقة جديدة.
+أثناء استخدام رمز النسخ الاحتياطي، ستتلقى دائمًا إشعارًا.
+إذا استُخدمت جميع رموز النسخ الاحتياطي، سيتم تعطيل المصادقة متعددة العوامل لحسابك، وقد يُطلب منك إعادة إعدادها.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph3" xml:space="preserve">
+    <value>اختر طريقة التحقق المفضلة لديك (تطبيق المصادقة، البريد الإلكتروني، أو الرسائل القصيرة SMS).</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph4" xml:space="preserve">
+    <value>أدخل كلمة المرور الخاصة بك للتأكيد وإكمال عملية المصادقة.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph5" xml:space="preserve">
+    <value>لتفعيل المصادقة الثنائية، قم بتثبيت أي تطبيق مصادقة (على سبيل المثال: Microsoft أو Google أو غيرهما).</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph6" xml:space="preserve">
+    <value>امسح رمز QR الظاهر على الشاشة باستخدام تطبيق المصادقة،
+أو انسخ الرمز المعروض في النافذة والصقه في تطبيق المصادقة.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph7" xml:space="preserve">
+    <value>اضغط على متابعة، ثم أدخل رمز التحقق (OTP) من تطبيق المصادقة.</value>
+  </data>
+  <data name="MFAuthenticationCaroselParagraph8" xml:space="preserve">
+    <value>أدخل رقم هاتفك المحمول إذا تم اختيار SMS،
+وإلا فأكِّد أو أدخل عنوان بريدك الإلكتروني المرتبط بحساب أكسكريبت إذا تم اختيار البريد الإلكتروني.</value>
+  </data>
+  <data name="MFAuthenticationFaq1" xml:space="preserve">
+    <value>هل يمكنني استخدام عدة طرق مصادقة متعددة العوامل في نفس الوقت؟</value>
+  </data>
+  <data name="MFAuthenticationFaq1Ans" xml:space="preserve">
+    <value>نعم، يدعم أكسكريبت تفعيل جميع طرق المصادقة الأساسية في نفس الوقت (تطبيق المصادقة، البريد الإلكتروني، أو الرسائل القصيرة SMS).
+ومع ذلك، يمكنك اختيار أي منها عند تسجيل الدخول.</value>
+  </data>
+  <data name="MFAuthenticationFaq2" xml:space="preserve">
+    <value>ماذا يحدث إذا قمت بإلغاء تثبيت تطبيق المصادقة؟</value>
+  </data>
+  <data name="MFAuthenticationFaq3" xml:space="preserve">
+    <value>هل يمكنني استخدام المصادقة متعددة العوامل (MFA) أثناء عدم الاتصال بالإنترنت؟</value>
+  </data>
+  <data name="MFAuthenticationFaq4" xml:space="preserve">
+    <value>هل يمكنني الوصول إلى ملفاتي إذا تم قفلي بسبب مشاكل المصادقة متعددة العوامل (MFA)؟</value>
+  </data>
+  <data name="MFAuthenticationFaq5" xml:space="preserve">
+    <value>هل بيانات المصادقة متعددة العوامل (MFA) الخاصة بي آمنة؟</value>
+  </data>
+  <data name="MFAuthenticationFaq6" xml:space="preserve">
+    <value>هل المصادقة متعددة العوامل (MFA) متاحة لجميع المستخدمين؟</value>
+  </data>
+  <data name="MFAuthenticationGuideNote" xml:space="preserve">
+    <value>بمجرد تفعيل المصادقة متعددة العوامل، سيطلب منك أكسكريبت رمز تحقق لمرة واحدة عند كل تسجيل دخول، مما يضيف طبقة أمان إضافية لحسابك.</value>
+  </data>
+  <data name="MFAuthenticationLinkLable" xml:space="preserve">
+    <value>المصادقة متعددة العوامل (MFA)</value>
+  </data>
+  <data name="MFAuthenticationSec1Paragraph1" xml:space="preserve">
+    <value>كلمات المرور وحدها لا تكفي دائمًا لحماية بياناتك الحساسة.
+تعمل المصادقة متعددة العوامل (MFA) على تعزيز الأمان من خلال طلب خطوة تحقق ثانية، مما يضمن أن المستخدمين المصرح لهم فقط هم من يمكنهم الوصول إلى حساباتهم.</value>
+  </data>
+  <data name="MFAuthenticationSec1Paragraph2" xml:space="preserve">
+    <value>عند تفعيل المصادقة متعددة العوامل (MFA)، يتطلب تسجيل الدخول إدخال كلٍ من كلمة المرور الخاصة بك ورمزٍ مؤقت يتم توليده في تطبيق المصادقة أو يُرسل إلى بريدك الإلكتروني أو إلى هاتفك المحمول.
+توفر هذه الطبقة الإضافية من الحماية تقليلًا كبيرًا في خطر الوصول غير المصرح به، حتى في حال تم اختراق كلمة المرور الخاصة بك.
+تُعد المصادقة متعددة العوامل إجراءً أمنيًا أساسيًا يساعد في الحفاظ على أمان ملفاتك المشفّرة، مما يجعل أكسكريبت أكثر موثوقية للاستخدام الشخصي والمهني.</value>
+  </data>
+  <data name="MFAuthenticationSec2SubHead1" xml:space="preserve">
+    <value>تسجيل دخول آمن بعوامل متعددة</value>
+  </data>
+  <data name="MFAuthenticationSec2SubHead2" xml:space="preserve">
+    <value>رموز نسخ احتياطية مشفّرة للوصول في حالات الطوارئ</value>
+  </data>
+  <data name="MFAuthenticationSec2SubHead3" xml:space="preserve">
+    <value>معالجة البيانات بما يتوافق مع اللائحة العامة لحماية البيانات (GDPR)</value>
+  </data>
+  <data name="MFAuthenticationSec2Text1" xml:space="preserve">
+    <value>تتطلب المصادقة متعددة العوامل (MFA) في  أكسكريبت من المستخدمين التحقق من هويتهم باستخدام عاملين أو أكثر من عوامل المصادقة — مثل شيء يعرفونه (كلمة المرور) أو شيء يمتلكونه (تطبيق المصادقة أو الرمز).</value>
+  </data>
+  <data name="MFAuthenticationSec2Text2" xml:space="preserve">
+    <value>أثناء الإعداد، يتلقى المستخدمون رموز نسخ احتياطية مشفّرة لضمان إمكانية الوصول إلى الحساب حتى في حال فقدان الجهاز الأساسي.
+يجب على المستخدم حفظ هذه الرموز بشكل آمن.</value>
+  </data>
+  <data name="MFAuthenticationSec2Text3" xml:space="preserve">
+    <value>تُعالَج جميع البيانات المتعلقة بالمصادقة متعددة العوامل (MFA) وفقًا للائحة العامة لحماية البيانات (GDPR) والمعايير الأخرى المعمول بها في مجال الخصوصية، مما يضمن بقاء بيانات المستخدم آمنة ومحميّة.</value>
+  </data>
+  <data name="MFAuthenticationSec4Heading" xml:space="preserve">
+    <value>كيف تكون رموز الاسترداد أو النسخ الاحتياطي مفيدة؟</value>
+  </data>
+  <data name="MFAuthenticationSec4Paragraph1" xml:space="preserve">
+    <value>بعد تفعيل المصادقة متعددة العوامل (MFA)، قم بتنزيل أو نسخ رموز النسخ الاحتياطي الخاصة بك.
+رموز الاسترداد أو النسخ الاحتياطي هي مجموعة من الرموز التي تُستخدم مرة واحدة، وتُقدّم عند إعداد المصادقة الثنائية لأول مرة.
+تعمل هذه الرموز كطريقة بديلة للوصول إلى حسابك في حال عدم توفر طريقة المصادقة الأساسية، مثل تطبيق المصادقة (على سبيل المثال: فقدان الهاتف، عدم توفر الرسائل القصيرة أو البريد الإلكتروني، حذف التطبيق، وما إلى ذلك).</value>
+  </data>
+  <data name="MFAuthenticationSec4Paragraph2" xml:space="preserve">
+    <value>إذا لم تتمكن من استخدام طريقة المصادقة متعددة العوامل المعتادة أثناء تسجيل الدخول، سيُطلب منك إدخال أحد رموز الاسترداد الخاصة بك.
+يتيح لك هذا تجاوز الحاجة إلى طريقة المصادقة المعتادة والوصول إلى حسابك بأمان.
+يمكن استخدام كل رمز مرة واحدة فقط، ويجب حفظها بشكل آمن.</value>
+  </data>
+  <data name="MFAVerificationCode" xml:space="preserve">
+    <value>أدخل رمز التحقق المكون من 6 أرقام من {0}</value>
+  </data>
   <data name="MissingFeaturesText" xml:space="preserve">
     <value>الميزات المفقودة</value>
   </data>
@@ -18080,6 +18548,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="MonthlySubscriptionTitle" xml:space="preserve">
     <value>شهريا</value>
+  </data>
+  <data name="MoreActionsText" xml:space="preserve">
+    <value>المزيد من الإجراءات</value>
   </data>
   <data name="MoreButtonText" xml:space="preserve">
     <value>أكثر...</value>
@@ -18120,8 +18591,14 @@ SE-114 29 ستوكهولم
   <data name="NavigationPaneHome" xml:space="preserve">
     <value>الصفحة الرئيسية</value>
   </data>
+  <data name="NeedAnyHelpText" xml:space="preserve">
+    <value>هل تحتاج إلى أي مساعدة؟</value>
+  </data>
   <data name="NeedProductForProjectText" xml:space="preserve">
     <value>كنت أستخدمه مؤقتا لمشروع</value>
+  </data>
+  <data name="NewCardSavedText" xml:space="preserve">
+    <value>تم حفظ إدخال بطاقتك الجديدة.</value>
   </data>
   <data name="NewMessageText" xml:space="preserve">
     <value>رسالة جديدة</value>
@@ -18129,11 +18606,17 @@ SE-114 29 ستوكهولم
   <data name="NewPassphraseDialogTitle" xml:space="preserve">
     <value>أنشئ كلمة مرور جديدة</value>
   </data>
+  <data name="NewPasswordUpdatedText" xml:space="preserve">
+    <value>تم تحديث إدخال كلمة المرور الجديدة بنجاح!</value>
+  </data>
   <data name="NewSecretSuccess" xml:space="preserve">
     <value>تم حفظ إدخال كلمة المرور الجديدة الخاصة بك.</value>
   </data>
   <data name="NewTrialButton" xml:space="preserve">
     <value>قم بحفظها وإدارتها ومشاركتها بأمان مع &lt;span&gt;مدير كلمات المرور الخاص بأكسكربت .&lt;/span&gt; يمكنك أيضا حماية &lt;span&gt; تفاصيل بطاقة الائتمان والملاحظات.&lt;/span&gt; جربه مجانا لمدة 30 يوما.</value>
+  </data>
+  <data name="NewVersionAvailableText" xml:space="preserve">
+    <value>هناك إصدار جديد متاح!</value>
   </data>
   <data name="NewVersionIsAvailableText" xml:space="preserve">
     <value>الإصدار {0} متاح!</value>
@@ -18276,6 +18759,9 @@ SE-114 29 ستوكهولم
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>لقد تم تسجيل خروجك. انقر لتسجيل الدخول.</value>
   </data>
+  <data name="NoFilesFoundText" xml:space="preserve">
+    <value>لم يتم العثور على أي ملف</value>
+  </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>لا يمكن الاتصال بالخادم الآن ، يرجى التحقق من اتصالك بالإنترنت.</value>
     <comment>Message which is displayed when device doesn't have internet connection.</comment>
@@ -18283,8 +18769,17 @@ SE-114 29 ستوكهولم
   <data name="NoItemsSelectedText" xml:space="preserve">
     <value>لم يتم تحديد أي عنصر</value>
   </data>
+  <data name="NoKeepEncryptedText" xml:space="preserve">
+    <value>لا، احتفظ بالتشفير</value>
+  </data>
   <data name="NoLabel" xml:space="preserve">
     <value>رقم</value>
+  </data>
+  <data name="NoLogToClearText" xml:space="preserve">
+    <value>لا يوجد سجل لمسحه!</value>
+  </data>
+  <data name="NoLogToExportText" xml:space="preserve">
+    <value>لا يوجد سجل للتصدير!</value>
   </data>
   <data name="NoMessagesFoundText" xml:space="preserve">
     <value>(لم يتم العثور على رسائل.)</value>
@@ -18368,6 +18863,12 @@ SE-114 29 ستوكهولم
   <data name="OfflineNoPremiumWarning" xml:space="preserve">
     <value>أنت غير متصل بالإنترنت لذا لا يمكننا التحقق من خطة اشتراكك. يرجى الاتصال بالإنترنت حتى نتمكن من تحديث حالتك!</value>
   </data>
+  <data name="OFFText" xml:space="preserve">
+    <value>إيقاف</value>
+  </data>
+  <data name="OhnoText" xml:space="preserve">
+    <value>أوه، لا!</value>
+  </data>
   <data name="OldVersionTooltip" xml:space="preserve">
     <value>نسختك قديمة. الرجاء النقر للتحقق من إصدار أحدث.</value>
   </data>
@@ -18379,6 +18880,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="OnlyAdminOnActiveBusinessSubscriptionError" xml:space="preserve">
     <value>تعذر حذف المستخدم لأنه المسؤول الوحيد عن اشتراك الأعمال. إما إلغاء الاشتراك أو ترشيح مسؤول آخر.</value>
+  </data>
+  <data name="ONText" xml:space="preserve">
+    <value>على</value>
   </data>
   <data name="OpenEncryptedFileOpenDialogTitle" xml:space="preserve">
     <value>حدد ملفا مؤمنا لفتحه</value>
@@ -18445,6 +18949,9 @@ SE-114 29 ستوكهولم
   <data name="OtherDetailsText" xml:space="preserve">
     <value>إذا كان غير ذلك ، يرجى إعطاء التفاصيل</value>
   </data>
+  <data name="OtherMFAOptionsText" xml:space="preserve">
+    <value>جرّب خيارات المصادقة متعددة العوامل الأخرى</value>
+  </data>
   <data name="OtherPlatformsLabel" xml:space="preserve">
     <value>منصات أخرى</value>
   </data>
@@ -18468,6 +18975,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="OurVisionLabel" xml:space="preserve">
     <value>رؤيتنا</value>
+  </data>
+  <data name="OwnerEmailText" xml:space="preserve">
+    <value>البريد الإلكتروني للمالك:</value>
   </data>
   <data name="PAGE_LEGACY_TR1_TITLE_TEXT2" xml:space="preserve">
     <value>أكسكربت ليجاسي</value>
@@ -18676,6 +19186,9 @@ SE-114 29 ستوكهولم
   <data name="PassphraseVerificationMismatch" xml:space="preserve">
     <value>كلمة المرور غير مطابقة</value>
   </data>
+  <data name="PasswordChangeText" xml:space="preserve">
+    <value>تغيير كلمة المرور</value>
+  </data>
   <data name="PasswordEasyText" xml:space="preserve">
     <value>سهل</value>
   </data>
@@ -18852,6 +19365,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="PastIncidentsHeading" xml:space="preserve">
     <value>الحوادث الماضية</value>
+  </data>
+  <data name="PathText" xml:space="preserve">
+    <value>المسار:</value>
   </data>
   <data name="PaymentCancelledNotifyEventText" xml:space="preserve">
     <value>محاولتك الأخيرة لشراء اشتراك اكسكربت لم تنجح!</value>
@@ -19191,6 +19707,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="PremiumTrialInstructionsLinkText" xml:space="preserve">
     <value>انقر &lt;a href="https://www.axcrypt.net/pricing/" target="_blank"&gt; هنا &lt;/a&gt; لمزيد من المعلومات حول الاشتراكات.</value>
+  </data>
+  <data name="PreparingAxCryptText" xml:space="preserve">
+    <value>جاري إعداد أكسكريبت...</value>
   </data>
   <data name="PressAndHoldLabel" xml:space="preserve">
     <value>اضغط مع الاستمرار لعرض المزيد</value>
@@ -20108,6 +20627,9 @@ SE-114 29 ستوكهولم
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>الملفات الأخيرة</value>
   </data>
+  <data name="RecentFoldersText" xml:space="preserve">
+    <value>المجلدات الأخيرة</value>
+  </data>
   <data name="RecentLabel" xml:space="preserve">
     <value>الاخيره</value>
   </data>
@@ -20238,6 +20760,9 @@ SE-114 29 ستوكهولم
   <data name="RemoveRecentFileToolStripMenuItemText" xml:space="preserve">
     <value>إزالة من القائمة ولكن الحفاظ على الأمن</value>
     <comment>This text is used in the context menu option, which will help the users to remove the file from the recent files list and remove the folder from the secured folders list.</comment>
+  </data>
+  <data name="RemoveText" xml:space="preserve">
+    <value>إزالة</value>
   </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>هناك اشتراك نشط متكرر على هذا الحساب. لا يلزم تجديد اشتراكات الأعمال المتكررة يدويا.</value>
@@ -20759,6 +21284,9 @@ SE-114 29 ستوكهولم
   <data name="RestoreMasterKeyText" xml:space="preserve">
     <value>استعادة ماستركي</value>
   </data>
+  <data name="RestoreToOriginalToolTipText" xml:space="preserve">
+    <value>استعادة إلى الأصلية تتطلب خطة اشتراك مدفوعة!</value>
+  </data>
   <data name="RetryPaymentText" xml:space="preserve">
     <value>أعد محاولة الدفع</value>
   </data>
@@ -20790,6 +21318,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="SearchText" xml:space="preserve">
     <value>البحث</value>
+  </data>
+  <data name="SecretDeletedText" xml:space="preserve">
+    <value>تم حذف سرك!</value>
   </data>
   <data name="SecretsAllItems" xml:space="preserve">
     <value>جميع المواد</value>
@@ -20824,8 +21355,65 @@ SE-114 29 ستوكهولم
   <data name="SecureDeleteToolStripMenuItemText" xml:space="preserve">
     <value>حذف آمن</value>
   </data>
+  <data name="SecuredMessageGuidesHead1" xml:space="preserve">
+    <value>كيف ترسل رسالة آمنة؟</value>
+  </data>
+  <data name="SecuredMessageGuidesHead2" xml:space="preserve">
+    <value>كيف يمكنني إرسال رسالة إلى عدة مستلمين؟</value>
+  </data>
+  <data name="SecuredMessageGuidesHead3" xml:space="preserve">
+    <value>كيفية قراءة الرسائل المرسلة إليك</value>
+  </data>
+  <data name="SecuredMessageGuidesHead4" xml:space="preserve">
+    <value>كيفية عرض الرسائل التي أرسلتها</value>
+  </data>
+  <data name="SecuredMessageGuidesHead5" xml:space="preserve">
+    <value>خيارات عرض الرسائل</value>
+  </data>
+  <data name="SecuredMessageGuidesHead6" xml:space="preserve">
+    <value>سجل الرسائل وعلامات التبويب</value>
+  </data>
+  <data name="SecuredMessageGuidesHead7" xml:space="preserve">
+    <value>إدارة الرسائل</value>
+  </data>
+  <data name="SecuredMessageGuidesHead8" xml:space="preserve">
+    <value>البحث عن الرسائل</value>
+  </data>
   <data name="SecuredMessageInvalidReceiverError" xml:space="preserve">
     <value>يجب أن تحتوي هذه الرسالة على مستلم</value>
+  </data>
+  <data name="SecuredMessageParaStep13" xml:space="preserve">
+    <value>اكتب رسالتك وحدد مدة العرض المطلوبة.</value>
+  </data>
+  <data name="SecuredMessageParaStep24" xml:space="preserve">
+    <value>انقر على مربع الاختيار بجانب رسالة واحدة أو عدة رسائل.</value>
+  </data>
+  <data name="SecuredMessageParaStep25" xml:space="preserve">
+    <value>نفِّذ إجراءات جماعية:</value>
+  </data>
+  <data name="SecuredMessageParaStep26" xml:space="preserve">
+    <value>وضع علامة كمقروءة</value>
+  </data>
+  <data name="SecuredMessageParaStep27" xml:space="preserve">
+    <value>وضع علامة كغير مقروءة</value>
+  </data>
+  <data name="SecuredMessageParaStep30" xml:space="preserve">
+    <value>حدِّد الرسالة أو الرسائل.</value>
+  </data>
+  <data name="SecuredMessageParaStep31" xml:space="preserve">
+    <value>انقر على حذف.</value>
+  </data>
+  <data name="SecuredMessageParaStep32" xml:space="preserve">
+    <value>الرسائل المحذوفة لن تكون مرئية لك بعد الآن، ولكن قد تظل متاحة للمستلم، وذلك حسب إعدادات عرض الرسالة المحددة.</value>
+  </data>
+  <data name="SecuredMessageParaStep34" xml:space="preserve">
+    <value>انقر على أيقونة الفلترة المتقدمة للبحث حسب البريد الإلكتروني للمستلم أو المرسل، أو الكلمات المفتاحية، أو نطاق التاريخ.</value>
+  </data>
+  <data name="SecuredMessageParaStep35" xml:space="preserve">
+    <value>تساعد عوامل التصفية في تحديد النتائج حسب علامة التبويب (الوارد، المرسلة، المحذوفة).</value>
+  </data>
+  <data name="SecuredMessageParaStep6" xml:space="preserve">
+    <value>اكتب رسالتك في مربع النص المخصص.</value>
   </data>
   <data name="SecuredMessengerFaq1" xml:space="preserve">
     <value>ما هو المرسِل الآمن من أكسكريبت؟</value>
@@ -20837,23 +21425,46 @@ SE-114 29 ستوكهولم
   <data name="SecuredMessengerFaq2" xml:space="preserve">
     <value>كيف يختلف المرسِل الآمن عن البريد الإلكتروني العادي؟</value>
   </data>
+  <data name="SecuredMessengerFaq2Ans" xml:space="preserve">
+    <value>على عكس البريد الإلكتروني العادي، الذي يمكن اعتراضه أو قراءته من قبل أطراف ثالثة، يقوم Secured Messenger بتشفير محتوى رسالتك باستخدام تشفير AES-256 قبل أن يغادر جهازك. لا يمكن فك التشفير وقراءتها إلا من قبل المستلم المقصود.</value>
+  </data>
   <data name="SecuredMessengerFaq3" xml:space="preserve">
     <value>هل يحتاج المستلِم إلى حساب أكسكريبت لقراءة الرسالة؟</value>
+  </data>
+  <data name="SecuredMessengerFaq3Ans" xml:space="preserve">
+    <value>نعم، يحتاج المستلم إلى حساب في أكسكريبت.
+سيتلقى دعوة عبر البريد الإلكتروني لإنشاء حساب لعرض الرسالة المشفّرة.</value>
   </data>
   <data name="SecuredMessengerFaq4" xml:space="preserve">
     <value>ما مدى أمان رسالتك؟ وهل يمكن لـ أكسكريبت قراءتها؟</value>
   </data>
+  <data name="SecuredMessengerFaq4Ans" xml:space="preserve">
+    <value>لا. تتبع أكسكريبت سياسة صارمة قائمة على "عدم المعرفة". يتم تشفير رسائلك على جهازك، ولا يمكن لـ أكسكريبت الوصول إلى كلمة المرور أو مفاتيح فك التشفير الخاصة بك. حتى أكسكريبت نفسها لا تستطيع الوصول إلى محتوى رسائلك.</value>
+  </data>
   <data name="SecuredMessengerFaq5" xml:space="preserve">
     <value>ما نوع التشفير الذي يستخدمه المرسِل الآمن؟</value>
+  </data>
+  <data name="SecuredMessengerFaq5Ans" xml:space="preserve">
+    <value>يستخدم Secured Messenger تشفير AES-256 في وضع CTR مع مفتاح جلسة فريد لكل رسالة.
+يتم تشفير مفتاح الجلسة باستخدام مفتاح مشتق من كلمة مرورك عبر PBKDF2-SHA512، ويتم تغليفه باستخدام طريقة AES Key Wrap المعتمدة من NIST.</value>
   </data>
   <data name="SecuredMessengerFaq6" xml:space="preserve">
     <value>هل يمكنني التحكم في مدة توفر الرسالة؟</value>
   </data>
+  <data name="SecuredMessengerFaq6Ans" xml:space="preserve">
+    <value>نعم، يمكنك اختيار جعل الرسائل قابلة للعرض مرة واحدة، أو تحديد وقت انتهاء صلاحيتها، أو السماح بعرضها إلى أجل غير مسمى.</value>
+  </data>
   <data name="SecuredMessengerFaq7" xml:space="preserve">
     <value>أين يتم تخزين بيانات رسالتي؟</value>
   </data>
+  <data name="SecuredMessengerFaq7Ans" xml:space="preserve">
+    <value>يتم تخزين بيانات الرسائل بشكل مشفّر بالكامل على خوادم آمنة تقع في الاتحاد الأوروبي، بما يتوافق تمامًا مع إرشادات GDPR و NIS2.</value>
+  </data>
   <data name="SecuredMessengerFaq8" xml:space="preserve">
     <value>ماذا يحدث للرسالة بعد تجاوزها حدّ مدة العرض؟</value>
+  </data>
+  <data name="SecuredMessengerFaq8Ans" xml:space="preserve">
+    <value>بمجرد أن تتجاوز الرسالة فترة العرض المحددة لها — سواء كانت عرضًا لمرة واحدة أو انتهاءً يعتمد على الوقت — تصبح غير قابلة للوصول إليها نهائيًا من قبل المستلم.</value>
   </data>
   <data name="SecuredMessengerGlanceHead1" xml:space="preserve">
     <value>الاتصال الخاص والآمن عبر الأجهزة</value>
@@ -20879,6 +21490,11 @@ SE-114 29 ستوكهولم
   <data name="SecuredMessengerGlanceText4" xml:space="preserve">
     <value>يتم تغليف مفتاح الرسالة باستخدام مواصفات NIST لتغليف مفاتيح AES. أما المفتاح المستخرج من الرسالة باستخدام خوارزمية PBKDF2-SHA512 فيُستخدم فقط كمفتاح لتشفير المفاتيح الأخرى.</value>
   </data>
+  <data name="SecuredMessengerGuidesNote" xml:space="preserve">
+    <value>يقدّم أكسكريبت تشفيرًا قويًا دون أي منافذ خلفية.
+إذا نسيت كلمة المرور، فستظل رسائلك المشفّرة غير قابلة للوصول.
+نظرًا لأنها مقفلة بكلمة مرورك الأصلية، ولأننا لا نقوم بتخزينها أو الوصول إليها، فلا يمكننا المساعدة في استعادتها أو فك تشفير ملفاتك.</value>
+  </data>
   <data name="SecuredMessengerLinkLabel" xml:space="preserve">
     <value>الرسائل الآمنة (Secured Messenger)</value>
   </data>
@@ -20887,6 +21503,10 @@ SE-114 29 ستوكهولم
   </data>
   <data name="SecuredMessengerSec3Text2" xml:space="preserve">
     <value>نستخدم معيار التشفير المتقدم (AES) بمفاتيح بطول 256 بت في وضع العداد (CTR)، بالإضافة إلى متجه تهيئة (IV) فريد وعشوائي لكل رسالة. يضمن ذلك أقصى درجات السرية ويمنع اكتشاف الأنماط.</value>
+  </data>
+  <data name="SecuredMessengerSec3Text3" xml:space="preserve">
+    <value>يتم تشفير كل رسالة باستخدام مفتاح جلسة جديد يتم إنشاؤه بطول 256 بت. بعد ذلك، يتم تغليف مفتاح الجلسة هذا بشكل آمن باستخدام خوارزمية AES Key Wrap وفقًا لمواصفات NIST.
+يتم اشتقاق مفتاح التغليف من كلمة المرور الخاصة بك باستخدام خوارزمية PBKDF2 مع SHA-512، ويُستخدم هذا المفتاح فقط لتشفير مفتاح الجلسة – وليس لتشفير الرسالة نفسها.</value>
   </data>
   <data name="SecuredMessengerSec3Text4" xml:space="preserve">
     <value>في التطبيق العملي، إليك كيف يعمل ذلك:</value>
@@ -21059,6 +21679,9 @@ SE-114 29 ستوكهولم
   <data name="SelectAllText" xml:space="preserve">
     <value>حدد الكل</value>
   </data>
+  <data name="SelectFileToViewFileInfoText" xml:space="preserve">
+    <value>اختر الملف لعرض معلوماته</value>
+  </data>
   <data name="SelectGroupText" xml:space="preserve">
     <value>اختر مجموعة</value>
   </data>
@@ -21164,6 +21787,9 @@ SE-114 29 ستوكهولم
   <data name="ShareKeysToolStripMenuItemText" xml:space="preserve">
     <value>مشاركة المفاتيح</value>
   </data>
+  <data name="ShareNotEncryptedText" xml:space="preserve">
+    <value>يبدو أن الملف الذي تريد مشاركته غير مشفّر...</value>
+  </data>
   <data name="ShareSecretFailed" xml:space="preserve">
     <value>فشلت مشاركة كلمة المرور!</value>
   </data>
@@ -21246,6 +21872,9 @@ SE-114 29 ستوكهولم
   <data name="SixMonthsPromtText" xml:space="preserve">
     <value>6 أشهر</value>
   </data>
+  <data name="SMSText" xml:space="preserve">
+    <value>رسالة نصية (SMS)</value>
+  </data>
   <data name="SocialMediaFollowText" xml:space="preserve">
     <value>تابعنا على وسائل التواصل الإجتماعي</value>
     <comment>Text telling readers to follow us on social media, typically with a number of icons below.</comment>
@@ -21262,6 +21891,9 @@ SE-114 29 ستوكهولم
     <value>تحديث الان!</value>
     <comment>A short label prompting the user to update AxCrypt now!</comment>
   </data>
+  <data name="SorryText" xml:space="preserve">
+    <value>عذرًا،</value>
+  </data>
   <data name="SpanishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Español (الأسبانية)</value>
     <comment>Do Not Translate</comment>
@@ -21275,6 +21907,15 @@ SE-114 29 ستوكهولم
   <data name="SslRequiredTitle" xml:space="preserve">
     <value>مطلوب اتصال آمن</value>
     <comment>The page title for the "A Secure Connection is required" page.</comment>
+  </data>
+  <data name="StandardEncryptionWarning" xml:space="preserve">
+    <value>خطتك الحالية للمشاهدة تتيح فقط العرض وفك التشفير.</value>
+  </data>
+  <data name="StandardEncryptionWarningText1" xml:space="preserve">
+    <value>قم بالترقية لفتح التشفير المتقدم والمزيد من الميزات.</value>
+  </data>
+  <data name="StandardEncryptionWarningText2" xml:space="preserve">
+    <value>خطتك الأساسية الحالية تستخدم تشفير AES-128.</value>
   </data>
   <data name="StandardsBasedLabel" xml:space="preserve">
     <value>التشفير القائم على المعايير</value>
@@ -21342,6 +21983,9 @@ SE-114 29 ستوكهولم
   <data name="StrongEncryptionTitle" xml:space="preserve">
     <value>اكسكربت موبايل</value>
     <comment>Title of "Strong encryption" slide on Onboarding screen in mobile application.</comment>
+  </data>
+  <data name="StrongerProtectionText" xml:space="preserve">
+    <value>قم بالترقية للحصول على حماية أقوى!</value>
   </data>
   <data name="StrongPasswordLabel" xml:space="preserve">
     <value>كلمة مرور قوية</value>
@@ -21447,6 +22091,9 @@ SE-114 29 ستوكهولم
   <data name="SubmitLabel" xml:space="preserve">
     <value>تقديم</value>
   </data>
+  <data name="SubmitNowText" xml:space="preserve">
+    <value>قدّم الآن</value>
+  </data>
   <data name="SubscribeForFreeForFullFunctionalityText" xml:space="preserve">
     <value>جرب الاشتراك مجانا للحصول على وظائف كاملة!</value>
   </data>
@@ -21548,6 +22195,9 @@ SE-114 29 ستوكهولم
   <data name="SubscriptionValidUntilText" xml:space="preserve">
     <value>الاشتراك صالح حتى</value>
   </data>
+  <data name="SuccessText" xml:space="preserve">
+    <value>نجاح</value>
+  </data>
   <data name="SummaryTitle" xml:space="preserve">
     <value>ملخص</value>
   </data>
@@ -21599,6 +22249,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="SwitchUserButtonText" xml:space="preserve">
     <value>تغير المستخدم</value>
+  </data>
+  <data name="SyncContactsText" xml:space="preserve">
+    <value>مزامنة جهات الاتصال!</value>
   </data>
   <data name="SyntheticWordsSuccessActivate" xml:space="preserve">
     <value>تم تفعيل الثقافة بنجاح.</value>
@@ -21681,6 +22334,12 @@ SE-114 29 ستوكهولم
   </data>
   <data name="TelLabel" xml:space="preserve">
     <value>هاتف</value>
+  </data>
+  <data name="TellUsWhatYouThinkText" xml:space="preserve">
+    <value>قل لنا برأيك</value>
+  </data>
+  <data name="TemporaryFilePathText" xml:space="preserve">
+    <value>مسار الملفات المؤقتة</value>
   </data>
   <data name="TermsAndConditionsLink" xml:space="preserve">
     <value>بالتسجيل في اكسكربت فإنك توافق على &lt;a&gt; الشروط &amp; amp؛ الشروط &lt;/a&gt;</value>
@@ -21941,6 +22600,12 @@ SE-114 29 ستوكهولم
   <data name="TextPreferenceUpdate" xml:space="preserve">
     <value>تحديث - احصل على إخطارات بجميع تحديثات برنامج اكسكربت</value>
   </data>
+  <data name="TfaCodeGeneratedText" xml:space="preserve">
+    <value>لإكمال تسجيل الدخول، أدخل رمز التحقق المكون من 6 أرقام من طريقة المصادقة المختارة.</value>
+  </data>
+  <data name="TfaPhoneText" xml:space="preserve">
+    <value>هل لا تملك هاتفك؟</value>
+  </data>
   <data name="ThanksChoosingAxCryptBusinessTitle" xml:space="preserve">
     <value>شكرًا لاختيارك اكسكربت بيزنس</value>
   </data>
@@ -21975,6 +22640,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="ToText" xml:space="preserve">
     <value>إلى:</value>
+  </data>
+  <data name="ToText1" xml:space="preserve">
+    <value>إلى</value>
   </data>
   <data name="TransactionHistoryTitle" xml:space="preserve">
     <value>تاريخ المعاملات</value>
@@ -22149,8 +22817,20 @@ SE-114 29 ستوكهولم
   <data name="TwoMinutesLabel" xml:space="preserve">
     <value>2 دقائق</value>
   </data>
+  <data name="TypeText" xml:space="preserve">
+    <value>النوع:</value>
+  </data>
+  <data name="TypeYourEmailPlaceHolderText" xml:space="preserve">
+    <value>اكتب بريدك الإلكتروني</value>
+  </data>
   <data name="TypeYourMessageHerePlaceHolderText" xml:space="preserve">
     <value>اكتب رسالتك هنا</value>
+  </data>
+  <data name="TypeYourPasswordPlaceHolderText" xml:space="preserve">
+    <value>اكتب كلمة المرور الخاصة بك</value>
+  </data>
+  <data name="TypeYourPasswordText" xml:space="preserve">
+    <value>اكتب كلمة المرور الخاصة بك مرة أخرى</value>
   </data>
   <data name="TypographyLabel" xml:space="preserve">
     <value>الطباعة</value>
@@ -22187,7 +22867,7 @@ SE-114 29 ستوكهولم
     <value>{1} لـ "{0}".</value>
   </data>
   <data name="UnregisterMailBody1" xml:space="preserve">
-    <value>هذا تأكيد على أن معرّف اكسكربت الموجود على &lt;a href="{0}" style="color: #86b96e؛ text-decoration: none؛"&gt; AxCrypt.net &lt;/a&gt; قد تم حذفه بنجاح.</value>
+    <value>هذا تأكيد على أن معرّف اكسكربت الموجود على &lt;a href="{{user_email}}" style="color: #86b96e؛ text-decoration: none؛"&gt; {{user_email}} &lt;/a&gt; قد تم حذفه بنجاح.</value>
   </data>
   <data name="UnregisterMailBody2" xml:space="preserve">
     <value>نحن حزينون لرؤيتك تذهب ونأمل أن تكون قد استمتعت بوقتك معنا!</value>
@@ -22213,6 +22893,9 @@ SE-114 29 ستوكهولم
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} تم التحديث بنجاح.</value>
   </data>
+  <data name="UpdateText" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
   <data name="UpdateUserRolesHeading" xml:space="preserve">
     <value>تحديث أدوار المستخدم</value>
   </data>
@@ -22224,6 +22907,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="UpgradeLegacyFilesMenuToolTip" xml:space="preserve">
     <value>اختر مجلدًا به ملفات AES-128 وقم بترقيتها.</value>
+  </data>
+  <data name="UpgradeNowText" xml:space="preserve">
+    <value>قم بالترقية الآن</value>
   </data>
   <data name="UpgradePromptText" xml:space="preserve">
     <value>إحصل على الأفضل!</value>
@@ -22240,6 +22926,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="UpsellBusinessForNotStandardPremiumUsersText" xml:space="preserve">
     <value>يبدو أنك أتيت من عمل. ضع في اعتبارك استخدام مستوى أعمالنا للحصول على ميزات مثل المفتاح الرئيسي وإدارة الأعمال وما إلى ذلك.</value>
+  </data>
+  <data name="UpToDateText" xml:space="preserve">
+    <value>أنت مُحدَّث إلى آخر إصدار!</value>
   </data>
   <data name="UsageOtherText" xml:space="preserve">
     <value>الاخري</value>
@@ -22376,6 +23065,9 @@ SE-114 29 ستوكهولم
   <data name="UseNecessaryCookiesOnlyPromptText" xml:space="preserve">
     <value>استخدم ملفات تعريف الارتباط الضرورية فقط</value>
   </data>
+  <data name="UserActivityTitle" xml:space="preserve">
+    <value>نشاط المستخدم</value>
+  </data>
   <data name="UserEmailChangedNotifyEventText" xml:space="preserve">
     <value>تم تغيير البريد الإلكتروني لحسابك بنجاح!</value>
   </data>
@@ -22385,11 +23077,26 @@ SE-114 29 ستوكهولم
   <data name="UserNamePrompt" xml:space="preserve">
     <value>اسم المستخدم</value>
   </data>
+  <data name="UserPromptOnAddingExcludeFolder" xml:space="preserve">
+    <value>هل ترغب في فك تشفير الملفات داخل المجلد الفرعي المستبعد؟</value>
+  </data>
+  <data name="UserPromptOnRemovingExcludeFolder" xml:space="preserve">
+    <value>المجلد المحدد موجود حاليًا في قائمة المستبعدة. هل ترغب في تأمينه بدلاً من ذلك؟</value>
+  </data>
   <data name="UserSettingsFormatChangeNeedsReset" xml:space="preserve">
     <value>لقد قمت بتحديث اكسكربت. لسوء الحظ ، يجب إعادة ضبط التكوين الخاص بك. بعد إعادة التشغيل ، ستفقد تفضيلاتك وإعداداتك للأسف. نعتذر عن الإزعاج. لا تزال ملفاتك المشفرة آمنة ولا بأس بها.</value>
   </data>
   <data name="usingText" xml:space="preserve">
     <value>باستخدام</value>
+  </data>
+  <data name="ValidEmailAddressText" xml:space="preserve">
+    <value>يرجى إدخال عنوان بريد إلكتروني صالح!</value>
+  </data>
+  <data name="ValidUntilText" xml:space="preserve">
+    <value>صالح حتى:</value>
+  </data>
+  <data name="VaultSettingsTitle" xml:space="preserve">
+    <value>إعدادات الخزنة</value>
   </data>
   <data name="VerificationEmailSentTitle" xml:space="preserve">
     <value>تم إرسال رابط التحقق</value>
@@ -22409,6 +23116,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>التحقق من الملف والتحقق منه</value>
+  </data>
+  <data name="VerifyMfaText" xml:space="preserve">
+    <value>التحقق متعدد العوامل</value>
   </data>
   <data name="VerifyPasswordPrompt" xml:space="preserve">
     <value>اكد كلمة المرور</value>
@@ -22430,6 +23140,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="VisibleUntilText" xml:space="preserve">
     <value>مرئي حتى:</value>
+  </data>
+  <data name="VisitOur" xml:space="preserve">
+    <value>يرجى زيارة موقعنا</value>
   </data>
   <data name="WarningTitle" xml:space="preserve">
     <value>تحذير!</value>
@@ -22772,6 +23485,9 @@ SE-114 29 ستوكهولم
   <data name="WrongPassphrase" xml:space="preserve">
     <value>كلمة مرور خاطئة. حاول مرة اخرى.</value>
   </data>
+  <data name="WrongVerificationCode" xml:space="preserve">
+    <value>رمز التحقق غير صحيح. يرجى المحاولة مرة أخرى.</value>
+  </data>
   <data name="WrongVerificationCodeFormat" xml:space="preserve">
     <value>يجب أن يتكون رمز التحقق من 6 أرقام بالضبط.</value>
   </data>
@@ -22819,8 +23535,20 @@ SE-114 29 ستوكهولم
   <data name="YearlySubscriptionTitle" xml:space="preserve">
     <value>سنوي</value>
   </data>
+  <data name="YesDecryptText" xml:space="preserve">
+    <value>نعم، فك التشفير</value>
+  </data>
   <data name="YesLabel" xml:space="preserve">
     <value>نعم</value>
+  </data>
+  <data name="YetText" xml:space="preserve">
+    <value>حتى الآن،</value>
+  </data>
+  <data name="YourEmailText" xml:space="preserve">
+    <value>بريدك الإلكتروني</value>
+  </data>
+  <data name="YourPasswordText" xml:space="preserve">
+    <value>كلمة المرور الخاصة بك:</value>
   </data>
   <data name="YourSecurityMattersHeading" xml:space="preserve">
     <value>أمانك &lt;span&gt;يهمّنا&lt;/span&gt;</value>
