@@ -9,6 +9,7 @@
 @inject LogOnViewModel LogOnViewModel
 @inject ICssService CssService
 @inject NavigationManager navigationManager
+@inject ImportPrivateKeyViewModel ImportViewModel
 
 @{
     string arabic = Core.Resolve.UserSettings.CultureName == "ar" ? "arabic-class" : "";
@@ -66,7 +67,6 @@
 
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.InvitePopup />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.Upgrade />
-                    <AxCrypt.App.Shared.Desktop.Components.PopupDialog.ImportPrivatePasswordDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.RenewSubscriptionDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.FilePasswordDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.VerifyAccountDialog />
@@ -88,6 +88,7 @@
                 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.GlobalPopupDialog />
                 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.UpgradeVersionDialog />
                 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.About />
+                <AxCrypt.App.Shared.Desktop.Components.PopupDialog.ImportPrivatePasswordDialog />
             </main>
         </div>
     }
@@ -104,6 +105,7 @@
         InitiateDelayToRenderPage();
         CanShowSignInPage = LogOnViewModel.IsVisible;
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdateSignInPageState;
+        ImportViewModel.ImportPrivateKeyDialog.OnDialogVisibilityChanged += UpdateUIState;
         LogOnViewModel.OnMFADialogVisibilityChanged += UpdateSignInPageState;
         LogOnViewModel.OnSubscriptionChanged += UpdateSubscriptionState;
         SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
@@ -173,7 +175,7 @@
         UpdateUIState();
     }
 
-    private async void UpdateUIState()
+    private async void UpdateUIState(bool isVisible = false)
     {
         await InvokeAsync(() =>
         {

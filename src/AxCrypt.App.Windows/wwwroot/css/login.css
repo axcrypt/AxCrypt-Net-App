@@ -1,11 +1,14 @@
 ﻿@charset "UTF-8";
 #content-wrap {
-  margin: 5% auto;
+  margin: 3% auto;
   padding: 0 50px;
 }
 
 .reg-sec {
   margin: 2.5% auto !important;
+}
+.reg-sec .form-field {
+  margin: 1% 0 2% !important;
 }
 
 .login-title, .reg-tle {
@@ -18,11 +21,11 @@
 .login-title {
   width: max-content;
   padding: 45px 55px 50px 0;
-  margin: 0 0 5% 0;
+  /* margin: 0 0 5% 0;*/
 }
 
 .reg-tle {
-  padding: 40px 45px 30px 0;
+  padding: 40px 45px 20px 0;
 }
 
 .che-txt {
@@ -49,7 +52,7 @@
 
 .signup-sec, .signup-sec input {
   color: #48772C;
-  margin: 3% 10% 3% 0% !important;
+  margin: 2% 10% 2% 0% !important;
 }
 
 .grn-clr {
@@ -62,13 +65,13 @@
 }
 
 .left-section {
-  width: 42.3%;
+  width: 43.3%;
   float: left;
   padding: 5px 20px;
 }
 
 .right-section {
-  width: 57.7%;
+  width: 56.7%;
   float: right;
   margin: 0 auto;
   max-width: 57.7%;
@@ -373,6 +376,39 @@ input[type=password] {
   margin: 0;
 }
 
+.dropup-content {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  width: 311px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  z-index: 10;
+  background-color: white;
+}
+
+.dropup-content a {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  color: #cacaca !important;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.dropup-content a:hover {
+  background-color: #E8FEDE;
+  color: #48772C !important;
+}
+
 @media (max-width: 768px) {
   .login-btn {
     width: 100%;
@@ -576,6 +612,7 @@ input[type=password] {
 @media (min-width: 1500px) {
   .reg-tle {
     width: max-content;
+    font-size: 38px !important;
   }
 }
 @media (max-width: 1386px) {

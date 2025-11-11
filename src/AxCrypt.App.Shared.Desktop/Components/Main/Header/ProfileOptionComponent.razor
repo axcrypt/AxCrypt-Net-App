@@ -127,9 +127,7 @@
     <div class="font-medium left-align" id="key-management-popup">
         <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="() => ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportSomeonesSharingKey)">@Texts.ImportSomeonesPublicSharingKeyText</dd>
         <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="() => ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportMySharingKey)">@Texts.ExportSharingKeyToolStripMenuItemText</dd>
-        <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async () => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID); })">@Texts.ImportMyPrivateKeyToolStripMenuItemText</dd>
         <dd class="act-clr @ProfileViewModel.GetDisabledClass(!ProfileViewModel.Account.IsLoggedOn)" @onclick="() => ProfileViewModel.HandleImportAndExportKeys(KeyManagement.ExportAxCryptIDAndSharingKeyPair)">@Texts.ExportMyPrivateKeyToolStripMenuItemText</dd>
-        <dd class="act-clr @ProfileViewModel.GetDisabledClass(ProfileViewModel.Account.IsLoggedOn)" @onclick="@(async () => { await ProfileViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID); })">@Texts.CreateAccountToolStripMenuItemText</dd>
     </div>
 </div>
 

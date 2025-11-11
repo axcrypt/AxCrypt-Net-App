@@ -7,6 +7,7 @@ using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
+
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.ViewModels;
@@ -56,7 +57,11 @@ public class LogOnViewModel : ViewModelBase
         {
             await Task.Delay(1000);
         }
-        InitiateProgressIndicator();
+
+        if(PageResult != DialogResult.Cancel)
+        {
+            InitiateProgressIndicator();
+        }
 
         ShowGetStartedCarousel = false;
         IsVisible = false;

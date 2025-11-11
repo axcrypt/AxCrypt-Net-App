@@ -157,6 +157,7 @@ namespace AxCrypt.App.Shared.Services
         {
             if (!_logOnViewModel.IsVisible)
             {
+                _logOnViewModel.PageResult = DialogResult.None;
                 LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
                 await _logOnViewModel.ShowLogOnDialog(logOnModel, _mainViewModel);
             }
@@ -173,7 +174,8 @@ namespace AxCrypt.App.Shared.Services
 
             if (_logOnViewModel.PageResult == DialogResult.Cancel)
             {
-                await new ApplicationManager().StopAndExit();
+                return;
+                //await new ApplicationManager().StopAndExit();
             }
 
             if (_logOnViewModel.PageResult != DialogResult.OK || _logOnViewModel.LogOnAccountModel.PasswordText.Length == 0)

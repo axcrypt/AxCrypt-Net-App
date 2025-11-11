@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
@@ -50,6 +51,7 @@ public class ProfileViewModel : ViewModelBase
     }
 
     public string ValidFormatted => Account.DaysLeft == 0 ? "0 days left" : New<LicensePolicy>().Expiration.ToString("dd MMMM yyyy", System.Globalization.CultureInfo.CurrentCulture);
+
     public ProfileViewModel()
     {
         _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
@@ -112,7 +114,8 @@ public class ProfileViewModel : ViewModelBase
             case KeyManagement.ImportAxCryptID:
                 if (!_logOnViewModel.IsLoggedOn)
                 {
-                    _logOnViewModel.ImportPrivatePasswordDialog.Show();
+                    ImportPrivateKeyViewModel importPrivateKeyDialog = AxCServiceProvider.GetService<ImportPrivateKeyViewModel>();
+                    await importPrivateKeyDialog.ShowDialogAsync(Resolve.UserSettings, Resolve.KnownIdentities);
                 }
                 break;
 
@@ -123,6 +126,7 @@ public class ProfileViewModel : ViewModelBase
             case KeyManagement.CreateAxCryptID:
                 if (!_logOnViewModel.IsLoggedOn)
                 {
+                    _registerViewModel.DialogResult = DialogResult.None;
                     _registerViewModel.ShowDialog(string.Empty, EmailAddress.Empty);
                 }
                 break;

@@ -1,6 +1,5 @@
-﻿using AxCrypt.App.Shared.Helpers;
+﻿using AxCrypt.App.Shared.Services.UI;
 using AxCrypt.App.Shared.Utility;
-using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -10,19 +9,37 @@ using System.Threading.Tasks;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels;
 
-public class ImportPrivateKeyViewModel
+public class ImportPrivateKeyViewModel : ViewModelBase
 {
     private ImportPrivateKeysViewModel? _viewModel;
-    private LogOnViewModel _logOnViewModel;
 
     public ImportPrivateKeyViewModel()
     {
-        _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
+        PageResult = DialogResult.None;
+        ImportPrivateKeyDialog = new CommonDialogService();
     }
 
-    public void ShowDialog(UserSettings userSettings, KnownIdentities knownIdentities)
+    public CommonDialogService ImportPrivateKeyDialog
+    { get { return GetProperty<CommonDialogService>(nameof(ImportPrivateKeyDialog)); } set { SetProperty(nameof(ImportPrivateKeyDialog), value); } }
+
+    public async Task ShowDialogAsync(UserSettings userSettings, KnownIdentities knownIdentities)
     {
+        PageResult = DialogResult.None;
+        PrivateKeyFileName = string.Empty;
+        PasswordText = string.Empty;
+        ErrorMessage = string.Empty;
         _viewModel = new ImportPrivateKeysViewModel(userSettings, knownIdentities);
+
+        Initialized();
+
+        ImportPrivateKeyDialog.Show();
+
+        while (PageResult == DialogResult.None)
+        {
+            await Task.Delay(1000);
+        }
+
+        ImportPrivateKeyDialog.Close();
     }
 
     private void Initialized()
@@ -35,21 +52,22 @@ public class ImportPrivateKeyViewModel
     public bool ShowPassPhrase { get; set; }
     public string? PrivateKeyFileName { get; set; }
     public string? PasswordText { get; set; }
-    private DialogResult PageResult { get; set; }
+    public DialogResult PageResult { get; set; }
 
     public async void ButtonOk_Click(EventArgs e)
     {
+        _viewModel!.PasswordText = PasswordText!;
         if (!AdHocValidationDueToMonoLimitations())
         {
             PageResult = DialogResult.None;
             return;
         }
 
-        _viewModel!.PasswordText = PasswordText!;
         await _viewModel.ImportFile.ExecuteAsync(null!);
         if (!_viewModel.ImportSuccessful)
         {
             PageResult = DialogResult.None;
+            ErrorMessage = Texts.FailedPrivateImport;
             return;
         }
         PageResult = DialogResult.OK;
@@ -58,54 +76,40 @@ public class ImportPrivateKeyViewModel
     private bool AdHocValidationDueToMonoLimitations()
     {
         bool validated = true;
+        try
+        {
+            if (_viewModel![nameof(ImportPrivateKeysViewModel.PrivateKeyFileName)].Length > 0)
+            {
+                ErrorMessage = Texts.FileNotFound;
+                validated = false;
+            }
+            else
+            {
+                ErrorMessage = "";
+            }
 
-        if (_viewModel![nameof(ImportPrivateKeysViewModel.PasswordText)].Length > 0)
-        {
-            ErrorMessage = Texts.WrongPassphrase;
-            validated = false;
-        }
-        else
-        {
-            ErrorMessage = "";
-        }
+            if (_viewModel[nameof(ImportPrivateKeysViewModel.PasswordText)].Length > 0)
+            {
+                ErrorMessage = Texts.WrongPassphrase;
+                validated = false;
+            }
+            else
+            {
+                ErrorMessage = "";
+            }
 
-        if (_viewModel[nameof(ImportPrivateKeysViewModel.PrivateKeyFileName)].Length > 0)
-        {
-            ErrorMessage = Texts.FileNotFound;
-            validated = false;
+            return validated;
         }
-        else
+        catch (Exception ex)
         {
-            ErrorMessage = "";
+            ErrorMessage = ex.ToString();
+            return validated;
         }
-
-        return validated;
     }
-
-    //private void _browsePrivateKeyFileButton_Click(object sender, EventArgs e)
-    //{
-    //    using (OpenFileDialog ofd = new OpenFileDialog())
-    //    {
-    //        ofd.Title = Texts.ImportPrivateKeysFileSelectionTitle;
-    //        ofd.Multiselect = false;
-    //        ofd.CheckFileExists = true;
-    //        ofd.CheckPathExists = true;
-    //        ofd.DefaultExt = New<IRuntimeEnvironment>().AxCryptExtension;
-    //        ofd.Filter = Texts.FileFilterDialogFilterPatternWin.InvariantFormat("." + ofd.DefaultExt, Texts.FileFilterFileTypeAxCryptIdFiles, Texts.FileFilterFileTypeAllFiles);
-    //        DialogResult result = ofd.ShowDialog();
-    //        if (result == DialogResult.OK)
-    //        {
-    //            _privateKeyFileTextBox.Text = ofd.FileName;
-    //            _privateKeyFileTextBox.SelectionStart = ofd.FileName.Length;
-    //            _privateKeyFileTextBox.SelectionLength = 1;
-    //            _passphraseTextBox.Focus();
-    //        }
-    //    }
-    //}
 
     public async Task BrowsePrivateKeyFile()
     {
-        FileResult fileResult = await FilePicker.Default.PickAsync();
+        FileResult? fileResult = await FilePicker.Default.PickAsync();
         if (fileResult != null)
         {
             PrivateKeyFileName = fileResult.FullPath;

@@ -239,10 +239,15 @@ namespace AxCrypt.Core.UI.ViewModel
                 return dialogResult;
             }
 
-            if (New<IInternetState>().Connected)
+            if (New<KnownIdentities>().IsLoggedOn)
             {
                 return PopupButtons.Cancel;
             }
+
+            if (New<IInternetState>().Connected)
+            {
+                return PopupButtons.Cancel;
+            }   
 
             return PopupButtons.Exit;
         }

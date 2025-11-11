@@ -1,15 +1,23 @@
 ﻿@page "/login"
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Models
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.App.Shared.Utility
 @using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.Content
 @using AxCrypt.Core
+@using AxCrypt.Core.Crypto
 @using AxCrypt.Core.UI.ViewModel
 @using Microsoft.Maui.ApplicationModel
 @using Microsoft.Maui.Devices
 
 @inject IJSRuntime JSRuntime
 @inject LogOnViewModel LogOnViewModel
+@inject RegisterViewModel RegisterModel
+@inject ProfileViewModel profileViewModel
+
+
+@inject NavigationManager navigationManager
 
 @if (LogOnViewModel.LogOnAccountModel != null)
 {
@@ -27,46 +35,82 @@
                         <label>@Texts.EmailLabel</label>
                         @if (!IsEmailReadOnly)
                         {
-                            <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" placeholder=@Texts.TypeYourEmailPlaceHolderText tabindex="1" />
+                            <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail"
+                                class="form-control email-img" placeholder=@Texts.TypeYourEmailPlaceHolderText tabindex="1" />
                         }
-                        else {
-                            <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail" class="form-control email-img" tabindex="1" readonly="readonly" />
+                        else
+                        {
+                            <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail"
+                                class="form-control email-img" tabindex="1" readonly="readonly" />
                         }
                     </div>
                 </div>
                 @if (!string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail))
                 {
                     <div style="width:100%;">
-                        <a href="" class="nav-link grn-clr" style="float:right;" tabindex="3" @onclick="async ()=> await LogOnViewModel.ClearAllSettingsAndRestartAsync()">@Texts.SwitchUserButtonText</a>
+                        <a href="" class="nav-link grn-clr" style="float:right;" tabindex="3"
+                            @onclick="async () => await LogOnViewModel.ClearAllSettingsAndRestartAsync()">@Texts.SwitchUserButtonText</a>
                     </div>
                 }
                 <div>
                     <label>@Texts.PassphrasePrompt</label>
                     <div style="position:relative; display:inline-block; width:100%;">
                         <i class="@PasswordIconClass" @onclick="TogglePassword"></i>
-                        <input type="@PasswordInputType" id="password-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img" placeholder=@Texts.TypeYourPasswordPlaceHolderText tabindex="2" />
+                        <input type="@PasswordInputType" id="password-txtbox"
+                            @bind-value="LogOnViewModel.LogOnAccountModel.PasswordText" class="form-control pswd-img"
+                            placeholder=@Texts.TypeYourPasswordPlaceHolderText tabindex="2" />
                     </div>
                 </div>
                 <br />
 
-                <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;" tabindex="3">@Texts.LogInText</button>
-                <div class="signup-link">
-                    <div style="display:inline-flex; align-items:center;">
-                        <span class="che-txt">@Texts.DontaccountText</span>
-                        <NavLink class="nav-link grn-clr" @onclick="CreateNewAccountLabel_LinkClicked" tabindex="4">
-                            <span>@Texts.PromptSignUp</span>
-                        </NavLink>
-                    </div><br />
-                    <NavLink class="nav-link grn-clr" @onclick="ForgetPassword_ButtonClicked" tabindex="5">
-                        <span>@Texts.PasswordResetShortLink?</span>
-                    </NavLink>
-                </div>
-
-                <div class="che-txt text-center" style="color:#494949; margin-top:20px;">
-                    @Texts.AgreeOurText <NavLink class="grn-clr" @onclick="RedirectToPrivacyPolicy">@Texts.PrivacyPolicyLinkLabel</NavLink> @Texts.AndText 
-                    <NavLink class="grn-clr" @onclick="RedirectToTermsOfUse">@Texts.TermsOfUseLinkLabel</NavLink>
-                </div>
+                <button class="button success grn-bg whte-clr" style="width:100%; margin: 20px 0px;"
+                    tabindex="3">@Texts.LogInText</button>
             </EditForm>
+
+            <div style="display: flex;align-items: flex-start; width: 90%;">
+                <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
+                <span style="margin: -13px 10px 13px;padding-top: -4px;">or</span>
+                <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
+            </div>
+            <div id="OtherOptions-Section" style="text-align: center;border-radius: 4px;">
+                <div class="dropdown" style="padding-bottom: 10px;">
+                    <div class="action-buttons" style="display: inline-flex;">
+                        <button @onclick="ToggleDropdown"
+                            style="width: 310px; color:  #48772c;font-weight: 600;text-align: center;">
+                            Other log in options
+                            <img class="drp-dwn up" id="lang-action-btn-arw" src="" alt="dropdown-img"
+                                style="max-height: 15px;" />
+                        </button>
+                    </div>
+                    @if (showDropdown)
+                    {
+                        <div class="dropup-content hide-model-popup">
+                            <a @onclick="async () => await InitiateImportAxCryptIdOnSignIn()"
+                                style="padding: 8px;">@Texts.ImportMyPrivateKeyToolStripMenuItemText</a>
+                            <a @onclick="OpenCreateAxCryptIdOnSignIn" style="padding: 8px;">@Texts.TitleCreateAxCryptIdTitle</a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="signup-link">
+                <div style="display:inline-flex; align-items:center;">
+                    <span class="che-txt">@Texts.DontaccountText</span>
+                    <NavLink class="nav-link grn-clr" @onclick="CreateNewAccountLabel_LinkClicked" tabindex="4">
+                        <span>@Texts.PromptSignUp</span>
+                    </NavLink>
+                </div><br />
+                <NavLink class="nav-link grn-clr" @onclick="ForgetPassword_ButtonClicked" tabindex="5">
+                    <span>@Texts.PasswordResetShortLink?</span>
+                </NavLink>
+            </div>
+
+            <div class="che-txt text-center" style="color:#494949; margin-top:20px;">
+                @Texts.AgreeOurText <NavLink class="grn-clr" @onclick="RedirectToPrivacyPolicy">
+                    @Texts.PrivacyPolicyLinkLabel</NavLink> @Texts.AndText
+                <NavLink class="grn-clr" @onclick="RedirectToTermsOfUse">@Texts.TermsOfUseLinkLabel</NavLink>
+            </div>
+
         </article>
         <article class="right-section">
             <div class="signin-right-img">
@@ -84,11 +128,18 @@
     private string PasswordInputType => isPasswordVisible ? "text" : "password";
 
     private string PasswordIconClass =>
-        isPasswordVisible ? "fa-eye-slash" : "fa-eye";
+    isPasswordVisible ? "fa-eye-slash" : "fa-eye";
 
     private void TogglePassword()
     {
         isPasswordVisible = !isPasswordVisible;
+    }
+
+    private bool showDropdown = false;
+
+    private void ToggleDropdown()
+    {
+        showDropdown = !showDropdown;
     }
 
     public bool IsEmailReadOnly { get; set; }
@@ -101,10 +152,14 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            string autoFocusFiled = string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? "useremail-txtbox" :
+            "password-txtbox";
+            await JSRuntime.InvokeVoidAsync("loginFunctions.focusElement", autoFocusFiled);
+        }
 
-        string autoFocusFiled = string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? "useremail-txtbox" : "password-txtbox";
-        await JSRuntime.InvokeVoidAsync("loginFunctions.focusElement", autoFocusFiled);
+        await base.OnAfterRenderAsync(firstRender);
     }
 
     private async void ButtonLogIn_Click()
@@ -183,12 +238,38 @@
     private async Task<bool> AdHocValidatePassphraseForFile()
     {
         LogOnViewModel.ErrorMessage = "";
-        if (!await LogOnViewModel.LogOnAccountModel.ValidateItemAsync(nameof(LogOnViewModel.LogOnAccountModel.EncryptedFileFullName)))
+        if (!await
+        LogOnViewModel.LogOnAccountModel.ValidateItemAsync(nameof(LogOnViewModel.LogOnAccountModel.EncryptedFileFullName)))
         {
             LogOnViewModel.ErrorMessage = Texts.WrongPassphrase;
             return false;
         }
         return true;
+    }
+
+    private async Task InitiateImportAxCryptIdOnSignIn()
+    {
+        await profileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID);
+        if (LogOnViewModel.IsLoggedOn)
+        {
+            LogOnViewModel.PageResult = DialogResult.OK;
+        }
+    }
+
+    private void OpenCreateAxCryptIdOnSignIn()
+    {
+        LogOnViewModel.PageResult = DialogResult.Cancel;
+        Task.Run(async () =>
+        {
+            await profileViewModel.HandleImportAndExportKeys(KeyManagement.CreateAxCryptID);
+
+            if (!RegisterModel.ShowSignUp && !LogOnViewModel.IsVisible)
+            {
+                LogOnViewModel.PageResult = DialogResult.None;
+                await LogOnViewModel.FileOperationViewModel.IdentityViewModel.AskForLogOnPassphrase.ExecuteAsync(LogOnIdentity.Empty);
+            }
+
+        });
     }
 
     private void CreateNewAccountLabel_LinkClicked(EventArgs e)

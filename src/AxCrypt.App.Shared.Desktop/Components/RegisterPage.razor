@@ -1,7 +1,9 @@
-﻿@using AxCrypt.App.Shared.Models
+﻿@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Models
 @using AxCrypt.Content
 
 @inject RegisterViewModel Register
+@inject ProfileViewModel profileViewModel
 
 <section class="content">
     <article class="left-section reg-sec" id="content-wrap">
@@ -11,30 +13,60 @@
         <EditForm Model="@Register.CreateAccountModel" class="signup-sec">
             <div class="form-field">
                 <label>@Texts.YourEmailText</label>
-                <input type="email" @bind-value="Register.CreateAccountModel.UserEmail" class="form-control email-img" placeholder="Enter your email" />
+                <input type="email" @bind-value="Register.CreateAccountModel.UserEmail" class="form-control email-img"
+                    placeholder="Enter your email" />
             </div>
             <div class="form-field">
                 <label>@Texts.CreatePasswordText:</label>
-                <input type="@passwordFiledType" @bind-value="Register.CreateAccountModel.PasswordText" class="form-control pswd-img" placeholder="Create your password" />
+                <input type="@passwordFiledType" @bind-value="Register.CreateAccountModel.PasswordText"
+                    class="form-control pswd-img" placeholder="Create your password" />
             </div>
             <div>
                 <label>@Texts.VerifyPasswordPrompt:</label>
-                <input type="@passwordFiledType" @bind-value="Register.CreateAccountModel.Verification" class="form-control pswd-img" placeholder="Type your password one more time" />
+                <input type="@passwordFiledType" @bind-value="Register.CreateAccountModel.Verification"
+                    class="form-control pswd-img" placeholder="Type your password one more time" />
             </div>
             <div class="check-bx">
-                <input type="checkbox" style="margin-right: 5px !important;" @bind="canShowPassword" @onclick="async() => await ToggleShowPassword()" />
+                <input type="checkbox" style="margin-right: 5px !important;" @bind="canShowPassword"
+                    @onclick="async () => await ToggleShowPassword()" />
                 <span class="che-txt">@Texts.ShowPasswordOptionPrompt</span>
             </div>
 
-            <button class="button grn-bg whte-clr" style="width:100%; margin: 20px 0px;" @onclick="async(e) => await Register.ButtonOk_Click(e)">@Texts.PromptSignUp</button>
-
-            <div class="signup-link">
-                <NavLink class="nav-link" href="mailto:support@axcrypt.net">
-                    <span class="che-txt">Do you need any help?</span>
-                    <span class="grn-clr">@Texts.ContactUsHeading!</span>
-                </NavLink>
-            </div>
+            <button class="button grn-bg whte-clr" style="width:100%; margin: 20px 0px;"
+                @onclick="async (e) => await Register.ButtonOk_Click(e)">@Texts.PromptSignUp</button>
         </EditForm>
+
+        <div style="display: flex;align-items: flex-start; width: 90%;">
+            <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
+            <span style="margin: -13px 10px 13px;padding-top: -4px;">or</span>
+            <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
+        </div>
+        <div id="OtherOptions-Section" style="text-align: center;border-radius: 4px;">
+            <div class="dropdown">
+                <div class="action-buttons">
+                    <button @onclick="ToggleDropdown" style="width: 310px; color:  #48772c;font-weight: 600;">
+                        Other sign up options
+                        <img class="drp-dwn down" id="lang-action-btn-arw" src="" alt="dropdown-img"
+                            style="max-height: 15px;" />
+                    </button>
+                </div>
+                @if (showDropdown)
+                {
+                    <div class="dropup-content hide-model-popup">
+                        <a @onclick="async () => await InitiateImportAxCryptIdOnRegister()"
+                            style="padding: 8px;">@Texts.ImportMyPrivateKeyToolStripMenuItemText</a>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="signup-link">
+            <NavLink class="nav-link" href="mailto:support@axcrypt.net">
+                <span class="che-txt">Do you need any help?</span>
+                <span class="grn-clr">@Texts.ContactUsHeading!</span>
+            </NavLink>
+        </div>
+
     </article>
     <article class="right-section">
         <div class="signin-right-img"></div>
@@ -51,12 +83,11 @@
         base.OnInitialized();
     }
 
-    private async Task RefreshComponentAsync()
+    private bool showDropdown = false;
+
+    private void ToggleDropdown()
     {
-        await InvokeAsync(() =>
-        {
-            StateHasChanged(); // Refresh UI
-        });
+        showDropdown = !showDropdown;
     }
 
     async Task ToggleShowPassword()
@@ -71,5 +102,20 @@
 
         passwordFiledType = "password";
         await RefreshComponentAsync();
+    }
+
+    private async Task InitiateImportAxCryptIdOnRegister()
+    {
+        await profileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID);
+        Register.ShowSignUp = false;
+        Register.DialogResult = Utility.DialogResult.Abort;
+    }
+
+    private async Task RefreshComponentAsync()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 }

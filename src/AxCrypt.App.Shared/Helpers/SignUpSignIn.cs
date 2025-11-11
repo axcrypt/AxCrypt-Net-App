@@ -39,7 +39,8 @@ public class SignUpSignIn
 
         viewModel.CreateAccount = (e) =>
         {
-            _registerModel.ShowDialog(String.Empty, EmailAddress.Parse(UserEmail));
+            _registerModel.DialogResult = DialogResult.None;
+            _registerModel.ShowDialog(string.Empty, EmailAddress.Parse(UserEmail));
             DialogResult result = _registerModel.DialogResult;
             if (result != DialogResult.OK)
             {
