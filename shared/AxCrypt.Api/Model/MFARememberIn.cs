@@ -8,5 +8,7 @@
         SixHours,
         TwelveHours,
         OneDay,
+        TwoDays,
+        OneWeek
     }
 }

@@ -118,7 +118,9 @@ namespace AxCrypt.App.Shared
                 new KeyValuePair<string, string>("3 Hours", (MFARememberIn.ThreeHours).ToString()),
                 new KeyValuePair<string, string>("6 Hours", (MFARememberIn.SixHours).ToString()),
                 new KeyValuePair<string, string>("12 Hours", (MFARememberIn.TwelveHours).ToString()),
-                new KeyValuePair<string, string>("1 Day", (MFARememberIn.OneDay).ToString())
+                new KeyValuePair<string, string>("1 Day", (MFARememberIn.OneDay).ToString()),
+                new KeyValuePair<string, string>("2 Days", (MFARememberIn.TwoDays).ToString()),
+                new KeyValuePair<string, string>("7 Days", (MFARememberIn.OneWeek).ToString()),
             };
         }
 
@@ -132,6 +134,8 @@ namespace AxCrypt.App.Shared
                 case MFARememberIn.SixHours: return expiryTimeofMFA.AddHours(6);
                 case MFARememberIn.TwelveHours: return expiryTimeofMFA.AddHours(12);
                 case MFARememberIn.OneDay: return expiryTimeofMFA.AddDays(1);
+                case MFARememberIn.TwoDays: return expiryTimeofMFA.AddDays(2);
+                case MFARememberIn.OneWeek: return expiryTimeofMFA.AddDays(7);
                 default: throw new ArgumentOutOfRangeException(nameof(rememberUntil));
             }
         }
