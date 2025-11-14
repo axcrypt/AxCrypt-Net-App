@@ -159,6 +159,12 @@ namespace AxCrypt.App.Shared.Services
             if (!_logOnViewModel.IsVisible)
             {
                 _logOnViewModel.PageResult = DialogResult.None;
+
+                if (WorkUserProfile.UserEmail == "" && Resolve.UserSettings.UserEmail != "")
+                {
+                    WorkUserProfile.SetUser(New<IUserProfilesStore>().AppRootFolder, Resolve.UserSettings.UserEmail);
+                }
+
                 Resolve.UserSettings.UserEmail = WorkUserProfile.UserEmail;
                 LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
                 await _logOnViewModel.ShowLogOnDialog(logOnModel, _mainViewModel);

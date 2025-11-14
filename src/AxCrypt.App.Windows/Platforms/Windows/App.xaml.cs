@@ -60,8 +60,7 @@ namespace AxCrypt.App.Windows.WinUI
                 return null;
             }
 
-            _workFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"AxCrypt" + Path.DirectorySeparatorChar);
-            //_workFolderPath = Path.Combine(FileSystem.Current.CacheDirectory, @"AxCrypt" + Path.DirectorySeparatorChar);
+            _workFolderPath = Path.Combine(FileSystem.AppDataDirectory, @"AxCrypt" + Path.DirectorySeparatorChar);
 
             RuntimeEnvironment.RegisterTypeFactories();
             TypeMap.Register.Singleton<FileLocker>(() => new FileLocker());
@@ -71,7 +70,11 @@ namespace AxCrypt.App.Windows.WinUI
             TypeMap.Register.Singleton<INow>(() => new Now());
             TypeMap.Register.Singleton<IReport>(() => new Report(_workFolderPath, 1000000));
 
+            string baseFolderPath = _workFolderPath;
             _workFolderPath = WorkUserProfile.GetUserWorkFolderOnAppStart(_workFolderPath) ?? throw new ApplicationException("App failed to start with invalid user work folder!");
+
+            SafeMoveDirectory(_workFolderPath);
+            SafeMoveDirectFiles(baseFolderPath, _workFolderPath);
 
             EmbeddedResourceManager.Initialize();
 
@@ -423,5 +426,85 @@ namespace AxCrypt.App.Windows.WinUI
                     break;
             }
         }
+
+        private static void SafeMoveDirectory(string destDir)
+        {
+            string sourceDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"AxCrypt" + Path.DirectorySeparatorChar);
+            if (!Directory.Exists(sourceDir))
+                return;
+
+            if (!Directory.Exists(destDir))
+                Directory.CreateDirectory(destDir);
+
+            try
+            {
+                CopyDirectory(sourceDir, destDir);
+                Directory.Delete(sourceDir, true);
+            }
+            catch
+            {
+                // Rollback if needed
+                if (Directory.Exists(destDir))
+                    Directory.Delete(destDir, true);
+
+                return;
+            }
+        }
+
+        private static void CopyDirectory(string sourceDir, string destDir)
+        {
+            Directory.CreateDirectory(destDir);
+
+            foreach (string file in Directory.GetFiles(sourceDir))
+            {
+                string target = Path.Combine(destDir, Path.GetFileName(file));
+                File.Copy(file, target, overwrite: false);
+            }
+
+            foreach (string dir in Directory.GetDirectories(sourceDir))
+            {
+                string target = Path.Combine(destDir, Path.GetFileName(dir));
+                CopyDirectory(dir, target);
+            }
+        }
+
+        private static void SafeMoveDirectFiles(string sourceDir, string destDir, bool overwrite = true)
+        {
+            if (!Directory.Exists(sourceDir))
+                throw new DirectoryNotFoundException($"Source not found: {sourceDir}");
+
+            if (!Directory.Exists(destDir))
+            {
+                Directory.CreateDirectory(destDir);
+            }
+
+            string[] files = Directory.GetFiles(destDir);
+            if (files.Any())
+            {
+                return;
+            }
+
+            foreach (string sourceFile in Directory.GetFiles(sourceDir))
+            {
+                string fileName = Path.GetFileName(sourceFile);
+                string destFile = Path.Combine(destDir, fileName);
+
+                try
+                {
+                    // If overwrite is false and file exists, this will throw
+                    if (overwrite && File.Exists(destFile))
+                        File.Delete(destFile);
+
+                    File.Move(sourceFile, destFile);
+                }
+                catch
+                {
+                    // If something fails, DO NOT delete source file
+                    // because the original is still safe
+                    throw;
+                }
+            }
+        }
+
     }
 }

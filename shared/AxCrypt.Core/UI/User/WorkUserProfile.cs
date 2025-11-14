@@ -31,6 +31,16 @@ namespace AxCrypt.Core.UI.User
                 return WorkFolderPath;
             }
 
+            if (Directory.Exists(workPath))
+            {
+                string? childDir = Directory.GetDirectories(workPath).FirstOrDefault();
+                if (childDir != null)
+                {
+                    InternalAddUser("", childDir);
+                    return childDir;
+                }
+            }
+
             return AddTempUserProfile(workPath);
         }
 
@@ -43,15 +53,25 @@ namespace AxCrypt.Core.UI.User
             return destinationFolderInfo;
         }
 
-        public static string AddTempUserProfile(string workPath)
+        public static string AddTempUserProfile(string workPath, string userEmail = "")
         {
             string folderPath = CreateTemporaryFolder(workPath).FullName;
+            return InternalAddUser(userEmail, folderPath);
+        }
+
+        private static string InternalAddUser(string userEmail, string folderPath)
+        {
             UserProfile userProfile = new UserProfile()
             {
                 Active = true,
                 BasePath = folderPath,
                 LastUpdateUtc = New<INow>().Utc,
             };
+
+            if (userEmail != "")
+            {
+                userProfile.UserEmail = userEmail;
+            }
 
             bool created = New<IUserProfilesStore>().AddUser(userProfile);
             if (created)
@@ -60,6 +80,25 @@ namespace AxCrypt.Core.UI.User
             }
 
             return null;
+        }
+
+        public static void SetUser(string basePath, string userEmail)
+        {
+            if (New<IUserProfilesStore>().Profiles.Any(up=> up.UserEmail == userEmail))
+            {
+                return;
+            }
+
+            UserProfile? tempProfile = New<IUserProfilesStore>().Profiles.FirstOrDefault(up => up.BasePath != "" && up.UserEmail == "");
+            if (tempProfile != null)
+            {
+                tempProfile.UserEmail = userEmail;
+                tempProfile.LastUpdateUtc = New<INow>().Utc;
+                New<IUserProfilesStore>().UpdateUser(tempProfile);
+                return;
+            }
+
+            AddTempUserProfile(basePath, userEmail);
         }
     }
 }
