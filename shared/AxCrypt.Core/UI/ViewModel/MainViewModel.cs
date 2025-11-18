@@ -198,11 +198,12 @@ namespace AxCrypt.Core.UI.ViewModel
                 if (loggedOn)
                 {
                     _fileSystemState.InitializeFileSystem();
+                    SetWatchedFolders();
                 }
 
                 EncryptFileEnabled = loggedOn && License.Has(LicenseCapability.EncryptNewFiles);
             });
-            BindPropertyChanged(nameof(License), async (LicenseCapabilities policy) => await SetWatchedFoldersAsync());
+            BindPropertyChanged(nameof(License), (LicenseCapabilities policy) => SetWatchedFolders());
             BindPropertyChanged(nameof(EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => Resolve.UserSettings.EncryptionUpgradeMode = mode);
             BindPropertyChanged(nameof(FolderOperationMode), async (FolderOperationMode mode) => await SetFolderOperationMode(mode));
         }
@@ -313,11 +314,11 @@ namespace AxCrypt.Core.UI.ViewModel
             switch (notification.NotificationType)
             {
                 case SessionNotificationType.WatchedFolderAdded:
-                    await SetWatchedFoldersAsync();
+                    SetWatchedFolders();
                     break;
 
                 case SessionNotificationType.WatchedFolderRemoved:
-                    await SetWatchedFoldersAsync();
+                    SetWatchedFolders();
                     break;
 
                 case SessionNotificationType.SignIn:
@@ -359,7 +360,7 @@ namespace AxCrypt.Core.UI.ViewModel
             }
         }
 
-        public async Task SetWatchedFoldersAsync()
+        public void SetWatchedFolders()
         {
             WatchedFoldersEnabled = License.Has(LicenseCapability.SecureFolders);
             if (!WatchedFoldersEnabled)

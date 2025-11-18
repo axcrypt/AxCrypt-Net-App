@@ -39,6 +39,7 @@ public class AppMain
         SetThisVersion();
         BindToViewModels();
         BindToFileOperationViewModel();
+        Resolve.UserSettings.SettingsVersion = New<UserSettingsVersion>().Current;
 
         _logOnService = new LogOnService(logOnViewModel, _registerViewModel, mainViewModel);
     }

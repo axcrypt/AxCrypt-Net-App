@@ -100,6 +100,34 @@ namespace AxCrypt.Core.UI.User
             return true;
         }
 
+        public bool RemoveUserProfile()
+        {
+            UserProfile? userProfile = Profiles.FirstOrDefault(usp => usp.Active);
+            if (userProfile == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                if (RemoveUser(userProfile))
+                {
+                    DeleteContainer(userProfile.BasePath);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void DeleteContainer(string destPath)
+        {
+            New<IDataContainer>(destPath).Delete();
+        }
+
         protected void Save()
         {
             if (_persistanceFileInfo == null)

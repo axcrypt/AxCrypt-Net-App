@@ -71,9 +71,9 @@ namespace AxCrypt.App.Windows.WinUI
             TypeMap.Register.Singleton<IReport>(() => new Report(_workFolderPath, 1000000));
 
             string baseFolderPath = _workFolderPath;
+            MoveProgramDataFilesIfAny(baseFolderPath);
             _workFolderPath = WorkUserProfile.GetUserWorkFolderOnAppStart(_workFolderPath) ?? throw new ApplicationException("App failed to start with invalid user work folder!");
 
-            SafeMoveDirectory(_workFolderPath);
             SafeMoveDirectFiles(baseFolderPath, _workFolderPath);
 
             EmbeddedResourceManager.Initialize();
@@ -399,24 +399,31 @@ namespace AxCrypt.App.Windows.WinUI
                 case "open":
                     Resolve.CommandService.Call(CommandVerb.Open, 0, files);
                     break;
+
                 case "decrypt":
                     Resolve.CommandService.Call(CommandVerb.Decrypt, 1, files);
                     break;
+
                 case "encrypt":
                     Resolve.CommandService.Call(CommandVerb.Encrypt, 2, files);
                     break;
+
                 case "securedelete":
                     Resolve.CommandService.Call(CommandVerb.Wipe, 3, files);
                     break;
+
                 case "randomrename":
                     Resolve.CommandService.Call(CommandVerb.RandomRename, 3, files);
                     break;
+
                 case "about":
                     Resolve.CommandService.Call(CommandVerb.About, 5, new string[] { });
                     break;
+
                 case "advanced":
                     Resolve.CommandService.Call(CommandVerb.Show, 6, new string[] { });
                     break;
+
                 case "signout":
                     Resolve.CommandService.Call(CommandVerb.SignOut, 7, new string[] { });
                     break;
@@ -427,14 +434,11 @@ namespace AxCrypt.App.Windows.WinUI
             }
         }
 
-        private static void SafeMoveDirectory(string destDir)
+        private static void MoveProgramDataFilesIfAny(string destDir)
         {
             string sourceDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"AxCrypt" + Path.DirectorySeparatorChar);
             if (!Directory.Exists(sourceDir))
                 return;
-
-            if (!Directory.Exists(destDir))
-                Directory.CreateDirectory(destDir);
 
             try
             {
@@ -453,7 +457,8 @@ namespace AxCrypt.App.Windows.WinUI
 
         private static void CopyDirectory(string sourceDir, string destDir)
         {
-            Directory.CreateDirectory(destDir);
+            if (!Directory.Exists(destDir))
+                Directory.CreateDirectory(destDir);
 
             foreach (string file in Directory.GetFiles(sourceDir))
             {
@@ -474,11 +479,9 @@ namespace AxCrypt.App.Windows.WinUI
                 throw new DirectoryNotFoundException($"Source not found: {sourceDir}");
 
             if (!Directory.Exists(destDir))
-            {
                 Directory.CreateDirectory(destDir);
-            }
 
-            string[] files = Directory.GetFiles(destDir);
+            string[] files = Directory.GetFiles(destDir); // Ignore if already files exists
             if (files.Any())
             {
                 return;
@@ -487,6 +490,11 @@ namespace AxCrypt.App.Windows.WinUI
             foreach (string sourceFile in Directory.GetFiles(sourceDir))
             {
                 string fileName = Path.GetFileName(sourceFile);
+                if (fileName.Contains("UserProfiles.txt"))
+                {
+                    continue;
+                }
+
                 string destFile = Path.Combine(destDir, fileName);
 
                 try
@@ -505,6 +513,5 @@ namespace AxCrypt.App.Windows.WinUI
                 }
             }
         }
-
     }
 }

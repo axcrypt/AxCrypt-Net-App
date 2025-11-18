@@ -26,19 +26,9 @@ namespace AxCrypt.Core.UI.User
 
         public static string? GetUserWorkFolderOnAppStart(string workPath)
         {
-            if (!IsFirstSignIn)
+            if (WorkFolderPath != "")
             {
                 return WorkFolderPath;
-            }
-
-            if (Directory.Exists(workPath))
-            {
-                string? childDir = Directory.GetDirectories(workPath).FirstOrDefault();
-                if (childDir != null)
-                {
-                    InternalAddUser("", childDir);
-                    return childDir;
-                }
             }
 
             return AddTempUserProfile(workPath);
@@ -84,7 +74,7 @@ namespace AxCrypt.Core.UI.User
 
         public static void SetUser(string basePath, string userEmail)
         {
-            if (New<IUserProfilesStore>().Profiles.Any(up=> up.UserEmail == userEmail))
+            if (New<IUserProfilesStore>().Profiles.Any(up => up.UserEmail == userEmail))
             {
                 return;
             }

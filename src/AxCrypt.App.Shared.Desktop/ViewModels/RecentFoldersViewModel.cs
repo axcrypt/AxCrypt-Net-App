@@ -39,8 +39,6 @@ public class RecentFoldersViewModel : ViewModelBase
         _userPromptViewModel = userPromptVM;
         RecentFoldersList = new ObservableCollection<string>();
         SelectedRecentFolders = new List<string>();
-
-        Initialize();
     }
 
     public LogOnViewModel LogOnViewModel { get; set; }
@@ -69,6 +67,7 @@ public class RecentFoldersViewModel : ViewModelBase
                 _mainViewModel.SelectedWatchedFolders = files;
             }
         });
+        RecentFoldersList = new ObservableCollection<string>(_mainViewModel.WatchedFolders);
     }
 
     private async Task ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)

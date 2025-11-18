@@ -40,5 +40,7 @@ namespace AxCrypt.Core.UI.User
         bool UpdateUser(UserProfile userProfile);
 
         bool RemoveUser(UserProfile userProfile);
+
+        bool RemoveUserProfile();
     }
 }

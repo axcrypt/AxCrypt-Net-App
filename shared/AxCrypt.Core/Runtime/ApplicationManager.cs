@@ -1,17 +1,12 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Core.Service;
-using AxCrypt.Core.Session;
-using AxCrypt.Core.UI;
 using AxCrypt.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.Core.Service;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.Service.SecuredMessenger;
+using AxCrypt.Core.Session;
+using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.FindFilesActivity;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Runtime
 {
@@ -44,7 +39,7 @@ namespace AxCrypt.Core.Runtime
             Resolve.WorkFolder.FileInfo.FileItemInfo(UI.FileActivity.FileActivityStore.FileActivityLogFileName).Delete();
             Resolve.WorkFolder.FileInfo.FileItemInfo(FindFilesStore.FINDFILESLOGFILENAME).Delete();
             New<KnownPublicKeys>().Delete();
-            Resolve.UserSettings.SettingsVersion = New<UserSettingsVersion>().Current;
+            Resolve.UserProfileStore.RemoveUserProfile();
         }
 
         public async Task StopAndExit()

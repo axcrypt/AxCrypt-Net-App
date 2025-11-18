@@ -42,6 +42,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Core.UI.FileActivity;
 using AxCrypt.Core.UI.FindFilesActivity;
 using AxCrypt.Api.Implementation;
+using AxCrypt.Core.UI.User;
 
 namespace AxCrypt.Core
 {
@@ -184,6 +185,11 @@ namespace AxCrypt.Core
         public static IAsymmetricFactory AsymmetricFactory
         {
             get { return New<IAsymmetricFactory>(); }
+        }
+
+        public static IUserProfilesStore UserProfileStore
+        {
+            get { return New<IUserProfilesStore>(); }
         }
     }
 }
