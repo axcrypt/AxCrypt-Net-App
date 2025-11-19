@@ -1,0 +1,106 @@
+﻿.SwitchUser-popup {
+    position: fixed;
+    margin: 10% auto;
+    display: inline-block;
+    width: 400px;
+    min-height: 429px;
+    max-height: 520px;
+    border-radius: 16px;
+    border: solid 1px;
+    background-color: white;
+}
+
+.popup-image-paragraph {
+    text-align: center;
+    margin: 30px 0 10px 0;
+}
+
+.popup-image {
+    width: 138px;
+    height: 133px;
+    top: 30px;
+    left: 131px;
+}
+
+.popup-paragraph {
+    width: 321px;
+    height: 32px;
+    top: 179px;
+    left: 40px;
+}
+
+.SwitchUser-popup-backgroundColor {
+    margin-right: 46px;
+    margin-top: 5px;
+}
+
+.SwitchUser-popup-backgroundImage {
+    width: 400px;
+    height: 34px;
+    background-color: #E8FEDE;
+    border-radius: 3px;
+    top: 221px;
+}
+
+.popup-select-emails {
+    line-height: 34px;
+    padding: 0 5px;
+}
+
+.popup-select-emails:hover,
+.popup-select-emails.active {
+    background-color: #E8FEDE !important;
+    cursor: pointer;
+}
+
+.popup-select-emails.active {
+    background: url(images/TickMark.svg) no-repeat center right 35px;
+}
+
+.popup-select-emails:hover .select-email,
+.popup-select-emails.active .select-email {
+    color: #48772C;
+    font-weight: 700 !important;
+}
+
+.icon-email {
+    width: 20px;
+    height: 20px;
+}
+
+.select-email {
+    font-weight: 400;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.switch-user-action-section {
+    margin: 0px 34px auto !important;
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    padding: 11px 0px 15px 0px;
+}
+
+.switch-user-action-btn {
+    text-align: center;
+    width: 153px;
+    height: 36.65px;
+    border-radius: 10px;
+}
+
+.switch-user-action-btn.confirm {
+    background-color: #48772C;
+    color: #FFF;
+    border: none;
+}
+
+.switch-user-action-btn.cancel {
+    background-color: #FFF;
+    border: 1px solid #86B96E;
+    color: #000;
+}
+
+.user-avatar {
+    content: url(images/default/AxCrypt_Icon.svg);
+}
