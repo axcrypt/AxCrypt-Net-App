@@ -147,14 +147,14 @@ public class AppSettingsViewModel : ViewModelBase
     {
         New<UserSettings>().HideRecentFiles = hideRecentFiles;
 
+        ObservableCollection<FileDetails> recentFilesList = new ObservableCollection<FileDetails>();
         if (!hideRecentFiles)
         {
-            _recentFilesViewModel!.RecentFilesList = new ObservableCollection<FileDetails>(_mainViewModel!.RecentFiles.Select(f => new FileDetails(f)));
-            _recentFilesViewModel.UpdateViewState();
-            return;
+            recentFilesList = new ObservableCollection<FileDetails>(_mainViewModel!.RecentFiles.Select(f => new FileDetails(f)));
         }
 
-        _recentFilesViewModel!.RecentFilesList.Clear();
+        _recentFilesViewModel.IsHideRecentFiles = hideRecentFiles;
+        _recentFilesViewModel!.RecentFilesList = recentFilesList;
         _recentFilesViewModel.UpdateViewState();
     }
 

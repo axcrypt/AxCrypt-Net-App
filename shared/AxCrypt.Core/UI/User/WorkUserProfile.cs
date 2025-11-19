@@ -45,6 +45,12 @@ namespace AxCrypt.Core.UI.User
 
         public static string AddTempUserProfile(string workPath, string userEmail = "")
         {
+            UserProfile? tempProfile = New<IUserProfilesStore>().Profiles.FirstOrDefault(up => up.BasePath != "" && up.UserEmail == "");
+            if (tempProfile != null)
+            {
+                return tempProfile.BasePath;
+            }
+
             string folderPath = CreateTemporaryFolder(workPath).FullName;
             return InternalAddUser(userEmail, folderPath);
         }

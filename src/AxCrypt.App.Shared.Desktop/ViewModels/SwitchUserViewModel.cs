@@ -40,6 +40,7 @@ public class SwitchUserViewModel : ViewModelBase
         if (currectActiveUser != null)
         {
             currectActiveUser.Active = false;
+            Update(currectActiveUser);
         }
 
         UserProfile? selectedUser = UserProfilesList.FirstOrDefault(up => up.UserEmail == userEmail);
