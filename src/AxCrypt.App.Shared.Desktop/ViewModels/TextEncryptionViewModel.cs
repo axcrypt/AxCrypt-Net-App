@@ -1,3 +1,8 @@
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.Content;
@@ -5,11 +10,6 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.UI;
 using AxCrypt.Cryptor;
 using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels;
@@ -106,8 +106,15 @@ public class TextEncryptionViewModel
             return;
         }
 
-        EncryptedText = await TextCryptor.EncryptTextAsync(Identity(), InputText, null);
-        ErrorMessage = string.Empty;
+        try
+        {
+            EncryptedText = await TextCryptor.EncryptTextAsync(Identity(), InputText, null);
+            ErrorMessage = string.Empty;
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"Failed to encrypt text due to {ex.Message}";
+        }
     }
 
     public void DecryptText()
@@ -118,10 +125,17 @@ public class TextEncryptionViewModel
             return;
         }
 
-        InputText = TextCryptor.DecryptText(Identity(), EncryptedText, null);
-        if (string.IsNullOrEmpty(InputText))
+        try
         {
-            ErrorMessage = Texts.WrongPassphrase;
+            InputText = TextCryptor.DecryptText(Identity(), EncryptedText, null);
+            if (string.IsNullOrEmpty(InputText))
+            {
+                ErrorMessage = Texts.WrongPassphrase;
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = "Failed to decrypt text!";
         }
     }
 
