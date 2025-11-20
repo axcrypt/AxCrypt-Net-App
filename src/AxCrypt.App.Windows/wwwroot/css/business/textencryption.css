@@ -1,8 +1,97 @@
-﻿.title {
-  position: fixed;
-  color: #48772C;
-  top: 31px;
-  left: 435px;
+﻿.tabicon {
+  max-width: 13px;
+  max-height: 16px;
+}
+.tabicon.decrypt-ico {
+  content: url(/images/default/IcoOpnScrdGry.svg);
+}
+.tabicon.encrypt-ico {
+  content: url(/images/default/IcoScrGry.svg);
+}
+
+.action-tabs {
+  width: 302px;
+  height: 36px;
+  background-color: #D9D9D9;
+  border-radius: 57.5px;
+  display: flex;
+  text-align: center;
+}
+.action-tabs > .act-tab {
+  width: 156px;
+  height: 36px;
+  padding: 5px 0;
+}
+.action-tabs > .act-tab.active {
+  background-color: #232323 !important;
+  border-radius: 57.5px;
+}
+.action-tabs > .act-tab.active .decrypt-ico {
+  content: url(/images/default/IcoOpnScrd.svg) !important;
+}
+.action-tabs > .act-tab.active .encrypt-ico {
+  content: url(/images/default/IcoScr.svg) !important;
+}
+.action-tabs > .act-tab.active > a {
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.action-tabs > .act-tab > a {
+  padding-left: 5px;
+  color: #A4A4A4;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.copy-clipboard-ico {
+  content: url(/images/business/IcoClipboard.svg);
+}
+
+.download-ico {
+  content: url(/images/business/IcoDwnld.svg);
+}
+
+.email-ico {
+  content: url(/images/business/IcoEml.svg);
+}
+
+.sharelink-ico {
+  content: url(/images/business/IcoLnk.svg);
+}
+
+.custom-password-help-hoverpopup {
+  height: fit-content;
+  padding: 15px 7px;
+  width: 190px;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  transform: translateX(50%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.encryp-and-reset-btn {
+  display: flex;
+  gap: 20px;
+  padding: 15px 0;
+}
+
+.multi-btn {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  max-width: 90%;
+}
+
+.multi-actn-btn {
+  width: 182px;
+  height: 34px;
+  text-align: center;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000;
+  border-radius: 4px;
 }
 
 .entr-txt-box .pswrd .encrypt-txt-box {
@@ -32,98 +121,7 @@
   font-size: 16px;
 }
 
-.password-container img {
-  position: absolute;
-  right: 10px;
-  top: 44%;
-  transform: translateY(-50%);
-  width: 17.45px;
-  height: 14.67px;
-  cursor: pointer;
-}
-
-.encryp-and-reset-btn {
-  display: flex;
-  gap: 20px;
-  padding: 15px 0;
-}
-
-.action-btn {
-  width: 153px;
-  height: 37px;
-  text-align: center;
-}
-
-.encryp-btn-color {
-  background-color: #96AD88;
-  color: #ffffff;
-  border: 1px solid #96AD88;
-}
-
-.encryp-btn-color:hover {
-  background-color: #48772C;
-}
-
-.reset-btn-color {
-  background-color: #ffffff;
-  color: #96AD88;
-  border: 1px solid #96AD88;
-  radius: 8px;
-}
-
 .encrypt-txt-box {
   width: 90%;
   padding-left: 10px;
-}
-
-.multi-btn {
-  display: flex;
-  gap: 20px;
-  font-size: 14px;
-  color: #96AD88;
-  max-width: 90%;
-}
-
-.multi-actn-btn {
-  width: 182px;
-  height: 34px;
-  text-align: center;
-  background-color: #ffffff;
-  color: #96AD88;
-  border: 1px solid #96AD88;
-  radius: 4px;
-}
-
-.active-tag {
-  padding: 10px 0 30px 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: #48772C;
-  text-decoration: none;
-}
-
-.active-tag:hover {
-  color: #48772C;
-}
-
-.encryp-tag-line {
-  border: 3px solid #48772c;
-  border-radius: 10px;
-  margin-right: 30px;
-  display: block !important;
-  margin: 0;
-  opacity: 1;
-}
-
-.inactive {
-  padding: 10px 0 30px 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: #a4a4a4;
-  text-decoration: none;
-  margin-top: 10px;
-}
-
-.inactive:hover {
-  color: #a4a4a4;
 }

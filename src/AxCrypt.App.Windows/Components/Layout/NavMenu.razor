@@ -71,8 +71,8 @@
         else
         {
             <div class="nav-item px-3">
-                <NavLink class="@($"nav-link four {GetClassByActiveTab("textencryption")}")" href="/">
-                    <span class="oi scrts" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">Text Encryption</span>
+                <NavLink class="@($"nav-link four {GetClassByActiveTab("textencryption")}")" href="javascript:void(0)" @onclick="UpgradeDialog">
+                    <span class="oi txtencrpt" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">Text Encryption</span>
                     <img class="nav-subs-upg" src="" alt="paid_required_img" title="@Texts.PremiumFeatureToolTipText" style="position:relative;" />
                 </NavLink>
             </div>
@@ -179,6 +179,11 @@
     private string GetClassByActiveTab(string activeTab)
     {
         return TabActive == activeTab ? "active" : "";
+    }
+
+    private void UpgradeDialog()
+    {
+        LogOnViewModel.UpgradeDialog.Show();
     }
 
     void UpdateUIState(bool result)
