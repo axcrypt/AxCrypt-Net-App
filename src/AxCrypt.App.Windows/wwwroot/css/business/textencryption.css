@@ -125,3 +125,21 @@
   width: 90%;
   padding-left: 10px;
 }
+
+.hide-password-ico, .show-password-ico {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.hide-password-ico {
+  content: url(/images/business/IcoHiddenPassword.svg);
+}
+
+.show-password-ico {
+  content: url(/images/business/IcoShownPassword.svg);
+}

@@ -47,7 +47,7 @@ public class TextEncryptionViewModel
     public string PasswordInputType => isPasswordVisible ? "text" : "password";
 
     public string PasswordIconClass =>
-        isPasswordVisible ? "fa-eye-slash" : "fa-eye";
+        isPasswordVisible ? "hide-password-ico" : "show-password-ico";
 
     public void TogglePassword()
     {
@@ -74,6 +74,7 @@ public class TextEncryptionViewModel
     public void ShowHideCustomPassword(MouseEventArgs args)
     {
         IsCustomPasswordMode = !IsCustomPasswordMode;
+        Password = "";
     }
 
     private int GetMaxCharaterLimit()
@@ -93,6 +94,7 @@ public class TextEncryptionViewModel
 
     public async Task EncryptText()
     {
+        ErrorMessage = "";
         EncryptedText = "";
         if (string.IsNullOrWhiteSpace(InputText))
         {
@@ -119,6 +121,8 @@ public class TextEncryptionViewModel
 
     public void DecryptText()
     {
+        ErrorMessage = "";
+        InputText = "";
         if (string.IsNullOrWhiteSpace(EncryptedText))
         {
             ErrorMessage = "Encrypted text is required.";

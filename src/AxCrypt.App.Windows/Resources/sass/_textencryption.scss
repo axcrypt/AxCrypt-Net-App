@@ -138,3 +138,20 @@
     padding-left: 10px;
 }
 
+.hide-password-ico, .show-password-ico {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.hide-password-ico {
+    content: $HiddenPasswordIco;
+}
+
+.show-password-ico {
+    content: $ShownPasswordIco;
+}

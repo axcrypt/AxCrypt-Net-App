@@ -17,18 +17,16 @@
     </div>
 </div>
 
-@if (TabIndex == 1)
-{
-    <div style="margin-top:20px;">
+<div class="parent-container" style="margin-top:20px;min-height:50vh;height: 77vh;overflow-y: auto;">
+    @if (TabIndex == 1)
+    {
         <AxCrypt.App.Shared.Desktop.Components.TextEncryption._TextEncryption />
-    </div>
-}
-else if (TabIndex == 2)
-{
-    <div style="margin-top:20px;">
+    }
+    else if (TabIndex == 2)
+    {
         <AxCrypt.App.Shared.Desktop.Components.TextEncryption._TextDecryption />
-    </div>
-}
+    }
+</div>
 
 @code {
     public int TabIndex { get; set; }
