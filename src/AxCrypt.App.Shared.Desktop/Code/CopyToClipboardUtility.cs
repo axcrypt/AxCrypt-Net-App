@@ -10,6 +10,10 @@ namespace AxCrypt.App.Shared.Desktop.Code
 
         public async Task CopyToClipboard(string copyText)
         {
+            if(string.IsNullOrEmpty(copyText))
+            {
+                return;
+            }
             await Clipboard.SetTextAsync(copyText);
             CopiedInfoText = "Copied!";
             await Task.Delay(2000);

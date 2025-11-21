@@ -165,23 +165,26 @@ public class TextEncryptionViewModel
 
     public async Task<bool> ExportTextAsync()
     {
+        string filename = "encryptedtext";
         string? exportText = "";
         if (SelectedTap == "TextEncryption")
         {
             exportText = EncryptedText;
+            filename = "encryptedtext";
         }
         else if (SelectedTap == "TextDecryption")
         {
             exportText = InputText;
+            filename = "text";
         }
 
-        if (exportText == null)
+        if (string.IsNullOrEmpty(exportText))
             return false;
 
-        return await DownloadTextAsFileAsync(exportText);
+        return await DownloadTextAsFileAsync(exportText, filename);
     }
 
-    private async Task<bool> DownloadTextAsFileAsync(string exportText)
+    private async Task<bool> DownloadTextAsFileAsync(string exportText, string downloadFileName)
     {
         byte[] txtData = Encoding.UTF8.GetBytes(exportText);
         if (txtData == null)
@@ -196,13 +199,13 @@ public class TextEncryptionViewModel
             return false;
         }
 
-        string fileName = Core.Resolve.UserSettings.UserEmail + "_encryptedtext_.txt";
+        string fileName = Core.Resolve.UserSettings.UserEmail + $"_{downloadFileName}.txt";
         string filePath = Path.Combine(downloadsFolderPath, fileName);
 
         int count = 1;
         while (File.Exists(filePath))
         {
-            string tempFileName = $"{Core.Resolve.UserSettings.UserEmail}._encryptedtext_({count}).txt";
+            string tempFileName = $"{Core.Resolve.UserSettings.UserEmail}._{downloadFileName}_({count}).txt";
             filePath = Path.Combine(downloadsFolderPath, tempFileName);
             count++;
         }
@@ -214,13 +217,16 @@ public class TextEncryptionViewModel
 
     private string GetDownloadsFolderPath()
     {
-        string downloadsFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-
-        return downloadsFolderPath;
+        return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
     }
 
     public void EncryptSendEmailBtn()
     {
+        if (string.IsNullOrEmpty(EncryptedText))
+        {
+            return;
+        }
+
         string to = "";
         string subject = "Sharing AxCrypt Encrypted Text";
 
