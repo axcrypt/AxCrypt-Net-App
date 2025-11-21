@@ -17,7 +17,7 @@
 
             <div style="float:right; padding-left:15px;">
                 <label class="toggle">
-                    <input type="checkbox" @bind="AppSettingsViewModel.HideRecentFiles" @onclick="AppSettingsViewModel.ToggleHideRecentFiles" />
+                    <input type="checkbox" checked="@AppSettingsViewModel.HideRecentFiles" @onclick="AppSettingsViewModel.ToggleHideRecentFiles" />
                     <span class="slider round">
                         @if (AppSettingsViewModel.HideRecentFiles)
                         {

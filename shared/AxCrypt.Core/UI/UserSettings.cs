@@ -150,7 +150,7 @@ namespace AxCrypt.Core.UI
             get
             {
 #if AX_BETA_BUILD
-                return "Beta";
+                return "beta";
 #else
                 return "";
 #endif

@@ -145,8 +145,6 @@ public class AppSettingsViewModel : ViewModelBase
 
     private void SetRecentFilesHiddenState(bool hideRecentFiles)
     {
-        New<UserSettings>().HideRecentFiles = hideRecentFiles;
-
         ObservableCollection<FileDetails> recentFilesList = new ObservableCollection<FileDetails>();
         if (!hideRecentFiles)
         {
@@ -156,6 +154,9 @@ public class AppSettingsViewModel : ViewModelBase
         _recentFilesViewModel.IsHideRecentFiles = hideRecentFiles;
         _recentFilesViewModel!.RecentFilesList = recentFilesList;
         _recentFilesViewModel.UpdateViewState();
+
+        HideRecentFiles = hideRecentFiles;
+        New<UserSettings>().HideRecentFiles = hideRecentFiles;
     }
 
     public async Task ToggleEncryptionUpgradeMode()
