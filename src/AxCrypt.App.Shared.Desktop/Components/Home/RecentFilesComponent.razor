@@ -31,7 +31,7 @@
     else if (RecentFilesViewModel.RecentFilesList.Any())
     {
         <table class="rcnt-fle-tbl" style="width:100%;table-layout: fixed;">
-            <thead style="user-select: none;">
+            <thead id="help-recent-file" class="help-recent-files" style="user-select: none; background-color: #fff;">
                 <tr>
                     <th style="width:3%;"> <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
                     <th style="width:40%;" @onclick="() => SetSortOrder(0)">@Texts.NameLabel<img class="@($"arw-img {GetClassByActiveSortOrderIndex(0)}")" src="" alt="arrow img" /></th>

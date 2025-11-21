@@ -1,7 +1,9 @@
 ﻿@using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.Content
+@using AxCrypt.Core.Runtime
 @using Microsoft.JSInterop
 
+@using static AxCrypt.Abstractions.TypeResolve
 @inject RecentFilesViewModel RecentFilesViewModel
 @inject IJSRuntime JSRuntime
 
@@ -32,6 +34,12 @@
         if (firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
+            if (!New<Core.UI.UserSettings>().HasSeenStartupHelp)
+            {
+                await Task.Delay(2000);
+                await JSRuntime.InvokeVoidAsync("startHomeHelp");
+                New<Core.UI.UserSettings>().HasSeenStartupHelp = true;
+            }
         }
         try
         {

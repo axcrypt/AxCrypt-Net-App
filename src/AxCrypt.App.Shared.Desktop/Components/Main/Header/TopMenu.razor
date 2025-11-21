@@ -12,11 +12,12 @@
 
 <div class="top-menu">
     <AxCrypt.App.Shared.Desktop.Components.Main.Header.LanguagesComponent />
-
-    <NavLink id="settings-dropdown-click-action" class="app-top-menu">
-        <img class="sttng-icon padding" src="/images/default/IcoExtrFtr.svg" alt="settings-icon" />
+    <NavLink class="app-top-menu" @onclick="ShowHelpOverlay">
+        <img class="idea-icon padding" src="/images/IcoIdea.svg" alt="Idea-icon" />
     </NavLink>
-
+    <NavLink id="settings-dropdown-click-action" class="app-top-menu">
+        <img id="help-settings" class="sttng-icon padding" src="/images/default/IcoExtrFtr.svg" alt="settings-icon" />
+    </NavLink>
     <NavLink id="notification-dropdown-click-action" class="app-top-menu">
         <span class="notification-badge">
             @NotificationCount
@@ -25,7 +26,7 @@
     </NavLink>
     <NavLink class="update-btn" @onclick="ViewModel.CheckAxCryptVersionAsync" title="@ViewModel.VersionHoverText">@Texts.UpdateText</NavLink>
     <NavLink class="mb-prfle" id="accounts-dropdown-click-action">
-        <img style="max-width:30px;width:30px;height:30px !important;" src="@SubscriptionIcon()" alt="subs-level icon" />
+        <img id="help-profile" style="max-width:30px;width:30px;height:30px !important;" src="@SubscriptionIcon()" alt="subs-level icon" />
     </NavLink>
 </div>
 
@@ -78,6 +79,11 @@
                 return "/images/free/IcoVwr.svg";
 
         }
+    }
+
+    private async Task ShowHelpOverlay()
+    {
+        await JSRuntime.InvokeVoidAsync("startHomeHelp");
     }
 
     private void UpdatePageState()

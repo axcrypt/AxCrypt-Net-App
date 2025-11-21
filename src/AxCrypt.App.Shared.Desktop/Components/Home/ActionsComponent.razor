@@ -13,12 +13,12 @@
 <div class="home-body" style="margin-top: 15px;">
     <div style="display:block; margin-bottom: 28px; width:63%">
         <h3 class="fle-nme fnt-sze">@Texts.ActionsText</h3>
-        <div class="" style="display:flex;">
+        <div id="help-wrapper" class="" style="display:flex;">
 
-            <div class="act-box" @onclick="async ()=> await homeActionModel!.OpenFile()" @onmouseover='@(() => ShowPopup("open"))' @onmouseout='@(() => HidePopup())'>
+            <div id="help-open" class="act-box" @onclick="async ()=> await homeActionModel!.OpenFile()" @onmouseover='@(() => ShowPopup("open"))' @onmouseout='@(() => HidePopup())'>
                 <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
                 <span class="text-size">@Texts.OpenEncryptedToolStripMenuItemText</span>
-                @if (isHovered && hoveredElement == "open")
+                @if (isHovered && hoveredElement == "open")  
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
                         <span class="txt-clr font-medium">@Texts.OpenToolStripButtonToolTipText</span>
@@ -51,7 +51,7 @@
             }
             else
             {
-                <div class="act-box" disabled="@(!homeActionModel!.EncryptButtonEnabled)" @onclick="async (e) => await homeActionModel!.SecureFile(e)" @onmouseover='@(() => ShowPopup("secure"))' @onmouseout='@(() => HidePopup())'>
+                <div id="help-secure" class="act-box" disabled="@(!homeActionModel!.EncryptButtonEnabled)" @onclick="async (e) => await homeActionModel!.SecureFile(e)" @onmouseover='@(() => ShowPopup("secure"))' @onmouseout='@(() => HidePopup())'>
                     <img class="act-img scr-act" src="" alt="scr-img" />
                     <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
                     @if (isHovered && hoveredElement == "secure")
@@ -63,7 +63,7 @@
                 </div>
             }
 
-            <div class="act-box" @onclick="async ()=> await homeActionModel.StopSecuringFile()" @onmouseover='@(() => ShowPopup("stop") )' @onmouseout='@(() => HidePopup() )'>
+            <div id="help-stop" class="act-box" @onclick="async () => await homeActionModel.StopSecuringFile()" @onmouseover='@(() => ShowPopup("stop"))' @onmouseout='@(() => HidePopup())'>
                 <img class="act-img stpscr-act" src="" alt="stpscr-img" />
                 <span class="text-size">@Texts.DecryptToolStripMenuItemText</span>
                 @if (isHovered && hoveredElement == "stop")
@@ -97,7 +97,7 @@
             }
             else
             {
-                <div class="act-box" @onclick="async(e)=> await homeActionModel.ShareKeysAsync(e)" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
+                <div id="help-sharekey" class="act-box" @onclick="async (e) => await homeActionModel.ShareKeysAsync(e)" @onmouseover='@(() => ShowPopup("share"))' @onmouseout='@(() => HidePopup())'>
                     <img class="act-img shrks-act" src="" alt="shrks-img" />
                     <span class="text-size">@Texts.ShareKeysToolStripMenuItemText</span>
                     @if (isHovered && hoveredElement == "share")
@@ -139,7 +139,7 @@
             }
             @if (homeActionModel.IsFilesPending)
             {
-                <div class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@( () => ShowPopup("clean") )' @onmouseout='@( () => HidePopup() )' @onclick="async (e) => await homeActionModel.CleanAndRemoveOpenFilesButton_Click(e)">
+                <div id="help-clean" class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@(() => ShowPopup("clean"))' @onmouseout='@(() => HidePopup())' @onclick="async (e) => await homeActionModel.CleanAndRemoveOpenFilesButton_Click(e)">
                     <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">@Texts.CleanUpPromptText</span>
                     @if (isHovered && hoveredElement == "clean")
                     {

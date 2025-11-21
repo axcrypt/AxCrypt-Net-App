@@ -185,8 +185,7 @@
     margin: 12px 20px 18px 0;
     padding: 3px;
     border: 1px solid $BorderClr;
-    box-shadow: 0px 2px 4px 0px rgba(35, 35, 35, 0.25);
-    background-color: transparent;
+    box-shadow: 0px 0px 20px 0px #FFFFFF66;
 }
 
 .onedrv-icon {
@@ -222,6 +221,7 @@
     padding: 5px 0px;
     cursor: pointer;
     line-height: 12px;
+    background-color: #fff;
 }
 
 .mre-actn-box:hover {
@@ -1090,7 +1090,6 @@
     }
 }
 
-
 @media only screen and (max-width: 1370px) {
     .rcnt-fle-tbl {
         max-width: 850px;
@@ -1158,6 +1157,7 @@
         text-decoration: none;
     }
 }
+
 .folderSettings-title {
     width: 100%;
     padding: 7px 0px !important;
@@ -1179,7 +1179,7 @@
     color: $colRed;
     font-size: 12px;
     font-style: normal;
-    font-weight: 700;    
+    font-weight: 700;
     cursor: default;
 }
 

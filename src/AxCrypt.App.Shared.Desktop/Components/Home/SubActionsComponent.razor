@@ -8,7 +8,7 @@
 <div class="mre-act-sec">
     @if (subActionModel!.EnableCloudServices)
     {
-        <div style="display:block;">
+        <div id="help-cloud-services" style="display:block;">
             <h3 class="fle-nme fnt-sze">@Texts.CloudServicesText</h3>
             <div style="display: flex;">
                 @foreach (KnownFolder? knownFolder in subActionModel?.KnownFoldersViewModel?.KnownFolders!)
@@ -29,7 +29,7 @@
         <div style="display: flex; gap: 2%;">
             @if (subActionModel.EnableRandomRename)
             {
-                <div class="mre-actn-box" @onclick="(e)=> subActionModel.RandomRenameAsync(e)" title="@Texts.AnonymousRenameToolTip">
+                <div id="help-anymous-rename" class="mre-actn-box" @onclick="(e)=> subActionModel.RandomRenameAsync(e)" title="@Texts.AnonymousRenameToolTip">
                     <img class="ico-eye-sml" src="" alt="hand-img" />
                     <span class="text-size text-style">@Texts.AnonymousRenameMenuText</span>
                 </div>
@@ -44,14 +44,14 @@
 
             @if (subActionModel.EnableSecureWipeFiles)
             {
-                <div class="mre-actn-box" @onclick="(e)=> subActionModel.SecureWipeFiles(e)" title="@Texts.FeaturesFileWipeDescription">
+                <div id="help-secure-dlt" class="mre-actn-box" @onclick="(e)=> subActionModel.SecureWipeFiles(e)" title="@Texts.FeaturesFileWipeDescription">
                     <img class="ico-dlt" src="" alt="secured-delete-img" />
                     <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
                 </div>
             }
             else
             {
-                <div class="mre-actn-box atn-bgclr" style="background-color: #D9D9D9 !important;" @onclick="() => subActionModel.UpgradeDialog()" title="@Texts.PremiumFeatureToolTipText">
+                <div id="help-secure-dlt" class="mre-actn-box atn-bgclr" style="background-color: #D9D9D9 !important;" @onclick="() => subActionModel.UpgradeDialog()" title="@Texts.PremiumFeatureToolTipText">
                     <img class="ico-dlt" src="" alt="secured-delete-img" style="filter: brightness(2);" />
                     <span class="text-size text-style" style="color: white !important;">@Texts.SecureDeleteToolStripMenuItemText</span>
                     <img class="nav-subs-upg" src="" alt="paid_required_img" style="padding-right:0px !important;" />
@@ -60,14 +60,14 @@
 
             @if (subActionModel.EnableEncryptionUpgrade)
             {
-                <div class="mre-actn-box" @onclick="(e)=> subActionModel.EncryptionUpgrade(e)" title="@Texts.UpgradeLegacyFilesMenuToolTip">
+                <div id="help-upgrade-files" class="mre-actn-box" @onclick="(e)=> subActionModel.EncryptionUpgrade(e)" title="@Texts.UpgradeLegacyFilesMenuToolTip">
                     <img class="ico-apikey" src="" alt="upgrade-enc-img" />
                     <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
                 </div>
             }
             else
             {
-                <div class="mre-actn-box atn-bgclr" style="background-color: #D9D9D9 !important;" @onclick="()=> subActionModel.UpgradeDialog()" title="@Texts.PremiumFeatureToolTipText">
+                <div id="help-upgrade-files" class="mre-actn-box atn-bgclr" style="background-color: #D9D9D9 !important;" @onclick="() => subActionModel.UpgradeDialog()" title="@Texts.PremiumFeatureToolTipText">
                     <img class="ico-apikey" src="" alt="upgrade-enc-img" style="filter: brightness(2);" />
                     <span class="text-size text-style" style="color: white !important;">@Texts.UpgradeLegacyFilesMenuItemText</span>
                     <img class="nav-subs-upg" src="" alt="paid_required_img" style="padding-right:0px !important;" />

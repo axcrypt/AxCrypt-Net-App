@@ -7,7 +7,7 @@
 @inject TopMenuViewModel ViewModel
 
 <div class="language-selector">
-    <div class="dropdown">
+    <div class="dropdown" id="help-language">
         @if (!ViewModel.LogOnViewModel.IsLoggedOn)
         {
             <button class="dropbtn font-high active" id="lang-dropdown-action-btn" style="min-width: 60px; gap: 7px;" title="Select language">
