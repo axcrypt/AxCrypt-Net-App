@@ -145,18 +145,6 @@ namespace AxCrypt.Core.UI
 #endif
         }
 
-        public string AppEnvironment
-        {
-            get
-            {
-#if AX_BETA_BUILD
-                return "beta";
-#else
-                return "";
-#endif
-            }
-        }
-
         public DateTime LastUpdateCheckUtc
         {
             get { return Load(nameof(LastUpdateCheckUtc), DateTime.MinValue); }
