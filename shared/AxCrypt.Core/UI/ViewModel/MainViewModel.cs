@@ -512,7 +512,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private Task AxCryptUpdateCheckAction(DateTime lastUpdateCheckUtc)
         {
-            return _axCryptUpdateCheck.CheckInBackgroundAsync(lastUpdateCheckUtc, _userSettings.NewestKnownVersion, _userSettings.UpdateUrl, _userSettings.CultureName, _userSettings.AppEnvironment);
+            return _axCryptUpdateCheck.CheckInBackgroundAsync(lastUpdateCheckUtc, _userSettings.NewestKnownVersion, _userSettings.UpdateUrl, _userSettings.CultureName, AppConstant.AppEnvironment);
         }
 
         private async Task<bool> WarnIfAnyDecryptedFilesActionAsync()

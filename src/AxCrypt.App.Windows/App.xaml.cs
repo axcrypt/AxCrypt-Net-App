@@ -578,10 +578,13 @@ public partial class App : Application
     {
 #if AX_DEBUG_BUILD
         string buildType = "Debug";
+        AppConstant.AppEnvironment = "beta";
 #elif AX_BETA_BUILD
         string buildType = "Beta";
+        AppConstant.AppEnvironment = "beta";
 #else
         string buildType = "";
+        AppConstant.AppEnvironment = "";
 #endif
         return string.IsNullOrWhiteSpace(buildType) ? "" : $"[{buildType}] ";
     }
