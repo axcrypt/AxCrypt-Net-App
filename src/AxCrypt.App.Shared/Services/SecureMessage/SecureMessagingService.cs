@@ -173,8 +173,8 @@ namespace AxCrypt.App.Shared.Services
         {
             RequestOptions options = new RequestOptions();
             options.UserName = Identity().UserEmail.ToString();
-            options.StartDate = messengerListViewModel.StartDate.Date;
-            options.EndDate = messengerListViewModel.EndDate.Date;
+            options.StartDate = messengerListViewModel.StartDate;
+            options.EndDate = messengerListViewModel.EndDate;
 
             IEnumerable<SecuredMessage> messages = await SecuredMessengerFacade.GetSecMsgSearchFilterAsync(messengerListViewModel.SecMessengerFilterTab, options);
 
