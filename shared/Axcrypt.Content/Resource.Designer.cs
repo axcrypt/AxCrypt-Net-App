@@ -1048,6 +1048,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Folder.
+        /// </summary>
+        public static string AddNewFolderText {
+            get {
+                return ResourceManager.GetString("AddNewFolderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Note.
         /// </summary>
         public static string AddNoteTitle {
@@ -4024,6 +4033,15 @@ namespace AxCrypt.Content {
         public static string BackToHomeButtonLabel {
             get {
                 return ResourceManager.GetString("BackToHomeButtonLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to home.
+        /// </summary>
+        public static string BackToHomeText {
+            get {
+                return ResourceManager.GetString("BackToHomeText", resourceCulture);
             }
         }
         
@@ -34980,6 +34998,618 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If you haven’t given AxCrypt a try, you must right now!.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Conclusion_Heading {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Conclusion_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check out the features &lt;a href=&apos;https://axcrypt.net/features/&apos;&gt;here!&lt;/a&gt;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Conclusion_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Conclusion_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And if you’d like to know more about AxCrypt, get in touch with us at support@axcrypt.net or business@axcrypt.net..
+        /// </summary>
+        public static string Blog_WYCBEIAE_Conclusion_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Conclusion_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow us on Social media for exciting offer updates and more!.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Conclusion_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Conclusion_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Built-in encryption software, such as BitLocker, serves as the first line of defence. This means your device or your disc is only protected from any kind of unauthorised physical access, especially in the event of you losing your device or it being stolen or decommissioned..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H1_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H1_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the physical hard drive or the disc is extracted and then cracked into with the decryption keys, your files are still present there, and this is a high risk. This is because built-in encryptions like BitLocker and &lt;b&gt;BitLocker alternatives&lt;/b&gt; only extend their encryption as far as the device is concerned..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H1_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H1_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to But if BitLocker is complemented with a Trusted Platform Module (TPM) chip, the security is definitely enhanced with a hardware component. The benefit of this is, if it recognises any kind of unauthorised changes or break-ins to the system hardware or software, it will immediately automatically lock the whole device and ask for a recovery key, preventing any kind of tampering or rogue boot attacks..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H1_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H1_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to But with all said and done, like we earlier mentioned,  BitLocker is definitely a strong option for protecting your device as a whole, the &lt;b&gt;container&lt;/b&gt;, but it doesn’t protect individual files—the &lt;b&gt;contents&lt;/b&gt; inside..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H1_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H1_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That’s where specialised tools like AxCrypt come in, offering military-grade file-level protection that BitLocker itself does not provide..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H1_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H1_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Over the years, the cyberverse has seen an alarming spike in cyberthreats — from ransomware and cyber espionage cases to passwords and phishing attacks. This proves one loud thing: no matter how much we advance with our built-in encryption or no matter how many BitLocker alternatives we explore, the threat towards files will always loom over us..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H2_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H2_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That’s because if someone breaks into your device or your disk is compromised, file security stops where device security ends. If your system is breached, your files become vulnerable—and possibly unrecoverable..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H2_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H2_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The built-in Windows encryption tool was originally designed to safeguard data at rest. It has been weaponised by criminals in ransomware attacks..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H2_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H2_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How?.
+        /// </summary>
+        public static string Blog_WYCBEIAE_H2_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H2_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to They now take over your entire network and all your key drives and lock you out of the system, and demand a ransom in exchange..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H2_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H2_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Three Ways BitLocker Is Used In Ransomware Attacks:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_H2_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H2_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;They infiltrate the network typically by breaching through common attack vectors like phishing scams, weak credentials and unpatched loopholes. Once in, you’re out, and they gain complete administrative control.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_H2_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H2_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;Now that they have administrative access,  these attackers go on to encrypt essential files, directories or the entire system itself, and with this action, they lock out the legitimate users and restrict access to their data entirely.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_H2_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H2_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;And this is where the actual game begins. Now that they have complete access to your entire system, these attackers will demand a ransom, promising to submit the new recovery key. Now the victim either has two options: pay the attacker or risk losing their data permanently.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_H2_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H2_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Okay, so now you think that encrypting your entire drive or an external disc could lock these malicious actors out..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;AxCrypt - The Perfect BitLocker alternative is that extra level of protection that you need right now.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt offers you file-level encryption with military-grade protection. This means that you not only get to encrypt files on your system, but you can also go ahead and encrypt those files that you saved on the cloud..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text11 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As for compliance standards, AxCrypt is like another feather in the hat, thanks to the file-level protection you get. AxCrypt meets the regulatory compliance practices that are essential for businesses and organisations in order to meet the data security and privacy standards..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text12 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cute..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The truth is, they can still enter..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full disk encryption does not protect you from viruses attacking your files. This is solely because viruses are software. When you log in to your computer, your files are not only visible to you but also to all the software on your system. This particular software, which is basically a &lt;b&gt;virus&lt;/b&gt;, can access all the data on your encrypted hard drive..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is still more drama that unfolds..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Even if you have anti-virus protection on your computer, you are still susceptible to these attacks. This means if another computer on your network is affected by this particular virus, or let&apos;s say has been attacked by a hacker, then that computer can access all your files on your computer, which, just for the record, is very common among businesses..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is where the hacker on the software can take over your files and make alterations that are permanent..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lastly, the problem worsens when these files are on the server, and then they are breached..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to So this is precisely why you need to have an extra level of protection over your files..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H3_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H3_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At the very core of this concept,  encryption basically means to convert some readable data into unreadable code that prevents people from misusing it..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H4_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H4_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to So when you look at encrypting your data and sensitive files, BitLocker is an amazing option, but that is like putting a lock on your main gate and leaving your front door wide open. While the hardware encryption protects the device, software encryption protects the data..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H4_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H4_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to But the real difference is when encryption is handled by Software and Hardware in terms of speed control and flexibility..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H4_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H4_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;So what is hardware encryption&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_H4_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H4_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is a hybrid model. While you already have a built-in encryption, something like BitLocker, a TPM chip is the hardware aspect in this. This means it uses the CPU&apos;s cryptographic hardware to secure and store information..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H4_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H4_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With hardware encryption, the action takes place independently of the operating system, and it is much faster since it uses a dedicated chip rather than system resources. The benefit here is that the encryption keys are stored within the hardware, which makes it nearly impossible to extract..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H4_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H4_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;And now, what is encryption software&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_H4_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H4_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Same logic, but this uses programs or applications to encrypt data either on an entire disc or specific folder or even individual files, e.g. AxCrypt Encryption Software..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H4_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H4_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is where encryption happens on a software level, giving the user complete control over what they want to encrypt and how they want to manage the keys..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H4_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H4_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here, the benefit is that encryption happens on the system CPU instead of a separate chip, and the files remain encrypted when shared externally, depending on the tool that you used..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H4_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H4_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;table border=&apos;1&apos; cellpadding=&apos;8&apos; cellspacing=&apos;0&apos;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Feature / Point&lt;/th&gt;&lt;th&gt;BitLocker&lt;/th&gt;&lt;th&gt;AxCrypt&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Type of Encryption&lt;/td&gt;&lt;td&gt;Device and full-disk encryption&lt;/td&gt;&lt;td&gt;File-level encryption with advanced security&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Platform Compatibility&lt;/td&gt;&lt;td&gt;Compatible with Windows only&lt;/td&gt;&lt;td&gt;Compatible with Windows, macOS, Android and iOS&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Protection Scope&lt;/td&gt;&lt;td&gt;Entire device&lt;/td&gt;&lt;td&gt;Protects files and folders&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Protection A [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_H5_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H5_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;table border=&apos;1&apos; cellpadding=&apos;8&apos; cellspacing=&apos;0&apos;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Feature / Point&lt;/th&gt;&lt;th&gt;FileVault&lt;/th&gt;&lt;th&gt;AxCrypt&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Type of Encryption&lt;/td&gt;&lt;td&gt;Full-Disk Encryption&lt;/td&gt;&lt;td&gt;File-level encryption with advanced security&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Platform Compatibility&lt;/td&gt;&lt;td&gt;Exclusively for macOS (built-in feature)&lt;/td&gt;&lt;td&gt;Compatible with Windows, macOS, Android, and iOS&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Protection Scope&lt;/td&gt;&lt;td&gt;Encodes information stored on your Mac; access via login ID &amp; password&lt;/td&gt;&lt; [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_H6_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H6_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That’s the whole truth, UNLESS you want your files waving a white flag once the hacker has got complete access..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H7_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H7_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitLocker and FileVault may be solid options to guard your device, but the protection lasts only till the device..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H7_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H7_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are now in a time and age where data travels faster than family gossip..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H7_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H7_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jokes apart, relying on built-in encryption is never enough, and an added layer of protection never hurts. That added layer of protection is AxCrypt, which flips the script for attackers..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H7_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H7_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An untouchable, unbreakable, super-protected and globally compliant encryption software such as AxCrypt is what enterprises around the world trust..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H7_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H7_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whether you&apos;re a business owner with sensitive information, client data or an individual protecting those ‘screenshots receipts’ for your best friend that you swore you would delete, this app is for all..
+        /// </summary>
+        public static string Blog_WYCBEIAE_H7_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_H7_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What Does The Built-In Encryption Actually Do For You?.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Heading1 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Heading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitLocker – A ‘BIT’ too Easy to Abuse.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Heading2 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Heading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why Full-Disk Encryption is not enough?.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Heading3 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Heading3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hardware Encryption Vs Encryption Software: What is the Difference?.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Heading4 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Heading4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BitLocker vs AxCrypt.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Heading5 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Heading5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FileVault vs AxCrypt.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Heading6 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Heading6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On the contrary, protect the contents more than the container!.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Heading7 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Heading7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If Coca-Cola, a beloved household name and a fond memory from our childhood, had saved their famous recipe on a piece of paper and then on a folder that said “Coca-Cola Recipe: Top Secret. DO NOT TOUCH” This brand might not have been as iconic as it is today!.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Summary {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;If Coca-Cola, a beloved household name and a fond memory from our childhood, had saved their famous recipe on a piece of paper and then on a folder that said “Coca-Cola Recipe: Top Secret. DO NOT TOUCH” This brand might not have been as iconic as it is today!&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Just as Coca-Cola’s enduring success depends on how it safeguards what truly matters—the secret recipe—the same logic applies when it comes to protecting your digital assets. The way we secure the container (our devices) and the content inside (our sensitive files) can make all the difference. This same principle applies to digital security..
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And that’s why we ask….
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text11 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If it wasn’t for their carefully guarded recipe, their long-standing legacy and the bold market presence it carries; Coca-cola would have just ended up being copied and would’ve landed up on the shelf and lost in the abyss of countless other competitiors..
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thanks to its unique taste, its closely guarded formula, along with the masterful marketing, Coca-Cola has now enshrined itself into our collective memories. .
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This story is a reminder of how protecting, presenting, and delivering the product is just as important as the product itself..
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And so this very same logic applies to protecting your digital assets, too. .
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, who knows if that cold-brew almond milk coffee, that you experimented with this morning, might just become the next big thing tomorrow?.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And that brings us to an important learning:.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;“The contents are just as important as the container itself”&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Similar to the Coca-Cola example, true success truly depends on how well you safeguard what truly matters to you. The way you secure the container (the devices) and the way you protect the contents inside (our sensitive files) make all the difference..
+        /// </summary>
+        public static string Blog_WYCBEIAE_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why Your Computer’s Built-In Encryption Isn’t Always Enough.
+        /// </summary>
+        public static string Blog_WYCBEIAE_Title {
+            get {
+                return ResourceManager.GetString("Blog_WYCBEIAE_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Final Thoughts: Business Needs Business-Grade Encryption.
         /// </summary>
         public static string Blog_WYONTABE_Conclusion_Heading {
@@ -38648,6 +39278,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please configure the Vault by navigating to Settings → Advanced Settings → Vault Settings..
+        /// </summary>
+        public static string ConfigureVault {
+            get {
+                return ResourceManager.GetString("ConfigureVault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do this for all remaining files?.
         /// </summary>
         public static string ConfirmAllCheckBoxText {
@@ -38909,6 +39548,15 @@ namespace AxCrypt.Content {
         public static string CreateManageGroupsHeading {
             get {
                 return ResourceManager.GetString("CreateManageGroupsHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create New folder.
+        /// </summary>
+        public static string CreateNewFolderText {
+            get {
+                return ResourceManager.GetString("CreateNewFolderText", resourceCulture);
             }
         }
         
@@ -49728,6 +50376,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected folder is inside the Vault, which is already secured. Please choose a different folder to add as a Secured Folder..
+        /// </summary>
+        public static string InvalidForSecuredFolder {
+            get {
+                return ResourceManager.GetString("InvalidForSecuredFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid key for &apos;{0}&apos;..
         /// </summary>
         public static string InvalidKey {
@@ -49760,6 +50417,15 @@ namespace AxCrypt.Content {
         public static string InvalidSubFolder {
             get {
                 return ResourceManager.GetString("InvalidSubFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The configured Vault folder path is either invalid or inaccessible. Update the Vault settings with a valid path to continue..
+        /// </summary>
+        public static string InvalidVaultSetting {
+            get {
+                return ResourceManager.GetString("InvalidVaultSetting", resourceCulture);
             }
         }
         
@@ -53981,6 +54647,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ransomware attackers now abuse BitLocker to lock users out of their own systems. Discover why full-disk encryption isn’t enough and how to truly protect your files..
+        /// </summary>
+        public static string Meta_Description_Blog_WYCBEIAE {
+            get {
+                return ResourceManager.GetString("Meta-Description-Blog-WYCBEIAE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discover why the AxCrypt Business plan is a must for companies. Learn the risks of using Free or Premium versions and the benefits of secure, compliant team encryption..
         /// </summary>
         public static string Meta_Description_Blog_WYONTABE {
@@ -55777,6 +56452,15 @@ namespace AxCrypt.Content {
         public static string Meta_Title_Blog_WUE {
             get {
                 return ResourceManager.GetString("Meta-Title-Blog-WUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full-Disk Encryption Isn’t Enough: Protect Your Files Better.
+        /// </summary>
+        public static string Meta_Title_Blog_WYCBEIAE {
+            get {
+                return ResourceManager.GetString("Meta-Title-Blog-WYCBEIAE", resourceCulture);
             }
         }
         
@@ -60421,7 +61105,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stronger encryption with AES-256.
+        ///   Looks up a localized string similar to Strong Encryption for your files.
         /// </summary>
         public static string premiumproductkeyhead1 {
             get {
@@ -60430,7 +61114,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Share your secure files with key sharing.
+        ///   Looks up a localized string similar to Secure your credentials with ease.
         /// </summary>
         public static string premiumproductkeyhead2 {
             get {
@@ -60439,7 +61123,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Secure files online with cloud storage awareness.
+        ///   Looks up a localized string similar to Private Conversations. Strong Encryption..
         /// </summary>
         public static string premiumproductkeyhead3 {
             get {
@@ -60493,7 +61177,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Advanced AES-256 encryption offers premium protection for your personal files in the three stages of data; data at rest, at transit, and in use. It has a key length of 256 bits and supports the greatest bit size and is practically unbreakable by brute force based on existing computing capability. .
+        ///   Looks up a localized string similar to Protect files with AES-256 bit encryption for complete data confidentiality..
         /// </summary>
         public static string premiumproductkeyparagraph1 {
             get {
@@ -60502,7 +61186,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Premium&apos;s zero - knowledge encryption allows you to securely share encrypted files, ensuring that only your chosen recipients can access them. This makes collaboration both simple and safe, keeping your information private and protected at all times. Files remain secure, as unauthorized users cannot decrypt them without the necessary credentials..
+        ///   Looks up a localized string similar to Add an extra layer of protection with Multi-Factor Authentication (MFA)..
         /// </summary>
         public static string premiumproductkeyparagraph2 {
             get {
@@ -60511,7 +61195,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Effortlessly sync your files with cloud folders on your desktop, including Google Drive, OneDrive, iCloud, and Dropbox. AxCrypt automatically encrypts your files before they are synced to the cloud, ensuring that your data remains secure whether it&apos;s stored locally or accessed from the cloud..
+        ///   Looks up a localized string similar to Encrypt and decrypt files easily across multiple devices and in all major languages..
         /// </summary>
         public static string premiumproductkeyparagraph3 {
             get {
@@ -60520,7 +61204,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Encrypt and decrypt your files directly on your mobile devices, including Android and iOS, to keep your data secure while you&apos;re on the go. Mobile encryption protects your personal photos, videos, and sensitive documents from unauthorized access, shields your data in case of theft or breaches, and ensures only you can share or view your information. Easily integrate with cloud storage services like Google Drive, Dropbox, and OneDrive. .
+        ///   Looks up a localized string similar to Securely store unlimited number of passwords, cards, and notes- all protected by AES-256 encryption..
         /// </summary>
         public static string premiumproductkeyparagraph4 {
             get {
@@ -60529,7 +61213,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Encrypt both the content of your files and their names, including file extensions, for extra protection. This feature adds an additional layer of security to keep your files and their identities private..
+        ///   Looks up a localized string similar to Enable MFA for added login security..
         /// </summary>
         public static string premiumproductkeyparagraph5 {
             get {
@@ -60538,7 +61222,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Permanently delete files to ensure they cannot be recovered by unauthorized parties even with the most sophisticated tools..
+        ///   Looks up a localized string similar to Sync and access seamlessly across devices and in your preferred language..
         /// </summary>
         public static string premiumproductkeyparagraph6 {
             get {
@@ -60547,7 +61231,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Simplify your digital life with AxCrypt Premium&apos;s built-in password manager. Store, organize, and access all your passwords securely in one place, reducing the risk of weak or reused passwords. (Detail out- Credit Card, notes).
+        ///   Looks up a localized string similar to Communicate privately with end-to-end AES-256 encryption on every message..
         /// </summary>
         public static string premiumproductkeyparagraph7 {
             get {
@@ -60556,7 +61240,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Our dedicated support team is available to assist with any questions or issues, ensuring that you can always make the most of AxCrypt Premium and keep your files secure.We will also guide you through easy-to-follow guides and tutorials to ensure you can make the most of our features..
+        ///   Looks up a localized string similar to Strengthen your security with MFA-enabled access..
         /// </summary>
         public static string premiumproductkeyparagraph8 {
             get {
@@ -60565,7 +61249,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enhance communication security with AES-256 encryption, ensuring messages remain private across web, desktop, and mobile. With Secured Messenger, only intended recipients can access messages, protecting sensitive information from unauthorized access..
+        ///   Looks up a localized string similar to Chat securely from any device, in any language, with control over message visibility — view once, timed, or always..
         /// </summary>
         public static string PremiumProductKeyParagraph9 {
             get {
@@ -62070,6 +62754,60 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I&apos;ve been using the product for a couple of months now. From implementation to daily use my questions are answered promptly and with clear instructions. My only regret is that I didn&apos;t know about this sooner!.
+        /// </summary>
+        public static string ProductClientReviewTex1 {
+            get {
+                return ResourceManager.GetString("ProductClientReviewTex1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Easy to request and receive support for a inadvertant double payment for annual fees. Extremely fast initial response/acknowledgement. Prompt resolution by immediately refunding within same working day; no questions asked as I provide the necessary transaction details. This should the benchmark for all support organizations..
+        /// </summary>
+        public static string ProductClientReviewTex2 {
+            get {
+                return ResourceManager.GetString("ProductClientReviewTex2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I use AxCrypt exclusively when I need certain files and folders individually encrypted. This user friendly platform can easily show even the most technically challenged users how it works andhow to use it. I have been using AxCrypt since May of 2021. Highly Recommended..
+        /// </summary>
+        public static string ProductClientReviewTex3 {
+            get {
+                return ResourceManager.GetString("ProductClientReviewTex3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt is known for its simplicity and user-friendly interface. Users can easily encrypt and decrypt files with a simple right-click in Windows Explorer. This makes it accessible even to those who are not technically inclined..
+        /// </summary>
+        public static string ProductClientReviewTex4 {
+            get {
+                return ResourceManager.GetString("ProductClientReviewTex4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I can encrypt/decrypt any document or folder in seconds with just a few mouse clicks..
+        /// </summary>
+        public static string ProductClientReviewTex5 {
+            get {
+                return ResourceManager.GetString("ProductClientReviewTex5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cloud Storage.
+        /// </summary>
+        public static string ProductCloudStorageLabel {
+            get {
+                return ResourceManager.GetString("ProductCloudStorageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Too complex to use.
         /// </summary>
         public static string ProductFeatureComplicatedText {
@@ -62079,7 +62817,61 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Experience Secure and Privacy-First Encryption for Your Personal Files.
+        ///   Looks up a localized string similar to File Name Encryption.
+        /// </summary>
+        public static string ProductFileNameEncryptionLabel {
+            get {
+                return ResourceManager.GetString("ProductFileNameEncryptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share Key Guide.
+        /// </summary>
+        public static string ProductGetStartedguide3 {
+            get {
+                return ResourceManager.GetString("ProductGetStartedguide3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get started with &lt;span&gt;AxCrypt&lt;/span&gt;.
+        /// </summary>
+        public static string ProductGetStartedHead {
+            get {
+                return ResourceManager.GetString("ProductGetStartedHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get the latest version of AxCrypt. Download the application, select your preferred language, and follow the guided steps to complete the setup..
+        /// </summary>
+        public static string ProductGetStartedparagraph1 {
+            get {
+                return ResourceManager.GetString("ProductGetStartedparagraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select which files you want to protect and encrypt them instantly with just a few clicks. No complicated setup;  simply right-click and secure..
+        /// </summary>
+        public static string ProductGetStartedparagraph2 {
+            get {
+                return ResourceManager.GetString("ProductGetStartedparagraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Easily share your encrypted files with family or friends. With one click, they can access the files securely through AxCrypt..
+        /// </summary>
+        public static string ProductGetStartedparagraph3 {
+            get {
+                return ResourceManager.GetString("ProductGetStartedparagraph3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Complete Digital Security Suite - &lt;span&gt;Premium Protection&lt;/span&gt; for &lt;b&gt;Personal Use&lt;/b&gt;.
         /// </summary>
         public static string ProductInfoText1 {
             get {
@@ -62313,6 +63105,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Secure Your Files &lt;b&gt;in Seconds&lt;/b&gt; - &lt;span&gt;Go Premium !&lt;/span&gt;.
+        /// </summary>
+        public static string ProductPremiumPricingHead {
+            get {
+                return ResourceManager.GetString("ProductPremiumPricingHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Try &lt;span&gt; Premium &lt;/span&gt; subscription for &lt;span&gt; one month free. &lt;/span&gt;.
         /// </summary>
         public static string ProductPremiumPricingTitle {
@@ -62322,11 +63123,155 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Full-Suite &lt;span&gt;Protection&lt;/span&gt;, No &lt;b&gt;Compromises&lt;/b&gt;.
+        /// </summary>
+        public static string ProductPremiumProtectionHead {
+            get {
+                return ResourceManager.GetString("ProductPremiumProtectionHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;No more worries over data compromise &lt;/span&gt;.
+        /// </summary>
+        public static string ProductPremiumProtectionSubHead {
+            get {
+                return ResourceManager.GetString("ProductPremiumProtectionSubHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;World-Class Encryption&lt;/span&gt; for &lt;b&gt;Personal&lt;/b&gt; File &lt;b&gt;Security&lt;/b&gt;.
+        /// </summary>
+        public static string ProductPremiumSecurityHeading {
+            get {
+                return ResourceManager.GetString("ProductPremiumSecurityHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get the confidence of enterprise-level encryption for your files and folders, all with a simple plan that fits your budget..
+        /// </summary>
+        public static string ProductPremiumSecurityPargraph {
+            get {
+                return ResourceManager.GetString("ProductPremiumSecurityPargraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No more worries over data compromise.
+        /// </summary>
+        public static string ProductPremiumSecuritySubHeading {
+            get {
+                return ResourceManager.GetString("ProductPremiumSecuritySubHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt’s secure encryption helps prevent your private files from being compromised by phishing emails or malicious attachments. Your data remains fully secure, even if a shared link is intercepted or sent to the wrong person..
+        /// </summary>
+        public static string ProductPremiumSecurityText1 {
+            get {
+                return ResourceManager.GetString("ProductPremiumSecurityText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This advanced security feature recognizes that a file’s safety depends on its content, not its container. Because every shared file is encrypted, a bad link will not expose your data to unauthorized access, ensuring your files remain completely secure wherever they are sent..
+        /// </summary>
+        public static string ProductPremiumSecurityText2 {
+            get {
+                return ResourceManager.GetString("ProductPremiumSecurityText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stronger encryption with &lt;span&gt; AES-256&lt;/span&gt;.
         /// </summary>
         public static string ProductPremiumSellingPointsStrongerEncrypt {
             get {
                 return ResourceManager.GetString("ProductPremiumSellingPointsStrongerEncrypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Securely share encrypted files with others via AxCrypt’s Key Sharing. You choose recipients by email so they can decrypt using their own credentials, without you ever sharing your password..
+        /// </summary>
+        public static string ProductProtectCarouselText1 {
+            get {
+                return ResourceManager.GetString("ProductProtectCarouselText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work seamlessly with cloud storage services (Dropbox, OneDrive, Google Drive): designate cloud or local folders as “secured,” and AxCrypt encrypts files before or when syncing to the cloud to protect your data in every location..
+        /// </summary>
+        public static string ProductProtectCarouselText2 {
+            get {
+                return ResourceManager.GetString("ProductProtectCarouselText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypt and decrypt files directly on your mobile device (Android &amp; iOS). Access encrypted files from cloud storage or received via email, ensuring your data remains protected on the go..
+        /// </summary>
+        public static string ProductProtectCarouselText3 {
+            get {
+                return ResourceManager.GetString("ProductProtectCarouselText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permanently wipe files so they can’t be recovered by undelete tools. Ensures that deleted sensitive data is removed safely..
+        /// </summary>
+        public static string ProductProtectCarouselText4 {
+            get {
+                return ResourceManager.GetString("ProductProtectCarouselText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get priority access to AxCrypt’s support team- faster responses, direct help, and guidance through any issues. Included in Premium so you can stay on top of your security without waiting..
+        /// </summary>
+        public static string ProductProtectCarouselText5 {
+            get {
+                return ResourceManager.GetString("ProductProtectCarouselText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an extra layer of login security beyond just your password: by enabling MFA you protect access to your account in case your password is compromised..
+        /// </summary>
+        public static string ProductProtectCarouselText6 {
+            get {
+                return ResourceManager.GetString("ProductProtectCarouselText6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename secured files to randomized identifiers so that the original names stay private. When you decrypt or open the file, the real file name is automatically restored..
+        /// </summary>
+        public static string ProductProtectCarouselText7 {
+            get {
+                return ResourceManager.GetString("ProductProtectCarouselText7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Built &lt;span&gt;Secure&lt;/span&gt;. Built &lt;b&gt;Compliant&lt;/b&gt;.
+        /// </summary>
+        public static string ProductRegulatoryHead {
+            get {
+                return ResourceManager.GetString("ProductRegulatoryHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All your files, passwords, and messages are encrypted locally with AES-256 and protected by zero-knowledge privacy. Get seamless access on any device, anywhere..
+        /// </summary>
+        public static string ProductremiumHeadparagraph {
+            get {
+                return ResourceManager.GetString("ProductremiumHeadparagraph", resourceCulture);
             }
         }
         
@@ -62471,6 +63416,96 @@ namespace AxCrypt.Content {
         public static string ProductSellingPointsUnlimitedPasswords {
             get {
                 return ResourceManager.GetString("ProductSellingPointsUnlimitedPasswords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;Support&lt;/span&gt; &amp; &lt;b&gt;Growth&lt;/b&gt;.
+        /// </summary>
+        public static string ProductSupportGrowthHead {
+            get {
+                return ResourceManager.GetString("ProductSupportGrowthHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat Bot.
+        /// </summary>
+        public static string ProductSupportGrowthHead1 {
+            get {
+                return ResourceManager.GetString("ProductSupportGrowthHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smooth Upgrade to Business.
+        /// </summary>
+        public static string ProductSupportGrowthHead2 {
+            get {
+                return ResourceManager.GetString("ProductSupportGrowthHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forum.
+        /// </summary>
+        public static string ProductSupportGrowthHead3 {
+            get {
+                return ResourceManager.GetString("ProductSupportGrowthHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get all your guidance here with step-by-step guides, Video Tutorials &amp; FAQs.
+        /// </summary>
+        public static string ProductSupportGrowthText1 {
+            get {
+                return ResourceManager.GetString("ProductSupportGrowthText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email support and priority responses for Premium subscribers..
+        /// </summary>
+        public static string ProductSupportGrowthText2 {
+            get {
+                return ResourceManager.GetString("ProductSupportGrowthText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find all your quick queries here 24/7.
+        /// </summary>
+        public static string ProductSupportGrowthText3 {
+            get {
+                return ResourceManager.GetString("ProductSupportGrowthText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join our community forum to ask questions, share tips, and connect with other users..
+        /// </summary>
+        public static string ProductSupportGrowthText4 {
+            get {
+                return ResourceManager.GetString("ProductSupportGrowthText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trusted by &lt;span&gt;millions&lt;/span&gt;.
+        /// </summary>
+        public static string ProductTrustedByMillionHead {
+            get {
+                return ResourceManager.GetString("ProductTrustedByMillionHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Awarded for reliable encryption and trusted across 100+ countries.
+        /// </summary>
+        public static string ProductTrustedByMillionText {
+            get {
+                return ResourceManager.GetString("ProductTrustedByMillionText", resourceCulture);
             }
         }
         
@@ -62646,7 +63681,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Why AxCrypt&lt;span&gt; Premium?&lt;/span&gt;.
+        ///   Looks up a localized string similar to Your Complete &lt;span&gt;Cyber Security Solution&lt;/span&gt; in &lt;b&gt;One Subscription&lt;/b&gt;.
         /// </summary>
         public static string ProductWhyAxcryptPremium {
             get {
@@ -65548,6 +66583,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected folder/file is part of the Vault and already secured. To add new items, please choose a location outside the Vault..
+        /// </summary>
+        public static string SecuredFolderValidationCannotAddItemsInVault {
+            get {
+                return ResourceManager.GetString("SecuredFolderValidationCannotAddItemsInVault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How to Send a Secured Message?.
         /// </summary>
         public static string SecuredMessageGuidesHead1 {
@@ -67046,6 +68090,15 @@ namespace AxCrypt.Content {
         public static string ShareKeysToolStripMenuItemText {
             get {
                 return ResourceManager.GetString("ShareKeysToolStripMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share.
+        /// </summary>
+        public static string ShareLabel {
+            get {
+                return ResourceManager.GetString("ShareLabel", resourceCulture);
             }
         }
         
@@ -70866,11 +71919,155 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your files in the previous Vault location are still secured. Going forward, this path will be treated as a Secured Folder..
+        /// </summary>
+        public static string VaultChangeMessage {
+            get {
+                return ResourceManager.GetString("VaultChangeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous Vault files remain secured.
+        /// </summary>
+        public static string VaultChangeTitle {
+            get {
+                return ResourceManager.GetString("VaultChangeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Vault has been configured successfully..
+        /// </summary>
+        public static string VaultConfiguredSuccessText {
+            get {
+                return ResourceManager.GetString("VaultConfiguredSuccessText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter you Vault folder Name.
+        /// </summary>
+        public static string VaultCreateNewFolderPrompt {
+            get {
+                return ResourceManager.GetString("VaultCreateNewFolderPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drag and drop your file/folder here.
+        /// </summary>
+        public static string VaultDrogDropText {
+            get {
+                return ResourceManager.GetString("VaultDrogDropText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-encrypt opened Vault when exiting?.
+        /// </summary>
+        public static string VaultLabelPromptAutoEncypt {
+            get {
+                return ResourceManager.GetString("VaultLabelPromptAutoEncypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide file name on encryption?.
+        /// </summary>
+        public static string VaultLabelPromptHideName {
+            get {
+                return ResourceManager.GetString("VaultLabelPromptHideName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Where should we store your encrypyed data?.
+        /// </summary>
+        public static string VaultLabelPromptVaultPath {
+            get {
+                return ResourceManager.GetString("VaultLabelPromptVaultPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The path set for the Vault appears to be moved or deleted. Kindly reconfigure the Vault in Settings → Advanced Settings → Vault Settings..
+        /// </summary>
+        public static string VaultMisConfigured {
+            get {
+                return ResourceManager.GetString("VaultMisConfigured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vault Settings.
         /// </summary>
         public static string VaultSettingsTitle {
             get {
                 return ResourceManager.GetString("VaultSettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vault.
+        /// </summary>
+        public static string VaultText {
+            get {
+                return ResourceManager.GetString("VaultText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You don’t have access to the selected folder/file. Please select a folder or file you can access..
+        /// </summary>
+        public static string VaultValidationAccessDenied {
+            get {
+                return ResourceManager.GetString("VaultValidationAccessDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot add a subfolder of the Vault into the Vault. Please select a folder outside the Vault..
+        /// </summary>
+        public static string VaultValidationCannotAddVaultFldrToVault {
+            get {
+                return ResourceManager.GetString("VaultValidationCannotAddVaultFldrToVault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The chosen path is inside the Vault. Decrypted files must be saved to a folder outside the Vault..
+        /// </summary>
+        public static string VaultValidationDecryptPath {
+            get {
+                return ResourceManager.GetString("VaultValidationDecryptPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot add a file of the Vault into the Vault again. Please select a file outside the Vault..
+        /// </summary>
+        public static string VaultValidationFileDuplication {
+            get {
+                return ResourceManager.GetString("VaultValidationFileDuplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files dropped into the Vault will be removed from their original location and moved into the Vault. Do you want to continue?.
+        /// </summary>
+        public static string VaultWarningsFileWillBeRemoved {
+            get {
+                return ResourceManager.GetString("VaultWarningsFileWillBeRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folders dropped into the Vault will be removed from their original location and moved into the Vault. Do you want to continue?.
+        /// </summary>
+        public static string VaultWarningsFolderWillBeRemoved {
+            get {
+                return ResourceManager.GetString("VaultWarningsFolderWillBeRemoved", resourceCulture);
             }
         }
         
