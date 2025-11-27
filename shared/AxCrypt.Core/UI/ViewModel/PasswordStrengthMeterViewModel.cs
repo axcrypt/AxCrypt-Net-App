@@ -67,6 +67,9 @@ namespace AxCrypt.Core.UI.ViewModel
                     case PasswordStrength.Weak:
                         return Texts.PasswordStrengthWeakTip;
 
+                    case PasswordStrength.Average:
+                        return Texts.PasswordStrengthWeakTip;
+
                     case PasswordStrength.Strong:
                         return Texts.PasswordStrengthStrongTip;
 

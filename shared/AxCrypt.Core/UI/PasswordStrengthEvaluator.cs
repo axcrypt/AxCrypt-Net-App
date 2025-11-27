@@ -58,9 +58,13 @@ namespace AxCrypt.Core.UI
             {
                 strength = PasswordStrength.Unacceptable;
             }
-            if (percent > 50 && percent < 75)
+            if (percent > 40 && percent < 60)
             {
                 strength = PasswordStrength.Weak;
+            }
+            if (percent > 60 && percent < 75)
+            {
+                strength = PasswordStrength.Average;
             }
             if (percent >= 75)
             {

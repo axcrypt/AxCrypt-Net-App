@@ -9,6 +9,7 @@ using AxCrypt.App.Shared.Desktop.ViewModels.Main;
 using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
 using Microsoft.Extensions.DependencyInjection;
+using AxCrypt.Core.UI.ViewModel;
 namespace AxCrypt.App.Shared.Desktop;
 
 public static class AppDesktopFactory
@@ -44,6 +45,7 @@ public static class AppDesktopFactory
 
         services.AddSingleton<RecentFoldersComponent>();
         services.AddSingleton<CopyToClipboardUtility>();
+        services.AddSingleton<PasswordStrengthMeterViewModel>();
 
         TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
         TypeMap.Register.Singleton<IMultiFactorAuthService>(() => new MultiFactorAuthService());
