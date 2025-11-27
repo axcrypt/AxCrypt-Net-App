@@ -4,8 +4,23 @@
 @using AxCrypt.Content
 
 @inject SubActionViewModel? subActionModel
+@inject NavigationManager Navigation
 
 <div class="mre-act-sec">
+    @if (subActionModel!.EnableVault)
+    {
+        <div style="display:block;">
+            <h3 class="fle-nme fnt-sze">@Texts.VaultText</h3>
+            <div style="display: flex;">
+                <div title="@Texts.VaultText">
+                    <button @onclick="ValidateVaultNavigation"
+                            class="assets-box">
+                        <img class="vlt-icon" style="width:32px;height:32px;" alt="Vault" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
     @if (subActionModel!.EnableCloudServices)
     {
         <div id="help-cloud-services" style="display:block;">
@@ -97,5 +112,14 @@
         {
             StateHasChanged(); // Refresh UI
         });
+    }
+
+    private async Task ValidateVaultNavigation()
+    {
+        bool isValid = await subActionModel.ValidateVaultPath();
+        if (isValid)
+        {
+            Navigation.NavigateTo("/Vault");
+        }
     }
 }

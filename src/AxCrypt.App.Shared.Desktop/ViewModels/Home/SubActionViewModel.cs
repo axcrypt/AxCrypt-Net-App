@@ -4,6 +4,7 @@ using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
+using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -48,6 +49,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
 
         public bool EnableCloudServices { get; set; }
 
+        public bool EnableVault { get; set; }
+
         public bool EnableRandomRename { get; set; }
 
         public bool EnableSecureWipeFiles { get; set; }
@@ -71,6 +74,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
         private async Task ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
         {
             await ConfigureCloudServiceAsync(license);
+            await ConfigureVaultAsync(license);
             await ConfigureAnonymousRenameAsync(license);
             await ConfigureSecureWipeAsync(license);
             await ConfigureStrongEncryptionAsync(license);
@@ -125,6 +129,18 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             else
             {
                 EnableCloudServices = false;
+            }
+        }
+
+        private async Task ConfigureVaultAsync(LicenseCapabilities license)
+        {
+            if (license.Has(LicenseCapability.Vault))
+            {
+                EnableVault = true;
+            }
+            else
+            {
+                EnableVault = false;
             }
         }
 
@@ -191,6 +207,33 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             //}
 
             UpdateViewState();
+        }
+
+        public async Task<bool> ValidateVaultPath()
+        {
+            string vaultfolder = New<UserSettings>().VaultEncryptDataPath;
+
+            if (string.IsNullOrEmpty(vaultfolder))
+            {
+                await New<IPopup>().ShowAsync(
+                    PopupButtons.Ok,
+                    Texts.WarningTitle,
+                    Texts.ConfigureVault
+                );
+                return false;
+            }
+
+            if (!New<IDataContainer>(vaultfolder).IsAvailable)
+            {
+                await New<IPopup>().ShowAsync(
+                    PopupButtons.Ok,
+                    Texts.WarningTitle,
+                    Texts.VaultMisConfigured
+                );
+                return false;
+            }
+
+            return true;
         }
 
         public string GetIconClass(string displayName)

@@ -34,6 +34,7 @@
         SendUnlimitedMessages,
 
         FindFiles,
+        Vault,
 
         TextEncryptionPremium,
         TextEncryptionBusiness

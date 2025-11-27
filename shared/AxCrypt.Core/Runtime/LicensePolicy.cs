@@ -81,6 +81,7 @@ namespace AxCrypt.Core.Runtime
             LicenseCapability.ShareSecretPremium,
             LicenseCapability.SendUnlimitedMessages,
             LicenseCapability.FindFiles,
+            LicenseCapability.Vault,
             LicenseCapability.TextEncryptionPremium,
         }));
 

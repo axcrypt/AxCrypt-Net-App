@@ -69,6 +69,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<TextEncryption>();
             services.AddSingleton<Notification>();
             services.AddSingleton<FindFiles>();
+            services.AddSingleton<Vault>();
             services.AddSingleton<Support>();
             services.AddSingleton<SecuredMessengerComponent>();
 

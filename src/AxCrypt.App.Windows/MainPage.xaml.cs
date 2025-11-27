@@ -32,6 +32,7 @@ public partial class MainPage : ContentPage, ISignIn
 
     private const string? _homePage = "/";
     private const string? _securedFolders = "/securedfolders";
+    private const string? _vault = "/Vault";
 
     private ApiVersion? _apiVersion;
 
@@ -65,6 +66,7 @@ public partial class MainPage : ContentPage, ISignIn
                 {
                     case _homePage:
                     case _securedFolders:
+                    case _vault:
                         e.AcceptedOperation = DataPackageOperation.Move;
                         break;
                     default:
@@ -78,7 +80,7 @@ public partial class MainPage : ContentPage, ISignIn
             {
                 e.Handled = true;
                 string? currentPage = _fileDropService.CurrentPage;
-                if (currentPage is not (_homePage or _securedFolders)) return;
+                if (currentPage is not (_homePage or _securedFolders or _vault)) return;
 
                 if (!e.DataView.Contains(StandardDataFormats.StorageItems))
                 {

@@ -525,14 +525,35 @@
                 </div>
             </dd>
         </dl>
-        @* <dl>
-            <dd class="center-column" style="cursor:pointer">
-                <div @onclick="(e)=> AppSettingsViewModel.ToggleVaultSettings()">
-                    <img class="" src="/images/vltsett.svg" alt="vault_settings_icon" />
-                    <span class="font-medium grey-clr">@Texts.VaultSettingsTitle</span>
-                </div>
-            </dd>
-        </dl> *@
+        @if (AppSettingsViewModel.EnableVaultMenuOption)
+        {
+            <dl>
+                <dd class="center-column" style="cursor:pointer" @onclick="(e) => AppSettingsViewModel.ToggleVaultSettings()">
+                    <div>
+                        <img class="" src="/images/vltsett.svg" alt="vault_settings_icon" />
+                        <span class="font-medium grey-clr">@Texts.VaultSettingsTitle</span>
+                    </div>
+                </dd>
+            </dl>
+        }
+        else
+        {
+            <dl @onmouseover='@(() => ShowPopup("Vault"))' @onmouseout='@(() => HidePopup())'>
+                <dd class="center-column" @onclick="AppSettingsViewModel.ShowUpgradePopup">
+                    <div>
+                        <img class="" src="/images/vltsett.svg" alt="vault_settings_icon" />
+                        <span class="font-medium grey-clr subs-required">@Texts.VaultSettingsTitle</span>
+                    </div>
+
+                    @if (isHovered && hoveredElement == "Vault")
+                    {
+                        <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
+                            <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
+                        </div>
+                    }
+                </dd>
+            </dl>
+        }
         <dl>
             <dd class="center-column">
                 <img class="" src="images/default/IcoFileLgng.svg" alt="IcoFileLgng" style="margin-right:5px;" />

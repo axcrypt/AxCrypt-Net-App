@@ -101,6 +101,8 @@ public class AppSettingsViewModel : ViewModelBase
 
     public bool EnableFindFilesMenuOption { get; set; }
 
+    public bool EnableVaultMenuOption { get; set; }
+
     private static bool _hideRecentFiles;
 
     public bool HideRecentFiles
@@ -463,6 +465,7 @@ public class AppSettingsViewModel : ViewModelBase
         ConfigureEncryptionFilePropertiesMenu(license);
         ConfigureInviteFrientMenu(license);
         ConfigureFindFilesMenu(license);
+        ConfigureVaultMenu(license);
         UpdateViewState();
     }
 
@@ -547,6 +550,18 @@ public class AppSettingsViewModel : ViewModelBase
         else
         {
             EnableFindFilesMenuOption = false;
+        }
+    }
+
+    private void ConfigureVaultMenu(LicenseCapabilities license)
+    {
+        if (license.Has(LicenseCapability.Vault))
+        {
+            EnableVaultMenuOption = true;
+        }
+        else
+        {
+            EnableVaultMenuOption = false;
         }
     }
 

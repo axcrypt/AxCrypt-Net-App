@@ -1,8 +1,12 @@
 ﻿@using AxCrypt.App.Shared.Desktop.ViewModels.Main
+@using AxCrypt.Content
+@using AxCrypt.Core.IO
+@using AxCrypt.Core.UI
+@using static AxCrypt.Abstractions.TypeResolve;
 
 @inject VaultSettingsViewModel VaultSettingsViewModel
 
-@if (IsVisible)
+@if (VaultSettingsViewModel.IsVisible)
 {
     <div id="vault-settings-modalDialog" class="vault-body modalDialog">
         <div class="">
@@ -12,26 +16,26 @@
                 <label style="color: #494949;font-size: 20px;font-weight:800;">Vault Encryption Settings</label>
             </div>
 
-            <span class="vault-question">Where should we store your encrypyed data?</span>
+            <span class="vault-question">@Texts.VaultLabelPromptVaultPath</span>
             <div class="vault-store-location-sec">
                 <input class="input1" type="text" id="text-box" name="" @bind-value="VaultSettingsViewModel.VaultEncryptDataPath">
-                <input class="input2" type="button" id="search" value="Browse" name="" @onclick="async (e) => await VaultSettingsViewModel.AddSecuredFolder(e)">
+                <input class="input2" type="button" id="Browse" value="Browse" name="" @onclick="async (e) => await VaultSettingsViewModel.AddSecuredFolder(e)">
             </div>
 
-            <div class="vault-auto-enc-toggle-sec">
-                <span class="vault-question">Auto-encrypt opened Vault when exiting?</span>
+            <div class="vault-auto-enc-toggle-sec" style="display:none">
+                <span class="vault-question">@Texts.VaultLabelPromptAutoEncypt</span>
                 <input id="check" type="checkbox" @bind="VaultSettingsViewModel.AutoVaultEncryptSigninFiles">
                 <label for="check" class="vault-auto-enc-toggle-chckbx"></label>
             </div>
 
             <div class="vault-hide-filename-toggle-sec">
-                <span class="vault-question">Hide file name on encryption?</span>
-                <input id="check-2" type="checkbox" @bind="VaultSettingsViewModel.VaultEncryptionFiles">
+                <span class="vault-question">@Texts.VaultLabelPromptHideName</span>
+                <input id="check-2" type="checkbox" @bind="VaultSettingsViewModel.VaultEncryptWithAutoRenameFiles">
                 <label for="check-2" class="vault-hide-filename-toggle-chckbx"></label>
             </div>
 
             <div style="text-align:center;margin:20px;">
-                <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => await VaultSettingsViewModel.SaveVaultSetting()" />
+                <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => await ValidateVaultPath()" />
                 <input type="button" class="input1 onbuttom-cancel" id="sbox" value="Cancel" name="" @onclick="VaultSettingsViewModel.Cancel" />
             </div>
 
@@ -39,20 +43,57 @@
     </div>
 }
 
+@if (_isVisible)
+{
+    <div id="vault-settings-modalDialog" class="vault-body modalDialog">
+        <div class="">
+            <div style="text-align:center;margin-bottom:18px;">
+                <img src="" class="vlt-pathchange-img" alt="Vault encrypion settings" />
+                <br />
+                <label style="color: #494949;font-size: 20px;font-weight:800;">@Texts.VaultChangeTitle</label>
+                <br />
+                <p>@Texts.VaultChangeMessage</p>
+            </div>
+            <div style="text-align:center;margin:20px;">
+                <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => { CloseVaultConfirmPop(); await VaultSettingsViewModel.MoveVaulttoSecuredfolder(); }" />
+                <input type="button" class="input1 onbuttom-cancel" id="sbox" value="Cancel" name="" @onclick="CloseVaultConfirmPop" />
+            </div>
+        </div>
+    </div>
+}
+
 @code {
-    private bool IsVisible { get; set; }
+    private bool _isVisible = false;
 
     protected override void OnInitialized()
     {
         VaultSettingsViewModel.OnUpdateViewState += async ()=> await UpdateState();
         VaultSettingsViewModel.VaultSettingsDialog.OnDialogVisibilityChanged += async (isVisible) => await UpdateAdvancedOptionsState(isVisible);
-
         base.OnInitialized();
+    }
+
+    private async Task ValidateVaultPath()
+    {
+        if (string.IsNullOrEmpty(VaultSettingsViewModel.VaultEncryptDataPath) || !New<IDataContainer>(VaultSettingsViewModel.VaultEncryptDataPath).IsAvailable)
+        {
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.InvalidVaultSetting);
+            return;
+        }
+
+        _isVisible = !string.IsNullOrEmpty(VaultSettingsViewModel.ExistingVaultPath) && VaultSettingsViewModel.ExistingVaultPath != VaultSettingsViewModel.VaultEncryptDataPath;
+
+        if (_isVisible)
+        {
+            VaultSettingsViewModel.VaultSettingsDialog.Close();
+            return;
+        }
+
+        await VaultSettingsViewModel.SaveVaultSetting();
     }
 
     async Task UpdateAdvancedOptionsState(bool isVisible)
     {
-        IsVisible = isVisible;
+        VaultSettingsViewModel.IsVisible = isVisible;
         await UpdateState();
     }
 
@@ -62,5 +103,10 @@
         {
             StateHasChanged();
         });
+    }
+
+    void CloseVaultConfirmPop()
+    {
+        _isVisible = false;
     }
 }

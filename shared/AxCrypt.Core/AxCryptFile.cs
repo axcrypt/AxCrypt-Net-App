@@ -254,6 +254,45 @@ namespace AxCrypt.Core
             }
         }
 
+        public virtual async Task EncryptVaultFolderUniqueWithBackupAndWipeAsync(IDataContainer container, EncryptionParameters encryptionParameters, IProgressContext progress, IEnumerable<IDataContainer>? ignoredFolders = null)
+        {
+            if (container == null)
+            {
+                throw new ArgumentNullException("container");
+            }
+            if (progress == null)
+            {
+                throw new ArgumentNullException("progress");
+            }
+
+            List<IDataContainer> ignoredFolderList = new List<IDataContainer>();
+            if (ignoredFolders != null && ignoredFolders.Any())
+            {
+                ignoredFolderList = ignoredFolders.ToList();
+            }
+            ignoredFolderList.Add(container);
+
+            progress.NotifyLevelStart();
+            try
+            {
+                List<IDataStore> files = new List<IDataStore>();
+                files.AddRange(await container.ListEncryptableWithWarningAsync(ignoredFolderList, FolderOperationMode.IncludeSubfolders));
+
+                progress.AddTotal(files.Count());
+                foreach (IDataStore file in files)
+                {
+                    progress.Display = file.Name;
+                    await EncryptFileUniqueWithBackupAndWipeAsync(file, encryptionParameters, progress);
+                    progress.AddCount(1);
+                    progress.Totals.AddFileCount(1);
+                }
+            }
+            finally
+            {
+                progress.NotifyLevelFinished();
+            }
+        }
+
         public virtual async Task EncryptFileUniqueWithBackupAndWipeAsync(IDataStore sourceStore, EncryptionParameters encryptionParameters, IProgressContext progress)
         {
             if (!await sourceStore.IsEncryptableWithWarningAsync())
@@ -740,6 +779,20 @@ namespace AxCrypt.Core
                 }
             }
             return destinationFileName;
+        }
+
+        public virtual async Task DecryptFilesInsideVaultFolderUniqueWithWipeOfOriginalAsync(IDataContainer sourceContainer, LogOnIdentity logOnIdentity, IStatusChecker statusChecker, IProgressContext progress)
+        {
+            IEnumerable<IDataStore> files = sourceContainer.ListEncrypted(new List<IDataContainer> { }, FolderOperationMode.IncludeSubfolders);
+            await Resolve.ParallelFileOperation.DoFilesAsync(files, (file, context) =>
+            {
+                return DecryptFileUniqueWithWipeOfOriginalAsync(file, logOnIdentity, context);
+            },
+            async (status) =>
+            {
+                await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.UpdateActiveFiles));
+                statusChecker.CheckStatusAndShowMessage(status.ErrorStatus, status.FullName, status.InternalMessage);
+            }).Free();
         }
 
         public virtual async Task DecryptFilesInsideFolderUniqueWithWipeOfOriginalAsync(IDataContainer sourceContainer, LogOnIdentity logOnIdentity, IStatusChecker statusChecker, IProgressContext progress)

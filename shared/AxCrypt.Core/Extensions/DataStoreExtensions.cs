@@ -236,7 +236,30 @@ namespace AxCrypt.Core.Extensions
             }
 
             string encryptedName = fullName.FullName.CreateEncryptedName();
-            return New<IDataStore>(encryptedName);
+            IDataStore destinationStore =  New<IDataStore>(encryptedName);
+
+            if (destinationStore.Container.IsVault() && New<UserSettings>().VaultEncryptWithAutoRenameFiles)
+            {
+                return destinationStore.CreateRandomUniqueName();
+            }
+
+            return destinationStore;
+        }
+
+        public static bool IsVault(this IDataContainer folderPath)
+        {
+            if (folderPath == null)
+            {
+                throw new ArgumentNullException(nameof(folderPath));
+            }
+
+            if (New<UserSettings>().VaultEncryptDataPath == "")
+            {
+                return false;
+            }
+
+            IDataContainer vaultEncryptDataContainer =  New<IDataContainer>(New<UserSettings>().VaultEncryptDataPath);
+            return folderPath.FullName.Contains(vaultEncryptDataContainer.FullName);
         }
 
         /// <summary>

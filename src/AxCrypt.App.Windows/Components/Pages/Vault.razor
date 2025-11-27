@@ -1,0 +1,333 @@
+﻿@page "/Vault"
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Common
+@using AxCrypt.Content
+@using AxCrypt.Core.UI
+
+@inject VaultViewModel ViewModel
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+@inject FileDropService FileDropService
+@using static AxCrypt.Abstractions.TypeResolve;
+
+<div class="vlt-header">
+    <a href="/" class="vault-back-link"><img class="Ico-LeftArrow" />Texts.BackToHomeText</a>
+</div>
+
+<div class="vlt-body" @onclick="async () => await HideContextMenu()">
+    <div class="page-title" style="margin-bottom:0;">
+        <h1>Vault</h1>
+    </div>
+    <div class="vlt-search-add">
+        <div class="vlt-search">
+            <input id="searchKeyword"
+                   name="searchKeyword"
+                   type="text"
+                   @bind="searchText"
+                   @oninput="async (eargs) => await OnSearchChanged(eargs)"
+                   placeholder="Search" />
+
+            <div class="search-btn"
+                 alt="search" @onclick="async ()=> await ViewModel.FilterVaultFiles(searchText)">
+                <img class="ico-vault-search" alt="search-icon"/>
+            </div>
+        </div>
+        <div class="vlt-add">
+            <select @bind="selectedtype" class="vlt-select-type">
+                <option value="file">File</option>
+                <option value="folder">Folder</option>
+            </select>
+            @if (selectedtype == "file")
+            {
+                <input class="vlt-btn-add" type="button" value="Add" @onclick="async e => await ViewModel.AddVaultFiles(e)" />
+            }
+            else
+            {
+                <input class="vlt-btn-add" type="button" value="Add" @onclick="async e => await ViewModel.AddVaultFolder(e, ViewModel.Currentfolder)" />
+            }
+        </div>
+    </div>
+    <div class="vlt-content-area">
+
+        @if (ViewModel.VaultItemList.Any())
+        {
+            <div class="vlt-list-folder">
+                <div class="vlt-header-bar">
+                    @if (isListView)
+                    {
+                        <div class="div-list-header">
+                            <span>@Texts.NameLabel</span>
+                            <span>@Texts.FileSizeColumnHeaderText</span>
+                            <span>@Texts.LastModifiedTimeColumnHeaderText</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="div-grid-header">
+                            <span>@Texts.NameLabel</span>
+                        </div>
+                    }
+
+                    <div class="display-type">
+                        <img class="@((isListView ? "selected" : "")) Ico-List"
+                             @onclick="() => SetView(true)"
+                             alt="List View" />
+
+                        <img class="@((!isListView ? "selected" : "")) Ico-Grid"
+                             @onclick="() => SetView(false)"
+                             alt="Grid View" />
+
+                    </div>
+                </div>
+                <div class="@(isListView ? "list-view-div" : "grid-view-div") @(isfileselected ? "prev-grid" : "")" @onclick="async () => await HideContextMenu()" @oncontextmenu="@(async e => await ShowContextMenu(e, "", "", "create"))">
+                    <ul class="vlt-file-list @(isListView ? "list-view" : "grid-view")">
+                        @foreach (var file in ViewModel.VaultItemList)
+                        {
+                            string filename = System.IO.Path.GetFileName(file.Filepath);
+                            <li class="file-list-item  @(ViewModel.SelectedFilePath == file.Filepath ? "selected" : "")" @ondblclick="@(file.FileType == "folder" ? (() => Openfolder(file.Filepath)) : (Action)null)"
+                                @oncontextmenu="@(async e => await ShowContextMenu(e, filename, file.Filepath, file.FileType))" @oncontextmenu:stopPropagation
+                                @onclick="async () => await SelectFile(file.FileType, filename, file.Filepath, file.Size)">
+                                <div class="file-details">
+                                    <span class="file-img-det">
+                                        <img alt="File Icon" class="list-file-icon @(file.FileType == "folder" ? "Icon-folder" : "Icon-file")" />
+                                        <span class="file-name">@((MarkupString)HighlightMatch(filename))</span>
+                                    </span>
+                                    @if (isListView)
+                                    {
+                                        <span>@file.Size</span>
+                                        <span>@file.ModifiedDate</span>
+                                    }
+                                </div>
+                            </li>
+                        }
+                    </ul>
+
+                    @if (!isListView && isfileselected)
+                    {
+                        <div class="detail-section">
+                            <img alt="Preview" class="detail-image  @(ViewModel.SelectedIsfolder ? "Icon-folder" : "Icon-file")" />
+                            <span class="detail-label">@Texts.FilePropertiesFileNameToolStripMenuItem</span>
+                            <span class="fil-fol-detail">@ViewModel.SelectedFile</span>
+                            <span class="detail-label">@Texts.FileSizeColumnHeaderText</span>
+                            <span class="fil-fol-detail">@ViewModel.SelectedFileSize</span>
+                            <span class="detail-label">@Texts.FindPathTitle</span>
+                            <span class="fil-fol-detail">@ViewModel.SelectedFilePath</span>
+                        </div>
+                    }
+                </div>
+
+
+                @if (contextMenuType == "file")
+                {
+                    <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
+                        <span class="menu-item" @onclick='() => ViewModel.HandlefileActionAsync("Open")'>@Texts.RecentFilesOpenToolStripMenuItemText</span>
+                        <span class="menu-item" @onclick="async e => await ViewModel.DecryptVaultfile(e)">@Texts.DecryptToolStripMenuItemText</span>
+                        <span class="menu-item" @onclick='() => ViewModel.HandlefileActionAsync("Reveal")'>@Texts.ShowInFolderText</span>
+                        <span class="menu-item" @onclick='() => ViewModel.HandlefileActionAsync("RenameAnonymously")'>@Texts.AnonymousRenameMenuText</span>
+                        <span class="menu-item" @onclick='() => ViewModel.HandlefileActionAsync("RenameOriginal")'>@Texts.RestoreAnonymousNamesMenuText</span>
+                    </div>
+                }
+                else if (contextMenuType == "folder")
+                {
+                    <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
+                        <span class="menu-item" @onclick="async e => await ViewModel.DecryptVaultfolder(e)">@Texts.DecryptToolStripMenuItemText</span>
+                        <span class="menu-item" @onclick='() => ViewModel.HandlefolderActionAsync("Reveal")'>@Texts.ShowInFolderText</span>
+                        <span class="menu-item" @onclick="() => isCreateVault = true">@Texts.CreateNewFolderText</span>
+
+                    </div>
+                }
+                else if (contextMenuType == "create")
+                {
+                    <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
+                        <span class="menu-item" @onclick="() => { isCreateVault = true; ViewModel.SelectedFilePath = ViewModel.Currentfolder; }">@Texts.CreateNewFolderText</span>
+                        <span class="menu-item" @onclick="async e => await ViewModel.AddVaultFolder(e, ViewModel.Currentfolder)">@Texts.AddNewFolderText</span>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="vlt-empty">
+                @if (ViewModel.IsProcessing)
+                {
+                    <img class="vlt-img-process" title="Vault process" />
+                }
+                else
+                {
+                    <img class="vlt-img-empty" title="Emtpy Vault" />
+                    <p>@Texts.VaultDrogDropText</p>
+                }
+            </div>
+        }
+        <div class="vlt-footer">
+            <nav class="breadcrumb">
+                @foreach (var (name, path) in ViewModel.VaultBreadCrumb)
+                {
+                    <span class="breadcrumb-part" @onclick="() => Openfolder(path)">
+                        @name
+                    </span>
+
+                    @if (name != ViewModel.VaultBreadCrumb.Last().Name)
+                    {
+                        <span class="separator"><img class="icon-next-arrow" /><img class="icon-dltfold" /> </span>
+                    }
+                }
+            </nav>
+        </div>
+
+
+    </div>
+    <script>
+        window.scrollToFirstMatch = function () {
+            const el = document.getElementById("firstMatch");
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        };
+    </script>
+
+</div>
+
+
+@if (isCreateVault)
+{
+    <div id="vault-settings-modalDialog" class="vault-body modalDialog">
+        <div class="">
+            <span class="vault-question">@Texts.VaultCreateNewFolderPrompt</span>
+            <div class="vault-store-location-sec">
+                <input class="input1" type="text" id="text-box" name="" @bind-value="ViewModel.VaultPath">
+            </div>
+            <div style="text-align:center;margin:20px;">
+                <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => { isCreateVault = false; await ViewModel.CreateVaultFolder(ViewModel.SelectedFilePath); }" />
+                <input type="button" class="input1 onbuttom-cancel" id="sbox" value="Cancel" name="" @onclick="() => isCreateVault = false" />
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool isCreateVault { get; set; }
+    private bool isListView { get; set; } = true;
+    private bool isfileselected { get; set; } = false;
+    private double contextMenuX { get; set; }
+    private double contextMenuY { get; set; }
+
+    private string searchText = string.Empty;
+    private string selectedtype = "file";
+    private string contextMenuType = "";
+
+    protected override void OnInitialized()
+    {
+        ViewModel.OnUpdateViewState += async () => await UpdateUIState();
+        ViewModel.InitialUpdate();
+        ViewModel.LoadVaultItems();
+        base.OnInitialized();
+        FileDropService.ResetOnDropped();
+        FileDropService.OnFoldersDropped += async (folders) => await HandleDroppedFolders(folders);
+        FileDropService.OnFilesDropped += async (files) => await HandleDroppedFiles(files);
+    }
+
+    private void SetView(bool listView)
+    {
+        isListView = listView;
+        isfileselected = false;
+        contextMenuType = "";
+    }
+
+    private void Openfolder(string folderpath)
+    {
+        ViewModel.Currentfolder = folderpath;
+        ViewModel.LoadVaultItems();
+    }
+
+    private async Task ShowContextMenu(MouseEventArgs e, string fileName, string filePath, string selectedFolder)
+    {
+        contextMenuX = e.PageX;
+        contextMenuY = e.PageY;
+        contextMenuType = selectedFolder;
+
+        if (selectedFolder == "create")
+        {
+            return;
+        }
+
+        ViewModel.SelectedFile = fileName;
+        ViewModel.SelectedFilePath = filePath;
+        await UpdateUIState();
+    }
+
+    private async Task SelectFile(string Type, string fileName, string filePath, string fileSize)
+    {
+        ViewModel.SelectedFile = fileName;
+        ViewModel.SelectedFilePath = filePath;
+        ViewModel.SelectedIsfolder = Type == "folder" ? true : false;
+        ViewModel.SelectedFileSize = fileSize;
+        isfileselected = true;
+        await HideContextMenu();
+    }
+
+    private async Task HideContextMenu()
+    {
+        contextMenuType = "";
+        await UpdateUIState();
+    }
+
+    private string HighlightMatch(string input)
+    {
+        if (string.IsNullOrWhiteSpace(searchText))
+            return System.Net.WebUtility.HtmlEncode(input);
+
+        string pattern = System.Text.RegularExpressions.Regex.Escape(searchText);
+        System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        int matchCount = 0;
+        string highlighted = regex.Replace(System.Net.WebUtility.HtmlEncode(input), match =>
+        {
+            matchCount++;
+            string spanId = matchCount == 1 ? "id='firstMatch'" : "";
+            return $"<span class=\"highlight\" {spanId}>{match.Value}</span>";
+        });
+
+        return highlighted;
+    }
+
+    private async Task OnSearchChanged(ChangeEventArgs e)
+    {
+        searchText = e.Value?.ToString() ?? "";
+        await Task.Yield();
+        await JSRuntime.InvokeVoidAsync("scrollToFirstMatch");
+    }
+
+    async Task UpdateUIState()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+
+    private async Task HandleDroppedFolders(IList<string> folders)
+    {
+        PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle, Texts.VaultWarningsFolderWillBeRemoved, DoNotShowAgainOptions.VaultDragDropWarning);
+        if (click == PopupButtons.Cancel)
+        {
+            return;
+        }
+
+        await ViewModel.EncryptDroppedFolders(folders);
+    }
+
+    private async Task HandleDroppedFiles(IList<string> files)
+    {
+        PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle, Texts.VaultWarningsFileWillBeRemoved, DoNotShowAgainOptions.VaultDragDropWarning);
+        if (click == PopupButtons.Cancel)
+        {
+            return;
+        }
+        await ViewModel.EncryptDroppedFile(files);
+    }
+
+}
+
+

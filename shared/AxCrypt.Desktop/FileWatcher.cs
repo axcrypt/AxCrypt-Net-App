@@ -62,7 +62,7 @@ namespace AxCrypt.Desktop
             _fileSystemWatcher.Error += (sender, e) => FileSystemChanged(new FileWatcherEventArgs(_fileInfo.FullName));
 
             _fileSystemWatcher.Filter = String.Empty;
-            _fileSystemWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.CreationTime;
+            _fileSystemWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.CreationTime | NotifyFilters.DirectoryName;
             _fileSystemWatcher.EnableRaisingEvents = true;
         }
 

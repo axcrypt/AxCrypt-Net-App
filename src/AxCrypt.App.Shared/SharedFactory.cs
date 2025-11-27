@@ -33,6 +33,7 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<FileDropService>();
 
             services.AddSingleton<FindFilesViewModel>();
+            services.AddSingleton<VaultViewModel>();
             services.AddSingleton<SupportViewModel>();
             services.AddSingleton<NotificationItemViewModel>();
             services.AddSingleton<FilePasswordDialogViewModel>();

@@ -32,6 +32,7 @@ using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -133,7 +134,29 @@ namespace AxCrypt.Core.Session
                     }
                     progress.Totals.ShowNotification();
                     break;
-
+                case SessionNotificationType.VaultFolderAdded:
+                    progress.NotifyLevelStart();
+                    try
+                    {
+                        await EncryptVaultFoldersIfSupportedAsync(notification.Identity, notification.Capabilities, progress);
+                    }
+                    finally
+                    {
+                        progress.NotifyLevelFinished();
+                    }
+                    progress.Totals.ShowNotification();
+                    break;
+                case SessionNotificationType.VaultFolderRemoved:
+                    foreach (string fullName in notification.FullNames)
+                    {
+                        IDataContainer removedFolderInfo = New<IDataContainer>(fullName);
+                        progress.Display = removedFolderInfo.Name;
+                        if (removedFolderInfo.IsAvailable)
+                        {
+                            await _axCryptFile.DecryptFilesInsideVaultFolderUniqueWithWipeOfOriginalAsync(removedFolderInfo, notification.Identity, _statusChecker, progress).Free();
+                        }
+                    }
+                    break;
                 case SessionNotificationType.WatchedFolderExcludedFolder:
                     foreach (string fullName in notification.FullNames)
                     {
@@ -191,6 +214,9 @@ namespace AxCrypt.Core.Session
                     await _activeFileAction.CheckActiveFiles(progress);
                     break;
 
+                case SessionNotificationType.VaultFolderChange:
+                    await EncryptVaultFoldersIfSupportedAsync(_knownIdentities.DefaultEncryptionIdentity, notification.Capabilities, progress);
+                    break;
                 case SessionNotificationType.LicensePolicyChanged:
                 case SessionNotificationType.RefreshLicensePolicy:
                     break;
@@ -219,6 +245,33 @@ namespace AxCrypt.Core.Session
                 progress.Display = folder.Name;
                 await _axCryptFile.EncryptFoldersUniqueWithBackupAndWipeAsync(new IDataContainer[] { folder }, encryptionParameters, progress, ignoredFolders);
             }
+        }
+
+        private async Task EncryptVaultFoldersIfSupportedAsync(LogOnIdentity identity, LicenseCapabilities capabilities, IProgressContext progress)
+        {
+            if (!capabilities.Has(LicenseCapability.Vault))
+            {
+                return;
+            }
+
+            string vaultEncryptPath = New<UserSettings>().VaultEncryptDataPath;
+            if (vaultEncryptPath == "")
+            {
+                return;
+            }
+
+            EncryptionParameters encryptionParameters = new EncryptionParameters(Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId, identity);
+            if (New<LicensePolicy>().Capabilities.Has(LicenseCapability.Business))
+            {
+                encryptionParameters = await identity.AddMasterKeyParameter(encryptionParameters, true);
+            }
+
+            WatchedFolder watchedFolder = _fileSystemState.WatchedFolders.First();
+
+            IDataContainer folder = New<IDataContainer>(vaultEncryptPath);
+            IDataContainer[] ignoredFolders = watchedFolder.IgnoredFolders.Select(X => New<IDataContainer>(X)).ToArray();
+            progress.Display = folder.Name;
+            await _axCryptFile.EncryptVaultFolderUniqueWithBackupAndWipeAsync(folder, encryptionParameters, progress, ignoredFolders);
         }
     }
 }

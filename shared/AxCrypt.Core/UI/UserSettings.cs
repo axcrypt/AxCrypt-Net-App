@@ -375,7 +375,7 @@ namespace AxCrypt.Core.UI
 
         public string VaultEncryptDataPath
         {
-            get { return Load(nameof(VaultEncryptDataPath), New<WorkFolder>().FileInfo?.FullName ?? ""); }
+            get { return Load(nameof(VaultEncryptDataPath), ""); }
             set { Store(nameof(VaultEncryptDataPath), value); }
         }
 
@@ -385,10 +385,10 @@ namespace AxCrypt.Core.UI
             set { Store(nameof(AutoVaultEncryptSigninFiles), value); }
         }
 
-        public bool VaultEncryptionFiles
+        public bool VaultEncryptWithAutoRenameFiles
         {
-            get { return Load(nameof(VaultEncryptionFiles), false); }
-            set { Store(nameof(VaultEncryptionFiles), value); }
+            get { return Load(nameof(VaultEncryptWithAutoRenameFiles), false); }
+            set { Store(nameof(VaultEncryptWithAutoRenameFiles), value); }
         }
 
         public bool FindFileMode

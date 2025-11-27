@@ -1,10 +1,15 @@
 ﻿using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.UI;
 using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.Common;
+using AxCrypt.Content;
+using AxCrypt.Core.Extensions;
+using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -21,13 +26,15 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
 
             VaultEncryptDataPath = New<UserSettings>().VaultEncryptDataPath;
             AutoVaultEncryptSigninFiles = New<UserSettings>().AutoVaultEncryptSigninFiles;
-            VaultEncryptionFiles = New<UserSettings>().VaultEncryptionFiles;
+            VaultEncryptWithAutoRenameFiles = New<UserSettings>().VaultEncryptWithAutoRenameFiles;
             VaultSettingsDialog = new CommonDialogService();
         }
 
         public string VaultEncryptDataPath { get; set; }
 
         private static bool _autoVaultEncryptSigninFiles;
+
+        public bool IsVisible { get; set; }
 
         public bool AutoVaultEncryptSigninFiles
         {
@@ -41,7 +48,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
 
         private static bool _vaultEncryptionFiles;
 
-        public bool VaultEncryptionFiles
+        public bool VaultEncryptWithAutoRenameFiles
         {
             get => _vaultEncryptionFiles;
             set
@@ -49,6 +56,12 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
                 _vaultEncryptionFiles = value;
                 LogOnViewModel.UIStateChanged();
             }
+        }
+
+        public string ExistingVaultPath
+        {
+            get => New<UserSettings>().VaultEncryptDataPath;
+            set => New<UserSettings>().VaultEncryptDataPath = value;
         }
 
         public CommonDialogService VaultSettingsDialog
@@ -75,16 +88,37 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
             VaultEncryptDataPath = eventArgs.SelectedFiles.First();
         }
 
-
         public async Task SaveVaultSetting()
         {
+            if (New<FileFilter>().IsForbiddenFolder(VaultEncryptDataPath))
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(VaultEncryptDataPath));
+                return;
+            }
+
             New<UserSettings>().VaultEncryptDataPath = VaultEncryptDataPath;
             New<UserSettings>().AutoVaultEncryptSigninFiles = AutoVaultEncryptSigninFiles;
-            New<UserSettings>().VaultEncryptionFiles = VaultEncryptionFiles;
+            New<UserSettings>().VaultEncryptWithAutoRenameFiles = VaultEncryptWithAutoRenameFiles;
 
             VaultSettingsDialog.Close();
 
-            await LogOnViewModel.MainViewModel.AddWatchedFolders.ExecuteAsync(VaultEncryptDataPath);
+            if (New<UserSettings>().VaultEncryptWithAutoRenameFiles)
+            {
+                await RenameEncryptedVaultFiles();
+            }
+            else
+            {
+                await RestoreEncryptedVaultFiles();
+            }
+
+            await LogOnViewModel.MainViewModel.CreateVaultFolders.ExecuteAsync(VaultEncryptDataPath);
+        }
+
+        public async Task MoveVaulttoSecuredfolder()
+        {
+            string existingVaultPath = New<UserSettings>().VaultEncryptDataPath;
+            await SaveVaultSetting();
+            await LogOnViewModel.MainViewModel.AddWatchedFolders.ExecuteAsync(new[] { existingVaultPath });
         }
 
         public void Cancel()
@@ -104,6 +138,42 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
             }
 
             LogOnViewModel.UpgradeDialog.Show();
+        }
+
+        private async Task RenameEncryptedVaultFiles()
+        {
+            if (!LogOnViewModel.License.Has(LicenseCapability.Vault))
+            {
+                return;
+            }
+
+            string vaultEncryptPath = New<UserSettings>().VaultEncryptDataPath;
+            if (vaultEncryptPath == "")
+            {
+                return;
+            }
+
+            IDataContainer folder = New<IDataContainer>(vaultEncryptPath);
+            IEnumerable<string> encryptedVaultFiles = folder.ListEncrypted(Enumerable.Empty<IDataContainer>(), FolderOperationMode.IncludeSubfolders).Select(file => file.FullName); ;
+            await New<FileOperationViewModel>().RandomRenameFiles.ExecuteAsync(encryptedVaultFiles);
+        }
+
+        private async Task RestoreEncryptedVaultFiles()
+        {
+            if (!LogOnViewModel.License.Has(LicenseCapability.Vault))
+            {
+                return;
+            }
+
+            string vaultEncryptPath = New<UserSettings>().VaultEncryptDataPath;
+            if (vaultEncryptPath == "")
+            {
+                return;
+            }
+
+            IDataContainer folder = New<IDataContainer>(vaultEncryptPath);
+            IEnumerable<string> encryptedVaultFiles = folder.ListEncrypted(Enumerable.Empty<IDataContainer>(), FolderOperationMode.IncludeSubfolders).Select(file => file.FullName); ;
+            await New<FileOperationViewModel>().RestoreRandomRenameFiles.ExecuteAsync(encryptedVaultFiles);
         }
     }
 }

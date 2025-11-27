@@ -1,0 +1,116 @@
+﻿#vault-settings-modalDialog .vlt-title-img {
+  content: url(/images/premium/ImgVaultSttngPrm.svg);
+  width: 348px;
+  height: 187px;
+  top: 28px;
+  left: 66px;
+}
+#vault-settings-modalDialog .vlt-pathchange-img {
+  content: url(/images/premium/ImgChangeVault.svg);
+}
+#vault-settings-modalDialog .vault-body {
+  margin: 1% auto;
+  width: 480px;
+  height: 508px;
+}
+#vault-settings-modalDialog .input1 {
+  width: 300px;
+  height: 32px;
+  top: 315px;
+  left: 32px;
+  gap: 8px;
+  border-radius: 5px;
+  border: 1px solid #A4A4A4;
+}
+#vault-settings-modalDialog .input2 {
+  background-color: #48772C;
+  color: #FFFFFF;
+  width: 96px;
+  height: 37px;
+  top: 313px;
+  left: 352px;
+  margin-left: 15px;
+  border-radius: 5px;
+  border: 0;
+}
+#vault-settings-modalDialog .vault-question {
+  color: #494949;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+}
+#vault-settings-modalDialog .on {
+  /* input:checked + .slider */
+}
+#vault-settings-modalDialog .off {
+  display: none;
+}
+#vault-settings-modalDialog .vault-auto-enc-toggle-sec,
+#vault-settings-modalDialog .vault-hide-filename-toggle-sec,
+#vault-settings-modalDialog .vault-store-location-sec {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-content: baseline;
+  margin-top: 18px;
+}
+#vault-settings-modalDialog .vault-store-location-sec #Browse {
+  margin-top: 3px;
+}
+#vault-settings-modalDialog .vault-auto-enc-toggle-chckbx, #vault-settings-modalDialog .vault-hide-filename-toggle-chckbx {
+  width: 55px;
+  height: 24px;
+  background-color: #c1c1c1;
+  border-radius: 100px;
+}
+#vault-settings-modalDialog .vault-auto-enc-toggle-chckbx:after,
+#vault-settings-modalDialog .vault-hide-filename-toggle-chckbx::after {
+  content: "OFF";
+  font-size: 13px;
+  position: absolute;
+  margin: 3px 0px 3px 25px;
+}
+#vault-settings-modalDialog .vault-auto-enc-toggle-chckbx::before,
+#vault-settings-modalDialog .vault-hide-filename-toggle-chckbx::before {
+  position: absolute;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 2px;
+}
+#vault-settings-modalDialog input[type=checkbox] {
+  display: none;
+}
+#vault-settings-modalDialog input:checked + .vault-auto-enc-toggle-chckbx,
+#vault-settings-modalDialog input:checked + .vault-hide-filename-toggle-chckbx {
+  background-color: #000;
+}
+#vault-settings-modalDialog input:checked + .vault-auto-enc-toggle-chckbx::before,
+#vault-settings-modalDialog input:checked + .vault-hide-filename-toggle-chckbx::before {
+  transform: translateX(32px);
+}
+#vault-settings-modalDialog input:checked + .vault-auto-enc-toggle-chckbx::after,
+#vault-settings-modalDialog input:checked + .vault-hide-filename-toggle-chckbx::after {
+  content: "ON";
+  font-size: 13px;
+  color: #fff;
+  position: absolute;
+  margin: 3px 7px;
+}
+#vault-settings-modalDialog .onbutton-confirm {
+  width: 154px;
+  height: 36.65px;
+  background-color: #96AD88;
+  margin-right: 20px;
+  color: #FFFFFF;
+  border-radius: 10px;
+  border: 0;
+}
+#vault-settings-modalDialog .onbuttom-cancel {
+  width: 154px;
+  height: 36.65px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+}

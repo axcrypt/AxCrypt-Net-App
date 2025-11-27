@@ -34,6 +34,11 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Portable;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Text;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -129,6 +134,12 @@ namespace AxCrypt.Core.UI.ViewModel
 
         public IAsyncAction DecryptWatchedFolders { get; private set; }
 
+        public IAsyncAction CreateVaultFolders { get; private set; }
+
+        public IAsyncAction AddVaultFolders { get; private set; }
+
+        public IAsyncAction DecryptVaultFolders { get; private set; }
+
         public IAction OpenSelectedFolder { get; private set; }
 
         public IAsyncAction AxCryptUpdateCheck { get; private set; }
@@ -172,6 +183,9 @@ namespace AxCrypt.Core.UI.ViewModel
             EncryptPendingFiles = new AsyncDelegateAction<object>((parameter) => EncryptPendingFilesAction());
             ClearPassphraseMemory = new AsyncDelegateAction<object>((parameter) => ClearPassphraseMemoryAction());
             DecryptWatchedFolders = new AsyncDelegateAction<IEnumerable<string>>((folders) => DecryptWatchedFoldersAction(folders), (folders) => Task.FromResult(LoggedOn));
+            CreateVaultFolders = new AsyncDelegateAction<string>((folders) => CreateVaultFolderActionAsync(folders), (folders) => Task.FromResult(LoggedOn));
+            AddVaultFolders = new AsyncDelegateAction<IEnumerable<string>>((folders) => AddVaultFolderActionAsync(folders), (folders) => Task.FromResult(LoggedOn));
+            DecryptVaultFolders = new AsyncDelegateAction<string>((folders) => DecryptVaultFoldersAction(folders), (folders) => Task.FromResult(LoggedOn));
             OpenSelectedFolder = new DelegateAction<string>((folder) => OpenSelectedFolderAction(folder));
             AxCryptUpdateCheck = new AsyncDelegateAction<DateTime>((utc) => AxCryptUpdateCheckAction(utc));
             LicenseUpdate = new DelegateAction<object>((o) => License = New<LicensePolicy>().Capabilities);
@@ -198,6 +212,7 @@ namespace AxCrypt.Core.UI.ViewModel
                 if (loggedOn)
                 {
                     _fileSystemState.InitializeFileSystem();
+                    New<VaultSettings>().InitializeVaultSettings();
                     SetWatchedFolders();
                 }
 
@@ -355,6 +370,7 @@ namespace AxCrypt.Core.UI.ViewModel
                 case SessionNotificationType.WorkFolderChange:
                 case SessionNotificationType.ProcessExit:
                 case SessionNotificationType.SessionChange:
+                case SessionNotificationType.VaultFolderAdded:
                 default:
                     break;
             }
@@ -457,12 +473,54 @@ namespace AxCrypt.Core.UI.ViewModel
             await _fileSystemState.Save();
         }
 
+        private async Task CreateVaultFolderActionAsync(string folder)
+        {
+            if (string.IsNullOrEmpty(folder) || !New<IDataContainer>(folder).IsAvailable)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle,
+                    Texts.InvalidVaultSetting);
+              
+                return;
+            }
+
+            if (New<FileFilter>().IsForbiddenFolder(folder))
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(folder));
+                return;
+            }
+
+            await New<VaultSettings>().CreateVaultWatchedFolderAsync(new VaultFolder(folder));
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.InformationTitle, Texts.VaultConfiguredSuccessText);
+        }
+
+        private async Task AddVaultFolderActionAsync(IEnumerable<string> folders)
+        {
+            if (!folders.Any())
+            {
+                return;
+            }
+
+            foreach (string folder in folders)
+            {
+                if (New<FileFilter>().IsForbiddenFolder(folder))
+                {
+                    await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(folder));
+                    return;
+                }
+
+                await New<VaultSettings>().AddVaultWatchedFolderAsync(folder);
+            }
+        }
+
         private async Task AddWatchedFoldersActionAsync(IEnumerable<string> folders)
         {
             if (!folders.Any())
             {
                 return;
             }
+
+            string? vaultPath = New<UserSettings>().VaultEncryptDataPath;
+
             foreach (string folder in folders)
             {
                 if (New<FileFilter>().IsForbiddenFolder(folder))
@@ -470,6 +528,13 @@ namespace AxCrypt.Core.UI.ViewModel
                     await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(folder));
                     continue;
                 }
+
+                if (!string.IsNullOrEmpty(vaultPath) && New<IDataContainer>(folder).IsVault())
+                {
+                    await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.InvalidForSecuredFolder);
+                    continue;
+                }
+
                 await _fileSystemState.AddWatchedFolderAsync(new WatchedFolder(folder, Resolve.KnownIdentities.DefaultEncryptionIdentity.Tag));
             }
             await _fileSystemState.Save();
@@ -486,6 +551,16 @@ namespace AxCrypt.Core.UI.ViewModel
                 await _fileSystemState.RemoveAndDecryptWatchedFolder(New<IDataContainer>(watchedFolderPath));
             }
             await _fileSystemState.Save();
+        }
+
+        private async Task DecryptVaultFoldersAction(string folder)
+        {
+            if (string.IsNullOrEmpty(folder))
+            {
+                return;
+            }
+
+            await New<VaultSettings>().RemoveAndDecryptVaultWatchedFolder(New<IDataContainer>(folder));
         }
 
         public virtual async Task RemoveWatchedFoldersAction(IEnumerable<string> folders)
