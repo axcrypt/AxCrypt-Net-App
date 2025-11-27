@@ -21,7 +21,7 @@
 <div style="padding: 10px 0px;">
     <label class="text-style">@Texts.RecentFilesTabPageText</label>
 </div>
-<div class="file-max-hgt">
+<div class="file-max-hgt" style="@(RecentFilesViewModel.HasNoSubscription ? "height:42vh;" : "")">
     @if (RecentFilesViewModel.IsHideRecentFiles)
     {
         <div class="row-sec">
