@@ -181,6 +181,16 @@
 		<PRIResource Remove="Components\Pages\Home\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Platforms\Windows\AxCryptShellExt.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Platforms\Windows\AxCryptShellExt.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
 	<PropertyGroup>
 		<AppxManifestFile>$(MSBuildThisFileDirectory)Platforms\Windows\Package.appxmanifest</AppxManifestFile>
 	</PropertyGroup>
