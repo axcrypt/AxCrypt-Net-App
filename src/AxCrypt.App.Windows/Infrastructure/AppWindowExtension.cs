@@ -109,15 +109,15 @@ namespace AxCrypt.App.Windows.Infrastructure
             if (trayService == null)
                 return;
 
-            if (trayService.Created)
-                return;
-
-            trayService.Initialize();
-
             Task.Run(() =>
             {
                 New<INotificationService>()?.ShowNotification("AxCrypt File Encryption", "Click here to restore the window");
             });
+
+            if (trayService.Created)
+                return;
+
+            trayService.Initialize();
 
             trayService.ClickHandler = (action) =>
             {
