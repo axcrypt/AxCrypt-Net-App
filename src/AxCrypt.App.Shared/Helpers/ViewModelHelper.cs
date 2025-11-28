@@ -3,6 +3,7 @@ using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -56,13 +57,31 @@ public static class ViewModelHelper
 
     public static readonly int MaxAllowedSecretsCount = 10;
 
+    private static long freeUserCount;
+   
+    public static async Task<bool> CheckFreeUserSecretsCountasync()
+    {
+        freeUserCount = await GetFreeUserSecretsCountAsync();
+        return freeUserCount < MaxAllowedSecretsCount;
+    }
+
+    public static async Task<long> GetFreeUserSecretsCountAsync()
+    {
+        if (!string.IsNullOrEmpty(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address))
+        {
+            return await New<LogOnIdentity, ISecretsService>(New<KnownIdentities>().DefaultEncryptionIdentity).GetFreeUserSecretsCount(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address);
+        }
+
+        return 0;
+    }
+
     public static bool CanAddNewSecret()
     {
         if (New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness)
         {
             return true;
         }
-        if (New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).FreeUserSecretsCount < MaxAllowedSecretsCount)
+        if (freeUserCount < MaxAllowedSecretsCount)
         {
             return true;
         }
@@ -75,7 +94,7 @@ public static class ViewModelHelper
         {
             return false;
         }
-        if (New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).FreeUserSecretsCount < MaxAllowedSecretsCount)
+        if (freeUserCount < MaxAllowedSecretsCount)
         {
             return true;
         }

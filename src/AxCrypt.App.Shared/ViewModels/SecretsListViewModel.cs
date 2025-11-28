@@ -43,8 +43,6 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
         ClearErrorProviders();
 
         HasPaidSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
-        HasPaidSubscription = ViewModelHelper.CanAddNewSecret();
-        HasNoSecretsCapability = HasPaidSubscription ? false : true;
 
         Keyword = "";
         SortOptionAllText = _sortOptionAll;
@@ -67,6 +65,17 @@ public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
             _logOnViewModel.UpgradeDialog.Show();
             return;
         }
+    }
+
+    public async Task UpdateFreeUserSubscriptionAsync()
+    {
+        if (HasPaidSubscription)
+        {
+            return;
+        }
+
+        HasPaidSubscription = await ViewModelHelper.CheckFreeUserSecretsCountasync();
+        HasNoSecretsCapability = HasPaidSubscription ? false : true;
     }
 
     public ObservableCollection<SecretViewModel> Secrets

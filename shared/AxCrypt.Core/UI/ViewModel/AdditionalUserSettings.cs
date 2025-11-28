@@ -26,18 +26,6 @@ namespace AxCrypt.Core.UI.ViewModel
             }
         }
 
-        public long FreeUserSecretsCount
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(Identity.UserEmail.Address) && !string.IsNullOrEmpty(UserEmail))
-                {
-                    return Task.Run(async () => await New<LogOnIdentity, ISecretsService>(Identity).GetFreeUserSecretsCount(UserEmail)).Result;
-                }
-                return 0;
-            }
-        }
-
         public bool UpdateFreeUserSecretsCount()
         {
             return Task.Run(async () => await New<LogOnIdentity, ISecretsService>(Identity).InsertFreeUserSecretsAsync(UserEmail)).Result;
