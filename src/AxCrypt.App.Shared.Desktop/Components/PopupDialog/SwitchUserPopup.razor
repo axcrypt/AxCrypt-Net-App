@@ -24,10 +24,14 @@
                 UserProfile email = validUserProfiles.ElementAt(i);
                 <div class="popup-select-emails @(email.Active ? "active" : "")">
                     <div @onclick="@(() => SelectEmail(email.UserEmail, email.SubsType))" style="display: inline-block;">
-                        <img class="@ActiveEmailIcon(email.SubsType) @(email.Active ? "active" : "")" alt="@email.SubsType" />
+                        <img class="Switchuser @ActiveEmailIcon(email.SubsType) @(email.Active ? "active" : "")" alt="@email.SubsType" />
                         <span class="select-email">@email.UserEmail</span>
                     </div>
-                    @if (!email.Active)
+                    @if (email.Active)
+                    {
+                        <span title="Remove user profile" style="color:green;float: right;font-weight: 800;" @onclick="() => SwitchUserViewModel.SwitchUser(email.UserEmail)">&#10003;</span>
+                    }
+                    else
                     {
                         <span title="Remove user profile" style="color:red;float: right;font-weight: 800;" @onclick="() => SwitchUserViewModel.RemoveButton_Click(email.UserEmail)">&#x2715</span>
                     }
