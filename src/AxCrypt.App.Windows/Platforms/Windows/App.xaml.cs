@@ -374,7 +374,15 @@ namespace AxCrypt.App.Windows.WinUI
             Uri uri = protocolArgs.Uri;
             string verb = uri.Host.ToLowerInvariant();
 
-            string? filePath = System.Web.HttpUtility.ParseQueryString(uri.Query).Get("file");
+            const string uriQueryParam = "file=";
+            int index = uri.OriginalString.IndexOf(uriQueryParam, StringComparison.OrdinalIgnoreCase);
+            string? filePath = null;
+
+            if (index >= 0)
+            {
+                filePath = uri.OriginalString.Substring(index + uriQueryParam.Length); 
+            }
+
             if (string.IsNullOrEmpty(filePath))
             {
                 return;
