@@ -85,11 +85,6 @@ public class RecentFilesViewModel : ViewModelBase
             return;
         }
 
-        if (RecentFilesList != null)
-        {
-            RecentFilesList = new ObservableCollection<FileDetails>();
-        }
-
         RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
         UpdateSelectedFileList();
         UpdateViewState();
