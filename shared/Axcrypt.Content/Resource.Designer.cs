@@ -47673,15 +47673,6 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live Chat.
-        /// </summary>
-        public static string GuidesLinkQuoteLabel5 {
-            get {
-                return ResourceManager.GetString("GuidesLinkQuoteLabel5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Encryption and Decryption.
         /// </summary>
         public static string GuidesLinkQuoteLabel6 {
@@ -47873,7 +47864,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Encryption Guides.
+        ///   Looks up a localized string similar to Encryption Guide.
         /// </summary>
         public static string helpcenterTitle2 {
             get {
