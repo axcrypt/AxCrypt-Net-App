@@ -21,10 +21,10 @@
     }
 
 .help-width {
-    width: 230px !important;
+    width: 220px !important;
 }
 
-.sidemenu-width {
+.sidemenu-width, .abt-width {
     width: max-content !important;
 }
 
@@ -92,4 +92,10 @@
 .z-top {
     z-index: 9999 !important;
     position: relative;
+}
+
+@media (max-width: 1380px) {
+    .abt-width {
+        width: 320px !important;
+    }
 }

@@ -16,10 +16,15 @@ function clearHelp() {
 }
 
 // Tooltip
-function createTooltip(rect, text, offsetTop = 8, offsetLeft = -30, extraClass = "") {
+function createTooltip(rect, text, offsetTop = 8, offsetLeft = -30, extraClass = "", customWidth = null) {
     const tip = document.createElement("div");
     tip.className = "help-tooltip " + extraClass;
     tip.innerHTML = text;
+
+    if (customWidth) {
+        tip.style.width = customWidth + "px";
+    }
+
     tip.style.top = rect.bottom + offsetTop + 55 + "px";
     tip.style.left = (rect.left + offsetLeft + 10) + "px";
     document.body.appendChild(tip);
@@ -63,7 +68,7 @@ function buildSlide(items, nextSlide = null, extraTooltipClass = "", offsets = {
 
         const rect = el.getBoundingClientRect();
 
-        createTooltip(rect, i.text, offsets.top, offsets.left, extraTooltipClass);
+        createTooltip(rect, i.text, offsets.top, offsets.left, extraTooltipClass, i.width || null);
 
         const imgUrl = arrowImages[index % arrowImages.length];
 
@@ -127,7 +132,7 @@ function startHomeHelp() {
         { id: "help-secure", text: "Click <b>Secure</b> to choose a file you want to encrypt." },
         { id: "help-stop", text: "Use <b>Stop Securing</b> to decrypt an encrypted file back to original." },
         { id: "help-sharekey", text: "Use <b>Share Keys</b> to share file access with colleagues and friends." },
-        { id: "help-clean", text: "The <b>Broom</b> icon shows up when something needs <b>clean-up</b>, like files that weren’t updated correctly or unencrypted files in monitored folders. Clicking the <b>Broom</b> icon will encrypt them." }
+        { id: "help-clean", text: "The <b>Broom</b> icon shows up when something needs <b>clean-up</b>, like files that weren’t updated correctly or unencrypted files in monitored folders. Clicking the <b>Broom</b> icon will encrypt them.", width: 250 }
     ];
     buildSlide(items, showCloudServicesHelp);
 }
@@ -186,7 +191,7 @@ function startTopMenuHelp() {
 
     const items = [
         { id: "help-language", text: "Select your preferred <b>Language</b>." },
-        { id: "help-settings", text: "Use <b>Settings</b> to configure options like inactivity sign-out, restoring original file names, offline mode, and advanced encryption." },
+        { id: "help-settings", text: "Use <b>Settings</b> to configure options like inactivity sign-out, restoring original file names, offline mode, and advanced encryption.", width: 150 },
         { id: "help-profile", text: "Use <b>Account</b> to access and manage your account, subscription, keys, and sign out." }
     ];
     buildSlide(items, startMoreActionHelp);
@@ -197,20 +202,28 @@ function startMoreActionHelp() {
     updateZIndexForSlide(helpSlideIndex);
 
     const items = [
-        { id: "help-anymous-rename", text: "Click to hide the real name of an encrypted file by renaming it with a random name." },
-        { id: "help-secure-dlt", text: "Click <b>Secure Delete</b> to safely remove your files." },
-        { id: "help-upgrade-files", text: "Click to choose a folder of AES-128 encrypted files and upgrade their encryption to AES-256." }
+        { id: "help-anymous-rename", text: "Click <b>Anonymous Rename</b> to hide the real name of an encrypted file by renaming it with a random name.", width: 200 },
+        { id: "help-secure-dlt", text: "Click <b>Secure Delete</b> to safely remove your files.", width: 200 },
+        { id: "help-upgrade-files", text: "Click <b>Upgrade Files</b> to choose a folder of AES-128 encrypted files and upgrade their encryption to AES-256.", width: 200 }
     ];
     buildSlide(items, showRecentFilesHelp);
 }
 
 function showRecentFilesHelp() {
+    if (!document.getElementById("help-recent-file")) {
+        return showSideMenuHelp();
+    }
+
     helpSlideIndex = 4;
     updateZIndexForSlide(helpSlideIndex);
 
     const items = [
-        { id: "help-recent-file", text: "The <b>Recent Files</b> section lets you manage your latest encrypted files and view information like file name, size, encryption algorithm, date, and who has access." }
+        {
+            id: "help-recent-file",
+            text: "The <b>Recent Files</b> section lets you manage your latest encrypted files and view information like file name, size, encryption algorithm, date, and who has access."
+        }
     ];
+
     buildSlide(items, showSideMenuHelp, "help-width");
 }
 
@@ -240,7 +253,7 @@ function showAboutMenuHelp() {
         { id: "help-about", text: "Know more <b>About AxCrypt.</b>" }
     ];
 
-    buildSlide(items, null, "sidemenu-width", { top: -100, left: 260 }, true, 40, -80);
+    buildSlide(items, null, "abt-width", { top: -100, left: 260 }, true, 40, -80);
 }
 
 function updateZIndexForSlide(slideIndex) {

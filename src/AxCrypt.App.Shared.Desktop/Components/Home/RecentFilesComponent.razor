@@ -28,7 +28,7 @@
             <p style="padding: 20px 30px;"><span class="grey-clr">@Texts.HideRecentFilesListTabToolTipText</span></p>
         </div>
     }
-    else if (RecentFilesViewModel.RecentFilesList.Any())
+    else
     {
         <table class="rcnt-fle-tbl" style="width:100%;table-layout: fixed;">
             <thead id="help-recent-file" class="help-recent-files" style="user-select: none; background-color: #fff;">
@@ -41,63 +41,69 @@
                     <th style="width:15%;">@Texts.PromptSharedWith</th>
 
                     @* @if (!RecentFilesViewModel.HasNoSubscription)
-                    {
-                        <th class="scrd-sec">@Texts.EncryptedPathColumnHeaderText</th>
-                    } *@
+                {
+                    <th class="scrd-sec">@Texts.EncryptedPathColumnHeaderText</th>
+                } *@
                 </tr>
             </thead>
-            <tbody class="row-sec">
-                @for (int i = 0; i < RecentFilesViewModel.RecentFilesList.Count; i++)
-                {
-                    FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
-                    <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails.FilePath) ? "selected" : "")"
-                        @oncontextmenu="async (e) => await RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)" @ondblclick="async (e) => await RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)">
-                        <td>
-                            <input class="check-box" type="checkbox" @onchange="() => RecentFilesViewModel.HandleFileClick(!fileDetails.IsChecked, fileDetails.FilePath)" checked="@fileDetails.IsChecked" />
-                        </td>
-                        <td class="fle-exton-img" title="@fileDetails.FilePath" style="display: grid; grid-template-columns: 55px 1fr; gap: 0;">
-                            <img class="@fileDetails.IconClass" style="width: 50px; height: 45px;" src="" alt="file-image" />
-                            <div style="display: flex; flex-direction: column; line-height: 20px; overflow: hidden;" rowspan="2">
-                                <span class="fle-nme" style="padding-left: 0 !important;">@fileDetails.FileName</span>
-                                <span class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 200 !important; font-size: 10px;" title="@fileDetails.FilePath">@fileDetails.FilePath</span>
-                            </div>
-                        </td>
-                        <td>@fileDetails.FileSize</td>
-                        <td>@fileDetails.Algorithm</td>
-                        <td>@fileDetails.LastModifiedDate</td>
-                        <td style="text-align:center">
-                            @if (fileDetails.SharedWith.Any())
-                            {
-                                <div style="display:flex;">
-                                    @foreach (string sharedWith in fileDetails.SharedWith.Take(MaxAvatarsToShow))
-                                    {
-                                        <div class="info-prple" title="@sharedWith">@sharedWith.Substring(0, 2).ToUpper()</div>
-                                    }
-
-                                    @if (fileDetails.SharedWith.Count() > MaxAvatarsToShow)
-                                    {
-                                        <div class="info-prple bdr-clr">+@((fileDetails.SharedWith.Count()) - MaxAvatarsToShow)</div>
-                                    }
+            @if (RecentFilesViewModel.RecentFilesList.Any())
+            {
+                <tbody class="row-sec">
+                    @for (int i = 0; i < RecentFilesViewModel.RecentFilesList.Count; i++)
+                    {
+                        FileDetails fileDetails = RecentFilesViewModel.RecentFilesList[i];
+                        <tr class="context-menu-target @(RecentFilesViewModel.SelectedFiles.Contains(fileDetails.FilePath) ? "selected" : "")"
+                            @oncontextmenu="async (e) => await RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)" @ondblclick="async (e) => await RecentFilesViewModel.OpenSecuredMouseDoubleClick(e, fileDetails.FilePath)">
+                            <td>
+                                <input class="check-box" type="checkbox" @onchange="() => RecentFilesViewModel.HandleFileClick(!fileDetails.IsChecked, fileDetails.FilePath)" checked="@fileDetails.IsChecked" />
+                            </td>
+                            <td class="fle-exton-img" title="@fileDetails.FilePath" style="display: grid; grid-template-columns: 55px 1fr; gap: 0;">
+                                <img class="@fileDetails.IconClass" style="width: 50px; height: 45px;" src="" alt="file-image" />
+                                <div style="display: flex; flex-direction: column; line-height: 20px; overflow: hidden;" rowspan="2">
+                                    <span class="fle-nme" style="padding-left: 0 !important;">@fileDetails.FileName</span>
+                                    <span class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 200 !important; font-size: 10px;" title="@fileDetails.FilePath">@fileDetails.FilePath</span>
                                 </div>
-                            }
-                            else
-                            {
-                                <div style="display:flex;"> - </div>
-                            }
+                            </td>
+                            <td>@fileDetails.FileSize</td>
+                            <td>@fileDetails.Algorithm</td>
+                            <td>@fileDetails.LastModifiedDate</td>
+                            <td style="text-align:center">
+                                @if (fileDetails.SharedWith.Any())
+                                {
+                                    <div style="display:flex;">
+                                        @foreach (string sharedWith in fileDetails.SharedWith.Take(MaxAvatarsToShow))
+                                        {
+                                            <div class="info-prple" title="@sharedWith">@sharedWith.Substring(0, 2).ToUpper()</div>
+                                        }
+
+                                        @if (fileDetails.SharedWith.Count() > MaxAvatarsToShow)
+                                        {
+                                            <div class="info-prple bdr-clr">+@((fileDetails.SharedWith.Count()) - MaxAvatarsToShow)</div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="display:flex;"> - </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+            else
+            {
+                <tbody>
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            <span class="empty-view-heading">@Texts.LetsStartOurJourneyText</span><br />
+                            <span>@Texts.AddAndSecureYourFirstFileText</span><br />
+                            <img class="empty-rcnt-fle-img" alt="default file img" />
                         </td>
                     </tr>
-                }
-
-            </tbody>
+                </tbody>
+            }
         </table>
-    }
-    else
-    {
-        <div class="text-center">
-            <span class="empty-view-heading">@Texts.LetsStartOurJourneyText</span><br />
-            <span>@Texts.AddAndSecureYourFirstFileText</span><br />
-            <img class="empty-rcnt-fle-img" alt="default file img" />
-        </div>
     }
 </div>
 
