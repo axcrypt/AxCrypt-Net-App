@@ -27,6 +27,7 @@
 
 
 using AxCrypt.Content;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.UI;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -57,13 +58,8 @@ namespace AxCrypt.Core.Session
                 throw new ArgumentNullException("vaultFolder");
             }
 
-            if (string.IsNullOrEmpty(vaultFolder.Path) || !New<IDataContainer>(vaultFolder.Path).IsAvailable)
+            if (!await IsValidVaultPath(vaultFolder.Path))
             {
-                await New<IPopup>().ShowAsync(
-                    PopupButtons.Ok,
-                    Texts.WarningTitle,
-                    Texts.InvalidVaultSetting);
-
                 return;
             }
 
@@ -96,6 +92,32 @@ namespace AxCrypt.Core.Session
             }
 
             await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.VaultFolderRemoved, Resolve.KnownIdentities.DefaultEncryptionIdentity, dataItem.FullName));
+        }
+
+        public async Task<bool> IsValidVaultPath(string vaultFolderPath)
+        {
+            if (string.IsNullOrEmpty(vaultFolderPath) || !New<IDataContainer>(vaultFolderPath).IsAvailable)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle,
+                    Texts.InvalidVaultSetting);
+                return false;
+            }
+
+            if (New<FileFilter>().IsForbiddenFolder(vaultFolderPath))
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(vaultFolderPath));
+                return false;
+            }
+
+            bool isWatched = New<FileSystemState>().WatchedFolders.Any(wf => vaultFolderPath.Contains(wf.Path));
+            if (isWatched)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle,
+                    "Unable to add secured folder or its sub folder as Vault");
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -37,9 +37,9 @@ using AxCrypt.Core.Session;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Linq;  
 using System.Text;
+using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.UI.ViewModel
@@ -475,17 +475,8 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task CreateVaultFolderActionAsync(string folder)
         {
-            if (string.IsNullOrEmpty(folder) || !New<IDataContainer>(folder).IsAvailable)
+            if (!await New<VaultSettings>().IsValidVaultPath(folder))
             {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle,
-                    Texts.InvalidVaultSetting);
-              
-                return;
-            }
-
-            if (New<FileFilter>().IsForbiddenFolder(folder))
-            {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(folder));
                 return;
             }
 
@@ -502,10 +493,9 @@ namespace AxCrypt.Core.UI.ViewModel
 
             foreach (string folder in folders)
             {
-                if (New<FileFilter>().IsForbiddenFolder(folder))
+                if (!await New<VaultSettings>().IsValidVaultPath(folder))
                 {
-                    await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(folder));
-                    return;
+                    continue;
                 }
 
                 await New<VaultSettings>().AddVaultWatchedFolderAsync(folder);
@@ -532,6 +522,13 @@ namespace AxCrypt.Core.UI.ViewModel
                 if (!string.IsNullOrEmpty(vaultPath) && New<IDataContainer>(folder).IsVault())
                 {
                     await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.InvalidForSecuredFolder);
+                    continue;
+                }
+
+                if (vaultPath.Contains(folder))
+                {
+                    await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle,
+                        "Unable to add as secured folder it may contains Vault as sub folder");
                     continue;
                 }
 

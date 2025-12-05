@@ -17,23 +17,25 @@ namespace AxCrypt.App.Shared.ViewModels
     {
         private IStatusAlertService _statusAlertService;
         private readonly MainViewModel _mainViewModel;
-        public LogOnViewModel LogOnViewModel { get; set; }
+        private LogOnViewModel _logOnViewModel;
+        private FileOperationViewModel _fileOperationViewModel;
         public VaultViewModel(IStatusAlertService StatusAlerService)
         {
-            LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
+            _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
             _mainViewModel = AxCServiceProviderExtension.LogOnViewModel!.MainViewModel;
+            _fileOperationViewModel = AxCServiceProviderExtension.LogOnViewModel.FileOperationViewModel;
             _statusAlertService = StatusAlerService;
         }
 
         private string VaultBasePath => Resolve.UserSettings.VaultEncryptDataPath ?? "";
-
+        public bool isCreateVault { get; set; }
         public string? SelectedFile { get; set; }
         public string SelectedFilePath { get; set; }
         public string SelectedFileSize { get; set; }
         public bool SelectedIsfolder { get; set; } = false;
         public string Currentfolder { get; set; }
-        public string BreadcrumbPath { get; set; }
         public string VaultPath { get; set; }
+        private IEnumerable<string> selectedVaultFiles { get; set; }
         public bool IsProcessing { get; set; } = false;
 
         public IEnumerable<VaultItem> VaultItemList = new List<VaultItem>();
@@ -88,7 +90,6 @@ namespace AxCrypt.App.Shared.ViewModels
                     ModifiedDate = file.LastWriteTimeUtc
                 });
         }
-
 
         string GetReadableSize(long bytes)
         {
@@ -151,7 +152,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 case "Open":
                     try
                     {
-                        await New<FileOperationViewModel>().OpenFiles.ExecuteAsync(new[] { SelectedFilePath });
+                        await _fileOperationViewModel.OpenFiles.ExecuteAsync(new[] { SelectedFilePath });
                     }
                     catch (Exception ex)
                     {
@@ -208,7 +209,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 case "Open":
                     try
                     {
-                        await New<FileOperationViewModel>().OpenFiles.ExecuteAsync(new[] { SelectedFilePath });
+                        await _fileOperationViewModel.OpenFiles.ExecuteAsync(new[] { SelectedFilePath });
                     }
                     catch (Exception ex)
                     {
@@ -219,7 +220,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 case "Decrypt":
                     try
                     {
-                        await New<FileOperationViewModel>().DecryptFiles.ExecuteAsync(new[] { SelectedFilePath });
+                        await _fileOperationViewModel.DecryptFiles.ExecuteAsync(new[] { SelectedFilePath });
                         if (!CheckActiveFiles(dataStore.FullName))
                         {
                             _statusAlertService.Success(Texts.FileDecryptionSuccessAlertMsg.InvariantFormat(Path.GetFileName(SelectedFilePath)));
@@ -234,7 +235,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 case "Reveal":
                     try
                     {
-                        await New<FileOperationViewModel>().ShowInFolder.ExecuteAsync(new[] { SelectedFilePath });
+                        await _fileOperationViewModel.ShowInFolder.ExecuteAsync(new[] { SelectedFilePath });
                     }
                     catch (Exception ex)
                     {
@@ -245,7 +246,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 case "RenameAnonymously":
                     try
                     {
-                        await New<FileOperationViewModel>().RandomRenameFiles.ExecuteAsync(new[] { SelectedFilePath });
+                        await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(new[] { SelectedFilePath });
                         if (!CheckActiveFiles(dataStore.FullName))
                         {
                             _statusAlertService.Success(Texts.FileRenameSuccessAlertMsg.InvariantFormat(Path.GetFileName(SelectedFilePath)));
@@ -260,7 +261,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 case "RenameOriginal":
                     try
                     {
-                        await New<FileOperationViewModel>().RestoreRandomRenameFiles.ExecuteAsync(new[] { SelectedFilePath });
+                        await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(new[] { SelectedFilePath });
                         if (!CheckActiveFiles(dataStore.FullName))
                         {
                             _statusAlertService.Success(Texts.FileRestoreRenameSuccessAlertMsg.InvariantFormat(Path.GetFileName(SelectedFilePath)));
@@ -277,7 +278,6 @@ namespace AxCrypt.App.Shared.ViewModels
 
             await LoadVaultItems(); 
         }
-
 
         private bool CheckActiveFiles(string filePath)
         {
@@ -322,20 +322,23 @@ namespace AxCrypt.App.Shared.ViewModels
         {
             await PremiumFeature_ClickAsync(LicenseCapability.Vault, async (ss, ee) => { await HandleVaultFileSelection(ss, ee); }, null!, eventArgs);
 
-            if (string.IsNullOrEmpty(Currentfolder) || string.IsNullOrEmpty(VaultPath))
+            if (string.IsNullOrEmpty(Currentfolder) || !selectedVaultFiles.Any())
             {
                 return;
             }
 
-            await MoveVaultFile(VaultPath, Currentfolder);
+            foreach (string vaultfilePath in selectedVaultFiles)
+            {
+                await MoveVaultFile(vaultfilePath, Currentfolder);
+            }
 
-            VaultPath = "";
+            selectedVaultFiles = Enumerable.Empty<string>();
             await LoadVaultItems();
         }
 
         private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
         {
-            if (LogOnViewModel.License.Has(requiredCapability))
+            if (_logOnViewModel.License.Has(requiredCapability))
             {
                 if (realHandler != null)
                 {
@@ -344,7 +347,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
-            LogOnViewModel.UpgradeDialog.Show();
+            _logOnViewModel.UpgradeDialog.Show();
         }
 
         private async Task HandleVaultFolderSelection(object sender, EventArgs e)
@@ -357,6 +360,7 @@ namespace AxCrypt.App.Shared.ViewModels
             await New<IDataItemSelection>().HandleSelection(eventArgs);
             if (eventArgs.SelectedFiles == null || !eventArgs.SelectedFiles.Any())
             {
+                VaultPath = "";
                 return;
             }
 
@@ -376,7 +380,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
-            VaultPath = eventArgs.SelectedFiles.First();
+            selectedVaultFiles = eventArgs.SelectedFiles;
         }
 
         public async Task DecryptVaultfolder(EventArgs eventArgs)
@@ -427,7 +431,6 @@ namespace AxCrypt.App.Shared.ViewModels
                     return;
             }
 
-
             SelectedFilePath = await MoveVaultFile(SelectedFilePath, VaultPath);
 
             if (!string.IsNullOrEmpty(SelectedFilePath))
@@ -453,11 +456,24 @@ namespace AxCrypt.App.Shared.ViewModels
                 return "";
             }
 
+            if (rootPath.Contains(sourceFolderPath))
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "Unable to add this folder it may contains Vault as sub folder");
+                return "";
+            }
+
+            if (New<FileFilter>().IsForbiddenFolder(sourceFolderPath))
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(sourceFolderPath));
+                return "";
+            }
+
             string folderName = Path.GetFileName(sourceFolderPath.TrimEnd(Path.DirectorySeparatorChar));
             string destinationFolderPath = Path.Combine(rootPath, folderName);
 
             if (Directory.Exists(destinationFolderPath))
             {
+                PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "The folder already exists in the destination. please rename it before moving it");
                 return "";
             }
 
@@ -475,19 +491,46 @@ namespace AxCrypt.App.Shared.ViewModels
             return destinationFolderPath;
         }
 
-        private bool CanAccessDirectory(string path)
+        private bool CanAccessDirectory(string folderPath)
         {
             try
             {
-                Directory.GetFiles(path);
-                Directory.GetDirectories(path);
+                if (!Directory.Exists(folderPath))
+                    return false;
+
+                string testFolder = Path.Combine(folderPath, Path.GetRandomFileName());
+                Directory.CreateDirectory(testFolder);
+
+                foreach (var file in Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories))
+                {
+                    try
+                    {
+                        using (FileStream stream = File.Open(file, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                        {
+
+                        }
+                    }
+                    catch (IOException)
+                    {
+                        Directory.Delete(testFolder);
+                        return false;
+                    }
+                }
+
+                Directory.Delete(testFolder);
+
                 return true;
             }
             catch (UnauthorizedAccessException)
             {
                 return false;
             }
+            catch (IOException)
+            {
+                return false;
+            }
         }
+
 
         private async Task CopyDirectoryAsync(string sourceDir, string destinationDir)
         {
@@ -517,10 +560,16 @@ namespace AxCrypt.App.Shared.ViewModels
 
             if (File.Exists(destinationFilePath))
             {
-                return "";
+                PopupButtons result =  await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "The file already exists in the destination. Do you want to continue with renaming?");
+                
+                if (result == PopupButtons.Cancel)
+                    return "";
+
+                FileLock Newfilepath = destinationFilePath.CreateUniqueFile();
+                destinationFilePath = Newfilepath.DataStore.FullName;
             }
 
-            File.Move(sourceFilePath, destinationFilePath);
+            File.Move(sourceFilePath, destinationFilePath,true);
             return destinationFilePath;
         }
 
@@ -531,11 +580,14 @@ namespace AxCrypt.App.Shared.ViewModels
 
             string VaultFolder = Path.Combine(SelectedFilePath, VaultPath);
 
-            if (!Directory.Exists(VaultFolder))
+            if (Directory.Exists(VaultFolder))
             {
-                Directory.CreateDirectory(VaultFolder);
+                PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "The folder already exists in the destination. please give a different Name!");
+                isCreateVault = true;
+                return;
             }
 
+            Directory.CreateDirectory(VaultFolder);
             VaultPath = "";
             await LoadVaultItems();
         }
@@ -619,7 +671,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
-            await New<FileOperationViewModel>().EncryptFiles.ExecuteAsync(AddedFoldersEvent.SelectedFiles);
+            await _fileOperationViewModel.EncryptFiles.ExecuteAsync(AddedFoldersEvent.SelectedFiles);
         }
     }
 

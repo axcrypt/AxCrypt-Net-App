@@ -6,6 +6,7 @@ using AxCrypt.Content;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System;
@@ -90,9 +91,9 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
 
         public async Task SaveVaultSetting()
         {
-            if (New<FileFilter>().IsForbiddenFolder(VaultEncryptDataPath))
+            if (!await New<VaultSettings>().IsValidVaultPath(VaultEncryptDataPath))
             {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(VaultEncryptDataPath));
+                VaultEncryptDataPath = New<UserSettings>().VaultEncryptDataPath;
                 return;
             }
 
@@ -118,6 +119,13 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
         {
             string existingVaultPath = New<UserSettings>().VaultEncryptDataPath;
             await SaveVaultSetting();
+            string newVaultPath = New<UserSettings>().VaultEncryptDataPath;
+
+            if (existingVaultPath.Contains(newVaultPath) || newVaultPath.Contains(existingVaultPath))
+            {
+                return;
+            }
+
             await LogOnViewModel.MainViewModel.AddWatchedFolders.ExecuteAsync(new[] { existingVaultPath });
         }
 
