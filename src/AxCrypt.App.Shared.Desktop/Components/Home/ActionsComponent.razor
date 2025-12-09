@@ -28,7 +28,7 @@
 
             @if (!homeActionModel!.EncryptButtonEnabled)
             {
-                <div class="popup-container" disabled="@(!homeActionModel.EncryptButtonEnabled)" @onclick="() => homeActionModel.UpgradeDialog()" @onmouseover='@( () => ShowPopup("secure") )' @onmouseout='@( () => HidePopup() )'>
+                <div id="help-secure" class="popup-container" disabled="@(!homeActionModel.EncryptButtonEnabled)" @onclick="() => homeActionModel.UpgradeDialog()" @onmouseover='@( () => ShowPopup("secure") )' @onmouseout='@( () => HidePopup() )'>
                     <div class="hover-trigger">
                         <div class="act-box shre-box" style="background-color:#D9D9D9;">
                             <img class="act-img scr-act" src="" alt="scr-img" />
@@ -75,7 +75,7 @@
             </div>
             @if (!homeActionModel!.KeyShareButtonEnabled)
             {
-                <div class="popup-container" disabled="@homeActionModel.KeyShareButtonEnabled" @onclick="() => homeActionModel.UpgradeDialog()" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
+                <div id="help-sharekey" class="popup-container" disabled="@homeActionModel.KeyShareButtonEnabled" @onclick="() => homeActionModel.UpgradeDialog()" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
                     <div class="hover-trigger">
                         <div class="act-box shre-box" style="background-color:#D9D9D9;">
                             <img class="act-img vwr-shrks-act" src="" alt="shrks-img" /><span class="text-size">@Texts.ShareKeysToolStripMenuItemText</span>
