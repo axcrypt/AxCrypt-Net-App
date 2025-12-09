@@ -17,7 +17,7 @@
 
     <div id="custom-pwd-section">
         <label>
-            <input class="che-box" type="checkbox" id="userchoice" @onclick=TextEncryptionViewModel.ShowHideCustomPassword />
+            <input class="che-box" type="checkbox" id="userchoice" @onclick=TextEncryptionViewModel.ShowHideCustomPassword checked="@TextEncryptionViewModel.IsCustomPasswordMode" />
             <span>Use Custom Password</span>
         </label>
         <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16" @onmouseover='@(() => TextEncryptionViewModel.ShowPopup("open"))' @onmouseout='@(() => TextEncryptionViewModel.HidePopup())'>
