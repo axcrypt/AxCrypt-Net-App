@@ -27,11 +27,9 @@ public class ShareSecretViewModel : ManageSecretViewModel
         SetNewContactState();
 
         SharedSecretTitle = Secret.SecretTitle!;
-        ShareSecretUserList = new ObservableCollection<SecretSharedUserViewModel>(Secret.SharedWith.Select(user => new SecretSharedUserViewModel(user.UserEmail, user.Visibility, user.OwnerEmail, "", AccountStatus.Verified)));
 
         CanEnableAddShareSecret = true;
         EnableApplyButton = false;
-        AddedUsersTitle = $"Added users with access ({ShareSecretUserList.Count})";
 
         VisibilityType = SecretShareVisibility.Forever.ToString();
         PageTitle = Texts.ShareAccessTitle;
@@ -39,6 +37,8 @@ public class ShareSecretViewModel : ManageSecretViewModel
 
         Secret.LoadAvailableGroupPublicKeysAsync(_identity);
         Secret.SetSharedAndNotSharedWith();
+        ShareSecretUserList = new ObservableCollection<SecretSharedUserViewModel>(Secret.SharedWith.Select(user => new SecretSharedUserViewModel(user.UserEmail, user.Visibility, user.OwnerEmail, user.GroupName, AccountStatus.Verified)));
+        AddedUsersTitle = $"Added users with access ({ShareSecretUserList.Count})";
     }
 
     public ObservableCollection<SecretSharedUserViewModel> ShareSecretUserList
@@ -330,7 +330,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
     public void ShowUnSharedUsersSuggestionPopup()
     {
         ShowUserSuggestion = true;
-        IEnumerable<SecretSharedUserViewModel> filteredUnSharedUsersList = Secret!.NotSharedWith.Distinct().ToArray().Select(user => new SecretSharedUserViewModel(user.Email, SecretShareVisibility.None, user.GroupName)).ToList();
+        IEnumerable<SecretSharedUserViewModel> filteredUnSharedUsersList = Secret!.NotSharedWith.Distinct().ToArray().Select(user => new SecretSharedUserViewModel(user.Email, SecretShareVisibility.None, Secret.OwnerEmail, user.GroupName)).ToList();
         if (!filteredUnSharedUsersList.Any())
         {
             ShowUserSuggestion = false;

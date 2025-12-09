@@ -128,10 +128,21 @@ public class SecretViewModel : ViewModelBase
 
     public void SetSharedAndNotSharedWith()
     {
-        EmailAddress userEmail = _identity.ActiveEncryptionKeyPair.UserEmail;
+        EmailAddress userEmail = _identity!.ActiveEncryptionKeyPair.UserEmail;
         using (KnownPublicKeys knownPublicKeys = New<KnownPublicKeys>())
         {
             NotSharedWith = knownPublicKeys.PublicKeys.Where(upk => upk.Email != userEmail && upk.Email.Address != New<UserSettings>().LicenseAuthorityEmail && !SharedWith.Any(sw => upk.Email == sw.UserEmail)).OrderBy(e => e.Email.Address);
+            
+            IDictionary<EmailAddress, string> publicKeyDict = knownPublicKeys.PublicKeys.ToDictionary(x => x.Email, x => x.GroupName);
+            IList<SecretSharedUserViewModel> sharedUsersList = SharedWith.ToList();
+            foreach (SecretSharedUserViewModel shareSecret in sharedUsersList)
+            {
+                if (publicKeyDict.TryGetValue(shareSecret.UserEmail, out string? groupName))
+                {
+                    shareSecret.GroupName = groupName;
+                }
+            }
+            SharedWith = sharedUsersList;
         }
     }
 
