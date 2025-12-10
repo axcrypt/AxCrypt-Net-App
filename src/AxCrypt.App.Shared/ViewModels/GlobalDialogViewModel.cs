@@ -62,6 +62,7 @@ public class GlobalDialogViewModel
 
         LogOnViewModel!.PopupResult = DialogResult.OK;
         LogOnViewModel.PopupButtons = [PopupButtons.Ok];
+        LogOnViewModel.GlobalPopupDialog.Close();
     }
 
     public void Button_CancelClicked()
@@ -73,14 +74,6 @@ public class GlobalDialogViewModel
 
         LogOnViewModel!.PopupResult = DialogResult.Cancel;
         LogOnViewModel.PopupButtons = [PopupButtons.Cancel];
-    }
-
-    private class PopupRequest
-    {
-        public TaskCompletionSource<PopupButtons> Completion { get; set; } = new();
-        public PopupButtons[]? Buttons { get; set; }
-        public string? Title { get; set; }
-        public string? Message { get; set; }
-        public DoNotShowAgainOptions DoNotShow { get; set; }
+        LogOnViewModel.GlobalPopupDialog.Close();
     }
 }
