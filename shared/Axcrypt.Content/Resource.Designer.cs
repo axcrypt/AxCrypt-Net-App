@@ -709,7 +709,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can start your trial of &lt;b&gt;AxCrypt Premium features for 30 days&lt;/b&gt; in the app!.
+        ///   Looks up a localized string similar to You can start your trial of &lt;b&gt;AxCrypt Premium features for 14 days&lt;/b&gt; in the app!.
         /// </summary>
         public static string ActivateMailBodyFreeTrial {
             get {
@@ -718,7 +718,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can start trying AxCrypt Premium features for 30 days in the app!.
+        ///   Looks up a localized string similar to You can start trying AxCrypt Premium features for 14 days in the app!.
         /// </summary>
         public static string ActivateMailBodyFreeTrialPlainText {
             get {
@@ -1572,6 +1572,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;(Android/iOS)&lt;/span&gt;.
+        /// </summary>
+        public static string AndroidIosTitle {
+            get {
+                return ResourceManager.GetString("AndroidIosTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to and.
         /// </summary>
         public static string AndText {
@@ -1916,7 +1925,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can start your trial of &lt;b&gt;AxCrypt Premium features for 30 days&lt;/b&gt; in the app!.
+        ///   Looks up a localized string similar to You can start your trial of &lt;b&gt;AxCrypt Premium features for 14 days&lt;/b&gt; in the app!.
         /// </summary>
         public static string AutoDeletionMailBodyFreeTrial {
             get {
@@ -2051,7 +2060,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can begin with a &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;&lt;b&gt;30-day free trial&lt;/b&gt;&lt;/a&gt; by selecting either the Premium or Business plan. During the trial period, you&apos;ll have full access to all features included in the plan you choose..
+        ///   Looks up a localized string similar to You can begin with a &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;&lt;b&gt;14-day free trial&lt;/b&gt;&lt;/a&gt; by selecting either the Premium or Business plan. During the trial period, you&apos;ll have full access to all features included in the plan you choose..
         /// </summary>
         public static string AxCBTGDBlock1Text2 {
             get {
@@ -3169,7 +3178,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;span&gt;AxCrypt award-winning &amp; easy to use encryption software&lt;/span&gt; helps your organisation to comply with data security and encryption requirements.&lt;span&gt;Try it free for 30-days&lt;/span&gt; to see how it works..
+        ///   Looks up a localized string similar to &lt;span&gt;AxCrypt award-winning &amp; easy to use encryption software&lt;/span&gt; helps your organisation to comply with data security and encryption requirements.&lt;span&gt;Try it free for 14-days&lt;/span&gt; to see how it works..
         /// </summary>
         public static string AxCryptAwardwinningText {
             get {
@@ -3479,7 +3488,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For the purposes of a subscription, a month is defined as 30 days and a year as 360 days..
+        ///   Looks up a localized string similar to For the purposes of a subscription, a month is defined as 14 days and a year as 360 days..
         /// </summary>
         public static string AxcryptBusinessBlock6Text3 {
             get {
@@ -3875,7 +3884,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Subscription periods are defined as 30 days for a month and 360 days for a year..
+        ///   Looks up a localized string similar to Subscription periods are defined as 14 days for a month and 360 days for a year..
         /// </summary>
         public static string AxcryptBusinessGuideBlock6Text2 {
             get {
@@ -3929,7 +3938,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to See how AxCrypt can secure your institution’s data today. &lt;span&gt;Try it for free for 30 Days! &lt;/span&gt;.
+        ///   Looks up a localized string similar to See how AxCrypt can secure your institution’s data today. &lt;span&gt;Try it for free for 14 Days! &lt;/span&gt;.
         /// </summary>
         public static string AxCryptFreeTrialText {
             get {
@@ -6782,7 +6791,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;li&gt;AxCrypt offers a one-month free trial to try out all the features, including the latest mobile encryption feature. So what are you waiting for? Sign up for a free trial of AxCrypt here:&lt;/li&gt;.
+        ///   Looks up a localized string similar to &lt;li&gt;AxCrypt offers a 14-days free trial to try out all the features, including the latest mobile encryption feature. So what are you waiting for? Sign up for a free trial of AxCrypt here:&lt;/li&gt;.
         /// </summary>
         public static string Blog_AMEFH_H2_Text1 {
             get {
@@ -7979,7 +7988,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try AxCrypt for free today with a &lt;b&gt;30-day free trial&lt;/b&gt;, and take your data security to the next level. Sign up now &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;https://account.axcrypt.net/en/Home/Login?Signup=True&lt;/a&gt;.
+        ///   Looks up a localized string similar to Try AxCrypt for free today with a &lt;b&gt;14-day free trial&lt;/b&gt;, and take your data security to the next level. Sign up now &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;https://account.axcrypt.net/en/Home/Login?Signup=True&lt;/a&gt;.
         /// </summary>
         public static string Blog_BAFESFW_Conclusion_Text4 {
             get {
@@ -8645,7 +8654,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Take your business’s data security to the next level! Try AxCrypt for free today with a &lt;b&gt;30-day free trial&lt;/b&gt;! Sign up now &lt;a href=&apos;https://account.axcrypt.net/en/HomeUser/CreateBusiness&apos;&gt;&lt;b&gt;https://account.axcrypt.net/en/HomeUser/CreateBusiness.&lt;/b&gt;&lt;/a&gt; .
+        ///   Looks up a localized string similar to Take your business’s data security to the next level! Try AxCrypt for free today with a &lt;b&gt;14-day free trial&lt;/b&gt;! Sign up now &lt;a href=&apos;https://account.axcrypt.net/en/HomeUser/CreateBusiness&apos;&gt;&lt;b&gt;https://account.axcrypt.net/en/HomeUser/CreateBusiness.&lt;/b&gt;&lt;/a&gt; .
         /// </summary>
         public static string Blog_BESFBDTUG_Conclusion_Text3 {
             get {
@@ -9428,7 +9437,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start your 30 days free trial now! Read more about our products here: &lt;a href=&apos;https://axcrypt.net/information/axcrypt/&apos;&gt;https://axcrypt.net/information/axcrypt/&lt;/a&gt;&lt;/li&gt;.
+        ///   Looks up a localized string similar to Start your 14 days free trial now! Read more about our products here: &lt;a href=&apos;https://axcrypt.net/information/axcrypt/&apos;&gt;https://axcrypt.net/information/axcrypt/&lt;/a&gt;&lt;/li&gt;.
         /// </summary>
         public static string Blog_BSTSSCE_H1_SH3_Text2 {
             get {
@@ -9545,7 +9554,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We offer business and premium subscriptions don’t miss out our 30 days free trial. You can read more about our offers here: &lt;a href=&apos;https://www.axcrypt.net/pricing&apos;&gt;https://www.axcrypt.net/pricing&lt;/a&gt;.
+        ///   Looks up a localized string similar to We offer business and premium subscriptions don’t miss out our 14 days free trial. You can read more about our offers here: &lt;a href=&apos;https://www.axcrypt.net/pricing&apos;&gt;https://www.axcrypt.net/pricing&lt;/a&gt;.
         /// </summary>
         public static string Blog_Business_PricingPage {
             get {
@@ -11372,7 +11381,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This Thanksgiving, elevate your data&apos;s protection. Experience AxCrypt&apos;s comprehensive security offerings with &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;strong&gt;30-day free trial&lt;/strong&gt;&lt;/a&gt; and celebrate worry-free data management!.
+        ///   Looks up a localized string similar to This Thanksgiving, elevate your data&apos;s protection. Experience AxCrypt&apos;s comprehensive security offerings with &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;strong&gt;14-day free trial&lt;/strong&gt;&lt;/a&gt; and celebrate worry-free data management!.
         /// </summary>
         public static string Blog_DLHRYSDTT_Conclusion_Text3 {
             get {
@@ -12479,7 +12488,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Once installed, simply sign in with your existing account, or signup with your email for a free &lt;b&gt; 30-day trial &lt;/b&gt;..
+        ///   Looks up a localized string similar to Once installed, simply sign in with your existing account, or signup with your email for a free &lt;b&gt; 14-day trial &lt;/b&gt;..
         /// </summary>
         public static string Blog_EGEODUNA_H1_Text2 {
             get {
@@ -14585,7 +14594,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try AxCrypt today with a &lt;b&gt;30-day free trial&lt;/b&gt; and take your data security to the next level. Sign up now by &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&amp;purchase=true&apos;&gt;&lt;b&gt;clicking here.&lt;/b&gt;&lt;/a&gt;.
+        ///   Looks up a localized string similar to Try AxCrypt today with a &lt;b&gt;14-day free trial&lt;/b&gt; and take your data security to the next level. Sign up now by &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&amp;purchase=true&apos;&gt;&lt;b&gt;clicking here.&lt;/b&gt;&lt;/a&gt;.
         /// </summary>
         public static string Blog_EODAGDFWBES_H5_Conclusion_Text3 {
             get {
@@ -15116,7 +15125,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install AxCrypt with a 30-Day Free Trial.
+        ///   Looks up a localized string similar to Install AxCrypt with a 14-Day Free Trial.
         /// </summary>
         public static string Blog_FEFBI_Conclusion_Heading {
             get {
@@ -15134,7 +15143,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start  protecting and securely sharing your passwords, card details, and notes today! Try AxCrypt free with a 30-day trial. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt; to download..
+        ///   Looks up a localized string similar to Start  protecting and securely sharing your passwords, card details, and notes today! Try AxCrypt free with a 14-day trial. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt; to download..
         /// </summary>
         public static string Blog_FEFBI_Conclusion_Text2 {
             get {
@@ -17114,7 +17123,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt Free for 30 Days.
+        ///   Looks up a localized string similar to Download AxCrypt Free for 14 Days.
         /// </summary>
         public static string Blog_HDSHTPMDWE_Conclusion_Heading {
             get {
@@ -17132,7 +17141,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start automatically encrypting your sensitive files today! Try AxCrypt free with a 30-day trial. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt; to download..
+        ///   Looks up a localized string similar to Start automatically encrypting your sensitive files today! Try AxCrypt free with a 14-day trial. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt; to download..
         /// </summary>
         public static string Blog_HDSHTPMDWE_Conclusion_Text2 {
             get {
@@ -18113,7 +18122,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try a one-month free trial on &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Android&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;iOS&lt;/a&gt;..
+        ///   Looks up a localized string similar to Try a 14-days free trial on &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Android&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;iOS&lt;/a&gt;..
         /// </summary>
         public static string Blog_HPDYMP_H3_Text2 {
             get {
@@ -18878,7 +18887,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Visit our pricing page at &lt;a href=&apos;https://axcrypt.net/pricing&apos;&gt;https://axcrypt.net/pricing&lt;/a&gt;  to see our subscription options. Try AxCrypt today with a &lt;b&gt;free one-month trial&lt;/b&gt; and take your data security to the next level. Sign up now by &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;clicking here&lt;/a&gt;..
+        ///   Looks up a localized string similar to Visit our pricing page at &lt;a href=&apos;https://axcrypt.net/pricing&apos;&gt;https://axcrypt.net/pricing&lt;/a&gt;  to see our subscription options. Try AxCrypt today with a &lt;b&gt;free 14-days trial&lt;/b&gt; and take your data security to the next level. Sign up now by &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;clicking here&lt;/a&gt;..
         /// </summary>
         public static string Blog_HQHCYP_H6_Conclusion_Text6 {
             get {
@@ -20030,7 +20039,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start automatically encrypting your files today! Try AxCrypt free with a 30-day trial and ensure your HIPAA-protected data remains secure. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;here&lt;/a&gt; to download..
+        ///   Looks up a localized string similar to Start automatically encrypting your files today! Try AxCrypt free with a 14-day trial and ensure your HIPAA-protected data remains secure. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;here&lt;/a&gt; to download..
         /// </summary>
         public static string Blog_HTCWHER_Conclusion_H1_Text3 {
             get {
@@ -20039,7 +20048,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt Free for 30 Days.
+        ///   Looks up a localized string similar to Download AxCrypt Free for 14 Days.
         /// </summary>
         public static string Blog_HTCWHER_Conclusion_Heading1 {
             get {
@@ -20615,7 +20624,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try AxCrypt Free for 30 Days.
+        ///   Looks up a localized string similar to Try AxCrypt Free for 14 Days.
         /// </summary>
         public static string Blog_HTEDOYAAIPI2_Conclusion_Heading {
             get {
@@ -20642,7 +20651,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Take your smartphone data security to the next level! Try AxCrypt for free today with a &lt;strong&gt;30-day free trial.&lt;/strong&gt; Sign up and download below for Android and iOS devices..
+        ///   Looks up a localized string similar to Take your smartphone data security to the next level! Try AxCrypt for free today with a &lt;strong&gt;14-day free trial.&lt;/strong&gt; Sign up and download below for Android and iOS devices..
         /// </summary>
         public static string Blog_HTEDOYAAIPI2_Conclusion_Text3 {
             get {
@@ -20921,7 +20930,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Take your Google Drive file security to the next level! Try AxCrypt for free today with a &lt;a href= &apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PSBQUkVNSVVNMTA=&apos;&gt;&lt;strong&gt;30-day free trial&lt;/strong&gt;&lt;/a&gt;.
+        ///   Looks up a localized string similar to Take your Google Drive file security to the next level! Try AxCrypt for free today with a &lt;a href= &apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PSBQUkVNSVVNMTA=&apos;&gt;&lt;strong&gt;14-day free trial&lt;/strong&gt;&lt;/a&gt;.
         /// </summary>
         public static string Blog_HTEFIGDSBSI2_Conclusion_Text3 {
             get {
@@ -21290,7 +21299,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt Free for 30 Days.
+        ///   Looks up a localized string similar to Download AxCrypt Free for 14 Days.
         /// </summary>
         public static string Blog_HTEFOWAWA_Conclusion_Heading {
             get {
@@ -21317,7 +21326,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start automatically encrypting your files today! Try AxCrypt free with a &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;b&gt;30-day free trial.&lt;/b&gt;&lt;/a&gt;.
+        ///   Looks up a localized string similar to Start automatically encrypting your files today! Try AxCrypt free with a &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;b&gt;14-day free trial.&lt;/b&gt;&lt;/a&gt;.
         /// </summary>
         public static string Blog_HTEFOWAWA_Conclusion_Text3 {
             get {
@@ -21875,7 +21884,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try AxCrypt Free for 30 Day.
+        ///   Looks up a localized string similar to Try AxCrypt Free for 14 Day.
         /// </summary>
         public static string Blog_HTSPWESBSI2_Conclusion_Heading {
             get {
@@ -22280,7 +22289,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt Free for 30 Days.
+        ///   Looks up a localized string similar to Download AxCrypt Free for 14 Days.
         /// </summary>
         public static string Blog_HTSRWWE_Conclusion_Heading1 {
             get {
@@ -22298,7 +22307,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start automatically encrypting your sensitive files today! Try AxCrypt free with a 30-day trial. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;here&lt;/a&gt; to download..
+        ///   Looks up a localized string similar to Start automatically encrypting your sensitive files today! Try AxCrypt free with a 14-day trial. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;here&lt;/a&gt; to download..
         /// </summary>
         public static string Blog_HTSRWWE_Conclusion_Text2 {
             get {
@@ -22631,7 +22640,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First month is free of charge!.
+        ///   Looks up a localized string similar to 14 days is free of charge!.
         /// </summary>
         public static string Blog_HTSSFWAUA_Conclusion_Text4 {
             get {
@@ -22937,7 +22946,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;6. Select a Payment Plan&lt;/b&gt;: To use the application, you need to select a payment plan. AxCrypt offers a one-month free trial. I chose the one-month trial and could easily cancel the plan without having to pay for the month..
+        ///   Looks up a localized string similar to &lt;b&gt;6. Select a Payment Plan&lt;/b&gt;: To use the application, you need to select a payment plan. AxCrypt offers a 14-days free trial. I chose the 14-days trial and could easily cancel the plan without having to pay for the days..
         /// </summary>
         public static string Blog_HTSSFWAUA_H3_Text6 {
             get {
@@ -23135,7 +23144,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt Free for 30 Days.
+        ///   Looks up a localized string similar to Download AxCrypt Free for 14 Days.
         /// </summary>
         public static string BLOG_HTSSPWYFC_Conclusion_Heading {
             get {
@@ -23153,7 +23162,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start  protecting and securely sharing your passwords, card details, and notes today! Try AxCrypt free with a 30-day trial. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt; to download..
+        ///   Looks up a localized string similar to Start  protecting and securely sharing your passwords, card details, and notes today! Try AxCrypt free with a 14-day trial. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt; to download..
         /// </summary>
         public static string BLOG_HTSSPWYFC_Conclusion_Text2 {
             get {
@@ -23720,7 +23729,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try AxCrypt today with a no-nonsense &lt;b&gt;30-day free trial&lt;/b&gt; and take your data security to the next level. Sign up now by &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&amp;purchase=true&apos;&gt;&lt;b&gt;clicking here&lt;/b&gt;&lt;/a&gt;..
+        ///   Looks up a localized string similar to Try AxCrypt today with a no-nonsense &lt;b&gt;14-day free trial&lt;/b&gt; and take your data security to the next level. Sign up now by &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&amp;purchase=true&apos;&gt;&lt;b&gt;clicking here&lt;/b&gt;&lt;/a&gt;..
         /// </summary>
         public static string Blog_IDTRLPVU_H4_Conclusion_Text3 {
             get {
@@ -24368,7 +24377,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try a one-month free trial, Download for Android or IOS users:.
+        ///   Looks up a localized string similar to Try a 14-days free trial. Download for Android or IOS users:.
         /// </summary>
         public static string Blog_MDSCBF_H2_Text2 {
             get {
@@ -24701,7 +24710,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt offers a one-month free trial to try out all the features, including the mobile encryption feature. So what are you waiting for? Sign up for a free trial of AxCrypt here:.
+        ///   Looks up a localized string similar to AxCrypt offers a 14-days free trial to try out all the features, including the mobile encryption feature. So what are you waiting for? Sign up for a free trial of AxCrypt here:.
         /// </summary>
         public static string Blog_MEWRECY_H2_SH4_Text2 {
             get {
@@ -26772,7 +26781,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We first offer a 30 day Premium Trial, and then you can choose if you’d like to use it for another 6 or 12 months at a time and can stop at any time..
+        ///   Looks up a localized string similar to We first offer a 14 day Premium Trial, and then you can choose if you’d like to use it for another 6 or 12 months at a time and can stop at any time..
         /// </summary>
         public static string Blog_SVL_Text8 {
             get {
@@ -27015,7 +27024,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login&apos;&gt;🔒 Try AxCrypt Free for 30 Days&lt;/a&gt; and experience how simple, secure encryption can be..
+        ///   Looks up a localized string similar to &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login&apos;&gt;🔒 Try AxCrypt Free for 14 Days&lt;/a&gt; and experience how simple, secure encryption can be..
         /// </summary>
         public static string Blog_T5FET_H4_Text9 {
             get {
@@ -29022,7 +29031,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try a one-month free trial, Download for Android or IOS users:.
+        ///   Looks up a localized string similar to Try a 14-days free trial, Download for Android or IOS users:.
         /// </summary>
         public static string Blog_Try_Download_Mobile_App_Text {
             get {
@@ -29427,7 +29436,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try AxCrypt today with a &lt;b&gt;30-day free trial&lt;/b&gt; and take your data security to the next level. Sign up now by &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&amp;purchase=true&apos;&gt;&lt;b&gt;clicking here&lt;/b&gt;&lt;/a&gt;..
+        ///   Looks up a localized string similar to Try AxCrypt today with a &lt;b&gt;14-day free trial&lt;/b&gt; and take your data security to the next level. Sign up now by &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&amp;purchase=true&apos;&gt;&lt;b&gt;clicking here&lt;/b&gt;&lt;/a&gt;..
         /// </summary>
         public static string Blog_TUGFEDE_H6_Conclusion_Text3 {
             get {
@@ -31821,7 +31830,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applying encryption at the Olympic Games 2024 ensures peace of mind, allowing you to be fully present without the worry of data breaches. Such breaches can significantly impact both spectators and athletes. With AxCrypt, you can capture and securely store your Olympic Games experience. Secure your participation by signing up for AxCrypt today and enjoy a 30-day free trial along with a 20% discount for the Olympics. Start protecting your Olympic experience now!.
+        ///   Looks up a localized string similar to Applying encryption at the Olympic Games 2024 ensures peace of mind, allowing you to be fully present without the worry of data breaches. Such breaches can significantly impact both spectators and athletes. With AxCrypt, you can capture and securely store your Olympic Games experience. Secure your participation by signing up for AxCrypt today and enjoy a 14-day free trial along with a 20% discount for the Olympics. Start protecting your Olympic experience now!.
         /// </summary>
         public static string Blog_WDSPOG_Conclusion_Text3 {
             get {
@@ -32100,7 +32109,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;Mobile Encryption&lt;/strong&gt; - With the AxCrypt mobile encryption you can secure your data on Google Drive Files and Dropbox with just one click on your iOS and Android devices. Try a one-month free trial: Download for &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Android&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;iOS&lt;/a&gt;.
+        ///   Looks up a localized string similar to &lt;strong&gt;Mobile Encryption&lt;/strong&gt; - With the AxCrypt mobile encryption you can secure your data on Google Drive Files and Dropbox with just one click on your iOS and Android devices. Try a 14-days free trial: Download for &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Android&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;iOS&lt;/a&gt;.
         /// </summary>
         public static string Blog_WENTI_H4_Text4 {
             get {
@@ -33333,7 +33342,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start automatically encrypting your sensitive files today! Try AxCrypt free with a 30-day trial. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt; to download..
+        ///   Looks up a localized string similar to Start automatically encrypting your sensitive files today! Try AxCrypt free with a 14-day trial. Click &lt;a href=&apos;https://account.axcrypt.net/HomeUser/CreatePremium/?utm=aWQ9Y2JjNTFkMjgtZmY4Zi00YjZjLWFiZDAtZjhmYTlkNTI5MGYxJmRpc2NvdW50PQ==&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt; to download..
         /// </summary>
         public static string Blog_WINAIMCR_Conclusion_H1_Text2 {
             get {
@@ -33342,7 +33351,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt Free for 30 Days.
+        ///   Looks up a localized string similar to Download AxCrypt Free for 14 Days.
         /// </summary>
         public static string Blog_WINAIMCR_Conclusion_Heading {
             get {
@@ -34404,7 +34413,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Visit our pricing page at &lt;a href=&apos;https://axcrypt.net/pricing&apos;&gt;https://axcrypt.net/pricing&lt;/a&gt;  to see our subscription options. Try AxCrypt today with a &lt;b&gt;free one-month trial&lt;/b&gt; and take your data security to the next level. Sign up now by &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;clicking here&lt;/a&gt;..
+        ///   Looks up a localized string similar to Visit our pricing page at &lt;a href=&apos;https://axcrypt.net/pricing&apos;&gt;https://axcrypt.net/pricing&lt;/a&gt;  to see our subscription options. Try AxCrypt today with a &lt;b&gt;free 14-days trial&lt;/b&gt; and take your data security to the next level. Sign up now by &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;clicking here&lt;/a&gt;..
         /// </summary>
         public static string Blog_WRDBTUAE_H6_Conclusion_Text3 {
             get {
@@ -36051,7 +36060,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Take your file security to the next level! Try AxCrypt for free today with a &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;&lt;b&gt;30-day free trial.&lt;/b&gt;&lt;/a&gt; Click below to download..
+        ///   Looks up a localized string similar to Take your file security to the next level! Try AxCrypt for free today with a &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;&lt;b&gt;14-day free trial.&lt;/b&gt;&lt;/a&gt; Click below to download..
         /// </summary>
         public static string Blog_ZKEEIST_Conclusion_Text3 {
             get {
@@ -36763,7 +36772,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;After 30 days, the trial turns into the subscription you signed up for, whether that’s monthly or yearly.&lt;/p&gt;&lt;p&gt;You can cancel your subscription at any time. If you do this before the trial ends, you won’t be charged anything. After that, your account will fall back to the Free version.&lt;/p&gt;.
+        ///   Looks up a localized string similar to &lt;p&gt;After 14 days, the trial turns into the subscription you signed up for, whether that’s monthly or yearly.&lt;/p&gt;&lt;p&gt;You can cancel your subscription at any time. If you do this before the trial ends, you won’t be charged anything. After that, your account will fall back to the Free version.&lt;/p&gt;.
         /// </summary>
         public static string BusinessAfterTrialBodyText {
             get {
@@ -36772,7 +36781,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to After 30 days, the trial turns into the subscription you signed up for, whether that’s monthly or yearly..
+        ///   Looks up a localized string similar to After 14 days, the trial turns into the subscription you signed up for, whether that’s monthly or yearly..
         /// </summary>
         public static string BusinessAfterTrialBodyText1 {
             get {
@@ -38032,7 +38041,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The first month is free, after that:.
+        ///   Looks up a localized string similar to The first 14 days is free, after that:.
         /// </summary>
         public static string BusinessTrialCreationSummaryTitle {
             get {
@@ -38041,7 +38050,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to !!You&apos;re eligible for a free 30 day trial! You can add as many users as you like and pay nothing for the first 30 days! But remember, after the 30 days are up, you will be charged.
+        ///   Looks up a localized string similar to !!You&apos;re eligible for a free 14 day trial! You can add as many users as you like and pay nothing for the first 14 days! But remember, after the 14 days are up, you will be charged.
         /// </summary>
         public static string BusinessTrialEligibleInfo {
             get {
@@ -38050,7 +38059,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to THE FIRST MONTH IS FREE.
+        ///   Looks up a localized string similar to THE 14 DAYS IS FREE.
         /// </summary>
         public static string BusinessTrialInfo {
             get {
@@ -41732,7 +41741,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try our subscriptions for one month &lt;span&gt;for free...&lt;/span&gt;.
+        ///   Looks up a localized string similar to Try our subscriptions for 14 days &lt;span&gt;for free...&lt;/span&gt;.
         /// </summary>
         public static string DownloadTryCtaHeading {
             get {
@@ -45504,7 +45513,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use the app with your AxCrypt ID. A Premium subscription is needed to use both Android and iOS apps. When creating a new AxCrypt ID you will automatically get 30-days Premium trial..
+        ///   Looks up a localized string similar to Use the app with your AxCrypt ID. A Premium subscription is needed to use both Android and iOS apps. When creating a new AxCrypt ID you will automatically get 14-days Premium trial..
         /// </summary>
         public static string GetStartedAxcryptMobileText {
             get {
@@ -47891,7 +47900,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try &lt;span&gt;AxCrypt for free &lt;br/&gt; for 30 Days!&lt;/span&gt; .
+        ///   Looks up a localized string similar to Try &lt;span&gt;AxCrypt for free &lt;br/&gt; for 14 Days!&lt;/span&gt; .
         /// </summary>
         public static string helpcenterwinningText {
             get {
@@ -49085,7 +49094,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find out how AxCrypt can secure your organization&apos;s data today. &lt;span&gt;Try it for free for 30 Days! &lt;/span&gt;.
+        ///   Looks up a localized string similar to Find out how AxCrypt can secure your organization&apos;s data today. &lt;span&gt;Try it for free for 14 Days! &lt;/span&gt;.
         /// </summary>
         public static string IndustriesFinancialTrialInfo {
             get {
@@ -49094,7 +49103,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to See how AxCrypt can secure your institution’s data today. &lt;span&gt; Try it for free for 30 Days! &lt;/span&gt;.
+        ///   Looks up a localized string similar to See how AxCrypt can secure your institution’s data today. &lt;span&gt; Try it for free for 14 Days! &lt;/span&gt;.
         /// </summary>
         public static string IndustriesFreeTrialText0 {
             get {
@@ -49238,7 +49247,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find out how AxCrypt can protect your government organization&apos;s data today.&lt;span&gt;Try it for free for 30 Days!&lt;/span&gt;.
+        ///   Looks up a localized string similar to Find out how AxCrypt can protect your government organization&apos;s data today.&lt;span&gt;Try it for free for 14 Days!&lt;/span&gt;.
         /// </summary>
         public static string IndustriesGovernmentTrialInfo {
             get {
@@ -49418,7 +49427,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find out how AxCrypt can secure your healthcare organization&apos;s data today.&lt;span&gt;Try it for free for 30 Days!&lt;/span&gt;.
+        ///   Looks up a localized string similar to Find out how AxCrypt can secure your healthcare organization&apos;s data today.&lt;span&gt;Try it for free for 14 Days!&lt;/span&gt;.
         /// </summary>
         public static string IndustriesHealthcareTrialInfo {
             get {
@@ -49562,7 +49571,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find out how AxCrypt can protect your legal firm’s data. &lt;span&gt;Try it for free for 30 Days!&lt;span&gt;.
+        ///   Looks up a localized string similar to Find out how AxCrypt can protect your legal firm’s data. &lt;span&gt;Try it for free for 14 Days!&lt;span&gt;.
         /// </summary>
         public static string IndustriesLegalTrialInfo {
             get {
@@ -49760,7 +49769,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find out how AxCrypt can protect your IT organization&apos;s data today.&lt;br/&gt; &lt;span&gt;Try it for free for 30 Days! &lt;/span&gt;.
+        ///   Looks up a localized string similar to Find out how AxCrypt can protect your IT organization&apos;s data today.&lt;br/&gt; &lt;span&gt;Try it for free for 14 Days! &lt;/span&gt;.
         /// </summary>
         public static string IndustriesTechTrialInfo {
             get {
@@ -50934,6 +50943,114 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share Key button.
+        /// </summary>
+        public static string KeyShareDesktopHead1 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent files.
+        /// </summary>
+        public static string KeyShareDesktopHead2 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secured folders.
+        /// </summary>
+        public static string KeyShareDesktopHead3 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key Sharing is available with AxCrypt &lt;span&gt;Premium&lt;/span&gt; and &lt;b&gt;Business&lt;/b&gt; — these are the basic steps on desktop..
+        /// </summary>
+        public static string KeyShareDesktopParagraph {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to the &lt;b&gt;Secured Folders&lt;b&gt; tab..
+        /// </summary>
+        public static string KeyShareDesktopStep1 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopStep1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to the &lt;b&gt;Recent Files&lt;/b&gt; tab..
+        /// </summary>
+        public static string KeyShareDesktopStep2 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopStep2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the &lt;b&gt;file(s)&lt;/b&gt; you want to share..
+        /// </summary>
+        public static string KeyShareDesktopStep3 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopStep3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click the &lt;b&gt;“Share Keys”&lt;/b&gt; action button..
+        /// </summary>
+        public static string KeyShareDesktopStep4 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopStep4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to the &lt;b&gt;Secured Folders&lt;/b&gt; tab..
+        /// </summary>
+        public static string KeyShareDesktopStep5 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopStep5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the &lt;b&gt;folder(s)&lt;/b&gt; you want to key share..
+        /// </summary>
+        public static string KeyShareDesktopStep6 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopStep6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow the steps mentioned above for key sharing..
+        /// </summary>
+        public static string KeyShareDesktopStep7 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopStep7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Optional) Enable the &lt;b&gt;“Include Sub Folder”&lt;/b&gt; option if you also wish to key share the sub-folder files..
+        /// </summary>
+        public static string KeyShareDesktopStep8 {
+            get {
+                return ResourceManager.GetString("KeyShareDesktopStep8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add recipients to the list of people who you want to share this file with.
         ///
         ///A recipient is identified by the AxCrypt ID sign in email, but we do not send the file! Here you add the recipients&apos; key to the file. You still have to share the actual file with the recipient afterwards..
@@ -50945,11 +51062,83 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Small but important details you should know before sharing files..
+        /// </summary>
+        public static string KeyShareGuideNoteParagraph {
+            get {
+                return ResourceManager.GetString("KeyShareGuideNoteParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share file access with colleagues and friends using Key Sharing — secure, simple, and designed to keep your data private while you collaborate..
+        /// </summary>
+        public static string KeyShareGuidesHeadParagraph {
+            get {
+                return ResourceManager.GetString("KeyShareGuidesHeadParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Share file access with &lt;label style=&quot;font-style: italic; &quot;&gt;colleagues and friends &lt;/label&gt; &lt;strong style=&quot;color: black; &quot;&gt;with &lt;/strong&gt;&lt;span&gt; Key Sharing!&lt;/span&gt;.
         /// </summary>
         public static string KeyShareGuidesTitle {
             get {
                 return ResourceManager.GetString("KeyShareGuidesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 📚 Quick Guide to Viewing or Decrypt the File.
+        /// </summary>
+        public static string KeyShareGuideWhatsNextHead1 {
+            get {
+                return ResourceManager.GetString("KeyShareGuideWhatsNextHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔐 Secured Messenger.
+        /// </summary>
+        public static string KeyShareGuideWhatsNextHead2 {
+            get {
+                return ResourceManager.GetString("KeyShareGuideWhatsNextHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 📝 Blog.
+        /// </summary>
+        public static string KeyShareGuideWhatsNextHead3 {
+            get {
+                return ResourceManager.GetString("KeyShareGuideWhatsNextHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;a href=&apos;/helpcenter/guides-section/&apos;&gt;How to Encrypt &amp; Decrypt Files with AxCrypt | Step-by-Step Guide&lt;/a&gt;.
+        /// </summary>
+        public static string KeyShareGuideWhatsNextText1 {
+            get {
+                return ResourceManager.GetString("KeyShareGuideWhatsNextText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secured Messenger is a secure, end-to-end encrypted messaging feature built into AxCrypt: &lt;/br&gt; &lt;a href=&apos;/information/guides/passwordmanager/&apos;&gt;AxCrypt Password Manager Guide – Securely Manage &amp; Share Passwords&lt;/a&gt;.
+        /// </summary>
+        public static string KeyShareGuideWhatsNextText2 {
+            get {
+                return ResourceManager.GetString("KeyShareGuideWhatsNextText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Want to dive deeper into encryption best practices? Explore our blog for guides and tips. &lt;/br&gt; &lt;a href=&apos;/blog/&apos;&gt;AxCrypt Blog&lt;/a&gt;.
+        /// </summary>
+        public static string KeyShareGuideWhatsNextText3 {
+            get {
+                return ResourceManager.GetString("KeyShareGuideWhatsNextText3", resourceCulture);
             }
         }
         
@@ -50970,6 +51159,33 @@ namespace AxCrypt.Content {
         public static string KeyShareLabelText {
             get {
                 return ResourceManager.GetString("KeyShareLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap the &lt;b&gt;Apply&lt;/b&gt; button..
+        /// </summary>
+        public static string KeyShareMobileStep7 {
+            get {
+                return ResourceManager.GetString("KeyShareMobileStep7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typically, employees share relevant and work-related information with each other. However, worrying about the data’s security during the sharing process is inevitable. Since this raises concern about sharing secured files, it is incredibly vital for encryption software to have a feature that lets you share and receive files more securely..
+        /// </summary>
+        public static string KeyShareOverviewParagraph1 {
+            get {
+                return ResourceManager.GetString("KeyShareOverviewParagraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In short: AxCrypt uses asymmetric encryption and a unique per-file session key. You share keys for access — not passwords...
+        /// </summary>
+        public static string KeyShareOverviewParagraph2 {
+            get {
+                return ResourceManager.GetString("KeyShareOverviewParagraph2", resourceCulture);
             }
         }
         
@@ -53378,7 +53594,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We noticed you don&apos;t have a subscription, you can try for free for 30 days!.
+        ///   Looks up a localized string similar to We noticed you don&apos;t have a subscription, you can try for free for 14 days!.
         /// </summary>
         public static string MessageAskAboutStartTrial {
             get {
@@ -53585,7 +53801,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Explore AxCrypt Beta&apos;s modern interface. Learn to encrypt, decrypt, and share files securely with our step-by-step guide. Start your 30-day free trial today..
+        ///   Looks up a localized string similar to Explore AxCrypt Beta&apos;s modern interface. Learn to encrypt, decrypt, and share files securely with our step-by-step guide. Start your 14-day free trial today..
         /// </summary>
         public static string Meta_Description_Beta_axcrypt_guide {
             get {
@@ -55070,7 +55286,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Compare AxCrypt’s Free, Premium, and Business plans. Get AES-256 encryption, password manager, and secure file sharing. Start your 1-month free trial today!.
+        ///   Looks up a localized string similar to Compare AxCrypt’s Free, Premium, and Business plans. Get AES-256 encryption, password manager, and secure file sharing. Start your 14-days free trial today!.
         /// </summary>
         public static string Meta_Description_Pricing {
             get {
@@ -55331,7 +55547,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Affordable price,get free trial,Try one-month free,free encryption software,premium file guarding.
+        ///   Looks up a localized string similar to Affordable price,get free trial,Try 14 days free,free encryption software,premium file guarding.
         /// </summary>
         public static string Meta_Keywords_Pricing {
             get {
@@ -58160,7 +58376,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save, manage, and securely share them with &lt;span&gt;AxCrypt&apos;s Password Manager.&lt;/span&gt; You can also protect &lt;span&gt; credit card details and notes.&lt;/span&gt; Try it free for 30 days..
+        ///   Looks up a localized string similar to Save, manage, and securely share them with &lt;span&gt;AxCrypt&apos;s Password Manager.&lt;/span&gt; You can also protect &lt;span&gt; credit card details and notes.&lt;/span&gt; Try it free for 14 days..
         /// </summary>
         public static string NewTrialButton {
             get {
@@ -58502,7 +58718,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Free 30-day trial of AxCrypt Business.
+        ///   Looks up a localized string similar to Free 14-day trial of AxCrypt Business.
         /// </summary>
         public static string NIS2GuidelinesContent5 {
             get {
@@ -58931,7 +59147,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1 free month.
+        ///   Looks up a localized string similar to 14 days free.
         /// </summary>
         public static string OneFreeMonthLabel {
             get {
@@ -59921,7 +60137,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save, manage, and securely share with &lt;span class=&quot;italic-text&quot;&gt;award winning and easy to use encryption software!&lt;/span&gt; You can also protect &lt;strong&gt;credit card details and notes.Try &lt;span&gt;AxCrypt&apos;s Subscription Plans&lt;/span&gt; free for 30 days.&lt;/strong&gt;.
+        ///   Looks up a localized string similar to Save, manage, and securely share with &lt;span class=&quot;italic-text&quot;&gt;award winning and easy to use encryption software!&lt;/span&gt; You can also protect &lt;strong&gt;credit card details and notes.Try &lt;span&gt;AxCrypt&apos;s Subscription Plans&lt;/span&gt; free for 14 days.&lt;/strong&gt;.
         /// </summary>
         public static string PasswordGeneratorSubHeading2 {
             get {
@@ -60038,7 +60254,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get AxCrypt Password Manager today and get the first 30 days for free!.
+        ///   Looks up a localized string similar to Get AxCrypt Password Manager today and get the first 14 days for free!.
         /// </summary>
         public static string PasswordManagerTrialInfo {
             get {
@@ -60916,7 +61132,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes, we offer a 30-day free trial for AxCrypt Premium. This allows you to explore all premium features and assess if it meets your needs. Sign up for the trial on our Free Trial Page..
+        ///   Looks up a localized string similar to Yes, we offer a 14-day free trial for AxCrypt Premium. This allows you to explore all premium features and assess if it meets your needs. Sign up for the trial on our Free Trial Page..
         /// </summary>
         public static string PremiumFaq4Ans {
             get {
@@ -60961,7 +61177,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  &lt;p&gt;Interested in getting a subscription, but not sure if it fits your needs? &lt;a href=&apos;https://account.axcrypt.net/en/Home/Purchase&apos;&gt;You can enjoy 30 days of AxCrypt Premium for free.&lt;/a&gt;&lt;/p&gt;&lt;p&gt;With AxCrypt Premium, you have access to extended functionality and exciting features! Encrypt your files with AES-256 – the strongest of the AES algorithm. It is used globally to protect sensitive and classified information of all levels. Securing folders has never been easier, only taking a single click to automati [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to  &lt;p&gt;Interested in getting a subscription, but not sure if it fits your needs? &lt;a href=&apos;https://account.axcrypt.net/en/Home/Purchase&apos;&gt;You can enjoy 14 days of AxCrypt Premium for free.&lt;/a&gt;&lt;/p&gt;&lt;p&gt;With AxCrypt Premium, you have access to extended functionality and exciting features! Encrypt your files with AES-256 – the strongest of the AES algorithm. It is used globally to protect sensitive and classified information of all levels. Securing folders has never been easier, only taking a single click to automati [rest of string was truncated]&quot;;.
         /// </summary>
         public static string PremiumFirstBodyText {
             get {
@@ -60970,7 +61186,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Interested in getting a subscription, but not sure if it fits your needs? &lt;a href={url}&gt;You can enjoy 30 days of AxCrypt Premium for free.&lt;/a&gt;.
+        ///   Looks up a localized string similar to Interested in getting a subscription, but not sure if it fits your needs? &lt;a href={url}&gt;You can enjoy 14 days of AxCrypt Premium for free.&lt;/a&gt;.
         /// </summary>
         public static string PremiumFirstBodyText1 {
             get {
@@ -61024,7 +61240,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Premium {0} x 30 days..
+        ///   Looks up a localized string similar to AxCrypt Premium {0} x 14 days..
         /// </summary>
         public static string PremiumItemDescriptionFormat {
             get {
@@ -61267,7 +61483,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;After 30 days, the trial turns into the subscription you signed up for, whether that’s monthly or yearly.&lt;/p&gt;&lt;p&gt;You can cancel your subscription at any time. If you do this before the trial ends, you won’t be charged anything. After that, your account will fall back to the Free version.&lt;/p&gt;.
+        ///   Looks up a localized string similar to &lt;p&gt;After 14 days, the trial turns into the subscription you signed up for, whether that’s monthly or yearly.&lt;/p&gt;&lt;p&gt;You can cancel your subscription at any time. If you do this before the trial ends, you won’t be charged anything. After that, your account will fall back to the Free version.&lt;/p&gt;.
         /// </summary>
         public static string PremiumSecondBodyText {
             get {
@@ -61276,7 +61492,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to After 30 days, the trial turns into the subscription you signed up for, whether that’s monthly or yearly..
+        ///   Looks up a localized string similar to After 14 days, the trial turns into the subscription you signed up for, whether that’s monthly or yearly..
         /// </summary>
         public static string PremiumSecondBodyText1 {
             get {
@@ -61330,7 +61546,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get AxCrypt Premium today and get the first 30 days for free!.
+        ///   Looks up a localized string similar to Get AxCrypt Premium today and get the first 14 days for free!.
         /// </summary>
         public static string PremiumTrialInfo {
             get {
@@ -61933,7 +62149,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try our subscriptions for &lt;span&gt;one month free&lt;/span&gt;.
+        ///   Looks up a localized string similar to Try our subscriptions for &lt;span&gt;14 days free&lt;/span&gt;.
         /// </summary>
         public static string PricingLinkLabelFeature {
             get {
@@ -62718,7 +62934,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try &lt;span&gt; Business &lt;/span&gt; subscription for &lt;span&gt; one month free. &lt;/span&gt;.
+        ///   Looks up a localized string similar to Try our subscriptions for &lt;span&gt;14 days free&lt;/span&gt;.
         /// </summary>
         public static string ProductBusinessPricingTitle {
             get {
@@ -63024,7 +63240,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try Password Manager &lt;span&gt; one month for free.&lt;/span&gt;.
+        ///   Looks up a localized string similar to Try Password Manager &lt;span&gt; 14 days for free.&lt;/span&gt;.
         /// </summary>
         public static string ProductPasswordManagerPricingTitle {
             get {
@@ -63105,7 +63321,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try &lt;span&gt; Premium &lt;/span&gt; subscription for &lt;span&gt; one month free. &lt;/span&gt;.
+        ///   Looks up a localized string similar to Try our subscriptions for &lt;span&gt;14 days free&lt;/span&gt;.
         /// </summary>
         public static string ProductPremiumPricingTitle {
             get {
@@ -63627,7 +63843,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 30-day trial.
+        ///   Looks up a localized string similar to 14-day trial.
         /// </summary>
         public static string ProductTryItForFreeSubheading {
             get {
@@ -63834,7 +64050,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 30 DAYS.
+        ///   Looks up a localized string similar to 14 DAYS.
         /// </summary>
         public static string PromptDays {
             get {
@@ -63897,7 +64113,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to x 30 days.
+        ///   Looks up a localized string similar to x 14 days.
         /// </summary>
         public static string PromptMonths {
             get {
@@ -64667,7 +64883,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GET A 30 DAY FREE TRIAL.
+        ///   Looks up a localized string similar to GET A 14 DAY FREE TRIAL.
         /// </summary>
         public static string RegulatoryTrialText1 {
             get {
@@ -64676,7 +64892,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start your healthcare data protection journey today with a 30-day free trial. Get &lt;span&gt;15% OFF AxCrypt BUSINESS&lt;/span&gt; post trial with coupon &lt;span&gt;BUSINESS15&lt;/span&gt;..
+        ///   Looks up a localized string similar to Start your healthcare data protection journey today with a 14-day free trial. Get &lt;span&gt;15% OFF AxCrypt BUSINESS&lt;/span&gt; post trial with coupon &lt;span&gt;BUSINESS15&lt;/span&gt;..
         /// </summary>
         public static string RegulatoryTrialText2 {
             get {
@@ -65458,7 +65674,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For the purposes of a subscription a month is defined as 30 days and a year as 360 days. When a subscription is created or renewed, the period is always a month or a year..
+        ///   Looks up a localized string similar to For the purposes of a subscription a month is defined as 14 days and a year as 360 days. When a subscription is created or renewed, the period is always a month or a year..
         /// </summary>
         public static string ResellerHelpBillingBlock2Text2 {
             get {
@@ -66502,7 +66718,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You do not have a valid subscription plan and can therefore no longer edit or create new password entries. However, you can still see existing entries. If you have not used your 30 day Trial period, you can start it from &lt;a href=&quot;/Home/Upgrade&quot;&gt;here&lt;/a&gt;..
+        ///   Looks up a localized string similar to You do not have a valid subscription plan and can therefore no longer edit or create new password entries. However, you can still see existing entries. If you have not used your 14 day Trial period, you can start it from &lt;a href=&quot;/Home/Upgrade&quot;&gt;here&lt;/a&gt;..
         /// </summary>
         public static string SecretsWarningIsReadOnly {
             get {
@@ -68483,7 +68699,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get immediate access! First month is free and you can cancel at anytime..
+        ///   Looks up a localized string similar to Get immediate access! 14 days is free and you can cancel at anytime..
         /// </summary>
         public static string StartFreeBusinessTrialHelpText {
             get {
@@ -68492,7 +68708,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start free month.
+        ///   Looks up a localized string similar to Start free 14 days.
         /// </summary>
         public static string StartFreeMonthLabel {
             get {
@@ -68690,7 +68906,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Take advantage of our 30-day free trial and enjoy a 50% discount on &lt;span&gt;AxCrypt Premium&lt;/span&gt;. Start protecting your academic work today! To claim your &lt;b&gt;50% discount,&lt;/b&gt; please complete the following steps:.
+        ///   Looks up a localized string similar to Take advantage of our 14-day free trial and enjoy a 50% discount on &lt;span&gt;AxCrypt Premium&lt;/span&gt;. Start protecting your academic work today! To claim your &lt;b&gt;50% discount,&lt;/b&gt; please complete the following steps:.
         /// </summary>
         public static string StudentDiscountparagraph {
             get {
@@ -69068,7 +69284,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1-month free trial included.
+        ///   Looks up a localized string similar to 14-days free trial included.
         /// </summary>
         public static string SubscriptionFreeTrialIndicatorText {
             get {
@@ -69212,7 +69428,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get 30 days subscription free!.
+        ///   Looks up a localized string similar to Get 14 days subscription free!.
         /// </summary>
         public static string SubscriptionTrialPrompt {
             get {
@@ -69762,7 +69978,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We offer 30 days free trial for the AxCrypt Premium or Business plan for new users. If you don’t like the product you can cancel the subscription before the trial ends. Cancelling the subscription can be done at any time. Doing this will not affect the trial and you will still be able to use all the features that comes with Business, Premium subscription during your trial period. After the 30 days of free trial, we will charge your credit/debit cards if you haven’t cancelled your subscription..
+        ///   Looks up a localized string similar to We offer 14 days free trial for the AxCrypt Premium or Business plan for new users. If you don’t like the product you can cancel the subscription before the trial ends. Cancelling the subscription can be done at any time. Doing this will not affect the trial and you will still be able to use all the features that comes with Business, Premium subscription during your trial period. After the 14 days of free trial, we will charge your credit/debit cards if you haven’t cancelled your subscription..
         /// </summary>
         public static string TermsOfUseBlock11Text1 {
             get {
@@ -69798,7 +70014,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancelling your paid subscription may be done at any time. However, refunds are not offered. For trying out AxCrypt to see if it fits your needs, you get a free month at the start of your initial subscription..
+        ///   Looks up a localized string similar to Cancelling your paid subscription may be done at any time. However, refunds are not offered. For trying out AxCrypt to see if it fits your needs, you get a 14 days at the start of your initial subscription..
         /// </summary>
         public static string TermsOfUseBlock12Text3 {
             get {
@@ -70338,7 +70554,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No refund will be provided if you haven’t cancelled your subscription during the trial period of 30 days. Refund will be given only under certain technical circumstances. We reserve the right to withdraw or modify such offers at any time without prior notice..
+        ///   Looks up a localized string similar to No refund will be provided if you haven’t cancelled your subscription during the trial period of 14 days. Refund will be given only under certain technical circumstances. We reserve the right to withdraw or modify such offers at any time without prior notice..
         /// </summary>
         public static string TermsOfUseBlockNew11Text1 {
             get {
@@ -70767,7 +70983,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try &lt;span&gt;AxCrypt for free for 30 Days!&lt;/span&gt;.
+        ///   Looks up a localized string similar to Try &lt;span&gt;AxCrypt for free for 14 Days!&lt;/span&gt;.
         /// </summary>
         public static string TryFree {
             get {
@@ -70803,7 +71019,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;span&gt;Try&lt;/span&gt; 1-month.
+        ///   Looks up a localized string similar to &lt;span&gt;Try&lt;/span&gt; 14-days.
         /// </summary>
         public static string TryOneMonth {
             get {
@@ -71172,7 +71388,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Discover the amazing features we designed to empower your mobile encryption with our &lt;b&gt;subscriptions right now or after 30-days free trial&lt;/b&gt;..
+        ///   Looks up a localized string similar to Discover the amazing features we designed to empower your mobile encryption with our &lt;b&gt;subscriptions right now or after 14-days free trial&lt;/b&gt;..
         /// </summary>
         public static string UnlockMagicalFeaturesDescription {
             get {
@@ -72235,6 +72451,24 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Watch tutorials.
+        /// </summary>
+        public static string WatchTutorialsLabel {
+            get {
+                return ResourceManager.GetString("WatchTutorialsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move faster with &lt;span&gt;our tutorials!&lt;/span&gt;.
+        /// </summary>
+        public static string WatchTutorialsText {
+            get {
+                return ResourceManager.GetString("WatchTutorialsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Weak password.
         /// </summary>
         public static string WeakPasswordLabel {
@@ -72262,7 +72496,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We&apos;re really happy that you have signed up! To make you feel really welcome, We&apos;re giving you the chance to try our Premium functions for 30 days for free. Just start your trial at any time from the AxCrypt app..
+        ///   Looks up a localized string similar to We&apos;re really happy that you have signed up! To make you feel really welcome, We&apos;re giving you the chance to try our Premium functions for 14 days for free. Just start your trial at any time from the AxCrypt app..
         /// </summary>
         public static string WelcomeMailBody1Html {
             get {
