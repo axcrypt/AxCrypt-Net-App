@@ -63,14 +63,6 @@
         }
     }
 
-    .vlt-select-type {
-        height: 35px;
-        width: 120px;
-        border-radius: 5px;
-        margin: 2px 0 15px;
-        border-color: $ActnBgClr;
-    }
-
     .vlt-btn-add {
         height: 35px;
         width: 60px;
@@ -78,7 +70,6 @@
         color: azure;
         border: 0;
         border-radius: 5px;
-        margin: 2px 0 15px;
     }
 
     .vlt-empty {
@@ -131,8 +122,19 @@
         }
     }
 
+    .file-img-det {
+        min-width: 0;
+        overflow: hidden;
+    }
+
     .file-name {
         color: #494949 !important;
+        display: inline-block;
+        max-width: 80%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
     }
 
     .list-file-icon {
@@ -225,12 +227,7 @@
         align-items: center;
 
         .file-name {
-            display: inline-block;
-            max-width: 130px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            vertical-align: middle;
+            max-width: 130px !important;
         }
     }
 

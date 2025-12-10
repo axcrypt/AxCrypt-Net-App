@@ -11,6 +11,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Shared.Helpers;
 
 namespace AxCrypt.App.Shared.Desktop;
 
@@ -49,7 +50,14 @@ public class AppMain
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => await _knownFoldersViewModel.UpdateState.ExecuteAsync(null));
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await new Display().LocalSignInWarningPopUpAsync(loggedOn); });
-
+        _mainViewModel.BindPropertyChanged(nameof(MainViewModel.VaultChangeDetected), async (bool changed) =>
+        {
+            if (changed)
+            {
+                AxCServiceProviderExtension.GetService<VaultViewModel>().LoadVaultItems();
+                _mainViewModel.VaultChangeDetected = false;
+            }
+        });
         SharedFactory.LoadUpdateCheck(_mainViewModel, _logOnViewModel);
     }
 

@@ -109,7 +109,7 @@ namespace AxCrypt.Core.Session
                 return false;
             }
 
-            bool isWatched = New<FileSystemState>().WatchedFolders.Any(wf => vaultFolderPath.Contains(wf.Path));
+            bool isWatched = New<FileSystemState>().WatchedFolders.Any(wf => vaultFolderPath.Trim('\\').Contains(wf.Path.Trim('\\')));
             if (isWatched)
             {
                 await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle,

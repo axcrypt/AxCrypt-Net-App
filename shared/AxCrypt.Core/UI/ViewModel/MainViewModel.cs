@@ -124,6 +124,9 @@ namespace AxCrypt.Core.UI.ViewModel
         public LicenseCapabilities License
         { get { return GetProperty<LicenseCapabilities>(nameof(License)); } set { SetProperty(nameof(License), value); } }
 
+        public bool VaultChangeDetected
+        { get { return GetProperty<bool>(nameof(VaultChangeDetected)); } set { SetProperty(nameof(VaultChangeDetected), value); } }
+
         public IAsyncAction RemoveRecentFiles { get; private set; }
 
         public IAsyncAction AddWatchedFolders { get; private set; }
@@ -166,6 +169,7 @@ namespace AxCrypt.Core.UI.ViewModel
         private void InitializePropertyValues()
         {
             WatchedFoldersEnabled = false;
+            VaultChangeDetected = false;
             WatchedFolders = new string[0];
             DragAndDropFiles = new string[0];
             RecentFiles = new ActiveFile[0];
@@ -367,10 +371,14 @@ namespace AxCrypt.Core.UI.ViewModel
                     LicenseUpdate.Execute(null);
                     break;
 
+                case SessionNotificationType.VaultFolderChange:
+                case SessionNotificationType.VaultFolderAdded:
+                    VaultChangeDetected = true;
+                    break;
+
                 case SessionNotificationType.WorkFolderChange:
                 case SessionNotificationType.ProcessExit:
                 case SessionNotificationType.SessionChange:
-                case SessionNotificationType.VaultFolderAdded:
                 default:
                     break;
             }

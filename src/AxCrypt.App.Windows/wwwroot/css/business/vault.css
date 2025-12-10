@@ -50,13 +50,6 @@
 .vlt-body .vlt-search:hover .search-btn {
   background-color: #232323;
 }
-.vlt-body .vlt-select-type {
-  height: 35px;
-  width: 120px;
-  border-radius: 5px;
-  margin: 2px 0 15px;
-  border-color: #232323;
-}
 .vlt-body .vlt-btn-add {
   height: 35px;
   width: 60px;
@@ -64,7 +57,6 @@
   color: azure;
   border: 0;
   border-radius: 5px;
-  margin: 2px 0 15px;
 }
 .vlt-body .vlt-empty {
   border: 2px dashed #A4A4A4;
@@ -109,8 +101,18 @@
   font-weight: 500;
   color: #A4A4A4;
 }
+.vlt-body .file-img-det {
+  min-width: 0;
+  overflow: hidden;
+}
 .vlt-body .file-name {
   color: #494949 !important;
+  display: inline-block;
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
 }
 .vlt-body .list-file-icon {
   min-width: 19px;
@@ -189,12 +191,7 @@
   align-items: center;
 }
 .vlt-body .vlt-file-list.grid-view .file-details .file-name {
-  display: inline-block;
-  max-width: 130px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: middle;
+  max-width: 130px !important;
 }
 .vlt-body .vlt-file-list.grid-view .list-file-icon {
   min-width: 40px;

@@ -32,7 +32,7 @@ public partial class MainPage : ContentPage, ISignIn
 
     private const string? _homePage = "/";
     private const string? _securedFolders = "/securedfolders";
-    private const string? _vault = "/Vault";
+    private const string? _vault = "/vault";
 
     private ApiVersion? _apiVersion;
 

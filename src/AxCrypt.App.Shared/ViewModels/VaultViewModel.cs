@@ -19,6 +19,7 @@ namespace AxCrypt.App.Shared.ViewModels
         private readonly MainViewModel _mainViewModel;
         private LogOnViewModel _logOnViewModel;
         private FileOperationViewModel _fileOperationViewModel;
+
         public VaultViewModel(IStatusAlertService StatusAlerService)
         {
             _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
@@ -27,44 +28,53 @@ namespace AxCrypt.App.Shared.ViewModels
             _statusAlertService = StatusAlerService;
         }
 
-        private string VaultBasePath => Resolve.UserSettings.VaultEncryptDataPath ?? "";
-        public bool isCreateVault { get; set; }
+        private string VaultBasePath
+        {
+            get => Resolve.UserSettings.VaultEncryptDataPath ?? "";
+        }
+        public bool CreateNewFolder { get; set; }
         public string? SelectedFile { get; set; }
         public string SelectedFilePath { get; set; }
         public string SelectedFileSize { get; set; }
-        public bool SelectedIsfolder { get; set; } = false;
-        public string Currentfolder { get; set; }
-        public string VaultPath { get; set; }
-        private IEnumerable<string> selectedVaultFiles { get; set; }
+        public bool IsFolder { get; set; } = false;
+        public string CurrentFolder { get; set; }
+        public string SelectedSubFolderPath { get; set; }
         public bool IsProcessing { get; set; } = false;
+        private IEnumerable<string> selectedFiles { get; set; }
 
         public IEnumerable<VaultItem> VaultItemList = new List<VaultItem>();
-        public List<(string Name, string Path)> VaultBreadCrumb = new List<(string Name, string Path)>();
 
-        public bool HasVaultCapability { get; set; }
+        public IList<(string Name, string Path)> VaultBreadCrumb = new List<(string Name, string Path)>();
 
         public void InitialUpdate()
         {
-            Currentfolder = VaultBasePath;
+            CurrentFolder = VaultBasePath;
         }
 
-        public async Task LoadVaultItems()
+        public void LoadVaultItems()
         {
-
-            if (string.IsNullOrEmpty(Currentfolder) || !New<IDataContainer>(Currentfolder).IsAvailable)
+            if (string.IsNullOrEmpty(CurrentFolder))
             {
                 return;
             }
 
-            IDataContainer vaultfolder = New<IDataContainer>(Currentfolder);
-            IEnumerable<IDataStore> vaultDataStore = vaultfolder.ListOfFiles(new List<IDataContainer>(), FolderOperationMode.SingleFolder);
+            IDataContainer vaultfolder = New<IDataContainer>(CurrentFolder);
+            if (!vaultfolder.IsAvailable)
+            {
+                return;
+            }
 
-            IEnumerable<VaultItem> folderItems = GetFolderItems(Currentfolder);
+            if (!CurrentFolder.Contains(VaultBasePath))
+            {
+                CurrentFolder = VaultBasePath;
+            }
 
+            IEnumerable<VaultItem> folderItems = GetFolderItems(CurrentFolder);
             IEnumerable<VaultItem> fileItems = GetFileItems(vaultfolder);
 
             VaultItemList = folderItems.Concat(fileItems).OrderByDescending(x => x.ModifiedDate);
             CreateBreadcrums();
+            UpdateViewState();
         }
 
         private IEnumerable<VaultItem> GetFolderItems(string path)
@@ -75,19 +85,20 @@ namespace AxCrypt.App.Shared.ViewModels
                     Filepath = folder,
                     FileType = "folder",
                     Size = "-",
-                    ModifiedDate = Directory.GetLastWriteTimeUtc(folder)
+                    ModifiedDate = Directory.GetLastWriteTimeUtc(folder).ToLocalTime()
                 });
         }
 
         private IEnumerable<VaultItem> GetFileItems(IDataContainer container)
         {
             return container.ListOfFiles(new List<IDataContainer>(), FolderOperationMode.SingleFolder)
+                .Where(file => Path.GetExtension(file.FullName).Equals(New<IRuntimeEnvironment>().AxCryptExtension, StringComparison.OrdinalIgnoreCase) && file.IsAvailable)
                 .Select(file => new VaultItem
                 {
                     Filepath = file.FullName,
                     FileType = "file",
                     Size = GetReadableSize(file.Length()),
-                    ModifiedDate = file.LastWriteTimeUtc
+                    ModifiedDate = file.LastWriteTimeUtc.ToLocalTime()
                 });
         }
 
@@ -106,23 +117,23 @@ namespace AxCrypt.App.Shared.ViewModels
             VaultBreadCrumb.Clear();
 
             string baseDir = Path.GetDirectoryName(VaultBasePath)!;
-            string relativePath = Path.GetRelativePath(baseDir, Currentfolder);
+            string relativePath = Path.GetRelativePath(baseDir, CurrentFolder);
             string[] parts = relativePath.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
 
             string currentPath = baseDir;
 
-            foreach (var part in parts)
+            foreach (string part in parts)
             {
                 currentPath = Path.Combine(currentPath, part);
                 VaultBreadCrumb.Add((part, currentPath));
             }
         }
 
-        public async Task FilterVaultFiles(string filename)
+        public void FilterVaultFiles(string filename)
         {
             SelectedFile = null;
 
-            await LoadVaultItems();
+            LoadVaultItems();
             if (string.IsNullOrWhiteSpace(filename))
             {
                 return;
@@ -135,7 +146,7 @@ namespace AxCrypt.App.Shared.ViewModels
             UpdateViewState();
         }
 
-        public async Task HandlefolderActionAsync(string action)
+        public async Task HandleFolderActionAsync(string action)
         {
             if (string.IsNullOrEmpty(SelectedFilePath))
                 return;
@@ -189,10 +200,10 @@ namespace AxCrypt.App.Shared.ViewModels
                     break;
             }
 
-            await LoadVaultItems();
+            LoadVaultItems();
         }
 
-        public async Task HandlefileActionAsync(string action)
+        public async Task HandleFileActionAsync(string action)
         {
             if (string.IsNullOrEmpty(SelectedFilePath))
                 return;
@@ -247,6 +258,7 @@ namespace AxCrypt.App.Shared.ViewModels
                     try
                     {
                         await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(new[] { SelectedFilePath });
+
                         if (!CheckActiveFiles(dataStore.FullName))
                         {
                             _statusAlertService.Success(Texts.FileRenameSuccessAlertMsg.InvariantFormat(Path.GetFileName(SelectedFilePath)));
@@ -273,10 +285,11 @@ namespace AxCrypt.App.Shared.ViewModels
                     }
                     break;
                 default:
+                    _statusAlertService.Error($"Invalid selection action {action}");
                     break;
             }
 
-            await LoadVaultItems(); 
+            LoadVaultItems();
         }
 
         private bool CheckActiveFiles(string filePath)
@@ -290,50 +303,48 @@ namespace AxCrypt.App.Shared.ViewModels
             return false;
         }
 
-        public async Task AddVaultFolder(EventArgs eventArgs, string? folderpath = null)
+        public async Task AddVaultFolder(EventArgs eventArgs)
         {
-            await PremiumFeature_ClickAsync(LicenseCapability.Vault, async (ss, ee) => { await HandleVaultFolderSelection(ss, ee); }, null!, eventArgs);
+            await PremiumFeature_ClickAsync(LicenseCapability.Vault, async (ss, ee) => await HandleVaultFolderSelection(ss, ee), null!, eventArgs);
 
-            if (string.IsNullOrEmpty(folderpath) || string.IsNullOrEmpty(VaultPath))
+            if (string.IsNullOrEmpty(SelectedSubFolderPath))
             {
                 return;
             }
 
-            if (New<IDataContainer>(VaultPath).IsVault())
+            if (New<IDataContainer>(SelectedSubFolderPath).IsVault())
             {
                 await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.VaultValidationCannotAddVaultFldrToVault);
-                VaultPath = "";
+                SelectedSubFolderPath = "";
                 return;
             }
 
-            string targetPath = await MoveVaultFolder(VaultPath, folderpath);
-
+            string targetPath = await MoveVaultFolder(SelectedSubFolderPath, CurrentFolder);
             if (!string.IsNullOrEmpty(targetPath))
             {
                 await _mainViewModel.AddVaultFolders.ExecuteAsync(new[] { targetPath });
-                Currentfolder = folderpath;
             }
 
-            VaultPath = "";
-            await LoadVaultItems();
+            SelectedSubFolderPath = "";
+            LoadVaultItems();
         }
 
         public async Task AddVaultFiles(EventArgs eventArgs)
         {
             await PremiumFeature_ClickAsync(LicenseCapability.Vault, async (ss, ee) => { await HandleVaultFileSelection(ss, ee); }, null!, eventArgs);
 
-            if (string.IsNullOrEmpty(Currentfolder) || !selectedVaultFiles.Any())
+            if (string.IsNullOrEmpty(CurrentFolder) || !selectedFiles.Any())
             {
                 return;
             }
 
-            foreach (string vaultfilePath in selectedVaultFiles)
+            foreach (string filePath in selectedFiles)
             {
-                await MoveVaultFile(vaultfilePath, Currentfolder);
+                await MoveVaultFile(filePath, CurrentFolder);
             }
 
-            selectedVaultFiles = Enumerable.Empty<string>();
-            await LoadVaultItems();
+            selectedFiles = Enumerable.Empty<string>();
+            LoadVaultItems();
         }
 
         private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
@@ -352,7 +363,7 @@ namespace AxCrypt.App.Shared.ViewModels
 
         private async Task HandleVaultFolderSelection(object sender, EventArgs e)
         {
-            FileSelectionEventArgs eventArgs = new FileSelectionEventArgs(new string[] { })
+            FileSelectionEventArgs eventArgs = new FileSelectionEventArgs([])
             {
                 FileSelectionType = FileSelectionType.Folder
             };
@@ -360,64 +371,65 @@ namespace AxCrypt.App.Shared.ViewModels
             await New<IDataItemSelection>().HandleSelection(eventArgs);
             if (eventArgs.SelectedFiles == null || !eventArgs.SelectedFiles.Any())
             {
-                VaultPath = "";
+                SelectedSubFolderPath = "";
                 return;
             }
 
-            VaultPath = eventArgs.SelectedFiles.First();
+            SelectedSubFolderPath = eventArgs.SelectedFiles.First();
         }
 
         private async Task HandleVaultFileSelection(object sender, EventArgs e)
         {
-            FileSelectionEventArgs eventArgs = new FileSelectionEventArgs(new string[] { })
+            FileSelectionEventArgs eventArgs = new FileSelectionEventArgs([])
             {
                 FileSelectionType = FileSelectionType.Encrypt
             };
 
+            selectedFiles = Enumerable.Empty<string>();
             await New<IDataItemSelection>().HandleSelection(eventArgs);
             if (eventArgs.SelectedFiles == null || !eventArgs.SelectedFiles.Any())
             {
                 return;
             }
 
-            selectedVaultFiles = eventArgs.SelectedFiles;
+            selectedFiles = eventArgs.SelectedFiles;
         }
 
         public async Task DecryptVaultfolder(EventArgs eventArgs)
         {
             await PremiumFeature_ClickAsync(LicenseCapability.Vault, async (ss, ee) => { await HandleVaultFolderSelection(ss, ee); }, null!, eventArgs);
 
-            if (string.IsNullOrEmpty(VaultPath))
+            if (string.IsNullOrEmpty(SelectedSubFolderPath))
             {
                 return;
             }
 
-            if (New<IDataContainer>(VaultPath).IsVault())
+            if (New<IDataContainer>(SelectedSubFolderPath).IsVault())
             {
                 await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.VaultValidationDecryptPath);
                 return;
             }
 
-            SelectedFilePath = await MoveVaultFolder(SelectedFilePath, VaultPath);
+            SelectedFilePath = await MoveVaultFolder(SelectedFilePath, SelectedSubFolderPath);
 
             if (!string.IsNullOrEmpty(SelectedFilePath))
             {
-                await HandlefolderActionAsync("Decrypt");
+                await HandleFolderActionAsync("Decrypt");
             }
 
-            VaultPath = "";
+            SelectedSubFolderPath = "";
         }
 
         public async Task DecryptVaultfile(EventArgs eventArgs)
         {
             await PremiumFeature_ClickAsync(LicenseCapability.Vault, async (ss, ee) => { await HandleVaultFolderSelection(ss, ee); }, null!, eventArgs);
 
-            if (string.IsNullOrEmpty(VaultPath))
+            if (string.IsNullOrEmpty(SelectedSubFolderPath))
             {
                 return;
             }
 
-            while (New<IDataContainer>(VaultPath).IsVault())
+            while (New<IDataContainer>(SelectedSubFolderPath).IsVault())
             {
                 await New<IPopup>().ShowAsync(
                     PopupButtons.Ok,
@@ -427,44 +439,25 @@ namespace AxCrypt.App.Shared.ViewModels
 
                 await PremiumFeature_ClickAsync(LicenseCapability.Vault, async (ss, ee) => { await HandleVaultFolderSelection(ss, ee); }, null!, eventArgs);
 
-                if (string.IsNullOrEmpty(VaultPath))
+                if (string.IsNullOrEmpty(SelectedSubFolderPath))
                     return;
             }
 
-            SelectedFilePath = await MoveVaultFile(SelectedFilePath, VaultPath);
+            SelectedFilePath = await MoveVaultFile(SelectedFilePath, SelectedSubFolderPath);
 
             if (!string.IsNullOrEmpty(SelectedFilePath))
             {
-                await HandlefileActionAsync("Decrypt");
+                await HandleFileActionAsync("Decrypt");
             }
 
-            VaultPath = "";
+            SelectedSubFolderPath = "";
         }
 
         private async Task<string> MoveVaultFolder(string sourceFolderPath, string rootPath)
         {
-
-            if (!New<IDataContainer>(rootPath).IsAvailable)
+            bool valid = await IsValidFolder(sourceFolderPath, rootPath);
+            if (!valid)
             {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SecuredFolderValidationCannotAddItemsInVault);
-                return "";
-            }
-
-            if (!CanAccessDirectory(sourceFolderPath))
-            {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.VaultValidationAccessDenied);
-                return "";
-            }
-
-            if (rootPath.Contains(sourceFolderPath))
-            {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "Unable to add this folder it may contains Vault as sub folder");
-                return "";
-            }
-
-            if (New<FileFilter>().IsForbiddenFolder(sourceFolderPath))
-            {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(sourceFolderPath));
                 return "";
             }
 
@@ -473,7 +466,7 @@ namespace AxCrypt.App.Shared.ViewModels
 
             if (Directory.Exists(destinationFolderPath))
             {
-                PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "The folder already exists in the destination. please rename it before moving it");
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "The folder already exists in the destination. please rename it before moving it");
                 return "";
             }
 
@@ -491,46 +484,40 @@ namespace AxCrypt.App.Shared.ViewModels
             return destinationFolderPath;
         }
 
-        private bool CanAccessDirectory(string folderPath)
+        private async Task<bool> IsValidFolder(string sourceFolderPath, string rootPath)
         {
-            try
+            if (!New<IDataContainer>(rootPath).IsAvailable)
             {
-                if (!Directory.Exists(folderPath))
-                    return false;
-
-                string testFolder = Path.Combine(folderPath, Path.GetRandomFileName());
-                Directory.CreateDirectory(testFolder);
-
-                foreach (var file in Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories))
-                {
-                    try
-                    {
-                        using (FileStream stream = File.Open(file, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
-                        {
-
-                        }
-                    }
-                    catch (IOException)
-                    {
-                        Directory.Delete(testFolder);
-                        return false;
-                    }
-                }
-
-                Directory.Delete(testFolder);
-
-                return true;
-            }
-            catch (UnauthorizedAccessException)
-            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SecuredFolderValidationCannotAddItemsInVault);
                 return false;
             }
-            catch (IOException)
+
+            if (!CanAccessDirectory(sourceFolderPath))
             {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.VaultValidationAccessDenied);
                 return false;
             }
+
+            if (!CanWriteDirectory(sourceFolderPath))
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "A file operation is in progress on this folder. Please wait for the current operation to finish.");
+                return false;
+            }
+
+            if (rootPath.Contains(sourceFolderPath))
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "Unable to add this folder it may contains Vault as sub folder");
+                return false;
+            }
+
+            if (New<FileFilter>().IsForbiddenFolder(sourceFolderPath))
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.SystemFolderForbiddenText.InvariantFormat(sourceFolderPath));
+                return false;
+            }
+
+            return true;
         }
-
 
         private async Task CopyDirectoryAsync(string sourceDir, string destinationDir)
         {
@@ -553,6 +540,53 @@ namespace AxCrypt.App.Shared.ViewModels
             }
         }
 
+        private bool CanAccessDirectory(string folderPath)
+        {
+            try
+            {
+                string testFolder = Path.Combine(folderPath, Path.GetRandomFileName());
+                Directory.CreateDirectory(testFolder);
+                Directory.Delete(testFolder);
+
+                return true;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return false;
+            }
+            catch (IOException)
+            {
+                return false;
+            }
+        }
+
+        private bool CanWriteDirectory(string folderPath)
+        {
+            try
+            {
+                foreach (string file in Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories))
+                {
+                    try
+                    {
+                        using (FileStream stream = File.Open(file, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                        {
+
+                        }
+                    }
+                    catch (IOException)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
+
         private async Task<string> MoveVaultFile(string sourceFilePath, string RootPath)
         {
             string fileName = Path.GetFileName(sourceFilePath.TrimEnd(Path.DirectorySeparatorChar));
@@ -560,8 +594,7 @@ namespace AxCrypt.App.Shared.ViewModels
 
             if (File.Exists(destinationFilePath))
             {
-                PopupButtons result =  await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "The file already exists in the destination. Do you want to continue with renaming?");
-                
+                PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "The file already exists in the destination. Do you want to continue with renaming?");
                 if (result == PopupButtons.Cancel)
                     return "";
 
@@ -569,60 +602,55 @@ namespace AxCrypt.App.Shared.ViewModels
                 destinationFilePath = Newfilepath.DataStore.FullName;
             }
 
-            File.Move(sourceFilePath, destinationFilePath,true);
+            File.Move(sourceFilePath, destinationFilePath, true);
             return destinationFilePath;
         }
 
-        public async Task CreateVaultFolder(string SelectedFilePath)
+        public async Task CreateVaultFolder(string currentVaultPath)
         {
-            if (string.IsNullOrWhiteSpace(SelectedFilePath) || string.IsNullOrWhiteSpace(VaultPath))
+            if (string.IsNullOrEmpty(SelectedSubFolderPath))
                 return;
 
-            string VaultFolder = Path.Combine(SelectedFilePath, VaultPath);
-
-            if (Directory.Exists(VaultFolder))
+            string newFolderPath = Path.Combine(currentVaultPath, SelectedSubFolderPath);
+            IDataContainer newFolderContainer = New<IDataContainer>(newFolderPath);
+            if (newFolderContainer.IsAvailable)
             {
-                PopupButtons result = await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "The folder already exists in the destination. please give a different Name!");
-                isCreateVault = true;
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, $"The folder {SelectedSubFolderPath} already exist(s), please try again with different folder name!");
                 return;
             }
 
-            Directory.CreateDirectory(VaultFolder);
-            VaultPath = "";
-            await LoadVaultItems();
+            newFolderContainer.CreateFolder();
+            CreateNewFolder = false;
+            SelectedSubFolderPath = "";
+            LoadVaultItems();
         }
 
         private FileSelectionEventArgs? AddedFoldersEvent { get; set; }
 
-        public async Task EncryptDroppedFolders(IList<string> folders)
+        public async Task EncryptDroppedFolders(IEnumerable<string> folders)
         {
-            if (!folders.Any() || string.IsNullOrEmpty(Currentfolder))
+            if (!folders.Any() || string.IsNullOrEmpty(CurrentFolder))
             {
                 return;
             }
 
-            AddedFoldersEvent = new FileSelectionEventArgs(new string[] { })
-            {
-                FileSelectionType = FileSelectionType.Folder
-            };
-
-            string newFolderPath = "";
-            foreach (string folder in folders)
-            {
-                if (New<IDataContainer>(folder).IsVault())
-                {
-                    await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.VaultValidationCannotAddVaultFldrToVault);
-                    continue;
-                }
-
-                newFolderPath = await MoveVaultFolder(folder, Currentfolder);
-                AddedFoldersEvent.SelectedFiles.Add(newFolderPath);
-            }
-
             IsProcessing = true;
-            await PremiumFeature_ClickAsync(LicenseCapability.Vault, async (ss, ee) => { await DragAndDroppedVaultFolderAsync(ss, ee); }, null!, AddedFoldersEvent);
+            await PremiumFeature_ClickAsync(LicenseCapability.Vault, async (ss, ee) =>
+            {
+                foreach (string folder in folders)
+                {
+                    if (New<IDataContainer>(folder).IsVault())
+                    {
+                        await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.VaultValidationCannotAddVaultFldrToVault);
+                        continue;
+                    }
+
+                    await MoveVaultFolder(folder, CurrentFolder);
+                }
+            }, null!, new FileSelectionEventArgs(folders));
+
             IsProcessing = false;
-            await LoadVaultItems();
+            LoadVaultItems();
         }
 
         private async Task DragAndDroppedVaultFolderAsync(object sender, EventArgs e)
@@ -635,17 +663,17 @@ namespace AxCrypt.App.Shared.ViewModels
             await _mainViewModel.AddVaultFolders.ExecuteAsync(AddedFoldersEvent.SelectedFiles);
         }
 
-        public async Task EncryptDroppedFile(IList<string> files)
+        public async Task EncryptDroppedFile(IEnumerable<string> files)
         {
-            if (!files.Any() || string.IsNullOrEmpty(Currentfolder))
+            if (!files.Any() || string.IsNullOrEmpty(CurrentFolder))
             {
                 return;
-            }   
+            }
 
-            AddedFoldersEvent = new FileSelectionEventArgs(new string[] { })
+            if (!_logOnViewModel.License.Has(LicenseCapability.Vault))
             {
-                FileSelectionType = FileSelectionType.Folder
-            };
+                return;
+            }
 
             string newFilePath = "";
             foreach (string file in files)
@@ -656,22 +684,10 @@ namespace AxCrypt.App.Shared.ViewModels
                     continue;
                 }
 
-                newFilePath = await MoveVaultFile(file, Currentfolder);
-                AddedFoldersEvent.SelectedFiles.Add(newFilePath);
+                newFilePath = await MoveVaultFile(file, CurrentFolder);
             }
 
-            await PremiumFeature_ClickAsync(LicenseCapability.Vault, async (ss, ee) => { await DragAndDroppedVaultFileAsync(ss, ee); }, null!, AddedFoldersEvent);
-            await LoadVaultItems();
-        }
-
-        private async Task DragAndDroppedVaultFileAsync(object sender, EventArgs e)
-        {
-            if (AddedFoldersEvent!.SelectedFiles == null || !AddedFoldersEvent.SelectedFiles.Any())
-            {
-                return;
-            }
-
-            await _fileOperationViewModel.EncryptFiles.ExecuteAsync(AddedFoldersEvent.SelectedFiles);
+            LoadVaultItems();
         }
     }
 
