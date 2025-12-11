@@ -86,6 +86,7 @@ public class VerifyPasswordViewModel
 
     public void CancelButton_Click(EventArgs e)
     {
+        ErrorMessage = "";
         DialogResult = DialogResult.Cancel;
         LogOnViewModel.VerifyPasswordDialog.Close();
     }
