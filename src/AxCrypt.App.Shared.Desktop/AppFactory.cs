@@ -16,6 +16,7 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.Service.SecuredMessenger;
+using AxCrypt.Core.Service.TextEncryption;
 using AxCrypt.Core.Service.UserNotification;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
@@ -60,6 +61,8 @@ public class AppFactory
         TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new CachingNotificationService(new DeviceNotificationService(new LocalNotificationService(), new ApiNotificationService(new AxNotificationApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
         TypeMap.Register.New<LogOnIdentity, ISecuredMessengerService>((LogOnIdentity identity) => new DeviceSecuredMessengerService(new LocalSecuredMessengerService(identity, Resolve.WorkFolder.FileInfo), new NullSecuredMessengerService(identity)));
         TypeMap.Register.New<LogOnIdentity, ISecuredMessengerService>((LogOnIdentity identity) => new CachingSecuredMessengerService(new DeviceSecuredMessengerService(new LocalSecuredMessengerService(identity, Resolve.WorkFolder.FileInfo), new ApiSecuredMessengerService(new SecureMsgrDbApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
+        TypeMap.Register.New<LogOnIdentity, ITextEncryptionService>((LogOnIdentity identity) => new DeviceTextEncryptionService(new LocalTextEncryptionService(), new NullTextEncryptionService(identity)));
+        TypeMap.Register.New<LogOnIdentity, ITextEncryptionService>((LogOnIdentity identity) => new CachingTextEncryptionService(new DeviceTextEncryptionService(new LocalTextEncryptionService(), new ApiTextEncryptionService(new AxTextEncryptionApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
 
         TypeMap.Register.Singleton<IDebugLoggingWindow>(() => new LogWindowService());
     }

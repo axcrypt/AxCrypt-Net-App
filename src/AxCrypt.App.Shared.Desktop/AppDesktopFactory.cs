@@ -42,6 +42,7 @@ public static class AppDesktopFactory
         services.AddSingleton<VerifyPasswordViewModel>();
         services.AddSingleton<TextEncryptionViewModel>();
         services.AddSingleton<ConfirmWipeDialogViewModel>();
+        services.AddSingleton<TextShareViewModel>();
 
         services.AddSingleton<SecuredMessage>();
 

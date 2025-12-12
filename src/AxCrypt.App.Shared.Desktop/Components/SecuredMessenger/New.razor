@@ -2,6 +2,7 @@
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.App.Shared.ViewModels.SecuredMessenger
 @using AxCrypt.Content
+@using AxCrypt.Core.Runtime
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject NewSecMsgrViewModel newSecMsgrViewModel
@@ -37,11 +38,11 @@
                                 }
                             </div>
                             <input @bind="newSecMsgrViewModel.UserEmail"
-                            @onkeydown="HandleKeyPress"
-                            @oninput="OnEmailInput"
-                            placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
-                            type="text"
-                            id="new-member-email" />
+                                   @onkeydown="HandleKeyPress"
+                                   @oninput="OnEmailInput"
+                                   placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
+                                   type="text"
+                                   id="new-member-email" />
                         </div>
                     </div>
                     @if (!string.IsNullOrEmpty(ErrorMessage))
@@ -49,7 +50,7 @@
                         <div class="error-message" style="padding-bottom: 5px;"> @ErrorMessage </div>
                     }
                     <hr class="dk-hide" />
-                    @if (Utility.IsBusinessUser)
+                    @if (IsBusinessUser())
                     {
                         <div class="grp-info dk-hide">
                             @Texts.GroupInfoText <strong><NavLink @onclick="OpenGroupPage"> @Texts.GroupFeatureText </NavLink></strong> @Texts.GroupInfoText2 <NavLink @onclick="OpenGroupCreationPage"> @Texts.CreateGroupInfoTexts </NavLink>
@@ -61,8 +62,8 @@
             <div class="grey-clr">
                 @Texts.VisibilityText
                 <select style="height: 35px; border-radius:5px" id="shareVisibilityOptions"
-                class="button visble-button fnt-medium"
-                @bind="newSecMsgrViewModel.Visibility">
+                        class="button visble-button fnt-medium"
+                        @bind="newSecMsgrViewModel.Visibility">
                     @foreach (string visibility in newSecMsgrViewModel.MessageVisibilityList)
                     {
                         <option value="@visibility">@visibility</option>
@@ -73,10 +74,10 @@
             </div>
             <div class="text-msg">
                 <InputTextArea @bind-Value="newSecMsgrViewModel.EncryptedMessage"
-                id="secured-mess-body"
-                maxlength="100000"
-                autofocus
-                placeholder=@Texts.TypeYourMessageHerePlaceHolderText />
+                               id="secured-mess-body"
+                               maxlength="100000"
+                               autofocus
+                               placeholder=@Texts.TypeYourMessageHerePlaceHolderText />
 
             </div>
         </div>
@@ -163,6 +164,11 @@
         newSecMsgrViewModel.UserEmail = "";
         newSecMsgrViewModel.IsVisible = !newSecMsgrViewModel.IsVisible;
         newSecMsgrViewModel.UpdateViewState();
+    }
+
+    private bool IsBusinessUser()
+    {
+        return New<LicensePolicy>().Capabilities.Has(LicenseCapability.Business);
     }
 
     private void OpenGroupCreationPage()

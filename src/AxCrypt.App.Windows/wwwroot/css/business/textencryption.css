@@ -85,13 +85,22 @@
 }
 
 .multi-actn-btn {
-  min-width: 182px;
   height: 34px;
   text-align: center;
   background-color: #ffffff;
   color: #000000;
   border: 1px solid #000;
   border-radius: 4px;
+}
+@media (max-width: 1250px) {
+  .multi-actn-btn {
+    min-width: 150px;
+  }
+}
+@media (min-width: 1251px) {
+  .multi-actn-btn {
+    min-width: 182px;
+  }
 }
 
 .entr-txt-box .pswrd .encrypt-txt-box {

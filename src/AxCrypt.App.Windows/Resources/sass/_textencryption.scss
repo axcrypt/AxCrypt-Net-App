@@ -96,62 +96,69 @@
 }
 
 .multi-actn-btn {
-    min-width: 182px;
     height: 34px;
     text-align: center;
     background-color: #ffffff;
     color: $colTxtlble;
     border: 1px solid $BorderClr;
     border-radius: 4px;
+
+    @media (max-width: 1250px) {
+        min-width: 150px;
+    }
+
+    @media (min-width: 1251px) {
+        min-width: 182px;
+    }
 }
 
 
-.entr-txt-box .pswrd .encrypt-txt-box {
-    font-size: 14px;
-}
+    .entr-txt-box .pswrd .encrypt-txt-box {
+        font-size: 14px;
+    }
 
-.entr-txt-box {
-    width: 90%;
-}
+    .entr-txt-box {
+        width: 90%;
+    }
 
-.che-box {
-    width: 16px;
-    height: 16px;
-    border: 2px solid #FFFFFF;
-}
+    .che-box {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #FFFFFF;
+    }
 
-.password-container {
-    position: relative;
-    width: 416px;
-    height: 55px;
-}
+    .password-container {
+        position: relative;
+        width: 416px;
+        height: 55px;
+    }
 
-.password-container input {
-    width: 100%;
-    padding: 10px 40px 10px 10px;
-    box-sizing: border-box;
-    font-size: 16px;
-}
+    .password-container input {
+        width: 100%;
+        padding: 10px 40px 10px 10px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
 
-.encrypt-txt-box {
-    width: 90%;
-    padding-left: 10px;
-}
+    .encrypt-txt-box {
+        width: 90%;
+        padding-left: 10px;
+    }
 
-.hide-password-ico, .show-password-ico {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
+    .hide-password-ico, .show-password-ico {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
 
-.hide-password-ico {
-    content: $HiddenPasswordIco;
-}
+    .hide-password-ico {
+        content: $HiddenPasswordIco;
+    }
 
-.show-password-ico {
-    content: $ShownPasswordIco;
-}
+    .show-password-ico {
+        content: $ShownPasswordIco;
+    }

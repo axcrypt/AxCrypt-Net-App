@@ -145,13 +145,7 @@ public class TextEncryptionViewModel
 
     private LogOnIdentity Identity()
     {
-        LogOnIdentity logOnIdentity = New<KnownIdentities>().DefaultEncryptionIdentity;
-        if (!string.IsNullOrEmpty(Password))
-        {
-            logOnIdentity = new LogOnIdentity(Password);
-        }
-
-        return logOnIdentity;
+        return new Passphrase(Password ?? "").EncryptionIdentity();
     }
 
     public void ResetBtn()
@@ -239,10 +233,5 @@ public class TextEncryptionViewModel
         string mailto = $"mailto:{to}?subject={Uri.EscapeDataString(subject)}&body={Uri.EscapeDataString(body)}";
 
         Process.Start(new ProcessStartInfo(mailto) { UseShellExecute = true });
-    }
-
-    public void EncryptShareLinkBtn()
-    {
-
     }
 }
