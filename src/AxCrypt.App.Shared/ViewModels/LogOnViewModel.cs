@@ -136,7 +136,7 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService UserPromptDialog
     { get { return GetProperty<CommonDialogService>(nameof(UserPromptDialog)); } set { SetProperty(nameof(UserPromptDialog), value); } }
 
-    public ProcessIndicator ProcessIndicator { get; set; } = new ProcessIndicator();
+    public ProcessIndicator ProcessIndicator { get; set; }
 
     public CommonDialogService SwitchUserDialog
     { get { return GetProperty<CommonDialogService>(nameof(SwitchUserDialog)); } set { SetProperty(nameof(SwitchUserDialog), value); } }
