@@ -1,10 +1,12 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Shared.Desktop.ViewModels.Home
+@using AxCrypt.App.Shared.Services
 @using AxCrypt.Core.UI
 @using AxCrypt.Content
 
 @inject SubActionViewModel? subActionModel
 @inject NavigationManager Navigation
+@inject FileDropService FileDropService
 
 <div class="mre-act-sec">
     @if (subActionModel!.EnableVault)
@@ -119,7 +121,8 @@
         bool isValid = await subActionModel.ValidateVaultPath();
         if (isValid)
         {
-            Navigation.NavigateTo("/Vault");
+            FileDropService.CurrentPage = "/vault";
+            Navigation.NavigateTo("/vault");
         }
     }
 }

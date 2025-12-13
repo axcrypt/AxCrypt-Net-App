@@ -51,7 +51,7 @@
             }
             else
             {
-                <div id="help-secure" class="act-box" disabled="@(!homeActionModel!.EncryptButtonEnabled)" @onclick="async (e) => await homeActionModel!.SecureFile(e)" @onmouseover='@(() => ShowPopup("secure"))' @onmouseout='@(() => HidePopup())'>
+                <div id="help-secure" class="act-box" @onclick="async (e) => await homeActionModel!.SecureFile(e)" @onmouseover='@(() => ShowPopup("secure"))' @onmouseout='@(() => HidePopup())'>
                     <img class="act-img scr-act" src="" alt="scr-img" />
                     <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
                     @if (isHovered && hoveredElement == "secure")
