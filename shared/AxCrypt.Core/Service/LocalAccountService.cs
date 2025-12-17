@@ -293,7 +293,7 @@ namespace AxCrypt.Core.Service
             get;
         }
 
-        public async Task SignupAsync(EmailAddress email, CultureInfo culture)
+        public async Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null)
         {
             await _completedTask;
         }

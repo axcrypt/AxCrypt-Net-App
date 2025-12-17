@@ -106,7 +106,7 @@ namespace AxCrypt.Core.Service
             return _completedTask;
         }
 
-        public Task SignupAsync(EmailAddress email, CultureInfo culture)
+        public Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null)
         {
             return _completedTask;
         }

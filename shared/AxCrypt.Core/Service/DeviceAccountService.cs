@@ -315,20 +315,20 @@ namespace AxCrypt.Core.Service
             await _localService.SaveAsync(keyPairs).Free();
         }
 
-        public async Task SignupAsync(EmailAddress email, CultureInfo culture)
+        public async Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null)
         {
             if (New<AxCryptOnlineState>().IsOnline)
             {
                 try
                 {
-                    await _remoteService.SignupAsync(email, culture).Free();
+                    await _remoteService.SignupAsync(email, culture, utm).Free();
                 }
                 catch (ApiException aex)
                 {
                     await aex.HandleApiExceptionAsync();
                 }
             }
-            await _localService.SignupAsync(email, culture).Free();
+            await _localService.SignupAsync(email, culture, utm).Free();
         }
 
         public async Task<AccountStatus> StatusAsync(EmailAddress email)

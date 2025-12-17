@@ -217,7 +217,7 @@ namespace AxCrypt.Api
             return accountKey;
         }
 
-        public async Task PostAllAccountsUserAsync(string userName, CultureInfo culture)
+        public async Task PostAllAccountsUserAsync(string userName, CultureInfo culture, string? utm = null)
         {
             if (userName == null)
             {
@@ -228,7 +228,7 @@ namespace AxCrypt.Api
                 throw new ArgumentNullException(nameof(culture));
             }
 
-            Uri resource = BaseUrl.PathCombine("users/all/accounts/{0}?culture={1}".With(ApiCaller.PathSegmentEncode(userName), culture.Name));
+            Uri resource = BaseUrl.PathCombine("users/all/accounts/{0}?culture={1}&utm={2}".With(ApiCaller.PathSegmentEncode(userName), culture.Name, utm ?? ""));
 
             RestResponse restResponse = await Caller.RestAsync(new RestIdentity(), new RestRequest("POST", resource, Timeout)).Free();
             ApiCaller.EnsureStatusOk(restResponse);

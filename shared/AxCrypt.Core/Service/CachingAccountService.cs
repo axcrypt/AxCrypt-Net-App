@@ -88,9 +88,9 @@ namespace AxCrypt.Core.Service
             await New<ICache>().UpdateItemAsync(async () => await _service.SaveAsync(keyPairs), _key).Free();
         }
 
-        public async Task SignupAsync(EmailAddress email, CultureInfo culture)
+        public async Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null)
         {
-            await New<ICache>().UpdateItemAsync(async () => await _service.SignupAsync(email, culture), _key).Free();
+            await New<ICache>().UpdateItemAsync(async () => await _service.SignupAsync(email, culture, utm), _key).Free();
         }
 
         public async Task<AccountStatus> StatusAsync(EmailAddress email)

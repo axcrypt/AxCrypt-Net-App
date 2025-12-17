@@ -263,9 +263,9 @@ namespace AxCrypt.Core.Service
             return await _apiClient.PostFeedbackAsync(subject, message).Free();
         }
 
-        public async Task SignupAsync(EmailAddress email, CultureInfo culture)
+        public async Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null)
         {
-            await _apiClient.PostAllAccountsUserAsync(email.Address, culture).Free();
+            await _apiClient.PostAllAccountsUserAsync(email.Address, culture, utm).Free();
         }
 
         public async Task PasswordResetAsync(string verificationCode)

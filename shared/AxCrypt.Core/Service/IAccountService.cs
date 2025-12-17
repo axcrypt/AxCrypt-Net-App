@@ -144,7 +144,7 @@ namespace AxCrypt.Core.Service
         /// in an email to the provided email address in Identity.
         /// </summary>
         /// <returns></returns>
-        Task SignupAsync(EmailAddress email, CultureInfo culture);
+        Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null);
 
         /// <summary>
         /// Resets the password for the account.
