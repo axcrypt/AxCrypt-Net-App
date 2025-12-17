@@ -322,7 +322,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Since then we have been awarded “The World’s Best Encryption Software” by the prestigious PC Magazine 2016-2024 as well as many other review sites in the world. We have a global reach with users from all countries. Our biggest markets are Europe with 45% and America with 30% of the users..
+        ///   Looks up a localized string similar to Since then we have been awarded “The World’s Best Encryption Software” by the prestigious PC Magazine 2016-2025 as well as many other review sites in the world. We have a global reach with users from all countries. Our biggest markets are Europe with 45% and America with 30% of the users..
         /// </summary>
         public static string AboutAxcryptHistoryText4 {
             get {
@@ -2164,6 +2164,15 @@ namespace AxCrypt.Content {
         public static string AxCKSGDBlock2Text5 {
             get {
                 return ResourceManager.GetString("AxCKSGDBlock2Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Key Sharing enables collaboration without compromising confidentiality — share access, revoke it anytime, and never expose your password. .
+        /// </summary>
+        public static string AxCKSGDBlock2Text6 {
+            get {
+                return ResourceManager.GetString("AxCKSGDBlock2Text6", resourceCulture);
             }
         }
         
@@ -15472,6 +15481,708 @@ namespace AxCrypt.Content {
         public static string Blog_FEFBI_Title {
             get {
                 return ResourceManager.GetString("Blog_FEFBI_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don’t Wait for a Breach—Secure Your Files with AxCrypt.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Conclusion_Heading {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Conclusion_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harvard was hit twice; Princeton could be another target again, and Penn is now dealing with an identity crisis thanks to those vicious emails that went out..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Conclusion_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Conclusion_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your data is yours to keep and not to be sold. .
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Conclusion_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Conclusion_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start this practice today, whether it is encryption for personal use or for your business. Because with AxCrypt, you do not have to be an expert to implement strong digital privacy and security. All you need is the AES-256-bit protection along with AxCrypt’s layered security add-ons to prevent your data from falling into the wrong hands..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Conclusion_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Conclusion_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download AxCrypt now. Encrypt, Protect and Deflect Digital Attacks now..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Conclusion_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Conclusion_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visit our page &lt;a href=&apos;https://axcrypt.net/pricing&apos;&gt;https://axcrypt.net/pricing&lt;/a&gt; to pick your perfect security plan..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Conclusion_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Conclusion_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can also sign up here and start your free trial today..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Conclusion_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Conclusion_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The IVY league university is home to 20,000 faculty and staff, 24,500 students in both undergraduate and postgraduate programs, and 400,000 alumni around the world..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H1_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H1_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harvard managed to block any further access to prevent any kind of unauthorised activity, and they have turned to a third-party cybersecurity partner and law enforcement to prevent any further incidents..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H1_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H1_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With Harvard, databases of alumni, donors, students and faculty records were breached..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H1_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H1_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This screams one loud message, and that is: these hackers are not just trying to tap into financial data, but they want identities, networks, influence, leverage, and details of important student profiles..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H1_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H1_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Universities and other forms of educational institutions carry a wealth of information when it comes to personal histories, notable alumni details, and family networks, and that is just the personal part of it..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H1_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H1_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As for the actual price, these institutions are a goldmine of datasets carrying information regarding research documents, experimental outcomes, grant records and communications, academic archives, and other highly confidential internal communications and information..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H1_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H1_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;What was exposed?&lt;/b&gt;&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H1_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H1_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The breach exposed contact details, biographical data, email addresses, phone numbers, home and business addresses, and other sensitive information. The breach also included details of the alumni spouses, contact details for current students and parents. .
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H1_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H1_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Financial records, passwords and SSN were not leaked, but information about donations, gifts, information related to fundraising and alumni engagement activities where exposed..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H1_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H1_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;The University’s response to the attack:&lt;/b&gt;&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H1_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H1_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While Harvard was attacked twice in the same year, other Ivy League universities, such as the University of Pennsylvania and Princeton, also faced similar breaches..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;The Princeton database breach occurred on November 10th, and this was also a phone phishing attack.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;Although the breach was for less than 24 hours, it had a lasting impact. This is because the breach exposed information about fundraising activities and donations.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text11 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;Sources say that the attack put nearly 100,000 people’s personal information at risk.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text12 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;According to other sources, one of them claims that the hackers have taken sufficient and more information to commit identity theft and wreak havoc on thousands of individuals.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text13 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;The investigation may take several weeks to examine what data was exactly compromised.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text14 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;The University’s response to the attack:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text15 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;The attack was ceased within 24 hours.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text16 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;An external set of cybersecurity experts was deployed, and the law and order systems were notified, too.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text17 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;Princeton also notified the community about being vigilant of phishing attacks and which also enhanced their security protocols and training.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text18 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;The University of Pennsylvania Data Breach:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;The breach happened on the 30th of October. The threat actors used an employee’s PennKey SSO account to breach the university’s Salesforce instance, Qlik analytics platform, SAP business intelligence systems, and SharePoint files.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;Hackers stole 1.71 GB of internal documents from the SharePoint and Box Storage platforms, which consisted of documents, financial information and alumni marketing materials.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;Another claim in the digital heist is that they could’ve stolen nearly 1.2 million records of PII, including donation history and other demographic details.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;The hackers also sent out mass emails from Penn.edu, which not only consisted of offensive emails, but also exposed tens of thousands of internal university files on online forums.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;The University’s response to the attack:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The infected systems were promptly locked down to stop further intrusion or any kind of unauthorised access. They turned to a third-party cybersecurity firm, CrowdStrike, to investigate the incident. Penn further reported this incident to the FBI and has now also implemented the necessary security patches issued by Oracle to resolve the exploited vulnerabilities..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;The Princeton Breach:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H2_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H2_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Well, this year’s breach can be next year’s impersonator..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H3_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H3_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is never about what they possess; it is always about what they could do with all that data. It&apos;s about how they use that to build something dangerous tomorrow..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H3_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H3_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stolen data can either be sold or held for ransom, and that is just skimming on the surface level of what could actually unfold..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H3_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H3_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When a hacker attacks an educational institution, they are not looking at just siphoning out data. They want leverage. They steal data because it is a multi-use asset. That data can be used, sold, used for impersonation, held as ransom or even worse, weaponised and automated..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H3_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H3_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With universities in focus, especially Ivy League universities, the student and faculty data that is exploited is of high value. And this is because these students or faculty are not mere regular individuals. The data also consists of information about donors, alumni, professors, researchers, and donors who come with high social and financial capital..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H3_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H3_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today, a single phishing email, or an email containing some enticing information, could expose your entire bank account, be it a business account, personal or a joint account. This could even manipulate your login request, or even go on to hijack digital identities tomorrow..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H3_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H3_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And that is precisely &lt;b&gt;why encryption is important.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H3_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H3_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With encryption, even if a breach happens, at most, they only see your files, but they can never open them and alter the information..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H3_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H3_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Once academic data or any data for that matter is exposed or compromised, it is then taken hostage to cyber marketplaces where it is either sold, copied, multiplied, duplicated indefinitely. This means leaked data is never truly gone..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H4_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H4_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While it seems absolutely harmless, this is just cannon fodder for targeted cybercrimes and personalised harassment. The real fun for hackers is that it is not just raw data that they are playing with. They are playing around with the credibility attached to it..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H4_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H4_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With university-based data breaches, attackers are impersonating trusted people in the university’s system to make phishing attempts and use socially enriched tactics to look super convincing..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H4_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H4_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Through this, in the end, the greatest risk is not exposure of information. It is using trust as a weapon, familiarity as a perfect loophole, using connection to manipulate access, finances, and using a simple professional relationship that is familiar to an insider to take complete control..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H4_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H4_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All of this and more under the guise of a legitimate academic connection..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H4_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H4_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encryption is no longer an option, and it is most definitely not a fire drill that happens once in a while. It needs to be a daily practice among organisations to prevent serious breaches..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H5_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H5_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Be it &lt;b&gt;encryption for business&lt;/b&gt; or just for personal use, it is an investment in your peace of mind and a perfect protection for your identity..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H5_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H5_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;&lt;b&gt;How encryption works&lt;/b&gt;.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H5_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H5_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encryption, if implemented properly, basically means even if someone were to access your device or drive, they will be left with nothing but unreadable and useless ciphertext. For instance, the AES-256-bit encryption is one of the strongest, unbeatable and trusted &lt;b&gt;types of encryption&lt;/b&gt; present. And the best part? AxCrypt offers you this, along with layered security like &lt;b&gt;password protection&lt;/b&gt; and &lt;b&gt;data breach prevention&lt;/b&gt;..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H5_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H5_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whether you want &lt;b&gt;secure file sharing&lt;/b&gt; options for documents like your property papers, legal documents, research material, and other documents, this encryption is a silent but loud shield protecting your privacy and peace of mind..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H5_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H5_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not all attacks need to be a digital loophole. Some just need a gullible person on the team or a familiar voice that is on the other end of the line..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H6_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H6_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now this is only merely an example of how your instincts, along with a &lt;b&gt;zero-knowledge encryption&lt;/b&gt; software, could save you from being the next breach headline..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H6_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H6_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here is a simple rule to spot a vishing attack from taking over you..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H6_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H6_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Got a random call at work? Seems quite familiar, but something seems off? Just verify that call with a simple, harmless, and personal question that only you and the other person who is being impersonated know..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H6_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H6_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;For example...&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H6_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H6_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Impersonator pretending to be Mr David:&lt;/b&gt; Hey Jane… I need you to open my laptop and send me the “ABC” file immediately..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H6_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H6_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;This is EXACTLY where the breach unfolds.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H6_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H6_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Either Jane, from accounts, can give the impersonator the file and get the company bankrupt, OR she can prevent a Vishing attack and get promoted with a really good hike for this move she pulled..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H6_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H6_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Jane:&lt;/b&gt; Sure. I’ll do that. But hey, how did your dentist appointment go? Did they remove the tooth?.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H6_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H6_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now the impersonator will answer, just to play along until they get their hands on what they are looking for. But Jane is smarter. She hangs up immediately and informs Mr David, who is on vacation in Bora Bora with his family..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_H6_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_H6_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Harvard Data Breach Incident and What Happened In A Gist..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Heading1 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Heading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How Universities Are Becoming a Prime Target This Season..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Heading2 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Heading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How does stealing data and information benefit hackers, and how do they benefit from this?.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Heading3 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Heading3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How does stolen data work in the black market?.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Heading4 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Heading4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An investment in encryption, a prevention of breach..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Heading5 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Heading5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An added Layer of Security, Encryption, and  A simple human test could expose who you’re handing over sensitive information to..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Heading6 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Heading6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The IVY league university is home to 20,000 faculty and staff, 24,500 students in both undergraduate and postgraduate programs, and 400,000 alumni around the world.With Harvard, databases of alumni, donors, students and faculty records were breached.This screams one loud message, and that is: these hackers are not just trying to tap into financial data, but they want identities, networks, influence, leverage, and details of important student profiles..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Summary {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;It took nothing more than a phone call with a familiar and convincing voice, a malicious actor impersonating as an internal contact, and just the right insider on the other end of the line. This is how a skilled hacker got their ‘Vish’.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meet the brand new cybercriminal business model, ‘Vishing’..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The act of impersonating a familiar entity to garner pity or fear or even sympathy to gain critical information like bank account numbers, OTPs, passwords and more..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hackers and attackers are upgrading to this convincing scam as a form of weaponised persuasion..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Familiarity&lt;/b&gt; – a psychological loophole that easily cuts through firewalls, BitLocker, antiviruses and sinks its claws deep into naive human trust. This is the beginning of all breaches, scams and ransom attacks. Because familiarity cements trust, and digital trust translates into something like ‘I know this person…let me give them what they are asking for’..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The more familiar your digital interactions become, the less suspicious you become, and that is exactly the kind of treats that these attackers feast on..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In this article, we will dive into how an elite university was prey to something as simple as a phone call with a familiar voice on the other end of the line..
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From Ivy League Universities to Personal Data: Academic Data Breaches are at an all-time high!.
+        /// </summary>
+        public static string Blog_FILUTPDADBAAAATH_Title {
+            get {
+                return ResourceManager.GetString("Blog_FILUTPDADBAAAATH_Title", resourceCulture);
             }
         }
         
@@ -37087,7 +37798,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PCMag&apos;s Best Encryption Software 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 &amp; 2024.
+        ///   Looks up a localized string similar to PCMag&apos;s Best Encryption Software 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 &amp; 2025.
         /// </summary>
         public static string BusinessFeatureListBestEncryption {
             get {
@@ -42254,7 +42965,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Encrypting Files with AxCrypt on Desktop.
+        ///   Looks up a localized string similar to &lt;b&gt;Encrypting&lt;/b&gt; files on &lt;span&gt;desktop&lt;/span&gt;.
         /// </summary>
         public static string EncryptDecryptGuideCarouselHead1 {
             get {
@@ -42263,7 +42974,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Encrypting Files with AxCrypt on Mobile Device.
+        ///   Looks up a localized string similar to &lt;b&gt;Encrypting&lt;/b&gt; files on &lt;span&gt;mobile&lt;/span&gt;.
         /// </summary>
         public static string EncryptDecryptGuideCarouselHead2 {
             get {
@@ -42272,7 +42983,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decrypting Files with AxCrypt on Desktop.
+        ///   Looks up a localized string similar to &lt;b&gt;Decrypting&lt;/b&gt; files on &lt;span&gt;desktop&lt;/span&gt;.
         /// </summary>
         public static string EncryptDecryptGuideCarouselHead3 {
             get {
@@ -42281,7 +42992,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decrypting Files on Mobile App (Android/iOS).
+        ///   Looks up a localized string similar to &lt;b&gt;Decrypting&lt;/b&gt; files on &lt;span&gt;mobile&lt;/span&gt;.
         /// </summary>
         public static string EncryptDecryptGuideCarouselHead4 {
             get {
@@ -42290,7 +43001,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 3 Easy Ways to Encrypt.
+        ///   Looks up a localized string similar to There are &lt;strong&gt;3 ways to encrypt:&lt;/strong&gt;.
         /// </summary>
         public static string EncryptDecryptGuideCarouselText1 {
             get {
@@ -42317,7 +43028,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 3 Easy Ways to Decrypt.
+        ///   Looks up a localized string similar to There are &lt;strong&gt;3 ways to decrypt:&lt;/strong&gt;.
         /// </summary>
         public static string EncryptDecryptGuideCarouselText12 {
             get {
@@ -42326,7 +43037,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;Use the &apos;Stop Secure&apos; Button&lt;/br&gt;&lt;/br&gt; File:&lt;/strong&gt; Click on Stop Secure action button, and select the file(s) you want to decrypt..
+        ///   Looks up a localized string similar to Right-click on your file in File Explorer..
         /// </summary>
         public static string EncryptDecryptGuideCarouselText13 {
             get {
@@ -42335,7 +43046,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;App Right-click context menu &lt;/br&gt;&lt;/br&gt;File: &lt;/strong&gt; In the &lt;strong&gt;Home | Recent Files &lt;/strong&gt;section: Right-click on the selected file(s) → choose &lt;strong&gt;Stop Secure &lt;/br&gt;Folder: &lt;/strong&gt; Go to the &lt;strong&gt;Secured Folders&lt;/strong&gt; menu: Right-click on the selected folder → choose &lt;strong&gt;Decrypt Permanently&lt;/strong&gt;.
+        ///   Looks up a localized string similar to Choose &lt;strong&gt;AxCrypt → Encrypt.&lt;/strong&gt;.
         /// </summary>
         public static string EncryptDecryptGuideCarouselText14 {
             get {
@@ -42344,7 +43055,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;Right-Click Context Menu (Windows)&lt;/br&gt;&lt;/br&gt; File:&lt;/strong&gt; Right-click on any file on file explorer, then choose &lt;strong&gt;AxCrypt → ‘Decrypt’.&lt;br/&gt;Folder:&lt;/strong&gt;  Right-click on any folder of which you want to decrypt files within, then choose &lt;strong&gt; AxCrypt → ‘Decrypt’.&lt;/strong&gt; .
+        ///   Looks up a localized string similar to Your file is now encrypted and hidden from prying eyes..
         /// </summary>
         public static string EncryptDecryptGuideCarouselText15 {
             get {
@@ -42461,7 +43172,196 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quick Tips.
+        ///   Looks up a localized string similar to Click the &lt;b&gt;Stop Secure button.&lt;/b&gt;.
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText1 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the file provider (Authorize if required).
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText10 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse and tap on the .axx file(s).
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText11 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the file(s) you wish to decrypt.
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText12 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose &lt;b&gt;AxCrypt → Decrypt&lt;/b&gt; to decrypt files inside the folder..
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText13 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to &lt;b&gt;Home | Recent Files&lt;/b&gt; and right-click the file → choose &lt;b&gt;Stop Secure.&lt;/b&gt;.
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText2 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For folders, navigate to &lt;b&gt;Secured Folders.&lt;/b&gt;.
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText3 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right-click the folder → choose &lt;b&gt;Decrypt Permanently.&lt;/b&gt;.
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText4 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click any file in File Explorer → choose &lt;b&gt;AxCrypt → Decrypt.&lt;/b&gt;.
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText5 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For folders, right-click the desired folder in Explorer..
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText6 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open the AxCrypt mobile app.
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText7 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in with your AxCrypt account.
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText8 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap &lt;b&gt; Stop secure.&lt;/b&gt;.
+        /// </summary>
+        public static string EncryptDecryptGuideDecryptText9 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDecryptText9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secure button.
+        /// </summary>
+        public static string EncryptDecryptGuideDesktopHead1 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDesktopHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drag&amp;Drop.
+        /// </summary>
+        public static string EncryptDecryptGuideDesktopHead2 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDesktopHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right-click menu.
+        /// </summary>
+        public static string EncryptDecryptGuideDesktopHead3 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDesktopHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Secure button.
+        /// </summary>
+        public static string EncryptDecryptGuideDesktopHead4 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDesktopHead4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App Right- Click Context Menu.
+        /// </summary>
+        public static string EncryptDecryptGuideDesktopHead5 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDesktopHead5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Right-Click Menu.
+        /// </summary>
+        public static string EncryptDecryptGuideDesktopHead6 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideDesktopHead6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Drag your file(s)&lt;/b&gt; into the &lt;b&gt;AxCrypt Home&lt;/b&gt; window..
+        /// </summary>
+        public static string EncryptDecryptGuideEncryptText1 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideEncryptText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files will be automatically encrypted and listed..
+        /// </summary>
+        public static string EncryptDecryptGuideEncryptText2 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptGuideEncryptText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick &lt;span&gt;Tips&lt;/span&gt;.
         /// </summary>
         public static string EncryptDecryptGuideTipsHead {
             get {
@@ -42488,11 +43388,56 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt 2 can decrypt files that were encrypted using AxCrypt 1 but not vice-versa..
+        ///   Looks up a localized string similar to AxCrypt 2 can decrypt files from AxCrypt 1, but not vice versa..
         /// </summary>
         public static string EncryptDecryptGuideTipsText3 {
             get {
                 return ResourceManager.GetString("EncryptDecryptGuideTipsText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your complete guide to securing and unlocking files with AxCrypt..
+        /// </summary>
+        public static string EncryptDecryptHeadParagraph {
+            get {
+                return ResourceManager.GetString("EncryptDecryptHeadParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encryption (desktop).
+        /// </summary>
+        public static string EncryptDecryptSideMenuHead1 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptSideMenuHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encryption (mobile).
+        /// </summary>
+        public static string EncryptDecryptSideMenuHead2 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptSideMenuHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decryption (desktop).
+        /// </summary>
+        public static string EncryptDecryptSideMenuHead3 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptSideMenuHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decryption (mobile).
+        /// </summary>
+        public static string EncryptDecryptSideMenuHead4 {
+            get {
+                return ResourceManager.GetString("EncryptDecryptSideMenuHead4", resourceCulture);
             }
         }
         
@@ -43748,7 +44693,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PCMag&apos;s Best Encryption Software 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 &amp; 2024.
+        ///   Looks up a localized string similar to PCMag&apos;s Best Encryption Software 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 &amp; 2025.
         /// </summary>
         public static string FeaturesBestEncryption {
             get {
@@ -48485,7 +49430,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PCMag Editors&apos; Choice 2024.
+        ///   Looks up a localized string similar to PCMag Editors&apos; Choice 2025.
         /// </summary>
         public static string HomeHeroSubheading {
             get {
@@ -49193,7 +50138,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt’s award winning and Zero-Knowledge file encryption software protects government data in one click. Secure files such as important government documents, public records, confidential reports, classified files, and more – with AES-256 bit data encryption standard. Create automatic encryption mechanisms to encrypt files within a folder and sync them to popular cloud storage providers.&lt;br/&gt;&lt;br/&gt;AxCrypt is the number 1 choice of PCMag as the ‘Best Encryption Software’ of 2024. It has been the number 1 for [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to AxCrypt’s award winning and Zero-Knowledge file encryption software protects government data in one click. Secure files such as important government documents, public records, confidential reports, classified files, and more – with AES-256 bit data encryption standard. Create automatic encryption mechanisms to encrypt files within a folder and sync them to popular cloud storage providers.&lt;br/&gt;&lt;br/&gt;AxCrypt is the number 1 choice of PCMag as the ‘Best Encryption Software’ of 2025. It has been the number 1 for [rest of string was truncated]&quot;;.
         /// </summary>
         public static string IndustriesGovernmentContent2 {
             get {
@@ -49490,7 +50435,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt’s award winning and Zero-Knowledge file encryption software secures your sensitive legal data in one click. Protect files such as important case files, patent documents, clients records, confidential documents and more – with AES-256 bit data encryption standard. Create automatic encryption mechanisms to encrypt files within a folder and sync them to popular cloud storage providers.&lt;br/&gt;&lt;br/&gt;AxCrypt is the number 1 choice of PCMag as the ‘Best Encryption Software’ in 2024. It has been the number 1 f [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to AxCrypt’s award winning and Zero-Knowledge file encryption software secures your sensitive legal data in one click. Protect files such as important case files, patent documents, clients records, confidential documents and more – with AES-256 bit data encryption standard. Create automatic encryption mechanisms to encrypt files within a folder and sync them to popular cloud storage providers.&lt;br/&gt;&lt;br/&gt;AxCrypt is the number 1 choice of PCMag as the ‘Best Encryption Software’ in 2025. It has been the number 1 f [rest of string was truncated]&quot;;.
         /// </summary>
         public static string IndustriesLegalContent2 {
             get {
@@ -53792,7 +54737,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Explore AxCrypt&apos;s accolades, including PCMag Editor’s Choice and Gartner&apos;s Best Encryption Software 2024. Discover why millions trust AxCrypt for secure file encryption..
+        ///   Looks up a localized string similar to Explore AxCrypt&apos;s accolades, including PCMag Editor’s Choice and Gartner&apos;s Best Encryption Software 2025. Discover why millions trust AxCrypt for secure file encryption..
         /// </summary>
         public static string Meta_Description_Awards {
             get {
@@ -54193,6 +55138,15 @@ namespace AxCrypt.Content {
         public static string Meta_Description_Blog_FEFBI {
             get {
                 return ResourceManager.GetString("Meta-Description-Blog-FEFBI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Learn how a vishing attack led to the Harvard data breach and why familiarity-based scams are becoming the biggest threat to digital security today..
+        /// </summary>
+        public static string Meta_Description_Blog_FILUTPDADBAAAATH {
+            get {
+                return ResourceManager.GetString("Meta-Description-Blog-FILUTPDADBAAAATH", resourceCulture);
             }
         }
         
@@ -55439,6 +56393,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Learn how to encrypt and decrypt text securely using AxCrypt’s reliable encryption features. This guide helps you protect sensitive messages and ensure only authorized users can access them..
+        /// </summary>
+        public static string Meta_Description_Text_Encrypt_Share_Decrypt {
+            get {
+                return ResourceManager.GetString("Meta-Description-Text-Encrypt-Share-Decrypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discover practical tips for using AxCrypt: secure email attachments, integrate with cloud services, anonymize filenames, and automate encryption tasks..
         /// </summary>
         public static string Meta_Description_Usage_Tips {
@@ -56002,6 +56965,15 @@ namespace AxCrypt.Content {
         public static string Meta_Title_Blog_FEFBI {
             get {
                 return ResourceManager.GetString("Meta-Title-Blog-FEFBI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harvard Data Breach: How Vishing Scams Exploit Familiarity.
+        /// </summary>
+        public static string Meta_Title_Blog_FILUTPDADBAAAATH {
+            get {
+                return ResourceManager.GetString("Meta-Title-Blog-FILUTPDADBAAAATH", resourceCulture);
             }
         }
         
@@ -57289,6 +58261,15 @@ namespace AxCrypt.Content {
         public static string Meta_Title_Terms_Of_Use {
             get {
                 return ResourceManager.GetString("Meta-Title-Terms-Of-Use", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text Encryption &amp; Decryption by AxCrypt | Protect Your Messages.
+        /// </summary>
+        public static string Meta_Title_Text_Encrypt_Share_Decrypt {
+            get {
+                return ResourceManager.GetString("Meta-Title-Text-Encrypt-Share-Decrypt", resourceCulture);
             }
         }
         
@@ -60637,7 +61618,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recognized for Excellence by PCMag Editors&apos; Choice 2024.
+        ///   Looks up a localized string similar to Recognized for Excellence by PCMag Editors&apos; Choice 2025.
         /// </summary>
         public static string PCMagEditorsChoice2024 {
             get {
@@ -70617,6 +71598,429 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is there a character limit for encrypting text?.
+        /// </summary>
+        public static string TextEncryptionFaq2 {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, the input text field supports up to &lt;b&gt;1000 characters.&lt;/b&gt;.
+        /// </summary>
+        public static string TextEncryptionFaq2Ans {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq2Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do I need a password to encrypt text?.
+        /// </summary>
+        public static string TextEncryptionFaq3 {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No, encryption happens automatically. However, if a &lt;b&gt;custom password&lt;/b&gt; has been set by the sender, you will need it to decrypt the text..
+        /// </summary>
+        public static string TextEncryptionFaq3Ans {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq3Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How do I share the encrypted text?.
+        /// </summary>
+        public static string TextEncryptionFaq4 {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can share it using the &lt;b&gt;Copy button, Download as .TXT, or Send via Email&lt;/b&gt; options provided..
+        /// </summary>
+        public static string TextEncryptionFaq4Ans {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq4Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is the encrypted text safe to send over email or chat apps?.
+        /// </summary>
+        public static string TextEncryptionFaq5 {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes. The encryption ensures that even if someone intercepts the message, they cannot read it without the password..
+        /// </summary>
+        public static string TextEncryptionFaq5Ans {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq5Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can I edit encrypted text?.
+        /// </summary>
+        public static string TextEncryptionFaq6 {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No, encrypted text cannot be edited. If you need changes, edit the original text and encrypt it again..
+        /// </summary>
+        public static string TextEncryptionFaq6Ans {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq6Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Which encryption algorithm is used for text encryption in AxCrypt?.
+        /// </summary>
+        public static string TextEncryptionFaq7 {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt uses industry-standard &lt;b&gt;AES-256 encryption&lt;/b&gt;, ensuring strong protection for your text. This is the same level of encryption used by government and enterprise-grade security systems..
+        /// </summary>
+        public static string TextEncryptionFaq7Ans {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq7Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Does text encryption happen locally on my device or on the cloud?.
+        /// </summary>
+        public static string TextEncryptionFaq8 {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All text encryption and decryption processes occur &lt;b&gt;locally on your device.&lt;/b&gt; Your text is never uploaded to any server, ensuring complete privacy and control over your data..
+        /// </summary>
+        public static string TextEncryptionFaq8Ans {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq8Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What happens if I forget my password?.
+        /// </summary>
+        public static string TextEncryptionFaq9 {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt &lt;b&gt;cannot recover or reset your password&lt;/b&gt; because we do not have access to it. To avoid losing access, we recommend storing your password securely in a trusted password manager..
+        /// </summary>
+        public static string TextEncryptionFaq9Ans {
+            get {
+                return ResourceManager.GetString("TextEncryptionFaq9Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What is &lt;span&gt;Text Encryption&lt;/span&gt;?.
+        /// </summary>
+        public static string TextEncryptionGuideContentHead {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideContentHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Need to share a confidential piece of text? AxCrypt lets you encrypt plain text in seconds. Simply enter the text, secure it with your account password or a custom password, and share the encrypted output via email, private messages, and more. As a sender, you can copy the encrypted text to your clipboard or download it as a .txt file to share through email. The recipient can then paste the encrypted text into the AxCrypt app and decrypt it instantly. It’s also an easy way to secure email communication and  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string TextEncryptionGuideparagraph1 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideparagraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt uses industry-standard &lt;strong&gt;AES-256 encryption&lt;/strong&gt;, ensuring strong protection for your text. This is the same level of encryption used by government and enterprise-grade security systems. All text encryption and decryption processes occur &lt;strong&gt;locally on your device&lt;/strong&gt;. Your text is never uploaded to any server, ensuring complete privacy and control over your data..
+        /// </summary>
+        public static string TextEncryptionGuideparagraph2 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideparagraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your complete guide to encryption and sharing Text..
+        /// </summary>
+        public static string TextEncryptionGuidesHeadParagraph {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuidesHeadParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;Text Encryption&lt;/span&gt;, Sharing and Decryption Guide.
+        /// </summary>
+        public static string TextEncryptionGuidesHeadTitle {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuidesHeadTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;Encrypting Text&lt;/span&gt; on&lt;b&gt; Desktop&lt;/b&gt;.
+        /// </summary>
+        public static string TextEncryptionGuideStepHead1 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;3 Easy Ways&lt;/span&gt; &lt;b&gt;to share&lt;/b&gt; Encrypted text.
+        /// </summary>
+        public static string TextEncryptionGuideStepHead2 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;Decrypting Text&lt;/span&gt; on &lt;b&gt;Desktop&lt;/b&gt;.
+        /// </summary>
+        public static string TextEncryptionGuideStepHead3 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open the AxCrypt App on your Desktop..
+        /// </summary>
+        public static string TextEncryptionGuideStepText1 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From the menu, select &lt;b&gt;Text Decryption.&lt;/b&gt;.
+        /// </summary>
+        public static string TextEncryptionGuideStepText10 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click &lt;b&gt; Decrypt Text.&lt;/b&gt;.
+        /// </summary>
+        public static string TextEncryptionGuideStepText11 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your Encrypted text in the input field below..
+        /// </summary>
+        public static string TextEncryptionGuideStepText12 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your encrypted text will be decrypted, and the original text will be displayed below..
+        /// </summary>
+        public static string TextEncryptionGuideStepText13 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Note:&lt;/b&gt; Please use the custom password shared with you (if any) to decrypt the text.
+        /// </summary>
+        public static string TextEncryptionGuideStepText14 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click &lt;b&gt; Decrypt&lt;/b&gt;.
+        /// </summary>
+        public static string TextEncryptionGuideStepText15 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click &lt;b&gt; Click Encrypt&lt;/b&gt;.
+        /// </summary>
+        public static string TextEncryptionGuideStepText16 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From the menu, select &lt;b&gt;Text Encryption.&lt;/b&gt;.
+        /// </summary>
+        public static string TextEncryptionGuideStepText2 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click &lt;b&gt;Encrypt Text.&lt;/b&gt;.
+        /// </summary>
+        public static string TextEncryptionGuideStepText3 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your text in the input field below (up to 1000 characters)..
+        /// </summary>
+        public static string TextEncryptionGuideStepText4 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your encrypted text will be generated and displayed below..
+        /// </summary>
+        public static string TextEncryptionGuideStepText5 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Note:&lt;/b&gt; You can opt for a custom password that is strong &amp; easy to remember, to encrypt &amp; decrypt this text..
+        /// </summary>
+        public static string TextEncryptionGuideStepText6 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Use the “Copy” Button&lt;/b&gt; &lt;/br&gt; Click the Copy button to instantly copy the encrypted text to your clipboard. You can then paste it into any app or platform such as messaging apps, documents, or chat windows for quick and easy sharing..
+        /// </summary>
+        public static string TextEncryptionGuideStepText7 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Download as .TXT&lt;/b&gt; &lt;/br&gt; Select the Download as .TXT option to save the encrypted text as a .txt file on your device. This file can be shared through email, cloud storage, messaging platforms, or any other method you prefer..
+        /// </summary>
+        public static string TextEncryptionGuideStepText8 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Send via Email&lt;/b&gt; &lt;/br&gt; Choose Send via Email to share the encrypted text directly through email. This option provides a simple alternative to traditional email encryption by automatically inserting the encrypted content for you..
+        /// </summary>
+        public static string TextEncryptionGuideStepText9 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔐 &lt;b&gt;Keep your password secure:&lt;/b&gt; Share it only with intended recipients and avoid sending it through insecure channels..
+        /// </summary>
+        public static string TextEncryptionGuideTips1 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideTips1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 📝 &lt;b&gt;Double-check your text:&lt;/b&gt; Ensure your input is accurate before encrypting, since encrypted text cannot be edited..
+        /// </summary>
+        public static string TextEncryptionGuideTips2 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideTips2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🛡️ &lt;b&gt;Custom Password: &lt;/b&gt; Store your password safely (password manager recommended). AxCrypt cannot recover or reset it for you, as we never have access to your password..
+        /// </summary>
+        public static string TextEncryptionGuideTips3 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideTips3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text Encryption.
+        /// </summary>
+        public static string TextEncryptionLinkLable {
+            get {
+                return ResourceManager.GetString("TextEncryptionLinkLable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypt Text.
+        /// </summary>
+        public static string TextEncryptionSideMenuHead1 {
+            get {
+                return ResourceManager.GetString("TextEncryptionSideMenuHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share Encrypted text.
+        /// </summary>
+        public static string TextEncryptionSideMenuHead2 {
+            get {
+                return ResourceManager.GetString("TextEncryptionSideMenuHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrypt Text.
+        /// </summary>
+        public static string TextEncryptionSideMenuHead3 {
+            get {
+                return ResourceManager.GetString("TextEncryptionSideMenuHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Critical - Get notified of critical AxCrypt updates.
         /// </summary>
         public static string TextPreferenceCritical {
@@ -70871,6 +72275,15 @@ namespace AxCrypt.Content {
         public static string TrustedByMillionsHeading {
             get {
                 return ResourceManager.GetString("TrustedByMillionsHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;Try&lt;/span&gt; 14 days.
+        /// </summary>
+        public static string Try14Days {
+            get {
+                return ResourceManager.GetString("Try14Days", resourceCulture);
             }
         }
         
