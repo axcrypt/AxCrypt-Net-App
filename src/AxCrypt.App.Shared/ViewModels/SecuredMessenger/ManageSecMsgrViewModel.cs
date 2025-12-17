@@ -301,6 +301,10 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
         public void SelectMessagesForActions(SecuredMessage message)
         {
             message.IsSelected = !message.IsSelected;
+
+            if (!message.IsSelected)
+                SelectAllMessages = false;
+
             UpdateViewState();
         }
 
@@ -314,6 +318,7 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
             IEnumerable<Guid> selectedMessengerList = GetSelectedMessagesList();
             if (!selectedMessengerList.Any())
             {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "Please select any message from the list to perform the action.");
                 return;
             }
 
@@ -324,6 +329,7 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
                 {
                     case "delete":
                         await DeleteSelectedMessagesAsync(selectedMessengerList);
+                        _showActions = false;
                         break;
 
                     case "read":
@@ -332,6 +338,7 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
                         {
                             SetReadOrUnreadMessage(selectedMessengerList, New<INow>().Utc);
                         }
+                        _showActions = false;
                         break;
 
                     case "unread":
@@ -340,6 +347,7 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
                         {
                             SetReadOrUnreadMessage(selectedMessengerList, DateTime.MinValue);
                         }
+                        _showActions = false;
                         break;
 
                     default:
@@ -380,6 +388,11 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
         public void ToggleAllMessages(ChangeEventArgs e)
         {
             bool isChecked = Convert.ToBoolean(e.Value);
+            UpdateToggleMessageStatus(isChecked);
+        }
+
+        public void UpdateToggleMessageStatus(bool isChecked)
+        {
             SelectAllMessages = isChecked;
             foreach (SecuredMessage msg in Messenger.Messages)
             {
