@@ -414,7 +414,7 @@ public class ShareKeyViewModel : ViewModelBase
 
     private bool AdHocValidateNewKeyShare()
     {
-        if (_viewModel![nameof(Core.UI.ViewModel.SharingListViewModel.NewKeyShare)].Length > 0)
+        if (_viewModel![nameof(AxCrypt.Core.UI.ViewModel.SharingListViewModel.NewKeyShare)].Length > 0)
         {
             ErrorMessage = Texts.InvalidEmail;
             return false;

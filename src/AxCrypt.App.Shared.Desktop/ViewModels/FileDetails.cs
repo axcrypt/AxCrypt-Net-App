@@ -13,7 +13,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels;
 
-public class FileDetails : Core.UI.ViewModel.ViewModelBase
+public class FileDetails : AxCrypt.Core.UI.ViewModel.ViewModelBase
 {
     private ActiveFile _activeFile;
 

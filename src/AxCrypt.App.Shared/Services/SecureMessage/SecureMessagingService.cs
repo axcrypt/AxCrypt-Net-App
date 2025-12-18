@@ -129,7 +129,7 @@ namespace AxCrypt.App.Shared.Services
                 return false;
             }
 
-            return await New<LogOnIdentity, Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).UpdateAsync(selectedMessengerList, New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address);
+            return await New<LogOnIdentity, AxCrypt.Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).UpdateAsync(selectedMessengerList, New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address);
         }
 
         public async Task<bool> SetUnreadMessageStatusAsync(IEnumerable<Guid> selectedMessengerList)
@@ -139,13 +139,13 @@ namespace AxCrypt.App.Shared.Services
                 return false;
             }
 
-            return await New<LogOnIdentity, Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).UpdateAsync(selectedMessengerList, New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address, true);
+            return await New<LogOnIdentity, AxCrypt.Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).UpdateAsync(selectedMessengerList, New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address, true);
         }
 
         public async Task<bool> DeleteMessagesByIds(IEnumerable<Guid> ids, SecureMsgrFilterTab securedMessengerFilter)
         {
             string userName = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address;
-            return await New<LogOnIdentity, Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).DeleteAsync(ids, userName, securedMessengerFilter);
+            return await New<LogOnIdentity, AxCrypt.Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).DeleteAsync(ids, userName, securedMessengerFilter);
         }
 
         public async Task<SecuredMessengerModel> GetLoadMoreSEMAsync(int pageNo, SecureMsgrFilterTab securedMessengerFilter)
@@ -291,7 +291,7 @@ namespace AxCrypt.App.Shared.Services
                 messageIds.Add(msg.Id);
             }
 
-            await New<LogOnIdentity, Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).UpdateAsync(messageIds, New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address);
+            await New<LogOnIdentity, AxCrypt.Core.Service.SecuredMessenger.ISecuredMessengerService>(Identity()).UpdateAsync(messageIds, New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address);
         }
 
         private static DateTime GetVisibleUntil(SecureMsgrVisibility visibility)

@@ -59,17 +59,17 @@ public class SecretViewModel : ViewModelBase
         SharedWith = share;
     }
 
-    private void Initialize(Core.Secrets.SecretPassword secretPwd)
+    private void Initialize(AxCrypt.Core.Secrets.SecretPassword secretPwd)
     {
         Password = new SecretPasswordViewModel(secretPwd.Title, secretPwd.Url, secretPwd.Username, secretPwd.Description, secretPwd.TheSecret);
     }
 
-    private void Initialize(Core.Secrets.SecretCard secretCard)
+    private void Initialize(AxCrypt.Core.Secrets.SecretCard secretCard)
     {
         Card = new SecretCardViewModel(secretCard.Number, secretCard.Description, secretCard.NameOnCard, secretCard.SecurityCode, secretCard.ExpirationDate);
     }
 
-    private void Initialize(Core.Secrets.SecretNote secretNote)
+    private void Initialize(AxCrypt.Core.Secrets.SecretNote secretNote)
     {
         Note = new SecretNoteViewModel(secretNote.Description, secretNote.Note);
     }

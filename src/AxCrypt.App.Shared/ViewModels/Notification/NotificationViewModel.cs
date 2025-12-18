@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace AxCrypt.App.Shared.ViewModels.Notification
 {
-    public class NotificationViewModel : Core.UI.ViewModel.ViewModelBase
+    public class NotificationViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
     {
         public NotificationViewModel()
         {

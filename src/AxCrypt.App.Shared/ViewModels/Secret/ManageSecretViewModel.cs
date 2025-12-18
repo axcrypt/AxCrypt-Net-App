@@ -8,7 +8,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.ViewModels.Secret;
 
-public class ManageSecretViewModel : Core.UI.ViewModel.ViewModelBase
+public class ManageSecretViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
 {
     public ManageSecretViewModel(SecretService secretService)
     {

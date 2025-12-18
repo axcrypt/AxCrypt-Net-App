@@ -113,14 +113,14 @@ public class UserNotificationService : ViewModelBase
             return;
         }
 
-        if (!Enum.TryParse(eventType, out Core.Notification.NotificationType notificationActionEventType))
+        if (!Enum.TryParse(eventType, out NotificationType notificationActionEventType))
         {
             return;
         }
 
         switch (notificationActionEventType)
         {
-            case Core.Notification.NotificationType.GetStarted:
+            case NotificationType.GetStarted:
                 OpenWebPage("https://axcrypt.net/information/guides/getstarted/");
                 break;
             default:
@@ -130,6 +130,6 @@ public class UserNotificationService : ViewModelBase
 
     private void OpenWebPage(string url)
     {
-        Core.BrowseUtility.RedirectTo(url);
+        AxCrypt.Core.BrowseUtility.RedirectTo(url);
     }
 }

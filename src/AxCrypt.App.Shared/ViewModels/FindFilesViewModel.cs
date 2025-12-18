@@ -42,7 +42,7 @@ namespace AxCrypt.App.Shared.ViewModels
         public void LoadSecuredFilesList()
         {
             FindFilesList = New<FindFilesStore>()?.GetFindFilesLogs()!;
-            HasFindFilesCapability = AxCServiceProviderExtension.LogOnViewModel!.License.Has(Core.Runtime.LicenseCapability.FindFiles);
+            HasFindFilesCapability = AxCServiceProviderExtension.LogOnViewModel!.License.Has(AxCrypt.Core.Runtime.LicenseCapability.FindFiles);
         }
 
         public void FilterSecuredFiles(string filename)

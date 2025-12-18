@@ -19,7 +19,7 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.ViewModels;
 
-public class SecretsListViewModel : Core.UI.ViewModel.ViewModelBase
+public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
 {
     private readonly int MaxRecentSecretsToShow = 10;
     private readonly string _sortOptionAll = Texts.SecretsAllItems;
