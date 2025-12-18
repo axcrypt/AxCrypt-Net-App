@@ -15,6 +15,10 @@ using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.App.Shared.Models.Secret;
 using Microsoft.Extensions.DependencyInjection;
+using AxCrypt.App.Shared.FileOperations.IO;
+using AxCrypt.Core;
+using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.App.Shared.FileOperations.Vault;
 
 namespace AxCrypt.App.Shared
 {
@@ -79,6 +83,13 @@ namespace AxCrypt.App.Shared
             TypeMap.Register.Singleton<IUserNotificationService>(() => new UserNotificationApiService());
         }
 
+        public static void RegisterTypeFactories()
+        {
+            TypeMap.Register.New<IVaultDataStore>(() => new VaultDataStore());
+            TypeMap.Register.Singleton<CustomParallelFileOperation>(() => new CustomParallelFileOperation());
+            TypeMap.Register.New<VaultOperationViewModel>(() => new VaultOperationViewModel(Resolve.KnownIdentities, New<CustomParallelFileOperation>(), New<IdentityViewModel>()));
+        }
+        
         public static void LoadUpdateCheck(MainViewModel mainViewModel, LogOnViewModel logOnViewModel)
         {
             _mainViewModel = mainViewModel;

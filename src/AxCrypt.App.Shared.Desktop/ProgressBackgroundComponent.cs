@@ -16,6 +16,7 @@ public class ProgressBackgroundComponent : Component, IProgressBackground
         {
             CustomProgressBar progressBar = new CustomProgressBar();
             IProgressContext progressContext = e.ProgressContext;
+            progressBar.ProgressContext = progressContext;
             progressContext.Progressing += (ss, ee) =>
             {
                 progressBar.Percentage = ee.Percent;

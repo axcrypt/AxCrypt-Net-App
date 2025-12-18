@@ -50,9 +50,17 @@
 .vlt-body .vlt-search:hover .search-btn {
   background-color: #48772C;
 }
+.vlt-body .action-button-vault {
+  padding: 3px 12px;
+  line-height: 30px;
+  background: #48772C;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 15px;
+}
 .vlt-body .vlt-btn-add {
-  height: 35px;
-  width: 60px;
+  height: 30px;
+  width: 50px;
   background-color: #48772C;
   color: azure;
   border: 0;
@@ -124,6 +132,7 @@
   margin-bottom: 5px;
 }
 .vlt-body .vlt-list-folder {
+  position: relative;
   border: 2px solid #A4A4A4;
   height: 65vh;
   border-radius: 5px;

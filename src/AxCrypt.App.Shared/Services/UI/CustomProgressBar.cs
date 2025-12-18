@@ -1,4 +1,5 @@
 ﻿using AxCrypt.App.Shared.Helpers;
+using AxCrypt.Core.UI;
 
 namespace AxCrypt.App.Shared.Services.UI
 {
@@ -31,6 +32,14 @@ namespace AxCrypt.App.Shared.Services.UI
             set
             {
                 _progressBarService.Percentage = value;
+            }
+        }
+
+        public IProgressContext ProgressContext
+        {
+            set
+            {
+                _progressBarService.ProgressContext = value;
             }
         }
 

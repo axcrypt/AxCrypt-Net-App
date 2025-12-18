@@ -74,6 +74,7 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<SecuredMessengerComponent>();
 
             SharedFactory.RegisterSingletons(services);
+            SharedFactory.RegisterTypeFactories();
             AppDesktopFactory.RegisterSingletons(services);
 
         }

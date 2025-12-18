@@ -172,6 +172,11 @@ namespace AxCrypt.Core.Extensions
             List<IDataStore> filteredListOfFiles = new List<IDataStore>();
             foreach (IDataStore dataStore in listofFiles)
             {
+                if (dataStore.IsLocked())
+                {
+                    continue;
+                }
+
                 if (await dataStore.IsEncryptableWithWarningAsync())
                 {
                     filteredListOfFiles.Add(dataStore);

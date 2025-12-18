@@ -1,7 +1,10 @@
 ﻿@using AxCrypt.App.Shared.Desktop.Data
 @using AxCrypt.App.Shared.Services
+@using AxCrypt.Content
+@using AxCrypt.Core.UI
 
 @inject ProgressBarService ProgressBarService
+@inject IJSRuntime JSRuntime
 
 @if (IsVisible)
 {
@@ -21,7 +24,7 @@
     }
     else
     {
-        <div class="progres-sec">
+        <div class="progres-sec" style="pointer-events:auto;" @oncontextmenu="async (e) => await ShowContextMenu(e)" @onclick="() => IsContextMenuVisible = false">
             <div class="fist-rw">
                 <div class=""><label class="progres-fle-txt" title="@ProgressBarService.Filename">@ProgressBarService.Filename</label></div>
                 <div>
@@ -32,31 +35,95 @@
                 <div class="progress-bubble-start" style="left:@ProgressBarService.Percentage%;"></div>
                 <div class="progress-bar" style="width:@ProgressBarService.Percentage%"></div>
                 <div class="progress-bubble-end"></div>
-            </div>
+            </div> 
         </div>
+        @if(IsContextMenuVisible)
+        {
+            <div class="context-menu-action" style="pointer-events:auto;position: fixed;z-index:9999; left: @(contextMenuX)px;transform-origin:@(flipContextMenu);">
+                <span class="menu-item" @onclick="CancelTask">@Texts.ButtonCancelText</span>
+            </div>
+        }
     }
 }
+<script type="text/javascript">
+    window.getWindowHeight = () => window.innerHeight;
+</script>
+<style>
+    .context-menu-action {
+        background: white;
+        border: 1px solid $BorderClr;
+        border-radius: 10px;
+        box-shadow: 0 0 10px $ActnBgClr;
+        min-width: 150px;
+        overflow: hidden;
+    }
 
+    .context-menu-action .menu-item {
+        padding: 8px 12px;
+        display: block;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+        font-size: 12px;
+        font-weight: 400;
+    }
+</style>
 @code {
     public bool IsVisible { get; set; }
 
+    public bool IsContextMenuVisible { get; set; } = false;
+    private double contextMenuX { get; set; }
+    private double contextMenuY { get; set; }
+    private string flipContextMenu { get; set; } = "top left";
+    private double contextMenuHeight { get; set; } = 210;
+
     protected override void OnInitialized()
     {
-        ProgressBarService.OnProgressBarVisibilityChanged += UpdateIndicatorVisibility;
+        ProgressBarService.OnProgressBarVisibilityChanged += async(isVisible)=> await UpdateIndicatorVisibility(isVisible);
     }
 
-    private void UpdateIndicatorVisibility(bool isVisible)
+    private async Task ShowContextMenu(MouseEventArgs e)
     {
-        IsVisible = isVisible;
+        contextMenuX = e.PageX;
+        contextMenuY = e.PageY;
+        flipContextMenu = "top left";
 
-        InvokeAsync(() =>
+        double windowHeight = await JSRuntime.InvokeAsync<double>("getWindowHeight");
+        if (contextMenuY + contextMenuHeight > windowHeight)
         {
-            StateHasChanged(); // Refresh UI
-        });
+            flipContextMenu = "bottom left";
+        }
+
+        IsContextMenuVisible = true;
+        await UpdateUIState();
+    }
+
+    private void CancelTask()
+    {
+        IProgressContext? progressContext = AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.ProgressBarService?.ProgressContext ?? null;
+        if(progressContext != null)
+        {
+            progressContext.Cancel = true;
+            progressContext.RequestCancel();
+        }
+    }
+
+    private async Task UpdateIndicatorVisibility(bool isVisible)
+    {
+        IsContextMenuVisible = false;
+
+        IsVisible = isVisible;
+        await UpdateUIState();
     }
 
     private void ClosePopup()
     {
         ProgressBarService.Hide();
+    }
+
+    private async Task UpdateUIState(){
+        await InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
     }
 }

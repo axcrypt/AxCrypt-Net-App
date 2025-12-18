@@ -1,4 +1,6 @@
-﻿namespace AxCrypt.App.Shared.Services;
+﻿using AxCrypt.Core.UI;
+
+namespace AxCrypt.App.Shared.Services;
 
 public class ProgressBarService
 {
@@ -39,6 +41,8 @@ public class ProgressBarService
             IsVisible = isVisible;
         }
     }
+
+    public IProgressContext ProgressContext { get; set; }
 
     public void Hide()
     {

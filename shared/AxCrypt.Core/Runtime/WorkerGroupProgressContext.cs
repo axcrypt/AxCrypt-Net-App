@@ -136,5 +136,22 @@ namespace AxCrypt.Core.Runtime
         {
             _singleThread.Leave();
         }
+
+        public event EventHandler? OnCancelled
+        {
+            add
+            {
+                _progress.OnCancelled += value;
+            }
+            remove
+            {
+                _progress.OnCancelled -= value;
+            }
+        }
+
+        public void RequestCancel()
+        {
+            _progress.RequestCancel();
+        }
     }
 }

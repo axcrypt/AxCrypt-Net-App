@@ -254,5 +254,13 @@ namespace AxCrypt.Core.UI
         public void LeaveSingleThread()
         {
         }
+
+        public event EventHandler? OnCancelled;
+        
+        public void RequestCancel() 
+        { 
+            Cancel = true; 
+            OnCancelled?.Invoke(this, EventArgs.Empty); 
+        }
     }
 }

@@ -25,14 +25,14 @@
 
 #endregion Coypright and License
 
-using AxCrypt.Abstractions;
-using AxCrypt.Core.Crypto;
-using AxCrypt.Core.Crypto.Asymmetric;
-using AxCrypt.Core.IO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using AxCrypt.Abstractions;
+using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Crypto.Asymmetric;
+using AxCrypt.Core.IO;
 
 namespace AxCrypt.Core.UI
 {
@@ -59,6 +59,8 @@ namespace AxCrypt.Core.UI
 
         public FileOperationContext Status { get; set; }
 
-        public IEnumerable<UserPublicKey> Recipients { get; set; } = null;
+        public IEnumerable<UserPublicKey>? Recipients { get; set; } = null;
+
+        public IDataContainer? SaveFileDataContainer { get; set; } = null;
     }
 }

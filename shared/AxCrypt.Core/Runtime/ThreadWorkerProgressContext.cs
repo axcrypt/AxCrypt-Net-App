@@ -145,5 +145,22 @@ namespace AxCrypt.Core.Runtime
             _progress.LeaveSingleThread();
             _isSingleThread = false;
         }
+
+        public event EventHandler? OnCancelled
+        {
+            add
+            {
+                _progress.OnCancelled += value;
+            }
+            remove
+            {
+                _progress.OnCancelled -= value;
+            }
+        }
+
+        public void RequestCancel()
+        {
+            _progress.RequestCancel();
+        }
     }
 }

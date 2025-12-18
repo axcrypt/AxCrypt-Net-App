@@ -56,5 +56,9 @@ namespace AxCrypt.Core.UI
         void LeaveSingleThread();
 
         ProgressTotals Totals { get; }
+
+        event EventHandler? OnCancelled;
+        
+        void RequestCancel();
     }
 }

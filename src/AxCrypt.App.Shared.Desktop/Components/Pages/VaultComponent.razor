@@ -34,21 +34,21 @@
         </div>
 
         <div class="vlt-add dropdown">
-            <div class="action-button">
-                <input class="vlt-btn-add" type="button" value="Add" />
+            <div class="action-button-vault">
+                <input class="vlt-btn-add" type="button" value="@Texts.AddPromptText" />
             </div>
             <div class="dropdown-content" style="margin-top: 50px;">
-                <a style="color:#69a051" @onclick="async e => await ViewModel.AddVaultFiles(e)">File(s)</a>
-                <a style="color:#69a051" @onclick="async e => await ViewModel.AddVaultFolder(e)">Folder(s)</a>
+                <a style="color:#69a051" @onclick="() => ViewModel.AddVaultFiles()">@Texts.FileFilterFileTypeFiles</a>
+                <a style="color:#69a051" @onclick="() => ViewModel.AddVaultFolder()">@Texts.ColumnFolderHeader</a>
             </div>
         </div>
 
     </div>
     <div class="vlt-content-area">
-
         @if (ViewModel.VaultItemList.Any())
         {
             <div class="vlt-list-folder">
+                <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
                 <div class="vlt-header-bar">
                     @if (isListView)
                     {
@@ -66,7 +66,7 @@
                     }
 
                     <div class="display-type">
-                        <img class="@((isListView ? "selected" : "")) Ico-List"
+                        <img style="background: rgba(0, 0, 0, 0); filter: brightness(0);" class="@((isListView ? "selected" : "")) Ico-List"
                              @onclick="() => SetView(true)"
                              alt="List View" />
 
@@ -76,7 +76,7 @@
 
                     </div>
                 </div>
-                <div class="@(isListView ? "list-view-div" : "grid-view-div") @(isfileselected ? "prev-grid" : "")" @onclick="async () => await HideContextMenu()" @oncontextmenu="@(async e => await ShowContextMenu(e, "", "", "create"))">
+                <div class="@(isListView ? "list-view-div" : "grid-view-div") @(ViewModel.isfileselected ? "prev-grid" : "")" @onclick="async () => await HideContextMenu()" @oncontextmenu="@(async e => await ShowContextMenu(e, "", "", "create"))">
                     <ul class="vlt-file-list @(isListView ? "list-view" : "grid-view")">
                         @foreach (VaultItem file in ViewModel.VaultItemList)
                         {
@@ -99,44 +99,56 @@
                         }
                     </ul>
 
-                    @if (!isListView && isfileselected)
+                    @if (!isListView && ViewModel.isfileselected)
                     {
                         <div class="detail-section">
-                            <img alt="Preview" class="detail-image  @(ViewModel.IsFolder ? "Icon-folder" : "Icon-file")" />
-                            <span class="detail-label">@Texts.FilePropertiesFileNameToolStripMenuItem</span>
+                            @if (ViewModel.IsFolder)
+                            {
+                                <img alt="Preview" class="detail-image Icon-folder" />
+                                <span class="detail-label">@Texts.ColumnFolderHeader @Texts.NameLabel</span>
+                            }
+                            else
+                            {
+                                <img alt="Preview" class="detail-image Icon-file" />
+                                <span class="detail-label">@Texts.FilePropertiesFileNameToolStripMenuItem</span>
+                                
+                            }
                             <span class="fil-fol-detail">@ViewModel.SelectedFile</span>
-                            <span class="detail-label">@Texts.FileSizeColumnHeaderText</span>
-                            <span class="fil-fol-detail">@ViewModel.SelectedFileSize</span>
-                            <span class="detail-label">@Texts.FindPathTitle</span>
-                            <span class="fil-fol-detail">@Texts.FindPathTitle</span>
+                            @if (!ViewModel.IsFolder)
+                            {
+                                <span class="detail-label">@Texts.FileSizeColumnHeaderText</span>
+                                <span class="fil-fol-detail">@ViewModel.SelectedFileSize</span>
+                            }
+                            <span class="detail-label">@Texts.PathText</span>
+                            <span class="fil-fol-detail">@ViewModel.SelectedFilePath</span>
                         </div>
                     }
                 </div>
 
 
-                @if (contextMenuType == "file")
+                @if (contextMenuType == "file" && !String.IsNullOrEmpty(ViewModel.SelectedFilePath))
                 {
                     <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;transform-origin:@(flipContextMenu) ;transform:@(flipTransform);">
-                        <span class="menu-item" @onclick='() => ViewModel.HandleFileActionAsync("Open")'>@Texts.RecentFilesOpenToolStripMenuItemText</span>
-                        <span class="menu-item" @onclick="async e => await ViewModel.DecryptVaultfile(e)">@Texts.DecryptToolStripMenuItemText</span>
-                        <span class="menu-item" @onclick='() => ViewModel.HandleFileActionAsync("Reveal")'>@Texts.ShowInFolderText</span>
-                        <span class="menu-item" @onclick='() => ViewModel.HandleFileActionAsync("RenameAnonymously")'>@Texts.AnonymousRenameMenuText</span>
-                        <span class="menu-item" @onclick='() => ViewModel.HandleFileActionAsync("RenameOriginal")'>@Texts.RestoreAnonymousNamesMenuText</span>
+                        <span class="menu-item" @onclick='() => ViewModel.PrepareFileActionAsync("Open")'>@Texts.RecentFilesOpenToolStripMenuItemText</span>
+                        <span class="menu-item" @onclick="async () => await ViewModel.DecryptVaultFileAsync()">@Texts.DecryptToolStripMenuItemText</span>
+                        <span class="menu-item" @onclick='() => ViewModel.PrepareFileActionAsync("Reveal")'>@Texts.ShowInFolderText</span>
+                        <span class="menu-item" @onclick='() => ViewModel.PrepareFileActionAsync("RenameAnonymously")'>@Texts.AnonymousRenameMenuText</span>
+                        <span class="menu-item" @onclick='() => ViewModel.PrepareFileActionAsync("RenameOriginal")'>@Texts.RestoreAnonymousNamesMenuText</span>
                     </div>
                 }
                 else if (contextMenuType == "folder")
                 {
                     <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
-                        <span class="menu-item" @onclick="async e => await ViewModel.DecryptVaultfolder(e)">@Texts.DecryptToolStripMenuItemText</span>
-                        <span class="menu-item" @onclick='() => ViewModel.HandleFolderActionAsync("Reveal")'>@Texts.ShowInFolderText</span>
-                        <span class="menu-item" @onclick="() => ViewModel.CreateNewFolder = true">@Texts.CreateNewFolderText</span>
+                        <span class="menu-item" @onclick="async () => await ViewModel.DecryptVaultfolder()">@Texts.DecryptToolStripMenuItemText</span>
+                        <span class="menu-item" @onclick='() => ViewModel.FolderActionReveal()'>@Texts.ShowInFolderText</span>
+                        <span class="menu-item" @onclick="() => CreateNewFolder(ViewModel.SelectedFilePath)">@Texts.CreateNewFolderText</span>
                     </div>
                 }
                 else if (contextMenuType == "create")
                 {
                     <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
-                        <span class="menu-item" @onclick="() => { ViewModel.CreateNewFolder = true; ViewModel.SelectedFilePath = ViewModel.CurrentFolder; }">@Texts.CreateNewFolderText</span>
-                        <span class="menu-item" @onclick="async e => await ViewModel.AddVaultFolder(e)">@Texts.AddNewFolderText</span>
+                        <span class="menu-item" @onclick="() => CreateNewFolder(ViewModel.CurrentFolder)">@Texts.CreateNewFolderText</span>
+                        <span class="menu-item" @onclick="() => ViewModel.AddVaultFolder()">@Texts.AddNewFolderText</span>
                     </div>
                 }
             </div>
@@ -157,7 +169,7 @@
         }
         <div class="vlt-footer">
             <nav class="breadcrumb">
-                @foreach ((string name, string path)  in ViewModel.VaultBreadCrumb)
+                @foreach ((string name, string path) in ViewModel.VaultBreadCrumb)
                 {
                     <span class="breadcrumb-part" @onclick="() => Openfolder(path)">
                         @name
@@ -187,8 +199,8 @@
 </div>
 
 
-@if (!isListView && isfileselected)
-                    {
+@if (ViewModel.CreateNewFolder)
+{
     <div id="vault-settings-modalDialog" class="vault-body modalDialog">
         <div class="">
             <span class="vault-question">@Texts.VaultCreateNewFolderPrompt</span>
@@ -196,7 +208,7 @@
                 <input class="input1" type="text" id="text-box" name="" @bind-value="ViewModel.SelectedSubFolderPath">
             </div>
             <div style="text-align:center;margin:20px;">
-                <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => await ViewModel.CreateVaultFolder(ViewModel.SelectedFilePath)" />
+                <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => await ViewModel.CreateVaultFolder(ViewModel.ParentFolderPath)" />
                 <input type="button" class="input1 onbuttom-cancel" id="sbox" value="Cancel" name="" @onclick="() => ViewModel.CreateNewFolder = false" />
             </div>
         </div>
@@ -205,7 +217,6 @@
 
 @code {
     private bool isListView { get; set; } = true;
-    private bool isfileselected { get; set; } = false;
     private double contextMenuX { get; set; }
     private double contextMenuY { get; set; }
     private string flipContextMenu { get; set; } = "top left";
@@ -231,7 +242,7 @@
     private void SetView(bool listView)
     {
         isListView = listView;
-        isfileselected = false;
+        ViewModel.isfileselected = false;
         contextMenuType = "";
     }
 
@@ -274,7 +285,7 @@
         ViewModel.SelectedFilePath = filePath;
         ViewModel.IsFolder = Type == "folder" ? true : false;
         ViewModel.SelectedFileSize = fileSize;
-        isfileselected = true;
+        ViewModel.isfileselected = true;
         await HideContextMenu();
     }
 
@@ -349,6 +360,15 @@
 
         string filename = System.IO.Path.GetFileName(file.Filepath);
         await SelectFile(file.FileType, filename, file.Filepath, file.Size);
-        await ViewModel.HandleFileActionAsync("Open");
+        await ViewModel.PrepareFileActionAsync("Open");
+    }
+
+    private void CreateNewFolder(string folderPath)
+    {
+        if (string.IsNullOrEmpty(folderPath))
+            return;
+
+        ViewModel.CreateNewFolder = true;
+        ViewModel.ParentFolderPath = folderPath;
     }
 }

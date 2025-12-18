@@ -159,5 +159,22 @@ namespace AxCrypt.Core.UI
                 _progress.Display = value;
             }
         }
+
+        public event EventHandler? OnCancelled
+        {
+            add
+            {
+                _progress.OnCancelled += value;
+            }
+            remove
+            {
+                _progress.OnCancelled -= value;
+            }
+        }
+
+        public void RequestCancel()
+        {
+            _progress.RequestCancel();
+        }
     }
 }

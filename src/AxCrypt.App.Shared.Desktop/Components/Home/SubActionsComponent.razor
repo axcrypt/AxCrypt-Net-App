@@ -11,15 +11,13 @@
 <div class="mre-act-sec">
     @if (subActionModel!.EnableVault)
     {
-        <div style="display:block;">
+        <div id="help-vault" style="display:block;">
             <h3 class="fle-nme fnt-sze">@Texts.VaultText</h3>
-            <div style="display: flex;">
-                <div title="@Texts.VaultText">
-                    <button @onclick="ValidateVaultNavigation"
-                            class="assets-box">
-                        <img class="vlt-icon" style="width:32px;height:32px;" alt="Vault" />
-                    </button>
-                </div>
+            <div title="@Texts.VaultText">
+                <button @onclick="ValidateVaultNavigation"
+                        class="vlt-action-btn">
+                    <img class="vlt-icon" alt="Vault" />
+                </button>
             </div>
         </div>
     }

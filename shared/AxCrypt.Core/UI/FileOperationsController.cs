@@ -72,9 +72,10 @@ namespace AxCrypt.Core.UI
         /// Create a new instance, reporting progress
         /// </summary>
         /// <param name="progress">The instance of ProgressContext to report progress via</param>
-        public FileOperationsController(IProgressContext progress)
+        public FileOperationsController(IProgressContext progress, IDataContainer? dataContainer = null)
         {
             _eventArgs = new FileOperationEventArgs();
+            _eventArgs.SaveFileDataContainer = dataContainer;
             _progress = progress;
         }
 
@@ -331,7 +332,7 @@ namespace AxCrypt.Core.UI
                     return Task.FromResult(false);
                 }
 
-                IDataStore destinationFileInfo = MakeEncryptableFileName(sourceFileInfo);
+                IDataStore destinationFileInfo = CreateDestinationDataStore(sourceFileInfo);
                 _eventArgs.SaveFileFullName = destinationFileInfo.FullName;
                 _eventArgs.OpenFileFullName = sourceFileInfo.FullName;
                 if (destinationFileInfo.IsAvailable)
@@ -363,6 +364,18 @@ namespace AxCrypt.Core.UI
 
             return Task.FromResult(true);
         }
+
+        private IDataStore CreateDestinationDataStore(IDataStore sourceFileInfo)
+        {
+            if (_eventArgs.SaveFileDataContainer == null)
+            {
+                return MakeEncryptableFileName(sourceFileInfo);
+            }
+
+            string destinationFileName = Resolve.Portable.Path().Combine(_eventArgs.SaveFileDataContainer.FullName, AxCryptFile.MakeAxCryptFileName(sourceFileInfo.Name));
+            return New<IDataStore>(destinationFileName);
+        }
+
         private static IDataStore MakeEncryptableFileName(IDataStore sourceFileInfo)
         {
             IDataStore destinationStore = New<IDataStore>(AxCryptFile.MakeAxCryptFileName(sourceFileInfo));
@@ -767,7 +780,13 @@ namespace AxCrypt.Core.UI
             }
 
             e.CryptoId = properties.DecryptionParameter.CryptoId;
-            IDataStore destination = New<IDataStore>(Resolve.Portable.Path().Combine(Resolve.Portable.Path().GetDirectoryName(sourceFileInfo.FullName), properties.FileMetaData.FileName));
+            
+            string saveFileDirectoryPath = Resolve.Portable.Path().GetDirectoryName(sourceFileInfo.FullName);
+            if(e.SaveFileDataContainer != null)
+            {
+                saveFileDirectoryPath = e.SaveFileDataContainer.FullName ?? saveFileDirectoryPath;
+            }
+            IDataStore destination = New<IDataStore>(Resolve.Portable.Path().Combine(saveFileDirectoryPath, properties.FileMetaData.FileName));
             e.SaveFileFullName = destination.FullName;
             e.AxCryptFile = sourceFileInfo;
             return true;

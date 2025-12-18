@@ -140,49 +140,12 @@ function startHomeHelp() {
 function showCloudServicesHelp() {
     helpSlideIndex = 1;
     updateZIndexForSlide(helpSlideIndex);
-    const parent = document.getElementById("help-cloud-services");
-    if (!parent) return;
 
-    const boxes = parent.querySelectorAll(".assets-box");
-    if (boxes.length === 0) return;
-
-    addMask();
-
-    boxes.forEach(box => {
-        const rect = box.getBoundingClientRect();
-    });
-
-    const first = boxes[0].getBoundingClientRect();
-    const last = boxes[boxes.length - 1].getBoundingClientRect();
-
-    const combinedRect = {
-        top: first.top,
-        left: first.left,
-        bottom: last.bottom,
-        right: last.right
-    };
-
-    createTooltip(
-        combinedRect,
-        "Use <b>Cloud Services</b> to manage encrypted files on your installed cloud drives.",
-        10,
-        0
-    );
-
-    createArrow(
-        {
-            bottom: (combinedRect.top + combinedRect.bottom) / 2,
-            left: (combinedRect.left + combinedRect.right) / 2
-        },
-        10 + 15,
-        0 - 70,
-        "images/help-arrow4.svg"
-    );
-    createPaginationDots();
-    createButtons(
-        () => { clearHelp(); startTopMenuHelp(); },
-        () => clearHelp()
-    );
+    const items = [
+        { id: "help-vault", text: "A secure space for sensitive files — everything you add to the <b>Vault</b> is encrypted automatically." },
+        { id: "help-cloud-services", text: "Use <b>Cloud Services</b> to manage encrypted files on your installed cloud drives.", width: 150 }
+    ];
+    buildSlide(items, startTopMenuHelp);
 }
 
 function startTopMenuHelp() {
@@ -259,7 +222,7 @@ function showAboutMenuHelp() {
 function updateZIndexForSlide(slideIndex) {
     const slideMap = {
         0: ".act-box",
-        1: ".assets-box",
+        1: ".assets-box, .vlt-action-btn",
         2: ".dropdown, .sttng-icon, .mb-prfle",
         3: ".mre-actn-box",
         4: ".help-recent-files",
