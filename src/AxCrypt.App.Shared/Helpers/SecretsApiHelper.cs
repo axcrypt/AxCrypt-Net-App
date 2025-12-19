@@ -63,8 +63,6 @@ public static class SecretsApiHelper
         }
 
         await ShareSecretFacade.ShareSecret(shareSecret, New<AxCrypt.Core.UI.KnownIdentities>().DefaultEncryptionIdentity);
-        await NotificationLogger.PushAsync(shareSecret.Share.OwnerEmail, NotificationType.ShareSecret, "A secret has been shared with you!", shareSecret.Share.SharedWith.Select(ssw => ssw.UserEmail.Address).ToArray(), null);
-
         return true;
     }
 

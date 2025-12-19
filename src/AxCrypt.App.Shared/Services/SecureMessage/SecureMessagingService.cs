@@ -118,7 +118,6 @@ namespace AxCrypt.App.Shared.Services
                 New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).UpdateFreeUserSecuredMessengerLimit();
             }
 
-            await NotificationLogger.PushAsync(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address, NotificationType.SecuredMessageSent, Content.Texts.SentSecuredMessageNotificationText, viewModel.ReceiverList.Select(sem => sem.EmailAddress).ToArray(), null!);
             return true;
         }
 
