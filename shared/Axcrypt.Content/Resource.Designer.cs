@@ -2375,7 +2375,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can download or Update the AxCrypt app from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Play Store&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;App Store&lt;/a&gt;..
+        ///   Looks up a localized string similar to You can download or Update the AxCrypt app from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Play Store&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;App Store&lt;/a&gt;..
         /// </summary>
         public static string AxCKSGDBlock4SH2Text1 {
             get {
@@ -6260,7 +6260,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We realize how mobile phones have evolved into an essential part of our lives and how crucial it is to access data safely on the go from your mobile phone. Grab the opportunity and access your important encrypted files with the AxCrypt mobile app, no matter where you are. Available on both Android and iOS.&lt;a href =&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Download now for Android &lt;/a&gt; and &lt;a href =&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;Download now for ios &lt;/a&gt;.
+        ///   Looks up a localized string similar to We realize how mobile phones have evolved into an essential part of our lives and how crucial it is to access data safely on the go from your mobile phone. Grab the opportunity and access your important encrypted files with the AxCrypt mobile app, no matter where you are. Available on both Android and iOS.&lt;a href =&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Download now for Android &lt;/a&gt; and &lt;a href =&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;Download n [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Blog_ADSDE_H3_SH2_Text1 {
             get {
@@ -6836,7 +6836,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;li&gt;&lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;Download AxCrypt&apos;s mobile encryption iOS from here&lt;/a&gt;&lt;/li&gt;.
+        ///   Looks up a localized string similar to &lt;li&gt;&lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;Download AxCrypt&apos;s mobile encryption iOS from here&lt;/a&gt;&lt;/li&gt;.
         /// </summary>
         public static string Blog_AMEFH_H2_Text5 {
             get {
@@ -14198,7 +14198,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 1:&lt;/b&gt; Download and install AxCrypt from the &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;b&gt;Google Play Store&lt;/b&gt;&lt;/a&gt; or the &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;&lt;b&gt;App Store&lt;/b&gt;&lt;/a&gt;..
+        ///   Looks up a localized string similar to &lt;b&gt;STEP 1:&lt;/b&gt; Download and install AxCrypt from the &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;b&gt;Google Play Store&lt;/b&gt;&lt;/a&gt; or the &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;&lt;b&gt;App Store&lt;/b&gt;&lt;/a&gt;..
         /// </summary>
         public static string Blog_EODAGDFWBES_H2_SH1_Text2 {
             get {
@@ -14405,7 +14405,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 1:&lt;/b&gt; Download and install AxCrypt from the &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;b&gt;Google Play Store&lt;/b&gt;&lt;/a&gt; or the &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;&lt;b&gt;App Store&lt;/b&gt;&lt;/a&gt;..
+        ///   Looks up a localized string similar to &lt;b&gt;STEP 1:&lt;/b&gt; Download and install AxCrypt from the &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;b&gt;Google Play Store&lt;/b&gt;&lt;/a&gt; or the &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;&lt;b&gt;App Store&lt;/b&gt;&lt;/a&gt;..
         /// </summary>
         public static string Blog_EODAGDFWBES_H3_SH1_Text2 {
             get {
@@ -18833,7 +18833,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try a 14-days free trial on &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Android&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;iOS&lt;/a&gt;..
+        ///   Looks up a localized string similar to Try a 14-days free trial on &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Android&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;iOS&lt;/a&gt;..
         /// </summary>
         public static string Blog_HPDYMP_H3_Text2 {
             get {
@@ -21398,7 +21398,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;STEP 1:&lt;/strong&gt; Install AxCrypt from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;strong&gt;Google Play Store&lt;/strong&gt;&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;&lt;strong&gt;App Store&lt;/strong&gt;&lt;/a&gt; and sign into your account..
+        ///   Looks up a localized string similar to &lt;strong&gt;STEP 1:&lt;/strong&gt; Install AxCrypt from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;strong&gt;Google Play Store&lt;/strong&gt;&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;&lt;strong&gt;App Store&lt;/strong&gt;&lt;/a&gt; and sign into your account..
         /// </summary>
         public static string Blog_HTEDOYAAIPI2_H2_SH1_Text1 {
             get {
@@ -21758,7 +21758,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;STEP 1:&lt;/strong&gt; Install AxCrypt from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;strong&gt;Google Play Store&lt;/strong&gt;&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;&lt;strong&gt;App Store&lt;/strong&gt;&lt;/a&gt; and sign in or sign up..
+        ///   Looks up a localized string similar to &lt;strong&gt;STEP 1:&lt;/strong&gt; Install AxCrypt from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;strong&gt;Google Play Store&lt;/strong&gt;&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;&lt;strong&gt;App Store&lt;/strong&gt;&lt;/a&gt; and sign in or sign up..
         /// </summary>
         public static string Blog_HTEFIGDSBSI2_H2_SH2_Text2 {
             get {
@@ -22820,7 +22820,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 1:&lt;/b&gt; Install AxCrypt from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;b&gt;Google PlayStore&lt;/b&gt;&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;&lt;b&gt;App Store&lt;/b&gt;&lt;/a&gt; and sign into your account..
+        ///   Looks up a localized string similar to &lt;b&gt;STEP 1:&lt;/b&gt; Install AxCrypt from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;b&gt;Google PlayStore&lt;/b&gt;&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;&lt;b&gt;App Store&lt;/b&gt;&lt;/a&gt; and sign into your account..
         /// </summary>
         public static string Blog_HTSPWESBSI2_H3_SH2_Text3 {
             get {
@@ -25097,7 +25097,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;div  style=&apos;margin:0 auto auto;    text-align: center;&apos;&gt;&lt;a href= &apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt; &lt;img width=&apos;230px&apos; height=&apos;71px&apos; src=&apos;https://axcrypt-download.s3.eu-north-1.amazonaws.com/images/newsletter_2022-01-18_3.png&apos; alt=&apos;google play badge&apos;/&gt;&lt;/a&gt; &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;&lt;img width=&apos;230px&apos; height=&apos;71px&apos; src=&apos;https://axcrypt-download.s3.eu-north-1.amazonaws.com/images/newsletter_2022-01-18_2.png&apos; alt=&apos;app store badge&apos;/&gt;&lt;/a&gt;&lt;/d [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &lt;div  style=&apos;margin:0 auto auto;    text-align: center;&apos;&gt;&lt;a href= &apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt; &lt;img width=&apos;230px&apos; height=&apos;71px&apos; src=&apos;https://axcrypt-download.s3.eu-north-1.amazonaws.com/images/newsletter_2022-01-18_3.png&apos; alt=&apos;google play badge&apos;/&gt;&lt;/a&gt; &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;&lt;img width=&apos;230px&apos; height=&apos;71px&apos; src=&apos;https://axcrypt-download.s3.eu-north-1.amazonaws.com/images/newsletter_2022-01-18_2.png&apos; alt=&apos;app s [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Blog_MDSCBF_H2_Text3 {
             get {
@@ -25430,7 +25430,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;div  style=&apos;margin:0 auto auto;     text-align: center;&apos;&gt;&lt;a href= &apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt; &lt;img width=&apos;230px&apos; height=&apos;71px&apos; src=&apos;https://axcrypt-download.s3.eu-north-1.amazonaws.com/images/newsletter_2022-01-18_3.png&apos; alt=&apos;google play badge&apos;/&gt;&lt;/a&gt; &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;&lt;img width=&apos;230px&apos; height=&apos;71px&apos; src=&apos;https://axcrypt-download.s3.eu-north-1.amazonaws.com/images/newsletter_2022-01-18_2.png&apos; alt=&apos;app store badge&apos;/&gt;&lt;/a&gt;&lt;/ [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &lt;div  style=&apos;margin:0 auto auto;     text-align: center;&apos;&gt;&lt;a href= &apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt; &lt;img width=&apos;230px&apos; height=&apos;71px&apos; src=&apos;https://axcrypt-download.s3.eu-north-1.amazonaws.com/images/newsletter_2022-01-18_3.png&apos; alt=&apos;google play badge&apos;/&gt;&lt;/a&gt; &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;&lt;img width=&apos;230px&apos; height=&apos;71px&apos; src=&apos;https://axcrypt-download.s3.eu-north-1.amazonaws.com/images/newsletter_2022-01-18_2.png&apos; alt=&apos;app  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Blog_MEWRECY_H2_SH4_Text3 {
             get {
@@ -27861,7 +27861,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We&apos;re always working to make our software more user-friendly. We have updated the UI available on Windows, Mac, iOS, and Android, and enhanced our Mobile App to make it easier for users to access encrypted data from anywhere at any time.&lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Download now for Android &lt;/a&gt; and &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;Download now for iOS &lt;/a&gt;&lt;br/&gt;&lt;br/&gt;.
+        ///   Looks up a localized string similar to We&apos;re always working to make our software more user-friendly. We have updated the UI available on Windows, Mac, iOS, and Android, and enhanced our Mobile App to make it easier for users to access encrypted data from anywhere at any time.&lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Download now for Android &lt;/a&gt; and &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;Download now for iOS &lt;/a&gt;&lt;br/&gt;&lt;br/&gt;.
         /// </summary>
         public static string Blog_TAYBS_H1_SH3_Text1 {
             get {
@@ -32820,7 +32820,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;Mobile Encryption&lt;/strong&gt; - With the AxCrypt mobile encryption you can secure your data on Google Drive Files and Dropbox with just one click on your iOS and Android devices. Try a 14-days free trial: Download for &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Android&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;iOS&lt;/a&gt;.
+        ///   Looks up a localized string similar to &lt;strong&gt;Mobile Encryption&lt;/strong&gt; - With the AxCrypt mobile encryption you can secure your data on Google Drive Files and Dropbox with just one click on your iOS and Android devices. Try a 14-days free trial: Download for &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&apos;&gt;Android&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;iOS&lt;/a&gt;.
         /// </summary>
         public static string Blog_WENTI_H4_Text4 {
             get {
@@ -36933,7 +36933,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 1:&lt;/b&gt; Install AxCrypt from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;b&gt;Google PlayStore&lt;/b&gt;&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt/id1157695909&apos;&gt;&lt;b&gt;App Store&lt;/b&gt;&lt;/a&gt; and sign into your account..
+        ///   Looks up a localized string similar to &lt;b&gt;STEP 1:&lt;/b&gt; Install AxCrypt from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;b&gt;Google PlayStore&lt;/b&gt;&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;&lt;b&gt;App Store&lt;/b&gt;&lt;/a&gt; and sign into your account..
         /// </summary>
         public static string Blog_ZKEEIST_H3_SH2_Text2 {
             get {

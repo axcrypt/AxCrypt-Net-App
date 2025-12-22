@@ -32,7 +32,7 @@ public class SuggestionViewModel
 
     public void DownloadiOsApp()
     {
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://apps.apple.com/us/app/axcrypt/id1157695909"));
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422"));
     }
 
     public void LearnMore()
