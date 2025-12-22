@@ -210,17 +210,25 @@
 }
 
 .vlt-action-btn {
-    width: 50px; 
-    height: 50px; 
-    background-color: black; 
-    padding: 3px; 
+    width: 50px;
+    height: 50px;
+    background-color: $ActnBgClr;
+    padding: 3px;
     margin-top: 15px;
+
+    :hover {
+        background-color: $ActnBgClr;
+    }
 }
 
 .vlt-icon {
     content: $ImgVltIcon;
-    width: 45px;
-    height: 45px;
+    min-width: 45px;
+    min-height: 45px;
+
+    :hover {
+        background-color: $ActnBgClr;
+    }
 }
 
 .mre-actn-box {
@@ -1132,7 +1140,22 @@
     }
 
     .mre-actn-box {
-        width: 178px;
+        width: 100px;
+        height: 75px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .ico-eye-sml {
+        width: 35px;
+    }
+
+    .ico-dlt {
+        width: 27px;
+    }
+
+    .ico-apikey {
+        width: 35px;
     }
 
     #mySection {

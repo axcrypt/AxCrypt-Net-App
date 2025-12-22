@@ -205,15 +205,21 @@
 .vlt-action-btn {
   width: 50px;
   height: 50px;
-  background-color: black;
+  background-color: #86B96E;
   padding: 3px;
   margin-top: 15px;
+}
+.vlt-action-btn :hover {
+  background-color: #86B96E;
 }
 
 .vlt-icon {
   content: url(/images/free/IcoVlt.svg);
-  width: 45px;
-  height: 45px;
+  min-width: 45px;
+  min-height: 45px;
+}
+.vlt-icon :hover {
+  background-color: #86B96E;
 }
 
 .mre-actn-box {
@@ -1036,7 +1042,19 @@
     padding: 10px 5px;
   }
   .mre-actn-box {
-    width: 178px;
+    width: 100px;
+    height: 75px;
+    flex-direction: column;
+    text-align: center;
+  }
+  .ico-eye-sml {
+    width: 35px;
+  }
+  .ico-dlt {
+    width: 27px;
+  }
+  .ico-apikey {
+    width: 35px;
   }
   #mySection {
     gap: 0px !important;
