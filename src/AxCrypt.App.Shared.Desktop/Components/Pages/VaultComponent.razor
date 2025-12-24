@@ -1,4 +1,5 @@
-﻿@using AxCrypt.App.Shared.Services
+﻿@using AxCrypt.App.Shared.Desktop.ViewModels.Main
+@using AxCrypt.App.Shared.Services
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Common
 @using AxCrypt.Content
@@ -9,15 +10,23 @@
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 @inject FileDropService FileDropService
+@inject AppSettingsViewModel AppSettingsViewModel
 
 <div class="vlt-header">
     <a href="/" class="vault-back-link"><img class="Ico-LeftArrow" />@Texts.BackToHomeText</a>
 </div>
 
 <div class="vlt-body" @onclick="async () => await HideContextMenu()">
-    <div class="page-title" style="margin-bottom:0;">
-        <h1>Vault</h1>
+    <div class="vlt-title-action">
+        <div class="page-title" style="margin-bottom:0;">
+            <h1>Vault</h1>
+        </div>
+        <button style="cursor:pointer" @onclick="(e) => AppSettingsViewModel.ToggleVaultSettings()">
+            <img class="" src="/images/vltsett.svg" alt="vault_settings_icon">
+            <span class="font-medium grey-clr">@Texts.VaultSettingsTitle</span>
+        </button>
     </div>
+
     <div class="vlt-search-add">
         <div class="vlt-search">
             <input id="searchKeyword"
@@ -101,7 +110,7 @@
 
                     @if (!isListView && ViewModel.isfileselected)
                     {
-                        <div class="detail-section">
+                        <div class="detail-section" @oncontextmenu:stopPropagation>
                             @if (ViewModel.IsFolder)
                             {
                                 <img alt="Preview" class="detail-image Icon-folder" />
