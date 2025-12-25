@@ -49,7 +49,7 @@ public class AppMain
     {
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => await _knownFoldersViewModel.UpdateState.ExecuteAsync(null));
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await new Display().LocalSignInWarningPopUpAsync(loggedOn); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await New<IUIThread>().SendToAsync(async () => await new Display().LocalSignInWarningPopUpAsync(loggedOn)); });
         _mainViewModel.BindPropertyChanged(nameof(MainViewModel.VaultChangeDetected), async (bool changed) =>
         {
             if (changed)

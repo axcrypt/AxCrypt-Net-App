@@ -36,19 +36,15 @@ namespace AxCrypt.Core.Session
 {
     public class VaultSettings
     {
-
-        private VaultFolder _vaultFolder { get; set; }
-
-        public void InitializeVaultSettings()
+        public async Task InitializeVaultSettings()
         {
             string vaultFolderpath = New<UserSettings>().VaultEncryptDataPath;
-
             if (string.IsNullOrEmpty(vaultFolderpath) || !New<IDataContainer>(vaultFolderpath).IsAvailable)
             {
                 return;
             }
 
-            CreateVaultWatchedFolderAsync(new VaultFolder(vaultFolderpath));
+            await CreateVaultWatchedFolderAsync(new VaultFolder(vaultFolderpath));
         }
 
         public async Task CreateVaultWatchedFolderAsync(VaultFolder vaultFolder)
@@ -64,7 +60,6 @@ namespace AxCrypt.Core.Session
             }
 
             vaultFolder.Changed += vaultWatchedFolder_Changed;
-            _vaultFolder = vaultFolder;
 
             await AddVaultWatchedFolderAsync(vaultFolder.Path);
         }

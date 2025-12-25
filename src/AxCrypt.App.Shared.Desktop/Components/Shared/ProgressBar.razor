@@ -24,14 +24,14 @@
     }
     else
     {
-        <div class="progres-sec" style="pointer-events:auto;" @oncontextmenu="async (e) => await ShowContextMenu(e)" @onclick="() => IsContextMenuVisible = false">
-            <div class="fist-rw">
+        <div class="progres-sec" style="pointer-events:auto;" @oncontextmenu="async (e) => await ShowContextMenu(e)">
+            <div class="fist-rw" @onclick="()=> IsContextMenuVisible= false">
                 <div class=""><label class="progres-fle-txt" title="@ProgressBarService.Filename">@ProgressBarService.Filename</label></div>
                 <div>
                     <label style="margin-right: 0 !important;">@ProgressBarService.Percentage%</label>
                 </div>
             </div>
-            <div class="progress-container">
+            <div class="progress-container" @onclick="()=> IsContextMenuVisible= false">
                 <div class="progress-bubble-start" style="left:@ProgressBarService.Percentage%;"></div>
                 <div class="progress-bar" style="width:@ProgressBarService.Percentage%"></div>
                 <div class="progress-bubble-end"></div>
@@ -109,7 +109,7 @@
 
     private async Task UpdateIndicatorVisibility(bool isVisible)
     {
-        IsContextMenuVisible = false;
+        IsContextMenuVisible = IsContextMenuVisible && isVisible;
 
         IsVisible = isVisible;
         await UpdateUIState();

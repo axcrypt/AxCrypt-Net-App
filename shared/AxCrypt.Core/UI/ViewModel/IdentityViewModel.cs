@@ -230,6 +230,11 @@ namespace AxCrypt.Core.UI.ViewModel
                 return;
             }
 
+            if (userAccount.AccountSource == AccountSource.Local)
+            {
+                return;
+            }
+
             logOnIdentity.UserGroupKeyPairs = await New<LogOnIdentity, IAccountService>(logOnIdentity).ListMembershipGroupsAsync();
         }
 

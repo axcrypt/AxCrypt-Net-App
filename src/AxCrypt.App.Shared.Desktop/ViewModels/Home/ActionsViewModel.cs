@@ -36,14 +36,23 @@ public class ActionsViewModel : ViewModelBase
     public void Initialized()
     {
         LogOnViewModel.BindPropertyChanged(nameof(LogOnViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
-
-        _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.EncryptFileEnabled), (bool enabled) => { EncryptButtonEnabled = enabled; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { IsFilesPending = areFilesPending; UpdateViewState(); });
     }
 
     public bool IsFilesPending { get; set; }
 
-    public bool EncryptButtonEnabled { get; set; }
+    public bool EncryptButtonEnabled
+    {
+        get
+        {
+            if (LogOnViewModel.License.Has(LicenseCapability.EncryptNewFiles))
+            {
+                return true;
+            }
+            
+            return _mainViewModel?.EncryptFileEnabled ?? false;          
+        }    
+    }
 
     public bool KeyShareButtonEnabled { get; set; }
 
