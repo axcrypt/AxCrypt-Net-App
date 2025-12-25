@@ -178,9 +178,9 @@
         }
         <div class="vlt-footer">
             <nav class="breadcrumb">
-                @foreach ((string name, string path) in ViewModel.VaultBreadCrumb)
+                @foreach ((string name, string path) in ViewModel.VaultBreadCrumb.TakeLast(4))
                 {
-                    <span class="breadcrumb-part" @onclick="() => Openfolder(path)">
+                    <span class="breadcrumb-part" title="@name" @onclick="() => Openfolder(path)">
                         @name
                     </span>
 
