@@ -212,13 +212,13 @@
 {
     <div id="vault-settings-modalDialog" class="vault-body modalDialog">
         <div class="">
-            <span class="vault-question">@Texts.VaultCreateNewFolderPrompt</span>
+            <span class="vault-question">Folder name</span>
             <div class="vault-store-location-sec">
-                <input class="input1" type="text" id="text-box" name="" @bind-value="ViewModel.SelectedSubFolderPath">
+                <input class="input1" type="text" id="text-box" maxlength="50" name="" @bind-value="ViewModel.SelectedSubFolderPath">
             </div>
             <div style="text-align:center;margin:20px;">
                 <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => await ViewModel.CreateVaultFolder(ViewModel.ParentFolderPath)" />
-                <input type="button" class="input1 onbuttom-cancel" id="sbox" value="Cancel" name="" @onclick="() => ViewModel.CreateNewFolder = false" />
+                <input type="button" class="input1 onbuttom-cancel" id="sbox" value="Cancel" name="" @onclick="() => CloseCreateNewFolderPopUp()" />
             </div>
         </div>
     </div>
@@ -379,5 +379,11 @@
 
         ViewModel.CreateNewFolder = true;
         ViewModel.ParentFolderPath = folderPath;
+    }
+
+    private void CloseCreateNewFolderPopUp()
+    {
+        ViewModel.CreateNewFolder = false;
+        ViewModel.SelectedSubFolderPath = "";
     }
 }
