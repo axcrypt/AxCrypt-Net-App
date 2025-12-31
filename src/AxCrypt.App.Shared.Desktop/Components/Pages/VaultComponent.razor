@@ -178,9 +178,17 @@
         }
         <div class="vlt-footer">
             <nav class="breadcrumb">
+                @if (ViewModel.VaultBreadCrumb.Count > 4)
+                {
+                    <span class="breadcrumb-part">
+                        .../
+                    </span>
+                    <span class="separator"><img class="icon-next-arrow" /><img class="icon-dltfold" /> </span>
+                }
+
                 @foreach ((string name, string path) in ViewModel.VaultBreadCrumb.TakeLast(4))
                 {
-                    <span class="breadcrumb-part" title="@name" @onclick="() => Openfolder(path)">
+                    <span class="breadcrumb-part" title="@path" @onclick="() => Openfolder(path)">
                         @name
                     </span>
 
