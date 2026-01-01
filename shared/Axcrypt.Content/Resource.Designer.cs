@@ -11309,7 +11309,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moreover, AxCrypt provides features like password management, password generator which generates passwords and ensures the passwords are as secure as possible, file wipe, etc.&lt;a href=&apos;https://axcrypt.net/information/features&apos;&gt; Read more about the AxCrypt features here&lt;/a&gt;.
+        ///   Looks up a localized string similar to Moreover, AxCrypt provides features like password management, password generator which generates passwords and ensures the passwords are as secure as possible, file wipe, etc.&lt;a href=&apos;/information/features/&apos;&gt; Read more about the AxCrypt features here&lt;/a&gt;.
         /// </summary>
         public static string Blog_DEVFE_H3_Text5 {
             get {
@@ -11489,7 +11489,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;STEP 1:&lt;/strong&gt; Install AxCrypt and sign in or sign up with your account: &lt;a href=&apos;https://axcrypt.net/download/&apos;&gt; https://axcrypt.net/download &lt;/a&gt; .
+        ///   Looks up a localized string similar to &lt;strong&gt;STEP 1:&lt;/strong&gt; Install AxCrypt and sign in or sign up with your account: &lt;a href=&apos;https://axcrypt.net/download/&apos;&gt; https://axcrypt.net/download/ &lt;/a&gt; .
         /// </summary>
         public static string Blog_DLHRYSDTT_H2_SH2_Text1 {
             get {
@@ -13235,7 +13235,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to And don’t forget - if in need of inspiration you can use our &lt;a href=&apos;/information/password-generator&apos; style=&apos;font-weight: 800;&apos;&gt;AxCrypt Password Generator&lt;/a&gt;. Based on statistical analysis of actual text, it produces strong passwords that are not nonsensical and actually possible to remember and type. You’ll get three suggestions of decreasing strength and complexity..
+        ///   Looks up a localized string similar to And don’t forget - if in need of inspiration you can use our &lt;a href=&apos;/information/password-generator/&apos; style=&apos;font-weight: 800;&apos;&gt;AxCrypt Password Generator&lt;/a&gt;. Based on statistical analysis of actual text, it produces strong passwords that are not nonsensical and actually possible to remember and type. You’ll get three suggestions of decreasing strength and complexity..
         /// </summary>
         public static string Blog_EIBM_H2_SH2_Text2 {
             get {
@@ -19040,7 +19040,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Using strong passwords is one way to protect your information online, so avoid using the same, easy-to-crack passwords, no matter how much you love your pet. Adopt symbols, numbers and different figures so no one can guess it by knowing personal information about you. You can also use the &lt;a href=&apos;/information/password-generator&apos; style=&apos;font-weight: 800;&apos;&gt;AxCrypt Password Generator&lt;/a&gt; that produces strong passwords that are not nonsensical and actually possible to remember and type. You&apos;ll get three sugges [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Using strong passwords is one way to protect your information online, so avoid using the same, easy-to-crack passwords, no matter how much you love your pet. Adopt symbols, numbers and different figures so no one can guess it by knowing personal information about you. You can also use the &lt;a href=&apos;/information/password-generator/&apos; style=&apos;font-weight: 800;&apos;&gt;AxCrypt Password Generator&lt;/a&gt; that produces strong passwords that are not nonsensical and actually possible to remember and type. You&apos;ll get three sugge [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Blog_HPYBFC_H5_SH1_Text1 {
             get {
@@ -38122,6 +38122,24 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Business makes sharing sensitive text information fast and secure by converting it into a secure unreadable format. Users can encrypt confidential plain text in seconds and distribute it via clipboard, .txt file, or send via email..
+        /// </summary>
+        public static string BusinessProductKeyParagraph12 {
+            get {
+                return ResourceManager.GetString("BusinessProductKeyParagraph12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Vault provides organizations with a secure, encrypted folder that is instantly and automatically encrypted, ensuring consistent data protection without manual effort..
+        /// </summary>
+        public static string BusinessProductKeyParagraph13 {
+            get {
+                return ResourceManager.GetString("BusinessProductKeyParagraph13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Efficiently organize users into groups and manage their access with centralized key management. This ensures consistent permissions across the organization, allowing administrators to manage and secure group access to critical data..
         /// </summary>
         public static string BusinessProductKeyParagraph2 {
@@ -39935,6 +39953,627 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do I need an AxCrypt account to use the Command Line Interface?.
+        /// </summary>
+        public static string CommandLineFaq1 {
+            get {
+                return ResourceManager.GetString("CommandLineFaq1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No. The AxCrypt CLI works &lt;strong&gt;completely offline&lt;/strong&gt; and does &lt;strong&gt;not require an account or sign-in.&lt;/strong&gt; You only need to provide a passphrase to encrypt or decrypt files..
+        /// </summary>
+        public static string CommandLineFaq1Ans {
+            get {
+                return ResourceManager.GetString("CommandLineFaq1Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What type of encryption does the CLI use?.
+        /// </summary>
+        public static string CommandLineFaq2 {
+            get {
+                return ResourceManager.GetString("CommandLineFaq2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The AxCrypt CLI uses &lt;strong&gt;128-bit AES encryption&lt;/strong&gt;, which is secure and widely trusted for protecting sensitive files..
+        /// </summary>
+        public static string CommandLineFaq2Ans {
+            get {
+                return ResourceManager.GetString("CommandLineFaq2Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can I encrypt multiple files at once?.
+        /// </summary>
+        public static string CommandLineFaq3 {
+            get {
+                return ResourceManager.GetString("CommandLineFaq3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes. You can list multiple files in a single command..
+        /// </summary>
+        public static string CommandLineFaq3Ans {
+            get {
+                return ResourceManager.GetString("CommandLineFaq3Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What file formats does AxCrypt CLI support?.
+        /// </summary>
+        public static string CommandLineFaq4 {
+            get {
+                return ResourceManager.GetString("CommandLineFaq4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt CLI works with &lt;strong&gt;any file type&lt;/strong&gt; like documents, images, videos, zip files, etc..
+        /// </summary>
+        public static string CommandLineFaq4Ans {
+            get {
+                return ResourceManager.GetString("CommandLineFaq4Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How do I share the password of files?.
+        /// </summary>
+        public static string CommandLineFaq5 {
+            get {
+                return ResourceManager.GetString("CommandLineFaq5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users need to securely share the passwords manually with receivers of Encrypted files..
+        /// </summary>
+        public static string CommandLineFaq5Ans {
+            get {
+                return ResourceManager.GetString("CommandLineFaq5Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can AxCrypt CLI need Internet connection?.
+        /// </summary>
+        public static string CommandLineFaq6 {
+            get {
+                return ResourceManager.GetString("CommandLineFaq6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt CLI can be used in offline mode - users do not need to be online to encrypt or decrypt..
+        /// </summary>
+        public static string CommandLineFaq6Ans {
+            get {
+                return ResourceManager.GetString("CommandLineFaq6Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The AxCrypt Command Line Interface (CLI) is a free, open-source tool that allows you to encrypt and decrypt files directly from your terminal or command prompt..
+        /// </summary>
+        public static string CommandLineGuideHeadParagraph {
+            get {
+                return ResourceManager.GetString("CommandLineGuideHeadParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;Command Syntax&lt;/span&gt; Overview.
+        /// </summary>
+        public static string CommandLineGuideStepHead1 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting the &lt;span&gt;Password&lt;/span&gt;.
+        /// </summary>
+        public static string CommandLineGuideStepHead2 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;Encrypting&lt;/span&gt; Files.
+        /// </summary>
+        public static string CommandLineGuideStepHead3 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;Decrypting&lt;/span&gt; Files.
+        /// </summary>
+        public static string CommandLineGuideStepHead4 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepHead4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How the &lt;span&gt;Command Line&lt;/span&gt; Works.
+        /// </summary>
+        public static string CommandLineGuideStepHead5 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepHead5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;AxCryptCli&lt;/strong&gt; → The program name that performs file encryption or decryption.
+        /// </summary>
+        public static string CommandLineGuideStepText1 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must use the &lt;strong&gt;same passphrase&lt;/strong&gt; that was used during encryption..
+        /// </summary>
+        public static string CommandLineGuideStepText10 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command Line Interface (CLI) ideal for:.
+        /// </summary>
+        public static string CommandLineGuideStepText11 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick one-off encryption and decryption.
+        /// </summary>
+        public static string CommandLineGuideStepText12 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automating routine file-protection tasks using scripts.
+        /// </summary>
+        public static string CommandLineGuideStepText13 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Environments where GUI tools are not available.
+        /// </summary>
+        public static string CommandLineGuideStepText14 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The AxCrypt CLI &lt;strong&gt;does not require an account or sign-in.&lt;/strong&gt; You only need to supply a password to perform secure &lt;strong&gt;128-bit AES encryption&lt;/strong&gt; or decryption..
+        /// </summary>
+        public static string CommandLineGuideStepText15 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently, the CLI supports &lt;strong&gt;two core operations:&lt;/strong&gt;.
+        /// </summary>
+        public static string CommandLineGuideStepText16 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can encrypt or decrypt &lt;strong&gt;multiple files in one command&lt;/strong&gt; by listing them all after the command..
+        /// </summary>
+        public static string CommandLineGuideStepText17 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ideal for scripts (PowerShell, Bash, batch files) for automated protection workflows..
+        /// </summary>
+        public static string CommandLineGuideStepText18 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not need to register or create an AxCrypt account to be able to use Axcrypt CLI..
+        /// </summary>
+        public static string CommandLineGuideStepText19 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;--[command]&lt;/strong&gt; → The operation to be performed (e.g., &lt;label class=&apos;encrypt-decrypt-cli&apos;&gt;&lt;/label&gt;).
+        /// </summary>
+        public static string CommandLineGuideStepText2 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A &lt;strong&gt;command line&lt;/strong&gt; is a text-based interface that allows you to interact with your computer by typing commands instead of clicking buttons. A password is required for both encryption and decryption.&lt;/br&gt;&lt;/br&gt; It’s commonly used by developers, system administrators, and power users because it’s fast, precise, and ideal for automation..
+        /// </summary>
+        public static string CommandLineGuideStepText20 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1. You type a command.
+        /// </summary>
+        public static string CommandLineGuideStepText21 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A command is a line of text that tells the computer &lt;strong&gt;what action you want it to perform.&lt;/strong&gt;.
+        /// </summary>
+        public static string CommandLineGuideStepText22 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Example:.
+        /// </summary>
+        public static string CommandLineGuideStepText23 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2. The command line reads and interprets what you typed.
+        /// </summary>
+        public static string CommandLineGuideStepText24 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The command line (Command Prompt, PowerShell, or Terminal) breaks your input into:.
+        /// </summary>
+        public static string CommandLineGuideStepText25 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Program name&lt;/strong&gt; (the tool you want to run).
+        /// </summary>
+        public static string CommandLineGuideStepText26 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Commands or switches&lt;/strong&gt; (what you want that tool to do).
+        /// </summary>
+        public static string CommandLineGuideStepText27 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Arguments&lt;/strong&gt; (additional information like file paths).
+        /// </summary>
+        public static string CommandLineGuideStepText28 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Example breakdown:.
+        /// </summary>
+        public static string CommandLineGuideStepText29 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;[args]&lt;/strong&gt; → Inputs required by the command, such as file paths.
+        /// </summary>
+        public static string CommandLineGuideStepText3 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3. The program executes your instruction.
+        /// </summary>
+        public static string CommandLineGuideStepText30 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Once interpreted, the command is passed to the program (in this case, AxCryptCli).&lt;/br&gt; The program then performs the action — such as encrypting, decrypting, copying, moving, or creating files.
+        /// </summary>
+        public static string CommandLineGuideStepText31 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For AxCrypt CLI, that action is usually:.
+        /// </summary>
+        public static string CommandLineGuideStepText32 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypting a file.
+        /// </summary>
+        public static string CommandLineGuideStepText33 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrypting a file.
+        /// </summary>
+        public static string CommandLineGuideStepText34 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText34", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4. The program returns output.
+        /// </summary>
+        public static string CommandLineGuideStepText35 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to After processing the command, the program usually displays the result in the terminal..
+        /// </summary>
+        public static string CommandLineGuideStepText36 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText36", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to “File encrypted successfully”.
+        /// </summary>
+        public static string CommandLineGuideStepText37 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText37", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to “Incorrect passphrase”.
+        /// </summary>
+        public static string CommandLineGuideStepText38 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText38", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to “File not found”.
+        /// </summary>
+        public static string CommandLineGuideStepText39 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText39", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Syntax&lt;/strong&gt;.
+        /// </summary>
+        public static string CommandLineGuideStepText4 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No message at all (if it executed silently).
+        /// </summary>
+        public static string CommandLineGuideStepText40 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some command-line tools also create new files (like AxCrypt creating .axx encrypted files)..
+        /// </summary>
+        public static string CommandLineGuideStepText41 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText41", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5. You can chain commands or automate them.
+        /// </summary>
+        public static string CommandLineGuideStepText42 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText42", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command line tools can be placed inside:.
+        /// </summary>
+        public static string CommandLineGuideStepText43 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText43", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Batch files (.bat).
+        /// </summary>
+        public static string CommandLineGuideStepText44 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText44", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PowerShell scripts (.ps1).
+        /// </summary>
+        public static string CommandLineGuideStepText45 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText45", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bash scripts (.sh).
+        /// </summary>
+        public static string CommandLineGuideStepText46 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText46", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cron jobs / scheduled tasks.
+        /// </summary>
+        public static string CommandLineGuideStepText47 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText47", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This makes repetitive tasks automatic and efficient.&lt;/br&gt; Example of automating encryption daily:.
+        /// </summary>
+        public static string CommandLineGuideStepText48 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText48", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Where:&lt;/b&gt;.
+        /// </summary>
+        public static string CommandLineGuideStepText49 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText49", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Full Command Example&lt;/strong&gt;.
+        /// </summary>
+        public static string CommandLineGuideStepText5 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Before running any encryption or decryption operation, you must provide &lt;strong&gt;a passphrase.&lt;/strong&gt;.
+        /// </summary>
+        public static string CommandLineGuideStepText50 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This sets the password for the operations that follow..
+        /// </summary>
+        public static string CommandLineGuideStepText6 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To encrypt one or more files, use &lt;label class=&apos;encrypt-cli&apos;&gt;&lt;/label&gt; the &lt;strong&gt;command.&lt;/strong&gt;.
+        /// </summary>
+        public static string CommandLineGuideStepText7 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Each file must be referenced using its &lt;strong&gt;full file path.&lt;/strong&gt;&lt;br/&gt;&lt;br/&gt;After encryption, the output file will have the &lt;label class=&apos;axx-extention&apos;&gt;&lt;/label&gt; extension..
+        /// </summary>
+        public static string CommandLineGuideStepText8 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To decrypt encrypted &lt;label class=&apos;axx-extention&apos;&gt;&lt;/label&gt; files, use the &lt;label class=&apos;decrypt-cli&apos;&gt;&lt;/label&gt; command..
+        /// </summary>
+        public static string CommandLineGuideStepText9 {
+            get {
+                return ResourceManager.GetString("CommandLineGuideStepText9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command Line Interface (CLI).
+        /// </summary>
+        public static string CommandLineInterFaceLinkLable {
+            get {
+                return ResourceManager.GetString("CommandLineInterFaceLinkLable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Address:.
         /// </summary>
         public static string CompanyAddressLabel {
@@ -40232,6 +40871,15 @@ namespace AxCrypt.Content {
         public static string CreateBusinessWithOtherPaymentMethodsSuccess {
             get {
                 return ResourceManager.GetString("CreateBusinessWithOtherPaymentMethodsSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The folder already exists. Would you like to keep the contents in a new folder with a timestamp added to its name?.
+        /// </summary>
+        public static string CreateFolderWhenAlreadyExistsConfirmText {
+            get {
+                return ResourceManager.GetString("CreateFolderWhenAlreadyExistsConfirmText", resourceCulture);
             }
         }
         
@@ -42164,7 +42812,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt for and start your incredible journey to the encryption world..
+        ///   Looks up a localized string similar to Download AxCrypt for &lt;b&gt;desktop&lt;/b&gt; or &lt;b&gt;mobile&lt;/b&gt; and start your incredible journey to the encryption world..
         /// </summary>
         public static string DownloadAxcryptDescription {
             get {
@@ -43100,7 +43748,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;Use the &apos;Secure&apos; Button&lt;/br&gt;&lt;/br&gt; File:&lt;/strong&gt; Click on &lt;strong&gt;Secure&lt;/strong&gt; action button, and select the file(s) you want to encrypt..
+        ///   Looks up a localized string similar to Click the &lt;strong&gt;Secure button.&lt;/strong&gt;.
         /// </summary>
         public static string EncryptDecryptGuideCarouselText2 {
             get {
@@ -43109,7 +43757,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;Drag and Drop&lt;/br&gt;&lt;/br&gt; File:&lt;/strong&gt; Just drag and drop your file(s) into the AxCrypt Home | Recent Files section.&lt;br/&gt; &lt;strong&gt;Folder:&lt;/strong&gt; Go to the ‘Secured Folders’ menu and drag and drop a folder. Alternatively, you can also click on ‘Add or Drag Folder’ to select the folder you want to encrypt files within..
+        ///   Looks up a localized string similar to Select the file(s) you want to encrypt..
         /// </summary>
         public static string EncryptDecryptGuideCarouselText3 {
             get {
@@ -43118,7 +43766,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;Right-Click Context Menu (Windows)&lt;/br&gt;&lt;/br&gt; File:&lt;/strong&gt; Right-click on any file on file explorer, then choose &lt;strong&gt;AxCrypt → ‘Encrypt’.&lt;br/&gt;Folder:&lt;/strong&gt; Right-click on any folder of which you want to encrypt files within, then choose &lt;strong&gt; AxCrypt → ‘Encrypt’.&lt;/strong&gt; .
+        ///   Looks up a localized string similar to Files are instantly encrypted and saved with a .axx extension..
         /// </summary>
         public static string EncryptDecryptGuideCarouselText4 {
             get {
@@ -45490,6 +46138,15 @@ namespace AxCrypt.Content {
         public static string FolderAlreadyWatched {
             get {
                 return ResourceManager.GetString("FolderAlreadyWatched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder name.
+        /// </summary>
+        public static string FolderNameLabel {
+            get {
+                return ResourceManager.GetString("FolderNameLabel", resourceCulture);
             }
         }
         
@@ -49561,6 +50218,24 @@ namespace AxCrypt.Content {
         public static string HomeSellingPointStrongEncryptionHeading {
             get {
                 return ResourceManager.GetString("HomeSellingPointStrongEncryptionHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert your confidential plain text into a secure, unreadable format. Type your text, secure it with your AxCrypt account password, and share the encrypted output..
+        /// </summary>
+        public static string HomeSellingPointTextEncryptionBody {
+            get {
+                return ResourceManager.GetString("HomeSellingPointTextEncryptionBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Vault is a secure, encrypted container for storing your sensitive files and folders automatically..
+        /// </summary>
+        public static string HomeSellingPointVaultEncryptionBody {
+            get {
+                return ResourceManager.GetString("HomeSellingPointVaultEncryptionBody", resourceCulture);
             }
         }
         
@@ -55871,6 +56546,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use AxCrypt Command Line to automate file encryption and decryption. Secure sensitive data with strong AES encryption using simple CLI commands..
+        /// </summary>
+        public static string Meta_Description_Commandline_Interface {
+            get {
+                return ResourceManager.GetString("Meta-Description-Commandline-Interface", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discover how organizations like Bechtle Schweiz AG and ElectroCraft trust AxCrypt for secure, user-friendly file encryption across industries. Read their stories now..
         /// </summary>
         public static string Meta_Description_Customerstories {
@@ -57694,6 +58378,15 @@ namespace AxCrypt.Content {
         public static string Meta_Title_c_sharp_senior_developer {
             get {
                 return ResourceManager.GetString("Meta-Title-c-sharp-senior-developer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Command Line | Encrypt Files via CLI.
+        /// </summary>
+        public static string Meta_Title_Commandline_Interface {
+            get {
+                return ResourceManager.GetString("Meta-Title-Commandline-Interface", resourceCulture);
             }
         }
         
@@ -59973,6 +60666,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Note:.
+        /// </summary>
+        public static string NoteLabelHead {
+            get {
+                return ResourceManager.GetString("NoteLabelHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notes.
         /// </summary>
         public static string NotesText {
@@ -61843,7 +62545,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt beta version on Android.
+        ///   Looks up a localized string similar to AxCrypt mobile app on Android.
         /// </summary>
         public static string PopularQuestionText21 {
             get {
@@ -64442,6 +65144,24 @@ namespace AxCrypt.Content {
         public static string ProductProtectCarouselText7 {
             get {
                 return ResourceManager.GetString("ProductProtectCarouselText7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Text Encryption instantly converts your confidential plain text into a secure, unreadable format. Type your text, secure it with your AxCrypt account password, and share the encrypted output via clipboard, .txt download, or send via email..
+        /// </summary>
+        public static string ProductProtectCarouselText8 {
+            get {
+                return ResourceManager.GetString("ProductProtectCarouselText8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Vault is a secure, encrypted container for storing your sensitive files and folders. Anything added to the Vault is automatically encrypted, with no manual cleanup or extra steps required..
+        /// </summary>
+        public static string ProductProtectCarouselText9 {
+            get {
+                return ResourceManager.GetString("ProductProtectCarouselText9", resourceCulture);
             }
         }
         
@@ -71987,9 +72707,9 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Text Encryption.
         /// </summary>
-        public static string TextEncryptionLinkLable {
+        public static string TextEncryptionLinkLabel {
             get {
-                return ResourceManager.GetString("TextEncryptionLinkLable", resourceCulture);
+                return ResourceManager.GetString("TextEncryptionLinkLabel", resourceCulture);
             }
         }
         
@@ -72017,6 +72737,15 @@ namespace AxCrypt.Content {
         public static string TextEncryptionSideMenuHead3 {
             get {
                 return ResourceManager.GetString("TextEncryptionSideMenuHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert your confidential plain text into a secure, unreadable format..
+        /// </summary>
+        public static string TextEncryptionText {
+            get {
+                return ResourceManager.GetString("TextEncryptionText", resourceCulture);
             }
         }
         
@@ -73566,20 +74295,29 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter you Vault folder Name.
-        /// </summary>
-        public static string VaultCreateNewFolderPrompt {
-            get {
-                return ResourceManager.GetString("VaultCreateNewFolderPrompt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Drag and drop your file/folder here.
         /// </summary>
         public static string VaultDrogDropText {
             get {
                 return ResourceManager.GetString("VaultDrogDropText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secured Vault.
+        /// </summary>
+        public static string VaultEncryptionLinkLabel {
+            get {
+                return ResourceManager.GetString("VaultEncryptionLinkLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secure, encrypted container for storing your sensitive files and folders..
+        /// </summary>
+        public static string VaultEncryptionText {
+            get {
+                return ResourceManager.GetString("VaultEncryptionText", resourceCulture);
             }
         }
         
