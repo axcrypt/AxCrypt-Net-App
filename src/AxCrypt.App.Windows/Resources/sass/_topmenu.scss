@@ -216,6 +216,10 @@
         &.IcoErrRprt {
             content: Url(/images/default/IcoErrRprt.svg);
         }
+
+        &.IcoDkMd {
+            content: $IcoDrkMod;
+        }
     }
 
     &:hover, &.selected {

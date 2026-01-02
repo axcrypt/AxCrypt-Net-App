@@ -30,10 +30,6 @@ public class TopMenuViewModel : ViewModelBase
         _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.DownloadVersion), async (DownloadVersion dv) => { await SetSoftwareStatus(); });
     }
 
-    public bool IsWideScreen { get; set; }
-
-    public bool IsLargeScreen { get; set; }
-
     public string? SelectedLanguage { get; set; } = "en";
 
     public string SelectedLanguageImageUrl { get; set; } = "images/flag/FrmEng.svg";

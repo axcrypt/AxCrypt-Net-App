@@ -11,9 +11,23 @@
     <link rel="stylesheet" href="css/app.css" />
     <link rel="stylesheet" href="AxCrypt.styles.css" />
     <link href="css/login.min.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="css/introjs.min.css" />
+    <script>
+        window.setTheme = function (theme) {
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+            if (theme == "dark") {
+                addDarkThemeCssFile("css/darktheme.css", "darktheme.css");
+            }
+            else {
+                removeDarkThemeCssFile();
+            }
+        };
 
+        window.getTheme = function () {
+            return localStorage.getItem("theme");
+        };
+    </script>
     <script>
         function enablePopup() {
             DotNet.invokeMethodAsync("AxCrypt", "EnablePopup");
@@ -74,6 +88,26 @@
             link.type = "text/css";
             link.href = cssFile;
             document.head.appendChild(link);
+        };
+
+        window.addDarkThemeCssFile = function (cssFilePath, cssFileName) {
+            if (isCssFileAdded(cssFileName, cssFilePath)) {
+                return;
+            }
+
+            var link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.id = "dark-theme-style-link"
+            link.type = "text/css";
+            link.href = cssFilePath;
+            document.head.appendChild(link);
+        };
+
+        window.removeDarkThemeCssFile = function () {
+            var linkElement = document.getElementById("dark-theme-style-link");
+            if (linkElement) {
+                linkElement.parentNode.removeChild(linkElement);
+            }
         };
     </script>
 </head>

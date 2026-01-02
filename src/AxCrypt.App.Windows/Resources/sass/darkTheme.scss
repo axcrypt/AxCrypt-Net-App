@@ -1,0 +1,168 @@
+﻿$colPageBgrnd: #121212;
+$colDefTxt: #ffffff;
+$colDefBgrnd: #ffffff;
+$colActnBgrnd: #333232;
+$colHeDBgrnd: #575757;
+$TbleBg: #575757;
+$BorderClr: #575757;
+$SdebrbgndClr: #303030;
+$colTxtlble: #A4A4A4;
+$colTxtLink: #CDFFB1;
+$colBordBgrnd: #282828;
+$colBord: #CDFFB1;
+
+.sidebar {
+    background-color: $SdebrbgndClr !important;
+}
+
+.nav-item .active,
+.nav-item :hover {
+    background-color: $TbleBg !important;
+    color: $colTxtLink !important;
+}
+
+.link-box {
+    background-color: $SdebrbgndClr !important;
+    border: $colBordBgrnd !important;
+    box-shadow: none !important;
+}
+
+.link-txt {
+    color: $colTxtLink !important;
+}
+
+
+.label-text label {
+    color: $colTxtlble !important;
+}
+
+.desc-txt {
+    color: $colTxtlble !important;
+}
+
+.sup-text-blur {
+    background-color: $colBordBgrnd !important;
+    border: $colBordBgrnd !important;
+}
+
+.btn-hide {
+    background-color: $TbleBg !important;
+    border: $BorderClr !important;
+    color: $colDefTxt !important;
+}
+
+.font-medium, .model-popup {
+    background-color: $SdebrbgndClr !important;
+    color: $colTxtlble !important;
+}
+
+.notify-pg-tbl-body td {
+    color: $colTxtLink !important;
+}
+
+.notification-table th {
+    background-color: $colHeDBgrnd !important;
+    color: $colTxtLink !important;
+}
+
+.password-create-dropdown-content {
+    background-color: $colBordBgrnd !important;
+}
+
+    .password-create-dropdown-content a:hover,
+    .password-create-dropdown-content a.active {
+        color: $colTxtLink !important;
+        background-color: $colHeDBgrnd !important;
+    }
+
+#messenger-keyword {
+    background-color: $colBordBgrnd !important;
+    border: 1px !important;
+}
+
+#secrets-keyword {
+    background-color: $colBordBgrnd !important;
+    border: 1px !important;
+}
+
+
+.tab a:hover, .tab a.active {
+    color: $colTxtLink !important;
+}
+
+.tab-selected {
+    border: 3px solid $colBord !important;
+}
+
+.tab-sec a.active,
+.tab-sec a:hover {
+    color: $colTxtLink !important;
+}
+
+.fnt-high {
+    background-color: $colActnBgrnd !important;
+}
+
+
+.mutli-slct-btn {
+    color: $colTxtLink !important;
+}
+
+.page {
+    background-color: $colPageBgrnd !important;
+    color: $colDefTxt;
+}
+
+.page-title {
+    color: $colDefTxt !important;
+}
+
+.fle-nme {
+    color: $colDefTxt !important;
+}
+
+.text-style {
+    color: $colDefTxt !important;
+}
+
+button {
+    background-color: $colDefBgrnd;
+    color: $colDefTxt;
+    border: solid 1px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.mre-actn-box {
+    background-color: $TbleBg !important;
+    border: $BorderClr !important;
+}
+
+.rcnt-fld-bx {
+    background-color: $colActnBgrnd;
+    border: $BorderClr !important;
+    box-shadow: none !important;
+    color: $colTxtlble !important;
+}
+
+.modalDialog > div {
+    color: $colDefTxt;
+    background-color: $colPageBgrnd !important;
+}
+
+.rcnt-fle-tbl {
+    thead tr th {
+        color: $colTxtlble;
+        background: $SdebrbgndClr !important;
+    }
+
+    tbody tr td, td span {
+        background: $colPageBgrnd !important;
+    }
+
+    tbody tr:hover,
+    tbody tr.active,
+    .selected {
+        background: $SdebrbgndClr !important;
+    }
+}

@@ -53,16 +53,6 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
-
-        try
-        {
-            ViewModel.IsWideScreen = await Utility.IsWideScreenAsync(JSRuntime);
-            ViewModel.IsLargeScreen = await Utility.IsLargeScreenAsync(JSRuntime);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error determining screen width: {ex.Message}");
-        }
     }
 
     private string SubscriptionIcon()
