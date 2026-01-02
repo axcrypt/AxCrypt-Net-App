@@ -7,7 +7,7 @@
 /*
  *  AxCrypt.Core - Core and Reference Implementation
  *
- *  Copyright (C) 2025 AxCrypt AB
+ *  Copyright (C) 2026 AxCrypt AB
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

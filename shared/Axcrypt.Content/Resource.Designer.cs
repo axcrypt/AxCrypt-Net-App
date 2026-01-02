@@ -71913,7 +71913,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copyright © 2025 AxCrypt AB, All rights reserved..
+        ///   Looks up a localized string similar to Copyright © 2026 AxCrypt AB, All rights reserved..
         /// </summary>
         public static string TermsOfUseBlock18Text4 {
             get {

@@ -5,7 +5,7 @@
 #region Coypright and License
 
 /*
- * AxCrypt AB - Copyright 2025, All Rights Reserved
+ * AxCrypt AB - Copyright 2026, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
