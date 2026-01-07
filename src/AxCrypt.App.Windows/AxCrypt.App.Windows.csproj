@@ -30,8 +30,6 @@
 
 		<!--<WindowsPackageType>None</WindowsPackageType>-->
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
 		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
 		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
 		<!--<HoursBetweenUpdateChecks>24</HoursBetweenUpdateChecks>-->
@@ -40,6 +38,12 @@
 		<AssemblyName>AxCrypt</AssemblyName>
 		<Copyright>Copyright © 2012-2026 AxCrypt AB</Copyright>
 	</PropertyGroup>
+	
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+	  <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+	  <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+	</PropertyGroup>
+	
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Debug'">
 		<ApplicationDisplayVersion>3.0.0.0</ApplicationDisplayVersion>
 		<ApplicationVersion>3.0.0.0</ApplicationVersion>
