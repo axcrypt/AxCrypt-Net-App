@@ -51,7 +51,7 @@ namespace AxCrypt.Core.Session
         {
             if (vaultFolder == null)
             {
-                throw new ArgumentNullException("vaultFolder");
+                throw new ArgumentNullException(nameof(vaultFolder));
             }
 
             if (!await IsValidVaultPath(vaultFolder.Path))
@@ -79,14 +79,14 @@ namespace AxCrypt.Core.Session
             }
         }
 
-        public virtual async Task RemoveAndDecryptVaultWatchedFolder(IDataItem dataItem)
+        public virtual async Task RemoveAndDecryptVaultWatchedFolder(IDataItem folderInfo)
         {
-            if (dataItem == null)
+            if (folderInfo == null)
             {
-                throw new ArgumentNullException("folderInfo");
+                throw new ArgumentNullException(nameof(folderInfo));
             }
 
-            await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.VaultFolderRemoved, Resolve.KnownIdentities.DefaultEncryptionIdentity, dataItem.FullName));
+            await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.VaultFolderRemoved, Resolve.KnownIdentities.DefaultEncryptionIdentity, folderInfo.FullName));
         }
 
         public async Task<bool> IsValidVaultPath(string vaultFolderPath)
@@ -108,7 +108,7 @@ namespace AxCrypt.Core.Session
             if (isWatched)
             {
                 await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle,
-                    "Unable to add secured folder or its sub folder as Vault");
+                    Texts.UnableAddSecuredFolderText);
                 return false;
             }
 

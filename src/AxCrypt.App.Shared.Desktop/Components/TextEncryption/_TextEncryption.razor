@@ -12,26 +12,26 @@
 }
 
 <div>
-    <label style="display: block;">Input text:</label>
-    <textarea required rows="5" class="entr-txt-box" @bind="TextEncryptionViewModel.InputText" placeholder="Enter text to encrypt" maxlength="@TextEncryptionViewModel.MaxAllowedCharators" @oninput="ValidateLength"></textarea>
+    <label style="display: block;">@Texts.InputTextHeading</label>
+    <textarea required rows="5" class="entr-txt-box" @bind="TextEncryptionViewModel.InputText" placeholder="@Texts.EnterTextToEncryptPlaceHolder" maxlength="@TextEncryptionViewModel.MaxAllowedCharators" @oninput="ValidateLength"></textarea>
 
     <div id="custom-pwd-section">
         <label>
             <input class="che-box" type="checkbox" id="userchoice" @onclick=TextEncryptionViewModel.ShowHideCustomPassword checked="@TextEncryptionViewModel.IsCustomPasswordMode" />
-            <span>Use Custom Password</span>
+            <span>@Texts.UseCustomPasswordHead</span>
         </label>
         <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16" @onmouseover='@(() => TextEncryptionViewModel.ShowPopup("open"))' @onmouseout='@(() => TextEncryptionViewModel.HidePopup())'>
 
         @if (TextEncryptionViewModel.IsHovered && TextEncryptionViewModel.HoveredElement == "open")
         {
             <div class="custom-password-help-hoverpopup text-center" style="background-color:#fff;">
-                <span class="txt-clr font-medium">Use a custom password that is strong & easy to remember, to encrypt the text.</span>
+                <span class="txt-clr font-medium">@Texts.UseCustomPasswordHead1</span>
             </div>
         }
         @if (TextEncryptionViewModel.IsCustomPasswordMode)
         {
             <br />
-            <label>Password:</label>
+            <label>@Texts.SecurityPasswordText:</label>
 
             <div class="password-container">
                 <i class="@TextEncryptionViewModel.PasswordIconClass" style="top:40% !important;" @onclick="TextEncryptionViewModel.TogglePassword"></i>
@@ -42,14 +42,14 @@
     </div>
 
     <div class="encryp-and-reset-btn">
-        <button class="button success btn-large font-medium active" @onclick=TextEncryptionViewModel.EncryptText>Encrypt</button>
-        <button class="button border btn-large font-medium btn-hide" @onclick=TextEncryptionViewModel.ResetBtn>Reset</button>
+        <button class="button success btn-large font-medium active" @onclick=TextEncryptionViewModel.EncryptText>@Texts.EncryptLabelText</button>
+        <button class="button border btn-large font-medium btn-hide" @onclick=TextEncryptionViewModel.ResetBtn>@Texts.ResetLabelText</button>
     </div>
 </div>
 
 <div>
-    <label style="display: block;">Encrypted text:</label>
-    <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText" placeholder="Encrypted text appears here"></textarea>
+    <label style="display: block;">@Texts.EncryptedTextHead</label>
+    <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText" placeholder="@Texts.EncryptedTextAppearsHerePlaceHolder"></textarea>
 </div>
 
 <div class="multi-btn">
@@ -60,12 +60,12 @@
 
     <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.ExportTextAsync>
         <img class="download-ico" alt="download ico" title="Download encrypted text as txt file" width="16" height="16" />
-        Download as.TXT
+        @Texts.DownloadAsTxtButton
     </button>
 
     <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.EncryptSendEmailBtn>
         <img class="email-ico" alt="email ico" title="Compose a new email with encrypted text" width="16" height="16" />
-        Send via Email
+        @Texts.SendViaEmailButton
     </button>
 
     @*     <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.EncryptShareLinkBtn>
@@ -111,7 +111,7 @@
 
         if (TextEncryptionViewModel.InputText.Length > TextEncryptionViewModel.MaxAllowedCharators)
         {
-            TextEncryptionViewModel.ErrorMessage = $"Maximum {TextEncryptionViewModel.MaxAllowedCharators} characters allowed!";
+            TextEncryptionViewModel.ErrorMessage = string.Format(Texts.MaximumCharactersNotification, TextEncryptionViewModel.MaxAllowedCharators);
         }
     }
 }

@@ -7,6 +7,7 @@ using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.Content;
 
 namespace AxCrypt.App.Shared.FileOperations.Vault;
 
@@ -36,7 +37,7 @@ public class VaultDataStore : IVaultDataStore
         _currentPath = currentPath;
         if (path == null)
         {
-            throw new ArgumentNullException("path");
+            throw new ArgumentNullException(nameof(path));
         }
 
         string normalized = path.NormalizeFilePath();
@@ -48,7 +49,7 @@ public class VaultDataStore : IVaultDataStore
         catch (Exception ex)
         {
             throw new FileOperationException(
-                $"Can't create {nameof(VaultDataStore)}.",
+                string.Format(Texts.CantCreateVaultDataStoreNotification, nameof(VaultDataStore)),
                 normalized,
                 ErrorStatus.Exception,
                 ex

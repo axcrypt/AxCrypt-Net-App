@@ -207,7 +207,7 @@ public class VaultOperationViewModel : ViewModelBase
                 catch (Exception ex)
                 {
                     // Handle exception (optional)
-                    Console.WriteLine($"Error invoking event handler: {ex.Message}");
+                    Console.WriteLine(string.Format(Texts.ErrorInvokingNotification, ex.Message));
                 }
             }
         }
@@ -335,7 +335,7 @@ public class VaultOperationViewModel : ViewModelBase
             return targetPath;
         }
 
-        PopupButtons popupResult = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "The folder already exists. Would you like to keep the contents in a new folder with a timestamp added to its name?");
+        PopupButtons popupResult = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, Texts.CreateFolderWhenAlreadyExistsConfirmText);
         if (popupResult == PopupButtons.Cancel)
         {
             return null;

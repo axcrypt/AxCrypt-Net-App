@@ -148,7 +148,7 @@ namespace AxCrypt.App.Shared.ViewModels
                     }
                     break;
                 default:
-                    _statusAlertService.Error($"Invalid selection action {action}");
+                    _statusAlertService.Error(string.Format(Texts.InvalidSelectionActionNotification, action));
                     break;
             }
 
@@ -295,7 +295,7 @@ namespace AxCrypt.App.Shared.ViewModels
             IDataContainer newFolderContainer = New<IDataContainer>(newFolderPath);
             if (newFolderContainer.IsAvailable)
             {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, $"The folder {SelectedSubFolderPath} already exist(s), please try again with different folder name!");
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, string.Format(Texts.SelectedSubFolderPathAlreadyExistText, SelectedSubFolderPath));
                 return;
             }
 
@@ -490,11 +490,11 @@ namespace AxCrypt.App.Shared.ViewModels
             }
             catch (UnauthorizedAccessException uae)
             {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, $"Failed to add folder(s)! {uae.Message}");
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, string.Format(Texts.FailedAddFolderNotification, uae.Message));
             }
             catch (Exception ex)
             {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, $"Failed to add folder(s)! {ex.Message}");
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, string.Format(Texts.FailedAddFolderNotification, ex.Message));
             }
         }
     }
@@ -502,7 +502,7 @@ namespace AxCrypt.App.Shared.ViewModels
     public class VaultItem
     {
         public string Filepath { get; set; } = "";
-        public string FileType { get; set; }
+        public string FileType { get; set; } = "";
         public string? Size { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

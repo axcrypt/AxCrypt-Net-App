@@ -10,13 +10,13 @@
 }
 
 <div>
-    <label style="display: block;">Encrypted text:</label>
+    <label style="display: block;">@Texts.EncryptedTextHead</label>
     <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText" placeholder="Enter text to encrypt"></textarea><br>
 
     <div id="custom-pwd-section">
         <label>
             <input class="che-box" type="checkbox" id="userchoice" @onclick=TextEncryptionViewModel.ShowHideCustomPassword checked="@TextEncryptionViewModel.IsCustomPasswordMode" />
-            <span>Use Custom Password</span>
+            <span>@Texts.UseCustomPasswordHead</span>
         </label>
         <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16" @onmouseover='@(() => TextEncryptionViewModel.ShowPopup("open"))' @onmouseout='@(() => TextEncryptionViewModel.HidePopup())'>
 
@@ -30,7 +30,7 @@
         @if (TextEncryptionViewModel.IsCustomPasswordMode)
         {
             <br />
-            <label>Password:</label>
+            <label>@Texts.SecurityPasswordText:</label>
 
             <div class="password-container">
                 <i class="@TextEncryptionViewModel.PasswordIconClass" style="top:40% !important;" @onclick="TextEncryptionViewModel.TogglePassword"></i>
@@ -41,25 +41,25 @@
 
 
     <div class="encryp-and-reset-btn">
-        <button class="button success btn-large font-medium active" @onclick=TextEncryptionViewModel.DecryptText>Decrypt</button>
-        <button class="button border btn-large font-medium btn-hide" @onclick=TextEncryptionViewModel.ResetBtn>Reset</button>
+        <button class="button success btn-large font-medium active" @onclick=TextEncryptionViewModel.DecryptText>@Texts.McInfMenuUnwrap</button>
+        <button class="button border btn-large font-medium btn-hide" @onclick=TextEncryptionViewModel.ResetBtn>@Texts.ResetLabelText</button>
     </div>
 </div>
 
 <div>
-    <label style="display: block;">Original text:</label>
-    <textarea class="encrypt-txt-box" rows="5" @bind="TextEncryptionViewModel.InputText" placeholder="Enter text to encrypt"></textarea><br>
+    <label style="display: block;">Plain text:</label>
+    <textarea class="encrypt-txt-box" rows="5" @bind="TextEncryptionViewModel.InputText" placeholder="Plain text appears here"></textarea><br>
 </div>
 
 <div class="multi-btn">
     <button class="multi-actn-btn" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(TextEncryptionViewModel.InputText)">
-        <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy original text to clipboard" width="16" height="16" />
+        <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy plain text to clipboard" width="16" height="16" />
         @Texts.SecretsCopytoClipboard
     </button>
 
     <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.ExportTextAsync>
-        <img class="download-ico" alt="download ico" title="Download original text as txt file" width="16" height="16" />
-        Download as.TXT
+        <img class="download-ico" alt="download ico" title="Download plain text as txt file" width="16" height="16" />
+        @Texts.DownloadAsTxtButton
     </button>
 </div>
 

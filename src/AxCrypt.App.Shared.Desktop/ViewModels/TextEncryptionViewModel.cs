@@ -98,13 +98,13 @@ public class TextEncryptionViewModel
         EncryptedText = "";
         if (string.IsNullOrWhiteSpace(InputText))
         {
-            ErrorMessage = "Input text is required.";
+            ErrorMessage = Texts.InputTextIsRequiredText;
             return;
         }
 
         if (InputText.Length > MaxAllowedCharators)
         {
-            ErrorMessage = $"Text should not exceed {MaxAllowedCharators} characters.";
+            ErrorMessage = string.Format(Texts.MaximumNotExceedCharactersNotification, MaxAllowedCharators);
             return;
         }
 
@@ -115,7 +115,7 @@ public class TextEncryptionViewModel
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Failed to encrypt text due to {ex.Message}";
+            ErrorMessage = string.Format(Texts.FailedEncryptTextNotification, ex.Message);
         }
     }
 
@@ -125,7 +125,7 @@ public class TextEncryptionViewModel
         InputText = "";
         if (string.IsNullOrWhiteSpace(EncryptedText))
         {
-            ErrorMessage = "Encrypted text is required.";
+            ErrorMessage = Texts.EncryptedTextIsRequiredText;
             return;
         }
 
@@ -139,7 +139,7 @@ public class TextEncryptionViewModel
         }
         catch (Exception ex)
         {
-            ErrorMessage = "Failed to decrypt text!";
+            ErrorMessage = Texts.FailedToDecryptText;
         }
     }
 
@@ -195,7 +195,7 @@ public class TextEncryptionViewModel
         string downloadsFolderPath = GetDownloadsFolderPath();
         if (downloadsFolderPath == null)
         {
-            await New<IPopup>().ShowAsync(PopupButtons.Ok, "Alert", "Could not determine the Downloads folder path.");
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.AlertText, Texts.CouldNotDetermineFolderPathText);
             return false;
         }
 
@@ -211,7 +211,7 @@ public class TextEncryptionViewModel
         }
 
         await File.WriteAllBytesAsync(filePath, txtData);
-        _StatusAlertService?.Success($"Your file has been successfully downloaded at {filePath}");
+        _StatusAlertService?.Success(string.Format(Texts.DownloadSuccessfullyNotification, filePath));
         return true;
     }
 
@@ -228,7 +228,7 @@ public class TextEncryptionViewModel
         }
 
         string to = "";
-        string subject = "Sharing AxCrypt Encrypted Text";
+        string subject = Texts.SharingEncryptedText;
 
         string body =
         "Hello,\n\n" +

@@ -45,7 +45,7 @@ namespace AxCrypt.Core.Session
         {
             if (path == null)
             {
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             }
 
             Path = path.NormalizeFolderPath();

@@ -1,7 +1,9 @@
-﻿<div class="row">
+﻿@using AxCrypt.Content;
+
+<div class="row">
     <div class="medium-12 columns page-title-container">
         <h1 class="page-title">
-            Text Encryption
+            @Texts.TextEncryptionLinkLabel
         </h1>
     </div>
 </div>
@@ -9,11 +11,11 @@
 <div class="action-tabs">
     <div id="encrypt-tab" class="act-tab @(TabIndex == 1 ? "active" : "")">
         <img class="tabicon encrypt-ico" alt="encrypt-icon" />
-        <a href="javascript:void(0);" @onclick="() => SetActiveTab(1)">Encrypt Text</a>
+        <a href="javascript:void(0);" @onclick="() => SetActiveTab(1)">@Texts.TextEncryptionSideMenuHead1</a>
     </div>
     <div id="decrypt-tab" class="act-tab @(TabIndex == 2 ? "active" : "")">
         <img class="tabicon decrypt-ico" alt="decrypt-icon" />
-        <a href="javascript:void(0);" @onclick="() => SetActiveTab(2)">Decrypt Text</a>
+        <a href="javascript:void(0);" @onclick="() => SetActiveTab(2)">@Texts.TextEncryptionSideMenuHead3</a>
     </div>
 </div>
 

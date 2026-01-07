@@ -19,7 +19,7 @@
 <div class="vlt-body" @onclick="async () => await HideContextMenu()">
     <div class="vlt-title-action">
         <div class="page-title" style="margin-bottom:0;">
-            <h1>Vault</h1>
+            <h1>@Texts.VaultText</h1>
         </div>
         <button style="cursor:pointer" @onclick="(e) => AppSettingsViewModel.ToggleVaultSettings()">
             <img class="" src="/images/vltsett.svg" alt="vault_settings_icon">
@@ -220,7 +220,7 @@
 {
     <div id="vault-settings-modalDialog" class="vault-body modalDialog">
         <div class="">
-            <span class="vault-question">Folder name</span>
+            <span class="vault-question">@Texts.FolderNameLabel</span>
             <div class="vault-store-location-sec">
                 <input class="input1" type="text" id="text-box" maxlength="50" name="" @bind-value="ViewModel.SelectedSubFolderPath">
             </div>
