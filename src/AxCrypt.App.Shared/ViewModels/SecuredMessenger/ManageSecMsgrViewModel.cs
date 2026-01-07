@@ -59,6 +59,11 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 
         public async Task GetMessagesList(SecureMsgrFilterTab secMessengerFilterTab)
         {
+            if (New<AxCrypt.Common.AxCryptOnlineState>().IsOffline)
+            {
+                return;
+            }
+
             using (ProcessIndicator processIndicator = new ProcessIndicator())
             {
                 if (secMessengerFilterTab == SecureMsgrFilterTab.None)
