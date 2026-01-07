@@ -11,7 +11,7 @@
 
 <div>
     <label style="display: block;">@Texts.EncryptedTextHead</label>
-    <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText" placeholder="Enter text to encrypt"></textarea><br>
+    <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText" placeholder="@Texts.EnterTextToEncryptPlaceHolder"></textarea><br>
 
     <div id="custom-pwd-section">
         <label>
@@ -23,7 +23,7 @@
         @if (TextEncryptionViewModel.IsHovered && TextEncryptionViewModel.HoveredElement == "open")
         {
             <div class="custom-password-help-hoverpopup text-center" style="background-color:#fff;">
-                <span class="txt-clr font-medium">Use the same custom password that was used to encrypt the text, for decryption.</span>
+                <span class="txt-clr font-medium">@Texts.CustomPasswordHelpHoverText</span>
             </div>
         }
 
@@ -47,18 +47,18 @@
 </div>
 
 <div>
-    <label style="display: block;">Plain text:</label>
-    <textarea class="encrypt-txt-box" rows="5" @bind="TextEncryptionViewModel.InputText" placeholder="Plain text appears here"></textarea><br>
+    <label style="display: block;">@Texts.PlainTextLabel</label>
+    <textarea class="encrypt-txt-box" rows="5" @bind="TextEncryptionViewModel.InputText" placeholder="@Texts.PlainTextPlaceHolder"></textarea><br>
 </div>
 
 <div class="multi-btn">
     <button class="multi-actn-btn" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(TextEncryptionViewModel.InputText)">
-        <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy plain text to clipboard" width="16" height="16" />
+        <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="@Texts.CopyPlainTextClipboardText" width="16" height="16" />
         @Texts.SecretsCopytoClipboard
     </button>
 
     <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.ExportTextAsync>
-        <img class="download-ico" alt="download ico" title="Download plain text as txt file" width="16" height="16" />
+        <img class="download-ico" alt="download ico" title="@Texts.DownloadPlainText" width="16" height="16" />
         @Texts.DownloadAsTxtButton
     </button>
 </div>
