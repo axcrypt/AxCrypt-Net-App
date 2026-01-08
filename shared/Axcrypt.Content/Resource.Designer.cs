@@ -41865,6 +41865,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy plain text to clipboard.
+        /// </summary>
+        public static string CopyPlainTextClipboardText {
+            get {
+                return ResourceManager.GetString("CopyPlainTextClipboardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not determine the Downloads folder path.
         /// </summary>
         public static string CouldNotDetermineFolderPathText {
@@ -42824,6 +42833,15 @@ namespace AxCrypt.Content {
         public static string CustomerYourStoryText {
             get {
                 return ResourceManager.GetString("CustomerYourStoryText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the same custom password that was used to encrypt the text, for decryption..
+        /// </summary>
+        public static string CustomPasswordHelpHoverText {
+            get {
+                return ResourceManager.GetString("CustomPasswordHelpHoverText", resourceCulture);
             }
         }
         
@@ -44153,6 +44171,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download plain text as txt file.
+        /// </summary>
+        public static string DownloadPlainText {
+            get {
+                return ResourceManager.GetString("DownloadPlainText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;span&gt;Premium&lt;/span&gt; plus:.
         /// </summary>
         public static string DownloadPrimiumPlusHeading {
@@ -44167,15 +44194,6 @@ namespace AxCrypt.Content {
         public static string DownloadReleaseNotes {
             get {
                 return ResourceManager.GetString("DownloadReleaseNotes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloads.
-        /// </summary>
-        public static string DownloadsText {
-            get {
-                return ResourceManager.GetString("DownloadsText", resourceCulture);
             }
         }
         
@@ -47317,15 +47335,6 @@ namespace AxCrypt.Content {
         public static string FolderAlreadyWatched {
             get {
                 return ResourceManager.GetString("FolderAlreadyWatched", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to folderInfo.
-        /// </summary>
-        public static string FolderInfoText {
-            get {
-                return ResourceManager.GetString("FolderInfoText", resourceCulture);
             }
         }
         
@@ -63670,6 +63679,24 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plain text:.
+        /// </summary>
+        public static string PlainTextLabel {
+            get {
+                return ResourceManager.GetString("PlainTextLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plain text appears here.
+        /// </summary>
+        public static string PlainTextPlaceHolder {
+            get {
+                return ResourceManager.GetString("PlainTextPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Plan.
         /// </summary>
         public static string PlanText {
@@ -75618,6 +75645,51 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use the &apos;Vault&apos; Icon.
+        /// </summary>
+        public static string VaultbuttonLinkHead1 {
+            get {
+                return ResourceManager.GetString("VaultbuttonLinkHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click on the &lt;b&gt;Vault&lt;/b&gt; icon and select the type &lt;b&gt;(File or Folder)&lt;/b&gt; from the dropdown..
+        /// </summary>
+        public static string VaultbuttonLinkStep1 {
+            get {
+                return ResourceManager.GetString("VaultbuttonLinkStep1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click &lt;b&gt;Add&lt;/b&gt; and choose the file or folder you want to store in the Vault..
+        /// </summary>
+        public static string VaultbuttonLinkStep2 {
+            get {
+                return ResourceManager.GetString("VaultbuttonLinkStep2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The file or folder is automatically secured and will appear in &lt;b&gt;Recent Files&lt;/b&gt; and be moved into the configured Vault..
+        /// </summary>
+        public static string VaultbuttonLinkStep3 {
+            get {
+                return ResourceManager.GetString("VaultbuttonLinkStep3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simply drag and drop your file(s) or folder into the &lt;b&gt;AxCrypt Vault&lt;/b&gt; section..
+        /// </summary>
+        public static string VaultbuttonLinkStep4 {
+            get {
+                return ResourceManager.GetString("VaultbuttonLinkStep4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your files in the previous Vault location are still secured. Going forward, this path will be treated as a Secured Folder..
         /// </summary>
         public static string VaultChangeMessage {
@@ -75681,11 +75753,677 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to vaultFolder.
+        ///   Looks up a localized string similar to Please configure the Vault by navigating to Settings â†’ Advanced Settings â†’ Vault Settings..
         /// </summary>
-        public static string VaultFolderText {
+        public static string VaultGuideCarouselText1 {
             get {
-                return ResourceManager.GetString("VaultFolderText", resourceCulture);
+                return ResourceManager.GetString("VaultGuideCarouselText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List View, or.
+        /// </summary>
+        public static string VaultGuideCarouselText10 {
+            get {
+                return ResourceManager.GetString("VaultGuideCarouselText10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grid View.
+        /// </summary>
+        public static string VaultGuideCarouselText11 {
+            get {
+                return ResourceManager.GetString("VaultGuideCarouselText11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select where you want your encrypted data to be stored â†’ Select the Folder â†’ Confirm..
+        /// </summary>
+        public static string VaultGuideCarouselText2 {
+            get {
+                return ResourceManager.GetString("VaultGuideCarouselText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can choose to randomize the file name on encryption..
+        /// </summary>
+        public static string VaultGuideCarouselText3 {
+            get {
+                return ResourceManager.GetString("VaultGuideCarouselText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files dropped into the Vault will be removed from their original location and moved into the Vault..
+        /// </summary>
+        public static string VaultGuideCarouselText4 {
+            get {
+                return ResourceManager.GetString("VaultGuideCarouselText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open the configured &lt;strong&gt;Vault folder.&lt;/strong&gt;.
+        /// </summary>
+        public static string VaultGuideCarouselText5 {
+            get {
+                return ResourceManager.GetString("VaultGuideCarouselText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the file or folder you want to remove..
+        /// </summary>
+        public static string VaultGuideCarouselText6 {
+            get {
+                return ResourceManager.GetString("VaultGuideCarouselText6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open it with &lt;b&gt;AxCrypt.&lt;/b&gt;.
+        /// </summary>
+        public static string VaultGuideCarouselText7 {
+            get {
+                return ResourceManager.GetString("VaultGuideCarouselText7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right-click and choose &lt;b&gt;Stop Securing.&lt;/b&gt;.
+        /// </summary>
+        public static string VaultGuideCarouselText8 {
+            get {
+                return ResourceManager.GetString("VaultGuideCarouselText8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move the file or folder to a location &lt;b&gt;outside the Vault.&lt;/b&gt;.
+        /// </summary>
+        public static string VaultGuideCarouselText9 {
+            get {
+                return ResourceManager.GetString("VaultGuideCarouselText9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What happens to my files when I add them to the Vault?.
+        /// </summary>
+        public static string VaultGuideFaq1 {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When you add files or folders to the Vault, they are automatically secured &lt;b&gt;using AES-256 encryption and moved into the Vault folder.&lt;/b&gt; The original copies are removed from their previous location, so there is no duplication or manual cleanup required..
+        /// </summary>
+        public static string VaultGuideFaq1Ans {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq1Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can I have more than one Vault on my computer?.
+        /// </summary>
+        public static string VaultGuideFaq2 {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;AxCrypt supports only one active Vault per system.&lt;/b&gt; The existing vault folder will be masked as secured folder the moment an another folder configured as Vault..
+        /// </summary>
+        public static string VaultGuideFaq2Ans {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq2Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do I need to manually encrypt or decrypt files inside the Vault?.
+        /// </summary>
+        public static string VaultGuideFaq3 {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No. The Vault handles this automatically: Files are secured as soon as they are added to the Vault. When you open a file, it is temporarily unlocked for use. When you close the file, AxCrypt automatically secures it again..
+        /// </summary>
+        public static string VaultGuideFaq3Ans {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq3Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can I remove or decrypt the entire Vault at once?.
+        /// </summary>
+        public static string VaultGuideFaq4 {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No. The Vault itself cannot be removed or unsecured in a single action. &lt;b&gt;Files and folders must be removed individually&lt;/b&gt; by using &lt;b&gt;Stop Securing&lt;/b&gt; and then moving them to a location outside the Vault..
+        /// </summary>
+        public static string VaultGuideFaq4Ans {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq4Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When is my Vault accessible?.
+        /// </summary>
+        public static string VaultGuideFaq5 {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Vault is accessible only when AxCrypt is running and you are logged in. If AxCrypt locks due to inactivity, manual lock, or system sleep, access to the Vault is automatically restricted..
+        /// </summary>
+        public static string VaultGuideFaq5Ans {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq5Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What happens if I change the Vault path?.
+        /// </summary>
+        public static string VaultGuideFaq6 {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When you change the Vault location: The old Vault folder is &lt;b&gt;no longer treated as a Vault.&lt;/b&gt; Any files left behind behave like files in a &lt;b&gt;regular secured folder.&lt;/b&gt; AxCrypt displays a &lt;b&gt;confirmation warning&lt;/b&gt; before allowing the change..
+        /// </summary>
+        public static string VaultGuideFaq6Ans {
+            get {
+                return ResourceManager.GetString("VaultGuideFaq6Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt &lt;span&gt;Vault&lt;/span&gt; – User Guide.
+        /// </summary>
+        public static string VaultGuideHeadTitle {
+            get {
+                return ResourceManager.GetString("VaultGuideHeadTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files and folders stored in a Vault are secured automatically. To remove them, they must be &lt;b&gt;taken out of the Vault individually&lt;/b&gt; and moved to another location.&lt;br/&gt;&lt;br/&gt; &lt;strong&gt;Note:&lt;strong/&gt; The entire Vault cannot be removed or unsecured at once. Files and folders must be handled one at a time..
+        /// </summary>
+        public static string VaultGuideParagraph1 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encryption Behavior.
+        /// </summary>
+        public static string VaultGuideParagraph10 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Once your Vault is created:.
+        /// </summary>
+        public static string VaultGuideParagraph11 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any file or folder added to the Vault is &lt;b&gt;automatically secured using AES-256 encryption.&lt;/b&gt;.
+        /// </summary>
+        public static string VaultGuideParagraph12 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files remain in a &lt;b&gt;standard folder structure&lt;/b&gt; on your local system, while the contents are fully protected..
+        /// </summary>
+        public static string VaultGuideParagraph13 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When you open a file from the Vault:.
+        /// </summary>
+        public static string VaultGuideParagraph14 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The file is &lt;b&gt;temporarily unlocked in memory or a secure temporary location for use.&lt;/b&gt;.
+        /// </summary>
+        public static string VaultGuideParagraph15 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As soon as you close the file, &lt;b&gt;AxCrypt automatically secures it again, with no manual action required.&lt;/b&gt;.
+        /// </summary>
+        public static string VaultGuideParagraph16 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Security &amp; Access Controls.
+        /// </summary>
+        public static string VaultGuideParagraph17 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Vault becomes accessible when you are logged into the AxCrypt application..
+        /// </summary>
+        public static string VaultGuideParagraph18 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If AxCrypt locks due to inactivity, manual lock, or system sleep, Vault access is automatically restricted..
+        /// </summary>
+        public static string VaultGuideParagraph19 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Vault contents can be viewed in :.
+        /// </summary>
+        public static string VaultGuideParagraph2 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files and folders in the Vault can be accessed only while AxCrypt is running and unlocked..
+        /// </summary>
+        public static string VaultGuideParagraph20 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &lt;b&gt;My Vault&lt;/b&gt; screen is a dedicated, secure place where all your encrypted files and folders reside..
+        /// </summary>
+        public static string VaultGuideParagraph21 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key points:.
+        /// </summary>
+        public static string VaultGuideParagraph22 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Everything you add gets encrypted automatically..
+        /// </summary>
+        public static string VaultGuideParagraph23 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is &lt;b&gt;no need for manual cleanup&lt;/b&gt; like in Secured Folders..
+        /// </summary>
+        public static string VaultGuideParagraph24 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the &lt;b&gt;search bar&lt;/b&gt; to quickly find files or folders..
+        /// </summary>
+        public static string VaultGuideParagraph25 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As you type, AxCrypt will highlight matching items—similar to the dynamic search in the User File Activity Log..
+        /// </summary>
+        public static string VaultGuideParagraph26 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can move your Vault to a different folder or drive, but there are important conditions :.
+        /// </summary>
+        public static string VaultGuideParagraph27 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What happens when you change the Vault path.
+        /// </summary>
+        public static string VaultGuideParagraph28 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The previously configured Vault folder is no longer treated as a Vault..
+        /// </summary>
+        public static string VaultGuideParagraph29 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can switch between these anytime..
+        /// </summary>
+        public static string VaultGuideParagraph3 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files remaining in that folder behave like files in a regular secured folder..
+        /// </summary>
+        public static string VaultGuideParagraph30 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any files still present will be accessible based on their current security state..
+        /// </summary>
+        public static string VaultGuideParagraph31 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt supports only one active Vault per system..
+        /// </summary>
+        public static string VaultGuideParagraph32 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A confirmation warning is shown before the Vault path is changed..
+        /// </summary>
+        public static string VaultGuideParagraph33 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Vault offers a seamless, transparent way to protect your sensitive files. With automatic encryption, auto-locking, secure access controls, and a simple drag-and-drop interface, it ensures that your data stays safe without interrupting your workflow..
+        /// </summary>
+        public static string VaultGuideParagraph34 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph34", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A dedicated menu may appear in the app&apos;s side navigation depending on your layout settings..
+        /// </summary>
+        public static string VaultGuideParagraph35 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Vault is a secure, encrypted container for storing your sensitive files and folders. Anything added to the Vault is &lt;b&gt;automatically encrypted,&lt;/b&gt; with no manual cleanup or extra steps required. It works like a dedicated encrypted folder that you can place anywhere on your computer, with full control through &lt;b&gt;Vault Settings.&lt;/b&gt;.
+        /// </summary>
+        public static string VaultGuideParagraph4 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a protected, encrypted container (Vault)..
+        /// </summary>
+        public static string VaultGuideParagraph5 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drag and drop files or folders for instant protection..
+        /// </summary>
+        public static string VaultGuideParagraph6 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically encrypt and decrypt files behind the scenes..
+        /// </summary>
+        public static string VaultGuideParagraph7 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work securely without worrying about manual cleanup..
+        /// </summary>
+        public static string VaultGuideParagraph8 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Vault is designed to help you:.
+        /// </summary>
+        public static string VaultGuideParagraph9 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Vault is a secure, encrypted container for storing your sensitive files and folders. Anything added to the Vault is automatically encrypted, with no manual cleanup or extra steps required..
+        /// </summary>
+        public static string VaultGuidesHeadParagraph {
+            get {
+                return ResourceManager.GetString("VaultGuidesHeadParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 ways to add files/folders to Vault.
+        /// </summary>
+        public static string VaultGuideSideMenuHead1 {
+            get {
+                return ResourceManager.GetString("VaultGuideSideMenuHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing files/folders from Vault.
+        /// </summary>
+        public static string VaultGuideSideMenuHead2 {
+            get {
+                return ResourceManager.GetString("VaultGuideSideMenuHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Viewing Your Vault.
+        /// </summary>
+        public static string VaultGuideSideMenuHead3 {
+            get {
+                return ResourceManager.GetString("VaultGuideSideMenuHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How the Vault Works.
+        /// </summary>
+        public static string VaultGuideSideMenuHead4 {
+            get {
+                return ResourceManager.GetString("VaultGuideSideMenuHead4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Vault Screen.
+        /// </summary>
+        public static string VaultGuideSideMenuHead5 {
+            get {
+                return ResourceManager.GetString("VaultGuideSideMenuHead5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure the &lt;span&gt;Vault&lt;/span&gt;.
+        /// </summary>
+        public static string VaultGuideSubHeading1 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key goals of the &lt;span&gt;Vault&lt;/span&gt;.
+        /// </summary>
+        public static string VaultGuideSubHeading10 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;span&gt;2 Easy Ways&lt;/span&gt; &lt;strong&gt;to Add&lt;/strong&gt; files and folders to encrypt automatically &lt;b&gt;in a Vault&lt;/b&gt;.
+        /// </summary>
+        public static string VaultGuideSubHeading2 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Removing&lt;/b&gt; Files or Folders from an &lt;span&gt;AxCrypt Vault&lt;/span&gt;.
+        /// </summary>
+        public static string VaultGuideSubHeading3 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Viewing&lt;/b&gt; Your &lt;span&gt;Vault&lt;/span&gt;.
+        /// </summary>
+        public static string VaultGuideSubHeading4 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What is &lt;span&gt;Vault&lt;/span&gt;?.
+        /// </summary>
+        public static string VaultGuideSubHeading5 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How the &lt;span&gt;Vault&lt;/span&gt; &lt;strong&gt;works?&lt;/strong&gt;.
+        /// </summary>
+        public static string VaultGuideSubHeading6 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My &lt;span&gt;Vault&lt;/span&gt; &lt;strong&gt;screen&lt;/strong&gt;.
+        /// </summary>
+        public static string VaultGuideSubHeading7 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search inside &lt;span&gt;Vault&lt;/span&gt;.
+        /// </summary>
+        public static string VaultGuideSubHeading8 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating your &lt;span&gt;Vault Path&lt;/span&gt;.
+        /// </summary>
+        public static string VaultGuideSubHeading9 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading9", resourceCulture);
             }
         }
         

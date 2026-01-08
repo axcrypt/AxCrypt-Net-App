@@ -14156,6 +14156,9 @@ If you do not accept our temporary session cookies you cannot sign in and the si
   <data name="CookiesDisabledError" xml:space="preserve">
     <value>Cookies appear to be disabled in your browser. Unless you accept session cookies from us you cannot sign in and the site may not perform as expected. Read more in our &lt;a href="{0}"&gt;cookie policy&lt;/a&gt;.</value>
   </data>
+  <data name="CopyPlainTextClipboardText" xml:space="preserve">
+    <value>Copy plain text to clipboard</value>
+  </data>
   <data name="CouldNotDetermineFolderPathText" xml:space="preserve">
     <value>Could not determine the Downloads folder path</value>
   </data>
@@ -14476,6 +14479,9 @@ If you do not accept our temporary session cookies you cannot sign in and the si
   </data>
   <data name="CustomerYourStoryText" xml:space="preserve">
     <value>Share your story</value>
+  </data>
+  <data name="CustomPasswordHelpHoverText" xml:space="preserve">
+    <value>Use the same custom password that was used to encrypt the text, for decryption.</value>
   </data>
   <data name="DataIntegrityLabel" xml:space="preserve">
     <value>Data integrity verification</value>
@@ -14924,14 +14930,14 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   <data name="DownloadpageMobileTitle" xml:space="preserve">
     <value>Put AxCrypt on &lt;span&gt; all &lt;br /&gt;your devices.&lt;/span&gt;</value>
   </data>
+  <data name="DownloadPlainText" xml:space="preserve">
+    <value>Download plain text as txt file</value>
+  </data>
   <data name="DownloadPrimiumPlusHeading" xml:space="preserve">
     <value>&lt;span&gt;Premium&lt;/span&gt; plus:</value>
   </data>
   <data name="DownloadReleaseNotes" xml:space="preserve">
     <value>See Release Notes</value>
-  </data>
-  <data name="DownloadsText" xml:space="preserve">
-    <value>Downloads</value>
   </data>
   <data name="DownloadSuccessfullyNotification" xml:space="preserve">
     <value>Your file has been successfully downloaded at {0}</value>
@@ -16004,9 +16010,6 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   </data>
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>Folder '{0}' already secured.</value>
-  </data>
-  <data name="FolderInfoText" xml:space="preserve">
-    <value>folderInfo</value>
   </data>
   <data name="FolderNameLabel" xml:space="preserve">
     <value>Folder name</value>
@@ -21607,6 +21610,12 @@ White space, and parts that are equal to common passwords are ignored and do not
   <data name="PhonePlaceholder" xml:space="preserve">
     <value>Type your phone number</value>
   </data>
+  <data name="PlainTextLabel" xml:space="preserve">
+    <value>Plain text:</value>
+  </data>
+  <data name="PlainTextPlaceHolder" xml:space="preserve">
+    <value>Plain text appears here</value>
+  </data>
   <data name="PlanText" xml:space="preserve">
     <value>Plan</value>
   </data>
@@ -25688,6 +25697,21 @@ The AxCrypt Team</value>
   <data name="ValidUntilText" xml:space="preserve">
     <value>Valid until:</value>
   </data>
+  <data name="VaultbuttonLinkHead1" xml:space="preserve">
+    <value>Use the 'Vault' Icon</value>
+  </data>
+  <data name="VaultbuttonLinkStep1" xml:space="preserve">
+    <value>Click on the &lt;b&gt;Vault&lt;/b&gt; icon and select the type &lt;b&gt;(File or Folder)&lt;/b&gt; from the dropdown.</value>
+  </data>
+  <data name="VaultbuttonLinkStep2" xml:space="preserve">
+    <value>Click &lt;b&gt;Add&lt;/b&gt; and choose the file or folder you want to store in the Vault.</value>
+  </data>
+  <data name="VaultbuttonLinkStep3" xml:space="preserve">
+    <value>The file or folder is automatically secured and will appear in &lt;b&gt;Recent Files&lt;/b&gt; and be moved into the configured Vault.</value>
+  </data>
+  <data name="VaultbuttonLinkStep4" xml:space="preserve">
+    <value>Simply drag and drop your file(s) or folder into the &lt;b&gt;AxCrypt Vault&lt;/b&gt; section.</value>
+  </data>
   <data name="VaultChangeMessage" xml:space="preserve">
     <value>Your files in the previous Vault location are still secured. Going forward, this path will be treated as a Secured Folder.</value>
   </data>
@@ -25709,8 +25733,230 @@ The AxCrypt Team</value>
   <data name="VaultEncryptionText" xml:space="preserve">
     <value>Secure, encrypted container for storing your sensitive files and folders.</value>
   </data>
-  <data name="VaultFolderText" xml:space="preserve">
-    <value>vaultFolder</value>
+  <data name="VaultGuideCarouselText1" xml:space="preserve">
+    <value>Please configure the Vault by navigating to Settings â†’ Advanced Settings â†’ Vault Settings.</value>
+  </data>
+  <data name="VaultGuideCarouselText10" xml:space="preserve">
+    <value>List View, or</value>
+  </data>
+  <data name="VaultGuideCarouselText11" xml:space="preserve">
+    <value>Grid View</value>
+  </data>
+  <data name="VaultGuideCarouselText2" xml:space="preserve">
+    <value>Select where you want your encrypted data to be stored â†’ Select the Folder â†’ Confirm.</value>
+  </data>
+  <data name="VaultGuideCarouselText3" xml:space="preserve">
+    <value>You can choose to randomize the file name on encryption.</value>
+  </data>
+  <data name="VaultGuideCarouselText4" xml:space="preserve">
+    <value>Files dropped into the Vault will be removed from their original location and moved into the Vault.</value>
+  </data>
+  <data name="VaultGuideCarouselText5" xml:space="preserve">
+    <value>Open the configured &lt;strong&gt;Vault folder.&lt;/strong&gt;</value>
+  </data>
+  <data name="VaultGuideCarouselText6" xml:space="preserve">
+    <value>Select the file or folder you want to remove.</value>
+  </data>
+  <data name="VaultGuideCarouselText7" xml:space="preserve">
+    <value>Open it with &lt;b&gt;AxCrypt.&lt;/b&gt;</value>
+  </data>
+  <data name="VaultGuideCarouselText8" xml:space="preserve">
+    <value>Right-click and choose &lt;b&gt;Stop Securing.&lt;/b&gt;</value>
+  </data>
+  <data name="VaultGuideCarouselText9" xml:space="preserve">
+    <value>Move the file or folder to a location &lt;b&gt;outside the Vault.&lt;/b&gt;</value>
+  </data>
+  <data name="VaultGuideFaq1" xml:space="preserve">
+    <value>What happens to my files when I add them to the Vault?</value>
+  </data>
+  <data name="VaultGuideFaq1Ans" xml:space="preserve">
+    <value>When you add files or folders to the Vault, they are automatically secured &lt;b&gt;using AES-256 encryption and moved into the Vault folder.&lt;/b&gt; The original copies are removed from their previous location, so there is no duplication or manual cleanup required.</value>
+  </data>
+  <data name="VaultGuideFaq2" xml:space="preserve">
+    <value>Can I have more than one Vault on my computer?</value>
+  </data>
+  <data name="VaultGuideFaq2Ans" xml:space="preserve">
+    <value>&lt;b&gt;AxCrypt supports only one active Vault per system.&lt;/b&gt; The existing vault folder will be masked as secured folder the moment an another folder configured as Vault.</value>
+  </data>
+  <data name="VaultGuideFaq3" xml:space="preserve">
+    <value>Do I need to manually encrypt or decrypt files inside the Vault?</value>
+  </data>
+  <data name="VaultGuideFaq3Ans" xml:space="preserve">
+    <value>No. The Vault handles this automatically: Files are secured as soon as they are added to the Vault. When you open a file, it is temporarily unlocked for use. When you close the file, AxCrypt automatically secures it again.</value>
+  </data>
+  <data name="VaultGuideFaq4" xml:space="preserve">
+    <value>Can I remove or decrypt the entire Vault at once?</value>
+  </data>
+  <data name="VaultGuideFaq4Ans" xml:space="preserve">
+    <value>No. The Vault itself cannot be removed or unsecured in a single action. &lt;b&gt;Files and folders must be removed individually&lt;/b&gt; by using &lt;b&gt;Stop Securing&lt;/b&gt; and then moving them to a location outside the Vault.</value>
+  </data>
+  <data name="VaultGuideFaq5" xml:space="preserve">
+    <value>When is my Vault accessible?</value>
+  </data>
+  <data name="VaultGuideFaq5Ans" xml:space="preserve">
+    <value>Your Vault is accessible only when AxCrypt is running and you are logged in. If AxCrypt locks due to inactivity, manual lock, or system sleep, access to the Vault is automatically restricted.</value>
+  </data>
+  <data name="VaultGuideFaq6" xml:space="preserve">
+    <value>What happens if I change the Vault path?</value>
+  </data>
+  <data name="VaultGuideFaq6Ans" xml:space="preserve">
+    <value>When you change the Vault location: The old Vault folder is &lt;b&gt;no longer treated as a Vault.&lt;/b&gt; Any files left behind behave like files in a &lt;b&gt;regular secured folder.&lt;/b&gt; AxCrypt displays a &lt;b&gt;confirmation warning&lt;/b&gt; before allowing the change.</value>
+  </data>
+  <data name="VaultGuideHeadTitle" xml:space="preserve">
+    <value>AxCrypt &lt;span&gt;Vault&lt;/span&gt; – User Guide</value>
+  </data>
+  <data name="VaultGuideParagraph1" xml:space="preserve">
+    <value>Files and folders stored in a Vault are secured automatically. To remove them, they must be &lt;b&gt;taken out of the Vault individually&lt;/b&gt; and moved to another location.&lt;br/&gt;&lt;br/&gt; &lt;strong&gt;Note:&lt;strong/&gt; The entire Vault cannot be removed or unsecured at once. Files and folders must be handled one at a time.</value>
+  </data>
+  <data name="VaultGuideParagraph10" xml:space="preserve">
+    <value>Encryption Behavior</value>
+  </data>
+  <data name="VaultGuideParagraph11" xml:space="preserve">
+    <value>Once your Vault is created:</value>
+  </data>
+  <data name="VaultGuideParagraph12" xml:space="preserve">
+    <value>Any file or folder added to the Vault is &lt;b&gt;automatically secured using AES-256 encryption.&lt;/b&gt;</value>
+  </data>
+  <data name="VaultGuideParagraph13" xml:space="preserve">
+    <value>Files remain in a &lt;b&gt;standard folder structure&lt;/b&gt; on your local system, while the contents are fully protected.</value>
+  </data>
+  <data name="VaultGuideParagraph14" xml:space="preserve">
+    <value>When you open a file from the Vault:</value>
+  </data>
+  <data name="VaultGuideParagraph15" xml:space="preserve">
+    <value>The file is &lt;b&gt;temporarily unlocked in memory or a secure temporary location for use.&lt;/b&gt;</value>
+  </data>
+  <data name="VaultGuideParagraph16" xml:space="preserve">
+    <value>As soon as you close the file, &lt;b&gt;AxCrypt automatically secures it again, with no manual action required.&lt;/b&gt;</value>
+  </data>
+  <data name="VaultGuideParagraph17" xml:space="preserve">
+    <value>Security &amp; Access Controls</value>
+  </data>
+  <data name="VaultGuideParagraph18" xml:space="preserve">
+    <value>The Vault becomes accessible when you are logged into the AxCrypt application.</value>
+  </data>
+  <data name="VaultGuideParagraph19" xml:space="preserve">
+    <value>If AxCrypt locks due to inactivity, manual lock, or system sleep, Vault access is automatically restricted.</value>
+  </data>
+  <data name="VaultGuideParagraph2" xml:space="preserve">
+    <value>Your Vault contents can be viewed in :</value>
+  </data>
+  <data name="VaultGuideParagraph20" xml:space="preserve">
+    <value>Files and folders in the Vault can be accessed only while AxCrypt is running and unlocked.</value>
+  </data>
+  <data name="VaultGuideParagraph21" xml:space="preserve">
+    <value>The &lt;b&gt;My Vault&lt;/b&gt; screen is a dedicated, secure place where all your encrypted files and folders reside.</value>
+  </data>
+  <data name="VaultGuideParagraph22" xml:space="preserve">
+    <value>Key points:</value>
+  </data>
+  <data name="VaultGuideParagraph23" xml:space="preserve">
+    <value>Everything you add gets encrypted automatically.</value>
+  </data>
+  <data name="VaultGuideParagraph24" xml:space="preserve">
+    <value>There is &lt;b&gt;no need for manual cleanup&lt;/b&gt; like in Secured Folders.</value>
+  </data>
+  <data name="VaultGuideParagraph25" xml:space="preserve">
+    <value>Use the &lt;b&gt;search bar&lt;/b&gt; to quickly find files or folders.</value>
+  </data>
+  <data name="VaultGuideParagraph26" xml:space="preserve">
+    <value>As you type, AxCrypt will highlight matching items—similar to the dynamic search in the User File Activity Log.</value>
+  </data>
+  <data name="VaultGuideParagraph27" xml:space="preserve">
+    <value>You can move your Vault to a different folder or drive, but there are important conditions :</value>
+  </data>
+  <data name="VaultGuideParagraph28" xml:space="preserve">
+    <value>What happens when you change the Vault path</value>
+  </data>
+  <data name="VaultGuideParagraph29" xml:space="preserve">
+    <value>The previously configured Vault folder is no longer treated as a Vault.</value>
+  </data>
+  <data name="VaultGuideParagraph3" xml:space="preserve">
+    <value>You can switch between these anytime.</value>
+  </data>
+  <data name="VaultGuideParagraph30" xml:space="preserve">
+    <value>Files remaining in that folder behave like files in a regular secured folder.</value>
+  </data>
+  <data name="VaultGuideParagraph31" xml:space="preserve">
+    <value>Any files still present will be accessible based on their current security state.</value>
+  </data>
+  <data name="VaultGuideParagraph32" xml:space="preserve">
+    <value>AxCrypt supports only one active Vault per system.</value>
+  </data>
+  <data name="VaultGuideParagraph33" xml:space="preserve">
+    <value>A confirmation warning is shown before the Vault path is changed.</value>
+  </data>
+  <data name="VaultGuideParagraph34" xml:space="preserve">
+    <value>AxCrypt Vault offers a seamless, transparent way to protect your sensitive files. With automatic encryption, auto-locking, secure access controls, and a simple drag-and-drop interface, it ensures that your data stays safe without interrupting your workflow.</value>
+  </data>
+  <data name="VaultGuideParagraph35" xml:space="preserve">
+    <value>A dedicated menu may appear in the app's side navigation depending on your layout settings.</value>
+  </data>
+  <data name="VaultGuideParagraph4" xml:space="preserve">
+    <value>AxCrypt Vault is a secure, encrypted container for storing your sensitive files and folders. Anything added to the Vault is &lt;b&gt;automatically encrypted,&lt;/b&gt; with no manual cleanup or extra steps required. It works like a dedicated encrypted folder that you can place anywhere on your computer, with full control through &lt;b&gt;Vault Settings.&lt;/b&gt;</value>
+  </data>
+  <data name="VaultGuideParagraph5" xml:space="preserve">
+    <value>Create a protected, encrypted container (Vault).</value>
+  </data>
+  <data name="VaultGuideParagraph6" xml:space="preserve">
+    <value>Drag and drop files or folders for instant protection.</value>
+  </data>
+  <data name="VaultGuideParagraph7" xml:space="preserve">
+    <value>Automatically encrypt and decrypt files behind the scenes.</value>
+  </data>
+  <data name="VaultGuideParagraph8" xml:space="preserve">
+    <value>Work securely without worrying about manual cleanup.</value>
+  </data>
+  <data name="VaultGuideParagraph9" xml:space="preserve">
+    <value>AxCrypt Vault is designed to help you:</value>
+  </data>
+  <data name="VaultGuidesHeadParagraph" xml:space="preserve">
+    <value>AxCrypt Vault is a secure, encrypted container for storing your sensitive files and folders. Anything added to the Vault is automatically encrypted, with no manual cleanup or extra steps required.</value>
+  </data>
+  <data name="VaultGuideSideMenuHead1" xml:space="preserve">
+    <value>2 ways to add files/folders to Vault</value>
+  </data>
+  <data name="VaultGuideSideMenuHead2" xml:space="preserve">
+    <value>Removing files/folders from Vault</value>
+  </data>
+  <data name="VaultGuideSideMenuHead3" xml:space="preserve">
+    <value>Viewing Your Vault</value>
+  </data>
+  <data name="VaultGuideSideMenuHead4" xml:space="preserve">
+    <value>How the Vault Works</value>
+  </data>
+  <data name="VaultGuideSideMenuHead5" xml:space="preserve">
+    <value>My Vault Screen</value>
+  </data>
+  <data name="VaultGuideSubHeading1" xml:space="preserve">
+    <value>Configure the &lt;span&gt;Vault&lt;/span&gt;</value>
+  </data>
+  <data name="VaultGuideSubHeading10" xml:space="preserve">
+    <value>Key goals of the &lt;span&gt;Vault&lt;/span&gt;</value>
+  </data>
+  <data name="VaultGuideSubHeading2" xml:space="preserve">
+    <value>&lt;span&gt;2 Easy Ways&lt;/span&gt; &lt;strong&gt;to Add&lt;/strong&gt; files and folders to encrypt automatically &lt;b&gt;in a Vault&lt;/b&gt;</value>
+  </data>
+  <data name="VaultGuideSubHeading3" xml:space="preserve">
+    <value>&lt;b&gt;Removing&lt;/b&gt; Files or Folders from an &lt;span&gt;AxCrypt Vault&lt;/span&gt;</value>
+  </data>
+  <data name="VaultGuideSubHeading4" xml:space="preserve">
+    <value>&lt;b&gt;Viewing&lt;/b&gt; Your &lt;span&gt;Vault&lt;/span&gt;</value>
+  </data>
+  <data name="VaultGuideSubHeading5" xml:space="preserve">
+    <value>What is &lt;span&gt;Vault&lt;/span&gt;?</value>
+  </data>
+  <data name="VaultGuideSubHeading6" xml:space="preserve">
+    <value>How the &lt;span&gt;Vault&lt;/span&gt; &lt;strong&gt;works?&lt;/strong&gt;</value>
+  </data>
+  <data name="VaultGuideSubHeading7" xml:space="preserve">
+    <value>My &lt;span&gt;Vault&lt;/span&gt; &lt;strong&gt;screen&lt;/strong&gt;</value>
+  </data>
+  <data name="VaultGuideSubHeading8" xml:space="preserve">
+    <value>Search inside &lt;span&gt;Vault&lt;/span&gt;</value>
+  </data>
+  <data name="VaultGuideSubHeading9" xml:space="preserve">
+    <value>Updating your &lt;span&gt;Vault Path&lt;/span&gt;</value>
   </data>
   <data name="VaultLabelPromptAutoEncypt" xml:space="preserve">
     <value>Auto-encrypt opened Vault when exiting?</value>
