@@ -139,15 +139,11 @@ namespace AxCrypt.Core.UI
         /// <summary>
         /// Raised to confirm that a file really should be wiped.
         /// </summary>
-        public event EventHandler<FileOperationEventArgs> WipeQueryConfirmation;
+        public event Func<FileOperationEventArgs, Task> WipeQueryConfirmation;
 
-        protected virtual void OnWipeQueryConfirmation(FileOperationEventArgs e)
+        protected virtual Task OnWipeQueryConfirmation(FileOperationEventArgs e)
         {
-            EventHandler<FileOperationEventArgs> handler = WipeQueryConfirmation;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            return WipeQueryConfirmation.Invoke(e);
         }
 
         /// <summary>
@@ -638,26 +634,26 @@ namespace AxCrypt.Core.UI
             return true;
         }
 
-        private Task<bool> WipeFilePreparationAsync(IDataStore fileInfo)
+        private async Task<bool> WipeFilePreparationAsync(IDataStore fileInfo)
         {
             using (FileLock fileLock = New<FileLocker>().Acquire(fileInfo))
             {
                 if (IsWriteProtected(fileLock) || IsLocked(fileLock))
                 {
-                    return Task.FromResult(false);
+                    return false;
                 }
 
                 _eventArgs.OpenFileFullName = fileInfo.FullName;
                 _eventArgs.SaveFileFullName = fileInfo.FullName;
                 if (_progress.AllItemsConfirmed)
                 {
-                    return Task.FromResult(true);
+                    return true;
                 }
-                OnWipeQueryConfirmation(_eventArgs);
+                await OnWipeQueryConfirmation(_eventArgs);
                 if (_eventArgs.Cancel)
                 {
                     _eventArgs.Status = new FileOperationContext(fileInfo.FullName, ErrorStatus.Canceled);
-                    return Task.FromResult(false);
+                    return false;
                 }
 
                 if (_eventArgs.ConfirmAll)
@@ -665,7 +661,7 @@ namespace AxCrypt.Core.UI
                     _progress.AllItemsConfirmed = true;
                 }
             }
-            return Task.FromResult(true);
+            return true;
         }
 
         private Task<bool> WipeFileOperationAsync()
@@ -780,9 +776,9 @@ namespace AxCrypt.Core.UI
             }
 
             e.CryptoId = properties.DecryptionParameter.CryptoId;
-            
+
             string saveFileDirectoryPath = Resolve.Portable.Path().GetDirectoryName(sourceFileInfo.FullName);
-            if(e.SaveFileDataContainer != null)
+            if (e.SaveFileDataContainer != null)
             {
                 saveFileDirectoryPath = e.SaveFileDataContainer.FullName ?? saveFileDirectoryPath;
             }

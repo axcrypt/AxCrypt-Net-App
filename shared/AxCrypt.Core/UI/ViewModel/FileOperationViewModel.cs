@@ -318,7 +318,7 @@ namespace AxCrypt.Core.UI.ViewModel
         {
             FileOperationsController operationsController = new FileOperationsController(progress);
 
-            operationsController.WipeQueryConfirmation += async (object sender, FileOperationEventArgs e) =>
+            operationsController.WipeQueryConfirmation += async (FileOperationEventArgs e) =>
             {
                 FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(new string[] { file.FullName, })
                 {

@@ -661,7 +661,7 @@ namespace AxCrypt.Core.Test
         public async Task TestSimpleWipe()
         {
             FileOperationsController controller = new FileOperationsController();
-            controller.WipeQueryConfirmation += (object sender, FileOperationEventArgs e) =>
+            controller.WipeQueryConfirmation += async (FileOperationEventArgs e) =>
             {
                 e.Cancel = false;
                 e.Skip = false;
@@ -678,11 +678,13 @@ namespace AxCrypt.Core.Test
         public void TestSimpleWipeOnThreadWorker()
         {
             FileOperationsController controller = new FileOperationsController();
-            controller.WipeQueryConfirmation += (object sender, FileOperationEventArgs e) =>
+            controller.WipeQueryConfirmation += (FileOperationEventArgs e) =>
             {
                 e.Cancel = false;
                 e.Skip = false;
                 e.ConfirmAll = false;
+
+                return Task.CompletedTask;
             };
 
             string destinationPath = String.Empty;
@@ -704,9 +706,11 @@ namespace AxCrypt.Core.Test
         public async Task TestWipeWithCancel()
         {
             FileOperationsController controller = new FileOperationsController();
-            controller.WipeQueryConfirmation += (object sender, FileOperationEventArgs e) =>
+            controller.WipeQueryConfirmation += (FileOperationEventArgs e) =>
             {
                 e.Cancel = true;
+
+                return Task.CompletedTask;
             };
             FileOperationContext status = await controller.WipeFileAsync(New<IDataStore>(_helloWorldAxxPath));
             Assert.That(status.ErrorStatus, Is.EqualTo(ErrorStatus.Canceled), "The wipe should indicate cancellation.");
@@ -719,9 +723,11 @@ namespace AxCrypt.Core.Test
         public async Task TestWipeWithSkip()
         {
             FileOperationsController controller = new FileOperationsController();
-            controller.WipeQueryConfirmation += (object sender, FileOperationEventArgs e) =>
+            controller.WipeQueryConfirmation += (FileOperationEventArgs e) =>
             {
                 e.Skip = true;
+
+                return Task.CompletedTask;
             };
             FileOperationContext status = await controller.WipeFileAsync(New<IDataStore>(_helloWorldAxxPath));
             Assert.That(status.ErrorStatus, Is.EqualTo(ErrorStatus.Success), "The wipe should indicate success even when skipping.");
@@ -736,13 +742,15 @@ namespace AxCrypt.Core.Test
             ProgressContext progress = new ProgressContext();
             FileOperationsController controller = new FileOperationsController(progress);
             int confirmationCount = 0;
-            controller.WipeQueryConfirmation += (object sender, FileOperationEventArgs e) =>
+            controller.WipeQueryConfirmation += (FileOperationEventArgs e) =>
             {
                 if (confirmationCount++ > 0)
                 {
                     throw new InvalidOperationException("The event should not be raised a second time.");
                 }
                 e.ConfirmAll = true;
+
+                return Task.CompletedTask;
             };
             progress.NotifyLevelStart();
             FileOperationContext status = await controller.WipeFileAsync(New<IDataStore>(_helloWorldAxxPath));

@@ -1,0 +1,72 @@
+﻿@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+
+@inject ConfirmWipeDialogViewModel ConfirmWipeDialogViewModel
+
+@if (IsVisible)
+{
+    <div id="modal-dialog6" class="modalDialog">
+        <div id="UpgradePopup" class="upg-popup text-center">
+            <div class="close-img" @onclick="Button_CancelClicked"></div>
+            <h2 style="padding-top:15px;">
+                <strong>@Texts.McInfMenuWipe</strong>
+            </h2>
+
+            <div>
+                <p>
+                    @Texts.PromptLabelText
+                </p>
+
+                <div style="display:flex;margin-left:30px;">
+                    <input id="dothisforallfiles" type="checkbox" @bind="ConfirmWipeDialogViewModel.OptedCheckAllFiles" />
+                    <label for="dothisforallfiles">@Texts.ConfirmAllCheckBoxText</label>
+                </div>
+
+                <div class="modal-footer" style="padding-top:15px;">
+                    <input type="button" class="btn-small font-medium free-color whte-clr" @onclick="Button_YesClicked" value="@Texts.YesLabel" style="text-align: center;border-color: transparent !important;" />
+                    <input type="button" class="btn-small font-medium" style="color: black !important;" @onclick="Button_NoClicked" value="@Texts.NoLabel" />
+                    <input type="button" class="btn-small font-medium" style="color: black !important;" @onclick="Button_CancelClicked" value="@Texts.ButtonCancelText" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+    bool IsVisible = false;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ConfirmWipeDialogViewModel.ConfirmWipeDialog.OnDialogVisibilityChanged += UpdateConfirmPopDialogState;
+    }
+
+    public void Button_YesClicked()
+    {
+        ConfirmWipeDialogViewModel.OptedNo = false;
+        ConfirmWipeDialogViewModel.OptedCancel = false;
+        ConfirmWipeDialogViewModel.OptedYes = true;
+    }
+
+    public void Button_NoClicked()
+    {
+        ConfirmWipeDialogViewModel.OptedCancel = false;
+        ConfirmWipeDialogViewModel.OptedYes = false;
+        ConfirmWipeDialogViewModel.OptedNo = true;
+    }
+
+    public void Button_CancelClicked()
+    {
+        ConfirmWipeDialogViewModel.OptedYes = false;
+        ConfirmWipeDialogViewModel.OptedNo = false;
+        ConfirmWipeDialogViewModel.OptedCancel = true;
+    }
+
+    void UpdateConfirmPopDialogState(bool isVisible)
+    {
+        InvokeAsync(() =>
+        {
+            IsVisible = isVisible;
+            StateHasChanged(); // Refresh UI
+        });
+    }
+}

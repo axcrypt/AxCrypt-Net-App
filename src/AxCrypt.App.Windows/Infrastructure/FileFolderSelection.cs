@@ -1,4 +1,6 @@
-﻿using AxCrypt.Content;
+﻿using AxCrypt.App.Shared.Services.UI;
+using AxCrypt.App.Shared.Services;
+using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
@@ -49,7 +51,7 @@ public class FileFolderSelection : IDataItemSelection
                 break;
 
             case FileSelectionType.WipeConfirm:
-                HandleWipeConfirm(e);
+                await HandleWipeConfirm(e);
                 break;
 
             case FileSelectionType.Folder:
@@ -90,17 +92,14 @@ public class FileFolderSelection : IDataItemSelection
         return;
     }
 
-    private static void HandleWipeConfirm(FileSelectionEventArgs e)
+    private static async Task HandleWipeConfirm(FileSelectionEventArgs e)
     {
-        //using (ConfirmWipeDialog cwd = new ConfirmWipeDialog())
-        //{
-        //    cwd.FileNameLabel.Text = Path.GetFileName(e.SelectedFiles[0]);
-        //    e.Skip = false;
-        //    DialogResult confirmResult = cwd.ShowDialog();
-        //    e.ConfirmAll = cwd._confirmAllCheckBox.Checked;
-        //    e.Skip = confirmResult == DialogResult.No;
-        //    e.Cancel = confirmResult == DialogResult.Cancel;
-        //}
+        AxCrypt.App.Shared.ViewModels.ConfirmWipeDialogViewModel cwd = AxCServiceProvider.GetService<AxCrypt.App.Shared.ViewModels.ConfirmWipeDialogViewModel>();
+        await cwd.ShowHideConfirmWipeDialog();
+        cwd.FileName = Path.GetFileName(e.SelectedFiles[0]);
+        e.ConfirmAll = cwd.OptedCheckAllFiles;
+        e.Skip = cwd.OptedNo;
+        e.Cancel = cwd.OptedCancel;
     }
 
     private static async Task HandleOpenFileSelection(FileSelectionEventArgs e)
