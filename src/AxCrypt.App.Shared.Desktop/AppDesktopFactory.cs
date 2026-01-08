@@ -3,6 +3,7 @@ using AxCrypt.Core.Authenticator.Service;
 using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Components.Pages;
 using AxCrypt.App.Shared.Desktop.Services;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.Desktop.ViewModels;
 using AxCrypt.App.Shared.Desktop.ViewModels.Home;
 using AxCrypt.App.Shared.Desktop.ViewModels.Main;

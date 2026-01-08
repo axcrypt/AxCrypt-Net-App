@@ -173,11 +173,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             await _fileOperationViewModel!.AsyncEncryptionUpgrade.ExecuteAsync(null!);
         }
 
-        public async void InviteUser(EventArgs e)
-        {
-            await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { LogOnViewModel.InviteDialog.Show(); }, null!, e);
-        }
-
         public void UpgradeDialog()
         {
             LogOnViewModel.UpgradeDialog.Show();
