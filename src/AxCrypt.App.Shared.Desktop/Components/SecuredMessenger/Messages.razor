@@ -16,7 +16,11 @@
     if (SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
     {
         messageToList = Model.Message.ReceiverList.Select(re => re.User);
-        messageToListText = string.Join(", ", messageToList.Take(Utility.MaxReceiversToDisplay));
+
+        if (messageToList.Count() > 0)
+        {
+            messageToListText = string.Join(", ", messageToList.Take(Utility.MaxReceiversToDisplay));
+        }
 
         read = DateTime.MinValue;
     }

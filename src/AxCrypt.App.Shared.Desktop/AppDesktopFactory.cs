@@ -11,7 +11,6 @@ using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
 using Microsoft.Extensions.DependencyInjection;
 using AxCrypt.Core.UI.ViewModel;
-using AxCrypt.App.Shared.ViewModels;
 namespace AxCrypt.App.Shared.Desktop;
 
 public static class AppDesktopFactory

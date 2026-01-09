@@ -139,7 +139,7 @@
 
         if (newSecMsgrViewModel.ReceiverList.Any(su => su.EmailAddress.ToLower() == email.ToLower()))
         {
-            ErrorMessage = Texts.EmailAlreadyAddedText;
+            ErrorMessage = Texts.EmailAlreadyAddedText.Replace("${0}", email);
             return;
         }
 
