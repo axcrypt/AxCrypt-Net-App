@@ -251,9 +251,9 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
             NewSecMsgrViewModel.UpdateViewState();
         }
 
-        public async Task ViewMessageById(Guid messageId)
+        public async Task ViewMessageById(Guid messageId,string messageContent)
         {
-            if (messageId == Guid.Empty)
+            if (messageId == Guid.Empty || !string.IsNullOrEmpty(messageContent))
             {
                 return;
             }

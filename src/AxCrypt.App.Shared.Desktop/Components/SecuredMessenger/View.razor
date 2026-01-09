@@ -50,7 +50,7 @@
         <div id="view-message-box">
             <div class="view-section" id="expand-view-sec">
                 <table>
-                    <tbody @onclick="async()=>await ViewSecMsgrViewModel.ViewMessageById(messenger.Id)" style="cursor:pointer;">
+                    <tbody @onclick="async () => await ViewSecMsgrViewModel.ViewMessageById(messenger.Id, messenger.Message.TheMessage!)" style="cursor:pointer;">
                         <tr>
                             <td> <div class="acc-prfl fnt-small">@senderShortCode</div></td>
                             <td style="line-height: normal; max-width: 235px; padding-left: 5px;">
@@ -106,7 +106,7 @@
                     </tbody>
                 </table>
                 <div class="text-msg message-content" id="secured-messenger-view-@messenger.Id" style="@LatestMessageStyle">
-                    @if (messenger.Message.TheMessage != null)
+                    @if (messenger.Message.TheMessage != null && !messenger.ShowLoadingWheel)
                     {
                         <textarea name="encryptedMessage" id="secured-mess-body" maxlength="100000" @bind="messenger.Message.TheMessage" readonly autofocus></textarea>
                     }
