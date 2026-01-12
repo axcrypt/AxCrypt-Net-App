@@ -10,6 +10,10 @@ function addMask() {
 
 // Clear slide
 function clearHelp() {
+    document.querySelectorAll(".help-overlay.z-top").forEach(x => {
+        x.classList.remove("help-overlay", "z-top");
+    });
+
     document.querySelectorAll(
         ".help-overlay-mask, .help-tooltip, .help-buttons, .help-pagination-dots, .help-arrow-img"
     ).forEach(x => x.remove());
@@ -230,12 +234,14 @@ function updateZIndexForSlide(slideIndex) {
         6: ".abt-sec"
     };
 
-    document.querySelectorAll(".z-top").forEach(x => x.classList.remove("z-top"));
+    document.querySelectorAll(".help-overlay.z-top").forEach(x => {
+        x.classList.remove("help-overlay", "z-top");
+    });
 
     const selector = slideMap[slideIndex];
     if (!selector) return;
 
     document.querySelectorAll(selector).forEach(x => {
-        x.classList.add("z-top");
+        x.classList.add("help-overlay", "z-top");
     });
 }
