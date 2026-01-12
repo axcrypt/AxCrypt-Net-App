@@ -50,9 +50,9 @@ namespace AxCrypt.Core.Runtime
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public void WaitForBackgroundToComplete()
+        public async Task WaitForBackgroundToCompleteAsync()
         {
-            New<IProgressBackground>().WaitForIdle();
+            await New<IProgressBackground>().WaitForIdleAsync();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
@@ -75,7 +75,7 @@ namespace AxCrypt.Core.Runtime
 
             try
             {
-                New<IProgressBackground>().WaitForIdle();
+                await New<IProgressBackground>().WaitForIdleAsync();
             }
             catch
             {

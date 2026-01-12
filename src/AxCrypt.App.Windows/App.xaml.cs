@@ -303,9 +303,9 @@ public partial class App : Application
     {
         if (_mainViewModel != null)
         {
-            new ApplicationManager().WaitForBackgroundToComplete();
+            await new ApplicationManager().WaitForBackgroundToCompleteAsync();
             await _mainViewModel.EncryptPendingFiles.ExecuteAsync(null);
-            new ApplicationManager().WaitForBackgroundToComplete();
+            await new ApplicationManager().WaitForBackgroundToCompleteAsync();
         }
     }
 

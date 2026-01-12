@@ -93,9 +93,9 @@ public class ProgressBackgroundComponent : Component, IProgressBackground
         }
     }
 
-    public void WaitForIdle()
+    public async Task WaitForIdleAsync()
     {
-        _progressBackground.WaitForIdle();
+        await _progressBackground.WaitForIdle();
     }
 
     public Task WorkAsync(string name, Func<IProgressContext, Task<FileOperationContext>> workFunctionAsync, Func<FileOperationContext, Task> completeAsync, IProgressContext progress)
@@ -107,7 +107,7 @@ public class ProgressBackgroundComponent : Component, IProgressBackground
     {
         if (disposing)
         {
-            WaitForIdle();
+            WaitForIdleAsync().GetAwaiter().GetResult();
         }
 
         base.Dispose(disposing);

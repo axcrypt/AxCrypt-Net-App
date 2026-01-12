@@ -96,9 +96,9 @@ public class AdvancedOptionsViewModel : ViewModelBase
 
     private async Task EncryptPendingFiles()
     {
-        new ApplicationManager().WaitForBackgroundToComplete();
+        await new ApplicationManager().WaitForBackgroundToCompleteAsync();
         await New<MainViewModel>().EncryptPendingFiles.ExecuteAsync(null!);
-        new ApplicationManager().WaitForBackgroundToComplete();
+        await new ApplicationManager().WaitForBackgroundToCompleteAsync();
     }
 
     public void CancelButton_Click(EventArgs e)

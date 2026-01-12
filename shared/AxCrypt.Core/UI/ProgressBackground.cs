@@ -58,11 +58,11 @@ namespace AxCrypt.Core.UI
         /// <summary>
         /// Wait for all operations to complete.
         /// </summary>
-        public void WaitForIdle()
+        public async Task WaitForIdle()
         {
             while (Busy)
             {
-                New<IUIThread>().Yield();
+                await Task.Yield();
             }
         }
 

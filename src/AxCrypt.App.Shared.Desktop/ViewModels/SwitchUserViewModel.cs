@@ -127,7 +127,7 @@ public class SwitchUserViewModel : ViewModelBase
         return New<IUserProfilesStore>().UpdateUser(userProfile);
     }
 
-    public bool RemoveButton_Click(string userEmail)
+    public async Task<bool> RemoveButton_Click(string userEmail)
     {
         if (string.IsNullOrEmpty(userEmail) || !UserProfilesList.Any(up => up.UserEmail == userEmail))
         {
@@ -150,7 +150,7 @@ public class SwitchUserViewModel : ViewModelBase
         {
             New<IDebugLoggingWindow>().CloseAllLogWindows();
 
-            new ApplicationManager().WaitForBackgroundToComplete();
+            await new ApplicationManager().WaitForBackgroundToCompleteAsync();
             SafeDeleteFilesInFolder(userProfile.BasePath);
         }
 
@@ -212,7 +212,7 @@ public class SwitchUserViewModel : ViewModelBase
 
         New<IDebugLoggingWindow>().CloseAllLogWindows();
 
-        new ApplicationManager().WaitForBackgroundToComplete();
+        await new ApplicationManager().WaitForBackgroundToCompleteAsync();
         await ShutDownAnd(New<IUIThread>().RestartApplication);
     }
 

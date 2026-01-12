@@ -135,9 +135,9 @@ public class ActionsViewModel : ViewModelBase
     {
         if (_mainViewModel != null)
         {
-            new ApplicationManager().WaitForBackgroundToComplete();
+            await new ApplicationManager().WaitForBackgroundToCompleteAsync();
             await _mainViewModel.EncryptPendingFiles.ExecuteAsync(null!);
-            new ApplicationManager().WaitForBackgroundToComplete();
+            await new ApplicationManager().WaitForBackgroundToCompleteAsync();
         }
 
         UpdateViewState();

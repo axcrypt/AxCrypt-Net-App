@@ -50,7 +50,7 @@ namespace AxCrypt.App.Shared.Utility
             {
                 New<IDebugLoggingWindow>().CloseAllLogWindows();
 
-                new ApplicationManager().WaitForBackgroundToComplete();
+                await new ApplicationManager().WaitForBackgroundToCompleteAsync();
                 await new ApplicationManager().ClearAllSettings();
                 await ShutDownAnd(New<IUIThread>().RestartApplication);
             }
@@ -80,9 +80,9 @@ namespace AxCrypt.App.Shared.Utility
             LogOnViewModel? logOnViewModel = AxCServiceProviderExtension.LogOnViewModel;
             if (logOnViewModel?.MainViewModel != null)
             {
-                new ApplicationManager().WaitForBackgroundToComplete();
+                await new ApplicationManager().WaitForBackgroundToCompleteAsync();
                 await logOnViewModel.MainViewModel.EncryptPendingFiles.ExecuteAsync(null);
-                new ApplicationManager().WaitForBackgroundToComplete();
+                await new ApplicationManager().WaitForBackgroundToCompleteAsync();
             }
         }
     }

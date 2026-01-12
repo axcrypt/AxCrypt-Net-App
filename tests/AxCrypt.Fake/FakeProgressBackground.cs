@@ -60,11 +60,11 @@ namespace AxCrypt.Fake
             OnWorkStatusChanged();
         }
 
-        public void WaitForIdle()
+        public async Task WaitForIdleAsync()
         {
             while (Busy)
             {
-                Thread.Sleep(0);
+                await Task.Delay(50); 
             }
         }
 

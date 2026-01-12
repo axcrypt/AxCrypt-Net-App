@@ -383,7 +383,7 @@ namespace AxCrypt.Core.Test
 
                 await mvm.EncryptPendingFiles.ExecuteAsync(null);
             }
-            New<IProgressBackground>().WaitForIdle();
+            await New<IProgressBackground>().WaitForIdleAsync();
 #pragma warning disable 4014
             mockActiveFileAction.Verify(x => x.PurgeActiveFiles(It.IsAny<IProgressContext>()), Times.Once, "Purge should be called.");
 #pragma warning restore 4014
