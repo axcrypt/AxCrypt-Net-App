@@ -165,7 +165,7 @@ namespace AxCrypt.Api.Shared.Helper
 
             if (securedMessengerFilterTab == SecureMsgrFilterTab.Inbox)
             {
-                rootMessage.Replies = rootMessage.Replies.Where(rm => (rm.Visibility == nameof(SecureMsgrVisibility.Once) && rm.Receiver.First(ru => ru.User == New<UserSettings>().UserEmail).Read == DateTime.MinValue) || rm.Visibility != nameof(SecureMsgrVisibility.Once) && rm.VisibleUntil > New<Abstractions.INow>().Utc);
+                rootMessage.Replies = rootMessage.Replies.Where(rm => (rm.Visibility == nameof(SecureMsgrVisibility.Once) && (rm.Receiver.Any(ru => ru.User == New<UserSettings>().UserEmail && ru.Read == DateTime.MinValue) || rm.Sender == New<UserSettings>().UserEmail)) || (rm.Visibility != nameof(SecureMsgrVisibility.Once) && rm.VisibleUntil > New<Abstractions.INow>().Utc ));
             }
 
             foreach (SecuredMessengerApiModel messenger in rootMessage.Replies)
