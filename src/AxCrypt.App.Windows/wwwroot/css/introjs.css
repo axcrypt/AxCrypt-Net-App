@@ -21,7 +21,7 @@
     }
 
 .help-width {
-    width: 220px !important;
+    width: 200px !important;
 }
 
 .sidemenu-width, .abt-width {
@@ -33,6 +33,8 @@
     bottom: 40px;
     left: 50%;
     z-index: 9999;
+    display:flex;
+    flex-direction:column;
 }
 
 .help-btn-skip {
@@ -97,5 +99,13 @@
 @media (max-width: 1380px) {
     .abt-width {
         width: 320px !important;
+    }
+
+    .help-buttons {
+        bottom: 25px !important;
+    }
+
+    .help-pagination-dots {
+        bottom: 130px !important;
     }
 }

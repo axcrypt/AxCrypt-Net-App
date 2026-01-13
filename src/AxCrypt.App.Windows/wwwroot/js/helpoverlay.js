@@ -169,8 +169,8 @@ function startMoreActionHelp() {
     updateZIndexForSlide(helpSlideIndex);
 
     const items = [
-        { id: "help-anymous-rename", text: "Click <b>Anonymous Rename</b> to hide the real name of an encrypted file by renaming it with a random name.", width: 200 },
-        { id: "help-secure-dlt", text: "Click <b>Secure Delete</b> to safely remove your files.", width: 200 },
+        { id: "help-anymous-rename", text: "Click <b>Anonymous Rename</b> to hide the real name of an encrypted file by renaming it with a random name.", width: 132 },
+        { id: "help-secure-dlt", text: "Click <b>Secure Delete</b> to safely remove your files.", width: 129 },
         { id: "help-upgrade-files", text: "Click <b>Upgrade Files</b> to choose a folder of AES-128 encrypted files and upgrade their encryption to AES-256.", width: 200 }
     ];
     buildSlide(items, showRecentFilesHelp);
