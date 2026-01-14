@@ -13085,6 +13085,12 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="BusinessProductKeyParagraph11" xml:space="preserve">
     <value>İş iletişimi güvenliğini AES-256 şifrelemesiyle artırarak, gizli mesajların web, masaüstü ve mobilde korunmasını sağlayın. Secured Messenger for Business ile yalnızca yetkili ekip üyeleri mesajlara erişebilir ve hassas kurumsal veriler yetkisiz erişimden korunur.</value>
   </data>
+  <data name="BusinessProductKeyParagraph12" xml:space="preserve">
+    <value>AxCrypt Business, hassas metin bilgilerinin paylaşılmasını güvenli ve okunamaz formata dönüştürerek hızlı ve güvenli hale getirir. Kullanıcılar gizli düz metni saniyeler içinde şifreleyip pano, .txt dosya veya e-posta yoluyla dağıtabilir.</value>
+  </data>
+  <data name="BusinessProductKeyParagraph13" xml:space="preserve">
+    <value>AxCrypt Vault, kuruluşlara anında ve otomatik olarak şifrelenen güvenli, şifreli bir klasör sunar ve manuel çaba olmadan tutarlı veri koruması sağlar.</value>
+  </data>
   <data name="BusinessProductKeyParagraph2" xml:space="preserve">
     <value>Kullanıcıları verimli bir şekilde gruplara ayırın ve merkezi anahtar yönetimi ile erişimlerini yönetin. Bu, kuruluş genelinde tutarlı izinler sağlar ve yöneticilerin kritik verilere grup erişimini yönetmelerini ve güvence altına almalarını sağlar.
 </value>
@@ -13780,6 +13786,9 @@ Bundan sonra &lt;b&gt;{0}&lt;/b&gt; ve var olan şifreni kullanarak oturum açab
   <data name="CommandLineFaq3" xml:space="preserve">
     <value>Birden fazla dosyayı aynı anda şifreleyebilir miyim?</value>
   </data>
+  <data name="CommandLineFaq3Ans" xml:space="preserve">
+    <value>Evet. Tek bir komutta birden fazla dosyayı listeleyebilirsiniz.</value>
+  </data>
   <data name="CommandLineFaq4" xml:space="preserve">
     <value>AxCrypt CLI hangi dosya formatlarını destekler?</value>
   </data>
@@ -13852,8 +13861,17 @@ Bundan sonra &lt;b&gt;{0}&lt;/b&gt; ve var olan şifreni kullanarak oturum açab
   <data name="CommandLineGuideStepText37" xml:space="preserve">
     <value>"Dosya başarıyla şifrelendi"</value>
   </data>
+  <data name="CommandLineGuideStepText38" xml:space="preserve">
+    <value>"Yanlış şifre"</value>
+  </data>
+  <data name="CommandLineGuideStepText39" xml:space="preserve">
+    <value>"Dosya bulunamadı"</value>
+  </data>
   <data name="CommandLineGuideStepText4" xml:space="preserve">
     <value>&lt;strong&gt;Syntax&lt;/strong&gt;</value>
+  </data>
+  <data name="CommandLineGuideStepText40" xml:space="preserve">
+    <value>Hiç mesaj yok (sessizce çalıştırılıyorsa)</value>
   </data>
   <data name="CommandLineGuideStepText41" xml:space="preserve">
     <value>Bazı komut satırı araçları yeni dosyalar da oluşturur (örneğin AxCrypt .axx şifreli dosyalar oluşturur).</value>
@@ -17145,6 +17163,12 @@ Herhangi bir nedenden dolayı şifreni bilmiyor veya hatırlamıyorsan bir şifr
   </data>
   <data name="HomeSellingPointStrongEncryptionHeading" xml:space="preserve">
     <value>Güçlü Şifreleme ve Güvenli Erişim</value>
+  </data>
+  <data name="HomeSellingPointTextEncryptionBody" xml:space="preserve">
+    <value>Gizli düz metninizi güvenli, okunamaz bir formata dönüştürün. Metninizi yazın, AxCrypt hesabınızın şifresiyle güvence altına alın ve şifreli çıktıyı paylaşın.</value>
+  </data>
+  <data name="HomeSellingPointVaultEncryptionBody" xml:space="preserve">
+    <value>AxCrypt Vault, hassas dosyalarınızı ve klasörlerinizi otomatik olarak depolamak için güvenli ve şifreli bir konteynerdir.</value>
   </data>
   <data name="HomeStayInTouchHeading" xml:space="preserve">
     <value>Bizimle iletişimde kalın</value>
@@ -22353,6 +22377,12 @@ HubSpot, CRM sistemi aracılığıyla iletişim yönetimi dahil, çevrimiçi paz
   <data name="ProductProtectCarouselText7" xml:space="preserve">
     <value>Güvenli dosyaların isimlerini rastgele tanımlayıcılarla yeniden adlandırarak orijinal isimlerin gizli kalmasını sağlar. Dosyayı şifre açtığınızda veya açtığınızda, gerçek dosya adı otomatik olarak geri yüklenir.</value>
   </data>
+  <data name="ProductProtectCarouselText8" xml:space="preserve">
+    <value>AxCrypt Metin Şifrelemesi, gizli düz metninizi anında güvenli, okunamaz bir formata dönüştürür. Metninizi yazın, AxCrypt hesabınızın şifresiyle güvence altına alın ve şifreli çıktıyı pano, indirme .txt veya e-posta ile gönderin.</value>
+  </data>
+  <data name="ProductProtectCarouselText9" xml:space="preserve">
+    <value>AxCrypt Vault, hassas dosyalarınızı ve klasörlerinizi depolamak için güvenli ve şifreli bir konteynerdir. Vault'a eklenen her şey otomatik olarak şifreleniyor, manuel temizleme veya ek adım gerektirmiyor.</value>
+  </data>
   <data name="ProductRegulatoryHead" xml:space="preserve">
     <value>Yapı &lt;span&gt;Secure&lt;/span&gt;. Yapı &lt;b&gt;Compliant&lt;/b&gt;</value>
   </data>
@@ -25513,6 +25543,9 @@ AxCrypt Ekibi</value>
   </data>
   <data name="VaultDrogDropText" xml:space="preserve">
     <value>Dosyanı/klasörünü buraya sürükleyip bırak</value>
+  </data>
+  <data name="VaultEncryptionLinkLabel" xml:space="preserve">
+    <value>Güvenli Kasa</value>
   </data>
   <data name="VaultLabelPromptAutoEncypt" xml:space="preserve">
     <value>Çıkışta Vault'u otomatik şifrele mi açıyor?</value>

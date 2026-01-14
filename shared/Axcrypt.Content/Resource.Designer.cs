@@ -15647,6 +15647,798 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Don’t let your data become a ‘Sensitive Information Buffet’!.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Conclusion_Heading {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Conclusion_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time is not up, and you still have a chance at saving your data..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Conclusion_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Conclusion_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With AxCrypt’s strategy on encryption, your data is yours and yours only. It’s not just about encrypting your data with the 256-bit encryption and giving you saying ‘all protected.’ It goes beyond that..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Conclusion_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Conclusion_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are talking about layered protection with MFA, 24/7 support that helps you stay guarded and outsmart the attacker..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Conclusion_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Conclusion_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you’re new here, start your &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;free trial&lt;/a&gt; now and freeze out those ‘phishy’ hackers..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Conclusion_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Conclusion_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already an existing user? &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login&apos;&gt;Upgrade now&lt;/a&gt;..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Conclusion_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Conclusion_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscribed? &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login&apos;&gt;Continue&lt;/a&gt;. to stay secure, safe and ahead of the hackers..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Conclusion_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Conclusion_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt, because your data needs more than just ‘Good enough..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Conclusion_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Conclusion_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;1: Automated Hacking using AI: The Login Breach:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li style=&apos;margin-left:30px;&apos;&gt;Password Spraying&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With brute force attacks, multiple passwords for the same ID are attempted. But this is almost useless because of the 3-strikes policy. This is where you or the attacker could get locked out of the system after 3 failed login attempts..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text11 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to But in the event of a password spray attempt, things are a lot different and effective. Password Spraying, although a low and slow attack, attempts one common password across thousands of accounts to bypass the 3-strike policy..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text12 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Think of it this way..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text13 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember those helpless but annoying door-to-door self-help book salesmen?.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text14 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password Spraying is something along those lines, except instead of pounding on one door until the owner loses his mind and calls the cops (&lt;b&gt;the three-strike policy&lt;/b&gt;), he rings every bell on the block with the same pitch..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text15 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Security ignores him cause he is not exactly harassing one person to look ‘phishy’…See what we did there?.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text16 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now, when we examine the Cyberverse and the world of &lt;b&gt;AI-powered cyber attacks&lt;/b&gt;, this salesman is an autonomous agent. This agent is not looking for a ‘NO’. For this agent, ‘NO’ stands for Next Opportunity, until one of them has left their door open..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text17 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This slow but patient process is what allows &lt;b&gt;machine learning cyber attacks&lt;/b&gt; breach massive networks without even alerting or alarming anyone. Humans need hours for this. An AI agent with an LLM can launch login attacks in minutes by deploying a pen-testing framework and automating the workflow..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text18 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;2: AI-driven cyber attacks, Ransomware and the ‘Prompt Lock’ attacks.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text19 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back in the day, when someone tried to hack your login credentials, it would take days and a lot of brainwork..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We’re living through a wave of polymorphic, generative ransomware that is not only fast but behaves like a shapeshifter in the Cyberverse..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text20 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If that made your stomach drop, keep reading..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text21 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What started off as a research project, called Prompt Lock, is now a lucrative business model among cybercriminals. This is where basic instructions are given to an AI agent, and it can orchestrate an entire &lt;b&gt;AI malware attack&lt;/b&gt;..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text22 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All of this independently without any human intervention..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text23 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is the year of &lt;b&gt;AI social engineering attacks&lt;/b&gt;, upping their ante with autonomous agents. They, i.e. the AI Agent and the LLM that are working together, are not going to strike blindly, but plan their entire mission, analyse target systems, and present the attacker with a ‘buffet’ of PII, sensitive data, even suggesting what kind of information is valuable for extortion..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text24 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Once the plan is set and the time is ripe, the agent launches the attacks wherein files are encrypted, malicious codes are launched, and data is exfiltrated to lock you out or threaten you with wiping out all your data..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text25 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These attacks can also be quite personalised. What this means is that a phishing email can be sent to you looking so convincing that you find it harmless and familiar, and that’s where the breach begins..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text26 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And the worst part? The code keeps changing like a shapeshifter. This makes it nearly impossible for any kind of traditional security to detect..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text27 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These polymorphic &lt;b&gt;generative AI cyber attacks&lt;/b&gt; and all of the other related operations run in the cloud, which makes this a sophisticated ransomware-as-a-service cybercriminal model..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text28 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;3: AI phishing attacks - super personal, super intuitive for all the wrong reasons.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text29 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to But now, &lt;b&gt;Machine learning cyber attacks&lt;/b&gt; are the flavour of the season..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The good old phishing scams, now powered by AI..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text30 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When it comes to phishing scams, the dead giveaway is the bad grammar, weird vocabulary, terrible spelling mistakes, or just a weird feeling about it. yeah?.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text31 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now, imagine this: what if this comes to you in the most legitimate way possible and you actually come to believe that this is from an authentic source?.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text32 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Okay, now here’s what happened right before you clicked that ‘Phishy’ link..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text33 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phishers use LLMs from the Dark Web to generate crisp, fluent and legible emails in almost whatever language you choose..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text34 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text34", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That eliminates the first and loudest suspicion..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text35 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now all they have to do is copy this email and paste it, and finally send it to whoever they want to attack..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text36 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text36", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;When we speak about LLMs, we are not talking about LLMs like ChatGPT, Gemini and alike.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text37 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text37", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These other forms of LLMS exist on the dark web without restrictions or guardrails against malicious use and pose a serious &lt;b&gt;large language model security risk&lt;/b&gt;..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text38 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text38", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;The worst part about these AI phishing attacks?&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text39 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text39", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes. This all began when the innocent Pen-testing framework, or the penetration testing tool that is often used to check security, fell into the hands of hackers..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If these attackers really want to get you, they can personalise their emails and send these AI agents to search out your social media accounts and all your presence on the internet..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text40 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The mail would look so hyperpersonalized that you might even gaslight yourself into believing that you actually signed up for something and forgot..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text41 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text41", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;4: Deepfake Cyber Threats and the Story of  the 35$ Million Voice:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text42 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text42", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Artificial intelligence in cybercrime&lt;/b&gt; really brought the metaphor ‘Putting words in your mouth’ to life..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text43 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text43", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes. All these attackers need is a 3-second recording of your voice or your video. Once it is fed into the generative AI, it goes ahead and literally mimics everything about you. Now all the attacker needs to do is come up with a script..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text44 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text44", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And if you thought that cutting off from all your social media accounts, deleting your voice from the voicemail, and living like ‘Patrick’ under a rock could save you from &lt;b&gt;deepfake cyber threats&lt;/b&gt;, you may want to think again..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text45 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text45", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In one incident of &lt;b&gt;AI-driven cyber attacks&lt;/b&gt; in the year of 2021, according to IBM, there was an audio deepfake that was executed..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text46 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text46", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In this &lt;b&gt;deepfake cyber threats&lt;/b&gt; incident, the attacker, reportedly impersonating their boss, asked the employee to wire them 35 million dollars to a particular account. Guess what?.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text47 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text47", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The naive and clueless employee believed the attacker and the company lost 35 million dollars, just like that..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text48 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text48", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;AI phishing attacks&lt;/b&gt; have been evolving, and in 2024, an attacker attempted a deepfake video and simulated a video pretending to be a CFO of the company and convinced an employee to wire 25 million dollars to the fraudster..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text49 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text49", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What was initially used by ethical hackers to test security is now being deployed by hackers and attackers to brute force their way into your systems..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember the saying,  “Seeing is believing” Now, the &lt;b&gt;future of cyber security 2026&lt;/b&gt;, seeing is not enough unless they are present in person..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text50 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;5: AI-driven cyber attacks, The CVE Genie and its Autonomous Hacking Tools:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text51 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text51", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is a prime example of how the weakest cog in the wheel can overturn the whole vehicle. Except in the security industry, these exploits are published, and they are called &lt;b&gt;Common Vulnerabilities and Exposures&lt;/b&gt;..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text52 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text52", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These publications or reports are written by security experts who identify major vulnerabilities, describe them, number them, document them, and catalogue them, and this information is publicly available..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text53 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text53", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is another research project that welcomed the darkness, and unfortunately, &lt;b&gt;autonomous hacking tools&lt;/b&gt; have turned this public safety data into a weapon.  Attackers took the data and information of this CVE and used an AI agent to develop a &lt;b&gt;CVE genie&lt;/b&gt;..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text54 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text54", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now, what this agent did is, it fed the CVE data to the LLM, which went through all the problem statements, pulled out the salient details and then came up with a plan and then sent this bundle of information back to the genie..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text55 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text55", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This genie then processes all of the vulnerabilities and then devises the exploit code for the attackers..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text56 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text56", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This was pretty much 51% sucessful, and you know what this means for &lt;b&gt;AI-driven cyber attacks&lt;/b&gt;?.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text57 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text57", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It means that anyone with a bare minimum understanding of how coding works can easily use this information and deploy an AI agent at their disposal to exploit systems..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text58 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text58", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This costs less than $3 (the price of a pack of Kool-Aid), and this lowers the barrier to entry so significantly that anyone with basic coding knowledge can launch high-level &lt;b&gt;AI-powered cyber attacks&lt;/b&gt;..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text59 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text59", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attackers deploy autonomous AI agents paired with an LLM. The two of them work in tandem, where the AI agent gets the job done, and the LLM supports the AI agent with the necessary information..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;6: AI-driven cyber attacks - The Final Boss or the kill chain:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text60 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text60", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meet the final boss of &lt;b&gt;Artificial Intelligence in cybercrime&lt;/b&gt; - the fully automated kill chain..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text61 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text61", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you thought that is yet to happen, it is already in action as you read this article..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text62 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text62", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These particular &lt;b&gt;AI-driven cyber attacks&lt;/b&gt; are notoriously leveraging systems like Anthropic to execute brutal operations..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text63 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text63", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In these forms of attacks, the AI agent behaves like a master strategist, and conducts independent research on identifying &lt;b&gt;high-value targets, analyses sensitive data and even designs fake personas&lt;/b&gt; to hide any kind of trails or breadcrumbs..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text64 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text64", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These agents enhance the &lt;b&gt;AI-driven cyber attacks&lt;/b&gt; by also taking strong economic decisions for you, by thoroughly analysing the victim’s financial worth, the assets they hold, and finally calibrating the ransom they can demand to ensure they are just enough to be fruitful and low enough for the victim to be compelled to pay..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text65 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text65", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And you thought your ex was good at manipulating you?.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text66 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text66", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And this is where it gets interesting, these &lt;b&gt;AI-driven cyber attacks&lt;/b&gt; are spearheaded by these AI agents that identify login pages and instantly parse HTML for credential fields, login forms and try to capture IDs, passwords, and OTPs..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now that the information is gathered, there are two major ways the attacks are conducted;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li style=&apos;margin-left:30px;&apos;&gt;Brute Force Attacks&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H1_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H1_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On the contrary, the &lt;b&gt;future of cybersecurity in 2026&lt;/b&gt; is at risk, and we have moved past the point of traditional firewalls and antiviruses as ‘just enough’ protection..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H2_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H2_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As &lt;b&gt;AI-driven cyber attacks&lt;/b&gt; become creative and more autonomous, polymorphic, and economically savvy, the gap between ‘elite hackers’ and ‘vide coders’ is closing..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H2_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H2_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are witnessing a massive shift in cyberattacks where artificial intelligence in cybercrime and the speed it takes to attack outpace human reaction time..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H2_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H2_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, this is not a lost battle. It’s time to think like a hacker to beat the hacker, but with better tech and understanding..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_H2_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_H2_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you’re still reading this, here are the 6 most dangerous AI-driven cyber attacks and methods currently being deployed..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Heading1 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Heading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Dawn of Good AI v/s BAD AI:.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Heading2 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Heading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember when Arnie said, “I’ll be back!” in the Terminator movie. He’s back for sure, but it’s not as Hollywood as you think it is. The “CYBERVERSE” has a threat far worse than Skynet’s rogue robots running their own agenda on world domination. We are talking about AI-powered cyber attacks..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Summary {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember when Arnie said, “I’ll be back!” in the Terminator movie. He’s back for sure, but it’s not as Hollywood as you think it is. The “CYBERVERSE” has a threat far worse than Skynet’s rogue robots running their own agenda on world domination. We are talking about &lt;b&gt;AI-powered cyber attacks&lt;/b&gt;..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Well, Arnie tried to warn us, and as we cosy up to 2026, the warnings are becoming a reality, and fiction is now becoming a fact..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It’s only been a few days into 2026, and we have seen Russian arms firms targeted by &lt;b&gt;AI-driven cyber-attacks&lt;/b&gt;, alongside high-profile incidents like the ClickFix Campaign’s BSOD attack and the NordVPN breach..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Safe to say that the &lt;b&gt;future of Cyber Security 2026&lt;/b&gt; is looming with &lt;b&gt;large language model security risks&lt;/b&gt;, threats to personal data and security, ransomware attacks and many others..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you think a firewall and antivirus are enough to stop these attacks, then you probably haven&apos;t moved on from Windows Vista yet, and it’s time you did..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This year calls for some serious cybersecurity introspection and a ready-fire-fighting team to rise against bad &lt;b&gt;artificial intelligence in cybercrime&lt;/b&gt;..
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Everything you need to know about AI-powered cyber attacks in 2026.
+        /// </summary>
+        public static string Blog_EYNTKAAPCA_Title {
+            get {
+                return ResourceManager.GetString("Blog_EYNTKAAPCA_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;a href=&apos;https://www.axcrypt.net/information/features&apos;&gt;Check out AxCrypt’s feature page to see what we offer&lt;/a&gt;.
         /// </summary>
         public static string Blog_Feature_Conclusion_Text1 {
@@ -57059,6 +57851,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AI-powered cyber attacks are redefining cybersecurity in 2026. Learn about automated hacking, AI phishing, ransomware, deepfakes, and more..
+        /// </summary>
+        public static string Meta_Description_Blog_EYNTKAAPCA {
+            get {
+                return ResourceManager.GetString("Meta-Description-Blog-EYNTKAAPCA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enhancing Financial Data Security with AxCrypt Encryption.
         /// </summary>
         public static string Meta_Description_Blog_FEFBI {
@@ -57806,6 +58607,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View the official SHA-256 cryptographic hashes for AxCrypt installers and packages. Use these hashes to verify downloads and ensure file authenticity and security..
+        /// </summary>
+        public static string Meta_Description_CHOF {
+            get {
+                return ResourceManager.GetString("Meta-Description-CHOF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use AxCrypt Command Line to automate file encryption and decryption. Secure sensitive data with strong AES encryption using simple CLI commands..
         /// </summary>
         public static string Meta_Description_Commandline_Interface {
@@ -58351,6 +59161,15 @@ namespace AxCrypt.Content {
         public static string Meta_Description_Usage_Tips {
             get {
                 return ResourceManager.GetString("Meta-Description-Usage-Tips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Learn how AxCrypt Vault helps you securely store, manage, and encrypt files with password protection and zero-knowledge security..
+        /// </summary>
+        public static string Meta_Description_vault {
+            get {
+                return ResourceManager.GetString("Meta-Description-vault", resourceCulture);
             }
         }
         
@@ -58909,6 +59728,15 @@ namespace AxCrypt.Content {
         public static string Meta_Title_Blog_EVA {
             get {
                 return ResourceManager.GetString("Meta-Title-Blog-EVA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AI-Driven Cyber Attacks in 2026: The 6 Biggest Threats.
+        /// </summary>
+        public static string Meta_Title_Blog_EYNTKAAPCA {
+            get {
+                return ResourceManager.GetString("Meta-Title-Blog-EYNTKAAPCA", resourceCulture);
             }
         }
         
@@ -59660,6 +60488,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cryptographic Hashes of Files.
+        /// </summary>
+        public static string Meta_Title_CHOF {
+            get {
+                return ResourceManager.GetString("Meta-Title-CHOF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AxCrypt Command Line | Encrypt Files via CLI.
         /// </summary>
         public static string Meta_Title_Commandline_Interface {
@@ -60250,6 +61087,15 @@ namespace AxCrypt.Content {
         public static string Meta_Title_Usage_Tips {
             get {
                 return ResourceManager.GetString("Meta-Title-Usage-Tips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Vault Feature Guide | Encrypt &amp; Protect Files.
+        /// </summary>
+        public static string Meta_Title_vault {
+            get {
+                return ResourceManager.GetString("Meta-Title-vault", resourceCulture);
             }
         }
         
@@ -71307,6 +72153,69 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Join AxCrypt.
+        /// </summary>
+        public static string ShareInviteMailBodyButton {
+            get {
+                return ResourceManager.GetString("ShareInviteMailBodyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You’ve Received Encrypted Content – Access via AxCrypt.
+        /// </summary>
+        public static string ShareInviteMailSubject {
+            get {
+                return ResourceManager.GetString("ShareInviteMailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You’ve received encrypted content.
+        /// </summary>
+        public static string ShareInviteMailText1 {
+            get {
+                return ResourceManager.GetString("ShareInviteMailText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join AxCrypt to securely access it..
+        /// </summary>
+        public static string ShareInviteMailText2 {
+            get {
+                return ResourceManager.GetString("ShareInviteMailText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {addedby_user_email} has shared encrypted content with you to ensure the information remains confidential and protected. Only authorized recipients can open it..
+        /// </summary>
+        public static string ShareInviteMailText3 {
+            get {
+                return ResourceManager.GetString("ShareInviteMailText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What is AxCrypt?.
+        /// </summary>
+        public static string ShareInviteMailText4 {
+            get {
+                return ResourceManager.GetString("ShareInviteMailText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt is a trusted, easy-to-use encryption tool that protects sensitive files, text, and messages using strong encryption. Only authorized recipients can securely view shared content..
+        /// </summary>
+        public static string ShareInviteMailText5 {
+            get {
+                return ResourceManager.GetString("ShareInviteMailText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add recipients to the list of people who you want to share this file with..
         /// </summary>
         public static string ShareKeyInformationText {
@@ -71348,6 +72257,15 @@ namespace AxCrypt.Content {
         public static string ShareNotEncryptedText {
             get {
                 return ResourceManager.GetString("ShareNotEncryptedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View shared content.
+        /// </summary>
+        public static string ShareNotifyMailBodyButton {
+            get {
+                return ResourceManager.GetString("ShareNotifyMailBodyButton", resourceCulture);
             }
         }
         
@@ -75753,7 +76671,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please configure the Vault by navigating to Settings â†’ Advanced Settings â†’ Vault Settings..
+        ///   Looks up a localized string similar to Please configure the Vault by navigating to Settings → Advanced Settings → Vault Settings..
         /// </summary>
         public static string VaultGuideCarouselText1 {
             get {
@@ -75780,7 +76698,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select where you want your encrypted data to be stored â†’ Select the Folder â†’ Confirm..
+        ///   Looks up a localized string similar to Select where you want your encrypted data to be stored → Select the Folder → Confirm..
         /// </summary>
         public static string VaultGuideCarouselText2 {
             get {
