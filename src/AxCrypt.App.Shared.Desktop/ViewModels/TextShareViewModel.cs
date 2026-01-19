@@ -201,8 +201,6 @@ public class TextShareViewModel : ViewModelBase
         }
 
         await InternalApplyShareAsync(availablePublicKeys, Passphrase);
-
-        HideDialog();
     }
 
     private async Task InternalApplyShareAsync(IEnumerable<UserPublicKey>? availablePublicKeys, Passphrase passphrase)

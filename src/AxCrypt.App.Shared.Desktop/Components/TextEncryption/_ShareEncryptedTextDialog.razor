@@ -1,4 +1,5 @@
-﻿@using AxCrypt.App.Shared.Helpers
+﻿@using AxCrypt.App.Shared.Desktop.Code
+@using AxCrypt.App.Shared.Helpers
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.Content
@@ -7,6 +8,7 @@
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject TextShareViewModel ShareModel
+@inject CopyToClipboardUtility CopyToClipboardUtility
 @inject IStatusAlertService _statusAlertService
 <style>
     .popup-small {
@@ -94,7 +96,7 @@
                     </div>
                 }
 
-                <div style="display:flex;justify-content:center;align-items: center;max-height: 40px;gap: 10px;">
+                <div style="display:flex;justify-content:center;align-items: center;max-height: 40px;gap: 10px;margin-top: 15px;">
                     <label style="font-size:16px;">@Texts.ExpireInLabelFirstPart </label>
 
                     <select style="width:128px;height:32px;font-size:16px;" @bind="ShareModel.ExpiresInOption">
@@ -121,7 +123,10 @@
                 @if (ShareModel.SharedLink != null)
                 {
                     <div>
-                        <a href="@ShareModel.SharedLink">@ShareModel.SharedLink</a>
+                        <button class="multi-actn-btn" title="@ShareModel.SharedLink.ToString()" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(ShareModel.SharedLink.ToString())">
+                            <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy share link to clipboard" width="16" height="16" />
+                            @Texts.SecretsCopytoClipboard
+                        </button>
                     </div>
                 }
             </div>

@@ -5,6 +5,7 @@
 @using AxCrypt.Common
 @using AxCrypt.Content
 @using AxCrypt.Core.Crypto
+@using AxCrypt.Core.UI
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject TextEncryptionViewModel TextEncryptionViewModel
@@ -134,6 +135,7 @@
 
         TextShareModel.EncryptedText = TextEncryptionViewModel.EncryptedText;
         TextShareModel.Passphrase = new Passphrase(TextEncryptionViewModel.Password ?? "");
+        TextShareModel.ReceiverList = new List<EmailAddress>();
         TextShareModel.SharedLink = null;
         TextShareModel.ShowDialog();
     }
