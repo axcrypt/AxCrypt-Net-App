@@ -221,8 +221,9 @@
     <div id="vault-settings-modalDialog" class="vault-body modalDialog">
         <div class="">
             <span class="vault-question">@Texts.FolderNameLabel</span>
-            <div class="vault-store-location-sec">
+            <div class="vault-new-folder">
                 <input class="input1" type="text" id="text-box" maxlength="50" name="" @bind-value="ViewModel.SelectedSubFolderPath">
+                <span>@ViewModel.ErrorMessage</span>
             </div>
             <div style="text-align:center;margin:20px;">
                 <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => await ViewModel.CreateVaultFolder(ViewModel.ParentFolderPath)" />
@@ -376,7 +377,7 @@
         }
 
         string filename = System.IO.Path.GetFileName(file.Filepath);
-        await SelectFile(file.FileType, filename, file.Filepath, file.Size);
+        await SelectFile(file.FileType, filename, file.Filepath, file.Size!);
         await ViewModel.PrepareFileActionAsync("Open");
     }
 
@@ -385,6 +386,7 @@
         if (string.IsNullOrEmpty(folderPath))
             return;
 
+        ViewModel.ErrorMessage = "";
         ViewModel.CreateNewFolder = true;
         ViewModel.ParentFolderPath = folderPath;
     }

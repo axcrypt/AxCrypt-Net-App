@@ -34,8 +34,10 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Session
 {
-    public class VaultSettings
+    public class VaultSettings : IDisposable
     {
+        private readonly Dictionary<string, VaultFolder> _watchedFolders = new();
+
         public async Task InitializeVaultSettings()
         {
             string vaultFolderpath = New<UserSettings>().VaultEncryptDataPath;
@@ -49,17 +51,16 @@ namespace AxCrypt.Core.Session
 
         public async Task CreateVaultWatchedFolderAsync(VaultFolder vaultFolder)
         {
-            if (vaultFolder == null)
-            {
-                throw new ArgumentNullException(nameof(vaultFolder));
-            }
+            ArgumentNullException.ThrowIfNull(vaultFolder);
 
             if (!await IsValidVaultPath(vaultFolder.Path))
-            {
                 return;
-            }
 
-            vaultFolder.Changed += vaultWatchedFolder_Changed;
+            if (_watchedFolders.ContainsKey(vaultFolder.Path))
+                return;
+
+            vaultFolder.Changed += vaultWatchedFolder_Changed!;
+            _watchedFolders.Add(vaultFolder.Path, vaultFolder);
 
             await AddVaultWatchedFolderAsync(vaultFolder.Path);
         }
@@ -113,6 +114,14 @@ namespace AxCrypt.Core.Session
             }
 
             return true;
+        }
+
+        public void Dispose()
+        {
+            foreach (VaultFolder watcher in _watchedFolders.Values)
+            {
+                watcher.Dispose();
+            }
         }
     }
 }

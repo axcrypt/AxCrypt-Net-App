@@ -57,7 +57,7 @@ namespace AxCrypt.Core.Session
             if (New<IDataContainer>(Path).IsAvailable)
             {
                 _fileWatcher = New<IFileWatcher>(Path);
-                _fileWatcher.FileChanged += _VaultfileWatcher_FileChanged;
+                _fileWatcher.FileChanged += _VaultfileWatcher_FileChanged!;
                 _fileWatcher.IncludeSubdirectories = true;
             }
         }
@@ -75,6 +75,11 @@ namespace AxCrypt.Core.Session
         protected virtual void OnChanged(FileWatcherEventArgs e)
         {
             Changed?.Invoke(this, e);
+        }
+
+        public void Dispose()
+        {
+            _fileWatcher.Dispose();
         }
     }
 }

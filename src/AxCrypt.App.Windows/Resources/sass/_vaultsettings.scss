@@ -46,6 +46,16 @@
         font-weight: 400;
     }
 
+    .vault-new-folder {
+        display: flex;
+        margin-top: 18px;
+        flex-direction: column;
+
+        span {
+            color:red;
+        }
+    }
+
     .on {
         /* input:checked + .slider */
     }

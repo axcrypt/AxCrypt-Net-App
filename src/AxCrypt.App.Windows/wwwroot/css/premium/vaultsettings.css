@@ -39,6 +39,14 @@
   line-height: 22px;
   font-weight: 400;
 }
+#vault-settings-modalDialog .vault-new-folder {
+  display: flex;
+  margin-top: 18px;
+  flex-direction: column;
+}
+#vault-settings-modalDialog .vault-new-folder span {
+  color: red;
+}
 #vault-settings-modalDialog .on {
   /* input:checked + .slider */
 }

@@ -37,6 +37,7 @@ namespace AxCrypt.App.Shared.ViewModels
         }
         public bool CreateNewFolder { get; set; }
         public string ParentFolderPath { get; set; }
+        public string ErrorMessage { get; set; }
         public string? SelectedFile { get; set; }
         public string SelectedFilePath { get; set; }
         public string SelectedFileSize { get; set; }
@@ -288,8 +289,12 @@ namespace AxCrypt.App.Shared.ViewModels
 
         public async Task CreateVaultFolder(string currentVaultPath)
         {
-            if (string.IsNullOrEmpty(SelectedSubFolderPath))
+            SelectedSubFolderPath = SelectedSubFolderPath.Trim().Trim('.');
+            if (!ValidFolderName(SelectedSubFolderPath))
+            {
+                ErrorMessage = "Enter a valid folder name";
                 return;
+            }
 
             string newFolderPath = Path.Combine(currentVaultPath, SelectedSubFolderPath);
             IDataContainer newFolderContainer = New<IDataContainer>(newFolderPath);
@@ -496,6 +501,17 @@ namespace AxCrypt.App.Shared.ViewModels
             {
                 await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, string.Format(Texts.FailedAddFolderNotification, ex.Message));
             }
+        }
+
+        private static bool ValidFolderName(string folderName)
+        {
+            if (string.IsNullOrEmpty(folderName))
+                return false;
+
+            if (folderName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+                return false;
+
+            return true;
         }
     }
 
