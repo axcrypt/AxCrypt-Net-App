@@ -36,7 +36,7 @@
                         @if (!LogOnViewModel.LogOnAccountModel.ReadOnlyUserEmail)
                         {
                             <input type="text" id="useremail-txtbox" @bind-value="LogOnViewModel.LogOnAccountModel.UserEmail"
-                                   class="form-control email-img" placeholder=@Texts.TypeYourEmailPlaceHolderText tabindex="1" />
+                                   class="form-control email-img" placeholder=@Texts.TypeYourEmailPlaceHolderText tabindex="1" autocomplete="off" />
                         }
                         else
                         {
