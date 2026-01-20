@@ -62,7 +62,7 @@ namespace AxCrypt.App.Shared.Services
         {
             if (e.IsAskingForPreviouslyUnknownPassphrase)
             {
-                HandleCreateNewLogOn(e);
+                await HandleCreateNewLogOn(e);
             }
             else
             {
@@ -74,7 +74,7 @@ namespace AxCrypt.App.Shared.Services
             }
         }
 
-        private void HandleCreateNewLogOn(LogOnEventArgs e)
+        private async Task HandleCreateNewLogOn(LogOnEventArgs e)
         {
             if (!String.IsNullOrEmpty(e.EncryptedFileFullName))
             {
@@ -82,7 +82,7 @@ namespace AxCrypt.App.Shared.Services
             }
             else
             {
-                HandleCreateNewAccount(e);
+                await HandleCreateNewAccount(e);
             }
         }
 
@@ -106,9 +106,9 @@ namespace AxCrypt.App.Shared.Services
             return;
         }
 
-        private void HandleCreateNewAccount(LogOnEventArgs e)
+        private async Task HandleCreateNewAccount(LogOnEventArgs e)
         {
-            _registerViewModel.ShowDialog(e.Passphrase.Text, e.Identity.UserEmail);
+            await _registerViewModel.ShowDialog(e.Passphrase.Text, e.Identity.UserEmail);
             DialogResult result = _registerViewModel.DialogResult;
             if (result != DialogResult.OK)
             {

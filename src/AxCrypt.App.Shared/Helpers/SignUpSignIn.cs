@@ -37,17 +37,15 @@ public class SignUpSignIn
         viewModel.BindPropertyChanged(nameof(viewModel.StopAndExit), (bool stop) => StopAndExit = stop);
         //ewModel.BindPropertyChanged(nameof(viewModel.TopControlsEnabled), (bool enabled) => SetTopControlsEnabled(parent, enabled));
 
-        viewModel.CreateAccount = (e) =>
+        viewModel.CreateAccount = async (e) =>
         {
             _registerModel.DialogResult = DialogResult.None;
-            _registerModel.ShowDialog(string.Empty, EmailAddress.Parse(UserEmail));
+            await _registerModel.ShowDialog(string.Empty, EmailAddress.Parse(UserEmail));
             DialogResult result = _registerModel.DialogResult;
             if (result != DialogResult.OK)
             {
                 e.Cancel = true;
             }
-
-            return Task.FromResult<object>(null);
         };
 
         viewModel.SignInCommandAsync = signingInState.SignIn;

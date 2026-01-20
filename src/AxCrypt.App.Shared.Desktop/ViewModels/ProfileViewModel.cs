@@ -127,7 +127,7 @@ public class ProfileViewModel : ViewModelBase
                 if (!_logOnViewModel.IsLoggedOn)
                 {
                     _registerViewModel.DialogResult = DialogResult.None;
-                    _registerViewModel.ShowDialog(string.Empty, EmailAddress.Empty);
+                    await _registerViewModel.ShowDialog(string.Empty, EmailAddress.Empty);
                 }
                 break;
         }

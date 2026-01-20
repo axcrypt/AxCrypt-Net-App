@@ -12,7 +12,7 @@ namespace AxCrypt.App.Shared.Models;
 public class RegisterViewModel : ViewModelBase
 {
     private bool IsCreating = false;
-
+    
     public event Action<bool>? OnVisibilityOfUserSignUpChanged;
 
     private bool _showSignUp;
@@ -34,14 +34,14 @@ public class RegisterViewModel : ViewModelBase
 
     public string ErrorMessage { get; set; } = string.Empty;
 
-    public void ShowDialog(string passphrase, EmailAddress email)
+    public async Task ShowDialog(string passphrase, EmailAddress email)
     {
         CreateAccountModel = new CreateNewAccountViewModel(passphrase, email);
         ShowSignUp = true;
 
         while (DialogResult == DialogResult.None)
         {
-            Task.Delay(1000);
+            await Task.Delay(1000);
         }
 
         ShowSignUp = false;

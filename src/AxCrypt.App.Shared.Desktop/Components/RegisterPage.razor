@@ -1,8 +1,12 @@
 ﻿@using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Models
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Common
 @using AxCrypt.Content
-
+@using AxCrypt.Core.UI.ViewModel
+@using static AxCrypt.Abstractions.TypeResolve
 @inject RegisterViewModel Register
+@inject LogOnViewModel logOnViewModel
 @inject ProfileViewModel profileViewModel
 
 <section class="content">
@@ -10,7 +14,7 @@
         <h1 class="reg-tle">@((MarkupString)(string.Format(@Texts.WelcomeText)))</h1>
         <span style="margin-bottom: 10px;">@((MarkupString)(string.Format(@Texts.OfflineSignupText)))</span><br />
         <label class="sub-head">@Texts.PromptSignUp</label>
-        <EditForm Model="@Register.CreateAccountModel" class="signup-sec">
+        <EditForm Model="@Register.CreateAccountModel" class="signup-sec" style="margin-bottom: 0% !important;">
             <div class="form-field">
                 <label>@Texts.YourEmailText</label>
                 <input type="email" @bind-value="Register.CreateAccountModel.UserEmail" class="form-control email-img"
@@ -35,13 +39,19 @@
             <button class="button grn-bg whte-clr" style="width:100%; margin: 20px 0px;"
                 @onclick="async (e) => await Register.ButtonOk_Click(e)">@Texts.PromptSignUp</button>
         </EditForm>
-
-        <div style="display: flex;align-items: flex-start; width: 90%;">
+        @if (!isOffline)
+        {
+            <div class="signup-link" style="width: 90%;margin-bottom: 2%;">
+                <NavLink class="nav-link grn-clr" href="javascript:void(0);" @onclick="GoToLogin">
+                    @Texts.AlreadyRegisteredLink</NavLink>
+            </div>
+        }
+        <div style="display: flex;align-items: flex-start; width: 90%; height:10px">
             <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
             <span style="margin: -13px 10px 13px;padding-top: -4px;">or</span>
             <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
         </div>
-        <div id="OtherOptions-Section" style="text-align: center;border-radius: 4px;">
+        <div id="OtherOptions-Section" style="text-align: center;border-radius: 4px; width: 90%;">
             <div class="dropdown">
                 <div class="action-buttons">
                     <button @onclick="ToggleDropdown" style="width: 310px; color:  #48772c;font-weight: 600;">
@@ -60,7 +70,7 @@
             </div>
         </div>
 
-        <div class="signup-link">
+        <div class="signup-link" style="width: 90%;">
             <NavLink class="nav-link" href="mailto:support@axcrypt.net">
                 <span class="che-txt">Do you need any help?</span>
                 <span class="grn-clr">@Texts.ContactUsHeading!</span>
@@ -78,8 +88,11 @@
     private string passwordFiledType = "password";
     bool canShowPassword = false;
 
+    bool isOffline = false;
+
     protected override void OnInitialized()
     {
+        isOffline = New<AxCryptOnlineState>().IsOffline;
         base.OnInitialized();
     }
 
@@ -109,6 +122,14 @@
         await profileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID);
         Register.ShowSignUp = false;
         Register.DialogResult = Utility.DialogResult.Abort;
+    }
+
+    private async Task GoToLogin()
+    {
+        Register.ShowSignUp = false;
+        Register.DialogResult = Utility.DialogResult.Cancel;
+        LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(AxCrypt.Core.Resolve.UserSettings, "");
+        await logOnViewModel.ShowLogOnDialog(logOnModel, logOnViewModel.MainViewModel);
     }
 
     private async Task RefreshComponentAsync()
