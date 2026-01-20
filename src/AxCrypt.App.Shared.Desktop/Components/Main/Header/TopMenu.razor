@@ -3,12 +3,16 @@
 @using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Models
 @using AxCrypt.Core
+@using AxCrypt.Core.UI
 @using Microsoft.JSInterop
 @using AxCrypt.Content
+
+@using static AxCrypt.Abstractions.TypeResolve
 
 @inject UserNotificationService notificationService
 @inject TopMenuViewModel ViewModel
 @inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
 
 <div class="top-menu">
     <AxCrypt.App.Shared.Desktop.Components.Main.Header.LanguagesComponent />
@@ -83,6 +87,14 @@
 
     private async Task ShowHelpOverlay()
     {
+        string currentPath = Navigation.ToBaseRelativePath(Navigation.Uri);
+        if (currentPath != "" && currentPath != "/")
+        {
+            New<UserSettings>().HasSeenStartupHelp = false;
+            Navigation.NavigateTo("/");
+            return;
+        }
+
         await JSRuntime.InvokeVoidAsync("startHomeHelp");
     }
 
