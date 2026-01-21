@@ -226,7 +226,9 @@ public class TextShareViewModel : ViewModelBase
             Guid sharedSecretId = await TextShareApiHelper.ShareTextAsync(logOnIdentity, textEncryptionApiModel);
             if (sharedSecretId != Guid.Empty)
             {
-                SharedLink = new Uri($"{AxCrypt.Core.Resolve.UserSettings.AccountWebUrl}GlobalTextEncryption/Decrypt?email={logOnIdentity.UserEmail}&id={sharedSecretId}");
+                Uri baseApiUri = AxCrypt.Core.Resolve.UserSettings.RestApiBaseUrl;
+                string accountWebDomain = baseApiUri.ToString().Replace(AxCrypt.Core.Resolve.UserSettings.RestApiBaseUrl.PathAndQuery, "/");
+                SharedLink = new Uri($"{accountWebDomain}GlobalTextEncryption/Decrypt?email={logOnIdentity.UserEmail}&id={sharedSecretId}");
             }
         }
     }

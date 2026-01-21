@@ -44,7 +44,7 @@
 {
     <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
     <div id="modal-dialog1" class="modalDialog" style="display: block;">
-        <div class="@(TabIndex == 1 ? "popup-small" : "popup-large")" style="margin-top:168px;">
+        <div class="@(TabIndex == 1 ? "popup-small" : "popup-large")" style="margin-top:168px; height: fit-content !important;">
             <img src="/images/premium/IcoCls.svg" alt="IntMark" width="12px" height="12px" @onclick="ShareModel.HideDialog" style="margin-left: 367px;">
 
             <h2 style="margin: 10px 0;text-align:center;color:#494949"><b>Share as Link</b></h2>
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="parent-container" style="max-height: fit-content;min-height: 230px;">
+            <div class="parent-container" style="min-height: fit-content;">
                 @if (TabIndex == 2)
                 {
                     <h5 style="margin: 10px 0; font-size:16px;">Choose up to @MaxAllowedUsersToShare users</h5>
@@ -78,8 +78,8 @@
 
                         @if (ShareModel.ReceiverList != null && ShareModel.ReceiverList.Any())
                         {
-                            <h5 style="margin: 10px 0; font-size:16px;">Users(@MaxAllowedUsersToShare) with access</h5>
-                            <table>
+                            <h3 style="margin: 10px 0; font-size:16px;">Users with access(@ShareModel.ReceiverList.Count)</h3>
+                            <table style="display: flex;gap: 10px;flex-wrap: wrap;">
                                 @foreach (AxCrypt.Core.UI.EmailAddress receiver in ShareModel.ReceiverList)
                                 {
                                     <tr>
@@ -87,7 +87,7 @@
                                             <span class="email-text" title="@receiver.Address">@receiver.Address</span>
                                         </td>
                                         <td>
-                                            <span class="remove-email" @onclick="() => Remove(receiver.Address)">x</span>
+                                            <span class="remove-email" style="padding-left:10px;" @onclick="() => Remove(receiver.Address)">x</span>
                                         </td>
                                     </tr>
                                 }
@@ -122,11 +122,15 @@
 
                 @if (ShareModel.SharedLink != null)
                 {
-                    <div>
-                        <button class="multi-actn-btn" title="@ShareModel.SharedLink.ToString()" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(ShareModel.SharedLink.ToString())">
+                    <div style="display: flex;justify-content: center;padding-top: 15px;">
+                        <button class="multi-actn-btn" title="Copy share link to clipboard" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(ShareModel.SharedLink.ToString())">
                             <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy share link to clipboard" width="16" height="16" />
                             @Texts.SecretsCopytoClipboard
                         </button>
+                        @if (CopyToClipboardUtility.CopiedInfoText != string.Empty)
+                        {
+                            <label style="margin: auto 10px;">@CopyToClipboardUtility.CopiedInfoText</label>
+                        }
                     </div>
                 }
             </div>
@@ -196,5 +200,11 @@
         {
             ShareModel.ReceiverList.Remove(emailAddress);
         }
+    }
+
+    private async Task CopyToClipBoard(string copyText)
+    {
+        await CopyToClipboardUtility.CopyToClipboard(copyText);
+        _statusAlertService.Error(Texts.NoInternetErrorMessage);
     }
 }
