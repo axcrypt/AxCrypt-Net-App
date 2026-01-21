@@ -10,6 +10,8 @@ $colTxtlble: #A4A4A4;
 $colTxtLink: #CDFFB1;
 $colBordBgrnd: #282828;
 $colBord: #CDFFB1;
+$colDrkMdL3: #575757;
+$colTxtBd: #FFFFFF;
 
 .sidebar {
     background-color: $SdebrbgndClr !important;
@@ -165,4 +167,9 @@ button {
     .selected {
         background: $SdebrbgndClr !important;
     }
+}
+
+textarea, input[type=text], textarea[readonly] {
+    background: $colDrkMdL3 !important;
+    color: $colTxtBd;
 }

@@ -6,48 +6,49 @@
 @inject AppSettingsViewModel AppSettingsViewModel
 
 <style>
-     .input-group {
-         display: flex;
-         align-items: center;
-         margin-bottom: 10px;
-     }
+    .input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
 
-         .input-group label {
-             min-width: 120px;
-             margin-right: 10px;
-         }
+        .input-group label {
+            min-width: 120px;
+            margin-right: 10px;
+        }
 
-         .input-group input {
-             flex-grow: 1;
-         }
+        .input-group input {
+            flex-grow: 1;
+        }
 
-     .popup {
-         position: absolute;
-         left: -150px; /* Adjust as per your requirement */
-         top: 0;
-         background-color: #fff;
-         border: 1px solid #ccc;
-         padding: 8px;
-         z-index: 1000;
-         width: 200px;
-         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-         pointer-events: none; /* Prevent interfering with hover logic */
-     }
+    .popup {
+        position: absolute;
+        left: -150px; /* Adjust as per your requirement */
+        top: 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 8px;
+        z-index: 1000;
+        width: 200px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        pointer-events: none; /* Prevent interfering with hover logic */
+    }
 
-     .dark-mode-switch-menu {
-         .slider:before {
-             height: 22px;
-             width: 22px;
-         }
+    .dark-mode-switch-menu .slider:before {
+        height: 22px;
+        width: 22px;
+        background-image: url(/images/sun.svg);
+        background-repeat: no-repeat;
+    }
 
-         input:checked + .slider:before {
-             transform: translateX(30px) !important;
-         }
+    .dark-mode-switch-menu input:checked + .slider:before {
+        transform: translateX(30px) !important;
+        background: black url(/images/moon.svg) no-repeat;
+    }
 
-         .on-off-text {
-             padding: 0 0px;
-         }
-     }
+    .dark-mode-switch-menu .on-off-text {
+        padding: 0 0px;
+    }
 </style>
 
 <div class="desk-stngs-popup manage-acc-sec model-popup font-medium" style="display:none;" id="settings-dropdown-popup">
@@ -353,22 +354,15 @@
         <NavLink class="nav-link center-column">
             <div>
                 <img class="stngs-menu-icon IcoDkMd" alt="IcoDkMd" />
-                <span class="grey-clr">Switch to Dark Mode</span>
+                @{
+                    string menuTitle = isDark ? "Switch to Light Mode" : "Switch to Dark Mode";
+                }
+                <span class="grey-clr">@menuTitle</span>
             </div>
             <div style="float:right; padding-left:15px;">
                 <label class="toggle" style="width: 60px;height: 30px;">
                     <input type="checkbox" checked="@isDark" @onclick="ToggleTheme" />
                     <span class="slider round">
-                        @if (isDark)
-                        {
-                            <img src="/images/moon.svg" class="on-off-text on-text" />
-                            <img src="/images/sun.svg" class="on-off-text off-text" style="display:none;" />
-                        }
-                        else
-                        {
-                            <img src="/images/moon.svg" class="on-off-text on-text" style="display:none;" />
-                            <img src="/images/sun.svg" class="on-off-text off-text" />
-                        }
                     </span>
                 </label>
             </div>
