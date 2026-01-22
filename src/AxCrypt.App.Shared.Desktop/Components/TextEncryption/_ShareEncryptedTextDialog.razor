@@ -45,7 +45,7 @@
     <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
     <div id="modal-dialog1" class="modalDialog" style="display: block;">
         <div class="@(TabIndex == 1 ? "popup-small" : "popup-large")" style="margin-top:100px; height: fit-content !important;">
-            <img src="/images/premium/IcoCls.svg" alt="IntMark" width="12px" height="12px" @onclick="ShareModel.HideDialog" style="margin-left: 367px;">
+            <div class="close-img" @onclick="ShareModel.HideDialog" />
 
             <h2 style="margin: 10px 0;text-align:center;color:#494949"><b>Share as Link</b></h2>
 
