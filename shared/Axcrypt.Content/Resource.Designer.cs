@@ -39877,6 +39877,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zero-Knowledge Encryption for total security..
+        /// </summary>
+        public static string BusinessProductKeyHead14 {
+            get {
+                return ResourceManager.GetString("BusinessProductKeyHead14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create and manage user groups with centralized key management.
         /// </summary>
         public static string BusinessProductKeyHead2 {
@@ -39981,6 +39990,15 @@ namespace AxCrypt.Content {
         public static string BusinessProductKeyParagraph13 {
             get {
                 return ResourceManager.GetString("BusinessProductKeyParagraph13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A privacy-first approach powered by an impenetrable 256-bit encryption keeps your data secure. With this, you retain full control of your decryption keys, ensuring only you not even AxCrypt can access your files..
+        /// </summary>
+        public static string BusinessProductKeyParagraph14 {
+            get {
+                return ResourceManager.GetString("BusinessProductKeyParagraph14", resourceCulture);
             }
         }
         
@@ -52193,7 +52211,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File security with AES-256 algorithm &amp; enhance security with Multi- Factor Authentication..
+        ///   Looks up a localized string similar to Zero-Knowledge File Security with AES- 256 algorithm. File security with AES-256 algorithm &amp; enhance security with Multi- Factor Authentication..
         /// </summary>
         public static string HomeSellingPointStrongEncryptionBody {
             get {
@@ -67223,6 +67241,15 @@ namespace AxCrypt.Content {
         public static string ProductPremiumSecurityText2 {
             get {
                 return ResourceManager.GetString("ProductPremiumSecurityText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A privacy first approach with impenetrable 256 bit encryption keeps your data secure. You retain full control of your decryption keys, ensuring that only you, and not even AxCrypt, can access your files..
+        /// </summary>
+        public static string ProductPremiumSecurityText3 {
+            get {
+                return ResourceManager.GetString("ProductPremiumSecurityText3", resourceCulture);
             }
         }
         
