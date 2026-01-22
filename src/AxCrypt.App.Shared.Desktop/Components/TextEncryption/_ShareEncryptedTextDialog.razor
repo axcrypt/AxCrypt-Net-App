@@ -44,7 +44,7 @@
 {
     <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
     <div id="modal-dialog1" class="modalDialog" style="display: block;">
-        <div class="@(TabIndex == 1 ? "popup-small" : "popup-large")" style="margin-top:168px; height: fit-content !important;">
+        <div class="@(TabIndex == 1 ? "popup-small" : "popup-large")" style="margin-top:100px; height: fit-content !important;">
             <img src="/images/premium/IcoCls.svg" alt="IntMark" width="12px" height="12px" @onclick="ShareModel.HideDialog" style="margin-left: 367px;">
 
             <h2 style="margin: 10px 0;text-align:center;color:#494949"><b>Share as Link</b></h2>
@@ -70,7 +70,7 @@
                         }
 
                         <div style="display: flex; justify-content: center;gap: 20px;">
-                            <input type="text" @bind="ShareModel.UserInput" style="width: 90%;" />
+                            <input type="text" maxlength="150" @bind="ShareModel.UserInput" style="width: 90%;" />
                             <button class="button success active" style="width: 75px;height: 40px;" @onclick="AddEmail">
                                 @Texts.AddPromptText
                             </button>
@@ -84,7 +84,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            <span class="email-text" title="@receiver.Address">@receiver.Address</span>
+                                            <span class="email-text-list" title="@receiver.Address">@receiver.Address</span>
                                         </td>
                                         <td>
                                             <span class="remove-email" style="padding-left:10px;" @onclick="() => Remove(receiver.Address)">x</span>
@@ -106,13 +106,16 @@
                         }
                     </select>
 
-                    <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16" @onmouseover='@(() => ShareModel.ShowPopup("open"))' @onmouseout='@(() => ShareModel.HidePopup())'>
-                    @if (ShareModel.IsHovered && ShareModel.HoveredElement == "open")
-                    {
-                        <div class="custom-password-help-hoverpopup text-center" style="background-color:#fff;">
-                            <span class="txt-clr font-medium">Set an expiry to automatically stop access after a chosen time, keeping your shared content secure.</span>
-                        </div>
-                    }
+                    <div style="position: relative;right:0;">
+                        <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16" @onmouseover='@(() => ShareModel.ShowPopup("open"))' @onmouseout='@(() => ShareModel.HidePopup())'>
+                        @if (ShareModel.IsHovered && ShareModel.HoveredElement == "open")
+                        {
+                            <div class="custom-password-help-hoverpopup text-center" style="background-color:#fff;right:0;">
+                                <span class="txt-clr font-medium">Set an expiry to automatically stop access after a chosen time, keeping your shared content secure.</span>
+                            </div>
+                        }
+                    </div>
+                    
                 </div>
 
                 <div style="display: flex; gap: 20px;justify-content: center;padding-top: 30px;">
@@ -168,6 +171,12 @@
             return;
         }
 
+        if (string.IsNullOrEmpty(ShareModel.UserInput))
+        {
+            ShareModel.ErrorMessage = Texts.ValidEmailAddressText;
+            return;
+        }
+
         ShareModel.ErrorMessage = "";
         AxCrypt.Core.UI.EmailAddress emailAddress;
         if (!AxCrypt.Core.UI.EmailAddress.TryParse(ShareModel.UserInput, out emailAddress))
@@ -183,7 +192,7 @@
         }
 
         int maxUsersCount = ShareModel.MaxAllowedUsersCountToShare();
-        if (ShareModel.ReceiverList.Count > maxUsersCount)
+        if (ShareModel.ReceiverList.Count >= maxUsersCount)
         {
             ShareModel.ErrorMessage = $"You can't add more users than the maximum allowed({maxUsersCount}).";
             return;

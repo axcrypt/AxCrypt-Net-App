@@ -43,6 +43,15 @@
   text-decoration: none;
 }
 
+.email-text-list {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  font-size: 13px;
+  display: inline-block;
+}
+
 .copy-clipboard-ico {
   content: url(/images/premium/IcoClipboard.svg);
 }
@@ -60,10 +69,11 @@
 }
 
 .custom-password-help-hoverpopup {
+  margin-top: 3px;
   height: fit-content;
   padding: 15px 7px;
   width: 190px;
-  padding: 10px;
+  padding: 3px;
   border-radius: 5px;
   position: absolute;
   transform: translateX(50%);

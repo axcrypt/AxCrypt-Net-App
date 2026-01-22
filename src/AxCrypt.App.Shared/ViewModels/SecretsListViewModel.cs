@@ -294,11 +294,6 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
 
     public async Task FilterSecretsBy(SecretsFilter type)
     {
-        if (SelectedSecretFilter == type)
-        {
-            type = 0;
-        }
-
         SelectedSecretFilter = type;
         await ApplyFilterOnSecrets();
     }
