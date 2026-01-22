@@ -66,7 +66,7 @@ namespace AxCrypt.App.Shared.Services
                 return replies.ToList();
             }
 
-            Task updateStatustask = new Task(async () => await UpdateVisibilityStatusAsync(replies));
+            Task updateStatustask = new Task(async () => await UpdateVisibilityStatusAsync(replies.Where(r => r.Id == messageId)));
             updateStatustask.Start();
 
             return replies.ToList();
@@ -79,7 +79,12 @@ namespace AxCrypt.App.Shared.Services
                 return null;
             }
 
-            return await SecuredMessengerFacade.GetMessageAsync(messageId);
+            SecuredMessage reply = await SecuredMessengerFacade.GetMessageAsync(messageId);
+
+            Task updateStatustask = new Task(async () => await UpdateVisibilityStatusAsync(new List<SecuredMessage> { reply }));
+            updateStatustask.Start();
+
+            return reply;
         }
 
         public async Task<bool> SentMessageAsync(NewSecMsgrViewModel viewModel)
