@@ -10,7 +10,6 @@ using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Cryptor;
-using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +48,7 @@ public class TextShareViewModel : ViewModelBase
 
     public string ErrorMessage { get; set; } = "";
 
-    public string? EncryptedText { get; set; } = "";
+    public string PlainText { get; set; } = "";
 
     public Uri? SharedLink { get; set; } = null;
 
@@ -84,11 +83,6 @@ public class TextShareViewModel : ViewModelBase
 
     public void ShowDialog()
     {
-        if (string.IsNullOrEmpty(EncryptedText))
-        {
-            return;
-        }
-
         IsVisible = true;
     }
 
@@ -178,9 +172,9 @@ public class TextShareViewModel : ViewModelBase
     public async Task ApplyAsync()
     {
         ErrorMessage = "";
-        if (string.IsNullOrEmpty(EncryptedText))
+        if (string.IsNullOrEmpty(PlainText))
         {
-            ErrorMessage = "Encrypted text is required to share";
+            ErrorMessage = "Text is required to share";
             return;
         }
 
@@ -208,21 +202,22 @@ public class TextShareViewModel : ViewModelBase
         SetExpiresIn();
         LogOnIdentity logOnIdentity = New<KnownIdentities>().DefaultEncryptionIdentity;
 
-        EncryptedText = await TextCryptor.EncryptTextAsync(passphrase.EncryptionIdentity(), UserInput, availablePublicKeys);
-        _textEncryptionViewModel.EncryptedText = EncryptedText;
-
-        TextEncryptionApiModel textEncryptionApiModel = new TextEncryptionApiModel()
-        {
-            EncryptedText = EncryptedText,
-            Recipients = ReceiverList.Select(su => su.Address),
-            Owner = logOnIdentity.UserEmail.Address,
-            VisibleUntil = ExpiresIn,
-            CreatedUtc = New<INow>().Utc,
-            UpdatedUtc = New<INow>().Utc,
-        };
-
         using (ProcessIndicator indicator = new ProcessIndicator())
         {
+            string encryptedText = await TextCryptor.EncryptTextAsync(passphrase.EncryptionIdentity(), PlainText, availablePublicKeys);
+            _textEncryptionViewModel.EncryptedText = encryptedText;
+
+            TextEncryptionApiModel textEncryptionApiModel = new TextEncryptionApiModel()
+            {
+                EncryptedText = encryptedText,
+                Recipients = ReceiverList.Select(su => su.Address),
+                Owner = logOnIdentity.UserEmail.Address,
+                VisibleUntil = ExpiresIn,
+                CreatedUtc = New<INow>().Utc,
+                UpdatedUtc = New<INow>().Utc,
+            };
+
+
             Guid sharedSecretId = await TextShareApiHelper.ShareTextAsync(logOnIdentity, textEncryptionApiModel);
             if (sharedSecretId != Guid.Empty)
             {
