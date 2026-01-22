@@ -50,7 +50,7 @@
         <div id="view-message-box">
             <div class="view-section" id="expand-view-sec">
                 <table>
-                    <tbody @onclick="async () => await ViewSecMsgrViewModel.ViewMessageById(messenger.Id, messenger.Message.TheMessage!)" style="cursor:pointer;">
+                    <tbody @onclick="async () => await ViewSecuredMessage(messenger.Id, messenger.Message.TheMessage!)" style="cursor:pointer;">
                         <tr>
                             <td> <div class="acc-prfl fnt-small">@senderShortCode</div></td>
                             <td style="line-height: normal; max-width: 235px; padding-left: 5px;">
@@ -147,4 +147,25 @@
             StateHasChanged(); // Refresh UI
         });
     }
+
+    private async Task ViewSecuredMessage(Guid messageId, string messageContent)
+    {
+        if (string.IsNullOrEmpty(messageContent))
+        {
+            await ViewSecMsgrViewModel.ViewMessageById(messageId, messageContent);
+            return;
+        }
+
+        await jsRuntime.InvokeVoidAsync("ShowHideSecuredMessage", "secured-messenger-view-" + messageId);
+    }
 }
+
+<script>
+    window.ShowHideSecuredMessage = function (id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        const isHidden = window.getComputedStyle(el).display === "none";
+        el.style.display = isHidden ? "block" : "none";
+    };
+</script>
