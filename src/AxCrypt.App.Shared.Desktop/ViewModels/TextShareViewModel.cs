@@ -178,6 +178,12 @@ public class TextShareViewModel : ViewModelBase
             return;
         }
 
+        if (!ReceiverList.Any())
+        {
+            ErrorMessage = "Please add at least one receiver.";
+            return;
+        }
+
         int maxUsersCount = MaxAllowedUsersCountToShare();
         if (ReceiverList.Count > maxUsersCount)
         {
