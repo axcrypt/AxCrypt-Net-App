@@ -53,7 +53,7 @@
         </div>
 
     </div>
-    <div class="vlt-content-area">
+    <div class="vlt-content-area" style="position: relative; overflow-x: hidden; overflow-y: auto;">
         @if (ViewModel.VaultItemList.Any())
         {
             <div class="vlt-list-folder">
@@ -137,7 +137,7 @@
 
                 @if (contextMenuType == "file" && !String.IsNullOrEmpty(ViewModel.SelectedFilePath))
                 {
-                    <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;transform-origin:@(flipContextMenu) ;transform:@(flipTransform);">
+                    <div class="context-menu-action" style="position:absolute; top:@(contextMenuY)px; left:@(contextMenuX)px;">
                         <span class="menu-item" @onclick='() => ViewModel.PrepareFileActionAsync("Open")'>@Texts.RecentFilesOpenToolStripMenuItemText</span>
                         <span class="menu-item" @onclick="async () => await ViewModel.DecryptVaultFileAsync()">@Texts.DecryptToolStripMenuItemText</span>
                         <span class="menu-item" @onclick='() => ViewModel.PrepareFileActionAsync("Reveal")'>@Texts.ShowInFolderText</span>
@@ -147,7 +147,7 @@
                 }
                 else if (contextMenuType == "folder")
                 {
-                    <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
+                    <div class="context-menu-action" style="position: absolute; top:@(contextMenuY)px; left:@(contextMenuX)px;">
                         <span class="menu-item" @onclick="async () => await ViewModel.DecryptVaultfolder()">@Texts.DecryptToolStripMenuItemText</span>
                         <span class="menu-item" @onclick='() => ViewModel.FolderActionReveal()'>@Texts.ShowInFolderText</span>
                         <span class="menu-item" @onclick="() => CreateNewFolder(ViewModel.SelectedFilePath)">@Texts.CreateNewFolderText</span>
@@ -155,7 +155,7 @@
                 }
                 else if (contextMenuType == "create")
                 {
-                    <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
+                    <div class="context-menu-action" style="position: absolute; top:@(contextMenuY)px; left:@(contextMenuX)px;">
                         <span class="menu-item" @onclick="() => CreateNewFolder(ViewModel.CurrentFolder)">@Texts.CreateNewFolderText</span>
                         <span class="menu-item" @onclick="() => ViewModel.AddVaultFolder()">@Texts.AddNewFolderText</span>
                     </div>
@@ -210,6 +210,22 @@
             }
         };
 
+        window.getElementRect = (selector) => {
+            const el = document.querySelector(selector);
+            if (!el) return null;
+
+            const rect = el.getBoundingClientRect();
+            return {
+                top: rect.top,
+                left: rect.left,
+                bottom: rect.bottom,
+                height: rect.height,
+                width: rect.width,
+                scrollTop: el.scrollTop,
+                scrollLeft: el.scrollLeft
+            };
+        };
+
         window.getWindowHeight = () => window.innerHeight;
     </script>
 
@@ -240,6 +256,7 @@
     private string flipContextMenu { get; set; } = "top left";
     private string flipTransform { get; set; } = "translateY(0)";
     private double contextMenuHeight { get; set; } = 210;
+    private double contextMenuWidth { get; set; } = 180;
 
     private string searchText = string.Empty;
     private string contextMenuType = "";
@@ -272,21 +289,34 @@
 
     private async Task ShowContextMenu(MouseEventArgs e, string fileName, string filePath, string selectedFolder)
     {
-        contextMenuX = e.PageX;
-        contextMenuY = e.PageY;
+        ElementRect container = await JSRuntime.InvokeAsync<ElementRect>("getElementRect", ".vlt-content-area");
+
+        contextMenuX = e.ClientX - container.Left + container.ScrollLeft;
+        contextMenuY = e.ClientY - container.Top + container.ScrollTop;
+
+        if (contextMenuX + contextMenuWidth > container.Width)
+        {
+            contextMenuX = container.Width - contextMenuWidth - 10;
+        }
+
+        double maxVisibleHeight = container.Height - 40;
+        if (contextMenuY + contextMenuHeight > maxVisibleHeight)
+        {
+            contextMenuY = maxVisibleHeight - contextMenuHeight - 10;
+        }
+
+        contextMenuX = Math.Max(0, contextMenuX);
+        contextMenuY = Math.Max(0, contextMenuY);
 
         contextMenuType = selectedFolder;
 
         if (selectedFolder == "create")
-        {
             return;
-        }
-
-        double windowHeight = await JSRuntime.InvokeAsync<double>("getWindowHeight");
 
         flipContextMenu = "top left";
         flipTransform = "translateY(0)";
-        if (contextMenuY + contextMenuHeight > windowHeight)
+
+        if (selectedFolder != "create" && contextMenuY + contextMenuHeight > container.Height)
         {
             flipContextMenu = "bottom left";
             flipTransform = $"translateY(-{contextMenuHeight}px)";
@@ -337,6 +367,7 @@
         searchText = e.Value?.ToString() ?? "";
         await Task.Yield();
         await JSRuntime.InvokeVoidAsync("scrollToFirstMatch");
+        await JSRuntime.InvokeVoidAsync("scrollLastItemIntoView");
     }
 
     async Task UpdateUIState()
@@ -395,5 +426,16 @@
     {
         ViewModel.CreateNewFolder = false;
         ViewModel.SelectedSubFolderPath = "";
+    }
+
+    public class ElementRect
+    {
+        public double Top { get; set; }
+        public double Left { get; set; }
+        public double Bottom { get; set; }
+        public double Height { get; set; }
+        public double Width { get; set; }
+        public double ScrollTop { get; set; }
+        public double ScrollLeft { get; set; }
     }
 }
