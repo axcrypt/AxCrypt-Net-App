@@ -31,7 +31,7 @@
     else
     {
         <table class="rcnt-fle-tbl" style="width:100%;table-layout: fixed;">
-            <thead id="help-recent-file" class="help-recent-files" style="user-select: none; background-color: #fff;">
+            <thead id="help-recent-file" class="help-recent-files rcnt-tbl-head" style="user-select: none; background-color: #fff;">
                 <tr>
                     <th style="width:3%;"> <input class="check-box" type="checkbox" @onchange="(e) => RecentFilesViewModel.SelectAllFiles(e)" checked="@RecentFilesViewModel.SelectAllChecked" /></th>
                     <th style="width:40%;" @onclick="() => SetSortOrder(0)">@Texts.NameLabel<img class="@($"arw-img {GetClassByActiveSortOrderIndex(0)}")" src="" alt="arrow img" /></th>
@@ -132,7 +132,14 @@
         <dd @onclick="(e) => RecentFilesViewModel.OnContextMenuAction(e, SecuredFilesContextMenu.ClearRecentFiles)">@Texts.ClearRecentFilesToolStripMenuItemText</dd>
     </dl>
 </div>
-
+<style>
+    .rcnt-tbl-head {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 5;
+    }
+</style>
 @code {
     private int ActiveSortOrderIndex = -1;
 
