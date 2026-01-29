@@ -25,7 +25,7 @@
     </div>
 
     <div style="flex: 1; overflow-y: auto; min-height: 0;">
-        <nav class="flex-column" style="padding-top:60px;">
+        <nav class="flex-column" style="margin-top: 30px;">
             <div id="help-home" class="nav-item px-3">
                 <NavLink class="nav-link one" href="/" ActiveClass="active" Match="NavLinkMatch.All">
                     <span class="oi account" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.HomeLinkLabel</span>
@@ -78,36 +78,35 @@
                     </NavLink>
                 </div>
             }
+
+            <div id="help-nofify" class="nav-item px-3">
+                <NavLink class="nav-link five" href="notification">
+                    <span class="oi notifctn" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.PromptNotificationsText</span>
+                </NavLink>
+            </div>
+            <div id="help-support" class="nav-item px-3">
+                <NavLink class="nav-link six" href="SupportIndex">
+                    <span class="oi suprt" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@LogOnViewModel.SupportPageTitle</span>
+                </NavLink>
+            </div>
+
+            <div class="prgrs-bar-sec nav-item">
+                <AxCrypt.App.Shared.Desktop.Components.Shared.ProgressBar />
+            </div>
+
+            <div class="abt-sec nav-item px-3" style="max-width: 400px;">
+                <div id="help-feedback">
+                    <NavLink class="@($"nav-link {GetClassByActiveTab("FeedbackPopup")}")" @onclick="FeedbackPopup">
+                        <span class="oi fdbck" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SendFeedbackTitle</span>
+                    </NavLink>
+                </div>
+                <div id="help-about">
+                    <NavLink class="@($"nav-link {GetClassByActiveTab("AboutPopup")}")" @onclick="AboutPopup">
+                        <span class="oi info" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.AboutAxcryptLinkLabel</span>
+                    </NavLink>
+                </div>
+            </div>
         </nav>
-    </div>
-    <div style="flex-shrink: 0; border-top: 1px solid; padding-bottom: 8px;">
-        <div id="help-nofify" class="nav-item px-3">
-            <NavLink class="nav-link five" href="notification">
-                <span class="oi notifctn" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.PromptNotificationsText</span>
-            </NavLink>
-        </div>
-        <div id="help-support" class="nav-item px-3">
-            <NavLink class="nav-link six" href="SupportIndex">
-                <span class="oi suprt" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@LogOnViewModel.SupportPageTitle</span>
-            </NavLink>
-        </div>
-
-        <div class="prgrs-bar-sec nav-item">
-            <AxCrypt.App.Shared.Desktop.Components.Shared.ProgressBar />
-        </div>
-
-        <div class="abt-sec nav-item px-3" style="max-width: 400px;">
-            <div id="help-feedback">
-                <NavLink class="@($"nav-link {GetClassByActiveTab("FeedbackPopup")}")" @onclick="FeedbackPopup">
-                    <span class="oi fdbck" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SendFeedbackTitle</span>
-                </NavLink>
-            </div>
-            <div id="help-about">
-                <NavLink class="@($"nav-link {GetClassByActiveTab("AboutPopup")}")" @onclick="AboutPopup">
-                    <span class="oi info" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.AboutAxcryptLinkLabel</span>
-                </NavLink>
-            </div>
-        </div>
     </div>
 </div>
 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.Feedback />
