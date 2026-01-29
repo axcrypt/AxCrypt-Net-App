@@ -71,11 +71,11 @@ $colTxtBd: #FFFFFF;
     background-color: $colBordBgrnd !important;
 }
 
-    .password-create-dropdown-content a:hover,
-    .password-create-dropdown-content a.active {
-        color: $colTxtLink !important;
-        background-color: $colHeDBgrnd !important;
-    }
+.password-create-dropdown-content a:hover,
+.password-create-dropdown-content a.active {
+    color: $colTxtLink !important;
+    background-color: $colHeDBgrnd !important;
+}
 
 #messenger-keyword {
     background-color: $colBordBgrnd !important;
@@ -172,4 +172,12 @@ button {
 textarea, input[type=text], textarea[readonly] {
     background: $colDrkMdL3 !important;
     color: $colTxtBd;
+}
+
+.find-fle-nme {
+    color: #232323;
+}
+
+.notif-popup-bck {
+    background-color: transparent !important;
 }
