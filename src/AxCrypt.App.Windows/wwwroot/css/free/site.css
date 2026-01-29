@@ -941,4 +941,16 @@ input[type=radio] {
   .page {
     background: #F9F9F9;
   }
+  .custom-password-help-hoverpopup {
+    margin-top: 3px;
+    height: fit-content;
+    padding: 15px 7px;
+    width: 190px;
+    padding: 3px;
+    border-radius: 5px;
+    position: absolute;
+    transform: translateX(50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
 }
