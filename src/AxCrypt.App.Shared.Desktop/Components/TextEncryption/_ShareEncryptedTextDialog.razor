@@ -50,11 +50,11 @@
             <h2 style="margin: 10px 0;text-align:center;color:#494949"><b>Share as Link</b></h2>
 
             <div class="action-tabs" style="margin: 20px auto;">
-                <div id="anyone-tab" class="act-tab @(TabIndex == 1 ? "active" : "")">
-                    <a href="javascript:void(0);" @onclick="() => TabIndex = 1">Anyone</a>
+                <div id="anyone-tab" class="act-tab @(TabIndex == 1 ? "active" : "")" @onclick="() => TabIndex = 1">
+                    <a href="javascript:void(0);">Anyone</a>
                 </div>
-                <div id="spcific-tab" class="act-tab @(TabIndex == 2 ? "active" : "")">
-                    <a href="javascript:void(0);" @onclick="() => TabIndex = 2">Specific users</a>
+                <div id="spcific-tab" class="act-tab @(TabIndex == 2 ? "active" : "")" @onclick="() => TabIndex = 2">
+                    <a href="javascript:void(0);">Specific users</a>
                 </div>
             </div>
 

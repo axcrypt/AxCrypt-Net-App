@@ -52,7 +52,7 @@
                             <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
                             <div style="display:flex">
                                 <input id="Card_SecurityCode" maxlength="3" placeholder="000" @bind="CardViewModel.SecurityCode"
-                                       type="password"
+                                       type="text"
                                        class="form-control @(GetInputClass(nameof(CardViewModel.SecurityCode)))"
                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 <ValidationMessage For="@(() => CardViewModel.SecurityCode)" />

@@ -9,13 +9,13 @@
 </div>
 
 <div class="action-tabs">
-    <div id="encrypt-tab" class="act-tab @(TabIndex == 1 ? "active" : "")">
+    <div id="encrypt-tab" class="act-tab @(TabIndex == 1 ? "active" : "")" @onclick="() => SetActiveTab(1)">
         <img class="tabicon encrypt-ico" alt="encrypt-icon" />
-        <a href="javascript:void(0);" @onclick="() => SetActiveTab(1)">@Texts.TextEncryptionSideMenuHead1</a>
+        <a href="javascript:void(0);">@Texts.TextEncryptionSideMenuHead1</a>
     </div>
-    <div id="decrypt-tab" class="act-tab @(TabIndex == 2 ? "active" : "")">
+    <div id="decrypt-tab" class="act-tab @(TabIndex == 2 ? "active" : "")" @onclick="() => SetActiveTab(2)">
         <img class="tabicon decrypt-ico" alt="decrypt-icon" />
-        <a href="javascript:void(0);" @onclick="() => SetActiveTab(2)">@Texts.TextEncryptionSideMenuHead3</a>
+        <a href="javascript:void(0);" >@Texts.TextEncryptionSideMenuHead3</a>
     </div>
 </div>
 

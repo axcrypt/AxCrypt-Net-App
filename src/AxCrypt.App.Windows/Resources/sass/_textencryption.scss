@@ -14,7 +14,7 @@
 .action-tabs {
     min-width: 302px;
     max-width: fit-content;
-    height: 36px;
+    height: auto;
     background-color: $colDsblBg;
     border-radius: 57.5px;
     display: flex;
@@ -23,7 +23,7 @@
     > .act-tab {
         min-width: 156px;
         max-width: 100%;
-        height: 36px;
+        height: auto;
         padding: 5px 10px;
 
         &.active {
