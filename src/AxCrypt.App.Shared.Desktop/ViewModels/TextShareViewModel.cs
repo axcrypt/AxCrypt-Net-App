@@ -169,7 +169,7 @@ public class TextShareViewModel : ViewModelBase
         }
     }
 
-    public async Task ApplyAsync()
+    public async Task ApplyAsync(int tabindex)
     {
         ErrorMessage = "";
         if (string.IsNullOrEmpty(PlainText))
@@ -178,7 +178,7 @@ public class TextShareViewModel : ViewModelBase
             return;
         }
 
-        if (!ReceiverList.Any())
+        if (tabindex != 1 && !ReceiverList.Any())
         {
             ErrorMessage = "Please add at least one receiver.";
             return;

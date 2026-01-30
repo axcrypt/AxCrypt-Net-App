@@ -119,7 +119,7 @@
                 </div>
 
                 <div style="display: flex; gap: 20px;justify-content: center;padding-top: 30px;">
-                    <button class="button success btn-large font-medium active" @onclick="async () => await ShareModel.ApplyAsync()">@Texts.ShareLabel</button>
+                    <button class="button success btn-large font-medium active" @onclick="async () => await ShareModel.ApplyAsync(TabIndex)">@Texts.ShareLabel</button>
                     <button class="button border btn-large font-medium btn-hide" @onclick="ShareModel.HideDialog">@Texts.ButtonCancelText</button>
                 </div>
 

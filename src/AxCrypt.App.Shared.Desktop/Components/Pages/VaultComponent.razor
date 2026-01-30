@@ -367,7 +367,6 @@
         searchText = e.Value?.ToString() ?? "";
         await Task.Yield();
         await JSRuntime.InvokeVoidAsync("scrollToFirstMatch");
-        await JSRuntime.InvokeVoidAsync("scrollLastItemIntoView");
     }
 
     async Task UpdateUIState()
