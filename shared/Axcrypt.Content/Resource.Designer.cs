@@ -36717,6 +36717,744 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Don’t wait for a breach to happen to take action..
+        /// </summary>
+        public static string Blog_WPRIDHTS_Conclusion_Heading {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Conclusion_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Take control of your Digital security today because no one else is going to do it for you. Stop reusing Passwords and adopt a strong and secure password hygiene regime. It is time you secure every account with unique passwords that are difficult to decode. Because when one password falls, it&apos;s connected to it falls too..
+        /// </summary>
+        public static string Blog_WPRIDHTS_Conclusion_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Conclusion_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start your &lt;a href=&apos;https://account.axcrypt.net/en/Home/Login?Signup=True&apos;&gt;&lt;b&gt;free trial&lt;/b&gt;&lt;/a&gt; with AxCrypt today and &lt;a href=&apos;https://axcrypt.net/download/&apos;&gt;&lt;b&gt;download&lt;/b&gt;&lt;/a&gt; the app..
+        /// </summary>
+        public static string Blog_WPRIDHTS_Conclusion_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Conclusion_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow us on our social media channels to stay updated about the current trends in cybersecurity and stay ahead of the game..
+        /// </summary>
+        public static string Blog_WPRIDHTS_Conclusion_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Conclusion_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All it takes is one breach, and they have access to everything. Yes! Everything, even those archived emo photos from 2005, you hoped would never resurface..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H1_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H1_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Most users think the more random, the stronger you make your passwords, the safer it is to reuse. Unfortunately, that’s not the case. Modern attacks work with modern technology..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H1_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H1_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password could be your cat’s first name paired with your nonna’s maiden name, with the last two digits of the date you broke-up and just to make it ‘difficult’ for hackers, you even added the &apos;`&apos; symbol, cause why not..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H1_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H1_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guess what, they know you way too well to decipher that password. It doesn’t take much. A fewrepetitivee photos, your likes, the pages you follow and your emotional outbursts on your social media handles; all of this contentactst as cannon fodder for theipersonaliseded attacks..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H1_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H1_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In such cases, even the strongest password becomes useless once it’s exposed. Be it your bank pins, your work laptop, your social media accounts, emails and even your phone passcode; everything today can be breached if you reuse your passwords..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H1_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H1_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The takeaway is clear: never reuse passwords..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H1_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H1_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password reuse happens when the same passwords are used across different platforms with little or no modification. This is poor password hygiene..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H2_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H2_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While this may seem harmless, hackers know way too well that people often reuse their passwords or slightly modify them. Hackers enjoy exploiting this idea through brute force attacks, password reuse attacks, AI generated Password spraying attacks, and that’s just to name a few..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H2_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H2_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The problem is pretty straightforward here. Every account is breached if the same or a relatively similar password has been used on all the other platforms. If one account is breached, then the hackers or attackers intuitively use the same passwords on all your other accounts until they hit the jackpot..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H2_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H2_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Emails, cloud storage, and financial accounts are high-value targets, and even the strongest passwords become useless ifthey ares exposed, leaving all your data exposed..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H2_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H2_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Understanding how hackers steal your passwords is the first step to grasping the seriousness of not reusing them..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This data is subsequently sold to other cyber criminals, who later reuse it in various types of attacks, such as credential stuffing. This practice effectively turns a single breach into many subsequent breaches, amplifying the overall impact of the original incident..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;4: Social engineering and familiar emails:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text11 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Earlier phishing attacks were easily detectable because of bad grammar or a mistake in the emails..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text12 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to But now hackers personalise their attacks and are deploying psychological ways of manipulating victims. They now impersonate someone you know or a trusted contact from your social circle,e or even a supportstaff memberf from your office or a figure of authority from your workplace..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text13 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This ‘supposedly’ familiar voice or even video is used to convince the naive and unaware individual into giving away the impersonated person’s passwords willingly because they trust the person that they are hearing or they are seeing..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text14 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These personalised engineered attacks are rising rapidly and exploit human behaviour rather than technical flaws..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text15 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The core goal of these attacks is to emotionally connect with the person, breach their trust, and exploit them fully..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text16 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;5: Man-in-the-middle-attacks and Network interceptions&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text17 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consider this a highway, but a lonely one in a remote part of the world..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text18 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Such places attract thieves, pirates, or even ghosts waiting to attack and seize everything you own..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text19 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cybercriminals come up with a host of different techniques to steal your passwords. There are the 6 most common ways your password could potentially be cracked:.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In these attacks, the highway acts as an unsecured Wi-Fi or compromised network, and the thieves are attackers intercepting traffic or exploiting activity on legitimate websites..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text20 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These attacks let them capture your passwords during transmission, especially when encryption is weak or absent..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text21 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;6: Brute force or automated guessing.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text22 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you work in tech, you know what brute force attacks and automated guessing mean..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text23 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hackers use automated tools to guess millions of password combinations in seconds until they find the right one..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text24 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brute force attacks and automated guessing include dictionary attacks, which use lists of common passwords, and password spraying..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text25 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;1: Credential Stuffing:&lt;/b&gt; Attackers compile stolen login credentials, including username, password, first and last name, date of birth, and other personal information. They use this breach to automate login attempts on many other sites..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now, if you are one of those who keep on reusing their passwords or making minor changes to the same password on every other platform, then this is a red carpet. Welcome, hackers, to break into your personal accounts..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;2: Key logging and Malware:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is where things get scarier. This method of accessing your personal data is like having an online stalker. Cyber criminals use malware to secretly record keystrokes or extract stored passwords from your browsers or devices..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These tools capture or steal victims&apos; credentials as they type or save passwords in the background..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;3: One data breach, one big list of compromised passwords, multiple channels exposed:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Most times when companies suffer a huge data breach incident, the attackers or hackers responsible for the breach immediately dump large amounts of username and password pairs onto the dark web. These stolen credentials are then sold for a significant value to interested parties..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H3_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H3_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These incidents show how devastating compromised credentials can be in real life..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H4_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H4_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Massive data leaks caused by infostealer malware and unsecured or unencrypted databases have exposed nearly ba billionusernames and passwords, giving cyber criminals. Hackers and attackers around the world are ready to use access for Ransomware attacks, phishing attacks, and credential stuffing attacks..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H4_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H4_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These are three big incidents that we wanted to show you through this blog..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H4_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H4_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;16 billion credentials exposed:&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H4_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H4_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recently, researchers uncovered nearly 16 billion login records spread across 30 unsecured, unencrypted datasets. These credentials include those linked to major platforms like Google, Apple, Facebook, Telegram, and GitHub. This is one of the largest username and password heists ever recorded..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H4_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H4_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;3.5 billion credential database leak:&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H4_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H4_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This single data set contained nearly 3.5 billion username and password pairs. It was collected via infostealer malware and stored in a misconfigured cloud environment, leaving sensitive data exposed and easy for hackers to access..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H4_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H4_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li&gt;184 million credential leak:&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H4_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H4_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Earlier this year, a breach exposed 184 million account credentials from platforms such as Facebook and Roblox, showing these platforms are common targets for infostealers and password theft..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H4_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H4_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If there were a perfect analogy for reused passwords, it would almost explain itself as a Domino Effect that went terribly wrong..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H5_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H5_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Here is what could happen if one account is compromised and the passwords are leaked.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H5_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H5_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;1. Email account breach:&lt;/b&gt; first attackers gain access to your emails, which is where you get your password reset links, and also where you may have, atsome point in time, ssentyour Passwords to yourself..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H5_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H5_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;2. The social media takeover:&lt;/b&gt; Now, once they access your email ID and password, they use these credentials to enter your social media accounts. These are the suspicious login attempt warnings you receive from Instagram or Facebook at odd hours..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H5_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H5_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;3. The digital money heist:&lt;/b&gt; Things get serious once someone accesses your social media or any other account. They send spam emails or messages to your contacts, asking for money or to click a link. This aims to hack more accounts or steal money in your name..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H5_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H5_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;4. The aftermath:&lt;/b&gt; This happens when friends, relatives, or others post on their Instagram stories or send direct messages warning that any money request is not from them but from a hacker or scammer who has accessed their account and demands money. In far worse cases, Work accounts are exposed, sensitive corporate data is leaked,d or reputational damage is caused..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H5_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H5_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintaining good password hygiene requires little effort,t and using the AxCrypt password manager to generate strong, unique passwords is a good place to start..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H6_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H6_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These passwords avoid predictable sequences and repeated patterns, reducing the impact of data breaches and the risk of hacking due to reused passwords..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H6_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H6_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instead of reusing passwords across platforms, download the app to securely store all your passwords, usernames, and IDs in one encrypted place. We, as a cybersecurity firm, do not hold any of your personal information, data, files, or sensitive material..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H6_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H6_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We use &lt;b&gt;zero-knowledge encryption&lt;/b&gt;, meaning our cryptographic algorithm prevents third parties, attackers, or even us from accessing your encrypted files and data..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H6_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H6_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We only store your ID and password as an irreversible hash so you can log in to access your encrypted data..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H6_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H6_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Another best practice is to update your passwords regularly. High-value accounts like your email, banking, and work credentials are digital gold for hackers. Changing your password frequently with AxCrypt helps prevent long-term exploitation..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H6_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H6_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finally, avoid using birthdays, pet names, or easily guessable information in your passwords. Hackers stalk you for months before they make a move, ve and Joe Goldberg is nothing compared to a skilled hacker who also stalks!.
+        /// </summary>
+        public static string Blog_WPRIDHTS_H6_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H6_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to They track your movements online, like the pages you like, the orders you make, your photos online, just to crack your password cause they know it could be a combination of these points, and this is an old trick in their playbook..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H6_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H6_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On the contrary, password reuse risks are real and on the rise..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H7_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H7_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The year is 2026, and an AI is playing a pivotal role for the good guys and the bad guys in the cyberverse..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H7_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H7_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All it takes is one reused password to compromise multiple accounts, leading to identity theft, financial losses, professional consequences, detrimental damage to your image, and many other irreversible incidences..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H7_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H7_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By using unique passwords and also deploying password managers to suggest super-strong unique passwords along with two-factor authentication, you are safeguarding yourself from a data retrieval nightmare. These best practices help reduce the threat of reuse password, hacking and abuse..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H7_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H7_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember, cybersecurity isn’t about fancy tools or just habits and so-called strong passwords like 1234@#..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H7_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H7_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In a time and age, like this extra protection with a little bit of relying on your intuition, and most importantly, using a trusted app, like AxCrypt, is important..
+        /// </summary>
+        public static string Blog_WPRIDHTS_H7_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_H7_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It’s A Risk You Can’t Afford to Ignore!.
+        /// </summary>
+        public static string Blog_WPRIDHTS_Heading1 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Heading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why is password reuse dangerous?.
+        /// </summary>
+        public static string Blog_WPRIDHTS_Heading2 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Heading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How Hackers Steal Passwords?.
+        /// </summary>
+        public static string Blog_WPRIDHTS_Heading3 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Heading3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real-World Password Breach Examples.
+        /// </summary>
+        public static string Blog_WPRIDHTS_Heading4 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Heading4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Domino Effect of Compromised Passwords.
+        /// </summary>
+        public static string Blog_WPRIDHTS_Heading5 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Heading5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How to protect yourself, and what are password security best practices that you can follow.
+        /// </summary>
+        public static string Blog_WPRIDHTS_Heading6 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Heading6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reusing passwords is far more dangerous than you think. It may look like a convenient option, but in reality, you are just making it way too easy for hackers and attackers to take control of all your data and information..
+        /// </summary>
+        public static string Blog_WPRIDHTS_Summary {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We get it..
+        /// </summary>
+        public static string Blog_WPRIDHTS_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remembering all your passwords can be really hard. One for your email, your Netflix account, your dating apps, and a random app you downloaded in 2016….
+        /// </summary>
+        public static string Blog_WPRIDHTS_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And keeping one password for all of them seems like a super easy option, right?.
+        /// </summary>
+        public static string Blog_WPRIDHTS_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reusing passwords is far more dangerous than you think. It may look like a convenient option, but in reality, you are just making it way too easy for hackers and attackers to take control of all your data and information. It&apos;ss almost like digitally telling th, em “Why, c’mon in, how about a cuppa?&apos;.
+        /// </summary>
+        public static string Blog_WPRIDHTS_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to So why is password reuse dangerous?.
+        /// </summary>
+        public static string Blog_WPRIDHTS_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Well….
+        /// </summary>
+        public static string Blog_WPRIDHTS_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why Password Reuse Is Dangerous and How to Stay Secure?.
+        /// </summary>
+        public static string Blog_WPRIDHTS_Title {
+            get {
+                return ResourceManager.GetString("Blog_WPRIDHTS_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data breaches occur when unauthorized individuals gain access to sensitive information without permission. There are several methods by which attackers can breach data, including exploiting software vulnerabilities, social engineering, physical attacks, and stealing login credentials..
         /// </summary>
         public static string Blog_WRDBTUAE_H1_Text1 {
@@ -38679,178 +39417,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Follow the steps below to &lt;b&gt;automatically&lt;/b&gt; encrypt files on your Windows and Mac with AxCrypt:.
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH1_Text1 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH1_Text1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To completely decrypt the file, click on the &lt;b&gt;‘Stop Securing’&lt;/b&gt; icon from the main menu strip on top and select the files that you’d like to decrypt..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH1_Text10 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH1_Text10", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 1:&lt;/b&gt; Download and install AxCrypt: https://axcrypt.net/download/.
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH1_Text2 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH1_Text2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 2:&lt;/b&gt; Open AxCrypt and sign in or sign up with your email and password..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH1_Text3 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH1_Text3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 3:&lt;/b&gt; Click the &lt;b&gt;‘Secure’&lt;/b&gt; button with a padlock icon and select the file you’d like to encrypt..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH1_Text4 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH1_Text4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 4:&lt;/b&gt; This will encrypt the file and you can open it by either &lt;b&gt;double-clicking&lt;/b&gt; the file on the &lt;b&gt;‘Recent Files’&lt;/b&gt; tab or by clicking on &lt;b&gt;‘Open Secured’&lt;/b&gt; and selecting the file..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH1_Text5 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH1_Text5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 5:&lt;/b&gt; To automatically encrypt, click on the &lt;b&gt;File &gt; Options&lt;/b&gt; and check the &lt;b&gt;‘Include Subfolders’&lt;/b&gt; option..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH1_Text6 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH1_Text6", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 6:&lt;/b&gt; Click on the &lt;b&gt;‘Secured Folders’&lt;/b&gt; tab and &lt;b&gt;right-click&lt;/b&gt; to add the desired folder that you would like to automatically encrypt files within..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH1_Text7 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH1_Text7", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 7:&lt;/b&gt; Create, modify, add, or drag files to the secured folder and AxCrypt will automatically encrypt them once you click the &lt;b&gt;‘Cleanup’&lt;/b&gt; button on the &lt;b&gt;top-right&lt;/b&gt; or sign out of the application..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH1_Text8 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH1_Text8", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your most recent encrypted files will appear on the main screen on the &lt;b&gt;‘Recent Files’&lt;/b&gt; tab, and will have a file extension of &lt;b&gt;.axx&lt;/b&gt;. You can add new folders and subfolders and AxCrypt will automatically encrypt the files within the folders..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH1_Text9 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH1_Text9", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Quick 3-step tutorial to encrypt files your Android and iOS smartphones:.
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH2_Text1 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH2_Text1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 1:&lt;/b&gt; Install AxCrypt from &lt;a href=&apos;https://play.google.com/store/apps/details?id=net.axcrypt.axcrypt2x&amp;hl=en&amp;gl=US&apos;&gt;&lt;b&gt;Google PlayStore&lt;/b&gt;&lt;/a&gt; or &lt;a href=&apos;https://apps.apple.com/us/app/axcrypt-file-encryption-new/id6746769422&apos;&gt;&lt;b&gt;App Store&lt;/b&gt;&lt;/a&gt; and sign into your account..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH2_Text2 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH2_Text2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 2:&lt;/b&gt; Tap the ‘Secure’ button with a padlock icon and select &lt;b&gt;‘Phone’.&lt;/b&gt;.
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH2_Text3 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH2_Text3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;STEP 3:&lt;/b&gt; Browse and select the files that you’d like to encrypt. Tap and hold to select multiple files..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH2_Text4 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH2_Text4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to And that’s it! Your files will be encrypted with an &lt;b&gt;.axx&lt;/b&gt; file extension, and will appear on the ‘Recent Files’ tab under the menu strip. To open a file, just tap on any of the listed files directly from the main screen, or tap the &lt;b&gt;‘Open Secured’&lt;/b&gt; button and select a file. To permanently decrypt a file, tap on the &lt;b&gt;‘Stop Securing’&lt;/b&gt; button and select the file that you’d like to decrypt that has the &lt;b&gt;.axx&lt;/b&gt; file extension..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH2_Text5 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH2_Text5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to When you open a file to view or edit, it only creates a temporary decryption process, and any changes made to the file will automatically be re-encrypted..
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH2_Text6 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH2_Text6", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AxCrypt can also automatically encrypt and sync files on your &lt;a href=&apos;https://axcrypt.net/blog/best-encryption-software-for-business-data-the-ultimate-guide/&apos;&gt;&lt;b&gt;Windows&lt;/b&gt;&lt;/a&gt; and Mac, and on your &lt;a href=&apos;https://axcrypt.net/blog/how-to-encrypt-files-in-google-drive-step-by-step-in-2024/&apos;&gt;&lt;b&gt;Google Drive&lt;/b&gt;&lt;/a&gt; and &lt;a href=&apos;https://axcrypt.net/blog/encrypt-onedrive-and-googledrive-files-using-worlds-best-encryption/&apos;&gt;&lt;b&gt;OneDrive accounts&lt;/b&gt;&lt;/a&gt;, so that you can access and edit them on the go on your p [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_SH2_Text7 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_SH2_Text7", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Steps to Automatically Encrypt Files on Windows and Mac with Zero-Knowledge&lt;/b&gt;.
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_Subheading1 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_Subheading1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Steps to Encrypt Files on Your Android and iOS Phones&lt;/b&gt;.
-        /// </summary>
-        public static string Blog_ZKEEIST_H3_Subheading2 {
-            get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H3_Subheading2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Using AxCrypt’s encryption software, you can encrypt your sensitive data on your computer or smartphone with just a few clicks. AxCrypt is the true Zero-Knowledge encryption software with a powerful, lightweight, and super-easy to use user interface..
+        ///   Looks up a localized string similar to Cyber threats are always in a constant state of update. They constantly grow more sophisticated and costly, and with the growing threats in the cyberscape, security can not afford to have reactive measures..
         /// </summary>
         public static string Blog_ZKEEIST_H3_Text1 {
             get {
@@ -38859,7 +39426,115 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zero-Knowledge Encryption is a powerful data security technique for your sensitive data. It can ensure that data is protected at all times, even if it resides with third-party service providers such as cloud storage services or corporate networks. Zero-Knowledge Encryption acts as a first line of defense for your sensitive files, and it&apos;s recommended by renowned institutions like &lt;a href=&apos;https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-111.pdf&apos;&gt;&lt;b&gt;NIST&lt;/b&gt;&lt;/a&gt;, &lt;a href=&apos;https://www.ibm [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to When we say we are powerful, we mean it, and in addition to that, we cut through all the complexities of strong encryption. We bring you effortless encryption, maximum protection, and the trust of zero-knowledge encryption, so that no one gets to read your data. Not us, not the hacker next door..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With just one password, we make encryption super easy yet strong, with many other intuitive features and automated file protection..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text11 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt – a security design, crafted to mitigate human-errors, eliminate friction and protect your data quietly but fiercely in the background..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text12 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is what true Zero-Knowledge encryption and security looks like..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text13 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And that’s how AxCrypt was built for this reality..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At AxCrypt, we don’t offer security as an added feature, but it is the foundation of everything we do. For years now, we have held the baton of strong security and led the way with zero-knowledge encryption, ensuring that only you have the right to access your files..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not us, not third parties, not the backdoors, not the attackers or hackers – just you..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As long as you control your passwords, you control all your data..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With this approach, you can rest assured that even in the event of a breach occurring, your data is secure, and it remains unreadable and unusable without the correct decryption keys. That’s not just a sign of strong security. That is a mark of smarter security..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Over the years, AxCrypt’s reliability has stood the test of time and trust. For over two decades, we have witnessed millions of users from around the world entrusting their data with AxCrypt as their guardian for sensitive information..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We secure your files with the unbreakable, industry-leading AES-256-bit encryption. This is by far one of the strongest security standards available today..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In a time and age where cyberthreats look harmless but cause maximum damage, where they look absolutely familiar and convincing, precaution can not come with passwords like ‘qwerty123’. AxCrypt identified and forecasted the threat decades ago and stands at delivering consistent, dependable protection that does not fail when you need it the most..
+        /// </summary>
+        public static string Blog_ZKEEIST_H3_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H3_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using AxCrypt’s encryption software, you can encrypt your sensitive data on your computer or smartphone with just a few clicks. AxCrypt is the true Zero-Knowledge encryption software with a powerful, lightweight, and super-easy to use user interface..
         /// </summary>
         public static string Blog_ZKEEIST_H4_Text1 {
             get {
@@ -38868,11 +39543,20 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zero-Knowledge Encryption is a powerful data security technique for your sensitive data. It can ensure that data is protected at all times, even if it resides with third-party service providers such as cloud storage services or corporate networks. Zero-Knowledge Encryption acts as a first line of defense for your sensitive files, and it&apos;s recommended by renowned institutions like &lt;a href=&apos;https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-111.pdf&apos;&gt;&lt;b&gt;NIST&lt;/b&gt;&lt;/a&gt;, &lt;a href=&apos;https://www.ibm [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blog_ZKEEIST_H5_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_H5_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selecting a robust file Zero-Knowledge Encryption software ensures that your files are equipped with the powerful measures to protect your sensitive data effectively.  Whether it&apos;s personal files, financial documents, or sensitive business data, encryption ensures that even if unauthorized access occurs to your files, your data remains unreadable and protected.
         /// </summary>
-        public static string Blog_ZKEEIST_H4_Text2 {
+        public static string Blog_ZKEEIST_H5_Text2 {
             get {
-                return ResourceManager.GetString("Blog_ZKEEIST_H4_Text2", resourceCulture);
+                return ResourceManager.GetString("Blog_ZKEEIST_H5_Text2", resourceCulture);
             }
         }
         
@@ -38895,7 +39579,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How to Use Zero-Knowledge Encryption for Your Files?.
+        ///   Looks up a localized string similar to AxCrypt: Zero-Knowledge Security For a High-Risk Digital World..
         /// </summary>
         public static string Blog_ZKEEIST_Heading3 {
             get {
@@ -38904,7 +39588,16 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2023 was a pivotal year for the advancements in the technology and IT sector. With expeditious developments in Artificial Intelligence and Machine Learning, launching a cyber attack has become easier than ever..
+        ///   Looks up a localized string similar to How to Use Zero-Knowledge Encryption for Your Files?.
+        /// </summary>
+        public static string Blog_ZKEEIST_Heading4 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_Heading4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2025 was a pivotal year for the advancements in the technology and IT sector. With expeditious developments in Artificial Intelligence and Machine Learning, launching a cyber attack has become easier than ever..
         /// </summary>
         public static string Blog_ZKEEIST_Summary {
             get {
@@ -38913,7 +39606,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2023 was a pivotal year for the advancements in the technology and IT sector. With expeditious developments in Artificial Intelligence and Machine Learning, launching a cyber attack has become easier than ever..
+        ///   Looks up a localized string similar to 2025 was a pivotal year for advancements in the technology and IT sector. With the rapid advancements in Artificial Intelligence and Machine Learning, launching a cyberattack has become easier than ever..
         /// </summary>
         public static string Blog_ZKEEIST_Text1 {
             get {
@@ -38922,7 +39615,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In 2023, there were a total of &lt;a href=&apos;https://www.itgovernance.co.uk/blog/list-of-data-breaches-and-cyber-attacks-in-2023&apos;&gt;&lt;strong&gt;6 billion&lt;/strong&gt;&lt;/a&gt; compromised records with &lt;a href=&apos;https://www.itgovernance.co.uk/blog/list-of-data-breaches-and-cyber-attacks-in-2023&apos;&gt;&lt;strong&gt;1,404&lt;/strong&gt;&lt;/a&gt; breach incidents, amounting to almost 4 breaches per day! Darkbeam was the largest data breach of 2023, with over &lt;a href=&apos;https://news.ycombinator.com/item?id=37684884&apos;&gt;&lt;strong&gt;3.8 billion&lt;/strong&gt;&lt;/a&gt; records [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Cyber threats and attacks have only worsened in 2025. The average cost of a data breach worldwide is an alarming $4.44 million, and when we look at the US, it only gets worse. The number stands at 10.22 million, which is the highest globally..
         /// </summary>
         public static string Blog_ZKEEIST_Text2 {
             get {
@@ -38931,7 +39624,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to However, the good news is that sensitive data can be proactively shielded from cyber attacks using powerful data encryption techniques. Encrypting data with Zero-Knowledge encryption ensures that even if data is leaked during a breach, it cannot be deciphered and cannot be made use of without the proper decryption keys..
+        ///   Looks up a localized string similar to Nearly 88% of breaches are caused by human errors. Spotting these errors is difficult. It takes an average of 181 days to identify errors, gaps, or vulnerabilities, and 241 more days to prevent full impact..
         /// </summary>
         public static string Blog_ZKEEIST_Text3 {
             get {
@@ -38940,7 +39633,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In this blog post, let’s discuss what data encryption with zero-knowledge encryption is, why it’s important for data security, how to use it, and its effective use cases.
+        ///   Looks up a localized string similar to By then, networks are compromised, data is infiltrated, breaches occur, and recovery becomes a nightmare..
         /// </summary>
         public static string Blog_ZKEEIST_Text4 {
             get {
@@ -38949,7 +39642,34 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zero-Knowledge Encryption Explained in Simple Terms.
+        ///   Looks up a localized string similar to Nearly 16% of breaches were seen to start with a Phishing Attack, and these breaches roughly cost $17,700 per minute in terms of damages. With 1,876 attacks per quarter and cyber fatigue impacting nearly half of organisations, proactive security strategies are essential..
+        /// </summary>
+        public static string Blog_ZKEEIST_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to However, the good news is that sensitive data can be proactively shielded from cyber-attacks using powerful data encryption techniques. Encrypting data with Zero-Knowledge encryption ensures that even if data is leaked during a breach, it cannot be deciphered and cannot be made use of without the proper decryption keys..
+        /// </summary>
+        public static string Blog_ZKEEIST_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In this blog post, let’s discuss what data encryption with zero-knowledge encryption is, why it’s important for data security, how to use it, and its effective use cases..
+        /// </summary>
+        public static string Blog_ZKEEIST_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_ZKEEIST_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zero-Knowledge Encryption: Security You Control..
         /// </summary>
         public static string Blog_ZKEEIST_Title {
             get {
@@ -52211,7 +52931,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zero-Knowledge File Security with AES- 256 algorithm. File security with AES-256 algorithm &amp; enhance security with Multi- Factor Authentication..
+        ///   Looks up a localized string similar to Zero-Knowledge File Security with AES-256 algorithm &amp; enhance security with Multi- Factor Authentication..
         /// </summary>
         public static string HomeSellingPointStrongEncryptionBody {
             get {
@@ -58535,6 +59255,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reusing passwords puts all your accounts at risk. Learn how hackers exploit reused passwords and discover best practices to stay secure online..
+        /// </summary>
+        public static string Meta_Description_Blog_WPRIDHTS {
+            get {
+                return ResourceManager.GetString("Meta-Description-Blog-WPRIDHTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Explore how recent data breaches highlight the critical need for robust encryption. Learn key lessons to protect your data and prevent future breaches..
         /// </summary>
         public static string Meta_Description_Blog_WRDBTUAE {
@@ -60412,6 +61141,15 @@ namespace AxCrypt.Content {
         public static string Meta_Title_Blog_WIPTFI2E {
             get {
                 return ResourceManager.GetString("Meta-Title-Blog-WIPTFI2E", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why Password Reuse Is Dangerous &amp; How to Stay Secure in 2026.
+        /// </summary>
+        public static string Meta_Title_Blog_WPRIDHTS {
+            get {
+                return ResourceManager.GetString("Meta-Title-Blog-WPRIDHTS", resourceCulture);
             }
         }
         
@@ -72133,6 +72871,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share as Link.
+        /// </summary>
+        public static string ShareAsLinkActionLabel {
+            get {
+                return ResourceManager.GetString("ShareAsLinkActionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All users with access in selected files ({0}).
         /// </summary>
         public static string SharedKeyUserListTitle {
@@ -74757,34 +75504,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What is &lt;span&gt;Text Encryption&lt;/span&gt;?.
-        /// </summary>
-        public static string TextEncryptionGuideContentHead {
-            get {
-                return ResourceManager.GetString("TextEncryptionGuideContentHead", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Need to share a confidential piece of text? AxCrypt lets you encrypt plain text in seconds. Simply enter the text, secure it with your account password or a custom password, and share the encrypted output via email, private messages, and more. As a sender, you can copy the encrypted text to your clipboard or download it as a .txt file to share through email. The recipient can then paste the encrypted text into the AxCrypt app and decrypt it instantly. It’s also an easy way to secure email communication and  [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string TextEncryptionGuideparagraph1 {
-            get {
-                return ResourceManager.GetString("TextEncryptionGuideparagraph1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AxCrypt uses industry-standard &lt;strong&gt;AES-256 encryption&lt;/strong&gt;, ensuring strong protection for your text. This is the same level of encryption used by government and enterprise-grade security systems. All text encryption and decryption processes occur &lt;strong&gt;locally on your device&lt;/strong&gt;. Your text is never uploaded to any server, ensuring complete privacy and control over your data..
-        /// </summary>
-        public static string TextEncryptionGuideparagraph2 {
-            get {
-                return ResourceManager.GetString("TextEncryptionGuideparagraph2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your complete guide to encryption and sharing Text..
+        ///   Looks up a localized string similar to AxCrypt lets you encrypt plain text in seconds. Simply enter the text, secure it with your account password or a custom password, and share the encrypted output via email, private messages, and more..
         /// </summary>
         public static string TextEncryptionGuidesHeadParagraph {
             get {
@@ -74892,11 +75612,38 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click &lt;b&gt; Click Encrypt&lt;/b&gt;.
+        ///   Looks up a localized string similar to Click &lt;b&gt; Encrypt&lt;/b&gt;.
         /// </summary>
         public static string TextEncryptionGuideStepText16 {
             get {
                 return ResourceManager.GetString("TextEncryptionGuideStepText16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Share as a Secure Link&lt;/b&gt;&lt;br/&gt; Use &lt;b&gt;Share as Link&lt;/b&gt; to generate a secure, time-limited link to your encrypted text. Choose whether the link can be accessed by &lt;b&gt;Anyone&lt;/b&gt; or only &lt;b&gt;Specific users&lt;/b&gt; (New users will receive an invitation email, and after the file is shared, a notification email with the access link).&lt;br/&gt; Add up to &lt;b&gt;3 specific email addresses&lt;/b&gt; for restricted access.
+        /// </summary>
+        public static string TextEncryptionGuideStepText17 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set &lt;b&gt;an expiration time&lt;/b&gt; (for example, 1 hour).
+        /// </summary>
+        public static string TextEncryptionGuideStepText18 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share the link confidently, knowing access is controlled and temporary.
+        /// </summary>
+        public static string TextEncryptionGuideStepText19 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText19", resourceCulture);
             }
         }
         
@@ -74906,6 +75653,33 @@ namespace AxCrypt.Content {
         public static string TextEncryptionGuideStepText2 {
             get {
                 return ResourceManager.GetString("TextEncryptionGuideStepText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This option is ideal when you want secure sharing without sending files or copying long encrypted text blocks..
+        /// </summary>
+        public static string TextEncryptionGuideStepText20 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the encrypted text was shared using the &lt;b&gt;Anyone&lt;/b&gt; option, you must enter the &lt;b&gt;custom password&lt;/b&gt; provided by the sender to decrypt the content..
+        /// </summary>
+        public static string TextEncryptionGuideStepText21 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the text was shared with you as a &lt;b&gt;Specific user&lt;/b&gt;, no password is required, you can decrypt the content directly using the secure link..
+        /// </summary>
+        public static string TextEncryptionGuideStepText22 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideStepText22", resourceCulture);
             }
         }
         
@@ -78757,6 +79531,24 @@ namespace AxCrypt.Content {
         public static string YourSecurityMattersText1 {
             get {
                 return ResourceManager.GetString("YourSecurityMattersText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zero-Knowledge Encryption.
+        /// </summary>
+        public static string ZeroKnowledgeEncryptionLabel {
+            get {
+                return ResourceManager.GetString("ZeroKnowledgeEncryptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A privacy-first approach powered by an impenetrable 256-bit encryption keeps your data secure. .
+        /// </summary>
+        public static string ZeroKnowledgeEncryptionText {
+            get {
+                return ResourceManager.GetString("ZeroKnowledgeEncryptionText", resourceCulture);
             }
         }
     }
