@@ -12,6 +12,7 @@ $colBordBgrnd: #282828;
 $colBord: #CDFFB1;
 $colDrkMdL3: #575757;
 $colTxtBd: #FFFFFF;
+$colDrkMdBushd: #757575; 
 
 .sidebar {
     background-color: $SdebrbgndClr !important;
@@ -189,3 +190,13 @@ textarea, input[type=text], textarea[readonly] {
 .file-dec-icon {
     content: url(/images/IcoClnGrn.svg);
 }
+}
+
+.page-heading {
+    background-color: $colDrkMdBushd;
+}
+
+.sub-head-clr {
+    color: $colTxtlble;
+}
+
