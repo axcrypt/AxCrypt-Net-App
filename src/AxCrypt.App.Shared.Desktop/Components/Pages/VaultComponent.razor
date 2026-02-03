@@ -364,9 +364,16 @@
 
     private async Task OnSearchChanged(ChangeEventArgs e)
     {
-        searchText = e.Value?.ToString() ?? "";
-        await Task.Yield();
-        await JSRuntime.InvokeVoidAsync("scrollToFirstMatch");
+        try
+        {
+            searchText = e.Value?.ToString() ?? "";
+            await Task.Yield();
+            await JSRuntime.InvokeVoidAsync("scrollToFirstMatch");
+        }
+        catch (Exception ex)
+        {
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, ex.Message);
+        }
     }
 
     async Task UpdateUIState()
