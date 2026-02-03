@@ -149,7 +149,11 @@ button {
 
 textarea, input[type=text], textarea[readonly] {
   background: #575757 !important;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
+}
+
+.clean-up textarea {
+  color: #FFFFFF !important;
 }
 
 .find-fle-nme {

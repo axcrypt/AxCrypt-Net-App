@@ -171,7 +171,11 @@ button {
 
 textarea, input[type=text], textarea[readonly] {
     background: $colDrkMdL3 !important;
-    color: $colTxtBd;
+    color: $colTxtBd !important;
+}
+
+.clean-up textarea {
+    color: $colTxtBd !important;
 }
 
 .find-fle-nme {
@@ -181,3 +185,4 @@ textarea, input[type=text], textarea[readonly] {
 .notif-popup-bck {
     background-color: transparent !important;
 }
+
