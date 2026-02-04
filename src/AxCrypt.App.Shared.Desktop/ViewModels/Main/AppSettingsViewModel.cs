@@ -223,7 +223,7 @@ public class AppSettingsViewModel : ViewModelBase
         {
             SelectedOption = duration;
             New<UserSettings>().InactivitySignOutTime = TimeSpan.FromMinutes(int.Parse(duration.ToString()));
-            InactivitySignOut = New<UserSettings>().InactivitySignOutTime.Minutes;
+            InactivitySignOut = (int)New<UserSettings>().InactivitySignOutTime.TotalMinutes;
         }, null!, e);
 
         StartInactivitySignOut();
