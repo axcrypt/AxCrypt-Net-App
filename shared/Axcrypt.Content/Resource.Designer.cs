@@ -75594,7 +75594,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Note:&lt;/b&gt; Please use the custom password shared with you (if any) to decrypt the text.
+        ///   Looks up a localized string similar to &lt;b&gt;Important Notes: &lt;/b&gt;.
         /// </summary>
         public static string TextEncryptionGuideStepText14 {
             get {
