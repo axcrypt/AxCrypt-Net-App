@@ -15,10 +15,10 @@
         <h3 class="fle-nme fnt-sze">@Texts.ActionsText</h3>
         <div id="help-wrapper" class="" style="display:flex;">
 
-            <div id="help-open" class="act-box" @onclick="async ()=> await homeActionModel!.OpenFile()" @onmouseover='@(() => ShowPopup("open"))' @onmouseout='@(() => HidePopup())'>
+            <div id="help-open" class="act-box" @onclick="async () => await homeActionModel!.OpenFile()" @onmouseover='@(() => ShowPopup("open"))' @onmouseout='@(() => HidePopup())'>
                 <img class="act-img opnscrd-act" src="" alt="opnscrd-img" />
                 <span class="text-size">@Texts.OpenEncryptedToolStripMenuItemText</span>
-                @if (isHovered && hoveredElement == "open")  
+                @if (isHovered && hoveredElement == "open")
                 {
                     <div class="home-hover text-center" style="background-color:#fff;">
                         <span class="txt-clr font-medium">@Texts.OpenToolStripButtonToolTipText</span>
@@ -28,7 +28,7 @@
 
             @if (!homeActionModel!.EncryptButtonEnabled)
             {
-                <div id="help-secure" class="popup-container" disabled="@(!homeActionModel.EncryptButtonEnabled)" @onclick="() => homeActionModel.UpgradeDialog()" @onmouseover='@( () => ShowPopup("secure") )' @onmouseout='@( () => HidePopup() )'>
+                <div id="help-secure" class="popup-container" disabled="@(!homeActionModel.EncryptButtonEnabled)" @onclick="() => homeActionModel.UpgradeDialog()" @onmouseover='@(() => ShowPopup("secure"))' @onmouseout='@(() => HidePopup())'>
                     <div class="hover-trigger">
                         <div class="act-box shre-box" style="background-color:#D9D9D9;">
                             <img class="act-img scr-act" src="" alt="scr-img" />
@@ -75,7 +75,7 @@
             </div>
             @if (!homeActionModel!.KeyShareButtonEnabled)
             {
-                <div id="help-sharekey" class="popup-container" disabled="@homeActionModel.KeyShareButtonEnabled" @onclick="() => homeActionModel.UpgradeDialog()" @onmouseover='@( () => ShowPopup("share") )' @onmouseout='@( () => HidePopup() )'>
+                <div id="help-sharekey" class="popup-container" disabled="@homeActionModel.KeyShareButtonEnabled" @onclick="() => homeActionModel.UpgradeDialog()" @onmouseover='@(() => ShowPopup("share"))' @onmouseout='@(() => HidePopup())'>
                     <div class="hover-trigger">
                         <div class="act-box shre-box" style="background-color:#D9D9D9;">
                             <img class="act-img vwr-shrks-act" src="" alt="shrks-img" /><span class="text-size">@Texts.ShareKeysToolStripMenuItemText</span>
@@ -115,7 +115,7 @@
                 } *@
             @if (homeActionModel.HasBusiness)
             {
-                <div class="act-box" @onmouseover='@( () => ShowPopup("master key") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.NavigateToMasterKeyPage">
+                <div class="act-box" @onmouseover='@(() => ShowPopup("master key"))' @onmouseout='@(() => HidePopup())' @onclick="homeActionModel.NavigateToMasterKeyPage">
                     <img class="act-img mtrkey-act" src="" alt="mtrkey-img" /><span class="text-size">@Texts.MasterKeyTitle</span>
                     @if (isHovered && hoveredElement == "master key")
                     {
@@ -126,7 +126,7 @@
                 </div>
                 @if (Utility.IsMainMenuHidden)
                 {
-                    <div class="act-box" @onmouseover='@( () => ShowPopup("create groups") )' @onmouseout='@( () => HidePopup() )' @onclick="homeActionModel.NavigateToCreateGroupsPage">
+                    <div class="act-box" @onmouseover='@(() => ShowPopup("create groups"))' @onmouseout='@(() => HidePopup())' @onclick="homeActionModel.NavigateToCreateGroupsPage">
                         <img class="act-img grp-act" src="" alt="grp-img" /><span class="text-size">Create groups</span>
                         @if (isHovered && hoveredElement == "create groups")
                         {
@@ -238,7 +238,7 @@
                     @* Unlock our amazing <span>features</span> developed to <span>empower your security!</span> *@
                     @((MarkupString)(string.Format(Texts.UpgradeToUnlockFullEncryptionFeaturesText)))
                 </label>
-                <button class="upgrd-btn font-medium btn-large" @onclick="()=>homeActionModel.UpgradeDialog()" style="height: 37px;"> @Texts.UpgradeNowText</button>
+                <button class="upgrd-btn font-medium btn-large" @onclick="() => homeActionModel.UpgradeDialog()" style="height: 37px;"> @Texts.UpgradeNowText</button>
             </div>
         </div>
     }

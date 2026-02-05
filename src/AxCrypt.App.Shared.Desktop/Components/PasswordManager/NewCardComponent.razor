@@ -35,7 +35,7 @@
                     </li>
                     <li>
                         <label for="Card_SecretDesc">@Texts.DescriptionLabel:</label>
-                        <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949" placeholder="example"
+                        <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949;" placeholder="example"
                                   @bind="CardViewModel.SecretDesc"
                                   class="@(GetInputClass(nameof(CardViewModel.SecretDesc)))"></textarea>
                         <ValidationMessage For="@(() => CardViewModel.SecretDesc)" />
@@ -43,7 +43,7 @@
                     <li class="list-row">
                         <div class="list-width">
                             <label for="Card_NameOnCard">@Texts.NameOnCardPrompt</label>
-                            <input type="text" style="color:#494949" placeholder="Name and Surname"
+                            <input type="text" style="color:#494949;" placeholder="Name and Surname"
                                    @bind="CardViewModel.NameOnCard"
                                    class="@(GetInputClass(nameof(CardViewModel.NameOnCard)))" />
                             <ValidationMessage For="@(() => CardViewModel.NameOnCard)" />

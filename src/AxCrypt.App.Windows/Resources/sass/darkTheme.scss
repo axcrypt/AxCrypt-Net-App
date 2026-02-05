@@ -14,6 +14,7 @@ $colDrkMdL3: #575757;
 $colTxtBd: #FFFFFF;
 $colDrkMdBushd: #757575;
 $BtnBackClr: #48772C;
+$colDrkMdHglhtPrm: #CDFFB1;
 
 .sidebar {
     background-color: $SdebrbgndClr !important;
@@ -35,8 +36,9 @@ $BtnBackClr: #48772C;
     color: $colTxtLink !important;
 }
 
-.label-text label, .lable-txt, .font-medium {
+.label-text label, .lable-txt {
     color: $colTxtlble !important;
+    background-color: $TbleBg !important;
 }
 
 .desc-txt, .nav-link span, .select-email {
@@ -56,7 +58,7 @@ $BtnBackClr: #48772C;
 
 .model-popup, .act-clr, .notification-popup {
     background-color: $SdebrbgndClr !important;
-    color: $colTxtlble !important;
+    color: $colTxtBd !important;
 }
 
 .notify-pg-tbl-body td {
@@ -72,11 +74,11 @@ $BtnBackClr: #48772C;
     background-color: $colBordBgrnd !important;
 }
 
-.password-create-dropdown-content a:hover,
-.password-create-dropdown-content a.active {
-    color: $colTxtLink !important;
-    background-color: $colHeDBgrnd !important;
-}
+    .password-create-dropdown-content a:hover,
+    .password-create-dropdown-content a.active {
+        color: $colTxtLink !important;
+        background-color: $colHeDBgrnd !important;
+    }
 
 #messenger-keyword {
     background-color: $colBordBgrnd !important;
@@ -113,7 +115,7 @@ $BtnBackClr: #48772C;
 
 .page {
     background-color: $colPageBgrnd !important;
-    color: $colDefTxt;
+    color: $colTxtlble;
 }
 
 .page-title {
@@ -121,7 +123,7 @@ $BtnBackClr: #48772C;
 }
 
 .fle-nme {
-    color: $colDefTxt !important;
+    color: $colTxtlble;
 }
 
 .text-style {
@@ -141,9 +143,13 @@ button {
     border: $BorderClr !important;
 }
 
+    .mre-actn-box:hover {
+        background-color: $TbleBg !important;
+    }
+
 .rcnt-fld-bx {
     background-color: $colActnBgrnd;
-    border: $BorderClr !important;
+    border: $BorderClr;
     box-shadow: none !important;
     color: $colTxtlble !important;
 }
@@ -175,8 +181,13 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     color: $colTxtBd !important;
 }
 
+    input[readonly="readonly"], textarea[readonly] {
+        border: $colDrkMdL3 !important;
+    }
+
 .clean-up textarea {
     color: $colTxtBd !important;
+    background: $colDrkMdL3 !important;
 }
 
 .find-fle-nme {
@@ -190,6 +201,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 .file-dec-icon {
     content: url(/images/IcoClnGrn.svg);
 }
+
 
 .page-heading {
     background-color: $colDrkMdBushd;
@@ -222,9 +234,9 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     background: $colBordBgrnd;
 }
 
-.inbox-section table:hover {
-    background: $colTxtlble;
-}
+    .inbox-section table:hover {
+        background: $colTxtlble;
+    }
 
 .email-txt-ovflw {
     color: $colTxtBd;
@@ -249,9 +261,9 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     color: $colTxtlble;
 }
 
-.secured-messenger option:hover {
-    color: $colBord;
-}
+    .secured-messenger option:hover {
+        color: $colBord;
+    }
 
 .multi-actn-btn {
     background-color: $colDrkMdL3;
@@ -259,9 +271,9 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     border: $colTxtlble;
 }
 
-.multi-actn-btn:hover {
-    background-color: $colDrkMdL3;
-}
+    .multi-actn-btn:hover {
+        background-color: $colDrkMdL3;
+    }
 
 .button.border {
     border: 1px solid $SdebrbgndClr !important;
@@ -281,9 +293,8 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     color: $colBord !important;
 }
 
-.flex-start .button {
-    background: $SdebrbgndClr;
-    color: $colTxtlble;
+.secured-messenger option:hover {
+    color: $colBord;
 }
 
 .settings-menu-item-container img, .manage-acc-sec a img, .notifi-img img {
@@ -292,4 +303,30 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 
 .notification-popup {
     border: 1px solid $SdebrbgndClr;
+}
+
+.password-filter-dropdown-content {
+    background: $SdebrbgndClr;
+    color: $colTxtlble !important;
+}
+
+.text-fnt-size {
+    color: $colDrkMdL3;
+}
+
+.grey-clr {
+    color: $colDrkMdL3;
+    font-weight: 700;
+}
+
+.home-index .fle-nme {
+    color: $colTxtBd;
+}
+
+.txt-clr, .highlight-text > span {
+    color: $colDrkMdHglhtPrm;
+}
+
+.abt-axc > span {
+    color: $colTxtlble;
 }

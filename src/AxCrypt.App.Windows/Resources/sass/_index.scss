@@ -8,14 +8,14 @@
     margin-bottom: 30px;
 }
 
-.page-title::before {
-    content: '';
-    position: absolute;
-    background-image: $Titlelogo;
-    background-size: contain;
-    background-repeat: no-repeat;
-    transform-origin: center center;
-}
+    .page-title::before {
+        content: '';
+        position: absolute;
+        background-image: $Titlelogo;
+        background-size: contain;
+        background-repeat: no-repeat;
+        transform-origin: center center;
+    }
 
 //top menu
 .update-btn {
@@ -31,9 +31,9 @@
     font-weight: 700;
 }
 
-.update-btn:hover {
-    color: #E0922F;
-}
+    .update-btn:hover {
+        color: #E0922F;
+    }
 
 
 .padding {
@@ -65,10 +65,10 @@
     padding: 10px 10px;
 }
 
-.mb-prfle.active {
-    color: white;
-    background-color: $BgrndCol;
-}
+    .mb-prfle.active {
+        color: white;
+        background-color: $BgrndCol;
+    }
 
 .back-arrow {
     content: $IcoBack;
@@ -132,18 +132,18 @@
     z-index: 10;
 }
 
-.hover-popup::after {
-    content: "";
-    position: absolute;
-    top: 20.8%;
-    right: -17px;
-    transform: translateY(-50%) rotate(180deg);
-    width: 0;
-    height: 0;
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;
-    border-right: 20px solid $BgrndCol;
-}
+    .hover-popup::after {
+        content: "";
+        position: absolute;
+        top: 20.8%;
+        right: -17px;
+        transform: translateY(-50%) rotate(180deg);
+        width: 0;
+        height: 0;
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        border-right: 20px solid $BgrndCol;
+    }
 
 .back-btn {
     content: $Backbtn;
@@ -165,9 +165,9 @@ input:focus + .slider {
     border: none !important;
 }
 
-.button.success:hover {
-    background-color: $BgrndCol;
-}
+    .button.success:hover {
+        background-color: $BgrndCol;
+    }
 
 .button.cancel {
     background-color: $WhtBgClr;
@@ -181,10 +181,10 @@ input:focus + .slider {
     color: $TxtClr;
 }
 
-.button.cancel:hover,
-.button.border:hover {
-    background-color: $butDefaultHoverCol;
-}
+    .button.cancel:hover,
+    .button.border:hover {
+        background-color: $butDefaultHoverCol;
+    }
 
 .button.active {
     color: $WhtTxtClr;
@@ -198,10 +198,10 @@ input:focus + .slider {
     border: 1px solid $butAlertBorder;
 }
 
-.button.alert:hover,
-.button.alert:focus {
-    background-color: $butAlertHover;
-}
+    .button.alert:hover,
+    .button.alert:focus {
+        background-color: $butAlertHover;
+    }
 
 .alert-box.success {
     background-color: $BgrndCol;
@@ -270,10 +270,10 @@ input[type="radio"] {
         cursor: pointer;
     }
 
-    a:hover {
-        color: none !important;
-        cursor: pointer;
-    }
+        a:hover {
+            color: none !important;
+            cursor: pointer;
+        }
 
     h3 {
         font-weight: 700;
@@ -399,6 +399,10 @@ input[type="radio"] {
     content: url(/images/premium/IcoHiddenPassword.svg);
 }
 
+.sub-box-bsns {
+    background: #000000;
+}
+
 .sub-box {
     margin-top: 10px;
     width: 158px;
@@ -508,9 +512,9 @@ input[type="radio"] {
     background-color: #fff;
 }
 
-.mre-actn-box:hover {
-    background-color: $TbleBg !important;
-}
+    .mre-actn-box:hover {
+        background-color: $TbleBg !important;
+    }
 
 .fle-exton-img {
     img {
@@ -696,18 +700,18 @@ input[type="radio"] {
     background-color: white;
 }
 
-.sugg-popup.active {
-    display: block;
-    top: 47%;
-    right: 3%;
-    position: fixed;
-    background-color: white;
-    text-align: right;
-    padding: 20px;
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2509803922);
-    border-radius: 5px;
-    z-index: 10;
-}
+    .sugg-popup.active {
+        display: block;
+        top: 47%;
+        right: 3%;
+        position: fixed;
+        background-color: white;
+        text-align: right;
+        padding: 20px;
+        box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2509803922);
+        border-radius: 5px;
+        z-index: 10;
+    }
 
 .info-prple {
     width: 24px;
@@ -721,21 +725,21 @@ input[type="radio"] {
     font-weight: 600;
 }
 
-.info-prple:nth-child(4n+1) {
-    background-color: #48772C;
-}
+    .info-prple:nth-child(4n+1) {
+        background-color: #48772C;
+    }
 
-.info-prple:nth-child(4n+2) {
-    background-color: #FFC50D;
-}
+    .info-prple:nth-child(4n+2) {
+        background-color: #FFC50D;
+    }
 
-.info-prple:nth-child(4n+3) {
-    background-color: #86B96E;
-}
+    .info-prple:nth-child(4n+3) {
+        background-color: #86B96E;
+    }
 
-.info-prple:nth-child(4n+4) {
-    background-color: #494949;
-}
+    .info-prple:nth-child(4n+4) {
+        background-color: #494949;
+    }
 
 .bdr-clr {
     background: #fff !important;
@@ -847,10 +851,10 @@ input[type="radio"] {
         padding: 3px 7px;
     }
 
-    dd:hover {
-        background-color: #F2F4F0;
-        border-radius: 4px;
-    }
+        dd:hover {
+            background-color: #F2F4F0;
+            border-radius: 4px;
+        }
 
     .refresh-icon {
         content: $IcoRefresh;
@@ -913,23 +917,23 @@ input[type="radio"] {
         margin-top: 4px;
     }
 
-    dd:hover {
-        color: $TxtClr;
-        background-color: $HglhtTxt;
-        margin: 4px -10px;
-        padding: 4px 20px;
-        background-image: $IcoIndctr;
-        background-repeat: no-repeat;
-        background-position: top right 0px;
-    }
+        dd:hover {
+            color: $TxtClr;
+            background-color: $HglhtTxt;
+            margin: 4px -10px;
+            padding: 4px 20px;
+            background-image: $IcoIndctr;
+            background-repeat: no-repeat;
+            background-position: top right 0px;
+        }
 }
 
-.home-context-menu::after {
-    content: "";
-    transform: translateY(-60%) rotate(90deg);
-    width: 0;
-    height: 0;
-}
+    .home-context-menu::after {
+        content: "";
+        transform: translateY(-60%) rotate(90deg);
+        width: 0;
+        height: 0;
+    }
 
 //recent folders
 .rcnt-fld-bx {
@@ -955,10 +959,10 @@ input[type="radio"] {
     }
 }
 
-.rcnt-fld-bx.selected {
-    background: $TbleBg;
-    box-shadow: 0px 1px 4px 0px #00000040;
-}
+    .rcnt-fld-bx.selected {
+        background: $TbleBg;
+        box-shadow: 0px 1px 4px 0px #00000040;
+    }
 
 .date-drpdwn {
     content: $IcoDrpDwn;
@@ -985,6 +989,7 @@ input[type="radio"] {
 
 .fld-dflt-cl {
     border: 1px solid $BorderClr;
+    box-shadow: none;
 }
 
 .fld-tem-cl {
@@ -1008,10 +1013,10 @@ input[type="radio"] {
     color: $colTxtDsbl;
 }
 
-.recent-fle-rw a.active,
-.recent-fle-rw a:hover {
-    color: $TxtClr;
-}
+    .recent-fle-rw a.active,
+    .recent-fle-rw a:hover {
+        color: $TxtClr;
+    }
 
 .fldr-img {
     content: $IcoFldr;
@@ -1065,28 +1070,28 @@ input[type="radio"] {
     z-index: 1;
 }
 
-.suggestion-list li {
-    padding-top: 10px;
-    cursor: pointer;
-    color: #CACACA;
-}
+    .suggestion-list li {
+        padding-top: 10px;
+        cursor: pointer;
+        color: #CACACA;
+    }
 
-.suggestion-list span {
-    padding-left: 20px;
-}
+    .suggestion-list span {
+        padding-left: 20px;
+    }
 
-.suggestion-list img {
-    padding-right: 20px;
-}
+    .suggestion-list img {
+        padding-right: 20px;
+    }
 
-.suggestion-list li:hover {
-    background-color: #f0f0f0;
-}
+    .suggestion-list li:hover {
+        background-color: #f0f0f0;
+    }
 
-.suggestion-list hr {
-    margin: 8px 0px 0px;
-    background-color: #232323;
-}
+    .suggestion-list hr {
+        margin: 8px 0px 0px;
+        background-color: #232323;
+    }
 
 .free-color {
     background-color: $ActnBgClr;
@@ -1225,9 +1230,9 @@ input[type="radio"] {
         content: $BtnFltr;
     }
 
-    .fltr-ico:active {
-        content: $BtnFltrAct;
-    }
+        .fltr-ico:active {
+            content: $BtnFltrAct;
+        }
 
     .act-txt-sze {
         font-size: 16px;
@@ -1264,17 +1269,17 @@ input[type="radio"] {
         }
     }
 
-    .rnt-fle-bx:active {
-        background-color: $FlActBg;
+        .rnt-fle-bx:active {
+            background-color: $FlActBg;
 
-        tr:nth-child(even) {
-            color: $FltxtAct;
+            tr:nth-child(even) {
+                color: $FltxtAct;
+            }
         }
-    }
 
-    .rnt-fle-bx.selected {
-        background-color: $FlActBg;
-    }
+        .rnt-fle-bx.selected {
+            background-color: $FlActBg;
+        }
 
     .rcnt-fle-tbl {
         overflow: hidden;
@@ -1325,12 +1330,12 @@ input[type="radio"] {
         text-decoration: none;
     }
 
-    .recent-fle-rw a.active,
-    .recent-fle-rw a:hover {
-        text-decoration: underline;
-        text-underline-offset: 0.25em;
-        text-decoration-thickness: 0.25em;
-    }
+        .recent-fle-rw a.active,
+        .recent-fle-rw a:hover {
+            text-decoration: underline;
+            text-underline-offset: 0.25em;
+            text-decoration-thickness: 0.25em;
+        }
 
     .fltr-popup {
         display: none;
@@ -1351,9 +1356,9 @@ input[type="radio"] {
             margin: 8px;
         }
 
-        input[type='radio']:checked + label {
-            color: $colTxtRglrBd;
-        }
+            input[type='radio']:checked + label {
+                color: $colTxtRglrBd;
+            }
     }
 
     .home-body {

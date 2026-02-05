@@ -18,8 +18,9 @@
   color: #CDFFB1 !important;
 }
 
-.label-text label, .lable-txt, .font-medium {
+.label-text label, .lable-txt {
   color: #A4A4A4 !important;
+  background-color: #575757 !important;
 }
 
 .desc-txt, .nav-link span, .select-email {
@@ -39,7 +40,7 @@
 
 .model-popup, .act-clr, .notification-popup {
   background-color: #303030 !important;
-  color: #A4A4A4 !important;
+  color: #FFFFFF !important;
 }
 
 .notify-pg-tbl-body td {
@@ -94,7 +95,7 @@
 
 .page {
   background-color: #121212 !important;
-  color: #ffffff;
+  color: #A4A4A4;
 }
 
 .page-title {
@@ -102,7 +103,7 @@
 }
 
 .fle-nme {
-  color: #ffffff !important;
+  color: #A4A4A4;
 }
 
 .text-style {
@@ -122,9 +123,13 @@ button {
   border: #575757 !important;
 }
 
+.mre-actn-box:hover {
+  background-color: #575757 !important;
+}
+
 .rcnt-fld-bx {
   background-color: #333232;
-  border: #575757 !important;
+  border: #575757;
   box-shadow: none !important;
   color: #A4A4A4 !important;
 }
@@ -152,8 +157,13 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
   color: #FFFFFF !important;
 }
 
+input[readonly=readonly], textarea[readonly] {
+  border: #575757 !important;
+}
+
 .clean-up textarea {
   color: #FFFFFF !important;
+  background: #575757 !important;
 }
 
 .find-fle-nme {
@@ -256,9 +266,8 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
   color: #CDFFB1 !important;
 }
 
-.flex-start .button {
-  background: #303030;
-  color: #A4A4A4;
+.secured-messenger option:hover {
+  color: #CDFFB1;
 }
 
 .settings-menu-item-container img, .manage-acc-sec a img, .notifi-img img {
@@ -267,4 +276,30 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 
 .notification-popup {
   border: 1px solid #303030;
+}
+
+.password-filter-dropdown-content {
+  background: #303030;
+  color: #A4A4A4 !important;
+}
+
+.text-fnt-size {
+  color: #575757;
+}
+
+.grey-clr {
+  color: #575757;
+  font-weight: 700;
+}
+
+.home-index .fle-nme {
+  color: #FFFFFF;
+}
+
+.txt-clr, .highlight-text > span {
+  color: #CDFFB1;
+}
+
+.abt-axc > span {
+  color: #A4A4A4;
 }
