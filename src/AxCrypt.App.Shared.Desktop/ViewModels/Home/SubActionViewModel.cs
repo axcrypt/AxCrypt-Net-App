@@ -37,7 +37,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
         {
             KnownFoldersViewModel = New<KnownFoldersViewModel>();
 
-            LogOnViewModel!.BindPropertyChanged(nameof(LogOnViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
+            _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicy(license); });
             KnownFoldersViewModel!.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
 
             KnownFoldersViewModel!.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
@@ -71,16 +71,16 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             }
         }
 
-        private async Task ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
+        private void ConfigureMenusAccordingToPolicy(LicenseCapabilities license)
         {
-            await ConfigureCloudServiceAsync(license);
-            await ConfigureVaultAsync(license);
-            await ConfigureAnonymousRenameAsync(license);
-            await ConfigureSecureWipeAsync(license);
-            await ConfigureStrongEncryptionAsync(license);
+            ConfigureCloudService(license);
+            ConfigureVault(license);
+            ConfigureAnonymousRename(license);
+            ConfigureSecureWipe(license);
+            ConfigureStrongEncryption(license);
         }
 
-        private async Task ConfigureAnonymousRenameAsync(LicenseCapabilities license)
+        private void ConfigureAnonymousRename(LicenseCapabilities license)
         {
             if (license.Has(LicenseCapability.RandomRename))
             {
@@ -94,7 +94,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             }
         }
 
-        private async Task ConfigureSecureWipeAsync(LicenseCapabilities license)
+        private void ConfigureSecureWipe(LicenseCapabilities license)
         {
             if (license.Has(LicenseCapability.SecureWipe))
             {
@@ -108,7 +108,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             }
         }
 
-        private async Task ConfigureStrongEncryptionAsync(LicenseCapabilities license)
+        private void ConfigureStrongEncryption(LicenseCapabilities license)
         {
             if (license.Has(LicenseCapability.StrongerEncryption))
             {
@@ -120,7 +120,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             }
         }
 
-        private async Task ConfigureCloudServiceAsync(LicenseCapabilities license)
+        private void ConfigureCloudService(LicenseCapabilities license)
         {
             if (license.Has(LicenseCapability.CloudStorageAwareness))
             {
@@ -132,7 +132,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             }
         }
 
-        private async Task ConfigureVaultAsync(LicenseCapabilities license)
+        private void ConfigureVault(LicenseCapabilities license)
         {
             if (license.Has(LicenseCapability.Vault))
             {
@@ -144,7 +144,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             }
         }
 
-        public async Task OnCloudServiceButtonClick(KnownFolder knownFolder)
+        public void OnCloudServiceButtonClick(KnownFolder knownFolder)
         {
             //await _fileOperationViewModel.OpenFilesFromFolder.ExecuteAsync(knownFolder.My.FullName);
             if (!Directory.Exists(knownFolder.My.FullName))

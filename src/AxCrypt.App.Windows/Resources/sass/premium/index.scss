@@ -17,3 +17,11 @@
 .home-body {
     align-items: flex-start;
 }
+
+.page-title::before {
+    top: 12px;
+    right: -20px;
+    width: 35px;
+    height: 32px;
+    transform: rotate(0deg);
+}

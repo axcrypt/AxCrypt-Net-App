@@ -1,4 +1,266 @@
-﻿.home-title {
+﻿/// Moved styles from site.scss starts here
+.page-title {
+    position: relative;
+    padding-right: 20px;
+    width: max-content;
+    font-weight: 800;
+    color: $TxtClr;
+    margin-bottom: 30px;
+}
+
+.page-title::before {
+    content: '';
+    position: absolute;
+    background-image: $Titlelogo;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform-origin: center center;
+}
+
+//top menu
+.update-btn {
+    background-image: url(/images/default/icoUpdt.svg);
+    background-position: top 7px right 3px;
+    background-repeat: no-repeat;
+    border: 1px solid #E0922F;
+    border-radius: 4px;
+    padding: 7px 22px 7px 6px;
+    text-decoration: none;
+    color: #E0922F;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.update-btn:hover {
+    color: #E0922F;
+}
+
+
+.padding {
+    margin: 0 3px;
+}
+
+.top-menu {
+    position: absolute;
+    right: 0px;
+    float: right;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.mb-prfle {
+    background-color: $PflBg;
+    color: $TxtClr;
+    height: 50px;
+    width: 50px;
+    font-size: 12px;
+    border-radius: 25px;
+    font-weight: 700;
+    padding: 10px 10px;
+}
+
+.mb-prfle.active {
+    color: white;
+    background-color: $BgrndCol;
+}
+
+.back-arrow {
+    content: $IcoBack;
+}
+
+.goback-text, .acc-txt {
+    padding-left: 20px;
+    font-weight: 700;
+    font-size: 31px;
+}
+
+.sttng-icon, .notif-icon, .idea-icon {
+    height: 25px;
+}
+
+.top-menu a.active, .top-menu a:hover {
+    .notif-icon {
+        content: $IcoNotifsublvl;
+    }
+
+    .sttng-icon {
+        content: $IcoSttngsActv;
+    }
+}
+
+.txt-clr {
+    color: $TxtClr;
+}
+
+.highlight-text span {
+    font-weight: 700;
+    color: $TxtClr;
+}
+
+.close-img {
+    content: $IcoErr;
+    float: right;
+    cursor: pointer;
+    position: relative;
+}
+//Beside popup
+.model-popup {
+    border: 1px solid $BorderClr;
+    padding: 20px;
+    background-color: $WhtBgClr;
+    border-radius: 16px;
+    z-index: 1;
+    box-shadow: 12px 12px 20px 0px #23232340;
+}
+//hover popup
+.hover-popup, .home-hover {
+    width: 162px;
+    height: 95px;
+    padding: 10px;
+    background-color: $BgrndCol;
+    border-radius: 5px;
+    position: absolute;
+    right: 80%;
+    transform: translateX(50%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.hover-popup::after {
+    content: "";
+    position: absolute;
+    top: 20.8%;
+    right: -17px;
+    transform: translateY(-50%) rotate(180deg);
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 20px solid $BgrndCol;
+}
+
+.back-btn {
+    content: $Backbtn;
+    width: 35px;
+    height: 35px;
+}
+
+input:checked + .slider {
+    background-color: $BgrndCol;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px $BgrndCol;
+}
+
+.button.success {
+    color: $WhtTxtClr;
+    background-color: $SucssBtnBgDflt;
+    border: none !important;
+}
+
+.button.success:hover {
+    background-color: $BgrndCol;
+}
+
+.button.cancel {
+    background-color: $WhtBgClr;
+    border: 1px solid $ButCanBorder;
+    color: $ButCanTxtCol;
+}
+
+.button.border {
+    background-color: $WhtBgClr;
+    border: 1px solid $BorderClr !important;
+    color: $TxtClr;
+}
+
+.button.cancel:hover,
+.button.border:hover {
+    background-color: $butDefaultHoverCol;
+}
+
+.button.active {
+    color: $WhtTxtClr;
+    background-color: $BgrndCol;
+    border: none !important;
+}
+
+.button.alert {
+    color: #FFFFFF;
+    background-color: $butAlertCol;
+    border: 1px solid $butAlertBorder;
+}
+
+.button.alert:hover,
+.button.alert:focus {
+    background-color: $butAlertHover;
+}
+
+.alert-box.success {
+    background-color: $BgrndCol;
+    border: 1px solid #6a9d53;
+}
+
+.sub-head-clr {
+    color: $HdTxtClr;
+}
+
+.deflt-txt-clr {
+    color: $HdTxtClr;
+}
+
+input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: $ActnBgClr;
+    vertical-align: middle;
+}
+
+.tab-selected {
+    border: 3px solid $colTxtSubHd;
+    border-radius: 10px;
+    margin-right: 30px;
+    display: block !important;
+    width: 100%;
+    margin: 0;
+    opacity: 1;
+}
+
+.warning-message {
+    font-size: 14px;
+    color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #e95e47;
+    border: 1px solid #cf2a0e;
+    /*    display: flex;
+    justify-content: space-between;
+    align-items: center;*/
+
+    a {
+        color: $colHglhgt;
+        text-decoration: underline;
+        pointer-events: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .button.success {
+        background-color: $BgrndCol !important;
+        height: 40px;
+    }
+}
+
+/// site.scss ends here
+
+.home-title {
     content: url('/images/default/Title-hand.svg');
 }
 

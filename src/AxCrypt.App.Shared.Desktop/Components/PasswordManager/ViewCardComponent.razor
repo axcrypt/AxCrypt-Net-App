@@ -28,7 +28,7 @@
                 <li>
                     <label for="Card_CardNumber">@Texts.CardNumberPrompt</label>
                     <div style="position: relative;">
-                        <input id="cardNumberInput" maxlength="19" minlength="12" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isCardNumberVisible, secretService.CurrentSecret.Card.CardNumber)" readonly="readonly" type="text" @onclick="ShowCardNumber">
+                        <input id="cardNumberInput" maxlength="19" minlength="12" style="color:#494949; background-color:#E2E2E2" value="@GetValue(isCardNumberVisible, secretService.CurrentSecret.Card.CardNumber)" readonly="readonly" type="text" @onclick="ShowCardNumber">
                         <div id="cp-card-number-clipbrd" style="position: absolute; right: 10px; top:2px;cursor: pointer;" class="copy-to-clipbrd" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret.Card.CardNumber)">
                             <img class="clipbrd" src="" alt="copy-clp-brd">
                         </div>
@@ -36,17 +36,17 @@
                 </li>
                 <li>
                     <label for="Card_SecretDesc">@Texts.DescriptionLabel</label>
-                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Card.SecretDesc" @bind:event="HandleOnChange" readonly="readonly"></textarea>
+                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Card.SecretDesc" @bind:event="HandleOnChange" readonly="readonly"></textarea>
                 </li>
                 <li class="list-row">
                     <div class="list-width">
                         <label for="Card_NameOnCard">@Texts.NameOnCardPrompt</label>
-                        <input type="text" style="color:#494949 !important; background-color:#E2E2E2" @bind-value="@secretService.CurrentSecret.Card.NameOnCard" readonly="readonly">
+                        <input type="text" style="color:#494949; background-color:#E2E2E2" @bind-value="@secretService.CurrentSecret.Card.NameOnCard" readonly="readonly">
                     </div>
                     <div class="list-width">
                         <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
                         <div style="display:flex; position: relative;">
-                            <input id="securityCodeInput" maxlength="1000" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isSecurityCodeVisible, secretService.CurrentSecret.Card.SecurityCode)" readonly="readonly" type="text" @onclick="ShowSecurityCode">
+                            <input id="securityCodeInput" maxlength="1000" style="color:#494949; background-color:#E2E2E2" value="@GetValue(isSecurityCodeVisible, secretService.CurrentSecret.Card.SecurityCode)" readonly="readonly" type="text" @onclick="ShowSecurityCode">
                             <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret.Card.SecurityCode)">
                                 <img class="clipbrd" src="" alt="copy-clp-brd">
                             </div>
@@ -56,7 +56,7 @@
                 <li class="list-row">
                     <div class="list-width">
                         <label for="Card_ExpirationDate">@Texts.ExpirationDatePrompt</label>
-                        <input id="card-exp-date-inp" style="color:#494949 !important; background-color:#E2E2E2" @bind-value="@secretService.CurrentSecret.Card.ExpirationDate" type="text" readonly="readonly">
+                        <input id="card-exp-date-inp" style="color:#494949; background-color:#E2E2E2" @bind-value="@secretService.CurrentSecret.Card.ExpirationDate" type="text" readonly="readonly">
                     </div>
                 </li>
                 <span id="copiedMessage" style="color: green; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
@@ -66,7 +66,7 @@
                     <li class="list-row">
                         <div class="list-width">
                             <label for="Card_ExpirationDate">@Texts.OwnerEmailText</label>
-                            <input id="card-exp-date-inp" style="color:#494949 !important; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.OwnerEmail" type="text" readonly="readonly">
+                            <input id="card-exp-date-inp" style="color:#494949; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.OwnerEmail" type="text" readonly="readonly">
                         </div>
                     </li>
                 }

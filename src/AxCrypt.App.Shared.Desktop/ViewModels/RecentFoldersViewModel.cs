@@ -58,7 +58,7 @@ public class RecentFoldersViewModel : ViewModelBase
     public void Initialize()
     {
         _mainViewModel.LoggedOn = Resolve.KnownIdentities.IsLoggedOn;
-        LogOnViewModel.BindPropertyAsyncChanged(nameof(LogOnViewModel.License), async (LicenseCapabilities license) => { await ConfigureMenusAccordingToPolicyAsync(license); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicy(license); });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.WatchedFolders), (IEnumerable<string> folders) => { UpdateWatchedFolders(folders); });
         this.BindPropertyChanged(nameof(SelectedRecentFolders), (IEnumerable<string> files) =>
         {
@@ -70,7 +70,7 @@ public class RecentFoldersViewModel : ViewModelBase
         RecentFoldersList = new ObservableCollection<string>(_mainViewModel.WatchedFolders);
     }
 
-    private async Task ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
+    private void ConfigureMenusAccordingToPolicy(LicenseCapabilities license)
     {
         HasNoSubscription = license.CryptoPolicy.Name == "Free";
     }

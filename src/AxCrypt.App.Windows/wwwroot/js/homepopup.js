@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             contextMenu.style.left = posX + "px";
             contextMenu.style.top = posY + "px";
-            
+
         }
     }
 
@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (targetobj.id === "settings-dropdown-click-action" || targetobj.parentElement.id === "settings-dropdown-click-action") {
             document.getElementById("settings-dropdown-click-action").classList.toggle("active");
             ShowHidePopup("settings-dropdown-popup");
+            setPositionPopupAtButton("settings-dropdown-click-action", "settings-dropdown-popup", e);
         }
         else {
             if (!IgnoreClosePopupOnPopupActions("settings-dropdown-popup", targetobj)) {
@@ -202,6 +203,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (targetobj.id === "notification-dropdown-click-action" || targetobj.parentElement.id === "notification-dropdown-click-action") {
             document.getElementById("notification-dropdown-click-action").classList.toggle("active");
             ShowHidePopup("notification-dropdown-popup");
+            setPositionPopupAtButton("notification-dropdown-click-action", "notification-dropdown-popup", e);
         }
         else {
             if (document.getElementById("notification-dropdown-click-action") != undefined) {
@@ -337,4 +339,25 @@ function IgnoreClosePopupOnPopupActions(popupId, targetobj) {
     if (offsetParent.id === popupId) {
         return true;
     }
+}
+
+function setPositionPopupAtButton(buttonId, popupId, e) {
+    var button = document.getElementById(buttonId);
+    var popup = document.getElementById(popupId);
+
+    if (!button || !popup) return;
+
+    if (popup.style.display != 'block') {
+        return;  // Exit the function if popup is already visible
+    }
+
+    var clickX = e.clientX;
+
+    // Current window width
+    var windowWidth = window.innerWidth;
+    var rightMargin = 40;
+    // Distance from clicked position to right edge
+    var distanceToRight = windowWidth - clickX - rightMargin;
+
+    popup.style.setProperty('--popup-menu-right', distanceToRight + 'px');
 }

@@ -76,3 +76,14 @@
     content: url(/images/business/ImgNoFldrs.svg);
     padding-top: 20px;
 }
+
+@media (max-width: 1350px) {
+    .page-title::before {
+        top: 3px;
+    }
+}
+
+.arabic-class .page-title::before {
+    left: -42px;
+    transform: rotate(0deg);
+}

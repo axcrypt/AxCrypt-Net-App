@@ -113,75 +113,12 @@
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2509803922);
 }
 
-/* loading wheel*/
-.loading-content {
-    text-align: center;
-}
-
-.loading-content img {
-    width: 100px;
-    max-width: 100px;
-    height: 100px;
-    content: url(/images/default/Loading_560x560.gif);
-    user-select: none;
-    outline: none;
-    pointer-events: none;
-}
-
-.loading-content span {
-    display: block;
-    margin-top: 10px;
-    font-size: 18px;
-    color: #333;
-}
-
-/* Full-page overlay */
-.secrets-loading-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: conic-gradient(from 10.99deg at 98.18% 128.62%,#FFFEE8 0deg,rgba(200, 199, 180, 0.8) 353.48deg,#F5FFF0 360deg);
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-}
-
-.secrets-loading-overlay .loading-content span {
-    margin-top: 20px;
-    font-size: 20px;
-    color: white;
-}
-
-/* no overlay*/
-.secrets-loading-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.login-lang-drpdwn {
-    position: absolute;
-    right: 32px;
-    top: 32px;
-
+#OtherOptions-Section, .login-lang-drpdwn {
     .drp-dwn {
         content: url(/images/free/BtnBack.svg);
         transform: rotate(90deg);
         width: 8px;
         margin-left: 18px;
-    }
-
-    .dropbtn {
-        background-color: #ffffff;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        color: #D9D9D9;
-        gap: 15px !important;
     }
 
     .dropbtn.active {
@@ -192,6 +129,21 @@
         .down {
             transform: rotate(-90deg);
         }
+    }
+}
+
+.login-lang-drpdwn {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+
+    .dropbtn {
+        background-color: #ffffff;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        color: #D9D9D9;
+        gap: 15px !important;
     }
 
     .tick-icon {
@@ -231,12 +183,10 @@
         cursor: pointer;
     }
 }
-
 /* 🔒 Hide password reveal icon on Windows (Chromium-based WebView2) */
 input[type="password"]::-ms-reveal {
     display: none;
 }
-
 /* 🧼 Hide WebKit (Mac) password reveal icon */
 input[type="password"]::-webkit-contacts-auto-fill-button,
 input[type="password"]::-webkit-credentials-auto-fill-button {
@@ -246,7 +196,6 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
     position: absolute;
     right: 0;
 }
-
 /* ✅ Optional: remove any margin/padding that might make room for the icon */
 input[type="password"] {
     padding-right: 0.5rem; /* Adjust as needed */

@@ -71,12 +71,12 @@
 {
     <div class="multi-btn">
         <button class="multi-actn-btn" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(TextEncryptionViewModel.EncryptedText)">
-            <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy encrypted text to clipboard" width="16" height="16" />
+            <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy encrypted text to the clipboard" width="16" height="16" />
             @Texts.SecretsCopytoClipboard
         </button>
 
         <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.ExportTextAsync>
-            <img class="download-ico" alt="download ico" title="Download encrypted text as txt file" width="16" height="16" />
+            <img class="download-ico" alt="download ico" title="Download encrypted text as a .txt file" width="16" height="16" />
             @Texts.DownloadAsTxtButton
         </button>
 
@@ -86,7 +86,7 @@
         </button>
 
         <button class="multi-actn-btn" @onclick=ShowShareTextDialog>
-            <img class="sharelink-ico" alt="share as link ico" title="Share encrypted text as link" width="16" height="16" />
+            <img class="sharelink-ico" alt="share as link ico" title="Share encrypted text via link" width="16" height="16" />
             Share as Link
         </button>
     </div>

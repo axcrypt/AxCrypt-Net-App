@@ -16,7 +16,6 @@ public class LogOnViewModel : ViewModelBase
 {
     public LogOnViewModel()
     {
-        License = New<LicensePolicy>().Capabilities;
         InviteDialog = new CommonDialogService();
         UpgradeDialog = new CommonDialogService();
         ShareKeyDialog = new CommonDialogService();
@@ -41,11 +40,17 @@ public class LogOnViewModel : ViewModelBase
             if (loggedOn)
             {
                 ProcessIndicator?.Dispose();
-                OnSubscriptionChanged?.Invoke();
                 await New<AccountStatusViewModel>().LoadAccountStatusAsync();
             }
         });
-        mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => { if (license != null) { License = license; OnSubscriptionChanged?.Invoke(); } });
+
+        mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => 
+        { 
+            if (license != null! && MainViewModel.LoggedOn) 
+            {
+                OnSubscriptionChanged?.Invoke(); 
+            }
+        });
 
         ProcessIndicator?.Dispose();
         ShowGetStartedCarousel = WorkUserProfile.IsFirstSignIn;
@@ -58,7 +63,7 @@ public class LogOnViewModel : ViewModelBase
             await Task.Delay(1000);
         }
 
-        if(PageResult != DialogResult.Cancel)
+        if (PageResult != DialogResult.Cancel)
         {
             InitiateProgressIndicator();
         }
@@ -79,11 +84,9 @@ public class LogOnViewModel : ViewModelBase
 
     public LicenseCapabilities License
     {
-        get { return GetProperty<LicenseCapabilities>(nameof(License)); }
-        set
-        {
-            SetProperty(nameof(License), value);
-            _subscriptionLevel = License.GetLicenseStatus();
+        get 
+        { 
+            return MainViewModel.License;
         }
     }
 
@@ -142,18 +145,11 @@ public class LogOnViewModel : ViewModelBase
         ProcessIndicator = new ProcessIndicator();
     }
 
-    private SubscriptionLevel _subscriptionLevel = SubscriptionLevel.Unknown;
-
     public SubscriptionLevel SubscriptionLevel
     {
         get
         {
-            if (_subscriptionLevel == SubscriptionLevel.Unknown)
-            {
-                _subscriptionLevel = License.GetLicenseStatus();
-            }
-
-            return _subscriptionLevel;
+            return License.GetLicenseStatus();
         }
     }
 
@@ -184,13 +180,13 @@ public class LogOnViewModel : ViewModelBase
     {
         get
         {
-            return IsLoggedOn && !License.Has(LicenseCapability.StrongerEncryption);
+            return IsLoggedOn && !UserHas(LicenseCapability.StrongerEncryption);
         }
     }
 
     public bool UserHas(LicenseCapability capability)
     {
-        return License.Has(capability);
+        return MainViewModel.License.Has(capability);
     }
 
     public bool UserInitiatedUpdateCheckPending { get; set; }

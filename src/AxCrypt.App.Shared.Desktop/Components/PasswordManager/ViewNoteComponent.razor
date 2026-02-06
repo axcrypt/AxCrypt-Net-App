@@ -26,12 +26,12 @@
             <ul class="clean-up sub-head-clr" style=" list-style:none">
                 <li>
                     <label for="Password_SecretDesc">@Texts.DescriptionLabel</label><br />
-                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Note.SecretDesc" @bind:event="HandleOnChange" readonly="readonly"></textarea>
+                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Note.SecretDesc" @bind:event="HandleOnChange" readonly="readonly"></textarea>
                 </li>
                 <li>
                     <label for="Note_Note">@Texts.NoteLabel</label>
                     <div style="display:flex; position: relative;">
-                        <textarea id="noteInput" type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949 !important; background-color:#E2E2E2" value="@GetValue(isNoteVisible, secretService.CurrentSecret.Note.Note)" readonly="readonly" @onclick="()=> VisibleReadOnlySecret(true)"></textarea>
+                        <textarea id="noteInput" type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949; background-color:#E2E2E2" value="@GetValue(isNoteVisible, secretService.CurrentSecret.Note.Note)" readonly="readonly" @onclick="()=> VisibleReadOnlySecret(true)"></textarea>
                         <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="async ()=> await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret!.Note.Note)">
                             <img class="clipbrd" src="" alt="copy-clp-brd">
                         </div>
@@ -44,7 +44,7 @@
                     <li class="list-row">
                         <div class="list-width">
                             <label for="Card_ExpirationDate">@Texts.OwnerEmailText</label>
-                            <input id="card-exp-date-inp" style="color:#494949 !important; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.OwnerEmail" type="text" readonly="readonly">
+                            <input id="card-exp-date-inp" style="color:#494949; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.OwnerEmail" type="text" readonly="readonly">
                         </div>
                     </li>
                 }

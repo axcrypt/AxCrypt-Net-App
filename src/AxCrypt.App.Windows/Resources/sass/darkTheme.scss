@@ -34,12 +34,11 @@ $colDrkMdBushd: #757575;
     color: $colTxtLink !important;
 }
 
-
-.label-text label {
+.label-text label, .lable-txt, .font-medium {
     color: $colTxtlble !important;
 }
 
-.desc-txt {
+.desc-txt, .nav-link span, .select-email {
     color: $colTxtlble !important;
 }
 
@@ -54,7 +53,7 @@ $colDrkMdBushd: #757575;
     color: $colDefTxt !important;
 }
 
-.font-medium, .model-popup {
+.model-popup, .act-clr, .notification-popup {
     background-color: $SdebrbgndClr !important;
     color: $colTxtlble !important;
 }
@@ -170,7 +169,7 @@ button {
     }
 }
 
-textarea, input[type=text], textarea[readonly] {
+textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     background: $colDrkMdL3 !important;
     color: $colTxtBd !important;
 }
@@ -190,7 +189,6 @@ textarea, input[type=text], textarea[readonly] {
 .file-dec-icon {
     content: url(/images/IcoClnGrn.svg);
 }
-}
 
 .page-heading {
     background-color: $colDrkMdBushd;
@@ -200,3 +198,6 @@ textarea, input[type=text], textarea[readonly] {
     color: $colTxtlble;
 }
 
+.settings-menu-item-container img, .manage-acc-sec a img{
+    filter: invert(1) !important;
+}

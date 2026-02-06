@@ -218,66 +218,25 @@
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2509803922);
 }
 
-/* loading wheel*/
-.loading-content {
-  text-align: center;
+#OtherOptions-Section .drp-dwn, .login-lang-drpdwn .drp-dwn {
+  content: url(/images/free/BtnBack.svg);
+  transform: rotate(90deg);
+  width: 8px;
+  margin-left: 18px;
 }
-
-.loading-content img {
-  width: 100px;
-  max-width: 100px;
-  height: 100px;
-  content: url(/images/default/Loading_560x560.gif);
-  user-select: none;
-  outline: none;
-  pointer-events: none;
+#OtherOptions-Section .dropbtn.active, .login-lang-drpdwn .dropbtn.active {
+  border-radius: 4px;
+  border: 1px solid #000000;
+  color: #86B96E;
 }
-
-.loading-content span {
-  display: block;
-  margin-top: 10px;
-  font-size: 18px;
-  color: #333;
-}
-
-/* Full-page overlay */
-.secrets-loading-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: conic-gradient(from 10.99deg at 98.18% 128.62%, #FFFEE8 0deg, rgba(200, 199, 180, 0.8) 353.48deg, #F5FFF0 360deg);
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-}
-
-.secrets-loading-overlay .loading-content span {
-  margin-top: 20px;
-  font-size: 20px;
-  color: white;
-}
-
-/* no overlay*/
-.secrets-loading-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+#OtherOptions-Section .dropbtn.active .down, .login-lang-drpdwn .dropbtn.active .down {
+  transform: rotate(-90deg);
 }
 
 .login-lang-drpdwn {
   position: absolute;
   right: 32px;
   top: 32px;
-}
-.login-lang-drpdwn .drp-dwn {
-  content: url(/images/free/BtnBack.svg);
-  transform: rotate(90deg);
-  width: 8px;
-  margin-left: 18px;
 }
 .login-lang-drpdwn .dropbtn {
   background-color: #ffffff;
@@ -286,14 +245,6 @@
   align-items: center;
   color: #D9D9D9;
   gap: 15px !important;
-}
-.login-lang-drpdwn .dropbtn.active {
-  border-radius: 4px;
-  border: 1px solid #000000;
-  color: #86B96E;
-}
-.login-lang-drpdwn .dropbtn.active .down {
-  transform: rotate(-90deg);
 }
 .login-lang-drpdwn .tick-icon {
   content: url(/images/free/TickMark.svg);

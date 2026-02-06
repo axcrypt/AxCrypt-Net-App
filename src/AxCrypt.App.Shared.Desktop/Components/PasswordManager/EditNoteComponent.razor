@@ -25,12 +25,12 @@
             <ul class="clean-up sub-head-clr" style=" list-style:none">
                 <li>
                     <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
-                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949 !important;" @bind="@NoteViewModel.SecretDesc"></textarea>
+                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949;" @bind="@NoteViewModel.SecretDesc"></textarea>
                     <ValidationMessage For="@(() => NoteViewModel.SecretDesc)" />
                 </li>
                 <li>
                     <label for="Note_Note">@Texts.NoteLabel:</label>
-                    <textarea type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949 !important;" @bind="@NoteViewModel.Note"></textarea>
+                    <textarea type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949;" @bind="@NoteViewModel.Note"></textarea>
                     <ValidationMessage For="@(() => NoteViewModel.Note)" />
                 </li>
                 <li>

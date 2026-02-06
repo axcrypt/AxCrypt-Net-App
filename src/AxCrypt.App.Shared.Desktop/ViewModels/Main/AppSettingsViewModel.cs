@@ -58,8 +58,8 @@ public class AppSettingsViewModel : ViewModelBase
         RestApiBaseUrlInput = Resolve.UserSettings.RestApiBaseUrl.ToString();
         TimeoutInput = Resolve.UserSettings.ApiTimeout.ToString();
 
-        _logOnViewModel!.BindPropertyAsyncChanged(nameof(_logOnViewModel.License), async (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
-        _logOnViewModel!.BindPropertyChanged(nameof(_logOnViewModel.IsLoggedOn), (bool isLoggedOn) => { if (isLoggedOn) { StartInactivitySignOut(); } });
+        _mainViewModel!.BindPropertyAsyncChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicy(license); });
+        _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), (bool isLoggedOn) => { if (isLoggedOn) { StartInactivitySignOut(); } });
         _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.FolderOperationMode), (FolderOperationMode SecureFolderLevel) => { IncludeSubfolders = SecureFolderLevel == FolderOperationMode.IncludeSubfolders ? true : false; });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.EncryptionUpgradeMode), (EncryptionUpgradeMode mode) => AutoUpgradeToAES256 = mode == EncryptionUpgradeMode.AutoUpgrade);
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.DebugMode), (bool enabled) => { UpdateDebugMode(enabled); });
@@ -456,11 +456,11 @@ public class AppSettingsViewModel : ViewModelBase
 
     #endregion Debug Section
 
-    private void ConfigureMenusAccordingToPolicyAsync(LicenseCapabilities license)
+    private void ConfigureMenusAccordingToPolicy(LicenseCapabilities license)
     {
-        ConfigureAutoUpgradeMenuAsync(license);
-        ConfigureIncludeSubfoldersMenuAsync(license);
-        ConfigureInactivityTimeOutMenuAsync(license);
+        ConfigureAutoUpgradeMenu(license);
+        ConfigureIncludeSubfoldersMenu(license);
+        ConfigureInactivityTimeOutMenu(license);
         ConfigureRestoreRenameMenu(license);
         ConfigureEncryptionFilePropertiesMenu(license);
         ConfigureInviteFrientMenu(license);
@@ -469,7 +469,7 @@ public class AppSettingsViewModel : ViewModelBase
         UpdateViewState();
     }
 
-    private void ConfigureAutoUpgradeMenuAsync(LicenseCapabilities license)
+    private void ConfigureAutoUpgradeMenu(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.StrongerEncryption))
         {
@@ -481,7 +481,7 @@ public class AppSettingsViewModel : ViewModelBase
         }
     }
 
-    private void ConfigureIncludeSubfoldersMenuAsync(LicenseCapabilities license)
+    private void ConfigureIncludeSubfoldersMenu(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.IncludeSubfolders))
         {
@@ -493,7 +493,7 @@ public class AppSettingsViewModel : ViewModelBase
         }
     }
 
-    private void ConfigureInactivityTimeOutMenuAsync(LicenseCapabilities license)
+    private void ConfigureInactivityTimeOutMenu(LicenseCapabilities license)
     {
         if (license.Has(LicenseCapability.InactivitySignOut))
         {

@@ -16,7 +16,7 @@
 }
 
 <div class="page @arabic" dir="@(Core.Resolve.UserSettings.CultureName == "ar" ? "rtl" : "ltr")" @onclick="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)" @onmousemove="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)">
-    @if (PageRendering || PageStyleRendering)
+    @if (PageRendering || (LogOnViewModel.IsLoggedOn && PageStyleRendering))
     {
         <main>
             <div class="secrets-loading-overlay">
@@ -29,14 +29,14 @@
     }
     else
     {
-        @if (LogOnViewModel.IsLoggedOn && !CanShowSignInPage)
+        @if (CanShowSigedInContent)
         {
             <div>
                 <AxCrypt.App.Shared.Desktop.Components.Shared.StandardEncryptionWarning />
             </div>
         }
         <div style="display: contents;">
-            @if (LogOnViewModel.IsLoggedOn && !CanShowSignInPage)
+            @if (CanShowSigedInContent)
             {
                 <div class="side-menu" style="max-width:400px;">
                     @if (!Utility.IsMainMenuHidden)
@@ -57,7 +57,7 @@
             }
 
             <main>
-                @if (LogOnViewModel.IsLoggedOn && !CanShowSignInPage)
+                @if (CanShowSigedInContent)
                 {
                     <AxCrypt.App.Shared.Desktop.Components.Main.HeaderComponent />
 
@@ -92,21 +92,24 @@
 
 @code {
     private bool PageRendering { get; set; } = true;
-    private bool PageStyleRendering { get; set; }
+
+    private bool PageStyleRendering { get; set; } = true;
+
     private bool CanShowSignInPage { get; set; }
-    private string? SubscriptionLevel { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
-        InitiateDelayToRenderPage();
+        await InitiateDelayToRenderPage();
         CanShowSignInPage = LogOnViewModel.IsVisible;
         LogOnViewModel.OnLogOnDialogVisibilityChanged += UpdateSignInPageState;
         ImportViewModel.ImportPrivateKeyDialog.OnDialogVisibilityChanged += UpdateUIState;
         LogOnViewModel.OnMFADialogVisibilityChanged += UpdateSignInPageState;
-        LogOnViewModel.OnSubscriptionChanged += UpdateSubscriptionState;
-        SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
-        await AddCssAsync(SubscriptionLevel);
-        UpdateSubscriptionState();
+        LogOnViewModel.OnSubscriptionChanged += async () => await UpdateSubscriptionState();
+
+        if (LogOnViewModel.IsLoggedOn)
+        {
+            await AddCssAsync();
+        }
 
         base.OnInitialized();
     }
@@ -124,27 +127,12 @@
         UpdateUIState();
     }
 
-    private async void UpdateSubscriptionState()
+    private async Task UpdateSubscriptionState()
     {
-        if (SubscriptionLevel == LogOnViewModel.SubscriptionLevel.ToString().ToLower())
-        {
-            if (SubscriptionLevel == Api.Model.SubscriptionLevel.Free.ToString().ToLower())
-            {
-                UpdateUIState();
-            }
-
-            return;
-        }
-
-        PageStyleRendering = true;
-
-        SubscriptionLevel = LogOnViewModel.SubscriptionLevel.ToString().ToLower();
         if (LogOnViewModel.IsLoggedOn)
         {
-            await AddCssAsync(SubscriptionLevel);
+            await AddCssAsync();
         }
-
-        PageStyleRendering = false;
 
         string currentURi = navigationManager.Uri;
         if (!LogOnViewModel.IsLoggedOn && currentURi.Replace(navigationManager.BaseUri, "") != "")
@@ -164,7 +152,7 @@
         }
     }
 
-    private async void InitiateDelayToRenderPage()
+    private async Task InitiateDelayToRenderPage()
     {
         await Task.Delay(1000);
         PageRendering = false;
@@ -179,12 +167,43 @@
         });
     }
 
-    async Task AddCssAsync(string subscriptionLevel)
+    private async Task AddCssAsync()
     {
-        IList<KeyValuePair<string, string>> cssFileList = CssService.ApplySubscriptionCssAsync(subscriptionLevel);
-        foreach (KeyValuePair<string, string> cssFile in cssFileList)
+        string subscriptionLevel = SubscriptionLevel;
+        string cssBasePath = subscriptionLevel switch
         {
-            await JS.InvokeVoidAsync("addCssFile", cssFile.Key, cssFile.Value);
+            "business" => "business",
+            "premium" => "premium",
+            "passwordmanager" => "free",
+            "free" => "free",
+            _ => "free"
+        };
+
+        bool loaded = await JS.InvokeAsync<bool>("addCssFile", cssBasePath, "appstylebundle.min.css");
+        if (loaded)
+        {
+            while (!await JS.InvokeAsync<bool>("isCssApplied", "css/" + cssBasePath, "appstylebundle.min.css"))
+            {
+                await Task.Delay(100); // Short delay to check periodically
+            }
+            PageStyleRendering = false;
+            UpdateUIState();
+        }
+    }
+
+    private string SubscriptionLevel
+    {
+        get
+        {
+            return LogOnViewModel.SubscriptionLevel.ToString().ToLower();
+        }
+    }
+
+    public bool CanShowSigedInContent
+    {
+        get
+        {
+            return LogOnViewModel.IsLoggedOn && !CanShowSignInPage && !PageStyleRendering;
         }
     }
 }

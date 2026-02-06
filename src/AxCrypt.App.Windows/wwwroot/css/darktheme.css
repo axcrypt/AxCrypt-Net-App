@@ -18,11 +18,11 @@
   color: #CDFFB1 !important;
 }
 
-.label-text label {
+.label-text label, .lable-txt, .font-medium {
   color: #A4A4A4 !important;
 }
 
-.desc-txt {
+.desc-txt, .nav-link span, .select-email {
   color: #A4A4A4 !important;
 }
 
@@ -37,7 +37,7 @@
   color: #ffffff !important;
 }
 
-.font-medium, .model-popup {
+.model-popup, .act-clr, .notification-popup {
   background-color: #303030 !important;
   color: #A4A4A4 !important;
 }
@@ -147,12 +147,8 @@ button {
   background: #303030 !important;
 }
 
-textarea, input[type=text], textarea[readonly] {
+textarea, input[type=text], input[type=password], textarea[readonly], textarea {
   background: #575757 !important;
-  color: #FFFFFF !important;
-}
-
-.clean-up textarea {
   color: #FFFFFF !important;
 }
 
@@ -178,4 +174,8 @@ textarea, input[type=text], textarea[readonly] {
 
 .sub-head-clr {
   color: #A4A4A4;
+}
+
+.settings-menu-item-container img, .manage-acc-sec a img {
+  filter: invert(1) !important;
 }
