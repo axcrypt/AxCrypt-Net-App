@@ -403,6 +403,12 @@ namespace AxCrypt.Core.UI
             set { Store(nameof(HasSeenStartupHelp), value); }
         }
 
+        public bool DarkMode
+        {
+            get { return Load(nameof(DarkMode), false); }
+            set { Store(nameof(DarkMode), value); }
+        }
+
         public T? Load<T>(string key)
         {
             return Load(key, default(T));
