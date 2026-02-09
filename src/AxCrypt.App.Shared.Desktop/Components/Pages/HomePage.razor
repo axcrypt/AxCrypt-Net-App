@@ -29,6 +29,7 @@
     {
         if (firstRender)
         {
+            await JSRuntime.InvokeVoidAsync("setHtmlLang", New<Core.UI.UserSettings>().CultureName);
             await base.OnAfterRenderAsync(firstRender);
             if (!New<Core.UI.UserSettings>().HasSeenStartupHelp)
             {
@@ -58,3 +59,9 @@
         });
     }
 }
+<script>
+    window.setHtmlLang = function (lang) {
+        if (!lang) return;
+        document.documentElement.setAttribute("lang", lang);
+    };
+</script>

@@ -945,6 +945,14 @@ input[type=radio] {
   padding-bottom: 15px;
   padding: 6px 0 6px 10px;
 }
+.rcnt-fle-tbl thead tr th:lang(fr), .rcnt-fle-tbl thead tr th:lang(ru) {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+.rcnt-fle-tbl thead tr th:lang(de), .rcnt-fle-tbl thead tr th:lang(tr), .rcnt-fle-tbl thead tr th:lang(sv) {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
 .rcnt-fle-tbl thead tr th img {
   padding-left: 5px;
 }

@@ -617,6 +617,15 @@ input[type="radio"] {
 
 .rcnt-fle-tbl {
     thead tr th {
+        &:lang(fr), &:lang(ru) {
+            font-size: 11px !important;
+            font-weight: 700 !important;
+        }
+        &:lang(de), &:lang(tr), &:lang(sv) {
+            font-size: 12px !important;
+            font-weight: 700 !important;
+        }
+
         color: $HdTxtClr;
         font-size: 14px;
         font-weight: 600;
