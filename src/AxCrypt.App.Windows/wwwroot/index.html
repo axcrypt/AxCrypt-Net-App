@@ -17,17 +17,12 @@
     <script type="text/javascript">
         window.setTheme = function (theme) {
             document.documentElement.setAttribute("data-theme", theme);
-            localStorage.setItem("theme", theme);
             if (theme == "dark") {
                 addDarkThemeCssFile("css/darktheme.css", "darktheme.css");
             }
             else {
                 removeDarkThemeCssFile();
             }
-        };
-
-        window.getTheme = function () {
-            return localStorage.getItem("theme");
         };
 
         function enablePopup() {

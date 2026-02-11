@@ -111,6 +111,8 @@
             await AddCssAsync();
         }
 
+        await InitializeTheme();
+
         base.OnInitialized();
     }
 
@@ -189,6 +191,12 @@
             PageStyleRendering = false;
             UpdateUIState();
         }
+    }
+
+    private async Task InitializeTheme()
+    {
+        string savedTheme = Core.Resolve.UserSettings.DarkMode ? "dark" : "light";
+        await JS.InvokeVoidAsync("setTheme", savedTheme);
     }
 
     private string SubscriptionLevel
