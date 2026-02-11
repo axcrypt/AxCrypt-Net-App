@@ -51,6 +51,7 @@ public class AppSettingsViewModel : ViewModelBase
         _logViewModel = AxCServiceProviderExtension.LogViewModel;
         EnableUserActivity = New<UserSettings>().UserActivityMode;
         EnableFindFiles = New<UserSettings>().FindFileMode;
+        DarkTheme = New<UserSettings>().DarkMode;
     }
 
     public void Initialized()
@@ -116,6 +117,8 @@ public class AppSettingsViewModel : ViewModelBase
     }
 
     public int InactivitySignOut { get; set; }
+    
+    public bool DarkTheme { get; set; }
 
     public void ToggleHideRecentFiles() => SetRecentFilesHiddenState(!New<UserSettings>().HideRecentFiles);
 
@@ -296,6 +299,12 @@ public class AppSettingsViewModel : ViewModelBase
         }
 
         AxCServiceProvider.GetService<VaultSettingsViewModel>().VaultSettingsDialog.Show();
+    }
+
+    public void SwitchDarkMode()
+    {
+        DarkTheme = !New<UserSettings>().DarkMode;
+        New<UserSettings>().DarkMode = DarkTheme;
     }
 
     #region Debug Section

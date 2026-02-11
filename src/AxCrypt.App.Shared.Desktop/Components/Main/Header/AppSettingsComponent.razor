@@ -355,13 +355,13 @@
             <div>
                 <img class="stngs-menu-icon IcoDkMd" alt="IcoDkMd" />
                 @{
-                    string menuTitle = isDark ? "Switch to Light Mode" : "Switch to Dark Mode";
+                    string menuTitle = AppSettingsViewModel.DarkTheme ? "Switch to Light Mode" : "Switch to Dark Mode";
                 }
                 <span class="grey-clr">@menuTitle</span>
             </div>
             <div style="float:right; padding-left:15px;">
                 <label class="toggle" style="width: 60px;height: 30px;">
-                    <input type="checkbox" checked="@isDark" @onclick="ToggleTheme" />
+                    <input type="checkbox" @bind="AppSettingsViewModel.DarkTheme" @onclick="ToggleTheme" />
                     <span class="slider round">
                     </span>
                 </label>
@@ -749,22 +749,6 @@
         base.OnInitialized();
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            var savedTheme = await JSRuntime.InvokeAsync<string>("getTheme");
-
-            if (!string.IsNullOrEmpty(savedTheme))
-            {
-                isDark = savedTheme == "dark";
-                await JSRuntime.InvokeVoidAsync("setTheme", savedTheme);
-            }
-        }
-
-        await base.OnAfterRenderAsync(firstRender);
-    }
-
     private void RedirectToDownload()
     {
         navigation.NavigateTo(AppSettingsViewModel.DownloadVersion!.ToString());
@@ -789,13 +773,11 @@
         hoveredElement = string.Empty;
     }
 
-
-    private bool isDark;
-
     private async Task ToggleTheme()
     {
-        isDark = !isDark;
-        await JSRuntime.InvokeVoidAsync("setTheme", isDark ? "dark" : "light");
+        AppSettingsViewModel.SwitchDarkMode();
+        string savedTheme = AppSettingsViewModel.DarkTheme ? "dark" : "light";
+        await JSRuntime.InvokeVoidAsync("setTheme", savedTheme);
     }
 
     private void UpdatePageState()
