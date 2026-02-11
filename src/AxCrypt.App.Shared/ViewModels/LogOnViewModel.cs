@@ -35,12 +35,14 @@ public class LogOnViewModel : ViewModelBase
 
     public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
     {
+        _subscriptionChangeDetected = false;
         mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), async (bool loggedOn) =>
         {
             if (loggedOn)
             {
                 ProcessIndicator?.Dispose();
                 await New<AccountStatusViewModel>().LoadAccountStatusAsync();
+                SubscriptionChanged();
             }
         });
 
@@ -48,7 +50,7 @@ public class LogOnViewModel : ViewModelBase
         { 
             if (license != null! && MainViewModel.LoggedOn) 
             {
-                OnSubscriptionChanged?.Invoke(); 
+                SubscriptionChanged();
             }
         });
 
@@ -257,8 +259,16 @@ public class LogOnViewModel : ViewModelBase
         OnUIStateChanged?.Invoke();
     }
 
+    private bool _subscriptionChangeDetected = false;
+
     public void SubscriptionChanged()
     {
+        if (_subscriptionChangeDetected)
+        {
+            return;
+        }
+
+        _subscriptionChangeDetected = true;
         OnSubscriptionChanged?.Invoke();
     }
 

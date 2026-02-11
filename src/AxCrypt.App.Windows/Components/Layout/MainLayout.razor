@@ -38,7 +38,9 @@
         <div style="display: contents;">
             @if (CanShowSigedInContent)
             {
-                <div class="side-menu" style="max-width:400px;">
+                string sideMenuCollapsedStyle = Utility.IsMainMenuHidden ? "sid-mnu-colpsd" : "";
+
+                <div class="@sideMenuCollapsedStyle side-menu" style="max-width:400px;">
                     @if (!Utility.IsMainMenuHidden)
                     {
                         <div style="position: relative;top: 120px;margin-left: auto;">
@@ -48,8 +50,9 @@
                     }
                     else
                     {
-                        <div class="" style="width:100px;overflow:hidden;height:100%;top: 120px;" @onclick="() => Utility.ToggleMainMenu()">
-                            <img class="expbd-icon" style="z-index:1;" src="" alt="image hide" />
+                        <div class="" style="width:100px;overflow:hidden;top: 120px;">
+                            <img class="expbd-icon" style="z-index:1;" src="" alt="image hide" @onclick="() => Utility.ToggleMainMenu()" />
+
                             <NavMenu />
                         </div>
                     }

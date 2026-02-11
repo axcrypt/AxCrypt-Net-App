@@ -62,7 +62,7 @@ namespace AxCrypt.Core.UI.ViewModel
             {
                 return;
             }
-            foreach (Action<object> action in actions)
+            foreach (Action<object> action in actions.ToArray())
             {
                 action(value);
             }
