@@ -12,7 +12,8 @@ $colBordBgrnd: #282828;
 $colBord: #CDFFB1;
 $colDrkMdL3: #575757;
 $colTxtBd: #FFFFFF;
-$colDrkMdBushd: #757575; 
+$colDrkMdBushd: #757575;
+$BtnBackClr: #48772C;
 
 .sidebar {
     background-color: $SdebrbgndClr !important;
@@ -170,7 +171,7 @@ button {
 }
 
 textarea, input[type=text], input[type=password], textarea[readonly], textarea {
-    background: $colDrkMdL3 !important;
+    background-color: $colDrkMdL3 !important;
     color: $colTxtBd !important;
 }
 
@@ -194,10 +195,101 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     background-color: $colDrkMdBushd;
 }
 
-.sub-head-clr {
+.sub-head-clr,
+.lable-txt {
+    color: $colTxtlble !important;
+}
+
+.model-popup {
+    border: none;
+}
+
+.add-fldr-img {
+    filter: brightness(0) saturate(90%) invert(50%);
+}
+
+
+.fldr-img {
+    filter: brightness(0) saturate(90%) invert(50%);
+}
+
+//.filter-text,
+.filter-text:hover {
     color: $colTxtlble;
 }
 
-.settings-menu-item-container img, .manage-acc-sec a img{
+.inbox-section table {
+    background: $colBordBgrnd;
+}
+
+.inbox-section table:hover {
+    background: $colTxtlble;
+}
+
+.email-txt-ovflw {
+    color: $colTxtBd;
+}
+
+.rply-icon,
+.dlt-icon {
+    color: $colTxtBd;
+}
+
+.visble-button {
+    background: $SdebrbgndClr;
+    color: $colBord;
+}
+
+.secured-messenger select {
+    color: $colBord !important;
+    font-weight: 700;
+}
+
+.secured-messenger option {
+    color: $colTxtlble;
+}
+
+.secured-messenger option:hover {
+    color: $colBord;
+}
+
+.multi-actn-btn {
+    background-color: $colDrkMdL3;
+    color: $colTxtlble;
+    border: $colTxtlble;
+}
+
+.multi-actn-btn:hover {
+    background-color: $colDrkMdL3;
+}
+
+.button.border {
+    border: 1px solid $SdebrbgndClr !important;
+}
+
+.button.success {
+    background-color: $BtnBackClr !important;
+    color: $colDefTxt !important;
+}
+
+.sub-box-bsns {
+    background: $colDrkMdBushd;
+}
+
+.hover-popup, .home-hover {
+    background: $colBordBgrnd;
+    color: $colBord !important;
+}
+
+.flex-start .button {
+    background: $SdebrbgndClr;
+    color: $colTxtlble;
+}
+
+.settings-menu-item-container img, .manage-acc-sec a img, .notifi-img img {
     filter: invert(1) !important;
+}
+
+.notification-popup {
+    border: 1px solid $SdebrbgndClr;
 }

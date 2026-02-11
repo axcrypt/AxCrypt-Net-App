@@ -148,7 +148,7 @@ button {
 }
 
 textarea, input[type=text], input[type=password], textarea[readonly], textarea {
-  background: #575757 !important;
+  background-color: #575757 !important;
   color: #FFFFFF !important;
 }
 
@@ -172,10 +172,99 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
   background-color: #757575;
 }
 
-.sub-head-clr {
+.sub-head-clr,
+.lable-txt {
+  color: #A4A4A4 !important;
+}
+
+.model-popup {
+  border: none;
+}
+
+.add-fldr-img {
+  filter: brightness(0) saturate(90%) invert(50%);
+}
+
+.fldr-img {
+  filter: brightness(0) saturate(90%) invert(50%);
+}
+
+.filter-text:hover {
   color: #A4A4A4;
 }
 
-.settings-menu-item-container img, .manage-acc-sec a img {
+.inbox-section table {
+  background: #282828;
+}
+
+.inbox-section table:hover {
+  background: #A4A4A4;
+}
+
+.email-txt-ovflw {
+  color: #FFFFFF;
+}
+
+.rply-icon,
+.dlt-icon {
+  color: #FFFFFF;
+}
+
+.visble-button {
+  background: #303030;
+  color: #CDFFB1;
+}
+
+.secured-messenger select {
+  color: #CDFFB1 !important;
+  font-weight: 700;
+}
+
+.secured-messenger option {
+  color: #A4A4A4;
+}
+
+.secured-messenger option:hover {
+  color: #CDFFB1;
+}
+
+.multi-actn-btn {
+  background-color: #575757;
+  color: #A4A4A4;
+  border: #A4A4A4;
+}
+
+.multi-actn-btn:hover {
+  background-color: #575757;
+}
+
+.button.border {
+  border: 1px solid #303030 !important;
+}
+
+.button.success {
+  background-color: #48772C !important;
+  color: #ffffff !important;
+}
+
+.sub-box-bsns {
+  background: #757575;
+}
+
+.hover-popup, .home-hover {
+  background: #282828;
+  color: #CDFFB1 !important;
+}
+
+.flex-start .button {
+  background: #303030;
+  color: #A4A4A4;
+}
+
+.settings-menu-item-container img, .manage-acc-sec a img, .notifi-img img {
   filter: invert(1) !important;
+}
+
+.notification-popup {
+  border: 1px solid #303030;
 }
