@@ -260,7 +260,18 @@ namespace AxCrypt.Core.Session
                 return;
             }
 
+            if (!vaultEncryptPath.EndsWith("\\"))
+            {
+                vaultEncryptPath += "\\";
+            }
+
             EncryptionParameters encryptionParameters = new EncryptionParameters(Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId, identity);
+            IEnumerable<EmailAddress> sharedWith = (new List<string> { vaultEncryptPath }).ToVaultFolders().SharedWith();
+            if (sharedWith != null && sharedWith.Any())
+            {
+                await encryptionParameters.AddAsync(await sharedWith.ToAvailableKnownPublicKeysAsync(identity));
+            }
+
             if (New<LicensePolicy>().Capabilities.Has(LicenseCapability.Business))
             {
                 encryptionParameters = await identity.AddMasterKeyParameter(encryptionParameters, true);

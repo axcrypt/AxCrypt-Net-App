@@ -21,10 +21,16 @@
         <div class="page-title" style="margin-bottom:0;">
             <h1>@Texts.VaultText</h1>
         </div>
-        <button style="cursor:pointer" @onclick="(e) => AppSettingsViewModel.ToggleVaultSettings()">
-            <img class="" src="/images/vltsett.svg" alt="vault_settings_icon">
-            <span class="font-medium grey-clr">@Texts.VaultSettingsTitle</span>
-        </button>
+        <div style="display:flex; gap:20px;">
+            <button class="vault-share-key-btn" style="min-width: 125px;text-align: center;" @onclick="async (e) => await ViewModel.VaultFolderKeySharing()">
+                <img class="shrks-act" style="max-height: 20px;" alt="vault_share_icon">
+                <span class="font-medium">@Texts.ShareKeysToolStripMenuItemText</span>
+            </button>
+            <button class="button success border" style="min-width: 125px;text-align: center;" @onclick="(e) => AppSettingsViewModel.ToggleVaultSettings()">
+                <img class="" src="/images/vltsett.svg" alt="vault_settings_icon">
+                <span class="font-medium grey-clr">@Texts.VaultSettingsTitle</span>
+            </button>
+        </div>
     </div>
 
     <div class="vlt-search-add">
@@ -248,6 +254,8 @@
         </div>
     </div>
 }
+
+<AxCrypt.App.Shared.Desktop.Components.Home.ShareKeyComponent />
 
 @code {
     private bool isListView { get; set; } = true;

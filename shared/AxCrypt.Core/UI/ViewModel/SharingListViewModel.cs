@@ -82,6 +82,8 @@ namespace AxCrypt.Core.UI.ViewModel
 
         public IAsyncAction RefreshKnownContact { get; private set; }
 
+        public IAsyncAction ShareVault { get; private set; }
+
         private SharingListViewModel(IEnumerable<string> filesOrfolderPaths, IEnumerable<UserPublicKey> sharedWith, LogOnIdentity identity)
         {
             _filesOrfolderPaths = filesOrfolderPaths;
@@ -110,6 +112,15 @@ namespace AxCrypt.Core.UI.ViewModel
             return new SharingListViewModel(folders, sharedWith, identity);
         }
 
+        public static async Task<SharingListViewModel> CreateForVaultsAsync(IEnumerable<string> folders, LogOnIdentity identity)
+        {
+            if (folders == null) throw new ArgumentNullException(nameof(folders));
+            if (identity == null) throw new ArgumentNullException(nameof(identity));
+
+            IEnumerable<UserPublicKey> sharedWith = GetAllPublicKeyRecipientsFromVaultFolders(folders);
+            return new SharingListViewModel(folders, sharedWith, identity);
+        }
+
         private void InitializePropertyValues(IEnumerable<UserPublicKey> sharedWith)
         {
             LoadAvailableGroupPublicKeysAsync(_identity);
@@ -123,6 +134,7 @@ namespace AxCrypt.Core.UI.ViewModel
             RemoveKeyShares = new AsyncDelegateAction<IEnumerable<UserPublicKey>>((upks) => RemoveKeySharesActionAsync(upks));
             AddNewKeyShare = new AsyncDelegateAction<string>((email) => AddNewKeyShareActionAsync(email), (email) => Task.FromResult(this[nameof(NewKeyShare)].Length == 0));
             ShareFolders = new AsyncDelegateAction<object>((o) => ShareFoldersActionAsync());
+            ShareVault = new AsyncDelegateAction<object>((o) => ShareVaultActionAsync());
             ShareFiles = new AsyncDelegateAction<object>((o) => ShareFilesActionAsync());
             UpdateNewKeyShareStatus = new AsyncDelegateAction<object>(async (o) => NewKeyShareStatus = await NewKeyShareStatusAsync());
             RefreshKnownContact = new AsyncDelegateAction<IEnumerable<EmailAddress>>((upks) => RefreshKnownContactsActionAsync(upks));
@@ -136,6 +148,20 @@ namespace AxCrypt.Core.UI.ViewModel
                 await New<FileSystemState>().AddWatchedFolderAsync(wf).Free();
             }
             await New<FileSystemState>().Save();
+            IEnumerable<IDataStore> files = _filesOrfolderPaths.SelectMany((folder) => New<IDataContainer>(folder).ListOfFiles(_filesOrfolderPaths.Select(x => New<IDataContainer>(x)), New<UserSettings>().FolderOperationMode.Policy()));
+
+            await files.Select(x => x.FullName).ChangeKeySharingAsync(SharedWith);
+        }
+
+        private async Task ShareVaultActionAsync()
+        {
+            foreach (VaultFolder vaultFolder in _filesOrfolderPaths.ToVaultFolders())
+            {
+                VaultFolder vf = new VaultFolder(vaultFolder, SharedWith);
+                New<FileSystemState>().AddVaultFolder(vf);
+            }
+            await New<FileSystemState>().Save();
+
             IEnumerable<IDataStore> files = _filesOrfolderPaths.SelectMany((folder) => New<IDataContainer>(folder).ListOfFiles(_filesOrfolderPaths.Select(x => New<IDataContainer>(x)), New<UserSettings>().FolderOperationMode.Policy()));
 
             await files.Select(x => x.FullName).ChangeKeySharingAsync(SharedWith);
@@ -269,6 +295,19 @@ namespace AxCrypt.Core.UI.ViewModel
         private static IEnumerable<UserPublicKey> GetAllPublicKeyRecipientsFromWatchedFolders(IEnumerable<string> folderPaths)
         {
             IEnumerable<EmailAddress> sharedWithEmailAddresses = folderPaths.ToWatchedFolders().SharedWith();
+
+            IEnumerable<UserPublicKey> sharedWith;
+            using (KnownPublicKeys knownPublicKeys = New<KnownPublicKeys>())
+            {
+                sharedWith = knownPublicKeys.PublicKeys.Where(pk => sharedWithEmailAddresses.Any(s => s == pk.Email)).ToList();
+            }
+
+            return sharedWith;
+        }
+
+        private static IEnumerable<UserPublicKey> GetAllPublicKeyRecipientsFromVaultFolders(IEnumerable<string> folderPaths)
+        {
+            IEnumerable<EmailAddress> sharedWithEmailAddresses = folderPaths.ToVaultFolders().SharedWith();
 
             IEnumerable<UserPublicKey> sharedWith;
             using (KnownPublicKeys knownPublicKeys = New<KnownPublicKeys>())

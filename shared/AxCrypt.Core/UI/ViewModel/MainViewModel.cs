@@ -37,7 +37,7 @@ using AxCrypt.Core.Session;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;  
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -488,7 +488,8 @@ namespace AxCrypt.Core.UI.ViewModel
                 return;
             }
 
-            await New<VaultSettings>().CreateVaultWatchedFolderAsync(new VaultFolder(folder));
+            await New<VaultSettings>().CreateVaultWatchedFolderAsync(new VaultFolder(folder, Resolve.KnownIdentities.DefaultEncryptionIdentity.Tag));
+
             await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.InformationTitle, Texts.VaultConfiguredSuccessText);
         }
 

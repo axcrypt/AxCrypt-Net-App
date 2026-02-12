@@ -443,6 +443,20 @@ namespace AxCrypt.Core.Extensions
             return sharedWithEmailAddresses;
         }
 
+        public static IEnumerable<VaultFolder> ToVaultFolders(this IEnumerable<string> folderPaths)
+        {
+            IEnumerable<VaultFolder> watched = Resolve.FileSystemState.AllVaultFolders.Where((wf) => folderPaths.Contains(wf.Path));
+
+            return watched;
+        }
+
+        public static IEnumerable<EmailAddress> SharedWith(this IEnumerable<VaultFolder> vaultFolders)
+        {
+            IEnumerable<EmailAddress> sharedWithEmailAddresses = vaultFolders.SelectMany(wf => wf.KeyShares).Distinct();
+
+            return sharedWithEmailAddresses;
+        }
+
         public static IEnumerable<string> IgnoredFolders(this IEnumerable<WatchedFolder> watchedFolders)
         {
             IEnumerable<string> ignoredFolders = watchedFolders.SelectMany(wf => wf.IgnoredFolders).Distinct();

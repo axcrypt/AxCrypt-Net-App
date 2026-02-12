@@ -1389,7 +1389,7 @@ input[type=radio] {
 }
 
 .page-title::before {
-  top: 12px;
+  top: 0px;
   right: -20px;
   width: 35px;
   height: 32px;
@@ -6374,6 +6374,12 @@ button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.vault-share-key-btn, .vault-share-key-btn:hover {
+  background-color: #48772C;
+  border: 1px solid #48772C;
+  color: #fff;
 }
 
 #vault-settings-modalDialog .vlt-title-img {

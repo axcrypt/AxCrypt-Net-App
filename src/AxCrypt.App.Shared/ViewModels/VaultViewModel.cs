@@ -1,5 +1,4 @@
-﻿using System;
-using AxCrypt.App.Shared.FileOperations.Vault;
+﻿using AxCrypt.App.Shared.FileOperations.Vault;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility.View;
@@ -22,13 +21,15 @@ namespace AxCrypt.App.Shared.ViewModels
         private readonly MainViewModel _mainViewModel;
         private LogOnViewModel _logOnViewModel;
         private FileOperationViewModel _fileOperationViewModel;
+        private ShareKeyViewModel? _sharekeyViewModel;
 
-        public VaultViewModel(IStatusAlertService StatusAlerService)
+        public VaultViewModel(IStatusAlertService StatusAlerService, ShareKeyViewModel? sharekeyViewModel)
         {
             _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
             _mainViewModel = AxCServiceProviderExtension.LogOnViewModel!.MainViewModel;
             _fileOperationViewModel = AxCServiceProviderExtension.LogOnViewModel.FileOperationViewModel;
             _statusAlertService = StatusAlerService;
+            _sharekeyViewModel = sharekeyViewModel;
         }
 
         private string VaultBasePath
@@ -512,6 +513,32 @@ namespace AxCrypt.App.Shared.ViewModels
                 return false;
 
             return true;
+        }
+
+        public async Task VaultFolderKeySharing()
+        {
+            await PremiumFeature_ClickAsync(LicenseCapability.Vault, () => { return VaultFolderKeySharingAsync(VaultBasePath); });
+        }
+
+        private async Task VaultFolderKeySharingAsync(string folderPath)
+        {
+            if (!folderPath.Any()) return;
+
+            if (!folderPath.EndsWith("\\"))
+            {
+                folderPath += "\\";
+            }
+
+            if (!Resolve.FileSystemState.AllVaultFolders.Any((wf) => folderPath == wf.Path))
+            {
+                Resolve.FileSystemState.AddVaultFolder(new VaultFolder(folderPath, Resolve.KnownIdentities.DefaultEncryptionIdentity.Tag));
+                await Resolve.FileSystemState.Save();
+            }
+
+            SharingListViewModel viewModel = await SharingListViewModel.CreateForVaultsAsync(new List<string> { folderPath }, Resolve.KnownIdentities.DefaultEncryptionIdentity);
+            await _sharekeyViewModel!.SetSelectedFilesOrFolders(new List<string> { folderPath }, viewModel);
+
+            await viewModel.ShareVault.ExecuteAsync(null!);
         }
     }
 

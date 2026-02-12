@@ -46,7 +46,7 @@ namespace AxCrypt.Core.Session
                 return;
             }
 
-            await CreateVaultWatchedFolderAsync(new VaultFolder(vaultFolderpath));
+            await CreateVaultWatchedFolderAsync(new VaultFolder(vaultFolderpath, Resolve.KnownIdentities.DefaultEncryptionIdentity.Tag));
         }
 
         public async Task CreateVaultWatchedFolderAsync(VaultFolder vaultFolder)

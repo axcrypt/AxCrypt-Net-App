@@ -25,23 +25,33 @@
 
 #endregion Coypright and License
 
+using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
-
+using AxCrypt.Core.UI;
+using Newtonsoft.Json;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Session
 {
     public class VaultFolder 
     {
+        [JsonProperty("path")]
         public string Path { get; private set; }
 
         private IFileWatcher _fileWatcher;
 
         public event EventHandler<FileWatcherEventArgs> Changed;
 
-        public VaultFolder(string path)
+        [JsonConstructor]
+        private VaultFolder()
+        {
+            Tag = IdentityPublicTag.Empty;
+            KeyShares = new List<EmailAddress>();
+        }
+
+        public VaultFolder(string path, IdentityPublicTag publicTag)
         {
             if (path == null)
             {
@@ -49,7 +59,21 @@ namespace AxCrypt.Core.Session
             }
 
             Path = path.NormalizeFolderPath();
+            Tag = publicTag;
+            KeyShares = new List<EmailAddress>();
             InitializeFileWatcher();
+        }
+
+        public VaultFolder(VaultFolder vaultFolder, IEnumerable<UserPublicKey> keyShares)
+        {
+            if (vaultFolder == null)
+            {
+                throw new ArgumentNullException(nameof(vaultFolder));
+            }
+
+            Path = vaultFolder.Path;
+            Tag = vaultFolder.Tag;
+            KeyShares = keyShares.Select(ks => ks.Email).ToArray();
         }
 
         private void InitializeFileWatcher()
@@ -75,6 +99,25 @@ namespace AxCrypt.Core.Session
         protected virtual void OnChanged(FileWatcherEventArgs e)
         {
             Changed?.Invoke(this, e);
+        }
+
+        [JsonProperty("publicTag")]
+        public IdentityPublicTag Tag
+        {
+            get;
+            private set;
+        }
+
+        [JsonProperty("keyShares")]
+        public IEnumerable<EmailAddress> KeyShares
+        {
+            get;
+            private set;
+        }
+
+        public bool Matches(string path)
+        {
+            return string.Compare(Path, path, StringComparison.OrdinalIgnoreCase) == 0;
         }
 
         public void Dispose()
