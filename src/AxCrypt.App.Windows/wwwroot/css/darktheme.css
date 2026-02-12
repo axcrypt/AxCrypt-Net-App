@@ -141,14 +141,14 @@ button {
 
 .rcnt-fle-tbl thead tr th {
   color: #A4A4A4;
-  background: #303030 !important;
+  background: #575757 !important;
 }
-.rcnt-fle-tbl tbody tr td, .rcnt-fle-tbl td span {
+.rcnt-fle-tbl tbody tr {
   background: #121212 !important;
 }
 .rcnt-fle-tbl tbody tr:hover,
 .rcnt-fle-tbl tbody tr.active,
-.rcnt-fle-tbl .selected {
+.rcnt-fle-tbl .selected td {
   background: #303030 !important;
 }
 
@@ -306,6 +306,6 @@ input[readonly=readonly], textarea[readonly] {
   color: #A4A4A4 !important;
 }
 
-.dropbtn, .language-dropdown > .dropdown-item-container {
+.dropbtn, .language-dropdown > .dropdown-item-container, .home-context-menu {
   background-color: #303030 !important;
 }

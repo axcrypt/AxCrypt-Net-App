@@ -74,11 +74,11 @@ $colDrkMdHglhtPrm: #CDFFB1;
     background-color: $colBordBgrnd !important;
 }
 
-    .password-create-dropdown-content a:hover,
-    .password-create-dropdown-content a.active {
-        color: $colTxtLink !important;
-        background-color: $colHeDBgrnd !important;
-    }
+.password-create-dropdown-content a:hover,
+.password-create-dropdown-content a.active {
+    color: $colTxtLink !important;
+    background-color: $colHeDBgrnd !important;
+}
 
 #messenger-keyword {
     background-color: $colBordBgrnd !important;
@@ -143,9 +143,9 @@ button {
     border: $BorderClr !important;
 }
 
-    .mre-actn-box:hover {
-        background-color: $TbleBg !important;
-    }
+.mre-actn-box:hover {
+    background-color: $TbleBg !important;
+}
 
 .rcnt-fld-bx {
     background-color: $colActnBgrnd;
@@ -162,16 +162,16 @@ button {
 .rcnt-fle-tbl {
     thead tr th {
         color: $colTxtlble;
-        background: $SdebrbgndClr !important;
+        background: $TbleBg !important;
     }
 
-    tbody tr td, td span {
+    tbody tr {
         background: $colPageBgrnd !important;
     }
 
     tbody tr:hover,
     tbody tr.active,
-    .selected {
+    .selected td {
         background: $SdebrbgndClr !important;
     }
 }
@@ -181,9 +181,9 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     color: $colTxtBd !important;
 }
 
-    input[readonly="readonly"], textarea[readonly] {
-        border: $colDrkMdL3 !important;
-    }
+input[readonly="readonly"], textarea[readonly] {
+    border: $colDrkMdL3 !important;
+}
 
 .clean-up textarea {
     color: $colTxtBd !important;
@@ -234,9 +234,9 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     background: $colBordBgrnd;
 }
 
-    .inbox-section table:hover {
-        background: $colTxtlble;
-    }
+.inbox-section table:hover {
+    background: $colTxtlble;
+}
 
 .email-txt-ovflw {
     color: $colTxtBd;
@@ -261,9 +261,9 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     color: $colTxtlble;
 }
 
-    .secured-messenger option:hover {
-        color: $colBord;
-    }
+.secured-messenger option:hover {
+    color: $colBord;
+}
 
 .multi-actn-btn {
     background-color: $colDrkMdL3;
@@ -271,9 +271,9 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     border: $colTxtlble;
 }
 
-    .multi-actn-btn:hover {
-        background-color: $colDrkMdL3;
-    }
+.multi-actn-btn:hover {
+    background-color: $colDrkMdL3;
+}
 
 .button.border {
     border: 1px solid $SdebrbgndClr !important;
@@ -334,6 +334,6 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     }
 }
 
-.dropbtn, .language-dropdown > .dropdown-item-container {
+.dropbtn, .language-dropdown > .dropdown-item-container, .home-context-menu {
     background-color: $SdebrbgndClr !important;
 }
