@@ -16,7 +16,7 @@ $colDrkMdBushd: #757575;
 $BtnBackClr: #48772C;
 $colDrkMdHglhtPrm: #CDFFB1;
 
-.sidebar {
+.side-menu {
     background-color: $SdebrbgndClr !important;
 }
 
@@ -134,8 +134,6 @@ button {
     background-color: $colDefBgrnd;
     color: $colDefTxt;
     border: solid 1px;
-    padding: 10px;
-    border-radius: 5px;
 }
 
 .mre-actn-box {
@@ -144,7 +142,8 @@ button {
 }
 
 .mre-actn-box:hover {
-    background-color: $TbleBg !important;
+    background-color: $SdebrbgndClr !important;
+    color: $colTxtlble;
 }
 
 .rcnt-fld-bx {
@@ -225,9 +224,12 @@ input[readonly="readonly"], textarea[readonly] {
     filter: brightness(0) saturate(90%) invert(50%);
 }
 
-//.filter-text,
-.filter-text:hover {
+.filter-text {
     color: $colTxtlble;
+}
+
+.filter-text:hover {
+    color: $TbleBg;
 }
 
 .inbox-section table {
@@ -346,7 +348,7 @@ input[readonly="readonly"], textarea[readonly] {
     filter: opacity(0.8);
 }
 
-.menu-image {
+.menu-image, .mre-actn-box img {
     filter: grayscale(1) brightness(10);
 }
 
@@ -357,3 +359,8 @@ input[readonly="readonly"], textarea[readonly] {
 .fle-exton-img img {
     filter: grayscale(1);
 }
+
+.actv-subs {
+    background-color: #ebebeb !important;
+}
+

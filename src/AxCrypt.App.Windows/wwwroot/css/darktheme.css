@@ -1,4 +1,4 @@
-﻿.sidebar {
+﻿.side-menu {
   background-color: #303030 !important;
 }
 
@@ -114,8 +114,6 @@ button {
   background-color: #ffffff;
   color: #ffffff;
   border: solid 1px;
-  padding: 10px;
-  border-radius: 5px;
 }
 
 .mre-actn-box {
@@ -124,7 +122,8 @@ button {
 }
 
 .mre-actn-box:hover {
-  background-color: #575757 !important;
+  background-color: #303030 !important;
+  color: #A4A4A4;
 }
 
 .rcnt-fld-bx {
@@ -199,8 +198,12 @@ input[readonly=readonly], textarea[readonly] {
   filter: brightness(0) saturate(90%) invert(50%);
 }
 
-.filter-text:hover {
+.filter-text {
   color: #A4A4A4;
+}
+
+.filter-text:hover {
+  color: #575757;
 }
 
 .inbox-section table {
@@ -318,7 +321,7 @@ input[readonly=readonly], textarea[readonly] {
   filter: opacity(0.8);
 }
 
-.menu-image {
+.menu-image, .mre-actn-box img {
   filter: grayscale(1) brightness(10);
 }
 
@@ -328,4 +331,8 @@ input[readonly=readonly], textarea[readonly] {
 
 .fle-exton-img img {
   filter: grayscale(1);
+}
+
+.actv-subs {
+  background-color: #ebebeb !important;
 }
