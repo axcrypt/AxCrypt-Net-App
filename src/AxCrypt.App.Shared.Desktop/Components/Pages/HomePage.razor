@@ -34,7 +34,7 @@
             if (!New<Core.UI.UserSettings>().HasSeenStartupHelp)
             {
                 await Task.Delay(2500);
-                await JSRuntime.InvokeVoidAsync("startHomeHelp");
+                await JSRuntime.InvokeVoidAsync("startHomeHelp", RecentFilesViewModel.LogOnViewModel.SubscriptionLevel.ToString().ToLower());
                 New<Core.UI.UserSettings>().HasSeenStartupHelp = true;
             }
         }

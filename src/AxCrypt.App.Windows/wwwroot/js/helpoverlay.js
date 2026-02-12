@@ -1,6 +1,6 @@
 ﻿let helpSlideIndex = 0;
 let totalHelpSlides = 7;
-
+let cu_subs_level = "";
 // Mask
 function addMask() {
     const mask = document.createElement("div");
@@ -128,7 +128,8 @@ function createPaginationDots() {
     document.body.appendChild(dotContainer);
 }
 
-function startHomeHelp() {
+function startHomeHelp(subscriptionLevel) {
+    cu_subs_level = subscriptionLevel;
     helpSlideIndex = 0;
     updateZIndexForSlide(helpSlideIndex);
     const items = [
@@ -138,6 +139,12 @@ function startHomeHelp() {
         { id: "help-sharekey", text: "Use <b>Share Keys</b> to share file access with colleagues and friends." },
         { id: "help-clean", text: "The <b>Broom</b> icon shows up when something needs <b>clean-up</b>, like files that weren’t updated correctly or unencrypted files in monitored folders. Clicking the <b>Broom</b> icon will encrypt them.", width: 250 }
     ];
+
+    if (cu_subs_level == "free") {
+        buildSlide(items, startTopMenuHelp);
+        return;
+    }
+
     buildSlide(items, showCloudServicesHelp);
 }
 

@@ -85,7 +85,7 @@
             return;
         }
 
-        await JSRuntime.InvokeVoidAsync("startHomeHelp");
+        await JSRuntime.InvokeVoidAsync("startHomeHelp", ViewModel.LogOnViewModel.SubscriptionLevel.ToString().ToLower());
     }
 
     private void UpdatePageState()
