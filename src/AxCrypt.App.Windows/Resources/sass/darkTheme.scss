@@ -334,6 +334,26 @@ input[readonly="readonly"], textarea[readonly] {
     }
 }
 
-.dropbtn, .language-dropdown > .dropdown-item-container, .home-context-menu {
+.dropbtn, .language-dropdown > .dropdown-item-container, .home-context-menu, .context-menu {
     background-color: $SdebrbgndClr !important;
+}
+
+.selected-file, .share-list {
+    background-color: $TbleBg !important;
+}
+
+.empty-list {
+    filter: opacity(0.8);
+}
+
+.menu-image {
+    filter: grayscale(1) brightness(10);
+}
+
+.file-keySh-icon {
+    filter: invert(1) !important;
+}
+
+.fle-exton-img img {
+    filter: grayscale(1);
 }

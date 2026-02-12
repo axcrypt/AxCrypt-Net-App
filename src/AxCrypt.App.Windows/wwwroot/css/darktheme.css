@@ -306,6 +306,26 @@ input[readonly=readonly], textarea[readonly] {
   color: #A4A4A4 !important;
 }
 
-.dropbtn, .language-dropdown > .dropdown-item-container, .home-context-menu {
+.dropbtn, .language-dropdown > .dropdown-item-container, .home-context-menu, .context-menu {
   background-color: #303030 !important;
+}
+
+.selected-file, .share-list {
+  background-color: #575757 !important;
+}
+
+.empty-list {
+  filter: opacity(0.8);
+}
+
+.menu-image {
+  filter: grayscale(1) brightness(10);
+}
+
+.file-keySh-icon {
+  filter: invert(1) !important;
+}
+
+.fle-exton-img img {
+  filter: grayscale(1);
 }
