@@ -120,7 +120,7 @@ namespace AxCrypt.Desktop
             }
         }
 
-        private void FileSystemChanged(FileWatcherEventArgs e)
+        protected virtual void FileSystemChanged(FileWatcherEventArgs e)
         {
             if (Resolve.Log.IsInfoEnabled)
             {
