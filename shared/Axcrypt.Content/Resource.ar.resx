@@ -671,6 +671,9 @@
     <value>عند التمكين ، لا يتم استخدام الوصول إلى الإنترنت مطلقًا أو مطلوبًا ، حتى يتم تعطيله.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
   </data>
+  <data name="AndroidIosTitle" xml:space="preserve">
+    <value>(Android/iOS)</value>
+  </data>
   <data name="AndText" xml:space="preserve">
     <value>و</value>
   </data>
@@ -869,6 +872,9 @@
   </data>
   <data name="AxCKSGDBlock2Text5" xml:space="preserve">
     <value>تخيل مشاركة مستند عمل حساس للغاية مثل تقرير الإيرادات مع رئيسك أو زميلك - مع ضمان تشفير الملف ، حتى بعد أن يفتحه المستلم ، فهذه هي ميزة مشاركة المفاتيح بالنسبة لك.</value>
+  </data>
+  <data name="AxCKSGDBlock2Text6" xml:space="preserve">
+    <value>تتيح ميزة مشاركة المفاتيح في أكس كريبت التعاون دون المساس بالسرّية — شارك الوصول، ألغِه في أي وقت، ومن دون الكشف عن كلمة المرور الخاصة بك أبدًا.</value>
   </data>
   <data name="AxCKSGDBlock3Heading" xml:space="preserve">
     <value>كيف &lt;span&gt; تعمل مشاركة المفاتيح؟&lt;/span&gt;</value>
@@ -2418,14 +2424,38 @@
   <data name="Blog_AFEWACLT_Conclusion_Heading" xml:space="preserve">
     <value>التشفير القادر على العمل على نطاق واسع</value>
   </data>
+  <data name="Blog_AFEWACLT_Conclusion_Text1" xml:space="preserve">
+    <value>مع تزايد أحجام البيانات وازدياد أتمتة سير العمل، يجب أن يواكب التشفير هذا التطور. تُمكّن أداة سطر الأوامر من أكسكريبت الفرق من تأمين الملفات بشكل أسرع وأكثر ذكاءً وبثبات أعلى، دون إضافة أي تعقيد.</value>
+  </data>
+  <data name="Blog_AFEWACLT_Conclusion_Text2" xml:space="preserve">
+    <value>سواء كنت تحمي النسخ الاحتياطية، أو تؤتمت مهام الأمان، أو تدمج التشفير في أنظمة المؤسسات، فإن واجهة سطر الأوامر من أكسكريبت تساعد على ضمان تنفيذ التشفير بالضبط في الوقت والمكان المناسبين.</value>
+  </data>
+  <data name="Blog_AFEWACLT_Conclusion_Text3" xml:space="preserve">
+    <value>ابدأ أتمتة تشفير الملفات باستخدام  أكسكريبت اليوم.</value>
+  </data>
   <data name="Blog_AFEWACLT_H1_Text1" xml:space="preserve">
     <value>تتيح لك أداة سطر الأوامر تنفيذ مهام مثل تشفير الملفات عن طريق كتابة أوامر بسيطة بدلاً من التنقل عبر واجهة رسومية </value>
   </data>
   <data name="Blog_AFEWACLT_H1_Text2" xml:space="preserve">
     <value>فكّر في الأمر بهذه الطريقة</value>
   </data>
+  <data name="Blog_AFEWACLT_H1_Text3" xml:space="preserve">
+    <value>أداة سطر الأوامر تتيح لك تشفير الملفات باستخدام أوامر بسيطة بشكل تلقائي، بدلاً من النقر عبر واجهة المستخدم الرسومية.</value>
+  </data>
   <data name="Blog_AFEWACLT_H1_Text4" xml:space="preserve">
     <value>لا يوجد نافذة لفتحها ولا أزرار للضغط عليها. تقوم بتنفيذ أمر، وتتم المهمة على الفور وغالبًا في الخلفية. هذا يجعل أدوات سطر الأوامر مفيدة بشكل خاص عندما </value>
+  </data>
+  <data name="Blog_AFEWACLT_H1_Text5" xml:space="preserve">
+    <value>يجب تشفير الملفات بشكل متكرر.</value>
+  </data>
+  <data name="Blog_AFEWACLT_H1_Text6" xml:space="preserve">
+    <value>يجب أن يعمل التشفير على الخوادم التي لا تحتوي على شاشات.</value>
+  </data>
+  <data name="Blog_AFEWACLT_H1_Text7" xml:space="preserve">
+    <value>يجب أن يكون الأمان مدمجًا في العمليات المؤتمتة.</value>
+  </data>
+  <data name="Blog_AFEWACLT_H1_Text8" xml:space="preserve">
+    <value>أدوات سطر الأوامر ليست «تقليدية» أو قديمة الطراز، بل هي وسيلة للسرعة والاعتمادية والأتمتة.</value>
   </data>
   <data name="Blog_AFEWACLT_H2_Text1" xml:space="preserve">
     <value>بالنسبة للشركات وفرق تقنية المعلومات، لا يقتصر التشفير على حماية البيانات فحسب، بل يتعلق بتنفيذ هذه الحماية بشكل صحيح في كل مرة.</value>
@@ -2436,17 +2466,77 @@
   <data name="Blog_AFEWACLT_H2_Text2" xml:space="preserve">
     <value>الأتمتة تقلل من الخطأ البشري </value>
   </data>
+  <data name="Blog_AFEWACLT_H2_Text3" xml:space="preserve">
+    <value>تعتمد العمليات اليدوية على تذكّر الأشخاص لتشفير الملفات، بينما تضمن سير عمل واجهة سطر الأوامر واجهة سطر الأوامر المؤتمتة حدوث التشفير في كل مرة دون الاعتماد على الذاكرة أو التدريب.</value>
+  </data>
   <data name="Blog_AFEWACLT_H2_Text4" xml:space="preserve">
     <value>يتناسب مع سير العمل الحالي</value>
+  </data>
+  <data name="Blog_AFEWACLT_H2_Text5" xml:space="preserve">
+    <value>يتكامل التشفير القائم على واجهة سطر الأوامر (CLI) بسلاسة مع:</value>
+  </data>
+  <data name="Blog_AFEWACLT_H2_Text6" xml:space="preserve">
+    <value>البرامج النصية</value>
+  </data>
+  <data name="Blog_AFEWACLT_H2_Text7" xml:space="preserve">
+    <value>المهام المجدولة (Cron Jobs)</value>
+  </data>
+  <data name="Blog_AFEWACLT_H2_Text8" xml:space="preserve">
+    <value>خطوط أنابيب التكامل والتسليم المستمر (CI/CD Pipelines)</value>
+  </data>
+  <data name="Blog_AFEWACLT_H2_Text9" xml:space="preserve">
+    <value>العمليات على جانب الخادم (Server-side processes)</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text1" xml:space="preserve">
+    <value>تجلب أداة سطر الأوامر من أكسكريبت تشفير أكسكريبت الموثوق إلى البيئات المؤتمتة والمعتمدة على الخوادم، دون الحاجة إلى تغيير طريقة عمل مؤسستك الحالية.</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text10" xml:space="preserve">
+    <value>يُمكّن من التشفير على الأجهزة التي لا تحتوي على واجهات رسومية</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text11" xml:space="preserve">
+    <value>يوسّع التشفير لمواكبة زيادة حجم البيانات</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text12" xml:space="preserve">
+    <value>كيف يُكمل ذلك برنامج أكس كريبت على سطح المكتب والهاتف المحمول</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text13" xml:space="preserve">
+    <value>واجهة سطر الأوامر الخاصة بـ أكس كريبت تعمل جنبًا إلى جنب مع أدوات أكس كريبت الحالية:</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text14" xml:space="preserve">
+    <value>تظل تطبيقات سطح المكتب مثالية للمستخدمين الأفراد وحماية الملفات اليومية.</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text15" xml:space="preserve">
+    <value>تدعم تطبيقات الهاتف المحمول الوصول الآمن أثناء التنقل.</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text16" xml:space="preserve">
+    <value>تتولى واجهة سطر الأوامر (CLI) إدارة الأتمتة والخوادم والعمليات التي تعمل في الخلفية.</value>
   </data>
   <data name="Blog_AFEWACLT_H3_Text17" xml:space="preserve">
     <value>معًا، يشكّلون نظامًا متكاملًا للتشفير — بدءًا من الملفات الفردية ووصولًا إلى سير العمل على مستوى المؤسسات.</value>
   </data>
+  <data name="Blog_AFEWACLT_H3_Text2" xml:space="preserve">
+    <value>واجهة سطر الأوامر من أكسكريبت ليست بديلاً، بل هي امتداد للفرق التي تحتاج إلى تشفير واسع النطاق.</value>
+  </data>
   <data name="Blog_AFEWACLT_H3_Text3" xml:space="preserve">
     <value>لمن هو مخصص</value>
   </data>
+  <data name="Blog_AFEWACLT_H3_Text4" xml:space="preserve">
+    <value>مسؤولو تقنية المعلومات الذين يديرون الخوادم والنسخ الاحتياطية والأنظمة الداخلية</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text5" xml:space="preserve">
+    <value>المطورون الذين يقومون ببناء خطوط أنابيب آمنة وعمليات مؤتمتة</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text6" xml:space="preserve">
+    <value>فرق الأمان التي تفرض التشفير المتسق عبر جميع </value>
+  </data>
   <data name="Blog_AFEWACLT_H3_Text7" xml:space="preserve">
     <value>ما المشاكل التي يحلها </value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text8" xml:space="preserve">
+    <value>يلغي خطوات التشفير اليدوي</value>
+  </data>
+  <data name="Blog_AFEWACLT_H3_Text9" xml:space="preserve">
+    <value>يضمن أمانًا متسقًا عبر الأنظمة</value>
   </data>
   <data name="Blog_AFEWACLT_H4_Text1" xml:space="preserve">
     <value>تشفير النسخ الاحتياطية التلقائي</value>
@@ -2469,6 +2559,9 @@
   <data name="Blog_AFEWACLT_H4_Text6" xml:space="preserve">
     <value>قم بتشفير الملفات تلقائيًا قبل رفعها إلى التخزين السحابي، مضيفًا طبقة أمان حيوية تتجاوز ضوابط الوصول. </value>
   </data>
+  <data name="Blog_AFEWACLT_H4_Text7" xml:space="preserve">
+    <value>4. أمان خطوط أنابيب CI/CD</value>
+  </data>
   <data name="Blog_AFEWACLT_H4_Text8" xml:space="preserve">
     <value>ادمج التشفير في مسارات البناء والنشر بحيث تتم حماية الملفات الحساسة كجزء من دورة حياة التطوير.</value>
   </data>
@@ -2481,8 +2574,26 @@
   <data name="Blog_AFEWACLT_Heading2" xml:space="preserve">
     <value>لماذا يُعدّ التشفير عبر سطر الأوامر (CLI) مهمًا؟</value>
   </data>
+  <data name="Blog_AFEWACLT_Heading3" xml:space="preserve">
+    <value>تقديم أداة سطر الأوامر من أكسكريبت</value>
+  </data>
+  <data name="Blog_AFEWACLT_Heading4" xml:space="preserve">
+    <value>حالات استخدام واقعية لأداة سطر الأوامر من أكسكريبت</value>
+  </data>
+  <data name="Blog_AFEWACLT_Summary" xml:space="preserve">
+    <value>إذا كانت مؤسستك تفضل العمليات المعتمدة على سطر الأوامر، فيجب أن يتوافق التشفير بشكل طبيعي مع هذا النهج. مع زيادة حجم البيانات، يصبح الاعتماد على التشفير اليدوي غير فعال وعرضة للأخطاء. من تأمين النسخ الاحتياطية إلى حماية الملفات على الخوادم والعمليات الآلية، يجب أن يكون التشفير قابلاً للتوسع بسهولة ودون عناء.</value>
+  </data>
+  <data name="Blog_AFEWACLT_Text1" xml:space="preserve">
+    <value>إذا كانت منظمتك تفضل العمليات القائمة على سطر الأوامر، فيجب أن يتوافق التشفير بشكل طبيعي مع هذا النهج. مع زيادة حجم البيانات، يصبح الاعتماد على التشفير اليدوي غير فعال ومعرضًا للأخطاء. من تأمين النسخ الاحتياطية إلى حماية الملفات على الخوادم والعمليات المؤتمتة، يجب أن يتمكن التشفير من التوسع بسهولة وسلاسة.</value>
+  </data>
   <data name="Blog_AFEWACLT_Text2" xml:space="preserve">
     <value>هنا تكمن أهمية أدوات سطر الأوامر</value>
+  </data>
+  <data name="Blog_AFEWACLT_Text3" xml:space="preserve">
+    <value>أداة أكس كريبت لسطر الأوامر مصممة للفرق التي تُقدّر الأتمتة، حيث توفر تشفيرًا موثوقًا للملفات مع الحفاظ على البساطة والأمان التي تقدمها أكس كريبت عبر نظامها البيئي بأكمله.</value>
+  </data>
+  <data name="Blog_AFEWACLT_Title" xml:space="preserve">
+    <value>أتمتة تشفير الملفات باستخدام أداة سطر الأوامر من أكس كريبت</value>
   </data>
   <data name="Blog_AIS_Conclusion_Heading" xml:space="preserve">
     <value>اكسكربت باختصار</value>
@@ -5307,6 +5418,270 @@
   <data name="Blog_EVA_Title" xml:space="preserve">
     <value>التشفير مقابل المصادقة</value>
   </data>
+  <data name="Blog_EYNTKAAPCA_Conclusion_Heading" xml:space="preserve">
+    <value>لا تدع بياناتك تتحول إلى «بوفيه للمعلومات الحساسة»!</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Conclusion_Text1" xml:space="preserve">
+    <value>الوقت لم ينتهِ بعد، ولا يزال لديك فرصة لإنقاذ بياناتك</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Conclusion_Text2" xml:space="preserve">
+    <value>مع استراتيجية أكس كريبت في التشفير، تظل بياناتك ملكك أنت وحدك. فالأمر لا يقتصر على تشفير بياناتك بتشفير ‎256-بت ثم الاكتفاء بالقول «تمت الحماية». بل يتجاوز ذلك إلى ما هو أبعد.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Conclusion_Text3" xml:space="preserve">
+    <value>نحن نتحدث عن الحماية متعددة الطبقات مع المصادقة متعددة العوامل (MFA)، ودعم متواصل على مدار الساعة، لمساعدتك على البقاء محميًا وتفويت فرص المهاجم.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Conclusion_Text4" xml:space="preserve">
+    <value>إذا كنت جديدًا هنا، ابدأ تجربتك المجانية الآن وحاصر هؤلاء القراصنة الماكرين.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Conclusion_Text5" xml:space="preserve">
+    <value>هل أنت مستخدم حالي؟ قم بالترقية الآن.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Conclusion_Text6" xml:space="preserve">
+    <value>اشتركت في الاستمرار في البقاء آمنًا وآمنًا ومتقدمًا على المتسللين</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Conclusion_Text7" xml:space="preserve">
+    <value>أكس كريبت، لأن بياناتك تحتاج إلى ما هو أكثر من مجرد «جيد بما يكفي».</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text1" xml:space="preserve">
+    <value>القرصنة الآلية باستخدام الذكاء الاصطناعي: خرق تسجيل الدخول</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text10" xml:space="preserve">
+    <value>رش كلمة المرور</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text11" xml:space="preserve">
+    <value>في هجمات القوة الغاشمة (القوة الغاشمة )، يتم تجربة عدة كلمات مرور مختلفة لنفس المعرّف. لكن هذا الأسلوب يصبح شبه عديم الفائدة بسبب سياسة المحاولات الثلاث، حيث يتم قفل النظام بعد ثلاث محاولات تسجيل دخول فاشلة، سواء بالنسبة لك أو للمهاجم.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text12" xml:space="preserve">
+    <value>لكن في حالة هجوم رش كلمات المرور (كلمة المرور رش)، تختلف الأمور كثيرًا ويكون الهجوم أكثر فاعلية. فرغم أن هذا النوع من الهجمات بطيء ومنخفض الحدة، إلا أنه يعتمد على تجربة كلمة مرور شائعة واحدة عبر آلاف الحسابات، مما يسمح بتجاوز سياسة المحاولات الثلاث دون التسبب في قفل الحسابات.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text13" xml:space="preserve">
+    <value>فكّر في الأمر بهذه الطريقة</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text14" xml:space="preserve">
+    <value>هل تتذكر أولئك باعة كتب المساعدة الذاتية الذين كانوا يطرقون الأبواب؟ مزعجون لكن لا حول لهم ولا </value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text15" xml:space="preserve">
+    <value>رشّ كلمات المرور يشبه ذلك إلى حدّ ما، لكن بدلًا من الطرق على بابٍ واحد مرارًا حتى يفقد صاحبه صبره ويتصل بالشرطة بعد سياسة «الضربات الثلاث»، يقوم المهاجم بقرع كل أجراس الحي مستخدمًا نفس الأسلوب.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text16" xml:space="preserve">
+    <value>يتجاهله الأمن لأنه لا يضايق شخصًا واحدًا ليبدو وكأنه "مخادع"... انظر ماذا فعلنا هناك؟</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text17" xml:space="preserve">
+    <value>الآن، عندما نفحص الفضاء السيبراني وعالم الهجمات الإلكترونية المدعومة بالذكاء الاصطناعي، نجد أن هذا البائع هو وكيل مستقل. هذا الوكيل لا يبحث عن كلمة "لا". بالنسبة له، "لا" تعني الفرصة التالية، حتى يترك أحدهم بابًا مفتوحًا.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text18" xml:space="preserve">
+    <value>هذه العملية البطيئة ولكن الصبورة هي ما يسمح لهجمات تعلّم الآلة باختراق شبكات ضخمة دون تنبيه أو إثارة قلق أي شخص. يحتاج البشر إلى ساعات لإنجاز ذلك، بينما يستطيع وكيل ذكاء اصطناعي مزوّد بنموذج لغوي كبير (LLM) إطلاق هجمات على تسجيل الدخول خلال دقائق، من خلال نشر إطار عمل لاختبار الاختراق وأتمتة سير العمل.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text19" xml:space="preserve">
+    <value>٢: الهجمات الإلكترونية المدعومة بالذكاء الاصطناعي، وبرامج الفدية، وهجمات «قفل الأوامر برومت لوك».</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text2" xml:space="preserve">
+    <value>في الماضي، عندما كان يحاول شخص ما اختراق بيانات تسجيل الدخول الخاصة بك، كان الأمر يستغرق أيامًا ويتطلب الكثير من التفكير والجهد العقلي.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text20" xml:space="preserve">
+    <value>نحن نعيش موجة من برامج الفدية التوليدية متعدّدة الأشكال، التي لا تتميز بالسرعة فحسب، بل تتصرف أيضًا كمتحوّل أشكال في الفضاء السيبراني.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text21" xml:space="preserve">
+    <value>إذا كان هذا الكلام قد جعلك تشعر بانقباض في معدتك، فتابع القراءة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text22" xml:space="preserve">
+    <value>ما بدأ كمشروع بحثي يُدعى اِسْتَدْعَى قفل أصبح الآن نموذج عمل مربحًا بين مجرمي الإنترنت. حيث يتم إعطاء وكيل ذكاء اصطناعي تعليمات أساسية فقط، ليتمكن بعدها من تنسيق وتنفيذ هجوم برمجي خبيث كامل مدعوم بالذكاء الاصطناعي.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text23" xml:space="preserve">
+    <value>كل ذلك يتم بشكل مستقل تمامًا دون أي تدخل بشري.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text24" xml:space="preserve">
+    <value>هذا هو عام هجمات الهندسة الاجتماعية المدعومة بالذكاء الاصطناعي، التي ترفع سقف خطورتها باستخدام وكلاء مستقلين. فهؤلاء — أي وكيل الذكاء الاصطناعي والنموذج اللغوي الكبير (LLM) العاملان معًا — لن يهاجموا بشكل أعمى، بل يخططون للمهمة بالكامل، ويحللون أنظمة الهدف، ويقدّمون للمهاجم «بوفيه» من المعلومات الشخصية (PII) والبيانات الحساسة، بل ويقترحون أيضًا نوع المعلومات الأكثر قيمة لاستخدامها في الابتزاز.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text25" xml:space="preserve">
+    <value>بمجرد وضع الخطة وحلول الوقت المناسب، يطلق الوكيل الهجمات حيث يتم تشفير الملفات، وتشغيل الشيفرات الخبيثة، وتهريب البيانات لإقصائك عن الوصول أو تهديدك بمسح جميع بياناتك بالكامل.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text26" xml:space="preserve">
+    <value>يمكن أن تكون هذه الهجمات أيضًا شديدة التخصيص. وهذا يعني أنه قد يتم إرسال رسالة تصيّد إليك تبدو مقنعة للغاية لدرجة أنك تعتبرها غير ضارة ومألوفة، ومن هنا يبدأ الاختراق.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text27" xml:space="preserve">
+    <value>وما هو الأسوأ من ذلك؟ أن الشيفرة تستمر في التغيّر كمتغيّر الأشكال، مما يجعل من شبه المستحيل على أي نوع من وسائل الحماية التقليدية اكتشافها.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text28" xml:space="preserve">
+    <value>تعمل هذه الهجمات الإلكترونية التوليدية متعددة الأشكال المدعومة بالذكاء الاصطناعي، وجميع العمليات الأخرى المرتبطة بها، عبر السحابة، مما يجعلها نموذجًا إجراميًا إلكترونيًا متطورًا لبرامج الفدية كخدمة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text29" xml:space="preserve">
+    <value>٣: هجمات التصيّد الاحتيالي المدعومة بالذكاء الاصطناعي — شديدة التخصيص وشديدة الذكاء، ولكن لأسباب خاطئة تمامًا.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text3" xml:space="preserve">
+    <value>ولكن الآن، أصبحت هجمات الأمن السيبراني المعتمدة على التعلم الآلي هي الموضة السائدة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text30" xml:space="preserve">
+    <value>عمليات التصيد الاحتيالي القديمة المعروفة… لكن هذه المرة مدعومة بالذكاء الاصطناعي.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text31" xml:space="preserve">
+    <value>عندما يتعلق الأمر بعمليات التصيد الاحتيالي، فإن العلامات الواضحة كانت دائمًا النحو السيئ، والمفردات الغريبة، والأخطاء الإملائية الفادحة، أو حتى ذلك الإحساس الغريب الذي يقول لك إن هناك شيئًا غير طبيعي… أليس كذلك؟</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text32" xml:space="preserve">
+    <value>والآن، تخيّل هذا: ماذا لو وصلك هذا الأمر بالطريقة الأكثر شرعية الممكنة، وبدأت فعليًا تصدّق أنه صادر من مصدر موثوق </value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text33" xml:space="preserve">
+    <value>حسنًا، إليك ما حدث بالضبط قبل أن تنقر على ذلك الرابط «المُريب» </value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text34" xml:space="preserve">
+    <value>يستخدم المحتالون عبر التصيّد نماذج لغوية كبيرة (LLMs) من الشبكة المظلمة لإنشاء رسائل بريد إلكتروني واضحة وسلسة وسهلة القراءة، وبأي لغة تقريبًا تختارها.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text35" xml:space="preserve">
+    <value>وهذا يُزيل أول وأقوى علامات الشك.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text36" xml:space="preserve">
+    <value>الآن كل ما عليهم فعله هو نسخ هذا البريد الإلكتروني ولصقه، ثم إرساله في النهاية إلى أي شخص يريدون استهدافه.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text37" xml:space="preserve">
+    <value>عندما نتحدث عن النماذج اللغوية الكبيرة (LLMs)، فنحن لا نعني نماذج مثل ChatGPT أو Gemini وما شابهها.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text38" xml:space="preserve">
+    <value>توجد أشكال أخرى من النماذج اللغوية الكبيرة (LLMs) على الشبكة المظلمة دون أي قيود أو ضوابط تمنع الاستخدام الخبيث، وتشكل خطرًا أمنيًا جسيمًا على مستوى النماذج اللغوية الكبيرة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text39" xml:space="preserve">
+    <value>أسوأ جزء في هجمات التصيد التي يقوم بها الذكاء الاصطناعي؟</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text4" xml:space="preserve">
+    <value>نعم. كل هذا بدأ عندما وقع إطار اختبار الاختراق البريء، أو أداة اختبار الاختراق التي تُستخدم غالبًا لفحص الأمان، في أيدي القراصنة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text40" xml:space="preserve">
+    <value>إذا كان هؤلاء المهاجمون عازمين فعلاً على استهدافك، فيمكنهم تخصيص رسائل البريد الإلكتروني بدقة، وإرسال وكلاء ذكاء اصطناعي للبحث في حساباتك على وسائل التواصل الاجتماعي وجمع كل ما يتعلق بوجودك على الإنترنت.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text41" xml:space="preserve">
+    <value>ستبدو الرسالة شخصية للغاية لدرجة أنك قد تُقنع نفسك خطأً بأنك فعلاً اشتركت في شيء ما ونسيت ذلك.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text42" xml:space="preserve">
+    <value>٤: التهديدات السيبرانية بالتزييف العميق وقصة الصوت الذي بلغت قيمته 35 مليون دولار:</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text43" xml:space="preserve">
+    <value>لقد جعل الذكاء الاصطناعي في الجرائم السيبرانية استعارة «وضع الكلمات في فمك» حقيقةً واقعية.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text44" xml:space="preserve">
+    <value>نعم. كل ما يحتاجه هؤلاء المهاجمون هو تسجيل صوتي أو مقطع فيديو مدته ثلاث ثوانٍ فقط. وبمجرد إدخاله إلى الذكاء الاصطناعي التوليدي، يقوم حرفيًا بمحاكاة كل ما يخصك. بعد ذلك، لا يحتاج المهاجم إلا إلى إعداد نص مناسب.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text45" xml:space="preserve">
+    <value>وإذا كنت تعتقد أن قطع الاتصال بجميع حساباتك على وسائل التواصل الاجتماعي، وحذف صوتك من البريد الصوتي، والعيش مثل «باتريك» تحت صخرة يمكن أن ينقذك من تهديدات التزييف العميق السيبرانية، فقد ترغب في التفكير مرة أخرى.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text46" xml:space="preserve">
+    <value>في إحدى حوادث الهجمات الإلكترونية المدعومة بالذكاء الاصطناعي عام 2021، ووفقًا لشركة IBM، تم تنفيذ هجوم بتزييف صوتي عميق (التزييف الصوتي العميق)</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text47" xml:space="preserve">
+    <value>في حادثة تهديدات سيبرانية باستخدام التزييف العميق، قام المهاجم — والذي تَبيّن أنه انتحل شخصية المدير — بطلب من الموظف تحويل 35 مليون دولار إلى حساب معيّن. خمن ماذا حدث؟في حادثة تهديد سيبراني تعتمد على التزييف العميق، طلب المهاجم — الذي قيل إنه انتحل صفة المدير — من الموظف تحويل 35 مليون دولار إلى حساب معيّن. خمن ماذا حدث؟</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text48" xml:space="preserve">
+    <value>الموظف الساذج وعديم الخبرة صدّق المهاجم، وخسرت الشركة 35 مليون دولار بهذه البساطة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text49" xml:space="preserve">
+    <value>تطوّرت هجمات التصيّد الاحتيالي المدعومة بالذكاء الاصطناعي، وفي عام 2024 حاول أحد المهاجمين تنفيذ هجوم عبر فيديو مُزيّف بتقنية التزييف العميق، حيث تمّت محاكاة فيديو يظهر وكأنه للمدير المالي (CFO) للشركة، وتمكّن من إقناع أحد الموظفين بتحويل 25 مليون دولار إلى المحتال.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text5" xml:space="preserve">
+    <value>ما كان يُستخدم في البداية من قِبل المخترقين الأخلاقيين لاختبار الأمان، أصبح الآن يُستَخدم من قِبل القراصنة والمهاجمين لشنّ هجمات القوة الغاشمة واختراق أنظمتك.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text50" xml:space="preserve">
+    <value>تذكّر المقولة: «الرؤية تصديق». أمّا الآن، وفي مستقبل الأمن السيبراني عام 2026، فالرؤية لم تعد كافية ما لم يكن الشخص حاضرًا بنفسه.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text51" xml:space="preserve">
+    <value>الهجمات السيبرانية المدفوعة بالذكاء الاصطناعي: CVE الجني وأدوات الاختراق الذاتية الخاصة به:</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text52" xml:space="preserve">
+    <value>هذا مثال واضح على كيف يمكن لأضعف ترس في العجلة أن يقلب المركبة بأكملها. لكن في مجال الأمن السيبراني، يتم نشر هذه الثغرات ويُطلق عليها اسم الثغرات ونقاط التعرض الشائعة (Common Vulnerabilities and Exposures – CVEs).</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text53" xml:space="preserve">
+    <value>تتم كتابة هذه المنشورات أو التقارير من قبل خبراء أمن يحددون الثغرات الرئيسية، ويصفونها، ويمنحونها أرقامًا، ويوثقونها، ويقومون بفهرستها، وتكون هذه المعلومات متاحة للعامة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text54" xml:space="preserve">
+    <value>هذا مشروع بحثي آخر رحّب بالجانب المظلم، وللأسف حوّلت أدوات الاختراق الذاتية هذه البيانات العامة الخاصة بالسلامة إلى سلاح. فقد أخذ المهاجمون بيانات ومعلومات هذه الثغرات (CVE) واستخدموا وكيلاً مدعومًا بالذكاء الاصطناعي لتطوير ما يُعرف بـ«جنيّ الثغرات (CVE Genie)».</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text55" xml:space="preserve">
+    <value>والآن، ما قام به هذا العامل هو أنه زوّد النموذج اللغوي الكبير (LLM) ببيانات CVE، فقام النموذج بمراجعة جميع أوصاف المشكلات، واستخلاص التفاصيل الجوهرية منها، ثم وضع خطة عمل، وبعد ذلك أعاد حزمة هذه المعلومات كاملة إلى الجني.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text56" xml:space="preserve">
+    <value>يقوم هذا «المارد» بعد ذلك بمعالجة جميع نقاط الضعف، ثم يبتكر شيفرة الاستغلال لصالح المهاجمين.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text57" xml:space="preserve">
+    <value>كان هذا ناجحًا بنسبة 51٪ تقريبًا، وهل تعرف ماذا يعني ذلك بالنسبة للهجمات الإلكترونية المدعومة بالذكاء الاصطناعي؟</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text58" xml:space="preserve">
+    <value>هذا يعني أن أي شخص يمتلك حدًا أدنى فقط من الفهم لكيفية عمل البرمجة يمكنه بسهولة استخدام هذه المعلومات ونشر وكيل ذكاء اصطناعي تحت تصرّفه لاستغلال الأنظمة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text59" xml:space="preserve">
+    <value>لا تتجاوز تكلفة ذلك 3 دولارات (أي ثمن علبة من مشروب Kool‑Aid)، وهذا يخفض حاجز الدخول بشكل كبير لدرجة أن أي شخص لديه معرفة أساسية بالبرمجة يمكنه شنّ هجمات إلكترونية متقدمة مدعومة بالذكاء الاصطناعي.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text6" xml:space="preserve">
+    <value>ينشر المهاجمون وكلاء ذكاء اصطناعي مستقلين مقترنين بنموذج لغوي كبير (LLM). يعمل الاثنان معًا بتناغم، حيث يتولى وكيل الذكاء الاصطناعي تنفيذ المهمة، بينما يزوّده النموذج اللغوي الكبير بالمعلومات اللازمة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text60" xml:space="preserve">
+    <value>٦: الهجمات الإلكترونية المدعومة بالذكاء الاصطناعي — الزعيم النهائي أو سلسلة القتل (Kill Chain):</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text61" xml:space="preserve">
+    <value>تعرّف على الزعيم الأخير للذكاء الاصطناعي في الجرائم السيبرانية: سلسلة القتل المؤتمتة بالكامل.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text62" xml:space="preserve">
+    <value>إذا كنت تظن أن هذا لم يحدث بعد، فهو بالفعل قيد التنفيذ بينما تقرأ هذا المقال.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text63" xml:space="preserve">
+    <value>تشتهر هذه الهجمات الإلكترونية المدعومة بالذكاء الاصطناعي باستغلال أنظمة مثل أنثروبيك (Anthropic) لتنفيذ عمليات شرسة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text64" xml:space="preserve">
+    <value>في هذا النوع من الهجمات، يتصرّف وكيل الذكاء الاصطناعي كاستراتيجي بارع، ويجري أبحاثًا مستقلة لتحديد الأهداف عالية القيمة، ويحلّل البيانات الحساسة، بل ويصمّم هويات مزيفة لإخفاء أي آثار أو خيوط قد تقود إليه.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text65" xml:space="preserve">
+    <value>تُعزّز هذه العوامل الهجمات السيبرانية المدفوعة بالذكاء الاصطناعي من خلال اتخاذ قرارات اقتصادية دقيقة أيضًا، وذلك عبر تحليل القيمة المالية للضحية والأصول التي يمتلكها بدقة، ثم تحديد مبلغ الفدية المطلوب بعناية ليكون مجزيًا بما يكفي، وفي الوقت نفسه منخفضًا بما يدفع الضحية إلى الاضطرار للدفع.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text66" xml:space="preserve">
+    <value>وأنت كنت تظن أن شريكك السابق بارع في التلاعب بك؟</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text7" xml:space="preserve">
+    <value>وهنا يصبح الأمر أكثر إثارة للاهتمام؛ إذ تقود هذه الهجمات الإلكترونية المدعومة بالذكاء الاصطناعي وكلاءُ ذكاء اصطناعي يقومون بتحديد صفحات تسجيل الدخول وتحليل كود HTML فورًا لاستخراج حقول بيانات الاعتماد ونماذج الدخول، ومحاولة التقاط معرّفات المستخدمين وكلمات المرور ورموز التحقق لمرة واحدة (OTPs).</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text8" xml:space="preserve">
+    <value>الآن وبعد جمع المعلومات، توجد طريقتان رئيسيتان لتنفيذ الهجمات.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text9" xml:space="preserve">
+    <value>هجمات القوة الغاشمة</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H2_Text1" xml:space="preserve">
+    <value>على العكس من ذلك، فإن مستقبل الأمن السيبراني في عام 2026 مُعرّض للخطر، وقد تجاوزنا مرحلة الاعتماد على الجدران النارية وبرامج مكافحة الفيروسات التقليدية باعتبارها حماية «كافية».</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H2_Text2" xml:space="preserve">
+    <value>مع ازدياد الهجمات السيبرانية المدفوعة بالذكاء الاصطناعي إبداعًا واستقلاليةً، وتحوّلها إلى هجمات متعددة الأشكال وذكية اقتصاديًا، فإن الفجوة بين «القراصنة النخبة» و«المبرمجين الهواة» آخذة في التقلّص.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H2_Text3" xml:space="preserve">
+    <value>نشهد تحوّلًا هائلًا في الهجمات السيبرانية، حيث يتفوّق الذكاء الاصطناعي في الجرائم السيبرانية وسرعة تنفيذه للهجمات على زمن استجابة البشر.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_H2_Text4" xml:space="preserve">
+    <value>ومع ذلك، فهذه ليست معركة خاسرة. لقد حان الوقت للتفكير بعقلية المخترق لهزيمة المخترق، ولكن بتقنيات أفضل وفهم أعمق.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Heading1" xml:space="preserve">
+    <value>إذا كنت لا تزال تقرأ هذا، فإليك أخطر ٦ هجمات إلكترونية مدعومة بالذكاء الاصطناعي والأساليب المستخدمة حاليًا.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Heading2" xml:space="preserve">
+    <value>فجر الذكاء الاصطناعي الجيد في مواجهة الذكاء الاصطناعي السيّئ:</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Summary" xml:space="preserve">
+    <value>تتذكر عندما قال أرني: «سأعود!» في فيلم المدمّر. نعم، لقد عاد بالفعل، لكن الأمر ليس هوليووديًا كما قد تتخيل. فـ«الفضاء السيبراني» يواجه تهديدًا أخطر بكثير من روبوتات سكاي نت المتمردة التي تسعى للسيطرة على العالم وفق أجندتها الخاصة. نحن نتحدث هنا عن هجمات إلكترونية مدعومة بالذكاء الاصطناعي.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Text1" xml:space="preserve">
+    <value>تتذكر عندما قال أرني: «سأعود!» في فيلم المدمّر. لقد عاد بالتأكيد، لكن الأمر ليس هوليووديًا كما تعتقد. يحتوي "الفضاء السيبراني" على تهديد أشد بكثير من روبوتات سكاي نت المتمردة التي تسعى للسيطرة على العالم وفق أجندتها الخاصة. نحن نتحدث هنا عن هجمات إلكترونية مدعومة بالذكاء الاصطناعي.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Text2" xml:space="preserve">
+    <value>حسنًا، لقد حاول أرني تحذيرنا، ومع اقترابنا بهدوء من عام 2026، أصبحت التحذيرات واقعًا ملموسًا، وأصبح الخيال الآن حقيقة.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Text3" xml:space="preserve">
+    <value>لم يمضِ سوى بضعة أيام على عام 2026، وقد شهدنا استهداف شركات الأسلحة الروسية بهجمات إلكترونية مدعومة بالذكاء الاصطناعي، إلى جانب حوادث بارزة مثل هجوم BSOD لحملة ClickFix واختراق NordVPN.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Text4" xml:space="preserve">
+    <value>من الآمن القول إن مستقبل أمن المعلومات في 2026 يلوح في الأفق محملاً بمخاطر مرتبطة بنماذج اللغة الكبيرة، وتهديدات للبيانات الشخصية والأمن، وهجمات الفدية (برامج الفدية)، والعديد من التحديات الأخرى.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Text5" xml:space="preserve">
+    <value>إذا كنت تعتقد أن جدار حماية وبرنامج مضاد للفيروسات كافيان لإيقاف هذه الهجمات، فمن المحتمل أنك لم تتجاوز بعد مرحلة  ويندوز فيستا، وحان الوقت لتفعل ذلك.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Text6" xml:space="preserve">
+    <value>هذا العام يتطلب تأملًا جادًا في الأمن السيبراني وفريقًا جاهزًا لمواجهة الجرائم السيبرانية الناتجة عن الذكاء الاصطناعي الضار.</value>
+  </data>
+  <data name="Blog_EYNTKAAPCA_Title" xml:space="preserve">
+    <value>كل ما تحتاج لمعرفته عن الهجمات الإلكترونية المدعومة بالذكاء الاصطناعي في عام 2026</value>
+  </data>
   <data name="Blog_Feature_Conclusion_Text1" xml:space="preserve">
     <value>&lt;a href='https://www.axcrypt.net/information/features'&gt; تحقق من صفحة ميزات اكسكربت لمعرفة ما نقدمه &lt;/a&gt;</value>
   </data>
@@ -5427,11 +5802,30 @@
   <data name="Blog_FEFBI_Title" xml:space="preserve">
     <value>تشفير الملفات في الصناعة المالية والمصرفية</value>
   </data>
+  <data name="Blog_FILUTPDADBAAAATH_Conclusion_Heading" xml:space="preserve">
+    <value>لا تنتظر حدوث اختراق — قم بتأمين ملفاتك باستخدام .أكس كريبت</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_Conclusion_Text1" xml:space="preserve">
+    <value>تعرّضت جامعة هارفارد لهجومين؛ وقد تكون جامعة برينستون هدفًا آخر مجددًا، بينما تواجه جامعة بنسلفانيا الآن أزمة هوية بسبب تلك الرسائل الإلكترونية الخبيثة التي تم إرسالها.</value>
+  </data>
   <data name="Blog_FILUTPDADBAAAATH_Conclusion_Text2" xml:space="preserve">
     <value>بياناتك ملكٌ لك، وليست للبيع.</value>
   </data>
+  <data name="Blog_FILUTPDADBAAAATH_Conclusion_Text3" xml:space="preserve">
+    <value>ابدأ هذه الممارسة اليوم، سواء كان التشفير للاستخدام الشخصي أو لأعمالك التجارية. لأنه مع أكس كريبت، لا تحتاج لأن تكون خبيرًا لتطبيق خصوصية وأمان رقمي قوي. كل ما تحتاجه هو حماية AES-256-bit مع إضافات الأمان متعددة الطبقات من أكس كريبت لمنع بياناتك من الوقوع في الأيدي الخاطئة.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_Conclusion_Text4" xml:space="preserve">
+    <value>حمّل أكس كريبت الآن.
+قم بتشفير بياناتك، وحمايتها، والتصدّي للهجمات الرقمية ابتداءً من الآن.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_Conclusion_Text5" xml:space="preserve">
+    <value>تفضّل بزيارة صفحتنا أكس كريبت لاختيار خطة الأمان المثالية لك.</value>
+  </data>
   <data name="Blog_FILUTPDADBAAAATH_Conclusion_Text6" xml:space="preserve">
     <value>يمكنك أيضًا التسجيل هنا والبدء في الفترة التجريبية المجانية اليوم.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_H1_Text1" xml:space="preserve">
+    <value>تضم جامعة رابطة الـ IVY نحو 20,000 عضو هيئة تدريس وموظف، و24,500 طالب في برامج البكالوريوس والدراسات العليا، و400,000 خريج حول العالم.</value>
   </data>
   <data name="Blog_FILUTPDADBAAAATH_H1_Text10" xml:space="preserve">
     <value>تمكنت جامعة هارفارد من منع أي وصول إضافي للحماية من أي نشاط غير مصرح به، كما لجأت إلى شريك خارجي في الأمن السيبراني والسلطات القانونية لمنع وقوع أي حوادث أخرى.</value>
@@ -5463,6 +5857,15 @@
   <data name="Blog_FILUTPDADBAAAATH_H2_Text1" xml:space="preserve">
     <value>بينما تعرّضت جامعة هارفارد لهجومين في نفس العام، واجهت جامعات أخرى في رابطة الـIvy League، مثل جامعة بنسلفانيا وبرينستون، خروقات مماثلة أيضًا.</value>
   </data>
+  <data name="Blog_FILUTPDADBAAAATH_H2_Text10" xml:space="preserve">
+    <value>وقع اختراق قاعدة بيانات جامعة برينستون في 10 نوفمبر، وكان هذا أيضًا هجوم تصيّد هاتفي.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_H2_Text11" xml:space="preserve">
+    <value>على الرغم من أن الاختراق استمر لأقل من 24 ساعة، إلا أن له تأثيرًا طويل الأمد، وذلك لأن الاختراق كشف معلومات تتعلق بأنشطة جمع التبرعات والتبرعات.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_H2_Text12" xml:space="preserve">
+    <value>تقول المصادر إن الهجوم عرّض المعلومات الشخصية لنحو 100,000 شخص للخطر.</value>
+  </data>
   <data name="Blog_FILUTPDADBAAAATH_H2_Text13" xml:space="preserve">
     <value>وفقًا لمصادر أخرى، فقد ذكر أحدها أن القراصنة قد حصلوا على معلومات كافية وأكثر لارتكاب سرقة الهوية وإلحاق الضرر بآلاف الأفراد.</value>
   </data>
@@ -5484,8 +5887,17 @@
   <data name="Blog_FILUTPDADBAAAATH_H2_Text2" xml:space="preserve">
     <value>خروقات بيانات جامعة بنسلفانيا</value>
   </data>
+  <data name="Blog_FILUTPDADBAAAATH_H2_Text3" xml:space="preserve">
+    <value>وقع الاختراق في 30 أكتوبر. استخدم المهاجمون حساب الدخول الموحد (SSO) الخاص بأحد الموظفين عبر PennKey لاختراق نظام Salesforce التابع للجامعة، ومنصة تحليلات Qlik، وأنظمة ذكاء الأعمال SAP، وملفات شيربوينت.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_H2_Text4" xml:space="preserve">
+    <value>سرق المخترقون 1.71 جيجابايت من المستندات الداخلية من منصتَي شيربوينت وBox Storage، والتي تضمنت مستندات، ومعلومات مالية، ومواد تسويقية خاصة بالخريجين.</value>
+  </data>
   <data name="Blog_FILUTPDADBAAAATH_H2_Text5" xml:space="preserve">
     <value>ادعاء آخر في عملية السرقة الرقمية هو أنهم ربما سرقوا ما يقارب 1.2 مليون سجل من المعلومات الشخصية (PII)، بما في ذلك تاريخ التبرعات وتفاصيل ديموغرافية أخرى.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_H2_Text6" xml:space="preserve">
+    <value>كما أرسل المخترقون رسائل بريد إلكتروني جماعية من نطاق Penn.edu، لم تقتصر على رسائل مسيئة فحسب، بل أدّت أيضًا إلى كشف عشرات الآلاف من ملفات الجامعة الداخلية على منتديات الإنترنت.</value>
   </data>
   <data name="Blog_FILUTPDADBAAAATH_H2_Text7" xml:space="preserve">
     <value>رد الجامعة على الهجوم:</value>
@@ -5544,11 +5956,20 @@
   <data name="Blog_FILUTPDADBAAAATH_H5_Text3" xml:space="preserve">
     <value>كيف يعمل التشفير</value>
   </data>
+  <data name="Blog_FILUTPDADBAAAATH_H5_Text4" xml:space="preserve">
+    <value>التشفير، إذا تم تنفيذه بشكل صحيح، يعني أساسًا أنه حتى إذا تمكن شخص ما من الوصول إلى جهازك أو القرص الصلب الخاص بك، فلن يجد سوى نص مشفر غير قابل للقراءة وعديم الفائدة. على سبيل المثال، يُعد تشفير AES-256-bit من أقوى وسائل التشفير وأكثرها أمانًا وموثوقية. والأفضل من ذلك؟ يقدم لك AxCrypt هذا، بالإضافة إلى طبقات أمان إضافية مثل حماية بكلمة مرور ومنع تسرب البيانات.</value>
+  </data>
   <data name="Blog_FILUTPDADBAAAATH_H5_Text5" xml:space="preserve">
     <value>سواء كنت تبحث عن خيارات آمنة لمشاركة الملفات مثل أوراق الملكية، والمستندات القانونية، والمواد البحثية، وغيرها من الوثائق، فإن هذا التشفير يُعد درعًا صامتًا لكنه قوي يحمي خصوصيتك وراحة بالك.</value>
   </data>
   <data name="Blog_FILUTPDADBAAAATH_H6_Text1" xml:space="preserve">
     <value>ليست كل الهجمات بحاجة إلى ثغرة رقمية. فبعضها يحتاج فقط إلى شخص ساذج ضمن الفريق، أو صوت مألوف على الطرف الآخر من الخط.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_H6_Text10" xml:space="preserve">
+    <value>الآن هذا مجرد مثال على كيف يمكن لغرائزك، إلى جانب برنامج تشفير صفر المعرفة، أن ينقذك من أن تكون عنوان الاختراق التالي.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_H6_Text2" xml:space="preserve">
+    <value>إليك قاعدة بسيطة لاكتشاف هجوم التصيد الصوتي(التصيد الصوتي قبل أن يتمكن من السيطرة عليك.</value>
   </data>
   <data name="Blog_FILUTPDADBAAAATH_H6_Text3" xml:space="preserve">
     <value>هل تلقيت مكالمة عشوائية في العمل؟ تبدو مألوفة جدًا، لكن هناك شيء غير مريح؟ فقط تحقّق من المكالمة بسؤال بسيط، غير ضار، وشخصي لا يعرف إجابته إلا أنت والشخص الحقيقي الذي يتم انتحال هويته.</value>
@@ -5562,8 +5983,14 @@
   <data name="Blog_FILUTPDADBAAAATH_H6_Text6" xml:space="preserve">
     <value>وهنا بالضبط يبدأ حدوث الاختراق</value>
   </data>
+  <data name="Blog_FILUTPDADBAAAATH_H6_Text7" xml:space="preserve">
+    <value>إمّا أن تقوم جين، من قسم الحسابات، بإعطاء الملف للمُنتحلّ فتتسبّب في إفلاس الشركة، أو أن تمنع هجوم تصيّد صوتي (التصيد الصوتي) وتحصل على ترقية وزيادة كبيرة جدًا في الراتب تقديرًا لهذا التصرّف الذكي الذي قامت به.</value>
+  </data>
   <data name="Blog_FILUTPDADBAAAATH_H6_Text8" xml:space="preserve">
     <value>**جين: بالتأكيد، سأفعل ذلك. لكن بالمناسبة، كيف سارت زيارة طبيب الأسنان؟ هل قاموا بخل</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_H6_Text9" xml:space="preserve">
+    <value>الآن سيقوم المنتحل بالرد، فقط لمجاراة الأمر إلى أن يتمكّن من الحصول على ما يبحث عنه. لكن جين أذكى من ذلك؛ فهي تُنهي المكالمة فورًا وتُبلغ السيد ديفيد، الذي يقضي إجازته في بورا بورا مع عائلته.</value>
   </data>
   <data name="Blog_FILUTPDADBAAAATH_Heading1" xml:space="preserve">
     <value>حادث اختراق بيانات جامعة هارفارد وما حدث باختصار.</value>
@@ -5583,11 +6010,24 @@
   <data name="Blog_FILUTPDADBAAAATH_Heading6" xml:space="preserve">
     <value>طبقة إضافية من الأمان، والتشفير، واختبار بشري بسيط يمكن أن يكشف الجهة التي تقوم بتسليمها معلوماتك الحساسة.</value>
   </data>
+  <data name="Blog_FILUTPDADBAAAATH_Summary" xml:space="preserve">
+    <value>جامعة من رابطة الـ IVY تضم 20,000 عضو هيئة تدريس وموظف، و24,500 طالب في برامج البكالوريوس والدراسات العليا، و400,000 خريج حول العالم. تعرضت قواعد بيانات هارفارد الخاصة بالخريجين والمتبرعين والطلاب وأعضاء هيئة التدريس للاختراق.
+وهذا يرسل رسالة واضحة جدًا، وهي: هؤلاء القراصنة لا يسعون فقط للوصول إلى البيانات المالية، بل يريدون الهويات، والشبكات، والنفوذ، والسلطة، وتفاصيل ملفات الطلاب المهمة.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_Text1" xml:space="preserve">
+    <value>لم يتطلّب الأمر أكثر من مكالمة هاتفية بصوت مألوف ومقنع، ومهاجم خبيث ينتحل صفة جهة داخلية، والشخص المناسب من داخل المؤسسة على الطرف الآخر من الخط. هكذا حصل مخترق ماهر على «ضحيته» عبر هجوم التصيّد الصوتي (Vishing).</value>
+  </data>
   <data name="Blog_FILUTPDADBAAAATH_Text2" xml:space="preserve">
     <value>تعرّف على نموذج أعمال الجرائم الإلكترونية الجديد كليًا: «التصيد الصوتي </value>
   </data>
+  <data name="Blog_FILUTPDADBAAAATH_Text3" xml:space="preserve">
+    <value>فعل انتحال صفة جهة مألوفة لإثارة الشفقة أو الخوف أو حتى التعاطف من أجل الحصول على معلومات حسّاسة مثل أرقام الحسابات البنكية، وأرقام التحقق لمرة واحدة (OTP)، وكلمات المرور، وغيرها.</value>
+  </data>
   <data name="Blog_FILUTPDADBAAAATH_Text4" xml:space="preserve">
     <value>يلجأ القراصنة والمهاجمون إلى هذا النوع المقنع من الاحتيال باعتباره شكلاً من أشكال الإقناع المُسلَّح.</value>
+  </data>
+  <data name="Blog_FILUTPDADBAAAATH_Text5" xml:space="preserve">
+    <value>الألفة – ثغرة نفسية تتجاوز بسهولة جدران الحماية خزانة بت وبرامج مكافحة الفيروسات، وتغرس مخالبها عميقًا في ثقة الإنسان الساذجة. إنها بداية جميع الاختراقات وعمليات الاحتيال وهجمات الفدية. فالألفة ترسّخ الثقة، والثقة الرقمية تتحول إلى شيء يشبه: «أعرف هذا الشخص… دعني أقدّم له ما يطلبه».</value>
   </data>
   <data name="Blog_FILUTPDADBAAAATH_Text6" xml:space="preserve">
     <value>كلما أصبحت تفاعلاتك الرقمية أكثر ألفة، كلما قلت شكوكك، وهذا بالضبط نوع الفخاخ التي يتغذى عليها هؤلاء المهاجمون.</value>
@@ -6739,6 +7179,9 @@
   </data>
   <data name="Blog_HQHCYP_H6_Conclusion_Text5" xml:space="preserve">
     <value>قم بحماية بياناتك من خروقات البيانات المدمرة وهجمات برامج الفدية وتسلل البيانات من خلال تنفيذ إجراءات الأمان القوية من اكسكربت. تحكم في ملفاتك ومجلداتك وقم بإدارة أذونات الوصول داخل مؤسستك باستخدام لوحة التحكم سهلة الاستخدام والحائزة على جوائز.</value>
+  </data>
+  <data name="Blog_HQHCYP_H6_Conclusion_Text6" xml:space="preserve">
+    <value>قم بزيارة صفحة الأسعار لدينا للاطلاع على خيارات الاشتراك. جرّب أكسكريبت اليوم مع تجربة مجانية لمدة ١٤ يومًا وارتقِ بأمان بياناتك إلى المستوى التالي. سجّل الآن بالنقر هنا.</value>
   </data>
   <data name="Blog_HQHCYP_Heading1" xml:space="preserve">
     <value>كلمات المرور بالأرقام</value>
@@ -9700,8 +10143,17 @@
   <data name="Blog_TBGTEFAF_Conclusion_Heading" xml:space="preserve">
     <value>اشفر الآن، وابقَ أكثر أمانًا من أي وقت مضى</value>
   </data>
+  <data name="Blog_TBGTEFAF_Conclusion_Text1" xml:space="preserve">
+    <value>لنفترض أن الاختراق قد بدأ بالفعل، والأسوأ من ذلك أنه بدأ بملف واحد غير مُشفّر تمكّن بهدوء من تجاوز ضوابط انعدام الثقة (Zero Trust) وإدارة الهويات والوصول (IAM) ومنع فقدان البيانات (DLP) قبل أن تنطلق أي إنذارات. المهاجم موجود الآن داخل نظامك ويمكنه رؤية كل شيء، لكنه لا يستطيع الوصول إلى أي شيء… لماذا؟</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Conclusion_Text2" xml:space="preserve">
+    <value>وذلك بفضل المستوى الدقيق من أمان الملفات الذي تم تطبيقه باستخدام أكسكريبت. فعلى الرغم من اختراق الوصول، تظل الملفات غير قابلة للقراءة ومحكمة الحماية بفضل تشفير 256-بت ونظام الأمان متعدد الطبقات في أكسكريبت.</value>
+  </data>
   <data name="Blog_TBGTEFAF_Conclusion_Text3" xml:space="preserve">
     <value>إذا كانت أهدافك هذا العام 2026 هي تأمين البيانات وتعزيز الأمن الرقمي، فلنتحدث.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Conclusion_Text4" xml:space="preserve">
+    <value>يمكنك البدء في تجربتك المجانية من هنا.</value>
   </data>
   <data name="Blog_TBGTEFAF_H1_Text1" xml:space="preserve">
     <value>لقد تحول التشفير من "إضافة جيدة" إلى "ضرورة لا غنى عنها". </value>
@@ -9709,11 +10161,38 @@
   <data name="Blog_TBGTEFAF_H1_Text10" xml:space="preserve">
     <value>تشفير سلس على مستوى الملفات والمجلدات ومحركات الأقراص، سهل الاستخدام ومناسب للمبتدئين.</value>
   </data>
+  <data name="Blog_TBGTEFAF_H1_Text11" xml:space="preserve">
+    <value>أداة تضمن أمان بياناتك أثناء نقلها وأثناء تخزينها</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H1_Text12" xml:space="preserve">
+    <value>تشفير أثناء التنقّل، وهذا يعني أنه يمكنك تشفير الملفات على هاتفك وكذلك على جهازك المحمول أو الكمبيوتر المكتبي.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H1_Text13" xml:space="preserve">
+    <value>تطبيق خفيف الوزن ولكنه قوي جدًا يمكنه تشفير بياناتك فورًا في لمح البصر.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H1_Text14" xml:space="preserve">
+    <value>لا يتطلب معرفة برمجية متقدمة، فقط قم بالسحب والإفلات لإجراء التشفير بسهولة.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H1_Text15" xml:space="preserve">
+    <value>شارك مفاتيحك بأمان مع مستخدمي أكس كريبت الموثوقين الآخرين.</value>
+  </data>
   <data name="Blog_TBGTEFAF_H1_Text16" xml:space="preserve">
     <value>المنصة المثالية للفرق للتعاون بأمان وحماية. </value>
   </data>
+  <data name="Blog_TBGTEFAF_H1_Text17" xml:space="preserve">
+    <value>أما بالنسبة للشركات التي تدير المجموعات، فلديك تحكّم كامل ورؤية واضحة عند مراقبة تدفّق المعلومات والبيانات داخل مؤسستك. اطّلع على أدلّتنا لمعرفة المزيد.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H1_Text18" xml:space="preserve">
+    <value>مع أكسكريبت إلى جانبك في عام 2026، ونصائحنا حول أفضل طرق التشفير للمبتدئين، يمكنك أن تطمئن لأنك لا تكتفي بردّ الفعل، بل تقوم بالمنع والحماية والتأمين والسيطرة على بياناتك ومعلوماتك.</value>
+  </data>
   <data name="Blog_TBGTEFAF_H1_Text19" xml:space="preserve">
     <value>دعونا نرى الآن </value>
+  </data>
+  <data name="Blog_TBGTEFAF_H1_Text2" xml:space="preserve">
+    <value>إنه يعمل أساسًا كزيك الرقمي الواقي من المخترقين، والمهاجمين، والمتلصصين، وغيرهم من الفاعلين الضاري</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H1_Text3" xml:space="preserve">
+    <value>هذا العام، قد تكون لحظة «OOPS» مكلفة للغاية. فقد أصبحت خروقات البيانات، وهجمات برامج الفدية، ورسائل التصيّد الاحتيالي، والتصيّد الصوتي (Vishing)، وغيرها من التهديدات، من أبرز ما يميز هذا الموسم في مجال الأمن السيبراني.</value>
   </data>
   <data name="Blog_TBGTEFAF_H1_Text4" xml:space="preserve">
     <value>الإجراء التفاعلي أو البيان العلني لن يحل المشكلة أو يقلل من الضرر. أنت بحاجة إلى أداة تشفير استباقية ومفصلة مع خطة لحماية ملفاتك ومجلداتك. </value>
@@ -9721,14 +10200,46 @@
   <data name="Blog_TBGTEFAF_H1_Text5" xml:space="preserve">
     <value>وبما أنك قد وصلت بالفعل إلى هذا الحد مع هذا المقال، فالأفضل أن تقرأ هذا أيضًا. </value>
   </data>
+  <data name="Blog_TBGTEFAF_H1_Text6" xml:space="preserve">
+    <value>أنت بحاجة إلى أكس كريبت. بلا نقاش.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H1_Text7" xml:space="preserve">
+    <value>الدخول إلى عام 2026 بدون أكس كريبت ليس فكرة جيدة. نحن مصنفون من بين أفضل أدوات التشفير الحديثة للبيانات الشخصية. يعمل أكس كريبت على مستوى دقيق جدًا، وهذا يعني أن ملفاتك ومجلداتك ومحركاتك مزودة</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H1_Text8" xml:space="preserve">
+    <value>في عام 2026، تحتاج بياناتك إلى أكثر من مجرد «تشفير جيد». إنها تحتاج إلى أداة تشفير تأتي مع خطة واضحة.</value>
+  </data>
   <data name="Blog_TBGTEFAF_H1_Text9" xml:space="preserve">
     <value>نحن نتحدث عن: </value>
+  </data>
+  <data name="Blog_TBGTEFAF_H2_Text1" xml:space="preserve">
+    <value>لقد ولّت الأيام التي كنا نستطيع فيها القول بفخر: « بيت لوكر هو كل ما أحتاجه»، أو «نحن نحمي الملفات والمجلدات ومحركات الأقراص بكلمات مرور».</value>
   </data>
   <data name="Blog_TBGTEFAF_H2_Text2" xml:space="preserve">
     <value>الحقيقة هي</value>
   </data>
   <data name="Blog_TBGTEFAF_H2_Text3" xml:space="preserve">
     <value>الحاوية محمية، لكن المحتويات ليست كذلك، وهذا ما قمنا بإصلاحه. إليك ثلاث طرق لتشفير ملفاتك</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H2_Text4" xml:space="preserve">
+    <value>زر الأمان – قائمة النقر بزر الفأرة الأيمن
+الطريقة الأولى: عبر التطبيق
+1. سجّل الدخول إلى التطبيق.
+2. انقر على Secure من قائمة الصفحة الرئيسية.
+3. حدِّد الملف الذي تريد تشفيره ثم انقر Open. سيتم تشفير الملف.
+الطريقة الثانية: السحب والإفلات
+1. انقر على الملف الذي تريد تشفيره.
+2. اسحبه وأفلته داخل التطبيق بعد تسجيل الدخول.
+3. سيتم تشفير الملف فورًا.
+الطريقة الثالثة: النقر بزر الفأرة الأيمن
+1. انقر على الملف الذي ترغب في تشفيره.
+2. انقر بزر الفأرة الأيمن على الملف.
+3. انتقل إلى أكسكريبت ثم اختر تشفير.
+
+</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H2_Text5" xml:space="preserve">
+    <value>إليك ثلاث طرق لتشفير مجلد باستخدام أكس كريبت:</value>
   </data>
   <data name="Blog_TBGTEFAF_H2_Text6" xml:space="preserve">
     <value>تمامًا مثل تشفير الملفات، تأتي حماية المجلدات بميزة إضافية</value>
@@ -9739,6 +10250,22 @@
   <data name="Blog_TBGTEFAF_H2_Text8" xml:space="preserve">
     <value>توفر كل طريقة وسيلة موثوقة لضمان بقاء بياناتك سرية ولا يمكن الوصول إليها إلا من قِبل الأشخاص الذين يمتلكون كلمة المرور أو المفتاح الصحيح. إن فهم هذه الخيارات سيساعدك على اختيار أفضل تقنية تشفير تناسب احتياجاتك.</value>
   </data>
+  <data name="Blog_TBGTEFAF_H2_Text9" xml:space="preserve">
+    <value>إضافة مجلّد إلى التطبيق
+الطريقة الأولى: الإضافة من داخل التطبيق
+1. انقر على أكسكريبت في الصفحة الرئيسية.
+2. انقر على إضافة، ثم حدِّد المجلّد الخاص بك وقم بتشفيره.
+الطريقة الثانية: السحب والإفلات
+1. انقر على ميزة المجلّد الآمن في الصفحة الرئيسية.
+2. اسحب المجلّد وأفلته داخل التطبيق ليتم تشفيره.
+الطريقة الثالثة: التأمين عبر النقر بزر الفأرة الأيمن
+1. تأكّد من أن أكسكريبت يعمل في الخلفية.
+2. ابحث عن المجلّد على سطح المكتب، ثم انقر بزر الفأرة الأيمن واختر أكسكريبت، وبعدها تشفير.
+</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H3_Text1" xml:space="preserve">
+    <value>عام ٢٠٢٦ ليس عامًا للفرص الثانية، وهو بعيد كل البعد عن أن يكون لطيفًا مع البيانات. بينما لا تزال تفكّر في تطبيق التشفير، يكون القراصنة والمهاجمون قد اتخذوا بالفعل خطواتهم الأولى. لقد حان الوقت لرفع مستوى الحماية والانتقال إلى أداة تشفير تعمل على مستوى دقيق ومفصّل.</value>
+  </data>
   <data name="Blog_TBGTEFAF_H3_Text2" xml:space="preserve">
     <value>مع هذا المقال حول كيفية تشفير الملفات والمجلدات، أصبحت الآن تدرك أن المهاجمين والقراصنة والفاعلين الضارين لا ينتظرون دور الميزانية أو الموافقات الداخلية. إنهم يرون الثغرة، ويرون الإهمال، ويستغلون الفرصة عندما يحين الوقت المناسب. </value>
   </data>
@@ -9748,9 +10275,15 @@
   <data name="Blog_TBGTEFAF_Heading1" xml:space="preserve">
     <value>توضيح تشفير الملفات والمجلدات. </value>
   </data>
+  <data name="Blog_TBGTEFAF_Heading2" xml:space="preserve">
+    <value>كيف يمكنك تشفير الملفات بأمان في عام  ٢٠٢٦ باستخدام أكسكريبت؟</value>
+  </data>
   <data name="Blog_TBGTEFAF_Heading3" xml:space="preserve">
     <value>على العكس من ذلك، تتمثل خطة عام 2026 في:
 من السيطرة على الأضرار إلى السيطرة على البيانات:</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Summary" xml:space="preserve">
+    <value>تخيّل هذا: إنه صباح يوم اثنين جميل، ولديك تقييمات الأداء الشهرية جاهزة للإرسال. والآن، عن طريق الخطأ، ضغطت على "الرد على الجميع" في محادثة تضم 100 شخص، وكارين من قسم الحسابات تدرك أنها على وشك أن تُفصل، وكل هذا بينما كنت تقصد إرسالها إلى مديرك فقط وليس إلى كل الموظفين في المكتب.</value>
   </data>
   <data name="Blog_TBGTEFAF_Text1" xml:space="preserve">
     <value>هذا بالضبط ما يحدث عندما تكون لديك ثقة من مستوى الإله أثناء إرسال ملفات غير مشفرة. </value>
@@ -9761,8 +10294,35 @@
   <data name="Blog_TBGTEFAF_Text11" xml:space="preserve">
     <value>ألقِ نظرة على هذا:</value>
   </data>
+  <data name="Blog_TBGTEFAF_Text12" xml:space="preserve">
+    <value>١. عند الحديث عن كمية هائلة، أو بالأحرى فاحشة، من تحويل الثروة الاقتصادية في التاريخ، تتوق شركة Cybersecurity Ventures أن تكاليف الجرائم الإلكترونية العالمية سترتفع بنسبة 15٪ خلال العامين المقبلين، لتصل سنويًا إلى 10.5 تريليون دولار أمريكي هذا العام على مستوى العالم. وتشير المصادر أيضًا إلى أنه من المتوقع أن ترتفع إلى 12 تريليون دولار أمريكي سنويًا بحلول عام 2031.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Text13" xml:space="preserve">
+    <value>٢. أظهرت دراسة استقصائية حديثة أُجريت في أكتوبر 2025 بواسطة Harris Poll لشركة Mastercard أن نحو 13,077 بالغًا في 13 دولة أبدوا أن الشباب أكثر عرضة للتهديدات الإلكترونية والاحتيال عبر الإنترنت. وتشير التقرير إلى أن الكثيرين يشعرون بالحرج من الإبلاغ عن مثل هذه الحوادث، وأن 60٪ يرون أن الاحتيال شائع جدًا لدرجة أنه يبدو لا مفر منه.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Text14" xml:space="preserve">
+    <value>٣. في 2 سبتمبر 2025، تعرضت منصة  لاختراق بيانات كبير أثر على نحو 17.6 مليون سجل تقريبًا. تم كشف بيانات حساسة، بما في ذلك المعلومات الشخصية (PII)، وأرقام الضمان الاجتماعي (SSNs)، والأسماء، والعناوين، وتواريخ الميلاد، وبطاقات الهوية الحكومية، والمعلومات الوظيفية، وبيانات المتصفح، والدخل، وحالة الائتمان. جاء هذا الاختراق نتيجة سوء تكوين السحابة وسرقة بيانات الاعتماد.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Text15" xml:space="preserve">
+    <value>٤. لم يسلم قطاع السفر والسياحة هذا العام أيضًا. فقد أثر اختراق بيانات شركة شركة كانساس للطيران على نحو 5.7 مليون سجل عميل فريد تقريبًا. تم الكشف عن التفاصيل الشخصية، وأرقام برامج المسافر الدائم، والجنس، وتفضيلات الوجبات. وجاء هذا الاختراق نتيجة خرق من طرف ثالث أو سلسلة التوريد عبر هجوم يُعرف بـ «القفز بين الجزر» (Island Hopping).</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Text16" xml:space="preserve">
+    <value>٥. أثر حادث اختراق بيانات ييل نيو هيفن على نحو 5.5 مليون سجل للمرضى تقريبًا. وكان هذا من أكبر اختراقات بيانات قطاع الرعاية الصحية هذا العام. جاء الهجوم على شكل هجوم برمجيات فدية  والوصول غير المصرح به، ولم تتبنَّ أي مجموعة مشهورة في مجال الجرائم الإلكترونية مسؤولية الهجوم علنًا.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Text17" xml:space="preserve">
+    <value>من خلال ذلك، ندرك أن التشفير أمرٌ جيد، لكن التطبيق الصحيح للتشفير أصبح أكثر أهمية في عام 2026.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Text18" xml:space="preserve">
+    <value>إذن، بعد أن تركنا أخطاء التشفير في عام 2025 وراءنا، دعونا نلقي نظرة على كيفية تشفير الملفات بشكل آمن في</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Text2" xml:space="preserve">
+    <value>عام 2026 يقترب بسرعة، وإذا لم تتعلم بعد كيفية تشفير وتأمين بياناتك، فستواجه عاماً صعباً قادماً. الخصوصية وحماية البيانات وحساسيتها أصبحت محور الحديث، ومع جميع اختراقات البيانات التي شهدناها هذا العام، تعلمنا أن الأمان على مستوى الملفات هو ما يحتاجه الجميع في الوقت الحالي.</value>
+  </data>
   <data name="Blog_TBGTEFAF_Text3" xml:space="preserve">
     <value>الخلاصة هي أن الخطأ لم يكن خطأً فعليًا. الخطأ الحقيقي يكمن في بروتوكول الأمان الضعيف، وعدم تنفيذ التشفير، وقلة الجدية فيما يتعلق بممارسات الأمن السيبراني الصحيحة والفعّالة.</value>
+  </data>
+  <data name="Blog_TBGTEFAF_Text4" xml:space="preserve">
+    <value>إذا كنت تعتقد أن عام 2026 يقدم فرصاً ثانية، فأنت مخطئ. نحن بحاجة إلى أدوات تشفير حديثة للبيانات الشخصية، لأنه لنواجه الحقيقة، المجرمون الإلكترونيون يتطورون، ويجب علينا نحن أيضاً أن نتطور. نحن نواجه السيد والسيدة “رانسوموير”، وأبنائهم، وهجمات مُدارة بالذكاء الاصطناعي، و”رانسوموير 5.0</value>
   </data>
   <data name="Blog_TBGTEFAF_Text5" xml:space="preserve">
     <value>سيُنضم أيضًا حقن الأوامر وتسميم الذكاء الاصطناعي إلى الحفلة في عام 2026. </value>
@@ -9772,6 +10332,9 @@
   </data>
   <data name="Blog_TBGTEFAF_Text7" xml:space="preserve">
     <value>هذا ليس كل شيء. </value>
+  </data>
+  <data name="Blog_TBGTEFAF_Text8" xml:space="preserve">
+    <value>لا يعني حقن الأوامر (Prompt Injection) وتسميم الذكاء الاصطناعي حقن الغاليوم في الأجهزة أو تنويم المستخدمين عبر أصوات مألوفة. بل يستخدم المهاجمون أوامر خبيثة للتلاعب بروبوتات الدردشة المؤسسية أو النماذج اللغوية الكبيرة (LLMs)، لتجاوز أنظمة الحماية، وتنفيذ إجراءات غير مصرح بها، أو تسريب البيانات الحساسة والأسرار التجارية.</value>
   </data>
   <data name="Blog_TBGTEFAF_Text9" xml:space="preserve">
     <value>في عالم تنتقل فيه البيانات أسرع من الإشاعات، فإن الطريقة التي ترسل بها المعلومات أهم من الشخص الذي ترسلها إليه.</value>
@@ -11282,6 +11845,9 @@
   <data name="Blog_WENTI_H4_Text3" xml:space="preserve">
     <value>&lt;strong&gt; مشاركة المفاتيح &lt;/ strong&gt; - يسمح لمستخدمي اكسكربت الآخرين بفتح الملفات المؤمنة باستخدام كلمات المرور الخاصة بهم. يمكن للمستخدمين إرسال ملف مشفر عبر البريد الإلكتروني ، مما يعني أنه لا يمكن الوصول إلى الملف إلا باستخدام مفتاح فريد. لمزيد من المعلومات حول مفتاح اكسكربت ، راجع برنامج المشاركة &lt;a href='https://www.youtube.com/watch؟v=TUVWbmiEFSs'&gt; البرنامج التعليمي لمشاركة المفاتيح &lt;/a&gt;</value>
   </data>
+  <data name="Blog_WENTI_H4_Text4" xml:space="preserve">
+    <value>التشفير على الهاتف المحمول – مع تشفير أكسكريبت على الهواتف، يمكنك تأمين بياناتك على ملفات Google Drive وDropbox بنقرة واحدة فقط على أجهزة iOS وAndroid الخاصة بك. جرّب تجربة مجانية لمدة 14 يومًا: حمّل الإصدار الخاص بـ Android.</value>
+  </data>
   <data name="Blog_WENTI_H4_Text5" xml:space="preserve">
     <value>&lt;strong&gt; التخزين السحابي &lt;/ strong&gt; - باستخدام اكسكربت ، من السهل جدًا تحقيق خصوصية البيانات في السحابة. سيجد برنامج اكسكربت تلقائيًا خدمات التخزين السحابية المثبتة على جهاز الكمبيوتر الخاص بك ويقوم بإنشاء مجلد اكسكربت هناك. نحن نسهل عليك عرض الملفات تلقائيًا والحفاظ عليها مؤمنة في هذه المجلدات.</value>
   </data>
@@ -11969,6 +12535,252 @@
   <data name="Blog_WIPM_Title" xml:space="preserve">
     <value>ما هو مدير كلمات المرور؟ ما مدى أمان برنامج إدارة كلمات المرور؟</value>
   </data>
+  <data name="Blog_WPRIDHTS_Conclusion_Heading" xml:space="preserve">
+    <value>لا تنتظر حدوث اختراق لتتخذ إجراءات.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Conclusion_Text1" xml:space="preserve">
+    <value>تولى السيطرة على أمانك الرقمي اليوم، لأنه لا أحد سيفعل ذلك نيابةً عنك. توقف عن إعادة استخدام كلمات المرور واعتمد نظامًا قويًا وآمنًا لإدارة كلمات المرور. حان الوقت لتأمين كل حساب بكلمات مرور فريدة يصعب فك تشفيرها، لأن سقوط كلمة مرور واحدة قد يؤدي إلى سقوط الحسابات المرتبطة بها أيضًا.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Conclusion_Text2" xml:space="preserve">
+    <value>ابدأ تجربتك المجانية مع أكسكريبت اليوم وقم بتنزيل التطبيق.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Conclusion_Text3" xml:space="preserve">
+    <value>تابعونا على قنواتنا في وسائل التواصل الاجتماعي لتظلوا على اطلاع على أحدث الاتجاهات في الأمن السيبراني ولتبقوا دائمًا متقدمين على المخاطر.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text1" xml:space="preserve">
+    <value>كل ما يتطلبه الأمر هو اختراق واحد فقط، وسيحصلون على إمكانية الوصول إلى كل شيء. نعم، كل شيء — حتى صور الإيمو المؤرشفة من عام 2005 التي كنت تأمل ألا تظهر إلى السطح مرة أخرى.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text2" xml:space="preserve">
+    <value>يعتقد معظم المستخدمين أنه كلما كانت كلمة المرور أكثر عشوائية وقوة، أصبح من الآمن إعادة استخدامها. لكن للأسف، هذا غير صحيح. فالهجمات الحديثة تعتمد على تقنيات حديثة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text3" xml:space="preserve">
+    <value>كلمة المرور الخاصة بك قد تكون اسم قطّك الأول مدموجًا مع اسم عائلة جدّتك قبل الزواج، مع آخر رقمين من تاريخ انفصالك، ولجعلها «صعبة» أكثر على المخترقين، أضفتَ حتى رمز `، لأنه… ولمَ لا؟ </value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text4" xml:space="preserve">
+    <value>تخيّل؟ هم يعرفونك جيدًا أكثر مما تتصور لفكّ تشفير كلمة المرور تلك. لا يتطلّب الأمر الكثير: بعض الصور المتكرّرة، إعجاباتك، الصفحات التي تتابعها، وانفعالاتك العاطفية على حساباتك في وسائل التواصل الاجتماعي. كل هذا المحتوى يعمل كوقود جاهز لهجمات مخصّصة تستهدفك أنت بالذ</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text5" xml:space="preserve">
+    <value>في مثل هذه الحالات، تصبح حتى أقوى كلمات المرور بلا قيمة بمجرد انكشافها. سواء كانت أرقامك السرّية البنكية، أو حاسوب العمل المحمول، أو حساباتك على وسائل التواصل الاجتماعي، أو بريدك الإلكتروني، وحتى رمز قفل هاتفك؛ كل شيء اليوم يمكن اختراقه إذا قمت بإعادة استخدام كلمات المرور نفسها.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text6" xml:space="preserve">
+    <value>الخلاصة واضحة: لا تُعِد استخدام كلمات المرور أبدًا.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text1" xml:space="preserve">
+    <value>تحدث إعادة استخدام كلمة المرور عندما يتم استخدام نفس كلمة المرور عبر منصات مختلفة مع تعديل بسيط أو بدون أي تعديل. ويُعدّ هذا سلوكًا سيئًا في إدارة كلمات المرور.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text2" xml:space="preserve">
+    <value>ورغم أن ذلك قد يبدو غير ضار، فإن القراصنة يدركون جيدًا أن الناس غالبًا ما يعيدون استخدام كلمات المرور أو يجرون عليها تعديلات طفيفة. ويستغل القراصنة هذه العادة عبر هجمات القوة الغاشمة، وهجمات إعادة استخدام كلمات المرور، وهجمات رشّ كلمات المرور المُولَّدة بالذكاء الاصطناعي، وهذا مجرد غيض من فيض.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text3" xml:space="preserve">
+    <value>المشكلة هنا واضحة جدًا: إذا تم استخدام كلمة المرور نفسها أو كلمة مرور متشابهة إلى حدّ كبير عبر جميع المنصات، فإن كل الحسابات تكون عرضة للاختراق. فإذا تم اختراق حساب واحد، يلجأ القراصنة أو المهاجمون تلقائيًا إلى تجربة كلمة المرور نفسها على بقية حساباتك حتى يصيبوا «ضربة الحظ».</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text4" xml:space="preserve">
+    <value>البريد الإلكتروني، وخدمات التخزين السحابي، والحسابات المالية تُعد أهدافًا عالية القيمة، وحتى أقوى كلمات المرور تصبح بلا فائدة إذا تم كشفها، مما يعرّض جميع بياناتك للخطر.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text1" xml:space="preserve">
+    <value>فهم كيفية سرقة القراصنة لكلمات المرور هو الخطوة الأولى لإدراك خطورة عدم إعادة استخدامها.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text10" xml:space="preserve">
+    <value>يتم بعد ذلك بيع هذه البيانات إلى مجرمي إنترنت آخرين، الذين يعيدون استخدامها لاحقًا في أنواع مختلفة من الهجمات مثل هجمات حشو بيانات الاعتماد. تؤدي هذه الممارسة فعليًا إلى تحويل اختراق واحد إلى عدة اختراقات لاحقة، مما يضاعف التأثير الإجمالي للحادثة الأصلية.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text11" xml:space="preserve">
+    <value>الهندسة الاجتماعية ورسائل البريد الإلكتروني المألوفة</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text12" xml:space="preserve">
+    <value>كانت هجمات التصيّد الاحتيالي السابقة سهلة الاكتشاف بسبب سوء القواعد اللغوية أو وجود أخطاء واضحة في رسائل البريد الإلكتروني.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text13" xml:space="preserve">
+    <value>لكن الآن يقوم القراصنة بتخصيص هجماتهم ويستخدمون أساليب نفسية للتلاعب بالضحايا. فهم ينتحلون صفة شخص تعرفه أو جهة موثوقة من دائرتك الاجتماعية، أو حتى أحد موظفي الدعم في مكتبك أو شخصية ذات سلطة في مكان عملك.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text14" xml:space="preserve">
+    <value>يتم استخدام هذا الصوت أو حتى مقطع الفيديو “المألوف ظاهريًا” لإقناع الشخص الساذج أو غير الواعي بالتخلي طوعًا عن كلمات المرور الخاصة بالشخص الذي يتم انتحال هويته، لأنه يثق بالشخص الذي يسمعه أو يراه.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text15" xml:space="preserve">
+    <value>تتزايد هذه الهجمات المُهندسة والمُخصّصة بسرعة كبيرة، وهي تستغل السلوك البشري بدلًا من الثغرات التقنية.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text16" xml:space="preserve">
+    <value>الهدف الأساسي من هذه الهجمات هو التأثير عاطفيًا على الضحية، واختراق ثقتها، ثم استغلالها بالكامل.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text17" xml:space="preserve">
+    <value>هجمات الرجل في الوسط واعتراضات الشبكة</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text18" xml:space="preserve">
+    <value>اعتبر هذا طريقًا سريعًا، لكنه طريق وحيد في جزء بعيد من العالم.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text19" xml:space="preserve">
+    <value>تجذب مثل هذه الأماكن اللصوص والقراصنة، وربما حتى الأشباح المتربصة للهجوم والاستيلاء على كل ما تملك.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text2" xml:space="preserve">
+    <value>يبتكر مجرمو الإنترنت مجموعة واسعة من الأساليب المختلفة لسرقة كلمات المرور الخاصة بك. وفيما يلي أكثر 6 طرق شيوعًا يمكن من خلالها اختراق كلمة المرور الخاصة بك:</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text20" xml:space="preserve">
+    <value>في مثل هذه الهجمات، يمثّل الطريق السريع شبكة Wi-Fi غير آمنة أو شبكة مخترَقة، بينما يمثّل اللصوص المهاجمين الذين يعترضون حركة البيانات أو يستغلون الأنشطة على مواقع ويب شرعية.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text21" xml:space="preserve">
+    <value>تُمكّنهم هذه الهجمات من التقاط كلمات المرور الخاصة بك أثناء نقلها، خاصةً عندما يكون التشفير ضعيفًا أو غير موجود.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text22" xml:space="preserve">
+    <value>هجوم القوة الغاشمة أو التخمين الآلي.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text23" xml:space="preserve">
+    <value>إذا كنت تعمل في مجال التقنية، فأنت تعرف ما المقصود بهجمات القوة الغاشمة والتخمين الآلي.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text24" xml:space="preserve">
+    <value>يستخدم القراصنة أدوات آلية لتجربة ملايين من تركيبات كلمات المرور في ثوانٍ معدودة حتى يعثروا على الكلمة الصحيحة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text25" xml:space="preserve">
+    <value>تشمل هجمات القوة الغاشمة والتخمين الآلي هجمات القاموس، التي تستخدم قوائم بكلمات المرور الشائعة، وكذلك هجمات رش كلمات المرور (رش كلمة المرور ).</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text3" xml:space="preserve">
+    <value>حشو بيانات الاعتماد (بيانات الاعتماد حشو): يقوم المهاجمون بتجميع بيانات تسجيل الدخول المسروقة، بما في ذلك اسم المستخدم وكلمة المرور والاسم الأول واسم العائلة وتاريخ الميلاد ومعلومات شخصية أخرى. ثم يستخدمون هذه البيانات المخترقة لأتمتة محاولات تسجيل الدخول على العديد من المواقع الأخرى.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text4" xml:space="preserve">
+    <value>والآن، إذا كنت من أولئك الذين يواصلون إعادة استخدام كلمة المرور نفسها أو إجراء تعديلات طفيفة عليها عبر مختلف المنصات، فأنت بذلك تفرش السجادة الحمراء. أهلًا بالقراصنة — مرحبًا بكم لاختراق حساباتك الشخصية.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text5" xml:space="preserve">
+    <value>تسجيل ضغطات المفاتيح والبرمجيات الخبيثة</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text6" xml:space="preserve">
+    <value>هنا تصبح الأمور أكثر رعبًا. هذه الطريقة في الوصول إلى بياناتك الشخصية تشبه وجود متطفّل يراقبك عبر الإنترنت. يستخدم مجرمو الإنترنت البرمجيات الخبيثة لتسجيل ضغطات المفاتيح سرًا أو لاستخراج كلمات المرور المخزّنة من متصفحاتك أو أجهزتك.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text7" xml:space="preserve">
+    <value>تقوم هذه الأدوات بالتقاط أو سرقة بيانات اعتماد الضحايا أثناء كتابتهم لكلمات المرور أو عند حفظها في الخلفية دون علمهم.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text8" xml:space="preserve">
+    <value>اختراق بيانات واحد، وقائمة ضخمة من كلمات المرور المخترقة، وعدة قنوات مكشوفة:</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text9" xml:space="preserve">
+    <value>في معظم الأحيان، عندما تتعرض الشركات لحادثة اختراق بيانات كبيرة، يقوم المهاجمون أو القراصنة المسؤولون عن الاختراق فورًا بنشر كميات هائلة من أزواج أسماء المستخدمين وكلمات المرور على الشبكة المظلمة. بعد ذلك يتم بيع بيانات الاعتماد المسروقة مقابل قيمة كبيرة لأطراف مهتمة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text1" xml:space="preserve">
+    <value>تُظهر هذه الحوادث مدى الدمار الذي يمكن أن تسببه بيانات الاعتماد المخترقة في الحياة الواقعية.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text2" xml:space="preserve">
+    <value>تسببت تسريبات بيانات هائلة ناتجة عن برمجيات سرقة المعلومات وقواعد بيانات غير مؤمّنة أو غير مشفّرة في كشف ما يقرب من مليار اسم مستخدم وكلمة مرور، مما منح مجرمي الإنترنت والقراصنة والمهاجمين حول العالم القدرة على استغلال هذه البيانات في هجمات برامج الفدية، وهجمات التصيّد الاحتيالي، وهجمات حشو بيانات الاعتماد.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text3" xml:space="preserve">
+    <value>هذه ثلاث حوادث كبرى أردنا أن نعرضها لكم من خلال هذه المدوّنة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text4" xml:space="preserve">
+    <value>كشف 16 مليار بيانات اعتماد</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text5" xml:space="preserve">
+    <value>مؤخرًا، اكتشف الباحثون ما يقارب 16 مليار سجل تسجيل دخول موزعة عبر 30 مجموعة بيانات غير مؤمَّنة وغير مشفَّرة. تشمل هذه بيانات الاعتماد الخاصة بمنصات رئيسية مثل جوجل، أبل، فيسبوك، تيليجرام، وجيت هاب. يُعد هذا أحد أكبر سرقات أسماء المستخدمين وكلمات المرور المسجلة على الإطلاق.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text6" xml:space="preserve">
+    <value>تسرّب قاعدة بيانات تضم 3.5 مليار بيانات اعتماد</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text7" xml:space="preserve">
+    <value>احتوت مجموعة البيانات الواحدة هذه على ما يقرب من 3.5 مليار زوج من أسماء المستخدمين وكلمات المرور. وقد تم جمعها عبر برمجيات سرقة المعلومات وتخزينها في بيئة سحابية سيئة الإعداد، مما ترك البيانات الحساسة مكشوفة وسهلة الوصول للقراصنة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text8" xml:space="preserve">
+    <value>تسرّب 184 مليون بيانات اعتماد:</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text9" xml:space="preserve">
+    <value>في وقت سابق من هذا العام، أدى اختراق أمني إلى كشف بيانات اعتماد 184 مليون حساب من منصات مثل فيسبوك روبلوكس، مما يوضح أن هذه المنصات تُعد أهدافًا شائعة لبرامج سرقة المعلومات وسرقة كلمات المرور</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text1" xml:space="preserve">
+    <value>إذا كان هناك تشبيه مثالي لإعادة استخدام كلمات المرور، فإنه يكاد يفسر نفسه كـ "تأثير الدومينو" الذي انقلب بشكل كارثي.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text2" xml:space="preserve">
+    <value>إليك ما قد يحدث إذا تم اختراق حساب واحد وتسريب كلمات المرور.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text3" xml:space="preserve">
+    <value>اختراق حساب البريد الإلكتروني: أولاً، يتمكّن المهاجمون من الوصول إلى رسائل بريدك الإلكتروني، وهي المكان الذي تصلك فيه روابط إعادة تعيين كلمة المرور، وأيضًا قد تكون قد أرسلت لنفسك كلمات المرور فيه في وقت ما.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text4" xml:space="preserve">
+    <value>الاستيلاء على حسابات وسائل التواصل الاجتماعي: بمجرد أن يتمكنوا من الوصول إلى بريدك الإلكتروني وكلمة المرور، يستخدمون هذه البيانات لتسجيل الدخول إلى حساباتك على وسائل التواصل الاجتماعي. هذه هي تنبيهات محاولات تسجيل الدخول المشبوهة التي تتلقاها من إنستغرام أو فيسبوك في أوقات غير معتادة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text5" xml:space="preserve">
+    <value>سرقة الأموال الرقمية: تصبح الأمور خطيرة بمجرد أن يصل شخص ما إلى حساباتك على وسائل التواصل الاجتماعي أو أي حساب آخر. يقومون بإرسال رسائل بريد إلكتروني أو رسائل مزعجة إلى جهات اتصالك، يطلبون فيها المال أو الضغط على رابط. الهدف من ذلك هو اختراق حسابات أخرى أو سرقة المال باسمك.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text6" xml:space="preserve">
+    <value>العواقب: يحدث هذا عندما يقوم الأصدقاء أو الأقارب أو الآخرون بنشر تحذيرات على قصصهم في إنستغرام أو إرسال رسائل مباشرة تفيد بأن أي طلب للمال ليس منهم بل من هاكر أو محتال تمكن من الوصول إلى حسابهم ويطالب بالمال. في حالات أسوأ بكثير، يتم كشف حسابات العمل، وتسريب بيانات حساسة للشركات، أو حدوث ضرر في السمعة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text1" xml:space="preserve">
+    <value>يتطلّب الحفاظ على ممارسات جيدة لإدارة كلمات المرور جهدًا بسيطًا فقط، ويُعدّ استخدام مدير كلمات المرور أكس كريبت لإنشاء كلمات مرور قوية وفريدة نقطة انطلاق ممتازة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text2" xml:space="preserve">
+    <value>تتجنب هذه الكلمات المرور التسلسلات المتوقعة والأنماط المتكررة، مما يقلّل من تأثير اختراقات البيانات وخطر الاختراق الناتج عن إعادة استخدام كلمات المرور.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text3" xml:space="preserve">
+    <value>بدلًا من إعادة استخدام كلمات المرور عبر منصّات مختلفة، قم بتنزيل التطبيق لتخزين جميع كلمات المرور وأسماء المستخدمين والمعرّفات الخاصة بك بشكل آمن في مكان واحد مشفّر. نحن، كشركة متخصّصة في الأمن السيبراني، لا نحتفظ بأي من معلوماتك الشخصية أو بياناتك أو ملفاتك أو المواد الحسّاسة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text4" xml:space="preserve">
+    <value>نستخدم تشفير المعرفة الصفرية، مما يعني أن خوارزميتنا التشفيرية تمنع أي طرف ثالث أو مهاجمين، أو حتى نحن، من الوصول إلى ملفاتك وبياناتك المشفرة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text5" xml:space="preserve">
+    <value>نحن نخزن معرفك وكلمة مرورك فقط كهاش لا يمكن عكسه حتى تتمكن من تسجيل الدخول للوصول إلى بياناتك المشفرة.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text6" xml:space="preserve">
+    <value>من أفضل الممارسات الأخرى تحديث كلمات المرور بانتظام. فالحسابات ذات القيمة العالية مثل البريد الإلكتروني، والحسابات البنكية، وبيانات عملك تُعدّ بمثابة ذهب رقمي للقراصنة. يساعد تغيير كلمات المرور بشكل متكرر باستخدام أكس كريبت في منع الاستغلال طويل المدى.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text7" xml:space="preserve">
+    <value>وأخيرًا، تجنّب استخدام تواريخ الميلاد، أو أسماء الحيوانات الأليفة، أو المعلومات السهلة التخمين في كلمات المرور الخاصة بك. فالقراصنة يراقبونك لعدة أشهر قبل أن يشنوا هجومهم، وجو غولدبيرغ مجرد طفل مقارنة بمخترق ماهر يقوم بالمراقبة أيضًا</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text8" xml:space="preserve">
+    <value>يقومون بتتبع تحركاتك على الإنترنت، مثل الصفحات التي تعجبك، والطلبات التي تجريها، وصورك المنشورة، فقط لكسر كلمة مرورك لأنهم يعلمون أنها قد تكون مزيجًا من هذه العناصر، وهذه حيلة قديمة في سجلّ أساليبهم.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text1" xml:space="preserve">
+    <value>على العكس، مخاطر إعادة استخدام كلمات المرور حقيقية وفي تزايد مستمر.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text2" xml:space="preserve">
+    <value>العام هو 2026، والذكاء الاصطناعي يلعب دورًا محوريًا لكل من الأطراف الخيّرة والأطراف الخبيثة في عالم الإنترنت السيبراني.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text3" xml:space="preserve">
+    <value>كل ما يتطلبه الأمر هو إعادة استخدام كلمة مرور واحدة فقط لاختراق عدة حسابات، مما يؤدي إلى سرقة الهوية، وخسائر مالية، وعواقب مهنية، وأضرار جسيمة بسمعتك، والعديد من الحوادث الأخرى التي لا يمكن إصلاحها.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text4" xml:space="preserve">
+    <value>باستخدام كلمات مرور فريدة وأيضًا من خلال استخدام مديري كلمات المرور لتوليد كلمات مرور قوية وفريدة مع تفعيل المصادقة الثنائية، فإنك تحمي نفسك من كابوس استرجاع البيانات. تساعد هذه الممارسات الفضلى على تقليل خطر إعادة استخدام كلمات المرور، والاختراق، وسوء الاستخدام.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text5" xml:space="preserve">
+    <value>تذكر، الأمن السيبراني لا يقتصر على الأدوات المتطورة أو مجرد العادات وكلمات المرور "القوية" المزعومة مثل 1234@#.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text6" xml:space="preserve">
+    <value>في هذا الزمن، من المهم توفير حماية إضافية مع الاعتماد قليلًا على حدسك، والأهم من ذلك استخدام تطبيق موثوق مثل أكس كريبت.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading1" xml:space="preserve">
+    <value>إنه خطر لا يمكنك تحمل تجاهله!</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading2" xml:space="preserve">
+    <value>لماذا يُعدّ إعادة استخدام كلمة المرور أمرًا خطيرًا؟</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading3" xml:space="preserve">
+    <value>كيف يسرق القراصنة كلمات المرور؟</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading4" xml:space="preserve">
+    <value>أمثلة واقعية على اختراقات كلمات المرور</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading5" xml:space="preserve">
+    <value>تأثير الدومينو لكلمات المرور المخترقة</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading6" xml:space="preserve">
+    <value>كيفية حماية نفسك وأفضل الممارسات لأمن كلمات المرور التي يمكنك اتباعها</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Summary" xml:space="preserve">
+    <value>إعادة استخدام كلمات المرور أخطر بكثير مما تظن. قد يبدو خيارًا مريحًا، لكن في الحقيقة، أنت تجعل الأمر سهلاً جدًا على القراصنة والمهاجمين للسيطرة على جميع بياناتك ومعلوماتك.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Text1" xml:space="preserve">
+    <value>فهمنا ما تقصده.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Text2" xml:space="preserve">
+    <value>تذكّر جميع كلمات المرور يمكن أن يكون صعبًا للغاية. كلمة للبريد الإلكتروني، وأخرى لحساب نتفليكس، وثالثة لتطبيقات المواعدة، وأخرى لتطبيق عشوائي قمت بتحميله في عام 2016…</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Text3" xml:space="preserve">
+    <value>واستخدام كلمة مرور واحدة لجميعها يبدو كخيار سهل جدًا، أليس كذلك؟</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Text4" xml:space="preserve">
+    <value>إعادة استخدام كلمات المرور أخطر بكثير مما تتصور. قد تبدو خيارًا مريحًا، لكنك في الواقع تجعل الأمر سهلًا للغاية على القراصنة والمهاجمين للسيطرة على جميع بياناتك ومعلوماتك. الأمر أشبه رقميًا بأن تقول لهم: «تفضلوا بالدخول، ما رأيكم بفنجان قهوة؟»</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Text5" xml:space="preserve">
+    <value>لماذا يُعدّ إعادة استخدام كلمة المرور أمرًا خطيرًا؟</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Text6" xml:space="preserve">
+    <value>حسنًا</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Title" xml:space="preserve">
+    <value>لماذا إعادة استخدام كلمات المرور خطيرة وكيف تبقى آمنًا؟</value>
+  </data>
   <data name="Blog_WRDBTUAE_H1_Text1" xml:space="preserve">
     <value>تحدث انتهاكات البيانات عندما يتمكن الأفراد غير المصرح لهم من الوصول إلى المعلومات الحساسة دون إذن. هناك العديد من الطرق التي يمكن للمهاجمين من خلالها اختراق البيانات ، بما في ذلك استغلال نقاط الضعف في البرامج والهندسة الاجتماعية والهجمات المادية وسرقة بيانات اعتماد تسجيل الدخول.</value>
   </data>
@@ -12060,6 +12872,9 @@
   </data>
   <data name="Blog_WRDBTUAE_H6_Conclusion_Text2" xml:space="preserve">
     <value>قم بحماية بياناتك من خروقات البيانات المدمرة وهجمات برامج الفدية وتسلل البيانات من خلال تنفيذ إجراءات الأمان القوية من اكسكربت. تحكم في ملفاتك ومجلداتك وقم بإدارة أذونات الوصول داخل مؤسستك باستخدام لوحة التحكم سهلة الاستخدام والحائزة على جوائز.</value>
+  </data>
+  <data name="Blog_WRDBTUAE_H6_Conclusion_Text3" xml:space="preserve">
+    <value>قم بزيارة صفحة الأسعار لدينا للاطلاع على خيارات الاشتراك. جرّب أكسكريبت اليوم مع تجربة مجانية لمدة ١٤ يومًا وارتقِ بأمان بياناتك إلى المستوى التالي. سجّل الآن بالنقر هنا.</value>
   </data>
   <data name="Blog_WRDBTUAE_Heading1" xml:space="preserve">
     <value>كيف تحدث خروقات البيانات؟</value>
@@ -12412,6 +13227,13 @@ BitLocker
 مشمول مع Windows Pro / Enterprise
 خطط مجانية، مميزة، وخطط أعمال</value>
   </data>
+  <data name="Blog_WYCBEIAE_H6_Text1" xml:space="preserve">
+    <value>الميزة / النقطة فايل فولت  أكسكريبت
+نوع التشفير	تشفير كامل للقرص تشفير على مستوى الملف مع أمان متقدّم
+التوافق مع النظام	مخصّص لنظام macOS فقط (ميزة مدمجة) متوافق مع Windows و macOS و Android و iOS
+نطاق الحماية يشفر المعلومات المخزنة على جهاز Mac؛ الوصول عبر معرف تسجيل الدخول وكلمة المرور يحمي الملفات والمجلدات على النظام وفي السحابة؛ الوصول عبر معرف تسجيل الدخول وكلمة المرور الخاصة بـ أكسكريبت
+الأمان عند سرقة الجهاز	يحمي الجهاز من الوصول غير المصرح به، لكن إذا اخترق شخص الجهاز باستخدام مفتاح الوصول، تصبح الملفات مكشوفة	أمان دقيق على مستوى الملف حتى إذا تم سرقة الجهاز والوصول إليه، تظل الملفات المشفرة محمية</value>
+  </data>
   <data name="Blog_WYCBEIAE_H7_Text1" xml:space="preserve">
     <value>هذه هي الحقيقة كاملة، إلا إذا كنت تريد لملفاتك أن ترفع الراية البيضاء بمجرد أن يحصل المخترق على وصول كامل.</value>
   </data>
@@ -12682,14 +13504,92 @@ BitLocker
   <data name="Blog_ZKEEIST_H2_Text3" xml:space="preserve">
     <value>يعد تشفير المعرفة الصفرية خيارا ممتازا لتأمين البيانات الحساسة ، مثل المعلومات المالية والسجلات الطبية والملكية الفكرية. إنه أيضا اختيار جيد للبيانات التي تريد الاحتفاظ بها خاصة ، مثل الصور الشخصية أو مقاطع الفيديو.</value>
   </data>
+  <data name="Blog_ZKEEIST_H3_Text1" xml:space="preserve">
+    <value>تتطور التهديدات السيبرانية باستمرار، إذ تزداد تعقيدًا وتكلفةً مع مرور الوقت. ومع تصاعد المخاطر في الفضاء السيبراني، لا يمكن للأمن أن يكتفي باتخاذ تدابير ردّ فعلية.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text10" xml:space="preserve">
+    <value>عندما نقول إننا أقوياء، فنحن نعني ذلك حقًا، وبالإضافة إلى ذلك، نتجاوز جميع التعقيدات المرتبطة بالتشفير القوي. نحن نوفر لك تشفيرًا سهل الاستخدام، حماية قصوى، وثقة تشفير المعرفة الصفرية، بحيث لا يتمكن أحد من قراءة بياناتك. لا نحن، ولا المخترق المجاور.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text11" xml:space="preserve">
+    <value>بكلمة مرور واحدة فقط، نجعل التشفير سهلًا للغاية وقويًا في الوقت نفسه، مع العديد من الميزات البديهية الأخرى وحماية الملفات تلقائيًا.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text12" xml:space="preserve">
+    <value>AxCrypt – تصميم أمني مصمّم لتقليل الأخطاء البشرية، وإزالة العقبات، وحماية بياناتك بهدوء ولكن بقوة في الخلفية</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text13" xml:space="preserve">
+    <value>كذا يبدو التشفير الحقيقي بمعرفة صفرية والأمان الحقيقي.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text2" xml:space="preserve">
+    <value>وهكذا تم تصميم أكس كريبت لمواجهة هذه الحقيقة</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text3" xml:space="preserve">
+    <value>في أكس كريبت، لا نقدم الأمان كميزة إضافية فحسب، بل هو أساس كل ما نقوم به. لسنوات عديدة، حملنا شعلة الأمان القوي وقدمنا الريادة في التشفير بمعرفة صفرية، لضمان أن يكون لديك وحدك الحق في الوصول إلى ملفاتك.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text4" xml:space="preserve">
+    <value>ليس نحن، ولا أطرافًا ثالثة، ولا الأبواب الخلفية، ولا المهاجمون أو القراصنة — أنت فقط.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text5" xml:space="preserve">
+    <value>طالما أنك تتحكّم في كلمات المرور الخاصة بك، فأنت تتحكّم في جميع بياناتك.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text6" xml:space="preserve">
+    <value>بهذه الطريقة، يمكنك أن تطمئن إلى أنه حتى في حال حدوث أي خرق أمني، فإن بياناتك تبقى آمنة، ولا يمكن قراءتها أو استخدامها بدون مفاتيح فك التشفير الصحيحة. هذا ليس مجرد دليل على أمان قوي، بل هو علامة على أمان أذكى.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text7" xml:space="preserve">
+    <value>على مر السنين، أثبتت موثوقية أكس كريبت جدارتها بالوقت والثقة. لأكثر من عقدين، شهدنا ملايين المستخدمين من جميع أنحاء العالم يثقون ببياناتهم لدى أكس كريبت كحارس لمعلوماتهم الحساسة.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text8" xml:space="preserve">
+    <value>نحن نحمي ملفاتك باستخدام تشفير AES-256 بت الرائد في الصناعة والذي لا يمكن كسره. يُعد هذا بلا شك أحد أقوى معايير الأمان المتوفرة اليوم.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text9" xml:space="preserve">
+    <value>في زمنٍ تبدو فيه التهديدات الإلكترونية غير ضارة لكنها تسبب أكبر الأضرار، وتبدو مألوفة ومقنعة بشكل كامل، لا يمكن الاكتفاء بكلمات مرور مثل "qwerty123" كإجراء احترازي. لقد قامت AxCrypt بتحديد هذه التهديدات والتنبؤ بها قبل عقود، وتلتزم بتقديم حماية متسقة وموثوقة لا تفشل عندما تحتاجها أكثر شيء.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H4_Text1" xml:space="preserve">
+    <value>باستخدام برنامج التشفير من أكس كريبت، يمكنك تشفير بياناتك الحساسة على جهاز الكمبيوتر أو الهاتف الذكي ببضع نقرات فقط. ويُعد أكس كريبت برنامج التشفير الحقيقي القائم على مبدأ انعدام المعرفة، بواجهة استخدام قوية وخفيفة وسهلة للغاية.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H5_Text1" xml:space="preserve">
+    <value>يُعدّ التشفير بمعرفة صفرية تقنية قوية لأمن البيانات الحسّاسة. فهو يضمن حماية البيانات في جميع الأوقات، حتى عندما تكون مخزّنة لدى مزوّدي خدمات من أطراف ثالثة مثل خدمات التخزين السحابي أو الشبكات المؤسسية. يعمل التشفير بمعرفة صفرية كخط الدفاع الأول لملفاتك الحسّاسة، وهو مُوصى به من قِبل مؤسسات مرموقة مثل IBM، حيث يحافظ على أمان بياناتك باستخدام معايير التشفير المتقدّمة المعتمدة لدى جهات مثل مايكروسوفت وغيرها، لحماية البيانات القيّمة وهي في حالة السكون.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H5_Text2" xml:space="preserve">
+    <value>اختيار برنامج تشفير ملفات قوي يعتمد على مبدأ المعرفة الصفرية (المعرفة صفر) يضمن أن ملفاتك مزودة بإجراءات قوية لحماية بياناتك الحساسة بفعالية. سواء كانت ملفات شخصية، مستندات مالية، أو بيانات أعمال حساسة، يضمن التشفير أنه حتى في حال الوصول غير المصرح به إلى ملفاتك، تظل بياناتك غير قابلة للقراءة ومحفوظة بأمان.</value>
+  </data>
   <data name="Blog_ZKEEIST_Heading1" xml:space="preserve">
     <value>ما هو تشفير المعرفة الصفرية؟</value>
   </data>
   <data name="Blog_ZKEEIST_Heading2" xml:space="preserve">
     <value>لماذا تشفير صفر المعرفة مهم لبياناتك؟</value>
   </data>
+  <data name="Blog_ZKEEIST_Heading3" xml:space="preserve">
+    <value>أكس كريبت: أمان قائم على مبدأ انعدام المعرفة لعالم رقمي عالي المخاطر.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Heading4" xml:space="preserve">
+    <value>كيف تستخدم التشفير بمعرفة صفرية لملفاتك؟</value>
+  </data>
   <data name="Blog_ZKEEIST_Summary" xml:space="preserve">
     <value>كان عام 2025 عاما محوريا للتقدم في قطاع التكنولوجيا وتكنولوجيا المعلومات. مع التطورات السريعة في الذكاء الاصطناعي والتعلم الآلي ، أصبح شن هجوم إلكتروني أسهل من أي وقت مضى.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Text1" xml:space="preserve">
+    <value>كان عام 2025 عامًا محوريًا للتطورات في قطاع التكنولوجيا وتقنية المعلومات. ومع التقدم السريع في الذكاء الاصطناعي وتعلّم الآلة، أصبح إطلاق الهجمات السيبرانية أسهل من أي وقت مضى.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Text2" xml:space="preserve">
+    <value>لقد تفاقمت التهديدات والهجمات السيبرانية بشكل أكبر في عام 2025. إذ يبلغ متوسط تكلفة اختراق البيانات عالميًا رقمًا مقلقًا يصل إلى 4.44 مليون دولار، وعند النظر إلى الولايات المتحدة، يصبح الوضع أسوأ؛ حيث تصل التكلفة إلى 10.22 مليون دولار، وهو الأعلى على مستوى العالم</value>
+  </data>
+  <data name="Blog_ZKEEIST_Text3" xml:space="preserve">
+    <value>نحو 88٪ من الاختراقات تحدث بسبب أخطاء بشرية. ويُعدّ اكتشاف هذه الأخطاء أمرًا صعبًا، إذ يستغرق الأمر في المتوسط 181 يومًا لتحديد الأخطاء أو الثغرات أو نقاط الضعف، ثم 241 يومًا إضافيًا لمنع تأثيرها الكامل.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Text4" xml:space="preserve">
+    <value>بحلول ذلك الوقت، تكون الشبكات قد تعرضت للاختراق، والبيانات قد تم التسلل إليها، وتحدث الاختراقات، ويصبح استعادة البيانات كابوسًا.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Text5" xml:space="preserve">
+    <value>تبين أن ما يقرب من 16% من الاختراقات تبدأ بهجوم تصيّد احتيالي، وتُكلّف هذه الاختراقات حوالي 17,700 دولار أمريكي في الدقيقة من حيث الأضرار. ومع 1,876 هجومًا كل ربع سنة وتأثير الإرهاق السيبراني على ما يقرب من نصف المؤسسات، تصبح استراتيجيات الأمن الاستباقية ضرورية.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Text6" xml:space="preserve">
+    <value>ومع ذلك، الخبر السار هو أنه يمكن حماية البيانات الحساسة بشكل استباقي من الهجمات السيبرانية باستخدام تقنيات تشفير قوية. يضمن تشفير البيانات بتقنية المعرفة الصفرية (المعرفة صفر-) أنه حتى في حال تسرب البيانات خلال اختراق، لا يمكن فك تشفيرها أو استخدامها دون المفاتيح الصحيحة لفك التشفير.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Text7" xml:space="preserve">
+    <value>في هذه التدوينة، دعونا نناقش ما هو تشفير البيانات بتقنية المعرفة الصفرية (المعرفة صفر-)، ولماذا هو مهم لأمن البيانات، وكيفية استخدامه، وحالات استخدامه الفعّالة.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Title" xml:space="preserve">
+    <value>التشفير بصفر معرفة: الأمان تحت سيطرتك.</value>
   </data>
   <data name="Blog_ZTCS_Conclusion_Text1" xml:space="preserve">
     <value>&lt;strong&gt; لماذا الثقة المعدومة مطلوبة؟ &lt;/strong&gt;</value>
@@ -13000,6 +13900,9 @@ BitLocker
   <data name="BusinessProductKeyHead10" xml:space="preserve">
     <value>تأمين الملفات عبر الإنترنت في الأجهزة المحمولة وسطح المكتب باستخدام أمان السحابة</value>
   </data>
+  <data name="BusinessProductKeyHead14" xml:space="preserve">
+    <value>التشفير بصفر معرفة لأقصى درجات الأمان.</value>
+  </data>
   <data name="BusinessProductKeyHead2" xml:space="preserve">
     <value>إنشاء مجموعات المستخدمين وإدارتها باستخدام إدارة المفاتيح المركزية</value>
   </data>
@@ -13029,6 +13932,15 @@ BitLocker
   </data>
   <data name="BusinessProductKeyParagraph11" xml:space="preserve">
     <value>عزّز أمان التواصل في الأعمال باستخدام تشفير AES-256، لضمان بقاء الرسائل السرية محمية عبر الويب وسطح المكتب والأجهزة المحمولة. مع تطبيق "Secured Messenger for Business"، لا يمكن الوصول إلى الرسائل إلا من قبل أعضاء الفريق المصرح لهم، مما يحمي البيانات المؤسسية الحساسة من الوصول غير المصرح به.</value>
+  </data>
+  <data name="BusinessProductKeyParagraph12" xml:space="preserve">
+    <value>يجعل أكسكريبت الأعمال  مشاركة المعلومات النصية الحساسة سريعة وآمنة من خلال تحويلها إلى صيغة آمنة غير قابلة للقراءة. يمكن للمستخدمين تشفير النص العادي السري في ثوانٍ ومشاركته عبر الحافظة (Clipboard)، أو ملف ‎.txt‎، أو إرساله عبر البريد الإلكتروني.</value>
+  </data>
+  <data name="BusinessProductKeyParagraph13" xml:space="preserve">
+    <value>يوفر أكس كريبت قبو للمؤسسات مجلدًا آمنًا ومشفّرًا يتم تشفيره على الفور وبشكل تلقائي، مما يضمن حماية البيانات بشكل مستمر دون الحاجة لأي جهد يدوي.</value>
+  </data>
+  <data name="BusinessProductKeyParagraph14" xml:space="preserve">
+    <value>نهج يضع الخصوصية أولًا، مدعوم بتشفير قوي غير قابل للاختراق بطول ‎256-بت، يحافظ على أمان بياناتك. وبهذا تحتفظ بالتحكم الكامل في مفاتيح فك التشفير الخاصة بك، مما يضمن أن لا أحد — ولا حتى أكس كريبت — يمكنه الوصول إلى ملفاتك.</value>
   </data>
   <data name="BusinessProductKeyParagraph2" xml:space="preserve">
     <value>تنظيم المستخدمين بكفاءة في مجموعات وإدارة وصولهم من خلال إدارة المفاتيح المركزية. يضمن ذلك أذونات متسقة عبر المؤسسة، مما يسمح للمسؤولين بإدارة وصول المجموعة إلى البيانات الهامة وتأمينه.</value>
@@ -13702,17 +14614,44 @@ BitLocker
   <data name="ColumnTransactionDateHeader" xml:space="preserve">
     <value>معاملات UTC </value>
   </data>
+  <data name="CommandLineFaq1" xml:space="preserve">
+    <value>هل أحتاج إلى حساب أكس كريبت لاستخدام واجهة سطر</value>
+  </data>
+  <data name="CommandLineFaq1Ans" xml:space="preserve">
+    <value>لا. واجهة سطر الأوامر الخاصة بـ أكس كريبت تعمل بشكل كامل دون الاتصال بالإنترنت ولا تتطلب حسابًا أو تسجيل دخول. كل ما تحتاجه هو إدخال عبارة مرور لتشفير أو فك تشفير الملفات.</value>
+  </data>
+  <data name="CommandLineFaq2" xml:space="preserve">
+    <value>ما نوع التشفير الذي تستخدمه واجهة سطر الأوامر؟</value>
+  </data>
+  <data name="CommandLineFaq2Ans" xml:space="preserve">
+    <value>تستخدم واجهة سطر الأوامر الخاصة بـ أكس كريبت تشفير AES بطول 128 بت، وهو آمن وموثوق به على نطاق واسع لحماية الملفات الحساسة.</value>
+  </data>
   <data name="CommandLineFaq3" xml:space="preserve">
     <value>هل يمكنني تشفير عدة ملفات في وقت واحد؟</value>
   </data>
   <data name="CommandLineFaq3Ans" xml:space="preserve">
     <value>نعم. يمكنك إدراج عدة ملفات في أمر واحد.</value>
   </data>
+  <data name="CommandLineFaq4" xml:space="preserve">
+    <value>ما تنسيقات الملفات التي تدعمها واجهة سطر أوامر أكس كريبت؟</value>
+  </data>
+  <data name="CommandLineFaq4Ans" xml:space="preserve">
+    <value>تعمل واجهة سطر الأوامر الخاصة بـ أكس كريبت مع أي نوع من الملفات مثل المستندات، الصور، مقاطع الفيديو، ملفات ZIP، وغيرها.</value>
+  </data>
   <data name="CommandLineFaq5" xml:space="preserve">
     <value>كيف يمكنني مشاركة كلمة مرور الملفات؟</value>
   </data>
   <data name="CommandLineFaq5Ans" xml:space="preserve">
     <value>يحتاج المستخدمون إلى مشاركة كلمات المرور بأمان يدويًا مع مستلمي الملفات المشفرة.</value>
+  </data>
+  <data name="CommandLineFaq6" xml:space="preserve">
+    <value>هل تحتاج واجهة سطر أوامر أكس كريبت إلى اتصال بالإنترنت؟</value>
+  </data>
+  <data name="CommandLineFaq6Ans" xml:space="preserve">
+    <value>يمكن استخدام واجهة سطر الأوامر الخاصة بـ أكس كريبت في الوضع غير المتصل بالإنترنت – فلا يحتاج المستخدمون إلى الاتصال بالإنترنت للتشفير أو فك التشفير.</value>
+  </data>
+  <data name="CommandLineGuideHeadParagraph" xml:space="preserve">
+    <value>واجهة سطر الأوامر الخاصة بـ أكس كريبت هي أداة مجانية ومفتوحة المصدر تتيح لك تشفير الملفات وفك تشفيرها مباشرةً من الطرفية أو من موجه الأوامر.</value>
   </data>
   <data name="CommandLineGuideStepHead1" xml:space="preserve">
     <value>نظرة عامة على صياغة الأوامر</value>
@@ -13729,6 +14668,9 @@ BitLocker
   <data name="CommandLineGuideStepHead5" xml:space="preserve">
     <value>كيف يعمل سطر الأوامر</value>
   </data>
+  <data name="CommandLineGuideStepText1" xml:space="preserve">
+    <value>AxCrypt → اسم البرنامج الذي يقوم بتشفير أو فك تشفير الملفات.</value>
+  </data>
   <data name="CommandLineGuideStepText10" xml:space="preserve">
     <value>يجب استخدام نفس عبارة المرور التي استُخدمت أثناء التشفير.</value>
   </data>
@@ -13740,6 +14682,30 @@ BitLocker
   </data>
   <data name="CommandLineGuideStepText13" xml:space="preserve">
     <value>أتمتة مهام حماية الملفات الروتينية باستخدام السكربتات</value>
+  </data>
+  <data name="CommandLineGuideStepText14" xml:space="preserve">
+    <value>البيئات التي لا تتوفر فيها أدوات واجهة المستخدم الرسومية (GUI).</value>
+  </data>
+  <data name="CommandLineGuideStepText15" xml:space="preserve">
+    <value>واجهة الأوامر الخاصة بـ أكس كريبت لا تتطلب حسابًا أو تسجيل دخول. كل ما تحتاجه هو إدخال كلمة مرور لتنفيذ تشفير أو فك تشفير آمن باستخدام ايه اي اس-128 بت.</value>
+  </data>
+  <data name="CommandLineGuideStepText16" xml:space="preserve">
+    <value>حاليًا، تدعم واجهة سطر الأوامر عمليتين أساسيتين.</value>
+  </data>
+  <data name="CommandLineGuideStepText17" xml:space="preserve">
+    <value>يمكنك تشفير أو فك تشفير عدة ملفات بأمر واحد عن طريق إدراج جميع الملفات بعد الأمر مباشرة.</value>
+  </data>
+  <data name="CommandLineGuideStepText18" xml:space="preserve">
+    <value>مثالية للسكربتات (قوة قذيفة باش، ملفات الدُفعات) لإنشاء سير عمل تلقائي للحماية.</value>
+  </data>
+  <data name="CommandLineGuideStepText19" xml:space="preserve">
+    <value>لا تحتاج إلى التسجيل أو إنشاء حساب أكس كريبت لاستخدام واجهة سطر الأوامر الخاصة بـ أكس كريبت.</value>
+  </data>
+  <data name="CommandLineGuideStepText2" xml:space="preserve">
+    <value>[الأمر] → العملية التي سيتم تنفيذها: تشفير - فك التشفير</value>
+  </data>
+  <data name="CommandLineGuideStepText20" xml:space="preserve">
+    <value>واجهة سطر الأوامر هي واجهة نصية تتيح لك التفاعل مع جهاز الكمبيوتر عن طريق كتابة الأوامر بدلًا من النقر على الأزرار. يتطلب الأمر كلمة مرور لكل من التشفير وفك التشفير. يُستخدم هذا الأسلوب عادةً من قبل المطورين، ومسؤولي الأنظمة، والمستخدمين المتقدمين لأنه سريع ودقيق ومثالي لأتمتة العمليات.</value>
   </data>
   <data name="CommandLineGuideStepText21" xml:space="preserve">
     <value>أنت تكتب أمرًا</value>
@@ -13753,17 +14719,32 @@ BitLocker
   <data name="CommandLineGuideStepText24" xml:space="preserve">
     <value>يقرأ سطر الأوامر ما كتبته ويفسره. </value>
   </data>
+  <data name="CommandLineGuideStepText25" xml:space="preserve">
+    <value>يقوم سطر الأوامر (موجه الأوامر، أو قذيفة السلطة، أو المحطة الطرفية) بتقسيم إدخالك إلى:</value>
+  </data>
   <data name="CommandLineGuideStepText26" xml:space="preserve">
     <value>اسم البرنامج (الأداة التي تريد تشغيلها) </value>
   </data>
   <data name="CommandLineGuideStepText27" xml:space="preserve">
     <value>الأوامر أو الخيارات (ما الذي تريد من الأداة أن تقوم به)</value>
   </data>
+  <data name="CommandLineGuideStepText28" xml:space="preserve">
+    <value> الحجج (معلومات إضافية مثل مسارات الملفات)</value>
+  </data>
   <data name="CommandLineGuideStepText29" xml:space="preserve">
     <value>تحليل المثال:</value>
   </data>
+  <data name="CommandLineGuideStepText3" xml:space="preserve">
+    <value>مدخلات قوية مطلوبة من قِبل الأمر، مثل مسارات الملفات.</value>
+  </data>
   <data name="CommandLineGuideStepText30" xml:space="preserve">
     <value>يقوم البرنامج بتنفيذ تعليماتك</value>
+  </data>
+  <data name="CommandLineGuideStepText31" xml:space="preserve">
+    <value>بمجرد تفسير الأمر، يتم تمريره إلى البرنامج (في هذه الحالة، أكس كريبت). بعد ذلك يقوم البرنامج بتنفيذ الإجراء، مثل التشفير أو فك التشفير أو النسخ أو النقل أو إنشاء الملفات.</value>
+  </data>
+  <data name="CommandLineGuideStepText32" xml:space="preserve">
+    <value>بالنسبة لواجهة سطر أوامر أكس كريبت فإن هذا الإجراء هو</value>
   </data>
   <data name="CommandLineGuideStepText33" xml:space="preserve">
     <value>تشفير ملف</value>
@@ -13792,6 +14773,9 @@ BitLocker
   <data name="CommandLineGuideStepText40" xml:space="preserve">
     <value>لا توجد رسالة على الإطلاق (إذا تم التنفيذ بصمت) </value>
   </data>
+  <data name="CommandLineGuideStepText41" xml:space="preserve">
+    <value>بعض أدوات سطر الأوامر تقوم أيضًا بإنشاء ملفات جديدة (مثل أكس كريبت الذي يقوم بإنشاء ملفات مشفرة).</value>
+  </data>
   <data name="CommandLineGuideStepText42" xml:space="preserve">
     <value>يمكنك ربط الأوامر معًا أو أتمتتها</value>
   </data>
@@ -13800,6 +14784,15 @@ BitLocker
   </data>
   <data name="CommandLineGuideStepText44" xml:space="preserve">
     <value>ملفات دفعة</value>
+  </data>
+  <data name="CommandLineGuideStepText45" xml:space="preserve">
+    <value>البرامج النصية بوويرشيل</value>
+  </data>
+  <data name="CommandLineGuideStepText46" xml:space="preserve">
+    <value>مخطوطات باش</value>
+  </data>
+  <data name="CommandLineGuideStepText47" xml:space="preserve">
+    <value>مهام كرون / المهام المجدولة</value>
   </data>
   <data name="CommandLineGuideStepText48" xml:space="preserve">
     <value>هذا يجعل المهام المتكررة تلقائية وفعّالة. مثال على أتمتة التشفير يوميًا:</value>
@@ -13815,6 +14808,15 @@ BitLocker
   </data>
   <data name="CommandLineGuideStepText6" xml:space="preserve">
     <value>يقوم هذا بتعيين كلمة المرور للعمليات التي تلي ذلك.</value>
+  </data>
+  <data name="CommandLineGuideStepText7" xml:space="preserve">
+    <value>لتشفير ملف واحد أو عدة ملفات، استخدم الأمر.</value>
+  </data>
+  <data name="CommandLineGuideStepText8" xml:space="preserve">
+    <value>"يجب الإشارة إلى كل ملف باستخدام مسار الملف الكامل. بعد التشفير، سيكون للملف الناتج الامتداد"</value>
+  </data>
+  <data name="CommandLineGuideStepText9" xml:space="preserve">
+    <value>لفك تشفير الملفات المشفرة، استخدم أمر فك التشفير."</value>
   </data>
   <data name="CommandLineInterFaceLinkLable" xml:space="preserve">
     <value>واجهة سطر الأوامر</value>
@@ -13898,6 +14900,12 @@ BitLocker
   </data>
   <data name="CookiesDisabledError" xml:space="preserve">
     <value>يبدو أن ملفات تعريف الارتباط معطلة في متصفحك. ما لم تقبل ملفات تعريف الارتباط للجلسة منا ، لا يمكنك تسجيل الدخول وقد لا يعمل الموقع بالشكل المتوقع. اقرأ المزيد في &lt;a href="{0}"&gt; سياسة ملفات تعريف الارتباط &lt;/a&gt;.</value>
+  </data>
+  <data name="CopyEncryptedTextToClipboardTooltipText" xml:space="preserve">
+    <value>نسخ النص المُشفَّر إلى الحافظة</value>
+  </data>
+  <data name="CopyPlainTextClipboardText" xml:space="preserve">
+    <value>نسخ النص العادي إلى الحافظة</value>
   </data>
   <data name="CouldNotDetermineFolderPathText" xml:space="preserve">
     <value>تعذر تحديد مسار مجلد التنزيلات</value>
@@ -14224,6 +15232,9 @@ BitLocker
   </data>
   <data name="CustomerYourStoryText" xml:space="preserve">
     <value>شارك قصتك</value>
+  </data>
+  <data name="CustomPasswordHelpHoverText" xml:space="preserve">
+    <value>استخدم كلمة المرور المخصّصة نفسها التي تم استخدامها لتشفير النص من أجل فك التشفير.</value>
   </data>
   <data name="DataIntegrityLabel" xml:space="preserve">
     <value>التحقق من سلامة البيانات</value>
@@ -14575,11 +15586,17 @@ BitLocker
   <data name="DoubleClickToOpenToolTip" xml:space="preserve">
     <value>انقر نقرا مزدوجا للفتح. إذا لزم الأمر ، ستتم مطالبتك بكلمة مرور.</value>
   </data>
+  <data name="DownloadAsTxtButton" xml:space="preserve">
+    <value>تنزيل بصيغة.TXT</value>
+  </data>
   <data name="DownloadAxcrypt2LinkLabel" xml:space="preserve">
     <value>قم بتنزيل برنامج اكسكربت 2</value>
   </data>
   <data name="DownloadAxCryptAppPrompt" xml:space="preserve">
     <value>قم بتنزيل تطبيق اكسكربت</value>
+  </data>
+  <data name="DownloadAxcryptDescription" xml:space="preserve">
+    <value>قم بتحميل أكس كريبت لأجهزة الكمبيوتر أو الهواتف المحمولة وابدأ رحلتك الرائعة في عالم التشفير.</value>
   </data>
   <data name="DownloadAxcryptLatestFeatures1" xml:space="preserve">
     <value>اكسكربت هو تشفير بدون أبواب خلفية. بدون كلمة المرور تضيع ملفاتك. لا تنسى كلمة المرور الخاصة بك! احتفظ دائمًا بنسخ احتياطية مناسبة من الملفات المهمة ، سواء كانت مشفرة أم لا.</value>
@@ -14589,6 +15606,9 @@ BitLocker
   </data>
   <data name="DownloadAxcryptLatestFeatures3" xml:space="preserve">
     <value>ضع في اعتبارك أنه إذا قمت بتثبيت اكسكربت 2 وفتح ملفات قديمة ، فلن يكون من الممكن فتح هذه الملفات باستخدام اكسكربت 1.</value>
+  </data>
+  <data name="DownloadEncryptedTextAsTxtTooltipText" xml:space="preserve">
+    <value>تنزيل نص مُشفَّر كملف</value>
   </data>
   <data name="DownloadHeroHeadingMac" xml:space="preserve">
     <value>AxCrypt  ل macOS </value>
@@ -14664,6 +15684,9 @@ BitLocker
   </data>
   <data name="DownloadpageMobileTitle" xml:space="preserve">
     <value>ضع اكسكربت على &lt;span&gt; جميع &lt;br/&gt; أجهزتك. &lt;/span&gt;</value>
+  </data>
+  <data name="DownloadPlainText" xml:space="preserve">
+    <value>تنزيل النص العادي كملف.</value>
   </data>
   <data name="DownloadPrimiumPlusHeading" xml:space="preserve">
     <value>&lt;span&gt;Premium&lt;/span&gt; بلس:</value>
@@ -14888,6 +15911,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="EncryptDecryptGuideCarouselText13" xml:space="preserve">
     <value>انقر بزر الفأرة الأيمن على الملف في مستكشف الملفات.</value>
   </data>
+  <data name="EncryptDecryptGuideCarouselText14" xml:space="preserve">
+    <value>اختر أكسكريبت ← تشفير</value>
+  </data>
   <data name="EncryptDecryptGuideCarouselText15" xml:space="preserve">
     <value>تم الآن تشفير ملفك وإخفاؤه عن أعين المتطفلين.</value>
   </data>
@@ -14908,6 +15934,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="EncryptDecryptGuideCarouselText3" xml:space="preserve">
     <value>اختر الملف الذي تريد تشفيره. </value>
+  </data>
+  <data name="EncryptDecryptGuideCarouselText4" xml:space="preserve">
+    <value>يتم تشفير الملفات على الفور وحفظها بامتداد .</value>
   </data>
   <data name="EncryptDecryptGuideCarouselText5" xml:space="preserve">
     <value>افتح تطبيق أكسكريبت</value>
@@ -14936,6 +15965,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="EncryptDecryptGuideDecryptText12" xml:space="preserve">
     <value>اختر الملف الذي ترغب في فك تشفيره</value>
   </data>
+  <data name="EncryptDecryptGuideDecryptText13" xml:space="preserve">
+    <value>اختر أكس كريبت → فك التشفير لفك تشفير الملفات داخل المجلد.</value>
+  </data>
   <data name="EncryptDecryptGuideDecryptText2" xml:space="preserve">
     <value>اذهب إلى الصفحة الرئيسية | الملفات الأخيرة، وانقر بزر الفأرة الأيمن على الملف → اختر "إيقاف الأمان".</value>
   </data>
@@ -14945,8 +15977,17 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="EncryptDecryptGuideDecryptText4" xml:space="preserve">
     <value>انقر بزر الفأرة الأيمن على المجلد → اختر "فك التشفير نهائيًا".</value>
   </data>
+  <data name="EncryptDecryptGuideDecryptText5" xml:space="preserve">
+    <value>انقر على أي ملف في مستكشف الملفات → اختر أكسكريبت → فك التشفير.</value>
+  </data>
   <data name="EncryptDecryptGuideDecryptText6" xml:space="preserve">
     <value>بالنسبة للمجلدات، انقر بزر الفأرة الأيمن على المجلد المطلوب في مستكشف الملفات.</value>
+  </data>
+  <data name="EncryptDecryptGuideDecryptText7" xml:space="preserve">
+    <value>افتح تطبيق أكس كريبت على الهاتف المحمول.</value>
+  </data>
+  <data name="EncryptDecryptGuideDecryptText8" xml:space="preserve">
+    <value>سجّل الدخول باستخدام حساب أكس كريبت الخاص بك.</value>
   </data>
   <data name="EncryptDecryptGuideDecryptText9" xml:space="preserve">
     <value>"اضغط لإيقاف الأمان"</value>
@@ -14969,6 +16010,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="EncryptDecryptGuideDesktopHead6" xml:space="preserve">
     <value>قائمة النقر بزر الفأرة الأيمن في ويندوز</value>
   </data>
+  <data name="EncryptDecryptGuideEncryptText1" xml:space="preserve">
+    <value>اسحب ملفك إلى نافذة أكس كريبت الرئيسية.</value>
+  </data>
   <data name="EncryptDecryptGuideEncryptText2" xml:space="preserve">
     <value>سيتم تشفير الملفات تلقائيًا وعرضها في القائمة.</value>
   </data>
@@ -14980,6 +16024,12 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="EncryptDecryptGuideTipsText2" xml:space="preserve">
     <value>استخدم دائمًا كلمات مرور قوية ومعقدة وتذكر ألا تنساها. أكسكريبت هو تشفير بدون ثغرات خلفية. بدون كلمة المرور، ستفقد ملفاتك. لا تنسَ كلمة المرور أبدًا! احرص دائمًا على الاحتفاظ بنسخ احتياطية مناسبة للملفات المهمة، سواء كانت مشفرة أم لا.</value>
+  </data>
+  <data name="EncryptDecryptGuideTipsText3" xml:space="preserve">
+    <value>يمكن لـ أكسكريبت 2 فك تشفير الملفات التي تم تشفيرها بواسطة أكسكريبت 1، ولكن العكس غير ممكن.</value>
+  </data>
+  <data name="EncryptDecryptHeadParagraph" xml:space="preserve">
+    <value>دليلك الشامل لتأمين الملفات وفتحها باستخدام أكس كريبت.</value>
   </data>
   <data name="EncryptDecryptSideMenuHead1" xml:space="preserve">
     <value>التشفير (على أجهزة الكمبيوتر)</value>
@@ -17094,8 +18144,17 @@ https://axcrypt.net/information/guides/encryption-decryption/</value>
   <data name="HomeSellingPointPasswordManagementHeading" xml:space="preserve">
     <value>إدارة كلمة المرور</value>
   </data>
+  <data name="HomeSellingPointStrongEncryptionBody" xml:space="preserve">
+    <value>أمان الملفات بمعرفة صفرية باستخدام خوارزمية AES-256، مع تعزيز مستوى الحماية عبر المصادقة متعددة العوامل.</value>
+  </data>
   <data name="HomeSellingPointStrongEncryptionHeading" xml:space="preserve">
     <value>تشفير قوي ووصول آمن</value>
+  </data>
+  <data name="HomeSellingPointTextEncryptionBody" xml:space="preserve">
+    <value>حوّل النص العادي السري إلى صيغة آمنة وغير قابلة للقراءة. اكتب النص الخاص بك، وقم بتأمينه باستخدام كلمة مرور حساب أكس كريبت، ثم شارك الناتج المشفّر.</value>
+  </data>
+  <data name="HomeSellingPointVaultEncryptionBody" xml:space="preserve">
+    <value>خزنة أكس كريبت هي حاوية آمنة ومشفرة لتخزين ملفاتك ومجلداتك الحساسة بشكل تلقائي.</value>
   </data>
   <data name="HomeStayInTouchHeading" xml:space="preserve">
     <value>البقاء على اتصال معنا</value>
@@ -17970,6 +19029,11 @@ SE-114 29 ستوكهولم
   <data name="KeyShareGuideWhatsNextText2" xml:space="preserve">
     <value>الرسائل الآمنة (Secured Messenger) هي ميزة مراسلة آمنة بتشفير كامل من الطرف إلى الطرف ومُدمجة في أكسكريبت:
 دليل مدير كلمات المرور في أكسكريبت – إدارة ومشاركة كلمات المرور بأمان</value>
+  </data>
+  <data name="KeyShareGuideWhatsNextText3" xml:space="preserve">
+    <value>هل ترغب في التعمق أكثر في أفضل ممارسات التشفير؟
+استكشف مدونتنا للاطّلاع على الأدلة والنصائح.
+مدونة أكسكريبت</value>
   </data>
   <data name="KeyShareInviteUserTextPrompt" xml:space="preserve">
     <value>أنت على وشك دعوة مستخدم جديد إلى برنامج اكسكربت. سوف نرسل دعوة مع التعليمات إلى البريد الإلكتروني لجهة الاتصال.
@@ -18948,6 +20012,9 @@ SE-114 29 ستوكهولم
   <data name="Meta-Description-Blog-AESWUSKWAMBYNS" xml:space="preserve">
     <value>ستتوقف أتاكاما في عام 2026، مما يترك المستخدمين يبحثون عن الحماية. اكتشف كيف تقدّم أكسكريبت بديلاً سلسًا وآمنًا للتشفير للملفات وللأعمال.</value>
   </data>
+  <data name="Meta-Description-Blog-AFEWACLT" xml:space="preserve">
+    <value>تعرّف على كيفية تمكين أداة سطر الأوامر من  أكسكريبت لتشفير الملفات بشكل آمن ومؤتمت للنسخ الاحتياطية والخوادم وسير العمل.</value>
+  </data>
   <data name="Meta-Description-Blog-AFSTTKYDSDTHSWA" xml:space="preserve">
     <value>تعرّف على كيفية الحفاظ على أمان بياناتك خلال موسم العطلات. اكتشف نصائح أساسية لحماية معلوماتك الحساسة باستخدام أكسكريبت.
 </value>
@@ -19048,8 +20115,14 @@ SE-114 29 ستوكهولم
   <data name="Meta-Description-Blog-EVA" xml:space="preserve">
     <value>استكشف الفروقات بين التشفير والمصادقة. تعرّف على كيفية عمل كلٍّ منهما معًا لحماية بياناتك الحساسة وتأمين الوصول إليها.</value>
   </data>
+  <data name="Meta-Description-Blog-EYNTKAAPCA" xml:space="preserve">
+    <value>الهجمات السيبرانية المدعومة بالذكاء الاصطناعي تعيد تشكيل عالم الأمن السيبراني في عام 2026. تعرّف على الاختراق الآلي، والتصيّد الاحتيالي بالذكاء الاصطناعي، وبرامج الفدية، والتزييف العميق، وغير ذلك المزيد.</value>
+  </data>
   <data name="Meta-Description-Blog-FEFBI" xml:space="preserve">
     <value>تعزيز أمان البيانات المالية باستخدام تشفير أكسكريبت</value>
+  </data>
+  <data name="Meta-Description-Blog-FILUTPDADBAAAATH" xml:space="preserve">
+    <value>تعرّف على كيف أدّى هجوم تصيّد صوتي (التصيد الصوتي) إلى اختراق بيانات جامعة هارفارد، ولماذا أصبحت عمليات الاحتيال القائمة على الألفة أكبر تهديد للأمن الرقمي في الوقت الحاضر.</value>
   </data>
   <data name="Meta-Description-Blog-FOKM" xml:space="preserve">
     <value>افهم أساسيات إدارة المفاتيح وأهميتها في حماية بياناتك باستخدام تشفير قوي. قم بتأمين مفاتيحك لتحقيق أعلى مستوى من الأمان.</value>
@@ -19199,6 +20272,9 @@ SE-114 29 ستوكهولم
   <data name="Meta-Description-Blog-TBFEBSBF" xml:space="preserve">
     <value>استكشف كيف يساهم تشفير الملفات في حماية البيانات الحساسة، وضمان الامتثال، وتقليل مخاطر الاختراق، مما يجعله عنصرًا أساسيًا في أمن الأعمال الحديثة.</value>
   </data>
+  <data name="Meta-Description-Blog-TBGTEFAF" xml:space="preserve">
+    <value>تعرّف على كيفية تشفير الملفات والمجلدات ومحركات الأقراص بأمان في عام 2026. يشرح هذا الدليل المناسب للمبتدئين أساليب التشفير الحديثة، ومخاطر برامج الفدية، وكيفية حماية البيانات باستخدام أكس كريبت.</value>
+  </data>
   <data name="Meta-Description-Blog-THRUFAHSEFT" xml:space="preserve">
     <value>اكتشف مخاطر الملفات غير المشفّرة وكيف تحمي أدوات التشفير البسيطة مثل أكسكريبت بياناتك الحساسة وخصوصيتك وأعمالك من التهديدات السيبرانية.</value>
   </data>
@@ -19262,6 +20338,9 @@ SE-114 29 ستوكهولم
   <data name="Meta-Description-Blog-WIPTFI2E" xml:space="preserve">
     <value>تعرّف على سبب اعتماد التشفير بقوة 256 بت كخيار مفضل لدى الصناعات لحماية البيانات الحساسة. اكتشف ميزاته الأمنية الفريدة التي لا مثيل لها.</value>
   </data>
+  <data name="Meta-Description-Blog-WPRIDHTS" xml:space="preserve">
+    <value>إعادة استخدام كلمات المرور يعرّض جميع حساباتك للخطر. تعرّف على كيفية استغلال القراصنة لكلمات المرور المعاد استخدامها واكتشف أفضل الممارسات للحفاظ على أمانك على الإنترنت.</value>
+  </data>
   <data name="Meta-Description-Blog-WRDBTUAE" xml:space="preserve">
     <value>استكشف كيف تُبرز الانتهاكات الأخيرة للبيانات الحاجة الملحّة إلى استخدام تشفير قوي. تعرّف على الدروس الأساسية لحماية بياناتك ومنع حدوث انتهاكات مستقبلية.</value>
   </data>
@@ -19291,6 +20370,12 @@ SE-114 29 ستوكهولم
   </data>
   <data name="Meta-Description-c-sharp-senior-developer" xml:space="preserve">
     <value>انضم إلى أكسكريبت كمطوّر C# أول في بنغالورو. اعمل على تطوير برنامج تشفير متعدد المنصات باستخدام .NET وMAUI وXamarin. قدّم الآن لتكون جزءًا من فريقنا المبتكر.</value>
+  </data>
+  <data name="Meta-Description-CHOF" xml:space="preserve">
+    <value>اعرض قيم التجزئة التشفيرية الرسمية SHA-256 لمثبّتات وحِزم أكسكريبت. استخدم هذه القيم للتحقّق من التنزيلات وضمان أصالة الملفات وأمانها.</value>
+  </data>
+  <data name="Meta-Description-Commandline-Interface" xml:space="preserve">
+    <value>استخدم واجهة سطر الأوامر الخاصة بـ أكس كريبت لأتمتة تشفير وفك تشفير الملفات. احمِ بياناتك الحساسة بتشفير AES قوي باستخدام أوامر بسيطة.</value>
   </data>
   <data name="Meta-Description-Customerstories" xml:space="preserve">
     <value>اكتشف كيف تعتمد منظمات مثل Bechtle Schweiz AG وElectroCraft على أكسكريبت لتشفير الملفات بأمان وسهولة عبر مختلف الصناعات. اقرأ قصصهم الآن.</value>
@@ -19468,8 +20553,14 @@ SE-114 29 ستوكهولم
   <data name="Meta-Description-Terms-Of-Use" xml:space="preserve">
     <value>استعرض شروط الخدمة الخاصة بـ أكسكريبت: اتفاقيات الترخيص، وطرق الدفع، وشروط الفترة التجريبية، وسياسات الاسترداد. تأكد من الامتثال لشروط الاستخدام الخاصة بنا.</value>
   </data>
+  <data name="Meta-Description-Text-Encrypt-Share-Decrypt" xml:space="preserve">
+    <value>تعرّف على كيفية تشفير النصوص وفك تشفيرها بأمان باستخدام ميزات التشفير الموثوقة من أكسكريبت. يساعدك هذا الدليل على حماية الرسائل الحساسة وضمان أن المستخدمين المصرّح لهم فقط يمكنهم الوصول إليها.</value>
+  </data>
   <data name="Meta-Description-Usage-Tips" xml:space="preserve">
     <value>اكتشف نصائح عملية لاستخدام AxCrypt: تأمين المرفقات في رسائل البريد الإلكتروني، التكامل مع خدمات التخزين السحابي، إخفاء أسماء الملفات، وأتمتة مهام التشفير.</value>
+  </data>
+  <data name="Meta-Description-vault" xml:space="preserve">
+    <value>تعلم كيف تساعدك خزانة أكسكريبت على تخزين وإدارة وتشفير الملفات بأمان، مع حماية بكلمة مرور وأمان بنظام المعرفة الصفرية.</value>
   </data>
   <data name="Meta-Keywords-Blog" xml:space="preserve">
     <value>كيفية تشفير الملفات ، ما هي استخدامات التشفير ، وكيفية حماية البيانات على هاتفك المحمول ، والأساطير حول التشفير ، وكيفية حماية عملك من التهديدات السيبرانية</value>
@@ -19556,6 +20647,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="Meta-Title-Blog-AESWUSKWAMBYNS" xml:space="preserve">
     <value>إيقاف تشفير أتاكاما: انتقل إلى أكسكريب بأمان</value>
+  </data>
+  <data name="Meta-Title-Blog-AFEWACLT" xml:space="preserve">
+    <value>أتمتة تشفير الملفات باستخدام أداة سطر الأوامر من أكسكريبت</value>
   </data>
   <data name="Meta-Title-Blog-AFSTTKYDSDTHSWA" xml:space="preserve">
     <value>احمِ بياناتك خلال العطلات باستخدام تشفير أكسكريبت</value>
@@ -19656,8 +20750,15 @@ SE-114 29 ستوكهولم
   <data name="Meta-Title-Blog-EVA" xml:space="preserve">
     <value>التشفير مقابل المصادقة: فهم الفروقات الرئيسية</value>
   </data>
+  <data name="Meta-Title-Blog-EYNTKAAPCA" xml:space="preserve">
+    <value>
+الهجمات السيبرانية المعتمدة على الذكاء الاصطناعي في عام 2026: أكبر 6 تهديدات</value>
+  </data>
   <data name="Meta-Title-Blog-FEFBI" xml:space="preserve">
     <value>تعرف على كيفية حماية قطاع البنوك من خلال تشفير AES-256 من أكسكريبت.</value>
+  </data>
+  <data name="Meta-Title-Blog-FILUTPDADBAAAATH" xml:space="preserve">
+    <value>اختراق بيانات جامعة هارفارد: كيف تستغلّ عمليات الاحتيال عبر التصيّد الصوتي (التصيد الصوتي) عامل الألفة والثقة</value>
   </data>
   <data name="Meta-Title-Blog-FOKM" xml:space="preserve">
     <value>إدارة المفاتيح: أمر أساسي لتشفير بيانات قوي</value>
@@ -19877,6 +20978,9 @@ SE-114 29 ستوكهولم
   <data name="Meta-Title-Blog-WIPTFI2E" xml:space="preserve">
     <value>لماذا تعتمد الصناعات على التشفير بمعدل 256 بت؟</value>
   </data>
+  <data name="Meta-Title-Blog-WPRIDHTS" xml:space="preserve">
+    <value>لماذا تُعدّ إعادة استخدام كلمات المرور خطيرة وكيفية الحفاظ على أمانك في عام 2026</value>
+  </data>
   <data name="Meta-Title-Blog-WRDBTUAE" xml:space="preserve">
     <value>دروس من الانتهاكات الأخيرة للبيانات: أهمية التشفير</value>
   </data>
@@ -19906,6 +21010,12 @@ SE-114 29 ستوكهولم
   </data>
   <data name="Meta-Title-c-sharp-senior-developer" xml:space="preserve">
     <value>مطور C# أول في أكسكريبت – وظيفة بدوام كامل في بنغالورو</value>
+  </data>
+  <data name="Meta-Title-CHOF" xml:space="preserve">
+    <value>التجزئات التشفيرية للملفات</value>
+  </data>
+  <data name="Meta-Title-Commandline-Interface" xml:space="preserve">
+    <value>واجهة سطر الأوامر الخاصة بـ أكس كريبت | تشفير الملفات عبر واجهة سطر الأوامر</value>
   </data>
   <data name="Meta-Title-Customerstories" xml:space="preserve">
     <value>قصص عملاء أكسكريبت – نجاحات حقيقية في التشفير</value>
@@ -20102,8 +21212,14 @@ SE-114 29 ستوكهولم
   <data name="Meta-Title-Terms-Of-Use" xml:space="preserve">
     <value>شروط خدمة أكسكريبت – شروط الترخيص والدفع والتجربة المجانية</value>
   </data>
+  <data name="Meta-Title-Text-Encrypt-Share-Decrypt" xml:space="preserve">
+    <value>تشفير وفك تشفير النصوص باستخدام أكسكريبت | احمِ رسائلك</value>
+  </data>
   <data name="Meta-Title-Usage-Tips" xml:space="preserve">
     <value>نصائح استخدام  أكسكريبت– أفضل الممارسات لمشاركة الملفات بأمان والتكامل الفعّال</value>
+  </data>
+  <data name="Meta-Title-vault" xml:space="preserve">
+    <value>دليل ميزات خزانة أكسكريبت | تشفير وحماية الملفات</value>
   </data>
   <data name="MetadataRetentionLabel" xml:space="preserve">
     <value>الاحتفاظ بالبيانات الوصفية</value>
@@ -21300,6 +22416,12 @@ SE-114 29 ستوكهولم
   <data name="PhonePlaceholder" xml:space="preserve">
     <value>اكتب رقم هاتفك</value>
   </data>
+  <data name="PlainTextLabel" xml:space="preserve">
+    <value>نص عادي</value>
+  </data>
+  <data name="PlainTextPlaceHolder" xml:space="preserve">
+    <value>يظهر النص العادي هنا</value>
+  </data>
   <data name="PlanText" xml:space="preserve">
     <value>خطة</value>
   </data>
@@ -21352,6 +22474,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="PopularQuestionText20" xml:space="preserve">
     <value>كيف يعمل أكسكربت؟</value>
+  </data>
+  <data name="PopularQuestionText21" xml:space="preserve">
+    <value>تطبيق أكس كريبت للأجهزة المحمولة على نظام أندرويد</value>
   </data>
   <data name="PopularQuestionText22" xml:space="preserve">
     <value>ملاحظات إصدار البرنامج</value>
@@ -22201,6 +23326,9 @@ SE-114 29 ستوكهولم
   <data name="ProductPremiumSecurityText2" xml:space="preserve">
     <value>تُدرك ميزة الأمان المتقدمة هذه أن سلامة الملف تعتمد على محتواه وليس على الحاوية التي يوجد فيها. وبما أن كل ملف يتم مشاركته يكون مُشفّرًا، فلن يؤدي أي رابط ضار إلى تعريض بياناتك للوصول غير المصرّح به، مما يضمن بقاء ملفاتك آمنة تمامًا أينما تم إرسالها.</value>
   </data>
+  <data name="ProductPremiumSecurityText3" xml:space="preserve">
+    <value>نهج يضع الخصوصية في المقام الأول، مدعوم بتشفير قوي غير قابل للاختراق بطول ‎256-بت، يحافظ على أمان بياناتك. تحتفظ بالتحكم الكامل في مفاتيح فك التشفير الخاصة بك، مما يضمن أن تكون أنت وحدك — ولا حتى أكس كريبت — من يمكنه الوصول إلى ملفاتك.</value>
+  </data>
   <data name="ProductPremiumSellingPointsStrongerEncrypt" xml:space="preserve">
     <value>تشفير اقوى بواسطة AES-256 &lt;span&gt; AES-256 &gt;</value>
   </data>
@@ -22224,6 +23352,12 @@ SE-114 29 ستوكهولم
   </data>
   <data name="ProductProtectCarouselText7" xml:space="preserve">
     <value>إعادة تسمية الملفات المؤمَّنة إلى معرّفات عشوائية بحيث تبقى الأسماء الأصلية خاصة. عند فك التشفير أو فتح الملف، تتم استعادة اسم الملف الحقيقي تلقائيًا.</value>
+  </data>
+  <data name="ProductProtectCarouselText8" xml:space="preserve">
+    <value>يقوم أكسكريبت لتشفير النصوص بتحويل النص العادي السري الخاص بك فورًا إلى صيغة آمنة وغير قابلة للقراءة. ما عليك سوى كتابة النص، وتأمينه بكلمة مرور حساب أكسكريبت الخاص بك، ثم مشاركة الناتج المشفّر عبر الحافظة (Clipboard)، أو تنزيله كملف ‎.txt‎، أو إرساله عبر البريد الإلكتروني.</value>
+  </data>
+  <data name="ProductProtectCarouselText9" xml:space="preserve">
+    <value>يُعد أكسكريبت الخزنة  حاوية آمنة ومشفّرة لتخزين ملفاتك ومجلداتك الحساسة. يتم تشفير أي عنصر يُضاف إلى الـ الخزنة تلقائيًا، دون الحاجة إلى تنظيف يدوي أو خطوات إضافية.</value>
   </data>
   <data name="ProductRegulatoryHead" xml:space="preserve">
     <value>مصمم ليكون آمنًا. مصمم ليكون متوافقًا.</value>
@@ -23784,6 +24918,9 @@ SE-114 29 ستوكهولم
   <data name="SellingPointMultilingualHeading" xml:space="preserve">
     <value>متعدد اللغات</value>
   </data>
+  <data name="SendEncryptedTextViaEmailTooltipText" xml:space="preserve">
+    <value>إنشاء رسالة بريد إلكتروني جديدة بنص مُشفَّر</value>
+  </data>
   <data name="SendFeedbackTitle" xml:space="preserve">
     <value>ارسل رأيك</value>
   </data>
@@ -23857,6 +24994,12 @@ SE-114 29 ستوكهولم
   <data name="ShareArticalText" xml:space="preserve">
     <value>شارك هذه المادة</value>
   </data>
+  <data name="ShareAsLinkActionLabel" xml:space="preserve">
+    <value>مشاركة كرابط</value>
+  </data>
+  <data name="ShareAsLinkActionText" xml:space="preserve">
+    <value>مشاركة كرابط</value>
+  </data>
   <data name="SharedKeyUserListTitle" xml:space="preserve">
     <value>جميع المستخدمين الذين لديهم حق الوصول في الملفات المحددة ({0})</value>
   </data>
@@ -23874,6 +25017,30 @@ SE-114 29 ستوكهولم
 
 يرجى النظر في إبلاغ "{0}" مباشرة بأمان ملف اكسكربت.</value>
   </data>
+  <data name="ShareEncryptedTextAsLinkTooltipText" xml:space="preserve">
+    <value>مشاركة نص مُشفَّر عبر رابط</value>
+  </data>
+  <data name="ShareInviteMailBodyButton" xml:space="preserve">
+    <value>انضم إلى أكس كريبت</value>
+  </data>
+  <data name="ShareInviteMailSubject" xml:space="preserve">
+    <value>لقد تلقيت محتوى مشفر – الوصول عبر أكس كريبت</value>
+  </data>
+  <data name="ShareInviteMailText1" xml:space="preserve">
+    <value>لقد تلقيت محتوى مُشفّرًا.</value>
+  </data>
+  <data name="ShareInviteMailText2" xml:space="preserve">
+    <value>انضم إلى أكس كريبت للوصول إليه بشكل آمن.</value>
+  </data>
+  <data name="ShareInviteMailText3" xml:space="preserve">
+    <value>تمت مشاركة محتوى مشفر معك بواسطة {addedby_user_email} لضمان بقاء المعلومات سرية ومحمية. يمكن للمستلمين المصرح لهم فقط فتحه.</value>
+  </data>
+  <data name="ShareInviteMailText4" xml:space="preserve">
+    <value>ما هو أكس كريبت</value>
+  </data>
+  <data name="ShareInviteMailText5" xml:space="preserve">
+    <value>أكس كريبت هو أداة تشفير موثوقة وسهلة الاستخدام تحمي الملفات الحساسة والنصوص والرسائل باستخدام تشفير قوي. لا يمكن للمستلمين المصرح لهم فقط عرض المحتوى المشترك بأمان.</value>
+  </data>
   <data name="ShareKeyInformationText" xml:space="preserve">
     <value>أضف مستلمين إلى قائمة الأشخاص الذين تريد مشاركة هذا الملف معهم.</value>
   </data>
@@ -23888,6 +25055,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="ShareNotEncryptedText" xml:space="preserve">
     <value>يبدو أن الملف الذي تريد مشاركته غير مشفّر...</value>
+  </data>
+  <data name="ShareNotifyMailBodyButton" xml:space="preserve">
+    <value>عرض المحتوى المشترك</value>
   </data>
   <data name="ShareSecretFailed" xml:space="preserve">
     <value>فشلت مشاركة كلمة المرور!</value>
@@ -23908,6 +25078,9 @@ SE-114 29 ستوكهولم
   <data name="ShareWithOthersTitle" xml:space="preserve">
     <value>سهولة الوصول إلى كلمات المرور</value>
     <comment>Title of "Share With Others" slide on Onboarding screen in mobile application.</comment>
+  </data>
+  <data name="SharingEncryptedText" xml:space="preserve">
+    <value>مشاركة نص أكس كريبت المشفّر</value>
   </data>
   <data name="ShowInFolderText" xml:space="preserve">
     <value>أظهر ذلك في الملف</value>
@@ -24690,6 +25863,9 @@ SE-114 29 ستوكهولم
   <data name="TextCheckEmailAndSpam" xml:space="preserve">
     <value>تحقق من البريد الإلكتروني والبريد العشوائي!</value>
   </data>
+  <data name="TextEncryptionEmailBodyText" xml:space="preserve">
+    <value>هذا النص مُشفَّر — استخدم أكس كريبت لعرض الرسالة الأصلية.</value>
+  </data>
   <data name="TextEncryptionFaq2" xml:space="preserve">
     <value>هل هناك حد لعدد الأحرف عند تشفير </value>
   </data>
@@ -24705,6 +25881,9 @@ SE-114 29 ستوكهولم
   <data name="TextEncryptionFaq4" xml:space="preserve">
     <value>كيف يمكنني مشاركة النص المُشفّر؟</value>
   </data>
+  <data name="TextEncryptionFaq4Ans" xml:space="preserve">
+    <value>يمكنك مشاركته باستخدام زر نسخ، أو خيار تنزيل باسم ‎.TXT، أو خيار الإرسال عبر البريد الإلكتروني المتاح.</value>
+  </data>
   <data name="TextEncryptionFaq5" xml:space="preserve">
     <value>هل النص المُشفّر آمن لإرساله عبر البريد الإلكتروني أو تطبيقات الدردشة؟</value>
   </data>
@@ -24717,6 +25896,12 @@ SE-114 29 ستوكهولم
   <data name="TextEncryptionFaq6Ans" xml:space="preserve">
     <value>لا، لا يمكن تعديل النص المشفّر. إذا كنت بحاجة إلى تغييرات، قم بتحرير النص الأصلي ثم أعد تشفيره.</value>
   </data>
+  <data name="TextEncryptionFaq7" xml:space="preserve">
+    <value>يستخدم أكسكريبت خوارزمية التشفير AES (معيار التشفير المتقدم) بمفتاح 256-بت لتشفير النصوص.</value>
+  </data>
+  <data name="TextEncryptionFaq7Ans" xml:space="preserve">
+    <value>يستخدم أكسكريبت تشفير AES-256 المعتمد كمعيار في الصناعة، مما يضمن حماية قوية لنصوصك. وهو نفس مستوى التشفير المستخدم في الأنظمة الأمنية الحكومية وأنظمة أمن المؤسسات.</value>
+  </data>
   <data name="TextEncryptionFaq8" xml:space="preserve">
     <value>هل يحدث تشفير النص على جهازي محليًا أم على </value>
   </data>
@@ -24725,6 +25910,24 @@ SE-114 29 ستوكهولم
   </data>
   <data name="TextEncryptionFaq9" xml:space="preserve">
     <value>ماذا يحدث إذا نسيت كلمة المرور الخاصة بي؟</value>
+  </data>
+  <data name="TextEncryptionFaq9Ans" xml:space="preserve">
+    <value>لا يمكن لـ أكسكريبت استعادة كلمة المرور الخاصة بك أو إعادة تعيينها لأننا لا نملك حق الوصول إليها. لتجنب فقدان الوصول، نوصي بحفظ كلمة المرور الخاصة بك بشكل آمن في مدير كلمات مرور موثوق.</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead1" xml:space="preserve">
+    <value>النسخ زر</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead2" xml:space="preserve">
+    <value>تنزيل بصيغة ‎.TXT</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead3" xml:space="preserve">
+    <value>إرسال عبر البريد الإلكتروني</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead4" xml:space="preserve">
+    <value>مشاركة كرابط آمن</value>
+  </data>
+  <data name="TextEncryptionGuidesHeadParagraph" xml:space="preserve">
+    <value>يتيح لك أكسكريبت تشفير النص العادي في ثوانٍ. ما عليك سوى إدخال النص، ثم تأمينه باستخدام كلمة مرور حسابك أو كلمة مرور مخصّصة، ومشاركة الناتج المشفّر عبر البريد الإلكتروني أو الرسائل الخاصة وغير ذلك.</value>
   </data>
   <data name="TextEncryptionGuidesHeadTitle" xml:space="preserve">
     <value>دليل تشفير النصوص ومشاركتها وفك تشفيرها</value>
@@ -24738,6 +25941,9 @@ SE-114 29 ستوكهولم
   <data name="TextEncryptionGuideStepHead3" xml:space="preserve">
     <value>فك تشفير النصوص على أجهزة الكمبيوتر</value>
   </data>
+  <data name="TextEncryptionGuideStepText1" xml:space="preserve">
+    <value>افتح تطبيق أكسكريبت على جهاز الكمبيوتر الخاص بك.</value>
+  </data>
   <data name="TextEncryptionGuideStepText10" xml:space="preserve">
     <value>من القائمة، اختر فك تشفير النص.</value>
   </data>
@@ -24750,11 +25956,35 @@ SE-114 29 ستوكهولم
   <data name="TextEncryptionGuideStepText13" xml:space="preserve">
     <value>سيتم فك تشفير نصك المُشفّر، وسيتم عرض النص الأصلي أدناه.</value>
   </data>
+  <data name="TextEncryptionGuideStepText14" xml:space="preserve">
+    <value>ملاحظات مهمة:</value>
+  </data>
   <data name="TextEncryptionGuideStepText15" xml:space="preserve">
     <value>انقر لفك التشفير</value>
   </data>
+  <data name="TextEncryptionGuideStepText16" xml:space="preserve">
+    <value>اضغط على "تشفير"</value>
+  </data>
+  <data name="TextEncryptionGuideStepText17" xml:space="preserve">
+    <value>استخدم المشاركة كرابط لإنشاء رابط آمن ومحدد المدة للنص المشفّر الخاص بك. اختر ما إذا كان يمكن الوصول إلى الرابط من قِبل أي شخص أو مستخدمين محددين فقط (سيتلقى المستخدمون الجدد رسالة دعوة عبر البريد الإلكتروني، وبعد مشاركة الملف سيتم إرسال رسالة إشعار تحتوي على رابط الوصول). يمكنك إضافة ما يصل إلى 3 عناوين بريد إلكتروني محددة للوصول المقيّد.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText18" xml:space="preserve">
+    <value>حدد وقت انتهاء الصلاحية (على سبيل المثال، ساعة واحدة)</value>
+  </data>
+  <data name="TextEncryptionGuideStepText19" xml:space="preserve">
+    <value>يمكنك مشاركة الرابط بثقة، مع العلم أن الوصول إليه مُتحكَّم به ومؤقّت.</value>
+  </data>
   <data name="TextEncryptionGuideStepText2" xml:space="preserve">
     <value>من القائمة، اختر تشفير النص.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText20" xml:space="preserve">
+    <value>يُعدّ هذا الخيار مثاليًا عندما ترغب في مشاركة آمنة دون الحاجة إلى إرسال ملفات أو نسخ كتل طويلة من النصوص المشفّرة.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText21" xml:space="preserve">
+    <value>إذا تمت مشاركة النص المشفّر باستخدام خيار أيّ شخص، فيجب إدخال كلمة المرور المخصّصة التي يقدّمها المُرسِل لفك تشفير المحتوى.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText22" xml:space="preserve">
+    <value>إذا تم مشاركة النص معك كمستخدم محدد، فلا حاجة لكلمة مرور؛ يمكنك فك تشفير المحتوى مباشرة باستخدام الرابط الآمن.</value>
   </data>
   <data name="TextEncryptionGuideStepText3" xml:space="preserve">
     <value>انقر على تشفير النص.</value>
@@ -24769,18 +25999,23 @@ SE-114 29 ستوكهولم
     <value>ملاحظة: يمكنك اختيار كلمة مرور مخصّصة تكون قوية وسهلة التذكّر، لاستخدامها في تشفير هذا النص وفك تشفيره.</value>
   </data>
   <data name="TextEncryptionGuideStepText7" xml:space="preserve">
-    <value>استخدم زر “نسخ”
-انقر على زر نسخ لنسخ النص المشفّر فورًا إلى الحافظة. بعد ذلك يمكنك لصقه في أي تطبيق أو منصة مثل تطبيقات المراسلة، المستندات، أو نوافذ الدردشة لمشاركته بسرعة وسهولة.</value>
+    <value>انقر على زر نسخ لنسخ النص المشفّر فورًا إلى الحافظة. يمكنك بعد ذلك لصقه في أي تطبيق أو منصة مثل تطبيقات المراسلة أو المستندات أو نوافذ الدردشة، وذلك لمشاركته بسهولة وسرعة.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText8" xml:space="preserve">
+    <value>حدّد خيار تنزيل بصيغة ‎.TXT لحفظ النص المشفّر كملف ‎.txt على جهازك. يمكن مشاركة هذا الملف عبر البريد الإلكتروني، أو التخزين السحابي، أو منصات المراسلة، أو أي طريقة أخرى تفضّلها.</value>
   </data>
   <data name="TextEncryptionGuideStepText9" xml:space="preserve">
-    <value>الإرسال عبر البريد الإلكتروني
-اختر الإرسال عبر البريد الإلكتروني لمشاركة النص المشفّر مباشرةً عبر الإيميل. يوفّر هذا الخيار بديلاً بسيطًا لتشفير البريد الإلكتروني التقليدي، حيث يتم إدراج المحتوى المشفّر تلقائيًا نيابةً عنك.</value>
+    <value>اختر الإرسال عبر البريد الإلكتروني لمشاركة النص المشفّر مباشرةً عبر البريد الإلكتروني. يوفّر هذا الخيار بديلاً بسيطًا لتشفير البريد الإلكتروني التقليدي، حيث يقوم تلقائيًا بإدراج المحتوى المشفّر نيابةً عنك.</value>
   </data>
   <data name="TextEncryptionGuideTips1" xml:space="preserve">
     <value>احرص على أمان كلمة المرور الخاصة بك: شاركها فقط مع المستلمين المقصودين وتجنّب إرسالها عبر قنوات غير آمنة.</value>
   </data>
   <data name="TextEncryptionGuideTips2" xml:space="preserve">
     <value>تحقق من نصك مرتين: تأكد من أن المدخلات دقيقة قبل التشفير، لأن النص المشفّر لا يمكن تعديله بعد ذلك.</value>
+  </data>
+  <data name="TextEncryptionGuideTips3" xml:space="preserve">
+    <value>كلمة مرور مخصّصة:
+احفظ كلمة المرور الخاصة بك بأمان (يُنصح باستخدام مدير كلمات المرور). لا يمكن لـ  أكسكريبت استعادتها أو إعادة تعيينها لك، لأننا لا نملك أي وصول إلى كلمة المرور الخاصة بك.</value>
   </data>
   <data name="TextEncryptionLinkLabel" xml:space="preserve">
     <value>تشفير النصوص.</value>
@@ -25334,6 +26569,9 @@ SE-114 29 ستوكهولم
   <data name="VaultbuttonLinkStep3" xml:space="preserve">
     <value>يتم تأمين الملف أو المجلد تلقائيًا، وسيظهر في الملفات الحديثة وسيتم نقله إلى الخزنة المُعدة مسبقًا.</value>
   </data>
+  <data name="VaultbuttonLinkStep4" xml:space="preserve">
+    <value>ببساطة اسحب وأفلت ملفك أو مجلدك في قسم خزانة أكسكريبت.</value>
+  </data>
   <data name="VaultChangeMessage" xml:space="preserve">
     <value>ملفاتك في موقع الخزنة السابق لا تزال مؤمَّنة. من الآن فصاعدًا، سيتم التعامل مع هذا المسار كمجلد مؤمَّن.</value>
   </data>
@@ -25355,11 +26593,80 @@ SE-114 29 ستوكهولم
   <data name="VaultEncryptionText" xml:space="preserve">
     <value>حاوية آمنة ومشفرة لتخزين ملفاتك ومجلداتك الحساسة. </value>
   </data>
+  <data name="VaultGuideCarouselText1" xml:space="preserve">
+    <value>يرجى تكوين الخزنة من خلال الانتقال إلى الإعدادات → الإعدادات المتقدمة → إعدادات الخزنة.</value>
+  </data>
   <data name="VaultGuideCarouselText10" xml:space="preserve">
     <value>عرض القائمة، أو </value>
   </data>
   <data name="VaultGuideCarouselText11" xml:space="preserve">
     <value>عرض الشبكة </value>
+  </data>
+  <data name="VaultGuideCarouselText2" xml:space="preserve">
+    <value>حدّد المكان الذي تريد تخزين بياناتك المشفّرة فيه → اختر المجلد → أكّد.</value>
+  </data>
+  <data name="VaultGuideCarouselText3" xml:space="preserve">
+    <value>يمكنك اختيار جعل اسم الملف عشوائيًا أثناء التشفير</value>
+  </data>
+  <data name="VaultGuideCarouselText4" xml:space="preserve">
+    <value>سيتم إزالة الملفات التي توضع في الخزنة من موقعها الأصلي ونقلها إلى الخزنة.</value>
+  </data>
+  <data name="VaultGuideCarouselText5" xml:space="preserve">
+    <value>افتح مجلد قبو المُعدّ.</value>
+  </data>
+  <data name="VaultGuideCarouselText6" xml:space="preserve">
+    <value>حدّد الملف أو المجلد الذي تريد إزالته.</value>
+  </data>
+  <data name="VaultGuideCarouselText7" xml:space="preserve">
+    <value>افتحه باستخدام أكس كريبت</value>
+  </data>
+  <data name="VaultGuideCarouselText8" xml:space="preserve">
+    <value>انقر بزر الماوس الأيمن واختر إيقاف التأمين.</value>
+  </data>
+  <data name="VaultGuideCarouselText9" xml:space="preserve">
+    <value>انقل الملف أو المجلد إلى موقع خارج الـ قبو.</value>
+  </data>
+  <data name="VaultGuideFaq1" xml:space="preserve">
+    <value>ماذا يحدث لملفاتي عند إضافتها إلى الخزنة؟</value>
+  </data>
+  <data name="VaultGuideFaq1Ans" xml:space="preserve">
+    <value>عند إضافة ملفات أو مجلدات إلى الخزنة، يتم تأمينها تلقائيًا باستخدام تشفير AES-256 ونقلها إلى مجلد أكسكريبت. تتم إزالة النسخ الأصلية من موقعها السابق، لذلك لا توجد حاجة إلى تكرار الملفات أو إجراء تنظيف يدوي.</value>
+  </data>
+  <data name="VaultGuideFaq2" xml:space="preserve">
+    <value>هل يمكنني إنشاء أكثر من الخزنة واحد على جهاز الكمبيوتر الخاص بي؟</value>
+  </data>
+  <data name="VaultGuideFaq2Ans" xml:space="preserve">
+    <value>يدعم أكسكريبت وجود الخزنة نشطة واحدة فقط لكل نظام. سيتم اعتبار مجلد الـ الخزنة الحالي مجلدًا مؤمّنًا بمجرد تكوين مجلد آخر ليكون الخزنة.</value>
+  </data>
+  <data name="VaultGuideFaq3" xml:space="preserve">
+    <value>هل أحتاج إلى تشفير الملفات داخل الخزنة أو فك تشفيرها يدويًا؟</value>
+  </data>
+  <data name="VaultGuideFaq3Ans" xml:space="preserve">
+    <value>لا. تتولى الخزنة إدارة ذلك تلقائيًا: حيث يتم تأمين الملفات فور إضافتها إلى الخزنة. وعند فتح ملف، يتم فتحه مؤقتًا للاستخدام، وعند إغلاق الملف، يقوم أكس كريبت بتأمينه تلقائيًا مرة أخرى.</value>
+  </data>
+  <data name="VaultGuideFaq4" xml:space="preserve">
+    <value>هل يمكنني إزالة الخزنة بالكامل أو فك تشفيره دفعةً واحدة؟</value>
+  </data>
+  <data name="VaultGuideFaq4Ans" xml:space="preserve">
+    <value>لا. لا يمكن إزالة الخزنة نفسها أو فك تأمينها بإجراء واحد فقط. يجب إزالة الملفات والمجلدات بشكل فردي باستخدام خيار إيقاف الحماية توقف عن التأمين ثم نقلها إلى موقع خارج الخزنة.</value>
+  </data>
+  <data name="VaultGuideFaq5" xml:space="preserve">
+    <value>متى تكون الخزنة الخاصة بي متاحة؟</value>
+  </data>
+  <data name="VaultGuideFaq5Ans" xml:space="preserve">
+    <value>يمكن الوصول إلى القبو الخاص بك فقط عندما يكون برنامج أكس كريبت قيد التشغيل وتكون مسجلاً دخولك. إذا قام أكس كريبت بالقفل بسبب الخمول، أو القفل اليدوي، أو دخول النظام في وضع السكون، فسيتم تقييد الوصول إلى القبو تلقائيًا.</value>
+  </data>
+  <data name="VaultGuideFaq6" xml:space="preserve">
+    <value>ماذا يحدث إذا قمت بتغيير مسار الخزنة؟</value>
+  </data>
+  <data name="VaultGuideFaq6Ans" xml:space="preserve">
+    <value>عند تغيير موقع الخزنة: لم يعد يتم التعامل مع مجلد الخزنة القديم كخزنة. أي ملفات تُركت فيه تتصرف كملفات في مجلد مؤمّن عادي. يعرض برنامج أكسكريبت تحذيرًا لتأكيد العملية قبل السماح بالتغيير.</value>
+  </data>
+  <data name="VaultGuideHeadTitle" xml:space="preserve">
+    <value>دليل مستخدم أكسكريبت الخزنة</value>
+  </data>
+  <data name="VaultGuideParagraph1" xml:space="preserve">
+    <value>الملفات والمجلدات المخزنة في الخزنة مؤمنة تلقائيًا. لإزالتها، يجب إخراجها من الخزنة بشكل فردي ونقلها إلى موقع آخر. لا يمكن إزالة الخزنة بالكامل أو إلغاء تأمينها دفعة واحدة. يجب التعامل مع الملفات والمجلدات واحدًا تلو الآخر.</value>
   </data>
   <data name="VaultGuideParagraph10" xml:space="preserve">
     <value>سلوك التشفير</value>
@@ -25373,14 +26680,80 @@ SE-114 29 ستوكهولم
   <data name="VaultGuideParagraph13" xml:space="preserve">
     <value>تبقى الملفات ضمن بنية مجلدات قياسية على نظامك المحلي، بينما تكون المحتويات محمية بالكامل.</value>
   </data>
+  <data name="VaultGuideParagraph14" xml:space="preserve">
+    <value>عند فتح ملف من الخزنة:</value>
+  </data>
   <data name="VaultGuideParagraph15" xml:space="preserve">
     <value>يتم إلغاء قفل الملف مؤقتًا في الذاكرة أو في موقع مؤقت آمن للاستخدام.</value>
+  </data>
+  <data name="VaultGuideParagraph16" xml:space="preserve">
+    <value>بمجرد إغلاق الملف، يقوم أكس كريبت بتأمينه تلقائيًا مرة أخرى، دون الحاجة لأي إجراء يدوي.</value>
+  </data>
+  <data name="VaultGuideParagraph17" xml:space="preserve">
+    <value>الأمان وعناصر التحكم في الوصول</value>
+  </data>
+  <data name="VaultGuideParagraph18" xml:space="preserve">
+    <value>تُصبح الخزنة قابلة للوصول عندما تكون مسجّل الدخول في تطبيق AxCrypt.</value>
+  </data>
+  <data name="VaultGuideParagraph19" xml:space="preserve">
+    <value>إذا قام أكس كريبت بالقفل بسبب عدم النشاط، أو القفل اليدوي، أو وضع السكون للنظام، فإن الوصول إلى الخزنة يتم تقييده تلقائيًا.</value>
   </data>
   <data name="VaultGuideParagraph2" xml:space="preserve">
     <value>يمكن عرض محتويات خزنتك في </value>
   </data>
+  <data name="VaultGuideParagraph20" xml:space="preserve">
+    <value>يمكن الوصول إلى الملفات والمجلدات في الخزنة فقط أثناء تشغيل أكس كريبت وبقفل غير مفعل.</value>
+  </data>
+  <data name="VaultGuideParagraph21" xml:space="preserve">
+    <value>شاشة خزنتي هي مساحة مخصصة وآمنة تتواجد فيها جميع ملفاتك ومجلداتك المشفّرة.</value>
+  </data>
+  <data name="VaultGuideParagraph22" xml:space="preserve">
+    <value>النقاط الرئيسية</value>
+  </data>
+  <data name="VaultGuideParagraph23" xml:space="preserve">
+    <value>كل ما تقوم بإضافته يتم تشفيره تلقائيًا.</value>
+  </data>
+  <data name="VaultGuideParagraph24" xml:space="preserve">
+    <value>لا توجد حاجة إلى تنظيف يدوي كما هو الحال في المجلدات المؤمّنة.</value>
+  </data>
+  <data name="VaultGuideParagraph25" xml:space="preserve">
+    <value>استخدم شريط البحث للعثور بسرعة على الملفات أو المجلدات.</value>
+  </data>
+  <data name="VaultGuideParagraph26" xml:space="preserve">
+    <value>أثناء الكتابة، يقوم أكس كريبت بتسليط الضوء على العناصر المطابقة—على غرار البحث الديناميكي في سجل نشاط ملفات المستخدم. </value>
+  </data>
+  <data name="VaultGuideParagraph27" xml:space="preserve">
+    <value>يمكنك نقل الخزنة إلى مجلد أو محرك أقراص مختلف، ولكن هناك شروط مهمة يجب مراعاتها.</value>
+  </data>
+  <data name="VaultGuideParagraph28" xml:space="preserve">
+    <value>ماذا يحدث عند تغيير مسار الخزنة</value>
+  </data>
+  <data name="VaultGuideParagraph29" xml:space="preserve">
+    <value>لم يعد مجلد الخزنة الذي تم تكوينه مسبقًا يُعامل كخزنة.</value>
+  </data>
   <data name="VaultGuideParagraph3" xml:space="preserve">
     <value>يمكنك التبديل بينها في أي وقت </value>
+  </data>
+  <data name="VaultGuideParagraph30" xml:space="preserve">
+    <value>الملفات التي تبقى داخل ذلك المجلد تتصرف مثل الملفات الموجودة في مجلد آمن عادي.</value>
+  </data>
+  <data name="VaultGuideParagraph31" xml:space="preserve">
+    <value>ستظل أي ملفات ما زالت موجودة قابلة للوصول وفقًا لحالة الأمان الحالية الخاصة بها.</value>
+  </data>
+  <data name="VaultGuideParagraph32" xml:space="preserve">
+    <value>يدعم أكس كريبت وجود قبو واحد نشط فقط لكل نظام.</value>
+  </data>
+  <data name="VaultGuideParagraph33" xml:space="preserve">
+    <value>يتم عرض تحذير للتأكيد قبل تغيير مسار الـ قبو</value>
+  </data>
+  <data name="VaultGuideParagraph34" xml:space="preserve">
+    <value>تقدّم خزانة أكسكريبت طريقة سلسة وشفافة لحماية ملفاتك الحساسة. مع التشفير التلقائي، والقفل التلقائي، وضوابط الوصول الآمنة، وواجهة بسيطة للسحب والإفلات، فهي تضمن بقاء بياناتك آمنة دون تعطيل سير عملك.</value>
+  </data>
+  <data name="VaultGuideParagraph35" xml:space="preserve">
+    <value>قد تظهر قائمة مخصّصة في التنقّل الجانبي للتطبيق اعتمادًا على إعدادات التخطيط لديك.</value>
+  </data>
+  <data name="VaultGuideParagraph4" xml:space="preserve">
+    <value>خزنة أكس كريبت هي حاوية آمنة ومشفرة لتخزين ملفاتك ومجلداتك الحساسة. أي شيء يُضاف إلى الخزنة يُشفّر تلقائيًا، دون الحاجة لأي خطوات يدوية أو تنظيف إضافي. تعمل الخزنة مثل مجلد مشفر مخصص يمكنك وضعه في أي مكان على جهازك، مع التحكم الكامل من خلال إعدادات الخزنة.</value>
   </data>
   <data name="VaultGuideParagraph5" xml:space="preserve">
     <value>أنشئ حاوية محمية ومشفرة (خزنة).</value>
@@ -25394,11 +26767,56 @@ SE-114 29 ستوكهولم
   <data name="VaultGuideParagraph8" xml:space="preserve">
     <value>اعمل بأمان دون القلق بشأن التنظيف اليدوي.</value>
   </data>
+  <data name="VaultGuideParagraph9" xml:space="preserve">
+    <value>تم تصميم خزنة أكس كريبت لمساعدتك في:</value>
+  </data>
+  <data name="VaultGuidesHeadParagraph" xml:space="preserve">
+    <value>تُعد أكسكريبت الخزنة الخزنة حاوية آمنة ومشفّرة لتخزين ملفاتك ومجلداتك الحساسة. يتم تشفير أي عنصر يُضاف إلى Vault تلقائيًا، دون الحاجة إلى تنظيف يدوي أو خطوات إضافية.</value>
+  </data>
+  <data name="VaultGuideSideMenuHead1" xml:space="preserve">
+    <value>طريقتان لإضافة ملفات/مجلدات إلى الـ قبو.</value>
+  </data>
+  <data name="VaultGuideSideMenuHead2" xml:space="preserve">
+    <value>إزالة الملفات/المجلدات من قبو</value>
+  </data>
+  <data name="VaultGuideSideMenuHead3" xml:space="preserve">
+    <value>عرض القبو الخاص بك</value>
+  </data>
   <data name="VaultGuideSideMenuHead4" xml:space="preserve">
     <value>كيف تعمل الخزنة </value>
   </data>
   <data name="VaultGuideSideMenuHead5" xml:space="preserve">
     <value>شاشة الخزنة الخاصة بي</value>
+  </data>
+  <data name="VaultGuideSubHeading1" xml:space="preserve">
+    <value>تهيئة الـ قبو.</value>
+  </data>
+  <data name="VaultGuideSubHeading10" xml:space="preserve">
+    <value>الأهداف الرئيسية للـ قبو.</value>
+  </data>
+  <data name="VaultGuideSubHeading2" xml:space="preserve">
+    <value>طريقتان سهلتان لإضافة الملفات والمجلدات لتشفيرها تلقائيًا في الخزنة</value>
+  </data>
+  <data name="VaultGuideSubHeading3" xml:space="preserve">
+    <value>"إزالة الملفات أو المجلدات من خزانة أكس كريبت"</value>
+  </data>
+  <data name="VaultGuideSubHeading4" xml:space="preserve">
+    <value>عرض الخزنة الخاصة بك</value>
+  </data>
+  <data name="VaultGuideSubHeading5" xml:space="preserve">
+    <value>ما هو قبو؟</value>
+  </data>
+  <data name="VaultGuideSubHeading6" xml:space="preserve">
+    <value>كيف يعمل القبو؟</value>
+  </data>
+  <data name="VaultGuideSubHeading7" xml:space="preserve">
+    <value>شاشة قبو بلدي</value>
+  </data>
+  <data name="VaultGuideSubHeading8" xml:space="preserve">
+    <value>البحث داخل الخزنة</value>
+  </data>
+  <data name="VaultGuideSubHeading9" xml:space="preserve">
+    <value>تحديث مسار الخزنة الخاصة بك</value>
   </data>
   <data name="VaultLabelPromptAutoEncypt" xml:space="preserve">
     <value>هل ترغب في تشفير الخزنة المفتوحة تلقائيًا عند الخروج؟</value>
@@ -25902,5 +27320,11 @@ SE-114 29 ستوكهولم
   </data>
   <data name="YourSecurityMattersText1" xml:space="preserve">
     <value>نحن نولي خصوصيتك أولوية قصوى. سيتم التعامل مع جميع الملاحظات والبيانات التي تُجمع خلال فترة التجربة التجريبية بأمان وسرية تامة.</value>
+  </data>
+  <data name="ZeroKnowledgeEncryptionLabel" xml:space="preserve">
+    <value>التشفير بصفر معرفة</value>
+  </data>
+  <data name="ZeroKnowledgeEncryptionText" xml:space="preserve">
+    <value>نهج يضع الخصوصية في المقام الأول، مدعوم بتشفير 256-بت لا يمكن اختراقه، يحافظ على أمان بياناتك.</value>
   </data>
 </root>

@@ -43395,6 +43395,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy encrypted text to clipboard.
+        /// </summary>
+        public static string CopyEncryptedTextToClipboardTooltipText {
+            get {
+                return ResourceManager.GetString("CopyEncryptedTextToClipboardTooltipText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy plain text to clipboard.
         /// </summary>
         public static string CopyPlainTextClipboardText {
@@ -45472,6 +45481,15 @@ namespace AxCrypt.Content {
         public static string DownloadAxcryptLatestFeatures3 {
             get {
                 return ResourceManager.GetString("DownloadAxcryptLatestFeatures3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download encrypted text as txt file.
+        /// </summary>
+        public static string DownloadEncryptedTextAsTxtTooltipText {
+            get {
+                return ResourceManager.GetString("DownloadEncryptedTextAsTxtTooltipText", resourceCulture);
             }
         }
         
@@ -72667,6 +72685,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compose a new email with encrypted text.
+        /// </summary>
+        public static string SendEncryptedTextViaEmailTooltipText {
+            get {
+                return ResourceManager.GetString("SendEncryptedTextViaEmailTooltipText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send Feedback.
         /// </summary>
         public static string SendFeedbackTitle {
@@ -72880,6 +72907,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share as Link.
+        /// </summary>
+        public static string ShareAsLinkActionText {
+            get {
+                return ResourceManager.GetString("ShareAsLinkActionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All users with access in selected files ({0}).
         /// </summary>
         public static string SharedKeyUserListTitle {
@@ -72923,6 +72959,15 @@ namespace AxCrypt.Content {
         public static string SharedWithUnverifiedMessagePattern {
             get {
                 return ResourceManager.GetString("SharedWithUnverifiedMessagePattern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share encrypted text via link.
+        /// </summary>
+        public static string ShareEncryptedTextAsLinkTooltipText {
+            get {
+                return ResourceManager.GetString("ShareEncryptedTextAsLinkTooltipText", resourceCulture);
             }
         }
         
@@ -74334,6 +74379,24 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switch to Dark Mode.
+        /// </summary>
+        public static string SwitchToDarkActionText {
+            get {
+                return ResourceManager.GetString("SwitchToDarkActionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Switch to Light Mode.
+        /// </summary>
+        public static string SwitchToLightActionText {
+            get {
+                return ResourceManager.GetString("SwitchToLightActionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Switch user.
         /// </summary>
         public static string SwitchUserButtonText {
@@ -75504,6 +75567,42 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;Copy&apos; Button.
+        /// </summary>
+        public static string TextEncryptionGuideshareHead1 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideshareHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download as .TXT.
+        /// </summary>
+        public static string TextEncryptionGuideshareHead2 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideshareHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send via email.
+        /// </summary>
+        public static string TextEncryptionGuideshareHead3 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideshareHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share as a Secure Link.
+        /// </summary>
+        public static string TextEncryptionGuideshareHead4 {
+            get {
+                return ResourceManager.GetString("TextEncryptionGuideshareHead4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AxCrypt lets you encrypt plain text in seconds. Simply enter the text, secure it with your account password or a custom password, and share the encrypted output via email, private messages, and more..
         /// </summary>
         public static string TextEncryptionGuidesHeadParagraph {
@@ -75531,7 +75630,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;span&gt;3 Easy Ways&lt;/span&gt; &lt;b&gt;to share&lt;/b&gt; Encrypted text.
+        ///   Looks up a localized string similar to &lt;span&gt;4 Easy Ways&lt;/span&gt; &lt;b&gt;to share&lt;/b&gt; Encrypted text.
         /// </summary>
         public static string TextEncryptionGuideStepHead2 {
             get {
@@ -75621,7 +75720,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Share as a Secure Link&lt;/b&gt;&lt;br/&gt; Use &lt;b&gt;Share as Link&lt;/b&gt; to generate a secure, time-limited link to your encrypted text. Choose whether the link can be accessed by &lt;b&gt;Anyone&lt;/b&gt; or only &lt;b&gt;Specific users&lt;/b&gt; (New users will receive an invitation email, and after the file is shared, a notification email with the access link).&lt;br/&gt; Add up to &lt;b&gt;3 specific email addresses&lt;/b&gt; for restricted access.
+        ///   Looks up a localized string similar to Use &lt;b&gt;Share as Link&lt;/b&gt; to generate a secure, time-limited link to your encrypted text. &lt;br/&gt;Choose whether the link can be accessed by &lt;b&gt;Anyone&lt;/b&gt; or only &lt;b&gt;Specific users&lt;/b&gt; (New users will receive an invitation email, and after the file is shared, a notification email with the access link).&lt;br/&gt; Add up to &lt;b&gt;3 specific email addresses&lt;/b&gt; for restricted access.
         /// </summary>
         public static string TextEncryptionGuideStepText17 {
             get {
@@ -75720,7 +75819,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Use the “Copy” Button&lt;/b&gt; &lt;/br&gt; Click the Copy button to instantly copy the encrypted text to your clipboard. You can then paste it into any app or platform such as messaging apps, documents, or chat windows for quick and easy sharing..
+        ///   Looks up a localized string similar to Click the Copy button to instantly copy the encrypted text to your clipboard. You can then paste it into any app or platform such as messaging apps, documents, or chat windows for quick and easy sharing..
         /// </summary>
         public static string TextEncryptionGuideStepText7 {
             get {
@@ -75729,7 +75828,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Download as .TXT&lt;/b&gt; &lt;/br&gt; Select the Download as .TXT option to save the encrypted text as a .txt file on your device. This file can be shared through email, cloud storage, messaging platforms, or any other method you prefer..
+        ///   Looks up a localized string similar to Select the Download as .TXT option to save the encrypted text as a .txt file on your device. This file can be shared through email, cloud storage, messaging platforms, or any other method you prefer..
         /// </summary>
         public static string TextEncryptionGuideStepText8 {
             get {
@@ -75738,7 +75837,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Send via Email&lt;/b&gt; &lt;/br&gt; Choose Send via Email to share the encrypted text directly through email. This option provides a simple alternative to traditional email encryption by automatically inserting the encrypted content for you..
+        ///   Looks up a localized string similar to Choose Send via Email to share the encrypted text directly through email. This option provides a simple alternative to traditional email encryption by automatically inserting the encrypted content for you..
         /// </summary>
         public static string TextEncryptionGuideStepText9 {
             get {

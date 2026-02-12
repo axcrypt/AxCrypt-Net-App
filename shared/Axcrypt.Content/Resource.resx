@@ -14666,6 +14666,9 @@ If you do not accept our temporary session cookies you cannot sign in and the si
   <data name="CookiesDisabledError" xml:space="preserve">
     <value>Cookies appear to be disabled in your browser. Unless you accept session cookies from us you cannot sign in and the site may not perform as expected. Read more in our &lt;a href="{0}"&gt;cookie policy&lt;/a&gt;.</value>
   </data>
+  <data name="CopyEncryptedTextToClipboardTooltipText" xml:space="preserve">
+    <value>Copy encrypted text to clipboard</value>
+  </data>
   <data name="CopyPlainTextClipboardText" xml:space="preserve">
     <value>Copy plain text to clipboard</value>
   </data>
@@ -15364,6 +15367,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   </data>
   <data name="DownloadAxcryptLatestFeatures3" xml:space="preserve">
     <value>Keep in mind that if you install AxCrypt 2 and open old files, these files will no longer be possible to open with AxCrypt 1.</value>
+  </data>
+  <data name="DownloadEncryptedTextAsTxtTooltipText" xml:space="preserve">
+    <value>Download encrypted text as txt file</value>
   </data>
   <data name="DownloadHeroHeadingMac" xml:space="preserve">
     <value>AxCrypt for macOS</value>
@@ -24657,6 +24663,9 @@ Subject: AxCrypt Report Snapshot</value>
   <data name="SellingPointMultilingualHeading" xml:space="preserve">
     <value>Multilingual</value>
   </data>
+  <data name="SendEncryptedTextViaEmailTooltipText" xml:space="preserve">
+    <value>Compose a new email with encrypted text</value>
+  </data>
   <data name="SendFeedbackTitle" xml:space="preserve">
     <value>Send Feedback</value>
   </data>
@@ -24733,6 +24742,9 @@ Choose something difficult to guess, since it will protect passwords in the onli
   <data name="ShareAsLinkActionLabel" xml:space="preserve">
     <value>Share as Link</value>
   </data>
+  <data name="ShareAsLinkActionText" xml:space="preserve">
+    <value>Share as Link</value>
+  </data>
   <data name="SharedKeyUserListTitle" xml:space="preserve">
     <value>All users with access in selected files ({0})</value>
   </data>
@@ -24749,6 +24761,9 @@ Choose something difficult to guess, since it will protect passwords in the onli
     <value>You are about to share securely with someone who has received but not yet responded to an invitation to use AxCrypt.
 
 Please consider informing '{0}' directly about AxCrypt file security.</value>
+  </data>
+  <data name="ShareEncryptedTextAsLinkTooltipText" xml:space="preserve">
+    <value>Share encrypted text via link</value>
   </data>
   <data name="ShareInviteMailBodyButton" xml:space="preserve">
     <value>Join AxCrypt</value>
@@ -25240,6 +25255,12 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Svenska (Swedish)</value>
   </data>
+  <data name="SwitchToDarkActionText" xml:space="preserve">
+    <value>Switch to Dark Mode</value>
+  </data>
+  <data name="SwitchToLightActionText" xml:space="preserve">
+    <value>Switch to Light Mode</value>
+  </data>
   <data name="SwitchUserButtonText" xml:space="preserve">
     <value>Switch user</value>
   </data>
@@ -25634,6 +25655,18 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   <data name="TextEncryptionFaq9Ans" xml:space="preserve">
     <value>AxCrypt &lt;b&gt;cannot recover or reset your password&lt;/b&gt; because we do not have access to it. To avoid losing access, we recommend storing your password securely in a trusted password manager.</value>
   </data>
+  <data name="TextEncryptionGuideshareHead1" xml:space="preserve">
+    <value>'Copy' Button</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead2" xml:space="preserve">
+    <value>Download as .TXT</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead3" xml:space="preserve">
+    <value>Send via email</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead4" xml:space="preserve">
+    <value>Share as a Secure Link</value>
+  </data>
   <data name="TextEncryptionGuidesHeadParagraph" xml:space="preserve">
     <value>AxCrypt lets you encrypt plain text in seconds. Simply enter the text, secure it with your account password or a custom password, and share the encrypted output via email, private messages, and more.</value>
   </data>
@@ -25644,7 +25677,7 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
     <value>&lt;span&gt;Encrypting Text&lt;/span&gt; on&lt;b&gt; Desktop&lt;/b&gt;</value>
   </data>
   <data name="TextEncryptionGuideStepHead2" xml:space="preserve">
-    <value>&lt;span&gt;3 Easy Ways&lt;/span&gt; &lt;b&gt;to share&lt;/b&gt; Encrypted text</value>
+    <value>&lt;span&gt;4 Easy Ways&lt;/span&gt; &lt;b&gt;to share&lt;/b&gt; Encrypted text</value>
   </data>
   <data name="TextEncryptionGuideStepHead3" xml:space="preserve">
     <value>&lt;span&gt;Decrypting Text&lt;/span&gt; on &lt;b&gt;Desktop&lt;/b&gt;</value>
@@ -25674,7 +25707,7 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
     <value>Click &lt;b&gt; Encrypt&lt;/b&gt;</value>
   </data>
   <data name="TextEncryptionGuideStepText17" xml:space="preserve">
-    <value>&lt;b&gt;Share as a Secure Link&lt;/b&gt;&lt;br/&gt; Use &lt;b&gt;Share as Link&lt;/b&gt; to generate a secure, time-limited link to your encrypted text. Choose whether the link can be accessed by &lt;b&gt;Anyone&lt;/b&gt; or only &lt;b&gt;Specific users&lt;/b&gt; (New users will receive an invitation email, and after the file is shared, a notification email with the access link).&lt;br/&gt; Add up to &lt;b&gt;3 specific email addresses&lt;/b&gt; for restricted access</value>
+    <value>Use &lt;b&gt;Share as Link&lt;/b&gt; to generate a secure, time-limited link to your encrypted text. &lt;br/&gt;Choose whether the link can be accessed by &lt;b&gt;Anyone&lt;/b&gt; or only &lt;b&gt;Specific users&lt;/b&gt; (New users will receive an invitation email, and after the file is shared, a notification email with the access link).&lt;br/&gt; Add up to &lt;b&gt;3 specific email addresses&lt;/b&gt; for restricted access</value>
   </data>
   <data name="TextEncryptionGuideStepText18" xml:space="preserve">
     <value>Set &lt;b&gt;an expiration time&lt;/b&gt; (for example, 1 hour)</value>
@@ -25707,13 +25740,13 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
     <value>&lt;b&gt;Note:&lt;/b&gt; You can opt for a custom password that is strong &amp; easy to remember, to encrypt &amp; decrypt this text.</value>
   </data>
   <data name="TextEncryptionGuideStepText7" xml:space="preserve">
-    <value>&lt;b&gt;Use the “Copy” Button&lt;/b&gt; &lt;/br&gt; Click the Copy button to instantly copy the encrypted text to your clipboard. You can then paste it into any app or platform such as messaging apps, documents, or chat windows for quick and easy sharing.</value>
+    <value>Click the Copy button to instantly copy the encrypted text to your clipboard. You can then paste it into any app or platform such as messaging apps, documents, or chat windows for quick and easy sharing.</value>
   </data>
   <data name="TextEncryptionGuideStepText8" xml:space="preserve">
-    <value>&lt;b&gt;Download as .TXT&lt;/b&gt; &lt;/br&gt; Select the Download as .TXT option to save the encrypted text as a .txt file on your device. This file can be shared through email, cloud storage, messaging platforms, or any other method you prefer.</value>
+    <value>Select the Download as .TXT option to save the encrypted text as a .txt file on your device. This file can be shared through email, cloud storage, messaging platforms, or any other method you prefer.</value>
   </data>
   <data name="TextEncryptionGuideStepText9" xml:space="preserve">
-    <value>&lt;b&gt;Send via Email&lt;/b&gt; &lt;/br&gt; Choose Send via Email to share the encrypted text directly through email. This option provides a simple alternative to traditional email encryption by automatically inserting the encrypted content for you.</value>
+    <value>Choose Send via Email to share the encrypted text directly through email. This option provides a simple alternative to traditional email encryption by automatically inserting the encrypted content for you.</value>
   </data>
   <data name="TextEncryptionGuideTips1" xml:space="preserve">
     <value>🔐 &lt;b&gt;Keep your password secure:&lt;/b&gt; Share it only with intended recipients and avoid sending it through insecure channels.</value>
