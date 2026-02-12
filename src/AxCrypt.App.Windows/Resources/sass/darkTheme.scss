@@ -288,11 +288,6 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     background: $colDrkMdBushd;
 }
 
-.hover-popup, .home-hover {
-    background: $colBordBgrnd;
-    color: $colBord !important;
-}
-
 .secured-messenger option:hover {
     color: $colBord;
 }
@@ -329,4 +324,16 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 
 .abt-axc > span {
     color: $colTxtlble;
+}
+
+.home-hover {
+    background-color: $SdebrbgndClr !important;
+
+    .txt-clr {
+        color: $colTxtlble !important;
+    }
+}
+
+.dropbtn, .language-dropdown > .dropdown-item-container {
+    background-color: $SdebrbgndClr !important;
 }

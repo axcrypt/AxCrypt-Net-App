@@ -261,11 +261,6 @@ input[readonly=readonly], textarea[readonly] {
   background: #757575;
 }
 
-.hover-popup, .home-hover {
-  background: #282828;
-  color: #CDFFB1 !important;
-}
-
 .secured-messenger option:hover {
   color: #CDFFB1;
 }
@@ -302,4 +297,15 @@ input[readonly=readonly], textarea[readonly] {
 
 .abt-axc > span {
   color: #A4A4A4;
+}
+
+.home-hover {
+  background-color: #303030 !important;
+}
+.home-hover .txt-clr {
+  color: #A4A4A4 !important;
+}
+
+.dropbtn, .language-dropdown > .dropdown-item-container {
+  background-color: #303030 !important;
 }
