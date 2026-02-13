@@ -16,8 +16,8 @@ $colDrkMdBushd: #757575;
 $BtnBackClr: #48772C;
 $colDrkMdHglhtPrm: #CDFFB1;
 
-.side-menu {
-    background-color: $SdebrbgndClr !important;
+.sidebar, .sid-mnu-colpsd.side-menu {
+    background: $SdebrbgndClr !important;
 }
 
 .nav-item .active,
@@ -113,7 +113,7 @@ $colDrkMdHglhtPrm: #CDFFB1;
     color: $colTxtLink !important;
 }
 
-.page {
+.page, .side-menu {
     background-color: $colPageBgrnd !important;
     color: $colTxtlble;
 }
