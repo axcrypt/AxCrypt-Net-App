@@ -20,7 +20,6 @@
 
 .label-text label, .lable-txt {
   color: #A4A4A4 !important;
-  background-color: #575757 !important;
 }
 
 .desc-txt, .nav-link span, .select-email {
@@ -278,7 +277,16 @@ input[readonly=readonly], textarea[readonly] {
 
 .password-filter-dropdown-content {
   background: #303030;
+}
+.password-filter-dropdown-content label {
   color: #A4A4A4 !important;
+}
+.password-filter-dropdown-content label:hover {
+  color: #CDFFB1 !important;
+}
+
+.password-filter-dropdown-content ul, .password-filter-dropdown-content li {
+  border-bottom: none;
 }
 
 .text-fnt-size {
@@ -321,7 +329,7 @@ input[readonly=readonly], textarea[readonly] {
   filter: opacity(0.8);
 }
 
-.menu-image, .mre-actn-box img {
+.menu-image, .mre-actn-box img, .close-img, .clck-img, .secrets-type-icon-desktop {
   filter: grayscale(1) brightness(10);
 }
 
@@ -335,4 +343,18 @@ input[readonly=readonly], textarea[readonly] {
 
 .actv-subs {
   background-color: #ebebeb !important;
+}
+
+.flex-start .button {
+  background-color: #303030;
+  color: #A4A4A4;
+}
+
+.button.border {
+  background-color: #303030;
+  color: #FFFFFF;
+}
+
+.button.border:hover {
+  background-color: #575757;
 }

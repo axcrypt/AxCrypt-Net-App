@@ -38,7 +38,6 @@ $colDrkMdHglhtPrm: #CDFFB1;
 
 .label-text label, .lable-txt {
     color: $colTxtlble !important;
-    background-color: $TbleBg !important;
 }
 
 .desc-txt, .nav-link span, .select-email {
@@ -74,11 +73,11 @@ $colDrkMdHglhtPrm: #CDFFB1;
     background-color: $colBordBgrnd !important;
 }
 
-.password-create-dropdown-content a:hover,
-.password-create-dropdown-content a.active {
-    color: $colTxtLink !important;
-    background-color: $colHeDBgrnd !important;
-}
+    .password-create-dropdown-content a:hover,
+    .password-create-dropdown-content a.active {
+        color: $colTxtLink !important;
+        background-color: $colHeDBgrnd !important;
+    }
 
 #messenger-keyword {
     background-color: $colBordBgrnd !important;
@@ -141,10 +140,10 @@ button {
     border: $BorderClr !important;
 }
 
-.mre-actn-box:hover {
-    background-color: $SdebrbgndClr !important;
-    color: $colTxtlble;
-}
+    .mre-actn-box:hover {
+        background-color: $SdebrbgndClr !important;
+        color: $colTxtlble;
+    }
 
 .rcnt-fld-bx {
     background-color: $colActnBgrnd;
@@ -168,11 +167,11 @@ button {
         background: $colPageBgrnd !important;
     }
 
-    tbody tr:hover,
-    tbody tr.active,
-    .selected td {
-        background: $SdebrbgndClr !important;
-    }
+        tbody tr:hover,
+        tbody tr.active,
+        .selected td {
+            background: $SdebrbgndClr !important;
+        }
 }
 
 textarea, input[type=text], input[type=password], textarea[readonly], textarea {
@@ -180,9 +179,9 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     color: $colTxtBd !important;
 }
 
-input[readonly="readonly"], textarea[readonly] {
-    border: $colDrkMdL3 !important;
-}
+    input[readonly="readonly"], textarea[readonly] {
+        border: $colDrkMdL3 !important;
+    }
 
 .clean-up textarea {
     color: $colTxtBd !important;
@@ -228,17 +227,17 @@ input[readonly="readonly"], textarea[readonly] {
     color: $colTxtlble;
 }
 
-.filter-text:hover {
-    color: $TbleBg;
-}
+    .filter-text:hover {
+        color: $TbleBg;
+    }
 
 .inbox-section table {
     background: $colBordBgrnd;
 }
 
-.inbox-section table:hover {
-    background: $colTxtlble;
-}
+    .inbox-section table:hover {
+        background: $colTxtlble;
+    }
 
 .email-txt-ovflw {
     color: $colTxtBd;
@@ -263,9 +262,9 @@ input[readonly="readonly"], textarea[readonly] {
     color: $colTxtlble;
 }
 
-.secured-messenger option:hover {
-    color: $colBord;
-}
+    .secured-messenger option:hover {
+        color: $colBord;
+    }
 
 .multi-actn-btn {
     background-color: $colDrkMdL3;
@@ -273,9 +272,9 @@ input[readonly="readonly"], textarea[readonly] {
     border: $colTxtlble;
 }
 
-.multi-actn-btn:hover {
-    background-color: $colDrkMdL3;
-}
+    .multi-actn-btn:hover {
+        background-color: $colDrkMdL3;
+    }
 
 .button.border {
     border: 1px solid $SdebrbgndClr !important;
@@ -304,8 +303,20 @@ input[readonly="readonly"], textarea[readonly] {
 
 .password-filter-dropdown-content {
     background: $SdebrbgndClr;
-    color: $colTxtlble !important;
+
+    label {
+        color: $colTxtlble !important;
+    }
+
+        label:hover {
+            color: $colBord !important;
+        }
 }
+
+    .password-filter-dropdown-content ul, .password-filter-dropdown-content li {
+        border-bottom: none;
+    }
+
 
 .text-fnt-size {
     color: $colDrkMdL3;
@@ -348,7 +359,7 @@ input[readonly="readonly"], textarea[readonly] {
     filter: opacity(0.8);
 }
 
-.menu-image, .mre-actn-box img {
+.menu-image, .mre-actn-box img, .close-img, .clck-img, .secrets-type-icon-desktop {
     filter: grayscale(1) brightness(10);
 }
 
@@ -364,3 +375,17 @@ input[readonly="readonly"], textarea[readonly] {
     background-color: #ebebeb !important;
 }
 
+
+.flex-start .button {
+    background-color: $SdebrbgndClr;
+    color: $colTxtlble;
+}
+
+.button.border {
+    background-color: $SdebrbgndClr;
+    color: $colTxtBd;
+}
+
+    .button.border:hover {
+        background-color: $TbleBg;
+    }
