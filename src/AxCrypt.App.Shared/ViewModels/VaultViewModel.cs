@@ -409,7 +409,22 @@ namespace AxCrypt.App.Shared.ViewModels
         {
             VaultBreadCrumb.Clear();
 
-            string baseDir = Path.GetDirectoryName(VaultBasePath)!;
+            IDataStore vaultDataStore = New<IDataStore>(VaultBasePath);
+            string? baseDir = !vaultDataStore.IsNetworkPath ? vaultDataStore.Container.FullName : vaultDataStore.FullName;
+            if (vaultDataStore.IsNetworkPath)
+            {
+                VaultBreadCrumb.Add((baseDir, baseDir));
+            }
+            if (vaultDataStore.IsNetworkPath && baseDir == CurrentFolder)
+            {
+                return;
+            }
+
+            if (baseDir == null)
+            {
+                throw new InvalidDataException(nameof(baseDir));
+            }
+
             string relativePath = Path.GetRelativePath(baseDir, CurrentFolder);
             string[] parts = relativePath.Split(
                 Path.DirectorySeparatorChar,

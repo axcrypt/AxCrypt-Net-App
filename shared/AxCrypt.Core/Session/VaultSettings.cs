@@ -59,7 +59,7 @@ namespace AxCrypt.Core.Session
             if (_watchedFolders.ContainsKey(vaultFolder.Path))
                 return;
 
-            vaultFolder.Changed += vaultWatchedFolder_Changed!;
+            vaultFolder.Changed += VaultWatchedFolder_Changed!;
             _watchedFolders.Add(vaultFolder.Path, vaultFolder);
 
             await AddVaultWatchedFolderAsync(vaultFolder.Path);
@@ -70,14 +70,9 @@ namespace AxCrypt.Core.Session
             await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.VaultFolderAdded, Resolve.KnownIdentities.DefaultEncryptionIdentity, vaultFolder));
         }
 
-        private async void vaultWatchedFolder_Changed(object sender, FileWatcherEventArgs e)
+        private async void VaultWatchedFolder_Changed(object sender, FileWatcherEventArgs e)
         {
-            VaultFolder vaultFolder = (VaultFolder)sender;
-            foreach (string fullName in e.FullNames)
-            {
-                IDataItem dataItem = New<IDataItem>(fullName);
-                await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.VaultFolderChange, dataItem.FullName));
-            }
+            await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.VaultFolderChange, e.FullNames));
         }
 
         public virtual async Task RemoveAndDecryptVaultWatchedFolder(IDataItem folderInfo)
