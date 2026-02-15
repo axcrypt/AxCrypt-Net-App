@@ -539,12 +539,8 @@ namespace AxCrypt.App.Shared.ViewModels
         {
             if (!folderPath.Any()) return;
 
-            if (!folderPath.EndsWith("\\"))
-            {
-                folderPath += "\\";
-            }
-
-            if (!Resolve.FileSystemState.AllVaultFolders.Any((wf) => folderPath == wf.Path))
+            folderPath = folderPath.NormalizeFolderPath();
+            if (!Resolve.FileSystemState.AllVaultFolders.Any((wf) => folderPath.NormalizeFolderPath() == wf.Path))
             {
                 Resolve.FileSystemState.AddVaultFolder(new VaultFolder(folderPath, Resolve.KnownIdentities.DefaultEncryptionIdentity.Tag));
                 await Resolve.FileSystemState.Save();
