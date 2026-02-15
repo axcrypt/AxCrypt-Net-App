@@ -33,6 +33,7 @@ public class CssService : ICssService
         {
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "sharesecret.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "findfiles.min.css"));
+            cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "filepicker.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "vault.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "vaultsettings.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "textencryption.min.css"));

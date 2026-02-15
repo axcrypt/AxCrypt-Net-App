@@ -239,6 +239,7 @@
   min-width: 150px;
   min-height: 210px;
   overflow: hidden;
+  z-index: 10;
 }
 .findfiles-modalDialog .context-menu-action .menu-item {
   padding: 8px 12px;
@@ -348,6 +349,472 @@
 }
 .findfiles-modalDialog .modal-footer {
   justify-content: center !important;
+}
+
+.file-picker-modalDialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Optional overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.file-picker-modalDialog > div {
+  width: fit-content;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  margin: 0;
+  max-width: 95vw; /* avoid overflow */
+  max-height: 95vh;
+  box-sizing: border-box;
+}
+.file-picker-modalDialog .file-picker-header .file-picker-title {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 30px 5px 0px;
+}
+.file-picker-modalDialog .file-picker-header .center-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.file-picker-modalDialog .file-picker-header .center-title label {
+  font-size: 20px;
+}
+.file-picker-modalDialog .file-picker-header .search-box {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+.file-picker-modalDialog .file-picker-header .search-btn img {
+  padding: 12px;
+}
+.file-picker-modalDialog .file-picker-header .search-box input {
+  border: 1px solid #A4A4A4;
+}
+.file-picker-modalDialog .file-picker-header .search-box .search-btn {
+  position: absolute;
+  right: 0px;
+  top: 22px;
+  transform: translateY(-50%);
+  width: 37px;
+  height: 35px;
+  cursor: pointer;
+  background-color: #969696;
+  border-radius: 5px;
+  transition: filter 0.3s ease;
+}
+.file-picker-modalDialog .file-picker-header .search-box:hover .search-btn {
+  background-color: #232323;
+}
+.file-picker-modalDialog .file-picker-filepath {
+  margin: 0px 15px;
+}
+.file-picker-modalDialog .file-picker-filepath .breadcrumb-part {
+  display: inline-block;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.file-picker-modalDialog .file-picker-filepath .breadcrumb {
+  font-size: 14px;
+  font-weight: 400;
+  color: #A4A4A4;
+  cursor: pointer;
+  margin-bottom: 0px;
+}
+.file-picker-modalDialog .file-picker-filepath .breadcrumb a {
+  text-decoration: none;
+  color: #A4A4A4;
+}
+.file-picker-modalDialog .file-picker-filepath .breadcrumb .separator {
+  margin: 0 5px;
+  color: #999;
+}
+.file-picker-modalDialog .file-picker-filepath .breadcrumb .current {
+  font-weight: bold;
+  color: #333;
+}
+.file-picker-modalDialog .file-picker-filepath .icon-dltfold {
+  content: url(/images/default/IcoFldrGry.svg);
+  height: 16px;
+  width: 16px;
+  margin-left: 2px;
+}
+.file-picker-modalDialog .file-picker-modal-body {
+  text-align: center !important;
+  width: 65vw;
+}
+.file-picker-modalDialog .file-picker-dir-content {
+  background: white;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 63vw;
+  min-height: 485px;
+  max-height: 600px;
+  text-align: left;
+  margin: 15px;
+  margin-bottom: 5px;
+  margin-top: 0px;
+}
+.file-picker-modalDialog .highlight {
+  background-color: yellow;
+  font-weight: bold;
+}
+.file-picker-modalDialog .file-notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 300px;
+  text-align: center;
+}
+.file-picker-modalDialog .file-notfound span {
+  margin-bottom: 15px;
+  font-weight: 400;
+  font-size: 14px;
+  color: #494949;
+}
+.file-picker-modalDialog .files-section .list-view {
+  width: 100%;
+}
+.file-picker-modalDialog .files-section .grid-view {
+  display: flex;
+}
+.file-picker-modalDialog .grid-view .file-grid {
+  overflow-y: auto;
+  padding: 5px;
+  box-sizing: border-box;
+  max-height: 426px;
+}
+.file-picker-modalDialog .grid-view .detail-section {
+  width: 27%;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-left: 1px solid #ccc;
+  min-height: 426px;
+  overflow-y: auto;
+}
+.file-picker-modalDialog .file-list {
+  list-style: none;
+  padding: 0;
+  max-height: 425px;
+  margin-bottom: 0;
+  overflow-y: scroll;
+}
+.file-picker-modalDialog .file-list li {
+  padding: 6px;
+  border-bottom: 1px solid #ccc;
+}
+.file-picker-modalDialog .file-grid {
+  display: flex;
+  row-gap: 5px;
+  flex-wrap: wrap;
+}
+.file-picker-modalDialog .file-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  text-align: center;
+  max-width: 155px;
+  min-width: 145px;
+  max-height: 120px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 5px 15px;
+}
+.file-picker-modalDialog .Icon-file {
+  content: url(/images/default/AxCrypt_Icon.svg);
+}
+.file-picker-modalDialog .Icon-folder {
+  content: url(/images/business/IcoFldr.svg);
+}
+.file-picker-modalDialog .list-file-icon {
+  width: 19px;
+  height: 20px;
+  object-fit: contain;
+}
+.file-picker-modalDialog .grid-file-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+.file-picker-modalDialog .file-name-grid {
+  word-wrap: break-word;
+  white-space: normal;
+  text-align: center;
+}
+.file-picker-modalDialog .file-name-grid, .file-picker-modalDialog .file-name, .file-picker-modalDialog .file-path {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+.file-picker-modalDialog .file-name-grid {
+  max-width: 140px;
+}
+.file-picker-modalDialog .file-name {
+  min-width: 280px;
+  max-width: 280px;
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.file-picker-modalDialog .file-path {
+  color: #A4A4A4;
+}
+.file-picker-modalDialog .file-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  gap: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.file-picker-modalDialog .file-list-item .fileitem-chk-box {
+  display: none;
+}
+.file-picker-modalDialog .file-list-item.select-item {
+  background-color: #ECECEC;
+}
+.file-picker-modalDialog .file-list-item.select-item .file-name {
+  font-weight: bold;
+  color: #000;
+}
+.file-picker-modalDialog .file-list-item.select-item .file-path {
+  color: #A4A4A4;
+  font-weight: bold;
+}
+.file-picker-modalDialog .file-list-item.select-item .fileitem-chk-box {
+  display: block !important;
+}
+.file-picker-modalDialog .file-grid-item.select-item {
+  background-color: #ECECEC;
+}
+.file-picker-modalDialog .file-grid-item.select-item .file-name-grid {
+  font-weight: bold;
+  color: #000;
+}
+.file-picker-modalDialog .file-list-item:hover, .file-picker-modalDialog .file-grid-item:hover {
+  background-color: #ECECEC;
+}
+.file-picker-modalDialog .file-list-item:hover .fileitem-chk-box, .file-picker-modalDialog .file-grid-item:hover .fileitem-chk-box {
+  display: block;
+}
+.file-picker-modalDialog .file-list-item, .file-picker-modalDialog .file-grid-item {
+  position: relative;
+}
+.file-picker-modalDialog .file-grid-item:hover .file-name-grid,
+.file-picker-modalDialog .file-list-item:hover .file-name {
+  font-weight: bold;
+  color: #000;
+}
+.file-picker-modalDialog .file-list-item:hover .file-path {
+  color: #A4A4A4;
+  font-weight: bold;
+}
+.file-picker-modalDialog .file-details {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.file-picker-modalDialog .file-action {
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+  padding: 0 5px;
+  width: 20px;
+  flex-shrink: 0;
+}
+.file-picker-modalDialog .close-img {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.file-picker-modalDialog .context-menu-action {
+  background: white;
+  border: 1px solid #000;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #232323;
+  min-width: 150px;
+  min-height: 100px;
+  overflow: hidden;
+}
+.file-picker-modalDialog .context-menu-action .menu-item {
+  padding: 8px 12px;
+  display: block;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  font-size: 12px;
+  font-weight: 400;
+}
+.file-picker-modalDialog .menu-item:last-child {
+  border-bottom: none;
+}
+.file-picker-modalDialog .context-menu-action .menu-item:hover {
+  background-color: #ECECEC !important;
+  color: #494949 !important;
+}
+.file-picker-modalDialog .detail-section {
+  padding: 20px;
+  box-sizing: border-box;
+  border-left: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  height: 426px;
+}
+.file-picker-modalDialog .select-file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  border-left: 1px solid #ccc;
+  height: 250px;
+  max-width: 180px;
+}
+.file-picker-modalDialog .select-file span {
+  margin: 2px;
+  text-align: center;
+}
+.file-picker-modalDialog .detail-image {
+  width: 69px;
+  height: 76px;
+  object-fit: contain;
+  margin-top: 8%;
+  margin-bottom: 16px;
+}
+.file-picker-modalDialog .detail-label {
+  font-size: 14px;
+  font-weight: 400;
+}
+.file-picker-modalDialog .detail-filename {
+  word-break: break-word;
+  white-space: normal;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 2px;
+  text-align: center;
+}
+.file-picker-modalDialog .Imgfile-picker {
+  /*        content: $Imgfile-picker;*/
+  padding: 20px;
+}
+.file-picker-modalDialog .Close-btn {
+  background-color: #232323;
+  color: #fff;
+  width: 110px;
+  height: 30px;
+  text-align: center;
+  font-size: 14px;
+}
+.file-picker-modalDialog .header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 5px;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+.file-picker-modalDialog .div-file-header {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  font-weight: bold;
+  padding: 8px 12px;
+}
+.file-picker-modalDialog .div-file-header span {
+  margin-right: 20px;
+  font-size: 14px;
+}
+.file-picker-modalDialog .display-type {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+.file-picker-modalDialog .display-type img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  padding: 4px;
+  transition: border 0.3s;
+}
+.file-picker-modalDialog .display-type img.selected {
+  border: 2px solid #007bff;
+  border-radius: 4px;
+}
+.file-picker-modalDialog .modal-footer {
+  justify-content: center !important;
+}
+.file-picker-modalDialog .content-area {
+  position: relative;
+}
+.file-picker-modalDialog .filepicker-action-container {
+  position: absolute;
+  bottom: 15px;
+  right: 40px;
+  z-index: 1;
+}
+.file-picker-modalDialog .filepicker-dropdown-action {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.file-picker-modalDialog .round-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  float: right;
+}
+.file-picker-modalDialog .action-btn {
+  content: url(/images/IconAction.svg);
+  width: 30px;
+  height: 30px;
+}
+.file-picker-modalDialog .filepicker-dropdown-menu-action {
+  position: absolute;
+  bottom: 70px;
+  background: #fefefe;
+  border-radius: 8px;
+  width: 130px;
+  z-index: 1;
+  right: 15px;
+  bottom: 50px;
+}
+.file-picker-modalDialog .dots {
+  line-height: 1;
+  display: block;
 }
 
 .page-title {

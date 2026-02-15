@@ -1,0 +1,18 @@
+using AxCrypt.Core.IO;
+
+namespace AxCrypt.App.Shared.Providers;
+
+public class FileProviderItem
+{
+    public FileProviderItem(string name, FileProvider value, string image)
+    {
+        Name = name;
+        Value = value;
+        Image = image;
+    }
+    public string? Name { get; set; }
+
+    public FileProvider Value { get; set; }
+
+    public string? Image { get; set; }
+}

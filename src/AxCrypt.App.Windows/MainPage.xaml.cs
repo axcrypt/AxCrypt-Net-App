@@ -118,7 +118,6 @@ public partial class MainPage : ContentPage, ISignIn
                 {
                     _fileDropService.NotifyFilesDropped(filePaths);
                 }
-
                 else if (folders.Any())
                 {
                     _fileDropService.NotifyFoldersDropped(folders);

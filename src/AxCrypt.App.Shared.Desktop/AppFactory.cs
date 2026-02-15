@@ -3,8 +3,11 @@ using AxCrypt.Api;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Data;
+using AxCrypt.App.Shared.Providers;
 using AxCrypt.App.Shared.Desktop.Services;
+using AxCrypt.App.Shared.Desktop.ViewModels;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -66,6 +69,7 @@ public class AppFactory
         TypeMap.Register.New<LogOnIdentity, ITextEncryptionService>((LogOnIdentity identity) => new CachingTextEncryptionService(new DeviceTextEncryptionService(new LocalTextEncryptionService(), new ApiTextEncryptionService(new AxTextEncryptionApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
 
         TypeMap.Register.Singleton<IDebugLoggingWindow>(() => new LogWindowService());
+        TypeMap.Register.New<FileProvidersUserAccessInfo>(() => FileProvidersUserAccessInfo.Create(Resolve.WorkFolder.FileInfo.FileItemInfo("FileProvidersUserAccessInfo.txt")));
     }
 
     public static void EnsureFileAssociation()

@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Shared.CloudCore;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -16,6 +17,10 @@ public class PlatformInitializer
     {
         TypeMap.Register.Singleton<IInternetState>(() => new InternetState());
         TypeMap.Register.Singleton<InstallationVerifier>(() => new InstallationVerifier());
+
+        string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string? rootApplicationDirectory = Path.GetDirectoryName(myDocuments);
+        TypeMap.Register.Singleton<ImportedFileStorage>(() => new ImportedFileStorage(rootApplicationDirectory!));
     }
 
     public static void CheckLavasoftWebCompanionExistence()

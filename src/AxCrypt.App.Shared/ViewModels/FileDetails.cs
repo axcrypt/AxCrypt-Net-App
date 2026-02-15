@@ -4,6 +4,7 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
+using AxCrypt.Core.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,9 +12,9 @@ using System.IO;
 using System.Linq;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Shared.Desktop.ViewModels;
+namespace AxCrypt.App.Shared.ViewModels;
 
-public class FileDetails : AxCrypt.Core.UI.ViewModel.ViewModelBase
+public class FileDetails : ViewModelBase
 {
     private ActiveFile _activeFile;
 
@@ -160,12 +161,6 @@ public class FileDetails : AxCrypt.Core.UI.ViewModel.ViewModelBase
         if (activeFile.IsShared && activeFile.IsMasterKeyShared)
         {
             IconClass = "file-masshk-icon";
-        }
-
-        if (activeFile.IsDecrypted)
-        {
-            IconClass = "file-dec-icon";
-            return;
         }
 
         if (IconClass == null)

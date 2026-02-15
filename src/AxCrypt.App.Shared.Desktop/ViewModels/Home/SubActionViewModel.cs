@@ -1,7 +1,12 @@
 ﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Shared.CloudCore.CloudFileProviderUtility;
+using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser;
 using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.App.Shared.ViewModels.FileBrowser;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.IO;
@@ -23,6 +28,9 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
         private MainViewModel? _mainViewModel;
         private IStatusAlertService _statusAlertService;
 
+        public FileProviderSelectionViewModel FileProviderViewModel;
+        public bool HasEncryptionCapability { get; set; }
+
         public SubActionViewModel()
         {
             LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
@@ -30,6 +38,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             _fileOperationViewModel = LogOnViewModel.FileOperationViewModel;
             _statusAlertService = AxCServiceProviderExtension.StatusAlertService!;
 
+            FileProviderViewModel = AxCServiceProvider.GetService<FileProviderSelectionViewModel>();
             Initialized();
         }
 
@@ -41,6 +50,19 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             KnownFoldersViewModel!.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
 
             KnownFoldersViewModel!.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
+
+            FileProviderViewModel.UpdateFileProviderSelection(FileOperationOption.None, InitializeProviderFileSelection);
+        }
+
+        private async Task InitializeProviderFileSelection()
+        {
+            if (FileProviderViewModel.SelectedFileProvider == null)
+            {
+                return;
+            }
+
+            FilePickerViewModel filePickerViewModel = AxCServiceProvider.GetService<DesktopFilePickerViewModel>();
+            await CloudFileProviderHelper.Initialize(FileProviderViewModel.SelectedFileProvider.Value, filePickerViewModel, FileProviderViewModel.SelectedFileOperation, HasEncryptionCapability);
         }
 
         public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }

@@ -94,6 +94,9 @@ public class LogOnViewModel : ViewModelBase
     public CommonDialogService InviteDialog
     { get { return GetProperty<CommonDialogService>(nameof(InviteDialog)); } set { SetProperty(nameof(InviteDialog), value); } }
 
+    public CommonDialogService FilePicker
+    { get { return GetProperty<CommonDialogService>(nameof(FilePicker)); } set { SetProperty(nameof(FilePicker), value); } }
+
     public CommonDialogService ShareKeyDialog
     { get { return GetProperty<CommonDialogService>(nameof(ShareKeyDialog)); } set { SetProperty(nameof(ShareKeyDialog), value); } }
 

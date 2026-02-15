@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.7" />
+	  <PackageReference Include="Dropbox.Api" Version="7.0.0" />
+	  <PackageReference Include="Google.Apis" Version="1.70.0" />
+	  <PackageReference Include="Google.Apis.Drive.v3" Version="1.70.0.3834" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.7" />
+	  <PackageReference Include="Microsoft.Graph" Version="5.86.0" />
+	  <PackageReference Include="Microsoft.Identity.Client" Version="4.74.0" />
   </ItemGroup>
 
   <ItemGroup>

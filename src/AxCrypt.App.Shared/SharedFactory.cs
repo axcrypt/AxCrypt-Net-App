@@ -1,24 +1,26 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Shared.FileOperations.IO;
+using AxCrypt.App.Shared.FileOperations.Vault;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Models.Notification;
+using AxCrypt.App.Shared.Models.Secret;
+using AxCrypt.App.Shared.Providers;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.ViewModels.Feedback;
+using AxCrypt.App.Shared.ViewModels.FileBrowser;
 using AxCrypt.App.Shared.ViewModels.Notification;
 using AxCrypt.App.Shared.ViewModels.Secret;
 using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
 using AxCrypt.Common;
+using AxCrypt.Core;
 using AxCrypt.Core.Notification;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using AxCrypt.App.Shared.Models.Secret;
 using Microsoft.Extensions.DependencyInjection;
-using AxCrypt.App.Shared.FileOperations.IO;
-using AxCrypt.Core;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Shared.FileOperations.Vault;
 
 namespace AxCrypt.App.Shared
 {
@@ -79,9 +81,15 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<UpgradeVersionViewModel>();
             services.AddSingleton<UpgradeSubscriptionViewModel>();
 
+            services.AddSingleton<FilePickerViewModel>();
+
             TypeMap.Register.Singleton<IUpgradeVersionService>(() => new UpgradeVersionService());
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
             TypeMap.Register.Singleton<IUserNotificationService>(() => new UserNotificationApiService());
+
+            services.AddSingleton<DropBoxAccessInfo>();
+            services.AddSingleton<OneDriveAccessInfo>();
+            services.AddSingleton<FileProviderSelectionViewModel>();
         }
 
         public static void RegisterTypeFactories()

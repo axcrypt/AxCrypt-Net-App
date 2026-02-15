@@ -1,0 +1,113 @@
+using AxCrypt.App.Shared.Providers;
+using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.Utility;
+using AxCrypt.Content;
+using AxCrypt.Core.UI.ViewModel;
+using static AxCrypt.Abstractions.TypeResolve;
+
+namespace AxCrypt.App.Shared.ViewModels;
+
+public class FileProviderSelectionViewModel : ViewModelBase
+{
+    private bool isVisible = false;
+
+    public bool IsVisible
+    {
+        get { return isVisible; }
+        set
+        {
+            isVisible = value;
+            UpdateViewState();
+        }
+    }
+
+    public FileOperationOption SelectedFileOperation { get; set; } = FileOperationOption.None;
+
+    public FileProviderItem? SelectedFileProvider { get; set; }
+
+    public IList<FileProviderItem> EncryptableFileProviders { get; set; } = [];
+
+    private Func<Task> _selectedProviderAction;
+
+    public void ShowFileProviderSelectionPopup(FileOperationOption fileOperation, Func<Task> selectedProviderAction)
+    {
+        _selectedProviderAction = selectedProviderAction;
+        SelectedFileOperation = fileOperation;
+        InitializeFileProviders();
+        IsVisible = true;
+    }
+
+    public void UpdateFileProviderSelection(FileOperationOption fileOperation, Func<Task> selectedProviderAction)
+    {
+        _selectedProviderAction = selectedProviderAction;
+        SelectedFileOperation = fileOperation;
+        InitializeFileProviders();
+    }
+
+    private void InitializeFileProviders()
+    {
+        EncryptableFileProviders = [];
+        if (SelectedFileOperation == FileOperationOption.OpenSecured)
+        {
+            EncryptableFileProviders.Add(
+                new FileProviderItem(
+                    "Your phone",
+                    AxCrypt.Core.IO.FileProvider.PhoneBrowser,
+                    "phn-icon"
+                )
+            );
+        }
+        if (
+            New<ICloudDriveConfiguration>().CurrentDeviceCategory == DeviceCategory.Android
+            && SelectedFileOperation != FileOperationOption.OpenSecured
+        )
+        {
+            EncryptableFileProviders.Add(
+                new FileProviderItem(
+                    Texts.PhoneLabel,
+                    AxCrypt.Core.IO.FileProvider.Local,
+                    "phn-icon"
+                )
+            );
+        }
+
+        EncryptableFileProviders.Add(
+            new FileProviderItem(
+                Texts.KnownFolderNameGoogleDrive,
+                AxCrypt.Core.IO.FileProvider.GoogleDrive,
+                "ggldrv-icon"
+            )
+        );
+        EncryptableFileProviders.Add(
+            new FileProviderItem(
+                Texts.KnownFolderNameDropbox,
+                AxCrypt.Core.IO.FileProvider.DropBox,
+                "drpbx-icon"
+            )
+        );
+        EncryptableFileProviders.Add(
+            new FileProviderItem(
+                Texts.KnownFolderNameOneDrive,
+                AxCrypt.Core.IO.FileProvider.OneDrive,
+                "onedrv-icon"
+            )
+        );
+    }
+
+    public async Task SubActionSelectProvider(FileProviderItem provider)
+    {
+        SelectedFileOperation = FileOperationOption.None;
+        SelectedFileProvider = provider;
+        IsVisible = false;
+
+        await _selectedProviderAction();
+    }
+
+    public async Task SelectProvider(FileProviderItem provider)
+    {
+        SelectedFileProvider = provider;
+        IsVisible = false;
+
+        await _selectedProviderAction();
+    }
+}

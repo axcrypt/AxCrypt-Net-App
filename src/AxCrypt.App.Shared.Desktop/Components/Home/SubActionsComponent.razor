@@ -1,5 +1,6 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Shared.Desktop.ViewModels.Home
+@using AxCrypt.App.Shared.Providers
 @using AxCrypt.App.Shared.Services
 @using AxCrypt.Core.UI
 @using AxCrypt.Content
@@ -26,16 +27,18 @@
         <div id="help-cloud-services" style="display:block;">
             <h3 class="fle-nme fnt-sze">@Texts.CloudServicesText</h3>
             <div style="display: flex;">
-                @foreach (KnownFolder? knownFolder in subActionModel?.KnownFoldersViewModel?.KnownFolders!)
+                @foreach (FileProviderItem provider in subActionModel.FileProviderViewModel.EncryptableFileProviders)
                 {
-                    <div title="@knownFolder.DisplayName">
-                        <button @onclick="() => subActionModel.OnCloudServiceButtonClick(knownFolder)"
+                    <div title="@provider.Name">
+                        <button @onclick="() => subActionModel.FileProviderViewModel.SubActionSelectProvider(provider)"
                                 class="assets-box"
-                                style="background-color:@(knownFolder.Enabled ? _ENABLEDTOOLSTRIPBACKCOLOR : subActionModel.DisabledBackColor)">
-                            <img class="icon @subActionModel.GetIconClass(knownFolder.My.FullName)" style="width:32px;height:32px;" src="" alt="@knownFolder.DisplayName" />
+                                style="background-color:@(_ENABLEDTOOLSTRIPBACKCOLOR)">
+                            <img class="@provider.Image" style="width:32px;height:32px;" src="" alt="@provider.Name" title="@provider.Name" />
                         </button>
                     </div>
                 }
+
+                <AxCrypt.App.Shared.Desktop.Components.FilePicker.FilePickerComponent />
             </div>
         </div>
     }

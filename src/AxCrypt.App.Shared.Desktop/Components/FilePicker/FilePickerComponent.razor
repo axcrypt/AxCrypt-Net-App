@@ -1,0 +1,371 @@
+﻿@using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser
+@using AxCrypt.App.Shared.UI.ViewModels
+@using AxCrypt.App.Shared.Utility
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.ViewModels.FileBrowser
+@using AxCrypt.Content
+
+@inject DesktopFilePickerViewModel ViewModel
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+
+@if (ViewModel.IsVisible)
+{
+    <div class="file-picker-modalDialog">
+        <div @onclick="async () => await HideContextMenu()">
+            <div class="file-picker-header">
+                <div class="close-img" @onclick="CloseWindow"></div>
+                <div class="file-picker-title">
+                    <div class="center-title">
+                        <img class="@ViewModel.SelectedCloudProvider" alt="cloud-storage-icon" />
+                        <label for="title" title="@ViewModel.PageTitle">
+                            @ViewModel.PageTitle
+                        </label>
+                    </div>
+
+                    <div class="search-box">
+                        <input id="searchKeyword"
+                               name="searchKeyword"
+                               type="text"
+                               @bind="searchText"
+                               placeholder="Search files"
+                               @oninput="async (eargs) => await OnSearchChanged(eargs)" />
+
+                        <div class="search-btn" @onclick="() => ViewModel.SearchFileList(searchText)">
+                            <img src="/images/default/IcoSearchWht.svg" alt="search-icon" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="file-picker-modal-body">
+                @if (ViewModel.Files.Count > 0)
+                {
+                    <div class="content-area">
+                        <div class="file-picker-dir-content find-fle-nme" @oncontextmenu="(e) => ShowContextMenu(e)" id="user_files_section" @onclick="async () => await HideContextMenu()">
+                            <div class="header-bar" @onclick:stopPropagation @oncontextmenu:preventDefault>
+                                <div class="div-file-header">
+                                    <span>
+                                        <input type="checkbox" checked="@selectAll" id="multiplefile" @onclick="() => SelectAllFile()" />
+                                        @Texts.NameLabel
+                                     </span>
+                                    @if (isListView)
+                                    {
+                                        <span>@Texts.FindPathTitle</span>
+                                    }
+                                </div>
+
+                                <div class="display-type">
+                                    <img src="/images/default/IcoList.svg"
+                                         class="@((isListView ? "selected" : ""))"
+                                         @onclick="() => SetView(true)"
+                                         alt="List View" />
+
+                                    <img src="/images/default/IcoGrid.svg"
+                                         class="@((!isListView ? "selected" : ""))"
+                                         @onclick="() => SetView(false)"
+                                         alt="Grid View" />
+                                </div>
+                            </div>
+
+                            <div class="files-section @(isListView ? "list-view" : "grid-view")">
+                                @if (isListView)
+                                {
+                                    <ul class="file-list">
+                                        @foreach (FilePickerItemViewModel file in ViewModel.Files)
+                                        {
+                                            string ParentPath = file.ParentPath + "/" + file.FileName;
+                                            <li class="file-list-item @(file.IsSelected ? "select-item" : "")" @onclick="() => OnCheckboxChanged(file)" @ondblclick="() => OnFolderClicked(file)">
+                                                <div class="file-details">
+                                                    @{
+                                                        if(!file.IsFolder)
+                                                        {
+                                                            <input id="@file.FileID" type="checkbox" checked="@file.IsSelected" class="fileitem-chk-box" />
+                                                        }
+                                                    }
+                                                    <img alt="File Icon" class="list-file-icon  @(file.IsFolder == true ? "Icon-folder" : "Icon-file")"/>
+                                                    <span class="file-name">
+                                                        @((MarkupString)HighlightMatch(file.FileName))
+                                                    </span>
+                                                    <span class="file-path">
+                                                        @((MarkupString)HighlightMatch(ParentPath))
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <div class="file-grid">
+                                        @foreach (FilePickerItemViewModel file in ViewModel.Files)
+                                        {
+                                            string ParentPath = file.ParentPath + "/" + file.FileName;
+                                            <div class="file-grid-item @(file.IsSelected ? "select-item" : "")" @onclick="() => OnCheckboxChanged(file)">
+                                                <img alt="File Icon" class="grid-file-icon @(file.IsFolder == true ? "Icon-folder" : "Icon-file")"/>
+                                                <span class="file-name-grid">@((MarkupString)HighlightMatch(file.FileName))</span>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+
+                                @if (isContextMenuVisible)
+                                {
+                                    <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
+                                        <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Encrypt)">@Texts.EncryptToolStripMenuItemText</span>
+                                        <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Decrypt)">@Texts.DecryptToolStripMenuItemText</span>
+                                        <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</span>
+                                        <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.OpenSecured)">@Texts.OpenEncryptedToolStripMenuItemText</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        @if (ViewModel.MultiSelectEnabled)
+                        {
+                            <div class="filepicker-action-container">
+                                <div class="filepicker-dropdown-action">
+                                    <div class="round-btn" @onclick="() => ShowActionContextMenu()" title="Edit option">
+                                        <img class="action-btn" alt="action button" />
+                                    </div>
+
+                                    @if (isActionContextMenuVisible)
+                                    {
+                                        <div class="filepicker-dropdown-menu-action context-menu-action">
+                                            <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Encrypt)">@Texts.EncryptToolStripMenuItemText</span>
+                                            <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Decrypt)">@Texts.DecryptToolStripMenuItemText</span>
+                                            <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</span>
+                                            <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.OpenSecured)">@Texts.OpenEncryptedToolStripMenuItemText</span>
+                                            <span class="menu-item" @onclick="async () => await ClearSelection()">@Texts.ClearAllText</span>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="file-notfound">
+                        <span>@Texts.NoFilesFoundText </span>
+                        <img src="/images/default/filenotfound.svg" />
+                    </div>
+                }
+                <div class="file-picker-filepath">
+                    <nav class="breadcrumb">
+                    <span class="breadcrumb-part" title="@ViewModel.PageTitle" @onclick="@(async () => await ViewModel.NavigateBackToPath("root"))">
+                        @ViewModel.PageTitle
+                    </span>
+
+                    @if (ViewModel.OpenedFoldersList.Count > 4)
+                    {
+                        <span class="breadcrumb-part">
+                            .../
+                        </span>
+                    }
+
+                    @foreach (FolderItem folder in ViewModel.OpenedFoldersList.TakeLast(4))
+                    {
+                        <span class="separator"><img class="icon-next-arrow" /><img class="icon-dltfold" /> </span>
+                        <span class="breadcrumb-part" title="@folder.DirectoryName" @onclick="async () => await ViewModel.NavigateBackToPath(folder.FileID)">
+                            @folder.DirectoryName
+                        </span>
+                    }
+                    </nav>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="Close-btn" @onclick="CloseWindow">
+                        @Texts.WixFailureCloseButton
+                    </button>
+                </div>
+            </div>
+       
+        </div>
+    </div>
+
+    <script>
+        window.scrollToFirstMatch = function () {
+            const el = document.getElementById("firstMatch");
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        };
+    </script>
+}
+
+@code {
+
+    private bool isListView { get; set; } = true;
+    private bool isContextMenuVisible { get; set; } = false;
+    private bool isActionContextMenuVisible { get; set; } = false;
+    private bool selectAll { get; set; } = false;
+    private double contextMenuX { get; set; }
+    private double contextMenuY { get; set; }
+
+    private string searchText = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        ViewModel.OnUpdateViewState += async () => await UpdateUIState();
+        base.OnInitialized();
+    }
+
+    private void CloseWindow()
+    {
+        ViewModel.IsVisible = false;
+    }
+
+    private string HighlightMatch(string input)
+    {
+        if (string.IsNullOrWhiteSpace(searchText))
+            return System.Net.WebUtility.HtmlEncode(input);
+
+        string pattern = System.Text.RegularExpressions.Regex.Escape(searchText);
+        System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        int matchCount = 0;
+        string highlighted = regex.Replace(System.Net.WebUtility.HtmlEncode(input), match =>
+        {
+            matchCount++;
+            string spanId = matchCount == 1 ? "id='firstMatch'" : "";
+            return $"<span class=\"highlight\" {spanId}>{match.Value}</span>";
+        });
+
+        return highlighted;
+    }
+
+    private async Task OnSearchChanged(ChangeEventArgs e)
+    {
+        searchText = e.Value?.ToString() ?? "";
+        await Task.Yield();
+        await JS.InvokeVoidAsync("scrollToFirstMatch");
+    }
+
+    private void SetView(bool listView)
+    {
+        isListView = listView;
+        isContextMenuVisible = false;
+        isActionContextMenuVisible = false;
+    }
+
+    private void OnCheckboxChanged(FilePickerItemViewModel file)
+    {
+        if (file.IsFolder)
+            return;
+
+        file.IsSelected = !file.IsSelected;
+        if (file.IsSelected)
+        {
+            ViewModel.SelectedFiles.Add(file);
+        }
+        else
+        {
+            ViewModel.SelectedFiles.Remove(file);
+        }
+
+        ViewModel.MultiSelectEnabled = ViewModel.SelectedFiles.Any();
+        if (!ViewModel.SelectedFiles.Any())
+        {
+            isContextMenuVisible = false;
+            isActionContextMenuVisible = false;
+        }
+
+        selectAll = ViewModel.SelectedFiles.Where(f => !f.IsSelected).Any();
+    }
+
+    private async Task ShowContextMenu(MouseEventArgs e)
+    {
+        if (!ViewModel.SelectedFiles.Any())
+            return;
+
+        contextMenuX = e.PageX;
+        contextMenuY = e.PageY;
+        isContextMenuVisible = true;
+        await UpdateUIState();
+    }
+
+    private async Task ShowActionContextMenu()
+    {
+        if (!ViewModel.SelectedFiles.Any())
+            return;
+
+        isActionContextMenuVisible = !isActionContextMenuVisible;
+        await UpdateUIState();
+    }
+
+    private async Task SelectAllFile()
+    {
+        selectAll = !selectAll;
+        ViewModel.SelectedFiles.Clear();
+        foreach (FilePickerItemViewModel file in ViewModel.Files.Where(f => !f.IsFolder))
+        {
+            file.IsSelected = selectAll;
+            ViewModel.SelectedFiles.Add(file);
+        }
+
+        isContextMenuVisible = false;
+        isActionContextMenuVisible = false;
+        await UpdateUIState();
+    }
+
+    private async Task ClearSelection()
+    {
+        foreach (FilePickerItemViewModel file in ViewModel.Files)
+        {
+            file.IsSelected = false;
+        }
+
+        isContextMenuVisible = false;
+        isActionContextMenuVisible = false;
+        ViewModel.SelectedFiles.Clear();
+        ViewModel.MultiSelectEnabled = ViewModel.SelectedFiles.Any();
+        await UpdateUIState();
+    }
+
+    private async Task HideContextMenu()
+    {
+        isContextMenuVisible = false;
+        await UpdateUIState();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            JS.InvokeVoidAsync("document.addEventListener", "click", EventCallback.Factory.Create<MouseEventArgs>(this, HideContextMenu));
+        }
+    }
+
+    async Task UpdateUIState()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+
+    private async Task UpdateFileOperation(FileOperationOption operation)
+    {
+        ViewModel.SelectedFileOperation = operation;
+        isContextMenuVisible = false;
+        isActionContextMenuVisible = false;
+        await OnDoneClicked();
+    }
+
+    private async Task OnDoneClicked()
+    {
+        await ViewModel.ProcessSelectedFileItemActionAsync();
+        await UpdateUIState();
+    }
+
+    private async Task OnFolderClicked(FilePickerItemViewModel file)
+    {
+        if (!file.IsFolder)
+        {
+            return;
+        }
+
+        await ViewModel.ProcessSelectedFile(file);
+    }
+}
