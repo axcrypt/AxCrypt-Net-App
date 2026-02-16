@@ -119,6 +119,10 @@ namespace AxCrypt.Core.UI
                         platform = ClientPlatformKind.Mac;
                         break;
 
+                    case Runtime.Platform.Linux:
+                        platform = ClientPlatformKind.Linux;
+                        break;
+
                     default:
                         throw new NotSupportedException($"App doesn't support updating on {OS.Current.Platform} platform");
                 }

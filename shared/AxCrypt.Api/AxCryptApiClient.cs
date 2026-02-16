@@ -328,11 +328,15 @@ namespace AxCrypt.Api
                     platformParameter = "mac";
                     break;
 
+                case ClientPlatformKind.Linux:
+                    platformParameter = "linux";
+                    break;
+
                 default:
                     throw new NotSupportedException($"App doesn't support updating on {platform} platform");
             }
 
-            Uri resource = BaseUrl.PathCombine($"users/appversion/{platformParameter}?version={currentVersion?.ToString() ?? string.Empty}&culture={cultureName}&appEnvironment={appEnvironment}");
+            Uri resource = BaseUrl.PathCombine($"users/axcrpt/{platformParameter}/appversion/?version={currentVersion?.ToString() ?? string.Empty}&culture={cultureName}&appEnvironment={appEnvironment}");
             if (New<AxCryptOnlineState>().IsOffline)
             {
                 return AxCryptVersion.Empty;

@@ -10,5 +10,6 @@ namespace AxCrypt.Api.Model
     {
         WindowsDesktop,
         Mac,
+        Linux,
     }
 }
