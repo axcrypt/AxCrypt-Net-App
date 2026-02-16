@@ -389,3 +389,31 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     .button.border:hover {
         background-color: $TbleBg;
     }
+
+.dropbtn.active {
+    color: $colTxtBd;
+    border: 1px solid $colTxtBd; //language drop down
+}
+
+.drp-dwn {
+    filter: grayscale(1);   //language drop down image
+}
+
+.language-dropdown {
+    border: $colTxtlble;
+}
+ 
+    .notification-popup tr td {
+        color: $colTxtlble;
+
+        :hover {
+            color: $colDrkMdHglhtPrm;
+            background-color: $TbleBg;
+            //class ="notifi-popup"     class create for table row(tr)
+        }
+    }
+
+.language-item:hover {
+    background-color: $TbleBg;
+    color: $colDrkMdHglhtPrm !important;
+}

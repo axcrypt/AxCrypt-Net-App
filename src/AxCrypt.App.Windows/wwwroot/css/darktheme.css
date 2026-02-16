@@ -358,3 +358,29 @@ input[readonly=readonly], textarea[readonly] {
 .button.border:hover {
   background-color: #575757;
 }
+
+.dropbtn.active {
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+}
+
+.drp-dwn {
+  filter: grayscale(1);
+}
+
+.language-dropdown {
+  border: #A4A4A4;
+}
+
+.notification-popup tr td {
+  color: #A4A4A4;
+}
+.notification-popup tr td :hover {
+  color: #CDFFB1;
+  background-color: #575757;
+}
+
+.language-item:hover {
+  background-color: #575757;
+  color: #CDFFB1 !important;
+}
