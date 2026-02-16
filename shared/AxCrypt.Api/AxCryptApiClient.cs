@@ -336,7 +336,7 @@ namespace AxCrypt.Api
                     throw new NotSupportedException($"App doesn't support updating on {platform} platform");
             }
 
-            Uri resource = BaseUrl.PathCombine($"users/axcrpt/{platformParameter}/appversion/?version={currentVersion?.ToString() ?? string.Empty}&culture={cultureName}&appEnvironment={appEnvironment}");
+            Uri resource = BaseUrl.PathCombine($"users/axcrypt/{platformParameter}/appversion/?version={currentVersion?.ToString() ?? string.Empty}&culture={cultureName}&env={appEnvironment}");
             if (New<AxCryptOnlineState>().IsOffline)
             {
                 return AxCryptVersion.Empty;
