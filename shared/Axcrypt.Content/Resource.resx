@@ -459,11 +459,17 @@ Choose something difficult to guess, since it will protect passwords in the onli
   <data name="AddMoreUsersTitle" xml:space="preserve">
     <value>Add more users</value>
   </data>
+  <data name="AddNewEmailText" xml:space="preserve">
+    <value>Add new email</value>
+  </data>
   <data name="AddNewFolderText" xml:space="preserve">
     <value>Add New Folder</value>
   </data>
   <data name="AddNoteTitle" xml:space="preserve">
     <value>Add Note</value>
+  </data>
+  <data name="AddOrDragFolderText" xml:space="preserve">
+    <value>Add or Drag Folder</value>
   </data>
   <data name="AddPasswordTitle" xml:space="preserve">
     <value>Add Password</value>
@@ -663,6 +669,9 @@ Please sign in using the same password you used then.</value>
   </data>
   <data name="AnonymousRenameToolTip" xml:space="preserve">
     <value>Hide the real name of a secured file by renaming it to something random.</value>
+  </data>
+  <data name="AnyoneText" xml:space="preserve">
+    <value>Anyone</value>
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>AxCrypt ID Verification [ {0} ]</value>
@@ -14310,6 +14319,9 @@ You must complete these steps to complete the process.</value>
   <data name="ChoosePrivateOrBusinessSignUpInfo" xml:space="preserve">
     <value>To get started with your account, choose whether you intend to use AxCrypt mainly as a private user or business.</value>
   </data>
+  <data name="ChooseUpTo " xml:space="preserve">
+    <value>Choose up to {0} users</value>
+  </data>
   <data name="CityLabel" xml:space="preserve">
     <value>City:</value>
   </data>
@@ -14328,6 +14340,9 @@ You must complete these steps to complete the process.</value>
   </data>
   <data name="ClearAllText" xml:space="preserve">
     <value>Clear all</value>
+  </data>
+  <data name="ClearButtonText" xml:space="preserve">
+    <value>Clear</value>
   </data>
   <data name="ClearLogsText" xml:space="preserve">
     <value>Clear Logs</value>
@@ -15013,6 +15028,9 @@ If you do not accept our temporary session cookies you cannot sign in and the si
   </data>
   <data name="DaysLeftWarningToolTip" xml:space="preserve">
     <value>Your subscription plan is about to expire. Click to renew.</value>
+  </data>
+  <data name="DaysText" xml:space="preserve">
+    <value>days</value>
   </data>
   <data name="DebugCheckVersionNowToolStripMenuItemText" xml:space="preserve">
     <value>Check Version Now</value>
@@ -19497,6 +19515,9 @@ Enable automatic conversion of AxCrypt 1.x files (recommended)?</value>
   <data name="MaximumNotExceedCharactersNotification" xml:space="preserve">
     <value>Text should not exceed {0} characters.</value>
   </data>
+  <data name="MaxUsersCountText" xml:space="preserve">
+    <value>You can't add more users than the maximum allowed{0}</value>
+  </data>
   <data name="McErrArgument" xml:space="preserve">
     <value>Internal error, invalid function argument in %4</value>
     <comment>Internal use only. Do not translate.</comment>
@@ -21674,6 +21695,9 @@ To return to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
   <data name="OtherDetailsText" xml:space="preserve">
     <value>If other, please give details</value>
   </data>
+  <data name="OtherLogOptions" xml:space="preserve">
+    <value>Other log in options</value>
+  </data>
   <data name="OtherMFAOptionsText" xml:space="preserve">
     <value>Try other MFA options</value>
   </data>
@@ -21914,6 +21938,9 @@ To return to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
   <data name="PasswordChangeText" xml:space="preserve">
     <value>Password change</value>
   </data>
+  <data name="PasswordCharactersText" xml:space="preserve">
+    <value>8 characters</value>
+  </data>
   <data name="PasswordEasyText" xml:space="preserve">
     <value>Easy</value>
   </data>
@@ -21953,6 +21980,9 @@ To return to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
   <data name="PasswordInformationText" xml:space="preserve">
     <value>The password must be 8 or more characters</value>
   </data>
+  <data name="PasswordLowerCaseLetter" xml:space="preserve">
+    <value>1 lower case letter</value>
+  </data>
   <data name="PasswordManagementListPageBody" xml:space="preserve">
     <value>Manage all your passwords online in the cloud&lt;span class="text-cutoff"&gt; with AxCrypt Password Management, your online safety deposit for passwords, codes, pins, etc. Your passwords are stored in a securely encrypted archive and are available to you, and only you, anywhere at any time. &lt;a class="hide-link"&gt;[Collapse]&lt;/a&gt;&lt;/span&gt;&lt;span class="text-cutoff-ellipsis"&gt;... &lt;a class="show-link"&gt;[Read more]&lt;/a&gt;&lt;/span&gt;</value>
   </data>
@@ -21980,6 +22010,9 @@ To return to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
   </data>
   <data name="PasswordModerateText" xml:space="preserve">
     <value>Moderate</value>
+  </data>
+  <data name="PasswordNumber" xml:space="preserve">
+    <value>1 number</value>
   </data>
   <data name="PasswordPolicyViolation" xml:space="preserve">
     <value>The password is not good enough to be acceptable.</value>
@@ -22058,6 +22091,9 @@ We classify the password in 4 categories of increasing strength, were we do not 
 White space, and parts that are equal to common passwords are ignored and do not add any strength.</value>
     <comment>A shorter description of how password strength is evaluated.</comment>
   </data>
+  <data name="PasswordSpecialCharacter" xml:space="preserve">
+    <value>1 special character like</value>
+  </data>
   <data name="PasswordStrengthBadName" xml:space="preserve">
     <value>Weak</value>
     <comment>Short displayed name of "Bad" password status</comment>
@@ -22074,6 +22110,9 @@ White space, and parts that are equal to common passwords are ignored and do not
     <value>Password is strong and good enough to recommend.</value>
     <comment>Status 'Green'. This is a really good password!</comment>
   </data>
+  <data name="PasswordStrengthText" xml:space="preserve">
+    <value>Password Strength</value>
+  </data>
   <data name="PasswordStrengthUnacceptableName" xml:space="preserve">
     <value>Too weak</value>
     <comment>Short displayed name of Unacceptable password status</comment>
@@ -22089,6 +22128,9 @@ White space, and parts that are equal to common passwords are ignored and do not
   <data name="PasswordStrengthWeakTip" xml:space="preserve">
     <value>Password is not strong enough to be recommended.</value>
     <comment>Status 'Orange'. It's almost an ok password, but it's not good enough to be really recommended.</comment>
+  </data>
+  <data name="PasswordUpperCaseLetter" xml:space="preserve">
+    <value>1 upper case letter</value>
   </data>
   <data name="PasswordUrlPrompt" xml:space="preserve">
     <value>URL</value>
@@ -24684,6 +24726,9 @@ Subject: AxCrypt Report Snapshot</value>
   <data name="SentSecuredMessageNotificationText" xml:space="preserve">
     <value>You have received a new secured message!</value>
   </data>
+  <data name="SentText" xml:space="preserve">
+    <value>Sent</value>
+  </data>
   <data name="ServerStatusLabel" xml:space="preserve">
     <value>Server status</value>
   </data>
@@ -24764,6 +24809,9 @@ Please consider informing '{0}' directly about AxCrypt file security.</value>
   </data>
   <data name="ShareEncryptedTextAsLinkTooltipText" xml:space="preserve">
     <value>Share encrypted text via link</value>
+  </data>
+  <data name="ShareEncryptedTextDialog" xml:space="preserve">
+    <value>Set an expiry to automatically stop access after a chosen time, keeping your shared content secure.</value>
   </data>
   <data name="ShareInviteMailBodyButton" xml:space="preserve">
     <value>Join AxCrypt</value>
@@ -24913,6 +24961,9 @@ Please consider informing '{0}' directly about AxCrypt file security.</value>
     <value>Español (Spanish)</value>
     <comment>Do Not Translate</comment>
   </data>
+  <data name="SpecificUsersText" xml:space="preserve">
+    <value>Specific users</value>
+  </data>
   <data name="SslRequiredPageBody" xml:space="preserve">
     <value>A secure SSL connection is required. Please try again using &lt;a href="{2}"&gt;{2}&lt;/a&gt; .
 
@@ -25001,6 +25052,9 @@ To go to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
   </data>
   <data name="StrongerProtectionText" xml:space="preserve">
     <value>Upgrade for stronger protection!</value>
+  </data>
+  <data name="StrongPasswordAtleastText" xml:space="preserve">
+    <value>Strong password contains at least</value>
   </data>
   <data name="StrongPasswordLabel" xml:space="preserve">
     <value>Strong password</value>
@@ -25263,6 +25317,9 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   </data>
   <data name="SwitchUserButtonText" xml:space="preserve">
     <value>Switch user</value>
+  </data>
+  <data name="SwitchUserPopupText" xml:space="preserve">
+    <value>Choose the &lt;b&gt;account&lt;/b&gt; to which you want to switch</value>
   </data>
   <data name="SyncContactsText" xml:space="preserve">
     <value>Sync contacts!</value>
@@ -26126,6 +26183,15 @@ The AxCrypt Team</value>
   <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
     <value>&lt;strong&gt;Upgrade to unlock full encryption features!&lt;/strong&gt;</value>
   </data>
+  <data name="UpgradeVersionDialogText" xml:space="preserve">
+    <value>Do you want to download it now or on the next launch?</value>
+  </data>
+  <data name="UpgradeVersionDialogText1" xml:space="preserve">
+    <value>Yes, download now!</value>
+  </data>
+  <data name="UpgradeVersionDialogText2" xml:space="preserve">
+    <value>No, later</value>
+  </data>
   <data name="UpsellBusinessForNotStandardPremiumUsersText" xml:space="preserve">
     <value>It seems like you come from a business. Consider using our business tier to get features like master key, business administration etc.</value>
   </data>
@@ -26273,6 +26339,9 @@ The AxCrypt Team</value>
   <data name="UseNecessaryCookiesOnlyPromptText" xml:space="preserve">
     <value>Use necessary cookies only</value>
   </data>
+  <data name="UserActivitiesText" xml:space="preserve">
+    <value>User Activities</value>
+  </data>
   <data name="UserActivityTitle" xml:space="preserve">
     <value>User Activity</value>
   </data>
@@ -26293,6 +26362,9 @@ The AxCrypt Team</value>
   </data>
   <data name="UserSettingsFormatChangeNeedsReset" xml:space="preserve">
     <value>You have updated AxCrypt. Unfortunately, your configuration must be reset. After restarting, your preferences and settings will unfortunately be lost. We apologize for the inconvenience. Your encrypted files are still safe and ok.</value>
+  </data>
+  <data name="UsersWithAccessText" xml:space="preserve">
+    <value>Users with access{0}</value>
   </data>
   <data name="usingText" xml:space="preserve">
     <value>using</value>

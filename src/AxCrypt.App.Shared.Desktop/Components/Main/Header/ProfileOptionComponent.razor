@@ -25,7 +25,7 @@
             {
                 <div style="text-align:left;">
                     <img class="" src="images/default/IcoClndr.svg" alt="go-back-img" />
-                    <span class="grey-clr font-high" style="padding-left: 5px;">@Texts.ExpireInLabelFirstPart <span class="txt-clr">@ProfileViewModel?.Account?.DaysLeft</span> days</span>
+                    <span class="grey-clr font-high" style="padding-left: 5px;">@Texts.ExpireInLabelFirstPart <span class="txt-clr">@ProfileViewModel?.Account?.DaysLeft</span>@Texts.DaysText</span>
                 </div>
             }
             else
@@ -55,7 +55,7 @@
                 <NavLink class="nav-link"
                          @onclick="() => ProfileViewModel!.OnOpenLogViewerClicked(Utility.LogType.FileActivity)">
                     <img class="" src="images/default/IcoFileLgng.svg" alt="IcoFileLgng" />
-                    <span>User Activity</span>
+                    <span>@Texts.UserActivityTitle</span>
                 </NavLink>
             </div>
         }
@@ -86,7 +86,7 @@
                     @if (isHovered && hoveredElement == "findfiles")
                     {
                         <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                            <span class="txt-clr font-medium">Find files required paid plan</span>
+                            <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
                         </div>
                     }
                 </div>

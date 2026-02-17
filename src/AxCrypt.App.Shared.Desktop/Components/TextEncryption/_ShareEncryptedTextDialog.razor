@@ -47,21 +47,21 @@
         <div class="@(TabIndex == 1 ? "popup-small" : "popup-large")" style="margin-top:100px; height: fit-content !important;">
             <div class="close-img" @onclick="ShareModel.HideDialog" />
 
-            <h2 style="margin: 10px 0;text-align:center;color:#494949"><b>Share as Link</b></h2>
+            <h2 style="margin: 10px 0;text-align:center;color:#494949"><b>@Texts.ShareAsLinkActionText</b></h2>
 
             <div class="action-tabs" style="margin: 20px auto;">
                 <div id="anyone-tab" class="act-tab @(TabIndex == 1 ? "active" : "")" @onclick="() => TabIndex = 1">
-                    <a href="javascript:void(0);">Anyone</a>
+                    <a href="javascript:void(0);">@Texts.AnyoneText</a>
                 </div>
                 <div id="spcific-tab" class="act-tab @(TabIndex == 2 ? "active" : "")" @onclick="() => TabIndex = 2">
-                    <a href="javascript:void(0);">Specific users</a>
+                    <a href="javascript:void(0);">@Texts.SpecificUsersText</a>
                 </div>
             </div>
 
             <div class="parent-container" style="min-height: fit-content;">
                 @if (TabIndex == 2)
                 {
-                    <h5 style="margin: 10px 0; font-size:16px;">Choose up to @MaxAllowedUsersToShare users</h5>
+                    <h5 style="margin: 10px 0; font-size:16px;">@string.Format(Texts.ChooseUpTo, MaxAllowedUsersToShare)</h5>
 
                     <div class="email-input-container">
                         @if (!string.IsNullOrEmpty(ShareModel.ErrorMessage))
@@ -78,7 +78,7 @@
 
                         @if (ShareModel.ReceiverList != null && ShareModel.ReceiverList.Any())
                         {
-                            <h3 style="margin: 10px 0; font-size:16px;">Users with access(@ShareModel.ReceiverList.Count)</h3>
+                            <h3 style="margin: 10px 0; font-size:16px;">@string.Format(Texts.UsersWithAccessText, ShareModel.ReceiverList.Count)</h3>
                             <table style="display: flex;gap: 10px;flex-wrap: wrap;">
                                 @foreach (AxCrypt.Core.UI.EmailAddress receiver in ShareModel.ReceiverList)
                                 {
@@ -111,11 +111,11 @@
                         @if (ShareModel.IsHovered && ShareModel.HoveredElement == "open")
                         {
                             <div class="custom-password-help-hoverpopup text-center" style="background-color:#fff;right:0;">
-                                <span class="txt-clr font-medium">Set an expiry to automatically stop access after a chosen time, keeping your shared content secure.</span>
+                                <span class="txt-clr font-medium">@Texts.ShareEncryptedTextDialog</span>
                             </div>
                         }
                     </div>
-                    
+
                 </div>
 
                 <div style="display: flex; gap: 20px;justify-content: center;padding-top: 30px;">
@@ -194,7 +194,7 @@
         int maxUsersCount = ShareModel.MaxAllowedUsersCountToShare();
         if (ShareModel.ReceiverList.Count >= maxUsersCount)
         {
-            ShareModel.ErrorMessage = $"You can't add more users than the maximum allowed({maxUsersCount}).";
+            ShareModel.ErrorMessage = string.Format(Texts.MaxUsersCountText, maxUsersCount);
             return;
         }
 

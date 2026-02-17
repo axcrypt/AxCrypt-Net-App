@@ -127,7 +127,7 @@
                 @if (Utility.IsMainMenuHidden)
                 {
                     <div class="act-box" @onmouseover='@(() => ShowPopup("create groups"))' @onmouseout='@(() => HidePopup())' @onclick="homeActionModel.NavigateToCreateGroupsPage">
-                        <img class="act-img grp-act" src="" alt="grp-img" /><span class="text-size">Create groups</span>
+                        <img class="act-img grp-act" src="" alt="grp-img" /><span class="text-size">@Texts.CreateGroupsText</span>
                         @if (isHovered && hoveredElement == "create groups")
                         {
                             <div class="home-hover text-center" style="background-color:#fff;">

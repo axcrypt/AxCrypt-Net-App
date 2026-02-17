@@ -81,21 +81,21 @@
                         <div id="tab-header">
                             <a class="sub-head-link unread-text @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "active" : "")"
                             @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox, Guid.Empty)" id="inbox-tab">
-                                Inbox @* <span id="inbox-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? messageCount : ""))</span> *@
+                                @Texts.InboxText @* <span id="inbox-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? messageCount : ""))</span> *@
                             </a>
                             <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "tab-selected" : "")">
                         </div>
                         <div id="tab-header">
                             <a class="sub-head-link @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "active" : "")"
                             @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent, Guid.Empty)" id="sent-tab">
-                                Sent @* <span id="sent-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? messageCount : ""))</span> *@
+                                @Texts.SentText @* <span id="sent-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? messageCount : ""))</span> *@
                             </a>
                             <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "tab-selected" : "")">
                         </div>
                         <div id="tab-header">
                             <a class="sub-head-link unread-text @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "active" : "")"
                             @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread, Guid.Empty)" id="unread-tab">
-                                Unread @* <span id="unread-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? messageCount : ""))</span> *@
+                                @Texts.UnReadText @* <span id="unread-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? messageCount : ""))</span> *@
                             </a>
                             <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "tab-selected" : "")">
                         </div>
@@ -167,22 +167,22 @@
 
         if (!string.IsNullOrWhiteSpace(SecMsgrViewModel.Messenger.UserName))
         {
-            appliedFilters.Add(new FilterItem("From", SecMsgrViewModel.Messenger.UserName));
+            appliedFilters.Add(new FilterItem(Texts.FromText, SecMsgrViewModel.Messenger.UserName));
         }
 
         if (!string.IsNullOrWhiteSpace(SecMsgrViewModel.Messenger.ReceiverName))
         {
-            appliedFilters.Add(new FilterItem("To", SecMsgrViewModel.Messenger.ReceiverName));
+            appliedFilters.Add(new FilterItem(Texts.ToText, SecMsgrViewModel.Messenger.ReceiverName));
         }
 
         if (SecMsgrViewModel.Messenger.StartDate != DateTime.MinValue)
         {
-            appliedFilters.Add(new FilterItem("Date from", SecMsgrViewModel.Messenger.StartDate.ToShortDateString()));
+            appliedFilters.Add(new FilterItem(Texts.DateFromText, SecMsgrViewModel.Messenger.StartDate.ToShortDateString()));
         }
 
         if (SecMsgrViewModel.Messenger.EndDate != DateTime.MinValue)
         {
-            appliedFilters.Add(new FilterItem("to", SecMsgrViewModel.Messenger.EndDate.ToShortDateString()));
+            appliedFilters.Add(new FilterItem(Texts.ToText1, SecMsgrViewModel.Messenger.EndDate.ToShortDateString()));
         }
     }
 

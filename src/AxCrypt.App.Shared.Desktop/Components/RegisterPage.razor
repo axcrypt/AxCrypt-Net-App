@@ -48,14 +48,14 @@
         }
         <div style="display: flex;align-items: flex-start; width: 90%; height:10px">
             <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
-            <span style="margin: -13px 10px 13px;padding-top: -4px;">or</span>
+            <span style="margin: -13px 10px 13px;padding-top: -4px;">@Texts.OrText</span>
             <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
         </div>
         <div id="OtherOptions-Section" style="text-align: center;border-radius: 4px; width: 90%;">
             <div class="dropdown">
                 <div class="action-buttons">
                     <button @onclick="ToggleDropdown" style="width: 310px; color:  #48772c;font-weight: 600;">
-                        Other sign up options
+                        @Texts.OtherLogOptions
                         <img class="drp-dwn down" id="lang-action-btn-arw" src="" alt="dropdown-img"
                             style="max-height: 15px;" />
                     </button>
@@ -72,7 +72,7 @@
 
         <div class="signup-link" style="width: 90%;">
             <NavLink class="nav-link" href="mailto:support@axcrypt.net">
-                <span class="che-txt">Do you need any help?</span>
+                <span class="che-txt">@Texts.NeedAnyHelpText</span>
                 <span class="grn-clr">@Texts.ContactUsHeading!</span>
             </NavLink>
         </div>

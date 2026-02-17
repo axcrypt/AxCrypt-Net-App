@@ -1,4 +1,5 @@
 ﻿@typeparam T
+@using AxCrypt.Content
 
 @if (IsVisible)
 {
@@ -9,7 +10,7 @@
         <div class="alert-body">
             @Message
         </div>
-        <button class="alert-button" @onclick="CloseAlert">OK</button>
+        <button class="alert-button" @onclick="CloseAlert">@Texts.ButtonOkText</button>
     </div>
 }
 

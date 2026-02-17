@@ -3,6 +3,7 @@
 @using AxCrypt.Core.UI
 @using AxCrypt.Core.UI.User
 @using static AxCrypt.Abstractions.TypeResolve
+@using AxCrypt.Content
 
 @inject SwitchUserViewModel SwitchUserViewModel
 @inject NavigationManager navigationManager
@@ -12,7 +13,7 @@
     <div class="SwitchUser-popup">
         <div class="popup-image-paragraph">
             <img class="popup-image" src="images/prfls_1.svg" alt="Switch user" style="display:block; margin:30px auto 16px auto;">
-            <span class="popup-paragraph" style="font-size:14px;">Choose the <b>account</b> to which you want to switch </span>
+            <span class="popup-paragraph" style="font-size:14px;">@((MarkupString)string.Format(Texts.SwitchUserPopupText))</span>
         </div>
         <div style="max-height: 220px;min-height: 100px;overflow-y:auto;margin: 0 30px;">
             @{
@@ -42,7 +43,7 @@
             {
                 <div class="popup-select-emails" style="margin-top: 6px;" @onclick="async () => await SwitchUserViewModel.OnNewEmail_Clicked()">
                     <img class="" src="images/Icon-4.svg" alt="" />
-                    <span class="select-email">Add new email</span>
+                    <span class="select-email">@Texts.AddNewEmailText</span>
                 </div>
             }
         </div>

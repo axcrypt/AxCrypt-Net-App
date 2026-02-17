@@ -22,7 +22,7 @@
             </div>
 
             <div>
-                <label for="title">User Activities</label>
+                <label for="title">@Texts.UserActivitiesText</label>
             </div>
 
             <div class="search-box" style="margin: 10px 0;">
@@ -39,9 +39,9 @@
                 }
             </div>
             <div class="modal-footer">
-                <button @onclick="ExportFileActivityLogs" style="float: right; margin:1px 5px 1px 0px; background-color: #48772C; color: white;" class="button font-medium success btn-small">Export</button>
-                <button @onclick="Clear" style="float: right; margin:1px 5px 1px 0px; background-color: #48772C; color: white;" class="button font-medium success btn-small free-color">Clear</button>
-                <button class="button font-medium success btn-large" @onclick="CloseLogWindow">Close</button>
+                <button @onclick="ExportFileActivityLogs" style="float: right; margin:1px 5px 1px 0px; background-color: #48772C; color: white;" class="button font-medium success btn-small">@Texts.PromptXecretsExport</button>
+                <button @onclick="Clear" style="float: right; margin:1px 5px 1px 0px; background-color: #48772C; color: white;" class="button font-medium success btn-small free-color">@Texts.ClearButtonText</button>
+                <button class="button font-medium success btn-large" @onclick="CloseLogWindow">@Texts.ButtonCloseText</button>
             </div>
         </div>
     </div>
@@ -147,12 +147,12 @@
             }
 
             File.Copy(originalFilePath, destinationFilePath);
-            StatusAlerService.Success("Exported successfully!");
+            StatusAlerService.Success(Texts.ExportedSuccessfullyText);
         }
         catch (Exception ex)
         {
             await New<Core.UI.IPopup>().ShowAsync(Core.UI.PopupButtons.Ok, AxCrypt.Content.Texts.MessageErrorTitle, ex.Message);
-            StatusAlerService.Error("Failed to export!");
+            StatusAlerService.Error(Texts.FailedToExportText);
         }
     }
 

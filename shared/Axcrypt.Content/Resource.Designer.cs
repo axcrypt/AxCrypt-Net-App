@@ -1048,6 +1048,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new email.
+        /// </summary>
+        public static string AddNewEmailText {
+            get {
+                return ResourceManager.GetString("AddNewEmailText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Folder.
         /// </summary>
         public static string AddNewFolderText {
@@ -1062,6 +1071,15 @@ namespace AxCrypt.Content {
         public static string AddNoteTitle {
             get {
                 return ResourceManager.GetString("AddNoteTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add or Drag Folder.
+        /// </summary>
+        public static string AddOrDragFolderText {
+            get {
+                return ResourceManager.GetString("AddOrDragFolderText", resourceCulture);
             }
         }
         
@@ -1640,6 +1658,15 @@ namespace AxCrypt.Content {
         public static string AnonymousRenameToolTip {
             get {
                 return ResourceManager.GetString("AnonymousRenameToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anyone.
+        /// </summary>
+        public static string AnyoneText {
+            get {
+                return ResourceManager.GetString("AnyoneText", resourceCulture);
             }
         }
         
@@ -42347,6 +42374,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose up to {0} users.
+        /// </summary>
+        public static string ChooseUpTo {
+            get {
+                return ResourceManager.GetString("ChooseUpTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City:.
         /// </summary>
         public static string CityLabel {
@@ -42397,6 +42433,15 @@ namespace AxCrypt.Content {
         public static string ClearAllText {
             get {
                 return ResourceManager.GetString("ClearAllText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string ClearButtonText {
+            get {
+                return ResourceManager.GetString("ClearButtonText", resourceCulture);
             }
         }
         
@@ -44435,6 +44480,15 @@ namespace AxCrypt.Content {
         public static string DaysLeftWarningToolTip {
             get {
                 return ResourceManager.GetString("DaysLeftWarningToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to days.
+        /// </summary>
+        public static string DaysText {
+            get {
+                return ResourceManager.GetString("DaysText", resourceCulture);
             }
         }
         
@@ -57613,6 +57667,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t add more users than the maximum allowed{0}.
+        /// </summary>
+        public static string MaxUsersCountText {
+            get {
+                return ResourceManager.GetString("MaxUsersCountText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Internal error, invalid function argument in %4.
         /// </summary>
         public static string McErrArgument {
@@ -63953,6 +64016,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Other log in options.
+        /// </summary>
+        public static string OtherLogOptions {
+            get {
+                return ResourceManager.GetString("OtherLogOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Try other MFA options.
         /// </summary>
         public static string OtherMFAOptionsText {
@@ -64673,6 +64745,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 8 characters.
+        /// </summary>
+        public static string PasswordCharactersText {
+            get {
+                return ResourceManager.GetString("PasswordCharactersText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Easy.
         /// </summary>
         public static string PasswordEasyText {
@@ -64790,6 +64871,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1 lower case letter.
+        /// </summary>
+        public static string PasswordLowerCaseLetter {
+            get {
+                return ResourceManager.GetString("PasswordLowerCaseLetter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage all your passwords online in the cloud&lt;span class=&quot;text-cutoff&quot;&gt; with AxCrypt Password Management, your online safety deposit for passwords, codes, pins, etc. Your passwords are stored in a securely encrypted archive and are available to you, and only you, anywhere at any time. &lt;a class=&quot;hide-link&quot;&gt;[Collapse]&lt;/a&gt;&lt;/span&gt;&lt;span class=&quot;text-cutoff-ellipsis&quot;&gt;... &lt;a class=&quot;show-link&quot;&gt;[Read more]&lt;/a&gt;&lt;/span&gt;.
         /// </summary>
         public static string PasswordManagementListPageBody {
@@ -64867,6 +64957,15 @@ namespace AxCrypt.Content {
         public static string PasswordModerateText {
             get {
                 return ResourceManager.GetString("PasswordModerateText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 number.
+        /// </summary>
+        public static string PasswordNumber {
+            get {
+                return ResourceManager.GetString("PasswordNumber", resourceCulture);
             }
         }
         
@@ -65047,6 +65146,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1 special character like.
+        /// </summary>
+        public static string PasswordSpecialCharacter {
+            get {
+                return ResourceManager.GetString("PasswordSpecialCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Weak.
         /// </summary>
         public static string PasswordStrengthBadName {
@@ -65083,6 +65191,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password Strength.
+        /// </summary>
+        public static string PasswordStrengthText {
+            get {
+                return ResourceManager.GetString("PasswordStrengthText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Too weak.
         /// </summary>
         public static string PasswordStrengthUnacceptableName {
@@ -65115,6 +65232,15 @@ namespace AxCrypt.Content {
         public static string PasswordStrengthWeakTip {
             get {
                 return ResourceManager.GetString("PasswordStrengthWeakTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 upper case letter.
+        /// </summary>
+        public static string PasswordUpperCaseLetter {
+            get {
+                return ResourceManager.GetString("PasswordUpperCaseLetter", resourceCulture);
             }
         }
         
@@ -72748,6 +72874,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sent.
+        /// </summary>
+        public static string SentText {
+            get {
+                return ResourceManager.GetString("SentText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server status.
         /// </summary>
         public static string ServerStatusLabel {
@@ -72968,6 +73103,15 @@ namespace AxCrypt.Content {
         public static string ShareEncryptedTextAsLinkTooltipText {
             get {
                 return ResourceManager.GetString("ShareEncryptedTextAsLinkTooltipText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set an expiry to automatically stop access after a chosen time, keeping your shared content secure..
+        /// </summary>
+        public static string ShareEncryptedTextDialog {
+            get {
+                return ResourceManager.GetString("ShareEncryptedTextDialog", resourceCulture);
             }
         }
         
@@ -73386,6 +73530,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specific users.
+        /// </summary>
+        public static string SpecificUsersText {
+            get {
+                return ResourceManager.GetString("SpecificUsersText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A secure SSL connection is required. Please try again using &lt;a href=&quot;{2}&quot;&gt;{2}&lt;/a&gt; .
         ///
         ///To go to the start page, click &lt;a href=&quot;{1}&quot;&gt;here&lt;/a&gt;..
@@ -73627,6 +73780,15 @@ namespace AxCrypt.Content {
         public static string StrongerProtectionText {
             get {
                 return ResourceManager.GetString("StrongerProtectionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Strong password contains at least.
+        /// </summary>
+        public static string StrongPasswordAtleastText {
+            get {
+                return ResourceManager.GetString("StrongPasswordAtleastText", resourceCulture);
             }
         }
         
@@ -74363,9 +74525,9 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Surname: .
         /// </summary>
-        public static string SurnameLabel {
+        public static string SurnameLabel_ {
             get {
-                return ResourceManager.GetString("SurnameLabel", resourceCulture);
+                return ResourceManager.GetString("SurnameLabel ", resourceCulture);
             }
         }
         
@@ -74402,6 +74564,15 @@ namespace AxCrypt.Content {
         public static string SwitchUserButtonText {
             get {
                 return ResourceManager.GetString("SwitchUserButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the &lt;b&gt;account&lt;/b&gt; to which you want to switch.
+        /// </summary>
+        public static string SwitchUserPopupText {
+            get {
+                return ResourceManager.GetString("SwitchUserPopupText", resourceCulture);
             }
         }
         
@@ -76932,6 +77103,33 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to download it now or on the next launch?.
+        /// </summary>
+        public static string UpgradeVersionDialogText {
+            get {
+                return ResourceManager.GetString("UpgradeVersionDialogText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, download now!.
+        /// </summary>
+        public static string UpgradeVersionDialogText1 {
+            get {
+                return ResourceManager.GetString("UpgradeVersionDialogText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No, later.
+        /// </summary>
+        public static string UpgradeVersionDialogText2 {
+            get {
+                return ResourceManager.GetString("UpgradeVersionDialogText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to It seems like you come from a business. Consider using our business tier to get features like master key, business administration etc..
         /// </summary>
         public static string UpsellBusinessForNotStandardPremiumUsersText {
@@ -77373,6 +77571,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Activities.
+        /// </summary>
+        public static string UserActivitiesText {
+            get {
+                return ResourceManager.GetString("UserActivitiesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Activity.
         /// </summary>
         public static string UserActivityTitle {
@@ -77432,6 +77639,15 @@ namespace AxCrypt.Content {
         public static string UserSettingsFormatChangeNeedsReset {
             get {
                 return ResourceManager.GetString("UserSettingsFormatChangeNeedsReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users with access{0}.
+        /// </summary>
+        public static string UsersWithAccessText {
+            get {
+                return ResourceManager.GetString("UsersWithAccessText", resourceCulture);
             }
         }
         

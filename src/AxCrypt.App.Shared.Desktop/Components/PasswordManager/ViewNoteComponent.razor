@@ -99,7 +99,7 @@
 
     private async Task DeleteSecret()
     {
-        PopupButtons selectedButton = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, "Alert!", "Are you sure want to delete this secret.", Common.DoNotShowAgainOptions.None);
+        PopupButtons selectedButton = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, @Texts.AlertText, @Texts.DeleteSecretText, Common.DoNotShowAgainOptions.None);
         bool isConfirmed = selectedButton == PopupButtons.Ok;
 
         if (!isConfirmed)
@@ -117,7 +117,7 @@
     {
         if (deleted)
         {
-            StatusAlertService.Success("Your secret has been deleted!");
+            StatusAlertService.Success(@Texts.SecretDeletedText);
         }
         else
         {
@@ -166,7 +166,7 @@
 
     private string GetValue(bool isVisible, string value)
     {
-        return isVisible ? value : "**click to show**";
+        return isVisible ? value : Texts.ClickToShowText;
     }
 
     void UpdateStateChanged()

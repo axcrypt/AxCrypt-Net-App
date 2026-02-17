@@ -36,7 +36,7 @@
             <div class="file-max-hgt hgt-ovflw" style="display: flex; flex-wrap: wrap;">
                 @if (!RecentFoldersViewModel.HasNoSubscription)
                 {
-                    <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="async (ss) => await RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label class="fle-nme">Add or Drag Folder</label></div>
+                    <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="async (ss) => await RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label class="fle-nme">@Texts.AddOrDragFolderText</label></div>
                 }
                 @if (!RecentFoldersViewModel.RecentFoldersList.Any())
                 {
