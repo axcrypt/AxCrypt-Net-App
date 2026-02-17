@@ -299,6 +299,14 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 
 .notification-popup {
     border: 1px solid $SdebrbgndClr;
+
+    >.table {
+        border-collapse: collapse;
+    }
+
+    tr {
+        border: 1px solid #575757; /* Row border color */
+    }
 }
 
 .password-filter-dropdown-content {

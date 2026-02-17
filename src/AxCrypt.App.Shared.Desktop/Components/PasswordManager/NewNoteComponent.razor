@@ -23,10 +23,10 @@
                 <ul class="clean-up sub-head-clr" style=" list-style:none; ">
                     <li>
                         <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
-                        <textarea id="pwd-desc-inp"
+                         <textarea id="pwd-desc-inp"
                                   placeholder="example" maxlength="100000"
                                   style="color:#494949" @bind="@newSecretViewModel.Secret.Note.SecretDesc" rows="2"
-                                  class="@GetInputClass(nameof(newSecretViewModel.Secret.Note.SecretDesc))"></textarea>
+                                  class="@GetInputClass(nameof(newSecretViewModel.Secret.Note.SecretDesc))"></textarea> 
                         <ValidationMessage For="@(() => newSecretViewModel.Secret.Note.SecretDesc)" />
                     </li>
                     <li>

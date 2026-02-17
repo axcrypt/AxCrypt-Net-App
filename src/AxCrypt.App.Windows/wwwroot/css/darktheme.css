@@ -274,6 +274,12 @@ input[readonly=readonly], textarea[readonly] {
 .notification-popup {
   border: 1px solid #303030;
 }
+.notification-popup > .table {
+  border-collapse: collapse;
+}
+.notification-popup tr {
+  border: 1px solid #575757; /* Row border color */
+}
 
 .password-filter-dropdown-content {
   background: #303030;
