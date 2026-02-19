@@ -262,10 +262,10 @@ public class ProfileViewModel : ViewModelBase
         return isDisabled ? "disabled" : string.Empty;
     }
 
-    public void CancelSubscription()
-    {
-        BrowseUtility.RedirectToMyAxCryptIDPage();
-    }
+    //public void CancelSubscription()
+    //{
+    //    BrowseUtility.RedirectToMyAxCryptIDPage();
+    //}
 
     public void UpgradeSubscription()
     {

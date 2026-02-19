@@ -585,11 +585,11 @@ public class AppSettingsViewModel : ViewModelBase
             return;
         }
 
-        _logOnViewModel.UpgradeDialog.Show();
+        ShowUpgradePopup();
     }
 
     public void ShowUpgradePopup()
     {
-        _logOnViewModel.UpgradeDialog.Show();
+        AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
     }
 }

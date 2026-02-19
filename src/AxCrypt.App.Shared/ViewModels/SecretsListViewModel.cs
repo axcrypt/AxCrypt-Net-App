@@ -26,14 +26,11 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
     private readonly string _sortOptionRecent = Texts.SecretsRecentlyAdded;
     private readonly string _sortOptionShared = Texts.PromptSharedWith;
 
-    private LogOnViewModel _logOnViewModel;
-
     private IStatusAlertService _StatusAlertService;
 
     public SecretsListViewModel()
     {
         _StatusAlertService = AxCServiceProviderExtension.StatusAlertService!;
-        _logOnViewModel = AxCServiceProviderExtension.GetService<LogOnViewModel>();
 
         Initialize();
     }
@@ -62,7 +59,7 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
     {
         if (!HasPaidSubscription)
         {
-            _logOnViewModel.UpgradeDialog.Show();
+            AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
             return;
         }
     }

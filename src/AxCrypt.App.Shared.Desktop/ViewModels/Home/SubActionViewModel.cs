@@ -175,7 +175,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
 
         public void UpgradeDialog()
         {
-            LogOnViewModel.UpgradeDialog.Show();
+            AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
         }
 
         public void AlwaysOfflineForFreeUser()
@@ -256,7 +256,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
                 return;
             }
 
-            LogOnViewModel.UpgradeDialog.Show();
+            UpgradeDialog();
         }
     }
 }

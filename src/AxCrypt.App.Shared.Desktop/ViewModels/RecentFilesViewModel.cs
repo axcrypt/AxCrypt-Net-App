@@ -65,7 +65,7 @@ public class RecentFilesViewModel : ViewModelBase
 
     public void UpgradePopup()
     {
-        LogOnViewModel.UpgradeDialog.Show();
+        AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
     }
 
     private void ConfigureMenus(LicenseCapabilities license)
@@ -334,6 +334,6 @@ public class RecentFilesViewModel : ViewModelBase
             return;
         }
 
-        LogOnViewModel.UpgradeDialog.Show();
+        UpgradePopup();
     }
 }

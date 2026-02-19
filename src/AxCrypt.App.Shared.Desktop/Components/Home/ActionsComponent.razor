@@ -39,8 +39,8 @@
                     @if (isHovered && hoveredElement == "secure")
                     {
                         <div class="popup-section">
-                            <div class="free-color" id="upgrade-sec" style="padding:10px; text-align:center; border-radius:5px;">
-                                <span style="color:white;">
+                            <div class="" id="upgrade-sec" style="background-color:#FFCBC9; padding:10px; text-align:center; border-radius:5px;">
+                                <span style="color: #CE3733;">
                                     @((MarkupString)(string.Format(Texts.UpgradeFeatureText)))
                                 </span>
                                 <button class="upgrd-btn font-medium btn-medium" @onclick="() => homeActionModel.UpgradeDialog()" style="margin: 0 auto;">@Texts.UpgradeText</button>
@@ -85,8 +85,8 @@
                     @if (isHovered && hoveredElement == "share")
                     {
                         <div class="popup-section">
-                            <div class="free-color" id="upgrade-sec" style="padding:10px; text-align:center; border-radius:5px;">
-                                <span style="color:white;">
+                            <div id="upgrade-sec" style="background-color:#FFCBC9; padding:10px; text-align:center; border-radius:5px;">
+                                <span style="color:#CE3733;">
                                     @((MarkupString)(string.Format(Texts.UpgradeFeatureText)))
                                 </span>
                                 <button class="upgrd-btn font-medium btn-medium" @onclick="() => homeActionModel.UpgradeDialog()" style="margin: 0 auto;">@Texts.UpgradeText</button>
@@ -231,14 +231,20 @@
     }
     else if (homeActionModel.HasNoSubscription)
     {
-        <div class="upgrd-box free-color">
+        <div class="upgrd-box" style="background-color: #FFCBC9;padding: 10px;">
             <img class="img-upgrdpl" src="" alt="" />
             <div>
-                <label class="unlck-txt">
-                    @* Unlock our amazing <span>features</span> developed to <span>empower your security!</span> *@
-                    @((MarkupString)(string.Format(Texts.UpgradeToUnlockFullEncryptionFeaturesText)))
+                @{
+                    string UpgradeSubsText = "Try now to unlock <span>stronger & unlimited encryption</span> features!";
+                    @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.License.Has(Core.Runtime.LicenseCapability.Viewer))
+                    {
+                        UpgradeSubsText = "Try now to unlock <span>Encryption & more features!</span>";
+                    }
+                }
+                <label class="unlck-txt" style="color:#CE3733">
+                    @((MarkupString)UpgradeSubsText)
                 </label>
-                <button class="upgrd-btn font-medium btn-large" @onclick="() => homeActionModel.UpgradeDialog()" style="height: 37px;"> @Texts.UpgradeNowText</button>
+                <button class="font-medium btn-large grn-bg whte-clr" @onclick="() => homeActionModel.UpgradeDialog()" style=" text-transform:capitalize;font-size: 15px;margin-top: 5px;">@Texts.TryNowLabel</button>
             </div>
         </div>
     }

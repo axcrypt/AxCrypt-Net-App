@@ -162,7 +162,7 @@ namespace AxCrypt.Core.UI.ViewModel
             }
             await New<FileSystemState>().Save();
 
-            IEnumerable<IDataStore> files = _filesOrfolderPaths.SelectMany((folder) => New<IDataContainer>(folder).ListOfFiles(_filesOrfolderPaths.Select(x => New<IDataContainer>(x)), New<UserSettings>().FolderOperationMode.Policy()));
+            IEnumerable<IDataStore> files = _filesOrfolderPaths.SelectMany((folder) => New<IDataContainer>(folder).ListOfFiles(_filesOrfolderPaths.Select(x => New<IDataContainer>(x)), FolderOperationMode.IncludeSubfolders));
 
             await files.Select(x => x.FullName).ChangeKeySharingAsync(SharedWith);
         }

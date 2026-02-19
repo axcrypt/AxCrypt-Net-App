@@ -11,13 +11,12 @@
         <div class="warning-message alert radius">
             @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.License.Has(Core.Runtime.LicenseCapability.Viewer))
             {
-                @Texts.StandardEncryptionWarning <strong><a class="grn-clr" href="javascript:void(0);" @onclick="RedirectToPurchasePage">@Texts.StandardEncryptionWarningText1</a></strong>
+                <strong><a style="" href="javascript:void(0);" @onclick="RedirectToPurchasePage">Click here to unlock <span>Encryption & more features!</span></a></strong>
             }
             else
             {
-                <span>@Texts.StandardEncryptionWarningText2 <strong><a class="grn-clr" href="javascript:void(0);" @onclick="RedirectToPurchasePage">@Texts.StandardEncryptionWarningText1</a></strong>.</span>
+                <strong><a style="" href="javascript:void(0);" @onclick="RedirectToPurchasePage">@((MarkupString)Texts.StandardEncryptionWarningText1)</a></strong>
             }
-            @*   <a @onclick="ClosePopup" class="close" style="float: right; color: #fff;">X</a> *@
         </div>
     </div>
 }

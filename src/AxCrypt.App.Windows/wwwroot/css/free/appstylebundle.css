@@ -226,23 +226,6 @@ input[type=radio] {
   opacity: 1;
 }
 
-.warning-message {
-  font-size: 14px;
-  color: #fff;
-  padding: 15px;
-  border-radius: 4px;
-  background-color: #e95e47;
-  border: 1px solid #cf2a0e;
-  /*    display: flex;
-  justify-content: space-between;
-  align-items: center;*/
-}
-.warning-message a {
-  color: #FFDA00;
-  text-decoration: underline;
-  pointer-events: auto;
-}
-
 @media (max-width: 768px) {
   .button.success {
     background-color: #86B96E !important;
@@ -1400,20 +1383,20 @@ input[type=radio] {
 }
 
 .unlck-txt {
-  text-align: left;
-  font-size: 12px;
+  text-align: center;
+  font-size: 14px;
   font-weight: 700;
   color: #FFF;
 }
 .unlck-txt span {
-  color: #FFDA00;
+  color: #48772c;
+  font-weight: 800;
 }
 
 .upgrd-box {
   border-radius: 12px;
   background-color: #86B96E;
   box-shadow: 0px 8px 12px 0px rgba(60, 97, 43, 0.25);
-  background-image: url(/images/free/ImgSprkls.svg);
   background-position: top 10px right 10px;
   background-repeat: no-repeat;
   display: flex;
@@ -1656,6 +1639,73 @@ input[type=radio] {
     z-index: 10;
   }
 }
+.warning-message {
+  font-size: 18px;
+  color: #fff;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #FFCBC9;
+  text-transform: uppercase;
+  font-weight: 800;
+  /*border: 1px solid #cf2a0e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;*/
+}
+.warning-message a {
+  color: #CE3733;
+  text-decoration: underline;
+  pointer-events: auto;
+}
+.warning-message a > span {
+  color: #48772c;
+}
+
+.try-upgrade-plan-popup-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #494949;
+  font-size: 16px;
+}
+.try-upgrade-plan-popup-container .try-upgrade-plan-title {
+  font-weight: 600;
+}
+.try-upgrade-plan-popup-container .try-upgrade-plan-title span, .try-upgrade-plan-popup-container .try-upgrade-plan-subtitle span {
+  color: #48772c;
+  font-weight: 800;
+  line-height: 25px;
+}
+.try-upgrade-plan-popup-container .more {
+  font-weight: bold;
+  list-style-type: none;
+}
+.try-upgrade-plan-popup-container .try-upgrade-plan-popup-container .font-medium {
+  font-size: 16px;
+}
+.try-upgrade-plan-popup-container .pricing-link {
+  text-decoration: none;
+  color: #000;
+}
+.try-upgrade-plan-popup-container .pricing-link:hover {
+  text-decoration: underline;
+}
+
+.upgrade-feature-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.upgrade-feature-container .feature-item {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  align-items: center;
+  margin: 15px 0;
+}
+
 .password-creation {
   margin: 0 auto;
   width: max-content;

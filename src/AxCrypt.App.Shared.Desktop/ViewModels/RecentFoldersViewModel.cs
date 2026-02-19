@@ -317,6 +317,6 @@ public class RecentFoldersViewModel : ViewModelBase
             return;
         }
 
-        LogOnViewModel.UpgradeDialog.Show();
+        AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
     }
 }

@@ -77,7 +77,7 @@
                 <div class="dropdown" style="padding-bottom: 10px;">
                     <div class="action-buttons" style="display: inline-flex;">
                         <button @onclick="ToggleDropdown"
-                                style="width: 310px; color:  #48772c;font-weight: 600;text-align: center;">
+                                style="width: 310px; color:#48772c;font-weight:600;text-align: center;">
                             @Texts.OtherLogOptions
                             <img class="drp-dwn up" id="lang-action-btn-arw" src="" alt="dropdown-img"
                                  style="max-height: 15px;" />
@@ -88,7 +88,10 @@
                         <div class="dropup-content hide-model-popup">
                             <a @onclick="async () => await InitiateImportAxCryptIdOnSignIn()"
                                style="padding: 8px;">@Texts.ImportMyPrivateKeyToolStripMenuItemText</a>
-                            <a @onclick="OpenCreateAxCryptIdOnSignIn" style="padding: 8px;">@Texts.TitleCreateAxCryptIdTitle</a>
+                            @if (LogOnViewModel.IsOffline)
+                            {
+                                <a @onclick="OpenCreateAxCryptIdOnSignIn" style="padding: 8px;">@Texts.TitleCreateAxCryptIdTitle</a>
+                            }
                         </div>
                     }
                 </div>

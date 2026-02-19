@@ -17,7 +17,6 @@ public class LogOnViewModel : ViewModelBase
     public LogOnViewModel()
     {
         InviteDialog = new CommonDialogService();
-        UpgradeDialog = new CommonDialogService();
         ShareKeyDialog = new CommonDialogService();
         ImportPrivatePasswordDialog = new CommonDialogService();
         RenewSubscriptionDialog = new CommonDialogService();
@@ -46,9 +45,9 @@ public class LogOnViewModel : ViewModelBase
             }
         });
 
-        mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) => 
-        { 
-            if (license != null! && MainViewModel.LoggedOn) 
+        mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) =>
+        {
+            if (license != null! && MainViewModel.LoggedOn)
             {
                 SubscriptionChanged();
             }
@@ -86,17 +85,14 @@ public class LogOnViewModel : ViewModelBase
 
     public LicenseCapabilities License
     {
-        get 
-        { 
+        get
+        {
             return MainViewModel.License;
         }
     }
 
     public CommonDialogService InviteDialog
     { get { return GetProperty<CommonDialogService>(nameof(InviteDialog)); } set { SetProperty(nameof(InviteDialog), value); } }
-
-    public CommonDialogService UpgradeDialog
-    { get { return GetProperty<CommonDialogService>(nameof(UpgradeDialog)); } set { SetProperty(nameof(UpgradeDialog), value); } }
 
     public CommonDialogService ShareKeyDialog
     { get { return GetProperty<CommonDialogService>(nameof(ShareKeyDialog)); } set { SetProperty(nameof(ShareKeyDialog), value); } }
@@ -160,6 +156,22 @@ public class LogOnViewModel : ViewModelBase
         get
         {
             return MainViewModel?.LoggedOn ?? false;
+        }
+    }
+
+    public bool EligibleForFreeTrial
+    {
+        get
+        {
+            return New<AccountStatusViewModel>().PlanState.HasFlag(PlanState.CanTryPremium);
+        }
+    }
+
+    public bool IsOffline
+    {
+        get
+        {
+            return New<Common.AxCryptOnlineState>().IsOffline;
         }
     }
 

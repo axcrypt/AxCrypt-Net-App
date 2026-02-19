@@ -1,10 +1,11 @@
 ﻿@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Content
 @using AxCrypt.Core.Runtime
 @using Microsoft.JSInterop
 
-@using static AxCrypt.Abstractions.TypeResolve
 @inject RecentFilesViewModel RecentFilesViewModel
+@inject UpgradeSubscriptionViewModel upgradeModel
 @inject IJSRuntime JSRuntime
 
 <div class="home-index">
@@ -29,17 +30,21 @@
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("setHtmlLang", New<Core.UI.UserSettings>().CultureName);
+            await JSRuntime.InvokeVoidAsync("setHtmlLang", Core.Resolve.UserSettings.CultureName);
             await base.OnAfterRenderAsync(firstRender);
-            if (!New<Core.UI.UserSettings>().HasSeenStartupHelp)
+            if (!Core.Resolve.UserSettings.HasSeenStartupHelp)
             {
                 await Task.Delay(2500);
                 await JSRuntime.InvokeVoidAsync("startHomeHelp", RecentFilesViewModel.LogOnViewModel.SubscriptionLevel.ToString().ToLower());
-                New<Core.UI.UserSettings>().HasSeenStartupHelp = true;
+                Core.Resolve.UserSettings.HasSeenStartupHelp = true;
             }
         }
         try
         {
+            if (RecentFilesViewModel.LogOnViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free && RecentFilesViewModel.LogOnViewModel.EligibleForFreeTrial)
+            {
+                ShowTryTrialSubscriptionDialog();
+            }
         }
         catch (Exception ex)
         {
@@ -49,6 +54,11 @@
         {
             //IsLoading = false;
         }
+    }
+
+    private void ShowTryTrialSubscriptionDialog()
+    {
+        upgradeModel.TryNowSubscriptionDialog.Show();
     }
 
     private void UpdatePageState()

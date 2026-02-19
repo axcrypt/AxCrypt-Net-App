@@ -16,8 +16,8 @@
                         <h3 class="txt-clr">@AboutViewModel.ProductName</h3>
                         <h4 style="font-size:18px">@Texts.FileEncryptionEasyText</h4>
 
-                        <label class="txt-clr">@AxCrypt.Content.Texts.AppVersionLabel</label>
-                        <span class="font-bold sub-head-clr">@AboutViewModel.Version</span> <br />
+                        <label class="txt-clr">@((MarkupString)string.Format(AxCrypt.Content.Texts.AppVersionLabel, ": <span class='font-bold sub-head-clr'>" + @AboutViewModel.Version + "</span>"))</label>
+                        <br />
 
                         <label class="txt-clr">@AxCrypt.Content.Texts.PromptSubscription:</label>
                         <span style="font-weight:500;font-size:15px;">@AboutViewModel.SubscriptionStatusAndExpiration</span>

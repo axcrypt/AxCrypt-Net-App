@@ -1,0 +1,90 @@
+﻿@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content;
+
+@inject UpgradeSubscriptionViewModel upgradeModel
+
+@if (IsVisible)
+{
+    <div id="modal-dialog5" class="modalDialog">
+        <div id="UpgradePopup" class="upg-popup text-center" style="width:40%;">
+            <div style="filter: invert(1);" class="close-img" @onclick="ClosePopup"></div>
+            <div class="try-upgrade-plan-popup-container">
+                <div>
+                    <h5 class="try-upgrade-plan-title">@Texts.TryUpgradePlanTitle3</h5>
+                    <span class="try-upgrade-plan-subtitle">@((MarkupString)string.Format(Texts.TryUpgradePlanSubTitleText1, Texts.SubscriptionPlanText + ","))</span>
+                </div>
+                <div class="upgrade-feature-container">
+                    <div class="feature-item">
+                        <img src="/images/free/Icoshield.svg" alt="shield" width="44" height="44">
+                        <span>@Texts.TryUpgradePlanFeatureText1</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="/images/free/IcoFtr$CloEn.svg" alt="folder" width="44" height="44">
+                        <span>@Texts.TryUpgradePlanFeatureText2</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="/images/free/IcoScrdFleShr.svg" alt="share" width="44" height="44">
+                        <span>@Texts.HipaaBenefitsSubHeading2</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="/images/free/IcoFtrPsswrdMng.svg" alt="password" width="44" height="44">
+                        <span>@Texts.PricingFeatureListPasswordManagement</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="/images/free/IcoBusiEnctnTls.svg" alt="business" width="44" height="44">
+                        <span>@Texts.TryUpgradePlanFeatureText5</span>
+                    </div>
+                </div>
+                <div>
+                    <span><a class="more pricing-link" style="color: #48772c;" href="javascript:void(0);" @onclick="upgradeModel.OpenPricingPage">@Texts.AndMoreText</a></span>
+                </div>
+                <div>
+                    <strong>@Texts.TryUpgradePlanActivationInstantText</strong>
+                </div>
+                <div class="center-column">
+                    <button class="btn-large font-medium grn-bg whte-clr" @onclick="OpenPremiumPage">
+                        @Texts.UpgradePromptText
+                    </button>
+                    <button class="btn-large font-medium button blck-bg whte-clr" @onclick="OpenBusinessPage" style="width: 160px;">
+                        @Texts.CreateBusinessText
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+    private bool IsVisible;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        upgradeModel.UpgradeSubscriptionDialog.OnDialogVisibilityChanged += UpdateUpgradeDialogState;
+    }
+
+    public void OpenBusinessPage()
+    {
+        upgradeModel.OpenBusinessPage();
+        ClosePopup();
+    }
+
+    public void OpenPremiumPage()
+    {
+        upgradeModel.OpenPremiumPage();
+        ClosePopup();
+    }
+
+    private void UpdateUpgradeDialogState(bool canShowUpgradeDialog)
+    {
+        InvokeAsync(() =>
+        {
+            IsVisible = canShowUpgradeDialog;
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void ClosePopup()
+    {
+        upgradeModel.UpgradeSubscriptionDialog.Close();
+    }
+}

@@ -154,7 +154,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
                 return;
             }
 
-            LogOnViewModel.UpgradeDialog.Show();
+            AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
         }
 
         private async Task RenameEncryptedVaultFiles()

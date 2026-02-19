@@ -49,9 +49,9 @@ public class ActionsViewModel : ViewModelBase
             {
                 return true;
             }
-            
-            return _mainViewModel?.EncryptFileEnabled ?? false;          
-        }    
+
+            return _mainViewModel?.EncryptFileEnabled ?? false;
+        }
     }
 
     public bool KeyShareButtonEnabled { get; set; }
@@ -145,7 +145,7 @@ public class ActionsViewModel : ViewModelBase
 
     public void UpgradeDialog()
     {
-        LogOnViewModel.UpgradeDialog.Show();
+        AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
     }
 
     public void NavigateToBusinessRenewalPage()
@@ -162,7 +162,7 @@ public class ActionsViewModel : ViewModelBase
     {
         BrowseUtility.RedirectToAccountWebUrl("{0}MasterKey/Index");
     }
-    
+
     public void NavigateToCreateGroupsPage()
     {
         BrowseUtility.RedirectToAccountWebUrl("{0}Group/Index");
@@ -189,6 +189,6 @@ public class ActionsViewModel : ViewModelBase
             return;
         }
 
-        LogOnViewModel.UpgradeDialog.Show();
+        UpgradeDialog();
     }
 }

@@ -1,0 +1,74 @@
+﻿@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content;
+
+@inject UpgradeSubscriptionViewModel upgradeModel
+
+@if (IsVisible)
+{
+    <div id="modal-dialog5" class="modalDialog">
+        <div id="UpgradePopup" class="upg-popup">
+            <div style="margin:12px 12px;" class="try-upgrade-plan-popup-container">
+                <div>
+                    <h6 class="try-upgrade-plan-title">
+                        @((MarkupString)@Texts.TryUpgradePlanTitle1)
+                    </h6>
+                </div>
+                <div>
+                    <span class="try-upgrade-plan-subtitle">@((MarkupString)string.Format(Texts.TryUpgradePlanSubTitleText1, Texts.FreeTrial + ","))</span>
+                </div>
+                <div>
+                    <ul>
+                        <li>@Texts.TryUpgradePlanFeatureText1</li>
+                        <li>@Texts.TryUpgradePlanFeatureText2</li>
+                        <li>@Texts.HipaaBenefitsSubHeading2</li>
+                        <li>@Texts.PricingFeatureListPasswordManagement</li>
+                        <li>@Texts.TryUpgradePlanFeatureText5</li>
+                        <li class="more"><a class="pricing-link" href="javascript:void(0);" @onclick="upgradeModel.OpenPricingPage">@Texts.AndMoreText</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p>
+                        @Texts.TryUpgradePlanCancelAnytimeText
+                    </p>
+                </div>
+                <div class="center-column">
+                    <button class="btn-large font-medium grn-bg whte-clr" @onclick="OpenPurchasePage">
+                        @Texts.ButtonStartTrial
+                    </button>
+                    <button class="btn-large font-medium button" @onclick="ClosePopup" style="background:none;border:1px solid #48772c;color:#494949;">
+                        @Texts.ButtonNotNow
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+    private bool IsVisible;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        upgradeModel.TryNowSubscriptionDialog.OnDialogVisibilityChanged += UpdateUpgradeDialogState;
+    }
+
+    public void OpenPurchasePage()
+    {
+        upgradeModel.OpenPurchasePage();
+        ClosePopup();
+    }
+
+    private void UpdateUpgradeDialogState(bool canShowUpgradeDialog)
+    {
+        InvokeAsync(() =>
+        {
+            IsVisible = canShowUpgradeDialog;
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private void ClosePopup()
+    {
+        upgradeModel.TryNowSubscriptionDialog.Close();
+    }
+}

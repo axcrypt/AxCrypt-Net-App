@@ -462,7 +462,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
-            _logOnViewModel.UpgradeDialog.Show();
+            AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
         }
 
         private async Task HandleVaultFolderSelection()

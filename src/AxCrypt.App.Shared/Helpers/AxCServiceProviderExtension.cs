@@ -64,4 +64,12 @@ public static class AxCServiceProviderExtension
             return GetService<FileOperationProcessIndicatorService>();
         }
     }
+
+    public static UpgradeSubscriptionViewModel? UpgradeSubscriptionViewModel
+    {
+        get
+        {
+            return GetService<UpgradeSubscriptionViewModel>();
+        }
+    }
 }

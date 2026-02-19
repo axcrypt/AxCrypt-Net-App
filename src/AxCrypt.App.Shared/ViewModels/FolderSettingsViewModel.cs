@@ -120,7 +120,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
-            LogOnViewModel.UpgradeDialog.Show();
+            AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
         }
 
         private async Task WatchedFoldersBrowseIgnoreFolder_Click(object sender, EventArgs e)

@@ -176,10 +176,5 @@ namespace AxCrypt.App.Shared.ViewModels
 
             return false;
         }
-
-        public void UpgradeDialog()
-        {
-            AxCServiceProviderExtension.LogOnViewModel!.UpgradeDialog.Show();
-        }
     }
 }
