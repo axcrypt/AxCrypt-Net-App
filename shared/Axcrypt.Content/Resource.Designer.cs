@@ -403,6 +403,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AxCrypt rolls out a refreshing new interface built for clarity and ease of use. With performance enhancements, the app delivered greater stability, enhanced security, and compatibility across all the major operating systems. Three new features, like the secured messenger, text encryption, and Vault, along with enhancements made to Password Manager, came to create a unified experience that simplified instant protection and security..
+        /// </summary>
+        public static string AboutUsHistory2025Text {
+            get {
+                return ResourceManager.GetString("AboutUsHistory2025Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AxCrypt is developed and released, offering a simple and user-friendly solution for sharing confidential data online..
         /// </summary>
         public static string AboutUsHistoryText1 {
@@ -1586,6 +1595,15 @@ namespace AxCrypt.Content {
         public static string AlwaysOfflineToolTip {
             get {
                 return ResourceManager.GetString("AlwaysOfflineToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ... and more.
+        /// </summary>
+        public static string AndMoreText {
+            get {
+                return ResourceManager.GetString("AndMoreText", resourceCulture);
             }
         }
         
@@ -57667,7 +57685,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can&apos;t add more users than the maximum allowed{0}.
+        ///   Looks up a localized string similar to You can&apos;t add more users than the maximum allowed({0}).
         /// </summary>
         public static string MaxUsersCountText {
             get {
@@ -73568,7 +73586,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade to unlock advanced encryption &amp; more features.
+        ///   Looks up a localized string similar to Click here to unlock stronger &amp; unlimited encryption features!.
         /// </summary>
         public static string StandardEncryptionWarningText1 {
             get {
@@ -74525,9 +74543,9 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Surname: .
         /// </summary>
-        public static string SurnameLabel_ {
+        public static string SurnameLabel {
             get {
-                return ResourceManager.GetString("SurnameLabel ", resourceCulture);
+                return ResourceManager.GetString("SurnameLabel", resourceCulture);
             }
         }
         
@@ -76541,6 +76559,96 @@ namespace AxCrypt.Content {
         public static string TryPremiumToolTip {
             get {
                 return ResourceManager.GetString("TryPremiumToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the plan that fits your needs. Activation is instant.
+        /// </summary>
+        public static string TryUpgradePlanActivationInstantText {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanActivationInstantText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel anytime before the trial period ends..
+        /// </summary>
+        public static string TryUpgradePlanCancelAnytimeText {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanCancelAnytimeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlimited Strong Encryption.
+        /// </summary>
+        public static string TryUpgradePlanFeatureText1 {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanFeatureText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder &amp; Cloud Encryption.
+        /// </summary>
+        public static string TryUpgradePlanFeatureText2 {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanFeatureText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business Encryption Tools.
+        /// </summary>
+        public static string TryUpgradePlanFeatureText5 {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanFeatureText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No charges today. Cancel anytime before the trial period ends..
+        /// </summary>
+        public static string TryUpgradePlanNoChargesText {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanNoChargesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With the &lt;span&gt;{0}&lt;/span&gt; unlock:.
+        /// </summary>
+        public static string TryUpgradePlanSubTitleText1 {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanSubTitleText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We noticed you don’t have a subscription, you can try &lt;span&gt;free for 14 Days!&lt;/span&gt;.
+        /// </summary>
+        public static string TryUpgradePlanTitle1 {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanTitle1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlock Complete Protection &lt;span&gt;Free for 14 Days!&lt;/span&gt;.
+        /// </summary>
+        public static string TryUpgradePlanTitle2 {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanTitle2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reactivate Full Protection.
+        /// </summary>
+        public static string TryUpgradePlanTitle3 {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanTitle3", resourceCulture);
             }
         }
         
@@ -79765,6 +79873,15 @@ namespace AxCrypt.Content {
         public static string YEAR_2024 {
             get {
                 return ResourceManager.GetString("YEAR_2024", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2025.
+        /// </summary>
+        public static string YEAR_2025 {
+            get {
+                return ResourceManager.GetString("YEAR_2025", resourceCulture);
             }
         }
         

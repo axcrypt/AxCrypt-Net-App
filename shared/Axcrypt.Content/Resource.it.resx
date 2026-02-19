@@ -14752,6 +14752,9 @@ Se non accetti i nostri cookie temporanei di sessione, non puoi connetterti e il
   <data name="CookiesDisabledError" xml:space="preserve">
     <value>I cookie non sembrano essere abilitati nel tuo browser. Se non accetti l'utilizzo dei cookie da parte nostra non puoi connetterti e il sito potrebbe non funzionare come previsto. Ulteriori informazioni nella nostra &lt;a href="{0}"&gt;informativa sui cookie&lt;/a&gt;</value>
   </data>
+  <data name="CopyEncryptedTextToClipboardTooltipText" xml:space="preserve">
+    <value>Copia il testo cifrato negli appunti</value>
+  </data>
   <data name="CopyPlainTextClipboardText" xml:space="preserve">
     <value>Copia il testo in chiaro nella cartellina</value>
   </data>
@@ -15451,6 +15454,9 @@ il servizio personale diretto e il supporto sono in inglese.</value>
   </data>
   <data name="DownloadAxcryptLatestFeatures3" xml:space="preserve">
     <value>Tieni presente che se installi AxCrypt 2 e apri vecchi file, questi file non saranno più possibili da aprire con AxCrypt 1.</value>
+  </data>
+  <data name="DownloadEncryptedTextAsTxtTooltipText" xml:space="preserve">
+    <value>Scarica testo criptato come file txt</value>
   </data>
   <data name="DownloadHeroHeadingMac" xml:space="preserve">
     <value>AxCrypt per macOS</value>
@@ -24725,6 +24731,9 @@ Oggetto: Rapporto Istantaneo AxCrypt </value>
   <data name="SellingPointMultilingualHeading" xml:space="preserve">
     <value>Multilingue</value>
   </data>
+  <data name="SendEncryptedTextViaEmailTooltipText" xml:space="preserve">
+    <value>Scrivi una nuova e-mail con testo criptato</value>
+  </data>
   <data name="SendFeedbackTitle" xml:space="preserve">
     <value>Invia Feedback</value>
   </data>
@@ -24802,6 +24811,9 @@ Scegli qualcosa che sia difficile da indovinare, poiché proteggerà sia le pass
   <data name="ShareAsLinkActionLabel" xml:space="preserve">
     <value>Condividi come link</value>
   </data>
+  <data name="ShareAsLinkActionText" xml:space="preserve">
+    <value>Condividi come link</value>
+  </data>
   <data name="SharedKeyUserListTitle" xml:space="preserve">
     <value>Tutti gli utenti con accesso ai file selezionati ({0})</value>
   </data>
@@ -24818,6 +24830,9 @@ Scegli qualcosa che sia difficile da indovinare, poiché proteggerà sia le pass
     <value>Stai per condividere in modo sicuro con un utente che è stato invitato ad usare AxCrypt ma non ha ancora risposto all'invito.
 
 Potrebbe essere necessario informare direttamente '{0}' riguardo la protezione dei file AxCrypt</value>
+  </data>
+  <data name="ShareEncryptedTextAsLinkTooltipText" xml:space="preserve">
+    <value>Condividi testo criptato tramite link</value>
   </data>
   <data name="ShareInviteMailBodyButton" xml:space="preserve">
     <value>Unisciti ad AxCrypt</value>
@@ -24979,9 +24994,6 @@ Per andare alla pagina iniziale, clicca &lt;a href="{1}"&gt;qui&lt;/a&gt; .</val
   </data>
   <data name="StandardEncryptionWarning" xml:space="preserve">
     <value>Il tuo attuale piano di visualizzazione consente solo la visualizzazione e la decrittografia</value>
-  </data>
-  <data name="StandardEncryptionWarningText1" xml:space="preserve">
-    <value>Esegui l'upgrade per sbloccare la crittografia avanzata e altre funzionalità</value>
   </data>
   <data name="StandardEncryptionWarningText2" xml:space="preserve">
     <value>Il tuo attuale piano di base utilizza la crittografia AES-128</value>
@@ -25304,6 +25316,12 @@ Per andare alla pagina iniziale, clicca &lt;a href="{1}"&gt;qui&lt;/a&gt; .</val
   </data>
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Svenska (Svedese)</value>
+  </data>
+  <data name="SwitchToDarkActionText" xml:space="preserve">
+    <value>Passa alla modalità scura</value>
+  </data>
+  <data name="SwitchToLightActionText" xml:space="preserve">
+    <value>Passa alla modalità chiara</value>
   </data>
   <data name="SwitchUserButtonText" xml:space="preserve">
     <value>Cambia utente</value>
@@ -25704,6 +25722,18 @@ Per andare alla pagina iniziale, clicca &lt;a href="{1}"&gt;qui&lt;/a&gt; .</val
   <data name="TextEncryptionFaq9Ans" xml:space="preserve">
     <value>AxCrypt &lt;b&gt;non può recuperare o reimpostare la tua password&lt;/b&gt; in quanto non ne abbiamo accesso. Per evitare di perdere l'accesso, consigliamo di conservare la password in modo sicuro tramite un gestore di password affidabile.</value>
   </data>
+  <data name="TextEncryptionGuideshareHead1" xml:space="preserve">
+    <value>Pulsante 'Copia'</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead2" xml:space="preserve">
+    <value>Scarica come .TXT</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead3" xml:space="preserve">
+    <value>Invia via e-mail</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead4" xml:space="preserve">
+    <value>Condividi come link sicuro</value>
+  </data>
   <data name="TextEncryptionGuidesHeadParagraph" xml:space="preserve">
     <value>AxCrypt ti permette di cifrare il testo semplice in pochi secondi. Basta inserire il messaggio, proteggerlo con la password del tuo account o una password personalizzata, e condividere l'output criptato via e-mail, messaggi privati e altro ancora.</value>
   </data>
@@ -25743,6 +25773,9 @@ Per andare alla pagina iniziale, clicca &lt;a href="{1}"&gt;qui&lt;/a&gt; .</val
   <data name="TextEncryptionGuideStepText16" xml:space="preserve">
     <value>Clicca &lt;b&gt; su Cripta&lt;/b&gt;</value>
   </data>
+  <data name="TextEncryptionGuideStepText17" xml:space="preserve">
+    <value>Utilizza &lt;b&gt;Condividi come link&lt;/b&gt; per generare un collegamento sicuro e con scadenza al tuo testo crittografato. &lt;br/&gt;Scegli se il link deve essere accessibile a &lt;b&gt;Chiunque&lt;/b&gt; oppure solo a &lt;b&gt;Utenti specifici&lt;/b&gt; (I nuovi utenti riceveranno un’e-mail di invito e, dopo la condivisione del file, un’e-mail di notifica con il link di accesso).&lt;br/&gt;Puoi aggiungere fino a &lt;b&gt;3 indirizzi e-mail specifici&lt;/b&gt; al fine di limitare l’accesso.</value>
+  </data>
   <data name="TextEncryptionGuideStepText18" xml:space="preserve">
     <value>Imposta &lt;b&gt;un tempo di scadenza&lt;/b&gt; (ad esempio, 1 ora)</value>
   </data>
@@ -25772,6 +25805,15 @@ Per andare alla pagina iniziale, clicca &lt;a href="{1}"&gt;qui&lt;/a&gt; .</val
   </data>
   <data name="TextEncryptionGuideStepText6" xml:space="preserve">
     <value>&lt;b&gt;Nota:&lt;/b&gt; Puoi scegliere una password personalizzata, forte e facile da ricordare, per criptare e decriptare questo testo.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText7" xml:space="preserve">
+    <value>Fai clic sul pulsante Copia per copiare immediatamente il testo crittografato negli appunti. Potrai quindi incollarlo facilmente in qualsiasi applicazione o piattaforma, come app di messaggistica, documenti o finestre di chat, per una condivisione rapida e sicura.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText8" xml:space="preserve">
+    <value>Seleziona l'opzione Download come .TXT per salvare il testo criptato come file .txt sul tuo dispositivo. Questo file può essere condiviso tramite e-mail, storage cloud, piattaforme di messaggistica o qualsiasi altro metodo tu preferisca.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText9" xml:space="preserve">
+    <value>Seleziona Invia tramite e-mail per condividere il testo crittografato direttamente via posta elettronica. Questa opzione rappresenta un’alternativa semplice alla crittografia delle e-mail tradizionale, inserendo automaticamente il contenuto crittografato nel messaggio.</value>
   </data>
   <data name="TextEncryptionGuideTips1" xml:space="preserve">
     <value>🔐 &lt;b&gt;Mantieni la tua password al sicuro:&lt;/b&gt; Condividila solo con i destinatari programmati ed evita di inviarla tramite canali non sicuri.</value>
