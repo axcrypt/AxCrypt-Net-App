@@ -73586,7 +73586,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click here to unlock stronger &amp; unlimited encryption features!.
+        ///   Looks up a localized string similar to Click here to unlock &lt;span&gt;stronger &amp; unlimited encryption&lt;/span&gt; features!.
         /// </summary>
         public static string StandardEncryptionWarningText1 {
             get {
