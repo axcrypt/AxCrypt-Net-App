@@ -15,7 +15,10 @@
 
 @inject IJSRuntime JSRuntime
 
-<div class="page-max-height">
+<div>
+    <div class="password-header">
+        <a href="/passwordManager" class="grn-clr"><img class="back-arrow" src="" />@Texts.PasswordManagementPageTitle</a>
+    </div>
     <div class="page-heading">
         <h3 class="password-creation">
             @Texts.ViewCardTitle
@@ -71,12 +74,7 @@
                     </li>
                 }
                 <li>
-                    <div class="center-column" style="gap: 20px;">
-                        <div>
-                            <NavLink href="passwordManager">
-                                <input type="submit" class="button cancel btn-extra-small" value="Back" />
-                            </NavLink>
-                        </div>
+                    <div style="float: right;">
                         <div>
                             @if (viewSecretViewModel.HasPaidSubscription)
                             {

@@ -9,7 +9,7 @@
 @inject IJSRuntime JSRuntime
 
 <div class="home-index">
-    <div>
+    <div class="top-page-title-container">
         <div class="page-title">
             <h1 class="">@Texts.WatchedFoldersTabPageText</h1>
         </div>
@@ -33,7 +33,7 @@
                 </div>
             }
 
-            <div class="file-max-hgt hgt-ovflw" style="display: flex; flex-wrap: wrap;">
+            <div class="hgt-ovflw" style="display: flex; flex-wrap: wrap;">
                 @if (!RecentFoldersViewModel.HasNoSubscription)
                 {
                     <div class="rcnt-fld-bx fld-dflt-cl add-fldr" @onclick="async (ss) => await RecentFoldersViewModel.AddSecuredFolder(ss)"><img class="add-fldr-img" src="" /><br /><label class="fle-nme">@Texts.AddOrDragFolderText</label></div>

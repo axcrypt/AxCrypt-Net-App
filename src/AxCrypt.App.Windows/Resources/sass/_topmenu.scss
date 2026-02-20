@@ -1,11 +1,19 @@
-﻿.mng-accnt {
+﻿:root {
+    --popup-menu-right: 50px;
+}
+
+.mng-accnt {
     content: $IcoMngAccnt;
+}
+
+.desk-acnt-popup {
+    right: 15px !important;
 }
 
 .desk-acnt-popup, .desk-stngs-popup, .notification-popup {
     position: absolute;
-    top: 65px !important;
-    right: 0%;
+    top: 105px !important;
+    right: 40px;
     text-align: left;
     z-index: 1;
 
@@ -83,11 +91,11 @@
         }
     }
 
-    .act-clr:not(.disabled):hover {
-        color: $TxtClr !important;
-        margin: 0 -19px;
-        padding: 5px 24px;
-    }
+        .act-clr:not(.disabled):hover {
+            color: $TxtClr !important;
+            margin: 0 -19px;
+            padding: 5px 24px;
+        }
 }
 
 .subs-dtls-popup {
@@ -118,13 +126,13 @@
     top: 39%;
 }
 
-.sub-pop2 a.active,
-.sub-pop2 a:hover {
-    background-color: $colAvtr;
-    color: $TxtClr !important;
-    padding: 10px 25px;
-    margin: 0 -20px;
-}
+    .sub-pop2 a.active,
+    .sub-pop2 a:hover {
+        background-color: $colAvtr;
+        color: $TxtClr !important;
+        padding: 10px 25px;
+        margin: 0 -20px;
+    }
 
 .desk-stngs-popup.model-popup {
     padding: 20px 0 !important;
@@ -351,9 +359,9 @@
     color: $TxtClr !important;
 }
 
-.key-mngnt-Popup a:hover .log-out-clr, .key-mngnt-Popup dd:hover .log-out-clr, .manage-acc-sec a:hover .log-out-clr, .manage-acc-sec dd:hover .log-out-clr {
-    opacity: 0.8;
-}
+    .key-mngnt-Popup a:hover .log-out-clr, .key-mngnt-Popup dd:hover .log-out-clr, .manage-acc-sec a:hover .log-out-clr, .manage-acc-sec dd:hover .log-out-clr {
+        opacity: 0.8;
+    }
 
 .key-mngnt-Popup a:hover, .manage-acc-sec a:hover {
     padding: 10px 25px;
@@ -366,11 +374,11 @@
     margin-bottom: 0px;
 }
 
-.key-mngnt-Popup dd:hover, .manage-acc-sec dd:hover {
-    padding: 5px 25px;
-    margin-left: -20px;
-    margin-right: -20px;
-}
+    .key-mngnt-Popup dd:hover, .manage-acc-sec dd:hover {
+        padding: 5px 25px;
+        margin-left: -20px;
+        margin-right: -20px;
+    }
 
 .acnt-upg {
     color: #48772C;
@@ -390,9 +398,9 @@
     cursor: pointer;
 }
 
-#inactivity input[type="radio"] + label:hover {
-    color: $HdTxtClr;
-}
+    #inactivity input[type="radio"] + label:hover {
+        color: $HdTxtClr;
+    }
 
 #inactivity input[type="radio"]:checked + label {
     color: $HdTxtClr;
@@ -409,9 +417,9 @@
         border: 0.2px solid #494949 !important;
     }
 
-    input[type=text]::Placeholder {
-        color: $FlActBg !important;
-    }
+        input[type=text]::Placeholder {
+            color: $FlActBg !important;
+        }
 }
 
 .invite-popup {
@@ -512,7 +520,7 @@
         box-shadow: 12px 12px 20px 0px #23232340;
         background-color: #ffffff;
         flex-wrap: wrap;
-        right: 0%;
+        right: 45px;
         top: 12%;
         flex-direction: column;
 
@@ -533,9 +541,9 @@
             font-size: 14px;
         }
 
-        a:hover {
-            text-decoration: underline;
-        }
+            a:hover {
+                text-decoration: underline;
+            }
     }
 }
 
@@ -555,15 +563,15 @@
     color: $colDsbl;
 }
 
-.dropbtn.active {
-    border-radius: 4px;
-    border: 1px solid #000000;
-    color: $TxtClr;
+    .dropbtn.active {
+        border-radius: 4px;
+        border: 1px solid #000000;
+        color: $TxtClr;
 
-    .down {
-        transform: rotate(-90deg);
+        .down {
+            transform: rotate(-90deg);
+        }
     }
-}
 
 .tick-icon {
     content: $TickMark;
@@ -597,13 +605,13 @@
     cursor: pointer;
 }
 
-.language-item img {
-    padding-right: 10px;
-}
+    .language-item img {
+        padding-right: 10px;
+    }
 
-.language-item:hover {
-    background-color: $PflBg;
-}
+    .language-item:hover {
+        background-color: $PflBg;
+    }
 
 /* Customize the scrollbar */
 .language-dropdown::-webkit-scrollbar {
@@ -851,12 +859,12 @@
             padding: 0 6px !important;
         }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            width: 24px;
-            height: 23px;
-        }
+            .slider:before {
+                position: absolute;
+                content: "";
+                width: 24px;
+                height: 23px;
+            }
 
         input:checked + .slider:before {
             transform: translateX(38px);

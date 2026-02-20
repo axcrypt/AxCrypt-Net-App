@@ -235,16 +235,18 @@
             <img class="img-upgrdpl" src="" alt="" />
             <div>
                 @{
-                    string UpgradeSubsText = "Try now to unlock <span>stronger & unlimited encryption</span> features!";
+                    string UpgradeSubsText = "To unlock <span>stronger & unlimited encryption</span> features!";
                     @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.License.Has(Core.Runtime.LicenseCapability.Viewer))
                     {
-                        UpgradeSubsText = "Try now to unlock <span>Encryption & more features!</span>";
+                        UpgradeSubsText = "To unlock <span>Encryption & more features!</span>";
                     }
+
+                    string ButtonText = AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel.EligibleForFreeTrial ? Texts.TryNowLabel : Texts.UpgradeNowText;
                 }
                 <label class="unlck-txt" style="color:#CE3733">
                     @((MarkupString)UpgradeSubsText)
                 </label>
-                <button class="font-medium btn-large grn-bg whte-clr" @onclick="() => homeActionModel.UpgradeDialog()" style=" text-transform:capitalize;font-size: 15px;margin-top: 5px;">@Texts.TryNowLabel</button>
+                <button class="font-medium btn-large grn-bg whte-clr" @onclick="() => homeActionModel.UpgradeDialog()" style="text-transform:capitalize;font-size: 14px;margin-top: 5px;">@ButtonText</button>
             </div>
         </div>
     }

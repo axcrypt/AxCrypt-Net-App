@@ -11,7 +11,7 @@ function searchSuccess() {
 
 function sortSecretSuccess() {
     $("#sort-secrets-loading").hide(),
-    $("#sort-secrets-list").show()
+        $("#sort-secrets-list").show()
 }
 
 
@@ -24,18 +24,18 @@ function sortSecretSuccess() {
         $("#sort-secrets-loading").show();
     }),
 
-    $("input:radio[name=SecretsTypeFilter]").click(function () {
-        $("#secret-type-filter-hidden").val($(this).val());
-        $('#secrets-filter-form').submit();
-        $("#sort-secrets-list").hide();
-        $("#sort-secrets-loading").show();
-    }),
+        $("input:radio[name=SecretsTypeFilter]").click(function () {
+            $("#secret-type-filter-hidden").val($(this).val());
+            $('#secrets-filter-form').submit();
+            $("#sort-secrets-list").hide();
+            $("#sort-secrets-loading").show();
+        }),
 
-    $("#sharedSecretsLimitOptions").change(function () {
-        $('#secrets-filter-form').submit();
-        $("#sort-secrets-list").hide();
-        $("#sort-secrets-loading").show();
-    })
+        $("#sharedSecretsLimitOptions").change(function () {
+            $('#secrets-filter-form').submit();
+            $("#sort-secrets-list").hide();
+            $("#sort-secrets-loading").show();
+        })
 });
 
 (function () {

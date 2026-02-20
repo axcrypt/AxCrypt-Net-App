@@ -10,7 +10,7 @@
 @inject NavigationManager navigation
 @inject IJSRuntime JSRuntime
 
-<div dir="@(Core.Resolve.UserSettings.CultureName == "ar"? "rtl":"ltr")">
+<div dir="@(Core.Resolve.UserSettings.CultureName == "ar" ? "rtl" : "ltr")">
     <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
 
     @if (LogOnViewModel.IsVisible)
@@ -28,6 +28,10 @@
     else if (LogOnViewModel.IsLoggedOn)
     {
         <AxCrypt.App.Shared.Desktop.Components.Pages.HomePage />
+        @if (LogOnViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
+        {
+            <AxCrypt.App.Shared.Desktop.Components.Shared.PaidPlanRequiredPopup />
+        }
     }
     else
     {

@@ -12,7 +12,10 @@
 
 @inject IJSRuntime jsRuntime
 
-<div style="width: 100%;" class="page-max-height parent-container">
+<div style="width: 100%;">
+    <div class="password-header">
+        <a href="/passwordManager" class="grn-clr"><img class="back-arrow" src="" />@Texts.PasswordManagementPageTitle</a>
+    </div>
     <div class="page-heading">
         <h3 class="password-creation">
             @Texts.EditNoteTitle
@@ -25,12 +28,12 @@
             <ul class="clean-up sub-head-clr" style=" list-style:none">
                 <li>
                     <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
-                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949;" @bind="@NoteViewModel.SecretDesc"></textarea>
+                    <textarea id="pwd-desc-inp" maxlength="100000" rows="5" style="color:#494949;" @bind="@NoteViewModel.SecretDesc"></textarea>
                     <ValidationMessage For="@(() => NoteViewModel.SecretDesc)" />
                 </li>
                 <li>
                     <label for="Note_Note">@Texts.NoteLabel:</label>
-                    <textarea type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949;" @bind="@NoteViewModel.Note"></textarea>
+                    <textarea type="text" class="secret-note-section" rows="7" cols="20" maxlength="100000" style="color:#494949;" @bind="@NoteViewModel.Note"></textarea>
                     <ValidationMessage For="@(() => NoteViewModel.Note)" />
                 </li>
                 <li>

@@ -52,6 +52,12 @@
     }
 }
 
+.top-page-title-container {
+    display: inline-flex;
+    position: absolute;
+    top: 50px;
+}
+
 .mb-prfle {
     background-color: $PflBg;
     color: $TxtClr;
@@ -264,7 +270,7 @@ input[type="radio"] {
 .head-sec {
     display: inline-flex;
     gap: 5px;
-    align-items: baseline;
+    align-items: center;
 }
 
 .home-body {
@@ -633,11 +639,6 @@ input[type="radio"] {
         background: $TbleBg !important;
         box-shadow: 0px 1px 4px 0px #00000040;
     }
-}
-
-.file-max-hgt {
-    max-height: 46vh;
-    overflow-y: scroll;
 }
 
 .fle-nme {

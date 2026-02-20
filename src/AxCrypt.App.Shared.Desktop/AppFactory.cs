@@ -24,6 +24,7 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Desktop;
 using AxCrypt.Mono;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Devices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,9 +99,11 @@ public class AppFactory
             {
                 currentLocation = new System.Drawing.Point((int)currentAppWindow.X, (int)currentAppWindow.Y);
             }
+
+            Microsoft.Maui.Devices.DisplayInfo displayInfo = Microsoft.Maui.Devices.DeviceDisplay.Current.MainDisplayInfo;
             System.Drawing.Point location = AppPreferences.MainWindowLocation == default(System.Drawing.Point) ? currentLocation : AppPreferences.MainWindowLocation;
-            currentAppWindow.X = location.X;
-            currentAppWindow.Y = location.Y;
+            currentAppWindow.X = location.X > displayInfo.Width ? 0 : location.X;
+            currentAppWindow.Y = location.Y > displayInfo.Height ? 0 : location.Y;
         }
 
         //_mainViewModel.RecentFilesComparer = GetComparer(AppPreferences.RecentFilesSortColumn, !AppPreferences.RecentFilesAscending);

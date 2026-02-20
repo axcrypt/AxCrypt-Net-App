@@ -3,13 +3,12 @@
 
 @inject HeaderComponentViewModel HCModel
 
-<div class="top-menu-section" style="margin: 20px;z-index: 100;flex:0 1 50px;">
+<div class="top-menu-section" style="margin: 40px 40px 10px 20px;z-index: 100;flex:0 1 50px;">
     <AxCrypt.App.Shared.Desktop.Components.Main.Header.TopMenu />
 </div>
 
 
 @code {
-
     protected override void OnInitialized()
     {
         HCModel.OnUpdateViewState += UpdatePageState;

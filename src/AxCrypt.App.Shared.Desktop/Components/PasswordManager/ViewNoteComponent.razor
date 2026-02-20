@@ -14,41 +14,10 @@
 @inject CopyToClipboardUtility CopyToClipboardUtility
 @inject IJSRuntime jsRuntime
 
-<style>
-    .description {
-        display: -webkit-box;
-        -webkit-line-clamp: 3; /* Show only 3 lines */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-
-    /* Expand when clicked */
-    #toggle-desc:checked ~ .description {
-        -webkit-line-clamp: unset;
-        overflow: visible;
-    }
-
-    /* Button styling */
-    .toggle-btn {
-        cursor: pointer;
-        color: red;
-        font-weight: 500;
-        display: inline-block;
-        margin-top: 6px;
-        margin: 0% 40% auto;
-    }
-
-        .toggle-btn::after {
-            content: "View More";
-        }
-
-    #toggle-desc:checked ~ .toggle-btn::after {
-        content: "View Less";
-    }
-
-</style>
-<div class="page-max-height1">
+<div>
+    <div class="password-header">
+        <a href="/passwordManager" class="grn-clr"><img class="back-arrow" src="" />@Texts.PasswordManagementPageTitle</a>
+    </div>
     <div class="page-heading">
         <h3 class="password-creation">
             @Texts.ViewNoteTitle
@@ -60,34 +29,21 @@
             <ul class="clean-up sub-head-clr" style=" list-style:none">
                 <li>
                     <label for="Password_SecretDesc">@Texts.DescriptionLabel</label><br />
-                    @* <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Note.SecretDesc" @bind:event="HandleOnChange" readonly="readonly"></textarea> *@
-                    <div class="description-box">
-                        <input type="checkbox" id="toggle-desc" hidden>
-                        <p class="description">
-                            Dark mode has become one of the most popular design trends in modern digital interfaces.
-                            It uses a dark background with light-colored text to reduce overall screen brightness.
-                            Many users prefer dark mode because it feels easier on the eyes, especially at night.
-                            It can help minimize glare in low-light environments and create a more comfortable viewing experience.
-                            Dark mode is commonly available in operating systems, websites, and mobile applications.
-                            Platforms like Android and iOS offer built-in dark themes across their systems.
-                            Social media apps such as Instagram and Twitter also support dark mode for user convenience.
-                            Beyond comfort, dark mode can help save battery life on devices with OLED or AMOLED screens.
-                            Designers often choose dark themes to create a modern and elegant appearance.
-                            However, dark mode may not be ideal for every situation, especially in bright sunlight.
-                            Some users find light mode better for reading long texts during the day.
-                            Accessibility considerations are important when designing dark interfaces.
-                            Proper contrast between text and background ensures readability for all users.
-                            Overall, dark mode has transformed the way people interact with digital technology.
-                        </p>
-                        <label for="toggle-desc" class="toggle-btn"></label>
+                    <div class="view-password-desc-wrapper" @ref="descWrapper">
+                        <div class="view-secret-description" @ref="descriptionDiv">
+                            @((MarkupString)secretService.CurrentSecret.Note.SecretDesc.Replace("\n", "<br />"))
+                        </div>
+                        <button type="button" class="view-secret-expand-toggle-btn" @onclick="async () => await ToggleText()" style="display:none">
+                            @Texts.BusinessSubsrcnShowMore
+                        </button>
                     </div>
                 </li>
                 <li>
                     <label for="Note_Note">@Texts.NoteLabel</label>
                     <div style="display:flex; position: relative;">
-                        <textarea id="noteInput" type="text" class="secret-note-section" cols="20" maxlength="100000" style="color:#494949; background-color:#E2E2E2" value="@GetValue(isNoteVisible, secretService.CurrentSecret.Note.Note)" readonly="readonly" @onclick="()=> VisibleReadOnlySecret(true)"></textarea>
-                       
-                        <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="async ()=> await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret!.Note.Note)">
+                        <textarea id="noteInput" type="text" class="secret-note-section" rows="7" cols="20" maxlength="100000" style="color:#494949; background-color:#E2E2E2" value="@GetValue(isNoteVisible, secretService.CurrentSecret.Note.Note)" readonly="readonly" @onclick="() => VisibleReadOnlySecret(true)"></textarea>
+
+                        <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret!.Note.Note)">
                             <img class="clipbrd" src="" alt="copy-clp-brd">
                         </div>
                     </div>
@@ -95,7 +51,6 @@
                 </li>
                 @if (secretService.CurrentSecret.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
                 {
-
                     <li class="list-row">
                         <div class="list-width">
                             <label for="Card_ExpirationDate">@Texts.OwnerEmailText</label>
@@ -104,12 +59,7 @@
                     </li>
                 }
                 <li>
-                    <div class="center-column" style="gap: 20px;">
-                        <div>
-                            <NavLink href="passwordManager">
-                                <input type="submit" class="button cancel btn-extra-small" value="Back" />
-                            </NavLink>
-                        </div>
+                    <div style="float: right;">
                         <div>
                             @if (viewSecretViewModel.HasPaidSubscription)
                             {
@@ -129,6 +79,9 @@
 </div>
 @code {
     ShareSecretViewModel? shareSecretViewModel;
+    private ElementReference descriptionDiv;
+    private ElementReference descWrapper;
+    private bool isExpanded = false;
 
     protected override void OnInitialized()
     {
@@ -148,8 +101,15 @@
     {
         if (firstRender)
         {
+            await jsRuntime.InvokeVoidAsync("initDescriptionToggle", descriptionDiv);
             await jsRuntime.InvokeVoidAsync("addClickListenerOutside", DotNetObjectReference.Create(this), "noteInput");
         }
+    }
+
+    private async Task ToggleText()
+    {
+        isExpanded = !isExpanded;
+        await jsRuntime.InvokeVoidAsync("toggleDescription", descriptionDiv, isExpanded);
     }
 
     private async Task DeleteSecret()

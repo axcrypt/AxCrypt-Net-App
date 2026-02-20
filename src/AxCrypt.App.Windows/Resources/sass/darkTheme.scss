@@ -71,6 +71,7 @@ $colDrkMdHglhtPrm: #CDFFB1;
 
 .password-create-dropdown-content {
     background-color: $colBordBgrnd !important;
+    color: $colTxtlble !important;
 }
 
     .password-create-dropdown-content a:hover,
@@ -357,6 +358,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 
 .dropbtn, .language-dropdown > .dropdown-item-container, .home-context-menu, .context-menu {
     background-color: $SdebrbgndClr !important;
+    color: $colTxtBd;
 }
 
 .selected-file, .share-list {
@@ -417,7 +419,6 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
         :hover {
             color: $colDrkMdHglhtPrm;
             background-color: $TbleBg;
-            //class ="notifi-popup"     class create for table row(tr)
         }
     }
 

@@ -9,7 +9,10 @@
 @inject NavigationManager navigationManager;
 @inject SecretService secretService
 
-<div class="page-max-height" style="width: 100%;">
+<div style="width: 100%;">
+    <div class="password-header">
+        <a href="/passwordManager" class="grn-clr"><img class="back-arrow" src="" />@Texts.PasswordManagementPageTitle</a>
+    </div>
     <div class="page-heading">
         <h3 class="password-creation">
             @Texts.AddNoteTitle
@@ -25,13 +28,13 @@
                         <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
                          <textarea id="pwd-desc-inp"
                                   placeholder="example" maxlength="100000"
-                                  style="color:#494949" @bind="@newSecretViewModel.Secret.Note.SecretDesc" rows="2"
+                                  style="color:#494949" @bind="@newSecretViewModel.Secret.Note.SecretDesc" rows="5"
                                   class="@GetInputClass(nameof(newSecretViewModel.Secret.Note.SecretDesc))"></textarea> 
                         <ValidationMessage For="@(() => newSecretViewModel.Secret.Note.SecretDesc)" />
                     </li>
                     <li>
                         <label for="Note_Note">@Texts.NoteLabel:</label>
-                        <textarea type="text" class="secret-note-section secret-note-bgnd" cols="20" maxlength="100000" style="color:#494949" placeholder="example" @bind="@newSecretViewModel.Secret.Note.Note"></textarea>
+                        <textarea type="text" class="secret-note-section secret-note-bgnd" rows="7" cols="20" maxlength="100000" style="color:#494949" placeholder="example" @bind="@newSecretViewModel.Secret.Note.Note"></textarea>
                     </li>
                     <li>
                         <div class="btn-sec-new-edit">

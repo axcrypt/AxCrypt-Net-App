@@ -147,7 +147,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.addEventListener('click', handler);
     };
 
-
     document.addEventListener('click', function (e) {
         let securedContextMenu = document.getElementById('securedContextMenu');
         if (securedContextMenu !== null) {
@@ -298,6 +297,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
             if (!IgnoreClosePopupOnPopupActions("advanced-filter-popup", targetobj) || targetobj.id === "apply-search-filter") {
                 HidePopup("advanced-filter-popup");
             }
+        }
+    });
+
+    var paidPlanRequirePopup = "";
+    document.addEventListener("mouseover", function (e) {
+        paidPlanRequirePopup = document.getElementById("paid-plan-required-popup");
+        if (paidPlanRequirePopup && e.target.classList.contains("nav-subs-upg")) {
+            paidPlanRequirePopup.style.display = "block";
+            paidPlanRequirePopup.style.left = e.clientX + 12 + "px";
+            paidPlanRequirePopup.style.top = e.clientY + 12 + "px";
+        }
+    });
+
+    document.addEventListener("mouseout", function (e) {
+        if (paidPlanRequirePopup && e.target.classList.contains("nav-subs-upg")) {
+            paidPlanRequirePopup.style.display = "none";
         }
     });
 });
