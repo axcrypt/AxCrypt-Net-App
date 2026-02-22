@@ -114,6 +114,8 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
 
         private FileProviderSelectionViewModel _fileProviderSelectionViewModel = fileProviderSelectionViewModel;
 
+        private UpgradeSubscriptionViewModel _upgradeViewModel = AxCServiceProviderExtension.UpgradeSubscriptionViewModel!;
+
         public void InitializeFilePickerDialog(
             FileStorageProvider fileProviderService,
             bool hasPaidSubscription
@@ -274,7 +276,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
 
             if (!HasLicenseCapabilityFor(_fileProviderService.SelectedFileOperation))
             {
-                LogOnViewModel!.UpgradeDialog.Show();
+                _upgradeViewModel.ShowUpgradeDialog();
                 return;
             }
 
@@ -432,7 +434,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
                 return;
             }
 
-            LogOnViewModel!.UpgradeDialog.Show();
+            _upgradeViewModel!.ShowUpgradeDialog();
         }
 
         private bool HasLicenseCapabilityFor(FileOperationOption fileOperationOption)
