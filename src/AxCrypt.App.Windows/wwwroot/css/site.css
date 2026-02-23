@@ -646,7 +646,11 @@ input:checked + .slider:before {
   padding-left: 10px;
   padding-right: unset;
 }
-.arabic-class .flex-column .nav-link.active.one, .arabic-class .flex-column .nav-link.active.two, .arabic-class .flex-column .nav-link.active.three, .arabic-class .flex-column .nav-link.active.four, .arabic-class .flex-column .nav-link.active.five {
+.arabic-class .flex-column .nav-link.active.one,
+.arabic-class .flex-column .nav-link.active.two,
+.arabic-class .flex-column .nav-link.active.three,
+.arabic-class .flex-column .nav-link.active.four,
+.arabic-class .flex-column .nav-link.active.five {
   background-position: top 4px left;
 }
 .arabic-class .sidebar .hide-icon {

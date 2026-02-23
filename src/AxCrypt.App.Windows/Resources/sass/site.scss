@@ -694,8 +694,15 @@ input:checked + .slider:before {
         }
     }
 
-    .flex-column .nav-link.active.one, .flex-column .nav-link.active.two, .flex-column .nav-link.active.three, .flex-column .nav-link.active.four, .flex-column .nav-link.active.five {
-        background-position: top 4px left;
+
+    .flex-column {
+        .nav-link.active.one,
+        .nav-link.active.two,
+        .nav-link.active.three,
+        .nav-link.active.four,
+        .nav-link.active.five {
+            background-position: top 4px left;
+        }
     }
 
     .sidebar {

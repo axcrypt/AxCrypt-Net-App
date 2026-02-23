@@ -4141,6 +4141,7 @@ textarea[readonly] {
 .nav-item .four.active,
 .nav-item .five.active,
 .nav-item .six.active,
+.nav-item .seven.active,
 .nav-item a:hover,
 .footer-menu a.active,
 .footer-menu a:hover,
@@ -4155,6 +4156,7 @@ textarea[readonly] {
 .nav-item .four.active .account,
 .nav-item .five.active .account,
 .nav-item .six.active .account,
+.nav-item .seven.active .account,
 .nav-item a:hover .account,
 .footer-menu a.active .account,
 .footer-menu a:hover .account,
@@ -4167,6 +4169,7 @@ textarea[readonly] {
 .nav-item .four.active .scrdfldr,
 .nav-item .five.active .scrdfldr,
 .nav-item .six.active .scrdfldr,
+.nav-item .seven.active .scrdfldr,
 .nav-item a:hover .scrdfldr,
 .footer-menu a.active .scrdfldr,
 .footer-menu a:hover .scrdfldr,
@@ -4179,6 +4182,7 @@ textarea[readonly] {
 .nav-item .four.active .scrts,
 .nav-item .five.active .scrts,
 .nav-item .six.active .scrts,
+.nav-item .seven.active .scrts,
 .nav-item a:hover .scrts,
 .footer-menu a.active .scrts,
 .footer-menu a:hover .scrts,
@@ -4191,6 +4195,7 @@ textarea[readonly] {
 .nav-item .four.active .scrdmssngr,
 .nav-item .five.active .scrdmssngr,
 .nav-item .six.active .scrdmssngr,
+.nav-item .seven.active .scrdmssngr,
 .nav-item a:hover .scrdmssngr,
 .footer-menu a.active .scrdmssngr,
 .footer-menu a:hover .scrdmssngr,
@@ -4203,6 +4208,7 @@ textarea[readonly] {
 .nav-item .four.active .txtencrpt,
 .nav-item .five.active .txtencrpt,
 .nav-item .six.active .txtencrpt,
+.nav-item .seven.active .txtencrpt,
 .nav-item a:hover .txtencrpt,
 .footer-menu a.active .txtencrpt,
 .footer-menu a:hover .txtencrpt,
@@ -4215,6 +4221,7 @@ textarea[readonly] {
 .nav-item .four.active .notifctn,
 .nav-item .five.active .notifctn,
 .nav-item .six.active .notifctn,
+.nav-item .seven.active .notifctn,
 .nav-item a:hover .notifctn,
 .footer-menu a.active .notifctn,
 .footer-menu a:hover .notifctn,
@@ -4227,6 +4234,7 @@ textarea[readonly] {
 .nav-item .four.active .suprt,
 .nav-item .five.active .suprt,
 .nav-item .six.active .suprt,
+.nav-item .seven.active .suprt,
 .nav-item a:hover .suprt,
 .footer-menu a.active .suprt,
 .footer-menu a:hover .suprt,
@@ -4239,6 +4247,7 @@ textarea[readonly] {
 .nav-item .four.active .fdbck,
 .nav-item .five.active .fdbck,
 .nav-item .six.active .fdbck,
+.nav-item .seven.active .fdbck,
 .nav-item a:hover .fdbck,
 .footer-menu a.active .fdbck,
 .footer-menu a:hover .fdbck,
@@ -4251,6 +4260,7 @@ textarea[readonly] {
 .nav-item .four.active .info,
 .nav-item .five.active .info,
 .nav-item .six.active .info,
+.nav-item .seven.active .info,
 .nav-item a:hover .info,
 .footer-menu a.active .info,
 .footer-menu a:hover .info,
@@ -4283,7 +4293,8 @@ textarea[readonly] {
 .flex-column .nav-link.active.three,
 .flex-column .nav-link.active.four,
 .flex-column .nav-link.active.five,
-.flex-column .nav-link.active.six {
+.flex-column .nav-link.active.six,
+.flex-column .nav-link.active.seven {
   background-image: url(/images/free/IcoIndctr.svg);
   background-repeat: no-repeat;
   background-position: top 4px right;
@@ -4668,6 +4679,10 @@ textarea[readonly] {
   margin-top: 10px;
 }
 
+.sidemenu-axc-logo {
+  margin: 50px 66px 0 44px;
+}
+
 .top-menu-section {
   margin: 70px 40px 10px 20px !important;
 }
@@ -4689,9 +4704,11 @@ textarea[readonly] {
   right: 10px;
 }
 
+.nav-item .five.active,
 .nav-item .four.active,
 .nav-item .three.active,
 .nav-item .two.active,
+.nav-item a.five:hover,
 .nav-item a.four:hover,
 .nav-item a.three:hover,
 .nav-item a.two:hover {

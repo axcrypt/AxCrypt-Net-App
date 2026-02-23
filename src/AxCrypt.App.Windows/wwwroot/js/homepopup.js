@@ -303,7 +303,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var paidPlanRequirePopup = "";
     document.addEventListener("mouseover", function (e) {
         paidPlanRequirePopup = document.getElementById("paid-plan-required-popup");
-        if (paidPlanRequirePopup && (e.target.classList.contains("nav-subs-upg") || e.target.classList.contains("subs-required"))) {
+        var currentTarget = e.target;
+        if (paidPlanRequirePopup
+            && (currentTarget.classList.contains("subs-required") || currentTarget.parentElement.classList.contains("subs-required")
+                || currentTarget.classList.contains("paid-plan-required") || currentTarget.parentElement.classList.contains("paid-plan-required"))
+        ) {
             paidPlanRequirePopup.style.display = "block";
             paidPlanRequirePopup.style.left = e.clientX + 12 + "px";
             paidPlanRequirePopup.style.top = e.clientY + 12 + "px";
@@ -311,7 +315,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     document.addEventListener("mouseout", function (e) {
-        if (paidPlanRequirePopup && (e.target.classList.contains("nav-subs-upg") || e.target.classList.contains("subs-required"))) {
+        var currentTarget = e.target;
+        if (paidPlanRequirePopup
+            && (currentTarget.classList.contains("subs-required") || currentTarget.parentElement.classList.contains("subs-required")
+                || currentTarget.classList.contains("paid-plan-required") || currentTarget.parentElement.classList.contains("paid-plan-required"))
+        ) {
             paidPlanRequirePopup.style.display = "none";
         }
     });

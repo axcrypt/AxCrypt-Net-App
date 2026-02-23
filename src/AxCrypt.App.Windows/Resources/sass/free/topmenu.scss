@@ -7,22 +7,22 @@
     color: $FlActBg !important;
 }
 
-.subs-required::after {
-    content: "";
-    display: inline-block;
-    background: url(/images/free/IcoRedSparkle.svg) no-repeat center;
-    background-size: 17px;
-    width: 17px;
-    height: 17px;
-    margin-left: 8px;
-}
+    .subs-required::after {
+        content: "";
+        display: inline-block;
+        background: url(/images/free/IcoRedSparkle.svg) no-repeat center;
+        background-size: 17px;
+        width: 17px;
+        height: 17px;
+        margin-left: 8px;
+    }
 
-.subs-required:hover {
-    background: none !important;
-    background-color: transparent !important;
-    color: $FlActBg !important;
-}
+    .subs-required:hover {
+        background: none !important;
+        background-color: transparent !important;
+        color: $FlActBg !important;
+    }
 
 .desk-acnt-popup, .desk-stngs-popup, .notification-popup {
-    top:135px !important;
+    top: 135px !important;
 }

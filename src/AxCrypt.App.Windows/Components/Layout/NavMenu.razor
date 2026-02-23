@@ -36,15 +36,14 @@
                 </NavLink>
             </div>
             <div id="help-secured-folders" class="nav-item px-3">
-                <NavLink class="nav-link two" href="securedfolders">
+                <NavLink class="nav-link two subs-required" href="securedfolders">
                     <span class="oi scrdfldr" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.EncryptedFoldersToolStripMenuItemText</span>
-                    <img class="nav-subs-upg" src="" alt="paid_required_img"  style="position:relative;" />
                 </NavLink>
             </div>
             @if (LogOnViewModel.UserHas(Core.Runtime.LicenseCapability.PasswordManagement))
             {
                 <div id="help-pswd-mngr" class="nav-item px-3">
-                    <NavLink class="@($"nav-link two {GetClassByActiveTab("passwordManager")}")" href="passwordManager">
+                    <NavLink class="@($"nav-link three {GetClassByActiveTab("passwordManager")}")" href="passwordManager">
                         <span class="oi scrts" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.PasswordManagerLinkLabel</span>
                     </NavLink>
                 </div>
@@ -52,23 +51,20 @@
             else
             {
                 <div id="help-pswd-mngr" class="nav-item px-3">
-                    <NavLink class="@($"nav-link three {GetClassByActiveTab("passwordManager")}")" href="passwordManager">
+                    <NavLink class="@($"nav-link three subs-required {GetClassByActiveTab("passwordManager")}")" href="passwordManager">
                         <span class="oi scrts" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.PasswordManagerLinkLabel</span>
-                        <img class="nav-subs-upg" src="" alt="paid_required_img"  style="position:relative;" />
                     </NavLink>
                 </div>
             }
             <div id="help-scrd-mssngr" class="nav-item px-3">
-                <NavLink class="nav-link three" href="securedmessenger">
+                <NavLink class="nav-link four subs-required" href="securedmessenger">
                     <span class="oi scrdmssngr" aria-hidden="true"></span> <span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SecuredMessengerLinkLabel</span>
-                    <img class="nav-subs-upg" src="" alt="paid_required_img" style="position:relative;" />
                 </NavLink>
             </div>
             @if (LogOnViewModel.UserHas(Core.Runtime.LicenseCapability.TextEncryptionPremium))
             {
                 <div id="help-txt-encyptn" class="nav-item px-3">
-                    <NavLink class="nav-link four" href="textencryption">
-                        <img class="nav-subs-upg" src="" alt="paid_required_img">
+                    <NavLink class="nav-link five" href="textencryption">
                         <span class="oi txtencrpt" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.TextEncryptionLinkLabel</span>
                     </NavLink>
                 </div>
@@ -76,20 +72,19 @@
             else
             {
                 <div id="help-txt-encyptn" class="nav-item px-3">
-                    <NavLink class="@($"nav-link four {GetClassByActiveTab("textencryption")}")" href="javascript:void(0)" @onclick="UpgradeDialog">
+                    <NavLink class="@($"nav-link five subs-required {GetClassByActiveTab("textencryption")}")" href="javascript:void(0)" @onclick="UpgradeDialog">
                         <span class="oi txtencrpt" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.TextEncryptionLinkLabel</span>
-                        <img class="nav-subs-upg" src="" alt="paid_required_img" style="position:relative;" />
                     </NavLink>
                 </div>
             }
 
             <div id="help-nofify" class="nav-item px-3">
-                <NavLink class="nav-link five" href="notification">
+                <NavLink class="nav-link six" href="notification">
                     <span class="oi notifctn" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.PromptNotificationsText</span>
                 </NavLink>
             </div>
             <div id="help-support" class="nav-item px-3">
-                <NavLink class="nav-link six" href="SupportIndex">
+                <NavLink class="nav-link seven" href="SupportIndex">
                     <span class="oi suprt" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@LogOnViewModel.SupportPageTitle</span>
                 </NavLink>
             </div>

@@ -1,4 +1,5 @@
 ﻿using AxCrypt.App.Shared.Services.UI;
+using AxCrypt.Content;
 using AxCrypt.Core.UI.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace AxCrypt.App.Shared.ViewModels
         public CommonDialogService UpgradeSubscriptionDialog
         { get { return GetProperty<CommonDialogService>(nameof(UpgradeSubscriptionDialog)); } set { SetProperty(nameof(UpgradeSubscriptionDialog), value); } }
 
+        public string? PopupTryUpgradeTitle { get; set; } = null;
 
         public void ShowUpgradeDialog()
         {
@@ -38,6 +40,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
+            PopupTryUpgradeTitle = Texts.TryUpgradePlanTitle3;
             UpgradeSubscriptionDialog.Show();
         }
 
@@ -50,6 +53,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
+            PopupTryUpgradeTitle = "<label style='margin-top:10px;font-size:19px;'>We noticed you don’t have a subscription!</label><label style='font-size:19px;margin-top:10px;'>" + @Texts.TryUpgradePlanTitle3 + "</label";
             UpgradeSubscriptionDialog.Show();
         }
 

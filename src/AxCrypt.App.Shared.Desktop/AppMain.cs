@@ -48,7 +48,14 @@ public class AppMain
     private void BindToViewModels()
     {
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => await _knownFoldersViewModel.UpdateState.ExecuteAsync(null));
-        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { if (loggedOn) New<InactivitySignOut>().RestartInactivityTimer(); });
+        _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) =>
+        {
+            if (loggedOn)
+            {
+                New<InactivitySignOut>().RestartInactivityTimer();
+                ShowRenewSubscriptionDialog();
+            }
+        });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await New<IUIThread>().SendToAsync(async () => await new Display().LocalSignInWarningPopUpAsync(loggedOn)); });
         _mainViewModel.BindPropertyChanged(nameof(MainViewModel.VaultChangeDetected), async (bool changed) =>
         {
@@ -61,6 +68,15 @@ public class AppMain
         SharedFactory.LoadUpdateCheck(_mainViewModel, _logOnViewModel);
     }
 
+    private void ShowRenewSubscriptionDialog()
+    {
+        if (!_mainViewModel.LoggedOn)
+        {
+            return;
+        }
+
+        AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowTryUpgradeDialog();
+    }
     private void BindToFileOperationViewModel()
     {
         _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));

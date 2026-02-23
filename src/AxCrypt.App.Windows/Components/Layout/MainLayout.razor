@@ -78,6 +78,11 @@
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.VerifyAccountDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.VerifyPasswordDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.UserPromptDialog />
+
+                    @if (LogOnViewModel.IsLoggedOn && LogOnViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
+                    {
+                        <AxCrypt.App.Shared.Desktop.Components.Shared.PaidPlanRequiredPopup />
+                    }
                 }
                 else
                 {

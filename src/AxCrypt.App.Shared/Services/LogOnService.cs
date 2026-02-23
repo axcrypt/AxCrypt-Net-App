@@ -54,8 +54,6 @@ namespace AxCrypt.App.Shared.Services
             {
                 //await SetLanguageAsync(Resolve.UserSettings.CultureName);
             }
-
-            //ShowRenewSubscriptionDialog();
         }
 
         public async Task HandleLogOn(LogOnEventArgs e)
