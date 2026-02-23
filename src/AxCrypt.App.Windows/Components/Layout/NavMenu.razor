@@ -38,7 +38,7 @@
             <div id="help-secured-folders" class="nav-item px-3">
                 <NavLink class="nav-link two" href="securedfolders">
                     <span class="oi scrdfldr" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.EncryptedFoldersToolStripMenuItemText</span>
-                    <img class="nav-subs-upg" src="" alt="paid_required_img" title="@Texts.PremiumFeatureToolTipText" style="position:relative;" />
+                    <img class="nav-subs-upg" src="" alt="paid_required_img"  style="position:relative;" />
                 </NavLink>
             </div>
             @if (LogOnViewModel.UserHas(Core.Runtime.LicenseCapability.PasswordManagement))
@@ -54,14 +54,14 @@
                 <div id="help-pswd-mngr" class="nav-item px-3">
                     <NavLink class="@($"nav-link three {GetClassByActiveTab("passwordManager")}")" href="passwordManager">
                         <span class="oi scrts" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.PasswordManagerLinkLabel</span>
-                        <img class="nav-subs-upg" src="" alt="paid_required_img" title="@Texts.PremiumFeatureToolTipText" style="position:relative;" />
+                        <img class="nav-subs-upg" src="" alt="paid_required_img"  style="position:relative;" />
                     </NavLink>
                 </div>
             }
             <div id="help-scrd-mssngr" class="nav-item px-3">
                 <NavLink class="nav-link three" href="securedmessenger">
                     <span class="oi scrdmssngr" aria-hidden="true"></span> <span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SecuredMessengerLinkLabel</span>
-                    <img class="nav-subs-upg" src="" alt="paid_required_img" title="@Texts.PremiumFeatureToolTipText" style="position:relative;" />
+                    <img class="nav-subs-upg" src="" alt="paid_required_img" style="position:relative;" />
                 </NavLink>
             </div>
             @if (LogOnViewModel.UserHas(Core.Runtime.LicenseCapability.TextEncryptionPremium))
@@ -78,7 +78,7 @@
                 <div id="help-txt-encyptn" class="nav-item px-3">
                     <NavLink class="@($"nav-link four {GetClassByActiveTab("textencryption")}")" href="javascript:void(0)" @onclick="UpgradeDialog">
                         <span class="oi txtencrpt" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.TextEncryptionLinkLabel</span>
-                        <img class="nav-subs-upg" src="" alt="paid_required_img" title="@Texts.PremiumFeatureToolTipText" style="position:relative;" />
+                        <img class="nav-subs-upg" src="" alt="paid_required_img" style="position:relative;" />
                     </NavLink>
                 </div>
             }
