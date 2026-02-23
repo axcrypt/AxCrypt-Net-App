@@ -47,6 +47,11 @@ namespace AxCrypt.App.Shared.ViewModels
 
         public void ShowTryUpgradeDialog()
         {
+            if (_logonViewModel.SubscriptionLevel > Api.Model.SubscriptionLevel.Free)
+            {
+                return;
+            }
+
             if (_logonViewModel.EligibleForFreeTrial)
             {
                 TryNowSubscriptionDialog.Show();
