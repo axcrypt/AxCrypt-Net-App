@@ -135,12 +135,6 @@
                     </label>
                 </div>
             </NavLink>
-            @if (isHovered && hoveredElement == "autoupgrade")
-            {
-                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
-                </div>
-            }
         </div>
     }
 
@@ -198,13 +192,6 @@
                     </label>
                 </div>
             </NavLink>
-
-            @if (isHovered && hoveredElement == "include")
-            {
-                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
-                </div>
-            }
         </div>
     }
 
@@ -228,12 +215,6 @@
                     <img class="next-arrow" />
                 </div>
             </NavLink>
-            @if (isHovered && hoveredElement == "inactivity")
-            {
-                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
-                </div>
-            }
         </div>
     }
 
@@ -255,12 +236,6 @@
                     <span class="subs-required">@Texts.RestoreAnonymousNamesMenuText</span>
                 </div>
             </NavLink>
-            @if (isHovered && hoveredElement == "rename")
-            {
-                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium"> @Texts.PremiumFeatureToolTipText</span>
-                </div>
-            }
         </div>
     }
 
@@ -316,12 +291,6 @@
                 <span class="subs-required">@Texts.FilePropertiesToolStripMenuItemText</span>
                 <img class="next-arrow" />
             </NavLink>
-            @if (isHovered && hoveredElement == "encryptfileproperties")
-            {
-                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
-                </div>
-            }
         </div>
     }
 
@@ -341,12 +310,6 @@
                 <span class="subs-required">@Texts.InviteUserToolStripMenuItemText</span>
                 <img class="next-arrow" />
             </NavLink>
-            @if (isHovered && hoveredElement == "invitefriend")
-            {
-                <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                    <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
-                </div>
-            }
         </div>
     }
 
@@ -609,13 +572,6 @@
                         <img class="" src="/images/vltsett.svg" alt="vault_settings_icon" />
                         <span class="font-medium grey-clr subs-required">@Texts.VaultSettingsTitle</span>
                     </div>
-
-                    @if (isHovered && hoveredElement == "Vault")
-                    {
-                        <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                            <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
-                        </div>
-                    }
                 </dd>
             </dl>
         }
@@ -696,13 +652,6 @@
                             </span>
                         </label>
                     </div>
-
-                    @if (isHovered && hoveredElement == "findfiles")
-                    {
-                        <div class="settings-menu-hover text-center popup" style="background-color:#fff;">
-                            <span class="txt-clr font-medium">@Texts.PremiumFeatureToolTipText</span>
-                        </div>
-                    }
                 </dd>
             </dl>
         }

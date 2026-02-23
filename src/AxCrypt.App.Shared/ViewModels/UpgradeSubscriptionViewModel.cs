@@ -41,6 +41,18 @@ namespace AxCrypt.App.Shared.ViewModels
             UpgradeSubscriptionDialog.Show();
         }
 
+
+        public void ShowTryUpgradeDialog()
+        {
+            if (_logonViewModel.EligibleForFreeTrial)
+            {
+                TryNowSubscriptionDialog.Show();
+                return;
+            }
+
+            UpgradeSubscriptionDialog.Show();
+        }
+
         public void OpenBusinessPage()
         {
             Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/Login?eff=1&reqFrom=Business");

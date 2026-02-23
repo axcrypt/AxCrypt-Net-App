@@ -41,7 +41,7 @@
         }
         try
         {
-            if (RecentFilesViewModel.LogOnViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free && RecentFilesViewModel.LogOnViewModel.EligibleForFreeTrial)
+            if (RecentFilesViewModel.LogOnViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
             {
                 ShowTryTrialSubscriptionDialog();
             }
@@ -58,7 +58,7 @@
 
     private void ShowTryTrialSubscriptionDialog()
     {
-        upgradeModel.TryNowSubscriptionDialog.Show();
+        upgradeModel.ShowTryUpgradeDialog();
     }
 
     private void UpdatePageState()

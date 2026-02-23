@@ -10,7 +10,7 @@
 @inject ActionsViewModel? homeActionModel
 @inject IJSRuntime jsRunTime
 
-<div class="home-body" style="margin-top: 15px;">
+<div class="home-body">
     <div style="display:block; margin-bottom: 28px; width:63%">
         <h3 class="fle-nme fnt-sze">@Texts.ActionsText</h3>
         <div id="help-wrapper" class="" style="display:flex;">
@@ -235,13 +235,18 @@
             <img class="img-upgrdpl" src="" alt="" />
             <div>
                 @{
-                    string UpgradeSubsText = "To unlock <span>stronger & unlimited encryption</span> features!";
+                    string UpgradeSubsText = "Unlock <span>stronger & unlimited encryption</span> features!";
+                    bool EligibleForTrial = AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.EligibleForFreeTrial;
                     @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.License.Has(Core.Runtime.LicenseCapability.Viewer))
                     {
-                        UpgradeSubsText = "To unlock <span>Encryption & more features!</span>";
+                        UpgradeSubsText = "Upgrade to unlock <span>Encryption & more features!</span>";
+                        if (EligibleForTrial)
+                        {
+                            UpgradeSubsText = "With a Free Trial, Upgrade to unlock <span>Encryption & more features!</span>";
+                        }
                     }
 
-                    string ButtonText = AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel.EligibleForFreeTrial ? Texts.TryNowLabel : Texts.UpgradeNowText;
+                    string ButtonText = EligibleForTrial ? Texts.TryNowLabel : Texts.UpgradeNowText;
                 }
                 <label class="unlck-txt" style="color:#CE3733">
                     @((MarkupString)UpgradeSubsText)

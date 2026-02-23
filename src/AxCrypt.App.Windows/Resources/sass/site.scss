@@ -3,22 +3,22 @@
     text-align: center;
 }
 
-.loading-content img {
-    width: 100px;
-    max-width: 100px;
-    height: 100px;
-    content: url(/images/default/Loading_560x560.gif);
-    user-select: none;
-    outline: none;
-    pointer-events: none;
-}
+    .loading-content img {
+        width: 100px;
+        max-width: 100px;
+        height: 100px;
+        content: url(/images/default/Loading_560x560.gif);
+        user-select: none;
+        outline: none;
+        pointer-events: none;
+    }
 
-.loading-content span {
-    display: block;
-    margin-top: 10px;
-    font-size: 18px;
-    color: #333;
-}
+    .loading-content span {
+        display: block;
+        margin-top: 10px;
+        font-size: 18px;
+        color: #333;
+    }
 
 /* Full-page overlay */
 .secrets-loading-overlay {
@@ -34,11 +34,11 @@
     left: 0;
 }
 
-.secrets-loading-overlay .loading-content span {
-    margin-top: 20px;
-    font-size: 20px;
-    color: white;
-}
+    .secrets-loading-overlay .loading-content span {
+        margin-top: 20px;
+        font-size: 20px;
+        color: white;
+    }
 
 /* no overlay*/
 .secrets-loading-content {
@@ -127,18 +127,18 @@
     z-index: 99999;
 }
 
-.modalDialog > div {
-    width: 35%;
-    min-width: 450px !important;
-    height: fit-content;
-    position: relative;
-    margin: 13% auto;
-    padding: 30px;
-    border-radius: 10px;
-    background: #fff;
-    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
+    .modalDialog > div {
+        width: 35%;
+        min-width: 450px !important;
+        height: fit-content;
+        position: relative;
+        margin: 13% auto;
+        padding: 30px;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
 
 .home-hover {
     height: fit-content;
@@ -160,11 +160,11 @@
     height: 40px;
 }
 
-.toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
+    .toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 
 .slider {
     position: absolute;
@@ -177,16 +177,16 @@
     transition: .4s;
 }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 32px;
-    width: 32px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-}
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 32px;
+        width: 32px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+    }
 
 input:checked + .slider:before {
     transform: translateX(48px);
@@ -196,9 +196,9 @@ input:checked + .slider:before {
     border-radius: 40px;
 }
 
-.slider.round:before {
-    border-radius: 50%;
-}
+    .slider.round:before {
+        border-radius: 50%;
+    }
 
 .on-off-text {
     position: absolute;
@@ -421,10 +421,10 @@ input:checked + .slider:before {
     width: 395px;
 }
 
-.alert-box.alert {
-    background-color: #e95e47;
-    border: 1px solid #cf2a0e;
-}
+    .alert-box.alert {
+        background-color: #e95e47;
+        border: 1px solid #cf2a0e;
+    }
 
 /*for input validation*/
 .input-error {
@@ -441,17 +441,17 @@ input:checked + .slider:before {
     position: relative;
 }
 
-.validation-message::before {
-    content: '';
-    background-image: url(/images/default/Errorinfo.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
-    vertical-align: middle;
-}
+    .validation-message::before {
+        content: '';
+        background-image: url(/images/default/Errorinfo.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
 
 .empty-view-heading {
     color: #494949;
@@ -570,9 +570,17 @@ input:checked + .slider:before {
 }
 
 @media (min-width: 1450px) {
+    .top-page-title-container {
+        top: 43px;
+    }
+
     .page-title, h1 {
         font-size: 35px !important;
     }
+
+        .page-title::before {
+            top: 10px !important;
+        }
 }
 
 .body-content-section {
@@ -595,11 +603,11 @@ input:checked + .slider:before {
         padding-right: 0px;
     }
 
-    .page-title::before {
-        right: unset;
-        left: -18px;
-        transform: rotate(-25deg);
-    }
+        .page-title::before {
+            right: unset;
+            left: -18px;
+            transform: rotate(-25deg);
+        }
 
     .top-menu {
         float: left !important;

@@ -555,8 +555,14 @@ input:checked + .slider:before {
   }
 }
 @media (min-width: 1450px) {
+  .top-page-title-container {
+    top: 43px;
+  }
   .page-title, h1 {
     font-size: 35px !important;
+  }
+  .page-title::before {
+    top: 10px !important;
   }
 }
 .body-content-section .secrets-loading-overlay {
