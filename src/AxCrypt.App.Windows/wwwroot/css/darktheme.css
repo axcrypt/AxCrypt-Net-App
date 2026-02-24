@@ -301,7 +301,6 @@ input[readonly=readonly], textarea[readonly] {
 }
 
 .grey-clr {
-  color: #575757;
   font-weight: 700;
 }
 
@@ -373,7 +372,7 @@ input[readonly=readonly], textarea[readonly] {
 }
 
 .drp-dwn {
-  filter: grayscale(1);
+  filter: brightness(0) invert(1);
 }
 
 .language-dropdown {
@@ -391,4 +390,46 @@ input[readonly=readonly], textarea[readonly] {
 .language-item:hover {
   background-color: #575757;
   color: #CDFFB1 !important;
+}
+
+.password-create-dropdown-content dd a,
+.notification-popup a {
+  color: #A4A4A4 !important;
+}
+
+.grn-clr:hover,
+.grn-clr:focus {
+  color: #48772c;
+}
+
+.dropdown-content {
+  background-color: #282828;
+}
+.dropdown-content :hover {
+  background-color: #575757 !important;
+  color: #CDFFB1 !important;
+}
+
+.back-arrow {
+  filter: invert(50%) !important;
+}
+
+.tick-icon {
+  filter: brightness(0) saturate(100%) invert(89%) sepia(13%) saturate(394%) hue-rotate(49deg) brightness(103%) contrast(101%);
+}
+
+.dropdown-content dd:hover,
+.password-filter-dropdown-content dd:hover,
+.password-create-dropdown-content dd:hover {
+  background-color: #575757;
+  color: #CDFFB1;
+}
+
+.try-upgrade-plan-popup-container {
+  color: #A4A4A4 !important;
+}
+
+.vault-body label,
+.vault-body span {
+  color: #A4A4A4 !important;
 }

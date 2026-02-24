@@ -15,6 +15,7 @@ $colTxtBd: #FFFFFF;
 $colDrkMdBushd: #757575;
 $BtnBackClr: #48772C;
 $colDrkMdHglhtPrm: #CDFFB1;
+$fndfleTxtlble: #232323;
 
 .sidebar, .sid-mnu-colpsd.side-menu {
     background: $SdebrbgndClr !important;
@@ -190,7 +191,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 }
 
 .find-fle-nme {
-    color: #232323;
+    color: $fndfleTxtlble;
 }
 
 .notif-popup-bck {
@@ -301,12 +302,12 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 .notification-popup {
     border: 1px solid $SdebrbgndClr;
 
-    >.table {
+    > .table {
         border-collapse: collapse;
     }
 
     tr {
-        border: 1px solid #575757; /* Row border color */
+        border: 1px solid $colDrkMdL3; /* Row border color */
     }
 }
 
@@ -332,7 +333,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 }
 
 .grey-clr {
-    color: $colDrkMdL3;
+    //color: $colDrkMdL3;
     font-weight: 700;
 }
 
@@ -406,7 +407,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 }
 
 .drp-dwn {
-    filter: grayscale(1);   //language drop down image
+    filter: brightness(0) invert(1); //language drop down image
 }
 
 .language-dropdown {
@@ -426,3 +427,47 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     background-color: $TbleBg;
     color: $colDrkMdHglhtPrm !important;
 }
+
+.password-create-dropdown-content dd a,
+.notification-popup a {
+    color: $colTxtlble !important;
+}
+
+.grn-clr:hover,
+.grn-clr:focus {
+    color: #48772c;
+}
+
+.dropdown-content {
+    background-color: $colBordBgrnd;
+
+    :hover {
+        background-color: $TbleBg !important;
+        color: $colDrkMdHglhtPrm !important;
+    }
+}
+
+.back-arrow {
+    filter: invert(50%) !important;
+}
+
+.tick-icon {
+    filter: brightness(0) saturate(100%) invert(89%) sepia(13%) saturate(394%) hue-rotate(49deg) brightness(103%) contrast(101%);
+}
+
+.dropdown-content dd:hover,
+.password-filter-dropdown-content dd:hover,
+.password-create-dropdown-content dd:hover {
+    background-color: $colDrkMdL3;
+    color: $colDrkMdHglhtPrm;
+}
+
+.try-upgrade-plan-popup-container {
+    color: $colTxtlble !important;
+}
+
+.vault-body label,
+.vault-body span {
+    color: #A4A4A4 !important;
+}
+
