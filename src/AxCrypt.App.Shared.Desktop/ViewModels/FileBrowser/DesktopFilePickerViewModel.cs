@@ -96,4 +96,18 @@ public class DesktopFilePickerViewModel(
 
         _selectedFiles = eventArgs.SelectedFiles;
     }
+
+    public string GetFileTypeIcon(string fileName)
+    {
+        string fileExtension = UIHelperUtility.GetExtention(fileName);
+        fileExtension = fileExtension?.ToLowerInvariant() ?? "";
+
+        string axcryptFileType = ".axx";
+        if (fileExtension == axcryptFileType)
+        {
+            return "axcrypt-icon";
+        }
+
+        return fileName.GetIcon();
+    }
 }

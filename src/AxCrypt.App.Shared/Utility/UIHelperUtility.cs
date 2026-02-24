@@ -5,7 +5,8 @@ public static class UIHelperUtility
     public static string GetIcon(this string fileName)
     {
         string fileExtension = GetExtention(fileName);
-
+        fileExtension = fileExtension?.ToLowerInvariant() ?? "";
+        
         if (DocFileTypes.Contains(fileExtension))
         {
             return "doc-type-ico";
@@ -25,7 +26,7 @@ public static class UIHelperUtility
         {
             return "aud-type-ico";
         }
-        
+
         if (CompressedFileTypes!.Contains(fileExtension))
         {
             return "comprz-type-ico";
@@ -41,85 +42,46 @@ public static class UIHelperUtility
         return fileExtension;
     }
 
-    private static readonly string[] VideoFileTypes = {
+    private static readonly string[] VideoFileTypes =
+    {
         ".mp4",
-        ".MP4",
         ".avi",
-        ".AVI",
         ".mov",
-        ".MOV",
         ".mkv",
-        ".MKV",
         ".wmv",
-        ".WMV",
         ".flv",
-        ".FLV",
         ".3gp",
-        ".3GP"
     };
 
-    private static readonly string[] DocFileTypes = {
+    private static readonly string[] DocFileTypes =
+    {
         ".txt",
-        ".TXT",
         ".xml",
-        ".XML",
         ".doc",
-        ".DOC",
         ".docx",
-        ".DOCX",
         ".pdf",
-        ".PDF",
+        ".pptx",
+        ".ppt",
         ".xls",
-        ".XLS",
         ".xlsx",
-        ".XLSX",
         ".csv",
-        ".CSV",
         ".js",
-        ".JS",
         ".cshtml",
-        ".CSHTML",
         ".cshtm",
-        ".CSHTM",
         ".scss",
         ".htm",
-        ".HTM",
         ".razor",
-        ".RAZOR",
     };
-    private static readonly string[] ImgFileTypes = {
+    private static readonly string[] ImgFileTypes =
+    {
         ".png",
-        ".PNG",
         ".svg",
-        ".SVG",
         ".jpg",
-        ".JPG",
         ".jpeg",
-        ".JPEG",
         ".gif",
-        ".GIF",
         ".psd",
-        ".PSD"
     };
 
-    private static readonly string[] AudioFileTypes = {
-        ".mp3",
-        ".MP3",
-        ".wav",
-        ".WAV",
-        ".aac",
-        ".AAC",
-        ".alac",
-        ".ALAC",
-        ".flac",
-        ".FLAC"
-    };
-    private static readonly string[] CompressedFileTypes = {
-        ".zip",
-        ".ZIP",
-        ".7Z",
-        ".7z",
-        ".rar",
-        ".RAR",
-    };
+    private static readonly string[] AudioFileTypes = { ".mp3", ".wav", ".aac", ".alac", ".flac", };
+    private static readonly string[] CompressedFileTypes = { ".zip", ".7z", ".rar", };
 }

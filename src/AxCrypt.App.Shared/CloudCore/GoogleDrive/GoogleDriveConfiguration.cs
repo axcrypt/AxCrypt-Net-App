@@ -76,7 +76,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             {
                 _clientId = "131011153195-hqc84rbfq31ht7237pjia2ofm0q3d2mc.apps.googleusercontent.com";
             }
-            else if (_deviceType == DeviceCategory.Windows)
+            else if (_deviceType == DeviceCategory.Windows || _deviceType == DeviceCategory.Mac)
             {
                 _clientId = "131011153195-r9l8gv5cu2828di1o6d4a5gion4354ao.apps.googleusercontent.com";
                 _clientSecret = "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";

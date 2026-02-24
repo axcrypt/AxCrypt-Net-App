@@ -27,7 +27,17 @@ namespace AxCrypt.App.Shared.Desktop.CloudCore
         {
             get
             {
-                return "AxCrypt.App.Windows";
+                if (DeviceInfo.Platform == DevicePlatform.MacCatalyst || DeviceInfo.Platform == DevicePlatform.macOS)
+                {
+                    return "net.axcrypt.app.maui";
+                }
+
+                if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                {
+                    return "axcrypt.net.app.windows";
+                }
+
+                return "AxCrypt.App.Linux";
             }
         }
 
@@ -39,7 +49,7 @@ namespace AxCrypt.App.Shared.Desktop.CloudCore
                 {
                     return DeviceCategory.Windows;
                 }
-                else if (DeviceInfo.Platform == DevicePlatform.MacCatalyst)
+                else if (DeviceInfo.Platform == DevicePlatform.MacCatalyst || DeviceInfo.Platform == DevicePlatform.macOS)
                 {
                     return DeviceCategory.Mac;
                 }

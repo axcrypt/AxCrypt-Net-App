@@ -83,7 +83,7 @@
                                                             <input id="@file.FileID" type="checkbox" checked="@file.IsSelected" class="fileitem-chk-box" />
                                                         }
                                                     }
-                                                    <img alt="File Icon" class="list-file-icon  @(file.IsFolder == true ? "Icon-folder" : file.FileName.GetIcon())" />
+                                                    <img alt="File Icon" class="list-file-icon  @(file.IsFolder == true ? "Icon-folder" : ViewModel.GetFileTypeIcon(file.FileName))" />
                                                     <span class="file-name">
                                                         @((MarkupString)HighlightMatch(file.FileName))
                                                     </span>
