@@ -60,9 +60,10 @@
 
     private void UpdateUpgradeDialogState(bool canShowUpgradeDialog)
     {
+        IsVisible = canShowUpgradeDialog;
+
         InvokeAsync(() =>
         {
-            IsVisible = canShowUpgradeDialog;
             StateHasChanged(); // Refresh UI
         });
     }

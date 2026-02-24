@@ -147,7 +147,7 @@
     }
 
     .file-notfound {
-        margin-top :50px;
+        margin-top: 50px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -226,12 +226,12 @@
         content: $AxCryptIcon;
     }
 
-    .default-type-ico {
-        content: $AxCryptIcon !important;
-    }
-
     .Icon-folder {
         content: $IcoFldr;
+    }
+
+    .axcrypt-icon {
+        margin: 0px;
     }
 
     .list-file-icon {

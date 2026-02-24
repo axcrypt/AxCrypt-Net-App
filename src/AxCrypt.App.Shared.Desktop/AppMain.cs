@@ -53,7 +53,7 @@ public class AppMain
             if (loggedOn)
             {
                 New<InactivitySignOut>().RestartInactivityTimer();
-                ShowRenewSubscriptionDialog();
+                await ShowRenewSubscriptionDialog();
             }
         });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) => { await New<IUIThread>().SendToAsync(async () => await new Display().LocalSignInWarningPopUpAsync(loggedOn)); });
@@ -68,13 +68,14 @@ public class AppMain
         SharedFactory.LoadUpdateCheck(_mainViewModel, _logOnViewModel);
     }
 
-    private void ShowRenewSubscriptionDialog()
+    private async Task ShowRenewSubscriptionDialog()
     {
         if (!_mainViewModel.LoggedOn)
         {
             return;
         }
 
+        await Task.Delay(2000);
         AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowTryUpgradeDialog();
     }
     private void BindToFileOperationViewModel()
