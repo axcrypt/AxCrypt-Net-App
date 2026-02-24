@@ -115,6 +115,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     originalFile.FullName,
                     ErrorStatus.FileAlreadyEncrypted
                 );
+
                 New<IStatusChecker>()
                     .CheckStatusAndShowMessage(
                         fileOperationContext.ErrorStatus,
@@ -154,12 +155,14 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             operationsController.QueryEncryptionPassphrase += (
                 object sender,
                 FileOperationEventArgs e
-            ) => { };
+            ) =>
+            { };
 
             operationsController.QuerySharedPublicKeys += (
                 object sender,
                 FileOperationEventArgs e
-            ) => { };
+            ) =>
+            { };
 
             operationsController.Completed += (object sender, FileOperationEventArgs e) =>
             {
@@ -175,9 +178,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 }
 
                 IDataStore encryptedInfo = New<IDataStore>(e.SaveFileFullName);
-                IDataStore decryptedInfo = New<IDataStore>(
-                    FileOperation.GetTemporaryDestinationName(e.OpenFileFullName)
-                );
+                IDataStore decryptedInfo = New<IDataStore>(FileOperation.GetTemporaryDestinationName(e.OpenFileFullName));
+
                 ActiveFile activeFile = new ActiveFile(
                     encryptedInfo,
                     decryptedInfo,
@@ -185,6 +187,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     ActiveFileStatus.NotDecrypted,
                     e.CryptoId
                 );
+
                 _fileSystemState.Add(activeFile);
             };
 
@@ -201,10 +204,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             return Task.FromResult(CheckStatusAndShowMessage(foc, string.Empty));
         }
 
-        private static bool CheckStatusAndShowMessage(
-            FileOperationContext context,
-            string fallbackName
-        )
+        private static bool CheckStatusAndShowMessage(FileOperationContext context, string fallbackName)
         {
             return Resolve.StatusChecker.CheckStatusAndShowMessage(
                 context.ErrorStatus,
@@ -213,33 +213,27 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             );
         }
 
-        private async Task UpdateEncryptedFileStatusAsync(
-            IDataStore actualFile,
-            FilePickerItemViewModel fileItem,
-            AxCrypt.Core.IO.FileProvider fileSource
-        )
+        private async Task UpdateEncryptedFileStatusAsync(IDataStore actualFile, FilePickerItemViewModel fileItem, AxCrypt.Core.IO.FileProvider fileSource)
         {
             ActiveFile encryptedFile = _fileSystemState.FindActiveFileFromEncryptedPath(
                 MakeAxCryptFileName(actualFile.FullName)
             );
+
             if (encryptedFile == null)
             {
                 return;
             }
 
-            using (
-                await New<IProgressDialog>()
-                    .Show("Your file is being secured…", Texts.ProgressIndicatorWaitMessage)
-            )
+            using (await New<IProgressDialog>().Show("Your file is being secured…", Texts.ProgressIndicatorWaitMessage))
             {
-                if (
-                    fileSource != AxCrypt.Core.IO.FileProvider.Local
-                    && !await CheckEncryptedOriginalFileProcessed(
-                        actualFile,
-                        fileItem,
-                        encryptedFile
-                    )
-                )
+                if (fileSource != AxCrypt.Core.IO.FileProvider.Local &&
+                    !await CheckEncryptedOriginalFileProcessed(actualFile, fileItem, encryptedFile))
+                {
+                    return;
+                }
+
+                if (fileSource == AxCrypt.Core.IO.FileProvider.Local &&
+                     !await UploadEncryptedFileAsync(fileItem, encryptedFile))
                 {
                     return;
                 }
@@ -256,13 +250,9 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 return;
             }
 
-            // await New<IUIThread>()
-            //     .SendToAsync(async () =>
-            //     {
             FileDetails newFile = new FileDetails(encryptedFile);
             _securedFilesViewModel.Files.Add(newFile);
             await _securedFilesViewModel.UpdateRecentFilesListAsync();
-            // });
         }
 
         private async Task<bool> CheckEncryptedOriginalFileProcessed(
@@ -276,6 +266,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 encryptedFile.EncryptedFileInfo.Name,
                 encryptedFile.EncryptedFileInfo
             );
+
             if (string.IsNullOrEmpty(newFileId))
             {
                 await New<IPopup>()
@@ -310,6 +301,31 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             return true;
         }
 
+        private async Task<bool> UploadEncryptedFileAsync(FilePickerItemViewModel fileItem, ActiveFile encryptedFile)
+        {
+            fileItem.FileID = fileItem.DestinationPath + encryptedFile.EncryptedFileInfo.Name;
+            string newFileId = await _fileProviderService.MoveFile(
+                            fileItem,
+                            encryptedFile.EncryptedFileInfo.Name,
+                            encryptedFile.EncryptedFileInfo
+                        );
+
+            if (string.IsNullOrEmpty(newFileId))
+            {
+                await New<IPopup>()
+                    .ShowAsync(
+                        PopupButtons.Ok,
+                        Texts.WarningTitle,
+                        "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
+                        Common.DoNotShowAgainOptions.None
+                    );
+
+                return false;
+            }
+
+            return true;
+        }
+
         #endregion Encryption
 
         #region Decryption
@@ -321,10 +337,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 return;
             }
 
-            using (
-                await New<IProgressDialog>()
-                    .Show("Stop securing...", Texts.ProgressIndicatorWaitMessage)
-            )
+            using (await New<IProgressDialog>().Show("Stop securing...", Texts.ProgressIndicatorWaitMessage))
             {
                 await DecryptFiles(files);
             }
@@ -378,12 +391,14 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     file.FullName,
                     ErrorStatus.WrongFileExtensionError
                 );
+
                 New<IStatusChecker>()
                     .CheckStatusAndShowMessage(
                         fileOperationContext.ErrorStatus,
                         fileOperationContext.FullName,
                         fileOperationContext.InternalMessage
                     );
+
                 return;
             }
 
@@ -392,6 +407,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     async (fileStream) => await _fileProviderService.CopyFileToImportedFiles(fileItem, fileStream),
                     file
                 );
+
             await DecryptPreparedFile(preparingResult, fileItem, fileItem.Source);
         }
 
@@ -411,12 +427,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     );
                 return;
             }
-            await InternalDecryptFile(
-                New<IDataStore>(preparingResult.FullName),
-                fileItem,
-                null,
-                source
-            );
+
+            await InternalDecryptFile(New<IDataStore>(preparingResult.FullName), fileItem, null, source);
         }
 
         private async Task InternalDecryptFile(
@@ -446,6 +458,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                         operationContext.FullName,
                         operationContext.InternalMessage
                     );
+
                 return;
             }
 
@@ -460,11 +473,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 return;
             }
 
-            if (
-                !_securedFilesViewModel.CheckIfFileAlreadyInRecentFileList(
-                    operationContext.AddedFile
-                )
-            )
+            if (!_securedFilesViewModel.CheckIfFileAlreadyInRecentFileList(operationContext.AddedFile))
             {
                 return;
             }
@@ -502,7 +511,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     operationsController.QuerySaveFileAs += (
                         object sender,
                         FileOperationEventArgs e
-                    ) => { };
+                    ) =>
+                    { };
 
                     operationsController.QueryDecryptionPassphrase = async (arg) =>
                     {
@@ -587,10 +597,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
 
         private async Task DecryptWithFilePassword(Passphrase passphrase)
         {
-            using (
-                await New<IProgressDialog>()
-                    .Show(Texts.ProgressIndicatorWaitMessage, Texts.ProgressIndicatorWaitMessage)
-            )
+            using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorWaitMessage, Texts.ProgressIndicatorWaitMessage))
             {
                 await InternalDecryptFile(
                     _securedFilesViewModel.FilePasswordViewModel.EncryptedFile,
@@ -601,9 +608,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             }
         }
 
-        private async Task ProcessOriginalFileInCloudProviderForDecryption(
-            FilePickerItemViewModel fileItem
-        )
+        private async Task ProcessOriginalFileInCloudProviderForDecryption(FilePickerItemViewModel fileItem)
         {
             try
             {
@@ -712,21 +717,18 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     file.FullName,
                     ErrorStatus.WrongFileExtensionError
                 );
+
                 New<IStatusChecker>()
                     .CheckStatusAndShowMessage(
                         fileOperationContext.ErrorStatus,
                         fileOperationContext.FullName,
                         fileOperationContext.InternalMessage
                     );
+
                 return;
             }
 
-            await ProcessShareKey(
-                file,
-                localFileItem,
-                New<KnownIdentities>().DefaultEncryptionIdentity,
-                true
-            );
+            await ProcessShareKey(file, localFileItem, New<KnownIdentities>().DefaultEncryptionIdentity, true);
         }
 
         private async Task ShareKeyWithCloudFile(FilePickerItemViewModel fileItem)
@@ -742,12 +744,14 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     file.FullName,
                     ErrorStatus.WrongFileExtensionError
                 );
+
                 New<IStatusChecker>()
                     .CheckStatusAndShowMessage(
                         fileOperationContext.ErrorStatus,
                         fileOperationContext.FullName,
                         fileOperationContext.InternalMessage
                     );
+
                 return;
             }
 
@@ -756,14 +760,11 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     async (fileStream) => await _fileProviderService.CopyFileToImportedFiles(fileItem, fileStream),
                     file
                 );
+
             await ShareKeyPreparedFile(preparingResult, fileItem, false);
         }
 
-        public async Task ShareKeyPreparedFile(
-            FileOperationContext preparingResult,
-            FilePickerItemViewModel fileItem,
-            bool localFile
-        )
+        public async Task ShareKeyPreparedFile(FileOperationContext preparingResult, FilePickerItemViewModel fileItem, bool localFile)
         {
             if (preparingResult.ErrorStatus != ErrorStatus.Success)
             {
@@ -784,16 +785,10 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             );
         }
 
-        private async Task ProcessShareKey(
-            IDataStore actualFile,
-            FilePickerItemViewModel fileItem,
-            LogOnIdentity identity,
-            bool localFile
-        )
+        private async Task ProcessShareKey(IDataStore actualFile, FilePickerItemViewModel fileItem, LogOnIdentity identity, bool localFile)
         {
             if (!TryFindDecryptionKey(actualFile))
             {
-                //_securedFilesViewModel.AskFilePassword(actualFile, fileId, new Xamarin.Forms.Command(SubmitFilePasswordForShareKey));
                 return;
             }
 
@@ -814,6 +809,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 ActiveFileStatus.NotDecrypted,
                 Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId
             );
+
             _fileSystemState.Add(activeFile);
             await _fileSystemState.Save();
 
@@ -821,6 +817,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 actualFile.FullName,
                 ErrorStatus.Success
             );
+
             FileOpenedContext fileOpenedContext = new FileOpenedContext(
                 fileOperationContext,
                 activeFile
@@ -832,15 +829,12 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 return null;
             }
 
-            if (
-                _securedFilesViewModel.CheckIfFileAlreadyInRecentFileList(
-                    fileOpenedContext.AddedFile
-                )
-            )
+            if (_securedFilesViewModel.CheckIfFileAlreadyInRecentFileList(fileOpenedContext.AddedFile))
             {
                 FileDetails? existingFile = _securedFilesViewModel.Files.FirstOrDefault(f =>
                     f.FilePath == fileOpenedContext.AddedFile.EncryptedFileInfo.FullName
                 );
+
                 _securedFilesViewModel.Files.Remove(existingFile);
             }
 
@@ -858,6 +852,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     actualFile,
                     New<KnownIdentities>().DefaultEncryptionIdentity
                 );
+
             IDataStore decryptedInfo = New<IDataStore>(
                 FileOperation.GetTemporaryDestinationName(
                     Resolve
@@ -868,6 +863,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                         )
                 )
             );
+
             return decryptedInfo;
         }
 
@@ -952,6 +948,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 encryptedFile.EncryptedFileInfo.Name,
                 encryptedFile.EncryptedFileInfo
             );
+
             if (string.IsNullOrEmpty(newFileId))
             {
                 await New<IPopup>()
@@ -961,6 +958,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                         "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
                         Common.DoNotShowAgainOptions.None
                     );
+
                 return false;
             }
 

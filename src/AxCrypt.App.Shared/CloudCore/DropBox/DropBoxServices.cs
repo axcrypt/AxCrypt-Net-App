@@ -289,15 +289,8 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
 
             try
             {
-                string dropboxPath = actualfileItem.FileID;
-                string dir = dropboxPath[..dropboxPath.LastIndexOf('/')];
-
-                if (string.IsNullOrEmpty(dir))
-                    dir = "/";
-
-                string path = dir == "/" ? "/" + fileName : dir + "/" + fileName;
-
-                return await UploadFileAsync(fileInfo, path, WriteMode.Add.Instance, true);
+                string dropboxPath = NormalizeToCloudPath(actualfileItem.FileID);
+                return await UploadFileAsync(fileInfo, dropboxPath, WriteMode.Add.Instance, true);
             }
             catch (Exception)
             {

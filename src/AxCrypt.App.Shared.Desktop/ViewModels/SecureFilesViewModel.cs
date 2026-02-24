@@ -1,12 +1,14 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.CloudCore;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Desktop.UI.Services;
-using AxCrypt.App.Shared.UI.ViewModels;
 using AxCrypt.App.Shared.Desktop.ViewModels.RecentFiles;
+using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.UI.ViewModels;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
+using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
@@ -21,7 +23,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Shared.Services.Interface;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels
 {
@@ -37,28 +38,21 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             Files = new List<FileDetails>();
             SelectedFiles = new List<FileDetails>();
             StartUpdatingRecentFiles();
-            SelectFilesText = Texts.SelectAllFilesLabelText;
-            CanShowSelectedFileCountBubble = false;
-            OpenInAppReview();
         }
 
-        public SecureFilesViewModel(
-            bool hasEncryptionCapability,
-            IDictionary<string, object> selectedFileData,
-            ICustomNavigationService navigationManager
-        )
-            : this()
+        public SecureFilesViewModel(bool hasEncryptionCapability, IDictionary<string, object> selectedFileData,
+            ICustomNavigationService navigationManager)
+        : this()
         {
             _navigationManager = navigationManager;
-            HasEncryptionCapability = hasEncryptionCapability;
-            if (
-                selectedFileData.Count > 0
-                && selectedFileData.ContainsKey(nameof(FilePickerItemViewModel))
-            )
+
+            if (selectedFileData.Count > 0
+                && selectedFileData.ContainsKey(nameof(FilePickerItemViewModel)))
             {
                 FileItems =
                     (IEnumerable<FilePickerItemViewModel>)
                         selectedFileData[nameof(FilePickerItemViewModel)];
+
                 SelectedFileStorageProvider = (FileStorageProvider)
                     selectedFileData[nameof(FileStorageProvider)];
             }
@@ -66,7 +60,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
 
         public async Task TriggerFileOperationProcess()
         {
-            await ProcessFileOperation();
+            await ProcessFileOperationAsync();
         }
 
         public IList<FileDetails> Files
@@ -100,41 +94,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             }
         }
 
-        public bool IsAnyActiveFile
-        {
-            get { return GetProperty<bool>(nameof(IsAnyActiveFile)); }
-            private set { SetProperty<bool>(nameof(IsAnyActiveFile), value); }
-        }
-
-        public bool IsAnySelectedFile
-        {
-            get { return GetProperty<bool>(nameof(IsAnySelectedFile)); }
-            private set { SetProperty<bool>(nameof(IsAnySelectedFile), value); }
-        }
-
-        public string SelectFilesText
-        {
-            get { return base.GetProperty<string>(nameof(SelectFilesText)); }
-            private set { base.SetProperty<string>(nameof(SelectFilesText), value); }
-        }
-
-        public bool HasEncryptionCapability
-        {
-            get { return base.GetProperty<bool>(nameof(HasEncryptionCapability)); }
-            private set { base.SetProperty<bool>(nameof(HasEncryptionCapability), value); }
-        }
-
-        public bool HasNoEncryptionCapability
-        {
-            get { return !base.GetProperty<bool>(nameof(HasEncryptionCapability)); }
-        }
-
-        public FilePickerItemViewModel SelectedFile
-        {
-            get { return base.GetProperty<FilePickerItemViewModel>(nameof(SelectedFile)); }
-            set { base.SetProperty<FilePickerItemViewModel>(nameof(SelectedFile), value); }
-        }
-
         public IEnumerable<FilePickerItemViewModel> FileItems
         {
             get { return GetProperty<IEnumerable<FilePickerItemViewModel>>(nameof(FileItems)); }
@@ -156,24 +115,11 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             }
         }
 
-        public int SelectedFilesCount
-        {
-            get { return base.GetProperty<int>(nameof(SelectedFilesCount)); }
-            private set { base.SetProperty<int>(nameof(SelectedFilesCount), value); }
-        }
-
-        public bool CanShowSelectedFileCountBubble
-        {
-            get { return base.GetProperty<bool>(nameof(CanShowSelectedFileCountBubble)); }
-            private set { base.SetProperty<bool>(nameof(CanShowSelectedFileCountBubble), value); }
-        }
-
         private async void OpenFile(FileDetails file)
         {
             if (SelectedFiles.Count > 0)
             {
-                UpdateFileBackGround(file);
-                UpdateRecentFilesListInfo();
+                AddSelectedFileToList(file);
                 return;
             }
 
@@ -262,7 +208,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
 
                 FileDetails newFile = new FileDetails(operationContext.AddedFile);
                 Files.Add(newFile);
-                UpdateRecentFilesListInfo();
                 return;
             }
 
@@ -337,42 +282,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
         {
             IEnumerable<ActiveFile> activeFiles = await _recentFilesProvider.LoadRecentFiles();
             Files = new List<FileDetails>(activeFiles.Select(a => new FileDetails(a)));
-            UpdateRecentFilesListInfo();
-        }
-
-        public async Task CleanupActiveFiles()
-        {
-            using (
-                await New<IProgressDialog>()
-                    .Show(Texts.ProgressIndicatorCleanupMessage, Texts.ProgressIndicatorWaitMessage)
-            )
-            {
-                await Task.Delay(300);
-                await _recentFilesProvider.PurgeActiveFilesAsync();
-            }
-        }
-
-        private void UpdateFileBackGround(FileDetails file)
-        {
-            //if (file.BackgroundColor == Colors.Green)
-            //{
-            //    file.FileItemImageIcon = "RecentFilesFileGray.png";
-            //    file.BackgroundColor = Colors.White;
-            //    SelectedFiles.Remove(file);
-            //    return;
-            //}
-
-            //file.BackgroundColor = Colors.GreenColor;
-            //file.FileItemImageIcon = "SelectedFileIcon.png";
-            AddSelectedFileToList(file);
-        }
-
-        private void UpdatedSelectedFile(FileDetails file)
-        {
-            //file.FileItemImageIcon = "SelectedFileIcon.png";
-            //file.BackgroundColor = Colors.GreenColor;
-            AddSelectedFileToList(file);
-            UpdateRecentFilesListInfo();
         }
 
         private void AddSelectedFileToList(FileDetails file)
@@ -385,63 +294,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             SelectedFiles.Add(file);
         }
 
-        public void UpdatedSelectedAllFiles()
-        {
-            string selctedAction = SelectFilesText;
-            //foreach (FileDetails file in Files)
-            //{
-            //    if (selctedAction == Texts.SelectAllFilesLabelText)
-            //    {
-            //        file.BackgroundColor = Colors.GreenColor;
-            //        file.FileItemImageIcon = "SelectedFileIcon.png";
-            //        continue;
-            //    }
-
-            //    file.FileItemImageIcon = "RecentFilesFileGray.png";
-            //    file.BackgroundColor = Colors.White;
-            //}
-
-            if (Files.Count() > 0)
-            {
-                SelectedFiles =
-                    selctedAction == Texts.SelectAllFilesLabelText
-                        ? Files.ToList()
-                        : new List<FileDetails>();
-                SelectFilesText =
-                    selctedAction == Texts.SelectAllFilesLabelText
-                        ? Texts.DeselectAllFilesLabelText
-                        : Texts.SelectAllFilesLabelText;
-                UpdateSelectedFileCountBubble();
-            }
-        }
-
-        private void UpdateSelectedFileCountBubble()
-        {
-            SelectedFilesCount = SelectedFiles.Count;
-            //CanShowSelectedFileCountBubble = SelectedFilesCount > 0;
-        }
-
-        private async Task RemoveAllFile()
-        {
-            if (SelectedFiles.Count() < 1)
-            {
-                return;
-            }
-
-            IEnumerable<IDataStore> selectedFiles = SelectedFiles
-                .Select(f => New<IDataStore>(f.FilePath))
-                .ToList();
-            bool isRemovedSuccessfully = await _recentFilesProvider.RemoveFilesFromRecent(
-                selectedFiles
-            );
-            if (isRemovedSuccessfully)
-            {
-                Files = new List<FileDetails>(Files.Except(SelectedFiles));
-                SelectedFiles = new List<FileDetails>();
-                UpdateRecentFilesListInfo();
-            }
-        }
-
         public async Task RemoveFile(FileDetails file)
         {
             try
@@ -449,12 +301,10 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 bool isRemovedSuccessfully = await _recentFilesProvider.RemoveFilesFromRecent(
                     new List<IDataStore>() { New<IDataStore>(file.FilePath) }
                 );
-                //file.IsDetailedInfoOpened = false;
+
                 if (isRemovedSuccessfully)
                 {
                     Files.Remove(file);
-                    //SelectedFiles.Remove(file);
-                    UpdateRecentFilesListInfo();
                 }
             }
             catch (System.Exception ex)
@@ -462,33 +312,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 Console.WriteLine(ex.ToString());
                 return;
             }
-        }
-
-        public void UpdateRecentFilesListInfo()
-        {
-            IsAnyActiveFile = Files.Count() < 1;
-            IsAnySelectedFile = Files.Count() > 0 && SelectedFiles.Count == 0;
-            SelectFilesText =
-                Files.Count() > 0 && Files.Count() == SelectedFiles.Count
-                    ? Texts.DeselectAllFilesLabelText
-                    : Texts.SelectAllFilesLabelText;
-            UpdateSelectedFileCountBubble();
-        }
-
-        private void ShowFileInfo()
-        {
-            if (!SelectedFiles.Any())
-            {
-                New<IPopup>()
-                    .ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.ExactlySelectOneFileText);
-                return;
-            }
-
-            FileDetails? file = Files.FirstOrDefault(f =>
-                f.FileName == SelectedFiles.First().FileName
-            );
-            //file.IsDetailedInfoOpened = true;
-            SelectedFileItemInfo = file;
         }
 
         public FilePickerItemViewModel FileItemForFilePassword
@@ -520,28 +343,13 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             }
         }
 
-        private void PaidSubscriptionRequiredAction()
-        {
-            if (HasEncryptionCapability)
-            {
-                return;
-            }
-
-            //New<NavigationPaneViewModel>().OpenUnlockFeaturesPopup();
-        }
-
-        private async Task ProcessFileOperation()
+        private async Task ProcessFileOperationAsync()
         {
             if (SelectedFileStorageProvider == null)
             {
                 return;
             }
 
-            await ProcessFileOperationAsync();
-        }
-
-        private async Task ProcessFileOperationAsync()
-        {
             switch (SelectedFileStorageProvider.SelectedFileOperation)
             {
                 case FileOperationOption.OpenSecured:
@@ -620,7 +428,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             await new CloudFileOperationViewModel(SelectedFileStorageProvider, this).Decrypt(FileItems);
         }
 
-        private ShareKeysViewModel? _shareKeyViewModel;
+        private ShareKeyViewModel? _shareKeyViewModel;
 
         public async Task ShareKeysOnSelectedFiles()
         {
@@ -670,27 +478,22 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             AxCrypt.Core.UI.ViewModel.SharingListViewModel sharingListViewModel =
                 await AxCrypt.Core.UI.ViewModel.SharingListViewModel.CreateForFilesAsync(
                     keySharingFilePathList,
-                    New<KnownIdentities>().DefaultEncryptionIdentity
+                    Resolve.KnownIdentities.DefaultEncryptionIdentity
                 );
 
-            IDictionary<string, object> dataDictionary = new Dictionary<string, object>
+            _shareKeyViewModel = AxCServiceProvider.GetService<ShareKeyViewModel>();
+
+            await _shareKeyViewModel!.SetSelectedFilesOrFolders(keySharingFileNames.Select(e => e), sharingListViewModel, true);
+
+            if (_shareKeyViewModel.PageResult == DialogResult.Cancel)
             {
-                { nameof(AxCrypt.Core.UI.ViewModel.SharingListViewModel), sharingListViewModel },
-                { "keySharingFilesList", keySharingFileNames },
-                { "keySharingFileItemList", FileItems },
-                { nameof(FileOperationViewModel), fileOperationViewModel }
-            };
+                return;
+            }
 
-            _shareKeyViewModel = AxCServiceProvider.GetService<ShareKeysViewModel>();
-            _shareKeyViewModel.InitializeValuesForShareKey(
-                keySharingFileNames,
-                sharingListViewModel,
-                FileItems,
-                fileOperationViewModel,
-                _navigationManager
-            );
-
-            _navigationManager.NavigateTo("/keyShare");
+            await fileOperationViewModel!.ShareKey(
+                   FileItems!,
+                   sharingListViewModel!.SharedWith
+               );
         }
 
         private string GetFullPathByFileSource(
@@ -709,22 +512,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             }
 
             return fileOperationViewModel.GetImportedFilePath(selectedFileItem.FileName!);
-        }
-
-        private void OpenInAppReview()
-        {
-            try
-            {
-                if (New<UserSettings>().LastInAppReviewInitiated <= New<INow>().Utc.AddDays(-20))
-                {
-                    New<UserSettings>().LastInAppReviewInitiated = New<INow>().Utc;
-                    //New<IInAppReview>().LaunchReview();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
         }
     }
 }

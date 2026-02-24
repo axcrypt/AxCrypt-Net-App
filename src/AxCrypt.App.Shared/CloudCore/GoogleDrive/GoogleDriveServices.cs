@@ -93,8 +93,9 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
         {
             string message =
                 $"AxCrypt needs your permission to access your {PageTitle} to open, encrypt, decrypt, and securely key share your files.\nYour privacy is our priority — we never store your files or share your data.\n\nWould you like to connect now?";
-            PopupButtons popupResult = await New<IPopup>()
-                .ShowAsync(PopupButtons.OkCancel, $"Connect to {PageTitle}", message);
+
+            PopupButtons popupResult = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, $"Connect to {PageTitle}", message);
+
             if (popupResult == PopupButtons.Cancel)
             {
                 return;
@@ -345,17 +346,20 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
 
             retryCount = 0;
 
-            GetRequest getRequest = _driveService!.Files.Get(actualFileItem.FileID);
-            getRequest.Fields = "parents";
-            getRequest.SupportsAllDrives = true;
-
-            Google.Apis.Drive.v3.Data.File existingFile = await getRequest.ExecuteAsync(ct);
-
             Google.Apis.Drive.v3.Data.File fileMetadata = new Google.Apis.Drive.v3.Data.File
             {
-                Name = fileInfo.Name,
-                Parents = existingFile.Parents
+                Name = fileInfo.Name
             };
+
+            if (_files.Any(f => f.FileID == actualFileItem.FileID))
+            {
+                GetRequest getRequest = _driveService!.Files.Get(actualFileItem.FileID);
+                getRequest.Fields = "parents";
+                getRequest.SupportsAllDrives = true;
+
+                Google.Apis.Drive.v3.Data.File existingFile = await getRequest.ExecuteAsync(ct);
+                fileMetadata.Parents = existingFile.Parents;
+            }
 
             const string contentType = "application/octet-stream";
 

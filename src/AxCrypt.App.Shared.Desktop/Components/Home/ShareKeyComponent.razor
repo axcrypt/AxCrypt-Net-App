@@ -245,6 +245,9 @@
     {
         string fileName = File.Exists(file) ? Path.GetFileName(file) : Directory.Exists(file) ? new DirectoryInfo(file).FullName : string.Empty;
 
+        if (ShareKeyViewModel.IsCloudFile)
+            fileName = file;
+
         if (string.IsNullOrEmpty(fileName))
         {
             Icon = string.Empty;

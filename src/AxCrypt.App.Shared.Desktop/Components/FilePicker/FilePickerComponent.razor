@@ -38,51 +38,52 @@
                 </div>
             </div>
             <div class="file-picker-modal-body">
-                @if (ViewModel.Files.Count > 0)
-                {
-                    <div class="content-area">
-                        <div class="file-picker-dir-content find-fle-nme" @oncontextmenu="(e) => ShowContextMenu(e)" id="user_files_section" @onclick="async () => await HideContextMenu()">
-                            <div class="header-bar" @onclick:stopPropagation @oncontextmenu:preventDefault>
-                                <div class="div-file-header">
-                                    <span>
-                                        <input type="checkbox" checked="@selectAll" id="multiplefile" @onclick="() => SelectAllFile()" />
-                                        @Texts.NameLabel
-                                     </span>
-                                    @if (isListView)
-                                    {
-                                        <span>@Texts.FindPathTitle</span>
-                                    }
-                                </div>
 
-                                <div class="display-type">
-                                    <img src="/images/default/IcoList.svg"
-                                         class="@((isListView ? "selected" : ""))"
-                                         @onclick="() => SetView(true)"
-                                         alt="List View" />
-
-                                    <img src="/images/default/IcoGrid.svg"
-                                         class="@((!isListView ? "selected" : ""))"
-                                         @onclick="() => SetView(false)"
-                                         alt="Grid View" />
-                                </div>
+                <div class="content-area">
+                    <div class="file-picker-dir-content find-fle-nme" @oncontextmenu="(e) => ShowContextMenu(e)" id="user_files_section" @onclick="async () => await HideContextMenu()">
+                        <div class="header-bar" @onclick:stopPropagation @oncontextmenu:preventDefault>
+                            <div class="div-file-header">
+                                <span>
+                                    <input type="checkbox" checked="@selectAll" id="multiplefile" @onclick="() => SelectAllFile()" />
+                                    @Texts.NameLabel
+                                </span>
+                                @if (isListView)
+                                {
+                                    <span>@Texts.FindPathTitle</span>
+                                }
                             </div>
 
-                            <div class="files-section @(isListView ? "list-view" : "grid-view")">
-                                @if (isListView)
+                            <div class="display-type">
+                                <img src="/images/default/IcoList.svg"
+                                     class="@((isListView ? "selected" : ""))"
+                                     @onclick="() => SetView(true)"
+                                     alt="List View" />
+
+                                <img src="/images/default/IcoGrid.svg"
+                                     class="@((!isListView ? "selected" : ""))"
+                                     @onclick="() => SetView(false)"
+                                     alt="Grid View" />
+                            </div>
+                        </div>
+
+                        <div class="files-section @(isListView ? "list-view" : "grid-view")">
+                            @if (isListView)
+                            {
+                                if (ViewModel.Files.Count > 0)
                                 {
                                     <ul class="file-list">
                                         @foreach (FilePickerItemViewModel file in ViewModel.Files)
                                         {
                                             string ParentPath = file.ParentPath + "/" + file.FileName;
                                             <li class="file-list-item @(file.IsSelected ? "select-item" : "")" @onclick="() => OnCheckboxChanged(file)" @ondblclick="() => OnFolderClicked(file)">
-                                                <div class="file-details">
+                                                <div class="file-details fle-exton-img">
                                                     @{
-                                                        if(!file.IsFolder)
+                                                        if (!file.IsFolder)
                                                         {
                                                             <input id="@file.FileID" type="checkbox" checked="@file.IsSelected" class="fileitem-chk-box" />
                                                         }
                                                     }
-                                                    <img alt="File Icon" class="list-file-icon  @(file.IsFolder == true ? "Icon-folder" : "Icon-file")"/>
+                                                    <img alt="File Icon" class="list-file-icon  @(file.IsFolder == true ? "Icon-folder" : file.FileName.GetIcon())" />
                                                     <span class="file-name">
                                                         @((MarkupString)HighlightMatch(file.FileName))
                                                     </span>
@@ -96,81 +97,99 @@
                                 }
                                 else
                                 {
-                                    <div class="file-grid">
-                                        @foreach (FilePickerItemViewModel file in ViewModel.Files)
-                                        {
-                                            string ParentPath = file.ParentPath + "/" + file.FileName;
-                                            <div class="file-grid-item @(file.IsSelected ? "select-item" : "")" @onclick="() => OnCheckboxChanged(file)">
-                                                <img alt="File Icon" class="grid-file-icon @(file.IsFolder == true ? "Icon-folder" : "Icon-file")"/>
-                                                <span class="file-name-grid">@((MarkupString)HighlightMatch(file.FileName))</span>
-                                            </div>
-                                        }
+                                    <div class="file-notfound">
+                                        <span>@Texts.NoFilesFoundText </span>
+                                        <img src="/images/default/filenotfound.svg" />
                                     </div>
                                 }
 
-                                @if (isContextMenuVisible)
+                            }
+                            else
+                            {
+                                <div class="file-grid">
+                                    @if (ViewModel.Files.Count > 0)
+                                    {
+                                        @foreach (FilePickerItemViewModel file in ViewModel.Files)
+                                        {
+                                            string ParentPath = file.ParentPath + "/" + file.FileName;
+                                            <div class="file-grid-item @(file.IsSelected ? "select-item" : "") fle-exton-img" @onclick="() => OnCheckboxChanged(file)">
+                                                <img alt="File Icon" class="grid-file-icon @(file.IsFolder == true ? "Icon-folder" : file.FileName.GetIcon())" />
+                                                <span class="file-name-grid">@((MarkupString)HighlightMatch(file.FileName))</span>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="file-notfound">
+                                            <span>@Texts.NoFilesFoundText </span>
+                                            <img src="/images/default/filenotfound.svg" />
+                                        </div>
+                                    }
+                                </div>
+                            }
+
+                            @if (isContextMenuVisible)
+                            {
+                                <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
+                                    <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Encrypt)">@Texts.EncryptToolStripMenuItemText</span>
+                                    <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Decrypt)">@Texts.DecryptToolStripMenuItemText</span>
+                                    <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</span>
+                                    <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.OpenSecured)">@Texts.OpenEncryptedToolStripMenuItemText</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="filepicker-action-container">
+                        <div class="filepicker-dropdown-action">
+                            @if (ViewModel.MultiSelectEnabled)
+                            {
+                                <div class="round-btn" @onclick="() => ShowActionContextMenu()" title="Edit option">
+                                    <img class="action-btn" alt="action button" />
+                                </div>
+
+                                @if (isActionContextMenuVisible)
                                 {
-                                    <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
+                                    <div class="filepicker-dropdown-menu-action context-menu-action">
                                         <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Encrypt)">@Texts.EncryptToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Decrypt)">@Texts.DecryptToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.OpenSecured)">@Texts.OpenEncryptedToolStripMenuItemText</span>
+                                        <span class="menu-item" @onclick="async () => await ClearSelection()">@Texts.ClearAllText</span>
                                     </div>
                                 }
-                            </div>
-                        </div>
-
-                        @if (ViewModel.MultiSelectEnabled)
-                        {
-                            <div class="filepicker-action-container">
-                                <div class="filepicker-dropdown-action">
-                                    <div class="round-btn" @onclick="() => ShowActionContextMenu()" title="Edit option">
-                                        <img class="action-btn" alt="action button" />
-                                    </div>
-
-                                    @if (isActionContextMenuVisible)
-                                    {
-                                        <div class="filepicker-dropdown-menu-action context-menu-action">
-                                            <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Encrypt)">@Texts.EncryptToolStripMenuItemText</span>
-                                            <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Decrypt)">@Texts.DecryptToolStripMenuItemText</span>
-                                            <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</span>
-                                            <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.OpenSecured)">@Texts.OpenEncryptedToolStripMenuItemText</span>
-                                            <span class="menu-item" @onclick="async () => await ClearSelection()">@Texts.ClearAllText</span>
-                                        </div>
-                                    }
-
+                            }
+                            else
+                            {
+                                <div class="round-btn" @onclick="async () => await ViewModel.AddFiles()" title="Add option">
+                                    <img class="add-btn" alt="add button" />
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                     </div>
-                }
-                else
-                {
-                    <div class="file-notfound">
-                        <span>@Texts.NoFilesFoundText </span>
-                        <img src="/images/default/filenotfound.svg" />
-                    </div>
-                }
+                </div>
+
+
                 <div class="file-picker-filepath">
                     <nav class="breadcrumb">
-                    <span class="breadcrumb-part" title="@ViewModel.PageTitle" @onclick="@(async () => await ViewModel.NavigateBackToPath("root"))">
-                        @ViewModel.PageTitle
-                    </span>
-
-                    @if (ViewModel.OpenedFoldersList.Count > 4)
-                    {
-                        <span class="breadcrumb-part">
-                            .../
+                        <span class="breadcrumb-part" title="@ViewModel.PageTitle" @onclick="@(async () => await ViewModel.NavigateBackToPath("root"))">
+                            @ViewModel.PageTitle
                         </span>
-                    }
 
-                    @foreach (FolderItem folder in ViewModel.OpenedFoldersList.TakeLast(4))
-                    {
-                        <span class="separator"><img class="icon-next-arrow" /><img class="icon-dltfold" /> </span>
-                        <span class="breadcrumb-part" title="@folder.DirectoryName" @onclick="async () => await ViewModel.NavigateBackToPath(folder.FileID)">
-                            @folder.DirectoryName
-                        </span>
-                    }
+                        @if (ViewModel.OpenedFoldersList.Count > 4)
+                        {
+                            <span class="breadcrumb-part">
+                                .../
+                            </span>
+                        }
+
+                        @foreach (FolderItem folder in ViewModel.OpenedFoldersList.TakeLast(4))
+                        {
+                            <span class="separator"><img class="icon-next-arrow" /><img class="icon-dltfold" /> </span>
+                            <span class="breadcrumb-part" title="@folder.DirectoryName" @onclick="async () => await ViewModel.NavigateBackToPath(folder.FileID)">
+                                @folder.DirectoryName
+                            </span>
+                        }
                     </nav>
                 </div>
 
@@ -180,7 +199,7 @@
                     </button>
                 </div>
             </div>
-       
+
         </div>
     </div>
 
@@ -244,6 +263,9 @@
 
     private void SetView(bool listView)
     {
+        if (ViewModel.Files.Count <= 0)
+            return;
+
         isListView = listView;
         isContextMenuVisible = false;
         isActionContextMenuVisible = false;
@@ -297,6 +319,7 @@
     private async Task SelectAllFile()
     {
         selectAll = !selectAll;
+        ViewModel.MultiSelectEnabled = true;
         ViewModel.SelectedFiles.Clear();
         foreach (FilePickerItemViewModel file in ViewModel.Files.Where(f => !f.IsFolder))
         {
@@ -350,6 +373,7 @@
         ViewModel.SelectedFileOperation = operation;
         isContextMenuVisible = false;
         isActionContextMenuVisible = false;
+        selectAll = false;
         await OnDoneClicked();
     }
 

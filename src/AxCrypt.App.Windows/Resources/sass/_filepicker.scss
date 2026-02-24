@@ -96,7 +96,7 @@
             font-weight: 400;
             color: $colDsbl;
             cursor: pointer;
-            margin-bottom : 0px;
+            margin-bottom: 0px;
         }
 
         .breadcrumb a {
@@ -147,6 +147,7 @@
     }
 
     .file-notfound {
+        margin-top :50px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -223,6 +224,10 @@
 
     .Icon-file {
         content: $AxCryptIcon;
+    }
+
+    .default-type-ico {
+        content: $AxCryptIcon !important;
     }
 
     .Icon-folder {
@@ -525,8 +530,15 @@
         cursor: pointer;
         float: right;
     }
+
     .action-btn {
         content: url(/images/IconAction.svg);
+        width: 30px;
+        height: 30px;
+    }
+
+    .add-btn {
+        content: url(/images/IconAdd.svg);
         width: 30px;
         height: 30px;
     }

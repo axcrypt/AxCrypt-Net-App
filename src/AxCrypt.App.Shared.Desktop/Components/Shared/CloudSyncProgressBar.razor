@@ -1,0 +1,129 @@
+﻿@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.Content
+@using AxCrypt.Core.UI
+
+@inject ProgressBarService ProgressBarService
+@inject IJSRuntime JSRuntime
+
+@if (IsVisible)
+{
+    @if (Utility.IsMainMenuHidden)
+    {
+        <div class="progress-circle-sec">
+                <div class="progress-wrapper">
+                <svg class="progress-circle" width="64" height="64" viewBox="0 0 64 64">
+                    <circle class="progress-background" cx="32" cy="32" r="28" />
+                    <circle class="progress-value" cx="32" cy="32" r="28"
+                            style="stroke-dasharray: 175.8; stroke-dashoffset:@(175.8 - (@ProgressBarService.Percentage * 1.758))" />
+                </svg>
+                <div class="progress-text">@ProgressBarService.Percentage%</div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="progres-sec" style="pointer-events:auto;" @oncontextmenu="async (e) => await ShowContextMenu(e)">
+            <div class="fist-rw" @onclick="() => IsContextMenuVisible = false">
+                <div class=""><label class="progres-fle-txt" title="@ProgressBarService.Filename">@ProgressBarService.Filename</label></div>
+                <div>
+                    <label style="margin-right: 0 !important;">@ProgressBarService.Percentage%</label>
+                </div>
+            </div>
+            <div class="progress-container" @onclick="() => IsContextMenuVisible = false">
+                <div class="progress-bubble-start" style="left:@ProgressBarService.Percentage%;"></div>
+                <div class="progress-bar" style="width:@ProgressBarService.Percentage%"></div>
+                <div class="progress-bubble-end"></div>
+            </div>
+        </div>
+        @if (IsContextMenuVisible)
+        {
+            <div class="context-menu-action" style="pointer-events:auto;position: fixed;z-index:9999; left: @(contextMenuX)px;transform-origin:@(flipContextMenu);">
+                <span class="menu-item" @onclick="CancelTask">@Texts.ButtonCancelText</span>
+            </div>
+        }
+    }
+}
+<script type="text/javascript">
+    window.getWindowHeight = () => window.innerHeight;
+</script>
+<style>
+    .context-menu-action {
+        background: white;
+        border: 1px solid $BorderClr;
+        border-radius: 10px;
+        box-shadow: 0 0 10px $ActnBgClr;
+        min-width: 150px;
+        overflow: hidden;
+    }
+
+        .context-menu-action .menu-item {
+            padding: 8px 12px;
+            display: block;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+            font-weight: 400;
+        }
+</style>
+@code {
+    public bool IsVisible { get; set; }
+
+    public bool IsContextMenuVisible { get; set; } = false;
+    private double contextMenuX { get; set; }
+    private double contextMenuY { get; set; }
+    private string flipContextMenu { get; set; } = "top left";
+    private double contextMenuHeight { get; set; } = 210;
+
+    protected override void OnInitialized()
+    {
+        ProgressBarService.OnProgressBarVisibilityChanged += async (isVisible) => await UpdateIndicatorVisibility(isVisible);
+    }
+
+    private async Task ShowContextMenu(MouseEventArgs e)
+    {
+        contextMenuX = e.PageX;
+        contextMenuY = e.PageY;
+        flipContextMenu = "top left";
+
+        double windowHeight = await JSRuntime.InvokeAsync<double>("getWindowHeight");
+        if (contextMenuY + contextMenuHeight > windowHeight)
+        {
+            flipContextMenu = "bottom left";
+        }
+
+        IsContextMenuVisible = true;
+        await UpdateUIState();
+    }
+
+    private void CancelTask()
+    {
+        IProgressContext? progressContext = AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.ProgressBarService?.ProgressContext ?? null;
+        if (progressContext != null)
+        {
+            progressContext.Cancel = true;
+            progressContext.RequestCancel();
+        }
+    }
+
+    private async Task UpdateIndicatorVisibility(bool isVisible)
+    {
+        IsContextMenuVisible = IsContextMenuVisible && isVisible;
+
+        IsVisible = isVisible;
+        await UpdateUIState();
+    }
+
+    private void ClosePopup()
+    {
+        ProgressBarService.Hide();
+    }
+
+    private async Task UpdateUIState()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+}

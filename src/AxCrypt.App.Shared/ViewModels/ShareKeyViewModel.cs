@@ -39,6 +39,8 @@ public class ShareKeyViewModel : ViewModelBase
     }
 
     public IEnumerable<string>? SelectedFilesOrFolders { get; set; }
+    
+    public bool IsCloudFile { get; set; }
 
     public DialogResult PageResult { get { return GetProperty<DialogResult>(nameof(PageResult)); } set { SetProperty(nameof(PageResult), value); } }
 
@@ -49,11 +51,12 @@ public class ShareKeyViewModel : ViewModelBase
         SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>();
     }
 
-    public async Task SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel)
+    public async Task SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel, bool isCloudFile = false)
     {
         EnableApplyButton = false;
         PageResult = DialogResult.None;
         SelectedFilesOrFolders = filesOrFoldersPath;
+        IsCloudFile = isCloudFile;
         _viewModel = sharingListViewModel;
         _viewModel.BindPropertyChanged<IEnumerable<UserPublicKey>>(nameof(SharingListViewModel.SharedWith), (aks) =>
         {

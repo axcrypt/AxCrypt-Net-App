@@ -22,8 +22,6 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
         private List<FilePickerItemViewModel> _files = new List<FilePickerItemViewModel>();
 
-        private readonly string OneDriveRootFolderPath = "/drive/root:";
-
         private readonly string RootFolderName = "root";
 
         private string? _userDriveId;
@@ -310,42 +308,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
         private async Task<string> UploadFileAsync(FilePickerItemViewModel actualFileItem, string fileName, IDataStore fileInfo, bool overwrite = false)
         {
-            CreateUploadSessionPostRequestBody uploadProps = new CreateUploadSessionPostRequestBody();
-
-            if (!overwrite)
-            {
-                uploadProps.AdditionalData = new Dictionary<string, object>
-                {
-                    { "@microsoft.graph.conflictBehavior", "rename" }
-                };
-            }
-            else
-            {
-                uploadProps.AdditionalData = new Dictionary<string, object>
-                {
-                    { "@microsoft.graph.conflictBehavior", "replace" }
-                };
-            }
-
-            UploadSession? uploadSession;
-            if (!overwrite)
-            {
-                string folderPath = actualFileItem.ParentPath.Replace(OneDriveRootFolderPath, "");
-                folderPath += folderPath.Length > 0 ? "/" : "";
-
-                uploadSession = await _graphClient
-                    .Drives[_userDriveId]
-                    .Items[RootFolderName]
-                    .ItemWithPath(folderPath + fileName)
-                    .CreateUploadSession.PostAsync(uploadProps);
-            }
-            else
-            {
-                uploadSession = await _graphClient
-                    .Drives[_userDriveId]
-                    .Items[actualFileItem.FileID]
-                    .CreateUploadSession.PostAsync(uploadProps);
-            }
+            UploadSession? uploadSession = await CreateUploadSession(actualFileItem, fileName, fileInfo, overwrite);
 
             int maxSliceSize = 10 * 1024 * 1024;
 
@@ -389,6 +352,59 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
             }
 
             return string.Empty;
+        }
+
+        private async Task<UploadSession> CreateUploadSession(FilePickerItemViewModel actualFileItem, string fileName, IDataStore fileInfo, bool overwrite = false)
+        {
+            CreateUploadSessionPostRequestBody uploadProps;
+            UploadSession? uploadSession;
+
+            if (!overwrite)
+            {
+                uploadProps = new CreateUploadSessionPostRequestBody
+                {
+                    Item = new DriveItemUploadableProperties
+                    {
+                        AdditionalData = new Dictionary<string, object>
+                        {
+                            { "@microsoft.graph.conflictBehavior", "rename" }
+                        }
+                    }
+                };
+
+                if (string.IsNullOrEmpty(actualFileItem.ParentPath))
+                {
+
+                    uploadSession = await _graphClient.Drives[_userDriveId].Root
+                        .ItemWithPath(fileName).CreateUploadSession.PostAsync(uploadProps);
+
+                    return uploadSession!;
+                }
+
+                string folderPath = actualFileItem.ParentPath;
+                folderPath += folderPath.Length > 0 ? "/" : "";
+
+                uploadSession = await _graphClient.Drives[_userDriveId].Items[RootFolderName]
+                    .ItemWithPath(folderPath + fileName).CreateUploadSession.PostAsync(uploadProps);
+
+                return uploadSession!;
+            }
+
+            uploadProps = new CreateUploadSessionPostRequestBody
+            {
+                Item = new DriveItemUploadableProperties
+                {
+                    AdditionalData = new Dictionary<string, object>
+                    {
+                        { "@microsoft.graph.conflictBehavior", "replace" }
+                    }
+                }
+            };
+
+            uploadSession = await _graphClient.Drives[_userDriveId].Items[actualFileItem.FileID]
+                .CreateUploadSession.PostAsync(uploadProps);
+
+            return uploadSession!;
         }
 
         public override async Task<bool> DeleteFileAsync(string originalFilePath, FilePickerItemViewModel fileItem, string encryptedFilePathForOverWrite,
@@ -530,16 +546,11 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
             try
             {
                 string filePath = fileName;
+
                 if (fileItem != null)
-                {
-                    filePath =
-                        fileItem.ParentPath.Replace(OneDriveRootFolderPath, "") + "/" + fileName;
-                }
-                driveFile = await graphClient
-                    .Drives[_userDriveId]
-                    .Root
-                    .ItemWithPath(fileName)
-                    .GetAsync();
+                    filePath = fileItem.ParentPath + "/" + fileName;
+
+                driveFile = await graphClient.Drives[_userDriveId].Root.ItemWithPath(fileName).GetAsync();
             }
             catch (Exception? exp)
             {

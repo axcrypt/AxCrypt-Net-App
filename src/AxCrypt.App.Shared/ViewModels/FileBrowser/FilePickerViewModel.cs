@@ -5,6 +5,7 @@ using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.UI.ViewModels;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Content;
+using AxCrypt.Core;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -133,7 +134,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
 
             MultiSelectEnabled = false;
             SelectedFiles = new List<FilePickerItemViewModel>();
-
+            OpenedFoldersList.Clear();
             IsVisible = true;
         }
 
@@ -282,20 +283,31 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
 
             if (SelectedFiles == null || !SelectedFiles.Any())
             {
-                await New<IPopup>()
-                    .ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "Please select files!");
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "Please select files!");
                 return;
             }
             try
             {
-                IEnumerable<FilePickerItemViewModel> selectedFileItems = SelectedFiles.Where(item =>
-                    !item.IsFolder
-                );
-                if (selectedFileItems.Any())
+                IEnumerable<FilePickerItemViewModel> selectedFileItems;
+
+                selectedFileItems = SelectedFiles.Where(item => !item.IsFolder && !item.FileName.Contains(OS.Current.AxCryptExtension));
+                string warningMessage = "Selected file cannot be EnCrypt,Key Share or Open";
+
+                if (SelectedFileOperation == FileOperationOption.Decrypt)
                 {
-                    await RedirectToMainScreen(selectedFileItems);
+                    selectedFileItems = SelectedFiles.Where(item => !item.IsFolder && item.FileName.Contains(OS.Current.AxCryptExtension));
+                    warningMessage = "Selected file cannot be Decrypt";
+                }
+
+                if (!selectedFileItems.Any())
+                {
+                    await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, warningMessage);
                     return;
                 }
+
+                await RedirectToMainScreen(selectedFileItems);
+                await NavigateBackToPath(CurrentFolderID ?? "root");
+                return;
             }
             catch (Exception ex)
             {
@@ -315,6 +327,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             FolderItem folder = OpenedFoldersList.FirstOrDefault(ofl =>
                 ofl.FileID == CurrentFolderID
             );
+
             if (folder == null)
             {
                 return;

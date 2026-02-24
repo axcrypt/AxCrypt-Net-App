@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
+using AxCrypt.Core.Session;
 
 namespace AxCrypt.App.Shared.CloudCore
 {
@@ -35,7 +36,7 @@ namespace AxCrypt.App.Shared.CloudCore
 
         public abstract Task CopyFileToImportedFiles(FilePickerItemViewModel file, Stream destinationFileStream);
 
-        public abstract Task<bool> UpdateFile(FilePickerItemViewModel fileItem, AxCrypt.Core.Session.ActiveFile encryptedFile);
+        public abstract Task<bool> UpdateFile(FilePickerItemViewModel fileItem, ActiveFile encryptedFile);
 
         public abstract Task<string> MoveFile(FilePickerItemViewModel fileItem, string fileName, IDataStore fileInfo);
 
@@ -147,6 +148,27 @@ namespace AxCrypt.App.Shared.CloudCore
                 || ex is IOException
                 || ex is TimeoutException
                 || ex is TaskCanceledException;
+        }
+
+        public string NormalizeToCloudPath(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+                return "/";
+
+
+            path = path.Replace("\\", "/");
+            if (path.Contains(":"))
+            {
+                int colonIndex = path.IndexOf(":");
+                path = path[(colonIndex + 1)..];
+            }
+
+            while (path.Contains("//"))
+                path = path.Replace("//", "/");
+
+            path = "/" + path.TrimStart('/');
+
+            return path;
         }
     }
 }
