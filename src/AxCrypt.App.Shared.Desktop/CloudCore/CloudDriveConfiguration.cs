@@ -12,7 +12,7 @@ namespace AxCrypt.App.Shared.Desktop.CloudCore
         {
             get
             {
-                if (DeviceInfo.Platform == DevicePlatform.WinUI || DeviceInfo.Platform == DevicePlatform.macOS)
+                if (DeviceInfo.Platform == DevicePlatform.WinUI || DeviceInfo.Platform == DevicePlatform.MacCatalyst || DeviceInfo.Platform == DevicePlatform.macOS)
                 {
                     return DesktopRedirectUrl;
                 }
