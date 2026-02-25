@@ -1,20 +1,4 @@
-﻿.vlt-header {
-    margin-bottom: 30px;
-
-    .vault-back-link {
-        font-weight: 600;
-        font-size: 12px;
-        color: $ActnBgClr;
-        margin-top: 10px;
-    }
-
-
-    .Ico-LeftArrow {
-        content: $ImgleftArrow;
-    }
-}
-
-.vlt-body {
+﻿.vlt-body {
     .vlt-title-action {
         display: flex;
         justify-content: space-between;
@@ -218,15 +202,15 @@
         align-content: start;
     }
 
-        .vlt-file-list.grid-view .file-list-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 0 5px;
-            height: 100px;
-            justify-content: center;
-        }
+    .vlt-file-list.grid-view .file-list-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 5px;
+        height: 100px;
+        justify-content: center;
+    }
 
     .file-list-item:hover {
         background-color: $colHovrbox;
@@ -301,20 +285,20 @@
         cursor: pointer;
     }
 
-        .breadcrumb a {
-            text-decoration: none;
-            color: $colDsbl;
-        }
+    .breadcrumb a {
+        text-decoration: none;
+        color: $colDsbl;
+    }
 
-        .breadcrumb .separator {
-            margin: 0 5px;
-            color: #999;
-        }
+    .breadcrumb .separator {
+        margin: 0 5px;
+        color: #999;
+    }
 
-        .breadcrumb .current {
-            font-weight: bold;
-            color: #333;
-        }
+    .breadcrumb .current {
+        font-weight: bold;
+        color: #333;
+    }
 
     .Icon-file {
         content: $AxCryptIcon;
@@ -357,14 +341,14 @@
         overflow: hidden;
     }
 
-        .context-menu-action .menu-item {
-            padding: 8px 12px;
-            display: block;
-            cursor: pointer;
-            border-bottom: 1px solid #eee;
-            font-size: 12px;
-            font-weight: 400;
-        }
+    .context-menu-action .menu-item {
+        padding: 8px 12px;
+        display: block;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+        font-size: 12px;
+        font-weight: 400;
+    }
 
     .menu-item:last-child {
         border-bottom: none;

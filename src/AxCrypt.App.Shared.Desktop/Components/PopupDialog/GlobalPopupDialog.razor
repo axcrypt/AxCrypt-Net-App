@@ -16,7 +16,7 @@
             </div>
             <div class="modal-body">
                 <div class="label-text-1">
-                    <p style="">@versionViewModel.LogOnViewModel.GlobalViewModel.MessageText</p>
+                    <p style="">@((MarkupString)versionViewModel.LogOnViewModel.GlobalViewModel.MessageText!)</p>
                 </div>
                 <div class="modal-footer">
                     @if (versionViewModel.LogOnViewModel.PopupButtons.Contains(PopupButtons.Ok))

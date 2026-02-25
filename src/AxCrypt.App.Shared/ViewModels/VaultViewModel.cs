@@ -337,6 +337,7 @@ namespace AxCrypt.App.Shared.ViewModels
             IDataContainer vaultfolder = New<IDataContainer>(CurrentFolder);
             if (!vaultfolder.IsAvailable)
             {
+                VaultItemList = new List<VaultItem>();
                 return;
             }
 
@@ -540,7 +541,7 @@ namespace AxCrypt.App.Shared.ViewModels
             if (!folderPath.Any()) return;
 
             folderPath = folderPath.NormalizeFolderPath();
-            if (!Resolve.FileSystemState.AllVaultFolders.Any((wf) => folderPath.NormalizeFolderPath() == wf.Path))
+            if (!Resolve.FileSystemState.AllVaultFolders.Any((wf) => folderPath == wf.Path))
             {
                 Resolve.FileSystemState.AddVaultFolder(new VaultFolder(folderPath, Resolve.KnownIdentities.DefaultEncryptionIdentity.Tag));
                 await Resolve.FileSystemState.Save();

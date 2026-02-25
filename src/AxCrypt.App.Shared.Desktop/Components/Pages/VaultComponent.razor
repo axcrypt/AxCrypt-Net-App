@@ -3,6 +3,7 @@
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Common
 @using AxCrypt.Content
+@using AxCrypt.Core.IO
 @using AxCrypt.Core.UI
 @using static AxCrypt.Abstractions.TypeResolve;
 
@@ -12,8 +13,8 @@
 @inject FileDropService FileDropService
 @inject AppSettingsViewModel AppSettingsViewModel
 
-<div class="vlt-header">
-    <a href="/" class="vault-back-link"><img class="Ico-LeftArrow" />@Texts.BackToHomeText</a>
+<div class="top-page-title-container password-header" style="z-index:100;">
+    <a href="/" class="grn-clr"><img class="back-arrow" src="" />@Texts.HomeLinkLabel</a>
 </div>
 
 <div class="vlt-body" @onclick="async () => await HideContextMenu()">
@@ -126,7 +127,7 @@
                             {
                                 <img alt="Preview" class="detail-image Icon-file" />
                                 <span class="detail-label">@Texts.FilePropertiesFileNameToolStripMenuItem</span>
-                                
+
                             }
                             <span class="fil-fol-detail">@ViewModel.SelectedFile</span>
                             @if (!ViewModel.IsFolder)
@@ -273,13 +274,28 @@
     {
         ViewModel.OnUpdateViewState += async () => await UpdateUIState();
         ViewModel.InitialUpdate();
-        ViewModel.LoadVaultItems();
 
         FileDropService.ResetOnDropped();
         FileDropService.OnFoldersDropped += async (folders) => await HandleDroppedFolders(folders);
         FileDropService.OnFilesDropped += async (files) => await HandleDroppedFiles(files);
 
         base.OnInitialized();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (!New<IDataContainer>(ViewModel.CurrentFolder.Normalize()).IsAvailable)
+        {
+            ViewModel.VaultItemList = new List<VaultItem>();
+
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, "Your vault folder is currently unavailable. <br/><br/>It may have been moved or deleted. Please check the folder location or choose a different vault.");
+            Navigation.NavigateTo("/");
+            return;
+        }
+
+        ViewModel.LoadVaultItems();
     }
 
     private void SetView(bool listView)

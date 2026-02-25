@@ -260,11 +260,7 @@ namespace AxCrypt.Core.Session
                 return;
             }
 
-            if (!vaultEncryptPath.EndsWith("\\"))
-            {
-                vaultEncryptPath += "\\";
-            }
-
+            vaultEncryptPath = vaultEncryptPath.NormalizeFolderPath();
             EncryptionParameters encryptionParameters = new EncryptionParameters(Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId, identity);
             IEnumerable<EmailAddress> sharedWith = (new List<string> { vaultEncryptPath }).ToVaultFolders().SharedWith();
             if (sharedWith != null && sharedWith.Any())
