@@ -289,7 +289,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
 
             try
             {
-                string dropboxPath = NormalizeToCloudPath(actualfileItem.FileID);
+                string dropboxPath = NormalizeToCloudPath(actualfileItem.FileID) + fileName;
                 return await UploadFileAsync(fileInfo, dropboxPath, WriteMode.Add.Instance, true);
             }
             catch (Exception)
@@ -325,7 +325,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
                     int lastSlash = originalCloudPath.LastIndexOf('/');
                     string dir = lastSlash > 0 ? originalCloudPath[..lastSlash] : "/";
 
-                    string renamedFilePath = dir == "/" ? "/" + randomlyEncryptedFile.Name : dir + "/" + randomlyEncryptedFile.Name;
+                    string renamedFilePath = NormalizeToCloudPath(dropBoxFilePath) + randomlyEncryptedFile.Name;
 
                     if (await MoveFile(fileItem, renamedFilePath))
                     {

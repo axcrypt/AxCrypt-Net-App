@@ -800,6 +800,7 @@
   justify-content: center;
   cursor: pointer;
   float: right;
+  background: #CACACA;
 }
 .file-picker-modalDialog .action-btn {
   content: url(/images/IconAction.svg);
@@ -824,6 +825,33 @@
 .file-picker-modalDialog .dots {
   line-height: 1;
   display: block;
+}
+.file-picker-modalDialog .breadcrumb {
+  font-size: 14px;
+  font-weight: 400;
+  color: #A4A4A4;
+  cursor: pointer;
+}
+.file-picker-modalDialog .breadcrumb a {
+  text-decoration: none;
+  color: #A4A4A4;
+}
+.file-picker-modalDialog .breadcrumb .separator {
+  margin: 0 5px;
+  color: #999;
+}
+.file-picker-modalDialog .breadcrumb .current {
+  font-weight: bold;
+  color: #333;
+}
+.file-picker-modalDialog .icon-next-arrow {
+  content: url(/images/business/IcoDrpDwn.svg);
+}
+.file-picker-modalDialog .icon-dltfold {
+  content: url(/images/default/IcoFldrGry.svg);
+  height: 16px;
+  width: 16px;
+  margin-left: 2px;
 }
 
 .page-title {

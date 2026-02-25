@@ -9,6 +9,19 @@
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
 
+<style>
+    .file-action-progress-bar {
+        position: absolute;
+        z-index: 1000;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        background: conic-gradient(from 10.99deg at 98.18% 128.62%, #fffee8 0deg, rgba(200, 199, 180, .8) 353.48deg, #f5fff0 360deg);
+        height: 53vh;
+        align-items: center;
+    }
+</style>
+
 @if (ViewModel.IsVisible)
 {
     <div class="file-picker-modalDialog">
@@ -38,6 +51,17 @@
                 </div>
             </div>
             <div class="file-picker-modal-body">
+                @if (ViewModel.ShowProgressBar)
+                {
+                    <div style="position:relative;">
+                        <div class="file-action-progress-bar">
+                            <div class="loading-content">
+                                <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
+                                <span style="color:black ">@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage</span>
+                            </div>
+                        </div>
+                    </div>
+                }
 
                 <div class="content-area">
                     <div class="file-picker-dir-content find-fle-nme" @oncontextmenu="(e) => ShowContextMenu(e)" id="user_files_section" @onclick="async () => await HideContextMenu()">
@@ -112,7 +136,7 @@
                                         @foreach (FilePickerItemViewModel file in ViewModel.Files)
                                         {
                                             string ParentPath = file.ParentPath + "/" + file.FileName;
-                                            <div class="file-grid-item @(file.IsSelected ? "select-item" : "") fle-exton-img" @onclick="() => OnCheckboxChanged(file)">
+                                            <div class="file-grid-item @(file.IsSelected ? "select-item" : "") fle-exton-img" @onclick="() => OnCheckboxChanged(file)" @ondblclick="() => OnFolderClicked(file)">
                                                 <img alt="File Icon" class="grid-file-icon @(file.IsFolder == true ? "Icon-folder" : file.FileName.GetIcon())" />
                                                 <span class="file-name-grid">@((MarkupString)HighlightMatch(file.FileName))</span>
                                             </div>
@@ -144,7 +168,7 @@
                         <div class="filepicker-dropdown-action">
                             @if (ViewModel.MultiSelectEnabled)
                             {
-                                <div class="round-btn" @onclick="() => ShowActionContextMenu()" title="Edit option">
+                                <div class="round-btn" @onclick="() => ShowActionContextMenu()" title="Manage selected file(s)">
                                     <img class="action-btn" alt="action button" />
                                 </div>
 
@@ -155,13 +179,13 @@
                                         <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Decrypt)">@Texts.DecryptToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.OpenSecured)">@Texts.OpenEncryptedToolStripMenuItemText</span>
-                                        <span class="menu-item" @onclick="async () => await ClearSelection()">@Texts.ClearAllText</span>
+                                        <span class="menu-item" @onclick="async () => await ClearSelection()">Clear Selected</span>
                                     </div>
                                 }
                             }
                             else
                             {
-                                <div class="round-btn" @onclick="async () => await ViewModel.AddFiles()" title="Add option">
+                                <div class="round-btn" @onclick="async () => await ViewModel.AddFiles()" title="Add file(s)">
                                     <img class="add-btn" alt="add button" />
                                 </div>
                             }

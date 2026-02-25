@@ -155,20 +155,23 @@ namespace AxCrypt.App.Shared.CloudCore
             if (string.IsNullOrWhiteSpace(path))
                 return "/";
 
-
             path = path.Replace("\\", "/");
-            if (path.Contains(":"))
-            {
-                int colonIndex = path.IndexOf(":");
+
+            int colonIndex = path.IndexOf(':');
+            if (colonIndex >= 0)
                 path = path[(colonIndex + 1)..];
-            }
 
             while (path.Contains("//"))
                 path = path.Replace("//", "/");
 
+            int lastSlashIndex = path.LastIndexOf('/');
+            path = lastSlashIndex >= 0
+                ? path[..(lastSlashIndex + 1)]
+                : "/";
+
             path = "/" + path.TrimStart('/');
 
-            return path;
+            return path.EndsWith("/") ? path : path + "/";
         }
     }
 }

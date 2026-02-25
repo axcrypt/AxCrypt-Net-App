@@ -4,6 +4,7 @@ using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.UI.ViewModels;
 using AxCrypt.App.Shared.Utility;
+using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Runtime;
@@ -116,6 +117,8 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
         private FileProviderSelectionViewModel _fileProviderSelectionViewModel = fileProviderSelectionViewModel;
 
         private UpgradeSubscriptionViewModel _upgradeViewModel = AxCServiceProviderExtension.UpgradeSubscriptionViewModel!;
+
+        public bool ShowProgressBar { get; set; } = false;
 
         public void InitializeFilePickerDialog(
             FileStorageProvider fileProviderService,
@@ -288,24 +291,46 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             }
             try
             {
-                IEnumerable<FilePickerItemViewModel> selectedFileItems;
+                IEnumerable<FilePickerItemViewModel> selectedFileItems = SelectedFiles.Where(item => !item.IsFolder);
+                string warningTitle = "";
+                string warningMessage = "";
 
-                selectedFileItems = SelectedFiles.Where(item => !item.IsFolder && !item.FileName.Contains(OS.Current.AxCryptExtension));
-                string warningMessage = "Selected file cannot be EnCrypt,Key Share or Open";
-
-                if (SelectedFileOperation == FileOperationOption.Decrypt)
+                switch (SelectedFileOperation)
                 {
-                    selectedFileItems = SelectedFiles.Where(item => !item.IsFolder && item.FileName.Contains(OS.Current.AxCryptExtension));
-                    warningMessage = "Selected file cannot be Decrypt";
+                    case FileOperationOption.OpenSecured:
+                        selectedFileItems = selectedFileItems.Where(item => item.FileName.Contains(OS.Current.AxCryptExtension));
+                        warningTitle = "Cannot Open File";
+                        warningMessage = "Only encrypted file can be opened in this application. The selected file does not appear to be encrypted.";
+                        break;
+                    case FileOperationOption.Encrypt:
+                        selectedFileItems = selectedFileItems.Where(item => !item.FileName.Contains(OS.Current.AxCryptExtension));
+                        warningTitle = "Already Encrypted";
+                        warningMessage = "One or more selected files may already be encrypted.";
+                        break;
+                    case FileOperationOption.Decrypt:
+                        selectedFileItems = selectedFileItems.Where(item => item.FileName.Contains(OS.Current.AxCryptExtension));
+                        warningTitle = "Not an Encrypted File";
+                        warningMessage = "One or more selected files are not recognized as encrypted. Only encrypted file(s) can be decrypted.";
+                        break;
+                    case FileOperationOption.ShareKey:
+                        selectedFileItems = selectedFileItems.Where(item => item.FileName.Contains(OS.Current.AxCryptExtension));
+                        warningTitle = "Cannot Share Key";
+                        warningMessage = "One or more selected files are not recognized as encrypted. Only encrypted file(s) can use Share Keys.";
+                        break;
+                    default:
+                        break;
                 }
 
                 if (!selectedFileItems.Any())
                 {
-                    await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, warningMessage);
+                    await New<IPopup>().ShowAsync(PopupButtons.Ok, warningTitle, warningMessage);
                     return;
                 }
 
+                ShowProgressBar = true;
                 await RedirectToMainScreen(selectedFileItems);
+                SelectedFiles.Clear();
+                ShowProgressBar = false;
                 await NavigateBackToPath(CurrentFolderID ?? "root");
                 return;
             }

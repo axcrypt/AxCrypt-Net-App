@@ -39,9 +39,9 @@
             gap: 10px;
         }
 
-        .center-title label {
-            font-size: 20px;
-        }
+            .center-title label {
+                font-size: 20px;
+            }
 
         .search-box {
             margin-left: auto;
@@ -99,20 +99,20 @@
             margin-bottom: 0px;
         }
 
-        .breadcrumb a {
-            text-decoration: none;
-            color: $colDsbl;
-        }
+            .breadcrumb a {
+                text-decoration: none;
+                color: $colDsbl;
+            }
 
-        .breadcrumb .separator {
-            margin: 0 5px;
-            color: #999;
-        }
+            .breadcrumb .separator {
+                margin: 0 5px;
+                color: #999;
+            }
 
-        .breadcrumb .current {
-            font-weight: bold;
-            color: #333;
-        }
+            .breadcrumb .current {
+                font-weight: bold;
+                color: #333;
+            }
 
         .icon-dltfold {
             content: $IcoFldrGry;
@@ -156,12 +156,12 @@
         text-align: center;
     }
 
-    .file-notfound span {
-        margin-bottom: 15px;
-        font-weight: 400;
-        font-size: 14px;
-        color: #494949;
-    }
+        .file-notfound span {
+            margin-bottom: 15px;
+            font-weight: 400;
+            font-size: 14px;
+            color: #494949;
+        }
 
     .files-section .list-view {
         width: 100%;
@@ -196,10 +196,10 @@
         overflow-y: scroll;
     }
 
-    .file-list li {
-        padding: 6px;
-        border-bottom: 1px solid #ccc;
-    }
+        .file-list li {
+            padding: 6px;
+            border-bottom: 1px solid #ccc;
+        }
 
     .file-grid {
         display: flex;
@@ -293,23 +293,23 @@
         }
     }
 
-    .file-list-item.select-item {
-        background-color: $colHovrbox;
+        .file-list-item.select-item {
+            background-color: $colHovrbox;
 
-        .file-name {
-            font-weight: bold;
-            color: $TxtClr;
-        }
+            .file-name {
+                font-weight: bold;
+                color: $TxtClr;
+            }
 
-        .file-path {
-            color: #A4A4A4;
-            font-weight: bold;
-        }
+            .file-path {
+                color: #A4A4A4;
+                font-weight: bold;
+            }
 
-        .fileitem-chk-box {
-            display: block !important;
+            .fileitem-chk-box {
+                display: block !important;
+            }
         }
-    }
 
     .file-grid-item.select-item {
         background-color: $colHovrbox;
@@ -332,16 +332,16 @@
         position: relative;
     }
 
-    .file-grid-item:hover .file-name-grid,
-    .file-list-item:hover .file-name {
-        font-weight: bold;
-        color: $TxtClr;
-    }
+        .file-grid-item:hover .file-name-grid,
+        .file-list-item:hover .file-name {
+            font-weight: bold;
+            color: $TxtClr;
+        }
 
-    .file-list-item:hover .file-path {
-        color: #A4A4A4;
-        font-weight: bold;
-    }
+        .file-list-item:hover .file-path {
+            color: #A4A4A4;
+            font-weight: bold;
+        }
 
     .file-details {
         flex: 1;
@@ -374,14 +374,14 @@
         overflow: hidden;
     }
 
-    .context-menu-action .menu-item {
-        padding: 8px 12px;
-        display: block;
-        cursor: pointer;
-        border-bottom: 1px solid #eee;
-        font-size: 12px;
-        font-weight: 400;
-    }
+        .context-menu-action .menu-item {
+            padding: 8px 12px;
+            display: block;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+            font-weight: 400;
+        }
 
     .menu-item:last-child {
         border-bottom: none;
@@ -414,10 +414,10 @@
         max-width: 180px;
     }
 
-    .select-file span {
-        margin: 2px;
-        text-align: center;
-    }
+        .select-file span {
+            margin: 2px;
+            text-align: center;
+        }
 
     .detail-image {
         width: 69px;
@@ -483,19 +483,19 @@
         padding: 10px;
     }
 
-    .display-type img {
-        width: 24px;
-        height: 24px;
-        cursor: pointer;
-        border: 2px solid transparent;
-        padding: 4px;
-        transition: border 0.3s;
-    }
+        .display-type img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            padding: 4px;
+            transition: border 0.3s;
+        }
 
-    .display-type img.selected {
-        border: 2px solid #007bff;
-        border-radius: 4px;
-    }
+            .display-type img.selected {
+                border: 2px solid #007bff;
+                border-radius: 4px;
+            }
 
     .modal-footer {
         justify-content: center !important;
@@ -529,6 +529,7 @@
         justify-content: center;
         cursor: pointer;
         float: right;
+        background: #CACACA;
     }
 
     .action-btn {
@@ -557,5 +558,38 @@
     .dots {
         line-height: 1;
         display: block;
+    }
+
+    .breadcrumb {
+        font-size: 14px;
+        font-weight: 400;
+        color: $colDsbl;
+        cursor: pointer;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: $colDsbl;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 5px;
+            color: #999;
+        }
+
+        .breadcrumb .current {
+            font-weight: bold;
+            color: #333;
+        }
+
+    .icon-next-arrow {
+        content: $SecTopArrowImg;
+    }
+
+    .icon-dltfold {
+        content: $IcoFldrGry;
+        height: 16px;
+        width: 16px;
+        margin-left: 2px;
     }
 }
