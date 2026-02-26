@@ -74216,6 +74216,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to With a Free Trial, Upgrade to unlock &lt;span&gt;Encryption &amp; more features!&lt;/span&gt;.
+        /// </summary>
+        public static string StartTrialToUnlockEncryptionText {
+            get {
+                return ResourceManager.GetString("StartTrialToUnlockEncryptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Did you know? You can enable the &apos;Include Subfolders&apos; option to work with folders in folders. A paid subscription plan is required for this..
         /// </summary>
         public static string StartupTipIncludeSubfoldersFeature {
@@ -77094,6 +77103,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We noticed you don’t have a subscription!.
+        /// </summary>
+        public static string TryUpgradePlanNoSubscriptionHeading {
+            get {
+                return ResourceManager.GetString("TryUpgradePlanNoSubscriptionHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to With the &lt;span&gt;{0}&lt;/span&gt; unlock:.
         /// </summary>
         public static string TryUpgradePlanSubTitleText1 {
@@ -77445,6 +77463,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unlock &lt;span&gt;stronger &amp; unlimited encryption&lt;/span&gt; features!.
+        /// </summary>
+        public static string UnlockAdvancedFeaturesText {
+            get {
+                return ResourceManager.GetString("UnlockAdvancedFeaturesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unlock our &lt;span&gt;amazing&lt;/span&gt; &lt;span&gt;features!&lt;/span&gt; Upgrade to &lt;span&gt;Premium&lt;/span&gt; or &lt;b&gt;Business&lt;/b&gt;.
         /// </summary>
         public static string UnlockFeatures {
@@ -77675,6 +77702,15 @@ namespace AxCrypt.Content {
         public static string UpgradeText {
             get {
                 return ResourceManager.GetString("UpgradeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade to unlock &lt;span&gt;Encryption &amp; more features!&lt;/span&gt;.
+        /// </summary>
+        public static string UpgradeToUnlockEncryptionText {
+            get {
+                return ResourceManager.GetString("UpgradeToUnlockEncryptionText", resourceCulture);
             }
         }
         
