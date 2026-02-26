@@ -228,6 +228,9 @@
   <data name="AboutPartnerSting" xml:space="preserve">
     <value>STING hilft talentierten Menschen, Ihre Ideen in nachhaltige Unternehmen zu verwandeln.</value>
   </data>
+  <data name="AboutUsHistory2025Text" xml:space="preserve">
+    <value>AxCrypt präsentiert eine neue, übersichtliche und benutzerfreundliche Oberfläche. Dank Leistungsverbesserungen bietet die App mehr Stabilität, erhöhte Sicherheit und Kompatibilität mit allen gängigen Betriebssystemen. Drei neue Funktionen – der sichere Messenger, die Textverschlüsselung und Vault – sowie Verbesserungen am Passwort-Manager sorgen für ein einheitliches Benutzererlebnis und vereinfachen sofortigen Schutz und Sicherheit.</value>
+  </data>
   <data name="AboutUsHistoryText1" xml:space="preserve">
     <value>AxCrypt wurde entwickelt und veröffentlicht und bietet eine einfache und benutzerfreundliche Lösung für den Online-Austausch vertraulicher Daten.</value>
   </data>
@@ -629,6 +632,9 @@ Bitte loggen Sie sich mit dem selben Passwort ein, welches Sie zuvor benutzt hab
   <data name="AlwaysOfflineToolTip" xml:space="preserve">
     <value>Solange diese Funktion aktiviert ist, wird der Internetzugang nie genutzt noch ist er erforderlich.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
+  </data>
+  <data name="AndMoreText" xml:space="preserve">
+    <value>... und mehr</value>
   </data>
   <data name="AndroidIosTitle" xml:space="preserve">
     <value>&lt;span&gt;(Android/iOS)&lt;/span&gt;</value>
@@ -12406,6 +12412,9 @@ Sie wurden gewarnt, jetzt genießen!
     <value>Diese Daten werden anschließend an andere Cyberkriminelle verkauft, die sie später für verschiedene Angriffe, wie beispielsweise Credential Stuffing, wiederverwenden. Dadurch wird aus einem einzelnen Sicherheitslücke effektiv eine Vielzahl weiterer Lücken, wodurch die Gesamtauswirkungen der ursprünglichen Lücke verstärkt werden.
 </value>
   </data>
+  <data name="Blog_WPRIDHTS_H3_Text11" xml:space="preserve">
+    <value>&lt;b&gt;4: Social Engineering und vertraute E-Mails:&lt;/b&gt;</value>
+  </data>
   <data name="Blog_WPRIDHTS_H3_Text12" xml:space="preserve">
     <value>Frühere Phishing-Angriffe waren aufgrund schlechter Grammatik oder Fehlern in den E-Mails leicht zu erkennen.</value>
   </data>
@@ -12420,6 +12429,9 @@ Sie wurden gewarnt, jetzt genießen!
   </data>
   <data name="Blog_WPRIDHTS_H3_Text16" xml:space="preserve">
     <value>Das Hauptziel dieser Angriffe ist es, eine emotionale Verbindung zu der Person herzustellen, ihr Vertrauen zu missbrauchen und sie vollständig auszunutzen.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text17" xml:space="preserve">
+    <value>&lt;b&gt;5: Man-in-the-Middle-Angriffe und Netzwerk-Abfangen&lt;/b&gt;</value>
   </data>
   <data name="Blog_WPRIDHTS_H3_Text18" xml:space="preserve">
     <value>Betrachten Sie dies als eine Autobahn, aber eine einsame in einem abgelegenen Teil der Welt.</value>
@@ -12436,6 +12448,9 @@ Sie wurden gewarnt, jetzt genießen!
   <data name="Blog_WPRIDHTS_H3_Text21" xml:space="preserve">
     <value>Diese Angriffe ermöglichen es Angreifern, Ihre Passwörter während der Übertragung abzufangen, insbesondere wenn die Verschlüsselung schwach oder gar nicht vorhanden ist.</value>
   </data>
+  <data name="Blog_WPRIDHTS_H3_Text22" xml:space="preserve">
+    <value>&lt;b&gt;6: Brute-Force-Angriff oder automatisiertes Raten.&lt;/b&gt;</value>
+  </data>
   <data name="Blog_WPRIDHTS_H3_Text23" xml:space="preserve">
     <value>Wer im Technologiebereich arbeitet, weiß, was Brute-Force-Angriffe und automatisiertes Raten bedeuten.</value>
   </data>
@@ -12451,11 +12466,17 @@ Sie wurden gewarnt, jetzt genießen!
   <data name="Blog_WPRIDHTS_H3_Text4" xml:space="preserve">
     <value>Wenn Sie zu denjenigen gehören, die ihre Passwörter immer wieder verwenden oder sie auf verschiedenen Plattformen nur geringfügig abändern, dann den Hacker bereitet das einen großen Bahnhof. Sie können sich so ganz einfach Zugang zu Ihren Konten verschaffen.</value>
   </data>
+  <data name="Blog_WPRIDHTS_H3_Text5" xml:space="preserve">
+    <value>&lt;b&gt;2: Keyloggern und Malware:&lt;/b&gt;</value>
+  </data>
   <data name="Blog_WPRIDHTS_H3_Text6" xml:space="preserve">
     <value>Hier wird es noch beängstigender. Diese Methode, an Ihre persönlichen Daten zu gelangen, ist vergleichbar mit einem Online-Nachsteller. Cyberkriminelle nutzen Schadsoftware, um heimlich Tastatureingaben aufzuzeichnen oder gespeicherte Passwörter aus Ihren Browsern oder Geräten zu entpacken.</value>
   </data>
   <data name="Blog_WPRIDHTS_H3_Text7" xml:space="preserve">
     <value>Diese Tools erfassen oder stehlen die Zugangsdaten der Opfer während der Eingabe oder speichern Passwörter im Hintergrund.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text8" xml:space="preserve">
+    <value>&lt;b&gt;3: Ein Datenleck, eine lange Liste beeinträchtigter Passwörter, mehrere offengelegte Kanäle:&lt;/b&gt;</value>
   </data>
   <data name="Blog_WPRIDHTS_H3_Text9" xml:space="preserve">
     <value>Wenn Unternehmen von einer größeren Datenpanne betroffen sind, veröffentlichen die Angreifer oder Hacker, die für den Vorfall verantwortlich sind, meist umgehend große Mengen an Benutzernamen und Passwörtern im Darknet. Diese gestohlenen Zugangsdaten werden dann zu hohen Preisen an Interessenten verkauft.</value>
@@ -12469,17 +12490,29 @@ Sie wurden gewarnt, jetzt genießen!
   <data name="Blog_WPRIDHTS_H4_Text3" xml:space="preserve">
     <value>Dies sind drei wichtige Ereignisse, die wir Ihnen in diesem Blog vorstellen wollten.</value>
   </data>
+  <data name="Blog_WPRIDHTS_H4_Text4" xml:space="preserve">
+    <value>&lt;li&gt;16 Milliarden Zugangsdaten offengelegt:&lt;/li&gt;</value>
+  </data>
   <data name="Blog_WPRIDHTS_H4_Text5" xml:space="preserve">
     <value>Forscher haben kürzlich fast 16 Milliarden Anmeldedatensätze entdeckt, die sich auf 30 ungesicherte und unverschlüsselte Datensätze verteilen. Diese Zugangsdaten umfassen solche, die mit großen Plattformen wie Google, Apple, Facebook, Telegram und GitHub verknüpft sind. Es handelt sich um einen der größten jemals dokumentierten Diebstähle von Benutzernamen und Passwörtern.</value>
   </data>
+  <data name="Blog_WPRIDHTS_H4_Text6" xml:space="preserve">
+    <value>&lt;li&gt;3,5 Milliarden Datensätze aus einer Anmeldeinformationsdatenbank geleakt:&lt;/li&gt;</value>
+  </data>
   <data name="Blog_WPRIDHTS_H4_Text7" xml:space="preserve">
     <value>Dieser einzelne Datensatz enthielt fast 3,5 Milliarden Benutzernamen-Passwort-Paare. Er wurde mithilfe von Infostealer-Malware gesammelt und in einer falsch konfigurierten Cloud-Umgebung gespeichert, wodurch sensible Daten ungeschützt und für Hacker leicht zugänglich waren.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text8" xml:space="preserve">
+    <value>&lt;li&gt;184 Millionen geleakte Zugangsdaten:&lt;/li&gt;</value>
   </data>
   <data name="Blog_WPRIDHTS_H4_Text9" xml:space="preserve">
     <value>Anfang dieses Jahres wurden bei einer Sicherheitslücke 184 Millionen Zugangsdaten von Plattformen wie Facebook und Roblox offengelegt, was zeigt, dass diese Plattformen häufige Ziele für Datendiebstahl und Passwortdiebstahl sind.</value>
   </data>
   <data name="Blog_WPRIDHTS_H5_Text1" xml:space="preserve">
     <value>Wenn es eine treffende Analogie für die Wiederverwendung von Passwörtern gäbe, würde sich das Ganze fast als Dominoeffekt erklären, der furchtbar schiefgegangen ist.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text2" xml:space="preserve">
+    <value>&lt;b&gt;So könnte es laufen, wenn ein Konto beeinträchtigt und die Passwörter weitergegeben werden.&lt;/b&gt;</value>
   </data>
   <data name="Blog_WPRIDHTS_H5_Text3" xml:space="preserve">
     <value>zunächst verschaffen sich Angreifer Zugang zu Ihren E-Mails, wo Sie Ihre Links zum Zurücksetzen Ihres Passworts finden und wo Sie sich möglicherweise irgendwann einmal Ihre Passwörter selbst zugesendet haben.</value>
@@ -24583,6 +24616,9 @@ Um zur Startseite zu gehen, klicken Sie &lt;a href="{1}"&gt;hier&lt;/a&gt;</valu
   <data name="StandardEncryptionWarning" xml:space="preserve">
     <value>Ihr aktueller Zuschauerplan erlaubt nur das Anzeigen und Entschlüsseln</value>
   </data>
+  <data name="StandardEncryptionWarningText1" xml:space="preserve">
+    <value>Klicken Sie hier, um &lt;span&gt; stärkere und unbegrenzte Verschlüsselungsfunktionen &lt;/span&gt; freizuschalten!</value>
+  </data>
   <data name="StandardEncryptionWarningText2" xml:space="preserve">
     <value>Ihr aktueller Basisplan verwendet AES-128-Verschlüsselung</value>
   </data>
@@ -25339,6 +25375,9 @@ Bitte besuchen Sie unseren &lt;a href="{0}"&gt;community support&lt;/a&gt;.</val
   <data name="TextEncryptionGuideStepText13" xml:space="preserve">
     <value>Ihr verschlüsselter Text wird entschlüsselt und der Originaltext wird unten angezeigt.</value>
   </data>
+  <data name="TextEncryptionGuideStepText14" xml:space="preserve">
+    <value>&lt;b&gt;Wichtige Hinweise:&lt;/b&gt;</value>
+  </data>
   <data name="TextEncryptionGuideStepText15" xml:space="preserve">
     <value>Klicken Sie auf &lt;b&gt; Entschlüsseln&lt;/b&gt;</value>
   </data>
@@ -25566,6 +25605,36 @@ Das AxCrypt Team</value>
   <data name="TryPremiumToolTip" xml:space="preserve">
     <value>Sie verwenden nicht das höchste Sicherheitsniveau. Klicken Sie jetzt kostenlos zu versuchen!</value>
     <comment>A tooltip explaining that a user can get a free trial of premium by clicking on the link.</comment>
+  </data>
+  <data name="TryUpgradePlanActivationInstantText" xml:space="preserve">
+    <value>Wählen Sie den Tarif, der Ihren Bedürfnissen entspricht. Die Aktivierung erfolgt sofort.</value>
+  </data>
+  <data name="TryUpgradePlanCancelAnytimeText" xml:space="preserve">
+    <value>Sie können jederzeit vor Ablauf der Probezeit kündigen.</value>
+  </data>
+  <data name="TryUpgradePlanFeatureText1" xml:space="preserve">
+    <value>Unbegrenzte starke Verschlüsselung</value>
+  </data>
+  <data name="TryUpgradePlanFeatureText2" xml:space="preserve">
+    <value>Ordner- und Cloud-Verschlüsselung</value>
+  </data>
+  <data name="TryUpgradePlanFeatureText5" xml:space="preserve">
+    <value>Tools zur Geschäftsverschlüsselung</value>
+  </data>
+  <data name="TryUpgradePlanNoChargesText" xml:space="preserve">
+    <value>Heute fallen keine Gebühren an. Sie können jederzeit vor Ablauf des Testzeitraums kündigen.</value>
+  </data>
+  <data name="TryUpgradePlanSubTitleText1" xml:space="preserve">
+    <value>Mit &lt;span&gt;{0}&lt;/span&gt; freischalten:</value>
+  </data>
+  <data name="TryUpgradePlanTitle1" xml:space="preserve">
+    <value>Wir haben festgestellt, dass Sie kein Abonnement haben. Sie können es &lt;span&gt;14 Tage lang kostenlos testen!&lt;/span&gt;</value>
+  </data>
+  <data name="TryUpgradePlanTitle2" xml:space="preserve">
+    <value>Schalten Sie den Komplettschutz frei &lt;span&gt;14 Tage lang kostenlos!&lt;/span&gt;</value>
+  </data>
+  <data name="TryUpgradePlanTitle3" xml:space="preserve">
+    <value>Den vollen Schutz reaktivieren</value>
   </data>
   <data name="TSTMNL_Business_BSALP_Text3" xml:space="preserve">
     <value>Unsere Kunden lagern die Installation und den Betrieb ihrer IT-Umgebung an uns aus. Es ist daher äußerst wichtig, dass diese Informationen bestmöglich und mit den aktuellsten Methoden geschützt werden. AxCrypt hilft uns, mit einem hohen Schutzniveau zu arbeiten, aber dennoch einfach und effizient.</value>
@@ -26668,6 +26737,9 @@ Für mehr Informationen klicken Sie auf OK um einen Webbrowser zu unserer Websit
   </data>
   <data name="YEAR_2024" xml:space="preserve">
     <value>2024</value>
+  </data>
+  <data name="YEAR_2025" xml:space="preserve">
+    <value>2025</value>
   </data>
   <data name="YearlyDiscountLabel" xml:space="preserve">
     <value>Jährlicher Rabatt</value>

@@ -229,6 +229,9 @@
   <data name="AboutPartnerSting" xml:space="preserve">
     <value>STING hjälper talangfulla människor att omvandla sina idéer till hållbara företag.</value>
   </data>
+  <data name="AboutUsHistory2025Text" xml:space="preserve">
+    <value>AxCrypt lanserar ett fräscht nytt gränssnitt byggt för tydlighet och användarvänlighet. Med prestandaförbättringar gav appen större stabilitet, ökad säkerhet och kompatibilitet över alla större operativsystem. Tre nya funktioner, som säker meddelandeprogramvara, textkryptering och Vault, tillsammans med förbättringar i Password Manager, skapade en enhetlig upplevelse som förenklade omedelbar säkerhet och skydd.</value>
+  </data>
   <data name="AboutUsHistoryText1" xml:space="preserve">
     <value>AxCrypt utvecklas och släpps, företaget erbjuder en enkel samt användarvänlig lösning för att dela konfidentiella data online.</value>
   </data>
@@ -458,11 +461,17 @@ Lägg till Kort</value>
   <data name="AddMoreUsersTitle" xml:space="preserve">
     <value>Lägg till fler användare</value>
   </data>
+  <data name="AddNewEmailText" xml:space="preserve">
+    <value>Lägg till ny e-post</value>
+  </data>
   <data name="AddNewFolderText" xml:space="preserve">
     <value>Lägg till Ny Mapp</value>
   </data>
   <data name="AddNoteTitle" xml:space="preserve">
     <value>Lägg till anteckning</value>
+  </data>
+  <data name="AddOrDragFolderText" xml:space="preserve">
+    <value>Lägg till eller Dra Mapp</value>
   </data>
   <data name="AddPasswordTitle" xml:space="preserve">
     <value>Lägg till Lösenord</value>
@@ -639,6 +648,9 @@ Logga nu in med samma lösenord som du angav då.</value>
     <value>Om Alltid Frånkopplad aktiveras, kommer ingen Internetåtkomst att krävas eller användas tills funktionen avaktiveras.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
   </data>
+  <data name="AndMoreText" xml:space="preserve">
+    <value>... och mer</value>
+  </data>
   <data name="AndroidIosTitle" xml:space="preserve">
     <value>&lt;span&gt;(Android/iOS)&lt;/span&gt;</value>
   </data>
@@ -662,6 +674,9 @@ Logga nu in med samma lösenord som du angav då.</value>
   </data>
   <data name="AnonymousRenameToolTip" xml:space="preserve">
     <value>Dölj det verkliga namnet för en skyddad fil genom att ge den ett slumpmässigt namn.</value>
+  </data>
+  <data name="AnyoneText" xml:space="preserve">
+    <value>Vem som helst</value>
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>AxCrypt ID Verifiering [ {0} ]</value>
@@ -12951,14 +12966,227 @@ AxCrypt är engagerade i att leverera kontinuerlig, förstklassig utbildning och
   <data name="Blog_WIPM_Title" xml:space="preserve">
     <value>Vad är en lösenordshanterare? Hur säker är programvaran för lösenordshanteraren?</value>
   </data>
+  <data name="Blog_WPRIDHTS_Conclusion_Heading" xml:space="preserve">
+    <value>Vänta inte på att ett intrång ska inträffa innan du agerar.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Conclusion_Text1" xml:space="preserve">
+    <value>Ta kontroll över din digitala säkerhet idag eftersom ingen annan kommer att göra det åt dig. Sluta återanvända lösenord och anta ett starkt och säkert hygiensystem för lösenord. Det är dags att ni säkrar varje konto med unika lösenord som är svåra att avkoda. För när ett lösenord faller, är det kopplat till att det också faller.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Conclusion_Text2" xml:space="preserve">
+    <value>Starta din &lt;a href='https://account.axcrypt.net/en/Home/Login?Signup=True'&gt;&lt;b&gt;gratis provperiod&lt;/b&gt;&lt;/a&gt; med AxCrypt idag och &lt;a href='https://axcrypt.net/download/'&gt;&lt;b&gt;ladda ner&lt;/b&gt;&lt;/a&gt; appen.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Conclusion_Text3" xml:space="preserve">
+    <value>Följ oss på våra sociala mediekanaler för att hålla dig uppdaterad om de senaste trenderna inom cybersäkerhet och ligg steget före.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text1" xml:space="preserve">
+    <value>Det räcker med ett intrång, och de har tillgång till allt. Ja! Allt, till och med de arkiverade emo-fotona från 2005, som du hoppades aldrig skulle dyka upp igen.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text2" xml:space="preserve">
+    <value>De flesta användare tycker att ju mer slumpmässigt, och komplexa du gör dina lösenord, desto säkrare är de att återanvända. Tyvärr är det inte så. Moderna attacker utnyttjar modern teknik.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text3" xml:space="preserve">
+    <value>Ditt lösenord kan vara din katts förnamn tillsammans med din mormors flicknamn, följt av de två sista siffrorna i datumet ni gjorde slut, och bara för att göra det 'svårare' för hackare har du till och med lagt till "`" symbolen, för varför inte.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text4" xml:space="preserve">
+    <value>Gissa vad, de känner dig alldeles för väl för att knäcka det lösenordet. Det krävs inte mycket. Några återkommande bilder, dina gilla-markeringar, sidorna du följer och dina känslomässiga utbrott på dina sociala medier-konton; Allt detta innehåll fungerar som bränsle för deras personifierade attacker.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text5" xml:space="preserve">
+    <value>I sådana fall blir även det starkaste lösenordet värdelöst när det väl har exponerats. Oavsett om det gäller bankkoder, jobbdator, sociala mediekonton, e-postadresser eller till och med din telefonkod; Allt idag kan bli hackat om du återanvänder dina lösenord.</value>
+  </data>
   <data name="Blog_WPRIDHTS_H1_Text6" xml:space="preserve">
     <value>Slutsatsen är tydlig: återanvänd aldrig lösenord.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text1" xml:space="preserve">
+    <value>Återanvändning av lösenord sker när samma lösenord används på olika plattformar med liten eller ingen förändring. Detta är dålig lösenordshygien.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text2" xml:space="preserve">
+    <value>Även om detta kan verka harmlöst vet hackare alltför väl att folk ofta återanvänder sina lösenord eller ändrar dem litegrann. Hackare drar möjligheten att utnyttja denna idé genom brute force-attacker, lösenordsåteranvändningsattacker, AI-genererade lösenordssprayattacker, bara för att nämna några.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text3" xml:space="preserve">
+    <value>Problemet är ganska enkelt här. Om ett eller samma relativt liknande lösenord har använts på flera plattformar riskerar alla konton att komprometteras. Om de gör intrång använder hackarna eller angriparna intuitivt samma lösenord på alla dina andra konton - tills de träffar rätt.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text4" xml:space="preserve">
+    <value>E-post, molnlagring och finansiella konton är särskilt attraktiva mål. Även de starkaste lösenorden blir värdelösa om de exponeras, och då riskerar all din data att exponeras.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text1" xml:space="preserve">
+    <value>Att förstå hur hackare stjäl era lösenord är det första steget för att inse allvaret i att inte återanvända dem.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text10" xml:space="preserve">
+    <value>Denna data säljs sedan till andra cyberbrottslingar, som senare återanvänder den i olika typer av attacker, såsom credential stuffing. Denna praxis förvandlar i praktiken ett enskilt intrång till många efterföljande intrång, vilket förstärker den totala effekten av den ursprungliga incidenten.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text11" xml:space="preserve">
+    <value>&lt;b&gt;4: Social ingenjörskonst och välbekanta mejl:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text12" xml:space="preserve">
+    <value>Tidigare nätfiskeattacker var lätta att upptäcka på grund av dålig grammatik eller ett fel i mejlen.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text13" xml:space="preserve">
+    <value>Men nu personifierar hackare sina attacker och använder psykologiska metoder för att manipulera sina offer. De kan utge sig för att vara någon du känner eller en betrodd kontakt från din sociala krets, till exempel en supportmedarbetare från kontoret eller en auktoritetsperson från arbetsplatsen.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text14" xml:space="preserve">
+    <value>Denna 'påstådda' bekanta röst eller till och med video används för att övertyga den naiva och ovetande personen att frivilligt ge bort den imiterade personens lösenord eftersom de litar på personen de hör eller ser.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text15" xml:space="preserve">
+    <value>Dessa personligt anpassade ingenjörsattacker ökar snabbt och utnyttjar mänskligt beteende snarare än tekniska brister.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text16" xml:space="preserve">
+    <value>Kärnmålet med dessa attacker är att känna en känslomässig koppling till personen, bryta deras förtroende och utnyttja dem fullt ut.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text17" xml:space="preserve">
+    <value>&lt;b&gt;5: Man-in-the-middle-attacker och nätverksavlyssningar&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text18" xml:space="preserve">
+    <value>Tänk på detta som en motorväg, men en öde sådan i en avlägsen del av världen.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text19" xml:space="preserve">
+    <value>Sådana platser lockar tjuvar, pirater eller till och med spöken som väntar på att attackera och ta allt du äger.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text2" xml:space="preserve">
+    <value>Cyberkriminella hittar på en mängd olika tekniker för att stjäla dina lösenord. Här är de 6 vanligaste sätten som ditt lösenord kan knäckas på:</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text20" xml:space="preserve">
+    <value>Vid dessa attacker fungerar motorvägen som ett osäkert Wi-Fi eller komprometterat nätverk, och tjuvarna är angripare som avlyssnar trafik eller utnyttjar aktivitet på legitima webbplatser.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text21" xml:space="preserve">
+    <value>Dessa attacker låter dem fånga dina lösenord under överföringen, särskilt när krypteringen är svag eller saknas.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text22" xml:space="preserve">
+    <value>&lt;b&gt;6: Brute force eller automatiserad gissning.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text23" xml:space="preserve">
+    <value>Om du jobbar inom teknik vet du vad brute force-attacker och automatiserat gissande innebär.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text24" xml:space="preserve">
+    <value>Hackare använder automatiserade verktyg för att gissa miljontals lösenordskombinationer under loppet av några sekunder tills de hittar rätt.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text25" xml:space="preserve">
+    <value>Brute force-attacker och automatiserad gissande inkluderar ordboksattacker, där listor med vanliga lösenord används, samt lösenordssprayning.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text3" xml:space="preserve">
+    <value>&lt;b&gt;1: Meritfyllning:&lt;/b&gt; Angripare samlar in stulna inloggningsuppgifter, inklusive användarnamn, lösenord, för- och efternamn, födelsedatum och annan personlig information. De använder detta intrång för att autentisera inloggningsförsök på många andra webbplatser.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text4" xml:space="preserve">
+    <value>Om du däremot är en av dem som fortsätter att återanvända sina lösenord eller gör mindre ändringar på samma lösenord på alla andra plattformar, då rullar du i praktiken ut röda mattan. Välkomna, hackare, att ta sig in i era personliga konton.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text5" xml:space="preserve">
+    <value>&lt;b&gt;2: Nyckelregistrering och Skadlig kod:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text6" xml:space="preserve">
+    <value>Här blir det ännu obehagligare. Detta sätt att få tillgång till era personliga data är som att ha en digital stalker. Cyberbrottslingar använder skadlig kod för att i hemlighet spela in tangenttryckningar eller extrahera lagrade lösenord från era webbläsare eller enheter.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text7" xml:space="preserve">
+    <value>Dessa verktyg fångar eller stjäl offrens inloggningsuppgifter när de skriver eller sparar lösenord i bakgrunden.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text8" xml:space="preserve">
+    <value>&lt;b&gt;3: Ett dataintrång, en stor lista med komprometterade lösenord - flera kanaler exponerade:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text9" xml:space="preserve">
+    <value>Ofta när företag drabbas av ett stort dataintrång, dumpar angriparna eller hackarna som är ansvariga omedelbart stora mängder användarnamn- och lösenordspar på dark web. Dessa stulna inloggningsuppgifter säljs sedan för ett betydande värde till intresserade parter.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text1" xml:space="preserve">
+    <value>Dessa incidenter visar hur förödande komprometterade inloggningsuppgifter kan vara i verkligheten.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text2" xml:space="preserve">
+    <value>Massiva dataläckor orsakade av informationsstöldskadlig kod och osäkra eller okrypterade databaser har avslöjat nästan miljarder användarnamn och lösenord, vilket ger cyberbrottslingar tillgång. Hackare och angripare världen över är redo att använda dessa uppgifter för ransomware-attacker, nätfiskeattacker och credential-stuffing-attacker.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text3" xml:space="preserve">
+    <value>Det här är tre stora händelser som vi ville visa dig i den här bloggen.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text4" xml:space="preserve">
+    <value>&lt;li&gt;16 miljarder inloggningsuppgifter exponerade:&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text5" xml:space="preserve">
+    <value>Nyligen upptäckte forskare nästan 16 miljarder inloggningsposter fördelade över 30 osäkra, okrypterade datamängder. Dessa inloggningsuppgifter inkluderar de som är kopplade till stora plattformar som Google, Apple, Facebook, Telegram och GitHub. Detta är en av de största stölder av användarnamn och lösenord som någonsin registrerats.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text6" xml:space="preserve">
+    <value>&lt;li&gt;3,5 miljarder läckta uppgifter i databasen:&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text7" xml:space="preserve">
+    <value>Denna enskilda datamängd innehöll nästan 3,5 miljarder användarnamns- och lösenordspar. Den samlades in via infostealer-skadlig kod och lagrades i en felkonfigurerad molnmiljö, vilket gjorde känslig data exponerad och lätt för hackare att komma åt.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text8" xml:space="preserve">
+    <value>&lt;li&gt;184 miljoner inloggningsuppgifter läckta:&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text9" xml:space="preserve">
+    <value>Tidigare i år avslöjade ett intrång 184 miljoner kontouppgifter från plattformar som Facebook och Roblox, vilket visar att dessa plattformar är vanliga mål för informationsstjuvar och lösenordsstöld.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text1" xml:space="preserve">
+    <value>Om det fanns en perfekt liknelse för återanvända lösenord skulle det nästan förklara sig som en Dominoeffekt som gick fruktansvärt fel.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text2" xml:space="preserve">
+    <value>&lt;b&gt;Här är vad som kan hända om ett konto komprometteras och lösenorden läcker.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text3" xml:space="preserve">
+    <value>&lt;b&gt;1. Intrång i e-postkontot:&lt;/b&gt; först får angripare tillgång till dina e-postmeddelanden, vilket är där du får dina länkar till återställning av lösenord, och även där du vid något tillfälle kan ha skickat dina lösenord till dig själv.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text4" xml:space="preserve">
+    <value>&lt;b&gt;2. Sociala mediers övertagande:&lt;/b&gt; När de väl får tillgång till ditt e-post-ID och lösenord använder de dessa uppgifter för att mata in dina sociala mediekonton. Detta är de misstänkta inloggningsförsöksvarningar du får från Instagram eller Facebook vid udda tider.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text5" xml:space="preserve">
+    <value>&lt;b&gt;3. Den digitala pengakuppen:&lt;/b&gt; Det blir allvarligt när någon får tillgång till ditt sociala medie- eller något annat konto. De skickar skräppost eller meddelanden till dina kontakter och ber om pengar eller att klicka på en länk. Detta syftar till att hacka fler konton eller stjäla pengar i ditt namn.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H5_Text6" xml:space="preserve">
+    <value>&lt;b&gt;4. Efterdyningarna:&lt;/b&gt; Detta händer när vänner, släktingar eller andra postar på sina Instagram-berättelser eller skickar direktmeddelanden som varnar för att eventuella pengaförfrågningar inte kommer från dem utan från en hackare eller bedragare som har fått tillgång till deras konto och kräver pengar. I de allra värsta fall exponeras arbetskonton, känslig företagsdata läcker ut, eller ryktesmässig skada.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text1" xml:space="preserve">
+    <value>Att upprätthålla god lösenordshygien kräver liten ansträngning, och att använda AxCrypts lösenordshanterare för att skapa starka, unika lösenord är en bra start.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text2" xml:space="preserve">
+    <value>Dessa lösenord undviker förutsägbara sekvenser och upprepade mönster, vilket minskar effekterna av dataintrång och risken för hacking på grund av återanvända lösenord.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text3" xml:space="preserve">
+    <value>Istället för att återanvända lösenord över olika plattformar, ladda ner appen för att säkert lagra alla dina lösenord, användarnamn och ID:n på ett krypterat ställe. Vi, som ett cybersäkerhetsföretag, innehar inte någon av din personliga information, data, filer eller känsligt material.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text4" xml:space="preserve">
+    <value>Vi använder &lt;b&gt;nollkunskapskryptering&lt;/b&gt;, vilket innebär att vår kryptografiska algoritm förhindrar att tredje part, angripare eller till och med oss själva har tillgång till dina krypterade filer och data.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text5" xml:space="preserve">
+    <value>Vi lagrar endast ditt ID och lösenord som en irreversibel hash så att du kan logga in för att komma åt din krypterade data.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text6" xml:space="preserve">
+    <value>En annan bästa praxis är att regelbundet uppdatera dina lösenord. Konton med högt värde som din e-post, bank- och arbetsuppgifter är digitalt guld för hackare. Att byta lösenord ofta med AxCrypt hjälper till att förhindra långsiktig utnyttjning.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text7" xml:space="preserve">
+    <value>Slutligen, undvik att använda födelsedagar, smeknamn eller lättgissad information i dina lösenord. Hackare förföljer dig i månader innan de gör ett drag, och Peter Svensson är ingenting jämfört med en skicklig hacker som också stalkar!</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H6_Text8" xml:space="preserve">
+    <value>De spårar ens rörelser online, som sidor man gillar, order man gör, ens foton online, bara för att knäcka lösenord eftersom de vet att det kan vara en kombination av dessa punkter, och detta är ett gammalt knep i deras repertoar.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text1" xml:space="preserve">
+    <value>Tvärtom är riskerna för återanvändning av lösenord verkliga och ökar.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text2" xml:space="preserve">
+    <value>Året är 2026, och en AI spelar en avgörande roll för både de goda och de onda i cyberversumet.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text3" xml:space="preserve">
+    <value>Allt som krävs är ett återanvänt lösenord för att kompromettera flera konton, vilket leder till identitetsstöld, ekonomiska förluster, yrkesmässiga konsekvenser, skadlig skada på ditt rykte och flera andra oåterkalleliga händelser.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text4" xml:space="preserve">
+    <value>Genom att använda unika lösenord och även använda lösenordshanterare för att föreslå superstarka unika lösenord tillsammans med tvåfaktorsautentisering, skyddar du dig själv från en mardröm med datahämtning. Dessa bästa metoder hjälper till att minska risken för återanvändning av lösenord, hacking och missbruk.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text5" xml:space="preserve">
+    <value>Kom ihåg att cybersäkerhet inte handlar om avancerade verktyg eller bara vanor och så kallade starka lösenord som 1234@#.</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text6" xml:space="preserve">
+    <value>I tider som detta är extra skydd i samband med att lita på din intuition, och viktigast av allt, att använda en pålitlig app som AxCrypt, väldigt viktigt.</value>
   </data>
   <data name="Blog_WPRIDHTS_Heading1" xml:space="preserve">
     <value>Det är en Risk du inte Har Råd att Ignorera!</value>
   </data>
   <data name="Blog_WPRIDHTS_Heading2" xml:space="preserve">
     <value>Varför är återanvändning av lösenord farligt?</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading3" xml:space="preserve">
+    <value>Hur Hackare Stjäl Lösenord?</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading4" xml:space="preserve">
+    <value>Exempel på verkliga lösenordsinntrång</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading5" xml:space="preserve">
+    <value>Dominoeffekten av Komprometterade Lösenord</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading6" xml:space="preserve">
+    <value>Hur man skyddar sig själv, och vilka är bästa praxis för lösenordssäkerhet man kan följa</value>
   </data>
   <data name="Blog_WPRIDHTS_Summary" xml:space="preserve">
     <value>Att återanvända lösenord är mycket farligare än man tror. Det kan verka som ett bekvämt alternativ, men i verkligheten gör man det alldeles för enkelt för hackare och angripare att ta kontroll över all ens data och information.</value>
@@ -12971,6 +13199,9 @@ AxCrypt är engagerade i att leverera kontinuerlig, förstklassig utbildning och
   </data>
   <data name="Blog_WPRIDHTS_Text3" xml:space="preserve">
     <value>Och att ha ett lösenord för alla verkar vara ett superenkelt alternativ, eller hur?</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Text4" xml:space="preserve">
+    <value>Att återanvända lösenord är mycket farligare än man kan tro. Det kan verka som ett bekvämt alternativ, men i verkligheten blir det alldeles för enkelt för hackare och angripare att ta kontroll över all din data och information. Det är nästan som att digitalt säga till dem "Kom in bara, vad sägs om en kopp te?"</value>
   </data>
   <data name="Blog_WPRIDHTS_Text5" xml:space="preserve">
     <value>Så varför är återanvändning av lösenord farligt?</value>
@@ -13683,8 +13914,50 @@ Och det viktigaste är:
   <data name="Blog_ZKEEIST_H3_Text1" xml:space="preserve">
     <value>Cyberhot blir alltid ständigt uppdaterade. De blir hela tiden mer sofistikerade och kostsamma, och med de växande hoten i cybervärlden har säkerheten inte råd att enbart förlita sig på reaktiva åtgärder.</value>
   </data>
+  <data name="Blog_ZKEEIST_H3_Text10" xml:space="preserve">
+    <value>När vi säger att vi är kraftfulla menar vi det, och dessutom skär vi igenom all komplexitet kring stark kryptering. Vi erbjuder dig enkel kryptering, maximalt skydd och förtroendet för nollkunskapskryptering, så att ingen får läsa dina data. Inte vi, inte hackern runt hörnet.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text11" xml:space="preserve">
+    <value>Med bara ett lösenord gör vi kryptering superenkel men ändå stark, med många andra intuitiva funktioner och automatiserat filskydd.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text12" xml:space="preserve">
+    <value>AxCrypt – en säkerhetsdesign, utformad för att minska mänskliga fel, eliminera friktion och skydda din data diskret men kraftfullt i bakgrunden.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text13" xml:space="preserve">
+    <value>Det är så här äkta Zero-Knowledge-kryptering och säkerhet ser ut.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text2" xml:space="preserve">
+    <value>Och det är så AxCrypt byggdes för denna verklighet.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text3" xml:space="preserve">
+    <value>På AxCrypt erbjuder vi inte säkerhet som en extra funktion, men det är grunden för allt vi gör. I flera år har vi hållit i stafettpinnen för stark säkerhet och lett vägen med nollkunskapskryptering, vilket säkerställer att endast du själv har rätt att komma åt dina filer.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text4" xml:space="preserve">
+    <value>Inte vi, inte tredje part, inte bakdörrarna, inte angriparna eller hackarna – bara du.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text5" xml:space="preserve">
+    <value>Så länge du kontrollerar dina lösenord kontrollerar du all din data.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text6" xml:space="preserve">
+    <value>Med detta tillvägagångssätt kan du vara säker på att även vid ett intrång är din data säker och förblir oläslig och oanvändbar utan rätt dekrypteringsnycklar. Det är inte bara ett tecken på stark säkerhet. Det är ett tecken på smartare säkerhet.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text7" xml:space="preserve">
+    <value>Under åren har AxCrypts pålitlighet stått sig över tid och förtroende. I över två decennier har vi sett miljontals användare från hela världen anförtro sina data till AxCrypt som deras väktare för känslig information.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text8" xml:space="preserve">
+    <value>Vi säkrar dina filer med den oknäckbara, branschledande AES-256-bitars krypteringen. Detta är utan tvekan en av de starkaste säkerhetsstandarderna som finns idag.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text9" xml:space="preserve">
+    <value>I en tid där cyberhot ser ofarliga ut men orsakar maximal skada, där de ser helt bekanta och övertygande ut, kan försiktighetsåtgärder inte komma med lösenord som 'qwerty123'. AxCrypt identifierade och förutsåg hotet för flera decennier sedan och står för att leverera konsekvent, pålitligt skydd som inte fallerar när du behöver det som mest.</value>
+  </data>
   <data name="Blog_ZKEEIST_H4_Text1" xml:space="preserve">
     <value>Med hjälp av AxCrypts krypteringsprogram kan du kryptera dina känsliga data på din dator eller smartphone med bara några få klick. AxCrypt är den äkta Zero-Knowledge-krypteringsprogramvaran med ett kraftfullt, lätt och superenkelt användargränssnitt.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H5_Text1" xml:space="preserve">
+    <value>Zero-Knowledge Encryption är en kraftfull datasäkerhetsteknik för dina känsliga data. Det kan säkerställa att data alltid är skyddade, även om de finns hos tredjepartsleverantörer som molnlagringstjänster eller företagsnätverk. Zero-Knowledge Kryptering fungerar som en första försvarslinje för dina känsliga filer, och det rekommenderas av kända institutioner som &lt;a href='https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-111.pdf'&gt;&lt;b&gt;NIST,&lt;/b&gt;&lt;/a&gt; &lt;a href='https://www.ibm.com/cloud/architecture/architecture/practices/data-security/'&gt;&lt;b&gt;IBM&lt;/b&gt;&lt;/a&gt;, &lt;a href='https://learn.microsoft.com/en-us/archive/msdn-magazine/2003/november/aes-keeping-your-data-secure-with-advance-encryption-standard'&gt;&lt;b&gt;Microsoft&lt;/b&gt;&lt;/a&gt; etc. för att skydda värdefulla data i vila.</value>
+  </data>
+  <data name="Blog_ZKEEIST_H5_Text2" xml:space="preserve">
+    <value>Genom att välja en robust programvara för filkryptering säkerställer du att dina filer är utrustade med kraftfulla åtgärder för att skydda dina känsliga data effektivt.  Oavsett om det är personliga filer, finansiella dokument eller känsliga affärsdata, säkerställer kryptering att även om obehörig åtkomst sker av dina filer, förblir dina data oläsliga och skyddade</value>
   </data>
   <data name="Blog_ZKEEIST_Heading1" xml:space="preserve">
     <value>Vad är Zero-Knowledge Kryptering?</value>
@@ -13694,6 +13967,9 @@ Och det viktigaste är:
   </data>
   <data name="Blog_ZKEEIST_Heading3" xml:space="preserve">
     <value>AxCrypt: Zero-Knowledge säkerhet för en digital värld med höga risker.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Heading4" xml:space="preserve">
+    <value>Hur Använder man Nollkunskapskryptering för Dina Filer?</value>
   </data>
   <data name="Blog_ZKEEIST_Summary" xml:space="preserve">
     <value>2025 var ett avgörande år för framsteg inom teknik- och IT-sektorn. Med snabba utvecklingar inom artificiell intelligens och maskininlärning har det blivit lättare än någonsin att utföra en cyberattack.</value>
@@ -13709,6 +13985,15 @@ Och det viktigaste är:
   </data>
   <data name="Blog_ZKEEIST_Text4" xml:space="preserve">
     <value>Vid det laget är nätverk komprometterade, data har infiltrerats, intrång inträffar och återställning blir en mardröm.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Text5" xml:space="preserve">
+    <value>Nästan 16 % av intrången började med en nätfiskeattack, och dessa intrång kostade ungefär 17 700 dollar per minut i skador. Med 1 876 attacker per kvartal och cybertrötthet som drabbar nästan hälften av organisationerna är proaktiva säkerhetsstrategier avgörande.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Text6" xml:space="preserve">
+    <value>Den goda nyheten är dock att känslig data proaktivt kan skyddas från cyberattacker med hjälp av kraftfulla datakrypteringstekniker. Kryptering av data med Zero-Knowledge-kryptering säkerställer att även om data läcker under ett intrång, kan den inte dechiffreres och kan inte användas utan rätt dekrypteringsnycklar.</value>
+  </data>
+  <data name="Blog_ZKEEIST_Text7" xml:space="preserve">
+    <value>I detta blogginlägg ska vi diskutera vad datakryptering med zero-knowledge-kryptering är, varför det är viktigt för datasäkerhet, hur man använder det och dess effektiva användningsområden.</value>
   </data>
   <data name="Blog_ZKEEIST_Title" xml:space="preserve">
     <value>Zero-Knowledge kryptering: Säkerheten Ni Kontrollerar.</value>
@@ -14665,6 +14950,9 @@ Du måste slutföra dessa steg för att processen skall fullföljas.</value>
   <data name="ChoosePrivateOrBusinessSignUpInfo" xml:space="preserve">
     <value>För att komma igång med ditt konto, välj om du avser att använda AxCrypt främst som privatperson eller företag.</value>
   </data>
+  <data name="ChooseUpTo " xml:space="preserve">
+    <value>Välj upp till {0} Användare</value>
+  </data>
   <data name="CityLabel" xml:space="preserve">
     <value>Stad:</value>
   </data>
@@ -14683,6 +14971,9 @@ Du måste slutföra dessa steg för att processen skall fullföljas.</value>
   </data>
   <data name="ClearAllText" xml:space="preserve">
     <value>Rensa alla</value>
+  </data>
+  <data name="ClearButtonText" xml:space="preserve">
+    <value>Klar</value>
   </data>
   <data name="ClearLogsText" xml:space="preserve">
     <value>Rensa Loggar</value>
@@ -15020,6 +15311,9 @@ Om du inte accepterar våra temporära sessionscookies kan du inte logga in och 
   </data>
   <data name="CookiesDisabledError" xml:space="preserve">
     <value>Cookies verkar vara inaktiverade i din webbläsare. Om du inte accepterar våra sessionscookies kan du inte logga in och sidan kan bete sig på ett oväntat sätt. Läs mer i vår &lt;a href="{0}"&gt;cookie policy&lt;/a&gt;.</value>
+  </data>
+  <data name="CopyEncryptedTextToClipboardTooltipText" xml:space="preserve">
+    <value>Kopiera krypterad text till urklipp</value>
   </data>
   <data name="CopyPlainTextClipboardText" xml:space="preserve">
     <value>Kopiera klartext till urklippstavlan</value>
@@ -15365,6 +15659,9 @@ Om du inte accepterar våra temporära sessionscookies kan du inte logga in och 
   </data>
   <data name="DaysLeftWarningToolTip" xml:space="preserve">
     <value>Ditt abonnemang går snart ut. Klicka för att förnya.</value>
+  </data>
+  <data name="DaysText" xml:space="preserve">
+    <value>Dagar</value>
   </data>
   <data name="DebugCheckVersionNowToolStripMenuItemText" xml:space="preserve">
     <value>Kolla Version Nu</value>
@@ -15719,6 +16016,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   </data>
   <data name="DownloadAxcryptLatestFeatures3" xml:space="preserve">
     <value>Tänk på att om du installerar AxCrypt 2 och öppnar gamla filer kommer dessa filer inte längre kunna öppnas i AxCrypt 1.</value>
+  </data>
+  <data name="DownloadEncryptedTextAsTxtTooltipText" xml:space="preserve">
+    <value>Ladda ner krypterad text som txt-fil</value>
   </data>
   <data name="DownloadHeroHeadingMac" xml:space="preserve">
     <value>AxCrypt för macOS</value>
@@ -18236,6 +18536,9 @@ Om du av någon anledning inte kommer ihåg lösenordet, måste du återställa 
   <data name="HomeSellingPointPasswordManagementHeading" xml:space="preserve">
     <value>Lösenordshantering</value>
   </data>
+  <data name="HomeSellingPointStrongEncryptionBody" xml:space="preserve">
+    <value>Zero-Knowledge Filsäkerhet med AES-256-algoritmen och öka säkerheten med multifaktorautentisering.</value>
+  </data>
   <data name="HomeSellingPointStrongEncryptionHeading" xml:space="preserve">
     <value>Stark Kryptering och Säker Åtkomst</value>
   </data>
@@ -19823,6 +20126,9 @@ Aktivera automatisk konvertering av AxCrypt 1.x-filer nu (rekommenderas)?</value
   <data name="MaximumNotExceedCharactersNotification" xml:space="preserve">
     <value>Texten får inte överstiga {0} karaktärer.</value>
   </data>
+  <data name="MaxUsersCountText" xml:space="preserve">
+    <value>Du kan inte lägga till fler användare än det maximala tillåtna ({0})</value>
+  </data>
   <data name="McErrVersionResource" xml:space="preserve">
     <value>Systemfel vid läsning av versionsresurs.</value>
     <comment>Internal use only. Do not translate.</comment>
@@ -20384,6 +20690,9 @@ Detta program är licensierat i enlighet med avtalet.
   </data>
   <data name="Meta-Description-Blog-WIPTFI2E" xml:space="preserve">
     <value>Läs mer om varför 256-bitars kryptering är det bästa valet för branscher för att skydda känsliga data. Upptäck dess oöverträffade säkerhetsfunktioner.</value>
+  </data>
+  <data name="Meta-Description-Blog-WPRIDHTS" xml:space="preserve">
+    <value>Att återanvända lösenord utsätter alla dina konton för risk. Lär dig hur hackare utnyttjar återanvända lösenord och upptäck bästa praxis för att hålla sig säker online.</value>
   </data>
   <data name="Meta-Description-Blog-WRDBTUAE" xml:space="preserve">
     <value>Utforska hur de senaste dataintrången belyser det kritiska behovet av robust kryptering. Lär er viktiga lärdomar för att skydda era data och förhindra framtida intrång.</value>
@@ -21018,6 +21327,9 @@ ladda ner krypteringsprogramvara,Kryptera filer,dekryptera filer,256-bitars kryp
   </data>
   <data name="Meta-Title-Blog-WIPTFI2E" xml:space="preserve">
     <value>Varför 256-bitars Kryptering Är Betrodd av Branscher</value>
+  </data>
+  <data name="Meta-Title-Blog-WPRIDHTS" xml:space="preserve">
+    <value>Varför återanvändning av lösenord är farligt och hur man håller sig säker 2026</value>
   </data>
   <data name="Meta-Title-Blog-WRDBTUAE" xml:space="preserve">
     <value>Lärdomar från de Senaste Dataintrången: Vikten av Kryptering</value>
@@ -21970,6 +22282,9 @@ För att återgå till startsidan klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</va
   <data name="OtherDetailsText" xml:space="preserve">
     <value>Vänligen uppge detaljer, om annat</value>
   </data>
+  <data name="OtherLogOptions" xml:space="preserve">
+    <value>Andra inloggningsalternativ</value>
+  </data>
   <data name="OtherMFAOptionsText" xml:space="preserve">
     <value>Prova andra MFA-alternativ</value>
   </data>
@@ -22213,6 +22528,9 @@ För att återgå till startsidan klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</va
   <data name="PasswordChangeText" xml:space="preserve">
     <value>Byte av lösenord</value>
   </data>
+  <data name="PasswordCharactersText" xml:space="preserve">
+    <value>8 tecken</value>
+  </data>
   <data name="PasswordEasyText" xml:space="preserve">
     <value>Enkelt</value>
   </data>
@@ -22252,6 +22570,9 @@ För att återgå till startsidan klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</va
   <data name="PasswordInformationText" xml:space="preserve">
     <value>Lösenordet måste innehålla minst 8 tecken</value>
   </data>
+  <data name="PasswordLowerCaseLetter" xml:space="preserve">
+    <value>1 liten bokstav</value>
+  </data>
   <data name="PasswordManagementListPageBody" xml:space="preserve">
     <value>Hantera alla dina lösenord online i molnet&lt;span class="text-cutoff"&gt; med AxCrypt Lösenordshantering, ditt kassaskåp på nätet för lösenord, pinkoder osv. Dina lösenord lagras säkert i ett krypterat arkiv och bara du har tillgång till dem, när som helst, var som helst. &lt;a class="hide-link"&gt;[Minimera]&lt;/a&gt;&lt;/span&gt;&lt;span class="text-cutoff-ellipsis"&gt;... &lt;a class="show-link"&gt;[Läs mer]&lt;/a&gt;&lt;/span&gt;</value>
   </data>
@@ -22279,6 +22600,9 @@ För att återgå till startsidan klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</va
   </data>
   <data name="PasswordModerateText" xml:space="preserve">
     <value>Moderera</value>
+  </data>
+  <data name="PasswordNumber" xml:space="preserve">
+    <value>1 siffra</value>
   </data>
   <data name="PasswordPolicyViolation" xml:space="preserve">
     <value>Lösenordet är för svagt för att kunna användas med AxCrypt.</value>
@@ -22351,6 +22675,9 @@ Beräkningen klassificerar sedan lösenordet i 4 nivåer, och vi godkänner inte
 Mellanslag och delar av ordet som består av vanliga lösenord bortses ifrån och adderar ingen extra styrka.</value>
     <comment>A shorter description of how password strength is evaluated.</comment>
   </data>
+  <data name="PasswordSpecialCharacter" xml:space="preserve">
+    <value>1 specialtecken som</value>
+  </data>
   <data name="PasswordStrengthBadName" xml:space="preserve">
     <value>Svagt</value>
     <comment>Short displayed name of "Bad" password status</comment>
@@ -22367,6 +22694,9 @@ Mellanslag och delar av ordet som består av vanliga lösenord bortses ifrån oc
     <value>Lösenordet är starkt och tillräckligt bra att rekommenderas.</value>
     <comment>Status 'Green'. This is a really good password!</comment>
   </data>
+  <data name="PasswordStrengthText" xml:space="preserve">
+    <value>Lösenordets Styrka</value>
+  </data>
   <data name="PasswordStrengthUnacceptableName" xml:space="preserve">
     <value>För svagt</value>
     <comment>Short displayed name of Unacceptable password status</comment>
@@ -22382,6 +22712,9 @@ Mellanslag och delar av ordet som består av vanliga lösenord bortses ifrån oc
   <data name="PasswordStrengthWeakTip" xml:space="preserve">
     <value>Lösenordet är för svagt för att vara rekommenderat.</value>
     <comment>Status 'Orange'. It's almost an ok password, but it's not good enough to be really recommended.</comment>
+  </data>
+  <data name="PasswordUpperCaseLetter" xml:space="preserve">
+    <value>1 versal</value>
   </data>
   <data name="PasswordUrlPrompt" xml:space="preserve">
     <value>URL</value>
@@ -24931,6 +25264,9 @@ Till: support@axcrypt.net
   <data name="SellingPointMultilingualHeading" xml:space="preserve">
     <value>Flerspråkig</value>
   </data>
+  <data name="SendEncryptedTextViaEmailTooltipText" xml:space="preserve">
+    <value>Skriv ett nytt mejl med krypterad text</value>
+  </data>
   <data name="SendFeedbackTitle" xml:space="preserve">
     <value>Skicka Feedback</value>
   </data>
@@ -24948,6 +25284,9 @@ Till: support@axcrypt.net
   </data>
   <data name="SentSecuredMessageNotificationText" xml:space="preserve">
     <value>Du har fått ett nytt säkrat meddelande!</value>
+  </data>
+  <data name="SentText" xml:space="preserve">
+    <value>Skickat</value>
   </data>
   <data name="ServerStatusLabel" xml:space="preserve">
     <value>Serverstatus</value>
@@ -25007,6 +25346,9 @@ Välj något som är svårt att gissa, eftersom det skyddar allt som har med AxC
   <data name="ShareAsLinkActionLabel" xml:space="preserve">
     <value>Dela som länk</value>
   </data>
+  <data name="ShareAsLinkActionText" xml:space="preserve">
+    <value>Dela som länk</value>
+  </data>
   <data name="SharedKeyUserListTitle" xml:space="preserve">
     <value>Alla användare med tillgång till utvalda filer ({0})</value>
   </data>
@@ -25023,6 +25365,12 @@ Välj något som är svårt att gissa, eftersom det skyddar allt som har med AxC
     <value>Du kommer att börja säker nyckeldelning med någon som har fått, men ännu inte verifierat en inbjudan att använda AxCrypt.
 
 Det kan vara lämpligt att informera '{0}' direkt om AxCrypt filskydd.</value>
+  </data>
+  <data name="ShareEncryptedTextAsLinkTooltipText" xml:space="preserve">
+    <value>Dela krypterad text via länk</value>
+  </data>
+  <data name="ShareEncryptedTextDialog" xml:space="preserve">
+    <value>Ställ in en utgångspunkt för att automatiskt stoppa åtkomsten efter en vald tidpunkt, vilket håller ditt delade innehåll säkert.</value>
   </data>
   <data name="ShareInviteMailBodyButton" xml:space="preserve">
     <value>Gå med i AxCrypt</value>
@@ -25172,6 +25520,9 @@ Det kan vara lämpligt att informera '{0}' direkt om AxCrypt filskydd.</value>
     <value>Español (Spanska)</value>
     <comment>Do Not Translate</comment>
   </data>
+  <data name="SpecificUsersText" xml:space="preserve">
+    <value>Specifika användare</value>
+  </data>
   <data name="SslRequiredPageBody" xml:space="preserve">
     <value>En krypterad SSL-förbindelse krävs. Försök igen med &lt;a href="{2}"&gt;{2}&lt;/a&gt; . 
  
@@ -25184,6 +25535,9 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   </data>
   <data name="StandardEncryptionWarning" xml:space="preserve">
     <value>Din nuvarande viewer-prenumeration tillåter endast visning och dekryptering</value>
+  </data>
+  <data name="StandardEncryptionWarningText1" xml:space="preserve">
+    <value>Klicka här för att låsa upp &lt;span&gt;starkare och obegränsade krypteringsfunktioner&lt;/span&gt; !</value>
   </data>
   <data name="StandardEncryptionWarningText2" xml:space="preserve">
     <value>Ditt nuvarande grundläggande abonnemang använder AES-128-kryptering</value>
@@ -25259,6 +25613,9 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   </data>
   <data name="StrongerProtectionText" xml:space="preserve">
     <value>Uppgradera för starkare skydd!</value>
+  </data>
+  <data name="StrongPasswordAtleastText" xml:space="preserve">
+    <value>Starkt lösenord innehåller minst</value>
   </data>
   <data name="StrongPasswordLabel" xml:space="preserve">
     <value>Starkt lösenord</value>
@@ -25509,8 +25866,17 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Svenska</value>
   </data>
+  <data name="SwitchToDarkActionText" xml:space="preserve">
+    <value>Byt till Mörkt Läge</value>
+  </data>
+  <data name="SwitchToLightActionText" xml:space="preserve">
+    <value>Byt till Ljust Läge</value>
+  </data>
   <data name="SwitchUserButtonText" xml:space="preserve">
     <value>Byt användare</value>
+  </data>
+  <data name="SwitchUserPopupText" xml:space="preserve">
+    <value>Välj det &lt;b&gt;konto&lt;/b&gt; du vill byta till</value>
   </data>
   <data name="SyncContactsText" xml:space="preserve">
     <value>Synkronisera kontakter!</value>
@@ -25905,6 +26271,21 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   <data name="TextEncryptionFaq9Ans" xml:space="preserve">
     <value>AxCrypt &lt;b&gt;kan inte återställa ditt lösenord&lt;/b&gt; eftersom vi inte har tillgång till det. För att undvika att förlora åtkomsten rekommenderar vi att du lagrar ditt lösenord säkert i en betrodd lösenordshanterare.</value>
   </data>
+  <data name="TextEncryptionGuideshareHead1" xml:space="preserve">
+    <value>'Kopiera'-knappen</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead2" xml:space="preserve">
+    <value>Ladda ner som .TXT</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead3" xml:space="preserve">
+    <value>Skicka via e-post</value>
+  </data>
+  <data name="TextEncryptionGuideshareHead4" xml:space="preserve">
+    <value>Dela som en Säker Länk</value>
+  </data>
+  <data name="TextEncryptionGuidesHeadParagraph" xml:space="preserve">
+    <value>AxCrypt låter dig kryptera ren text på några sekunder. Mata helt enkelt in sms:et, säkra det med ditt kontolösenord eller ett eget lösenord, och dela det krypterade resultatet via e-post, privata meddelanden och mer.</value>
+  </data>
   <data name="TextEncryptionGuidesHeadTitle" xml:space="preserve">
     <value>Guide &lt;span&gt;för Textkryptering&lt;/span&gt;, Delning och Dekryptering</value>
   </data>
@@ -25932,11 +26313,35 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   <data name="TextEncryptionGuideStepText13" xml:space="preserve">
     <value>Din krypterade text kommer att dekrypteras och originaltexten visas nedan.</value>
   </data>
+  <data name="TextEncryptionGuideStepText14" xml:space="preserve">
+    <value>&lt;b&gt;Viktiga Anmärkningar: &lt;/b&gt;</value>
+  </data>
   <data name="TextEncryptionGuideStepText15" xml:space="preserve">
     <value>Klicka på &lt;b&gt; Dekryptera&lt;/b&gt;</value>
   </data>
+  <data name="TextEncryptionGuideStepText16" xml:space="preserve">
+    <value>Klicka &lt;b&gt; på Kryptera&lt;/b&gt;</value>
+  </data>
+  <data name="TextEncryptionGuideStepText17" xml:space="preserve">
+    <value>Använd &lt;b&gt;Dela som länk&lt;/b&gt; för att skapa en säker, tidsbegränsad länk till din krypterade text. &lt;br/&gt;Välj om länken kan nås av &lt;b&gt;vem&lt;/b&gt; som helst eller endast &lt;b&gt;specifika användare&lt;/b&gt; (Nya användare får ett inbjudningsmail, och efter att filen delats ett notifikationsmejl med åtkomstlänken).&lt;br/&gt; Lägg till upp till &lt;b&gt;3 specifika e-postadresser&lt;/b&gt; för begränsad åtkomst</value>
+  </data>
+  <data name="TextEncryptionGuideStepText18" xml:space="preserve">
+    <value>Sätt &lt;b&gt;en utgångstid&lt;/b&gt; (till exempel 1 timme)</value>
+  </data>
+  <data name="TextEncryptionGuideStepText19" xml:space="preserve">
+    <value>Dela länken med förtroende, med vetskapen om att åtkomsten är kontrollerad och tillfällig</value>
+  </data>
   <data name="TextEncryptionGuideStepText2" xml:space="preserve">
     <value>Från menyn, välj &lt;b&gt;Textkryptering.&lt;/b&gt;</value>
+  </data>
+  <data name="TextEncryptionGuideStepText20" xml:space="preserve">
+    <value>Detta alternativ är idealiskt när du vill ha säker delning utan att skicka filer eller kopiera långa krypterade textblock.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText21" xml:space="preserve">
+    <value>Om den krypterade texten delades med alternativet &lt;b&gt;Vem som helst&lt;/b&gt; måste du ange det &lt;b&gt;anpassade lösenord&lt;/b&gt; som avsändaren angav för att dekryptera innehållet.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText22" xml:space="preserve">
+    <value>Om texten delades med dig som &lt;b&gt;Specifik användare&lt;/b&gt; krävs inget lösenord, du kan dekryptera innehållet direkt med den säkra länken.</value>
   </data>
   <data name="TextEncryptionGuideStepText3" xml:space="preserve">
     <value>Klicka &lt;b&gt;på Kryptera Text.&lt;/b&gt;</value>
@@ -25949,6 +26354,15 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   </data>
   <data name="TextEncryptionGuideStepText6" xml:space="preserve">
     <value>&lt;b&gt;Notera:&lt;/b&gt; Du kan välja ett anpassat lösenord som är starkt och lätt att komma ihåg, för att kryptera och dekryptera denna text.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText7" xml:space="preserve">
+    <value>Klicka på Kopiera-knappen för att omedelbart kopiera den krypterade texten till ditt urklipp. Man kan sedan klistra in den i vilken app eller plattform som helst, såsom meddelandeappar, dokument eller chattfönster för snabb och enkel delning.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText8" xml:space="preserve">
+    <value>Välj alternativet Ladda ner som .TXT för att spara den krypterade texten som en .txt fil på din enhet. Denna fil kan delas via e-post, molnlagring, meddelandeplattformar eller någon annan metod du föredrar.</value>
+  </data>
+  <data name="TextEncryptionGuideStepText9" xml:space="preserve">
+    <value>Välj Skicka via e-post för att dela den krypterade texten direkt via e-post. Detta alternativ ger ett enkelt alternativ till traditionell e-postkryptering genom att automatiskt infoga det krypterade innehållet åt dig.</value>
   </data>
   <data name="TextEncryptionGuideTips1" xml:space="preserve">
     <value>🔐 &lt;b&gt;Håll ditt lösenord säkert:&lt;/b&gt; Dela det endast med avsedda mottagare och undvik att skicka det via osäkra kanaler.</value>
@@ -26132,6 +26546,36 @@ AxCrypt-teamet</value>
   <data name="TryPremiumToolTip" xml:space="preserve">
     <value>Du har inte den högsta säkerhetsnivån. Klicka för att prova Premium gratis nu!</value>
     <comment>A tooltip explaining that a user can get a free trial of premium by clicking on the link.</comment>
+  </data>
+  <data name="TryUpgradePlanActivationInstantText" xml:space="preserve">
+    <value>Välj den prenumeration som passar dina behov. Aktiveringen är omedelbar</value>
+  </data>
+  <data name="TryUpgradePlanCancelAnytimeText" xml:space="preserve">
+    <value>Avboka när som helst innan provperioden är slut.</value>
+  </data>
+  <data name="TryUpgradePlanFeatureText1" xml:space="preserve">
+    <value>Obegränsad Stark Kryptering</value>
+  </data>
+  <data name="TryUpgradePlanFeatureText2" xml:space="preserve">
+    <value>Mapp- och Molnkryptering</value>
+  </data>
+  <data name="TryUpgradePlanFeatureText5" xml:space="preserve">
+    <value>Affärskrypteringsverktyg</value>
+  </data>
+  <data name="TryUpgradePlanNoChargesText" xml:space="preserve">
+    <value>Inga avgifter idag. Avsluta när som helst innan provperioden är slut.</value>
+  </data>
+  <data name="TryUpgradePlanSubTitleText1" xml:space="preserve">
+    <value>Med &lt;span&gt;{0}&lt;/span&gt; Lås upp:</value>
+  </data>
+  <data name="TryUpgradePlanTitle1" xml:space="preserve">
+    <value>Vi märkte att du inte har någon prenumeration, du kan prova &lt;span&gt;gratis i 14 dagar!&lt;/span&gt;</value>
+  </data>
+  <data name="TryUpgradePlanTitle2" xml:space="preserve">
+    <value>Lås upp komplett skydd &lt;span&gt;gratis i 14 dagar!&lt;/span&gt;</value>
+  </data>
+  <data name="TryUpgradePlanTitle3" xml:space="preserve">
+    <value>Återaktivera Fullt Skydd</value>
   </data>
   <data name="TSTMNL_Business_BSALP_Text3" xml:space="preserve">
     <value>Våra kunder lägger ut installation och drift av sin IT-miljö till oss. Det är därför oerhört viktigt att denna information skyddas på bästa möjliga sätt och med de senaste metoderna. AxCrypt hjälper oss att arbeta med en hög skyddsnivå men ändå på ett enkelt och effektivt sätt.
@@ -26327,6 +26771,15 @@ AxCrypt-teamet</value>
   <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
     <value>&lt;strong&gt;Uppgradera för att låsa upp fullständiga krypteringsfunktioner!&lt;/strong&gt;</value>
   </data>
+  <data name="UpgradeVersionDialogText" xml:space="preserve">
+    <value>Vill du ladda ner det nu eller vid nästa lansering?</value>
+  </data>
+  <data name="UpgradeVersionDialogText1" xml:space="preserve">
+    <value>Ja, ladda ner nu!</value>
+  </data>
+  <data name="UpgradeVersionDialogText2" xml:space="preserve">
+    <value>Nej, senare</value>
+  </data>
   <data name="UpsellBusinessForNotStandardPremiumUsersText" xml:space="preserve">
     <value>Det verkar som att du kommer från ett företag. Överväg att använda våran Business nivå för att få funktioner som huvudnyckel, företagsadministration etc.</value>
   </data>
@@ -26474,6 +26927,9 @@ AxCrypt-teamet</value>
   <data name="UseNecessaryCookiesOnlyPromptText" xml:space="preserve">
     <value>Använd bara nödvändiga cookies</value>
   </data>
+  <data name="UserActivitiesText" xml:space="preserve">
+    <value>Användaraktiviteter</value>
+  </data>
   <data name="UserActivityTitle" xml:space="preserve">
     <value>Användaraktivitet</value>
   </data>
@@ -26494,6 +26950,9 @@ AxCrypt-teamet</value>
   </data>
   <data name="UserSettingsFormatChangeNeedsReset" xml:space="preserve">
     <value>Du har uppdaterat AxCrypt. Dessfärre måste dina inställningar återställas. Efter omstart av AxCrypt kommer inställningarna återgå till utgångsläget. Vi ber om ursäkt för besväret. Dina skyddade filer är lika säkra som alltd.</value>
+  </data>
+  <data name="UsersWithAccessText" xml:space="preserve">
+    <value>Användare med åtkomst{0}</value>
   </data>
   <data name="usingText" xml:space="preserve">
     <value>användande</value>
@@ -27236,6 +27695,9 @@ i %TEMP%.</value>
   </data>
   <data name="YEAR_2024" xml:space="preserve">
     <value>2024</value>
+  </data>
+  <data name="YEAR_2025" xml:space="preserve">
+    <value>2025</value>
   </data>
   <data name="YearlyDiscountLabel" xml:space="preserve">
     <value>Årlig rabatt</value>
