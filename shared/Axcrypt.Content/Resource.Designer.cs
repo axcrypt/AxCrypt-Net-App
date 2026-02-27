@@ -25862,6 +25862,501 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No More Workarounds. No More Compromises..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Conclusion_Heading {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Conclusion_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linux users…it is time!.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Conclusion_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Conclusion_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For long now, you have spent time in the darkness, wondering what good security felt like..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Conclusion_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Conclusion_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The wait is over, and we bring you an &lt;b&gt;easy-to-use&lt;/b&gt;, zero-knowledge, end-to-end encryption to the platform built for people who take security seriously..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Conclusion_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Conclusion_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No more workarounds. No more compromises. Just strong, industry-standard encryption that puts you fully in control of your data..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Conclusion_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Conclusion_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download AxCrypt for Linux today and experience security done right..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Conclusion_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Conclusion_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;a href=&apos;https://axcrypt.net/betadownload/&apos;&gt;Start your free trial now&lt;/a&gt;..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Conclusion_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Conclusion_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To begin encrypting files on your Linux system, you must install the latest version from the website..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1. Click on ‘Stop Secure’.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2. This will take you to the file selection window, where you can select the encrypted file you want to decrypt..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text11 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3. Your file is now decrypted..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text12 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Method 2:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text13 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1. In the application, under recent files, locate the file you want to decrypt, select the file and hit ‘Stop Securing’..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text14 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2. Your file is now decrypted..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text15 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Method 3:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text16 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1. In the application, under recent files, locate the file you want to decrypt and select it and right-click on it..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text17 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2. Scroll down to find ‘Stop Securing and Remove from the list.’.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text18 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;a href=&apos;https://axcrypt.net/betadownload/&apos;&gt;&lt;b&gt;Click here to install&lt;/b&gt;&lt;/a&gt;..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Encrypting a file with AxCrypt for Linux&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1. Log in with you registered AxCrypt email ID and password..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2. Click on ‘Secure’, and the file selection window will open..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3. Choose the file you want to encrypt and click on Open..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4. The file will then appear on the recent files section of the application, and your file is encrypted with AxCrypt’s encryption..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;3 Simple ways of Decrypting your AxCrypt Encrypted File:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Method 1:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H1_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H1_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Need a solid way to protect files on Linux? Here’s a solution that matters..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H2_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H2_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt’s Linux data security upgrade goes beyond basic protection, showing strong security governance where compliance leads..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H2_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H2_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By applying consistent standards-based encryption on Linux, AxCrypt helps meet regulatory demands without operational hassle..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H2_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H2_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It offers AES-256 encryption, &lt;b&gt;easy-to-use&lt;/b&gt;, end-to-end protection, and a strong Zero-knowledge model..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H2_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H2_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sensitive data stays encrypted at rest and in transit. Access is limited to authorised users, and encryption keys are fully user-controlled, reducing exposure and third-party risk..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_H2_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_H2_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How to Encrypt Files and Folders on Linux with AxCrypt.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Heading1 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Heading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On the Contrary: More Than an Encryption Tool but A Security Standard.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Heading2 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Heading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Over the years, Linux users who implemented workaround solutions to decrypt their .axx files ran around in circles with frustrating moments like switching systems, using alternatives and adopting entirely different encryption stacks, only to be disappointed about how these files were not as easy to open as they expected..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Summary {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Over the years, Linux users who implemented workaround solutions to decrypt their .axx files ran around in circles with frustrating moments like switching systems, using alternatives and adopting entirely different encryption stacks, only to be disappointed about how these files were not as easy to open as they expected.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text1 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;AxCrypt closes a long-standing loop and brings you the same feel and intuition of unmatched digital security, along with file compatibility and native experiences.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text10 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linux users! The wait is over..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text11 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No backdoors. No hidden access. No “trust us” middle ground..
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text12 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With AxCrypt coming to LINUX OS, here’s what users get:.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text13 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key features:.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text14 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li style=&apos;margin-left:30px;&apos;&gt;&lt;b&gt;AES-256-bit encryption&lt;/b&gt; is an industry-standard for secure files, and with the Linux upgrade, security became smoother, faster, and tighter.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text15 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li style=&apos;margin-left:30px;&apos;&gt;&lt;b&gt;End-to-end encryption&lt;/b&gt; that ensures your data, information or any file you share is protected at rest and in transit.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text16 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li style=&apos;margin-left:30px;&apos;&gt;&lt;b&gt;Easy to use&lt;/b&gt;, fits Linux workflows without complex setups or steep learning curves.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text17 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li style=&apos;margin-left:30px;&apos;&gt;&lt;b&gt;Key Sharing&lt;/b&gt; lets you securely share encrypted files and keys with trusted users without exposing data.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text18 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li style=&apos;margin-left:30px;&apos;&gt;&lt;b&gt;Zero-Knowledge Security and encryption&lt;/b&gt; ensure only you can access your encrypted data; AxCrypt has no access.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text19 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;We heard you through the forums and requests.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text2 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li style=&apos;margin-left:30px;&apos;&gt;&lt;b&gt;Password Manager&lt;/b&gt; stores all passwords, notes, and card details safely in one place.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text20 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;li style=&apos;margin-left:30px;&apos;&gt;&lt;b&gt;Cross-platform compatibility&lt;/b&gt; lets you access and secure files on any operating system.&lt;/li&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text21 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;While AskUbuntu threads inquired about how to decrypt AxCrypt files, Linux Mint discussions suggested workarounds. If that wasn’t adding insult to injury, Reddit users suggested Wine alternatives, which didn&apos;t really feel like a solution. It felt like a patch, and it did not deliver the authentic AxCrypt encryption experience.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text3 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;The message was loud, and it was:&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text4 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Linux users didn’t want hacks; they definitely didn’t want the compatibility gymnastics. They wanted the real deal – the native, reliable way to decrypt and encrypt AxCrypt files, the AxCrypt way.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text5 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;This gap was bridged and sealed, for good.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text6 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Encryption is not just about complicated mathematical operations and algorithms. It is also about accessibility, usability, and the sheer smoothness of cross-platform compatibility.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text7 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Developers, privacy-conscious professionals, and cross-platform teams needed file-level encryption that worked seamlessly and intuitively in Linux environments with CLI support, compatibility with existing .axx files, and without disrupting workflows and tandem.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text8 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;That conversation is now over.&lt;/b&gt;.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Text9 {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Text9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Introducing AxCrypt for Linux (Beta Version): Secure File Encryption Built for Linux Users.
+        /// </summary>
+        public static string Blog_IALBSFEBLU_Title {
+            get {
+                return ResourceManager.GetString("Blog_IALBSFEBLU_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to As we adjust to a new work environment that no one may ever have envisioned, the pandemic has disturbed organizations and led human resources managers to rethink how to perform their duties. HR professionals are worried not just about their employees&apos; health and well-being during the epidemic, but also about processing paperwork in a secure manner and providing comfort to the millions of people who have been laid off or working remotely..
         /// </summary>
         public static string Blog_ICSHRS_H1_Text1 {
@@ -42941,6 +43436,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Selected.
+        /// </summary>
+        public static string ClearSelectedText {
+            get {
+                return ResourceManager.GetString("ClearSelectedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click to check for a newer version..
         /// </summary>
         public static string ClickToCheckForNewerVersionTooltip {
@@ -55344,6 +55848,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your vault folder is currently unavailable. &lt;br/&gt;&lt;br/&gt;It may have been moved or deleted. Please check the folder location or choose a different vault..
+        /// </summary>
+        public static string InvalidVaultFolderErrorMessage {
+            get {
+                return ResourceManager.GetString("InvalidVaultFolderErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The configured Vault folder path is either invalid or inaccessible. Update the Vault settings with a valid path to continue..
         /// </summary>
         public static string InvalidVaultSetting {
@@ -58760,7 +59273,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try AxCrypt Beta with upgraded AES-256 encryption, sleek new design, and built-in password manager. Download now for Windows and macOS..
+        ///   Looks up a localized string similar to Try AxCrypt Beta with upgraded AES-256 encryption, sleek new design, and built-in password manager. Download now for Windows, Linux and macOS..
         /// </summary>
         public static string Meta_Description_Beta_Download {
             get {
@@ -59413,6 +59926,15 @@ namespace AxCrypt.Content {
         public static string Meta_Description_Blog_HTSSPWYFC {
             get {
                 return ResourceManager.GetString("Meta-Description-Blog-HTSSPWYFC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protect sensitive files on Linux with AxCrypt. Native encryption, CLI support, AES-256 security, and full compatibility—built for developers and teams..
+        /// </summary>
+        public static string Meta_Description_Blog_IALBSFEBLU {
+            get {
+                return ResourceManager.GetString("Meta-Description-Blog-IALBSFEBLU", resourceCulture);
             }
         }
         
@@ -60659,7 +61181,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download AxCrypt Beta – New File Encryption for Windows &amp; Mac.
+        ///   Looks up a localized string similar to Download AxCrypt Beta – New File Encryption for Windows, Linux &amp; Mac.
         /// </summary>
         public static string Meta_Title_Beta_Download {
             get {
@@ -61312,6 +61834,15 @@ namespace AxCrypt.Content {
         public static string Meta_Title_Blog_HTSSPWYFC {
             get {
                 return ResourceManager.GetString("Meta-Title-Blog-HTSSPWYFC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Linux App: Native File Encryption &amp; Decryption Made Easy.
+        /// </summary>
+        public static string Meta_Title_Blog_IALBSFEBLU {
+            get {
+                return ResourceManager.GetString("Meta-Title-Blog-IALBSFEBLU", resourceCulture);
             }
         }
         
@@ -74072,15 +74603,6 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your current basic plan uses AES-128 encryption.
-        /// </summary>
-        public static string StandardEncryptionWarningText2 {
-            get {
-                return ResourceManager.GetString("StandardEncryptionWarningText2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Standards based cryptography.
         /// </summary>
         public static string StandardsBasedLabel {
@@ -77486,24 +78008,6 @@ namespace AxCrypt.Content {
         public static string UnlockFullEncryptionFeaturesText {
             get {
                 return ResourceManager.GetString("UnlockFullEncryptionFeaturesText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Discover the amazing features we designed to empower your mobile encryption with our &lt;b&gt;subscriptions right now or after 14-days free trial&lt;/b&gt;..
-        /// </summary>
-        public static string UnlockMagicalFeaturesDescription {
-            get {
-                return ResourceManager.GetString("UnlockMagicalFeaturesDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unlock our magical features!.
-        /// </summary>
-        public static string UnlockMagicalFeaturesTitle {
-            get {
-                return ResourceManager.GetString("UnlockMagicalFeaturesTitle", resourceCulture);
             }
         }
         
