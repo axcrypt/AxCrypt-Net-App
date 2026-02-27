@@ -374,7 +374,6 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
                 if (string.IsNullOrEmpty(actualFileItem.ParentPath))
                 {
-
                     uploadSession = await _graphClient.Drives[_userDriveId].Root
                         .ItemWithPath(fileName).CreateUploadSession.PostAsync(uploadProps);
 

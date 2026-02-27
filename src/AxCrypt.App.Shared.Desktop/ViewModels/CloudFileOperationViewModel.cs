@@ -303,7 +303,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
 
         private async Task<bool> UploadEncryptedFileAsync(FilePickerItemViewModel fileItem, ActiveFile encryptedFile)
         {
-            fileItem.FileID = fileItem.DestinationPath + encryptedFile.EncryptedFileInfo.Name;
+            fileItem.FileID = fileItem.ParentPath + "/" + encryptedFile.EncryptedFileInfo.Name;
+
             string newFileId = await _fileProviderService.MoveFile(
                             fileItem,
                             encryptedFile.EncryptedFileInfo.Name,

@@ -4,9 +4,9 @@ using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.UI.ViewModels;
 using AxCrypt.App.Shared.Utility;
-using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Content;
 using AxCrypt.Core;
+using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -71,9 +71,9 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
 
         public string PageTitle { get; set; } = "";
 
-        public string SelectedFilePath { get; set; } = "";
+        public string SelectedProviderImage { get; set; } = "";
 
-        public string SelectedCloudProvider { get; set; } = "";
+        public FileProvider SelectedCloudProvider { get; set; }
 
         public string CurrentFolder
         {
@@ -133,7 +133,8 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             CurrentFolder = _fileProviderService.PageTitle;
             SelectedFileOperation = _fileProviderService.SelectedFileOperation;
             Files = new ObservableCollection<FilePickerItemViewModel>(_fileProviderService.Files);
-            SelectedCloudProvider = _fileProviderSelectionViewModel.SelectedFileProvider?.Image ?? "";
+            SelectedProviderImage = _fileProviderSelectionViewModel.SelectedFileProvider?.Image ?? "";
+            SelectedCloudProvider = _fileProviderSelectionViewModel.SelectedFileProvider!.Value;
 
             MultiSelectEnabled = false;
             SelectedFiles = new List<FilePickerItemViewModel>();
@@ -302,21 +303,25 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
                         warningTitle = "Cannot Open File";
                         warningMessage = "Only encrypted file can be opened in this application. The selected file does not appear to be encrypted.";
                         break;
+
                     case FileOperationOption.Encrypt:
                         selectedFileItems = selectedFileItems.Where(item => !item.FileName.Contains(OS.Current.AxCryptExtension));
                         warningTitle = "Already Encrypted";
                         warningMessage = "One or more selected files may already be encrypted.";
                         break;
+
                     case FileOperationOption.Decrypt:
                         selectedFileItems = selectedFileItems.Where(item => item.FileName.Contains(OS.Current.AxCryptExtension));
                         warningTitle = "Not an Encrypted File";
                         warningMessage = "One or more selected files are not recognized as encrypted. Only encrypted file(s) can be decrypted.";
                         break;
+
                     case FileOperationOption.ShareKey:
                         selectedFileItems = selectedFileItems.Where(item => item.FileName.Contains(OS.Current.AxCryptExtension));
                         warningTitle = "Cannot Share Key";
                         warningMessage = "One or more selected files are not recognized as encrypted. Only encrypted file(s) can use Share Keys.";
                         break;
+
                     default:
                         break;
                 }
@@ -383,7 +388,11 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
 
         public async Task NavigateBackToPath(string folderId)
         {
-            if (folderId == "root")
+            SelectedFiles.Clear();
+            MultiSelectEnabled = false;
+            FolderItem folder = OpenedFoldersList.FirstOrDefault(ofl => ofl.FileID == folderId)!;
+
+            if (folderId == "root" || folder == null)
             {
                 await _fileProviderService.ListFilesAsync();
                 Files = new ObservableCollection<FilePickerItemViewModel>(
@@ -395,12 +404,6 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
                 return;
             }
 
-            FolderItem folder = OpenedFoldersList.FirstOrDefault(ofl => ofl.FileID == folderId)!;
-            if (folder == null)
-            {
-                return;
-            }
-
             await _fileProviderService.ListFilesAsync(folder.FileID);
             Files = new ObservableCollection<FilePickerItemViewModel>(
                 _fileProviderService.Files
@@ -409,8 +412,8 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             int index = OpenedFoldersList.FindIndex(ofl => ofl.FileID == folderId);
             OpenedFoldersList.RemoveRange(index + 1, OpenedFoldersList.Count - (index + 1));
 
-            CurrentFolder = folder.ParentDirectory;
-            CurrentFolderID = folder.ParentDirectoryID;
+            CurrentFolder = folder.DirectoryName;
+            CurrentFolderID = folder.FileID;
         }
 
         private void RedirectToMainScreen()

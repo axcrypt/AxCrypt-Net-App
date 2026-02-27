@@ -57,8 +57,10 @@ public class DesktopFilePickerViewModel(
         }
 
         FolderItem CurrentCloudFolder = OpenedFoldersList.LastOrDefault()!;
+        string currentFolderId = CurrentCloudFolder == null ? "" : CurrentCloudFolder.FileID;
 
-        string currentFolderId = CurrentCloudFolder == null ? "/" : CurrentCloudFolder.FileID + "/";
+        if (SelectedCloudProvider == FileProvider.OneDrive)
+            currentFolderId = OpenedFoldersList.Any() ? string.Join("/", OpenedFoldersList.Select(f => f.DirectoryName)) : "";
 
         foreach (string file in _selectedFiles)
         {
@@ -69,7 +71,7 @@ public class DesktopFilePickerViewModel(
                 FileName = fileContainer.Name,
                 IsFolder = fileContainer.IsFolder,
                 FileExtension = System.IO.Path.GetExtension(fileContainer.FullName),
-                DestinationPath = currentFolderId.ToLower(),
+                ParentPath = currentFolderId,
                 Source = FileProvider.Local,
             };
 

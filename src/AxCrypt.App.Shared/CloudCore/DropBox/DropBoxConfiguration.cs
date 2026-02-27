@@ -1,18 +1,12 @@
 ﻿using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.CloudCore.DropBox
 {
     public class DropBoxConfiguration
     {
-        private static string _redirectUrl;
-        private static DeviceCategory _deviceType;
-
-        public static void Initialize(ICloudDriveConfiguration config)
-        {
-            _redirectUrl = config.RedirectUrl;
-            _deviceType = config.CurrentDeviceCategory;
-        }
+        private static DeviceCategory _deviceType => New<ICloudDriveConfiguration>().CurrentDeviceCategory;
 
         public static readonly string ClientIdOrAppKey = "omrx7hccdskf45r";
 
@@ -21,7 +15,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
         public static readonly string AuthorizeUrl = "https://www.dropbox.com/oauth2/authorize";
         public static readonly string AccessTokenUrl = "https://api.dropboxapi.com/oauth2/token";
 
-        public static string RedirectUrl => _redirectUrl;
+        public static string RedirectUrl => New<ICloudDriveConfiguration>().RedirectUrl;
 
         public static int ChunkFileSize =>
         _deviceType switch

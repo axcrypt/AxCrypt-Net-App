@@ -351,6 +351,11 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                 Name = fileInfo.Name
             };
 
+            if (!string.IsNullOrEmpty(actualFileItem.ParentPath))
+            {
+                fileMetadata.Parents = new List<string> { actualFileItem.ParentPath };
+            }
+
             if (_files.Any(f => f.FileID == actualFileItem.FileID))
             {
                 GetRequest getRequest = _driveService!.Files.Get(actualFileItem.FileID);
@@ -401,6 +406,16 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                         if (progress.Status == UploadStatus.Completed)
                         {
                             return createRequest.ResponseBody.Id;
+                        }
+
+                        if (progress.Status == UploadStatus.Failed)
+                        {
+                            retryCount++;
+
+                            Console.WriteLine($"Upload failed: {progress.Exception?.Message}");
+
+                            await Task.Delay(2000, ct);
+                            continue;
                         }
                     }
                     catch (Exception ex) when (IsNetworkError(ex))

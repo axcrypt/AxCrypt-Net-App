@@ -1,18 +1,13 @@
 ﻿using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.CloudCore.OneDrive
 {
     public class OneDriveConfiguration
     {
-        private static string _redirectUrl;
-        private static DeviceCategory _deviceType;
-
-        public static void Initialize(ICloudDriveConfiguration config)
-        {
-            _redirectUrl = config.RedirectUrl;
-            _deviceType = config.CurrentDeviceCategory;
-        }
+        private static string _redirectUrl => New<ICloudDriveConfiguration>().RedirectUrl;
+        private static DeviceCategory _deviceType => New<ICloudDriveConfiguration>().CurrentDeviceCategory;
 
         public static readonly string AUTHORIZE_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
 
@@ -37,7 +32,5 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
             _ when _deviceType == DeviceCategory.Windows || _deviceType == DeviceCategory.Mac => 16 * 1024 * 102,
             _ => 8 * 1024 * 102
         };
-
-        public new static DeviceCategory DeviceType => _deviceType;
     }
 }

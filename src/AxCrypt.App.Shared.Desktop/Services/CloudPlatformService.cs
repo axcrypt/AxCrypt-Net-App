@@ -10,7 +10,7 @@ namespace AxCrypt.App.Shared.Desktop.Services
     {
         public async Task InitializeCloudAuth(OAuth2Auth OAuth2Authenticator)
         {
-            Task OAuthListenerTask = GoogleAuthInterceptor.ListenForOAuthRedirectAsync(OAuth2Authenticator!.RedirectUrl.ToString());
+            Task OAuthListenerTask = CloudDriveAuthInterceptor.ListenForOAuthRedirectAsync(OAuth2Authenticator!.RedirectUrl.ToString());
             Uri authUrl = new Uri(OAuth2Authenticator!.AuthUrl);
             await Browser.OpenAsync(OAuth2Authenticator!.AuthUrl, BrowserLaunchMode.External);
             await OAuthListenerTask;

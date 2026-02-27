@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AxCrypt.App.Shared.Desktop.Services
 {
-    public static class GoogleAuthInterceptor
+    public static class CloudDriveAuthInterceptor
     {
         private static HttpListener? _httpListener;
         private static Task<HttpListenerContext>? _listenerTask;

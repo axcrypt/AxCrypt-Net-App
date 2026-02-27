@@ -1,7 +1,4 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Shared.CloudCore.DropBox;
-using AxCrypt.App.Shared.CloudCore.GoogleDrive;
-using AxCrypt.App.Shared.CloudCore.OneDrive;
 using AxCrypt.App.Shared.Desktop.CloudCore;
 using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Components.Pages;
@@ -60,18 +57,6 @@ public static class AppDesktopFactory
         TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
         TypeMap.Register.Singleton<IMultiFactorAuthService>(() => new MultiFactorAuthService());
         TypeMap.Register.Singleton<ICloudPlatformService>(() => new CloudPlatformService());
-
-        services.AddSingleton<ICloudDriveConfiguration, CloudDriveConfiguration>();
         TypeMap.Register.Singleton<ICloudDriveConfiguration>(() => new CloudDriveConfiguration());
-
-        ICloudDriveConfiguration cloudConfig = services.BuildServiceProvider().GetRequiredService<ICloudDriveConfiguration>();
-        InitializeCloudDrive(cloudConfig);
-    }
-
-    private static void InitializeCloudDrive(ICloudDriveConfiguration cloudConfig)
-    {
-        DropBoxConfiguration.Initialize(cloudConfig);
-        new GoogleDriveConfiguration(cloudConfig);
-        OneDriveConfiguration.Initialize(cloudConfig);
     }
 }

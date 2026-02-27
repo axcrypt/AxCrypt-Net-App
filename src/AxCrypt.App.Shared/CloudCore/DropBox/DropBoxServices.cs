@@ -173,8 +173,8 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
                     FileID = file.PathLower,
                     FileName = file.Name,
                     IsFolder = file.IsFolder,
-                    FileExtension = System.IO.Path.GetExtension(file.PathLower),
-                    Source = AxCrypt.Core.IO.FileProvider.DropBox,
+                    FileExtension = Path.GetExtension(file.PathLower),
+                    Source = FileProvider.DropBox,
                 })
                 .OrderByDescending(file => file.IsFolder)
                 .ToList();
@@ -270,7 +270,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
             }
         }
 
-        public override async Task<string> MoveFile(FilePickerItemViewModel actualfileItem, string fileName, IDataStore fileInfo)
+        public override async Task<string> MoveFile(FilePickerItemViewModel actualFileItem, string fileName, IDataStore fileInfo)
         {
             if (!New<IInternetState>().Connected)
             {
@@ -289,7 +289,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
 
             try
             {
-                string dropboxPath = NormalizeToCloudPath(actualfileItem.FileID) + fileName;
+                string dropboxPath = NormalizeToCloudPath(actualFileItem.FileID) + fileName;
                 return await UploadFileAsync(fileInfo, dropboxPath, WriteMode.Add.Instance, true);
             }
             catch (Exception)
