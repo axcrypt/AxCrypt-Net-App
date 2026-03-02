@@ -6,14 +6,14 @@ public class ProcessIndicator : IDisposable, IAsyncDisposable
 {
     private readonly ProcessIndicatorService? _processIndicatorService;
 
-    public ProcessIndicator()
+    public ProcessIndicator(bool isFullScreen = false)
     {
         try
         {
             _processIndicatorService = AxCServiceProvider.GetService<ProcessIndicatorService>();
             if (_processIndicatorService != null)
             {
-                _processIndicatorService.Show();
+                _processIndicatorService.Show(null, null, isFullScreen);
             }
         }
         catch (Exception exp)

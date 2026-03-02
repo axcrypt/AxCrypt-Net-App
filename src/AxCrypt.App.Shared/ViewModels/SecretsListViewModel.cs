@@ -57,6 +57,12 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
 
     public void UpgradeFreeUser()
     {
+        if(New<AxCryptOnlineState>().IsOffline)
+        {
+            //await New<IPopup>().ShowAsync(PopupButtons.Ok, "Alert",  Texts.InternetNotRequiredInformation);
+            return;
+        }
+
         if (!HasPaidSubscription)
         {
             AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();

@@ -78,7 +78,7 @@
 
                         @if (ShareModel.ReceiverList != null && ShareModel.ReceiverList.Any())
                         {
-                            <h3 style="margin: 10px 0; font-size:16px;">@string.Format(Texts.UsersWithAccessText, ShareModel.ReceiverList.Count)</h3>
+                            <h3 style="margin: 10px 0; font-size:16px;">@string.Format(Texts.UsersWithAccessText, "(" + ShareModel.ReceiverList.Count + ")")</h3>
                             <table style="display: flex;gap: 10px;flex-wrap: wrap;">
                                 @foreach (AxCrypt.Core.UI.EmailAddress receiver in ShareModel.ReceiverList)
                                 {

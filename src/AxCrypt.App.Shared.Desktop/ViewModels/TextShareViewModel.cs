@@ -194,7 +194,7 @@ public class TextShareViewModel : ViewModelBase
         IEnumerable<UserPublicKey> availablePublicKeys = null;
         if (ReceiverList != null && ReceiverList.Any())
         {
-            using (ProcessIndicator indicator = new ProcessIndicator())
+            using (ProcessIndicator indicator = new ProcessIndicator(true))
             {
                 availablePublicKeys = await GetPublicKeysAsync(ReceiverList);
             }
@@ -208,7 +208,7 @@ public class TextShareViewModel : ViewModelBase
         SetExpiresIn();
         LogOnIdentity logOnIdentity = New<KnownIdentities>().DefaultEncryptionIdentity;
 
-        using (ProcessIndicator indicator = new ProcessIndicator())
+        using (ProcessIndicator indicator = new ProcessIndicator(true))
         {
             string encryptedText = await TextCryptor.EncryptTextAsync(passphrase.EncryptionIdentity(), PlainText, availablePublicKeys);
             _textEncryptionViewModel.EncryptedText = encryptedText;

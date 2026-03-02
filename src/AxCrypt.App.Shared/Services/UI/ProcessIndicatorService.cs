@@ -22,11 +22,14 @@ public class ProcessIndicatorService
 
     public string? Message { get; set; }
 
-    public void Show(string? title = null, string? message = null)
+    public bool FullScreen { get; set; }
+
+    public void Show(string? title = null, string? message = null, bool isFullScreen = false)
     {
         Title = title ?? Texts.ProgressIndicatorWaitMessage;
         Message = message ?? Texts.ProgressIndicatorWaitMessage;
         IsVisible = true;
+        FullScreen = isFullScreen;
     }
 
     public void Hide()
