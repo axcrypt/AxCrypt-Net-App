@@ -55,11 +55,11 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
         ShowSecretFilterMenu = false;
     }
 
-    public void UpgradeFreeUser()
+    public async Task UpgradeFreeUser()
     {
         if(New<AxCryptOnlineState>().IsOffline)
         {
-            //await New<IPopup>().ShowAsync(PopupButtons.Ok, "Alert",  Texts.InternetNotRequiredInformation);
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.AlertText,  Texts.OfflineInternetRequiredText);
             return;
         }
 

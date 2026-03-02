@@ -1,7 +1,9 @@
 using AxCrypt.App.Shared.Providers;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
+using AxCrypt.Common;
 using AxCrypt.Content;
+using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -96,6 +98,12 @@ public class FileProviderSelectionViewModel : ViewModelBase
 
     public async Task SubActionSelectProvider(FileProviderItem provider)
     {
+        if (New<AxCryptOnlineState>().IsOffline)
+        {
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.AlertText, Texts.OfflineInternetRequiredText);
+            return;
+        }
+
         SelectedFileOperation = FileOperationOption.None;
         SelectedFileProvider = provider;
         IsVisible = false;

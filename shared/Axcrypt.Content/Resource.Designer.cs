@@ -75551,9 +75551,9 @@ namespace AxCrypt.Content {
         /// <summary>
         ///   Looks up a localized string similar to Surname: .
         /// </summary>
-        public static string SurnameLabel_ {
+        public static string SurnameLabel {
             get {
-                return ResourceManager.GetString("SurnameLabel ", resourceCulture);
+                return ResourceManager.GetString("SurnameLabel", resourceCulture);
             }
         }
         
