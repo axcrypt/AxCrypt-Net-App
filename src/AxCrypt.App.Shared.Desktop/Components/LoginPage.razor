@@ -172,6 +172,11 @@
     private async void ButtonLogIn_Click()
     {
         LogOnViewModel.PageResult = DialogResult.None;
+        if (isPasswordVisible)
+        {
+            TogglePassword();
+        }
+
         using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             if (!await AdHocValidationDueToMonoLimitations())
