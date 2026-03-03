@@ -295,7 +295,10 @@
             return;
         }
 
-        ViewModel.LoadVaultItems();
+        if (firstRender)
+        {
+            ViewModel.LoadVaultItems();
+        }
     }
 
     private void SetView(bool listView)
