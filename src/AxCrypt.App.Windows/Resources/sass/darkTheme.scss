@@ -149,7 +149,7 @@ button {
 
     .mre-actn-box:hover {
         background-color: $SdebrbgndClr !important;
-        color: $colTxtlble;
+        color: $colTxtlble !important;
     }
 
 .rcnt-fld-bx {
@@ -407,8 +407,8 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     }
 
 .dropbtn.active {
-    color: $colTxtBd;
-    border: 1px solid $colTxtBd; //language drop down
+    color: $colTxtBd !important;
+    border: 1px solid $colTxtBd !important; //language drop down
 }
 
 .drp-dwn {
@@ -473,7 +473,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 
 .vault-body label,
 .vault-body span {
-    color: #A4A4A4 !important;
+    color: $colTxtlble !important;
 }
 
 .multi-actn-btn {
@@ -489,7 +489,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 }
 
 .file-picker-modalDialog > div {
-    background-color: #A4A4A4;
+    background-color: $colTxtlble;
     color: white;
 }
 
@@ -500,4 +500,12 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 
 .file-picker-modalDialog .filepicker-dropdown-menu-action {
     background-color: #A3A3A3;
+}
+
+.file-picker-modalDialog .file-path {
+    color: #fff !important;
+}
+
+.vlt-body .file-name {
+    color: $colTxtlble !important;
 }

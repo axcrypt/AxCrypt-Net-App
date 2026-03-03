@@ -499,7 +499,7 @@ input[type="radio"] {
 }
 
 .mre-actn-box:hover {
-    background-color: $TbleBg !important;
+    background-color: $TbleBg;
 }
 
 .fle-exton-img {
@@ -636,7 +636,7 @@ input[type="radio"] {
     tbody tr:hover,
     tbody tr.active,
     .selected {
-        background: $TbleBg !important;
+        background: $TbleBg;
         box-shadow: 0px 1px 4px 0px #00000040;
     }
 }

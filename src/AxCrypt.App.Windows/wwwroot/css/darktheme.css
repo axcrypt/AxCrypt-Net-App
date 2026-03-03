@@ -127,7 +127,7 @@ button {
 
 .mre-actn-box:hover {
   background-color: #303030 !important;
-  color: #A4A4A4;
+  color: #A4A4A4 !important;
 }
 
 .rcnt-fld-bx {
@@ -371,8 +371,8 @@ input[readonly=readonly], textarea[readonly] {
 }
 
 .dropbtn.active {
-  color: #FFFFFF;
-  border: 1px solid #FFFFFF;
+  color: #FFFFFF !important;
+  border: 1px solid #FFFFFF !important;
 }
 
 .drp-dwn {
@@ -461,4 +461,12 @@ input[readonly=readonly], textarea[readonly] {
 
 .file-picker-modalDialog .filepicker-dropdown-menu-action {
   background-color: #A3A3A3;
+}
+
+.file-picker-modalDialog .file-path {
+  color: #fff !important;
+}
+
+.vlt-body .file-name {
+  color: #A4A4A4 !important;
 }

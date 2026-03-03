@@ -236,6 +236,7 @@
         ShareKeyViewModel!.KeySharingUserEmail = "";
         ShareKeyViewModel.SelectedFilesOrFolders = new List<string>();
         ShareKeyViewModel.CloseSyncPopup();
+        ShareKeyViewModel.PageResult = DialogResult.Cancel;
         ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.Close();
     }
 
