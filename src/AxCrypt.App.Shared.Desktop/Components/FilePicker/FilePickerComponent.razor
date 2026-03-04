@@ -6,7 +6,6 @@
 @using AxCrypt.Content
 
 @inject DesktopFilePickerViewModel ViewModel
-@inject NavigationManager Navigation
 @inject IJSRuntime JS
 
 <style>
@@ -67,13 +66,21 @@
                     <div class="file-picker-dir-content find-fle-nme" @oncontextmenu="(e) => ShowContextMenu(e)" id="user_files_section" @onclick="async () => await HideContextMenu()">
                         <div class="header-bar" @onclick:stopPropagation @oncontextmenu:preventDefault>
                             <div class="div-file-header">
-                                <span>
-                                    <input type="checkbox" checked="@selectAll" id="multiplefile" @onclick="() => SelectAllFile()" />
-                                    @Texts.NameLabel
-                                </span>
                                 @if (isListView)
                                 {
+                                    <span>
+                                        <input type="checkbox" checked="@selectAll" id="multiplefile" @onclick="() => SelectAllFile()" />
+                                        @Texts.NameLabel
+                                    </span>
+
                                     <span>@Texts.FindPathTitle</span>
+                                }
+                                else
+                                {
+                                    <span>
+                                        <input type="checkbox" checked="@selectAll" id="multiplefile" @onclick="() => SelectAllFile()" />
+                                        @Texts.SelectAllFilesLabelText
+                                    </span>
                                 }
                             </div>
 
@@ -91,9 +98,9 @@
                         </div>
 
                         <div class="files-section @(isListView ? "list-view" : "grid-view")">
-                            @if (isListView)
+                            @if (ViewModel.Files.Count > 0)
                             {
-                                if (ViewModel.Files.Count > 0)
+                                @if (isListView)
                                 {
                                     <ul class="file-list">
                                         @foreach (FilePickerItemViewModel file in ViewModel.Files)
@@ -121,34 +128,23 @@
                                 }
                                 else
                                 {
-                                    <div class="file-notfound">
-                                        <span>@Texts.NoFilesFoundText </span>
-                                        <img src="/images/default/filenotfound.svg" />
-                                    </div>
-                                }
-
-                            }
-                            else
-                            {
-                                <div class="file-grid">
-                                    @if (ViewModel.Files.Count > 0)
-                                    {
+                                    <div class="file-grid">
                                         @foreach (FilePickerItemViewModel file in ViewModel.Files)
                                         {
                                             string ParentPath = file.ParentPath + "/" + file.FileName;
                                             <div class="file-grid-item @(file.IsSelected ? "select-item" : "") fle-exton-img" @onclick="() => OnCheckboxChanged(file)" @ondblclick="() => OnFolderClicked(file)">
-                                                <img alt="File Icon" class="grid-file-icon @(file.IsFolder == true ? "Icon-folder" : file.FileName.GetIcon())" />
+                                                <img alt="File Icon" class="grid-file-icon @(file.IsFolder == true ? "Icon-folder" : ViewModel.GetFileTypeIcon(file.FileName))" />
                                                 <span class="file-name-grid">@((MarkupString)HighlightMatch(file.FileName))</span>
                                             </div>
                                         }
-                                    }
-                                    else
-                                    {
-                                        <div class="file-notfound">
-                                            <span>@Texts.NoFilesFoundText </span>
-                                            <img src="/images/default/filenotfound.svg" />
-                                        </div>
-                                    }
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="file-notfound">
+                                    <span>@Texts.NoFilesFoundText </span>
+                                    <img src="/images/default/filenotfound.svg" />
                                 </div>
                             }
 
