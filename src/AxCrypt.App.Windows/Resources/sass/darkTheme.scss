@@ -375,7 +375,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     filter: opacity(0.8);
 }
 
-.menu-image, .mre-actn-box img, .close-img, .clck-img, .secrets-type-icon-desktop {
+.menu-image, .mre-actn-box img, .close-img, .clck-img, .secrets-type-icon-desktop, .display-type > img {
     filter: grayscale(1) brightness(10);
 }
 
@@ -485,17 +485,18 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 }
 
 .file-picker-modalDialog .file-picker-dir-content {
-    background: #575757;
+    color: #fff !important;
+    background: #575757 !important;
 }
 
 .file-picker-modalDialog > div {
-    background-color: $colTxtlble;
-    color: white;
+    background-color: $colTxtlble !important;
+    color: #fff !important;
 }
 
 .file-picker-dir-content .file-list li {
     background-color: #A3A3A3;
-    color: white;
+    color: #fff;
 }
 
 .file-picker-modalDialog .filepicker-dropdown-menu-action {
@@ -508,4 +509,12 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 
 .vlt-body .file-name {
     color: $colTxtlble !important;
+}
+
+.file-list-item:hover .file-path, .file-grid-item:hover .file-path {
+    color: #A4A4A4 !important;
+}
+
+.display-type > img.selected {
+    filter: invert(0) !important;
 }
