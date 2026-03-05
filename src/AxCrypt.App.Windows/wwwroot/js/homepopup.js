@@ -303,10 +303,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var paidPlanRequirePopup = "";
     document.addEventListener("mouseover", function (e) {
         paidPlanRequirePopup = document.getElementById("paid-plan-required-popup");
+        if (!paidPlanRequirePopup) {
+            return true;
+        }
+
         var currentTarget = e.target;
-        if (paidPlanRequirePopup
-            && (currentTarget.classList.contains("subs-required") || currentTarget.parentElement.classList.contains("subs-required")
-                || currentTarget.classList.contains("paid-plan-required") || currentTarget.parentElement.classList.contains("paid-plan-required"))
+        if (currentTarget.classList.contains("subs-required") || currentTarget.parentElement.classList.contains("subs-required")
+            || currentTarget.classList.contains("paid-plan-required") || currentTarget.parentElement.classList.contains("paid-plan-required")
+            || currentTarget.classList.contains("subs-required-parent")
         ) {
             paidPlanRequirePopup.style.display = "block";
             paidPlanRequirePopup.style.left = e.clientX + 12 + "px";
@@ -316,9 +320,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     document.addEventListener("mouseout", function (e) {
         var currentTarget = e.target;
-        if (paidPlanRequirePopup
-            && (currentTarget.classList.contains("subs-required") || currentTarget.parentElement.classList.contains("subs-required")
-                || currentTarget.classList.contains("paid-plan-required") || currentTarget.parentElement.classList.contains("paid-plan-required"))
+        if (!paidPlanRequirePopup) {
+            return true;
+        }
+
+        if (currentTarget.classList.contains("subs-required") || currentTarget.parentElement.classList.contains("subs-required")
+            || currentTarget.classList.contains("paid-plan-required") || currentTarget.parentElement.classList.contains("paid-plan-required")
+            || currentTarget.classList.contains("subs-required-parent")
         ) {
             paidPlanRequirePopup.style.display = "none";
         }

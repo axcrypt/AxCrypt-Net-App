@@ -35,7 +35,7 @@
                     <span class="oi account" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.HomeLinkLabel</span>
                 </NavLink>
             </div>
-            <div id="help-secured-folders" class="nav-item px-3">
+            <div id="help-secured-folders" class="nav-item px-3 subs-required-parent">
                 <NavLink class="nav-link two subs-required" href="securedfolders">
                     <span class="oi scrdfldr" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.EncryptedFoldersToolStripMenuItemText</span>
                 </NavLink>
@@ -50,13 +50,13 @@
             }
             else
             {
-                <div id="help-pswd-mngr" class="nav-item px-3">
+                <div id="help-pswd-mngr" class="nav-item px-3 subs-required-parent">
                     <NavLink class="@($"nav-link three subs-required {GetClassByActiveTab("passwordManager")}")" href="passwordManager">
                         <span class="oi scrts" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.PasswordManagerLinkLabel</span>
                     </NavLink>
                 </div>
             }
-            <div id="help-scrd-mssngr" class="nav-item px-3">
+            <div id="help-scrd-mssngr" class="nav-item px-3 subs-required-parent">
                 <NavLink class="nav-link four subs-required" href="securedmessenger">
                     <span class="oi scrdmssngr" aria-hidden="true"></span> <span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.SecuredMessengerLinkLabel</span>
                 </NavLink>
@@ -71,7 +71,7 @@
             }
             else
             {
-                <div id="help-txt-encyptn" class="nav-item px-3">
+                <div id="help-txt-encyptn" class="nav-item px-3 subs-required-parent">
                     <NavLink class="@($"nav-link five subs-required {GetClassByActiveTab("textencryption")}")" href="javascript:void(0)" @onclick="UpgradeDialog">
                         <span class="oi txtencrpt" aria-hidden="true"></span><span class="nav-text" hidden="@Utility.IsMainMenuHidden">@Texts.TextEncryptionLinkLabel</span>
                     </NavLink>

@@ -450,7 +450,7 @@ input[readonly=readonly], textarea[readonly] {
   background: #575757 !important;
 }
 
-.file-picker-modalDialog > div {
+.file-picker-modalDialog > div, .file-picker-dir-content .context-menu-action {
   background-color: #A4A4A4 !important;
   color: #fff !important;
 }
@@ -472,7 +472,7 @@ input[readonly=readonly], textarea[readonly] {
   color: #A4A4A4 !important;
 }
 
-.file-list-item:hover .file-path, .file-grid-item:hover .file-path {
+.file-list-item:hover .file-path, .file-grid-item:hover .file-path, .select-item .file-path {
   color: #A4A4A4 !important;
 }
 
