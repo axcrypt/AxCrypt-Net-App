@@ -26159,7 +26159,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Over the years, Linux users who implemented workaround solutions to decrypt their .axx files ran around in circles with frustrating moments like switching systems, using alternatives and adopting entirely different encryption stacks, only to be disappointed about how these files were not as easy to open as they expected.&lt;/b&gt;.
+        ///   Looks up a localized string similar to Over the years, Linux users who implemented workaround solutions to decrypt their .axx files ran around in circles with frustrating moments like switching systems, using alternatives and adopting entirely different encryption stacks, only to be disappointed about how these files were not as easy to open as they expected..
         /// </summary>
         public static string Blog_IALBSFEBLU_Text1 {
             get {
@@ -26168,7 +26168,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;AxCrypt closes a long-standing loop and brings you the same feel and intuition of unmatched digital security, along with file compatibility and native experiences.&lt;/b&gt;.
+        ///   Looks up a localized string similar to AxCrypt closes a long-standing loop and brings you the same feel and intuition of unmatched digital security, along with file compatibility and native experiences..
         /// </summary>
         public static string Blog_IALBSFEBLU_Text10 {
             get {
@@ -26258,7 +26258,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;We heard you through the forums and requests.&lt;/b&gt;.
+        ///   Looks up a localized string similar to We heard you through the forums and requests..
         /// </summary>
         public static string Blog_IALBSFEBLU_Text2 {
             get {
@@ -26285,7 +26285,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;While AskUbuntu threads inquired about how to decrypt AxCrypt files, Linux Mint discussions suggested workarounds. If that wasn’t adding insult to injury, Reddit users suggested Wine alternatives, which didn&apos;t really feel like a solution. It felt like a patch, and it did not deliver the authentic AxCrypt encryption experience.&lt;/b&gt;.
+        ///   Looks up a localized string similar to While AskUbuntu threads inquired about how to decrypt AxCrypt files, Linux Mint discussions suggested workarounds. If that wasn’t adding insult to injury, Reddit users suggested Wine alternatives, which didn&apos;t really feel like a solution. It felt like a patch, and it did not deliver the authentic AxCrypt encryption experience..
         /// </summary>
         public static string Blog_IALBSFEBLU_Text3 {
             get {
@@ -26294,7 +26294,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;The message was loud, and it was:&lt;/b&gt;.
+        ///   Looks up a localized string similar to The message was loud, and it was:.
         /// </summary>
         public static string Blog_IALBSFEBLU_Text4 {
             get {
@@ -26303,7 +26303,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Linux users didn’t want hacks; they definitely didn’t want the compatibility gymnastics. They wanted the real deal – the native, reliable way to decrypt and encrypt AxCrypt files, the AxCrypt way.&lt;/b&gt;.
+        ///   Looks up a localized string similar to Linux users didn’t want hacks; they definitely didn’t want the compatibility gymnastics. They wanted the real deal – the native, reliable way to decrypt and encrypt AxCrypt files, the AxCrypt way..
         /// </summary>
         public static string Blog_IALBSFEBLU_Text5 {
             get {
@@ -26312,7 +26312,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;This gap was bridged and sealed, for good.&lt;/b&gt;.
+        ///   Looks up a localized string similar to This gap was bridged and sealed, for good..
         /// </summary>
         public static string Blog_IALBSFEBLU_Text6 {
             get {
@@ -26321,7 +26321,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Encryption is not just about complicated mathematical operations and algorithms. It is also about accessibility, usability, and the sheer smoothness of cross-platform compatibility.&lt;/b&gt;.
+        ///   Looks up a localized string similar to Encryption is not just about complicated mathematical operations and algorithms. It is also about accessibility, usability, and the sheer smoothness of cross-platform compatibility..
         /// </summary>
         public static string Blog_IALBSFEBLU_Text7 {
             get {
@@ -26330,7 +26330,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;Developers, privacy-conscious professionals, and cross-platform teams needed file-level encryption that worked seamlessly and intuitively in Linux environments with CLI support, compatibility with existing .axx files, and without disrupting workflows and tandem.&lt;/b&gt;.
+        ///   Looks up a localized string similar to Developers, privacy-conscious professionals, and cross-platform teams needed file-level encryption that worked seamlessly and intuitively in Linux environments with CLI support, compatibility with existing .axx files, and without disrupting workflows and tandem..
         /// </summary>
         public static string Blog_IALBSFEBLU_Text8 {
             get {
@@ -26339,7 +26339,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;That conversation is now over.&lt;/b&gt;.
+        ///   Looks up a localized string similar to That conversation is now over..
         /// </summary>
         public static string Blog_IALBSFEBLU_Text9 {
             get {
@@ -45773,6 +45773,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Desktop.
+        /// </summary>
+        public static string DesktopLabel {
+            get {
+                return ResourceManager.GetString("DesktopLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         public static string DetailsText {
@@ -46736,20 +46745,11 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  File&lt;span&gt; security&lt;/span&gt;&lt;br /&gt;&lt;label&gt;should be &lt;span&gt;easy.&lt;/span&gt;&lt;/label&gt;.
+        ///   Looks up a localized string similar to &lt;strong&gt;File&lt;/strong&gt; &lt;span&gt;security&lt;/span&gt; &lt;strong&gt;should be&lt;/strong&gt; &lt;span&gt;easy.&lt;/span&gt;.
         /// </summary>
-        public static string DownloadpageDesktopTitle {
+        public static string DownloadpageHeadingTitle {
             get {
-                return ResourceManager.GetString("DownloadpageDesktopTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Put AxCrypt on &lt;span&gt; all &lt;br /&gt;your devices.&lt;/span&gt;.
-        /// </summary>
-        public static string DownloadpageMobileTitle {
-            get {
-                return ResourceManager.GetString("DownloadpageMobileTitle", resourceCulture);
+                return ResourceManager.GetString("DownloadpageHeadingTitle", resourceCulture);
             }
         }
         
@@ -46777,6 +46777,15 @@ namespace AxCrypt.Content {
         public static string DownloadReleaseNotes {
             get {
                 return ResourceManager.GetString("DownloadReleaseNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;All&lt;/strong&gt; &lt;span&gt;platforms.&lt;/span&gt;.
+        /// </summary>
+        public static string DownloadsubHeading {
+            get {
+                return ResourceManager.GetString("DownloadsubHeading", resourceCulture);
             }
         }
         
@@ -63803,6 +63812,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mobile.
+        /// </summary>
+        public static string MobileLabel {
+            get {
+                return ResourceManager.GetString("MobileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;fc&gt;Easily decrypt&lt;/fc&gt; secured files both from desktop and mobile.
         /// </summary>
         public static string MobileOnboardingDecryptDescription {
@@ -78768,7 +78786,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Users with access{0}.
+        ///   Looks up a localized string similar to Users with access({0}).
         /// </summary>
         public static string UsersWithAccessText {
             get {
