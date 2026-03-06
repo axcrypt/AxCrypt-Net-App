@@ -399,7 +399,7 @@ namespace AxCrypt.Core.UI.ViewModel
             {
                 if (e.Status.ErrorStatus != ErrorStatus.Success)
                 {
-                    return;
+                    return Task.CompletedTask;
                 }
 
                 file.RestoreRandomRename(e.LogOnIdentity);
@@ -408,6 +408,8 @@ namespace AxCrypt.Core.UI.ViewModel
                 {
                     Resolve.Log.LogInfo("Restore filename to original '{0}'.".InvariantFormat(file.FullName), file.FullName, UserActivityLog.RestoreRenameToOriginal);
                 }
+
+                return Task.CompletedTask;
             };
 
             return operationsController.VerifyEncryptedAsync(file);
@@ -522,6 +524,8 @@ namespace AxCrypt.Core.UI.ViewModel
                 {
                     e.Status = new FileOperationContext(string.Empty, ErrorStatus.Success);
                 }
+
+                return Task.CompletedTask;
             };
             return controller.EncryptFileAsync(file, Recipients);
         }
@@ -556,6 +560,8 @@ namespace AxCrypt.Core.UI.ViewModel
                     ActiveFile activeFile = new ActiveFile(encryptedInfo, decryptedInfo, e.LogOnIdentity, ActiveFileStatus.NotDecrypted, e.CryptoId);
                     _fileSystemState.Add(activeFile);
                 }
+
+                return Task.CompletedTask;
             };
 
             return operationsController.VerifyEncryptedAsync(fullName);

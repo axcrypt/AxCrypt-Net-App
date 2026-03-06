@@ -125,19 +125,15 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 return fileOperationContext;
             }
 
-            FileOperationContext context = await ProcessFileEncryption(originalFile, progress);
-            if (context.ErrorStatus == ErrorStatus.Success)
-            {
-                await UpdateEncryptedFileStatusAsync(originalFile, file, file.Source);
-                await New<FileSystemState>().Save();
-            }
+            FileOperationContext context = await ProcessFileEncryption(originalFile, progress, file);
 
             return context;
         }
 
         private Task<FileOperationContext> ProcessFileEncryption(
             IDataStore actualFile,
-            IProgressContext progressContext
+            IProgressContext progressContext,
+            FilePickerItemViewModel file
         )
         {
             FileOperationsController operationsController = new FileOperationsController(
@@ -164,7 +160,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             ) =>
             { };
 
-            operationsController.Completed += (object sender, FileOperationEventArgs e) =>
+            operationsController.Completed += async (object sender, FileOperationEventArgs e) =>
             {
                 if (e.Status.ErrorStatus == ErrorStatus.FileAlreadyEncrypted)
                 {
@@ -188,7 +184,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     e.CryptoId
                 );
 
-                _fileSystemState.Add(activeFile);
+                await UpdateEncryptedFileStatusAsync(actualFile, activeFile, file, file.Source);
+                encryptedInfo.Delete();
             };
 
             return operationsController.EncryptFileAsync(actualFile, Recipients);
@@ -213,12 +210,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             );
         }
 
-        private async Task UpdateEncryptedFileStatusAsync(IDataStore actualFile, FilePickerItemViewModel fileItem, AxCrypt.Core.IO.FileProvider fileSource)
+        private async Task UpdateEncryptedFileStatusAsync(IDataStore actualFile, ActiveFile encryptedFile, FilePickerItemViewModel fileItem, AxCrypt.Core.IO.FileProvider fileSource)
         {
-            ActiveFile encryptedFile = _fileSystemState.FindActiveFileFromEncryptedPath(
-                MakeAxCryptFileName(actualFile.FullName)
-            );
-
             if (encryptedFile == null)
             {
                 return;
@@ -238,21 +231,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     return;
                 }
             }
-
-            if (encryptedFile == null)
-            {
-                await _securedFilesViewModel.UpdateRecentFilesListAsync();
-                return;
-            }
-
-            if (_securedFilesViewModel.CheckIfFileAlreadyInRecentFileList(encryptedFile))
-            {
-                return;
-            }
-
-            FileDetails newFile = new FileDetails(encryptedFile);
-            _securedFilesViewModel.Files.Add(newFile);
-            await _securedFilesViewModel.UpdateRecentFilesListAsync();
         }
 
         private async Task<bool> CheckEncryptedOriginalFileProcessed(
@@ -356,8 +334,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
 
                 await DecryptCloudFile(fileItem);
             }
-
-            await New<FileSystemState>().Save();
         }
 
         private async Task DecryptLocalFile(FilePickerItemViewModel fileItem)
@@ -467,21 +443,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             {
                 await ProcessOriginalFileInCloudProviderForDecryption(fileItem);
             }
-
-            if (operationContext.AddedFile == null)
-            {
-                await _securedFilesViewModel.UpdateRecentFilesListAsync();
-                return;
-            }
-
-            if (!_securedFilesViewModel.CheckIfFileAlreadyInRecentFileList(operationContext.AddedFile))
-            {
-                return;
-            }
-
-            FileDetails newFile = new FileDetails(operationContext.AddedFile);
-            await _securedFilesViewModel.RemoveFile(newFile);
-            await _securedFilesViewModel.UpdateRecentFilesListAsync();
         }
 
         public async Task<FileOpenedContext> ProcessFileDecryption(
@@ -572,6 +533,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     operationsController.Completed += (object sender, FileOperationEventArgs e) =>
                     {
                         _decryptedPathForFileMove = e.SaveFileFullName;
+                        return Task.CompletedTask;
                     };
 
                     FileOperationContext fileOperationContext =
@@ -643,6 +605,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                         );
                     return;
                 }
+
+                file.Delete();
             }
             catch (Exception ex)
             {
@@ -705,7 +669,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 await ShareKeyWithCloudFile(fileItem);
             }
 
-            await New<FileSystemState>().Save();
+            //await New<FileSystemState>().Save();
         }
 
         private async Task ShareKeyWithLocalFile(FilePickerItemViewModel localFileItem)
@@ -795,9 +759,19 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
 
             await _filesOrfolderPaths.ChangeKeySharingAsync(_shareKeyUserList, identity);
 
-            ActiveFile activeFile = await AddActiveFileToRecentFilesListAsync(actualFile);
+            IDataStore decryptedInfo = GetDecryptedInfo(actualFile);
+
+            ActiveFile activeFile = new ActiveFile(actualFile, decryptedInfo, New<KnownIdentities>().DefaultEncryptionIdentity,
+                ActiveFileStatus.NotDecrypted,
+                Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId
+            );
 
             await UpdateOriginalFileAsync(actualFile, fileItem, activeFile, true);
+
+            if (!localFile)
+            {
+                actualFile.Delete();
+            }
         }
 
         private async Task<ActiveFile> AddActiveFileToRecentFilesListAsync(IDataStore actualFile)

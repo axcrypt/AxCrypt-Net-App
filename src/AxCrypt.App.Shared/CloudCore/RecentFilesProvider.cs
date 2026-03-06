@@ -188,6 +188,7 @@ namespace AxCrypt.App.Shared.CloudCore
 
                     operationsController.Completed += (object sender, FileOperationEventArgs e) =>
                     {
+                        return Task.CompletedTask;
                     };
 
                     FileOperationContext fileOperationContext = await operationsController.DecryptAndLaunchAsync(file);

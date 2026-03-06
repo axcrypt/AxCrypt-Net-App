@@ -160,14 +160,15 @@ namespace AxCrypt.Core.UI
         /// Always raised at the end of an operation, regardless of errors or cancellation.
         /// </summary>
         /// <param name="e"></param>
-        public event EventHandler<FileOperationEventArgs> Completed;
+        public event Func<object, FileOperationEventArgs, Task> Completed;
 
-        protected virtual void OnCompleted(FileOperationEventArgs e)
+        protected virtual async Task OnCompletedAsync(FileOperationEventArgs e)
         {
-            EventHandler<FileOperationEventArgs> handler = Completed;
+            Func<object, FileOperationEventArgs, Task> handler = Completed;
+
             if (handler != null)
             {
-                handler(this, e);
+                await handler(this, e);
             }
         }
 
@@ -382,6 +383,7 @@ namespace AxCrypt.Core.UI
 
             return destinationStore;
         }
+
         private bool IsLocked(FileLock fileLock)
         {
             IDataStore dataStore = fileLock.DataStore;
@@ -839,7 +841,7 @@ namespace AxCrypt.Core.UI
             finally
             {
                 _progress.NotifyLevelFinished();
-                OnCompleted(_eventArgs);
+                await OnCompletedAsync(_eventArgs);
             }
 
             return _eventArgs.Status;

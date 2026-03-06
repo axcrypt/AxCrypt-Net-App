@@ -95,6 +95,7 @@ namespace AxCrypt.Core.Test
             controller.Completed += (object sender, FileOperationEventArgs e) =>
             {
                 destinationPath = e.SaveFileFullName;
+                return Task.CompletedTask;
             };
 
             FileOperationContext status = await controller.EncryptFileAsync(New<IDataStore>(_davidCopperfieldTxtPath));
@@ -126,6 +127,7 @@ namespace AxCrypt.Core.Test
             {
                 destinationPath = e.SaveFileFullName;
                 status = e.Status;
+                return Task.CompletedTask;
             };
 
             controller.EncryptFileAsync(New<IDataStore>(_davidCopperfieldTxtPath));
@@ -156,9 +158,10 @@ namespace AxCrypt.Core.Test
                 };
             string destinationPath = String.Empty;
             controller.Completed += (object sender, FileOperationEventArgs e) =>
-                {
-                    destinationPath = e.SaveFileFullName;
-                };
+            {
+                destinationPath = e.SaveFileFullName;
+                return Task.CompletedTask;
+            };
 
             FileOperationContext status = await controller.EncryptFileAsync(New<IDataStore>(_davidCopperfieldTxtPath));
             Assert.That(status.ErrorStatus, Is.EqualTo(ErrorStatus.Success), "The status should indicate success.");
@@ -202,6 +205,7 @@ namespace AxCrypt.Core.Test
                 destinationPath = e.SaveFileFullName;
                 logOnIdentity = e.LogOnIdentity;
                 cryptoId = e.CryptoId;
+                return Task.CompletedTask;
             };
 
             FileOperationContext status = await controller.EncryptFileAsync(New<IDataStore>(_davidCopperfieldTxtPath));
@@ -272,9 +276,10 @@ namespace AxCrypt.Core.Test
                 });
             string destinationPath = String.Empty;
             controller.Completed += (object sender, FileOperationEventArgs e) =>
-                {
-                    destinationPath = e.SaveFileFullName;
-                };
+            {
+                destinationPath = e.SaveFileFullName;
+                return Task.CompletedTask;
+            };
             FileOperationContext status = await controller.DecryptFileAsync(New<IDataStore>(_helloWorldAxxPath));
 
             Assert.That(status.ErrorStatus, Is.EqualTo(ErrorStatus.Success), "The status should indicate success.");
@@ -311,6 +316,7 @@ namespace AxCrypt.Core.Test
             {
                 destinationPath = e.SaveFileFullName;
                 status = e.Status;
+                return Task.CompletedTask;
             };
 
             controller.DecryptFileAsync(New<IDataStore>(_helloWorldAxxPath));
@@ -409,6 +415,7 @@ namespace AxCrypt.Core.Test
             controller.Completed += (object sender, FileOperationEventArgs e) =>
             {
                 destinationPath = e.SaveFileFullName;
+                return Task.CompletedTask;
             };
             FileOperationContext status = await controller.DecryptFileAsync(New<IDataStore>(_helloWorldAxxPath));
 
@@ -472,6 +479,7 @@ namespace AxCrypt.Core.Test
             controller.Completed += (object sender, FileOperationEventArgs e) =>
             {
                 status = e.Status;
+                return Task.CompletedTask;
             };
 
             await controller.DecryptAndLaunchAsync(New<IDataStore>(_helloWorldAxxPath));
@@ -524,6 +532,7 @@ namespace AxCrypt.Core.Test
             controller.Completed += (object sender, FileOperationEventArgs e) =>
             {
                 destinationPath = e.SaveFileFullName;
+                return Task.CompletedTask;
             };
             bool knownKeyWasAdded = false;
             controller.KnownKeyAdded = new AsyncDelegateAction<FileOperationEventArgs>((FileOperationEventArgs e) =>
@@ -571,13 +580,15 @@ namespace AxCrypt.Core.Test
                     case 4:
                         e.LogOnIdentity = new LogOnIdentity("e");
                         break;
-                };
+                }
+                ;
                 return Task.FromResult<object>(null);
             };
             string destinationPath = String.Empty;
             controller.Completed += (object sender, FileOperationEventArgs e) =>
             {
                 destinationPath = e.SaveFileFullName;
+                return Task.CompletedTask;
             };
             bool knownKeyWasAdded = false;
             controller.KnownKeyAdded = new AsyncDelegateAction<FileOperationEventArgs>((FileOperationEventArgs e) =>
@@ -648,9 +659,10 @@ namespace AxCrypt.Core.Test
                 };
             FileOperationContext status = new FileOperationContext(String.Empty, ErrorStatus.Unknown);
             controller.Completed += (object sender, FileOperationEventArgs e) =>
-                {
-                    status = e.Status;
-                };
+            {
+                status = e.Status;
+                return Task.CompletedTask;
+            };
 
             controller.DecryptFileAsync(New<IDataStore>(_helloWorldAxxPath));
 
@@ -693,6 +705,7 @@ namespace AxCrypt.Core.Test
             {
                 destinationPath = e.SaveFileFullName;
                 status = e.Status;
+                return Task.CompletedTask;
             };
 
             controller.WipeFileAsync(New<IDataStore>(_davidCopperfieldTxtPath));

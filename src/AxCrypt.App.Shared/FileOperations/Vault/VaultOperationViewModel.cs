@@ -90,6 +90,8 @@ public class VaultOperationViewModel : ViewModelBase
             {
                 e.Status = new FileOperationContext(string.Empty, ErrorStatus.Success);
             }
+
+            return Task.CompletedTask;
         };
         return controller.EncryptFileAsync(dataStore.File, Recipients!);
     }
