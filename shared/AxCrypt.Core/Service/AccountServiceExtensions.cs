@@ -4,6 +4,7 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using System.Linq;
 using System.Threading.Tasks;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Service
 {
@@ -17,6 +18,12 @@ namespace AxCrypt.Core.Service
             }
 
             UserAccount account = await service.AccountAsync().Free();
+            if (account != null! && account.SubscriptionLevel == SubscriptionLevel.Unknown)
+            {
+                await New<IAccountSetupService>().CompleteAccountSetupAsync();
+                return false;
+            }
+
             if (!account.AccountKeys.Select(k => k.ToUserKeyPair(service.Identity.Passphrase)).Any((ukp) => ukp != null))
             {
                 return false;

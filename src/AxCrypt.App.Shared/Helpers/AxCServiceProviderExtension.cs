@@ -72,4 +72,12 @@ public static class AxCServiceProviderExtension
             return GetService<UpgradeSubscriptionViewModel>();
         }
     }
+
+    public static AccountSetupViewModel? AccountSetupViewModel
+    {
+        get
+        {
+            return GetService<AccountSetupViewModel>();
+        }
+    }
 }

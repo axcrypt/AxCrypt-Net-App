@@ -1,0 +1,141 @@
+﻿@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content;
+
+@inject AccountSetupViewModel accountSetupModel
+@inject UpgradeSubscriptionViewModel upgradeModel
+
+<style>
+    #account-setup-required.modalDialog {
+        z-index: 99999 !important;
+    }
+    #account-setup-required.modalDialog > div {
+        min-width: 600px !important;
+    }
+    .account-complete-plan-popup-container > .center-column > .btn-large {
+        padding: 12px !important;
+        min-height: 60px !important;
+    }
+
+    .account-complete-plan-popup-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        color: #494949;
+        font-size: 16px;
+    }
+
+    .account-complete-plan-popup-container .try-upgrade-plan-title {
+        font-weight: 600;
+    }
+
+    .account-complete-plan-popup-container .try-upgrade-plan-title span, .try-upgrade-plan-subtitle span {
+        color: #48772c;
+        font-weight: 800;
+        line-height: 25px;
+    }
+
+    .account-complete-plan-popup-container .more {
+        font-weight: bold;
+        list-style-type: none;
+    }
+
+    .account-complete-plan-popup-container .font-medium {
+        font-size: 14px;
+    }
+
+    .pricing-link {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .pricing-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+@if (IsVisible)
+{
+    <div id="account-setup-required" class="modalDialog">
+        <div id="UpgradePopup" class="upg-popup">
+            <div style="margin:12px 12px;" class="account-complete-plan-popup-container">
+                <div>
+                    <h6 class="try-upgrade-plan-title">
+                        One More Step to Get Started
+                    </h6>
+                </div>
+                <div class="account-setup-description">
+                    <p>Your account setup isn’t finished yet.</p>
+                    <p>
+                        Choose a plan to unlock encryption features and start using the app.
+                    </p>
+                </div>
+                <div>
+                    <span class="try-upgrade-plan-subtitle">@((MarkupString)string.Format(Texts.TryUpgradePlanSubTitleText1, Texts.FreeTrial + ","))</span>
+                </div>
+                <div>
+                    <ul>
+                        <li>@Texts.TryUpgradePlanFeatureText1</li>
+                        <li>@Texts.TryUpgradePlanFeatureText2</li>
+                        <li>@Texts.HipaaBenefitsSubHeading2</li>
+                        <li>@Texts.PricingFeatureListPasswordManagement</li>
+                        <li>@Texts.TryUpgradePlanFeatureText5</li>
+                        <li class="more"><a class="pricing-link" href="javascript:void(0);" @onclick="upgradeModel.OpenPricingPage">@Texts.AndMoreText</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p>
+                         <strong>Note: </strong>You need to select a plan to start using the app.
+                    </p>
+                </div>
+                <div class="center-column">
+                    <button class="btn-large font-medium grn-bg whte-clr" @onclick="OpenPremiumPage">
+                        Choose Private Plan
+                    </button>
+                    <button class="btn-large font-medium button blck-bg whte-clr" @onclick="OpenBusinessPage" style="width: 160px;">
+                        @Texts.CreateBusinessText
+                    </button>
+                    <button class="btn-large font-medium button" @onclick="OpenPasswordManagerPage" style="background:none;border:1px solid #48772c;color:#494949;">
+                        Choose Password Manager Plan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+    private bool IsVisible;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        accountSetupModel.OnAccountSetupDialogVisibilityChanged += async (isVisible)=> await UpdateUpgradeDialogState(isVisible);
+    }
+
+    public void OpenBusinessPage()
+    {
+        upgradeModel.OpenBusinessPage();
+        accountSetupModel.PopupResult = Utility.DialogResult.OK;
+    }
+
+    public void OpenPremiumPage()
+    {
+        upgradeModel.OpenPremiumPage();
+        accountSetupModel.PopupResult = Utility.DialogResult.OK;
+    }
+
+    public void OpenPasswordManagerPage()
+    {
+        upgradeModel.OpenPassswordManagerPage();
+        accountSetupModel.PopupResult = Utility.DialogResult.OK;
+    }
+
+    private async Task UpdateUpgradeDialogState(bool canShowUpgradeDialog)
+    {
+        IsVisible = canShowUpgradeDialog;
+
+        await InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+}

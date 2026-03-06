@@ -8,6 +8,7 @@ using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.App.Shared.Providers;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.UI.Services;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.ViewModels.Feedback;
 using AxCrypt.App.Shared.ViewModels.FileBrowser;
@@ -17,6 +18,7 @@ using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
 using AxCrypt.Common;
 using AxCrypt.Core;
 using AxCrypt.Core.Notification;
+using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
@@ -90,6 +92,7 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<DropBoxAccessInfo>();
             services.AddSingleton<OneDriveAccessInfo>();
             services.AddSingleton<FileProviderSelectionViewModel>();
+            services.AddSingleton<AccountSetupViewModel>();
         }
 
         public static void RegisterTypeFactories()
@@ -97,6 +100,7 @@ namespace AxCrypt.App.Shared
             TypeMap.Register.New<IVaultDataStore>(() => new VaultDataStore());
             TypeMap.Register.Singleton<CustomParallelFileOperation>(() => new CustomParallelFileOperation());
             TypeMap.Register.New<VaultOperationViewModel>(() => new VaultOperationViewModel(Resolve.KnownIdentities, New<CustomParallelFileOperation>(), New<IdentityViewModel>()));
+            TypeMap.Register.New<IAccountSetupService>(() => new AccountSetupService());
         }
         
         public static void LoadUpdateCheck(MainViewModel mainViewModel, LogOnViewModel logOnViewModel)

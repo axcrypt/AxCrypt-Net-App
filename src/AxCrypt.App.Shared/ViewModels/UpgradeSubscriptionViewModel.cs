@@ -72,6 +72,11 @@ namespace AxCrypt.App.Shared.ViewModels
             Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/Login?eff=1&reqFrom=Premium");
         }
 
+        public void OpenPassswordManagerPage()
+        {
+            Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/Login?eff=1&reqFrom=PasswordManager");
+        }
+
         public void OpenPurchasePage()
         {
             Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/Login?Signup=True");
