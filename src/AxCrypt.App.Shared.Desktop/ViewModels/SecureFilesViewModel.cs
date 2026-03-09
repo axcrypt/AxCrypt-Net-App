@@ -384,27 +384,28 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             string? fileName = selectedFile.FileName;
             string fullFilePath = SelectedFileStorageProvider.GetImportedFilePath(fileName!);
             IDataStore file = New<IDataStore>(fullFilePath);
+
             if (!file.IsEncrypted())
             {
                 FileOperationContext fileOperationContext = new FileOperationContext(
                     file.FullName,
                     ErrorStatus.WrongFileExtensionError
                 );
-                New<IStatusChecker>()
-                    .CheckStatusAndShowMessage(
+
+                New<IStatusChecker>().CheckStatusAndShowMessage(
                         fileOperationContext.ErrorStatus,
                         fileOperationContext.FullName,
                         fileOperationContext.InternalMessage
                     );
+
                 return;
             }
 
-            FileOperationContext preparingResult = await New<ImportedFileStorage>()
-                .CopyFileToImportedFiles(
-                    async (fileStream) =>
-                        await SelectedFileStorageProvider.CopyFileToImportedFiles(selectedFile, fileStream),
-                    file
-                );
+            FileOperationContext preparingResult = await New<ImportedFileStorage>().CopyFileToImportedFiles(
+                async (fileStream) => await SelectedFileStorageProvider.CopyFileToImportedFiles(selectedFile, fileStream),
+                file
+            );
+
             await DecryptPreparedFile(preparingResult);
         }
 
@@ -444,8 +445,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 this
             );
 
-            IList<string> keySharingFilePathList = new List<string>();
-            IList<string> keySharingFileNames = new List<string>();
+            IList<FileOperationContext> ShareKeyFileListItem = new List<FileOperationContext>();
+
             foreach (FilePickerItemViewModel fileItem in FileItems)
             {
                 string fullFilePath = GetFullPathByFileSource(fileItem, fileOperationViewModel);
@@ -457,12 +458,12 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                         ErrorStatus.WrongFileExtensionError
                     );
 
-                    New<IStatusChecker>()
-                        .CheckStatusAndShowMessage(
+                    New<IStatusChecker>().CheckStatusAndShowMessage(
                             fileOperationContext.ErrorStatus,
                             fileOperationContext.FullName,
                             fileOperationContext.InternalMessage
-                        );
+                    );
+
                     return;
                 }
 
@@ -471,29 +472,32 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     continue;
                 }
 
-                keySharingFilePathList.Add(fullFilePath);
-                keySharingFileNames.Add(fileItem.FileName!);
+                ShareKeyFileListItem.Add(await fileOperationViewModel.ShareKeyWithCloudFile(fileItem));
             }
 
-            AxCrypt.Core.UI.ViewModel.SharingListViewModel sharingListViewModel =
-                await AxCrypt.Core.UI.ViewModel.SharingListViewModel.CreateForFilesAsync(
-                    keySharingFilePathList,
-                    Resolve.KnownIdentities.DefaultEncryptionIdentity
-                );
+            IEnumerable<string> ShareKeyFilepathList = ShareKeyFileListItem.Select(f => f.FullName);
+
+            SharingListViewModel sharingListViewModel = await SharingListViewModel.CreateForFilesAsync(
+                                                             ShareKeyFilepathList,
+                                                             Resolve.KnownIdentities.DefaultEncryptionIdentity
+                                                        );
 
             _shareKeyViewModel = AxCServiceProvider.GetService<ShareKeyViewModel>();
 
-            await _shareKeyViewModel!.SetSelectedFilesOrFolders(keySharingFileNames.Select(e => e), sharingListViewModel, true);
+            await _shareKeyViewModel!.SetSelectedFilesOrFolders(FileItems.Select(e => e.FileName), sharingListViewModel, true);
 
             if (_shareKeyViewModel.PageResult == DialogResult.Cancel)
             {
+                foreach (string itemPath in ShareKeyFileListItem.Select(f => f.FullName))
+                {
+                    IDataStore file = New<IDataStore>(itemPath);
+                    file.Delete();
+                }
+
                 return;
             }
 
-            await fileOperationViewModel!.ShareKey(
-                   FileItems!,
-                   sharingListViewModel!.SharedWith
-               );
+            await fileOperationViewModel.ShareKeyPreparedFile(ShareKeyFileListItem, FileItems, sharingListViewModel!.SharedWith);
         }
 
         private string GetFullPathByFileSource(

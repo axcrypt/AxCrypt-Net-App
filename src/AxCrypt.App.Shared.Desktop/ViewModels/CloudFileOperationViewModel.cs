@@ -1,7 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.CloudCore;
 using AxCrypt.App.Shared.UI.ViewModels;
-using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
@@ -185,7 +184,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 );
 
                 await UpdateEncryptedFileStatusAsync(actualFile, activeFile, file, file.Source);
-                encryptedInfo.Delete();
             };
 
             return operationsController.EncryptFileAsync(actualFile, Recipients);
@@ -257,14 +255,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 return false;
             }
 
-            if (
-                !await _fileProviderService.DeleteFileAsync(
-                    actualFile.FullName,
-                    fileItem,
-                    encryptedFile.EncryptedFileInfo.FullName,
-                    newFileId
-                )
-            )
+            if (!await _fileProviderService.DeleteFileAsync(actualFile.FullName, fileItem, encryptedFile.EncryptedFileInfo.FullName))
             {
                 await New<IPopup>()
                     .ShowAsync(
@@ -605,8 +596,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                         );
                     return;
                 }
-
-                file.Delete();
             }
             catch (Exception ex)
             {
@@ -625,82 +614,9 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
 
         #region ShareKey
 
-        private IEnumerable<AxCrypt.Core.Crypto.Asymmetric.UserPublicKey>? _shareKeyUserList;
-
-        private IList<string> _filesOrfolderPaths = new List<string>();
-
-        public async Task<bool> ShareKey(
-            IEnumerable<FilePickerItemViewModel> files,
-            IEnumerable<AxCrypt.Core.Crypto.Asymmetric.UserPublicKey> userPublicKeys
-        )
+        public async Task<FileOperationContext> ShareKeyWithCloudFile(FilePickerItemViewModel fileItem)
         {
-            if (files == null)
-            {
-                return false;
-            }
-
-            if (userPublicKeys == null)
-            {
-                return false;
-            }
-
-            _shareKeyUserList = userPublicKeys;
-            using (
-                await New<IProgressDialog>()
-                    .Show("Applying share key...", Texts.ProgressIndicatorWaitMessage)
-            )
-            {
-                await ShareKeyFiles(files);
-            }
-
-            return true;
-        }
-
-        private async Task ShareKeyFiles(IEnumerable<FilePickerItemViewModel> files)
-        {
-            foreach (FilePickerItemViewModel fileItem in files)
-            {
-                if (fileItem.Source == AxCrypt.Core.IO.FileProvider.Local)
-                {
-                    await ShareKeyWithLocalFile(fileItem);
-                    continue;
-                }
-
-                await ShareKeyWithCloudFile(fileItem);
-            }
-
-            //await New<FileSystemState>().Save();
-        }
-
-        private async Task ShareKeyWithLocalFile(FilePickerItemViewModel localFileItem)
-        {
-            _filesOrfolderPaths.Add(localFileItem.FileID);
-            IDataStore file = New<IDataStore>(localFileItem.FileID);
-            if (!file.IsEncrypted())
-            {
-                FileOperationContext fileOperationContext = new FileOperationContext(
-                    file.FullName,
-                    ErrorStatus.WrongFileExtensionError
-                );
-
-                New<IStatusChecker>()
-                    .CheckStatusAndShowMessage(
-                        fileOperationContext.ErrorStatus,
-                        fileOperationContext.FullName,
-                        fileOperationContext.InternalMessage
-                    );
-
-                return;
-            }
-
-            await ProcessShareKey(file, localFileItem, New<KnownIdentities>().DefaultEncryptionIdentity, true);
-        }
-
-        private async Task ShareKeyWithCloudFile(FilePickerItemViewModel fileItem)
-        {
-            string fileName = fileItem.FileName;
-            string fullFilePath = _fileProviderService.GetImportedFilePath(fileName);
-            _filesOrfolderPaths.Add(fullFilePath);
+            string fullFilePath = _fileProviderService.GetImportedFilePath(fileItem.FileName);
 
             IDataStore file = New<IDataStore>(fullFilePath);
             if (!file.IsEncrypted())
@@ -710,136 +626,63 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     ErrorStatus.WrongFileExtensionError
                 );
 
-                New<IStatusChecker>()
-                    .CheckStatusAndShowMessage(
+                New<IStatusChecker>().CheckStatusAndShowMessage(
                         fileOperationContext.ErrorStatus,
                         fileOperationContext.FullName,
                         fileOperationContext.InternalMessage
                     );
 
-                return;
+                return fileOperationContext;
             }
 
-            FileOperationContext preparingResult = await New<ImportedFileStorage>()
-                .CopyFileToImportedFiles(
+            return await New<ImportedFileStorage>().CopyFileToImportedFiles(
                     async (fileStream) => await _fileProviderService.CopyFileToImportedFiles(fileItem, fileStream),
                     file
-                );
-
-            await ShareKeyPreparedFile(preparingResult, fileItem, false);
-        }
-
-        public async Task ShareKeyPreparedFile(FileOperationContext preparingResult, FilePickerItemViewModel fileItem, bool localFile)
-        {
-            if (preparingResult.ErrorStatus != ErrorStatus.Success)
-            {
-                New<IStatusChecker>()
-                    .CheckStatusAndShowMessage(
-                        preparingResult.ErrorStatus,
-                        preparingResult.FullName,
-                        preparingResult.InternalMessage
-                    );
-                return;
-            }
-
-            await ProcessShareKey(
-                New<IDataStore>(preparingResult.FullName),
-                fileItem,
-                New<KnownIdentities>().DefaultEncryptionIdentity,
-                localFile
             );
         }
 
-        private async Task ProcessShareKey(IDataStore actualFile, FilePickerItemViewModel fileItem, LogOnIdentity identity, bool localFile)
+        public async Task ShareKeyPreparedFile(IEnumerable<FileOperationContext> shareKeyFileList, IEnumerable<FilePickerItemViewModel> fileItem, IEnumerable<UserPublicKey> userPublicKeys)
         {
-            if (!TryFindDecryptionKey(actualFile))
+            if (userPublicKeys == null)
             {
                 return;
             }
 
-            await _filesOrfolderPaths.ChangeKeySharingAsync(_shareKeyUserList, identity);
+            await shareKeyFileList.Select(f => f.FullName).ChangeKeySharingAsync(userPublicKeys, New<KnownIdentities>().DefaultEncryptionIdentity);
 
-            IDataStore decryptedInfo = GetDecryptedInfo(actualFile);
+            IList<FilePickerItemViewModel> itemList = fileItem.ToList();
+            int i = 0;
 
-            ActiveFile activeFile = new ActiveFile(actualFile, decryptedInfo, New<KnownIdentities>().DefaultEncryptionIdentity,
-                ActiveFileStatus.NotDecrypted,
-                Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId
-            );
-
-            await UpdateOriginalFileAsync(actualFile, fileItem, activeFile, true);
-
-            if (!localFile)
+            foreach (FileOperationContext sharedFileInfo in shareKeyFileList)
             {
-                actualFile.Delete();
+                if (sharedFileInfo.ErrorStatus != ErrorStatus.Success)
+                {
+                    New<IStatusChecker>()
+                        .CheckStatusAndShowMessage(
+                            sharedFileInfo.ErrorStatus,
+                            sharedFileInfo.FullName,
+                            sharedFileInfo.InternalMessage
+                        );
+                    return;
+                }
+
+                await ProcessShareKey(
+                    New<IDataStore>(sharedFileInfo.FullName),
+                    itemList[i]
+                );
+
+                i++;
             }
         }
 
-        private async Task<ActiveFile> AddActiveFileToRecentFilesListAsync(IDataStore actualFile)
+        private async Task ProcessShareKey(IDataStore fileInfo, FilePickerItemViewModel cloudFileItem)
         {
-            IDataStore decryptedInfo = GetDecryptedInfo(actualFile);
-            ActiveFile activeFile = new ActiveFile(
-                actualFile,
-                decryptedInfo,
-                New<KnownIdentities>().DefaultEncryptionIdentity,
-                ActiveFileStatus.NotDecrypted,
-                Resolve.CryptoFactory.Default(New<ICryptoPolicy>()).CryptoId
-            );
-
-            _fileSystemState.Add(activeFile);
-            await _fileSystemState.Save();
-
-            FileOperationContext fileOperationContext = new FileOperationContext(
-                actualFile.FullName,
-                ErrorStatus.Success
-            );
-
-            FileOpenedContext fileOpenedContext = new FileOpenedContext(
-                fileOperationContext,
-                activeFile
-            );
-
-            if (fileOpenedContext.AddedFile == null)
+            if (!TryFindDecryptionKey(fileInfo))
             {
-                await _securedFilesViewModel.UpdateRecentFilesListAsync();
-                return null;
+                return;
             }
 
-            if (_securedFilesViewModel.CheckIfFileAlreadyInRecentFileList(fileOpenedContext.AddedFile))
-            {
-                FileDetails? existingFile = _securedFilesViewModel.Files.FirstOrDefault(f =>
-                    f.FilePath == fileOpenedContext.AddedFile.EncryptedFileInfo.FullName
-                );
-
-                _securedFilesViewModel.Files.Remove(existingFile);
-            }
-
-            FileDetails sharedKeyFile = new FileDetails(activeFile);
-            _securedFilesViewModel.Files.Add(sharedKeyFile);
-            await _securedFilesViewModel.UpdateRecentFilesListAsync();
-
-            return activeFile;
-        }
-
-        private static IDataStore GetDecryptedInfo(IDataStore actualFile)
-        {
-            EncryptedProperties properties = New<AxCryptFile>()
-                .CreateEncryptedProperties(
-                    actualFile,
-                    New<KnownIdentities>().DefaultEncryptionIdentity
-                );
-
-            IDataStore decryptedInfo = New<IDataStore>(
-                FileOperation.GetTemporaryDestinationName(
-                    Resolve
-                        .Portable.Path()
-                        .Combine(
-                            Resolve.Portable.Path().GetDirectoryName(actualFile.FullName),
-                            properties.FileMetaData.FileName
-                        )
-                )
-            );
-
-            return decryptedInfo;
+            await UpdateShareKeyFileAsync(fileInfo, cloudFileItem, true);
         }
 
         /**
@@ -911,49 +754,23 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             return true;
         }
 
-        private async Task<bool> UpdateOriginalFileAsync(
-            IDataStore actualFile,
-            FilePickerItemViewModel fileItem,
-            ActiveFile encryptedFile,
+        private async Task<bool> UpdateShareKeyFileAsync(
+            IDataStore fileInfo,
+            FilePickerItemViewModel cloudFileItem,
             bool renameOnDelete = false
         )
         {
-            string newFileId = await _fileProviderService.MoveFile(
-                fileItem,
-                encryptedFile.EncryptedFileInfo.Name,
-                encryptedFile.EncryptedFileInfo
-            );
+            bool fileStatus = await _fileProviderService.UpdateFile(cloudFileItem, fileInfo);
 
-            if (string.IsNullOrEmpty(newFileId))
+            if (!fileStatus)
             {
-                await New<IPopup>()
-                    .ShowAsync(
-                        PopupButtons.Ok,
-                        Texts.WarningTitle,
-                        "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
-                        Common.DoNotShowAgainOptions.None
-                    );
+                await New<IPopup>().ShowAsync(
+                    PopupButtons.Ok,
+                    Texts.WarningTitle,
+                    "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
+                    Common.DoNotShowAgainOptions.None
+                );
 
-                return false;
-            }
-
-            if (
-                !await _fileProviderService.DeleteFileAsync(
-                    string.Empty,
-                    fileItem,
-                    encryptedFile.EncryptedFileInfo.FullName,
-                    newFileId,
-                    renameOnDelete
-                )
-            )
-            {
-                await New<IPopup>()
-                    .ShowAsync(
-                        PopupButtons.Ok,
-                        Texts.WarningTitle,
-                        "Your file was successfully encrypted, however there was a problem when deleting the original file. The original left is left untouched and needs to be removed manually.",
-                        Common.DoNotShowAgainOptions.None
-                    );
                 return false;
             }
 

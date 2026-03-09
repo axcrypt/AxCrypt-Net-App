@@ -301,7 +301,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             }
         }
 
-        public override async Task<bool> UpdateFile(FilePickerItemViewModel fileItem, AxCrypt.Core.Session.ActiveFile encryptedFile)
+        public override async Task<bool> UpdateFile(FilePickerItemViewModel cloudFileItem, IDataStore fileInfo, CancellationToken ct = default)
         {
             if (!New<IInternetState>().Connected)
             {
@@ -310,25 +310,43 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
 
             try
             {
-                Google.Apis.Drive.v3.Data.File file = _driveService!.Files.Get(fileItem.FileID).Execute();
+                IList<string> actualParentPath = await GetParentFolderPath(cloudFileItem.FileID);
 
-                string contentType = "application/octet-stream";
+                cloudFileItem.ParentPath = await CreateCloudFolder();
+                string newFileId = await UploadFileAsync(cloudFileItem, fileInfo.Name, fileInfo);
 
-                file.Name = encryptedFile.EncryptedFileInfo.Name;
-                file.MimeType = contentType;
-
-                using (Stream stream = encryptedFile.EncryptedFileInfo.OpenRead())
+                if (string.IsNullOrEmpty(newFileId))
                 {
-                    FilesResource.UpdateMediaUpload request = _driveService.Files.Update(
-                        file,
-                        fileItem.FileID,
-                        stream,
-                        contentType
-                    );
+                    await New<IPopup>().ShowAsync(
+                            PopupButtons.Ok,
+                            Texts.WarningTitle,
+                            "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
+                            Common.DoNotShowAgainOptions.None
+                        );
 
-                    await request.UploadAsync();
-                    return request.ResponseBody != null;
+                    return false;
                 }
+
+                if (!await DeleteFileAsync(fileInfo.FullName, cloudFileItem, fileInfo.FullName))
+                {
+                    await New<IPopup>().ShowAsync(
+                            PopupButtons.Ok,
+                            Texts.WarningTitle,
+                            "Your file was successfully encrypted, however there was a problem when deleting the original file. The original left is left untouched and needs to be removed manually.",
+                            Common.DoNotShowAgainOptions.None
+                        );
+
+                    return false;
+                }
+
+                if (await MoveFile(newFileId, cloudFileItem.ParentPath, actualParentPath.FirstOrDefault()!))
+                {
+                    FilesResource.DeleteRequest deleteRequest = _driveService.Files.Delete(cloudFileItem.ParentPath);
+                    deleteRequest.SupportsAllDrives = true;
+                    await deleteRequest.ExecuteAsync(ct);
+                }
+
+                return true;
             }
             catch (Exception)
             {
@@ -351,19 +369,14 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                 Name = fileInfo.Name
             };
 
+            if (_files.Any(f => f.FileID == actualFileItem.FileID))
+            {
+                fileMetadata.Parents = await GetParentFolderPath(actualFileItem.FileID);
+            }
+
             if (!string.IsNullOrEmpty(actualFileItem.ParentPath))
             {
                 fileMetadata.Parents = new List<string> { actualFileItem.ParentPath };
-            }
-
-            if (_files.Any(f => f.FileID == actualFileItem.FileID))
-            {
-                GetRequest getRequest = _driveService!.Files.Get(actualFileItem.FileID);
-                getRequest.Fields = "parents";
-                getRequest.SupportsAllDrives = true;
-
-                Google.Apis.Drive.v3.Data.File existingFile = await getRequest.ExecuteAsync(ct);
-                fileMetadata.Parents = existingFile.Parents;
             }
 
             const string contentType = "application/octet-stream";
@@ -489,6 +502,56 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             {
                 return false;
             }
+        }
+
+        private async Task<string> CreateCloudFolder()
+        {
+            Google.Apis.Drive.v3.Data.File folderMetadata = new Google.Apis.Drive.v3.Data.File()
+            {
+                Name = "/MyAxcryptTempFile_" + GenerateRandomFolderName(),
+                MimeType = "application/vnd.google-apps.folder"
+            };
+
+            Google.Apis.Drive.v3.FilesResource.CreateRequest folderRequest = _driveService.Files.Create(folderMetadata);
+            folderRequest.Fields = "id";
+
+            Google.Apis.Drive.v3.Data.File folder = folderRequest.Execute();
+            return folder.Id;
+        }
+
+        public async Task<bool> MoveFile(string fileId, string folderId, string parentFolderPath)
+        {
+            try
+            {
+                FilesResource.UpdateRequest moveRequest = _driveService.Files.Update(new Google.Apis.Drive.v3.Data.File(), fileId);
+                moveRequest.AddParents = parentFolderPath;
+                moveRequest.RemoveParents = folderId;
+                moveRequest.Fields = "id, parents";
+                moveRequest.SupportsAllDrives = true;
+
+                Google.Apis.Drive.v3.Data.File movedFile = await moveRequest.ExecuteAsync();
+                return movedFile != null;
+            }
+            catch (OperationCanceledException)
+            {
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Move failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        private async Task<IList<string>> GetParentFolderPath(string fileId)
+        {
+            GetRequest getRequest = _driveService!.Files.Get(fileId);
+            getRequest.Fields = "parents";
+            getRequest.SupportsAllDrives = true;
+
+            Google.Apis.Drive.v3.Data.File existingFile = await getRequest.ExecuteAsync();
+
+            return existingFile.Parents;
         }
 
         private static readonly string[] SUFFIXES = { "Bytes", "KB", "MB", "GB", "TB", "PB" };

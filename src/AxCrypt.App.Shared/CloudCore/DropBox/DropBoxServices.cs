@@ -5,7 +5,6 @@ using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels.Authentication;
 using AxCrypt.Content;
 using AxCrypt.Core.IO;
-using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using Dropbox.Api;
 using Dropbox.Api.Files;
@@ -327,7 +326,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
 
                     string renamedFilePath = NormalizeToCloudPath(dropBoxFilePath) + randomlyEncryptedFile.Name;
 
-                    if (await MoveFile(fileItem, renamedFilePath))
+                    if (await MoveFile(fileItem.FileID, renamedFilePath))
                     {
                         dropBoxFilePath = renamedFilePath;
                     }
@@ -366,9 +365,9 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
             }
         }
 
-        private async Task<bool> MoveFile(FilePickerItemViewModel fileItem, string toPath)
+        private async Task<bool> MoveFile(string fileId, string toPath)
         {
-            RelocationArg relocationArg = new RelocationArg(fileItem.FileID, toPath, false, true);
+            RelocationArg relocationArg = new RelocationArg(fileId, toPath, false, true);
             RelocationResult Result = await _dropboxclient.Files.MoveV2Async(relocationArg);
 
             if (Result == null)
@@ -471,7 +470,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
             return string.Empty;
         }
 
-        public override async Task<bool> UpdateFile(FilePickerItemViewModel fileItem, ActiveFile encryptedFile)
+        public override async Task<bool> UpdateFile(FilePickerItemViewModel cloudFileItem, IDataStore fileInfo, CancellationToken ct = default)
         {
             if (!New<IInternetState>().Connected)
             {
@@ -480,14 +479,40 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
 
             try
             {
-                UploadArg uploadArg = new UploadArg(fileItem.FileID, WriteMode.Overwrite.Instance, false, DateTime.Now);
+                string temCloudFolder = "/MyAxcryptTempFile_" + GenerateRandomFolderName();
+                string dropboxPath = temCloudFolder + "/" + fileInfo.Name;
+                string newFileId = await UploadFileAsync(fileInfo, dropboxPath, WriteMode.Add.Instance, true);
 
-                using Stream stream = encryptedFile.EncryptedFileInfo.OpenRead();
-
-                FileMetadata metadata = await _dropboxclient.Files.UploadAsync(uploadArg, stream);
-                if (metadata != null)
+                if (string.IsNullOrEmpty(newFileId))
                 {
-                    return true;
+                    await New<IPopup>().ShowAsync(
+                            PopupButtons.Ok,
+                            Texts.WarningTitle,
+                            "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
+                            Common.DoNotShowAgainOptions.None
+                        );
+
+                    return false;
+                }
+
+                if (!await DeleteFileAsync(fileInfo.FullName, cloudFileItem, fileInfo.FullName))
+                {
+                    await New<IPopup>().ShowAsync(
+                            PopupButtons.Ok,
+                            Texts.WarningTitle,
+                            "Your file was successfully encrypted, however there was a problem when deleting the original file. The original left is left untouched and needs to be removed manually.",
+                            Common.DoNotShowAgainOptions.None
+                        );
+
+                    return false;
+                }
+
+                if (await MoveFile(dropboxPath, cloudFileItem.FileID))
+                {
+                    DeleteArg deleteArg = new DeleteArg(temCloudFolder);
+                    DeleteResult Result = await _dropboxclient.Files.DeleteV2Async(deleteArg);
+
+                    return Result != null;
                 }
 
                 return false;

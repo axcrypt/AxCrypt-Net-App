@@ -5,9 +5,10 @@ using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels.Authentication;
 using AxCrypt.Content;
 using AxCrypt.Core.IO;
-using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using Azure.Core;
+using Dropbox.Api;
+using Dropbox.Api.Files;
 using Microsoft.Graph;
 using Microsoft.Graph.Drives.Item.Items.Item.CreateUploadSession;
 using Microsoft.Graph.Models;
@@ -431,7 +432,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
                     randomlyEncryptedFile.Delete();
                 }
 
-                if (originalFilePath != null)
+                if (string.IsNullOrEmpty(originalFilePath))
                 {
                     IDataStore file = New<IDataStore>(originalFilePath);
                     if (file != null && file.IsAvailable)
@@ -469,7 +470,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
             }
         }
 
-        public override async Task<bool> UpdateFile(FilePickerItemViewModel fileItem, ActiveFile encryptedFile)
+        public override async Task<bool> UpdateFile(FilePickerItemViewModel cloudFileItem, IDataStore fileInfo, CancellationToken ct = default)
         {
             if (!New<IInternetState>().Connected)
             {
@@ -478,8 +479,60 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
             try
             {
-                await UploadFileAsync(fileItem, encryptedFile.EncryptedFileInfo.Name, encryptedFile.EncryptedFileInfo, true);
-                return await Rename(fileItem.FileID, encryptedFile.EncryptedFileInfo.Name);
+                string actualParentPath = cloudFileItem.ParentPath;
+
+                cloudFileItem.ParentPath = "/MyAxcryptTempFile_" + GenerateRandomFolderName();
+                string newFileId = await UploadFileAsync(cloudFileItem, fileInfo.Name, fileInfo);
+
+                if (string.IsNullOrEmpty(newFileId))
+                {
+                    await New<IPopup>().ShowAsync(
+                            PopupButtons.Ok,
+                            Texts.WarningTitle,
+                            "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
+                            Common.DoNotShowAgainOptions.None
+                        );
+
+                    return false;
+                }
+
+                if (!await DeleteFileAsync(fileInfo.FullName, cloudFileItem, fileInfo.FullName))
+                {
+                    await New<IPopup>().ShowAsync(
+                            PopupButtons.Ok,
+                            Texts.WarningTitle,
+                            "Your file was successfully encrypted, however there was a problem when deleting the original file. The original left is left untouched and needs to be removed manually.",
+                            Common.DoNotShowAgainOptions.None
+                        );
+
+                    return false;
+                }
+
+                DriveItem destinationFolder;
+                string normalizedPath = actualParentPath?.Trim('/');
+
+                if (string.IsNullOrEmpty(normalizedPath) || normalizedPath.Equals("root", StringComparison.OrdinalIgnoreCase) ||
+                normalizedPath.StartsWith("drives/", StringComparison.OrdinalIgnoreCase))
+                {
+                    destinationFolder = await _graphClient.Drives[_userDriveId].Root.GetAsync();
+                }
+                else
+                {
+                    destinationFolder = await _graphClient.Drives[_userDriveId].Root.ItemWithPath(actualParentPath).GetAsync();
+                }
+
+                DriveItem temFolderId = await _graphClient.Drives[_userDriveId].Root.ItemWithPath(cloudFileItem.ParentPath).GetAsync();
+
+                if (temFolderId?.Id == null)
+                    return false;
+
+                if (await MoveFile(newFileId, destinationFolder!.Id!))
+                {
+                    await _graphClient.Drives[_userDriveId].Items[temFolderId.Id].DeleteAsync(cancellationToken: ct);
+                    return true;
+                }
+
+                return false;
             }
             catch (HttpRequestException e)
             {
@@ -491,6 +544,32 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
             }
 
             return false;
+        }
+
+        public async Task<bool> MoveFile(string fileId, string folderId)
+        {
+            try
+            {
+                DriveItem moveItem = new DriveItem
+                {
+                    ParentReference = new ItemReference
+                    {
+                        Id = folderId
+                    }
+                };
+
+                DriveItem movedFile = await _graphClient.Drives[_userDriveId].Items[fileId].PatchAsync(moveItem);
+                return movedFile != null;
+            }
+            catch (OperationCanceledException)
+            {
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Move failed: {ex.Message}");
+                return false;
+            }
         }
 
         private async Task<bool> Rename(string fileId, string fullFilePath)

@@ -1,17 +1,11 @@
 ﻿using AxCrypt.App.Shared.UI.ViewModels;
-using AxCrypt.App.Shared.ViewModels.Authentication;
 using AxCrypt.App.Shared.Utility;
+using AxCrypt.App.Shared.ViewModels.Authentication;
 using AxCrypt.Core;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Core.Session;
 
 namespace AxCrypt.App.Shared.CloudCore
 {
@@ -36,7 +30,7 @@ namespace AxCrypt.App.Shared.CloudCore
 
         public abstract Task CopyFileToImportedFiles(FilePickerItemViewModel file, Stream destinationFileStream);
 
-        public abstract Task<bool> UpdateFile(FilePickerItemViewModel fileItem, ActiveFile encryptedFile);
+        public abstract Task<bool> UpdateFile(FilePickerItemViewModel cloudFileItem, IDataStore fileInfo, CancellationToken ct = default);
 
         public abstract Task<string> MoveFile(FilePickerItemViewModel fileItem, string fileName, IDataStore fileInfo);
 
@@ -140,6 +134,21 @@ namespace AxCrypt.App.Shared.CloudCore
             randomName.Append(".tmp");
 
             return Resolve.Portable.Path().Combine(directory, randomName.ToString());
+        }
+
+        public static string GenerateRandomFolderName()
+        {
+            const string validFileNameChars = "abcdefghijklmnopqrstuvwxyz";
+            const int randomLength = 8;
+            
+            StringBuilder randomName = new StringBuilder(randomLength + 4);
+            byte[] random = Resolve.RandomGenerator.Generate(randomLength);
+            for (int i = 0; i < randomLength; ++i)
+            {
+                randomName.Append(validFileNameChars[random[i] % validFileNameChars.Length]);
+            }
+
+            return randomName.ToString();
         }
 
         public static bool IsNetworkError(Exception ex)
