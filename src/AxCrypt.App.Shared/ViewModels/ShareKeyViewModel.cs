@@ -20,7 +20,7 @@ public class ShareKeyViewModel : ViewModelBase
 {
     public LogOnViewModel LogOnViewModel;
     private SharingListViewModel? _viewModel;
-    private EmailAddress? UserEmailForContextMenuAction;
+    public EmailAddress? UserEmailForContextMenuAction;
     private IEnumerable<string>? _shareKeyFileNameList;
 
     public SubscriptionLevel SubscriptionLevel { get; set; }
