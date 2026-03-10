@@ -1,4 +1,5 @@
-﻿using AxCrypt.App.Shared.ViewModels;
+﻿using AxCrypt.App.Shared.Utility;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
@@ -48,6 +49,11 @@ public static class ShareKeyService
             IEnumerable<string> encryptedFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncrypted());
             SharingListViewModel viewModel = await SharingListViewModel.CreateForFilesAsync(encryptedFileNames, Resolve.KnownIdentities.DefaultEncryptionIdentity);
             await sharekeyViewModel!.SetSelectedFilesOrFolders(fileNames, viewModel);
+
+            if (sharekeyViewModel.PageResult == DialogResult.Cancel)
+            {
+                return;
+            }
 
             if (encryptableFileNames != null && encryptableFileNames.Any())
             {
