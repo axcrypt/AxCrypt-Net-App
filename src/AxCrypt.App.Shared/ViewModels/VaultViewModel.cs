@@ -550,6 +550,11 @@ namespace AxCrypt.App.Shared.ViewModels
             SharingListViewModel viewModel = await SharingListViewModel.CreateForVaultsAsync(new List<string> { folderPath }, Resolve.KnownIdentities.DefaultEncryptionIdentity);
             await _sharekeyViewModel!.SetSelectedFilesOrFolders(new List<string> { folderPath }, viewModel);
 
+            if (_sharekeyViewModel.PageResult == Utility.DialogResult.Cancel)
+            {
+                return;
+            }
+
             await viewModel.ShareVault.ExecuteAsync(null!);
         }
     }
