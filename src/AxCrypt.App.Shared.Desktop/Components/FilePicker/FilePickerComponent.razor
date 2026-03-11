@@ -16,7 +16,7 @@
         width: 100%;
         justify-content: center;
         background: conic-gradient(from 10.99deg at 98.18% 128.62%, #fffee8 0deg, rgba(200, 199, 180, .8) 353.48deg, #f5fff0 360deg);
-        height: 53vh;
+        height: 89%;
         align-items: center;
     }
 </style>
@@ -49,15 +49,13 @@
                     </div>
                 </div>
             </div>
-            <div class="file-picker-modal-body">
+            <div class="file-picker-modal-body" style="position:relative">
                 @if (ViewModel.ShowProgressBar)
                 {
-                    <div style="position:relative;">
-                        <div class="file-action-progress-bar">
-                            <div class="loading-content">
-                                <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
-                                <span style="color:black ">@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage</span>
-                            </div>
+                    <div class="file-action-progress-bar">
+                        <div class="loading-content">
+                            <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
+                            <span style="color:black ">@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage</span>
                         </div>
                     </div>
                 }
