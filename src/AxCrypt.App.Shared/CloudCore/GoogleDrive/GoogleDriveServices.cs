@@ -339,11 +339,34 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                     return false;
                 }
 
-                if (await MoveFile(newFileId, cloudFileItem.ParentPath, actualParentPath.FirstOrDefault()!))
+                if (!await MoveFile(newFileId, cloudFileItem.ParentPath, actualParentPath.FirstOrDefault()!))
+                {
+                    await New<IPopup>().ShowAsync(
+                        PopupButtons.Ok,
+                        Texts.WarningTitle,
+                        "The file was uploaded to the temporary folder successfully. However, it could not be moved to the destination folder. The file remains in the temporary folder and must be moved to the destination folder manually.",
+                        Common.DoNotShowAgainOptions.None
+                    );
+
+                    return false;
+                }
+
+                try
                 {
                     FilesResource.DeleteRequest deleteRequest = _driveService.Files.Delete(cloudFileItem.ParentPath);
                     deleteRequest.SupportsAllDrives = true;
                     await deleteRequest.ExecuteAsync(ct);
+                }
+                catch (Exception ex)
+                {
+                    await New<IPopup>().ShowAsync(
+                        PopupButtons.Ok,
+                        Texts.WarningTitle,
+                        "Your file was uploaded successfully. However, there was a problem deleting the temporary folder created for the secure upload. Please remove the temporary folder manually.",
+                        Common.DoNotShowAgainOptions.None
+                    );
+
+                    return false;
                 }
 
                 return true;

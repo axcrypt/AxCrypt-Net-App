@@ -7,8 +7,6 @@ using AxCrypt.Content;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.UI;
 using Azure.Core;
-using Dropbox.Api;
-using Dropbox.Api.Files;
 using Microsoft.Graph;
 using Microsoft.Graph.Drives.Item.Items.Item.CreateUploadSession;
 using Microsoft.Graph.Models;
@@ -526,13 +524,34 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
                 if (temFolderId?.Id == null)
                     return false;
 
-                if (await MoveFile(newFileId, destinationFolder!.Id!))
+                if (!await MoveFile(newFileId, destinationFolder!.Id!))
+                {
+                    await New<IPopup>().ShowAsync(
+                        PopupButtons.Ok,
+                        Texts.WarningTitle,
+                        "The file was uploaded to the temporary folder successfully. However, it could not be moved to the destination folder. The file remains in the temporary folder and must be moved to the destination folder manually.",
+                        Common.DoNotShowAgainOptions.None
+                    );
+
+                    return false;
+                }
+
+                try
                 {
                     await _graphClient.Drives[_userDriveId].Items[temFolderId.Id].DeleteAsync(cancellationToken: ct);
                     return true;
                 }
+                catch (Exception ex)
+                {
+                    await New<IPopup>().ShowAsync(
+                        PopupButtons.Ok,
+                        Texts.WarningTitle,
+                        "Your file was uploaded successfully. However, there was a problem deleting the temporary folder created for the secure upload. Please remove the temporary folder manually.",
+                        Common.DoNotShowAgainOptions.None
+                    );
 
-                return false;
+                    return false;
+                }
             }
             catch (HttpRequestException e)
             {

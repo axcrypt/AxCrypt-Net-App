@@ -760,21 +760,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             bool renameOnDelete = false
         )
         {
-            bool fileStatus = await _fileProviderService.UpdateFile(cloudFileItem, fileInfo);
-
-            if (!fileStatus)
-            {
-                await New<IPopup>().ShowAsync(
-                    PopupButtons.Ok,
-                    Texts.WarningTitle,
-                    "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
-                    Common.DoNotShowAgainOptions.None
-                );
-
-                return false;
-            }
-
-            return true;
+            return await _fileProviderService.UpdateFile(cloudFileItem, fileInfo);
         }
 
         #endregion ShareKey

@@ -367,15 +367,23 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
 
         private async Task<bool> MoveFile(string fileId, string toPath)
         {
-            RelocationArg relocationArg = new RelocationArg(fileId, toPath, false, true);
-            RelocationResult Result = await _dropboxclient.Files.MoveV2Async(relocationArg);
-
-            if (Result == null)
+            try
             {
+                RelocationArg relocationArg = new RelocationArg(fileId, toPath, false, true);
+                RelocationResult result = await _dropboxclient.Files.MoveV2Async(relocationArg);
+
+                if (result == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 return false;
             }
-
-            return true;
         }
 
         public async Task<string> UploadFileAsync(IDataStore fileInfo, string destinationPath, WriteMode writeMode, bool autoRename, CancellationToken ct = default)
@@ -507,15 +515,35 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
                     return false;
                 }
 
-                if (await MoveFile(dropboxPath, cloudFileItem.FileID))
+                if (!await MoveFile(dropboxPath, cloudFileItem.FileID))
+                {
+                    await New<IPopup>().ShowAsync(
+                        PopupButtons.Ok,
+                        Texts.WarningTitle,
+                        "The file was uploaded to the temporary folder successfully. However, it could not be moved to the destination folder. The file remains in the temporary folder and must be moved to the destination folder manually.",
+                        Common.DoNotShowAgainOptions.None
+                    );
+
+                    return false;
+                }
+
+                try
                 {
                     DeleteArg deleteArg = new DeleteArg(temCloudFolder);
                     DeleteResult Result = await _dropboxclient.Files.DeleteV2Async(deleteArg);
-
                     return Result != null;
                 }
+                catch (Exception ex)
+                {
+                    await New<IPopup>().ShowAsync(
+                        PopupButtons.Ok,
+                        Texts.WarningTitle,
+                        "Your file was uploaded successfully. However, there was a problem deleting the temporary folder created for the secure upload. Please remove the temporary folder manually.",
+                        Common.DoNotShowAgainOptions.None
+                    );
 
-                return false;
+                    return false;
+                }
             }
             catch (Exception)
             {
