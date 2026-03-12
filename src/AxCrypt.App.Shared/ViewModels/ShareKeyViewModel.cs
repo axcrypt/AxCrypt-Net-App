@@ -10,7 +10,6 @@ using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using Microsoft.AspNetCore.Components;
 using System.Collections.ObjectModel;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -39,10 +38,11 @@ public class ShareKeyViewModel : ViewModelBase
     }
 
     public IEnumerable<string>? SelectedFilesOrFolders { get; set; }
-    
+
     public bool IsCloudFile { get; set; }
 
-    public DialogResult PageResult { get { return GetProperty<DialogResult>(nameof(PageResult)); } set { SetProperty(nameof(PageResult), value); } }
+    public DialogResult PageResult
+    { get { return GetProperty<DialogResult>(nameof(PageResult)); } set { SetProperty(nameof(PageResult), value); } }
 
     public ShareKeyViewModel()
     {
@@ -256,7 +256,7 @@ public class ShareKeyViewModel : ViewModelBase
             return;
         }
 
-        if (New<AxCryptOnlineState>().IsOffline && !await AddShareKeyWhenOffline(addedUserEmailAddress))
+        if ((New<AxCryptOnlineState>().IsOffline) && !await AddShareKeyWhenOffline(addedUserEmailAddress))
         {
             return;
         }
@@ -271,7 +271,14 @@ public class ShareKeyViewModel : ViewModelBase
                 accountStatus = await ShareNewContactAsync();
             }
 
-            sharedUser = new ShareKeyUser(EmailAddress.Parse(_viewModel!.NewKeyShare), accountStatus);
+            try
+            {
+                sharedUser = new ShareKeyUser(EmailAddress.Parse(_viewModel!.NewKeyShare), accountStatus);
+            }
+            catch (Exception ex)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.KeySharingOffline);
+            }
         }
         else
         {
