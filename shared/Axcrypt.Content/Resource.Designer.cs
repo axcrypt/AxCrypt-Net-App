@@ -1543,7 +1543,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We use cookies to enhance your browsing experience and to understand how visitors use our website. By continuing to use this site you consent to the use of cookies in accordance with our &lt;a href=&apos;/information/privacy-policy&apos;&gt;cookie policy&lt;/a&gt;..
+        ///   Looks up a localized string similar to We use cookies to enhance your browsing experience and to understand how visitors use our website. By continuing to use this site you consent to the use of cookies in accordance with our &lt;a href=&apos;/information/privacy-policy/&apos;&gt;cookie policy&lt;/a&gt;..
         /// </summary>
         public static string AllowCookieInfoText {
             get {
@@ -53840,11 +53840,30 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Easy to use, Strong, and Secure &lt;span&gt;Encryption&lt;/span&gt;.
+        ///   Looks up a localized string similar to The easiest way to &lt;span&gt;encrypt&lt;/span&gt;, &lt;span&gt;share&lt;/span&gt; and &lt;span&gt;secure&lt;/span&gt;&lt;br/&gt; your files..
         /// </summary>
         public static string HomeHeroHeading1 {
             get {
                 return ResourceManager.GetString("HomeHeroHeading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protect files and folders with strong encryption before sharing them or storing in Google Drive, 
+        ///OneDrive, or Dropbox with zero-knowledge encryption..
+        /// </summary>
+        public static string HomeHeroHeading2 {
+            get {
+                return ResourceManager.GetString("HomeHeroHeading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to everywhere.
+        /// </summary>
+        public static string HomeHeroHeading3 {
+            get {
+                return ResourceManager.GetString("HomeHeroHeading3", resourceCulture);
             }
         }
         
@@ -53903,25 +53922,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Encrypt &amp; decrypt files effortlessly on all major devices, with support for widely used languages.
-        /// </summary>
-        public static string HomeSellingPointAxcryptMobileBody {
-            get {
-                return ResourceManager.GetString("HomeSellingPointAxcryptMobileBody", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Multi-Device &amp; Multilingual.
-        /// </summary>
-        public static string HomeSellingPointAxcryptMobileHeading {
-            get {
-                return ResourceManager.GetString("HomeSellingPointAxcryptMobileHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Automatically secure your files in Dropbox, Google Drive and OneDrive etc..
+        ///   Looks up a localized string similar to Encrypt sensitive data from your Google Drive, Dropbox, and OneDrive under one secure platform..
         /// </summary>
         public static string HomeSellingPointCloudStorageAwarenessBody {
             get {
@@ -53930,29 +53931,11 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cloud storage awareness.
+        ///   Looks up a localized string similar to Cloud Security.
         /// </summary>
         public static string HomeSellingPointCloudStorageAwarenessHeading {
             get {
                 return ResourceManager.GetString("HomeSellingPointCloudStorageAwarenessHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Allow secured files to be opened by other AxCrypt users with their own password..
-        /// </summary>
-        public static string HomeSellingPointCollaborationBody {
-            get {
-                return ResourceManager.GetString("HomeSellingPointCollaborationBody", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Trusted Collaboration.
-        /// </summary>
-        public static string HomeSellingPointCollaborationHeading {
-            get {
-                return ResourceManager.GetString("HomeSellingPointCollaborationHeading", resourceCulture);
             }
         }
         
@@ -53975,20 +53958,38 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage and share your passwords, notes and cards securely wherever you are, and generate strong passwords..
+        ///   Looks up a localized string similar to Allow secured files to be opened by other AxCrypt users with their own password..
         /// </summary>
-        public static string HomeSellingPointPasswordManagementBody {
+        public static string HomeSellingPointSecureFileSharingBody {
             get {
-                return ResourceManager.GetString("HomeSellingPointPasswordManagementBody", resourceCulture);
+                return ResourceManager.GetString("HomeSellingPointSecureFileSharingBody", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password management.
+        ///   Looks up a localized string similar to Secure File Sharing.
         /// </summary>
-        public static string HomeSellingPointPasswordManagementHeading {
+        public static string HomeSellingPointSecureFileSharingHeading {
             get {
-                return ResourceManager.GetString("HomeSellingPointPasswordManagementHeading", resourceCulture);
+                return ResourceManager.GetString("HomeSellingPointSecureFileSharingHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Securely manage and share passwords, notes, and cards, and communicate safely with encrypted messaging across devices..
+        /// </summary>
+        public static string HomeSellingPointSecurePasswordsMessagingBody {
+            get {
+                return ResourceManager.GetString("HomeSellingPointSecurePasswordsMessagingBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secure Passwords &amp; Messaging.
+        /// </summary>
+        public static string HomeSellingPointSecurePasswordsMessagingHeading {
+            get {
+                return ResourceManager.GetString("HomeSellingPointSecurePasswordsMessagingHeading", resourceCulture);
             }
         }
         
@@ -54011,7 +54012,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Convert your confidential plain text into a secure, unreadable format. Type your text, secure it with your AxCrypt account password, and share the encrypted output..
+        ///   Looks up a localized string similar to Convert your confidential plain text into a secure, unreadable format. Type your text, secure it with your AxCrypt account password, and share the encrypted output as a link..
         /// </summary>
         public static string HomeSellingPointTextEncryptionBody {
             get {
@@ -54020,7 +54021,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AxCrypt Vault is a secure, encrypted container for storing your sensitive files and folders automatically..
+        ///   Looks up a localized string similar to AxCrypt Vault is a secure, encrypted container for storing and sharing your sensitive files and folders automatically..
         /// </summary>
         public static string HomeSellingPointVaultEncryptionBody {
             get {
@@ -66393,15 +66394,6 @@ namespace AxCrypt.Content {
         public static string PayPalReadMoreLink {
             get {
                 return ResourceManager.GetString("PayPalReadMoreLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Recognized for Excellence by PCMag Editors&apos; Choice 2025.
-        /// </summary>
-        public static string PCMagEditorsChoice2024 {
-            get {
-                return ResourceManager.GetString("PCMagEditorsChoice2024", resourceCulture);
             }
         }
         

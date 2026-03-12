@@ -634,6 +634,9 @@
     <value>启用后，互联网接入永远不会使用或需要，直到禁用。</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
   </data>
+  <data name="AndMoreText" xml:space="preserve">
+    <value>…以及更多</value>
+  </data>
   <data name="AndroidIosTitle" xml:space="preserve">
     <value>&lt;span&gt;(Android/iOS)&lt;/span&gt;</value>
   </data>
@@ -657,6 +660,9 @@
   </data>
   <data name="AnonymousRenameToolTip" xml:space="preserve">
     <value>通过将安全文件重命名为随机的内容来隐藏安全文件的真实名称。</value>
+  </data>
+  <data name="AnyoneText" xml:space="preserve">
+    <value>任何人</value>
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>AxCrypt ID验证[{0} ]</value>
@@ -4021,6 +4027,24 @@
   <data name="Blog_CWELTI_Title" xml:space="preserve">
     <value>加密货币，为什么加密与它联系在一起？</value>
   </data>
+  <data name="Blog_DADSGCEBPFC_Conclusion_Heading" xml:space="preserve">
+    <value>立即使用 AxCrypt 强化您的加密治理层！</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_Conclusion_Text1" xml:space="preserve">
+    <value>约会平台不仅仅是为娱乐或社交而设计的科技公司。它们是“信任型”企业。有人信任该应用，足以在平台上做真实的自己，表达真实的自我。</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_Conclusion_Text2" xml:space="preserve">
+    <value>当这种信任被破坏，用户的数据、私人对话、个人历史和偏好被泄露时，泄露的影响已不仅仅是数据问题，而是会让平台用户产生恐惧，并立即撤离该平台。</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_Conclusion_Text3" xml:space="preserve">
+    <value>处理用户数据集、内部分析导出或合规相关文档等敏感信息时，需要采用文件级加密。这是一项基础性控制措施，而不仅仅是清单上的一项勾选。</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_Conclusion_Text8" xml:space="preserve">
+    <value>要了解如何使用 AxCrypt 加密来保护您的文件，请访问我们的&lt;a href='https://axcrypt.net/helpcenter/'&gt;帮助中心，查看指南和视频教程&lt;/a&gt;。</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_Conclusion_Text9" xml:space="preserve">
+    <value>关注我们的社交媒体渠道，及时获取有关网络安全最佳实践的最新动态、实用技巧和资讯内容。</value>
+  </data>
   <data name="Blog_DADSGCEBPFC_H1_SH1_Text1" xml:space="preserve">
     <value>&lt;li&gt;数据最小化实践&lt;/li&gt;</value>
   </data>
@@ -4060,17 +4084,65 @@
   <data name="Blog_DADSGCEBPFC_H2_SH1_Text1" xml:space="preserve">
     <value>&lt;b&gt;1. Match Group 数据泄露事件（2026）：&lt;/b&gt;</value>
   </data>
+  <data name="Blog_DADSGCEBPFC_H2_SH1_Text10" xml:space="preserve">
+    <value>&lt;li&gt;随后提起了一项集体诉讼，原告指控其在数据治理和敏感数据保护方面存在疏忽且措施不足。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H2_SH1_Text11" xml:space="preserve">
+    <value>&lt;b&gt;4. Tinder 照片爬取（2019）&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H2_SH1_Text12" xml:space="preserve">
+    <value>&lt;li&gt;威胁行为者爬取并泄露了近7万张Tinder照片，随后将其分享到犯罪论坛上。尽管此次事件并非由漏洞导致，但它表明未受保护的媒体内容多么容易被收集并在官方系统之外被滥用。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H2_SH1_Text2" xml:space="preserve">
+    <value>&lt;li&gt;2026 年 1 月，包括 &lt;a href= 'https://www.malwarebytes.com/blog/news/2026/01/match-hinge-okcupid-and-panera-bread-breached-by-ransomware-group'&gt;Match Group（Tinder、Hinge 和 OkCupid 的母公司）以及 Bumble&lt;/a&gt; 在内的主要行业企业成为攻击目标，凸显企业安全漏洞的持续存在。ShinyHunters 声称通过针对 SSO 的电话钓鱼技术窃取了 1000 万条 Match Group 记录，这反映了公司间普遍存在的泄露模式。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H2_SH1_Text3" xml:space="preserve">
+    <value>&lt;li&gt;据称被窃取的数据包括用户标识、内部文档、订阅详情和追踪信息。Match Group 声称没有证据显示登录信息、财务数据或私人消息被泄露。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H2_SH1_Text4" xml:space="preserve">
+    <value>&lt;b&gt;2. Bumble 企业事件（2026):&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H2_SH1_Text5" xml:space="preserve">
+    <value>&lt;li&gt;大约在同一时间，另一知名公司 Bumble 确认发生了一起数据安全事件，导致承包商账户被入侵，从而短暂但未经授权地访问了内部系统。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H2_SH1_Text6" xml:space="preserve">
+    <value>&lt;li&gt;用户资料、账户数据和消息未被访问，但此事件凸显了第三方访问可能对内部环境造成干扰。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H2_SH1_Text8" xml:space="preserve">
+    <value>&lt;li&gt;2025年年中，一款名为“Tea”的女性专用应用在其遗留存储系统上遭受了重大影响。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H2_SH1_Text9" xml:space="preserve">
+    <value>&lt;li&gt;&lt;a href='https://www.bitdefender.com/en-us/blog/hotforsecurity/major-security-breach-at-tea-app-exposes-sensitive-user-data'&gt;About 72,000 images, including 13,000 verification selfies and IDs, along with 59,000 user photos&lt;/a&gt; from various posts and messages, were exposed before containment of the breach.&lt;/li&gt;</value>
+  </data>
   <data name="Blog_DADSGCEBPFC_H2_SubHeading1" xml:space="preserve">
     <value>&lt;b&gt;以下是迄今为止一些重大约会应用数据泄露事件：&lt;/b&gt;</value>
   </data>
   <data name="Blog_DADSGCEBPFC_H2_Text1" xml:space="preserve">
     <value>对于网络安全、数据治理和电子发现团队来说，这些高度敏感平台的泄露暴露了数据疏忽造成的人力成本，并凸显了加强治理、强化合规以及严格保护约会应用敏感数据的必要性。</value>
   </data>
+  <data name="Blog_DADSGCEBPFC_H3_Text1" xml:space="preserve">
+    <value>加密是一种基础设施级的保护措施。但文件级安全和端点加密仍然常常被忽视。</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H3_Text2" xml:space="preserve">
+    <value>虽然数据库和云存储系统可能已得到充分保护，但导出的文档、报告、数据集、法律文件、分析数据以及共享文件往往暴露在外，处于安全系统之外。</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H3_Text3" xml:space="preserve">
+    <value>通过文件级加密，你可以放心，即使有人入侵你的系统并获取了你的文件，在没有授权访问的情况下，这些文件仍然被锁定，攻击者无法读取。</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H3_Text4" xml:space="preserve">
+    <value>这一治理防护措施有助于降低数据泄露的影响或防止泄露本身，同时也体现了良好的监管责任。</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_H3_Text5" xml:space="preserve">
+    <value>&lt;a href='https://axcrypt.net/information/regulatory-compliance/hipaa/'&gt;在此阅读有关 AxCrypt 监管合规性的更多信息。&lt;/a&gt;</value>
+  </data>
   <data name="Blog_DADSGCEBPFC_Heading1" xml:space="preserve">
     <value>安全事件表明存在技术漏洞，而监管审查则显示治理失效。</value>
   </data>
   <data name="Blog_DADSGCEBPFC_Heading2" xml:space="preserve">
     <value>今年有哪些重大约会应用数据泄露事件？</value>
+  </data>
+  <data name="Blog_DADSGCEBPFC_Heading3" xml:space="preserve">
+    <value>加密不仅是安全措施，更是一种治理方式：</value>
   </data>
   <data name="Blog_DADSGCEBPFC_Summary" xml:space="preserve">
     <value>随着平台处理高度个人化和敏感的用户信息，约会应用数据安全已成为关键的领导力关注点。随着网络攻击和监管审查的增加，治理、合规和加密不再是可选的防护措施，而是建立信任、履行责任和长期生存的基础性要求。</value>
@@ -8647,8 +8719,29 @@
   <data name="BLOG_HTSSPWYFC_Title" xml:space="preserve">
     <value>如何安全地与您的朋友和同事共享密码</value>
   </data>
+  <data name="Blog_IALBSFEBLU_Conclusion_Text2" xml:space="preserve">
+    <value>很长一段时间以来，你一直身处黑暗之中，思索良好的安全保障究竟是什么感觉。</value>
+  </data>
+  <data name="Blog_IALBSFEBLU_Conclusion_Text3" xml:space="preserve">
+    <value>等待已经结束，我们为重视安全的用户打造的平台带来了&lt;b&gt;易于使用&lt;/b&gt;的零知识端到端加密。</value>
+  </data>
+  <data name="Blog_IALBSFEBLU_Conclusion_Text4" xml:space="preserve">
+    <value>不再需要权宜之计，也不再需要妥协。只有强大、符合行业标准的加密，让你完全掌控自己的数据。</value>
+  </data>
+  <data name="Blog_IALBSFEBLU_Conclusion_Text5" xml:space="preserve">
+    <value>立即下载适用于 Linux 的 AxCrypt，体验真正可靠的安全保护。</value>
+  </data>
+  <data name="Blog_IALBSFEBLU_Conclusion_Text6" xml:space="preserve">
+    <value>```html
+&lt;a href='https://axcrypt.net/betadownload/'&gt;立即开始免费试用&lt;/a&gt;。
+```
+</value>
+  </data>
   <data name="Blog_IALBSFEBLU_H1_Text1" xml:space="preserve">
     <value>要在 Linux 系统上开始加密文件，您必须从官网下载最新版本。</value>
+  </data>
+  <data name="Blog_IALBSFEBLU_H1_Text10" xml:space="preserve">
+    <value>1. 单击“停止安全”</value>
   </data>
   <data name="Blog_IALBSFEBLU_H1_Text2" xml:space="preserve">
     <value>&lt;a href='https://axcrypt.net/betadownload/'&gt;&lt;b&gt;点击此处安装&lt;/b&gt;&lt;/a&gt;。</value>
@@ -8670,6 +8763,9 @@
   </data>
   <data name="Blog_IALBSFEBLU_H1_Text8" xml:space="preserve">
     <value>&lt;b&gt;解密 AxCrypt 加密文件的 3 种简单方法：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_IALBSFEBLU_H1_Text9" xml:space="preserve">
+    <value>&lt;b&gt;方法 1：&lt;/b&gt;</value>
   </data>
   <data name="Blog_IALBSFEBLU_Heading1" xml:space="preserve">
     <value>如何使用 AxCrypt 在 Linux 上加密文件和文件夹</value>
@@ -12529,6 +12625,9 @@
   <data name="Blog_WIPM_Title" xml:space="preserve">
     <value>什么是密码管理器？ 密码管理软件的安全性如何？</value>
   </data>
+  <data name="Blog_WPRIDHTS_Conclusion_Heading" xml:space="preserve">
+    <value>不要等到发生泄露才采取行动。</value>
+  </data>
   <data name="Blog_WPRIDHTS_Conclusion_Text1" xml:space="preserve">
     <value>立即掌控您的数字安全，因为不会有人替您做这件事。停止重复使用密码，并采用强大、安全的密码管理习惯。现在是为每个账户设置独一无二、难以破解的密码的时候了。因为一旦一个密码被攻破，与其关联的账户也将受到威胁。</value>
   </data>
@@ -12538,11 +12637,64 @@
   <data name="Blog_WPRIDHTS_Conclusion_Text3" xml:space="preserve">
     <value>关注我们的社交媒体渠道，了解网络安全最新趋势，保持领先。</value>
   </data>
+  <data name="Blog_WPRIDHTS_H1_Text1" xml:space="preserve">
+    <value>只需一次泄露，他们就能访问你的一切。没错！所有的一切，甚至是你以为永远不会重现的 2005 年存档的情绪照片。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text2" xml:space="preserve">
+    <value>大多数用户认为，密码越随机、越复杂，重复使用就越安全。不幸的是，事实并非如此。现代攻击利用现代技术进行作案。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text3" xml:space="preserve">
+    <value>你的密码可能是你猫的名字加上你奶奶的娘家姓，再加上你分手日期的最后两位数字，为了“增加破解难度”，你甚至还加了一个 '`' 符号，反正为什么不呢。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text4" xml:space="preserve">
+    <value>猜猜看，他们对你了解得太透彻，以至于能轻松破解你的密码。其实并不需要太多信息。几张重复的照片、你的点赞、你关注的页面，以及你在社交媒体上的情绪宣泄；所有这些内容都成为个性化攻击的“炮灰”。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text5" xml:space="preserve">
+    <value>在这种情况下，即使是最强的密码一旦泄露也毫无用处。无论是银行密码、工作笔记本、社交媒体账号、电子邮件，甚至是手机解锁码；如果你重复使用密码，今天的一切都可能被攻破。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H1_Text6" xml:space="preserve">
+    <value>结论很明确：绝不要重复使用密码。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text1" xml:space="preserve">
+    <value>当同一个密码在不同平台上重复使用且几乎没有修改时，就发生了密码重复使用。这是一种糟糕的密码管理习惯。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text2" xml:space="preserve">
+    <value>虽然这看起来无害，但黑客非常清楚，人们经常重复使用密码或稍作修改。黑客喜欢利用这一点，通过暴力破解攻击、密码重复使用攻击、人工智能生成的密码喷洒攻击，仅举几例。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text3" xml:space="preserve">
+    <value>问题非常直接。如果在所有其他平台上使用了相同或相对相似的密码，那么每个账户都可能被攻破。一旦一个账户被入侵，黑客或攻击者会直觉性地在你的其他所有账户上使用相同的密码，直到攻破为止。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H2_Text4" xml:space="preserve">
+    <value>电子邮件、云存储和金融账户都是高价值目标，即使是最强的密码一旦泄露，也会变得毫无用处，从而导致所有数据暴露。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text1" xml:space="preserve">
+    <value>了解黑客如何窃取你的密码，是理解不重复使用密码这一问题严重性的第一步。</value>
+  </data>
   <data name="Blog_WPRIDHTS_H3_Text10" xml:space="preserve">
     <value>这些数据之后又会被其他网络犯罪分子收购，并在各种类型的攻击中重复使用，例如凭证填充攻击。这种做法实际上将一次泄露事件演变为多次后续攻击，放大了原事件的整体影响。</value>
   </data>
   <data name="Blog_WPRIDHTS_H3_Text11" xml:space="preserve">
     <value>&lt;b&gt;4: Social engineering and familiar emails:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text12" xml:space="preserve">
+    <value>早期的网络钓鱼攻击很容易被识别，因为邮件中常常存在糟糕的语法或错误。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text13" xml:space="preserve">
+    <value>但现在黑客会个性化他们的攻击，并采用心理手段操控受害者。他们会冒充你认识的人、你社交圈中的可信联系人，甚至是你办公室的支持人员或工作场所的权威人士。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text14" xml:space="preserve">
+    <value>这种“看似熟悉”的声音，甚至视频，被用来让天真且不知情的个人自愿提供被冒充者的密码，因为他们信任自己所听到或看到的人。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text15" xml:space="preserve">
+    <value>这些个性化精心设计的攻击正在迅速增加，它们利用的是人的行为习惯，而非技术漏洞。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text16" xml:space="preserve">
+    <value>这些攻击的核心目标是与受害者建立情感联系，突破他们的信任，并对其进行彻底利用。
+</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H3_Text17" xml:space="preserve">
+    <value>&lt;b&gt;5：中间人攻击与网络拦截&lt;/b&gt;
+</value>
   </data>
   <data name="Blog_WPRIDHTS_H3_Text18" xml:space="preserve">
     <value>可以把这想象成一条高速公路，但位于世界偏远地区的孤独公路。</value>
@@ -12595,6 +12747,41 @@
   <data name="Blog_WPRIDHTS_H4_Text1" xml:space="preserve">
     <value>这些事件显示了凭证泄露在现实生活中可能造成的严重后果。</value>
   </data>
+  <data name="Blog_WPRIDHTS_H4_Text2" xml:space="preserve">
+    <value>大规模的数据泄露由信息窃取型恶意软件以及未受保护或未加密的数据库造成，已经暴露了近十亿个用户名和密码，使网络犯罪分子得以利用这些数据。世界各地的黑客和攻击者正准备利用这些访问权限发动勒索软件攻击、网络钓鱼攻击以及凭证填充攻击。
+</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text3" xml:space="preserve">
+    <value>以下是我们希望通过本博客向您展示的三起重大事件。
+</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text4" xml:space="preserve">
+    <value>&lt;li&gt;160亿条凭证被泄露：&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text5" xml:space="preserve">
+    <value>最近，研究人员发现近160亿条登录记录分布在30个未受保护、未加密的数据集中。这些凭证包括与Google、Apple、Facebook、Telegram和GitHub等主要平台相关的账户信息。这是有记录以来规模最大的用户名和密码窃取事件之一。
+
+</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text6" xml:space="preserve">
+    <value>&lt;li&gt;35亿条凭证数据库泄露事件：&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text7" xml:space="preserve">
+    <value>该单个数据集包含近35亿组用户名和密码组合。它通过信息窃取型恶意软件收集，并存储在配置错误的云环境中，导致敏感数据暴露，黑客可以轻易获取。
+。
+</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text8" xml:space="preserve">
+    <value>&lt;li&gt;1.84亿条凭证泄露：&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H4_Text9" xml:space="preserve">
+    <value>今年早些时候，一次数据泄露事件暴露了来自 Facebook 和 Roblox 等平台的 1.84 亿个账户凭证，表明这些平台是信息窃取型恶意软件和密码窃取的常见目标。
+
+</value>
+  </data>
   <data name="Blog_WPRIDHTS_H6_Text1" xml:space="preserve">
     <value>保持良好的密码习惯其实并不费力，使用 AxCrypt 密码管理器生成强大且唯一的密码，是一个很好的起点。</value>
   </data>
@@ -12622,6 +12809,30 @@
   <data name="Blog_WPRIDHTS_H7_Text1" xml:space="preserve">
     <value>相反，重复使用密码的风险是真实存在的，而且呈上升趋势。</value>
   </data>
+  <data name="Blog_WPRIDHTS_H7_Text2" xml:space="preserve">
+    <value>现在是 2026 年，人工智能在网络世界中，对正义方和攻击方都起着关键作用。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text3" xml:space="preserve">
+    <value>只需一个重复使用的密码，就可能导致多个账户被入侵，从而引发身份盗窃、经济损失、职业后果、形象受损以及许多其他不可逆的事件。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text4" xml:space="preserve">
+    <value>通过使用唯一密码，并利用密码管理器生成超强唯一密码，同时启用双重身份验证，你可以保护自己免受数据泄露的噩梦。这些最佳做法有助于降低密码重复使用、黑客攻击和滥用的风险。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text5" xml:space="preserve">
+    <value>请记住，网络安全不仅仅关乎花哨的工具，也不仅仅依赖习惯或所谓的强密码，如 1234@#。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_H7_Text6" xml:space="preserve">
+    <value>在这样的时代，额外的保护、适度依赖你的直觉，以及最重要的，使用可信的应用程序（例如 AxCrypt）都非常重要。</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading1" xml:space="preserve">
+    <value>这是一个你无法忽视的风险！</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading2" xml:space="preserve">
+    <value>为什么重复使用密码是危险的？</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Heading3" xml:space="preserve">
+    <value>黑客是如何窃取密码的？</value>
+  </data>
   <data name="Blog_WPRIDHTS_Heading4" xml:space="preserve">
     <value>现实世界的密码泄露案例</value>
   </data>
@@ -12642,6 +12853,12 @@
   </data>
   <data name="Blog_WPRIDHTS_Text4" xml:space="preserve">
     <value>但重复使用密码比你想象的要危险得多。表面上看似方便，实际上你只是让黑客和攻击者更容易控制你的所有数据和信息。这几乎就像在数字世界里告诉他们：“来吧，进来坐坐，喝杯咖啡怎么样？”</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Text5" xml:space="preserve">
+    <value>那么，为什么重复使用密码是危险的？</value>
+  </data>
+  <data name="Blog_WPRIDHTS_Text6" xml:space="preserve">
+    <value>嗯…</value>
   </data>
   <data name="Blog_WPRIDHTS_Title" xml:space="preserve">
     <value>为什么重复使用密码如此危险？如何保持安全？</value>
@@ -13309,6 +13526,12 @@
   <data name="Blog_ZKEEIST_H3_Text11" xml:space="preserve">
     <value>只需一个密码，我们就能让加密既简单又强大，并提供许多其他直观功能和自动文件保护。</value>
   </data>
+  <data name="Blog_ZKEEIST_H3_Text12" xml:space="preserve">
+    <value>AxCrypt 一种安全设计，旨在减少人为错误、消除操作摩擦，并在后台默默而有力地保护您的数据。</value>
+  </data>
+  <data name="Blog_ZKEEIST_H3_Text13" xml:space="preserve">
+    <value>这就是真正的零知识加密与安全的样子。</value>
+  </data>
   <data name="Blog_ZKEEIST_H3_Text2" xml:space="preserve">
     <value>这就是 AxCrypt 为这种现实而诞生的原因。</value>
   </data>
@@ -13350,6 +13573,9 @@
   </data>
   <data name="Blog_ZKEEIST_Heading3" xml:space="preserve">
     <value>AxCrypt：为高风险数字世界打造的零知识安全防护。</value>
+  </data>
+  <data name="Blog_ZKEEIST_Heading4" xml:space="preserve">
+    <value>如何为您的文件使用零知识加密？</value>
   </data>
   <data name="Blog_ZKEEIST_Summary" xml:space="preserve">
     <value>2025 年是技术和 IT 领域进步的关键一年。随着人工智能和机器学习的快速发展，发起网络攻击变得比以往任何时候都容易。</value>
@@ -17826,9 +18052,6 @@
   <data name="HomeHeroHeading" xml:space="preserve">
     <value>"高级加密在一个非常简单的设置"</value>
   </data>
-  <data name="HomeHeroHeading1" xml:space="preserve">
-    <value>易于使用、强大且安全的 &lt;span&gt;加密&lt;/span&gt;</value>
-  </data>
   <data name="HomeHeroHeadingHighlight" xml:space="preserve">
     <value>"高级&lt;span&gt;加密&lt;/span&gt;在一个超级&lt;span&gt;简单的&lt;/span&gt;设置"</value>
   </data>
@@ -17847,44 +18070,17 @@
   <data name="HomeLinkLabel" xml:space="preserve">
     <value>首页</value>
   </data>
-  <data name="HomeSellingPointAxcryptMobileBody" xml:space="preserve">
-    <value>在所有主要设备上轻松加密和解密文件，并支持广泛使用的语言</value>
-  </data>
-  <data name="HomeSellingPointAxcryptMobileHeading" xml:space="preserve">
-    <value>多设备和多语言</value>
-  </data>
-  <data name="HomeSellingPointCloudStorageAwarenessBody" xml:space="preserve">
-    <value>自动安全您的文件在Dropbox，谷歌驱动器等。</value>
-  </data>
-  <data name="HomeSellingPointCloudStorageAwarenessHeading" xml:space="preserve">
-    <value>云存储感知</value>
-  </data>
-  <data name="HomeSellingPointCollaborationBody" xml:space="preserve">
-    <value>允许其他AxCrypt用户使用自己的密码打开安全文件。</value>
-  </data>
-  <data name="HomeSellingPointCollaborationHeading" xml:space="preserve">
-    <value>值得信赖的协作</value>
-  </data>
   <data name="HomeSellingPointGroupsManagementBody" xml:space="preserve">
     <value>管理您的业务中的用户和组，并通过组密钥管理控制访问以增强安全性。</value>
   </data>
   <data name="HomeSellingPointGroupsManagementHeading" xml:space="preserve">
     <value>组和密钥管理</value>
   </data>
-  <data name="HomeSellingPointPasswordManagementBody" xml:space="preserve">
-    <value>无论您身在何处，都可以安全地管理和共享您的密码、笔记和卡片，并生成强密码。</value>
-  </data>
-  <data name="HomeSellingPointPasswordManagementHeading" xml:space="preserve">
-    <value>密码管理</value>
+  <data name="HomeSellingPointStrongEncryptionBody" xml:space="preserve">
+    <value>使用 AES-256 算法实现零知识文件安全，并通过多因素身份验证增强安全性。</value>
   </data>
   <data name="HomeSellingPointStrongEncryptionHeading" xml:space="preserve">
     <value>强加密和安全访问</value>
-  </data>
-  <data name="HomeSellingPointTextEncryptionBody" xml:space="preserve">
-    <value>将您的机密纯文本转换为安全、不可阅读的格式。输入你的文本，用你的AxCrypt账户密码保护，然后分享加密输出。</value>
-  </data>
-  <data name="HomeSellingPointVaultEncryptionBody" xml:space="preserve">
-    <value>AxCrypt 保险库是一个安全、加密的容器，用于自动存储您的敏感文件和文件夹。</value>
   </data>
   <data name="HomeStayInTouchHeading" xml:space="preserve">
     <value>与我们保持联系</value>
@@ -19771,6 +19967,9 @@ SE-114 29 斯德哥尔摩
   <data name="Meta-Description-Blog-CWIELTI" xml:space="preserve">
     <value>了解加密和加密货币之间的关系。了解加密如何保护加密世界中的交易和数字资产。</value>
   </data>
+  <data name="Meta-Description-Blog-DADSGCEBPFC" xml:space="preserve">
+    <value>了解约会应用如何通过健全的治理、合规监管以及加密来保护敏感用户数据。本文将探讨真实的数据泄露案例、GDPR 和 CCPA 带来的风险，以及 CISO 为建立信任并降低法律风险必须遵循的最佳实践。</value>
+  </data>
   <data name="Meta-Description-Blog-DARATAIUIS" xml:space="preserve">
     <value>了解保护静态、传输中和使用中的数据的重要性。了解加密如何保护数据移动的每个阶段。</value>
   </data>
@@ -20400,6 +20599,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="Meta-Title-Blog-CWIELTI" xml:space="preserve">
     <value>为什么加密对加密货币安全至关重要</value>
+  </data>
+  <data name="Meta-Title-Blog-DADSGCEBPFC" xml:space="preserve">
+    <value>约会应用程序数据安全：治理、合规与加密最佳实践</value>
   </data>
   <data name="Meta-Title-Blog-DARATAIUIS" xml:space="preserve">
     <value>数据安全：了解静态、传输中的数据和使用中的数据</value>
@@ -21859,6 +22061,9 @@ SE-114 29 斯德哥尔摩
   <data name="PasswordChangeText" xml:space="preserve">
     <value>密码更改</value>
   </data>
+  <data name="PasswordCharactersText" xml:space="preserve">
+    <value>8 个字符</value>
+  </data>
   <data name="PasswordEasyText" xml:space="preserve">
     <value>容易</value>
   </data>
@@ -21898,6 +22103,9 @@ SE-114 29 斯德哥尔摩
   <data name="PasswordInformationText" xml:space="preserve">
     <value>密码必须为 8 个字符或以上</value>
   </data>
+  <data name="PasswordLowerCaseLetter" xml:space="preserve">
+    <value>1 个小写字母</value>
+  </data>
   <data name="PasswordManagementListPageBody" xml:space="preserve">
     <value>在云中在线管理您的所有密码&lt;span class="text-cutoff"&gt;使用AxCrypt密码管理，您的密码，代码，引脚等在线安全存款。 您的密码存储在一个安全加密的存档，并提供给你，只有你，在任何地方在任何时间。 &lt;a class="hide-link"&gt;[崩溃]&lt;/a&gt;&lt;/span&gt;&lt;span class="text-cutoff-ellipsis"&gt;... &lt;a class="show-link"&gt;[阅读更多]&lt;/a&gt;&lt;/span&gt;</value>
   </data>
@@ -21922,6 +22130,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="PasswordModerateText" xml:space="preserve">
     <value>温和</value>
+  </data>
+  <data name="PasswordNumber" xml:space="preserve">
+    <value>1 个数字</value>
   </data>
   <data name="PasswordPolicyViolation" xml:space="preserve">
     <value>密码不够好，无法接受。</value>
@@ -21994,6 +22205,9 @@ SE-114 29 斯德哥尔摩
 将忽略空白以及等于常用密码的部分，并且不会增加任何强度。</value>
     <comment>A shorter description of how password strength is evaluated.</comment>
   </data>
+  <data name="PasswordSpecialCharacter" xml:space="preserve">
+    <value>1 个特殊字符，例如</value>
+  </data>
   <data name="PasswordStrengthBadName" xml:space="preserve">
     <value>弱</value>
     <comment>Short displayed name of "Bad" password status</comment>
@@ -22028,6 +22242,9 @@ SE-114 29 斯德哥尔摩
   <data name="PasswordStrengthWeakTip" xml:space="preserve">
     <value>密码不够强大，不建议使用。</value>
     <comment>Status 'Orange'. It's almost an ok password, but it's not good enough to be really recommended.</comment>
+  </data>
+  <data name="PasswordUpperCaseLetter" xml:space="preserve">
+    <value>1 个大写字母</value>
   </data>
   <data name="PasswordUrlPrompt" xml:space="preserve">
     <value>网址</value>
@@ -22064,9 +22281,6 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="PayPalReadMoreLink" xml:space="preserve">
     <value>[更多关于贝宝的信息]</value>
-  </data>
-  <data name="PCMagEditorsChoice2024" xml:space="preserve">
-    <value>荣获 2025 年 PCMag 编辑选择奖</value>
   </data>
   <data name="PendingStatus" xml:space="preserve">
     <value>等待</value>
@@ -24717,6 +24931,9 @@ SE-114 29 斯德哥尔摩
     <value>西班牙语</value>
     <comment>Do Not Translate</comment>
   </data>
+  <data name="SpecificUsersText" xml:space="preserve">
+    <value>特定用户</value>
+  </data>
   <data name="SslRequiredPageBody" xml:space="preserve">
     <value>需要安全的SSL连接。 请使用&lt;a href重试="{2}"&gt;{2}&lt;/a&gt;。
 
@@ -24777,6 +24994,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="StartMakingMoneyText3" xml:space="preserve">
     <value>推广您的会员链接或将您的客户帐户设置为经销商以开始赚钱。</value>
+  </data>
+  <data name="StartTrialToUnlockEncryptionText" xml:space="preserve">
+    <value>通过免费试用升级，即可解锁&lt;span&gt;加密及更多功能！&lt;/span&gt;</value>
   </data>
   <data name="StartupTipIncludeSubfoldersFeature" xml:space="preserve">
     <value>你知道吗？ 您可以启用"包含子文件夹"选项来处理文件夹中的文件夹。 为此需要付费订阅计划。</value>
@@ -25444,6 +25664,9 @@ SE-114 29 斯德哥尔摩
   <data name="TextEncryptionFaq9Ans" xml:space="preserve">
     <value>AxCrypt &lt;b&gt;无法恢复或重置您的密码&lt;/b&gt; ，因为我们无法访问该密码。为避免失去访问权限，我们建议将密码安全存储在可信的密码管理器中。</value>
   </data>
+  <data name="TextEncryptionGuideshareHead1" xml:space="preserve">
+    <value>“复制”按钮</value>
+  </data>
   <data name="TextEncryptionGuideshareHead2" xml:space="preserve">
     <value>下载为 .TXT</value>
   </data>
@@ -25452,6 +25675,10 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="TextEncryptionGuideshareHead4" xml:space="preserve">
     <value>以安全链接分享</value>
+  </data>
+  <data name="TextEncryptionGuidesHeadParagraph" xml:space="preserve">
+    <value>AxCrypt 让你在几秒钟内加密纯文本。只需输入文本，使用你的账户密码或自定义密码进行保护，然后通过电子邮件、私信等方式分享加密后的内容。
+</value>
   </data>
   <data name="TextEncryptionGuidesHeadTitle" xml:space="preserve">
     <value>&lt;span&gt;文本加密&lt;/span&gt;、共享与解密指南</value>
@@ -25480,11 +25707,40 @@ SE-114 29 斯德哥尔摩
   <data name="TextEncryptionGuideStepText13" xml:space="preserve">
     <value>您的加密文本将被解密，原始文本将显示在下方。</value>
   </data>
+  <data name="TextEncryptionGuideStepText14" xml:space="preserve">
+    <value>&lt;b&gt;重要说明：&lt;/b&gt;</value>
+  </data>
   <data name="TextEncryptionGuideStepText15" xml:space="preserve">
     <value>点击 &lt;b&gt; 解密&lt;/b&gt;</value>
   </data>
+  <data name="TextEncryptionGuideStepText16" xml:space="preserve">
+    <value>单击&lt;b&gt;加密&lt;/b&gt;
+</value>
+  </data>
+  <data name="TextEncryptionGuideStepText17" xml:space="preserve">
+    <value>使用 &lt;b&gt;Share as Link&lt;/b&gt; 生成安全的、有限时效的加密文本链接。&lt;br/&gt;选择该链接是可被 &lt;b&gt;任何人&lt;/b&gt; 访问，还是仅可被 &lt;b&gt;特定用户&lt;/b&gt; 访问（新用户将收到邀请邮件，文件共享后，将发送包含访问链接的通知邮件）。&lt;br/&gt;最多添加 &lt;b&gt;3 个特定邮箱地址&lt;/b&gt; 以限制访问。</value>
+  </data>
+  <data name="TextEncryptionGuideStepText18" xml:space="preserve">
+    <value>设置&lt;b&gt;过期时间&lt;/b&gt;（例如，1小时）
+</value>
+  </data>
+  <data name="TextEncryptionGuideStepText19" xml:space="preserve">
+    <value>放心分享该链接，访问权限受控且仅在限定时间内有效。</value>
+  </data>
   <data name="TextEncryptionGuideStepText2" xml:space="preserve">
     <value>在菜单中选择 &lt;b&gt;文本加密。&lt;/b&gt;</value>
+  </data>
+  <data name="TextEncryptionGuideStepText20" xml:space="preserve">
+    <value>如果你希望在不发送文件或复制大量加密文本的情况下进行安全共享，这个选项非常适合。
+</value>
+  </data>
+  <data name="TextEncryptionGuideStepText21" xml:space="preserve">
+    <value>如果加密文本是通过&lt;b&gt;Anyone&lt;/b&gt;选项共享的，你必须输入发送方提供的&lt;b&gt;自定义密码&lt;/b&gt;才能解密内容。
+</value>
+  </data>
+  <data name="TextEncryptionGuideStepText22" xml:space="preserve">
+    <value>如果文本是以&lt;b&gt;Specific user&lt;/b&gt;方式与你共享的，则无需密码，你可以通过安全链接直接解密内容
+</value>
   </data>
   <data name="TextEncryptionGuideStepText3" xml:space="preserve">
     <value>点击 &lt;b&gt;加密文本。&lt;/b&gt;</value>
@@ -25498,8 +25754,16 @@ SE-114 29 斯德哥尔摩
   <data name="TextEncryptionGuideStepText6" xml:space="preserve">
     <value>&lt;b&gt;注：&lt;/b&gt; 你可以选择一个强且易于记忆的自定义密码，用于加密和解密这些文本。</value>
   </data>
+  <data name="TextEncryptionGuideStepText7" xml:space="preserve">
+    <value>单击“复制”按钮即可立即将加密文本复制到剪贴板。随后，你可以将其粘贴到任何应用或平台中，例如消息应用、文档或聊天窗口，以便快速、轻松地分享。
+</value>
+  </data>
   <data name="TextEncryptionGuideStepText8" xml:space="preserve">
     <value>选择“下载为 .TXT”选项，将加密文本保存为设备上的 .txt 文件。此文件可通过电子邮件、云存储、消息平台或您选择的任何方式分享。</value>
+  </data>
+  <data name="TextEncryptionGuideStepText9" xml:space="preserve">
+    <value>选择“通过电子邮件发送”即可通过电子邮件直接共享加密文本。此选项通过自动为你插入加密内容，提供了一种简单的传统电子邮件加密替代方案。
+</value>
   </data>
   <data name="TextEncryptionGuideTips1" xml:space="preserve">
     <value>🔐 &lt;b&gt;保护密码安全：&lt;/b&gt; 只与目标接收者分享，避免通过不安全的渠道发送。</value>
@@ -25687,8 +25951,23 @@ AxCrypt团队</value>
   <data name="TryUpgradePlanActivationInstantText" xml:space="preserve">
     <value>选择适合您需求的计划。激活即时生效</value>
   </data>
+  <data name="TryUpgradePlanCancelAnytimeText" xml:space="preserve">
+    <value>在试用期结束前随时可取消。</value>
+  </data>
+  <data name="TryUpgradePlanFeatureText1" xml:space="preserve">
+    <value>无限强加密</value>
+  </data>
+  <data name="TryUpgradePlanFeatureText2" xml:space="preserve">
+    <value>文件夹与云加密</value>
+  </data>
+  <data name="TryUpgradePlanFeatureText5" xml:space="preserve">
+    <value>企业加密工具</value>
+  </data>
   <data name="TryUpgradePlanNoChargesText" xml:space="preserve">
     <value>今天不收费。试用期结束前可随时取消。</value>
+  </data>
+  <data name="TryUpgradePlanNoSubscriptionHeading" xml:space="preserve">
+    <value>我们注意到您还没有订阅！</value>
   </data>
   <data name="TryUpgradePlanSubTitleText1" xml:space="preserve">
     <value>使用 &lt;span&gt;{0}&lt;/span&gt; 解锁：</value>
@@ -25806,6 +26085,9 @@ AxCrypt团队</value>
   <data name="UnknownLogOn" xml:space="preserve">
     <value>密码以前不知道。 点击"新建"创建一个新的。</value>
   </data>
+  <data name="UnlockAdvancedFeaturesText" xml:space="preserve">
+    <value>解锁&lt;span&gt;更强大且无限制的加密&lt;/span&gt;功能！</value>
+  </data>
   <data name="UnlockFeatures" xml:space="preserve">
     <value>解锁我们的&lt;span&gt;惊人&lt;/span&gt;&lt;span&gt;功能！&lt;/span&gt;升级到 &lt;span&gt;Premium&lt;/span&gt; 或 &lt;b&gt;Business&lt;/b&gt;</value>
   </data>
@@ -25878,6 +26160,9 @@ AxCrypt团队</value>
   </data>
   <data name="UpgradeText" xml:space="preserve">
     <value>升级</value>
+  </data>
+  <data name="UpgradeToUnlockEncryptionText" xml:space="preserve">
+    <value>升级以解锁&lt;span&gt;加密及更多功能！&lt;/span&gt;</value>
   </data>
   <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
     <value>&lt;strong&gt;升级以解锁完整的加密功能！&lt;/strong&gt;</value>
@@ -26058,6 +26343,9 @@ AxCrypt团队</value>
   </data>
   <data name="UserSettingsFormatChangeNeedsReset" xml:space="preserve">
     <value>您已经更新了AxCrypt。 不幸的是，您的配置必须重置。 重新启动后，您的首选项和设置将不幸丢失。 我们对由此带来的不便深表歉意。 您的加密文件仍然安全。</value>
+  </data>
+  <data name="UsersWithAccessText" xml:space="preserve">
+    <value>有访问权限的用户({0})</value>
   </data>
   <data name="usingText" xml:space="preserve">
     <value>用</value>

@@ -626,7 +626,7 @@ Choose something difficult to guess, since it will protect passwords in the onli
     <value>Allow all cookies</value>
   </data>
   <data name="AllowCookieInfoText" xml:space="preserve">
-    <value>We use cookies to enhance your browsing experience and to understand how visitors use our website. By continuing to use this site you consent to the use of cookies in accordance with our &lt;a href='/information/privacy-policy'&gt;cookie policy&lt;/a&gt;.</value>
+    <value>We use cookies to enhance your browsing experience and to understand how visitors use our website. By continuing to use this site you consent to the use of cookies in accordance with our &lt;a href='/information/privacy-policy/'&gt;cookie policy&lt;/a&gt;.</value>
   </data>
   <data name="AllowCookiesPopupTitle" xml:space="preserve">
     <value>This website uses cookies</value>
@@ -18184,7 +18184,14 @@ If you for any reason do not know or remember the password, you must perform a p
     <value>"Advanced encryption in a superbly simple setting"</value>
   </data>
   <data name="HomeHeroHeading1" xml:space="preserve">
-    <value>Easy to use, Strong, and Secure &lt;span&gt;Encryption&lt;/span&gt;</value>
+    <value>The easiest way to &lt;span&gt;encrypt&lt;/span&gt;, &lt;span&gt;share&lt;/span&gt; and &lt;span&gt;secure&lt;/span&gt;&lt;br/&gt; your files.</value>
+  </data>
+  <data name="HomeHeroHeading2" xml:space="preserve">
+    <value>Protect files and folders with strong encryption before sharing them or storing in Google Drive, 
+OneDrive, or Dropbox with zero-knowledge encryption.</value>
+  </data>
+  <data name="HomeHeroHeading3" xml:space="preserve">
+    <value>everywhere</value>
   </data>
   <data name="HomeHeroHeadingHighlight" xml:space="preserve">
     <value>"Advanced &lt;span&gt;encryption&lt;/span&gt; in a superbly &lt;span&gt;simple&lt;/span&gt; setting"</value>
@@ -18204,23 +18211,11 @@ If you for any reason do not know or remember the password, you must perform a p
   <data name="HomeLinkLabel" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="HomeSellingPointAxcryptMobileBody" xml:space="preserve">
-    <value>Encrypt &amp; decrypt files effortlessly on all major devices, with support for widely used languages</value>
-  </data>
-  <data name="HomeSellingPointAxcryptMobileHeading" xml:space="preserve">
-    <value>Multi-Device &amp; Multilingual</value>
-  </data>
   <data name="HomeSellingPointCloudStorageAwarenessBody" xml:space="preserve">
-    <value>Automatically secure your files in Dropbox, Google Drive and OneDrive etc.</value>
+    <value>Encrypt sensitive data from your Google Drive, Dropbox, and OneDrive under one secure platform.</value>
   </data>
   <data name="HomeSellingPointCloudStorageAwarenessHeading" xml:space="preserve">
-    <value>Cloud storage awareness</value>
-  </data>
-  <data name="HomeSellingPointCollaborationBody" xml:space="preserve">
-    <value>Allow secured files to be opened by other AxCrypt users with their own password.</value>
-  </data>
-  <data name="HomeSellingPointCollaborationHeading" xml:space="preserve">
-    <value>Trusted Collaboration</value>
+    <value>Cloud Security</value>
   </data>
   <data name="HomeSellingPointGroupsManagementBody" xml:space="preserve">
     <value>Manage users &amp; groups within your business &amp; control access with group key management for enhanced security.</value>
@@ -18228,11 +18223,17 @@ If you for any reason do not know or remember the password, you must perform a p
   <data name="HomeSellingPointGroupsManagementHeading" xml:space="preserve">
     <value>Groups &amp; Key Management</value>
   </data>
-  <data name="HomeSellingPointPasswordManagementBody" xml:space="preserve">
-    <value>Manage and share your passwords, notes and cards securely wherever you are, and generate strong passwords.</value>
+  <data name="HomeSellingPointSecureFileSharingBody" xml:space="preserve">
+    <value>Allow secured files to be opened by other AxCrypt users with their own password.</value>
   </data>
-  <data name="HomeSellingPointPasswordManagementHeading" xml:space="preserve">
-    <value>Password management</value>
+  <data name="HomeSellingPointSecureFileSharingHeading" xml:space="preserve">
+    <value>Secure File Sharing</value>
+  </data>
+  <data name="HomeSellingPointSecurePasswordsMessagingBody" xml:space="preserve">
+    <value>Securely manage and share passwords, notes, and cards, and communicate safely with encrypted messaging across devices.</value>
+  </data>
+  <data name="HomeSellingPointSecurePasswordsMessagingHeading" xml:space="preserve">
+    <value>Secure Passwords &amp; Messaging</value>
   </data>
   <data name="HomeSellingPointStrongEncryptionBody" xml:space="preserve">
     <value>Zero-Knowledge File Security with AES-256 algorithm &amp; enhance security with Multi- Factor Authentication.</value>
@@ -18241,10 +18242,10 @@ If you for any reason do not know or remember the password, you must perform a p
     <value>Strong Encryption &amp; Secure Access</value>
   </data>
   <data name="HomeSellingPointTextEncryptionBody" xml:space="preserve">
-    <value>Convert your confidential plain text into a secure, unreadable format. Type your text, secure it with your AxCrypt account password, and share the encrypted output.</value>
+    <value>Convert your confidential plain text into a secure, unreadable format. Type your text, secure it with your AxCrypt account password, and share the encrypted output as a link.</value>
   </data>
   <data name="HomeSellingPointVaultEncryptionBody" xml:space="preserve">
-    <value>AxCrypt Vault is a secure, encrypted container for storing your sensitive files and folders automatically.</value>
+    <value>AxCrypt Vault is a secure, encrypted container for storing and sharing your sensitive files and folders automatically.</value>
   </data>
   <data name="HomeStayInTouchHeading" xml:space="preserve">
     <value>Stay in touch with us</value>
@@ -22515,9 +22516,6 @@ White space, and parts that are equal to common passwords are ignored and do not
   </data>
   <data name="PayPalReadMoreLink" xml:space="preserve">
     <value>[More info about PayPal]</value>
-  </data>
-  <data name="PCMagEditorsChoice2024" xml:space="preserve">
-    <value>Recognized for Excellence by PCMag Editors' Choice 2025</value>
   </data>
   <data name="PendingForApprovalMasterKeyStatus" xml:space="preserve">
     <value>PendingForApproval</value>
