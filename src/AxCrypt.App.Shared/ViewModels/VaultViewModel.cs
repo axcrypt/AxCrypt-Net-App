@@ -1,4 +1,5 @@
-﻿using AxCrypt.App.Shared.FileOperations.Vault;
+﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Shared.FileOperations.Vault;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility.View;
@@ -36,6 +37,7 @@ namespace AxCrypt.App.Shared.ViewModels
         {
             get => Resolve.UserSettings.VaultEncryptDataPath ?? "";
         }
+
         public bool CreateNewFolder { get; set; }
         public string ParentFolderPath { get; set; }
         public string ErrorMessage { get; set; }
@@ -68,7 +70,6 @@ namespace AxCrypt.App.Shared.ViewModels
 
         private async Task HandleFileActionAsync(string action)
         {
-
             switch (action)
             {
                 case "Open":
@@ -149,6 +150,7 @@ namespace AxCrypt.App.Shared.ViewModels
                         _statusAlertService.Error(Texts.FileRestoreRenameFailedAlertMsg.InvariantFormat(Path.GetFileName(SelectedFilePath), ex.Message));
                     }
                     break;
+
                 default:
                     _statusAlertService.Error(string.Format(Texts.InvalidSelectionActionNotification, action));
                     break;
@@ -380,18 +382,36 @@ namespace AxCrypt.App.Shared.ViewModels
         {
             string AxCryptExtension = New<IRuntimeEnvironment>().AxCryptExtension;
 
-            return container.ListOfFiles(new List<IDataContainer>(), FolderOperationMode.SingleFolder).Where(file =>
-                file.IsAvailable && Path.GetExtension(file.FullName).Equals(AxCryptExtension, StringComparison.OrdinalIgnoreCase))
-                .Select(file => new VaultItem
+            IEnumerable<IDataStore> encryptedVaultFileList = container.ListOfFiles(new List<IDataContainer>(), FolderOperationMode.SingleFolder);
+            IList<VaultItem> vaultListIterm = new List<VaultItem>();
+
+            foreach (var file in encryptedVaultFileList)
+            {
+                try
                 {
-                    Filepath = file.FullName,
-                    FileType = "file",
-                    Size = GetReadableSize(file),
-                    ModifiedDate = file.LastWriteTimeUtc.ToLocalTime()
-                });
+                    if (file.IsAvailable &&
+                        Path.GetExtension(file.FullName)
+                            .Equals(AxCryptExtension, StringComparison.OrdinalIgnoreCase))
+                    {
+                        vaultListIterm.Add(new VaultItem
+                        {
+                            Filepath = file.FullName,
+                            FileType = "file",
+                            Size = GetReadableSize(file),
+                            ModifiedDate = file.LastWriteTimeUtc.ToLocalTime()
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    New<IStatusChecker>().CheckStatusAndShowMessage(ErrorStatus.Exception, string.Empty, $"{ex.Messages()}");
+                }
+            }
+
+            return vaultListIterm;
         }
 
-        string GetReadableSize(IDataStore file)
+        private string GetReadableSize(IDataStore file)
         {
             if (!file.IsAvailable)
                 return string.Empty;
@@ -411,11 +431,28 @@ namespace AxCrypt.App.Shared.ViewModels
             VaultBreadCrumb.Clear();
 
             IDataStore vaultDataStore = New<IDataStore>(VaultBasePath);
-            string? baseDir = !vaultDataStore.IsNetworkPath ? vaultDataStore.Container.FullName : vaultDataStore.FullName;
+
+            string? baseDir = vaultDataStore.FullName;
+
+            if (!vaultDataStore.IsNetworkPath)
+            {
+                try
+                {
+                    IDataContainer container = vaultDataStore.Container;
+                    if (container != null)
+                        baseDir = container.FullName;
+                }
+                catch
+                {
+                    VaultBreadCrumb.Add((baseDir, baseDir));
+                }
+            }
+
             if (vaultDataStore.IsNetworkPath)
             {
                 VaultBreadCrumb.Add((baseDir, baseDir));
             }
+
             if (vaultDataStore.IsNetworkPath && baseDir == CurrentFolder)
             {
                 return;

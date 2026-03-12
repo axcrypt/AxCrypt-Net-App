@@ -191,7 +191,15 @@ namespace AxCrypt.Core.UI.ViewModel
             {
                 return;
             }
-            await _fileOperation.DoFilesAsync(files.Select(f => New<IDataStore>(f)).ToList(), DecryptFileWork, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+
+            try
+            {
+                await _fileOperation.DoFilesAsync(files.Select(f => New<IDataStore>(f)).ToList(), DecryptFileWork, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+            }
+            catch (Exception ex)
+            {
+                _statusChecker.CheckStatusAndShowMessage(ErrorStatus.Exception, string.Empty, $"{ex.Messages()}");
+            }
         }
 
         private async Task WipeFilesActionAsync(IEnumerable<string> files)
@@ -201,7 +209,15 @@ namespace AxCrypt.Core.UI.ViewModel
             {
                 return;
             }
-            await _fileOperation.DoFilesAsync(files.Select(f => New<IDataStore>(f)).ToList(), WipeFileWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+
+            try
+            {
+                await _fileOperation.DoFilesAsync(files.Select(f => New<IDataStore>(f)).ToList(), WipeFileWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+            }
+            catch (Exception ex)
+            {
+                _statusChecker.CheckStatusAndShowMessage(ErrorStatus.Exception, string.Empty, $"{ex.Messages()}");
+            }
         }
 
         private async Task EncryptionUpgradeActionAsync(IEnumerable<IDataContainer> containers)
@@ -213,7 +229,14 @@ namespace AxCrypt.Core.UI.ViewModel
                 return;
             }
 
-            await _fileOperation.DoFilesAsync(new DataContainerCollection(containers).Where((ds) => ds.IsEncrypted()), EncryptionUpgradeWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+            try
+            {
+                await _fileOperation.DoFilesAsync(new DataContainerCollection(containers).Where((ds) => ds.IsEncrypted()), EncryptionUpgradeWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+            }
+            catch (Exception ex)
+            {
+                _statusChecker.CheckStatusAndShowMessage(ErrorStatus.Exception, string.Empty, $"{ex.Messages()}");
+            }
         }
 
         private async Task RandomRenameFilesActionAsync(IEnumerable<string> files)
@@ -223,7 +246,15 @@ namespace AxCrypt.Core.UI.ViewModel
             {
                 return;
             }
-            await _fileOperation.DoFilesAsync(files.Select(f => New<IDataStore>(f)).ToList(), RandomRenameFileWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+
+            try
+            {
+                await _fileOperation.DoFilesAsync(files.Select(f => New<IDataStore>(f)).ToList(), RandomRenameFileWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+            }
+            catch (Exception ex)
+            {
+                _statusChecker.CheckStatusAndShowMessage(ErrorStatus.Exception, string.Empty, $"{ex.Messages()}");
+            }
         }
 
         private async Task RestoreRandomRenameFilesActionAsync(IEnumerable<string> files)
@@ -233,7 +264,15 @@ namespace AxCrypt.Core.UI.ViewModel
             {
                 return;
             }
-            await _fileOperation.DoFilesAsync(files.Select(f => New<IDataStore>(f)).ToList(), RestoreRandomRenameFilesWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+
+            try
+            {
+                await _fileOperation.DoFilesAsync(files.Select(f => New<IDataStore>(f)).ToList(), RestoreRandomRenameFilesWorkAsync, (status) => Task.FromResult(CheckStatusAndShowMessage(status, string.Empty)));
+            }
+            catch (Exception ex)
+            {
+                _statusChecker.CheckStatusAndShowMessage(ErrorStatus.Exception, string.Empty, $"{ex.Messages()}");
+            }
         }
 
         private async Task<IEnumerable<string>> SelectFiles(FileSelectionType fileSelectionType)
