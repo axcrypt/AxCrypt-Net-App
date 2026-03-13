@@ -124,9 +124,13 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
             {
                 existingVaultPath += "\\";
             }
-            VaultFolder vaultFolder = AxCrypt.Core.Resolve.FileSystemState.AllVaultFolders.First(vf => vf.Path == existingVaultPath);
-            AxCrypt.Core.Resolve.FileSystemState.RemoveVaultFolder(vaultFolder);
-            await AxCrypt.Core.Resolve.FileSystemState.Save();
+
+            VaultFolder? vaultFolder = AxCrypt.Core.Resolve.FileSystemState.AllVaultFolders.FirstOrDefault(vf => vf.Path == existingVaultPath);
+            if (vaultFolder != null)
+            {
+                AxCrypt.Core.Resolve.FileSystemState.RemoveVaultFolder(vaultFolder);
+                await AxCrypt.Core.Resolve.FileSystemState.Save();
+            }
 
             string newVaultPath = New<UserSettings>().VaultEncryptDataPath;
 
