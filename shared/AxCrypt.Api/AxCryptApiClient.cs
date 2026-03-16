@@ -77,7 +77,7 @@ namespace AxCrypt.Api
                 throw new InvalidOperationException("There must be an identity and password to attempt to get private account information.");
             }
 
-            Uri resource = BaseUrl.PathCombine("users/my/account");
+            Uri resource = BaseUrl.PathCombine("usersv2/my/account");
 
             RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest(resource, Timeout)).Free();
             ApiCaller.EnsureStatusOk(restResponse);

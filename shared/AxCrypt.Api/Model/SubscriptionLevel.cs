@@ -9,6 +9,7 @@ namespace AxCrypt.Api.Model
         Unknown,
         DefinedByServer,
         Undisclosed,
+        LegacyFree,
         Free,
         Premium,
         Business,
