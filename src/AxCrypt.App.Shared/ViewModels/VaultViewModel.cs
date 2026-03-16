@@ -369,13 +369,21 @@ namespace AxCrypt.App.Shared.ViewModels
 
         private IEnumerable<VaultItem> GetFolderItems(string path)
         {
-            return Directory.GetDirectories(path).Select(folder => new VaultItem
+            try
             {
-                Filepath = folder,
-                FileType = "folder",
-                Size = "-",
-                ModifiedDate = Directory.GetLastWriteTimeUtc(folder).ToLocalTime()
-            });
+                return Directory.GetDirectories(path).Select(folder => new VaultItem
+                {
+                    Filepath = folder,
+                    FileType = "folder",
+                    Size = "-",
+                    ModifiedDate = Directory.GetLastWriteTimeUtc(folder).ToLocalTime()
+                });
+            }
+            catch (Exception ex)
+            {
+                New<IStatusChecker>().CheckStatusAndShowMessage(ErrorStatus.Exception, string.Empty, $"{ex.Messages()}");
+                return Enumerable.Empty<VaultItem>();
+            }
         }
 
         private IEnumerable<VaultItem> GetFileItems(IDataContainer container)

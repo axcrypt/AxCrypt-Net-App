@@ -25,6 +25,7 @@
 
 #endregion Coypright and License
 
+using AxCrypt.Abstractions;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
@@ -34,13 +35,8 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Extensions
@@ -241,7 +237,7 @@ namespace AxCrypt.Core.Extensions
             }
 
             string encryptedName = fullName.FullName.CreateEncryptedName();
-            IDataStore destinationStore =  New<IDataStore>(encryptedName);
+            IDataStore destinationStore = New<IDataStore>(encryptedName);
 
             if (destinationStore.Container.IsVault() && New<UserSettings>().VaultEncryptWithAutoRenameFiles)
             {
@@ -263,7 +259,7 @@ namespace AxCrypt.Core.Extensions
                 return false;
             }
 
-            IDataContainer vaultEncryptDataContainer =  New<IDataContainer>(New<UserSettings>().VaultEncryptDataPath);
+            IDataContainer vaultEncryptDataContainer = New<IDataContainer>(New<UserSettings>().VaultEncryptDataPath);
             return folderPath.FullName.Contains(vaultEncryptDataContainer.FullName);
         }
 
@@ -405,7 +401,17 @@ namespace AxCrypt.Core.Extensions
                 throw new ArgumentNullException("folderPath");
             }
 
-            IEnumerable<IDataStore> files = folderPath.Files;
+            IEnumerable<IDataStore> files = Enumerable.Empty<IDataStore>();
+            try
+            {
+                files = folderPath.Files;
+            }
+            catch (Exception ex)
+            {
+                New<IStatusChecker>().CheckStatusAndShowMessage(ErrorStatus.Exception, string.Empty, $"{ex.Messages()}");
+                return files;
+            }
+
             if (folderOperationMode == FolderOperationMode.SingleFolder)
             {
                 return files;

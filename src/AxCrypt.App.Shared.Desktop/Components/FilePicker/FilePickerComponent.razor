@@ -151,7 +151,7 @@
                                 <div class="context-menu-action" style="position: fixed; top: @(contextMenuY)px;left: @(contextMenuX)px;">
                                     <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Encrypt)">@Texts.EncryptToolStripMenuItemText</span>
                                     <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Decrypt)">@Texts.DecryptToolStripMenuItemText</span>
-                                    @* <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</span> *@
+                                    <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</span>
                                     <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.OpenSecured)">@Texts.OpenEncryptedToolStripMenuItemText</span>
                                 </div>
                             }
@@ -171,7 +171,7 @@
                                     <div class="filepicker-dropdown-menu-action context-menu-action">
                                         <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Encrypt)">@Texts.EncryptToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.Decrypt)">@Texts.DecryptToolStripMenuItemText</span>
-                                        @* <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</span> *@
+                                        <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">@Texts.ShareKeysToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick="async () => await UpdateFileOperation(FileOperationOption.OpenSecured)">@Texts.OpenEncryptedToolStripMenuItemText</span>
                                         <span class="menu-item" @onclick="async () => await ClearSelection()">Clear Selected</span>
                                     </div>
