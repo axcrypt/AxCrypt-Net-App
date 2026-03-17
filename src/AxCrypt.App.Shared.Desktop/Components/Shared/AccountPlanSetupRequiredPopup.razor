@@ -10,6 +10,7 @@
     }
     #account-setup-required.modalDialog > div {
         min-width: 600px !important;
+        margin: 4% auto !important;
     }
     .account-complete-plan-popup-container > .center-column > .btn-large {
         padding: 12px !important;
@@ -34,6 +35,15 @@
         line-height: 25px;
     }
 
+    .benefit-item {
+        background-color: #e5f7da;
+        margin-top : 10px;
+    }
+
+    .benefit-item p {
+        padding: 6px 15px 0px
+    }
+
     .account-complete-plan-popup-container .more {
         font-weight: bold;
         list-style-type: none;
@@ -51,6 +61,48 @@
     .pricing-link:hover {
         text-decoration: underline;
     }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 5px;
+    }
+
+    li {
+        margin-bottom: 2px;
+    }
+
+    .trial-btn {
+        padding: 14px 18px;
+    }
+
+    .btn-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .arrow {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .btn-sub {
+        font-size: 13px;
+        opacity: 0.9;
+    }
+
+    .secondary-text{
+        color: #8a8a8a;
+        font-weight: normal;
+        font-size: 14px;
+        margin-left: 4px;
+    }
+
+    .feature-title{
+        margin-left : 6px;
+    }
 </style>
 
 @if (IsVisible)
@@ -59,66 +111,80 @@
         <div id="UpgradePopup" class="upg-popup">
             <div style="margin:12px 12px;" class="account-complete-plan-popup-container">
                 <div>
-                    <h6 class="try-upgrade-plan-title">
+                    <h5 style="text-align:center" class="try-upgrade-plan-title">
                         Encrypt and secure your files in seconds
-                    </h6>
+                    </h5>
                 </div>
                 <div class="account-setup-description">
-                    <p>Start your <b>free trial</b> to unlock encryption secure file sharing with AxCrypt.</p>
+                    <label>
+                        <span class="secondary-text">Start your </span><strong>free trial</strong><span class="secondary-text"> to unlock encryption secure file sharing with AxCrypt.</span>
+                    </label>
                 </div>
                 <hr />
-                <div>
-                    <span class="try-upgrade-plan-subtitle">@((MarkupString)string.Format(Texts.TryUpgradePlanSubTitleText1, Texts.FreeTrial + ","))</span>
-                </div>
                 <div>
                     <ul>
                         <li>
                             <div>
                                 <img src="/images/free/Icoshield.svg" alt="shield" width="44" height="44" />
-                                <label><strong>AES-256 file encryption</strong></label>
+                                <label class="feature-title"><strong>AES-256 file encryption</strong></label>
                             </div>
                         </li>
                         <li>
                             <div>
                                 <img src="/images/free/IcoFtr$CloEn.svg" alt="folder" width="44" height="44" />
-                                <label><strong>Secure cloud folders</strong><span>(Google Drive, OneDrive, Dropbox)</span></label>
+                                <label class="feature-title"><strong>Secure cloud folders</strong><span class="secondary-text">(Google Drive, OneDrive, Dropbox)</span></label>
                             </div>
                         </li>
                         <li>
                             <div>
                                 <img src="/images/free/IcoScrdFleShr.svg" alt="share" width="44" height="44" />
-                                <label><strong>Encrypted file sharing</strong></label>
+                                <label class="feature-title"><strong>Encrypted file sharing</strong></label>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <img class="" />
-                                <label><strong>Mobile apps</strong><span>(iOS & Android)</span></label>
+                                <img src="/images/free/MobileIcon.svg" alt="share" width="44" height="44" />
+                                <label class="feature-title"><strong>Mobile apps</strong><span class="secondary-text">(iOS & Android)</span></label>
                             </div>
                         </li>
                     </ul>
-                    <div>
-                        <img class="" />
+                    <div class="benefit-item">
                         <p>
-                            Zero-knowledge encryption. <strong>Only you control your files.</strong>
+                            Zero-knowledge encryption. <b>Only you control your files.</b>
                         </p>
                     </div>
                 </div>
                 <div class="center-column">
-                    <button class="btn-large font-medium grn-bg whte-clr" style="width:100%;" @onclick="OpenPremiumPage">
-                        Start free trial - Personal
-                        <br />
-                        For individuals securing their own files
+                    <button class="btn-large font-medium grn-bg whte-clr trial-btn" style="width:100%;margin-bottom:5px" @onclick="OpenPremiumPage">
+                        <div class="btn-content">
+                            <div style="text-align: left;">
+                                Start free trial — Personal
+                                <br />
+                                <span class="btn-sub">For individuals securing their own files</span>
+                            </div>
+
+                            <span class="arrow">→</span>
+                        </div>
                     </button>
-                    <button class="btn-large font-medium button blck-bg whte-clr" @onclick="OpenBusinessPage" style="width: 160px;">
-                        Start free trial - Business
-                        <br />
-                        For teams sharing and managing files together
+                    <button class="btn-large font-medium button blck-bg whte-clr" style="width:100%;margin-bottom:5px" @onclick="OpenBusinessPage">
+                        <div class="btn-content">
+                            <div style="text-align: left;">
+                                Start free trial - Business
+                                <br />
+                                <span class="btn-sub"> For teams sharing and managing files together</span>
+                            </div>
+                            <span class="arrow">→</span>
+                        </div>
                     </button>
-                    <button class="btn-large font-medium button" @onclick="async ()=> await ActivateViewerPlanAsync()" style="background:none;border:1px solid #48772c;color:#494949;">
-                        Viewer - only for decryption
-                        <br />
-                        Open encrpted files shared with you, for free
+                    <button class="btn-large font-medium button" style="background:none;border:1px solid #48772c;color:#494949;width:100%;margin-bottom:5px" @onclick="async () => await ActivateViewerPlanAsync()">
+                        <div class="btn-content">
+                            <div style="text-align: left;">
+                                Viewer - only for decryption
+                                <br />
+                                <span class="btn-sub">Open encrpted files shared with you, for free</span>
+                            </div>
+                            <span class="arrow">→</span>
+                        </div>
                     </button>
                 </div>
             </div>
