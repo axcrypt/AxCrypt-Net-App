@@ -60,42 +60,65 @@
             <div style="margin:12px 12px;" class="account-complete-plan-popup-container">
                 <div>
                     <h6 class="try-upgrade-plan-title">
-                        One More Step to Get Started
+                        Encrypt and secure your files in seconds
                     </h6>
                 </div>
                 <div class="account-setup-description">
-                    <p>Your account setup isn’t finished yet.</p>
-                    <p>
-                        Choose a plan to unlock encryption features and start using the app.
-                    </p>
+                    <p>Start your <b>free trial</b> to unlock encryption secure file sharing with AxCrypt.</p>
                 </div>
+                <hr />
                 <div>
                     <span class="try-upgrade-plan-subtitle">@((MarkupString)string.Format(Texts.TryUpgradePlanSubTitleText1, Texts.FreeTrial + ","))</span>
                 </div>
                 <div>
                     <ul>
-                        <li>@Texts.TryUpgradePlanFeatureText1</li>
-                        <li>@Texts.TryUpgradePlanFeatureText2</li>
-                        <li>@Texts.HipaaBenefitsSubHeading2</li>
-                        <li>@Texts.PricingFeatureListPasswordManagement</li>
-                        <li>@Texts.TryUpgradePlanFeatureText5</li>
-                        <li class="more"><a class="pricing-link" href="javascript:void(0);" @onclick="upgradeModel.OpenPricingPage">@Texts.AndMoreText</a></li>
+                        <li>
+                            <div>
+                                <img src="/images/free/Icoshield.svg" alt="shield" width="44" height="44" />
+                                <label><strong>AES-256 file encryption</strong></label>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="/images/free/IcoFtr$CloEn.svg" alt="folder" width="44" height="44" />
+                                <label><strong>Secure cloud folders</strong><span>(Google Drive, OneDrive, Dropbox)</span></label>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="/images/free/IcoScrdFleShr.svg" alt="share" width="44" height="44" />
+                                <label><strong>Encrypted file sharing</strong></label>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img class="" />
+                                <label><strong>Mobile apps</strong><span>(iOS & Android)</span></label>
+                            </div>
+                        </li>
                     </ul>
-                </div>
-                <div>
-                    <p>
-                         <strong>Note: </strong>You need to select a plan to start using the app.
-                    </p>
+                    <div>
+                        <img class="" />
+                        <p>
+                            Zero-knowledge encryption. <strong>Only you control your files.</strong>
+                        </p>
+                    </div>
                 </div>
                 <div class="center-column">
-                    <button class="btn-large font-medium grn-bg whte-clr" @onclick="OpenPremiumPage">
-                        Choose Private Plan
+                    <button class="btn-large font-medium grn-bg whte-clr" style="width:100%;" @onclick="OpenPremiumPage">
+                        Start free trial - Personal
+                        <br />
+                        For individuals securing their own files
                     </button>
                     <button class="btn-large font-medium button blck-bg whte-clr" @onclick="OpenBusinessPage" style="width: 160px;">
-                        @Texts.CreateBusinessText
+                        Start free trial - Business
+                        <br />
+                        For teams sharing and managing files together
                     </button>
-                    <button class="btn-large font-medium button" @onclick="OpenPasswordManagerPage" style="background:none;border:1px solid #48772c;color:#494949;">
-                        Choose Password Manager Plan
+                    <button class="btn-large font-medium button" @onclick="async ()=> await ActivateViewerPlanAsync()" style="background:none;border:1px solid #48772c;color:#494949;">
+                        Viewer - only for decryption
+                        <br />
+                        Open encrpted files shared with you, for free
                     </button>
                 </div>
             </div>
@@ -123,9 +146,9 @@
         accountSetupModel.PopupResult = Utility.DialogResult.OK;
     }
 
-    public void OpenPasswordManagerPage()
+    public async Task ActivateViewerPlanAsync()
     {
-        upgradeModel.OpenPassswordManagerPage();
+        await accountSetupModel.SetViewerPlanAsync();
         accountSetupModel.PopupResult = Utility.DialogResult.OK;
     }
 
