@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt - Copyright 2026, AxCrypt AB, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -384,6 +384,16 @@ namespace AxCrypt.Core.Service
             }
 
             return await _apiClient.UpdateRememberMeOnMFAInfoAsync(multiFactorAuthApi).Free();
+        }
+
+        public async Task SetMyAccountViewerPlanAsync()
+        {
+            if (string.IsNullOrEmpty(_apiClient.Identity.User))
+            {
+                throw new InvalidOperationException("The account service requires a user.");
+            }
+
+            await _apiClient.PostSetMyAccountViewerPlanAsync().Free();
         }
     }
 }

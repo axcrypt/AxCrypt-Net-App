@@ -1,5 +1,8 @@
 ﻿using AxCrypt.App.Shared.Utility;
+using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Service;
 using AxCrypt.Core.UI.ViewModel;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.ViewModels;
 
@@ -39,4 +42,10 @@ public class AccountSetupViewModel : ViewModelBase
     }
 
     public event Action<bool>? OnAccountSetupDialogVisibilityChanged;
+
+    public async Task SetViewerPlanAsync()
+    {
+        IAccountService accountService = New<LogOnIdentity, IAccountService>(New<Core.UI.KnownIdentities>().DefaultEncryptionIdentity);
+        await accountService.SetMyAccountViewerPlanAsync();
+    }
 }

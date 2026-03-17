@@ -503,6 +503,14 @@ namespace AxCrypt.Api
             return updated;
         }
 
+        public async Task PostSetMyAccountViewerPlanAsync()
+        {
+            Uri resource = BaseUrl.PathCombine("users/setfreeuser/{0}".With(ApiCaller.PathSegmentEncode(Identity.User)));
+
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("POST", resource, Timeout));
+            ApiCaller.EnsureStatusOk(restResponse);
+        }
+
         private static IStringSerializer Serializer
         {
             get

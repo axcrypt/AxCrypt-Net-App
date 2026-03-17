@@ -173,5 +173,10 @@ namespace AxCrypt.Core.Service
         {
             return await New<ICache>().UpdateItemAsync(() => _service.UpdateRememberMeOnMFAInfoAsync(multiFactorAuthApi), _key).Free();
         }
+
+        public async Task SetMyAccountViewerPlanAsync()
+        {
+            await _service.SetMyAccountViewerPlanAsync();
+        }
     }
 }

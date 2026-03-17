@@ -406,5 +406,10 @@ namespace AxCrypt.Core.Service
             await SaveAsync(localAccount);
             return true;
         }
+
+        public async Task SetMyAccountViewerPlanAsync()
+        {
+            throw new InvalidOperationException("Can't set user plan as viewer locally.");
+        }
     }
 }

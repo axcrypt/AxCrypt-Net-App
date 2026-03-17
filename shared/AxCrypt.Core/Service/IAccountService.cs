@@ -220,5 +220,7 @@ namespace AxCrypt.Core.Service
         Task<bool> CreateSubscriptionByGooglePaymentAsync(GooglePurchaseInfo googlePamentTrans);
 
         Task<bool> UpdateRememberMeOnMFAInfoAsync(MultiFactorAuthApiModel multiFactorAuthApi);
+
+        Task SetMyAccountViewerPlanAsync();
     }
 }

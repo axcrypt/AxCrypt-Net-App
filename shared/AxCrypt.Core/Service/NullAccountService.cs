@@ -180,5 +180,10 @@ namespace AxCrypt.Core.Service
         {
             return Task.FromResult(false);
         }
+
+        public Task SetMyAccountViewerPlanAsync()
+        {
+            return _completedTask;
+        }
     }
 }

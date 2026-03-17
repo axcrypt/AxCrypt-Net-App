@@ -498,5 +498,22 @@ namespace AxCrypt.Core.Service
 
             return await _localService.UpdateRememberMeOnMFAInfoAsync(multiFactorAuthApi).Free();
         }
+
+        public async Task SetMyAccountViewerPlanAsync()
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                try
+                {
+                    await _remoteService.SetMyAccountViewerPlanAsync().Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                }
+            }
+
+            await _localService.SetMyAccountViewerPlanAsync().Free();
+        }
     }
 }
