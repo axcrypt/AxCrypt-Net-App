@@ -347,7 +347,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 }
 
 .txt-clr, .highlight-text > span {
-    color: $colDrkMdHglhtPrm;
+    color: $colDrkMdHglhtPrm !important;
 }
 
 .abt-axc > span {
@@ -420,7 +420,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 }
 
 .notification-popup tr td {
-    color: $colTxtlble;
+    color: $colTxtlble !important;
 
     :hover {
         color: $colDrkMdHglhtPrm;
@@ -517,4 +517,26 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 
 .display-type > img.selected {
     filter: invert(0) !important;
+}
+
+.breadcrumb-part {
+    color: $colTxtBd;
+}
+
+.notif-icon:hover,
+.sttng-icon:hover {
+    filter: brightness(0) invert(1);
+}
+
+.notifipopup-show {
+    color: $colTxtlble !important;
+}
+
+.file-masKey-icon {
+    filter: brightness(0) invert(1) !important;
+}
+
+.top-menu a.active .sttng-icon,
+.top-menu a.active .notif-icon {
+    filter: brightness(0) invert(1) !important;
 }

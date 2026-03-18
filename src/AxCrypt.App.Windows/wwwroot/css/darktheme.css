@@ -313,7 +313,7 @@ input[readonly=readonly], textarea[readonly] {
 }
 
 .txt-clr, .highlight-text > span {
-  color: #CDFFB1;
+  color: #CDFFB1 !important;
 }
 
 .abt-axc > span {
@@ -384,7 +384,7 @@ input[readonly=readonly], textarea[readonly] {
 }
 
 .notification-popup tr td {
-  color: #A4A4A4;
+  color: #A4A4A4 !important;
 }
 .notification-popup tr td :hover {
   color: #CDFFB1;
@@ -478,4 +478,26 @@ input[readonly=readonly], textarea[readonly] {
 
 .display-type > img.selected {
   filter: invert(0) !important;
+}
+
+.breadcrumb-part {
+  color: #FFFFFF;
+}
+
+.notif-icon:hover,
+.sttng-icon:hover {
+  filter: brightness(0) invert(1);
+}
+
+.notifipopup-show {
+  color: #A4A4A4 !important;
+}
+
+.file-masKey-icon {
+  filter: brightness(0) invert(1) !important;
+}
+
+.top-menu a.active .sttng-icon,
+.top-menu a.active .notif-icon {
+  filter: brightness(0) invert(1) !important;
 }
