@@ -234,7 +234,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
-            if (!_logOnViewModel.License.Has(LicenseCapability.Vault))
+            if (!_logOnViewModel.UserHas(LicenseCapability.Vault))
             {
                 return;
             }
@@ -499,7 +499,7 @@ namespace AxCrypt.App.Shared.ViewModels
 
         private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<Task> realHandler)
         {
-            if (_logOnViewModel.License.Has(requiredCapability))
+            if (_logOnViewModel.UserHas(requiredCapability))
             {
                 if (realHandler != null)
                 {

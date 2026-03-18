@@ -237,7 +237,7 @@
                 @{
                     string UpgradeSubsText = "Unlock <span>stronger & unlimited encryption</span> features!";
                     bool EligibleForTrial = AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.EligibleForFreeTrial;
-                    @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.License.Has(Core.Runtime.LicenseCapability.Viewer))
+                    @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.UserHas(Core.Runtime.LicenseCapability.Viewer))
                     {
                         UpgradeSubsText = "Upgrade to unlock <span>Encryption & more features!</span>";
                         if (EligibleForTrial)

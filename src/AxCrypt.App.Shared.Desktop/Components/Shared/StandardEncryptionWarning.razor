@@ -9,7 +9,7 @@
 {
     <div class="row site-warning" style="@PopupStyle">
         <div class="warning-message alert radius">
-            @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.License.Has(Core.Runtime.LicenseCapability.Viewer))
+            @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.UserHas(Core.Runtime.LicenseCapability.Viewer))
             {
                 <strong><a style="" href="javascript:void(0);" @onclick="RedirectToPurchasePage">Click here to unlock <span>Encryption & more features!</span></a></strong>
             }

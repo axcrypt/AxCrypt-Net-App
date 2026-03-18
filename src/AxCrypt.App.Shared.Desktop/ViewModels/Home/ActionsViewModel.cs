@@ -45,7 +45,7 @@ public class ActionsViewModel : ViewModelBase
     {
         get
         {
-            if (LogOnViewModel.License.Has(LicenseCapability.EncryptNewFiles))
+            if (LogOnViewModel.UserHas(LicenseCapability.EncryptNewFiles))
             {
                 return true;
             }

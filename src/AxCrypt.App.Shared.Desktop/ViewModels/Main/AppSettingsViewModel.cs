@@ -234,7 +234,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     private void StartInactivitySignOut()
     {
-        if (!_logOnViewModel.License.Has(LicenseCapability.InactivitySignOut))
+        if (!_logOnViewModel.UserHas(LicenseCapability.InactivitySignOut))
         {
             return;
         }
@@ -576,7 +576,7 @@ public class AppSettingsViewModel : ViewModelBase
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {
-        if (_logOnViewModel.License.Has(requiredCapability))
+        if (_logOnViewModel.UserHas(requiredCapability))
         {
             if (realHandler != null)
             {

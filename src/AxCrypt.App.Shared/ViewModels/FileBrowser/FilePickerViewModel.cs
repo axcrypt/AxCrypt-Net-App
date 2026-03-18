@@ -480,7 +480,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
 
         private bool HasLicenseCapabilityFor(FileOperationOption fileOperationOption)
         {
-            LicenseCapabilities? license = LogOnViewModel!.License;
+            LicenseCapabilities? license = _mainViewModel!.License;
             bool hasCapability = fileOperationOption switch
             {
                 FileOperationOption.Encrypt

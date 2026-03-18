@@ -269,7 +269,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
 
         private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
         {
-            if (LogOnViewModel.License.Has(requiredCapability))
+            if (LogOnViewModel.UserHas(requiredCapability))
             {
                 if (realHandler != null)
                 {
