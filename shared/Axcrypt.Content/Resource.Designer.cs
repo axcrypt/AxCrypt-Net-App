@@ -19,7 +19,7 @@ namespace AxCrypt.Content {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resource {
@@ -1570,6 +1570,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Already subscribed? Restore your plan.
+        /// </summary>
+        public static string AlreadySubscribedText {
+            get {
+                return ResourceManager.GetString("AlreadySubscribedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Oops. You already verified your account, that&apos;s great!
         ///
         ///Please sign in using the same password you used then..
@@ -1784,6 +1793,15 @@ namespace AxCrypt.Content {
         public static string AppNotWorkExpectedText {
             get {
                 return ResourceManager.GetString("AppNotWorkExpectedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We will appreciate your feedback!.
+        /// </summary>
+        public static string AppreciateYourFeedback {
+            get {
+                return ResourceManager.GetString("AppreciateYourFeedback", resourceCulture);
             }
         }
         
@@ -42730,6 +42748,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to By subscribing to AxCrypt you agree to our.
+        /// </summary>
+        public static string BySubscribingAgreeText {
+            get {
+                return ResourceManager.GetString("BySubscribingAgreeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Canceled &apos;{0}&apos;..
         /// </summary>
         public static string Canceled {
@@ -46907,6 +46934,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Options.
+        /// </summary>
+        public static string EditOptionsButtonText {
+            get {
+                return ResourceManager.GetString("EditOptionsButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Password .
         /// </summary>
         public static string EditPasswordTitle {
@@ -49931,6 +49967,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This folder is empty!.
+        /// </summary>
+        public static string FolderIsEmptyText {
+            get {
+                return ResourceManager.GetString("FolderIsEmptyText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Folder name.
         /// </summary>
         public static string FolderNameLabel {
@@ -50170,6 +50215,15 @@ namespace AxCrypt.Content {
         public static string ForIndividualsLabel {
             get {
                 return ResourceManager.GetString("ForIndividualsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Format.
+        /// </summary>
+        public static string FormatColumnHeaderText {
+            get {
+                return ResourceManager.GetString("FormatColumnHeaderText", resourceCulture);
             }
         }
         
@@ -53795,7 +53849,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 20 &lt;span&gt;years&lt;/span&gt;.
+        ///   Looks up a localized string similar to 25 &lt;span&gt;years&lt;/span&gt;.
         /// </summary>
         public static string HomeHeroDeliveries1 {
             get {
@@ -53840,7 +53894,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The easiest way to &lt;span&gt;encrypt&lt;/span&gt;, &lt;span&gt;share&lt;/span&gt; and &lt;span&gt;secure&lt;/span&gt;&lt;br/&gt; your files..
+        ///   Looks up a localized string similar to The easiest way to &lt;span&gt;encrypt&lt;/span&gt;, &lt;span&gt;share&lt;/span&gt; and &lt;span&gt;secure&lt;/span&gt;&lt;br/&gt; your files.
         /// </summary>
         public static string HomeHeroHeading1 {
             get {
@@ -54201,6 +54255,24 @@ namespace AxCrypt.Content {
         public static string InactivitySignoutToolTipText {
             get {
                 return ResourceManager.GetString("InactivitySignoutToolTipText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In addition to the.
+        /// </summary>
+        public static string InAdditionTexts {
+            get {
+                return ResourceManager.GetString("InAdditionTexts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to features, which you use now, you will get:.
+        /// </summary>
+        public static string InAdditionTexts1 {
+            get {
+                return ResourceManager.GetString("InAdditionTexts1", resourceCulture);
             }
         }
         
@@ -56535,7 +56607,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 📚 Quick Guide to Viewing or Decrypt the File.
+        ///   Looks up a localized string similar to &lt;strong&gt;📚 Quick Guide&lt;/strong&gt; to Viewing or Decrypt the File.
         /// </summary>
         public static string KeyShareGuideWhatsNextHead1 {
             get {
@@ -56544,7 +56616,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🔐 Secured Messenger.
+        ///   Looks up a localized string similar to &lt;strong&gt;🔐 Secured Messenger&lt;/strong&gt;.
         /// </summary>
         public static string KeyShareGuideWhatsNextHead2 {
             get {
@@ -56553,7 +56625,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 📝 Blog.
+        ///   Looks up a localized string similar to &lt;strong&gt;📝 Blog&lt;/strong&gt;.
         /// </summary>
         public static string KeyShareGuideWhatsNextHead3 {
             get {
@@ -56571,7 +56643,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Secured Messenger is a secure, end-to-end encrypted messaging feature built into AxCrypt: &lt;/br&gt; &lt;a href=&apos;/information/guides/passwordmanager/&apos;&gt;AxCrypt Password Manager Guide – Securely Manage &amp; Share Passwords&lt;/a&gt;.
+        ///   Looks up a localized string similar to Secured Messenger is a secure, end-to-end encrypted messaging feature built into AxCrypt: &lt;/br&gt; &lt;a href=&apos;/information/guides/securedmessenger/&apos;&gt;AxCrypt Secured Messenger | End-to-End Encrypted Messaging for Complete Privacy&lt;/a&gt;.
         /// </summary>
         public static string KeyShareGuideWhatsNextText2 {
             get {
@@ -57502,6 +57574,15 @@ namespace AxCrypt.Content {
         public static string LinkToSignUpWebPage {
             get {
                 return ResourceManager.GetString("LinkToSignUpWebPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading plans....
+        /// </summary>
+        public static string LoadingPlansTexts {
+            get {
+                return ResourceManager.GetString("LoadingPlansTexts", resourceCulture);
             }
         }
         
@@ -60930,6 +61011,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Learn how to use AxCrypt Secure Cloud to encrypt, store, and share files safely. Follow our step-by-step guide for secure cloud file protection..
+        /// </summary>
+        public static string Meta_Description_Secure_Cloud_On_Platform {
+            get {
+                return ResourceManager.GetString("Meta-Description-Secure-Cloud-On-Platform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Protect business communication with AxCrypt’s Secured Messenger. End-to-end encryption, AES-256 security, EU-based servers, and full GDPR &amp; NIS2 compliance..
         /// </summary>
         public static string Meta_Description_Securedmessenger {
@@ -62892,6 +62982,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AxCrypt Secure Cloud Guide | Encrypt &amp; Share Files Securely.
+        /// </summary>
+        public static string Meta_Title_Secure_Cloud_On_Platform {
+            get {
+                return ResourceManager.GetString("Meta-Title-Secure-Cloud-On-Platform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AxCrypt Secured Messenger | End-to-End Encrypted Messaging for Complete Privacy.
         /// </summary>
         public static string Meta_Title_Securedmessenger {
@@ -64809,6 +64908,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are &lt;b&gt;offline&lt;/b&gt;.
+        /// </summary>
+        public static string OfflineText {
+            get {
+                return ResourceManager.GetString("OfflineText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OFF.
         /// </summary>
         public static string OFFText {
@@ -66488,11 +66596,29 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Platform not supported, please contact AxCrypt support!.
+        /// </summary>
+        public static string PlatformNotSupportedText {
+            get {
+                return ResourceManager.GetString("PlatformNotSupportedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please note!.
         /// </summary>
         public static string PleaseNoteText {
             get {
                 return ResourceManager.GetString("PleaseNoteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please rate us on.
+        /// </summary>
+        public static string PleaseRateUsText {
+            get {
+                return ResourceManager.GetString("PleaseRateUsText", resourceCulture);
             }
         }
         
@@ -70752,6 +70878,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remember me for.
+        /// </summary>
+        public static string RememberMeForText {
+            get {
+                return ResourceManager.GetString("RememberMeForText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove from recent files.
         /// </summary>
         public static string RemoveFromRecentFilesLabelText {
@@ -72335,6 +72470,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore now.
+        /// </summary>
+        public static string RestoreNowText {
+            get {
+                return ResourceManager.GetString("RestoreNowText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restore to original requires a paid subscription plan!..
         /// </summary>
         public static string RestoreToOriginalToolTipText {
@@ -72574,6 +72718,447 @@ namespace AxCrypt.Content {
         public static string SecTwoFacAuthenConText3 {
             get {
                 return ResourceManager.GetString("SecTwoFacAuthenConText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why must you secure your cloud storage data?.
+        /// </summary>
+        public static string SecureCloudFaq1 {
+            get {
+                return ResourceManager.GetString("SecureCloudFaq1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While data uploaded onto the cloud can increase accessibility, it also increases the risk of exposure. &lt;/br&gt;&lt;/br&gt;When you secure your data on the cloud with an encryption tool that deploys an AES-256 encryption algorithm. Only you and those to whom you give access via the application can access this encrypted data. &lt;/br&gt;&lt;/br&gt;It&apos;s built for users who want to protect sensitive files, enable secure cloud file sharing, and encrypt documents online without disrupting workflow..
+        /// </summary>
+        public static string SecureCloudFaq1Ans {
+            get {
+                return ResourceManager.GetString("SecureCloudFaq1Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How many cloud storage platforms does AxCrypt&apos;s Cloud Security support?.
+        /// </summary>
+        public static string SecureCloudFaq2 {
+            get {
+                return ResourceManager.GetString("SecureCloudFaq2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AxCrypt&apos;s Cloud Security supports only Google Drive, OneDrive, and Dropbox..
+        /// </summary>
+        public static string SecureCloudFaq2Ans {
+            get {
+                return ResourceManager.GetString("SecureCloudFaq2Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can I securely share encrypted files stored in the cloud?.
+        /// </summary>
+        public static string SecureCloudFaq3 {
+            get {
+                return ResourceManager.GetString("SecureCloudFaq3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes. You can share encrypted files stored on the cloud through the Share Keys features present within the application. &lt;/br&gt;&lt;/br&gt;With Cloud Security feature, you can grant access and authorize users. Your files remain protected through Cloud Security and are only accessible to approved or authorised users. &lt;/br&gt;&lt;/br&gt;This cloud sync feature comes with maximum file protection and gives you complete control and security over your data..
+        /// </summary>
+        public static string SecureCloudFaq3Ans {
+            get {
+                return ResourceManager.GetString("SecureCloudFaq3Ans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protect files in cloud storage through the application.
+        /// </summary>
+        public static string SecureCloudGuidebuttonHead1 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuidebuttonHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypt files - both Local and Cloud Files.
+        /// </summary>
+        public static string SecureCloudGuidebuttonHead2 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuidebuttonHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Secure.
+        /// </summary>
+        public static string SecureCloudGuidebuttonHead3 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuidebuttonHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To securely sync files, connect your Google Drive or Dropbox account by granting permission during the authentication prompt. Once approved, AxCrypt can securely open, encrypt, decrypt, and share files directly from your cloud storage without storing your data..
+        /// </summary>
+        public static string SecureCloudGuideCarouselText {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideCarouselText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work seamlessly with cloud storage services (Dropbox, OneDrive, Google Drive) with AxCrypt. AxCrypt secures files with AES-256 encryption before uploading to the cloud. Your files are protected both at rest and in transit..
+        /// </summary>
+        public static string SecureCloudGuidesHeadParagraph {
+            get {
+                return ResourceManager.GetString("SecureCloudGuidesHeadParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Securely access all your sensitive data on &lt;b&gt;one secure&lt;/b&gt; &lt;br/&gt; &lt;b&gt;platform&lt;/b&gt; with &lt;span&gt;&lt;b&gt;AxCrypt.&lt;/b&gt;&lt;/span&gt;.
+        /// </summary>
+        public static string SecureCloudGuidesHeadTitle {
+            get {
+                return ResourceManager.GetString("SecureCloudGuidesHeadTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authenticate Your &lt;span&gt;Cloud Account&lt;/span&gt;.
+        /// </summary>
+        public static string SecureCloudGuideStepHead1 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here&apos;s &lt;span&gt;How to Protect Files in Cloud Storage&lt;/span&gt; with AxCrypt&apos;s AES 256-bit Encryption..
+        /// </summary>
+        public static string SecureCloudGuideStepHead2 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepHead2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How to use the &lt;span&gt;Stop Secure and the Open Secured&lt;/span&gt; options in &lt;span class=&apos;for-bold&apos;&gt;Cloud Encryption&lt;/span&gt;?.
+        /// </summary>
+        public static string SecureCloudGuideStepHead3 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepHead3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How to use the &lt;span&gt;Share Key Options&lt;/span&gt; in Cloud Encryption?.
+        /// </summary>
+        public static string SecureCloudGuideStepHead4 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepHead4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What is &lt;span&gt;Cloud Security?&lt;/span&gt;.
+        /// </summary>
+        public static string SecureCloudGuideStepHead5 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepHead5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is &lt;span&gt;Cloud Security&lt;/span&gt; a &lt;span class=&apos;for-bold&apos;&gt;zero-knowledge&lt;/span&gt; cloud storage solution?.
+        /// </summary>
+        public static string SecureCloudGuideStepHead6 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepHead6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On the AxCrypt app&apos;s homepage, Click on the preferred cloud storage service provider..
+        /// </summary>
+        public static string SecureCloudGuideStepText1 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click on &apos;Open Secured&apos;..
+        /// </summary>
+        public static string SecureCloudGuideStepText10 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Please note:&lt;/strong&gt; Your files stay encrypted and secure. They open briefly while you work and re-encrypt automatically when you exit the application..
+        /// </summary>
+        public static string SecureCloudGuideStepText11 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In the file selection pop-up, you can also secure files via the right-click menu—simply select your desired file and click Secure. Please note that a one-time cloud authorization is required..
+        /// </summary>
+        public static string SecureCloudGuideStepText12 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click on &apos;Stop Securing&apos;..
+        /// </summary>
+        public static string SecureCloudGuideStepText13 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your files are now permanently decrypted..
+        /// </summary>
+        public static string SecureCloudGuideStepText14 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Please note:&lt;/strong&gt; You can also click on the action menu (3 dots) in the bottom right corner and select stop secure..
+        /// </summary>
+        public static string SecureCloudGuideStepText15 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign in to AxCrypt and choose from the 3 cloud storage providers present..
+        /// </summary>
+        public static string SecureCloudGuideStepText16 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locate your file and select it..
+        /// </summary>
+        public static string SecureCloudGuideStepText17 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click on &lt;strong&gt;&apos;Share Keys&apos;.&lt;/strong&gt;.
+        /// </summary>
+        public static string SecureCloudGuideStepText18 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add the email ID you want to securely share keys with and click on &lt;strong&gt;&apos;Add&apos;.&lt;/strong&gt;.
+        /// </summary>
+        public static string SecureCloudGuideStepText19 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A file selection pop-up will open showing the cloud files..
+        /// </summary>
+        public static string SecureCloudGuideStepText2 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Cloud Security&lt;/strong&gt; by AxCrypt is a feature that ensures encrypted cloud sync across multiple devices and supported cloud storage platforms. This allows you to secure cloud storage files using client-side encryption that authorises users with the necessary access permissions to access them. &lt;/br&gt;&lt;/br&gt; With AxCrypt&apos;s Cloud Security feature, you can almost encrypt any files. From files, PDFs, sheets, to images, you can use AxCrypt&apos;s Cloud SecurityAES-256 encryption algorithm to protect them..
+        /// </summary>
+        public static string SecureCloudGuideStepText20 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Yes.&lt;/strong&gt; Cloud Security by AxCrypt is designed as a zero-knowledge cloud storage solution. This means that your files are encrypted using the AES-256 encryption algorithm, and we do not hold or access any of the information or data that is uploaded onto the cloud storage platforms. The cloud storage provider does not control your encryption keys. This guarantees stronger data privacy and true end-to-end encrypted cloud sync..
+        /// </summary>
+        public static string SecureCloudGuideStepText21 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locate the file from the available cloud storage options on the application..
+        /// </summary>
+        public static string SecureCloudGuideStepText22 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On the application homepage, click on your preferred cloud storage..
+        /// </summary>
+        public static string SecureCloudGuideStepText23 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click the &quot;+&quot; action button and choose the file you want to securely upload to the cloud..
+        /// </summary>
+        public static string SecureCloudGuideStepText24 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click Open, and the file is now encrypted in both locations : local and the cloud..
+        /// </summary>
+        public static string SecureCloudGuideStepText25 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Please note:&lt;/strong&gt; The file will be encrypted locally as well as on the cloud..
+        /// </summary>
+        public static string SecureCloudGuideStepText26 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the file you want to protect..
+        /// </summary>
+        public static string SecureCloudGuideStepText3 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click on the Action Menu (3 dots) in the bottom right corner of the popup..
+        /// </summary>
+        public static string SecureCloudGuideStepText4 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click on Secure, and now your file is encrypted with an .axx extension..
+        /// </summary>
+        public static string SecureCloudGuideStepText5 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Please note:&lt;/strong&gt; The file is encrypted locally and then uploaded to the cloud..
+        /// </summary>
+        public static string SecureCloudGuideStepText6 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locate the file you want to Open Securely..
+        /// </summary>
+        public static string SecureCloudGuideStepText7 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the file and then right-click..
+        /// </summary>
+        public static string SecureCloudGuideStepText8 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Or you may also click on the action menu (3 dots) to perform this action..
+        /// </summary>
+        public static string SecureCloudGuideStepText9 {
+            get {
+                return ResourceManager.GetString("SecureCloudGuideStepText9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;In this guide, you will learn how to use AxCrypt with cloud storage.&lt;/strong&gt;&lt;/br&gt; There&apos;s no need to install any cloud drive sync applications locally. AxCrypt Cloud Security encrypts your files with AES-256 and provides end-to-end protection, syncing them to the cloud while keeping them safe both in transit and during use..
+        /// </summary>
+        public static string SecureCloudParagraph {
+            get {
+                return ResourceManager.GetString("SecureCloudParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here&apos;s How to Protect Files in Cloud Storage.
+        /// </summary>
+        public static string SecureCloudSideMenuHead1 {
+            get {
+                return ResourceManager.GetString("SecureCloudSideMenuHead1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 📚&lt;strong&gt;Quick Guide&lt;/strong&gt; to using AxCrypt Vault- an automatically encrypted container &lt;br/&gt;for storing your sensitive files and folders:.
+        /// </summary>
+        public static string SecureCloudWhatNextText1 {
+            get {
+                return ResourceManager.GetString("SecureCloudWhatNextText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;a href=&apos;/information/guides/vault/&apos;&gt;AxCrypt Vault Feature Guide | Encrypt &amp; Protect Files&lt;/a&gt;.
+        /// </summary>
+        public static string SecureCloudWhatNextText2 {
+            get {
+                return ResourceManager.GetString("SecureCloudWhatNextText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secure Cloud.
+        /// </summary>
+        public static string SecuredCloudLinkLabel {
+            get {
+                return ResourceManager.GetString("SecuredCloudLinkLabel", resourceCulture);
             }
         }
         
@@ -74681,6 +75266,15 @@ namespace AxCrypt.Content {
         public static string StartFreeTrial {
             get {
                 return ResourceManager.GetString("StartFreeTrial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start your 14 days free trial, Then .
+        /// </summary>
+        public static string StartFreeTrialText {
+            get {
+                return ResourceManager.GetString("StartFreeTrialText", resourceCulture);
             }
         }
         

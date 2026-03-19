@@ -635,6 +635,9 @@ Choose something difficult to guess, since it will protect passwords in the onli
     <value>Already registered? Log in here</value>
     <comment>Link to sign in page.</comment>
   </data>
+  <data name="AlreadySubscribedText" xml:space="preserve">
+    <value>Already subscribed? Restore your plan</value>
+  </data>
   <data name="AlreadyVerifiedInfo" xml:space="preserve">
     <value>Oops. You already verified your account, that's great!
 
@@ -712,6 +715,9 @@ Please sign in using the same password you used then.</value>
   </data>
   <data name="AppNotWorkExpectedText" xml:space="preserve">
     <value>Didn't work as expected</value>
+  </data>
+  <data name="AppreciateYourFeedback" xml:space="preserve">
+    <value>We will appreciate your feedback!</value>
   </data>
   <data name="ApprovedMasterKeyStatus" xml:space="preserve">
     <value>Approved</value>
@@ -14435,6 +14441,9 @@ You have been warned, now enjoy!</value>
   <data name="BuyText" xml:space="preserve">
     <value>Buy</value>
   </data>
+  <data name="BySubscribingAgreeText" xml:space="preserve">
+    <value>By subscribing to AxCrypt you agree to our</value>
+  </data>
   <data name="Canceled" xml:space="preserve">
     <value>Canceled '{0}'.</value>
   </data>
@@ -15845,6 +15854,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   <data name="EditNoteTitle" xml:space="preserve">
     <value>Edit Note</value>
   </data>
+  <data name="EditOptionsButtonText" xml:space="preserve">
+    <value>Edit Options</value>
+  </data>
   <data name="EditPasswordTitle" xml:space="preserve">
     <value>Edit Password </value>
   </data>
@@ -16875,6 +16887,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>Folder '{0}' already secured.</value>
   </data>
+  <data name="FolderIsEmptyText" xml:space="preserve">
+    <value>This folder is empty!</value>
+  </data>
   <data name="FolderNameLabel" xml:space="preserve">
     <value>Folder name</value>
   </data>
@@ -16957,6 +16972,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   </data>
   <data name="ForIndividualsLabel" xml:space="preserve">
     <value>For individuals</value>
+  </data>
+  <data name="FormatColumnHeaderText" xml:space="preserve">
+    <value>Format</value>
   </data>
   <data name="ForOrganisationsLabel" xml:space="preserve">
     <value>For organisations</value>
@@ -18169,7 +18187,7 @@ If you for any reason do not know or remember the password, you must perform a p
     <value>represented countries</value>
   </data>
   <data name="HomeHeroDeliveries1" xml:space="preserve">
-    <value>20 &lt;span&gt;years&lt;/span&gt;</value>
+    <value>25 &lt;span&gt;years&lt;/span&gt;</value>
   </data>
   <data name="HomeHeroDeliveries2" xml:space="preserve">
     <value>trusted delivery</value>
@@ -18184,7 +18202,7 @@ If you for any reason do not know or remember the password, you must perform a p
     <value>"Advanced encryption in a superbly simple setting"</value>
   </data>
   <data name="HomeHeroHeading1" xml:space="preserve">
-    <value>The easiest way to &lt;span&gt;encrypt&lt;/span&gt;, &lt;span&gt;share&lt;/span&gt; and &lt;span&gt;secure&lt;/span&gt;&lt;br/&gt; your files.</value>
+    <value>The easiest way to &lt;span&gt;encrypt&lt;/span&gt;, &lt;span&gt;share&lt;/span&gt; and &lt;span&gt;secure&lt;/span&gt;&lt;br/&gt; your files</value>
   </data>
   <data name="HomeHeroHeading2" xml:space="preserve">
     <value>Protect files and folders with strong encryption before sharing them or storing in Google Drive, 
@@ -18309,6 +18327,12 @@ If you want to view or update the file contents, please decrypt it separately, a
   </data>
   <data name="InactivitySignoutToolTipText" xml:space="preserve">
     <value>Inactivity Signout requires a paid subscription plan!.</value>
+  </data>
+  <data name="InAdditionTexts" xml:space="preserve">
+    <value>In addition to the</value>
+  </data>
+  <data name="InAdditionTexts1" xml:space="preserve">
+    <value>features, which you use now, you will get:</value>
   </data>
   <data name="InboxText" xml:space="preserve">
     <value>Inbox</value>
@@ -19108,19 +19132,19 @@ A recipient is identified by the AxCrypt ID sign in email, but we do not send th
     <value>Share file access with &lt;label style="font-style: italic; "&gt;colleagues and friends &lt;/label&gt; &lt;strong style="color: black; "&gt;with &lt;/strong&gt;&lt;span&gt; Key Sharing!&lt;/span&gt;</value>
   </data>
   <data name="KeyShareGuideWhatsNextHead1" xml:space="preserve">
-    <value>📚 Quick Guide to Viewing or Decrypt the File</value>
+    <value>&lt;strong&gt;📚 Quick Guide&lt;/strong&gt; to Viewing or Decrypt the File</value>
   </data>
   <data name="KeyShareGuideWhatsNextHead2" xml:space="preserve">
-    <value>🔐 Secured Messenger</value>
+    <value>&lt;strong&gt;🔐 Secured Messenger&lt;/strong&gt;</value>
   </data>
   <data name="KeyShareGuideWhatsNextHead3" xml:space="preserve">
-    <value>📝 Blog</value>
+    <value>&lt;strong&gt;📝 Blog&lt;/strong&gt;</value>
   </data>
   <data name="KeyShareGuideWhatsNextText1" xml:space="preserve">
     <value>&lt;a href='/helpcenter/guides-section/'&gt;How to Encrypt &amp; Decrypt Files with AxCrypt | Step-by-Step Guide&lt;/a&gt;</value>
   </data>
   <data name="KeyShareGuideWhatsNextText2" xml:space="preserve">
-    <value>Secured Messenger is a secure, end-to-end encrypted messaging feature built into AxCrypt: &lt;/br&gt; &lt;a href='/information/guides/passwordmanager/'&gt;AxCrypt Password Manager Guide – Securely Manage &amp; Share Passwords&lt;/a&gt;</value>
+    <value>Secured Messenger is a secure, end-to-end encrypted messaging feature built into AxCrypt: &lt;/br&gt; &lt;a href='/information/guides/securedmessenger/'&gt;AxCrypt Secured Messenger | End-to-End Encrypted Messaging for Complete Privacy&lt;/a&gt;</value>
   </data>
   <data name="KeyShareGuideWhatsNextText3" xml:space="preserve">
     <value>Want to dive deeper into encryption best practices? Explore our blog for guides and tips. &lt;/br&gt; &lt;a href='/blog/'&gt;AxCrypt Blog&lt;/a&gt;</value>
@@ -19448,6 +19472,9 @@ Enable automatic conversion of AxCrypt 1.x files (recommended)?</value>
   </data>
   <data name="LinkToSignUpWebPage" xml:space="preserve">
     <value>{0}Home/Register</value>
+  </data>
+  <data name="LoadingPlansTexts" xml:space="preserve">
+    <value>Loading plans...</value>
   </data>
   <data name="LoadingText" xml:space="preserve">
     <value>Loading..</value>
@@ -20647,6 +20674,9 @@ This program is licensed according to the agreement.
   <data name="Meta-Description-Reseller-help-Support" xml:space="preserve">
     <value>Access AxCrypt's reseller support: technical guides, video tutorials, sales materials, and direct assistance to enhance your reselling experience.</value>
   </data>
+  <data name="Meta-Description-Secure-Cloud-On-Platform" xml:space="preserve">
+    <value>Learn how to use AxCrypt Secure Cloud to encrypt, store, and share files safely. Follow our step-by-step guide for secure cloud file protection.</value>
+  </data>
   <data name="Meta-Description-Securedmessenger" xml:space="preserve">
     <value>Protect business communication with AxCrypt’s Secured Messenger. End-to-end encryption, AES-256 security, EU-based servers, and full GDPR &amp; NIS2 compliance.</value>
   </data>
@@ -21300,6 +21330,9 @@ This program is licensed according to the agreement.
   </data>
   <data name="Meta-Title-Reseller-help-Support" xml:space="preserve">
     <value>AxCrypt Reseller Support – Technical Assistance &amp; Sales Resources</value>
+  </data>
+  <data name="Meta-Title-Secure-Cloud-On-Platform" xml:space="preserve">
+    <value>AxCrypt Secure Cloud Guide | Encrypt &amp; Share Files Securely</value>
   </data>
   <data name="Meta-Title-Securedmessenger" xml:space="preserve">
     <value>AxCrypt Secured Messenger | End-to-End Encrypted Messaging for Complete Privacy</value>
@@ -21958,6 +21991,9 @@ To return to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
   <data name="OfflineSignupText" xml:space="preserve">
     <value>Currently you are &lt;b class="font-extra-bold"&gt;offline&lt;/b&gt;. However, you still can &lt;span class="grn-clr font-extra-bold"&gt;&lt;b&gt;Sign up!&lt;/b&gt;&lt;/span&gt;</value>
   </data>
+  <data name="OfflineText" xml:space="preserve">
+    <value>You are &lt;b&gt;offline&lt;/b&gt;</value>
+  </data>
   <data name="OFFText" xml:space="preserve">
     <value>OFF</value>
   </data>
@@ -22547,8 +22583,14 @@ White space, and parts that are equal to common passwords are ignored and do not
   <data name="PlanText" xml:space="preserve">
     <value>Plan</value>
   </data>
+  <data name="PlatformNotSupportedText" xml:space="preserve">
+    <value>Platform not supported, please contact AxCrypt support!</value>
+  </data>
   <data name="PleaseNoteText" xml:space="preserve">
     <value>Please note!</value>
+  </data>
+  <data name="PleaseRateUsText" xml:space="preserve">
+    <value>Please rate us on</value>
   </data>
   <data name="PolishLanguageSelection" xml:space="preserve">
     <value>Polski (Polish)</value>
@@ -24002,6 +24044,9 @@ Please &lt;a href="mailto:premium@axcrypt.net"&gt;contact us&lt;/a&gt; and we wi
     <value>Your software needs to be updated due to a reliability issue.</value>
     <comment>Displayed prominently, perhaps as a pop-up, when it's discovered that an update is available the contains a reliability fix.</comment>
   </data>
+  <data name="RememberMeForText" xml:space="preserve">
+    <value>Remember me for</value>
+  </data>
   <data name="RemoveFromRecentFilesLabelText" xml:space="preserve">
     <value>Remove from recent files</value>
   </data>
@@ -24542,6 +24587,9 @@ Subject: AxCrypt Report Snapshot</value>
   <data name="RestoreMasterKeyText" xml:space="preserve">
     <value>Restore MasterKey</value>
   </data>
+  <data name="RestoreNowText" xml:space="preserve">
+    <value>Restore now</value>
+  </data>
   <data name="RestoreToOriginalToolTipText" xml:space="preserve">
     <value>Restore to original requires a paid subscription plan!.</value>
   </data>
@@ -24624,6 +24672,153 @@ Subject: AxCrypt Report Snapshot</value>
   </data>
   <data name="SecTwoFacAuthenConText3" xml:space="preserve">
     <value>!!Use your mobile phone to recieve security code</value>
+  </data>
+  <data name="SecureCloudFaq1" xml:space="preserve">
+    <value>Why must you secure your cloud storage data?</value>
+  </data>
+  <data name="SecureCloudFaq1Ans" xml:space="preserve">
+    <value>While data uploaded onto the cloud can increase accessibility, it also increases the risk of exposure. &lt;/br&gt;&lt;/br&gt;When you secure your data on the cloud with an encryption tool that deploys an AES-256 encryption algorithm. Only you and those to whom you give access via the application can access this encrypted data. &lt;/br&gt;&lt;/br&gt;It's built for users who want to protect sensitive files, enable secure cloud file sharing, and encrypt documents online without disrupting workflow.</value>
+  </data>
+  <data name="SecureCloudFaq2" xml:space="preserve">
+    <value>How many cloud storage platforms does AxCrypt's Cloud Security support?</value>
+  </data>
+  <data name="SecureCloudFaq2Ans" xml:space="preserve">
+    <value>AxCrypt's Cloud Security supports only Google Drive, OneDrive, and Dropbox.</value>
+  </data>
+  <data name="SecureCloudFaq3" xml:space="preserve">
+    <value>Can I securely share encrypted files stored in the cloud?</value>
+  </data>
+  <data name="SecureCloudFaq3Ans" xml:space="preserve">
+    <value>Yes. You can share encrypted files stored on the cloud through the Share Keys features present within the application. &lt;/br&gt;&lt;/br&gt;With Cloud Security feature, you can grant access and authorize users. Your files remain protected through Cloud Security and are only accessible to approved or authorised users. &lt;/br&gt;&lt;/br&gt;This cloud sync feature comes with maximum file protection and gives you complete control and security over your data.</value>
+  </data>
+  <data name="SecureCloudGuidebuttonHead1" xml:space="preserve">
+    <value>Protect files in cloud storage through the application</value>
+  </data>
+  <data name="SecureCloudGuidebuttonHead2" xml:space="preserve">
+    <value>Encrypt files - both Local and Cloud Files</value>
+  </data>
+  <data name="SecureCloudGuidebuttonHead3" xml:space="preserve">
+    <value>Stop Secure</value>
+  </data>
+  <data name="SecureCloudGuideCarouselText" xml:space="preserve">
+    <value>To securely sync files, connect your Google Drive or Dropbox account by granting permission during the authentication prompt. Once approved, AxCrypt can securely open, encrypt, decrypt, and share files directly from your cloud storage without storing your data.</value>
+  </data>
+  <data name="SecureCloudGuidesHeadParagraph" xml:space="preserve">
+    <value>Work seamlessly with cloud storage services (Dropbox, OneDrive, Google Drive) with AxCrypt. AxCrypt secures files with AES-256 encryption before uploading to the cloud. Your files are protected both at rest and in transit.</value>
+  </data>
+  <data name="SecureCloudGuidesHeadTitle" xml:space="preserve">
+    <value>Securely access all your sensitive data on &lt;b&gt;one secure&lt;/b&gt; &lt;br/&gt; &lt;b&gt;platform&lt;/b&gt; with &lt;span&gt;&lt;b&gt;AxCrypt.&lt;/b&gt;&lt;/span&gt;</value>
+  </data>
+  <data name="SecureCloudGuideStepHead1" xml:space="preserve">
+    <value>Authenticate Your &lt;span&gt;Cloud Account&lt;/span&gt;</value>
+  </data>
+  <data name="SecureCloudGuideStepHead2" xml:space="preserve">
+    <value>Here's &lt;span&gt;How to Protect Files in Cloud Storage&lt;/span&gt; with AxCrypt's AES 256-bit Encryption.</value>
+  </data>
+  <data name="SecureCloudGuideStepHead3" xml:space="preserve">
+    <value>How to use the &lt;span&gt;Stop Secure and the Open Secured&lt;/span&gt; options in &lt;span class='for-bold'&gt;Cloud Encryption&lt;/span&gt;?</value>
+  </data>
+  <data name="SecureCloudGuideStepHead4" xml:space="preserve">
+    <value>How to use the &lt;span&gt;Share Key Options&lt;/span&gt; in Cloud Encryption?</value>
+  </data>
+  <data name="SecureCloudGuideStepHead5" xml:space="preserve">
+    <value>What is &lt;span&gt;Cloud Security?&lt;/span&gt;</value>
+  </data>
+  <data name="SecureCloudGuideStepHead6" xml:space="preserve">
+    <value>Is &lt;span&gt;Cloud Security&lt;/span&gt; a &lt;span class='for-bold'&gt;zero-knowledge&lt;/span&gt; cloud storage solution?</value>
+  </data>
+  <data name="SecureCloudGuideStepText1" xml:space="preserve">
+    <value>On the AxCrypt app's homepage, Click on the preferred cloud storage service provider.</value>
+  </data>
+  <data name="SecureCloudGuideStepText10" xml:space="preserve">
+    <value>Click on 'Open Secured'.</value>
+  </data>
+  <data name="SecureCloudGuideStepText11" xml:space="preserve">
+    <value>&lt;strong&gt;Please note:&lt;/strong&gt; Your files stay encrypted and secure. They open briefly while you work and re-encrypt automatically when you exit the application.</value>
+  </data>
+  <data name="SecureCloudGuideStepText12" xml:space="preserve">
+    <value>In the file selection pop-up, you can also secure files via the right-click menu—simply select your desired file and click Secure. Please note that a one-time cloud authorization is required.</value>
+  </data>
+  <data name="SecureCloudGuideStepText13" xml:space="preserve">
+    <value>Click on 'Stop Securing'.</value>
+  </data>
+  <data name="SecureCloudGuideStepText14" xml:space="preserve">
+    <value>Your files are now permanently decrypted.</value>
+  </data>
+  <data name="SecureCloudGuideStepText15" xml:space="preserve">
+    <value>&lt;strong&gt;Please note:&lt;/strong&gt; You can also click on the action menu (3 dots) in the bottom right corner and select stop secure.</value>
+  </data>
+  <data name="SecureCloudGuideStepText16" xml:space="preserve">
+    <value>Sign in to AxCrypt and choose from the 3 cloud storage providers present.</value>
+  </data>
+  <data name="SecureCloudGuideStepText17" xml:space="preserve">
+    <value>Locate your file and select it.</value>
+  </data>
+  <data name="SecureCloudGuideStepText18" xml:space="preserve">
+    <value>Click on &lt;strong&gt;'Share Keys'.&lt;/strong&gt;</value>
+  </data>
+  <data name="SecureCloudGuideStepText19" xml:space="preserve">
+    <value>Add the email ID you want to securely share keys with and click on &lt;strong&gt;'Add'.&lt;/strong&gt;</value>
+  </data>
+  <data name="SecureCloudGuideStepText2" xml:space="preserve">
+    <value>A file selection pop-up will open showing the cloud files.</value>
+  </data>
+  <data name="SecureCloudGuideStepText20" xml:space="preserve">
+    <value>&lt;strong&gt;Cloud Security&lt;/strong&gt; by AxCrypt is a feature that ensures encrypted cloud sync across multiple devices and supported cloud storage platforms. This allows you to secure cloud storage files using client-side encryption that authorises users with the necessary access permissions to access them. &lt;/br&gt;&lt;/br&gt; With AxCrypt's Cloud Security feature, you can almost encrypt any files. From files, PDFs, sheets, to images, you can use AxCrypt's Cloud SecurityAES-256 encryption algorithm to protect them.</value>
+  </data>
+  <data name="SecureCloudGuideStepText21" xml:space="preserve">
+    <value>&lt;strong&gt;Yes.&lt;/strong&gt; Cloud Security by AxCrypt is designed as a zero-knowledge cloud storage solution. This means that your files are encrypted using the AES-256 encryption algorithm, and we do not hold or access any of the information or data that is uploaded onto the cloud storage platforms. The cloud storage provider does not control your encryption keys. This guarantees stronger data privacy and true end-to-end encrypted cloud sync.</value>
+  </data>
+  <data name="SecureCloudGuideStepText22" xml:space="preserve">
+    <value>Locate the file from the available cloud storage options on the application.</value>
+  </data>
+  <data name="SecureCloudGuideStepText23" xml:space="preserve">
+    <value>On the application homepage, click on your preferred cloud storage.</value>
+  </data>
+  <data name="SecureCloudGuideStepText24" xml:space="preserve">
+    <value>Click the "+" action button and choose the file you want to securely upload to the cloud.</value>
+  </data>
+  <data name="SecureCloudGuideStepText25" xml:space="preserve">
+    <value>Click Open, and the file is now encrypted in both locations : local and the cloud.</value>
+  </data>
+  <data name="SecureCloudGuideStepText26" xml:space="preserve">
+    <value>&lt;strong&gt;Please note:&lt;/strong&gt; The file will be encrypted locally as well as on the cloud.</value>
+  </data>
+  <data name="SecureCloudGuideStepText3" xml:space="preserve">
+    <value>Select the file you want to protect.</value>
+  </data>
+  <data name="SecureCloudGuideStepText4" xml:space="preserve">
+    <value>Click on the Action Menu (3 dots) in the bottom right corner of the popup.</value>
+  </data>
+  <data name="SecureCloudGuideStepText5" xml:space="preserve">
+    <value>Click on Secure, and now your file is encrypted with an .axx extension.</value>
+  </data>
+  <data name="SecureCloudGuideStepText6" xml:space="preserve">
+    <value>&lt;strong&gt;Please note:&lt;/strong&gt; The file is encrypted locally and then uploaded to the cloud.</value>
+  </data>
+  <data name="SecureCloudGuideStepText7" xml:space="preserve">
+    <value>Locate the file you want to Open Securely.</value>
+  </data>
+  <data name="SecureCloudGuideStepText8" xml:space="preserve">
+    <value>Select the file and then right-click.</value>
+  </data>
+  <data name="SecureCloudGuideStepText9" xml:space="preserve">
+    <value>Or you may also click on the action menu (3 dots) to perform this action.</value>
+  </data>
+  <data name="SecureCloudParagraph" xml:space="preserve">
+    <value>&lt;strong&gt;In this guide, you will learn how to use AxCrypt with cloud storage.&lt;/strong&gt;&lt;/br&gt; There's no need to install any cloud drive sync applications locally. AxCrypt Cloud Security encrypts your files with AES-256 and provides end-to-end protection, syncing them to the cloud while keeping them safe both in transit and during use.</value>
+  </data>
+  <data name="SecureCloudSideMenuHead1" xml:space="preserve">
+    <value>Here's How to Protect Files in Cloud Storage</value>
+  </data>
+  <data name="SecureCloudWhatNextText1" xml:space="preserve">
+    <value>📚&lt;strong&gt;Quick Guide&lt;/strong&gt; to using AxCrypt Vault- an automatically encrypted container &lt;br/&gt;for storing your sensitive files and folders:</value>
+  </data>
+  <data name="SecureCloudWhatNextText2" xml:space="preserve">
+    <value>&lt;a href='/information/guides/vault/'&gt;AxCrypt Vault Feature Guide | Encrypt &amp; Protect Files&lt;/a&gt;</value>
+  </data>
+  <data name="SecuredCloudLinkLabel" xml:space="preserve">
+    <value>Secure Cloud</value>
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>AxCrypt Secure Delete</value>
@@ -25349,6 +25544,9 @@ To go to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
   </data>
   <data name="StartFreeTrial" xml:space="preserve">
     <value>Start free trial</value>
+  </data>
+  <data name="StartFreeTrialText" xml:space="preserve">
+    <value>Start your 14 days free trial, Then </value>
   </data>
   <data name="StartMakingMoneyHeading" xml:space="preserve">
     <value>Start making money in &lt;span&gt;3 Easy Steps&lt;/span&gt;</value>
