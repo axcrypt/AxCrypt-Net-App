@@ -56,7 +56,7 @@
                     <span class="text-size">@Texts.EncryptToolStripMenuItemText</span>
                     @if (isHovered && hoveredElement == "secure")
                     {
-                        <div class="home-hover text-center" style="background-color:#fff; max-height: 60px;">
+                        <div class="home-hover text-center" style="background-color:#fff;">
                             <span class="txt-clr font-medium">@Texts.EncryptToolStripButtonToolTipText</span>
                         </div>
                     }
@@ -68,7 +68,7 @@
                 <span class="text-size">@Texts.DecryptToolStripMenuItemText</span>
                 @if (isHovered && hoveredElement == "stop")
                 {
-                    <div class="home-hover text-center" style="background-color:#fff; max-height: 60px;">
+                    <div class="home-hover text-center" style="background-color:#fff;">
                         <span class="txt-clr font-medium">@Texts.DecryptButtonTooltipText</span>
                     </div>
                 }
@@ -102,7 +102,7 @@
                     <span class="text-size">@Texts.ShareKeysToolStripMenuItemText</span>
                     @if (isHovered && hoveredElement == "share")
                     {
-                        <div class="home-hover text-center" style="background-color:#fff; max-height: 60px;">
+                        <div class="home-hover text-center" style="background-color:#fff;">
                             <span class="txt-clr font-medium">@Texts.KeySharingToolTip</span>
                         </div>
                     }
@@ -179,7 +179,7 @@
 
     @if (homeActionModel.HasBusiness)
     {
-        <div>
+        <div class="buy-someone-upg-bus-section">
             <label class="fle-nme fnt-sze" style="padding-bottom:20px;">@Texts.ActiveSubscriptionsText</label>
             <div class="actv-subs">
                 @* <div class="battery">
@@ -199,7 +199,7 @@
     }
     else if (homeActionModel.HasPremium)
     {
-        <div style="display: block;">
+        <div class="buy-someone-upg-bus-section">
             <div style="display:flex; min-width: 340px; gap: 10px;">
                 <label class="fle-nme fnt-sze">@Texts.PromptSubscription</label>
                 <img class="ico-hidden" src="" @onclick="ToggleSection" alt="hand-img" style="display: none;" id="toggleImageClosed" />

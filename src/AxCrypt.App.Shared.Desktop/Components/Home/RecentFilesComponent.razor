@@ -58,7 +58,7 @@
                                 <input class="check-box" type="checkbox" @onchange="() => RecentFilesViewModel.HandleFileClick(!fileDetails.IsChecked, fileDetails.FilePath)" checked="@fileDetails.IsChecked" />
                             </td>
                             <td class="fle-exton-img" title="@fileDetails.FilePath" style="display: grid;grid-template-columns: 55px 1fr;gap: 0;align-items: center;">
-                                <img class="@fileDetails.IconClass" style="width: 50px; height: 45px;" src="" alt="file-image" />
+                                <img class="@fileDetails.IconClass" style="width: 35px; height: 35px;" src="" alt="file-image" />
                                 <div style="display: flex; flex-direction: column; line-height: 20px; overflow: hidden;" rowspan="2">
                                     <span class="fle-nme" style="padding-left: 0 !important;">@fileDetails.FileName</span>
                                     <span class="scrd-sec" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 200 !important; font-size: 10px;" title="@fileDetails.FilePath">@fileDetails.FilePath</span>

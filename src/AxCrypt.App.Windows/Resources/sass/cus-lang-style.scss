@@ -1,0 +1,69 @@
+﻿html[lang="ru"],
+html[lang="fr"],
+html[lang="de"],
+html[lang="nl"],
+html[lang="it"] {
+    .top-menu-section {
+        margin: 20px 40px 10px 20px !important;
+    }
+
+    .home-index {
+        container-type: inline-size;
+        container-name: home-layout;
+    }
+
+    .act-box {
+        min-width: 100px !important;
+        min-height: 85px !important;
+        padding: 12px 10px !important;
+
+        .opnscrd-act, .stpscr-act {
+            width: 25px !important;
+        }
+
+        .shrks-act {
+            width: 30px !important;
+        }
+
+        .scr-act, .mtrkey-act {
+            min-width: 30px !important;
+            height: 35px;
+        }
+    }
+
+    .top-page-title-container {
+        top: 70px !important;
+    }
+
+    .body-content-section {
+        margin: 25px 40px 20px 20px !important;
+    }
+
+    .arabic-class .page-title::before {
+        left: -30px !important;
+    }
+
+    .password-filter-dropdown-content {
+        min-width: 150px !important;
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .password-create-dropdown-content {
+        min-width: 120px !important;
+        width: auto !important;
+        height: auto !important;
+    }
+}
+
+@container home-layout (max-width: 760px) {
+    .buy-someone-upg-bus-section {
+        display: none;
+    }
+}
+
+@container home-layout (min-width: 761px) {
+    .buy-someone-upg-bus-section {
+        display: block;
+    }
+}
