@@ -356,6 +356,7 @@ input[type="radio"] {
     font-size: 12px;
     font-weight: 700;
     line-height: 14px;
+    word-wrap: anywhere;
 }
 
 .text-style {
@@ -462,14 +463,16 @@ input[type="radio"] {
 }
 
 .vlt-action-btn {
-    width: 63px;
-    height: 60px;
+    min-width: 63px;
+    min-height: 60px;
     background-color: $ActnBgClr;
-    padding: 3px;
     margin-top: 15px;
+    align-content: center;
+    cursor: pointer;
+    border-radius: 10px;
 
     :hover {
-        background-color: $ActnBgClr;
+        background-color: $ActnBgClr !important;
     }
 }
 
@@ -477,10 +480,7 @@ input[type="radio"] {
     content: $ImgVltIcon;
     min-width: 55px;
     min-height: 50px;
-
-    :hover {
-        background-color: $ActnBgClr;
-    }
+    margin: auto 4px;
 }
 
 .mre-actn-box {
@@ -602,16 +602,6 @@ input[type="radio"] {
 
 .rcnt-fle-tbl {
     thead tr th {
-        &:lang(fr), &:lang(ru) {
-            font-size: 11px !important;
-            font-weight: 700 !important;
-        }
-
-        &:lang(de), &:lang(tr), &:lang(sv) {
-            font-size: 12px !important;
-            font-weight: 700 !important;
-        }
-
         color: $HdTxtClr;
         font-size: 14px;
         font-weight: 600;

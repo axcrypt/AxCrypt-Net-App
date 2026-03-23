@@ -44,12 +44,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
 
         public void Initialized()
         {
-            KnownFoldersViewModel = New<KnownFoldersViewModel>();
-
-            _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicy(license); });
-            KnownFoldersViewModel!.KnownFolders = New<IKnownFoldersDiscovery>().Discover();
-
-            KnownFoldersViewModel!.BindPropertyChanged(nameof(KnownFoldersViewModel.KnownFolders), (IEnumerable<KnownFolder> folders) => UpdateKnownFolders(folders));
+            _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { if (_mainViewModel.LoggedOn) ConfigureMenusAccordingToPolicy(license); });
 
             FileProviderViewModel.UpdateFileProviderSelection(FileOperationOption.None, InitializeProviderFileSelection);
         }
@@ -64,8 +59,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             FilePickerViewModel filePickerViewModel = AxCServiceProvider.GetService<DesktopFilePickerViewModel>();
             await CloudFileProviderHelper.Initialize(FileProviderViewModel.SelectedFileProvider.Value, filePickerViewModel, FileProviderViewModel.SelectedFileOperation, HasEncryptionCapability);
         }
-
-        public KnownFoldersViewModel? KnownFoldersViewModel { get; set; }
 
         public LogOnViewModel LogOnViewModel { get; set; }
 
@@ -100,6 +93,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             ConfigureAnonymousRename(license);
             ConfigureSecureWipe(license);
             ConfigureStrongEncryption(license);
+
+            UpdateViewState();
         }
 
         private void ConfigureAnonymousRename(LicenseCapabilities license)
@@ -214,16 +209,6 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
         public string SetInternetStateText()
         {
             return New<UserSettings>().OfflineMode ? "Switch to Online" : "Switch to Offline";
-        }
-
-        private void UpdateKnownFolders(IEnumerable<KnownFolder> folders)
-        {
-            //foreach (KnownFolder folder in folders)
-            //{
-            //    GetIconClass(folder.My.FullName);
-            //}
-
-            UpdateViewState();
         }
 
         public async Task<bool> ValidateVaultPath()

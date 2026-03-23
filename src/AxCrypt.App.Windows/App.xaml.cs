@@ -35,7 +35,6 @@ public partial class App : Application
 
     private FileOperationViewModel _fileOperationViewModel;
 
-    private KnownFoldersViewModel _knownFoldersViewModel;
     private LogViewModel _logViewModel;
     private LogOnViewModel _logOnViewModel;
 
@@ -59,7 +58,7 @@ public partial class App : Application
         InitializeServiceDependencyProvider();
         _progressBackgroundWorker = new ProgressBackgroundComponent();
 
-        MainPage = new MainPage(logOnViewModel, _mainViewModel!, _fileOperationViewModel!, _knownFoldersViewModel!, registerViewModel, fileDropService);
+        MainPage = new MainPage(logOnViewModel, _mainViewModel!, _fileOperationViewModel!, registerViewModel, fileDropService);
     }
 
     private static void InitializeServiceDependencyProvider()
@@ -167,7 +166,6 @@ public partial class App : Application
         New<LicensePolicy>();
         _mainViewModel = New<MainViewModel>();
         _fileOperationViewModel = New<FileOperationViewModel>();
-        _knownFoldersViewModel = New<KnownFoldersViewModel>();
         New<SessionNotify>().AddCommand(async (notification) => await New<SessionNotificationHandler>().HandleNotificationAsync(notification));
     }
 

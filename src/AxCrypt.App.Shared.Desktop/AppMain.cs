@@ -22,7 +22,6 @@ public class AppMain
 
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
-    private KnownFoldersViewModel _knownFoldersViewModel;
 
     public LogOnService _logOnService;
 
@@ -30,12 +29,11 @@ public class AppMain
     {
     }
 
-    public void Initialize(LogOnViewModel logOnViewModel, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, KnownFoldersViewModel knownFoldersViewModel, RegisterViewModel registerViewModel)
+    public void Initialize(LogOnViewModel logOnViewModel, MainViewModel mainViewModel, FileOperationViewModel fileOperationViewModel, RegisterViewModel registerViewModel)
     {
         _logOnViewModel = logOnViewModel;
         _mainViewModel = mainViewModel;
         _fileOperationViewModel = fileOperationViewModel;
-        _knownFoldersViewModel = knownFoldersViewModel;
         _registerViewModel = registerViewModel;
         SetThisVersion();
         BindToViewModels();
@@ -47,7 +45,7 @@ public class AppMain
 
     private void BindToViewModels()
     {
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => await _knownFoldersViewModel.UpdateState.ExecuteAsync(null));
+        //_mainViewModel.BindPropertyChanged(nameof(_mainViewModel.License), async (LicenseCapabilities license) => await _knownFoldersViewModel.UpdateState.ExecuteAsync(null));
         _mainViewModel.BindPropertyAsyncChanged(nameof(_mainViewModel.LoggedOn), async (bool loggedOn) =>
         {
             if (loggedOn)
