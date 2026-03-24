@@ -17,7 +17,7 @@ namespace AxCrypt.Core.Service
             }
 
             UserAccount account = await service.AccountAsync().Free();
-            if (await ValidAccountSetupStatusAsync(account))
+            if (account == null!)
             {
                 return false;
             }
@@ -26,25 +26,25 @@ namespace AxCrypt.Core.Service
             {
                 return false;
             }
-            return true;
-        }
 
-        private static async Task<bool> ValidAccountSetupStatusAsync(UserAccount account)
-        {
-            if(account == null!)
+            if (await ValidAccountSetupStatusAsync(account, service.Identity))
             {
                 return false;
             }
+            return true;
+        }
 
+        private static async Task<bool> ValidAccountSetupStatusAsync(UserAccount account, LogOnIdentity logOnIdentity)
+        {
             if (!New<IInternetState>().Connected && account.AccountStatus == AccountStatus.Offline)
             {
                 return false;
             }
-            
+
             if (account != null! && account.SubscriptionLevel == SubscriptionLevel.Unknown)
             {
-                await New<IAccountSetupService>().CompleteAccountSetupAsync();
-                return false;
+                await New<IAccountSetupService>().CompleteAccountSetupAsync(logOnIdentity);
+                return true;
             }
 
             return false;

@@ -106,7 +106,7 @@ function createArrow(rect, offsetTop, offsetLeft, imgUrl, rotate = false, arrowT
     img.style.left = (rect.left + offsetLeft + 40 + arrowLeftOffset) + "px";
 
     img.style.height = "60px";
-    img.style.zIndex = "999999";
+    img.style.zIndex = "9999";
 
     if (rotate) {
         img.style.transform = "rotate(270deg)";

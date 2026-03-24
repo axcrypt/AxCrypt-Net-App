@@ -40,6 +40,6 @@ namespace AxCrypt.Core.Service
     /// </summary>
     public interface IAccountSetupService
     {
-        Task CompleteAccountSetupAsync();
+        Task CompleteAccountSetupAsync(LogOnIdentity logOnIdentity);
     }
 }

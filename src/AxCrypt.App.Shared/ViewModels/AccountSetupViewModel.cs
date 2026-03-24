@@ -10,8 +10,9 @@ public class AccountSetupViewModel : ViewModelBase
 {
     public AccountSetupViewModel() { }
 
-    public async Task ShowAccountIncompleteWarningDialog()
+    public async Task ShowAccountIncompleteWarningDialog(LogOnIdentity logOnIdentity)
     {
+        _logOnIdentity = logOnIdentity;
         PopupResult = DialogResult.None;
         IsVisible = true;
 
@@ -43,9 +44,11 @@ public class AccountSetupViewModel : ViewModelBase
 
     public event Action<bool>? OnAccountSetupDialogVisibilityChanged;
 
+    private LogOnIdentity? _logOnIdentity { get; set; }
+
     public async Task SetViewerPlanAsync()
     {
-        IAccountService accountService = New<LogOnIdentity, IAccountService>(New<Core.UI.KnownIdentities>().DefaultEncryptionIdentity);
+        IAccountService accountService = New<LogOnIdentity, IAccountService>(_logOnIdentity);
         await accountService.SetMyAccountViewerPlanAsync();
     }
 }
