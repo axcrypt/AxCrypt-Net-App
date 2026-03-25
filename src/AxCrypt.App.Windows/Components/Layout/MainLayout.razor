@@ -64,7 +64,8 @@
                 {
                     <AxCrypt.App.Shared.Desktop.Components.Main.HeaderComponent />
 
-                    <div class="body-content-section">
+                    string sideMenuCollapsedbodyStyle = Utility.IsMainMenuHidden ? "sid-mnu-colpsd-body" : "";
+                    <div class="body-content-section @sideMenuCollapsedbodyStyle">
                         @Body
                     </div>
 
