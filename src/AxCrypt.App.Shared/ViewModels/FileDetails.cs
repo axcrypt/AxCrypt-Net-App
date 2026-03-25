@@ -148,6 +148,12 @@ public class FileDetails : ViewModelBase
 
     private void SetIconClass(ActiveFile activeFile)
     {
+        if (activeFile.Status == ActiveFileStatus.AssumedOpenAndDecrypted)
+        {
+            IconClass = "file-dec-icon";
+            return;
+        }
+
         if (activeFile.IsShared)
         {
             IconClass = "file-keySh-icon";
