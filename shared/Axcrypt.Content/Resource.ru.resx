@@ -13955,9 +13955,6 @@
   <data name="BusinessProductKeyHead1" xml:space="preserve">
     <value>Мастер-ключ исключает риск потери доступа к критически важным файлам</value>
   </data>
-  <data name="BusinessProductKeyHead10" xml:space="preserve">
-    <value>Защита файлов в Интернете на мобильных устройствах и настольных компьютерах с помощью безопасности облака</value>
-  </data>
   <data name="BusinessProductKeyHead14" xml:space="preserve">
     <value>Шифрование с нулевым разглашением для полной безопасности</value>
   </data>
@@ -18097,6 +18094,9 @@
   <data name="HomeHeroHeading" xml:space="preserve">
     <value>"Продвинутое шифрование с очень простой настройкой"</value>
   </data>
+  <data name="HomeHeroHeading1" xml:space="preserve">
+    <value>Самый простой способ &lt;span&gt;шифровать&lt;/span&gt;, &lt;span&gt;делиться&lt;/span&gt; и &lt;span&gt;защищать&lt;/span&gt;&lt;br/&gt; ваши файлы</value>
+  </data>
   <data name="HomeHeroHeadingHighlight" xml:space="preserve">
     <value>"Расширенное &lt;span&gt; шифрование&lt;/span&gt; в великолепно &lt;span&gt; простой &lt;/span&gt; настройке"</value>
   </data>
@@ -18115,11 +18115,26 @@
   <data name="HomeLinkLabel" xml:space="preserve">
     <value>Стартовая страница</value>
   </data>
+  <data name="HomeSellingPointCloudStorageAwarenessBody" xml:space="preserve">
+    <value>Шифруйте конфиденциальную информацию из Google Drive, Dropbox, и OneDrive на одной защищенной платформе.</value>
+  </data>
+  <data name="HomeSellingPointCloudStorageAwarenessHeading" xml:space="preserve">
+    <value>Облачная безопасность</value>
+  </data>
   <data name="HomeSellingPointGroupsManagementBody" xml:space="preserve">
     <value>Управляйте пользователями и группами в своем бизнесе и контролируйте доступ с помощью управления групповыми ключами для повышения безопасности.</value>
   </data>
   <data name="HomeSellingPointGroupsManagementHeading" xml:space="preserve">
     <value>Управление группами и ключами</value>
+  </data>
+  <data name="HomeSellingPointSecureFileSharingBody" xml:space="preserve">
+    <value>Разрешите другим пользователям AxCrypt открыть защищенные файлы, используя их собственные пароли.</value>
+  </data>
+  <data name="HomeSellingPointSecureFileSharingHeading" xml:space="preserve">
+    <value>Безопасный обмен файлами</value>
+  </data>
+  <data name="HomeSellingPointSecurePasswordsMessagingHeading" xml:space="preserve">
+    <value>Безопасные пароли и сообщения</value>
   </data>
   <data name="HomeSellingPointStrongEncryptionBody" xml:space="preserve">
     <value>Защита файлов с нулевым разглашением с помощью алгоритма AES-256 и повышение уровня безопасности за счет многофакторной аутентификации.</value>
@@ -22588,9 +22603,6 @@ SE-114 29 Стокгольм
   <data name="PricingFeatureListBusinessAdmin" xml:space="preserve">
     <value>Бизнес-Администратор</value>
   </data>
-  <data name="PricingFeatureListCloudStorage" xml:space="preserve">
-    <value>Учёт облачного хранилища</value>
-  </data>
   <data name="PricingFeatureListCommunitySupport" xml:space="preserve">
     <value>Поддержка сообщества</value>
   </data>
@@ -22900,9 +22912,6 @@ SE-114 29 Стокгольм
   <data name="ProductClientReviewTex5" xml:space="preserve">
     <value>Я могу зашифровать/расшифровать любой документ или папку всего за несколько кликов мышью.</value>
   </data>
-  <data name="ProductCloudStorageLabel" xml:space="preserve">
-    <value>Облачное хранилище</value>
-  </data>
   <data name="ProductFeatureComplicatedText" xml:space="preserve">
     <value>Слишком сложный в использовании</value>
   </data>
@@ -23037,9 +23046,6 @@ SE-114 29 Стокгольм
   </data>
   <data name="ProductProtectCarouselText1" xml:space="preserve">
     <value>Безопасно делитесь зашифрованными файлами с другими через систему Совместного использования ключей в AxCrypt. Вы выбираете получателей по электронной почте, чтобы они могли расшифровать, используя свои учетные данные, не раскрывая пароль.</value>
-  </data>
-  <data name="ProductProtectCarouselText2" xml:space="preserve">
-    <value>Бесшовно работайте с облачными сервисами хранения (Dropbox, OneDrive, Google Drive): обозначайте облачные или локальные папки как «защищённые», а AxCrypt шифрует файлы до или во время синхронизации с облаком, чтобы защитить ваши данные в каждом месте.</value>
   </data>
   <data name="ProductProtectCarouselText3" xml:space="preserve">
     <value>Шифруйте и расшифровывайте файлы непосредственно на вашем мобильном устройстве (Android и iOS). Получайте доступ к зашифрованным файлам из облачного хранилища или полученным по электронной почте, обеспечивая защиту ваших данных в ходу.</value>
@@ -24189,6 +24195,36 @@ SE-114 29 Стокгольм
   </data>
   <data name="SecTwoFacAuthenConText3" xml:space="preserve">
     <value>Используйте свой мобильный телефон для получения кода безопасности</value>
+  </data>
+  <data name="SecureCloudGuideStepHead1" xml:space="preserve">
+    <value>Аутентифицируйте свой &lt;span&gt;облачный аккаунт&lt;/span&gt;</value>
+  </data>
+  <data name="SecureCloudGuideStepHead2" xml:space="preserve">
+    <value>Вот &lt;span&gt;как защитить файлы в облачном хранилище&lt;/span&gt; с помощью 256-битного шифрования AES от AxCrypt.</value>
+  </data>
+  <data name="SecureCloudGuideStepHead3" xml:space="preserve">
+    <value>Как использовать опции &lt;span&gt;Остановить защиту и Включить защиту&lt;/span&gt; в &lt;span class='for-bold'&gt;облачном шифровании&lt;/span&gt;?</value>
+  </data>
+  <data name="SecureCloudGuideStepHead4" xml:space="preserve">
+    <value>Как использовать &lt;span&gt;опции Поделиться ключом&lt;/span&gt; в облачном шифровании?</value>
+  </data>
+  <data name="SecureCloudGuideStepHead5" xml:space="preserve">
+    <value>Что такое &lt;span&gt;облачная безопасность?&lt;/span&gt;</value>
+  </data>
+  <data name="SecureCloudGuideStepHead6" xml:space="preserve">
+    <value>Является ли &lt;span&gt;облачная безопасность&lt;/span&gt; решением для облачного хранения &lt;span class='for-bold'&gt;с нулевым уровнем разглашения&lt;/span&gt;?</value>
+  </data>
+  <data name="SecureCloudGuideStepText1" xml:space="preserve">
+    <value>На главной странице приложения AxCrypt нажмите на выбранного вами поставщика услуг облачного хранения данных.</value>
+  </data>
+  <data name="SecureCloudGuideStepText10" xml:space="preserve">
+    <value>Нажмите «Открыть защищённое соединение».</value>
+  </data>
+  <data name="SecureCloudGuideStepText2" xml:space="preserve">
+    <value>Откроется всплывающее окно с выбором файлов, в котором будут отображаться файлы из облака.</value>
+  </data>
+  <data name="SecureCloudGuideStepText9" xml:space="preserve">
+    <value>Или вы также можете кликнуть в меню действий (3 точки), чтобы выполнить это действие.</value>
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>AxCrypt Безопасное Удаление</value>

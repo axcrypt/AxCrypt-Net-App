@@ -14006,7 +14006,10 @@ You have been warned, now enjoy!</value>
     <value>The Master Key eliminates the risk of losing access to critical files</value>
   </data>
   <data name="BusinessProductKeyHead10" xml:space="preserve">
-    <value>Secure files online in mobile and desktop with cloud security</value>
+    <value>Secure your Cloud files across mobile and desktop</value>
+  </data>
+  <data name="BusinessProductKeyHead11" xml:space="preserve">
+    <value>Multi-Factor Authentication (MFA) for Businesses</value>
   </data>
   <data name="BusinessProductKeyHead14" xml:space="preserve">
     <value>Zero-Knowledge Encryption for total security.</value>
@@ -14049,6 +14052,9 @@ You have been warned, now enjoy!</value>
   </data>
   <data name="BusinessProductKeyParagraph14" xml:space="preserve">
     <value>A privacy-first approach powered by an impenetrable 256-bit encryption keeps your data secure. With this, you retain full control of your decryption keys, ensuring only you not even AxCrypt can access your files.</value>
+  </data>
+  <data name="BusinessProductKeyParagraph15" xml:space="preserve">
+    <value>Strengthen your organization's security with MFA, adding an extra layer of protection beyond passwords. Employees must verify their identity using a secondary method, such as a one-time code via email or mobile, ensuring secure access to sensitive business data.</value>
   </data>
   <data name="BusinessProductKeyParagraph2" xml:space="preserve">
     <value>Efficiently organize users into groups and manage their access with centralized key management. This ensures consistent permissions across the organization, allowing administrators to manage and secure group access to critical data.</value>
@@ -22015,6 +22021,9 @@ To return to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
   <data name="ONText" xml:space="preserve">
     <value>ON</value>
   </data>
+  <data name="OpenAxCryptFilesText" xml:space="preserve">
+    <value>Open &lt;span class="grn-clr"&gt;AxCrypt files&lt;/span&gt; on your phone.</value>
+  </data>
   <data name="OpenEncryptedFileOpenDialogTitle" xml:space="preserve">
     <value>Select secured file to open</value>
   </data>
@@ -22965,9 +22974,6 @@ White space, and parts that are equal to common passwords are ignored and do not
   <data name="PricingFeatureListBusinessPrioritySupport" xml:space="preserve">
     <value>Business Priority Support</value>
   </data>
-  <data name="PricingFeatureListCloudStorage" xml:space="preserve">
-    <value>Cloud Storage Awareness</value>
-  </data>
   <data name="PricingFeatureListCommunitySupport" xml:space="preserve">
     <value>Community Support</value>
   </data>
@@ -23363,9 +23369,6 @@ HubSpot is an integrated software solution with which we cover various aspects o
   <data name="ProductClientReviewTex5" xml:space="preserve">
     <value>I can encrypt/decrypt any document or folder in seconds with just a few mouse clicks.</value>
   </data>
-  <data name="ProductCloudStorageLabel" xml:space="preserve">
-    <value>Cloud Storage</value>
-  </data>
   <data name="ProductFeatureComplicatedText" xml:space="preserve">
     <value>Too complex to use</value>
   </data>
@@ -23500,9 +23503,6 @@ HubSpot is an integrated software solution with which we cover various aspects o
   </data>
   <data name="ProductProtectCarouselText1" xml:space="preserve">
     <value>Securely share encrypted files with others via AxCrypt’s Key Sharing. You choose recipients by email so they can decrypt using their own credentials, without you ever sharing your password.</value>
-  </data>
-  <data name="ProductProtectCarouselText2" xml:space="preserve">
-    <value>Work seamlessly with cloud storage services (Dropbox, OneDrive, Google Drive): designate cloud or local folders as “secured,” and AxCrypt encrypts files before or when syncing to the cloud to protect your data in every location.</value>
   </data>
   <data name="ProductProtectCarouselText3" xml:space="preserve">
     <value>Encrypt and decrypt files directly on your mobile device (Android &amp; iOS). Access encrypted files from cloud storage or received via email, ensuring your data remains protected on the go.</value>
@@ -24818,7 +24818,7 @@ Subject: AxCrypt Report Snapshot</value>
     <value>&lt;a href='/information/guides/vault/'&gt;AxCrypt Vault Feature Guide | Encrypt &amp; Protect Files&lt;/a&gt;</value>
   </data>
   <data name="SecuredCloudLinkLabel" xml:space="preserve">
-    <value>Secure Cloud</value>
+    <value>Cloud Security</value>
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>AxCrypt Secure Delete</value>
@@ -27147,8 +27147,26 @@ The AxCrypt Team</value>
   <data name="VaultGuideParagraph35" xml:space="preserve">
     <value>A dedicated menu may appear in the app's side navigation depending on your layout settings.</value>
   </data>
+  <data name="VaultGuideParagraph36" xml:space="preserve">
+    <value>Click on the Vault feature.</value>
+  </data>
+  <data name="VaultGuideParagraph37" xml:space="preserve">
+    <value>Click on the ‘Share Keys’ option present in the top right corner.</value>
+  </data>
+  <data name="VaultGuideParagraph38" xml:space="preserve">
+    <value>Add a user with their email ID.</value>
+  </data>
+  <data name="VaultGuideParagraph39" xml:space="preserve">
+    <value>Now, click on apply.</value>
+  </data>
   <data name="VaultGuideParagraph4" xml:space="preserve">
     <value>AxCrypt Vault is a secure, encrypted container for storing your sensitive files and folders. Anything added to the Vault is &lt;b&gt;automatically encrypted,&lt;/b&gt; with no manual cleanup or extra steps required. It works like a dedicated encrypted folder that you can place anywhere on your computer, with full control through &lt;b&gt;Vault Settings.&lt;/b&gt;</value>
+  </data>
+  <data name="VaultGuideParagraph40" xml:space="preserve">
+    <value>Note: Group Key Sharing is a Business Feature.</value>
+  </data>
+  <data name="VaultGuideParagraph41" xml:space="preserve">
+    <value>Select the group from the dropdown.</value>
   </data>
   <data name="VaultGuideParagraph5" xml:space="preserve">
     <value>Create a protected, encrypted container (Vault).</value>
@@ -27188,6 +27206,12 @@ The AxCrypt Team</value>
   </data>
   <data name="VaultGuideSubHeading10" xml:space="preserve">
     <value>Key goals of the &lt;span&gt;Vault&lt;/span&gt;</value>
+  </data>
+  <data name="VaultGuideSubHeading11" xml:space="preserve">
+    <value>Key Sharing the Vault.</value>
+  </data>
+  <data name="VaultGuideSubHeading12" xml:space="preserve">
+    <value>Key Sharing the Vault with a Group.</value>
   </data>
   <data name="VaultGuideSubHeading2" xml:space="preserve">
     <value>&lt;span&gt;2 Easy Ways&lt;/span&gt; &lt;strong&gt;to Add&lt;/strong&gt; files and folders to encrypt automatically &lt;b&gt;in a Vault&lt;/b&gt;</value>

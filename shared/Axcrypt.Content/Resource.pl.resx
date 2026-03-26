@@ -633,6 +633,9 @@ Wybierz coś trudnego do odgadnięcia, ponieważ hasło to będzie chronić has�
     <value>Masz już konto? Zaloguj się tutaj</value>
     <comment>Link to sign in page.</comment>
   </data>
+  <data name="AlreadySubscribedText" xml:space="preserve">
+    <value>Już subskrybowałeś? Przywróć swój plan</value>
+  </data>
   <data name="AlreadyVerifiedInfo" xml:space="preserve">
     <value>Ups. Zweryfikowałeś już swoje konto, to świetnie!
  
@@ -710,6 +713,9 @@ Zaloguj się, używając tego samego hasła, którego używałeś.</value>
   </data>
   <data name="AppNotWorkExpectedText" xml:space="preserve">
     <value>Nie działa zgodnie z oczekiwaniami</value>
+  </data>
+  <data name="AppreciateYourFeedback" xml:space="preserve">
+    <value>Będziemy wdzięczni za Wasze opinie!</value>
   </data>
   <data name="ApproveMasterKeyMoreThanOneBusinessError" xml:space="preserve">
     <value>Klucza głównego nie można włączyć, będąc należąc do więcej niż jednej firmy. Przed włączeniem klucza głównego opuść wszystkie inne firmy, których jesteś częścią.</value>
@@ -13991,9 +13997,6 @@ Według badania przeprowadzonego przez &lt;b&gt;IBM&lt;/b&gt; średni koszt naru
   <data name="BusinessProductKeyHead1" xml:space="preserve">
     <value>Klucz główny eliminuje ryzyko utraty dostępu do krytycznych plików</value>
   </data>
-  <data name="BusinessProductKeyHead10" xml:space="preserve">
-    <value>Bezpieczne pliki online na urządzeniach przenośnych i stacjonarnych z zabezpieczeniami w chmurze</value>
-  </data>
   <data name="BusinessProductKeyHead14" xml:space="preserve">
     <value>Szyfrowanie zerowej wiedzy dla pełnego bezpieczeństwa.</value>
   </data>
@@ -14423,6 +14426,9 @@ Według badania przeprowadzonego przez &lt;b&gt;IBM&lt;/b&gt; średni koszt naru
   </data>
   <data name="BuyText" xml:space="preserve">
     <value>Kup</value>
+  </data>
+  <data name="BySubscribingAgreeText" xml:space="preserve">
+    <value>Subskrybując AxCrypt, wyrażasz zgodę na nasze</value>
   </data>
   <data name="Canceled" xml:space="preserve">
     <value>Anulowano '{0}'</value>
@@ -15774,6 +15780,9 @@ Przykro nam, że rozstajesz się z nami i mamy nadzieję, że byłeś zadowolony
   <data name="DownloadNowText" xml:space="preserve">
     <value>Pobierz teraz</value>
   </data>
+  <data name="DownloadpageHeadingTitle" xml:space="preserve">
+    <value>Bezpieczeństwo plików powinno być łatwe.</value>
+  </data>
   <data name="DownloadPlainText" xml:space="preserve">
     <value>Pobierz tekst zwykły jako plik txt</value>
   </data>
@@ -15827,6 +15836,9 @@ Przykro nam, że rozstajesz się z nami i mamy nadzieję, że byłeś zadowolony
   </data>
   <data name="EditNoteTitle" xml:space="preserve">
     <value>Edytuj notatkę</value>
+  </data>
+  <data name="EditOptionsButtonText" xml:space="preserve">
+    <value>Opcje edycji</value>
   </data>
   <data name="EditPasswordTitle" xml:space="preserve">
     <value>Edytuj hasło</value>
@@ -16858,6 +16870,9 @@ Przykro nam, że rozstajesz się z nami i mamy nadzieję, że byłeś zadowolony
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>Folder '{0}' jest już zabezpieczony.</value>
   </data>
+  <data name="FolderIsEmptyText" xml:space="preserve">
+    <value>Ten folder jest pusty!</value>
+  </data>
   <data name="FolderNameLabel" xml:space="preserve">
     <value>Nazwa folderu</value>
   </data>
@@ -16940,6 +16955,9 @@ Przykro nam, że rozstajesz się z nami i mamy nadzieję, że byłeś zadowolony
   </data>
   <data name="ForIndividualsLabel" xml:space="preserve">
     <value>Dla klientów indywidualnych</value>
+  </data>
+  <data name="FormatColumnHeaderText" xml:space="preserve">
+    <value>Formacie</value>
   </data>
   <data name="ForOrganisationsLabel" xml:space="preserve">
     <value>Dla organizacji </value>
@@ -18168,6 +18186,16 @@ Jeśli z jakiegokolwiek powodu nie znasz lub nie pamiętasz hasła, musisz zrese
   <data name="HomeHeroHeading" xml:space="preserve">
     <value>„Zaawansowane szyfrowanie w niezwykle prostym ustawieniu”</value>
   </data>
+  <data name="HomeHeroHeading1" xml:space="preserve">
+    <value>Najprostszy sposób szyfrowania, udostępniania i zabezpieczania Twoje akta</value>
+  </data>
+  <data name="HomeHeroHeading2" xml:space="preserve">
+    <value>Chroń pliki i foldery silnym szyfrowaniem przed udostępnieniem ich lub przechowywaniem w Google Drive,
+OneDrive lub Dropbox z szyfrowaniem zerowym znaniem.</value>
+  </data>
+  <data name="HomeHeroHeading3" xml:space="preserve">
+    <value>wszędzie</value>
+  </data>
   <data name="HomeHeroHeadingHighlight" xml:space="preserve">
     <value>„Zaawansowane &lt;span&gt;szyfrowanie&lt;/span&gt; w niezwykle &lt;span&gt;prostym&lt;/span&gt; ustawieniu”</value>
   </data>
@@ -18186,17 +18214,41 @@ Jeśli z jakiegokolwiek powodu nie znasz lub nie pamiętasz hasła, musisz zrese
   <data name="HomeLinkLabel" xml:space="preserve">
     <value>Strona główna </value>
   </data>
+  <data name="HomeSellingPointCloudStorageAwarenessBody" xml:space="preserve">
+    <value>Szyfruj wrażliwe dane z Google Drive, Dropbox i OneDrive na jednej bezpiecznej platformie.</value>
+  </data>
+  <data name="HomeSellingPointCloudStorageAwarenessHeading" xml:space="preserve">
+    <value>Bezpieczeństwo w chmurze</value>
+  </data>
   <data name="HomeSellingPointGroupsManagementBody" xml:space="preserve">
     <value>Zarządzaj użytkownikami i grupami w swojej firmie i kontroluj dostęp za pomocą zarządzania kluczami grup w celu zwiększenia bezpieczeństwa.</value>
   </data>
   <data name="HomeSellingPointGroupsManagementHeading" xml:space="preserve">
     <value>Grupy i zarządzanie kluczami</value>
   </data>
+  <data name="HomeSellingPointSecureFileSharingBody" xml:space="preserve">
+    <value>Pozwól innym użytkownikom AxCrypt otwierać zabezpieczone pliki za pomocą ich własnego hasła.</value>
+  </data>
+  <data name="HomeSellingPointSecureFileSharingHeading" xml:space="preserve">
+    <value>Bezpieczne udostępnianie plików</value>
+  </data>
+  <data name="HomeSellingPointSecurePasswordsMessagingBody" xml:space="preserve">
+    <value>Bezpiecznie zarządzaj i udostępniaj hasła, notatki i kartki oraz komunikuj się bezpiecznie za pomocą szyfrowanych wiadomości na różnych urządzeniach.</value>
+  </data>
+  <data name="HomeSellingPointSecurePasswordsMessagingHeading" xml:space="preserve">
+    <value>Bezpieczne hasła i komunikaty</value>
+  </data>
   <data name="HomeSellingPointStrongEncryptionBody" xml:space="preserve">
     <value>Bezpieczeństwo plików zero-knowledge z algorytmem AES-256 oraz zwiększenie bezpieczeństwa dzięki uwierzytelnianiu wieloskładnikowemu.</value>
   </data>
   <data name="HomeSellingPointStrongEncryptionHeading" xml:space="preserve">
     <value>Silne szyfrowanie i bezpieczny dostęp</value>
+  </data>
+  <data name="HomeSellingPointTextEncryptionBody" xml:space="preserve">
+    <value>Przekonwertuj poufny tekst w bezpiecznym, nieczytelnym formacie. Wpisz swój tekst, zabezpiecz go hasłem do konta AxCrypt i udostępnij zaszyfrowany wynik jako link.</value>
+  </data>
+  <data name="HomeSellingPointVaultEncryptionBody" xml:space="preserve">
+    <value>AxCrypt Vault to bezpieczny, zaszyfrowany kontener do automatycznego przechowywania i udostępniania wrażliwych plików oraz folderów.</value>
   </data>
   <data name="HomeStayInTouchHeading" xml:space="preserve">
     <value>Pozostań z nami w kontakcie</value>
@@ -18259,6 +18311,12 @@ Jeśli chcesz obejrzeć lub uaktualnić zawartość plików, proszę odszyfruj j
   </data>
   <data name="InactivitySignoutToolTipText" xml:space="preserve">
     <value>Wylogowanie z powodu braku aktywności wymaga płatnego planu subskrypcji!.</value>
+  </data>
+  <data name="InAdditionTexts" xml:space="preserve">
+    <value>Oprócz</value>
+  </data>
+  <data name="InAdditionTexts1" xml:space="preserve">
+    <value>funkcje, których używasz teraz, otrzymają:</value>
   </data>
   <data name="InboxText" xml:space="preserve">
     <value>Skrzynka odbiorcza</value>
@@ -19055,6 +19113,9 @@ Adresat jest identyfikowany przez AxCrypt ID w wiadomości e-mail, ale nie wysy�
   <data name="KeyShareGuidesTitle" xml:space="preserve">
     <value>Udostępnij dostęp do plików za pomocą &lt;label style="font-style: italic; "&gt;colleagues and friends &lt;/label&gt; &lt;strong style="color: black; "&gt;z &lt;/strong&gt;&lt;span&gt; Udostępnianie kluczy!&lt;/span&gt;</value>
   </data>
+  <data name="KeyShareGuideWhatsNextHead1" xml:space="preserve">
+    <value>📚 Szybki przewodnik po przeglądaniu lub odszyfrowaniu pliku</value>
+  </data>
   <data name="KeyShareGuideWhatsNextHead2" xml:space="preserve">
     <value>&lt;strong&gt;🔐 Zabezpieczony Posłaniec&lt;/strong&gt;</value>
   </data>
@@ -19063,6 +19124,9 @@ Adresat jest identyfikowany przez AxCrypt ID w wiadomości e-mail, ale nie wysy�
   </data>
   <data name="KeyShareGuideWhatsNextText1" xml:space="preserve">
     <value>Jak szyfrować i odszyfrować pliki za pomocą AxCrypt | Przewodnik krok po kroku</value>
+  </data>
+  <data name="KeyShareGuideWhatsNextText2" xml:space="preserve">
+    <value>Secured Messenger to bezpieczna, end-to-end szyfrowana funkcja komunikatorów wbudowana w AxCrypt: AxCrypt Bezpieczny Posłaniec | Szyfrowane wiadomości end-to-end dla pełnej prywatności</value>
   </data>
   <data name="KeyShareGuideWhatsNextText3" xml:space="preserve">
     <value>Chcesz zagłębić się w najlepsze praktyki szyfrowania? Sprawdź nasz blog, aby poznać poradniki i wskazówki. AxCrypt Blog</value>
@@ -19366,6 +19430,9 @@ Włącz automatyczną konwersję plików AxCrypt 1.x (zalecane)?</value>
   </data>
   <data name="LinkToSecretsPageWithUserNameFormat" xml:space="preserve">
     <value>{0}secrets?email={1}&amp;app</value>
+  </data>
+  <data name="LoadingPlansTexts" xml:space="preserve">
+    <value>Plany ładowania...</value>
   </data>
   <data name="LoadingText" xml:space="preserve">
     <value>Ładowanie..</value>
@@ -20561,6 +20628,9 @@ Ten program jest licencjonowany zgodnie z umową.
   <data name="Meta-Description-Reseller-help-Support" xml:space="preserve">
     <value>Uzyskaj dostęp do wsparcia dla sprzedawców AxCrypt: przewodników technicznych, samouczków wideo, materiałów sprzedażowych i bezpośredniej pomocy, aby poprawić jakość odsprzedaży.</value>
   </data>
+  <data name="Meta-Description-Secure-Cloud-On-Platform" xml:space="preserve">
+    <value>Dowiedz się, jak korzystać z AxCrypt Secure Cloud do bezpiecznego szyfrowania, przechowywania i udostępniania plików. Postępuj zgodnie z naszym przewodnikiem krok po kroku dotyczącym bezpiecznej ochrony plików w chmurze.</value>
+  </data>
   <data name="Meta-Description-Securedmessenger" xml:space="preserve">
     <value>Chroń komunikację biznesową za pomocą Secure Messenger AxCrypt. Szyfrowanie end-to-end, bezpieczeństwo AES-256, serwery w UE oraz pełna zgodność z RODO i NIS2.</value>
   </data>
@@ -21214,6 +21284,9 @@ Ten program jest licencjonowany zgodnie z umową.
   </data>
   <data name="Meta-Title-Reseller-help-Support" xml:space="preserve">
     <value>AxCrypt Reseller Support – Pomoc techniczna i zasoby sprzedażowe</value>
+  </data>
+  <data name="Meta-Title-Secure-Cloud-On-Platform" xml:space="preserve">
+    <value>AxCrypt Secure Cloud Guide | Szyfruj i udostępniaj pliki bezpiecznie</value>
   </data>
   <data name="Meta-Title-Securedmessenger" xml:space="preserve">
     <value>AxCrypt Bezpieczny Posłaniec | Szyfrowane wiadomości end-to-end dla pełnej prywatności</value>
@@ -21870,6 +21943,9 @@ Aby powrócić do strony początkowej, kliknij &lt;a href="{1}"&gt; tutaj &lt;/a
   <data name="OfflineSignupText" xml:space="preserve">
     <value>Obecnie jesteś offline. Jednak nadal możesz się zarejestrować!</value>
   </data>
+  <data name="OfflineText" xml:space="preserve">
+    <value>Jesteś offline</value>
+  </data>
   <data name="OFFText" xml:space="preserve">
     <value>OFF</value>
   </data>
@@ -22443,8 +22519,14 @@ Białe miejsca i części występujące w popularnych hasłach są ignorowane i 
   <data name="PlanText" xml:space="preserve">
     <value>Abonament</value>
   </data>
+  <data name="PlatformNotSupportedText" xml:space="preserve">
+    <value>Platforma nie jest wspierana, prosimy o kontakt z pomocą techniczną AxCrypt!</value>
+  </data>
   <data name="PleaseNoteText" xml:space="preserve">
     <value>Uwaga!</value>
+  </data>
+  <data name="PleaseRateUsText" xml:space="preserve">
+    <value>Proszę ocenić nas</value>
   </data>
   <data name="PolishLanguageSelection" xml:space="preserve">
     <value>Polski</value>
@@ -22811,9 +22893,6 @@ Białe miejsca i części występujące w popularnych hasłach są ignorowane i 
   </data>
   <data name="PricingFeatureListBusinessPrioritySupport" xml:space="preserve">
     <value>Priorytetowe Wsparcie Biznesowe</value>
-  </data>
-  <data name="PricingFeatureListCloudStorage" xml:space="preserve">
-    <value>Świadomość przechowywania w chmurze</value>
   </data>
   <data name="PricingFeatureListCommunitySupport" xml:space="preserve">
     <value>Społeczność</value>
@@ -23205,9 +23284,6 @@ Białe miejsca i części występujące w popularnych hasłach są ignorowane i 
   <data name="ProductClientReviewTex5" xml:space="preserve">
     <value>Mogę zaszyfrować/odszyfrować dowolny dokument lub folder w kilka sekund, wystarczy kilka kliknięć myszką.</value>
   </data>
-  <data name="ProductCloudStorageLabel" xml:space="preserve">
-    <value>Przechowywanie w chmurze</value>
-  </data>
   <data name="ProductFeatureComplicatedText" xml:space="preserve">
     <value>Zbyt skomplikowane w użyciu</value>
   </data>
@@ -23342,9 +23418,6 @@ Białe miejsca i części występujące w popularnych hasłach są ignorowane i 
   </data>
   <data name="ProductProtectCarouselText1" xml:space="preserve">
     <value>Bezpiecznie udostępniaj zaszyfrowane pliki innym za pomocą Key Sharing w AxCrypt. Odbiorców wybierasz przez e-mail, aby mogli odszyfrować za pomocą własnych danych uwierzytelniających, bez konieczności udostępniania hasła.</value>
-  </data>
-  <data name="ProductProtectCarouselText2" xml:space="preserve">
-    <value>Współpracuj płynnie z usługami przechowywania w chmurze (Dropbox, OneDrive, Google Drive): oznacz foldery w chmurze lub lokalne jako "zabezpieczone", a AxCrypt szyfruje pliki przed lub podczas synchronizacji z chmurą, aby chronić Twoje dane w każdej lokalizacji.</value>
   </data>
   <data name="ProductProtectCarouselText3" xml:space="preserve">
     <value>Szyfruj i odszyfruj pliki bezpośrednio na swoim urządzeniu mobilnym (Android i iOS). Uzyskaj dostęp do zaszyfrowanych plików z chmury lub otrzymanych e-mailem, zapewniając ochronę swoich danych w podróży.</value>
@@ -23886,6 +23959,9 @@ Skorzysaj z 30-dniowego okresu próbnego który możesz przerwać w dowolnym mo
     <value>Twoje oprogramowanie musi być aktualizowane z powodu problemu niezawodności.</value>
     <comment>Displayed prominently, perhaps as a pop-up, when it's discovered that an update is available the contains a reliability fix.</comment>
   </data>
+  <data name="RememberMeForText" xml:space="preserve">
+    <value>Pamiętaj mnie za</value>
+  </data>
   <data name="RemoveFromRecentFilesLabelText" xml:space="preserve">
     <value>Usuń z ostatnich plików</value>
   </data>
@@ -24420,6 +24496,9 @@ Temat: Migawka raportu AxCrypt</value>
   <data name="RestoreMasterKeyText" xml:space="preserve">
     <value>Przywróć klucz główny</value>
   </data>
+  <data name="RestoreNowText" xml:space="preserve">
+    <value>Przywróć teraz</value>
+  </data>
   <data name="RestoreToOriginalToolTipText" xml:space="preserve">
     <value>Przywrócenie oryginału wymaga płatnego planu subskrypcji!.</value>
   </data>
@@ -24484,6 +24563,153 @@ Temat: Migawka raportu AxCrypt</value>
   </data>
   <data name="SecretsWarningIsSoonExpired" xml:space="preserve">
     <value>Twoja subskrypcja Premium wygasa {0}. Będziesz musiał przedłużyć subskrypcję Premium, aby móc edytować lub tworzyć nowe hasła. Dostęp tylko do odczytu zachowujesz bezterminowo.</value>
+  </data>
+  <data name="SecureCloudFaq1" xml:space="preserve">
+    <value>Dlaczego musisz zabezpieczyć swoje dane w chmurze?</value>
+  </data>
+  <data name="SecureCloudFaq1Ans" xml:space="preserve">
+    <value>Chociaż przesyłane dane do chmury mogą zwiększyć dostępność, to jednocześnie zwiększają ryzyko ujawnienia. Gdy zabezpieczasz swoje dane w chmurze za pomocą narzędzia szyfrującego wdrażającego algorytm szyfrowania AES-256. Tylko Ty i osoby, którym udzielisz dostępu przez aplikację, mogą uzyskać dostęp do tych zaszyfrowanych danych. Jest stworzony dla użytkowników, którzy chcą chronić wrażliwe pliki, umożliwić bezpieczne udostępnianie plików w chmurze oraz szyfrować dokumenty online bez zakłócania przepływu pracy.</value>
+  </data>
+  <data name="SecureCloudFaq2" xml:space="preserve">
+    <value>Ile platform chmurowych obsługuje Cloud Security AxCrypt?</value>
+  </data>
+  <data name="SecureCloudFaq2Ans" xml:space="preserve">
+    <value>Bezpieczeństwo chmurowe AxCrypt obsługuje jedynie Google Drive, OneDrive i Dropbox.</value>
+  </data>
+  <data name="SecureCloudFaq3" xml:space="preserve">
+    <value>Czy mogę bezpiecznie udostępniać zaszyfrowane pliki przechowywane w chmurze?</value>
+  </data>
+  <data name="SecureCloudFaq3Ans" xml:space="preserve">
+    <value>Tak. Możesz udostępniać zaszyfrowane pliki przechowywane w chmurze za pomocą funkcji Share Keys dostępnych w aplikacji. Dzięki funkcji Cloud Security możesz przyznawać dostęp i autoryzować użytkowników. Twoje pliki pozostają chronione przez Cloud Security i są dostępne tylko dla zatwierdzonych lub upoważnionych użytkowników. Ta funkcja synchronizacji w chmurze zapewnia maksymalną ochronę plików i daje pełną kontrolę oraz bezpieczeństwo nad danymi.</value>
+  </data>
+  <data name="SecureCloudGuidebuttonHead1" xml:space="preserve">
+    <value>Protect pliki w chmurze za pośrednictwem aplikacji</value>
+  </data>
+  <data name="SecureCloudGuidebuttonHead2" xml:space="preserve">
+    <value>Szyfruj pliki – zarówno lokalne, jak i chmurowe</value>
+  </data>
+  <data name="SecureCloudGuidebuttonHead3" xml:space="preserve">
+    <value>Stop Secure</value>
+  </data>
+  <data name="SecureCloudGuideCarouselText" xml:space="preserve">
+    <value>Aby bezpiecznie synchronizować pliki, połącz swoje konto Google Drive lub Dropbox, udzielając zgody podczas pytania uwierzytelniania. Po zatwierdzeniu AxCrypt może bezpiecznie otwierać, szyfrować, deszyfrować i udostępniać pliki bezpośrednio z Twojej chmury, bez konieczności przechowywania danych.</value>
+  </data>
+  <data name="SecureCloudGuidesHeadParagraph" xml:space="preserve">
+    <value>Współpracuj płynnie z usługami przechowywania w chmurze (Dropbox, OneDrive, Google Drive) z AxCrypt. AxCrypt zabezpiecza pliki szyfrowaniem AES-256 przed przesłaniem do chmury. Twoje pliki są chronione zarówno w stanie spoczynku, jak i w trakcie transportu.</value>
+  </data>
+  <data name="SecureCloudGuidesHeadTitle" xml:space="preserve">
+    <value>Bezpieczny dostęp do wszystkich wrażliwych danych w jednym bezpiecznym miejscu platformę z AxCrypt.</value>
+  </data>
+  <data name="SecureCloudGuideStepHead1" xml:space="preserve">
+    <value>Uwierzytelnij swoje konto chmurowe</value>
+  </data>
+  <data name="SecureCloudGuideStepHead2" xml:space="preserve">
+    <value>Oto jak chronić pliki w chmurze za pomocą szyfrowania AES 256-bit od AxCrypt.</value>
+  </data>
+  <data name="SecureCloudGuideStepHead3" xml:space="preserve">
+    <value>Jak korzystać z opcji Stop Secure i Open Secured w szyfrowaniu w chmurze?</value>
+  </data>
+  <data name="SecureCloudGuideStepHead4" xml:space="preserve">
+    <value>Jak korzystać z opcji Share Key w szyfrowaniu chmurowym?</value>
+  </data>
+  <data name="SecureCloudGuideStepHead5" xml:space="preserve">
+    <value>Czym jest bezpieczeństwo w chmurze?</value>
+  </data>
+  <data name="SecureCloudGuideStepHead6" xml:space="preserve">
+    <value>Czy Cloud Security to rozwiązanie do przechowywania danych w chmurze bez wiedzy ?</value>
+  </data>
+  <data name="SecureCloudGuideStepText1" xml:space="preserve">
+    <value>Na stronie głównej aplikacji AxCrypt kliknij preferowanego dostawcę usług przechowywania w chmurze.</value>
+  </data>
+  <data name="SecureCloudGuideStepText10" xml:space="preserve">
+    <value>Kliknij 'Otwórz zabezpieczone'.</value>
+  </data>
+  <data name="SecureCloudGuideStepText11" xml:space="preserve">
+    <value>Proszę zauważyć: Twoje pliki pozostają szyfrowane i bezpieczne. Otwierają się na krótko podczas pracy i automatycznie szyfrują się po wyjściu z aplikacji.</value>
+  </data>
+  <data name="SecureCloudGuideStepText12" xml:space="preserve">
+    <value>W okienku wyboru plików możesz także zabezpieczyć pliki za pomocą menu po prawej stronie myszy — wystarczy wybrać wybrany plik i kliknąć Secure. Prosimy pamiętać, że wymagana jest jednorazowa autoryzacja w chmurze.</value>
+  </data>
+  <data name="SecureCloudGuideStepText13" xml:space="preserve">
+    <value>Kliknij 'Stop Securing'.</value>
+  </data>
+  <data name="SecureCloudGuideStepText14" xml:space="preserve">
+    <value>Twoje pliki są teraz trwale odszyfrowane.</value>
+  </data>
+  <data name="SecureCloudGuideStepText15" xml:space="preserve">
+    <value>Proszę zauważyć: Możesz też kliknąć menu akcji (3 kropki) w prawym dolnym rogu i wybrać zatrzymanie bezpieczne.</value>
+  </data>
+  <data name="SecureCloudGuideStepText16" xml:space="preserve">
+    <value>Zaloguj się do AxCrypt i wybierz spośród 3 dostępnych dostawców przechowywania w chmurze.</value>
+  </data>
+  <data name="SecureCloudGuideStepText17" xml:space="preserve">
+    <value>Znajdź swój plik i wybierz go.</value>
+  </data>
+  <data name="SecureCloudGuideStepText18" xml:space="preserve">
+    <value>Kliknij 'Udostępnij klucze'.</value>
+  </data>
+  <data name="SecureCloudGuideStepText19" xml:space="preserve">
+    <value>Dodaj adres e-mail, z którym chcesz bezpiecznie udostępniać klucze, i kliknij 'Dodaj'.</value>
+  </data>
+  <data name="SecureCloudGuideStepText2" xml:space="preserve">
+    <value>Otworzy się okienko wyboru plików, które pokaże pliki w chmurze.</value>
+  </data>
+  <data name="SecureCloudGuideStepText20" xml:space="preserve">
+    <value>Bezpieczeństwo chmury firmy AxCrypt to funkcja zapewniająca szyfrowaną synchronizację chmury na wielu urządzeniach i obsługiwanych platformach przechowywania danych. Pozwala to zabezpieczyć pliki przechowywania w chmurze za pomocą szyfrowania po stronie klienta, które upoważnia użytkowników do uzyskania niezbędnych uprawnień dostępu do nich. Dzięki funkcji Cloud Security w AxCrypt możesz niemal zaszyfrować dowolne pliki. Od plików, PDF-ów, arkuszy po obrazy – możesz użyć algorytmu szyfrowania Cloud SecurityAES-256 firmy AxCrypt, aby je chronić.</value>
+  </data>
+  <data name="SecureCloudGuideStepText21" xml:space="preserve">
+    <value>Tak. Cloud Security firmy AxCrypt została zaprojektowana jako rozwiązanie chmurowe oparte na zerowej wiedzy. Oznacza to, że Twoje pliki są szyfrowane za pomocą algorytmu szyfrowania AES-256 i nie posiadamy ani nie mamy dostępu do żadnych informacji ani danych przesyłanych na platformy przechowywania w chmurze. Dostawca przechowywania w chmurze nie kontroluje Twoich kluczy szyfrowania. Gwarantuje to silniejszą ochronę prywatności danych oraz prawdziwą, end-to-end szyfrowaną synchronizację w chmurze.</value>
+  </data>
+  <data name="SecureCloudGuideStepText22" xml:space="preserve">
+    <value>Znajdź plik w dostępnych opcjach przechowywania w chmurze w aplikacji.</value>
+  </data>
+  <data name="SecureCloudGuideStepText23" xml:space="preserve">
+    <value>Na stronie głównej aplikacji kliknij preferowane miejsce przechowywania w chmurze.</value>
+  </data>
+  <data name="SecureCloudGuideStepText24" xml:space="preserve">
+    <value>Kliknij przycisk akcji "+" i wybierz plik, który chcesz bezpiecznie przesłać do chmury.</value>
+  </data>
+  <data name="SecureCloudGuideStepText25" xml:space="preserve">
+    <value>Kliknij Otwórz i plik jest teraz zaszyfrowany w obu lokalizacjach: lokalnie i w chmurze.</value>
+  </data>
+  <data name="SecureCloudGuideStepText26" xml:space="preserve">
+    <value>Proszę zauważyć: Plik będzie szyfrowany zarówno lokalnie, jak i w chmurze.</value>
+  </data>
+  <data name="SecureCloudGuideStepText3" xml:space="preserve">
+    <value>Wybierz plik, który chcesz chronić.</value>
+  </data>
+  <data name="SecureCloudGuideStepText4" xml:space="preserve">
+    <value>Kliknij na menu akcji (3 kropki) w prawym dolnym rogu wyskakującego okienka.</value>
+  </data>
+  <data name="SecureCloudGuideStepText5" xml:space="preserve">
+    <value>Kliknij na Secure, a teraz plik jest szyfrowany rozszerzeniem .axx.</value>
+  </data>
+  <data name="SecureCloudGuideStepText6" xml:space="preserve">
+    <value>Proszę zauważyć: Plik jest szyfrowany lokalnie, a następnie przesyłany do chmury.</value>
+  </data>
+  <data name="SecureCloudGuideStepText7" xml:space="preserve">
+    <value>Znajdź plik, który chcesz bezpiecznie otworzyć.</value>
+  </data>
+  <data name="SecureCloudGuideStepText8" xml:space="preserve">
+    <value>Wybierz plik, a następnie kliknij prawym przyciskiem myszy.</value>
+  </data>
+  <data name="SecureCloudGuideStepText9" xml:space="preserve">
+    <value>Możesz też kliknąć menu akcji (3 kropki), aby wykonać tę akcję.</value>
+  </data>
+  <data name="SecureCloudParagraph" xml:space="preserve">
+    <value>W tym przewodniku nauczysz się, jak korzystać z AxCrypt z przechowywaniem w chmurze. Nie ma potrzeby instalować lokalnych aplikacji do synchronizacji dysku w chmurze. AxCrypt Cloud Security szyfruje Twoje pliki za pomocą AES-256 i zapewnia ochronę od początku do końca, synchronizując je z chmurą, jednocześnie chroniąc zarówno podczas transportu, jak i użytkowania.</value>
+  </data>
+  <data name="SecureCloudSideMenuHead1" xml:space="preserve">
+    <value>Oto jak chronić pliki w chmurze</value>
+  </data>
+  <data name="SecureCloudWhatNextText1" xml:space="preserve">
+    <value>📚Szybki przewodnik po korzystaniu z AxCrypt Vault – automatycznie szyfrowanego kontenera Do przechowywania wrażliwych plików i folderów:</value>
+  </data>
+  <data name="SecureCloudWhatNextText2" xml:space="preserve">
+    <value>Przewodnik po funkcjach AxCrypt Vault | Szyfruj i chronij pliki</value>
+  </data>
+  <data name="SecuredCloudLinkLabel" xml:space="preserve">
+    <value>Secure Cloud</value>
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>Bezpieczne usuwanie AxCrypt</value>
@@ -25209,6 +25435,9 @@ Aby przejść do strony początkowej, kliknij &lt;a href="{1}"&gt;tutaj&lt;/a&gt
   </data>
   <data name="StartFreeTrial" xml:space="preserve">
     <value>Rozpocznij darmowy okres próbny</value>
+  </data>
+  <data name="StartFreeTrialText" xml:space="preserve">
+    <value>Rozpocznij swój 14-dniowy darmowy okres próbny, a potem</value>
   </data>
   <data name="StartMakingMoneyHeading" xml:space="preserve">
     <value>Zacznij zarabiać pieniądze w &lt;span&gt;3 prostych krokach&lt;/span&gt;</value>

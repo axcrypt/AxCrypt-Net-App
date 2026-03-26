@@ -41605,11 +41605,20 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Secure files online in mobile and desktop with cloud security.
+        ///   Looks up a localized string similar to Secure your Cloud files across mobile and desktop.
         /// </summary>
         public static string BusinessProductKeyHead10 {
             get {
                 return ResourceManager.GetString("BusinessProductKeyHead10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multi-Factor Authentication (MFA) for Businesses.
+        /// </summary>
+        public static string BusinessProductKeyHead11 {
+            get {
+                return ResourceManager.GetString("BusinessProductKeyHead11", resourceCulture);
             }
         }
         
@@ -41736,6 +41745,15 @@ namespace AxCrypt.Content {
         public static string BusinessProductKeyParagraph14 {
             get {
                 return ResourceManager.GetString("BusinessProductKeyParagraph14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Strengthen your organization&apos;s security with MFA, adding an extra layer of protection beyond passwords. Employees must verify their identity using a secondary method, such as a one-time code via email or mobile, ensuring secure access to sensitive business data..
+        /// </summary>
+        public static string BusinessProductKeyParagraph15 {
+            get {
+                return ResourceManager.GetString("BusinessProductKeyParagraph15", resourceCulture);
             }
         }
         
@@ -64980,6 +64998,15 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open &lt;span class=&quot;grn-clr&quot;&gt;AxCrypt files&lt;/span&gt; on your phone..
+        /// </summary>
+        public static string OpenAxCryptFilesText {
+            get {
+                return ResourceManager.GetString("OpenAxCryptFilesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select secured file to open.
         /// </summary>
         public static string OpenEncryptedFileOpenDialogTitle {
@@ -67712,15 +67739,6 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cloud Storage Awareness.
-        /// </summary>
-        public static string PricingFeatureListCloudStorage {
-            get {
-                return ResourceManager.GetString("PricingFeatureListCloudStorage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Community Support.
         /// </summary>
         public static string PricingFeatureListCommunitySupport {
@@ -68902,15 +68920,6 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cloud Storage.
-        /// </summary>
-        public static string ProductCloudStorageLabel {
-            get {
-                return ResourceManager.GetString("ProductCloudStorageLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Too complex to use.
         /// </summary>
         public static string ProductFeatureComplicatedText {
@@ -69312,15 +69321,6 @@ namespace AxCrypt.Content {
         public static string ProductProtectCarouselText1 {
             get {
                 return ResourceManager.GetString("ProductProtectCarouselText1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Work seamlessly with cloud storage services (Dropbox, OneDrive, Google Drive): designate cloud or local folders as “secured,” and AxCrypt encrypts files before or when syncing to the cloud to protect your data in every location..
-        /// </summary>
-        public static string ProductProtectCarouselText2 {
-            get {
-                return ResourceManager.GetString("ProductProtectCarouselText2", resourceCulture);
             }
         }
         
@@ -73154,7 +73154,7 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Secure Cloud.
+        ///   Looks up a localized string similar to Cloud Security.
         /// </summary>
         public static string SecuredCloudLinkLabel {
             get {
@@ -79993,11 +79993,65 @@ namespace AxCrypt.Content {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click on the Vault feature..
+        /// </summary>
+        public static string VaultGuideParagraph36 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph36", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click on the ‘Share Keys’ option present in the top right corner..
+        /// </summary>
+        public static string VaultGuideParagraph37 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph37", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a user with their email ID..
+        /// </summary>
+        public static string VaultGuideParagraph38 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph38", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now, click on apply..
+        /// </summary>
+        public static string VaultGuideParagraph39 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph39", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AxCrypt Vault is a secure, encrypted container for storing your sensitive files and folders. Anything added to the Vault is &lt;b&gt;automatically encrypted,&lt;/b&gt; with no manual cleanup or extra steps required. It works like a dedicated encrypted folder that you can place anywhere on your computer, with full control through &lt;b&gt;Vault Settings.&lt;/b&gt;.
         /// </summary>
         public static string VaultGuideParagraph4 {
             get {
                 return ResourceManager.GetString("VaultGuideParagraph4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: Group Key Sharing is a Business Feature..
+        /// </summary>
+        public static string VaultGuideParagraph40 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the group from the dropdown..
+        /// </summary>
+        public static string VaultGuideParagraph41 {
+            get {
+                return ResourceManager.GetString("VaultGuideParagraph41", resourceCulture);
             }
         }
         
@@ -80115,6 +80169,24 @@ namespace AxCrypt.Content {
         public static string VaultGuideSubHeading10 {
             get {
                 return ResourceManager.GetString("VaultGuideSubHeading10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key Sharing the Vault..
+        /// </summary>
+        public static string VaultGuideSubHeading11 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key Sharing the Vault with a Group..
+        /// </summary>
+        public static string VaultGuideSubHeading12 {
+            get {
+                return ResourceManager.GetString("VaultGuideSubHeading12", resourceCulture);
             }
         }
         

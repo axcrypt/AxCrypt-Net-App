@@ -665,6 +665,9 @@
     <value>مسجل بالفعل؟ سجل الدخول هنا</value>
     <comment>Link to sign in page.</comment>
   </data>
+  <data name="AlreadySubscribedText" xml:space="preserve">
+    <value>مشترك بالفعل؟ استعد خطتك</value>
+  </data>
   <data name="AlreadyVerifiedInfo" xml:space="preserve">
     <value>ويحي. لقد تحققت بالفعل من حسابك ، هذا رائع!
 
@@ -743,6 +746,9 @@
   </data>
   <data name="AppNotWorkExpectedText" xml:space="preserve">
     <value>لم يعمل كما هو متوقع</value>
+  </data>
+  <data name="AppreciateYourFeedback" xml:space="preserve">
+    <value>سوف نقدر ملاحظاتك!</value>
   </data>
   <data name="ApproveMasterKeyMoreThanOneBusinessError" xml:space="preserve">
     <value>لا يمكن تمكين المفتاح الرئيسي أثناء كونه جزءًا من أكثر من عمل واحد. يرجى ترك أي أعمال أخرى تكون جزءًا منها قبل تمكين المفتاح الرئيسي.</value>
@@ -14235,7 +14241,10 @@ BitLocker
     <value>يزيل المفتاح الرئيسي خطر فقدان الوصول إلى الملفات الهامة</value>
   </data>
   <data name="BusinessProductKeyHead10" xml:space="preserve">
-    <value>تأمين الملفات عبر الإنترنت في الأجهزة المحمولة وسطح المكتب باستخدام أمان السحابة</value>
+    <value>أمّن ملفاتك في السحابة عبر الهاتف والجهاز المكتبي</value>
+  </data>
+  <data name="BusinessProductKeyHead11" xml:space="preserve">
+    <value>المصادقة متعددة العوامل  للأعمال</value>
   </data>
   <data name="BusinessProductKeyHead14" xml:space="preserve">
     <value>التشفير بصفر معرفة لأقصى درجات الأمان.</value>
@@ -14278,6 +14287,9 @@ BitLocker
   </data>
   <data name="BusinessProductKeyParagraph14" xml:space="preserve">
     <value>نهج يضع الخصوصية أولًا، مدعوم بتشفير قوي غير قابل للاختراق بطول ‎256-بت، يحافظ على أمان بياناتك. وبهذا تحتفظ بالتحكم الكامل في مفاتيح فك التشفير الخاصة بك، مما يضمن أن لا أحد — ولا حتى أكس كريبت — يمكنه الوصول إلى ملفاتك.</value>
+  </data>
+  <data name="BusinessProductKeyParagraph15" xml:space="preserve">
+    <value>عزز أمان مؤسستك باستخدام المصادقة متعددة العوامل، حيث تضيف طبقة حماية إضافية تتجاوز كلمات المرور. يجب على الموظفين التحقق من هويتهم باستخدام طريقة ثانوية، مثل رمز لمرة واحدة عبر البريد الإلكتروني أو الهاتف المحمول، لضمان وصول آمن إلى البيانات الحساسة للأعمال.</value>
   </data>
   <data name="BusinessProductKeyParagraph2" xml:space="preserve">
     <value>تنظيم المستخدمين بكفاءة في مجموعات وإدارة وصولهم من خلال إدارة المفاتيح المركزية. يضمن ذلك أذونات متسقة عبر المؤسسة، مما يسمح للمسؤولين بإدارة وصول المجموعة إلى البيانات الهامة وتأمينه.</value>
@@ -14671,6 +14683,9 @@ BitLocker
   </data>
   <data name="BuyText" xml:space="preserve">
     <value>شراء</value>
+  </data>
+  <data name="BySubscribingAgreeText" xml:space="preserve">
+    <value>باشتراكك في أكس كريبت، فإنك توافق على شروطنا</value>
   </data>
   <data name="Canceled" xml:space="preserve">
     <value>تم إلغاء "{0}".</value>
@@ -16090,6 +16105,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="EditNoteTitle" xml:space="preserve">
     <value>تحرير مذكرة</value>
   </data>
+  <data name="EditOptionsButtonText" xml:space="preserve">
+    <value>خيارات التحرير</value>
+  </data>
   <data name="EditPasswordTitle" xml:space="preserve">
     <value>تحرير كلمة المرور</value>
   </data>
@@ -17129,6 +17147,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="FolderAlreadyWatched" xml:space="preserve">
     <value>المجلد "{0}" مؤمن بالفعل.</value>
   </data>
+  <data name="FolderIsEmptyText" xml:space="preserve">
+    <value>هذا المجلد فارغ!</value>
+  </data>
   <data name="FolderNameLabel" xml:space="preserve">
     <value>اسم المجلد</value>
   </data>
@@ -17211,6 +17232,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="ForIndividualsLabel" xml:space="preserve">
     <value>للأفراد</value>
+  </data>
+  <data name="FormatColumnHeaderText" xml:space="preserve">
+    <value>تنسيق</value>
   </data>
   <data name="ForOrganisationsLabel" xml:space="preserve">
     <value>للمنظمات</value>
@@ -18573,6 +18597,12 @@ https://axcrypt.net/information/guides/encryption-decryption/</value>
   <data name="InactivitySignoutToolTipText" xml:space="preserve">
     <value>تسجيل الخروج عند الخمول يتطلب خطة اشتراك مدفوعة!</value>
   </data>
+  <data name="InAdditionTexts" xml:space="preserve">
+    <value>بالإضافة إلى الـ</value>
+  </data>
+  <data name="InAdditionTexts1" xml:space="preserve">
+    <value>الميزات التي تستخدمها الآن، ستحصل على:</value>
+  </data>
   <data name="InboxText" xml:space="preserve">
     <value>الوارد</value>
   </data>
@@ -19371,6 +19401,9 @@ SE-114 29 ستوكهولم
   <data name="KeyShareGuidesTitle" xml:space="preserve">
     <value>مشاركة الوصول إلى الملفات مع &lt;label style="font-style: italic; "&gt;الزملاء والأصدقاء &lt;/label&gt;&lt;strong style="color: black; "&gt;مع &lt;/strong&gt;&lt;span&gt; مشاركة المفاتيح!&lt;/span&gt;</value>
   </data>
+  <data name="KeyShareGuideWhatsNextHead1" xml:space="preserve">
+    <value>دليل سريع لعرض الملف أو فك تشفيره</value>
+  </data>
   <data name="KeyShareGuideWhatsNextHead2" xml:space="preserve">
     <value>&lt;strong&gt;الرسائل الآمنة.&lt;/strong&gt;</value>
   </data>
@@ -19379,6 +19412,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="KeyShareGuideWhatsNextText1" xml:space="preserve">
     <value>كيفية تشفير وفك تشفير الملفات باستخدام أكسكريبت | دليل خطوة بخطوة</value>
+  </data>
+  <data name="KeyShareGuideWhatsNextText2" xml:space="preserve">
+    <value>المراسلة الآمنة هو ميزة مراسلة آمنة مشفرة من طرف إلى طرف ومدمجة في أكس كريبت: معلومات/أدلة أكس كريبت آمن رسول | المراسلة المشفرة من طرف إلى طرف للخصوصية الكاملة</value>
   </data>
   <data name="KeyShareGuideWhatsNextText3" xml:space="preserve">
     <value>هل ترغب في التعمق أكثر في أفضل ممارسات التشفير؟
@@ -19689,6 +19725,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="LinkToSecretsPageWithUserNameFormat" xml:space="preserve">
     <value>{0}secrets?email={1}&amp;app</value>
+  </data>
+  <data name="LoadingPlansTexts" xml:space="preserve">
+    <value>جارٍ تحميل الخطط</value>
   </data>
   <data name="LoadingText" xml:space="preserve">
     <value>تحميل..</value>
@@ -20891,6 +20930,9 @@ SE-114 29 ستوكهولم
   <data name="Meta-Description-Reseller-help-Support" xml:space="preserve">
     <value>احصل على دعم موزعي أكسكريبت: أدلة فنية، دروس فيديو تعليمية، مواد تسويقية، ومساعدة مباشرة لتعزيز تجربتك في إعادة البيع.</value>
   </data>
+  <data name="Meta-Description-Secure-Cloud-On-Platform" xml:space="preserve">
+    <value>تعرّف على كيفية استخدام أكس كريبت السحابة الآمنة لتشفير الملفات وتخزينها ومشاركتها بأمان. اتبع دليلنا خطوة بخطوة لحماية الملفات في السحابة بشكل آمن.</value>
+  </data>
   <data name="Meta-Description-Securedmessenger" xml:space="preserve">
     <value>احمِ اتصالات الأعمال باستخدام برنامج المراسلة الآمن من أكسكريبت. تشفير من طرف إلى طرف، أمان AES-256، خوادم مقرّها الاتحاد الأوروبي، وامتثال كامل للائحة GDPR ومعيار NIS2.</value>
   </data>
@@ -21558,6 +21600,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="Meta-Title-Reseller-help-Support" xml:space="preserve">
     <value>دعم موزعي أكسكريبت – المساعدة التقنية وموارد المبيعات</value>
+  </data>
+  <data name="Meta-Title-Secure-Cloud-On-Platform" xml:space="preserve">
+    <value>دليل أكس كريبت للسحابة الآمنة | تشفير ومشاركة الملفات بأمان</value>
   </data>
   <data name="Meta-Title-Securedmessenger" xml:space="preserve">
     <value>أكسكريبت مؤمَّن مراسِل | مراسلة مشفّرة من الطرف إلى الطرف لخصوصية كاملة</value>
@@ -22227,6 +22272,9 @@ SE-114 29 ستوكهولم
   <data name="OfflineSignupText" xml:space="preserve">
     <value>حاليًا أنت كذلك. ومع ذلك، لا يزال بإمكانك التسجيل!</value>
   </data>
+  <data name="OfflineText" xml:space="preserve">
+    <value>أنت غير متصل بالإنترنت</value>
+  </data>
   <data name="OFFText" xml:space="preserve">
     <value>إيقاف</value>
   </data>
@@ -22247,6 +22295,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="ONText" xml:space="preserve">
     <value>على</value>
+  </data>
+  <data name="OpenAxCryptFilesText" xml:space="preserve">
+    <value>افتح ملفات أكس كريبت على هاتفك.</value>
   </data>
   <data name="OpenEncryptedFileOpenDialogTitle" xml:space="preserve">
     <value>حدد ملفا مؤمنا لفتحه</value>
@@ -22811,8 +22862,14 @@ SE-114 29 ستوكهولم
   <data name="PlanText" xml:space="preserve">
     <value>خطة</value>
   </data>
+  <data name="PlatformNotSupportedText" xml:space="preserve">
+    <value>النظام غير مدعوم، يرجى التواصل مع دعم أكس كريبت!</value>
+  </data>
   <data name="PleaseNoteText" xml:space="preserve">
     <value>يرجى الملاحظة!</value>
+  </data>
+  <data name="PleaseRateUsText" xml:space="preserve">
+    <value>يرجى تقييمنا على</value>
   </data>
   <data name="PolishLanguageSelection" xml:space="preserve">
     <value>بولسكي (بولندي)</value>
@@ -23181,9 +23238,6 @@ SE-114 29 ستوكهولم
   </data>
   <data name="PricingFeatureListBusinessPrioritySupport" xml:space="preserve">
     <value>دعم أولوية الأعمال</value>
-  </data>
-  <data name="PricingFeatureListCloudStorage" xml:space="preserve">
-    <value>دراية التخزين السحابي </value>
   </data>
   <data name="PricingFeatureListCommunitySupport" xml:space="preserve">
     <value>دعم المجتمع</value>
@@ -23583,9 +23637,6 @@ SE-114 29 ستوكهولم
   <data name="ProductClientReviewTex5" xml:space="preserve">
     <value>أستطيع تشفير وفك تشفير أي مستند أو مجلد خلال ثوانٍ معدودة وببضع نقرات بالماوس فقط.</value>
   </data>
-  <data name="ProductCloudStorageLabel" xml:space="preserve">
-    <value>التخزين السحابي</value>
-  </data>
   <data name="ProductFeatureComplicatedText" xml:space="preserve">
     <value>معقدة للغاية للاستخدام</value>
   </data>
@@ -23720,9 +23771,6 @@ SE-114 29 ستوكهولم
   </data>
   <data name="ProductProtectCarouselText1" xml:space="preserve">
     <value>شارك الملفات المشفّرة بأمان مع الآخرين عبر ميزة مشاركة المفاتيح في أكسكريبت. اختر المستلمين عبر البريد الإلكتروني ليتمكنوا من فك التشفير باستخدام بيانات اعتمادهم الخاصة، دون أن تضطر لمشاركة كلمة مرورك أبدًا.</value>
-  </data>
-  <data name="ProductProtectCarouselText2" xml:space="preserve">
-    <value>اعمل بسلاسة مع خدمات التخزين السحابي (Dropbox، OneDrive، Google Drive): حدّد المجلدات السحابية أو المحلية كـ "محمية"، ويقوم أكسكريبت بتشفير الملفات قبل أو أثناء مزامنتها مع السحابة لحماية بياناتك في كل مكان.</value>
   </data>
   <data name="ProductProtectCarouselText3" xml:space="preserve">
     <value>قم بتشفير وفك تشفير الملفات مباشرة على جهازك المحمول (Android و iOS). يمكنك الوصول إلى الملفات المشفّرة من التخزين السحابي أو الملفات المستلمة عبر البريد الإلكتروني، مما يضمن بقاء بياناتك محمية أثناء تنقلك.</value>
@@ -24266,6 +24314,9 @@ SE-114 29 ستوكهولم
     <value>يحتاج برنامجك إلى التحديث نظرا لوجود مشكلة تتعلق بالموثوقية.</value>
     <comment>Displayed prominently, perhaps as a pop-up, when it's discovered that an update is available the contains a reliability fix.</comment>
   </data>
+  <data name="RememberMeForText" xml:space="preserve">
+    <value>تذكرني ل</value>
+  </data>
   <data name="RemoveFromRecentFilesLabelText" xml:space="preserve">
     <value>إزالة من الملفات الأخيرة</value>
   </data>
@@ -24803,6 +24854,9 @@ SE-114 29 ستوكهولم
   <data name="RestoreMasterKeyText" xml:space="preserve">
     <value>استعادة ماستركي</value>
   </data>
+  <data name="RestoreNowText" xml:space="preserve">
+    <value>استعادة الآن</value>
+  </data>
   <data name="RestoreToOriginalToolTipText" xml:space="preserve">
     <value>استعادة إلى الأصلية تتطلب خطة اشتراك مدفوعة!</value>
   </data>
@@ -24867,6 +24921,155 @@ SE-114 29 ستوكهولم
   </data>
   <data name="SecretsWarningIsSoonExpired" xml:space="preserve">
     <value>ينتهي اشتراكك قريبًا في {0}. بعد ذلك ، سيتعين عليك تمديد اشتراكك لتتمكن من تحرير أو إنشاء إدخالات كلمة مرور جديدة. ستحتفظ بحق الوصول للقراءة فقط إلى أجل غير مسمى.</value>
+  </data>
+  <data name="SecureCloudFaq1" xml:space="preserve">
+    <value>لماذا يجب عليك تأمين بيانات التخزين السحابي الخاصة بك؟</value>
+  </data>
+  <data name="SecureCloudFaq1Ans" xml:space="preserve">
+    <value>بينما يمكن للبيانات التي يتم تحميلها على السحابة أن تزيد من سهولة الوصول إليها، فإنها أيضًا تزيد من خطر التعرض. عندما تقوم بتأمين بياناتك على السحابة باستخدام أداة تشفير تعتمد خوارزمية التشفير AES-256، فإنك فقط ومن تمنحهم الوصول عبر التطبيق يمكنهم الوصول إلى هذه البيانات المشفرة. تم تصميمه للمستخدمين الذين يرغبون في حماية الملفات الحساسة، وتمكين مشاركة الملفات السحابية بأمان، وتشفير المستندات عبر الإنترنت دون تعطيل سير العمل</value>
+  </data>
+  <data name="SecureCloudFaq2" xml:space="preserve">
+    <value>ما هو عدد منصات التخزين السحابية التي يدعمها أكس كريبت الأمن السحابي
+</value>
+  </data>
+  <data name="SecureCloudFaq2Ans" xml:space="preserve">
+    <value>أمان السحابة في أكس كريبت يدعم فقط كل من جوجل درايف. و ون درايف. و دروب بوكس..</value>
+  </data>
+  <data name="SecureCloudFaq3" xml:space="preserve">
+    <value>هل يمكنني مشاركة الملفات المشفرة المخزنة في السحابة بشكل آمن؟</value>
+  </data>
+  <data name="SecureCloudFaq3Ans" xml:space="preserve">
+    <value>نعم. يمكنك مشاركة الملفات المشفرة المخزنة على السحابة من خلال ميزة مفاتيح المشاركة الموجودة داخل التطبيق. باستخدام ميزة أمان السحابة، يمكنك منح الوصول وتفويض المستخدمين. تظل ملفاتك محمية من خلال أمان السحابة ولا يمكن الوصول إليها إلا من قبل المستخدمين المعتمدين أو المخولين. تأتي ميزة المزامنة السحابية هذه مع أقصى حماية للملفات وتمنحك السيطرة الكاملة والأمان على بياناتك.</value>
+  </data>
+  <data name="SecureCloudGuidebuttonHead1" xml:space="preserve">
+    <value>حماية الملفات في التخزين السحابي من خلال التطبيق.</value>
+  </data>
+  <data name="SecureCloudGuidebuttonHead2" xml:space="preserve">
+    <value>تشفير الملفات — سواء المحلية أو المخزنة في السحابة.</value>
+  </data>
+  <data name="SecureCloudGuidebuttonHead3" xml:space="preserve">
+    <value>إيقاف الحماية</value>
+  </data>
+  <data name="SecureCloudGuideCarouselText" xml:space="preserve">
+    <value>لمزامنة الملفات بشكل آمن، قم بربط حسابك في محرك جوجل أو دروببوإكس من خلال منح الإذن أثناء طلب المصادقة. بعد الموافقة، يمكن لـ أكس كريبت فتح الملفات وتشفيرها وفك تشفيرها ومشاركتها بأمان مباشرةً من التخزين السحابي دون تخزين بياناتك.</value>
+  </data>
+  <data name="SecureCloudGuidesHeadParagraph" xml:space="preserve">
+    <value>اعمل بسلاسة مع خدمات التخزين السحابي (دروببوإكس واحد يقود ومحرك جوجل) باستخدام أكس كريبت. يقوم أكس كريبت بتأمين الملفات باستخدام تشفير AES-256 قبل تحميلها إلى السحابة. تظل ملفاتك محمية سواء أثناء التخزين أو أثناء النقل.</value>
+  </data>
+  <data name="SecureCloudGuidesHeadTitle" xml:space="preserve">
+    <value>يمكنك الوصول بأمان إلى جميع بياناتك الحساسة على منصة واحدة آمنة باستخدام AxCrypt.</value>
+  </data>
+  <data name="SecureCloudGuideStepHead1" xml:space="preserve">
+    <value>قم بمصادقة حسابك السحابي</value>
+  </data>
+  <data name="SecureCloudGuideStepHead2" xml:space="preserve">
+    <value>إليك كيفية حماية الملفات في التخزين السحابي باستخدام تشفير AES ‏256-بت من أكس كريبت.</value>
+  </data>
+  <data name="SecureCloudGuideStepHead3" xml:space="preserve">
+    <value>كيفية استخدام خياري "إيقاف الحماية" و"فتح الملف المؤمَّن" في فئة تشفير التخزين السحابي.</value>
+  </data>
+  <data name="SecureCloudGuideStepHead4" xml:space="preserve">
+    <value>كيفية استخدام خيارات مشاركة المفتاح في تشفير التخزين السحابي؟</value>
+  </data>
+  <data name="SecureCloudGuideStepHead5" xml:space="preserve">
+    <value>ما هو أمان السحابة؟</value>
+  </data>
+  <data name="SecureCloudGuideStepHead6" xml:space="preserve">
+    <value>هل تعتبر أمان السحابة حلاً للتخزين السحابي بمعرفة صفرية؟</value>
+  </data>
+  <data name="SecureCloudGuideStepText1" xml:space="preserve">
+    <value>على الصفحة الرئيسية لتطبيق أكس كريبت، انقر على مزود خدمة التخزين السحابي المفضل لديك.</value>
+  </data>
+  <data name="SecureCloudGuideStepText10" xml:space="preserve">
+    <value>انقر فوق "فتح المضمون</value>
+  </data>
+  <data name="SecureCloudGuideStepText11" xml:space="preserve">
+    <value>يرجى ملاحظة: تبقى ملفاتك مشفّرة وآمنة. يتم فتحها مؤقتًا أثناء العمل عليها، ثم يُعاد تشفيرها تلقائيًا عند الخروج من التطبيق.</value>
+  </data>
+  <data name="SecureCloudGuideStepText12" xml:space="preserve">
+    <value>في نافذة اختيار الملفات المنبثقة، يمكنك أيضًا تأمين الملفات عبر قائمة النقر بزر الماوس الأيمن—ما عليك سوى تحديد الملف المطلوب والنقر على "تأمين". يرجى ملاحظة أنه يلزم إجراء تفويض سحابي لمرة واحدة.</value>
+  </data>
+  <data name="SecureCloudGuideStepText13" xml:space="preserve">
+    <value>انقر فوق "إيقاف التأمين</value>
+  </data>
+  <data name="SecureCloudGuideStepText14" xml:space="preserve">
+    <value>أصبحت ملفاتك الآن مفككة التشفير بشكل دائم.</value>
+  </data>
+  <data name="SecureCloudGuideStepText15" xml:space="preserve">
+    <value>يرجى الملاحظة: يمكنك أيضًا النقر على قائمة الإجراءات (النقاط الثلاث) في الزاوية اليمنى السفلية واختيار "إيقاف الحماية".</value>
+  </data>
+  <data name="SecureCloudGuideStepText16" xml:space="preserve">
+    <value>قم بتسجيل الدخول إلى أكس كريبت واختر من بين مزودي خدمة التخزين السحابي الثلاثة المتاحين.</value>
+  </data>
+  <data name="SecureCloudGuideStepText17" xml:space="preserve">
+    <value>حدد موقع الملف الخاص بك واختره.</value>
+  </data>
+  <data name="SecureCloudGuideStepText18" xml:space="preserve">
+    <value>انقر على "مشاركة المفاتيح القوية"</value>
+  </data>
+  <data name="SecureCloudGuideStepText19" xml:space="preserve">
+    <value>أضف عنوان البريد الإلكتروني الذي تريد مشاركة المفاتيح معه بأمان، ثم انقر على "إضافة"</value>
+  </data>
+  <data name="SecureCloudGuideStepText2" xml:space="preserve">
+    <value>ستفتح نافذة منبثقة لاختيار الملفات تعرض الملفات المخزنة على السحابة.</value>
+  </data>
+  <data name="SecureCloudGuideStepText20" xml:space="preserve">
+    <value>تعد خدمة أمان السحابة من أكس كريبت ميزة تضمن مزامنة مشفرة للملفات عبر السحابة على عدة أجهزة ومنصات تخزين سحابي مدعومة. يتيح لك ذلك تأمين ملفات التخزين السحابي باستخدام التشفير على جانب العميل، مع السماح فقط للمستخدمين المخوّلين بالوصول إليها. باستخدام ميزة أمان السحابة من أكس كريبت، يمكنك تقريبًا تشفير أي نوع من الملفات، بدءًا من الملفات، وملفات PDF، والجداول، وصولًا إلى الصور، باستخدام خوارزمية التشفير AES-256 لحمايتها.</value>
+  </data>
+  <data name="SecureCloudGuideStepText21" xml:space="preserve">
+    <value>نعم. تم تصميم خدمة أمان السحابة من أكس كريبت كحل للتخزين السحابي بمعرفة صفرية. هذا يعني أن ملفاتك مشفرة باستخدام خوارزمية التشفير AES-256، ونحن لا نحتفظ أو نصل إلى أي معلومات أو بيانات تم تحميلها على منصات التخزين السحابي. كما أن مزوّد التخزين السحابي لا يتحكم في مفاتيح التشفير الخاصة بك. هذا يضمن خصوصية أقوى للبيانات ومزامنة سحابية مشفرة من طرف إلى طرف فعليًا.</value>
+  </data>
+  <data name="SecureCloudGuideStepText22" xml:space="preserve">
+    <value>حدد الملف من خيارات التخزين السحابي المتاحة في التطبيق</value>
+  </data>
+  <data name="SecureCloudGuideStepText23" xml:space="preserve">
+    <value>على الصفحة الرئيسية للتطبيق، انقر على خدمة التخزين السحابي المفضلة لديك.</value>
+  </data>
+  <data name="SecureCloudGuideStepText24" xml:space="preserve">
+    <value>انقر على زر الإجراء "+" واختر الملف الذي تريد رفعه بأمان إلى السحابة.</value>
+  </data>
+  <data name="SecureCloudGuideStepText25" xml:space="preserve">
+    <value>انقر على "فتح"، وسيتم الآن تشفير الملف في كلا الموقعين: المحلي والسحابي.</value>
+  </data>
+  <data name="SecureCloudGuideStepText26" xml:space="preserve">
+    <value>يرجى الملاحظة: سيتم تشفير الملف محليًا وكذلك على السحابة.</value>
+  </data>
+  <data name="SecureCloudGuideStepText3" xml:space="preserve">
+    <value>اختر الملف الذي تريد حمايته.</value>
+  </data>
+  <data name="SecureCloudGuideStepText4" xml:space="preserve">
+    <value>انقر على قائمة الإجراءات (النقاط الثلاث) في الزاوية اليمنى السفلية من النافذة المنبثقة.</value>
+  </data>
+  <data name="SecureCloudGuideStepText5" xml:space="preserve">
+    <value>انقر على "تأمين"، والآن تم تشفير ملفك بامتداد ‎.axx‎</value>
+  </data>
+  <data name="SecureCloudGuideStepText6" xml:space="preserve">
+    <value>يرجى ملاحظة: يتم تشفير الملف محليًا أولاً، ثم يتم تحميله إلى السحابة.</value>
+  </data>
+  <data name="SecureCloudGuideStepText7" xml:space="preserve">
+    <value>حدد موقع الملف الذي تريد فتحه بشكل آمن.</value>
+  </data>
+  <data name="SecureCloudGuideStepText8" xml:space="preserve">
+    <value>حدد الملف ثم انقر بزر الماوس الأيمن.</value>
+  </data>
+  <data name="SecureCloudGuideStepText9" xml:space="preserve">
+    <value>أو يمكنك أيضًا النقر على قائمة الإجراءات (النقاط الثلاث) لتنفيذ هذا الإجراء.</value>
+  </data>
+  <data name="SecureCloudParagraph" xml:space="preserve">
+    <value>في هذا الدليل، ستتعلم كيفية استخدام أكس كريبت مع التخزين السحابي. لا حاجة لتثبيت أي تطبيقات لمزامنة محركات السحابة محليًا. يقوم أكس كريبت الأمن السحابي
+  بتشفير ملفاتك باستخدام AES-256 ويوفر حماية من طرف إلى طرف، مع مزامنتها إلى السحابة مع الحفاظ على أمانها أثناء النقل وأثناء الاستخدام.</value>
+  </data>
+  <data name="SecureCloudSideMenuHead1" xml:space="preserve">
+    <value>إليك كيفية حماية الملفات في التخزين السحابي.</value>
+  </data>
+  <data name="SecureCloudWhatNextText1" xml:space="preserve">
+    <value>دليل سريع لاستخدام أكس كريبت فولت — حاوية مشفّرة تلقائيًا لتخزين ملفاتك ومجلداتك الحساسة:</value>
+  </data>
+  <data name="SecureCloudWhatNextText2" xml:space="preserve">
+    <value>معلومات/أدلة/الخزنة دليل ميزة أكس كريبت قبو | تشفير وحماية الملفات</value>
+  </data>
+  <data name="SecuredCloudLinkLabel" xml:space="preserve">
+    <value>الأمن السحابي</value>
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>اكسكربت حذف الآمن</value>
@@ -25604,6 +25807,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="StartFreeTrial" xml:space="preserve">
     <value>ابدأ الإصدار التجريبي المجاني</value>
+  </data>
+  <data name="StartFreeTrialText" xml:space="preserve">
+    <value>ابدأ تجربة مجانية لمدة 14 يومًا، ثم</value>
   </data>
   <data name="StartMakingMoneyHeading" xml:space="preserve">
     <value>ابدأ في جني الأموال في &lt;span&gt;3 خطوات سهلة&lt;/span&gt;</value>
@@ -27207,8 +27413,26 @@ SE-114 29 ستوكهولم
   <data name="VaultGuideParagraph35" xml:space="preserve">
     <value>قد تظهر قائمة مخصّصة في التنقّل الجانبي للتطبيق اعتمادًا على إعدادات التخطيط لديك.</value>
   </data>
+  <data name="VaultGuideParagraph36" xml:space="preserve">
+    <value>انقر على ميزة الخزنة</value>
+  </data>
+  <data name="VaultGuideParagraph37" xml:space="preserve">
+    <value>انقر على خيار «مشاركة المفاتيح» الموجود في الزاوية العلوية اليمنى.</value>
+  </data>
+  <data name="VaultGuideParagraph38" xml:space="preserve">
+    <value>أضف مستخدمًا باستخدام عنوان بريده الإلكتروني.</value>
+  </data>
+  <data name="VaultGuideParagraph39" xml:space="preserve">
+    <value>**الآن، انقر على «تطبيق</value>
+  </data>
   <data name="VaultGuideParagraph4" xml:space="preserve">
     <value>خزنة أكس كريبت هي حاوية آمنة ومشفرة لتخزين ملفاتك ومجلداتك الحساسة. أي شيء يُضاف إلى الخزنة يُشفّر تلقائيًا، دون الحاجة لأي خطوات يدوية أو تنظيف إضافي. تعمل الخزنة مثل مجلد مشفر مخصص يمكنك وضعه في أي مكان على جهازك، مع التحكم الكامل من خلال إعدادات الخزنة.</value>
+  </data>
+  <data name="VaultGuideParagraph40" xml:space="preserve">
+    <value>ملاحظة: مشاركة المفاتيح الجماعية هي ميزة مخصّصة للأعمال.</value>
+  </data>
+  <data name="VaultGuideParagraph41" xml:space="preserve">
+    <value>اختر المجموعة من القائمة المنسدلة.</value>
   </data>
   <data name="VaultGuideParagraph5" xml:space="preserve">
     <value>أنشئ حاوية محمية ومشفرة (خزنة).</value>
@@ -27248,6 +27472,12 @@ SE-114 29 ستوكهولم
   </data>
   <data name="VaultGuideSubHeading10" xml:space="preserve">
     <value>الأهداف الرئيسية للـ قبو.</value>
+  </data>
+  <data name="VaultGuideSubHeading11" xml:space="preserve">
+    <value>مفتاح مشاركة الخزنة</value>
+  </data>
+  <data name="VaultGuideSubHeading12" xml:space="preserve">
+    <value>مفتاح مشاركة الخزنة مع مجموعة</value>
   </data>
   <data name="VaultGuideSubHeading2" xml:space="preserve">
     <value>طريقتان سهلتان لإضافة الملفات والمجلدات لتشفيرها تلقائيًا في الخزنة</value>
