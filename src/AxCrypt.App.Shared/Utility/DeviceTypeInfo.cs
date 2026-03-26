@@ -16,6 +16,8 @@ namespace AxCrypt.App.Shared.Utility
 
         Windows,
 
-        Mac
+        Mac, 
+
+        Linux
     }
 }
