@@ -56,7 +56,7 @@
 		<_AxCryptMajor>3</_AxCryptMajor>
 		<AxMinorVersion Condition=" '$(AxMinorVersion)' == '' ">0</AxMinorVersion>
 		<AxBuildNumber Condition=" '$(AxBuildNumber)' == '' ">1</AxBuildNumber>
-		<FinalAppVersion>$(_AxCryptMajor).$(AxMinorVersion).0.$(AxBuildNumber)</FinalAppVersion>
+		<FinalAppVersion>$(_AxCryptMajor).$(AxMinorVersion).$(AxBuildNumber).0</FinalAppVersion>
 		<ApplicationDisplayVersion>$(FinalAppVersion)</ApplicationDisplayVersion>
 		<ApplicationVersion>$(FinalAppVersion)</ApplicationVersion>
 		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
