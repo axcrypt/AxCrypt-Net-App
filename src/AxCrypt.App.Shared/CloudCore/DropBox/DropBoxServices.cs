@@ -139,8 +139,11 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
             return new DropboxClient(_instance.AccessToken, config);
         }
 
-        public override async Task SearchFileFolderAsync(string query, string path = "")
+        public override async Task SearchFileFolderAsync(string query, string path)
         {
+            if (path == "root")
+                path = "";
+
             try
             {
                 SearchV2Arg searchQuery = new SearchV2Arg(query: query,
@@ -148,7 +151,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
                                     path: path,
                                     maxResults: 100,
                                     fileStatus: FileStatus.Active.Instance,
-                                    filenameOnly: false));
+                                    filenameOnly: true));
 
                 SearchV2Result searchResult = await _dropboxclient.Files.SearchV2Async(searchQuery);
 

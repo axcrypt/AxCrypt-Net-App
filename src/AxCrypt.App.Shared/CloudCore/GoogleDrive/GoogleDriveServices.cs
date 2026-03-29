@@ -171,43 +171,125 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             }
         }
 
-        public override async Task SearchFileFolderAsync(string query, string path = "")
+        #region SearchFile
+        public override async Task SearchFileFolderAsync(string query, string path)
         {
+            string searchText = query.Trim();
+            if (string.IsNullOrEmpty(searchText))
+                return;
+
+            string escapedQuery = searchText.Replace("'", "\\'");
+
             try
             {
-                ListRequest request = _driveService!.Files.List();
-                request.Q = $"name contains '{query}' and trashed = false";
-                request.Fields = "files(id, name, mimeType, fileExtension, parents)";
-                request.PageSize = 100;
+                List<Google.Apis.Drive.v3.Data.File> allFiles = new();
 
-                List<Google.Apis.Drive.v3.Data.File> allFiles = new List<Google.Apis.Drive.v3.Data.File>();
-                while (true)
+                List<string> folderIds = await GetAllSubFolderIdsAsync(path);
+                folderIds.Add(path);
+
+                foreach (string folderId in folderIds)
                 {
-                    FileList searchResult = await request.ExecuteAsync();
+                    List<Google.Apis.Drive.v3.Data.File> folderFiles =
+                        await SearchFilesInFolderAsync(escapedQuery, folderId);
 
-                    if (searchResult.Files != null)
-                        allFiles.AddRange(searchResult.Files);
-
-                    if (string.IsNullOrEmpty(searchResult.NextPageToken)) break;
-
-                    request.PageToken = searchResult.NextPageToken;
+                    allFiles.AddRange(folderFiles);
                 }
 
-                _files = allFiles
-                .Select(item => new FilePickerItemViewModel()
+                _files = allFiles.Select(f => new FilePickerItemViewModel()
                 {
-                    FileID = item.Id,
-                    FileName = item.Name,
-                    IsFolder = item.MimeType == "application/vnd.google-apps.folder",
-                    FileExtension = Path.GetExtension(item.Name),
+                    FileID = f.Id,
+                    FileName = f.Name,
+                    IsFolder = f.MimeType == "application/vnd.google-apps.folder",
+                    FileExtension = string.IsNullOrEmpty(f.FileExtension)
+                            ? Path.GetExtension(f.Name ?? "")
+                            : f.FileExtension,
                     Source = FileProvider.GoogleDrive,
-                }).ToList() ?? new List<FilePickerItemViewModel>();
+                }).ToList();
             }
             catch (Exception e)
             {
                 await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, e.Message);
             }
         }
+
+        /// <summary>
+        /// Search files matching query inside a specific folder (or entire drive if folderId is null).
+        /// Excludes folders, trashed files, and hidden/app-generated files (matches Normal UI).
+        /// </summary>
+        private async Task<List<Google.Apis.Drive.v3.Data.File>> SearchFilesInFolderAsync(
+            string escapedQuery, string folderId)
+        {
+            List<Google.Apis.Drive.v3.Data.File> results = new();
+
+            string q = $"name contains '{escapedQuery}' " +
+                       $"and trashed = false " +
+                       $"and mimeType != 'application/vnd.google-apps.folder' " +
+                       $"and mimeType != 'application/vnd.google-apps.script' " +
+                       $"and mimeType != 'application/vnd.google-apps.form' " +
+                       $"and 'me' in owners " +
+                       $"and '{folderId}' in parents ";
+
+            ListRequest request = _driveService!.Files.List();
+            request.Q = q;
+            request.Fields = "nextPageToken, files(id, name, mimeType, fileExtension, parents, size, modifiedTime)";
+            request.PageSize = 100;
+            request.Spaces = "drive";
+            request.Corpora = "user";
+
+            while (true)
+            {
+                FileList searchResult = await request.ExecuteAsync();
+                if (searchResult.Files != null)
+                    results.AddRange(searchResult.Files);
+
+                if (string.IsNullOrEmpty(searchResult.NextPageToken)) break;
+                request.PageToken = searchResult.NextPageToken;
+            }
+
+            return results;
+        }
+
+        /// <summary>
+        /// Recursively fetches all subfolder IDs under a given folder.
+        /// </summary>
+        private async Task<List<string>> GetAllSubFolderIdsAsync(string folderId)
+        {
+            List<string> allSubFolderIds = new();
+            Queue<string> queue = new();
+            queue.Enqueue(folderId);
+
+            while (queue.Count > 0)
+            {
+                string currentFolderId = queue.Dequeue();
+
+                ListRequest request = _driveService!.Files.List();
+                request.Q = $"'{currentFolderId}' in parents " +
+                            $"and mimeType = 'application/vnd.google-apps.folder' " +
+                            $"and trashed = false ";
+                request.Fields = "nextPageToken, files(id, name)";
+                request.PageSize = 100;
+
+                while (true)
+                {
+                    FileList result = await request.ExecuteAsync();
+                    if (result.Files != null)
+                    {
+                        foreach (var folder in result.Files)
+                        {
+                            allSubFolderIds.Add(folder.Id);
+                            queue.Enqueue(folder.Id);
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(result.NextPageToken)) break;
+                    request.PageToken = result.NextPageToken;
+                }
+            }
+
+            return allSubFolderIds;
+        }
+
+        #endregion
 
         public override async Task ListFilesAsync(string fileId = "")
         {

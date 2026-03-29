@@ -147,44 +147,54 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
             _userDriveId = driveInfo!.Id;
         }
 
-        public override async Task SearchFileFolderAsync(string query, string path = "")
+        public override async Task SearchFileFolderAsync(string query, string path)
         {
+            string searchText = query.Trim();
+            string searchQuery = Uri.EscapeDataString(searchText);
+
+            if (string.IsNullOrEmpty(searchText)) return;
+
             try
             {
-                SearchWithQGetResponse? searchResult = await _graphClient.Drives[_userDriveId].Items["root"]
-                .SearchWithQ($"{query}*").GetAsync(config =>
+                SearchWithQGetResponse? searchResult = await _graphClient
+                .Drives[_userDriveId!].Items[path].SearchWithQ(searchQuery)
+                .GetAsSearchWithQGetResponseAsync(config =>
                 {
-                    config.QueryParameters.Select = new[] { "id", "name", "folder", "file", "parentReference" };
+                    config.QueryParameters.Select = new[]
+                    {
+                        "id", "name", "folder", "file", "parentReference"
+                    };
                     config.QueryParameters.Top = 100;
                 });
 
-                if(searchResult == null) return;
+                List<DriveItem> allItems = new();
 
-                List<DriveItem> allItems = new List<DriveItem>();
-
-                while (searchResult?.Value != null)
+                while (searchResult != null)
                 {
-                    allItems.AddRange(searchResult.Value);
-                    if (searchResult.OdataNextLink == null) break;
+                    if (searchResult.Value != null)
+                        allItems.AddRange(searchResult.Value);
 
-                    searchResult = await _graphClient.Drives[_userDriveId].Items["root"]
-                                .SearchWithQ(Uri.EscapeDataString(query)).WithUrl(searchResult.OdataNextLink)
-                                .GetAsync();
+                    if (string.IsNullOrEmpty(searchResult.OdataNextLink)) break;
+
+                    searchResult = await _graphClient.Drives[_userDriveId!].Items["root"].SearchWithQ(searchQuery)
+                        .WithUrl(searchResult.OdataNextLink!).GetAsSearchWithQGetResponseAsync();
                 }
 
-
-                _files = allItems.Select(item => new FilePickerItemViewModel
-                {
-                    FileID = item.Id!,
-                    FileName = item.Name!,
-                    IsFolder = item.Folder != null,
-                    FileExtension = Path.GetExtension(item.Name!),
-                    Source = FileProvider.OneDrive,
-                }).ToList() ?? new List<FilePickerItemViewModel>();
+                _files = allItems.Where(item => !string.IsNullOrEmpty(item.Name) &&
+                        item.Root == null && Path.GetFileNameWithoutExtension(item.Name)
+                        .Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                 ).Select(item => new FilePickerItemViewModel
+                 {
+                     FileID = item.Id!,
+                     FileName = item.Name!,
+                     IsFolder = item.Folder != null,
+                     FileExtension = Path.GetExtension(item.Name!),
+                     Source = FileProvider.OneDrive,
+                 }).ToList();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, e.Message);
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, ex.Message);
             }
         }
 

@@ -506,7 +506,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
 
         public async Task SearchAsync(string query, string path = "")
         {
-            if (String.IsNullOrEmpty(query))
+            if (!IsQueryValid(query, SelectedCloudProvider))
             {
                 return;
             }
@@ -514,8 +514,10 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             SelectedFiles.Clear();
             if (SelectedCloudProvider != FileProvider.Local)
             {
+                ShowProgressBar = true;
                 await _fileProviderService.SearchFileFolderAsync(query);
                 Files = new ObservableCollection<FilePickerItemViewModel>(_fileProviderService.Files);
+                ShowProgressBar = false;
                 return;
             }
 
@@ -524,6 +526,23 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
                     );
 
             return;
+        }
+
+        private static bool IsQueryValid(string query, FileProvider provider)
+        {
+            int minLength = provider switch
+            {
+                FileProvider.DropBox => 2,
+                _ => 1
+            };
+
+            if (string.IsNullOrWhiteSpace(query) || query.Trim().Length < minLength)
+            {
+                New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, $"{provider} requires at least {minLength} characters to search.");
+                return false;
+            }
+
+            return true;
         }
     }
 }
