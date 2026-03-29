@@ -1,9 +1,11 @@
 ﻿@using AxCrypt.App.Shared.Desktop.ViewModels.Main
+@using AxCrypt.App.Shared.Models
 @using AxCrypt.Content
 
 @inject NavigationManager navigation
 @inject IJSRuntime JSRuntime
 @inject AppSettingsViewModel AppSettingsViewModel
+@inject AppLocalizationOptions? localizationOptions
 
 <style>
     .input-group {
@@ -55,6 +57,15 @@
     <span style="padding-left: 20px;" class="font-bold">@Texts.SettingsPageTitle</span>
 
     <div class="settings-menu-item-container">
+        <NavLink @attributes="AppSettingsViewModel.NavLinkAttributes1()" id="language-selection-button-action">
+            <img class="flag-icon" src="@AppSettingsViewModel.SelectedLanguageImageUrl" alt="flag-icon" style="padding-right: 10px;" />
+            <span>App Language (@AppSettingsViewModel.SelectedLanguageDisplayName)</span>
+            <img class="next-arrow" />
+        </NavLink>
+    </div>
+
+    <div class="settings-menu-item-container">
+
         <NavLink class="nav-link center-column">
             <div>
                 <img class="stngs-menu-icon IcoEye" alt="IcoEye" />
@@ -354,6 +365,28 @@
                        @onclick="(e) => AppSettingsViewModel.OnInactivityContextMenu(timeout, e)" />
                 <label for="timeout-@timeout">@((timeout == 0) ? "Disable" : $"{timeout} minutes")</label>
                 <br />
+            }
+        </form>
+    </div>
+</div>
+
+<div class="model-popup sub-pop2" style="display:none;top:18%;" id="language-selection-side-popup">
+    <div id="language-popup">
+        <form id="language-popup-form">
+            @foreach (CultureOption culture in localizationOptions.SupportedCultures)
+            {
+                <div class="dropdown-item-container">
+                    <NavLink class="language-item font-high" @onclick="async () => await ChangeLanguageAsync(culture.Name, culture.ImageUrl, culture.DisplayName)">
+
+                        <img class="flag-icon" src="@culture.ImageUrl" alt="@culture.DisplayName" />
+                        <span>@culture.DisplayName</span>
+
+                        @if (culture.Name == AppSettingsViewModel.SelectedLanguage)
+                        {
+                            <img class="tick-icon" src="" alt="tick" />
+                        }
+                    </NavLink>
+                </div>
             }
         </form>
     </div>
@@ -727,6 +760,19 @@
         AppSettingsViewModel.SwitchDarkMode();
         string savedTheme = AppSettingsViewModel.DarkTheme ? "dark" : "light";
         await JSRuntime.InvokeVoidAsync("setTheme", savedTheme);
+    }
+
+    public async Task ChangeLanguageAsync(string cultureName, string imageUrl, string displayName)
+    {
+        AppSettingsViewModel.SelectedLanguage = cultureName;
+        AppSettingsViewModel.SelectedLanguageImageUrl = imageUrl;
+        AppSettingsViewModel.SelectedLanguageDisplayName = displayName!;
+
+        AppSettingsViewModel.SetLanguageAsync(cultureName);
+
+        await JSRuntime.InvokeVoidAsync("setHtmlLang", Core.Resolve.UserSettings.CultureName);
+
+        navigation.NavigateTo(navigation.Uri, forceLoad: true);
     }
 
     private void UpdatePageState()

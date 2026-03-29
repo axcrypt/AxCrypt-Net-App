@@ -86,7 +86,7 @@ public class TopMenuViewModel : ViewModelBase
     public async Task SetSoftwareStatus()
     {
         VersionUpdateStatus status = _mainViewModel!.VersionUpdateStatus;
-
+        ShowUpdate = true;
         switch (status)
         {
             case VersionUpdateStatus.ShortTimeSinceLastSuccessfulCheck:

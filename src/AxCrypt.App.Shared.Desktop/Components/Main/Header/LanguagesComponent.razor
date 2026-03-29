@@ -15,14 +15,6 @@
                 <img class="drp-dwn down" id="lang-action-btn-arw" style="width:7px; margin:0px;" src="" alt="dropdown-img" />
             </button>
         }
-        else
-        {
-            <button class="dropbtn font-high active" id="lang-dropdown-action-btn">
-                <img class="flag-icon" src="@ViewModel.SelectedLanguageImageUrl" alt="flag-icon" style="padding-right: 10px;" />
-                @ViewModel.SelectedLanguageDisplayName
-                <img class="drp-dwn down" id="lang-action-btn-arw" src="" alt="dropdown-img" />
-            </button>
-        }
 
         <div class="language-dropdown" style="display: none" id="lang-dropdown-popup">
             @foreach (CultureOption culture in localizationOptions.SupportedCultures)

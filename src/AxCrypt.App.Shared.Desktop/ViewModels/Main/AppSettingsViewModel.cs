@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -117,7 +118,26 @@ public class AppSettingsViewModel : ViewModelBase
     }
 
     public int InactivitySignOut { get; set; }
-    
+
+    public string? SelectedLanguage { get; set; } = "en";
+
+    public string SelectedLanguageImageUrl { get; set; } = "images/flag/FrmEng.svg";
+
+    public string SelectedLanguageDisplayName { get; set; } = Texts.EnglishLanguageToolStripMenuItemText;
+
+    public void SetLanguageAsync(string cultureName)
+    {
+        Resolve.UserSettings.CultureName = cultureName;
+        SetCulture();
+    }
+
+    private void SetCulture()
+    {
+        CultureInfo cultureInfo = new CultureInfo(Resolve.UserSettings.CultureName);
+        Thread.CurrentThread.CurrentUICulture = cultureInfo;
+        Content.Resource.Culture = cultureInfo;
+    }
+
     public bool DarkTheme { get; set; }
 
     public void ToggleHideRecentFiles() => SetRecentFilesHiddenState(!New<UserSettings>().HideRecentFiles);

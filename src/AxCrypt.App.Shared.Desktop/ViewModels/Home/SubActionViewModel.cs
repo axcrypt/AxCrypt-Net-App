@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.CloudCore.CloudFileProviderUtility;
 using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser;
+using AxCrypt.App.Shared.Desktop.ViewModels.Main;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
@@ -217,11 +218,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
 
             if (string.IsNullOrEmpty(vaultfolder))
             {
-                await New<IPopup>().ShowAsync(
-                    PopupButtons.Ok,
-                    Texts.WarningTitle,
-                    Texts.ConfigureVault
-                );
+                AppSettingsViewModel appSettingsViewModel = AxCServiceProvider.GetService<AppSettingsViewModel>();
+                appSettingsViewModel.ToggleVaultSettings();
                 return false;
             }
 

@@ -164,14 +164,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
         //Handle show/hide the language dropdown popup
         var langSelArrow = document.getElementById("lang-action-btn-arw");
-        if (targetobj.id === "lang-dropdown-action-btn" || targetobj.parentElement.id === "lang-dropdown-action-btn") {
-            ShowHidePopup("lang-dropdown-popup");
-            langSelArrow.classList.toggle("down");
-        }
-        else {
-            HidePopup("lang-dropdown-popup");
-            if (langSelArrow !== undefined) {
-                langSelArrow.classList.add("down");
+        if (langSelArrow) {
+            if (targetobj.id === "lang-dropdown-action-btn" || targetobj.parentElement.id === "lang-dropdown-action-btn") {
+                ShowHidePopup("lang-dropdown-popup");
+                langSelArrow.classList.toggle("down");
+            }
+            else {
+                HidePopup("lang-dropdown-popup");
+                if (langSelArrow !== undefined) {
+                    langSelArrow.classList.add("down");
+                }
             }
         }
 
@@ -218,6 +220,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         else {
             if (!IgnoreClosePopupOnPopupActions("inactivity-signout-side-popup", targetobj)) {
                 HidePopup("inactivity-signout-side-popup");
+            }
+        }
+
+
+        if (targetobj.id === "language-selection-button-action" || targetobj.parentElement.id === "language-selection-button-action") {
+            ShowHidePopup("language-selection-side-popup");
+        }
+        else {
+            if (!IgnoreClosePopupOnPopupActions("language-selection-side-popup", targetobj)) {
+                HidePopup("language-selection-side-popup");
             }
         }
 

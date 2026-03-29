@@ -16,19 +16,22 @@
 
 <div class="top-menu">
     <AxCrypt.App.Shared.Desktop.Components.Main.Header.LanguagesComponent />
-    <NavLink class="app-top-menu" @onclick="ShowHelpOverlay">
+    <NavLink class="app-top-menu" @onclick="ShowHelpOverlay" title="Show get-started tips">
         <img class="idea-icon padding" src="/images/IcoIdea.svg" alt="Idea-icon" />
     </NavLink>
-    <NavLink id="settings-dropdown-click-action" class="app-top-menu">
+    <NavLink id="settings-dropdown-click-action" class="app-top-menu" title="App settings">
         <img id="help-settings" class="sttng-icon padding" src="/images/default/IcoExtrFtr.svg" alt="settings-icon" />
     </NavLink>
-    <NavLink id="notification-dropdown-click-action" class="app-top-menu">
+    <NavLink id="notification-dropdown-click-action" class="app-top-menu" title="Recent notification(s)">
         <span class="notification-badge">
             @NotificationCount
         </span>
         <img class="notif-icon padding" src="/images/default/IcoNtfctns.svg" alt="notify-icon" />
     </NavLink>
-    <NavLink class="update-btn" @onclick="ViewModel.CheckAxCryptVersionAsync" title="@ViewModel.VersionHoverText">@Texts.UpdateText</NavLink>
+    @{
+        string UpdateAvailableStyle = ViewModel.ShowUpdate ? "update-btn" : "update-btn no-upd-avilbl";
+    }
+    <NavLink class="@UpdateAvailableStyle" @onclick="ViewModel.CheckAxCryptVersionAsync" title="@ViewModel.VersionHoverText">@Texts.UpdateText</NavLink>
     <NavLink class="mb-prfle" id="accounts-dropdown-click-action">
         <img id="help-profile" style="max-width:30px;width:30px;height:30px !important;" src="@SubscriptionIcon()" alt="subs-level icon" />
     </NavLink>

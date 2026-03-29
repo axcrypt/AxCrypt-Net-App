@@ -20,14 +20,11 @@ html[lang="de"],
 html[lang="nl"],
 html[lang="it"],
 html[lang="tr"],
+html[lang="es"],
 html[lang="pt"] {
-    .top-menu-section {
-        margin: 20px 40px 10px 20px !important;
-    }
-
     .act-box {
         min-width: 100px !important;
-        min-height: 85px !important;
+        min-height: 90px !important;
         padding: 12px 10px !important;
 
         .opnscrd-act, .stpscr-act {
@@ -42,10 +39,6 @@ html[lang="pt"] {
             min-width: 30px !important;
             height: 35px;
         }
-    }
-
-    .top-page-title-container {
-        top: 70px !important;
     }
 
     .body-content-section {
@@ -67,6 +60,10 @@ html[lang="pt"] {
         width: auto !important;
         height: auto !important;
     }
+}
+
+.parent-container {
+    margin-top: 15px !important;
 }
 
 @container home-layout (max-width: 794px) {
@@ -124,5 +121,11 @@ html[lang="pt"] {
 html[lang="it"] {
     .home-index h3 {
         font-size: 14px;
+    }
+}
+
+html[lang="tr"] {
+    .page-title {
+        font-size: 24px !important;
     }
 }

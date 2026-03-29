@@ -31,8 +31,14 @@
     font-weight: 700;
 }
 
+    .update-btn.no-upd-avilbl {
+        border: 1px solid var(--col-mbr-dsbl, #A4A4A4) !important;
+        color: var(--col-mbr-dsbl, #A4A4A4) !important;
+        filter: grayscale(1);
+    }
+
     .update-btn:hover {
-        color: #E0922F;
+        color: var(--col-mbr-dsbl, #A4A4A4);
     }
 
 
@@ -283,6 +289,12 @@ input[type="radio"] {
     display: flex;
     gap: 1.5%;
     justify-content: space-between;
+
+    .more-actions-section {
+        display: flex;
+        gap: 2%;
+        margin-top: 35px;
+    }
 }
 
 .act-box {
@@ -290,8 +302,11 @@ input[type="radio"] {
     margin-right: 15px;
     margin-top: 20px;
     padding: 15px 5px;
-    width: 80px;
-    height: 80px;
+    width: 85px;
+    height: 85px;
+    /*min-width: 100px !important;
+    min-height: 90px !important;
+    padding: 15px 5px !important;*/
     border-radius: 4px;
     background-color: $ActnBgClr;
     color: $WhtTxtClr;
@@ -375,6 +390,7 @@ input[type="radio"] {
 
 .fnt-sze {
     font-size: 16px;
+    min-width: 155px;
 }
 
 .ico-eye {
@@ -393,7 +409,7 @@ input[type="radio"] {
 .sub-box {
     margin-top: 10px;
     width: 158px;
-    height: 100px;
+    height: 110px;
     border-radius: 8px;
     color: #FFFFFF;
     text-align: center;
@@ -429,10 +445,10 @@ input[type="radio"] {
 }
 
 .assets-box {
-    width: 60px;
+    width: 70px;
     height: 50px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     border-radius: 4px;
     margin: 10px 10px 10px 0;
@@ -464,6 +480,7 @@ input[type="radio"] {
 
 .vlt-action-btn {
     min-width: 63px;
+    width: 63px;
     min-height: 60px;
     background-color: $ActnBgClr;
     margin-top: 15px;
@@ -484,14 +501,13 @@ input[type="radio"] {
 }
 
 .mre-actn-box {
-    height: 40px;
+    height: 50px;
+    width: 230px;
     border-radius: 4px;
     margin: 1.5% 0;
     border: 1px solid $BorderClr;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 0px;
+    align-content: center;
+    padding: 5px 5px 5px 10px;
     cursor: pointer;
     line-height: 12px;
     background-color: #fff;
@@ -500,6 +516,14 @@ input[type="radio"] {
     .mre-actn-box:hover {
         background-color: $TbleBg;
     }
+
+.sub-action-next-arrow {
+    content: $IcoDrpDwn;
+    float: right;
+    height: 14px;
+    margin: 14px 10px;
+    transform: rotate(90deg);
+}
 
 .fle-exton-img {
     img {
@@ -569,25 +593,22 @@ input[type="radio"] {
 
 .ico-eye-sml {
     content: $IcoEye;
-    padding: 5px;
-    width: 28px;
+    min-width: 20px;
 }
 
 .ico-dlt {
     content: $IcoDlt;
-    padding: 5px;
-    width: 22px;
+    min-width: 16px;
 }
 
 .ico-apikey {
     content: $IcoAPIKey;
-    padding: 5px;
-    width: 28px;
+    min-width: 22px;
 }
 
 .ico-offln {
     content: $IcoOffln;
-    padding: 5px;
+    min-width: 22px;
 }
 
 .ico-invtfrd {
@@ -667,10 +688,10 @@ input[type="radio"] {
 }
 
 .learn-btn {
-    width: 72px !important;
+    width: 85px !important;
     border: 1px solid $BorderClr;
     font-weight: 700;
-    font-size: 8px;
+    font-size: 10px;
 }
 
 /*home suggestion section*/
@@ -1164,7 +1185,7 @@ input[type="radio"] {
 
     .act-box {
         width: 80px;
-        height: 80px;
+        height: 90px;
         text-align: center;
         padding: 15px;
         margin-right: 10px;
@@ -1380,34 +1401,15 @@ input[type="radio"] {
     }
 
     .act-box {
-        width: 75px;
-        height: 75px;
+        width: 85px;
+        height: 90px;
         padding: 10px 5px;
     }
 
     .mre-actn-box {
-        min-width: 100px;
-        height: 75px;
-        flex-direction: column;
-        text-align: center;
-
         .text-style {
             padding: 0px 10px 10px 10px !important;
         }
-    }
-
-    .ico-eye-sml {
-        width: 35px;
-    }
-
-    .ico-dlt {
-        width: 27px;
-        padding: 10px 5px 5px 5px;
-    }
-
-    .ico-apikey {
-        width: 35px;
-        padding: 10px 5px 5px 5px;
     }
 
     #mySection {
@@ -1477,3 +1479,26 @@ input[type="radio"] {
     justify-content: center;
     align-items: center;
 }
+
+.dropdown-content .text-style {
+    padding-left: 5px;
+}
+
+/* Firefox */
+* {
+    scrollbar-color: $TxtClr #f1f1f1; //thumb color + track color
+}
+
+/* Chrome, Edge, MAUI WebView */
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $TxtClr;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: $TxtClr;
+    }

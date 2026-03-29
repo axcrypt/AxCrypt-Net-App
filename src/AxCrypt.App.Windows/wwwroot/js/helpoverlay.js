@@ -164,24 +164,24 @@ function startTopMenuHelp() {
     updateZIndexForSlide(helpSlideIndex);
 
     const items = [
-        { id: "help-language", text: "Select your preferred <b>Language</b>." },
+        //{ id: "help-language", text: "Select your preferred <b>Language</b>." },
         { id: "help-settings", text: "Use <b>Settings</b> to configure options like inactivity sign-out, restoring original file names, offline mode, and advanced encryption.", width: 150 },
         { id: "help-profile", text: "Use <b>Account</b> to access and manage your account, subscription, keys, and sign out." }
     ];
-    buildSlide(items, startMoreActionHelp);
-}
-
-function startMoreActionHelp() {
-    helpSlideIndex = 3;
-    updateZIndexForSlide(helpSlideIndex);
-
-    const items = [
-        { id: "help-anymous-rename", text: "Click <b>Anonymous Rename</b> to hide the real name of an encrypted file by renaming it with a random name.", width: 132 },
-        { id: "help-secure-dlt", text: "Click <b>Secure Delete</b> to safely remove your files.", width: 129 },
-        { id: "help-upgrade-files", text: "Click <b>Upgrade Files</b> to choose a folder of AES-128 encrypted files and upgrade their encryption to AES-256.", width: 200 }
-    ];
     buildSlide(items, showRecentFilesHelp);
 }
+
+//function startMoreActionHelp() {
+//    helpSlideIndex = 3;
+//    updateZIndexForSlide(helpSlideIndex);
+
+//    const items = [
+//        { id: "help-anymous-rename", text: "Click <b>Anonymous Rename</b> to hide the real name of an encrypted file by renaming it with a random name.", width: 132 },
+//        { id: "help-secure-dlt", text: "Click <b>Secure Delete</b> to safely remove your files.", width: 129 },
+//        { id: "help-upgrade-files", text: "Click <b>Upgrade Files</b> to choose a folder of AES-128 encrypted files and upgrade their encryption to AES-256.", width: 200 }
+//    ];
+//    buildSlide(items, showRecentFilesHelp);
+//}
 
 function showRecentFilesHelp() {
     if (!document.getElementById("help-recent-file")) {

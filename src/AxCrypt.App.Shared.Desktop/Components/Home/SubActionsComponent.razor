@@ -4,10 +4,13 @@
 @using AxCrypt.App.Shared.Services
 @using AxCrypt.Core.UI
 @using AxCrypt.Content
+@using AxCrypt.App.Shared.Desktop.ViewModels.Main;
+@using AxCrypt.Core.UI.ViewModel
 
 @inject SubActionViewModel? subActionModel
 @inject NavigationManager Navigation
 @inject FileDropService FileDropService
+@inject AppSettingsViewModel AppSettingsViewModel
 
 <div class="mre-act-sec">
     @if (subActionModel!.EnableVault)
@@ -16,12 +19,13 @@
             <h3 class="fle-nme fnt-sze">@Texts.VaultText</h3>
             <div title="@Texts.VaultText">
                 <div @onclick="ValidateVaultNavigation"
-                        class="vlt-action-btn">
+                     class="vlt-action-btn">
                     <img class="vlt-icon" alt="Vault" />
                 </div>
             </div>
         </div>
     }
+
     @if (subActionModel!.EnableCloudServices)
     {
         <div id="help-cloud-services" style="display:block;">
@@ -33,7 +37,7 @@
                         <button @onclick="() => subActionModel.FileProviderViewModel.SubActionSelectProvider(provider)"
                                 class="assets-box"
                                 style="background-color:@(_ENABLEDTOOLSTRIPBACKCOLOR)">
-                            <img class="@provider.Image" style="width:50px;height:50px;" src="" alt="@provider.Name" title="@provider.Name" />
+                            <img class="@provider.Image" src="" alt="@provider.Name" title="@provider.Name" />
                         </button>
                     </div>
                 }
@@ -42,57 +46,66 @@
             </div>
         </div>
     }
+
     <div class="medium-7" style="display:block;">
-        <h3 class="fle-nme fnt-sze">@Texts.MoreActionsText</h3>
-        <div style="display: flex; gap: 2%;">
-            @if (subActionModel.EnableRandomRename)
-            {
-                <div id="help-anymous-rename" class="mre-actn-box" @onclick="(e)=> subActionModel.RandomRenameAsync(e)" title="@Texts.AnonymousRenameToolTip">
-                    <img class="ico-eye-sml" src="" alt="hand-img" />
-                    <span class="text-size text-style">@Texts.AnonymousRenameMenuText</span>
+        <div class="more-actions-section">
+            <div class="dropdown">
+                <div class="mre-actn-box" style="text-align:center;">
+                    <h3 class="fle-nme fnt-sze" style="margin: 10px 0;display: inline-block;">@Texts.MoreActionsText</h3>
+                    <img class="sub-action-next-arrow">
                 </div>
-            }
-            else
-            {
-                <div class="mre-actn-box atn-bgclr" @onclick="subActionModel.AlwaysOfflineForFreeUser" title="@Texts.AlwaysOfflineToolTip">
-                    <img class="ico-offln" src="" alt="hand-img" />
-                    <span class="text-size text-style">@subActionModel.SetInternetStateText()</span>
-                </div>
-            }
+                <div class="dropdown-content" style="z-index: 100;">
+                    @if (subActionModel.EnableRandomRename)
+                    {
+                        <div id="help-anymous-rename" class="mre-actn-box" @onclick="(e) => subActionModel.RandomRenameAsync(e)" title="@Texts.AnonymousRenameToolTip">
+                            <img class="ico-eye-sml" src="" alt="hand-img" />
+                            <span class="text-size text-style">@Texts.AnonymousRenameMenuText</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="mre-actn-box atn-bgclr" @onclick="subActionModel.AlwaysOfflineForFreeUser" title="@Texts.AlwaysOfflineToolTip">
+                            <img class="ico-offln" src="" alt="hand-img" />
+                            <span class="text-size text-style">@subActionModel.SetInternetStateText()</span>
+                        </div>
+                    }
 
-            @if (subActionModel.EnableSecureWipeFiles)
-            {
-                <div id="help-secure-dlt" class="mre-actn-box" @onclick="(e)=> subActionModel.SecureWipeFiles(e)" title="@Texts.FeaturesFileWipeDescription">
-                    <img class="ico-dlt" src="" alt="secured-delete-img" />
-                    <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
-                </div>
+                    @if (subActionModel.EnableSecureWipeFiles)
+                    {
+                        <div id="help-secure-dlt" class="mre-actn-box" @onclick="(e) => subActionModel.SecureWipeFiles(e)" title="@Texts.FeaturesFileWipeDescription">
+                            <img class="ico-dlt" src="" alt="secured-delete-img" />
+                            <span class="text-size text-style">@Texts.SecureDeleteToolStripMenuItemText</span>
+                        </div>
 
-                <AxCrypt.App.Shared.Desktop.Components.PopupDialog.ConfirmWipeDialog />
-            }
-            else
-            {
-                <div id="help-secure-dlt" class="mre-actn-box atn-bgclr paid-plan-required" style="background-color: #D9D9D9 !important;" @onclick="() => subActionModel.UpgradeDialog()">
-                    <img class="ico-dlt" src="" alt="secured-delete-img" style="filter: brightness(2);" />
-                    <span class="text-size text-style" style="color: white !important;">@Texts.SecureDeleteToolStripMenuItemText</span>
-                    <img class="nav-subs-upg" src="" alt="paid_required_img" style="padding-right:0px !important;" />
-                </div>
-            }
+                        <AxCrypt.App.Shared.Desktop.Components.PopupDialog.ConfirmWipeDialog />
+                    }
+                    else
+                    {
+                        <div id="help-secure-dlt" class="mre-actn-box atn-bgclr paid-plan-required" style="background-color: #D9D9D9 !important;" @onclick="() => subActionModel.UpgradeDialog()">
+                            <img class="ico-dlt" src="" alt="secured-delete-img" style="filter: brightness(2);" />
+                            <span class="text-size text-style" style="color: white !important;">@Texts.SecureDeleteToolStripMenuItemText</span>
+                            <img class="nav-subs-upg" src="" alt="paid_required_img" style="padding-right:0px !important;" />
+                        </div>
+                    }
 
-            @if (subActionModel.EnableEncryptionUpgrade)
-            {
-                <div id="help-upgrade-files" class="mre-actn-box" @onclick="(e)=> subActionModel.EncryptionUpgrade(e)" title="@Texts.UpgradeLegacyFilesMenuToolTip">
-                    <img class="ico-apikey" src="" alt="upgrade-enc-img" />
-                    <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
+                    @if (subActionModel.EnableEncryptionUpgrade)
+                    {
+                        <div id="help-upgrade-files" class="mre-actn-box" @onclick="(e) => subActionModel.EncryptionUpgrade(e)" title="@Texts.UpgradeLegacyFilesMenuToolTip">
+                            <img class="ico-apikey" src="" alt="upgrade-enc-img" />
+                            <span class="text-size text-style">@Texts.UpgradeLegacyFilesMenuItemText</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="help-upgrade-files" class="mre-actn-box atn-bgclr paid-plan-required" style="background-color: #D9D9D9 !important;" @onclick="() => subActionModel.UpgradeDialog()">
+                            <img class="ico-apikey" src="" alt="upgrade-enc-img" style="filter: brightness(2);" />
+                            <span class="text-size text-style" style="color: white !important;">@Texts.UpgradeLegacyFilesMenuItemText</span>
+                            <img class="nav-subs-upg" src="" alt="paid_required_img" style="padding-right:0px !important;" />
+                        </div>
+                    }
                 </div>
-            }
-            else
-            {
-                <div id="help-upgrade-files" class="mre-actn-box atn-bgclr paid-plan-required" style="background-color: #D9D9D9 !important;" @onclick="() => subActionModel.UpgradeDialog()">
-                    <img class="ico-apikey" src="" alt="upgrade-enc-img" style="filter: brightness(2);" />
-                    <span class="text-size text-style" style="color: white !important;">@Texts.UpgradeLegacyFilesMenuItemText</span>
-                    <img class="nav-subs-upg" src="" alt="paid_required_img" style="padding-right:0px !important;" />
-                </div>
-            }
+            </div>
+
             @* <div class="mre-actn-box fade-clr" style="border:dotted;">
             <span class="text-size text-style">Add action to the Home</span>
             </div> *@
@@ -127,5 +140,20 @@
             FileDropService.CurrentPage = "/vault";
             Navigation.NavigateTo("/vault");
         }
+    }
+
+    public string hoveredElement { get; set; } = string.Empty;
+    public bool isHovered { get; set; }
+
+    public void ShowPopup(string element)
+    {
+        isHovered = true;
+        hoveredElement = element;
+    }
+
+    private void HidePopup()
+    {
+        isHovered = false;
+        hoveredElement = string.Empty;
     }
 }
