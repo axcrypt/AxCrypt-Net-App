@@ -55,7 +55,7 @@ $loginImgBgnd: #494949;
     border: $colBordBgrnd !important;
 }
 
-.btn-hide {
+.btn-hide, .alert-box {
     background-color: $TbleBg !important;
     border: $BorderClr !important;
     color: $colDefTxt !important;
@@ -80,11 +80,11 @@ $loginImgBgnd: #494949;
     color: $colTxtlble !important;
 }
 
-    .password-create-dropdown-content a:hover,
-    .password-create-dropdown-content a.active {
-        color: $colTxtLink !important;
-        background-color: $colHeDBgrnd !important;
-    }
+.password-create-dropdown-content a:hover,
+.password-create-dropdown-content a.active {
+    color: $colTxtLink !important;
+    background-color: $colHeDBgrnd !important;
+}
 
 #messenger-keyword {
     background-color: $colBordBgrnd !important;
@@ -136,10 +136,14 @@ $loginImgBgnd: #494949;
     color: $colDefTxt !important;
 }
 
+bold.text-style {
+    color: #121212 !important;
+}
+
 button {
     background-color: $colDefBgrnd;
     color: $colDefTxt;
-    border: solid 1px;
+    //border: solid 1px;            help overlay
 }
 
 .mre-actn-box {
@@ -147,16 +151,20 @@ button {
     border: $BorderClr !important;
 }
 
-    .mre-actn-box:hover {
-        background-color: $SdebrbgndClr !important;
-        color: $colTxtlble !important;
-    }
+.mre-actn-box:hover {
+    background-color: $SdebrbgndClr !important;
+    color: $colTxtlble !important;
+}
 
 .rcnt-fld-bx {
     background-color: $colActnBgrnd;
-    border: $BorderClr;
+    border: $BorderClr !important;
     box-shadow: none !important;
     color: $colTxtlble !important;
+}
+
+.add-fldr {
+    border-style: dotted !important;
 }
 
 .modalDialog > div {
@@ -174,11 +182,11 @@ button {
         background: $colPageBgrnd !important;
     }
 
-        tbody tr:hover,
-        tbody tr.active,
-        .selected td {
-            background: $SdebrbgndClr !important;
-        }
+    tbody tr:hover,
+    tbody tr.active,
+    .selected td {
+        background: $SdebrbgndClr !important;
+    }
 }
 
 textarea, input[type=text], input[type=password], textarea[readonly], textarea {
@@ -186,9 +194,9 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     color: $colTxtBd !important;
 }
 
-    input[readonly="readonly"], textarea[readonly] {
-        border: $colDrkMdL3 !important;
-    }
+input[readonly="readonly"], textarea[readonly] {
+    border: $colDrkMdL3 !important;
+}
 
 .clean-up textarea {
     color: $colTxtBd !important;
@@ -225,28 +233,27 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     filter: brightness(0) saturate(90%) invert(50%);
 }
 
-
-.fldr-img {
+.fldr-img, .arrow-img, .faq-img, .idea-img, .page-title::before {
     filter: brightness(0) saturate(90%) invert(50%);
 }
 
 .filter-text {
-    color: $colTxtlble;
+    color: $colTxtlble !important;
 }
 
-    .filter-text:hover {
-        color: $TbleBg;
-    }
+.filter-text:hover {
+    color: $TbleBg;
+}
 
 .inbox-section table {
     background: $colBordBgrnd;
 }
 
-    .inbox-section table:hover {
-        background: $colTxtlble;
-    }
+.inbox-section table:hover {
+    background: $colTxtlble;
+}
 
-.email-txt-ovflw {
+.email-txt-ovflw, .deflt-txt-clr {
     color: $colTxtBd;
 }
 
@@ -269,21 +276,21 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     color: $colTxtlble;
 }
 
-    .secured-messenger option:hover {
-        color: $colBord;
-    }
-
-.multi-actn-btn {
-    background-color: $colDrkMdL3;
-    color: $colTxtlble;
-    border: $colTxtlble;
+.secured-messenger option:hover {
+    color: $colBord;
 }
 
-    .multi-actn-btn:hover {
-        background-color: $colDrkMdL3;
-    }
+.multi-actn-btn {
+    background-color: $colDrkMdL3 !important;
+    color: $colTxtlble !important;
+    border: $colTxtlble !important;
+}
 
-.button.border {
+.multi-actn-btn:hover {
+    background-color: $colDrkMdL3;
+}
+
+.button.border, .model-popup {
     border: 1px solid $SdebrbgndClr !important;
 }
 
@@ -304,43 +311,52 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     filter: invert(1) !important;
 }
 
+.manage-acc-sec a:hover {
+    background: $colDrkMdBushd;
+}
+
 .notification-popup {
-    border: 1px solid $SdebrbgndClr;
+    border: 1px solid $SdebrbgndClr !important;
 
     > .table {
         border-collapse: collapse;
     }
 
     tr {
-        border: 1px solid $colDrkMdL3; /* Row border color */
+        border: 1px solid $colDrkMdL3 !important; /* Row border color */
     }
 }
 
 .password-filter-dropdown-content {
-    background: $SdebrbgndClr;
+    background: $SdebrbgndClr !important;
 
     label {
         color: $colTxtlble !important;
     }
 
-        label:hover {
-            color: $colBord !important;
-        }
+    label:hover {
+        color: $colBord !important;
+    }
 }
 
-    .password-filter-dropdown-content ul, .password-filter-dropdown-content li {
-        border-bottom: none;
-    }
+.password-filter-dropdown-content ul, .password-filter-dropdown-content li {
+    border-bottom: none;
+}
 
 
 .text-fnt-size {
-    color: $colDrkMdL3;
+    color: $colDrkMdL3 !important;
 }
 
 .grey-clr {
-    //color: $colDrkMdL3;
+    color: $colTxtlble !important;
     font-weight: 700;
 }
+
+.second .grey-clr {
+    color: #575757 !important;
+}
+
 
 .home-index .fle-nme {
     color: $colTxtBd;
@@ -367,7 +383,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     color: $colTxtBd;
 }
 
-.selected-file, .share-list {
+.selected-file, .share-list, .blck-bg {
     background-color: $TbleBg !important;
 }
 
@@ -379,12 +395,12 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     filter: grayscale(1) brightness(10);
 }
 
-.file-keySh-icon {
-    filter: invert(1) !important;
+.eye-icon {
+    filter: grayscale(1) brightness(15);
 }
 
-.fle-exton-img img {
-    filter: grayscale(1);
+.file-keySh-icon {
+    filter: invert(1) !important;
 }
 
 .actv-subs {
@@ -398,24 +414,24 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 }
 
 .button.border {
-    background-color: $SdebrbgndClr;
-    color: $colTxtBd;
+    background-color: $TbleBg !important;
+    color: $colTxtBd !important;
 }
 
-    .button.border:hover {
-        background-color: $TbleBg;
-    }
+.button.border:hover {
+    background-color: $TbleBg;
+}
 
 .dropbtn.active {
     color: $colTxtBd !important;
     border: 1px solid $colTxtBd !important; //language drop down
 }
 
-.drp-dwn {
+.drp-dwn, .arw-img, .passwords-icon, .notes-icon, .secret-icon, .notifiarrow {
     filter: brightness(0) invert(1); //language drop down image
 }
 
-.language-dropdown {
+.language-dropdown, .form-control {
     border: $colTxtlble;
 }
 
@@ -444,7 +460,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 }
 
 .dropdown-content {
-    background-color: $colBordBgrnd;
+    background-color: $colBordBgrnd !important;
 
     :hover {
         background-color: $TbleBg !important;
@@ -452,7 +468,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     }
 }
 
-.back-arrow {
+.back-arrow, .Icon-folder, .icon-next-arrow, .filter-trigger, .filter-image, .deletebin {
     filter: invert(50%) !important;
 }
 
@@ -463,7 +479,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 .dropdown-content dd:hover,
 .password-filter-dropdown-content dd:hover,
 .password-create-dropdown-content dd:hover {
-    background-color: $colDrkMdL3;
+    background-color: $colDrkMdL3 !important;
     color: $colDrkMdHglhtPrm;
 }
 
@@ -528,7 +544,7 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
     filter: brightness(0) invert(1);
 }
 
-.notifipopup-show {
+.notifipopup-show, .grn-clr {
     color: $colTxtlble !important;
 }
 
@@ -539,6 +555,47 @@ textarea, input[type=text], input[type=password], textarea[readonly], textarea {
 .top-menu a.active .sttng-icon,
 .top-menu a.active .notif-icon {
     filter: brightness(0) invert(1) !important;
+}
+
+.custom-password-help-hoverpopup {
+    background-color: $SdebrbgndClr !important;
+
+    .txt-clr {
+        color: $colTxtlble !important;
+    }
+}
+
+.popup-small h2,
+.popup-large h2 {
+    color: #fff !important;
+}
+
+.grn-bg {
+    border: 1px #48772c !important;
+}
+
+.btn-large.font-medium.button {
+    background-color: #575757 !important;
+    border: none;
+    color: #fff !important;
+}
+
+.notification-badge {
+    color: #232323;
+    background: #ffffff;
+    z-index: (1);
+}
+
+/*.settings-menu-item-container .stngs-menu-icon.IcoEye :hover {
+    filter: grayscale(1) brightness(20) !important;
+}*/
+
+#inactivityForm :hover {
+    color: $colDrkMdHglhtPrm !important;
+}
+
+#inactivity input[type=radio]:checked + label {
+    color: $colDrkMdHglhtPrm !important;
 }
 
 .stngs-menu-icon.IcoEye,

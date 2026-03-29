@@ -180,7 +180,7 @@ input:focus + .slider {
 
 .button.border {
   background-color: #FFF;
-  border: 1px solid #48772C !important;
+  border: 1px solid #48772C;
   color: #48772C;
 }
 
@@ -7105,16 +7105,18 @@ button {
   border-radius: 10px;
 }
 
+html[lang=ru] .top-menu-section,
+html[lang=fr] .top-menu-section,
+html[lang=de] .top-menu-section,
+html[lang=nl] .top-menu-section,
+html[lang=it] .top-menu-section {
+  margin: 60px 40px 10px 20px !important;
+}
 html[lang=ru] .home-index,
 html[lang=fr] .home-index,
 html[lang=de] .home-index,
 html[lang=nl] .home-index,
-html[lang=it] .home-index,
-html[lang=tr] .home-index,
-html[lang=sv] .home-index,
-html[lang=es] .home-index,
-html[lang=pt] .home-index,
-html[lang=pl] .home-index {
+html[lang=it] .home-index {
   container-type: inline-size;
   container-name: home-layout;
 }
@@ -7220,43 +7222,121 @@ html[lang=pt] .password-create-dropdown-content {
   width: auto !important;
   height: auto !important;
 }
-
-.parent-container {
+html[lang=ru] .tabcontent, html[lang=ru] .filter-tab-wrapper, html[lang=ru] .action-tabs, html[lang=ru] .parent-container, html[lang=ru] .sub-head-clr, html[lang=ru] .notification-table,
+html[lang=fr] .tabcontent,
+html[lang=fr] .filter-tab-wrapper,
+html[lang=fr] .action-tabs,
+html[lang=fr] .parent-container,
+html[lang=fr] .sub-head-clr,
+html[lang=fr] .notification-table,
+html[lang=de] .tabcontent,
+html[lang=de] .filter-tab-wrapper,
+html[lang=de] .action-tabs,
+html[lang=de] .parent-container,
+html[lang=de] .sub-head-clr,
+html[lang=de] .notification-table,
+html[lang=nl] .tabcontent,
+html[lang=nl] .filter-tab-wrapper,
+html[lang=nl] .action-tabs,
+html[lang=nl] .parent-container,
+html[lang=nl] .sub-head-clr,
+html[lang=nl] .notification-table,
+html[lang=it] .tabcontent,
+html[lang=it] .filter-tab-wrapper,
+html[lang=it] .action-tabs,
+html[lang=it] .parent-container,
+html[lang=it] .sub-head-clr,
+html[lang=it] .notification-table,
+html[lang=tr] .tabcontent,
+html[lang=tr] .filter-tab-wrapper,
+html[lang=tr] .action-tabs,
+html[lang=tr] .parent-container,
+html[lang=tr] .sub-head-clr,
+html[lang=tr] .notification-table,
+html[lang=es] .tabcontent,
+html[lang=es] .filter-tab-wrapper,
+html[lang=es] .action-tabs,
+html[lang=es] .parent-container,
+html[lang=es] .sub-head-clr,
+html[lang=es] .notification-table,
+html[lang=pt] .tabcontent,
+html[lang=pt] .filter-tab-wrapper,
+html[lang=pt] .action-tabs,
+html[lang=pt] .parent-container,
+html[lang=pt] .sub-head-clr,
+html[lang=pt] .notification-table {
   margin-top: 15px !important;
 }
-
+html[lang=ru] .parent-container,
+html[lang=fr] .parent-container,
+html[lang=de] .parent-container,
+html[lang=nl] .parent-container,
+html[lang=it] .parent-container,
+html[lang=tr] .parent-container,
+html[lang=es] .parent-container,
+html[lang=pt] .parent-container {
+  margin-top: 15px !important;
+}
 @container home-layout (max-width: 794px) {
-  .buy-someone-upg-bus-section {
+  html[lang=ru] .buy-someone-upg-bus-section,
+  html[lang=fr] .buy-someone-upg-bus-section,
+  html[lang=de] .buy-someone-upg-bus-section,
+  html[lang=nl] .buy-someone-upg-bus-section,
+  html[lang=it] .buy-someone-upg-bus-section,
+  html[lang=tr] .buy-someone-upg-bus-section,
+  html[lang=es] .buy-someone-upg-bus-section,
+  html[lang=pt] .buy-someone-upg-bus-section {
     display: none;
   }
-  .recent-files-container th:nth-child(6), .recent-files-container td:nth-child(6) {
+  html[lang=ru] .recent-files-container th:nth-child(6), html[lang=ru] .recent-files-container td:nth-child(6),
+  html[lang=fr] .recent-files-container th:nth-child(6),
+  html[lang=fr] .recent-files-container td:nth-child(6),
+  html[lang=de] .recent-files-container th:nth-child(6),
+  html[lang=de] .recent-files-container td:nth-child(6),
+  html[lang=nl] .recent-files-container th:nth-child(6),
+  html[lang=nl] .recent-files-container td:nth-child(6),
+  html[lang=it] .recent-files-container th:nth-child(6),
+  html[lang=it] .recent-files-container td:nth-child(6),
+  html[lang=tr] .recent-files-container th:nth-child(6),
+  html[lang=tr] .recent-files-container td:nth-child(6),
+  html[lang=es] .recent-files-container th:nth-child(6),
+  html[lang=es] .recent-files-container td:nth-child(6),
+  html[lang=pt] .recent-files-container th:nth-child(6),
+  html[lang=pt] .recent-files-container td:nth-child(6) {
     display: none;
-  }
-  .recent-files-container th:nth-child(2) {
-    width: 45% !important;
-  }
-  .recent-files-container th:nth-child(3) {
-    width: 15% !important;
-  }
-  .recent-files-container th:nth-child(4) {
-    width: 15% !important;
-  }
-  .recent-files-container th:nth-child(5) {
-    width: 25% !important;
-  }
-  .mre-act-sec {
-    padding-right: 10px;
   }
 }
 @container home-layout (min-width: 795px) {
-  .buy-someone-upg-bus-section {
+  html[lang=ru] .buy-someone-upg-bus-section,
+  html[lang=fr] .buy-someone-upg-bus-section,
+  html[lang=de] .buy-someone-upg-bus-section,
+  html[lang=nl] .buy-someone-upg-bus-section,
+  html[lang=it] .buy-someone-upg-bus-section,
+  html[lang=tr] .buy-someone-upg-bus-section,
+  html[lang=es] .buy-someone-upg-bus-section,
+  html[lang=pt] .buy-someone-upg-bus-section {
     display: block;
   }
-  .recent-files-container th:nth-child(6),
-  .recent-files-container td:nth-child(6) {
+  html[lang=ru] .recent-files-container th:nth-child(6),
+  html[lang=ru] .recent-files-container td:nth-child(6),
+  html[lang=fr] .recent-files-container th:nth-child(6),
+  html[lang=fr] .recent-files-container td:nth-child(6),
+  html[lang=de] .recent-files-container th:nth-child(6),
+  html[lang=de] .recent-files-container td:nth-child(6),
+  html[lang=nl] .recent-files-container th:nth-child(6),
+  html[lang=nl] .recent-files-container td:nth-child(6),
+  html[lang=it] .recent-files-container th:nth-child(6),
+  html[lang=it] .recent-files-container td:nth-child(6),
+  html[lang=tr] .recent-files-container th:nth-child(6),
+  html[lang=tr] .recent-files-container td:nth-child(6),
+  html[lang=es] .recent-files-container th:nth-child(6),
+  html[lang=es] .recent-files-container td:nth-child(6),
+  html[lang=pt] .recent-files-container th:nth-child(6),
+  html[lang=pt] .recent-files-container td:nth-child(6) {
     display: table-cell;
   }
 }
+
 html[lang=pt] .act-box {
   min-width: 100px !important;
   min-height: 95px !important;

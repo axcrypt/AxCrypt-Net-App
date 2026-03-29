@@ -50,10 +50,10 @@
             <h2 style="margin: 10px 0;text-align:center;color:#494949"><b>@Texts.ShareAsLinkActionText</b></h2>
 
             <div class="action-tabs" style="margin: 20px auto;">
-                <div id="anyone-tab" class="act-tab @(TabIndex == 1 ? "active" : "")" @onclick="() => TabIndex = 1">
+                <div id="anyone-tab" class="act-tab @(TabIndex == 1 ? "active" : "")" @onclick="async () => await RefreshUIForTab(1)">
                     <a href="javascript:void(0);">@Texts.AnyoneText</a>
                 </div>
-                <div id="spcific-tab" class="act-tab @(TabIndex == 2 ? "active" : "")" @onclick="() => TabIndex = 2">
+                <div id="spcific-tab" class="act-tab @(TabIndex == 2 ? "active" : "")" @onclick="async () => await RefreshUIForTab(2)">
                     <a href="javascript:void(0);">@Texts.SpecificUsersText</a>
                 </div>
             </div>
@@ -215,5 +215,13 @@
     {
         await CopyToClipboardUtility.CopyToClipboard(copyText);
         _statusAlertService.Error(Texts.NoInternetErrorMessage);
+    }
+
+    private async Task RefreshUIForTab(int tab)
+    {
+        TabIndex = tab;
+        ShareModel.SharedLink = null;
+        ShareModel.ErrorMessage = string.Empty;
+        ShareModel.UserInput = string.Empty;
     }
 }

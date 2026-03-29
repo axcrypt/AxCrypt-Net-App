@@ -67,13 +67,11 @@
                 }
             </div>
 
-            <div class="encryp-and-reset-btn">
-                <button class="button success btn-large font-medium active"
-                        @onclick="async () => await TextEncryptionViewModel.EncryptText()">@Texts.EncryptLabelText</button>
-                <button class="button border btn-large font-medium btn-hide"
-                        @onclick=TextEncryptionViewModel.ResetBtn>@Texts.ResetLabelText</button>
-            </div>
-        </div>
+    <div class="encryp-and-reset-btn">
+        <button class="button success btn-large font-medium active" @onclick="async () => await TextEncryptionViewModel.EncryptText()">@Texts.EncryptLabelText</button>
+        <button class="button border btn-large font-medium btn-hide reset-border" @onclick=TextEncryptionViewModel.ResetBtn>@Texts.ResetLabelText</button>
+    </div>
+</div>
 
         <div>
             <label style="display: block;">@Texts.EncryptedTextHead</label>

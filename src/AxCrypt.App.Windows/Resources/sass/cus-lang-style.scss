@@ -2,111 +2,94 @@
 html[lang="fr"],
 html[lang="de"],
 html[lang="nl"],
-html[lang="it"],
-html[lang="tr"],
-html[lang="sv"],
-html[lang="es"],
-html[lang="pt"],
-html[lang="pl"] {
+html[lang="it"] {
+    .top-menu-section {
+        margin: 60px 40px 10px 20px !important;
+    }
+
     .home-index {
         container-type: inline-size;
         container-name: home-layout;
     }
 }
 
-    html[lang="ru"],
-    html[lang="fr"],
-    html[lang="de"],
-    html[lang="nl"],
-    html[lang="it"],
-    html[lang="tr"],
-    html[lang="es"],
-    html[lang="pt"] {
-        .act-box {
-            min-width: 100px !important;
-            min-height: 90px !important;
-            padding: 12px 10px !important;
+html[lang="ru"],
+html[lang="fr"],
+html[lang="de"],
+html[lang="nl"],
+html[lang="it"],
+html[lang="tr"],
+html[lang="es"],
+html[lang="pt"] {
+    .act-box {
+        min-width: 100px !important;
+        min-height: 90px !important;
+        padding: 12px 10px !important;
 
-            .opnscrd-act, .stpscr-act {
-                width: 25px !important;
-            }
-
-            .shrks-act {
-                width: 30px !important;
-            }
-
-            .scr-act, .mtrkey-act {
-                min-width: 30px !important;
-                height: 35px;
-            }
+        .opnscrd-act, .stpscr-act {
+            width: 25px !important;
         }
 
-        .body-content-section {
-            margin: 25px 20px 20px 20px !important;
+        .shrks-act {
+            width: 30px !important;
         }
 
-        .arabic-class .page-title::before {
-            left: -30px !important;
-        }
-
-        .password-filter-dropdown-content {
-            min-width: 150px !important;
-            width: auto !important;
-            height: auto !important;
-        }
-
-        .password-create-dropdown-content {
-            min-width: 120px !important;
-            width: auto !important;
-            height: auto !important;
+        .scr-act, .mtrkey-act {
+            min-width: 30px !important;
+            height: 35px;
         }
     }
 
-.parent-container {
-    margin-top: 15px !important;
-}
-
-@container home-layout (max-width: 794px) {
-    .buy-someone-upg-bus-section {
-        display: none;
+    .body-content-section {
+        margin: 25px 20px 20px 20px !important;
     }
 
-    .recent-files-container {
-        th:nth-child(6), td:nth-child(6) {
+    .arabic-class .page-title::before {
+        left: -30px !important;
+    }
+
+    .password-filter-dropdown-content {
+        min-width: 150px !important;
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .password-create-dropdown-content {
+        min-width: 120px !important;
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .tabcontent, .filter-tab-wrapper, .action-tabs, .parent-container, .sub-head-clr, .notification-table {
+        margin-top: 15px !important;
+    }
+
+    .parent-container {
+        margin-top: 15px !important;
+    }
+
+    @container home-layout (max-width: 794px) {
+        .buy-someone-upg-bus-section {
             display: none;
         }
 
-        th:nth-child(2) {
-            width: 45% !important;
-        }
-
-        th:nth-child(3) {
-            width: 15% !important;
-        }
-
-        th:nth-child(4) {
-            width: 15% !important;
-        }
-
-        th:nth-child(5) {
-            width: 25% !important;
+        .recent-files-container {
+            th:nth-child(6), td:nth-child(6) {
+                display: none;
+            }
         }
     }
 
-    .mre-act-sec {
-        padding-right: 10px;
-    }
-}
+    @container home-layout (min-width: 795px) {
+        .buy-someone-upg-bus-section {
+            display: block;
+        }
 
-@container home-layout (min-width: 795px) {
-    .buy-someone-upg-bus-section {
-        display: block;
-    }
-
-    .recent-files-container {
-        th:nth-child(6),
-        td:nth-child(6) {
-            display: table-cell;
+        .recent-files-container {
+            th:nth-child(6),
+            td:nth-child(6) {
+                display: table-cell;
+            }
         }
     }
 }
