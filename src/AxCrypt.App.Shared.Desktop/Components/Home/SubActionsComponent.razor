@@ -34,9 +34,12 @@
                 @foreach (FileProviderItem provider in subActionModel.FileProviderViewModel.EncryptableFileProviders)
                 {
                     <div title="@provider.Name">
+                        @{
+                            string ConfiguredStyle = provider.Configured ? "background-color:" + _ENABLEDTOOLSTRIPBACKCOLOR : "background-color:#A4A4A4; filter: grayscale(1);";
+                        }
                         <button @onclick="() => subActionModel.FileProviderViewModel.SubActionSelectProvider(provider)"
                                 class="assets-box"
-                                style="background-color:@(_ENABLEDTOOLSTRIPBACKCOLOR)">
+                                style="@(ConfiguredStyle)">
                             <img class="@provider.Image" src="" alt="@provider.Name" title="@provider.Name" />
                         </button>
                     </div>
