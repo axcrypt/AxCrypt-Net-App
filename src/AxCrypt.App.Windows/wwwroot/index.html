@@ -25,6 +25,11 @@
             }
         };
 
+        window.setHtmlLang = function (lang) {
+            if (!lang) return;
+            document.documentElement.setAttribute("lang", lang);
+        };
+
         function enablePopup() {
             DotNet.invokeMethodAsync("AxCrypt", "EnablePopup");
         }

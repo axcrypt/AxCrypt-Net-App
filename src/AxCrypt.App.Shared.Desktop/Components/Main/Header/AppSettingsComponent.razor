@@ -1,6 +1,7 @@
 ﻿@using AxCrypt.App.Shared.Desktop.ViewModels.Main
 @using AxCrypt.App.Shared.Models
 @using AxCrypt.Content
+@using AxCrypt.Core
 
 @inject NavigationManager navigation
 @inject IJSRuntime JSRuntime
@@ -727,6 +728,16 @@
     {
         AppSettingsViewModel.Initialized();
         AppSettingsViewModel.OnUpdateViewState += UpdatePageState;
+
+        string currentCulture = Resolve.UserSettings.CultureName;
+        CultureOption cultureOption = localizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == currentCulture)!;
+
+        if (cultureOption != null)
+        {
+            AppSettingsViewModel.SelectedLanguage = cultureOption.Name;
+            AppSettingsViewModel.SelectedLanguageImageUrl = cultureOption.ImageUrl!;
+            AppSettingsViewModel.SelectedLanguageDisplayName = cultureOption.DisplayName!;
+        }
 
         base.OnInitialized();
     }
