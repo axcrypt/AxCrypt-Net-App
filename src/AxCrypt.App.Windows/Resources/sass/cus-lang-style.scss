@@ -14,53 +14,53 @@ html[lang="pl"] {
     }
 }
 
-html[lang="ru"],
-html[lang="fr"],
-html[lang="de"],
-html[lang="nl"],
-html[lang="it"],
-html[lang="tr"],
-html[lang="es"],
-html[lang="pt"] {
-    .act-box {
-        min-width: 100px !important;
-        min-height: 90px !important;
-        padding: 12px 10px !important;
+    html[lang="ru"],
+    html[lang="fr"],
+    html[lang="de"],
+    html[lang="nl"],
+    html[lang="it"],
+    html[lang="tr"],
+    html[lang="es"],
+    html[lang="pt"] {
+        .act-box {
+            min-width: 100px !important;
+            min-height: 90px !important;
+            padding: 12px 10px !important;
 
-        .opnscrd-act, .stpscr-act {
-            width: 25px !important;
+            .opnscrd-act, .stpscr-act {
+                width: 25px !important;
+            }
+
+            .shrks-act {
+                width: 30px !important;
+            }
+
+            .scr-act, .mtrkey-act {
+                min-width: 30px !important;
+                height: 35px;
+            }
         }
 
-        .shrks-act {
-            width: 30px !important;
+        .body-content-section {
+            margin: 25px 20px 20px 20px !important;
         }
 
-        .scr-act, .mtrkey-act {
-            min-width: 30px !important;
-            height: 35px;
+        .arabic-class .page-title::before {
+            left: -30px !important;
+        }
+
+        .password-filter-dropdown-content {
+            min-width: 150px !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+        .password-create-dropdown-content {
+            min-width: 120px !important;
+            width: auto !important;
+            height: auto !important;
         }
     }
-
-    .body-content-section {
-        margin: 25px 20px 20px 20px !important;
-    }
-
-    .arabic-class .page-title::before {
-        left: -30px !important;
-    }
-
-    .password-filter-dropdown-content {
-        min-width: 150px !important;
-        width: auto !important;
-        height: auto !important;
-    }
-
-    .password-create-dropdown-content {
-        min-width: 120px !important;
-        width: auto !important;
-        height: auto !important;
-    }
-}
 
 .parent-container {
     margin-top: 15px !important;

@@ -289,9 +289,6 @@ input[type=radio] {
   padding: 15px 5px;
   width: 85px;
   height: 85px;
-  /*min-width: 100px !important;
-  min-height: 90px !important;
-  padding: 15px 5px !important;*/
   border-radius: 4px;
   background-color: #48772C;
   color: #FFF;
@@ -300,6 +297,7 @@ input[type=radio] {
   box-shadow: 0px 4px 6px 0px rgba(49, 73, 35, 0.25);
   cursor: pointer;
   line-height: 14px;
+  align-content: center;
 }
 
 .opnscrd-act {
@@ -2908,6 +2906,20 @@ input[type=radio] {
     gap: 15px;
   }
 }
+.settings-sub-menu-item {
+  justify-content: left;
+  display: flex;
+  align-items: center;
+  min-width: 190px;
+}
+.settings-sub-menu-item img {
+  padding-right: 5px;
+}
+.settings-sub-menu-item .on-off-toggle-switch {
+  position: absolute;
+  right: 15px;
+}
+
 #vault-settings-modalDialog .vlt-title-img {
   content: url(/images/premium/ImgVaultSttngPrm.svg);
   width: 348px;

@@ -272,7 +272,7 @@ input[readonly=readonly], textarea[readonly] {
   color: #CDFFB1;
 }
 
-.settings-menu-item-container img, .manage-acc-sec a img, .notifi-img img {
+.manage-acc-sec a img, .notifi-img img {
   filter: invert(1) !important;
 }
 
@@ -500,4 +500,17 @@ input[readonly=readonly], textarea[readonly] {
 .top-menu a.active .sttng-icon,
 .top-menu a.active .notif-icon {
   filter: brightness(0) invert(1) !important;
+}
+
+.stngs-menu-icon.IcoEye,
+.stngs-menu-icon.Ico256,
+.stngs-menu-icon.IcoIncldFldrs24px,
+.stngs-menu-icon.Icoinactsign,
+.stngs-menu-icon.IcoRstr,
+.stngs-menu-icon.IcoAdvsSttns,
+.stngs-menu-icon.IcoOffln,
+.stngs-menu-icon.IcoEncrptSttgs,
+.stngs-menu-icon.IcoInvtFrnd,
+.stngs-menu-icon.IcoDkMd {
+  filter: invert(1) !important;
 }

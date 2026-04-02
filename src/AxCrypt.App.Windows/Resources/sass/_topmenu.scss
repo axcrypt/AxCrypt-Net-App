@@ -1000,3 +1000,19 @@
         gap: 15px;
     }
 }
+
+.settings-sub-menu-item {
+    justify-content: left;
+    display: flex;
+    align-items: center;
+    min-width: 190px;
+
+    img {
+        padding-right: 5px;
+    }
+
+    .on-off-toggle-switch {
+        position: absolute;
+        right: 15px;
+    }
+}
