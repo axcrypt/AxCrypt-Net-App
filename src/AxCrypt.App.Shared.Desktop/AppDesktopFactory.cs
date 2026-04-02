@@ -14,6 +14,7 @@ using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Devices;
 
 namespace AxCrypt.App.Shared.Desktop;
 
@@ -57,6 +58,10 @@ public static class AppDesktopFactory
         TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
         TypeMap.Register.Singleton<IMultiFactorAuthService>(() => new MultiFactorAuthService());
         TypeMap.Register.Singleton<ICloudPlatformService>(() => new CloudPlatformService());
-        TypeMap.Register.Singleton<ICloudDriveConfiguration>(() => new CloudDriveConfiguration());
+
+        if (DeviceInfo.Platform == DevicePlatform.WinUI || DeviceInfo.Platform == DevicePlatform.MacCatalyst || DeviceInfo.Platform == DevicePlatform.macOS)
+        {
+            TypeMap.Register.Singleton<ICloudDriveConfiguration>(() => new CloudDriveConfiguration());
+        }
     }
 }
