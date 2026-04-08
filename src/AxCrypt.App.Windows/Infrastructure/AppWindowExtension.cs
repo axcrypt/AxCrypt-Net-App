@@ -1,6 +1,7 @@
 ﻿using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Services.Interface;
 using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
@@ -8,6 +9,8 @@ using AxCrypt.Common;
 using AxCrypt.Core;
 using AxCrypt.Core.Extensions;
 using Microsoft.UI.Windowing;
+using System.Runtime.InteropServices;
+using WinRT.Interop;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows.Infrastructure
@@ -78,9 +81,12 @@ namespace AxCrypt.App.Windows.Infrastructure
                     Microsoft.UI.Windowing.OverlappedPresenter overlappedPresenter = ((Microsoft.UI.Windowing.OverlappedPresenter)s.Presenter);
                     if (overlappedPresenter.State == Microsoft.UI.Windowing.OverlappedPresenterState.Minimized)
                     {
-                        SetupTrayIcon();
-                        Resolve.UserSettings.RestoreFullWindow = false;
-                        s?.Hide();
+                        if (s.IsVisible)
+                        {
+                            SetupTrayIcon();
+                            Resolve.UserSettings.RestoreFullWindow = false;
+                            s?.Hide();
+                        }
                     }
                     if (overlappedPresenter.State == Microsoft.UI.Windowing.OverlappedPresenterState.Maximized)
                     {
@@ -141,9 +147,16 @@ namespace AxCrypt.App.Windows.Infrastructure
             };
         }
 
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
         private static void RestoreWindowWithFocus()
         {
-            Task.Run(async () =>
+            Microsoft.UI.Dispatching.DispatcherQueue dispatcher = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
+            dispatcher.TryEnqueue(() =>
             {
                 try
                 {
@@ -163,11 +176,13 @@ namespace AxCrypt.App.Windows.Infrastructure
                         }
                         overlapped.Restore();
                     }
+
                     _appWindow.Show(true);
+                    AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
                 }
                 catch (ApiException aex)
                 {
-                     await aex.HandleApiExceptionAsync();
+                    aex.ReportAndDisplay();
                 }
             });
         }

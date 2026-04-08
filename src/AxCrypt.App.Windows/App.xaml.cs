@@ -1,14 +1,14 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.Desktop;
 using AxCrypt.App.Shared.Desktop.Code;
+using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Platforms.Windows.Implementation;
-using AxCrypt.App.Windows.Services;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -363,11 +363,6 @@ public partial class App : Application
                     break;
             }
 
-            while (AxCServiceProviderExtension.LogOnViewModel!.IsVisible || !AxCServiceProviderExtension.LogOnViewModel!.IsLoggedOn)
-            {
-                await Task.Delay(1000);
-            }
-
             switch (e.Verb)
             {
                 case CommandVerb.Open:
@@ -457,29 +452,12 @@ public partial class App : Application
 
     private async Task SignInAsync()
     {
-        //SignUpSignIn signUpSignIn = new SignUpSignIn()
-        //{
-        //    Version = _apiVersion,
-        //    UserEmail = New<UserSettings>().UserEmail,
-        //};
+        AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
 
-        //await signUpSignIn.DialogsAsync(this, this);
-
-        //New<UserSettings>().UserEmail = signUpSignIn.UserEmail;
-
-        //if (signUpSignIn.StopAndExit)
-        //{
-        //    await new ApplicationManager().StopAndExit();
-        //    return;
-        //}
-
-        //await SetSignInSignOutStatusAsync(_mainViewModel.LoggedOn);
-        //if (_mainViewModel.LoggedOn && Thread.CurrentThread.CurrentUICulture.Name != Resolve.UserSettings.CultureName)
-        //{
-        //    await SetLanguageAsync(Resolve.UserSettings.CultureName);
-        //}
-
-        //ShowRenewSubscriptionDialog();
+        while (AxCServiceProviderExtension.LogOnViewModel!.IsVisible || !AxCServiceProviderExtension.LogOnViewModel!.IsLoggedOn)
+        {
+            await Task.Delay(1000);
+        }
     }
 
     private void UpdateArabicStyle()
@@ -538,6 +516,11 @@ public partial class App : Application
     }
 
     private static Window? _window;
+
+    public static Window? Window 
+    {
+        get => _window;
+    }
 
     protected override Window CreateWindow(IActivationState? activationState)
     {

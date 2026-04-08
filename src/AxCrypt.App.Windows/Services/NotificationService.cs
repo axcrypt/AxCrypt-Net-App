@@ -1,10 +1,8 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.Desktop.Services.Interface;
-using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using Microsoft.Toolkit.Uwp.Notifications;
-using Microsoft.UI.Windowing;
 using Windows.UI.Notifications;
 using static AxCrypt.Abstractions.TypeResolve;
 

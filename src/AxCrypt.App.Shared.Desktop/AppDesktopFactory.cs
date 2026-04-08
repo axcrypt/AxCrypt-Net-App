@@ -46,6 +46,9 @@ public static class AppDesktopFactory
 
         services.AddSingleton<SecuredMessage>();
 
+        services.AddSingleton<IFilePasswordWindowService, FilePasswordWindowService>();
+        services.AddSingleton<UserFilePasswordViewModel>();
+
         services.AddSingleton<RecentFoldersComponent>();
         services.AddSingleton<CopyToClipboardUtility>();
         services.AddSingleton<PasswordStrengthMeterViewModel>();

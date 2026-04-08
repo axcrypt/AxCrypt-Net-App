@@ -263,21 +263,17 @@ namespace AxCrypt.Core.UI.ViewModel
             if (!_knownIdentities.IsLoggedOn)
             {
                 LogOnIdentity logOnIdentity = await LogOnIdentityFromCredentialsAsync(EmailAddress.Parse(logOnArgs.UserEmail), logOnArgs.Passphrase);
-                if (logOnIdentity == LogOnIdentity.Empty)
-                {
-                    return LogOnIdentity.Empty;
-                }
 
-                if (!_knownIdentities.IsMFAEnabled)
+                bool allowMFAWithoutFile = _knownIdentities.IsMFAEnabled && string.IsNullOrEmpty(logOnArgs.EncryptedFileFullName);
+                if (logOnIdentity != LogOnIdentity.Empty && allowMFAWithoutFile)
                 {
-                    return logOnIdentity;
+                    logOnIdentity = await AskForMFAVerify(logOnArgs, logOnIdentity);
                 }
-
-                logOnIdentity = await AskForMFAVerify(logOnArgs, logOnIdentity);
             }
 
             LogOnIdentity identy = await AddKnownIdentityFromEventAsync(logOnArgs);
-            if (!_knownIdentities.IsLoggedOn && identy.UserEmail != EmailAddress.Empty)
+            bool allowNonMfaLogin = identy.UserEmail != EmailAddress.Empty && !_knownIdentities.IsMFAEnabled;
+            if (!_knownIdentities.IsLoggedOn && allowNonMfaLogin)
             {
                 await _knownIdentities.SetDefaultEncryptionIdentity(identy);
             }

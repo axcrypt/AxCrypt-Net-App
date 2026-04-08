@@ -39,6 +39,8 @@ public class LogOnViewModel : ViewModelBase
         {
             if (loggedOn)
             {
+                IsVisible = false;
+                PageResult = DialogResult.OK;
                 ProcessIndicator?.Dispose();
                 await New<AccountStatusViewModel>().LoadAccountStatusAsync();
                 SubscriptionChanged();

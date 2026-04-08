@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Api.Model;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core;
@@ -133,13 +134,7 @@ namespace AxCrypt.App.Shared.Services
 
         private async Task HandleExistingLogOn(LogOnEventArgs e)
         {
-            if (
-                !string.IsNullOrEmpty(e.EncryptedFileFullName)
-                && (
-                    string.IsNullOrEmpty(Resolve.UserSettings.UserEmail)
-                    || Resolve.KnownIdentities.IsLoggedOn
-                )
-            )
+            if (!string.IsNullOrEmpty(e.EncryptedFileFullName))
             {
                 await HandleExistingLogOnForEncryptedFile(e);
             }
@@ -151,31 +146,24 @@ namespace AxCrypt.App.Shared.Services
 
         private async Task HandleExistingLogOnForEncryptedFile(LogOnEventArgs e)
         {
-            FilePasswordDialogViewModel filePasswordDialog =
-                AxCServiceProvider.GetService<FilePasswordDialogViewModel>();
-            await filePasswordDialog.ShowFilePasswordDialog(e.EncryptedFileFullName);
+            IFilePasswordWindowService filePasswordDialog = AxCServiceProvider.GetService<IFilePasswordWindowService>();
+            DialogResult result = await filePasswordDialog.ShowWindow(e.EncryptedFileFullName);
+            UserFilePasswordViewModel viewModel = AxCServiceProvider.GetService<UserFilePasswordViewModel>();
 
-            if (filePasswordDialog.DialogResult == DialogResult.Retry)
-            {
-                e.Passphrase = filePasswordDialog.ViewModel!.Passphrase;
-                e.IsAskingForPreviouslyUnknownPassphrase = true;
-                return;
-            }
-
-            if (
-                filePasswordDialog.DialogResult != DialogResult.OK
-                || filePasswordDialog.ViewModel!.Passphrase == Passphrase.Empty
-            )
+            if (result != DialogResult.OK || viewModel.ViewModel!.Passphrase == Passphrase.Empty)
             {
                 e.Cancel = true;
                 return;
             }
 
-            e.Passphrase = filePasswordDialog.ViewModel.Passphrase;
+            e.UserEmail = Resolve.UserSettings.UserEmail;
+            e.Passphrase = viewModel.ViewModel.Passphrase;
         }
 
         private async Task HandleExistingAccountLogOn(LogOnEventArgs e)
         {
+            AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
+
             if (!_logOnViewModel.IsVisible)
             {
                 _logOnViewModel.PageResult = DialogResult.None;
