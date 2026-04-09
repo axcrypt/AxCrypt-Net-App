@@ -93,6 +93,9 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<OneDriveAccessInfo>();
             services.AddSingleton<FileProviderSelectionViewModel>();
             services.AddSingleton<AccountSetupViewModel>();
+
+            services.AddSingleton<TextEncryptionViewModel>();
+            services.AddSingleton<TextShareViewModel>();
         }
 
         public static void RegisterTypeFactories()

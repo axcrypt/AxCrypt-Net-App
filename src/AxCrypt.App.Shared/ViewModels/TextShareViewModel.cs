@@ -16,7 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Shared.Desktop.ViewModels;
+namespace AxCrypt.App.Shared.ViewModels;
 
 public enum TextShareExpireOption
 {

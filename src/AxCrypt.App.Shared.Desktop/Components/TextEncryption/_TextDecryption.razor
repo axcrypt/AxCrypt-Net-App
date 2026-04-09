@@ -1,7 +1,7 @@
 ﻿@using AxCrypt.App.Shared.Desktop.Code
 @using AxCrypt.Content
 
-@inject AxCrypt.App.Shared.Desktop.ViewModels.TextEncryptionViewModel TextEncryptionViewModel
+@inject AxCrypt.App.Shared.ViewModels.TextEncryptionViewModel TextEncryptionViewModel
 @inject CopyToClipboardUtility CopyToClipboardUtility
 
 @if (!string.IsNullOrEmpty(TextEncryptionViewModel.ErrorMessage))
@@ -11,61 +11,74 @@
 
 <div>
     <label style="display: block;">@Texts.EncryptedTextHead</label>
-    <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText" placeholder="@Texts.EnterTextToEncryptPlaceHolder"></textarea><br>
+    <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText"
+              placeholder="@Texts.EnterTextToEncryptPlaceHolder"></textarea><br>
 
     <div id="custom-pwd-section">
         <label>
-            <input class="che-box" type="checkbox" id="userchoice" @onclick=TextEncryptionViewModel.ShowHideCustomPassword checked="@TextEncryptionViewModel.IsCustomPasswordMode" />
+            <input class="che-box" type="checkbox" id="userchoice"
+                   @onclick=TextEncryptionViewModel.ShowHideCustomPassword
+                   checked="@TextEncryptionViewModel.IsCustomPasswordMode" />
             <span>@Texts.UseCustomPasswordHead</span>
         </label>
-        <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16" @onmouseover='@(() => TextEncryptionViewModel.ShowPopup("open"))' @onmouseout='@(() => TextEncryptionViewModel.HidePopup())'>
+        <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16"
+             @onmouseover='@(() => TextEncryptionViewModel.ShowPopup("open"))'
+             @onmouseout='@(() => TextEncryptionViewModel.HidePopup())'>
 
-        @if (TextEncryptionViewModel.IsHovered && TextEncryptionViewModel.HoveredElement == "open")
-        {
-            <div class="custom-password-help-hoverpopup text-center" style="background-color:#fff;">
-                <span class="txt-clr font-medium">@Texts.CustomPasswordHelpHoverText</span>
+            @if (TextEncryptionViewModel.IsHovered && TextEncryptionViewModel.HoveredElement == "open")
+            {
+                <div class="custom-password-help-hoverpopup text-center" style="background-color:#fff;">
+                    <span class="txt-clr font-medium">@Texts.CustomPasswordHelpHoverText</span>
+                </div>
+            }
+
+            @if (TextEncryptionViewModel.IsCustomPasswordMode)
+            {
+                <br />
+                <label>@Texts.SecurityPasswordText:</label>
+
+                <div class="password-container">
+                    <i class="@TextEncryptionViewModel.PasswordIconClass" style="top:40% !important;"
+                       @onclick="TextEncryptionViewModel.TogglePassword"></i>
+                    <input type="@TextEncryptionViewModel.PasswordInputType" id="passwordbox"
+                           @bind="TextEncryptionViewModel.Password"><br>
+                    </div>
+                }
             </div>
-        }
 
-        @if (TextEncryptionViewModel.IsCustomPasswordMode)
-        {
-            <br />
-            <label>@Texts.SecurityPasswordText:</label>
 
-            <div class="password-container">
-                <i class="@TextEncryptionViewModel.PasswordIconClass" style="top:40% !important;" @onclick="TextEncryptionViewModel.TogglePassword"></i>
-                <input type="@TextEncryptionViewModel.PasswordInputType" id="passwordbox" @bind="TextEncryptionViewModel.Password"><br>
+            <div class="encryp-and-reset-btn">
+                <button class="button success btn-large font-medium active"
+                        @onclick=TextEncryptionViewModel.DecryptText>@Texts.McInfMenuUnwrap</button>
+                <button class="button border btn-large font-medium btn-hide"
+                        @onclick=TextEncryptionViewModel.ResetBtn>@Texts.ResetLabelText</button>
             </div>
-        }
-    </div>
+        </div>
 
+        <div>
+            <label style="display: block;">@Texts.PlainTextLabel</label>
+            <textarea class="encrypt-txt-box" rows="5" @bind="TextEncryptionViewModel.InputText"
+                      placeholder="@Texts.PlainTextPlaceHolder" readonly></textarea><br>
+        </div>
 
-    <div class="encryp-and-reset-btn">
-        <button class="button success btn-large font-medium active" @onclick=TextEncryptionViewModel.DecryptText>@Texts.McInfMenuUnwrap</button>
-        <button class="button border btn-large font-medium btn-hide" @onclick=TextEncryptionViewModel.ResetBtn>@Texts.ResetLabelText</button>
-    </div>
-</div>
+        <div class="multi-btn">
+            <button class="multi-actn-btn"
+                    @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(TextEncryptionViewModel.InputText)">
+                <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="@Texts.CopyPlainTextClipboardText" width="16"
+                     height="16" />
+                @Texts.SecretsCopytoClipboard
+            </button>
 
-<div>
-    <label style="display: block;">@Texts.PlainTextLabel</label>
-    <textarea class="encrypt-txt-box" rows="5" @bind="TextEncryptionViewModel.InputText" placeholder="@Texts.PlainTextPlaceHolder" readonly></textarea><br>
-</div>
+            <button class="multi-actn-btn"
+                    @onclick="async () => await TextEncryptionViewModel.ExportTextAsync(AxCrypt.App.Shared.Desktop.Data.Utility.GetDownloadsFolderPath())">
+                <img class="download-ico" alt="download ico" title="@Texts.DownloadPlainText" width="16" height="16" />
+                @Texts.DownloadAsTxtButton
+            </button>
+        </div>
 
-<div class="multi-btn">
-    <button class="multi-actn-btn" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(TextEncryptionViewModel.InputText)">
-        <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="@Texts.CopyPlainTextClipboardText" width="16" height="16" />
-        @Texts.SecretsCopytoClipboard
-    </button>
-
-    <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.ExportTextAsync>
-        <img class="download-ico" alt="download ico" title="@Texts.DownloadPlainText" width="16" height="16" />
-        @Texts.DownloadAsTxtButton
-    </button>
-</div>
-
-<div>
-    <span id="copiedMessage" style="color: #48772C; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
-</div>
+        <div>
+            <span id="copiedMessage" style="color: #48772C; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
+        </div>
 
 
 @code {

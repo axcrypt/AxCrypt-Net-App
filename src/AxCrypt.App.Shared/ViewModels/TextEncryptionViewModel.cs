@@ -12,7 +12,7 @@ using AxCrypt.Cryptor;
 using Microsoft.AspNetCore.Components.Web;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Shared.Desktop.ViewModels;
+namespace AxCrypt.App.Shared.ViewModels;
 
 public class TextEncryptionViewModel
 {
@@ -27,7 +27,6 @@ public class TextEncryptionViewModel
     public string? ErrorMessage { get; set; }
 
     public string? SelectedTap { get; set; }
-
 
     public IStatusAlertService _StatusAlertService;
 
@@ -79,12 +78,20 @@ public class TextEncryptionViewModel
 
     private int GetMaxCharaterLimit()
     {
-        if (AxCServiceProviderExtension.LogOnViewModel!.UserHas(Core.Runtime.LicenseCapability.TextEncryptionBusiness))
+        if (
+            AxCServiceProviderExtension.LogOnViewModel!.UserHas(
+                Core.Runtime.LicenseCapability.TextEncryptionBusiness
+            )
+        )
         {
             return 2000;
         }
 
-        if (AxCServiceProviderExtension.LogOnViewModel!.UserHas(Core.Runtime.LicenseCapability.TextEncryptionPremium))
+        if (
+            AxCServiceProviderExtension.LogOnViewModel!.UserHas(
+                Core.Runtime.LicenseCapability.TextEncryptionPremium
+            )
+        )
         {
             return 1000;
         }
@@ -104,7 +111,10 @@ public class TextEncryptionViewModel
 
         if (InputText.Length > MaxAllowedCharators)
         {
-            ErrorMessage = string.Format(Texts.MaximumNotExceedCharactersNotification, MaxAllowedCharators);
+            ErrorMessage = string.Format(
+                Texts.MaximumNotExceedCharactersNotification,
+                MaxAllowedCharators
+            );
             return;
         }
 
@@ -157,7 +167,7 @@ public class TextEncryptionViewModel
         IsCustomPasswordMode = false;
     }
 
-    public async Task<bool> ExportTextAsync()
+    public async Task<bool> ExportTextAsync(string downloadsFolderPath)
     {
         string filename = "encryptedtext";
         string? exportText = "";
@@ -175,10 +185,14 @@ public class TextEncryptionViewModel
         if (string.IsNullOrEmpty(exportText))
             return false;
 
-        return await DownloadTextAsFileAsync(exportText, filename);
+        return await DownloadTextAsFileAsync(exportText, filename, downloadsFolderPath);
     }
 
-    private async Task<bool> DownloadTextAsFileAsync(string exportText, string downloadFileName)
+    private async Task<bool> DownloadTextAsFileAsync(
+        string exportText,
+        string downloadFileName,
+        string downloadsFolderPath
+    )
     {
         byte[] txtData = Encoding.UTF8.GetBytes(exportText);
         if (txtData == null)
@@ -186,10 +200,10 @@ public class TextEncryptionViewModel
             return false;
         }
 
-        string downloadsFolderPath = GetDownloadsFolderPath();
         if (downloadsFolderPath == null)
         {
-            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.AlertText, Texts.CouldNotDetermineFolderPathText);
+            await New<IPopup>()
+                .ShowAsync(PopupButtons.Ok, Texts.AlertText, Texts.CouldNotDetermineFolderPathText);
             return false;
         }
 
@@ -199,19 +213,26 @@ public class TextEncryptionViewModel
         int count = 1;
         while (File.Exists(filePath))
         {
-            string tempFileName = $"{Core.Resolve.UserSettings.UserEmail}._{downloadFileName}_({count}).txt";
+            string tempFileName =
+                $"{Core.Resolve.UserSettings.UserEmail}._{downloadFileName}_({count}).txt";
             filePath = Path.Combine(downloadsFolderPath, tempFileName);
             count++;
         }
 
-        await File.WriteAllBytesAsync(filePath, txtData);
-        _StatusAlertService?.Success(string.Format(Texts.DownloadSuccessfullyNotification, filePath));
+        try
+        {
+            await File.WriteAllBytesAsync(filePath, txtData);
+            _StatusAlertService?.Success(
+                string.Format(Texts.DownloadSuccessfullyNotification, filePath)
+            );
+        }
+        catch (Exception exp)
+        {
+            _StatusAlertService?.Error(
+                string.Format("Failed to download text due to ", exp.Message)
+            );
+        }
         return true;
-    }
-
-    private string GetDownloadsFolderPath()
-    {
-        return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
     }
 
     public void EncryptSendEmailBtn()
@@ -225,12 +246,14 @@ public class TextEncryptionViewModel
         string subject = Texts.SharingEncryptedText;
 
         string body =
-        "Hello,\n\n" +
-        "This text is encrypted — use AxCrypt to view the original message.\n\n" +
-        "Encrypted Text:\n" +
-        EncryptedText + "\n\n";
+            "Hello,\n\n"
+            + "This text is encrypted — use AxCrypt to view the original message.\n\n"
+            + "Encrypted Text:\n"
+            + EncryptedText
+            + "\n\n";
 
-        string mailto = $"mailto:{to}?subject={Uri.EscapeDataString(subject)}&body={Uri.EscapeDataString(body)}";
+        string mailto =
+            $"mailto:{to}?subject={Uri.EscapeDataString(subject)}&body={Uri.EscapeDataString(body)}";
 
         Process.Start(new ProcessStartInfo(mailto) { UseShellExecute = true });
     }

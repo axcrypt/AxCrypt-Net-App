@@ -1,10 +1,11 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.ViewModels.Notification;
 using Microsoft.JSInterop;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Devices;
-using System;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Desktop.Data;
@@ -144,5 +145,13 @@ public static class Utility
         string deviceModel = $"{DeviceInfo.Manufacturer} {DeviceInfo.Model}";
 
         return $"{os}|{appVersion}|{deviceModel}";
+    }
+
+    public static string GetDownloadsFolderPath()
+    {
+        return Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            "Downloads"
+        );
     }
 }
