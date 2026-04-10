@@ -1,8 +1,19 @@
 ﻿@import "_switchuser";
 
 #content-wrap {
-    margin: 3% auto;
+    /* Vertically centre the sign-in content. On a tall window the form
+       sits in the middle of the viewport instead of being pinned near
+       the top with empty space below it; on a short window the column
+       grows past 100vh and the page scrolls normally.
+       position:relative is the anchor for the sign-in loader overlay
+       (was previously an inline style on the element). */
+    position: relative;
+    margin: 0 auto;
     padding: 0 50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .reg-sec {

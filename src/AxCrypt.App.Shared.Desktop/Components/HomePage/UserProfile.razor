@@ -1,0 +1,203 @@
+﻿@using AxCrypt.App.Shared.Desktop.Models
+@using AxCrypt.App.Shared.Desktop.Services
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.Content
+@using AxCrypt.Core
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject UserService userService
+@inject PopupService popupService
+@inject ProfileViewModel profileViewModel
+@inject IJSRuntime JSRuntime
+
+@implements IDisposable
+
+<!-- Clickable profile row -->
+<div class="user-row @(popupService.ProfileMenuOpen ? "user-row--active" : "")"
+        @onclick="popupService.ToggleProfileMenu" role="button" tabindex="0"
+        @onkeydown="(e) => { if (e.Key == EnterText) popupService.ToggleProfileMenu(); }">
+    <div class="avatar" style="background:@userService.UserAvatarColor()">@userService.UserInitials()</div>
+    <div class="user-details">
+        <span class="user-name">@userService.UserEmail</span>
+        @* <span class="user-sub">@userService.UserEmail</span> *@
+    </div>
+    <span class="profile-chevron @(popupService.ProfileMenuOpen ? "profile-chevron--open" : "")">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="18 15 12 9 6 15" />
+        </svg>
+    </span>
+</div>
+
+<!-- Profile Popup Menu (anchored above footer) -->
+@if (popupService.ProfileMenuOpen)
+{
+    <div class="profile-menu" @onclick:stopPropagation>
+        <!-- Header -->
+        <div class="profile-menu-header">
+            <div class="pm-avatar" style="background:@userService.UserAvatarColor()">@userService.UserInitials()</div>
+            <div class="pm-info">
+                <span class="pm-name">@userService.UserEmail</span>
+                @* <span class="pm-email">@userService.UserEmail</span> *@
+                <span class="pm-plan-badge">@userService.SubscriptionLevel</span>
+            </div>
+        </div>
+        <div class="pm-divider"></div>
+
+        <!-- Menu Items -->
+        @foreach (ProfileMenuItem item in ProfileMenuItems)
+        {
+            @if (item.IsDivider)
+            {
+                <div class="pm-divider"></div>
+            }
+            else
+            {
+                <button class="pm-item @(item.IsDanger ? "pm-item--danger" : "")"
+                        @onclick="() => OnProfileMenuAction(item)">
+                    <span class="pm-item-icon @item.StyleClass">@((MarkupString)item.IconSvg)</span>
+                    <div class="pm-item-text">
+                        <span class="pm-item-label">@item.Label</span>
+                        @if (!string.IsNullOrEmpty(item.SubLabel))
+                        {
+                            <span class="pm-item-sub">@item.SubLabel</span>
+                        }
+                    </div>
+                    @if (!string.IsNullOrEmpty(item.Badge))
+                    {
+                        <span class="pm-item-badge">@item.Badge</span>
+                    }
+                </button>
+            }
+        }
+    </div>
+    <button id="subscription-details-button-action" style="display:none;"></button>
+}
+
+<AxCrypt.App.Shared.Desktop.Components.HomePage.SubscriptionDetails />
+
+@code {
+    private string EnterText = "Enter";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        await profileViewModel!.InitializeAsync();
+
+        // Resumed-session fallback: if the user is already signed in by the
+        // time this component mounts (LoggedOn was already true), the
+        // LogOnViewModel binding that normally pushes data to UserService
+        // never fires. Pull the email from the known identity here so the
+        // avatar + name render on first paint — no click required.
+        try
+        {
+            string knownEmail = Resolve.KnownIdentities?.DefaultEncryptionIdentity?.UserEmail?.Address ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(userService.UserEmail) && !string.IsNullOrWhiteSpace(knownEmail))
+            {
+                userService.InitializeData(profileViewModel.Account.SubscriptionLevel, knownEmail);
+            }
+        }
+        catch
+        {
+            // Identity not ready yet — UserService will fill in once
+            // LogOnViewModel.LoggedOn fires its property-changed callback.
+        }
+
+        // Re-render whenever the popup state OR the underlying user data
+        // changes. The latter is the actual fix: UserService.Notify() now
+        // fires from InitializeData so the email + initials show up live.
+        popupService.OnChange += UpdatePageState;
+        userService.OnChange += UpdatePageState;
+    }
+
+    public void Dispose()
+    {
+        popupService.OnChange -= UpdatePageState;
+        userService.OnChange -= UpdatePageState;
+    }
+
+    private void UpdatePageState()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    // ── Profile Menu Data ──────────────────────────────────────
+    private List<ProfileMenuItem> ProfileMenuItems = new()
+    {
+        // new() { Label="My Profile",       SubLabel="View & edit your profile",   Route="/profile",
+        //     IconSvg="<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2'/><circle cx='12' cy='7' r='4'/></svg>" },
+        // new() { Label="Change Password",  SubLabel="Update your login password",  Route="/password/change",
+        //     IconSvg="<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><rect x='3' y='11' width='18' height='11' rx='2'/><path d='M7 11V7a5 5 0 0110 0v4'/><circle cx='12' cy='16' r='1' fill='currentColor'/></svg>" },
+        // new() { Label="Key Management",   SubLabel="Manage encryption keys",      Route="/keys",
+        //     IconSvg="<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4'/></svg>",
+        //     Badge="3 active" },
+        // new() { Label="Two-Factor Auth",  SubLabel="Manage 2FA settings",         Route="/security/2fa",
+        //     IconSvg="<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z'/><polyline points='9 12 11 14 15 10'/></svg>" },
+        // new() { Label="Trusted Devices",  SubLabel="View connected devices",      Route="/devices",
+        //     IconSvg="<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><rect x='2' y='3' width='20' height='14' rx='2'/><line x1='8' y1='21' x2='16' y2='21'/><line x1='12' y1='17' x2='12' y2='21'/></svg>" },
+        // new() { IsDivider=true },
+        // new() { Label="Preferences",      SubLabel="App settings & theme",        Route="/settings",
+        //     IconSvg="<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><circle cx='12' cy='12' r='3'/><path d='M19.07 4.93l-1.41 1.41M5.34 18.66l-1.41 1.41M20 12h2M2 12h2'/></svg>" },
+        // new() { Label="Audit Log",        SubLabel="Your activity history",       Route="/activity",
+        //     IconSvg="<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><circle cx='12' cy='12' r='10'/><polyline points='12 6 12 12 16 14'/></svg>" },
+        // new() { IsDivider=true },
+        new() { Label=Texts.OptionsClearAllSettingsAndExitToolStripMenuItemText, SubLabel="Reset preferences and start a fresh session on this device", IsDanger=false,
+                // Route is required — OnProfileMenuAction switches on
+                // item.Route to dispatch. Without this, clicking Clear All
+                // Settings did nothing because the case never matched.
+                Route="/optionsclearallsettingsandexit",
+                StyleClass="pm-ClrSttngs-icon" },
+        new() { Label=Texts.HelpToolStripMenuItemText, SubLabel="Open the in-app help center and getting-started guide", Route="/help", IsDanger=false,
+                StyleClass="pm-MngAccnt-icon" },
+        new() { Label=Texts.SubscriptionDetailsTitle, SubLabel="View your plan, billing, and renewal details", Route="/subscriptiondetails", IsDanger=false,
+                StyleClass="pm-SubsDetails-icon" },
+        new() { Label=Texts.DebugManageAccountToolStripMenuItemText, SubLabel="Update profile, security, and contact info on axcrypt.net", Route="/manageaccount", IsDanger=false,
+                StyleClass="pm-Users-icon" },
+        new() { Label=Texts.LogOffText, SubLabel="Sign out of this device — your files stay encrypted", Route="/logout", IsDanger=true,
+                StyleClass="pm-SngOut-icon" },
+        new() { Label=Texts.ExitToolStripMenuItemText, SubLabel="Close the AxCrypt app", Route="/exit", IsDanger=true,
+                 StyleClass="pm-Lgng-icon" },
+    };
+
+    private async Task OnProfileMenuAction(ProfileMenuItem item)
+    {
+        popupService.CloseAllPopups();
+
+        switch (item.Route)
+        {
+            case "/optionsclearallsettingsandexit":
+                await profileViewModel!.ClearAllSettingsAndRestartAsync();
+                break;
+
+            case "/help":
+                profileViewModel!.ViewHelpMenuItemClick();
+                break;
+            case "/subscriptiondetails":
+                await OpenSubscriptiondetailsAsync();
+                break;
+            case "/manageaccount":
+                profileViewModel!.RedirectToMyAxCryptIDPage();
+                break;
+            case "/logout":
+                await profileViewModel!.SignOut();
+                break;
+            case "/exit":
+                await profileViewModel!.ExitMenuItem_Click(null!);
+                break;
+            default:
+                break;
+        }
+
+        // if (!string.IsNullOrEmpty(item.Route))
+        //     navigationManager.NavigateTo(item.Route);
+    }
+
+    private async Task OpenSubscriptiondetailsAsync()
+    {
+        await JSRuntime.InvokeVoidAsync("triggerClick", "subscription-details-button-action");
+    }
+}

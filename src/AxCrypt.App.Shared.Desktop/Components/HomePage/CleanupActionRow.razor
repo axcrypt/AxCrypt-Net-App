@@ -1,0 +1,39 @@
+@using AxCrypt.App.Shared.Desktop.ViewModels.Home
+@using AxCrypt.Content
+
+@inject ActionsViewModel? homeActionModel
+
+@* Clean-up attention pill — visible only while open files are pending re-encryption. *@
+@if (homeActionModel != null && IsCleanUpRequired)
+{
+    <div class="qa-cleanup-pill"
+            role="status"
+            aria-live="polite"
+            title="@Texts.CloseAndRemoveOpenFilesToolStripButtonToolTipText">
+        <div class="qa-cleanup-icon">
+            <img src="images/default/IcoCln.svg" alt="" aria-hidden="true" />
+        </div>
+        <div class="qa-cleanup-text">
+            <span class="qa-cleanup-title">@Texts.CleanUpPromptText</span>
+            <span class="qa-cleanup-sub">@Texts.CloseAndRemoveOpenFilesToolStripButtonToolTipText</span>
+        </div>
+        <button type="button"
+                class="qa-cleanup-btn"
+                @onclick="(e) => homeActionModel.CleanAndRemoveOpenFilesButton_Click(e)">
+            @Texts.CleanUpPromptText
+        </button>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsCleanUpRequired { get; set; }
+
+    [Parameter] public string ActionFor { get; set; }
+
+    protected override void OnInitialized()
+    {
+        homeActionModel!.OnUpdateViewState += () => InvokeAsync(StateHasChanged);
+
+        base.OnInitialized();
+    }
+}

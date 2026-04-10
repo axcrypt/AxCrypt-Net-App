@@ -14,6 +14,11 @@ public class EditSecretViewModel : ManageSecretViewModel
 {
     public EditSecretViewModel(SecretService secretService) : base(secretService)
     {
+        if (Secret == null)
+        {
+            return;
+        }
+        
         switch (Secret.SecretType)
         {
             case Api.Model.Secret.SecretType.Legacy:

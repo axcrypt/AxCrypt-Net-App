@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Api;
 using AxCrypt.Api.Model.Secret;
+using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.Data;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
@@ -57,9 +58,14 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
 
     public async Task UpgradeFreeUser()
     {
-        if(New<AxCryptOnlineState>().IsOffline)
+        if (New<AxCryptOnlineState>().IsOffline)
         {
-            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.AlertText,  Texts.OfflineInternetRequiredText);
+            await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.AlertText, Texts.OfflineInternetRequiredText);
+            return;
+        }
+
+        if (!await New<UserEntitlementService>().UserHasCapability(LimitedCapability.CreateSecret, New<AccountStatusViewModel>().SubscriptionLevel))
+        {
             return;
         }
 
@@ -78,6 +84,8 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
         }
 
         HasPaidSubscription = await ViewModelHelper.CheckFreeUserSecretsCountasync();
+        HasPaidSubscription = await New<UserEntitlementService>().UserHasCapability(LimitedCapability.CreateSecret, New<AccountStatusViewModel>().SubscriptionLevel);
+
         HasNoSecretsCapability = HasPaidSubscription ? false : true;
     }
 
@@ -156,14 +164,17 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
         set { SetProperty(nameof(SelectedSecretListFilter), value); }
     }
 
-    public bool ShowSecretTypeCreateMenu { get { return GetProperty<bool>(nameof(ShowSecretTypeCreateMenu)); } set { SetProperty(nameof(ShowSecretTypeCreateMenu), value); } }
+    public bool ShowSecretTypeCreateMenu
+    { get { return GetProperty<bool>(nameof(ShowSecretTypeCreateMenu)); } set { SetProperty(nameof(ShowSecretTypeCreateMenu), value); } }
 
-    public bool ShowSecretFilterMenu { get { return GetProperty<bool>(nameof(ShowSecretFilterMenu)); } set { SetProperty(nameof(ShowSecretFilterMenu), value); } }
+    public bool ShowSecretFilterMenu
+    { get { return GetProperty<bool>(nameof(ShowSecretFilterMenu)); } set { SetProperty(nameof(ShowSecretFilterMenu), value); } }
 
     public bool HasPaidSubscription
     { get { return GetProperty<bool>(nameof(HasPaidSubscription)); } private set { SetProperty(nameof(HasPaidSubscription), value); } }
 
-    public bool HasNoSecretsCapability { get { return GetProperty<bool>(nameof(HasNoSecretsCapability)); } private set { SetProperty(nameof(HasNoSecretsCapability), value); } }
+    public bool HasNoSecretsCapability
+    { get { return GetProperty<bool>(nameof(HasNoSecretsCapability)); } private set { SetProperty(nameof(HasNoSecretsCapability), value); } }
 
     public bool ShowSecretsList
     { get { return GetProperty<bool>(nameof(ShowSecretsList)); } private set { SetProperty(nameof(ShowSecretsList), value); } }
@@ -228,9 +239,11 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
             case "TXT":
                 saveResult = await ExportTextAsync();
                 break;
+
             case "XML":
                 saveResult = await ExportXml();
                 break;
+
             default:
                 _StatusAlertService?.Error("Unsupported file type.");
                 return;
@@ -244,6 +257,16 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
         {
             _StatusAlertService?.Error("Failed to download the file. Please check your internet connection and try again.");
         }
+    }
+
+    /// <summary>
+    /// Drops the in-memory secret cache so the next <see cref="FindSecrets"/>
+    /// re-queries the server. Call after a create or delete so the list
+    /// reflects the change immediately instead of serving a stale cache.
+    /// </summary>
+    public void InvalidateCache()
+    {
+        _CachedSecrets = new Dictionary<SecretFilterOption, ObservableCollection<SecretViewModel>>();
     }
 
     /// <summary>

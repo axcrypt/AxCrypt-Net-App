@@ -1,0 +1,154 @@
+@using AxCrypt.App.Shared.Desktop.Models
+@inject NavigationManager Navigation
+
+<div class="vault-shell">
+
+    <!-- Header -->
+    <div class="vault-page-header">
+        <div class="vph-left">
+            <div class="vph-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                    <path d="M7 11V7a5 5 0 0110 0v4"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class="vph-title">Secure Vault</h1>
+                <p class="vph-sub">@VaultPath · <strong>@FilesInVault</strong> files · AES-256 protected</p>
+            </div>
+        </div>
+        <div class="vph-actions">
+            <button class="vph-btn vph-btn--secondary" @onclick="LockVault">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                @(IsLocked ? "Unlock Vault" : "Lock Vault")
+            </button>
+            <button class="vph-btn" @onclick='() => Navigation.NavigateTo("/actions/vault-add")'>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add to Vault
+            </button>
+        </div>
+    </div>
+
+    @if (IsLocked)
+    {
+        <!-- Locked State -->
+        <div class="vault-locked">
+            <div class="vl-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                    <path d="M7 11V7a5 5 0 0110 0v4"/>
+                </svg>
+            </div>
+            <h3>Vault is Locked</h3>
+            <p>Enter your vault password to access your files.</p>
+            <div class="vl-input-row">
+                <input type="password" @bind="UnlockPassword" placeholder="Vault password..." class="vl-input" />
+                <button class="vl-unlock-btn" @onclick="UnlockVault">Unlock</button>
+            </div>
+            @if (!string.IsNullOrEmpty(UnlockError))
+            {
+                <div class="vl-error">@UnlockError</div>
+            }
+        </div>
+    }
+    else
+    {
+        <!-- Vault Stats -->
+        <div class="vault-stats">
+            <div class="vs-card">
+                <div class="vs-icon" style="background:#dbeafe"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                <span class="vs-num">@FilesInVault</span><span class="vs-label">Files Protected</span>
+            </div>
+            <div class="vs-card">
+                <div class="vs-icon" style="background:#dcfce7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z"/></svg></div>
+                <span class="vs-num">AES-256</span><span class="vs-label">Encryption</span>
+            </div>
+            <div class="vs-card">
+                <div class="vs-icon" style="background:#fef3c7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <span class="vs-num">@LastBackup</span><span class="vs-label">Last Backup</span>
+            </div>
+            <div class="vs-card">
+                <div class="vs-icon" style="background:#f5f3ff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+                <span class="vs-num">@VaultSizeGB GB</span><span class="vs-label">Total Size</span>
+            </div>
+        </div>
+
+        <!-- Auto-encrypt banner -->
+        <div class="vault-auto-banner">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z"/></svg>
+            <span>Auto-encryption is <strong>ON</strong> — files saved to this folder are encrypted automatically</span>
+            <button class="vab-settings" @onclick='() => Navigation.NavigateTo("/settings/advanced")'>Manage</button>
+        </div>
+
+        <!-- Vault File List -->
+        <div class="vault-files">
+            <div class="vf-header-row">
+                <h3 class="vf-title">Vault Contents</h3>
+                <div class="vf-actions">
+                    <input type="text" @bind="VaultSearch" @bind:event="oninput" placeholder="Search vault..." class="vf-search" />
+                    <button class="vf-sort">Sort ↕</button>
+                </div>
+            </div>
+
+            @if (!VaultFiles.Any())
+            {
+                <div class="vf-empty">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+                    <p>Your vault is empty. Add files to protect them.</p>
+                </div>
+            }
+            else
+            {
+                @foreach (var f in FilteredVaultFiles)
+                {
+                    <div class="vf-row">
+                        <div class="vf-icon-wrap" style="background:#eff6ff">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="vf-info">
+                            <span class="vf-name">@f.Name</span>
+                            <span class="vf-meta">@f.Size · @f.Date</span>
+                        </div>
+                        <span class="vf-algo">AES-256</span>
+                        <div class="vf-btns">
+                            <button class="vf-btn">Open</button>
+                            <button class="vf-btn">Share</button>
+                            <button class="vf-btn vf-btn--out">Remove</button>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private string VaultPath    { get; set; } = @"C:\Users\Alex\Secure Vault";
+    private int    FilesInVault { get; set; } = 45;
+    private string LastBackup   { get; set; } = "2h ago";
+    private double VaultSizeGB  { get; set; } = 2.4;
+    private bool   IsLocked     { get; set; } = false;
+    private string UnlockPassword { get; set; } = string.Empty;
+    private string UnlockError  { get; set; } = string.Empty;
+    private string VaultSearch  { get; set; } = string.Empty;
+
+    private void LockVault()   { IsLocked = true; UnlockPassword = string.Empty; }
+    private void UnlockVault()
+    {
+        if (string.IsNullOrEmpty(UnlockPassword)) { UnlockError = "Please enter your vault password."; return; }
+        if (UnlockPassword != "demo123")          { UnlockError = "Incorrect password. Try again."; return; }
+        IsLocked = false; UnlockError = string.Empty;
+    }
+
+    private List<FileItem> VaultFiles = new()
+    {
+        new(){Name="Project_Proposal.pdf", Size="25.4 MB",Date="Today, 2:30 PM", Status="Encrypted",IconColor="#eff6ff",ExtLabel=""},
+        new(){Name="Financial_Report.xlsx",Size="12.3 MB",Date="Yesterday",       Status="Encrypted",IconColor="#f0fdf4",ExtLabel=""},
+        new(){Name="Client_Records.enc",   Size="8.7 MB", Date="May 20, 2025",    Status="Encrypted",IconColor="#eff6ff",ExtLabel=""},
+        new(){Name="Presentation.pptx",    Size="30.1 MB",Date="May 19, 2025",    Status="Encrypted",IconColor="#fff7ed",ExtLabel=""},
+    };
+
+    private IEnumerable<FileItem> FilteredVaultFiles => string.IsNullOrEmpty(VaultSearch)
+        ? VaultFiles
+        : VaultFiles.Where(f => f.Name.Contains(VaultSearch, StringComparison.OrdinalIgnoreCase));
+}

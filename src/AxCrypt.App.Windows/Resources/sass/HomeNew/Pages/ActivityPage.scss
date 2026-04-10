@@ -1,0 +1,34 @@
+.activity-shell{padding:20px 28px 32px;overflow-y:auto;background:#f3f4f6;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;color:#111827;flex:1}
+.act-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:16px}
+.act-title{font-size:22px;font-weight:700}
+.act-sub{font-size:13px;color:#6b7280;margin-top:3px}
+.act-header-actions{display:flex;gap:8px;align-items:center}
+.act-filter{padding:7px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;font-size:13px;outline:none;cursor:pointer}
+.act-export-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background .13s}
+.act-export-btn:hover{background:#f3f4f6}
+.act-stats{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.act-stat{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:10px 18px;display:flex;flex-direction:column;gap:2px;flex:1;min-width:100px}
+.as-num{font-size:20px;font-weight:800;color:#2563eb}
+.as-label{font-size:11.5px;color:#6b7280}
+.act-timeline{background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden}
+.act-date-group{}
+.act-date-label{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#9ca3af;padding:12px 16px 6px;background:#f9fafb;border-bottom:1px solid #f3f4f6}
+.act-log-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #f9fafb;transition:background .1s}
+.act-log-row:hover{background:#f9fafb}
+.alr-icon{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
+.alr-icon--encrypt{background:#eff6ff}
+.alr-icon--decrypt{background:#f0fdf4}
+.alr-icon--share{background:#fef3c7}
+.alr-icon--delete{background:#fef2f2}
+.alr-icon--login{background:#f5f3ff}
+.alr-body{flex:1;display:flex;flex-direction:column;gap:1px}
+.alr-action{font-size:13px;font-weight:500;color:#374151}
+.alr-file{font-size:12px;color:#2563eb;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:280px}
+.alr-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.alr-time{font-size:11.5px;color:#9ca3af}
+.alr-badge{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px}
+.alr-badge--encrypt{background:#eff6ff;color:#1d4ed8}
+.alr-badge--decrypt{background:#f0fdf4;color:#15803d}
+.alr-badge--share{background:#fef3c7;color:#92400e}
+.alr-badge--delete{background:#fef2f2;color:#b91c1c}
+.alr-badge--login{background:#f5f3ff;color:#5b21b6}

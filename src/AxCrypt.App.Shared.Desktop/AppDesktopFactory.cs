@@ -1,4 +1,6 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Entitlement.Contracts;
+using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.Desktop.CloudCore;
 using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Components.Pages;
@@ -7,6 +9,7 @@ using AxCrypt.App.Shared.Desktop.ViewModels;
 using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser;
 using AxCrypt.App.Shared.Desktop.ViewModels.Home;
 using AxCrypt.App.Shared.Desktop.ViewModels.Main;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core.Authenticator.Service;
@@ -53,6 +56,20 @@ public static class AppDesktopFactory
         services.AddSingleton<CopyToClipboardUtility>();
         services.AddSingleton<PasswordStrengthMeterViewModel>();
         services.AddSingleton<DesktopFilePickerViewModel>();
+
+        services.AddSingleton<PopupService>();
+        services.AddSingleton<UserService>();
+        services.AddSingleton<PaidFeaturegateService>();
+        services.AddSingleton<NavPageService>();
+        services.AddSingleton<BatchFileOperationService>();
+
+        TypeMap.Register.Singleton<UserEntitlementService>(() => new UserEntitlementService());
+
+        // UI-facing feature usage provider — wraps UserEntitlementService and
+        // adds an offline-cache + replay layer so FreePlanLimitBar always
+        // has counters to render, even before the API call finishes or
+        // when the user is fully offline.
+        services.AddSingleton<IFeatureUsageProvider, FeatureUsageAdapter>();
 
         TypeMap.Register.Singleton<IVerifySignInPassword>(() => new VerifySignInPassword());
         TypeMap.Register.Singleton<IMultiFactorAuthService>(() => new MultiFactorAuthService());

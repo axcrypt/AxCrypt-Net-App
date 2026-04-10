@@ -1,7 +1,10 @@
 using AxCrypt.Abstractions;
 using AxCrypt.Api.Model.TextEncryption;
+using AxCrypt.App.Entitlement.Models;
+using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Utility.View;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
@@ -31,6 +34,7 @@ public enum TextShareExpireOption
 public class TextShareViewModel : ViewModelBase
 {
     private TextEncryptionViewModel _textEncryptionViewModel;
+
     public TextShareViewModel(TextEncryptionViewModel textEncryptionViewModel)
     {
         _textEncryptionViewModel = textEncryptionViewModel;
@@ -68,6 +72,7 @@ public class TextShareViewModel : ViewModelBase
     }
 
     private bool _isVisible = false;
+
     public bool IsVisible
     {
         get
@@ -151,18 +156,23 @@ public class TextShareViewModel : ViewModelBase
             case TextShareExpireOption.OneHour:
                 ExpiresIn = New<INow>().Utc.AddHours(1);
                 break;
+
             case TextShareExpireOption.OneDay:
                 ExpiresIn = New<INow>().Utc.AddDays(1);
                 break;
+
             case TextShareExpireOption.OneWeek:
                 ExpiresIn = New<INow>().Utc.AddDays(7);
                 break;
+
             case TextShareExpireOption.OneMonth:
                 ExpiresIn = New<INow>().Utc.AddMonths(1);
                 break;
+
             case TextShareExpireOption.Forever:
                 ExpiresIn = DateTime.MaxValue;
                 break;
+
             default:
                 ErrorMessage = "Invalid expires in option selected!";
                 break;
@@ -191,6 +201,14 @@ public class TextShareViewModel : ViewModelBase
             return;
         }
 
+        UsageLimit usage = await New<UserEntitlementService>().GetAvailableUsageLimit(LimitedCapability.ShareEncryptedText, New<AccountStatusViewModel>().SubscriptionLevel);
+
+        if (usage != null && ReceiverList.Count > (usage.MaxCount - usage.UsedCount))
+        {
+            ErrorMessage = usage.ValidationMessage;
+            return;
+        }
+
         IEnumerable<UserPublicKey> availablePublicKeys = null;
         if (ReceiverList != null && ReceiverList.Any())
         {
@@ -201,6 +219,11 @@ public class TextShareViewModel : ViewModelBase
         }
 
         await InternalApplyShareAsync(availablePublicKeys, Passphrase);
+
+        if (ReceiverList != null && ReceiverList.Any() && usage != null)
+        {
+            await New<UserEntitlementService>().SyncUserUsageCountAsync(LimitedCapability.ShareEncryptedText, New<AccountStatusViewModel>().SubscriptionLevel, ReceiverList.Count());
+        }
     }
 
     private async Task InternalApplyShareAsync(IEnumerable<UserPublicKey>? availablePublicKeys, Passphrase passphrase)
@@ -223,8 +246,8 @@ public class TextShareViewModel : ViewModelBase
                 UpdatedUtc = New<INow>().Utc,
             };
 
-
             Guid sharedSecretId = await TextShareApiHelper.ShareTextAsync(logOnIdentity, textEncryptionApiModel);
+
             if (sharedSecretId != Guid.Empty)
             {
                 Uri baseApiUri = AxCrypt.Core.Resolve.UserSettings.RestApiBaseUrl;

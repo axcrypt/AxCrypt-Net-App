@@ -1,35 +1,28 @@
 ﻿@using AxCrypt.Content
 
-<div class="top-page-title-container">
-    <div class="medium-12 columns">
-        <h1 class="page-title">
-            @Texts.TextEncryptionLinkLabel
-        </h1>
+<div class="page-content-body-section">
+    <div class="action-tabs">
+        <div id="encrypt-tab" class="act-tab @(TabIndex == 1 ? "active" : "")" @onclick="() => SetActiveTab(1)">
+            <img class="tabicon encrypt-ico" alt="encrypt-icon" />
+            <a href="javascript:void(0);">@Texts.TextEncryptionSideMenuHead1</a>
+        </div>
+        <div id="decrypt-tab" class="act-tab @(TabIndex == 2 ? "active" : "")" @onclick="() => SetActiveTab(2)">
+            <img class="tabicon decrypt-ico" alt="decrypt-icon" />
+            <a href="javascript:void(0);">@Texts.TextEncryptionSideMenuHead3</a>
+        </div>
+    </div>
+
+    <div class="parent-container">
+        @if (TabIndex == 1)
+        {
+            <AxCrypt.App.Shared.Desktop.Components.TextEncryption._TextEncryption />
+        }
+        else if (TabIndex == 2)
+        {
+            <AxCrypt.App.Shared.Desktop.Components.TextEncryption._TextDecryption />
+        }
     </div>
 </div>
-
-<div class="action-tabs">
-    <div id="encrypt-tab" class="act-tab @(TabIndex == 1 ? "active" : "")" @onclick="() => SetActiveTab(1)">
-        <img class="tabicon encrypt-ico" alt="encrypt-icon" />
-        <a href="javascript:void(0);">@Texts.TextEncryptionSideMenuHead1</a>
-    </div>
-    <div id="decrypt-tab" class="act-tab @(TabIndex == 2 ? "active" : "")" @onclick="() => SetActiveTab(2)">
-        <img class="tabicon decrypt-ico" alt="decrypt-icon" />
-        <a href="javascript:void(0);" >@Texts.TextEncryptionSideMenuHead3</a>
-    </div>
-</div>
-
-<div class="parent-container">
-    @if (TabIndex == 1)
-    {
-        <AxCrypt.App.Shared.Desktop.Components.TextEncryption._TextEncryption />
-    }
-    else if (TabIndex == 2)
-    {
-        <AxCrypt.App.Shared.Desktop.Components.TextEncryption._TextDecryption />
-    }
-</div>
-
 @code {
     public int TabIndex { get; set; }
 

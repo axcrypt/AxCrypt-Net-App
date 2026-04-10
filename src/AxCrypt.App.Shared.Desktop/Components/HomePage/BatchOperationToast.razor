@@ -1,0 +1,188 @@
+@using System.Threading
+@using AxCrypt.App.Shared.Desktop.Services
+
+@inject BatchFileOperationService batchService
+
+@implements IDisposable
+
+@*
+    Non-blocking toast that summarizes the most recent batch encrypt /
+    decrypt / open / remove run. Shows:
+      • progress while the batch is in flight ("Encrypting 3 of 7…")
+      • a green summary toast on full success
+      • a red summary toast when one or more files failed, with an
+        expandable list of failure reasons and an "ignore and continue"
+        feel — the toast does NOT block subsequent operations.
+    The toast auto-dismisses 8 s after a success-only batch finishes.
+    Failure toasts stick until the user closes them so failed files
+    can be reviewed at leisure.
+*@
+
+@if (Visible)
+{
+    <div class="batch-toast @ToastClass" role="status" aria-live="polite">
+        <div class="bt-header">
+            <div class="bt-icon">@StatusIcon</div>
+            <div class="bt-text">
+                <span class="bt-title">@Title</span>
+                <span class="bt-sub">@Subtitle</span>
+            </div>
+            <button class="bt-close" @onclick="Hide" title="Dismiss" aria-label="Dismiss">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+
+        @if (Result != null && Result.HasFailures)
+        {
+            <button class="bt-toggle" @onclick="() => DetailOpen = !DetailOpen">
+                @(DetailOpen ? "Hide details" : "View details")
+            </button>
+
+            @if (DetailOpen)
+            {
+                <ul class="bt-failures">
+                    @foreach (BatchFileError err in Result.Failed)
+                    {
+                        <li class="bt-failure-row" title="@err.FilePath">
+                            <span class="bt-failure-name">@err.FileName</span>
+                            <span class="bt-failure-reason">@err.Reason</span>
+                        </li>
+                    }
+                </ul>
+            }
+        }
+    </div>
+}
+
+@code {
+    private BatchOperationResult? Result;
+    private int Completed;
+    private int Total;
+    private bool DetailOpen;
+    private bool Visible;
+    private CancellationTokenSource? _dismissCts;
+
+    protected override void OnInitialized()
+    {
+        batchService.OnProgress += HandleProgress;
+        batchService.OnFinished += HandleFinished;
+    }
+
+    public void Dispose()
+    {
+        batchService.OnProgress -= HandleProgress;
+        batchService.OnFinished -= HandleFinished;
+        _dismissCts?.Cancel();
+        _dismissCts?.Dispose();
+    }
+
+    private void HandleProgress(int completed, int total)
+    {
+        Completed = completed;
+        Total = total;
+        if (Total > 1)
+        {
+            // Only show the progress chip for actual batches (≥ 2 files).
+            // Single-file ops would just flash.
+            Result = null;
+            DetailOpen = false;
+            Visible = true;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void HandleFinished(BatchOperationResult result)
+    {
+        Result = result;
+        DetailOpen = false;
+        Visible = result.Total > 1 || result.HasFailures;
+        InvokeAsync(StateHasChanged);
+
+        if (!result.HasFailures && result.Total > 1)
+        {
+            ScheduleAutoDismiss(8000);
+        }
+    }
+
+    private void ScheduleAutoDismiss(int ms)
+    {
+        _dismissCts?.Cancel();
+        _dismissCts = new CancellationTokenSource();
+        CancellationToken token = _dismissCts.Token;
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await Task.Delay(ms, token);
+            }
+            catch (TaskCanceledException)
+            {
+                return;
+            }
+            if (!token.IsCancellationRequested)
+            {
+                Visible = false;
+                await InvokeAsync(StateHasChanged);
+            }
+        });
+    }
+
+    private void Hide()
+    {
+        _dismissCts?.Cancel();
+        Visible = false;
+    }
+
+    // ── Visual state ───────────────────────────────────────────
+    private bool InProgress => Result == null && Total > 0;
+    private bool HadFailures => Result != null && Result.HasFailures;
+    private bool AllSucceeded => Result != null && !Result.HasFailures;
+
+    private string ToastClass =>
+        InProgress  ? "batch-toast--progress" :
+        HadFailures ? "batch-toast--error"    :
+        AllSucceeded? "batch-toast--success"  : "";
+
+    private string Title
+    {
+        get
+        {
+            if (InProgress)  return $"Working on {Total} file(s)";
+            if (HadFailures) return Result!.HasSucceeded
+                ? $"{Result.OperationName} {Result.Succeeded.Count}/{Result.Total} • {Result.Failed.Count} failed"
+                : $"{Result.OperationName} failed for {Result.Failed.Count} file(s)";
+            if (AllSucceeded) return $"{Result!.OperationName} {Result.Succeeded.Count} file(s)";
+            return "";
+        }
+    }
+
+    private string Subtitle
+    {
+        get
+        {
+            if (InProgress)   return $"{Completed} of {Total} done";
+            if (HadFailures)  return "Other files continued — see details below.";
+            if (AllSucceeded) return "All done.";
+            return "";
+        }
+    }
+
+    private RenderFragment StatusIcon
+    {
+        get
+        {
+            if (InProgress)
+            {
+                return @<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>;
+            }
+            if (HadFailures)
+            {
+                return @<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>;
+            }
+            return @<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12" /></svg>;
+        }
+    }
+}

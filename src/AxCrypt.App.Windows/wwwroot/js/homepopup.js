@@ -343,6 +343,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             paidPlanRequirePopup.style.display = "none";
         }
     });
+
+    window.triggerClick = (elementId) => {
+        const el = document.getElementById(elementId);
+        if (el) {
+            el.click();
+        }
+    };
 });
 
 function ShowHidePopup(popupId) {
@@ -404,3 +411,7 @@ function setPositionPopupAtButton(buttonId, popupId, e) {
 
     popup.style.setProperty('--popup-menu-right', distanceToRight + 'px');
 }
+
+window.getWindowHeight = function () {
+    return window.innerHeight;
+};

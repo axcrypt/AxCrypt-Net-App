@@ -1,0 +1,358 @@
+﻿@using AxCrypt.App.Shared.Desktop.Models
+@using AxCrypt.App.Shared.Desktop.Services
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Desktop.ViewModels.Main
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.ViewModels
+@using Microsoft.AspNetCore.Components.Web
+
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+@inject RecentFilesViewModel recentFilesViewModel
+@inject RecentFoldersViewModel recentFoldersViewModel
+@inject AppSettingsViewModel appSettingsViewModel
+@inject PopupService popupService
+@inject NavPageService navPageService
+@inject UserService userService
+@inject PaidFeaturegateService paidFeaturegateService
+
+<!-- Global Search -->
+<div class="search-wrapper">
+    <label class="search-box @(SearchFocused ? "search-box--focused" : "")">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+        <input @bind="SearchQuery" @bind:event="oninput"
+               @onfocus="() => SearchFocused = true"
+               @onblur="() => { SearchFocused = false; }"
+               placeholder="Search files, vault, tools..."
+               class="search-input" />
+        @if (!string.IsNullOrEmpty(SearchQuery))
+        {
+            <button class="search-clear" @onclick="() => SearchQuery = string.Empty">×</button>
+        }
+    </label>
+    @if (!string.IsNullOrEmpty(SearchQuery) && SearchResults.Any())
+    {
+        <div class="search-results" @onclick:stopPropagation>
+            @foreach (IGrouping<string, SearchResult> grp in SearchResults.GroupBy(r => r.Category))
+            {
+                <div class="sr-group-label">@grp.Key</div>
+                @foreach (SearchResult r in grp)
+                {
+                    <button class="sr-item @(r.IsLocked ? "sr-item--locked" : "")"
+                            @onclick="async () => await OnSearchResult(r)">
+                        <span class="sr-icon">@((MarkupString)r.IconSvg)</span>
+                        <div class="sr-text">
+                            <span class="sr-name">@HighlightMatch(r.Name, SearchQuery)</span>
+                            <span class="sr-sub">@r.SubText</span>
+                        </div>
+                        @if (r.IsLocked)
+                        {
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" title="Paid feature">
+                                <rect x="3" y="11" width="18" height="11" rx="2" />
+                                <path d="M7 11V7a5 5 0 0110 0v4" />
+                            </svg>
+                        }
+                        else
+                        {
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><polyline points="9 18 15 12 9 6" /></svg>
+                        }
+                    </button>
+                }
+            }
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(SearchQuery) && !SearchResults.Any())
+    {
+        <div class="search-results">
+            <div class="sr-empty">No results for "<strong>@SearchQuery</strong>"</div>
+        </div>
+    }
+</div>
+
+@code {
+    // ═══════════════════════════════════════════
+    //  GLOBAL SEARCH
+    // ═══════════════════════════════════════════
+    private string SearchQuery { get; set; } = string.Empty;
+    private bool SearchFocused { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        AllFiles = recentFilesViewModel.RecentFilesList;
+
+        // Secured folders come from a shared singleton view-model. If the
+        // Secured Folders page has never been opened the list is still empty,
+        // so prime it once here — guarded so we don't re-bind its events.
+        if (!recentFoldersViewModel.RecentFoldersList.Any())
+        {
+            recentFoldersViewModel.Initialize();
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        AllFiles = recentFilesViewModel.RecentFilesList;
+    }
+
+    private List<SearchResult> SearchResults => string.IsNullOrWhiteSpace(SearchQuery)
+        ? new()
+        : BuildSearchResults(SearchQuery);
+
+    // Inline category icons (kept as constants so BuildSearchResults stays readable).
+    private const string FileIcon = "<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='#3b82f6' stroke-width='2'><path d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/><polyline points='14 2 14 8 20 8'/></svg>";
+    private const string FolderIcon = "<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='#0ea5e9' stroke-width='2'><path d='M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z'/></svg>";
+    private const string SettingsIcon = "<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='#f59e0b' stroke-width='2'><circle cx='12' cy='12' r='3'/><path d='M19.07 4.93l-1.41 1.41M5.34 18.66l-1.41 1.41M20 12h2M2 12h2M19.07 19.07l-1.41-1.41M5.34 5.34L3.93 3.93M12 20v2M12 2v2'/></svg>";
+    private const string ToolsIcon = "<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='#8b5cf6' stroke-width='2'><path d='M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z'/></svg>";
+    private const string PageIcon = "<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='#10b981' stroke-width='2'><rect x='3' y='3' width='18' height='18' rx='2'/></svg>";
+
+    private List<SearchResult> BuildSearchResults(string q)
+    {
+        List<SearchResult> results = new List<SearchResult>();
+
+        // Free-tier users see file/folder rows with a lock badge — clicking
+        // them opens the paid-gate popup instead of running the action.
+        // Same rule the Find Files tool / Secured Folders quick action use
+        // — keeps the gate consistent everywhere a free user could reach a
+        // paid file action from. Premium / Business pass through unchanged.
+        bool freeGate = userService.IsFreeTier;
+
+        // ── Files ── a result opens the file just like a Recent Files row.
+        results.AddRange(AllFiles
+            .Where(f => f.FileName.Contains(q, StringComparison.OrdinalIgnoreCase))
+            .Select(f => new SearchResult
+            {
+                Category = "Files",
+                Name = f.FileName,
+                SubText = f.Algorithm + " · " + f.FileSize,
+                Route = f.FilePath,
+                IconSvg = FileIcon,
+                IsLocked = freeGate
+            }));
+
+        // ── Folders ── secured (watched) folders open exactly like a
+        // double-click on a row in the Secured Folders page.
+        results.AddRange(recentFoldersViewModel.RecentFoldersList
+            .Where(folder => System.IO.Path.GetFileName(folder.TrimEnd('/', '\\'))
+                                 .Contains(q, StringComparison.OrdinalIgnoreCase)
+                          || folder.Contains(q, StringComparison.OrdinalIgnoreCase))
+            .Select(folder => new SearchResult
+            {
+                Category = "Folders",
+                Name = System.IO.Path.GetFileName(folder.TrimEnd('/', '\\')),
+                SubText = folder,
+                IconSvg = FolderIcon,
+                IsLocked = freeGate,
+                OnClick = () =>
+                {
+                    recentFoldersViewModel.HandleDoubleClick(
+                        new MouseEventArgs { Type = "dblclick" }, folder);
+                    return Task.CompletedTask;
+                }
+            }));
+
+        // ── Settings ── each entry either performs the setting directly
+        // (toggles) or opens the Settings popup for controls that need UI.
+        var settings = new (string Name, string Keywords, string SubText, Func<Task> Action)[]
+        {
+            ("Dark Mode",
+             "appearance theme dark light mode display colour color night",
+             "Toggle light / dark theme",
+             async () =>
+             {
+                 appSettingsViewModel.SwitchDarkMode();
+                 await JS.InvokeVoidAsync("setTheme",
+                     appSettingsViewModel.DarkTheme ? "dark" : "light");
+             }),
+
+            ("Hide Recent Files",
+             "hide recent files privacy home screen list",
+             "Toggle on / off",
+             () =>
+             {
+                 appSettingsViewModel.ToggleHideRecentFiles();
+                 return Task.CompletedTask;
+             }),
+
+            ("Work Offline",
+             "offline always offline network sync server connection",
+             "Toggle on / off",
+             () =>
+             {
+                 appSettingsViewModel.ToggleAlwaysOffline(EventArgs.Empty);
+                 return Task.CompletedTask;
+             }),
+
+            ("Language",
+             "language locale region translation culture",
+             "Open Settings",
+             OpenSettingsAsync),
+
+            ("Auto Sign-Out",
+             "auto sign out inactivity timeout idle lock session",
+             "Open Settings",
+             OpenSettingsAsync),
+
+            ("Advanced Settings",
+             "advanced settings preferences vault options properties",
+             "Open Settings",
+             OpenSettingsAsync),
+
+            ("Privacy & Security",
+             "privacy security preferences settings options",
+             "Open Settings",
+             OpenSettingsAsync),
+        };
+        results.AddRange(settings
+            .Where(s => s.Name.Contains(q, StringComparison.OrdinalIgnoreCase)
+                     || s.Keywords.Contains(q, StringComparison.OrdinalIgnoreCase))
+            .Select(s => new SearchResult
+            {
+                Category = "Settings",
+                Name = s.Name,
+                SubText = s.SubText,
+                IconSvg = SettingsIcon,
+                OnClick = s.Action
+            }));
+
+        // ── Tools ── every entry deep-links straight to that tool on the
+        // Tools page through a ?tool= query the page reads on load.
+        (string Id, string Name, string Keywords)[] toolNames = new[]
+        {
+            ("secure-delete", "Secure Delete", "secure delete permanently wipe shred"),
+            ("anon-rename", "Anonymous Rename", "hide filename anonymize anonymous rename"),
+            ("restore-rename", "Restore Original Names", "restore original names undo rename"),
+            ("find-files", "Find Encrypted Files", "scan find encrypted locate files"),
+            ("activity-logs", "User Activity", "activity log history file actions audit"),
+            ("upgrade-tool", "Upgrade to AES-256", "upgrade aes 256 128 re-encrypt legacy"),
+            ("invite", "Invite Friend", "invite share referral friend colleague"),
+            ("import-public-key", "Import Sharing Key", "import public sharing key"),
+            ("export-public-key", "Export Sharing Key", "export public sharing key"),
+            ("export-axcryptid-public-key", "Export AxCrypt ID", "export axcrypt id private key backup"),
+        };
+        // Paid tools — surface a lock badge for free users so search
+        // mirrors the gate the Tools page itself applies.
+        HashSet<string> paidToolIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "find-files",
+            "anon-rename",
+            "restore-rename",
+            "upgrade-tool",
+            "secure-delete",
+        };
+
+        results.AddRange(toolNames
+            .Where(t => t.Name.Contains(q, StringComparison.OrdinalIgnoreCase)
+                     || t.Keywords.Contains(q, StringComparison.OrdinalIgnoreCase))
+            .Select(t => new SearchResult
+            {
+                Category = "Tools",
+                Name = t.Name,
+                SubText = "Open in Tools",
+                Route = $"/tools?tool={t.Id}",
+                IconSvg = ToolsIcon,
+                IsLocked = freeGate && paidToolIds.Contains(t.Id)
+            }));
+
+        // ── Pages ── real in-app routes (the same ones the side menu uses).
+        (string Name, string SubText, string Route)[] pages = new[]
+        {
+            ("Home", "Dashboard & quick actions", "/"),
+            ("Vault", "Your secure vault", "/vault"),
+            ("Secured Folders", "Auto-encrypt watched folders", "/securedfolders"),
+            ("Password Manager", "Passwords, cards & notes", "/passwordManager"),
+            ("Secured Messenger", "Encrypted messages", "/securedmessenger"),
+            ("Text Encryption", "Encrypt & share text", "/textencryption"),
+            ("Notifications", "Alerts & updates", "/notification"),
+            ("Help & Support", "Guides and contact", "/helpcenter"),
+        };
+        results.AddRange(pages
+            .Where(p => p.Name.Contains(q, StringComparison.OrdinalIgnoreCase))
+            .Select(p => new SearchResult
+            {
+                Category = "Pages",
+                Name = p.Name,
+                SubText = p.SubText,
+                Route = p.Route,
+                IconSvg = PageIcon
+            }));
+
+        return results.Take(12).ToList();
+    }
+
+    /// <summary>Opens the Settings popup — shared by every Settings result
+    /// whose target is a control that needs UI rather than a direct toggle.</summary>
+    private Task OpenSettingsAsync()
+    {
+        popupService.OpenSettingsMenu();
+        return Task.CompletedTask;
+    }
+
+    private MarkupString HighlightMatch(string text, string q)
+    {
+        if (string.IsNullOrEmpty(q)) return (MarkupString)text;
+        var idx = text.IndexOf(q, StringComparison.OrdinalIgnoreCase);
+        if (idx < 0) return (MarkupString)text;
+        return (MarkupString)(text[..idx] + $"<mark class='sr-highlight'>{text.Substring(idx, q.Length)}</mark>" + text[(idx + q.Length)..]);
+    }
+
+    private async Task OnSearchResult(SearchResult r)
+    {
+        // Clear the query first so the results dropdown closes for every
+        // branch (the old code returned early and left it open).
+        SearchQuery = string.Empty;
+
+        // Locked → free-user paid-gate popup. We never run the underlying
+        // action or navigate to the page; the gate is the only outcome.
+        if (r.IsLocked)
+        {
+            string headline = r.Category switch
+            {
+                "Files"   => "File search",
+                "Folders" => "Secured folder search",
+                "Tools"   => r.Name,
+                _         => r.Name,
+            };
+            paidFeaturegateService.ShowPaidGate(
+                headline,
+                "Search and open encrypted files, folders and paid tools without limits.",
+                new[]
+                {
+                    "Search across all your encrypted files",
+                    "Open secured folders directly from search",
+                    "Unlock Find Files and other paid tools",
+                    "Priority support and stronger limits",
+                });
+            return;
+        }
+
+        // Action-backed results (Settings that perform directly, Folders that
+        // open) run their delegate and stop — no navigation involved.
+        if (r.OnClick != null)
+        {
+            await r.OnClick.Invoke();
+            return;
+        }
+
+        if (r.Category == "Files")
+        {
+            // Open the file exactly like double-clicking a Recent Files row.
+            await recentFilesViewModel.OpenSecuredMouseDoubleClick(
+                new MouseEventArgs { Type = "dblclick" }, r.Route);
+            return;
+        }
+
+        // Tools & Pages — go to the real in-app route and sync the side-menu
+        // active state, mirroring how the TopBar navigates. Tools carry a
+        // ?tool= query the Tools page reads to open the exact tool; strip it
+        // before setting the active page so the side menu still matches.
+        popupService.CloseAllPopups();
+        Navigation.NavigateTo(r.Route);
+        navPageService.SetActivePage(r.Route.Split('?')[0]);
+    }
+
+    private IEnumerable<FileDetails> AllFiles = new List<FileDetails>();
+}

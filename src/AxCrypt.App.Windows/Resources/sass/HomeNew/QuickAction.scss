@@ -1,0 +1,170 @@
+﻿/* ═══════════════════════════════════════════
+   Quick Actions
+════════════════════════════════════════════ */
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+}
+
+.qa-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 14px 8px 12px;
+    border: 1.5px solid $brand-green-lt;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+    text-align: center;
+    background: $brand-green-lt;
+    color: $active-text-cr;
+
+    &:hover {
+        background: $brand-green-lt;
+        border-color: $brand-green;
+        box-shadow: 0 2px 8px rgba(37,99,235,.12);
+    }
+
+    &.disabled {
+        background: $bg-page;
+        color: $text-primary;
+
+        &:hover {
+            background: $bg-page;
+            color: $text-primary;
+            box-shadow: 0 2px 8px rgba(37,99,235,.12);
+        }
+
+        .qa-icon img {
+            filter: brightness(0.5);
+        }
+    }
+}
+
+    .qa-btn:hover {
+        background: $brand-green-lt;
+        border-color: $brand-green;
+        box-shadow: 0 2px 8px rgba(37,99,235,.12);
+    }
+
+.qa-icon-wrap {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+}
+
+.qa-icon {
+    display: grid;
+    place-items: center;
+
+    img {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+.qa-label {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.qa-desc {
+    font-size: 10.5px;
+    color: $text-muted;
+    line-height: 1.2;
+}
+
+/* ═══════════════════════════════════════════
+   Clean-up attention pill
+   Visible only while files are open (re-encrypt pending)
+════════════════════════════════════════════ */
+.qa-cleanup-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    margin: 0 0 12px;
+    background: $HglhtTxt; /* amber-50 */
+    border: 1px solid $BorderClr; /* amber-200 */
+    border-left: 3px solid $BorderClr; /* amber-400 accent */
+    border-radius: 10px;
+    animation: qaCleanupSlideIn .22s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes qaCleanupSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.qa-cleanup-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: $BtnBackClr; /* amber-100 */
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    img {
+        width: 18px;
+        height: 18px;
+        filter: invert(1);
+    }
+}
+
+.qa-cleanup-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+}
+
+.qa-cleanup-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #633806; /* amber-800 */
+    line-height: 1.2;
+}
+
+.qa-cleanup-sub {
+    font-size: 11.5px;
+    color: #854F0B; /* amber-600 */
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.qa-cleanup-btn {
+    background: $ActnBgClr; /* amber-400 */
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 7px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background .15s, transform .1s;
+
+    &:hover {
+        background: $ActnBgClr; /* amber-600 */
+    }
+
+    &:active {
+        transform: scale(.97);
+    }
+}

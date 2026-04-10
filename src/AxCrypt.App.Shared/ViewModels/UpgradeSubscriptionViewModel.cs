@@ -40,7 +40,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
-            PopupTryUpgradeTitle = Texts.TryUpgradePlanTitle3;
+            PopupTryUpgradeTitle = "Activate Full Protection";
             UpgradeSubscriptionDialog.Show();
         }
 
@@ -58,7 +58,7 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
-            PopupTryUpgradeTitle = "<label style='margin-top:10px;font-size:19px;'>We noticed you don’t have a subscription!</label><label style='font-size:19px;margin-top:10px;'>" + @Texts.TryUpgradePlanTitle3 + "</label";
+            PopupTryUpgradeTitle = "<label style='margin-top:10px;font-size:19px;'>We noticed you don’t have a subscription!</label><label style='font-size:19px;margin-top:10px;'> Activate Full Protection </label";
             UpgradeSubscriptionDialog.Show();
         }
 

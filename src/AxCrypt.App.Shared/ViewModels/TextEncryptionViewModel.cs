@@ -1,15 +1,18 @@
+using AxCrypt.App.Entitlement.Services;
+using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.Services.Interface;
+using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.Content;
+using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Runtime;
+using AxCrypt.Core.UI;
+using AxCrypt.Cryptor;
+using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using AxCrypt.App.Shared.Helpers;
-using AxCrypt.App.Shared.Services.Interface;
-using AxCrypt.Content;
-using AxCrypt.Core.Crypto;
-using AxCrypt.Core.UI;
-using AxCrypt.Cryptor;
-using Microsoft.AspNetCore.Components.Web;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.ViewModels;
@@ -115,6 +118,11 @@ public class TextEncryptionViewModel
                 Texts.MaximumNotExceedCharactersNotification,
                 MaxAllowedCharators
             );
+            return;
+        }
+
+        if (!await New<UserEntitlementService>().UserHasTextEncryptionLimit(InputText, LimitedCapability.TextEncryption, New<AccountStatusViewModel>().SubscriptionLevel))
+        {
             return;
         }
 

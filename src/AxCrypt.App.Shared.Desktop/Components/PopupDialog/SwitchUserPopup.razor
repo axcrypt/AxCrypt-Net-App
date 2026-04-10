@@ -1,4 +1,5 @@
 ﻿@using AxCrypt.Abstractions
+@using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Core.UI
 @using AxCrypt.Core.UI.User
@@ -7,10 +8,11 @@
 
 @inject SwitchUserViewModel SwitchUserViewModel
 @inject NavigationManager navigationManager
+@inject PopupService popupService
 
-@if (IsVisible)
+@if (popupService.SwitchUserPopupOpen)
 {
-    <div class="SwitchUser-popup">
+    <div class="SwitchUser-popup" style="z-index:100;">
         <div class="popup-image-paragraph">
             <img class="popup-image" src="images/prfls_1.svg" alt="Switch user" style="display:block; margin:30px auto 16px auto;">
             <span class="popup-paragraph" style="font-size:14px;">@((MarkupString)string.Format(Texts.SwitchUserPopupText))</span>
@@ -48,8 +50,8 @@
             }
         </div>
         <div class="switch-user-action-section">
-            <input class="switch-user-action-btn confirm" type="button" value="Confirm" @onclick="async () => await SwitchUserViewModel.OnConfirm_Clicked()" />
-            <input class="switch-user-action-btn cancel" type="button" value="Cancel" @onclick="SwitchUserViewModel.OnCancel_Clicked" />
+            <input class="switch-user-action-btn confirm" type="button" value="Confirm" @onclick="async () => await ConfirmSwitchUserAsync()" />
+            <input class="switch-user-action-btn cancel" type="button" value="Cancel" @onclick="popupService.ToggleSwitchUserPopupOpen" />
         </div>
     </div>
 }
@@ -69,9 +71,16 @@
         }
 
         SwitchUserViewModel.OnUpdateViewState += async () => await UpdateState();
-        SwitchUserViewModel.LogOnViewModel.SwitchUserDialog.OnDialogVisibilityChanged += async (isVisible) => await UpdateAdvancedOptionsState(isVisible);
+        popupService.OnChange += async () => await UpdateState();
+
+        //SwitchUserViewModel.LogOnViewModel.SwitchUserDialog.OnDialogVisibilityChanged += async (isVisible) => await UpdateAdvancedOptionsState(isVisible);
 
         base.OnInitialized();
+    }
+
+    private async Task ConfirmSwitchUserAsync(){
+        await SwitchUserViewModel.OnConfirm_Clicked();
+        popupService.ToggleSwitchUserPopupOpen();
     }
 
     private void SelectEmail(string userEmail, string subsType)

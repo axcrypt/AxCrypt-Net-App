@@ -1,8 +1,12 @@
 ﻿@charset "UTF-8";
 .SwitchUser-popup {
+  /* Centered on the viewport. `margin: auto` does nothing on a
+     position:fixed element without left/right anchors, so it used
+     to sit near the top-left — top/left 50% + translate centers it. */
   position: fixed;
-  margin: 10% auto;
-  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 400px;
   min-height: 429px;
   max-height: 520px;
@@ -107,8 +111,19 @@
 }
 
 #content-wrap {
-  margin: 3% auto;
+  /* Vertically centre the sign-in content. On a tall window the form
+     sits in the middle of the viewport instead of being pinned near
+     the top with empty space below it; on a short window the column
+     grows past 100vh and the page scrolls normally.
+     position:relative is the anchor for the sign-in loader overlay
+     (was previously an inline style on the element). */
+  position: relative;
+  margin: 0 auto;
   padding: 0 50px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .reg-sec {

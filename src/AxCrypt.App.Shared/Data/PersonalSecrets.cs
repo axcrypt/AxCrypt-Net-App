@@ -1,10 +1,14 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model.Secret;
+using AxCrypt.App.Entitlement.Contracts;
+using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.Facades;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
 using AxCrypt.App.Shared.Password;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Secrets;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -181,6 +185,12 @@ public static class PersonalSecrets
         if (ViewModelHelper.CanUpdateFreeUserNewSecretCount())
         {
             New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).UpdateFreeUserSecretsCount();
+            await New<UserEntitlementService>().InsertUserUsageCount(LimitedCapability.CreateSecret, New<AccountStatusViewModel>().SubscriptionLevel);
+            IFeatureUsageProvider? usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
+            if (usage != null)
+            {
+                usage.UpdateUsageCount(FeatureKey.PasswordEntry);
+            }
         }
         return true;
     }

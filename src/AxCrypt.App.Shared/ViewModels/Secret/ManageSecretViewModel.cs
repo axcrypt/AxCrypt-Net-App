@@ -12,10 +12,34 @@ public class ManageSecretViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
 {
     public ManageSecretViewModel(SecretService secretService)
     {
-        Secret = secretService.CurrentSecret!;
+        // Defensive construction. These view-models are sometimes
+        // resolved by DI before a secret has been selected (e.g. when
+        // a page that injects ViewSecretViewModel / EditSecretViewModel
+        // first mounts). In that window secretService.CurrentSecret is
+        // null and AccountStatusViewModel may not be primed yet — the
+        // unguarded code here used to throw a NullReferenceException
+        // straight out of the constructor, which the DI container
+        // surfaced as "Object reference not set to an instance of an
+        // object" and blocked the whole page from rendering.
+        Secret = secretService?.CurrentSecret!;
 
-        HasPaidSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasPasswordManager || New<AccountStatusViewModel>().PlanState == PlanState.HasPremium || New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
-        HasBusinessSubscription = New<AccountStatusViewModel>().PlanState == PlanState.HasBusiness;
+        try
+        {
+            PlanState planState = New<AccountStatusViewModel>().PlanState;
+            HasPaidSubscription = planState == PlanState.HasPasswordManager
+                                  || planState == PlanState.HasPremium
+                                  || planState == PlanState.HasBusiness;
+            HasBusinessSubscription = planState == PlanState.HasBusiness;
+        }
+        catch
+        {
+            // Subscription status not resolvable yet — default to the
+            // most restrictive (free) state. Callers re-query the real
+            // status later via InitializeUserSubscription().
+            HasPaidSubscription = false;
+            HasBusinessSubscription = false;
+        }
+
         ClearErrorFileds();
     }
 

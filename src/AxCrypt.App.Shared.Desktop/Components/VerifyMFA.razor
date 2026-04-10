@@ -1,4 +1,4 @@
-﻿@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Content
 @using AxCrypt.App.Shared.Utility
 @using AxCrypt.Api.Model
@@ -14,113 +14,246 @@
     SelectMethod(MultiFactorAuthType.None);
 }
 
-<section class="content">
-    <article class="left-section" id="content-wrap" style="margin: 7% auto!important;">
-        <span class="tfa-sub-head">@Texts.VerifyMfaText</span>
-        <p style="margin-top: 16px;">@Texts.MfaText1 <a href="" @onclick="RedirectToMFAGuidePage" class="recry-code-btn"><span>@Texts.MFAText. </span></a>@Texts.MFAText2</p>
-        <div>
-            @if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.Authenticator && IsAuthenticatorEnabled)
-            {
-                <label class="otp-option">
-                    <input type="radio" checked @onclick="() => SelectMethod(MultiFactorAuthType.Authenticator)" />
-                    <p class="two-fa-text">@Texts.AuthenticatorAppText</p>
-                </label>
-            }
-            else if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.Email && IsEmailEnabled)
-            {
-                <label class="otp-option">
-                    <input type="radio" checked @onclick="() => SelectMethod(MultiFactorAuthType.Email)" />
-                    <p class="two-fa-text">@Texts.EmailLabel</p>
-                </label>
-            }
-            else if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.SMS && IsSmsEnabled)
-            {
-                <label class="otp-option">
-                    <input type="radio" checked @onclick="() => SelectMethod(MultiFactorAuthType.SMS)" />
-                    <p class="two-fa-text">@Texts.SMSText</p>
-                </label>
-            }
+@* Two-factor verification — same two-panel shell as the new sign-in
+   screen (LoginPageNew): brand panel left, verification form right. *@
+<section class="lp-shell">
 
-            @if (MoreThanOneEnabled && !ShowOtherOptions)
-            {
-                <a href="#" @onclick="ShowOtherOptionsMenu" class="show-other-optn">
-                    <span>@Texts.OtherMFAOptionsText</span>
-                    <img class="expd-colps-submnu-arw down" src="" alt="expnd-colps-arrow-img" />
-                </a>
-            }
+    @* ── Brand panel (left) ─────────────────────────── *@
+    <aside class="lp-brand">
+        <div class="lp-brand-bg"></div>
+        <img class="lp-brand-key" src="images/axcryptIcon.png" alt="" aria-hidden="true" />
 
-            @if (ShowOtherOptions)
-            {
-                <div id="other-options">
+        <div class="lp-brand-inner">
+            <div class="lp-brand-mark">
+                <img class="lp-brand-logo-img" src="images/axcrypt_text.png" alt="AxCrypt" />
+            </div>
+
+            <h1 class="lp-brand-headline">
+                Your files.<br />
+                Protected everywhere.<br />
+                <span class="lp-brand-emphasis">Always.</span>
+            </h1>
+
+            <p class="lp-brand-sub">
+                Secure files, passwords, and private messages with powerful encryption — before they are shared, synced, or stored in the cloud.
+            </p>
+
+            <ul class="lp-brand-pills" aria-label="Why AxCrypt">
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    AES-256 device encryption
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Secure cloud storage &amp; simple sharing
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Works across devices
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Works online <em>and</em> offline
+                </li>
+            </ul>
+        </div>
+
+        <div class="lp-brand-footer">© AxCrypt — File security made easy</div>
+    </aside>
+
+    @* ── Verification panel (right) ─────────────────── *@
+    <article class="lp-form" id="content-wrap">
+        <div class="lp-topbar"></div>
+
+        <div class="lp-form-inner">
+
+            <div class="lp-form-head">
+                <span class="lp-mfa-badge" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <polyline points="9 12 11 14 15 10" />
+                    </svg>
+                </span>
+                <h2 class="lp-title">@Texts.VerifyMfaText</h2>
+                <p class="lp-sub">
+                    @Texts.MfaText1
+                    <a href="" @onclick="RedirectToMFAGuidePage" @onclick:preventDefault
+                       class="lp-link lp-link--inline">@Texts.MFAText</a>
+                    @Texts.MFAText2
+                </p>
+            </div>
+
+            @* ── Method selection ───────────────────────── *@
+            <div class="lp-mfa-methods">
+                @if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.Authenticator && IsAuthenticatorEnabled)
+                {
+                    <label class="lp-mfa-opt lp-mfa-opt--active">
+                        <input type="radio" checked @onclick="() => SelectMethod(MultiFactorAuthType.Authenticator)" />
+                        <span class="lp-mfa-opt-ic">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="5" y="2" width="14" height="20" rx="2" /><line x1="12" y1="18" x2="12" y2="18" />
+                            </svg>
+                        </span>
+                        <span class="lp-mfa-opt-name">@Texts.AuthenticatorAppText</span>
+                    </label>
+                }
+                else if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.Email && IsEmailEnabled)
+                {
+                    <label class="lp-mfa-opt lp-mfa-opt--active">
+                        <input type="radio" checked @onclick="() => SelectMethod(MultiFactorAuthType.Email)" />
+                        <span class="lp-mfa-opt-ic">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="4" width="20" height="16" rx="2" /><polyline points="22 6 12 13 2 6" />
+                            </svg>
+                        </span>
+                        <span class="lp-mfa-opt-name">@Texts.EmailLabel</span>
+                    </label>
+                }
+                else if (LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType == MultiFactorAuthType.SMS && IsSmsEnabled)
+                {
+                    <label class="lp-mfa-opt lp-mfa-opt--active">
+                        <input type="radio" checked @onclick="() => SelectMethod(MultiFactorAuthType.SMS)" />
+                        <span class="lp-mfa-opt-ic">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 11.5a8.38 8.38 0 01-9 8.5 8.5 8.5 0 01-4-1L3 21l1.5-5a8.5 8.5 0 0117-4.5z" />
+                            </svg>
+                        </span>
+                        <span class="lp-mfa-opt-name">@Texts.SMSText</span>
+                    </label>
+                }
+
+                @if (MoreThanOneEnabled && !ShowOtherOptions)
+                {
+                    <button type="button" class="lp-mfa-altlink" @onclick="ShowOtherOptionsMenu">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                        @Texts.OtherMFAOptionsText
+                    </button>
+                }
+
+                @if (ShowOtherOptions)
+                {
                     @if (IsAuthenticatorEnabled && LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType != MultiFactorAuthType.Authenticator)
                     {
-                        <label class="otp-option">
+                        <label class="lp-mfa-opt">
                             <input type="radio" @onclick="() => SelectMethod(MultiFactorAuthType.Authenticator)" />
-                            <p class="two-fa-text">@Texts.AuthenticatorAppText</p>
+                            <span class="lp-mfa-opt-ic">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="5" y="2" width="14" height="20" rx="2" /><line x1="12" y1="18" x2="12" y2="18" />
+                                </svg>
+                            </span>
+                            <span class="lp-mfa-opt-name">@Texts.AuthenticatorAppText</span>
                         </label>
                     }
                     @if (IsEmailEnabled && LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType != MultiFactorAuthType.Email)
                     {
-                        <label class="otp-option">
+                        <label class="lp-mfa-opt">
                             <input type="radio" @onclick="() => SelectMethod(MultiFactorAuthType.Email)" />
-                            <p class="two-fa-text">@Texts.EmailLabel</p>
+                            <span class="lp-mfa-opt-ic">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="4" width="20" height="16" rx="2" /><polyline points="22 6 12 13 2 6" />
+                                </svg>
+                            </span>
+                            <span class="lp-mfa-opt-name">@Texts.EmailLabel</span>
                         </label>
                     }
                     @if (IsSmsEnabled && LogOnViewModel.MultiFactorAuthViewModel.SelectedMFAType != MultiFactorAuthType.SMS)
                     {
-                        <label class="otp-option">
+                        <label class="lp-mfa-opt">
                             <input type="radio" @onclick="() => SelectMethod(MultiFactorAuthType.SMS)" />
-                            <p class="two-fa-text">@Texts.SMSText</p>
+                            <span class="lp-mfa-opt-ic">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 11.5a8.38 8.38 0 01-9 8.5 8.5 8.5 0 01-4-1L3 21l1.5-5a8.5 8.5 0 0117-4.5z" />
+                                </svg>
+                            </span>
+                            <span class="lp-mfa-opt-name">@Texts.SMSText</span>
                         </label>
                     }
-                </div>
-            }
+                }
+            </div>
 
             @if (ShowGenerateButton)
             {
-                <button type="button" @onclick="GenerateOTP" class="generate-btn success left">
+                <button type="button" class="lp-mfa-generate" @onclick="GenerateOTP">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M4 4v6h6" /><path d="M20 20v-6h-6" />
+                        <path d="M20 8a8 8 0 00-14.93-3M4 16a8 8 0 0014.93 3" />
+                    </svg>
                     @Texts.GenerateText
                 </button>
             }
+
+            <EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit" class="lp-form-fields">
+                <DataAnnotationsValidator />
+
+                <div class="lp-field">
+                    <div class="lp-field-head">
+                        <label for="verify-code-txtbox">Verification code</label>
+                    </div>
+                    <input type="tel" inputmode="numeric" pattern="[0-9]*"
+                           id="verify-code-txtbox"
+                           class="lp-input lp-mfa-code @(IsOtpInvalid ? "lp-input--invalid" : "")"
+                           placeholder="------" maxlength="6"
+                           @ref="OtpInputRef"
+                           @bind="LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword"
+                           @oninput="ValidateCode"
+                           onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+                    <ValidationMessage class="lp-mfa-validation" For="@(() => LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword)" />
+                </div>
+
+                <div class="lp-mfa-remember">
+                    <input type="checkbox" id="click-checkbox" @bind="LogOnViewModel.MultiFactorAuthViewModel.RememberMeOnMFA" />
+                    <label for="click-checkbox" class="lp-mfa-remember-txt">@Texts.DontAskAgainText</label>
+                    <select id="expireMFAOptions" class="lp-mfa-remember-select" name="Visibility" title="Visibility"
+                            @bind="LogOnViewModel.MultiFactorAuthViewModel.MFARememberInOption">
+                        @foreach (KeyValuePair<string, string> item in LogOnViewModel.MultiFactorAuthViewModel.RememberMFAUntillList())
+                        {
+                            <option value="@item.Value">@item.Key</option>
+                        }
+                    </select>
+                </div>
+
+                @if (!string.IsNullOrEmpty(LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage))
+                {
+                    <div class="lp-error" role="alert">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                        <span>@LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage</span>
+                    </div>
+                }
+
+                <button type="submit" class="lp-submit" disabled="@(!IsCodeValid())">
+                    <span>@Texts.LogInText</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                </button>
+                <button type="button" class="lp-btn-ghost" @onclick="OnCancelClick">@Texts.ButtonCancelText</button>
+            </EditForm>
+
+            <div class="lp-mfa-recovery">
+                <strong>@Texts.TfaPhoneText</strong>
+                <p>
+                    @Texts.MfaRecoveryCodeText
+                    <a href="" @onclick="RedirectToMyRecoverTwoFactorPage" @onclick:preventDefault
+                       class="lp-link lp-link--inline">@Texts.MfaRecoveryCodeText1</a>
+                    @Texts.MfaRecoveryCodeText2
+                </p>
+            </div>
         </div>
-
-        <EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit" class="signup-sec">
-            <DataAnnotationsValidator />
-            <div class="verify-code-txt">
-                <input type="tel" inputmode="numeric" pattern="[0-9]*" id="verify-code-txtbox" class="form-control @(IsOtpInvalid ? "input-invalid" : "")"
-                       placeholder="Verification code" maxlength="6" @ref="OtpInputRef" @bind="LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword"
-                       @oninput="ValidateCode" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                <ValidationMessage style="font-size: 13px;color: #f00;display: block;position: relative;font-weight: 700;" For="@(() => LogOnViewModel.MultiFactorAuthViewModel.OneTimePassword)" />
-            </div>
-            <div class="remember-mfa">
-                <input type="checkbox" style="margin:0 !important" id="click-checkbox" @bind="LogOnViewModel.MultiFactorAuthViewModel.RememberMeOnMFA" />
-                <label class="remember-txt">@Texts.DontAskAgainText</label>
-                <select id="expireMFAOptions" class="remember-drpdwn" name="Visibility" title="Visibility" @bind="LogOnViewModel.MultiFactorAuthViewModel.MFARememberInOption">
-                    @foreach (KeyValuePair<string, string> item in LogOnViewModel.MultiFactorAuthViewModel.RememberMFAUntillList())
-                    {
-                        <option value="@item.Value">@item.Key</option>
-                    }
-                </select>
-            </div>
-
-            @if (!string.IsNullOrEmpty(LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage))
-            {
-                <div class="alert alert-danger">@LogOnViewModel.MultiFactorAuthViewModel.ErrorMessage</div>
-            }
-
-            <button type="submit" class="button success grn-bg whte-clr" style="width:100%; margin:20px 0 0;" disabled="@(!IsCodeValid())">@Texts.LogInText</button>
-            <button type="button" @onclick="OnCancelClick" class="button success" style="width:100%; margin:20px 0 30px;">@Texts.ButtonCancelText</button>
-
-            <div class="text-center" style="margin-top:2rem;">
-                <span><strong>@Texts.TfaPhoneText</strong></span>
-                <p>@Texts.MfaRecoveryCodeText <a href="" @onclick="RedirectToMyRecoverTwoFactorPage" class="recry-code-btn"> @Texts.MfaRecoveryCodeText1 </a> @Texts.MfaRecoveryCodeText2</p>
-                @* <p>Or <a href="https://account.axcrypt.net/en/Home/RecoverTwoFactor" class="recry-code-btn">enter an email to get OTP </a> to access your account.</p> *@
-            </div>
-        </EditForm>
-
-    </article>
-    <article class="right-section">
-        <div class="signin-right-img"></div>
     </article>
 </section>
 
@@ -128,7 +261,7 @@
     window.verifyFunctions = {
         focusElement: function (id) {
             const element = document.getElementById(id);
-            element.focus();
+            if (element) element.focus();
         }
     }
 </script>

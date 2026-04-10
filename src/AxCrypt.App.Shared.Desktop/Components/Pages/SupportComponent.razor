@@ -1,6 +1,5 @@
 ﻿@using AxCrypt.Api.Model
 @using AxCrypt.App.Shared.Desktop.Data
-@using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Content
 
@@ -8,22 +7,7 @@
 @inject LogOnViewModel LogOnModel
 @inject IJSRuntime _jsRuntime
 
-<div class="mb-sec">
-    <NavLink class="mb-title flex-start" href="/" style="align-items: center;">
-        <img class="back-btn" src="" alt="go-back-img" />
-        <span class="goback-text">@Texts.PromptSupport</span>
-    </NavLink>
-</div>
-
-<div class="top-page-title-container">
-    <div class="medium-12 columns">
-        <h1 class="page-title">
-            @LogOnModel.SupportPageTitle
-        </h1>
-    </div>
-</div>
-
-<div class="medium-12 columns support">
+<div class="medium-12 columns support page-content-body-section">
     <p class="sub-head-clr hide-txt">@(PageDescription)</p>
 
     @if (!string.IsNullOrEmpty(SupportViewModel.ErrorMessage))

@@ -1,560 +1,1454 @@
-﻿.signin-right-img {
-  background-color: #494949;
+﻿@charset "UTF-8";
+/* =============================================================
+  AxCrypt — Dark Theme
+  -------------------------------------------------------------
+  Token-based dark theme using a 5-tier surface elevation system.
+  Loaded via wwwroot/index.html addDarkThemeCssFile() when the
+  user enables Dark Mode from Settings.
+
+  Design principles
+  • Material Design 3 dark surfaces (no pure-black backgrounds –
+    easier on the eyes, less OLED bleed, supports elevation).
+  • WCAG AA contrast on all text against its surface.
+  • Brand green is "lifted" for legibility on dark
+    (#48772C → #7FCC5C) while the mint highlight (#CDFFB1) is
+    kept for links/accents.
+  • Single source of truth: every page/component is themed by
+    pointing it at the elevation tokens below.
+  ============================================================= */
+/* ─── Brand ─────────────────────────────────────────────────── */
+/* lifted brand green */
+/* hover / focus */
+/* tinted bg */
+/* legacy accent */
+/* ─── Surfaces (elevation 0 → 4) ───────────────────────────── */
+/* app background  */
+/* sidebar / topbar */
+/* cards / popovers */
+/* hover, raised    */
+/* dropdown / modal */
+/* ─── Borders & dividers ───────────────────────────────────── */
+/* ─── Text ─────────────────────────────────────────────────── */
+/* primary    */
+/* secondary  */
+/* muted      */
+/* disabled   */
+/* on $dt-brand */
+/* accent link */
+/* ─── Semantic ─────────────────────────────────────────────── */
+/* ─── Shadows ──────────────────────────────────────────────── */
+/* =============================================================
+   Global / scrollbar
+   ============================================================= */
+html,
+body {
+  background: #0F141A;
+  color: #E8ECF1;
+  color-scheme: dark;
 }
 
-.sidebar, .sid-mnu-colpsd.side-menu {
-  background: #303030 !important;
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-.nav-item .active,
-.nav-item :hover {
-  background-color: #575757 !important;
-  color: #CDFFB1 !important;
+::-webkit-scrollbar-track {
+  background: #0F141A;
 }
 
-.link-box {
-  background-color: #303030 !important;
-  border: #282828 !important;
-  box-shadow: none !important;
+::-webkit-scrollbar-thumb {
+  background: #232E3B;
+  border-radius: 8px;
+  border: 2px solid #0F141A;
 }
 
-.link-txt {
-  color: #CDFFB1 !important;
+::-webkit-scrollbar-thumb:hover {
+  background: #2A3645;
 }
 
-.label-text label, .lable-txt {
-  color: #A4A4A4 !important;
+::selection {
+  background: rgba(127, 204, 92, 0.24);
+  color: #E8ECF1;
 }
 
-.desc-txt, .nav-link span, .select-email {
-  color: #A4A4A4 !important;
+/* =============================================================
+   App shell (legacy + HomeNew)
+   ============================================================= */
+.page,
+.side-menu,
+.app-shell,
+.layout-body,
+.main-content,
+.content-grid {
+  background-color: #0F141A !important;
+  color: #E8ECF1;
 }
 
-.sup-text-blur {
-  background-color: #282828 !important;
-  border: #282828 !important;
+.topbar {
+  background: #161D26 !important;
+  border-bottom: 1px solid #2A3340 !important;
+  color: #E8ECF1;
 }
 
-.btn-hide, .alert-box {
-  background-color: #575757 !important;
-  border: #575757 !important;
-  color: #ffffff !important;
+.page-title,
+.nav-page-title,
+.fb-title,
+.sup-title,
+.act-title,
+.pwd-title,
+.files-title,
+.vph-title,
+.up-hero-title {
+  color: #E8ECF1 !important;
 }
 
-.model-popup, .act-clr, .notification-popup {
-  background-color: #303030 !important;
-  color: #FFFFFF !important;
+.page-subtitle,
+.fb-sub,
+.sup-sub,
+.act-sub,
+.pwd-sub,
+.files-subtitle,
+.vph-sub,
+.up-hero-sub {
+  color: #B5BCC7 !important;
 }
 
-.notify-pg-tbl-body td {
-  color: #CDFFB1 !important;
+/* =============================================================
+   Sidebar (legacy + new)
+   ============================================================= */
+.sidebar,
+.sid-mnu-colpsd.side-menu {
+  background: #161D26 !important;
+  border-right: 1px solid #2A3340 !important;
+  color: #E8ECF1;
 }
 
-.notification-table th {
-  background-color: #575757 !important;
-  color: #CDFFB1 !important;
+.nav-item {
+  color: #B5BCC7 !important;
 }
 
-.password-create-dropdown-content {
-  background-color: #282828 !important;
-  color: #A4A4A4 !important;
+.nav-item:hover,
+.nav-item--active,
+.nav-item .active {
+  background: rgba(127, 204, 92, 0.14) !important;
+  color: #B8E89A !important;
 }
 
-.password-create-dropdown-content a:hover,
-.password-create-dropdown-content a.active {
-  color: #CDFFB1 !important;
-  background-color: #575757 !important;
+.nav-icon {
+  opacity: 0.9;
 }
 
-#messenger-keyword {
-  background-color: #282828 !important;
-  border: 1px !important;
+.brand-name,
+.user-name {
+  color: #E8ECF1 !important;
 }
 
-#secrets-keyword {
-  background-color: #282828 !important;
-  border: 1px !important;
+.user-email,
+.user-row .desc-txt {
+  color: #7A8494 !important;
 }
 
-.tab a:hover, .tab a.active {
-  color: #CDFFB1 !important;
+.user-row:hover,
+.user-row--active {
+  background: rgba(255, 255, 255, 0.04) !important;
 }
 
-.tab-selected {
-  border: 3px solid #CDFFB1 !important;
+.sidebar-footer {
+  border-top: 1px solid #2A3340 !important;
 }
 
-.tab-sec a.active,
-.tab-sec a:hover {
-  color: #CDFFB1 !important;
+.toggle-btn,
+.toggle-btn-collapsed {
+  background: transparent !important;
+  border: 1px solid #2A3340 !important;
+  color: #B5BCC7 !important;
 }
 
-.fnt-high {
-  background-color: #333232 !important;
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #E8ECF1 !important;
 }
 
-.mutli-slct-btn {
-  color: #CDFFB1 !important;
+.avatar,
+.pm-avatar {
+  background: #7FCC5C !important;
+  color: #0F1A07 !important;
 }
 
-.page, .side-menu {
-  background-color: #121212 !important;
-  color: #A4A4A4;
+/* =============================================================
+   Cards / surfaces (legacy `.card` + new `.*-card`, `.*-shell`)
+   ============================================================= */
+.card,
+.recent-files-card,
+.files-shell,
+.pwd-shell,
+.vault-shell,
+.activity-shell,
+.support-shell,
+.feedback-shell,
+.upgrade-shell {
+  background: #0F141A !important;
+  color: #E8ECF1 !important;
 }
 
-.page-title {
-  color: #ffffff !important;
+/* generic card surfaces inside pages */
+.fstat,
+.vs-card,
+.pwd-card,
+.fb-rating-card,
+.fb-form-card,
+.fb-history,
+.sup-cat-card,
+.sup-faq,
+.sco-card,
+.up-plan,
+.up-trust-item,
+.act-stat,
+.act-timeline,
+.vault-locked,
+.vault-files,
+.files-grid-header,
+.session-row {
+  background: #1C2530 !important;
+  border: 1px solid #2A3340 !important;
+  color: #E8ECF1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25) !important;
 }
 
-.fle-nme {
-  color: #A4A4A4;
+.section-title,
+.fb-card-title,
+.fb-hist-title,
+.sup-contact-title,
+.sup-faq-title,
+.vf-title,
+.scc-label,
+.up-plan-name,
+.pwd-card h3,
+.sco-card h4,
+.vault-locked h3 {
+  color: #E8ECF1 !important;
 }
 
-.text-style {
-  color: #ffffff !important;
+.fstat-label,
+.vs-label,
+.as-label,
+.pwd-card p,
+.sco-card p,
+.up-plan-desc,
+.up-price-old,
+.up-period,
+.up-refund,
+.scc-count,
+.fr-sub,
+.fe-desc,
+.vf-empty {
+  color: #7A8494 !important;
 }
 
-bold.text-style {
-  color: #121212 !important;
+.fstat-num,
+.vs-num,
+.as-num,
+.up-price {
+  color: #E8ECF1 !important;
 }
 
-button {
-  background-color: #ffffff;
-  color: #ffffff;
+/* gradient hero text – fallback to solid for dark legibility */
+.up-hero-title {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  color: #9BE076 !important;
 }
 
-.mre-actn-box {
-  background-color: #575757 !important;
-  border: #575757 !important;
+.up-plan--pro {
+  border-color: #7FCC5C !important;
+  box-shadow: 0 0 0 4px rgba(127, 204, 92, 0.14) !important;
 }
 
-.mre-actn-box:hover {
-  background-color: #303030 !important;
-  color: #A4A4A4 !important;
+.up-plan--pro .up-plan-name {
+  color: #7FCC5C !important;
 }
 
-.rcnt-fld-bx {
-  background-color: #333232;
-  border: #575757 !important;
-  box-shadow: none !important;
-  color: #A4A4A4 !important;
+/* =============================================================
+   Rows / tables / lists
+   ============================================================= */
+.files-row,
+.vf-row,
+.fb-hist-row,
+.act-log-row,
+.faq-item {
+  background: #1C2530 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #E8ECF1 !important;
 }
 
-.add-fldr {
-  border-style: dotted !important;
+.files-row:hover,
+.vf-row:hover,
+.act-log-row:hover,
+.faq-item:hover {
+  background: #232E3B !important;
 }
 
-.modalDialog > div {
-  color: #ffffff;
-  background-color: #121212 !important;
+.files-row--sel,
+.session-row--current {
+  background: rgba(127, 204, 92, 0.14) !important;
+  border-color: #7FCC5C !important;
+}
+
+.fr-name,
+.alr-action,
+.session-device {
+  color: #E8ECF1 !important;
+}
+
+.alr-file,
+.rk-copy {
+  color: #B8E89A !important;
+}
+
+.act-date-label {
+  background: #161D26 !important;
+  color: #7A8494 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.trow:not(.trow--header):hover {
+  background: #232E3B !important;
+}
+
+.trow--selected {
+  background: rgba(127, 204, 92, 0.14) !important;
+}
+
+.trow--header {
+  color: #7A8494 !important;
+  border-bottom: 1px solid #2A3340 !important;
 }
 
 .rcnt-fle-tbl thead tr th {
-  color: #A4A4A4 !important;
-  background: #575757 !important;
+  color: #B5BCC7 !important;
+  background: #161D26 !important;
 }
 .rcnt-fle-tbl tbody tr {
-  background: #121212 !important;
+  background: #1C2530 !important;
 }
 .rcnt-fle-tbl tbody tr:hover,
 .rcnt-fle-tbl tbody tr.active,
 .rcnt-fle-tbl .selected td {
-  background: #303030 !important;
+  background: #232E3B !important;
 }
 
-textarea, input[type=text], input[type=password], textarea[readonly], textarea {
-  background-color: #575757 !important;
-  color: #FFFFFF !important;
+/* notifications */
+.notification-table th {
+  background-color: #161D26 !important;
+  color: #B5BCC7 !important;
 }
 
-input[readonly=readonly], textarea[readonly] {
-  border: #575757 !important;
+.notify-pg-tbl-body td {
+  color: #E8ECF1 !important;
+}
+
+.notification-popup {
+  background: #232E3B !important;
+  border: 1px solid #3A4554 !important;
+  color: #E8ECF1 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+.notification-popup tr {
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+.notification-popup tr td {
+  color: #B5BCC7 !important;
+}
+.notification-popup tr td :hover {
+  color: #B8E89A !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+.notification-popup a {
+  color: #B5BCC7 !important;
+}
+
+/* =============================================================
+   Tabs / chips / pills
+   ============================================================= */
+.ftab,
+.fb-type-tab {
+  background: #1C2530 !important;
+  border: 1.5px solid #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+.ftab--active,
+.fb-type-tab--active {
+  background: #7FCC5C !important;
+  border-color: #7FCC5C !important;
+  color: #0F1A07 !important;
+  font-weight: 600;
+}
+
+.ftab-count {
+  background: rgba(15, 20, 26, 0.35) !important;
+  color: #0F1A07 !important;
+}
+
+.tab a:hover,
+.tab a.active,
+.tab-sec a.active,
+.tab-sec a:hover {
+  color: #B8E89A !important;
+}
+
+.tab-selected {
+  border: 3px solid #7FCC5C !important;
+}
+
+/* =============================================================
+   Badges (legacy + new)
+   ============================================================= */
+.badge--enc,
+.alr-badge--encrypt {
+  background: rgba(96, 165, 250, 0.14) !important;
+  color: #60A5FA !important;
+}
+
+.badge--opened,
+.alr-badge--decrypt {
+  background: rgba(74, 222, 128, 0.14) !important;
+  color: #4ADE80 !important;
+}
+
+.badge--shared,
+.alr-badge--share {
+  background: rgba(251, 191, 36, 0.14) !important;
+  color: #FBBF24 !important;
+}
+
+.alr-badge--delete {
+  background: rgba(248, 113, 113, 0.14) !important;
+  color: #F87171 !important;
+}
+
+.alr-badge--login {
+  background: rgba(167, 139, 250, 0.15) !important;
+  color: #C4B5FD !important;
+}
+
+.algo-chip {
+  background: rgba(127, 204, 92, 0.14) !important;
+  color: #B8E89A !important;
+}
+
+.fb-hist-status--review {
+  background: rgba(251, 191, 36, 0.14) !important;
+  color: #FBBF24 !important;
+}
+
+.fb-hist-status--fixed {
+  background: rgba(74, 222, 128, 0.14) !important;
+  color: #4ADE80 !important;
+}
+
+.fb-hist-status--seen {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #B5BCC7 !important;
+}
+
+.fb-hist-date,
+.alr-time {
+  color: #7A8494 !important;
+}
+
+/* icon-tinted backgrounds in alert rows */
+.alr-icon--encrypt {
+  background: rgba(96, 165, 250, 0.14) !important;
+}
+
+.alr-icon--decrypt {
+  background: rgba(74, 222, 128, 0.14) !important;
+}
+
+.alr-icon--share {
+  background: rgba(251, 191, 36, 0.14) !important;
+}
+
+.alr-icon--delete {
+  background: rgba(248, 113, 113, 0.14) !important;
+}
+
+.alr-icon--login {
+  background: rgba(167, 139, 250, 0.15) !important;
+}
+
+/* =============================================================
+   Buttons
+   ============================================================= */
+button {
+  background-color: #1C2530;
+  color: #E8ECF1;
+  border-color: #2A3340;
+}
+
+/* Primary CTA family */
+.fh-btn,
+.vph-btn,
+.pwd-btn,
+.fb-submit-btn,
+.vl-unlock-btn,
+.fe-cta,
+.vab-settings,
+.sco-btn--blue {
+  background: #7FCC5C !important;
+  border-color: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+.fh-btn:hover,
+.vph-btn:hover,
+.pwd-btn:hover,
+.fb-submit-btn:hover,
+.vl-unlock-btn:hover,
+.fe-cta:hover,
+.sco-btn--blue:hover {
+  background: #9BE076 !important;
+  border-color: #9BE076 !important;
+}
+
+/* Green variant button */
+.pwd-btn--green {
+  background: #4ADE80 !important;
+  color: #052E14 !important;
+}
+
+/* Danger button */
+.pwd-btn--danger,
+.bulk-btn--danger {
+  background: #F87171 !important;
+  border-color: #F87171 !important;
+  color: #2A0808 !important;
+}
+
+/* Secondary / outlined button */
+.vph-btn--secondary,
+.act-export-btn,
+.sco-btn,
+.rk-copy {
+  background: #1C2530 !important;
+  border: 1px solid #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.vph-btn--secondary:hover,
+.act-export-btn:hover,
+.sco-btn:hover {
+  background: #232E3B !important;
+}
+
+/* Bulk bar (multi-select) */
+.bulk-bar {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+}
+
+.bulk-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.bulk-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  filter: brightness(1.15);
+}
+
+/* AxCrypt legacy button system */
+.button.success {
+  background-color: #7FCC5C !important;
+  color: #0F1A07 !important;
+  border-color: #7FCC5C !important;
+}
+
+.button.success:hover {
+  background-color: #9BE076 !important;
+}
+
+.button.border {
+  background-color: #1C2530 !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+}
+
+.button.border:hover {
+  background-color: #232E3B !important;
+  color: #E8ECF1 !important;
+}
+
+.btn-large.font-medium.button {
+  background-color: #232E3B !important;
+  border: 1px solid #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.flex-start .button {
+  background-color: #1C2530;
+  color: #B5BCC7;
+}
+
+.grn-bg {
+  border: 1px solid #7FCC5C !important;
+}
+
+.premium-btn {
+  background-color: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+.business-btn {
+  background-color: #232E3B !important;
+  color: #E8ECF1 !important;
+}
+
+.icon-btn {
+  background: #1C2530 !important;
+  border: 1px solid #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+.icon-btn:hover {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+}
+
+.icon-btn--active {
+  background: rgba(127, 204, 92, 0.14) !important;
+  border-color: #7FCC5C !important;
+  color: #7FCC5C !important;
+}
+
+.mic-btn {
+  background: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+/* =============================================================
+   Form controls
+   ============================================================= */
+textarea,
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=search],
+input[type=number],
+textarea[readonly],
+.pwd-input,
+.fb-input,
+.fb-textarea,
+.vl-input,
+.act-filter,
+.fh-sort-select,
+.vf-search,
+.vf-sort {
+  background-color: #1C2530 !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+  caret-color: #7FCC5C;
+}
+
+textarea::placeholder,
+input::placeholder {
+  color: #7A8494 !important;
+}
+
+.pwd-input:focus,
+.fb-input:focus,
+.fb-textarea:focus,
+.vl-input:focus,
+textarea:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=search]:focus {
+  border-color: #7FCC5C !important;
+  box-shadow: 0 0 0 3px rgba(127, 204, 92, 0.35) !important;
+  outline: none;
+}
+
+input[readonly=readonly],
+textarea[readonly] {
+  border: 1px solid #2A3340 !important;
+  color: #B5BCC7 !important;
 }
 
 .clean-up textarea {
-  color: #FFFFFF !important;
-  background: #575757 !important;
+  color: #E8ECF1 !important;
+  background: #1C2530 !important;
 }
 
-.find-fle-nme {
-  color: #232323;
+/* Search box on topbar / global */
+.search-box,
+.fh-search {
+  background: #1C2530 !important;
+  border: 1.5px solid #2A3340 !important;
+}
+
+.search-box--focused {
+  border-color: #7FCC5C !important;
+  box-shadow: 0 0 0 3px rgba(127, 204, 92, 0.35) !important;
+}
+
+.search-input,
+.fh-search-input {
+  background: transparent !important;
+  color: #E8ECF1 !important;
+}
+
+#messenger-keyword,
+#secrets-keyword {
+  background-color: #1C2530 !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #2A3340 !important;
+}
+
+/* Secured Messenger — section cards / tab divider
+   (framing added in _SecuredMessenger.scss). */
+.secured-messenger #sec-msg-search-section,
+.secured-messenger #search-message-list {
+  background: #1C2530 !important;
+  border-color: #2A3340 !important;
+}
+
+.secured-messenger .tab-sec {
+  border-bottom-color: #2A3340 !important;
+}
+
+/* Secured Messenger — master-detail panes + empty states */
+.secured-messenger .all-msg,
+.secured-messenger .smx-reader {
+  border-color: #2A3340 !important;
+}
+
+.secured-messenger .smx-empty-title {
+  color: #E8ECF1 !important;
+}
+
+.secured-messenger .smx-empty-sub {
+  color: #9ca3af !important;
+}
+
+.secured-messenger .smx-empty-icon {
+  color: #4b5563 !important;
+}
+
+/* Secured Messenger — list-pane header */
+.secured-messenger .all-msg .center-column {
+  border-bottom-color: #2A3340 !important;
+}
+
+.secured-messenger .mutli-slct-btn {
+  color: #E8ECF1 !important;
+}
+
+/* Secured Messenger — conversation rows */
+.secured-messenger .smx-msg-row:hover {
+  background: #22262e !important;
+}
+
+.secured-messenger .smx-msg-row--active,
+.secured-messenger .smx-msg-row--active:hover {
+  background: rgba(127, 204, 92, 0.12) !important;
+}
+
+.secured-messenger .smx-msg-name {
+  color: #e5e7eb !important;
+}
+
+.secured-messenger .smx-msg-row--unread .smx-msg-name {
+  color: #ffffff !important;
+}
+
+.secured-messenger .smx-msg-meta {
+  color: #9ca3af !important;
+}
+
+.secured-messenger .smx-msg-row--unread .smx-msg-meta {
+  color: #c8cdd5 !important;
+}
+
+.secured-messenger .smx-msg-time {
+  color: #6b7280 !important;
+}
+
+.secured-messenger .smx-msg-more {
+  background: #22312a !important;
+  color: #7fcc5c !important;
+}
+
+.secured-messenger .smx-msg-unread-dot {
+  background: #7fcc5c !important;
+}
+
+/* Strength meter */
+.pws-bar {
+  background: #232E3B !important;
+}
+
+.pws-bar--weak {
+  background: #F87171 !important;
+}
+
+.pws-bar--fair {
+  background: #FBBF24 !important;
+}
+
+.pws-bar--good {
+  background: #60A5FA !important;
+}
+
+.pws-bar--strong {
+  background: #4ADE80 !important;
+}
+
+.pws-label {
+  color: #7A8494 !important;
+}
+
+/* =============================================================
+   Status / banners
+   ============================================================= */
+.pwd-status--ok,
+.fb-success,
+.tfa-status--on {
+  background: rgba(74, 222, 128, 0.14) !important;
+  color: #4ADE80 !important;
+  border: 1px solid rgba(74, 222, 128, 0.25) !important;
+}
+
+.pwd-status--err,
+.vl-error {
+  background: rgba(248, 113, 113, 0.14) !important;
+  color: #F87171 !important;
+  border: 1px solid rgba(248, 113, 113, 0.25) !important;
+}
+
+.tfa-status--off {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #B5BCC7 !important;
+}
+
+.rk-warning {
+  background: rgba(251, 191, 36, 0.14) !important;
+  color: #FBBF24 !important;
+}
+
+.vault-auto-banner {
+  background: rgba(96, 165, 250, 0.14) !important;
+  border: 1px solid rgba(96, 165, 250, 0.25) !important;
+  color: #60A5FA !important;
+}
+
+.recovery-key-display {
+  background: #161D26 !important;
+  border: 1px solid #2A3340 !important;
+}
+
+.recovery-key-display code {
+  color: #CDFFB1 !important;
+}
+
+/* =============================================================
+   Popups / popovers / context menus / modals
+   ============================================================= */
+.model-popup,
+.act-clr,
+.profile-menu,
+.settings-menu,
+.context-menu,
+.home-context-menu,
+.rf-context-menu,
+.search-results {
+  background-color: #232E3B !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+.modalDialog > div {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+.modalDialog {
+  background-color: rgba(0, 0, 0, 0.55) !important;
+}
+
+.ctx-file-name,
+.ctx-file-header {
+  color: #E8ECF1 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dropbtn,
+.language-dropdown > .dropdown-item-container {
+  background-color: #232E3B !important;
+  color: #E8ECF1 !important;
+}
+
+.dropbtn.active {
+  color: #E8ECF1 !important;
+  border: 1px solid #B5BCC7 !important;
+}
+
+.language-item:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #B8E89A !important;
+}
+
+.dropdown-content {
+  background-color: #232E3B !important;
+  color: #E8ECF1 !important;
+}
+.dropdown-content :hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #B8E89A !important;
+}
+
+.dropdown-content dd:hover,
+.password-filter-dropdown-content dd:hover,
+.password-create-dropdown-content dd:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #B8E89A !important;
+}
+
+.password-create-dropdown-content {
+  background-color: #232E3B !important;
+  color: #B5BCC7 !important;
+}
+
+.password-create-dropdown-content a:hover,
+.password-create-dropdown-content a.active {
+  color: #B8E89A !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.password-create-dropdown-content dd a,
+.notification-popup a {
+  color: #B5BCC7 !important;
+}
+
+.password-filter-dropdown-content {
+  background: #232E3B !important;
+}
+.password-filter-dropdown-content label {
+  color: #B5BCC7 !important;
+}
+.password-filter-dropdown-content label:hover {
+  color: #B8E89A !important;
+}
+
+.password-filter-dropdown-content ul,
+.password-filter-dropdown-content li {
+  border-bottom: none;
+}
+
+.try-upgrade-plan-popup-container {
+  color: #B5BCC7 !important;
+}
+
+.custom-password-help-hoverpopup {
+  background-color: #232E3B !important;
+  border: 1px solid #3A4554 !important;
+}
+.custom-password-help-hoverpopup .txt-clr {
+  color: #B5BCC7 !important;
 }
 
 .notif-popup-bck {
   background-color: transparent !important;
 }
 
+/* Sub-menus / sub-headers */
+.page-heading {
+  background-color: #161D26 !important;
+  color: #E8ECF1 !important;
+}
+
+.sub-box-bsns,
+.sub-head-clr,
+.lable-txt,
+.label-text label {
+  color: #B5BCC7 !important;
+}
+
+.fle-nme {
+  color: #B5BCC7 !important;
+}
+
+.text-style {
+  color: #E8ECF1 !important;
+}
+
+bold.text-style {
+  color: #E8ECF1 !important; /* fixed: previously #121212 (invisible) */
+  font-weight: 700;
+}
+
+/* =============================================================
+   Misc legacy elements
+   ============================================================= */
+.signin-right-img {
+  background-color: #1C2530;
+}
+
+.link-box {
+  background-color: #1C2530 !important;
+  border: 1px solid #2A3340 !important;
+  box-shadow: none !important;
+}
+
+.link-txt,
+.txt-clr,
+.highlight-text > span {
+  color: #B8E89A !important;
+}
+
+.desc-txt,
+.nav-link span,
+.select-email,
+.filter-text,
+.notifipopup-show,
+.grn-clr {
+  color: #B5BCC7 !important;
+}
+
+.filter-text:hover {
+  color: #E8ECF1 !important;
+}
+
+.sup-text-blur {
+  background-color: #1C2530 !important;
+  border: 1px solid #2A3340 !important;
+}
+
+.btn-hide,
+.alert-box {
+  background-color: #232E3B !important;
+  border: 1px solid #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.alert-box.alert {
+  background-color: rgba(248, 113, 113, 0.14) !important;
+  border: 1px solid #F87171 !important;
+  color: #F87171 !important;
+}
+
+.fnt-high {
+  background-color: #232E3B !important;
+}
+
+.mutli-slct-btn {
+  color: #B8E89A !important;
+}
+
+.mre-actn-box {
+  background-color: #232E3B !important;
+  border: 1px solid #2A3340 !important;
+}
+
+.mre-actn-box:hover {
+  background-color: #2A3645 !important;
+  color: #E8ECF1 !important;
+}
+
+.rcnt-fld-bx {
+  background-color: #1C2530;
+  border: 1px solid #2A3340 !important;
+  box-shadow: none !important;
+  color: #B5BCC7 !important;
+}
+
+.add-fldr {
+  border-style: dotted !important;
+}
+
+.find-fle-nme {
+  color: #B5BCC7 !important;
+}
+
 .file-dec-icon {
   content: url(/images/IcoClnGrn.svg);
 }
 
-.page-heading {
-  background-color: #757575;
-}
-
-.sub-head-clr,
-.lable-txt {
-  color: #A4A4A4 !important;
-}
-
-.model-popup {
-  border: none;
-}
-
-.add-fldr-img {
-  filter: brightness(0) saturate(90%) invert(50%);
-}
-
-.fldr-img, .arrow-img, .faq-img, .idea-img, .page-title::before {
-  filter: brightness(0) saturate(90%) invert(50%);
-}
-
-.filter-text {
-  color: #A4A4A4 !important;
-}
-
-.filter-text:hover {
-  color: #575757;
+.email-txt-ovflw,
+.deflt-txt-clr,
+.rply-icon,
+.dlt-icon {
+  color: #E8ECF1 !important;
 }
 
 .inbox-section table {
-  background: #282828;
+  background: #1C2530 !important;
 }
 
 .inbox-section table:hover {
-  background: #A4A4A4;
-}
-
-.email-txt-ovflw, .deflt-txt-clr {
-  color: #FFFFFF;
-}
-
-.rply-icon,
-.dlt-icon {
-  color: #FFFFFF;
+  background: #232E3B !important;
 }
 
 .visble-button {
-  background: #303030;
-  color: #CDFFB1;
+  background: #232E3B;
+  color: #B8E89A;
 }
 
 .secured-messenger select {
-  color: #CDFFB1 !important;
+  color: #B8E89A !important;
+  background: #1C2530 !important;
   font-weight: 700;
 }
 
 .secured-messenger option {
-  color: #A4A4A4;
+  color: #B5BCC7;
+  background: #1C2530;
 }
 
 .secured-messenger option:hover {
-  color: #CDFFB1;
+  color: #B8E89A;
 }
 
 .multi-actn-btn {
-  background-color: #575757 !important;
-  color: #A4A4A4 !important;
-  border: #A4A4A4 !important;
+  background-color: #232E3B !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+}
+.multi-actn-btn > img {
+  filter: brightness(1.5);
 }
 
 .multi-actn-btn:hover {
-  background-color: #575757;
+  background-color: #2A3645;
 }
 
-.button.border, .model-popup {
-  border: 1px solid #303030 !important;
+.selected-file,
+.share-list,
+.blck-bg {
+  background-color: #232E3B !important;
 }
 
-.button.success {
-  background-color: #48772C !important;
-  color: #ffffff !important;
+.empty-list {
+  filter: opacity(0.85);
 }
 
-.sub-box-bsns {
-  background: #757575;
+.home-hover {
+  background-color: #232E3B !important;
+}
+.home-hover .txt-clr {
+  color: #B5BCC7 !important;
 }
 
-.secured-messenger option:hover {
-  color: #CDFFB1;
+.popup-small h2,
+.popup-large h2 {
+  color: #E8ECF1 !important;
 }
 
-.manage-acc-sec a img, .notifi-img img {
-  filter: invert(1) !important;
+.notification-badge {
+  color: #0F1A07;
+  background: #7FCC5C;
+  z-index: 1;
 }
 
-.manage-acc-sec a:hover {
-  background: #757575;
+.empty-view-heading {
+  color: #E8ECF1 !important;
 }
 
-.notification-popup {
-  border: 1px solid #303030 !important;
-}
-.notification-popup > .table {
-  border-collapse: collapse;
-}
-.notification-popup tr {
-  border: 1px solid #575757 !important; /* Row border color */
+.validation-message,
+.error-message {
+  color: #F87171 !important;
 }
 
-.password-filter-dropdown-content {
-  background: #303030 !important;
-}
-.password-filter-dropdown-content label {
-  color: #A4A4A4 !important;
-}
-.password-filter-dropdown-content label:hover {
-  color: #CDFFB1 !important;
+.input-error {
+  border: 1px solid #F87171 !important;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.14) !important;
 }
 
-.password-filter-dropdown-content ul, .password-filter-dropdown-content li {
-  border-bottom: none;
+/* Settings/labels */
+.label-text label,
+.lable-txt,
+.fb-label,
+.fc-label {
+  color: #B5BCC7 !important;
+}
+
+.vault-body label,
+.vault-body span {
+  color: #B5BCC7 !important;
 }
 
 .text-fnt-size {
-  color: #575757 !important;
+  color: #B5BCC7 !important;
 }
 
 .grey-clr {
-  color: #A4A4A4 !important;
+  color: #7A8494 !important;
   font-weight: 700;
 }
 
 .second .grey-clr {
-  color: #575757 !important;
+  color: #7A8494 !important;
 }
 
 .home-index .fle-nme {
-  color: #FFFFFF;
-}
-
-.txt-clr, .highlight-text > span {
-  color: #CDFFB1 !important;
+  color: #E8ECF1 !important;
 }
 
 .abt-axc > span {
-  color: #A4A4A4;
+  color: #B5BCC7;
 }
 
-.home-hover {
-  background-color: #303030 !important;
-}
-.home-hover .txt-clr {
-  color: #A4A4A4 !important;
+.breadcrumb-part {
+  color: #E8ECF1 !important;
 }
 
-.dropbtn, .language-dropdown > .dropdown-item-container, .home-context-menu, .context-menu {
-  background-color: #303030 !important;
-  color: #FFFFFF;
-}
-
-.selected-file, .share-list, .blck-bg {
-  background-color: #575757 !important;
-}
-
-.empty-list {
-  filter: opacity(0.8);
-}
-
-.menu-image, .mre-actn-box img, .close-img, .clck-img, .secrets-type-icon-desktop, .display-type > img {
-  filter: grayscale(1) brightness(10);
-}
-
-.eye-icon {
-  filter: grayscale(1) brightness(15);
-}
-
-.file-keySh-icon {
-  filter: invert(1) !important;
-}
-
-.actv-subs {
-  background-color: #ebebeb !important;
-}
-
-.flex-start .button {
-  background-color: #303030;
-  color: #A4A4A4;
-}
-
-.button.border {
-  background-color: #575757 !important;
-  color: #FFFFFF !important;
-}
-
-.button.border:hover {
-  background-color: #575757;
-}
-
-.dropbtn.active {
-  color: #FFFFFF !important;
-  border: 1px solid #FFFFFF !important;
-}
-
-.drp-dwn, .arw-img, .passwords-icon, .notes-icon, .secret-icon, .notifiarrow {
-  filter: brightness(0) invert(1);
-}
-
-.language-dropdown, .form-control {
-  border: #A4A4A4;
-}
-
-.notification-popup tr td {
-  color: #A4A4A4 !important;
-}
-.notification-popup tr td :hover {
-  color: #CDFFB1;
-  background-color: #575757;
-}
-
-.language-item:hover {
-  background-color: #575757;
-  color: #CDFFB1 !important;
-}
-
-.password-create-dropdown-content dd a,
-.notification-popup a {
-  color: #A4A4A4 !important;
+.notifipopup-show,
+.grn-clr {
+  color: #B5BCC7 !important;
 }
 
 .grn-clr:hover,
 .grn-clr:focus {
-  color: #48772c;
+  color: #B8E89A !important;
 }
 
-.dropdown-content {
-  background-color: #282828 !important;
-}
-.dropdown-content :hover {
-  background-color: #575757 !important;
-  color: #CDFFB1 !important;
+.actv-subs {
+  background-color: #232E3B !important;
+  color: #E8ECF1 !important;
 }
 
-.back-arrow, .Icon-folder, .icon-next-arrow, .filter-trigger, .filter-image, .deletebin {
-  filter: invert(50%) !important;
+/* =============================================================
+   File-picker dialog (kept dark with neutral surface)
+   ============================================================= */
+.file-picker-modalDialog .file-picker-dir-content {
+  color: #E8ECF1 !important;
+  background: #232E3B !important;
+}
+
+.file-picker-modalDialog > div,
+.file-picker-dir-content .context-menu-action {
+  background-color: #232E3B !important;
+  color: #E8ECF1 !important;
+}
+
+.file-picker-dir-content .file-list li {
+  background-color: #1C2530;
+  color: #E8ECF1;
+}
+
+.file-picker-modalDialog .filepicker-dropdown-menu-action {
+  background-color: #1C2530;
+}
+
+.file-picker-modalDialog .file-path {
+  color: #E8ECF1 !important;
+}
+
+.vlt-body .file-name {
+  color: #B5BCC7 !important;
+}
+
+.file-list-item:hover .file-path,
+.file-grid-item:hover .file-path,
+.select-item .file-path {
+  color: #B5BCC7 !important;
+}
+
+/* =============================================================
+   Toasts (HomeNew layout)
+   ============================================================= */
+.toast {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+.toast--success {
+  background: rgba(74, 222, 128, 0.14) !important;
+  color: #4ADE80 !important;
+  border-color: rgba(74, 222, 128, 0.35) !important;
+}
+
+.toast--error {
+  background: rgba(248, 113, 113, 0.14) !important;
+  color: #F87171 !important;
+  border-color: rgba(248, 113, 113, 0.35) !important;
+}
+
+.toast--warning {
+  background: rgba(251, 191, 36, 0.14) !important;
+  color: #FBBF24 !important;
+  border-color: rgba(251, 191, 36, 0.35) !important;
+}
+
+/* =============================================================
+   Quick Actions — clean-up attention pill
+   (visible only while files are open / pending re-encryption)
+   ============================================================= */
+.qa-cleanup-pill {
+  background: rgba(251, 191, 36, 0.1) !important;
+  border: 1px solid rgba(251, 191, 36, 0.35) !important;
+  border-left: 3px solid #FBBF24 !important;
+}
+
+.qa-cleanup-icon img {
+  /* re-tint the broom svg to warm amber on dark */
+  filter: brightness(0) saturate(100%) invert(82%) sepia(40%) saturate(660%) hue-rotate(360deg) brightness(101%) contrast(101%) !important;
+}
+
+.qa-cleanup-title {
+  color: #fff !important;
+}
+
+.qa-cleanup-sub {
+  color: #B5BCC7 !important;
+}
+
+/* =============================================================
+   Support page – special gradient hero
+   ============================================================= */
+.sup-search-card {
+  background: linear-gradient(135deg, #232E3B, #1C2530) !important;
+  border: 1px solid #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.sup-search-box {
+  background: #161D26 !important;
+  border: 1.5px solid #3A4554 !important;
+}
+
+.sup-search-input {
+  color: #E8ECF1 !important;
+}
+
+.sup-search-input::placeholder {
+  color: #7A8494 !important;
+}
+
+.faq-q {
+  color: #E8ECF1 !important;
+}
+
+.faq-a {
+  color: #B5BCC7 !important;
+}
+
+.faq-chevron {
+  color: #7A8494 !important;
+}
+
+/* =============================================================
+   Upgrade page extras
+   ============================================================= */
+.up-hero-badge {
+  background: rgba(251, 191, 36, 0.14) !important;
+  color: #FBBF24 !important;
+  border: 1px solid rgba(251, 191, 36, 0.25) !important;
+}
+
+.up-plan-popular {
+  background: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+.up-feat {
+  color: #E8ECF1 !important;
+}
+
+.up-feat--no {
+  color: #7A8494 !important;
+}
+
+.up-plan-cta {
+  background: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+.up-plan-cta--current {
+  background: #232E3B !important;
+  color: #7A8494 !important;
+}
+
+.up-plan-cta--pro {
+  background: #9BE076 !important;
+  color: #0F1A07 !important;
+}
+
+/* =============================================================
+   Image / icon adjustments (inversions for light-on-dark icons)
+   ============================================================= */
+.add-fldr-img,
+.fldr-img,
+.arrow-img,
+.faq-img,
+.idea-img,
+.nav-page-title::before {
+  filter: brightness(0) saturate(90%) invert(70%);
+}
+
+.manage-acc-sec a img,
+.notifi-img img {
+  filter: invert(1) !important;
+}
+
+.manage-acc-sec a:hover {
+  background: #232E3B;
+}
+
+.drp-dwn,
+.arw-img,
+.passwords-icon,
+.notes-icon,
+.secret-icon,
+.notifiarrow,
+.file-keySh-icon,
+.file-masKey-icon {
+  filter: brightness(0) invert(1);
+}
+
+.menu-image,
+.mre-actn-box img,
+.close-img,
+.clck-img,
+.secrets-type-icon-desktop,
+.display-type > img {
+  filter: grayscale(1) brightness(8);
+}
+
+.eye-icon {
+  filter: grayscale(1) brightness(12);
+}
+
+.back-arrow,
+.Icon-folder,
+.icon-next-arrow,
+.filter-trigger,
+.filter-image,
+.deletebin {
+  filter: invert(70%) !important;
 }
 
 .tick-icon {
   filter: brightness(0) saturate(100%) invert(89%) sepia(13%) saturate(394%) hue-rotate(49deg) brightness(103%) contrast(101%);
 }
 
-.dropdown-content dd:hover,
-.password-filter-dropdown-content dd:hover,
-.password-create-dropdown-content dd:hover {
-  background-color: #575757 !important;
-  color: #CDFFB1;
-}
-
-.try-upgrade-plan-popup-container {
-  color: #A4A4A4 !important;
-}
-
-.vault-body label,
-.vault-body span {
-  color: #A4A4A4 !important;
-}
-
-.multi-actn-btn {
-  color: #fff;
-}
-.multi-actn-btn > img {
-  filter: brightness(1.5);
-}
-
-.file-picker-modalDialog .file-picker-dir-content {
-  color: #fff !important;
-  background: #575757 !important;
-}
-
-.file-picker-modalDialog > div, .file-picker-dir-content .context-menu-action {
-  background-color: #A4A4A4 !important;
-  color: #fff !important;
-}
-
-.file-picker-dir-content .file-list li {
-  background-color: #A3A3A3;
-  color: #fff;
-}
-
-.file-picker-modalDialog .filepicker-dropdown-menu-action {
-  background-color: #A3A3A3;
-}
-
-.file-picker-modalDialog .file-path {
-  color: #fff !important;
-}
-
-.vlt-body .file-name {
-  color: #A4A4A4 !important;
-}
-
-.file-list-item:hover .file-path, .file-grid-item:hover .file-path, .select-item .file-path {
-  color: #A4A4A4 !important;
-}
-
-.display-type > img.selected {
-  filter: invert(0) !important;
-}
-
-.breadcrumb-part {
-  color: #FFFFFF;
-}
-
 .notif-icon:hover,
-.sttng-icon:hover {
-  filter: brightness(0) invert(1);
-}
-
-.notifipopup-show, .grn-clr {
-  color: #A4A4A4 !important;
-}
-
-.file-masKey-icon {
-  filter: brightness(0) invert(1) !important;
-}
-
+.sttng-icon:hover,
 .top-menu a.active .sttng-icon,
 .top-menu a.active .notif-icon {
   filter: brightness(0) invert(1) !important;
 }
 
-.custom-password-help-hoverpopup {
-  background-color: #303030 !important;
-}
-.custom-password-help-hoverpopup .txt-clr {
-  color: #A4A4A4 !important;
-}
-
-.popup-small h2,
-.popup-large h2 {
-  color: #fff !important;
-}
-
-.grn-bg {
-  border: 1px #48772c !important;
-}
-
-.btn-large.font-medium.button {
-  background-color: #575757 !important;
-  border: none;
-  color: #fff !important;
-}
-
-.notification-badge {
-  color: #232323;
-  background: #ffffff;
-  z-index: 1;
-}
-
-/*.settings-menu-item-container .stngs-menu-icon.IcoEye :hover {
-    filter: grayscale(1) brightness(20) !important;
-}*/
-#inactivityForm :hover {
-  color: #CDFFB1 !important;
-}
-
-#inactivity input[type=radio]:checked + label {
-  color: #CDFFB1 !important;
+.display-type > img.selected {
+  filter: invert(0) !important;
 }
 
 .stngs-menu-icon.IcoEye,
@@ -568,4 +1462,1442 @@ input[readonly=readonly], textarea[readonly] {
 .stngs-menu-icon.IcoInvtFrnd,
 .stngs-menu-icon.IcoDkMd {
   filter: invert(1) !important;
+}
+
+/* =============================================================
+   Menu icons — dark-theme SVG visibility patch
+   --------------------------------------------------------------
+   Most of our chrome icons ship as dark-on-light SVGs loaded via
+   CSS `content: url(../../Resources/sass/)` or `<img src=...>`. On dark surfaces
+   they read as black-on-charcoal and effectively disappear.
+   These rules invert their luminance so they appear as light /
+   white line-art on dark backgrounds. Brand-colored / status
+   icons keep their hue via hue-rotate where needed.
+   ============================================================= */
+/* Sidebar nav icons — all variants of `.nav-icon` load SVGs
+   through `content:` in HomeNew/Sidebar.scss. Tint to near-white
+   so the side menu remains legible against $dt-surface-1. */
+.sidebar .nav-icon,
+.nav-item .nav-icon,
+.upgrade-btn .nav-icon {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.85 !important;
+}
+
+/* Active nav row — bump brightness slightly so the icon picks
+   up the brand-soft selection background. */
+.nav-item--active .nav-icon,
+.nav-item .active .nav-icon {
+  opacity: 1 !important;
+}
+
+/* Top-bar icon buttons (notifications bell, settings gear) —
+   the gear is an <img src="…IcoExtrFtrs1.svg">; the bell is an
+   inline SVG with currentColor strokes and doesn't need a filter.
+   Target only <img> children so we don't double-tint the SVGs. */
+.icon-btn > img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9;
+}
+
+.icon-btn:hover > img,
+.icon-btn--active > img {
+  opacity: 1;
+}
+
+/* Settings popup row icons — `<img class="encrp-file-property">`
+   and `<img class="Ico-advsd-setts">` (Advanced Settings link). */
+.encrp-file-property,
+.Ico-advsd-setts {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.85;
+}
+
+/* Profile menu (sidebar footer popup) — each row carries a
+   `pm-item-icon` plus a per-row modifier that injects the SVG via
+   `content:`. Tint them so the icons stay visible on the dark
+   popup surface. The danger row keeps its red tint via the
+   pm-item--danger override, so do NOT filter that one. */
+.pm-item:not(.pm-item--danger) .pm-item-icon {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9;
+}
+
+.pm-item--danger .pm-item-icon {
+  /* Re-tint the red danger icon for dark surfaces — keep hue,
+     just bump luminance so it still reads as red, not maroon. */
+  filter: brightness(1.15) saturate(1.1) !important;
+}
+
+/* Quick Action tiles — `<img src="images/default/IcoXxx.svg">`
+   inside `.qa-icon`. Light tint on dark; locked tiles keep the
+   amber lock badge (rendered as a separate SVG). */
+.qa-icon img,
+.qa-btn .qa-icon img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9;
+}
+
+.qa-btn:hover .qa-icon img {
+  opacity: 1;
+}
+
+/* Advanced Options popup — `.adv-nav-icon` / `.adv-row-icon`
+   wrap inline SVGs with their own brand strokes (#7c3aed,
+   #2563eb, #d97706). They already render fine on dark since
+   the strokes are colored, but the tinted background pill
+   (e.g. `#f5f3ff`, `#fff7ed`) reads as a bright halo on dark.
+   Mute the wrapper a hair so it feels native to the dark panel
+   without losing the brand-color cue. */
+.adv-nav-icon,
+.adv-row-icon {
+  filter: brightness(0.94) saturate(0.92);
+}
+
+/* radio / inactivity menu */
+#inactivityForm :hover {
+  color: #B8E89A !important;
+}
+
+#inactivity input[type=radio]:checked + label {
+  color: #B8E89A !important;
+}
+
+.language-dropdown,
+.form-control {
+  border-color: #2A3340 !important;
+}
+
+.find-fle-nme {
+  color: #B5BCC7;
+}
+
+/* =============================================================
+   Settings popup (gear button, HomeNew)
+   Uses .sm-* selectors — none of which were covered above.
+   ============================================================= */
+.settings-menu {
+  background: #232E3B !important;
+  border: 1px solid #3A4554 !important;
+  color: #E8ECF1 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+.sm-title {
+  color: #E8ECF1 !important;
+}
+
+.sm-close {
+  background: transparent !important;
+  border: 1px solid #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+.sm-close:hover {
+  background: rgba(248, 113, 113, 0.14) !important;
+  color: #F87171 !important;
+  border-color: #F87171 !important;
+}
+
+.sm-divider {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.sm-section-label {
+  color: #7A8494 !important;
+}
+
+.sm-select {
+  background: #1C2530 !important;
+  border: 1px solid #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.sm-select:focus {
+  border-color: #7FCC5C !important;
+  box-shadow: 0 0 0 3px rgba(127, 204, 92, 0.35) !important;
+}
+
+.sm-select-chevron {
+  color: #7A8494 !important;
+}
+
+/* Inactivity radio chips */
+.sm-radio-item {
+  background: #1C2530 !important;
+  border: 1.5px solid #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+.sm-radio-dot {
+  background: #232E3B !important;
+  border-color: #3A4554 !important;
+}
+
+.sm-radio-item--active {
+  background: #7FCC5C !important;
+  border-color: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+.sm-radio-item--active .sm-radio-dot {
+  background: #0F1A07 !important;
+  border-color: #0F1A07 !important;
+}
+
+/* Toggle rows */
+.sm-toggle-row {
+  background: transparent !important;
+}
+
+.sm-toggle-row:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Locked rows — dim text + warm hover hint that maps to the
+   paid-gate popup that opens on click. */
+.sm-toggle-row--locked .sm-toggle-label,
+.sm-toggle-row--locked .sm-toggle-desc {
+  color: #7A8494 !important;
+}
+
+.sm-toggle-row--locked:hover {
+  background: rgba(251, 191, 36, 0.14) !important;
+}
+
+/* Same lock styling for the Advanced Options popup rows */
+.adv-nav-row--locked:hover,
+.adv-toggle-row--locked:hover {
+  background: rgba(251, 191, 36, 0.14) !important;
+}
+
+.adv-nav-row--locked .adv-nav-label,
+.adv-nav-row--locked .adv-nav-desc,
+.adv-toggle-row--locked .adv-row-label,
+.adv-toggle-row--locked .adv-row-desc {
+  color: #7A8494 !important;
+}
+
+/* =============================================================
+   Paid-gate dialog (single shared component for all upgrade prompts)
+   ============================================================= */
+.paid-gate-backdrop {
+  background: rgba(0, 0, 0, 0.55) !important;
+}
+
+.paid-gate-modal {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+.pgm-title {
+  color: #E8ECF1 !important;
+}
+
+.pgm-desc {
+  color: #B5BCC7 !important;
+}
+
+.pgm-features {
+  background-color: rgba(0, 0, 0, 0.55) !important;
+}
+
+.pgm-perk {
+  color: #E8ECF1 !important;
+}
+
+.pgm-cancel {
+  color: #7A8494 !important;
+  background: transparent !important;
+}
+
+.pgm-cancel:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #E8ECF1 !important;
+}
+
+.sm-toggle-label {
+  color: #E8ECF1 !important;
+}
+
+.sm-toggle-desc {
+  color: #7A8494 !important;
+}
+
+/* Generic toggle switch — used on the gear popup */
+.toggle-switch {
+  background: #2A3645 !important;
+}
+
+.toggle-switch--on {
+  background: #7FCC5C !important;
+}
+
+.toggle-thumb {
+  background: #E8ECF1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Advanced settings list */
+.sm-advanced-btn {
+  background: transparent !important;
+  color: #E8ECF1 !important;
+}
+
+.sm-advanced-btn:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.sm-adv-arrow {
+  color: #7A8494 !important;
+}
+
+/* =============================================================
+   Tools page (.tools-* / .tool-*)
+   ============================================================= */
+.tools-shell {
+  background: #0F141A !important;
+  color: #E8ECF1 !important;
+}
+
+.tools-title {
+  color: #E8ECF1 !important;
+}
+
+.tools-subtitle {
+  color: #B5BCC7 !important;
+}
+
+.tools-search-box {
+  background: #1C2530 !important;
+  border: 1px solid #2A3340 !important;
+  box-shadow: none !important;
+}
+
+.tools-search-input {
+  color: #E8ECF1 !important;
+  background: transparent !important;
+}
+
+.tools-search-input::placeholder {
+  color: #7A8494 !important;
+}
+
+.tools-group-header,
+.tools-group-name {
+  color: #E8ECF1 !important;
+}
+
+.tools-group-count {
+  color: #7A8494 !important;
+}
+
+.tools-empty {
+  color: #7A8494 !important;
+}
+
+/* Tools cards (the grid items) */
+.tool-card {
+  background: #1C2530 !important;
+  border: 1px solid #2A3340 !important;
+  color: #E8ECF1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+.tool-card:hover {
+  border-color: #7FCC5C !important;
+  background: #232E3B !important;
+}
+
+.tool-card--active {
+  border-color: #7FCC5C !important;
+  background: rgba(127, 204, 92, 0.14) !important;
+}
+
+.tool-card--danger {
+  border-color: rgba(248, 113, 113, 0.35) !important;
+}
+
+.tool-card--danger:hover {
+  border-color: #F87171 !important;
+  background: rgba(248, 113, 113, 0.14) !important;
+}
+
+.tools-upgrade-ico {
+  filter: brightness(1.3);
+}
+
+/* Active tool panel (right side) */
+.tool-panel {
+  background: #1C2530 !important;
+  border: 1.5px solid #7FCC5C !important;
+  color: #E8ECF1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+.tool-panel-header,
+.tool-panel-title-row {
+  color: #E8ECF1 !important;
+}
+
+.tool-panel-name {
+  color: #E8ECF1 !important;
+}
+
+.tool-panel-desc,
+.tool-body-intro {
+  color: #B5BCC7 !important;
+}
+
+.tool-panel-close {
+  color: #B5BCC7 !important;
+  background: transparent !important;
+  border: 1px solid #2A3340 !important;
+}
+
+.tool-panel-close:hover {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+}
+
+.tool-panel-icon {
+  background: rgba(127, 204, 92, 0.14) !important;
+}
+
+/* Tool fields/inputs */
+.tool-field-label {
+  color: #B5BCC7 !important;
+}
+
+.tool-field-hint {
+  color: #7A8494 !important;
+}
+
+.tool-text-input,
+.tool-textarea {
+  background: #161D26 !important;
+  border: 1px solid #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.tool-text-input:focus,
+.tool-textarea:focus {
+  border-color: #7FCC5C !important;
+  box-shadow: 0 0 0 3px rgba(127, 204, 92, 0.35) !important;
+}
+
+.tool-text-input::placeholder,
+.tool-textarea::placeholder {
+  color: #7A8494 !important;
+}
+
+/* Tool drop zone */
+.tool-drop-zone {
+  background: #161D26 !important;
+  border: 2px dashed #3A4554 !important;
+  color: #B5BCC7 !important;
+}
+
+.tool-drop-zone--active {
+  background: rgba(127, 204, 92, 0.14) !important;
+  border-color: #7FCC5C !important;
+  color: #E8ECF1 !important;
+}
+
+.tool-drop-zone--done {
+  background: rgba(74, 222, 128, 0.14) !important;
+  border-color: #4ADE80 !important;
+  color: #4ADE80 !important;
+}
+
+.tool-path-row {
+  background: #161D26 !important;
+  border: 1px solid #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+.tool-browse-btn {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+}
+
+.tool-browse-btn:hover {
+  background: #2A3645 !important;
+}
+
+/* Tool action buttons */
+.tool-action-btn {
+  background: #7FCC5C !important;
+  color: #0F1A07 !important;
+  border: 1px solid #7FCC5C !important;
+}
+
+.tool-action-btn:hover {
+  background: #9BE076 !important;
+  border-color: #9BE076 !important;
+}
+
+.tool-action-btn--scan {
+  background: #60A5FA !important;
+  color: #062045 !important;
+  border-color: #60A5FA !important;
+}
+
+.tool-action-btn--danger {
+  background: #F87171 !important;
+  color: #2A0808 !important;
+  border-color: #F87171 !important;
+}
+
+/* Tool radios / checkbox rows */
+.tool-radio-chip {
+  background: #1C2530 !important;
+  border: 1.5px solid #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+.tool-radio-chip--active {
+  background: rgba(127, 204, 92, 0.14) !important;
+  border-color: #7FCC5C !important;
+  color: #7FCC5C !important;
+}
+
+.tool-checkbox-row {
+  color: #E8ECF1 !important;
+}
+
+.tool-option-label,
+.tool-option-row {
+  color: #E8ECF1 !important;
+}
+
+/* Tool banners */
+.tool-info-box {
+  background: rgba(96, 165, 250, 0.14) !important;
+  border: 1px solid rgba(96, 165, 250, 0.25) !important;
+  color: #60A5FA !important;
+}
+
+.tool-info-box--blue {
+  background: rgba(96, 165, 250, 0.14) !important;
+  color: #60A5FA !important;
+}
+
+.tool-success-banner {
+  background: rgba(74, 222, 128, 0.14) !important;
+  border: 1px solid rgba(74, 222, 128, 0.25) !important;
+  color: #4ADE80 !important;
+}
+
+.tool-warning-banner {
+  background: rgba(251, 191, 36, 0.14) !important;
+  border: 1px solid rgba(251, 191, 36, 0.25) !important;
+  color: #FBBF24 !important;
+}
+
+/* =============================================================
+   Help & Support page — pick up the remaining .sup-/.sco-/.faq-
+   nodes the earlier dark theme didn't cover.
+   ============================================================= */
+.sup-cat-card {
+  background: #1C2530 !important;
+  border: 1.5px solid #2A3340 !important;
+  color: #E8ECF1 !important;
+}
+
+.sup-cat-card:hover {
+  border-color: #7FCC5C !important;
+  background: #232E3B !important;
+  box-shadow: 0 4px 12px rgba(127, 204, 92, 0.12) !important;
+}
+
+.scc-icon {
+  background: rgba(127, 204, 92, 0.14) !important;
+}
+
+/* =============================================================
+   Recent Files extras (bulk bar + status-tinted file icons)
+   ============================================================= */
+.rf-bulk-bar {
+  background: #7FCC5C !important;
+  border-color: #9BE076 !important;
+}
+
+.rf-bulk-count {
+  background: rgba(255, 255, 255, 0.22) !important;
+  color: #fff !important;
+}
+
+.rf-bulk-btn {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.26) !important;
+}
+
+.rf-bulk-btn:hover {
+  background: rgba(255, 255, 255, 0.26) !important;
+}
+
+.rf-bulk-btn--danger {
+  background: #F87171 !important;
+  color: #2A0808 !important;
+  border-color: #F87171 !important;
+}
+
+.rf-bulk-btn--danger:hover {
+  filter: brightness(0.92);
+}
+
+.rf-empty-title {
+  color: #E8ECF1 !important;
+}
+
+.rf-empty-sub {
+  color: #7A8494 !important;
+}
+
+.file-icon--enc {
+  background: rgba(96, 165, 250, 0.14) !important;
+  color: #60A5FA !important;
+}
+
+.file-icon--opened {
+  background: rgba(74, 222, 128, 0.14) !important;
+  color: #4ADE80 !important;
+}
+
+.file-icon--shared {
+  background: rgba(251, 191, 36, 0.14) !important;
+  color: #FBBF24 !important;
+}
+
+.file-icon--master-key {
+  background: rgba(167, 139, 250, 0.15) !important;
+  color: #C4B5FD !important;
+}
+
+.badge--master-key {
+  background: rgba(167, 139, 250, 0.15) !important;
+  color: #C4B5FD !important;
+}
+
+/* Sticky table header keeps the column titles visible while body scrolls */
+.trow--header {
+  background: #0F141A !important;
+  color: #7A8494 !important;
+  border-bottom: 1px solid #2A3340 !important;
+}
+
+/* Scrollable body — match the slim scrollbar to the dark theme */
+.files-table-body {
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent !important;
+}
+
+.files-table-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22) !important;
+}
+
+.files-table-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35) !important;
+}
+
+.tab-count {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #B5BCC7 !important;
+}
+
+.tab--active .tab-count {
+  background: rgba(15, 20, 26, 0.35) !important;
+  color: #0F1A07 !important;
+}
+
+/* Context menu sub-bits */
+.context-menu,
+.rf-context-menu {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+.ctx-file-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.ctx-item {
+  color: #E8ECF1 !important;
+  background: transparent !important;
+}
+
+.ctx-item:hover,
+.ctx-item:focus-visible {
+  background: rgba(255, 255, 255, 0.08) !important;
+  outline: none;
+}
+
+.ctx-icon {
+  color: #B5BCC7 !important;
+}
+
+.ctx-item:hover .ctx-icon {
+  color: #E8ECF1 !important;
+}
+
+.ctx-label {
+  color: inherit !important;
+}
+
+.ctx-item--danger {
+  color: #F87171 !important;
+}
+
+.ctx-item--danger .ctx-icon {
+  color: #F87171 !important;
+}
+
+.ctx-item--danger:hover {
+  background: rgba(248, 113, 113, 0.14) !important;
+  color: #F87171 !important;
+}
+
+.ctx-item--locked {
+  color: #7A8494 !important;
+}
+
+.ctx-item--locked .ctx-icon {
+  color: #7A8494 !important;
+}
+
+.ctx-lock-badge {
+  background: rgba(251, 191, 36, 0.14) !important;
+  color: #FBBF24 !important;
+}
+
+.ctx-divider {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.ctx-file-name {
+  color: #E8ECF1 !important;
+}
+
+.ctx-file-size {
+  color: #7A8494 !important;
+}
+
+/* Subdued ghost variant for "Clear" in the bulk-action bar */
+.rf-bulk-btn--ghost {
+  background: transparent !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.rf-bulk-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* =============================================================
+   Tools / Help Center — tool-card sub-pieces (tc-*)
+   The earlier dark theme only covered the outer .tool-card. Inside
+   the card the title / desc / footer / open-link still inherited
+   light-mode hex colors and read as near-invisible on dark surfaces.
+   ============================================================= */
+.tc-name {
+  color: #E8ECF1 !important;
+}
+
+.tc-desc {
+  color: #B5BCC7 !important;
+}
+
+.tc-header {
+  color: #E8ECF1 !important;
+}
+
+.tc-icon {
+  background: rgba(127, 204, 92, 0.14) !important;
+}
+
+.tc-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.tc-open {
+  color: #7FCC5C !important;
+}
+
+.tool-card--danger .tc-open {
+  color: #F87171 !important;
+}
+
+.tc-badge {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #B5BCC7 !important;
+}
+
+.tc-badge--new {
+  background: rgba(96, 165, 250, 0.14) !important;
+  color: #60A5FA !important;
+}
+
+.tc-badge--beta {
+  background: rgba(167, 139, 250, 0.15) !important;
+  color: #C4B5FD !important;
+}
+
+.tc-badge--danger {
+  background: rgba(248, 113, 113, 0.14) !important;
+  color: #F87171 !important;
+}
+
+/* Help Center shell — reuses .tools-shell but its inline grouped
+   layout has its own `nav-*-ico` filter; cards have already been
+   covered above. Make sure the page titles surface clearly. */
+.tools-shell h1,
+.tools-shell h2,
+.tools-shell h3,
+.tools-shell p,
+.tools-shell label {
+  color: #E8ECF1 !important;
+}
+
+.tools-shell .grey-clr,
+.tools-shell .fle-nme {
+  color: #B5BCC7 !important;
+}
+
+/* =============================================================
+   Security status — tier pill + state-tinted rows
+   ============================================================= */
+.sec-tier-pill--free {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #B5BCC7 !important;
+}
+
+.sec-tier-pill--premium {
+  background: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+.sec-tier-pill--business {
+  background: rgba(167, 139, 250, 0.18) !important;
+  color: #C4B5FD !important;
+}
+
+.security-row--warn .sec-title {
+  color: #FBBF24 !important;
+}
+
+.security-row--lock {
+  opacity: 0.85;
+}
+
+.security-row--lock .sec-title {
+  color: #B5BCC7 !important;
+}
+
+.security-row--clickable:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.security-status-card {
+  background: #1C2530 !important;
+}
+
+/* =============================================================
+   Per-file ProgressBar (inner-loop byte progress)
+   ============================================================= */
+.progres-sec {
+  background: #161D26 !important;
+  border-top: 1px solid #2A3340 !important;
+}
+
+.progres-fle-txt {
+  color: #E8ECF1 !important;
+}
+
+.progres-pct {
+  color: #B5BCC7 !important;
+}
+
+.progress-container {
+  background: #232E3B !important;
+}
+
+.progress-bar {
+  background: #7FCC5C !important;
+}
+
+.progress-background {
+  stroke: #3A4554 !important;
+}
+
+.progress-value {
+  stroke: #7FCC5C !important;
+}
+
+.progress-text {
+  color: #E8ECF1 !important;
+}
+
+.progress-context-menu {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+.progress-context-menu .menu-item {
+  color: #E8ECF1 !important;
+}
+
+.progress-context-menu .menu-item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* =============================================================
+   Drag-and-drop hint overlay (Recent Files / Secured Folders)
+   ============================================================= */
+.recent-files-card--dropping,
+.home-index--dropping {
+  border: 2px dashed #7FCC5C !important;
+  background: rgba(127, 204, 92, 0.14) !important;
+  box-shadow: 0 0 0 4px rgba(127, 204, 92, 0.14) !important;
+}
+
+.rf-drop-hint {
+  background: rgba(15, 20, 26, 0.88) !important;
+  color: #7FCC5C !important;
+}
+
+/* =============================================================
+   Batch operation toast (per-file failure summary)
+   ============================================================= */
+.batch-toast {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+.bt-title {
+  color: #E8ECF1 !important;
+}
+
+.bt-sub {
+  color: #7A8494 !important;
+}
+
+.bt-close {
+  background: transparent !important;
+  color: #7A8494 !important;
+}
+
+.bt-close:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #E8ECF1 !important;
+}
+
+.bt-toggle {
+  background: transparent !important;
+  border-color: #3A4554 !important;
+  color: #B5BCC7 !important;
+}
+
+.bt-toggle:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #E8ECF1 !important;
+}
+
+.bt-failures {
+  border-top-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.bt-failure-row {
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.bt-failure-name {
+  color: #E8ECF1 !important;
+}
+
+.bt-failure-reason {
+  color: #F87171 !important;
+}
+
+.batch-toast--progress .bt-icon {
+  background: rgba(96, 165, 250, 0.14) !important;
+  color: #60A5FA !important;
+}
+
+.batch-toast--success {
+  border-color: rgba(74, 222, 128, 0.35) !important;
+}
+
+.batch-toast--success .bt-icon {
+  background: rgba(74, 222, 128, 0.14) !important;
+  color: #4ADE80 !important;
+}
+
+.batch-toast--error {
+  border-color: rgba(248, 113, 113, 0.35) !important;
+}
+
+.batch-toast--error .bt-icon {
+  background: rgba(248, 113, 113, 0.14) !important;
+  color: #F87171 !important;
+}
+
+.batch-toast--error .bt-title {
+  color: #F87171 !important;
+}
+
+/* =============================================================
+   Update pill — Topbar (dark variants)
+   Normal stays amber-on-warm; mandatory stays red with pulse.
+   ============================================================= */
+.update-pill--normal {
+  background: rgba(251, 191, 36, 0.14) !important;
+  color: #FBBF24 !important;
+  border-color: rgba(251, 191, 36, 0.35) !important;
+}
+
+.update-pill--normal:hover {
+  background: rgba(251, 191, 36, 0.22) !important;
+}
+
+.update-pill--mandatory {
+  /* keep the red — high-stakes signal regardless of theme */
+  background: #DC2626 !important;
+  color: #fff !important;
+  border-color: #B91C1C !important;
+}
+
+.update-pill-version {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: inherit !important;
+}
+
+/* =============================================================
+   File Password Window (FPW) — pops up when opening a file whose
+   password differs from the sign-in password. Styles live inline
+   in the Razor file (component-scoped); these rules retint the
+   chrome for dark mode.
+   ============================================================= */
+.fpw-overlay {
+  background: rgba(0, 0, 0, 0.55) !important;
+}
+
+.fpw-modal {
+  background: #1C2530 !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #2A3340 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+.fpw-header {
+  /* Brand green keeps strong identity on dark backgrounds */
+  background-color: #7FCC5C !important;
+  border-bottom: 1px solid #2A3340 !important;
+}
+
+.fpw-icon {
+  background: rgba(127, 204, 92, 0.15) !important;
+}
+
+.fpw-title {
+  color: #0F1A07 !important;
+}
+
+.fpw-file {
+  color: #E8ECF1 !important;
+}
+
+.fpw-file img {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.axx-desc {
+  color: #B5BCC7 !important;
+}
+
+.fpw-group label {
+  color: #B5BCC7 !important;
+}
+
+.fpw-input {
+  background: #161D26 !important;
+  color: #E8ECF1 !important;
+  border-color: #3A4554 !important;
+}
+
+.fpw-input::placeholder {
+  color: #7A8494 !important;
+}
+
+.fpw-error {
+  background: rgba(220, 38, 38, 0.14) !important;
+  color: #fca5a5 !important;
+}
+
+.fpw-footer {
+  border-top: 1px solid #2A3340 !important;
+}
+
+.fpw-btn.cancel {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+  border: 1px solid #3A4554 !important;
+}
+
+.fpw-btn.cancel:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.fpw-btn.confirm {
+  background: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+.fpw-btn.confirm:disabled {
+  opacity: 0.4 !important;
+}
+
+.fpw-note {
+  background: #161D26 !important;
+  color: #B5BCC7 !important;
+}
+
+.fpw-success {
+  background: rgba(127, 204, 92, 0.14) !important;
+  color: #86efac !important;
+}
+
+/* =============================================================
+   AxLoader — single brand spinner. Re-tinted for dark surfaces.
+   ============================================================= */
+.axl--fullpage {
+  background: rgba(15, 23, 42, 0.78) !important; /* dark scrim, slate-900 @ 78% */
+}
+
+.axl--fullpage .axl-msg,
+.axl .axl-msg {
+  color: #E8ECF1 !important;
+}
+
+.axl-ring-track {
+  stroke: rgba(127, 204, 92, 0.18) !important; /* lifted brand for dark */
+}
+
+.axl-ring-arc {
+  stroke: #7FCC5C !important;
+}
+
+.axl-key {
+  color: #7FCC5C !important;
+}
+
+/* =============================================================
+   Password Manager — list cards + form chrome on dark surfaces.
+   ============================================================= */
+.pm-title,
+.pm-form-title,
+.pm-empty-title,
+.pm-card-title {
+  color: #E8ECF1 !important;
+}
+
+.pm-subtitle,
+.pm-form-sub,
+.pm-empty-sub,
+.pm-card-type {
+  color: #B5BCC7 !important;
+}
+
+/* Header buttons */
+.pm-icon-btn {
+  background: #1C2530 !important;
+  border-color: #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+.pm-icon-btn:hover {
+  background: #232E3B !important;
+  border-color: #7FCC5C !important;
+  color: #7FCC5C !important;
+}
+
+.pm-add-menu,
+.pm-export-menu {
+  background: #232E3B !important;
+  border-color: #3A4554 !important;
+}
+
+.pm-export-menu a,
+.pm-add-item-title {
+  color: #E8ECF1 !important;
+}
+
+.pm-add-item-sub {
+  color: #7A8494 !important;
+}
+
+.pm-add-item:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.pm-export-menu a:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Search + filters */
+.pm-search-input {
+  background: #1C2530 !important;
+  border-color: #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.pm-search-input::placeholder {
+  color: #7A8494 !important;
+}
+
+.pm-search-icon {
+  color: #7A8494 !important;
+}
+
+.pm-chips {
+  background: #1C2530 !important;
+  border-color: #2A3340 !important;
+}
+
+.pm-chip {
+  color: #B5BCC7 !important;
+}
+
+.pm-chip:hover {
+  color: #E8ECF1 !important;
+}
+
+.pm-chip--active {
+  background: #232E3B !important;
+  color: #7FCC5C !important;
+}
+
+.pm-type-chip {
+  background: #1C2530 !important;
+  border-color: #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+.pm-type-chip:hover {
+  color: #E8ECF1 !important;
+  border-color: #3A4554 !important;
+}
+
+.pm-type-chip--active {
+  background: #7FCC5C !important;
+  border-color: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+.pm-sort {
+  background: #1C2530 !important;
+  border-color: #2A3340 !important;
+  color: #E8ECF1 !important;
+}
+
+/* Cards */
+.pm-card {
+  background: #1C2530 !important;
+  border-color: #2A3340 !important;
+}
+
+.pm-card:hover,
+.pm-card:focus-visible {
+  border-color: transparent !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+.pm-card-shared {
+  background: #232E3B !important;
+  border-color: #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+/* Empty state */
+.pm-empty {
+  background: #1C2530 !important;
+  border-color: #3A4554 !important;
+}
+
+/* Form chrome */
+.pm-form-shell {
+  background: #1C2530 !important;
+  border-color: #2A3340 !important;
+}
+
+.pm-form-header,
+.pm-form-footer {
+  background: #232E3B !important;
+  border-color: #2A3340 !important;
+}
+
+.pm-form-back {
+  background: #1C2530 !important;
+  border-color: #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+.pm-form-back:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #E8ECF1 !important;
+}
+
+.pm-form-row label {
+  color: #E8ECF1 !important;
+}
+
+.pm-form-input,
+.pm-form-textarea {
+  background: #161D26 !important;
+  border-color: #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.pm-form-input::placeholder,
+.pm-form-textarea::placeholder {
+  color: #7A8494 !important;
+}
+
+.pm-form-display {
+  background: #161D26 !important;
+  border-color: #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.pm-form-mini-btn {
+  color: #B5BCC7 !important;
+}
+
+.pm-form-mini-btn:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #7FCC5C !important;
+}
+
+.pm-btn--ghost {
+  background: #1C2530 !important;
+  border-color: #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.pm-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.pm-btn--danger {
+  background: #1C2530 !important;
+}
+
+/* ── Sidebar + list layout (PM) dark-theme ─────────────────── */
+.pm-rail,
+.pm-main {
+  background: #1C2530 !important;
+  border-color: #2A3340 !important;
+}
+
+.pm-rail-head {
+  border-bottom-color: #2A3340 !important;
+}
+
+.pm-rail-title {
+  color: #E8ECF1 !important;
+}
+
+.pm-rail-sub {
+  color: #B5BCC7 !important;
+}
+
+.pm-rail-item {
+  color: #B5BCC7 !important;
+}
+
+.pm-rail-item:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #E8ECF1 !important;
+}
+
+.pm-rail-item--active {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #7FCC5C !important;
+}
+
+.pm-rail-item--active .pm-rail-item-icon {
+  color: #7FCC5C !important;
+}
+
+.pm-rail-item-count {
+  background: #232E3B !important;
+  border-color: #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+
+.pm-rail-item--active .pm-rail-item-count {
+  background: #7FCC5C !important;
+  border-color: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+.pm-rail-sep,
+.pm-rail-foot {
+  border-color: #2A3340 !important;
+  background: transparent !important;
+}
+
+.pm-main-header {
+  border-bottom-color: #2A3340 !important;
+}
+
+.pm-main-title {
+  color: #E8ECF1 !important;
+}
+
+.pm-main-count {
+  color: #B5BCC7 !important;
+}
+
+.pm-row {
+  background: transparent !important;
+}
+
+.pm-row:hover,
+.pm-row:focus-visible {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: #2A3340 !important;
+}
+
+.pm-row-title {
+  color: #E8ECF1 !important;
+}
+
+.pm-row-subtitle {
+  color: #B5BCC7 !important;
+}
+
+.pm-row-type {
+  color: #7A8494 !important;
+}
+
+.pm-row-chevron {
+  color: #B5BCC7 !important;
+}
+
+.pm-row-shared {
+  background: #232E3B !important;
+  border-color: #2A3340 !important;
+  color: #B5BCC7 !important;
 }

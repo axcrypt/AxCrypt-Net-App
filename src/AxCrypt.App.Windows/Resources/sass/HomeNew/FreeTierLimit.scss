@@ -1,0 +1,66 @@
+﻿
+/* Free tier limit bar */
+.free-limit-bar {
+    margin: 8px 8px 0;
+    padding: 10px 10px 8px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 10px
+}
+
+.sidebar-collapsed .free-limit-bar {
+    display: none
+}
+
+.flb-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px
+}
+
+.flb-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #92400e
+}
+
+.flb-upgrade {
+    font-size: 11px;
+    font-weight: 700;
+    color: $brand-green;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline
+}
+
+.flb-track {
+    height: 5px;
+    background: #fde68a;
+    border-radius: 9px;
+    overflow: hidden;
+    margin-bottom: 4px
+}
+
+.flb-fill {
+    height: 100%;
+    background: #f59e0b;
+    border-radius: 9px;
+    transition: width .3s
+}
+
+.flb-fill--full {
+    background: #ef4444
+}
+
+.flb-hint {
+    font-size: 11px;
+    color: #92400e
+}
+
+.flb-maxed {
+    color: #dc2626;
+    font-weight: 600
+}

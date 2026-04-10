@@ -454,9 +454,11 @@ public partial class App : Application
     {
         AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
 
+        // Poll at 100 ms so a command-triggered flow resumes promptly once
+        // sign-in completes, instead of waiting up to a second per tick.
         while (AxCServiceProviderExtension.LogOnViewModel!.IsVisible || !AxCServiceProviderExtension.LogOnViewModel!.IsLoggedOn)
         {
-            await Task.Delay(1000);
+            await Task.Delay(100);
         }
     }
 
@@ -522,6 +524,13 @@ public partial class App : Application
         get => _window;
     }
 
+    // Preferred initial window size on first launch — large enough to
+    // show the entire dashboard (TopBar + content-grid + right-column)
+    // comfortably on a 1440×900 or 1600×900 screen, while still
+    // shrinkable down to the minimums declared in AppPreferences.
+    private const int DefaultWindowWidth = 1280;
+    private const int DefaultWindowHeight = 800;
+
     protected override Window CreateWindow(IActivationState? activationState)
     {
         _window = base.CreateWindow(activationState);
@@ -529,8 +538,10 @@ public partial class App : Application
         {
             _window.MinimumHeight = AppPreferences.MinimumWindowHeight;
             _window.MinimumWidth = AppPreferences.MinimumWindowWidth;
-            _window.Height = AppPreferences.MinimumWindowHeight;
-            _window.Width = AppPreferences.MinimumWindowWidth;
+            // Start at the preferred size, not the minimum, so the user
+            // doesn't immediately need to resize to see the full layout.
+            _window.Height = DefaultWindowHeight;
+            _window.Width = DefaultWindowWidth;
 
             AppFactory.RestoreUserPreferences(_window);
         }

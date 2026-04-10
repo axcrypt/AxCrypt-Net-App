@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="AxCrypt.styles.css" />
     <link href="css/site.min.css" rel="stylesheet" />
     <link href="css/login.min.css" rel="stylesheet" />
+    <link href="css/loginnew.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/introjs.min.css" />
 
     <script type="text/javascript">
@@ -121,6 +122,33 @@
                 linkElement.parentNode.removeChild(linkElement);
             }
         };
+
+        // Clamps an absolutely/fixed-positioned popover (typically a
+        // context menu) so it can never spill off the right or bottom
+        // edge of the viewport. Called from Blazor after the popup
+        // renders at the cursor position. Idempotent — safe to call
+        // on every re-render.
+        window.clampToViewport = function (elementId) {
+            var el = document.getElementById(elementId);
+            if (!el) return;
+            // Reset any previous nudge before measuring so we get the
+            // true natural rect each time.
+            el.style.transform = "";
+            requestAnimationFrame(function () {
+                var r = el.getBoundingClientRect();
+                var margin = 8;
+                var vw = document.documentElement.clientWidth || window.innerWidth;
+                var vh = document.documentElement.clientHeight || window.innerHeight;
+                var dx = 0, dy = 0;
+                if (r.right > vw - margin) dx = (vw - margin) - r.right;
+                if (r.bottom > vh - margin) dy = (vh - margin) - r.bottom;
+                if (r.left + dx < margin) dx = margin - r.left;
+                if (r.top + dy < margin) dy = margin - r.top;
+                if (dx !== 0 || dy !== 0) {
+                    el.style.transform = "translate(" + dx + "px," + dy + "px)";
+                }
+            });
+        };
     </script>
 </head>
 
@@ -128,11 +156,97 @@
 
     <div class="status-bar-safe-area"></div>
 
+    <!--
+        Bootstrap loader styles — inlined so the loader renders correctly
+        BEFORE any CSS bundle has loaded. Without these, the SVG circles
+        fall back to the browser default fill (black) and the ring paints
+        as a giant solid black blob.
+    -->
+    <style>
+        #boot-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 99997;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #boot-loader .bl-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        #boot-loader .bl-ring {
+            position: relative;
+            width: 84px;
+            height: 84px;
+        }
+        #boot-loader .bl-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+        #boot-loader .bl-track {
+            fill: none;
+            stroke: rgba(72, 119, 44, 0.12);
+            stroke-width: 5;
+        }
+        #boot-loader .bl-arc {
+            fill: none;
+            stroke: #48772C;
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-dasharray: 80 180;
+            transform-origin: 32px 32px;
+            animation: bl-spin 1.1s linear infinite;
+        }
+        @keyframes bl-spin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+        #boot-loader .bl-key {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            color: #48772C;
+            animation: bl-pulse 1.8s ease-in-out infinite;
+        }
+        #boot-loader .bl-key svg {
+            width: 28px;
+            height: 28px;
+            transform: none;
+        }
+        @keyframes bl-pulse {
+            0%, 100% { transform: scale(0.96); opacity: .75; }
+            50%      { transform: scale(1.0);  opacity: 1;   }
+        }
+        #boot-loader .bl-msg {
+            font-size: 14px;
+            color: #111827;
+            font-weight: 500;
+        }
+    </style>
+
     <div id="app">
-        <div class="secrets-loading-overlay">
-            <div class="loading-content">
-                <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
-                <span style="color:black ">Initializing...</span>
+        <!-- Bootstrap loader — pre-Blazor, fully self-styled above. -->
+        <div id="boot-loader">
+            <div class="bl-stack">
+                <div class="bl-ring">
+                    <svg viewBox="0 0 64 64">
+                        <circle class="bl-track" cx="32" cy="32" r="28" fill="none"></circle>
+                        <circle class="bl-arc"   cx="32" cy="32" r="28" fill="none"></circle>
+                    </svg>
+                    <div class="bl-key">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <rect x="6" y="11" width="12" height="9" rx="2" fill="currentColor" stroke="none"></rect>
+                            <path d="M9 11V8a3 3 0 016 0v3"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="bl-msg">Initializing AxCrypt…</div>
             </div>
         </div>
     </div>

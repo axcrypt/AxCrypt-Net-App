@@ -1,4 +1,4 @@
-﻿@using AxCrypt.Api.Model.Secret
+@using AxCrypt.Api.Model.Secret
 @using AxCrypt.App.Shared.Models.Secret
 @using AxCrypt.App.Shared.ViewModels.Secret
 @using AxCrypt.App.Shared.Helpers
@@ -13,79 +13,113 @@
 @inject NewSecretViewModel newSecretViewModel
 @inject SecretService secretService
 
-<div style="width: 100%;">
-    <div class="password-header">
-        <a href="/passwordManager" class="grn-clr"><img class="back-arrow" src="" />@Texts.PasswordManagementPageTitle</a>
-    </div>
-    <div class="page-heading">
-        <h3 class="password-creation">
-            @Texts.AddCardTitle
-        </h3>
-    </div>
-    <div class="parent-container">
-        <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
+@*
+    New Card — credit card entry. Uses the shared .pm-form-* shell.
+*@
+
+<div class="page-content-body-section">
+
+    <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
+
+    <div class="pm-form-shell">
+
+        <div class="pm-form-header">
+            <NavLink class="pm-form-back" href="passwordManager" title="Back to passwords">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </NavLink>
+            <div class="pm-form-titles">
+                <h2 class="pm-form-title">@Texts.AddCardTitle</h2>
+                <p class="pm-form-sub">Store a card. Number + CVV stay encrypted at rest.</p>
+            </div>
+            <span class="pm-type-badge pm-type-badge--card" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="5" width="20" height="14" rx="2"/>
+                    <line x1="2" y1="10" x2="22" y2="10"/>
+                </svg>
+            </span>
+        </div>
+
         <EditForm Model="@CardViewModel" OnValidSubmit="SavePassword" @ref="editForm">
             <DataAnnotationsValidator />
-            <div class="row">
-                <ul class="clean-up sub-head-clr" style=" list-style:none ">
-                    <li>
-                        <label for="Card_CardNumber">@Texts.CardNumberPrompt</label>
-                        <input maxlength="19" minlength="12" style="color:#494949;" placeholder="XXXX XXXX XXXX XXXX"
-                               @bind="CardViewModel!.CardNumber" type="text"
-                               class="form-control @(GetInputClass(nameof(CardViewModel.CardNumber)))"
-                               onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                        <ValidationMessage For="@(() => CardViewModel.CardNumber)" />
-                    </li>
-                    <li>
-                        <label for="Card_SecretDesc">@Texts.DescriptionLabel:</label>
-                        <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949;" placeholder="example"
-                                  @bind="CardViewModel.SecretDesc"
-                                  class="@(GetInputClass(nameof(CardViewModel.SecretDesc)))"></textarea>
-                        <ValidationMessage For="@(() => CardViewModel.SecretDesc)" />
-                    </li>
-                    <li class="list-row">
-                        <div class="list-width">
-                            <label for="Card_NameOnCard">@Texts.NameOnCardPrompt</label>
-                            <input type="text" style="color:#494949;" placeholder="Name and Surname"
-                                   @bind="CardViewModel.NameOnCard"
-                                   class="@(GetInputClass(nameof(CardViewModel.NameOnCard)))" />
-                            <ValidationMessage For="@(() => CardViewModel.NameOnCard)" />
-                        </div>
-                        <div class="list-width">
-                            <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
-                            <div style="display:flex">
-                                <input id="Card_SecurityCode" maxlength="3" placeholder="000" @bind="CardViewModel.SecurityCode"
-                                       type="text"
-                                       class="form-control @(GetInputClass(nameof(CardViewModel.SecurityCode)))"
-                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                                <ValidationMessage For="@(() => CardViewModel.SecurityCode)" />
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-row">
-                        <div class="list-width">
-                            <label for="Card_ExpirationDate">@Texts.ExpirationDatePrompt:</label>
-                            <input id="Card_ExpirationDate" maxlength="7" placeholder="MM/YYYY" @bind="CardViewModel.ExpirationDate"
-                                   type="text"
-                                   class="form-control @(GetInputClass(nameof(CardViewModel.ExpirationDate)))"
-                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                   @oninput="(e) => CardViewModel.OnExpirationDateInput(e)">
-                            <ValidationMessage For="@(() => CardViewModel.ExpirationDate)" />
-                            @if (!string.IsNullOrEmpty(CardViewModel.ExpirationDateError))
-                            {
-                                <div class="eror-message" style="color:red;font-weight:500;">@CardViewModel.ExpirationDateError</div>
-                            }
-                        </div>
-                    </li>
-                    <li>
-                        <div class="btn-sec-new-edit">
-                            <button type="submit" class="button btn-extra-small success">@Texts.ButtonSaveText</button>
-                            <NavLink href="passwordManager">
-                                <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
-                            </NavLink>
-                        </div>
-                    </li>
-                </ul>
+
+            <div class="pm-form-body">
+
+                <div class="pm-form-row">
+                    <label for="nc-desc">@Texts.DescriptionLabel</label>
+                    <input id="nc-desc"
+                           type="text"
+                           class="pm-form-input @GetInputClass(nameof(CardViewModel.SecretDesc))"
+                           maxlength="100000"
+                           placeholder="e.g. Visa — personal"
+                           @bind="CardViewModel.SecretDesc" />
+                    <ValidationMessage For="@(() => CardViewModel.SecretDesc)" />
+                </div>
+
+                <div class="pm-form-row">
+                    <label for="nc-number">@Texts.CardNumberPrompt</label>
+                    <input id="nc-number"
+                           type="text"
+                           class="pm-form-input @GetInputClass(nameof(CardViewModel.CardNumber))"
+                           maxlength="19"
+                           minlength="12"
+                           placeholder="XXXX XXXX XXXX XXXX"
+                           @bind="CardViewModel.CardNumber"
+                           onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+                    <ValidationMessage For="@(() => CardViewModel.CardNumber)" />
+                </div>
+
+                <div class="pm-form-row">
+                    <label for="nc-name">@Texts.NameOnCardPrompt</label>
+                    <input id="nc-name"
+                           type="text"
+                           class="pm-form-input @GetInputClass(nameof(CardViewModel.NameOnCard))"
+                           placeholder="Name and Surname"
+                           @bind="CardViewModel.NameOnCard" />
+                    <ValidationMessage For="@(() => CardViewModel.NameOnCard)" />
+                </div>
+
+                <div class="pm-form-row">
+                    <label for="nc-exp">@Texts.ExpirationDatePrompt</label>
+                    <input id="nc-exp"
+                           type="text"
+                           class="pm-form-input @GetInputClass(nameof(CardViewModel.ExpirationDate))"
+                           maxlength="7"
+                           placeholder="MM/YYYY"
+                           @bind="CardViewModel.ExpirationDate"
+                           onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                           @oninput="(e) => CardViewModel.OnExpirationDateInput(e)" />
+                    <ValidationMessage For="@(() => CardViewModel.ExpirationDate)" />
+                    @if (!string.IsNullOrEmpty(CardViewModel.ExpirationDateError))
+                    {
+                        <div style="color:#dc2626; font-weight:500; font-size:11.5px;">@CardViewModel.ExpirationDateError</div>
+                    }
+                </div>
+
+                <div class="pm-form-row">
+                    <label for="nc-cvv">@Texts.SecurityCodePrompt</label>
+                    <input id="nc-cvv"
+                           type="text"
+                           class="pm-form-input @GetInputClass(nameof(CardViewModel.SecurityCode))"
+                           maxlength="3"
+                           placeholder="000"
+                           @bind="CardViewModel.SecurityCode"
+                           onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+                    <ValidationMessage For="@(() => CardViewModel.SecurityCode)" />
+                </div>
+            </div>
+
+            <div class="pm-form-footer">
+                <NavLink href="passwordManager" class="pm-btn pm-btn--ghost">
+                    @Texts.ButtonCancelText
+                </NavLink>
+                <button type="submit" class="pm-btn pm-btn--primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    @Texts.ButtonSaveText
+                </button>
             </div>
         </EditForm>
     </div>
@@ -93,13 +127,12 @@
 
 @code {
     private EditForm? editForm;
-    private SecretCardViewModel? CardViewModel = new SecretCardViewModel(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+    private SecretCardViewModel CardViewModel = new SecretCardViewModel(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
 
     private string GetInputClass(string propertyName)
     {
         FieldIdentifier fieldIdentifier = new FieldIdentifier(newSecretViewModel!.Secret.Card, propertyName);
         bool isFieldValid = editForm!.EditContext!.GetValidationMessages(fieldIdentifier).Any();
-
         return isFieldValid ? "input-error" : string.Empty;
     }
 

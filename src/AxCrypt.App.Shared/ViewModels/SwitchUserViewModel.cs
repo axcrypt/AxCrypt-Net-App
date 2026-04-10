@@ -182,12 +182,11 @@ public class SwitchUserViewModel : ViewModelBase
     {
         if (LogOnViewModel.LogOnAccountModel.UserEmail == SelectedProfileUserEmail)
         {
-            LogOnViewModel.SwitchUserDialog.Close();
             return;
         }
 
         SetLoginUserProfile(SelectedProfileUserEmail, true);
-        LogOnViewModel.SwitchUserDialog.Close();
+        //LogOnViewModel.SwitchUserDialog.Close();
 
         UserProfile? selectedUserProfile = UserProfilesList.FirstOrDefault(up => up.UserEmail == SelectedProfileUserEmail);
         if (selectedUserProfile == null)

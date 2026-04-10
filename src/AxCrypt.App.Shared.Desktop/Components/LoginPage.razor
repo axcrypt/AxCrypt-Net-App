@@ -1,4 +1,9 @@
-﻿@page "/login"
+@* Legacy sign-in page. Kept around for reference and as a non-routable
+   component. The live sign-in route is owned by LoginPageNew.razor.
+   The `@page "/login"` directive was removed here to avoid Blazor's
+   duplicate-route compile error — both files used to claim "/login". *@
+@using AxCrypt.App.Shared.Desktop.Components.Shared
+@using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Models
 @using AxCrypt.App.Shared.ViewModels
@@ -16,8 +21,11 @@
 @inject RegisterViewModel RegisterModel
 @inject ProfileViewModel profileViewModel
 @inject SwitchUserViewModel SwitchUserModel
+@inject PopupService popupService
 
 @inject NavigationManager navigationManager
+
+@implements IDisposable
 
 @if (LogOnViewModel.LogOnAccountModel != null)
 {
@@ -25,6 +33,7 @@
         <article class="left-section" id="content-wrap">
             <h1 class="login-title hg-img">@Texts.WelcomeBackTitle</h1>
             <span class="sub-head">@Texts.LogInText</span>
+
             <EditForm Model="@LogOnViewModel.LogOnAccountModel" OnValidSubmit="ButtonLogIn_Click" class="signup-sec">
                 @if (!string.IsNullOrEmpty(LogOnViewModel.ErrorMessage))
                 {
@@ -48,7 +57,13 @@
                 @if (!string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) || SwitchUserModel.UserProfilesList.Any(up => up.UserEmail != ""))
                 {
                     <div style="width:100%;">
-                        <a href="" class="nav-link grn-clr" style="float:right;" tabindex="3" @onclick="LogOnViewModel.ShowSwitchUserDialog">@Texts.SwitchUserButtonText</a>
+                        @* The popup itself (SwitchUserPopup) gates on
+                           popupService.SwitchUserPopupOpen — so the click
+                           needs to flip THAT flag. The previous call to
+                           LogOnViewModel.ShowSwitchUserDialog toggled a
+                           different state the popup wasn't watching, so
+                           the link did nothing visible. *@
+                        <a href="javascript:void(0)" class="nav-link grn-clr" style="float:right;" tabindex="3" @onclick="popupService.ToggleSwitchUserPopupOpen">@Texts.SwitchUserButtonText</a>
                     </div>
                 }
                 <div>
@@ -68,19 +83,25 @@
                 </button>
             </EditForm>
 
-            <div style="display: flex;align-items: flex-start; width: 90%;">
-                <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
-                <span style="margin: -13px 10px 13px;padding-top: -4px;">@Texts.OrText</span>
-                <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
+            <div class="lp-or">
+                <hr class="lp-or-line" />
+                <span class="lp-or-text">@Texts.OrText</span>
+                <hr class="lp-or-line" />
             </div>
             <div id="OtherOptions-Section" style="text-align: center;border-radius: 4px;">
                 <div class="dropdown" style="padding-bottom: 10px;">
                     <div class="action-buttons" style="display: inline-flex;">
-                        <button @onclick="ToggleDropdown"
-                                style="width: 310px; color:#48772c;font-weight:600;text-align: center;">
+                        @* Inline SVG chevron — rotates with the open state.
+                           The old <img src=""> also carried id="lang-action-btn-arw",
+                           which duplicated the LanguagesComponent's arrow id and
+                           made homepopup.js toggle the wrong element. *@
+                        <button type="button" class="lp-other-toggle" @onclick="ToggleDropdown">
                             @Texts.OtherLogOptions
-                            <img class="drp-dwn up" id="lang-action-btn-arw" src="" alt="dropdown-img"
-                                 style="max-height: 15px;" />
+                            <svg class="lp-other-arrow @(showDropdown ? "lp-other-arrow--open" : "")"
+                                 width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2.5">
+                                <polyline points="18 15 12 9 6 15" />
+                            </svg>
                         </button>
                     </div>
                     @if (showDropdown)
@@ -116,6 +137,22 @@
                 <NavLink class="grn-clr" @onclick="RedirectToTermsOfUse">@Texts.TermsOfUseLinkLabel</NavLink>
             </div>
 
+            @* Sign-in loader — a small card overlaid on top of the
+               login form. The form stays mounted underneath (dimmed
+               by the scrim) so there's no layout jump, and the loader
+               is clearly scoped to the login action rather than
+               floating disconnected at the page top. *@
+            @if (_isSubmitting)
+            {
+                <div class="login-loader-overlay">
+                    <div class="login-loader-card">
+                        <AxCrypt.App.Shared.Desktop.Components.Shared.AxLoader
+                            Mode="AxCrypt.App.Shared.Desktop.Components.Shared.LoaderMode.Body"
+                            Message="@_statusMessage" />
+                    </div>
+                </div>
+            }
+
         </article>
         <article class="right-section">
             <div class="signin-right-img">
@@ -131,6 +168,12 @@
 @code {
 
     private bool isPasswordVisible = false;
+
+    // Inline sign-in loader state. _isSubmitting swaps the form for the
+    // AxLoader inside the login section; _statusMessage is the action
+    // text shown under the wheel ("Validating…", "Signing you in…").
+    private bool _isSubmitting = false;
+    private string _statusMessage = string.Empty;
 
     private string PasswordInputType => isPasswordVisible ? "text" : "password";
 
@@ -151,25 +194,39 @@
 
     public bool IsEmailReadOnly { get; set; }
 
+    // Held in a field so it can be unsubscribed in Dispose — an
+    // anonymous lambda passed straight to += can never be removed,
+    // which leaks this component every time the sign-in page mounts.
+    private Action? _onUpdateViewState;
+
     protected override async Task OnInitializedAsync()
     {
-        LogOnViewModel.OnUpdateViewState += async () => await RefreshComponentAsync();
+        _onUpdateViewState = async () => await RefreshComponentAsync();
+        LogOnViewModel.OnUpdateViewState += _onUpdateViewState;
         await base.OnInitializedAsync();
+    }
+
+    public void Dispose()
+    {
+        if (_onUpdateViewState != null)
+        {
+            LogOnViewModel.OnUpdateViewState -= _onUpdateViewState;
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            string autoFocusFiled = string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? "useremail-txtbox" :
+            string autoFocusField = string.IsNullOrEmpty(LogOnViewModel.LogOnAccountModel.UserEmail) ? "useremail-txtbox" :
             "password-txtbox";
-            await JSRuntime.InvokeVoidAsync("loginFunctions.focusElement", autoFocusFiled);
+            await JSRuntime.InvokeVoidAsync("loginFunctions.focusElement", autoFocusField);
         }
 
         await base.OnAfterRenderAsync(firstRender);
     }
 
-    private async void ButtonLogIn_Click()
+    private async Task ButtonLogIn_Click()
     {
         LogOnViewModel.PageResult = DialogResult.None;
         if (isPasswordVisible)
@@ -177,14 +234,27 @@
             TogglePassword();
         }
 
-        using (ProcessIndicator processIndicator = new ProcessIndicator())
+        // Show the inline loader inside the login section (replaces the
+        // form). No global ProcessIndicator — that's what used to float
+        // the wheel over the whole page.
+        _isSubmitting = true;
+        _statusMessage = "Validating your details…";
+        await RefreshComponentAsync();
+
+        if (!await AdHocValidationDueToMonoLimitations())
         {
-            if (!await AdHocValidationDueToMonoLimitations())
-            {
-                await RefreshComponentAsync();
-                return;
-            }
+            // Validation failed — bring the form back so the user can
+            // correct the email / password.
+            _isSubmitting = false;
+            await RefreshComponentAsync();
+            return;
         }
+
+        // Validation passed — keep the loader up through the actual
+        // sign-in handshake. The page navigates away once sign-in
+        // completes, so the loader naturally disappears with it.
+        _statusMessage = "Signing you in…";
+        await RefreshComponentAsync();
 
         LogOnViewModel.PageResult = DialogResult.OK;
     }
@@ -306,11 +376,109 @@
     }
 }
 
+<style>
+    /* Sign-in loader overlay — scoped to the login form column
+       (.left-section is position:relative). A light scrim dims the
+       form underneath; the card floats centred on top. No layout
+       shift, form stays in the DOM. */
+    .login-loader-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.66);
+        backdrop-filter: blur(2px);
+        animation: login-loader-fade 0.14s ease-out;
+    }
+
+    @@keyframes login-loader-fade {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    .login-loader-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        box-shadow: 0 16px 44px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.08);
+        padding: 22px 30px;
+        min-width: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    html[data-theme="dark"] .login-loader-overlay {
+        background: rgba(15, 23, 42, 0.6);
+    }
+
+    html[data-theme="dark"] .login-loader-card {
+        background: #1a1d23;
+        border-color: #2a2e36;
+    }
+
+    /* "Or" divider between the sign-in form and the other-options
+       menu. Replaces an inline-styled block that used negative
+       margins and an invalid `padding-top: -4px`. */
+    .lp-or {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 90%;
+        margin: 16px 0;
+    }
+
+    .lp-or-line {
+        flex: 1;
+        border: none;
+        border-top: 1px solid #d0d4d9;
+        margin: 0;
+    }
+
+    .lp-or-text {
+        font-size: 13px;
+        color: #6b7280;
+    }
+
+    /* "Other sign-in options" toggle + chevron. */
+    .lp-other-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 310px;
+        color: #48772c;
+        font-weight: 600;
+        text-align: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .lp-other-arrow {
+        transition: transform .18s ease;
+    }
+
+    .lp-other-arrow--open {
+        transform: rotate(180deg);
+    }
+
+    html[data-theme="dark"] .lp-or-line {
+        border-top-color: #2a2e36;
+    }
+
+    html[data-theme="dark"] .lp-or-text {
+        color: #9ca3af;
+    }
+</style>
+
 <script type="text/javascript">
     window.loginFunctions = {
         focusElement: function (id) {
             const element = document.getElementById(id);
-            element.focus();
+            if (element) element.focus();
         }
     }
 </script>

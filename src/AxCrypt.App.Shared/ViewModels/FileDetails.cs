@@ -37,6 +37,13 @@ public class FileDetails : ViewModelBase
         FilePath = file.EncryptedFileInfo.FullName;
         CleanUpNeeded = file.IsDecrypted;
 
+        // Surface raw share/master-key state as booleans so the Razor
+        // can derive its status badge directly without parsing IconClass.
+        // Master-key files are a business-tier concept — free/premium
+        // files never set IsMasterKeyShared.
+        IsKeyShared = file.IsShared;
+        IsMasterKeyShared = file.IsMasterKeyShared;
+
         FileExtension = Path.GetExtension(file.DecryptedFileInfo.Name);
         LastAccessedDate = file.Properties.LastActivityTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture);
         SharedWith = new List<string>();
@@ -120,6 +127,29 @@ public class FileDetails : ViewModelBase
     {
         get { return GetProperty<bool>(nameof(CleanUpNeeded)); }
         set { SetProperty(nameof(CleanUpNeeded), value); }
+    }
+
+    /// <summary>
+    /// True when the file has at least one external key-share recipient.
+    /// Mirror of ActiveFile.IsShared, exposed here so the UI doesn't have
+    /// to parse the IconClass string to derive status.
+    /// </summary>
+    public bool IsKeyShared
+    {
+        get { return GetProperty<bool>(nameof(IsKeyShared)); }
+        set { SetProperty(nameof(IsKeyShared), value); }
+    }
+
+    /// <summary>
+    /// True when a business master key is currently applied to this file.
+    /// Surfaced as a distinct "Master key" status badge so business
+    /// users can immediately see which files are recoverable via their
+    /// organization's master key. Always false for free / premium tiers.
+    /// </summary>
+    public bool IsMasterKeyShared
+    {
+        get { return GetProperty<bool>(nameof(IsMasterKeyShared)); }
+        set { SetProperty(nameof(IsMasterKeyShared), value); }
     }
 
     public IReadOnlyCollection<string> SharedWith

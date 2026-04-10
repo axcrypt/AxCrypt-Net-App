@@ -97,7 +97,7 @@
             }
             else
             {
-                <div id="help-sharekey" class="act-box" @onclick="async (e) => await homeActionModel.ShareKeysAsync(e)" @onmouseover='@(() => ShowPopup("share"))' @onmouseout='@(() => HidePopup())'>
+                <div id="help-sharekey" class="act-box" @onclick="async (e) => await homeActionModel.ShareKeys(e)" @onmouseover='@(() => ShowPopup("share"))' @onmouseout='@(() => HidePopup())'>
                     <img class="act-img shrks-act" src="" alt="shrks-img" />
                     <span class="text-size">@Texts.ShareKeysToolStripMenuItemText</span>
                     @if (isHovered && hoveredElement == "share")
@@ -137,7 +137,7 @@
                     </div>
                 }
             }
-            @if (homeActionModel.IsFilesPending)
+            @if (homeActionModel.AreFilesPending || homeActionModel.AreFoldersPending)
             {
                 <div id="help-clean" class="act-box" style="background: var(--col-hglhgt, #FFDA00);" @onmouseover='@(() => ShowPopup("clean"))' @onmouseout='@(() => HidePopup())' @onclick="async (e) => await homeActionModel.CleanAndRemoveOpenFilesButton_Click(e)">
                     <img class="act-img cln-act" src="" alt="cln-img" /><span class="text-size" style="color:black;">@Texts.CleanUpPromptText</span>
@@ -237,7 +237,7 @@
                 @{
                     string UpgradeSubsText = "Unlock <span>stronger & unlimited encryption</span> features!";
                     bool EligibleForTrial = AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.EligibleForFreeTrial;
-                    @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.UserHas(Core.Runtime.LicenseCapability.Viewer))
+                    @if (AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.LogOnViewModel!.UserHas(AxCrypt.Core.Runtime.LicenseCapability.Viewer))
                     {
                         UpgradeSubsText = "Upgrade to unlock <span>Encryption & more features!</span>";
                         if (EligibleForTrial)
@@ -317,16 +317,16 @@
 
     private void OpenBuyForSomeOneElsePage()
     {
-        Core.BrowseUtility.RedirectToAccountWebUrl("{0}Home/Index");
+        AxCrypt.Core.BrowseUtility.RedirectToAccountWebUrl("{0}Home/Index");
     }
 
     private void OpenCreateBusinessPage()
     {
-        Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/CreateBusiness");
+        AxCrypt.Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/CreateBusiness");
     }
 
     private void OpenGuidesGetStartedPage()
     {
-        Core.BrowseUtility.RedirectTo("https://axcrypt.net/helpcenter/guides-section/");
+        AxCrypt.Core.BrowseUtility.RedirectTo("https://axcrypt.net/helpcenter/guides-section/");
     }
 }

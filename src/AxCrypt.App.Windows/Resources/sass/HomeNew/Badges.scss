@@ -1,0 +1,61 @@
+﻿/* Badges */
+.badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.badge--enc {
+    background: $badge-enc-bg;
+    color: $badge-enc-fg;
+}
+
+.badge--opened {
+    background: $badge-opened-bg;
+    color: $badge-opened-fg;
+}
+
+.badge--shared {
+    background: $badge-shared-bg;
+    color: $badge-shared-fg;
+}
+
+.icon-btn-sm {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: $text-muted;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+    transition: background .1s, color .1s;
+}
+
+    .icon-btn-sm:hover {
+        background: $bg-page;
+        color: $text-primary;
+    }
+
+.view-all-btn {
+    margin-top: 14px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 9px;
+    border: 1px solid $border;
+    border-radius: var(--radius-btn);
+    background: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    color: $brand-green;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+    .view-all-btn:hover {
+        background: $brand-green-lt;
+    }

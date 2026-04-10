@@ -87,7 +87,7 @@ namespace AxCrypt.App.Shared.CloudCore.CloudFileProviderUtility
                 fileProviderService.SelectedFileOperation = fileOperationOption;
 
                 //_filePickerViewModel = AxCServiceProvider.GetService<FilePickerViewModel>();
-                _filePickerViewModel.InitializeFilePickerDialog(
+                _filePickerViewModel!.InitializeFilePickerDialog(
                     fileProviderService,
                     hasPaidSubscription
                 );

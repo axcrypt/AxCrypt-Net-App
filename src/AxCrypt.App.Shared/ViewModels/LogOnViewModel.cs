@@ -1,4 +1,6 @@
 ﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.UI;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.Utility.View;
@@ -32,38 +34,62 @@ public class LogOnViewModel : ViewModelBase
         SwitchUserDialog = new CommonDialogService();
     }
 
+    // Guards the one-time MainViewModel property subscriptions below.
+    // ShowLogOnDialog runs on every sign-in — including every
+    // sign-out → sign-in cycle. The handlers used to be re-attached on
+    // each call, so after N cycles a single successful sign-in fired N
+    // duplicate LoadAccountStatusAsync() network calls (and N
+    // InitializeData calls), making each subsequent sign-in slower than
+    // the last. Binding once fixes that compounding slowdown.
+    private bool _mainViewModelBound;
+
     public async Task ShowLogOnDialog(LogOnAccountViewModel logOnAccountModel, MainViewModel mainViewModel)
     {
         _subscriptionChangeDetected = false;
-        mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), async (bool loggedOn) =>
-        {
-            if (loggedOn)
-            {
-                IsVisible = false;
-                PageResult = DialogResult.OK;
-                ProcessIndicator?.Dispose();
-                await New<AccountStatusViewModel>().LoadAccountStatusAsync();
-                SubscriptionChanged();
-            }
-        });
 
-        mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) =>
+        // Set before wiring the handler so the (single) LoggedOn handler
+        // always reads the model for the sign-in currently in progress.
+        LogOnAccountModel = logOnAccountModel;
+
+        if (!_mainViewModelBound)
         {
-            if (license != null! && MainViewModel.LoggedOn)
+            _mainViewModelBound = true;
+
+            mainViewModel.BindPropertyChanged(nameof(mainViewModel.LoggedOn), async (bool loggedOn) =>
             {
-                SubscriptionChanged();
-            }
-        });
+                if (loggedOn)
+                {
+                    IsVisible = false;
+                    PageResult = DialogResult.OK;
+                    ProcessIndicator?.Dispose();
+                    await New<AccountStatusViewModel>().LoadAccountStatusAsync();
+                    SubscriptionChanged();
+
+                    AxCServiceProvider.GetService<UserService>().InitializeData(SubscriptionLevel, LogOnAccountModel?.UserEmail ?? string.Empty);
+                }
+            });
+
+            mainViewModel.BindPropertyChanged(nameof(mainViewModel.License), (LicenseCapabilities license) =>
+            {
+                if (license != null! && MainViewModel.LoggedOn)
+                {
+                    SubscriptionChanged();
+                }
+            });
+        }
 
         ProcessIndicator?.Dispose();
         ShowGetStartedCarousel = WorkUserProfile.IsFirstSignIn;
 
-        LogOnAccountModel = logOnAccountModel;
         IsVisible = true;
 
+        // Poll for the dialog result. 100 ms keeps the hand-off snappy —
+        // the old 1000 ms interval added up to a full second of dead wait
+        // after the user pressed Sign In, on every sign-in and every
+        // sign-out → sign-in.
         while (PageResult == DialogResult.None)
         {
-            await Task.Delay(1000);
+            await Task.Delay(100);
         }
 
         if (PageResult != DialogResult.Cancel)

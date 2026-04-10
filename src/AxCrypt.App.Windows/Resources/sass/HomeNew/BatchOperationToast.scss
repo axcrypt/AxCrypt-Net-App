@@ -1,0 +1,174 @@
+﻿/* ═══════════════════════════════════════════
+   Batch operation toast
+   Bottom-right summary toast for encrypt / decrypt / open / remove
+   batches. Three states: progress, success, failure.
+════════════════════════════════════════════ */
+.batch-toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    background: $bg-card;
+    border: 1px solid $border;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .14), 0 2px 8px rgba(0, 0, 0, .08);
+    padding: 12px 14px;
+    z-index: 9000;
+    animation: btSlideIn .22s cubic-bezier(.4, 0, .2, 1);
+    font-size: 13px;
+    color: $text-primary;
+}
+
+@keyframes btSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bt-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.bt-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.bt-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.bt-title {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.bt-sub {
+    font-size: 11.5px;
+    color: $text-muted;
+    line-height: 1.4;
+}
+
+.bt-close {
+    background: transparent;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: $text-muted;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    transition: background .12s, color .12s;
+}
+
+.bt-close:hover {
+    background: $bg-page;
+    color: $text-primary;
+}
+
+.bt-toggle {
+    margin-top: 10px;
+    width: 100%;
+    background: transparent;
+    border: 1px solid $border;
+    color: $text-secondary;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 600;
+    transition: background .12s, color .12s;
+}
+
+.bt-toggle:hover {
+    background: $bg-page;
+    color: $text-primary;
+}
+
+.bt-failures {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border-top: 1px solid $border;
+}
+
+.bt-failure-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 2px;
+    font-size: 12px;
+    border-bottom: 1px solid $border;
+}
+
+.bt-failure-row:last-child {
+    border-bottom: none;
+}
+
+.bt-failure-name {
+    flex: 1;
+    font-weight: 500;
+    color: $text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bt-failure-reason {
+    color: #b91c1c;
+    font-size: 11.5px;
+    flex-shrink: 0;
+    max-width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Variants ─────────────────────────────── */
+.batch-toast--progress .bt-icon {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.batch-toast--success {
+    border-color: #bbf7d0;
+}
+
+.batch-toast--success .bt-icon {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.batch-toast--error {
+    border-color: #fecaca;
+}
+
+.batch-toast--error .bt-icon {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.batch-toast--error .bt-title {
+    color: #991b1b;
+}

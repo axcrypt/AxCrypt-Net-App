@@ -1,9 +1,13 @@
 ﻿@import "_basevariables.scss";
 
 .SwitchUser-popup {
+    /* Centered on the viewport. `margin: auto` does nothing on a
+       position:fixed element without left/right anchors, so it used
+       to sit near the top-left — top/left 50% + translate centers it. */
     position: fixed;
-    margin: 10% auto;
-    display: inline-block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 400px;
     min-height: 429px;
     max-height: 520px;

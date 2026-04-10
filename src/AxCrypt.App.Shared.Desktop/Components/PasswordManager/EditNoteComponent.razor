@@ -1,4 +1,4 @@
-﻿@using AxCrypt.App.Shared.Models.Secret
+@using AxCrypt.App.Shared.Models.Secret
 @using AxCrypt.App.Shared.ViewModels.Secret
 @using AxCrypt.App.Shared.Helpers
 @using AxCrypt.App.Shared.Services.Interface
@@ -9,47 +9,76 @@
 @inject NavigationManager navigationManager
 @inject SecretService secretService
 @inject EditSecretViewModel editSecretViewModel
-
 @inject IJSRuntime jsRuntime
 
-<div style="width: 100%;">
-    <div class="password-header">
-        <a href="/passwordManager" class="grn-clr"><img class="back-arrow" src="" />@Texts.PasswordManagementPageTitle</a>
-    </div>
-    <div class="page-heading">
-        <h3 class="password-creation">
-            @Texts.EditNoteTitle
-        </h3>
-    </div>
+<div class="page-content-body-section">
+
     <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
-    <EditForm Model="@NoteViewModel" OnValidSubmit="SavePassword">
-        <DataAnnotationsValidator />
-        <div class="row">
-            <ul class="clean-up sub-head-clr" style=" list-style:none">
-                <li>
-                    <label for="Password_SecretDesc">@Texts.DescriptionLabel:</label><br />
-                    <textarea id="pwd-desc-inp" maxlength="100000" rows="5" style="color:#494949;" @bind="@NoteViewModel.SecretDesc"></textarea>
-                    <ValidationMessage For="@(() => NoteViewModel.SecretDesc)" />
-                </li>
-                <li>
-                    <label for="Note_Note">@Texts.NoteLabel:</label>
-                    <textarea type="text" class="secret-note-section" rows="7" cols="20" maxlength="100000" style="color:#494949;" @bind="@NoteViewModel.Note"></textarea>
-                    <ValidationMessage For="@(() => NoteViewModel.Note)" />
-                </li>
-                <li>
-                    <div class="btn-sec-new-edit">
-                        <button type="submit" class="button btn-extra-small success">@Texts.ButtonSaveText</button>
-                        <NavLink href="viewnote">
-                            <input type="reset" class="button btn-extra-small cancel" value="@Texts.ButtonCancelText" style="margin-left: 20px;" />
-                        </NavLink>
-                    </div>
-                </li>
-            </ul>
+
+    <div class="pm-form-shell">
+
+        <div class="pm-form-header">
+            <NavLink class="pm-form-back" href="viewnote" title="Cancel">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </NavLink>
+            <div class="pm-form-titles">
+                <h2 class="pm-form-title">@Texts.EditNoteTitle</h2>
+                <p class="pm-form-sub">Update your secure note. Encrypts on save.</p>
+            </div>
+            <span class="pm-type-badge pm-type-badge--note" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                </svg>
+            </span>
         </div>
-    </EditForm>
+
+        <EditForm Model="@NoteViewModel" OnValidSubmit="SavePassword">
+            <DataAnnotationsValidator />
+
+            <div class="pm-form-body">
+
+                <div class="pm-form-row">
+                    <label for="en-desc">@Texts.DescriptionLabel</label>
+                    <input id="en-desc"
+                           type="text"
+                           class="pm-form-input"
+                           maxlength="100000"
+                           @bind="@NoteViewModel.SecretDesc" />
+                    <ValidationMessage For="@(() => NoteViewModel.SecretDesc)" />
+                </div>
+
+                <div class="pm-form-row">
+                    <label for="en-body">@Texts.NoteLabel</label>
+                    <textarea id="en-body"
+                              rows="9"
+                              maxlength="100000"
+                              class="pm-form-textarea"
+                              @bind="@NoteViewModel.Note"></textarea>
+                    <ValidationMessage For="@(() => NoteViewModel.Note)" />
+                </div>
+            </div>
+
+            <div class="pm-form-footer">
+                <NavLink href="viewnote" class="pm-btn pm-btn--ghost">
+                    @Texts.ButtonCancelText
+                </NavLink>
+                <button type="submit" class="pm-btn pm-btn--primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    @Texts.ButtonSaveText
+                </button>
+            </div>
+        </EditForm>
+    </div>
 </div>
+
 @code {
     SecretNoteViewModel NoteViewModel;
+
     protected override void OnInitialized()
     {
         if (secretService.CurrentSecret == null)
@@ -81,10 +110,5 @@
         {
             StatusAlertService.Error(editSecretViewModel.ErrorMessage);
         }
-    }
-
-    private async Task HandleOnChange(ChangeEventArgs args)
-    {
-        secretService.CurrentSecret.Note.SecretDesc = args.Value.ToString();
     }
 }

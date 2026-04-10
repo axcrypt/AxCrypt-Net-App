@@ -50,6 +50,18 @@ namespace AxCrypt.App.Shared.ViewModels
             SelectedFile = null;
 
             LoadSecuredFilesList();
+
+            // Free-tier guard. The Find Files page itself only renders when
+            // HasFindFilesCapability is true, but the filter API is reachable
+            // from the global search and from any future deep-link — keep the
+            // check inline so the same rule applies regardless of entry point.
+            if (!HasFindFilesCapability)
+            {
+                FindFilesList = new List<FindFilesLog>();
+                UpdateViewState();
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(filename))
             {
                 return;

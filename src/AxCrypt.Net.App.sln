@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.11.35327.3
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11520.95 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.App.Windows", "AxCrypt.App.Windows\AxCrypt.App.Windows.csproj", "{0AED6448-76A4-41AF-8C16-BF1B6ABE823D}"
 EndProject
@@ -44,6 +44,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolutionItems", "SolutionItems\SolutionItems.csproj", "{B0E35A71-4431-4BD0-AB54-DE90590641EC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.App.Shared.Desktop", "AxCrypt.App.Shared.Desktop\AxCrypt.App.Shared.Desktop.csproj", "{84D3C588-4193-413D-BEF1-44F2E6C7B3C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxCrypt.App.Entitlement", "AxCrypt.App.Entitlement\AxCrypt.App.Entitlement.csproj", "{27BFD577-71F3-41B5-842A-227682EAF175}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +131,10 @@ Global
 		{84D3C588-4193-413D-BEF1-44F2E6C7B3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84D3C588-4193-413D-BEF1-44F2E6C7B3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84D3C588-4193-413D-BEF1-44F2E6C7B3C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27BFD577-71F3-41B5-842A-227682EAF175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27BFD577-71F3-41B5-842A-227682EAF175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27BFD577-71F3-41B5-842A-227682EAF175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27BFD577-71F3-41B5-842A-227682EAF175}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

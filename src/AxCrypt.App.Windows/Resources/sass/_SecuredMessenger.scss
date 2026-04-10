@@ -15,17 +15,48 @@
 }
 
 .msg-search-btn {
-    background-image: $IcoSearchWht;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 15px;
-    background-color: $ActnBgClr !important;
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 40px;
     height: 40px;
-    position: absolute;
-    top: 0px;
-    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    background-color: $ActnBgClr !important;
+    color: #fff;
+    cursor: pointer;
 }
+
+    .msg-search-btn svg {
+        pointer-events: none;
+    }
+
+/* Messenger search field. It used to carry the generic `.search-box`
+   class, which GlobalSearch.scss restyles as a flex "pill" for the
+   home-page global search — that leaked in and collapsed this field so
+   it read as invisible. A dedicated class keeps it isolated. */
+.sec-msg-search {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 96px 0 12px;
+    border: 1px solid #d4d8dd;
+    border-radius: 8px;
+    background-color: #fff;
+    color: $TxtClr;
+    font-size: 14px;
+}
+
+    .sec-msg-search:focus {
+        outline: none;
+        border-color: $ActnBgClr;
+        box-shadow: 0 0 0 3px rgba(72, 119, 44, 0.12);
+    }
 
 #messenger-keyword {
     background-image: $SearchIcon;
@@ -558,6 +589,12 @@ textarea[readonly] {
 }
 
 #search-msg-form {
+    /* Positioning context for the absolutely-placed filter + search
+       buttons, so they align to the input rather than to the outer
+       card (which now carries padding). */
+    position: relative;
+    width: 100%;
+
     input, select {
         height: 40px;
     }
@@ -580,6 +617,422 @@ textarea[readonly] {
     }
 }
 
+/* ── Secured Messenger — section framing & polish ──────────────
+   The legacy markup had no section boundaries, so the search area,
+   the Inbox/Sent/Unread tabs and the message list all bled together.
+   These rules frame each as its own outlined block. */
+.secured-messenger {
+
+    /* Search sits in its own outlined card; the input fills its width. */
+    #sec-msg-search-section {
+        background: #fff;
+        border: 1px solid #e2e5e9;
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
+    }
+
+    /* Inbox / Sent / Unread — a divider + active-tab underline turns
+       the bare links into a proper tab strip. */
+    .tab-sec {
+        width: 100%;
+        margin: 4px 0 0;
+        gap: 28px;
+        border-bottom: 1px solid #e2e5e9;
+
+        a {
+            padding: 8px 0 10px;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: color .15s, border-color .15s;
+        }
+
+        a.active {
+            border-bottom-color: $ActnBgClr;
+        }
+    }
+
+    /* Message list framed as its own outlined card. */
+    #search-message-list {
+        background: #fff;
+        border: 1px solid #e2e5e9;
+        border-radius: 10px;
+        padding: 14px;
+        margin-top: 16px;
+    }
+}
+
+/* ── Secured Messenger — master-detail body (Password-Manager style) ──
+   The message list and the reading pane sit side by side as framed
+   panes that fill the available height; empty states fill the space
+   so a pane is never just blank. */
+.secured-messenger {
+
+    /* Two-pane split inside the message-list card. */
+    .smx-body {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        gap: 14px;
+        margin: 0;
+    }
+
+    /* Left — message list pane. Header + scrolling list + load-more. */
+    .all-msg {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 290px);
+        border: 1px solid #e2e5e9;
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    /* The scrolling list claims the space between header and load-more. */
+    .message-list-section {
+        flex: 1;
+        min-height: 0;
+        max-height: none;
+        overflow-y: auto;
+    }
+
+    /* Right — reading pane. A flex column so the empty state can fill it. */
+    .smx-reader {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 290px);
+        max-height: calc(100vh - 290px);
+        overflow-y: auto;
+        border: 1px solid #e2e5e9;
+        border-radius: 10px;
+        padding: 16px;
+    }
+
+    /* Shared empty state — centred in whichever pane it sits in. */
+    .smx-empty {
+        flex: 1;
+        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 8px;
+        padding: 40px 24px;
+        margin: 0;
+    }
+
+    .smx-empty-icon {
+        color: #c2c8cf;
+        margin-bottom: 4px;
+    }
+
+    .smx-empty-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: $TxtClr;
+    }
+
+    .smx-empty-sub {
+        font-size: 13px;
+        color: $colMbrDisable;
+        max-width: 320px;
+        line-height: 1.5;
+    }
+
+    /* ── List-pane header ──────────────────────────────────────
+       The legacy markup wraps the "Inbox" title in a Foundation
+       .button and floats the New button, which collapses into a
+       grey blob with a wrapped New button in the narrow pane.
+       These rules turn it into one clean header row. */
+    .all-msg .center-column {
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 8px;
+        padding: 10px 12px;
+        border-bottom: 1px solid #e2e5e9;
+        flex-shrink: 0;
+    }
+
+    /* "Inbox" title + select control — strip the Foundation button look. */
+    .all-msg .center-column .button.fnt-high {
+        flex: 1;
+        min-width: 0;
+        width: auto !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: default;
+    }
+
+    .mutli-slct-btn {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1f2937;
+    }
+
+    .select-option {
+        height: 15px !important;
+        cursor: pointer;
+        opacity: .6;
+        transition: opacity .12s;
+    }
+
+        .select-option:hover {
+            opacity: 1;
+        }
+
+    /* Bulk actions stay hidden until a message is selected — no more
+       three faint icons cluttering the header by default. */
+    .slct-actions {
+        display: none;
+        float: none;
+        gap: 12px;
+        height: auto;
+        margin: 0;
+        align-items: center;
+    }
+
+        .slct-actions.active-btn {
+            display: inline-flex;
+        }
+
+    /* New Message — compact green pill, no Foundation float / +-glyph. */
+    .all-msg .center-column .new-btn {
+        float: none !important;
+        width: auto !important;
+        height: 34px;
+        flex-shrink: 0;
+        margin: 0 !important;
+        padding: 0 14px !important;
+        background-image: none !important;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    /* ── Message list — keep rows inside the pane ───────────────
+       Neutralise the Foundation grid (negative row margins / column
+       gutters) so the message cards never bleed past the pane edge. */
+    .message-list-section {
+        padding: 10px;
+    }
+
+        .message-list-section .row {
+            margin: 0;
+        }
+
+        .message-list-section .columns {
+            padding: 0;
+        }
+
+    .inbox-section table {
+        margin-bottom: 8px;
+    }
+
+    /* ── Reading pane content fills the pane ───────────────────
+       Without this the selected-message view sat as a small card
+       collapsed at the top of an otherwise empty pane. Flexing the
+       content chain makes it expand like the Password Manager
+       detail pane. */
+    .smx-reader-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+    }
+
+    #viewer-messenger-section {
+        flex: 1;
+        min-height: 0;
+    }
+
+    /* The reading pane already frames the content — drop the inner
+       card chrome so the message view isn't a card inside a card. */
+    .smx-reader .view-section {
+        box-shadow: none;
+        border-radius: 0;
+        margin-bottom: 0;
+    }
+
+    /* ── Conversation rows — modern secure-messaging list ──────
+       Replaces the legacy table-based message rows. Each row is a
+       flat list item: avatar, correspondent, expiry meta, time and
+       an unread dot. */
+    .smx-msg-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 9px 10px;
+        margin-bottom: 2px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background .12s;
+    }
+
+        .smx-msg-row:hover {
+            background: #f3f5f1;
+        }
+
+    .smx-msg-row--active,
+    .smx-msg-row--active:hover {
+        background: #eaf3de;
+    }
+
+    .smx-msg-avatar {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .smx-msg-initials {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #48772C;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: .02em;
+    }
+
+    .smx-msg-check {
+        width: 17px;
+        height: 17px;
+        cursor: pointer;
+        accent-color: #48772C;
+    }
+
+    .smx-msg-main {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .smx-msg-top {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+    }
+
+    .smx-msg-name {
+        flex: 1;
+        min-width: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: #1f2937;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .smx-msg-more {
+        flex-shrink: 0;
+        font-size: 10.5px;
+        font-weight: 700;
+        color: #48772C;
+        background: #eaf3de;
+        padding: 1px 7px;
+        border-radius: 10px;
+    }
+
+    .smx-msg-time {
+        flex-shrink: 0;
+        font-size: 11.5px;
+        color: #9ca3af;
+    }
+
+    .smx-msg-bottom {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 3px;
+    }
+
+    .smx-msg-meta {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        color: #6b7280;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+        .smx-msg-meta svg {
+            flex-shrink: 0;
+            opacity: .7;
+        }
+
+        .smx-msg-meta span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+    .smx-msg-unread-dot {
+        flex-shrink: 0;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #48772C;
+    }
+
+    /* Unread → heavier name, darker meta. */
+    .smx-msg-row--unread .smx-msg-name {
+        font-weight: 800;
+        color: #111827;
+    }
+
+    .smx-msg-row--unread .smx-msg-meta {
+        color: #374151;
+    }
+}
+
+/* Stack the two panes on narrow windows. */
+@media only screen and (max-width: 900px) {
+    .secured-messenger .smx-body {
+        grid-template-columns: 1fr;
+    }
+
+    .secured-messenger .smx-reader {
+        min-height: 360px;
+        max-height: none;
+    }
+}
+
+/* ── Secured Messenger container fix ───────────────────────────
+   The shared .page-content-body-section caps width at 95% which,
+   together with its 20px side margins, overflowed the page on
+   narrower windows. The messenger's master-detail panes already
+   manage their own width and per-pane scrolling, so the page just
+   needs to fill the space between the margins. */
+.secured-messenger .page-content-body-section {
+    max-width: none;
+}
+
+/* …and the shared rule clamps height to 80vh with its own scrollbar
+   below 1300px — that fought the panes' internal scroll (two
+   scrollbars). The panes own the scrolling now. */
+@media only screen and (max-width: 1300px) {
+    .secured-messenger .page-content-body-section {
+        max-height: none;
+        overflow-y: visible;
+    }
+}
+
 .text-fnt-size {
     color: $HdTxtClr;
 }
@@ -590,16 +1043,33 @@ textarea[readonly] {
 
 .filter-tab-wrapper {
     position: relative;
-    display: inline-block;
+    display: block;
+    width: 100%;
 }
 
 .filter-trigger {
     position: absolute;
-    right: 50px;
-    padding: 14px 5px 14px 5px;
+    top: 0;
+    right: 48px;
+    width: 36px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: $colMbrDisable;
     cursor: pointer;
-    content: $ScrtFilterImg;
 }
+
+    .filter-trigger:hover {
+        color: $ActnBgClr;
+    }
+
+    .filter-trigger svg {
+        pointer-events: none;
+    }
 
 .filter-popup {
     position: absolute;

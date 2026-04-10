@@ -6,7 +6,7 @@ namespace AxCrypt.App.Windows.Services;
 
 public class TrayService : ITrayService
 {
-    WindowsTrayIcon? tray;
+    private WindowsTrayIcon? tray;
 
     public Action<ContextMenuItem> ClickHandler { get; set; }
 
@@ -25,6 +25,11 @@ public class TrayService : ITrayService
     public void Hide() => tray?.HideTrayIcon();
 
     public void EnsureVisible() => tray?.EnsureVisible();
+
+    public void Remove()
+    {
+        tray?.HideTrayIcon();
+    }
 
     public void Dispose()
     {

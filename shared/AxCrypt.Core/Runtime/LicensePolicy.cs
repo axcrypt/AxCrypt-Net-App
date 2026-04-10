@@ -54,6 +54,7 @@ namespace AxCrypt.Core.Runtime
             LicenseCapability.EncryptNewFiles,
             LicenseCapability.EditExistingFiles,
             LicenseCapability.ShareSecretFree,
+            LicenseCapability.KeySharing,
         });
 
         protected static readonly HashSet<LicenseCapability> PasswordManagerCapabilitySet = new HashSet<LicenseCapability>(FreeCapabilitySet.Concat(new LicenseCapability[]

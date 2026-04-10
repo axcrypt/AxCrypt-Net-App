@@ -8,15 +8,6 @@
     margin-bottom: 30px;
 }
 
-    .page-title::before {
-        content: '';
-        position: absolute;
-        background-image: $Titlelogo;
-        background-size: contain;
-        background-repeat: no-repeat;
-        transform-origin: center center;
-    }
-
 //top menu
 .update-btn {
     background-image: url(/images/default/icoUpdt.svg);
@@ -474,6 +465,10 @@ input[type="radio"] {
 //temporary
 .default-icon {
     content: url(/images/default/icoScrdFldr.svg);
+}
+
+.home-icon {
+    content: url(/images/default/icoPremium.svg);
 }
 
 .vlt-action-btn {

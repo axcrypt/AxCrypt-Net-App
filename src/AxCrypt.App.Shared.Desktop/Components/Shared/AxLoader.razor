@@ -1,0 +1,150 @@
+@*
+    AxLoader — the single loading-wheel component for the entire app.
+
+    The wheel is the AxCrypt icon (axcryptIcon.png) spinning. Using one
+    component everywhere keeps the loading experience consistent from
+    cold boot through sign-in to in-app waits.
+
+      Mode="FullPage"  → scrim + centered spinning icon + tagline. Use
+                         when the app shell is unavailable (sign-in,
+                         resume-session, big initial sync).
+
+      Mode="Body"      → inline spinning icon, no scrim. Use inside a
+                         page body (Password Manager list, Secured
+                         Messenger thread, Notifications, etc.) so the
+                         topbar + sidebar stay live.
+
+    Self-contained styling: the `<style>` block ships with the component
+    so it renders correctly even when the SCSS bundle for a given tier
+    hasn't loaded yet (e.g. before sign-in).
+*@
+
+<div class="axl @ModeClass" role="status" aria-live="polite" aria-label="@AriaLabel">
+    <div class="axl-stack">
+        <div class="axl-logo" aria-hidden="true">
+            <img class="axl-logo-img" src="images/axcryptIcon.png" alt="" />
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Message))
+        {
+            <div class="axl-msg">@Message</div>
+        }
+        else if (Mode == LoaderMode.FullPage)
+        {
+            <div class="axl-msg axl-msg--default">Just a moment…</div>
+        }
+    </div>
+</div>
+
+@code {
+    /// <summary>Which variant to render — full-page scrim or inline body.</summary>
+    [Parameter] public LoaderMode Mode { get; set; } = LoaderMode.Body;
+
+    /// <summary>Optional message under the icon. Full-page has a default.</summary>
+    [Parameter] public string? Message { get; set; }
+
+    /// <summary>Optional aria-label override for screen readers. Defaults to "Loading".</summary>
+    [Parameter] public string AriaLabel { get; set; } = "Loading";
+
+    private string ModeClass => Mode switch
+    {
+        LoaderMode.FullPage => "axl--fullpage",
+        LoaderMode.Body     => "axl--body",
+        _                   => "axl--body",
+    };
+}
+
+@* Self-contained styles. Lives next to the markup so the loader
+   always renders correctly — no SCSS bundle dependency. *@
+<style>
+    .axl {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .axl-stack {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+    }
+
+    /* Wrapper — gentle "breathing" scale so the icon feels alive
+       independently of the spin. */
+    .axl-logo {
+        width: 64px;
+        height: 64px;
+        animation: axl-breathe 1.4s ease-in-out infinite;
+    }
+
+    /* The AxCrypt icon spins as the loading wheel. */
+    .axl-logo-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        animation: axl-spin 1.4s linear infinite;
+    }
+
+    @@keyframes axl-spin {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+    }
+
+    @@keyframes axl-breathe {
+        0%, 100% { transform: scale(0.95); }
+        50%      { transform: scale(1); }
+    }
+
+    .axl-msg {
+        font-size: 13px;
+        font-weight: 500;
+        color: #6b7280;
+        text-align: center;
+        max-width: 240px;
+        line-height: 1.5;
+    }
+
+    /* ── Full-page variant ── */
+    .axl--fullpage {
+        position: fixed;
+        inset: 0;
+        z-index: 99997;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(3px);
+    }
+
+    .axl--fullpage .axl-logo { width: 84px; height: 84px; }
+    .axl--fullpage .axl-msg  { font-size: 14px; color: #111827; }
+
+    /* ── Inline body variant ── */
+    .axl--body {
+        width: 100%;
+        min-height: 180px;
+        padding: 16px;
+    }
+
+    .axl--body .axl-logo { width: 52px; height: 52px; }
+
+    /* ── Dark theme — applied via the data-theme attribute set on the
+       html tag by the theme switcher. ── */
+    html[data-theme="dark"] .axl--fullpage {
+        background: rgba(15, 23, 42, 0.78);
+    }
+
+    html[data-theme="dark"] .axl--fullpage .axl-msg { color: #e5e7eb; }
+    html[data-theme="dark"] .axl-msg                { color: #b5bcc7; }
+
+    /* Respect reduced-motion: drop the spin/breathe, keep a soft pulse. */
+    @@media (prefers-reduced-motion: reduce) {
+        .axl-logo,
+        .axl-logo-img {
+            animation: axl-fade 1.6s ease-in-out infinite;
+        }
+    }
+
+    @@keyframes axl-fade {
+        0%, 100% { opacity: 1; }
+        50%      { opacity: 0.5; }
+    }
+</style>

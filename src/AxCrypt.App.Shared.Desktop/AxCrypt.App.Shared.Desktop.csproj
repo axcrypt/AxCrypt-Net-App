@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net9.0</TargetFrameworks>
+        <TargetFrameworks>net10.0</TargetFrameworks>
         <!--<UseMaui>true</UseMaui>-->
         <!--<ImplicitUsings>enable</ImplicitUsings>-->
         <Nullable>enable</Nullable>
@@ -25,6 +25,7 @@
       <ProjectReference Include="..\..\shared\Axcrypt.Content\AxCrypt.Content.csproj" />
       <ProjectReference Include="..\..\shared\AxCrypt.Core\AxCrypt.Core.csproj" />
       <ProjectReference Include="..\..\shared\AxCrypt.Desktop\AxCrypt.Desktop.csproj" />
+      <ProjectReference Include="..\AxCrypt.App.Entitlement\AxCrypt.App.Entitlement.csproj" />
       <ProjectReference Include="..\AxCrypt.App.Shared\AxCrypt.App.Shared.csproj" />
     </ItemGroup>
 	
@@ -32,6 +33,11 @@
       <Content Update="Components\Main\Header\LanguagesComponent.razor">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       </Content>
+    </ItemGroup>
+	
+    <ItemGroup>
+      <Folder Include="Components\HomePage\" />
+      <Folder Include="Models\" />
     </ItemGroup>
 
 </Project>

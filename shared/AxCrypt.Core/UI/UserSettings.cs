@@ -397,6 +397,12 @@ namespace AxCrypt.Core.UI
             set { Store(nameof(FindFileMode), value); }
         }
 
+        public string EntitlementHashKey
+        {
+            get { return Load(nameof(EntitlementHashKey), string.Empty); }
+            set { Store(nameof(EntitlementHashKey), value); }
+        }
+
         public bool HasSeenStartupHelp
         {
             get { return Load(nameof(HasSeenStartupHelp), false); }

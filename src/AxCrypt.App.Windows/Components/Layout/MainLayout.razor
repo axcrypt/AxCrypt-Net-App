@@ -1,4 +1,5 @@
 ﻿@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.App.Shared.ViewModels
@@ -10,35 +11,36 @@
 @inject ICssService CssService
 @inject NavigationManager navigationManager
 @inject ImportPrivateKeyViewModel ImportViewModel
+@inject PopupService popupService
+@* PaidFeaturegateService is no longer injected here — the paid-gate
+   modal now lives entirely inside its own component
+   (Components/Shared/PaidGateDialog.razor) which injects the service
+   on its own. *@
 
 @{
     string arabic = Core.Resolve.UserSettings.CultureName == "ar" ? "arabic-class" : "";
 }
 
-<div class="page @arabic" dir="@(Core.Resolve.UserSettings.CultureName == "ar" ? "rtl" : "ltr")" @onclick="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)" @onmousemove="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)">
+<div class="@arabic" dir="@(Core.Resolve.UserSettings.CultureName == "ar" ? "rtl" : "ltr")" @onclick="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)" @onmousemove="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)">
     @if (PageRendering || (LogOnViewModel.IsLoggedOn && PageStyleRendering))
     {
+        @* Boot loader — uses the same AxLoader visual the rest of
+           the app shows, so the brand experience is consistent
+           from cold start through to in-app waits. *@
         <main>
-            <div class="secrets-loading-overlay">
-                <div class="loading-content">
-                    <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
-                    <span style="color:black ">@Texts.PreparingAxCryptText</span>
-                </div>
-            </div>
+            <AxCrypt.App.Shared.Desktop.Components.Shared.AxLoader
+                Mode="AxCrypt.App.Shared.Desktop.Components.Shared.LoaderMode.FullPage"
+                Message="@Texts.PreparingAxCryptText" />
         </main>
     }
     else
     {
-        @if (CanShowSigedInContent)
-        {
-            <div>
-                <AxCrypt.App.Shared.Desktop.Components.Shared.StandardEncryptionWarning />
-            </div>
-        }
-        <div style="display: contents;">
+        <div class="app-shell @(Utility.IsMainMenuHidden ? "sidebar-collapsed" : "")" @onclick="CloseContextMenu">
             @if (CanShowSigedInContent)
             {
-                string sideMenuCollapsedStyle = Utility.IsMainMenuHidden ? "sid-mnu-colpsd" : "";
+                <AxCrypt.App.Shared.Desktop.Components.HomePage.SideBar />
+
+                @* string sideMenuCollapsedStyle = Utility.IsMainMenuHidden ? "sid-mnu-colpsd" : "";
 
                 <div class="@sideMenuCollapsedStyle side-menu" style="max-width:400px;">
                     @if (!Utility.IsMainMenuHidden)
@@ -47,6 +49,8 @@
                             <img class="hide-icon" style="position: relative;z-index:1;width: 30px;margin-left: -15px;" src="" alt="image hide" @onclick="() => Utility.ToggleMainMenu()">
                         </div>
                         <NavMenu />
+                        <AxCrypt.App.Shared.Desktop.Components.HomePage.SideBar />
+
                     }
                     else
                     {
@@ -54,20 +58,31 @@
                             <img class="expbd-icon" style="z-index:1;" src="" alt="image hide" @onclick="() => Utility.ToggleMainMenu()" />
 
                             <NavMenu />
+                            <AxCrypt.App.Shared.Desktop.Components.HomePage.SideBar />
+
                         </div>
                     }
-                </div>
+                </div> *@
+
+
+                <!-- Click-outside backdrop for profile menu -->
+                @if (popupService.AnyPopupOpen)
+                {
+                    <div class="global-backdrop" @onclick="popupService.CloseAllPopups"></div>
+                }
             }
 
-            <main style="display: flex;flex-flow: column;height: 100%;">
+            <main class="main-content">
                 @if (CanShowSigedInContent)
                 {
-                    <AxCrypt.App.Shared.Desktop.Components.Main.HeaderComponent />
+                    @* <AxCrypt.App.Shared.Desktop.Components.Main.HeaderComponent /> *@
+                    <AxCrypt.App.Shared.Desktop.Components.HomePage.TopBar />
 
-                    string sideMenuCollapsedbodyStyle = Utility.IsMainMenuHidden ? "sid-mnu-colpsd-body" : "";
+                    @Body
+                    @* string sideMenuCollapsedbodyStyle = Utility.IsMainMenuHidden ? "sid-mnu-colpsd-body" : "";
                     <div class="body-content-section @sideMenuCollapsedbodyStyle">
                         @Body
-                    </div>
+                    </div> *@
 
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.StatusAlertComponent />
 
@@ -75,7 +90,6 @@
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.TryUpgradeDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.UpgradeSubscriptionDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.RenewSubscriptionDialog />
-                    <AxCrypt.App.Shared.Desktop.Components.PopupDialog.FilePasswordDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.VerifyAccountDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.VerifyPasswordDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.UserPromptDialog />
@@ -97,6 +111,16 @@
                 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.About />
                 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.ImportPrivatePasswordDialog />
                 <AxCrypt.App.Shared.Desktop.Components.Shared.AccountPlanSetupRequiredPopup />
+
+
+                @* Paid Feature Gate Popup — extracted into its own
+                   component so all paid-gate UI lives in one file
+                   (Components/Shared/PaidGateDialog.razor). Every caller
+                   that triggers the gate goes through
+                   PaidFeaturegateService.ShowPaidGate(...); this is the
+                   single render point that listens to PaidGateOpen and
+                   draws the tier-targeted modal. *@
+                <AxCrypt.App.Shared.Desktop.Components.Shared.PaidGateDialog />
             </main>
         </div>
     }
@@ -132,7 +156,18 @@
     {
         CanShowSignInPage = canShowSignInPage;
         string currentURi = navigationManager.Uri;
-        if (CanShowSignInPage && currentURi.Replace(navigationManager.BaseUri, "") != "")
+
+        // Only force-reload to the root when we're actually entering the
+        // sign-in screen AND the user is NOT logged on. The old version
+        // fired on EVERY OnLogOnDialogVisibilityChanged event, which
+        // includes the case where the FilePasswordWindow (a separate
+        // MAUI window) flips the visibility flag while the main window
+        // user is already signed in — causing a full reload of the home
+        // page mid-decrypt. The reload also re-triggers
+        // MainViewModel.DownloadVersion → AvailableVersionDialog, which
+        // is the "update available popup pops up unexpectedly" symptom.
+        bool atRoot = currentURi.Replace(navigationManager.BaseUri, "") == "";
+        if (CanShowSignInPage && !LogOnViewModel.IsLoggedOn && !atRoot)
         {
             navigationManager.NavigateTo("/", true);
             return;
@@ -168,7 +203,20 @@
 
     private async Task InitiateDelayToRenderPage()
     {
-        await Task.Delay(1000);
+        // The previous Task.Delay(1000) was a defensive hack that gated
+        // the entire signed-in shell for a full second. Profiling showed
+        // nothing depended on that delay — the real readiness signal is
+        // CanShowSigedInContent (LogOnViewModel.IsLoggedOn &&
+        // !CanShowSignInPage && !PageStyleRendering), which already
+        // gates the actual home UI. Drop the 1000ms blocker and let the
+        // shell render as soon as Blazor is ready. The AxLoader keeps
+        // showing until CSS finishes applying, so the user still sees
+        // a polished waiting state — just for the time we actually need.
+        //
+        // Tiny yield instead of a blocking delay so other async startup
+        // work (CSS load, theme init) gets a chance to run before we
+        // flip the flag.
+        await Task.Yield();
         PageRendering = false;
         UpdateUIState();
     }
@@ -226,4 +274,6 @@
             return LogOnViewModel.IsLoggedOn && !CanShowSignInPage && !PageStyleRendering;
         }
     }
+
+    private void CloseContextMenu() => popupService.ContextMenuOpen = false;
 }

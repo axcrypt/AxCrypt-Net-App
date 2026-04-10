@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api.Model;
+using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.Data;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models.Secret;
@@ -7,11 +8,13 @@ using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
+using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Secrets;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using Microsoft.AspNetCore.Components;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.ViewModels.Secret;
@@ -114,7 +117,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
         set { SetProperty(nameof(SharedSecretTitle), value); }
     }
 
-    public void AddUserToSharedListAsync()
+    public async Task AddUserToSharedListAsync()
     {
         if (!ViewModelHelper.IsAxCryptOnline())
         {
@@ -132,7 +135,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
             shareGroupText = SecretSharingUserEmail.Trim();
         }
 
-        if (!ValidUserToShareSecret(addedUserEmailAddress))
+        if (!await ValidUserToShareSecret(addedUserEmailAddress))
         {
             return;
         }
@@ -167,7 +170,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
         return addedUserEmailAddress;
     }
 
-    private bool ValidUserToShareSecret(EmailAddress addedUserEmailAddress)
+    private async Task<bool> ValidUserToShareSecret(EmailAddress addedUserEmailAddress)
     {
         if (addedUserEmailAddress == EmailAddress.Empty)
         {
@@ -185,7 +188,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
             return false;
         }
 
-        int maxAllowedUsersCount = ViewModelHelper.MaxAllowedUsersCountToShare();
+        int maxAllowedUsersCount = await ViewModelHelper.MaxAllowedUsersCountToShare();
         if (ShareSecretUserList.Count >= maxAllowedUsersCount)
         {
             ErrorMessage = $"Cannot add more users. Maximum allowed is {maxAllowedUsersCount}.";
@@ -261,6 +264,12 @@ public class ShareSecretViewModel : ManageSecretViewModel
             ShowHideOfflineError(false);
             return false;
         }
+
+        if (!await New<UserEntitlementService>().UserHasCapability(LimitedCapability.ShareSecret, New<AccountStatusViewModel>().SubscriptionLevel))
+        {
+            return false;
+        }
+
         using (ProcessIndicator processIndicator = new ProcessIndicator())
         {
             SecretClientModel theSecret = Secret.ToClientModel(Secret.SecretGuid);

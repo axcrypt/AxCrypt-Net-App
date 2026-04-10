@@ -1,0 +1,105 @@
+﻿/* ── Sidebar footer ──────────────────────── */
+.sidebar-footer {
+    padding: 12px 8px 0;
+    border-top: 1px solid $border;
+    margin-top: 8px;
+    overflow: visible !important; /* allow popups to overflow */
+    position: relative;
+}
+
+/* Clickable profile row */
+.user-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 6px 4px;
+    border-radius: 8px;
+    transition: background .15s;
+    user-select: none;
+    overflow: hidden;
+}
+
+    .user-row:hover,
+    .user-row--active {
+        background: $bg-page;
+    }
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: $brand-green;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+    transition: opacity 0.15s;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-sub {
+    font-size: 11px;
+    color: $text-muted;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-chevron {
+    flex-shrink: 0;
+    color: $text-muted;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s, opacity 0.15s;
+}
+
+.profile-chevron--open {
+    transform: rotate(180deg);
+}
+
+.upgrade-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px;
+    background: $brand-green;
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-btn);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity .15s;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+    .upgrade-btn:hover {
+        background: $brand-green;
+        opacity: .88;
+    }
+
+.upgrade-label {
+    transition: opacity 0.15s, max-width 0.15s;
+    overflow: hidden;
+}

@@ -106,6 +106,10 @@ namespace AxCrypt.Core.UI.ViewModel
         public bool FilesArePending
         { get { return GetProperty<bool>(nameof(FilesArePending)); } set { SetProperty(nameof(FilesArePending), value); } }
 
+        public bool FoldersArePending
+        { get { return GetProperty<bool>(nameof(FoldersArePending)); } set { SetProperty(nameof(FoldersArePending), value); } }
+
+
         public DownloadVersion DownloadVersion
         { get { return GetProperty<DownloadVersion>(nameof(DownloadVersion)); } set { SetProperty(nameof(DownloadVersion), value); } }
 
@@ -346,6 +350,7 @@ namespace AxCrypt.Core.UI.ViewModel
                     break;
 
                 case SessionNotificationType.WatchedFolderChange:
+                    FoldersArePending = AreFoldersPending();
                     FilesArePending = AreFilesPending();
                     break;
 
@@ -363,6 +368,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
                 case SessionNotificationType.SessionStart:
                 case SessionNotificationType.ActiveFileChange:
+                    FoldersArePending = AreFoldersPending();
                     FilesArePending = AreFilesPending();
                     SetRecentFiles();
                     break;
@@ -435,6 +441,11 @@ namespace AxCrypt.Core.UI.ViewModel
                 return true;
             }
 
+            return false;
+        }
+
+        private bool AreFoldersPending()
+        {
             List<IDataStore> files = new List<IDataStore>();
             foreach (WatchedFolder wf in Resolve.KnownIdentities.LoggedOnWatchedFolders)
             {

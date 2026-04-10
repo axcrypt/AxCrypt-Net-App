@@ -1,0 +1,141 @@
+@using AxCrypt.App.Entitlement.Contracts
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.Content
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject NavigationManager Navigation
+@inject UserService userService
+
+<div class="upgrade-shell">
+    <div class="up-hero">
+        @if (ShowPremiumOnly)
+        {
+            <div class="up-hero-badge up-hero-badge--premium">Re-activate Premium</div>
+            <h1 class="up-hero-title">Welcome back to Premium</h1>
+            <p class="up-hero-sub">Pick up where you left off — unlimited encryption, key sharing, and vault, all included.</p>
+        }
+        else if (ShowBusinessOnly)
+        {
+            <div class="up-hero-badge up-hero-badge--business">Re-activate Business</div>
+            <h1 class="up-hero-title">Bring your team back to AxCrypt Business</h1>
+            <p class="up-hero-sub">Master key recovery, group sharing, audit logs, and manage users — everything your organization had.</p>
+        }
+        else
+        {
+            <div class="up-hero-badge">Limited Time — 20% Off Annually</div>
+            <h1 class="up-hero-title">Unlock encryption and more features of AxCrypt</h1>
+            <p class="up-hero-sub">Military-grade encryption, unlimited files, secure sharing and vault — everything you need to protect what matters.</p>
+        }
+    </div>
+
+    <div class="up-plans up-plans--@PlanColumnCount">
+
+        @if (ShowFree)
+        {
+            <!-- Free -->
+            <div class="up-plan">
+                <div class="up-plan-header">
+                    <span class="up-plan-name">@Texts.LicenseFreeNameText</span>
+                    <p class="up-plan-desc">Get started with basic encryption</p>
+                </div>
+                <ul class="up-features">
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Encrypt up to 3 files / month</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>@Texts.PricingFeatureListAES256</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Open encrypted files</li>
+                    <li class="up-feat up-feat--no"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#e5e7eb" /><line x1="8" y1="12" x2="16" y2="12" stroke="white" stroke-width="2" /></svg>Secure Vault</li>
+                    <li class="up-feat up-feat--no"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#e5e7eb" /><line x1="8" y1="12" x2="16" y2="12" stroke="white" stroke-width="2" /></svg>@Texts.GetStartedKeySharingHeading</li>
+                    <li class="up-feat up-feat--no"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#e5e7eb" /><line x1="8" y1="12" x2="16" y2="12" stroke="white" stroke-width="2" /></svg>Cloud Drive Encryption</li>
+                </ul>
+                <button class="up-plan-cta up-plan-cta--current">Current Plan</button>
+            </div>
+        }
+
+        @if (ShowPremium)
+        {
+            <!-- Premium -->
+            <div class="up-plan up-plan--pro">
+                @if (!ShowPremiumOnly)
+                {
+                    <div class="up-plan-popular">Most Popular</div>
+                }
+                <div class="up-plan-header">
+                    <span class="up-plan-name">@Texts.LicensePremiumNameText</span>
+                    <p class="up-plan-desc">Everything you need for serious file security</p>
+                </div>
+                <ul class="up-features">
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg><strong>Unlimited</strong>AES-256 encryption</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Secure Vault (unlimited)</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Cloud Drive Encryption</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>@Texts.GetStartedKeySharingHeading</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Batch encrypt / decrypt folders</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Priority Support + live chat</li>
+                </ul>
+                <button class="up-plan-cta up-plan-cta--pro premium-btn" @onclick="OnPremiumUpgradeClick">
+                    Upgrade to Premium Now →
+                </button>
+                <p class="up-refund">Cancel anytime</p>
+            </div>
+        }
+
+        @if (ShowBusiness)
+        {
+            <!-- Business -->
+            <div class="up-plan @(ShowBusinessOnly ? "up-plan--biz" : "")">
+                <div class="up-plan-header">
+                    <span class="up-plan-name">@Texts.LicenseBusinessNameText</span>
+                    <p class="up-plan-desc">For teams that encrypt and share together</p>
+                </div>
+                <ul class="up-features">
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg><strong>Unlimited</strong>AES-256 encryption</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Secure Vault (unlimited)</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Cloud Drive Encryption</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Master Key recovery</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Shared team vault</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>Central admin dashboard</li>
+                    <li class="up-feat up-feat--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>@Texts.PricingFeatureListAccountManager</li>
+               </ul>
+                <button class="up-plan-cta up-plan-cta--pro business-btn" @onclick="OnBusinessUpgradeClick">
+                    Upgrade to Business Now →
+                </button>
+                <p class="up-refund">Cancel anytime</p>
+            </div>
+        }
+    </div>
+
+    <!-- Trust signals -->
+    <div class="up-trust">
+        <div class="up-trust-item">🔒 <span>All encryption is <strong>local</strong> — we never see your files</span></div>
+        <div class="up-trust-item">🛡️ <span><strong>AES-256</strong> military-grade standard</span></div>
+        <div class="up-trust-item">↩️ <span>File security from <strong>Sweden</strong></span></div>
+        <div class="up-trust-item">🌍 <span>Trusted by <strong>10,00,000+</strong> users worldwide</span></div>
+    </div>
+</div>
+
+@code {
+    /// <summary>Which signup tier is the user on, sticky from sign-in.</summary>
+    private SignUpFrom Origin => userService.SignUpFrom;
+
+    private bool ShowPremiumOnly  => Origin == SignUpFrom.Premium;
+    private bool ShowBusinessOnly => Origin == SignUpFrom.Business;
+    private bool ShowAllPlans     => Origin == SignUpFrom.None || Origin == SignUpFrom.Free;
+
+    private bool ShowFree     => ShowAllPlans;
+    private bool ShowPremium  => ShowAllPlans || ShowPremiumOnly;
+    private bool ShowBusiness => ShowAllPlans || ShowBusinessOnly;
+
+    /// <summary>Used by CSS to lay 3 / 1 plans nicely.</summary>
+    private string PlanColumnCount =>
+        ShowAllPlans ? "3" : "1";
+
+    private void OnPremiumUpgradeClick()
+    {
+        // In a real app, trigger payment flow
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom=Premium"));
+    }
+
+    private void OnBusinessUpgradeClick()
+    {
+        // In a real app, trigger payment flow
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom=Premium"));
+    }
+}

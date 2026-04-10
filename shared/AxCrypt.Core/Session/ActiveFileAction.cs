@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt - Copyright 2026, AxCrypt AB, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -27,6 +27,7 @@
 
 using AxCrypt.Abstractions;
 using AxCrypt.Common;
+using AxCrypt.Content;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
@@ -69,6 +70,11 @@ namespace AxCrypt.Core.Session
                 {
                     if (activeFile.Status.HasMask(ActiveFileStatus.Exception))
                     {
+                        return activeFile;
+                    }
+                    if (activeFile.IsDecrypted && activeFile.Status.HasMask(ActiveFileStatus.AssumedOpenAndDecrypted))
+                    {
+                        await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "The file ({0}) could not be updated and re-encrypted because it is open in another application.\r\nPlease close all applications using the file and try again.\r\nAxCrypt will automatically continue once the file becomes available.".InvariantFormat(activeFile.DecryptedFileInfo.FullName), DoNotShowAgainOptions.None);
                         return activeFile;
                     }
                     if (New<FileLocker>().IsLocked(activeFile.DecryptedFileInfo))

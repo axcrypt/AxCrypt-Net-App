@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.CloudCore.CloudFileProviderUtility;
 using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser;
 using AxCrypt.App.Shared.Desktop.ViewModels.Main;
@@ -184,6 +185,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
         public async void SecureWipeFiles(EventArgs e)
         {
             await PremiumFeature_ClickAsync(LicenseCapability.SecureWipe, async (ss, ee) => { await _fileOperationViewModel.WipeFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null!); }, null!, e);
+            await New<UserEntitlementService>().InsertUserUsageCount(LimitedCapability.SecureWipe, LogOnViewModel.SubscriptionLevel);
+            return;
         }
 
         public async void EncryptionUpgrade(EventArgs e)

@@ -467,7 +467,7 @@
             <img class="stngs-menu-icon IcoLgng" alt="IcoLgng" />
             <span>@Texts.DebugLoggingToolStripMenuItemText</span>
         </NavLink>
-        <NavLink class="nav-link settings-menu-item-container" @onclick="AppSettingsViewModel.OpenManageAxCryptID">
+        <NavLink class="nav-link settings-menu-item-container" @onclick="async ()=> await AppSettingsViewModel.OpenManageAxCryptID()">
             <img class="stngs-menu-icon IcoUsers" alt="IcoUsers" />
             <span>@Texts.DebugManageAccountToolStripMenuItemText</span>
         </NavLink>

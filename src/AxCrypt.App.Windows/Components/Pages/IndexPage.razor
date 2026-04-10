@@ -13,12 +13,25 @@
 <div dir="@(Core.Resolve.UserSettings.CultureName == "ar" ? "rtl" : "ltr")">
     <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
 
+    @* Mount the global error popup at the shell level so it's available
+       even when no page is signed in (e.g. exception during sign-in /
+       MFA / boot). TopBar mounts it again post-sign-in — that's
+       harmless: the popup hosts a singleton service, and one of the
+       instances will be in view for any given screen. *@
+    <AxCrypt.App.Shared.Desktop.Components.Shared.ErrorReportPopup />
+
     @if (LogOnViewModel.IsVisible)
     {
-        <AxCrypt.App.Shared.Desktop.Components.LoginPage />
+        <AxCrypt.App.Shared.Desktop.Components.LoginPageNew />
     }
     else if (!LogOnViewModel.IsVisible && LogOnViewModel.IsMfaEnabled)
     {
+        @* MFA screen takes over directly after sign-in. The sign-in
+           ProcessIndicator started in LogOnViewModel.InitiateProgressIndicator()
+           is still showing — dispose it here so the MFA form isn't covered
+           by the full-page loader. *@
+        LogOnViewModel.ProcessIndicator?.Dispose();
+
         <AxCrypt.App.Shared.Desktop.Components.VerifyMFA />
     }
     else if (ShowSignUp)
@@ -27,18 +40,19 @@
     }
     else if (LogOnViewModel.IsLoggedOn)
     {
-        <AxCrypt.App.Shared.Desktop.Components.Pages.HomePage />
+       @*  <AxCrypt.App.Shared.Desktop.Components.Pages.HomePage /> *@
+        <AxCrypt.App.Shared.Desktop.Components.Pages.NewHomePage />
     }
     else
     {
         LogOnViewModel.ProcessIndicator?.Dispose();
 
-        <div class="secrets-loading-overlay">
-            <div class="loading-content">
-                <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
-                <span style="color:black ">@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage</span>
-            </div>
-        </div>
+        @* Post sign-in transition. Uses the branded AxLoader (FullPage)
+           instead of the heavy 560x560 Loading GIF, so the wait right
+           after sign-in matches the boot loader and every in-app loader. *@
+        <AxCrypt.App.Shared.Desktop.Components.Shared.AxLoader
+            Mode="AxCrypt.App.Shared.Desktop.Components.Shared.LoaderMode.FullPage"
+            Message="@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage" />
     }
 
 </div>

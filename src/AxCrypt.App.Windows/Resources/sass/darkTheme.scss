@@ -1,601 +1,1495 @@
-﻿$colPageBgrnd: #121212;
-$colDefTxt: #ffffff;
-$colDefBgrnd: #ffffff;
-$colActnBgrnd: #333232;
-$colHeDBgrnd: #575757;
-$TbleBg: #575757;
-$BorderClr: #575757;
-$SdebrbgndClr: #303030;
-$colTxtlble: #A4A4A4;
-$colTxtLink: #CDFFB1;
-$colBordBgrnd: #282828;
-$colBord: #CDFFB1;
-$colDrkMdL3: #575757;
-$colTxtBd: #FFFFFF;
-$colDrkMdBushd: #757575;
-$BtnBackClr: #48772C;
-$colDrkMdHglhtPrm: #CDFFB1;
-$fndfleTxtlble: #232323;
-$loginImgBgnd: #494949;
+﻿/* =============================================================
+   AxCrypt — Dark Theme
+   -------------------------------------------------------------
+   Token-based dark theme using a 5-tier surface elevation system.
+   Loaded via wwwroot/index.html addDarkThemeCssFile() when the
+   user enables Dark Mode from Settings.
 
-.signin-right-img {
-    background-color: $loginImgBgnd;
+   Design principles
+   • Material Design 3 dark surfaces (no pure-black backgrounds –
+     easier on the eyes, less OLED bleed, supports elevation).
+   • WCAG AA contrast on all text against its surface.
+   • Brand green is "lifted" for legibility on dark
+     (#48772C → #7FCC5C) while the mint highlight (#CDFFB1) is
+     kept for links/accents.
+   • Single source of truth: every page/component is themed by
+     pointing it at the elevation tokens below.
+   ============================================================= */
+
+/* ─── Brand ─────────────────────────────────────────────────── */
+$dt-brand: #7FCC5C; /* lifted brand green */
+$dt-brand-strong: #9BE076; /* hover / focus */
+$dt-brand-soft: rgba(127, 204, 92, .14); /* tinted bg */
+$dt-brand-soft-strong: rgba(127, 204, 92, .24);
+$dt-mint: #CDFFB1; /* legacy accent */
+$dt-accent-ring: rgba(127, 204, 92, .35);
+
+/* ─── Surfaces (elevation 0 → 4) ───────────────────────────── */
+$dt-surface-0: #0F141A; /* app background  */
+$dt-surface-1: #161D26; /* sidebar / topbar */
+$dt-surface-2: #1C2530; /* cards / popovers */
+$dt-surface-3: #232E3B; /* hover, raised    */
+$dt-surface-4: #2A3645; /* dropdown / modal */
+$dt-surface-overlay: rgba(255, 255, 255, .04);
+$dt-surface-overlay-hi: rgba(255, 255, 255, .08);
+
+/* ─── Borders & dividers ───────────────────────────────────── */
+$dt-border: #2A3340;
+$dt-border-strong: #3A4554;
+$dt-divider: rgba(255, 255, 255, .06);
+
+/* ─── Text ─────────────────────────────────────────────────── */
+$dt-text: #E8ECF1; /* primary    */
+$dt-text-secondary: #B5BCC7; /* secondary  */
+$dt-text-muted: #7A8494; /* muted      */
+$dt-text-disabled: #525C6B; /* disabled   */
+$dt-text-on-brand: #0F1A07; /* on $dt-brand */
+$dt-link: #B8E89A; /* accent link */
+$dt-link-hover: $dt-mint;
+
+/* ─── Semantic ─────────────────────────────────────────────── */
+$dt-success: #4ADE80;
+$dt-success-soft: rgba(74, 222, 128, .14);
+$dt-warning: #FBBF24;
+$dt-warning-soft: rgba(251, 191, 36, .14);
+$dt-danger: #F87171;
+$dt-danger-soft: rgba(248, 113, 113, .14);
+$dt-info: #60A5FA;
+$dt-info-soft: rgba(96, 165, 250, .14);
+
+/* ─── Shadows ──────────────────────────────────────────────── */
+$dt-shadow-card: 0 1px 3px rgba(0, 0, 0, .35), 0 1px 2px rgba(0, 0, 0, .25);
+$dt-shadow-pop: 0 12px 32px rgba(0, 0, 0, .55), 0 2px 8px rgba(0, 0, 0, .35);
+
+/* =============================================================
+   Global / scrollbar
+   ============================================================= */
+html,
+body {
+    background: $dt-surface-0;
+    color: $dt-text;
+    color-scheme: dark;
 }
 
-.sidebar, .sid-mnu-colpsd.side-menu {
-    background: $SdebrbgndClr !important;
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
 }
 
-.nav-item .active,
-.nav-item :hover {
-    background-color: $TbleBg !important;
-    color: $colTxtLink !important;
+::-webkit-scrollbar-track {
+    background: $dt-surface-0;
 }
 
-.link-box {
-    background-color: $SdebrbgndClr !important;
-    border: $colBordBgrnd !important;
-    box-shadow: none !important;
+::-webkit-scrollbar-thumb {
+    background: $dt-surface-3;
+    border-radius: 8px;
+    border: 2px solid $dt-surface-0;
 }
 
-.link-txt {
-    color: $colTxtLink !important;
+::-webkit-scrollbar-thumb:hover {
+    background: $dt-surface-4;
 }
 
-.label-text label, .lable-txt {
-    color: $colTxtlble !important;
+::selection {
+    background: $dt-brand-soft-strong;
+    color: $dt-text;
 }
 
-.desc-txt, .nav-link span, .select-email {
-    color: $colTxtlble !important;
+/* =============================================================
+   App shell (legacy + HomeNew)
+   ============================================================= */
+.page,
+.side-menu,
+.app-shell,
+.layout-body,
+.main-content,
+.content-grid {
+    background-color: $dt-surface-0 !important;
+    color: $dt-text;
 }
 
-.sup-text-blur {
-    background-color: $colBordBgrnd !important;
-    border: $colBordBgrnd !important;
+.topbar {
+    background: $dt-surface-1 !important;
+    border-bottom: 1px solid $dt-border !important;
+    color: $dt-text;
 }
 
-.btn-hide, .alert-box {
-    background-color: $TbleBg !important;
-    border: $BorderClr !important;
-    color: $colDefTxt !important;
+.page-title,
+.nav-page-title,
+.fb-title,
+.sup-title,
+.act-title,
+.pwd-title,
+.files-title,
+.vph-title,
+.up-hero-title {
+    color: $dt-text !important;
 }
 
-.model-popup, .act-clr, .notification-popup {
-    background-color: $SdebrbgndClr !important;
-    color: $colTxtBd !important;
+.page-subtitle,
+.fb-sub,
+.sup-sub,
+.act-sub,
+.pwd-sub,
+.files-subtitle,
+.vph-sub,
+.up-hero-sub {
+    color: $dt-text-secondary !important;
 }
 
-.notify-pg-tbl-body td {
-    color: $colTxtLink !important;
+/* =============================================================
+   Sidebar (legacy + new)
+   ============================================================= */
+.sidebar,
+.sid-mnu-colpsd.side-menu {
+    background: $dt-surface-1 !important;
+    border-right: 1px solid $dt-border !important;
+    color: $dt-text;
 }
 
-.notification-table th {
-    background-color: $colHeDBgrnd !important;
-    color: $colTxtLink !important;
+.nav-item {
+    color: $dt-text-secondary !important;
 }
 
-.password-create-dropdown-content {
-    background-color: $colBordBgrnd !important;
-    color: $colTxtlble !important;
+.nav-item:hover,
+.nav-item--active,
+.nav-item .active {
+    background: $dt-brand-soft !important;
+    color: $dt-link !important;
 }
 
-.password-create-dropdown-content a:hover,
-.password-create-dropdown-content a.active {
-    color: $colTxtLink !important;
-    background-color: $colHeDBgrnd !important;
+.nav-icon {
+    opacity: .9;
 }
 
-#messenger-keyword {
-    background-color: $colBordBgrnd !important;
-    border: 1px !important;
+.brand-name,
+.user-name {
+    color: $dt-text !important;
 }
 
-#secrets-keyword {
-    background-color: $colBordBgrnd !important;
-    border: 1px !important;
+.user-email,
+.user-row .desc-txt {
+    color: $dt-text-muted !important;
 }
 
-
-.tab a:hover, .tab a.active {
-    color: $colTxtLink !important;
+.user-row:hover,
+.user-row--active {
+    background: $dt-surface-overlay !important;
 }
 
-.tab-selected {
-    border: 3px solid $colBord !important;
+.sidebar-footer {
+    border-top: 1px solid $dt-border !important;
 }
 
-.tab-sec a.active,
-.tab-sec a:hover {
-    color: $colTxtLink !important;
+.toggle-btn,
+.toggle-btn-collapsed {
+    background: transparent !important;
+    border: 1px solid $dt-border !important;
+    color: $dt-text-secondary !important;
 }
 
-.fnt-high {
-    background-color: $colActnBgrnd !important;
+.toggle-btn:hover {
+    background: $dt-surface-overlay !important;
+    color: $dt-text !important;
 }
 
-
-.mutli-slct-btn {
-    color: $colTxtLink !important;
+.avatar,
+.pm-avatar {
+    background: $dt-brand !important;
+    color: $dt-text-on-brand !important;
 }
 
-.page, .side-menu {
-    background-color: $colPageBgrnd !important;
-    color: $colTxtlble;
+/* =============================================================
+   Cards / surfaces (legacy `.card` + new `.*-card`, `.*-shell`)
+   ============================================================= */
+.card,
+.recent-files-card,
+/* new pages */
+.files-shell,
+.pwd-shell,
+.vault-shell,
+.activity-shell,
+.support-shell,
+.feedback-shell,
+.upgrade-shell {
+    background: $dt-surface-0 !important;
+    color: $dt-text !important;
 }
 
-.page-title {
-    color: $colDefTxt !important;
+/* generic card surfaces inside pages */
+.fstat,
+.vs-card,
+.pwd-card,
+.fb-rating-card,
+.fb-form-card,
+.fb-history,
+.sup-cat-card,
+.sup-faq,
+.sco-card,
+.up-plan,
+.up-trust-item,
+.act-stat,
+.act-timeline,
+.vault-locked,
+.vault-files,
+.files-grid-header,
+.session-row {
+    background: $dt-surface-2 !important;
+    border: 1px solid $dt-border !important;
+    color: $dt-text !important;
+    box-shadow: $dt-shadow-card !important;
 }
 
-.fle-nme {
-    color: $colTxtlble;
+.section-title,
+.fb-card-title,
+.fb-hist-title,
+.sup-contact-title,
+.sup-faq-title,
+.vf-title,
+.scc-label,
+.up-plan-name,
+.pwd-card h3,
+.sco-card h4,
+.vault-locked h3 {
+    color: $dt-text !important;
 }
 
-.text-style {
-    color: $colDefTxt !important;
+.fstat-label,
+.vs-label,
+.as-label,
+.pwd-card p,
+.sco-card p,
+.up-plan-desc,
+.up-price-old,
+.up-period,
+.up-refund,
+.scc-count,
+.fr-sub,
+.fe-desc,
+.vf-empty {
+    color: $dt-text-muted !important;
 }
 
-bold.text-style {
-    color: #121212 !important;
+.fstat-num,
+.vs-num,
+.as-num,
+.up-price {
+    color: $dt-text !important;
 }
 
-button {
-    background-color: $colDefBgrnd;
-    color: $colDefTxt;
-    //border: solid 1px;            help overlay
+/* gradient hero text – fallback to solid for dark legibility */
+.up-hero-title {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    color: $dt-brand-strong !important;
 }
 
-.mre-actn-box {
-    background-color: $TbleBg !important;
-    border: $BorderClr !important;
+.up-plan--pro {
+    border-color: $dt-brand !important;
+    box-shadow: 0 0 0 4px $dt-brand-soft !important;
 }
 
-.mre-actn-box:hover {
-    background-color: $SdebrbgndClr !important;
-    color: $colTxtlble !important;
+.up-plan--pro .up-plan-name {
+    color: $dt-brand !important;
 }
 
-.rcnt-fld-bx {
-    background-color: $colActnBgrnd;
-    border: $BorderClr !important;
-    box-shadow: none !important;
-    color: $colTxtlble !important;
+/* =============================================================
+   Rows / tables / lists
+   ============================================================= */
+.files-row,
+.vf-row,
+.fb-hist-row,
+.act-log-row,
+.faq-item {
+    background: $dt-surface-2 !important;
+    border-bottom: 1px solid $dt-divider !important;
+    color: $dt-text !important;
 }
 
-.add-fldr {
-    border-style: dotted !important;
+.files-row:hover,
+.vf-row:hover,
+.act-log-row:hover,
+.faq-item:hover {
+    background: $dt-surface-3 !important;
 }
 
-.modalDialog > div {
-    color: $colDefTxt;
-    background-color: $colPageBgrnd !important;
+.files-row--sel,
+.session-row--current {
+    background: $dt-brand-soft !important;
+    border-color: $dt-brand !important;
+}
+
+.fr-name,
+.alr-action,
+.session-device {
+    color: $dt-text !important;
+}
+
+.alr-file,
+.rk-copy {
+    color: $dt-link !important;
+}
+
+.act-date-label {
+    background: $dt-surface-1 !important;
+    color: $dt-text-muted !important;
+    border-bottom: 1px solid $dt-divider !important;
+}
+
+.trow:not(.trow--header):hover {
+    background: $dt-surface-3 !important;
+}
+
+.trow--selected {
+    background: $dt-brand-soft !important;
+}
+
+.trow--header {
+    color: $dt-text-muted !important;
+    border-bottom: 1px solid $dt-border !important;
 }
 
 .rcnt-fle-tbl {
     thead tr th {
-        color: $colTxtlble !important;
-        background: $TbleBg !important;
+        color: $dt-text-secondary !important;
+        background: $dt-surface-1 !important;
     }
 
     tbody tr {
-        background: $colPageBgrnd !important;
+        background: $dt-surface-2 !important;
     }
 
     tbody tr:hover,
     tbody tr.active,
     .selected td {
-        background: $SdebrbgndClr !important;
+        background: $dt-surface-3 !important;
     }
 }
 
-textarea, input[type=text], input[type=password], textarea[readonly], textarea {
-    background-color: $colDrkMdL3 !important;
-    color: $colTxtBd !important;
+/* notifications */
+.notification-table th {
+    background-color: $dt-surface-1 !important;
+    color: $dt-text-secondary !important;
 }
 
-input[readonly="readonly"], textarea[readonly] {
-    border: $colDrkMdL3 !important;
+.notify-pg-tbl-body td {
+    color: $dt-text !important;
+}
+
+.notification-popup {
+    background: $dt-surface-3 !important;
+    border: 1px solid $dt-border-strong !important;
+    color: $dt-text !important;
+    box-shadow: $dt-shadow-pop !important;
+
+    tr {
+        border: 1px solid $dt-divider !important;
+    }
+
+    tr td {
+        color: $dt-text-secondary !important;
+
+        :hover {
+            color: $dt-link !important;
+            background-color: $dt-surface-overlay-hi !important;
+        }
+    }
+
+    a {
+        color: $dt-text-secondary !important;
+    }
+}
+
+/* =============================================================
+   Tabs / chips / pills
+   ============================================================= */
+.ftab,
+.fb-type-tab {
+    background: $dt-surface-2 !important;
+    border: 1.5px solid $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+.ftab--active,
+.fb-type-tab--active {
+    background: $dt-brand !important;
+    border-color: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+    font-weight: 600;
+}
+
+.ftab-count {
+    background: rgba(15, 20, 26, .35) !important;
+    color: $dt-text-on-brand !important;
+}
+
+.tab a:hover,
+.tab a.active,
+.tab-sec a.active,
+.tab-sec a:hover {
+    color: $dt-link !important;
+}
+
+.tab-selected {
+    border: 3px solid $dt-brand !important;
+}
+
+/* =============================================================
+   Badges (legacy + new)
+   ============================================================= */
+.badge--enc,
+.alr-badge--encrypt {
+    background: $dt-info-soft !important;
+    color: $dt-info !important;
+}
+
+.badge--opened,
+.alr-badge--decrypt {
+    background: $dt-success-soft !important;
+    color: $dt-success !important;
+}
+
+.badge--shared,
+.alr-badge--share {
+    background: $dt-warning-soft !important;
+    color: $dt-warning !important;
+}
+
+.alr-badge--delete {
+    background: $dt-danger-soft !important;
+    color: $dt-danger !important;
+}
+
+.alr-badge--login {
+    background: rgba(167, 139, 250, .15) !important;
+    color: #C4B5FD !important;
+}
+
+.algo-chip {
+    background: $dt-brand-soft !important;
+    color: $dt-link !important;
+}
+
+.fb-hist-status--review {
+    background: $dt-warning-soft !important;
+    color: $dt-warning !important;
+}
+
+.fb-hist-status--fixed {
+    background: $dt-success-soft !important;
+    color: $dt-success !important;
+}
+
+.fb-hist-status--seen {
+    background: $dt-surface-overlay-hi !important;
+    color: $dt-text-secondary !important;
+}
+
+.fb-hist-date,
+.alr-time {
+    color: $dt-text-muted !important;
+}
+
+/* icon-tinted backgrounds in alert rows */
+.alr-icon--encrypt {
+    background: $dt-info-soft !important;
+}
+
+.alr-icon--decrypt {
+    background: $dt-success-soft !important;
+}
+
+.alr-icon--share {
+    background: $dt-warning-soft !important;
+}
+
+.alr-icon--delete {
+    background: $dt-danger-soft !important;
+}
+
+.alr-icon--login {
+    background: rgba(167, 139, 250, .15) !important;
+}
+
+/* =============================================================
+   Buttons
+   ============================================================= */
+button {
+    background-color: $dt-surface-2;
+    color: $dt-text;
+    border-color: $dt-border;
+}
+
+/* Primary CTA family */
+.fh-btn,
+.vph-btn,
+.pwd-btn,
+.fb-submit-btn,
+.vl-unlock-btn,
+.fe-cta,
+.vab-settings,
+.sco-btn--blue {
+    background: $dt-brand !important;
+    border-color: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+}
+
+.fh-btn:hover,
+.vph-btn:hover,
+.pwd-btn:hover,
+.fb-submit-btn:hover,
+.vl-unlock-btn:hover,
+.fe-cta:hover,
+.sco-btn--blue:hover {
+    background: $dt-brand-strong !important;
+    border-color: $dt-brand-strong !important;
+}
+
+/* Green variant button */
+.pwd-btn--green {
+    background: $dt-success !important;
+    color: #052E14 !important;
+}
+
+/* Danger button */
+.pwd-btn--danger,
+.bulk-btn--danger {
+    background: $dt-danger !important;
+    border-color: $dt-danger !important;
+    color: #2A0808 !important;
+}
+
+/* Secondary / outlined button */
+.vph-btn--secondary,
+.act-export-btn,
+.sco-btn,
+.rk-copy {
+    background: $dt-surface-2 !important;
+    border: 1px solid $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.vph-btn--secondary:hover,
+.act-export-btn:hover,
+.sco-btn:hover {
+    background: $dt-surface-3 !important;
+}
+
+/* Bulk bar (multi-select) */
+.bulk-bar {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+}
+
+.bulk-btn {
+    background: $dt-surface-overlay-hi !important;
+    border-color: $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.bulk-btn:hover {
+    background: $dt-surface-overlay-hi !important;
+    filter: brightness(1.15);
+}
+
+/* AxCrypt legacy button system */
+.button.success {
+    background-color: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+    border-color: $dt-brand !important;
+}
+
+.button.success:hover {
+    background-color: $dt-brand-strong !important;
+}
+
+.button.border {
+    background-color: $dt-surface-2 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+}
+
+.button.border:hover {
+    background-color: $dt-surface-3 !important;
+    color: $dt-text !important;
+}
+
+.btn-large.font-medium.button {
+    background-color: $dt-surface-3 !important;
+    border: 1px solid $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.flex-start .button {
+    background-color: $dt-surface-2;
+    color: $dt-text-secondary;
+}
+
+.grn-bg {
+    border: 1px solid $dt-brand !important;
+}
+
+.premium-btn {
+    background-color: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+}
+
+.business-btn {
+    background-color: $dt-surface-3 !important;
+    color: $dt-text !important;
+}
+
+.icon-btn {
+    background: $dt-surface-2 !important;
+    border: 1px solid $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+.icon-btn:hover {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+}
+
+.icon-btn--active {
+    background: $dt-brand-soft !important;
+    border-color: $dt-brand !important;
+    color: $dt-brand !important;
+}
+
+.mic-btn {
+    background: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+}
+
+/* =============================================================
+   Form controls
+   ============================================================= */
+textarea,
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=search],
+input[type=number],
+textarea[readonly],
+.pwd-input,
+.fb-input,
+.fb-textarea,
+.vl-input,
+.act-filter,
+.fh-sort-select,
+.vf-search,
+.vf-sort {
+    background-color: $dt-surface-2 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+    caret-color: $dt-brand;
+}
+
+textarea::placeholder,
+input::placeholder {
+    color: $dt-text-muted !important;
+}
+
+.pwd-input:focus,
+.fb-input:focus,
+.fb-textarea:focus,
+.vl-input:focus,
+textarea:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=search]:focus {
+    border-color: $dt-brand !important;
+    box-shadow: 0 0 0 3px $dt-accent-ring !important;
+    outline: none;
+}
+
+input[readonly="readonly"],
+textarea[readonly] {
+    border: 1px solid $dt-border !important;
+    color: $dt-text-secondary !important;
 }
 
 .clean-up textarea {
-    color: $colTxtBd !important;
-    background: $colDrkMdL3 !important;
+    color: $dt-text !important;
+    background: $dt-surface-2 !important;
 }
 
-.find-fle-nme {
-    color: $fndfleTxtlble;
+/* Search box on topbar / global */
+.search-box,
+.fh-search {
+    background: $dt-surface-2 !important;
+    border: 1.5px solid $dt-border !important;
+}
+
+.search-box--focused {
+    border-color: $dt-brand !important;
+    box-shadow: 0 0 0 3px $dt-accent-ring !important;
+}
+
+.search-input,
+.fh-search-input {
+    background: transparent !important;
+    color: $dt-text !important;
+}
+
+#messenger-keyword,
+#secrets-keyword {
+    background-color: $dt-surface-2 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border !important;
+}
+
+/* Secured Messenger — section cards / tab divider
+   (framing added in _SecuredMessenger.scss). */
+.secured-messenger #sec-msg-search-section,
+.secured-messenger #search-message-list {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border !important;
+}
+
+.secured-messenger .tab-sec {
+    border-bottom-color: $dt-border !important;
+}
+
+/* Secured Messenger — master-detail panes + empty states */
+.secured-messenger .all-msg,
+.secured-messenger .smx-reader {
+    border-color: $dt-border !important;
+}
+
+.secured-messenger .smx-empty-title {
+    color: $dt-text !important;
+}
+
+.secured-messenger .smx-empty-sub {
+    color: #9ca3af !important;
+}
+
+.secured-messenger .smx-empty-icon {
+    color: #4b5563 !important;
+}
+
+/* Secured Messenger — list-pane header */
+.secured-messenger .all-msg .center-column {
+    border-bottom-color: $dt-border !important;
+}
+
+.secured-messenger .mutli-slct-btn {
+    color: $dt-text !important;
+}
+
+/* Secured Messenger — conversation rows */
+.secured-messenger .smx-msg-row:hover {
+    background: #22262e !important;
+}
+
+.secured-messenger .smx-msg-row--active,
+.secured-messenger .smx-msg-row--active:hover {
+    background: rgba(127, 204, 92, 0.12) !important;
+}
+
+.secured-messenger .smx-msg-name {
+    color: #e5e7eb !important;
+}
+
+.secured-messenger .smx-msg-row--unread .smx-msg-name {
+    color: #ffffff !important;
+}
+
+.secured-messenger .smx-msg-meta {
+    color: #9ca3af !important;
+}
+
+.secured-messenger .smx-msg-row--unread .smx-msg-meta {
+    color: #c8cdd5 !important;
+}
+
+.secured-messenger .smx-msg-time {
+    color: #6b7280 !important;
+}
+
+.secured-messenger .smx-msg-more {
+    background: #22312a !important;
+    color: #7fcc5c !important;
+}
+
+.secured-messenger .smx-msg-unread-dot {
+    background: #7fcc5c !important;
+}
+
+/* Strength meter */
+.pws-bar {
+    background: $dt-surface-3 !important;
+}
+
+.pws-bar--weak {
+    background: $dt-danger !important;
+}
+
+.pws-bar--fair {
+    background: $dt-warning !important;
+}
+
+.pws-bar--good {
+    background: $dt-info !important;
+}
+
+.pws-bar--strong {
+    background: $dt-success !important;
+}
+
+.pws-label {
+    color: $dt-text-muted !important;
+}
+
+/* =============================================================
+   Status / banners
+   ============================================================= */
+.pwd-status--ok,
+.fb-success,
+.tfa-status--on {
+    background: $dt-success-soft !important;
+    color: $dt-success !important;
+    border: 1px solid rgba(74, 222, 128, .25) !important;
+}
+
+.pwd-status--err,
+.vl-error {
+    background: $dt-danger-soft !important;
+    color: $dt-danger !important;
+    border: 1px solid rgba(248, 113, 113, .25) !important;
+}
+
+.tfa-status--off {
+    background: $dt-surface-overlay-hi !important;
+    color: $dt-text-secondary !important;
+}
+
+.rk-warning {
+    background: $dt-warning-soft !important;
+    color: $dt-warning !important;
+}
+
+.vault-auto-banner {
+    background: $dt-info-soft !important;
+    border: 1px solid rgba(96, 165, 250, .25) !important;
+    color: $dt-info !important;
+}
+
+.recovery-key-display {
+    background: $dt-surface-1 !important;
+    border: 1px solid $dt-border !important;
+}
+
+.recovery-key-display code {
+    color: $dt-mint !important;
+}
+
+/* =============================================================
+   Popups / popovers / context menus / modals
+   ============================================================= */
+.model-popup,
+.act-clr,
+.profile-menu,
+.settings-menu,
+.context-menu,
+.home-context-menu,
+.rf-context-menu,
+.search-results {
+    background-color: $dt-surface-3 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+    box-shadow: $dt-shadow-pop !important;
+}
+
+.modalDialog > div {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+    box-shadow: $dt-shadow-pop !important;
+}
+
+.modalDialog {
+    background-color: rgba(0, 0, 0, .55) !important;
+}
+
+.ctx-file-name,
+.ctx-file-header {
+    color: $dt-text !important;
+    border-color: $dt-divider !important;
+}
+
+.dropbtn,
+.language-dropdown > .dropdown-item-container {
+    background-color: $dt-surface-3 !important;
+    color: $dt-text !important;
+}
+
+.dropbtn.active {
+    color: $dt-text !important;
+    border: 1px solid $dt-text-secondary !important;
+}
+
+.language-item:hover {
+    background-color: $dt-surface-overlay-hi !important;
+    color: $dt-link !important;
+}
+
+.dropdown-content {
+    background-color: $dt-surface-3 !important;
+    color: $dt-text !important;
+
+    :hover {
+        background-color: $dt-surface-overlay-hi !important;
+        color: $dt-link !important;
+    }
+}
+
+.dropdown-content dd:hover,
+.password-filter-dropdown-content dd:hover,
+.password-create-dropdown-content dd:hover {
+    background-color: $dt-surface-overlay-hi !important;
+    color: $dt-link !important;
+}
+
+.password-create-dropdown-content {
+    background-color: $dt-surface-3 !important;
+    color: $dt-text-secondary !important;
+}
+
+.password-create-dropdown-content a:hover,
+.password-create-dropdown-content a.active {
+    color: $dt-link !important;
+    background-color: $dt-surface-overlay-hi !important;
+}
+
+.password-create-dropdown-content dd a,
+.notification-popup a {
+    color: $dt-text-secondary !important;
+}
+
+.password-filter-dropdown-content {
+    background: $dt-surface-3 !important;
+
+    label {
+        color: $dt-text-secondary !important;
+    }
+
+    label:hover {
+        color: $dt-link !important;
+    }
+}
+
+.password-filter-dropdown-content ul,
+.password-filter-dropdown-content li {
+    border-bottom: none;
+}
+
+.try-upgrade-plan-popup-container {
+    color: $dt-text-secondary !important;
+}
+
+.custom-password-help-hoverpopup {
+    background-color: $dt-surface-3 !important;
+    border: 1px solid $dt-border-strong !important;
+
+    .txt-clr {
+        color: $dt-text-secondary !important;
+    }
 }
 
 .notif-popup-bck {
     background-color: transparent !important;
 }
 
+/* Sub-menus / sub-headers */
+.page-heading {
+    background-color: $dt-surface-1 !important;
+    color: $dt-text !important;
+}
+
+.sub-box-bsns,
+.sub-head-clr,
+.lable-txt,
+.label-text label {
+    color: $dt-text-secondary !important;
+}
+
+.fle-nme {
+    color: $dt-text-secondary !important;
+}
+
+.text-style {
+    color: $dt-text !important;
+}
+
+bold.text-style {
+    color: $dt-text !important; /* fixed: previously #121212 (invisible) */
+    font-weight: 700;
+}
+
+/* =============================================================
+   Misc legacy elements
+   ============================================================= */
+.signin-right-img {
+    background-color: $dt-surface-2;
+}
+
+.link-box {
+    background-color: $dt-surface-2 !important;
+    border: 1px solid $dt-border !important;
+    box-shadow: none !important;
+}
+
+.link-txt,
+.txt-clr,
+.highlight-text > span {
+    color: $dt-link !important;
+}
+
+.desc-txt,
+.nav-link span,
+.select-email,
+.filter-text,
+.notifipopup-show,
+.grn-clr {
+    color: $dt-text-secondary !important;
+}
+
+.filter-text:hover {
+    color: $dt-text !important;
+}
+
+.sup-text-blur {
+    background-color: $dt-surface-2 !important;
+    border: 1px solid $dt-border !important;
+}
+
+.btn-hide,
+.alert-box {
+    background-color: $dt-surface-3 !important;
+    border: 1px solid $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.alert-box.alert {
+    background-color: $dt-danger-soft !important;
+    border: 1px solid $dt-danger !important;
+    color: $dt-danger !important;
+}
+
+.fnt-high {
+    background-color: $dt-surface-3 !important;
+}
+
+.mutli-slct-btn {
+    color: $dt-link !important;
+}
+
+.mre-actn-box {
+    background-color: $dt-surface-3 !important;
+    border: 1px solid $dt-border !important;
+}
+
+.mre-actn-box:hover {
+    background-color: $dt-surface-4 !important;
+    color: $dt-text !important;
+}
+
+.rcnt-fld-bx {
+    background-color: $dt-surface-2;
+    border: 1px solid $dt-border !important;
+    box-shadow: none !important;
+    color: $dt-text-secondary !important;
+}
+
+.add-fldr {
+    border-style: dotted !important;
+}
+
+.find-fle-nme {
+    color: $dt-text-secondary !important;
+}
+
 .file-dec-icon {
     content: url(/images/IcoClnGrn.svg);
 }
 
-
-.page-heading {
-    background-color: $colDrkMdBushd;
-}
-
-.sub-head-clr,
-.lable-txt {
-    color: $colTxtlble !important;
-}
-
-.model-popup {
-    border: none;
-}
-
-.add-fldr-img {
-    filter: brightness(0) saturate(90%) invert(50%);
-}
-
-.fldr-img, .arrow-img, .faq-img, .idea-img, .page-title::before {
-    filter: brightness(0) saturate(90%) invert(50%);
-}
-
-.filter-text {
-    color: $colTxtlble !important;
-}
-
-.filter-text:hover {
-    color: $TbleBg;
+.email-txt-ovflw,
+.deflt-txt-clr,
+.rply-icon,
+.dlt-icon {
+    color: $dt-text !important;
 }
 
 .inbox-section table {
-    background: $colBordBgrnd;
+    background: $dt-surface-2 !important;
 }
 
 .inbox-section table:hover {
-    background: $colTxtlble;
-}
-
-.email-txt-ovflw, .deflt-txt-clr {
-    color: $colTxtBd;
-}
-
-.rply-icon,
-.dlt-icon {
-    color: $colTxtBd;
+    background: $dt-surface-3 !important;
 }
 
 .visble-button {
-    background: $SdebrbgndClr;
-    color: $colBord;
+    background: $dt-surface-3;
+    color: $dt-link;
 }
 
 .secured-messenger select {
-    color: $colBord !important;
+    color: $dt-link !important;
+    background: $dt-surface-2 !important;
     font-weight: 700;
 }
 
 .secured-messenger option {
-    color: $colTxtlble;
+    color: $dt-text-secondary;
+    background: $dt-surface-2;
 }
 
 .secured-messenger option:hover {
-    color: $colBord;
+    color: $dt-link;
 }
 
 .multi-actn-btn {
-    background-color: $colDrkMdL3 !important;
-    color: $colTxtlble !important;
-    border: $colTxtlble !important;
-}
-
-.multi-actn-btn:hover {
-    background-color: $colDrkMdL3;
-}
-
-.button.border, .model-popup {
-    border: 1px solid $SdebrbgndClr !important;
-}
-
-.button.success {
-    background-color: $BtnBackClr !important;
-    color: $colDefTxt !important;
-}
-
-.sub-box-bsns {
-    background: $colDrkMdBushd;
-}
-
-.secured-messenger option:hover {
-    color: $colBord;
-}
-
-.manage-acc-sec a img, .notifi-img img {
-    filter: invert(1) !important;
-}
-
-.manage-acc-sec a:hover {
-    background: $colDrkMdBushd;
-}
-
-.notification-popup {
-    border: 1px solid $SdebrbgndClr !important;
-
-    > .table {
-        border-collapse: collapse;
-    }
-
-    tr {
-        border: 1px solid $colDrkMdL3 !important; /* Row border color */
-    }
-}
-
-.password-filter-dropdown-content {
-    background: $SdebrbgndClr !important;
-
-    label {
-        color: $colTxtlble !important;
-    }
-
-    label:hover {
-        color: $colBord !important;
-    }
-}
-
-.password-filter-dropdown-content ul, .password-filter-dropdown-content li {
-    border-bottom: none;
-}
-
-
-.text-fnt-size {
-    color: $colDrkMdL3 !important;
-}
-
-.grey-clr {
-    color: $colTxtlble !important;
-    font-weight: 700;
-}
-
-.second .grey-clr {
-    color: #575757 !important;
-}
-
-
-.home-index .fle-nme {
-    color: $colTxtBd;
-}
-
-.txt-clr, .highlight-text > span {
-    color: $colDrkMdHglhtPrm !important;
-}
-
-.abt-axc > span {
-    color: $colTxtlble;
-}
-
-.home-hover {
-    background-color: $SdebrbgndClr !important;
-
-    .txt-clr {
-        color: $colTxtlble !important;
-    }
-}
-
-.dropbtn, .language-dropdown > .dropdown-item-container, .home-context-menu, .context-menu {
-    background-color: $SdebrbgndClr !important;
-    color: $colTxtBd;
-}
-
-.selected-file, .share-list, .blck-bg {
-    background-color: $TbleBg !important;
-}
-
-.empty-list {
-    filter: opacity(0.8);
-}
-
-.menu-image, .mre-actn-box img, .close-img, .clck-img, .secrets-type-icon-desktop, .display-type > img {
-    filter: grayscale(1) brightness(10);
-}
-
-.eye-icon {
-    filter: grayscale(1) brightness(15);
-}
-
-.file-keySh-icon {
-    filter: invert(1) !important;
-}
-
-.actv-subs {
-    background-color: #ebebeb !important;
-}
-
-
-.flex-start .button {
-    background-color: $SdebrbgndClr;
-    color: $colTxtlble;
-}
-
-.button.border {
-    background-color: $TbleBg !important;
-    color: $colTxtBd !important;
-}
-
-.button.border:hover {
-    background-color: $TbleBg;
-}
-
-.dropbtn.active {
-    color: $colTxtBd !important;
-    border: 1px solid $colTxtBd !important; //language drop down
-}
-
-.drp-dwn, .arw-img, .passwords-icon, .notes-icon, .secret-icon, .notifiarrow {
-    filter: brightness(0) invert(1); //language drop down image
-}
-
-.language-dropdown, .form-control {
-    border: $colTxtlble;
-}
-
-.notification-popup tr td {
-    color: $colTxtlble !important;
-
-    :hover {
-        color: $colDrkMdHglhtPrm;
-        background-color: $TbleBg;
-    }
-}
-
-.language-item:hover {
-    background-color: $TbleBg;
-    color: $colDrkMdHglhtPrm !important;
-}
-
-.password-create-dropdown-content dd a,
-.notification-popup a {
-    color: $colTxtlble !important;
-}
-
-.grn-clr:hover,
-.grn-clr:focus {
-    color: #48772c;
-}
-
-.dropdown-content {
-    background-color: $colBordBgrnd !important;
-
-    :hover {
-        background-color: $TbleBg !important;
-        color: $colDrkMdHglhtPrm !important;
-    }
-}
-
-.back-arrow, .Icon-folder, .icon-next-arrow, .filter-trigger, .filter-image, .deletebin {
-    filter: invert(50%) !important;
-}
-
-.tick-icon {
-    filter: brightness(0) saturate(100%) invert(89%) sepia(13%) saturate(394%) hue-rotate(49deg) brightness(103%) contrast(101%);
-}
-
-.dropdown-content dd:hover,
-.password-filter-dropdown-content dd:hover,
-.password-create-dropdown-content dd:hover {
-    background-color: $colDrkMdL3 !important;
-    color: $colDrkMdHglhtPrm;
-}
-
-.try-upgrade-plan-popup-container {
-    color: $colTxtlble !important;
-}
-
-.vault-body label,
-.vault-body span {
-    color: $colTxtlble !important;
-}
-
-.multi-actn-btn {
-    color: #fff;
+    background-color: $dt-surface-3 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
 
     > img {
         filter: brightness(1.5);
     }
 }
 
-.file-picker-modalDialog .file-picker-dir-content {
-    color: #fff !important;
-    background: #575757 !important;
+.multi-actn-btn:hover {
+    background-color: $dt-surface-4;
 }
 
-.file-picker-modalDialog > div, .file-picker-dir-content .context-menu-action {
-    background-color: $colTxtlble !important;
-    color: #fff !important;
+.selected-file,
+.share-list,
+.blck-bg {
+    background-color: $dt-surface-3 !important;
 }
 
-.file-picker-dir-content .file-list li {
-    background-color: #A3A3A3;
-    color: #fff;
+.empty-list {
+    filter: opacity(0.85);
 }
 
-.file-picker-modalDialog .filepicker-dropdown-menu-action {
-    background-color: #A3A3A3;
-}
-
-.file-picker-modalDialog .file-path {
-    color: #fff !important;
-}
-
-.vlt-body .file-name {
-    color: $colTxtlble !important;
-}
-
-.file-list-item:hover .file-path, .file-grid-item:hover .file-path, .select-item .file-path {
-    color: #A4A4A4 !important;
-}
-
-.display-type > img.selected {
-    filter: invert(0) !important;
-}
-
-.breadcrumb-part {
-    color: $colTxtBd;
-}
-
-.notif-icon:hover,
-.sttng-icon:hover {
-    filter: brightness(0) invert(1);
-}
-
-.notifipopup-show, .grn-clr {
-    color: $colTxtlble !important;
-}
-
-.file-masKey-icon {
-    filter: brightness(0) invert(1) !important;
-}
-
-.top-menu a.active .sttng-icon,
-.top-menu a.active .notif-icon {
-    filter: brightness(0) invert(1) !important;
-}
-
-.custom-password-help-hoverpopup {
-    background-color: $SdebrbgndClr !important;
+.home-hover {
+    background-color: $dt-surface-3 !important;
 
     .txt-clr {
-        color: $colTxtlble !important;
+        color: $dt-text-secondary !important;
     }
 }
 
 .popup-small h2,
 .popup-large h2 {
-    color: #fff !important;
-}
-
-.grn-bg {
-    border: 1px #48772c !important;
-}
-
-.btn-large.font-medium.button {
-    background-color: #575757 !important;
-    border: none;
-    color: #fff !important;
+    color: $dt-text !important;
 }
 
 .notification-badge {
-    color: #232323;
-    background: #ffffff;
-    z-index: (1);
+    color: $dt-text-on-brand;
+    background: $dt-brand;
+    z-index: 1;
 }
 
-/*.settings-menu-item-container .stngs-menu-icon.IcoEye :hover {
-    filter: grayscale(1) brightness(20) !important;
-}*/
-
-#inactivityForm :hover {
-    color: $colDrkMdHglhtPrm !important;
+.empty-view-heading {
+    color: $dt-text !important;
 }
 
-#inactivity input[type=radio]:checked + label {
-    color: $colDrkMdHglhtPrm !important;
+.validation-message,
+.error-message {
+    color: $dt-danger !important;
+}
+
+.input-error {
+    border: 1px solid $dt-danger !important;
+    box-shadow: 0 0 0 3px $dt-danger-soft !important;
+}
+
+/* Settings/labels */
+.label-text label,
+.lable-txt,
+.fb-label,
+.fc-label {
+    color: $dt-text-secondary !important;
+}
+
+.vault-body label,
+.vault-body span {
+    color: $dt-text-secondary !important;
+}
+
+.text-fnt-size {
+    color: $dt-text-secondary !important;
+}
+
+.grey-clr {
+    color: $dt-text-muted !important;
+    font-weight: 700;
+}
+
+.second .grey-clr {
+    color: $dt-text-muted !important;
+}
+
+.home-index .fle-nme {
+    color: $dt-text !important;
+}
+
+.abt-axc > span {
+    color: $dt-text-secondary;
+}
+
+.breadcrumb-part {
+    color: $dt-text !important;
+}
+
+.notifipopup-show,
+.grn-clr {
+    color: $dt-text-secondary !important;
+}
+
+.grn-clr:hover,
+.grn-clr:focus {
+    color: $dt-link !important;
+}
+
+.actv-subs {
+    background-color: $dt-surface-3 !important;
+    color: $dt-text !important;
+}
+
+/* =============================================================
+   File-picker dialog (kept dark with neutral surface)
+   ============================================================= */
+.file-picker-modalDialog .file-picker-dir-content {
+    color: $dt-text !important;
+    background: $dt-surface-3 !important;
+}
+
+.file-picker-modalDialog > div,
+.file-picker-dir-content .context-menu-action {
+    background-color: $dt-surface-3 !important;
+    color: $dt-text !important;
+}
+
+.file-picker-dir-content .file-list li {
+    background-color: $dt-surface-2;
+    color: $dt-text;
+}
+
+.file-picker-modalDialog .filepicker-dropdown-menu-action {
+    background-color: $dt-surface-2;
+}
+
+.file-picker-modalDialog .file-path {
+    color: $dt-text !important;
+}
+
+.vlt-body .file-name {
+    color: $dt-text-secondary !important;
+}
+
+.file-list-item:hover .file-path,
+.file-grid-item:hover .file-path,
+.select-item .file-path {
+    color: $dt-text-secondary !important;
+}
+
+/* =============================================================
+   Toasts (HomeNew layout)
+   ============================================================= */
+.toast {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+    box-shadow: $dt-shadow-pop !important;
+}
+
+.toast--success {
+    background: $dt-success-soft !important;
+    color: $dt-success !important;
+    border-color: rgba(74, 222, 128, .35) !important;
+}
+
+.toast--error {
+    background: $dt-danger-soft !important;
+    color: $dt-danger !important;
+    border-color: rgba(248, 113, 113, .35) !important;
+}
+
+.toast--warning {
+    background: $dt-warning-soft !important;
+    color: $dt-warning !important;
+    border-color: rgba(251, 191, 36, .35) !important;
+}
+
+/* =============================================================
+   Quick Actions — clean-up attention pill
+   (visible only while files are open / pending re-encryption)
+   ============================================================= */
+.qa-cleanup-pill {
+    background: rgba(251, 191, 36, .10) !important;
+    border: 1px solid rgba(251, 191, 36, .35) !important;
+    border-left: 3px solid $dt-warning !important;
+}
+
+.qa-cleanup-icon {
+    img {
+        /* re-tint the broom svg to warm amber on dark */
+        filter: brightness(0) saturate(100%) invert(82%) sepia(40%) saturate(660%) hue-rotate(360deg) brightness(101%) contrast(101%) !important;
+    }
+}
+
+.qa-cleanup-title {
+    color: #fff !important;
+}
+
+.qa-cleanup-sub {
+    color: $dt-text-secondary !important;
+}
+
+/* =============================================================
+   Support page – special gradient hero
+   ============================================================= */
+.sup-search-card {
+    background: linear-gradient(135deg, $dt-surface-3, $dt-surface-2) !important;
+    border: 1px solid $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.sup-search-box {
+    background: $dt-surface-1 !important;
+    border: 1.5px solid $dt-border-strong !important;
+}
+
+.sup-search-input {
+    color: $dt-text !important;
+}
+
+.sup-search-input::placeholder {
+    color: $dt-text-muted !important;
+}
+
+.faq-q {
+    color: $dt-text !important;
+}
+
+.faq-a {
+    color: $dt-text-secondary !important;
+}
+
+.faq-chevron {
+    color: $dt-text-muted !important;
+}
+
+/* =============================================================
+   Upgrade page extras
+   ============================================================= */
+.up-hero-badge {
+    background: $dt-warning-soft !important;
+    color: $dt-warning !important;
+    border: 1px solid rgba(251, 191, 36, .25) !important;
+}
+
+.up-plan-popular {
+    background: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+}
+
+.up-feat {
+    color: $dt-text !important;
+}
+
+.up-feat--no {
+    color: $dt-text-muted !important;
+}
+
+.up-plan-cta {
+    background: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+}
+
+.up-plan-cta--current {
+    background: $dt-surface-3 !important;
+    color: $dt-text-muted !important;
+}
+
+.up-plan-cta--pro {
+    background: $dt-brand-strong !important;
+    color: $dt-text-on-brand !important;
+}
+
+/* =============================================================
+   Image / icon adjustments (inversions for light-on-dark icons)
+   ============================================================= */
+.add-fldr-img,
+.fldr-img,
+.arrow-img,
+.faq-img,
+.idea-img,
+.nav-page-title::before {
+    filter: brightness(0) saturate(90%) invert(70%);
+}
+
+.manage-acc-sec a img,
+.notifi-img img {
+    filter: invert(1) !important;
+}
+
+.manage-acc-sec a:hover {
+    background: $dt-surface-3;
+}
+
+.drp-dwn,
+.arw-img,
+.passwords-icon,
+.notes-icon,
+.secret-icon,
+.notifiarrow,
+.file-keySh-icon,
+.file-masKey-icon {
+    filter: brightness(0) invert(1);
+}
+
+.menu-image,
+.mre-actn-box img,
+.close-img,
+.clck-img,
+.secrets-type-icon-desktop,
+.display-type > img {
+    filter: grayscale(1) brightness(8);
+}
+
+.eye-icon {
+    filter: grayscale(1) brightness(12);
+}
+
+.back-arrow,
+.Icon-folder,
+.icon-next-arrow,
+.filter-trigger,
+.filter-image,
+.deletebin {
+    filter: invert(70%) !important;
+}
+
+.tick-icon {
+    filter: brightness(0) saturate(100%) invert(89%) sepia(13%) saturate(394%) hue-rotate(49deg) brightness(103%) contrast(101%);
+}
+
+.notif-icon:hover,
+.sttng-icon:hover,
+.top-menu a.active .sttng-icon,
+.top-menu a.active .notif-icon {
+    filter: brightness(0) invert(1) !important;
+}
+
+.display-type > img.selected {
+    filter: invert(0) !important;
 }
 
 .stngs-menu-icon.IcoEye,
@@ -609,4 +1503,1443 @@ input[readonly="readonly"], textarea[readonly] {
 .stngs-menu-icon.IcoInvtFrnd,
 .stngs-menu-icon.IcoDkMd {
     filter: invert(1) !important;
+}
+
+/* =============================================================
+   Menu icons — dark-theme SVG visibility patch
+   --------------------------------------------------------------
+   Most of our chrome icons ship as dark-on-light SVGs loaded via
+   CSS `content: url(...)` or `<img src=...>`. On dark surfaces
+   they read as black-on-charcoal and effectively disappear.
+   These rules invert their luminance so they appear as light /
+   white line-art on dark backgrounds. Brand-colored / status
+   icons keep their hue via hue-rotate where needed.
+   ============================================================= */
+
+/* Sidebar nav icons — all variants of `.nav-icon` load SVGs
+   through `content:` in HomeNew/Sidebar.scss. Tint to near-white
+   so the side menu remains legible against $dt-surface-1. */
+.sidebar .nav-icon,
+.nav-item .nav-icon,
+.upgrade-btn .nav-icon {
+    filter: brightness(0) invert(1) !important;
+    opacity: .85 !important;
+}
+
+/* Active nav row — bump brightness slightly so the icon picks
+   up the brand-soft selection background. */
+.nav-item--active .nav-icon,
+.nav-item .active .nav-icon {
+    opacity: 1 !important;
+}
+
+/* Top-bar icon buttons (notifications bell, settings gear) —
+   the gear is an <img src="…IcoExtrFtrs1.svg">; the bell is an
+   inline SVG with currentColor strokes and doesn't need a filter.
+   Target only <img> children so we don't double-tint the SVGs. */
+.icon-btn > img {
+    filter: brightness(0) invert(1) !important;
+    opacity: .9;
+}
+
+.icon-btn:hover > img,
+.icon-btn--active > img {
+    opacity: 1;
+}
+
+/* Settings popup row icons — `<img class="encrp-file-property">`
+   and `<img class="Ico-advsd-setts">` (Advanced Settings link). */
+.encrp-file-property,
+.Ico-advsd-setts {
+    filter: brightness(0) invert(1) !important;
+    opacity: .85;
+}
+
+/* Profile menu (sidebar footer popup) — each row carries a
+   `pm-item-icon` plus a per-row modifier that injects the SVG via
+   `content:`. Tint them so the icons stay visible on the dark
+   popup surface. The danger row keeps its red tint via the
+   pm-item--danger override, so do NOT filter that one. */
+.pm-item:not(.pm-item--danger) .pm-item-icon {
+    filter: brightness(0) invert(1) !important;
+    opacity: .9;
+}
+
+.pm-item--danger .pm-item-icon {
+    /* Re-tint the red danger icon for dark surfaces — keep hue,
+       just bump luminance so it still reads as red, not maroon. */
+    filter: brightness(1.15) saturate(1.1) !important;
+}
+
+/* Quick Action tiles — `<img src="images/default/IcoXxx.svg">`
+   inside `.qa-icon`. Light tint on dark; locked tiles keep the
+   amber lock badge (rendered as a separate SVG). */
+.qa-icon img,
+.qa-btn .qa-icon img {
+    filter: brightness(0) invert(1) !important;
+    opacity: .9;
+}
+
+.qa-btn:hover .qa-icon img {
+    opacity: 1;
+}
+
+/* Advanced Options popup — `.adv-nav-icon` / `.adv-row-icon`
+   wrap inline SVGs with their own brand strokes (#7c3aed,
+   #2563eb, #d97706). They already render fine on dark since
+   the strokes are colored, but the tinted background pill
+   (e.g. `#f5f3ff`, `#fff7ed`) reads as a bright halo on dark.
+   Mute the wrapper a hair so it feels native to the dark panel
+   without losing the brand-color cue. */
+.adv-nav-icon,
+.adv-row-icon {
+    filter: brightness(.94) saturate(.92);
+}
+
+/* radio / inactivity menu */
+#inactivityForm :hover {
+    color: $dt-link !important;
+}
+
+#inactivity input[type=radio]:checked + label {
+    color: $dt-link !important;
+}
+
+.language-dropdown,
+.form-control {
+    border-color: $dt-border !important;
+}
+
+.find-fle-nme {
+    color: $dt-text-secondary;
+}
+
+/* =============================================================
+   Settings popup (gear button, HomeNew)
+   Uses .sm-* selectors — none of which were covered above.
+   ============================================================= */
+.settings-menu {
+    background: $dt-surface-3 !important;
+    border: 1px solid $dt-border-strong !important;
+    color: $dt-text !important;
+    box-shadow: $dt-shadow-pop !important;
+}
+
+.sm-title {
+    color: $dt-text !important;
+}
+
+.sm-close {
+    background: transparent !important;
+    border: 1px solid $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+.sm-close:hover {
+    background: $dt-danger-soft !important;
+    color: $dt-danger !important;
+    border-color: $dt-danger !important;
+}
+
+.sm-divider {
+    background: $dt-divider !important;
+}
+
+.sm-section-label {
+    color: $dt-text-muted !important;
+}
+
+.sm-select {
+    background: $dt-surface-2 !important;
+    border: 1px solid $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.sm-select:focus {
+    border-color: $dt-brand !important;
+    box-shadow: 0 0 0 3px $dt-accent-ring !important;
+}
+
+.sm-select-chevron {
+    color: $dt-text-muted !important;
+}
+
+/* Inactivity radio chips */
+.sm-radio-item {
+    background: $dt-surface-2 !important;
+    border: 1.5px solid $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+.sm-radio-dot {
+    background: $dt-surface-3 !important;
+    border-color: $dt-border-strong !important;
+}
+
+.sm-radio-item--active {
+    background: $dt-brand !important;
+    border-color: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+}
+
+.sm-radio-item--active .sm-radio-dot {
+    background: $dt-text-on-brand !important;
+    border-color: $dt-text-on-brand !important;
+}
+
+/* Toggle rows */
+.sm-toggle-row {
+    background: transparent !important;
+}
+
+.sm-toggle-row:hover {
+    background: $dt-surface-overlay !important;
+}
+
+/* Locked rows — dim text + warm hover hint that maps to the
+   paid-gate popup that opens on click. */
+.sm-toggle-row--locked .sm-toggle-label,
+.sm-toggle-row--locked .sm-toggle-desc {
+    color: $dt-text-muted !important;
+}
+
+.sm-toggle-row--locked:hover {
+    background: $dt-warning-soft !important;
+}
+
+/* Same lock styling for the Advanced Options popup rows */
+.adv-nav-row--locked:hover,
+.adv-toggle-row--locked:hover {
+    background: $dt-warning-soft !important;
+}
+
+.adv-nav-row--locked .adv-nav-label,
+.adv-nav-row--locked .adv-nav-desc,
+.adv-toggle-row--locked .adv-row-label,
+.adv-toggle-row--locked .adv-row-desc {
+    color: $dt-text-muted !important;
+}
+
+/* =============================================================
+   Paid-gate dialog (single shared component for all upgrade prompts)
+   ============================================================= */
+.paid-gate-backdrop {
+    background: rgba(0, 0, 0, .55) !important;
+}
+
+.paid-gate-modal {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+    box-shadow: $dt-shadow-pop !important;
+}
+
+.pgm-title {
+    color: $dt-text !important;
+}
+
+.pgm-desc {
+    color: $dt-text-secondary !important;
+}
+
+.pgm-features {
+    background-color: rgba(0, 0, 0, .55) !important;
+}
+
+.pgm-perk {
+    color: $dt-text !important;
+}
+
+.pgm-cancel {
+    color: $dt-text-muted !important;
+    background: transparent !important;
+}
+
+.pgm-cancel:hover {
+    background: $dt-surface-overlay-hi !important;
+    color: $dt-text !important;
+}
+
+.sm-toggle-label {
+    color: $dt-text !important;
+}
+
+.sm-toggle-desc {
+    color: $dt-text-muted !important;
+}
+
+/* Generic toggle switch — used on the gear popup */
+.toggle-switch {
+    background: $dt-surface-4 !important;
+}
+
+.toggle-switch--on {
+    background: $dt-brand !important;
+}
+
+.toggle-thumb {
+    background: $dt-text !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .45) !important;
+}
+
+/* Advanced settings list */
+.sm-advanced-btn {
+    background: transparent !important;
+    color: $dt-text !important;
+}
+
+.sm-advanced-btn:hover {
+    background: $dt-surface-overlay !important;
+}
+
+.sm-adv-arrow {
+    color: $dt-text-muted !important;
+}
+
+/* =============================================================
+   Tools page (.tools-* / .tool-*)
+   ============================================================= */
+.tools-shell {
+    background: $dt-surface-0 !important;
+    color: $dt-text !important;
+}
+
+.tools-title {
+    color: $dt-text !important;
+}
+
+.tools-subtitle {
+    color: $dt-text-secondary !important;
+}
+
+.tools-search-box {
+    background: $dt-surface-2 !important;
+    border: 1px solid $dt-border !important;
+    box-shadow: none !important;
+}
+
+.tools-search-input {
+    color: $dt-text !important;
+    background: transparent !important;
+}
+
+.tools-search-input::placeholder {
+    color: $dt-text-muted !important;
+}
+
+.tools-group-header,
+.tools-group-name {
+    color: $dt-text !important;
+}
+
+.tools-group-count {
+    color: $dt-text-muted !important;
+}
+
+.tools-empty {
+    color: $dt-text-muted !important;
+}
+
+/* Tools cards (the grid items) */
+.tool-card {
+    background: $dt-surface-2 !important;
+    border: 1px solid $dt-border !important;
+    color: $dt-text !important;
+    box-shadow: $dt-shadow-card !important;
+}
+
+.tool-card:hover {
+    border-color: $dt-brand !important;
+    background: $dt-surface-3 !important;
+}
+
+.tool-card--active {
+    border-color: $dt-brand !important;
+    background: $dt-brand-soft !important;
+}
+
+.tool-card--danger {
+    border-color: rgba(248, 113, 113, .35) !important;
+}
+
+.tool-card--danger:hover {
+    border-color: $dt-danger !important;
+    background: $dt-danger-soft !important;
+}
+
+.tools-upgrade-ico {
+    filter: brightness(1.3);
+}
+
+/* Active tool panel (right side) */
+.tool-panel {
+    background: $dt-surface-2 !important;
+    border: 1.5px solid $dt-brand !important;
+    color: $dt-text !important;
+    box-shadow: $dt-shadow-card !important;
+}
+
+.tool-panel-header,
+.tool-panel-title-row {
+    color: $dt-text !important;
+}
+
+.tool-panel-name {
+    color: $dt-text !important;
+}
+
+.tool-panel-desc,
+.tool-body-intro {
+    color: $dt-text-secondary !important;
+}
+
+.tool-panel-close {
+    color: $dt-text-secondary !important;
+    background: transparent !important;
+    border: 1px solid $dt-border !important;
+}
+
+.tool-panel-close:hover {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+}
+
+.tool-panel-icon {
+    background: $dt-brand-soft !important;
+}
+
+/* Tool fields/inputs */
+.tool-field-label {
+    color: $dt-text-secondary !important;
+}
+
+.tool-field-hint {
+    color: $dt-text-muted !important;
+}
+
+.tool-text-input,
+.tool-textarea {
+    background: $dt-surface-1 !important;
+    border: 1px solid $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.tool-text-input:focus,
+.tool-textarea:focus {
+    border-color: $dt-brand !important;
+    box-shadow: 0 0 0 3px $dt-accent-ring !important;
+}
+
+.tool-text-input::placeholder,
+.tool-textarea::placeholder {
+    color: $dt-text-muted !important;
+}
+
+/* Tool drop zone */
+.tool-drop-zone {
+    background: $dt-surface-1 !important;
+    border: 2px dashed $dt-border-strong !important;
+    color: $dt-text-secondary !important;
+}
+
+.tool-drop-zone--active {
+    background: $dt-brand-soft !important;
+    border-color: $dt-brand !important;
+    color: $dt-text !important;
+}
+
+.tool-drop-zone--done {
+    background: $dt-success-soft !important;
+    border-color: $dt-success !important;
+    color: $dt-success !important;
+}
+
+.tool-path-row {
+    background: $dt-surface-1 !important;
+    border: 1px solid $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+.tool-browse-btn {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+}
+
+.tool-browse-btn:hover {
+    background: $dt-surface-4 !important;
+}
+
+/* Tool action buttons */
+.tool-action-btn {
+    background: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+    border: 1px solid $dt-brand !important;
+}
+
+.tool-action-btn:hover {
+    background: $dt-brand-strong !important;
+    border-color: $dt-brand-strong !important;
+}
+
+.tool-action-btn--scan {
+    background: $dt-info !important;
+    color: #062045 !important;
+    border-color: $dt-info !important;
+}
+
+.tool-action-btn--danger {
+    background: $dt-danger !important;
+    color: #2A0808 !important;
+    border-color: $dt-danger !important;
+}
+
+/* Tool radios / checkbox rows */
+.tool-radio-chip {
+    background: $dt-surface-2 !important;
+    border: 1.5px solid $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+.tool-radio-chip--active {
+    background: $dt-brand-soft !important;
+    border-color: $dt-brand !important;
+    color: $dt-brand !important;
+}
+
+.tool-checkbox-row {
+    color: $dt-text !important;
+}
+
+.tool-option-label,
+.tool-option-row {
+    color: $dt-text !important;
+}
+
+/* Tool banners */
+.tool-info-box {
+    background: $dt-info-soft !important;
+    border: 1px solid rgba(96, 165, 250, .25) !important;
+    color: $dt-info !important;
+}
+
+.tool-info-box--blue {
+    background: $dt-info-soft !important;
+    color: $dt-info !important;
+}
+
+.tool-success-banner {
+    background: $dt-success-soft !important;
+    border: 1px solid rgba(74, 222, 128, .25) !important;
+    color: $dt-success !important;
+}
+
+.tool-warning-banner {
+    background: $dt-warning-soft !important;
+    border: 1px solid rgba(251, 191, 36, .25) !important;
+    color: $dt-warning !important;
+}
+
+/* =============================================================
+   Help & Support page — pick up the remaining .sup-/.sco-/.faq-
+   nodes the earlier dark theme didn't cover.
+   ============================================================= */
+.sup-cat-card {
+    background: $dt-surface-2 !important;
+    border: 1.5px solid $dt-border !important;
+    color: $dt-text !important;
+}
+
+.sup-cat-card:hover {
+    border-color: $dt-brand !important;
+    background: $dt-surface-3 !important;
+    box-shadow: 0 4px 12px rgba(127, 204, 92, .12) !important;
+}
+
+.scc-icon {
+    background: $dt-brand-soft !important;
+}
+
+/* =============================================================
+   Recent Files extras (bulk bar + status-tinted file icons)
+   ============================================================= */
+.rf-bulk-bar {
+    background: $dt-brand !important;
+    border-color: $dt-brand-strong !important;
+}
+
+.rf-bulk-count {
+    background: rgba(255, 255, 255, .22) !important;
+    color: #fff !important;
+}
+
+.rf-bulk-btn {
+    background: rgba(255, 255, 255, .14) !important;
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, .26) !important;
+}
+
+.rf-bulk-btn:hover {
+    background: rgba(255, 255, 255, .26) !important;
+}
+
+.rf-bulk-btn--danger {
+    background: $dt-danger !important;
+    color: #2A0808 !important;
+    border-color: $dt-danger !important;
+}
+
+.rf-bulk-btn--danger:hover {
+    filter: brightness(.92);
+}
+
+.rf-empty-title {
+    color: $dt-text !important;
+}
+
+.rf-empty-sub {
+    color: $dt-text-muted !important;
+}
+
+.file-icon--enc {
+    background: $dt-info-soft !important;
+    color: $dt-info !important;
+}
+
+.file-icon--opened {
+    background: $dt-success-soft !important;
+    color: $dt-success !important;
+}
+
+.file-icon--shared {
+    background: $dt-warning-soft !important;
+    color: $dt-warning !important;
+}
+
+.file-icon--master-key {
+    background: rgba(167, 139, 250, .15) !important;
+    color: #C4B5FD !important;
+}
+
+.badge--master-key {
+    background: rgba(167, 139, 250, .15) !important;
+    color: #C4B5FD !important;
+}
+
+/* Sticky table header keeps the column titles visible while body scrolls */
+.trow--header {
+    background: $dt-surface-0 !important;
+    color: $dt-text-muted !important;
+    border-bottom: 1px solid $dt-border !important;
+}
+
+/* Scrollable body — match the slim scrollbar to the dark theme */
+.files-table-body {
+    scrollbar-color: rgba(255, 255, 255, .22) transparent !important;
+}
+
+.files-table-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .22) !important;
+}
+
+.files-table-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, .35) !important;
+}
+
+.tab-count {
+    background: rgba(255, 255, 255, .08) !important;
+    color: $dt-text-secondary !important;
+}
+
+.tab--active .tab-count {
+    background: rgba(15, 20, 26, .35) !important;
+    color: $dt-text-on-brand !important;
+}
+
+/* Context menu sub-bits */
+.context-menu,
+.rf-context-menu {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+    box-shadow: $dt-shadow-pop !important;
+}
+
+.ctx-file-header {
+    border-bottom: 1px solid $dt-divider !important;
+}
+
+.ctx-item {
+    color: $dt-text !important;
+    background: transparent !important;
+}
+
+.ctx-item:hover,
+.ctx-item:focus-visible {
+    background: $dt-surface-overlay-hi !important;
+    outline: none;
+}
+
+.ctx-icon {
+    color: $dt-text-secondary !important;
+}
+
+.ctx-item:hover .ctx-icon {
+    color: $dt-text !important;
+}
+
+.ctx-label {
+    color: inherit !important;
+}
+
+.ctx-item--danger {
+    color: $dt-danger !important;
+}
+
+.ctx-item--danger .ctx-icon {
+    color: $dt-danger !important;
+}
+
+.ctx-item--danger:hover {
+    background: $dt-danger-soft !important;
+    color: $dt-danger !important;
+}
+
+.ctx-item--locked {
+    color: $dt-text-muted !important;
+}
+
+.ctx-item--locked .ctx-icon {
+    color: $dt-text-muted !important;
+}
+
+.ctx-lock-badge {
+    background: $dt-warning-soft !important;
+    color: $dt-warning !important;
+}
+
+.ctx-divider {
+    background: $dt-divider !important;
+}
+
+.ctx-file-name {
+    color: $dt-text !important;
+}
+
+.ctx-file-size {
+    color: $dt-text-muted !important;
+}
+
+/* Subdued ghost variant for "Clear" in the bulk-action bar */
+.rf-bulk-btn--ghost {
+    background: transparent !important;
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, .35) !important;
+}
+
+.rf-bulk-btn--ghost:hover {
+    background: rgba(255, 255, 255, .12) !important;
+    border-color: rgba(255, 255, 255, .55) !important;
+}
+
+/* =============================================================
+   Tools / Help Center — tool-card sub-pieces (tc-*)
+   The earlier dark theme only covered the outer .tool-card. Inside
+   the card the title / desc / footer / open-link still inherited
+   light-mode hex colors and read as near-invisible on dark surfaces.
+   ============================================================= */
+.tc-name {
+    color: $dt-text !important;
+}
+
+.tc-desc {
+    color: $dt-text-secondary !important;
+}
+
+.tc-header {
+    color: $dt-text !important;
+}
+
+.tc-icon {
+    background: $dt-brand-soft !important;
+}
+
+.tc-footer {
+    border-top: 1px solid $dt-divider !important;
+}
+
+.tc-open {
+    color: $dt-brand !important;
+}
+
+.tool-card--danger .tc-open {
+    color: $dt-danger !important;
+}
+
+.tc-badge {
+    background: $dt-surface-overlay-hi !important;
+    color: $dt-text-secondary !important;
+}
+
+.tc-badge--new {
+    background: $dt-info-soft !important;
+    color: $dt-info !important;
+}
+
+.tc-badge--beta {
+    background: rgba(167, 139, 250, .15) !important;
+    color: #C4B5FD !important;
+}
+
+.tc-badge--danger {
+    background: $dt-danger-soft !important;
+    color: $dt-danger !important;
+}
+
+/* Help Center shell — reuses .tools-shell but its inline grouped
+   layout has its own `nav-*-ico` filter; cards have already been
+   covered above. Make sure the page titles surface clearly. */
+.tools-shell h1,
+.tools-shell h2,
+.tools-shell h3,
+.tools-shell p,
+.tools-shell label {
+    color: $dt-text !important;
+}
+
+.tools-shell .grey-clr,
+.tools-shell .fle-nme {
+    color: $dt-text-secondary !important;
+}
+
+/* =============================================================
+   Security status — tier pill + state-tinted rows
+   ============================================================= */
+.sec-tier-pill--free {
+    background: $dt-surface-overlay-hi !important;
+    color: $dt-text-secondary !important;
+}
+
+.sec-tier-pill--premium {
+    background: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+}
+
+.sec-tier-pill--business {
+    background: rgba(167, 139, 250, .18) !important;
+    color: #C4B5FD !important;
+}
+
+.security-row--warn .sec-title {
+    color: $dt-warning !important;
+}
+
+.security-row--lock {
+    opacity: .85;
+}
+
+.security-row--lock .sec-title {
+    color: $dt-text-secondary !important;
+}
+
+.security-row--clickable:hover {
+    background: $dt-surface-overlay !important;
+}
+
+.security-status-card {
+    background: $dt-surface-2 !important;
+}
+
+/* =============================================================
+   Per-file ProgressBar (inner-loop byte progress)
+   ============================================================= */
+.progres-sec {
+    background: $dt-surface-1 !important;
+    border-top: 1px solid $dt-border !important;
+}
+
+.progres-fle-txt {
+    color: $dt-text !important;
+}
+
+.progres-pct {
+    color: $dt-text-secondary !important;
+}
+
+.progress-container {
+    background: $dt-surface-3 !important;
+}
+
+.progress-bar {
+    background: $dt-brand !important;
+}
+
+.progress-background {
+    stroke: $dt-border-strong !important;
+}
+
+.progress-value {
+    stroke: $dt-brand !important;
+}
+
+.progress-text {
+    color: $dt-text !important;
+}
+
+.progress-context-menu {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+    box-shadow: $dt-shadow-pop !important;
+}
+
+.progress-context-menu .menu-item {
+    color: $dt-text !important;
+}
+
+.progress-context-menu .menu-item:hover {
+    background: $dt-surface-overlay-hi !important;
+}
+
+/* =============================================================
+   Drag-and-drop hint overlay (Recent Files / Secured Folders)
+   ============================================================= */
+.recent-files-card--dropping,
+.home-index--dropping {
+    border: 2px dashed $dt-brand !important;
+    background: $dt-brand-soft !important;
+    box-shadow: 0 0 0 4px rgba(127, 204, 92, .14) !important;
+}
+
+.rf-drop-hint {
+    background: rgba(15, 20, 26, .88) !important;
+    color: $dt-brand !important;
+}
+
+/* =============================================================
+   Batch operation toast (per-file failure summary)
+   ============================================================= */
+.batch-toast {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+    box-shadow: $dt-shadow-pop !important;
+}
+
+.bt-title {
+    color: $dt-text !important;
+}
+
+.bt-sub {
+    color: $dt-text-muted !important;
+}
+
+.bt-close {
+    background: transparent !important;
+    color: $dt-text-muted !important;
+}
+
+.bt-close:hover {
+    background: $dt-surface-overlay-hi !important;
+    color: $dt-text !important;
+}
+
+.bt-toggle {
+    background: transparent !important;
+    border-color: $dt-border-strong !important;
+    color: $dt-text-secondary !important;
+}
+
+.bt-toggle:hover {
+    background: $dt-surface-overlay-hi !important;
+    color: $dt-text !important;
+}
+
+.bt-failures {
+    border-top-color: $dt-divider !important;
+}
+
+.bt-failure-row {
+    border-bottom-color: $dt-divider !important;
+}
+
+.bt-failure-name {
+    color: $dt-text !important;
+}
+
+.bt-failure-reason {
+    color: $dt-danger !important;
+}
+
+.batch-toast--progress .bt-icon {
+    background: $dt-info-soft !important;
+    color: $dt-info !important;
+}
+
+.batch-toast--success {
+    border-color: rgba(74, 222, 128, .35) !important;
+}
+
+.batch-toast--success .bt-icon {
+    background: $dt-success-soft !important;
+    color: $dt-success !important;
+}
+
+.batch-toast--error {
+    border-color: rgba(248, 113, 113, .35) !important;
+}
+
+.batch-toast--error .bt-icon {
+    background: $dt-danger-soft !important;
+    color: $dt-danger !important;
+}
+
+.batch-toast--error .bt-title {
+    color: $dt-danger !important;
+}
+
+/* =============================================================
+   Update pill — Topbar (dark variants)
+   Normal stays amber-on-warm; mandatory stays red with pulse.
+   ============================================================= */
+.update-pill--normal {
+    background: rgba(251, 191, 36, .14) !important;
+    color: $dt-warning !important;
+    border-color: rgba(251, 191, 36, .35) !important;
+}
+
+.update-pill--normal:hover {
+    background: rgba(251, 191, 36, .22) !important;
+}
+
+.update-pill--mandatory {
+    /* keep the red — high-stakes signal regardless of theme */
+    background: #DC2626 !important;
+    color: #fff !important;
+    border-color: #B91C1C !important;
+}
+
+.update-pill-version {
+    background: rgba(255, 255, 255, .08) !important;
+    color: inherit !important;
+}
+
+/* =============================================================
+   File Password Window (FPW) — pops up when opening a file whose
+   password differs from the sign-in password. Styles live inline
+   in the Razor file (component-scoped); these rules retint the
+   chrome for dark mode.
+   ============================================================= */
+.fpw-overlay {
+    background: rgba(0, 0, 0, .55) !important;
+}
+
+.fpw-modal {
+    background: $dt-surface-2 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border !important;
+    box-shadow: $dt-shadow-card !important;
+}
+
+.fpw-header {
+    /* Brand green keeps strong identity on dark backgrounds */
+    background-color: $dt-brand !important;
+    border-bottom: 1px solid $dt-border !important;
+}
+
+.fpw-icon {
+    background: rgba(127, 204, 92, .15) !important;
+}
+
+.fpw-title {
+    color: $dt-text-on-brand !important;
+}
+
+.fpw-file {
+    color: $dt-text !important;
+}
+
+.fpw-file img {
+    filter: brightness(0) invert(1);
+    opacity: .8;
+}
+
+.axx-desc {
+    color: $dt-text-secondary !important;
+}
+
+.fpw-group label {
+    color: $dt-text-secondary !important;
+}
+
+.fpw-input {
+    background: $dt-surface-1 !important;
+    color: $dt-text !important;
+    border-color: $dt-border-strong !important;
+}
+
+.fpw-input::placeholder {
+    color: $dt-text-muted !important;
+}
+
+.fpw-error {
+    background: rgba(220, 38, 38, .14) !important;
+    color: #fca5a5 !important;
+}
+
+.fpw-footer {
+    border-top: 1px solid $dt-border !important;
+}
+
+.fpw-btn.cancel {
+    background: $dt-surface-3 !important;
+    color: $dt-text !important;
+    border: 1px solid $dt-border-strong !important;
+}
+
+.fpw-btn.cancel:hover {
+    background: $dt-surface-overlay !important;
+}
+
+.fpw-btn.confirm {
+    background: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+}
+
+.fpw-btn.confirm:disabled {
+    opacity: .4 !important;
+}
+
+.fpw-note {
+    background: $dt-surface-1 !important;
+    color: $dt-text-secondary !important;
+}
+
+.fpw-success {
+    background: rgba(127, 204, 92, .14) !important;
+    color: #86efac !important;
+}
+
+/* =============================================================
+   AxLoader — single brand spinner. Re-tinted for dark surfaces.
+   ============================================================= */
+.axl--fullpage {
+    background: rgba(15, 23, 42, 0.78) !important; /* dark scrim, slate-900 @ 78% */
+}
+
+.axl--fullpage .axl-msg,
+.axl .axl-msg {
+    color: $dt-text !important;
+}
+
+.axl-ring-track {
+    stroke: rgba(127, 204, 92, 0.18) !important; /* lifted brand for dark */
+}
+
+.axl-ring-arc {
+    stroke: $dt-brand !important;
+}
+
+.axl-key {
+    color: $dt-brand !important;
+}
+
+/* =============================================================
+   Password Manager — list cards + form chrome on dark surfaces.
+   ============================================================= */
+.pm-title,
+.pm-form-title,
+.pm-empty-title,
+.pm-card-title {
+    color: $dt-text !important;
+}
+
+.pm-subtitle,
+.pm-form-sub,
+.pm-empty-sub,
+.pm-card-type {
+    color: $dt-text-secondary !important;
+}
+
+/* Header buttons */
+.pm-icon-btn {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+.pm-icon-btn:hover {
+    background: $dt-surface-3 !important;
+    border-color: $dt-brand !important;
+    color: $dt-brand !important;
+}
+
+.pm-add-menu,
+.pm-export-menu {
+    background: $dt-surface-3 !important;
+    border-color: $dt-border-strong !important;
+}
+
+.pm-export-menu a,
+.pm-add-item-title {
+    color: $dt-text !important;
+}
+
+.pm-add-item-sub {
+    color: $dt-text-muted !important;
+}
+
+.pm-add-item:hover {
+    background: $dt-surface-overlay !important;
+}
+
+.pm-export-menu a:hover {
+    background: $dt-surface-overlay !important;
+}
+
+/* Search + filters */
+.pm-search-input {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.pm-search-input::placeholder {
+    color: $dt-text-muted !important;
+}
+
+.pm-search-icon {
+    color: $dt-text-muted !important;
+}
+
+.pm-chips {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border !important;
+}
+
+.pm-chip {
+    color: $dt-text-secondary !important;
+}
+
+.pm-chip:hover {
+    color: $dt-text !important;
+}
+
+.pm-chip--active {
+    background: $dt-surface-3 !important;
+    color: $dt-brand !important;
+}
+
+.pm-type-chip {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+.pm-type-chip:hover {
+    color: $dt-text !important;
+    border-color: $dt-border-strong !important;
+}
+
+.pm-type-chip--active {
+    background: $dt-brand !important;
+    border-color: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+}
+
+.pm-sort {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border !important;
+    color: $dt-text !important;
+}
+
+/* Cards */
+.pm-card {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border !important;
+}
+
+.pm-card:hover,
+.pm-card:focus-visible {
+    border-color: transparent !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.20) !important;
+}
+
+.pm-card-shared {
+    background: $dt-surface-3 !important;
+    border-color: $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+/* Empty state */
+.pm-empty {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border-strong !important;
+}
+
+/* Form chrome */
+.pm-form-shell {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border !important;
+}
+
+.pm-form-header,
+.pm-form-footer {
+    background: $dt-surface-3 !important;
+    border-color: $dt-border !important;
+}
+
+.pm-form-back {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+.pm-form-back:hover {
+    background: $dt-surface-overlay !important;
+    color: $dt-text !important;
+}
+
+.pm-form-row label {
+    color: $dt-text !important;
+}
+
+.pm-form-input,
+.pm-form-textarea {
+    background: $dt-surface-1 !important;
+    border-color: $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.pm-form-input::placeholder,
+.pm-form-textarea::placeholder {
+    color: $dt-text-muted !important;
+}
+
+.pm-form-display {
+    background: $dt-surface-1 !important;
+    border-color: $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.pm-form-mini-btn {
+    color: $dt-text-secondary !important;
+}
+
+.pm-form-mini-btn:hover {
+    background: $dt-surface-overlay !important;
+    color: $dt-brand !important;
+}
+
+.pm-btn--ghost {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border-strong !important;
+    color: $dt-text !important;
+}
+
+.pm-btn--ghost:hover {
+    background: $dt-surface-overlay !important;
+}
+
+.pm-btn--danger {
+    background: $dt-surface-2 !important;
+}
+
+/* ── Sidebar + list layout (PM) dark-theme ─────────────────── */
+.pm-rail,
+.pm-main {
+    background: $dt-surface-2 !important;
+    border-color: $dt-border !important;
+}
+
+.pm-rail-head {
+    border-bottom-color: $dt-border !important;
+}
+
+.pm-rail-title {
+    color: $dt-text !important;
+}
+
+.pm-rail-sub {
+    color: $dt-text-secondary !important;
+}
+
+.pm-rail-item {
+    color: $dt-text-secondary !important;
+}
+
+.pm-rail-item:hover {
+    background: $dt-surface-overlay !important;
+    color: $dt-text !important;
+}
+
+.pm-rail-item--active {
+    background: $dt-surface-overlay !important;
+    color: $dt-brand !important;
+}
+
+.pm-rail-item--active .pm-rail-item-icon {
+    color: $dt-brand !important;
+}
+
+.pm-rail-item-count {
+    background: $dt-surface-3 !important;
+    border-color: $dt-border !important;
+    color: $dt-text-secondary !important;
+}
+
+.pm-rail-item--active .pm-rail-item-count {
+    background: $dt-brand !important;
+    border-color: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+}
+
+.pm-rail-sep,
+.pm-rail-foot {
+    border-color: $dt-border !important;
+    background: transparent !important;
+}
+
+.pm-main-header {
+    border-bottom-color: $dt-border !important;
+}
+
+.pm-main-title {
+    color: $dt-text !important;
+}
+
+.pm-main-count {
+    color: $dt-text-secondary !important;
+}
+
+.pm-row {
+    background: transparent !important;
+}
+
+.pm-row:hover,
+.pm-row:focus-visible {
+    background: $dt-surface-overlay !important;
+    border-color: $dt-border !important;
+}
+
+.pm-row-title {
+    color: $dt-text !important;
+}
+
+.pm-row-subtitle {
+    color: $dt-text-secondary !important;
+}
+
+.pm-row-type {
+    color: $dt-text-muted !important;
+}
+
+.pm-row-chevron {
+    color: $dt-text-secondary !important;
+}
+
+.pm-row-shared {
+    background: $dt-surface-3 !important;
+    border-color: $dt-border !important;
+    color: $dt-text-secondary !important;
 }

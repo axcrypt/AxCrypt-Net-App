@@ -1,0 +1,89 @@
+@using AxCrypt.App.Entitlement.Contracts
+@using AxCrypt.App.Shared.Desktop.Services
+@using AxCrypt.App.Shared.Desktop.ViewModels.Home
+@using AxCrypt.App.Shared.Desktop.Models
+@using AxCrypt.App.Shared.Services
+
+@inject ActionsViewModel? homeActionModel
+@inject UserService userService
+@inject PaidFeaturegateService paidFeaturegateService
+@inject IFeatureUsageProvider usage
+
+<section class="card">
+    <div class="card-header-row">
+        <h2 class="section-title">Quick Actions</h2>
+        <span class="card-header-hint">One-click access to the things you do most — open, encrypt, decrypt, or share.</span>
+    </div>
+
+    <AxCrypt.App.Shared.Desktop.Components.HomePage.CleanupActionRow IsCleanUpRequired=@homeActionModel!.AreFilesPending ActionFor="Files"/>
+
+    <div class="quick-actions-grid">
+        @foreach (QuickActionItem qa in QuickActionCatalog.Items)
+        {
+            <QuickActionTile Item="qa"
+                             IsLocked="IsLockedFor(qa)"
+                             OnInvoke="OnQuickAction" />
+        }
+    </div>
+</section>
+
+<AxCrypt.App.Shared.Desktop.Components.PopupDialog.ConfirmWipeDialog />
+<AxCrypt.App.Shared.Desktop.Components.Home.ShareKeyComponent />
+
+@code {
+    protected override void OnInitialized()
+    {
+        homeActionModel!.OnUpdateViewState += () => InvokeAsync(StateHasChanged);
+
+        usage.OnChange += () => InvokeAsync(StateHasChanged);
+    }
+
+    private bool IsLockedFor(QuickActionItem qa)
+    {
+        if (qa.IsPaid && userService.IsFreeTier) return true;
+
+        if (qa.Type == QuickActionType.Encrypt
+            && userService.IsFreeTier
+            && usage.GetUsage(FeatureKey.FileEncryption).IsExhausted) return true;
+
+        if (qa.Type == QuickActionType.ShareKey
+            && userService.IsFreeTier
+            && usage.GetUsage(FeatureKey.KeyShare).IsExhausted) return true;
+
+        return false;
+    }
+
+    // ── Dispatch ───────────────────────────────────────────────
+    private async Task OnQuickAction(QuickActionItem qa)
+    {
+        // Locked → show the tier-targeted paid-gate popup with the
+        // tile's own copy + perks. The popup CTA goes to /upgradePage.
+        bool isLockedFeature = IsLockedFor(qa);
+        if (isLockedFeature)
+        {
+            paidFeaturegateService.ShowPaidGate(qa.Label, qa.HelpText, qa.PaidPerks);
+            return;
+        }
+
+        switch (qa.Type)
+        {
+            case QuickActionType.OpenSecured:
+                await homeActionModel!.OpenFile();
+                break;
+
+            case QuickActionType.Encrypt:
+                if (!homeActionModel!.EncryptButtonEnabled && isLockedFeature) { homeActionModel.UpgradeDialog(); return; }
+                await homeActionModel.SecureFileAsync();
+                break;
+
+            case QuickActionType.Decrypt:
+                await homeActionModel!.StopSecuringFile();
+                break;
+
+            case QuickActionType.ShareKey:
+                if (!homeActionModel!.EncryptButtonEnabled && isLockedFeature) { homeActionModel.UpgradeDialog(); return; }
+                await homeActionModel!.ShareKeysAsync(EventArgs.Empty);
+                break;
+        }
+    }
+}

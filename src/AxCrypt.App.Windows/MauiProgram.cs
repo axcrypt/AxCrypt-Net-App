@@ -4,6 +4,7 @@ using AxCrypt.App.Shared.Desktop;
 using AxCrypt.App.Shared.Desktop.Services.Interface;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Windows.Components.Pages;
+using AxCrypt.App.Windows.Components.Pages.Main;
 using AxCrypt.App.Windows.Infrastructure;
 using AxCrypt.App.Windows.Services;
 using Microsoft.Extensions.Logging;
@@ -72,6 +73,14 @@ namespace AxCrypt.App.Windows
             services.AddSingleton<Vault>();
             services.AddSingleton<Support>();
             services.AddSingleton<SecuredMessengerComponent>();
+
+            services.AddSingleton<ActivityPage>();
+            services.AddSingleton<FeedbackPage>();
+            services.AddSingleton<FilesPage>();
+            services.AddSingleton<SupportPage>();
+            services.AddSingleton<UpgradePage>();
+            services.AddSingleton<VaultPage>();
+            services.AddSingleton<HelpCenter>();
 
             SharedFactory.RegisterSingletons(services);
             SharedFactory.RegisterTypeFactories();

@@ -24,74 +24,65 @@
 
         read = DateTime.MinValue;
     }
-    string shortUserText = Model.IsSelected ? "" : messageToListText.Substring(0, 2).ToUpper();
-
-    string fontClass = "";
-    string icoRead = "";
-
-    if (SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
-    {
-        fontClass = read != DateTime.MinValue ? "" : "read-text";
-        icoRead = read == DateTime.MinValue ? "ico-unread" : "";
-    }
+    bool isUnread = SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent
+                    && read == DateTime.MinValue;
 
     Guid messageSelectionId = Model.ParentId == Guid.Empty ? Model.Id : Model.ParentId;
-    <div id="unread-message-@messageSelectionId" class="unread-message @fontClass" data-id="@Model.Id" data-parent="@Model.ParentId" @onclick="async (e)=> await ManageSecMgrViewModel.ViewMessageReplies(messageSelectionId, SecMessengerFilterTab)">
-        <div>
-            <table class="hover-table @((Model.IsSelected || ManageSecMgrViewModel.SelectedMessageId == messageSelectionId) ? "msg-selected" : "")">
-                <tbody>
-                    <tr>
-                        <td rowspan="2" class="first" style="width: 12%;">
-                            <div class="acc-prfl-container">
-                                <div class="@icoRead dsk-hide"></div>
-                                <div class="acc-prfl fnt-small second" style="@(Model.IsSelected ? "display: none;" : "display: block;")">
-                                    @shortUserText
-                                </div>
-                                <input type="checkbox"
-                                       class="hover-checkbox"
-                                       style="@(Model.IsSelected ? "display: block;" : "display: none;")"
-                                       checked="@Model.IsSelected"
-                                       bind-checked="@Model.IsSelected"
-                                       @onclick:stopPropagation="true"
-                                       @onchange="() => ManageSecMgrViewModel.SelectMessagesForActions(Model)"
-                                       data-id="@messageSelectionId" />
-                            </div>
-                        </td>
+    bool isActive = Model.IsSelected || ManageSecMgrViewModel.SelectedMessageId == messageSelectionId;
+    bool selectMode = Model.IsSelected || ManageSecMgrViewModel.isMultiCheckboxVisible;
+    string initials = messageToListText.Length >= 2
+        ? messageToListText.Substring(0, 2).ToUpper()
+        : messageToListText.ToUpper();
+    int extraReceivers = messageToList.Count() - Utility.MaxReceiversToDisplay;
 
-                        <td class="text-fnt-size second" style="max-width: 250px; line-height: normal;">
-                            <span class="email-txt-ovflw">
-                                @messageToListText
-                                @if (messageToList.Count() > Utility.MaxReceiversToDisplay)
-                                {
-                                    <span class="mre-user-txt">+@(messageToList.Count() - Utility.MaxReceiversToDisplay) others</span>
-                                }
-                            </span>
-                        </td>
-                        <td class="mob-hide">
-                            <div class="@icoRead"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="second" style="font-size:12px;">
-                            <div style="display:inline-block;">
-                                <img class="clck-img" src="images/default/IcoClock.svg" />
-                                <span class="grey-clr">@Texts.VisibleUntilText</span>
-                                <span class="text-fnt-size">
-                                    @(Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Forever ? "Forever" :
-                                        Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Once ? "Once" :
-                                        Utility.ToDateString(Model.Message.VisibleUntil.ToLocalTime()))
-                                </span>
-                            </div>
-                            <div style="display:inline-block;float:right;">
-                                <span class="grey-clr text-size" style="padding-right: 10px;font-size:11px;">
-                                    @Utility.ToDateString(Model.CreatedUtc.ToLocalTime())
-                                </span>
-                            </div>
-                        </td>
+    @* Conversation row — avatar / correspondent / expiry meta / time,
+       in the style of a modern secure-messaging app. All view-model
+       wiring (open thread, multi-select) is preserved 1:1. *@
+    <div id="unread-message-@messageSelectionId"
+         class="smx-msg-row @(isUnread ? "smx-msg-row--unread" : "") @(isActive ? "smx-msg-row--active" : "")"
+         data-id="@Model.Id" data-parent="@Model.ParentId"
+         @onclick="async (e) => await ManageSecMgrViewModel.ViewMessageReplies(messageSelectionId, SecMessengerFilterTab)">
 
-                    </tr>
-                </tbody>
-            </table>
+        <div class="smx-msg-avatar">
+            @if (selectMode)
+            {
+                <input type="checkbox" class="smx-msg-check"
+                       checked="@Model.IsSelected"
+                       @onclick:stopPropagation="true"
+                       @onchange="() => ManageSecMgrViewModel.SelectMessagesForActions(Model)"
+                       data-id="@messageSelectionId" />
+            }
+            else
+            {
+                <span class="smx-msg-initials">@initials</span>
+            }
+        </div>
+
+        <div class="smx-msg-main">
+            <div class="smx-msg-top">
+                <span class="smx-msg-name" title="@messageToListText">@messageToListText</span>
+                @if (extraReceivers > 0)
+                {
+                    <span class="smx-msg-more">+@extraReceivers</span>
+                }
+                <span class="smx-msg-time">@Utility.ToDateString(Model.CreatedUtc.ToLocalTime())</span>
+            </div>
+            <div class="smx-msg-bottom">
+                <span class="smx-msg-meta">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="9" />
+                        <polyline points="12 7 12 12 15 14" />
+                    </svg>
+                    <span>@Texts.VisibleUntilText
+                        @(Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Forever ? "Forever" :
+                          Model.Message.Visibility == AxCrypt.Core.UI.SecureMsgrVisibility.Once ? "Once" :
+                          Utility.ToDateString(Model.Message.VisibleUntil.ToLocalTime()))</span>
+                </span>
+                @if (isUnread)
+                {
+                    <span class="smx-msg-unread-dot" title="Unread"></span>
+                }
+            </div>
         </div>
     </div>
 }

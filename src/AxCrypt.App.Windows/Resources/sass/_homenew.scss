@@ -1,0 +1,159 @@
+﻿/* Scoped styles */
+
+/* ═══════════════════════════════════════════
+   Variables & Reset
+════════════════════════════════════════════ */
+:root {
+    --sidebar-w: 210px;
+    --sidebar-w-collapsed: 62px;
+    --radius-card: 14px;
+    --radius-btn: 8px;
+    --sidebar-transition: width 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ═══════════════════════════════════════════
+   Shell
+════════════════════════════════════════════ */
+.app-shell {
+    display: flex;
+    height: 100vh;
+    background: $bg-page;
+    font-family: sans-serif;
+    color: $text-primary;
+    font-size: 14px;
+}
+
+@import "HomeNew/Sidebar";
+@import "HomeNew/FreeTierLimit";
+@import "HomeNew/SidebarFooter";
+@import "HomeNew/ProfileMenuPopup";
+@import "HomeNew/SidebarCollapse";
+@import "HomeNew/MainContant";
+@import "HomeNew/TopBar";
+@import "HomeNew/SettingsPopup";
+@import "HomeNew/EncryptionFilePropertiesPopup";
+@import "HomeNew/EmptyState";
+
+@import "HomeNew/ContextMenu";
+@import "HomeNew/PaidgateModel";
+@import "HomeNew/HelpOverlay";
+@import "HomeNew/GlobalSearch";
+@import "HomeNew/AdvancedSettingsModels";
+@import "HomeNew/AdvancedOptionsPopup";
+
+@import "HomeNew/Cards";
+@import "HomeNew/QuickAction";
+@import "HomeNew/FilterTabs";
+@import "HomeNew/FilesTable";
+@import "HomeNew/Badges";
+@import "HomeNew/VaultStatus";
+@import "HomeNew/CloudDrives";
+@import "HomeNew/SecurityStatus";
+@import "HomeNew/CTAButton";
+@import "HomeNew/ResponsiveHelpers";
+
+@import "HomeNew/Tools";
+@import "HomeNew/Pages/ActivityPage";
+@import "HomeNew/Pages/FeedbackPage";
+@import "HomeNew/Pages/FilesPage";
+@import "HomeNew/Pages/MainLayout";
+@import "HomeNew/Pages/PasswordPage";
+@import "HomeNew/Pages/SupportPage";
+@import "HomeNew/Pages/UpgradePage";
+@import "HomeNew/Pages/VaultPage";
+@import "HomeNew/BatchOperationToast";
+@import "HomeNew/ProgressBar";
+@import "HomeNew/AxLoader";
+@import "HomeNew/PasswordManager";
+@import "HomeNew/HelpCenter.scss";
+
+/*
+@import "../Home/Badges";
+*/
+/* ── Global backdrop ─── */
+.global-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: transparent;
+    background: rgba(0,0,0,.12);
+    backdrop-filter: blur(1px)
+}
+
+.nav-item span {
+    margin-right: 0px !important;
+}
+
+.page-content-body-section {
+    margin: 20px;
+    max-width: 95%;
+
+    @media only screen and (max-width: 1300px) {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+/* ── Keyframes ─── */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+/* ── Responsive ─── */
+@media(max-width:900px) {
+    .content-grid {
+        grid-template-columns: 1fr
+    }
+
+    .quick-actions-grid {
+        grid-template-columns: repeat(2,1fr)
+    }
+}
+
+@media(max-width:620px) {
+    .sidebar {
+        display: none
+    }
+
+    .search-box {
+        width: 180px
+    }
+
+    .trow {
+        grid-template-columns: 28px 1fr 70px 50px
+    }
+
+    .tcol-date, .tcol-size {
+        display: none
+    }
+
+    .adv-modal, .help-overlay {
+        width: calc(100vw - 32px)
+    }
+}

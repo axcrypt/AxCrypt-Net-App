@@ -1,4 +1,8 @@
+using AxCrypt.App.Entitlement.Contracts;
+using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.Desktop.Code;
+using AxCrypt.App.Shared.Desktop.Services;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels;
@@ -11,10 +15,10 @@ using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Shared.Helpers;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels;
 
@@ -23,18 +27,25 @@ public class RecentFilesViewModel : ViewModelBase
     private MainViewModel _mainViewModel;
     private FileOperationViewModel _fileOperationViewModel;
     private ShareKeyViewModel? _sharekeyViewModel;
+    private BatchFileOperationService _batchService;
 
-    public RecentFilesViewModel(ShareKeyViewModel sharekeyViewModel)
+    public RecentFilesViewModel(ShareKeyViewModel sharekeyViewModel, BatchFileOperationService batchService)
     {
         LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
         _mainViewModel = AxCServiceProviderExtension.LogOnViewModel!.MainViewModel;
         _fileOperationViewModel = AxCServiceProviderExtension.LogOnViewModel!.FileOperationViewModel;
         _sharekeyViewModel = sharekeyViewModel;
+        _batchService = batchService;
 
         SelectAllChecked = false;
         SelectedFiles = new List<string>();
         RecentFilesList = new ObservableCollection<FileDetails>();
     }
+
+    /// <summary>Expose the batch service so a UI component can subscribe to its progress / summary events.</summary>
+    public BatchFileOperationService BatchService => _batchService;
+
+    private bool _bindingsHooked;
 
     public void OnInitialized()
     {
@@ -42,8 +53,34 @@ public class RecentFilesViewModel : ViewModelBase
 
         ConfigureMenus(LogOnViewModel.License);
 
+        // The VM is a singleton (see AppDesktopFactory) but the Razor
+        // component re-runs OnInitializedAsync on every mount. Guard the
+        // property-change subscriptions so we don't keep stacking duplicate
+        // callbacks (which would fan-out one ActiveFile change into N
+        // redundant UI refreshes).
+        if (_bindingsHooked)
+        {
+            // Even on remount, re-emit current state so the new component
+            // instance picks up rows that already exist.
+            UpdateRecentFiles(_mainViewModel.RecentFiles);
+            return;
+        }
+        _bindingsHooked = true;
+
+        // Core push: whole RecentFiles collection changes.
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.RecentFiles), (IEnumerable<ActiveFile> files) => { UpdateRecentFiles(files); });
-        this.BindPropertyChanged(nameof(SelectedFiles), (IEnumerable<string> files) => { _mainViewModel.SelectedRecentFiles = files; });
+
+        // Core push: an individual file transitioned open ↔ closed.
+        // MainViewModel doesn't always rebuild the RecentFiles collection
+        // when only the status of one file flips, so we re-derive from the
+        // current list and notify the view.
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool _) => { UpdateRecentFiles(_mainViewModel.RecentFiles); });
+
+        this.BindPropertyChanged(nameof(SelectedFiles), (IEnumerable<string> files) =>
+        {
+            _mainViewModel.SelectedRecentFiles = files;
+            UpdateViewState();
+        });
 
         //_recentFilesListView.DragOver += (sender, e) => { _mainViewModel.DragAndDropFiles = e.GetDragged(); e.Effect = GetEffectsForRecentFiles(e); };
         // _recentFilesListView.SelectedIndexChanged += (sender, e) => { _mainViewModel.SelectedRecentFiles = _recentFilesListView.SelectedItems.Cast<ListViewItem>().Select(lvi => EncryptedPath(lvi)); };
@@ -56,6 +93,19 @@ public class RecentFilesViewModel : ViewModelBase
 
     public IEnumerable<string> SelectedFiles
     { get { return GetProperty<IEnumerable<string>>(nameof(SelectedFiles)); } set { SetProperty(nameof(SelectedFiles), value); } }
+
+    /// <summary>
+    /// The single file path that the right-click / ⋮-dots context menu
+    /// is targeting. Intentionally separate from <see cref="SelectedFiles"/>
+    /// so that opening the context menu on an unchecked row does NOT
+    /// add it to the checkbox selection (and therefore does not show the
+    /// bulk-action bar).
+    /// </summary>
+    public string? ContextMenuTarget
+    {
+        get { return GetProperty<string?>(nameof(ContextMenuTarget)); }
+        set { SetProperty(nameof(ContextMenuTarget), value); }
+    }
 
     public bool SelectAllChecked { get; set; }
 
@@ -78,14 +128,37 @@ public class RecentFilesViewModel : ViewModelBase
 
     private void UpdateRecentFiles(IEnumerable<ActiveFile> files)
     {
-         ConfigureMenus(LogOnViewModel.License);
-        if (New<UserSettings>().HideRecentFiles)
+        ConfigureMenus(LogOnViewModel.License);
+
+        // Preserve checked-state across re-builds — the underlying
+        // ActiveFile collection gets replaced on every change, so without
+        // this the UI would lose selection whenever any file's status
+        // transitioned.
+        HashSet<string> previouslyChecked = (RecentFilesList ?? new ObservableCollection<FileDetails>())
+            .Where(rf => rf.IsChecked)
+            .Select(rf => rf.FilePath)
+            .ToHashSet();
+
+        if (New<UserSettings>().HideRecentFiles || files == null)
         {
             RecentFilesList = new ObservableCollection<FileDetails>();
+            SelectedFiles = new List<string>();
+            SelectAllChecked = false;
+            UpdateViewState();
             return;
         }
 
-        RecentFilesList = new ObservableCollection<FileDetails>(files.Select(f => new FileDetails(f)));
+        RecentFilesList = new ObservableCollection<FileDetails>(
+            files.Select(f =>
+            {
+                FileDetails details = new FileDetails(f);
+                if (previouslyChecked.Contains(details.FilePath))
+                {
+                    details.IsChecked = true;
+                }
+                return details;
+            }));
+
         UpdateSelectedFileList();
         UpdateViewState();
     }
@@ -93,19 +166,118 @@ public class RecentFilesViewModel : ViewModelBase
     public void SelectAllFiles(ChangeEventArgs e)
     {
         SelectAllChecked = Convert.ToBoolean(e.Value);
-        if (!SelectAllChecked)
+        if (RecentFilesList == null)
         {
-            SelectedFiles = new List<string>();
-            UpdateRecentFiles(_mainViewModel.RecentFiles);
             return;
         }
 
-        SelectedFiles = RecentFilesList.Select(rf => { rf.IsChecked = SelectAllChecked; return rf.FilePath; }).ToList();
+        if (!SelectAllChecked)
+        {
+            foreach (FileDetails rf in RecentFilesList)
+            {
+                rf.IsChecked = false;
+            }
+            SelectedFiles = new List<string>();
+            UpdateViewState();
+            return;
+        }
+
+        // Mark every visible file as checked and publish the new list.
+        SelectedFiles = RecentFilesList
+            .Select(rf =>
+            {
+                rf.IsChecked = SelectAllChecked;
+                return rf.FilePath;
+            })
+            .ToList();
+
+        UpdateViewState();
     }
 
     public void HandleFileClick(bool isChecked, string selectedFile)
     {
         UpdateSelectedFile(selectedFile, isChecked);
+        UpdateViewState();
+    }
+
+    /// <summary>
+    /// Records which file the user right-clicked / opened the ⋮ menu on,
+    /// WITHOUT mutating the checkbox selection. The bulk-action bar stays
+    /// hidden because no row's IsChecked flag changes.
+    /// </summary>
+    public void OpenContextMenuForFile(string filePath)
+    {
+        ContextMenuTarget = filePath;
+        UpdateViewState();
+    }
+
+    /// <summary>Clear the context-menu target (call when the menu closes).</summary>
+    public void ClearContextMenuTarget()
+    {
+        ContextMenuTarget = null;
+        UpdateViewState();
+    }
+
+    /// <summary>
+    /// Uncheck every row, hide the bulk-action bar, and clear the
+    /// downstream selection list on MainViewModel.
+    /// </summary>
+    public void ClearSelection()
+    {
+        if (RecentFilesList != null)
+        {
+            foreach (FileDetails f in RecentFilesList)
+            {
+                f.IsChecked = false;
+            }
+        }
+        SelectAllChecked = false;
+        SelectedFiles = new List<string>();
+        UpdateViewState();
+    }
+
+    /// <summary>
+    /// Run a context-menu action against the right-clicked target.
+    /// • If the target is already one of the checked rows, the action applies
+    ///   to the whole multi-selection (standard file-manager behavior).
+    /// • Otherwise, the action applies only to the right-clicked row —
+    ///   the visible checkbox selection is left untouched.
+    /// </summary>
+    public async Task RunContextMenuActionForTarget(EventArgs args, SecuredFilesContextMenu action)
+    {
+        string? target = ContextMenuTarget;
+        if (string.IsNullOrEmpty(target))
+        {
+            await OnContextMenuAction(args, action);
+            return;
+        }
+
+        bool targetIsChecked = RecentFilesList?.Any(f => f.FilePath == target && f.IsChecked) ?? false;
+
+        if (targetIsChecked)
+        {
+            // Whole checked-selection path.
+            await OnContextMenuAction(args, action);
+            ContextMenuTarget = null;
+            UpdateViewState();
+            return;
+        }
+
+        // Single-file path: temporarily push the target into MainViewModel
+        // so the existing command pipeline picks it up, then restore the
+        // user's actual selection so the checkbox list stays consistent.
+        IEnumerable<string> previous = _mainViewModel.SelectedRecentFiles ?? new List<string>();
+        _mainViewModel.SelectedRecentFiles = new List<string> { target };
+        try
+        {
+            await OnContextMenuAction(args, action);
+        }
+        finally
+        {
+            _mainViewModel.SelectedRecentFiles = previous;
+            ContextMenuTarget = null;
+            UpdateViewState();
+        }
     }
 
     private void UpdateSelectedFile(string selectedFile, bool isChecked)
@@ -258,19 +430,45 @@ public class RecentFilesViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Encrypt a batch of dropped files. Each file is encrypted in its own
+    /// Core call so that one failure (locked file, permission denied,
+    /// disk full, …) does not abort the remaining files. Errors are
+    /// captured and surfaced via the batch-summary toast.
+    /// </summary>
     public async Task EncryptDroppedFiles(IList<string> files)
     {
-        if (!files.Any())
+        if (files == null || !files.Any())
         {
             return;
         }
 
-        await _fileOperationViewModel.EncryptFiles.ExecuteAsync(files);
+        int availableCount = await New<UserEntitlementService>().GetRemainingCount(LimitedCapability.SecureFolders, New<AccountStatusViewModel>().SubscriptionLevel, files.Count());
+        if (availableCount <= 0)
+        {
+            return;
+        }
+        
+        files = files.Take(availableCount).ToList();
+
+        // FeatureKey.FileEncryption → the batch service reports the
+        // successful count to the entitlement provider on finish, so the
+        // free-tier usage bar reflects the encryption straight away.
+        await _batchService.RunAsync(
+            files,
+            async (path) => await _fileOperationViewModel.EncryptFiles.ExecuteAsync(new[] { path }),
+            "Encrypted",
+            FeatureKey.FileEncryption);
     }
 
-    private async Task OpenSecured()
+    public async Task OpenSecured()
     {
-        await _fileOperationViewModel.OpenFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
+        // Each "Open" goes through its own Core call so a single failure
+        // (wrong password, locked file, ...) doesn't stop the rest.
+        await _batchService.RunAsync(
+            _mainViewModel.SelectedRecentFiles,
+            async (path) => await _fileOperationViewModel.OpenFiles.ExecuteAsync(new[] { path }),
+            "Opened");
     }
 
     public async Task OpenSecuredMouseDoubleClick(MouseEventArgs args, string selectedFilePath)
@@ -289,18 +487,28 @@ public class RecentFilesViewModel : ViewModelBase
 
         if (args.Type == "dblclick")
         {
-            await _fileOperationViewModel.OpenFiles.ExecuteAsync(selectedFilePath == null ? throw new NullReferenceException(nameof(selectedFilePath)) : new List<string> { selectedFilePath });
+            if (selectedFilePath == null)
+            {
+                throw new NullReferenceException(nameof(selectedFilePath));
+            }
+            await _fileOperationViewModel.OpenFiles.ExecuteAsync(new List<string> { selectedFilePath });
         }
     }
 
     private async Task RemoveFromListKeepSecured()
     {
-        await _mainViewModel.RemoveRecentFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
+        await _batchService.RunAsync(
+            _mainViewModel.SelectedRecentFiles,
+            async (path) => await _mainViewModel.RemoveRecentFiles.ExecuteAsync(new[] { path }),
+            "Removed");
     }
 
     private async Task DecryptAndRemoveFromList()
     {
-        await _fileOperationViewModel.DecryptFiles.ExecuteAsync(_mainViewModel.SelectedRecentFiles);
+        await _batchService.RunAsync(
+            _mainViewModel.SelectedRecentFiles,
+            async (path) => await _fileOperationViewModel.DecryptFiles.ExecuteAsync(new[] { path }),
+            "Decrypted");
     }
 
     private async Task ShareKeyFromRecentFiles(EventArgs args)

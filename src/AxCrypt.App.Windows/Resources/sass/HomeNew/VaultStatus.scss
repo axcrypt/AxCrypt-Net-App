@@ -1,0 +1,81 @@
+﻿/* ═══════════════════════════════════════════
+   Vault Status
+════════════════════════════════════════════ */
+.vault-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+
+    div {
+        overflow : visible !important;
+    }
+}
+
+.vault-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: $text-secondary;
+}
+
+.vault-row--path {
+    background: $bg-page;
+    padding: 7px 10px;
+    border-radius: 8px;
+}
+
+.vault-folder-ico {
+    color: $brand-green;
+}
+
+.vault-path {
+    flex: 1;
+    font-size: 12px;
+    font-weight: 500;
+    color: $text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vault-chevron {
+    color: $text-muted;
+    cursor: pointer;
+}
+
+.vault-count {
+    width: 22px;
+    height: 22px;
+    background: $brand-green;
+    color: #fff;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.manage-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px;
+    background: $bg-page;
+    border: 1px solid $border;
+    border-radius: var(--radius-btn);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    color: $text-primary;
+    transition: background .15s;
+}
+
+    .manage-btn:hover {
+        background: $brand-green-lt;
+        color: $active-text-cr;
+    }

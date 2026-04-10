@@ -1,4 +1,5 @@
 ﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Entitlement.Contracts;
 
 namespace AxCrypt.App.Shared.Models;
 
@@ -13,4 +14,10 @@ public class AccountModel
     public bool ImportPass { get; set; }
     public bool CreateId { get; set; }
     public bool IsImportAxCryptIDDisabled { get; set; } = true;
+
+    /// <summary>
+    /// The plan the user originally signed up on. Sticky across sign-ins;
+    /// drives feature-targeted upgrade copy and the Upgrade page filter.
+    /// </summary>
+    public SignUpFrom SignUpFrom { get; set; } = SignUpFrom.None;
 }

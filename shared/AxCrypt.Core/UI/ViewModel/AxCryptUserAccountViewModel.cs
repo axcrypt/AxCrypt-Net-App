@@ -24,5 +24,18 @@ namespace AxCrypt.Core.UI.ViewModel
                 return _userAccount.HadAnyPaidSubscription;
             }
         }
+
+        public static string SignUpFrom
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_userAccount.SignUpFrom))
+                {
+                    return "Free";
+                }
+
+                return _userAccount.SignUpFrom;
+            }
+        }
     }
 }

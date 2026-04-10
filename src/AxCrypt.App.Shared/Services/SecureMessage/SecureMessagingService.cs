@@ -3,16 +3,19 @@ using AxCrypt.Api;
 using AxCrypt.Api.Model.SecuredMessenger;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.Api.Shared.Helper;
-using AxCrypt.App.Shared.ViewModels;
-using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
+using AxCrypt.App.Entitlement.Contracts;
+using AxCrypt.App.Entitlement.Services;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
+using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Runtime;
 using AxCrypt.Core.SecuredMessenger;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.Core.Notification;
 
 namespace AxCrypt.App.Shared.Services
 {
@@ -94,6 +97,11 @@ namespace AxCrypt.App.Shared.Services
                 return false;
             }
 
+            if (!await New<UserEntitlementService>().UserHasCapability(LimitedCapability.SendSecuredMessages, _logOnViewModel.SubscriptionLevel))
+            {
+                return false;
+            }
+
             bool allowToAdd = SecMessengerUtility.AllowAddNewMessage(_logOnViewModel.SubscriptionLevel);
             if (!allowToAdd)
             {
@@ -116,6 +124,13 @@ namespace AxCrypt.App.Shared.Services
             if (!saved)
             {
                 return false;
+            }
+
+            await New<UserEntitlementService>().InsertUserUsageCount(LimitedCapability.SendSecuredMessages, _logOnViewModel.SubscriptionLevel);
+            IFeatureUsageProvider? usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
+            if (usage != null)
+            {
+                usage.UpdateUsageCount(FeatureKey.SecuredMessage);
             }
 
             if (SecMessengerUtility.CanUpdateFreeUserCount())

@@ -107,7 +107,24 @@ public class ProgressBackgroundComponent : Component, IProgressBackground
     {
         if (disposing)
         {
-            WaitForIdleAsync().GetAwaiter().GetResult();
+            // Used to do .GetAwaiter().GetResult() here — that blocked the
+            // disposing thread until every in-flight progress operation
+            // finished. When Dispose ran on the UI dispatcher (the common
+            // case via MAUI component teardown) and the in-flight work
+            // was marshaling Progressing events back to that same
+            // dispatcher, the dispatcher dead-locked and the app froze.
+            //
+            // The background work is already orphan-safe — it'll complete
+            // and tear down its own progress bar via OperationCompleted.
+            // Just fire off the wait so Dispose can return immediately.
+            try
+            {
+                _ = WaitForIdleAsync();
+            }
+            catch
+            {
+                // Disposal must never throw.
+            }
         }
 
         base.Dispose(disposing);

@@ -39,6 +39,7 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<FileOperationProcessIndicatorService>();
             services.AddSingleton<ProgressBarService>();
             services.AddSingleton<FileDropService>();
+            services.AddSingleton<ErrorReportService>();
 
             services.AddSingleton<FindFilesViewModel>();
             services.AddSingleton<VaultViewModel>();

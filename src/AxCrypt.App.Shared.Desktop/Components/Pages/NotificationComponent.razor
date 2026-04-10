@@ -7,14 +7,6 @@
 @inject NavigationManager navigation
 @inject UserNotificationService notificationService
 
-<div class="top-page-title-container">
-    <div class="medium-12 columns">
-        <h1 class="page-title">
-            @Texts.PromptNotificationsText
-        </h1>
-    </div>
-</div>
-
 <div class="parent-container">
     <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
     @if (!model.Notifications.Any())
@@ -26,7 +18,7 @@
     }
     else
     {
-        <div class="medium-12 columns">
+        <div class="medium-12 columns page-content-body-section">
             <table class="notification-table curved-table">
                 <thead class="notify-pg-tbl-head">
                     <tr class="notification-text">

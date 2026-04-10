@@ -26,9 +26,12 @@ namespace AxCrypt.App.Shared
             MultiFactorAuthType = AxCrypt.Core.Resolve.KnownIdentities.MultiFactorAuthType;
 
             IsVisible = true;
+
+            // Poll at 100 ms, not 1000 ms — the old interval added up to a
+            // full second of dead wait after the user submitted the code.
             while (PageResult == DialogResult.None)
             {
-                await Task.Delay(1000);
+                await Task.Delay(100);
             }
 
             IsVisible = false;

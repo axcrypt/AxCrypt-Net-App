@@ -1,0 +1,63 @@
+﻿@using AxCrypt.App.Shared.Desktop.Services
+@using AxCrypt.App.Shared.Providers
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.Desktop.ViewModels.Home
+@using AxCrypt.Content
+
+@inject UserService userService
+@inject SubActionViewModel? subActionModel
+@inject PaidFeaturegateService paidFeaturegateService
+
+<!-- Cloud Drives -->
+<section class="card">
+    <div class="card-hdr">
+        <h2 class="section-title">@Texts.CloudServicesText</h2>
+        @if (userService.IsFreeTier)
+        {
+            <span class="pro-pill" @onclick="ShowUpgradePopup"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg></span>
+        }
+    </div>
+
+    <div class="cloud-body @(userService.IsFreeTier ? "blurred" : "")">
+        @foreach (FileProviderItem provider in subActionModel!.FileProviderViewModel.EncryptableFileProviders)
+        {
+            <div class="drive-row">
+                <img class="drive-icon @provider.Image" src="" alt="@provider.Name" title="@provider.Name" />
+                <div class="drive-info">
+                    <span class="drive-name">@provider.Name</span>
+                    @* @if (!string.IsNullOrEmpty(d.Account))
+                    {
+                        <span class="drive-acct">@d.Account</span>
+                    } *@
+
+                    @if (provider.Configured)
+                    {
+                        <span class="connected-badge">Connected</span>
+                    }
+                </div>
+
+                @{
+                    string cloudDriveActionLabel = provider.Configured ? "Manage Files" : "Connect";
+                }
+                <button class="connect-btn" @onclick="() => subActionModel.FileProviderViewModel.SubActionSelectProvider(provider)">@cloudDriveActionLabel</button>
+            </div>
+        }
+    </div>
+
+    <AxCrypt.App.Shared.Desktop.Components.FilePicker.FilePickerComponent />
+</section>
+
+@code {
+    private void ShowUpgradePopup()
+    {
+        paidFeaturegateService.ShowPaidGate(Texts.SecuredCloudLinkLabel,
+            "Protect your cloud-stored files with secure encryption and advanced security features.",
+            new[]
+            {
+                "Secure cloud file protection",
+                "Encrypt files before upload",
+                "Keep cloud data private",
+                "Unlock advanced cloud security"
+            });
+    }
+}

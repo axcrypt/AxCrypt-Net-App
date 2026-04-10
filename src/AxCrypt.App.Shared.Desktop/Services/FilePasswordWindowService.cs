@@ -64,7 +64,15 @@ public class FilePasswordWindowService : IFilePasswordWindowService
 
         await Show();
 
-        return _userFilePasswordViewModel.FilePasswordTcs.Task.Result;
+        // ⚠ Must await — never `.Task.Result`. ShowWindow gets called from
+        // UI-dispatcher contexts (file open, recent-files double-click).
+        // Blocking on the TCS there used to deadlock the dispatcher: the
+        // BlazorWebView inside the new window can't complete its render
+        // (and therefore can't fire the click that resolves the TCS) until
+        // the UI thread unwinds — which it can't, because it's parked on
+        // .Task.Result. End result: "app becomes unresponsive". Plain await
+        // releases the thread back to the dispatcher and the modal renders.
+        return await _userFilePasswordViewModel.FilePasswordTcs.Task.ConfigureAwait(false);
     }
 
     private void BindPropertyChangedEvents()

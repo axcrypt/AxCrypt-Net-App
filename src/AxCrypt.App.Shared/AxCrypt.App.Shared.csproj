@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -20,6 +20,7 @@
     <ProjectReference Include="..\..\shared\AxCrypt.Api\AxCrypt.Api.csproj" />
     <ProjectReference Include="..\..\shared\AxCrypt.Core\AxCrypt.Core.csproj" />
     <ProjectReference Include="..\..\shared\AxCrypt.Cryptor\AxCrypt.Cryptor.csproj" />
+    <ProjectReference Include="..\AxCrypt.App.Entitlement\AxCrypt.App.Entitlement.csproj" />
   </ItemGroup>
 
 </Project>

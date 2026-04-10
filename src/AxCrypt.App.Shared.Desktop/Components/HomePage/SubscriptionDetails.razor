@@ -1,0 +1,33 @@
+﻿@using AxCrypt.Api.Model
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.Content
+
+@inject ProfileViewModel profileViewModel
+
+<div class="subs-dtls-popup model-popup sub-pop2" style="display:none;" id="subscription-details-side-popup">
+    <div class="close-img" id="close-subscription-details-side-popup"></div>
+    <div class="center-column" style="padding:0;">
+        <div>
+            <img class="ico-user-dk" src="" alt="Ico-user" />
+        </div>
+        <div>
+            <span class="txt-clr">@Texts.PromptSubscription:</span>
+            <span class="font-bold sub-head-clr">@profileViewModel!.Account.SubscriptionLevel.ToString()</span><br />
+
+            @if (profileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
+            {
+                <span class="txt-clr">@Texts.TypeText</span>
+                <span class="font-bold sub-head-clr">@profileViewModel.Account.Subscription</span>
+
+                <br />
+
+                <span class="txt-clr">@Texts.ValidUntilText</span>
+                <span class="font-bold sub-head-clr">@profileViewModel.ValidFormatted</span>
+
+                <br />
+
+                @* <a class="can-subs" @onclick="profileViewModel.CancelSubscription">@Texts.CancelSubscriptionPrompt</a> *@
+            }
+        </div>
+    </div>
+</div>

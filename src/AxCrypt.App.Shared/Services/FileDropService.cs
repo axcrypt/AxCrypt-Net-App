@@ -2,6 +2,8 @@
 
 public class FileDropService
 {
+    public event Action? OnFilesDraggedOver;
+    public event Action? OnFilesDragLeave;
     public event Action<IList<string>>? OnFilesDropped;
     public event Action<IList<string>>? OnFoldersDropped;
 
@@ -17,9 +19,20 @@ public class FileDropService
         OnFoldersDropped?.Invoke(paths);
     }
 
+    public void NotifyFilesDraggedOver()
+    {
+        OnFilesDraggedOver?.Invoke();
+    }
+
+    public void NotifyFilesDragLeave()
+    {
+        OnFilesDragLeave?.Invoke();
+    }
+
     public void ResetOnDropped()
     {
         OnFilesDropped = null;
+        OnFoldersDropped = null;
         OnFoldersDropped = null;
     }
 

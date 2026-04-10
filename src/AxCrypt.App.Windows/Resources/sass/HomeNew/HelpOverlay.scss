@@ -1,0 +1,134 @@
+﻿/* ── Help Overlay ─── */
+.help-overlay {
+    position: fixed;
+    top: 72px;
+    right: 16px;
+    z-index: 400;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 16px 60px rgba(0,0,0,.16);
+    width: 420px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    animation: slideDown .2s cubic-bezier(.4,0,.2,1)
+}
+
+.help-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px 12px;
+    border-bottom: 1px solid var(--border)
+}
+
+.help-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+    .help-title-row h2 {
+        font-size: 15px;
+        font-weight: 700
+    }
+
+.help-close {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 4px 6px;
+    cursor: pointer;
+    color: var(--muted);
+    display: grid;
+    place-items: center;
+    transition: background .14s
+}
+
+    .help-close:hover {
+        background: #fef2f2;
+        color: #ef4444
+    }
+
+.help-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 10px 12px 0;
+    flex-wrap: wrap
+}
+
+.help-tab {
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--text2);
+    transition: all .13s
+}
+
+.help-tab--active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+    font-weight: 600
+}
+
+.help-content {
+    overflow-y: auto;
+    flex: 1;
+    padding: 10px 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.help-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px;
+    background: var(--bg);
+    border-radius: 10px
+}
+
+.help-item-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0
+}
+
+.help-item-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1
+}
+
+.help-item-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text)
+}
+
+.help-item-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.5
+}
+
+.help-kbd {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 10.5px;
+    background: #1e293b;
+    color: #f8fafc;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-family: monospace
+}

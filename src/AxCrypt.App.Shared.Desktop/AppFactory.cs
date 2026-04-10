@@ -3,11 +3,9 @@ using AxCrypt.Api;
 using AxCrypt.Api.SecuredMessenger;
 using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Data;
-using AxCrypt.App.Shared.Providers;
 using AxCrypt.App.Shared.Desktop.Services;
-using AxCrypt.App.Shared.Desktop.ViewModels;
+using AxCrypt.App.Shared.Providers;
 using AxCrypt.App.Shared.Services.Interface;
-using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -17,6 +15,7 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Ipc;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
+using AxCrypt.Core.Service.Entitlement;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.Service.SecuredMessenger;
 using AxCrypt.Core.Service.TextEncryption;
@@ -27,7 +26,6 @@ using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Desktop;
 using AxCrypt.Mono;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Devices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +59,8 @@ public class AppFactory
         TypeMap.Register.New<LogOnIdentity, IAccountService>((LogOnIdentity identity) => new CachingAccountService(new DeviceAccountService(new LocalAccountService(identity, Resolve.WorkFolder.FileInfo), new ApiAccountService(new AxCryptApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
         TypeMap.Register.New<LogOnIdentity, ISecretsService>((LogOnIdentity identity) => new DeviceSecretsService(new LocalSecretsService(identity, Resolve.WorkFolder.FileInfo), new NullSecretsService(identity)));
         TypeMap.Register.New<LogOnIdentity, ISecretsService>((LogOnIdentity identity) => new CachingSecretsService(new DeviceSecretsService(new LocalSecretsService(identity, Resolve.WorkFolder.FileInfo), new ApiSecretsService(new AxSecretsApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
+        TypeMap.Register.New<LogOnIdentity, IEntitlementService>((LogOnIdentity identity) => new DeviceEntitlementService(new LocalEntitlementService(identity, Resolve.WorkFolder.FileInfo), new NullEntitlementService(identity)));
+        TypeMap.Register.New<LogOnIdentity, IEntitlementService>((LogOnIdentity identity) => new CachingEntitlementService(new DeviceEntitlementService(new LocalEntitlementService(identity, Resolve.WorkFolder.FileInfo), new ApiEntitlementService(new AxEntitlementApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
         TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new DeviceNotificationService(new LocalNotificationService(), new NullNotificationService(identity)));
         TypeMap.Register.New<LogOnIdentity, INotificationService>((LogOnIdentity identity) => new CachingNotificationService(new DeviceNotificationService(new LocalNotificationService(), new ApiNotificationService(new AxNotificationApiClient(identity.ToRestIdentity(), Resolve.UserSettings.RestApiBaseUrl, Resolve.UserSettings.ApiTimeout)))));
         TypeMap.Register.New<LogOnIdentity, ISecuredMessengerService>((LogOnIdentity identity) => new DeviceSecuredMessengerService(new LocalSecuredMessengerService(identity, Resolve.WorkFolder.FileInfo), new NullSecuredMessengerService(identity)));
@@ -86,6 +86,7 @@ public class AppFactory
         {
             return;
         }
+
         New<KeyPairService>().Start();
     }
 

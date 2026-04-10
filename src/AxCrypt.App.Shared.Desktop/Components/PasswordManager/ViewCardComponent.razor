@@ -1,10 +1,11 @@
-﻿@using AxCrypt.App.Shared.ViewModels.Secret
+@using AxCrypt.App.Shared.ViewModels.Secret
 @using AxCrypt.App.Shared.Helpers
 @using AxCrypt.App.Shared.Desktop.Code
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.Content
 @using AxCrypt.Core
 @using AxCrypt.Core.UI
+@using Microsoft.JSInterop
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject IStatusAlertService StatusAlertService;
@@ -12,88 +13,194 @@
 @inject SecretService secretService
 @inject ViewSecretViewModel viewSecretViewModel
 @inject CopyToClipboardUtility CopyToClipboardUtility
-
 @inject IJSRuntime JSRuntime
 
-<div>
-    <div class="password-header">
-        <a href="/passwordManager" class="grn-clr"><img class="back-arrow" src="" />@Texts.PasswordManagementPageTitle</a>
-    </div>
-    <div class="page-heading">
-        <h3 class="password-creation">
-            @Texts.ViewCardTitle
-        </h3>
-    </div>
-    <form>
-        <div class="row parent-container">
-            <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
-            <ul class="clean-up sub-head-clr" style=" list-style:none">
-                <li>
-                    <label for="Card_CardNumber">@Texts.CardNumberPrompt</label>
-                    <div style="position: relative;">
-                        <input id="cardNumberInput" maxlength="19" minlength="12" style="color:#494949; background-color:#E2E2E2" value="@GetValue(isCardNumberVisible, secretService.CurrentSecret.Card.CardNumber)" readonly="readonly" type="text" @onclick="ShowCardNumber">
-                        <div id="cp-card-number-clipbrd" style="position: absolute; right: 10px; top:2px;cursor: pointer;" class="copy-to-clipbrd" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret.Card.CardNumber)">
-                            <img class="clipbrd" src="" alt="copy-clp-brd">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <label for="Card_SecretDesc">@Texts.DescriptionLabel</label>
-                    <textarea id="pwd-desc-inp" maxlength="100000" style="color:#494949; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.Card.SecretDesc" @bind:event="HandleOnChange" readonly="readonly"></textarea>
-                </li>
-                <li class="list-row">
-                    <div class="list-width">
-                        <label for="Card_NameOnCard">@Texts.NameOnCardPrompt</label>
-                        <input type="text" style="color:#494949; background-color:#E2E2E2" @bind-value="@secretService.CurrentSecret.Card.NameOnCard" readonly="readonly">
-                    </div>
-                    <div class="list-width">
-                        <label for="Card_SecurityCode">@Texts.SecurityCodePrompt:</label><br />
-                        <div style="display:flex; position: relative;">
-                            <input id="securityCodeInput" maxlength="1000" style="color:#494949; background-color:#E2E2E2" value="@GetValue(isSecurityCodeVisible, secretService.CurrentSecret.Card.SecurityCode)" readonly="readonly" type="text" @onclick="ShowSecurityCode">
-                            <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret.Card.SecurityCode)">
-                                <img class="clipbrd" src="" alt="copy-clp-brd">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-row">
-                    <div class="list-width">
-                        <label for="Card_ExpirationDate">@Texts.ExpirationDatePrompt</label>
-                        <input id="card-exp-date-inp" style="color:#494949; background-color:#E2E2E2" @bind-value="@secretService.CurrentSecret.Card.ExpirationDate" type="text" readonly="readonly">
-                    </div>
-                </li>
-                <span id="copiedMessage" style="color: green; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
-                @if (secretService.CurrentSecret.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
-                {
+@*
+    View Card — read-only credit-card detail panel.
+*@
 
-                    <li class="list-row">
-                        <div class="list-width">
-                            <label for="Card_ExpirationDate">@Texts.OwnerEmailText</label>
-                            <input id="card-exp-date-inp" style="color:#494949; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.OwnerEmail" type="text" readonly="readonly">
-                        </div>
-                    </li>
-                }
-                <li>
-                    <div style="float: right;">
-                        <div>
-                            @if (viewSecretViewModel.HasPaidSubscription)
-                            {
-                                <input id="secret-delete" type="button" class="button btn-extra-small alert" value="@Texts.ButtonDeleteText" @onclick="async () => await DeleteSecret()" />
-                            }
-                            @if (viewSecretViewModel.HasPaidSubscription && secretService.CurrentSecret.OwnerEmail == viewSecretViewModel.UserEmail)
-                            {
-                                <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" style="margin-left:20px;" />
-                            }
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <ShareSecretComponent />
+<div class="page-content-body-section">
+
+    <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
+
+    <div class="pm-form-shell">
+
+        <div class="pm-form-header">
+            <NavLink class="pm-form-back" href="passwordManager" title="Back to passwords">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </NavLink>
+            <div class="pm-form-titles">
+                <h2 class="pm-form-title">@(secretService.CurrentSecret?.Card?.SecretDesc ?? Texts.ViewCardTitle)</h2>
+                <p class="pm-form-sub">@Texts.CardPrompt</p>
+            </div>
+            <span class="pm-type-badge pm-type-badge--card" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="5" width="20" height="14" rx="2"/>
+                    <line x1="2" y1="10" x2="22" y2="10"/>
+                </svg>
+            </span>
         </div>
-    </form>
+
+        <div class="pm-form-body">
+
+            <div class="pm-form-row">
+                <label>@Texts.CardNumberPrompt</label>
+                <div class="pm-form-display">
+                    <span id="cardNumberInput"
+                          class="pm-form-display-value"
+                          style="font-family: 'Courier New', monospace; letter-spacing: 1px; cursor: pointer;"
+                          @onclick="ShowCardNumber">
+                        @GetValue(isCardNumberVisible, secretService.CurrentSecret.Card.CardNumber)
+                    </span>
+                    <div class="pm-form-display-actions">
+                        <button type="button"
+                                class="pm-form-mini-btn"
+                                title="@(isCardNumberVisible ? "Hide" : "Show")"
+                                @onclick="ToggleCardNumber">
+                            @if (isCardNumberVisible)
+                            {
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24"/>
+                                    <line x1="1" y1="1" x2="23" y2="23"/>
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            }
+                        </button>
+                        <button type="button"
+                                class="pm-form-mini-btn"
+                                title="@Texts.SecretsCopytoClipboard"
+                                @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret.Card.CardNumber)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pm-form-row">
+                <label>@Texts.NameOnCardPrompt</label>
+                <div class="pm-form-display">
+                    <span class="pm-form-display-value">@(string.IsNullOrEmpty(secretService.CurrentSecret.Card.NameOnCard) ? "—" : secretService.CurrentSecret.Card.NameOnCard)</span>
+                </div>
+            </div>
+
+            <div class="pm-form-row">
+                <label>@Texts.ExpirationDatePrompt</label>
+                <div class="pm-form-display">
+                    <span class="pm-form-display-value">@(string.IsNullOrEmpty(secretService.CurrentSecret.Card.ExpirationDate) ? "—" : secretService.CurrentSecret.Card.ExpirationDate)</span>
+                </div>
+            </div>
+
+            <div class="pm-form-row">
+                <label>@Texts.SecurityCodePrompt</label>
+                <div class="pm-form-display">
+                    <span id="securityCodeInput"
+                          class="pm-form-display-value"
+                          style="font-family: 'Courier New', monospace; cursor: pointer;"
+                          @onclick="ShowSecurityCode">
+                        @GetValue(isSecurityCodeVisible, secretService.CurrentSecret.Card.SecurityCode)
+                    </span>
+                    <div class="pm-form-display-actions">
+                        <button type="button"
+                                class="pm-form-mini-btn"
+                                title="@(isSecurityCodeVisible ? "Hide" : "Show")"
+                                @onclick="ToggleSecurityCode">
+                            @if (isSecurityCodeVisible)
+                            {
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24"/>
+                                    <line x1="1" y1="1" x2="23" y2="23"/>
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            }
+                        </button>
+                        <button type="button"
+                                class="pm-form-mini-btn"
+                                title="@Texts.SecretsCopytoClipboard"
+                                @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret.Card.SecurityCode)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(CopyToClipboardUtility.CopiedInfoText))
+                {
+                    <span style="color:#48772C; font-size:11.5px; font-weight:600;">@CopyToClipboardUtility.CopiedInfoText</span>
+                }
+            </div>
+
+            @if (!string.IsNullOrEmpty(secretService.CurrentSecret.Card.SecretDesc))
+            {
+                <div class="pm-form-row">
+                    <label>@Texts.DescriptionLabel</label>
+                    <div class="pm-form-display">
+                        <span class="pm-form-display-value">@secretService.CurrentSecret.Card.SecretDesc</span>
+                    </div>
+                </div>
+            }
+
+            @if (secretService.CurrentSecret.SharedWith != null
+                 && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
+            {
+                <div class="pm-form-row">
+                    <label>@Texts.OwnerEmailText</label>
+                    <div class="pm-form-display">
+                        <span class="pm-form-display-value">@secretService.CurrentSecret.OwnerEmail</span>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="pm-form-footer">
+            @if (viewSecretViewModel.HasPaidSubscription)
+            {
+                <button type="button" class="pm-btn pm-btn--danger" @onclick="async () => await DeleteSecret()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6l-2 14a2 2 0 01-2 2H9a2 2 0 01-2-2L5 6"/>
+                    </svg>
+                    @Texts.ButtonDeleteText
+                </button>
+            }
+            @if (viewSecretViewModel.HasPaidSubscription
+                 && secretService.CurrentSecret.OwnerEmail == viewSecretViewModel.UserEmail)
+            {
+                <button type="button" class="pm-btn pm-btn--primary" @onclick="NavigateToEdit">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                        <path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                    Edit
+                </button>
+            }
+        </div>
+
+        <ShareSecretComponent />
+    </div>
 </div>
+
 @code {
     ShareSecretViewModel? shareSecretViewModel;
+    private bool isCardNumberVisible = false;
+    private bool isSecurityCodeVisible = false;
 
     protected override void OnInitialized()
     {
@@ -111,59 +218,27 @@
 
     private void NavigateToEdit()
     {
-        if (secretService.CurrentSecret != null)
+        if (secretService.CurrentSecret != null
+            && secretService.CurrentSecret.SecretType == AxCrypt.Api.Model.Secret.SecretType.Card)
         {
-            string url = secretService.CurrentSecret.SecretType switch
-            {
-                AxCrypt.Api.Model.Secret.SecretType.Card => $"/editcard"
-            };
-            if (!string.IsNullOrEmpty(url))
-            {
-                navigationManager.NavigateTo(url);
-            }
+            navigationManager.NavigateTo("/editcard");
         }
     }
 
     private async Task DeleteSecret()
     {
         PopupButtons selectedButton = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.AlertText, Texts.DeleteSecretText, Common.DoNotShowAgainOptions.None);
-        bool isConfirmed = selectedButton == PopupButtons.Ok;
-
-        if (!isConfirmed)
-        {
-            return;
-        }
+        if (selectedButton != PopupButtons.Ok) return;
 
         bool deleted = await viewSecretViewModel.TryDeleteSecretAsync();
-        ShowDeleteStatus(deleted);
+        if (deleted) StatusAlertService.Success(Texts.SecretDeletedText);
+        else         StatusAlertService.Error(viewSecretViewModel.ErrorMessage);
 
         navigationManager.NavigateTo("/passwordManager");
     }
 
-    private void ShowDeleteStatus(bool deleted)
-    {
-        if (deleted)
-        {
-            StatusAlertService.Success(Texts.SecretDeletedText);
-        }
-        else
-        {
-            StatusAlertService.Error(viewSecretViewModel.ErrorMessage);
-        }
-    }
-
-    private async Task HandleOnChange(ChangeEventArgs args)
-    {
-        secretService.CurrentSecret!.Card.SecretDesc = args?.Value?.ToString();
-    }
-
-    private bool isCardNumberVisible = false;
-    private bool isSecurityCodeVisible = false;
-
-    private string GetValue(bool isVisible, string value)
-    {
-        return isVisible ? value : Texts.ClickToShowText;
-    }
+    private string GetValue(bool isVisible, string value) =>
+        isVisible ? value : Texts.ClickToShowText;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -177,45 +252,35 @@
     [JSInvokable]
     public void HideField(string fieldId)
     {
-        if (fieldId == "cardNumberInput" && isCardNumberVisible)
-        {
-            isCardNumberVisible = false;
-        }
-        else if (fieldId == "securityCodeInput" && isSecurityCodeVisible)
-        {
-            isSecurityCodeVisible = false;
-        }
+        if (fieldId == "cardNumberInput" && isCardNumberVisible)         isCardNumberVisible = false;
+        else if (fieldId == "securityCodeInput" && isSecurityCodeVisible) isSecurityCodeVisible = false;
         StateHasChanged();
     }
 
-    private void ShowCardNumber()
+    private void ShowCardNumber()   => VisibleReadOnlySecret("cardNumberInput", true);
+    private void ShowSecurityCode() => VisibleReadOnlySecret("securityCodeInput", true);
+
+    // Dedicated zero-arg toggles for the mini show/hide buttons.
+    // Razor @onclick can't safely nest quotes inside a lambda, so
+    // we expose method handlers that don't take a string fieldId.
+    private void ToggleCardNumber()
     {
-        VisibleReadOnlySecret("cardNumberInput", true);
+        isCardNumberVisible = !isCardNumberVisible;
+        StateHasChanged();
     }
 
-    private void ShowSecurityCode()
+    private void ToggleSecurityCode()
     {
-        VisibleReadOnlySecret("securityCodeInput", true);
+        isSecurityCodeVisible = !isSecurityCodeVisible;
+        StateHasChanged();
     }
 
     private void VisibleReadOnlySecret(string fieldId, bool isVisible)
     {
-        if (fieldId == "cardNumberInput")
-        {
-            isCardNumberVisible = isVisible;
-        }
-        else if (fieldId == "securityCodeInput")
-        {
-            isSecurityCodeVisible = isVisible;
-        }
+        if (fieldId == "cardNumberInput")        isCardNumberVisible   = isVisible;
+        else if (fieldId == "securityCodeInput") isSecurityCodeVisible = isVisible;
         StateHasChanged();
     }
 
-    void UpdateStateChanged()
-    {
-        InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });
-    }
+    void UpdateStateChanged() => InvokeAsync(StateHasChanged);
 }

@@ -1,8 +1,26 @@
-﻿@using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.Services
 
 @inject ProcessIndicatorService ProcessIndicatorService
 
+@*
+    Legacy entry point — kept so the ~15 existing `<ProcessIndicatorComponent />`
+    call sites continue to work. Internally this just delegates to AxLoader
+    (the single brand spinner) and picks the mode from the service's
+    FullScreen flag. Update the visual in AxLoader.razor / AxLoader.scss
+    and every caller updates with it.
+*@
+
+@if (IsVisible)
+{
+    <AxLoader Mode="@(ProcessIndicatorService.FullScreen ? LoaderMode.FullPage : LoaderMode.Body)"
+              Message="@Message" />
+}
+
 @code {
+    public bool IsVisible { get; set; }
+    public string? Title { get; set; }
+    public string? Message { get; set; }
+
     protected override void OnInitialized()
     {
         ProcessIndicatorService.OnProcessIndicatorVisibilityChanged += UpdateIndicatorVisibility;
@@ -11,55 +29,9 @@
     private void UpdateIndicatorVisibility(bool isVisible)
     {
         IsVisible = isVisible;
-        Title = ProcessIndicatorService.Title;
-        Message = ProcessIndicatorService.Message;
+        Title     = ProcessIndicatorService.Title;
+        Message   = ProcessIndicatorService.Message;
 
-        InvokeAsync(() =>
-        {
-            StateHasChanged(); // Refresh UI
-        });
+        InvokeAsync(StateHasChanged);
     }
-
-    private void ClosePopup()
-    {
-        ProcessIndicatorService.Hide();
-    }
-
-    public bool IsVisible { get; set; }
-
-    public string? Title { get; set; }
-
-    public string? Message { get; set; }
-}
-
-<style type="text/css">
-    .page-loading-wheel-overlay {
-        width: 100%;
-        height: 100%;
-        background: conic-gradient(from 10.99deg at 98.18% 128.62%, #fffee8 0deg, rgba(200, 199, 180, .8) 353.48deg, #f5fff0 360deg);
-        z-index: 99997;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top: 0;
-        left: 0;
-    }
-
-    .overlay-fixed {
-        position: fixed;
-    }
-
-    .overlay-absolute {
-        position: absolute;
-    }
-</style>
-
-@if (IsVisible)
-{
-    <div class="page-loading-wheel-overlay @(ProcessIndicatorService.FullScreen ? "overlay-fixed" : "overlay-absolute")">
-        <div class="loading-content">
-            <img src="/images/default/Loading_560x560.gif" alt="Loading..." />
-            <span style="color:black ">@Message</span>
-        </div>
-    </div>
 }

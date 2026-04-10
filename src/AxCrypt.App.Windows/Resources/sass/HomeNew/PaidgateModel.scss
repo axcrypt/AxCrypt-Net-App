@@ -1,0 +1,231 @@
+﻿/* ── Paid Gate Modal ─── */
+/* Full-screen scrim that catches click-outside to dismiss. Sits below
+   the centered modal but above page content so taps anywhere outside
+   the dialog close it. */
+.paid-gate-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 499;
+    background: rgba(0, 0, 0, .35);
+    backdrop-filter: blur(2px);
+    display: grid;
+    place-items: center;
+    animation: paidGateBackdropIn .14s ease-out;
+}
+
+@keyframes paidGateBackdropIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.paid-gate-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 500;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 24px 80px rgba(0,0,0,.22);
+    padding: 28px 24px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: modalIn .2s cubic-bezier(.4,0,.2,1);
+    text-align: center
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%,-48%)
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%,-50%)
+    }
+}
+
+.pgm-icon {
+    width: 56px;
+    height: 56px;
+    background: #fef3c7;
+    border-radius: 50%;
+    display: grid;
+    place-items: center
+}
+
+.pgm-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text)
+}
+
+.pgm-desc {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6
+}
+
+.pgm-features {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-self: stretch;
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 10px 14px
+}
+
+.pgm-perk {
+    font-size: 12.5px;
+    color: #166534;
+    text-align: left
+}
+
+.pgm-upgrade-btn {
+    width: 100%;
+    padding: 12px;
+    background: $NotiPassBack;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity .15s
+}
+
+    .pgm-upgrade-btn:hover {
+        opacity: .9
+    }
+
+.pgm-cancel {
+    background: none;
+    border: none;
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 4px
+}
+
+    .pgm-cancel:hover {
+        color: var(--text)
+    }
+
+// vault status,cloud drive for free users
+.card.locked {
+    border-color: #fde68a;
+    background: #fffdf0
+}
+
+.card-hdr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px
+}
+
+    .card-hdr .card-title {
+        margin-bottom: 0
+    }
+
+.pro-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: var(--amber-lt);
+    color: #92400e;
+    border: 0.5px solid #fde68a;
+    cursor: pointer
+}
+
+.blurred {
+    filter: blur(3px);
+    pointer-events: none;
+    user-select: none;
+    opacity: .6
+}
+
+.locked-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    text-align: center
+}
+
+.lo-title {
+    font-size: 13px;
+    font-weight: 600
+}
+
+.lo-desc {
+    font-size: 11.5px;
+    color: var(--gray2)
+}
+
+.lo-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 14px;
+    background: $NotiPassBack;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 4px
+}
+
+/* ── Tier brand variants ─────────────────────
+   Applied to .paid-gate-modal based on SignUpFrom. The icon ring and
+   the upgrade button take the brand color of the tier we're pitching.
+
+   generic  → amber (default — for None / Free users, the full
+              plan ladder is shown on /upgradePage)
+   premium  → AxCrypt brand green (Premium re-activation)
+   business → near-black (Business re-activation)
+*/
+.pgm-tier--premium {
+    .pgm-icon {
+        background: #dcfce7; /* green-100 */
+    }
+    .pgm-title {
+        color: #14532d; /* green-900 */
+    }
+    .pgm-upgrade-btn {
+        background: $NotiPassBack; /* AxCrypt premium green */
+        color: #fff;
+    }
+}
+
+.pgm-tier--business {
+    .pgm-icon {
+        background: #ede9fe; /* violet-100 */
+    }
+    .pgm-title {
+        color: #111827;
+    }
+    .pgm-upgrade-btn {
+        background: #111827;
+        color: #fff;
+    }
+}
+
+.pgm-tier--generic {
+    .pgm-icon {
+        background: #fef3c7;
+    }
+}
+

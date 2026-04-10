@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.Api;
 using AxCrypt.Api.Model;
+using AxCrypt.App.Entitlement.Contracts;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Utility;
@@ -335,7 +336,10 @@ public class ShareKeyViewModel : ViewModelBase
 
     private void SetNewContactState()
     {
-        if (!New<LicensePolicy>().Capabilities.Has(LicenseCapability.KeySharing))
+        IFeatureUsageProvider? usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
+        int availableCount = usage.GetUsage(FeatureKey.KeyShare).Remaining;
+
+        if (!New<LicensePolicy>().Capabilities.Has(LicenseCapability.KeySharing) && availableCount == 0)
         {
             KeySharingUserEmail = $"[{Texts.PremiumFeatureToolTipText}]";
             return;

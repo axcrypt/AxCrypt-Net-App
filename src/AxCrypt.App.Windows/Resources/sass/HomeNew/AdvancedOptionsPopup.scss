@@ -1,0 +1,353 @@
+/* AdvancedOptionsPopup.razor.css */
+
+/* ── Backdrop ─────────────────────────────────────────────────── */
+.adv-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: advFadeIn 0.15s ease;
+}
+@keyframes advFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ── Panel ────────────────────────────────────────────────────── */
+.adv-panel {
+    width: 480px;
+    max-height: 84vh;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.20), 0 4px 16px rgba(0, 0, 0, 0.10);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: advSlideUp 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes advSlideUp {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+.adv-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fafafa;
+    flex-shrink: 0;
+}
+
+.adv-back-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    color: #6b7280;
+    flex-shrink: 0;
+    transition: background 0.14s, color 0.14s;
+}
+.adv-back-btn:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.adv-header-text { flex: 1; }
+.adv-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+.adv-subtitle {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 3px;
+}
+
+/* ── Scrollable body ──────────────────────────────────────────── */
+.adv-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px 0;
+}
+.adv-body::-webkit-scrollbar { width: 5px; }
+.adv-body::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 9px; }
+
+/* ── Section labels ───────────────────────────────────────────── */
+.adv-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #9ca3af;
+    padding: 12px 20px 5px;
+}
+
+/* ── Divider ──────────────────────────────────────────────────── */
+.adv-divider {
+    height: 1px;
+    background: #f3f4f6;
+    margin: 8px 0;
+}
+
+/* ── Nav rows (Configuration) ─────────────────────────────────── */
+.adv-nav-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.12s;
+}
+.adv-nav-row:hover { background: #f9fafb; }
+
+.adv-nav-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.adv-nav-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+.adv-nav-label {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #111827;
+}
+.adv-nav-desc {
+    font-size: 11.5px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+.adv-nav-arrow { flex-shrink: 0; }
+.adv-nav-row:hover .adv-nav-arrow { color: #374151; }
+
+/* ── Diagnostic toggle rows ───────────────────────────────────── */
+.adv-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 11px 20px;
+    cursor: pointer;
+    transition: background 0.12s;
+}
+.adv-toggle-row:hover     { background: #f9fafb; }
+.adv-toggle-row--on       { background: #f0fdf4; }
+.adv-toggle-row--on:hover { background: #dcfce7; }
+
+/* Locked rows — both nav and toggle. Pointer cursor + warm hover
+   tint hint that clicking opens the paid-gate popup. Label/desc
+   are dimmed so the lock badge reads as the call-to-action. */
+.adv-nav-row--locked,
+.adv-toggle-row--locked {
+    cursor: pointer;
+}
+
+.adv-nav-row--locked:hover,
+.adv-toggle-row--locked:hover {
+    background: #fffbeb; /* amber-50 */
+}
+
+.adv-nav-row--locked .adv-nav-label,
+.adv-nav-row--locked .adv-nav-desc,
+.adv-toggle-row--locked .adv-row-label,
+.adv-toggle-row--locked .adv-row-desc {
+    color: #6b7280;
+}
+
+.adv-row-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.adv-row-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+.adv-row-label {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #111827;
+}
+.adv-row-desc {
+    font-size: 11.5px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+/* ── Toggle switch (same design as EFP) ──────────────────────── */
+.adv-toggle {
+    position: relative;
+    width: 54px;
+    height: 28px;
+    border-radius: 14px;
+    background: #d1d5db;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.22s;
+    padding: 0;
+}
+.adv-toggle--on { background: #2d7a2d; }
+
+.adv-toggle-knob {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+    transition: left 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+.adv-toggle--on .adv-toggle-knob { left: 30px; }
+
+.adv-toggle-label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    color: #ffffff;
+}
+.adv-toggle--on    .adv-toggle-label { left: 8px; }
+.adv-toggle:not(.adv-toggle--on) .adv-toggle-label { right: 6px; color: #9ca3af; }
+
+/* ── Warning callout (debug mode) ────────────────────────────── */
+.adv-warning-callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 4px 20px 6px;
+    padding: 10px 14px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 9px;
+    font-size: 12px;
+    color: #92400e;
+    line-height: 1.6;
+    animation: calloutIn 0.18s ease;
+}
+@keyframes calloutIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.adv-warning-callout svg { flex-shrink: 0; margin-top: 2px; color: #d97706; }
+
+/* ── Danger Zone rows ─────────────────────────────────────────── */
+.adv-danger-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 20px;
+    background: #fef2f2;
+    border-bottom: 1px solid #fecaca;
+}
+.adv-danger-row:first-of-type { border-top: none; }
+.adv-danger-row:last-of-type  { border-bottom: none; }
+
+.adv-danger-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+.adv-danger-label {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #991b1b;
+}
+.adv-danger-desc {
+    font-size: 11.5px;
+    color: #b91c1c;
+}
+
+.adv-danger-btn {
+    padding: 7px 16px;
+    border: 1.5px solid #fca5a5;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #dc2626;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.14s, border-color 0.14s;
+}
+.adv-danger-btn:hover {
+    background: #fef2f2;
+    border-color: #f87171;
+}
+.adv-danger-btn--critical {
+    background: #dc2626;
+    color: #ffffff;
+    border-color: #dc2626;
+}
+.adv-danger-btn--critical:hover {
+    background: #b91c1c;
+    border-color: #b91c1c;
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+.adv-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-top: 1px solid #f0f0f0;
+    background: #fafafa;
+    flex-shrink: 0;
+}
+.adv-footer-hint {
+    font-size: 12px;
+    color: #9ca3af;
+}
+.adv-done-btn {
+    padding: 8px 22px;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+}
+.adv-done-btn:hover  { opacity: 0.88; }
+.adv-done-btn:active { transform: scale(0.98); }

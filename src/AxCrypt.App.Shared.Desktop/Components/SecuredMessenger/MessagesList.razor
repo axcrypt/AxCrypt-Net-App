@@ -9,7 +9,13 @@
         <div class="inbox-section no-margin" id="load-message-list">
             @if (ManageSecMgrViewModel.Messenger.Messages == null || !ManageSecMgrViewModel.Messenger.Messages.Any())
             {
-                <label class="center-column" id="noMoreNewMessagesText" style="margin: 10% 20%;">@Texts.NoMessagesFoundText</label>
+                <div class="smx-empty" id="noMoreNewMessagesText">
+                    <svg class="smx-empty-icon" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                        <path d="M22 12h-6l-2 3h-4l-2-3H2" />
+                        <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z" />
+                    </svg>
+                    <span class="smx-empty-title">@Texts.NoMessagesFoundText</span>
+                </div>
             }
             else
             {

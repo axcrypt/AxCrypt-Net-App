@@ -1,0 +1,157 @@
+﻿@using AxCrypt.App.Shared.Desktop.Services
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Desktop.ViewModels.Home
+@using AxCrypt.App.Shared.Desktop.Models
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+
+@inject NavigationManager Navigation
+@inject ActionsViewModel? homeActionModel
+@inject VaultViewModel vaultViewModel
+@inject RecentFoldersViewModel RecentFoldersViewModel
+@inject SubActionViewModel? subActionModel
+@inject PaidFeaturegateService paidFeaturegateService
+
+<!-- CTA -->
+<div class="cta-wrapper">
+    <button class="cta-btn" @onclick="ToggleNewActionMenu">
+        @PlusSvg New Secure Action
+        <span class="cta-chevron @(NewActionMenuOpen ? "cta-chevron--open" : "")">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                <polyline points="18 15 12 9 6 15" />
+            </svg>
+        </span>
+    </button>
+
+    @if (NewActionMenuOpen)
+    {
+        <div class="new-action-menu">
+            <div class="nam-header">Choose an action</div>
+            @foreach (NewActionGroup grp in NewActionGroups)
+            {
+                @foreach (NewActionItem item in grp.Items)
+                {
+                    <button class="nam-item" @onclick="async (e) => await OnNewAction(e, item)">
+                        <span class="nam-icon nam-icon-bg">
+                            @((MarkupString)item.IconSvg)
+                        </span>
+                        <div class="nam-text">
+                            <span class="nam-label">@item.Label</span>
+                            <span class="nam-desc">@item.Description</span>
+                        </div>
+                        <svg class="nam-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </button>
+                }
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private bool ProfileMenuOpen { get; set; } = false;
+
+    private bool NewActionMenuOpen { get; set; } = false;
+
+    private bool SettingsMenuOpen { get; set; } = false;
+
+    private void ToggleNewActionMenu() { NewActionMenuOpen = !NewActionMenuOpen; ProfileMenuOpen = false; SettingsMenuOpen = false; }
+
+    private async Task OnNewAction(EventArgs e, NewActionItem item)
+    {
+        NewActionMenuOpen = false;
+
+        switch (item.Route)
+        {
+            case "/actions/share":
+                if (!homeActionModel!.KeyShareButtonEnabled)
+                {
+                    paidFeaturegateService.ShowPaidGate("Encrypt & Share", "Secure files and safely share encrypted access with others.", new[] { "Share file access securely", "No need to share passwords", "Control who can access files", "Remove access anytime" });
+                    return;
+                }
+
+                await homeActionModel.ShareKeysAsync(e);
+                break;
+
+            case "/actions/encrypt-folder":
+                if (RecentFoldersViewModel.HasNoSubscription)
+                {
+                    paidFeaturegateService.ShowPaidGate(Texts.WatchedFoldersTabPageText, "Automatically monitor and protect your folders with secure encryption.", new[] { "Automatically encrypt added/changed files", "Monitor multiple folders securely", "Protect sensitive files automatically", "Unlock advanced security features" });
+                    return;
+                }
+
+                await RecentFoldersViewModel.AddSecuredFolder(e);
+                break;
+
+            case "/actions/vault-add":
+                if (!subActionModel!.EnableVault)
+                {
+                    paidFeaturegateService.ShowPaidGate(Texts.VaultText, "Store and protect your sensitive files securely in encrypted vaults.", new[] { "Create secure encrypted vaults", "Protect important files and folders", "Access advanced vault security", "Unlock premium protection features" });
+                    return;
+                }
+
+                await ValidateVaultNavigation();
+                break;
+
+            case "/actions/secure-delete":
+                if (!subActionModel!.EnableVault)
+                {
+                    paidFeaturegateService.ShowPaidGate(Texts.SecureDeleteToolStripMenuItemText, "Permanently delete files so they cannot be recovered.", new[] { "Permanent file deletion", "Prevent file recovery", "Protect sensitive information", "Unlock advanced security tools" });
+                    return;
+                }
+
+                subActionModel.SecureWipeFiles(e);
+                break;
+
+            case "/actions/findfiles":
+                if (!subActionModel!.EnableVault)
+                {
+                    paidFeaturegateService.ShowPaidGate(Texts.FindFileFeatureTitle, "Upgrade to unlock more features.", new[] { "Unlimited files", "Priority support", "Advanced algorithms" });
+                    return;
+                }
+
+                ValidateFindFilesNavigation();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private async Task ValidateVaultNavigation()
+    {
+        bool isValid = await subActionModel!.ValidateVaultPath();
+        if (isValid)
+        {
+            await vaultViewModel.AddVaultFiles();
+        }
+    }
+
+    private void ValidateFindFilesNavigation()
+    {
+        Navigation.NavigateTo("/findfiles");
+    }
+
+    // ── New Secure Action Menu Data ────────────────────────────
+    private List<NewActionGroup> NewActionGroups = new()
+    {
+        new() { GroupLabel = "ENCRYPTION",
+            Items = new()
+            {
+                new() { Label="Encrypt & Share",     Description="Secure a file and get it ready to share safely.",        Route="/actions/share",
+                    IconSvg="<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#2563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='11' width='14' height='11' rx='2'/><path d='M7 11V7a5 5 0 0110 0'/><circle cx='10' cy='16' r='1' fill='#2563eb'/><path d='M18 13h4M20 11l2 2-2 2'/></svg>" },
+                new() { Label="Secure Folder",     Description="Protect all files inside a folder with encryption.",         Route="/actions/encrypt-folder",
+                    IconSvg="<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#2563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z'/><rect x='9' y='11' width='6' height='5' rx='1'/><path d='M11 11v-1.5a1.5 1.5 0 013 0V11'/><circle cx='12' cy='14' r='0.8' fill='#2563eb'/></svg>" },
+                new() { Label="Add Files to Vault",     Description="Store your important files in a secure Vault.",          Route="/actions/vault-add",
+                    IconSvg="<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#2563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='3' width='18' height='18' rx='2'/><circle cx='10' cy='12' r='4'/><circle cx='10' cy='12' r='1.5' fill='#2563eb'/><line x1='10' y1='8' x2='10' y2='6'/><line x1='14' y1='12' x2='16' y2='12'/><line x1='10' y1='16' x2='10' y2='18'/><line x1='6' y1='12' x2='4' y2='12'/><rect x='20' y='10' width='2' height='4' rx='1'/><line x1='16' y1='3' x2='16' y2='7'/><line x1='14' y1='5' x2='18' y2='5'/></svg>" },
+                new() { Label="Secure Delete",     Description="Permanently delete files so they cannot be recovered.",          Route="/actions/secure-delete",
+                    IconSvg="<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#2563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='3 6 5 6 21 6'/><path d='M8 6V4a1 1 0 011-1h6a1 1 0 011 1v2'/><rect x='5' y='6' width='14' height='15' rx='2'/><line x1='9' y1='10' x2='9.01' y2='17' stroke-dasharray='1.5 2'/><line x1='12' y1='10' x2='12.01' y2='17' stroke-dasharray='1.5 2'/><line x1='15' y1='10' x2='15.01' y2='17' stroke-dasharray='1.5 2'/></svg>" },
+                new() { Label="Recent Secure Files",     Description="Quickly open your recently protected or accessed files.",          Route="/actions/findfiles",
+                    IconSvg="<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#2563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h5'/><path d='M14 2v6h6'/><circle cx='17' cy='17' r='5'/><polyline points='17 14 17 17 19 18'/></svg>" },
+            }
+        }
+    };
+
+    private RenderFragment PlusSvg => @<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>;
+}

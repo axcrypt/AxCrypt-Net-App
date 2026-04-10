@@ -245,134 +245,28 @@
     }
 }
 
-.flex-start {
-    .button.highlighted {
-        background-color: $BgrndCol !important;
-        color: $WhtTxtClr;
-    }
-}
-
 .abt-axc a {
     color: #000000;
 }
 
-//progrees bar line
-.progres-sec {
-    margin-top: 190px;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    height: 80px;
-    background: $psmgrBgClr;
-    padding: 15px 10px;
-    border-radius: 8px;
-}
-
-.progress-bar {
-    background-color: $ActnBgClr;
-    height: 100%;
-    width: 0%;
-    border-radius: 4px;
-    transition: width 0.1s ease;
-}
-
-.fist-rw {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 8px;
-    color: $colTxtPrmBd;
-
-    div:nth-child(2) {
-        font-weight: 700;
-        font-size: 11px;
-    }
-
-    label {
-        font-size: 12px;
-    }
-}
-
-.progress-container {
-    width: 100%;
-    background-color: #fff;
-    border-radius: 4px;
-    height: 10px;
-    position: relative;
-}
-
-.progress-bubble-start {
-    position: absolute;
-    top: 0px;
-    right: -5px;
-    height: 10px;
-    width: 10px;
-    background-color: black;
-    border-radius: 50%;
-    transition: left 0.1s ease;
-    z-index: 1;
-    margin-left: -10px;
-}
-
-.progress-bubble-end {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    height: 10px;
-    width: 10px;
-    background-color: white;
-    border: 2px solid $BorderClr;
-    border-radius: 50%;
-}
-
-.progres-fle-txt {
-    display: inline-block;
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-//progress bar circle
-.progress-circle-sec {
-    margin-top: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.progress-wrapper {
-    position: relative;
-    width: 64px;
-    height: 64px;
-}
-
-.progress-circle {
-    transform: rotate(90deg);
-}
-
-.progress-background {
-    fill: none;
-    stroke: $psmgrBgClr;
-    stroke-width: 8;
-}
-
-.progress-value {
-    fill: none;
-    stroke: $ActnBgClr;
-    stroke-width: 8;
-    stroke-linecap: round;
-    transition: stroke-dashoffset 0.1s ease;
-}
-
-.progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 12px;
-    font-weight: bold;
-    color: $TxtClr;
-}
+// ── Progress bar styles intentionally removed ───────────────
+// The legacy NavMenu-sidebar progress strip (`.progres-sec`,
+// `.progress-bar`, `.progress-container`, `.progres-fle-txt`,
+// `.progress-circle-sec`, `.progress-wrapper`, `.progress-circle`,
+// `.progress-background`, `.progress-value`, `.progress-text`,
+// `.progress-bubble-*`, `.fist-rw`) used to be defined here with
+// inline-flow positioning (margin-top: 190px, height: 80px). Those
+// rules clobbered the new HomeNew floating-card positioning every
+// time `_sidemenu` was imported AFTER `_homenew` — which is exactly
+// what happens in the Premium bundle, producing the giant inline
+// green strip between the welcome banner and Quick Actions.
+//
+// The HomeNew/ProgressBar.scss file is now the single source of
+// truth: `position: fixed; bottom: 20px; left: 20px;` floats the
+// strip as a small card in the bottom-left corner regardless of
+// which subscription bundle is loaded. If a Razor consumer still
+// references the legacy class names that's fine — the new file
+// owns them all.
 
 @media (max-width: 768px) {
     .account {
@@ -553,6 +447,8 @@
     }
 
     .flex-start {
+        border: 1px solid $colTxtDsbl;
+        
         a {
             text-decoration: underline;
             text-underline-offset: 3.5px;
@@ -608,16 +504,7 @@
         content: $IcoTw;
     }
 
-    .progres-sec {
-        position: absolute;
-        bottom: 20px;
-        padding: 8px 20px;
-        height: 70px;
-        z-index: 1;
-        width: 300px;
-    }
-
-    .fist-rw {
-        padding-bottom: 0px;
-    }
+    // .progres-sec + .fist-rw overrides removed — see comment at
+    // the original block higher up. HomeNew/ProgressBar.scss owns
+    // these selectors now.
 }

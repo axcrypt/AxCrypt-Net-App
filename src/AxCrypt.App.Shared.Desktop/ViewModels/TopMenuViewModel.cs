@@ -40,7 +40,48 @@ public class TopMenuViewModel : ViewModelBase
 
     public string? VersionHoverText { get; set; }
 
-    public bool ShowUpdate { get; set; }
+    /// <summary>
+    /// True when an update is available and should be surfaced in the UI.
+    /// Observable via BindPropertyChanged so the topbar pill re-renders.
+    /// </summary>
+    public bool ShowUpdate
+    {
+        get { return GetProperty<bool>(nameof(ShowUpdate)); }
+        set { SetProperty(nameof(ShowUpdate), value); }
+    }
+
+    /// <summary>
+    /// True when the new available version is a forced/mandatory upgrade
+    /// (e.g. a critical security release). UI surfaces this as a
+    /// red "Update required" pill instead of the default amber chip.
+    /// Set this from the platform shell when the update manifest
+    /// signals required=true; defaults to false (normal update).
+    /// </summary>
+    public bool IsMandatoryUpdate
+    {
+        get { return GetProperty<bool>(nameof(IsMandatoryUpdate)); }
+        set { SetProperty(nameof(IsMandatoryUpdate), value); }
+    }
+
+    /// <summary>Version label shown next to the update pill, e.g. "v2.4.0".</summary>
+    public string AvailableVersionLabel
+    {
+        get
+        {
+            try
+            {
+                if (_mainViewModel?.DownloadVersion?.Version != null)
+                {
+                    return "v" + _mainViewModel.DownloadVersion.Version.ToString();
+                }
+            }
+            catch
+            {
+                // DownloadVersion is platform-supplied; tolerate any shape mismatch.
+            }
+            return string.Empty;
+        }
+    }
 
     public void SetLanguageAsync(string cultureName)
     {

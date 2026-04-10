@@ -1,0 +1,291 @@
+﻿/* ═══════════════════════════════════════════
+   Settings Popup (gear button)
+════════════════════════════════════════════ */
+.settings-wrapper {
+    position: relative;
+}
+
+.icon-btn--active {
+    background: $brand-green-lt;
+    border-color: $brand-green;
+    color: $brand-green;
+}
+
+.settings-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 340px;
+    background: #fff;
+    border: 1px solid $border;
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.14), 0 2px 8px rgba(0,0,0,.08);
+    padding: 6px;
+    z-index: 200;
+    animation: menuSlideDown 0.18s cubic-bezier(.4,0,.2,1);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+@keyframes menuSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px 8px;
+}
+
+.sm-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: $text-primary;
+}
+
+.sm-close {
+    background: none;
+    border: 1px solid $border;
+    border-radius: 6px;
+    padding: 3px 5px;
+    cursor: pointer;
+    color: $text-muted;
+    display: grid;
+    place-items: center;
+    transition: background .14s;
+}
+
+    .sm-close:hover {
+        background: #fef2f2;
+        color: #ef4444;
+    }
+
+.sm-divider {
+    height: 1px;
+    background: $border;
+    margin: 4px 0;
+}
+
+.sm-section {
+    padding: 8px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sm-section-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: $text-muted;
+    padding: 0 6px;
+}
+
+/* Language select */
+.sm-select-wrap {
+    position: relative;
+}
+
+.sm-select {
+    width: 100%;
+    padding: 8px 32px 8px 12px;
+    border: 1px solid $border;
+    border-radius: 8px;
+    background: $bg-page;
+    font-size: 13px;
+    color: $text-primary;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color .15s;
+}
+
+    .sm-select:focus {
+        border-color: $brand-green;
+        box-shadow: 0 0 0 3px #dbeafe;
+    }
+
+.sm-select-chevron {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: $text-muted;
+}
+
+/* Inactivity radio group */
+.sm-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 4px;
+}
+
+.sm-radio-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border: 1.5px solid $border;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12.5px;
+    color: $text-secondary;
+    background: #fff;
+    transition: all .13s;
+    user-select: none;
+}
+
+    .sm-radio-item input[type=radio] {
+        display: none;
+    }
+
+.sm-radio-dot {
+    width: 10px;
+    height: 10px;
+    border: 2px solid $border;
+    border-radius: 50%;
+    background: #fff;
+    transition: all .13s;
+    flex-shrink: 0;
+}
+
+.sm-radio-item--active {
+    border-color: $brand-green;
+    background: $brand-green-lt;
+    color: $active-text-cr;
+    font-weight: 600;
+}
+
+    .sm-radio-item--active .sm-radio-dot {
+        background: $brand-green;
+        border-color: $brand-green;
+    }
+
+/* Toggle rows */
+.sm-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 6px;
+    border-radius: 8px;
+    transition: background .12s;
+}
+
+    .sm-toggle-row:hover {
+        background: $bg-page;
+    }
+
+/* Locked rows are click-through to the paid-gate popup. Dim the text a
+   touch so the lock badge reads as the call-to-action, and show the
+   pointer cursor so it doesn't look inert. */
+.sm-toggle-row--locked {
+    cursor: pointer;
+}
+
+.sm-toggle-row--locked .sm-toggle-label,
+.sm-toggle-row--locked .sm-toggle-desc {
+    color: $text-muted;
+}
+
+.sm-toggle-row--locked:hover {
+    background: #fffbeb; /* amber-50 — hints at the upgrade pitch the popup will show */
+}
+
+.sm-toggle-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.sm-toggle-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: $text-primary;
+}
+
+.sm-toggle-desc {
+    font-size: 11px;
+    color: $text-muted;
+}
+
+/* Toggle switch */
+.toggle-switch {
+    width: 40px;
+    height: 22px;
+    border-radius: 11px;
+    background: #d1d5db;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    padding: 0;
+}
+
+.toggle-switch--on {
+    background: $brand-green;
+}
+
+.toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    transition: left 0.2s;
+}
+
+.toggle-switch--on .toggle-thumb {
+    left: 21px;
+}
+
+/* Advanced Settings links */
+.sm-advanced-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 500;
+    color: $text-primary;
+    transition: background .12s;
+}
+
+    .sm-advanced-btn:hover {
+        background: $bg-page;
+    }
+
+.sm-adv-arrow {
+    margin-left: auto;
+    color: $text-muted;
+    transition: transform .15s;
+}
+
+.sm-advanced-btn:hover .sm-adv-arrow {
+    transform: translateX(2px);
+}

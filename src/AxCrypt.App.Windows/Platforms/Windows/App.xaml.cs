@@ -247,7 +247,15 @@ namespace AxCrypt.App.Windows.WinUI
             //ThreadException += Application_ThreadException;
             //SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
 
+            // Wire every global exception sink to the same handler. The old
+            // code only attached AppDomain.CurrentDomain.UnhandledException —
+            // task-pool exceptions (background awaits, fire-and-forget
+            // ContinueWith) went to TaskScheduler.UnobservedTaskException
+            // which was never subscribed, so they vanished silently and
+            // contributed to the "app becomes unresponsive" reports.
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            TaskScheduler.UnobservedTaskException += Application_ThreadException;
+
             try
             {
                 _mauiApp = MauiProgram.CreateMauiApp();
@@ -256,7 +264,7 @@ namespace AxCrypt.App.Windows.WinUI
             }
             catch (Exception ex)
             {
-                ExceptionMessageAndReport(ex);
+                ExceptionMessageAndReport(ex, "Startup");
             }
             finally
             {
@@ -266,18 +274,41 @@ namespace AxCrypt.App.Windows.WinUI
             }
         }
 
-        private static async void ExceptionMessageAndReport(Exception ex)
+        /// <summary>
+        /// Single funnel for every unhandled-exception path. Writes the log
+        /// (so we still have a forensic trail), then forwards to the global
+        /// <c>ErrorReportService</c> so the Blazor shell can surface a popup
+        /// for the user instead of failing silently.
+        /// </summary>
+        private static void ExceptionMessageAndReport(Exception? ex, string? context = null)
         {
-            New<IReport>().Exception(ex);
-            while (ex.InnerException != null)
+            if (ex == null)
             {
-                ex = ex.InnerException;
+                return;
             }
 
-            //AlertDialog alertDialog = new AlertDialog();
-            //alertDialog.Title = "Unhandled Exception";
-            //alertDialog.Content = ex.Message;
-            //await alertDialog.ShowAsync();
+            try
+            {
+                New<IReport>().Exception(ex);
+            }
+            catch
+            {
+                // Reporting must never re-throw.
+            }
+
+            try
+            {
+                // The error report service is a DI singleton — fetching it
+                // via the extension keeps the platform layer decoupled from
+                // the DI container instance.
+                AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.ErrorReportService?.Report(ex, context);
+            }
+            catch
+            {
+                // If even the service isn't available yet (very early boot
+                // crash), there's nothing we can do — the log entry above
+                // is the trail of record.
+            }
         }
 
         private void CurrentDomain_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -285,8 +316,13 @@ namespace AxCrypt.App.Windows.WinUI
             if (e.Exception is ApplicationExitException)
             {
                 Exit();
+                return;
             }
-            ExceptionMessageAndReport(e.Exception as Exception);
+            // e.Handled = true keeps the process alive after the popup —
+            // without it WinUI would tear down the app the moment we
+            // returned from this handler, leaving the user with no UI.
+            try { e.Handled = true; } catch { }
+            ExceptionMessageAndReport(e.Exception as Exception, "WinUI dispatcher");
         }
 
         private void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
@@ -294,8 +330,9 @@ namespace AxCrypt.App.Windows.WinUI
             if (e.ExceptionObject is ApplicationExitException)
             {
                 Exit();
+                return;
             }
-            ExceptionMessageAndReport(e.ExceptionObject as Exception);
+            ExceptionMessageAndReport(e.ExceptionObject as Exception, "AppDomain");
         }
 
         private void Application_ThreadException(object sender, UnobservedTaskExceptionEventArgs e)
@@ -303,8 +340,12 @@ namespace AxCrypt.App.Windows.WinUI
             if (e.Exception is ApplicationExitException)
             {
                 Exit();
+                return;
             }
-            ExceptionMessageAndReport(e.Exception as Exception);
+            // Mark observed so the runtime doesn't escalate it to a process
+            // crash on the next GC pass. We've now surfaced it via the popup.
+            try { e.SetObserved(); } catch { }
+            ExceptionMessageAndReport(e.Exception as Exception, "Background task");
         }
 
         private static void RunBackground(CommandLine commandLine)
@@ -347,7 +388,7 @@ namespace AxCrypt.App.Windows.WinUI
                     Exit();
                 }
 
-                ExceptionMessageAndReport(ex);
+                ExceptionMessageAndReport(ex, "App launch");
             }
         }
 

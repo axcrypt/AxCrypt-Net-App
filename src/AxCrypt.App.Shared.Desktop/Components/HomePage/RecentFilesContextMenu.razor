@@ -1,0 +1,177 @@
+@using AxCrypt.App.Shared.Desktop.Models
+@using AxCrypt.App.Shared.Desktop.Services
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Utility.View
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+
+@inject NavigationManager Navigation
+@inject PopupService popupService
+@inject PaidFeaturegateService paidFeaturegateService
+@inject NavPageService NavPageService
+@inject RecentFilesViewModel recentFilesViewModel
+@inject IJSRuntime JSRuntime
+
+@*
+    Right-click + ⋮-dots context menu for Recent Files.
+    Operates on RecentFilesViewModel.ContextMenuTarget (the row the user
+    right-clicked) rather than the checkbox selection — so opening this
+    menu never surfaces the bulk-action bar. If the right-clicked file
+    happens to also be one of the currently-checked rows, the actions
+    fan out to the whole multi-selection (standard file-manager behavior,
+    handled in RunContextMenuActionForTarget on the VM).
+*@
+
+@if (IsOpen)
+{
+    @* IMPORTANT: do NOT add the legacy `context-menu` class here.
+       _index.scss redefines `.context-menu` with a tiny fixed
+       80×120 absolute-positioned box used by Share-Secret /
+       Share-Key popovers. We use a distinct `rf-context-menu`
+       class so we get the HomeNew styling cleanly. *@
+    <div id="rf-context-menu"
+         class="rf-context-menu"
+         style="left:@(popupService.ContextMenuX)px;top:@(popupService.ContextMenuY)px"
+         @onclick:stopPropagation
+         @oncontextmenu:preventDefault="true"
+         @oncontextmenu:stopPropagation="true">
+
+        <div class="ctx-file-header">
+            @if (TargetFile != null)
+            {
+                <span class="ctx-file-name" title="@TargetFile.FilePath">@TargetFile.FileName</span>
+                <span class="ctx-file-size">@TargetFile.FileSize</span>
+            }
+            else
+            {
+                <span class="ctx-file-name">@SelectedCount items selected</span>
+                <span class="ctx-file-size">Bulk action</span>
+            }
+        </div>
+
+        <button class="ctx-item" @onclick="CtxOpen">
+            <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+            <span class="ctx-label">@Texts.McInfMenuOpen</span>
+        </button>
+
+        <button class="ctx-item" @onclick="CtxCleanUp">
+            <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M9 6v14a2 2 0 002 2h2a2 2 0 002-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
+            <span class="ctx-label">Re-encrypt &amp; close</span>
+        </button>
+
+        <button class="ctx-item @(paidFeaturegateService.IsPaidFeature("share") ? "ctx-item--locked" : "")"
+                @onclick="CtxShare">
+            <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></svg>
+            <span class="ctx-label">@Texts.ShareKeysToolStripMenuItemText</span>
+            @if (paidFeaturegateService.IsPaidFeature("share"))
+            {
+                <span class="ctx-lock-badge">PRO</span>
+            }
+        </button>
+
+        <button class="ctx-item" @onclick="CtxShowInFolder">
+            <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
+            <span class="ctx-label">@Texts.ShowInFolderText</span>
+        </button>
+
+        <button class="ctx-item" @onclick="CtxRestoreOriginalName">
+            <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10" /><path d="M3.51 15a9 9 0 102.13-9.36L1 10" /></svg>
+            <span class="ctx-label">@Texts.RestoreAnonymousNamesMenuText</span>
+        </button>
+
+        <div class="ctx-divider"></div>
+
+        <button class="ctx-item ctx-item--danger" @onclick="CtxRemove">
+            <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" /></svg>
+            <span class="ctx-label">@Texts.RemoveRecentFileToolStripMenuItemText</span>
+        </button>
+
+        <button class="ctx-item ctx-item--danger" @onclick="CtxDecryptAndRemove">
+            <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
+            <span class="ctx-label">@Texts.DecryptAndRemoveFromListToolStripMenuItemText</span>
+        </button>
+    </div>
+
+    @* Click-outside / right-click-outside dismiss *@
+    <div class="ctx-backdrop"
+         @onclick="CloseMenu"
+         @oncontextmenu:preventDefault="true"
+         @oncontextmenu="CloseMenu"></div>
+}
+
+@code {
+    // ── Open state ─────────────────────────────────────────────
+    private bool IsOpen => popupService.ContextMenuOpen
+        && (recentFilesViewModel.ContextMenuTarget != null
+            || (recentFilesViewModel.SelectedFiles?.Any() == true));
+
+    private FileDetails? TargetFile
+    {
+        get
+        {
+            string? targetPath = recentFilesViewModel.ContextMenuTarget;
+            if (string.IsNullOrEmpty(targetPath))
+            {
+                return null;
+            }
+            return recentFilesViewModel.RecentFilesList?.FirstOrDefault(f => f.FilePath == targetPath);
+        }
+    }
+
+    private int SelectedCount => recentFilesViewModel.SelectedFiles?.Count() ?? 0;
+
+    // ── After-render: clamp the menu so it never spills off-screen ─
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (IsOpen)
+        {
+            await JSRuntime.InvokeVoidAsync("clampToViewport", "rf-context-menu");
+        }
+    }
+
+    // ── Lifecycle ──────────────────────────────────────────────
+    protected override async Task OnInitializedAsync()
+    {
+        NavPageService.OnUpdateViewState += async () => await RefreshComponentAsync();
+        popupService.OnChange += async () => await RefreshComponentAsync();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task RefreshComponentAsync() =>
+        await InvokeAsync(StateHasChanged);
+
+    // ── Actions ─────────────────────────────────────────────────
+    private void CloseMenu()
+    {
+        popupService.CloseAllPopups();
+        recentFilesViewModel.ClearContextMenuTarget();
+    }
+
+    private async Task RunAndClose(SecuredFilesContextMenu action)
+    {
+        // Close the menu visually before the (potentially async) action
+        // runs so the user gets immediate feedback.
+        popupService.CloseAllPopups();
+        await recentFilesViewModel.RunContextMenuActionForTarget(EventArgs.Empty, action);
+    }
+
+    private Task CtxOpen()                => RunAndClose(SecuredFilesContextMenu.OpenSecured);
+    private Task CtxCleanUp()             => RunAndClose(SecuredFilesContextMenu.StopSecureAndRemoveFromList);
+    private Task CtxShare()
+    {
+        if (paidFeaturegateService.IsPaidFeature("share"))
+        {
+            CloseMenu();
+            paidFeaturegateService.ShowPaidGate(
+                "Key Share",
+                "Share encrypted files securely with a one-time key.",
+                new[] { "One-time share keys", "Revoke access anytime", "Expiry dates on keys" });
+            return Task.CompletedTask;
+        }
+        return RunAndClose(SecuredFilesContextMenu.ShareKey);
+    }
+    private Task CtxShowInFolder()        => RunAndClose(SecuredFilesContextMenu.ShowInFolder);
+    private Task CtxRestoreOriginalName() => RunAndClose(SecuredFilesContextMenu.RenameToOriginal);
+    private Task CtxRemove()              => RunAndClose(SecuredFilesContextMenu.RemoveFromListButKeepSecured);
+    private Task CtxDecryptAndRemove()    => RunAndClose(SecuredFilesContextMenu.StopSecureAndRemoveFromList);
+}

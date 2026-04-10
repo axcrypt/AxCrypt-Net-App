@@ -1,21 +1,28 @@
-﻿@using AxCrypt.Api.Model
+﻿@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Desktop.ViewModels.Home
 @using AxCrypt.App.Shared.Services
 @using AxCrypt.App.Shared.Utility.View
-@using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.Content
 
 @inject RecentFoldersViewModel RecentFoldersViewModel
+@inject ActionsViewModel? homeActionModel
 @inject FileDropService FileDropService
 @inject IJSRuntime JSRuntime
 
-<div class="home-index">
-    <div class="top-page-title-container">
-        <div class="page-title">
-            <h1 class="">@Texts.WatchedFoldersTabPageText</h1>
+@implements IDisposable
+
+<div class="home-index @(DropZoneActive ? "home-index--dropping" : "")">
+    @if (DropZoneActive)
+    {
+        <div class="rf-drop-hint rf-drop-hint--folders">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
+            <span>Drop folders here to secure</span>
         </div>
-    </div>
-    <AxCrypt.App.Shared.Desktop.Components.Home.ActionsComponent />
-    <div>
+    }
+
+    <div class="page-content-body-section">
+        <AxCrypt.App.Shared.Desktop.Components.HomePage.CleanupActionRow IsCleanUpRequired=@homeActionModel!.AreFoldersPending ActionFor="Folders"/>
+        
         <div style="padding: 10px 0px 15px;">
             <label class="text-style font-bold">@Texts.RecentFoldersText</label>
         </div>
@@ -103,16 +110,51 @@
 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.FolderSettingsDialog />
 
 @code {
+    private bool DropZoneActive { get; set; }
+
+    // Held on the instance so we can unsubscribe on Dispose.
+    private Action<IList<string>>? _onFoldersDroppedHandler;
+
     protected override async Task OnInitializedAsync()
     {
         RecentFoldersViewModel.Initialize();
 
         RecentFoldersViewModel.OnUpdateViewState += UpdateStateChanged;
         RecentFoldersViewModel.LogOnViewModel.OnUIStateChanged += UpdateStateChanged;
+
         FileDropService.ResetOnDropped();
-        FileDropService.OnFoldersDropped += async (folders) => await HandleDroppedFolders(folders);
+        _onFoldersDroppedHandler = async (folders) =>
+        {
+            DropZoneActive = false;
+            await HandleDroppedFolders(folders);
+            await InvokeAsync(StateHasChanged);
+        };
+        FileDropService.OnFoldersDropped += _onFoldersDroppedHandler;
+        FileDropService.OnFilesDraggedOver += HandleDraggedOverFiles;
+        FileDropService.OnFilesDragLeave += HandleDragLeave;
 
         await base.OnInitializedAsync();
+    }
+    private void HandleDraggedOverFiles()
+    {
+        DropZoneActive = true;
+        UpdateStateChanged();
+    }
+
+    private void HandleDragLeave()
+    {
+        DropZoneActive = false;
+        UpdateStateChanged();
+    }
+
+    public void Dispose()
+    {
+        if (_onFoldersDroppedHandler != null)
+        {
+            FileDropService.OnFoldersDropped -= _onFoldersDroppedHandler;
+        }
+        RecentFoldersViewModel.OnUpdateViewState -= UpdateStateChanged;
+        RecentFoldersViewModel.LogOnViewModel.OnUIStateChanged -= UpdateStateChanged;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

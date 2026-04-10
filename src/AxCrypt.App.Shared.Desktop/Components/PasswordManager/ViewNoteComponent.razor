@@ -1,10 +1,11 @@
-﻿@using AxCrypt.App.Shared.ViewModels.Secret
+@using AxCrypt.App.Shared.ViewModels.Secret
 @using AxCrypt.App.Shared.Helpers
 @using AxCrypt.App.Shared.Models.Secret
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.Content
 @using AxCrypt.Core.UI
 @using AxCrypt.App.Shared.Desktop.Code
+@using Microsoft.JSInterop
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject IStatusAlertService StatusAlertService;
@@ -14,74 +15,116 @@
 @inject CopyToClipboardUtility CopyToClipboardUtility
 @inject IJSRuntime jsRuntime
 
-<div>
-    <div class="password-header">
-        <a href="/passwordManager" class="grn-clr"><img class="back-arrow" src="" />@Texts.PasswordManagementPageTitle</a>
-    </div>
-    <div class="page-heading">
-        <h3 class="password-creation">
-            @Texts.ViewNoteTitle
-        </h3>
-    </div>
-    <form>
-        <div class="row parent-container">
-            <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
-            <ul class="clean-up sub-head-clr" style=" list-style:none">
-                <li>
-                    <label for="Password_SecretDesc">@Texts.DescriptionLabel</label><br />
-                    <div class="view-password-desc-wrapper" @ref="descWrapper">
-                        <div class="view-secret-description" @ref="descriptionDiv">
-                            @((MarkupString)secretService.CurrentSecret.Note.SecretDesc.Replace("\n", "<br />"))
-                        </div>
-                        <button type="button" class="view-secret-expand-toggle-btn" @onclick="async () => await ToggleText()" style="display:none">
-                            @Texts.BusinessSubsrcnShowMore
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <label for="Note_Note">@Texts.NoteLabel</label>
-                    <div style="display:flex; position: relative;">
-                        <textarea id="noteInput" type="text" class="secret-note-section" rows="7" cols="20" maxlength="100000" style="color:#494949; background-color:#E2E2E2" value="@GetValue(isNoteVisible, secretService.CurrentSecret.Note.Note)" readonly="readonly" @onclick="() => VisibleReadOnlySecret(true)"></textarea>
+@*
+    View Note — read-only secure note. Uses the shared .pm-form-*
+    chrome so it visually matches View Password / Edit Password.
+*@
 
-                        <div id="cp-sec-pwd-clipbrd" style="position: absolute; right: 10px; cursor: pointer;" class="copy-to-clipbrd" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret!.Note.Note)">
-                            <img class="clipbrd" src="" alt="copy-clp-brd">
-                        </div>
-                    </div>
-                    <span id="copiedMessage" style="color: green; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
-                </li>
-                @if (secretService.CurrentSecret.SharedWith != null && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
-                {
-                    <li class="list-row">
-                        <div class="list-width">
-                            <label for="Card_ExpirationDate">@Texts.OwnerEmailText</label>
-                            <input id="card-exp-date-inp" style="color:#494949; background-color:#E2E2E2" @bind="@secretService.CurrentSecret.OwnerEmail" type="text" readonly="readonly">
-                        </div>
-                    </li>
-                }
-                <li>
-                    <div style="float: right;">
-                        <div>
-                            @if (viewSecretViewModel.HasPaidSubscription)
-                            {
-                                <input id="secret-delete" type="button" class="button btn-extra-small alert" value="@Texts.ButtonDeleteText" @onclick="async () => await DeleteSecret()" />
-                            }
-                            @if (viewSecretViewModel.HasPaidSubscription && secretService.CurrentSecret.OwnerEmail == viewSecretViewModel.UserEmail)
-                            {
-                                <input id="secret-edit" type="button" class="button success btn-extra-small" value="Edit" @onclick="NavigateToEdit" style="margin-left:20px;" />
-                            }
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <ShareSecretComponent />
+<div class="page-content-body-section">
+
+    <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
+
+    <div class="pm-form-shell">
+
+        <div class="pm-form-header">
+            <NavLink class="pm-form-back" href="passwordManager" title="Back to passwords">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </NavLink>
+            <div class="pm-form-titles">
+                <h2 class="pm-form-title">@(secretService.CurrentSecret?.Note?.SecretDesc ?? Texts.ViewNoteTitle)</h2>
+                <p class="pm-form-sub">@Texts.NoteLabel</p>
+            </div>
+            <span class="pm-type-badge pm-type-badge--note" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                </svg>
+            </span>
         </div>
-    </form>
+
+        <div class="pm-form-body">
+
+            @if (!string.IsNullOrEmpty(secretService.CurrentSecret!.Note.SecretDesc))
+            {
+                <div class="pm-form-row">
+                    <label>@Texts.DescriptionLabel</label>
+                    <div class="pm-form-display">
+                        <span class="pm-form-display-value">@secretService.CurrentSecret.Note.SecretDesc</span>
+                    </div>
+                </div>
+            }
+
+            <div class="pm-form-row">
+                <label>@Texts.NoteLabel</label>
+                <div class="pm-form-input-wrap">
+                    <textarea id="noteInput"
+                              class="pm-form-textarea"
+                              rows="9"
+                              readonly="readonly"
+                              style="cursor: pointer; padding-right: 44px;"
+                              @onclick="() => VisibleReadOnlySecret(true)">@GetValue(isNoteVisible, secretService.CurrentSecret.Note.Note)</textarea>
+                    <button type="button"
+                            class="pm-form-input-action"
+                            title="@Texts.SecretsCopytoClipboard"
+                            style="top: 12px; transform: none;"
+                            @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(secretService.CurrentSecret!.Note.Note)">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2"/>
+                            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                        </svg>
+                    </button>
+                </div>
+                @if (!string.IsNullOrEmpty(CopyToClipboardUtility.CopiedInfoText))
+                {
+                    <span style="color:#48772C; font-size:11.5px; font-weight:600;">@CopyToClipboardUtility.CopiedInfoText</span>
+                }
+            </div>
+
+            @if (secretService.CurrentSecret.SharedWith != null
+                 && secretService.CurrentSecret.OwnerEmail != viewSecretViewModel.UserEmail)
+            {
+                <div class="pm-form-row">
+                    <label>@Texts.OwnerEmailText</label>
+                    <div class="pm-form-display">
+                        <span class="pm-form-display-value">@secretService.CurrentSecret.OwnerEmail</span>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="pm-form-footer">
+            @if (viewSecretViewModel.HasPaidSubscription)
+            {
+                <button type="button" class="pm-btn pm-btn--danger" @onclick="async () => await DeleteSecret()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6l-2 14a2 2 0 01-2 2H9a2 2 0 01-2-2L5 6"/>
+                    </svg>
+                    @Texts.ButtonDeleteText
+                </button>
+            }
+            @if (viewSecretViewModel.HasPaidSubscription
+                 && secretService.CurrentSecret.OwnerEmail == viewSecretViewModel.UserEmail)
+            {
+                <button type="button" class="pm-btn pm-btn--primary" @onclick="NavigateToEdit">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                        <path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                    Edit
+                </button>
+            }
+        </div>
+
+        <ShareSecretComponent />
+    </div>
 </div>
+
 @code {
     ShareSecretViewModel? shareSecretViewModel;
-    private ElementReference descriptionDiv;
-    private ElementReference descWrapper;
-    private bool isExpanded = false;
+    private bool isNoteVisible = false;
 
     protected override void OnInitialized()
     {
@@ -101,67 +144,31 @@
     {
         if (firstRender)
         {
-            await jsRuntime.InvokeVoidAsync("initDescriptionToggle", descriptionDiv);
             await jsRuntime.InvokeVoidAsync("addClickListenerOutside", DotNetObjectReference.Create(this), "noteInput");
         }
-    }
-
-    private async Task ToggleText()
-    {
-        isExpanded = !isExpanded;
-        await jsRuntime.InvokeVoidAsync("toggleDescription", descriptionDiv, isExpanded);
     }
 
     private async Task DeleteSecret()
     {
         PopupButtons selectedButton = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, @Texts.AlertText, @Texts.DeleteSecretText, Common.DoNotShowAgainOptions.None);
         bool isConfirmed = selectedButton == PopupButtons.Ok;
-
-        if (!isConfirmed)
-        {
-            return;
-        }
+        if (!isConfirmed) return;
 
         bool deleted = await viewSecretViewModel.TryDeleteSecretAsync();
-        ShowDeleteStatus(deleted);
+        if (deleted) StatusAlertService.Success(@Texts.SecretDeletedText);
+        else         StatusAlertService.Error(viewSecretViewModel.ErrorMessage);
 
         navigationManager.NavigateTo("/passwordManager");
-    }
-
-    private void ShowDeleteStatus(bool deleted)
-    {
-        if (deleted)
-        {
-            StatusAlertService.Success(@Texts.SecretDeletedText);
-        }
-        else
-        {
-            StatusAlertService.Error(viewSecretViewModel.ErrorMessage);
-        }
-    }
-
-    private void HandleOnChange(ChangeEventArgs args)
-    {
-        secretService.CurrentSecret!.Note.SecretDesc = args?.Value?.ToString();
     }
 
     private void NavigateToEdit()
     {
         SecretViewModel secret = secretService.CurrentSecret!;
-        if (secret != null)
+        if (secret != null && secret.SecretType == AxCrypt.Api.Model.Secret.SecretType.Note)
         {
-            string url = secret.SecretType switch
-            {
-                AxCrypt.Api.Model.Secret.SecretType.Note => $"/editnote"
-            };
-            if (!string.IsNullOrEmpty(url))
-            {
-                navigationManager.NavigateTo(url);
-            }
+            navigationManager.NavigateTo("/editnote");
         }
     }
-
-    private bool isNoteVisible = false;
 
     [JSInvokable]
     public void HideField(string fieldId)
@@ -186,9 +193,6 @@
 
     void UpdateStateChanged()
     {
-        InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });
+        InvokeAsync(StateHasChanged);
     }
 }

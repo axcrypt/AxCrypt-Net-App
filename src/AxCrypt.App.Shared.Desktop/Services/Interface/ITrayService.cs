@@ -15,5 +15,7 @@ public interface ITrayService
 
     void EnsureVisible();
 
+    void Remove();
+
     void Dispose();
 }

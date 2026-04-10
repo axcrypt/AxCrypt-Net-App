@@ -1,4 +1,7 @@
-﻿using AxCrypt.App.Shared.Helpers;
+﻿using AxCrypt.App.Entitlement.Models;
+using AxCrypt.App.Entitlement.Services;
+using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
@@ -237,6 +240,7 @@ public class RecentFoldersViewModel : ViewModelBase
 
     private async Task WatchedFoldersAddSecureFolderMenuItem_Click(object sender, EventArgs e)
     {
+
         FileSelectionEventArgs eventArgs = new FileSelectionEventArgs(new string[] { })
         {
             FileSelectionType = FileSelectionType.Folder
@@ -248,7 +252,14 @@ public class RecentFoldersViewModel : ViewModelBase
             return;
         }
 
-        await _mainViewModel.AddWatchedFolders.ExecuteAsync(eventArgs.SelectedFiles);
+        int availableCount = await New<UserEntitlementService>().GetRemainingCount(LimitedCapability.SecureFolders, New<AccountStatusViewModel>().SubscriptionLevel, eventArgs.SelectedFiles.Count());
+        if (availableCount <= 0)
+        {
+            return;
+        }
+
+        await _mainViewModel.AddWatchedFolders.ExecuteAsync(eventArgs.SelectedFiles.Take(availableCount));
+        await New<UserEntitlementService>().InsertUserUsageCount(LimitedCapability.SecureFolders, LogOnViewModel.SubscriptionLevel);
     }
 
     private async void WatchedFolderKeySharing(EventArgs args)
@@ -288,7 +299,52 @@ public class RecentFoldersViewModel : ViewModelBase
 
     private async void DecryptPermanently()
     {
-        await _mainViewModel.DecryptWatchedFolders.ExecuteAsync(_mainViewModel.SelectedWatchedFolders);
+        // Snapshot which folders the user asked to stop securing. Core's
+        // DecryptWatchedFolders command mutates MainViewModel.WatchedFolders
+        // before it finishes the actual decrypt, so the row vanishes from
+        // the UI immediately. If the user then right-clicks the progress
+        // bar and chooses Cancel, the decrypt aborts but Core does NOT
+        // restore the watched-folder entry — leaving the user with a
+        // partially-decrypted folder that's no longer in the secured list.
+        //
+        // Capture the list, run the command, then check whether the
+        // operation was cancelled. If it was, re-add anything that got
+        // pulled but never finished decrypting so the secured list lines
+        // up with reality.
+        List<string> toStop = _mainViewModel.SelectedWatchedFolders?.ToList() ?? new List<string>();
+
+        IProgressContext? ctx = AxCServiceProviderExtension.ProgressBarService?.ProgressContext;
+
+        await _mainViewModel.DecryptWatchedFolders.ExecuteAsync(toStop);
+
+        if (toStop.Count == 0)
+        {
+            return;
+        }
+
+        bool wasCancelled = ctx != null && ctx.Cancel;
+        if (!wasCancelled)
+        {
+            return;
+        }
+
+        // Refresh the secured list from the source of truth — any folder
+        // the user asked to stop that is still actually secured (i.e.
+        // wasn't fully unsecured before the cancel landed) should remain
+        // in the list. The simplest way to converge is to re-add the
+        // missing entries: Core's AddWatchedFolders is a no-op for
+        // already-watched folders, and for the ones it dropped optimistically
+        // it'll put them back.
+        IEnumerable<string> stillSecured = _mainViewModel.WatchedFolders ?? Array.Empty<string>();
+        List<string> missing = toStop
+            .Where(p => !string.IsNullOrEmpty(p))
+            .Where(p => !stillSecured.Any(s => string.Equals(s, p, StringComparison.OrdinalIgnoreCase)))
+            .ToList();
+
+        if (missing.Count > 0)
+        {
+            await _mainViewModel.AddWatchedFolders.ExecuteAsync(missing);
+        }
     }
 
     private async void DecryptTemporarily()

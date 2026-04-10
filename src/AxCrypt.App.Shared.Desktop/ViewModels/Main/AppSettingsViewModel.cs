@@ -50,8 +50,6 @@ public class AppSettingsViewModel : ViewModelBase
         IsFileNameOn = New<UserSettings>().EncryptFilePropertiesFileName;
         AdvancedOptionsViewModel = new AdvancedOptionsViewModel();
         _logViewModel = AxCServiceProviderExtension.LogViewModel;
-        EnableUserActivity = New<UserSettings>().UserActivityMode;
-        EnableFindFiles = New<UserSettings>().FindFileMode;
         DarkTheme = New<UserSettings>().DarkMode;
     }
 
@@ -206,9 +204,9 @@ public class AppSettingsViewModel : ViewModelBase
         UpdateViewState();
     }
 
-    public async void ToggleIncludeSubfolders(EventArgs e)
+    public async Task ToggleIncludeSubfolders(EventArgs e)
     {
-        await PremiumFeature_ClickAsync(LicenseCapability.IncludeSubfolders, (ss, ee) => { return ToggleIncludeSubfoldersOption(); }, null!, e);
+        await PremiumFeature_ClickAsync(LicenseCapability.IncludeSubfolders, async (ss, ee) => { await ToggleIncludeSubfoldersOption(); }, null!, e);
     }
 
     private async Task ToggleIncludeSubfoldersOption()
@@ -234,7 +232,6 @@ public class AppSettingsViewModel : ViewModelBase
         {
             _mainViewModel.FolderOperationMode = FolderOperationMode.IncludeSubfolders;
             IncludeSubfolders = true;
-            UpdateViewState();
         }
 
         UpdateViewState();
@@ -278,11 +275,31 @@ public class AppSettingsViewModel : ViewModelBase
 
     public void ToggleDebug() => UpdateDebugMode(!_mainViewModel.DebugMode);
 
-    public bool EnableUserActivity { get; set; }
+    public bool EnableUserActivity
+    {
+        get
+        {
+            return New<UserSettings>().UserActivityMode;
+        }
+        set
+        {
+            ToggleUserActivity();
+        }
+    }
 
     public void ToggleUserActivity() => UpdateUserActivityMode(!New<UserSettings>().UserActivityMode);
 
-    public bool EnableFindFiles { get; set; }
+    public bool EnableFindFiles
+    {
+        get
+        {
+            return New<UserSettings>().FindFileMode;
+        }
+        set
+        {
+            ToggleFindFiles();
+        }
+    }
 
     public void ToggleFindFiles() => UpdateFindFileMode(!New<UserSettings>().FindFileMode);
 
@@ -299,6 +316,11 @@ public class AppSettingsViewModel : ViewModelBase
     public async void InviteUser(EventArgs e)
     {
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) => { _logOnViewModel.InviteDialog.Show(); }, null!, e);
+    }
+
+    public void OpenInviteUser(EventArgs e)
+    {
+        _logOnViewModel.InviteDialog.Show();
     }
 
     public void ToggleAdvancedOption()
@@ -333,18 +355,32 @@ public class AppSettingsViewModel : ViewModelBase
     {
         EnableDebugPopup = enabled;
         _mainViewModel!.DebugMode = enabled;
+        // Broadcast so every surface that conditions on EnableDebugPopup
+        // (Side menu, Tools page, AppSettings popup) re-renders right
+        // away instead of only after the next app launch.
+        _logOnViewModel.UIStateChanged();
+        UpdateViewState();
     }
 
     private void UpdateUserActivityMode(bool enabled)
     {
         New<UserSettings>().UserActivityMode = enabled;
         AxCServiceProvider.GetService<ProfileViewModel>().UpdateViewState();
+        // Notify the rest of the UI — Tools page, side menu, profile
+        // options — so the user activity row appears/disappears the
+        // moment the toggle flips.
+        _logOnViewModel.UIStateChanged();
+        UpdateViewState();
     }
 
     private void UpdateFindFileMode(bool enabled)
     {
         New<UserSettings>().FindFileMode = enabled;
         AxCServiceProvider.GetService<ProfileViewModel>().UpdateViewState();
+        // Same as user activity / debug — propagate to every dependent
+        // surface so Find Files becomes available immediately.
+        _logOnViewModel.UIStateChanged();
+        UpdateViewState();
     }
 
     public string? ErrorMessage { get; set; }
@@ -424,7 +460,7 @@ public class AppSettingsViewModel : ViewModelBase
         New<IDebugLoggingWindow>().ShowLogWindow(logType);
     }
 
-    public async void OpenManageAxCryptID()
+    public async Task OpenManageAxCryptID()
     {
         AccountStorage userKeyPairs = new AccountStorage(New<LogOnIdentity, IAccountService>(Resolve.KnownIdentities.DefaultEncryptionIdentity));
         _viewModel = await ManageAccountViewModel.CreateAsync(userKeyPairs);

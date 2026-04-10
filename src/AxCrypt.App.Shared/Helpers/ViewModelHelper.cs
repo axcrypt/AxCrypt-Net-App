@@ -1,18 +1,17 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.UI;
-using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Helpers;
 
 public static class ViewModelHelper
 {
-    private static readonly int MaxShareUsersAllowedFree = 1;
     private static readonly int MaxShareUsersAllowedPremium = 10;
     private static readonly int MaxShareUsersAllowedBusiness = 20;
 
@@ -25,7 +24,7 @@ public static class ViewModelHelper
                 .ToList();
     }
 
-    public static int MaxAllowedUsersCountToShare()
+    public static async Task<int> MaxAllowedUsersCountToShare()
     {
         LicenseCapabilities Capability = New<LicensePolicy>().Capabilities;
 
@@ -41,11 +40,12 @@ public static class ViewModelHelper
 
         if (Capability.Has(LicenseCapability.ShareSecretFree))
         {
-            return MaxShareUsersAllowedFree;
+            return await New<UserEntitlementService>().GetRemainingCount(LimitedCapability.ShareSecret, New<AccountStatusViewModel>().SubscriptionLevel);
         }
 
         return 0;
     }
+
     public static bool IsAxCryptOnline()
     {
         if (New<AxCryptOnlineState>().IsOffline)
@@ -58,11 +58,11 @@ public static class ViewModelHelper
     public static readonly int MaxAllowedSecretsCount = 10;
 
     private static long freeUserCount;
-   
+
     public static async Task<bool> CheckFreeUserSecretsCountasync()
     {
-        freeUserCount = await GetFreeUserSecretsCountAsync();
-        return freeUserCount < MaxAllowedSecretsCount;
+        freeUserCount = await New<UserEntitlementService>().GetRemainingCount(LimitedCapability.CreateSecret, New<AccountStatusViewModel>().SubscriptionLevel);
+        return freeUserCount > 0;
     }
 
     public static async Task<long> GetFreeUserSecretsCountAsync()
@@ -81,7 +81,7 @@ public static class ViewModelHelper
         {
             return true;
         }
-        if (freeUserCount < MaxAllowedSecretsCount)
+        if (freeUserCount > 0)
         {
             return true;
         }
@@ -94,7 +94,7 @@ public static class ViewModelHelper
         {
             return false;
         }
-        if (freeUserCount < MaxAllowedSecretsCount)
+        if (freeUserCount > 0)
         {
             return true;
         }

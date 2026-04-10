@@ -1,8 +1,9 @@
-﻿using AxCrypt.App.Shared.Services.UI;
+﻿using AxCrypt.Api.Model;
+using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
-using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
@@ -217,12 +218,50 @@ public class FileFolderSelection : IDataItemSelection
             return;
         }
 
-        foreach (string fileName in ofd.Select(file => file.FullPath))
+        IEnumerable<string> selectedFiles = ofd.Select(file => file.FullPath);
+        if (e.FileSelectionType == FileSelectionType.Encrypt || e.FileSelectionType == FileSelectionType.KeySharingEncrypt || e.FileSelectionType == FileSelectionType.KeySharing)
+        {
+            int availableCount = await GetAvailableFileCount(e.FileSelectionType, New<AccountStatusViewModel>().SubscriptionLevel, ofd.Count());
+
+            if (availableCount <= 0)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            selectedFiles = selectedFiles.Take(availableCount);
+        }
+
+        foreach (string fileName in selectedFiles)
         {
             e.SelectedFiles?.Add(fileName);
         }
 
         return;
+    }
+
+    private static async Task<int> GetAvailableFileCount(FileSelectionType fileSelectionType, SubscriptionLevel subscriptionLevel, int selectedCount)
+    {
+        LimitedCapability capability;
+        switch (fileSelectionType)
+        {
+            case FileSelectionType.Encrypt:
+                capability = LimitedCapability.StrongerEncryption;
+                break;
+
+            case FileSelectionType.KeySharingEncrypt:
+                capability = LimitedCapability.StrongerEncryption;
+                break;
+
+            case FileSelectionType.Wipe:
+                capability = LimitedCapability.StrongerEncryption;
+                break;
+
+            default:
+                break;
+        }
+
+        return await New<UserEntitlementService>().GetRemainingCount(LimitedCapability.StrongerEncryption, subscriptionLevel, selectedCount);
     }
 
     private static async void HandleSaveAsFileSelection(FileSelectionEventArgs e)

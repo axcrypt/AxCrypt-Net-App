@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\shared\AxCrypt.Api\AxCrypt.Api.csproj" />
+    <ProjectReference Include="..\..\shared\AxCrypt.Core\AxCrypt.Core.csproj" />
+    <ProjectReference Include="..\..\shared\AxCrypt.Cryptor\AxCrypt.Cryptor.csproj" />
+    <!-- DO NOT add a reference back to AxCrypt.App.Shared here:
+         AxCrypt.App.Shared already references this project, so adding
+         the reverse edge produces MSB4006 "circular dependency in the
+         CleanReferencedProjects target". UI-binding contracts (FeatureKey,
+         FeatureUsage, IFeatureUsageProvider, SignUpFrom) live in THIS
+         project so AxCrypt.App.Shared can consume them one-way. -->
+  </ItemGroup>
+
+</Project>

@@ -5,8 +5,12 @@ namespace AxCrypt.App.Shared.Desktop.Code
 {
     public static class AppPreferences
     {
-        public const int MinimumWindowWidth = 1230;
-        public const int MinimumWindowHeight = 770;
+        // Sized to fit 1366×768 — the most common Windows laptop screen —
+        // with room for the Windows taskbar (~40px) and title bar (~32px).
+        // Previously 1230×770 which exceeded the usable area on those
+        // displays, hiding the home screen's bottom section.
+        public const int MinimumWindowWidth = 1100;
+        public const int MinimumWindowHeight = 750;
 
         public static double MainWindowWidth
         { get { return Resolve.UserSettings.Load<double>(nameof(MainWindowWidth)); } set { Resolve.UserSettings.Store(nameof(MainWindowWidth), value); } }

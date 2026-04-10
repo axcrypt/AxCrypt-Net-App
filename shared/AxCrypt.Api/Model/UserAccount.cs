@@ -145,6 +145,9 @@ namespace AxCrypt.Api.Model
         [JsonProperty("multiFactorAuthInfo")]
         public MultiFactorAuthApiModel MultiFactorAuthInfo { get; set; }
 
+        [JsonProperty("signupfrom")]
+        public string SignUpFrom { get; set; }
+
         public bool Equals(UserAccount other)
         {
             if ((object)other == null)

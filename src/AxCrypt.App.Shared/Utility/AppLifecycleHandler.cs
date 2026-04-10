@@ -69,10 +69,48 @@ namespace AxCrypt.App.Shared.Utility
 
         private static async Task ShutDownAnd(Action finalAction)
         {
-            await new ApplicationManager().ShutdownBackgroundSafe();
-            await EncryptPendingFiles();
+            // Background-shutdown + pending-file flush can occasionally hang
+            // (e.g. a vault sync awaiting a disposed cancellation token, or
+            // EncryptPendingFiles stuck on an aborted file). Without a
+            // timeout, finalAction() — the call that actually terminates
+            // the process — never runs, leaving the app window closed but
+            // the underlying process alive (this is what the user reported
+            // as "the app closes but the debug window stays open").
+            //
+            // Race the shutdown work against a hard deadline so the kill
+            // always fires within a bounded window.
+            const int shutdownTimeoutMs = 3500;
 
-            finalAction();
+            Task shutdownTask = Task.Run(async () =>
+            {
+                try
+                {
+                    await new ApplicationManager().ShutdownBackgroundSafe();
+                    await EncryptPendingFiles();
+                }
+                catch
+                {
+                    // Best-effort shutdown — if anything throws we still
+                    // want the exit to proceed.
+                }
+            });
+
+            await Task.WhenAny(shutdownTask, Task.Delay(shutdownTimeoutMs));
+
+            // Always run the final action (Process.GetCurrentProcess().Kill()
+            // on Windows; equivalent on other platforms). Wrapped so a
+            // platform that ungracefully throws still doesn't strand us.
+            try
+            {
+                finalAction();
+            }
+            catch
+            {
+                // Belt-and-suspenders: if the platform exit threw, kill
+                // the process directly so the user never sees a zombie
+                // window.
+                System.Environment.Exit(0);
+            }
         }
 
         private static async Task EncryptPendingFiles()

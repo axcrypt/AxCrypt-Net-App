@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace AxCrypt.Api.Model
+﻿namespace AxCrypt.Api.Model
 {
     public enum SubscriptionLevel
     {
@@ -11,6 +7,7 @@ namespace AxCrypt.Api.Model
         Undisclosed,
         LegacyFree,
         Free,
+        Lite,
         Premium,
         Business,
         PasswordManager

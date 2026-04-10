@@ -48,6 +48,14 @@ public static class AxCServiceProviderExtension
             return GetService<ProgressBarService>();
         }
     }
+
+    public static ErrorReportService? ErrorReportService
+    {
+        get
+        {
+            return GetService<ErrorReportService>();
+        }
+    }
     
     public static LogViewModel? LogViewModel
     {

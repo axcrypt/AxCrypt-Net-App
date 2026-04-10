@@ -1,0 +1,87 @@
+﻿@using AxCrypt.App.Shared.Desktop.Models
+@using AxCrypt.App.Shared.Desktop.Services
+
+@inject NavigationManager Navigation
+@inject PopupService popupService
+@inject PaidFeaturegateService paidFeaturegateService
+@inject NavPageService NavPageService
+
+<!-- Help Overlay -->
+@if (popupService.HelpOverlayOpen)
+{
+    <div class="help-overlay" @onclick:stopPropagation>
+        <div class="help-header">
+            <div class="help-title-row">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
+                <h2>Get Started with SecureApp</h2>
+            </div>
+            <button class="help-close" @onclick="() => popupService.HelpOverlayOpen = false">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+            </button>
+        </div>
+        <div class="help-tabs">
+            @foreach (var tab in HelpTabs)
+            {
+                <button class="help-tab @(ActiveHelpTab == tab.Id ? "help-tab--active" : "")"
+                        @onclick="() => ActiveHelpTab = tab.Id">
+                    @tab.Label
+                </button>
+            }
+        </div>
+        <div class="help-content">
+            @foreach (var item in HelpItems.Where(h => h.TabId == ActiveHelpTab))
+            {
+                <div class="help-item">
+                    <div class="help-item-icon" style="background:@item.IconBg">@((MarkupString)item.IconSvg)</div>
+                    <div class="help-item-body">
+                        <span class="help-item-title">@item.Title</span>
+                        <span class="help-item-desc">@item.Description</span>
+                        @if (!string.IsNullOrEmpty(item.Shortcut))
+                        {
+                            <kbd class="help-kbd">@item.Shortcut</kbd>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    // ═══════════════════════════════════════════
+    //  HELP OVERLAY
+    // ═══════════════════════════════════════════
+
+    protected override Task OnInitializedAsync()
+    {
+        NavPageService.OnUpdateViewState += async () => await RefreshComponentAsync();
+
+        return base.OnInitializedAsync();
+    }
+
+    private async Task RefreshComponentAsync()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged(); // Refresh UI
+        });
+    }
+
+    private string ActiveHelpTab { get; set; } = "start";
+    private List<(string Id, string Label)> HelpTabs = new() { ("start", "Getting Started"), ("features", "Key Features"), ("shortcuts", "Tips & Tricks"), ("faq", "FAQ") };
+
+    private List<HelpItem> HelpItems = new()
+    {
+        new() { TabId="start", Title="Encrypt your first file", Description="Click 'Encrypt File' from Quick Actions, or drag and drop any file onto the Recent Files section. Your file is encrypted with AES-256 instantly.", IconBg="#dbeafe", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#3b82f6' stroke-width='2'><rect x='3' y='11' width='18' height='11' rx='2'/><path d='M7 11V7a5 5 0 0110 0v4'/></svg>" },
+        new() { TabId="start", Title="Set up your Vault", Description="The Vault keeps all encrypted files in one secure folder. Enable auto-encryption so new files are protected the moment you save them.", IconBg="#f5f3ff", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#8b5cf6' stroke-width='2'><path d='M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z'/></svg>", Shortcut="Pro only" },
+        new() { TabId="start", Title="Share a file securely", Description="Use 'Share Securely' to generate a one-time share key. The recipient can only open the file with that key, and you can revoke access at any time.", IconBg="#dcfce7", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#22c55e' stroke-width='2'><circle cx='18' cy='5' r='3'/><circle cx='6' cy='12' r='3'/><circle cx='18' cy='19' r='3'/><line x1='8.59' y1='13.51' x2='15.42' y2='17.49'/></svg>", Shortcut="Pro only" },
+        new() { TabId="features", Title="Global Search", Description="Search any file, tool, or page from the search bar at the top. Results are filtered live as you type.", IconBg="#eff6ff", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#3b82f6' stroke-width='2'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>", Shortcut="Ctrl+K" },
+        new() { TabId="features", Title="Right-click Context Menu", Description="Right-click any file in the Recent Files list for quick actions: open, share key, anonymous rename, or remove from recent.", IconBg="#fff7ed", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#f97316' stroke-width='2'><circle cx='12' cy='5' r='1'/><circle cx='12' cy='12' r='1'/><circle cx='12' cy='19' r='1'/></svg>", Shortcut="Right-click" },
+        new() { TabId="features", Title="Drag & Drop to Encrypt", Description="Drag any file from your desktop onto the Recent Files section to encrypt it instantly — no dialog needed.", IconBg="#ecfdf5", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#10b981' stroke-width='2'><polyline points='16 16 12 12 8 16'/><line x1='12' y1='12' x2='12' y2='21'/></svg>" },
+        new() { TabId="features", Title="Anonymous Rename", Description="Use the Tools page to replace filenames with random IDs — so no one can guess a file's contents from its name alone.", IconBg="#f5f3ff", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#8b5cf6' stroke-width='2'><path d='M12 20h9'/><path d='M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z'/></svg>" },
+        new() { TabId="shortcuts", Title="Quick encrypt shortcut", Description="Press Ctrl+E anywhere in the app to instantly open the file picker and encrypt a new file.", IconBg="#dbeafe", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#3b82f6' stroke-width='2'><rect x='3' y='11' width='18' height='11' rx='2'/><path d='M7 11V7a5 5 0 0110 0v4'/></svg>", Shortcut="Ctrl+E" },
+        new() { TabId="shortcuts", Title="Collapse the sidebar", Description="Click the ← button at the top of the sidebar to collapse it for more screen space. Hover icons to see labels.", IconBg="#eff6ff", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#3b82f6' stroke-width='2'><polyline points='15 18 9 12 15 6'/></svg>", Shortcut="Ctrl+B" },
+        new() { TabId="faq", Title="Is my data sent to any server?", Description="No. All encryption and decryption happens locally on your device. SecureApp never transmits your unencrypted data.", IconBg="#dcfce7", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#22c55e' stroke-width='2'><path d='M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z'/><polyline points='9 12 11 14 15 10'/></svg>" },
+        new() { TabId="faq", Title="What happens if I forget my password?", Description="SecureApp cannot recover your password — this is by design. Always store your password in a safe place. Key management (Pro) lets you set up recovery keys.", IconBg="#fef3c7", IconSvg="<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#d97706' stroke-width='2'><circle cx='12' cy='12' r='10'/><path d='M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3'/><line x1='12' y1='17' x2='12.01' y2='17'/></svg>" },
+    };
+}

@@ -66,12 +66,18 @@ public partial class MainPage : ContentPage, ISignIn
                     case _securedFolders:
                     case _vault:
                         e.AcceptedOperation = DataPackageOperation.Move;
+                        _fileDropService.NotifyFilesDraggedOver();
                         break;
                     default:
                         e.AcceptedOperation = DataPackageOperation.None;
                         break;
                 }
                 e.Handled = true;
+            };
+
+            nativeView.DragLeave += (sender, e) =>
+            {
+                _fileDropService.NotifyFilesDragLeave();
             };
 
             nativeView.Drop += async (sender, e) =>
@@ -112,11 +118,15 @@ public partial class MainPage : ContentPage, ISignIn
                     }
                 }
 
+                // Notify each bucket independently — a single drop can
+                // mix files and folders (e.g. user multi-selects a folder
+                // alongside loose files in Explorer). The old `else if`
+                // silently dropped folders whenever any file was present.
                 if (filePaths.Any())
                 {
                     _fileDropService.NotifyFilesDropped(filePaths);
                 }
-                else if (folders.Any())
+                if (folders.Any())
                 {
                     _fileDropService.NotifyFoldersDropped(folders);
                 }

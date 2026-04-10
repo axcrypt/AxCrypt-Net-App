@@ -1,94 +1,128 @@
-﻿@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Services
 @using AxCrypt.Content
 @using AxCrypt.Core.UI
 
 @inject ProgressBarService ProgressBarService
+@inject BatchFileOperationService batchService
 @inject IJSRuntime JSRuntime
+
+@implements IDisposable
+
+@*
+    Per-file BYTE progress for the currently-processing file. The
+    "outer loop" file-step progress + summary lives in the
+    BatchOperationToast component; the two indicators complement
+    each other and are deliberately separate:
+
+        ProgressBar         → "vacation.pdf · 47%"  (inner loop)
+        BatchOperationToast → "3 of 5 · 2 failed"   (outer loop)
+
+    Driven by ProgressBarService which is fed from Core's
+    IProgressContext.Progressing events via CustomProgressBar.
+
+    Auto-hides when BatchFileOperationService.OnFinished fires so
+    a stale "100% vacation.pdf" frame never lingers after the last
+    file's events arrive a tick late.
+*@
 
 @if (IsVisible)
 {
     @if (Utility.IsMainMenuHidden)
     {
+        @* Sidebar-collapsed layout — circular ring only. *@
         <div class="progress-circle-sec">
-@*             <span>Click</span>
- *@            <div class="progress-wrapper">
+            <div class="progress-wrapper">
                 <svg class="progress-circle" width="64" height="64" viewBox="0 0 64 64">
                     <circle class="progress-background" cx="32" cy="32" r="28" />
                     <circle class="progress-value" cx="32" cy="32" r="28"
-                            style="stroke-dasharray: 175.8; stroke-dashoffset:@(175.8 - (@ProgressBarService.Percentage * 1.758))" />
+                            style="stroke-dasharray:175.8;stroke-dashoffset:@(175.8 - (ProgressBarService.Percentage * 1.758))" />
                 </svg>
-                <div class="progress-text">@ProgressBarService.Percentage%</div>
+                <div class="progress-text">@(Math.Round(ProgressBarService.Percentage))%</div>
             </div>
         </div>
     }
     else
     {
-        <div class="progres-sec" style="pointer-events:auto;" @oncontextmenu="async (e) => await ShowContextMenu(e)">
-            <div class="fist-rw" @onclick="()=> IsContextMenuVisible= false">
-                <div class=""><label class="progres-fle-txt" title="@ProgressBarService.Filename">@ProgressBarService.Filename</label></div>
-                <div>
-                    <label style="margin-right: 0 !important;">@ProgressBarService.Percentage%</label>
-                </div>
+        @* Full-bar layout — linear bar + filename + Cancel context menu. *@
+        <div class="progres-sec"
+             style="pointer-events:auto;"
+             @oncontextmenu:preventDefault="true"
+             @oncontextmenu="async (e) => await ShowContextMenu(e)">
+
+            <div class="fist-rw" @onclick="CloseContextMenu">
+                <label class="progres-fle-txt" title="@ProgressBarService.Filename">@ProgressBarService.Filename</label>
+                <label class="progres-pct">@(Math.Round(ProgressBarService.Percentage))%</label>
             </div>
-            <div class="progress-container" @onclick="()=> IsContextMenuVisible= false">
-                <div class="progress-bubble-start" style="left:@ProgressBarService.Percentage%;"></div>
-                <div class="progress-bar" style="width:@ProgressBarService.Percentage%"></div>
+
+            <div class="progress-container" @onclick="CloseContextMenu">
+                <div class="progress-bubble-start" style="left:@(ProgressBarService.Percentage)%;"></div>
+                <div class="progress-bar" style="width:@(ProgressBarService.Percentage)%"></div>
                 <div class="progress-bubble-end"></div>
-            </div> 
-        </div>
-        @if(IsContextMenuVisible)
-        {
-            <div class="context-menu-action" style="pointer-events:auto;position: fixed;z-index:9999; left: @(contextMenuX)px;transform-origin:@(flipContextMenu);">
-                <span class="menu-item" @onclick="CancelTask">@Texts.ButtonCancelText</span>
             </div>
+        </div>
+
+        @if (IsContextMenuVisible)
+        {
+            <div class="progress-context-menu"
+                 style="left:@(contextMenuX)px;top:@(contextMenuY)px;transform-origin:@flipContextMenu">
+                <button type="button" class="menu-item" @onclick="CancelTask">
+                    @Texts.ButtonCancelText
+                </button>
+            </div>
+            @* Click-outside dismiss layer *@
+            <div class="progress-context-backdrop" @onclick="CloseContextMenu"></div>
         }
     }
 }
-<script type="text/javascript">
-    window.getWindowHeight = () => window.innerHeight;
-</script>
-<style>
-    .context-menu-action {
-        background: white;
-        border: 1px solid $BorderClr;
-        border-radius: 10px;
-        box-shadow: 0 0 10px $ActnBgClr;
-        min-width: 150px;
-        overflow: hidden;
-    }
 
-    .context-menu-action .menu-item {
-        padding: 8px 12px;
-        display: block;
-        cursor: pointer;
-        border-bottom: 1px solid #eee;
-        font-size: 12px;
-        font-weight: 400;
-    }
-</style>
 @code {
-    public bool IsVisible { get; set; }
+    public bool IsVisible { get; private set; }
 
-    public bool IsContextMenuVisible { get; set; } = false;
-    private double contextMenuX { get; set; }
-    private double contextMenuY { get; set; }
-    private string flipContextMenu { get; set; } = "top left";
-    private double contextMenuHeight { get; set; } = 210;
+    public bool IsContextMenuVisible { get; private set; }
+    private double contextMenuX;
+    private double contextMenuY;
+    private string flipContextMenu = "top left";
+    private const double ContextMenuHeight = 64; // single "Cancel" row — keep accurate for the flip check
+
+    // Hold a strong reference to the handler so we can unhook on Dispose.
+    private Action<bool>? _onVisibilityChanged;
+    private Action<BatchOperationResult>? _onBatchFinished;
 
     protected override void OnInitialized()
     {
-        ProgressBarService.OnProgressBarVisibilityChanged += async(isVisible)=> await UpdateIndicatorVisibility(isVisible);
+        _onVisibilityChanged = async isVisible => await UpdateIndicatorVisibility(isVisible);
+        ProgressBarService.OnProgressBarVisibilityChanged += _onVisibilityChanged;
+
+        // When the BATCH ends (outer loop), the inner-loop bar should
+        // disappear immediately so a late "100% lastfile.pdf" event
+        // can't leave the strip showing stale state.
+        _onBatchFinished = _ => ProgressBarService.Hide();
+        batchService.OnFinished += _onBatchFinished;
     }
 
+    public void Dispose()
+    {
+        if (_onVisibilityChanged != null)
+        {
+            ProgressBarService.OnProgressBarVisibilityChanged -= _onVisibilityChanged;
+        }
+        if (_onBatchFinished != null)
+        {
+            batchService.OnFinished -= _onBatchFinished;
+        }
+    }
+
+    // ── Context menu (right-click → Cancel) ─────────────────────
     private async Task ShowContextMenu(MouseEventArgs e)
     {
-        contextMenuX = e.PageX;
-        contextMenuY = e.PageY;
+        contextMenuX = e.ClientX;
+        contextMenuY = e.ClientY;
         flipContextMenu = "top left";
 
         double windowHeight = await JSRuntime.InvokeAsync<double>("getWindowHeight");
-        if (contextMenuY + contextMenuHeight > windowHeight)
+        if (contextMenuY + ContextMenuHeight > windowHeight)
         {
             flipContextMenu = "bottom left";
         }
@@ -97,33 +131,32 @@
         await UpdateUIState();
     }
 
+    private void CloseContextMenu()
+    {
+        if (IsContextMenuVisible)
+        {
+            IsContextMenuVisible = false;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
     private void CancelTask()
     {
-        IProgressContext? progressContext = AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.ProgressBarService?.ProgressContext ?? null;
-        if(progressContext != null)
+        IProgressContext? ctx = AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.ProgressBarService?.ProgressContext;
+        if (ctx != null)
         {
-            progressContext.Cancel = true;
-            progressContext.RequestCancel();
+            ctx.Cancel = true;
+            ctx.RequestCancel();
         }
+        CloseContextMenu();
     }
 
     private async Task UpdateIndicatorVisibility(bool isVisible)
     {
         IsContextMenuVisible = IsContextMenuVisible && isVisible;
-
         IsVisible = isVisible;
         await UpdateUIState();
     }
 
-    private void ClosePopup()
-    {
-        ProgressBarService.Hide();
-    }
-
-    private async Task UpdateUIState(){
-        await InvokeAsync(() =>
-        {
-            StateHasChanged(); // Refresh UI
-        });
-    }
+    private async Task UpdateUIState() => await InvokeAsync(StateHasChanged);
 }
