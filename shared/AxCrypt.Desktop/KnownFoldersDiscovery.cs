@@ -43,7 +43,7 @@ namespace AxCrypt.Desktop
         public IEnumerable<KnownFolder> Discover()
         {
             List<KnownFolder> knownFolders = new List<KnownFolder>();
-            if (OS.Current.Platform != Platform.WindowsDesktop)
+            if (OS.Current.Platform != Platform.WindowsDesktop || OS.Current.Platform != Platform.MacOsx )
             {
                 return knownFolders;
             }

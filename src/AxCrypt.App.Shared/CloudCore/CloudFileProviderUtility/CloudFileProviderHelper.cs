@@ -1,5 +1,7 @@
 ﻿using AxCrypt.App.Shared.CloudCore.DropBox;
 using AxCrypt.App.Shared.CloudCore.GoogleDrive;
+using AxCrypt.App.Shared.CloudCore.iCloud;
+
 
 //using AxCrypt.App.Shared.Desktop.Core.LocalStorage;
 using AxCrypt.App.Shared.CloudCore.OneDrive;
@@ -45,6 +47,11 @@ namespace AxCrypt.App.Shared.CloudCore.CloudFileProviderUtility
 
                     case AxCrypt.Core.IO.FileProvider.OneDrive:
                         fileProviderService = new OneDriveServices(InitiateFilePicker);
+                        Auth = fileProviderService.OAuth2Authenticator;
+                        break;
+
+                    case AxCrypt.Core.IO.FileProvider.iCloud:
+                        fileProviderService = new iCloudServices(InitiateFilePicker);
                         Auth = fileProviderService.OAuth2Authenticator;
                         break;
 

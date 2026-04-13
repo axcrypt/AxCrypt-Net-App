@@ -130,6 +130,8 @@ namespace AxCrypt.Core.IO
         DropBox,
 
         OneDrive,
+
+        iCloud,
     }
 }
 

@@ -18,6 +18,7 @@ namespace AxCrypt.App.Shared.Providers
             GoogleDriveAccessInfo = new List<GoogleDriveAccessInfo>();
             DropBoxAccessInfo = new List<DropBoxAccessInfo>();
             OneDriveAccessInfo = new List<OneDriveAccessInfo>();
+            iCloudAccessInfo = new List<iCloudAccessInfo>();
         }
 
         [JsonProperty("google_drive")]
@@ -28,6 +29,9 @@ namespace AxCrypt.App.Shared.Providers
 
         [JsonProperty("one_drive")]
         public IEnumerable<OneDriveAccessInfo> OneDriveAccessInfo { get; set; }
+
+        [JsonProperty("i_cloud")]
+        public IEnumerable<iCloudAccessInfo> iCloudAccessInfo { get; set; }
 
         private static IDataStore _fileProvidersUserAccessInfoStore;
         private static FileProvidersUserAccessInfo _fileProvidersUserAccessInfo;
@@ -214,6 +218,62 @@ namespace AxCrypt.App.Shared.Providers
             oneDriveAccessInfoList.Remove(gDriveAccessInfo);
 
             _fileProvidersUserAccessInfo.OneDriveAccessInfo = oneDriveAccessInfoList;
+            Save(_fileProvidersUserAccessInfo);
+        }
+
+        public void Add(iCloudAccessInfo newDriveAccessInfo)
+        {
+            if (newDriveAccessInfo == null)
+            {
+                return;
+            }
+
+            IList<iCloudAccessInfo> iCloudAccessInfoList = new List<iCloudAccessInfo>();
+            if (_fileProvidersUserAccessInfo != null)
+            {
+                iCloudAccessInfoList = _fileProvidersUserAccessInfo.iCloudAccessInfo.ToList();
+            }
+
+            iCloudAccessInfo? oldDriveAccessInfo = iCloudAccessInfoList.SingleOrDefault(gdf => gdf.RefreshToken == newDriveAccessInfo.RefreshToken);
+            if (oldDriveAccessInfo == null)
+            {
+                iCloudAccessInfoList.Add(newDriveAccessInfo);
+                _fileProvidersUserAccessInfo = _fileProvidersUserAccessInfo ?? new FileProvidersUserAccessInfo();
+                _fileProvidersUserAccessInfo.iCloudAccessInfo = iCloudAccessInfoList;
+                Save(_fileProvidersUserAccessInfo);
+                return;
+            }
+
+            if (oldDriveAccessInfo == newDriveAccessInfo)
+            {
+                return;
+            }
+
+            iCloudAccessInfoList.Remove(oldDriveAccessInfo);
+            iCloudAccessInfoList.Add(newDriveAccessInfo);
+
+            _fileProvidersUserAccessInfo.iCloudAccessInfo = iCloudAccessInfoList;
+            Save(_fileProvidersUserAccessInfo);
+        }
+
+        public void Remove(iCloudAccessInfo driveAccessInfo)
+        {
+            if (_fileProvidersUserAccessInfo == null)
+            {
+                return;
+            }
+
+            IList<iCloudAccessInfo> iCloudAccessInfoList = _fileProvidersUserAccessInfo.iCloudAccessInfo.ToList();
+
+            iCloudAccessInfo? gDriveAccessInfo = iCloudAccessInfoList.SingleOrDefault(gdf => gdf.RefreshToken == driveAccessInfo.RefreshToken);
+            if (gDriveAccessInfo == null)
+            {
+                return;
+            }
+
+            iCloudAccessInfoList.Remove(gDriveAccessInfo);
+
+            _fileProvidersUserAccessInfo.iCloudAccessInfo = iCloudAccessInfoList;
             Save(_fileProvidersUserAccessInfo);
         }
 

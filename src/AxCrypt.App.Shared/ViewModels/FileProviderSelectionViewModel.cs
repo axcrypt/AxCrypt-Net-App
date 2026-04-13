@@ -5,6 +5,7 @@ using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
+using Microsoft.Graph.Models.CallRecords;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.ViewModels;
@@ -97,6 +98,18 @@ public class FileProviderSelectionViewModel : ViewModelBase
                 New<FileProvidersUserAccessInfo>().OneDriveAccessInfo?.Any() ?? false
             )
         );
+
+        if (OperatingSystem.IsMacCatalyst() || OperatingSystem.IsMacOS())
+        {
+            EncryptableFileProviders.Add(
+                new FileProviderItem(
+                    Texts.KnownFolderNameICloud,
+                    AxCrypt.Core.IO.FileProvider.iCloud,
+                    "cld-icon",
+                    New<FileProvidersUserAccessInfo>().iCloudAccessInfo?.Any() ?? false
+                )
+            );
+        }
     }
 
     public async Task SubActionSelectProvider(FileProviderItem provider)

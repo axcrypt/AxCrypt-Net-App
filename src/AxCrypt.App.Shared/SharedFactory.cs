@@ -92,6 +92,7 @@ namespace AxCrypt.App.Shared
 
             services.AddSingleton<DropBoxAccessInfo>();
             services.AddSingleton<OneDriveAccessInfo>();
+            services.AddSingleton<iCloudAccessInfo>();
             services.AddSingleton<FileProviderSelectionViewModel>();
             services.AddSingleton<AccountSetupViewModel>();
 
