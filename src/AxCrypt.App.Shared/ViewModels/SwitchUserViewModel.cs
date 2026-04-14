@@ -1,7 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services.Interface;
-using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.User;
 using AxCrypt.Core.UI.ViewModel;
@@ -12,7 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
-namespace AxCrypt.App.Shared.Desktop.ViewModels;
+namespace AxCrypt.App.Shared.ViewModels;
 
 public class SwitchUserViewModel : ViewModelBase
 {
@@ -127,7 +126,7 @@ public class SwitchUserViewModel : ViewModelBase
         return New<IUserProfilesStore>().UpdateUser(userProfile);
     }
 
-    public async Task<bool> RemoveButton_Click(string userEmail)
+    public async Task<bool> RemoveUserProfileAsync(string userEmail)
     {
         if (string.IsNullOrEmpty(userEmail) || !UserProfilesList.Any(up => up.UserEmail == userEmail))
         {

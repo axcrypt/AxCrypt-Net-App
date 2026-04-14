@@ -48,6 +48,7 @@ namespace AxCrypt.App.Shared
 
             services.AddSingleton<RegisterViewModel>();
             services.AddSingleton<AppLocalizationOptions>();
+            services.AddSingleton<SwitchUserViewModel>();
 
             services.AddSingleton<SecretService>();
             services.AddSingleton<SupportService>();

@@ -23,7 +23,11 @@ namespace AxCrypt.App.Shared.Services
 
         public bool IsSigningIn { get; set; }
 
-        public LogOnService(LogOnViewModel logOnViewModel, RegisterViewModel registerViewModel, MainViewModel mainViewModel)
+        public LogOnService(
+            LogOnViewModel logOnViewModel,
+            RegisterViewModel registerViewModel,
+            MainViewModel mainViewModel
+        )
         {
             _logOnViewModel = logOnViewModel;
             _mainViewModel = mainViewModel;
@@ -42,7 +46,9 @@ namespace AxCrypt.App.Shared.Services
 
             await signUpSignIn.DialogsAsync(this);
 
-            New<UserSettings>().UserEmail = signUpSignIn.UserEmail;
+            New<UserSettings>().UserEmail = string.IsNullOrEmpty(signUpSignIn.UserEmail)
+                ? _logOnViewModel.LogOnAccountModel.UserEmail
+                : signUpSignIn.UserEmail;
 
             if (signUpSignIn.StopAndExit)
             {
@@ -50,7 +56,10 @@ namespace AxCrypt.App.Shared.Services
                 return;
             }
 
-            if (_mainViewModel.LoggedOn && Thread.CurrentThread.CurrentUICulture.Name != Resolve.UserSettings.CultureName)
+            if (
+                _mainViewModel.LoggedOn
+                && Thread.CurrentThread.CurrentUICulture.Name != Resolve.UserSettings.CultureName
+            )
             {
                 //await SetLanguageAsync(Resolve.UserSettings.CultureName);
             }
@@ -86,7 +95,10 @@ namespace AxCrypt.App.Shared.Services
 
         private void HandleCreateNewLogOnForEncryptedFile(LogOnEventArgs e)
         {
-            NewPasswordViewModel viewModel = new NewPasswordViewModel(e.Passphrase.Text, e.EncryptedFileFullName);
+            NewPasswordViewModel viewModel = new NewPasswordViewModel(
+                e.Passphrase.Text,
+                e.EncryptedFileFullName
+            );
 
             //using (NewPassphraseDialog passphraseDialog = new NewPassphraseDialog(this, Texts.NewPassphraseDialogTitle, viewModel))
             //{
@@ -121,7 +133,13 @@ namespace AxCrypt.App.Shared.Services
 
         private async Task HandleExistingLogOn(LogOnEventArgs e)
         {
-            if (!string.IsNullOrEmpty(e.EncryptedFileFullName) && (string.IsNullOrEmpty(Resolve.UserSettings.UserEmail) || Resolve.KnownIdentities.IsLoggedOn))
+            if (
+                !string.IsNullOrEmpty(e.EncryptedFileFullName)
+                && (
+                    string.IsNullOrEmpty(Resolve.UserSettings.UserEmail)
+                    || Resolve.KnownIdentities.IsLoggedOn
+                )
+            )
             {
                 await HandleExistingLogOnForEncryptedFile(e);
             }
@@ -133,7 +151,8 @@ namespace AxCrypt.App.Shared.Services
 
         private async Task HandleExistingLogOnForEncryptedFile(LogOnEventArgs e)
         {
-            FilePasswordDialogViewModel filePasswordDialog = AxCServiceProvider.GetService<FilePasswordDialogViewModel>();
+            FilePasswordDialogViewModel filePasswordDialog =
+                AxCServiceProvider.GetService<FilePasswordDialogViewModel>();
             await filePasswordDialog.ShowFilePasswordDialog(e.EncryptedFileFullName);
 
             if (filePasswordDialog.DialogResult == DialogResult.Retry)
@@ -143,7 +162,10 @@ namespace AxCrypt.App.Shared.Services
                 return;
             }
 
-            if (filePasswordDialog.DialogResult != DialogResult.OK || filePasswordDialog.ViewModel!.Passphrase == Passphrase.Empty)
+            if (
+                filePasswordDialog.DialogResult != DialogResult.OK
+                || filePasswordDialog.ViewModel!.Passphrase == Passphrase.Empty
+            )
             {
                 e.Cancel = true;
                 return;
@@ -160,11 +182,17 @@ namespace AxCrypt.App.Shared.Services
 
                 if (WorkUserProfile.UserEmail == "" && Resolve.UserSettings.UserEmail != "")
                 {
-                    WorkUserProfile.SetUser(New<IUserProfilesStore>().AppRootFolder, Resolve.UserSettings.UserEmail);
+                    WorkUserProfile.SetUser(
+                        New<IUserProfilesStore>().AppRootFolder,
+                        Resolve.UserSettings.UserEmail
+                    );
                 }
 
                 Resolve.UserSettings.UserEmail = WorkUserProfile.UserEmail;
-                LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(Resolve.UserSettings, e.EncryptedFileFullName);
+                LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(
+                    Resolve.UserSettings,
+                    e.EncryptedFileFullName
+                );
                 await _logOnViewModel.ShowLogOnDialog(logOnModel, _mainViewModel);
             }
 
@@ -184,7 +212,10 @@ namespace AxCrypt.App.Shared.Services
                 //await new ApplicationManager().StopAndExit();
             }
 
-            if (_logOnViewModel.PageResult != DialogResult.OK || _logOnViewModel.LogOnAccountModel.PasswordText.Length == 0)
+            if (
+                _logOnViewModel.PageResult != DialogResult.OK
+                || _logOnViewModel.LogOnAccountModel.PasswordText.Length == 0
+            )
             {
                 e.Cancel = true;
                 return;
@@ -207,7 +238,10 @@ namespace AxCrypt.App.Shared.Services
 
             if (!_logOnViewModel.MultiFactorAuthViewModel!.IsVisible)
             {
-                await _logOnViewModel.MultiFactorAuthViewModel.ShowLogOnDialog(EmailAddress.Parse(e.UserEmail), e.Passphrase);
+                await _logOnViewModel.MultiFactorAuthViewModel.ShowLogOnDialog(
+                    EmailAddress.Parse(e.UserEmail),
+                    e.Passphrase
+                );
             }
 
             if (_logOnViewModel.MultiFactorAuthViewModel.PageResult == DialogResult.None)
@@ -223,7 +257,10 @@ namespace AxCrypt.App.Shared.Services
                 return;
             }
 
-            if (_logOnViewModel.MultiFactorAuthViewModel.PageResult != DialogResult.OK || _logOnViewModel.MultiFactorAuthViewModel!.OneTimePassword!.Length == 0)
+            if (
+                _logOnViewModel.MultiFactorAuthViewModel.PageResult != DialogResult.OK
+                || _logOnViewModel.MultiFactorAuthViewModel!.OneTimePassword!.Length == 0
+            )
             {
                 e.Cancel = true;
                 return;
