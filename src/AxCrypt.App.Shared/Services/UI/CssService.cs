@@ -29,6 +29,10 @@ public class CssService : ICssService
             new KeyValuePair<string, string>(cssBasePath, "support.min.css"),
         };
 
+        if (subscriptionLevel == "free")
+        {
+            cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "upgradesubscription.min.css"));
+        }
         if (subscriptionLevel != "free")
         {
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "sharesecret.min.css"));
