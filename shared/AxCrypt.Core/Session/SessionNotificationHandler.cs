@@ -273,10 +273,14 @@ namespace AxCrypt.Core.Session
                 encryptionParameters = await identity.AddMasterKeyParameter(encryptionParameters, true);
             }
 
-            WatchedFolder watchedFolder = _fileSystemState.WatchedFolders.First();
+            IDataContainer[]? ignoredFolders = null;
+            if (_fileSystemState.WatchedFolders.Any())
+            {
+                WatchedFolder? watchedFolder = _fileSystemState.WatchedFolders.First();
+                ignoredFolders = watchedFolder.IgnoredFolders.Select(X => New<IDataContainer>(X)).ToArray();
+            }
 
             IDataContainer folder = New<IDataContainer>(vaultEncryptPath);
-            IDataContainer[] ignoredFolders = watchedFolder.IgnoredFolders.Select(X => New<IDataContainer>(X)).ToArray();
             progress.Display = folder.Name;
             await _axCryptFile.EncryptVaultFolderUniqueWithBackupAndWipeAsync(folder, encryptionParameters, progress, ignoredFolders);
         }
