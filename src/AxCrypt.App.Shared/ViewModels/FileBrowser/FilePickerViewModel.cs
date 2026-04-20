@@ -22,6 +22,8 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
     ) : ViewModelBase
     {
         protected bool _isVisible = false;
+        public bool IsSearchResultVisible { get; set; } = false;
+        public string SearchQuery { get; set; } = string.Empty;
 
         public bool IsVisible
         {
@@ -140,6 +142,8 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             SelectedFiles = new List<FilePickerItemViewModel>();
             OpenedFoldersList.Clear();
             IsVisible = true;
+            IsSearchResultVisible = false;
+            SearchQuery = string.Empty;
         }
 
         public bool IsFileSelected(FilePickerItemViewModel file)
@@ -336,6 +340,13 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
                 await RedirectToMainScreen(selectedFileItems);
                 SelectedFiles.Clear();
                 ShowProgressBar = false;
+
+                if (IsSearchResultVisible)
+                {
+                    await SearchAsync(SearchQuery);
+                    return;
+                }
+
                 await NavigateBackToPath(CurrentFolderID ?? "root");
                 return;
             }
@@ -493,16 +504,26 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             return hasCapability;
         }
 
-        public void SearchFileList(string searchText)
+        public async Task SearchAsync(string query, string path = "")
         {
-            SelectedFiles.Clear();
-            if (string.IsNullOrEmpty(searchText))
+            if (String.IsNullOrEmpty(query))
             {
-                Files = new ObservableCollection<FilePickerItemViewModel>(_fileProviderService.Files.Select(f => { f.IsSelected = false; return f; }));
                 return;
             }
 
-            Files = new ObservableCollection<FilePickerItemViewModel>(_fileProviderService.Files.Select(f => { f.IsSelected = false; return f; }).Where(f => f.FileName.Contains(searchText, StringComparison.OrdinalIgnoreCase) == true));
+            SelectedFiles.Clear();
+            if (SelectedCloudProvider != FileProvider.Local)
+            {
+                await _fileProviderService.SearchFileFolderAsync(query);
+                Files = new ObservableCollection<FilePickerItemViewModel>(_fileProviderService.Files);
+                return;
+            }
+
+            Files = new ObservableCollection<FilePickerItemViewModel>(
+                        Files.Where(f => f.FileName.Contains(query, StringComparison.OrdinalIgnoreCase))
+                    );
+
+            return;
         }
     }
 }

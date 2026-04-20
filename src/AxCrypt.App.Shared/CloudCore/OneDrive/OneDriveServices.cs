@@ -9,6 +9,7 @@ using AxCrypt.Core.UI;
 using Azure.Core;
 using Microsoft.Graph;
 using Microsoft.Graph.Drives.Item.Items.Item.CreateUploadSession;
+using Microsoft.Graph.Drives.Item.Items.Item.SearchWithQ;
 using Microsoft.Graph.Models;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -144,6 +145,47 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
             _graphClient = GetAuthenticatedClient();
             Microsoft.Graph.Models.Drive? driveInfo = await _graphClient.Me.Drive.GetAsync();
             _userDriveId = driveInfo!.Id;
+        }
+
+        public override async Task SearchFileFolderAsync(string query, string path = "")
+        {
+            try
+            {
+                SearchWithQGetResponse? searchResult = await _graphClient.Drives[_userDriveId].Items["root"]
+                .SearchWithQ($"{query}*").GetAsync(config =>
+                {
+                    config.QueryParameters.Select = new[] { "id", "name", "folder", "file", "parentReference" };
+                    config.QueryParameters.Top = 100;
+                });
+
+                if(searchResult == null) return;
+
+                List<DriveItem> allItems = new List<DriveItem>();
+
+                while (searchResult?.Value != null)
+                {
+                    allItems.AddRange(searchResult.Value);
+                    if (searchResult.OdataNextLink == null) break;
+
+                    searchResult = await _graphClient.Drives[_userDriveId].Items["root"]
+                                .SearchWithQ(Uri.EscapeDataString(query)).WithUrl(searchResult.OdataNextLink)
+                                .GetAsync();
+                }
+
+
+                _files = allItems.Select(item => new FilePickerItemViewModel
+                {
+                    FileID = item.Id!,
+                    FileName = item.Name!,
+                    IsFolder = item.Folder != null,
+                    FileExtension = Path.GetExtension(item.Name!),
+                    Source = FileProvider.OneDrive,
+                }).ToList() ?? new List<FilePickerItemViewModel>();
+            }
+            catch (Exception e)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, e.Message);
+            }
         }
 
         public override async Task ListFilesAsync(string folderId = "")

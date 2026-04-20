@@ -171,6 +171,44 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             }
         }
 
+        public override async Task SearchFileFolderAsync(string query, string path = "")
+        {
+            try
+            {
+                ListRequest request = _driveService!.Files.List();
+                request.Q = $"name contains '{query}' and trashed = false";
+                request.Fields = "files(id, name, mimeType, fileExtension, parents)";
+                request.PageSize = 100;
+
+                List<Google.Apis.Drive.v3.Data.File> allFiles = new List<Google.Apis.Drive.v3.Data.File>();
+                while (true)
+                {
+                    FileList searchResult = await request.ExecuteAsync();
+
+                    if (searchResult.Files != null)
+                        allFiles.AddRange(searchResult.Files);
+
+                    if (string.IsNullOrEmpty(searchResult.NextPageToken)) break;
+
+                    request.PageToken = searchResult.NextPageToken;
+                }
+
+                _files = allFiles
+                .Select(item => new FilePickerItemViewModel()
+                {
+                    FileID = item.Id,
+                    FileName = item.Name,
+                    IsFolder = item.MimeType == "application/vnd.google-apps.folder",
+                    FileExtension = Path.GetExtension(item.Name),
+                    Source = FileProvider.GoogleDrive,
+                }).ToList() ?? new List<FilePickerItemViewModel>();
+            }
+            catch (Exception e)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, e.Message);
+            }
+        }
+
         public override async Task ListFilesAsync(string fileId = "")
         {
             try

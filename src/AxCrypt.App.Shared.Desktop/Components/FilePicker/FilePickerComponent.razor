@@ -25,7 +25,7 @@
 {
     <div class="file-picker-modalDialog">
         <div @onclick="async () => await HideContextMenu()">
-            <div class="file-picker-header">
+            <div class="file-picker-header" style="margin:1rem;">
                 <div class="close-img" @onclick="CloseWindow"></div>
                 <div class="file-picker-title">
                     <div class="center-title">
@@ -39,13 +39,24 @@
                         <input id="searchKeyword"
                                name="searchKeyword"
                                type="text"
-                               @bind="searchText"
+                               @bind="ViewModel.SearchQuery"
                                placeholder="Search files"
+                               style="margin-bottom: 5px;"
                                @oninput="async (eargs) => await OnSearchChanged(eargs)" />
 
-                        <div class="search-btn" @onclick="() => ViewModel.SearchFileList(searchText)">
+                        <div class="search-btn" @onclick="() => OnSearchClick()">
                             <img src="/images/default/IcoSearchWht.svg" alt="search-icon" />
                         </div>
+
+                        @if (ViewModel.IsSearchResultVisible)
+                        {
+                            <label>
+                                Search result
+                                <span style="color: #0078d4;text-decoration: underline;cursor: pointer;padding: 0px 10px;display: inline-block;"
+                                      @onclick="() => ClearResult()">Clear result</span>
+                            </label>
+                        }
+
                     </div>
                 </div>
             </div>
@@ -190,28 +201,29 @@
 
                 <div class="file-picker-filepath">
                     <nav class="breadcrumb">
-                        <span class="breadcrumb-part" title="@ViewModel.PageTitle" @onclick="@(async () => await ViewModel.NavigateBackToPath("root"))">
-                            @ViewModel.PageTitle
-                        </span>
-
-                        @if (ViewModel.OpenedFoldersList.Count > 4)
+                        @if (!ViewModel.IsSearchResultVisible)
                         {
-                            <span class="breadcrumb-part">
-                                .../
+                            <span class="breadcrumb-part" title="@ViewModel.PageTitle" @onclick="@(async () => await ViewModel.NavigateBackToPath("root"))">
+                                @ViewModel.PageTitle
                             </span>
-                        }
 
-                        @foreach (FolderItem folder in ViewModel.OpenedFoldersList.TakeLast(4))
-                        {
-                            <span class="separator"><img class="icon-next-arrow" /><img class="icon-dltfold" /> </span>
-                            <span class="breadcrumb-part" title="@folder.DirectoryName" @onclick="async () => await ViewModel.NavigateBackToPath(folder.FileID)">
-                                @folder.DirectoryName
-                            </span>
+                            @if (ViewModel.OpenedFoldersList.Count > 4)
+                            {
+                                <span class="breadcrumb-part">
+                                    .../
+                                </span>
+                            }
+
+                            @foreach (FolderItem folder in ViewModel.OpenedFoldersList.TakeLast(4))
+                            {
+                                <span class="separator"><img class="icon-next-arrow" /><img class="icon-dltfold" /> </span>
+                                <span class="breadcrumb-part" title="@folder.DirectoryName" @onclick="async () => await ViewModel.NavigateBackToPath(folder.FileID)">
+                                    @folder.DirectoryName
+                                </span>
+                            }
                         }
                     </nav>
-                </div>
 
-                <div class="modal-footer">
                     <button class="Close-btn" @onclick="CloseWindow">
                         @Texts.WixFailureCloseButton
                     </button>
@@ -240,8 +252,6 @@
     private double contextMenuX { get; set; }
     private double contextMenuY { get; set; }
 
-    private string searchText = string.Empty;
-
     protected override void OnInitialized()
     {
         ViewModel.OnUpdateViewState += async () => await UpdateUIState();
@@ -255,10 +265,10 @@
 
     private string HighlightMatch(string input)
     {
-        if (string.IsNullOrWhiteSpace(searchText))
+        if (string.IsNullOrWhiteSpace(ViewModel.SearchQuery))
             return System.Net.WebUtility.HtmlEncode(input);
 
-        string pattern = System.Text.RegularExpressions.Regex.Escape(searchText);
+        string pattern = System.Text.RegularExpressions.Regex.Escape(ViewModel.SearchQuery);
         System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
         int matchCount = 0;
@@ -274,9 +284,22 @@
 
     private async Task OnSearchChanged(ChangeEventArgs e)
     {
-        searchText = e.Value?.ToString() ?? "";
+        ViewModel.SearchQuery = e.Value?.ToString() ?? "";
         await Task.Yield();
         await JS.InvokeVoidAsync("scrollToFirstMatch");
+    }
+
+    private async Task OnSearchClick()
+    {
+        ViewModel.IsSearchResultVisible = true;
+        await ViewModel.SearchAsync(ViewModel.SearchQuery);
+    }
+
+    private async Task ClearResult()
+    {
+        ViewModel.IsSearchResultVisible = false;
+        await ViewModel.NavigateBackToPath("root");
+        ViewModel.SearchQuery = "";
     }
 
     private void SetView(bool listView)

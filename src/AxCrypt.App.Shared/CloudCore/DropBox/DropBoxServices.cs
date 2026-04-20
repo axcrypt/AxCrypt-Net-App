@@ -139,6 +139,49 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
             return new DropboxClient(_instance.AccessToken, config);
         }
 
+        public override async Task SearchFileFolderAsync(string query, string path = "")
+        {
+            try
+            {
+                SearchV2Arg searchQuery = new SearchV2Arg(query: query,
+                                    options: new SearchOptions(
+                                    path: path,
+                                    maxResults: 100,
+                                    fileStatus: FileStatus.Active.Instance,
+                                    filenameOnly: false));
+
+                SearchV2Result searchResult = await _dropboxclient.Files.SearchV2Async(searchQuery);
+
+                List<SearchMatchV2> allMatches = new List<SearchMatchV2>();
+                while (true)
+                {
+                    allMatches.AddRange(searchResult.Matches.Where(m => m.Metadata.IsMetadata));
+                    if (!searchResult.HasMore) break;
+
+                    searchResult = await _dropboxclient.Files.SearchContinueV2Async(searchResult.Cursor);
+                }
+
+                _files = allMatches.Select(m => new FilePickerItemViewModel()
+                {
+                     FileID = m.Metadata.AsMetadata.Value.PathLower,
+                     FileName = m.Metadata.AsMetadata.Value.Name,
+                     IsFolder = m.Metadata.AsMetadata.Value.IsFolder,
+                     FileExtension = Path.GetExtension(m.Metadata.AsMetadata.Value.PathLower),
+                     Source = FileProvider.DropBox,
+                }).ToList() ?? new List<FilePickerItemViewModel>();
+            }
+            catch (Exception e)
+            {
+                if (e.Message.StartsWith("expired_access_token/"))
+                {
+                    _instance.RemoveExpiredDropBoxToken();
+                    _instance = new DropBoxAuthenticator();
+                }
+
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, e.Message);
+            }
+        }
+
         public override async Task ListFilesAsync(string fileId = "")
         {
             try
@@ -165,7 +208,6 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
                 return;
             }
 
-            _files = new List<FilePickerItemViewModel>();
             _files = files
                 .Entries.Select(file => new FilePickerItemViewModel()
                 {

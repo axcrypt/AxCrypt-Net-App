@@ -24,6 +24,8 @@ namespace AxCrypt.App.Shared.CloudCore
             return System.IO.Path.Combine(importedDirectoryPath, importedFileName);
         }
 
+        public abstract Task SearchFileFolderAsync(string query, string path = "");
+
         public abstract Task ListFilesAsync(string fileId = "");
 
         public abstract Task<MemoryStream> ReadFileStreamAsync(string fileId);
