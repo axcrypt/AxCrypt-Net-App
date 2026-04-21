@@ -4,12 +4,14 @@ using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components.WebView.Maui;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
 using System;
 using System.Threading.Tasks;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Desktop.Services;
 
@@ -87,6 +89,11 @@ public class FilePasswordWindowService : IFilePasswordWindowService
         MainThread.BeginInvokeOnMainThread(() =>
         {
             AxCServiceProvider.GetService<IWindowService>().FocusFilePasswordAndMinimizeMain();
+
+            if (_window != null)
+            {
+                _window.Destroying += (s, args) => ValidateForRestore();
+            }
         });
     }
 
@@ -96,8 +103,20 @@ public class FilePasswordWindowService : IFilePasswordWindowService
         {
             _userFilePasswordViewModel.IsWindowActive = false;
 
+            ValidateForRestore();
+
             Application.Current!.CloseWindow(_window);
             _window = null;
+        }
+    }
+
+    private static void ValidateForRestore()
+    {
+        IWindowService windowService = AxCServiceProvider.GetService<IWindowService>();
+
+        if (New<KnownIdentities>().IsLoggedOn)
+        {
+            windowService.RestoreWindowWithFocus();
         }
     }
 }
