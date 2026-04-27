@@ -61,7 +61,7 @@ public class FilePasswordWindowService : IFilePasswordWindowService
 
     private Window CreateWindow()
     {
-        return new Window
+        Window window = new Window
         {
             Title = _title,
             Width = 650,
@@ -82,6 +82,13 @@ public class FilePasswordWindowService : IFilePasswordWindowService
                 }
             }
         };
+
+        window.Destroying += (s, e) =>
+        {
+            _userFilePasswordViewModel.CancelButton_Click(e);
+        };
+
+        return window;
     }
 
     private void OnWindowReady(object? sender, EventArgs e)
