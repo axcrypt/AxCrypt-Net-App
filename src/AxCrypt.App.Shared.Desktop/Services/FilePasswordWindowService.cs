@@ -23,9 +23,41 @@ public class FilePasswordWindowService : IFilePasswordWindowService
 
     public async Task<DialogResult> ShowWindow(string? encryptedFileFullName)
     {
+        // Idempotency guard — when the caller path fires the file-password
+        // prompt twice in quick succession (e.g. double-click on Recent
+        // Files + a concurrent decrypt-on-resume), we previously called
+        // Application.Current.OpenWindow on a brand-new window while the
+        // old one was still alive. MAUI then threw the "already created"
+        // exception. Close the prior window first; cancel its pending
+        // TaskCompletionSource so callers waiting on the earlier result
+        // don't deadlock.
+        if (_window != null)
+        {
+            try
+            {
+                _userFilePasswordViewModel?.FilePasswordTcs?.TrySetResult(DialogResult.Cancel);
+                Close();
+            }
+            catch
+            {
+                // Best-effort cleanup — if the previous window is in a
+                // broken state we still want the new request to land.
+                _window = null;
+            }
+        }
+
         _userFilePasswordViewModel = AxCServiceProviderExtension.GetService<UserFilePasswordViewModel>();
 
         _userFilePasswordViewModel.ViewModel = new FilePasswordViewModel(encryptedFileFullName!);
+
+        // Always start with the password obscured. The VM is freshly
+        // instantiated here, but the property's default isn't
+        // guaranteed across versions of FilePasswordViewModel — set
+        // it explicitly so an "eye toggled" state from a previous
+        // open never carries over.
+        _userFilePasswordViewModel.ViewModel.ShowPassword = false;
+        _userFilePasswordViewModel.ErrorMessage = string.Empty;
+
         BindPropertyChangedEvents();
 
         _userFilePasswordViewModel.FilePasswordTcs = new TaskCompletionSource<DialogResult>();
@@ -61,11 +93,25 @@ public class FilePasswordWindowService : IFilePasswordWindowService
 
     private Window CreateWindow()
     {
+        // Window sized to fit the modal content — earlier the OS-level
+        // window was 650×400 while the rendered modal is only ~440px
+        // wide, leaving a wide empty scrim around it. Pick the modal
+        // width (440) + scrim padding on each side (16 + 16) for the
+        // window width, and the actual modal height (~360) + 24 for
+        // the OS chrome / scrim top-bottom. Min/Max prevent the user
+        // from resizing this dialog to something unreadable.
+        const double targetWidth  = 480;
+        const double targetHeight = 420;
+
         Window window = new Window
         {
             Title = _title,
-            Width = 650,
-            Height = 400,
+            Width = targetWidth,
+            Height = targetHeight,
+            MinimumWidth = targetWidth,
+            MinimumHeight = targetHeight,
+            MaximumWidth = targetWidth,
+            MaximumHeight = targetHeight,
             Page = new ContentPage
             {
                 Content = new BlazorWebView
@@ -106,15 +152,29 @@ public class FilePasswordWindowService : IFilePasswordWindowService
 
     public void Close()
     {
-        if (_window != null)
+        if (_window == null)
+        {
+            return;
+        }
+
+        if (_userFilePasswordViewModel != null)
         {
             _userFilePasswordViewModel.IsWindowActive = false;
-
-            ValidateForRestore();
-
-            Application.Current!.CloseWindow(_window);
-            _window = null;
         }
+
+        ValidateForRestore();
+
+        try
+        {
+            Application.Current!.CloseWindow(_window);
+        }
+        catch
+        {
+            // Window may already be destroying when Close() fires from
+            // the OnDestroy handler — swallow so the guard in
+            // ShowWindow can still clear the slot.
+        }
+        _window = null;
     }
 
     private static void ValidateForRestore()
