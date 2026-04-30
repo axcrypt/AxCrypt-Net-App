@@ -24,6 +24,7 @@ using Microsoft.Windows.AppLifecycle;
 using System.Diagnostics;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
 using static AxCrypt.Abstractions.TypeResolve;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -374,21 +375,31 @@ namespace AxCrypt.App.Windows.WinUI
             Uri uri = protocolArgs.Uri;
             string verb = uri.Host.ToLowerInvariant();
 
-            const string uriQueryParam = "file=";
-            int index = uri.OriginalString.IndexOf(uriQueryParam, StringComparison.OrdinalIgnoreCase);
+            const string uriQueryPathParam = "path=";
+            int index = uri.OriginalString.IndexOf(uriQueryPathParam, StringComparison.OrdinalIgnoreCase);
             string? filePath = null;
+            string? files = null;
+            var decoder = new WwwFormUrlDecoder(uri.Query);
 
-            if (index >= 0)
-            {
-                filePath = uri.OriginalString.Substring(index + uriQueryParam.Length); 
-            }
-
+            filePath = decoder.GetFirstValueByName("path");
+            files = decoder.GetFirstValueByName("files");
             if (string.IsNullOrEmpty(filePath))
             {
                 return;
             }
+            if (string.IsNullOrEmpty(files))
+            {
+                return;
+            }
 
-            string[] files = Directory.Exists(filePath) ? Directory.GetFiles(filePath, "*.*", SearchOption.AllDirectories) : File.Exists(filePath) ? new[] { filePath } : Array.Empty<string>();
+            List<string> filesWithPath = new List<String>();
+            foreach (string item in files.Split("|"))
+            {
+                string itemFullPath = Path.Combine(filePath, item);
+                filesWithPath.AddRange(Directory.Exists(itemFullPath) ? Directory.GetFiles(itemFullPath, "*.*", SearchOption.AllDirectories) : File.Exists(itemFullPath) ? new[] { itemFullPath } : Array.Empty<string>());
+            }
+
+            string[] filesArr = filesWithPath.ToArray();
 
             if (files.Length == 0)
             {
@@ -396,7 +407,7 @@ namespace AxCrypt.App.Windows.WinUI
             }
 
             CreateMauiApp();
-            ResolveVerb(verb, files);
+            ResolveVerb(verb, filesArr);
             Environment.Exit(0);
         }
 
