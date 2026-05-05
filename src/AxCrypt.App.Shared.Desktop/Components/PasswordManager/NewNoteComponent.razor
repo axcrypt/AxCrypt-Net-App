@@ -34,7 +34,8 @@
                     </li>
                     <li>
                         <label for="Note_Note">@Texts.NoteLabel:</label>
-                        <textarea type="text" class="secret-note-section secret-note-bgnd" rows="7" cols="20" maxlength="100000" style="color:#494949" placeholder="example" @bind="@newSecretViewModel.Secret.Note.Note"></textarea>
+                        <textarea type="text" class="@GetInputClass(nameof(newSecretViewModel.Secret.Note.Note)) secret-note-section secret-note-bgnd" rows="7" cols="20" maxlength="100000" style="color:#494949" placeholder="example" @bind="@newSecretViewModel.Secret.Note.Note"></textarea>
+                        <ValidationMessage For="@(() => newSecretViewModel.Secret.Note.Note)" />
                     </li>
                     <li>
                         <div class="btn-sec-new-edit">
