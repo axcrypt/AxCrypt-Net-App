@@ -19,6 +19,7 @@ public class WindowService : IWindowService
 
     private const int SW_HIDE = 0;
     private const int SW_SHOW = 5;
+    private const int SW_MINIMIZE = 6;
     private const int SW_RESTORE = 9;
     private const int GWL_STYLE = -16;
     private const int WS_THICKFRAME = 0x00040000;
@@ -175,6 +176,7 @@ public class WindowService : IWindowService
         IntPtr? hwnd = TryGetWindowHandle(window);
         if (hwnd is null) return;
 
+        ShowWindow(hwnd.Value, SW_MINIMIZE);
         ShowWindow(hwnd.Value, SW_HIDE);
     }
 

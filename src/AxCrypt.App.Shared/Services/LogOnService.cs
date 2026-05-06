@@ -162,8 +162,6 @@ namespace AxCrypt.App.Shared.Services
 
         private async Task HandleExistingAccountLogOn(LogOnEventArgs e)
         {
-            AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
-
             if (!_logOnViewModel.IsVisible)
             {
                 _logOnViewModel.PageResult = DialogResult.None;
