@@ -105,7 +105,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             {
                 await New<ICloudPlatformService>().InitializeCloudAuth(OAuth2Authenticator!);
             }
-            catch (TaskCanceledException ex)
+            catch (TaskCanceledException)
             {
                 return;
             }
@@ -310,7 +310,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                     FileList driveFileList = await fileListRequest.ExecuteAsync();
                     GenerateFileItemLists(driveFileList.Files);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw;
                 }
@@ -328,20 +328,17 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                 return;
             }
 
-            _files = files
-                .Select(file => new FilePickerItemViewModel()
-                {
-                    FileID = file.Id,
-                    FileName = file.Name,
-                    IsFolder = file.MimeType == FilePickerItemViewModel.GOOGLEFOLDER_MIMETYPE,
-                    MimeType = file.MimeType,
-                    FileExtension = file.FileExtension,
-                    FileSize = FormatSize(file.Size),
-                    ModifiedTime = file.ModifiedTimeDateTimeOffset?.ToString("MM/dd/yyyy"),
-                    Source = AxCrypt.Core.IO.FileProvider.GoogleDrive,
-                })
-                .OrderByDescending(file => file.IsFolder)
-                .ToList();
+            _files = files.Select(file => new FilePickerItemViewModel()
+            {
+                FileID = file.Id,
+                FileName = file.Name,
+                IsFolder = file.MimeType == FilePickerItemViewModel.GOOGLEFOLDER_MIMETYPE,
+                MimeType = file.MimeType,
+                FileExtension = file.FileExtension,
+                FileSize = FormatSize(file.Size),
+                ModifiedTime = file.ModifiedTimeDateTimeOffset?.ToString("MM/dd/yyyy")!,
+                Source = FileProvider.GoogleDrive,
+            }).OrderByDescending(file => file.IsFolder).ToList();
         }
 
         public override async Task<MemoryStream> ReadFileStreamAsync(string fileId)
@@ -382,13 +379,13 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             }
 
             //string fileName - filename already we are reading for the list - if possibel try to pass that value here
-            Google.Apis.Drive.v3.FilesResource.GetRequest getFileRequest = _driveService.Files.Get(fileItem.FileID);
+            GetRequest getFileRequest = _driveService!.Files.Get(fileItem.FileID);
             getFileRequest.MediaDownloader.ChunkSize = chunkFileSize;
-            getFileRequest.Alt = FilesResource.GetRequest.AltEnum.Media;
+            getFileRequest.Alt = GetRequest.AltEnum.Media;
             getFileRequest.SupportsAllDrives = true;
 
             getFileRequest.MediaDownloader.ProgressChanged += (
-                Google.Apis.Download.IDownloadProgress progress
+                IDownloadProgress progress
             ) =>
             {
                 switch (progress.Status)
@@ -432,7 +429,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             {
                 IList<string> actualParentPath = await GetParentFolderPath(cloudFileItem.FileID);
 
-                cloudFileItem.ParentPath = await CreateCloudFolder();
+                cloudFileItem.ParentPath = CreateCloudFolder();
                 string newFileId = await UploadFileAsync(cloudFileItem, fileInfo.Name, fileInfo);
 
                 if (string.IsNullOrEmpty(newFileId))
@@ -473,11 +470,11 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
 
                 try
                 {
-                    FilesResource.DeleteRequest deleteRequest = _driveService.Files.Delete(cloudFileItem.ParentPath);
+                    FilesResource.DeleteRequest deleteRequest = _driveService!.Files.Delete(cloudFileItem.ParentPath);
                     deleteRequest.SupportsAllDrives = true;
                     await deleteRequest.ExecuteAsync(ct);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     await New<IPopup>().ShowAsync(
                         PopupButtons.Ok,
@@ -489,6 +486,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                     return false;
                 }
 
+                cloudFileItem.FileID = newFileId;
                 return true;
             }
             catch (Exception)
@@ -527,7 +525,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             using Stream fileStream = fileInfo.OpenRead();
             fileStream.Position = 0;
 
-            CreateMediaUpload createRequest = _driveService.Files.Create(fileMetadata, fileStream, contentType);
+            CreateMediaUpload createRequest = _driveService!.Files.Create(fileMetadata, fileStream, contentType);
 
             createRequest.ChunkSize = ResumableUpload.MinimumChunkSize * 32;
             createRequest.Fields = "id";
@@ -647,7 +645,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             }
         }
 
-        private async Task<string> CreateCloudFolder()
+        private string CreateCloudFolder()
         {
             Google.Apis.Drive.v3.Data.File folderMetadata = new Google.Apis.Drive.v3.Data.File()
             {
@@ -655,7 +653,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                 MimeType = "application/vnd.google-apps.folder"
             };
 
-            Google.Apis.Drive.v3.FilesResource.CreateRequest folderRequest = _driveService.Files.Create(folderMetadata);
+            CreateRequest folderRequest = _driveService!.Files.Create(folderMetadata);
             folderRequest.Fields = "id";
 
             Google.Apis.Drive.v3.Data.File folder = folderRequest.Execute();
@@ -666,7 +664,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
         {
             try
             {
-                FilesResource.UpdateRequest moveRequest = _driveService.Files.Update(new Google.Apis.Drive.v3.Data.File(), fileId);
+                UpdateRequest moveRequest = _driveService!.Files.Update(new Google.Apis.Drive.v3.Data.File(), fileId);
                 moveRequest.AddParents = parentFolderPath;
                 moveRequest.RemoveParents = folderId;
                 moveRequest.Fields = "id, parents";
@@ -684,6 +682,53 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                 System.Diagnostics.Debug.WriteLine($"Move failed: {ex.Message}");
                 return false;
             }
+        }
+
+        public override async Task<ShareResult> ShareFileAsync(string fileId, ShareRequest request)
+        {
+            try
+            {
+                IEnumerable<Task<Google.Apis.Drive.v3.Data.Permission>> userPermissionTasks =
+                    request.RecipientEmailList.Select(email =>
+                    {
+                        Google.Apis.Drive.v3.Data.Permission userPermission = new Google.Apis.Drive.v3.Data.Permission
+                        {
+                            Type = "user",
+                            Role = request.Permission == SharePermission.Editor ? "writer" : "reader",
+                            EmailAddress = email
+                        };
+                        PermissionsResource.CreateRequest permReq = _driveService!.Permissions.Create(userPermission, fileId);
+                        permReq.SendNotificationEmail = true;
+                        permReq.EmailMessage = request.Message;
+                        permReq.Fields = "id";
+                        return permReq.ExecuteAsync();
+                    });
+
+                await Task.WhenAll(userPermissionTasks);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+
+            Google.Apis.Drive.v3.Data.Permission linkPermission = new Google.Apis.Drive.v3.Data.Permission
+            {
+                Type = request.LinkType == ShareLinkType.TeamOnly ? "domain" : "anyone",
+                Role = "reader"
+            };
+            await _driveService!.Permissions.Create(linkPermission, fileId).ExecuteAsync();
+
+            FilesResource.GetRequest fileReq = _driveService.Files.Get(fileId);
+            fileReq.Fields = "webViewLink";
+            Google.Apis.Drive.v3.Data.File file = await fileReq.ExecuteAsync();
+
+            return new ShareResult
+            {
+                ShareableLink = file.WebViewLink,
+                PermissionSet = true,
+                RecipientEmailList = request.RecipientEmailList
+            };
         }
 
         private async Task<IList<string>> GetParentFolderPath(string fileId)

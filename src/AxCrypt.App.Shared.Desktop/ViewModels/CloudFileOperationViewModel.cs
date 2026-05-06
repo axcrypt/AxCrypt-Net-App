@@ -653,29 +653,25 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             IList<FilePickerItemViewModel> itemList = fileItem.ToList();
             int i = 0;
 
+            ShareRequest request = new ShareRequest();
+            request.RecipientEmailList = userPublicKeys.Select(e => e.Email.ToString()).ToList();
+
             foreach (FileOperationContext sharedFileInfo in shareKeyFileList)
             {
                 if (sharedFileInfo.ErrorStatus != ErrorStatus.Success)
                 {
-                    New<IStatusChecker>()
-                        .CheckStatusAndShowMessage(
-                            sharedFileInfo.ErrorStatus,
-                            sharedFileInfo.FullName,
-                            sharedFileInfo.InternalMessage
-                        );
+                    New<IStatusChecker>().CheckStatusAndShowMessage(sharedFileInfo.ErrorStatus, sharedFileInfo.FullName,
+                            sharedFileInfo.InternalMessage);
+
                     return;
                 }
 
-                await ProcessShareKey(
-                    New<IDataStore>(sharedFileInfo.FullName),
-                    itemList[i]
-                );
-
+                await ProcessShareKey(New<IDataStore>(sharedFileInfo.FullName), itemList[i], request);
                 i++;
             }
         }
 
-        private async Task ProcessShareKey(IDataStore fileInfo, FilePickerItemViewModel cloudFileItem)
+        private async Task ProcessShareKey(IDataStore fileInfo, FilePickerItemViewModel cloudFileItem, ShareRequest request)
         {
             if (!TryFindDecryptionKey(fileInfo))
             {
@@ -683,6 +679,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             }
 
             await UpdateShareKeyFileAsync(fileInfo, cloudFileItem, true);
+            await _fileProviderService.ShareFileAsync(cloudFileItem.FileID, request);
         }
 
         /**
@@ -754,11 +751,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             return true;
         }
 
-        private async Task<bool> UpdateShareKeyFileAsync(
-            IDataStore fileInfo,
-            FilePickerItemViewModel cloudFileItem,
-            bool renameOnDelete = false
-        )
+        private async Task<bool> UpdateShareKeyFileAsync(IDataStore fileInfo, FilePickerItemViewModel cloudFileItem,
+            bool renameOnDelete = false)
         {
             return await _fileProviderService.UpdateFile(cloudFileItem, fileInfo);
         }

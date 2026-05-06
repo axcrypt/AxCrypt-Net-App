@@ -435,15 +435,12 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
         {
             if (FileItems == null)
             {
-                await New<IPopup>()
-                    .ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.ExactlySelectOneFileText);
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.ExactlySelectOneFileText);
                 return;
             }
 
             CloudFileOperationViewModel fileOperationViewModel = new CloudFileOperationViewModel(
-                SelectedFileStorageProvider,
-                this
-            );
+                SelectedFileStorageProvider, this);
 
             IList<FileOperationContext> ShareKeyFileListItem = new List<FileOperationContext>();
 
@@ -453,10 +450,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 IDataStore file = New<IDataStore>(fullFilePath);
                 if (!file.IsEncrypted())
                 {
-                    FileOperationContext fileOperationContext = new FileOperationContext(
-                        file.FullName,
-                        ErrorStatus.WrongFileExtensionError
-                    );
+                    FileOperationContext fileOperationContext = new FileOperationContext(file.FullName,
+                        ErrorStatus.WrongFileExtensionError);
 
                     New<IStatusChecker>().CheckStatusAndShowMessage(
                             fileOperationContext.ErrorStatus,
@@ -500,8 +495,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             await fileOperationViewModel.ShareKeyPreparedFile(ShareKeyFileListItem, FileItems, sharingListViewModel!.SharedWith);
         }
 
-        private string GetFullPathByFileSource(
-            FilePickerItemViewModel selectedFileItem,
+        private string GetFullPathByFileSource(FilePickerItemViewModel selectedFileItem,
             CloudFileOperationViewModel fileOperationViewModel
         )
         {

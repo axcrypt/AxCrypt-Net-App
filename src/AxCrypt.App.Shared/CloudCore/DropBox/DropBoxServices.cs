@@ -8,6 +8,7 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.UI;
 using Dropbox.Api;
 using Dropbox.Api.Files;
+using Dropbox.Api.Sharing;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.CloudCore.DropBox
@@ -48,7 +49,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
         )
         {
             _instance = instance;
-            _oAuth2Authenticator = instance.Auth;
+            _oAuth2Authenticator = instance.Auth!;
             if (_oAuth2Authenticator != null)
             {
                 _oAuth2Authenticator.Completed += async (sender, e) =>
@@ -85,7 +86,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
             {
                 await New<ICloudPlatformService>().InitializeCloudAuth(OAuth2Authenticator!);
             }
-            catch (TaskCanceledException ex)
+            catch (TaskCanceledException)
             {
                 return;
             }
@@ -166,11 +167,11 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
 
                 _files = allMatches.Select(m => new FilePickerItemViewModel()
                 {
-                     FileID = m.Metadata.AsMetadata.Value.PathLower,
-                     FileName = m.Metadata.AsMetadata.Value.Name,
-                     IsFolder = m.Metadata.AsMetadata.Value.IsFolder,
-                     FileExtension = Path.GetExtension(m.Metadata.AsMetadata.Value.PathLower),
-                     Source = FileProvider.DropBox,
+                    FileID = m.Metadata.AsMetadata.Value.PathLower,
+                    FileName = m.Metadata.AsMetadata.Value.Name,
+                    IsFolder = m.Metadata.AsMetadata.Value.IsFolder,
+                    FileExtension = Path.GetExtension(m.Metadata.AsMetadata.Value.PathLower),
+                    Source = FileProvider.DropBox,
                 }).ToList() ?? new List<FilePickerItemViewModel>();
             }
             catch (Exception e)
@@ -299,7 +300,7 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
         {
             if (!New<IInternetState>().Connected)
             {
-                return null;
+                return null!;
             }
 
             try
@@ -576,9 +577,10 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
                 {
                     DeleteArg deleteArg = new DeleteArg(temCloudFolder);
                     DeleteResult Result = await _dropboxclient.Files.DeleteV2Async(deleteArg);
+                    cloudFileItem.FileID = newFileId;
                     return Result != null;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     await New<IPopup>().ShowAsync(
                         PopupButtons.Ok,
@@ -594,6 +596,46 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
             {
                 return false;
             }
+        }
+
+        public override async Task<ShareResult> ShareFileAsync(string filePath, ShareRequest request)
+        {
+            try
+            {
+                await _dropboxclient.Sharing.AddFileMemberAsync(
+                    new AddFileMemberArgs(
+                        file: filePath,
+                        members: request.RecipientEmailList.Select(email => new MemberSelector.Email(email)),
+                        accessLevel: request.Permission == SharePermission.Editor
+                                         ? AccessLevel.Editor.Instance
+                                         : AccessLevel.Viewer.Instance,
+                        quiet: false,
+                        customMessage: request.Message
+                    ));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+
+            RequestedVisibility visibility = request.LinkType == ShareLinkType.TeamOnly
+                ? (RequestedVisibility)RequestedVisibility.TeamOnly.Instance
+                : RequestedVisibility.Public.Instance;
+
+            SharedLinkMetadata linkResult = await _dropboxclient.Sharing.CreateSharedLinkWithSettingsAsync(
+                new CreateSharedLinkWithSettingsArg(
+                    path: filePath,
+                    settings: new SharedLinkSettings(requestedVisibility: visibility)
+                )
+            );
+
+            return new ShareResult
+            {
+                ShareableLink = linkResult.Url,
+                PermissionSet = true,
+                RecipientEmailList = request.RecipientEmailList
+            };
         }
     }
 }

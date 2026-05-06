@@ -36,6 +36,8 @@ namespace AxCrypt.App.Shared.CloudCore
 
         public abstract Task<string> MoveFile(FilePickerItemViewModel fileItem, string fileName, IDataStore fileInfo);
 
+        public abstract Task<ShareResult> ShareFileAsync(string fileId, ShareRequest request);
+
         public abstract Task<bool> DeleteFileAsync(
             string fileName,
             FilePickerItemViewModel fileItem,
@@ -93,11 +95,7 @@ namespace AxCrypt.App.Shared.CloudCore
             return moveToFileInfo;
         }
 
-        private static IDataStore MoveOrCopyTo(
-            IDataStore moveToFileInfo,
-            string randomName,
-            bool canMove
-        )
+        private static IDataStore MoveOrCopyTo(IDataStore moveToFileInfo, string randomName, bool canMove)
         {
             if (canMove)
             {
@@ -142,7 +140,7 @@ namespace AxCrypt.App.Shared.CloudCore
         {
             const string validFileNameChars = "abcdefghijklmnopqrstuvwxyz";
             const int randomLength = 8;
-            
+
             StringBuilder randomName = new StringBuilder(randomLength + 4);
             byte[] random = Resolve.RandomGenerator.Generate(randomLength);
             for (int i = 0; i < randomLength; ++i)
@@ -185,4 +183,25 @@ namespace AxCrypt.App.Shared.CloudCore
             return path.EndsWith("/") ? path : path + "/";
         }
     }
+
+    public class ShareRequest
+    {
+        public IEnumerable<string> RecipientEmailList { get; set; }
+        public SharePermission Permission { get; set; } = SharePermission.Viewer;
+        public ShareLinkType LinkType { get; set; } = ShareLinkType.Anyone;
+        public string Message { get; set; } = "You have a new file shared with you securely via AxCrypt. Click below to access your file.";
+    }
+
+    public class ShareResult
+    {
+        public string ShareableLink { get; set; }
+        public bool PermissionSet { get; set; }
+        public IEnumerable<string> RecipientEmailList { get; set; }
+    }
+
+    public enum SharePermission
+    { Viewer, Editor }
+
+    public enum ShareLinkType
+    { Anyone, TeamOnly }
 }

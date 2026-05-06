@@ -8,7 +8,9 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.UI;
 using Azure.Core;
 using Microsoft.Graph;
+using Microsoft.Graph.Drives.Item.Items.Item.CreateLink;
 using Microsoft.Graph.Drives.Item.Items.Item.CreateUploadSession;
+using Microsoft.Graph.Drives.Item.Items.Item.Invite;
 using Microsoft.Graph.Drives.Item.Items.Item.SearchWithQ;
 using Microsoft.Graph.Models;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -143,7 +145,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
         private async Task LoadCloudDriveAsync()
         {
             _graphClient = GetAuthenticatedClient();
-            Microsoft.Graph.Models.Drive? driveInfo = await _graphClient.Me.Drive.GetAsync();
+            Drive? driveInfo = await _graphClient.Me.Drive.GetAsync();
             _userDriveId = driveInfo!.Id;
         }
 
@@ -215,11 +217,11 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
                 _files = files.Select(file => new FilePickerItemViewModel()
                 {
-                    FileID = file.Id,
-                    FileName = file.Name,
+                    FileID = file.Id!,
+                    FileName = file.Name!,
                     IsFolder = file.Folder != null,
-                    MimeType = file.File?.MimeType,
-                    FileExtension = file.Folder != null ? "" : System.IO.Path.GetExtension(file.Name),
+                    MimeType = file.File?.MimeType!,
+                    FileExtension = file.Folder != null ? "" : System.IO.Path.GetExtension(file.Name)!,
                     ParentPath = file.ParentReference!.Path!,
                     Source = AxCrypt.Core.IO.FileProvider.OneDrive,
                 })
@@ -277,7 +279,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
                 if (!item.AdditionalData.TryGetValue("@microsoft.graph.downloadUrl", out object? downloadUrlObj) || downloadUrlObj is null)
                     throw new Exception("Download URL missing.");
 
-                string downloadUrl = downloadUrlObj.ToString();
+                string downloadUrl = downloadUrlObj.ToString()!;
 
                 long fileSize = item.Size ?? throw new Exception("File size missing.");
                 long offset = 0;
@@ -514,9 +516,9 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
                 return true;
             }
-            catch (HttpRequestException hrex)
+            catch (HttpRequestException)
             {
-                throw hrex;
+                throw;
             }
         }
 
@@ -558,8 +560,8 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
                     return false;
                 }
 
-                DriveItem destinationFolder;
-                string normalizedPath = actualParentPath?.Trim('/');
+                DriveItem? destinationFolder;
+                string normalizedPath = actualParentPath!.Trim('/');
 
                 if (string.IsNullOrEmpty(normalizedPath) || normalizedPath.Equals("root", StringComparison.OrdinalIgnoreCase) ||
                 normalizedPath.StartsWith("drives/", StringComparison.OrdinalIgnoreCase))
@@ -571,7 +573,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
                     destinationFolder = await _graphClient.Drives[_userDriveId].Root.ItemWithPath(actualParentPath).GetAsync();
                 }
 
-                DriveItem temFolderId = await _graphClient.Drives[_userDriveId].Root.ItemWithPath(cloudFileItem.ParentPath).GetAsync();
+                DriveItem? temFolderId = await _graphClient.Drives[_userDriveId].Root.ItemWithPath(cloudFileItem.ParentPath).GetAsync();
 
                 if (temFolderId?.Id == null)
                     return false;
@@ -591,9 +593,10 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
                 try
                 {
                     await _graphClient.Drives[_userDriveId].Items[temFolderId.Id].DeleteAsync(cancellationToken: ct);
+                    cloudFileItem.FileID = newFileId;
                     return true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     await New<IPopup>().ShowAsync(
                         PopupButtons.Ok,
@@ -617,6 +620,43 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
             return false;
         }
 
+        public override async Task<ShareResult> ShareFileAsync(string fileId, ShareRequest request)
+        {
+            try
+            {
+                InvitePostRequestBody inviteBody = new InvitePostRequestBody
+                {
+                    Recipients = request.RecipientEmailList
+                        .Select(email => new DriveRecipient { Email = email })
+                        .ToList(),
+                    Roles = new List<string> { request.Permission == SharePermission.Editor ? "write" : "read" },
+                    SendInvitation = true,
+                    Message = request.Message
+                };
+
+                await _graphClient.Drives[_userDriveId].Items[fileId].Invite.PostAsInvitePostResponseAsync(inviteBody);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+
+            CreateLinkPostRequestBody linkBody = new CreateLinkPostRequestBody
+            {
+                Type = request.Permission == SharePermission.Editor ? "edit" : "view",
+                Scope = request.LinkType == ShareLinkType.TeamOnly ? "organization" : "anonymous"
+            };
+            Permission? linkResult = await _graphClient.Drives[_userDriveId].Items[fileId].CreateLink.PostAsync(linkBody);
+
+            return new ShareResult
+            {
+                ShareableLink = linkResult?.Link?.WebUrl!,
+                PermissionSet = true,
+                RecipientEmailList = request.RecipientEmailList
+            };
+        }
+
         public async Task<bool> MoveFile(string fileId, string folderId)
         {
             try
@@ -629,7 +669,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
                     }
                 };
 
-                DriveItem movedFile = await _graphClient.Drives[_userDriveId].Items[fileId].PatchAsync(moveItem);
+                DriveItem? movedFile = await _graphClient.Drives[_userDriveId].Items[fileId].PatchAsync(moveItem);
                 return movedFile != null;
             }
             catch (OperationCanceledException)
@@ -664,11 +704,11 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
             FilePickerItemViewModel fileItem = new FilePickerItemViewModel()
             {
-                FileID = driveFile.Id,
-                FileName = driveFile.Name,
+                FileID = driveFile.Id!,
+                FileName = driveFile.Name!,
                 IsFolder = driveFile.Folder != null,
-                MimeType = driveFile.File?.MimeType,
-                FileExtension = driveFile.Folder != null ? "" : System.IO.Path.GetExtension(driveFile.Name),
+                MimeType = driveFile.File?.MimeType!,
+                FileExtension = driveFile.Folder != null ? "" : System.IO.Path.GetExtension(driveFile.Name)!,
                 ParentPath = driveFile.ParentReference!.Path!,
                 Source = AxCrypt.Core.IO.FileProvider.OneDrive,
             };
@@ -701,7 +741,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
                 driveFile = await graphClient.Drives[_userDriveId].Root.ItemWithPath(fileName).GetAsync();
             }
-            catch (Exception? exp)
+            catch (Exception)
             {
                 fileNameCounter = 0;
                 originalFileName = "";
@@ -740,7 +780,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
         private GraphServiceClient GetAuthenticatedClient()
         {
             CustomTokenCredential tokenCredential = new CustomTokenCredential(
-                _instance.AccessToken,
+                _instance.AccessToken!,
                 _instance.AccessTokenExpireOffset
             );
 
