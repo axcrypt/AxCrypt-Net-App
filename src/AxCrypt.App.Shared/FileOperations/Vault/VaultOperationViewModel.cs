@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.FileOperations.IO;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
@@ -9,11 +10,6 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.FileOperations.Vault;
@@ -25,17 +21,16 @@ public class VaultOperationViewModel : ViewModelBase
 
     public IEnumerable<UserPublicKey>? Recipients { get; set; } = null;
 
-    public IdentityViewModel IdentityViewModel { get; private set; }
+    private IdentityViewModel _identityViewModel { get; set; }
 
     public VaultOperationViewModel(
         KnownIdentities knownIdentities,
-        CustomParallelFileOperation customParallelFileOperation,
-        IdentityViewModel identityViewModel
+        CustomParallelFileOperation customParallelFileOperation
     )
     {
+        _identityViewModel = AxCServiceProviderExtension.LogOnViewModel!.FileOperationViewModel.IdentityViewModel;
         _fileOperation = customParallelFileOperation;
         _knownIdentities = knownIdentities;
-        IdentityViewModel = identityViewModel;
 
         InitializePropertyValues();
     }
@@ -181,13 +176,13 @@ public class VaultOperationViewModel : ViewModelBase
 
     private async Task QueryDecryptPassphraseAsync(FileOperationEventArgs e)
     {
-        await IdentityViewModel.AskForDecryptPassphrase.ExecuteAsync(e.OpenFileFullName);
-        if (IdentityViewModel.LogOnIdentity == LogOnIdentity.Empty)
+        await _identityViewModel.AskForDecryptPassphrase.ExecuteAsync(e.OpenFileFullName);
+        if (_identityViewModel.LogOnIdentity == LogOnIdentity.Empty)
         {
             e.Cancel = true;
             return;
         }
-        e.LogOnIdentity = IdentityViewModel.LogOnIdentity;
+        e.LogOnIdentity = _identityViewModel.LogOnIdentity;
     }
 
     public event Func<object, FileSelectionEventArgs, Task> SelectingFilesAsync;
@@ -266,8 +261,7 @@ public class VaultOperationViewModel : ViewModelBase
                 vaultDestinationContainer.CreateFolder();
             }
 
-
-            IEnumerable<IVaultDataStore> vaultFileDataStores = sourceDirContainer.Files.Select((file)=> New<IVaultDataStore>().Create(file, vaultDestinationContainer.FullName));
+            IEnumerable<IVaultDataStore> vaultFileDataStores = sourceDirContainer.Files.Select((file) => New<IVaultDataStore>().Create(file, vaultDestinationContainer.FullName));
             await EncryptFiles.ExecuteAsync(vaultFileDataStores);
 
             // Copy subdirectories recursively
@@ -311,7 +305,7 @@ public class VaultOperationViewModel : ViewModelBase
                 return;
             }
 
-            IEnumerable<IVaultDataStore> vaultFileDataStores = sourceDirContainer.Files.Select((file)=> New<IVaultDataStore>().Create(file, vaultDestinationContainer.FullName));
+            IEnumerable<IVaultDataStore> vaultFileDataStores = sourceDirContainer.Files.Select((file) => New<IVaultDataStore>().Create(file, vaultDestinationContainer.FullName));
             await DecryptFiles.ExecuteAsync(vaultFileDataStores);
 
             // Copy subdirectories recursively
@@ -344,9 +338,8 @@ public class VaultOperationViewModel : ViewModelBase
         }
 
         string name = targetDataContainer.Name;
-        string dir = targetDataContainer.FullName.Replace(targetDataContainer.Name + "\\","");
+        string dir = targetDataContainer.FullName.Replace(targetDataContainer.Name + "\\", "");
         //string dir = Path.GetDirectoryName(targetPath);
-        
 
         string newName = $"{name}_{DateTime.Now:yyyyMMddHHmmss}";
         return Path.Combine(dir, newName);

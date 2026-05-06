@@ -103,10 +103,10 @@ namespace AxCrypt.App.Shared
         {
             TypeMap.Register.New<IVaultDataStore>(() => new VaultDataStore());
             TypeMap.Register.Singleton<CustomParallelFileOperation>(() => new CustomParallelFileOperation());
-            TypeMap.Register.New<VaultOperationViewModel>(() => new VaultOperationViewModel(Resolve.KnownIdentities, New<CustomParallelFileOperation>(), New<IdentityViewModel>()));
+            TypeMap.Register.New<VaultOperationViewModel>(() => new VaultOperationViewModel(Resolve.KnownIdentities, New<CustomParallelFileOperation>()));
             TypeMap.Register.New<IAccountSetupService>(() => new AccountSetupService());
         }
-        
+
         public static void LoadUpdateCheck(MainViewModel mainViewModel, LogOnViewModel logOnViewModel)
         {
             _mainViewModel = mainViewModel;

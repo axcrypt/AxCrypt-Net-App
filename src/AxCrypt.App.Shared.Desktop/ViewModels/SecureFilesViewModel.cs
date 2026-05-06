@@ -123,7 +123,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 return;
             }
 
-            await DecryptFile(New<IDataStore>(file.FilePath));
+            await DecryptFile(New<IDataStore>(file.FilePath), null!);
         }
 
         private async void AddFile(object anchorView)
@@ -151,21 +151,13 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
         {
             if (preparingResult.ErrorStatus != ErrorStatus.Success)
             {
-                New<IStatusChecker>()
-                    .CheckStatusAndShowMessage(
-                        preparingResult.ErrorStatus,
-                        preparingResult.FullName,
-                        preparingResult.InternalMessage
-                    );
+                New<IStatusChecker>().CheckStatusAndShowMessage(preparingResult.ErrorStatus, preparingResult.FullName,
+                    preparingResult.InternalMessage);
+
                 return;
             }
 
-            await DecryptFile(New<IDataStore>(preparingResult.FullName));
-        }
-
-        private Task DecryptFile(IDataStore dataStore)
-        {
-            return DecryptFile(dataStore, null!);
+            await DecryptFile(New<IDataStore>(preparingResult.FullName), null!);
         }
 
         private async Task DecryptFile(IDataStore file, Passphrase passphrase)
@@ -173,24 +165,13 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             FileOpenedContext operationContext = null!;
             if (New<UserSettings>().ShouldNotifyUserAboutCleaningWorkflow)
             {
-                await New<IPopup>()
-                    .ShowAsync(
-                        PopupButtons.Ok,
-                        Texts.WarningTitle,
-                        Texts.CleanupWorkflowDescription
-                    );
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.CleanupWorkflowDescription);
                 New<UserSettings>().ShouldNotifyUserAboutCleaningWorkflow = false;
             }
 
-            using (
-                await New<IProgressDialog>()
-                    .Show(
-                        Texts.ProgressIndicatorDecryptingMessage,
-                        Texts.ProgressIndicatorWaitMessage
-                    )
-            )
+            using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorDecryptingMessage, Texts.ProgressIndicatorWaitMessage))
             {
-                operationContext = await _recentFilesProvider.DecryptAndLaunch(file, passphrase);
+                operationContext = await new CloudFileOperationViewModel(SelectedFileStorageProvider, this).DecryptAndLaunch(file, passphrase);
             }
 
             if (operationContext.ErrorStatus == ErrorStatus.Success)
@@ -216,31 +197,27 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 AskFilePassword(file);
                 return;
             }
-            New<IStatusChecker>()
-                .CheckStatusAndShowMessage(
-                    operationContext.ErrorStatus,
-                    operationContext.FullName,
-                    operationContext.InternalMessage
-                );
+
+            New<IStatusChecker>().CheckStatusAndShowMessage(operationContext.ErrorStatus, operationContext.FullName,
+                operationContext.InternalMessage);
         }
 
         public bool CheckIfFileAlreadyInRecentFileList(ActiveFile addedFile)
         {
-            bool isAlreadyInRecent = Files.Any(f =>
-                f.FilePath == addedFile.EncryptedFileInfo.FullName
-            );
+            bool isAlreadyInRecent = Files.Any(f => f.FilePath == addedFile.EncryptedFileInfo.FullName);
+
             if (!isAlreadyInRecent)
             {
                 return false;
             }
+
             if (isAlreadyInRecent && !addedFile.IsShared)
             {
                 return true;
             }
 
-            FileDetails? existingFile = Files.FirstOrDefault(f =>
-                f.FilePath == addedFile.EncryptedFileInfo.FullName
-            );
+            FileDetails? existingFile = Files.FirstOrDefault(f => f.FilePath == addedFile.EncryptedFileInfo.FullName);
+
             if (existingFile!.SharedWith.Any())
             {
                 return true;
@@ -267,7 +244,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
 
                 await DecryptFile(FilePasswordViewModel.EncryptedFile, passphrase);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, "Something went wrong!");
             }
@@ -387,16 +364,11 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
 
             if (!file.IsEncrypted())
             {
-                FileOperationContext fileOperationContext = new FileOperationContext(
-                    file.FullName,
-                    ErrorStatus.WrongFileExtensionError
-                );
+                FileOperationContext fileOperationContext = new FileOperationContext(file.FullName,
+                    ErrorStatus.WrongFileExtensionError);
 
-                New<IStatusChecker>().CheckStatusAndShowMessage(
-                        fileOperationContext.ErrorStatus,
-                        fileOperationContext.FullName,
-                        fileOperationContext.InternalMessage
-                    );
+                New<IStatusChecker>().CheckStatusAndShowMessage(fileOperationContext.ErrorStatus, fileOperationContext.FullName,
+                        fileOperationContext.InternalMessage);
 
                 return;
             }
@@ -448,15 +420,16 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             {
                 string fullFilePath = GetFullPathByFileSource(fileItem, fileOperationViewModel);
                 IDataStore file = New<IDataStore>(fullFilePath);
+
                 if (!file.IsEncrypted())
                 {
                     FileOperationContext fileOperationContext = new FileOperationContext(file.FullName,
                         ErrorStatus.WrongFileExtensionError);
 
                     New<IStatusChecker>().CheckStatusAndShowMessage(
-                            fileOperationContext.ErrorStatus,
-                            fileOperationContext.FullName,
-                            fileOperationContext.InternalMessage
+                        fileOperationContext.ErrorStatus,
+                        fileOperationContext.FullName,
+                        fileOperationContext.InternalMessage
                     );
 
                     return;

@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.CloudCore;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.UI.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
@@ -23,6 +24,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
         private FileStorageProvider _fileProviderService;
         private SecureFilesViewModel _securedFilesViewModel;
         private FileSystemState _fileSystemState = New<FileSystemState>();
+        private IdentityViewModel _identityViewModel { get; set; }
 
         private ParallelFileOperation _fileOperation;
         public IEnumerable<UserPublicKey> Recipients { get; set; } = null;
@@ -34,6 +36,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             SecureFilesViewModel secureFilesViewModel
         )
         {
+            _identityViewModel = AxCServiceProviderExtension.LogOnViewModel!.FileOperationViewModel.IdentityViewModel;
             _fileProviderService = fileProviderService;
 
             _securedFilesViewModel = secureFilesViewModel;
@@ -129,15 +132,11 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             return context;
         }
 
-        private Task<FileOperationContext> ProcessFileEncryption(
-            IDataStore actualFile,
-            IProgressContext progressContext,
-            FilePickerItemViewModel file
-        )
+        private Task<FileOperationContext> ProcessFileEncryption(IDataStore actualFile, IProgressContext progressContext,
+            FilePickerItemViewModel file)
         {
-            FileOperationsController operationsController = new FileOperationsController(
-                progressContext
-            );
+            FileOperationsController operationsController = new FileOperationsController(progressContext);
+
             operationsController.QuerySaveFileAs += (object sender, FileOperationEventArgs e) =>
             {
                 using (FileLock lockedSave = e.SaveFileFullName.CreateUniqueFile())
@@ -147,17 +146,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 }
             };
 
-            operationsController.QueryEncryptionPassphrase += (
-                object sender,
-                FileOperationEventArgs e
-            ) =>
-            { };
-
-            operationsController.QuerySharedPublicKeys += (
-                object sender,
-                FileOperationEventArgs e
-            ) =>
-            { };
+            operationsController.QueryEncryptionPassphrase += (object sender, FileOperationEventArgs e) => { };
+            operationsController.QuerySharedPublicKeys += (object sender, FileOperationEventArgs e) => { };
 
             operationsController.Completed += async (object sender, FileOperationEventArgs e) =>
             {
@@ -175,13 +165,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 IDataStore encryptedInfo = New<IDataStore>(e.SaveFileFullName);
                 IDataStore decryptedInfo = New<IDataStore>(FileOperation.GetTemporaryDestinationName(e.OpenFileFullName));
 
-                ActiveFile activeFile = new ActiveFile(
-                    encryptedInfo,
-                    decryptedInfo,
-                    e.LogOnIdentity,
-                    ActiveFileStatus.NotDecrypted,
-                    e.CryptoId
-                );
+                ActiveFile activeFile = new ActiveFile(encryptedInfo, decryptedInfo, e.LogOnIdentity,
+                    ActiveFileStatus.NotDecrypted, e.CryptoId);
 
                 await UpdateEncryptedFileStatusAsync(actualFile, activeFile, file, file.Source);
             };
@@ -201,8 +186,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
 
         private static bool CheckStatusAndShowMessage(FileOperationContext context, string fallbackName)
         {
-            return Resolve.StatusChecker.CheckStatusAndShowMessage(
-                context.ErrorStatus,
+            return Resolve.StatusChecker.CheckStatusAndShowMessage(context.ErrorStatus,
                 string.IsNullOrEmpty(context.FullName) ? fallbackName : context.FullName,
                 context.InternalMessage
             );
@@ -231,39 +215,34 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             }
         }
 
-        private async Task<bool> CheckEncryptedOriginalFileProcessed(
-            IDataStore actualFile,
-            FilePickerItemViewModel fileItem,
-            ActiveFile encryptedFile
-        )
+        private async Task<bool> CheckEncryptedOriginalFileProcessed(IDataStore actualFile, FilePickerItemViewModel fileItem,
+            ActiveFile encryptedFile)
         {
-            string newFileId = await _fileProviderService.MoveFile(
-                fileItem,
-                encryptedFile.EncryptedFileInfo.Name,
+            string newFileId = await _fileProviderService.MoveFile(fileItem, encryptedFile.EncryptedFileInfo.Name,
                 encryptedFile.EncryptedFileInfo
             );
 
             if (string.IsNullOrEmpty(newFileId))
             {
-                await New<IPopup>()
-                    .ShowAsync(
-                        PopupButtons.Ok,
-                        Texts.WarningTitle,
-                        "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
-                        Common.DoNotShowAgainOptions.None
-                    );
+                await New<IPopup>().ShowAsync(
+                    PopupButtons.Ok,
+                    Texts.WarningTitle,
+                    "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
+                    Common.DoNotShowAgainOptions.None
+                );
+
                 return false;
             }
 
             if (!await _fileProviderService.DeleteFileAsync(actualFile.FullName, fileItem, encryptedFile.EncryptedFileInfo.FullName))
             {
-                await New<IPopup>()
-                    .ShowAsync(
-                        PopupButtons.Ok,
-                        Texts.WarningTitle,
-                        "Your file was successfully encrypted, however there was a problem when deleting the original file. The original left is left untouched and needs to be removed manually.",
-                        Common.DoNotShowAgainOptions.None
-                    );
+                await New<IPopup>().ShowAsync(
+                      PopupButtons.Ok,
+                      Texts.WarningTitle,
+                      "Your file was successfully encrypted, however there was a problem when deleting the original file. The original left is left untouched and needs to be removed manually.",
+                      Common.DoNotShowAgainOptions.None
+                );
+
                 return false;
             }
 
@@ -274,21 +253,14 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
         {
             fileItem.FileID = fileItem.ParentPath + "/" + encryptedFile.EncryptedFileInfo.Name;
 
-            string newFileId = await _fileProviderService.MoveFile(
-                            fileItem,
-                            encryptedFile.EncryptedFileInfo.Name,
-                            encryptedFile.EncryptedFileInfo
-                        );
+            string newFileId = await _fileProviderService.MoveFile(fileItem, encryptedFile.EncryptedFileInfo.Name,
+                            encryptedFile.EncryptedFileInfo);
 
             if (string.IsNullOrEmpty(newFileId))
             {
-                await New<IPopup>()
-                    .ShowAsync(
-                        PopupButtons.Ok,
-                        Texts.WarningTitle,
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle,
                         "Your file was successfully encrypted, however there was a problem when moving the encrypted file. The encrypted left is not updated and try again.",
-                        Common.DoNotShowAgainOptions.None
-                    );
+                        Common.DoNotShowAgainOptions.None);
 
                 return false;
             }
@@ -399,33 +371,20 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             await InternalDecryptFile(New<IDataStore>(preparingResult.FullName), fileItem, null, source);
         }
 
-        private async Task InternalDecryptFile(
-            IDataStore actualFile,
-            FilePickerItemViewModel fileItem,
-            Passphrase passphrase,
-            AxCrypt.Core.IO.FileProvider source
-        )
+        private async Task InternalDecryptFile(IDataStore actualFile, FilePickerItemViewModel fileItem,
+            Passphrase passphrase, FileProvider source)
         {
             FileOpenedContext operationContext = null;
             operationContext = await ProcessFileDecryption(actualFile, passphrase);
             if (operationContext.ErrorStatus == ErrorStatus.Canceled)
             {
-                _securedFilesViewModel.AskFilePassword(
-                    actualFile,
-                    fileItem,
-                    source,
-                    new Microsoft.Maui.Controls.Command(SubmitFilePasswordForCloudFiles)
-                );
                 return;
             }
+
             if (operationContext.ErrorStatus != ErrorStatus.Success)
             {
-                New<IStatusChecker>()
-                    .CheckStatusAndShowMessage(
-                        operationContext.ErrorStatus,
-                        operationContext.FullName,
-                        operationContext.InternalMessage
-                    );
+                New<IStatusChecker>().CheckStatusAndShowMessage(operationContext.ErrorStatus, operationContext.FullName,
+                    operationContext.InternalMessage);
 
                 return;
             }
@@ -461,65 +420,21 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     );
 
                     KnownIdentities knownIdentities = New<KnownIdentities>();
-                    operationsController.QuerySaveFileAs += (
-                        object sender,
-                        FileOperationEventArgs e
-                    ) =>
-                    { };
 
-                    operationsController.QueryDecryptionPassphrase = async (arg) =>
+                    operationsController.QueryDecryptionPassphrase = HandleQueryDecryptionPassphraseEventAsync;
+                    operationsController.QuerySaveFileAs += (object sender, FileOperationEventArgs e) => { };
+
+                    operationsController.KnownKeyAdded = new AsyncDelegateAction<FileOperationEventArgs>(async (FileOperationEventArgs e) =>
                     {
-                        if (passphrase == null)
+                        if (!_fileSystemState.KnownPassphrases.Any(i => i.Thumbprint == e.LogOnIdentity.Passphrase.Thumbprint))
                         {
-                            // If file password is unknown, cancel file decryption.
-                            // When user input correct passphrase, DecryptAndLaunch can be called again.
-                            arg.Cancel = true;
-                            return;
+                            _fileSystemState.KnownPassphrases.Add(
+                                e.LogOnIdentity.Passphrase
+                            );
                         }
 
-                        LogOnIdentity identity = LogOnIdentity.Empty;
-                        foreach (Passphrase candidate in _fileSystemState.KnownPassphrases)
-                        {
-                            if (candidate.Thumbprint == passphrase.Thumbprint)
-                            {
-                                identity = new LogOnIdentity(passphrase);
-                                break;
-                            }
-                        }
-
-                        if (identity == LogOnIdentity.Empty)
-                        {
-                            identity = new LogOnIdentity(passphrase);
-                            _fileSystemState.KnownPassphrases.Add(passphrase);
-                            await _fileSystemState.Save();
-                        }
-
-                        await knownIdentities.AddAsync(identity);
-                        Resolve.UserSettings.EncryptionUpgradeMode =
-                            EncryptionUpgradeMode.NotDecided;
-                        arg.LogOnIdentity = identity;
-
-                        return;
-                    };
-
-                    operationsController.KnownKeyAdded =
-                        new AsyncDelegateAction<FileOperationEventArgs>(
-                            async (FileOperationEventArgs e) =>
-                            {
-                                if (
-                                    !_fileSystemState.KnownPassphrases.Any(i =>
-                                        i.Thumbprint == e.LogOnIdentity.Passphrase.Thumbprint
-                                    )
-                                )
-                                {
-                                    _fileSystemState.KnownPassphrases.Add(
-                                        e.LogOnIdentity.Passphrase
-                                    );
-                                }
-
-                                await knownIdentities.AddAsync(e.LogOnIdentity);
-                            }
-                        );
+                        await knownIdentities.AddAsync(e.LogOnIdentity);
+                    });
 
                     operationsController.Completed += (object sender, FileOperationEventArgs e) =>
                     {
@@ -527,39 +442,74 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                         return Task.CompletedTask;
                     };
 
-                    FileOperationContext fileOperationContext =
-                        await operationsController.DecryptFileAsync(file);
-                    ActiveFile associatedFile = _fileSystemState.FindActiveFileFromEncryptedPath(
-                        file.FullName
-                    );
+                    FileOperationContext fileOperationContext = await operationsController.DecryptFileAsync(file);
+                    ActiveFile associatedFile = _fileSystemState.FindActiveFileFromEncryptedPath(file.FullName);
+
                     return new FileOpenedContext(fileOperationContext, associatedFile);
                 }
             });
         }
 
-        private async void SubmitFilePasswordForCloudFiles()
+        public async Task<FileOpenedContext> DecryptAndLaunch(IDataStore file, Passphrase passphrase)
         {
-            Passphrase? passphrase =
-                await _securedFilesViewModel.FilePasswordViewModel.SubmitFilePassword();
-            if (passphrase == null)
+            // Avoid working with files in UI thread.
+            return await Task.Run(async () =>
             {
-                return;
-            }
+                IExternalDataStore externalDataStore = file as IExternalDataStore;
+                Task<IDisposable> openTask = Task.FromResult<IDisposable>(null);
+                if (externalDataStore != null)
+                {
+                    // Loads external file before the long manipulations with it content.
+                    // This allows to avoid multiple open/close operations.
+                    openTask = externalDataStore.OpenAsync();
+                }
 
-            await DecryptWithFilePassword(passphrase);
+                using (await openTask)
+                {
+                    ProgressContext progressContext = new ProgressContext();
+                    FileOperationsController operationsController = new FileOperationsController(progressContext);
+
+                    KnownIdentities knownIdentities = New<KnownIdentities>();
+
+                    operationsController.QueryDecryptionPassphrase = HandleQueryDecryptionPassphraseEventAsync;
+                    operationsController.QuerySaveFileAs += (object sender, FileOperationEventArgs e) => { };
+
+                    operationsController.KnownKeyAdded = new AsyncDelegateAction<FileOperationEventArgs>(async (FileOperationEventArgs e) =>
+                    {
+                        if (!_fileSystemState.KnownPassphrases.Any(i => i.Thumbprint == e.LogOnIdentity.Passphrase.Thumbprint))
+                        {
+                            _fileSystemState.KnownPassphrases.Add(e.LogOnIdentity.Passphrase);
+                        }
+
+                        await knownIdentities.AddAsync(e.LogOnIdentity);
+                    });
+
+                    operationsController.Completed += (object sender, FileOperationEventArgs e) =>
+                    {
+                        return Task.CompletedTask;
+                    };
+
+                    FileOperationContext fileOperationContext = await operationsController.DecryptAndLaunchAsync(file);
+                    ActiveFile associatedFile = _fileSystemState.FindActiveFileFromEncryptedPath(file.FullName);
+                    return new FileOpenedContext(fileOperationContext, associatedFile);
+                }
+            });
         }
 
-        private async Task DecryptWithFilePassword(Passphrase passphrase)
+        private Task HandleQueryDecryptionPassphraseEventAsync(FileOperationEventArgs e)
         {
-            using (await New<IProgressDialog>().Show(Texts.ProgressIndicatorWaitMessage, Texts.ProgressIndicatorWaitMessage))
+            return QueryDecryptPassphraseAsync(e);
+        }
+
+        private async Task QueryDecryptPassphraseAsync(FileOperationEventArgs e)
+        {
+            await _identityViewModel.AskForDecryptPassphrase.ExecuteAsync(e.OpenFileFullName);
+            if (_identityViewModel.LogOnIdentity == LogOnIdentity.Empty)
             {
-                await InternalDecryptFile(
-                    _securedFilesViewModel.FilePasswordViewModel.EncryptedFile,
-                    _securedFilesViewModel.FileItemForFilePassword,
-                    passphrase,
-                    _securedFilesViewModel.FileSource
-                );
+                e.Cancel = true;
+                return;
             }
+            e.LogOnIdentity = _identityViewModel.LogOnIdentity;
         }
 
         private async Task ProcessOriginalFileInCloudProviderForDecryption(FilePickerItemViewModel fileItem)
