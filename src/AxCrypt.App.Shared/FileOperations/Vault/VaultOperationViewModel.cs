@@ -136,7 +136,7 @@ public class VaultOperationViewModel : ViewModelBase
 
         FileOperationsController operationsController = new FileOperationsController(progress, dataStore.CurrentPath);
 
-        operationsController.QueryDecryptionPassphrase = HandleQueryDecryptionPassphraseEventAsync;
+        operationsController.QueryDecryptionPassphrase = QueryDecryptPassphraseAsync;
 
         operationsController.QuerySaveFileAs += async (object sender, FileOperationEventArgs e) =>
         {
@@ -167,11 +167,6 @@ public class VaultOperationViewModel : ViewModelBase
         };
 
         return operationsController.DecryptFileAsync(dataStore.File);
-    }
-
-    private Task HandleQueryDecryptionPassphraseEventAsync(FileOperationEventArgs e)
-    {
-        return QueryDecryptPassphraseAsync(e);
     }
 
     private async Task QueryDecryptPassphraseAsync(FileOperationEventArgs e)

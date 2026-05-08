@@ -395,110 +395,59 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             }
         }
 
-        public async Task<FileOpenedContext> ProcessFileDecryption(
-            IDataStore file,
-            Passphrase passphrase
-        )
+        public async Task<FileOpenedContext> ProcessFileDecryption(IDataStore file, Passphrase passphrase)
         {
+            FileOperationsController operationsController = InitalizeFileOperation();
+
             // Avoid working with files in UI thread.
             return await Task.Run(async () =>
             {
-                IExternalDataStore externalDataStore = file as IExternalDataStore;
-                Task<IDisposable> openTask = Task.FromResult<IDisposable>(null);
-                if (externalDataStore != null)
-                {
-                    // Loads external file before the long manipulations with it content.
-                    // This allows to avoid multiple open/close operations.
-                    openTask = externalDataStore.OpenAsync();
-                }
-
-                using (await openTask)
-                {
-                    ProgressContext progressContext = new ProgressContext();
-                    FileOperationsController operationsController = new FileOperationsController(
-                        progressContext
-                    );
-
-                    KnownIdentities knownIdentities = New<KnownIdentities>();
-
-                    operationsController.QueryDecryptionPassphrase = HandleQueryDecryptionPassphraseEventAsync;
-                    operationsController.QuerySaveFileAs += (object sender, FileOperationEventArgs e) => { };
-
-                    operationsController.KnownKeyAdded = new AsyncDelegateAction<FileOperationEventArgs>(async (FileOperationEventArgs e) =>
-                    {
-                        if (!_fileSystemState.KnownPassphrases.Any(i => i.Thumbprint == e.LogOnIdentity.Passphrase.Thumbprint))
-                        {
-                            _fileSystemState.KnownPassphrases.Add(
-                                e.LogOnIdentity.Passphrase
-                            );
-                        }
-
-                        await knownIdentities.AddAsync(e.LogOnIdentity);
-                    });
-
-                    operationsController.Completed += (object sender, FileOperationEventArgs e) =>
-                    {
-                        _decryptedPathForFileMove = e.SaveFileFullName;
-                        return Task.CompletedTask;
-                    };
-
-                    FileOperationContext fileOperationContext = await operationsController.DecryptFileAsync(file);
-                    ActiveFile associatedFile = _fileSystemState.FindActiveFileFromEncryptedPath(file.FullName);
-
-                    return new FileOpenedContext(fileOperationContext, associatedFile);
-                }
+                FileOperationContext fileOperationContext = await operationsController.DecryptFileAsync(file);
+                ActiveFile associatedFile = _fileSystemState.FindActiveFileFromEncryptedPath(file.FullName);
+                return new FileOpenedContext(fileOperationContext, associatedFile);
             });
         }
 
         public async Task<FileOpenedContext> DecryptAndLaunch(IDataStore file, Passphrase passphrase)
         {
+            FileOperationsController operationsController = InitalizeFileOperation();
+
             // Avoid working with files in UI thread.
             return await Task.Run(async () =>
             {
-                IExternalDataStore externalDataStore = file as IExternalDataStore;
-                Task<IDisposable> openTask = Task.FromResult<IDisposable>(null);
-                if (externalDataStore != null)
-                {
-                    // Loads external file before the long manipulations with it content.
-                    // This allows to avoid multiple open/close operations.
-                    openTask = externalDataStore.OpenAsync();
-                }
-
-                using (await openTask)
-                {
-                    ProgressContext progressContext = new ProgressContext();
-                    FileOperationsController operationsController = new FileOperationsController(progressContext);
-
-                    KnownIdentities knownIdentities = New<KnownIdentities>();
-
-                    operationsController.QueryDecryptionPassphrase = HandleQueryDecryptionPassphraseEventAsync;
-                    operationsController.QuerySaveFileAs += (object sender, FileOperationEventArgs e) => { };
-
-                    operationsController.KnownKeyAdded = new AsyncDelegateAction<FileOperationEventArgs>(async (FileOperationEventArgs e) =>
-                    {
-                        if (!_fileSystemState.KnownPassphrases.Any(i => i.Thumbprint == e.LogOnIdentity.Passphrase.Thumbprint))
-                        {
-                            _fileSystemState.KnownPassphrases.Add(e.LogOnIdentity.Passphrase);
-                        }
-
-                        await knownIdentities.AddAsync(e.LogOnIdentity);
-                    });
-
-                    operationsController.Completed += (object sender, FileOperationEventArgs e) =>
-                    {
-                        return Task.CompletedTask;
-                    };
-
-                    FileOperationContext fileOperationContext = await operationsController.DecryptAndLaunchAsync(file);
-                    ActiveFile associatedFile = _fileSystemState.FindActiveFileFromEncryptedPath(file.FullName);
-                    return new FileOpenedContext(fileOperationContext, associatedFile);
-                }
+                FileOperationContext fileOperationContext = await operationsController.DecryptAndLaunchAsync(file);
+                ActiveFile associatedFile = _fileSystemState.FindActiveFileFromEncryptedPath(file.FullName);
+                return new FileOpenedContext(fileOperationContext, associatedFile);
             });
         }
 
-        private Task HandleQueryDecryptionPassphraseEventAsync(FileOperationEventArgs e)
+        private FileOperationsController InitalizeFileOperation()
         {
-            return QueryDecryptPassphraseAsync(e);
+            ProgressContext progressContext = new ProgressContext();
+            FileOperationsController operationsController = new FileOperationsController(progressContext);
+
+            KnownIdentities knownIdentities = New<KnownIdentities>();
+
+            operationsController.QueryDecryptionPassphrase = QueryDecryptPassphraseAsync;
+            operationsController.QuerySaveFileAs += (object sender, FileOperationEventArgs e) => { };
+
+            operationsController.KnownKeyAdded = new AsyncDelegateAction<FileOperationEventArgs>(async (FileOperationEventArgs e) =>
+            {
+                if (!_fileSystemState.KnownPassphrases.Any(i => i.Thumbprint == e.LogOnIdentity.Passphrase.Thumbprint))
+                {
+                    _fileSystemState.KnownPassphrases.Add(e.LogOnIdentity.Passphrase);
+                }
+
+                await knownIdentities.AddAsync(e.LogOnIdentity);
+            });
+
+            operationsController.Completed += (object sender, FileOperationEventArgs e) =>
+            {
+                _decryptedPathForFileMove = e.SaveFileFullName;
+                return Task.CompletedTask;
+            };
+
+            return operationsController;
         }
 
         private async Task QueryDecryptPassphraseAsync(FileOperationEventArgs e)
@@ -629,7 +578,10 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             }
 
             await UpdateShareKeyFileAsync(fileInfo, cloudFileItem, true);
-            await _fileProviderService.ShareFileAsync(cloudFileItem.FileID, request);
+            if (request.RecipientEmailList.Any())
+            {
+                await _fileProviderService.ShareFileAsync(cloudFileItem.FileID, request);
+            }
         }
 
         /**
