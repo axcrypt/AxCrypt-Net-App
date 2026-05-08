@@ -189,7 +189,7 @@ namespace AxCrypt.App.Shared.CloudCore
         public IEnumerable<string> RecipientEmailList { get; set; }
         public SharePermission Permission { get; set; } = SharePermission.Viewer;
         public ShareLinkType LinkType { get; set; } = ShareLinkType.Anyone;
-        public string Message { get; set; } = "You have a new file shared with you securely via AxCrypt. Click below to access your file.";
+        public string Message { get; set; } = "A file has been securely shared with you via AxCrypt. Click below to access the file.";
     }
 
     public class ShareResult

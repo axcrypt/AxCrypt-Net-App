@@ -172,6 +172,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
         }
 
         #region SearchFile
+
         public override async Task SearchFileFolderAsync(string query, string path)
         {
             string searchText = query.Trim();
@@ -274,7 +275,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                     FileList result = await request.ExecuteAsync();
                     if (result.Files != null)
                     {
-                        foreach (var folder in result.Files)
+                        foreach (Google.Apis.Drive.v3.Data.File? folder in result.Files)
                         {
                             allSubFolderIds.Add(folder.Id);
                             queue.Enqueue(folder.Id);
@@ -289,7 +290,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             return allSubFolderIds;
         }
 
-        #endregion
+        #endregion SearchFile
 
         public override async Task ListFilesAsync(string fileId = "")
         {
@@ -686,33 +687,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
 
         public override async Task<ShareResult> ShareFileAsync(string fileId, ShareRequest request)
         {
-            try
-            {
-                IEnumerable<Task<Google.Apis.Drive.v3.Data.Permission>> userPermissionTasks =
-                    request.RecipientEmailList.Select(email =>
-                    {
-                        Google.Apis.Drive.v3.Data.Permission userPermission = new Google.Apis.Drive.v3.Data.Permission
-                        {
-                            Type = "user",
-                            Role = request.Permission == SharePermission.Editor ? "writer" : "reader",
-                            EmailAddress = email
-                        };
-                        PermissionsResource.CreateRequest permReq = _driveService!.Permissions.Create(userPermission, fileId);
-                        permReq.SendNotificationEmail = true;
-                        permReq.EmailMessage = request.Message;
-                        permReq.Fields = "id";
-                        return permReq.ExecuteAsync();
-                    });
-
-                await Task.WhenAll(userPermissionTasks);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                throw;
-            }
-
-            Google.Apis.Drive.v3.Data.Permission linkPermission = new Google.Apis.Drive.v3.Data.Permission
+            Permission linkPermission = new Permission
             {
                 Type = request.LinkType == ShareLinkType.TeamOnly ? "domain" : "anyone",
                 Role = "reader"
@@ -722,6 +697,29 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             FilesResource.GetRequest fileReq = _driveService.Files.Get(fileId);
             fileReq.Fields = "webViewLink";
             Google.Apis.Drive.v3.Data.File file = await fileReq.ExecuteAsync();
+
+            _ = Task.Run(async () =>
+            {
+                foreach (string email in request.RecipientEmailList)
+                {
+                    try
+                    {
+                        PermissionsResource.CreateRequest permReq = _driveService.Permissions.Create(new Permission
+                        {
+                            Type = "user",
+                            Role = request.Permission == SharePermission.Editor ? "writer" : "reader",
+                            EmailAddress = email
+                        }, fileId);
+
+                        permReq.SendNotificationEmail = true;
+                        permReq.EmailMessage = request.Message;
+
+                        await permReq.ExecuteAsync();
+                        await Task.Delay(1000);
+                    }
+                    catch (Exception ex) { Debug.WriteLine($"Background Share Error: {ex.Message}"); }
+                }
+            });
 
             return new ShareResult
             {
