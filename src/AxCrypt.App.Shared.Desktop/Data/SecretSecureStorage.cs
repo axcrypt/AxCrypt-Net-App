@@ -1,11 +1,6 @@
 ﻿using AxCrypt.Core;
 using AxCrypt.Core.UI;
-using AxCrypt.Core.UI.ViewModel;
-using Microsoft.Maui.Storage;
-using System;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.Desktop.Data
@@ -43,12 +38,13 @@ namespace AxCrypt.App.Shared.Desktop.Data
         {
             get
             {
+                string? uniqueKeyVal = AxC_Unique_Key;
                 if (!Resolve.KnownIdentities.IsLoggedOn)
                 {
-                    return new byte[] { };
+                    return Encoding.UTF8.GetBytes(uniqueKeyVal);
                 }
 
-                string? uniqueKeyVal = AxC_Unique_Key + New<KnownIdentities>().DefaultEncryptionIdentity.Passphrase.Text.Substring(0, 8);
+                uniqueKeyVal += New<KnownIdentities>().DefaultEncryptionIdentity.Passphrase.Text.Substring(0, 8);
                 return Encoding.UTF8.GetBytes(uniqueKeyVal);
             }
         }
