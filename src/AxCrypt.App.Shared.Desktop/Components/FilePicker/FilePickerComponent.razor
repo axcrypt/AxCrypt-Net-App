@@ -19,6 +19,30 @@
         height: 89%;
         align-items: center;
     }
+
+    .tab-container {
+        display: flex;
+        margin: 0px 15px;
+        align-items: center;
+        border: 3px solid #48772C;
+        width: fit-content;
+        border-radius: 5px;
+    }
+
+    .tab-label {
+        font-size: 16px;
+        cursor: pointer;
+        padding: 5px 25px;
+        border-radius: 4px;
+    }
+
+    .active-tab {
+        border: 3px solid #48772C;
+        font-weight: 600;
+        color: white;
+        background-color: #48772C;
+    }
+
 </style>
 
 @if (ViewModel.IsVisible)
@@ -72,6 +96,23 @@
                 }
 
                 <div class="content-area">
+                    <div class="tab-container">
+                        <span class="tab-label @((ViewModel.selectedTab == "all" ? "active-tab" : ""))" @onclick='async () => await GetSelectedFileList("all")'>
+                            All files
+                        </span>
+
+                        <label class="tab-label @((ViewModel.selectedTab == "sharedWithMe" ? "active-tab" : ""))" @onclick='async () => await GetSelectedFileList("sharedWithMe")'>
+                            Shared with me
+                        </label>
+
+                        @if (ViewModel.SelectedCloudProvider != Core.IO.FileProvider.OneDrive)
+                        {
+                            <label class="tab-label @((ViewModel.selectedTab == "sharedByMe" ? "active-tab" : ""))" @onclick='async () => await GetSelectedFileList("sharedByMe")'>
+                                Shared by me
+                            </label>
+                        }
+
+                    </div>
                     <div class="file-picker-dir-content find-fle-nme" @oncontextmenu="(e) => ShowContextMenu(e)" id="user_files_section" @onclick="async () => await HideContextMenu()">
                         <div class="header-bar" @onclick:stopPropagation @oncontextmenu:preventDefault>
                             <div class="div-file-header">
@@ -201,7 +242,7 @@
 
                 <div class="file-picker-filepath">
                     <nav class="breadcrumb">
-                        @if (!ViewModel.IsSearchResultVisible)
+                        @if (!ViewModel.IsSearchResultVisible & ViewModel.selectedTab == "all")
                         {
                             <span class="breadcrumb-part" title="@ViewModel.PageTitle" @onclick="@(async () => await ViewModel.NavigateBackToPath("root"))">
                                 @ViewModel.PageTitle
@@ -244,7 +285,6 @@
 }
 
 @code {
-
     private bool isListView { get; set; } = true;
     private bool isContextMenuVisible { get; set; } = false;
     private bool isActionContextMenuVisible { get; set; } = false;
@@ -261,6 +301,27 @@
     private void CloseWindow()
     {
         ViewModel.IsVisible = false;
+    }
+
+    private async Task GetSelectedFileList(string selectedTab)
+    {
+        switch (selectedTab)
+        {
+            case "all":
+                await ViewModel.NavigateBackToPath("root");
+                ViewModel.selectedTab = selectedTab;
+                break;
+
+            case "sharedWithMe":
+                await ViewModel.GetSharedWithFileListAsync();
+                ViewModel.selectedTab = selectedTab;
+                break;
+
+            case "sharedByMe":
+                await ViewModel.GetSharedByFileListAsync();
+                ViewModel.selectedTab = selectedTab;
+                break;
+        }
     }
 
     private string HighlightMatch(string input)

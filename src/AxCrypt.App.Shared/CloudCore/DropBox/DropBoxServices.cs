@@ -186,6 +186,78 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
             }
         }
 
+        public override async Task ListSharedWithFilesAsync()
+        {
+            try
+            {
+                ListFilesResult sharedFiles = await _dropboxclient.Sharing.ListReceivedFilesAsync(limit: 100);
+
+                List<SharedFileMetadata> allItems = new List<SharedFileMetadata>();
+                allItems.AddRange(sharedFiles.Entries);
+
+                while (!string.IsNullOrEmpty(sharedFiles.Cursor))
+                {
+                    sharedFiles = await _dropboxclient.Sharing.ListReceivedFilesContinueAsync(sharedFiles.Cursor);
+                    allItems.AddRange(sharedFiles.Entries);
+                }
+
+                _files = allItems.Where(file => IsAxCryptFile(file.Name))
+                .Select(file => new FilePickerItemViewModel()
+                {
+                    FileID = file.Id,
+                    FileName = file.Name,
+                    IsFolder = false,
+                    FileExtension = Path.GetExtension(file.Name),
+                    Source = FileProvider.DropBox,
+                }).OrderBy(f => f.FileName).ToList();
+            }
+            catch (Exception e)
+            {
+                if (e.Message.StartsWith("expired_access_token/"))
+                {
+                    _instance.RemoveExpiredDropBoxToken();
+                    _instance = new DropBoxAuthenticator();
+                }
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, e.Message);
+            }
+        }
+
+        public override async Task ListSharedFilesAsync()
+        {
+            try
+            {
+                ListSharedLinksResult sharedLinks = await _dropboxclient.Sharing.ListSharedLinksAsync();
+                List<SharedLinkMetadata> allItems = new List<SharedLinkMetadata>();
+                allItems.AddRange(sharedLinks.Links);
+
+                while (sharedLinks.HasMore)
+                {
+                    sharedLinks = await _dropboxclient.Sharing.ListSharedLinksAsync(
+                        cursor: sharedLinks.Cursor);
+                    allItems.AddRange(sharedLinks.Links);
+                }
+
+                _files = allItems.OfType<FileLinkMetadata>().Where(file => IsAxCryptFile(file.Name))
+                .Select(file => new FilePickerItemViewModel()
+                {
+                    FileID = file.Id,
+                    FileName = file.Name,
+                    IsFolder = false,
+                    FileExtension = Path.GetExtension(file.Name),
+                    Source = FileProvider.DropBox,
+                }).OrderBy(f => f.FileName).ToList();
+            }
+            catch (Exception e)
+            {
+                if (e.Message.StartsWith("expired_access_token/"))
+                {
+                    _instance.RemoveExpiredDropBoxToken();
+                    _instance = new DropBoxAuthenticator();
+                }
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, e.Message);
+            }
+        }
+
         public override async Task ListFilesAsync(string fileId = "")
         {
             try

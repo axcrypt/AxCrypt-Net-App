@@ -200,6 +200,78 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
             }
         }
 
+        public override async Task ListSharedFilesAsync()
+        {
+            try
+            {
+                DriveItemCollectionResponse? driveItems = await _graphClient.Drives[_userDriveId].Items["root"].Children
+                .GetAsync(requestConfig =>
+                {
+                    requestConfig.QueryParameters.Select = new[]
+                    {
+                        "id", "name", "file", "folder", "size",
+                        "parentReference", "shared"
+                    };
+                });
+
+                List<DriveItem> pageItems = new List<DriveItem>();
+
+                foreach (DriveItem item in driveItems?.Value ?? [])
+                {
+                    bool isShared = item.Shared != null;
+
+                    if (isShared && IsAxCryptFile(item.Name!))
+                    {
+                        _files.Add(new FilePickerItemViewModel
+                        {
+                            FileID = item.Id!,
+                            FileName = item.Name!,
+                            IsFolder = item.Folder != null,
+                            MimeType = item.File?.MimeType!,
+                            FileExtension = item.Folder != null ? "" : Path.GetExtension(item.Name ?? ""),
+                            ParentPath = item.ParentReference?.Path ?? "",
+                            Source = FileProvider.OneDrive,
+                        });
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, e.Message);
+            }
+        }
+
+        public override async Task ListSharedWithFilesAsync()
+        {
+            try
+            {
+                Drive? drive = await _graphClient.Me.Drive.GetAsync();
+                string driveId = drive?.Id!;
+
+                Microsoft.Graph.Drives.Item.SharedWithMe.SharedWithMeGetResponse? result = await _graphClient.Drives[driveId].SharedWithMe.GetAsSharedWithMeGetResponseAsync();
+
+                if (result?.Value == null)
+                    return;
+
+                _files = result.Value
+                .Where(file => file.RemoteItem != null && IsAxCryptFile(file.RemoteItem!.Name!))
+                .Select(file => new FilePickerItemViewModel()
+                {
+                    FileID = file.RemoteItem!.Id!,
+                    FileName = file.RemoteItem.Name!,
+                    IsFolder = file.RemoteItem.Folder != null,
+                    MimeType = file.RemoteItem.File?.MimeType!,
+                    FileExtension = file.RemoteItem.Folder != null ? "" : Path.GetExtension(file.RemoteItem.Name!),
+                    ParentPath = file.RemoteItem.ParentReference?.Path ?? "",
+                    Source = FileProvider.OneDrive,
+                }).OrderByDescending(f => f.IsFolder).ToList();
+            }
+            catch (Exception e)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, e.Message);
+            }
+        }
+
         public override async Task ListFilesAsync(string folderId = "")
         {
             try
@@ -223,10 +295,8 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
                     MimeType = file.File?.MimeType!,
                     FileExtension = file.Folder != null ? "" : System.IO.Path.GetExtension(file.Name)!,
                     ParentPath = file.ParentReference!.Path!,
-                    Source = AxCrypt.Core.IO.FileProvider.OneDrive,
-                })
-                    .OrderByDescending(file => file.IsFolder)
-                    .ToList();
+                    Source = FileProvider.OneDrive,
+                }).OrderByDescending(file => file.IsFolder).ToList();
             }
             catch (Exception ex)
             {

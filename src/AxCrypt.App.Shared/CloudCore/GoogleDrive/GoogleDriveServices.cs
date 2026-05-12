@@ -292,6 +292,67 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
 
         #endregion SearchFile
 
+        public override async Task ListSharedFilesAsync()
+        {
+            try
+            {
+                List<Google.Apis.Drive.v3.Data.File> allItems = new();
+                ListRequest request = _driveService!.Files.List();
+
+                request.Q = "'me' in owners and trashed = false";
+                request.Fields = "nextPageToken, files(id, name, mimeType, shared, sharingUser)";
+                request.PageSize = 100;
+
+                do
+                {
+                    FileList result = await request.ExecuteAsync();
+                    if (result.Files != null)
+                    {
+                        List<Google.Apis.Drive.v3.Data.File> sharedByMe = result.Files
+                            .Where(f => f.Shared == true && IsAxCryptFile(f.Name)).ToList();
+
+                        allItems.AddRange(sharedByMe);
+                    }
+                    request.PageToken = result.NextPageToken;
+                } while (!string.IsNullOrEmpty(request.PageToken));
+
+                GenerateFileItemLists(allItems);
+            }
+            catch (Exception e)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, e.Message);
+            }
+        }
+
+        public override async Task ListSharedWithFilesAsync()
+        {
+            try
+            {
+                List<Google.Apis.Drive.v3.Data.File> allItems = new List<Google.Apis.Drive.v3.Data.File>();
+
+                ListRequest request = _driveService!.Files.List();
+                request.Q = "sharedWithMe = true";
+                request.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime, owners)";
+                request.PageSize = 100;
+
+                do
+                {
+                    FileList result = await request.ExecuteAsync();
+
+                    if (result.Files != null)
+                        allItems.AddRange(result.Files.Where(f => IsAxCryptFile(f.Name)));
+
+                    request.PageToken = result.NextPageToken;
+                } while (!string.IsNullOrEmpty(request.PageToken));
+
+                GenerateFileItemLists(allItems);
+            }
+            catch (Exception e)
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, e.Message);
+            }
+        }
+
         public override async Task ListFilesAsync(string fileId = "")
         {
             try

@@ -24,7 +24,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
         protected bool _isVisible = false;
         public bool IsSearchResultVisible { get; set; } = false;
         public string SearchQuery { get; set; } = string.Empty;
-
+        public string selectedTab { get; set; } = "";
         public bool IsVisible
         {
             get { return _isVisible; }
@@ -144,6 +144,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             IsVisible = true;
             IsSearchResultVisible = false;
             SearchQuery = string.Empty;
+            selectedTab = "all";
         }
 
         public bool IsFileSelected(FilePickerItemViewModel file)
@@ -228,6 +229,18 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             }
 
             await _fileProviderService.ListFilesAsync(fileId);
+            Files = new ObservableCollection<FilePickerItemViewModel>(_fileProviderService.Files);
+        }
+
+        public async Task GetSharedByFileListAsync()
+        {
+            await _fileProviderService.ListSharedFilesAsync();
+            Files = new ObservableCollection<FilePickerItemViewModel>(_fileProviderService.Files);
+        }
+        
+        public async Task GetSharedWithFileListAsync()
+        {
+            await _fileProviderService.ListSharedWithFilesAsync();
             Files = new ObservableCollection<FilePickerItemViewModel>(_fileProviderService.Files);
         }
 
@@ -347,13 +360,29 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
                     return;
                 }
 
-                await NavigateBackToPath(CurrentFolderID ?? "root");
+                await NavigatetoTab(CurrentFolderID!);
                 return;
             }
             catch (Exception ex)
             {
                 await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, ex.Message);
                 UpdateViewState();
+            }
+        }
+
+        private async Task NavigatetoTab(string folderId)
+        {
+            switch (selectedTab)
+            {
+                case "all":
+                    await NavigateBackToPath(CurrentFolderID ?? "root");
+                    break;
+                case "sharedWithMe":
+                    await GetSharedWithFileListAsync();
+                    break;
+                case "sharedByMe":
+                    await GetSharedByFileListAsync();
+                    break;
             }
         }
 
@@ -365,7 +394,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
                 return;
             }
 
-            FolderItem folder = OpenedFoldersList.FirstOrDefault(ofl =>
+            FolderItem? folder = OpenedFoldersList.FirstOrDefault(ofl =>
                 ofl.FileID == CurrentFolderID
             );
 

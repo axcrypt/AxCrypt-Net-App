@@ -12,6 +12,7 @@ namespace AxCrypt.App.Shared.CloudCore
     public abstract class FileStorageProvider
     {
         private const string ImportedFilesDirectory = "ImportedFiles";
+        private const string AXCRYPT_FILE_EXTENSION = "axx";
 
         public string GetImportedFilePath(string importedFileName)
         {
@@ -27,6 +28,10 @@ namespace AxCrypt.App.Shared.CloudCore
         public abstract Task SearchFileFolderAsync(string query, string path = "root");
 
         public abstract Task ListFilesAsync(string fileId = "");
+
+        public abstract Task ListSharedWithFilesAsync();
+
+        public abstract Task ListSharedFilesAsync();
 
         public abstract Task<MemoryStream> ReadFileStreamAsync(string fileId);
 
@@ -149,6 +154,14 @@ namespace AxCrypt.App.Shared.CloudCore
             }
 
             return randomName.ToString();
+        }
+
+        public bool IsAxCryptFile(string fileExtension)
+        {
+            if (string.IsNullOrEmpty(fileExtension))
+                return false;
+
+            return fileExtension == AXCRYPT_FILE_EXTENSION || fileExtension.EndsWith(AXCRYPT_FILE_EXTENSION);
         }
 
         public static bool IsNetworkError(Exception ex)
