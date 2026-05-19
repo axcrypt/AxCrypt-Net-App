@@ -60,7 +60,7 @@
                     <i class="@TextEncryptionViewModel.PasswordIconClass" style="top:40% !important;"
                        @onclick="TextEncryptionViewModel.TogglePassword"></i>
                     <input type="@TextEncryptionViewModel.PasswordInputType" id="passwordbox" min="8"
-                           @bind="TextEncryptionViewModel.Password" @bind:event="oninput">
+                           @bind="TextEncryptionViewModel.Password" @bind:event="oninput" autocomplete="off">
                     </div>
                     <AxCrypt.App.Shared.Desktop.Components.Shared.PasswordStrengthMeterComponent
                     InputValue="@TextEncryptionViewModel.Password" />
