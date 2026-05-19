@@ -47,7 +47,6 @@
         }
     </div>
 
-
     <div class="encryp-and-reset-btn">
         <button class="button success btn-large font-medium active"
                 @onclick=TextEncryptionViewModel.DecryptText>
@@ -80,11 +79,6 @@
         @Texts.TextEncryptionGuideshareHead2
     </button>
 </div>
-
-<div>
-    <span id="copiedMessage" style="color: #48772C; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
-</div>
-
 
 @code {
     protected override void OnInitialized()
