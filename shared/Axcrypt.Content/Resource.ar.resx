@@ -686,6 +686,9 @@
   <data name="AndMoreText" xml:space="preserve">
     <value>والمزيد</value>
   </data>
+  <data name="AndroidDownloadLinkTooltip" xml:space="preserve">
+    <value>افتح ملفاتك وادخل إليها وقم بإلغاء قفلها بأمان أثناء التنقل. يتطلب Android 7.0 أو أحدث.</value>
+  </data>
   <data name="AndroidIosTitle" xml:space="preserve">
     <value>(Android/iOS)</value>
   </data>
@@ -13619,8 +13622,14 @@
   <data name="Blog_WIPM_Title" xml:space="preserve">
     <value>ما هو مدير كلمات المرور؟ ما مدى أمان برنامج إدارة كلمات المرور؟</value>
   </data>
+  <data name="Blog_WITHDEPYD_H1_Text22" xml:space="preserve">
+    <value>بينما تعمل جدران الحماية وبرامج مكافحة الفيروسات وحلول حماية نقاط النهاية على حلول تركز على النظام، فإنها تستهدف فقط حماية نظامك ولا توفر حماية على المستوى الخلوي. ومع تزايد هجمات انتحال العناوين (Typo القرفصاء؟.)، أصبحت الحاجة إلى حماية دقيقة وعلى مستوى تفصيلي أكثر أهمية من أي وقت مضى.</value>
+  </data>
   <data name="Blog_WITHDEPYD_H1_Text23" xml:space="preserve">
     <value>هنا يأتي دور التشفير على مستوى الملفات. في عام 2026، أصبح من الضروري فهم كيفية حماية التشفير للبيانات الحساسة.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H1_Text24" xml:space="preserve">
+    <value>تُصمَّم هجمات انتحال العناوين (Typosquatting) لخداع المستخدمين ودفعهم إلى الكشف عن معلوماتهم الحساسة. إن إدخال بياناتك الشخصية، مثل بريدك الإلكتروني وكلمة المرور أو رمز التحقق (OTP)، قد يؤدي إلى تعريض ملفاتك وبياناتك الأكثر حساسية للخطر. وذلك لأن هجمات انتحال العناوين ليست سوى بوابة للدخول. أما ما يحدث بعد أن تنقر بالخطأ، فيتم بصمت وفي الخلفية، دون أن تلاحظ أي شيء حتى يصبح الأوان قد فات.</value>
   </data>
   <data name="Blog_WITHDEPYD_H1_Text25" xml:space="preserve">
     <value>لا يمكنك القضاء على كل خطأ مطبعي، لكن يمكنك التحكم فيما يحدث عند وقوعه.</value>
@@ -13634,8 +13643,68 @@
   <data name="Blog_WITHDEPYD_H1_Text5" xml:space="preserve">
     <value>خطأ بسيط واحد قد يعيد توجيهك إلى موقع يسرق بيانات تسجيل الدخول الخاصة بك وغيرها من المعلومات الشخصية الحساسة، بهذه البساطة.</value>
   </data>
+  <data name="Blog_WITHDEPYD_H2_Text1" xml:space="preserve">
+    <value>دعونا نعترف أنه في مرحلة ما، كانت محادثاتنا على واتساب أسرع طريقة لحفظ رابط مهم أو مجموعة من كلمات المرور. نعم، قد يكون الحفظ السريع في الدردشات أو الرسائل أو المتصفح أو حتى على ورقة لاصقة أمرًا مريحًا للغاية. لكن كل ما يتطلبه الأمر هو خطأ بسيط كهذا لكشف جميع معلوماتك الحساسة.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text10" xml:space="preserve">
+    <value>قم بتخزين الملاحظات الخاصة بأمان.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text11" xml:space="preserve">
+    <value>احفظ التفاصيل المالية مثل معلومات بطاقات الائتمان والخصم في نظام مُشفّر.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text12" xml:space="preserve">
+    <value>شارك هذه التفاصيل بأمان مع جهة اتصال موثوقة دون الخوف من اعتراضها.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text13" xml:space="preserve">
+    <value>تم بناؤه على بنية معرفة صفرية ومحمي بتشفير 256 بت، ولا يمكن الوصول إليه إلا من قِبلك ومن قِبل المستلم.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text14" xml:space="preserve">
+    <value>في مشهد تهديدات تقوده الأخطاء الصغيرة، يضمن مدير كلمات المرور ألّا تتسبب نقرة خاطئة واحدة في حدوث اختراق كبير.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text15" xml:space="preserve">
+    <value>إذا كنت تشك في حدوث اختراق وتريد منع خروقات البيانات باستخدام التشفير، خصوصًا بعد الوقوع ضحية لهجمات التصيد عبر الأخطاء الإملائية أو التسبب في اختراق بسببها، فقد طرحت السؤال الصحيح.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text16" xml:space="preserve">
+    <value>لنفترض أن المخترق تمكن بطريقة ما من اعتراض بياناتك أو الوصول إليها عبر قناة مخترقة، وقمتَ بحماية معلوماتك باستخدام برنامج لتشفير الملفات مثل AxCrypt، ففي هذه الحالة سيحتاج المخترق أو المهاجم إلى مفاتيح فك التشفير الصحيحة حتى يتمكن من الوصول إلى ملفاتك المشفرة</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text17" xml:space="preserve">
+    <value>وإلا فسيظلون دائمًا غير قادرين على الوصول إليها.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text18" xml:space="preserve">
+    <value>لنرَ كيف يمكن منع اختراقات البيانات باستخدام التشفير.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text2" xml:space="preserve">
+    <value>يمكنك القضاء على جميع المخاطر المحتملة بميزة واحدة قوية فقط.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text3" xml:space="preserve">
+    <value>يُعدّ مدير كلمات المرور من أكس كريبت صديقك المفضل في مثل هذه المواقف، تمامًا كشخص يعرف حقًا كيف يحافظ على الأسرار</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text4" xml:space="preserve">
+    <value>مثالي لتخزين كلمات المرور الخاصة بك مع الروابط الصحيحة، ومناسب لحفظ تفاصيل بطاقاتك، والمكان الأمثل لتدوين الملاحظات المهمة التي لا ينبغي أن يطّلع عليها أحد.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text5" xml:space="preserve">
+    <value>والأفضل من ذلك؟</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text6" xml:space="preserve">
+    <value>يتم تخزين جميع معلوماتك باستخدام تشفير المعرفة الصفرية (تشفير المعرفة الصفرية ). وهذا يعني أن بياناتك تبقى محكمة الإغلاق بالكامل دون أي استثناءات. حتى نحن لا نستطيع قراءة بياناتك. ولجعل الأمر أفضل، تعتمد هذه الميزة أيضًا على خوارزمية التشفير ‏256-bit، مما يرتقي بأمان البيانات إلى مستوى جديد تمامًا.</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text7" xml:space="preserve">
+    <value>لماذا تحتاج إلى مدير كلمات مرور؟</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H2_Text9" xml:space="preserve">
+    <value>يتيح لك مدير كلمات المرور من أكس كريبت حفظ أكثر من مجرد كلمات المرور:</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H3_Text1" xml:space="preserve">
+    <value>كيفية تأمين الملفات الحساسة على جهاز الكمبيوتر الخاص بك</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H3_Text2" xml:space="preserve">
+    <value>قم بتنزيل التطبيق، وأنشئ حسابًا، ثم قم بتأكيد هويتك إذا كنت مستخدمًا جديدًا.</value>
+  </data>
   <data name="Blog_WITHDEPYD_Heading2" xml:space="preserve">
     <value>طريقة أذكى لتخزين البيانات الحساسة وحمايتها</value>
+  </data>
+  <data name="Blog_WITHDEPYD_Heading3" xml:space="preserve">
+    <value>كيف يحمي التشفير البيانات الحساسة — سواء على السحابة أو محليًا (باستخدام أكس كريبت)</value>
   </data>
   <data name="Blog_WITHDEPYD_Summary" xml:space="preserve">
     <value>في عالمٍ تُولِّد فيه السرعةُ الأخطاء، ويُعدّ الوقتُ مالًا، ويحتضر فيه الصبرُ موتًا متعجّلًا، قد يكلّفك خطأٌ بسيط وسط كل ذلك ثمنًا باهظًا. نحن نتحدث عن الإنترنت، وكيف يمكن لكلمةٍ واحدةٍ مكتوبةٍ بشكلٍ خاطئ أن تتدحرج لتتحول إلى كارثةٍ رقمية.</value>
@@ -19925,6 +19994,9 @@ SE-114 29 ستوكهولم
   <data name="InvoiceVatChargeHeadline" xml:space="preserve">
     <value>ضريبة القيمة المضافة</value>
   </data>
+  <data name="IOSDownloadLinkTooltip" xml:space="preserve">
+    <value>يمكنك الوصول إلى ملفاتك وعرضها وإدارتها بأمان في أي وقت على iPhone أو iPad. يتطلب iOS 16.4 أو أحدث.</value>
+  </data>
   <data name="ItalianLanguageSelection" xml:space="preserve">
     <value>إيطاليانو (إيطالي)</value>
     <comment>The name of the language Italian in Italian. It should never be translated.</comment>
@@ -20441,6 +20513,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="MacOsCompatibleText" xml:space="preserve">
     <value>نظام التشغيل X 10.8 Mountain Lion أو أحدث.</value>
+  </data>
+  <data name="MacOSDownloadLinkTooltip" xml:space="preserve">
+    <value>حافظ على أمان ملفاتك على أجهزة Mac المزودة بمعالجات Intel مع وصول سهل إلى الملفات عبر Finder. يعمل على macOS 12 حتى macOS 27.</value>
   </data>
   <data name="MagicGuidMIssingFileStatus" xml:space="preserve">
     <value>"{0}" ليس ملف اكسكربت .</value>
@@ -23887,11 +23962,11 @@ SE-114 29 ستوكهولم
   <data name="PricingChooseButton" xml:space="preserve">
     <value>اختر</value>
   </data>
+  <data name="PricingDesktopPlatforms" xml:space="preserve">
+    <value>ويندوز وماك ولينكس</value>
+  </data>
   <data name="PricingEncryptFilesMonth" xml:space="preserve">
     <value>تشفير ملفين شهريًا</value>
-  </data>
-  <data name="PricingFeatureDedicatedAccountManagement" xml:space="preserve">
-    <value>إدارة حساب مخصصة</value>
   </data>
   <data name="PricingFeatureEverythingInFreePlus" xml:space="preserve">
     <value>كل شيء في فري بليس</value>
@@ -24069,6 +24144,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="PricingLinkLabelFeature1" xml:space="preserve">
     <value>اختر الخطة المناسبة لأمانك</value>
+  </data>
+  <data name="PricingMobilePlatforms" xml:space="preserve">
+    <value>تطبيق أندرويد وiOS</value>
   </data>
   <data name="PricingMobileViewOnly" xml:space="preserve">
     <value>عرض عبر الهاتف المحمول فقط.</value>
@@ -24943,6 +25021,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="RecentLabel" xml:space="preserve">
     <value>الاخيره</value>
+  </data>
+  <data name="RedHatDownloadLinkTooltip" xml:space="preserve">
+    <value>حماية آمنة وموثوقة للملفات على أنظمة Red Hat. يعمل على هذا الإصدار والإصدارات الأحدث.</value>
   </data>
   <data name="RedirectingCheckoutPageText" xml:space="preserve">
     <value>إعادة التوجيه إلى صفحة الخروج ..</value>
@@ -27674,6 +27755,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="TypographyLabel" xml:space="preserve">
     <value>الطباعة</value>
+  </data>
+  <data name="UbuntuDownloadLinkTooltip" xml:space="preserve">
+    <value>قم بتأمين ملفاتك باستخدام تطبيق سهل الاستخدام. يدعم Debian 13.</value>
   </data>
   <data name="UnableAddSecuredFolderText" xml:space="preserve">
     <value>يتعذر إضافة المجلد المؤمَّن أو أحد مجلداته الفرعية كخزنة</value>
