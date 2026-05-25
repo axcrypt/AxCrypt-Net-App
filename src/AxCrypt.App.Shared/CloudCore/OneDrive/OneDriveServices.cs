@@ -13,6 +13,7 @@ using Microsoft.Graph.Drives.Item.Items.Item.CreateUploadSession;
 using Microsoft.Graph.Drives.Item.Items.Item.Invite;
 using Microsoft.Graph.Drives.Item.Items.Item.SearchWithQ;
 using Microsoft.Graph.Models;
+using Microsoft.Graph.Models.ODataErrors;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Shared.CloudCore.OneDrive
@@ -705,6 +706,18 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
                 };
 
                 await _graphClient.Drives[_userDriveId].Items[fileId].Invite.PostAsInvitePostResponseAsync(inviteBody);
+            }
+            catch (ODataError odataError) when (odataError.Message.Contains("NoResolvedUsers", StringComparison.OrdinalIgnoreCase))
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, "Invalid Recipients",
+                    "One or more recipients do not have a OneDrive account. Please verify the email addresses and try again.");
+
+                return new ShareResult
+                {
+                    ShareableLink = string.Empty,
+                    PermissionSet = false,
+                    RecipientEmailList = Enumerable.Empty<string>()
+                };
             }
             catch (Exception ex)
             {
