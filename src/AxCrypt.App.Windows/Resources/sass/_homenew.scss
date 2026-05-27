@@ -54,6 +54,8 @@
 @import "HomeNew/Badges";
 @import "HomeNew/VaultStatus";
 @import "HomeNew/CloudDrives";
+@import "HomeNew/CloudDriveManager";
+@import "HomeNew/CloudBrowser";
 @import "HomeNew/SecurityStatus";
 @import "HomeNew/CTAButton";
 @import "HomeNew/ResponsiveHelpers";
@@ -93,10 +95,15 @@
 .page-content-body-section {
     margin: 20px;
     max-width: 95%;
+    /* Always reserve a vertical scrollbar so the Notifications and Text
+       Encryption pages (and anything else hosted here) can scroll
+       independently of the page chrome instead of clipping off the
+       bottom of the viewport. */
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
 
     @media only screen and (max-width: 1300px) {
         max-height: 80vh;
-        overflow-y: auto;
     }
 }
 

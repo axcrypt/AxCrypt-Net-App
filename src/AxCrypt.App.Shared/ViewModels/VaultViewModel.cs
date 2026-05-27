@@ -33,9 +33,49 @@ namespace AxCrypt.App.Shared.ViewModels
             _sharekeyViewModel = sharekeyViewModel;
         }
 
-        private string VaultBasePath
+        private string _vaultBasePath = "";
+
+        public string VaultBasePath
         {
-            get => Resolve.UserSettings.VaultEncryptDataPath ?? "";
+            get
+            {
+                if (string.IsNullOrEmpty(_vaultBasePath))
+                    _vaultBasePath = Resolve.UserSettings.VaultEncryptDataPath ?? "";
+
+                return _vaultBasePath;
+            }
+        }
+
+        public bool IsVaultConfigured
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(VaultBasePath))
+                {
+                    return false;
+                }
+
+                return New<IDataContainer>(VaultBasePath).IsAvailable;
+            }
+        }
+
+        private string _currentFolder = "";
+
+        public string CurrentFolder
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_currentFolder))
+                {
+                    _currentFolder = VaultBasePath;
+                }
+
+                return _currentFolder;
+            }
+            set
+            {
+                _currentFolder = value;
+            }
         }
 
         public bool CreateNewFolder { get; set; }
@@ -46,7 +86,6 @@ namespace AxCrypt.App.Shared.ViewModels
         public string SelectedFileSize { get; set; }
         public bool isfileselected { get; set; } = false;
         public bool IsFolder { get; set; } = false;
-        public string CurrentFolder { get; set; }
         public string SelectedSubFolderPath { get; set; }
         public bool IsProcessing { get; set; } = false;
         private IEnumerable<string> _selectedFiles { get; set; }
@@ -54,11 +93,6 @@ namespace AxCrypt.App.Shared.ViewModels
         public IEnumerable<VaultItem> VaultItemList = new List<VaultItem>();
 
         public IList<(string Name, string Path)> VaultBreadCrumb = new List<(string Name, string Path)>();
-
-        public void InitialUpdate()
-        {
-            CurrentFolder = VaultBasePath;
-        }
 
         public async Task PrepareFileActionAsync(string action)
         {
@@ -327,6 +361,15 @@ namespace AxCrypt.App.Shared.ViewModels
             );
 
             UpdateViewState();
+        }
+
+        public void RefreshVaultContainers()
+        {
+            if (_vaultBasePath != Resolve.UserSettings.VaultEncryptDataPath)
+            {
+                _vaultBasePath = Resolve.UserSettings.VaultEncryptDataPath ?? "";
+                _currentFolder = _vaultBasePath;
+            }
         }
 
         public void LoadVaultItems()

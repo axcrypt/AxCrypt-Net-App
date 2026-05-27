@@ -178,9 +178,11 @@ public class ActionsViewModel : ViewModelBase
     public async Task ShareKeys(EventArgs e)
     {
         // Key share is paid-gated and operates on the current recent-files
-        // selection. When the user picked multiple files we route each
-        // through the batch service so the bottom-right toast can show
-        // the same "N of M  ·  K failed" summary as the other actions.
+        // selection. The share-key dialog accepts the whole selection in
+        // one call and applies the chosen recipients to every file in a
+        // single atomic operation — so we do NOT route through the batch
+        // service (which would loop file-by-file and surface a confusing
+        // per-file progress toast for what is, conceptually, one action).
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) =>
         {
             await ShareKeysAsync(e);
@@ -189,21 +191,9 @@ public class ActionsViewModel : ViewModelBase
 
     public async Task ShareKeysAsync(EventArgs e)
     {
-        IEnumerable<string>? selected = _mainViewModel?.SelectedRecentFiles;
-        if (selected != null && selected.Count() > 1)
-        {
-            await _batchService.RunAsync(
-                selected,
-                async (path) => await ShareKeyService.ShareKeysWithFileSelectionAsync(
-                    _sharekeyViewModel!,
-                    new[] { path },
-                    _fileOperationViewModel),
-                "Shared");
-            return;
-        }
-
-        // Single file (or none) — the share-key dialog handles its
-        // own flow, including failure presentation.
+        // One-shot share — the dialog and service handle the whole
+        // selection internally and present their own success / failure UI.
+        // No per-file iteration, no batch toast.
         await ShareKeyService.ShareKeysWithFileSelectionAsync(
             _sharekeyViewModel!,
             _mainViewModel!.SelectedRecentFiles,

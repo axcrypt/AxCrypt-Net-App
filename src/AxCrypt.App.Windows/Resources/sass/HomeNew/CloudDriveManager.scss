@@ -1,0 +1,565 @@
+﻿.cm-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 600;
+    background: rgba(15, 23, 42, .55);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: cmScrimIn .14s ease-out;
+}
+
+@keyframes cmScrimIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.cm-card {
+    width: 100%;
+    max-width: 560px;
+    max-height: 86vh;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.22);
+    display: flex;
+    flex-direction: column;
+    animation: cmCardIn .18s cubic-bezier(.4,0,.2,1);
+    overflow: hidden;
+}
+
+@keyframes cmCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.cm-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px 20px 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.cm-head-text {
+    flex: 1;
+}
+
+.cm-title {
+    margin: 0 0 4px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.cm-sub {
+    margin: 0;
+    font-size: 12.5px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.cm-x {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    line-height: 1;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.cm-x:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.cm-body {
+    padding: 12px 14px 6px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cm-provider {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+    transition: border-color .15s, box-shadow .15s;
+}
+
+.cm-provider:hover {
+    border-color: #48772C;
+    box-shadow: 0 4px 12px rgba(72, 119, 44, .08);
+}
+
+.cm-provider--linked {
+    background: linear-gradient(180deg, #f6fff0 0%, #ffffff 100%);
+}
+
+.cm-prov-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: #f3f4f6;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.cm-prov-icon img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.cm-prov-body {
+    min-width: 0;
+}
+
+.cm-prov-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+
+.cm-prov-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.cm-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+}
+
+.cm-status--ok {
+    background: rgba(72,119,44,.12);
+    color: #2f5618;
+}
+
+.cm-status--off {
+    background: rgba(107,114,128,.12);
+    color: #6b7280;
+}
+
+.cm-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    display: inline-block;
+}
+
+.cm-prov-help {
+    margin: 0;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+.cm-prov-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.cm-btn {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+.cm-btn--primary {
+    background: #48772C;
+    color: #fff;
+}
+
+.cm-btn--primary:hover {
+    background: #3f6826;
+}
+
+.cm-btn--ghost {
+    background: #fff;
+    color: #111827;
+    border-color: #d1d5db;
+}
+
+.cm-btn--ghost:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.cm-empty {
+    text-align: center;
+    padding: 30px 12px;
+    color: #6b7280;
+}
+
+.cm-empty p {
+    margin: 8px 0 0;
+    font-size: 13px;
+}
+
+.cm-foot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px 14px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.cm-foot-hint {
+    flex: 1;
+    font-size: 11.5px;
+    color: #6b7280;
+}
+
+/* ── Dark theme ──────────────────────────────────────── */
+html[data-theme="dark"] .cm-card {
+    background: #1f2937;
+    box-shadow: 0 24px 60px rgba(0,0,0,.55);
+}
+
+html[data-theme="dark"] .cm-head,
+html[data-theme="dark"] .cm-foot {
+    border-color: #374151;
+}
+
+html[data-theme="dark"] .cm-title {
+    color: #f3f4f6;
+}
+
+html[data-theme="dark"] .cm-sub,
+html[data-theme="dark"] .cm-foot-hint,
+html[data-theme="dark"] .cm-prov-help {
+    color: #9ca3af;
+}
+
+html[data-theme="dark"] .cm-x {
+    color: #9ca3af;
+}
+
+html[data-theme="dark"] .cm-x:hover {
+    background: #374151;
+    color: #f3f4f6;
+}
+
+html[data-theme="dark"] .cm-provider {
+    background: #111827;
+    border-color: #374151;
+}
+
+html[data-theme="dark"] .cm-provider:hover {
+    border-color: #7fcc5c;
+    box-shadow: 0 4px 12px rgba(127,204,92,.15);
+}
+
+html[data-theme="dark"] .cm-provider--linked {
+    background: linear-gradient(180deg, rgba(127,204,92,.08) 0%, #111827 100%);
+}
+
+html[data-theme="dark"] .cm-prov-icon {
+    background: #1f2937;
+}
+
+html[data-theme="dark"] .cm-prov-name {
+    color: #f3f4f6;
+}
+
+html[data-theme="dark"] .cm-status--ok {
+    background: rgba(127,204,92,.16);
+    color: #b8e89a;
+}
+
+html[data-theme="dark"] .cm-status--off {
+    background: rgba(255,255,255,.08);
+    color: #9ca3af;
+}
+
+html[data-theme="dark"] .cm-btn--primary {
+    background: #7fcc5c;
+    color: #0f1a07;
+}
+
+html[data-theme="dark"] .cm-btn--primary:hover {
+    background: #9be076;
+}
+
+html[data-theme="dark"] .cm-btn--ghost {
+    background: #1f2937;
+    color: #f3f4f6;
+    border-color: #4b5563;
+}
+
+html[data-theme="dark"] .cm-btn--ghost:hover {
+    background: #111827;
+}
+
+/* Provider brand icons render via existing utility classes
+       (.ggldrv-icon, .drpbx-icon, .onedrv-icon). They ship colored —
+       no dark filter needed; the dark cm-prov-icon background already
+       gives them enough contrast. */
+
+/* =============================================================
+   Cloud Browser nav page — design fixes ported from the inline
+   <style> block on CloudBrowserPage.razor so the page lines up
+   with the rest of the HomeNew SCSS architecture.
+
+   Adds:
+     • Real folder icon for list + grid rows (was a missing asset)
+     • Reshaped search bar (focus ring, brand icon tint, clear x)
+     • Brand-toned highlight mark used by HighlightMatch
+     • Polished hover / selection treatment on rows + tiles
+     • Tighter toolbar wrap behaviour on narrow widths
+   ============================================================= */
+
+/* ---- Folder + file glyphs ---------------------------------- */
+/* The list/grid icons render an <img class="@(file.IsFolder ? "Icon-folder" : ...)" />
+   so .Icon-folder needs a real picture. Wire it to the same
+   tier-specific folder asset the secure-folders page uses. */
+.cbp-row-icon.Icon-folder,
+.cbp-tile-icon.Icon-folder {
+    content: $IcoFldr;
+}
+
+/* Generic file fallback — when GetFileTypeIcon returns the
+   axcrypt icon class. */
+.cbp-row-icon.axcrypt-icon,
+.cbp-tile-icon.axcrypt-icon {
+    content: $AxCryptIcon;
+}
+
+/* Folders read a touch larger in the list to balance the chunkier
+   icon silhouette against the smaller file glyphs. */
+.cbp-row-icon.Icon-folder {
+    width: 26px;
+    height: 26px;
+}
+
+.cbp-tile-icon.Icon-folder {
+    width: 44px;
+    height: 44px;
+}
+
+/* ---- Search bar refinement --------------------------------- */
+/* Reshape the search pill so it reads as a proper input control
+   (taller, more padding, distinct focus ring, dim glyph that
+   brightens on focus). Matches the pattern used by the Secured
+   Messenger search and the Tools page search. */
+.cbp-search {
+    height: 38px;
+    padding: 0 12px;
+    border-width: 1.5px;
+    border-radius: 10px;
+    background: $bg-card;
+    transition: border-color .15s, box-shadow .15s, background .15s;
+
+    > svg {
+        flex-shrink: 0;
+        color: $text-muted;
+        transition: color .15s;
+    }
+
+    input {
+        flex: 1;
+        height: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 13.5px;
+        color: $text-primary;
+        padding: 0;
+
+        &::placeholder { color: $text-muted; }
+    }
+
+    &:hover {
+        border-color: $brand-green;
+    }
+
+    &:focus-within {
+        border-color: $brand-green;
+        box-shadow: 0 0 0 3px rgba(72, 119, 44, .14);
+        background: #fff;
+
+        > svg { color: $brand-green; }
+    }
+}
+
+/* Clear-search × button — neutral by default, danger-tinted on
+   hover so the destructive intent is obvious. */
+.cbp-search-clear {
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .05);
+    color: $text-muted;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background .12s, color .12s;
+
+    &:hover {
+        background: rgba(220, 38, 38, .12);
+        color: #b91c1c;
+    }
+}
+
+/* ---- Highlight match (used by HighlightMatch) -------------- */
+.cbp-hl {
+    background: rgba(72, 119, 44, .22);
+    color: inherit;
+    border-radius: 3px;
+    padding: 0 1px;
+}
+
+/* ---- Row polish -------------------------------------------- */
+/* Smoother hover transition + brand-tinted left bar to indicate
+   selection. Keeps existing colours; just tightens motion + focus. */
+.cbp-row {
+    transition: background .12s, box-shadow .12s, border-color .12s;
+    border-left: 3px solid transparent;
+}
+
+.cbp-row:hover {
+    background: $bg-page;
+}
+
+.cbp-row--selected {
+    background: rgba(72, 119, 44, .10);
+    border-left-color: $brand-green;
+}
+
+.cbp-row-check {
+    accent-color: $brand-green;
+}
+
+/* ---- Tile polish ------------------------------------------- */
+.cbp-tile {
+    transition: background .12s, border-color .12s, transform .08s, box-shadow .15s;
+}
+
+.cbp-tile:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .06);
+}
+
+.cbp-tile--selected {
+    box-shadow: 0 4px 10px rgba(72, 119, 44, .18);
+}
+
+/* ---- Provider icon in the page header ---------------------- */
+/* Inline <img class="cbp-prov-icon @ViewModel.SelectedProviderImage" />
+   — the tier-specific provider glyphs (.ggldrv-icon, .drpbx-icon,
+   .onedrv-icon, .phn-icon) ship coloured; widen the white frame so
+   they sit centred. */
+.cbp-prov-icon {
+    background: #fff;
+    border: 1px solid $border;
+    padding: 6px;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+/* ---- Toolbar wrap behaviour -------------------------------- */
+@media only screen and (max-width: 900px) {
+    .cbp-toolbar {
+        flex-wrap: wrap;
+
+        .cbp-search { order: 3; flex-basis: 100%; }
+        .cbp-tabs   { order: 1; }
+        .cbp-view-toggle { order: 2; }
+    }
+}
+
+/* =============================================================
+   Dark theme — covers the new search + folder bits.
+   ============================================================= */
+html[data-theme="dark"] .cbp-search {
+    background: #1c2530;
+    border-color: #3a4554;
+}
+
+html[data-theme="dark"] .cbp-search > svg     { color: #b5bcc7; }
+html[data-theme="dark"] .cbp-search input     { color: #e8ecf1; }
+html[data-theme="dark"] .cbp-search input::placeholder { color: #7a8494; }
+
+html[data-theme="dark"] .cbp-search:hover     { border-color: #7fcc5c; }
+html[data-theme="dark"] .cbp-search:focus-within {
+    border-color: #7fcc5c;
+    background: #232e3b;
+    box-shadow: 0 0 0 3px rgba(127, 204, 92, .35);
+
+    > svg { color: #b8e89a; }
+}
+
+html[data-theme="dark"] .cbp-search-clear {
+    background: rgba(255, 255, 255, .06);
+    color: #b5bcc7;
+
+    &:hover {
+        background: rgba(248, 113, 113, .18);
+        color: #fca5a5;
+    }
+}
+
+html[data-theme="dark"] .cbp-hl {
+    background: rgba(127, 204, 92, .28);
+}
+
+html[data-theme="dark"] .cbp-row:hover {
+    background: #232e3b;
+}
+
+html[data-theme="dark"] .cbp-row--selected {
+    background: rgba(127, 204, 92, .14);
+    border-left-color: #7fcc5c;
+}
+
+html[data-theme="dark"] .cbp-prov-icon {
+    background: #232e3b;
+    border-color: #3a4554;
+}

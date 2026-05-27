@@ -1,17 +1,15 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
-using AxCrypt.App.Shared.Helpers;
 
 namespace AxCrypt.App.Shared.Desktop;
 
@@ -59,7 +57,9 @@ public class AppMain
         {
             if (changed)
             {
-                AxCServiceProviderExtension.GetService<VaultViewModel>().LoadVaultItems();
+                VaultViewModel vaultViewModel = AxCServiceProviderExtension.GetService<VaultViewModel>();
+                vaultViewModel.RefreshVaultContainers();
+                vaultViewModel.LoadVaultItems();
                 _mainViewModel.VaultChangeDetected = false;
             }
         });
@@ -76,6 +76,7 @@ public class AppMain
         await Task.Delay(2000);
         AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowTryUpgradeDialog();
     }
+
     private void BindToFileOperationViewModel()
     {
         _fileOperationViewModel.FirstLegacyOpen += (sender, e) => New<IUIThread>().SendTo(async () => await SetLegacyOpenMode(e));
@@ -120,5 +121,4 @@ public class AppMain
 
         _mainViewModel.EncryptionUpgradeMode = EncryptionUpgradeMode.AutoUpgrade;
     }
-
 }

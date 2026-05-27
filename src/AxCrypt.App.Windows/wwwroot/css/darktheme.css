@@ -2901,3 +2901,409 @@ bold.text-style {
   border-color: #2A3340 !important;
   color: #B5BCC7 !important;
 }
+
+/* =============================================================
+   Ported from Windows darkTheme.scss — covers the dark-mode gaps
+   reported on macOS:
+     • paid-gate body strip + locked vault card
+     • Tools page tile icons
+     • Quick Action disabled tile (Share Key visibility)
+     • profile popup row chrome + badge
+     • settings popup catch-all icon filter
+     • new login (LoginPageNew) + MFA (VerifyMFA) `.lp-*` shell
+     • AxLoader body variant + brand glow
+   ============================================================= */
+/* ---- Paid gate body + ladder typography ---------------------- */
+.pgm-features {
+  background: #1C2530 !important;
+  border: 1px solid #3A4554 !important;
+}
+
+.pgm-perk {
+  color: #C7E7B9 !important; /* mint accent against the dark strip */
+}
+
+.pgm-tier--premium .pgm-title,
+.pgm-tier--business .pgm-title {
+  color: #E8ECF1 !important;
+}
+
+/* Locked Vault / Cloud Drives card — warm-cream slab swapped for a
+   dark amber-tinted surface with the amber border as the cue. */
+.card.locked {
+  background: #2A2415 !important;
+  border-color: #6B5A1A !important;
+}
+
+.lo-title {
+  color: #E8ECF1 !important;
+}
+
+.lo-desc {
+  color: #B5BCC7 !important;
+}
+
+/* ---- Tools page tile icons ---------------------------------- */
+.tool-card .tc-icon img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9 !important;
+}
+
+.tool-card:hover .tc-icon img,
+.tool-card--active .tc-icon img {
+  opacity: 1 !important;
+}
+
+.tool-card--danger .tc-icon img {
+  filter: brightness(0) saturate(100%) invert(48%) sepia(89%) saturate(2378%) hue-rotate(338deg) brightness(99%) contrast(96%) !important;
+  opacity: 0.95 !important;
+}
+
+/* ---- Quick Action disabled tile ----------------------------- */
+.qa-btn.disabled,
+.qa-btn.disabled:hover {
+  background: #1C2530 !important;
+  color: #B5BCC7 !important;
+  border-color: #2A3340 !important;
+}
+
+.qa-btn.disabled .qa-icon img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.55 !important;
+}
+
+/* ---- Profile popup chrome ----------------------------------- */
+.profile-menu .pm-item-icon {
+  background: #1C2530 !important;
+  color: #B5BCC7 !important;
+}
+
+.profile-menu .pm-item:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.profile-menu .pm-item--danger:hover {
+  background: rgba(248, 113, 113, 0.14) !important;
+}
+
+.profile-menu .pm-item--danger .pm-item-label,
+.profile-menu .pm-item--danger .pm-item-icon {
+  color: #F87171 !important;
+}
+
+.profile-menu .pm-item-label {
+  color: #E8ECF1 !important;
+}
+
+.profile-menu .pm-item-sub {
+  color: #B5BCC7 !important;
+}
+
+.profile-menu .pm-name {
+  color: #E8ECF1 !important;
+}
+
+.profile-menu .pm-email {
+  color: #B5BCC7 !important;
+}
+
+.profile-menu .pm-divider {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.profile-menu .pm-item-badge {
+  background: rgba(127, 204, 92, 0.14) !important;
+  color: #B8E89A !important;
+  border: 1px solid rgba(127, 204, 92, 0.35) !important;
+}
+
+/* ---- Settings popup catch-all + per-icon row ---------------- */
+.settings-menu img:not(.stngs-menu-icon):not([data-theme-aware]) {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9;
+}
+
+.settings-menu .sm-section-label svg {
+  color: #7A8494 !important;
+}
+
+.settings-menu .sm-toggle-row > img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9;
+}
+
+.settings-menu .sm-toggle-row--locked > img {
+  opacity: 0.55 !important;
+}
+
+/* =============================================================
+   New sign-in (LoginPageNew) + MFA verification (VerifyMFA)
+   Brand panel (left) keeps its dark green gradient. The form panel
+   on the right and every interactive element are repainted here.
+   ============================================================= */
+.lp-shell {
+  background: #0F141A !important;
+}
+
+.lp-form {
+  background: #0F141A !important;
+  color: #E8ECF1 !important;
+}
+
+.lp-title {
+  color: #E8ECF1 !important;
+}
+
+.lp-sub,
+.lp-divider,
+.lp-foot,
+.lp-legal {
+  color: #B5BCC7 !important;
+}
+
+.lp-divider::before,
+.lp-divider::after {
+  background: #2A3340 !important;
+}
+
+.lp-field-head label {
+  color: #E8ECF1 !important;
+}
+
+.lp-input {
+  background: #1C2530 !important;
+  color: #E8ECF1 !important;
+  border-color: #3A4554 !important;
+}
+.lp-input::placeholder {
+  color: #7A8494 !important;
+}
+.lp-input:focus {
+  border-color: #7FCC5C !important;
+  box-shadow: 0 0 0 3px rgba(127, 204, 92, 0.35) !important;
+}
+
+.lp-input--readonly {
+  background: #161D26 !important;
+  color: #B5BCC7 !important;
+}
+
+.lp-input--invalid {
+  border-color: #F87171 !important;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.18) !important;
+}
+
+.lp-eye {
+  color: #B5BCC7 !important;
+}
+.lp-eye:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #E8ECF1 !important;
+}
+
+.lp-error {
+  background: rgba(248, 113, 113, 0.14) !important;
+  color: #FCA5A5 !important;
+  border-color: rgba(248, 113, 113, 0.32) !important;
+}
+
+.lp-submit {
+  background: #7FCC5C !important;
+  color: #0F1A07 !important;
+  box-shadow: 0 1px 2px rgba(127, 204, 92, 0.32) !important;
+}
+.lp-submit:hover {
+  background: #9BE076 !important;
+  box-shadow: 0 4px 10px rgba(127, 204, 92, 0.32) !important;
+}
+
+.lp-submit--loading,
+.lp-submit--loading:hover {
+  background: #5FA844 !important;
+  box-shadow: 0 1px 2px rgba(127, 204, 92, 0.22) !important;
+}
+
+.lp-link {
+  color: #B8E89A !important;
+}
+
+.lp-other-toggle {
+  background: #1C2530 !important;
+  color: #E8ECF1 !important;
+  border-color: #3A4554 !important;
+}
+.lp-other-toggle svg {
+  color: #B5BCC7 !important;
+}
+.lp-other-toggle:hover {
+  background: #232E3B !important;
+  border-color: #7FCC5C !important;
+  color: #B8E89A !important;
+}
+.lp-other-toggle:hover svg {
+  color: #B8E89A !important;
+}
+
+.lp-other-menu {
+  background: #232E3B !important;
+  border-color: #3A4554 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+.lp-other-item {
+  color: #E8ECF1 !important;
+  background: transparent !important;
+}
+.lp-other-item:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.lp-login-popup-card {
+  background: #1F2937 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* ---- MFA-specific ------------------------------------------ */
+.lp-mfa-badge {
+  background: rgba(127, 204, 92, 0.14) !important;
+  color: #B8E89A !important;
+}
+
+.lp-mfa-opt {
+  border-color: #3A4554 !important;
+  background: #1C2530 !important;
+  color: #E8ECF1 !important;
+}
+.lp-mfa-opt:hover {
+  border-color: #7FCC5C !important;
+}
+
+.lp-mfa-opt--active {
+  border-color: #7FCC5C !important;
+  background: rgba(127, 204, 92, 0.12) !important;
+}
+
+.lp-mfa-opt-ic,
+.lp-mfa-opt-name {
+  color: #E8ECF1 !important;
+}
+
+.lp-mfa-altlink {
+  background: transparent !important;
+  color: #B8E89A !important;
+}
+.lp-mfa-altlink:hover {
+  background: rgba(127, 204, 92, 0.1) !important;
+}
+
+.lp-mfa-generate {
+  background: #1C2530 !important;
+  color: #B8E89A !important;
+  border: 1px solid #3A4554 !important;
+}
+.lp-mfa-generate:hover {
+  background: #232E3B !important;
+  border-color: #7FCC5C !important;
+}
+
+.lp-mfa-code {
+  background: #1C2530 !important;
+  color: #E8ECF1 !important;
+  letter-spacing: 0.45em !important;
+}
+
+.lp-mfa-validation {
+  color: #FCA5A5 !important;
+}
+
+.lp-mfa-remember,
+.lp-mfa-remember-txt {
+  color: #B5BCC7 !important;
+}
+
+.lp-mfa-remember-select {
+  background: #1C2530 !important;
+  color: #E8ECF1 !important;
+  border-color: #3A4554 !important;
+}
+
+.lp-mfa-recovery {
+  border-top-color: #2A3340 !important;
+  color: #B5BCC7 !important;
+}
+.lp-mfa-recovery strong {
+  color: #E8ECF1 !important;
+}
+
+.lp-btn-ghost {
+  background: #1C2530 !important;
+  color: #E8ECF1 !important;
+  border-color: #3A4554 !important;
+}
+.lp-btn-ghost:hover {
+  background: #232E3B !important;
+  border-color: #7FCC5C !important;
+  color: #B8E89A !important;
+}
+
+/* =============================================================
+   AxLoader — full-page + body variants on dark surfaces
+   ============================================================= */
+.axl--fullpage {
+  background: rgba(15, 23, 42, 0.82) !important;
+  backdrop-filter: blur(4px);
+}
+
+.axl--body {
+  background: transparent !important;
+}
+
+.axl--fullpage .axl-msg,
+.axl .axl-msg {
+  color: #E8ECF1 !important;
+}
+
+.axl-msg--default {
+  color: #B5BCC7 !important;
+}
+
+.axl-logo-img {
+  filter: brightness(1.05) drop-shadow(0 1px 6px rgba(127, 204, 92, 0.25)) !important;
+}
+
+/* =============================================================
+   Popup loader cards — any AxLoader hosted inside a centered
+   modal-style card. The self-contained <style> blocks inside the
+   Razor components already darken the card surface, but those
+   styles can race with mount timing in fresh windows (FilePassword,
+   send-message popup, etc.). Pinning the dark surface here guarantees
+   the popup is dark whenever the dark stylesheet is loaded.
+   ============================================================= */
+.lp-login-popup-card,
+.smx-send-popup-card,
+.erp-card,
+.cm-card {
+  background: #1F2937 !important;
+  color: #E8ECF1 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Popup scrims behind those cards — keep them dark-tinted regardless
+   of source stylesheet load order. */
+.lp-login-popup,
+.smx-send-popup,
+.erp-scrim,
+.cm-scrim {
+  background: rgba(15, 23, 42, 0.55) !important;
+  backdrop-filter: blur(2px);
+}
+
+/* When an AxLoader paints inside one of these dark cards, force its
+   `.axl-msg` (and the icon) to the dark palette explicitly — the body
+   variant is transparent so the card surface shows through. */
+.lp-login-popup-card .axl-msg,
+.smx-send-popup-card .axl-msg,
+.cm-card .axl-msg,
+.erp-card .axl-msg {
+  color: #E8ECF1 !important;
+}

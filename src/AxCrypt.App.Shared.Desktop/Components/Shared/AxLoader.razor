@@ -126,14 +126,44 @@
 
     .axl--body .axl-logo { width: 52px; height: 52px; }
 
-    /* ── Dark theme — applied via the data-theme attribute set on the
-       html tag by the theme switcher. ── */
+    /* ── Dark theme — applied via the data-theme attribute the theme
+       switcher sets on html tag. The attribute is sticky across the
+       document, so any selector under html[data-theme="dark"] wins
+       wherever the wheel mounts in that document. ── */
     html[data-theme="dark"] .axl--fullpage {
-        background: rgba(15, 23, 42, 0.78);
+        background: rgba(15, 23, 42, 0.82) !important;
+        backdrop-filter: blur(4px);
     }
 
-    html[data-theme="dark"] .axl--fullpage .axl-msg { color: #e5e7eb; }
-    html[data-theme="dark"] .axl-msg                { color: #b5bcc7; }
+    html[data-theme="dark"] .axl--body {
+        background: transparent !important;
+    }
+
+    html[data-theme="dark"] .axl--fullpage .axl-msg,
+    html[data-theme="dark"] .axl .axl-msg {
+        color: #E8ECF1 !important;
+    }
+
+    html[data-theme="dark"] .axl-msg--default {
+        color: #B5BCC7 !important;
+    }
+
+    /* Soft brand glow under the logo so it pops on the dark scrim. */
+    html[data-theme="dark"] .axl-logo-img {
+        filter: brightness(1.05) drop-shadow(0 1px 6px rgba(127, 204, 92, .25));
+    }
+
+    /* Fallback for platforms where the data-theme attribute hasn't been
+       wired yet (e.g. very early boot, sign-in screen before the user
+       toggle has been read) — match the OS preference. */
+    @@media (prefers-color-scheme: dark) {
+        .axl--fullpage:not([data-theme-light]) {
+            background: rgba(15, 23, 42, 0.82);
+        }
+        .axl--fullpage:not([data-theme-light]) .axl-msg {
+            color: #E8ECF1;
+        }
+    }
 
     /* Respect reduced-motion: drop the spin/breathe, keep a soft pulse. */
     @@media (prefers-reduced-motion: reduce) {

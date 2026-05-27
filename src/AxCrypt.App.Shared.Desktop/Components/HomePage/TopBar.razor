@@ -149,7 +149,7 @@
                                     <label class="sm-radio-item @(SettingsViewModel.InactivitySignOut == opt ? "sm-radio-item--active" : "")">
                                         <input type="radio" name="inactivity" value="@opt"
                                                checked="@(SettingsViewModel.InactivitySignOut == opt)"
-                                               @onchange="() => SettingsViewModel.InactivitySignOut = opt" />
+                                               @onchange="async (e) => await SettingsViewModel.OnInactivityContextMenu(opt, e)" />
                                         <span class="sm-radio-dot"></span>
                                         @opt mins
                                     </label>
@@ -239,6 +239,7 @@
 
 <AxCrypt.App.Shared.Desktop.Components.HomePage.HelpOverlay />
 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.AdvancedOptionsDialog />
+<AxCrypt.App.Shared.Desktop.Components.PopupDialog.VaultSettingsPopup />
 
 <AxCrypt.App.Shared.Desktop.Components.Shared.ProgressBar />
 <AxCrypt.App.Shared.Desktop.Components.HomePage.BatchOperationToast />

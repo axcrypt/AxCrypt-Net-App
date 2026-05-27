@@ -57,6 +57,15 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 
         public NewSecMsgrViewModel NewSecMsgrViewModel { get; set; }
 
+        /// <summary>
+        /// Drives the inline list-loader inside MessagesList.razor. Distinct
+        /// from the global ProcessIndicator (which paints a full-page scrim)
+        /// — this flag is read by the list pane and used to render an
+        /// AxLoader Body variant inside its scroll region while a fetch is
+        /// in flight, matching the Password Manager loading pattern.
+        /// </summary>
+        public bool IsListLoading { get; private set; }
+
         public async Task GetMessagesList(SecureMsgrFilterTab secMessengerFilterTab)
         {
             if (New<AxCrypt.Common.AxCryptOnlineState>().IsOffline)
@@ -64,31 +73,55 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
                 return;
             }
 
-            using (ProcessIndicator processIndicator = new ProcessIndicator())
+            // Re-entrancy guard — if the user repeatedly taps a filter tab
+            // during an in-flight load, queueing duplicate fetches starves
+            // the dispatcher and looks like a hang. Drop the second click
+            // until the first finishes.
+            if (IsListLoading)
             {
-                if (secMessengerFilterTab == SecureMsgrFilterTab.None)
+                return;
+            }
+
+            IsListLoading = true;
+            UpdateViewState();
+            try
+            {
+                using (ProcessIndicator processIndicator = new ProcessIndicator())
                 {
-                    secMessengerFilterTab = SecureMsgrFilterTab.Inbox;
+                    if (secMessengerFilterTab == SecureMsgrFilterTab.None)
+                    {
+                        secMessengerFilterTab = SecureMsgrFilterTab.Inbox;
+                    }
+
+                    switch (secMessengerFilterTab)
+                    {
+                        case SecureMsgrFilterTab.Inbox:
+                            Messenger = await _messageService.GetListForInboxAsync();
+                            break;
+
+                        case SecureMsgrFilterTab.Sent:
+                            Messenger = await _messageService.GetListForSentAsync();
+                            break;
+
+                        case SecureMsgrFilterTab.Unread:
+                            Messenger = await _messageService.GetListForUnreadAsync();
+                            break;
+
+                        default:
+                            break;
+                    }
                 }
-
-                switch (secMessengerFilterTab)
-                {
-                    case SecureMsgrFilterTab.Inbox:
-                        Messenger = await _messageService.GetListForInboxAsync();
-                        break;
-
-                    case SecureMsgrFilterTab.Sent:
-                        Messenger = await _messageService.GetListForSentAsync();
-                        break;
-
-                    case SecureMsgrFilterTab.Unread:
-                        Messenger = await _messageService.GetListForUnreadAsync();
-                        break;
-
-                    default:
-                        break;
-                }
-
+            }
+            catch (Exception ex)
+            {
+                // Surface fetch failures via the central error popup so the
+                // user sees something actionable instead of an apparent hang.
+                AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.ErrorReportService?.Report(
+                    ex, "Loading messages");
+            }
+            finally
+            {
+                IsListLoading = false;
                 UpdateViewState();
             }
         }
@@ -155,6 +188,11 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
             DateTime currentUtc = New<INow>().Utc;
             Messenger.ChildMessages = Messenger.ChildMessages.Where(rm =>
             {
+                if (rm == null)
+                {
+                    return false;
+                }
+
                 if (rm.Message.Visibility == SecureMsgrVisibility.Once)
                 {
                     MessengerReceiverApiModel? receiver = rm.Message.ReceiverList.FirstOrDefault(ru => ru.User == New<UserSettings>().UserEmail);

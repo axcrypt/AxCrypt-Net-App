@@ -1,16 +1,14 @@
-﻿@using AxCrypt.Api.Model
-@using AxCrypt.App.Shared.Desktop.ViewModels.Home
+﻿@using AxCrypt.App.Shared.Desktop.ViewModels.Home
 @using AxCrypt.App.Shared.Providers
 @using AxCrypt.App.Shared.Services
-@using AxCrypt.Core.UI
 @using AxCrypt.Content
 @using AxCrypt.App.Shared.Desktop.ViewModels.Main;
-@using AxCrypt.Core.UI.ViewModel
 
 @inject SubActionViewModel? subActionModel
 @inject NavigationManager Navigation
 @inject FileDropService FileDropService
 @inject AppSettingsViewModel AppSettingsViewModel
+@inject CloudDriveViewModel CloudDrive
 
 <div class="mre-act-sec">
     @if (subActionModel!.EnableVault)
@@ -35,7 +33,7 @@
                 {
                     <div title="@provider.Name">
                         @{
-                            string ConfiguredStyle = provider.Configured ? "background-color:" + _ENABLEDTOOLSTRIPBACKCOLOR : "background-color:#A4A4A4; filter: grayscale(1);";
+                            string ConfiguredStyle = CloudDrive.IsConnected(provider) ? "background-color:" + _ENABLEDTOOLSTRIPBACKCOLOR : "background-color:#A4A4A4; filter: grayscale(1);";
                         }
                         <button @onclick="() => subActionModel.FileProviderViewModel.SubActionSelectProvider(provider)"
                                 class="assets-box"

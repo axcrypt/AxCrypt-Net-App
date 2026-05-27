@@ -14,25 +14,54 @@
 
 <div class="row smx-body">
     <div class="all-msg" style="padding: 0;">
-        <div class="center-column">
-            <button class="button fnt-high" style="text-align: left; height: 44px;">
-                @if (ManageSecMgrViewModel.isMultiCheckboxVisible || ManageSecMgrViewModel.AnySelected)
-                {
-                    <input type="checkbox" class="multi-chckbx" title="Select All" checked="@ManageSecMgrViewModel.SelectAllMessages" bind-checked="@ManageSecMgrViewModel.SelectAllMessages" @onchange="ManageSecMgrViewModel.ToggleAllMessages" />
-                }
+        @* List-pane header — title on the left, persistent bulk-action
+           toolbar in the middle, "New message" on the right. The old
+           markup wrapped everything inside a single <button>, which hid
+           the bulk-action icons and produced invalid nesting. Split into
+           explicit zones so every option is visible on the page. *@
+        <div class="center-column smx-list-header">
+            <div class="smx-list-header-title">
+                <input type="checkbox"
+                       class="multi-chckbx"
+                       title="Select all"
+                       checked="@ManageSecMgrViewModel.SelectAllMessages"
+                       @onchange="ManageSecMgrViewModel.ToggleAllMessages" />
                 <span class="mutli-slct-btn">@TabTitleText</span>
-                <img class="select-option" src="/images/default/IcoSelect.svg" style="height: 14px;" alt="delete-img" title="Select" @onclick="@ManageSecMgrViewModel.ToggleMultiCheckbox" />
-                <div class="slct-actions @activeClass">
-                    <img class="multi-dlt" src="" alt="Delete" title="Delete" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("delete"))" />
-                    @if (SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
-                    {
-                        <img class="multi-read" src="" alt="Mark Read" title="Read" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("read"))" />
-                        <img class="multi-unread" src="" alt="Mark Unread" title="Unread" @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("unread"))" />
-                    }
-                </div>
-            </button>
-            <button class="button success new-btn fnt-small" id="create-new-message" @onclick="()=>{ ManageSecMgrViewModel.ComposeNewMessage(); }">
-                @Texts.NewMessageText
+                <img class="select-option" src="/images/default/IcoSelect.svg"
+                     style="height: 14px;" alt="Select" title="Toggle selection mode"
+                     @onclick="@ManageSecMgrViewModel.ToggleMultiCheckbox" />
+            </div>
+
+            <div class="smx-list-header-actions @activeClass" aria-label="Bulk actions">
+                <button type="button" class="smx-bulk-btn smx-bulk-btn--danger" title="Delete"
+                        disabled="@(!ManageSecMgrViewModel.AnySelected)"
+                        @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("delete"))">
+                    <img class="multi-dlt" src="" alt="Delete" />
+                </button>
+                @if (SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
+                {
+                    <button type="button" class="smx-bulk-btn" title="Mark as read"
+                            disabled="@(!ManageSecMgrViewModel.AnySelected)"
+                            @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("read"))">
+                        <img class="multi-read" src="" alt="Read" />
+                    </button>
+                    <button type="button" class="smx-bulk-btn" title="Mark as unread"
+                            disabled="@(!ManageSecMgrViewModel.AnySelected)"
+                            @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("unread"))">
+                        <img class="multi-unread" src="" alt="Unread" />
+                    </button>
+                }
+            </div>
+
+            <button class="button success new-btn fnt-small smx-new-btn"
+                    id="create-new-message"
+                    title="Compose new secured message"
+                    @onclick="() => { ManageSecMgrViewModel.ComposeNewMessage(); }">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                <span>@Texts.NewMessageText</span>
             </button>
         </div>
         <div id="all-message-list" class="message-list-section">
@@ -72,6 +101,108 @@
         }
     </div>
 </div>
+
+<style>
+    /* Messenger list-pane header — three explicit zones so every option
+       (filter title, bulk actions, compose) is visible at all times. */
+    .smx-list-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        min-height: 48px;
+    }
+
+    .smx-list-header-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .smx-list-header-title .mutli-slct-btn {
+        font-weight: 700;
+        font-size: 13.5px;
+    }
+
+    .smx-list-header-title .select-option {
+        cursor: pointer;
+        opacity: .75;
+        transition: opacity .12s;
+    }
+
+    .smx-list-header-title .select-option:hover {
+        opacity: 1;
+    }
+
+    .smx-list-header-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        flex: 1;
+        justify-content: flex-start;
+    }
+
+    .smx-bulk-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: transparent;
+        border: 1px solid transparent;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        transition: background .12s, border-color .12s, opacity .12s;
+    }
+
+    .smx-bulk-btn:hover:not(:disabled) {
+        background: #f3f4f6;
+        border-color: #e5e7eb;
+    }
+
+    .smx-bulk-btn:disabled {
+        opacity: .38;
+        cursor: not-allowed;
+    }
+
+    .smx-bulk-btn--danger:hover:not(:disabled) {
+        background: rgba(220, 38, 38, .10);
+        border-color: rgba(220, 38, 38, .25);
+    }
+
+    .smx-bulk-btn img {
+        width: 16px;
+        height: 16px;
+        pointer-events: none;
+    }
+
+    .smx-new-btn {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        height: 32px;
+        margin: 0;
+    }
+
+    .smx-new-btn svg {
+        flex-shrink: 0;
+    }
+
+    /* Dark theme */
+    html[data-theme="dark"] .smx-bulk-btn:hover:not(:disabled) {
+        background: rgba(255, 255, 255, .06);
+        border-color: rgba(255, 255, 255, .12);
+    }
+
+    html[data-theme="dark"] .smx-bulk-btn--danger:hover:not(:disabled) {
+        background: rgba(248, 113, 113, .14);
+        border-color: rgba(248, 113, 113, .35);
+    }
+</style>
 
 <EditForm Model="ManageSecMgrViewModel" id="loadmore-button-click">
     <input type="hidden" id="pagenumber-id-hidden" name="pageNumber" value="@ManageSecMgrViewModel.Messenger.PageNumber" />

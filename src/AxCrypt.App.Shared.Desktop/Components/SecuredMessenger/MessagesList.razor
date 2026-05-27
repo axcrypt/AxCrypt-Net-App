@@ -1,4 +1,5 @@
 ﻿@using AxCrypt.Core.SecuredMessenger;
+@using AxCrypt.App.Shared.Desktop.Components.Shared
 @using AxCrypt.App.Shared.ViewModels.SecuredMessenger;
 @using AxCrypt.Content
 
@@ -7,7 +8,15 @@
 <div class="row">
     <div class="medium-12 columns">
         <div class="inbox-section no-margin" id="load-message-list">
-            @if (ManageSecMgrViewModel.Messenger.Messages == null || !ManageSecMgrViewModel.Messenger.Messages.Any())
+            @if (ManageSecMgrViewModel.IsListLoading)
+            {
+                @* Inline list-loader — matches the Password Manager pattern of
+                   showing an AxLoader Body variant inside the list pane while
+                   the fetch is in flight, instead of a full-page scrim that
+                   blocks the rest of the messenger. *@
+                <AxLoader Mode="LoaderMode.Body" Message="@Texts.LoadingText" />
+            }
+            else if (ManageSecMgrViewModel.Messenger.Messages == null || !ManageSecMgrViewModel.Messenger.Messages.Any())
             {
                 <div class="smx-empty" id="noMoreNewMessagesText">
                     <svg class="smx-empty-icon" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">

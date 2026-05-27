@@ -34,6 +34,7 @@ public static class AppDesktopFactory
         services.AddSingleton<AdvancedOptionsViewModel>();
         services.AddSingleton<ActionsViewModel>();
         services.AddSingleton<SubActionViewModel>();
+        services.AddSingleton<CloudDriveViewModel>();
         services.AddSingleton<HeaderComponentViewModel>();
         services.AddSingleton<RecentFilesViewModel>();
         services.AddSingleton<ProfileViewModel>();

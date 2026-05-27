@@ -4,7 +4,7 @@
 @using AxCrypt.App.Shared.Services
 @using AxCrypt.Content
 @using AxCrypt.Core
-@using static AxCrypt.Abstractions.TypeResolve
+@using AxCrypt.App.Shared.Desktop.Data
 
 @inject UserService userService
 @inject PopupService popupService
@@ -15,8 +15,8 @@
 
 <!-- Clickable profile row -->
 <div class="user-row @(popupService.ProfileMenuOpen ? "user-row--active" : "")"
-        @onclick="popupService.ToggleProfileMenu" role="button" tabindex="0"
-        @onkeydown="(e) => { if (e.Key == EnterText) popupService.ToggleProfileMenu(); }">
+     @onclick="() => { if (Utility.IsMainMenuHidden) { Utility.ToggleMainMenu(); } popupService.ToggleProfileMenu(); }" role="button" tabindex="0"
+     @onkeydown="(e) => { if (e.Key == EnterText) popupService.ToggleProfileMenu(); }">
     <div class="avatar" style="background:@userService.UserAvatarColor()">@userService.UserInitials()</div>
     <div class="user-details">
         <span class="user-name">@userService.UserEmail</span>

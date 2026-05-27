@@ -139,6 +139,11 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
                 return;
             }
 
+            if (!New<IDataContainer>(existingVaultPath).IsAvailable)
+            {
+                return;
+            }
+
             await LogOnViewModel.MainViewModel.AddWatchedFolders.ExecuteAsync(new[] { existingVaultPath });
         }
 

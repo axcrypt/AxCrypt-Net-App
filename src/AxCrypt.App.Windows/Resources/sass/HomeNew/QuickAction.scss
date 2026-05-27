@@ -1,60 +1,126 @@
 ﻿/* ═══════════════════════════════════════════
    Quick Actions
+   Grid of square-ish tiles. Each tile has an icon, a label and a
+   short description — all three must fit inside the box at every
+   column width and the lock badge sits in the top-right corner.
 ════════════════════════════════════════════ */
 .quick-actions-grid {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
 .qa-btn {
+    position: relative;        // anchor for .qa-paid-badge
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 14px 8px 12px;
+    gap: 4px;
+    padding: 14px 10px 12px;
     border: 1.5px solid $brand-green-lt;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: border-color .15s, box-shadow .15s;
+    transition: transform .12s ease, border-color .15s, box-shadow .18s, background .15s;
     text-align: center;
     background: $brand-green-lt;
     color: $active-text-cr;
+    overflow: hidden;          // belt-and-braces clip if a long string ever leaks
+    min-height: clamp(96px, 15vh, 150px);
+
+    /* Layered action-button shadow.
+       • Outer drop-shadow tinted with the brand so the tile reads as a
+         coloured action chip rather than a flat card.
+       • Inner highlight (inset 0 1px 0 white/14) suggests a lit top edge,
+         the cue most "Material Design" action buttons use to look pressable.
+       Hover lifts the tile, active presses it back down — the classic
+       elevation curve. */
+    box-shadow:
+        0 1px 1px rgba(0, 0, 0, .06),
+        0 4px 10px rgba(72, 119, 44, .22),
+        inset 0 1px 0 rgba(255, 255, 255, .14);
 
     &:hover {
         background: $brand-green-lt;
         border-color: $brand-green;
-        box-shadow: 0 2px 8px rgba(37,99,235,.12);
+        transform: translateY(-1px);
+        box-shadow:
+            0 2px 3px rgba(0, 0, 0, .08),
+            0 10px 22px rgba(72, 119, 44, .32),
+            inset 0 1px 0 rgba(255, 255, 255, .18);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow:
+            0 1px 1px rgba(0, 0, 0, .08),
+            0 2px 6px rgba(72, 119, 44, .22),
+            inset 0 1px 2px rgba(0, 0, 0, .12);
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow:
+            0 0 0 3px rgba(72, 119, 44, .35),
+            0 4px 10px rgba(72, 119, 44, .22),
+            inset 0 1px 0 rgba(255, 255, 255, .14);
     }
 
     &.disabled {
         background: $bg-page;
         color: $text-primary;
+        // Disabled tiles read as flat/muted instead of lifted — no brand
+        // glow, just a thin neutral drop so they're still tactile.
+        box-shadow:
+            0 1px 1px rgba(0, 0, 0, .04),
+            0 2px 4px rgba(0, 0, 0, .04);
 
         &:hover {
             background: $bg-page;
             color: $text-primary;
-            box-shadow: 0 2px 8px rgba(37,99,235,.12);
+            transform: none;
+            box-shadow:
+                0 1px 2px rgba(0, 0, 0, .06),
+                0 4px 10px rgba(0, 0, 0, .06);
+        }
+
+        &:active {
+            transform: none;
+            box-shadow:
+                0 1px 1px rgba(0, 0, 0, .06),
+                inset 0 1px 2px rgba(0, 0, 0, .08);
         }
 
         .qa-icon img {
-            filter: brightness(0.5);
+            filter: brightness(.5);
+            opacity: .8;
         }
     }
 }
 
-    .qa-btn:hover {
-        background: $brand-green-lt;
-        border-color: $brand-green;
-        box-shadow: 0 2px 8px rgba(37,99,235,.12);
-    }
+/* Lock chip — top-right corner of a locked tile. */
+.qa-paid-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    background: rgba(245, 158, 11, .18);
+    border: 1px solid rgba(245, 158, 11, .35);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    pointer-events: none; // the whole tile is the click target
+}
 
 .qa-icon-wrap {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     display: grid;
     place-items: center;
+    flex-shrink: 0;
 }
 
 .qa-icon {
@@ -62,8 +128,9 @@
     place-items: center;
 
     img {
-        width: 26px;
-        height: 26px;
+        width: 24px;
+        height: 24px;
+        display: block;
     }
 }
 
@@ -71,12 +138,35 @@
     font-weight: 600;
     font-size: 13px;
     line-height: 1.2;
+    width: 100%;
+    max-width: 100%;
+    // Clamp to one line — labels are short ("Encrypt File", "Share Securely").
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .qa-desc {
-    font-size: 10.5px;
+    font-size: 11px;
     color: $text-muted;
-    line-height: 1.2;
+    line-height: 1.25;
+    width: 100%;
+    max-width: 100%;
+    // Two-line clamp keeps the description visible without forcing the tile
+    // taller when the copy is long ("Preview encrypted files without
+    // decrypting permanently").
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+/* When the tile is enabled (brand-green background), the description
+   inherits the white text but the muted color from the base rule above
+   wins. Force it light for readability against the green tile. */
+.qa-btn:not(.disabled) .qa-desc {
+    color: rgba(255, 255, 255, .88);
 }
 
 /* ═══════════════════════════════════════════

@@ -67,6 +67,7 @@ public static class ShareKeyService
             if (encryptableFileNames != null && encryptableFileNames.Any())
             {
                 IFeatureUsageProvider? usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
+                fileOperationViewModel.Recipients = viewModel.SharedWith;
                 FeatureUsage featureUsage = usage.GetUsage(FeatureKey.KeyShare);
                 int availableCount = featureUsage.Remaining;
                 if (availableCount == 0)

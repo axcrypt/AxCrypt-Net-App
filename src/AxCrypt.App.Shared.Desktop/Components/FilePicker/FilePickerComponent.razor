@@ -1,8 +1,6 @@
 ﻿@using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser
 @using AxCrypt.App.Shared.UI.ViewModels
 @using AxCrypt.App.Shared.Utility
-@using AxCrypt.App.Shared.Desktop.ViewModels
-@using AxCrypt.App.Shared.ViewModels.FileBrowser
 @using AxCrypt.Content
 
 @inject DesktopFilePickerViewModel ViewModel
@@ -301,6 +299,7 @@
     private void CloseWindow()
     {
         ViewModel.IsVisible = false;
+        ViewModel.FileProviderSelectionViewModel.UpdateViewState();
     }
 
     private async Task GetSelectedFileList(string selectedTab)

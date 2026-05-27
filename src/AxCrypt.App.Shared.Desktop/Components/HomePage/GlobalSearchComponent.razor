@@ -258,6 +258,17 @@
             }));
 
         // ── Pages ── real in-app routes (the same ones the side menu uses).
+        // Paid routes — same set as NavPageData.IsPaid. Locked for free users
+        // so search lines up with what the side-menu shows: a free user can
+        // see the entry but tapping it opens the paid-gate popup instead of
+        // navigating into a feature their plan doesn't include.
+        HashSet<string> paidRoutes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "/vault",
+            "/securedfolders",
+            "/textencryption",
+        };
+
         (string Name, string SubText, string Route)[] pages = new[]
         {
             ("Home", "Dashboard & quick actions", "/"),
@@ -277,7 +288,8 @@
                 Name = p.Name,
                 SubText = p.SubText,
                 Route = p.Route,
-                IconSvg = PageIcon
+                IconSvg = PageIcon,
+                IsLocked = freeGate && paidRoutes.Contains(p.Route)
             }));
 
         return results.Take(12).ToList();
@@ -289,6 +301,69 @@
     {
         popupService.OpenSettingsMenu();
         return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Per-route paid-gate copy for locked Pages results. Mirrors the
+    /// SideBar's OnClickNavMenu so a free user clicking either surface
+    /// sees the same upgrade pitch. Falls back to a generic page-locked
+    /// message for any future paid route that isn't listed here.
+    /// </summary>
+    private void ShowPaidGateForRoute(string route, string fallbackName)
+    {
+        switch (route)
+        {
+            case "/vault":
+                paidFeaturegateService.ShowPaidGate(
+                    AxCrypt.Content.Texts.VaultText,
+                    "Store and protect your sensitive files securely in encrypted vaults.",
+                    new[]
+                    {
+                        "Create secure encrypted vaults",
+                        "Protect important files and folders",
+                        "Access advanced vault security",
+                        "Unlock premium protection features",
+                    });
+                break;
+
+            case "/securedfolders":
+                paidFeaturegateService.ShowPaidGate(
+                    AxCrypt.Content.Texts.WatchedFoldersTabPageText,
+                    "Automatically monitor and protect your folders with secure encryption.",
+                    new[]
+                    {
+                        "Automatically encrypt added/changed files",
+                        "Monitor multiple folders securely",
+                        "Protect sensitive files automatically",
+                        "Unlock advanced security features",
+                    });
+                break;
+
+            case "/textencryption":
+                paidFeaturegateService.ShowPaidGate(
+                    AxCrypt.Content.Texts.TextEncryptionLinkLabel,
+                    "Encrypt your text securely with advanced protection features.",
+                    new[]
+                    {
+                        "Encrypt unlimited text",
+                        "Advanced encryption algorithms",
+                        "Protect sensitive information",
+                        "Priority customer support",
+                    });
+                break;
+
+            default:
+                paidFeaturegateService.ShowPaidGate(
+                    fallbackName,
+                    "This page is part of a paid plan. Upgrade to unlock it.",
+                    new[]
+                    {
+                        "Access every page in the app",
+                        "Unlock paid features without limits",
+                        "Priority support",
+                    });
+                break;
+        }
     }
 
     private MarkupString HighlightMatch(string text, string q)
@@ -307,8 +382,17 @@
 
         // Locked → free-user paid-gate popup. We never run the underlying
         // action or navigate to the page; the gate is the only outcome.
+        // Pages get tier-specific copy that matches what the side-menu
+        // shows when a free user clicks the same nav item (see SideBar
+        // .OnClickNavMenu) so the funnel is consistent across surfaces.
         if (r.IsLocked)
         {
+            if (r.Category == "Pages")
+            {
+                ShowPaidGateForRoute(r.Route, r.Name);
+                return;
+            }
+
             string headline = r.Category switch
             {
                 "Files"   => "File search",

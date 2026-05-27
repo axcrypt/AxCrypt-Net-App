@@ -1,0 +1,563 @@
+﻿.cbp-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    gap: 12px;
+    padding: 16px 20px 0;
+    background: #f9fafb;
+    overflow: hidden;
+}
+
+.cbp-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.cbp-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    cursor: pointer;
+    transition: background .12s, border-color .12s;
+}
+
+.cbp-back:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.cbp-header-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 0;
+}
+
+.cbp-prov-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    padding: 6px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.cbp-header-text {
+    min-width: 0;
+}
+
+.cbp-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.cbp-sub {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    color: #6b7280;
+}
+
+.cbp-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cbp-tabs {
+    display: inline-flex;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+.cbp-tab {
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: 7px;
+    transition: background .12s, color .12s;
+}
+
+.cbp-tab:hover {
+    color: #111827;
+}
+
+.cbp-tab--active {
+    background: #48772C;
+    color: #fff;
+}
+
+.cbp-search {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 6px 10px;
+}
+
+.cbp-search:focus-within {
+    border-color: #48772C;
+    box-shadow: 0 0 0 3px rgba(72,119,44,.14);
+}
+
+.cbp-search svg {
+    color: #9ca3af;
+    flex-shrink: 0;
+}
+
+.cbp-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+    color: #111827;
+    padding: 4px 0;
+}
+
+.cbp-search input::placeholder {
+    color: #9ca3af;
+}
+
+.cbp-search-clear {
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    line-height: 1;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+.cbp-search-clear:hover {
+    color: #111827;
+}
+
+.cbp-view-toggle {
+    display: inline-flex;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+.cbp-view-btn {
+    background: transparent;
+    border: none;
+    padding: 6px 9px;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: 7px;
+    transition: background .12s, color .12s;
+}
+
+.cbp-view-btn:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.cbp-view-btn--active {
+    background: #48772C;
+    color: #fff;
+}
+
+.cbp-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: #6b7280;
+}
+
+.cbp-bc-item {
+    background: transparent;
+    border: none;
+    padding: 2px 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #48772C;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.cbp-bc-item:hover {
+    background: rgba(72,119,44,.10);
+}
+
+.cbp-bc-sep {
+    color: #9ca3af;
+}
+
+.cbp-search-info {
+    font-size: 12.5px;
+    color: #6b7280;
+}
+
+.cbp-link {
+    background: transparent;
+    border: none;
+    color: #48772C;
+    font-weight: 600;
+    font-size: 12.5px;
+    cursor: pointer;
+    margin-left: 6px;
+}
+
+.cbp-link:hover {
+    text-decoration: underline;
+}
+
+.cbp-files {
+    flex: 1;
+    min-height: 0;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.cbp-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.cbp-empty-title {
+    margin: 6px 0 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.cbp-empty-sub {
+    margin: 0 0 12px;
+    font-size: 12.5px;
+    color: #6b7280;
+    max-width: 320px;
+}
+
+.cbp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cbp-row {
+    display: grid;
+    grid-template-columns: 24px 28px 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .1s;
+}
+
+.cbp-row + .cbp-row {
+    border-top: 1px solid #f3f4f6;
+}
+
+.cbp-row:hover {
+    background: #f9fafb;
+}
+
+.cbp-row--selected {
+    background: rgba(72,119,44,.10);
+}
+
+.cbp-row-check {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+.cbp-row-check--hidden {
+    visibility: hidden;
+}
+
+.cbp-row-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.cbp-row-body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.cbp-row-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #111827;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cbp-row-path {
+    font-size: 11.5px;
+    color: #9ca3af;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cbp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    padding: 4px;
+}
+
+.cbp-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 10px;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    transition: background .12s, border-color .12s;
+}
+
+.cbp-tile:hover {
+    background: #f9fafb;
+    border-color: #e5e7eb;
+}
+
+.cbp-tile--selected {
+    background: rgba(72,119,44,.10);
+    border-color: #48772C;
+}
+
+.cbp-tile-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.cbp-tile-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: #111827;
+    text-align: center;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.cbp-actionbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+    margin-bottom: 12px;
+}
+
+.cbp-actionbar-spacer {
+    flex: 1;
+}
+
+.cbp-actionbar-count {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #48772C;
+}
+
+.cbp-actionbar-hint {
+    flex: 1;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.cbp-btn {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+.cbp-btn--primary {
+    background: #48772C;
+    color: #fff;
+}
+
+.cbp-btn--primary:hover {
+    background: #3f6826;
+}
+
+.cbp-btn--ghost {
+    background: #fff;
+    color: #111827;
+    border-color: #d1d5db;
+}
+
+.cbp-btn--ghost:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+/* Dark theme — mirrors the rest of the app's surfaces. */
+html[data-theme="dark"] .cbp-page {
+    background: #0F141A;
+}
+
+html[data-theme="dark"] .cbp-title {
+    color: #E8ECF1;
+}
+
+html[data-theme="dark"] .cbp-sub,
+html[data-theme="dark"] .cbp-search-info,
+html[data-theme="dark"] .cbp-actionbar-hint {
+    color: #B5BCC7;
+}
+
+html[data-theme="dark"] .cbp-back,
+html[data-theme="dark"] .cbp-tabs,
+html[data-theme="dark"] .cbp-search,
+html[data-theme="dark"] .cbp-view-toggle,
+html[data-theme="dark"] .cbp-actionbar,
+html[data-theme="dark"] .cbp-tile,
+html[data-theme="dark"] .cbp-files {
+    background: #1C2530;
+    border-color: #3A4554;
+    color: #E8ECF1;
+}
+
+html[data-theme="dark"] .cbp-back:hover,
+html[data-theme="dark"] .cbp-view-btn:hover,
+html[data-theme="dark"] .cbp-row:hover,
+html[data-theme="dark"] .cbp-tile:hover {
+    background: #232E3B;
+}
+
+html[data-theme="dark"] .cbp-tab,
+html[data-theme="dark"] .cbp-view-btn {
+    color: #B5BCC7;
+}
+
+html[data-theme="dark"] .cbp-tab:hover {
+    color: #E8ECF1;
+}
+
+html[data-theme="dark"] .cbp-tab--active,
+html[data-theme="dark"] .cbp-view-btn--active {
+    background: #7FCC5C;
+    color: #0F1A07;
+}
+
+html[data-theme="dark"] .cbp-search input {
+    color: #E8ECF1;
+}
+
+html[data-theme="dark"] .cbp-search input::placeholder {
+    color: #7A8494;
+}
+
+html[data-theme="dark"] .cbp-search:focus-within {
+    border-color: #7FCC5C;
+    box-shadow: 0 0 0 3px rgba(127,204,92,.35);
+}
+
+html[data-theme="dark"] .cbp-prov-icon {
+    background: #232E3B;
+    border-color: #3A4554;
+}
+
+html[data-theme="dark"] .cbp-row + .cbp-row {
+    border-top-color: rgba(255,255,255,.06);
+}
+
+html[data-theme="dark"] .cbp-row--selected,
+html[data-theme="dark"] .cbp-tile--selected {
+    background: rgba(127,204,92,.14);
+    border-color: #7FCC5C;
+}
+
+html[data-theme="dark"] .cbp-row-name,
+html[data-theme="dark"] .cbp-tile-name,
+html[data-theme="dark"] .cbp-empty-title {
+    color: #E8ECF1;
+}
+
+html[data-theme="dark"] .cbp-row-path,
+html[data-theme="dark"] .cbp-empty-sub {
+    color: #7A8494;
+}
+
+html[data-theme="dark"] .cbp-bc-item {
+    color: #B8E89A;
+}
+
+html[data-theme="dark"] .cbp-bc-item:hover {
+    background: rgba(127,204,92,.14);
+}
+
+html[data-theme="dark"] .cbp-actionbar-count {
+    color: #B8E89A;
+}
+
+html[data-theme="dark"] .cbp-link {
+    color: #B8E89A;
+}
+
+html[data-theme="dark"] .cbp-btn--primary {
+    background: #7FCC5C;
+    color: #0F1A07;
+}
+
+html[data-theme="dark"] .cbp-btn--primary:hover {
+    background: #9BE076;
+}
+
+html[data-theme="dark"] .cbp-btn--ghost {
+    background: #1C2530;
+    color: #E8ECF1;
+    border-color: #4B5563;
+}
+
+html[data-theme="dark"] .cbp-btn--ghost:hover {
+    background: #232E3B;
+}

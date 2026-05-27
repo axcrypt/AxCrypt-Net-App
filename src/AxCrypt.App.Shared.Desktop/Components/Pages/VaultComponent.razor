@@ -13,7 +13,7 @@
 @inject FileDropService FileDropService
 @inject AppSettingsViewModel AppSettingsViewModel
 
-@if (!isVaultConfigured)
+@if (!ViewModel.IsVaultConfigured)
 {
     <div class="page-content-body-section vlt-body">
         <div class="vlt-empty">
@@ -30,6 +30,7 @@
 else
 {
     <div class="page-content-body-section vlt-body" @onclick="async () => await HideContextMenu()">
+
         <div class="vlt-title-action">
             <div style="display:flex; gap:20px;">
                 <button class="vault-share-key-btn" style="min-width: 125px;text-align: center;"
@@ -67,7 +68,14 @@ else
                 </div>
 
             </div>
-            <div class="vlt-content-area" style="position: relative; overflow-x: hidden; overflow-y: auto;">
+            <div class="vlt-content-area @(DropZoneActive ? "recent-files-card--dropping" : "")" style="position: relative; overflow-x: hidden; overflow-y: auto;">
+                @if (DropZoneActive)
+                {
+                    <div class="rf-drop-hint">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
+                        <span>Drop files/folders here to encrypt</span>
+                    </div>
+                }
                 @if (ViewModel.VaultItemList.Any())
                 {
                     <div class="vlt-list-folder">
@@ -287,27 +295,28 @@ else
 }
 @code {
     private bool isListView { get; set; } = true;
-    private bool isVaultConfigured { get; set; }
     private double contextMenuX { get; set; }
     private double contextMenuY { get; set; }
     private string flipContextMenu { get; set; } = "top left";
     private string flipTransform { get; set; } = "translateY(0)";
     private double contextMenuHeight { get; set; } = 210;
     private double contextMenuWidth { get; set; } = 180;
+    private bool DropZoneActive { get; set; }
 
     private string searchText = string.Empty;
     private string contextMenuType = "";
 
     protected override async Task OnInitializedAsync()
     {
-        isVaultConfigured = await ValidateVaultPath();
-
         ViewModel.OnUpdateViewState += async () => await UpdateUIState();
-        ViewModel.InitialUpdate();
+        await ValidateVaultPath();
 
         FileDropService.ResetOnDropped();
         FileDropService.OnFoldersDropped += async (folders) => await HandleDroppedFolders(folders);
         FileDropService.OnFilesDropped += async (files) => await HandleDroppedFiles(files);
+
+        FileDropService.OnFilesDraggedOver += async () => await HandleDraggedOverFiles();
+        FileDropService.OnFilesDragLeave += async () => await HandleDragLeave();
 
         base.OnInitialized();
     }
@@ -321,12 +330,12 @@ else
             ViewModel.VaultItemList = new List<VaultItem>();
 
             await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, "Your vault folder is currently unavailable. <br/><br/>It may have been moved or deleted. Please check the folder location or choose a different vault.");
-            Navigation.NavigateTo("/");
             return;
         }
 
         if (firstRender)
         {
+            ViewModel.CurrentFolder = ViewModel.VaultBasePath;
             ViewModel.LoadVaultItems();
         }
     }
@@ -407,7 +416,7 @@ else
 
         string pattern = System.Text.RegularExpressions.Regex.Escape(searchText);
         System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(pattern,
-System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
         int matchCount = 0;
         string highlighted = regex.Replace(System.Net.WebUtility.HtmlEncode(input), match =>
@@ -442,10 +451,37 @@ System.Text.RegularExpressions.RegexOptions.IgnoreCase);
         });
     }
 
+    // ═══════════════════════════════════════════
+    //  Drop zone
+    // ═══════════════════════════════════════════
+    private async Task HandleDroppedFiles(IList<string> files)
+    {
+        DropZoneActive = false;
+        if (!ViewModel.IsVaultConfigured)
+        {
+            return;
+        }
+
+        PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle,
+        Texts.VaultWarningsFileWillBeRemoved, DoNotShowAgainOptions.VaultDragDropWarning);
+        if (click == PopupButtons.Cancel)
+        {
+            return;
+        }
+        await ViewModel.EncryptDroppedFile(files);
+    }
+
     private async Task HandleDroppedFolders(IList<string> folders)
     {
+        DropZoneActive = false;
+        if (!ViewModel.IsVaultConfigured)
+        {
+            return;
+        }
+
         PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle,
-Texts.VaultWarningsFolderWillBeRemoved, DoNotShowAgainOptions.VaultDragDropWarning);
+        Texts.VaultWarningsFolderWillBeRemoved, DoNotShowAgainOptions.VaultDragDropWarning);
+
         if (click == PopupButtons.Cancel)
         {
             return;
@@ -454,15 +490,16 @@ Texts.VaultWarningsFolderWillBeRemoved, DoNotShowAgainOptions.VaultDragDropWarni
         await ViewModel.EncryptDroppedFolders(folders);
     }
 
-    private async Task HandleDroppedFiles(IEnumerable<string> files)
+    private async Task HandleDraggedOverFiles()
     {
-        PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle,
-Texts.VaultWarningsFileWillBeRemoved, DoNotShowAgainOptions.VaultDragDropWarning);
-        if (click == PopupButtons.Cancel)
-        {
-            return;
-        }
-        await ViewModel.EncryptDroppedFile(files);
+        DropZoneActive = true;
+        await UpdateUIState();
+    }
+
+    private async Task HandleDragLeave()
+    {
+        DropZoneActive = false;
+        await UpdateUIState();
     }
 
     private async Task OnItemDoubleClick(VaultItem file)
@@ -496,21 +533,23 @@ Texts.VaultWarningsFileWillBeRemoved, DoNotShowAgainOptions.VaultDragDropWarning
 
     public async Task<bool> ValidateVaultPath()
     {
-        string vaultfolder = New<UserSettings>().VaultEncryptDataPath;
-
-        if (string.IsNullOrEmpty(vaultfolder))
+        if (string.IsNullOrEmpty(ViewModel.VaultBasePath))
         {
             AppSettingsViewModel.ToggleVaultSettings();
             return false;
         }
 
-        if (!New<IDataContainer>(vaultfolder).IsAvailable)
+        if (!ViewModel.IsVaultConfigured)
         {
-            await New<IPopup>().ShowAsync(
+            PopupButtons result = await New<IPopup>().ShowAsync(
                 PopupButtons.Ok,
                 Texts.WarningTitle,
                 Texts.VaultMisConfigured
             );
+
+            if (result == PopupButtons.Ok)
+                AppSettingsViewModel.ToggleVaultSettings();
+
             return false;
         }
 

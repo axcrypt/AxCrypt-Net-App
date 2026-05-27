@@ -1,4 +1,5 @@
-﻿@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.Desktop.Components.Shared
+@using AxCrypt.App.Shared.Desktop.Data
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.App.Shared.ViewModels.SecuredMessenger
 @using AxCrypt.Content
@@ -6,85 +7,572 @@
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject NewSecMsgrViewModel newSecMsgrViewModel
-
 @inject IJSRuntime jsRuntime
+
+@*
+    Compose pane — full redesign. Three vertical bands:
+      1. Header   → title + Close button
+      2. Form     → To chips, visibility, message body
+      3. Action   → Discard (ghost) + Send (primary) row pinned bottom
+
+    The header and action rows are sticky so the message body can grow
+    inside a constrained scroll area instead of the whole compose pane
+    overflowing. Self-contained styling so the new chrome doesn't
+    depend on the legacy `.new-section` / `.new-message-form` SCSS.
+*@
 
 @if (newSecMsgrViewModel.IsVisible)
 {
-    <div class="new-section" id="new-message-section">
-        <div id="send-new-message-form" class="new-message-form">
-            <div class="main-padding">
-                <input type="hidden" id="reply-message-id-hidden" name="messengerId" @bind="newSecMsgrViewModel.ParentId" />
-                <input type="hidden" id="new-member-email-hidden" name="ReceiverEmails" @bind="newSecMsgrViewModel.ReceiverEmails" />
+    <section class="ncm" id="new-message-section" aria-label="New secured message">
 
-                <div class="new-page">
-                    <div class="medium-12 dk-hide" style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
-                        <NavLink href="messagelist"><img class="ico-close" src="" alt="close-img" /></NavLink>
-                        <span class="mb-page-title text-center">@Texts.NewMessageText</span>
-                        <button type="button" class="snd-mb snd-dk" style="background-color: transparent; margin-bottom: 0px; padding-right: 0px;">
-                        </button>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <input type="button" class="button success btn-large fnt-small btn-size snd-dk" id="send-button-desktop" value="Send" @onclick="async () => await SendAsync(newSecMsgrViewModel)" />
-                        <img class="dlt-img" style="float: right;" @onclick="DeleteDraftMessage" alt="Clear" title="Delete draft" />
-                    </div>
-                    <div class="" style="display:flex;padding:0 5px;">
-                        <label class="grey-clr" style="display: inline-block; padding-right: 5px;">@Texts.ToText</label>
-                        <div class="email-input-container">
-                            <div id="email-tags">
-                                @foreach (MessengerReceiver receiver in newSecMsgrViewModel.ReceiverList)
-                                {
-                                    <span class="email-tag"><span class="email-text" title="@receiver.EmailAddress">@receiver.EmailAddress</span> <span class="remove-email" @onclick="() => RemoveEmail(receiver.EmailAddress)">x</span></span>
-                                }
-                            </div>
-                            <input @bind="newSecMsgrViewModel.UserEmail"
-                                   @onkeydown="HandleKeyPress"
-                                   @oninput="OnEmailInput"
-                                   placeholder="@Texts.BusinessSubscriptionEmailPlaceholder"
-                                   type="text"
-                                   id="new-member-email" />
-                        </div>
-                    </div>
-                    @if (!string.IsNullOrEmpty(ErrorMessage))
+        @* ── Header ─────────────────────────────── *@
+        <header class="ncm-head">
+            <div class="ncm-head-text">
+                <h2 class="ncm-title">@Texts.NewMessageText</h2>
+                <p class="ncm-sub">End-to-end encrypted — only your recipients can read this.</p>
+            </div>
+            <button type="button" class="ncm-x" @onclick="DeleteDraftMessage" title="Discard draft" aria-label="Close">×</button>
+        </header>
+
+        @* ── Form ───────────────────────────────── *@
+        <div class="ncm-body">
+
+            @* To ── chips + input ───────────────── *@
+            <div class="ncm-field">
+                <label class="ncm-label" for="ncm-to-input">@Texts.ToText</label>
+                <div class="ncm-chips" @onclick="FocusToInput">
+                    @foreach (MessengerReceiver receiver in newSecMsgrViewModel.ReceiverList)
                     {
-                        <div class="error-message" style="padding-bottom: 5px;"> @ErrorMessage </div>
+                        <span class="ncm-chip" title="@receiver.EmailAddress">
+                            <span class="ncm-chip-text">@receiver.EmailAddress</span>
+                            <button type="button"
+                                    class="ncm-chip-x"
+                                    title="Remove"
+                                    @onclick="() => RemoveEmail(receiver.EmailAddress)"
+                                    @onclick:stopPropagation="true">×</button>
+                        </span>
                     }
-                    <hr class="dk-hide" />
-                    @if (IsBusinessUser())
-                    {
-                        <div class="grp-info dk-hide">
-                            @Texts.GroupInfoText <strong><NavLink @onclick="OpenGroupPage"> @Texts.GroupFeatureText </NavLink></strong> @Texts.GroupInfoText2 <NavLink @onclick="OpenGroupCreationPage"> @Texts.CreateGroupInfoTexts </NavLink>
-                        </div>
-                        <hr class="dk-hide" />
-                    }
+                    <input id="ncm-to-input"
+                           type="email"
+                           class="ncm-chip-input"
+                           placeholder="@(newSecMsgrViewModel.ReceiverList.Any() ? "Add another…" : Texts.BusinessSubscriptionEmailPlaceholder)"
+                           @ref="_toInputRef"
+                           @bind="newSecMsgrViewModel.UserEmail"
+                           @bind:event="oninput"
+                           @onkeydown="HandleKeyPress" />
+                </div>
+                <p class="ncm-hint">Press <kbd>Enter</kbd> or <kbd>,</kbd> to add each recipient.</p>
+            </div>
+
+            @if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                <div class="ncm-error" role="alert">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <span>@ErrorMessage</span>
+                </div>
+            }
+
+            @* Visibility ── dropdown ─────────────── *@
+            <div class="ncm-field ncm-field--inline">
+                <label class="ncm-label" for="ncm-visibility">@Texts.VisibilityText</label>
+                <div class="ncm-select-wrap">
+                    <select id="ncm-visibility"
+                            class="ncm-select"
+                            @bind="newSecMsgrViewModel.Visibility">
+                        @foreach (string visibility in newSecMsgrViewModel.MessageVisibilityList)
+                        {
+                            <option value="@visibility">@visibility</option>
+                        }
+                    </select>
+                    <svg class="ncm-select-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9" />
+                    </svg>
                 </div>
             </div>
-            <div class="grey-clr">
-                @Texts.VisibilityText
-                <select style="height: 35px; border-radius:5px" id="shareVisibilityOptions"
-                        class="button visble-button fnt-medium"
-                        @bind="newSecMsgrViewModel.Visibility">
-                    @foreach (string visibility in newSecMsgrViewModel.MessageVisibilityList)
-                    {
-                        <option value="@visibility">@visibility</option>
-                    }
-                </select>
 
-                @* <img class="" src="/images/default/IcoInfOld.svg" alt="" /> *@
+            @* Message body ───────────────────────── *@
+            <div class="ncm-field ncm-field--grow">
+                <label class="ncm-label" for="ncm-body">Message</label>
+                <textarea id="ncm-body"
+                          class="ncm-textarea"
+                          maxlength="100000"
+                          autofocus
+                          placeholder="@Texts.TypeYourMessageHerePlaceHolderText"
+                          @bind="newSecMsgrViewModel.EncryptedMessage"
+                          @bind:event="oninput"></textarea>
+                <p class="ncm-hint ncm-hint--right">@CharCount of 100,000</p>
             </div>
-            <div class="text-msg">
-                <InputTextArea @bind-Value="newSecMsgrViewModel.EncryptedMessage"
-                               id="secured-mess-body"
-                               maxlength="100000"
-                               autofocus
-                               placeholder=@Texts.TypeYourMessageHerePlaceHolderText />
 
-            </div>
+            @if (IsBusinessUser())
+            {
+                <div class="ncm-info">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
+                    <span>
+                        @Texts.GroupInfoText
+                        <NavLink @onclick="OpenGroupPage">@Texts.GroupFeatureText</NavLink>
+                        @Texts.GroupInfoText2
+                        <NavLink @onclick="OpenGroupCreationPage">@Texts.CreateGroupInfoTexts</NavLink>
+                    </span>
+                </div>
+            }
+
+            @* Hidden inputs kept so any external JS that reads them still works. *@
+            <input type="hidden" id="reply-message-id-hidden" name="messengerId" @bind="newSecMsgrViewModel.ParentId" />
+            <input type="hidden" id="new-member-email-hidden" name="ReceiverEmails" @bind="newSecMsgrViewModel.ReceiverEmails" />
         </div>
-    </div>
+
+        @* ── Action bar ─────────────────────────── *@
+        <footer class="ncm-foot">
+            <button type="button"
+                    class="ncm-btn ncm-btn--ghost"
+                    @onclick="DeleteDraftMessage"
+                    disabled="@newSecMsgrViewModel.IsSending">
+                Discard
+            </button>
+            <span class="ncm-foot-spacer"></span>
+            <button type="button"
+                    class="ncm-btn ncm-btn--primary"
+                    @onclick="async () => await SendAsync(newSecMsgrViewModel)"
+                    disabled="@(!CanSend)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+                Send securely
+            </button>
+        </footer>
+
+        @* ── Sending overlay (popup loader) ──────── *@
+        @if (newSecMsgrViewModel.IsSending)
+        {
+            <div class="ncm-send-popup">
+                <div class="ncm-send-popup-card">
+                    <AxLoader Mode="LoaderMode.Body" Message="Sending your secured message…" />
+                </div>
+            </div>
+        }
+    </section>
 }
+
+<style>
+    /* ── Shell ──────────────────────────────────── */
+    .ncm {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 0;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    /* Header */
+    .ncm-head {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 18px 20px 12px;
+        border-bottom: 1px solid #e5e7eb;
+        background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+    }
+
+    .ncm-head-text { flex: 1; min-width: 0; }
+
+    .ncm-title {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 700;
+        color: #111827;
+        line-height: 1.2;
+    }
+
+    .ncm-sub {
+        margin: 4px 0 0;
+        font-size: 12.5px;
+        color: #6b7280;
+    }
+
+    .ncm-x {
+        width: 30px;
+        height: 30px;
+        border: none;
+        background: transparent;
+        font-size: 22px;
+        line-height: 1;
+        color: #6b7280;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+    .ncm-x:hover { background: #f3f4f6; color: #111827; }
+
+    /* Body */
+    .ncm-body {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 16px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .ncm-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .ncm-field--inline {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .ncm-field--grow {
+        flex: 1;
+        min-height: 200px;
+    }
+
+    .ncm-label {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #111827;
+        margin: 0;
+    }
+
+    .ncm-hint {
+        margin: 0;
+        font-size: 11.5px;
+        color: #6b7280;
+    }
+    .ncm-hint--right { text-align: right; }
+
+    .ncm-hint kbd {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 11px;
+        background: #f3f4f6;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        padding: 0 5px;
+    }
+
+    /* Chips */
+    .ncm-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+        min-height: 46px;
+        padding: 6px 8px;
+        background: #fff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 10px;
+        cursor: text;
+        transition: border-color .12s, box-shadow .12s;
+    }
+
+    .ncm-chips:focus-within {
+        border-color: #48772C;
+        box-shadow: 0 0 0 3px rgba(72, 119, 44, .14);
+    }
+
+    .ncm-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 6px 3px 10px;
+        background: rgba(72, 119, 44, .10);
+        color: #2f5618;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 500;
+    }
+
+    .ncm-chip-text {
+        max-width: 220px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ncm-chip-x {
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        background: rgba(72, 119, 44, .15);
+        color: #2f5618;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .ncm-chip-x:hover { background: rgba(220, 38, 38, .18); color: #b91c1c; }
+
+    .ncm-chip-input {
+        flex: 1;
+        min-width: 160px;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 13px;
+        color: #111827;
+        padding: 4px 4px;
+    }
+
+    .ncm-chip-input::placeholder { color: #9ca3af; }
+
+    /* Visibility select */
+    .ncm-select-wrap {
+        position: relative;
+        flex: 1;
+    }
+
+    .ncm-select {
+        width: 100%;
+        appearance: none;
+        height: 36px;
+        padding: 0 30px 0 12px;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 8px;
+        background: #fff;
+        font-size: 13px;
+        color: #111827;
+        cursor: pointer;
+        transition: border-color .12s, box-shadow .12s;
+    }
+
+    .ncm-select:focus {
+        outline: none;
+        border-color: #48772C;
+        box-shadow: 0 0 0 3px rgba(72, 119, 44, .14);
+    }
+
+    .ncm-select-chev {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #6b7280;
+    }
+
+    /* Textarea */
+    .ncm-textarea {
+        flex: 1;
+        min-height: 180px;
+        width: 100%;
+        padding: 12px 14px;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 10px;
+        background: #fff;
+        font-size: 13.5px;
+        line-height: 1.55;
+        color: #111827;
+        resize: vertical;
+        font-family: inherit;
+        transition: border-color .12s, box-shadow .12s;
+    }
+
+    .ncm-textarea:focus {
+        outline: none;
+        border-color: #48772C;
+        box-shadow: 0 0 0 3px rgba(72, 119, 44, .14);
+    }
+
+    .ncm-textarea::placeholder { color: #9ca3af; }
+
+    /* Error + info banners */
+    .ncm-error,
+    .ncm-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 12.5px;
+        line-height: 1.45;
+    }
+
+    .ncm-error {
+        background: rgba(248, 113, 113, .12);
+        color: #b91c1c;
+        border: 1px solid rgba(248, 113, 113, .25);
+    }
+
+    .ncm-info {
+        background: rgba(96, 165, 250, .10);
+        color: #1e40af;
+        border: 1px solid rgba(96, 165, 250, .25);
+    }
+
+    .ncm-info svg, .ncm-error svg { flex-shrink: 0; margin-top: 2px; }
+    .ncm-info a { color: inherit; text-decoration: underline; font-weight: 600; }
+
+    /* Footer */
+    .ncm-foot {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px 14px;
+        border-top: 1px solid #e5e7eb;
+        background: #fff;
+    }
+
+    .ncm-foot-spacer { flex: 1; }
+
+    .ncm-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        height: 38px;
+        padding: 0 16px;
+        border-radius: 9px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: background .15s, color .15s, border-color .15s, transform .08s;
+    }
+
+    .ncm-btn:active { transform: scale(.98); }
+
+    .ncm-btn:disabled {
+        opacity: .55;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .ncm-btn--primary {
+        background: #48772C;
+        color: #fff;
+        box-shadow: 0 1px 2px rgba(72, 119, 44, .25);
+    }
+    .ncm-btn--primary:hover:not(:disabled) {
+        background: #3f6826;
+        box-shadow: 0 4px 12px rgba(72, 119, 44, .35);
+    }
+
+    .ncm-btn--ghost {
+        background: #fff;
+        color: #111827;
+        border-color: #d1d5db;
+    }
+    .ncm-btn--ghost:hover:not(:disabled) {
+        background: #f9fafb;
+        border-color: #9ca3af;
+    }
+
+    /* Sending overlay */
+    .ncm-send-popup {
+        position: absolute;
+        inset: 0;
+        z-index: 50;
+        background: rgba(15, 23, 42, .45);
+        backdrop-filter: blur(2px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: ncmIn .14s ease-out;
+    }
+
+    @@keyframes ncmIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    .ncm-send-popup-card {
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
+        padding: 18px 22px;
+        min-width: 240px;
+    }
+
+    /* ── Dark theme ─────────────────────────────── */
+    html[data-theme="dark"] .ncm                  { background: #1C2530; }
+    html[data-theme="dark"] .ncm-head             { background: linear-gradient(180deg, #232E3B 0%, #1C2530 100%); border-bottom-color: #2A3340; }
+    html[data-theme="dark"] .ncm-title            { color: #E8ECF1; }
+    html[data-theme="dark"] .ncm-sub,
+    html[data-theme="dark"] .ncm-hint             { color: #B5BCC7; }
+    html[data-theme="dark"] .ncm-hint kbd         { background: #232E3B; border-color: #3A4554; color: #B5BCC7; }
+    html[data-theme="dark"] .ncm-x                { color: #B5BCC7; }
+    html[data-theme="dark"] .ncm-x:hover          { background: #232E3B; color: #E8ECF1; }
+    html[data-theme="dark"] .ncm-label            { color: #E8ECF1; }
+    html[data-theme="dark"] .ncm-chips,
+    html[data-theme="dark"] .ncm-select,
+    html[data-theme="dark"] .ncm-textarea {
+        background: #161D26;
+        border-color: #3A4554;
+        color: #E8ECF1;
+    }
+    html[data-theme="dark"] .ncm-chips:focus-within,
+    html[data-theme="dark"] .ncm-select:focus,
+    html[data-theme="dark"] .ncm-textarea:focus {
+        border-color: #7FCC5C;
+        box-shadow: 0 0 0 3px rgba(127, 204, 92, .35);
+    }
+    html[data-theme="dark"] .ncm-chip-input       { color: #E8ECF1; }
+    html[data-theme="dark"] .ncm-chip-input::placeholder,
+    html[data-theme="dark"] .ncm-textarea::placeholder { color: #7A8494; }
+    html[data-theme="dark"] .ncm-chip {
+        background: rgba(127, 204, 92, .14);
+        color: #B8E89A;
+    }
+    html[data-theme="dark"] .ncm-chip-x {
+        background: rgba(127, 204, 92, .18);
+        color: #B8E89A;
+    }
+    html[data-theme="dark"] .ncm-chip-x:hover {
+        background: rgba(248, 113, 113, .22);
+        color: #FCA5A5;
+    }
+    html[data-theme="dark"] .ncm-select-chev      { color: #B5BCC7; }
+    html[data-theme="dark"] .ncm-foot             { background: #1C2530; border-top-color: #2A3340; }
+    html[data-theme="dark"] .ncm-btn--primary     { background: #7FCC5C; color: #0F1A07; }
+    html[data-theme="dark"] .ncm-btn--primary:hover:not(:disabled) { background: #9BE076; }
+    html[data-theme="dark"] .ncm-btn--ghost {
+        background: #1C2530;
+        color: #E8ECF1;
+        border-color: #4B5563;
+    }
+    html[data-theme="dark"] .ncm-btn--ghost:hover:not(:disabled) { background: #232E3B; }
+    html[data-theme="dark"] .ncm-error            { background: rgba(248,113,113,.14); color: #FCA5A5; border-color: rgba(248,113,113,.32); }
+    html[data-theme="dark"] .ncm-info             { background: rgba(96,165,250,.14); color: #93C5FD; border-color: rgba(96,165,250,.32); }
+    html[data-theme="dark"] .ncm-send-popup-card  { background: #1F2937; box-shadow: 0 20px 50px rgba(0,0,0,.55); }
+</style>
+
 @code {
     private string ErrorMessage { get; set; } = null!;
+    private ElementReference _toInputRef;
+
+    /// <summary>
+    /// Computed character count for the message-length hint. Pulled into a
+    /// property so the formatter call doesn't pollute the markup.
+    /// </summary>
+    private string CharCount => (newSecMsgrViewModel.EncryptedMessage?.Length ?? 0).ToString("N0");
+
+    /// <summary>
+    /// Gate the Send button — at least one recipient + non-empty body, not
+    /// already in flight.
+    /// </summary>
+    private bool CanSend =>
+        !newSecMsgrViewModel.IsSending
+        && newSecMsgrViewModel.ReceiverList.Any()
+        && !string.IsNullOrWhiteSpace(newSecMsgrViewModel.EncryptedMessage);
 
     protected override void OnInitialized()
     {
@@ -92,17 +580,10 @@
         base.OnInitialized();
     }
 
-    private void OnEmailInput(ChangeEventArgs e)
+    /// <summary>Click anywhere on the chips row routes focus into the input.</summary>
+    private async Task FocusToInput()
     {
-        if (!string.IsNullOrEmpty(e.Value?.ToString()!))
-        {
-            return;
-        }
-
-        if (!string.IsNullOrWhiteSpace(ErrorMessage))
-        {
-            ErrorMessage = null;
-        }
+        try { await _toInputRef.FocusAsync(); } catch { }
     }
 
     private void HandleKeyPress(KeyboardEventArgs e)
@@ -112,7 +593,6 @@
             if (!string.IsNullOrWhiteSpace(newSecMsgrViewModel.UserEmail))
             {
                 string trimmedEmail = newSecMsgrViewModel.UserEmail.Trim();
-
                 AddEmail(trimmedEmail);
             }
         }
@@ -125,7 +605,8 @@
             return;
         }
 
-        newSecMsgrViewModel.ReceiverList = newSecMsgrViewModel.ReceiverList.Where(su => su.EmailAddress.ToLower() != email.ToLower()).ToList();
+        newSecMsgrViewModel.ReceiverList = newSecMsgrViewModel.ReceiverList
+            .Where(su => su.EmailAddress.ToLower() != email.ToLower()).ToList();
         newSecMsgrViewModel.ReceiverEmails = string.Join(",", newSecMsgrViewModel.ReceiverList.Select(su => su.EmailAddress));
     }
 
@@ -147,10 +628,13 @@
         newSecMsgrViewModel.ReceiverList.Add(new MessengerReceiver { EmailAddress = email, Read = DateTime.MinValue });
         newSecMsgrViewModel.ReceiverEmails = string.Join(",", newSecMsgrViewModel.ReceiverList.Select(su => su.EmailAddress));
         newSecMsgrViewModel.UserEmail = "";
+        ErrorMessage = "";
     }
 
     private async Task SendAsync(NewSecMsgrViewModel newSecMsgrViewModel)
     {
+        // If the user typed an address but didn't press Enter, add it as a
+        // chip before sending so they don't lose the recipient.
         if (!string.IsNullOrWhiteSpace(newSecMsgrViewModel.UserEmail))
         {
             AddEmail(newSecMsgrViewModel.UserEmail);
@@ -162,7 +646,10 @@
     private void DeleteDraftMessage()
     {
         newSecMsgrViewModel.UserEmail = "";
-        newSecMsgrViewModel.IsVisible = !newSecMsgrViewModel.IsVisible;
+        newSecMsgrViewModel.ReceiverList = new List<MessengerReceiver>();
+        newSecMsgrViewModel.ReceiverEmails = "";
+        newSecMsgrViewModel.EncryptedMessage = "";
+        newSecMsgrViewModel.IsVisible = false;
         newSecMsgrViewModel.UpdateViewState();
     }
 
@@ -184,10 +671,6 @@
     void UpdateState()
     {
         ErrorMessage = "";
-
-        InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });
+        InvokeAsync(() => StateHasChanged());
     }
 }

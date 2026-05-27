@@ -25,6 +25,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
         public bool IsSearchResultVisible { get; set; } = false;
         public string SearchQuery { get; set; } = string.Empty;
         public string selectedTab { get; set; } = "";
+
         public bool IsVisible
         {
             get { return _isVisible; }
@@ -116,7 +117,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
 
         private ShareKeyViewModel? _sharekeyViewModel = shareKeyViewModel;
 
-        private FileProviderSelectionViewModel _fileProviderSelectionViewModel = fileProviderSelectionViewModel;
+        public FileProviderSelectionViewModel FileProviderSelectionViewModel = fileProviderSelectionViewModel;
 
         private UpgradeSubscriptionViewModel _upgradeViewModel = AxCServiceProviderExtension.UpgradeSubscriptionViewModel!;
 
@@ -135,8 +136,8 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             CurrentFolder = _fileProviderService.PageTitle;
             SelectedFileOperation = _fileProviderService.SelectedFileOperation;
             Files = new ObservableCollection<FilePickerItemViewModel>(_fileProviderService.Files);
-            SelectedProviderImage = _fileProviderSelectionViewModel.SelectedFileProvider?.Image ?? "";
-            SelectedCloudProvider = _fileProviderSelectionViewModel.SelectedFileProvider!.Value;
+            SelectedProviderImage = FileProviderSelectionViewModel.SelectedFileProvider?.Image ?? "";
+            SelectedCloudProvider = FileProviderSelectionViewModel.SelectedFileProvider!.Value;
 
             MultiSelectEnabled = false;
             SelectedFiles = new List<FilePickerItemViewModel>();
@@ -237,7 +238,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             await _fileProviderService.ListSharedFilesAsync();
             Files = new ObservableCollection<FilePickerItemViewModel>(_fileProviderService.Files);
         }
-        
+
         public async Task GetSharedWithFileListAsync()
         {
             await _fileProviderService.ListSharedWithFilesAsync();
@@ -377,9 +378,11 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
                 case "all":
                     await NavigateBackToPath(CurrentFolderID ?? "root");
                     break;
+
                 case "sharedWithMe":
                     await GetSharedWithFileListAsync();
                     break;
+
                 case "sharedByMe":
                     await GetSharedByFileListAsync();
                     break;
@@ -426,7 +429,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             }
         }
 
-        public async Task NavigateBackToPath(string folderId)
+        public async Task NavigateBackToPath(string folderId = "root")
         {
             SelectedFiles.Clear();
             MultiSelectEnabled = false;

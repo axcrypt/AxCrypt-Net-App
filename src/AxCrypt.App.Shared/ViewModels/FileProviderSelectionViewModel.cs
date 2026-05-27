@@ -78,24 +78,21 @@ public class FileProviderSelectionViewModel : ViewModelBase
             new FileProviderItem(
                 Texts.KnownFolderNameGoogleDrive,
                 AxCrypt.Core.IO.FileProvider.GoogleDrive,
-                "ggldrv-icon",
-                New<FileProvidersUserAccessInfo>().GoogleDriveAccessInfo?.Any() ?? false
+                "ggldrv-icon"
             )
         );
         EncryptableFileProviders.Add(
             new FileProviderItem(
                 Texts.KnownFolderNameDropbox,
                 AxCrypt.Core.IO.FileProvider.DropBox,
-                "drpbx-icon",
-                New<FileProvidersUserAccessInfo>().DropBoxAccessInfo?.Any() ?? false
+                "drpbx-icon"
             )
         );
         EncryptableFileProviders.Add(
             new FileProviderItem(
                 Texts.KnownFolderNameOneDrive,
                 AxCrypt.Core.IO.FileProvider.OneDrive,
-                "onedrv-icon",
-                New<FileProvidersUserAccessInfo>().OneDriveAccessInfo?.Any() ?? false
+                "onedrv-icon"
             )
         );
 

@@ -303,14 +303,76 @@ public class AppSettingsViewModel : ViewModelBase
 
     public void ToggleFindFiles() => UpdateFindFileMode(!New<UserSettings>().FindFileMode);
 
-    public void FilePropertiesDateModified(EventArgs e)
+    /// <summary>
+    /// Toggle "encrypt date modified" — same pattern as AES-256 auto-upgrade:
+    /// turning ON requires the sign-in password verifier; turning OFF is
+    /// allowed without re-auth. The bound UI flag (<see cref="IsDateModifiedOn"/>)
+    /// is flipped only after the underlying setting actually changes so the
+    /// checkbox can't drift from the real state when verification fails.
+    /// </summary>
+    public async Task FilePropertiesDateModifiedAsync()
     {
-        New<UserSettings>().EncryptFilePropertiesDateModified = !IsDateModifiedOn;
+        bool wantOn = !IsDateModifiedOn;
+
+        if (!wantOn)
+        {
+            New<UserSettings>().EncryptFilePropertiesDateModified = false;
+            IsDateModifiedOn = false;
+            UpdateViewState();
+            return;
+        }
+
+        if (!await New<IVerifySignInPassword>().Verify(Texts.ChangeOptionGenericWarning))
+        {
+            // Verification cancelled — keep the off state and refresh the UI
+            // so any checkbox the user mid-clicked snaps back.
+            IsDateModifiedOn = false;
+            UpdateViewState();
+            return;
+        }
+
+        New<UserSettings>().EncryptFilePropertiesDateModified = true;
+        IsDateModifiedOn = true;
+        UpdateViewState();
     }
 
-    public void FilePropertiesFileName(EventArgs e)
+    /// <summary>Synchronous alias kept so existing markup that wires <c>@onclick</c>
+    /// to a void handler still compiles. Internally it fires the async path.</summary>
+    public async void FilePropertiesDateModified(EventArgs e)
     {
-        New<UserSettings>().EncryptFilePropertiesFileName = !IsFileNameOn;
+        await FilePropertiesDateModifiedAsync();
+    }
+
+    /// <summary>
+    /// Toggle "encrypt filename" — same flow as above.
+    /// </summary>
+    public async Task FilePropertiesFileNameAsync()
+    {
+        bool wantOn = !IsFileNameOn;
+
+        if (!wantOn)
+        {
+            New<UserSettings>().EncryptFilePropertiesFileName = false;
+            IsFileNameOn = false;
+            UpdateViewState();
+            return;
+        }
+
+        if (!await New<IVerifySignInPassword>().Verify(Texts.ChangeOptionGenericWarning))
+        {
+            IsFileNameOn = false;
+            UpdateViewState();
+            return;
+        }
+
+        New<UserSettings>().EncryptFilePropertiesFileName = true;
+        IsFileNameOn = true;
+        UpdateViewState();
+    }
+
+    public async void FilePropertiesFileName(EventArgs e)
+    {
+        await FilePropertiesFileNameAsync();
     }
 
     public async void InviteUser(EventArgs e)

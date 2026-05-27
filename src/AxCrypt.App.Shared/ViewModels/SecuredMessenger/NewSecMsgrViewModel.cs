@@ -77,6 +77,15 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 
         public event Action<SecureMsgrFilterTab>? OnTabUpdateViewState;
 
+        /// <summary>
+        /// Toggled around <see cref="SentMessageAsync"/> so the New composer
+        /// can paint a popup AxLoader card while the message is in flight.
+        /// Distinct from <see cref="ProcessIndicator"/>'s global scrim — this
+        /// one lives inside the compose panel and keeps the rest of the
+        /// messenger interactive.
+        /// </summary>
+        public bool IsSending { get; private set; }
+
         public void TapUpdateViewState()
         {
             OnTabUpdateViewState?.Invoke(SelectedTab);
@@ -96,10 +105,32 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
                 return;
             }
 
-            bool result = false;
-            using (ProcessIndicator indicator = new ProcessIndicator())
+            if (IsSending)
             {
-                result = await _msgService.SentMessageAsync(newSecMsgrViewModel);
+                // Re-entrancy guard — repeated Send clicks would queue
+                // duplicate sends and look like a hang.
+                return;
+            }
+
+            IsSending = true;
+            UpdateViewState();
+            bool result = false;
+            try
+            {
+                using (ProcessIndicator indicator = new ProcessIndicator())
+                {
+                    result = await _msgService.SentMessageAsync(newSecMsgrViewModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                AxCrypt.App.Shared.Helpers.AxCServiceProviderExtension.ErrorReportService?.Report(
+                    ex, "Sending message");
+            }
+            finally
+            {
+                IsSending = false;
+                UpdateViewState();
             }
 
             if (result)

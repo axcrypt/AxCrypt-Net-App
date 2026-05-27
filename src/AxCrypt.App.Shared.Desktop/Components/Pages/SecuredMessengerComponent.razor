@@ -82,41 +82,150 @@
 
         </div>
         <div class="medium-12 columns">
-            <div id="All" class="tabcontent">
-                <div class="row">
-                    <div class="tab-sec medium-9 columns">
-                        <div id="tab-header">
-                            <a class="sub-head-link unread-text @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "active" : "")"
-                            @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox, Guid.Empty)" id="inbox-tab">
-                                @Texts.InboxText @* <span id="inbox-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? messageCount : ""))</span> *@
-                            </a>
-                            <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "tab-selected" : "")">
-                        </div>
-                        <div id="tab-header">
-                            <a class="sub-head-link @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "active" : "")"
-                            @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent, Guid.Empty)" id="sent-tab">
-                                @Texts.SentText @* <span id="sent-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? messageCount : ""))</span> *@
-                            </a>
-                            <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "tab-selected" : "")">
-                        </div>
-                        <div id="tab-header">
-                            <a class="sub-head-link unread-text @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "active" : "")"
-                            @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread, Guid.Empty)" id="unread-tab">
-                                @Texts.UnReadText @* <span id="unread-message-count">(@(SecuredMessengerModel.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? messageCount : ""))</span> *@
-                            </a>
-                            <hr style="display:none;" class="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "tab-selected" : "")">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @* Filter tabs — Inbox / Sent / Unread.
+               Previous markup used `id="tab-header"` three times (invalid),
+               wrapped each tab in its own div, and carried hidden <hr>
+               elements that did nothing. Replaced with a flat <nav role="tablist">
+               of three buttons so the layout is one strip and selection
+               state is driven by a single `.smx-filter-tab--active` class. *@
+            <nav class="smx-filter-tabs" role="tablist" aria-label="Message filter">
+                <button type="button"
+                        class="smx-filter-tab @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox ? "smx-filter-tab--active" : "")"
+                        role="tab"
+                        aria-selected="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox)"
+                        @onclick="() => SetActiveTab(SecureMsgrFilterTab.Inbox, Guid.Empty)"
+                        id="inbox-tab">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+                        <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z" />
+                    </svg>
+                    <span>@Texts.InboxText</span>
+                </button>
+                <button type="button"
+                        class="smx-filter-tab @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "smx-filter-tab--active" : "")"
+                        role="tab"
+                        aria-selected="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent)"
+                        @onclick="() => SetActiveTab(SecureMsgrFilterTab.Sent, Guid.Empty)"
+                        id="sent-tab">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <line x1="22" y1="2" x2="11" y2="13" />
+                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                    <span>@Texts.SentText</span>
+                </button>
+                <button type="button"
+                        class="smx-filter-tab @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "smx-filter-tab--active" : "")"
+                        role="tab"
+                        aria-selected="@(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread)"
+                        @onclick="() => SetActiveTab(SecureMsgrFilterTab.Unread, Guid.Empty)"
+                        id="unread-tab">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9" />
+                        <circle cx="12" cy="12" r="3" fill="currentColor" />
+                    </svg>
+                    <span>@Texts.UnReadText</span>
+                </button>
+            </nav>
             <div id="search-message-list" class="parent-container">
-                <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
-
                 <AxCrypt.App.Shared.Desktop.Components.SecuredMessenger.Body />
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    /* Messenger filter strip — one flat row of three pill-style buttons
+       sharing a soft underline. Replaces the old 3-div / 3-hr layout
+       that produced inconsistent spacing and duplicate IDs. */
+    .smx-filter-tabs {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 6px 10px 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .smx-filter-tab {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: transparent;
+        border: none;
+        padding: 8px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #6b7280;
+        cursor: pointer;
+        border-radius: 8px 8px 0 0;
+        transition: color .12s, background .12s;
+    }
+
+    .smx-filter-tab svg {
+        flex-shrink: 0;
+        opacity: .75;
+        transition: opacity .12s;
+    }
+
+    .smx-filter-tab:hover {
+        color: #111827;
+        background: rgba(72, 119, 44, .06);
+    }
+
+    .smx-filter-tab:hover svg {
+        opacity: 1;
+    }
+
+    .smx-filter-tab--active {
+        color: #48772C;
+    }
+
+    .smx-filter-tab--active svg {
+        opacity: 1;
+    }
+
+    /* Active-tab underline — drawn as a thicker bar that sits flush with
+       the bottom border so the tab feels anchored to the list below. */
+    .smx-filter-tab--active::after {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: -1px;
+        height: 2.5px;
+        background: #48772C;
+        border-radius: 2px;
+    }
+
+    html[data-theme="dark"] .smx-filter-tabs {
+        border-bottom-color: #2A3340;
+    }
+
+    html[data-theme="dark"] .smx-filter-tab {
+        color: #B5BCC7;
+    }
+
+    html[data-theme="dark"] .smx-filter-tab:hover {
+        color: #E8ECF1;
+        background: rgba(127, 204, 92, .12);
+    }
+
+    html[data-theme="dark"] .smx-filter-tab--active {
+        color: #B8E89A;
+    }
+
+    html[data-theme="dark"] .smx-filter-tab--active::after {
+        background: #7FCC5C;
+    }
+
+    /* Tighten the wrapper around the list so the new filter strip and
+       list pane sit flush together — the old `parent-container` margin
+       added an unwanted gap below the tabs. */
+    #search-message-list.parent-container {
+        margin-top: 0;
+        padding-top: 0;
+    }
+</style>
 
 @code {
     private SecureMsgrFilterTab activeTab = SecureMsgrFilterTab.Inbox;

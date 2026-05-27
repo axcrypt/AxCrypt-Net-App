@@ -373,7 +373,7 @@ function IgnoreClosePopupOnPopupActions(popupId, targetobj) {
     }
 
     var offsetParent = targetobj.parentElement.offsetParent;
-    if (offsetParent === null) {
+    if (offsetParent === undefined || offsetParent === null) {
         return false;
     }
 
@@ -382,7 +382,7 @@ function IgnoreClosePopupOnPopupActions(popupId, targetobj) {
     }
 
     offsetParent = offsetParent.offsetParent;
-    if (offsetParent === null) {
+    if (offsetParent === undefined || offsetParent === null) {
         return false;
     }
 
