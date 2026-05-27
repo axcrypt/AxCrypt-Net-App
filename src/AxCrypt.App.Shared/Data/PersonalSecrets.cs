@@ -184,12 +184,10 @@ public static class PersonalSecrets
         await SecretsFacade.ProtectAsync(secret);
         if (ViewModelHelper.CanUpdateFreeUserNewSecretCount())
         {
-            New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).UpdateFreeUserSecretsCount();
-            await New<UserEntitlementService>().InsertUserUsageCount(LimitedCapability.CreateSecret, New<AccountStatusViewModel>().SubscriptionLevel);
             IFeatureUsageProvider? usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
             if (usage != null)
             {
-                usage.UpdateUsageCount(FeatureKey.PasswordEntry);
+                await usage.RecordUsageAsync(FeatureKey.PasswordEntry);
             }
         }
         return true;

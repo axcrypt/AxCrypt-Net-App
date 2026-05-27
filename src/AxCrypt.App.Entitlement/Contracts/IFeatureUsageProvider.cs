@@ -51,9 +51,6 @@ public interface IFeatureUsageProvider
     /// <summary>Latest usage + cap for a feature. Always returns a valid value.</summary>
     FeatureUsage GetUsage(FeatureKey feature);
 
-    /// <summary>Latest usage + cap for a feature. Always returns a valid value.</summary>
-    void UpdateUsageCount(FeatureKey feature, int increment = 1);
-
     /// <summary>Convenience check — true when the user has remaining allowance.</summary>
     bool CanUse(FeatureKey feature) => !GetUsage(feature).IsExhausted;
 

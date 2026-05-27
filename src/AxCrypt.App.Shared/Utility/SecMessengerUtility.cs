@@ -1,5 +1,9 @@
 ﻿using AxCrypt.Api;
 using AxCrypt.Api.Model;
+using AxCrypt.App.Entitlement.Contracts;
+using AxCrypt.App.Entitlement.Services;
+using AxCrypt.App.Shared.Helpers;
+using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
@@ -13,6 +17,7 @@ public static class SecMessengerUtility
     private static readonly int MaxSendUsersAllowedFree = 1;
     private static readonly int MaxSendUsersAllowedPremium = 10;
     private static readonly int MaxSendUsersAllowedBusiness = 20;
+    private static IFeatureUsageProvider? usage;
 
     public static int MaxSendUserCount(SubscriptionLevel subscriptionLevel)
     {
@@ -48,7 +53,8 @@ public static class SecMessengerUtility
             return true;
         }
 
-        if (New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).FreeUserSendMessageCount < MaxMessageCreationAllowed)
+        usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
+        if (usage.GetUsage(FeatureKey.SecuredMessage).Remaining > 0)
         {
             return true;
         }
@@ -56,14 +62,15 @@ public static class SecMessengerUtility
         return false;
     }
 
-    public static bool CanUpdateFreeUserCount()
+    public static bool CanUpdateFreeUserCount(SubscriptionLevel subscriptionLevel)
     {
         if (New<LicensePolicy>().Capabilities.Has(LicenseCapability.SendUnlimitedMessages))
         {
             return false;
         }
 
-        if (New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).FreeUserSendMessageCount < MaxMessageCreationAllowed)
+        usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
+        if (usage.GetUsage(FeatureKey.SecuredMessage).Remaining > 0)
         {
             return true;
         }

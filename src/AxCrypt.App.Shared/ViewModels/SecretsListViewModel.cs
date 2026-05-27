@@ -84,8 +84,6 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
         }
 
         HasPaidSubscription = await ViewModelHelper.CheckFreeUserSecretsCountasync();
-        HasPaidSubscription = await New<UserEntitlementService>().UserHasCapability(LimitedCapability.CreateSecret, New<AccountStatusViewModel>().SubscriptionLevel);
-
         HasNoSecretsCapability = HasPaidSubscription ? false : true;
     }
 

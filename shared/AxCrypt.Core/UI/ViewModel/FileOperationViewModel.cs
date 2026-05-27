@@ -53,7 +53,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         public IdentityViewModel IdentityViewModel { get; private set; }
 
-        public IEnumerable<UserPublicKey> Recipients { get; set; } = null;
+        public IEnumerable<UserPublicKey>? Recipients { get; set; } = null;
 
         public FileOperationViewModel(FileSystemState fileSystemState, SessionNotify sessionNotify, KnownIdentities knownIdentities, ParallelFileOperation fileOperation, IStatusChecker statusChecker, IdentityViewModel identityViewModel)
         {

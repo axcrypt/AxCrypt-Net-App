@@ -97,11 +97,6 @@ namespace AxCrypt.App.Shared.Services
                 return false;
             }
 
-            if (!await New<UserEntitlementService>().UserHasCapability(LimitedCapability.SendSecuredMessages, _logOnViewModel.SubscriptionLevel))
-            {
-                return false;
-            }
-
             bool allowToAdd = SecMessengerUtility.AllowAddNewMessage(_logOnViewModel.SubscriptionLevel);
             if (!allowToAdd)
             {
@@ -126,16 +121,13 @@ namespace AxCrypt.App.Shared.Services
                 return false;
             }
 
-            await New<UserEntitlementService>().InsertUserUsageCount(LimitedCapability.SendSecuredMessages, _logOnViewModel.SubscriptionLevel);
-            IFeatureUsageProvider? usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
-            if (usage != null)
+            if (SecMessengerUtility.CanUpdateFreeUserCount(_logOnViewModel.SubscriptionLevel))
             {
-                usage.UpdateUsageCount(FeatureKey.SecuredMessage);
-            }
-
-            if (SecMessengerUtility.CanUpdateFreeUserCount())
-            {
-                New<LogOnIdentity, AdditionalUserSettings>(New<KnownIdentities>().DefaultEncryptionIdentity).UpdateFreeUserSecuredMessengerLimit();
+                IFeatureUsageProvider? usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
+                if (usage != null)
+                {
+                    await usage.RecordUsageAsync(FeatureKey.SecuredMessage);
+                }
             }
 
             return true;

@@ -8,6 +8,7 @@ using AxCrypt.App.Shared.Utility;
 using AxCrypt.Common;
 using AxCrypt.Content;
 using AxCrypt.Core.Crypto.Asymmetric;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
@@ -21,7 +22,7 @@ public class ShareKeyViewModel : ViewModelBase
     public LogOnViewModel LogOnViewModel;
     private SharingListViewModel? _viewModel;
     public EmailAddress? UserEmailForContextMenuAction;
-    private IEnumerable<string>? _shareKeyFileNameList;
+    private IFeatureUsageProvider? _userFeatureLimitUsage;
 
     public SubscriptionLevel SubscriptionLevel { get; set; }
     public bool IsWideScreen { get; set; }
@@ -54,6 +55,8 @@ public class ShareKeyViewModel : ViewModelBase
 
     public async Task SetSelectedFilesOrFolders(IEnumerable<string> filesOrFoldersPath, SharingListViewModel sharingListViewModel, bool isCloudFile = false)
     {
+        _userFeatureLimitUsage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
+
         EnableApplyButton = false;
         PageResult = DialogResult.None;
         SelectedFilesOrFolders = filesOrFoldersPath;
@@ -228,6 +231,12 @@ public class ShareKeyViewModel : ViewModelBase
 
     public async Task AddShareKeyUser()
     {
+        bool flowControl = AllowKeyShareWithRemainingLimits();
+        if (!flowControl)
+        {
+            return;
+        }
+
         if (DisableAddUserButton)
         {
             return;
@@ -296,6 +305,27 @@ public class ShareKeyViewModel : ViewModelBase
         LogOnViewModel.UIStateChanged();
     }
 
+    private bool AllowKeyShareWithRemainingLimits()
+    {
+        FeatureUsage keyShareUsage = _userFeatureLimitUsage!.GetUsage(FeatureKey.KeyShare);
+        if (keyShareUsage.IsExhausted)
+        {
+            New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "You have already exceeded the sharing limit. To key share more files, please upgrade your plan.", DoNotShowAgainOptions.None);
+            SetNewContactState();
+            return false;
+        }
+
+        int keyShareUserCount = ShareKeyUserList!.Count;
+        ShareKeyUserList = ShareKeyUserList!.Take(keyShareUsage.Remaining).ToList();
+        if (keyShareUserCount >= keyShareUsage.Remaining)
+        {
+            New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, $"You can only share with {keyShareUsage.Remaining} more user(s). If you want to share with additional users, please upgrade your plan.", DoNotShowAgainOptions.None);
+            return false;
+        }
+
+        return true;
+    }
+
     private EmailAddress ShareKeyUserEmailAddress()
     {
         if (EmailAddress.TryParse(KeySharingUserEmail.Trim(), out EmailAddress addedUserEmailAddress))
@@ -336,8 +366,7 @@ public class ShareKeyViewModel : ViewModelBase
 
     private void SetNewContactState()
     {
-        IFeatureUsageProvider? usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
-        int availableCount = usage.GetUsage(FeatureKey.KeyShare).Remaining;
+        int availableCount = _userFeatureLimitUsage!.GetUsage(FeatureKey.KeyShare).Remaining;
 
         if (!New<LicensePolicy>().Capabilities.Has(LicenseCapability.KeySharing) && availableCount == 0)
         {

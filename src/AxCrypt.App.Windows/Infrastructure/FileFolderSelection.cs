@@ -219,18 +219,15 @@ public class FileFolderSelection : IDataItemSelection
         }
 
         IEnumerable<string> selectedFiles = ofd.Select(file => file.FullPath);
-        if (e.FileSelectionType == FileSelectionType.Encrypt || e.FileSelectionType == FileSelectionType.KeySharingEncrypt || e.FileSelectionType == FileSelectionType.KeySharing)
+        int availableCount = await GetAvailableFileCount(e.FileSelectionType, New<AccountStatusViewModel>().SubscriptionLevel, ofd.Count());
+
+        if (availableCount <= 0)
         {
-            int availableCount = await GetAvailableFileCount(e.FileSelectionType, New<AccountStatusViewModel>().SubscriptionLevel, ofd.Count());
-
-            if (availableCount <= 0)
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            selectedFiles = selectedFiles.Take(availableCount);
+            e.Cancel = true;
+            return;
         }
+
+        selectedFiles = selectedFiles.Take(availableCount);
 
         foreach (string fileName in selectedFiles)
         {
@@ -250,18 +247,18 @@ public class FileFolderSelection : IDataItemSelection
                 break;
 
             case FileSelectionType.KeySharingEncrypt:
-                capability = LimitedCapability.StrongerEncryption;
+                capability = LimitedCapability.KeySharing;
                 break;
 
             case FileSelectionType.Wipe:
-                capability = LimitedCapability.StrongerEncryption;
+                capability = LimitedCapability.SecureWipe;
                 break;
 
             default:
-                break;
+                return selectedCount;
         }
 
-        return await New<UserEntitlementService>().GetRemainingCount(LimitedCapability.StrongerEncryption, subscriptionLevel, selectedCount);
+        return await New<UserEntitlementService>().GetRemainingCount(capability, subscriptionLevel, selectedCount);
     }
 
     private static async void HandleSaveAsFileSelection(FileSelectionEventArgs e)

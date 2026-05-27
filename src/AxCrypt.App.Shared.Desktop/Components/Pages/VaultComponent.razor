@@ -15,9 +15,16 @@
 
 @if (!isVaultConfigured)
 {
-    <div class="vlt-empty">
-        <img class="vlt-img-empty" title="Emtpy Vault" />
-        <p>No folder has been configured as a Vault. Please configure a Vault folder and try again.</p>
+    <div class="page-content-body-section vlt-body">
+        <div class="vlt-empty">
+            <img class="vlt-img-empty" title="Emtpy Vault" />
+            <p>No folder has been configured as a Vault. Please configure Vault folder and try again.</p>
+            <button class="button success border" style="min-width: 125px;text-align: center;"
+                    @onclick="(e) => AppSettingsViewModel.ToggleVaultSettings()">
+                <img class="" src="/images/vltsett.svg" alt="vault_settings_icon">
+                <span class="font-medium grey-clr">@Texts.VaultSettingsTitle</span>
+            </button>
+        </div>
     </div>
 }
 else

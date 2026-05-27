@@ -143,26 +143,6 @@ public class FeatureUsageAdapter : IFeatureUsageProvider
         return BuildUsage(feature, used: 0, isStale: true);
     }
 
-    public void UpdateUsageCount(FeatureKey feature, int increment = 1)
-    {
-        if (!_snapshot.TryGetValue(feature, out var usage) || usage == null)
-        {
-            usage = BuildUsage(feature, used: 0, isStale: true);
-            _snapshot[feature] = usage;
-        }
-
-        _snapshot[feature] = new FeatureUsage
-        {
-            Feature = usage.Feature,
-            Used = usage.Used + increment,
-            Limit = usage.Limit,
-            LastSyncedUtc = DateTime.UtcNow,
-            IsStale = usage.IsStale,
-        };
-
-        OnChange?.Invoke();
-    }
-
     public async Task<bool> TryConsumeAsync(FeatureKey feature, int count = 1)
     {
         if (count <= 0) return true;

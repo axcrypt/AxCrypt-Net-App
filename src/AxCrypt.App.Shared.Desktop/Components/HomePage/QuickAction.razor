@@ -44,11 +44,11 @@
 
         if (qa.Type == QuickActionType.Encrypt
             && userService.IsFreeTier
-            && usage.GetUsage(FeatureKey.FileEncryption).IsExhausted) return true;
+            && !usage.CanUse(FeatureKey.FileEncryption)) return true;
 
         if (qa.Type == QuickActionType.ShareKey
             && userService.IsFreeTier
-            && usage.GetUsage(FeatureKey.KeyShare).IsExhausted) return true;
+            && !usage.CanUse(FeatureKey.KeyShare)) return true;
 
         return false;
     }

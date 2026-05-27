@@ -1,10 +1,9 @@
 ﻿using AxCrypt.Abstractions;
+using AxCrypt.App.Entitlement.Contracts;
 using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Common;
-using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
-using AxCrypt.Core.Service.Secrets;
 using AxCrypt.Core.UI;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -14,6 +13,13 @@ public static class ViewModelHelper
 {
     private static readonly int MaxShareUsersAllowedPremium = 10;
     private static readonly int MaxShareUsersAllowedBusiness = 20;
+
+    private static IFeatureUsageProvider usage;
+
+    static ViewModelHelper()
+    {
+        usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
+    }
 
     public static IList<string> GetVisibilityTypeList()
     {
@@ -61,18 +67,8 @@ public static class ViewModelHelper
 
     public static async Task<bool> CheckFreeUserSecretsCountasync()
     {
-        freeUserCount = await New<UserEntitlementService>().GetRemainingCount(LimitedCapability.CreateSecret, New<AccountStatusViewModel>().SubscriptionLevel);
+        freeUserCount = usage.GetUsage(FeatureKey.PasswordEntry).Remaining;
         return freeUserCount > 0;
-    }
-
-    public static async Task<long> GetFreeUserSecretsCountAsync()
-    {
-        if (!string.IsNullOrEmpty(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address))
-        {
-            return await New<LogOnIdentity, ISecretsService>(New<KnownIdentities>().DefaultEncryptionIdentity).GetFreeUserSecretsCount(New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address);
-        }
-
-        return 0;
     }
 
     public static bool CanAddNewSecret()

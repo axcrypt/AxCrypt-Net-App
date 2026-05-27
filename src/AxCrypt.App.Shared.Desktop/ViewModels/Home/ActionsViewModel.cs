@@ -209,7 +209,7 @@ public class ActionsViewModel : ViewModelBase
             _mainViewModel!.SelectedRecentFiles,
             _fileOperationViewModel);
 
-        await _batchService.RecordMeteredUsageAsync(FeatureKey.FileEncryption);
+        await _batchService.RecordMeteredUsageAsync(FeatureKey.KeyShare);
         ReconcileFreeTierUsage();
     }
 
