@@ -1,19 +1,15 @@
-﻿/* ═══════════════════════════════════════════
-   Recent Files Context Menu (right-click + ⋮ dots)
-
-   IMPORTANT — this file deliberately uses `.rf-context-menu` and
-   NOT `.context-menu`. The legacy `_index.scss` defines a
-   `.context-menu` rule with `height: 80px; width: 120px;
-   position: absolute; float: right;` that's relied on by the
-   Share-Secret and Share-Key popovers. Importing both files in
-   the same bundle would let the legacy rule win source order
-   and force this menu into an 80×120 box. Keeping the namespace
-   separate sidesteps the conflict cleanly.
-
-   Anchored at the cursor by inline left/top — `clampToViewport`
-   (declared in wwwroot/index.html) nudges it back inside the
-   viewport on render so it can't spill off-screen.
-════════════════════════════════════════════ */
+﻿// Recent Files Context Menu (right-click + ⋮ dots)
+// IMPORTANT — this file deliberately uses `.rf-context-menu` and
+// NOT `.context-menu`. The legacy `_index.scss` defines a
+// `.context-menu` rule with `height: 80px; width: 120px;
+// position: absolute; float: right;` that's relied on by the
+// Share-Secret and Share-Key popovers. Importing both files in
+// the same bundle would let the legacy rule win source order
+// and force this menu into an 80×120 box. Keeping the namespace
+// separate sidesteps the conflict cleanly.
+// Anchored at the cursor by inline left/top — `clampToViewport`
+// (declared in wwwroot/index.html) nudges it back inside the
+// viewport on render so it can't spill off-screen.
 .rf-context-menu {
     position: fixed;
     z-index: 400;
@@ -47,7 +43,7 @@
     }
 }
 
-/* ── File header (name + size) ───────────── */
+// ── File header (name + size) ─────────────
 .rf-context-menu .ctx-file-header {
     display: flex;
     flex-direction: column;
@@ -74,7 +70,7 @@
     font-weight: 500;
 }
 
-/* ── Menu items ──────────────────────────── */
+// ── Menu items ────────────────────────────
 .rf-context-menu .ctx-item {
     width: 100%;
     display: flex;
@@ -113,7 +109,7 @@
     white-space: nowrap;
 }
 
-/* Danger items (Remove / Decrypt+Remove) */
+// Danger items (Remove / Decrypt+Remove)
 .rf-context-menu .ctx-item--danger {
     color: #b91c1c;
 }
@@ -131,7 +127,7 @@
     color: #b91c1c;
 }
 
-/* Locked (paid-gated) items */
+// Locked (paid-gated) items
 .rf-context-menu .ctx-item--locked {
     color: $text-muted;
 }
@@ -152,14 +148,14 @@
     flex-shrink: 0;
 }
 
-/* Divider between sections (e.g. before destructive items) */
+// Divider between sections (e.g. before destructive items)
 .rf-context-menu .ctx-divider {
     height: 1px;
     background: $border;
     margin: 6px 0;
 }
 
-/* Invisible click-outside / right-click-outside dismiss layer */
+// Invisible click-outside / right-click-outside dismiss layer
 .ctx-backdrop {
     position: fixed;
     inset: 0;

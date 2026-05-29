@@ -1,4 +1,5 @@
-﻿@using AxCrypt.App.Shared.Desktop.ViewModels.Main
+﻿@implements IDisposable
+@using AxCrypt.App.Shared.Desktop.ViewModels.Main
 @using AxCrypt.Content
 @using AxCrypt.Core.IO
 @using AxCrypt.Core.UI
@@ -6,70 +7,149 @@
 
 @inject VaultSettingsViewModel VaultSettingsViewModel
 
+@* ── Vault Settings dialog ─────────────────────────────── *@
 @if (VaultSettingsViewModel.IsVisible)
 {
-    <div id="vault-settings-modalDialog" class="vault-body modalDialog">
-        <div class="">
-            <div style="text-align:center;margin-bottom:18px;">
-                <img src="" class="vlt-title-img" alt="Vault encrypion settings" />
-                <br />
-                <label style="color: #494949;font-size: 20px;font-weight:800;">@Texts.VaultEncryptionSettings</label>
+    <div class="axd-backdrop" @onclick="VaultSettingsViewModel.Cancel">
+        <div class="axd-modal axd-modal--vault"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="axd-vault-title"
+             @onclick:stopPropagation>
+
+            <header class="axd-header">
+                <div class="axd-header-icon" aria-hidden="true">
+                    <img class="vlt-icon" title="vault_settings" />
+                </div>
+                <div class="axd-header-text">
+                    <h2 id="axd-vault-title" class="axd-title">@Texts.VaultEncryptionSettings</h2>
+                    <p class="axd-sub">Configure where and how your vault encrypts files</p>
+                </div>
+                <button type="button" class="axd-close"
+                        @onclick="VaultSettingsViewModel.Cancel"
+                        aria-label="Close">×</button>
+            </header>
+
+            <div class="axd-body">
+
+                @* Vault path *@
+                <div class="axd-field">
+                    <label class="axd-label" for="vault-path">@Texts.VaultLabelPromptVaultPath</label>
+                    <div class="axd-path-row">
+                        <input id="vault-path" type="text" class="axd-input"
+                               @bind-value="VaultSettingsViewModel.VaultEncryptDataPath" />
+                        <button type="button" class="axd-btn axd-btn--ghost"
+                                @onclick="async (e) => await VaultSettingsViewModel.AddSecuredFolder(e)">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+                            </svg>
+                            Browse
+                        </button>
+                    </div>
+                </div>
+
+                @* Toggles *@
+                <div class="axd-toggles">
+                    @* Hide filename toggle *@
+                    <div class="axd-toggle-row">
+                        <div>
+                            <div class="axd-toggle-label">@Texts.VaultLabelPromptHideName</div>
+                            <div class="axd-toggle-sub">Encrypt file names within the vault</div>
+                        </div>
+                        <label class="axd-switch">
+                            <input type="checkbox" @bind="VaultSettingsViewModel.VaultEncryptWithAutoRenameFiles" />
+                            <span class="axd-switch-track"></span>
+                        </label>
+                    </div>
+                </div>
             </div>
 
-            <span class="vault-question">@Texts.VaultLabelPromptVaultPath</span>
-            <div class="vault-store-location-sec">
-                <input class="input1" type="text" id="text-box" name="" @bind-value="VaultSettingsViewModel.VaultEncryptDataPath">
-                <input class="input2" type="button" id="Browse" value="Browse" name="" @onclick="async (e) => await VaultSettingsViewModel.AddSecuredFolder(e)">
-            </div>
-
-            <div class="vault-auto-enc-toggle-sec" style="display:none">
-                <span class="vault-question">@Texts.VaultLabelPromptAutoEncypt</span>
-                <input id="check" type="checkbox" @bind="VaultSettingsViewModel.AutoVaultEncryptSigninFiles">
-                <label for="check" class="vault-auto-enc-toggle-chckbx"></label>
-            </div>
-
-            <div class="vault-hide-filename-toggle-sec">
-                <span class="vault-question">@Texts.VaultLabelPromptHideName</span>
-                <input id="check-2" type="checkbox" @bind="VaultSettingsViewModel.VaultEncryptWithAutoRenameFiles">
-                <label for="check-2" class="vault-hide-filename-toggle-chckbx"></label>
-            </div>
-
-            <div style="text-align:center;margin:20px;">
-                <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => await ValidateVaultPath()" />
-                <input type="button" class="input1 onbuttom-cancel" id="sbox" value="Cancel" name="" @onclick="VaultSettingsViewModel.Cancel" />
-            </div>
-
+            <footer class="axd-footer">
+                <button type="button" class="axd-btn axd-btn--ghost"
+                        @onclick="VaultSettingsViewModel.Cancel">Cancel</button>
+                <button type="button" class="axd-btn axd-btn--primary"
+                        @onclick="async () => await ValidateVaultPath()">Confirm</button>
+            </footer>
         </div>
     </div>
 }
 
+@* ── Vault move-confirmation dialog ───────────────────── *@
 @if (_isVisible)
 {
-    <div id="vault-settings-modalDialog" class="vault-body modalDialog">
-        <div class="">
-            <div style="text-align:center;margin-bottom:18px;">
-                <img src="" class="vlt-pathchange-img" alt="Vault encrypion settings" />
-                <br />
-                <label style="color: #494949;font-size: 20px;font-weight:800;">@Texts.VaultChangeTitle</label>
-                <br />
-                <p>@Texts.VaultChangeMessage</p>
-            </div>
-            <div style="text-align:center;margin:20px;">
-                <input type="button" class="input2 onbutton-confirm" id="fbox" value="Confirm" name="" @onclick="async () => { CloseVaultConfirmPop(); await VaultSettingsViewModel.MoveVaulttoSecuredfolder(); }" />
-                <input type="button" class="input1 onbuttom-cancel" id="sbox" value="Cancel" name="" @onclick="CloseVaultConfirmPop" />
-            </div>
+    <div class="axd-backdrop" @onclick="CloseVaultConfirmPop">
+        <div class="axd-modal axd-modal--narrow"
+             role="alertdialog"
+             aria-modal="true"
+             aria-labelledby="axd-vaultchg-title"
+             @onclick:stopPropagation>
+
+            <header class="axd-header">
+                <div class="axd-header-icon axd-header-icon--warn" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                        <line x1="12" y1="9" x2="12" y2="13" />
+                        <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                </div>
+                <div class="axd-header-text">
+                    <h2 id="axd-vaultchg-title" class="axd-title">@Texts.VaultChangeTitle</h2>
+                    <p class="axd-sub">@Texts.VaultChangeMessage</p>
+                </div>
+                <button type="button" class="axd-close"
+                        @onclick="CloseVaultConfirmPop"
+                        aria-label="Close">×</button>
+            </header>
+
+            <footer class="axd-footer">
+                <button type="button" class="axd-btn axd-btn--ghost"
+                        @onclick="CloseVaultConfirmPop">Cancel</button>
+                <button type="button" class="axd-btn axd-btn--primary"
+                        @onclick="async () => { CloseVaultConfirmPop(); await VaultSettingsViewModel.MoveVaulttoSecuredfolder(); }">
+                    Confirm &amp; Move
+                </button>
+            </footer>
         </div>
     </div>
 }
+
 
 @code {
     private bool _isVisible = false;
 
+    // OnUpdateViewState is Action; OnDialogVisibilityChanged is
+    // Action<bool>. Match those signatures here, then fire-and-forget
+    // the async work inside the lambda so the Action signature holds.
+    // UpdateState() / UpdateAdvancedOptionsState() each marshal to the
+    // UI thread internally, so a discarded Task is safe.
+    private Action? _onUpdateViewState;
+    private Action<bool>? _onDialogVisibilityChanged;
+
     protected override void OnInitialized()
     {
-        VaultSettingsViewModel.OnUpdateViewState += async ()=> await UpdateState();
-        VaultSettingsViewModel.VaultSettingsDialog.OnDialogVisibilityChanged += async (isVisible) => await UpdateAdvancedOptionsState(isVisible);
+        _onUpdateViewState = () => _ = UpdateState();
+        _onDialogVisibilityChanged = (isVisible) => _ = UpdateAdvancedOptionsState(isVisible);
+        VaultSettingsViewModel.OnUpdateViewState += _onUpdateViewState;
+        VaultSettingsViewModel.VaultSettingsDialog.OnDialogVisibilityChanged += _onDialogVisibilityChanged;
         base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        if (_onUpdateViewState != null)
+        {
+            VaultSettingsViewModel.OnUpdateViewState -= _onUpdateViewState;
+            _onUpdateViewState = null;
+        }
+        if (_onDialogVisibilityChanged != null)
+        {
+            VaultSettingsViewModel.VaultSettingsDialog.OnDialogVisibilityChanged -= _onDialogVisibilityChanged;
+            _onDialogVisibilityChanged = null;
+        }
     }
 
     private async Task ValidateVaultPath()
@@ -94,8 +174,16 @@
 
     async Task UpdateAdvancedOptionsState(bool isVisible)
     {
-        VaultSettingsViewModel.IsVisible = isVisible;
-        await UpdateState();
+        // The dialog-visibility event can fire from any thread (e.g. the
+        // VM raises it from a background flow). Marshal onto the Blazor
+        // renderer's SynchronizationContext BEFORE mutating UI-bound
+        // state — otherwise we race the renderer reading IsVisible from
+        // the UI thread while a worker writes it here.
+        await InvokeAsync(() =>
+        {
+            VaultSettingsViewModel.IsVisible = isVisible;
+            StateHasChanged();
+        });
     }
 
     async Task UpdateState()

@@ -81,11 +81,11 @@
 
     private void OnPopupStateChanged() => InvokeAsync(StateHasChanged);
 
-    private void Close() => popupService.PaidGateOpen = false;
+    private void Close() => popupService.ClosePaidGate();
 
     private void OpenUpgradePage()
     {
-        popupService.PaidGateOpen = false;
+        popupService.ClosePaidGate();
         navigationManager.NavigateTo("/upgradePage");
     }
 }

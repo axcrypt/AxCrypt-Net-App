@@ -1,9 +1,18 @@
-﻿/* Badges */
+// ── Badges & status pills ─────────────────────────────────────────
+// Authoritative definitions for .badge, .icon-btn-sm, .view-all-btn.
+// FilesTable.scss augmented .badge with display/color/whitespace
+// properties needed in table context — merged here so there's
+// one source of truth.
+
 .badge {
     font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
+    font-weight: 700;
+    padding: 2px 9px;
     border-radius: 20px;
+    color: inherit;
+    line-height: 1.5;
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .badge--enc {
@@ -21,6 +30,11 @@
     color: $badge-shared-fg;
 }
 
+.badge--master-key {
+    background: #f5f3ff;
+    color: #6d28d9;
+}
+
 .icon-btn-sm {
     background: none;
     border: none;
@@ -31,12 +45,12 @@
     display: grid;
     place-items: center;
     transition: background .1s, color .1s;
-}
 
-    .icon-btn-sm:hover {
+    &:hover {
         background: $bg-page;
         color: $text-primary;
     }
+}
 
 .view-all-btn {
     margin-top: 14px;
@@ -54,8 +68,8 @@
     color: $brand-green;
     cursor: pointer;
     transition: background .15s;
-}
 
-    .view-all-btn:hover {
+    &:hover {
         background: $brand-green-lt;
     }
+}

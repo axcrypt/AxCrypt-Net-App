@@ -271,6 +271,10 @@ public class RecentFoldersViewModel : ViewModelBase
     {
         if (!folderPaths.Any()) return;
 
+        // Show the dialog shell immediately so the user sees it at once
+        // while CreateForFoldersAsync makes its API call in the background.
+        _sharekeyViewModel!.LogOnViewModel.ShareKeyDialog.Show();
+
         SharingListViewModel viewModel = await SharingListViewModel.CreateForFoldersAsync(folderPaths, Resolve.KnownIdentities.DefaultEncryptionIdentity);
         await _sharekeyViewModel!.SetSelectedFilesOrFolders(_mainViewModel.SelectedWatchedFolders.Select(e => e), viewModel);
 

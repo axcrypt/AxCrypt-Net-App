@@ -55,7 +55,7 @@
     .sec-msg-search:focus {
         outline: none;
         border-color: $ActnBgClr;
-        box-shadow: 0 0 0 3px rgba(72, 119, 44, 0.12);
+        box-shadow: 0 0 0 3px rgba($brand-green, 0.12);
     }
 
 #messenger-keyword {
@@ -901,7 +901,7 @@ textarea[readonly] {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #48772C;
+        background: $brand-green;
         color: #fff;
         font-size: 13px;
         font-weight: 700;
@@ -912,7 +912,7 @@ textarea[readonly] {
         width: 17px;
         height: 17px;
         cursor: pointer;
-        accent-color: #48772C;
+        accent-color: $brand-green;
     }
 
     .smx-msg-main {
@@ -941,7 +941,7 @@ textarea[readonly] {
         flex-shrink: 0;
         font-size: 10.5px;
         font-weight: 700;
-        color: #48772C;
+        color: $brand-green;
         background: #eaf3de;
         padding: 1px 7px;
         border-radius: 10px;
@@ -987,7 +987,7 @@ textarea[readonly] {
         width: 9px;
         height: 9px;
         border-radius: 50%;
-        background: #48772C;
+        background: $brand-green;
     }
 
     /* Unread → heavier name, darker meta. */
@@ -1449,4 +1449,311 @@ textarea[readonly] {
     overflow: hidden;
     text-overflow: ellipsis;
     word-wrap: break-word;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Secured Messenger — View message (.smv-*)
+   --------------------------------------------------------------
+   Modern card layout. Accent color comes from $brand-green so the
+   tier paint kicks in automatically (Premium #48772C, Business #000,
+   Free #48772C).
+════════════════════════════════════════════════════════════════ */
+
+.smv-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 4px;
+}
+
+.smv-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+    overflow: hidden;
+    transition: border-color .14s, box-shadow .14s;
+}
+.smv-card:hover {
+    border-color: rgba($brand-green, .35);
+    box-shadow: 0 4px 14px rgba($brand-green, .08);
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+.smv-card-head {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: start;
+    gap: 12px;
+    padding: 14px 16px 12px;
+    cursor: pointer;
+}
+
+.smv-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba($brand-green, .12);
+    color: $brand-green;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    flex-shrink: 0;
+}
+
+.smv-meta {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.smv-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.smv-label {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #9ca3af;
+    min-width: 28px;
+}
+
+.smv-email {
+    min-width: 0;
+    color: #111827;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.smv-email--to {
+    color: #374151;
+}
+
+.smv-more {
+    margin-left: 6px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    color: $brand-green;
+    background: rgba($brand-green, .10);
+}
+
+/* Optional visibility pills row */
+.smv-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.smv-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    color: $brand-green;
+    background: rgba($brand-green, .10);
+    border: 1px solid rgba($brand-green, .18);
+}
+.smv-pill--once {
+    color: #b45309;
+    background: #fef3c7;
+    border-color: #fde68a;
+}
+
+/* Action cluster (Reply / Delete / time) */
+.smv-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.smv-icon-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    color: #6b7280;
+    display: inline-grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background .12s, color .12s, border-color .12s, box-shadow .12s;
+}
+.smv-icon-btn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    color: #111827;
+}
+.smv-icon-btn--primary:hover {
+    background: rgba($brand-green, .10);
+    border-color: rgba($brand-green, .35);
+    color: $brand-green;
+}
+.smv-icon-btn--danger:hover {
+    background: rgba(220, 38, 38, .10);
+    border-color: rgba(220, 38, 38, .35);
+    color: #b91c1c;
+}
+
+.smv-actions > .smv-icon-btn + .smv-icon-btn {
+    /* Stack vertically — small offset between Reply and Delete. */
+    margin-top: 0;
+}
+
+.smv-time {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+
+/* ── Body ──────────────────────────────────────────────────────── */
+.smv-body {
+    border-top: 1px solid #f0f1f3;
+    background: #fafafa;
+}
+
+.smv-textarea {
+    width: 100%;
+    min-height: 140px;
+    max-height: 360px;
+    padding: 14px 16px;
+    border: none;
+    background: transparent;
+    color: #111827;
+    font-size: 13.5px;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+    font-family: inherit;
+}
+.smv-textarea:focus {
+    outline: none;
+}
+
+.smv-body--loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 22px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.smv-spinner {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba($brand-green, .25);
+    border-top-color: $brand-green;
+    animation: smvSpin .9s linear infinite;
+    display: inline-block;
+}
+
+@keyframes smvSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Responsive — narrow reader panes ─────────────────────────── */
+@media (max-width: 560px) {
+    .smv-card-head {
+        grid-template-columns: 36px 1fr;
+        row-gap: 10px;
+    }
+    .smv-actions {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .smv-time {
+        order: -1;
+        margin-right: auto;
+    }
+}
+
+/* ── Dark theme ────────────────────────────────────────────────── */
+html[data-theme="dark"] {
+    .smv-card {
+        background: #1c2530;
+        border-color: #2a3645;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    }
+    .smv-card:hover {
+        border-color: rgba($brand-green, .55);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, .45);
+    }
+
+    .smv-avatar {
+        background: rgba($brand-green, .22);
+        color: lighten($brand-green, 25%);
+    }
+
+    .smv-label { color: #b5bcc7; }
+    .smv-email { color: #e8ecf1; }
+    .smv-email--to { color: #cbd5e1; }
+    .smv-more {
+        background: rgba($brand-green, .22);
+        color: lighten($brand-green, 25%);
+    }
+
+    .smv-pill {
+        background: rgba($brand-green, .22);
+        border-color: rgba($brand-green, .45);
+        color: lighten($brand-green, 25%);
+    }
+    .smv-pill--once {
+        background: rgba(245, 158, 11, .18);
+        border-color: rgba(245, 158, 11, .35);
+        color: #fcd34d;
+    }
+
+    .smv-icon-btn {
+        background: #232e3b;
+        border-color: #3a4554;
+        color: #b5bcc7;
+    }
+    .smv-icon-btn:hover {
+        background: #2a3645;
+        border-color: #4b5563;
+        color: #e8ecf1;
+    }
+    .smv-icon-btn--primary:hover {
+        background: rgba($brand-green, .22);
+        border-color: rgba($brand-green, .55);
+        color: lighten($brand-green, 30%);
+    }
+    .smv-icon-btn--danger:hover {
+        background: rgba(248, 113, 113, .18);
+        border-color: rgba(248, 113, 113, .45);
+        color: #fca5a5;
+    }
+
+    .smv-time { color: #7a8494; }
+
+    .smv-body {
+        background: #18222d;
+        border-top-color: #2a3645;
+    }
+    .smv-textarea { color: #e8ecf1; }
+    .smv-body--loading { color: #b5bcc7; }
 }

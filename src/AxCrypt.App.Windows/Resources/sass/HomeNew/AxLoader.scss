@@ -1,20 +1,15 @@
-/* ═══════════════════════════════════════════
-   AxLoader — single brand loading-wheel
-   --------------------------------------------------------------
-   Two modes, both styled from this file:
-
-     .axl.axl--fullpage  → scrim + centered ring + tagline.
-                            Used during sign-in / resume-session
-                            (LoaderMode.FullPage)
-
-     .axl.axl--body      → inline ring, no scrim.
-                            Used inside page bodies — Password
-                            Manager, Secured Messenger, Notifications
-                            (LoaderMode.Body)
-
-   Single keyframe set keeps the brand identity identical across the
-   app — only the wrapper sizing / scrim differ.
-════════════════════════════════════════════ */
+// AxLoader — single brand loading-wheel
+// --------------------------------------------------------------
+// Two modes, both styled from this file:
+// .axl.axl--fullpage  → scrim + centered ring + tagline.
+// Used during sign-in / resume-session
+// (LoaderMode.FullPage)
+// .axl.axl--body      → inline ring, no scrim.
+// Used inside page bodies — Password
+// Manager, Secured Messenger, Notifications
+// (LoaderMode.Body)
+// Single keyframe set keeps the brand identity identical across the
+// app — only the wrapper sizing / scrim differ.
 
 .axl {
     display: flex;
@@ -22,7 +17,7 @@
     justify-content: center;
 }
 
-/* ── Stack: ring on top, optional message below ─── */
+// ── Stack: ring on top, optional message below ───
 .axl-stack {
     display: flex;
     flex-direction: column;
@@ -30,7 +25,7 @@
     gap: 14px;
 }
 
-/* ── Ring: SVG circle with a moving arc ─── */
+// ── Ring: SVG circle with a moving arc ───
 .axl-ring {
     position: relative;
     width: 64px;
@@ -45,7 +40,7 @@
 
 .axl-ring-track {
     fill: none;
-    stroke: rgba(72, 119, 44, 0.12); /* faint brand-green */
+    stroke: rgba(72, 119, 44, 0.12); // faint brand-green
     stroke-width: 5;
 }
 
@@ -54,7 +49,7 @@
     stroke: $brand-green;
     stroke-width: 5;
     stroke-linecap: round;
-    stroke-dasharray: 80 180; /* arc length / gap — gives the spinner look */
+    stroke-dasharray: 80 180; // arc length / gap — gives the spinner look
     stroke-dashoffset: 0;
     transform-origin: 32px 32px;
     animation: axl-arc-spin 1.1s linear infinite;
@@ -65,7 +60,7 @@
     to   { transform: rotate(360deg); }
 }
 
-/* ── Center key glyph: subtle pulse so it feels alive ─── */
+// ── Center key glyph: subtle pulse so it feels alive ───
 .axl-key {
     position: absolute;
     inset: 0;
@@ -90,7 +85,7 @@
     50%      { transform: scale(1.0);  opacity: 1;   }
 }
 
-/* ── Message below the ring ─── */
+// ── Message below the ring ───
 .axl-msg {
     font-size: 13px;
     font-weight: 500;
@@ -105,9 +100,7 @@
     font-weight: 400;
 }
 
-/* ════════════════════════════════════════════════════════════
-   Variant: FULL PAGE — scrim + centered ring
-   ──────────────────────────────────────────────────────────── */
+// Variant: FULL PAGE — scrim + centered ring
 .axl--fullpage {
     position: fixed;
     inset: 0;
@@ -139,9 +132,7 @@
     to   { opacity: 1; }
 }
 
-/* ════════════════════════════════════════════════════════════
-   Variant: BODY — inline, no scrim
-   ──────────────────────────────────────────────────────────── */
+// Variant: BODY — inline, no scrim
 .axl--body {
     width: 100%;
     min-height: 200px;

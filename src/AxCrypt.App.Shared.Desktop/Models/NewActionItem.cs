@@ -6,4 +6,5 @@ public class NewActionItem
     public string Description { get; set; } = string.Empty;
     public string IconSvg { get; set; } = string.Empty;
     public string Route { get; set; } = string.Empty;
+    public bool IsEnable { get; set; } = true;
 }

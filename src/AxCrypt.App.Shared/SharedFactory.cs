@@ -90,6 +90,7 @@ namespace AxCrypt.App.Shared
             TypeMap.Register.Singleton<IUpgradeVersionService>(() => new UpgradeVersionService());
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
             TypeMap.Register.Singleton<IUserNotificationService>(() => new UserNotificationApiService());
+            TypeMap.Register.Singleton<AxCryptUserAccountViewModel>(() => new AxCryptUserAccountViewModel());
 
             services.AddSingleton<DropBoxAccessInfo>();
             services.AddSingleton<OneDriveAccessInfo>();

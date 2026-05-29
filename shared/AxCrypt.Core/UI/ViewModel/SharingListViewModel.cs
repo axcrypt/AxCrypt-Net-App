@@ -90,8 +90,6 @@ namespace AxCrypt.Core.UI.ViewModel
             _identity = identity;
 
             InitializePropertyValues(sharedWith);
-            BindPropertyChangedEvents();
-            SubscribeToModelEvents();
         }
 
         public static async Task<SharingListViewModel> CreateForFilesAsync(IEnumerable<string> files, LogOnIdentity identity)
@@ -101,6 +99,11 @@ namespace AxCrypt.Core.UI.ViewModel
 
             IEnumerable<UserPublicKey> sharedWith = await GetAllPublicKeyRecipientsFromEncryptedFiles(files, identity);
             return new SharingListViewModel(files, sharedWith, identity);
+        }
+
+        public void UpdateFiles(IEnumerable<string> files)
+        {
+            _filesOrfolderPaths = files;
         }
 
         public static async Task<SharingListViewModel> CreateForFoldersAsync(IEnumerable<string> folders, LogOnIdentity identity)
@@ -181,14 +184,6 @@ namespace AxCrypt.Core.UI.ViewModel
             {
                 NotSharedWith = knownPublicKeys.PublicKeys.Where(upk => upk.Email != userEmail && upk.Email.Address != New<UserSettings>().LicenseAuthorityEmail && !sharedWith.Any(sw => upk.Email == sw.Email)).OrderBy(e => e.Email.Address);
             }
-        }
-
-        private void BindPropertyChangedEvents()
-        {
-        }
-
-        private static void SubscribeToModelEvents()
-        {
         }
 
         private async Task RemoveKeySharesActionAsync(IEnumerable<UserPublicKey> keySharesToRemove)

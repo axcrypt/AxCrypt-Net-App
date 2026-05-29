@@ -1,13 +1,13 @@
-﻿/* ── Sidebar footer ──────────────────────── */
+﻿// ── Sidebar footer ────────────────────────
 .sidebar-footer {
     padding: 12px 8px 0;
     border-top: 1px solid $border;
     margin-top: 8px;
-    overflow: visible !important; /* allow popups to overflow */
+    overflow: visible !important; // allow popups to overflow
     position: relative;
 }
 
-/* Clickable profile row */
+// Clickable profile row
 .user-row {
     display: flex;
     align-items: center;

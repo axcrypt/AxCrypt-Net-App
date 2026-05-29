@@ -1,0 +1,409 @@
+@using AxCrypt.App.Entitlement.Contracts
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.Content
+@using static AxCrypt.Abstractions.TypeResolve
+
+@inject NavigationManager Navigation
+@inject UserService userService
+
+<div class="pp-shell">
+
+    @* ── Plan switcher (Free / None users can toggle Premium ↔ Business) ── *@
+    @if (IsFreeUser)
+    {
+        <div class="pp-plan-tabs" role="tablist" aria-label="Select plan">
+            <button class="pp-tab @(!_showBusiness ? "pp-tab--active pp-tab--prem" : "")"
+                    role="tab" aria-selected="@(!_showBusiness)"
+                    @onclick="() => _showBusiness = false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+                </svg>
+                <span class="pp-tab-name">Premium</span>
+                <span class="pp-tab-sub">For individuals</span>
+            </button>
+            <button class="pp-tab @(_showBusiness ? "pp-tab--active pp-tab--biz" : "")"
+                    role="tab" aria-selected="@_showBusiness"
+                    @onclick="() => _showBusiness = true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                <span class="pp-tab-name">Business</span>
+                <span class="pp-tab-sub">For teams</span>
+            </button>
+        </div>
+    }
+
+    @* ── Hero ── *@
+    <div class="pp-hero">
+        <div class="pp-hero-badge @(ShowingBusiness ? "pp-hero-badge--biz" : "pp-hero-badge--prem")">
+            @if (ShowingBusiness)
+            {
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                <span>For Teams</span>
+            }
+            else
+            {
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span>Most Popular</span>
+            }
+        </div>
+
+        <h1 class="pp-hero-title">
+            @if (ShowingBusiness)
+            {
+                <span>AxCrypt <span class="pp-hero-accent-biz">Business</span></span>
+            }
+            else
+            {
+                <span>AxCrypt <span class="pp-hero-accent-prem">Premium</span></span>
+            }
+        </h1>
+
+        <p class="pp-hero-sub">
+            @if (ShowingBusiness)
+            {
+                <span>Secure collaboration, shared vault, admin controls, and compliance tools for your organisation.</span>
+            }
+            else
+            {
+                <span>Unlimited encryption, secure key sharing, Password Manager, and Cloud Drive — everything for serious file security.</span>
+            }
+        </p>
+    </div>
+
+    @* ── 2-column body ── *@
+    <div class="pp-body">
+
+        @* ───────── LEFT: plan features ───────── *@
+        <div class="pp-features-col">
+
+            @* Billing toggle *@
+            <div class="pp-billing-wrap">
+                <div class="pp-billing" role="group" aria-label="Billing period">
+                    <button class="pp-bill-btn @(!_yearlyBilling ? "pp-bill-btn--on" : "")"
+                            @onclick="() => _yearlyBilling = false">
+                        Monthly
+                    </button>
+                    <button class="pp-bill-btn @(_yearlyBilling ? "pp-bill-btn--on" : "")"
+                            @onclick="() => _yearlyBilling = true">
+                        Yearly
+                        <span class="pp-save-badge">Save 20%</span>
+                    </button>
+                </div>
+            </div>
+
+            @* Price *@
+            <div class="pp-price-block">
+                <span class="pp-price @(ShowingBusiness ? "pp-price--biz" : "pp-price--prem")">
+                    @(ShowingBusiness ? BusinessPrice : PremiumPrice)
+                </span>
+                <span class="pp-price-period">
+                    @(ShowingBusiness ? BusinessPeriod : PremiumPeriod)
+                </span>
+            </div>
+            @if (_yearlyBilling)
+            {
+                <div class="pp-price-note">
+                    @(ShowingBusiness ? "≈ $10.42 / user / month — billed yearly" : "≈ $3.92 / month — billed yearly")
+                </div>
+            }
+
+            @* ── PREMIUM features ── *@
+            @if (!ShowingBusiness)
+            {
+                <ul class="pp-feat-list" aria-label="Premium plan features">
+                    <li class="pp-feat pp-feat--on">@CheckIcon Unlimited AES-256 encryption</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Secure Vault (unlimited)</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Cloud Drive Encryption</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon @Texts.GetStartedKeySharingHeading</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Batch encrypt &amp; decrypt folders</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Password Manager</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Secured Messenger</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon @Texts.PricingFeatureListMobileApps</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Priority support + live chat</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon HIPAA / GDPR compliant</li>
+                </ul>
+            }
+
+            @* ── BUSINESS features ── *@
+            @if (ShowingBusiness)
+            {
+                <div class="pp-feat-section-label">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z"/>
+                    </svg>
+                    Premium features included
+                </div>
+                <ul class="pp-feat-list pp-feat-list--grid" aria-label="Premium features included in Business">
+                    <li class="pp-feat pp-feat--on">@CheckIcon <strong>Unlimited</strong>&nbsp;AES-256 encryption</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Secure Vault (unlimited)</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Cloud Drive Encryption</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon @Texts.GetStartedKeySharingHeading</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Password Manager</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Secured Messenger</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Batch encrypt / decrypt folders</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Priority support + live chat</li>
+                </ul>
+
+                <div class="pp-feat-section-label pp-feat-section-label--team">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="9" cy="7" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+                        <circle cx="17" cy="6" r="2"/><path d="M21 21v-2a4 4 0 00-3-3.86"/>
+                    </svg>
+                    Team &amp; admin features
+                </div>
+                <ul class="pp-feat-list pp-feat-list--grid" aria-label="Business team features">
+                    <li class="pp-feat pp-feat--on">@CheckIcon Master Key recovery</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Group management — seats, roles, invites</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Group key access — shared encryption keys</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Shared team vault</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Central admin dashboard</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Audit log — every encrypt, share &amp; access</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Multi-factor authentication</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Role-based access control</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon HIPAA / GDPR / NIS 2 compliance</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon Per-seat invoicing &amp; PO support</li>
+                    <li class="pp-feat pp-feat--on">@CheckIcon @Texts.PricingFeatureListAccountManager</li>
+                </ul>
+            }
+        </div>
+
+        @* ───────── RIGHT: order summary ───────── *@
+        <div class="pp-summary-col">
+            <div class="pp-summary-card">
+
+                @* Header *@
+                <div class="pp-summary-header">
+                    <span class="pp-summary-title">Order summary</span>
+                    <span class="pp-summary-subtitle">Review before checkout</span>
+                </div>
+
+                @* Plan pill *@
+                <div class="pp-plan-pill @(ShowingBusiness ? "pp-plan-pill--biz" : "pp-plan-pill--prem")">
+                    <span class="pp-plan-pill-name">@ReviewPlanName</span>
+                    <span class="pp-plan-pill-billing">@ReviewBilling</span>
+                </div>
+
+                @* Trial highlight *@
+                @if (_trialEligible)
+                {
+                    <div class="pp-trial-box @(ShowingBusiness ? "pp-trial-box--biz" : "")">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 3"/>
+                        </svg>
+                        <span><strong>14 days free</strong> — your card is charged only after the trial ends</span>
+                    </div>
+                }
+
+                @* Price rows *@
+                <div class="pp-price-rows">
+                    <div class="pp-price-row">
+                        <span>Subtotal</span>
+                        <strong>@ReviewSubtotal</strong>
+                    </div>
+                    <div class="pp-price-row">
+                        <span>VAT</span>
+                        <strong>Calculated at checkout</strong>
+                    </div>
+                    @if (_trialEligible)
+                    {
+                        <div class="pp-price-row pp-price-row--today">
+                            <span>Due today</span>
+                            <strong class="pp-price-zero">$0.00</strong>
+                        </div>
+                        <div class="pp-price-row pp-price-row--after">
+                            <span>After 14-day trial</span>
+                            <strong>@ReviewAfterTrial</strong>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="pp-price-row pp-price-row--today">
+                            <span>Due today</span>
+                            <strong>@ReviewAfterTrial</strong>
+                        </div>
+                    }
+                </div>
+
+                @* Discount code *@
+                <details class="pp-discount">
+                    <summary class="pp-discount-toggle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+                        </svg>
+                        Have a discount code?
+                    </summary>
+                    <div class="pp-discount-body">
+                        <input class="pp-discount-input" @bind="_discountCode" placeholder="Enter code" />
+                        <button class="pp-discount-apply" @onclick="OnApplyDiscount">Apply</button>
+                    </div>
+                </details>
+
+                @* Terms *@
+                <label class="pp-terms">
+                    <input type="checkbox" @bind="_termsAccepted" />
+                    <span>
+                        I accept AxCrypt's
+                        <button class="pp-link" @onclick='() => OpenLink("https://axcrypt.net/information/terms-of-use/")'>Terms of Service</button>
+                        and
+                        <button class="pp-link" @onclick='() => OpenLink("https://axcrypt.net/information/privacy-policy/")'>Privacy Policy</button>.
+                    </span>
+                </label>
+
+                @* CTA buttons *@
+                <div class="pp-cta-wrap">
+                    <button class="pp-cta-primary @(ShowingBusiness ? "pp-cta-primary--biz" : "")"
+                            disabled="@(!_termsAccepted)"
+                            @onclick="OnCheckout">
+                        @CtaText
+                    </button>
+                    <button class="pp-cta-paypal" @onclick="OnPayPalCheckout">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M7.5 3.5h9a4 4 0 014 4v.5a4.5 4.5 0 01-4.5 4.5H13l-1.5 8.5H7l1.5-8.5H5L7.5 3.5z" stroke="#003087" stroke-width="1.5" stroke-linejoin="round"/>
+                        </svg>
+                        Continue with PayPal
+                    </button>
+                </div>
+
+                @* Trust line *@
+                <div class="pp-trust-line">
+                    <span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+                        </svg>
+                        Secure checkout
+                    </span>
+                    <span class="pp-trust-dot">·</span>
+                    @if (_trialEligible) { <span>No charge during trial</span> <span class="pp-trust-dot">·</span> }
+                    <span>Cancel anytime</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>@* /.pp-body *@
+
+    @* ── Trust row ── *@
+    <div class="pp-trust-row">
+        <div class="pp-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            <span>All encryption is <strong>local</strong> — we never see your files</span>
+        </div>
+        <div class="pp-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z"/>
+            </svg>
+            <span><strong>AES-256</strong> military-grade encryption</span>
+        </div>
+        <div class="pp-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+            </svg>
+            <span>Trusted by <strong>1,000,000+</strong> users worldwide</span>
+        </div>
+        <div class="pp-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+            </svg>
+            <span>File security from <strong>Sweden</strong> since 2008</span>
+        </div>
+    </div>
+
+</div>
+
+@code {
+    // ── Plan state ──────────────────────────────────────────────
+    private SignUpFrom Origin => userService.SignUpFrom;
+
+    private bool IsPremiumUser  => Origin == SignUpFrom.Premium;
+    private bool IsBusinessUser => Origin == SignUpFrom.Business;
+    private bool IsFreeUser     => Origin == SignUpFrom.Free || Origin == SignUpFrom.None;
+
+    private bool _showBusiness  = false;
+    private bool _yearlyBilling = true;
+    private bool _trialEligible = true; // TODO: wire to IFeatureUsageProvider / entitlement service
+    private bool _termsAccepted = false;
+    private string _discountCode = "";
+
+    private bool ShowingBusiness => IsBusinessUser || (IsFreeUser && _showBusiness);
+
+    protected override void OnInitialized()
+    {
+        // Premium and Business users are pinned to their origin plan
+        _showBusiness = IsBusinessUser;
+    }
+
+    // ── Pricing ─────────────────────────────────────────────────
+    private string PremiumPrice  => _yearlyBilling ? "$47"  : "$5";
+    private string PremiumPeriod => _yearlyBilling ? "/ year" : "/ month";
+    private string BusinessPrice  => _yearlyBilling ? "$125" : "$13";
+    private string BusinessPeriod => _yearlyBilling ? "/ user / year" : "/ user / month";
+
+    // ── Review strings ───────────────────────────────────────────
+    private string ReviewPlanName =>
+        ShowingBusiness
+            ? $"Business {(_yearlyBilling ? "Yearly" : "Monthly")}"
+            : $"Premium {(_yearlyBilling ? "Yearly" : "Monthly")}";
+
+    private string ReviewBilling => _yearlyBilling ? "Yearly billing" : "Monthly billing";
+
+    private string ReviewSubtotal =>
+        ShowingBusiness
+            ? (_yearlyBilling ? "$125.00 / user" : "$13.00 / user")
+            : (_yearlyBilling ? "$47.00" : "$5.00");
+
+    private string ReviewAfterTrial =>
+        ShowingBusiness
+            ? (_yearlyBilling ? "$125.00 / user / year" : "$13.00 / user / month")
+            : (_yearlyBilling ? "$47.00 / year" : "$5.00 / month");
+
+    private string CtaText =>
+        _trialEligible ? "Start 14-Day Free Trial →" : "Buy Now →";
+
+    // ── Actions ──────────────────────────────────────────────────
+    private void OnCheckout()
+    {
+        var plan    = ShowingBusiness ? "Business" : "Premium";
+        var billing = _yearlyBilling ? "yearly" : "monthly";
+        New<Abstractions.IBrowser>().OpenUri(
+            new Uri($"https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom={plan}&billing={billing}"));
+    }
+
+    private void OnPayPalCheckout()
+    {
+        var plan    = ShowingBusiness ? "Business" : "Premium";
+        var billing = _yearlyBilling ? "yearly" : "monthly";
+        New<Abstractions.IBrowser>().OpenUri(
+            new Uri($"https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom={plan}&billing={billing}&provider=paypal"));
+    }
+
+    private void OnApplyDiscount()
+    {
+        if (!string.IsNullOrWhiteSpace(_discountCode))
+        {
+            var plan    = ShowingBusiness ? "Business" : "Premium";
+            var billing = _yearlyBilling ? "yearly" : "monthly";
+            New<Abstractions.IBrowser>().OpenUri(
+                new Uri($"https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom={plan}&billing={billing}&code={Uri.EscapeDataString(_discountCode)}"));
+        }
+    }
+
+    private void OpenLink(string url) =>
+        New<Abstractions.IBrowser>().OpenUri(new Uri(url));
+
+    // ── Icons ────────────────────────────────────────────────────
+    private static RenderFragment CheckIcon =>
+        @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0">
+            <circle cx="12" cy="12" r="10" fill="#22c55e"/>
+            <polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none"/>
+        </svg>;
+}

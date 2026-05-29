@@ -110,6 +110,7 @@
 .cbp-search {
     flex: 1;
     min-width: 200px;
+    width: 58vw;
     position: relative;
     display: flex;
     align-items: center;
@@ -273,9 +274,29 @@
     margin: 0;
 }
 
+.cbp-list-wrap {
+    min-width: 0;
+}
+
+.cbp-list-header {
+    display: grid;
+    grid-template-columns: 24px 28px minmax(180px, 1fr) 110px 150px minmax(150px, .8fr);
+    align-items: center;
+    gap: 12px;
+    padding: 9px 10px;
+    border-bottom: 1px solid #edf0f3;
+    border-radius: 8px 8px 0 0;
+    background: #f9fafb;
+    color: #6b7280;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
 .cbp-row {
     display: grid;
-    grid-template-columns: 24px 28px 1fr;
+    grid-template-columns: 24px 28px minmax(180px, 1fr) 110px 150px minmax(150px, .8fr);
     align-items: center;
     gap: 12px;
     padding: 8px 10px;
@@ -331,6 +352,17 @@
     font-size: 11.5px;
     color: #9ca3af;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cbp-row-size,
+.cbp-row-modified {
+    min-width: 0;
+    overflow: hidden;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -439,125 +471,135 @@
     border-color: #9ca3af;
 }
 
-/* Dark theme — mirrors the rest of the app's surfaces. */
-html[data-theme="dark"] .cbp-page {
-    background: #0F141A;
+// Dark theme — mirrors the rest of the app's surfaces.
+
+@media (max-width: 720px) {
+    .cbp-page {
+        padding: 14px 14px 0;
+    }
+
+    .cbp-list-header,
+    .cbp-row {
+        grid-template-columns: 24px 28px minmax(150px, 1fr) 86px;
+    }
+
+    .cbp-col-modified,
+    .cbp-col-location,
+    .cbp-row-modified,
+    .cbp-row-path {
+        display: none;
+    }
+
+    .cbp-col-size,
+    .cbp-row-size {
+        text-align: right;
+    }
 }
 
-html[data-theme="dark"] .cbp-title {
-    color: #E8ECF1;
-}
-
-html[data-theme="dark"] .cbp-sub,
-html[data-theme="dark"] .cbp-search-info,
-html[data-theme="dark"] .cbp-actionbar-hint {
-    color: #B5BCC7;
-}
-
-html[data-theme="dark"] .cbp-back,
-html[data-theme="dark"] .cbp-tabs,
-html[data-theme="dark"] .cbp-search,
-html[data-theme="dark"] .cbp-view-toggle,
-html[data-theme="dark"] .cbp-actionbar,
-html[data-theme="dark"] .cbp-tile,
-html[data-theme="dark"] .cbp-files {
-    background: #1C2530;
-    border-color: #3A4554;
-    color: #E8ECF1;
-}
-
-html[data-theme="dark"] .cbp-back:hover,
-html[data-theme="dark"] .cbp-view-btn:hover,
-html[data-theme="dark"] .cbp-row:hover,
-html[data-theme="dark"] .cbp-tile:hover {
-    background: #232E3B;
-}
-
-html[data-theme="dark"] .cbp-tab,
-html[data-theme="dark"] .cbp-view-btn {
-    color: #B5BCC7;
-}
-
-html[data-theme="dark"] .cbp-tab:hover {
-    color: #E8ECF1;
-}
-
-html[data-theme="dark"] .cbp-tab--active,
-html[data-theme="dark"] .cbp-view-btn--active {
-    background: #7FCC5C;
-    color: #0F1A07;
-}
-
-html[data-theme="dark"] .cbp-search input {
-    color: #E8ECF1;
-}
-
-html[data-theme="dark"] .cbp-search input::placeholder {
-    color: #7A8494;
-}
-
-html[data-theme="dark"] .cbp-search:focus-within {
-    border-color: #7FCC5C;
-    box-shadow: 0 0 0 3px rgba(127,204,92,.35);
-}
-
-html[data-theme="dark"] .cbp-prov-icon {
-    background: #232E3B;
-    border-color: #3A4554;
-}
-
-html[data-theme="dark"] .cbp-row + .cbp-row {
-    border-top-color: rgba(255,255,255,.06);
-}
-
-html[data-theme="dark"] .cbp-row--selected,
-html[data-theme="dark"] .cbp-tile--selected {
-    background: rgba(127,204,92,.14);
-    border-color: #7FCC5C;
-}
-
-html[data-theme="dark"] .cbp-row-name,
-html[data-theme="dark"] .cbp-tile-name,
-html[data-theme="dark"] .cbp-empty-title {
-    color: #E8ECF1;
-}
-
-html[data-theme="dark"] .cbp-row-path,
-html[data-theme="dark"] .cbp-empty-sub {
-    color: #7A8494;
-}
-
-html[data-theme="dark"] .cbp-bc-item {
-    color: #B8E89A;
-}
-
-html[data-theme="dark"] .cbp-bc-item:hover {
-    background: rgba(127,204,92,.14);
-}
-
-html[data-theme="dark"] .cbp-actionbar-count {
-    color: #B8E89A;
-}
-
-html[data-theme="dark"] .cbp-link {
-    color: #B8E89A;
-}
-
-html[data-theme="dark"] .cbp-btn--primary {
-    background: #7FCC5C;
-    color: #0F1A07;
-}
-
-html[data-theme="dark"] .cbp-btn--primary:hover {
-    background: #9BE076;
-}
-
-html[data-theme="dark"] .cbp-btn--ghost {
-    background: #1C2530;
-    color: #E8ECF1;
-    border-color: #4B5563;
-}
-
-html[data-theme="dark"] .cbp-btn--ghost:hover {
-    background: #232E3B;
+html[data-theme="dark"] {
+    .cbp-page {
+        background: #0F141A;
+    }
+    .cbp-title {
+        color: #E8ECF1;
+    }
+    .cbp-sub,
+    .cbp-search-info,
+    .cbp-actionbar-hint {
+        color: #B5BCC7;
+    }
+    .cbp-back,
+    .cbp-tabs,
+    .cbp-search,
+    .cbp-view-toggle,
+    .cbp-actionbar,
+    .cbp-tile,
+    .cbp-files {
+        background: #1C2530;
+        border-color: #3A4554;
+        color: #E8ECF1;
+    }
+    .cbp-back:hover,
+    .cbp-view-btn:hover,
+    .cbp-row:hover,
+    .cbp-tile:hover {
+        background: #232E3B;
+    }
+    .cbp-tab,
+    .cbp-view-btn {
+        color: #B5BCC7;
+    }
+    .cbp-tab:hover {
+        color: #E8ECF1;
+    }
+    .cbp-tab--active,
+    .cbp-view-btn--active {
+        background: #7FCC5C;
+        color: #0F1A07;
+    }
+    .cbp-search input {
+        color: #E8ECF1;
+    }
+    .cbp-search input::placeholder {
+        color: #7A8494;
+    }
+    .cbp-search:focus-within {
+        border-color: #7FCC5C;
+        box-shadow: 0 0 0 3px rgba(127,204,92,.35);
+    }
+    .cbp-prov-icon {
+        background: #232E3B;
+        border-color: #3A4554;
+    }
+    .cbp-row + .cbp-row {
+        border-top-color: rgba(255,255,255,.06);
+    }
+    .cbp-list-header {
+        background: #18222D;
+        border-bottom-color: #2A3645;
+        color: #B5BCC7;
+    }
+    .cbp-row--selected,
+    .cbp-tile--selected {
+        background: rgba(127,204,92,.14);
+        border-color: #7FCC5C;
+    }
+    .cbp-row-name,
+    .cbp-tile-name,
+    .cbp-empty-title {
+        color: #E8ECF1;
+    }
+    .cbp-row-path,
+    .cbp-row-size,
+    .cbp-row-modified,
+    .cbp-empty-sub {
+        color: #7A8494;
+    }
+    .cbp-bc-item {
+        color: #B8E89A;
+    }
+    .cbp-bc-item:hover {
+        background: rgba(127,204,92,.14);
+    }
+    .cbp-actionbar-count {
+        color: #B8E89A;
+    }
+    .cbp-link {
+        color: #B8E89A;
+    }
+    .cbp-btn--primary {
+        background: #7FCC5C;
+        color: #0F1A07;
+    }
+    .cbp-btn--primary:hover {
+        background: #9BE076;
+    }
+    .cbp-btn--ghost {
+        background: #1C2530;
+        color: #E8ECF1;
+        border-color: #4B5563;
+    }
+    .cbp-btn--ghost:hover {
+        background: #232E3B;
+    }
 }

@@ -1,7 +1,5 @@
 ﻿
-/* ═══════════════════════════════════════════
-   Sidebar – COLLAPSED state
-════════════════════════════════════════════ */
+// Sidebar – COLLAPSED state
 .sidebar-collapsed .sidebar {
     width: var(--sidebar-w-collapsed);
 }
@@ -36,7 +34,7 @@
     position: relative;
 }
 
-    /* Sidebar collapsed tooltip */
+    // Sidebar collapsed tooltip
     .sidebar-collapsed .nav-item:hover::after {
         content: attr(data-tip,attr(href));
         position: absolute;

@@ -42,10 +42,19 @@
 
 @import "HomeNew/ContextMenu";
 @import "HomeNew/PaidgateModel";
+@import "HomeNew/ShareKey";
 @import "HomeNew/HelpOverlay";
 @import "HomeNew/GlobalSearch";
 @import "HomeNew/AdvancedSettingsModels";
 @import "HomeNew/AdvancedOptionsPopup";
+@import "HomeNew/AxcryptDialogs";
+@import "HomeNew/VaultSettingsPopup";
+@import "HomeNew/InvitePopup";
+@import "HomeNew/SubscriptionCards";
+@import "HomeNew/RenewDialog";
+@import "HomeNew/TryUpgradeDialog";
+@import "HomeNew/SecuredMessengerUI";
+@import "HomeNew/PasswordManagerUI";
 
 @import "HomeNew/Cards";
 @import "HomeNew/QuickAction";
@@ -72,8 +81,9 @@
 @import "HomeNew/BatchOperationToast";
 @import "HomeNew/ProgressBar";
 @import "HomeNew/AxLoader";
-@import "HomeNew/PasswordManager";
-@import "HomeNew/HelpCenter.scss";
+@import "HomeNew/HelpCenter";
+@import "HomeNew/FindFiles";
+@import "HomeNew/ShareEncryptedText";
 
 /*
 @import "../Home/Badges";
@@ -95,15 +105,75 @@
 .page-content-body-section {
     margin: 20px;
     max-width: 95%;
-    /* Always reserve a vertical scrollbar so the Notifications and Text
-       Encryption pages (and anything else hosted here) can scroll
-       independently of the page chrome instead of clipping off the
-       bottom of the viewport. */
+    /* Notifications + Text Encryption need a vertical scroll fallback
+       so they don't clip off the viewport on shorter macOS windows. */
     max-height: calc(100vh - 110px);
     overflow-y: auto;
 
     @media only screen and (max-width: 1300px) {
         max-height: 80vh;
+    }
+}
+
+/* Sticky header for the Notifications table. */
+.notification-table {
+    thead {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: inherit;
+    }
+}
+
+/* Vault page — switch from a fixed 65vh inner list to a flex-grown
+   one so the file pane fills the available space and the outer
+   page-content scroll handles overflow when needed. */
+.page-content-body-section.vlt-body {
+    display: flex;
+    flex-direction: column;
+    overflow-y: visible;
+    max-height: none;
+
+    @media only screen and (max-width: 1300px) {
+        max-height: none;
+    }
+
+    > div:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .vlt-content-area {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        max-height: 70vh;
+    }
+
+    .vlt-list-folder {
+        flex: 1 1 auto;
+        min-height: 320px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .vlt-empty {
+        flex: 1 1 auto;
+        min-height: 320px;
+        height: auto;
+    }
+
+    .list-view-div,
+    .grid-view-div {
+        flex: 1 1 auto;
+        min-height: 0;
+        height: auto;
+        overflow-y: auto;
     }
 }
 

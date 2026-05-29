@@ -158,6 +158,14 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
             return await _messageService.GetLoadMoreSEMAsync(pageNumber, secMessengerFilterTab);
         }
 
+        // Guard flag — prevents a second click or a tab switch from
+        // launching a concurrent ViewMessageReplies call while one is
+        // already in flight. Without this, two concurrent calls race to
+        // overwrite Messenger.Messages and Messenger.ChildMessages, and
+        // the first call's ReadSelectedMessage fires against the second
+        // call's (different) message list, causing the First() exception.
+        private bool _viewingMessage = false;
+
         public async Task ViewMessageReplies(Guid messageId, SecureMsgrFilterTab securedMessengerFilterTab)
         {
             if (messageId == Guid.Empty)
@@ -165,22 +173,36 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
                 return;
             }
 
-            SelectedMessageId = messageId;
-
-            ResetMessageView();
-
-            ShowLoadingWheel = true;
-            IsRead = DateTime.MaxValue;
-            Messenger.ChildMessages = await _messageService.ViewMessageWithRepliesAsync(messageId, securedMessengerFilterTab);
-            Messenger.SecMessengerFilterTab = securedMessengerFilterTab;
-
-            if (Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox)
+            // Drop the call if a previous one hasn't finished yet.
+            if (_viewingMessage)
             {
-                ReadSelectedMessage(messageId);
-                RefreshVisibleMessages(messageId);
+                return;
             }
 
-            ShowLoadingWheel = false;
+            _viewingMessage = true;
+            try
+            {
+                SelectedMessageId = messageId;
+
+                ResetMessageView();
+
+                ShowLoadingWheel = true;
+                IsRead = DateTime.MaxValue;
+                Messenger.ChildMessages = await _messageService.ViewMessageWithRepliesAsync(messageId, securedMessengerFilterTab);
+                Messenger.SecMessengerFilterTab = securedMessengerFilterTab;
+
+                if (Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Inbox)
+                {
+                    ReadSelectedMessage(messageId);
+                    RefreshVisibleMessages(messageId);
+                }
+
+                ShowLoadingWheel = false;
+            }
+            finally
+            {
+                _viewingMessage = false;
+            }
         }
 
         private void RefreshVisibleMessages(Guid messageId)
@@ -231,8 +253,25 @@ namespace AxCrypt.App.Shared.ViewModels.SecuredMessenger
 
         private void ReadSelectedMessage(Guid messageId)
         {
-            SecuredMessage selectedMsg = Messenger.Messages.First(msg => msg.Id == messageId || msg.ParentId == messageId);
-            selectedMsg.Message.ReceiverList.First(mr => mr.User == New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address).Read = New<INow>().Utc;
+            // Use FirstOrDefault instead of First so a tab switch that
+            // replaces Messenger.Messages mid-flight doesn't crash with
+            // "Sequence contains no matching element".
+            SecuredMessage? selectedMsg = Messenger.Messages
+                .FirstOrDefault(msg => msg.Id == messageId || msg.ParentId == messageId);
+
+            if (selectedMsg == null)
+            {
+                return;
+            }
+
+            string currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address;
+            MessengerReceiverApiModel? receiver = selectedMsg.Message.ReceiverList
+                .FirstOrDefault(mr => mr.User == currentUser);
+
+            if (receiver != null)
+            {
+                receiver.Read = New<INow>().Utc;
+            }
         }
 
         public async Task DeleteMessageById(Guid messengerId, Guid parentId, SecureMsgrFilterTab secMessengerFilterTab)

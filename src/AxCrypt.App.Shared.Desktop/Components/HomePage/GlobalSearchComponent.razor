@@ -4,6 +4,7 @@
 @using AxCrypt.App.Shared.Desktop.ViewModels.Main
 @using AxCrypt.App.Shared.Services
 @using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
 @using Microsoft.AspNetCore.Components.Web
 
 @inject NavigationManager Navigation
@@ -220,19 +221,26 @@
 
         // ── Tools ── every entry deep-links straight to that tool on the
         // Tools page through a ?tool= query the page reads on load.
-        (string Id, string Name, string Keywords)[] toolNames = new[]
+        //
+        // Opt-in tools (activity-logs, find-files) are only surfaced when
+        // their respective enable flag is on — the same condition the Tools
+        // page uses to show the card in the grid. Showing a disabled tool
+        // in search and then refusing to open it creates a confusing dead
+        // end; hiding it entirely mirrors the Tools page behaviour.
+        (string Id, string Name, string Keywords, bool IsEnabled)[] toolNames = new[]
         {
-            ("secure-delete", "Secure Delete", "secure delete permanently wipe shred"),
-            ("anon-rename", "Anonymous Rename", "hide filename anonymize anonymous rename"),
-            ("restore-rename", "Restore Original Names", "restore original names undo rename"),
-            ("find-files", "Find Encrypted Files", "scan find encrypted locate files"),
-            ("activity-logs", "User Activity", "activity log history file actions audit"),
-            ("upgrade-tool", "Upgrade to AES-256", "upgrade aes 256 128 re-encrypt legacy"),
-            ("invite", "Invite Friend", "invite share referral friend colleague"),
-            ("import-public-key", "Import Sharing Key", "import public sharing key"),
-            ("export-public-key", "Export Sharing Key", "export public sharing key"),
-            ("export-axcryptid-public-key", "Export AxCrypt ID", "export axcrypt id private key backup"),
+            ("secure-delete",              "Secure Delete",           "secure delete permanently wipe shred",                    true),
+            ("anon-rename",                "Anonymous Rename",        "hide filename anonymize anonymous rename",                true),
+            ("restore-rename",             "Restore Original Names",  "restore original names undo rename",                     true),
+            ("find-files",                 "Find Encrypted Files",    "scan find encrypted locate files",                       appSettingsViewModel.EnableFindFiles),
+            ("activity-logs",              "User Activity",           "activity log history file actions audit",                appSettingsViewModel.EnableUserActivity),
+            ("upgrade-tool",               "Upgrade to AES-256",      "upgrade aes 256 128 re-encrypt legacy",                  true),
+            ("invite",                     "Invite Friend",           "invite share referral friend colleague",                  true),
+            ("import-public-key",          "Import Sharing Key",      "import public sharing key",                              true),
+            ("export-public-key",          "Export Sharing Key",      "export public sharing key",                              true),
+            ("export-axcryptid-public-key","Export AxCrypt ID",       "export axcrypt id private key backup",                   true),
         };
+
         // Paid tools — surface a lock badge for free users so search
         // mirrors the gate the Tools page itself applies.
         HashSet<string> paidToolIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
@@ -245,8 +253,9 @@
         };
 
         results.AddRange(toolNames
-            .Where(t => t.Name.Contains(q, StringComparison.OrdinalIgnoreCase)
-                     || t.Keywords.Contains(q, StringComparison.OrdinalIgnoreCase))
+            .Where(t => t.IsEnabled                                               // skip disabled opt-in tools
+                     && (t.Name.Contains(q, StringComparison.OrdinalIgnoreCase)
+                      || t.Keywords.Contains(q, StringComparison.OrdinalIgnoreCase)))
             .Select(t => new SearchResult
             {
                 Category = "Tools",
@@ -316,51 +325,51 @@
             case "/vault":
                 paidFeaturegateService.ShowPaidGate(
                     AxCrypt.Content.Texts.VaultText,
-                    "Store and protect your sensitive files securely in encrypted vaults.",
+                    Texts.QuickSecureActionEncryptedVaults,
                     new[]
                     {
-                        "Create secure encrypted vaults",
-                        "Protect important files and folders",
-                        "Access advanced vault security",
-                        "Unlock premium protection features",
+                        Texts.QuickSecureActionSecureEncryptedVaults,
+                        Texts.QuickSecureActionProtectImportantFiles,
+                        Texts.QuickSecureActionAdvancedVaultSecurity,
+                        Texts.QuickSecureActionUnlockPremium,
                     });
                 break;
 
             case "/securedfolders":
                 paidFeaturegateService.ShowPaidGate(
                     AxCrypt.Content.Texts.WatchedFoldersTabPageText,
-                    "Automatically monitor and protect your folders with secure encryption.",
+                    Texts.QuickSecureActionAutomaticallyMonitor,
                     new[]
                     {
-                        "Automatically encrypt added/changed files",
-                        "Monitor multiple folders securely",
-                        "Protect sensitive files automatically",
-                        "Unlock advanced security features",
+                        Texts.QuickSecureActionAutomaticallyEncrypt,
+                        Texts.QuickSecureActionMonitorMultiple,
+                        Texts.QuickSecureActionProtectSensitive,
+                        Texts.QuickSecureActionUnlockAdvanced,
                     });
                 break;
 
             case "/textencryption":
                 paidFeaturegateService.ShowPaidGate(
                     AxCrypt.Content.Texts.TextEncryptionLinkLabel,
-                    "Encrypt your text securely with advanced protection features.",
+                    Texts.TextEncryptionAdvancedProtectionFeatures,
                     new[]
                     {
-                        "Encrypt unlimited text",
-                        "Advanced encryption algorithms",
-                        "Protect sensitive information",
-                        "Priority customer support",
+                        Texts.EncryptUnlimitedText,
+                        Texts.AdvancedEncryptionAlgorithms,
+                        Texts.QuickSecureActionSensitiveInformation,
+                        Texts.PriorityCustomerSupport,
                     });
                 break;
 
             default:
                 paidFeaturegateService.ShowPaidGate(
                     fallbackName,
-                    "This page is part of a paid plan. Upgrade to unlock it.",
+                    Texts.TextEncryptionPaidPlanPopup,
                     new[]
                     {
-                        "Access every page in the app",
-                        "Unlock paid features without limits",
-                        "Priority support",
+                        Texts.TextEncryptionAccessEveryPopup,
+                        Texts.TextEncryptionWithoutLimitsPopup,
+                        Texts.PrioritySupportTitle,
                     });
                 break;
         }
@@ -402,13 +411,13 @@
             };
             paidFeaturegateService.ShowPaidGate(
                 headline,
-                "Search and open encrypted files, folders and paid tools without limits.",
+                Texts.PagesHeadline,
                 new[]
                 {
-                    "Search across all your encrypted files",
-                    "Open secured folders directly from search",
-                    "Unlock Find Files and other paid tools",
-                    "Priority support and stronger limits",
+                    Texts.PagesSearchAcrossPopup,
+                    Texts.PagesSearchOpenSecuredPopup,
+                    Texts.PagesUnlockFindFilesPopup,
+                    Texts.PagesPrioritySupportPopup,
                 });
             return;
         }

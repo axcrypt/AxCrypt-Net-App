@@ -140,25 +140,18 @@ public class BatchFileOperationService
             return;
         }
 
-        // Light-weight: feed the existing toast service. The richer
-        // BatchOperationToast component (if mounted) also subscribes
-        // to OnFinished for the detailed breakdown.
-        string summary;
-        if (result.HasFailures && result.HasSucceeded)
+        // BatchOperationToast owns the notification for multi-file batches and
+        // any operation that has failures — it renders the richer breakdown with
+        // a per-file failure list and an auto-dismiss on success. Publishing the
+        // lightweight alert on top of it would show two toasts for the same event.
+        // Only push the simple success alert for single-file operations that
+        // BatchOperationToast explicitly hides itself for.
+        if (result.Total > 1 || result.HasFailures)
         {
-            summary = $"{result.OperationName} {result.Succeeded.Count}/{result.Total} files. {result.Failed.Count} failed.";
-            _statusAlertService.Error(summary);
+            return;
         }
-        else if (result.HasFailures)
-        {
-            summary = $"{result.OperationName} failed for all {result.Failed.Count} file(s).";
-            _statusAlertService.Error(summary);
-        }
-        else
-        {
-            summary = $"{result.OperationName} {result.Succeeded.Count} file(s) successfully.";
-            _statusAlertService.Success(summary);
-        }
+
+        _statusAlertService.Success($"{result.OperationName} {result.Succeeded.Count} file(s) successfully.");
     }
 
     /// <summary>

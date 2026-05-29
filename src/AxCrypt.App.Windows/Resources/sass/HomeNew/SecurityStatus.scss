@@ -1,7 +1,5 @@
 ﻿
-/* ═══════════════════════════════════════════
-   Security Status
-════════════════════════════════════════════ */
+// Security Status
 .security-row {
     display: flex;
     align-items: flex-start;
@@ -14,7 +12,9 @@
         border-bottom: none;
     }
 
-.sec-check /*.sec-status-icon*/ {
+// Both class names are used as the status icon element
+.sec-check,
+.sec-status-icon {
     flex-shrink: 0;
     margin-top: 1px;
 }
@@ -56,7 +56,7 @@
         text-decoration: underline
     }
 
-/* ── Tier pill in the section header ──────── */
+// ── Tier pill in the section header ────────
 .security-status-card .card-header-row {
     margin-bottom: 6px;
 }
@@ -85,7 +85,7 @@
     color: #6d28d9;
 }
 
-/* ── State tint on rows ───────────────────── */
+// ── State tint on rows ─────────────────────
 .security-row--warn .sec-title {
     color: #92400e;
 }

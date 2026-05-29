@@ -1,0 +1,239 @@
+@* LEGACY — DO NOT USE
+   Superseded by ConversionDialog.razor + ConversionDialogConfig.ForTryNow().
+No longer mounted in MainLayout — safe to delete once all references are confirmed gone.
+*@
+@using AxCrypt.App.Entitlement.Contracts
+@using AxCrypt.App.Shared.Helpers
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+
+@inject UpgradeSubscriptionViewModel upgradeModel
+@inject NavigationManager navigationManager
+@implements IDisposable
+
+@*
+    TryNowSubscriptionDialog — first-sign-in nudge for a free user who
+    is still eligible for the free trial.
+
+    Conversion-focused redesign (distinct from PaidGateDialog):
+
+      ┌──────────────────────────────────────┐
+      │   ✨  GRADIENT HERO BANNER  ✨        │ ← brand-tinted by tier
+      │   "30 days free" badge                │
+      ├──────────────────────────────────────┤
+      │   Headline (benefit-led)              │
+      │   Sub-head (1 line, social-proof'd)   │
+      │                                       │
+      │   ┌────────┐  ┌────────┐              │
+      │   │ value  │  │ value  │   2x2 grid   │
+      │   └────────┘  └────────┘              │
+      │   ┌────────┐  ┌────────┐              │
+      │   │ value  │  │ value  │              │
+      │   └────────┘  └────────┘              │
+      │                                       │
+      │   ┌────────────────────────────────┐ │
+      │   │     START FREE TRIAL  →        │ │  primary CTA
+      │   └────────────────────────────────┘ │
+      │   No payment • Cancel anytime        │  risk reversal
+      │                                       │
+      │   AES-256 • HIPAA • GDPR              │  trust row
+      │                                       │
+      │              Not now                  │  tiny dismiss
+      └──────────────────────────────────────┘
+
+    Wider modal (520px instead of 360px) so the value grid breathes
+    and feels like a marketing surface — bigger conversion lift than
+    a tight "perks list" treatment.
+
+    Tier-aware via UserService.SignUpFrom (None/Free/Premium/Business)
+    drives both copy and accent color. The CTA always goes to the
+    in-app /upgradePage so SignUpFrom-filtered plans take over.
+*@
+
+@if (IsVisible)
+{
+    <div class="cnv-backdrop" @onclick="ClosePopup">
+        <div class="cnv-modal @TierCssClass"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="trynow-title"
+             @onclick:stopPropagation>
+
+            <button type="button" class="cnv-close" @onclick="ClosePopup" aria-label="Close">×</button>
+
+            <div class="cnv-hero">
+                <div class="cnv-hero-sparkle" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 2l2.39 5.46L20 8l-4.5 3.45L17 17l-5-2.7L7 17l1.5-5.55L4 8l5.61-.54L12 2z" />
+                    </svg>
+                </div>
+                <span class="cnv-hero-badge">@TrialBadge</span>
+            </div>
+
+            <div class="cnv-body">
+                <h2 id="trynow-title" class="cnv-title">@Headline</h2>
+                <p class="cnv-sub">@Subhead</p>
+
+                <div class="cnv-grid">
+                    <div class="cnv-card">
+                        <div class="cnv-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z" />
+                            </svg>
+                        </div>
+                        <div class="cnv-card-text">
+                            <span class="cnv-card-title">AES-256 everywhere</span>
+                            <span class="cnv-card-desc">@Texts.TryUpgradePlanFeatureText1</span>
+                        </div>
+                    </div>
+
+                    <div class="cnv-card">
+                        <div class="cnv-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+                            </svg>
+                        </div>
+                        <div class="cnv-card-text">
+                            <span class="cnv-card-title">Cloud-ready</span>
+                            <span class="cnv-card-desc">@Texts.TryUpgradePlanFeatureText2</span>
+                        </div>
+                    </div>
+
+                    <div class="cnv-card">
+                        <div class="cnv-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="7" r="3" />
+                                <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" />
+                                <path d="M17 11l2 2 4-4" />
+                            </svg>
+                        </div>
+                        <div class="cnv-card-text">
+                            <span class="cnv-card-title">Share keys safely</span>
+                            <span class="cnv-card-desc">@Texts.HipaaBenefitsSubHeading2</span>
+                        </div>
+                    </div>
+
+                    <div class="cnv-card">
+                        <div class="cnv-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" />
+                                <path d="M7 11V7a5 5 0 0110 0v4" />
+                            </svg>
+                        </div>
+                        <div class="cnv-card-text">
+                            <span class="cnv-card-title">Password Manager</span>
+                            <span class="cnv-card-desc">@Texts.PricingFeatureListPasswordManagement</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="cnv-cta" @onclick="OpenUpgradePage">
+                    <span>@Texts.ButtonStartTrial</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                </button>
+
+                <p class="cnv-risk">No payment to start • Cancel anytime</p>
+
+                <div class="cnv-trust" aria-label="Compliance">
+                    <span>AES-256</span>
+                    <span class="cnv-trust-dot"></span>
+                    <span>HIPAA</span>
+                    <span class="cnv-trust-dot"></span>
+                    <span>GDPR</span>
+                </div>
+
+                <button class="cnv-dismiss" @onclick="ClosePopup">@Texts.ButtonNotNow</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool IsVisible;
+
+    /// <summary>
+    /// Snapshot of UserService.SignUpFrom captured when the popup opens
+    /// so the brand color + copy stay stable through the dialog's life.
+    /// </summary>
+    private SignUpFrom _signUpFrom = SignUpFrom.None;
+
+    // Business is handled by the dedicated BusinessSubscriptionDialog —
+    // UpgradeSubscriptionViewModel routes SignUpFrom == Business there
+    // before this popup ever opens, so we only need Premium / generic
+    // variants here.
+    private string TierCssClass => _signUpFrom switch
+    {
+        SignUpFrom.Premium  => "cnv-tier--premium",
+        _                   => "cnv-tier--generic",
+    };
+
+    private string TrialBadge => _signUpFrom switch
+    {
+        SignUpFrom.Premium  => "Premium — reactivated free",
+        _                   => "14 days free",
+    };
+
+    private string Headline => _signUpFrom switch
+    {
+        SignUpFrom.Premium  => "Welcome back. Premium on us.",
+        _                   => "Get the full AxCrypt — on us.",
+    };
+
+    private string Subhead => _signUpFrom switch
+    {
+        SignUpFrom.Premium  => "Your Premium features are one click away — no card needed.",
+        _                   => "Join a million-plus users protecting files with AES-256. No card to start.",
+    };
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        upgradeModel.TryNowSubscriptionDialog.OnDialogVisibilityChanged += UpdateUpgradeDialogState;
+    }
+
+    public void Dispose()
+    {
+        upgradeModel.TryNowSubscriptionDialog.OnDialogVisibilityChanged -= UpdateUpgradeDialogState;
+    }
+
+    /// <summary>
+    /// Funnel single destination — in-app /upgradePage instead of the
+    /// legacy external account web URL. The plan grid already filters
+    /// by SignUpFrom, so the user lands on the right offer set.
+    /// </summary>
+    private void OpenUpgradePage()
+    {
+        ClosePopup();
+        navigationManager.NavigateTo("/upgradePage");
+    }
+
+    private void UpdateUpgradeDialogState(bool canShowUpgradeDialog)
+    {
+        IsVisible = canShowUpgradeDialog;
+        if (IsVisible)
+        {
+            // GetService<T>() returns a non-null instance for registered
+            // services (same pattern PaidFeaturegateService uses).
+            _signUpFrom = AxCServiceProviderExtension.GetService<UserService>().SignUpFrom;
+        }
+
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+
+    private void ClosePopup()
+    {
+        upgradeModel.TryNowSubscriptionDialog.Close();
+    }
+}

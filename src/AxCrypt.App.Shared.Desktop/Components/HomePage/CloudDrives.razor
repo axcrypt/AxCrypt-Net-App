@@ -22,7 +22,7 @@
         else
         {
             <button class="cd-manage-link" @onclick="OpenManager" title="Open Cloud Manager">
-                Manage
+                @Texts.BusinessSubscriptionManageMenu
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="9 18 15 12 9 6" />
                 </svg>
@@ -41,12 +41,12 @@
 
                     @if (isConnected)
                     {
-                        <span class="connected-badge">Connected</span>
+                        <span class="connected-badge">@Texts.CloudServicesConnectedText</span>
                     }
                 </div>
 
                 @{
-                    string cloudDriveActionLabel = isConnected ? "Manage Files" : "Connect";
+                    string cloudDriveActionLabel = isConnected ? Texts.CloudServicesManageFilesText : Texts.CloudServicesConnectText;
                 }
 
                 <button class="connect-btn" @onclick="async () => await OnRowAction(provider)">@cloudDriveActionLabel</button>
@@ -119,13 +119,12 @@
     private void ShowUpgradePopup()
     {
         paidFeaturegateService.ShowPaidGate(Texts.SecuredCloudLinkLabel,
-            "Protect your cloud-stored files with secure encryption and advanced security features.",
+            Texts.SecuredCloudHelpText,
             new[]
             {
-                "Secure cloud file protection",
-                "Encrypt files before upload",
-                "Keep cloud data private",
-                "Unlock advanced cloud security"
+                Texts.SecureCloudFileProtectionPopup,
+                Texts.KeepCloudDataPrivatePopup,
+                Texts.UnlockAdvancedCloudSecurityPopup
             });
     }
 }

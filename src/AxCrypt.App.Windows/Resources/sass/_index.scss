@@ -1,75 +1,7 @@
-﻿/// Moved styles from site.scss starts here
-.page-title {
-    position: relative;
-    padding-right: 20px;
-    width: max-content;
-    font-weight: 800;
-    color: $TxtClr;
-    margin-bottom: 30px;
-}
-
-//top menu
-.update-btn {
-    background-image: url(/images/default/icoUpdt.svg);
-    background-position: top 7px right 3px;
-    background-repeat: no-repeat;
-    border: 1px solid #E0922F;
-    border-radius: 4px;
-    padding: 7px 22px 7px 6px;
-    text-decoration: none;
-    color: #E0922F;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-    .update-btn.no-upd-avilbl {
-        border: 1px solid var(--col-mbr-dsbl, #A4A4A4) !important;
-        color: var(--col-mbr-dsbl, #A4A4A4) !important;
-        filter: grayscale(1);
-    }
-
-    .update-btn:hover {
-        color: var(--col-mbr-dsbl, #A4A4A4);
-    }
-
-
-.padding {
+﻿.padding {
     margin: 0 3px;
 }
 
-.top-menu {
-    float: right;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    a {
-        text-decoration: none;
-    }
-}
-
-.top-page-title-container {
-    display: inline-flex;
-    position: absolute;
-    top: 50px;
-}
-
-.mb-prfle {
-    background-color: $PflBg;
-    color: $TxtClr;
-    height: 50px;
-    width: 50px;
-    font-size: 12px;
-    border-radius: 25px;
-    font-weight: 700;
-    padding: 10px 10px;
-}
-
-    .mb-prfle.active {
-        color: white;
-        background-color: $BgrndCol;
-    }
 
 .back-arrow {
     content: $IcoBack;
@@ -111,7 +43,7 @@
     position: relative;
 }
 //Beside popup
-.model-popup {
+/*.model-popup {
     border: 1px solid $BorderClr;
     padding: 20px;
     background-color: $WhtBgClr;
@@ -144,7 +76,7 @@
         border-top: 20px solid transparent;
         border-bottom: 20px solid transparent;
         border-right: 20px solid $BgrndCol;
-    }
+    }*/
 
 .back-btn {
     content: $Backbtn;
@@ -391,24 +323,6 @@ input[type="radio"] {
     content: url(/images/premium/IcoHiddenPassword.svg);
 }
 
-.sub-box-bsns {
-    background: #000000;
-}
-
-.sub-box {
-    margin-top: 10px;
-    width: 158px;
-    height: 110px;
-    border-radius: 8px;
-    color: #FFFFFF;
-    text-align: center;
-    box-shadow: 0 4px 6px 0 rgba(49, 73, 35, .25);
-
-    .subs-plan {
-        font-size: 20px;
-    }
-}
-
 .plan-prm-icon {
     content: url(/images/default/IcoPremiumUpgrade.svg);
     margin-bottom: 8px;
@@ -419,49 +333,6 @@ input[type="radio"] {
     margin-bottom: 8px;
 }
 
-.buy-button {
-    min-width: 100px !important;
-    height: 28px;
-    padding: 1% 10%;
-    margin: 0px auto;
-    background-color: white;
-    color: darkgreen;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.assets-box {
-    width: 70px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    margin: 10px 10px 10px 0;
-    padding: 3px;
-    border: 1px solid $BorderClr;
-    box-shadow: 0px 0px 20px 0px #FFFFFF66;
-}
-
-.onedrv-icon {
-    content: url(/images/default/IcoOneDrv.svg);
-}
-
-.cld-icon {
-    content: url(/images/default/IcoIcld.svg);
-}
-
-.ggldrv-icon {
-    content: url(/images/default/IcoGglDrv.svg);
-}
-
-.drpbx-icon {
-    content: url(/images/default/IcoDrpbx.svg);
-}
-
 //temporary
 .default-icon {
     content: url(/images/default/icoScrdFldr.svg);
@@ -469,53 +340,6 @@ input[type="radio"] {
 
 .home-icon {
     content: url(/images/default/icoPremium.svg);
-}
-
-.vlt-action-btn {
-    min-width: 63px;
-    width: 63px;
-    min-height: 60px;
-    background-color: $ActnBgClr;
-    margin-top: 15px;
-    align-content: center;
-    cursor: pointer;
-    border-radius: 10px;
-
-    :hover {
-        background-color: $ActnBgClr !important;
-    }
-}
-
-.vlt-icon {
-    content: $ImgVltIcon;
-    min-width: 55px;
-    min-height: 50px;
-    margin: auto 4px;
-}
-
-.mre-actn-box {
-    height: 50px;
-    width: 230px;
-    border-radius: 4px;
-    margin: 1.5% 0;
-    border: 1px solid $BorderClr;
-    align-content: center;
-    padding: 5px 5px 5px 10px;
-    cursor: pointer;
-    line-height: 12px;
-    background-color: #fff;
-}
-
-    .mre-actn-box:hover {
-        background-color: $TbleBg;
-    }
-
-.sub-action-next-arrow {
-    content: $IcoDrpDwn;
-    float: right;
-    height: 14px;
-    margin: 14px 10px;
-    transform: rotate(90deg);
 }
 
 .fle-exton-img {

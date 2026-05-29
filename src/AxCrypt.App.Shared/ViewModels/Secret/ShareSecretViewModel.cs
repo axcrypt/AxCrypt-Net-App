@@ -214,7 +214,7 @@ public class ShareSecretViewModel : ManageSecretViewModel
     private void UpdateUIElementsOnChange()
     {
         EnableApplyButton = true;
-        //CanEnableAddShareSecret = true;
+        CanEnableAddShareSecret = true; // re-enable Add after each successful addition
         //IsAnyUsersAdded = ShareSecretUserList.Any();
         //NoUsersAdded = ShareSecretUserList.Count == 0;
 

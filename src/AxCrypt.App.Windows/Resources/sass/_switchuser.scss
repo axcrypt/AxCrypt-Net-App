@@ -1,112 +1,338 @@
-﻿@import "_basevariables.scss";
+@import "_basevariables.scss";
+
+.SwitchUser-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(15, 23, 42, .44);
+    backdrop-filter: blur(3px);
+}
 
 .SwitchUser-popup {
-    /* Centered on the viewport. `margin: auto` does nothing on a
-       position:fixed element without left/right anchors, so it used
-       to sit near the top-left — top/left 50% + translate centers it. */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    min-height: 429px;
-    max-height: 520px;
-    border-radius: 16px;
-    border: solid 1px;
-    background-color: white;
+    width: min(440px, calc(100vw - 32px));
+    max-height: calc(100vh - 48px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(17, 24, 39, .08);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, .30);
+    color: #111827;
 }
 
 .popup-image-paragraph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 28px 30px 18px;
     text-align: center;
-    margin: 30px 0 10px 0;
+}
+
+.switch-user-hero {
+    width: 88px;
+    height: 88px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 4px;
+    border-radius: 24px;
+    background: rgba(72, 119, 44, .10);
 }
 
 .popup-image {
-    width: 138px;
-    height: 133px;
-    top: 30px;
-    left: 131px;
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+}
+
+.switch-user-title {
+    margin: 0;
+    color: #111827;
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.25;
 }
 
 .popup-paragraph {
-    width: 321px;
-    height: 32px;
-    top: 179px;
-    left: 40px;
+    max-width: 330px;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.55;
 }
 
-.SwitchUser-popup-backgroundColor {
-    margin-right: 46px;
-    margin-top: 5px;
-}
-
-.SwitchUser-popup-backgroundImage {
-    width: 400px;
-    height: 34px;
-    background-color: #E8FEDE;
-    border-radius: 3px;
-    top: 221px;
+.switch-user-list {
+    min-height: 96px;
+    max-height: 236px;
+    margin: 0 22px;
+    padding: 4px;
+    overflow-y: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #f9fafb;
 }
 
 .popup-select-emails {
-    line-height: 34px;
-    padding: 0 5px;
+    width: 100%;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+    border: 0;
+    border-radius: 11px;
+    background: transparent;
+    color: #111827;
+    transition: background .14s, box-shadow .14s;
 }
 
 .popup-select-emails:hover,
 .popup-select-emails.active {
-    background-color: #E8FEDE !important;
+    background: #fff !important;
+    box-shadow: 0 1px 4px rgba(17, 24, 39, .06);
     cursor: pointer;
 }
 
 .popup-select-emails.active {
-    background: url(images/TickMark.svg) no-repeat center right 35px;
+    box-shadow: inset 0 0 0 1px rgba(72, 119, 44, .22), 0 1px 4px rgba(17, 24, 39, .06);
 }
 
-.popup-select-emails:hover .select-email,
-.popup-select-emails.active .select-email {
-    color: #48772C;
-    font-weight: 700 !important;
-}
-
-.icon-email {
-    width: 20px;
-    height: 20px;
-}
-
-.select-email {
-    font-weight: 400;
-    font-size: 14px;
-    margin-left: 5px;
-}
-
-.switch-user-action-section {
-    margin: 0px 34px auto !important;
+.switch-user-profile {
+    min-width: 0;
+    flex: 1;
     display: flex;
-    gap: 24px;
-    justify-content: center;
-    padding: 11px 0px 15px 0px;
-}
-
-.switch-user-action-btn {
-    text-align: center;
-    width: 153px;
-    height: 36.65px;
-    border-radius: 10px;
-}
-
-.switch-user-action-btn.confirm {
-    background-color: #48772C;
-    color: #FFF;
-    border: none;
-}
-
-.switch-user-action-btn.cancel {
-    background-color: #FFF;
-    border: 1px solid #86B96E;
-    color: #000;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
 }
 
 .Switchuser.user-avatar {
     content: $AxCryptIcon;
+}
+
+.Switchuser {
+    width: 30px;
+    height: 30px;
+    padding: 6px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(72, 119, 44, .10);
+}
+
+.switch-user-add-icon {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(72, 119, 44, .10);
+}
+
+.switch-user-add-icon img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.select-email {
+    min-width: 0;
+    overflow: hidden;
+    color: #111827;
+    font-size: 13.5px;
+    font-weight: 650;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.popup-select-emails.active .select-email,
+.popup-select-emails:hover .select-email {
+    color: #48772C;
+}
+
+.switch-user-state {
+    width: 30px;
+    height: 30px;
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: background .14s, color .14s;
+}
+
+.switch-user-state--active {
+    color: #48772C;
+    background: rgba(72, 119, 44, .12);
+}
+
+.switch-user-state--remove {
+    color: #dc2626;
+}
+
+.switch-user-state--remove:hover {
+    background: #fef2f2;
+}
+
+.popup-select-emails--add {
+    justify-content: flex-start;
+    margin-top: 4px;
+    padding: 8px 12px;
+    color: #48772C;
+    font-weight: 800;
+}
+
+.popup-select-emails--add .select-email {
+    color: #48772C;
+}
+
+.switch-user-action-section {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding: 18px 22px 22px;
+}
+
+.switch-user-action-btn {
+    min-width: 116px;
+    height: 38px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s, transform .08s;
+}
+
+.switch-user-action-btn:active {
+    transform: translateY(1px);
+}
+
+.switch-user-action-btn.confirm {
+    border: 0;
+    background: #48772C;
+    color: #fff;
+}
+
+.switch-user-action-btn.confirm:hover {
+    background: #3f6826;
+}
+
+.switch-user-action-btn.cancel {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #374151;
+}
+
+.switch-user-action-btn.cancel:hover {
+    border-color: rgba(72, 119, 44, .45);
+    color: #48772C;
+    background: rgba(72, 119, 44, .06);
+}
+
+.SwitchUser-popup-backgroundColor,
+.SwitchUser-popup-backgroundImage,
+.icon-email {
+    display: none;
+}
+
+html[data-theme="dark"] {
+    .SwitchUser-backdrop {
+        background: rgba(0, 0, 0, .58);
+    }
+
+    .SwitchUser-popup {
+        border-color: #2a3645;
+        background: #1c2530;
+        color: #e8ecf1;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, .58);
+    }
+
+    .switch-user-hero {
+        background: rgba(127, 204, 92, .14);
+    }
+
+    .switch-user-title,
+    .select-email {
+        color: #e8ecf1;
+    }
+
+    .popup-paragraph {
+        color: #b5bcc7;
+    }
+
+    .switch-user-list {
+        border-color: #2a3645;
+        background: #18222d;
+    }
+
+    .popup-select-emails:hover,
+    .popup-select-emails.active {
+        background: #232e3b !important;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .30);
+    }
+
+    .popup-select-emails.active {
+        box-shadow: inset 0 0 0 1px rgba(127, 204, 92, .32), 0 1px 4px rgba(0, 0, 0, .30);
+    }
+
+    .Switchuser,
+    .switch-user-add-icon {
+        background: rgba(127, 204, 92, .16);
+    }
+
+    .popup-select-emails.active .select-email,
+    .popup-select-emails:hover .select-email,
+    .popup-select-emails--add,
+    .popup-select-emails--add .select-email,
+    .switch-user-state--active {
+        color: #b8e89a;
+    }
+
+    .switch-user-state--active {
+        background: rgba(127, 204, 92, .18);
+    }
+
+    .switch-user-state--remove {
+        color: #f87171;
+    }
+
+    .switch-user-state--remove:hover {
+        background: rgba(239, 68, 68, .14);
+    }
+
+    .switch-user-action-btn.confirm {
+        background: #7fcc5c;
+        color: #0f1a07;
+    }
+
+    .switch-user-action-btn.confirm:hover {
+        background: #6fbd50;
+    }
+
+    .switch-user-action-btn.cancel {
+        border-color: #3a4554;
+        background: #232e3b;
+        color: #e8ecf1;
+    }
+
+    .switch-user-action-btn.cancel:hover {
+        border-color: rgba(127, 204, 92, .45);
+        background: rgba(127, 204, 92, .14);
+        color: #b8e89a;
+    }
 }

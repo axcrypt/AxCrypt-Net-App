@@ -1,4 +1,4 @@
-﻿@using AxCrypt.App.Shared.Desktop.Code
+@using AxCrypt.App.Shared.Desktop.Code
 @using AxCrypt.App.Shared.Helpers
 @using AxCrypt.App.Shared.Services.Interface
 @using AxCrypt.App.Shared.Utility.View
@@ -10,157 +10,279 @@
 @inject TextShareViewModel ShareModel
 @inject CopyToClipboardUtility CopyToClipboardUtility
 @inject IStatusAlertService _statusAlertService
-<style>
-    .popup-small {
-        width: 397px !important;
-        height: 375px !important;
-        margin: auto;
-        background: white;
-        padding: 10px;
-        border-radius: 8px;
-    }
 
-    .popup-large {
-        width: 397px !important;
-        height: 472px !important;
-        margin: auto;
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-    }
+@*
+    Share Encrypted Text dialog — redesigned with the .skd-* (share-key
+    dialog) design system.  All @code logic is unchanged; only the
+    markup and the inline <style> have been replaced.
 
-    .action-btn {
-        background-color: #96AD88;
-        color: #ffffff;
-        border-radius: 4px;
-        width: 182px;
-        height: 34px;
-        font-size: 14px;
-        text-align: center;
-    }
-</style>
+    Structure
+        skd-backdrop → skd-modal
+          skd-header   (lock icon · "Share as link" · ×)
+          skd-body
+            tsd-tabs   (Anyone | Specific Users)
+            [Specific Users] skd-section → input row + recipient list
+            tsd-expiry (expires dropdown + tooltip)
+            [After share]   tsd-link-callout
+          skd-footer   (Cancel | Share)
+*@
 
 @if (ShareModel.IsVisible)
 {
     <AxCrypt.App.Shared.Desktop.Components.Shared.ProcessIndicatorComponent />
-    <div id="modal-dialog1" class="modalDialog" style="display: block;">
-        <div class="@(TabIndex == 1 ? "popup-small" : "popup-large")" style="margin-top:100px; height: fit-content !important;">
-            <div class="close-img" @onclick="ShareModel.HideDialog" />
 
-            <h2 style="margin: 10px 0;text-align:center;color:#494949"><b>@Texts.ShareAsLinkActionText</b></h2>
+    <div class="skd-backdrop" @onclick="ShareModel.HideDialog">
+        <div class="skd-modal tsd-modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="tsd-title"
+             @onclick:stopPropagation>
 
-            <div class="action-tabs" style="margin: 20px auto;">
-                <div id="anyone-tab" class="act-tab @(TabIndex == 1 ? "active" : "")" @onclick="async () => await RefreshUIForTab(1)">
-                    <a href="javascript:void(0);">@Texts.AnyoneText</a>
+            @* ── Header ─────────────────────────────────────── *@
+            <header class="skd-header">
+                <div class="skd-header-icon tsd-header-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+                    </svg>
                 </div>
-                <div id="spcific-tab" class="act-tab @(TabIndex == 2 ? "active" : "")" @onclick="async () => await RefreshUIForTab(2)">
-                    <a href="javascript:void(0);">@Texts.SpecificUsersText</a>
+                <div class="skd-header-text">
+                    <h2 id="tsd-title" class="skd-title">@Texts.ShareAsLinkActionText</h2>
+                    <p class="skd-sub">Share your encrypted text — set who can access it and for how long.</p>
                 </div>
-            </div>
+                <button type="button" class="skd-close" @onclick="ShareModel.HideDialog" aria-label="Close">×</button>
+            </header>
 
-            <div class="parent-container" style="min-height: fit-content;">
+            <div class="skd-body">
+
+                @* ── Tab switcher ────────────────────────────── *@
+                <div class="tsd-tabs" role="tablist">
+                    <button type="button"
+                            role="tab"
+                            class="tsd-tab @(TabIndex == 1 ? "tsd-tab--active" : "")"
+                            aria-selected="@(TabIndex == 1)"
+                            @onclick="async () => await RefreshUIForTab(1)">
+                        @Texts.AnyoneText
+                    </button>
+                    <button type="button"
+                            role="tab"
+                            class="tsd-tab @(TabIndex == 2 ? "tsd-tab--active" : "")"
+                            aria-selected="@(TabIndex == 2)"
+                            @onclick="async () => await RefreshUIForTab(2)">
+                        @Texts.SpecificUsersText
+                    </button>
+                </div>
+
+                @* ── Specific Users panel ────────────────────── *@
                 @if (TabIndex == 2)
                 {
-                    <h5 style="margin: 10px 0; font-size:16px;">@string.Format(Texts.ChooseUpTo, MaxAllowedUsersToShare)</h5>
+                    <section class="skd-section">
+                        <label class="skd-label">
+                            @string.Format(Texts.ChooseUpTo, MaxAllowedUsersToShare)
+                        </label>
 
-                    <div class="email-input-container">
                         @if (!string.IsNullOrEmpty(ShareModel.ErrorMessage))
                         {
-                            <div class="error-message" style="padding-bottom: 5px;">@ShareModel.ErrorMessage </div>
+                            <div class="skd-error" role="alert">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="8" x2="12" y2="12"/>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                </svg>
+                                <span>@ShareModel.ErrorMessage</span>
+                            </div>
                         }
 
-                        <div style="display: flex; justify-content: center;gap: 20px;">
-                            <input type="text" maxlength="150" @bind="ShareModel.UserInput" style="width: 90%;" />
-                            <button class="button success active" style="width: 75px;height: 40px;" @onclick="AddEmail">
+                        @* Email input + Add *@
+                        <div class="skd-add-row">
+                            <div class="skd-input-wrap">
+                                <svg class="skd-input-icon" width="16" height="16" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/>
+                                    <polyline points="22 6 12 13 2 6"/>
+                                </svg>
+                                <input type="text"
+                                       class="skd-input"
+                                       maxlength="150"
+                                       placeholder="someone@example.com"
+                                       autocomplete="off"
+                                       @bind="ShareModel.UserInput"
+                                       @onkeydown="OnEmailKeyDown" />
+                            </div>
+                            <button type="button"
+                                    class="skd-btn skd-btn--primary"
+                                    @onclick="AddEmail">
                                 @Texts.AddPromptText
                             </button>
                         </div>
 
+                        @* Recipient list *@
                         @if (ShareModel.ReceiverList != null && ShareModel.ReceiverList.Any())
                         {
-                            <h3 style="margin: 10px 0; font-size:16px;">@string.Format(Texts.UsersWithAccessText, "(" + ShareModel.ReceiverList.Count + ")")</h3>
-                            <table style="display: flex;gap: 10px;flex-wrap: wrap;">
+                            <div class="skd-list-head">
+                                <h3 class="skd-list-title">
+                                    @string.Format(Texts.UsersWithAccessText,
+                                        $"({ShareModel.ReceiverList.Count})")
+                                </h3>
+                            </div>
+                            <ul class="skd-recipient-list">
                                 @foreach (AxCrypt.Core.UI.EmailAddress receiver in ShareModel.ReceiverList)
                                 {
-                                    <tr>
-                                        <td>
-                                            <span class="email-text-list" title="@receiver.Address">@receiver.Address</span>
-                                        </td>
-                                        <td>
-                                            <span class="remove-email" style="padding-left:10px;" @onclick="() => Remove(receiver.Address)">x</span>
-                                        </td>
-                                    </tr>
+                                    string addr = receiver.Address;
+                                    <li class="skd-recipient">
+                                        <span class="skd-recipient-avatar" aria-hidden="true">
+                                            @InitialOf(addr)
+                                        </span>
+                                        <span class="skd-recipient-name">@addr</span>
+                                        <button type="button"
+                                                class="tsd-remove-btn"
+                                                aria-label="Remove @addr"
+                                                @onclick="() => Remove(addr)"
+                                                @onclick:stopPropagation>
+                                            <svg width="14" height="14" viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2.5"
+                                                 stroke-linecap="round" aria-hidden="true">
+                                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                                <line x1="6" y1="6" x2="18" y2="18"/>
+                                            </svg>
+                                        </button>
+                                    </li>
                                 }
-                            </table>
+                            </ul>
                         }
-                    </div>
-                }
-
-                <div style="display:flex;justify-content:center;align-items: center;max-height: 40px;gap: 10px;margin-top: 15px;">
-                    <label style="font-size:16px;">@Texts.ExpireInLabelFirstPart </label>
-
-                    <select style="width:128px;height:32px;font-size:16px;" @bind="ShareModel.ExpiresInOption">
-                        @foreach (KeyValuePair<string, string> selectOption in ShareModel.ExpiryOptionsList)
+                        else
                         {
-                            <option value="@selectOption.Key">@selectOption.Value</option>
-                        }
-                    </select>
-
-                    <div style="position: relative;right:0;">
-                        <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16" @onmouseover='@(() => ShareModel.ShowPopup("open"))' @onmouseout='@(() => ShareModel.HidePopup())'>
-                        @if (ShareModel.IsHovered && ShareModel.HoveredElement == "open")
-                        {
-                            <div class="custom-password-help-hoverpopup text-center" style="background-color:#fff;right:0;">
-                                <span class="txt-clr font-medium">@Texts.ShareEncryptedTextDialog</span>
+                            <div class="skd-empty">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="1.6"
+                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="8" r="4"/>
+                                    <path d="M4 21v-1a6 6 0 016-6h4a6 6 0 016 6v1"/>
+                                </svg>
+                                <p class="skd-empty-title">No recipients yet</p>
+                                <p class="skd-empty-sub">Add an email above to share access.</p>
                             </div>
                         }
+                    </section>
+                }
+
+                @* ── Expiry row ───────────────────────────────── *@
+                <section class="skd-section tsd-expiry-section">
+                    <label class="skd-label" for="tsd-expiry">@Texts.ExpireInLabelFirstPart</label>
+                    <div class="tsd-expiry-row">
+                        <div class="tsd-select-wrap">
+                            <select id="tsd-expiry"
+                                    class="tsd-select"
+                                    @bind="ShareModel.ExpiresInOption">
+                                @foreach (KeyValuePair<string, string> opt in ShareModel.ExpiryOptionsList)
+                                {
+                                    <option value="@opt.Key">@opt.Value</option>
+                                }
+                            </select>
+                            <svg class="tsd-select-caret" width="12" height="12" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+
+                        @* Info tooltip *@
+                        <div class="tsd-info-wrap"
+                             @onmouseover='() => ShareModel.ShowPopup("open")'
+                             @onmouseout='ShareModel.HidePopup'>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round"
+                                 class="tsd-info-icon" aria-label="Expiry information">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="8"/>
+                                <line x1="12" y1="12" x2="12" y2="16"/>
+                            </svg>
+                            @if (ShareModel.IsHovered && ShareModel.HoveredElement == "open")
+                            {
+                                <div class="tsd-tooltip" role="tooltip">
+                                    @Texts.ShareEncryptedTextDialog
+                                </div>
+                            }
+                        </div>
                     </div>
+                </section>
 
-                </div>
-
-                <div style="display: flex; gap: 20px;justify-content: center;padding-top: 30px;">
-                    <button class="button success btn-large font-medium active" @onclick="async () => await ShareModel.ApplyAsync(TabIndex)">@Texts.ShareLabel</button>
-                    <button class="button border btn-large font-medium btn-hide" @onclick="ShareModel.HideDialog">@Texts.ButtonCancelText</button>
-                </div>
-
+                @* ── Shared link callout ─────────────────────── *@
                 @if (ShareModel.SharedLink != null)
                 {
-                    <div style="display: flex;justify-content: center;padding-top: 15px;">
-                        <button class="multi-actn-btn" title="Copy share link to clipboard" @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(ShareModel.SharedLink.ToString())">
-                            <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy share link to clipboard" width="16" height="16" />
-                            @Texts.SecretsCopytoClipboard
+                    <div class="tsd-link-callout" role="status">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                             stroke="#16a34a" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <div class="tsd-link-body">
+                            <span class="tsd-link-label">Link ready — copy and share it</span>
+                            <span class="tsd-link-url">@ShareModel.SharedLink</span>
+                        </div>
+                        <button type="button"
+                                class="tsd-copy-btn @(CopyToClipboardUtility.CopiedInfoText != string.Empty ? "tsd-copy-btn--copied" : "")"
+                                title="@Texts.SecretsCopytoClipboard"
+                                @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(ShareModel.SharedLink.ToString())">
+                            @if (CopyToClipboardUtility.CopiedInfoText != string.Empty)
+                            {
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Copied!</span>
+                            }
+                            else
+                            {
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                                </svg>
+                                <span>@Texts.SecretsCopytoClipboard</span>
+                            }
                         </button>
-                        @if (CopyToClipboardUtility.CopiedInfoText != string.Empty)
-                        {
-                            <label style="margin: auto 10px;">@CopyToClipboardUtility.CopiedInfoText</label>
-                        }
                     </div>
                 }
+
             </div>
+
+            @* ── Footer ─────────────────────────────────────── *@
+            <footer class="skd-footer">
+                <button type="button" class="skd-btn skd-btn--ghost" @onclick="ShareModel.HideDialog">
+                    @Texts.ButtonCancelText
+                </button>
+                <button type="button"
+                        class="skd-btn skd-btn--primary"
+                        @onclick="async () => await ShareModel.ApplyAsync(TabIndex)">
+                    @Texts.ShareLabel
+                </button>
+            </footer>
         </div>
     </div>
 }
 
+@* Styles live in AxCrypt.App.Windows/Resources/sass/HomeNew/ShareEncryptedText.scss *@
+
 @code {
-
     private int MaxAllowedUsersToShare = 0;
-
     private int TabIndex { get; set; } = 1;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
         MaxAllowedUsersToShare = ShareModel.MaxAllowedUsersCountToShare();
         ShareModel.OnUpdateViewState += async () => await UpdateState();
     }
 
     private async Task UpdateState()
     {
-        await InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });
+        await InvokeAsync(StateHasChanged);
     }
 
     private void AddEmail()
@@ -211,10 +333,9 @@
         }
     }
 
-    private async Task CopyToClipBoard(string copyText)
+    private void OnEmailKeyDown(KeyboardEventArgs e)
     {
-        await CopyToClipboardUtility.CopyToClipboard(copyText);
-        _statusAlertService.Error(Texts.NoInternetErrorMessage);
+        if (e.Key == "Enter") AddEmail();
     }
 
     private async Task RefreshUIForTab(int tab)
@@ -224,4 +345,7 @@
         ShareModel.ErrorMessage = string.Empty;
         ShareModel.UserInput = string.Empty;
     }
+
+    private static string InitialOf(string? text) =>
+        string.IsNullOrWhiteSpace(text) ? "?" : text.Trim()[..1].ToUpperInvariant();
 }

@@ -17,7 +17,7 @@ public static class NavPageData
                     Href = "/",
                     Label = Texts.HomeLinkLabel,
                     Title = Texts.WelcomeBackTitle,
-                    Subtitle = "Your encrypted dashboard — recent files, quick actions, and security status at a glance.",
+                    Subtitle = Texts.NavPageSubtitle,
                     Match = NavLinkMatch.All,
                     StyleClass = "nav-home-ico",
                     SideMenu = true
@@ -27,7 +27,7 @@ public static class NavPageData
                     Href = "/securedfolders",
                     Label = Texts.WatchedFoldersTabPageText,
                     Title = Texts.WatchedFoldersTabPageText,
-                    Subtitle = "Folders AxCrypt watches — anything you drop in is automatically encrypted.",
+                    Subtitle = Texts.NavPageSecuredFoldersSubtitle,
                     IsPaid = true,
                     Match = NavLinkMatch.Prefix,
                     StyleClass = "nav-folders-ico",
@@ -38,7 +38,7 @@ public static class NavPageData
                     Href = "/vault",
                     Label = Texts.VaultText,
                     Title = Texts.VaultText,
-                    Subtitle = "A private, encrypted space that automatically protects your files and securely shares them with trusted people.",
+                    Subtitle = Texts.NavPageVaultSubtitle,
                     Match = NavLinkMatch.Prefix,
                     IsPaid = true,
                     StyleClass = "nav-vault-ico",
@@ -49,7 +49,7 @@ public static class NavPageData
                     Href = "/passwordManager",
                     Label = Texts.PasswordManagerLinkLabel,
                     Title = Texts.PasswordManagerLinkLabel,
-                    Subtitle = "Store passwords, generate strong ones, and autofill — all protected by AES-256.",
+                    Subtitle = Texts.NavPagePasswordManagerSubtitle,
                     Match = NavLinkMatch.Prefix,
                     StyleClass = "nav-pwdmggr-ico",
                     SideMenu = true
@@ -59,7 +59,7 @@ public static class NavPageData
                     Href = "/securedmessenger",
                     Label = Texts.SecuredMessengerLinkLabel,
                     Title = Texts.SecuredMessengerLinkLabel,
-                    Subtitle = "Send end-to-end encrypted messages — only the recipient can read them.",
+                    Subtitle = Texts.NavPageSecuredMessengerSubtitle,
                     Match = NavLinkMatch.Prefix,
                     StyleClass = "nav-secdmsgr-ico",
                     SideMenu = true
@@ -69,7 +69,7 @@ public static class NavPageData
                     Href = "/textencryption",
                     Label = Texts.TextEncryptionLinkLabel,
                     Title = Texts.TextEncryptionLinkLabel,
-                    Subtitle = "Paste any text, encrypt it, and share the ciphertext safely anywhere.",
+                    Subtitle = Texts.NavPageTextEncryptionSubtitle,
                     IsPaid = true,
                     Match = NavLinkMatch.Prefix,
                     StyleClass = "nav-txtencryp-ico",
@@ -78,9 +78,9 @@ public static class NavPageData
                 new()
                 {
                     Href = "/tools",
-                    Label = "Tools",
-                    Title = "Tools",
-                    Subtitle = "Secure-delete, anonymous rename, file verification, and other AxCrypt utilities.",
+                    Label = Texts.NavPageToolsLinkLabel,
+                    Title = Texts.NavPageToolsLinkLabel,
+                    Subtitle = Texts.NavPageToolsSubtitle,
                     Match = NavLinkMatch.Prefix,
                     StyleClass = "nav-tools-ico",
                     SideMenu = true
@@ -88,9 +88,9 @@ public static class NavPageData
                 new()
                 {
                     Href = "/helpcenter",
-                    Label = "Help & Support",
-                    Title = "Help Center",
-                    Subtitle = "Browse FAQs, search the knowledge base, send feedback, or reach our support team.",
+                    Label = Texts.NavPageHelpCenterLinkLabel,
+                    Title = Texts.NavPageHelpCenterTitle,
+                    Subtitle = Texts.NavPageHelpCenterSubtitle,
                     Match = NavLinkMatch.Prefix,
                     StyleClass = "nav-suprt-ico",
                     SideMenu = true
@@ -100,10 +100,20 @@ public static class NavPageData
                     Href = "/notification",
                     Label = Texts.PromptNotificationsText,
                     Title = Texts.PromptNotificationsText,
-                    Subtitle = "Activity alerts, share-key invitations, and system messages in one place.",
+                    Subtitle = Texts.NavPageToolsNotificationsSubtitle,
                     Match = NavLinkMatch.Prefix,
                     StyleClass = "nav-suprt-ico",
                     SideMenu = false
+                },
+                new()
+                {
+                    Href = "/findfiles",
+                    Label = Texts.FindFileFeatureTitle,
+                    Title = Texts.FindFileFeatureTitle,
+                    Subtitle = Texts.FindFilesFeatureDescription,
+                    Match = NavLinkMatch.Prefix,
+                    StyleClass = "nav-tools-ico",
+                    SideMenu = false   // accessed via Tools page, not sidebar
                 },
             };
         }

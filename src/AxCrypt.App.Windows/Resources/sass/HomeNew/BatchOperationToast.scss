@@ -1,8 +1,6 @@
-﻿/* ═══════════════════════════════════════════
-   Batch operation toast
-   Bottom-right summary toast for encrypt / decrypt / open / remove
-   batches. Three states: progress, success, failure.
-════════════════════════════════════════════ */
+﻿// Batch operation toast
+// Bottom-right summary toast for encrypt / decrypt / open / remove
+// batches. Three states: progress, success, failure.
 .batch-toast {
     position: fixed;
     bottom: 20px;
@@ -145,7 +143,7 @@
     white-space: nowrap;
 }
 
-/* ── Variants ─────────────────────────────── */
+// ── Variants ───────────────────────────────
 .batch-toast--progress .bt-icon {
     background: #eff6ff;
     color: #1d4ed8;

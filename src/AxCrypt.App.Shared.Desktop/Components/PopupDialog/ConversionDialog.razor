@@ -1,0 +1,144 @@
+@implements IDisposable
+@using AxCrypt.App.Entitlement.Contracts
+@using AxCrypt.App.Shared.Desktop.Models
+@using AxCrypt.App.Shared.Helpers
+@using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+@using AxCrypt.App.Shared.Services.UI
+
+@inject UpgradeSubscriptionViewModel upgradeModel
+@inject NavigationManager navigationManager
+
+@*
+    ConversionDialog — the single, app-shell-level component that
+    renders all three "upgrade / try now / renew" conversion popups.
+
+    Previously three separate files (TryNowSubscriptionDialog,
+    UpgradeSubscriptionDialog, BusinessSubscriptionDialog) all using the
+    identical .cnv-* shell with only copy and feature cards differing.
+    This component listens to all three CommonDialogService triggers and
+    renders from a ConversionDialogConfig built by the static factories
+    in that class.
+
+    To change copy for any mode → edit ConversionDialogConfig.cs.
+    To change layout for all modes → edit the markup below once.
+    To add a new mode → add a factory method + wire a new dialog service.
+*@
+
+@if (_config != null)
+{
+    <div class="cnv-backdrop" @onclick="Close">
+        <div class="cnv-modal @_config.TierCssClass"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="cnv-title"
+             @onclick:stopPropagation>
+
+            <button type="button" class="cnv-close" @onclick="Close" aria-label="Close">×</button>
+
+            @* ── Hero band ─────────────────────────────────── *@
+            <div class="cnv-hero">
+                <div class="cnv-hero-sparkle" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z" />
+                        <polyline points="9 12 11 14 15 10" />
+                    </svg>
+                </div>
+                <span class="cnv-hero-badge">@_config.HeroBadge</span>
+            </div>
+
+            @* ── Body ──────────────────────────────────────── *@
+            <div class="cnv-body">
+                <h2 id="cnv-title" class="cnv-title">@_config.Headline</h2>
+                <p class="cnv-sub">@_config.Subhead</p>
+
+                @* ── 2×2 feature grid ──────────────────────── *@
+                <div class="cnv-grid">
+                    @foreach (ConversionDialogFeature feat in _config.Features)
+                    {
+                        <div class="cnv-card">
+                            <div class="cnv-card-icon" aria-hidden="true">
+                                @((MarkupString)feat.Icon)
+                            </div>
+                            <div class="cnv-card-text">
+                                <span class="cnv-card-title">@feat.Title</span>
+                                <span class="cnv-card-desc">@feat.Desc</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @* ── Primary CTA ───────────────────────────── *@
+                <button class="cnv-cta" @onclick="OpenUpgradePage">
+                    <span>@_config.CtaLabel</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                </button>
+
+                <p class="cnv-risk">@_config.RiskLine</p>
+
+                @* ── Trust badges ──────────────────────────── *@
+                <div class="cnv-trust" aria-label="Compliance">
+                    @for (int i = 0; i < _config.TrustBadges.Count; i++)
+                    {
+                        <span>@_config.TrustBadges[i]</span>
+                        @if (i < _config.TrustBadges.Count - 1)
+                        {
+                            <span class="cnv-trust-dot" aria-hidden="true"></span>
+                        }
+                    }
+                </div>
+
+                <button class="cnv-dismiss" @onclick="Close">@Texts.ButtonNotNow</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private ConversionDialogConfig? _config;
+    private CommonDialogService? _activeDialog;
+
+    protected override void OnInitialized()
+    {
+        upgradeModel.TryNowSubscriptionDialog.OnDialogVisibilityChanged  += OnTryNowChanged;
+        upgradeModel.UpgradeSubscriptionDialog.OnDialogVisibilityChanged += OnUpgradeChanged;
+        upgradeModel.BusinessSubscriptionDialog.OnDialogVisibilityChanged += OnBusinessChanged;
+    }
+
+    public void Dispose()
+    {
+        upgradeModel.TryNowSubscriptionDialog.OnDialogVisibilityChanged  -= OnTryNowChanged;
+        upgradeModel.UpgradeSubscriptionDialog.OnDialogVisibilityChanged -= OnUpgradeChanged;
+        upgradeModel.BusinessSubscriptionDialog.OnDialogVisibilityChanged -= OnBusinessChanged;
+    }
+
+    private void OnTryNowChanged(bool visible)  => Show(visible, upgradeModel.TryNowSubscriptionDialog,  ConversionDialogConfig.ForTryNow(GetSignUpFrom()));
+    private void OnUpgradeChanged(bool visible) => Show(visible, upgradeModel.UpgradeSubscriptionDialog, ConversionDialogConfig.ForUpgrade(GetSignUpFrom()));
+    private void OnBusinessChanged(bool visible) => Show(visible, upgradeModel.BusinessSubscriptionDialog, ConversionDialogConfig.ForBusiness());
+
+    private void Show(bool visible, CommonDialogService dialog, ConversionDialogConfig config)
+    {
+        _activeDialog = visible ? dialog : null;
+        _config       = visible ? config : null;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void Close() => _activeDialog?.Close();
+
+    private void OpenUpgradePage()
+    {
+        Close();
+        navigationManager.NavigateTo("/upgradePage");
+    }
+
+    private static SignUpFrom GetSignUpFrom() =>
+        AxCServiceProviderExtension.GetService<UserService>()?.SignUpFrom ?? SignUpFrom.None;
+}

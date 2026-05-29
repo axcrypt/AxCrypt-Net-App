@@ -1,4 +1,5 @@
-﻿@using AxCrypt.Abstractions
+﻿@implements IDisposable
+@using AxCrypt.Abstractions
 @using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Core.UI
@@ -12,52 +13,90 @@
 
 @if (popupService.SwitchUserPopupOpen)
 {
-    <div class="SwitchUser-popup" style="z-index:100;">
-        <div class="popup-image-paragraph">
-            <img class="popup-image" src="images/prfls_1.svg" alt="Switch user" style="display:block; margin:30px auto 16px auto;">
-            <span class="popup-paragraph" style="font-size:14px;">@((MarkupString)string.Format(Texts.SwitchUserPopupText))</span>
-        </div>
-        <div style="max-height: 220px;min-height: 100px;overflow-y:auto;margin: 0 30px;">
-            @{
-                IEnumerable<UserProfile> validUserProfiles = SwitchUserViewModel.UserProfilesList.Where(up => up.UserEmail != "");
-                int validProfileCount = validUserProfiles.Count();
-            }
-            @for (int i = 0; i < validProfileCount; i++)
-            {
-                UserProfile email = validUserProfiles.ElementAt(i);
-                <div class="popup-select-emails @(email.Active ? "active" : "")">
-                    <div @onclick="@(() => SelectEmail(email.UserEmail, email.SubsType))" style="display: inline-block;">
-                        <img class="Switchuser @ActiveEmailIcon(email.SubsType) @(email.Active ? "active" : "")" alt="@email.SubsType" />
-                        <span class="select-email">@email.UserEmail</span>
+    <div class="SwitchUser-backdrop">
+        <div class="SwitchUser-popup" role="dialog" aria-modal="true" aria-labelledby="switch-user-title">
+            <div class="popup-image-paragraph">
+                <span class="switch-user-hero">
+                    <img class="popup-image" src="images/prfls_1.svg" alt="Switch user">
+                </span>
+                <h2 id="switch-user-title" class="switch-user-title">@Texts.SwitchUserButtonText</h2>
+                <span class="popup-paragraph">@((MarkupString)string.Format(Texts.SwitchUserPopupText))</span>
+            </div>
+            <div class="switch-user-list">
+                @{
+                    IEnumerable<UserProfile> validUserProfiles = SwitchUserViewModel.UserProfilesList.Where(up => up.UserEmail != "");
+                    int validProfileCount = validUserProfiles.Count();
+                }
+                @for (int i = 0; i < validProfileCount; i++)
+                {
+                    UserProfile email = validUserProfiles.ElementAt(i);
+                    <div class="popup-select-emails @(email.Active ? "active" : "")">
+                        <button class="switch-user-profile"
+                                type="button"
+                                @onclick="@(() => SelectEmail(email.UserEmail, email.SubsType))">
+                            <img class="Switchuser @ActiveEmailIcon(email.SubsType) @(email.Active ? "active" : "")" alt="@email.SubsType" />
+                            <span class="select-email">@email.UserEmail</span>
+                        </button>
+                        @if (email.Active)
+                        {
+                            <button class="switch-user-state switch-user-state--active"
+                                    type="button"
+                                    title="Selected profile"
+                                    @onclick="() => SwitchUserViewModel.SwitchUser(email.UserEmail)">&#10003;</button>
+                        }
+                        else
+                        {
+                            <button class="switch-user-state switch-user-state--remove"
+                                    type="button"
+                                    title="Remove user profile"
+                                    @onclick="() => SwitchUserViewModel.RemoveUserProfileAsync(email.UserEmail)">&#x2715;</button>
+                        }
                     </div>
-                    @if (email.Active)
-                    {
-                        <span title="Remove user profile" style="color:green;float: right;font-weight: 800;" @onclick="() => SwitchUserViewModel.SwitchUser(email.UserEmail)">&#10003;</span>
-                    }
-                    else
-                    {
-                        <span title="Remove user profile" style="color:red;float: right;font-weight: 800;" @onclick="() => SwitchUserViewModel.RemoveUserProfileAsync(email.UserEmail)">&#x2715</span>
-                    }
-                </div>
-            }
+                }
 
-            @if (validProfileCount < SwitchUserViewModel.MaxUserProfileLimit)
-            {
-                <div class="popup-select-emails" style="margin-top: 6px;" @onclick="async () => await SwitchUserViewModel.OnNewEmail_Clicked()">
-                    <img class="" src="images/Icon-4.svg" alt="" />
-                    <span class="select-email">@Texts.AddNewEmailText</span>
-                </div>
-            }
-        </div>
-        <div class="switch-user-action-section">
-            <input class="switch-user-action-btn confirm" type="button" value="Confirm" @onclick="async () => await ConfirmSwitchUserAsync()" />
-            <input class="switch-user-action-btn cancel" type="button" value="Cancel" @onclick="popupService.ToggleSwitchUserPopupOpen" />
+                @if (validProfileCount < SwitchUserViewModel.MaxUserProfileLimit)
+                {
+                    <button class="popup-select-emails popup-select-emails--add"
+                            type="button"
+                            @onclick="async () => await SwitchUserViewModel.OnNewEmail_Clicked()">
+                        <span class="switch-user-add-icon">
+                            <img src="images/Icon-4.svg" alt="" />
+                        </span>
+                        <span class="select-email">@Texts.AddNewEmailText</span>
+                    </button>
+                }
+            </div>
+            <div class="switch-user-action-section">
+                <button class="switch-user-action-btn confirm" type="button" @onclick="async () => await ConfirmSwitchUserAsync()">Confirm</button>
+                <button class="switch-user-action-btn cancel" type="button" @onclick="popupService.ToggleSwitchUserPopupOpen">Cancel</button>
+            </div>
         </div>
     </div>
 }
 
 @code {
     private bool IsVisible { get; set; }
+    // OnUpdateViewState / OnChange are `event Action?` on the VM and the
+    // PopupService — not `event Func<Task>?` — so the field types must be
+    // Action too. Bridge the sync handler to an async UpdateState() with
+    // a fire-and-forget InvokeAsync inside the lambda so the event signature
+    // stays Action while we still get UI thread marshalling.
+    private Action? _onUpdateViewState;
+    private Action? _onPopupChange;
+
+    public void Dispose()
+    {
+        if (_onUpdateViewState != null)
+        {
+            SwitchUserViewModel.OnUpdateViewState -= _onUpdateViewState;
+            _onUpdateViewState = null;
+        }
+        if (_onPopupChange != null)
+        {
+            popupService.OnChange -= _onPopupChange;
+            _onPopupChange = null;
+        }
+    }
 
     protected override void OnInitialized()
     {
@@ -70,8 +109,14 @@
             SelectEmail(SwitchUserViewModel.SelectedProfileUserEmail, userProfile.SubsType);
         }
 
-        SwitchUserViewModel.OnUpdateViewState += async () => await UpdateState();
-        popupService.OnChange += async () => await UpdateState();
+        // UpdateState() already marshals to the UI dispatcher via its
+        // own InvokeAsync(StateHasChanged) call, so the Action lambdas
+        // just kick it off and discard the returned Task — the Action
+        // signature can't await it.
+        _onUpdateViewState = () => _ = UpdateState();
+        _onPopupChange     = () => _ = UpdateState();
+        SwitchUserViewModel.OnUpdateViewState += _onUpdateViewState;
+        popupService.OnChange += _onPopupChange;
 
         //SwitchUserViewModel.LogOnViewModel.SwitchUserDialog.OnDialogVisibilityChanged += async (isVisible) => await UpdateAdvancedOptionsState(isVisible);
 

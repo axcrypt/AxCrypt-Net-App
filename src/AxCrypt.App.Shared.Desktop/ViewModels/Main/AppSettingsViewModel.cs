@@ -35,6 +35,18 @@ public class AppSettingsViewModel : ViewModelBase
     private RecentFilesViewModel? _recentFilesViewModel;
     private LogViewModel? _logViewModel;
 
+    // ── One-shot initialisation guard ────────────────────────────────────────────
+    // Initialized() is called from two Blazor components:
+    //   1. AppSettingsComponent.OnInitialized() — persistent header, runs once on app load.
+    //   2. ToolsComponent.OnInitializedAsync()  — called on EVERY navigation to the Tools page.
+    //
+    // Without this guard, each Tools-page visit stacks 5 more BindPropertyChanged handlers
+    // on _mainViewModel.  The most dangerous: StartInactivitySignOut fires N times on login,
+    // creating N overlapping inactivity timers that each re-register the singleton factory and
+    // restart the countdown.  Competing concurrent LogOffLogOn executions deadlock the session
+    // state and make the app unresponsive.
+    private int _initialized = 0;
+
     public AppSettingsViewModel(RecentFilesViewModel recentFilesViewModel)
     {
         _logOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
@@ -55,6 +67,15 @@ public class AppSettingsViewModel : ViewModelBase
 
     public void Initialized()
     {
+        // Guard: subscribe only once regardless of how many times this is called.
+        if (System.Threading.Interlocked.CompareExchange(ref _initialized, 1, 0) != 0)
+        {
+            // Still refresh the UI-bound settings so the page shows current values.
+            RestApiBaseUrlInput = Resolve.UserSettings.RestApiBaseUrl.ToString();
+            TimeoutInput = Resolve.UserSettings.ApiTimeout.ToString();
+            return;
+        }
+
         RestApiBaseUrlInput = Resolve.UserSettings.RestApiBaseUrl.ToString();
         TimeoutInput = Resolve.UserSettings.ApiTimeout.ToString();
 

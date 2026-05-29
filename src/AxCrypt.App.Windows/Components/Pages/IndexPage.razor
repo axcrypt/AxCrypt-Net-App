@@ -36,12 +36,36 @@
     }
     else if (ShowSignUp)
     {
-        <AxCrypt.App.Shared.Desktop.Components.RegisterPage />
+        @* Online → new conversion-focused SignUpPage (step 1 only,
+           plan selection happens in the account web).
+           Offline → legacy RegisterPage which creates a local key
+           pair without any web hand-off. *@
+        @if (AxCrypt.Abstractions.TypeResolve.New<AxCrypt.Common.AxCryptOnlineState>().IsOffline)
+        {
+            <AxCrypt.App.Shared.Desktop.Components.RegisterPage />
+        }
+        else
+        {
+            <AxCrypt.App.Shared.Desktop.Components.SignUpPageNew />
+        }
     }
     else if (LogOnViewModel.IsLoggedOn)
     {
        @*  <AxCrypt.App.Shared.Desktop.Components.Pages.HomePage /> *@
         <AxCrypt.App.Shared.Desktop.Components.Pages.NewHomePage />
+
+        @* Hold the full-page loader as an overlay for one render-and-settle
+           cycle after sign-in so the user never sees a blank frame between
+           the loader vanishing and the home page mounting its children
+           (QuickAction, RecentFiles, VaultStatus, CloudDrives each pull
+           data on first render and can take 100-300 ms to draw their
+           bodies). The cover fades out from OnAfterRenderAsync below. *@
+        @if (_postSignInOverlay)
+        {
+            <AxCrypt.App.Shared.Desktop.Components.Shared.AxLoader
+                Mode="AxCrypt.App.Shared.Desktop.Components.Shared.LoaderMode.FullPage"
+                Message="@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage" />
+        }
     }
     else
     {
@@ -49,10 +73,19 @@
 
         @* Post sign-in transition. Uses the branded AxLoader (FullPage)
            instead of the heavy 560x560 Loading GIF, so the wait right
-           after sign-in matches the boot loader and every in-app loader. *@
+           after sign-in matches the boot loader and every in-app loader.
+           Arm the overlay so the next render — when IsLoggedOn flips to
+           true and we move into the NewHomePage branch above — keeps the
+           loader visible until the home page has had a chance to draw. *@
+        _armPostSignInOverlay = true;
+
         <AxCrypt.App.Shared.Desktop.Components.Shared.AxLoader
             Mode="AxCrypt.App.Shared.Desktop.Components.Shared.LoaderMode.FullPage"
             Message="@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage" />
+
+        <AxCrypt.App.Shared.Desktop.Components.PopupDialog.TryNowSubscriptionDialog />
+        <AxCrypt.App.Shared.Desktop.Components.PopupDialog.TryUpgradeDialog />
+        <AxCrypt.App.Shared.Desktop.Components.PopupDialog.UpgradeSubscriptionDialog />
     }
 
 </div>
@@ -60,13 +93,69 @@
 @code {
     public bool ShowSignUp { get; set; }
 
+    // ── Post sign-in overlay state ───────────────────────────────
+    // The overlay covers NewHomePage during its first-paint settle so
+    // the user never sees a blank/half-rendered home between the
+    // sign-in loader and the live home. Two ways it gets triggered:
+    //
+    //   1. SLOW PATH — sign-in is async and we render the loader
+    //      branch first; that branch arms _armPostSignInOverlay so
+    //      the next render (where IsLoggedOn flips true) holds the
+    //      overlay regardless of timing.
+    //
+    //   2. FAST PATH — on a free user with a warm cache, LoggedOn
+    //      flips true in the same render cycle that IsVisible flips
+    //      false, so IndexPage goes straight from the login form to
+    //      the home branch without ever passing through the loader
+    //      branch. _armPostSignInOverlay was never set. The
+    //      _wasLoggedOn edge detector below catches that case by
+    //      noticing IsLoggedOn just transitioned false → true and
+    //      arming the overlay implicitly.
+    //
+    // Without (2), free-user sign-in still flashed blank because the
+    // arm was tied to a code path we were skipping. (Reported case.)
+    private bool _armPostSignInOverlay;
+    private bool _postSignInOverlay;
+    private bool _wasLoggedOn;
+
     protected override void OnInitialized()
     {
         ShowSignUp = Register.ShowSignUp;
         base.OnInitialized();
+        // Seed _wasLoggedOn from current state so re-mounts that already
+        // see IsLoggedOn = true (e.g. after a navigation back to "/")
+        // don't trigger a spurious overlay on a healthy home.
+        _wasLoggedOn = LogOnViewModel.IsLoggedOn;
         Register.OnVisibilityOfUserSignUpChanged += async (bool isVisible) => await UpdateSignUpPageVisibility(isVisible);
         LogOnViewModel.OnLogOnDialogVisibilityChanged += async (bool isVisible) => await UpdatePageState(isVisible);
         LogOnViewModel.OnMFADialogVisibilityChanged += async (bool isVisible) => await UpdatePageState(isVisible);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // Edge-detect the IsLoggedOn flip. justLoggedOn is true on the
+        // very first render after sign-in completes — covers both the
+        // slow-path (loader branch in between) and the fast-path (jump
+        // straight from login form to home).
+        bool justLoggedOn = !_wasLoggedOn && LogOnViewModel.IsLoggedOn;
+        _wasLoggedOn = LogOnViewModel.IsLoggedOn;
+
+        if ((_armPostSignInOverlay || justLoggedOn) && LogOnViewModel.IsLoggedOn && !_postSignInOverlay)
+        {
+            _armPostSignInOverlay = false;
+            _postSignInOverlay = true;
+            await InvokeAsync(StateHasChanged);
+
+            // 450 ms is the longest first-paint settle measured for
+            // RecentFiles + CloudDrives on a cold cache. The home page
+            // is already drawn underneath, so the loader is purely
+            // cosmetic at this point.
+            await Task.Delay(450);
+
+            _postSignInOverlay = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        await base.OnAfterRenderAsync(firstRender);
     }
 
     private async Task UpdatePageState(bool isShow = false)

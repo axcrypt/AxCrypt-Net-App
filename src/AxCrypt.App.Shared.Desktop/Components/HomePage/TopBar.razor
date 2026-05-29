@@ -41,7 +41,7 @@
                         <line x1="12" y1="8" x2="12" y2="12" />
                         <line x1="12" y1="16" x2="12.01" y2="16" />
                     </svg>
-                    <span class="update-pill-label">Update required</span>
+                    <span class="update-pill-label">@Texts.UpdateRequiredText</span>
                 }
                 else
                 {
@@ -166,7 +166,7 @@
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z" />
                             </svg>
-                            Privacy &amp; Security
+                            @((MarkupString)Texts.TopBarPrivacySecurity)
                         </div>
                         @foreach (SettingToggle tog in SettingToggles)
                         {
@@ -208,12 +208,6 @@
                         </svg>
                     </button>
 
-                    @if (_encOpen)
-                    {
-                        <EncryptionFilePropertiesPopup IsOpen="@_encOpen"
-                                                       OnClose="ClosePopup" />
-                    }
-
                     <!-- Advanced Settings link -->
                     <button class="sm-advanced-btn" @onclick="OpenAdvancedPopup">
                         <img src="" class="Ico-advsd-setts" />
@@ -222,12 +216,6 @@
                             <polyline points="9 18 15 12 9 6" />
                         </svg>
                     </button>
-
-                    @if (_advOpen)
-                    {
-                        <AdvancedOptionsPopup IsOpen="@_advOpen"
-                                              OnClose="CloseAdvancedPopup" />
-                    }
                 </div>
             }
         </div>
@@ -236,6 +224,18 @@
         <p class="page-subtitle">@navPageService.CurrentPage.Subtitle</p>
     </div>
 </header>
+
+@* ── Popups hoisted outside <header> so position:fixed backdrops
+       are not trapped inside the settings-menu's overflow/transform
+       containing block. ────────────────────────────────────────── *@
+@if (_encOpen)
+{
+    <EncryptionFilePropertiesPopup IsOpen="@_encOpen" OnClose="ClosePopup" />
+}
+@if (_advOpen)
+{
+    <AdvancedOptionsPopup IsOpen="@_advOpen" OnClose="CloseAdvancedPopup" />
+}
 
 <AxCrypt.App.Shared.Desktop.Components.HomePage.HelpOverlay />
 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.AdvancedOptionsDialog />
@@ -256,15 +256,15 @@
 
     private List<SettingToggle> BuildSettingToggles() => new()
     {
-        new() { Label=Texts.OptionsHideRecentFilesToolStripMenuItemText, Description="Don't list files you've recently opened on the home screen", IsEnable=true, IsOn=SettingsViewModel.HideRecentFiles, ImageClass = "stngs-menu-icon IcoEye", OnClickFunc = ()=> { SettingsViewModel.ToggleHideRecentFiles(); return Task.CompletedTask; } },
-        new() { Label=Texts.AlwaysOffline, Description="Work entirely offline — never sync or check in with our servers", IsEnable=true, IsOn=SettingsViewModel.AlwaysOffline, ImageClass = "stngs-menu-icon IcoOffln", OnClickFunc = ()=> { SettingsViewModel.ToggleAlwaysOffline(null!); return Task.CompletedTask; }  },
-        new() { Label=Texts.OptionsConvertMenuItemText, Description="Automatically upgrade AES-128 encrypted files to AES-256 when opened.", IsEnable=SettingsViewModel.EnableAutoUpgrade,  IsOn=SettingsViewModel.AutoUpgradeToAES256, ImageClass = "stngs-menu-icon Ico256",
-                PaidPerks=new[]{"Auto-upgrade files to AES-256","Background encryption migration","One-click compliance with latest standard"},
+        new() { Label=Texts.OptionsHideRecentFilesToolStripMenuItemText, Description=Texts.OptionsHideRecentFilesDescription, IsEnable=true, IsOn=SettingsViewModel.HideRecentFiles, ImageClass = "stngs-menu-icon IcoEye", OnClickFunc = ()=> { SettingsViewModel.ToggleHideRecentFiles(); return Task.CompletedTask; } },
+        new() { Label=Texts.AlwaysOffline, Description=Texts.AlwaysOfflineDescription, IsEnable=true, IsOn=SettingsViewModel.AlwaysOffline, ImageClass = "stngs-menu-icon IcoOffln", OnClickFunc = ()=> { SettingsViewModel.ToggleAlwaysOffline(null!); return Task.CompletedTask; }  },
+        new() { Label=Texts.OptionsConvertMenuItemText, Description=Texts.OptionsConvertMenuItemDescription, IsEnable=SettingsViewModel.EnableAutoUpgrade,  IsOn=SettingsViewModel.AutoUpgradeToAES256, ImageClass = "stngs-menu-icon Ico256",
+                PaidPerks=new[]{Texts.AutoUpgradeFilesAES256,Texts.BackgroundEncryptionMigrationPopup,Texts.OneLatestStandardPopup},
                 OnClickFunc = async ()=> await SettingsViewModel.ToggleEncryptionUpgradeMode() },
-        new() { Label=Texts.OptionsIncludeSubfoldersToolStripMenuItemText, Description="When encrypting a folder, also encrypt every file in its sub-folders", IsEnable=SettingsViewModel.EnableIncludeSubfolders, IsOn=SettingsViewModel.IncludeSubfolders, ImageClass = "stngs-menu-icon IcoIncldFldrs24px",
-                PaidPerks=new[]{ "Encrypt files in all subfolders", "Batch encrypt multiple files at once", "Keep folder structure organized", "Unlock advanced folder protection" },
+        new() { Label=Texts.OptionsIncludeSubfoldersToolStripMenuItemText, Description=Texts.OptionsIncludeSubfoldersDescription, IsEnable=SettingsViewModel.EnableIncludeSubfolders, IsOn=SettingsViewModel.IncludeSubfolders, ImageClass = "stngs-menu-icon IcoIncldFldrs24px",
+                PaidPerks=new[]{ Texts.EncryptFilesAllSubFoldersPopup, Texts.BatchEncryptMultiplePopup, Texts.KeepFolderStructurePopup, Texts.UnlockAdvancedFolderPopup },
                 OnClickFunc = async ()=> await SettingsViewModel.ToggleIncludeSubfolders(null!) },
-        new() { Label=SettingsViewModel.DarkTheme ? Texts.SwitchToLightActionText : Texts.SwitchToDarkActionText, Description="Easier on the eyes in low light — applies instantly across the app", IsEnable=true, IsOn=SettingsViewModel.DarkTheme, ImageClass = "stngs-menu-icon IcoDkMd", OnClickFunc = async ()=> await ToggleTheme() },
+        new() { Label=SettingsViewModel.DarkTheme ? Texts.SwitchToLightActionText : Texts.SwitchToDarkActionText, Description=Texts.SwitchToDarkActionDescription, IsEnable=true, IsOn=SettingsViewModel.DarkTheme, ImageClass = "stngs-menu-icon IcoDkMd", OnClickFunc = async ()=> await ToggleTheme() },
     };
 
     protected override async Task OnInitializedAsync()
@@ -336,11 +336,11 @@
         paidFeaturegateService.ShowPaidGate(
             feature: tog.Label,
             desc: string.IsNullOrWhiteSpace(tog.Description)
-                ? "Available on Premium and Business plans."
+                ? Texts.AvailablePremiumBusinessPlans
                 : tog.Description,
             perks: tog.PaidPerks.Length > 0
                 ? tog.PaidPerks
-                : new[] { "Unlimited encryption", "Secure key sharing", "Priority support" });
+                : new[] { Texts.RecentFilesUnlimitedEncryption, Texts.SecureKeySharingPopup, Texts.PrioritySupportTitle });
     }
 
     /// <summary>Handles the language &lt;select&gt; onchange — resolves the
@@ -380,13 +380,13 @@
 
     private void ShowUpgradePopup()
     {
-        paidFeaturegateService.ShowPaidGate(Texts.IdleSignOutToolStripMenuItemText, "Automatically sign out and secure your opened or pending files after a period of inactivity.",
+        paidFeaturegateService.ShowPaidGate(Texts.IdleSignOutToolStripMenuItemText, Texts.ShowUpgradeAutoSignoutPendingPopup,
         new[]
         {
-            "Auto sign out protection",
-            "Auto-encrypt opened or pending files",
-            "Protect sensitive data",
-            "Unlock Enhanced security features"
+            Texts.ShowUpgradeAutoSignoutPopup,
+            Texts.ShowUpgradeAutoEncryptOpenedPopup,
+            Texts.ShowUpgradeProtectSensitivePopup,
+            Texts.ShowUpgradeEnhancedSecurityPopup
         });
     }
 

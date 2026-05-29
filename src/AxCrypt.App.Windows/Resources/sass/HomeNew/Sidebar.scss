@@ -1,6 +1,4 @@
-﻿/* ═══════════════════════════════════════════
-   Sidebar – Expanded
-════════════════════════════════════════════ */
+﻿// Sidebar – Expanded
 .sidebar {
     width: var(--sidebar-w);
     background: #fff;
@@ -97,9 +95,9 @@
     &.nav-home-ico {
         content: $IcoUsersHMDefault;
     }
-    /* &.nav-files-ico {
-        content: $IcoScrdFldrDefault;
-    }*/
+    // &.nav-files-ico {
+        // content: $IcoScrdFldrDefault;
+        // }
 
     &.nav-folders-ico {
         content: $IcoScrdFldrDefault;

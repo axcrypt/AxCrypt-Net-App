@@ -1,5 +1,5 @@
 ﻿
-/* ── Advanced Settings Modal ─── */
+// ── Advanced Settings Modal ───
 .adv-modal {
     position: fixed;
     top: 50%;
@@ -9,11 +9,28 @@
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 24px 80px rgba(0,0,0,.22);
-    width: 520px;
-    max-height: 80vh;
+    // Shrink-to-fit on narrow windows + leave a 16px viewport gutter
+    // on all sides so the modal is always visible at any size.
+    // Was: width:520px / max-height:80vh which left the modal
+    // off-screen on small windows (< 520px wide or < 500px tall).
+    width: min(520px, calc(100vw - 32px));
+    max-height: calc(100vh - 32px);
     display: flex;
     flex-direction: column;
-    animation: modalIn .2s cubic-bezier(.4,0,.2,1)
+    animation: modalIn .2s cubic-bezier(.4,0,.2,1);
+    // The .adv-body inside owns the scrolling; clip overflow here so
+    // the rounded corners aren't broken by overflowing content.
+    overflow: hidden
+}
+
+// Some callers render the modal without a backdrop — give it a
+// subtle drop-shadow scrim on small viewports so it isn't lost
+// against the page chrome behind it.
+@media only screen and (max-width: 720px), only screen and (max-height: 600px) {
+    .adv-modal {
+        width: calc(100vw - 24px);
+        max-height: calc(100vh - 24px);
+    }
 }
 
 .adv-modal-header {

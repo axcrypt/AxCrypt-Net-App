@@ -10,6 +10,11 @@ namespace AxCrypt.Core.UI.ViewModel
         public static async Task<MultiFactorAuthType> GetMultiFactorStatusAsync(string userEmail, string currentDeviceInfo, Func<string, Task<MultiFactorAuthApiModel>> getMultiFactorAuthStatusApiModel)
         {
             MultiFactorAuthApiModel authStatusApiModel = await getMultiFactorAuthStatusApiModel(userEmail);
+            return GetValidMFAAuthType(authStatusApiModel, currentDeviceInfo);
+        }
+
+        public static MultiFactorAuthType GetValidMFAAuthType(MultiFactorAuthApiModel authStatusApiModel, string currentDeviceInfo)
+        {
             if (authStatusApiModel == null || string.IsNullOrEmpty(authStatusApiModel.MfaEnabledTypes))
             {
                 return MultiFactorAuthType.None;
@@ -31,7 +36,7 @@ namespace AxCrypt.Core.UI.ViewModel
             }
 
             return selectedMultiFactorAuthType;
-        }
+        } 
 
         private static bool CheckUserDeviceExpiry(MultiFactorAuthApiModel authStatusApiModel, string currentDeviceInfo)
         {

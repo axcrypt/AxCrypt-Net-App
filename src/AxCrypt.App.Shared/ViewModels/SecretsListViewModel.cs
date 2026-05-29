@@ -9,6 +9,7 @@ using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.Common;
 using AxCrypt.Content;
+using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service.Secrets;
@@ -212,6 +213,14 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
     public SecretFilterOption Filter { get; set; } = SecretFilterOption.All;
     public SecretsFilter SelectedFilter { get; set; } = SecretsFilter.All;
 
+    public bool IsSignedIn
+    {
+        get
+        {
+            return Resolve.KnownIdentities.IsLoggedOn && Resolve.KnownIdentities.DefaultEncryptionIdentity != LogOnIdentity.Empty;
+        }
+    }
+
     public async Task OnInputChanged(ChangeEventArgs e)
     {
         Keyword = e.Value.ToString();
@@ -274,6 +283,11 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
     /// <returns>SecretCollection containing found secrets</returns>
     public async Task FindSecrets()
     {
+        if (!IsSignedIn)
+        {
+            return;
+        }
+
         if (_CachedSecrets!.ContainsKey(SecretFilterOption.All))
         {
             Secrets = _CachedSecrets[SecretFilterOption.All];

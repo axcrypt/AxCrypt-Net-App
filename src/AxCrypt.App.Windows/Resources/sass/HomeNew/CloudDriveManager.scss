@@ -252,141 +252,133 @@
     color: #6b7280;
 }
 
-/* ── Dark theme ──────────────────────────────────────── */
-html[data-theme="dark"] .cm-card {
-    background: #1f2937;
-    box-shadow: 0 24px 60px rgba(0,0,0,.55);
-}
+// ── Dark theme ────────────────────────────────────────
 
-html[data-theme="dark"] .cm-head,
-html[data-theme="dark"] .cm-foot {
-    border-color: #374151;
-}
+// Provider brand icons render via existing utility classes
+// (.ggldrv-icon, .drpbx-icon, .onedrv-icon). They ship colored —
+// no dark filter needed; the dark cm-prov-icon background already
+// gives them enough contrast.
 
-html[data-theme="dark"] .cm-title {
-    color: #f3f4f6;
-}
+// =============================================================
+// Cloud Browser nav page — design fixes ported from the inline
+// <style> block on CloudBrowserPage.razor so the page lines up
+// with the rest of the HomeNew SCSS architecture.
+// Adds:
+// • Real folder icon for list + grid rows (was a missing asset)
+// • Reshaped search bar (focus ring, brand icon tint, clear x)
+// • Brand-toned highlight mark used by HighlightMatch
+// • Polished hover / selection treatment on rows + tiles
+// • Tighter toolbar wrap behaviour on narrow widths
+// =============================================================
 
-html[data-theme="dark"] .cm-sub,
-html[data-theme="dark"] .cm-foot-hint,
-html[data-theme="dark"] .cm-prov-help {
-    color: #9ca3af;
-}
-
-html[data-theme="dark"] .cm-x {
-    color: #9ca3af;
-}
-
-html[data-theme="dark"] .cm-x:hover {
-    background: #374151;
-    color: #f3f4f6;
-}
-
-html[data-theme="dark"] .cm-provider {
-    background: #111827;
-    border-color: #374151;
-}
-
-html[data-theme="dark"] .cm-provider:hover {
-    border-color: #7fcc5c;
-    box-shadow: 0 4px 12px rgba(127,204,92,.15);
-}
-
-html[data-theme="dark"] .cm-provider--linked {
-    background: linear-gradient(180deg, rgba(127,204,92,.08) 0%, #111827 100%);
-}
-
-html[data-theme="dark"] .cm-prov-icon {
-    background: #1f2937;
-}
-
-html[data-theme="dark"] .cm-prov-name {
-    color: #f3f4f6;
-}
-
-html[data-theme="dark"] .cm-status--ok {
-    background: rgba(127,204,92,.16);
-    color: #b8e89a;
-}
-
-html[data-theme="dark"] .cm-status--off {
-    background: rgba(255,255,255,.08);
-    color: #9ca3af;
-}
-
-html[data-theme="dark"] .cm-btn--primary {
-    background: #7fcc5c;
-    color: #0f1a07;
-}
-
-html[data-theme="dark"] .cm-btn--primary:hover {
-    background: #9be076;
-}
-
-html[data-theme="dark"] .cm-btn--ghost {
-    background: #1f2937;
-    color: #f3f4f6;
-    border-color: #4b5563;
-}
-
-html[data-theme="dark"] .cm-btn--ghost:hover {
-    background: #111827;
-}
-
-/* Provider brand icons render via existing utility classes
-       (.ggldrv-icon, .drpbx-icon, .onedrv-icon). They ship colored —
-       no dark filter needed; the dark cm-prov-icon background already
-       gives them enough contrast. */
-
-/* =============================================================
-   Cloud Browser nav page — design fixes ported from the inline
-   <style> block on CloudBrowserPage.razor so the page lines up
-   with the rest of the HomeNew SCSS architecture.
-
-   Adds:
-     • Real folder icon for list + grid rows (was a missing asset)
-     • Reshaped search bar (focus ring, brand icon tint, clear x)
-     • Brand-toned highlight mark used by HighlightMatch
-     • Polished hover / selection treatment on rows + tiles
-     • Tighter toolbar wrap behaviour on narrow widths
-   ============================================================= */
-
-/* ---- Folder + file glyphs ---------------------------------- */
-/* The list/grid icons render an <img class="@(file.IsFolder ? "Icon-folder" : ...)" />
-   so .Icon-folder needs a real picture. Wire it to the same
-   tier-specific folder asset the secure-folders page uses. */
+// ---- Folder + file glyphs ----------------------------------
+// The list/grid icons render an <img class="@(file.IsFolder ? "Icon-folder" : ...)" />
+// so .Icon-folder needs a real picture. Wire it to the same
+// tier-specific folder asset the secure-folders page uses.
 .cbp-row-icon.Icon-folder,
 .cbp-tile-icon.Icon-folder {
     content: $IcoFldr;
 }
 
-/* Generic file fallback — when GetFileTypeIcon returns the
-   axcrypt icon class. */
+// Generic file fallback — when GetFileTypeIcon returns the
+// axcrypt icon class.
 .cbp-row-icon.axcrypt-icon,
 .cbp-tile-icon.axcrypt-icon {
     content: $AxCryptIcon;
 }
 
-/* Folders read a touch larger in the list to balance the chunkier
-   icon silhouette against the smaller file glyphs. */
-.cbp-row-icon.Icon-folder {
-    width: 26px;
-    height: 26px;
+// File-type glyphs — wire the classes returned by
+// UIHelperUtility.GetIcon() to the same SVG assets used by the file
+// picker and recent-files lists. Without these the list rendered a
+// missing-image placeholder for every non-folder entry.
+.cbp-row-icon.doc-type-ico,
+.cbp-tile-icon.doc-type-ico       { content: $IcoDcmnt; }
+
+.cbp-row-icon.img-type-ico,
+.cbp-tile-icon.img-type-ico       { content: $IcoPctr; }
+
+.cbp-row-icon.vid-type-ico,
+.cbp-tile-icon.vid-type-ico       { content: $IcoVd; }
+
+.cbp-row-icon.aud-type-ico,
+.cbp-tile-icon.aud-type-ico       { content: $IcoMsc; }
+
+.cbp-row-icon.comprz-type-ico,
+.cbp-tile-icon.comprz-type-ico    { content: $IcoComprzd; }
+
+.cbp-row-icon.default-type-ico,
+.cbp-tile-icon.default-type-ico   { content: $IcoDefault; }
+
+// Lock every icon to a uniform footprint so folders and files line
+// up in a straight column (was: 26px folder vs 24px file producing a
+// sawtooth left edge). The image is centred inside the slot via
+// object-fit so non-square assets don't stretch.
+.cbp-row-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
 }
 
-.cbp-tile-icon.Icon-folder {
+.cbp-tile-icon {
     width: 44px;
     height: 44px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
-/* ---- Search bar refinement --------------------------------- */
-/* Reshape the search pill so it reads as a proper input control
-   (taller, more padding, distinct focus ring, dim glyph that
-   brightens on focus). Matches the pattern used by the Secured
-   Messenger search and the Tools page search. */
+// ---- Toolbar row + search bar refinement -------------------
+// Normalize every cell of the search row (tabs, search, view
+// toggle) to the same 38px height so the three pills sit on a
+// single baseline. Without explicit heights each control sized
+// itself from its content padding, producing a 32 / 38 / 34 px
+// jagged row depending on locale text length.
+.cbp-toolbar {
+    align-items: center;
+    row-gap: 10px;
+}
+
+.cbp-tabs,
+.cbp-view-toggle {
+    height: 38px;
+    box-sizing: border-box;
+    align-items: center;
+    // Tighten the inner pill padding so the inner buttons can fill
+    // the 38px chrome without overflowing.
+    padding: 3px;
+}
+
+.cbp-tab,
+.cbp-view-btn {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Reshape the search pill so it reads as a proper input control
+// (taller, more padding, distinct focus ring, dim glyph that
+// brightens on focus). Matches the pattern used by the Secured
+// Messenger search and the Tools page search.
 .cbp-search {
     height: 38px;
+    // Match the toolbar's other controls so the row baselines align
+    // cleanly — the tabs / view-toggle pills are 38px tall too once
+    // you include their 3px chrome padding.
+    box-sizing: border-box;
     padding: 0 12px;
+    // Tighten the magnifier ↔ input gap and centre everything
+    // vertically so the glyph, caret, and × clear button sit on the
+    // same baseline.
+    align-items: center;
+    gap: 8px;
+    // Stop the pill from gobbling the entire toolbar — keep it wide
+    // on roomy windows but reserve space for the tabs + view toggle.
+    flex: 1 1 260px;
+    min-width: 220px;
+    max-width: 520px;
     border-width: 1.5px;
     border-radius: 10px;
     background: $bg-card;
@@ -394,12 +386,15 @@ html[data-theme="dark"] .cm-btn--ghost:hover {
 
     > svg {
         flex-shrink: 0;
+        width: 16px;
+        height: 16px;
         color: $text-muted;
         transition: color .15s;
     }
 
     input {
         flex: 1;
+        min-width: 0;
         height: 100%;
         border: none;
         outline: none;
@@ -407,6 +402,7 @@ html[data-theme="dark"] .cm-btn--ghost:hover {
         font-size: 13.5px;
         color: $text-primary;
         padding: 0;
+        line-height: 1;
 
         &::placeholder { color: $text-muted; }
     }
@@ -424,22 +420,29 @@ html[data-theme="dark"] .cm-btn--ghost:hover {
     }
 }
 
-/* Clear-search × button — neutral by default, danger-tinted on
-   hover so the destructive intent is obvious. */
+// Clear-search × button — neutral by default, danger-tinted on
+// hover so the destructive intent is obvious.
 .cbp-search-clear {
+    // Slightly larger glyph centred inside a 22px hit-target so the
+    // × symbol reads as a button, not stray punctuation. The glyph
+    // was drifting top-left because the inherited .cbp-search padding
+    // was wrapping it asymmetrically.
+    flex-shrink: 0;
     width: 22px;
     height: 22px;
     border: none;
     border-radius: 999px;
     background: rgba(0, 0, 0, .05);
     color: $text-muted;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1;
+    font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0;
+    margin: 0;
     transition: background .12s, color .12s;
 
     &:hover {
@@ -448,7 +451,7 @@ html[data-theme="dark"] .cm-btn--ghost:hover {
     }
 }
 
-/* ---- Highlight match (used by HighlightMatch) -------------- */
+// ---- Highlight match (used by HighlightMatch) --------------
 .cbp-hl {
     background: rgba(72, 119, 44, .22);
     color: inherit;
@@ -456,12 +459,21 @@ html[data-theme="dark"] .cm-btn--ghost:hover {
     padding: 0 1px;
 }
 
-/* ---- Row polish -------------------------------------------- */
-/* Smoother hover transition + brand-tinted left bar to indicate
-   selection. Keeps existing colours; just tightens motion + focus. */
+// ---- Row polish --------------------------------------------
+// Smoother hover transition + brand-tinted left bar to indicate
+// selection. Keeps existing colours; just tightens motion + focus.
 .cbp-row {
+    // Re-shape the row grid so the checkbox slot and the icon slot
+    // have fixed widths — that's what makes both folder and file
+    // icons line up in a perfectly straight column down the list.
+    // Was: grid-template-columns: 24px 28px 1fr — the 28px icon slot
+    // was wider than the 24px icon so right-edges of icons didn't
+    // line up between files of different types.
+    grid-template-columns: 22px 26px 1fr;
+    column-gap: 10px;
     transition: background .12s, box-shadow .12s, border-color .12s;
     border-left: 3px solid transparent;
+    align-items: center;
 }
 
 .cbp-row:hover {
@@ -477,7 +489,7 @@ html[data-theme="dark"] .cm-btn--ghost:hover {
     accent-color: $brand-green;
 }
 
-/* ---- Tile polish ------------------------------------------- */
+// ---- Tile polish -------------------------------------------
 .cbp-tile {
     transition: background .12s, border-color .12s, transform .08s, box-shadow .15s;
 }
@@ -491,11 +503,11 @@ html[data-theme="dark"] .cm-btn--ghost:hover {
     box-shadow: 0 4px 10px rgba(72, 119, 44, .18);
 }
 
-/* ---- Provider icon in the page header ---------------------- */
-/* Inline <img class="cbp-prov-icon @ViewModel.SelectedProviderImage" />
-   — the tier-specific provider glyphs (.ggldrv-icon, .drpbx-icon,
-   .onedrv-icon, .phn-icon) ship coloured; widen the white frame so
-   they sit centred. */
+// ---- Provider icon in the page header ----------------------
+// Inline <img class="cbp-prov-icon @ViewModel.SelectedProviderImage" />
+// — the tier-specific provider glyphs (.ggldrv-icon, .drpbx-icon,
+// .onedrv-icon, .phn-icon) ship coloured; widen the white frame so
+// they sit centred.
 .cbp-prov-icon {
     background: #fff;
     border: 1px solid $border;
@@ -504,7 +516,7 @@ html[data-theme="dark"] .cm-btn--ghost:hover {
     object-fit: contain;
 }
 
-/* ---- Toolbar wrap behaviour -------------------------------- */
+// ---- Toolbar wrap behaviour --------------------------------
 @media only screen and (max-width: 900px) {
     .cbp-toolbar {
         flex-wrap: wrap;
@@ -515,51 +527,110 @@ html[data-theme="dark"] .cm-btn--ghost:hover {
     }
 }
 
-/* =============================================================
-   Dark theme — covers the new search + folder bits.
-   ============================================================= */
-html[data-theme="dark"] .cbp-search {
-    background: #1c2530;
-    border-color: #3a4554;
-}
+// =============================================================
+// Dark theme — covers the new search + folder bits.
+// =============================================================
 
-html[data-theme="dark"] .cbp-search > svg     { color: #b5bcc7; }
-html[data-theme="dark"] .cbp-search input     { color: #e8ecf1; }
-html[data-theme="dark"] .cbp-search input::placeholder { color: #7a8494; }
+html[data-theme="dark"] {
+    .cm-card {
+        background: #1f2937;
+        box-shadow: 0 24px 60px rgba(0,0,0,.55);
+    }
+    .cm-head,
+    .cm-foot {
+        border-color: #374151;
+    }
+    .cm-title {
+        color: #f3f4f6;
+    }
+    .cm-sub,
+    .cm-foot-hint,
+    .cm-prov-help {
+        color: #9ca3af;
+    }
+    .cm-x {
+        color: #9ca3af;
+    }
+    .cm-x:hover {
+        background: #374151;
+        color: #f3f4f6;
+    }
+    .cm-provider {
+        background: #111827;
+        border-color: #374151;
+    }
+    .cm-provider:hover {
+        border-color: #7fcc5c;
+        box-shadow: 0 4px 12px rgba(127,204,92,.15);
+    }
+    .cm-provider--linked {
+        background: linear-gradient(180deg, rgba(127,204,92,.08) 0%, #111827 100%);
+    }
+    .cm-prov-icon {
+        background: #1f2937;
+    }
+    .cm-prov-name {
+        color: #f3f4f6;
+    }
+    .cm-status--ok {
+        background: rgba(127,204,92,.16);
+        color: #b8e89a;
+    }
+    .cm-status--off {
+        background: rgba(255,255,255,.08);
+        color: #9ca3af;
+    }
+    .cm-btn--primary {
+        background: #7fcc5c;
+        color: #0f1a07;
+    }
+    .cm-btn--primary:hover {
+        background: #9be076;
+    }
+    .cm-btn--ghost {
+        background: #1f2937;
+        color: #f3f4f6;
+        border-color: #4b5563;
+    }
+    .cm-btn--ghost:hover {
+        background: #111827;
+    }
+    .cbp-search {
+        background: #1c2530;
+        border-color: #3a4554;
+    }
+    .cbp-search > svg { color: #b5bcc7; }
+    .cbp-search input { color: #e8ecf1; }
+    .cbp-search input::placeholder { color: #7a8494; }
+    .cbp-search:hover { border-color: #7fcc5c; }
+    .cbp-search:focus-within {
+        border-color: #7fcc5c;
+        background: #232e3b;
+        box-shadow: 0 0 0 3px rgba(127, 204, 92, .35);
 
-html[data-theme="dark"] .cbp-search:hover     { border-color: #7fcc5c; }
-html[data-theme="dark"] .cbp-search:focus-within {
-    border-color: #7fcc5c;
-    background: #232e3b;
-    box-shadow: 0 0 0 3px rgba(127, 204, 92, .35);
+        > svg { color: #b8e89a; }
+    }
+    .cbp-search-clear {
+        background: rgba(255, 255, 255, .06);
+        color: #b5bcc7;
 
-    > svg { color: #b8e89a; }
-}
-
-html[data-theme="dark"] .cbp-search-clear {
-    background: rgba(255, 255, 255, .06);
-    color: #b5bcc7;
-
-    &:hover {
+        &:hover {
         background: rgba(248, 113, 113, .18);
         color: #fca5a5;
+        }
     }
-}
-
-html[data-theme="dark"] .cbp-hl {
-    background: rgba(127, 204, 92, .28);
-}
-
-html[data-theme="dark"] .cbp-row:hover {
-    background: #232e3b;
-}
-
-html[data-theme="dark"] .cbp-row--selected {
-    background: rgba(127, 204, 92, .14);
-    border-left-color: #7fcc5c;
-}
-
-html[data-theme="dark"] .cbp-prov-icon {
-    background: #232e3b;
-    border-color: #3a4554;
+    .cbp-hl {
+        background: rgba(127, 204, 92, .28);
+    }
+    .cbp-row:hover {
+        background: #232e3b;
+    }
+    .cbp-row--selected {
+        background: rgba(127, 204, 92, .14);
+        border-left-color: #7fcc5c;
+    }
+    .cbp-prov-icon {
+        background: #232e3b;
+        border-color: #3a4554;
+    }
 }

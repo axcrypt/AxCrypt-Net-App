@@ -1,7 +1,5 @@
 ﻿
-/* ═══════════════════════════════════════════
-   Cards
-════════════════════════════════════════════ */
+// Cards
 .card {
     background: $bg-card;
     border: 1px solid $border;
@@ -13,23 +11,23 @@
 .recent-files-card {
     position: relative;
     transition: background .2s, border-color .2s, box-shadow .2s;
-    /* Stretch to fill the left column so the section uses whatever
-       vertical space the window gives it (with the small bottom gap
-       from .left-col's `gap`). On a tall window the table-body grows
-       to show more rows; on a short window it shrinks and the inner
-       scrollbar engages — never overflows the page. */
+    // Stretch to fill the left column so the section uses whatever
+    // vertical space the window gives it (with the small bottom gap
+    // from .left-col's `gap`). On a tall window the table-body grows
+    // to show more rows; on a short window it shrinks and the inner
+    // scrollbar engages — never overflows the page.
     flex: 1;
     min-height: 0;
     display: flex;
     flex-direction: column;
 }
 
-/* ── Drop-zone visual feedback ─────────────
-   Active state shown on .recent-files-card and on the secured-folders
-   page wrapper (.home-index) while the user is dragging a file/folder
-   over them. The dashed border and tinted background make it obvious
-   the area accepts the drop; the .rf-drop-hint overlay shows the
-   intent in plain language. */
+// ── Drop-zone visual feedback ─────────────
+// Active state shown on .recent-files-card and on the secured-folders
+// page wrapper (.home-index) while the user is dragging a file/folder
+// over them. The dashed border and tinted background make it obvious
+// the area accepts the drop; the .rf-drop-hint overlay shows the
+// intent in plain language.
 .recent-files-card--dropping,
 .home-index--dropping {
     border: 2px dashed $brand-green !important;
@@ -39,7 +37,7 @@
 
 .home-index {
     position: relative;
-    /* keep dashed border from shifting layout when toggling on/off */
+    // keep dashed border from shifting layout when toggling on/off
     border: 2px dashed transparent;
     border-radius: var(--radius-card);
     transition: background .2s, border-color .2s;
@@ -57,7 +55,7 @@
     padding: 12px;
     background: rgba(255, 255, 255, .85);
     border-radius: calc(var(--radius-card) - 2px);
-    pointer-events: none; /* don't intercept the drop event itself */
+    pointer-events: none; // don't intercept the drop event itself
     font-size: 14px;
     font-weight: 600;
     color: $brand-green;
@@ -90,10 +88,10 @@
     flex-shrink: 0;
 }
 
-/* Title row stretches edge-to-edge inside the card padding. Title sits
-   left and the optional hint flows to the right of it, eating the empty
-   space instead of leaving a gap. Gap is small so on narrow widths the
-   row still reads as one band. */
+// Title row stretches edge-to-edge inside the card padding. Title sits
+// left and the optional hint flows to the right of it, eating the empty
+// space instead of leaving a gap. Gap is small so on narrow widths the
+// row still reads as one band.
 .card-header-row {
     display: flex;
     align-items: baseline;
@@ -108,8 +106,8 @@
         margin-bottom: 0;
     }
 
-/* Inline subtitle next to the title. Muted, smaller, single-line —
-   uses ellipsis when the card narrows so the title never wraps. */
+// Inline subtitle next to the title. Muted, smaller, single-line —
+// uses ellipsis when the card narrows so the title never wraps.
 .card-header-hint {
     flex: 1 1 auto;
     min-width: 0;
@@ -125,5 +123,5 @@
 .header-actions {
     display: flex;
     gap: 4px;
-    margin-left: auto; /* keep header actions pinned to the right edge */
+    margin-left: auto; // keep header actions pinned to the right edge
 }

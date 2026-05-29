@@ -1,4 +1,4 @@
-﻿using AxCrypt.Abstractions;
+using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.Desktop;
 using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Services;
@@ -20,6 +20,7 @@ using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Desktop;
 using System.Globalization;
+using System.Net;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.App.Windows;
@@ -28,7 +29,6 @@ public partial class App : Application
 {
     private readonly ProgressBackgroundComponent _progressBackgroundWorker;
 
-    //private bool _isInitializing = true;
     private CommandLine _commandLine;
 
     private MainViewModel _mainViewModel;
@@ -63,18 +63,18 @@ public partial class App : Application
 
     private static void InitializeServiceDependencyProvider()
     {
-        IServiceProvider _service;
+        IServiceProvider service;
 #if WINDOWS10_0_17763_0_OR_GREATER
-        _service = MauiWinUIApplication.Current.Services;
+        service = MauiWinUIApplication.Current.Services;
 #elif ANDROID
-            _service = MauiApplication.Current.Services;
+        service = MauiApplication.Current.Services;
 #elif IOS || MACCATALYST
-            _service = MauiUIApplicationDelegate.Current.Services;
+        service = MauiUIApplicationDelegate.Current.Services;
 #else
-            _service = null;
+        service = null;
 #endif
 
-        new AxCServiceProvider(_service);
+        new AxCServiceProvider(service);
     }
 
     protected override void OnStart()
@@ -96,10 +96,6 @@ public partial class App : Application
                 await Application.Current?.MainPage?.DisplayAlert("AxCrypt failed to start. All Settings cleared.", ex.Message, "OK")!;
                 Quit();
             }
-            finally
-            {
-                //_isInitializing = false;
-            }
         });
     }
 
@@ -113,7 +109,6 @@ public partial class App : Application
         CheckOfflineModeFirst();
         AppFactory.StartKeyPairService();
         await AttachLogListener();
-        //ConfigureUiOptions();
         PlatformInitializer.SetupPathFilters();
         IntializeControls();
         WireUpEvents();
@@ -147,8 +142,6 @@ public partial class App : Application
         TypeMap.Register.Singleton<IDataItemSelection>(() => new FileFolderSelection());
         TypeMap.Register.Singleton<IDeviceLocked>(() => new DeviceLocked());
         TypeMap.Register.Singleton<IKnownFolderImageProvider>(() => new KnownFolderImageProvider());
-
-        //TypeMap.Register.Singleton<IVersion>(() => new DesktopVersion());
 
         PlatformInitializer.RegisterTypeFactories();
         AppFactory.RegisterTypeFactories();
@@ -194,66 +187,8 @@ public partial class App : Application
     {
         if (OS.Current.Platform == Core.Runtime.Platform.WindowsDesktop)
         {
-            InitializeNotifyIcon();
+            // Notify-icon setup is handled by the platform-specific shell integration.
         }
-    }
-
-    private void InitializeNotifyIcon()
-    {
-        //_notifyIcon.Icon = Resources.axcrypticon;
-        //_notifyIcon.Visible = false;
-
-        //_notifyIcon.DoubleClick += (object sender, EventArgs e) =>
-        //{
-        //    Styling.RestoreWindowWithFocus(this);
-        //    New<UserSettings>().RestoreFullWindow = true;
-        //};
-
-        //_notifyAdvancedToolStripMenuItem.Click += (sender, e) =>
-        //{
-        //    Styling.RestoreWindowWithFocus(this);
-        //    New<UserSettings>().RestoreFullWindow = true;
-        //};
-
-        //_notifyIcon.MouseClick += (sender, e) =>
-        //{
-        //    if (e.Button == MouseButtons.Left)
-        //    {
-        //        MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
-        //        mi.Invoke(sender, null);
-        //    }
-        //};
-
-        //Resize += (sender, e) =>
-        //{
-        //    switch (WindowState)
-        //    {
-        //        case FormWindowState.Minimized:
-        //            ShowNotifyIcon();
-        //            New<UserSettings>().RestoreFullWindow = false;
-        //            break;
-
-        //        case FormWindowState.Normal:
-        //            _notifyIcon.Visible = false;
-        //            break;
-        //    }
-        //};
-    }
-
-    private void ShowNotifyIcon()
-    {
-        //_notifyIcon.Visible = true;
-
-        //if (!_balloonTipShown)
-        //{
-        //    _notifyIcon.BalloonTipTitle = Texts.AxCryptFileEncryption;
-        //    _notifyIcon.BalloonTipText = Texts.TrayBalloonTooltip;
-        //    _notifyIcon.ShowBalloonTip(500);
-
-        //    _balloonTipShown = true;
-        //}
-
-        //Hide();
     }
 
     private DeviceLocking _deviceLocking;
@@ -321,10 +256,35 @@ public partial class App : Application
         SetAppWindowTitle(appTitle);
     }
 
+    /// <summary>
+    /// Starts the IPC command listener. If the HTTP prefix is already registered
+    /// (another instance running, or the OS port is still held after a crash), we
+    /// log a warning and continue — the UI remains fully functional, only the
+    /// single-instance IPC channel is unavailable.
+    /// </summary>
     private void SetupCommandService()
     {
         Resolve.CommandService.Received += New<CommandHandler>().RequestReceived;
-        Resolve.CommandService.StartListening();
+
+        try
+        {
+            Resolve.CommandService.StartListening();
+        }
+        catch (HttpListenerException ex)
+        {
+            // Error 183 = ERROR_ALREADY_EXISTS  (URL prefix already claimed)
+            // Error 5   = ERROR_ACCESS_DENIED   (no netsh URL reservation)
+            // Error 32  = ERROR_SHARING_VIOLATION (port in use by another process)
+            // In all cases the app can still run — just without IPC.
+            Resolve.Log.LogWarning($"IPC listener could not start (HttpListenerException {ex.ErrorCode}): {ex.Message}. " +
+                "Another instance may already be running.");
+        }
+        catch (IOException ex)
+        {
+            Resolve.Log.LogWarning($"IPC listener could not start (IOException): {ex.Message}. " +
+                "Another instance may already be running.");
+        }
+
         New<CommandHandler>().CommandComplete += AxCryptMainForm_CommandComplete;
     }
 
@@ -462,17 +422,6 @@ public partial class App : Application
         }
     }
 
-    private void UpdateArabicStyle()
-    {
-        //if (Resolve.UserSettings.CultureName == "ar-AR")
-        //{
-        //    this.RightToLeft = RightToLeft.Yes;
-        //    return;
-        //}
-
-        //this.RightToLeft = RightToLeft.No;
-    }
-
     private async Task PremiumFeatureActionAsync(LicenseCapability requiredCapability, Func<Task> realHandler)
     {
         if (_mainViewModel.License.Has(requiredCapability))
@@ -498,31 +447,9 @@ public partial class App : Application
         });
     }
 
-    public static void RestoreWindowWithFocus()
-    {
-        //if (form == null)
-        //{
-        //    throw new ArgumentNullException(nameof(form));
-        //}
-
-        //form.Show();
-        //form.WindowState = FormWindowState.Normal;
-        //form.Activate();
-        //form.Focus();
-        //form.BringToFront();
-
-        //foreach (Form owned in form.OwnedForms)
-        //{
-        //    RestoreWindowWithFocus(owned);
-        //}
-    }
-
     private static Window? _window;
 
-    public static Window? Window 
-    {
-        get => _window;
-    }
+    public static Window? Window => _window;
 
     // Preferred initial window size on first launch — large enough to
     // show the entire dashboard (TopBar + content-grid + right-column)
@@ -538,8 +465,6 @@ public partial class App : Application
         {
             _window.MinimumHeight = AppPreferences.MinimumWindowHeight;
             _window.MinimumWidth = AppPreferences.MinimumWindowWidth;
-            // Start at the preferred size, not the minimum, so the user
-            // doesn't immediately need to resize to see the full layout.
             _window.Height = DefaultWindowHeight;
             _window.Width = DefaultWindowWidth;
 
@@ -579,27 +504,5 @@ public partial class App : Application
         AppConstant.AppEnvironment = "";
 #endif
         return string.IsNullOrWhiteSpace(buildType) ? "" : $"[{buildType}] ";
-    }
-
-    protected override void OnAppLinkRequestReceived(Uri uri)
-    {
-        base.OnAppLinkRequestReceived(uri);
-    }
-
-    public override void OpenWindow(Window window)
-    {
-        base.OpenWindow(window);
-    }
-
-    protected override void OnResume()
-    {
-        //Check subscription level and resume operation
-        base.OnResume();
-    }
-
-    protected override void OnSleep()
-    {
-        // on minimize the window
-        base.OnSleep();
     }
 }

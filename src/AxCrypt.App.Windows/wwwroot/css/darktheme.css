@@ -1196,6 +1196,10 @@ bold.text-style {
   color: #7A8494 !important;
 }
 
+.rcnt-fld-bx.selected {
+  background: rgba(74, 222, 128, 0.14);
+}
+
 .home-index .fle-nme {
   color: #E8ECF1 !important;
 }
@@ -1515,18 +1519,17 @@ bold.text-style {
 
 /* Profile menu (sidebar footer popup) — each row carries a
    `pm-item-icon` plus a per-row modifier that injects the SVG via
-   `content:`. Tint them so the icons stay visible on the dark
-   popup surface. The danger row keeps its red tint via the
-   pm-item--danger override, so do NOT filter that one. */
+   `content:`. Do not invert the whole chip: filter affects the
+   background and the CSS-injected icon together, which can hide it
+   on dark surfaces. */
 .pm-item:not(.pm-item--danger) .pm-item-icon {
-  filter: brightness(0) invert(1) !important;
-  opacity: 0.9;
+  filter: none !important;
+  opacity: 1;
 }
 
 .pm-item--danger .pm-item-icon {
-  /* Re-tint the red danger icon for dark surfaces — keep hue,
-     just bump luminance so it still reads as red, not maroon. */
-  filter: brightness(1.15) saturate(1.1) !important;
+  filter: none !important;
+  opacity: 1;
 }
 
 /* Quick Action tiles — `<img src="images/default/IcoXxx.svg">`
@@ -2975,7 +2978,16 @@ bold.text-style {
 /* ---- Profile popup chrome ----------------------------------- */
 .profile-menu .pm-item-icon {
   background: #1C2530 !important;
+  border: 1px solid #2A3340 !important;
   color: #B5BCC7 !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+.profile-menu .pm-item:hover .pm-item-icon {
+  background: rgba(127, 204, 92, 0.14) !important;
+  border-color: rgba(127, 204, 92, 0.35) !important;
+  color: #B8E89A !important;
 }
 
 .profile-menu .pm-item:hover {
@@ -2989,6 +3001,12 @@ bold.text-style {
 .profile-menu .pm-item--danger .pm-item-label,
 .profile-menu .pm-item--danger .pm-item-icon {
   color: #F87171 !important;
+}
+
+.profile-menu .pm-item--danger .pm-item-icon {
+  background: rgba(248, 113, 113, 0.14) !important;
+  border-color: rgba(248, 113, 113, 0.3) !important;
+  filter: none !important;
 }
 
 .profile-menu .pm-item-label {

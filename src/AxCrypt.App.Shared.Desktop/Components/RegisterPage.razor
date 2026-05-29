@@ -1,142 +1,279 @@
-﻿@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Models
+@using AxCrypt.App.Shared.Utility
+@using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Common
 @using AxCrypt.Content
+@using AxCrypt.Core.Runtime
 @using AxCrypt.Core.UI.ViewModel
 @using static AxCrypt.Abstractions.TypeResolve
+
 @inject RegisterViewModel Register
 @inject LogOnViewModel logOnViewModel
 @inject ProfileViewModel profileViewModel
 
-<section class="content">
-    <article class="left-section reg-sec" id="content-wrap">
-        <h1 class="reg-tle">@((MarkupString)(string.Format(@Texts.WelcomeText)))</h1>
-        <span style="margin-bottom: 10px;">@((MarkupString)(string.Format(@Texts.OfflineSignupText)))</span><br />
-        <label class="sub-head">@Texts.PromptSignUp</label>
-        <EditForm Model="@Register.CreateAccountModel" class="signup-sec" style="margin-bottom: 0% !important;">
-            <div class="form-field">
-                <label>@Texts.YourEmailText</label>
-                <input type="email" @bind-value="Register.CreateAccountModel.UserEmail" class="form-control email-img"
-                    placeholder="Enter your email" />
-            </div>
-            <div class="form-field">
-                <label>@Texts.CreatePasswordText:</label>
-                <input type="@passwordFiledType" @bind-value="Register.CreateAccountModel.PasswordText"
-                    class="form-control pswd-img" placeholder="Create your password" />
-            </div>
-            <div>
-                <label>@Texts.VerifyPasswordPrompt:</label>
-                <input type="@passwordFiledType" @bind-value="Register.CreateAccountModel.Verification"
-                    class="form-control pswd-img" placeholder="Type your password one more time" />
-            </div>
-            <div class="check-bx">
-                <input type="checkbox" style="margin-right: 5px !important;" @bind="canShowPassword"
-                    @onclick="async () => await ToggleShowPassword()" />
-                <span class="che-txt">@Texts.ShowPasswordOptionPrompt</span>
+@*
+    RegisterPage — OFFLINE sign-up flow only.
+
+    For ONLINE sign-up, the live route is the new SignUpPage component
+    (conversion-focused step-1 → account-web hand-off). IndexPage's
+    ShowSignUp branch dispatches between the two based on the current
+    AxCryptOnlineState. We keep both files separate because the offline
+    flow has a very different job to do:
+      • There's no web hand-off available, so we have to create a fully
+        functional local key pair right here in the app.
+      • There's no plan to pitch — offline accounts don't get paid
+        features. The UI should be matter-of-fact about that instead
+        of teasing plans that can't be unlocked.
+
+    Visual: reuses the same .lp-shell + .lp-brand panel as SignUpPage
+    so the user doesn't get yanked into a different visual world.
+*@
+
+<section class="lp-shell">
+
+    @* ── Brand panel (left) — identical to SignUpPage so the
+           transition between flows stays seamless. ─────────── *@
+    <aside class="lp-brand">
+        <div class="lp-brand-bg"></div>
+        <img class="lp-brand-key" src="images/axcryptIcon.png" alt="" aria-hidden="true" />
+
+        <div class="lp-brand-inner">
+            <div class="lp-brand-mark">
+                <img class="lp-brand-logo-img" src="images/axcrypt_text.png" alt="AxCrypt" />
             </div>
 
-            <button class="button grn-bg whte-clr" style="width:100%; margin: 20px 0px;"
-                @onclick="async (e) => await Register.ButtonOk_Click(e)">@Texts.PromptSignUp</button>
-        </EditForm>
-        @if (!isOffline)
-        {
-            <div class="signup-link" style="width: 90%;margin-bottom: 2%;">
-                <NavLink class="nav-link grn-clr" href="javascript:void(0);" @onclick="GoToLogin">
-                    @Texts.AlreadyRegisteredLink</NavLink>
-            </div>
-        }
-        <div style="display: flex;align-items: flex-start; width: 90%; height:10px">
-            <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
-            <span style="margin: -13px 10px 13px;padding-top: -4px;">@Texts.OrText</span>
-            <hr style="flex: 1; border: none; border-top: 1px solid gray;margin: 0 0 0.5rem;">
+            <h1 class="lp-brand-headline">
+                Your files.<br/>
+                Protected everywhere.<br/>
+                <span class="lp-brand-emphasis">Always.</span>
+            </h1>
+
+            <p class="lp-brand-sub">
+                Secure files, passwords, and private messages with powerful
+                encryption — before they are shared, synced, or stored in the cloud.
+            </p>
+
+            <ul class="lp-brand-pills" aria-label="Why AxCrypt">
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    AES-256 device encryption
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Works offline — no account server required
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Your private key stays on your device
+                </li>
+            </ul>
         </div>
-        <div id="OtherOptions-Section" style="text-align: center;border-radius: 4px; width: 90%;">
-            <div class="dropdown">
-                <div class="action-buttons">
-                    <button @onclick="ToggleDropdown" style="width: 310px; color:  #48772c;font-weight: 600;">
-                        @Texts.OtherLogOptions
-                        <img class="drp-dwn down" id="lang-action-btn-arw" src="" alt="dropdown-img"
-                            style="max-height: 15px;" />
-                    </button>
+
+        <div class="lp-brand-footer">© AxCrypt — File security made easy</div>
+    </aside>
+
+    @* ── Form panel (right) — offline-only ─────────────── *@
+    <article class="lp-form" id="content-wrap">
+        <div class="lp-form-inner">
+
+            <div class="lp-form-head">
+                <h2 class="lp-title">Create an offline account</h2>
+                <p class="lp-sub">
+                    AxCrypt will generate a local AxCrypt ID on this device.
+                    You can sync it later when you go online.
+                </p>
+
+                <div class="lp-info lp-info--offline" role="note">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    <span>@((MarkupString)Texts.OfflineSignupText)</span>
                 </div>
-                @if (showDropdown)
+            </div>
+
+            <EditForm Model="@Register.CreateAccountModel" class="lp-form-fields">
+
+                @if (!string.IsNullOrEmpty(Register.ErrorMessage))
                 {
-                    <div class="dropup-content hide-model-popup">
-                        <a @onclick="async () => await InitiateImportAxCryptIdOnRegister()"
-                            style="padding: 8px;">@Texts.ImportMyPrivateKeyToolStripMenuItemText</a>
+                    <div class="lp-error" role="alert">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <span>@Register.ErrorMessage</span>
                     </div>
                 }
+
+                @* ── Email ───────────────────────────────── *@
+                <div class="lp-field">
+                    <div class="lp-field-head">
+                        <label for="reg-email">@Texts.YourEmailText</label>
+                    </div>
+                    <input type="email"
+                           id="reg-email"
+                           class="lp-input"
+                           @bind-value="Register.CreateAccountModel.UserEmail"
+                           @bind-value:event="oninput"
+                           placeholder="@Texts.TypeYourEmailPlaceHolderText"
+                           autocomplete="email"
+                           tabindex="1" />
+                </div>
+
+                @* ── Password (with eye toggle) ──────────── *@
+                <div class="lp-field">
+                    <div class="lp-field-head">
+                        <label for="reg-password">@Texts.CreatePasswordText</label>
+                    </div>
+                    <div class="lp-input-wrap">
+                        <input type="@passwordFieldType"
+                               id="reg-password"
+                               class="lp-input"
+                               @bind-value="Register.CreateAccountModel.PasswordText"
+                               @bind-value:event="oninput"
+                               placeholder="Create your password"
+                               autocomplete="new-password"
+                               tabindex="2" />
+                        <button type="button"
+                                class="lp-input-eye"
+                                @onclick="TogglePasswordVisibility"
+                                title="@(canShowPassword ? "Hide password" : "Show password")"
+                                aria-label="@(canShowPassword ? "Hide password" : "Show password")"
+                                tabindex="-1">
+                            @if (canShowPassword)
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a18.46 18.46 0 015.06-5.94"/>
+                                    <path d="M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 8 11 8a18.46 18.46 0 01-3.17 4.07"/>
+                                    <line x1="1" y1="1" x2="23" y2="23"/>
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            }
+                        </button>
+                    </div>
+                    <AxCrypt.App.Shared.Desktop.Components.Shared.PasswordStrengthMeterComponent
+                        InputValue="@Register.CreateAccountModel.PasswordText" />
+                </div>
+
+                @* ── Verify password ─────────────────────── *@
+                <div class="lp-field">
+                    <div class="lp-field-head">
+                        <label for="reg-verify">@Texts.VerifyPasswordPrompt</label>
+                    </div>
+                    <input type="@passwordFieldType"
+                           id="reg-verify"
+                           class="lp-input"
+                           @bind-value="Register.CreateAccountModel.Verification"
+                           @bind-value:event="oninput"
+                           placeholder="Type your password one more time"
+                           autocomplete="new-password"
+                           tabindex="3" />
+                </div>
+
+                <button type="button"
+                        class="lp-cta"
+                        disabled="@_isCreating"
+                        tabindex="4"
+                        @onclick="CreateAccountAsync">
+                    @if (_isCreating)
+                    {
+                        <span class="lp-cta-spinner" aria-hidden="true"></span>
+                        <span>Creating account…</span>
+                    }
+                    else
+                    {
+                        <span>Create offline account</span>
+                    }
+                </button>
+
+                <p class="lp-hint">
+                    Your key pair stays on this device. You can sync it later
+                    by signing in here once you have an online connection.
+                </p>
+            </EditForm>
+
+            @* ── Footer: back to sign in + key import ──── *@
+            <div class="lp-form-foot">
+                <button type="button" class="lp-link lp-link--mini"
+                        @onclick="InitiateImportAxCryptIdOnRegister">
+                    @Texts.ImportMyPrivateKeyToolStripMenuItemText
+                </button>
             </div>
         </div>
+    </article>
 
-        <div class="signup-link" style="width: 90%;">
-            <NavLink class="nav-link" href="mailto:support@axcrypt.net">
-                <span class="che-txt">@Texts.NeedAnyHelpText</span>
-                <span class="grn-clr">@Texts.ContactUsHeading!</span>
-            </NavLink>
+    @* ── Vertical loading overlay ── *@
+    @if (_isCreating)
+    {
+        <div class="lp-loading-overlay" role="status" aria-live="polite">
+            <div class="lp-loading-card">
+                <span class="lp-loading-spinner" aria-hidden="true"></span>
+                <span class="lp-loading-msg">Creating your account…</span>
+            </div>
         </div>
-
-    </article>
-    <article class="right-section">
-        <div class="signin-right-img"></div>
-    </article>
+    }
 </section>
 
 @code {
     private bool _isCreating = false;
-    private string passwordFiledType = "password";
-    bool canShowPassword = false;
+    private string passwordFieldType = "password";
+    private bool canShowPassword = false;
 
-    bool isOffline = false;
-
-    protected override void OnInitialized()
-    {
-        isOffline = New<AxCryptOnlineState>().IsOffline;
-        base.OnInitialized();
-    }
-
-    private bool showDropdown = false;
-
-    private void ToggleDropdown()
-    {
-        showDropdown = !showDropdown;
-    }
-
-    async Task ToggleShowPassword()
+    private void TogglePasswordVisibility()
     {
         canShowPassword = !canShowPassword;
-        if (canShowPassword)
+        passwordFieldType = canShowPassword ? "text" : "password";
+    }
+
+    /// <summary>
+    /// Offline-only — drives the existing RegisterViewModel flow which
+    /// generates a local key pair and stores it. No web hand-off.
+    /// </summary>
+    private async Task CreateAccountAsync()
+    {
+        if (_isCreating)
         {
-            passwordFiledType = "text";
-            await RefreshComponentAsync();
             return;
         }
 
-        passwordFiledType = "password";
-        await RefreshComponentAsync();
+        Register.ErrorMessage = string.Empty;
+
+        try
+        {
+            _isCreating = true;
+            await Register.ButtonOk_Click(EventArgs.Empty);
+        }
+        finally
+        {
+            _isCreating = false;
+        }
     }
 
     private async Task InitiateImportAxCryptIdOnRegister()
     {
         await profileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID);
         Register.ShowSignUp = false;
-        Register.DialogResult = Utility.DialogResult.Abort;
-    }
-
-    private async Task GoToLogin()
-    {
-        Register.ShowSignUp = false;
-        Register.DialogResult = Utility.DialogResult.Cancel;
-        LogOnAccountViewModel logOnModel = new LogOnAccountViewModel(AxCrypt.Core.Resolve.UserSettings, "");
-        await logOnViewModel.ShowLogOnDialog(logOnModel, logOnViewModel.MainViewModel);
-    }
-
-    private async Task RefreshComponentAsync()
-    {
-        await InvokeAsync(() =>
-        {
-            StateHasChanged(); // Refresh UI
-        });
+        Register.DialogResult = DialogResult.Abort;
     }
 }

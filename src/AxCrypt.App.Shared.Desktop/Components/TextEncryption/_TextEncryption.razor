@@ -34,16 +34,17 @@
                   @oninput="ValidateLength" readonly></textarea>
     }
 
-    <div id="custom-pwd-section">
-        <label>
-            <input class="che-box" type="checkbox" id="userchoice"
-                   @onclick=TextEncryptionViewModel.ShowHideCustomPassword
-                   checked="@TextEncryptionViewModel.IsCustomPasswordMode" />
-            <span>@Texts.UseCustomPasswordHead</span>
-        </label>
-        <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16"
-             @onmouseover='@(() => TextEncryptionViewModel.ShowPopup("open"))'
-             @onmouseout='@(() => TextEncryptionViewModel.HidePopup())'>
+    <div class="cus-pass-section">
+        <div id="custom-pwd-section">
+            <label>
+                <input class="che-box" type="checkbox" id="userchoice"
+                       @onclick=TextEncryptionViewModel.ShowHideCustomPassword
+                       checked="@TextEncryptionViewModel.IsCustomPasswordMode" />
+                <span>@Texts.UseCustomPasswordHead</span>
+            </label>
+            <img src="/images/premium/IcoInfOld.svg" alt="info icon" width="16" height="16"
+                 @onmouseover='@(() => TextEncryptionViewModel.ShowPopup("open"))'
+                 @onmouseout='@(() => TextEncryptionViewModel.HidePopup())'>
 
             @if (TextEncryptionViewModel.IsHovered && TextEncryptionViewModel.HoveredElement == "open")
             {
@@ -51,21 +52,21 @@
                     <span class="txt-clr font-medium">@Texts.UseCustomPasswordHead1</span>
                 </div>
             }
-            @if (TextEncryptionViewModel.IsCustomPasswordMode)
-            {
-                <br />
-                <label>@Texts.PassphrasePrompt:</label>
+        </div>
+        @if (TextEncryptionViewModel.IsCustomPasswordMode)
+        {
+            <label style="display:block;">@Texts.PassphrasePrompt:</label>
 
-                <div class="password-container">
-                    <i class="@TextEncryptionViewModel.PasswordIconClass" style="top:40% !important;"
-                       @onclick="TextEncryptionViewModel.TogglePassword"></i>
-                    <input type="@TextEncryptionViewModel.PasswordInputType" id="passwordbox" min="8"
-                           @bind="TextEncryptionViewModel.Password" @bind:event="oninput" autocomplete="off">
-                    </div>
-                    <AxCrypt.App.Shared.Desktop.Components.Shared.PasswordStrengthMeterComponent
-                    InputValue="@TextEncryptionViewModel.Password" />
-                }
+            <div class="password-container">
+                <i class="@TextEncryptionViewModel.PasswordIconClass" style="top:40% !important;"
+                   @onclick="TextEncryptionViewModel.TogglePassword"></i>
+                <input type="@TextEncryptionViewModel.PasswordInputType" id="passwordbox" min="8"
+                       @bind="TextEncryptionViewModel.Password" @bind:event="oninput" autocomplete="off">
             </div>
+            <AxCrypt.App.Shared.Desktop.Components.Shared.PasswordStrengthMeterComponent InputValue="@TextEncryptionViewModel.Password" />
+        }
+    </div>
+
 
     <div class="encryp-and-reset-btn">
         <button class="button success btn-large font-medium active" @onclick="async () => await TextEncryptionViewModel.EncryptText()">@Texts.EncryptLabelText</button>
@@ -73,47 +74,47 @@
     </div>
 </div>
 
-        <div>
-            <label style="display: block;">@Texts.EncryptedTextHead</label>
-            <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText"
-                      placeholder="@Texts.EncryptedTextAppearsHerePlaceHolder" readonly></textarea>
-        </div>
+<div>
+    <label style="display: block;">@Texts.EncryptedTextHead</label>
+    <textarea class="encrypt-txt-box" rows="7" @bind="TextEncryptionViewModel.EncryptedText"
+              placeholder="@Texts.EncryptedTextAppearsHerePlaceHolder" readonly></textarea>
+</div>
 
-        @if (!string.IsNullOrEmpty(TextEncryptionViewModel.EncryptedText))
-        {
-            <div class="multi-btn">
-                <button class="multi-actn-btn"
-                        @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(TextEncryptionViewModel.EncryptedText)">
-                    <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy encrypted text to the clipboard"
-                         width="16" height="16" />
-                    @Texts.SecretsCopytoClipboard
-                </button>
+@if (!string.IsNullOrEmpty(TextEncryptionViewModel.EncryptedText))
+{
+    <div class="multi-btn">
+        <button class="multi-actn-btn"
+                @onclick="async () => await CopyToClipboardUtility.CopyToClipboard(TextEncryptionViewModel.EncryptedText)">
+            <img class="copy-clipboard-ico" alt="copy to clipboard ico" title="Copy encrypted text to the clipboard"
+                 width="16" height="16" />
+            @Texts.SecretsCopytoClipboard
+        </button>
 
-                <button class="multi-actn-btn"
-                        @onclick="async () => await TextEncryptionViewModel.ExportTextAsync(AxCrypt.App.Shared.Desktop.Data.Utility.GetDownloadsFolderPath())">
-                    <img class="download-ico" alt="download ico" title="Download encrypted text as a .txt file" width="16"
-                         height="16" />
-                    @Texts.DownloadAsTxtButton
-                </button>
+        <button class="multi-actn-btn"
+                @onclick="async () => await TextEncryptionViewModel.ExportTextAsync(AxCrypt.App.Shared.Desktop.Data.Utility.GetDownloadsFolderPath())">
+            <img class="download-ico" alt="download ico" title="Download encrypted text as a .txt file" width="16"
+                 height="16" />
+            @Texts.DownloadAsTxtButton
+        </button>
 
-                <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.EncryptSendEmailBtn>
-                    <img class="email-ico" alt="email ico" title="Compose a new email with encrypted text" width="16" height="16" />
-                    @Texts.SendViaEmailButton
-                </button>
+        <button class="multi-actn-btn" @onclick=TextEncryptionViewModel.EncryptSendEmailBtn>
+            <img class="email-ico" alt="email ico" title="Compose a new email with encrypted text" width="16" height="16" />
+            @Texts.SendViaEmailButton
+        </button>
 
-                <button class="multi-actn-btn" @onclick=ShowShareTextDialog>
-                    <img class="sharelink-ico" alt="share as link ico" title="Share encrypted text via link" width="16"
-                         height="16" />
-                    @Texts.ShareAsLinkActionText
-                </button>
-            </div>
+        <button class="multi-actn-btn" @onclick=ShowShareTextDialog>
+            <img class="sharelink-ico" alt="share as link ico" title="Share encrypted text via link" width="16"
+                 height="16" />
+            @Texts.ShareAsLinkActionText
+        </button>
+    </div>
 
-            <AxCrypt.App.Shared.Desktop.Components.TextEncryption._ShareEncryptedTextDialog />
+    <AxCrypt.App.Shared.Desktop.Components.TextEncryption._ShareEncryptedTextDialog />
 
-            <div>
-                <span id="copiedMessage" style="color: #48772C; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
-            </div>
-        }
+    <div>
+        <span id="copiedMessage" style="color: #48772C; font-weight: bold;">@CopyToClipboardUtility.CopiedInfoText</span>
+    </div>
+}
 
 @code {
     protected override void OnInitialized()

@@ -513,6 +513,12 @@ public class RecentFilesViewModel : ViewModelBase
 
     private async Task ShareKeyFromRecentFiles(EventArgs args)
     {
+        // Show the dialog shell immediately — the compiled service makes
+        // an API call before firing OnDialogVisibilityChanged(true), which
+        // caused a ~5-second blank delay.  Calling Show() here makes the
+        // dialog appear at once; the service populates it when ready.
+        _sharekeyViewModel!.LogOnViewModel.ShareKeyDialog.Show();
+
         await ShareKeyService.ShareKeysAsync(_mainViewModel.SelectedRecentFiles, _sharekeyViewModel!, _fileOperationViewModel);
     }
 

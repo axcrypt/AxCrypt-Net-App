@@ -19,7 +19,7 @@
             <header class="cm-head">
                 <div class="cm-head-text">
                     <h2 id="cm-title" class="cm-title">@Texts.CloudServicesText</h2>
-                    <p class="cm-sub">Connect, browse and manage your encrypted cloud storage. Files are encrypted on your device <em>before</em> they reach any cloud.</p>
+                    <p class="cm-sub">@((MarkupString)Texts.CloudServicesSubTitle)</p>
                 </div>
                 <button class="cm-x" type="button" @onclick="Close" aria-label="Close">×</button>
             </header>
@@ -42,12 +42,12 @@
                                     {
                                         <span class="cm-status cm-status--ok">
                                             <span class="cm-status-dot" aria-hidden="true"></span>
-                                            Connected
+                                            @Texts.CloudServicesConnectedText
                                         </span>
                                     }
                                     else
                                     {
-                                        <span class="cm-status cm-status--off">Not connected</span>
+                                        <span class="cm-status cm-status--off">@Texts.CloudServicesNotConnectedText</span>
                                     }
                                 </div>
                                 <p class="cm-prov-help">@HelpFor(provider)</p>
@@ -59,13 +59,13 @@
                                     <button type="button"
                                             class="cm-btn cm-btn--primary"
                                             @onclick="() => OnBrowse(provider)">
-                                        Browse files
+                                        @Texts.BrowseFilesText
                                     </button>
                                     <button type="button"
                                             class="cm-btn cm-btn--ghost"
                                             title="Sign out of this account"
                                             @onclick="() => OnDisconnect(provider)">
-                                        Disconnect
+                                        @Texts.CloudServicesDisconnectText
                                     </button>
                                 }
                                 else
@@ -73,7 +73,7 @@
                                     <button type="button"
                                             class="cm-btn cm-btn--primary"
                                             @onclick="() => OnConnect(provider)">
-                                        Connect
+                                        @Texts.CloudServicesConnectText
                                     </button>
                                 }
                             </div>
@@ -86,14 +86,14 @@
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.6">
                             <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
                         </svg>
-                        <p>No cloud providers available right now.</p>
+                        <p>@Texts.NoCloudServicesText</p>
                     </div>
                 }
             </div>
 
             <footer class="cm-foot">
-                <span class="cm-foot-hint">Tip: you can stay signed in to multiple providers at once.</span>
-                <button type="button" class="cm-btn cm-btn--ghost" @onclick="Close">Done</button>
+                <span class="cm-foot-hint">@Texts.CloudServicesFooter</span>
+                <button type="button" class="cm-btn cm-btn--ghost" @onclick="Close">@Texts.DoneTitle</button>
             </footer>
         </div>
     </div>
@@ -110,16 +110,16 @@
         return provider.Value switch
         {
             AxCrypt.Core.IO.FileProvider.GoogleDrive
-                => "Encrypt files before uploading to your Google Drive.",
+                => Texts.CloudServicesGoogleDriveHelpText,
             AxCrypt.Core.IO.FileProvider.DropBox
-                => "Keep files encrypted on Dropbox — only you hold the key.",
+                => Texts.CloudServicesDropBoxHelpText,
             AxCrypt.Core.IO.FileProvider.OneDrive
-                => "Send encrypted files to OneDrive without exposing contents.",
+                => Texts.CloudServicesOneDriveHelpText,
             AxCrypt.Core.IO.FileProvider.PhoneBrowser
-                => "Open and decrypt files stored on your phone.",
+                => Texts.CloudServicesPhoneBrowserHelpText,
             AxCrypt.Core.IO.FileProvider.Local
-                => "Browse files on this device.",
-            _ => "Connect to manage encrypted files in this provider.",
+                => Texts.CloudServicesLocalHelpText,
+            _ => Texts.CloudServicesLocalHelpText1,
         };
     }
 
@@ -128,7 +128,11 @@
         await subActionModel!.FileProviderViewModel.SubActionSelectProvider(provider);
         filePickerViewModel.IsVisible = false;
         await Close();
-        Navigation.NavigateTo("/cloudbrowser");
+
+        if (cloudDrive.IsConnected(provider))
+        {
+            Navigation.NavigateTo("/cloudbrowser");
+        }
     }
 
     private async Task OnBrowse(FileProviderItem provider)
@@ -136,12 +140,16 @@
         await subActionModel!.FileProviderViewModel.SubActionSelectProvider(provider);
         filePickerViewModel.IsVisible = false;
         await Close();
-        Navigation.NavigateTo("/cloudbrowser");
+
+        if (cloudDrive.IsConnected(provider))
+        {
+            Navigation.NavigateTo("/cloudbrowser");
+        }
     }
 
     private async Task OnDisconnect(FileProviderItem provider)
     {
-        //provider.Configured = false;
+        cloudDrive.DisconnetCloudService(provider);
         await InvokeAsync(StateHasChanged);
     }
 }

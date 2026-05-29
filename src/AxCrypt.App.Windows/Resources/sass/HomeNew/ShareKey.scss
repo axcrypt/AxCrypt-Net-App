@@ -1,0 +1,715 @@
+// Share-key dialog (.skd-*) — complete rebuild
+
+.skd-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 700;
+    background: rgba(15, 23, 42, .55);
+    backdrop-filter: blur(3px);
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow-y: auto;
+    animation: skdBackdropIn .14s ease-out;
+}
+
+@keyframes skdBackdropIn { from { opacity: 0 } to { opacity: 1 } }
+
+.skd-modal {
+    width: 100%;
+    max-width: 560px;
+    max-height: calc(100vh - 48px);
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, .28);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: skdModalIn .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+@keyframes skdModalIn {
+    from { opacity: 0; transform: translateY(10px) scale(.98); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);   }
+}
+
+// ── Header ───────────────────────────────────────────────────
+.skd-header {
+    display: grid;
+    grid-template-columns: 44px 1fr 30px;
+    align-items: start;
+    gap: 14px;
+    padding: 20px 22px 14px;
+    border-bottom: 1px solid #f0f1f3;
+}
+
+.skd-header-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(72, 119, 44, .12);
+    color: #48772C;
+    display: grid;
+    place-items: center;
+}
+
+.skd-header-text { min-width: 0; }
+
+.skd-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.3;
+}
+
+.skd-sub {
+    margin: 4px 0 0;
+    font-size: 12.5px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.skd-close {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    color: #6b7280;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background .14s, color .14s;
+}
+.skd-close:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+// ── Business banner ─────────────────────────────────────────
+.skd-biz-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 12px 22px 0;
+    padding: 10px 12px;
+    background: linear-gradient(180deg, rgba(72, 119, 44, .08), rgba(72, 119, 44, .04));
+    border: 1px solid rgba(72, 119, 44, .25);
+    border-radius: 10px;
+    color: #2f5618;
+    font-size: 12.5px;
+    line-height: 1.5;
+}
+
+.skd-biz-banner-text { flex: 1; }
+
+.skd-biz-banner svg { flex-shrink: 0; margin-top: 1px; color: #48772C; }
+
+.skd-link {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #2f5618;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+}
+.skd-link:hover { color: #48772C; }
+
+// ── Body ────────────────────────────────────────────────────
+.skd-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 22px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.skd-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skd-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #6b7280;
+}
+
+// ── Selected files chip strip ───────────────────────────────
+.skd-files {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.skd-file-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px 5px 8px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    font-size: 12px;
+    color: #374151;
+    max-width: 220px;
+}
+
+.skd-file-chip-icon {
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.skd-file-chip-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.skd-file-chip--more {
+    background: rgba(72, 119, 44, .12);
+    border-color: rgba(72, 119, 44, .25);
+    color: #2f5618;
+    font-weight: 700;
+}
+
+// Per-chip remove × — small neutral target that goes danger on hover.
+// Stays out of the way unless the user is mousing over the chip; this
+// is the only path to remove a single file from the selection without
+// re-opening the file picker.
+.skd-file-chip-remove {
+    width: 18px;
+    height: 18px;
+    margin-left: 2px;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: #9ca3af;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-grid;
+    place-items: center;
+    transition: background .12s, color .12s;
+}
+.skd-file-chip-remove:hover {
+    background: rgba(220, 38, 38, .14);
+    color: #b91c1c;
+}
+
+// ── Error pill ──────────────────────────────────────────────
+.skd-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    color: #b91c1c;
+    font-size: 12.5px;
+    line-height: 1.4;
+}
+
+// ── Add recipient row ───────────────────────────────────────
+.skd-add-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: stretch;
+}
+
+.skd-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.skd-input-icon {
+    position: absolute;
+    left: 12px;
+    color: #9ca3af;
+    pointer-events: none;
+    transition: color .15s;
+}
+
+.skd-input {
+    flex: 1;
+    height: 40px;
+    padding: 0 12px 0 36px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 13.5px;
+    color: #111827;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+}
+
+.skd-input::placeholder { color: #9ca3af; }
+
+.skd-input:focus {
+    border-color: #48772C;
+    box-shadow: 0 0 0 3px rgba(72, 119, 44, .14);
+}
+.skd-input:focus + .skd-input-icon,
+.skd-input-wrap:focus-within .skd-input-icon { color: #48772C; }
+
+// ── Suggestions popover ─────────────────────────────────────
+.skd-suggestions {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    max-height: 240px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 4px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+    list-style: none;
+}
+
+.skd-suggestion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .12s;
+}
+
+.skd-suggestion:hover { background: #f3f4f6; }
+
+.skd-suggestion-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #ecfccb;
+    color: #2f5618;
+    font-size: 12.5px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.skd-suggestion-avatar--group {
+    background: rgba(72, 119, 44, .15);
+    color: #2f5618;
+}
+
+.skd-suggestion-text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    color: #111827;
+}
+
+.skd-suggestion-tag {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #2f5618;
+    background: rgba(72, 119, 44, .12);
+    border-radius: 999px;
+    padding: 2px 8px;
+}
+
+// ── Buttons ─────────────────────────────────────────────────
+.skd-btn {
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s, opacity .15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skd-btn--primary {
+    background: #48772C;
+    color: #fff;
+}
+.skd-btn--primary:hover { background: #3f6826; }
+.skd-btn--primary:disabled {
+    background: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.skd-btn--ghost {
+    background: #fff;
+    color: #111827;
+    border-color: #d1d5db;
+}
+.skd-btn--ghost:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+// ── Recipient list ──────────────────────────────────────────
+.skd-list-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.skd-list-title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.skd-recipient-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.skd-recipient {
+    display: grid;
+    grid-template-columns: 36px 1fr 32px;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    transition: background .12s;
+}
+.skd-recipient + .skd-recipient { border-top: 1px solid #f3f4f6; }
+.skd-recipient:hover { background: #f9fafb; }
+
+.skd-recipient-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ecfccb;
+    color: #2f5618;
+    font-size: 14px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+}
+
+.skd-recipient-name {
+    min-width: 0;
+    font-size: 13.5px;
+    color: #111827;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.skd-recipient-menu-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background .12s, color .12s;
+}
+.skd-recipient-menu-btn:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+// Floating context menu — appears under the kebab.
+.skd-context-menu {
+    position: fixed;
+    z-index: 800;
+    min-width: 180px;
+    padding: 4px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .14);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.skd-context-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 7px;
+    font-size: 13px;
+    color: #111827;
+    cursor: pointer;
+    transition: background .12s;
+}
+.skd-context-item:hover { background: #f3f4f6; }
+.skd-context-item--danger { color: #b91c1c; }
+.skd-context-item--danger:hover { background: #fee2e2; }
+
+// ── Empty state ─────────────────────────────────────────────
+.skd-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 28px 14px;
+    border: 1px dashed #d1d5db;
+    border-radius: 12px;
+    background: #fafafa;
+    color: #9ca3af;
+    text-align: center;
+}
+.skd-empty-title {
+    margin: 4px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #374151;
+}
+.skd-empty-sub {
+    margin: 0;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+// ── Footer ──────────────────────────────────────────────────
+.skd-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 22px 18px;
+    border-top: 1px solid #f0f1f3;
+    background: #fafafa;
+}
+
+// ── Mini-popups (sync prompt, encrypt-warning) ──────────────
+.skd-mini-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 850;
+    background: rgba(15, 23, 42, .55);
+    backdrop-filter: blur(3px);
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    animation: skdBackdropIn .14s ease-out;
+}
+
+.skd-mini-modal {
+    width: 100%;
+    max-width: 380px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .26);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: skdModalIn .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+.skd-mini-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+    color: #111827;
+    text-align: center;
+}
+
+.skd-mini-text {
+    margin: 0;
+    font-size: 13px;
+    color: #4b5563;
+    line-height: 1.55;
+}
+
+.skd-mini-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+// ── Responsive — phone-ish widths ───────────────────────────
+@media (max-width: 520px) {
+    .skd-modal { border-radius: 14px; }
+    .skd-header { padding: 16px 16px 12px; }
+    .skd-body   { padding: 12px 16px 4px; }
+    .skd-footer { padding: 12px 16px 14px; }
+    .skd-biz-banner { margin: 10px 16px 0; }
+
+    .skd-add-row { grid-template-columns: 1fr; }
+}
+
+// ── Dark theme ──────────────────────────────────────────────
+html[data-theme="dark"] {
+    .skd-modal {
+        background: #1c2530;
+        box-shadow: 0 32px 80px rgba(0, 0, 0, .55);
+    }
+    .skd-header,
+    .skd-footer { border-color: #2a3645; }
+    .skd-footer { background: #18222d; }
+    .skd-title       { color: #f3f4f6; }
+    .skd-sub         { color: #b5bcc7; }
+    .skd-label       { color: #b5bcc7; }
+    .skd-close       { color: #b5bcc7; }
+    .skd-close:hover { background: #232e3b; color: #f3f4f6; }
+
+    .skd-header-icon {
+        background: rgba(127, 204, 92, .18);
+        color: #b8e89a;
+    }
+
+    .skd-biz-banner {
+        background: linear-gradient(180deg, rgba(127, 204, 92, .12), rgba(127, 204, 92, .06));
+        border-color: rgba(127, 204, 92, .35);
+        color: #b8e89a;
+    }
+    .skd-biz-banner svg { color: #b8e89a; }
+    .skd-link           { color: #b8e89a; }
+    .skd-link:hover     { color: #d1f0bb; }
+
+    .skd-files {
+        background: #232e3b;
+        border-color: #3a4554;
+    }
+    .skd-file-chip {
+        background: #1c2530;
+        border-color: #3a4554;
+        color: #e8ecf1;
+    }
+    .skd-file-chip--more {
+        background: rgba(127, 204, 92, .15);
+        border-color: rgba(127, 204, 92, .35);
+        color: #b8e89a;
+    }
+
+    .skd-input {
+        background: #232e3b;
+        border-color: #3a4554;
+        color: #e8ecf1;
+    }
+    .skd-input::placeholder { color: #7a8494; }
+    .skd-input:focus {
+        border-color: #7fcc5c;
+        box-shadow: 0 0 0 3px rgba(127, 204, 92, .25);
+    }
+
+    .skd-suggestions {
+        background: #232e3b;
+        border-color: #3a4554;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+    }
+    .skd-suggestion:hover { background: #2a3645; }
+    .skd-suggestion-text  { color: #e8ecf1; }
+    .skd-suggestion-avatar {
+        background: rgba(127, 204, 92, .18);
+        color: #b8e89a;
+    }
+
+    .skd-btn--primary {
+        background: #7fcc5c;
+        color: #0f1a07;
+    }
+    .skd-btn--primary:hover { background: #9be076; }
+    .skd-btn--primary:disabled {
+        background: #2a3645;
+        color: #6b7280;
+    }
+    .skd-btn--ghost {
+        background: #1c2530;
+        color: #e8ecf1;
+        border-color: #4b5563;
+    }
+    .skd-btn--ghost:hover {
+        background: #232e3b;
+        border-color: #7a8494;
+    }
+
+    .skd-list-title { color: #f3f4f6; }
+    .skd-recipient-list {
+        background: #1c2530;
+        border-color: #3a4554;
+    }
+    .skd-recipient + .skd-recipient { border-top-color: #2a3645; }
+    .skd-recipient:hover { background: #232e3b; }
+    .skd-recipient-name { color: #e8ecf1; }
+    .skd-recipient-avatar {
+        background: rgba(127, 204, 92, .18);
+        color: #b8e89a;
+    }
+    .skd-recipient-menu-btn:hover {
+        background: #232e3b;
+        color: #e8ecf1;
+    }
+
+    .skd-context-menu {
+        background: #232e3b;
+        border-color: #3a4554;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, .55);
+    }
+    .skd-context-item        { color: #e8ecf1; }
+    .skd-context-item:hover  { background: #2a3645; }
+    .skd-context-item--danger { color: #fca5a5; }
+    .skd-context-item--danger:hover { background: rgba(248, 113, 113, .15); }
+
+    .skd-empty {
+        background: #1c2530;
+        border-color: #3a4554;
+        color: #b5bcc7;
+    }
+    .skd-empty-title { color: #e8ecf1; }
+    .skd-empty-sub   { color: #b5bcc7; }
+
+    .skd-error {
+        background: rgba(248, 113, 113, .12);
+        border-color: rgba(248, 113, 113, .35);
+        color: #fca5a5;
+    }
+
+    .skd-mini-modal { background: #1c2530; }
+    .skd-mini-title { color: #f3f4f6; }
+    .skd-mini-text  { color: #b5bcc7; }
+}

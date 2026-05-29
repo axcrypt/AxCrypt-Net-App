@@ -63,6 +63,7 @@ public static class AppDesktopFactory
         services.AddSingleton<PaidFeaturegateService>();
         services.AddSingleton<NavPageService>();
         services.AddSingleton<BatchFileOperationService>();
+        services.AddSingleton<OnlineSignUpService>();
 
         TypeMap.Register.Singleton<UserEntitlementService>(() => new UserEntitlementService());
 

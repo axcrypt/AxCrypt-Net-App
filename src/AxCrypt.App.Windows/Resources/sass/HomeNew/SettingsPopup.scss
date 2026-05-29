@@ -1,6 +1,4 @@
-﻿/* ═══════════════════════════════════════════
-   Settings Popup (gear button)
-════════════════════════════════════════════ */
+﻿// Settings Popup (gear button)
 .settings-wrapper {
     position: relative;
 }
@@ -35,7 +33,10 @@
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        // No transform in the final state — any transform on an ancestor
+        // (even translateY(0)) creates a new containing block that traps
+        // position:fixed descendants, preventing them from covering the
+        // full viewport. Ending on opacity-only avoids this.
     }
 }
 
@@ -94,7 +95,7 @@
     padding: 0 6px;
 }
 
-/* Language select */
+// Language select
 .sm-select-wrap {
     position: relative;
 }
@@ -127,7 +128,7 @@
     color: $text-muted;
 }
 
-/* Inactivity radio group */
+// Inactivity radio group
 .sm-radio-group {
     display: flex;
     flex-wrap: wrap;
@@ -176,7 +177,7 @@
         border-color: $brand-green;
     }
 
-/* Toggle rows */
+// Toggle rows
 .sm-toggle-row {
     display: flex;
     align-items: center;
@@ -191,9 +192,9 @@
         background: $bg-page;
     }
 
-/* Locked rows are click-through to the paid-gate popup. Dim the text a
-   touch so the lock badge reads as the call-to-action, and show the
-   pointer cursor so it doesn't look inert. */
+// Locked rows are click-through to the paid-gate popup. Dim the text a
+// touch so the lock badge reads as the call-to-action, and show the
+// pointer cursor so it doesn't look inert.
 .sm-toggle-row--locked {
     cursor: pointer;
 }
@@ -204,7 +205,7 @@
 }
 
 .sm-toggle-row--locked:hover {
-    background: #fffbeb; /* amber-50 — hints at the upgrade pitch the popup will show */
+    background: #fffbeb; // amber-50 — hints at the upgrade pitch the popup will show
 }
 
 .sm-toggle-info {
@@ -224,7 +225,7 @@
     color: $text-muted;
 }
 
-/* Toggle switch */
+// Toggle switch
 .toggle-switch {
     width: 40px;
     height: 22px;
@@ -258,7 +259,7 @@
     left: 21px;
 }
 
-/* Advanced Settings links */
+// Advanced Settings links
 .sm-advanced-btn {
     width: 100%;
     display: flex;

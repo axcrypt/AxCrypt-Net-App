@@ -14,7 +14,7 @@ namespace AxCrypt.App.Shared.Services;
 
 public static class ShareKeyService
 {
-    public static async Task ShareKeysWithFileSelectionAsync(ShareKeyViewModel sharekeyViewModel, IEnumerable<string> selectedRecentFileNames, FileOperationViewModel fileOperationViewModel)
+    public static async Task<bool> ShareKeysWithFileSelectionAsync(ShareKeyViewModel sharekeyViewModel, IEnumerable<string> selectedRecentFileNames, FileOperationViewModel fileOperationViewModel)
     {
         FileSelectionEventArgs fileSelectionArgs = new FileSelectionEventArgs(selectedRecentFileNames)
         {
@@ -30,18 +30,47 @@ public static class ShareKeyService
         int availableCount = usage.GetUsage(FeatureKey.KeyShare).Remaining;
         if (availableCount == 0)
         {
-            return;
+            CloseShareKeyDialogIfOpen(sharekeyViewModel);
+            return false;
         }
 
-        if (fileSelectionArgs.Cancel)
+        // Cancelled picker OR empty selection — the caller (ActionsViewModel)
+        // opened the ShareKey dialog optimistically before the picker, so the
+        // shell is showing right now with no files. Close it so the user
+        // isn't left staring at an empty popup that does nothing.
+        if (fileSelectionArgs.Cancel || !fileSelectionArgs.SelectedFiles.Any())
         {
-            return;
+            CloseShareKeyDialogIfOpen(sharekeyViewModel);
+            return false;
         }
 
-        await ShareKeysAsync(fileSelectionArgs.SelectedFiles, sharekeyViewModel, fileOperationViewModel);
+        return await ShareKeysAsync(fileSelectionArgs.SelectedFiles, sharekeyViewModel, fileOperationViewModel);
     }
 
-    public static async Task ShareKeysAsync(IEnumerable<string> fileNames, ShareKeyViewModel sharekeyViewModel, FileOperationViewModel fileOperationViewModel)
+    /// <summary>
+    /// Idempotent dialog-close used by every early-exit path. The optimistic
+    /// Show() in ActionsViewModel / RecentFilesViewModel means the dialog
+    /// shell can be on screen with no data; this helper makes sure it goes
+    /// away on every abort.
+    /// </summary>
+    private static void CloseShareKeyDialogIfOpen(ShareKeyViewModel sharekeyViewModel)
+    {
+        try
+        {
+            sharekeyViewModel?.LogOnViewModel?.ShareKeyDialog?.Close();
+            if (sharekeyViewModel != null)
+            {
+                sharekeyViewModel.SelectedFilesOrFolders = new List<string>();
+                sharekeyViewModel.PageResult = DialogResult.Cancel;
+            }
+        }
+        catch
+        {
+            // Closing a not-open dialog must never throw.
+        }
+    }
+
+    public static async Task<bool> ShareKeysAsync(IEnumerable<string> fileNames, ShareKeyViewModel sharekeyViewModel, FileOperationViewModel fileOperationViewModel)
     {
         try
         {
@@ -51,7 +80,7 @@ public static class ShareKeyService
                 PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "There are some unencrypted files also selected for key sharing. AxCrypt will encrypt and then key share the selected files. Would you like to continue to proceed?");
                 if (click != PopupButtons.Ok)
                 {
-                    return;
+                    return false;
                 }
             }
 
@@ -61,7 +90,7 @@ public static class ShareKeyService
 
             if (sharekeyViewModel.PageResult == DialogResult.Cancel)
             {
-                return;
+                return false;
             }
 
             if (encryptableFileNames != null && encryptableFileNames.Any())
@@ -72,7 +101,7 @@ public static class ShareKeyService
                 int availableCount = featureUsage.Remaining;
                 if (availableCount == 0)
                 {
-                    return;
+                    return false;
                 }
 
                 if (featureUsage.Limit > 0)
@@ -83,15 +112,16 @@ public static class ShareKeyService
 
                 await fileOperationViewModel.EncryptFiles.ExecuteAsync(encryptableFileNames);
                 fileOperationViewModel.Recipients = null;
-                return;
+                return true;
             }
 
             await viewModel.ShareFiles.ExecuteAsync(null);
+            return true;
         }
         catch (Exception ex)
         {
             await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.MessageErrorTitle, ex.Message);
-            return;
+            return false;
         }
     }
 }

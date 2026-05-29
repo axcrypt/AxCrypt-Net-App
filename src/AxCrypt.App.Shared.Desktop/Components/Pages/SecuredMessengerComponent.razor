@@ -1,7 +1,10 @@
-﻿@using AxCrypt.Api.SecuredMessenger
+﻿@implements IDisposable
+@using AxCrypt.Api.SecuredMessenger
 @using AxCrypt.App.Shared.ViewModels.SecuredMessenger
 @using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.Content
+@using AxCrypt.Core
+@using AxCrypt.Core.Crypto
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject ManageSecMsgrViewModel SecMsgrViewModel
@@ -133,108 +136,40 @@
     </div>
 </div>
 
-<style>
-    /* Messenger filter strip — one flat row of three pill-style buttons
-       sharing a soft underline. Replaces the old 3-div / 3-hr layout
-       that produced inconsistent spacing and duplicate IDs. */
-    .smx-filter-tabs {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        padding: 6px 10px 0;
-        border-bottom: 1px solid #e5e7eb;
-    }
-
-    .smx-filter-tab {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: transparent;
-        border: none;
-        padding: 8px 12px;
-        font-size: 13px;
-        font-weight: 600;
-        color: #6b7280;
-        cursor: pointer;
-        border-radius: 8px 8px 0 0;
-        transition: color .12s, background .12s;
-    }
-
-    .smx-filter-tab svg {
-        flex-shrink: 0;
-        opacity: .75;
-        transition: opacity .12s;
-    }
-
-    .smx-filter-tab:hover {
-        color: #111827;
-        background: rgba(72, 119, 44, .06);
-    }
-
-    .smx-filter-tab:hover svg {
-        opacity: 1;
-    }
-
-    .smx-filter-tab--active {
-        color: #48772C;
-    }
-
-    .smx-filter-tab--active svg {
-        opacity: 1;
-    }
-
-    /* Active-tab underline — drawn as a thicker bar that sits flush with
-       the bottom border so the tab feels anchored to the list below. */
-    .smx-filter-tab--active::after {
-        content: "";
-        position: absolute;
-        left: 12px;
-        right: 12px;
-        bottom: -1px;
-        height: 2.5px;
-        background: #48772C;
-        border-radius: 2px;
-    }
-
-    html[data-theme="dark"] .smx-filter-tabs {
-        border-bottom-color: #2A3340;
-    }
-
-    html[data-theme="dark"] .smx-filter-tab {
-        color: #B5BCC7;
-    }
-
-    html[data-theme="dark"] .smx-filter-tab:hover {
-        color: #E8ECF1;
-        background: rgba(127, 204, 92, .12);
-    }
-
-    html[data-theme="dark"] .smx-filter-tab--active {
-        color: #B8E89A;
-    }
-
-    html[data-theme="dark"] .smx-filter-tab--active::after {
-        background: #7FCC5C;
-    }
-
-    /* Tighten the wrapper around the list so the new filter strip and
-       list pane sit flush together — the old `parent-container` margin
-       added an unwanted gap below the tabs. */
-    #search-message-list.parent-container {
-        margin-top: 0;
-        padding-top: 0;
-    }
-</style>
 
 @code {
     private SecureMsgrFilterTab activeTab = SecureMsgrFilterTab.Inbox;
 
+    // OnTabUpdateViewState is event Action<SecureMsgrFilterTab> — match
+    // it and fire-and-forget the async UpdateTabState() inside the
+    // lambda. The handler marshals to the UI dispatcher internally.
+    private Action<SecureMsgrFilterTab>? _onTabUpdateViewState;
+
     protected override void OnInitialized()
     {
         SecMsgrViewModel.OnUpdateViewState += UpdatePageState;
-        SecMsgrViewModel.NewSecMsgrViewModel.OnTabUpdateViewState += async (SecureMsgrFilterTab selectedtab) => await UpdateTabState(selectedtab);
+        _onTabUpdateViewState = (SecureMsgrFilterTab selectedtab) => _ = UpdateTabState(selectedtab);
+        SecMsgrViewModel.NewSecMsgrViewModel.OnTabUpdateViewState += _onTabUpdateViewState;
     }
+
+    public void Dispose()
+    {
+        SecMsgrViewModel.OnUpdateViewState -= UpdatePageState;
+        if (_onTabUpdateViewState != null)
+        {
+            SecMsgrViewModel.NewSecMsgrViewModel.OnTabUpdateViewState -= _onTabUpdateViewState;
+            _onTabUpdateViewState = null;
+        }
+    }
+
+    // ── Authentication guard ─────────────────────────────────────────────────────
+    // Every call that reaches the service layer (SetSelectedTabActive, SearchList,
+    // ViewMessageReplies) will throw InvalidOperationException / InvalidCipherTextException
+    // when DefaultEncryptionIdentity has no user — i.e. during sign-out or before sign-in.
+    // Guard every entry point so we bail out silently instead of crashing.
+    private static bool IsLoggedIn()
+        => Resolve.KnownIdentities.IsLoggedOn
+        && Resolve.KnownIdentities.DefaultEncryptionIdentity != LogOnIdentity.Empty;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -243,7 +178,7 @@
             //await New<Core.UI.IPopup>().ShowAsync(Core.UI.PopupButtons.Ok, Texts.MessageErrorTitle, Texts.NoInternetErrorMessage);
         }
 
-        if (firstRender)
+        if (firstRender && IsLoggedIn())
         {
             await SetActiveTab(activeTab, Guid.Empty);
         }
@@ -251,6 +186,7 @@
 
     private async Task SetActiveTab(SecureMsgrFilterTab securedMessengerFilterTab, Guid parentId)
     {
+        if (!IsLoggedIn()) return;
         SecMsgrViewModel.NewSecMsgrViewModel.ParentId = parentId;
         activeTab = securedMessengerFilterTab;
         await SecMsgrViewModel.SetSelectedTabActive(securedMessengerFilterTab);
@@ -258,6 +194,7 @@
 
     private async Task SearchList()
     {
+        if (!IsLoggedIn()) return;
         if (New<AxCrypt.Common.AxCryptOnlineState>().IsOffline)
         {
             return;
@@ -321,6 +258,7 @@
 
     private async Task ClearAllFilters()
     {
+        if (!IsLoggedIn()) return;
         appliedFilters.Clear();
         SecMsgrViewModel.Messenger.UserName = "";
         SecMsgrViewModel.Messenger.ReceiverName = "";
@@ -343,12 +281,19 @@
 
     private async Task UpdateTabState(SecureMsgrFilterTab securedMessengerFilterTab)
     {
-        await SetActiveTab(securedMessengerFilterTab, SecMsgrViewModel.NewSecMsgrViewModel.ParentId);
-
-        await InvokeAsync(() =>
+        if (!IsLoggedIn()) return;
+        // OnTabUpdateViewState fires from the messenger background flow,
+        // not the renderer SC. SetActiveTab mutates `activeTab` and
+        // `ParentId` synchronously before its first await — both are
+        // UI-bound, so we marshal onto the Blazor dispatcher first.
+        // Then the final selection clear + StateHasChanged stays on the
+        // same SC, so the render is consistent.
+        await InvokeAsync(async () =>
         {
+            if (!IsLoggedIn()) return;
+            await SetActiveTab(securedMessengerFilterTab, SecMsgrViewModel.NewSecMsgrViewModel.ParentId);
             SecMsgrViewModel.SelectedMessageId = Guid.Empty;
-            StateHasChanged(); // Refresh UI
+            StateHasChanged();
         });
     }
 

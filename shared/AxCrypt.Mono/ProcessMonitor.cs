@@ -1,4 +1,4 @@
-﻿using AxCrypt.Core.Runtime;
+using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
 using System;
 using System.Collections.Generic;

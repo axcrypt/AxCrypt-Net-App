@@ -1,0 +1,666 @@
+// ================================================================
+// Plan & Pay page  —  pp-*
+// Standalone compile → wwwroot/css/HomeNew/Pages/PlanAndPayPage.css
+// ================================================================
+
+// ── Local variables ──────────────────────────────────────────────
+$pp-green:           #48772c;
+$pp-green-dark:      #3d6a24;
+$pp-green-light:     #f0fdf4;
+$pp-green-border:    #bbf7d0;
+$pp-green-text:      #166534;
+$pp-green-mid:       #16a34a;
+$pp-biz:             #111827;
+$pp-biz-mid:         #374151;
+$pp-biz-light:       #f0f2f5;
+$pp-biz-border:      #d1d5db;
+$pp-ink:             #111827;
+$pp-ink-soft:        #374151;
+$pp-muted:           #6b7280;
+$pp-hint:            #9ca3af;
+$pp-bg:              #f3f4f6;
+$pp-bg-soft:         #f9fafb;
+$pp-white:           #fff;
+$pp-border:          #e5e7eb;
+$pp-border-soft:     #f3f4f6;
+$pp-radius-card:     16px;
+$pp-radius-md:       10px;
+$pp-radius-sm:       8px;
+$pp-radius-pill:     99px;
+$pp-font:            'Segoe UI', system-ui, sans-serif;
+
+// ── Shell ────────────────────────────────────────────────────────
+
+.pp-shell {
+    padding: 28px 32px;
+    background: $pp-bg;
+    font-family: $pp-font;
+    color: $pp-ink;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-size: 13px;
+}
+
+// ── Plan switcher tabs (Free / None users) ───────────────────────
+
+.pp-plan-tabs {
+    display: flex;
+    gap: 10px;
+    background: $pp-white;
+    border: 1px solid $pp-border;
+    border-radius: $pp-radius-card;
+    padding: 6px;
+    align-self: center;
+}
+
+.pp-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    background: none;
+    border: 1.5px solid transparent;
+    border-radius: $pp-radius-md;
+    cursor: pointer;
+    padding: 10px 32px;
+    transition: background 0.15s, border-color 0.15s;
+    color: $pp-muted;
+
+    &:hover {
+        background: $pp-bg-soft;
+    }
+
+    &--active {
+        background: $pp-green-light;
+        border-color: $pp-green;
+        color: $pp-green;
+
+        .pp-tab-sub {
+            color: lighten($pp-green, 10%);
+        }
+
+        &.pp-tab--biz {
+            background: $pp-biz-light;
+            border-color: $pp-biz;
+            color: $pp-biz;
+
+            .pp-tab-sub {
+                color: $pp-ink-soft;
+            }
+        }
+    }
+}
+
+.pp-tab-name {
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pp-tab-sub {
+    font-size: 11px;
+    color: $pp-hint;
+}
+
+// ── Hero ─────────────────────────────────────────────────────────
+
+.pp-hero {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.pp-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: $pp-radius-pill;
+    border: 1px solid transparent;
+
+    &--prem {
+        background: $pp-green-light;
+        border-color: $pp-green-border;
+        color: $pp-green-text;
+    }
+
+    &--biz {
+        background: $pp-biz-light;
+        border-color: $pp-biz-border;
+        color: $pp-biz;
+    }
+}
+
+.pp-hero-title {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    color: $pp-ink;
+}
+
+.pp-hero-accent-prem { color: $pp-green; }
+.pp-hero-accent-biz  { color: $pp-biz; }
+
+.pp-hero-sub {
+    font-size: 14px;
+    color: $pp-muted;
+    line-height: 1.65;
+    margin: 0;
+}
+
+// ── 2-column body ─────────────────────────────────────────────────
+
+.pp-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 24px;
+    align-items: start;
+}
+
+// ── LEFT: features column ─────────────────────────────────────────
+
+.pp-features-col {
+    background: $pp-white;
+    border: 1.5px solid $pp-border;
+    border-radius: $pp-radius-card;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &--biz {
+        border-color: $pp-biz-mid;
+    }
+}
+
+// Billing toggle
+
+.pp-billing-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.pp-billing {
+    display: inline-flex;
+    background: $pp-bg;
+    border-radius: $pp-radius-md;
+    padding: 3px;
+    gap: 2px;
+}
+
+.pp-bill-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: none;
+    border: none;
+    border-radius: $pp-radius-sm;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: $pp-muted;
+    padding: 6px 16px;
+    transition: background 0.12s, color 0.12s;
+    white-space: nowrap;
+
+    &--on {
+        background: $pp-white;
+        color: $pp-ink;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.10);
+    }
+}
+
+.pp-save-badge {
+    background: #dcfce7;
+    border-radius: $pp-radius-pill;
+    color: $pp-green-text;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+}
+
+// Price block
+
+.pp-price-block {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    line-height: 1;
+}
+
+.pp-price {
+    font-size: 40px;
+    font-weight: 800;
+    color: $pp-ink;
+
+    &--prem { color: $pp-green; }
+    &--biz  { color: $pp-biz; }
+}
+
+.pp-price-period {
+    font-size: 14px;
+    color: $pp-muted;
+    padding-bottom: 6px;
+}
+
+.pp-price-note {
+    font-size: 12px;
+    color: $pp-hint;
+    margin-top: -8px;
+}
+
+// Feature section labels (Business)
+
+.pp-feat-section-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: $pp-green;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 6px 0 2px;
+    border-top: 1px solid $pp-border;
+    margin-top: 4px;
+
+    &--team {
+        color: $pp-ink-soft;
+    }
+}
+
+// Feature list
+
+.pp-feat-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &--grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px 20px;
+    }
+}
+
+.pp-feat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: $pp-ink;
+
+    &--off {
+        color: $pp-hint;
+    }
+}
+
+// ── RIGHT: order summary column ───────────────────────────────────
+
+.pp-summary-col {
+    position: sticky;
+    top: 0;
+}
+
+.pp-summary-card {
+    background: $pp-white;
+    border: 1.5px solid $pp-border;
+    border-radius: $pp-radius-card;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+// Summary header
+
+.pp-summary-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid $pp-border-soft;
+}
+
+.pp-summary-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: $pp-ink;
+    display: block;
+}
+
+.pp-summary-subtitle {
+    font-size: 11.5px;
+    color: $pp-hint;
+}
+
+// Plan pill
+
+.pp-plan-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: $pp-radius-md;
+    padding: 9px 13px;
+
+    &--prem {
+        background: $pp-green-light;
+        border: 1px solid $pp-green-border;
+
+        .pp-plan-pill-name {
+            color: $pp-green-text;
+        }
+
+        .pp-plan-pill-billing {
+            border-color: #d1fae5;
+        }
+    }
+
+    &--biz {
+        background: $pp-biz-light;
+        border: 1px solid $pp-biz-border;
+
+        .pp-plan-pill-name {
+            color: $pp-biz;
+        }
+    }
+}
+
+.pp-plan-pill-name {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.pp-plan-pill-billing {
+    font-size: 11px;
+    font-weight: 600;
+    background: $pp-white;
+    border-radius: $pp-radius-pill;
+    padding: 2px 9px;
+    color: $pp-ink-soft;
+    border: 1px solid $pp-biz-border;
+}
+
+// Trial highlight
+
+.pp-trial-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: $pp-green-light;
+    border: 1px solid $pp-green-border;
+    border-radius: $pp-radius-md;
+    color: $pp-green-text;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 9px 12px;
+    line-height: 1.45;
+
+    svg {
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    &--biz {
+        background: $pp-biz-light;
+        border-color: $pp-biz-border;
+        color: $pp-ink-soft;
+    }
+}
+
+// Price rows
+
+.pp-price-rows {
+    background: linear-gradient(180deg, #fafafa, $pp-bg);
+    border: 1px solid $pp-border;
+    border-radius: $pp-radius-sm;
+    overflow: hidden;
+}
+
+.pp-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 13px;
+    font-size: 12.5px;
+    border-bottom: 1px solid $pp-border-soft;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    span   { color: $pp-muted; }
+    strong { color: $pp-ink; font-weight: 700; }
+
+    &--today {
+        background: $pp-green-light;
+
+        span {
+            color: $pp-green-text;
+            font-weight: 700;
+        }
+    }
+
+    &--after {
+        span, strong {
+            font-size: 11.5px;
+            color: $pp-hint;
+        }
+    }
+}
+
+.pp-price-zero {
+    color: $pp-green-mid !important;
+    font-size: 15px !important;
+}
+
+// Discount
+
+.pp-discount {
+    border: 1px solid $pp-border;
+    border-radius: $pp-radius-md;
+    overflow: hidden;
+}
+
+.pp-discount-toggle {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: $pp-muted;
+    list-style: none;
+    padding: 9px 12px;
+    user-select: none;
+
+    &::-webkit-details-marker { display: none; }
+}
+
+.pp-discount-body {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    padding: 0 10px 10px;
+}
+
+.pp-discount-input {
+    background: $pp-bg-soft;
+    border: 1px solid $pp-border;
+    border-radius: $pp-radius-sm;
+    font-size: 12.5px;
+    outline: none;
+    padding: 7px 10px;
+    width: 100%;
+
+    &:focus {
+        border-color: $pp-green;
+        background: $pp-white;
+    }
+}
+
+.pp-discount-apply {
+    background: $pp-bg;
+    border: 1px solid $pp-border;
+    border-radius: $pp-radius-sm;
+    color: $pp-ink-soft;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    white-space: nowrap;
+
+    &:hover {
+        background: $pp-border;
+    }
+}
+
+// Terms
+
+.pp-terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11.5px;
+    color: $pp-muted;
+    cursor: pointer;
+    line-height: 1.45;
+
+    input {
+        accent-color: $pp-green;
+        flex-shrink: 0;
+        margin-top: 1px;
+        cursor: pointer;
+    }
+}
+
+.pp-link {
+    background: none;
+    border: none;
+    color: $pp-green;
+    cursor: pointer;
+    font-size: inherit;
+    font-weight: 700;
+    padding: 0;
+    text-decoration: underline;
+}
+
+// CTA buttons
+
+.pp-cta-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pp-cta-primary {
+    background: $pp-green;
+    border: none;
+    border-radius: $pp-radius-md;
+    color: $pp-white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    min-height: 46px;
+    padding: 0 20px;
+    transition: opacity 0.15s, transform 0.1s;
+    width: 100%;
+
+    &:hover:not(:disabled) {
+        opacity: 0.9;
+        transform: scale(1.01);
+    }
+
+    &:disabled {
+        opacity: 0.42;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    &--biz {
+        background: $pp-biz;
+    }
+}
+
+.pp-cta-paypal {
+    align-items: center;
+    background: $pp-white;
+    border: 1.5px solid $pp-biz-border;
+    border-radius: $pp-radius-md;
+    color: #003087;
+    cursor: pointer;
+    display: flex;
+    font-size: 13px;
+    font-weight: 700;
+    gap: 7px;
+    justify-content: center;
+    min-height: 40px;
+    transition: border-color 0.14s;
+    width: 100%;
+
+    &:hover {
+        border-color: #003087;
+    }
+}
+
+// Trust line
+
+.pp-trust-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    font-size: 11px;
+    color: $pp-hint;
+    justify-content: center;
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+}
+
+.pp-trust-dot {
+    color: $pp-biz-border;
+}
+
+// ── Trust row (bottom) ────────────────────────────────────────────
+
+.pp-trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.pp-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    color: $pp-muted;
+    background: $pp-white;
+    border: 1px solid $pp-border;
+    border-radius: $pp-radius-md;
+    padding: 9px 16px;
+
+    strong {
+        color: $pp-ink-soft;
+    }
+}

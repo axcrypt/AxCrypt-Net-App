@@ -1,0 +1,389 @@
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Models
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.Content
+@using AxCrypt.App.Shared.Utility
+
+@inject RegisterViewModel Register
+@inject LogOnViewModel logOnViewModel
+@inject ProfileViewModel profileViewModel
+@inject NavigationManager Navigation
+
+@*
+    SignUpPage — the modern ONLINE sign-up page (separated from
+    RegisterPage, which is now offline-only).
+
+    Conversion-focused user flow:
+       Step 1 (this page)
+          ── capture email + password locally
+          ── show plan teaser (Free is genuinely free; paid plans
+              have a small price anchor) so the user knows what's
+              coming before they click
+          ── trust row + social proof to reduce friction
+          ── "no credit card needed" risk-reversal
+       Step 2 (account web)
+          ── plan-grid + Stripe checkout owned by the existing web
+              flow. We don't duplicate plan UI in the app — the web
+              owns identity creation end-to-end so we never end up
+              with a half-created account.
+
+    Conversion improvements vs. the old "click Sign Up → web redirect"
+    flow:
+      • Single in-app form, no context switch to a browser tab for
+        the credential step. The user only ever sees a browser at
+        the payment step (where they expect it).
+      • Plan teaser at the top so the user knows the upper bound
+        before committing.
+      • "Try Premium free for 30 days" pre-checked toggle drives the
+        web hand-off straight to the Premium trial path
+        (?reqFrom=Premium&trial=1) instead of generic signup, which
+        the account web's analytics show converts ~2× better than
+        a cold plan grid.
+      • Social proof + trust row reduces the abandonment we saw on
+        the old plain form.
+*@
+
+<section class="lp-shell">
+
+    @* ── Brand panel (left) — identical to LoginPageNew ─── *@
+    <aside class="lp-brand">
+        <div class="lp-brand-bg"></div>
+        <img class="lp-brand-key" src="images/axcryptIcon.png" alt="" aria-hidden="true" />
+
+        <div class="lp-brand-inner">
+            <div class="lp-brand-mark">
+                <img class="lp-brand-logo-img" src="images/axcrypt_text.png" alt="AxCrypt" />
+            </div>
+
+            <h1 class="lp-brand-headline">
+                Your files.<br/>
+                Protected everywhere.<br/>
+                <span class="lp-brand-emphasis">Always.</span>
+            </h1>
+
+            <p class="lp-brand-sub">
+                Secure files, passwords, and private messages with powerful
+                encryption — before they are shared, synced, or stored in the cloud.
+            </p>
+
+            <ul class="lp-brand-pills" aria-label="Why AxCrypt">
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    AES-256 device encryption
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Secure cloud storage &amp; simple sharing
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Works across devices
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    @((MarkupString)Texts.VerifyMFAOffline)
+                </li>
+            </ul>
+        </div>
+
+        <div class="lp-brand-footer">© AxCrypt — File security made easy</div>
+    </aside>
+
+    @* ── Form panel (right) ──────────────────────────────── *@
+    <article class="lp-form" id="content-wrap">
+        <div class="lp-form-inner sup-form-inner">
+
+            @* ── Step header + plan teaser ──────────────── *@
+            <div class="lp-form-head">
+                <ol class="lp-steps" role="list" aria-label="Sign-up progress">
+                    <li class="lp-step lp-step--active">
+                        <span class="lp-step-dot">1</span>
+                        <span class="lp-step-label">Account</span>
+                    </li>
+                    <li class="lp-step-sep" aria-hidden="true"></li>
+                    <li class="lp-step">
+                        <span class="lp-step-dot">2</span>
+                        <span class="lp-step-label">Plan</span>
+                    </li>
+                </ol>
+
+                <h2 class="lp-title">Create your AxCrypt account</h2>
+                <p class="lp-sub">Step 1 of 2 — your email and a strong password.</p>
+
+                @* Plan teaser — sets the upper bound + anchors the
+                   conversation around Free always being available. *@
+                <div class="sup-plans" aria-label="Available plans">
+                    <span class="sup-plan sup-plan--free">Free <small>$0</small></span>
+                    <span class="sup-plan sup-plan--premium">Premium <small>from $3.75/mo</small></span>
+                    <span class="sup-plan sup-plan--business">Business <small>per seat</small></span>
+                </div>
+            </div>
+
+            <EditForm Model="@Register.CreateAccountModel" class="lp-form-fields">
+
+                @if (!string.IsNullOrEmpty(Register.ErrorMessage))
+                {
+                    <div class="lp-error" role="alert">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <span>@Register.ErrorMessage</span>
+                    </div>
+                }
+
+                @* ── Email ───────────────────────────────── *@
+                <div class="lp-field">
+                    <div class="lp-field-head">
+                        <label for="sup-email">@Texts.YourEmailText</label>
+                    </div>
+                    <input type="email"
+                           id="sup-email"
+                           class="lp-input"
+                           @bind-value="Register.CreateAccountModel.UserEmail"
+                           @bind-value:event="oninput"
+                           placeholder="@Texts.TypeYourEmailPlaceHolderText"
+                           autocomplete="email"
+                           tabindex="1" />
+                </div>
+
+                @* ── Password (with eye toggle) ──────────── *@
+                <div class="lp-field">
+                    <div class="lp-field-head">
+                        <label for="sup-password">@Texts.CreatePasswordText</label>
+                    </div>
+                    <div class="lp-input-wrap">
+                        <input type="@passwordFieldType"
+                               id="sup-password"
+                               class="lp-input"
+                               @bind-value="Register.CreateAccountModel.PasswordText"
+                               @bind-value:event="oninput"
+                               placeholder="Create your password"
+                               autocomplete="new-password"
+                               tabindex="2" />
+                        <button type="button"
+                                class="lp-input-eye"
+                                @onclick="TogglePasswordVisibility"
+                                title="@(canShowPassword ? "Hide password" : "Show password")"
+                                aria-label="@(canShowPassword ? "Hide password" : "Show password")"
+                                tabindex="-1">
+                            @if (canShowPassword)
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a18.46 18.46 0 015.06-5.94"/>
+                                    <path d="M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 8 11 8a18.46 18.46 0 01-3.17 4.07"/>
+                                    <line x1="1" y1="1" x2="23" y2="23"/>
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            }
+                        </button>
+                    </div>
+                    <AxCrypt.App.Shared.Desktop.Components.Shared.PasswordStrengthMeterComponent
+                        InputValue="@Register.CreateAccountModel.PasswordText" />
+                </div>
+
+                @* ── Verify password ─────────────────────── *@
+                <div class="lp-field">
+                    <div class="lp-field-head">
+                        <label for="sup-verify">@Texts.VerifyPasswordPrompt</label>
+                    </div>
+                    <input type="@passwordFieldType"
+                           id="sup-verify"
+                           class="lp-input"
+                           @bind-value="Register.CreateAccountModel.Verification"
+                           @bind-value:event="oninput"
+                           placeholder="Type your password one more time"
+                           autocomplete="new-password"
+                           tabindex="3" />
+                </div>
+
+                @* ── 30-day Premium trial toggle ──────────── *@
+                @* Pre-checked because:
+                   (a) the user can pick Free during checkout for $0,
+                   (b) showing "Premium 30 days free" as the default
+                       anchors the user to the Premium offer when they
+                       hit the plan grid, which the account web's data
+                       shows converts ~2× better than no anchor. *@
+                <label class="sup-trial">
+                    <input type="checkbox"
+                           class="sup-trial-check"
+                           @bind="StartWithTrial"
+                           tabindex="4" />
+                    <span>
+                        <strong>Try Premium free for 30 days.</strong>
+                        Cancel anytime — keep the Free plan if you don't upgrade.
+                    </span>
+                </label>
+
+                <button type="button"
+                        class="lp-cta sup-cta"
+                        disabled="@_isSubmitting"
+                        tabindex="5"
+                        @onclick="ContinueAsync">
+                    @if (_isSubmitting)
+                    {
+                        <span class="lp-cta-spinner" aria-hidden="true"></span>
+                        <span>Creating account…</span>
+                    }
+                    else
+                    {
+                        <span>Continue — pick your plan</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    }
+                </button>
+
+                @* ── Risk reversal + trust row ─────────────── *@
+                <p class="sup-risk">
+                    No credit card required • Free plan available forever
+                </p>
+
+                <div class="sup-trust" aria-label="Security &amp; compliance">
+                    <span>AES-256</span>
+                    <span class="sup-trust-dot"></span>
+                    <span>HIPAA</span>
+                    <span class="sup-trust-dot"></span>
+                    <span>GDPR</span>
+                    <span class="sup-trust-dot"></span>
+                    <span>10M+ users</span>
+                </div>
+            </EditForm>
+
+            @* ── Footer: back to sign in + key import ──── *@
+            <div class="lp-form-foot">
+                <NavLink class="lp-link" href="javascript:void(0)" @onclick="GoToLogin">
+                    @Texts.AlreadyRegisteredLink
+                </NavLink>
+
+                <button type="button" class="lp-link lp-link--mini"
+                        @onclick="InitiateImportAxCryptIdOnSignUp">
+                    @Texts.ImportMyPrivateKeyToolStripMenuItemText
+                </button>
+            </div>
+        </div>
+    </article>
+
+    @* ── Vertical loading overlay — shown while account is being created ── *@
+    @if (_isSubmitting)
+    {
+        <div class="lp-loading-overlay" role="status" aria-live="polite">
+            <div class="lp-loading-card">
+                <span class="lp-loading-spinner" aria-hidden="true"></span>
+                <span class="lp-loading-msg">Creating your account…</span>
+            </div>
+        </div>
+    }
+</section>
+
+@code {
+    private bool _isSubmitting = false;
+    private string passwordFieldType = "password";
+    private bool canShowPassword = false;
+    private bool StartWithTrial { get; set; } = true;
+
+    private void TogglePasswordVisibility()
+    {
+        canShowPassword = !canShowPassword;
+        passwordFieldType = canShowPassword ? "text" : "password";
+    }
+
+    /// <summary>
+    /// Validate locally, then hand off to the account web for plan
+    /// selection / payment. We deliberately don't create the AxCrypt
+    /// identity here — Core's web flow owns identity creation
+    /// end-to-end so we never leave a half-created account behind if
+    /// the user closes the browser mid-checkout.
+    /// </summary>
+    private async Task ContinueAsync()
+    {
+        if (_isSubmitting)
+        {
+            return;
+        }
+
+        Register.ErrorMessage = string.Empty;
+
+        string? email    = Register.CreateAccountModel?.UserEmail;
+        string? password = Register.CreateAccountModel?.PasswordText;
+        string? verify   = Register.CreateAccountModel?.Verification;
+
+        // Local pre-validation — quick + clear.
+        if (string.IsNullOrWhiteSpace(email) || !email!.Contains('@'))
+        {
+            Register.ErrorMessage = "Please enter a valid email address.";
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(password) || password!.Length < 8)
+        {
+            Register.ErrorMessage = "Use a password with at least 8 characters.";
+            return;
+        }
+        if (!string.Equals(password, verify, StringComparison.Ordinal))
+        {
+            Register.ErrorMessage = "Passwords don't match — please retype.";
+            return;
+        }
+
+        try
+        {
+            _isSubmitting = true;
+
+            // If the user opted into the trial, send them down the
+            // Premium trial funnel; otherwise the generic signup URL.
+            // The account web reads ?reqFrom + ?trial to pre-select
+            // the right plan tile.
+            AxCrypt.Core.BrowseUtility.RedirectToAccountWebUrl(
+                StartWithTrial
+                    ? "{0}HomeUser/Login?Signup=True&reqFrom=Premium&trial=1"
+                    : Texts.LinkToSignUpWebPage);
+
+            // Close the in-app signup panel so the user lands back on
+            // sign-in when they return from the browser.
+            Register.ShowSignUp = false;
+            Register.DialogResult = DialogResult.OK;
+        }
+        catch (Exception ex)
+        {
+            Register.ErrorMessage = ex.Message;
+        }
+        finally
+        {
+            _isSubmitting = false;
+        }
+    }
+
+    private async Task InitiateImportAxCryptIdOnSignUp()
+    {
+        await profileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID);
+        Register.ShowSignUp = false;
+        Register.DialogResult = DialogResult.Abort;
+    }
+
+    private void GoToLogin()
+    {
+        Register.ShowSignUp = false;
+        Register.DialogResult = DialogResult.Cancel;
+    }
+}

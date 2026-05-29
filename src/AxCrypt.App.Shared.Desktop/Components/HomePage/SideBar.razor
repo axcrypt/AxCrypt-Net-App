@@ -146,15 +146,15 @@
             switch (navPage.Href)
             {
                 case "/vault":
-                    paidFeaturegateService.ShowPaidGate(Texts.VaultText, "Store and protect your sensitive files securely in encrypted vaults.", new[] { "Create secure encrypted vaults", "Protect important files and folders", "Access advanced vault security", "Unlock premium protection features" });
+                    paidFeaturegateService.ShowPaidGate(Texts.VaultText, Texts.QuickSecureActionEncryptedVaults, new[] { Texts.QuickSecureActionSecureEncryptedVaults, Texts.QuickSecureActionProtectImportantFiles, Texts.QuickSecureActionAdvancedVaultSecurity, Texts.QuickSecureActionUnlockPremium });
                     break;
 
                 case "/textencryption":
-                    paidFeaturegateService.ShowPaidGate(Texts.TextEncryptionLinkLabel, "Encrypt your text securely with advanced protection features.", new[] { "Encrypt unlimited text", "Advanced encryption algorithms", "Protect sensitive information", "Priority customer support" });
+                    paidFeaturegateService.ShowPaidGate(Texts.TextEncryptionLinkLabel, Texts.TextEncryptionAdvancedProtectionFeatures, new[] { Texts.EncryptUnlimitedText, Texts.AdvancedEncryptionAlgorithms, Texts.QuickSecureActionSensitiveInformation, Texts.PriorityCustomerSupport });
                     break;
 
                 case "/securedfolders":
-                    paidFeaturegateService.ShowPaidGate(Texts.WatchedFoldersTabPageText, "Automatically monitor and protect your folders with secure encryption.", new[] { "Automatically encrypt added/changed files", "Monitor multiple folders securely", "Protect sensitive files automatically", "Unlock advanced security features" });
+                    paidFeaturegateService.ShowPaidGate(Texts.WatchedFoldersTabPageText, Texts.QuickSecureActionAutomaticallyMonitor, new[] { Texts.QuickSecureActionAutomaticallyEncrypt, Texts.QuickSecureActionMonitorMultiple, Texts.QuickSecureActionProtectSensitive, Texts.QuickSecureActionUnlockAdvanced });
                     break;
                 default:
                     break;

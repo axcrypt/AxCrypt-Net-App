@@ -7,7 +7,9 @@ using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
+using static AxCrypt.Abstractions.TypeResolve;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,10 +131,26 @@ public class ActionsViewModel : ViewModelBase
             return;
         }
 
-        await _fileOperationViewModel.EncryptFiles.ExecuteAsync(null);
+        // No pre-selection: open the file picker ourselves so we know exactly
+        // which files the user chose. This lets us route through RunAsync (same
+        // as the pre-selection path) which meters only the files that actually
+        // succeeded, and skips metering entirely on cancel.
+        FileSelectionEventArgs args = new FileSelectionEventArgs(Enumerable.Empty<string>())
+        {
+            FileSelectionType = FileSelectionType.Encrypt,
+        };
+        await New<IDataItemSelection>().HandleSelection(args);
 
-        await _batchService.RecordMeteredUsageAsync(FeatureKey.FileEncryption);
-        ReconcileFreeTierUsage();
+        if (args.Cancel || !args.SelectedFiles.Any())
+        {
+            return; // Picker cancelled — nothing encrypted, quota unchanged.
+        }
+
+        await _batchService.RunAsync(
+            args.SelectedFiles,
+            async (path) => await _fileOperationViewModel.EncryptFiles.ExecuteAsync(new[] { path }),
+            "Encrypted",
+            FeatureKey.FileEncryption);
     }
 
     /// <summary>
@@ -177,12 +195,6 @@ public class ActionsViewModel : ViewModelBase
 
     public async Task ShareKeys(EventArgs e)
     {
-        // Key share is paid-gated and operates on the current recent-files
-        // selection. The share-key dialog accepts the whole selection in
-        // one call and applies the chosen recipients to every file in a
-        // single atomic operation — so we do NOT route through the batch
-        // service (which would loop file-by-file and surface a confusing
-        // per-file progress toast for what is, conceptually, one action).
         await PremiumFeature_ClickAsync(LicenseCapability.KeySharing, async (ss, ee) =>
         {
             await ShareKeysAsync(e);
@@ -191,15 +203,26 @@ public class ActionsViewModel : ViewModelBase
 
     public async Task ShareKeysAsync(EventArgs e)
     {
+        // Open the dialog shell immediately so the user sees it at once,
+        // instead of waiting ~5 s for the service's pre-load API call.
+        // The compiled service will fire OnDialogVisibilityChanged(true)
+        // again when data is ready — that second call is idempotent.
+        _sharekeyViewModel!.LogOnViewModel.ShareKeyDialog.Show();
+
         // One-shot share — the dialog and service handle the whole
         // selection internally and present their own success / failure UI.
         // No per-file iteration, no batch toast.
-        await ShareKeyService.ShareKeysWithFileSelectionAsync(
+        bool shared = await ShareKeyService.ShareKeysWithFileSelectionAsync(
             _sharekeyViewModel!,
             _mainViewModel!.SelectedRecentFiles,
             _fileOperationViewModel);
 
-        await _batchService.RecordMeteredUsageAsync(FeatureKey.KeyShare);
+        // Only record metered usage when key sharing actually completed —
+        // cancelling the file picker or the share dialog must not consume quota.
+        if (shared)
+        {
+            await _batchService.RecordMeteredUsageAsync(FeatureKey.KeyShare);
+        }
         ReconcileFreeTierUsage();
     }
 

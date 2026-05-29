@@ -199,7 +199,7 @@ namespace AxCrypt.Core.UI.ViewModel
                 _knownIdentities.MultiFactorAuthType = (MultiFactorAuthType)Enum.Parse(typeof(MultiFactorAuthType), userAccount.MultiFactorAuthInfo.MfaEnabledTypes);
             }
 
-            new AxCryptUserAccountViewModel().Initilaize(userAccount);
+            New<AxCryptUserAccountViewModel>().Initilaize(userAccount);
 
             IEnumerable<UserKeyPair> userKeyPairs = userAccount.AccountKeys.Select(k => k.ToUserKeyPair(passphrase));
             LogOnIdentity logOnIdentity = new LogOnIdentity(userKeyPairs, passphrase);

@@ -29,7 +29,7 @@ $lp-bg-soft: #f9fafb;
     overflow: hidden;
     color: #fff;
     background: linear-gradient(160deg, $lp-brand-deep 0%, $lp-brand-mid 50%, $lp-brand 100%);
-    padding: 56px;
+    padding: 36px 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -96,7 +96,7 @@ $lp-bg-soft: #f9fafb;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 56px;
+    margin-bottom: 32px;
 }
 
 .lp-brand-name {
@@ -107,11 +107,11 @@ $lp-bg-soft: #f9fafb;
 }
 
 .lp-brand-headline {
-    font-size: 38px;
+    font-size: 28px;
     font-weight: 700;
     line-height: 1.12;
     letter-spacing: -0.02em;
-    margin: 0 0 20px;
+    margin: 0 0 30px;
 }
 
 .lp-brand-emphasis {
@@ -120,10 +120,10 @@ $lp-bg-soft: #f9fafb;
 }
 
 .lp-brand-sub {
-    font-size: 14.5px;
+    font-size: 13.5px;
     line-height: 1.65;
     color: rgba(255, 255, 255, 0.78);
-    margin: 0 0 32px;
+    margin: 0 0 30px;
     max-width: 320px;
 }
 
@@ -145,7 +145,7 @@ $lp-bg-soft: #f9fafb;
         background: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 999px;
-        padding: 7px 14px;
+        padding: 5px 11px;
         width: max-content;
         backdrop-filter: blur(4px);
     }
@@ -173,37 +173,38 @@ $lp-bg-soft: #f9fafb;
     display: flex;
     flex-direction: column;
     background: $lp-surface;
-    padding: 24px 48px 48px;
-    overflow-y: auto;
+    padding: 14px 36px 24px;
+    overflow: hidden; // let .sup2-scroll handle vertical scrolling
+    min-height: 0;    // required inside a flex column for child scroll to work
 }
 
 .lp-topbar {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 12px;
-    min-height: 36px;
+    margin-bottom: 6px;
+    min-height: 30px;
 }
 
 .lp-form-inner {
     flex: 1;
-    width: 30vw;
-    max-width: 400px;
+    width: clamp(300px, 34vw, 440px);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: 24px;
+    padding-top: 24px;
+    padding-bottom: 48px;
 }
 
 .lp-form-head {
-    margin-bottom: 28px;
+    margin-bottom: 14px;
 }
 
 .lp-title {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 700;
     color: $lp-text;
-    margin: 0 0 6px;
+    margin: 0 0 4px;
     letter-spacing: -0.01em;
 }
 
@@ -221,7 +222,7 @@ $lp-bg-soft: #f9fafb;
 .lp-form-fields {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
 }
 
 .lp-field {
@@ -261,8 +262,8 @@ $lp-bg-soft: #f9fafb;
     }
 
 .lp-input {
-    height: 46px;
-    padding: 0 14px;
+    height: 38px;
+    padding: 0 12px;
     border: 1.5px solid $lp-border;
     border-radius: 10px;
     font-size: 14px;
@@ -288,9 +289,7 @@ $lp-bg-soft: #f9fafb;
 .lp-input-wrap {
     position: relative;
     display: block;
-    /* Pin to the input height so the eye has a deterministic frame to
-       center inside — otherwise inherited line-height drifts it. */
-    height: 46px;
+    height: 38px;
 }
 
 .lp-input--password {
@@ -360,16 +359,16 @@ $lp-bg-soft: #f9fafb;
     }
 
 .lp-submit {
-    height: 46px;
+    height: 40px;
     border: none;
     border-radius: 10px;
     background: $lp-brand;
     color: #fff;
-    font-size: 14.5px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.15s, transform 0.08s, box-shadow 0.15s;
-    margin-top: 8px;
+    margin-top: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -452,7 +451,7 @@ $lp-bg-soft: #f9fafb;
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 24px 0;
+    margin: 14px 0;
     color: $lp-muted;
     font-size: 12px;
 }
@@ -472,12 +471,12 @@ $lp-bg-soft: #f9fafb;
 
 .lp-other-toggle {
     width: 100%;
-    height: 44px;
+    height: 38px;
     background: $lp-bg-soft;
     color: $lp-text;
     border: 1px solid $lp-border;
     border-radius: 10px;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 500;
     cursor: pointer;
     display: flex;
@@ -538,9 +537,9 @@ $lp-bg-soft: #f9fafb;
 
 /* ── Footer ─────────────────────────────────────────────── */
 .lp-foot {
-    margin-top: 32px;
+    margin-top: 14px;
     text-align: center;
-    font-size: 13px;
+    font-size: 12.5px;
     color: $lp-muted;
 
     span {
@@ -549,9 +548,9 @@ $lp-bg-soft: #f9fafb;
 }
 
 .lp-legal {
-    margin: 16px 0 0;
+    margin: 8px 0 0;
     text-align: center;
-    font-size: 11.5px;
+    font-size: 11px;
     color: $lp-muted;
     line-height: 1.6;
 }
@@ -740,7 +739,7 @@ $lp-bg-soft: #f9fafb;
 
 /* Secondary (cancel) button */
 .lp-btn-ghost {
-    height: 44px;
+    height: 40px;
     border: 1px solid $lp-border;
     border-radius: 10px;
     background: #fff;
@@ -882,6 +881,41 @@ $lp-bg-soft: #f9fafb;
         }
 }
 
+html[data-theme="dark"] .lp-lang.login-lang-drpdwn {
+    .dropbtn {
+        background: #1c2530;
+        border-color: #3a4554;
+        color: #e8ecf1;
+    }
+
+        .dropbtn:hover,
+        .dropbtn.active {
+            border-color: rgba(127, 204, 92, .55);
+            color: #b8e89a;
+            background: #232e3b;
+        }
+
+    .drp-dwn {
+        filter: brightness(0) invert(1);
+        opacity: .75;
+    }
+
+    .language-dropdown {
+        background: #1c2530;
+        border-color: #3a4554;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, .45);
+    }
+
+    .language-item {
+        color: #e8ecf1;
+    }
+
+        .language-item:hover {
+            background: rgba(127, 204, 92, .14);
+            color: #b8e89a;
+        }
+}
+
 /* ── Compact viewports (< 900px wide) — stack panels ──── */
 @media (max-width: 900px) {
     .lp-shell {
@@ -915,6 +949,14 @@ $lp-bg-soft: #f9fafb;
 
     .lp-form-inner {
         padding-bottom: 16px;
+    }
+}
+
+@media (max-height: 680px) {
+    .lp-form-inner {
+        justify-content: flex-start;
+        padding-top: 8px;
+        padding-bottom: 12px;
     }
 }
 
@@ -1688,3 +1730,442 @@ input[type="password"] {
         font-size: 30px !important;
     }
 }
+/* ════════════════════════════════════════════════════════════════
+   Sign-up extras layered on top of the .lp-* login system —
+   step indicator, offline banner, primary CTA spinner.
+════════════════════════════════════════════════════════════════ */
+
+.lp-steps {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.lp-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #9ca3af;
+}
+
+.lp-step-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #6b7280;
+  font-size: 11.5px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  transition: background .14s, color .14s, transform .12s;
+}
+
+.lp-step--active {
+  color: #48772C;
+}
+.lp-step--active .lp-step-dot {
+  background: #48772C;
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.lp-step-sep {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #48772C 0%, #e5e7eb 100%);
+  border-radius: 999px;
+  list-style: none;
+  max-width: 60px;
+}
+
+.lp-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.lp-info--offline {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+.lp-info--offline svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #b45309;
+}
+
+.lp-cta {
+  margin-top: 4px;
+  height: 40px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #48772C 0%, #3f6826 100%);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 10px rgba(72, 119, 44, .25);
+  transition: transform .08s, box-shadow .15s, opacity .15s;
+}
+.lp-cta:hover  { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(72, 119, 44, .32); }
+.lp-cta:active { transform: translateY(0); }
+.lp-cta:disabled {
+  background: #d1d5db;
+  color: #6b7280;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.lp-cta-spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .35);
+  border-top-color: #fff;
+  display: inline-block;
+  animation: lp-cta-spin .8s linear infinite;
+}
+@keyframes lp-cta-spin {
+  to { transform: rotate(360deg); }
+}
+
+.lp-hint {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.55;
+  text-align: center;
+}
+.lp-hint strong { color: #111827; }
+
+.lp-form-foot {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  border-top: 1px solid #f3f4f6;
+}
+
+/* Dark theme */
+html[data-theme="dark"] {
+  .lp-step       { color: #7a8494; }
+  .lp-step-dot   { background: #2a3645; color: #b5bcc7; }
+  .lp-step--active { color: #b8e89a; }
+  .lp-step--active .lp-step-dot { background: #7fcc5c; color: #0f1a07; }
+  .lp-step-sep { background: linear-gradient(90deg, #7fcc5c 0%, #2a3645 100%); }
+
+  .lp-info--offline {
+    background: rgba(245, 158, 11, .12);
+    border-color: rgba(245, 158, 11, .35);
+    color: #fcd34d;
+  }
+  .lp-info--offline svg { color: #fcd34d; }
+
+  .lp-cta {
+    background: linear-gradient(180deg, #7fcc5c 0%, #5fb13e 100%);
+    color: #0f1a07;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+  }
+  .lp-cta:disabled { background: #2a3645; color: #6b7280; }
+
+  .lp-hint { color: #b5bcc7; }
+  .lp-hint strong { color: #e8ecf1; }
+
+  .lp-form-foot { border-top-color: #2a3645; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SignUpPage (.sup-*) extras — conversion-focused pieces that
+   layer on top of the shared .lp-* login system.
+════════════════════════════════════════════════════════════════ */
+
+/* Tighten the form inner column on the conversion page so the
+   eye flow stays compact and there's room for the plan teaser,
+   trial line, risk-reversal, and trust row without scrolling. */
+.sup-form-inner {
+  max-width: 480px;
+}
+
+/* ── Plan teaser row ─────────────────────────────────────── */
+.sup-plans {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 8px 0 2px;
+}
+
+.sup-plan {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #374151;
+
+  small {
+    font-weight: 500;
+    color: #6b7280;
+    font-size: 11px;
+  }
+}
+
+.sup-plan--free {
+  border-color: rgba(72, 119, 44, .35);
+  background: rgba(72, 119, 44, .08);
+  color: #2f5618;
+  small { color: #2f5618; }
+}
+
+.sup-plan--premium {
+  border-color: #fbbf24;
+  background: #fef3c7;
+  color: #92400e;
+  small { color: #92400e; }
+}
+
+.sup-plan--business {
+  border-color: #1f2937;
+  background: #1f2937;
+  color: #fff;
+  small { color: #d1d5db; }
+}
+
+/* ── 30-day trial toggle row ─────────────────────────────── */
+.sup-trial {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  margin-top: 2px;
+  background: rgba(72, 119, 44, .08);
+  border: 1px solid rgba(72, 119, 44, .25);
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #2f5618;
+  cursor: pointer;
+  transition: border-color .14s, background .14s;
+}
+
+.sup-trial:hover {
+  border-color: rgba(72, 119, 44, .55);
+}
+
+.sup-trial-check {
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+  accent-color: #48772C;
+  cursor: pointer;
+}
+
+.sup-trial strong {
+  color: #1f3a0e;
+  font-weight: 700;
+}
+
+/* ── Risk reversal line under the CTA ────────────────────── */
+.sup-risk {
+  margin: 2px 0 0;
+  text-align: center;
+  font-size: 11.5px;
+  color: #6b7280;
+}
+
+/* ── Trust row ───────────────────────────────────────────── */
+.sup-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+.sup-trust-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* CTA gets a touch more breathing room on the sign-up page. */
+.sup-cta {
+  margin-top: 12px;
+}
+
+/* ── Style-issue fixes for the lp-* sign-in / sign-up shell ── */
+
+/* Step indicator: <ol> picks up browser default left padding
+   + decimal numbers. Strip those so the pill row is pristine. */
+.lp-steps {
+  padding-left: 0 !important;
+  list-style: none !important;
+}
+.lp-steps > li { list-style: none; }
+.lp-step-sep { list-style: none; }
+
+/* Form footer chevron drift fix — the "Already have an account?"
+   link and the key-import button could wrap awkwardly on narrow
+   widths. Stack them when they don't fit. */
+.lp-form-foot {
+  flex-wrap: wrap;
+}
+.lp-form-foot > * { min-width: 0; }
+
+/* Eye toggle position fix — sat just outside the input border on
+   some font-render combos, drifting the focus ring. Force it
+   inside the input wrap. */
+.lp-input-eye {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background .12s, color .12s;
+}
+.lp-input-eye:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* Dark theme */
+html[data-theme="dark"] {
+  .sup-plan {
+    background: #1c2530;
+    border-color: #3a4554;
+    color: #e8ecf1;
+    small { color: #b5bcc7; }
+  }
+  .sup-plan--free {
+    border-color: rgba(127, 204, 92, .55);
+    background: rgba(127, 204, 92, .14);
+    color: #b8e89a;
+    small { color: #b8e89a; }
+  }
+  .sup-plan--premium {
+    border-color: rgba(251, 191, 36, .55);
+    background: rgba(251, 191, 36, .14);
+    color: #fcd34d;
+    small { color: #fcd34d; }
+  }
+  .sup-plan--business {
+    background: #f3f4f6;
+    border-color: #f3f4f6;
+    color: #111827;
+    small { color: #4b5563; }
+  }
+
+  .sup-trial {
+    background: rgba(127, 204, 92, .14);
+    border-color: rgba(127, 204, 92, .35);
+    color: #b8e89a;
+  }
+  .sup-trial:hover { border-color: rgba(127, 204, 92, .65); }
+  .sup-trial-check { accent-color: #7fcc5c; }
+  .sup-trial strong { color: #d1f0bb; }
+
+  .sup-risk { color: #b5bcc7; }
+  .sup-trust { color: #7a8494; }
+
+  .lp-input-eye { color: #b5bcc7; }
+  .lp-input-eye:hover { background: #232e3b; color: #e8ecf1; }
+}
+
+
+
+/* Vertical loading overlay — shown during form submission.
+   Spinner ring on top, message text below (vertical layout). */
+.lp-loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.42);
+  backdrop-filter: blur(2px);
+}
+
+.lp-loading-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.26);
+  padding: 30px 36px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.lp-loading-spinner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid rgba(72, 119, 44, 0.18);
+  border-top-color: #48772C;
+  animation: lp-overlay-spin 0.85s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes lp-overlay-spin {
+  to { transform: rotate(360deg); }
+}
+
+.lp-loading-msg {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
+}
+
+html[data-theme="dark"] {
+  .lp-loading-card {
+    background: #1e2530;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  }
+  .lp-loading-spinner {
+    border-color: rgba(127, 204, 92, 0.20);
+    border-top-color: #7fcc5c;
+  }
+  .lp-loading-msg { color: #b5bcc7; }
+}
+
+@import "HomeNew/SignUpNew";

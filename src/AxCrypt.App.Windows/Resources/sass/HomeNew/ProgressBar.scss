@@ -1,13 +1,11 @@
-﻿/* ═══════════════════════════════════════════
-   Per-file byte progress bar
-   The "inner loop" indicator — shows live byte percentage for the
-   currently-processing file. Paired with the BatchOperationToast
-   (outer-loop step progress + summary) for multi-file batches.
-════════════════════════════════════════════ */
+﻿// Per-file byte progress bar
+// The "inner loop" indicator — shows live byte percentage for the
+// currently-processing file. Paired with the BatchOperationToast
+// (outer-loop step progress + summary) for multi-file batches.
 
-/* Floating progress card — circular ring variant lives further
-   down where the floating position is set. This block only owns
-   the inner ring layout (the SVG + center label). */
+// Floating progress card — circular ring variant lives further
+// down where the floating position is set. This block only owns
+// the inner ring layout (the SVG + center label).
 .progress-wrapper {
     position: relative;
     width: 64px;
@@ -42,15 +40,15 @@
     color: $text-primary;
 }
 
-/* Expanded: linear bar floating at bottom-left.
-   Mirror of BatchOperationToast (bottom-right) so both indicators
-   live in the same eye-line. position:fixed means it survives
-   page navigation and never pushes content.
-   Sidebar offset (left: 230px) keeps the card clear of the
-   collapsed sidebar (62px) AND the expanded sidebar (210px); on
-   small windows it collapses back toward the edge via max-width.
-   `pointer-events: auto` is set inline in the Razor so the
-   right-click-Cancel context menu still works through the card. */
+// Expanded: linear bar floating at bottom-left.
+// Mirror of BatchOperationToast (bottom-right) so both indicators
+// live in the same eye-line. position:fixed means it survives
+// page navigation and never pushes content.
+// Sidebar offset (left: 230px) keeps the card clear of the
+// collapsed sidebar (62px) AND the expanded sidebar (210px); on
+// small windows it collapses back toward the edge via max-width.
+// `pointer-events: auto` is set inline in the Razor so the
+// right-click-Cancel context menu still works through the card.
 .progres-sec {
     position: fixed;
     bottom: 20px;
@@ -82,7 +80,7 @@
     }
 }
 
-/* Sidebar-collapsed ring sits in the same corner as the bar */
+// Sidebar-collapsed ring sits in the same corner as the bar
 .progress-circle-sec {
     position: fixed;
     bottom: 20px;
@@ -139,12 +137,12 @@
 
 .progress-bubble-start,
 .progress-bubble-end {
-    /* Decorative endpoint dots — kept for the existing look but
-       intentionally hidden until/unless a designer wants them. */
+    // Decorative endpoint dots — kept for the existing look but
+    // intentionally hidden until/unless a designer wants them.
     display: none;
 }
 
-/* Right-click context menu — single "Cancel" row */
+// Right-click context menu — single "Cancel" row
 .progress-context-menu {
     position: fixed;
     z-index: 9999;

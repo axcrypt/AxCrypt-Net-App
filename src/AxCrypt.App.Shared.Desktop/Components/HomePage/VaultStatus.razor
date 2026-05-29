@@ -14,7 +14,7 @@
 
 <section class="card">
     <div class="card-hdr">
-        <h2 class="section-title">Vault Status</h2>
+        <h2 class="section-title">@Texts.VaultStatusText</h2>
         @if (userService.IsFreeTier)
         {
             <span class="pro-pill" @onclick="ShowUpgradePopup"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg></span>
@@ -41,7 +41,7 @@
 
             <div class="vault-row">
                 <span class="vault-auto-ico">@ShieldSmSvg</span>
-                <span>Auto-encryption is <strong>ON</strong></span>
+                <span>@((MarkupString)Texts.VaultStatusAutoEncryption)</span>
             </div>
 
 @*             <div class="vault-row">
@@ -53,9 +53,12 @@
     @if (userService.IsFreeTier)
     {
         <div class="locked-overlay" @onclick="ShowUpgradePopup">
-            <div class="lo-title">Secure Vault is a paid feature</div>
-            <div class="lo-desc">Unlock unlimited protected storage, and auto-encryption.</div>
-            <button class="lo-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /></svg>Upgrade to unlock</button>
+            <div class="lo-title">@Texts.VaultStatusPaidText</div>
+            <div class="lo-desc">@Texts.VaultStatusUnlockUnlimited</div>
+            <button class="lo-btn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /></svg>
+                @Texts.UpgradeToUnlockText
+            </button>
         </div>
     }
     else
@@ -76,7 +79,7 @@
 
     private void ShowUpgradePopup()
     {
-        paidFeaturegateService.ShowPaidGate(Texts.VaultText, "Store and protect your sensitive files securely in encrypted vaults.", new[] { "Create secure encrypted vaults", "Protect important files and folders", "Access advanced vault security", "Unlock premium protection features" });
+        paidFeaturegateService.ShowPaidGate(Texts.VaultText, Texts.QuickSecureActionEncryptedVaults, new[] { Texts.QuickSecureActionSecureEncryptedVaults, Texts.QuickSecureActionProtectImportantFiles, Texts.QuickSecureActionAdvancedVaultSecurity, Texts.QuickSecureActionUnlockPremium });
     }
 
     private async Task ValidateVaultNavigation()

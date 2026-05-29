@@ -1,4 +1,4 @@
-﻿@using AxCrypt.App.Shared.Desktop.Data
+@using AxCrypt.App.Shared.Desktop.Data
 @using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Services.Interface
@@ -21,7 +21,7 @@
     string arabic = Core.Resolve.UserSettings.CultureName == "ar" ? "arabic-class" : "";
 }
 
-<div class="@arabic" dir="@(Core.Resolve.UserSettings.CultureName == "ar" ? "rtl" : "ltr")" @onclick="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)" @onmousemove="async (e) => await LogOnViewModel.AxCryptMainForm_ClickAsync(e)">
+<div class="@arabic" dir="@(Core.Resolve.UserSettings.CultureName == "ar" ? "rtl" : "ltr")" @onclick="(e) => LogOnViewModel.AxCryptMainForm_Click(e)" @onmousemove="(e) => LogOnViewModel.AxCryptMainForm_Click(e)">
     @if (PageRendering || (LogOnViewModel.IsLoggedOn && PageStyleRendering))
     {
         @* Boot loader — uses the same AxLoader visual the rest of
@@ -86,18 +86,15 @@
 
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.StatusAlertComponent />
 
-                    <AxCrypt.App.Shared.Desktop.Components.PopupDialog.TryNowSubscriptionDialog />
+                    @* Single component handles TryNow / Upgrade / Business
+                       conversion popups — replaces the three separate files.
+                       Copy and feature-card definitions live in ConversionDialogConfig.cs. *@
+                    <AxCrypt.App.Shared.Desktop.Components.PopupDialog.ConversionDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.TryUpgradeDialog />
-                    <AxCrypt.App.Shared.Desktop.Components.PopupDialog.UpgradeSubscriptionDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.RenewSubscriptionDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.VerifyAccountDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.VerifyPasswordDialog />
                     <AxCrypt.App.Shared.Desktop.Components.PopupDialog.UserPromptDialog />
-
-                    @if (LogOnViewModel.IsLoggedOn && LogOnViewModel.SubscriptionLevel == Api.Model.SubscriptionLevel.Free)
-                    {
-                        <AxCrypt.App.Shared.Desktop.Components.Shared.PaidPlanRequiredPopup />
-                    }
                 }
                 else
                 {
@@ -111,14 +108,7 @@
                 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.About />
                 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.ImportPrivatePasswordDialog />
                 <AxCrypt.App.Shared.Desktop.Components.Shared.AccountPlanSetupRequiredPopup />
-
-                @* Paid Feature Gate Popup — extracted into its own
-                   component so all paid-gate UI lives in one file
-                   (Components/Shared/PaidGateDialog.razor). Every caller
-                   that triggers the gate goes through
-                   PaidFeaturegateService.ShowPaidGate(...); this is the
-                   single render point that listens to PaidGateOpen and
-                   draws the tier-targeted modal. *@
+                @* Feature-gate popup (small modal for locked features) *@
                 <AxCrypt.App.Shared.Desktop.Components.Shared.PaidGateDialog />
             </main>
         </div>
@@ -165,8 +155,11 @@
         // page mid-decrypt. The reload also re-triggers
         // MainViewModel.DownloadVersion → AvailableVersionDialog, which
         // is the "update available popup pops up unexpectedly" symptom.
-        bool atRoot = currentURi.Replace(navigationManager.BaseUri, "") == "";
-        if (CanShowSignInPage && !LogOnViewModel.IsLoggedOn && !atRoot)
+        string currentPath = currentURi.Replace(navigationManager.BaseUri, "").TrimStart('/');
+        bool atRoot = currentPath == "";
+        // Allow /upgradePage to stay visible after signup even before full login
+        bool atUpgradePage = currentPath == "upgradePage";
+        if (CanShowSignInPage && !LogOnViewModel.IsLoggedOn && !atRoot && !atUpgradePage)
         {
             navigationManager.NavigateTo("/", true);
             return;
@@ -183,7 +176,9 @@
         }
 
         string currentURi = navigationManager.Uri;
-        if (!LogOnViewModel.IsLoggedOn && currentURi.Replace(navigationManager.BaseUri, "") != "")
+        string subPath = currentURi.Replace(navigationManager.BaseUri, "").TrimStart('/');
+        // Allow /upgradePage to remain after signup before full login state is established
+        if (!LogOnViewModel.IsLoggedOn && subPath != "" && subPath != "upgradePage")
         {
             navigationManager.NavigateTo("/", true);
             return;

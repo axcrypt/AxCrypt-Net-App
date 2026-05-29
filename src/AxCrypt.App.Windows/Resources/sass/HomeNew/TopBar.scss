@@ -1,4 +1,4 @@
-﻿/* Top Bar */
+﻿// Top Bar
 .topbar {
     display: grid;
     grid-template-areas: "pagetitle toptools" "pagesubtitle pagesubtitle";
@@ -98,11 +98,9 @@
     content: $IcoAdvsdSettsDefault;
 }
 
-/* ═══════════════════════════════════════════
-   Update pill — Topbar
-   Two variants: normal (amber) and mandatory (red).
-   Only rendered when TopMenuViewModel.ShowUpdate is true.
-════════════════════════════════════════════ */
+// Update pill — Topbar
+// Two variants: normal (amber) and mandatory (red).
+// Only rendered when TopMenuViewModel.ShowUpdate is true.
 .update-pill {
     display: inline-flex;
     align-items: center;
@@ -121,7 +119,7 @@
     transform: scale(.97);
 }
 
-/* Normal: amber chip */
+// Normal: amber chip
 .update-pill--normal {
     background: #FEF3C7;
     color: #92400E;
@@ -132,7 +130,7 @@
     }
 }
 
-/* Mandatory: red pill with subtle pulse so the user can't miss it */
+// Mandatory: red pill with subtle pulse so the user can't miss it
 .update-pill--mandatory {
     background: #DC2626;
     color: #fff;

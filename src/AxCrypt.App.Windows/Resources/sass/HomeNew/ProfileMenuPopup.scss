@@ -1,7 +1,5 @@
 ﻿
-/* ═══════════════════════════════════════════
-   Profile Menu Popup
-════════════════════════════════════════════ */
+// Profile Menu Popup
 .profile-menu {
     position: absolute;
     bottom: calc(100% + 6px);
@@ -14,6 +12,7 @@
     padding: 6px;
     z-index: 200;
     animation: menuSlideUp 0.18s cubic-bezier(.4,0,.2,1);
+    color: $text-primary;
 }
 
 @keyframes menuSlideUp {
@@ -51,6 +50,7 @@
 .pm-info {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .pm-name {
@@ -59,6 +59,7 @@
     word-wrap: anywhere;
     max-height: 40px;
     overflow: hidden;
+    color: $text-primary;
 }
 
 .pm-email {
@@ -84,6 +85,7 @@
     cursor: pointer;
     text-align: left;
     transition: background .12s;
+    color: $text-primary;
 }
 
     .pm-item:hover {
@@ -103,41 +105,16 @@
 }
 
 .pm-item-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
     background: $bg-page;
     display: grid;
     place-items: center;
     flex-shrink: 0;
     color: $text-secondary;
-
-    &.pm-ClrSttngs-icon {
-        content: $IcoClrSttngsDefault;
-    }
-
-    &.pm-MngAccnt-icon {
-        content: $IcoMngAccntDefault; //MngAccnt
-    }
-
-    &.pm-Users-icon {
-        content: $IcoMngAxcptDefault;
-    }
-
-    &.pm-SubsDetails-icon {
-        content: $IcoSubsDetailsDefault;
-    }
-
-    &.pm-SngOut-icon {
-        content: $IcoSngOutDefault;
-    }
-
-    &.pm-Lgng-icon {
-        content: $IcoLgngDefault;
-    }
+    transition: background .12s, color .12s;
 }
-
-
 
 .pm-item-text {
     flex: 1;
@@ -164,4 +141,88 @@
     background: $brand-green-lt;
     color: $brand-green;
     white-space: nowrap;
+}
+
+// Plan tier badge shown in the menu header (Free / Premium / Business)
+.pm-plan-badge {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: $brand-green-lt;
+    color: $brand-green;
+    text-transform: capitalize;
+    letter-spacing: .02em;
+    align-self: flex-start;
+}
+
+html[data-theme="dark"] {
+    .profile-menu {
+        background: #1c2530;
+        border-color: #2a3645;
+        box-shadow: 0 16px 42px rgba(0,0,0,.55), 0 2px 8px rgba(0,0,0,.32);
+        color: #e8ecf1;
+    }
+
+    .profile-menu-header {
+        background: transparent;
+    }
+
+    .pm-name,
+    .pm-item-label {
+        color: #e8ecf1;
+    }
+
+    .pm-email,
+    .pm-item-sub {
+        color: #b5bcc7;
+    }
+
+    .pm-divider {
+        background: #2a3645;
+    }
+
+    .pm-item {
+        color: #e8ecf1;
+    }
+
+        .pm-item:hover {
+            background: #232e3b;
+        }
+
+    .pm-item--danger:hover {
+        background: rgba(239, 68, 68, .14);
+    }
+
+    .pm-item--danger .pm-item-label {
+        color: #f87171;
+    }
+
+    .pm-item-icon {
+        background: #232e3b;
+        color: #b5bcc7;
+        border: 1px solid #344152;
+        filter: none;
+        opacity: 1;
+    }
+
+    .pm-item:hover .pm-item-icon {
+        background: rgba(127, 204, 92, .16);
+        border-color: rgba(127, 204, 92, .32);
+        opacity: 1;
+    }
+
+    .pm-item--danger .pm-item-icon {
+        background: rgba(239, 68, 68, .14);
+        border-color: rgba(248, 113, 113, .30);
+        filter: none;
+        opacity: 1;
+    }
+
+    .pm-item-badge,
+    .pm-plan-badge {
+        background: rgba(127, 204, 92, .16);
+        color: #b8e89a;
+    }
 }

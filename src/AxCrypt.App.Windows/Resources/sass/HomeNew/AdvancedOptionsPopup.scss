@@ -1,6 +1,6 @@
-/* AdvancedOptionsPopup.razor.css */
+// AdvancedOptionsPopup.razor.css
 
-/* ── Backdrop ─────────────────────────────────────────────────── */
+// ── Backdrop ───────────────────────────────────────────────────
 .adv-backdrop {
     position: fixed;
     inset: 0;
@@ -10,6 +10,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    // Gutter + scroll so the panel is always reachable on short windows
+    padding: 16px;
+    overflow-y: auto;
     animation: advFadeIn 0.15s ease;
 }
 @keyframes advFadeIn {
@@ -17,10 +20,10 @@
     to   { opacity: 1; }
 }
 
-/* ── Panel ────────────────────────────────────────────────────── */
+// ── Panel ──────────────────────────────────────────────────────
 .adv-panel {
     width: 480px;
-    max-height: 84vh;
+    max-height: calc(100vh - 32px);
     background: #ffffff;
     border-radius: 16px;
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.20), 0 4px 16px rgba(0, 0, 0, 0.10);
@@ -34,7 +37,7 @@
     to   { opacity: 1; transform: translateY(0)   scale(1);    }
 }
 
-/* ── Header ───────────────────────────────────────────────────── */
+// ── Header ─────────────────────────────────────────────────────
 .adv-header {
     display: flex;
     align-items: center;
@@ -76,7 +79,7 @@
     margin-top: 3px;
 }
 
-/* ── Scrollable body ──────────────────────────────────────────── */
+// ── Scrollable body ────────────────────────────────────────────
 .adv-body {
     flex: 1;
     overflow-y: auto;
@@ -85,7 +88,7 @@
 .adv-body::-webkit-scrollbar { width: 5px; }
 .adv-body::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 9px; }
 
-/* ── Section labels ───────────────────────────────────────────── */
+// ── Section labels ─────────────────────────────────────────────
 .adv-section-label {
     font-size: 11px;
     font-weight: 700;
@@ -95,14 +98,14 @@
     padding: 12px 20px 5px;
 }
 
-/* ── Divider ──────────────────────────────────────────────────── */
+// ── Divider ────────────────────────────────────────────────────
 .adv-divider {
     height: 1px;
     background: #f3f4f6;
     margin: 8px 0;
 }
 
-/* ── Nav rows (Configuration) ─────────────────────────────────── */
+// ── Nav rows (Configuration) ───────────────────────────────────
 .adv-nav-row {
     width: 100%;
     display: flex;
@@ -146,7 +149,7 @@
 .adv-nav-arrow { flex-shrink: 0; }
 .adv-nav-row:hover .adv-nav-arrow { color: #374151; }
 
-/* ── Diagnostic toggle rows ───────────────────────────────────── */
+// ── Diagnostic toggle rows ─────────────────────────────────────
 .adv-toggle-row {
     display: flex;
     align-items: center;
@@ -159,9 +162,9 @@
 .adv-toggle-row--on       { background: #f0fdf4; }
 .adv-toggle-row--on:hover { background: #dcfce7; }
 
-/* Locked rows — both nav and toggle. Pointer cursor + warm hover
-   tint hint that clicking opens the paid-gate popup. Label/desc
-   are dimmed so the lock badge reads as the call-to-action. */
+// Locked rows — both nav and toggle. Pointer cursor + warm hover
+// tint hint that clicking opens the paid-gate popup. Label/desc
+// are dimmed so the lock badge reads as the call-to-action.
 .adv-nav-row--locked,
 .adv-toggle-row--locked {
     cursor: pointer;
@@ -169,7 +172,7 @@
 
 .adv-nav-row--locked:hover,
 .adv-toggle-row--locked:hover {
-    background: #fffbeb; /* amber-50 */
+    background: #fffbeb; // amber-50
 }
 
 .adv-nav-row--locked .adv-nav-label,
@@ -206,7 +209,7 @@
     line-height: 1.4;
 }
 
-/* ── Toggle switch (same design as EFP) ──────────────────────── */
+// ── Toggle switch (same design as EFP) ────────────────────────
 .adv-toggle {
     position: relative;
     width: 54px;
@@ -248,7 +251,7 @@
 .adv-toggle--on    .adv-toggle-label { left: 8px; }
 .adv-toggle:not(.adv-toggle--on) .adv-toggle-label { right: 6px; color: #9ca3af; }
 
-/* ── Warning callout (debug mode) ────────────────────────────── */
+// ── Warning callout (debug mode) ──────────────────────────────
 .adv-warning-callout {
     display: flex;
     align-items: flex-start;
@@ -269,7 +272,7 @@
 }
 .adv-warning-callout svg { flex-shrink: 0; margin-top: 2px; color: #d97706; }
 
-/* ── Danger Zone rows ─────────────────────────────────────────── */
+// ── Danger Zone rows ───────────────────────────────────────────
 .adv-danger-row {
     display: flex;
     align-items: center;
@@ -324,7 +327,7 @@
     border-color: #b91c1c;
 }
 
-/* ── Footer ───────────────────────────────────────────────────── */
+// ── Footer ─────────────────────────────────────────────────────
 .adv-footer {
     display: flex;
     align-items: center;

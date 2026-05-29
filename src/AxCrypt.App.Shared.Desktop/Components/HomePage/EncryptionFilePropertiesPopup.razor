@@ -20,7 +20,7 @@
             </button>
             <div class="efp-header-text">
                 <h2 class="efp-title">@Texts.FilePropertiesToolStripMenuItemText</h2>
-                <p class="efp-subtitle">Choose which metadata is embedded inside each encrypted file</p>
+                <p class="efp-subtitle">@Texts.FilePropertiesSubTitle</p>
             </div>
         </div>
 
@@ -31,14 +31,14 @@
                 <line x1="12" y1="8" x2="12" y2="12"/>
                 <line x1="12" y1="16" x2="12.01" y2="16"/>
             </svg>
-            <span>These properties are stored <strong>inside the encrypted file</strong>. They let you sort and identify files without decrypting them.</span>
+            <span>@((MarkupString)Texts.FilePropertiesInfoText)</span>
         </div>
 
         <!-- ── Scrollable body ── -->
         <div class="efp-body">
 
             <!-- Section: Sortable Columns -->
-            <div class="efp-section-label">Sortable Columns</div>
+            <div class="efp-section-label">@Texts.FilePropertiesSortableColumns</div>
 
             @foreach (FilePropertyItem item in ColumnItems)
             {
@@ -59,7 +59,7 @@
                                 @onclick="async () => { await item.OnClickFunc(); }">
 @*                                 title="@(item.IsToggled ? "Turn off" : "Turn on")">
  *@                            <span class="efp-toggle-knob"></span>
-                            <span class="efp-toggle-label">@(item.IsToggled ? "ON" : "OFF")</span>
+                            <span class="efp-toggle-label">@(item.IsToggled? Texts.ONText: Texts.OFFText)</span>
                         </button>
                     }
                     else
@@ -101,7 +101,7 @@
             <span class="efp-footer-hint">
                 @EnabledCount of @AllItems.Count properties enabled
             </span>
-            <button class="efp-done-btn" @onclick="OnClose">Done</button>
+            <button class="efp-done-btn" @onclick="OnClose">@Texts.DoneTitle</button>
         </div>
     </div>
 </div>
@@ -150,8 +150,8 @@
             // ── Sortable columns ─────────────────────────────────────────
             new()
             {
-                Id = "date-modified", Label = "Date Modified", Section = "columns", IsToggled = appSettingsViewModel.IsDateModifiedOn, IsEnable = appSettingsViewModel.EnableEncryptionFileProperties,
-                Description = "Keep the original file modified date unchanged even after encryption.",
+                Id = "date-modified", Label = Texts.FilePropertiesDateModifiedToolStripMenuItem, Section = "columns", IsToggled = appSettingsViewModel.IsDateModifiedOn, IsEnable = appSettingsViewModel.EnableEncryptionFileProperties,
+                Description = Texts.FilePropertiesDescription,
                 OnClickFunc = async () => await appSettingsViewModel.FilePropertiesDateModifiedAsync(),
                 IconSvg = @"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#2563eb' stroke-width='2'>
                     <rect x='3' y='4' width='18' height='18' rx='2'/>
@@ -159,18 +159,18 @@
                     <line x1='8' y1='2' x2='8' y2='6'/>
                     <line x1='3' y1='10' x2='21' y2='10'/>
                 </svg>",
-                PaidPerks = new[] { "Preserve original modified date", "Avoid visible encryption timestamp changes", "Extra privacy protection", "Unlock advanced file security" }
+                PaidPerks = new[] { Texts.PreserveOriginalModifiedDatePopup, Texts.AvoidVisibleEncryptionPopup, Texts.ExtraPrivacyProtectionPopup, Texts.UnlockAdvancedFileSecurityPopup }
             },
             new()
             {
-                Id = "file-name", Label = "Original File Name", Section = "columns", IsToggled = appSettingsViewModel.IsFileNameOn, IsEnable = appSettingsViewModel.EnableRestoreRename,
-                Description = "Hide original file names by replacing them with secure random names during encryption.",
+                Id = "file-name", Label =Texts.FilePropertiesOriginalFileNameTitle, Section = "columns", IsToggled = appSettingsViewModel.IsFileNameOn, IsEnable = appSettingsViewModel.EnableRestoreRename,
+                Description = Texts.FilePropertiesOriginalFileNameDescription,
                 OnClickFunc = async () => await appSettingsViewModel.FilePropertiesFileNameAsync(),
                 IconSvg = @"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#16a34a' stroke-width='2'>
                     <path d='M12 20h9'/>
                     <path d='M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z'/>
                 </svg>",
-                PaidPerks = new[] { "Hide original file names", "Generate secure random file names", "Add extra privacy protection", "Unlock advanced encryption features" }
+                PaidPerks = new[] { Texts.HideOriginalFileNamesPopup, Texts.GenerateSecureRandomFileNamesPopup, Texts.AddExtraPrivacyProtectionPopup, Texts.UnlockAdvancedEncryptionFeaturesPopup }
             },
         };
     }

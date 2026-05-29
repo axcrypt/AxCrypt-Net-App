@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AxCrypt.Api.Model;
 
 namespace AxCrypt.Core.UI.ViewModel
 {
@@ -35,6 +36,14 @@ namespace AxCrypt.Core.UI.ViewModel
                 }
 
                 return _userAccount.SignUpFrom;
+            }
+        }
+
+        public static MultiFactorAuthType MFAEnabledType
+        {
+            get
+            {
+                return UserMultiFactorAuthHandler.GetValidMFAAuthType(_userAccount.MultiFactorAuthInfo, string.Empty);
             }
         }
     }

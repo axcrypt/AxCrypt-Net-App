@@ -1,27 +1,22 @@
 ﻿
-/* ═══════════════════════════════════════════
-   Files Table
-
-   Layout — locked column track:
-     check  | name (flex, can shrink) | status | date | size | actions
-      28px  |     minmax(0, 1fr)      | 130px  |120px | 80px |  72px
-
-   The `minmax(0, 1fr)` on the name column is the important bit: without
-   it, a long file path inside .file-meta would push the name column past
-   its share and force the row wider than the card, clipping the status /
-   date / size / actions columns off-screen (the original bug).
-
-   Auto-scroll — the rows wrap in a max-height container with a sticky
-   header so once you have more than ~5 files, the body scrolls but the
-   header (and the page) stay put.
-════════════════════════════════════════════ */
+// Files Table
+// Layout — locked column track:
+// check  | name (flex, can shrink) | status | date | size | actions
+// 28px  |     minmax(0, 1fr)      | 130px  |120px | 80px |  72px
+// The `minmax(0, 1fr)` on the name column is the important bit: without
+// it, a long file path inside .file-meta would push the name column past
+// its share and force the row wider than the card, clipping the status /
+// date / size / actions columns off-screen (the original bug).
+// Auto-scroll — the rows wrap in a max-height container with a sticky
+// header so once you have more than ~5 files, the body scrolls but the
+// header (and the page) stay put.
 .files-table {
     width: 100%;
-    overflow: hidden; /* belt-and-braces: never let a runaway row leak out */
-    /* Lay out as a flex column so the sticky header takes its natural
-       height and the scrollable body claims the rest. Combined with
-       flex:1 + min-height:0 on .recent-files-card, this lets the
-       section live-resize with the window. */
+    overflow: hidden; // belt-and-braces: never let a runaway row leak out
+    // Lay out as a flex column so the sticky header takes its natural
+    // height and the scrollable body claims the rest. Combined with
+    // flex:1 + min-height:0 on .recent-files-card, this lets the
+    // section live-resize with the window.
     flex: 1;
     min-height: 0;
     display: flex;
@@ -56,7 +51,7 @@
     padding-bottom: 8px;
     border-bottom: 1px solid $border;
     margin-bottom: 4px;
-    /* Sticky so the column titles stay visible while body scrolls */
+    // Sticky so the column titles stay visible while body scrolls
     position: sticky;
     top: 0;
     z-index: 2;
@@ -64,19 +59,19 @@
     border-radius: 0;
 }
 
-/* Scrollable body — flexes to fill whatever vertical space the
-   recent-files card has after the header. min-height:0 lets it
-   shrink below content-min and engage the internal scrollbar.
-   min-height: 180px keeps at least ~4 rows visible even when the
-   window is dragged very small, so the section never collapses
-   to "just a header". The previous fixed `max-height: 260px` was
-   replaced because it stopped the table from growing on taller
-   windows. */
+// Scrollable body — flexes to fill whatever vertical space the
+// recent-files card has after the header. min-height:0 lets it
+// shrink below content-min and engage the internal scrollbar.
+// min-height: 180px keeps at least ~4 rows visible even when the
+// window is dragged very small, so the section never collapses
+// to "just a header". The previous fixed `max-height: 260px` was
+// replaced because it stopped the table from growing on taller
+// windows.
 .files-table-body {
     flex: 1;
     min-height: 180px;
     overflow-y: auto;
-    /* Slim, theme-friendly scrollbar */
+    // Slim, theme-friendly scrollbar
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, .18) transparent;
 }
@@ -97,7 +92,7 @@
 .tcol {
     display: flex;
     align-items: center;
-    min-width: 0; /* allow text-ellipsis children to shrink */
+    min-width: 0; // allow text-ellipsis children to shrink
 }
 
 .tcol-name {
@@ -129,7 +124,7 @@
     letter-spacing: .02em;
 }
 
-/* status-tinted file icons */
+// status-tinted file icons
 .file-icon--enc {
     background: $badge-enc-bg;
     color: $badge-enc-fg;
@@ -145,8 +140,8 @@
     color: $badge-shared-fg;
 }
 
-/* Master-key applied — business users only. Distinct purple so it
-   reads as a separate, more privileged state than "Key shared". */
+// Master-key applied — business users only. Distinct purple so it
+// reads as a separate, more privileged state than "Key shared".
 .file-icon--master-key {
     background: #f5f3ff;
     color: #6d28d9;
@@ -160,7 +155,7 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
-    flex: 1; /* fill remaining .tcol-name space so ellipsis can kick in */
+    flex: 1; // fill remaining .tcol-name space so ellipsis can kick in
     overflow: hidden;
 }
 
@@ -182,83 +177,8 @@
     max-width: 100%;
 }
 
-.badge {
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 9px;
-    border-radius: 20px;
-    /* Reset inherited color from .tcol-status so each badge variant
-       below wins cleanly. Without this, .tcol-status's grey-secondary
-       color would compete with the variant's intended foreground. */
-    color: inherit;
-    line-height: 1.5;
-    display: inline-block;
-    white-space: nowrap;
-}
-
-.badge--enc {
-    background: $badge-enc-bg;
-    color: $badge-enc-fg;
-}
-
-.badge--opened {
-    background: $badge-opened-bg;
-    color: $badge-opened-fg;
-}
-
-.badge--shared {
-    background: $badge-shared-bg;
-    color: $badge-shared-fg;
-}
-
-.badge--master-key {
-    background: #f5f3ff;
-    color: #6d28d9;
-}
-
-.icon-btn-sm {
-    background: none;
-    border: none;
-    padding: 4px;
-    cursor: pointer;
-    color: $text-muted;
-    border-radius: 5px;
-    display: grid;
-    place-items: center;
-    transition: background .1s, color .1s;
-}
-
-    .icon-btn-sm:hover {
-        background: $bg-page;
-        color: $text-primary;
-    }
-
-.view-all-btn {
-    margin-top: 14px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    padding: 9px;
-    border: 1px solid $border;
-    border-radius: var(--radius-btn);
-    background: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    color: $brand-green;
-    cursor: pointer;
-    transition: background .15s;
-}
-
-    .view-all-btn:hover {
-        background: $brand-green-lt;
-    }
-
-/* ═══════════════════════════════════════════
-   Recent Files — bulk action bar
-   Appears when one or more rows are checked.
-════════════════════════════════════════════ */
+// Recent Files — bulk action bar
+// Appears when one or more rows are checked.
 .rf-bulk-bar {
     display: flex;
     align-items: center;
@@ -331,8 +251,8 @@
     }
 }
 
-/* Subdued variant — used for "Clear selection". Lower visual weight
-   than the primary actions so it doesn't compete with Open/Share. */
+// Subdued variant — used for "Clear selection". Lower visual weight
+// than the primary actions so it doesn't compete with Open/Share.
 .rf-bulk-btn--ghost {
     background: transparent;
     color: #fff;
@@ -344,17 +264,15 @@
     }
 }
 
-/* ═══════════════════════════════════════════
-   Recent Files — empty state per filter
-════════════════════════════════════════════ */
-/* The empty state sits directly inside .files-table, which is
-   `overflow: hidden`. Without its own sizing it took natural height and
-   got clipped on a short column — e.g. a free user, where the plan
-   limit bar eats column space — with no way to reach the cut-off part.
-   `flex: 1` + `min-height: 0` make it claim the leftover card height;
-   `overflow-y: auto` lets it scroll if the card is too short for the
-   illustration + text; `safe center` centres the content when it fits
-   and falls back to a scrollable top when it doesn't. */
+// Recent Files — empty state per filter
+// The empty state sits directly inside .files-table, which is
+// `overflow: hidden`. Without its own sizing it took natural height and
+// got clipped on a short column — e.g. a free user, where the plan
+// limit bar eats column space — with no way to reach the cut-off part.
+// `flex: 1` + `min-height: 0` make it claim the leftover card height;
+// `overflow-y: auto` lets it scroll if the card is too short for the
+// illustration + text; `safe center` centres the content when it fits
+// and falls back to a scrollable top when it doesn't.
 .rf-empty {
     flex: 1;
     min-height: 0;
@@ -368,10 +286,10 @@
     padding: 28px 16px 24px;
 }
 
-/* Keep the empty-state illustration compact so the whole section fits
-   without scrolling in the common case. The image itself is set via
-   `content: url(...)` in the per-tier index.scss; this only caps its
-   rendered size. */
+// Keep the empty-state illustration compact so the whole section fits
+// without scrolling in the common case. The image itself is set via
+// `content: url(...)` in the per-tier index.scss; this only caps its
+// rendered size.
 .rf-empty .empty-rcnt-fle-img {
     width: 116px;
     height: auto;
@@ -391,10 +309,3 @@
     line-height: 1.5;
 }
 
-/* Click-outside backdrop for the context menu */
-.ctx-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 399;
-    background: transparent;
-}

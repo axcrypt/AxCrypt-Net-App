@@ -1,3 +1,4 @@
+@implements IDisposable
 @using AxCrypt.App.Shared.Desktop.ViewModels.Home
 @using AxCrypt.Content
 
@@ -30,10 +31,23 @@
 
     [Parameter] public string ActionFor { get; set; }
 
+    // Stored so we can unsubscribe in Dispose() — inline lambdas cannot be unsubscribed.
+    private Action? _onUpdateViewState;
+
     protected override void OnInitialized()
     {
-        homeActionModel!.OnUpdateViewState += () => InvokeAsync(StateHasChanged);
+        _onUpdateViewState = () => InvokeAsync(StateHasChanged);
+        homeActionModel!.OnUpdateViewState += _onUpdateViewState;
 
         base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        if (homeActionModel != null && _onUpdateViewState != null)
+        {
+            homeActionModel.OnUpdateViewState -= _onUpdateViewState;
+            _onUpdateViewState = null;
+        }
     }
 }

@@ -1,45 +1,87 @@
-﻿@using AxCrypt.App.Shared.ViewModels
+﻿@implements IDisposable
+@using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Content
 
 @inject InviteViewModel InviteViewModel
 
 @if (IsVisible)
 {
-    <div id="modal-dialog1" class="modalDialog" style="display: block;">
-        <div class="invite-popup text-center">
-            <div>
-                <div class="close-img" @onclick="ClosePopup"></div>
-                <div class="center-column">
-                    <div>
-                        <img src="images/default/ImgInvFrnds.svg" alt="ImgInvFrnds-img" style="height: 100%;" />
-                        <br /><br />
-                        <span class="text-center font-bold" style="font-size: 20px;">
-                            @Texts.InviteFriendAxCryptText
-                        </span>
-                    </div>
-                    <div class="invite-text">
-                        <span class="grey-clr">@Texts.DialogInviteUserPromptLabelText</span><br />
-                        @if (InviteViewModel.InviteUserDisabled)
-                        {
-                            <input type="text" id="inviteFriend" name="inviteFriend" placeholder=@Texts.FriendsEmailText @bind-value="@InviteViewModel.InvitedUser" disabled="disabled">
-                        }
-                        else
-                        {
-                            <input type="text" id="inviteFriend" name="inviteFriend" placeholder=@Texts.FriendsEmailText @bind-value="@InviteViewModel.InvitedUser">
-                        }
-                        @if (!string.IsNullOrEmpty(InviteViewModel.ErrorMessage))
-                        {
-                            <div class="error-message">@InviteViewModel.ErrorMessage</div>
-                        }
-                    </div>
-                    <div class="modal-footer">
-                        <button class="button font-medium success btn-large" @onclick="()=> InviteViewModel.InviteFriend()">@Texts.Invite!</button>
-                    </div>
+    <div class="axd-backdrop" @onclick="ClosePopup">
+        <div class="axd-modal axd-modal--invite"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="axd-invite-title"
+             @onclick:stopPropagation>
+
+            @* ── Close button ─────────────────────────────────── *@
+            <button type="button" class="axd-close axd-close--abs"
+                    @onclick="ClosePopup" aria-label="Close">×</button>
+
+            @* ── Illustration area ────────────────────────────── *@
+            <div class="inv-hero">
+                <div class="inv-hero-icon" aria-hidden="true">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.5"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <line x1="19" y1="8" x2="19" y2="14" />
+                        <line x1="22" y1="11" x2="16" y2="11" />
+                    </svg>
                 </div>
+                <h2 id="axd-invite-title" class="inv-title">@Texts.InviteFriendAxCryptText</h2>
+                <p class="inv-sub">@Texts.DialogInviteUserPromptLabelText</p>
+            </div>
+
+            @* ── Email input ──────────────────────────────────── *@
+            <div class="axd-body inv-body">
+                <form class="axd-path-row" @onsubmit="InviteViewModel.InviteFriend">
+                    <div class="axd-input-wrap">
+                        <svg class="inv-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" />
+                            <polyline points="22 6 12 13 2 6" />
+                        </svg>
+                        <input type="email"
+                               id="inviteFriend"
+                               class="axd-input inv-input"
+                               placeholder="@Texts.FriendsEmailText"
+                               @bind-value="@InviteViewModel.InvitedUser"
+                               disabled="@InviteViewModel.InviteUserDisabled"
+                               autocomplete="email" />
+                    </div>
+                    <button type="submit"
+                            class="axd-btn axd-btn--primary"
+                            disabled="@InviteViewModel.InviteUserDisabled">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2.5"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                        @Texts.Invite!
+                    </button>
+                </form>
+
+                @if (!string.IsNullOrEmpty(InviteViewModel.ErrorMessage))
+                {
+                    <div class="axd-error" role="alert">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                        <span>@InviteViewModel.ErrorMessage</span>
+                    </div>
+                }
             </div>
         </div>
     </div>
 }
+
 
 @code {
     private bool IsVisible;
@@ -50,13 +92,18 @@
         InviteViewModel.LogOnViewModel.InviteDialog.OnDialogVisibilityChanged += UpdateInviteDialogState;
     }
 
+    public void Dispose()
+    {
+        InviteViewModel.LogOnViewModel.InviteDialog.OnDialogVisibilityChanged -= UpdateInviteDialogState;
+    }
+
     private void UpdateInviteDialogState(bool canShowInviteDialog)
     {
         InvokeAsync(() =>
         {
             InviteViewModel.Initialize();
             IsVisible = canShowInviteDialog;
-            StateHasChanged(); // Refresh UI
+            StateHasChanged();
         });
     }
 

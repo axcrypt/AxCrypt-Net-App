@@ -1,7 +1,5 @@
 ﻿
-/* ═══════════════════════════════════════════
-   Cloud Drives
-════════════════════════════════════════════ */
+// Cloud Drives
 .drive-row {
     display: flex;
     align-items: center;
@@ -60,3 +58,19 @@
         background: $brand-green-lt;
         color: #fff;
     }
+
+.onedrv-icon {
+    content: url(/images/default/IcoOneDrv.svg);
+}
+
+.cld-icon {
+    content: url(/images/default/IcoIcld.svg);
+}
+
+.ggldrv-icon {
+    content: url(/images/default/IcoGglDrv.svg);
+}
+
+.drpbx-icon {
+    content: url(/images/default/IcoDrpbx.svg);
+}

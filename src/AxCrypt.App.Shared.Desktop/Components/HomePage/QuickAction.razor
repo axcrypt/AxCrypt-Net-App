@@ -1,8 +1,10 @@
+@implements IDisposable
 @using AxCrypt.App.Entitlement.Contracts
 @using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Desktop.ViewModels.Home
 @using AxCrypt.App.Shared.Desktop.Models
 @using AxCrypt.App.Shared.Services
+@using AxCrypt.Content
 
 @inject ActionsViewModel? homeActionModel
 @inject UserService userService
@@ -11,8 +13,8 @@
 
 <section class="card">
     <div class="card-header-row">
-        <h2 class="section-title">Quick Actions</h2>
-        <span class="card-header-hint">One-click access to the things you do most — open, encrypt, decrypt, or share.</span>
+        <h2 class="section-title">@Texts.QuickActionsTitle</h2>
+        <span class="card-header-hint">@Texts.QuickActionsSubTitle</span>
     </div>
 
     <AxCrypt.App.Shared.Desktop.Components.HomePage.CleanupActionRow IsCleanUpRequired=@homeActionModel!.AreFilesPending ActionFor="Files"/>
@@ -31,11 +33,24 @@
 <AxCrypt.App.Shared.Desktop.Components.Home.ShareKeyComponent />
 
 @code {
+    private Action? _onActionModelUpdate;
+    private Action? _onUsageChange;
+
     protected override void OnInitialized()
     {
-        homeActionModel!.OnUpdateViewState += () => InvokeAsync(StateHasChanged);
+        _onActionModelUpdate = () => InvokeAsync(StateHasChanged);
+        _onUsageChange       = () => InvokeAsync(StateHasChanged);
 
-        usage.OnChange += () => InvokeAsync(StateHasChanged);
+        homeActionModel!.OnUpdateViewState += _onActionModelUpdate;
+        usage.OnChange += _onUsageChange;
+    }
+
+    public void Dispose()
+    {
+        if (homeActionModel != null && _onActionModelUpdate != null)
+            homeActionModel.OnUpdateViewState -= _onActionModelUpdate;
+        if (_onUsageChange != null)
+            usage.OnChange -= _onUsageChange;
     }
 
     private bool IsLockedFor(QuickActionItem qa)

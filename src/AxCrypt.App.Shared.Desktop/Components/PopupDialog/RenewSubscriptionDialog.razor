@@ -1,4 +1,5 @@
-﻿@using AxCrypt.App.Shared.ViewModels
+﻿@implements IDisposable
+@using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Common
 @using AxCrypt.Content
 @using AxCrypt.Core.UI
@@ -9,28 +10,68 @@
 
 @if (IsVisible)
 {
-    <div id="modal-dialog6" class="modalDialog password-dialog">
-        <div class="text-content" style="margin-bottom: 16px;">
-            @((MarkupString)InitializeFeatureText())
-            <div class="button-group center-column" style="padding-top:15px;justify-content:space-evenly;">
-                <button class="button font-medium success btn-large" @onclick="RenewSubscriptionAsync">@Texts.BusinessSubscriptionRenewMenu</button>
-                <button class="btn-large font-medium button cancel" @onclick="UpdateDoNotShowAgainOptions">@Texts.ButtonNotNow</button>
+    <div class="axd-backdrop" @onclick="UpdateDoNotShowAgainOptions">
+        <div class="axd-modal axd-modal--narrow"
+             role="alertdialog"
+             aria-modal="true"
+             aria-labelledby="ren-title"
+             @onclick:stopPropagation>
+
+            @* Header *@
+            <header class="axd-header">
+                <div class="axd-header-icon axd-header-icon--warn" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2l2.39 5.46L20 8l-4.5 3.45L17 17l-5-2.7L7 17l1.5-5.55L4 8l5.61-.54L12 2z"/>
+                    </svg>
+                </div>
+                <div class="axd-header-text">
+                    <h2 id="ren-title" class="axd-title">@Texts.BusinessSubscriptionRenewMenu</h2>
+                    <p class="axd-sub">@Texts.UpgradeSubscriptionPromptText</p>
+                </div>
+                <button type="button" class="axd-close"
+                        @onclick="UpdateDoNotShowAgainOptions"
+                        aria-label="Close">×</button>
+            </header>
+
+            @* Feature list *@
+            <div class="axd-body ren-body">
+                <ul class="ren-feat-list" aria-label="Subscription features">
+                    @foreach (string feature in Texts.RenewSubscriptionDialogFeaturesList.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        <li class="ren-feat-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                 stroke="#48772C" stroke-width="2.5"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            @feature
+                        </li>
+                    }
+                </ul>
+
+                @* Don't-show-again *@
+                <label class="ren-dontshow">
+                    <input type="checkbox"
+                           class="ren-checkbox"
+                           @onchange="(e) => ToggleCheckbox(e)"
+                           checked="@IsCheckboxDontShowThisAgain" />
+                    <span>@Texts.DontShowAgainCheckBoxText</span>
+                </label>
             </div>
-            <label> <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@IsCheckboxDontShowThisAgain" />@Texts.DontShowAgainCheckBoxText</label>
+
+            @* Footer *@
+            <footer class="axd-footer">
+                <button type="button" class="axd-btn axd-btn--ghost"
+                        @onclick="UpdateDoNotShowAgainOptions">@Texts.ButtonNotNow</button>
+                <button type="button" class="axd-btn axd-btn--primary"
+                        @onclick="RenewSubscriptionAsync">@Texts.BusinessSubscriptionRenewMenu</button>
+            </footer>
         </div>
     </div>
 }
 
-<style>
-    .text-content {
-        margin-bottom: 16px;
-    }
-
-    .button-group {
-        margin-top: 0;
-        padding: 8px 0;
-    }
-</style>
 
 @code {
     private bool IsVisible;
@@ -45,6 +86,11 @@
         _dontShowAgainFlag = DoNotShowAgainOptions.UpgradeSubscriptionWarning;
         base.OnInitialized();
         viewModel.RenewSubscriptionDialog.OnDialogVisibilityChanged += UpdateRenewDialogState;
+    }
+
+    public void Dispose()
+    {
+        viewModel.RenewSubscriptionDialog.OnDialogVisibilityChanged -= UpdateRenewDialogState;
     }
 
     string InitializeFeatureText()

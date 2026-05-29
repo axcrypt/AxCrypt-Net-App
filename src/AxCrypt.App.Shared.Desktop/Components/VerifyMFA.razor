@@ -29,13 +29,13 @@
             </div>
 
             <h1 class="lp-brand-headline">
-                Your files.<br />
-                Protected everywhere.<br />
-                <span class="lp-brand-emphasis">Always.</span>
+                @Texts.YourFilesText<br />
+                @Texts.ProtectedEverywhereText<br />
+                <span class="lp-brand-emphasis">@Texts.AlwaysText</span>
             </h1>
 
             <p class="lp-brand-sub">
-                Secure files, passwords, and private messages with powerful encryption — before they are shared, synced, or stored in the cloud.
+                @Texts.VerifyMFABrandSubTitle
             </p>
 
             <ul class="lp-brand-pills" aria-label="Why AxCrypt">
@@ -43,25 +43,25 @@
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
                         <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    AES-256 device encryption
+                    @Texts.VerifyMFAWhyAxCryptLabel
                 </li>
                 <li>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
                         <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    Secure cloud storage &amp; simple sharing
+                    @Texts.VerifyMFASecureCloudStorage
                 </li>
                 <li>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
                         <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    Works across devices
+                    @Texts.VerifyMFAWorksAcrossDevices
                 </li>
                 <li>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
                         <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    Works online <em>and</em> offline
+                    @((MarkupString)Texts.VerifyMFAOffline)
                 </li>
             </ul>
         </div>
@@ -197,7 +197,7 @@
 
                 <div class="lp-field">
                     <div class="lp-field-head">
-                        <label for="verify-code-txtbox">Verification code</label>
+                        <label for="verify-code-txtbox">@Texts.PromptActivationCode</label>
                     </div>
                     <input type="tel" inputmode="numeric" pattern="[0-9]*"
                            id="verify-code-txtbox"

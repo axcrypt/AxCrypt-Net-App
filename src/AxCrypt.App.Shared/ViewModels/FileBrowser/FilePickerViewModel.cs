@@ -146,6 +146,7 @@ namespace AxCrypt.App.Shared.ViewModels.FileBrowser
             IsSearchResultVisible = false;
             SearchQuery = string.Empty;
             selectedTab = "all";
+            FileProviderSelectionViewModel.UpdateViewState();
         }
 
         public bool IsFileSelected(FilePickerItemViewModel file)

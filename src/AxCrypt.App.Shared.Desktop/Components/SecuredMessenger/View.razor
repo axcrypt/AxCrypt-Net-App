@@ -1,136 +1,203 @@
-﻿@using AxCrypt.App.Shared.Desktop.Data
+@implements IDisposable
+@using AxCrypt.App.Shared.Desktop.Data
 @using AxCrypt.App.Shared.ViewModels.SecuredMessenger
 @using AxCrypt.Core.SecuredMessenger
 @using AxCrypt.Core.UI
 @using AxCrypt.Content
-
-@using static AxCrypt.Abstractions.TypeResolve;
+@using AxCrypt.Core
+@using static AxCrypt.Abstractions.TypeResolve
 
 @inject ManageSecMsgrViewModel ViewSecMsgrViewModel
 @inject IJSRuntime jsRuntime
 
-@if (ViewSecMsgrViewModel.Messenger != null && ViewSecMsgrViewModel.Messenger.ChildMessages != null && ViewSecMsgrViewModel.Messenger.ChildMessages.Any())
+@*
+    Secured Messenger — View message (.smv-* design system).
+
+    Replaces the legacy <table>/floats layout with a flat, modern
+    message-card stack. Each card:
+       ┌──────────────────────────────────────────────────────────┐
+       │ [AV] sender@…                          ⏱ 2h ago  [↩][🗑] │
+       │      to: bob@…, carol@…   (+N others)                    │
+       │      🕒 Visible until Jan 5  ·  👁 Once                  │   (pills, optional)
+       │ ──────────────────────────────────────────────────────── │
+       │  <message body — textarea readonly OR loading wheel>     │
+       └──────────────────────────────────────────────────────────┘
+
+    Accent color (avatar, reply icon, visibility pills) comes from
+    $brand-green which is tier-defined in /sass/<tier>/_homeNewVariables.scss
+    — Premium #48772C, Business #000, Free #48772C.
+*@
+
+@if (ViewSecMsgrViewModel.Messenger != null
+     && ViewSecMsgrViewModel.Messenger.ChildMessages != null
+     && ViewSecMsgrViewModel.Messenger.ChildMessages.Any())
 {
-    int replyIndex = 0; string LatestMessageStyle = "";
-    @foreach (SecuredMessage messenger in ViewSecMsgrViewModel.Messenger.ChildMessages)
-    {
-        LatestMessageStyle = "display:none;";
-        if (!string.IsNullOrEmpty(messenger.Message.TheMessage))
+    <div class="smv-thread">
+        @foreach (SecuredMessage messenger in ViewSecMsgrViewModel.Messenger.ChildMessages)
         {
-            LatestMessageStyle = "display:block;";
-        }
+            Guid parentId    = messenger.ParentId == Guid.Empty ? messenger.Id : messenger.ParentId;
+            string messageFrom  = messenger.Message.Username;
+            IEnumerable<string> messageToList = messenger.Message.ReceiverList.Select(re => re.User);
+            string messageToText = string.Join(", ", messageToList);
 
-        Guid parentId = messenger.ParentId == Guid.Empty ? messenger.Id : messenger.ParentId;
+            // Whose initials show in the avatar — sent → recipient,
+            // received → sender. Keeps the leading glyph meaningful when
+            // scanning a thread.
+            bool isSentTab = ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab
+                             == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent
+                             || messageFrom == currentUser;
+            string avatarSource = isSentTab ? messageToText : messageFrom;
+            string avatar = InitialsOf(avatarSource);
 
-        string messageFrom = messenger.Message.Username;
-        IEnumerable<string> messageToList = messenger.Message.ReceiverList.Select(re => re.User);
-        string messageToListText = string.Join(", ", messageToList);
+            IList<string> replyUserList = isSentTab
+                ? new List<string> { messageFrom }
+                : BuildReplyUserList(messageToList, messageFrom);
+            string replyReceivers = string.Join(", ", replyUserList);
 
-        string senderShortCode = messageFrom.Substring(0, 2).ToUpper();
-        IList<string> replyUserList = new List<string>();
-        if (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent || messageFrom == currentUser)
-        {
-            senderShortCode = messageToListText.Substring(0, 2).ToUpper();
-            replyUserList = new List<string> { messageFrom };
-        }
-        else
-        {
-            replyUserList = messageToList.Where(re => !re.Equals(currentUser)).ToList();
-            if (!replyUserList.Any(ru => ru == messageFrom))
-            {
-                replyUserList.Add(messageFrom);
-            }
-        }
+            bool showDelete =
+                (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom == currentUser) ||
+                (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom != currentUser);
 
-        bool showDeleteButton = (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab == AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom == currentUser) ||
-        (ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent && messageFrom != currentUser);
+            bool bodyVisible = !string.IsNullOrEmpty(messenger.Message.TheMessage);
+            string bodyToggleStyle = bodyVisible ? "display:block;" : "display:none;";
 
-        string replyMesssageReceivers = string.Join(", ", replyUserList);
+            <article class="smv-card" id="view-message-box">
 
-        <div id="view-message-box">
-            <div class="view-section" id="expand-view-sec">
-                <table>
-                    <tbody @onclick="async () => await ViewSecuredMessage(messenger.Id, messenger.Message.TheMessage!)" style="cursor:pointer;">
-                        <tr>
-                            <td> <div class="acc-prfl fnt-small">@senderShortCode</div></td>
-                            <td style="line-height: normal; max-width: 235px; padding-left: 5px;">
-                                <div style="display: flex; align-items: center; gap: 5px ">
-                                    <label>@Texts.FromText</label>
-                                    <span class="email-txt-ovflw">@messenger.Message.Username</span>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 5px; padding-top: 5px;">
-                                    <label>@Texts.ToText</label>
-                                    <span class="email-txt-ovflw" style="padding-left:18px;">
-                                        @string.Join(", ", messageToList.Take(Utility.MaxReceiversToDisplay))
+                @* ── Header ─────────────────────────────────────── *@
+                <header class="smv-card-head"
+                        @onclick="async () => await ViewSecuredMessage(messenger.Id, messenger.Message.TheMessage!)">
+                    <span class="smv-avatar" aria-hidden="true">@avatar</span>
 
-                                        @if (messageToList.Count() > Utility.MaxReceiversToDisplay)
-                                        {
-                                            <span class="fnt-medium mre-user-txt">+@(messageToList.Count() - Utility.MaxReceiversToDisplay) others</span>
-                                        }
-                                    </span>
-                                </div>
-                            </td>
-                            <td class="right-align" style="vertical-align: top;">
-                                <input type="button" class="rply-icon" id="reply-button-@messenger.Id"
-                                       data-id="@messenger.Id"
-                                       @onclick:stopPropagation="true"
-                                       @onclick="() => ViewSecMsgrViewModel.ReplyMessage(messenger.Id, parentId, replyMesssageReceivers)"
-                                       value="Reply" name="reply-button" />
-
-                                @if (showDeleteButton)
+                    <div class="smv-meta">
+                        <div class="smv-meta-row">
+                            <span class="smv-label">@Texts.FromText</span>
+                            <span class="smv-email" title="@messageFrom">@messageFrom</span>
+                        </div>
+                        <div class="smv-meta-row">
+                            <span class="smv-label">@Texts.ToText</span>
+                            <span class="smv-email smv-email--to" title="@messageToText">
+                                @string.Join(", ", messageToList.Take(Utility.MaxReceiversToDisplay))
+                                @if (messageToList.Count() > Utility.MaxReceiversToDisplay)
                                 {
-                                    <input type="button" name="delete-button" class="dlt-icon" value="Delete"
-                                           data-id="@messenger.Id"
-                                           @onclick:stopPropagation="true"
-                                           @onclick="async()=>await ViewSecMsgrViewModel.DeleteMessageById(messenger.Id, parentId, ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab)"
-                                           style="background-color: transparent; border: none;" />
+                                    <span class="smv-more">+@(messageToList.Count() - Utility.MaxReceiversToDisplay) others</span>
                                 }
-                                <br />
-                                <label class="right-align grey-clr" style="font-size: 12px; font-weight: 600; padding-top: 5px;" title="@Utility.ToLocalFullDateString(messenger.CreatedUtc)">@Utility.ToDateString(messenger.CreatedUtc.ToLocalTime())</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="visiblity-text fnt-small" colspan="2">
+                            </span>
+                        </div>
+
+                        @if (messenger.Message.VisibleUntil != DateTime.MaxValue
+                             || messenger.Message.Visibility == SecureMsgrVisibility.Once)
+                        {
+                            <div class="smv-pills">
                                 @if (messenger.Message.VisibleUntil != DateTime.MaxValue)
                                 {
-                                    <span>@Texts.VisibleUntilText</span>
-                                    <span class="" title="@Utility.ToLocalFullDateString(messenger.Message.VisibleUntil.ToLocalTime())">@Utility.ToDateString(messenger.Message.VisibleUntil.ToLocalTime())</span>
+                                    <span class="smv-pill" title="@Utility.ToLocalFullDateString(messenger.Message.VisibleUntil.ToLocalTime())">
+                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                             stroke="currentColor" stroke-width="2.2"
+                                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <polyline points="12 6 12 12 16 14"/>
+                                        </svg>
+                                        @Texts.VisibleUntilText
+                                        @Utility.ToDateString(messenger.Message.VisibleUntil.ToLocalTime())
+                                    </span>
                                 }
                                 else if (messenger.Message.Visibility == SecureMsgrVisibility.Once)
                                 {
-                                    <span>@Texts.VisibilityText</span>
-                                    <span class="">@messenger.Message.Visibility.ToString()</span>
+                                    <span class="smv-pill smv-pill--once">
+                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                             stroke="currentColor" stroke-width="2.2"
+                                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                            <circle cx="12" cy="12" r="3"/>
+                                        </svg>
+                                        @Texts.VisibilityText @messenger.Message.Visibility
+                                    </span>
                                 }
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="text-msg message-content" id="secured-messenger-view-@messenger.Id" style="@LatestMessageStyle">
+                            </div>
+                        }
+                    </div>
+
+                    <div class="smv-actions" @onclick:stopPropagation="true">
+                        <button type="button" class="smv-icon-btn smv-icon-btn--primary"
+                                title="Reply"
+                                data-id="@messenger.Id"
+                                @onclick="() => ViewSecMsgrViewModel.ReplyMessage(messenger.Id, parentId, replyReceivers)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 17 4 12 9 7"/>
+                                <path d="M20 18v-2a4 4 0 00-4-4H4"/>
+                            </svg>
+                        </button>
+
+                        @if (showDelete)
+                        {
+                            <button type="button" class="smv-icon-btn smv-icon-btn--danger"
+                                    title="Delete"
+                                    data-id="@messenger.Id"
+                                    @onclick="async () => await ViewSecMsgrViewModel.DeleteMessageById(messenger.Id, parentId, ViewSecMsgrViewModel.Messenger.SecMessengerFilterTab)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6l-1.5 14a2 2 0 01-2 2H8.5a2 2 0 01-2-2L5 6"/>
+                                    <path d="M10 11v6M14 11v6"/>
+                                </svg>
+                            </button>
+                        }
+
+                        <time class="smv-time"
+                              title="@Utility.ToLocalFullDateString(messenger.CreatedUtc)">
+                            @Utility.ToDateString(messenger.CreatedUtc.ToLocalTime())
+                        </time>
+                    </div>
+                </header>
+
+                @* ── Body ───────────────────────────────────────── *@
+                <div class="smv-body"
+                     id="secured-messenger-view-@messenger.Id"
+                     style="@bodyToggleStyle">
                     @if (messenger.Message.TheMessage != null && !messenger.ShowLoadingWheel)
                     {
-                        <textarea name="encryptedMessage" id="secured-mess-body" maxlength="100000" @bind="messenger.Message.TheMessage" readonly autofocus></textarea>
+                        <textarea name="encryptedMessage"
+                                  id="secured-mess-body"
+                                  class="smv-textarea"
+                                  maxlength="100000"
+                                  @bind="messenger.Message.TheMessage"
+                                  readonly autofocus></textarea>
                     }
                 </div>
+
                 @if (messenger.ShowLoadingWheel)
                 {
-                    <div class="text-msg message-content messager-loading" id="messenger-view-loading-section-@messenger.Id">
-                        <span>@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage</span>
+                    <div class="smv-body smv-body--loading"
+                         id="messenger-view-loading-section-@messenger.Id">
+                        <span class="smv-spinner" aria-hidden="true"></span>
+                        <span>@Texts.ProgressIndicatorWaitMessage</span>
                     </div>
                 }
-            </div>
-        </div>
-
-        replyIndex++;
-    }
+            </article>
+        }
+    </div>
 }
 
 @code {
-
-    string currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address;
+    // Deferred: accessing DefaultEncryptionIdentity at field-init time throws
+    // if no user is logged in. Read it lazily in OnInitialized() instead.
+    string currentUser = "";
 
     protected override void OnInitialized()
     {
+        if (Resolve.KnownIdentities.IsLoggedOn)
+        {
+            currentUser = New<KnownIdentities>().DefaultEncryptionIdentity.UserEmail.Address;
+        }
         ViewSecMsgrViewModel.OnUpdateViewState += UpdatePageState;
+    }
+
+    public void Dispose()
+    {
+        ViewSecMsgrViewModel.OnUpdateViewState -= UpdatePageState;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -146,6 +213,41 @@
         {
             StateHasChanged(); // Refresh UI
         });
+    }
+
+    /// <summary>
+    /// Two-char avatar initials. Falls back to "?" so the circle is
+    /// never empty (looked broken in the legacy markup).
+    /// </summary>
+    private static string InitialsOf(string source)
+    {
+        if (string.IsNullOrWhiteSpace(source))
+        {
+            return "?";
+        }
+        string trimmed = source.Trim();
+        return trimmed.Length >= 2
+            ? trimmed[..2].ToUpperInvariant()
+            : trimmed[..1].ToUpperInvariant();
+    }
+
+    /// <summary>
+    /// Recipients minus currentUser, then add the sender so a quick
+    /// "Reply all" goes to the original sender too. Matches the legacy
+    /// flow exactly — extracted into a helper to keep the foreach body
+    /// readable.
+    /// </summary>
+    private IList<string> BuildReplyUserList(IEnumerable<string> recipients, string sender)
+    {
+        IList<string> list = recipients
+            .Where(re => !re.Equals(currentUser))
+            .ToList();
+
+        if (!list.Any(ru => ru == sender))
+        {
+            list.Add(sender);
+        }
+        return list;
     }
 
     private async Task ViewSecuredMessage(Guid messageId, string messageContent)

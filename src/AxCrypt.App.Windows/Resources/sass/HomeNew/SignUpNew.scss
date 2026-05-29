@@ -1,0 +1,214 @@
+// New sign-up page (.sup2-*)
+// Three-step compact flow: Account → Verify → Password
+
+// ── Layout ────────────────────────────────────────────────────────
+.sup2-form  { display: flex; align-items: flex-start; justify-content: center; }
+
+// Scroll wrapper — makes the form panel scroll vertically on short
+// windows instead of clipping the password fields or the CTA button.
+.sup2-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+
+    // Always-visible vertical scrollbar so users on short windows
+    // can see they can scroll to reach the full form.
+    &::-webkit-scrollbar       { width: 6px; }
+    &::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 9px; }
+    &::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 9px;
+        &:hover { background: #9ca3af; }
+    }
+
+    // Firefox
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f3f4f6;
+}
+
+.sup2-inner { width: 100%; max-width: 400px; padding: 1rem 1.5rem; }
+
+// ── Step indicator ────────────────────────────────────────────────
+.sup2-steps {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+    gap: 0;
+}
+
+.sup2-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.sup2-step-sep {
+    flex: 1;
+    height: 2px;
+    background: #e5e7eb;
+    margin: 0 6px 18px;
+    transition: background 0.3s;
+}
+
+.sup2-step--done .sup2-step-sep { background: #16a34a; }
+
+.sup2-step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: #e5e7eb;
+    color: #9ca3af;
+    transition: background 0.3s, color 0.3s;
+}
+
+.sup2-step--active .sup2-step-dot,
+.sup2-step--done   .sup2-step-dot {
+    background: #16a34a;
+    color: #fff;
+}
+
+.sup2-step-label {
+    font-size: 0.7rem;
+    color: #9ca3af;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.sup2-step--active .sup2-step-label,
+.sup2-step--done   .sup2-step-label { color: #16a34a; }
+
+// ── Per-step heading ──────────────────────────────────────────────
+.sup2-head { margin-bottom: 1.25rem; }
+
+// ── Account type toggle (step 1) ──────────────────────────────────
+.sup2-type-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 0.25rem;
+}
+
+.sup2-type-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 0.85rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s, background 0.2s;
+
+    &:hover        { border-color: #86efac; background: #f0fdf4; }
+    &--active      { border-color: #16a34a; background: #f0fdf4; }
+}
+
+.sup2-type-label { font-size: 0.9rem;  font-weight: 700; color: #111; }
+.sup2-type-sub   { font-size: 0.72rem; color: #6b7280; }
+
+// ── CTA button ────────────────────────────────────────────────────
+.sup2-cta { margin-top: 1.25rem; }
+
+// ── Step divider (separates OTP from password on combined step) ───
+.sup2-step-divider {
+    height: 1px;
+    background: #e5e7eb;
+    margin: 1.1rem 0 1rem;
+    position: relative;
+
+    &::after {
+        content: "then";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 0 10px;
+        font-size: 0.72rem;
+        color: #9ca3af;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+    }
+}
+
+// ── OTP boxes (step 2) ────────────────────────────────────────────
+.sup2-otp-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin: 1rem 0 0.75rem;
+}
+
+.sup2-otp-box {
+    width: 46px;
+    height: 56px;
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+    background: #fff;
+    color: #111;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &:focus    { border-color: #16a34a; box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15); }
+    &--filled  { border-color: #16a34a; }
+}
+
+// ── Resend row (step 2) ───────────────────────────────────────────
+.sup2-resend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.25rem;
+}
+
+.sup2-resend-btn {
+    background: none;
+    border: 1.5px solid #16a34a;
+    border-radius: 20px;
+    color: #16a34a;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 3px 12px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover { background: #16a34a; color: #fff; }
+}
+
+.sup2-resend-cooldown { font-size: 0.78rem; color: #9ca3af; }
+
+// ── Back button ───────────────────────────────────────────────────
+.sup2-back-row { margin-top: 0.75rem; }
+
+.sup2-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6b7280;
+    font-size: 0.82rem;
+    padding: 4px 6px;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+
+    &:hover { color: #111; background: #f3f4f6; }
+}

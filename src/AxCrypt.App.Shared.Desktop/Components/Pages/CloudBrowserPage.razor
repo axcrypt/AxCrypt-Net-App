@@ -1,5 +1,6 @@
 @using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser
 @using AxCrypt.App.Shared.Desktop.Components.Shared
+@using AxCrypt.App.Shared.Helpers
 @using AxCrypt.App.Shared.UI.ViewModels
 @using AxCrypt.App.Shared.Utility
 @using AxCrypt.App.Shared.ViewModels.FileBrowser
@@ -20,7 +21,7 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="15 18 9 12 15 6" />
             </svg>
-            <span>Back</span>
+            <span>@Texts.PromptBackLinkText</span>
         </button>
 
         <div class="cbp-header-title">
@@ -39,13 +40,13 @@
                     class="cbp-tab @(ViewModel.selectedTab == "all" ? "cbp-tab--active" : "")"
                     role="tab" aria-selected="@(ViewModel.selectedTab == "all")"
                     @onclick='async () => await ShowTab("all")'>
-                All files
+                @Texts.FileFilterFileTypeAllFiles
             </button>
             <button type="button"
                     class="cbp-tab @(ViewModel.selectedTab == "sharedWithMe" ? "cbp-tab--active" : "")"
                     role="tab" aria-selected="@(ViewModel.selectedTab == "sharedWithMe")"
                     @onclick='async () => await ShowTab("sharedWithMe")'>
-                Shared with me
+                @Texts.SharedWithMeText
             </button>
             @if (ViewModel.SelectedCloudProvider != AxCrypt.Core.IO.FileProvider.OneDrive)
             {
@@ -53,7 +54,7 @@
                         class="cbp-tab @(ViewModel.selectedTab == "sharedByMe" ? "cbp-tab--active" : "")"
                         role="tab" aria-selected="@(ViewModel.selectedTab == "sharedByMe")"
                         @onclick='async () => await ShowTab("sharedByMe")'>
-                    Shared by me
+                    @Texts.SharedByMeText
                 </button>
             }
         </nav>
@@ -107,7 +108,7 @@
     @if (!ViewModel.IsSearchResultVisible && ViewModel.selectedTab == "all")
     {
         <nav class="cbp-breadcrumb" aria-label="Folder path">
-            <button type="button" class="cbp-bc-item" @onclick="async () => await ViewModel.NavigateBackToPath()">
+            <button type="button" class="cbp-bc-item" @onclick="async () => await WithLoading(async () => await ViewModel.NavigateBackToPath())">
                 @ViewModel.PageTitle
             </button>
             @foreach (FolderItem folder in ViewModel.OpenedFoldersList.TakeLast(4))
@@ -116,7 +117,7 @@
                 <button type="button"
                         class="cbp-bc-item"
                         title="@folder.DirectoryName"
-                        @onclick="async () => await ViewModel.NavigateBackToPath(folder.FileID)">
+                        @onclick="async () => await WithLoading(async () => await ViewModel.NavigateBackToPath(folder.FileID))">
                     @folder.DirectoryName
                 </button>
             }
@@ -127,7 +128,7 @@
     {
         <div class="cbp-search-info">
             Search results for "<strong>@ViewModel.SearchQuery</strong>"
-            <button type="button" class="cbp-link" @onclick="ClearSearch">Clear</button>
+            <button type="button" class="cbp-link" @onclick="ClearSearch">@Texts.ClearButtonText</button>
         </div>
     }
 
@@ -144,40 +145,53 @@
                     <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
                 </svg>
                 <p class="cbp-empty-title">@Texts.NoFilesFoundText</p>
-                <p class="cbp-empty-sub">Drop a file in your cloud account, or upload one from this device.</p>
+                <p class="cbp-empty-sub">@Texts.FileListSubTitle</p>
                 <button type="button" class="cbp-btn cbp-btn--primary" @onclick="async () => await ViewModel.AddFiles()">
-                    Add files from this device
+                    @Texts.FileListButtonText
                 </button>
             </div>
         }
         else if (IsListView)
         {
-            <ul class="cbp-list" role="list">
-                @foreach (FilePickerItemViewModel file in ViewModel.Files)
-                {
-                    string parentPath = file.ParentPath + "/" + file.FileName;
-                    <li class="cbp-row @(file.IsSelected ? "cbp-row--selected" : "")"
-                        @ondblclick="async () => await OnFolderClicked(file)"
-                        @oncontextmenu="(e) => ShowContextMenu(e)"
-                        @oncontextmenu:preventDefault="true">
-                        @if (!file.IsFolder)
-                        {
-                            <input type="checkbox" class="cbp-row-check"
-                                   checked="@file.IsSelected"
-                                   @onchange="() => OnCheckboxChanged(file)" />
-                        }
-                        else
-                        {
-                            <span class="cbp-row-check cbp-row-check--hidden"></span>
-                        }
-                        <img class="cbp-row-icon @(file.IsFolder ? "Icon-folder" : ViewModel.GetFileTypeIcon(file.FileName))" alt="" />
-                        <div class="cbp-row-body">
-                            <span class="cbp-row-name">@((MarkupString)HighlightMatch(file.FileName))</span>
+            <div class="cbp-list-wrap" role="table" aria-label="Cloud files">
+                <div class="cbp-list-header" role="row">
+                    <span class="cbp-col-check" aria-hidden="true"></span>
+                    <span class="cbp-col-icon" aria-hidden="true"></span>
+                    <span class="cbp-col-name" role="columnheader">@Texts.NameLabel</span>
+                    <span class="cbp-col-size" role="columnheader">@Texts.FileSizeColumnHeaderText</span>
+                    <span class="cbp-col-modified" role="columnheader">@Texts.LastModifiedTimeColumnHeaderText</span>
+                    <span class="cbp-col-location" role="columnheader">Location</span>
+                </div>
+                <ul class="cbp-list" role="rowgroup">
+                    @foreach (FilePickerItemViewModel file in ViewModel.Files)
+                    {
+                        string parentPath = DisplayCell(file.ParentPath);
+                        <li class="cbp-row @(file.IsSelected ? "cbp-row--selected" : "")"
+                            role="row"
+                            @ondblclick="async () => await OnFolderClicked(file)"
+                            @oncontextmenu="(e) => ShowContextMenu(e)"
+                            @oncontextmenu:preventDefault="true">
+                            @if (!file.IsFolder)
+                            {
+                                <input type="checkbox" class="cbp-row-check"
+                                       checked="@file.IsSelected"
+                                       @onchange="() => OnCheckboxChanged(file)" />
+                            }
+                            else
+                            {
+                                <span class="cbp-row-check cbp-row-check--hidden"></span>
+                            }
+                            <span class="cbp-row-icon" aria-hidden="true">@((MarkupString)FileIconSvg(file.IsFolder, file.FileName))</span>
+                            <div class="cbp-row-body">
+                                <span class="cbp-row-name">@((MarkupString)HighlightMatch(file.FileName))</span>
+                            </div>
+                            <span class="cbp-row-size">@DisplayCell(file.FileSize)</span>
+                            <span class="cbp-row-modified">@DisplayCell(file.ModifiedTime)</span>
                             <span class="cbp-row-path">@((MarkupString)HighlightMatch(parentPath))</span>
-                        </div>
-                    </li>
-                }
-            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
         }
         else
         {
@@ -190,7 +204,7 @@
                             @ondblclick="async () => await OnFolderClicked(file)"
                             @oncontextmenu="(e) => ShowContextMenu(e)"
                             @oncontextmenu:preventDefault="true">
-                        <img class="cbp-tile-icon @(file.IsFolder ? "Icon-folder" : ViewModel.GetFileTypeIcon(file.FileName))" alt="" />
+                        <span class="cbp-tile-icon" aria-hidden="true">@((MarkupString)FileIconSvg(file.IsFolder, file.FileName))</span>
                         <span class="cbp-tile-name">@((MarkupString)HighlightMatch(file.FileName))</span>
                     </button>
                 }
@@ -203,7 +217,7 @@
     {
         <div class="cbp-actionbar" role="region" aria-label="Bulk actions">
             <span class="cbp-actionbar-count">@ViewModel.SelectedFiles.Count selected</span>
-            <button type="button" class="cbp-btn cbp-btn--ghost" @onclick="ClearSelection">Clear</button>
+            <button type="button" class="cbp-btn cbp-btn--ghost" @onclick="ClearSelection">@Texts.ClearButtonText</button>
             <span class="cbp-actionbar-spacer"></span>
             <button type="button" class="cbp-btn cbp-btn--ghost"
                     @onclick="async () => await UpdateFileOperation(FileOperationOption.OpenSecured)">
@@ -229,13 +243,15 @@
            page is never "empty hands" — adding files is the one action
            that doesn't require a selection. *@
         <div class="cbp-actionbar cbp-actionbar--idle">
-            <span class="cbp-actionbar-hint">Tip: double-click a folder to open it, or select files to encrypt / share / open.</span>
+            <span class="cbp-actionbar-hint">@Texts.CloudBrowserPageTips</span>
             <button type="button" class="cbp-btn cbp-btn--primary" @onclick="async () => await ViewModel.AddFiles()">
-                + Add files
+                @Texts.CloudBrowserPageTips1
             </button>
         </div>
     }
 </div>
+
+<AxCrypt.App.Shared.Desktop.Components.Home.ShareKeyComponent />
 
 <script>
     window.cbpScrollToFirstMatch = function () {
@@ -276,21 +292,51 @@
 
     private async Task ShowTab(string tabId)
     {
-        switch (tabId)
+        // Surface the loader for every tab switch — the underlying provider
+        // call (NavigateBackToPath / list shared) only flips ShowProgressBar
+        // for selection-action paths, so it has to be toggled explicitly here
+        // for every list refresh otherwise the page looks frozen on a slow
+        // network.
+        // Store the raw tabId key so the tab comparison in markup (== "all" etc.)
+        // always matches — previously Texts.* values were stored here causing the
+        // active-tab highlight to break after the first click.
+        await WithLoading(async () =>
         {
-            case "all":
-                await ViewModel.NavigateBackToPath("root");
-                ViewModel.selectedTab = "all";
-                break;
-            case "sharedWithMe":
-                await ViewModel.GetSharedWithFileListAsync();
-                ViewModel.selectedTab = "sharedWithMe";
-                break;
-            case "sharedByMe":
-                await ViewModel.GetSharedByFileListAsync();
-                ViewModel.selectedTab = "sharedByMe";
-                break;
+            ViewModel.selectedTab = tabId;
+            switch (tabId)
+            {
+                case "all":
+                    await ViewModel.NavigateBackToPath("root");
+                    break;
+                case "sharedWithMe":
+                    await ViewModel.GetSharedWithFileListAsync();
+                    break;
+                case "sharedByMe":
+                    await ViewModel.GetSharedByFileListAsync();
+                    break;
+            }
+        });
+    }
+
+    private async Task WithLoading(Func<Task> operation)
+    {
+        ViewModel.ShowProgressBar = true;
+        await InvokeAsync(StateHasChanged);
+        try
+        {
+            await operation();
         }
+        catch (Exception ex)
+        {
+            // Hide the loader before showing the error so the popup isn't
+            // covered by the blocking AxLoader scrim.
+            ViewModel.ShowProgressBar = false;
+            await InvokeAsync(StateHasChanged);
+            AxCServiceProviderExtension.ErrorReportService?.Report(ex, "Cloud browser");
+            return;
+        }
+        ViewModel.ShowProgressBar = false;
+        await InvokeAsync(StateHasChanged);
     }
 
     private void SetView(bool listView)
@@ -327,7 +373,9 @@
         {
             return;
         }
-        await ViewModel.ProcessSelectedFile(file);
+        // Folder drill-in hits the cloud provider — keep the user informed
+        // while the listing is fetched.
+        await WithLoading(async () => await ViewModel.ProcessSelectedFile(file));
     }
 
     private void ShowContextMenu(MouseEventArgs e)
@@ -344,7 +392,7 @@
         if (e.Key == "Enter")
         {
             ViewModel.IsSearchResultVisible = true;
-            await ViewModel.SearchAsync(ViewModel.SearchQuery);
+            await WithLoading(async () => await ViewModel.SearchAsync(ViewModel.SearchQuery));
         }
     }
 
@@ -352,7 +400,7 @@
     {
         ViewModel.IsSearchResultVisible = false;
         ViewModel.SearchQuery = string.Empty;
-        await ViewModel.NavigateBackToPath("root");
+        await WithLoading(async () => await ViewModel.NavigateBackToPath("root"));
     }
 
     private async Task ClearSelection()
@@ -370,6 +418,12 @@
     {
         ViewModel.SelectedFileOperation = operation;
         await ViewModel.ProcessSelectedFileItemActionAsync();
+
+        // After any action (encrypt, decrypt, delete, share) force a re-render
+        // so the file list reflects changes immediately — the ViewModel may have
+        // already raised OnUpdateViewState, but a direct call here guarantees the
+        // UI is consistent even if the event fires on a background thread.
+        await InvokeAsync(StateHasChanged);
     }
 
     private string HighlightMatch(string input)
@@ -384,5 +438,65 @@
 
         return regex.Replace(System.Net.WebUtility.HtmlEncode(input),
             match => $"<mark class=\"cbp-hl\">{match.Value}</mark>");
+    }
+
+    private static string DisplayCell(string value)
+    {
+        return string.IsNullOrWhiteSpace(value) ? "-" : value;
+    }
+
+    /// <summary>
+    /// Returns a crisp inline SVG icon for a file or folder.
+    /// SVG avoids the blur that CSS background-image icons produce at
+    /// non-integer scale factors (common in HiDPI / MAUI WebView).
+    /// </summary>
+    private static string FileIconSvg(bool isFolder, string fileName)
+    {
+        if (isFolder)
+        {
+            return "<svg width='20' height='20' viewBox='0 0 24 24' fill='none' " +
+                   "stroke='#f59e0b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'>" +
+                   "<path d='M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z'/>" +
+                   "</svg>";
+        }
+
+        string ext = System.IO.Path.GetExtension(fileName).ToLowerInvariant();
+
+        // Encrypted AxCrypt file — use the official brand icon
+        if (ext == ".axx")
+        {
+            return "<img src='/images/default/AxCrypt_Icon.svg' width='20' height='20' " +
+                   "style='object-fit:contain;' alt='AxCrypt encrypted file' />";
+        }
+
+        // Image files
+        if (ext is ".jpg" or ".jpeg" or ".png" or ".gif" or ".bmp" or ".svg" or ".webp")
+        {
+            return "<svg width='20' height='20' viewBox='0 0 24 24' fill='none' " +
+                   "stroke='#8b5cf6' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'>" +
+                   "<rect x='3' y='3' width='18' height='18' rx='2'/>" +
+                   "<circle cx='8.5' cy='8.5' r='1.5'/>" +
+                   "<polyline points='21 15 16 10 5 21'/>" +
+                   "</svg>";
+        }
+
+        // PDF
+        if (ext == ".pdf")
+        {
+            return "<svg width='20' height='20' viewBox='0 0 24 24' fill='none' " +
+                   "stroke='#ef4444' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'>" +
+                   "<path d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/>" +
+                   "<polyline points='14 2 14 8 20 8'/>" +
+                   "<line x1='9' y1='15' x2='15' y2='15'/>" +
+                   "<line x1='9' y1='12' x2='11' y2='12'/>" +
+                   "</svg>";
+        }
+
+        // Generic file
+        return "<svg width='20' height='20' viewBox='0 0 24 24' fill='none' " +
+               "stroke='#6b7280' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'>" +
+               "<path d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/>" +
+               "<polyline points='14 2 14 8 20 8'/>" +
+               "</svg>";
     }
 }

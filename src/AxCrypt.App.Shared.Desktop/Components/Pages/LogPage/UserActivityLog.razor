@@ -1,4 +1,5 @@
 ﻿@page "/useractivitylog"
+@implements IDisposable
 @using AxCrypt.Abstractions
 @using AxCrypt.App.Shared.Services
 @using AxCrypt.App.Shared.Services.Interface
@@ -118,6 +119,12 @@
         Store = New<FileActivityStore>();
         UpdateLog();
         Store!.OnUpdateViewState += UpdateState;
+    }
+
+    public void Dispose()
+    {
+        if (Store != null)
+            Store.OnUpdateViewState -= UpdateState;
     }
 
     protected override void OnAfterRender(bool firstRender)

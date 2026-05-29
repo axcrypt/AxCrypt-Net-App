@@ -1,0 +1,166 @@
+// ── Secured Messenger UI (smx-*) ───────────────────────────────────
+// Filter tabs, list-pane header, bulk-action buttons, reader pane.
+
+// ── Filter strip ──────────────────────────────────────────────────
+.smx-filter-tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.smx-filter-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    transition: color .12s, background .12s;
+}
+
+.smx-filter-tab svg {
+    flex-shrink: 0;
+    opacity: .75;
+    transition: opacity .12s;
+}
+
+.smx-filter-tab:hover {
+    color: #111827;
+    background: rgba(72, 119, 44, .06);
+}
+
+.smx-filter-tab:hover svg { opacity: 1; }
+
+.smx-filter-tab--active { color: #48772C; }
+
+.smx-filter-tab--active svg { opacity: 1; }
+
+// Active-tab underline
+.smx-filter-tab--active::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: -1px;
+    height: 2.5px;
+    background: #48772C;
+    border-radius: 2px;
+}
+
+// Tighten parent container gap below tabs
+#search-message-list.parent-container {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+// ── List-pane header ──────────────────────────────────────────────
+.smx-list-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    min-height: 48px;
+}
+
+.smx-list-header-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.smx-list-header-title .mutli-slct-btn {
+    font-weight: 700;
+    font-size: 13.5px;
+}
+
+.smx-list-header-title .select-option {
+    cursor: pointer;
+    opacity: .75;
+    transition: opacity .12s;
+}
+
+.smx-list-header-title .select-option:hover { opacity: 1; }
+
+.smx-list-header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    justify-content: flex-start;
+}
+
+// ── Bulk-action buttons ───────────────────────────────────────────
+.smx-bulk-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background .12s, border-color .12s, opacity .12s;
+}
+
+.smx-bulk-btn:hover:not(:disabled) {
+    background: #f3f4f6;
+    border-color: #e5e7eb;
+}
+
+.smx-bulk-btn:disabled {
+    opacity: .38;
+    cursor: not-allowed;
+}
+
+.smx-bulk-btn--danger:hover:not(:disabled) {
+    background: rgba(220, 38, 38, .10);
+    border-color: rgba(220, 38, 38, .25);
+}
+
+.smx-bulk-btn img {
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+// ── Compose button ────────────────────────────────────────────────
+.smx-new-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    height: 32px;
+    margin: 0;
+}
+
+.smx-new-btn svg { flex-shrink: 0; }
+
+// ── Dark theme ────────────────────────────────────────────────────
+
+html[data-theme="dark"] {
+    .smx-filter-tabs { border-bottom-color: #2A3340; }
+    .smx-filter-tab { color: #B5BCC7; }
+    .smx-filter-tab:hover { color: #E8ECF1; background: rgba(127, 204, 92, .12); }
+    .smx-filter-tab--active { color: #B8E89A; }
+    .smx-filter-tab--active::after { background: #7FCC5C; }
+    .smx-bulk-btn:hover:not(:disabled) {
+        background: rgba(255, 255, 255, .06);
+        border-color: rgba(255, 255, 255, .12);
+    }
+    .smx-bulk-btn--danger:hover:not(:disabled) {
+        background: rgba(248, 113, 113, .14);
+        border-color: rgba(248, 113, 113, .35);
+    }
+}

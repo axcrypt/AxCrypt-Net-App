@@ -86,5 +86,29 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
                     return false;
             }
         }
+
+        public void DisconnetCloudService(FileProviderItem provider)
+        {
+            switch (provider.Value)
+            {
+                case Core.IO.FileProvider.GoogleDrive:
+                    GoogleDriveAccessInfo googleDriveAccessInfo = New<FileProvidersUserAccessInfo>().GoogleDriveAccessInfo.First();
+                    New<FileProvidersUserAccessInfo>().Remove(googleDriveAccessInfo);
+                    break;
+
+                case Core.IO.FileProvider.OneDrive:
+                    OneDriveAccessInfo oneDriveAccessInfo = New<FileProvidersUserAccessInfo>().OneDriveAccessInfo.First();
+                    New<FileProvidersUserAccessInfo>().Remove(oneDriveAccessInfo);
+                    break;
+
+                case Core.IO.FileProvider.DropBox:
+                    DropBoxAccessInfo dropBoxAccessInfo = New<FileProvidersUserAccessInfo>().DropBoxAccessInfo.First();
+                    New<FileProvidersUserAccessInfo>().Remove(dropBoxAccessInfo);
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }

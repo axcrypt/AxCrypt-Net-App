@@ -1,4 +1,5 @@
-﻿@using AxCrypt.App.Shared.Desktop.Services
+﻿@implements IDisposable
+@using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Desktop.ViewModels.Main
 @using AxCrypt.Content
 
@@ -6,80 +7,114 @@
 
 @if (IsVisible)
 {
-    <div id="modal-dialog6" class="modalDialog">
-        <div style="text-align: left;">
-            <div class="modal-header text-center" style="display:block; font-weight:600;">
-                <span>@Texts.ApplicationConfigurationText</span>
-            </div>
-            <div class="modal-body">
-                <div style="padding-bottom: 15px;">
-                    <label>@Texts.ApplicationConfigurationPathText</label>
-                    <span class="info-tooltip" style="margin:0px 2px -2px 4px;">
-                        <img src="/images/default/IcoInfOld.svg" alt="info"/>
-                        <span class="tooltip-text">
-                            @Texts.ApplicationConfigurationSettingsText
+    <div class="axd-backdrop" @onclick="() => viewModel.CancelButton_Click(null!)">
+        <div class="axd-modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="axd-cfg-title"
+             @onclick:stopPropagation>
+
+            @* ── Header ─────────────────────────────────────────── *@
+            <header class="axd-header">
+                <div class="axd-header-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14" />
+                        <path d="M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07" />
+                    </svg>
+                </div>
+                <div class="axd-header-text">
+                    <h2 id="axd-cfg-title" class="axd-title">@Texts.ApplicationConfigurationText</h2>
+                    <p class="axd-sub">Manage local file paths used by AxCrypt</p>
+                </div>
+                <button type="button" class="axd-close"
+                        @onclick="() => viewModel.CancelButton_Click(null!)"
+                        aria-label="Close">×</button>
+            </header>
+
+            @* ── Body ─────────────────────────────────────────── *@
+            <div class="axd-body">
+
+                @* Config path — read-only *@
+                <div class="axd-field">
+                    <div class="axd-field-label-row">
+                        <label class="axd-label" for="cfg-path">@Texts.ApplicationConfigurationPathText</label>
+                        <span class="axd-tooltip-wrap" tabindex="0">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="12" />
+                                <line x1="12" y1="16" x2="12.01" y2="16" />
+                            </svg>
+                            <span class="axd-tooltip" role="tooltip">@Texts.ApplicationConfigurationSettingsText</span>
                         </span>
-                    </span><br />
-                    <input type="path" @bind="viewModel.AppConfigPath" readonly="readonly" style="width:100%;" />
+                    </div>
+                    <input id="cfg-path" type="text"
+                           class="axd-input axd-input--readonly"
+                           @bind="viewModel.AppConfigPath"
+                           readonly="readonly" aria-readonly="true" />
                 </div>
-                <label>@Texts.TemporaryFilePathText</label>
-                <span class="info-tooltip" style="margin:0px 2px -2px 4px;">
-                    <img src="/images/default/IcoInfOld.svg" alt="info" />
-                    <span class="tooltip-text">
-                        @Texts.TemporarilyStoresText
-                    </span>
-                </span>
-                <div class="center-column">
-                    <input type="path" @bind="viewModel.TempConfigPath" @oninput="(e)=> viewModel.BrowseButton_click(e)" style="width:75%;" />
-                    <button class="button font-medium success btn-small" @onclick="(e)=> viewModel.BrowseButton_click(e)">@Texts.BrowseText</button>
+
+                @* Temp path — editable + browse *@
+                <div class="axd-field">
+                    <div class="axd-field-label-row">
+                        <label class="axd-label" for="tmp-path">@Texts.TemporaryFilePathText</label>
+                        <span class="axd-tooltip-wrap" tabindex="0">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="12" />
+                                <line x1="12" y1="16" x2="12.01" y2="16" />
+                            </svg>
+                            <span class="axd-tooltip" role="tooltip">@Texts.TemporarilyStoresText</span>
+                        </span>
+                    </div>
+                    <div class="axd-path-row">
+                        <input id="tmp-path" type="text" class="axd-input"
+                               @bind="viewModel.TempConfigPath"
+                               @oninput="(e) => viewModel.BrowseButton_click(e)" />
+                        <button type="button" class="axd-btn axd-btn--ghost"
+                                @onclick="(e) => viewModel.BrowseButton_click(e)">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+                            </svg>
+                            @Texts.BrowseText
+                        </button>
+                    </div>
                 </div>
+
+                @if (!string.IsNullOrEmpty(viewModel.ErrorMessage))
+                {
+                    <div class="axd-error" role="alert">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                        <span>@viewModel.ErrorMessage</span>
+                    </div>
+                }
             </div>
-            <div class="modal-footer">
-                <button class="button font-medium success btn-small" @onclick="(e)=> viewModel.ButtonOk_Click(e)">@Texts.ButtonOkText</button>
-                <button class="btn-small font-medium button cancel" @onclick="(e)=> viewModel.CancelButton_Click(e)">@Texts.ButtonCancelText</button>
-            </div>
-            @if (!string.IsNullOrEmpty(viewModel.ErrorMessage))
-            {
-                <div class="error-message"> @viewModel.ErrorMessage</div>
-            }
+
+            @* ── Footer ───────────────────────────────────────── *@
+            <footer class="axd-footer">
+                <button type="button" class="axd-btn axd-btn--ghost"
+                        @onclick="(e) => viewModel.CancelButton_Click(e)">@Texts.ButtonCancelText</button>
+                <button type="button" class="axd-btn axd-btn--primary"
+                        @onclick="(e) => viewModel.ButtonOk_Click(e)">@Texts.ButtonOkText</button>
+            </footer>
         </div>
     </div>
 }
-<style>
-    .info-tooltip {
-        position: relative;
-        display: inline-block;
-        cursor: pointer;
-    }
 
-        .info-tooltip img {
-            width: 16px;
-            height: 16px;
-        }
-
-    .tooltip-text {
-        visibility: hidden;
-        width: 260px;
-        background-color: #333;
-        color: #fff;
-        text-align: left;
-        padding: 8px;
-        border-radius: 5px;
-        position: absolute;
-        z-index: 10;
-        bottom: 125%;
-        left: 50%;
-        transform: translateX(-50%);
-        white-space: normal;
-        line-height: 1.4;
-        font-size: 13px;
-        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    .info-tooltip:hover .tooltip-text {
-        visibility: visible;
-    }
-</style>
 @code {
     private bool IsVisible { get; set; }
 
@@ -89,6 +124,12 @@
         viewModel.OnUpdateViewState += UpdateState;
         viewModel.LogOnViewModel.AdvancedOptionsDialog.OnDialogVisibilityChanged += UpdateAdvancedOptionsState;
         base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        viewModel.OnUpdateViewState -= UpdateState;
+        viewModel.LogOnViewModel.AdvancedOptionsDialog.OnDialogVisibilityChanged -= UpdateAdvancedOptionsState;
     }
 
     void UpdateAdvancedOptionsState(bool isVisible)

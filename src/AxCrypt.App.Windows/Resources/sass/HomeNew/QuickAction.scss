@@ -1,9 +1,7 @@
-﻿/* ═══════════════════════════════════════════
-   Quick Actions
-   Grid of square-ish tiles. Each tile has an icon, a label and a
-   short description — all three must fit inside the box at every
-   column width and the lock badge sits in the top-right corner.
-════════════════════════════════════════════ */
+﻿// Quick Actions
+// Grid of square-ish tiles. Each tile has an icon, a label and a
+// short description — all three must fit inside the box at every
+// column width and the lock badge sits in the top-right corner.
 .quick-actions-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -28,13 +26,13 @@
     overflow: hidden;          // belt-and-braces clip if a long string ever leaks
     min-height: clamp(96px, 15vh, 150px);
 
-    /* Layered action-button shadow.
-       • Outer drop-shadow tinted with the brand so the tile reads as a
-         coloured action chip rather than a flat card.
-       • Inner highlight (inset 0 1px 0 white/14) suggests a lit top edge,
-         the cue most "Material Design" action buttons use to look pressable.
-       Hover lifts the tile, active presses it back down — the classic
-       elevation curve. */
+    // Layered action-button shadow.
+    // • Outer drop-shadow tinted with the brand so the tile reads as a
+    // coloured action chip rather than a flat card.
+    // • Inner highlight (inset 0 1px 0 white/14) suggests a lit top edge,
+    // the cue most "Material Design" action buttons use to look pressable.
+    // Hover lifts the tile, active presses it back down — the classic
+    // elevation curve.
     box-shadow:
         0 1px 1px rgba(0, 0, 0, .06),
         0 4px 10px rgba(72, 119, 44, .22),
@@ -98,7 +96,7 @@
     }
 }
 
-/* Lock chip — top-right corner of a locked tile. */
+// Lock chip — top-right corner of a locked tile.
 .qa-paid-badge {
     position: absolute;
     top: 6px;
@@ -162,26 +160,24 @@
     word-break: break-word;
 }
 
-/* When the tile is enabled (brand-green background), the description
-   inherits the white text but the muted color from the base rule above
-   wins. Force it light for readability against the green tile. */
+// When the tile is enabled (brand-green background), the description
+// inherits the white text but the muted color from the base rule above
+// wins. Force it light for readability against the green tile.
 .qa-btn:not(.disabled) .qa-desc {
     color: rgba(255, 255, 255, .88);
 }
 
-/* ═══════════════════════════════════════════
-   Clean-up attention pill
-   Visible only while files are open (re-encrypt pending)
-════════════════════════════════════════════ */
+// Clean-up attention pill
+// Visible only while files are open (re-encrypt pending)
 .qa-cleanup-pill {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 9px 12px;
     margin: 0 0 12px;
-    background: $HglhtTxt; /* amber-50 */
-    border: 1px solid $BorderClr; /* amber-200 */
-    border-left: 3px solid $BorderClr; /* amber-400 accent */
+    background: $HglhtTxt; // amber-50
+    border: 1px solid $BorderClr; // amber-200
+    border-left: 3px solid $BorderClr; // amber-400 accent
     border-radius: 10px;
     animation: qaCleanupSlideIn .22s cubic-bezier(.4,0,.2,1);
 }
@@ -202,7 +198,7 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: $BtnBackClr; /* amber-100 */
+    background: $BtnBackClr; // amber-100
     display: grid;
     place-items: center;
     flex-shrink: 0;
@@ -225,13 +221,13 @@
 .qa-cleanup-title {
     font-size: 13px;
     font-weight: 600;
-    color: #633806; /* amber-800 */
+    color: #633806; // amber-800
     line-height: 1.2;
 }
 
 .qa-cleanup-sub {
     font-size: 11.5px;
-    color: #854F0B; /* amber-600 */
+    color: #854F0B; // amber-600
     line-height: 1.3;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -239,7 +235,7 @@
 }
 
 .qa-cleanup-btn {
-    background: $ActnBgClr; /* amber-400 */
+    background: $ActnBgClr; // amber-400
     color: #fff;
     border: none;
     border-radius: 7px;
@@ -251,7 +247,7 @@
     transition: background .15s, transform .1s;
 
     &:hover {
-        background: $ActnBgClr; /* amber-600 */
+        background: $ActnBgClr; // amber-600
     }
 
     &:active {

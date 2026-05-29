@@ -409,6 +409,7 @@ namespace AxCrypt.Core.Extensions
                 BusinessAdmin = highPriorityAccount.BusinessAdmin,
                 HadAnyPaidSubscription = highPriorityAccount.HadAnyPaidSubscription,
                 MultiFactorAuthInfo = highPriorityAccount.MultiFactorAuthInfo,
+                SignUpFrom = highPriorityAccount.SignUpFrom
             };
             return merged;
         }

@@ -1,221 +1,497 @@
-﻿@using AxCrypt.App.Shared.ViewModels
+@implements IDisposable
+@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.Content
 @using AxCrypt.Core.UI.FindFilesActivity
 
 @inject IJSRuntime JSRuntime
 @inject FindFilesViewModel ViewModel
 @inject NavigationManager Navigation
+@inject NavPageService navPageService
 
-@if (ViewModel.HasFindFilesCapability)
-{
-    <div class="findfiles-modalDialog">
-        <div>
-            <div class="findfiles-modal-body" @onclick="async () => await HideContextMenu()">
-                <div class="close-img" style="margin-top:15px;margin-right:20px;" @onclick="CloseWindow"></div>
+@*
+    Find Files — redesigned to match Cloud Browser and Vault layout.
 
-                <div>
-                    <img class="Imgfindfiles" alt="find_files_img" />
-                </div>
+    Structure mirrors .cbp-* / .vlt-* pages:
+        Header  (icon + title + subtitle)
+        Toolbar (search input + list/grid toggle)
+        Meta    (match count strip when a query is active)
+        Card    (list view OR grid view)
+          └── context menu (fixed popover)
+        Action bar (selected-file actions, always visible at bottom)
 
-                <div style="margin-bottom:5px;color:black;">
-                    <label for="title" title="@Texts.FindFilesFeatureTooltip" style="font-size:20px;">@Texts.FindFileFeatureTitle</label>
-                    <p>@Texts.FindFilesFeatureDescription</p>
-                </div>
+    CSS lives in HomeNew/FindFiles.scss (.ff-*).
+    All FindFilesViewModel hooks are preserved unchanged.
+*@
 
-                <div class="search-box">
-                    <input id="searchKeyword"
-                           name="searchKeyword"
-                           type="text"
-                           @bind="SearchText"
-                           placeholder="@Texts.FindFilesSearchPlaceholder"
-                           @oninput="async (eargs) => await OnSearchChanged(eargs)" />
+<div class="ff-page" @onclick="async () => await HideContextMenu()">
 
-                    <div class="search-btn"
-                         alt="search"
-                         @onclick="() => ViewModel.FilterSecuredFiles(SearchText)">
-                        <img src="/images/default/IcoSearchWht.svg" alt="search-icon" style="padding: 12px;" />
-                    </div>
-                </div>
-
-                @if (ViewModel.FindFilesCount > 0)
+    @if (!ViewModel.HasFindFilesCapability)
+    {
+        @* ── Locked / paid-gate ───────────────────────────────── *@
+        <div class="ff-locked">
+            <div class="ff-locked-icon" aria-hidden="true">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.6"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                </svg>
+            </div>
+            <h2 class="ff-locked-title">Premium feature</h2>
+            <p class="ff-locked-sub">
+                Find Files searches across every file you've encrypted with
+                AxCrypt. Upgrade to unlock instant search across your library.
+            </p>
+            <button type="button" class="ff-btn ff-btn--primary"
+                    @onclick="@(() => Navigation.NavigateTo("/upgradePage"))">
+                See plans
+            </button>
+        </div>
+    }
+    else
+    {
+        @* ── Toolbar: search + view toggle ───────────────────── *@
+        <div class="ff-toolbar">
+            <div class="ff-search">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input id="searchKeyword"
+                       name="searchKeyword"
+                       type="text"
+                       class="ff-search-input"
+                       @bind="SearchText"
+                       placeholder="@Texts.FindFilesSearchPlaceholder"
+                       @oninput="async e => await OnSearchChanged(e)" />
+                @if (!string.IsNullOrEmpty(SearchText))
                 {
-                    <div class="content-area">
-                        <div class="findfiles-dir-content find-fle-nme" @onclick:stopPropagation id="user_files_section" @onclick="async () => await HideContextMenu()">
-                            <div class="header-bar">
-                                @if (isListView)
-                                {
-                                    <div class="div-file-header">
-                                        <span>@Texts.NameLabel</span>
-                                        <span>@Texts.FindPathTitle</span>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="div-file-header">
-                                        <span>@Texts.NameLabel</span>
-                                    </div>
-                                }
+                    <button type="button" class="ff-search-clear" title="Clear search"
+                            @onclick="() => { SearchText = string.Empty; ViewModel.FilterSecuredFiles(string.Empty); }">
+                        ×
+                    </button>
+                }
+            </div>
 
-                                <div class="display-type">
-                                    <img src="/images/default/IcoList.svg"
-                                         class="@((isListView ? "selected" : ""))"
-                                         @onclick="() => SetView(true)"
-                                         alt="List View" />
+            <div class="ff-view-toggle" role="group" aria-label="View mode">
+                <button type="button"
+                        class="ff-view-btn @(isListView ? "ff-view-btn--active" : "")"
+                        title="List view"
+                        @onclick="() => SetView(true)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <line x1="8" y1="6" x2="21" y2="6" />
+                        <line x1="8" y1="12" x2="21" y2="12" />
+                        <line x1="8" y1="18" x2="21" y2="18" />
+                        <line x1="3" y1="6" x2="3.01" y2="6" />
+                        <line x1="3" y1="12" x2="3.01" y2="12" />
+                        <line x1="3" y1="18" x2="3.01" y2="18" />
+                    </svg>
+                </button>
+                <button type="button"
+                        class="ff-view-btn @(!isListView ? "ff-view-btn--active" : "")"
+                        title="Grid view"
+                        @onclick="() => SetView(false)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
 
-                                    <img src="/images/default/IcoGrid.svg"
-                                         class="@((!isListView ? "selected" : ""))"
-                                         @onclick="() => SetView(false)"
-                                         alt="Grid View" />
-                                </div>
-                            </div>
+        @* ── Match-count strip ────────────────────────────────── *@
+        @if (!string.IsNullOrWhiteSpace(SearchText) && ViewModel.FindFilesCount > 0)
+        {
+            <div class="ff-meta">
+                <strong>@ViewModel.FindFilesCount</strong>
+                @(ViewModel.FindFilesCount == 1 ? "match" : "matches") for
+                <em>"@SearchText"</em>
+            </div>
+        }
 
-                            <div class="files-section @(isListView ? "list-view" : "grid-view")">
-                                @if (isListView)
-                                {
-                                    <ul class="file-list">
-                                        @foreach (FindFilesLog file in ViewModel.FindFilesList)
-                                        {
-                                            string fileName = System.IO.Path.GetFileName(file.FilePath);
-                                            <li class="file-list-item @(ViewModel.SelectedFilePath == file.FilePath ? "selected-list" : "")" @onclick="async () => await SelectFile(fileName, file.FilePath)"
-                                                @oncontextmenu="(e) => ShowContextMenu(e, fileName, file.FilePath)">
-                                                <div class="file-details">
-                                                    <img src="/images/default/AxCrypt_Icon.svg" alt="File Icon" class="list-file-icon" />
-                                                    <span class="file-name @(ViewModel.SelectedFilePath == file.FilePath ? "selected-text" : "")">
-                                                        @((MarkupString)HighlightMatch(fileName))
-                                                    </span>
-                                                    <span class="file-path @(ViewModel.SelectedFilePath == file.FilePath ? "selected-path" : "")">
-                                                        @((MarkupString)HighlightMatch(file.FilePath))
-                                                    </span>
-                                                </div>
-                                                <span class="file-action" @onclick="(e) => ShowContextMenu(e, fileName, file.FilePath)" @onclick:stopPropagation>⋮</span>
-                                            </li>
-                                        }
-                                    </ul>
-                                }
-                                else
-                                {
-                                    <div class="file-grid">
-                                        @foreach (FindFilesLog file in ViewModel.FindFilesList)
-                                        {
-                                            string fileName = System.IO.Path.GetFileName(file.FilePath);
-                                            <div class="file-grid-item @(ViewModel.SelectedFilePath == file.FilePath ? "selected-grid" : "")"
-                                                 @onclick="async () => await SelectFile(fileName, file.FilePath)"
-                                                 @oncontextmenu="(e) => ShowContextMenu(e, fileName, file.FilePath)">
-                                                <img src="/images/default/AxCrypt_Icon.svg" alt="File Icon" class="grid-file-icon" />
-                                                <span class="file-name-grid  @(ViewModel.SelectedFilePath == file.FilePath ? "selected-text" : "")">@((MarkupString)HighlightMatch(fileName))</span>
-                                            </div>
-                                        }
-                                    </div>
-                                }
+        @* ── File card ────────────────────────────────────────── *@
+        @if (ViewModel.FindFilesCount > 0)
+        {
+            <div class="ff-card" id="user_files_section"
+                 @onclick="async () => await HideContextMenu()"
+                 @onclick:stopPropagation>
 
-                                @if (IsContextMenuVisible)
-                                {
-                                    <div class="context-menu-action" style="position: fixed; top: @(ContextMenuY)px;left: @(ContextMenuX)px;transform-origin:@(flipContextMenu) ;transform:@(flipTransform);">
-                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Open", ViewModel.SelectedFilePath)'>@Texts.RecentFilesOpenToolStripMenuItemText</span>
-                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Delete", ViewModel.SelectedFilePath)'>@Texts.RemoveRecentFileToolStripMenuItemText</span>
-                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Decrypt", ViewModel.SelectedFilePath)'>@Texts.DecryptToolStripMenuItemText</span>
-                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("Reveal", ViewModel.SelectedFilePath)'>@Texts.ShowInFolderText</span>
-                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("RenameAnonymously", ViewModel.SelectedFilePath)'>@Texts.AnonymousRenameMenuText</span>
-                                        <span class="menu-item" @onclick='() => ViewModel.HandleActionAsync("RenameOriginal", ViewModel.SelectedFilePath)'>@Texts.RestoreAnonymousNamesMenuText</span>
-                                    </div>
-                                }
-
-                                @if (!isListView && ViewModel.SelectedFile != null)
-                                {
-                                    <div class="detail-section">
-                                        <img src="/images/default/AxCrypt_Icon.svg" alt="Preview" class="detail-image" />
-                                        <span class="detail-label">@Texts.FilePropertiesFileNameToolStripMenuItem</span>
-                                        <span class="detail-filename">@ViewModel.SelectedFile</span>
-                                        <span class="detail-label">@Texts.FindPathTitle</span>
-                                        <span class="detail-filename">@ViewModel.SelectedFilePath</span>
-                                    </div>
-                                }
-                                else if (!isListView)
-                                {
-                                    <div class="select-file">
-                                        <span>@Texts.SelectFileToViewFileInfoText </span>
-                                    </div>
-                                }
-                            </div>
-                        </div>
+                @if (isListView)
+                {
+                    @* Sticky list header *@
+                    <div class="ff-list-head" role="row">
+                        <span class="ff-col-check" aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span role="columnheader">@Texts.NameLabel</span>
+                        <span role="columnheader" class="ff-col-path">@Texts.FindPathTitle</span>
+                        <span aria-hidden="true"></span>
                     </div>
+
+                    <div class="ff-list-wrap">
+                        <ul class="ff-list" role="list">
+                            @foreach (FindFilesLog file in ViewModel.FindFilesList)
+                            {
+                                string fileName = System.IO.Path.GetFileName(file.FilePath);
+                                bool selected   = ViewModel.SelectedFilePath == file.FilePath;
+                                bool isChecked  = _selectedPaths.Contains(file.FilePath);
+
+                                <li class="ff-row @(selected ? "ff-row--selected" : "") @(isChecked ? "ff-row--checked" : "")"
+                                    role="row"
+                                    @onclick="async () => await SelectFile(fileName, file.FilePath)"
+                                    @oncontextmenu="e => ShowContextMenu(e, fileName, file.FilePath)"
+                                    @oncontextmenu:preventDefault="true">
+
+                                    <input type="checkbox"
+                                           class="ff-row-check"
+                                           checked="@isChecked"
+                                           @onchange="() => ToggleSelection(file.FilePath)"
+                                           @onclick:stopPropagation="true" />
+
+                                    <span class="ff-row-icon" aria-hidden="true">
+                                        <img src="/images/default/AxCrypt_Icon.svg" width="18" height="20"
+                                             style="object-fit:contain;" alt="AxCrypt encrypted file" />
+                                    </span>
+
+                                    <div class="ff-row-body">
+                                        <span class="ff-row-name">
+                                            @((MarkupString)HighlightMatch(fileName))
+                                        </span>
+                                    </div>
+
+                                    <span class="ff-row-path-col">
+                                        @((MarkupString)HighlightMatch(file.FilePath))
+                                    </span>
+
+                                    <button type="button"
+                                            class="ff-row-menu"
+                                            aria-label="Row options"
+                                            @onclick="e => ShowContextMenu(e, fileName, file.FilePath)"
+                                            @onclick:stopPropagation>
+                                        <svg width="14" height="14" viewBox="0 0 24 24"
+                                             fill="currentColor" aria-hidden="true">
+                                            <circle cx="12" cy="5"  r="1.6" />
+                                            <circle cx="12" cy="12" r="1.6" />
+                                            <circle cx="12" cy="19" r="1.6" />
+                                        </svg>
+                                    </button>
+                                </li>
+                            }
+                        </ul>
+                    </div>@* ff-list-wrap *@
                 }
                 else
                 {
-                    <div class="file-notfound">
-                        <span>@Texts.NoFilesFoundText </span>
-                        <img src="/images/default/filenotfound.svg" />
-                    </div>
-                }
+                    @* Grid view *@
+                    <div class="ff-grid-wrap">
+                        <div class="ff-grid">
+                            @foreach (FindFilesLog file in ViewModel.FindFilesList)
+                            {
+                                string fileName = System.IO.Path.GetFileName(file.FilePath);
+                                bool selected   = ViewModel.SelectedFilePath == file.FilePath;
+                                bool isChecked  = _selectedPaths.Contains(file.FilePath);
 
-                <div class="modal-footer">
-                    <button class="Close-btn" @onclick="CloseWindow">
-                        @Texts.WixFailureCloseButton
+                                <div class="ff-tile @(selected ? "ff-tile--selected" : "") @(isChecked ? "ff-tile--checked" : "")"
+                                     @onclick="async () => await SelectFile(fileName, file.FilePath)"
+                                     @oncontextmenu="e => ShowContextMenu(e, fileName, file.FilePath)"
+                                     @oncontextmenu:preventDefault="true">
+
+                                    @* Checkbox overlay *@
+                                    <input type="checkbox"
+                                           class="ff-tile-check"
+                                           checked="@isChecked"
+                                           @onchange="() => ToggleSelection(file.FilePath)"
+                                           @onclick:stopPropagation="true" />
+
+                                    <span class="ff-tile-icon" aria-hidden="true">
+                                        <img src="/images/default/AxCrypt_Icon.svg" width="32" height="36" style="object-fit:contain;" alt="AxCrypt encrypted file" />
+                                    </span>
+                                    <span class="ff-tile-name">
+                                        @((MarkupString)HighlightMatch(fileName))
+                                    </span>
+
+                                    @* Three-dot menu button *@
+                                    <button type="button"
+                                            class="ff-tile-menu"
+                                            aria-label="Row options"
+                                            @onclick="e => ShowContextMenu(e, fileName, file.FilePath)"
+                                            @onclick:stopPropagation>
+                                        <svg width="13" height="13" viewBox="0 0 24 24"
+                                             fill="currentColor" aria-hidden="true">
+                                            <circle cx="12" cy="5"  r="1.6" />
+                                            <circle cx="12" cy="12" r="1.6" />
+                                            <circle cx="12" cy="19" r="1.6" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>@* ff-grid / ff-grid-wrap *@
+                }
+            </div>
+
+            @* ── Context menu ─────────────────────────────────── *@
+            @if (IsContextMenuVisible)
+            {
+                <div class="ff-context-menu"
+                     style="top: @(ContextMenuY)px; left: @(ContextMenuX)px;
+                    transform-origin: @flipContextMenu;
+                    transform: @flipTransform;"
+                     role="menu"
+                     @onclick:stopPropagation>
+                    <button type="button" class="ff-context-item" role="menuitem"
+                            @onclick='() => RunActionAsync("Open")'>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                        @Texts.RecentFilesOpenToolStripMenuItemText
+                    </button>
+                    <button type="button" class="ff-context-item" role="menuitem"
+                            @onclick='() => RunActionAsync("Decrypt")'>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 019.9-1" />
+                        </svg>
+                        @Texts.DecryptToolStripMenuItemText
+                    </button>
+                    <button type="button" class="ff-context-item" role="menuitem"
+                            @onclick='() => RunActionAsync("Reveal")'>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+                        </svg>
+                        @Texts.ShowInFolderText
+                    </button>
+                    <button type="button" class="ff-context-item" role="menuitem"
+                            @onclick='() => RunActionAsync("RenameAnonymously")'>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M12 20h9" />
+                            <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                        </svg>
+                        @Texts.AnonymousRenameMenuText
+                    </button>
+                    <button type="button" class="ff-context-item" role="menuitem"
+                            @onclick='() => RunActionAsync("RenameOriginal")'>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <polyline points="1 4 1 10 7 10" />
+                            <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
+                        </svg>
+                        @Texts.RestoreAnonymousNamesMenuText
+                    </button>
+                    <div class="ff-context-divider" role="separator"></div>
+                    <button type="button" class="ff-context-item ff-context-item--danger"
+                            role="menuitem"
+                            @onclick='() => RunActionAsync("Delete")'>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+                            <path d="M10 11v6M14 11v6" />
+                            <path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2" />
+                        </svg>
+                        @Texts.RemoveRecentFileToolStripMenuItemText
                     </button>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        window.scrollToFirstMatch = function () {
-            const el = document.getElementById("firstMatch");
-            if (el) {
-                el.scrollIntoView({ behavior: "smooth", block: "center" });
             }
-        };
+        }
+        else
+        {
+            @* ── Empty state ──────────────────────────────────── *@
+            <div class="ff-empty">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.3"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    <line x1="8" y1="11" x2="14" y2="11" />
+                </svg>
+                <p class="ff-empty-title">@Texts.NoFilesFoundText</p>
+                @if (!string.IsNullOrWhiteSpace(SearchText))
+                {
+                    <p class="ff-empty-sub">
+                        Try a different keyword, or
+                        <button type="button" class="ff-link"
+                                @onclick="() => { SearchText = string.Empty; ViewModel.FilterSecuredFiles(string.Empty); }">
+                            clear the search
+                        </button>.
+                    </p>
+                }
+            </div>
+        }
 
-         window.getWindowHeight = () => window.innerHeight;
-    </script>
-}
+        @* ── Action bar — multi-select (cbp-actionbar pattern) ── *@
+        @if (_selectedPaths.Any())
+        {
+            <div class="ff-actionbar" role="region" aria-label="Bulk actions">
+                <span class="ff-actionbar-file">@_selectedPaths.Count selected</span>
+                <button type="button" class="ff-btn ff-btn--ghost" @onclick="ClearSelection">
+                    @Texts.ClearButtonText
+                </button>
+                <span class="ff-actionbar-spacer"></span>
+                <button type="button" class="ff-btn ff-btn--ghost"
+                        @onclick='async () => await BatchRunAsync("Open")'>
+                    @Texts.RecentFilesOpenToolStripMenuItemText
+                </button>
+                <button type="button" class="ff-btn ff-btn--ghost"
+                        @onclick='async () => await BatchRunAsync("Decrypt")'>
+                    @Texts.DecryptToolStripMenuItemText
+                </button>
+                <button type="button" class="ff-btn ff-btn--ghost"
+                        @onclick='async () => await BatchRunAsync("Reveal")'>
+                    @Texts.ShowInFolderText
+                </button>
+                <button type="button" class="ff-btn ff-btn--primary"
+                        @onclick='async () => await BatchRunAsync("RenameAnonymously")'>
+                    @Texts.AnonymousRenameMenuText
+                </button>
+                <button type="button" class="ff-btn ff-btn--danger"
+                        @onclick='async () => await BatchRunAsync("Delete")'>
+                    @Texts.RemoveRecentFileToolStripMenuItemText
+                </button>
+            </div>
+        }
+        else if (ViewModel.SelectedFile != null)
+        {
+            @* Single-file selection (click without checkbox) *@
+            <div class="ff-actionbar" role="region" aria-label="File actions">
+                <span class="ff-actionbar-file" title="@ViewModel.SelectedFilePath">
+                    @ViewModel.SelectedFile
+                </span>
+                <span class="ff-actionbar-spacer"></span>
+                <button type="button" class="ff-btn ff-btn--ghost"
+                        @onclick='() => RunActionAsync("Open")'>
+                    @Texts.RecentFilesOpenToolStripMenuItemText
+                </button>
+                <button type="button" class="ff-btn ff-btn--ghost"
+                        @onclick='() => RunActionAsync("Decrypt")'>
+                    @Texts.DecryptToolStripMenuItemText
+                </button>
+                <button type="button" class="ff-btn ff-btn--ghost"
+                        @onclick='() => RunActionAsync("Reveal")'>
+                    @Texts.ShowInFolderText
+                </button>
+                <button type="button" class="ff-btn ff-btn--primary"
+                        @onclick='() => RunActionAsync("RenameAnonymously")'>
+                    @Texts.AnonymousRenameMenuText
+                </button>
+                <button type="button" class="ff-btn ff-btn--danger"
+                        @onclick='() => RunActionAsync("Delete")'>
+                    @Texts.RemoveRecentFileToolStripMenuItemText
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="ff-actionbar ff-actionbar--idle">
+                <span class="ff-actionbar-hint">
+                    Select files with the checkboxes, then act — or click a file to select it.
+                </span>
+            </div>
+        }
+    }
+</div>
+
+<script>
+    window.scrollToFirstMatch = function () {
+        const el = document.getElementById("firstMatch");
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+    window.getWindowHeight = () => window.innerHeight;
+</script>
 
 @code {
-
     private bool isListView { get; set; } = true;
-    public bool IsContextMenuVisible { get; set; } = false;
-    public double ContextMenuX { get; set; }
-    public double ContextMenuY { get; set; }
+    private bool IsContextMenuVisible { get; set; }
+    private double ContextMenuX { get; set; }
+    private double ContextMenuY { get; set; }
     private string flipContextMenu { get; set; } = "top left";
     private string flipTransform { get; set; } = "translateY(0)";
-    private double ContextMenuHeight { get; set; } = 210;
+    private const double ContextMenuHeight = 240;
 
     private string SearchText = string.Empty;
+    private Action? _onUpdateViewState;
 
+    // ── Multi-select ──────────────────────────────────────────────
+    private readonly HashSet<string> _selectedPaths = new();
+
+    private void ToggleSelection(string filePath)
+    {
+        if (!_selectedPaths.Remove(filePath))
+            _selectedPaths.Add(filePath);
+    }
+
+    private void ClearSelection()
+    {
+        _selectedPaths.Clear();
+        StateHasChanged();
+    }
+
+    private async Task BatchRunAsync(string action)
+    {
+        foreach (string path in _selectedPaths.ToList())
+        {
+            await ViewModel.HandleActionAsync(action, path);
+        }
+        ClearSelection();
+        await HideContextMenu();
+    }
+
+    // ── Lifecycle ─────────────────────────────────────────────────
     protected override void OnInitialized()
     {
-        ViewModel.OnUpdateViewState += async () => await UpdateUIState();
+        // Ensure TopBar shows "Find Files" title even on direct URL access.
+        navPageService.SetActivePage("/findfiles");
+
+        _onUpdateViewState = () => _ = UpdateUIState();
+        ViewModel.OnUpdateViewState += _onUpdateViewState;
         ViewModel.LoadSecuredFilesList();
         base.OnInitialized();
     }
 
-    private void CloseWindow()
+    public void Dispose()
     {
-        Navigation.NavigateTo("/");
+        if (_onUpdateViewState != null)
+        {
+            ViewModel.OnUpdateViewState -= _onUpdateViewState;
+            _onUpdateViewState = null;
+        }
     }
 
+    // ── Helpers ───────────────────────────────────────────────────
     private string HighlightMatch(string input)
     {
         if (string.IsNullOrWhiteSpace(SearchText))
             return System.Net.WebUtility.HtmlEncode(input);
 
         string pattern = System.Text.RegularExpressions.Regex.Escape(SearchText);
-        System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        var regex = new System.Text.RegularExpressions.Regex(
+                             pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
         int matchCount = 0;
-        string highlighted = regex.Replace(System.Net.WebUtility.HtmlEncode(input), match =>
+        return regex.Replace(System.Net.WebUtility.HtmlEncode(input), match =>
         {
             matchCount++;
-            string spanId = matchCount == 1 ? "id='firstMatch'" : "";
-            return $"<span class=\"highlight\" {spanId}>{match.Value}</span>";
+            string id = matchCount == 1 ? "id='firstMatch'" : "";
+            return $"<mark class=\"ff-hl\" {id}>{match.Value}</mark>";
         });
-
-        return highlighted;
     }
 
     private async Task OnSearchChanged(ChangeEventArgs e)
     {
         SearchText = e.Value?.ToString() ?? "";
         await Task.Yield();
+        ViewModel.FilterSecuredFiles(SearchText);
         await JSRuntime.InvokeVoidAsync("scrollToFirstMatch");
     }
 
@@ -237,17 +513,20 @@
     {
         ViewModel.SelectedFile = fileName;
         ViewModel.SelectedFilePath = filePath;
-        ContextMenuX = e.PageX;
-        ContextMenuY = e.PageY;
+
+        ContextMenuX = e.ClientX;
+        ContextMenuY = e.ClientY;
 
         double windowHeight = await JSRuntime.InvokeAsync<double>("getWindowHeight");
-
-        flipContextMenu = "top left";
-        flipTransform = "translateY(0)";
         if (ContextMenuY + ContextMenuHeight > windowHeight)
         {
             flipContextMenu = "bottom left";
             flipTransform = $"translateY(-{ContextMenuHeight}px)";
+        }
+        else
+        {
+            flipContextMenu = "top left";
+            flipTransform = "translateY(0)";
         }
 
         IsContextMenuVisible = true;
@@ -256,23 +535,19 @@
 
     private async Task HideContextMenu()
     {
-        IsContextMenuVisible = false;
-        await UpdateUIState();
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
+        if (IsContextMenuVisible)
         {
-            JSRuntime.InvokeVoidAsync("document.addEventListener", "click", EventCallback.Factory.Create<MouseEventArgs>(this, HideContextMenu));
+            IsContextMenuVisible = false;
+            await UpdateUIState();
         }
     }
 
-    async Task UpdateUIState()
+    private async Task RunActionAsync(string action)
     {
-        await InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });
+        try { await ViewModel.HandleActionAsync(action, ViewModel.SelectedFilePath); }
+        finally { await HideContextMenu(); }
     }
+
+    private async Task UpdateUIState() =>
+        await InvokeAsync(StateHasChanged);
 }

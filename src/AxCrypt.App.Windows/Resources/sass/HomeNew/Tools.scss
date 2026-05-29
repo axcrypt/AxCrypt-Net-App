@@ -1,6 +1,6 @@
-﻿/* ToolsPage.razor.css — Scoped styles for Tools page */
+﻿// ToolsPage.razor.css — Scoped styles for Tools page
 
-/* ── Shell ─────────────────────────────── */
+// ── Shell ───────────────────────────────
 .tools-shell {
     flex: 1;
     padding: 20px 28px 32px;
@@ -10,7 +10,7 @@
     color: $text-primary;
 }
 
-/* ── Page Header ───────────────────────── */
+// ── Page Header ─────────────────────────
 .tools-header {
     display: flex;
     align-items: flex-start;
@@ -52,7 +52,7 @@
     color: $text-primary;
 }
 
-/* ── Active Tool Panel ─────────────────── */
+// ── Active Tool Panel ───────────────────
 .tool-panel {
     background: #fff;
     border: 1.5px solid $brand-green;
@@ -125,7 +125,7 @@
         color: #ef4444;
     }
 
-/* ── Tool Body ─────────────────────────── */
+// ── Tool Body ───────────────────────────
 .tool-body {
     display: flex;
     flex-direction: column;
@@ -180,7 +180,7 @@
     color: #15803d;
 }
 
-/* Drop Zone */
+// Drop Zone
 .tool-drop-zone {
     border: 2px dashed $border;
     border-radius: 10px;
@@ -230,7 +230,7 @@
     color: $text-muted;
 }
 
-/* Options */
+// Options
 .tool-option-row {
     display: flex;
     align-items: center;
@@ -396,7 +396,7 @@
         background: $brand-green-lt;
     }
 
-/* Action Buttons */
+// Action Buttons
 .tool-action-btn {
     display: flex;
     align-items: center;
@@ -441,7 +441,7 @@
         background: $brand-green-lt;
     }
 
-/* AES upgrade */
+// AES upgrade
 .aes-progress-area {
     display: flex;
     align-items: center;
@@ -471,7 +471,7 @@
     margin-top: 2px;
 }
 
-/* Find results */
+// Find results
 .find-results {
     border: 1px solid $border;
     border-radius: 9px;
@@ -527,7 +527,7 @@
     font-size: 12px;
 }
 
-/* Verify */
+// Verify
 .verify-result {
     display: flex;
     flex-direction: column;
@@ -574,7 +574,7 @@
         font-weight: 600;
     }
 
-/* Spinner */
+// Spinner
 .spinner {
     width: 16px;
     height: 16px;
@@ -591,7 +591,7 @@
     }
 }
 
-/* ── Tool Groups & Grid ─────────────────── */
+// ── Tool Groups & Grid ───────────────────
 .tools-group {
     margin-bottom: 28px;
 }
@@ -732,7 +732,7 @@
     color: #ef4444;
 }
 
-/* Empty state */
+// Empty state
 .tools-empty {
     text-align: center;
     padding: 60px 20px;
@@ -818,14 +818,14 @@
     content: $IcoOpnErrPrtSnpctDefault;
 }
 
-/*.ico-verify-axcrypt {
-    content: $IcoVerifyAxcryptDefault;
-}*/
+// .ico-verify-axcrypt {
+    // content: $IcoVerifyAxcryptDefault;
+    // }
 
-/*.about-us-ico {
-    content: $IcoInfOldDefault;
-}*/
-/* ── Responsive ─────────────────────────── */
+// .about-us-ico {
+    // content: $IcoInfOldDefault;
+    // }
+// ── Responsive ───────────────────────────
 @media (max-width: 700px) {
     .tools-header {
         flex-direction: column;

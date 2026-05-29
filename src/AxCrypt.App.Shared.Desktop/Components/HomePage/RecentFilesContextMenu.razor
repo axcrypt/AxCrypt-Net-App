@@ -45,7 +45,7 @@
             else
             {
                 <span class="ctx-file-name">@SelectedCount items selected</span>
-                <span class="ctx-file-size">Bulk action</span>
+                <span class="ctx-file-size">@Texts.BulkActionText</span>
             }
         </div>
 
@@ -56,7 +56,7 @@
 
         <button class="ctx-item" @onclick="CtxCleanUp">
             <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M9 6v14a2 2 0 002 2h2a2 2 0 002-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
-            <span class="ctx-label">Re-encrypt &amp; close</span>
+            <span class="ctx-label">@((MarkupString)Texts.RecentFilesReencryptClose)</span>
         </button>
 
         <button class="ctx-item @(paidFeaturegateService.IsPaidFeature("share") ? "ctx-item--locked" : "")"
@@ -65,7 +65,7 @@
             <span class="ctx-label">@Texts.ShareKeysToolStripMenuItemText</span>
             @if (paidFeaturegateService.IsPaidFeature("share"))
             {
-                <span class="ctx-lock-badge">PRO</span>
+                <span class="ctx-lock-badge">Text.PROText</span>
             }
         </button>
 
@@ -163,9 +163,9 @@
         {
             CloseMenu();
             paidFeaturegateService.ShowPaidGate(
-                "Key Share",
-                "Share encrypted files securely with a one-time key.",
-                new[] { "One-time share keys", "Revoke access anytime", "Expiry dates on keys" });
+                Texts.KeyShareLabelText,
+                Texts.RecentFileShareContextMenu,
+                new[] { Texts.KeyShareOneTime, Texts.RevokeAccessAnytime, Texts.ExpiryDatesKeys });
             return Task.CompletedTask;
         }
         return RunAndClose(SecuredFilesContextMenu.ShareKey);

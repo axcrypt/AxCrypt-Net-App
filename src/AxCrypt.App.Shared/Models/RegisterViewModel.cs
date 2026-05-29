@@ -37,6 +37,13 @@ public class RegisterViewModel : ViewModelBase
     public async Task ShowDialog(string passphrase, EmailAddress email)
     {
         CreateAccountModel = new CreateNewAccountViewModel(passphrase, email);
+
+        // Reset before showing so that a second call (after the user
+        // previously cancelled and came back) doesn't exit the polling
+        // loop immediately because DialogResult is still the stale Cancel
+        // value from the previous session.
+        DialogResult = DialogResult.None;
+
         ShowSignUp = true;
 
         while (DialogResult == DialogResult.None)

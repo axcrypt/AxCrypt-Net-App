@@ -21,7 +21,6 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
     {
         private int chunkFileSize = GoogleDriveConfiguration.ChunkFileSize;
         private const int maxRetries = 3;
-        private int retryCount = 0;
 
         public class FileInformation
         {
@@ -62,7 +61,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             if (!New<IInternetState>().Connected)
             {
                 throw new InvalidOperationException(
-                    "No Internet Acccess, please check your internet connection."
+                    "No Internet access, please check your internet connection."
                 );
             }
 
@@ -357,25 +356,26 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
         {
             try
             {
-                string queryString = String.Format("'root' in parents and trashed=false");
-                if (fileId.Length > 0)
-                {
-                    queryString = String.Format("parents in '{0}'", fileId);
-                }
+                // Use the correct Google Drive query syntax: 'id' in parents
+                string queryString = string.IsNullOrEmpty(fileId)
+                    ? "'root' in parents and trashed = false"
+                    : $"'{fileId}' in parents and trashed = false";
 
                 ListRequest fileListRequest = _driveService!.Files.List();
                 fileListRequest.Q = queryString;
-                fileListRequest.Fields = "nextPageToken, files(id,name,mimeType,size,modifiedTime,fileExtension)";
+                fileListRequest.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime, fileExtension)";
+                fileListRequest.PageSize = 100;
 
-                try
+                List<Google.Apis.Drive.v3.Data.File> allFiles = new();
+                do
                 {
                     FileList driveFileList = await fileListRequest.ExecuteAsync();
-                    GenerateFileItemLists(driveFileList.Files);
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                    if (driveFileList.Files != null)
+                        allFiles.AddRange(driveFileList.Files);
+                    fileListRequest.PageToken = driveFileList.NextPageToken;
+                } while (!string.IsNullOrEmpty(fileListRequest.PageToken));
+
+                GenerateFileItemLists(allFiles);
             }
             catch (Exception ex)
             {
@@ -410,14 +410,10 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                 return null!;
             }
 
-            FileInformation data = new FileInformation();
-
-            Google.Apis.Drive.v3.Data.File metadata = await _driveService!.Files.Get(fileId).ExecuteAsync();
-            data.Name = metadata.Name;
-
-            using MemoryStream ms = new MemoryStream();
-            await _driveService.Files.Get(fileId).DownloadAsync(ms);
-
+            // Do NOT use `using` here — the MemoryStream must remain open for the caller.
+            MemoryStream ms = new MemoryStream();
+            await _driveService!.Files.Get(fileId).DownloadAsync(ms);
+            ms.Position = 0;
             return ms;
         }
 
@@ -426,18 +422,18 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             if (!New<IInternetState>().Connected)
             {
                 throw new InvalidOperationException(
-                    "No Internet Acccess, please check your internet connection."
+                    "No Internet access, please check your internet connection."
                 );
             }
 
             if (fileItem == null)
             {
-                throw new ArgumentNullException("request");
+                throw new ArgumentNullException(nameof(fileItem));
             }
 
             if (destinationFileStream == null)
             {
-                throw new ArgumentNullException("request");
+                throw new ArgumentNullException(nameof(destinationFileStream));
             }
 
             //string fileName - filename already we are reading for the list - if possibel try to pass that value here
@@ -489,9 +485,10 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
 
             try
             {
+                // Snapshot the original parent before we start mutating anything.
                 IList<string> actualParentPath = await GetParentFolderPath(cloudFileItem.FileID);
 
-                cloudFileItem.ParentPath = CreateCloudFolder();
+                cloudFileItem.ParentPath = await CreateCloudFolderAsync();
                 string newFileId = await UploadFileAsync(cloudFileItem, fileInfo.Name, fileInfo);
 
                 if (string.IsNullOrEmpty(newFileId))
@@ -549,6 +546,9 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                 }
 
                 cloudFileItem.FileID = newFileId;
+
+                // Refresh the file list so the UI reflects the change immediately.
+                await LoadDriveFilesAsync();
                 return true;
             }
             catch (Exception)
@@ -565,7 +565,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             if (fileInfo == null)
                 throw new ArgumentNullException(nameof(fileInfo));
 
-            retryCount = 0;
+            int retryCount = 0;
 
             Google.Apis.Drive.v3.Data.File fileMetadata = new Google.Apis.Drive.v3.Data.File
             {
@@ -688,17 +688,17 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             {
                 await _driveService!.Files.Delete(fileItem.FileID).ExecuteAsync();
 
-                if (string.IsNullOrEmpty(fullFileName))
+                if (!string.IsNullOrEmpty(fullFileName))
                 {
-                    return true;
+                    IDataStore file = New<IDataStore>(fullFileName);
+                    if (file != null && file.IsAvailable)
+                    {
+                        WipeLocalFile(fullFileName);
+                    }
                 }
 
-                IDataStore file = New<IDataStore>(fullFileName);
-                if (file != null && file.IsAvailable)
-                {
-                    WipeLocalFile(fullFileName);
-                }
-
+                // Refresh the file list so the deletion is reflected immediately.
+                await LoadDriveFilesAsync();
                 return true;
             }
             catch (Exception)
@@ -707,18 +707,18 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
             }
         }
 
-        private string CreateCloudFolder()
+        private async Task<string> CreateCloudFolderAsync()
         {
-            Google.Apis.Drive.v3.Data.File folderMetadata = new Google.Apis.Drive.v3.Data.File()
+            Google.Apis.Drive.v3.Data.File folderMetadata = new Google.Apis.Drive.v3.Data.File
             {
-                Name = "/MyAxcryptTempFile_" + GenerateRandomFolderName(),
+                Name = "MyAxcryptTempFile_" + GenerateRandomFolderName(),
                 MimeType = "application/vnd.google-apps.folder"
             };
 
             CreateRequest folderRequest = _driveService!.Files.Create(folderMetadata);
             folderRequest.Fields = "id";
 
-            Google.Apis.Drive.v3.Data.File folder = folderRequest.Execute();
+            Google.Apis.Drive.v3.Data.File folder = await folderRequest.ExecuteAsync();
             return folder.Id;
         }
 

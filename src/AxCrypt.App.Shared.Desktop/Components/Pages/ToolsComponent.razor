@@ -11,6 +11,7 @@
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject NavigationManager Navigation
+@inject NavPageService navPageService
 @inject ProfileViewModel? ProfileViewModel
 @inject AppSettingsViewModel appSettingsViewModel
 @inject PaidFeaturegateService paidFeaturegateService
@@ -384,10 +385,10 @@
                                 <span class="tc-badge tc-badge--danger">Irreversible</span>
                             }
                         </div>
-                        <h4 class="tc-name">@tool.Name</h4>
+                        <h4 class="tc-name">@((MarkupString)tool.Name)</h4>
                         <p class="tc-desc">@tool.Description</p>
                         <div class="tc-footer">
-                            <span class="tc-open">Open tool</span>
+                            <span class="tc-open">@Texts.OpenToolText</span>
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="9 18 15 12 9 6" />
                             </svg>
@@ -577,7 +578,7 @@
     {
         if (string.IsNullOrWhiteSpace(InviteEmail)) return;
         await Task.Delay(600);
-        InviteStatus = $"Invite sent to {InviteEmail} successfully!";
+        InviteStatus = Texts.InviteEmailSuccessfullyText;
         InviteEmail = string.Empty; StateHasChanged();
     }
 
@@ -591,7 +592,7 @@
             case "invite":
                 if (!appSettingsViewModel.EnableInviteFriend || !await New<UserEntitlementService>().UserHasCapability(LimitedCapability.KeySharing, LogOnViewModel.SubscriptionLevel))
                 {
-                    paidFeaturegateService.ShowPaidGate(Texts.InviteUserToolStripMenuItemText, "Send a secure onboarding invite to colleagues or friends with offline key sharing support.", new[] { "Secure user invites", "Offline key sharing", "Easy encrypted onboarding", "End-to-end protection" });
+                    paidFeaturegateService.ShowPaidGate(Texts.InviteUserToolStripMenuItemText, Texts.InviteUserToolPopup, new[] { Texts.SecureUserInvitesPopup, Texts.OfflineKeySharingPopup, Texts.EasyEncryptedOnboardingPopup, Texts.EndToEndProtectionPopup });
                     return;
                 }
 
@@ -633,7 +634,7 @@
             case "upgrade-tool":
                 @if (!subActionModel.EnableEncryptionUpgrade)
                 {
-                    paidFeaturegateService.ShowPaidGate(Texts.UpgradeLegacyFilesMenuItemText, "Upgrade AES-128 encrypted files to AES-256 when opened.", new[] { "Upgrade files to AES-256", "Migrate older encryption", "Latest security standard", "Stronger file protection" });
+                    paidFeaturegateService.ShowPaidGate(Texts.UpgradeLegacyFilesMenuItemText, Texts.OptionsConvertMenuItemDescription, new[] { Texts.UpgradeLegacyFilesMenuItemText, "Migrate older encryption", "Latest security standard", "Stronger file protection" });
                     return;
                 }
 
@@ -643,13 +644,13 @@
             case "anon-rename":
                 if (!subActionModel.EnableRandomRename)
                 {
-                    paidFeaturegateService.ShowPaidGate(Texts.AnonymousRenameMenuText, "Rename files with random names to help protect your privacy.",
+                    paidFeaturegateService.ShowPaidGate(Texts.AnonymousRenameMenuText, Texts.AnonymousRenameMenuPopup,
                         new[]
                         {
-                            "Hide original file names",
-                            "Improve file privacy",
-                            "Rename files securely",
-                            "Unlock advanced privacy features"
+                            Texts.HideOriginalFileNamesPopup,
+                            Texts.ImproveFilePrivacyPopup,
+                            Texts.RenameFilesSecurelyPopup,
+                            Texts.UnlockAdvancedPrivacyPopup
                         });
                     return;
                 }
@@ -660,13 +661,13 @@
             case "secure-delete":
                 if (!subActionModel.EnableSecureWipeFiles)
                 {
-                    paidFeaturegateService.ShowPaidGate(Texts.SecureDeleteToolStripMenuItemText, "Permanently delete files so they cannot be recovered.",
+                    paidFeaturegateService.ShowPaidGate(Texts.SecureDeleteToolStripMenuItemText, Texts.QuickSecureActionPermanentlyDelete,
                         new[]
                         {
-                            "Permanent file deletion",
-                            "Prevent file recovery",
-                            "Protect sensitive information",
-                            "Unlock advanced security tools"
+                            Texts.QuickSecureActionPermanentFileDeletion,
+                            Texts.QuickSecureActionPreventFileRecovery,
+                            Texts.QuickSecureActionSensitiveInformation,
+                            Texts.QuickSecureActionUnlockSecurityTools
                         });
                     return;
                 }
@@ -677,7 +678,7 @@
             case "restore-rename":
                 if (!appSettingsViewModel.EnableRestoreRename)
                 {
-                    paidFeaturegateService.ShowPaidGate(Texts.RestoreAnonymousNamesMenuText, "Upgrade to unlock more features.", new[] { "Restore original file names", "Manage anonymous encrypted files",  "Protect file identity securely", "Unlock advanced privacy features"});
+                    paidFeaturegateService.ShowPaidGate(Texts.RestoreAnonymousNamesMenuText, Texts.QuickSecureActionUnlockMoreFeatures, new[] { Texts.RestoreRenamePopup, Texts.ManageAnonymousFiles, Texts.ProtectFileIdentityPopup, Texts.UnlockAdvancedPrivacyPopup });
                     return;
                 }
 
@@ -697,16 +698,32 @@
                 break;
 
             case "activity-logs":
+                // User Activity Logging is an opt-in toggle in Advanced Settings.
+                // If it hasn't been enabled yet, show an info popup and open the
+                // Advanced Settings popup so the user can turn it on — the same
+                // flow triggered by clicking the Advanced Settings entry in the
+                // sidebar or top-bar settings menu.
+                if (!appSettingsViewModel.EnableUserActivity)
+                {
+                    await New<AxCrypt.Core.UI.IPopup>().ShowAsync(
+                        AxCrypt.Core.UI.PopupButtons.Ok,
+                        Texts.UserActivityTitle,
+                        "User Activity Logging is currently disabled. Enable it in Advanced Settings to view the activity log.");
+                    // Open Advanced Settings so the user can enable the toggle.
+                    appSettingsViewModel.ToggleAdvancedOption();
+                    return;
+                }
                 ProfileViewModel!.OnOpenLogViewerClicked(Utility.LogType.FileActivity);
                 break;
 
             case "find-files":
                 if (!appSettingsViewModel.EnableFindFilesMenuOption)
                 {
-                    paidFeaturegateService.ShowPaidGate(Texts.FindFileFeatureTitle, "Upgrade to unlock more features.", new[] { "Unlimited files", "Priority support", "Advanced algorithms" });
+                    paidFeaturegateService.ShowPaidGate(Texts.FindFileFeatureTitle, Texts.QuickSecureActionUnlockMoreFeatures, new[] { Texts.QuickSecureActionUnlimitedFiles, Texts.PrioritySupportTitle, Texts.QuickSecureActionAdvancedAlgorithms });
                     return;
                 }
 
+                navPageService.SetActivePage("/findfiles");
                 Navigation.NavigateTo("/findfiles");
                 break;
 
@@ -757,61 +774,61 @@
             {
                 new()
                 {
-                    Name = "Privacy & Anonymity",
+                    Name = Texts.PrivacyAnonymityTitle,
                     Tools = new()
                     {
                         new() { Id="secure-delete", Name=@Texts.SecureDeleteToolStripMenuItemText,
-                        Description="Permanently wipe files with multi-pass overwriting. Makes recovery impossible even with forensic tools.",
+                        Description=Texts.SecureDeleteToolDescription,
                         IconBg="ico-bg-tool", IsDanger=true, IsPaid=true,
                         IconSvg = "secure-delete-ico" },
                         new() { Id="anon-rename", Name=@Texts.AnonymousRenameMenuText,
-                        Description="Replace original filenames with random identifiers to hide file contents from filename alone.",
+                        Description=Texts.AnonymousRenameDescription,
                         IconBg="ico-bg-tool", IsPaid=true,
                         IconSvg = "anonymous-rename-ico" },
                         new() { Id="restore-rename", Name=Texts.RestoreAnonymousNamesMenuText,
-                        Description="Undo anonymous renaming and restore files to their original filenames using the stored rename map.",
+                        Description=Texts.RestoreAnonymousNamesDescription,
                         IconBg="ico-bg-tool",
                         IconSvg = "restore-org-name-ico" },
                     }
                 },
                 new()
                 {
-                    Name = "Discovery & Activity",
+                    Name = Texts.DiscoveryActivityText,
                     Tools = new()
                     {
                         new() { Id="find-files", Name=Texts.FindFileFeatureTitle,
-                        Description="Scan and locate all encrypted files in one place.",
+                        Description=Texts.FindFileFeatureDescription,
                         IconBg="ico-bg-tool", IsPaid=true,IsEnable=appSettingsViewModel.EnableFindFiles,
                         IconSvg = "ico-findencpt-files" },
 
                         new() { Id="activity-logs", Name=Texts.UserActivityTitle,
-                        Description="View all file actions and history.",
+                        Description=Texts.UserActivityDescription,
                         IconBg="ico-bg-tool",IsEnable=appSettingsViewModel.EnableUserActivity,
                         IconSvg = "invite-frd-ico" },
                     }
                 },
                 new()
                 {
-                    Name = "Encryption Management",
+                    Name = Texts.EncryptionManagementText,
                     Tools = new()
                     {
                         new() { Id="upgrade-tool", Name=Texts.UpgradeLegacyFilesMenuItemText/* "Upgrade AES-128 → AES-256" */,
-                            Description="Scan and re-encrypt legacy AES-128 files to the stronger AES-256 standard with one click.",
+                            Description=Texts.UpgradeLegacyFilesDescription,
                             IconBg="ico-bg-tool", IsPaid=true,
                             IconSvg = "tools-upgrade-ico" },
                     }
                 },
                 new()
                 {
-                    Name = "Sharing & Collaboration",
+                    Name = Texts.SharingCollaborationTitle,
                     Tools = new()
                     {
                         new() { Id="invite", Name=Texts.InviteUserToolStripMenuItemText,
-                            Description="Send a secure onboarding invite to a colleague or friend. They'll be set up with end-to-end encryption from day one.",
+                            Description=Texts.InviteUserToolStripDescription,
                             IconBg="ico-bg-tool", IsPaid=true,
                             IconSvg = "invite-frd-ico" },
                         new() { Id="import-public-key", Name=Texts.ImportSomeonesPublicSharingKeyText,
-                            Description="Add a trusted user’s public key to access encrypted shared files securely.",
+                            Description=Texts.ImportSomeonesPublicDescription,
                             IconBg="ico-bg-tool",
                             IconSvg = "key-mngmnt-ico" },
                     }
@@ -822,58 +839,58 @@
                     Tools = new()
                     {
                         new() { Id="export-public-key", Name=Texts.ExportSharingKeyToolStripMenuItemText,
-                            Description="Share your public key so others can securely send encrypted files to you.",
+                            Description=Texts.ExportSharingKeyDescription,
                             IconBg="ico-bg-tool",
                             IconSvg = "invite-frd-ico" },
                         new() { Id="export-axcryptid-public-key", Name=Texts.ExportMyPrivateKeyToolStripMenuItemText,
-                            Description="Backup or transfer your AxCrypt identity and sharing keys securely for recovery or device migration.",
+                            Description=Texts.ExportMyPrivateKeyDescription,
                             IconBg="ico-bg-tool",
                             IconSvg = "key-mngmnt-ico" },
                     }
                 },
                 new()
                 {
-                    Name = "Debug & Diagnostics",
+                    Name = Texts.DebugDiagnosticsToolStripMenuItemText,
                     IsEnable = appSettingsViewModel.EnableDebugPopup,
                     Tools = new()
                     {
                         new() { Id="debug-check-version", Name=Texts.DebugCheckVersionNowToolStripMenuItemText,
-                            Description="Check for the latest AxCrypt updates to improve security, stability, and performance.",
+                            Description=Texts.DebugCheckVersionNowDescription,
                             IconBg="ico-bg-tool",
                             IconSvg = "ico-chk-vrn-nw" },
 
                         new() { Id="debug-options", Name=Texts.DebugOptionsToolStripMenuItemText,
-                            Description="Remove temporary stored data.",
+                            Description=Texts.DebugOptionsToolStripDescription,
                             IconBg="ico-bg-tool",
                             IconSvg = "ico-options" },
 
                         new() { Id="debug-logging", Name=Texts.DebugLoggingToolStripMenuItemText,
-                            Description="View application logs to help diagnose issues and troubleshoot problems.",
+                            Description=Texts.DebugLoggingDescription,
                             IconBg="ico-bg-tool",
                             IconSvg = "pm-Lgng-icon" },
 
                         new() { Id="debug-manageaxcryptid", Name=Texts.DebugManageAccountToolStripMenuItemText,
-                            Description="Run encryption test scenarios.",
+                            Description=Texts.DebugManageAccountDescription,
                             IconBg="ico-bg-tool" ,
                             IconSvg = "pm-Users-icon" },
 
                         new() { Id="debug-trybrokenfile", Name=Texts.TryBrokenFileToolStripMenuItemText,
-                            Description="Attempt to recover and open damaged or partially corrupted encrypted files.",
+                            Description=Texts.TryBrokenFileDescription,
                             IconBg="ico-bg-tool" ,
                             IconSvg = "ico-try-brkn-fl" },
 
                         new() { Id="debug-verifyfiletool", Name=Texts.VerifyFileToolStripMenuItem,
-                            Description="Verify whether a file is encrypted and authenticated by AxCrypt.",
+                            Description=Texts.VerifyFileDescription,
                             IconBg="ico-bg-tool",
                             IconSvg = "find-encpt-files" },
 
                         new() { Id="debug-checktools", Name=Texts.DebugFileFormatCheckToolStripMenuItemText,
-                            Description="Analyze a file’s encryption status and compatibility with AxCrypt.",
+                            Description=Texts.DebugFileDescription,
                             IconBg="ico-bg-tool" ,
                             IconSvg = "ico-findencpt-files" },
 
                         new() { Id="debug-reportsnapshot", Name=Texts.ReportSnapshotOpenMenuItem,
-                            Description="Open saved diagnostic reports for troubleshooting and support assistance.",
+                            Description=Texts.ReportSnapshotDescription,
                             IconBg="ico-bg-tool" ,
                             IconSvg = "ico-opn-err-prt-snpct" },
                     }

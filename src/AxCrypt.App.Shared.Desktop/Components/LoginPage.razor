@@ -1,20 +1,12 @@
-@* Legacy sign-in page. Kept around for reference and as a non-routable
-   component. The live sign-in route is owned by LoginPageNew.razor.
-   The `@page "/login"` directive was removed here to avoid Blazor's
-   duplicate-route compile error — both files used to claim "/login". *@
-@using AxCrypt.App.Shared.Desktop.Components.Shared
 @using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Models
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.App.Shared.Utility
-@using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.Content
 @using AxCrypt.Core
 @using AxCrypt.Core.Crypto
 @using AxCrypt.Core.UI.ViewModel
-@using Microsoft.Maui.ApplicationModel
-@using Microsoft.Maui.Devices
 
 @inject IJSRuntime JSRuntime
 @inject LogOnViewModel LogOnViewModel
@@ -355,9 +347,27 @@
         });
     }
 
-    private void CreateNewAccountLabel_LinkClicked(EventArgs e)
+    private async Task CreateNewAccountLabel_LinkClicked(EventArgs e)
     {
-        BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToSignUpWebPage);
+        // Keep the legacy LoginPage in sync with LoginPageNew — instead of
+        // bouncing the user out to the web signup, drive the in-app
+        // RegisterPage. Account creation finishes locally; the existing
+        // post-signup flow continues to the web for the payment step.
+        string passphrase = LogOnViewModel.LogOnAccountModel?.PasswordText ?? string.Empty;
+        AxCrypt.Core.UI.EmailAddress email = AxCrypt.Core.UI.EmailAddress.Empty;
+        if (!string.IsNullOrWhiteSpace(LogOnViewModel.LogOnAccountModel?.UserEmail)
+            && AxCrypt.Core.UI.EmailAddress.TryParse(LogOnViewModel.LogOnAccountModel!.UserEmail, out AxCrypt.Core.UI.EmailAddress parsed))
+        {
+            email = parsed;
+        }
+
+        LogOnViewModel.IsVisible = false;
+        await RegisterModel.ShowDialog(passphrase, email);
+
+        if (RegisterModel.DialogResult == DialogResult.Cancel)
+        {
+            LogOnViewModel.IsVisible = true;
+        }
     }
 
     private void ForgetPassword_ButtonClicked(EventArgs e)

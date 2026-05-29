@@ -25,12 +25,12 @@
     {
         <div class="rf-drop-hint">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
-            <span>Drop files here to encrypt</span>
+            <span>@Texts.RecentFilesDropFiles</span>
         </div>
     }
     <div class="card-header-row">
         <h2 class="section-title">@Texts.RecentFilesTabPageText</h2>
-        <span class="card-header-hint">Double-click a file to open it. Right-click for more actions.</span>
+        <span class="card-header-hint">@Texts.RecentFilesSubTitle</span>
     </div>
 
     @if (recentFilesViewModel.IsHideRecentFiles)
@@ -65,23 +65,23 @@
                 <div class="rf-bulk-actions">
                     <button class="rf-bulk-btn" @onclick="BulkOpen" title="Open selected files">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
-                        Open
+                        @Texts.McInfMenuOpen
                     </button>
                     <button class="rf-bulk-btn" @onclick="BulkShareKey" title="Share key for selected files">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></svg>
-                        Share key
+                        @Texts.ShareKeysToolStripMenuItemText
                     </button>
                     <button class="rf-bulk-btn" @onclick="BulkCleanUp" title="Re-encrypt and close selected files">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M9 6v14a2 2 0 002 2h2a2 2 0 002-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
-                        Clean up
+                        @Texts.CleanUpPromptText
                     </button>
                     <button class="rf-bulk-btn rf-bulk-btn--danger" @onclick="BulkRemove" title="Remove selected from list">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" /></svg>
-                        Remove
+                        @Texts.RemoveText
                     </button>
                     <button class="rf-bulk-btn rf-bulk-btn--ghost" @onclick="ClearSelection" title="Clear selection">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-                        Clear
+                        @Texts.ClearButtonText
                     </button>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                            title="Select all" />
                 </div>
                 <div class="tcol tcol-name">@Texts.NameLabel</div>
-                <div class="tcol tcol-status">Status</div>
+                <div class="tcol tcol-status">@Texts.ColumnStatusHeader</div>
                 <div class="tcol tcol-date">@Texts.LastModifiedTimeColumnHeaderText</div>
                 <div class="tcol tcol-size">@Texts.FileSizeColumnHeaderText</div>
                 <div class="tcol tcol-act"></div>
@@ -185,14 +185,22 @@
 
     private int EncryptedCount { get; set; } = 2;
 
+    // FileDropService.OnFilesDropped is event Action<IList<string>> —
+    // match the signature and fire-and-forget the async handler so the
+    // Action contract holds. HandleDroppedFiles awaits its own UI
+    // marshalling so the discarded Task is safe.
+    private Action<IList<string>>? _onFilesDropped;
+
     protected override async Task OnInitializedAsync()
     {
         recentFilesViewModel.OnInitialized();
         recentFilesViewModel.OnUpdateViewState += UpdatePageState;
+
         FileDropService.ResetOnDropped();
-        FileDropService.OnFilesDropped += async (files) => await HandleDroppedFiles(files);
+        _onFilesDropped = (files) => _ = HandleDroppedFiles(files);
+        FileDropService.OnFilesDropped    += _onFilesDropped;
         FileDropService.OnFilesDraggedOver += HandleDraggedOverFiles;
-        FileDropService.OnFilesDragLeave += HandleDragLeave;
+        FileDropService.OnFilesDragLeave  += HandleDragLeave;
 
         await base.OnInitializedAsync();
     }
@@ -202,6 +210,13 @@
         // VM is a singleton — unhook so the next mount doesn't stack
         // up duplicate handlers (one ActiveFile change → N redraws).
         recentFilesViewModel.OnUpdateViewState -= UpdatePageState;
+
+        // Unsubscribe FileDropService events.  Without this, each navigation
+        // back to the home page adds another copy of each handler, causing
+        // N concurrent file-encrypt calls on the next drop.
+        if (_onFilesDropped != null) { FileDropService.OnFilesDropped -= _onFilesDropped; _onFilesDropped = null; }
+        FileDropService.OnFilesDraggedOver -= HandleDraggedOverFiles;
+        FileDropService.OnFilesDragLeave  -= HandleDragLeave;
     }
 
     private void UpdatePageState()
@@ -291,15 +306,15 @@
 
     private string EmptyTitle => ActiveTab switch
     {
-        "Opened" => "No files are currently open",
-        "Shared" => "No shared files yet",
+        "Opened" => Texts.RecentFilesNoFilesCurrentlyOpen,
+        "Shared" => Texts.RecentFilesNoSharedFilesYet,
         _        => Texts.LetsStartOurJourneyText,
     };
 
     private string EmptySub => ActiveTab switch
     {
-        "Opened" => "Files you open will appear here while they are decrypted.",
-        "Shared" => "Share a file with someone and it will show up here.",
+        "Opened" => Texts.RecentFilesYouOpenWillAppear,
+        "Shared" => Texts.RecentFilesShareSomeone,
         _        => Texts.AddAndSecureYourFirstFileText,
     };
 
@@ -403,23 +418,43 @@
 
     // ═══════════════════════════════════════════
     //  Drop zone
+    //
+    //  FileDropService raises these from the JS interop / drag-drop
+    //  pipeline thread, not the renderer SC. Marshal every UI-bound
+    //  mutation (DropZoneActive flips the drop-zone class) onto the
+    //  Blazor dispatcher first so the renderer can't read a torn flag
+    //  or throw "current thread is not associated with the Dispatcher"
+    //  on the StateHasChanged.
     // ═══════════════════════════════════════════
     private async Task HandleDroppedFiles(IList<string> files)
     {
-        DropZoneActive = false;
+        await InvokeAsync(() =>
+        {
+            DropZoneActive = false;
+            StateHasChanged();
+        });
         await recentFilesViewModel.EncryptDroppedFiles(files);
     }
 
     private void HandleDraggedOverFiles()
     {
-        DropZoneActive = true;
-        UpdatePageState();
+        // Fire-and-forget the marshal — Action signature can't be made
+        // async. UpdatePageState's job is already absorbed into the
+        // InvokeAsync body, so it's no longer called separately.
+        _ = InvokeAsync(() =>
+        {
+            DropZoneActive = true;
+            StateHasChanged();
+        });
     }
 
     private void HandleDragLeave()
     {
-        DropZoneActive = false;
-        UpdatePageState();
+        _ = InvokeAsync(() =>
+        {
+            DropZoneActive = false;
+            StateHasChanged();
+        });
     }
 
     private void HandleFileDrop()
@@ -428,9 +463,9 @@
         if (IsFreeTier && EncryptedCount >= FreeLimit)
         {
             paidFeaturegateService.ShowPaidGate(
-                "Unlimited Encryption",
-                "Free plan allows encrypting 3 files. Upgrade for unlimited.",
-                new[] { "Unlimited files", "Batch encryption", "AES-256 always" });
+                Texts.RecentFilesUnlimitedEncryption,
+                Texts.RecentFilesFreePlan,
+                new[] { Texts.QuickSecureActionUnlimitedFiles, Texts.RecentFilesBatchEncryption, Texts.RecentFilesAES256Always });
             return;
         }
         EncryptedCount++;

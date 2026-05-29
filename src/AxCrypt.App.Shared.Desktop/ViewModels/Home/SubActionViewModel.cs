@@ -179,14 +179,134 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
 
         public async void RandomRenameAsync(EventArgs e)
         {
-            await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null!); }, null!, e);
+            await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) =>
+            {
+                IEnumerable<string> preSelected = _mainViewModel?.SelectedRecentFiles ?? Enumerable.Empty<string>();
+
+                IEnumerable<string> filesToRename;
+                if (preSelected.Any())
+                {
+                    filesToRename = preSelected;
+                }
+                else
+                {
+                    FileSelectionEventArgs args = new FileSelectionEventArgs(Enumerable.Empty<string>())
+                    {
+                        FileSelectionType = FileSelectionType.Rename,
+                    };
+                    await New<IDataItemSelection>().HandleSelection(args);
+
+                    if (args.Cancel || !args.SelectedFiles.Any())
+                    {
+                        return; // user cancelled — no toast
+                    }
+                    filesToRename = args.SelectedFiles;
+                }
+
+                int count = filesToRename.Count();
+                try
+                {
+                    await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(filesToRename);
+                    _statusAlertService.Success(count == 1
+                        ? "Anonymously renamed 1 file."
+                        : $"Anonymously renamed {count} files.");
+                }
+                catch (Exception ex)
+                {
+                    _statusAlertService.Error($"Anonymous rename failed: {ex.Message}");
+                }
+            }, null!, e);
+        }
+
+        public async void RestoreOriginalNamesAsync(EventArgs e)
+        {
+            await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) =>
+            {
+                IEnumerable<string> preSelected = _mainViewModel?.SelectedRecentFiles ?? Enumerable.Empty<string>();
+
+                IEnumerable<string> filesToRestore;
+                if (preSelected.Any())
+                {
+                    filesToRestore = preSelected;
+                }
+                else
+                {
+                    FileSelectionEventArgs args = new FileSelectionEventArgs(Enumerable.Empty<string>())
+                    {
+                        FileSelectionType = FileSelectionType.Rename,
+                    };
+                    await New<IDataItemSelection>().HandleSelection(args);
+
+                    if (args.Cancel || !args.SelectedFiles.Any())
+                    {
+                        return; // user cancelled — no toast
+                    }
+                    filesToRestore = args.SelectedFiles;
+                }
+
+                int count = filesToRestore.Count();
+                try
+                {
+                    await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(filesToRestore);
+                    _statusAlertService.Success(count == 1
+                        ? "Restored original name for 1 file."
+                        : $"Restored original names for {count} files.");
+                }
+                catch (Exception ex)
+                {
+                    _statusAlertService.Error($"Restore original names failed: {ex.Message}");
+                }
+            }, null!, e);
         }
 
         public async void SecureWipeFiles(EventArgs e)
         {
-            await PremiumFeature_ClickAsync(LicenseCapability.SecureWipe, async (ss, ee) => { await _fileOperationViewModel.WipeFiles.ExecuteAsync(_mainViewModel!.SelectedRecentFiles.Any() ? _mainViewModel!.SelectedRecentFiles : null!); }, null!, e);
-            await New<UserEntitlementService>().InsertUserUsageCount(LimitedCapability.SecureWipe, LogOnViewModel.SubscriptionLevel);
-            return;
+            await PremiumFeature_ClickAsync(LicenseCapability.SecureWipe, async (ss, ee) =>
+            {
+                // Resolve the file list — either from a pre-existing selection or by
+                // opening the file picker ourselves. Owning the picker call lets us
+                // detect a cancel and skip both the success toast and usage recording.
+                IEnumerable<string> preSelected = _mainViewModel?.SelectedRecentFiles ?? Enumerable.Empty<string>();
+
+                IEnumerable<string> filesToWipe;
+                if (preSelected.Any())
+                {
+                    filesToWipe = preSelected;
+                }
+                else
+                {
+                    FileSelectionEventArgs args = new FileSelectionEventArgs(Enumerable.Empty<string>())
+                    {
+                        FileSelectionType = FileSelectionType.Wipe,
+                    };
+                    await New<IDataItemSelection>().HandleSelection(args);
+
+                    if (args.Cancel || !args.SelectedFiles.Any())
+                    {
+                        return; // user cancelled picker — no toast, no usage charge
+                    }
+                    filesToWipe = args.SelectedFiles;
+                }
+
+                int count = filesToWipe.Count();
+
+                try
+                {
+                    await _fileOperationViewModel.WipeFiles.ExecuteAsync(filesToWipe);
+
+                    _statusAlertService.Success(count == 1
+                        ? $"Securely deleted 1 file."
+                        : $"Securely deleted {count} files.");
+
+                    // Record usage only when the wipe actually completed.
+                    await New<UserEntitlementService>().InsertUserUsageCount(
+                        LimitedCapability.SecureWipe, LogOnViewModel.SubscriptionLevel);
+                }
+                catch (Exception ex)
+                {
+                    _statusAlertService.Error($"Secure delete failed: {ex.Message}");
+                }
+            }, null!, e);
         }
 
         public async void EncryptionUpgrade(EventArgs e)

@@ -76,7 +76,6 @@ public class ShareKeyViewModel : ViewModelBase
         });
 
         _viewModel.BindPropertyChanged<bool>(nameof(SharingListViewModel.IsOnline), (bool isOnline) => { SetNewContactState(); });
-
         IEnumerable<ShareKeyUser> filteredGroupList = _viewModel!.NotSharedWith.Distinct().ToArray().Select(user => new ShareKeyUser(user.Email, user.GroupName)).ToList();
         SuggestedUnSharedUsers = new ObservableCollection<ShareKeyUser>(filteredGroupList);
 
@@ -88,6 +87,31 @@ public class ShareKeyViewModel : ViewModelBase
         }
 
         LogOnViewModel.ShareKeyDialog.Close();
+    }
+
+    /// <summary>
+    /// Drop a single file from the active selection. Wired to the × on each
+    /// file chip in the ShareKey dialog so users can prune their selection
+    /// without re-opening the file picker. If the last file is removed the
+    /// dialog auto-closes — sharing nothing makes no sense.
+    /// </summary>
+    public void RemoveSelectedFile(string path)
+    {
+        if (SelectedFilesOrFolders == null || string.IsNullOrEmpty(path))
+        {
+            return;
+        }
+
+        SelectedFilesOrFolders = SelectedFilesOrFolders
+            .Where(f => !string.Equals(f, path, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+        _viewModel!.UpdateFiles(SelectedFilesOrFolders);
+
+        if (!SelectedFilesOrFolders.Any())
+        {
+            PageResult = DialogResult.Cancel;
+            LogOnViewModel.ShareKeyDialog.Close();
+        }
     }
 
     public bool ContextMenu { get; set; } = false;

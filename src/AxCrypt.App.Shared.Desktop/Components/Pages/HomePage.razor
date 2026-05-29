@@ -1,4 +1,5 @@
-﻿@using AxCrypt.App.Shared.Desktop.ViewModels
+﻿@implements IDisposable
+@using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Content
 @using AxCrypt.Core.Runtime
@@ -24,6 +25,11 @@
     {
         await base.OnInitializedAsync();
         RecentFilesViewModel.OnUpdateViewState += UpdatePageState;
+    }
+
+    public void Dispose()
+    {
+        RecentFilesViewModel.OnUpdateViewState -= UpdatePageState;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
