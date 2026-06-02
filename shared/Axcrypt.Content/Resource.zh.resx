@@ -436,6 +436,10 @@
   <data name="AddEmailPromptText" xml:space="preserve">
     <value>添加电子邮件</value>
   </data>
+  <data name="AddExtraPrivacyProtectionPopup" xml:space="preserve">
+    <value>添加额外隐私保护
+</value>
+  </data>
   <data name="AddFileLabel" xml:space="preserve">
     <value>打开AxCrypt文件</value>
     <comment>Tooltip for "AddFile" button in mobile application</comment>
@@ -504,6 +508,28 @@
   </data>
   <data name="AdminLabel" xml:space="preserve">
     <value>行政主任</value>
+  </data>
+  <data name="AdvancedDebugWarningText" xml:space="preserve">
+    <value>调试日志可能包含文件路径。未主动进行故障排除时，请将其禁用以保护您的隐私。</value>
+  </data>
+  <data name="AdvancedDiagnosticsText" xml:space="preserve">
+    <value>诊断与amp;监控</value>
+  </data>
+  <data name="AdvancedEncryptionAlgorithms" xml:space="preserve">
+    <value>高级加密算法
+</value>
+  </data>
+  <data name="AdvancedFooterHintText" xml:space="preserve">
+    <value>更改将立即生效</value>
+  </data>
+  <data name="AdvancedOptionsConfiguration" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="AdvancedOptionsSubTitle" xml:space="preserve">
+    <value>应用程序配置、诊断和监控控件</value>
+  </data>
+  <data name="AdvancedOptionsTitle" xml:space="preserve">
+    <value>高级选项</value>
   </data>
   <data name="AdvancedSettingsText" xml:space="preserve">
     <value>高级设置</value>
@@ -639,6 +665,10 @@
     <value>始终脱机</value>
     <comment>Menu choice with checkbox indicating if we are running offline or not.</comment>
   </data>
+  <data name="AlwaysOfflineDescription" xml:space="preserve">
+    <value>完全离线工作——绝不与我们的服务器同步或连接
+</value>
+  </data>
   <data name="AlwaysOfflineToolTip" xml:space="preserve">
     <value>启用后，互联网接入永远不会使用或需要，直到禁用。</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
@@ -667,6 +697,10 @@
   <data name="AnnualSubscriptionTitle" xml:space="preserve">
     <value>年报</value>
   </data>
+  <data name="AnonymousRenameMenuDescription" xml:space="preserve">
+    <value>使用“工具”页面将文件名替换为随机 ID，这样任何人都无法仅凭文件名猜测文件内容。
+</value>
+  </data>
   <data name="AnonymousRenameMenuText" xml:space="preserve">
     <value>匿名重命名</value>
   </data>
@@ -681,6 +715,9 @@
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>AxCrypt ID验证[{0} ]</value>
+  </data>
+  <data name="AppConfigurationDescription" xml:space="preserve">
+    <value>数据路径、缓存位置和重置默认设置</value>
   </data>
   <data name="AppConfigurationText" xml:space="preserve">
     <value>应用程序配置</value>
@@ -791,6 +828,10 @@
   <data name="AutoDeletionMailSubject" xml:space="preserve">
     <value>您的AxCrypt ID帐户将很快被删除！</value>
   </data>
+  <data name="AutolockOnInactivityPopup" xml:space="preserve">
+    <value>无操作时自动锁定
+</value>
+  </data>
   <data name="AutomatedMessageText" xml:space="preserve">
     <value>这是一条自动消息。请不要直接回复此电子邮件。</value>
   </data>
@@ -799,6 +840,17 @@
   </data>
   <data name="AutomaticFileUpdatingText" xml:space="preserve">
     <value>打开并保存后自动更新安全文件。</value>
+  </data>
+  <data name="AutoUpgradeFilesAES256" xml:space="preserve">
+    <value>自动将文件升级为 AES-256 加密
+</value>
+  </data>
+  <data name="AvailablePremiumBusinessPlans" xml:space="preserve">
+    <value>适用于高级版和企业版方案。
+</value>
+  </data>
+  <data name="AvoidVisibleEncryptionPopup" xml:space="preserve">
+    <value>避免显示因加密而导致的时间戳变化</value>
   </data>
   <data name="AwardsLabel" xml:space="preserve">
     <value>奖项</value>
@@ -1489,6 +1541,10 @@
   <data name="AxCWhatsNextSecurityText3" xml:space="preserve">
     <value>查看 AxCrypt 安全页面：  &lt;a href='/information/security/'&gt;&lt;b&gt;Why is AxCrypt secure? | Algorithms&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
+  <data name="BackgroundEncryptionMigrationPopup" xml:space="preserve">
+    <value>后台加密迁移
+</value>
+  </data>
   <data name="BacktoAxCryptIDText" xml:space="preserve">
     <value>返回&lt;span&gt;AxCrypt ID&lt;/span&gt;</value>
   </data>
@@ -1504,6 +1560,10 @@
   <data name="BadEmail" xml:space="preserve">
     <value>错误的电子邮件地址</value>
     <comment>Displayed when email address format validation fails.</comment>
+  </data>
+  <data name="BatchEncryptMultiplePopup" xml:space="preserve">
+    <value>一次批量加密多个文件
+</value>
   </data>
   <data name="BecomeanAffiliateText" xml:space="preserve">
     <value>成为会员</value>
@@ -9862,6 +9922,293 @@
   <data name="Blog_ITESBETFC_Title" xml:space="preserve">
     <value>教育部门是否容易成为网络攻击的目标？</value>
   </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Heading" xml:space="preserve">
+    <value>您的数据离泄露仅有一次不慎点击之遥，</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text1" xml:space="preserve">
+    <value>立即修复！</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text2" xml:space="preserve">
+    <value>说真的：如果您认真对待自己的业务，并重视保护 Linux 及所有其他设备上的业务数据，那么接下来的这一步至关重要。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text3" xml:space="preserve">
+    <value>&lt;li&gt;加密任何未加密的文件或您认为可能在勒索软件攻击中被用于对您不利的敏感信息。&lt;a href='https://account.axcrypt.net/en/Home/Login?Signup=True'&gt;从此处开始 AxCrypt 免费试用。&lt;/a&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text4" xml:space="preserve">
+    <value>&lt;li&gt;如果您尚未充分利用 AxCrypt 来实施数据安全保护，并希望了解更多信息，请查看&lt;a href='https://axcrypt.net/helpcenter/'&gt;我们的资源指南。&lt;/a&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text5" xml:space="preserve">
+    <value>&lt;li&gt;&lt;a href='https://axcrypt.net/blog/'&gt;选择您的下一篇阅读内容，并及时了解&lt;/a&gt; AxCrypt 的当前网络安全趋势。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text1" xml:space="preserve">
+    <value>在高安全性领域工作的用户需要了解如何在 Android 上查看加密文件，或如何在工作站上处理 .axx 文件（AxCrypt 加密文件）。无论使用 AxCrypt Windows 11 版还是 AxCrypt for Linux，安全保护都必须无缝顺畅，旨在防止数据外泄。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text10" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;文件加密完成后，您可以看到该文件已保存为 .axx 文件扩展名。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text11" xml:space="preserve">
+    <value>您可以在这篇关于 &lt;a href='https://axcrypt.net/information/guides/encryption-decryption/'&gt;使用 AxCrypt 进行加密与解密&lt;/a&gt; 的指南中，详细了解有关加密和解密文件的更多信息。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text12" xml:space="preserve">
+    <value>&lt;b&gt;3. 使用 AxCrypt 的保险库功能实现加密自动化：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text13" xml:space="preserve">
+    <value>现在，您可以开始在 Linux 上保护文件，确保不会遗漏任何文件。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text14" xml:space="preserve">
+    <value>&lt;b&gt;以下是如何配置 AxCrypt 保险库。&lt;/b&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text15" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;您只需登录应用程序 &gt; 点击“设置” &gt; “高级设置” &gt; 然后点击“保险库设置”。&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text16" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;选择您希望保险库所在的位置，然后确认您的选择。&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text17" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;此步骤为可选操作，但如果您确实非常、非常重视隐私，请对保险库进行随机化处理，以增加一层隐私保护。&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text18" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;如果您有嵌套的文件和文件夹，请务必选择“包含子文件夹”。&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text19" xml:space="preserve">
+    <value>配置完成后，任何新添加的文件都会自动移入保险库并进行加密，从而保护 Linux 上的机密文件。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text2" xml:space="preserve">
+    <value>在安全系统中，“如何在没有密码的情况下打开加密文件”这个问题本就不应有答案，因为强加密的设计目的正是防止这种情况发生。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text20" xml:space="preserve">
+    <value>&lt;b&gt;如何将文件添加到 AxCrypt 保险库：&lt;/b&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text21" xml:space="preserve">
+    <value>使用操作菜单：
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text22" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;只需点击保险库图标 &gt; 然后选择您想要的文件夹或文件 &gt; 接着点击“添加”，并选择您想要加密的内容。&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text23" xml:space="preserve">
+    <value>使用拖放选项：</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text24" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;将文件或文件夹拖入保险库&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text25" xml:space="preserve">
+    <value>在这两种情况下，文件都会立即加密并显示在您的最近使用的文件中，非常适合在 Linux 上保护业务文档并用于日常工作流程。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text26" xml:space="preserve">
+    <value>在本指南中了解有关保险库加密的更多信息：&lt;a href='https://axcrypt.net/information/guides/vault/'&gt;AxCrypt 保险库——用户指南。&lt;/a&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text27" xml:space="preserve">
+    <value>&lt;b&gt;4. 通过云安全功能使用 AxCrypt for Linux 保护云端文件：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text28" xml:space="preserve">
+    <value>对于团队、自由职业者和去中心化组织而言，这种 Linux 服务器安全保护正是您在使用云端时确保数据安全所需要的。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text29" xml:space="preserve">
+    <value>&lt;b&gt;以下是如何使用 AxCrypt 在 Linux 上保护云存储：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text3" xml:space="preserve">
+    <value>对于 Linux 服务器安全而言，加密是您最有力的第一道防线。如果您管理内部文档或客户数据，保护文件安全至关重要——尤其是对于中小型企业而言，一次数据泄露就可能造成毁灭性后果。与 BitLocker 或 FileVault 不同，许多团队需要专用的跨平台加密工具，以保护特定文件夹，并能够与 Linux 工作流程配合使用。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text30" xml:space="preserve">
+    <value>&lt;b&gt;方法 A：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text31" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;加密现有云端文件&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text32" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;打开 AxCrypt 并选择您的云服务提供商&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text33" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;选择您想要保护的文件&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text34" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;点击操作菜单（三个点）→ 选择“保护”&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text35" xml:space="preserve">
+    <value>&lt;b&gt;方法 B：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text36" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;同时上传并加密&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text37" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;点击应用程序中的“+”按钮&lt;/li&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text38" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;选择要上传的文件&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text39" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;打开该文件进行加密&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text4" xml:space="preserve">
+    <value>&lt;b&gt;让我们来看看如何在 Linux 上使用 AxCrypt：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text40" xml:space="preserve">
+    <value>如果您想了解更多关于 &lt;a href='https://axcrypt.net/information/guides/secure-cloud/'&gt;AxCrypt for Linux 和云安全的信息，请点击此处阅读更多内容。&lt;/a&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text41" xml:space="preserve">
+    <value>&lt;b&gt;5. 通过共享密钥安全共享文件：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text42" xml:space="preserve">
+    <value>对于注重小型企业 Linux 数据安全的企业而言，这一升级功能超越了传统的文件共享方式。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text43" xml:space="preserve">
+    <value>&lt;b&gt;如何使用密钥共享安全地共享文件&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text44" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;使用 AxCrypt 加密您的文件&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text45" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;右键点击该文件 → 点击“共享密钥”&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text46" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;添加收件人的电子邮件地址&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text47" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;点击“应用”&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text48" xml:space="preserve">
+    <value>完成后：</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text49" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;收件人将获得解密该文件的权限&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text5" xml:space="preserve">
+    <value>&lt;b&gt;1. 安装：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text50" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;您仍需要通过电子邮件、云端或安全渠道单独发送该文件。该文件仍将受到 256 位加密算法的安全保护。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text51" xml:space="preserve">
+    <value>此工作流程对于保护 Linux 上的远程文件以及分布式团队至关重要，可确保您的文件无论传输到何处或存储于何处，安全保护都始终随行。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;点击&lt;a href='https://axcrypt.net/download/'&gt;&lt;b&gt;此处&lt;/b&gt;&lt;/a&gt;开始使用。安装适用于 Linux 的 AxCrypt 后，请使用您在 AxCrypt 注册的电子邮件 ID 和密码登录。这是一款轻量且出色的 Linux 加密软件。这些凭据是您解密使用 AxCrypt for Linux 加密的文件所需的唯一访问信息。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text7" xml:space="preserve">
+    <value>&lt;b&gt;2. 在 AxCrypt for Linux 上加密和解密文件：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;成功创建 AxCrypt for Linux 账户并登录应用程序后，若要加密文件，您必须点击操作菜单中的“保护”按钮。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;随后，系统会将您转至文件选择窗口，您可以在其中选择要加密的文件。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text1" xml:space="preserve">
+    <value>由于 Linux 在云端和服务器配置中的应用不断增加，2026 年，Linux 服务器安全对中小型企业而言比以往任何时候都更加关键。Linux 为 75% 面向网络的计算机提供支持，这使它们成为主要攻击目标。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text2" xml:space="preserve">
+    <value>对于旨在保护 Linux 服务器上的文件或提升 Linux 服务器安全性的中小型企业而言，挑战不在于预防，而在于使系统具备面向未来的安全能力，并始终领先于漏洞利用风险。攻击者了解这些缺口和后门。因此，Linux 文件加密以及在 Linux 上加密文件比以往任何时候都更加重要。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text3" xml:space="preserve">
+    <value>攻击窗口存在于发现漏洞与修复漏洞之间。在此期间保护 Linux 上的敏感文件至关重要。我们审查了 Commandline Linux 和 Linux Security 关于 2025 年被利用漏洞的调查结果，重点说明了为什么像 AxCrypt for Linux 这样的现代 Linux 加密软件对于小型企业的文件加密至关重要。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text4" xml:space="preserve">
+    <value>&lt;b&gt;已发现且正被积极利用的漏洞。&lt;/b&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text5" xml:space="preserve">
+    <value>&lt;table border='1' cellspacing='0' cellpadding='8'&gt;&lt;tr&gt;&lt;th&gt;CVE ID&lt;/th&gt;&lt;th&gt;漏洞类型&lt;/th&gt;&lt;th&gt;CVSS 评分&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-1086&lt;/td&gt;&lt;td&gt;释放后使用（netfilter）&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-53104&lt;/td&gt;&lt;td&gt;越界写入（UVC 驱动程序）&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-53150&lt;/td&gt;&lt;td&gt;越界读取（ALSA 音频）&lt;/td&gt;&lt;td&gt;7.1–7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-53197&lt;/td&gt;&lt;td&gt;ALSA 音频漏洞&lt;/td&gt;&lt;td&gt;高&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-50302&lt;/td&gt;&lt;td&gt;HID 驱动程序漏洞&lt;/td&gt;&lt;td&gt;高&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2023-0386&lt;/td&gt;&lt;td&gt;权限提升（OverlayFS）&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2021-22555&lt;/td&gt;&lt;td&gt;堆越界写入（netfilter）&lt;/td&gt;&lt;td&gt;8.3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2022-0847&lt;/td&gt;&lt;td&gt;权限提升（“Dirty Pipe”）&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2019-13272&lt;/td&gt;&lt;td&gt;权限管理不当&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2021-3493&lt;/td&gt;&lt;td&gt;权限提升（OverlayFS）&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2025-21756&lt;/td&gt;&lt;td&gt;释放后使用（vsock 子系统）&lt;/td&gt;&lt;td&gt;高&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2025-38352&lt;/td&gt;&lt;td&gt;竞争条件（TOCTOU – Linux 内核）&lt;/td&gt;&lt;td&gt;高&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text6" xml:space="preserve">
+    <value>该列表揭示了攻击者手法中的一个明显模式。大多数列出的漏洞都涉及由 CISA 跟踪的权限提升缺陷。从 CVE-2024-1086 等 netfilter 漏洞，到 Overlay FS 和驱动程序问题，攻击者以 Linux 核心组件为目标，以最少的 effort 获取 root 访问权限。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text7" xml:space="preserve">
+    <value>&lt;b&gt;这对作为中小型企业主的您以及其他拥有关键信息的人意味着什么：&lt;/b&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text8" xml:space="preserve">
+    <value>攻击者并不只是在试探中小型企业的防御；他们正在悄无声息地夺取控制权。如果您需要迅速采取行动，请从 AxCrypt 免费版开始。当您的团队中有人问“什么是 AxCrypt？”或搜索 AxCrypt 免费版时，这表明他们已准备好弥补安全缺口。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H3_Text1" xml:space="preserve">
+    <value>数据泄露已不再是罕见事件。如今，这种事件已在预料之中，这意味着中小型企业需要加强 Linux 数据安全保护。以下是正在塑造 2026 年网络安全格局的最重要且最新的统计数据。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H3_Text2" xml:space="preserve">
+    <value>&lt;table border='1' cellspacing='0' cellpadding='8'&gt;&lt;tr&gt;&lt;th&gt;指标&lt;/th&gt;&lt;th&gt;统计数据&lt;/th&gt;&lt;th&gt;结果&lt;/th&gt;&lt;th&gt;来源&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;2025 年数据泄露的平均成本&lt;/td&gt;&lt;td&gt;444 万美元至 445 万美元&lt;/td&gt;&lt;td&gt;数据泄露响应时间降至九年来最低水平，为 241 天。AI 是一把双刃剑：它节省了 1900 万美元的数据泄露成本，但近 20% 的组织因“影子 AI”而遭遇数据泄露，平均损失为 67 万美元。深度伪造冒充等社会工程攻击几乎发生在每 6 起数据泄露事件中的 1 起。&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.ibm.com/reports/data-breach'&gt;《2025 年数据泄露成本报告》&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;成为网络攻击目标的中小型企业&lt;/td&gt;&lt;td&gt;30% 的数据泄露事件由第三方参与导致（是 2024 年的 2 倍）。&lt;/td&gt;&lt;td&gt;小型企业并非受到“黑客行动主义者”或内部人员的攻击；相反，外部犯罪分子会利用弱密码和人为失误来轻易牟利。&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.verizon.com/business/resources/infographics/2025-dbir-smb-snapshot.pdf'&gt;《2025 年数据泄露调查报告》- 中小型企业概览&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;数据泄露频率和成功率&lt;/td&gt;&lt;td&gt;共发生 3,049 起事件，其中 2,842 起导致已确认的数据泄露。&lt;/td&gt;&lt;td&gt;小型企业面临着从攻击演变为实际数据丢失的高转化率，约 93% 的事件最终导致成功的数据泄露。&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-of-data-breaches'&gt;Verizon DBIR 显示，勒索软件涉及 44% 的数据泄露事件&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;主要攻击模式&lt;/td&gt;&lt;td&gt;系统入侵、社会工程攻击和基本 Web 应用程序攻击导致了 96% 的数据泄露事件。&lt;/td&gt;&lt;td&gt;将安全工作集中于这三类攻击途径时效果最为显著，因为它们构成了大多数小型企业漏洞的来源。&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.kiteworks.com/third-party-risk/verizon-2025-dbir-third-party-risk-explosion/'&gt;勒索软件持续激增：新策略与付款变化&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text1" xml:space="preserve">
+    <value>中小型企业如今是主要攻击目标。漏装一个补丁，或 SSH 密钥被钓鱼窃取，都可能让攻击者控制您的系统。默认加密敏感数据，并迅速弥补明显的安全漏洞。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text2" xml:space="preserve">
+    <value>从被动修补转向主动安全防护：快速安装补丁、强制使用高强度凭据、持续监控，并降低第三方风险。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text3" xml:space="preserve">
+    <value>安全是企业的核心职能；它可以保护收入、信任和合规性。立即开始行动：加密文件、强化访问控制，并将安全视为每个人的职责。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading1" xml:space="preserve">
+    <value>AxCrypt for Linux：Linux 服务器安全以及如何在 Linux 服务器中保护文件并安全共享文件的分步指南
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading2" xml:space="preserve">
+    <value>为什么在 2026 年，Linux 服务器安全对中小型企业来说比以往任何时候都更加重要？</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading3" xml:space="preserve">
+    <value>每个中小型企业和创业者都必须了解的当前数据泄露统计趋势：
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading4" xml:space="preserve">
+    <value>最终要点与行动计划</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Summary" xml:space="preserve">
+    <value>2026 年初，高级 AI 网络攻击瞄准了 Linux 服务器和端点。这一增长趋势让中小型企业、大型公司及个人用户中的安全专家深感担忧，因为数据窃取所造成的高昂影响远远超出了常见的 IT 问题。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text1" xml:space="preserve">
+    <value>&lt;b&gt;简介&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text10" xml:space="preserve">
+    <value>这些发现只说明了一件事：网络威胁不再只是理论上的风险，也不是对未来的预判。它正在发生，持续不断，而且就在您阅读这篇文章的此刻已经存在。
+</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text2" xml:space="preserve">
+    <value>Linux 为现代企业的核心基础架构提供支撑：云、服务器、容器和物联网。对于中小型企业而言，Linux 是兼顾性能与成本的首选。随着关键工作负载迁移到 Linux，中小型企业的 Linux 数据安全如今已成为董事会层面的重点事项。随着 Linux 在初创企业、托管服务等领域的应用不断增长，中小型企业的 Linux 网络安全如今已至关重要。这是 2026 年中小型企业 Linux 数据安全的一项关键需求。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text3" xml:space="preserve">
+    <value>2026 年初，高级 AI 网络攻击瞄准了 Linux 服务器和端点设备。此类攻击的增加令中小型企业、大型公司和个人用户的安全专家感到担忧，因为数据窃取所造成的高昂影响远远超出了常见的 IT 问题。</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text4" xml:space="preserve">
+    <value>&lt;b&gt;以下是来自 &lt;a href='https://commandlinux.com/'&gt;Commandline Linux&lt;/a&gt; 的一些主要发现：&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text5" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;这种风险并非假设或理论上的风险。每年都会报告数千个漏洞（CVE），每天还会出现 8 至 9 个等待被利用的新漏洞，因此攻击面正在不断扩大。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;中小型企业由于安全资源有限，面临较高的暴露风险；而大型组织拥有更多关键数据，因此面临的风险也会进一步加剧。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text7" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;近 89% 的暴力破解攻击和攻击尝试都始于 SSH 等基本访问点。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;32% 的勒索软件攻击会利用已知漏洞，这意味着延迟安装补丁会直接转化为风险。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;近 46% 的组织报告称，在发生安全事件后失去了客户或收入。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Title" xml:space="preserve">
+    <value>2026 年小型企业 Linux 数据安全：Linux 文件加密与最佳实践简明指南</value>
+  </data>
   <data name="Blog_LYCWAR_Summary" xml:space="preserve">
     <value>当您使用AxCrypt2时，首先您必须"登录"-在第一次之后，这只是输入您的密码。 由于AxCrypt是一个基于密码的文件加密应用程序，这是有道理的。</value>
   </data>
@@ -11932,6 +12279,181 @@
   <data name="Blog_UODPCH_Title" xml:space="preserve">
     <value>使用被认为有害的不同密码</value>
   </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Heading" xml:space="preserve">
+    <value>现在正是使用 AxCrypt 采取行动的时候
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text1" xml:space="preserve">
+    <value>在 2026 年，数字威胁已经发生演变，数据比黄金更有价值。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text2" xml:space="preserve">
+    <value>不要拖延，也不要认为加密既困难又昂贵。我们提供从 AxCrypt 免费版到 AxCrypt 企业版的加密解决方案，专为所有用户而设计。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text3" xml:space="preserve">
+    <value>无论您是初次接触加密，还是只想保护 Windows 11、Linux 或 Mac 上的几个文件，我们都能满足您的需求。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text4" xml:space="preserve">
+    <value>不要让您的数据成为面临风险的 48% 中的一部分。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text5" xml:space="preserve">
+    <value>保护您的未来。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text6" xml:space="preserve">
+    <value>立即下载 AxCrypt，并&lt;a href='https://account.axcrypt.net/en/Home/Login?Signup=True'&gt;开始 14 天免费试用&lt;/a&gt;。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text1" xml:space="preserve">
+    <value>大多数组织确实会部署和使用加密工具及程序，但这种做法仍不普及。对于远程办公而言，这一缺口会进一步扩大。&lt;a href='https://nordlayer.com/blog/byod-security-risks/'&gt;根据 NordLayer 的总结&lt;/a&gt;，问题在于自带设备（BYOD）、不安全或公共 Wi-Fi、影子 IT、未加密的文件传输，以及暴露时间超过理想时长的公共云文件夹。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text10" xml:space="preserve">
+    <value>如果您正在使用 Windows 11，并正在寻找免费文件加密软件或强大的企业级加密方案，以保护团队的数据和工作流程，那么在 2026 年的威胁环境下，AxCrypt 就是您的理想解决方案。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text11" xml:space="preserve">
+    <value>点击此处阅读更多有关云数据安全的信息和解决方案。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text2" xml:space="preserve">
+    <value>另一个值得关注的问题是，安全文件共享的普及速度仍然缓慢，而云文件共享服务和远程访问路径会成为彼此独立的入口点。因此，在此过程中，只需一次错误配置或一批被盗的凭据，就可能成为攻击者直接访问公司数据的入口。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text3" xml:space="preserve">
+    <value>&lt;a href='https://blog.talosintelligence.com/ir-trends-q1-2026/'&gt;Talo's&lt;/a&gt; 的另一份事件响应数据报告显示，攻击者正在积极利用薄弱环节。在其 2026 年第一季度报告中，网络钓鱼是最常见的初始访问途径，而多因素身份验证（MFA）薄弱、基础设施暴露以及日志记录不完善一直是常见问题。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text4" xml:space="preserve">
+    <value>&lt;b&gt;那么，您如何保护云存储并最大限度地降低云安全风险呢？&lt;/b&gt;
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text5" xml:space="preserve">
+    <value>在这个“办公室”就是任何网络良好之处的时代，云数据安全不容妥协，咖啡休息时间也真正变成了在自家厨房中度过，AxCrypt 提供了安全的云存储环境，而大多数现代团队仍在努力达到这一水平。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;零负担云加密：无论是 Google Drive、OneDrive，还是 Dropbox，AxCrypt 都能实现无缝集成，最大限度减少操作障碍，最大限度提升云存储安全性，确保云端不会留有任何可供他人访问的未加密文件。如果您正在寻找一款能够与云端、本地文件无缝协作，并可在所有主流操作系统上顺畅运行的工具，那么 AxCrypt 正是一款能够以业务运转速度完成文件加密的应用程序。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text7" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;专为所有人打造：无论您使用的是 Windows，并希望使用适用于 Windows 11 的 AxCrypt，还是使用适用于 Linux 的 AxCrypt，甚至是 macOS，AxCrypt 都能在这些操作系统以及您的移动设备上流畅运行，帮助您全面了解如何在 Android 上查看加密文件。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;降低云安全风险：在整个组织范围内部署 AxCrypt 免费版或高级版，可消除影子 IT 和凭据被盗的风险。即使攻击者访问了云文件夹，AES-256 位加密也能保护其中的内容。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;赋能安全文件共享：AxCrypt 支持团队成员使用各自的密码共享文件，从而简化云安全最佳实践。它提供了最高效的云端文件加密方式，无需承担传统密钥管理所带来的管理负担。&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text1" xml:space="preserve">
+    <value>向无边界团队的转型不应迫使企业在速度与安全之间作出选择。云端仍然存在未加密文件的一个主要原因，是传统安全措施和加密方式所带来的操作阻碍。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text2" xml:space="preserve">
+    <value>当今不断演变的威胁环境使安全保护更具挑战性，但安全问题绝不能事后才考虑，也不能被忽视。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text3" xml:space="preserve">
+    <value>随着 AI 驱动的网络攻击和其他严重数据风险不断上升，员工往往会寻找变通方法，从而使这 48% 的缺口演变成数据泄露事件。目标是实现细粒度保护：文件加密必须做到无感且强大。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text4" xml:space="preserve">
+    <value>企业需要数据加密，尤其是细粒度级别的数据加密。您不仅可以保护文件和文件夹，还能让团队无论身处何地，都能在全面安全保障下安心工作。AxCrypt 通过坚不可摧的企业文件级安全保护，为您带来这种信心。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text5" xml:space="preserve">
+    <value>真正的数据泄露防范并非源于严格的限制，而是源于在细粒度层面实施战略性、智能化的数据保护。它会自动运行，因此即使您忘记采取操作，您的数据仍会受到保护。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text6" xml:space="preserve">
+    <value>无论您是希望将整个加密流程自动化，还是需要一款能够随时快速加密文件的简单应用程序，AxCrypt 都能通过我们的零知识安全保护，确保您的工作效率不受影响，同时保障您的隐私安全。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Heading1" xml:space="preserve">
+    <value>云文件加密如何最大限度降低数据泄露风险
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Heading2" xml:space="preserve">
+    <value>在不牺牲工作效率的情况下保护远程团队安全</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Summary" xml:space="preserve">
+    <value>随着越来越多的工作流程转移到云端，远程组织和去中心化组织不断增多，数据泄露正逐渐成为预料之中的事件，攻击面也在不断扩大。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text1" xml:space="preserve">
+    <value>&lt;b&gt;简介&lt;b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text10" xml:space="preserve">
+    <value>&lt;b&gt;2.&lt;/b&gt; 全球近一半的数据将存储在 AWS、Azure 和 Google 等超大规模云服务提供商处。根据 &lt;a href='https://spacelift.io/blog/cloud-computing-statistics'&gt;SpaceLift&lt;/a&gt; 的数据，AWS 以约 32% 的份额领先公有云市场，Microsoft Azure 以 23% 的份额紧随其后。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text11" xml:space="preserve">
+    <value>&lt;b&gt;3.&lt;/b&gt; 云风险正在上升：约 45% 的数据泄露事件发生在云端，服务器仍然是主要攻击目标。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text12" xml:space="preserve">
+    <value>&lt;b&gt;4.&lt;/b&gt; 尽管对安全的重视程度不断提高，但仍然存在重大缺口：48% 的企业仍在云端同时存储加密和未加密的数据，而自带设备（BYOD）做法和便利优先的文件共享方式通常会加剧这一问题。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text13" xml:space="preserve">
+    <value>&lt;b&gt;因此，核心问题在于，48% 的企业仍然在云端存储未加密文件，而这一危险缺口仍在持续存在并不断扩大。&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text14" xml:space="preserve">
+    <value>&lt;b&gt;但为什么会这样？&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text15" xml:space="preserve">
+    <value>当云端存在未加密文件时，这种安全缺口便会出现；而当加密只停留在书面政策层面，而未落实为云配置、密钥管理或访问控制中的日常实践时，这一缺口会进一步扩大。当云采用速度超过数据治理速度时，这一缺口和云安全风险也会随之加剧。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text16" xml:space="preserve">
+    <value>有高达 83% 的企业重视云数据安全。但其余企业呢？</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text17" xml:space="preserve">
+    <value>这一缺口确实存在，以下是其存在的主要原因：</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text18" xml:space="preserve">
+    <value>&lt;b&gt;1. 人们更看重便利性而非安全性：&lt;/b&gt; Google Drive、OneDrive 和 Dropbox 等云平台通过默认设置让共享变得轻而易举，例如，任何拥有链接的人基本上都可以访问内容。许多团队认为，服务提供商的内置保护措施已经足以保护敏感信息。但实际上，如果任何拥有链接的人都能访问，他们实际上也就能够访问您公司中的几乎所有内容。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text19" xml:space="preserve">
+    <value>&lt;b&gt;2. 认为过于复杂：&lt;/b&gt;大多数传统加密方式给人的感觉都很复杂且繁琐，会增加额外步骤、密钥管理工作，扰乱工作流程，还需要复杂脚本以及许多开发人员或程序员的参与。在节奏快速的组织中，尤其是远程团队，时间十分有限。云数据泄露正是在这一缺口中发生的。许多人认为部署云数据安全措施十分困难，因此直接放弃了这一想法。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text2" xml:space="preserve">
+    <value>随着越来越多的工作流程转移到云端，远程组织和去中心化组织不断增多，数据泄露正逐渐成为预料之中的事件，攻击面也在不断扩大。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text20" xml:space="preserve">
+    <value>&lt;b&gt;3. 资源限制：&lt;/b&gt;中小型企业和快速发展的中型公司面临的另一个挑战是缺乏专门的安全团队。它们往往优先考虑工作效率，而忽视了云数据安全。在发展过程中，管理层通常将加密视为事后才考虑的问题，或认为其成本过高。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text21" xml:space="preserve">
+    <value>&lt;b&gt;4. 政策不一致与 BYOD 文化：&lt;/b&gt;混合办公和远程办公通常会混用个人设备和公司设备。一些远程组织依赖员工的个人系统，而这些系统可能已遭到入侵。这会导致影子 IT、未加密上传和不安全下载。通过不安全的渠道和公共 Wi-Fi 发送敏感信息，会使未加密的数据暴露给黑客和攻击者。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text22" xml:space="preserve">
+    <value>&lt;b&gt;5. 最后一点，也是我们特别想强调的一点：“这种事绝不会发生在我们身上”的心态：&lt;/b&gt;在数据泄露真正发生之前，风险似乎只是抽象的概念。许多中小型企业、自由职业者和小型团队错误地认为自己是安全的。当他们认为数据泄露或攻击不会影响到自己时，事故往往就在此时发生。他们忽视数据安全，通过不安全的渠道发送敏感信息，并让第三方能够看到所有内容。这种心态十分有害，尤其是对于没有办公场所或缺乏适当云安全措施的组织而言。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text3" xml:space="preserve">
+    <value>到 2026 年，近 98% 的员工将寻求远程办公选项，约 27% 的劳动力希望实现完全远程办公。有消息来源称，混合办公劳动力如今已在职场格局中占据主导地位，其中近 52% 的人希望改善工作与生活之间的平衡。近 89% 的科技行业员工接受混合办公和远程办公模式。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text4" xml:space="preserve">
+    <value>远程办公和混合办公看似方便可行，但也伴随着诸多威胁。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text5" xml:space="preserve">
+    <value>云端未加密的文件——首先就是最容易被攻击的目标。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text6" xml:space="preserve">
+    <value>即使在今天，大多数员工和专业人士仍然认为，基本的云数据安全措施应该就足够了。但实际上，这正是所有风险的入口。由于威胁环境始终在不断演变，再加上 AI 驱动的网络攻击和现成可用的恶意软件，突破防护变得十分容易。绕过基本的云数据安全措施，甚至利用权限漏洞获取您的所有数据，并不需要多么高明的黑客技术。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text7" xml:space="preserve">
+    <value>如果缺乏强有力的云数据安全实践，也没有用于加密云端文件的应用程序，尤其是在远程办公时，您不仅会面临迫在眉睫的数据泄露风险，还可能因不符合合规要求而陷入困境。
+</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text8" xml:space="preserve">
+    <value>为了从统计角度了解远程办公以及基于云端、无边界劳动力的现状，以下是截至目前 2026 年最重要的云数据安全统计数据报告。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text9" xml:space="preserve">
+    <value>&lt;b&gt;1.&lt;/b&gt; 到 2026 年，约有 200 泽字节的数据将存储在云端，从而加速向远程、云优先工作模式的转变。</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Title" xml:space="preserve">
+    <value>为什么 48% 的企业仍在云端存储未加密文件，以及 AxCrypt 如何解决这一问题
+</value>
+  </data>
   <data name="Blog_WAMHIHY_Conclusion_Heading" xml:space="preserve">
     <value>不用投资就能得到报酬！</value>
   </data>
@@ -11967,6 +12489,9 @@
   </data>
   <data name="Blog_WAMHIHY_H2_Text4" xml:space="preserve">
     <value>建立更好的声誉-您可以通过与AxCrypt等信誉良好且可靠的公司联系来提高您在互联网上的声誉。</value>
+  </data>
+  <data name="Blog_WAMHIHY_H2_Text5" xml:space="preserve">
+    <value>此外，为您的受众制作视觉效果出色的&lt;a href='https://www.adobe.com/express/create/brochure'&gt;宣传册设计&lt;/a&gt;材料，有助于以更专业、更具吸引力的方式展示您的联盟推广内容。</value>
   </data>
   <data name="Blog_WAMHIHY_H3_SH1_Text1" xml:space="preserve">
     <value>通过我们的256位加密，AxCrypt通过实施用户友好且易于使用的加密软件来提高数据安全性并降低违规风险。</value>
@@ -14793,6 +15318,10 @@
   <data name="BrandToneLabel" xml:space="preserve">
     <value>品牌基调</value>
   </data>
+  <data name="BrowseFilesText" xml:space="preserve">
+    <value>浏览文件
+</value>
+  </data>
   <data name="BrowseText" xml:space="preserve">
     <value>浏览</value>
   </data>
@@ -14801,6 +15330,9 @@
   </data>
   <data name="BruteForceResistantText" xml:space="preserve">
     <value>动态蛮力计数器措施 - 迭代密码包装使攻击更加困难。</value>
+  </data>
+  <data name="BulkActionText" xml:space="preserve">
+    <value>批量操作</value>
   </data>
   <data name="BusinessAcceptInvitationText" xml:space="preserve">
     <value>接受邀请</value>
@@ -15734,6 +16266,54 @@
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>单击此项可对安全文件夹中打开的任何文件或新文件进行加密，但请确保它们首先未被使用。</value>
   </data>
+  <data name="CloudServicesConnectedText" xml:space="preserve">
+    <value>已连接</value>
+  </data>
+  <data name="CloudServicesConnectText" xml:space="preserve">
+    <value>连接
+</value>
+  </data>
+  <data name="CloudServicesDisconnectText" xml:space="preserve">
+    <value>断开连接
+</value>
+  </data>
+  <data name="CloudServicesDropBoxHelpText" xml:space="preserve">
+    <value>在 Dropbox 上保持文件加密——只有您持有密钥。
+</value>
+  </data>
+  <data name="CloudServicesFooter" xml:space="preserve">
+    <value>提示：您可以同时保持登录多个服务提供商。
+</value>
+  </data>
+  <data name="CloudServicesGoogleDriveHelpText" xml:space="preserve">
+    <value>在将文件上传到您的 Google Drive 之前对其进行加密。
+</value>
+  </data>
+  <data name="CloudServicesLocalHelpText" xml:space="preserve">
+    <value>浏览此设备上的文件。</value>
+  </data>
+  <data name="CloudServicesLocalHelpText1" xml:space="preserve">
+    <value>连接后可管理此服务提供商中的加密文件。</value>
+  </data>
+  <data name="CloudServicesManageFilesText" xml:space="preserve">
+    <value>管理文件</value>
+  </data>
+  <data name="CloudServicesNotConnectedText" xml:space="preserve">
+    <value>未连接
+</value>
+  </data>
+  <data name="CloudServicesOneDriveHelpText" xml:space="preserve">
+    <value>将加密文件发送到 OneDrive，而不会暴露文件内容。
+</value>
+  </data>
+  <data name="CloudServicesPhoneBrowserHelpText" xml:space="preserve">
+    <value>打开并解密存储在您手机上的文件。
+</value>
+  </data>
+  <data name="CloudServicesSubTitle" xml:space="preserve">
+    <value>连接、浏览并管理您的加密云存储。文件会在到达任何云端&lt;em&gt;之前&lt;/em&gt;，先在您的设备上完成加密。
+</value>
+  </data>
   <data name="CloudServicesText" xml:space="preserve">
     <value>云服务</value>
   </data>
@@ -16417,8 +16997,18 @@
   <data name="DebugLoggingToolStripMenuItemText" xml:space="preserve">
     <value>测井</value>
   </data>
+  <data name="DebugManageAccountSubTitle" xml:space="preserve">
+    <value>在 axcrypt.net 上更新个人资料、安全设置和联系信息
+</value>
+  </data>
   <data name="DebugManageAccountToolStripMenuItemText" xml:space="preserve">
     <value>管理AxCrypt ID</value>
+  </data>
+  <data name="DebugModeDescription" xml:space="preserve">
+    <value>写入详细的错误日志，以帮助诊断问题</value>
+  </data>
+  <data name="DebugModeTitle" xml:space="preserve">
+    <value>调试模式</value>
   </data>
   <data name="DebugOptionsToolStripMenuItemText" xml:space="preserve">
     <value>选项</value>
@@ -17207,8 +17797,14 @@
   <data name="EncryptFileOpenDialogTitle" xml:space="preserve">
     <value>选择要安全的文件</value>
   </data>
+  <data name="EncryptFilesAllSubFoldersPopup" xml:space="preserve">
+    <value>加密所有子文件夹中的文件</value>
+  </data>
   <data name="EncryptFileSaveAsDialogTitle" xml:space="preserve">
     <value>文件存在，另存为</value>
+  </data>
+  <data name="EncryptFilesBeforeUploadPopup" xml:space="preserve">
+    <value>上传前加密文件</value>
   </data>
   <data name="EncryptLabelText" xml:space="preserve">
     <value>加密</value>
@@ -17218,6 +17814,10 @@
   </data>
   <data name="EncryptToolStripMenuItemText" xml:space="preserve">
     <value>安全</value>
+  </data>
+  <data name="EncryptUnlimitedText" xml:space="preserve">
+    <value>无限制加密文本
+</value>
   </data>
   <data name="EnglishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>英语</value>
@@ -17280,6 +17880,10 @@
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>退出</value>
   </data>
+  <data name="ExitToolSubTitle" xml:space="preserve">
+    <value>关闭 AxCrypt 应用程序
+</value>
+  </data>
   <data name="ExpirationDatePrompt" xml:space="preserve">
     <value>有效期限</value>
   </data>
@@ -17292,6 +17896,10 @@
   <data name="ExpireInLabelFirstPart" xml:space="preserve">
     <value>过期</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
+  </data>
+  <data name="ExpiryDatesKeys" xml:space="preserve">
+    <value>密钥到期日期
+</value>
   </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>导出成功！</value>
@@ -17307,6 +17915,9 @@
   </data>
   <data name="ExportSharingKeyToolStripMenuItemToolTipText" xml:space="preserve">
     <value>将导出的公共共享密钥发送给您想与您共享加密文件的其他人。</value>
+  </data>
+  <data name="ExtraPrivacyProtectionPopup" xml:space="preserve">
+    <value>额外隐私保护</value>
   </data>
   <data name="FailedAddFolderNotification" xml:space="preserve">
     <value>添加文件夹失败！ {0}</value>
@@ -17843,9 +18454,29 @@
     <value>修改日期</value>
     <comment>A menu text for selecting file properties - date modified for encryption.</comment>
   </data>
+  <data name="FilePropertiesDescription" xml:space="preserve">
+    <value>即使加密后，也保持原始文件的修改日期不变。</value>
+  </data>
   <data name="FilePropertiesFileNameToolStripMenuItem" xml:space="preserve">
     <value>文件名</value>
     <comment>A menu text for selecting file properties - file name for encryption.</comment>
+  </data>
+  <data name="FilePropertiesInfoText" xml:space="preserve">
+    <value>这些属性存储在&lt;strong&gt;加密文件内部&lt;/strong&gt;。您无需解密文件，即可对其进行排序和识别。</value>
+  </data>
+  <data name="FilePropertiesOriginalFileNameDescription" xml:space="preserve">
+    <value>在加密过程中使用安全的随机名称替换原始文件名，以隐藏原始文件名。
+</value>
+  </data>
+  <data name="FilePropertiesOriginalFileNameTitle" xml:space="preserve">
+    <value>原始文件名
+</value>
+  </data>
+  <data name="FilePropertiesSortableColumns" xml:space="preserve">
+    <value>可排序列</value>
+  </data>
+  <data name="FilePropertiesSubTitle" xml:space="preserve">
+    <value>选择要嵌入每个加密文件中的元数据</value>
   </data>
   <data name="FilePropertiesToolStripMenuItemText" xml:space="preserve">
     <value>加密文件属性</value>
@@ -17883,6 +18514,10 @@
   </data>
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>财务</value>
+  </data>
+  <data name="FindEncryptedFilesQuicklyPopup" xml:space="preserve">
+    <value>快速查找加密文件
+</value>
   </data>
   <data name="FindFileFeatureTitle" xml:space="preserve">
     <value>查找文件</value>
@@ -18201,6 +18836,10 @@
   </data>
   <data name="GeneralLabel" xml:space="preserve">
     <value>总体</value>
+  </data>
+  <data name="GenerateSecureRandomFileNamesPopup" xml:space="preserve">
+    <value>生成安全的随机文件名
+</value>
   </data>
   <data name="GenerateText" xml:space="preserve">
     <value>生成</value>
@@ -19045,14 +19684,95 @@
   <data name="HelpContactsprtText4" xml:space="preserve">
     <value>请求功能</value>
   </data>
+  <data name="HelpOverlayAnyServerDescription" xml:space="preserve">
+    <value>不会。所有加密和解密操作均在您的设备本地进行。SecureApp 绝不会传输您的未加密数据。
+</value>
+  </data>
+  <data name="HelpOverlayAnyServerTitle" xml:space="preserve">
+    <value>我的数据会发送到任何服务器吗？</value>
+  </data>
+  <data name="HelpOverlayCollapseSidebarDescription" xml:space="preserve">
+    <value>点击侧边栏顶部的 ← 按钮将其折叠，以获得更多屏幕空间。将鼠标悬停在图标上即可查看标签。
+</value>
+  </data>
+  <data name="HelpOverlayCollapseSidebarTitle" xml:space="preserve">
+    <value>折叠侧边栏</value>
+  </data>
+  <data name="HelpOverlayDragDropEncryptDescription" xml:space="preserve">
+    <value>将桌面上的任意文件拖放到“最近使用的文件”部分，即可立即加密——无需打开对话框。
+</value>
+  </data>
+  <data name="HelpOverlayDragDropEncryptTitle" xml:space="preserve">
+    <value>拖放以加密</value>
+  </data>
+  <data name="HelpOverlayEncryptYourFirstFileDescription" xml:space="preserve">
+    <value>从“快速操作”中点击“加密文件”，或将任意文件拖放到“最近使用的文件”部分。您的文件将立即使用 AES-256 进行加密。</value>
+  </data>
+  <data name="HelpOverlayEncryptYourFirstFileTitle" xml:space="preserve">
+    <value>加密您的第一个文件
+</value>
+  </data>
+  <data name="HelpOverlayGlobalSearchDescription" xml:space="preserve">
+    <value>从顶部的搜索栏中搜索任何文件、工具或页面。结果会随着您的输入实时筛选。
+</value>
+  </data>
+  <data name="HelpOverlayGlobalSearchTitle" xml:space="preserve">
+    <value>全局搜索</value>
+  </data>
+  <data name="HelpOverlayQuickEncryptShortcutDescription" xml:space="preserve">
+    <value>在应用程序中的任意位置按 Ctrl+E，即可立即打开文件选择器并加密新文件。</value>
+  </data>
+  <data name="HelpOverlayQuickEncryptShortcutTitle" xml:space="preserve">
+    <value>快速加密快捷方式</value>
+  </data>
+  <data name="HelpOverlayRightClickContextMenuDescription" xml:space="preserve">
+    <value>右键点击“最近使用的文件”列表中的任意文件，即可执行快速操作：打开、共享密钥、匿名重命名或从最近使用的文件中移除。
+</value>
+  </data>
+  <data name="HelpOverlayRightClickContextMenuTitle" xml:space="preserve">
+    <value>右键上下文菜单</value>
+  </data>
+  <data name="HelpOverlaySetupYourVaultDescription" xml:space="preserve">
+    <value>保险库将所有加密文件保存在一个安全文件夹中。启用自动加密后，新文件将在您保存的那一刻受到保护。</value>
+  </data>
+  <data name="HelpOverlaySetupYourVaultTitle" xml:space="preserve">
+    <value>设置您的保险库
+</value>
+  </data>
+  <data name="HelpOverlayShareFileSecurelyDescription" xml:space="preserve">
+    <value>使用“安全共享”生成一次性共享密钥。收件人只能使用该密钥打开文件，并且您可以随时撤销访问权限。</value>
+  </data>
+  <data name="HelpOverlayShareFileSecurelyTitle" xml:space="preserve">
+    <value>安全共享文件
+</value>
+  </data>
+  <data name="HelpOverlayTitle" xml:space="preserve">
+    <value>开始使用 SecureApp
+</value>
+  </data>
+  <data name="HelpOverlayWhatHappensDescription" xml:space="preserve">
+    <value>SecureApp 无法恢复您的密码——这是其设计机制。请始终将您的密码存储在安全的位置。“密钥管理”（专业版）功能可让您设置恢复密钥。
+</value>
+  </data>
+  <data name="HelpOverlayWhatHappensTitle" xml:space="preserve">
+    <value>如果我忘记了密码，会发生什么？</value>
+  </data>
   <data name="HelpToolStripMenuItemText" xml:space="preserve">
     <value>帮助</value>
+  </data>
+  <data name="HelpToolSubTitle" xml:space="preserve">
+    <value>打开应用内帮助中心和入门指南
+</value>
   </data>
   <data name="HelpViewHelpMenuItemText" xml:space="preserve">
     <value>查看帮助</value>
   </data>
   <data name="HideFeaturesLabel" xml:space="preserve">
     <value>隐藏功能</value>
+  </data>
+  <data name="HideOriginalFileNamesPopup" xml:space="preserve">
+    <value>隐藏原始文件名
+</value>
   </data>
   <data name="HideRecentFilesListTabToolTipText" xml:space="preserve">
     <value>最近的文件列表被禁用。 转到选项以启用。</value>
@@ -20076,6 +20796,13 @@ SE-114 29 斯德哥尔摩
   <data name="JobTitlePlaceholder" xml:space="preserve">
     <value>输入您的职位名称</value>
   </data>
+  <data name="KeepCloudDataPrivatePopup" xml:space="preserve">
+    <value>确保云端数据私密安全</value>
+  </data>
+  <data name="KeepFolderStructurePopup" xml:space="preserve">
+    <value>保持文件夹结构有序
+</value>
+  </data>
   <data name="KeepMeUpdatedLinkLabel" xml:space="preserve">
     <value>让我更新</value>
   </data>
@@ -20168,6 +20895,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>点击 &lt;b&gt;应用&lt;/b&gt; 按钮。</value>
+  </data>
+  <data name="KeyShareOneTime" xml:space="preserve">
+    <value>一次性共享密钥</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>通常，员工会相互共享相关和与工作相关的信息。但是，在共享过程中担心数据的安全性是不可避免的。由于这引起了对共享安全文件的担忧，因此加密软件具有可让您更安全地共享和接收文件的功能非常重要。</value>
@@ -20500,6 +21230,10 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="LogoAndIconLabel" xml:space="preserve">
     <value>标志和图标</value>
+  </data>
+  <data name="LogOffSubTitle" xml:space="preserve">
+    <value>退出此设备上的登录——您的文件将保持加密状态
+</value>
   </data>
   <data name="LogOffText" xml:space="preserve">
     <value>注销</value>
@@ -21351,6 +22085,10 @@ SE-114 29 斯德哥尔摩
   <data name="Meta-Description-Blog-ITTROLPPAVU" xml:space="preserve">
     <value>了解未受保护的个人媒体如何导致身份盗用。发现使用 AxCrypt 的 AES-256 加密保护您的照片和视频的技巧。</value>
   </data>
+  <data name="Meta-Description-Blog-LDSFSB2SGLFEBP" xml:space="preserve">
+    <value>通过 Linux 文件加密、网络安全最佳实践以及面向中小型企业的安全数据共享，在 2026 年保护 Linux 服务器和业务文件。
+</value>
+  </data>
   <data name="Meta-Description-Blog-LYCWAR" xml:space="preserve">
     <value>想知道让 AxCrypt 在您的计算机上运行是否安全？了解要采取的预防措施以及如何确保您的文件保持安全。</value>
   </data>
@@ -21434,6 +22172,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="Meta-Description-Blog-UODPCH" xml:space="preserve">
     <value>了解为什么使用不同的密码可能会增加您的安全风险。了解加密和密码管理如何帮助确保数据安全。</value>
+  </data>
+  <data name="Meta-Description-Blog-W4BSSUFOTCAHAFI" xml:space="preserve">
+    <value>48% 的企业在云端存储未加密文件。了解 AxCrypt 的 AES-256 加密如何保护您的数据、防止数据泄露并保护远程团队。</value>
   </data>
   <data name="Meta-Description-Blog-WATPOI" xml:space="preserve">
     <value>探索 WikiLeaks 的影响以及加密在保护敏感信息方面的重要性。学习数据保护方面的经验教训。</value>
@@ -22005,6 +22746,10 @@ SE-114 29 斯德哥尔摩
   <data name="Meta-Title-Blog-ITTROLPPAVU" xml:space="preserve">
     <value>保护个人照片和视频免受身份盗窃</value>
   </data>
+  <data name="Meta-Title-Blog-LDSFSB2SGLFEBP" xml:space="preserve">
+    <value>2026 年中小型企业 Linux 数据安全：文件加密与最佳实践
+</value>
+  </data>
   <data name="Meta-Title-Blog-LYCWAR" xml:space="preserve">
     <value>让 AxCrypt 在您的计算机上运行是否安全？</value>
   </data>
@@ -22088,6 +22833,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="Meta-Title-Blog-UODPCH" xml:space="preserve">
     <value>为什么使用不同的密码会对您的安全有害</value>
+  </data>
+  <data name="Meta-Title-Blog-W4BSSUFOTCAHAFI" xml:space="preserve">
+    <value>为什么 48% 的企业在云端存储未加密文件 | AxCrypt</value>
   </data>
   <data name="Meta-Title-Blog-WATPOI" xml:space="preserve">
     <value>WikiLeaks：加密在保护信息中的作用</value>
@@ -22457,6 +23205,10 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="MFAText2" xml:space="preserve">
     <value>请选择您的身份验证方法。</value>
+  </data>
+  <data name="MFAuthenticationAdditionalFactorText" xml:space="preserve">
+    <value>在密码之外添加额外的身份验证因素用于登录。
+</value>
   </data>
   <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>如何在 AxCrypt 中启用 MFA？</value>
@@ -22884,6 +23636,10 @@ SE-114 29 斯德哥尔摩
   <data name="NisWhatsInsidesubheading" xml:space="preserve">
     <value>里面有什么：</value>
   </data>
+  <data name="NoCloudServicesText" xml:space="preserve">
+    <value>当前没有可用的云服务提供商。
+</value>
+  </data>
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>你被注销了。 点击登录。</value>
   </data>
@@ -23023,6 +23779,10 @@ SE-114 29 斯德哥尔摩
   <data name="OneFreeMonthLabel" xml:space="preserve">
     <value>14天免费</value>
   </data>
+  <data name="OneLatestStandardPopup" xml:space="preserve">
+    <value>一键符合最新标准
+</value>
+  </data>
   <data name="OnlyAdminOnActiveBusinessSubscriptionError" xml:space="preserve">
     <value>无法删除用户，因为他们是Business订阅的唯一管理员。 取消订阅或提名其他管理员。</value>
   </data>
@@ -23059,8 +23819,16 @@ SE-114 29 斯德哥尔摩
   <data name="OptionsChangePassphraseToolStripMenuItemText" xml:space="preserve">
     <value>更改密码</value>
   </data>
+  <data name="OptionsClearAllSettingsAndExitSubTitle" xml:space="preserve">
+    <value>重置偏好设置，并在此设备上开始新的会话
+</value>
+  </data>
   <data name="OptionsClearAllSettingsAndExitToolStripMenuItemText" xml:space="preserve">
     <value>清除所有设置并重新启动</value>
+  </data>
+  <data name="OptionsConvertMenuItemDescription" xml:space="preserve">
+    <value>打开 AES-128 加密文件时，自动将其升级为 AES-256 加密。
+</value>
   </data>
   <data name="OptionsConvertMenuItemText" xml:space="preserve">
     <value>自动将文件升级到AES-256</value>
@@ -23073,8 +23841,16 @@ SE-114 29 斯德哥尔摩
   <data name="OptionsDebugToolStripMenuItemText" xml:space="preserve">
     <value>调试</value>
   </data>
+  <data name="OptionsHideRecentFilesDescription" xml:space="preserve">
+    <value>不要在主页上列出您最近打开的文件
+</value>
+  </data>
   <data name="OptionsHideRecentFilesToolStripMenuItemText" xml:space="preserve">
     <value>隐藏最近的文件</value>
+  </data>
+  <data name="OptionsIncludeSubfoldersDescription" xml:space="preserve">
+    <value>加密文件夹时，同时加密其子文件夹中的每个文件
+</value>
   </data>
   <data name="OptionsIncludeSubfoldersToolStripMenuItemText" xml:space="preserve">
     <value>包含子文件夹</value>
@@ -23871,6 +24647,9 @@ SE-114 29 斯德哥尔摩
   <data name="PreparingAxCryptText" xml:space="preserve">
     <value>正在准备 AxCrypt...</value>
   </data>
+  <data name="PreserveOriginalModifiedDatePopup" xml:space="preserve">
+    <value>保留原始修改日期</value>
+  </data>
   <data name="PressAndHoldLabel" xml:space="preserve">
     <value>按住查看更多</value>
     <comment>Tooltip for Press and hold gesture in mobile application</comment>
@@ -24154,6 +24933,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="PricingViewerTierInfo" xml:space="preserve">
     <value>您只能解密现有文件（您之前自行加密的文件，或他人与您共享的文件）。</value>
+  </data>
+  <data name="PriorityCustomerSupport" xml:space="preserve">
+    <value>优先客户支持</value>
   </data>
   <data name="PrioritySupportTitle" xml:space="preserve">
     <value>优先支持</value>
@@ -24821,6 +25603,9 @@ SE-114 29 斯德哥尔摩
   <data name="PromptXecretsSecretText" xml:space="preserve">
     <value>密码或秘密</value>
   </data>
+  <data name="PROText" xml:space="preserve">
+    <value>专业版</value>
+  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>所选订阅时间无效。 有效订阅必须至少为{0}个月，且不超过{1}个月。</value>
   </data>
@@ -24879,6 +25664,123 @@ SE-114 29 斯德哥尔摩
     <value>&lt;b&gt;您对AxCrypt业务有任何疑问吗？&lt;/b&gt;
 请&lt;a href="mailto:business@axcrypt.net"&gt;联系我们&lt;/a&gt;我们将尽快帮助您。</value>
   </data>
+  <data name="QuickActionsSubTitle" xml:space="preserve">
+    <value>一键访问您最常执行的操作——打开、加密、解密或共享。
+</value>
+  </data>
+  <data name="QuickActionsTitle" xml:space="preserve">
+    <value>快速操作
+</value>
+  </data>
+  <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
+    <value>高级算法</value>
+  </data>
+  <data name="QuickSecureActionAdvancedVaultSecurity" xml:space="preserve">
+    <value>访问高级保险库安全功能
+</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyEncrypt" xml:space="preserve">
+    <value>自动加密新增/更改的文件</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyMonitor" xml:space="preserve">
+    <value>通过安全加密自动监控并保护您的文件夹。</value>
+  </data>
+  <data name="QuickSecureActionControlFiles" xml:space="preserve">
+    <value>控制谁可以访问文件</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShare" xml:space="preserve">
+    <value>加密并共享</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShareDescription" xml:space="preserve">
+    <value>保护文件，并准备好安全共享。</value>
+  </data>
+  <data name="QuickSecureActionEncryptedVaults" xml:space="preserve">
+    <value>在加密保险库中安全地存储和保护您的敏感文件。
+</value>
+  </data>
+  <data name="QuickSecureActionHeader" xml:space="preserve">
+    <value>选择操作</value>
+  </data>
+  <data name="QuickSecureActionMonitorMultiple" xml:space="preserve">
+    <value>安全监控多个文件夹</value>
+  </data>
+  <data name="QuickSecureActionNoNeedSharePasswords" xml:space="preserve">
+    <value>无需共享密码</value>
+  </data>
+  <data name="QuickSecureActionPermanentFileDeletion" xml:space="preserve">
+    <value>永久删除文件
+</value>
+  </data>
+  <data name="QuickSecureActionPermanentlyDelete" xml:space="preserve">
+    <value>永久删除文件，使其无法恢复。
+</value>
+  </data>
+  <data name="QuickSecureActionPreventFileRecovery" xml:space="preserve">
+    <value>防止文件被恢复</value>
+  </data>
+  <data name="QuickSecureActionProtectImportantFiles" xml:space="preserve">
+    <value>保护重要文件和文件夹
+</value>
+  </data>
+  <data name="QuickSecureActionProtectSensitive" xml:space="preserve">
+    <value>自动保护敏感文件
+</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFiles" xml:space="preserve">
+    <value>最近保护的文件</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFilesDescription" xml:space="preserve">
+    <value>快速打开您最近保护或访问过的文件。</value>
+  </data>
+  <data name="QuickSecureActionRemoveAccessAnytime" xml:space="preserve">
+    <value>随时撤销访问权限</value>
+  </data>
+  <data name="QuickSecureActionSecureEncryptedVaults" xml:space="preserve">
+    <value>创建安全加密保险库</value>
+  </data>
+  <data name="QuickSecureActionSecureFilesShare" xml:space="preserve">
+    <value>保护文件，并与他人安全共享加密访问权限。</value>
+  </data>
+  <data name="QuickSecureActionSecureFolder" xml:space="preserve">
+    <value>保护文件夹</value>
+  </data>
+  <data name="QuickSecureActionSecureFolderDescription" xml:space="preserve">
+    <value>通过加密保护文件夹中的所有文件。
+</value>
+  </data>
+  <data name="QuickSecureActionSensitiveInformation" xml:space="preserve">
+    <value>保护敏感信息</value>
+  </data>
+  <data name="QuickSecureActionShareFileAccessSecurely" xml:space="preserve">
+    <value>安全共享文件访问权限</value>
+  </data>
+  <data name="QuickSecureActionUnlimitedFiles" xml:space="preserve">
+    <value>无限数量的文件</value>
+  </data>
+  <data name="QuickSecureActionUnlockAdvanced" xml:space="preserve">
+    <value>解锁高级安全功能</value>
+  </data>
+  <data name="QuickSecureActionUnlockMoreFeatures" xml:space="preserve">
+    <value>升级以解锁更多功能。</value>
+  </data>
+  <data name="QuickSecureActionUnlockPremium" xml:space="preserve">
+    <value>解锁高级保护功能
+</value>
+  </data>
+  <data name="QuickSecureActionUnlockSecurityTools" xml:space="preserve">
+    <value>解锁高级安全工具</value>
+  </data>
+  <data name="QuickSecureAddFilesVault" xml:space="preserve">
+    <value>将文件添加到保险库</value>
+  </data>
+  <data name="QuickSecureAddFilesVaultDescription" xml:space="preserve">
+    <value>将您的重要文件存储在安全的保险库中。
+</value>
+  </data>
+  <data name="QuickSecureSecureDeleteDescription" xml:space="preserve">
+    <value>永久删除文件，使其无法恢复。
+</value>
+  </data>
   <data name="RateApplicationLinkAndroid" xml:space="preserve">
     <value>请在 &lt;a &gt;谷歌播放&lt;/A&gt; 上为我们评分 </value>
     <comment>Link to app store in mobile application (Android)</comment>
@@ -24917,11 +25819,51 @@ SE-114 29 斯德哥尔摩
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>我们敦促您尽快重新尝试付款，以保护您的敏感数据并继续享受付费功能。</value>
   </data>
+  <data name="RecentFilesAES256Always" xml:space="preserve">
+    <value>始终使用 AES-256</value>
+  </data>
+  <data name="RecentFilesBatchEncryption" xml:space="preserve">
+    <value>批量加密</value>
+  </data>
+  <data name="RecentFilesDropFiles" xml:space="preserve">
+    <value>将文件拖放到此处进行加密
+</value>
+  </data>
+  <data name="RecentFilesFreePlan" xml:space="preserve">
+    <value>免费方案允许加密 3 个文件。升级后可无限制加密文件。</value>
+  </data>
+  <data name="RecentFileShareContextMenu" xml:space="preserve">
+    <value>使用一次性密钥安全共享加密文件
+</value>
+  </data>
+  <data name="RecentFilesNoFilesCurrentlyOpen" xml:space="preserve">
+    <value>当前没有打开的文件
+</value>
+  </data>
+  <data name="RecentFilesNoSharedFilesYet" xml:space="preserve">
+    <value>暂无共享文件</value>
+  </data>
   <data name="RecentFilesOpenToolStripMenuItemText" xml:space="preserve">
     <value>打开</value>
   </data>
+  <data name="RecentFilesReencryptClose" xml:space="preserve">
+    <value>重新加密并关闭</value>
+  </data>
+  <data name="RecentFilesShareSomeone" xml:space="preserve">
+    <value>与他人共享文件后，该文件将显示在此处。</value>
+  </data>
+  <data name="RecentFilesSubTitle" xml:space="preserve">
+    <value>双击文件将其打开。右键点击以执行更多操作。
+</value>
+  </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>最近的文件</value>
+  </data>
+  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
+    <value>无限制加密</value>
+  </data>
+  <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
+    <value>您打开的文件在解密期间将显示在此处。</value>
   </data>
   <data name="RecentFoldersText" xml:space="preserve">
     <value>最近使用的文件夹</value>
@@ -25062,6 +26004,10 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="RemoveText" xml:space="preserve">
     <value>删除</value>
+  </data>
+  <data name="RenameDeleteOrDecryptFilesPopup" xml:space="preserve">
+    <value>重命名、删除或解密文件
+</value>
   </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>此帐户上有一个活跃的定期订阅。 无需手动续订定期Business订阅。</value>
@@ -25583,6 +26529,10 @@ SE-114 29 斯德哥尔摩
   <data name="ReviewsLabel" xml:space="preserve">
     <value>审查</value>
   </data>
+  <data name="RevokeAccessAnytime" xml:space="preserve">
+    <value>随时撤销访问权限
+</value>
+  </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>俄语</value>
     <comment>The name of the Russian Language in Russian. It should never be translated.</comment>
@@ -25593,6 +26543,10 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="SaveSecretErrorIsReadOnly" xml:space="preserve">
     <value>只有具有有效订阅计划的用户才允许保存密码条目。</value>
+  </data>
+  <data name="ScheduledVaultBackupsPopup" xml:space="preserve">
+    <value>定期保险库备份
+</value>
   </data>
   <data name="ScriptingEnabledLabel" xml:space="preserve">
     <value>启用脚本</value>
@@ -25671,6 +26625,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="SecureCloudFaq3Ans" xml:space="preserve">
     <value>可以。您可以通过应用内的“共享密钥”功能，安全地共享存储在云端的加密文件。 &lt;/br&gt;&lt;/br&gt;借助云安全功能，您可以授予访问权限并对用户进行授权。您的文件会持续受到云安全的保护，并且仅对已批准或已授权的用户开放访问。 &lt;/br&gt;&lt;/br&gt;此云同步功能可提供最高级别的文件保护，让您对自己的数据拥有完全的控制权与安全保障。</value>
+  </data>
+  <data name="SecureCloudFileProtectionPopup" xml:space="preserve">
+    <value>安全的云端文件保护</value>
   </data>
   <data name="SecureCloudGuidebuttonHead1" xml:space="preserve">
     <value>通过应用程序保护云存储中的文件</value>
@@ -25797,6 +26754,9 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="SecureCloudWhatNextText2" xml:space="preserve">
     <value>&lt;a href='/information/guides/vault/'&gt;AxCrypt Vault 功能指南 | 加密并保护文件&lt;/a&gt;</value>
+  </data>
+  <data name="SecuredCloudHelpText" xml:space="preserve">
+    <value>通过安全加密和高级安全功能保护您存储在云端的文件。</value>
   </data>
   <data name="SecuredCloudLinkLabel" xml:space="preserve">
     <value>云安全</value>
@@ -26050,6 +27010,14 @@ SE-114 29 斯德哥尔摩
   <data name="SecuredMessengerText" xml:space="preserve">
     <value>使用AES-256加密确保目标收件人跨设备进行私密、安全的通信。</value>
   </data>
+  <data name="SecureEncryptedVaultPopup" xml:space="preserve">
+    <value>安全加密保险库
+</value>
+  </data>
+  <data name="SecureKeySharingPopup" xml:space="preserve">
+    <value>安全密钥共享
+</value>
+  </data>
   <data name="SecurityBlock1Heading" xml:space="preserve">
     <value>为什么AxCrypt安全？</value>
   </data>
@@ -26201,6 +27169,51 @@ SE-114 29 斯德哥尔摩
   <data name="SecuritySectionText" xml:space="preserve">
     <value>安全对我们至关重要。 我们与AxCrypt所做的一切都以安全为最高优先级。 我们确保没有人可以访问您的加密文件，只要您可以控制自己的密码。</value>
     <comment>Description of "Security" section of About Us page in mobile application.</comment>
+  </data>
+  <data name="SecurityStatusEncryptionsPerMonth" xml:space="preserve">
+    <value>每月 2 次加密操作</value>
+  </data>
+  <data name="SecurityStatusFreePlan" xml:space="preserve">
+    <value>免费方案每月最多可加密 2 个文件。</value>
+  </data>
+  <data name="SecurityStatusGroupkeySharing" xml:space="preserve">
+    <value>群组密钥共享
+</value>
+  </data>
+  <data name="SecurityStatusGroupkeySharingDescription" xml:space="preserve">
+    <value>按团队或角色共享访问权限——集中管理。
+</value>
+  </data>
+  <data name="SecurityStatusMasterKeyRecovery" xml:space="preserve">
+    <value>主密钥恢复
+</value>
+  </data>
+  <data name="SecurityStatusMasterKeyRecoveryDescription" xml:space="preserve">
+    <value>如果成员失去访问权限，您的组织可以恢复文件。
+</value>
+  </data>
+  <data name="SecurityStatusSecureDeleteTitle" xml:space="preserve">
+    <value>通过多次覆写永久擦除文件。
+</value>
+  </data>
+  <data name="SecurityStatusTitle" xml:space="preserve">
+    <value>安全状态
+</value>
+  </data>
+  <data name="SecurityStatusUnlimitedAES256" xml:space="preserve">
+    <value>无限制 AES-256 加密与密钥共享
+</value>
+  </data>
+  <data name="SecurityStatusUnlimitedAES256Description" xml:space="preserve">
+    <value>无每日限制——还可与受信任的收件人共享密钥。
+</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription" xml:space="preserve">
+    <value>无每日限制——还可与受信任的收件人共享密钥。
+</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription1" xml:space="preserve">
+    <value>无每日限制，支持密钥共享和匿名重命名。</value>
   </data>
   <data name="SecurityUpdateAvailableWarning" xml:space="preserve">
     <value>由于安全问题，您的软件需要更新。</value>
@@ -26406,6 +27419,26 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="ShowPasswordOptionPrompt" xml:space="preserve">
     <value>显示密码</value>
+  </data>
+  <data name="ShowUpgradeAutoEncryptOpenedPopup" xml:space="preserve">
+    <value>自动加密已打开或待处理的文件
+</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPendingPopup" xml:space="preserve">
+    <value>在一段时间无操作后自动退出登录，并保护您已打开或待处理的文件。
+</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPopup" xml:space="preserve">
+    <value>自动退出登录保护
+</value>
+  </data>
+  <data name="ShowUpgradeEnhancedSecurityPopup" xml:space="preserve">
+    <value>解锁增强型安全功能
+</value>
+  </data>
+  <data name="ShowUpgradeProtectSensitivePopup" xml:space="preserve">
+    <value>保护敏感数据
+</value>
   </data>
   <data name="SignedInUserInfo" xml:space="preserve">
     <value>使用了&lt;b&gt;{0}&lt;/b&gt;登录</value>
@@ -26693,6 +27726,10 @@ SE-114 29 斯德哥尔摩
   <data name="SubscriptionDeletedText" xml:space="preserve">
     <value>已删除</value>
   </data>
+  <data name="SubscriptionDetailsSubTitle" xml:space="preserve">
+    <value>查看您的方案、账单和续订详情
+</value>
+  </data>
   <data name="SubscriptionDetailsTitle" xml:space="preserve">
     <value>订阅详情</value>
   </data>
@@ -26818,6 +27855,10 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>瑞典语</value>
+  </data>
+  <data name="SwitchToDarkActionDescription" xml:space="preserve">
+    <value>在低光环境下更护眼——立即应用于整个应用程序
+</value>
   </data>
   <data name="SwitchToDarkActionText" xml:space="preserve">
     <value>切换到深色模式</value>
@@ -27168,6 +28209,10 @@ SE-114 29 斯德哥尔摩
   <data name="TextCheckEmailAndSpam" xml:space="preserve">
     <value>检查邮件和垃圾邮件！</value>
   </data>
+  <data name="TextEncryptionAdvancedProtectionFeatures" xml:space="preserve">
+    <value>通过高级保护功能安全地加密您的文本。
+</value>
+  </data>
   <data name="TextEncryptionEmailBodyText" xml:space="preserve">
     <value>此文本已加密——请使用AxCrypt查看原始消息。</value>
   </data>
@@ -27390,6 +28435,10 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="ToolTipPremiumNeededForSecrets" xml:space="preserve">
     <value>密码管理需要付费订阅计划。 点击立即升级！</value>
+  </data>
+  <data name="TopBarPrivacySecurity" xml:space="preserve">
+    <value>隐私与安全
+</value>
   </data>
   <data name="TotalLicencesText" xml:space="preserve">
     <value>许可证 （已用/总计）</value>
@@ -27658,8 +28707,29 @@ AxCrypt团队</value>
   <data name="UnknownLogOn" xml:space="preserve">
     <value>密码以前不知道。 点击"新建"创建一个新的。</value>
   </data>
+  <data name="UnlimitedVaultEntriesPopup" xml:space="preserve">
+    <value>保险库条目数量不限
+</value>
+  </data>
+  <data name="UnlockAdvancedCloudSecurityPopup" xml:space="preserve">
+    <value>解锁高级云安全功能</value>
+  </data>
+  <data name="UnlockAdvancedEncryptionFeaturesPopup" xml:space="preserve">
+    <value>解锁高级加密功能
+</value>
+  </data>
   <data name="UnlockAdvancedFeaturesText" xml:space="preserve">
     <value>解锁&lt;span&gt;更强大且无限制的加密&lt;/span&gt;功能！</value>
+  </data>
+  <data name="UnlockAdvancedFileManagementPopup" xml:space="preserve">
+    <value>解锁高级文件管理功能</value>
+  </data>
+  <data name="UnlockAdvancedFileSecurityPopup" xml:space="preserve">
+    <value>解锁高级文件安全功能</value>
+  </data>
+  <data name="UnlockAdvancedFolderPopup" xml:space="preserve">
+    <value>解锁高级文件夹保护功能
+</value>
   </data>
   <data name="UnlockFeatures" xml:space="preserve">
     <value>解锁我们的&lt;span&gt;惊人&lt;/span&gt;&lt;span&gt;功能！&lt;/span&gt;升级到 &lt;span&gt;Premium&lt;/span&gt; 或 &lt;b&gt;Business&lt;/b&gt;</value>
@@ -27696,6 +28766,9 @@ AxCrypt团队</value>
   </data>
   <data name="UpdatePaymentDetailsText" xml:space="preserve">
     <value>更新付款详情</value>
+  </data>
+  <data name="UpdateRequiredText" xml:space="preserve">
+    <value>需要更新</value>
   </data>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} 已成功更新。</value>
@@ -27740,6 +28813,9 @@ AxCrypt团队</value>
   <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
     <value>&lt;strong&gt;升级以解锁完整的加密功能！&lt;/strong&gt;</value>
   </data>
+  <data name="UpgradeToUnlockText" xml:space="preserve">
+    <value>升级以解锁</value>
+  </data>
   <data name="UpgradeVersionDialogText" xml:space="preserve">
     <value>您想现在下载，还是在下次启动时下载？</value>
   </data>
@@ -27757,6 +28833,9 @@ AxCrypt团队</value>
   </data>
   <data name="UsageOtherText" xml:space="preserve">
     <value>其他</value>
+  </data>
+  <data name="UsageTipsAnonymousFileDescription" xml:space="preserve">
+    <value>加密文件不会在磁盘上留下原始文件名的任何痕迹。</value>
   </data>
   <data name="UsageTipsAnonymousFileHeading" xml:space="preserve">
     <value>匿名文件名</value>
@@ -27892,6 +28971,10 @@ AxCrypt团队</value>
   </data>
   <data name="UseCustomPasswordHead1" xml:space="preserve">
     <value>使用一个强且易于记忆的自定义密码来加密文本。</value>
+  </data>
+  <data name="UserActivitiesDescription" xml:space="preserve">
+    <value>记录所有文件操作——加密、解密、共享、删除
+</value>
   </data>
   <data name="UserActivitiesText" xml:space="preserve">
     <value>用户活动</value>
@@ -28226,8 +29309,28 @@ AxCrypt团队</value>
   <data name="VaultMisConfigured" xml:space="preserve">
     <value>保险库设置的路径似乎被移动或删除了。请在设置→高级设置→保险库设置中重新配置保险库。</value>
   </data>
+  <data name="VaultSettingsDescription" xml:space="preserve">
+    <value>保险库路径、自动锁定计时器和备份频率
+</value>
+  </data>
   <data name="VaultSettingsTitle" xml:space="preserve">
     <value>保险库设定 </value>
+  </data>
+  <data name="VaultStatusAuto-encryption" xml:space="preserve">
+    <value>自动加密已&lt;strong&gt;开启&lt;/strong&gt;
+</value>
+  </data>
+  <data name="VaultStatusPaidText" xml:space="preserve">
+    <value>安全保险库是一项付费功能
+</value>
+  </data>
+  <data name="VaultStatusText" xml:space="preserve">
+    <value>保险库状态
+</value>
+  </data>
+  <data name="VaultStatusUnlockUnlimited" xml:space="preserve">
+    <value>解锁无限受保护存储和自动加密功能。
+</value>
   </data>
   <data name="VaultText" xml:space="preserve">
     <value>保险库</value>
@@ -28276,6 +29379,10 @@ AxCrypt团队</value>
   </data>
   <data name="ViewAllText" xml:space="preserve">
     <value>查看全部..</value>
+  </data>
+  <data name="ViewAndManageFileReferencesPopup" xml:space="preserve">
+    <value>查看和管理文件引用信息
+</value>
   </data>
   <data name="ViewCardTitle" xml:space="preserve">
     <value>查看银行卡</value>

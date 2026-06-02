@@ -437,6 +437,9 @@ Lägg till Kort</value>
   <data name="AddEmailPromptText" xml:space="preserve">
     <value>Lägg till mail</value>
   </data>
+  <data name="AddExtraPrivacyProtectionPopup" xml:space="preserve">
+    <value>Lägg till extra integritetsskydd</value>
+  </data>
   <data name="AddFileLabel" xml:space="preserve">
     <value>Öppna AxCrypt-fil</value>
     <comment>Tooltip for "AddFile" button in mobile application</comment>
@@ -506,6 +509,27 @@ Lägg till Kort</value>
   </data>
   <data name="AdminLabel" xml:space="preserve">
     <value>Administration</value>
+  </data>
+  <data name="AdvancedDebugWarningText" xml:space="preserve">
+    <value>Felsökningsloggar kan inkludera filvägar. Inaktivera när du inte aktivt felsöker för att skydda din sekretess.</value>
+  </data>
+  <data name="AdvancedDiagnosticsText" xml:space="preserve">
+    <value>Diagnostik och övervakning</value>
+  </data>
+  <data name="AdvancedEncryptionAlgorithms" xml:space="preserve">
+    <value>Avancerade krypteringsalgoritmer</value>
+  </data>
+  <data name="AdvancedFooterHintText" xml:space="preserve">
+    <value>Förändringar träder i kraft omedelbart</value>
+  </data>
+  <data name="AdvancedOptionsConfiguration" xml:space="preserve">
+    <value>Konfiguration</value>
+  </data>
+  <data name="AdvancedOptionsSubTitle" xml:space="preserve">
+    <value>Appkonfiguration, diagnostik och övervakningskontroller</value>
+  </data>
+  <data name="AdvancedOptionsTitle" xml:space="preserve">
+    <value>Avancerade Alternativ</value>
   </data>
   <data name="AdvancedSettingsText" xml:space="preserve">
     <value>Avancerade inställningar</value>
@@ -647,6 +671,9 @@ Logga nu in med samma lösenord som du angav då.</value>
     <value>Alltid Frånkopplad</value>
     <comment>Menu choice with checkbox indicating if we are running offline or not.</comment>
   </data>
+  <data name="AlwaysOfflineDescription" xml:space="preserve">
+    <value>Arbeta helt offline – synka aldrig med eller kommunicera med våra servrar </value>
+  </data>
   <data name="AlwaysOfflineToolTip" xml:space="preserve">
     <value>Om Alltid Frånkopplad aktiveras, kommer ingen Internetåtkomst att krävas eller användas tills funktionen avaktiveras.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
@@ -675,6 +702,9 @@ Logga nu in med samma lösenord som du angav då.</value>
   <data name="AnnualSubscriptionTitle" xml:space="preserve">
     <value>Årlig</value>
   </data>
+  <data name="AnonymousRenameMenuDescription" xml:space="preserve">
+    <value>Använd sidan Verktyg för att ersätta filnamn med slumpmässiga ID:n — så att ingen kan gissa innehållet i en fil enbart utifrån dess namn.</value>
+  </data>
   <data name="AnonymousRenameMenuText" xml:space="preserve">
     <value>Anonymt Namnbyte</value>
   </data>
@@ -689,6 +719,9 @@ Logga nu in med samma lösenord som du angav då.</value>
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>AxCrypt ID Verifiering [ {0} ]</value>
+  </data>
+  <data name="AppConfigurationDescription" xml:space="preserve">
+    <value>Datavägar, cache-placering och återställa standardinställningar</value>
   </data>
   <data name="AppConfigurationText" xml:space="preserve">
     <value>Konfiguration av Appar</value>
@@ -799,6 +832,9 @@ Logga nu in med samma lösenord som du angav då.</value>
   <data name="AutoDeletionMailSubject" xml:space="preserve">
     <value>Ditt AxCrypt ID-konto raderas snart!</value>
   </data>
+  <data name="AutolockOnInactivityPopup" xml:space="preserve">
+    <value>Auto-låsning vid inaktivitet</value>
+  </data>
   <data name="AutomatedMessageText" xml:space="preserve">
     <value>Det här är ett automatiskt meddelande. Svara inte direkt på det här e-postmeddelandet.</value>
   </data>
@@ -807,6 +843,15 @@ Logga nu in med samma lösenord som du angav då.</value>
   </data>
   <data name="AutomaticFileUpdatingText" xml:space="preserve">
     <value>Automatisk uppdatering av den säkrade filen efter att ha öppnats och sparats.</value>
+  </data>
+  <data name="AutoUpgradeFilesAES256" xml:space="preserve">
+    <value>Automatisk uppgradering av filer till AES-256</value>
+  </data>
+  <data name="AvailablePremiumBusinessPlans" xml:space="preserve">
+    <value>Finns på Premium- och Företags-prenumerationer.</value>
+  </data>
+  <data name="AvoidVisibleEncryptionPopup" xml:space="preserve">
+    <value>Undvik synliga tidsstämplar för kryptering</value>
   </data>
   <data name="AwardsLabel" xml:space="preserve">
     <value>Utmärkelser</value>
@@ -1498,6 +1543,9 @@ Du har blivit varnad, njut nu av programvaran!</value>
   <data name="AxCWhatsNextSecurityText3" xml:space="preserve">
     <value>Ta en titt på AxCrypts säkerhetssida: &lt;a href='/information/security/'&gt;&lt;b&gt;Varför är AxCrypt säkert? | Algoritmer&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
+  <data name="BackgroundEncryptionMigrationPopup" xml:space="preserve">
+    <value>Migrering av kryptering i bakgrunden</value>
+  </data>
   <data name="BacktoAxCryptIDText" xml:space="preserve">
     <value>Tillbaka till &lt;span&gt;AxCrypt ID&lt;/span&gt;</value>
   </data>
@@ -1513,6 +1561,9 @@ Du har blivit varnad, njut nu av programvaran!</value>
   <data name="BadEmail" xml:space="preserve">
     <value>Felaktig e-postadress</value>
     <comment>Displayed when email address format validation fails.</comment>
+  </data>
+  <data name="BatchEncryptMultiplePopup" xml:space="preserve">
+    <value>Kryptera flera filer samtidigt</value>
   </data>
   <data name="BecomeanAffiliateText" xml:space="preserve">
     <value>Bli en Affiliate partner</value>
@@ -10277,6 +10328,264 @@ Det finns flera sätt på vilka identitetsstöld kan uppstå. En vanlig metod ä
   <data name="Blog_ITESBETFC_Title" xml:space="preserve">
     <value>Är utbildningssektorn ett lätt mål för cyberattacker?</value>
   </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Heading" xml:space="preserve">
+    <value>Din Data är bara ett Slarvigt Klick Från Ett Intrång,</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text1" xml:space="preserve">
+    <value>Fixa det nu!</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text2" xml:space="preserve">
+    <value>Ärligt talat: Om du är seriös med ditt företag och skydda företagsdata på Linux och på alla andra enheter, är detta nästa steg viktigt.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text3" xml:space="preserve">
+    <value>&lt;li&gt;Kryptera alla okrypterade filer eller känslig information som du tror kan användas mot dig vid en ransomware-attack. &lt;a href='https://account.axcrypt.net/en/Home/Login?Signup=True'&gt;Starta din AxCrypt gratisprovperiod härifrån.&lt;/a&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text4" xml:space="preserve">
+    <value>&lt;li&gt;Om du inte har utnyttjat AxCrypt maximalt i dina datasäkerhetsrutiner och vill lära dig mer, kolla in &lt;a href='https://axcrypt.net/helpcenter/'&gt;Våra Guider i Våra Resurser.&lt;/a&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text5" xml:space="preserve">
+    <value>&lt;li&gt;&lt;a href='https://axcrypt.net/blog/'&gt;Välj din nästa läsning och håll dig uppdaterad&lt;/a&gt; med de aktuella Cybersäkerhetstrenderna med AxCrypt.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text1" xml:space="preserve">
+    <value>Användare som arbetar inom högsäkerhetsområden behöver veta hur man visar krypterade filer på Android eller hanterar .axx-filer (AxCrypt Encrypted Files) på arbetsstationer. Säkerheten måste vara sömlös oavsett om man använder AxCrypt Windows 11 eller AxCrypt för Linux, med målet att förhindra dataexfiltration.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text10" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;När du har krypterat filen kan du se att den är sparad med filfiländelsen .axx.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text11" xml:space="preserve">
+    <value>Du kan läsa mer om att kryptera och dekryptera dina filer i detalj i denna guide om &lt;a href='https://axcrypt.net/information/guides/encryption-decryption/'&gt;Kryptering och Dekryptering med AxCrypt&lt;/a&gt;.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text12" xml:space="preserve">
+    <value>&lt;b&gt;3. Automatisera din kryptering med AxCrypts Valv-Funktion:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text13" xml:space="preserve">
+    <value>Du kan nu börja säkra filer på Linux utan att missa någon av dem.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text14" xml:space="preserve">
+    <value>&lt;b&gt;Så här kan du konfigurera AxCrypt Valv.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text15" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Allt du behöver göra är att logga in i appen &gt; klicka på inställningar &gt; avancerade inställningar &gt; och sedan Valvinställningar.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text16" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Välj var du vill att Valvet ska ligga, och bekräfta sedan ditt val.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text17" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Detta är valfritt, men om du är verkligen, VERKLIGEN seriös med din integritet, kan du slumpmässigt generera Valvet för ett extra lager av integritet.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text18" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Om du har inbäddade filer och mappar, se till att välja "Inkludera undermappar".&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text19" xml:space="preserve">
+    <value>När filen är konfigurerad flyttas alla tillagda filer automatiskt in i valvet och krypteras, vilket skyddar konfidentiella Linux-filer.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text2" xml:space="preserve">
+    <value>I ett säkerhetssystem bör det inte finnas något svar på hur man öppnar krypterade filer utan lösenord, stark kryptering är utformad för att förhindra just det.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text20" xml:space="preserve">
+    <value>&lt;b&gt;Hur man lägger till filer i AxCrypt-valvet:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text21" xml:space="preserve">
+    <value>Att använda åtgärdsmenyn:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text22" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Klicka helt enkelt på valvikonen&gt; välj sedan den mapp eller fil du vill ha. &gt; klickar sedan på lägg till och väljer vad du vill kryptera.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text23" xml:space="preserve">
+    <value>Att använda Dra och Släpp-alternativet:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text24" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Dra filer eller mappar till Valvet&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text25" xml:space="preserve">
+    <value>I båda fallen krypteras filer omedelbart och visas i dina senaste filer, perfekt för säkra affärsdokument på Linux och dagliga arbetsflöden.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text26" xml:space="preserve">
+    <value>Läs mer om Valv-krypteringen här i denna guide: &lt;a href='https://axcrypt.net/information/guides/vault/'&gt;AxCrypt Vault – Användarguide.&lt;/a&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text27" xml:space="preserve">
+    <value>&lt;b&gt;4. Säkra Filer i Molnet med AxCrypt för Linux med Molnsäkerhet:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text28" xml:space="preserve">
+    <value>För team, frilansare och decentraliserade organisationer är denna Linux Server Security precis vad du behöver för att säkerställa att din data, särskilt när du arbetar med molnet.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text29" xml:space="preserve">
+    <value>&lt;b&gt;Så här kan du säkra molnlagring på Linux med AxCrypt:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text3" xml:space="preserve">
+    <value>För Linux-serversäkerhet är kryptering ens starkaste första försvar. Om du hanterar interna dokument eller kunddata är det avgörande att säkra filer—särskilt för små och medelstora företag, där ett enda intrång kan vara förödande. Till skillnad från BitLocker eller FileVault behöver många team dedikerad, plattformsoberoende kryptering som skyddar specifika mappar och fungerar parallellt med Linux-arbetsflöden.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text30" xml:space="preserve">
+    <value>&lt;b&gt;Metod A:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text31" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Kryptera Befintliga Molnfiler&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text32" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Öppna AxCrypt och välj din molnleverantör&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text33" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Välj den fil du vill skydda&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text34" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Klicka på åtgärdsmenyn (3 punkter) → Välj Säkra&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text35" xml:space="preserve">
+    <value>&lt;b&gt;Metod B:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text36" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Ladda upp och Kryptera Samtidigt&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text37" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Klicka på "+"-knappen i appen&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text38" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Välj filen att ladda upp&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text39" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Öppna den för kryptering&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Låt oss titta på hur man arbetar med AxCrypt för Linux:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text40" xml:space="preserve">
+    <value>Om du vill lära dig mer om &lt;a href='https://axcrypt.net/information/guides/secure-cloud/'&gt;AxCrypt för Linux och Molnsäkerhet, läs mer här.&lt;/a&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text41" xml:space="preserve">
+    <value>&lt;b&gt;5. Dela Filer Säkert med Nyckeldelning:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text42" xml:space="preserve">
+    <value>För företag som fokuserar på Linux-datasäkerhet för småföretag slår denna uppgradering traditionella fildelningsmetoder.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text43" xml:space="preserve">
+    <value>&lt;b&gt;Hur man Delar Filer på ett Säkert Sätt med Hjälp av Nyckeldelning&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text44" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Kryptera din fil med AxCrypt&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text45" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Högerklicka på filen → Klicka på Dela nycklar&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text46" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Lägg till mottagarens e-postadress&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text47" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Klicka på Sök&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text48" xml:space="preserve">
+    <value>När det är klart:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text49" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Mottagaren får tillgång till att dekryptera filen&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text5" xml:space="preserve">
+    <value>&lt;b&gt;1. Installation:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text50" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Du måste fortfarande skicka filen separat via e-post, molnet eller en säker kanal. Denna fil kommer fortfarande att vara säkrad med 256-bitars krypteringsalgoritmen.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text51" xml:space="preserve">
+    <value>Detta arbetsflöde är avgörande för att säkra fjärrfiler på Linux och distribuerade team för att säkerställa att säkerheten följer med dina filer, vart de kan flyttas eller vila.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Klicka &lt;a href='https://axcrypt.net/download/'&gt;&lt;b&gt;här&lt;/b&gt;&lt;/a&gt; för att komma igång. När du har installerat AxCrypt för Linux, den enkla och perfekta Linux-krypteringsprogramvaran, logga in med ditt AxCrypt-registrerade e-postadress och lösenord. Dessa inloggningsuppgifter är den enda åtkomst du behöver för att dekryptera dina filer krypterade med AxCrypt för Linux.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text7" xml:space="preserve">
+    <value>&lt;b&gt;2. Kryptering och dekryptering av filer på AxCrypt för Linux:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;När du lyckats skapa ett konto hos AxCrypt för Linux och loggat in i applikationen, måste du klicka på knappen 'Säkra' i åtgärdsmenyn för att kryptera dina filer.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Detta kommer nu att omdirigera dig till filvalsfönstret, där du kan välja en fil du vill kryptera.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text1" xml:space="preserve">
+    <value>År 2026 är Linux Server Security viktigare än någonsin för små och medelstora företag  på grund av Linux ökande användning i moln-/serverlösningar. Den driver 75 % av webbbaserade datorer, vilket gör dem till attraktiva mål för angripare.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text2" xml:space="preserve">
+    <value>För små och medelstora företag som vill säkra filer på Linux-servrar eller förbättra säkerheten är utmaningen inte förebyggande utan att framtidssäkra systemen och ligga steget före exploateringar. Angriparna känner till luckorna och bakdörrarna. Därför är Linux-filkryptering och filkryptering på Linux viktigare än någonsin.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text3" xml:space="preserve">
+    <value>Attackfönstret är tiden mellan att sårbarheter upptäcks och att de åtgärdas. Att säkra känsliga filer på Linux under denna tid är avgörande. Vi granskade fynd från Commandline Linux och Linux Security om sårbarheter som utnyttjades 2025, och belyste varför verktyg som AxCrypt för Linux, modern Linux-krypteringsprogramvara, är avgörande för filkryptering hos småföretag.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Sårbarheter identifierade och aktivt utnyttjades.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text5" xml:space="preserve">
+    <value>&lt;table border='1' cellspacing='0' cellpadding='8'&gt;&lt;tr&gt;&lt;th&gt;CVE-ID&lt;/th&gt;&lt;th&gt;Sårbarhetstyp&lt;/th&gt;&lt;th&gt;CVSS-poäng&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-1086&lt;/td&gt;&lt;td&gt;Användning-efter-fri (nätfilter)&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-53104&lt;/td&gt;&lt;td&gt;Out-of-bounds write (UVC-drivrutin)&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-53150&lt;/td&gt;&lt;td&gt;Utanför gränsen läst (ALSA-ljud)&lt;/td&gt;&lt;td&gt;7.1–7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-53197&lt;/td&gt;&lt;td&gt;ALSA-ljudsårbarhet&lt;/td&gt;&lt;td&gt;Högt&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-50302&lt;/td&gt;&lt;td&gt;HID-drivrutinssårbarhet&lt;/td&gt;&lt;td&gt;Högt&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2023-0386&lt;/td&gt;&lt;td&gt;Privilegieeskalering (OverlayFS)&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2021-22555&lt;/td&gt;&lt;td&gt;Heap-out-of-bounds-skriv (netfilter)&lt;/td&gt;&lt;td&gt;8.3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2022-0847&lt;/td&gt;&lt;td&gt;Privilegieupptrappning ("Dirty Pipe")&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2019-13272&lt;/td&gt;&lt;td&gt;Otillbörlig privilegiehantering&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2021-3493&lt;/td&gt;&lt;td&gt;Privilegieeskalering (OverlayFS)&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2025-21756&lt;/td&gt;&lt;td&gt;Use-after-free (vsock-delsystem)&lt;/td&gt;&lt;td&gt;Högt&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2025-38352&lt;/td&gt;&lt;td&gt;Tävlingsvillkor (TOCTOU – Linux-kärna)&lt;/td&gt;&lt;td&gt;Högt&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text6" xml:space="preserve">
+    <value>Listan avslöjar ett tydligt mönster i angriparens metoder. De flesta av de nämnde sårbarheter gäller brister i behörighetseskalering som spåras av CISA. Från nätfilterbuggar som CVE-2024-1086 till Overlay FS och drivrutinsproblem, riktar angripare in sig på kärnkomponenter i Linux för att få root-behörighet med minimal ansträngning.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text7" xml:space="preserve">
+    <value>&lt;b&gt;Vad detta betyder för dig som SMF-ägare och alla andra med viktig information:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text8" xml:space="preserve">
+    <value>Angripare sonderar inte bara små och medelstora företag; De tar tyst kontroll över systemen. Om du behöver agera snabbt, börja med AxCrypt Gratis. När någon i ditt team frågar, 'Vad är AxCrypt?' eller söker efter AxCrypt Gratis, är det en signal om att de är redo att täppa till säkerhetsluckor.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H3_Text1" xml:space="preserve">
+    <value>Dataintrång är inte längre en enskild händelse. De förväntas nu, och det innebär att Linux-datasäkerheten för småföretag behöver skärpas. Här är de viktigaste och mest aktuella statistiken som formar cybersäkerhetens utveckling 2026.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H3_Text2" xml:space="preserve">
+    <value>&lt;table border='1' cellspacing='0' cellpadding='8'&gt;&lt;tr&gt;&lt;th&gt;Metrik&lt;/th&gt;&lt;th&gt;Statistik&lt;/th&gt;&lt;th&gt;Resultat&lt;/th&gt;&lt;th&gt;Källa&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Genomsnittlig kostnad för ett dataintrång år 2025&lt;/td&gt;&lt;td&gt;4,44 miljoner till 4,45 miljoner dollar&lt;/td&gt;&lt;td&gt;Tiden för att hantera ett intrång nådde en nioårslägsta nivå på 241 dagar. AI är ett tveeggat svärd: det sparade 19 miljoner dollar i intrångskostnader, men nästan 20 % av organisationerna drabbades av intrång från 'Shadow AI', vilket i genomsnitt kostade 670 000 dollar. Social engineering-attacker som deepfake-imitation förekommer i nästan 1 av 6 intrång.&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.ibm.com/reports/data-breach'&gt;Kostnad för en dataintrångsrapport 2025&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;SMF som är måltavlor för cyberattacker&lt;/td&gt;&lt;td&gt;30 % av intrången berodde på tredjepartsinblandning (dubbelt så mycket som 2024).&lt;/td&gt;&lt;td&gt;Småföretag är inte måltavlor för 'hacktivister' eller insiders; Istället söker externa brottslingar enkla utbetalningar genom att utnyttja svaga lösenord och mänskliga misstag.&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.verizon.com/business/resources/infographics/2025-dbir-smb-snapshot.pdf'&gt;2025 års rapport om dataintrångsutredningar - 2025 års rapport om dataintrångsutredningar. Översikt av små och medelstora företag&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Frekvens av intrång och framgångsgrad&lt;/td&gt;&lt;td&gt;3 049 incidenter totalt varav 2 842 resulterade i bekräftad datautdelning.&lt;/td&gt;&lt;td&gt;Småföretag har en hög konverteringsgrad från attack till faktisk dataförlust, där cirka 93 % av incidenterna resulterar i ett lyckat intrång.&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-of-data-breaches'&gt;Verizon DBIR visar att ransomware är inblandad i 44 % av dataintrången&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Primära attackmönster&lt;/td&gt;&lt;td&gt;Systemintrång, social engineering och grundläggande webbapplikationsattacker orsakar 96 % av intrången.&lt;/td&gt;&lt;td&gt;Säkerhetsinsatser är mest effektiva när de fokuserar på dessa tre vektorer, som står för de flesta småföretags sårbarheter.&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.kiteworks.com/third-party-risk/verizon-2025-dbir-third-party-risk-explosion/'&gt;Ransomwares fortsatta våg: Nya taktiker och förändrade betalningar&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text1" xml:space="preserve">
+    <value>Små och medelstora företag är nu huvudsakliga mål. En missad patch eller en nätfiskad SSH-nyckel kan ge angripare tillgång till dina system. Kryptera känslig data som standard och åtgärda säkerhetsbrister snabbt.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text2" xml:space="preserve">
+    <value>Gå från reaktiva fixar till proaktiv säkerhet: patcha snabbt, upprätthåll starka inloggningsuppgifter, övervaka kontinuerligt och minska risken för tredje part.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text3" xml:space="preserve">
+    <value>Säkerhet är en kärnfunktion i verksamheten; Den skyddar intäkter, förtroende och efterlevnad. Börja idag: kryptera filer, förstärk åtkomstkontrollen och se till att säkerhet är allas ansvar.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading1" xml:space="preserve">
+    <value>AxCrypt för Linux: En steg-för-steg-guide om Linux-serversäkerhet och hur man säkrar filer och säkert delar filer inom Linux-servrar</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading2" xml:space="preserve">
+    <value>Varför är Linux-serversäkerhet viktigare än någonsin för små och medelstora företag år 2026?</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading3" xml:space="preserve">
+    <value>Aktuella Trender inom Dataintrångsstatistik som varje SMF och Entreprenör Bör Känna till:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading4" xml:space="preserve">
+    <value>Slutsatser och Handlingsplan</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Summary" xml:space="preserve">
+    <value>I början av 2026 riktades avancerade AI-cyberattacker mot Linux-servrar och -slutpunkter. Denna ökning oroar säkerhetsexperter inom SMF, stora företag och privatpersoner, eftersom datastöld orsakar kostsamma konsekvenser utöver vanliga IT-frågor.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text1" xml:space="preserve">
+    <value>&lt;b&gt;Introduktion&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text10" xml:space="preserve">
+    <value>Dessa fynd berättar bara en sak: cyberhoten finns inte längre bara i teorin, och de är inte en förväntan. Det är aktivt, det är bestående och det händer samtidigt som du läser den här artikeln.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text2" xml:space="preserve">
+    <value>Linux utgör ryggraden i många moderna företags infrastrukturer: moln, servrar, containrar och IoT. För små och medelstora företag är det det främsta valet när det gäller prestanda och kostnad. Linux-datasäkerhet för småföretag är nu en styrelsens prioritet när viktiga arbetsbelastningar flyttas till Linux. Med ökad Linux-användning i start-ups, hosting och mer är Linux Cybersecurity för små och medelstora företag nu nödvändigt. Det är ett nyckelbehov inom Linux-datasäkerhet för småföretag år 2026.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text3" xml:space="preserve">
+    <value>I början av 2026 riktades avancerade AI-cyberattacker mot Linux-servrar och -klienenheter. Denna ökning oroar säkerhetsexperter inom SMF, stora företag och privatpersoner, eftersom datastöld orsakar kostsamma konsekvenser utöver vanliga IT-frågor.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Här är några viktiga resultat från &lt;a href='https://commandlinux.com/'&gt;Commandline Linux:&lt;/a&gt;&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text5" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Risken är varken hypotetisk eller teoretisk. Med tusentals sårbarheter (CVE) rapporterade varje år och 8–9 nya som dyker upp dagligen och är redo på att utnyttjas, ökar attackytan ständigt.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Små och medelstora företag står inför hög exponering på grund av begränsade säkerhetsresurser, medan större organisationer med betydligt mer kritisk data står inför en ökad risk.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text7" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Nästan 89 % av brute-force-attacker och försök börjar via grundläggande åtkomstpunkter som SSH.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;32 % av ransomware-attacker utnyttjar kända sårbarheter, vilket innebär att fördröjd patchning direkt innebär risk.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Nästan 46 % av organisationerna rapporterar att de förlorat kunder eller intäkter efter en säkerhetsincident.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Title" xml:space="preserve">
+    <value>Linux-Datasäkerhet för Småföretag 2026: En Kort Guide till Linux-Filkryptering och Bästa Praxis</value>
+  </data>
   <data name="Blog_LYCWAR_Summary" xml:space="preserve">
     <value>När du använder AxCrypt 2 måste du först "logga in" - efter första gången är det bara att ange ditt lösenord. Eftersom AxCrypt är en lösenordsbaserad app för filkryptering är det rimligt.</value>
   </data>
@@ -12450,6 +12759,156 @@ Jämföra fil vs. Diskkryptering</value>
   <data name="Blog_UODPCH_Title" xml:space="preserve">
     <value>Användning av olika lösenord anses vara skadligt</value>
   </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Heading" xml:space="preserve">
+    <value>Nu är det Dags att Agera med AxCrypt</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text1" xml:space="preserve">
+    <value>År 2026 har digitala hot utvecklats, och data är mer värdefullt än guld.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text2" xml:space="preserve">
+    <value>Vänta inte eller tro att kryptering är svårt eller kostsamt. Vi har krypteringslösningar som AxCrypt Gratis till AxCrypt Företag som är utformade för alla.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text3" xml:space="preserve">
+    <value>Oavsett om du är ny inom kryptering eller bara vill säkra några filer på Windows 11, Linux eller Mac, har vi det du behöver.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text4" xml:space="preserve">
+    <value>Låt inte dina data hamna i de 48 % som är i riskzonen.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text5" xml:space="preserve">
+    <value>Säkra din framtid.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text6" xml:space="preserve">
+    <value>Ladda ner AxCrypt nu och &lt;a href='https://account.axcrypt.net/en/Home/Login?Signup=True'&gt;starta en 14-dagars GRATIS provperiod&lt;/a&gt;.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text1" xml:space="preserve">
+    <value>De flesta organisationer använder krypteringsverktyg och program, men det är sällsynt. Och när det gäller distansarbete ökar klyftan. &lt;a href='https://nordlayer.com/blog/byod-security-risks/'&gt;Enligt NordLayers sammanfattning&lt;/a&gt; ligger problemet i BYOD, osäkert eller offentligt Wi-Fi, skugg-IT och okrypterade filöverföringar eller till och med publika molnmappar som förblir exponerade längre än de egentligen borde.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text10" xml:space="preserve">
+    <value>Om du aktivt använder Windows 11 och söker gratis filkrypteringsprogramvara eller robust kryptering för företag för att skydda ditt teams data och arbetsflöde, är AxCrypt den definitiva lösningen för hotbilden 2026.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text11" xml:space="preserve">
+    <value>Läs mer här för information och lösningar om molndatasäkerhet.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text2" xml:space="preserve">
+    <value>En annan oroande punkt är att säker fildelning endast långsamt får genomslag, och hur molnbaserade fildelningstjänster och fjärråtkomstvägar blir separata ingångspunkter. Och i förlängningen kan en enda felkonfiguration eller en stulen batch av inloggningsuppgifter bli en inkörsport för en angripare att få direkt tillgång till företagets data.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text3" xml:space="preserve">
+    <value>En annan rapport från &lt;a href='https://blog.talosintelligence.com/ir-trends-q1-2026/'&gt;Talos&lt;/a&gt; incidentresponsdata visar hur angripare aktivt utnyttjar svaga punkter och hur nätfiske är den vanligaste initiala åtkomstvektorn i deras rapport för första kvartalet 2026, och MFA-svagheter, tillsammans med exponerad infrastruktur och bristfällig loggning, var ständiga problem.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Så, hur säkrar du molnlagring och minimerar risker med molnsäkerhet?&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text5" xml:space="preserve">
+    <value>I en tid där 'kontoret' är där det finns bra internet, och molndatasäkerhet inte kan kompromissas, och kaffepauser bokstavligen hålls i ens eget kök, AxCrypt tillhandahåller den säkra molnlagringsmiljö som de flesta moderna team fortfarande försöker nå upp till.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Sömlös Molnkryptering: Oavsett om det är Google Drive, OneDrive eller till och med Dropbox, integrerar sig AxCrypt smidigt för att minimera friktion och maximera säker molnlagring, så att inga okrypterade filer finns kvar i molnet för någon att komma åt. Om du letar efter något som fungerar sömlöst i molnet, med lokala filer och som fungerar smidigt och sömlöst över alla större operativsystem, då är AxCrypt appen för filkryptering som fungerar i affärstempo.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text7" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Byggt för alla: Oavsett om du arbetar med Windows och vill ha AxCrypt Windows 11, eller AxCrypt för Linux eller till och med macOS, fungerar AxCrypt utan problem på alla dessa operativsystem och även på din mobil, vilket hjälper en att hitta alla svar på hur man kan visa krypterade filer på Android.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Minska molnsäkerhetsrisker: Att implementera AxCrypt Gratis eller Premium i hela organisationen eliminerar risker för skugg-IT och stöld av inloggningsuppgifter. Om angripare får tillgång till en molnmapp skyddar AES-256-bitars kryptering dess innehåll.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Att stärka säker fildelning: AxCrypt gör det möjligt för teammedlemmar att dela filer med egna lösenord, vilket förenklar bästa praxis för molnsäkerhet. Det erbjuder det mest effektiva sättet att kryptera filer i molnet, utan det administrativa arbetet som traditionell nyckelhantering innebär.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text1" xml:space="preserve">
+    <value>Övergången till en gränslös arbetsstyrka bör inte tvinga fram valet mellan snabbhet och säkerhet. En huvudorsak till att okrypterade filer finns kvar i molnet är den friktion som traditionell säkerhet och kryptering orsakar.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text2" xml:space="preserve">
+    <value>Dagens föränderliga hotbild gör säkerheten utmanande, men det kan inte vara en eftertanke eller ignoreras.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text3" xml:space="preserve">
+    <value>Med AI-drivna cyberattacker och andra allvarliga datarisker som ökar, hittar anställda ofta lösningar vilket gör att 48%-gapet leder till intrång. Målet är detaljerat: filkryptering måste vara osynlig men ändå stark.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text4" xml:space="preserve">
+    <value>Företag behöver datakryptering, särskilt på en detaljerad nivå. Du säkrar inte bara filer och mappar utan ger också ditt team möjlighet att arbeta var som helst med full säkerhet och trygghet. AxCrypt levererar detta förtroende genom filnivåsäkerhet för företag, en säkerhet som är orubblig.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text5" xml:space="preserve">
+    <value>Verklig förebyggande av dataintrång uppstår inte genom strikta begränsningar utan genom strategiskt, intelligent dataskydd på mobilnivå. Den fungerar automatiskt, så även om du glömmer är din data skyddad.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text6" xml:space="preserve">
+    <value>Oavsett om du vill automatisera hela din krypteringsprocess eller behöver en enkel app för att kryptera filer direkt, säkerställer AxCrypt att din produktivitet förblir intakt och din integritet är säker med vår enkla säkerhet.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Heading1" xml:space="preserve">
+    <value>Hur Minimerar Kryptering av Molnfiler Risken för Dataintrång</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Heading2" xml:space="preserve">
+    <value>Säkra Distansarbetskraft Utan att Offra Produktiviteten</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Summary" xml:space="preserve">
+    <value>Med fler arbetsflöden som flyttar till molnet och ökande distans- och decentraliserade organisationer blir intrång förväntade och attackytan vidgas.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text1" xml:space="preserve">
+    <value>&lt;b&gt;Introduktion&lt;b&gt;&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text10" xml:space="preserve">
+    <value>&lt;b&gt;2.&lt;/b&gt; Nästan hälften av världens data kommer att finnas hos hyperscalers som AWS, Azure och Google. Enligt &lt;a href='https://spacelift.io/blog/cloud-computing-statistics'&gt;SpaceLift&lt;/a&gt; leder AWS marknaden för publika moln med cirka 32 % andel, följt av Microsoft Azure med 23 %.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text11" xml:space="preserve">
+    <value>&lt;b&gt;3.&lt;/b&gt; Molnrisken ökar: cirka 45 % av dataintrång sker i molnet, och servrar förblir de primära målen.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text12" xml:space="preserve">
+    <value>&lt;b&gt;4. Trots&lt;/b&gt; större fokus på säkerhet kvarstår ett stort gap: 48 % av företagen lagrar fortfarande både krypterad och okrypterad data i molnet, ofta förvärrat av BYOD-praxis och fildelning med fokus på bekvämlighet.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text13" xml:space="preserve">
+    <value>&lt;b&gt;Så här är kärnproblemet, och det är att 48 % av företagen fortfarande lagrar okrypterade filer i molnet, och denna farliga klyfta fortsätter att bestå samt öka.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text14" xml:space="preserve">
+    <value>&lt;b&gt;Men varför?&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text15" xml:space="preserve">
+    <value>Luckorna finns just när det finns okrypterade filer i molnet, och de ökar ännu mer när kryptering blir en policy på papper och inte en daglig praxis för molnprovisionering, nyckelhantering eller åtkomstkontroll. Denna lucka och molnsäkerhetsriskerna förstärks också när molninförandet går snabbare än datastyrningen.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text16" xml:space="preserve">
+    <value>Ungefär 83 % av företagen prioriterar molndatasäkerhet. Men hur är det med resten?</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text17" xml:space="preserve">
+    <value>Denna lucka finns, och här är huvudorsakerna till varför den finns:</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text18" xml:space="preserve">
+    <value>&lt;b&gt;1. Folk föredrar bekvämlighet framför säkerhet:&lt;/b&gt; Molnplattformar som Google Drive, OneDrive och Dropbox gör delning enkelt med standardinställningar, som om vem som helst med länken kan komma åt det. Många team antar att leverantörens inbyggda skydd räcker precis tillräckligt för att skydda känslig information. Men i verkligheten, om någon med länken har tillgång, har de tillgång till i princip allt i ditt företag också.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text19" xml:space="preserve">
+    <value>&lt;b&gt;2. Antagen komplexitet:&lt;/b&gt; De flesta traditionella krypteringar känns komplicerade och krångliga, vilket leder till extra steg, nyckelhantering, störda arbetsflöden, komplexa skript och behov av många utvecklare eller kodare. I snabbrörliga organisationer, särskilt med distansteam, är tiden begränsad. Det är i detta gap som molndataintrång uppstår. Många antar att det är svårt att implementera molndatasäkerhet och avfärdar idén.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text2" xml:space="preserve">
+    <value>Med fler arbetsflöden som flyttar till molnet och ökande distans- och decentraliserade organisationer blir intrång förväntade och attackytan vidgas.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text20" xml:space="preserve">
+    <value>&lt;b&gt;3. Resursbegränsningar:&lt;/b&gt; En annan utmaning som små och medelstora företag står inför är bristen på dedikerade säkerhetsteam. De prioriterar ofta produktivitet och lämnar molndatasäkerhet bakom sig. Kryptering behandlas ofta som en eftertanke eller anses vara för kostsamt för hantering under tillväxten.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text21" xml:space="preserve">
+    <value>&lt;b&gt;4. Inkonsekventa policyer och BYOD-kulturen:&lt;/b&gt; Hybrid- och distansarbete blandar ofta personliga och företagsrelaterade enheter. Vissa distansorganisationer förlitar sig på anställdas personliga system, som kan vara komprometterade. Detta orsakar skugg-IT, okrypterade uppladdningar och osäkra nedladdningar. Att skicka känslig information via osäkra kanaler och offentligt Wi-Fi exponerar okrypterad data för hackare och angripare.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text22" xml:space="preserve">
+    <value>&lt;b&gt;5. Den sista är vår personliga favorit. Det skulle aldrig hända vårt mindset:&lt;/b&gt; Tills ett intrång sker verkar risken abstrakt. Många SMF, frilansare och smågrupper tror felaktigt att de är säkra. När de tror att intrång eller attacker inte kommer att påverka dem, är just då incidenter inträffar. De försummar datasäkerhet, skickar känslig information via osäkra kanaler och låter tredje part se allt. Denna inställning är skadlig, särskilt för organisationer utan kontor eller ordentlig molnsäkerhet.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text3" xml:space="preserve">
+    <value>År 2026 kommer nästan 98 % av arbetstagarna att söka distansarbete, och cirka 27 % av arbetsstyrkan vill jobba helt på distans. Källor hävdar att den hybrida arbetsstyrkan nu dominerar den professionella världen, där nästan 52 % strävar efter att förbättra balansen mellan arbete och privatliv. Nästan 89 % av teknikanställda omfamnar hybrid- och distansarbete.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text4" xml:space="preserve">
+    <value>Fjärr- och hybridarbete verkar bekvämt och genomförbart, men innebär flera hot.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text5" xml:space="preserve">
+    <value>Okrypterade filer i molnet – den enklaste sårbarheten att utnyttja, till att börja med.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text6" xml:space="preserve">
+    <value>De flesta anställda och yrkesverksamma tror, även i dag, att grundläggande datasäkerhet i molnet räcker. Men i verkligheten är det snarare inkörsporten till alla risker. Eftersom hotbilden ständigt utvecklas, och med AI-drivna cyberattacker samt färdig malware, är det enkelt att ta sig igenom. Det krävs inte särskilt skickliga hackare för att kringgå grundläggande molnsäkerhet eller till och med behörighetsbaserade kryphål och få tillgång till all din data.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text7" xml:space="preserve">
+    <value>Utan starka regler för molndatasäkerhet och en app för att kryptera filer i molnet, särskilt när man arbetar på distans, är du inte bara i problem för ett hotande dataintrång, utan du har också problem för att du inte uppfyller efterlevnadskraven.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text8" xml:space="preserve">
+    <value>För att sätta saker i ett statistiskt perspektiv av vad som händer med distansarbete och molnbaserade, gränslösa arbetsstyrkor, här är en rapport över de främsta statistiken för molnsäkerhet hittills år 2026.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text9" xml:space="preserve">
+    <value>&lt;b&gt;1.&lt;/b&gt; År 2026 kommer cirka 200 zettabyte data att lagras i molnet, vilket påskyndar övergången till distansarbete, moln-först-arbete.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Title" xml:space="preserve">
+    <value>Varför 48 % av företagen fortfarande lagrar okrypterade filer i molnet, och hur AxCrypt löser det</value>
+  </data>
   <data name="Blog_WAMHIHY_Conclusion_Heading" xml:space="preserve">
     <value>Få betalt utan att investera!</value>
   </data>
@@ -12488,6 +12947,9 @@ Jämföra fil vs. Diskkryptering</value>
   </data>
   <data name="Blog_WAMHIHY_H2_Text4" xml:space="preserve">
     <value>Bygg ett bättre rykte - Du kan förbättra ditt rykte på internet genom att omge dig med ett rekommenderat och pålitligt företag som AxCrypt.</value>
+  </data>
+  <data name="Blog_WAMHIHY_H2_Text5" xml:space="preserve">
+    <value>Dessutom kan det hjälpa att skapa visuellt tilltalande &lt;a href='https://www.adobe.com/express/create/brochure'&gt;broschyrdesignmaterial&lt;/a&gt; för din publik att presentera dina affiliatekampanjer mer professionellt och attraktivt.</value>
   </data>
   <data name="Blog_WAMHIHY_H3_SH1_Text1" xml:space="preserve">
     <value>Med vår 256-bitars kryptering ökar AxCrypt datasäkerheten och minskar riskerna för intrång genom att implementera en användarvänlig och lättanvänd krypteringsmjukvara.</value>
@@ -15420,6 +15882,9 @@ Nyckelbegrepp för Zero Trust</value>
   <data name="BrandToneLabel" xml:space="preserve">
     <value>Varumärkeston</value>
   </data>
+  <data name="BrowseFilesText" xml:space="preserve">
+    <value>Bläddra bland filer</value>
+  </data>
   <data name="BrowseText" xml:space="preserve">
     <value>Bläddra</value>
   </data>
@@ -15428,6 +15893,9 @@ Nyckelbegrepp för Zero Trust</value>
   </data>
   <data name="BruteForceResistantText" xml:space="preserve">
     <value>Dynamisk brute force motåtgärd - iterativ lösenordswrapping gör attacker ännu svårare.</value>
+  </data>
+  <data name="BulkActionText" xml:space="preserve">
+    <value>Massåtgärd</value>
   </data>
   <data name="BusinessAcceptInvitationText" xml:space="preserve">
     <value>Acceptera Inbjudan</value>
@@ -16361,6 +16829,45 @@ Du måste slutföra dessa steg för att processen skall fullföljas.</value>
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>Klicka här för att säkra eventuella öppna filer eller nya filer i skyddade mappar, men säkerställ först att de inte används.</value>
   </data>
+  <data name="CloudServicesConnectedText" xml:space="preserve">
+    <value>Ansluten</value>
+  </data>
+  <data name="CloudServicesConnectText" xml:space="preserve">
+    <value>Koppla upp</value>
+  </data>
+  <data name="CloudServicesDisconnectText" xml:space="preserve">
+    <value>Koppla från</value>
+  </data>
+  <data name="CloudServicesDropBoxHelpText" xml:space="preserve">
+    <value>Behåll filer krypterade på Dropbox – det är bara du som har nyckeln.</value>
+  </data>
+  <data name="CloudServicesFooter" xml:space="preserve">
+    <value>Tips: du kan vara inloggad hos flera leverantörer samtidigt.</value>
+  </data>
+  <data name="CloudServicesGoogleDriveHelpText" xml:space="preserve">
+    <value>Kryptera filer innan du laddar upp dem till din Google Drive.</value>
+  </data>
+  <data name="CloudServicesLocalHelpText" xml:space="preserve">
+    <value>Bläddra bland filer på denna enhet.</value>
+  </data>
+  <data name="CloudServicesLocalHelpText1" xml:space="preserve">
+    <value>Koppla upp dig för att hantera krypterade filer hos denna leverantör.</value>
+  </data>
+  <data name="CloudServicesManageFilesText" xml:space="preserve">
+    <value>Hantera filer</value>
+  </data>
+  <data name="CloudServicesNotConnectedText" xml:space="preserve">
+    <value>Ej ansluten</value>
+  </data>
+  <data name="CloudServicesOneDriveHelpText" xml:space="preserve">
+    <value>Skicka krypterade filer till OneDrive utan att exponera innehållet.</value>
+  </data>
+  <data name="CloudServicesPhoneBrowserHelpText" xml:space="preserve">
+    <value>Öppna och dekryptera filer som lagras på din telefon.</value>
+  </data>
+  <data name="CloudServicesSubTitle" xml:space="preserve">
+    <value>Anslut, bläddra och hantera din krypterade molnlagring. Filer krypteras på din enhet &lt;em&gt;innan&lt;/em&gt; de når något moln.</value>
+  </data>
   <data name="CloudServicesText" xml:space="preserve">
     <value>Molntjänster</value>
   </data>
@@ -17044,8 +17551,17 @@ Om du inte accepterar våra temporära sessionscookies kan du inte logga in och 
   <data name="DebugLoggingToolStripMenuItemText" xml:space="preserve">
     <value>Logga</value>
   </data>
+  <data name="DebugManageAccountSubTitle" xml:space="preserve">
+    <value>Uppdatera profil, säkerhet samt kontaktuppgifter på axcrypt.net</value>
+  </data>
   <data name="DebugManageAccountToolStripMenuItemText" xml:space="preserve">
     <value>Hantera AxCrypt ID</value>
+  </data>
+  <data name="DebugModeDescription" xml:space="preserve">
+    <value>Skriv detaljerade felloggar för att hjälpa till att diagnostisera problem</value>
+  </data>
+  <data name="DebugModeTitle" xml:space="preserve">
+    <value>Felsökningsläge</value>
   </data>
   <data name="DebugOptionsToolStripMenuItemText" xml:space="preserve">
     <value>Alternativ</value>
@@ -17841,8 +18357,14 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   <data name="EncryptFileOpenDialogTitle" xml:space="preserve">
     <value>Välj filer att skydda</value>
   </data>
+  <data name="EncryptFilesAllSubFoldersPopup" xml:space="preserve">
+    <value>Kryptera filer i alla undermappar</value>
+  </data>
   <data name="EncryptFileSaveAsDialogTitle" xml:space="preserve">
     <value>Filen finns redan, spara som</value>
+  </data>
+  <data name="EncryptFilesBeforeUploadPopup" xml:space="preserve">
+    <value>Kryptera filer innan uppladdning</value>
   </data>
   <data name="EncryptLabelText" xml:space="preserve">
     <value>Kryptera</value>
@@ -17852,6 +18374,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   </data>
   <data name="EncryptToolStripMenuItemText" xml:space="preserve">
     <value>Skydda</value>
+  </data>
+  <data name="EncryptUnlimitedText" xml:space="preserve">
+    <value>Kryptera obegränsad text</value>
   </data>
   <data name="EnglishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Engelska</value>
@@ -17917,6 +18442,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>Avsluta</value>
   </data>
+  <data name="ExitToolSubTitle" xml:space="preserve">
+    <value>Stäng AxCrypt-appen</value>
+  </data>
   <data name="ExpirationDatePrompt" xml:space="preserve">
     <value>Utgångsdatum</value>
   </data>
@@ -17929,6 +18457,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   <data name="ExpireInLabelFirstPart" xml:space="preserve">
     <value>Avslutas om</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
+  </data>
+  <data name="ExpiryDatesKeys" xml:space="preserve">
+    <value>Utgångsdatum på nycklar</value>
   </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Exporten lyckades!</value>
@@ -17944,6 +18475,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   </data>
   <data name="ExportSharingKeyToolStripMenuItemToolTipText" xml:space="preserve">
     <value>Skicka den exporterade delningsnyckeln till andra som skall få åtkomst till skyddade filer.</value>
+  </data>
+  <data name="ExtraPrivacyProtectionPopup" xml:space="preserve">
+    <value>Extra integritetsskydd</value>
   </data>
   <data name="FailedAddFolderNotification" xml:space="preserve">
     <value>Misslyckades med att lägga till mapp(ar)! {0}</value>
@@ -18489,9 +19023,27 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
     <value>Ändrat datum</value>
     <comment>A menu text for selecting file properties - date modified for encryption.</comment>
   </data>
+  <data name="FilePropertiesDescription" xml:space="preserve">
+    <value>Behåll den ursprungliga filens ändrade datum oförändrat även efter kryptering.</value>
+  </data>
   <data name="FilePropertiesFileNameToolStripMenuItem" xml:space="preserve">
     <value>Filnamn</value>
     <comment>A menu text for selecting file properties - file name for encryption.</comment>
+  </data>
+  <data name="FilePropertiesInfoText" xml:space="preserve">
+    <value>Dessa egenskaper lagras &lt;strong&gt;i den krypterade filen&lt;/strong&gt;. De låter dig sortera och identifiera filer utan att dekryptera dem.</value>
+  </data>
+  <data name="FilePropertiesOriginalFileNameDescription" xml:space="preserve">
+    <value>Dölj ursprungliga filnamn genom att ersätta dem med säkra slumpmässiga namn under kryptering.</value>
+  </data>
+  <data name="FilePropertiesOriginalFileNameTitle" xml:space="preserve">
+    <value>Ursprungligt filnamn</value>
+  </data>
+  <data name="FilePropertiesSortableColumns" xml:space="preserve">
+    <value>Sorteringsbara kolumner</value>
+  </data>
+  <data name="FilePropertiesSubTitle" xml:space="preserve">
+    <value>Välj vilken metadata som bäddas in i varje krypterad fil</value>
   </data>
   <data name="FilePropertiesToolStripMenuItemText" xml:space="preserve">
     <value>Egenskaper för krypteringsfiler</value>
@@ -18529,6 +19081,9 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   </data>
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>Finansiellt</value>
+  </data>
+  <data name="FindEncryptedFilesQuicklyPopup" xml:space="preserve">
+    <value>Hitta krypterade filer snabbt</value>
   </data>
   <data name="FindFileFeatureTitle" xml:space="preserve">
     <value>Söka efter filer</value>
@@ -18847,6 +19402,9 @@ Besök vår &lt;a href="{0}"&gt;gruppsupport&lt;/a&gt;.</value>
   </data>
   <data name="GeneralLabel" xml:space="preserve">
     <value>Allmänt</value>
+  </data>
+  <data name="GenerateSecureRandomFileNamesPopup" xml:space="preserve">
+    <value>Generera säkra slumpmässiga filnamn</value>
   </data>
   <data name="GenerateText" xml:space="preserve">
     <value>Generera</value>
@@ -19697,14 +20255,83 @@ Om du av någon anledning inte kommer ihåg lösenordet, måste du återställa 
   <data name="HelpContactsprtText4" xml:space="preserve">
     <value>Begär en funktion</value>
   </data>
+  <data name="HelpOverlayAnyServerDescription" xml:space="preserve">
+    <value>Nej. All kryptering och dekryptering sker lokalt på din enhet. SecureApp skickar aldrig din okrypterade data.</value>
+  </data>
+  <data name="HelpOverlayAnyServerTitle" xml:space="preserve">
+    <value>Skickas min data till någon server?</value>
+  </data>
+  <data name="HelpOverlayCollapseSidebarDescription" xml:space="preserve">
+    <value>Klicka på ←knappen högst upp i sidofältet för att fälla ihop den och ge mer skärmutrymme. Dra musen över ikoner för att se etiketter.</value>
+  </data>
+  <data name="HelpOverlayCollapseSidebarTitle" xml:space="preserve">
+    <value>Fäll ihop sidopanelen</value>
+  </data>
+  <data name="HelpOverlayDragDropEncryptDescription" xml:space="preserve">
+    <value>Dra vilken fil som helst från ditt skrivbord till avsnittet Senaste filer för att kryptera den direkt – ingen dialogruta behövs.</value>
+  </data>
+  <data name="HelpOverlayDragDropEncryptTitle" xml:space="preserve">
+    <value>Dra och Släpp för att Kryptera</value>
+  </data>
+  <data name="HelpOverlayEncryptYourFirstFileDescription" xml:space="preserve">
+    <value>Klicka på 'Kryptera fil' från Snabba Åtgärder, eller dra och släpp vilken fil som helst till avsnittet Senaste Filer. Din fil krypteras direkt med AES-256.</value>
+  </data>
+  <data name="HelpOverlayEncryptYourFirstFileTitle" xml:space="preserve">
+    <value>Kryptera din första fil</value>
+  </data>
+  <data name="HelpOverlayGlobalSearchDescription" xml:space="preserve">
+    <value>Sök i vilken fil, verktyg eller sida som helst i sökfältet högst upp. Resultaten filtreras i realtid medan du skriver.</value>
+  </data>
+  <data name="HelpOverlayGlobalSearchTitle" xml:space="preserve">
+    <value>Global sökning</value>
+  </data>
+  <data name="HelpOverlayQuickEncryptShortcutDescription" xml:space="preserve">
+    <value>Tryck Ctrl+E var som helst i appen för att omedelbart öppna filväljaren och kryptera en ny fil.</value>
+  </data>
+  <data name="HelpOverlayQuickEncryptShortcutTitle" xml:space="preserve">
+    <value>Snabbgenväg för kryptering</value>
+  </data>
+  <data name="HelpOverlayRightClickContextMenuDescription" xml:space="preserve">
+    <value>Högerklicka på vilken fil som helst i listan över Senaste filer för snabba åtgärder: öppna, dela nyckel, byt namn anonymt eller ta bort från senaste.</value>
+  </data>
+  <data name="HelpOverlayRightClickContextMenuTitle" xml:space="preserve">
+    <value>Högerklicksmeny</value>
+  </data>
+  <data name="HelpOverlaySetupYourVaultDescription" xml:space="preserve">
+    <value>Valvet förvarar alla krypterade filer i en säker mapp. Aktivera automatisk kryptering så att nya filer skyddas så fort du sparar dem.</value>
+  </data>
+  <data name="HelpOverlaySetupYourVaultTitle" xml:space="preserve">
+    <value>Sätt upp ditt Valv</value>
+  </data>
+  <data name="HelpOverlayShareFileSecurelyDescription" xml:space="preserve">
+    <value>Använd 'Dela säkert' för att generera en engångsdelningsnyckel. Mottagaren kan bara öppna filen med den nyckeln, och du kan dra tillbaka åtkomsten när som helst.</value>
+  </data>
+  <data name="HelpOverlayShareFileSecurelyTitle" xml:space="preserve">
+    <value>Dela en fil säkert</value>
+  </data>
+  <data name="HelpOverlayTitle" xml:space="preserve">
+    <value>Kom Igång med SecureApp</value>
+  </data>
+  <data name="HelpOverlayWhatHappensDescription" xml:space="preserve">
+    <value>SecureApp kan inte återställa ditt lösenord – detta är avsiktligt. Spara alltid ditt lösenord på en säker plats. Nyckelhantering (Pro) låter dig skapa återställningsnycklar.</value>
+  </data>
+  <data name="HelpOverlayWhatHappensTitle" xml:space="preserve">
+    <value>Vad händer om jag glömmer mitt lösenord?</value>
+  </data>
   <data name="HelpToolStripMenuItemText" xml:space="preserve">
     <value>Hjälp</value>
+  </data>
+  <data name="HelpToolSubTitle" xml:space="preserve">
+    <value>Öppna hjälpcentret i appen och kom igång-guiden</value>
   </data>
   <data name="HelpViewHelpMenuItemText" xml:space="preserve">
     <value>Visa Hjälp</value>
   </data>
   <data name="HideFeaturesLabel" xml:space="preserve">
     <value>Göm funktioner</value>
+  </data>
+  <data name="HideOriginalFileNamesPopup" xml:space="preserve">
+    <value>Dölj ursprungliga filnamn</value>
   </data>
   <data name="HideRecentFilesListTabToolTipText" xml:space="preserve">
     <value>Listan med Senaste Filer är inaktiverad. Gå till Alternativ för att aktivera.</value>
@@ -20739,6 +21366,12 @@ EU Moms-nummer SE556967618101</value>
   <data name="JobTitlePlaceholder" xml:space="preserve">
     <value>Skriv din befattning</value>
   </data>
+  <data name="KeepCloudDataPrivatePopup" xml:space="preserve">
+    <value>Håll molndata privat</value>
+  </data>
+  <data name="KeepFolderStructurePopup" xml:space="preserve">
+    <value>Håll mappstrukturen organiserad</value>
+  </data>
   <data name="KeepMeUpdatedLinkLabel" xml:space="preserve">
     <value>Håll Mig Uppdaterad</value>
   </data>
@@ -20834,6 +21467,9 @@ Ange språk för inbjudan, och ett eventuellt personligt meddelande neda.</value
   </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>Tryck på &lt;b&gt;knappen Tillämpa&lt;/b&gt;.</value>
+  </data>
+  <data name="KeyShareOneTime" xml:space="preserve">
+    <value>Engångsdelningsnycklar</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>Vanligtvis delar anställda relevant och arbetsrelaterad information med varandra. Det är dock oundvikligt att oroa sig för datasäkerheten under delningsprocessen. Eftersom detta väcker oro för att dela skyddade filer är det otroligt viktigt att krypteringsprogram har en funktion som gör att ni kan dela och ta emot filer på ett säkrare sätt.</value>
@@ -21172,6 +21808,9 @@ Aktivera automatisk konvertering av AxCrypt 1.x-filer nu (rekommenderas)?</value
   </data>
   <data name="LogoAndIconLabel" xml:space="preserve">
     <value>Logotyp och ikon</value>
+  </data>
+  <data name="LogOffSubTitle" xml:space="preserve">
+    <value>Logga ut från denna enhet — dina filer förblir krypterade</value>
   </data>
   <data name="LogOffText" xml:space="preserve">
     <value>Logga ut</value>
@@ -21988,6 +22627,9 @@ Detta program är licensierat i enlighet med avtalet.
   <data name="Meta-Description-Blog-ITTROLPPAVU" xml:space="preserve">
     <value>Lär dig hur oskyddade personlig media kan leda till identitetsstöld. Upptäck tips för att skydda dina foton och videor med AxCrypts AES-256-kryptering.</value>
   </data>
+  <data name="Meta-Description-Blog-LDSFSB2SGLFEBP" xml:space="preserve">
+    <value>Skydda Linux-servrar och företagsfiler 2026 med Linux-filkryptering, bästa cybersäkerhetspraxis och säker datadelning för små och medelstora företag.</value>
+  </data>
   <data name="Meta-Description-Blog-LYCWAR" xml:space="preserve">
     <value>Undrar du om det är säkert att låta AxCrypt vara igång på din dator? Lär dig vilka försiktighetsåtgärder du ska vidta och hur du ser till att dina filer förblir säkra.</value>
   </data>
@@ -22071,6 +22713,9 @@ Detta program är licensierat i enlighet med avtalet.
   </data>
   <data name="Meta-Description-Blog-UODPCH" xml:space="preserve">
     <value>Läs mer om varför användning av olika lösenord kan öka era säkerhetsrisker. Upptäck hur kryptering och lösenordshantering kan hjälpa er att hålla era data säker.</value>
+  </data>
+  <data name="Meta-Description-Blog-W4BSSUFOTCAHAFI" xml:space="preserve">
+    <value>48 % av företagen lagrar okrypterade filer i molnet. Lär dig hur AxCrypts AES-256-kryptering säkrar era data, förhindrar intrång och skyddar distansteam.</value>
   </data>
   <data name="Meta-Description-Blog-WATPOI" xml:space="preserve">
     <value>Utforska effekterna av WikiLeaks och vikten av kryptering för att skydda känslig information. Ta del av lärdomar inom dataskydd.</value>
@@ -22649,6 +23294,9 @@ ladda ner krypteringsprogramvara,Kryptera filer,dekryptera filer,256-bitars kryp
   <data name="Meta-Title-Blog-ITTROLPPAVU" xml:space="preserve">
     <value>Skydda Personliga Foton och Videor från Identitetsstöld</value>
   </data>
+  <data name="Meta-Title-Blog-LDSFSB2SGLFEBP" xml:space="preserve">
+    <value>Linux-datasäkerhet för Små och Medelstora Företag år 2026: Filkryptering och Bästa Praxis</value>
+  </data>
   <data name="Meta-Title-Blog-LYCWAR" xml:space="preserve">
     <value>Är det Säkert att Låta AxCrypt vara Igång på din Dator?</value>
   </data>
@@ -22732,6 +23380,9 @@ ladda ner krypteringsprogramvara,Kryptera filer,dekryptera filer,256-bitars kryp
   </data>
   <data name="Meta-Title-Blog-UODPCH" xml:space="preserve">
     <value>Därför kan det Vara Skadligt för din Säkerhet att Använda Olika Lösenord</value>
+  </data>
+  <data name="Meta-Title-Blog-W4BSSUFOTCAHAFI" xml:space="preserve">
+    <value>Varför 48 % av Företagen Lagrar Okrypterade Filer på Molnet | AxCrypt</value>
   </data>
   <data name="Meta-Title-Blog-WATPOI" xml:space="preserve">
     <value>Wikileaks: Krypteringens Roll för att Skydda Information</value>
@@ -23105,6 +23756,9 @@ valfri metod(Authenticator-app, e-post och SMS).</value>
   <data name="MFAText2" xml:space="preserve">
     <value>Välj din autentiseringsmetod.</value>
   </data>
+  <data name="MFAuthenticationAdditionalFactorText" xml:space="preserve">
+    <value>Lägg till en extra faktor utöver ditt lösenord för inloggning.</value>
+  </data>
   <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>Hur aktiverar jag MFA i AxCrypt?</value>
   </data>
@@ -23366,6 +24020,42 @@ valfri metod(Authenticator-app, e-post och SMS).</value>
   <data name="NavigationPaneHome" xml:space="preserve">
     <value>Start</value>
   </data>
+  <data name="NavPageHelpCenterLinkLabel" xml:space="preserve">
+    <value>Hjälp &amp; support</value>
+  </data>
+  <data name="NavPageHelpCenterSubtitle" xml:space="preserve">
+    <value>Bläddra bland vanliga frågor, sök i kunskapsbasen, skicka feedback eller kontakta vårt supportteam.</value>
+  </data>
+  <data name="NavPageHelpCenterTitle" xml:space="preserve">
+    <value>Hjälpcenter</value>
+  </data>
+  <data name="NavPagePasswordManagerSubtitle" xml:space="preserve">
+    <value>Spara lösenord, generera starka lösenord och autofyll – allt skyddat av AES-256.</value>
+  </data>
+  <data name="NavPageSecuredFoldersSubtitle" xml:space="preserve">
+    <value>Mappar som AxCrypt övervakar — allt du lägger i krypteras automatiskt.</value>
+  </data>
+  <data name="NavPageSecuredMessengerSubtitle" xml:space="preserve">
+    <value>Skicka end-to-end-krypterade meddelanden – endast mottagaren kan läsa dem.</value>
+  </data>
+  <data name="NavPageSubtitle" xml:space="preserve">
+    <value>Din krypterade instrumentpanel – senaste filer, snabba åtgärder och säkerhetsstatus vid en snabb anblick.</value>
+  </data>
+  <data name="NavPageTextEncryptionSubtitle" xml:space="preserve">
+    <value>Klistra in vilken text som helst, kryptera den och dela chiffertexten säkert var som helst.</value>
+  </data>
+  <data name="NavPageToolsLinkLabel" xml:space="preserve">
+    <value>Verktyg</value>
+  </data>
+  <data name="NavPageToolsNotificationsSubtitle" xml:space="preserve">
+    <value>Aktivitetsvarningar, inbjudningar till nyckeldelning och systemmeddelanden samlade på ett ställe.</value>
+  </data>
+  <data name="NavPageToolsSubtitle" xml:space="preserve">
+    <value>Säker radering, anonymt ombenämning, filverifiering och andra AxCrypt-verktyg.</value>
+  </data>
+  <data name="NavPageVaultSubtitle" xml:space="preserve">
+    <value>Ett privat, krypterat utrymme som automatiskt skyddar dina filer och säkert delar dem med betrodda personer.</value>
+  </data>
   <data name="NeedAnyHelpText" xml:space="preserve">
     <value>Behöver du hjälp?</value>
   </data>
@@ -23531,6 +24221,9 @@ valfri metod(Authenticator-app, e-post och SMS).</value>
   <data name="NisWhatsInsidesubheading" xml:space="preserve">
     <value>Vad finns inuti:</value>
   </data>
+  <data name="NoCloudServicesText" xml:space="preserve">
+    <value>Inga molnleverantörer tillgängliga just nu.</value>
+  </data>
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>Du är utloggad. Klicka för att logga på.</value>
   </data>
@@ -23670,6 +24363,9 @@ För att återgå till startsidan klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</va
   <data name="OneFreeMonthLabel" xml:space="preserve">
     <value>14 dagar gratis</value>
   </data>
+  <data name="OneLatestStandardPopup" xml:space="preserve">
+    <value>Efterlevnad av den senaste standarden med ett klick</value>
+  </data>
   <data name="OnlyAdminOnActiveBusinessSubscriptionError" xml:space="preserve">
     <value>Användaren kunde inte tas bort för att de är den enda administratören i Businessprenumerationen. Avbryt antingen prenumerationen eller utse en annan administratör.</value>
   </data>
@@ -23706,8 +24402,14 @@ För att återgå till startsidan klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</va
   <data name="OptionsChangePassphraseToolStripMenuItemText" xml:space="preserve">
     <value>Byt Lösenord</value>
   </data>
+  <data name="OptionsClearAllSettingsAndExitSubTitle" xml:space="preserve">
+    <value>Återställ inställningar och starta en ny session på denna enhet</value>
+  </data>
   <data name="OptionsClearAllSettingsAndExitToolStripMenuItemText" xml:space="preserve">
     <value>Rensa alla inställningar och starta om</value>
+  </data>
+  <data name="OptionsConvertMenuItemDescription" xml:space="preserve">
+    <value>Uppgradera automatiskt AES-128-krypterade filer till AES-256 när de öppnas.</value>
   </data>
   <data name="OptionsConvertMenuItemText" xml:space="preserve">
     <value>Uppgradera filer till AES-256 automatiskt</value>
@@ -23720,8 +24422,14 @@ För att återgå till startsidan klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</va
   <data name="OptionsDebugToolStripMenuItemText" xml:space="preserve">
     <value>Felsöka</value>
   </data>
+  <data name="OptionsHideRecentFilesDescription" xml:space="preserve">
+    <value>Lista inte filer du nyligen öppnat på hemskärmen</value>
+  </data>
   <data name="OptionsHideRecentFilesToolStripMenuItemText" xml:space="preserve">
     <value>Dölj Senaste Filer</value>
+  </data>
+  <data name="OptionsIncludeSubfoldersDescription" xml:space="preserve">
+    <value>När du krypterar en mapp, kryptera också varje fil i dess undermappar</value>
   </data>
   <data name="OptionsIncludeSubfoldersToolStripMenuItemText" xml:space="preserve">
     <value>Inkludera Underkataloger</value>
@@ -23863,6 +24571,21 @@ För att återgå till startsidan klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</va
   </data>
   <data name="PageNotFoundInfo" xml:space="preserve">
     <value>Vi kunde inte hitta sidan du letade efter. Antingen gick något snett eller så finns inte sidan.</value>
+  </data>
+  <data name="PagesHeadline" xml:space="preserve">
+    <value>Sök och öppna krypterade filer, mappar och betalda verktyg utan begränsningar.</value>
+  </data>
+  <data name="PagesPrioritySupportPopup" xml:space="preserve">
+    <value>Prioriterat stöd och starkare gränser</value>
+  </data>
+  <data name="PagesSearchAcrossPopup" xml:space="preserve">
+    <value>Sök igenom alla dina krypterade filer</value>
+  </data>
+  <data name="PagesSearchOpenSecuredPopup" xml:space="preserve">
+    <value>Öppna säkrade mappar direkt från sökfunktionen</value>
+  </data>
+  <data name="PagesUnlockFindFilesPopup" xml:space="preserve">
+    <value>Lås upp Hitta Filer och andra betalda verktyg</value>
   </data>
   <data name="PaidSubscriptionNeededForMobileApp" xml:space="preserve">
     <value>För att använda AxCrypt på mobilen behöver du en prenumeration.</value>
@@ -24536,6 +25259,9 @@ Mellanslag och delar av ordet som består av vanliga lösenord bortses ifrån oc
   <data name="PreparingAxCryptText" xml:space="preserve">
     <value>Förbereder AxCrypt...</value>
   </data>
+  <data name="PreserveOriginalModifiedDatePopup" xml:space="preserve">
+    <value>Bevara ursprungligt ändrat datum</value>
+  </data>
   <data name="PressAndHoldLabel" xml:space="preserve">
     <value>Tryck och håll för att se mer</value>
     <comment>Tooltip for Press and hold gesture in mobile application</comment>
@@ -24825,6 +25551,9 @@ Mellanslag och delar av ordet som består av vanliga lösenord bortses ifrån oc
   </data>
   <data name="PrimaryReasonForCancelationLabelText" xml:space="preserve">
     <value>Vilka är de primära anledningarna för avbrytandet?</value>
+  </data>
+  <data name="PriorityCustomerSupport" xml:space="preserve">
+    <value>Prioriterad kundsupport</value>
   </data>
   <data name="PrioritySupportTitle" xml:space="preserve">
     <value>Prioritetsstöd</value>
@@ -25573,6 +26302,9 @@ HubSpot är en integrerad mjukvarulösning där vi täcker olika aspekter av vå
   <data name="PromptXecretsSecretText" xml:space="preserve">
     <value>Lösenord eller annan hemlighet</value>
   </data>
+  <data name="PROText" xml:space="preserve">
+    <value>PRO</value>
+  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>Ogiltig tidsperiod, den måste vara minst {0} månad(er) och högst {1} månader.</value>
   </data>
@@ -25631,6 +26363,111 @@ Vänligen &lt;a href="mailto:business@axcrypt.net"&gt;kontakta oss&lt;/a&gt; så
   <data name="QueriesAboutAxCryptPremium" xml:space="preserve">
     <value>&lt;b&gt;Har du några frågor om AxCrypt Premium?&lt;/b&gt; Vänligen &lt;a href="mailto:premium@axcrypt.net"&gt;contact us&lt;/a&gt; och vi kommer att hjälpa dig så snart som möjligt.</value>
   </data>
+  <data name="QuickActionsSubTitle" xml:space="preserve">
+    <value>Ett-klicks åtkomst till det du gör mest – öppna, kryptera, dekryptera eller dela.</value>
+  </data>
+  <data name="QuickActionsTitle" xml:space="preserve">
+    <value>Snabba Åtgärder</value>
+  </data>
+  <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
+    <value>Avancerade algoritmer</value>
+  </data>
+  <data name="QuickSecureActionAdvancedVaultSecurity" xml:space="preserve">
+    <value>Åtkomst till avancerad valvsäkerhet</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyEncrypt" xml:space="preserve">
+    <value>Kryptera automatiskt tillagda/ändrade filer</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyMonitor" xml:space="preserve">
+    <value>Övervaka och skydda dina mappar automatiskt med säker kryptering.</value>
+  </data>
+  <data name="QuickSecureActionControlFiles" xml:space="preserve">
+    <value>Kontrollera vem som kan komma åt filer</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShare" xml:space="preserve">
+    <value>Kryptera och Dela</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShareDescription" xml:space="preserve">
+    <value>Säkra en fil och förbered den för att dela säkert.</value>
+  </data>
+  <data name="QuickSecureActionEncryptedVaults" xml:space="preserve">
+    <value>Förvara och skydda dina känsliga filer säkert i krypterade valv.</value>
+  </data>
+  <data name="QuickSecureActionHeader" xml:space="preserve">
+    <value>Välj en åtgärd</value>
+  </data>
+  <data name="QuickSecureActionMonitorMultiple" xml:space="preserve">
+    <value>Övervaka flera mappar säkert</value>
+  </data>
+  <data name="QuickSecureActionNoNeedSharePasswords" xml:space="preserve">
+    <value>Ingen anledning att dela lösenord</value>
+  </data>
+  <data name="QuickSecureActionPermanentFileDeletion" xml:space="preserve">
+    <value>Permanent filradering</value>
+  </data>
+  <data name="QuickSecureActionPermanentlyDelete" xml:space="preserve">
+    <value>Radera filer permanent så att de inte kan återställas.</value>
+  </data>
+  <data name="QuickSecureActionPreventFileRecovery" xml:space="preserve">
+    <value>Förhindra filåterställning</value>
+  </data>
+  <data name="QuickSecureActionProtectImportantFiles" xml:space="preserve">
+    <value>Skydda viktiga filer och mappar</value>
+  </data>
+  <data name="QuickSecureActionProtectSensitive" xml:space="preserve">
+    <value>Skydda känsliga filer automatiskt</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFiles" xml:space="preserve">
+    <value>Senaste Säkrade Filer</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFilesDescription" xml:space="preserve">
+    <value>Öppna snabbt dina nyligen skyddade eller använda filer.</value>
+  </data>
+  <data name="QuickSecureActionRemoveAccessAnytime" xml:space="preserve">
+    <value>Ta bort åtkomst när som helst</value>
+  </data>
+  <data name="QuickSecureActionSecureEncryptedVaults" xml:space="preserve">
+    <value>Skapa säkra krypterade valv</value>
+  </data>
+  <data name="QuickSecureActionSecureFilesShare" xml:space="preserve">
+    <value>Säkra filer och dela krypterad åtkomst säkert med andra.</value>
+  </data>
+  <data name="QuickSecureActionSecureFolder" xml:space="preserve">
+    <value>Säker Mapp</value>
+  </data>
+  <data name="QuickSecureActionSecureFolderDescription" xml:space="preserve">
+    <value>Skydda alla filer i en mapp med kryptering.</value>
+  </data>
+  <data name="QuickSecureActionSensitiveInformation" xml:space="preserve">
+    <value>Skydda känslig information</value>
+  </data>
+  <data name="QuickSecureActionShareFileAccessSecurely" xml:space="preserve">
+    <value>Dela filåtkomst säkert</value>
+  </data>
+  <data name="QuickSecureActionUnlimitedFiles" xml:space="preserve">
+    <value>Obegränsade filer</value>
+  </data>
+  <data name="QuickSecureActionUnlockAdvanced" xml:space="preserve">
+    <value>Lås upp avancerade säkerhetsfunktioner</value>
+  </data>
+  <data name="QuickSecureActionUnlockMoreFeatures" xml:space="preserve">
+    <value>Uppgradera för att låsa upp fler funktioner.</value>
+  </data>
+  <data name="QuickSecureActionUnlockPremium" xml:space="preserve">
+    <value>Lås upp premiumskyddsfunktioner</value>
+  </data>
+  <data name="QuickSecureActionUnlockSecurityTools" xml:space="preserve">
+    <value>Lås upp avancerade säkerhetsverktyg</value>
+  </data>
+  <data name="QuickSecureAddFilesVault" xml:space="preserve">
+    <value>Lägg till filer i Valv</value>
+  </data>
+  <data name="QuickSecureAddFilesVaultDescription" xml:space="preserve">
+    <value>Spara dina viktiga filer i ett säkert Valv.</value>
+  </data>
+  <data name="QuickSecureSecureDeleteDescription" xml:space="preserve">
+    <value>Radera filer permanent så att de inte kan återställas.</value>
+  </data>
   <data name="RateApplicationLinkAndroid" xml:space="preserve">
     <value>Betygsätt oss på &lt;a&gt;Google Play&lt;/a&gt;.</value>
     <comment>Link to app store in mobile application (Android)</comment>
@@ -25672,14 +26509,50 @@ Vänligen &lt;a href="mailto:business@axcrypt.net"&gt;kontakta oss&lt;/a&gt; så
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>Vi uppmanar dig att försöka betala igen så fort som möjligt för att skydda dina känsliga uppgifter och fortsätta att njuta av de betalda funktionerna.</value>
   </data>
+  <data name="RecentFilesAES256Always" xml:space="preserve">
+    <value>AES-256 alltid</value>
+  </data>
+  <data name="RecentFilesBatchEncryption" xml:space="preserve">
+    <value>Batchkryptering</value>
+  </data>
+  <data name="RecentFilesDropFiles" xml:space="preserve">
+    <value>Släpp filer här för kryptering</value>
+  </data>
+  <data name="RecentFilesFreePlan" xml:space="preserve">
+    <value>Gratisprenumeration tillåter kryptering av 3 filer. Uppgradera för obegränsad användning.</value>
+  </data>
+  <data name="RecentFileShareContextMenu" xml:space="preserve">
+    <value>Dela krypterade filer säkert med en engångsnyckel</value>
+  </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>Du har inte öppnat några säkra filer nyligen. Klicka på &lt;b&gt;Open Secured&lt;/b&gt; för att bläddra efter säkra filer.</value>
+  </data>
+  <data name="RecentFilesNoFilesCurrentlyOpen" xml:space="preserve">
+    <value>Inga filer är för närvarande öppna</value>
+  </data>
+  <data name="RecentFilesNoSharedFilesYet" xml:space="preserve">
+    <value>Inga delade filer än</value>
   </data>
   <data name="RecentFilesOpenToolStripMenuItemText" xml:space="preserve">
     <value>Öppna</value>
   </data>
+  <data name="RecentFilesReencryptClose" xml:space="preserve">
+    <value>Omkryptera och stäng</value>
+  </data>
+  <data name="RecentFilesShareSomeone" xml:space="preserve">
+    <value>Dela en fil med någon så dyker den upp här.</value>
+  </data>
+  <data name="RecentFilesSubTitle" xml:space="preserve">
+    <value>Dubbelklicka på en fil för att öppna den. Högerklicka för fler alternativ.</value>
+  </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>Aktuella</value>
+  </data>
+  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
+    <value>Obegränsad Kryptering</value>
+  </data>
+  <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
+    <value>Filer du öppnar kommer att visas här medan de dekrypteras.</value>
   </data>
   <data name="RecentFoldersText" xml:space="preserve">
     <value>Senaste Mappar</value>
@@ -25825,6 +26698,9 @@ En provperiod på 30 dagar ingår alltid och du kan påbörja den när som helst
   </data>
   <data name="RemoveText" xml:space="preserve">
     <value>Ta bort</value>
+  </data>
+  <data name="RenameDeleteOrDecryptFilesPopup" xml:space="preserve">
+    <value>Byt namn på, radera eller dekryptera filer</value>
   </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>Det finns en aktiv återkommande prenumeration på detta konto. Återkommande Business-prenumerationer behöver inte förnyas manuellt.</value>
@@ -26364,6 +27240,9 @@ Till: support@axcrypt.net
   <data name="ReviewsLabel" xml:space="preserve">
     <value>Recensioner</value>
   </data>
+  <data name="RevokeAccessAnytime" xml:space="preserve">
+    <value>Återkalla åtkomst när som helst</value>
+  </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>русский (Ryska)</value>
     <comment>The name of the Russian Language in Russian. It should never be translated.</comment>
@@ -26374,6 +27253,9 @@ Till: support@axcrypt.net
   </data>
   <data name="SaveSecretErrorIsReadOnly" xml:space="preserve">
     <value>Endast betalande abonnenter kan spara lösenordsposter.</value>
+  </data>
+  <data name="ScheduledVaultBackupsPopup" xml:space="preserve">
+    <value>Schemalagda valvsäkerhetskopior</value>
   </data>
   <data name="ScriptingEnabledLabel" xml:space="preserve">
     <value>Skript aktiverat</value>
@@ -26437,6 +27319,9 @@ Till: support@axcrypt.net
   </data>
   <data name="SecureCloudFaq3Ans" xml:space="preserve">
     <value>Ja. Du kan dela krypterade filer som lagras i molnet via Nyckeldelnings-funktionerna som finns i applikationen. &lt;br&gt;&lt;br&gt;Med Molnsäkerhetsfunktionen kan du ge åtkomst och auktorisera användare. Dina filer förblir skyddade genom Molnsäkerhet och är endast tillgängliga för godkända eller auktoriserade användare. &lt;/br&gt;&lt;/br&gt;Denna molnsynkroniseringsfunktion har maximalt filskydd och ger dig full kontroll och säkerhet över dina data.</value>
+  </data>
+  <data name="SecureCloudFileProtectionPopup" xml:space="preserve">
+    <value>Säkert molnfilskydd</value>
   </data>
   <data name="SecureCloudGuidebuttonHead1" xml:space="preserve">
     <value>Skydda filer i molnlagring via applikationen</value>
@@ -26563,6 +27448,9 @@ Till: support@axcrypt.net
   </data>
   <data name="SecureCloudWhatNextText2" xml:space="preserve">
     <value>&lt;a href='/information/guides/vault/'&gt;AxCrypt Valv Funktionsguide | Kryptera och Skydda Filer&lt;/a&gt;</value>
+  </data>
+  <data name="SecuredCloudHelpText" xml:space="preserve">
+    <value>Skydda dina molnlagrade filer med säker kryptering och avancerade säkerhetsfunktioner.</value>
   </data>
   <data name="SecuredCloudLinkLabel" xml:space="preserve">
     <value>Molnsäkerhet</value>
@@ -26816,6 +27704,12 @@ Till: support@axcrypt.net
   <data name="SecuredMessengerText" xml:space="preserve">
     <value>Säkerställ privat, trygg kommunikation mellan enheter med AES-256-kryptering för avsedda mottagare. </value>
   </data>
+  <data name="SecureEncryptedVaultPopup" xml:space="preserve">
+    <value>Säkert krypterat valv</value>
+  </data>
+  <data name="SecureKeySharingPopup" xml:space="preserve">
+    <value>Säker nyckeldelning</value>
+  </data>
   <data name="SecurityBlock1Heading" xml:space="preserve">
     <value>Varför är AxCrypt säker?</value>
   </data>
@@ -26967,6 +27861,42 @@ Till: support@axcrypt.net
   <data name="SecuritySectionText" xml:space="preserve">
     <value>Säkerhet är viktigt för oss. Allt som har med AxCrypt att göra sker med säkerhet som högsta prioritet. Vi säkerställer att ingen kan öppna dina filer, så länge ditt lösenord är hemligt.</value>
     <comment>Description of "Security" section of About Us page in mobile application.</comment>
+  </data>
+  <data name="SecurityStatusEncryptionsPerMonth" xml:space="preserve">
+    <value>2 krypteringar per månad</value>
+  </data>
+  <data name="SecurityStatusFreePlan" xml:space="preserve">
+    <value>Gratis prenumerationen inkluderar upp till 2 filkrypteringar per månad.</value>
+  </data>
+  <data name="SecurityStatusGroupkeySharing" xml:space="preserve">
+    <value>Gruppnyckeldelning</value>
+  </data>
+  <data name="SecurityStatusGroupkeySharingDescription" xml:space="preserve">
+    <value>Dela åtkomst per team eller roll – hanterat centralt.</value>
+  </data>
+  <data name="SecurityStatusMasterKeyRecovery" xml:space="preserve">
+    <value>Huvudnyckel-återvinning</value>
+  </data>
+  <data name="SecurityStatusMasterKeyRecoveryDescription" xml:space="preserve">
+    <value>Din organisation kan återställa filer om en medlem förlorar tillgången.</value>
+  </data>
+  <data name="SecurityStatusSecureDeleteTitle" xml:space="preserve">
+    <value>Radera filer permanent med överskrivning som görs flera gånger.</value>
+  </data>
+  <data name="SecurityStatusTitle" xml:space="preserve">
+    <value>Säkerhetsstatus</value>
+  </data>
+  <data name="SecurityStatusUnlimitedAES256" xml:space="preserve">
+    <value>Obegränsad AES-256-kryptering och nyckeldelning</value>
+  </data>
+  <data name="SecurityStatusUnlimitedAES256Description" xml:space="preserve">
+    <value>Inga dagliga begränsningar – plus dela nycklar med betrodda mottagare.</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription" xml:space="preserve">
+    <value>Inga dagliga begränsingar – dela dessutom nycklar med betrodda mottagare.</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription1" xml:space="preserve">
+    <value>Inga dagliga begränsningar, nyckeldelning, samt anonymt namnbyte.</value>
   </data>
   <data name="SecurityUpdateAvailableWarning" xml:space="preserve">
     <value>Programmet behöver uppdateras beroende på en säkerhetsbrist.</value>
@@ -27175,6 +28105,21 @@ Det kan vara lämpligt att informera '{0}' direkt om AxCrypt filskydd.</value>
   </data>
   <data name="ShowPasswordOptionPrompt" xml:space="preserve">
     <value>Visa Lösenord</value>
+  </data>
+  <data name="ShowUpgradeAutoEncryptOpenedPopup" xml:space="preserve">
+    <value>Auto-kryptera öppnade eller väntande filer</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPendingPopup" xml:space="preserve">
+    <value>Logga automatiskt ut och säkra dina öppnade eller väntande filer efter en period av inaktivitet.</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPopup" xml:space="preserve">
+    <value>Automatiskt utloggningsskydd</value>
+  </data>
+  <data name="ShowUpgradeEnhancedSecurityPopup" xml:space="preserve">
+    <value>Lås upp Förbättrade Säkerhetsfunktioner</value>
+  </data>
+  <data name="ShowUpgradeProtectSensitivePopup" xml:space="preserve">
+    <value>Skydda känsliga data</value>
   </data>
   <data name="SignedInUserInfo" xml:space="preserve">
     <value>Inloggad med &lt;b&gt;{0}&lt;/b&gt;</value>
@@ -27476,6 +28421,9 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   <data name="SubscriptionDeletedText" xml:space="preserve">
     <value>Borttagen</value>
   </data>
+  <data name="SubscriptionDetailsSubTitle" xml:space="preserve">
+    <value>Se dina prenumerations-, fakturerings- och förnyelsedetaljer</value>
+  </data>
   <data name="SubscriptionDetailsTitle" xml:space="preserve">
     <value>Prenumerationsinformation</value>
   </data>
@@ -27597,6 +28545,9 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   </data>
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Svenska</value>
+  </data>
+  <data name="SwitchToDarkActionDescription" xml:space="preserve">
+    <value>Skonsammare för ögonen i svagt ljus — gäller direkt i hela appen</value>
   </data>
   <data name="SwitchToDarkActionText" xml:space="preserve">
     <value>Byt till Mörkt Läge</value>
@@ -27952,6 +28903,12 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   <data name="TextCheckEmailAndSpam" xml:space="preserve">
     <value>Finns i inbox eller skräppost!</value>
   </data>
+  <data name="TextEncryptionAccessEveryPopup" xml:space="preserve">
+    <value>Åtkomst till varje sida i appen</value>
+  </data>
+  <data name="TextEncryptionAdvancedProtectionFeatures" xml:space="preserve">
+    <value>Kryptera din text säkert med avancerade skyddsfunktioner.</value>
+  </data>
   <data name="TextEncryptionEmailBodyText" xml:space="preserve">
     <value>Denna text är krypterad — använd AxCrypt för att visa det ursprungliga meddelandet.</value>
   </data>
@@ -28108,6 +29065,9 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   <data name="TextEncryptionLinkLabel" xml:space="preserve">
     <value>Textkryptering</value>
   </data>
+  <data name="TextEncryptionPaidPlanPopup" xml:space="preserve">
+    <value>Den här sidan är en del av ett betalt abonnemang. Uppgradera för att låsa upp den.</value>
+  </data>
   <data name="TextEncryptionSideMenuHead1" xml:space="preserve">
     <value>Kryptera Text</value>
   </data>
@@ -28119,6 +29079,9 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   </data>
   <data name="TextEncryptionText" xml:space="preserve">
     <value>Konvertera din konfidentiella klartext till ett säkert, oläsbart format.</value>
+  </data>
+  <data name="TextEncryptionWithoutLimitsPopup" xml:space="preserve">
+    <value>Lås upp betalfunktioner utan begränsningar</value>
   </data>
   <data name="TextPreferenceCritical" xml:space="preserve">
     <value>Kritiska - Du blir notifierad om kritiska uppdateringar</value>
@@ -28166,6 +29129,9 @@ För att återgå till startsidan, klicka &lt;a href="{1}"&gt;här&lt;/a&gt;.</v
   </data>
   <data name="ToolTipPremiumNeededForSecrets" xml:space="preserve">
     <value>Ett betalt abonnemang krävs för lösenordshantering. Klicka för att uppgradera nu!</value>
+  </data>
+  <data name="TopBarPrivacySecurity" xml:space="preserve">
+    <value>Sekretess och säkerhet</value>
   </data>
   <data name="TotalLicencesText" xml:space="preserve">
     <value>Licenser (använd/totalt)</value>
@@ -28439,8 +29405,26 @@ AxCrypt-teamet</value>
   <data name="UnknownLogOn" xml:space="preserve">
     <value>Okänt lösenord. Klicka 'Ny' för att skapa en ny identitet.</value>
   </data>
+  <data name="UnlimitedVaultEntriesPopup" xml:space="preserve">
+    <value>Obegränsade valvplatser</value>
+  </data>
+  <data name="UnlockAdvancedCloudSecurityPopup" xml:space="preserve">
+    <value>Lås upp avancerad molnsäkerhet</value>
+  </data>
+  <data name="UnlockAdvancedEncryptionFeaturesPopup" xml:space="preserve">
+    <value>Lås upp avancerade krypteringsfunktioner</value>
+  </data>
   <data name="UnlockAdvancedFeaturesText" xml:space="preserve">
     <value>Lås upp &lt;span&gt;starkare och obegränsade krypteringsfunktioner&lt;/span&gt; !</value>
+  </data>
+  <data name="UnlockAdvancedFileManagementPopup" xml:space="preserve">
+    <value>Lås upp avancerad filhantering</value>
+  </data>
+  <data name="UnlockAdvancedFileSecurityPopup" xml:space="preserve">
+    <value>Lås upp avancerad filsäkerhet</value>
+  </data>
+  <data name="UnlockAdvancedFolderPopup" xml:space="preserve">
+    <value>Lås upp avancerat mappskydd</value>
   </data>
   <data name="UnlockFeatures" xml:space="preserve">
     <value>Lås upp våra &lt;span&gt;fantastiska&lt;/span&gt; &lt;span&gt;funktioner!&lt;/span&gt; Uppgradera till &lt;span&gt;Premium&lt;/span&gt; eller &lt;b&gt;Företag&lt;/b&gt;</value>
@@ -28477,6 +29461,9 @@ AxCrypt-teamet</value>
   </data>
   <data name="UpdatePaymentDetailsText" xml:space="preserve">
     <value>Uppdatera betalningsinformation</value>
+  </data>
+  <data name="UpdateRequiredText" xml:space="preserve">
+    <value>Uppdatering krävs</value>
   </data>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} Uppdaterades framgångsrikt.</value>
@@ -28521,6 +29508,9 @@ AxCrypt-teamet</value>
   <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
     <value>&lt;strong&gt;Uppgradera för att låsa upp fullständiga krypteringsfunktioner!&lt;/strong&gt;</value>
   </data>
+  <data name="UpgradeToUnlockText" xml:space="preserve">
+    <value>Uppgradera för att låsa upp</value>
+  </data>
   <data name="UpgradeVersionDialogText" xml:space="preserve">
     <value>Vill du ladda ner det nu eller vid nästa lansering?</value>
   </data>
@@ -28538,6 +29528,9 @@ AxCrypt-teamet</value>
   </data>
   <data name="UsageOtherText" xml:space="preserve">
     <value>Annat</value>
+  </data>
+  <data name="UsageTipsAnonymousFileDescription" xml:space="preserve">
+    <value>Krypterade filer behåller inga spår av det ursprungliga namnet på disken.</value>
   </data>
   <data name="UsageTipsAnonymousFileHeading" xml:space="preserve">
     <value>Anonyma filnamn</value>
@@ -28676,6 +29669,9 @@ AxCrypt-teamet</value>
   </data>
   <data name="UseNecessaryCookiesOnlyPromptText" xml:space="preserve">
     <value>Använd bara nödvändiga cookies</value>
+  </data>
+  <data name="UserActivitiesDescription" xml:space="preserve">
+    <value>Registrera alla filoperationer — kryptera, dekryptera, dela, radera</value>
   </data>
   <data name="UserActivitiesText" xml:space="preserve">
     <value>Användaraktiviteter</value>
@@ -29010,8 +30006,23 @@ AxCrypt-teamet</value>
   <data name="VaultMisConfigured" xml:space="preserve">
     <value>Vägen som satts för Valvet verkar ha flyttats eller tagits bort. Vänligen konfigurera om Valvet i Inställningar → Avancerade inställningar → Valvinställningar.</value>
   </data>
+  <data name="VaultSettingsDescription" xml:space="preserve">
+    <value>Valv-sökväg, automatisk låstimer och backupfrekvens</value>
+  </data>
   <data name="VaultSettingsTitle" xml:space="preserve">
     <value>Valvinställningar</value>
+  </data>
+  <data name="VaultStatusAuto-encryption" xml:space="preserve">
+    <value>Autokryptering är &lt;strong&gt;PÅ&lt;/strong&gt;</value>
+  </data>
+  <data name="VaultStatusPaidText" xml:space="preserve">
+    <value>Säkrat Valv är en betalfunktion</value>
+  </data>
+  <data name="VaultStatusText" xml:space="preserve">
+    <value>Valvstatus</value>
+  </data>
+  <data name="VaultStatusUnlockUnlimited" xml:space="preserve">
+    <value>Lås upp obegränsad skyddad lagring och automatisk kryptering.</value>
   </data>
   <data name="VaultText" xml:space="preserve">
     <value>Valv</value>
@@ -29060,6 +30071,9 @@ Slutför inloggningen med AxCrypt genom att ange engångslösenordet (OTP) i aut
   </data>
   <data name="ViewAllText" xml:space="preserve">
     <value>Visa alla...</value>
+  </data>
+  <data name="ViewAndManageFileReferencesPopup" xml:space="preserve">
+    <value>Visa och hantera filreferenser</value>
   </data>
   <data name="ViewCardTitle" xml:space="preserve">
     <value>Visa Kort</value>

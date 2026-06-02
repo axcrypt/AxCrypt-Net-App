@@ -439,6 +439,9 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
   <data name="AddEmailPromptText" xml:space="preserve">
     <value>이메일 추가</value>
   </data>
+  <data name="AddExtraPrivacyProtectionPopup" xml:space="preserve">
+    <value>추가적인 프라이버시 보호</value>
+  </data>
   <data name="AddFileLabel" xml:space="preserve">
     <value>AxCrypt 파일 열기</value>
     <comment>Tooltip for "AddFile" button in mobile application</comment>
@@ -507,6 +510,27 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
   </data>
   <data name="AdminLabel" xml:space="preserve">
     <value>관리</value>
+  </data>
+  <data name="AdvancedDebugWarningText" xml:space="preserve">
+    <value>디버그 로그에는 파일 경로가 포함될 수 있습니다. 프라이버시를 보호하기 위해 문제 해결이 적극적이지 않을 때는 비활성화하세요.</value>
+  </data>
+  <data name="AdvancedDiagnosticsText" xml:space="preserve">
+    <value>진단 및 모니터링</value>
+  </data>
+  <data name="AdvancedEncryptionAlgorithms" xml:space="preserve">
+    <value>고급 암호화 알고리즘</value>
+  </data>
+  <data name="AdvancedFooterHintText" xml:space="preserve">
+    <value>변경 사항은 즉시 적용됩니다</value>
+  </data>
+  <data name="AdvancedOptionsConfiguration" xml:space="preserve">
+    <value>구성</value>
+  </data>
+  <data name="AdvancedOptionsSubTitle" xml:space="preserve">
+    <value>앱 설정, 진단 및 모니터링 제어</value>
+  </data>
+  <data name="AdvancedOptionsTitle" xml:space="preserve">
+    <value>고급 옵션</value>
   </data>
   <data name="AdvancedSettingsText" xml:space="preserve">
     <value>고급 설정</value>
@@ -648,6 +672,9 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
     <value>오프라인 유지</value>
     <comment>Menu choice with checkbox indicating if we are running offline or not.</comment>
   </data>
+  <data name="AlwaysOfflineDescription" xml:space="preserve">
+    <value>완전히 오프라인으로 작업하세요 — 절대 서버에 동기화하거나 체크인하지 마세요</value>
+  </data>
   <data name="AlwaysOfflineToolTip" xml:space="preserve">
     <value>활성화되는시 비활성화 될 때까지 인터넷 접속을 요구하지 않습니다.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
@@ -677,6 +704,9 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
   <data name="AnnualSubscriptionTitle" xml:space="preserve">
     <value>연간</value>
   </data>
+  <data name="AnonymousRenameMenuDescription" xml:space="preserve">
+    <value>도구 페이지를 이용해 파일 이름을 무작위 ID로 교체하세요 — 아무도 파일 이름만으로 내용을 추측할 수 없습니다.</value>
+  </data>
   <data name="AnonymousRenameMenuText" xml:space="preserve">
     <value>익명 이름 다시 짓기</value>
   </data>
@@ -691,6 +721,9 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>AxCrypt ID 확인 [ {0} ]</value>
+  </data>
+  <data name="AppConfigurationDescription" xml:space="preserve">
+    <value>데이터 경로, 캐시 위치, 그리고 리셋 기본값</value>
   </data>
   <data name="AppConfigurationText" xml:space="preserve">
     <value>앱 구성</value>
@@ -799,6 +832,9 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
   <data name="AutoDeletionMailSubject" xml:space="preserve">
     <value>AxCrypt ID 계정이 곧 삭제됩니다!</value>
   </data>
+  <data name="AutolockOnInactivityPopup" xml:space="preserve">
+    <value>비활성 시 자동 잠금</value>
+  </data>
   <data name="AutomatedMessageText" xml:space="preserve">
     <value>이것은 자동화된 메시지입니다. 이 이메일에 직접 회신하지 마십시오.</value>
   </data>
@@ -807,6 +843,15 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
   </data>
   <data name="AutomaticFileUpdatingText" xml:space="preserve">
     <value>열고 저장한 후 보안 파일의 자동 업데이트.</value>
+  </data>
+  <data name="AutoUpgradeFilesAES256" xml:space="preserve">
+    <value>AES-256으로 자동 업그레이드 파일</value>
+  </data>
+  <data name="AvailablePremiumBusinessPlans" xml:space="preserve">
+    <value>프리미엄 및 비즈니스 플랜 모두에서 이용 가능합니다.</value>
+  </data>
+  <data name="AvoidVisibleEncryptionPopup" xml:space="preserve">
+    <value>눈에 띄는 암호화 타임스탬프 변경을 피하세요</value>
   </data>
   <data name="AwardsLabel" xml:space="preserve">
     <value>어워즈</value>
@@ -1496,6 +1541,9 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
   <data name="AxCWhatsNextSecurityText3" xml:space="preserve">
     <value>AxCrypt 보안 페이지: &lt;a href='/information/security/'&gt;&lt;b&gt;AxCrypt가 안전한 이유 | 알고리즘&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
+  <data name="BackgroundEncryptionMigrationPopup" xml:space="preserve">
+    <value>백그라운드 암호화 마이그레이션</value>
+  </data>
   <data name="BacktoAxCryptIDText" xml:space="preserve">
     <value>&lt;span&gt;AxCrypt ID&lt;/span&gt;으로 돌아가</value>
   </data>
@@ -1511,6 +1559,9 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
   <data name="BadEmail" xml:space="preserve">
     <value>이메일 주소가 맞지 않습니다.</value>
     <comment>Displayed when email address format validation fails.</comment>
+  </data>
+  <data name="BatchEncryptMultiplePopup" xml:space="preserve">
+    <value>여러 파일을 동시에 배치 암호화합니다</value>
   </data>
   <data name="BecomeanAffiliateText" xml:space="preserve">
     <value>계열사가 되세요.</value>
@@ -9883,6 +9934,264 @@ AxCrypt는 Windows, Mac, iOS, Android 기기에서 사용할 수 있는 수상 �
   <data name="Blog_ITESBETFC_Title" xml:space="preserve">
     <value>교육 부문이 사이버 공격의 쉬운 표적이되고 있습니까?</value>
   </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Heading" xml:space="preserve">
+    <value>당신의 데이터는 한 번의 부주의한 클릭으로 침해에 직면해 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text1" xml:space="preserve">
+    <value>지금 바로 고쳐!</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text2" xml:space="preserve">
+    <value>솔직히 말해서: 비즈니스를 진지하게 생각하고 리눅스와 모든 기기에서 비즈니스 데이터를 보호하는 데 관심이 있다면, 이 다음 단계는 매우 중요합니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text3" xml:space="preserve">
+    <value>랜섬웨어 공격에 사용될 수 있다고 생각되는 암호화되지 않은 파일이나 민감한 정보는 모두 암호화하세요. 여기에서 AxCrypt 무료 체험을 시작하세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text4" xml:space="preserve">
+    <value>데이터 보안 관행에서 AxCrypt를 최대한 활용하지 못했다면 더 알고 싶다면, 저희 가이드 in Our Resources 를 확인해 보세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text5" xml:space="preserve">
+    <value>다음 읽을거리를 골라 AxCrypt와 함께 최신 사이버보안 동향을 확인하세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text1" xml:space="preserve">
+    <value>고보안 분야에서 작업하는 사용자는 안드로이드에서 암호화된 파일을 볼 수 있거나 워크스테이션에서 .axx 파일(AxCrypt 암호화 파일)을 다루는 방법을 알아야 합니다. AxCrypt Windows 11 또는 Linux용 AxCrypt 사용 시 데이터 유출을 막기 위해 보안이 원활해야 합니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text10" xml:space="preserve">
+    <value>파일을 암호화하면 .axx 확장자로 저장된 것을 볼 수 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text11" xml:space="preserve">
+    <value>AxCrypt를 이용한 암호화 및 복호화&lt;/a&gt; 가이드에서 파일 암호화 및 복호화에 대해 더 자세히 읽어보실 수 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text12" xml:space="preserve">
+    <value>3. AxCrypt의 Vault 기능을 이용한 암호화 자동화:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text13" xml:space="preserve">
+    <value>이제 리눅스에서 파일을 하나도 놓치지 않고 안전하게 보호할 수 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text14" xml:space="preserve">
+    <value>AxCrypt Vault를 구성하는 방법은 다음과 같습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text15" xml:space="preserve">
+    <value>애플리케이션에 로그인해서 설정&gt; 고급 설정 &gt; 클릭한 후 Vault 설정&gt; 클릭하면 됩니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text16" xml:space="preserve">
+    <value>금고가 어디에 위치할지 선택한 후 확인하세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text17" xml:space="preserve">
+    <value>이것은 선택 사항이지만, 정말, 정말 프라이버시를 중요하게 생각한다면 Vault를 무작위로 설정해 추가적인 프라이버시 계층을 확보하세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text18" xml:space="preserve">
+    <value>중첩된 파일과 폴더가 있다면 "하위 폴더 포함"을 선택하세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text19" xml:space="preserve">
+    <value>설정이 완료되면 추가된 파일은 자동으로 볼트로 이동하며 암호화되어 기밀 리눅스 파일을 보호합니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text2" xml:space="preserve">
+    <value>안전한 시스템에서는 비밀번호 없이 암호화된 파일을 여는 방법이 답이 없어야 하며, 강력한 암호화는 바로 이를 방지하기 위해 설계되었습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text20" xml:space="preserve">
+    <value>AxCrypt 금고에 파일 추가하는 방법:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text21" xml:space="preserve">
+    <value>액션 메뉴 사용:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text22" xml:space="preserve">
+    <value>Vault 아이콘을 클릭한 다음&gt; 원하는 폴더나 파일을 선택하세요. &gt; 추가를 클릭해서 암호화할 내용을 선택하세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text23" xml:space="preserve">
+    <value>드래그 앤 드롭 옵션 사용:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text24" xml:space="preserve">
+    <value>파일이나 폴더를 볼트로 드래그하세요</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text25" xml:space="preserve">
+    <value>두 경우 모두 파일이 즉시 암호화되어 최근 파일에 나타나 리눅스에서 안전한 비즈니스 문서나 일상 워크플로우에 이상적입니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text26" xml:space="preserve">
+    <value>Vautl 암호화에 대해 더 알아보려면 이 가이드: AxCrypt Vault – 사용자 가이드.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text27" xml:space="preserve">
+    <value>4. 클라우드 보안이 적용된 AxCrypt for Linux로 클라우드 내 파일 보안:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text28" xml:space="preserve">
+    <value>팀, 프리랜서, 그리고 분산형 조직에게 이 리눅스 서버 보안은 특히 클라우드와 작업할 때 데이터를 안전하게 보호하는 데 딱 필요한 것입니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text29" xml:space="preserve">
+    <value>다음은 AxCrypt로 리눅스에서 클라우드 저장소를 안전하게 보호하는 방법입니다:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text3" xml:space="preserve">
+    <value>리눅스 서버 보안을 위해서는 암호화가 가장 강력한 첫 번째 방어책입니다. 내부 문서나 고객 데이터를 관리한다면, 특히 한 번의 침해가 치명적일 수 있는 SMB의 경우 파일 보호가 필수적입니다. BitLocker나 FileVault와 달리, 많은 팀이 특정 폴더를 보호하고 리눅스 워크플로우와 연계되는 전용 크로스 플랫폼 암호화가 필요합니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text30" xml:space="preserve">
+    <value>방법 A:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text31" xml:space="preserve">
+    <value>기존 클라우드 파일 암호화</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text32" xml:space="preserve">
+    <value>AxCrypt를 열고 클라우드 제공업체를 선택하세요</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text33" xml:space="preserve">
+    <value>보호하고자 하는 파일을 선택하세요</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text34" xml:space="preserve">
+    <value>액션 메뉴(점 3개)를 클릭→ Secure 선택</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text35" xml:space="preserve">
+    <value>방법 B:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text36" xml:space="preserve">
+    <value>업로드 및 암호화 동시에</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text37" xml:space="preserve">
+    <value>앱에서 "+" 버튼을 클릭하세요</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text38" xml:space="preserve">
+    <value>업로드할 파일을 선택하세요</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text39" xml:space="preserve">
+    <value>암호화를 위해 열어</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text4" xml:space="preserve">
+    <value>이제 AxCrypt for Linux를 어떻게 활용하는지 살펴보겠습니다:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text40" xml:space="preserve">
+    <value>AxCrypt for Linux와 클라우드 보안에 대해 더 알고 싶으시다 면, 여기에서 더 읽어보세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text41" xml:space="preserve">
+    <value>5. 키 공유를 통한 파일 안전 공유:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text42" xml:space="preserve">
+    <value>소규모 비즈니스를 위한 리눅스 데이터 보안에 집중하는 기업들에게 이 업그레이드는 기존의 파일 공유 방식을 능가합니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text43" xml:space="preserve">
+    <value>키 공유를 이용해 파일을 안전하게 공유하는 방법</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text44" xml:space="preserve">
+    <value>AxCrypt로 파일을 암호화하세요</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text45" xml:space="preserve">
+    <value>파일을 우클릭→ 키 공유 버튼을 클릭하세요</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text46" xml:space="preserve">
+    <value>수신자의 이메일 주소를 추가하세요</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text47" xml:space="preserve">
+    <value>신청하기 클릭</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text48" xml:space="preserve">
+    <value>끝나면:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text49" xml:space="preserve">
+    <value>수신자는 파일을 복호화할 수 있는 권한을 얻습니다</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text5" xml:space="preserve">
+    <value>1. 설치:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text50" xml:space="preserve">
+    <value>파일은 이메일, 클라우드, 보안 채널을 통해 별도로 전송해야 합니다. 이 파일은 256비트 암호화 알고리즘으로 여전히 안전합니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text51" xml:space="preserve">
+    <value>이 워크플로우는 리눅스에서 원격 파일을 보호하고 분산된 팀이 보안이 파일과 함께 이동하거나 보관할 수 있도록 하는 데 필수적입니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text6" xml:space="preserve">
+    <value>시작하려면 여기 를 클릭하세요. 가볍고 완벽한 Linux 암호화 소프트웨어인 AxCrypt for Linux를 설치한 후에는 AxCrypt에 등록된 이메일 ID와 비밀번호로 로그인하세요. 이 자격 증명만 있으면 AxCrypt for Linux로 암호화된 파일을 복호화할 수 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text7" xml:space="preserve">
+    <value>2. 리눅스용 AxCrypt에서 파일 암호화 및 복호화:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text8" xml:space="preserve">
+    <value>AxCrypt for Linux에서 성공적으로 계정을 만들고 애플리케이션에 로그인하면, 파일을 암호화하려면 작업 메뉴에 있는 'Secure' 버튼을 클릭해야 합니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text9" xml:space="preserve">
+    <value>이제 파일 선택 창으로 이동해 암호화할 파일을 선택할 수 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text1" xml:space="preserve">
+    <value>2026년 리눅스의 클라우드/서버 구성에서의 사용이 증가함에 따라 중소기업에게 리눅스 서버 보안은 그 어느 때보다 중요해졌습니다. 이 엔진은 웹 기반 컴퓨터의 75%를 구동하며, 이들이 주요 표적이 됩니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text2" xml:space="preserve">
+    <value>리눅스 서버의 파일을 보호하거나 보안을 강화하려는 중소기업에게 도전 과제는 예방이 아니라 시스템을 미래에 대비하고 취약점을 앞서 나가는 것입니다. 공격자들은 틈새와 백도어를 알고 있습니다. 따라서 리눅스 파일 암호화와 파일 암호화는 그 어느 때보다 중요해졌습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text3" xml:space="preserve">
+    <value>공격 기간은 결함을 발견하고 수정하는 사이에 있습니다. 이 기간 동안 리눅스에서 민감한 파일을 안전하게 보호하는 것이 필수적입니다. 우리는 Commandline Linux와 Linux Security의 2025년에 악용된 취약점에 관한 연구 결과를 검토하며, AxCrypt for Linux와 같은 도구, 즉 현대 리눅스 암호화 소프트웨어가 소규모 기업의 파일 암호화에 왜 중요한지를 강조했습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text4" xml:space="preserve">
+    <value>취약점이 발견되어 적극적으로 악용되고 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text5" xml:space="preserve">
+    <value>CVE ID 취약점 유형 CVSS 점수 CVE-2024-1086 무료 후 사용 (넷필터) 7.8 CVE-2024-53104 경계 밖 쓰기 (UVC 드라이버) 7.8 CVE-2024-53150 아웃 오브 바운드 리드 (ALSA 오디오) 7.1–7.8 CVE-2024-53197 ALSA 오디오 취약점 높게CVE-2024-50302 HID 드라이버 취약점 높게 CVE-2023-0386 권한 상승 (오버레이FS)7.8 CVE-2021-22555 힙 경계 밖 쓰기 (netfilter) 8.3 CVE-2022-0847 권한 상승("더러운 파이프") 7.8 CVE-2019-13272 부적절한 권한 관리 7.8 CVE-2021-3493 권한 상승 (오버레이FS) 7.8 CVE-2025-21756 Use-after-free (vsock 서브시스템) 높게 CVE-2025-38352 Race condition (TOCTOU – Linux 커널) 높게</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text6" xml:space="preserve">
+    <value>이 목록은 공격자의 수법에서 명확한 패턴을 드러낸다. 대부분의 위반 사항은 CISA가 추적하는 특권 상승 결함과 관련되어 있습니다. CVE-2024-1086과 같은 넷필터 버그부터 오버레이 FS 및 드라이버 문제까지, 공격자들은 최소한의 노력으로 루트 접근을 얻기 위해 핵심 리눅스 부품을 노립니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text7" xml:space="preserve">
+    <value>이것이 SMB 소유주로서 여러분과 중요한 정보를 가진 모든 분들께 의미하는 바:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text8" xml:space="preserve">
+    <value>공격자들은 단순히 SMB를 탐색하는 것이 아닙니다; 그들은 조용히 통제권을 잡고 있다. 빠르게 행동해야 한다면 AxCrypt Free부터 시작하세요. 팀 내 누군가가 'AxCrypt가 무엇인가요?'라고 묻거나 AxCrypt Free를 검색하면, 이는 보안 공백을 해소할 준비가 되었다는 신호입니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H3_Text1" xml:space="preserve">
+    <value>데이터 유출은 더 이상 드문 일이 아닙니다. 이제는 이것이 예상되며, 이는 소규모 기업을 위한 리눅스 데이터 보안을 강화해야 함을 의미합니다. 다음은 2026년 사이버보안의 면을 형성하고 있는 가장 중요하고 최신의 통계들입니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H3_Text2" xml:space="preserve">
+    <value>미터법 통계 결과 출처 2025년 데이터 유출의 평균 비용 444만 달러에서 445만 달러 침입 대응 시간은 241일로 9년 만에 최저치를 기록했습니다. AI는 양날의 검입니다: 침해 비용을 1,900만 달러 절감했지만, 거의 20%의 조직이 '그림자 AI'로 인한 침해 피해를 입었으며, 평균 67만 달러의 손실을 입었습니다. 딥페이크 사칭과 같은 사회공학 공격은 거의 6건 중 1건의 침해에서 발생합니다 데이터 유출 보고서 비용 2025 사이버 공격의 표적이 된 중소기업 유출의 30%는 제3자 개입으로 인한 것으로(2024년 대비 2배). 소규모 사업체는 '핵티비스트'나 내부자의 표적이 되지 않습니다; 대신 외부 범죄자들은 약한 비밀번호와 인간의 실수를 이용해 쉬운 수익을 노립니다. 2025년 데이터 유출 조사 보고서 - 2025년 데이터 유출 조사 보고서. 중소기업 스냅샷 침해 빈도 및 성공률 총 3,049건의 사건 중 2,842건이 확인된 데이터 공개로 이어졌습니다. 소규모 사업체는 공격에서 실제 데이터 손실로 전환율이 높아 약 93%의 사고가 성공적인 침해로 이어집니다. Verizon DBIR, 랜섬웨어가 데이터 유출의 44%에 연루되었다고 밝혔습니다 주요 공격 패턴 시스템 침입, 사회공학, 기본 웹 애플리케이션 공격이 96%의 침해를 일으킵니다. 보안 노력은 이 세 가지 경로에 집중할 때 가장 효과적입니다. 이 세 가지 경로가 대부분의 소규모 기업 취약점을 설명합니다. 랜섬웨어의 지속적인 급증: 새로운 전술과 변화하는 결제</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text1" xml:space="preserve">
+    <value>중소기업이 현재 주요 표적이 되었습니다. 패치 하나 놓치거나 피싱된 SSH 키가 공격자에게 시스템을 넘길 수 있습니다. 민감한 데이터를 기본적으로 암호화하고 명백한 빈틈을 빠르게 메우세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text2" xml:space="preserve">
+    <value>반응적인 수정에서 선제적 보안으로 전환하세요: 빠르게 패치하고, 강력한 자격 증명을 강제하며, 지속적으로 모니터링하고, 제3자 위험을 줄이세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text3" xml:space="preserve">
+    <value>보안은 핵심 비즈니스 기능이며; 수익, 신뢰, 준수를 보호합니다. 오늘부터 시작하세요: 파일을 암호화하고, 접근을 강화하며, 보안을 모두의 역할로 삼으세요.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading1" xml:space="preserve">
+    <value>리눅스용 AxCrypt: 리눅스 서버 보안 및 파일 보안 및 리눅스 서버 내 파일 안전 공유 방법에 대한 단계별 가이드</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading2" xml:space="preserve">
+    <value>2026년 리눅스 서버 보안이 중소기업에 그 어느 때보다 중요한가요?</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading3" xml:space="preserve">
+    <value>모든 중소기업과 기업가가 반드시 알아야 할 데이터 유출 통계의 최신 동향:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading4" xml:space="preserve">
+    <value>최종 시점 및 실행 계획</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Summary" xml:space="preserve">
+    <value>2026년 초, 첨단 AI 사이버 공격이 리눅스 서버와 엔드포인트를 겨냥했습니다. 이러한 증가는 중소기업, 대기업, 개인의 보안 전문가들에게 경고를 불러일으키며, 데이터 도난은 일반적인 IT 문제를 넘어서는 막대한 비용을 초래하기 때문입니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text1" xml:space="preserve">
+    <value>소개</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text10" xml:space="preserve">
+    <value>이 발견들은 단 한 가지를 외치고 있습니다: 사이버 위협은 더 이상 이론 속에 존재하지 않으며, 예측도 아닙니다. 이 글을 읽는 순간에도 이미 활성화되고 지속적으로 진행되고 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text2" xml:space="preserve">
+    <value>리눅스는 클라우드, 서버, 컨테이너, IoT 등 현대 비즈니스 백본을 지원합니다. 중소기업에게는 성능과 비용 면에서 최고의 선택입니다. 소규모 비즈니스를 위한 리눅스 데이터 보안은 주요 워크로드가 리눅스로 이동하면서 이사회의 우선순위가 되었습니다. 스타트업, 호스팅 등에서 리눅스 사용이 증가함에 따라, 중소기업을 위한 리눅스 사이버보안은 이제 필수적이다. 이는 2026년 소규모 기업의 리눅스 데이터 보안에서 핵심적인 필요 사항입니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text3" xml:space="preserve">
+    <value>2026년 초, 첨단 AI 사이버 공격이 리눅스 서버와 엔드포인트를 겨냥했습니다. 이러한 증가는 중소기업, 대기업, 개인의 보안 전문가들에게 경고를 불러일으키며, 데이터 도난은 일반적인 IT 문제를 넘어서는 막대한 비용을 초래하기 때문입니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text4" xml:space="preserve">
+    <value>다음은 Commandline Linux 에서 얻은 주요 발견 몇 가지입니다:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text5" xml:space="preserve">
+    <value>위험은 가상이나 이론적인 것이 아닙니다. 매년 수천 건의 취약점(CVE)이 보고되고 매일 8에서 9개의 새로운 취약점이 나타나 악용을 기다리고 있어 공격 표면은 끊임없이 확장되고 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text6" xml:space="preserve">
+    <value>중소기업은 제한된 보안 자원으로 인해 높은 노출에 직면해 있으며, 훨씬 더 중요한 데이터를 가진 대기업은 더 큰 위험에 직면해 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text7" xml:space="preserve">
+    <value>무차별 대입 공격과 시도의 거의 89%는 SSH와 같은 기본 액세스 포인트에서 시작됩니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text8" xml:space="preserve">
+    <value>랜섬웨어 공격의 32%는 알려진 취약점을 악용하므로, 패치 지연은 직접적인 위험으로 이어집니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text9" xml:space="preserve">
+    <value>거의 46%의 조직이 보안 사고 이후 고객 손실이나 수익 손실을 보고하고 있습니다.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Title" xml:space="preserve">
+    <value>2026년 소규모 기업을 위한 리눅스 데이터 보안: 리눅스 파일 암호화 및 모범 사례에 대한 짧은 가이드</value>
+  </data>
   <data name="Blog_LYCWAR_Summary" xml:space="preserve">
     <value>AxCrypt 2를 사용할 때 먼저 "로그인"해야합니다 - 처음 로그인 한 후에는 비밀번호를 입력하는 것입니다. AxCrypt는 암호 기반 파일 암호화 응용 프로그램이기 때문입니다.</value>
   </data>
@@ -11955,6 +12264,156 @@ AxCrypt는 Windows, Mac, iOS, Android 기기에서 사용할 수 있는 수상 �
   <data name="Blog_UODPCH_Title" xml:space="preserve">
     <value>유해한 것으로 간주되는 다른 암호 사용</value>
   </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Heading" xml:space="preserve">
+    <value>행동할 때는 바로 AxCrypt와 함께입니다</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text1" xml:space="preserve">
+    <value>2026년에는 디지털 위협이 진화했고, 데이터는 금보다 더 소중합니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text2" xml:space="preserve">
+    <value>암호화가 어렵거나 비용이 많이 든다고 생각하거나 지연하지 마세요. 저희는 AxCrypt Free to AxCrypt 같은 암호화 솔루션을 제공하며, 모두를 위해 설계되었습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text3" xml:space="preserve">
+    <value>암호화에 익숙하지 않거나 Windows 11, Linux, Mac에서 몇 개의 파일을 보호하고 싶을 때, 저희가 도와드립니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text4" xml:space="preserve">
+    <value>당신의 데이터가 위험에 처한 48%에 합류하지 않도록 하세요.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text5" xml:space="preserve">
+    <value>당신의 미래를 지키세요.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text6" xml:space="preserve">
+    <value>지금 AxCrypt를 다운로드하고 14일 무료 체험을 시작 하세요.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text1" xml:space="preserve">
+    <value>대부분의 조직은 암호화 도구와 프로그램을 활용하지만, 이는 드물다. 원격 근무에 관해서는 그 격차가 더 벌어집니다. NordLayer의 요약에 따르&lt;/a&gt;면, 문제는 BYOD, 보안되지 않은 또는 공개 Wi-Fi, 섀도우 IT, 암호화되지 않은 파일 전송 또는 이상적으로 노출된 상태로 남아 있는 퍼블릭 클라우드 폴더에 있습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text10" xml:space="preserve">
+    <value>윈도우 11을 적극적으로 사용하고 있고, 팀의 데이터와 워크플로우를 보호하기 위해 무료 파일 암호화 소프트웨어나 강력한 암호화를 기업용으로 찾고 있다면, AxCrypt는 2026년 위협 환경에 대한 결정적인 해결책입니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text11" xml:space="preserve">
+    <value>클라우드 데이터 보안에 관한 정보와 해결책은 여기에서 더 읽어보세요.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text2" xml:space="preserve">
+    <value>또 다른 우려는 보안 파일 공유가 서서히 주목받고 있으며, 클라우드 파일 공유 서비스와 원격 접속 경로가 별개의 진입 지점이 된다는 점입니다. 따라서 한 번의 잘못된 설정이나 도난당한 자격 증명 배치가 공격자가 회사 데이터에 직접 접근할 수 있는 관문이 될 수 있습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text3" xml:space="preserve">
+    <value>Talo 의 사고 대응 데이터 보고서에 따르면 공격자들이 취약점을 적극적으로 악용하고 있으며, 2026년 1분기 보고서에서 피싱이 가장 많이 관찰된 초기 접근 벡터였고, 다단계 인증(MFA) 취약점, 노출된 인프라 및 부실한 로깅이 지속적인 문제였습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text4" xml:space="preserve">
+    <value>그렇다면 클라우드 저장소를 어떻게 보호하고 클라우드 보안 위험을 최소화할 수 있을까요?</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text5" xml:space="preserve">
+    <value>'사무실'이 좋은 인터넷이 있는 곳이고, 클라우드 데이터 보안이 위협받을 수 없으며, 커피 휴식이 바로 주방에서 이루어지는 시대에, AxCrypt는 대부분의 현대 팀이 아직 맞추기 어려운 안전한 클라우드 스토리지 환경을 제공합니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text6" xml:space="preserve">
+    <value>무노력 클라우드 암호화: 구글 드라이브, 원드라이브, 심지어 드롭박스 등 어떤 플랫폼이든 AxCrypt는 원활하게 통합되어 마찰을 최소화하고 안전한 클라우드 저장소를 극대화하여 누구에게나 접근할 수 있는 암호화되지 않은 파일을 클라우드에 남기지 않습니다. 클라우드와 원활하게 작동하고, 로컬 파일도 지원하며, 모든 주요 운영체제에서 원활하고 매끄럽게 작동하는 것을 찾고 있다면, AxCrypt는 비즈니스 속도로 파일을 암호화하는 앱입니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text7" xml:space="preserve">
+    <value>모두를 위한 빌드: 윈도우에서 작업하시고 AxCrypt Windows 11을 원하든, Linux용 AxCrypt를 원하든, 심지어 macOS용 AxCrypt는 모든 OS와 모바일에서 문제 없이 작동하여 안드로이드에서 암호화된 파일을 보는 모든 방법에 대한 모든 답을 찾는 데 도움을 줍니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text8" xml:space="preserve">
+    <value>클라우드 보안 위험 완화: AxCrypt 무료 또는 Premium 프로그램을 조직 전반에 도입하면 섀도우 IT 및 자격 증명 도난 위험을 제거합니다. 공격자가 클라우드 폴더에 접근하면 AES-256비트 암호화가 그 내용을 보호합니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text9" xml:space="preserve">
+    <value>안전한 파일 공유 강화: AxCrypt는 팀원들이 자신의 비밀번호로 파일을 공유할 수 있게 하여 클라우드 보안 모범 사례를 단순화합니다. 이는 전통적인 키 관리의 관리 부담 없이 클라우드에서 파일을 가장 효율적으로 암호화할 수 있는 방법을 제공합니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text1" xml:space="preserve">
+    <value>국경 없는 노동력으로의 전환은 속도와 안전 중 하나를 선택하게 해서는 안 됩니다. 암호화되지 않은 파일이 클라우드에 남아 있는 주요 이유 중 하나는 전통적인 보안 및 암호화가 초래하는 마찰 때문입니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text2" xml:space="preserve">
+    <value>오늘날 진화하는 위협 환경은 보안을 어렵게 만들지만, 보안을 부차적으로 생각하거나 무시해서는 안 됩니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text3" xml:space="preserve">
+    <value>AI 기반 사이버 공격과 기타 심각한 데이터 위험이 증가함에 따라, 직원들은 종종 우회 방법을 찾으며 48%의 격차를 침해로 바꾸고 있습니다. 목표는 세밀합니다: 파일 암호화는 보이지 않으면서도 강력해야 합니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text4" xml:space="preserve">
+    <value>기업은 특히 세밀한 수준에서 데이터 암호화가 필요합니다. 파일과 폴더를 안전하게 보호할 뿐만 아니라, 팀이 어디서든 완전한 보안과 자신감을 가지고 일할 수 있도록 힘을 실어줍니다. AxCrypt는 기업에 철통 같은 파일 수준의 보안을 통해 이러한 신뢰를 제공합니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text5" xml:space="preserve">
+    <value>진정한 데이터 유출 방지는 엄격한 제한에서 비롯된 것이 아니라 셀룰러 수준에서의 전략적이고 지능적인 데이터 보호에서 비롯됩니다. 자동으로 작동하기 때문에, 잊어버려도 데이터는 보호됩니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text6" xml:space="preserve">
+    <value>전체 암호화 과정을 자동화하고 싶거나 간단한 앱으로 파일을 실시간으로 암호화할 수 있든, AxCrypt는 제로 지식 보안으로 생산성을 유지하고 개인정보를 안전하게 지켜줍니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Heading1" xml:space="preserve">
+    <value>클라우드 파일 암호화가 데이터 유출 위험을 최소화하는 방법</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Heading2" xml:space="preserve">
+    <value>생산성을 희생하지 않고 원격 근무 인력을 확보하기</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Summary" xml:space="preserve">
+    <value>더 많은 워크플로우가 클라우드로 전환되고 원격 및 분산형 조직이 증가함에 따라 침해가 예상되고 공격 표면도 넓어지고 있습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text1" xml:space="preserve">
+    <value>소개</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text10" xml:space="preserve">
+    <value>2. 전 세계 데이터의 거의 절반이 AWS, Azure, Google 같은 하이퍼스케일러 기업에 저장될 것입니다. SpaceLift 에 따르면, AWS는 약 32%의 점유율로 퍼블릭 클라우드 시장을 선도하고 있으며, 그 뒤를 Microsoft Azure가 23%로 차지하고 있습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text11" xml:space="preserve">
+    <value>3. 클라우드 위험이 증가하고 있습니다: 데이터 유출의 약 45%가 클라우드에서 발생하며, 서버가 주요 표적입니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text12" xml:space="preserve">
+    <value>4. 보안에 대한 더 큰 집중에도 불구하고, 여전히 큰 격차가 존재합니다: 48%의 기업이 여전히 암호화된 데이터와 암호화되지 않은 데이터를 클라우드에 저장하고 있으며, 이는 BYOD 관행과 편의를 우선시하는 파일 공유로 인해 더욱 악화되는 경우가 많습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text13" xml:space="preserve">
+    <value>핵심 문제는 48%의 기업이 여전히 암호화되지 않은 파일을 클라우드에 저장하고 있으며, 이 위험한 격차가 계속해서 지속되고 확대되고 있다는 점입니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text14" xml:space="preserve">
+    <value>하지만 왜일까요?</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text15" xml:space="preserve">
+    <value>이 간극은 클라우드에 암호화되지 않은 파일이 있을 때 정확히 존재하며, 암호화가 클라우드 프로비저딩, 키 관리, 접근 제어의 일상적인 관행이 아닌 종이 정책이 될 때 그 간극은 더욱 벌어집니다. 이 격차와 클라우드 보안 위험은 클라우드 도입이 데이터 거버넌스보다 빠르게 진행될 때 더욱 커집니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text16" xml:space="preserve">
+    <value>클라우드 데이터 보안을 우선시하는 기업의 약 83%가 그렇습니다. 그렇다면 나머지는 어떨까요?</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text17" xml:space="preserve">
+    <value>이 격차가 존재하며, 그 주요 이유는 다음과 같습니다:</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text18" xml:space="preserve">
+    <value>1. 사람들은 보안보다 편리함을 선호합니다: Google Drive, OneDrive, Dropbox 같은 클라우드 플랫폼은 기본 설정으로 누구나 링크를 통해 쉽게 공유할 수 있게 해줍니다. 많은 팀은 제공업체의 내장 보호 기능이 민감한 정보를 보호하기에 충분하다고 생각합니다. 하지만 실제로는, 그 링크를 가진 사람이 접근할 수 있다면, 회사 내 거의 모든 것에 접근할 수 있습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text19" xml:space="preserve">
+    <value>2. 가정된 복잡성:&lt;/b&gt; 대부분의 전통적인 암호화는 복잡하고 번거로워 추가 단계, 키 관리, 워크플로우 중단, 복잡한 스크립트, 그리고 많은 개발자나 개발자의 필요성을 초래합니다. 특히 원격 근무 팀이 있는 빠르게 움직이는 조직에서는 시간이 제한적입니다. 이 공백이 바로 클라우드 데이터 유출이 발생하는 지점입니다. 많은 사람들이 클라우드 데이터 보안 배포가 어렵다고 생각하고 그 아이디어를 무시합니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text2" xml:space="preserve">
+    <value>더 많은 워크플로우가 클라우드로 전환되고 원격 및 분산형 조직이 증가함에 따라 침해가 예상되고 공격 표면도 넓어지고 있습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text20" xml:space="preserve">
+    <value>3. 자원 제약:&lt;/b&gt; 중소기업과 빠르게 성장하는 중견기업이 직면한 또 다른 도전 과제는 전담 보안팀의 부족입니다. 이들은 종종 생산성을 우선시하고 클라우드 데이터 보안을 뒤로합니다. 암호화는 종종 부차적으로 취급되거나 성장 과정에서 관리 비용이 너무 많이 든다고 여겨집니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text21" xml:space="preserve">
+    <value>4. 일관성 없는 정책과 BYOD 문화:&lt;/b&gt; 하이브리드 및 원격 근무는 종종 개인과 기업 기기를 혼합합니다. 일부 원격 조직은 직원들의 개인 시스템에 의존하는데, 이는 침해될 수 있습니다. 이로 인해 섀도우 IT, 암호화되지 않은 업로드, 그리고 안전하지 않은 다운로드가 발생합니다. 민감한 정보를 보안이 취약한 채널과 공공 Wi-Fi로 전송하면 암호화되지 않은 데이터가 해커와 공격자에게 노출됩니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text22" xml:space="preserve">
+    <value>5. 마지막 작품은 저희가 가장 좋아하는 작품입니다. 우리의 사고방식에는 절대 일어나지 않을 것입니다:&lt;/b&gt; 침해가 발생하기 전까지는 위험이 추상적으로 느껴집니다. 많은 중소기업, 프리랜서, 소규모 그룹이 자신들이 안전하다고 잘못 믿고 있습니다. 침해나 공격이 자신들에게 영향을 미치지 않을 거라고 생각할 때, 바로 사고가 발생합니다. 데이터 보안을 무시하고, 민감한 정보를 보안이 취약한 채널로 전송하며, 제3자가 모든 것을 볼 수 있게 합니다. 이러한 사고방식은 특히 사무실이나 적절한 클라우드 보안이 없는 조직에 해롭습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text3" xml:space="preserve">
+    <value>2026년까지 거의 98%의 근로자가 원격 근무를 원할 것이며, 전체 노동력의 약 27%가 완전 원격 근무를 원하고 있습니다. 소식통에 따르면 하이브리드 노동력이 현재 직장 환경을 지배하고 있으며, 약 52%가 워라밸 개선을 목표로 하고 있습니다. 기술 직원의 거의 89%가 하이브리드 및 원격 근무를 수용하고 있습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text4" xml:space="preserve">
+    <value>원격 근무와 하이브리드 근무는 편리하고 실현 가능해 보이지만, 수많은 위협도 내포하고 있습니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text5" xml:space="preserve">
+    <value>클라우드에 저장된 암호화되지 않은 파일 - 처음부터 가장 쉬운 열매였다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text6" xml:space="preserve">
+    <value>오늘날에도 대부분의 직원과 전문가들은 기본적인 클라우드 데이터 보안만으로도 해결책이 될 것이라고 믿고 있습니다. 하지만 실제로는 그것이 모든 위험의 관문입니다. 위협 환경은 항상 진화하고 있으며, AI 기반 사이버 공격과 즉시 사용 가능한 악성코드가 있어 쉽게 돌파할 수 있습니다. 기본적인 클라우드 데이터 보안이나 권한 기반 허점을 우회해 모든 데이터를 확보하는 데는 숙련된 해커가 그리 많지 않아도 됩니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text7" xml:space="preserve">
+    <value>강력한 클라우드 데이터 보안 관행과 클라우드 내 파일을 암호화하는 앱이 없다면, 특히 원격 근무 시 데이터 유출 위험에 처할 뿐만 아니라 준수 기준을 충족하지 못해 문제도 생깁니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text8" xml:space="preserve">
+    <value>원격 근무와 클라우드 기반, 국경 없는 인력에 대한 통계적 관점에서 이해하기 위해, 2026년 지금까지 진행된 주요 클라우드 데이터 보안 통계 보고서를 소개합니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text9" xml:space="preserve">
+    <value>1. 2026년까지 약 200제타바이트의 데이터가 클라우드에 저장되어, 원격 클라우드 우선 업무로의 전환이 가속화될 것입니다.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Title" xml:space="preserve">
+    <value>왜 48%의 기업이 여전히 암호화되지 않은 파일을 클라우드에 저장하고 있으며, AxCrypt가 이를 어떻게 해결하는지에 대해</value>
+  </data>
   <data name="Blog_WAMHIHY_Conclusion_Heading" xml:space="preserve">
     <value>투자하지 않고 수익을 얻으십시오!</value>
   </data>
@@ -11990,6 +12449,9 @@ AxCrypt는 Windows, Mac, iOS, Android 기기에서 사용할 수 있는 수상 �
   </data>
   <data name="Blog_WAMHIHY_H2_Text4" xml:space="preserve">
     <value>더 나은 평판 구축 - AxCrypt와 같이 평판이 좋고 신뢰할 수 있는 회사와 제휴하여 귀하의 인터넷 평판을 높일 수 있습니다.</value>
+  </data>
+  <data name="Blog_WAMHIHY_H2_Text5" xml:space="preserve">
+    <value>또한, 시청자를 위해 시각적으로 매력적인 브로셔 디자인 자료를 만드는 것은 제휴 프로모션을 보다 전문적이고 매력적으로 표현하는 데 도움이 될 수 있습니다.</value>
   </data>
   <data name="Blog_WAMHIHY_H3_SH1_Text1" xml:space="preserve">
     <value>256비트 암호화를 통해 AxCrypt는 사용자 친화적이고 사용하기 쉬운 암호화 소프트웨어를 구현하여 데이터 보안을 강화하는 동시에 데이터 침해 위험 또한 줄입니다.</value>
@@ -14811,6 +15273,9 @@ AxCrypt는 Windows, Mac, iOS, Android 기기에서 사용할 수 있는 수상 �
   <data name="BrandToneLabel" xml:space="preserve">
     <value>브랜드 톤</value>
   </data>
+  <data name="BrowseFilesText" xml:space="preserve">
+    <value>파일 탐색</value>
+  </data>
   <data name="BrowseText" xml:space="preserve">
     <value>찾아보기</value>
   </data>
@@ -14819,6 +15284,9 @@ AxCrypt는 Windows, Mac, iOS, Android 기기에서 사용할 수 있는 수상 �
   </data>
   <data name="BruteForceResistantText" xml:space="preserve">
     <value>다이나믹 브루트 포스 카운터 측정 - 반복적인 암호 래핑으로 공격을 더욱 어렵게 합니다.</value>
+  </data>
+  <data name="BulkActionText" xml:space="preserve">
+    <value>벌크 액션</value>
   </data>
   <data name="BusinessAcceptInvitationText" xml:space="preserve">
     <value>초대 승락하기</value>
@@ -15867,6 +16335,45 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>열린 파일 또는 새 파일들을 암호화하시려면 여기를 누르시기 바랍니다. 그러나 본파일이 이미 사용중이 아닌지를 확인 해주시기 바랍니다.</value>
   </data>
+  <data name="CloudServicesConnectedText" xml:space="preserve">
+    <value>연결</value>
+  </data>
+  <data name="CloudServicesConnectText" xml:space="preserve">
+    <value>연결해</value>
+  </data>
+  <data name="CloudServicesDisconnectText" xml:space="preserve">
+    <value>연결 해제</value>
+  </data>
+  <data name="CloudServicesDropBoxHelpText" xml:space="preserve">
+    <value>파일은 Dropbox에 암호화되어 있어야 합니다 — 열쇠는 오직 당신만이 쥐고 있습니다.</value>
+  </data>
+  <data name="CloudServicesFooter" xml:space="preserve">
+    <value>팁: 여러 제공업체에 동시에 로그인할 수 있습니다.</value>
+  </data>
+  <data name="CloudServicesGoogleDriveHelpText" xml:space="preserve">
+    <value>Google Drive에 업로드하기 전에 파일을 암호화하세요.</value>
+  </data>
+  <data name="CloudServicesLocalHelpText" xml:space="preserve">
+    <value>이 기기에서 파일을 둘러보세요.</value>
+  </data>
+  <data name="CloudServicesLocalHelpText1" xml:space="preserve">
+    <value>이 제공업체에서 암호화된 파일을 관리하려면 연결하세요.</value>
+  </data>
+  <data name="CloudServicesManageFilesText" xml:space="preserve">
+    <value>파일 관리</value>
+  </data>
+  <data name="CloudServicesNotConnectedText" xml:space="preserve">
+    <value>연결되지 않음</value>
+  </data>
+  <data name="CloudServicesOneDriveHelpText" xml:space="preserve">
+    <value>암호화된 파일을 OneDrive에 보내면서도 내용을 노출시키지 마세요.</value>
+  </data>
+  <data name="CloudServicesPhoneBrowserHelpText" xml:space="preserve">
+    <value>휴대폰에 저장된 파일을 열고 복호화하세요.</value>
+  </data>
+  <data name="CloudServicesSubTitle" xml:space="preserve">
+    <value>암호화된 클라우드 저장소를 연결하고, 탐색하며, 관리할 수 있습니다. 파일은 클라우드 에 도달하기 전에 기기에서 암호화됩니다.</value>
+  </data>
   <data name="CloudServicesText" xml:space="preserve">
     <value>클라우드 서비스</value>
   </data>
@@ -16551,8 +17058,17 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="DebugLoggingToolStripMenuItemText" xml:space="preserve">
     <value>로그인 중</value>
   </data>
+  <data name="DebugManageAccountSubTitle" xml:space="preserve">
+    <value>프로필, 보안, 연락처 정보를 axcrypt.net 에서 업데이트하세요</value>
+  </data>
   <data name="DebugManageAccountToolStripMenuItemText" xml:space="preserve">
     <value>AxCrypt ID 관리하기</value>
+  </data>
+  <data name="DebugModeDescription" xml:space="preserve">
+    <value>문제 진단을 돕기 위해 상세한 오류 기록을 작성하세요</value>
+  </data>
+  <data name="DebugModeTitle" xml:space="preserve">
+    <value>디버그 모드</value>
   </data>
   <data name="DebugOptionsToolStripMenuItemText" xml:space="preserve">
     <value>옵션</value>
@@ -17347,8 +17863,14 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="EncryptFileOpenDialogTitle" xml:space="preserve">
     <value>보안 강화를 원하는 파일을 선택해주세요.</value>
   </data>
+  <data name="EncryptFilesAllSubFoldersPopup" xml:space="preserve">
+    <value>모든 하위 폴더의 파일을 암호화하세요</value>
+  </data>
   <data name="EncryptFileSaveAsDialogTitle" xml:space="preserve">
     <value>파일 존재, 이와 같이 저장</value>
+  </data>
+  <data name="EncryptFilesBeforeUploadPopup" xml:space="preserve">
+    <value>업로드 전에 파일 암호화</value>
   </data>
   <data name="EncryptLabelText" xml:space="preserve">
     <value>암호화하다</value>
@@ -17358,6 +17880,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   </data>
   <data name="EncryptToolStripMenuItemText" xml:space="preserve">
     <value>보안</value>
+  </data>
+  <data name="EncryptUnlimitedText" xml:space="preserve">
+    <value>무제한 텍스트 암호화</value>
   </data>
   <data name="EnglishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>영어</value>
@@ -17423,6 +17948,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>나가기</value>
   </data>
+  <data name="ExitToolSubTitle" xml:space="preserve">
+    <value>AxCrypt 앱을 닫으세요</value>
+  </data>
   <data name="ExpirationDatePrompt" xml:space="preserve">
     <value>만료 일자</value>
   </data>
@@ -17435,6 +17963,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="ExpireInLabelFirstPart" xml:space="preserve">
     <value>만료</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
+  </data>
+  <data name="ExpiryDatesKeys" xml:space="preserve">
+    <value>키의 만료일</value>
   </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>성공적으로 내보내졌습니다!</value>
@@ -17450,6 +17981,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   </data>
   <data name="ExportSharingKeyToolStripMenuItemToolTipText" xml:space="preserve">
     <value>암호화된 파일들을 다른 사용자들과 공유하시려면 수출한 공유 공개 키를 보내시기 바랍니다.</value>
+  </data>
+  <data name="ExtraPrivacyProtectionPopup" xml:space="preserve">
+    <value>추가적인 프라이버시 보호</value>
   </data>
   <data name="FailedAddFolderNotification" xml:space="preserve">
     <value>폴더 추가에 실패했습니다! {0}</value>
@@ -17995,9 +18529,27 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
     <value>수정한 날짜</value>
     <comment>A menu text for selecting file properties - date modified for encryption.</comment>
   </data>
+  <data name="FilePropertiesDescription" xml:space="preserve">
+    <value>암호화 후에도 원본 파일 수정 날짜는 변경하지 마세요.</value>
+  </data>
   <data name="FilePropertiesFileNameToolStripMenuItem" xml:space="preserve">
     <value>파일 이름</value>
     <comment>A menu text for selecting file properties - file name for encryption.</comment>
+  </data>
+  <data name="FilePropertiesInfoText" xml:space="preserve">
+    <value>이 속성들은 암호화된 파일 안에 저장됩니다. 복호화하지 않고도 파일을 정렬하고 식별할 수 있게 해줍니다.</value>
+  </data>
+  <data name="FilePropertiesOriginalFileNameDescription" xml:space="preserve">
+    <value>암호화 과정에서 원본 파일 이름을 안전한 무작위 이름으로 교체하여 숨기세요.</value>
+  </data>
+  <data name="FilePropertiesOriginalFileNameTitle" xml:space="preserve">
+    <value>원래 파일 이름</value>
+  </data>
+  <data name="FilePropertiesSortableColumns" xml:space="preserve">
+    <value>정렬 가능한 열(sortable columns)</value>
+  </data>
+  <data name="FilePropertiesSubTitle" xml:space="preserve">
+    <value>각 암호화된 파일에 어떤 메타데이터가 포함되어 있는지 선택하세요</value>
   </data>
   <data name="FilePropertiesToolStripMenuItemText" xml:space="preserve">
     <value>암호화 파일 속성</value>
@@ -18035,6 +18587,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   </data>
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>재정</value>
+  </data>
+  <data name="FindEncryptedFilesQuicklyPopup" xml:space="preserve">
+    <value>암호화된 파일을 빠르게 찾기</value>
   </data>
   <data name="FindFileFeatureTitle" xml:space="preserve">
     <value>파일 찾기</value>
@@ -18353,6 +18908,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   </data>
   <data name="GeneralLabel" xml:space="preserve">
     <value>일반</value>
+  </data>
+  <data name="GenerateSecureRandomFileNamesPopup" xml:space="preserve">
+    <value>안전한 임의 파일 이름 생성</value>
   </data>
   <data name="GenerateText" xml:space="preserve">
     <value>생성</value>
@@ -19204,14 +19762,83 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="HelpContactsprtText4" xml:space="preserve">
     <value>기능 요청</value>
   </data>
+  <data name="HelpOverlayAnyServerDescription" xml:space="preserve">
+    <value>아니. 모든 암호화와 복호화는 기기에서 로컬에서 이루어집니다. SecureApp은 암호화되지 않은 데이터를 절대 전송하지 않습니다.</value>
+  </data>
+  <data name="HelpOverlayAnyServerTitle" xml:space="preserve">
+    <value>제 데이터가 어떤 서버로 전송되나요?</value>
+  </data>
+  <data name="HelpOverlayCollapseSidebarDescription" xml:space="preserve">
+    <value>사이드바 상단의 ← 버튼을 클릭하면 화면 공간을 더 확보하기 위해 접히세요. 라벨을 보려면 아이콘을 마우스로 올리세요.</value>
+  </data>
+  <data name="HelpOverlayCollapseSidebarTitle" xml:space="preserve">
+    <value>사이드바 접기</value>
+  </data>
+  <data name="HelpOverlayDragDropEncryptDescription" xml:space="preserve">
+    <value>데스크톱에서 파일을 '최근 파일 섹션'으로 드래그하면 즉시 암호화할 수 있습니다 — 대화 없이 바로 암호화할 수 있습니다.</value>
+  </data>
+  <data name="HelpOverlayDragDropEncryptTitle" xml:space="preserve">
+    <value>드래그 앤 드롭 → 암호화</value>
+  </data>
+  <data name="HelpOverlayEncryptYourFirstFileDescription" xml:space="preserve">
+    <value>빠른 동작에서 '파일 암호화'를 클릭하거나, 파일을 최근 파일 섹션에 드래그 앤 드롭하세요. 당신의 파일은 즉시 AES-256으로 암호화됩니다.</value>
+  </data>
+  <data name="HelpOverlayEncryptYourFirstFileTitle" xml:space="preserve">
+    <value>첫 번째 파일을 암호화하세요</value>
+  </data>
+  <data name="HelpOverlayGlobalSearchDescription" xml:space="preserve">
+    <value>상단 검색창에서 파일, 도구 또는 페이지를 검색할 수 있습니다. 입력하는 동안 결과가 실시간으로 필터링됩니다.</value>
+  </data>
+  <data name="HelpOverlayGlobalSearchTitle" xml:space="preserve">
+    <value>글로벌 서치</value>
+  </data>
+  <data name="HelpOverlayQuickEncryptShortcutDescription" xml:space="preserve">
+    <value>앱 내 어디든 Ctrl+E를 누르면 파일 선택기를 즉시 열고 새 파일을 암호화할 수 있습니다.</value>
+  </data>
+  <data name="HelpOverlayQuickEncryptShortcutTitle" xml:space="preserve">
+    <value>빠른 암호화 지름길</value>
+  </data>
+  <data name="HelpOverlayRightClickContextMenuDescription" xml:space="preserve">
+    <value>최근 파일 목록에서 파일을 우클릭하여 빠른 작업을 하세요: 열기, 키 공유, 익명 이름 변경, 최근 파일 삭제.</value>
+  </data>
+  <data name="HelpOverlayRightClickContextMenuTitle" xml:space="preserve">
+    <value>오른쪽 클릭 컨텍스트 메뉴</value>
+  </data>
+  <data name="HelpOverlaySetupYourVaultDescription" xml:space="preserve">
+    <value>Vault는 모든 암호화된 파일을 하나의 안전한 폴더에 보관합니다. 자동 암호화를 활성화해서 새 파일을 저장하는 즉시 보호하세요.</value>
+  </data>
+  <data name="HelpOverlaySetupYourVaultTitle" xml:space="preserve">
+    <value>금고를 설정하세요</value>
+  </data>
+  <data name="HelpOverlayShareFileSecurelyDescription" xml:space="preserve">
+    <value>'Share Securely'를 사용해 일회성 공유 키를 생성하세요. 수신자는 그 키로만 파일을 열 수 있고, 언제든지 접근 권한을 취소할 수 있습니다.</value>
+  </data>
+  <data name="HelpOverlayShareFileSecurelyTitle" xml:space="preserve">
+    <value>파일을 안전하게 공유하세요</value>
+  </data>
+  <data name="HelpOverlayTitle" xml:space="preserve">
+    <value>SecureApp과 함께 시작하기</value>
+  </data>
+  <data name="HelpOverlayWhatHappensDescription" xml:space="preserve">
+    <value>SecureApp은 비밀번호를 복구할 수 없습니다 — 이는 의도된 것입니다. 비밀번호는 항상 안전한 곳에 보관하세요. Key Management(Pro)는 복구 키를 설정할 수 있게 해줍니다.</value>
+  </data>
+  <data name="HelpOverlayWhatHappensTitle" xml:space="preserve">
+    <value>비밀번호를 잊어버리면 어떻게 되나요?</value>
+  </data>
   <data name="HelpToolStripMenuItemText" xml:space="preserve">
     <value>도움</value>
+  </data>
+  <data name="HelpToolSubTitle" xml:space="preserve">
+    <value>앱 내 도움말 센터와 시작 가이드를 열어</value>
   </data>
   <data name="HelpViewHelpMenuItemText" xml:space="preserve">
     <value>도움</value>
   </data>
   <data name="HideFeaturesLabel" xml:space="preserve">
     <value>기능 감추기</value>
+  </data>
+  <data name="HideOriginalFileNamesPopup" xml:space="preserve">
+    <value>원본 파일 이름 숨기기</value>
   </data>
   <data name="HideRecentFilesListTabToolTipText" xml:space="preserve">
     <value>최근 파일 리스트는 비활성화되었습니다. 활성화를 원하시면 옵션을 선택하여 주십시오.</value>
@@ -20244,6 +20871,12 @@ EU VAT Number SE556967618101</value>
   <data name="JobTitlePlaceholder" xml:space="preserve">
     <value>직함 입력</value>
   </data>
+  <data name="KeepCloudDataPrivatePopup" xml:space="preserve">
+    <value>클라우드 데이터는 비공개로 유지하세요</value>
+  </data>
+  <data name="KeepFolderStructurePopup" xml:space="preserve">
+    <value>폴더 구조를 정리하세요</value>
+  </data>
   <data name="KeepMeUpdatedLinkLabel" xml:space="preserve">
     <value>업데이트 해주십시오.</value>
   </data>
@@ -20339,6 +20972,9 @@ AxCrypt ID 로그인시 사용한 이메일을 통해 수신자의 신원확인�
   </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>Apply 버튼을 누르세요.</value>
+  </data>
+  <data name="KeyShareOneTime" xml:space="preserve">
+    <value>일회성 공유 키</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>일반적으로 직원들은 관련 정보 및 업무 관련 정보를 서로 공유합니다. 그러나 공유 과정에서 데이터 보안에 대한 걱정은 불가피합니다. 이로 인해 보안 파일 공유에 대한 우려가 제기되기 때문에 암호화 소프트웨어에 파일을 보다 안전하게 공유하고 받을 수 있는 기능이 있는 것이 매우 중요합니다.</value>
@@ -20677,6 +21313,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   </data>
   <data name="LogoAndIconLabel" xml:space="preserve">
     <value>로고 및 아이콘</value>
+  </data>
+  <data name="LogOffSubTitle" xml:space="preserve">
+    <value>이 기기에서 로그아웃하세요 — 파일은 계속 암호화되어 있습니다</value>
   </data>
   <data name="LogOffText" xml:space="preserve">
     <value>로그아웃</value>
@@ -21527,6 +22166,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   <data name="Meta-Description-Blog-ITTROLPPAVU" xml:space="preserve">
     <value>보호되지 않은 개인 미디어가 어떻게 신원 도용으로 이어질 수 있는지 알아보세요. AxCrypt의 AES-256 암호화를 사용하여 사진과 비디오를 보호하는 팁을 알아보세요.</value>
   </data>
+  <data name="Meta-Description-Blog-LDSFSB2SGLFEBP" xml:space="preserve">
+    <value>2026년에 리눅스 파일 암호화, 사이버 보안 모범 사례, 그리고 SMB를 위한 안전한 데이터 공유로 리눅스 서버와 비즈니스 파일을 보호하세요.</value>
+  </data>
   <data name="Meta-Description-Blog-LYCWAR" xml:space="preserve">
     <value>컴퓨터에서 AxCrypt를 실행해 두는 것이 안전한지 궁금하십니까? 취해야 할 예방 조치와 파일을 안전하게 유지하는 방법을 알아보세요.</value>
   </data>
@@ -21610,6 +22252,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   </data>
   <data name="Meta-Description-Blog-UODPCH" xml:space="preserve">
     <value>다른 암호를 사용하면 보안 위험이 증가할 수 있는 이유를 알아봅니다. 암호화 및 비밀번호 관리가 데이터를 안전하게 유지하는 데 어떻게 도움이 되는지 알아보세요.</value>
+  </data>
+  <data name="Meta-Description-Blog-W4BSSUFOTCAHAFI" xml:space="preserve">
+    <value>48%의 기업이 암호화되지 않은 파일을 클라우드에 저장합니다. AxCrypt의 AES-256 암호화가 어떻게 데이터를 보호하고, 침해를 방지하며, 원격 팀을 보호하는지 알아보세요.</value>
   </data>
   <data name="Meta-Description-Blog-WATPOI" xml:space="preserve">
     <value>WikiLeaks의 영향과 민감한 정보를 보호하는 데 있어 암호화의 중요성에 대해 알아보세요. 데이터 보호에 대한 교훈을 알아보십시오.</value>
@@ -22181,6 +22826,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   <data name="Meta-Title-Blog-ITTROLPPAVU" xml:space="preserve">
     <value>신원 도용으로부터 개인 사진 및 비디오 보호</value>
   </data>
+  <data name="Meta-Title-Blog-LDSFSB2SGLFEBP" xml:space="preserve">
+    <value>2026년 중소기업을 위한 리눅스 데이터 보안: 파일 암호화 및 모범 사례</value>
+  </data>
   <data name="Meta-Title-Blog-LYCWAR" xml:space="preserve">
     <value>컴퓨터에서 AxCrypt를 실행 중인 상태로 두는 것이 안전합니까?</value>
   </data>
@@ -22264,6 +22912,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   </data>
   <data name="Meta-Title-Blog-UODPCH" xml:space="preserve">
     <value>다른 암호를 사용하면 보안에 해로울 수 있는 이유</value>
+  </data>
+  <data name="Meta-Title-Blog-W4BSSUFOTCAHAFI" xml:space="preserve">
+    <value>왜 48%의 기업이 암호화되지 않은 파일을 클라우드에 저장하나요 | 액스크립트</value>
   </data>
   <data name="Meta-Title-Blog-WATPOI" xml:space="preserve">
     <value>WikiLeaks: 정보 보호를 위한 암호화의 역할</value>
@@ -22633,6 +23284,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   </data>
   <data name="MFAText2" xml:space="preserve">
     <value>인증 방법을 선택하십시오.</value>
+  </data>
+  <data name="MFAuthenticationAdditionalFactorText" xml:space="preserve">
+    <value>로그인 시 비밀번호 외에 추가 요소를 추가하세요.</value>
   </data>
   <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>AxCrypt에서 MFA를 활성화하는 방법은 무엇입니까?</value>
@@ -23060,6 +23714,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   <data name="NisWhatsInsidesubheading" xml:space="preserve">
     <value>내부 내용:</value>
   </data>
+  <data name="NoCloudServicesText" xml:space="preserve">
+    <value>현재 클라우드 제공업체는 없습니다.</value>
+  </data>
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>로그아웃 하셨습니다. 로그인을 하시려면 클릭해 주십시오.</value>
   </data>
@@ -23198,6 +23855,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   <data name="OneFreeMonthLabel" xml:space="preserve">
     <value>14일 자유</value>
   </data>
+  <data name="OneLatestStandardPopup" xml:space="preserve">
+    <value>최신 표준 원클릭 준수</value>
+  </data>
   <data name="OnlyAdminOnActiveBusinessSubscriptionError" xml:space="preserve">
     <value>Business 구독의 유일한 관리자로 사용자를 삭제할 수 없습니다. 구독을 취소하거나 다른 관리자를 지명하세요.</value>
   </data>
@@ -23234,8 +23894,14 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   <data name="OptionsChangePassphraseToolStripMenuItemText" xml:space="preserve">
     <value>변경 비밀번호</value>
   </data>
+  <data name="OptionsClearAllSettingsAndExitSubTitle" xml:space="preserve">
+    <value>이 기기에서 환경설정을 재설정하고 새로 세션을 시작하세요</value>
+  </data>
   <data name="OptionsClearAllSettingsAndExitToolStripMenuItemText" xml:space="preserve">
     <value>모든 설정 초기화 및 다시 시작</value>
+  </data>
+  <data name="OptionsConvertMenuItemDescription" xml:space="preserve">
+    <value>AES-128 암호화된 파일을 열면 자동으로 AES-256으로 업그레이드하세요.</value>
   </data>
   <data name="OptionsConvertMenuItemText" xml:space="preserve">
     <value>파일을 AES-256으로 자동 업그레이드</value>
@@ -23248,8 +23914,14 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   <data name="OptionsDebugToolStripMenuItemText" xml:space="preserve">
     <value>Debug</value>
   </data>
+  <data name="OptionsHideRecentFilesDescription" xml:space="preserve">
+    <value>최근에 열었던 파일을 홈 화면에 올리지 마세요</value>
+  </data>
   <data name="OptionsHideRecentFilesToolStripMenuItemText" xml:space="preserve">
     <value>최근 파일 숨기기</value>
+  </data>
+  <data name="OptionsIncludeSubfoldersDescription" xml:space="preserve">
+    <value>폴더를 암호화할 때는 하위 폴더에 있는 모든 파일도 암호화하세요</value>
   </data>
   <data name="OptionsIncludeSubfoldersToolStripMenuItemText" xml:space="preserve">
     <value>하위 폴더 포함</value>
@@ -24060,6 +24732,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   <data name="PreparingAxCryptText" xml:space="preserve">
     <value>AxCrypt 준비 중...</value>
   </data>
+  <data name="PreserveOriginalModifiedDatePopup" xml:space="preserve">
+    <value>원본 수정 날짜를 보존하세요</value>
+  </data>
   <data name="PressAndHoldLabel" xml:space="preserve">
     <value>더 보려면 길게 누르세요</value>
     <comment>Tooltip for Press and hold gesture in mobile application</comment>
@@ -24349,6 +25024,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   </data>
   <data name="PrimaryReasonForCancelationLabelText" xml:space="preserve">
     <value>취소하시는 이유는 무엇입니까?</value>
+  </data>
+  <data name="PriorityCustomerSupport" xml:space="preserve">
+    <value>우선 고객 지원</value>
   </data>
   <data name="PrioritySupportTitle" xml:space="preserve">
     <value>Priority Support</value>
@@ -25096,6 +25774,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="PromptXecretsSecretText" xml:space="preserve">
     <value>비밀번호 또는 비밀</value>
   </data>
+  <data name="PROText" xml:space="preserve">
+    <value>프로</value>
+  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>선택하신 구독 날짜가 잘못되었습니다. 유효한 구독은 최소 {0} 개월, 최대는 {1} 개월입니다.</value>
   </data>
@@ -25150,6 +25831,111 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="QueriesAboutAxCryptPremium" xml:space="preserve">
     <value>&lt;b&gt;AxCrypt Business에 대해 궁금한 점이 있나요?&lt;/b&gt;&lt;a href="mailto:business@axcrypt.net"&gt;으로 문의&lt;/a&gt; 부탁드립니다.</value>
   </data>
+  <data name="QuickActionsSubTitle" xml:space="preserve">
+    <value>가장 자주 하는 일들—열기, 암호화, 복호화, 공유 — 에 한 번에 접근할 수 있습니다.</value>
+  </data>
+  <data name="QuickActionsTitle" xml:space="preserve">
+    <value>빠른 작업</value>
+  </data>
+  <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
+    <value>고급 알고리즘</value>
+  </data>
+  <data name="QuickSecureActionAdvancedVaultSecurity" xml:space="preserve">
+    <value>접근 고급 금고 보안</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyEncrypt" xml:space="preserve">
+    <value>추가/변경된 파일을 자동으로 암호화합니다</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyMonitor" xml:space="preserve">
+    <value>안전한 암호화로 폴더를 자동으로 모니터링하고 보호하세요.</value>
+  </data>
+  <data name="QuickSecureActionControlFiles" xml:space="preserve">
+    <value>누가 파일에 접근할 수 있는지 통제하세요</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShare" xml:space="preserve">
+    <value>암호화 및 공유</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShareDescription" xml:space="preserve">
+    <value>파일을 안전하게 확보하고 공유할 준비를 하세요.</value>
+  </data>
+  <data name="QuickSecureActionEncryptedVaults" xml:space="preserve">
+    <value>민감한 파일을 암호화된 금고에 안전하게 보관하고 보호하세요.</value>
+  </data>
+  <data name="QuickSecureActionHeader" xml:space="preserve">
+    <value>행동을 선택하세요</value>
+  </data>
+  <data name="QuickSecureActionMonitorMultiple" xml:space="preserve">
+    <value>여러 폴더를 안전하게 모니터링하세요</value>
+  </data>
+  <data name="QuickSecureActionNoNeedSharePasswords" xml:space="preserve">
+    <value>비밀번호를 공유할 필요는 없습니다</value>
+  </data>
+  <data name="QuickSecureActionPermanentFileDeletion" xml:space="preserve">
+    <value>영구 파일 삭제</value>
+  </data>
+  <data name="QuickSecureActionPermanentlyDelete" xml:space="preserve">
+    <value>복구가 불가능하도록 파일을 영구적으로 삭제하세요.</value>
+  </data>
+  <data name="QuickSecureActionPreventFileRecovery" xml:space="preserve">
+    <value>파일 복구 방지</value>
+  </data>
+  <data name="QuickSecureActionProtectImportantFiles" xml:space="preserve">
+    <value>중요한 파일과 폴더를 보호하세요</value>
+  </data>
+  <data name="QuickSecureActionProtectSensitive" xml:space="preserve">
+    <value>민감한 파일을 자동으로 보호하세요</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFiles" xml:space="preserve">
+    <value>최근 보안 파일</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFilesDescription" xml:space="preserve">
+    <value>최근에 보호하거나 접근한 파일을 빠르게 열어보세요.</value>
+  </data>
+  <data name="QuickSecureActionRemoveAccessAnytime" xml:space="preserve">
+    <value>언제든지 접근 권한을 제거할 수 있습니다</value>
+  </data>
+  <data name="QuickSecureActionSecureEncryptedVaults" xml:space="preserve">
+    <value>안전한 암호화된 금고 생성</value>
+  </data>
+  <data name="QuickSecureActionSecureFilesShare" xml:space="preserve">
+    <value>파일을 안전하게 보호하고 암호화된 접근 권한을 안전하게 공유합니다.</value>
+  </data>
+  <data name="QuickSecureActionSecureFolder" xml:space="preserve">
+    <value>보안 폴더</value>
+  </data>
+  <data name="QuickSecureActionSecureFolderDescription" xml:space="preserve">
+    <value>폴더 내 모든 파일은 암호화로 보호하세요.</value>
+  </data>
+  <data name="QuickSecureActionSensitiveInformation" xml:space="preserve">
+    <value>민감한 정보 보호</value>
+  </data>
+  <data name="QuickSecureActionShareFileAccessSecurely" xml:space="preserve">
+    <value>파일 접근 권한을 안전하게 공유하세요</value>
+  </data>
+  <data name="QuickSecureActionUnlimitedFiles" xml:space="preserve">
+    <value>무제한 파일</value>
+  </data>
+  <data name="QuickSecureActionUnlockAdvanced" xml:space="preserve">
+    <value>고급 보안 기능 잠금 해제</value>
+  </data>
+  <data name="QuickSecureActionUnlockMoreFeatures" xml:space="preserve">
+    <value>더 많은 기능을 잠금 해제하려면 업그레이드하세요.</value>
+  </data>
+  <data name="QuickSecureActionUnlockPremium" xml:space="preserve">
+    <value>프리미엄 보호 기능 잠금 해제</value>
+  </data>
+  <data name="QuickSecureActionUnlockSecurityTools" xml:space="preserve">
+    <value>고급 보안 도구 잠금 해제</value>
+  </data>
+  <data name="QuickSecureAddFilesVault" xml:space="preserve">
+    <value>금고에 파일 추가</value>
+  </data>
+  <data name="QuickSecureAddFilesVaultDescription" xml:space="preserve">
+    <value>중요한 파일을 안전한 금고에 보관하세요.</value>
+  </data>
+  <data name="QuickSecureSecureDeleteDescription" xml:space="preserve">
+    <value>복구가 불가능하도록 파일을 영구적으로 삭제하세요.</value>
+  </data>
   <data name="RateApplicationLinkAndroid" xml:space="preserve">
     <value>&lt;a&gt;구글 플레이&lt;/a&gt;에서 저희를 평가해주세요</value>
     <comment>Link to app store in mobile application (Android)</comment>
@@ -25191,14 +25977,50 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>민감한 데이터를 보호하고 유료 기능을 계속 즐기기 위해 가능한 한 빨리 결제를 다시 시도해 보시기 바랍니다.</value>
   </data>
+  <data name="RecentFilesAES256Always" xml:space="preserve">
+    <value>AES-256은 항상</value>
+  </data>
+  <data name="RecentFilesBatchEncryption" xml:space="preserve">
+    <value>배치 암호화</value>
+  </data>
+  <data name="RecentFilesDropFiles" xml:space="preserve">
+    <value>여기에 파일을 드롭해 암호화하세요</value>
+  </data>
+  <data name="RecentFilesFreePlan" xml:space="preserve">
+    <value>무료 플랜은 3개의 파일을 암호화할 수 있습니다. 무제한으로 업그레이드하세요.</value>
+  </data>
+  <data name="RecentFileShareContextMenu" xml:space="preserve">
+    <value>일회용 키로 암호화된 파일을 안전하게 공유하세요</value>
+  </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>보안 처리된 파일을 최근에 연 적이 없습니다. 파일을 찾으시려면 브라우즈를 클릭하여 파일을 열어주세요.</value>
+  </data>
+  <data name="RecentFilesNoFilesCurrentlyOpen" xml:space="preserve">
+    <value>현재 열린 파일이 없습니다</value>
+  </data>
+  <data name="RecentFilesNoSharedFilesYet" xml:space="preserve">
+    <value>아직 공유 파일이 없습니다</value>
   </data>
   <data name="RecentFilesOpenToolStripMenuItemText" xml:space="preserve">
     <value>열기</value>
   </data>
+  <data name="RecentFilesReencryptClose" xml:space="preserve">
+    <value>재암호화 및 종료</value>
+  </data>
+  <data name="RecentFilesShareSomeone" xml:space="preserve">
+    <value>누군가와 파일을 공유하면 여기 표시됩니다.</value>
+  </data>
+  <data name="RecentFilesSubTitle" xml:space="preserve">
+    <value>파일을 더블 클릭해서 열어보세요. 더 많은 행동을 원하시려면 우클릭하세요.</value>
+  </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>최근 파일</value>
+  </data>
+  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
+    <value>무제한 암호화</value>
+  </data>
+  <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
+    <value>복호화되는 동안 열어둔 파일이 여기에 나타납니다.</value>
   </data>
   <data name="RecentFoldersText" xml:space="preserve">
     <value>최근 폴더</value>
@@ -25344,6 +26166,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="RemoveText" xml:space="preserve">
     <value>제거하다</value>
+  </data>
+  <data name="RenameDeleteOrDecryptFilesPopup" xml:space="preserve">
+    <value>파일 이름 변경, 삭제 또는 복호화</value>
   </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>AxCrypt Business 구독 갱신할 시간입니다.</value>
@@ -25874,6 +26699,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="ReviewsLabel" xml:space="preserve">
     <value>리뷰</value>
   </data>
+  <data name="RevokeAccessAnytime" xml:space="preserve">
+    <value>언제든지 접근 권한을 취소할 수 있습니다</value>
+  </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>러시아어(Russian)</value>
     <comment>The name of the Russian Language in Russian. It should never be translated.</comment>
@@ -25884,6 +26712,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="SaveSecretErrorIsReadOnly" xml:space="preserve">
     <value>유효한 구독 플랜 사용자분들께서만 암호 입력을 저장하실수 있습니다.</value>
+  </data>
+  <data name="ScheduledVaultBackupsPopup" xml:space="preserve">
+    <value>예약된 볼트 백업</value>
   </data>
   <data name="ScriptingEnabledLabel" xml:space="preserve">
     <value>사용 가능한 스크립팅</value>
@@ -25947,6 +26778,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="SecureCloudFaq3Ans" xml:space="preserve">
     <value>네. 애플리케이션에 있는 공유 키를 통해 클라우드에 저장된 암호화된 파일을 공유할 수 있습니다. 클라우드 보안 기능을 통해 접근 권한을 부여하고 사용자 권한을 부여할 수 있습니다. 귀하의 파일은 클라우드 보안을 통해 보호되며, 승인되거나 권한 있는 사용자만 접근할 수 있습니다. 이 클라우드 동기화 기능은 최대 파일 보호를 제공하며, 데이터에 대한 완전한 통제와 보안을 제공합니다.</value>
+  </data>
+  <data name="SecureCloudFileProtectionPopup" xml:space="preserve">
+    <value>안전한 클라우드 파일 보호</value>
   </data>
   <data name="SecureCloudGuidebuttonHead1" xml:space="preserve">
     <value>애플리케이션을 통해 클라우드 저장소 내 파일을 보호하세요</value>
@@ -26073,6 +26907,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="SecureCloudWhatNextText2" xml:space="preserve">
     <value>AxCrypt 금고 기능 가이드 | 파일 암호화 및 보호</value>
+  </data>
+  <data name="SecuredCloudHelpText" xml:space="preserve">
+    <value>클라우드 저장 파일을 안전한 암호화와 고급 보안 기능으로 보호하세요.</value>
   </data>
   <data name="SecuredCloudLinkLabel" xml:space="preserve">
     <value>보안 클라우드</value>
@@ -26326,6 +27163,12 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="SecuredMessengerText" xml:space="preserve">
     <value>의도한 수신자를 위해 AES-256 암호화를 통해 장치 간에 비공개적이고 안전한 통신을 보장합니다.</value>
   </data>
+  <data name="SecureEncryptedVaultPopup" xml:space="preserve">
+    <value>보안 암호화 볼트</value>
+  </data>
+  <data name="SecureKeySharingPopup" xml:space="preserve">
+    <value>보안 키 공유</value>
+  </data>
   <data name="SecurityBlock1Heading" xml:space="preserve">
     <value>AxCrypt이 왜 안전할까요?</value>
   </data>
@@ -26478,6 +27321,42 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="SecuritySectionText" xml:space="preserve">
     <value>보안은 저희에게 중요한 문제입니다. AxCrypt로 하는 모든 작업은 보안을 최우선으로 생각합니다. 저희는 사용자가 자신의 암호를 제어할 수 있는 한 아무도 암호화된 파일에 액세스할 수 없도록 합니다.</value>
     <comment>Description of "Security" section of About Us page in mobile application.</comment>
+  </data>
+  <data name="SecurityStatusEncryptionsPerMonth" xml:space="preserve">
+    <value>한 달에 2번의 암호화</value>
+  </data>
+  <data name="SecurityStatusFreePlan" xml:space="preserve">
+    <value>무료 요금제는 한 달에 최대 2개의 파일 암호화를 포함합니다.</value>
+  </data>
+  <data name="SecurityStatusGroupkeySharing" xml:space="preserve">
+    <value>그룹 키 공유</value>
+  </data>
+  <data name="SecurityStatusGroupkeySharingDescription" xml:space="preserve">
+    <value>팀 또는 역할별로 접근 권한을 공유하며 중앙에서 관리합니다.</value>
+  </data>
+  <data name="SecurityStatusMasterKeyRecovery" xml:space="preserve">
+    <value>마스터키 복구</value>
+  </data>
+  <data name="SecurityStatusMasterKeyRecoveryDescription" xml:space="preserve">
+    <value>회원이 접근 권한을 잃으면 귀하의 조직은 파일을 복구할 수 있습니다.</value>
+  </data>
+  <data name="SecurityStatusSecureDeleteTitle" xml:space="preserve">
+    <value>멀티패스 덮어쓰기로 파일을 영구 삭제하세요.</value>
+  </data>
+  <data name="SecurityStatusTitle" xml:space="preserve">
+    <value>보안 상태</value>
+  </data>
+  <data name="SecurityStatusUnlimitedAES256" xml:space="preserve">
+    <value>무제한 AES-256 암호화 및 키 공유</value>
+  </data>
+  <data name="SecurityStatusUnlimitedAES256Description" xml:space="preserve">
+    <value>일일 제한 없고 — 신뢰할 수 있는 수신자와 키를 공유합니다.</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription" xml:space="preserve">
+    <value>일일 제한 없고 — 신뢰할 수 있는 수신자와 키를 공유합니다.</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription1" xml:space="preserve">
+    <value>일일 제한 없음, 키 공유, 익명 이름 변경.</value>
   </data>
   <data name="SecurityUpdateAvailableWarning" xml:space="preserve">
     <value>보안 문제로 사용자의 소프트웨어 업데이트가 필요합니다.</value>
@@ -26686,6 +27565,21 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="ShowPasswordOptionPrompt" xml:space="preserve">
     <value>비밀번호 보여주기</value>
+  </data>
+  <data name="ShowUpgradeAutoEncryptOpenedPopup" xml:space="preserve">
+    <value>열렸거나 대기 중인 파일 자동 암호화</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPendingPopup" xml:space="preserve">
+    <value>일정 기간 비활성 상태가 되면 자동으로 로그아웃하고 열려 있거나 대기 중인 파일을 보호하세요.</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPopup" xml:space="preserve">
+    <value>자동 로그아웃 보호</value>
+  </data>
+  <data name="ShowUpgradeEnhancedSecurityPopup" xml:space="preserve">
+    <value>강화된 보안 기능 잠금 해제</value>
+  </data>
+  <data name="ShowUpgradeProtectSensitivePopup" xml:space="preserve">
+    <value>민감한 데이터 보호</value>
   </data>
   <data name="SignedInUserInfo" xml:space="preserve">
     <value>&lt;b&gt;{0}&lt;/b&gt;와 로그인</value>
@@ -26985,6 +27879,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="SubscriptionDeletedText" xml:space="preserve">
     <value>삭제 완료</value>
   </data>
+  <data name="SubscriptionDetailsSubTitle" xml:space="preserve">
+    <value>요금제, 청구 및 갱신 세부 정보를 확인하세요</value>
+  </data>
   <data name="SubscriptionDetailsTitle" xml:space="preserve">
     <value>구독 세부 정보</value>
   </data>
@@ -27106,6 +28003,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>스웨덴어 (스웨덴)</value>
+  </data>
+  <data name="SwitchToDarkActionDescription" xml:space="preserve">
+    <value>저조도에서 눈에 더 편안하게 — 앱 전반에 즉시 적용됩니다</value>
   </data>
   <data name="SwitchToDarkActionText" xml:space="preserve">
     <value>다크 모드로 전환하기</value>
@@ -27460,6 +28360,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="TextCheckEmailAndSpam" xml:space="preserve">
     <value>이메일과 스팸메일을 확인하기!</value>
   </data>
+  <data name="TextEncryptionAdvancedProtectionFeatures" xml:space="preserve">
+    <value>고급 보호 기능을 통해 텍스트를 안전하게 암호화하세요.</value>
+  </data>
   <data name="TextEncryptionEmailBodyText" xml:space="preserve">
     <value>이 텍스트는 암호화되어 있으니 AxCrypt를 사용해 원본 메시지를 확인하세요.</value>
   </data>
@@ -27674,6 +28577,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="ToolTipPremiumNeededForSecrets" xml:space="preserve">
     <value>비밀번호 관리는 유료 구독을 통해 하실수 있습니다. 업그레이드를 하시려면 클릭해주십시오!</value>
+  </data>
+  <data name="TopBarPrivacySecurity" xml:space="preserve">
+    <value>프라이버시 및 보안</value>
   </data>
   <data name="TotalLicencesText" xml:space="preserve">
     <value>라이센스(사용됨/합계)</value>
@@ -27942,8 +28848,26 @@ AxCrypt 팀</value>
   <data name="UnknownLogOn" xml:space="preserve">
     <value>모르는 비밀번호입니다. 새로운 비밀번호를 원하시다면 ''새로운 비밀번호''를 클릭해주십시오.</value>
   </data>
+  <data name="UnlimitedVaultEntriesPopup" xml:space="preserve">
+    <value>무제한 금고 입구</value>
+  </data>
+  <data name="UnlockAdvancedCloudSecurityPopup" xml:space="preserve">
+    <value>고급 클라우드 보안 해제</value>
+  </data>
+  <data name="UnlockAdvancedEncryptionFeaturesPopup" xml:space="preserve">
+    <value>고급 암호화 기능 잠금 해제</value>
+  </data>
   <data name="UnlockAdvancedFeaturesText" xml:space="preserve">
     <value>더 강력하고 무제한의 암호화 기능을 잠금 해제하세요!</value>
+  </data>
+  <data name="UnlockAdvancedFileManagementPopup" xml:space="preserve">
+    <value>고급 파일 관리 잠금 해제</value>
+  </data>
+  <data name="UnlockAdvancedFileSecurityPopup" xml:space="preserve">
+    <value>고급 파일 보안 해제</value>
+  </data>
+  <data name="UnlockAdvancedFolderPopup" xml:space="preserve">
+    <value>고급 폴더 보호 해제</value>
   </data>
   <data name="UnlockFeatures" xml:space="preserve">
     <value>우리의 놀라운 기능을 잠금 해제 하세요!프리미엄 또는 비즈니스 로 업그레이드</value>
@@ -27980,6 +28904,9 @@ AxCrypt 팀</value>
   </data>
   <data name="UpdatePaymentDetailsText" xml:space="preserve">
     <value>결제 디테일 업데이트하기</value>
+  </data>
+  <data name="UpdateRequiredText" xml:space="preserve">
+    <value>업데이트 필요</value>
   </data>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0}이(가) 성공적으로 업데이트되었습니다.</value>
@@ -28024,6 +28951,9 @@ AxCrypt 팀</value>
   <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
     <value>업그레이드하여 전체 암호화 기능을 잠금 해제하세요!</value>
   </data>
+  <data name="UpgradeToUnlockText" xml:space="preserve">
+    <value>업그레이드하면 잠금 해제</value>
+  </data>
   <data name="UpgradeVersionDialogText" xml:space="preserve">
     <value>지금 다운로드하시겠습니까, 아니면 다음 출시 때 다운로드하시겠습니까?</value>
   </data>
@@ -28041,6 +28971,9 @@ AxCrypt 팀</value>
   </data>
   <data name="UsageOtherText" xml:space="preserve">
     <value>기타</value>
+  </data>
+  <data name="UsageTipsAnonymousFileDescription" xml:space="preserve">
+    <value>암호화된 파일은 디스크에 원래 이름의 흔적이 전혀 남지 않습니다.</value>
   </data>
   <data name="UsageTipsAnonymousFileHeading" xml:space="preserve">
     <value>익명 파일 이름</value>
@@ -28179,6 +29112,9 @@ AxCrypt 팀</value>
   </data>
   <data name="UseNecessaryCookiesOnlyPromptText" xml:space="preserve">
     <value>필요한 쿠키만 사용</value>
+  </data>
+  <data name="UserActivitiesDescription" xml:space="preserve">
+    <value>모든 파일 작업 — 암호화, 복호화, 공유, 삭제 — 를 기록하세요</value>
   </data>
   <data name="UserActivitiesText" xml:space="preserve">
     <value>사용자 활동</value>
@@ -28513,8 +29449,23 @@ AxCrypt 팀</value>
   <data name="VaultMisConfigured" xml:space="preserve">
     <value>금고에 설정된 경로가 이동하거나 삭제된 것으로 보입니다. Vault를 설정에서 고급 설정→ Vault 설정→ 다시 설정해 주세요.</value>
   </data>
+  <data name="VaultSettingsDescription" xml:space="preserve">
+    <value>금고 경로, 자동 잠금 타이머, 백업 주파수</value>
+  </data>
   <data name="VaultSettingsTitle" xml:space="preserve">
     <value>볼트 설정</value>
+  </data>
+  <data name="VaultStatusAuto-encryption" xml:space="preserve">
+    <value>자동 암호화는 켜 져 있습니다</value>
+  </data>
+  <data name="VaultStatusPaidText" xml:space="preserve">
+    <value>Secure Vault는 유료 기능입니다</value>
+  </data>
+  <data name="VaultStatusText" xml:space="preserve">
+    <value>금고 상태</value>
+  </data>
+  <data name="VaultStatusUnlockUnlimited" xml:space="preserve">
+    <value>무제한 보호 저장소와 자동 암호화 기능을 잠금 해제하세요.</value>
   </data>
   <data name="VaultText" xml:space="preserve">
     <value>볼트</value>
@@ -28563,6 +29514,9 @@ AxCrypt 로그인을 완료하려면 인증 창에 일회용 암호(OTP)를 입�
   </data>
   <data name="ViewAllText" xml:space="preserve">
     <value>모두 보기..</value>
+  </data>
+  <data name="ViewAndManageFileReferencesPopup" xml:space="preserve">
+    <value>파일 참조 보기 및 관리</value>
   </data>
   <data name="ViewCardTitle" xml:space="preserve">
     <value>카드 보기</value>

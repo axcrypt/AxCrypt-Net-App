@@ -442,6 +442,9 @@ Scegli una password difficile da indovinare, poiché proteggerà sia le password
   <data name="AddEmailPromptText" xml:space="preserve">
     <value>Aggiungi email</value>
   </data>
+  <data name="AddExtraPrivacyProtectionPopup" xml:space="preserve">
+    <value>Aggiungere una protezione extra per la privacy</value>
+  </data>
   <data name="AddFileLabel" xml:space="preserve">
     <value>Apri il File AxCrypt</value>
     <comment>Tooltip for "AddFile" button in mobile application</comment>
@@ -510,6 +513,27 @@ Scegli una password difficile da indovinare, poiché proteggerà sia le password
   </data>
   <data name="AdminLabel" xml:space="preserve">
     <value>Amminstratore</value>
+  </data>
+  <data name="AdvancedDebugWarningText" xml:space="preserve">
+    <value>I log di debug possono includere percorsi di file. Disabilita quando non è attivamente nel troubleshooting per proteggere la tua privacy.</value>
+  </data>
+  <data name="AdvancedDiagnosticsText" xml:space="preserve">
+    <value>Diagnostica e monitoraggio</value>
+  </data>
+  <data name="AdvancedEncryptionAlgorithms" xml:space="preserve">
+    <value>Algoritmi avanzati di crittografia</value>
+  </data>
+  <data name="AdvancedFooterHintText" xml:space="preserve">
+    <value>I cambiamenti entrano in vigore immediatamente</value>
+  </data>
+  <data name="AdvancedOptionsConfiguration" xml:space="preserve">
+    <value>Configurazione</value>
+  </data>
+  <data name="AdvancedOptionsSubTitle" xml:space="preserve">
+    <value>Configurazione dell'app, diagnostica e controlli di monitoraggio</value>
+  </data>
+  <data name="AdvancedOptionsTitle" xml:space="preserve">
+    <value>Opzioni avanzate</value>
   </data>
   <data name="AdvancedSettingsText" xml:space="preserve">
     <value>Impostazioni avanzate</value>
@@ -651,6 +675,9 @@ Per favore connettiti usando la stessa password che avevi già utilizzato.</valu
     <value>Sempre Non in Linea</value>
     <comment>Menu choice with checkbox indicating if we are running offline or not.</comment>
   </data>
+  <data name="AlwaysOfflineDescription" xml:space="preserve">
+    <value>Lavora completamente offline — mai sincronizzare o fare check-in con i nostri server</value>
+  </data>
   <data name="AlwaysOfflineToolTip" xml:space="preserve">
     <value>Quando è abilitato, l'accesso a Internet non è mai usato o richiesto, finché non viene disabilitato.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
@@ -679,6 +706,9 @@ Per favore connettiti usando la stessa password che avevi già utilizzato.</valu
   <data name="AnnualSubscriptionTitle" xml:space="preserve">
     <value>Annuo</value>
   </data>
+  <data name="AnonymousRenameMenuDescription" xml:space="preserve">
+    <value>Usa la pagina Strumenti per sostituire i nomi dei file con ID casuali — così nessuno può indovinare il contenuto di un file solo dal suo nome.</value>
+  </data>
   <data name="AnonymousRenameMenuText" xml:space="preserve">
     <value>Rinomina Anonimo</value>
   </data>
@@ -693,6 +723,9 @@ Per favore connettiti usando la stessa password che avevi già utilizzato.</valu
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>Verifica dell'AxCrypt ID [ {0} ]</value>
+  </data>
+  <data name="AppConfigurationDescription" xml:space="preserve">
+    <value>Percorsi dati, posizione della cache e reset dei valori predefiniti</value>
   </data>
   <data name="AppConfigurationText" xml:space="preserve">
     <value>Configurazione dell'app</value>
@@ -803,6 +836,9 @@ Gli aggiornamenti all'abbonamento verranno riportati qui in pochi minuti.</value
   <data name="AutoDeletionMailSubject" xml:space="preserve">
     <value>Il tuo account AxCrypt ID verrà eliminato presto!</value>
   </data>
+  <data name="AutolockOnInactivityPopup" xml:space="preserve">
+    <value>Blocco automatico sull'inattività</value>
+  </data>
   <data name="AutomatedMessageText" xml:space="preserve">
     <value>Si tratta di un messaggio automatico. Si prega di non rispondere direttamente a questa e-mail.</value>
   </data>
@@ -811,6 +847,15 @@ Gli aggiornamenti all'abbonamento verranno riportati qui in pochi minuti.</value
   </data>
   <data name="AutomaticFileUpdatingText" xml:space="preserve">
     <value>Aggiornamento automatico del file protetto dopo l'apertura ed il salvataggio.</value>
+  </data>
+  <data name="AutoUpgradeFilesAES256" xml:space="preserve">
+    <value>File di aggiornamento automatico in AES-256</value>
+  </data>
+  <data name="AvailablePremiumBusinessPlans" xml:space="preserve">
+    <value>Disponibile sui piani Premium e Business.</value>
+  </data>
+  <data name="AvoidVisibleEncryptionPopup" xml:space="preserve">
+    <value>Evitare cambiamenti visibili del timestamp di crittografia</value>
   </data>
   <data name="AwardsLabel" xml:space="preserve">
     <value>Premi</value>
@@ -1501,6 +1546,9 @@ Il piano Business è destinato alle organizzazioni, non ai privati.</value>
   <data name="AxCWhatsNextSecurityText3" xml:space="preserve">
     <value>Dai un'occhiata alla pagina sulla sicurezza di AxCrypt:  &lt;a href='/information/security/'&gt;&lt;b&gt;Perché AxCrypt è sicuro? | Algoritmi&lt;/b&gt;&lt;/a&gt;.</value>
   </data>
+  <data name="BackgroundEncryptionMigrationPopup" xml:space="preserve">
+    <value>Migrazione della crittografia in background</value>
+  </data>
   <data name="BacktoAxCryptIDText" xml:space="preserve">
     <value>Torna a &lt;span&gt;AxCrypt ID&lt;/span&gt;</value>
   </data>
@@ -1516,6 +1564,9 @@ Il piano Business è destinato alle organizzazioni, non ai privati.</value>
   <data name="BadEmail" xml:space="preserve">
     <value>Indirizzo e-mail non corretto</value>
     <comment>Displayed when email address format validation fails.</comment>
+  </data>
+  <data name="BatchEncryptMultiplePopup" xml:space="preserve">
+    <value>Crittografia batch con più file contemporaneamente</value>
   </data>
   <data name="BecomeanAffiliateText" xml:space="preserve">
     <value>Diventa un affiliato</value>
@@ -9928,6 +9979,264 @@ Ed è proprio per evitare che questi “incidenti” si ripetano che noi di AxCr
   <data name="Blog_ITESBETFC_Title" xml:space="preserve">
     <value>Il Settore Educativo sta diventando un facile bersaglio per gli Attacchi Informatici?</value>
   </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Heading" xml:space="preserve">
+    <value>I tuoi dati sono a un clic distratto da una violazione,</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text1" xml:space="preserve">
+    <value>Sistemalo ora!</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text2" xml:space="preserve">
+    <value>Parlando sul serio: se sei serio riguardo al tuo business e alla protezione dei dati aziendali su Linux e su tutti gli altri dispositivi, questo prossimo passo è serio.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text3" xml:space="preserve">
+    <value>&lt;li&gt;Cripta qualsiasi file non criptato o informazione sensibile che pensi possa essere usata contro di te in un attacco ransomware. &lt;a href='https://account.axcrypt.net/en/Home/Login?Signup=True'&gt;Inizia da qui la tua prova gratuita di AxCrypt.&lt;/a&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text4" xml:space="preserve">
+    <value>&lt;li&gt;Se non hai ancora massimizzato l'uso di AxCrypt nelle tue pratiche di sicurezza dei dati e vuoi saperne di più, consulta &lt;a href='https://axcrypt.net/helpcenter/'&gt;le nostre Guide nelle nostre Risorse.&lt;/a&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text5" xml:space="preserve">
+    <value>&lt;li&gt;&lt;a href='https://axcrypt.net/blog/'&gt;Scegli la tua prossima lettura e rimani aggiornato&lt;/a&gt; sulle tendenze attuali della cybersecurity con AxCrypt.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text1" xml:space="preserve">
+    <value>Gli utenti che lavorano in settori ad alta sicurezza devono sapere come il dover visualizzare file criptati su Android o gestire file .axx (AxCrypt Encrypted Files) su workstation. La sicurezza deve essere fluida sia nell'uso di AxCrypt Windows 11 sia di AxCrypt per Linux, con l'obiettivo di prevenire l'esfiltrazione dei dati.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text10" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Una volta che hai criptato il file, puoi vedere che viene salvato con l'estensione .axx.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text11" xml:space="preserve">
+    <value>Puoi saperne di più su come cifrare e decifrare i tuoi file nel dettaglio in questa guida su &lt;a href='https://axcrypt.net/information/guides/encryption-decryption/'&gt;Crittografia e Decrittografia con AxCrypt&lt;/a&gt;.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text12" xml:space="preserve">
+    <value>&lt;b&gt;3. Automatizzare la crittografia con la funzione Vault di AxCrypt:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text13" xml:space="preserve">
+    <value>Ora puoi iniziare a proteggere i file su Linux senza perderne nessuno.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text14" xml:space="preserve">
+    <value>&lt;b&gt;Ecco come puoi configurare l'AxCrypt Vault.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text15" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Tutto quello che devi fare è accedere all'applicazione &gt; cliccare su Impostazioni &gt; Impostazioni avanzate &gt; e poi su Impostazioni del Vault.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text16" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Scegli dove vuoi che risieda il Vault e poi conferma la tua selezione.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text17" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Questo è opzionale, ma se sei davvero, DAVVERO serio riguardo alla privacy, allora randomizza il Vault per un ulteriore livello di privacy.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text18" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Se hai file e cartelle annidati, assicurati di selezionare "Include sottocartelle".&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text19" xml:space="preserve">
+    <value>Una volta configurato, qualsiasi file aggiunto si sposta automaticamente nel Vault ed è criptato, proteggendo i file Linux riservati.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text2" xml:space="preserve">
+    <value>In un sistema sicuro, come dover aprire file criptati senza password non dovrebbe avere risposta, la crittografia forte è progettata proprio per impedirlo.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text20" xml:space="preserve">
+    <value>&lt;b&gt;Come aggiungere file al vault di AxCrypt:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text21" xml:space="preserve">
+    <value>Utilizzo del menu delle azioni:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text22" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Basta cliccare sull'icona del Vault&gt; poi selezionare la cartella o il file che desideri. &gt; poi clicca su aggiungi e scegli cosa vuoi criptare.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text23" xml:space="preserve">
+    <value>Usando l'opzione Drag &amp; Drop:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text24" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Trascina file o cartelle nel Vault&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text25" xml:space="preserve">
+    <value>In entrambi i casi, i file vengono criptati istantaneamente e appaiono nei tuoi file recenti, ideali per documenti aziendali sicuri su Linux e per i flussi di lavoro quotidiani.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text26" xml:space="preserve">
+    <value>Scopri di più sulla Crittografia Vautl qui in questa guida: &lt;a href='https://axcrypt.net/information/guides/vault/'&gt;AxCrypt Vault – Guida Utente.&lt;/a&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text27" xml:space="preserve">
+    <value>&lt;b&gt;4. Proteggere file sul cloud con AxCrypt per Linux e garantire la sicurezza del cloud:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text28" xml:space="preserve">
+    <value>Per team, freelance e organizzazioni decentralizzate, questa sicurezza Linux Server è proprio ciò di cui hai bisogno per garantire la sicurezza dei tuoi dati, soprattutto lavorando con il cloud.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text29" xml:space="preserve">
+    <value>&lt;b&gt;Ecco come puoi proteggere lo storage cloud su Linux con AxCrypt:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text3" xml:space="preserve">
+    <value>Per la sicurezza dei server Linux, la crittografia è la tua prima difesa più forte. Se gestisci documenti interni o dati dei clienti, proteggere i file è essenziale—soprattutto per le PMI, dove una sola violazione può essere devastante. A differenza di BitLocker o FileVault, molti team necessitano di una crittografia dedicata e multipiattaforma che protegga cartelle specifiche e funzioni insieme ai flussi di lavoro Linux.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text30" xml:space="preserve">
+    <value>&lt;b&gt;Metodo A:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text31" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Cripta i file cloud esistenti&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text32" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Apri AxCrypt e seleziona il tuo provider cloud&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text33" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Scegli il file che vuoi proteggere&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text34" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Clicca sul menu delle azioni (3 puntini) → seleziona Proteggi&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text35" xml:space="preserve">
+    <value>&lt;b&gt;Metodo B:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text36" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Carica e Cripta Contemporaneamente&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text37" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Clicca sul pulsante "+" nell'app&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text38" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Seleziona il file da caricare&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text39" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Aprilo per criptare&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Diamo un'occhiata a come lavorare con AxCrypt per Linux:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text40" xml:space="preserve">
+    <value>Se vuoi saperne di più su &lt;a href='https://axcrypt.net/information/guides/secure-cloud/'&gt;AxCrypt per Linux e la sicurezza cloud, leggi di più qui.&lt;/a&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text41" xml:space="preserve">
+    <value>&lt;b&gt;5. Condividi file in modo sicuro con la condivisione delle chiavi:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text42" xml:space="preserve">
+    <value>Per le aziende focalizzate sulla sicurezza dei dati Linux per le piccole imprese, questo aggiornamento supera i metodi tradizionali di condivisione file.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text43" xml:space="preserve">
+    <value>&lt;b&gt;Come condividere file in modo sicuro utilizzando la condivisione delle chiavi&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text44" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Cripta il tuo file usando AxCrypt&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text45" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Clicca con il tasto destro sul file → Clicca su Tasti Condividi&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text46" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Aggiungi l'indirizzo email del destinatario&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text47" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Clicca su Applica&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text48" xml:space="preserve">
+    <value>Una volta fatto:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text49" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Il destinatario ha accesso per decifrare il file&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text5" xml:space="preserve">
+    <value>&lt;b&gt;1. Installazione:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text50" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Devi comunque inviare il file separatamente via email, via cloud o tramite un canale sicuro. Questo file sarà comunque sicuro con l'algoritmo di crittografia a 256 bit.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text51" xml:space="preserve">
+    <value>Questo flusso di lavoro è essenziale per proteggere i file remoti su team Linux e distribuiti, per garantire che la sicurezza viaggi con i tuoi file, dove possono viaggiare o riposare.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Clicca &lt;a href='https://axcrypt.net/download/'&gt;&lt;b&gt;qui&lt;/b&gt;&lt;/a&gt; per iniziare. Una volta installato AxCrypt per Linux, il software di cifratura Linux leggero e perfetto, accedi con il tuo ID email e la password registrati su AxCrypt. Queste credenziali sono l'unico accesso necessario per decriptare i file criptati con AxCrypt per Linux.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text7" xml:space="preserve">
+    <value>&lt;b&gt;2. Crittografia e decrittazione dei file su AxCrypt per Linux:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Una volta creato con successo un account con AxCrypt per Linux e effettuato l'accesso all'applicazione, per criptare i file devi cliccare sul pulsante 'Sicura' presente nel menu delle azioni.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Questo ora ti reindirizzerà alla finestra di selezione dei file, dove puoi scegliere un file da criptare.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text1" xml:space="preserve">
+    <value>La sicurezza dei server Linux è più critica che mai per le PMI nel 2026 a causa dell'aumento dell'uso di Linux nelle configurazioni cloud/server. Alimenta il 75% dei computer orientati al web, rendendoli bersagli primari.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text2" xml:space="preserve">
+    <value>Per le PMI che mirano a proteggere i file su server Linux o a migliorare la sicurezza dei server Linux, la sfida non è la prevenzione, ma la preparazione dei sistemi a prova di futuro e il prevenire gli exploit. Gli attaccanti conoscono i varchi e le porte posteriori. Pertanto, la crittografia dei file Linux e la crittografia dei file su Linux sono più vitali che mai.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text3" xml:space="preserve">
+    <value>La finestra di attacco è tra l'individuare e correggere i difetti. Proteggere i file sensibili su Linux in questo periodo è essenziale. Abbiamo esaminato i risultati di Commandline Linux e Linux Security riguardo alle vulnerabilità sfruttate nel 2025, evidenziando perché strumenti come AxCrypt for Linux, il moderno software di crittografia Linux, sono fondamentali per la crittografia dei file nelle piccole imprese.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Vulnerabilità identificate e attivamente sfruttate.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text5" xml:space="preserve">
+    <value>&lt;table border='1' cellspacing='0' cellpadding='8'&gt;&lt;tr&gt;&lt;th&gt;CVE ID&lt;/th&gt;&lt;th&gt;Tipo di vulnerabilità&lt;/th&gt;&lt;th&gt;Punteggio CVSS&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-1086&lt;/td&gt;&lt;td&gt;Use-after-free (netfilter)&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-53104&lt;/td&gt;&lt;td&gt;Scrittura fuori dai limiti (driver UVC)&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-53150&lt;/td&gt;&lt;td&gt;Lettura fuori dai limiti (audio ALSA)&lt;/td&gt;&lt;td&gt;7.1–7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-53197&lt;/td&gt;&lt;td&gt;Vulnerabilità audio ALSA&lt;/td&gt;&lt;td&gt;Alto&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2024-50302&lt;/td&gt;&lt;td&gt;Vulnerabilità del driver HID&lt;/td&gt;&lt;td&gt;Alto&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2023-0386&lt;/td&gt;&lt;td&gt;Escalation dei privilegi (OverlayFS)&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2021-22555&lt;/td&gt;&lt;td&gt;Scrittura fuori limite del heap (netfilter)&lt;/td&gt;&lt;td&gt;8.3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2022-0847&lt;/td&gt;&lt;td&gt;Escalation dei privilegi ("Dirty Pipe")&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2019-13272&lt;/td&gt;&lt;td&gt;Gestione impropria dei privilegi&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2021-3493&lt;/td&gt;&lt;td&gt;Escalation dei privilegi (OverlayFS)&lt;/td&gt;&lt;td&gt;7.8&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2025-21756&lt;/td&gt;&lt;td&gt;Use-after-free (sottosistema vsock)&lt;/td&gt;&lt;td&gt;Alto&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;CVE-2025-38352&lt;/td&gt;&lt;td&gt;Condizione di gara (TOCTOU – kernel Linux)&lt;/td&gt;&lt;td&gt;Alto&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text6" xml:space="preserve">
+    <value>La lista rivela un chiaro schema nei metodi dell'attaccante. La maggior parte delle citazioni riguarda difetti di escalation di privilegi monitorati dalla CISA. Dai bug del netfilter come CVE-2024-1086 a Overlay FS e problemi di driver, gli attaccanti puntano alle parti principali di Linux per ottenere accesso root con il minimo sforzo.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text7" xml:space="preserve">
+    <value>&lt;b&gt;Cosa significa questo per te come proprietario di PMI e per tutti gli altri con informazioni fondamentali:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text8" xml:space="preserve">
+    <value>Gli attaccanti non stanno solo sondando le PMI; stanno tranquillamente prendendo il controllo. Se devi agire velocemente, inizia con AxCrypt Free. Quando qualcuno del tuo team chiede: 'Cos'è AxCrypt?' o cerca AxCrypt Free, è un segnale che sono pronti a colmare le lacune di sicurezza.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H3_Text1" xml:space="preserve">
+    <value>Le violazioni dei dati non sono più un evento raro. Ora è prevedibile, e questo significa che la sicurezza dei dati Linux per le piccole imprese deve essere rafforzata. Ecco le statistiche più importanti e aggiornate che stanno plasmando il volto della Cybersecurity nel 2026.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H3_Text2" xml:space="preserve">
+    <value>&lt;table border='1' cellspacing='0' cellpadding='8'&gt;&lt;tr&gt;&lt;th&gt;Metrica&lt;/th&gt;&lt;th&gt;Statistiche&lt;/th&gt;&lt;th&gt;Esito&lt;/th&gt;&lt;th&gt;Fonte&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Costo medio di una violazione dei dati nel 2025&lt;/td&gt;&lt;td&gt;4,44 milioni di dollari a 4,45 milioni&lt;/td&gt;&lt;td&gt;Il tempo di risposta per la violazione ha raggiunto il minimo degli ultimi nove anni a 241 giorni. L'IA è un'arma a doppio taglio: ha risparmiato 19 milioni di dollari in costi di violazione, ma quasi il 20% delle organizzazioni ha subito violazioni da parte dell''IA Ombra', con un costo medio di 670.000 dollari. Gli attacchi di ingegneria sociale come l'imitazione deepfake si verificano in quasi 1 violazione su 6.&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.ibm.com/reports/data-breach'&gt;Costo di un rapporto sulle violazioni dati 2025&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;PMI prese di mira in attacchi informatici&lt;/td&gt;&lt;td&gt;Il 30% delle violazioni è stato dovuto al coinvolgimento di terzi (2 volte rispetto al 2024).&lt;/td&gt;&lt;td&gt;Le piccole imprese non sono prese di mira da 'hacktivisti' o insideri; Invece, i criminali esterni cercano pagamenti facili sfruttando password deboli e errori umani.&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.verizon.com/business/resources/infographics/2025-dbir-smb-snapshot.pdf'&gt;Rapporto sulle indagini sulle violazioni dati 2025 - Rapporto sulle indagini sulle violazioni dati 2025. Panoramica delle piccole e medie imprese&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Frequenza di Breach e Tasso di Successo&lt;/td&gt;&lt;td&gt;3.049 incidenti totali, di cui 2.842 che hanno portato alla conferma della divulgazione dei dati.&lt;/td&gt;&lt;td&gt;Le piccole imprese affrontano un alto tasso di conversione da attacco a perdita effettiva di dati, con circa il 93% degli incidenti che si traduce in una violazione di successo.&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-of-data-breaches'&gt;Verizon DBIR mostra che il ransomware è coinvolto nel 44% delle violazioni dei dati&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Schemi di attacco primari&lt;/td&gt;&lt;td&gt;L'intrusione di sistema, l'ingegneria sociale e gli attacchi alle applicazioni web di base causano il 96% delle violazioni.&lt;/td&gt;&lt;td&gt;Gli sforzi di sicurezza sono più efficaci quando si concentrano su questi tre vettori, che spiegano la maggior parte delle vulnerabilità delle piccole imprese.&lt;/td&gt;&lt;td&gt;&lt;a href='https://www.kiteworks.com/third-party-risk/verizon-2025-dbir-third-party-risk-explosion/'&gt;Continua Crescita del Ransomware: Nuove Tattiche e Cambiamenti nei Pagamenti&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text1" xml:space="preserve">
+    <value>Le PMI sono ora obiettivi principali. Una patch mancata o una chiave SSH danneggiata possono consegnare i tuoi sistemi agli attaccanti. Cripta i dati sensibili di default e chiudi rapidamente le lacune evidenti.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text2" xml:space="preserve">
+    <value>Passa da correzioni reattive a una sicurezza proattiva: aggiorna rapidamente, fai rispettare credenziali forti, monitora continuamente e riduci il rischio da parte di terze parti.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text3" xml:space="preserve">
+    <value>La sicurezza è una funzione centrale del business; Protegge ricavi, fiducia e conformità. Inizia da oggi: cripta i file, rafforza l'accesso e considera la sicurezza come compito di tutti.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading1" xml:space="preserve">
+    <value>AxCrypt per Linux: Una guida passo dopo passo sulla sicurezza dei server Linux e su come proteggere i file e condividere file in modo sicuro all'interno dei server Linux</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading2" xml:space="preserve">
+    <value>Perché la sicurezza dei server Linux è più importante che mai per le piccole e medie imprese nel 2026?</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading3" xml:space="preserve">
+    <value>Tendenze attuali nelle statistiche sulle violazioni dei dati che ogni PMI e imprenditore deve conoscere:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading4" xml:space="preserve">
+    <value>Conclusioni finali e piano d'azione</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Summary" xml:space="preserve">
+    <value>All'inizio del 2026, attacchi informatici avanzati con IA hanno preso di mira server e endpoint Linux. Questo aumento allarma esperti di sicurezza in PMI, grandi aziende e privati, poiché il furto di dati provoca impatti costosi oltre i normali problemi IT.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text1" xml:space="preserve">
+    <value>&lt;b&gt;Introduzione&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text10" xml:space="preserve">
+    <value>Questi risultati gridano solo una cosa: le minacce informatiche non sono più in teoria e non sono più un'anticipazione. È attivo, è persistente e sta già accadendo mentre leggi questo articolo.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text2" xml:space="preserve">
+    <value>Linux alimenta le moderne backbone aziendali: cloud, server, container e IoT. Per le PMI, è la scelta principale per prestazioni e costi. La sicurezza dei dati Linux per le piccole imprese è ora una priorità del consiglio, poiché i carichi di lavoro chiave si spostano su Linux. Con l'uso di Linux in crescita nelle start-up, nell'hosting e altro ancora, la sicurezza informatica Linux per le PMI è ormai essenziale. È una necessità chiave nella sicurezza dei dati Linux per le piccole imprese nel 2026.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text3" xml:space="preserve">
+    <value>All'inizio del 2026, attacchi informatici avanzati con IA hanno preso di mira server e endpoint Linux. Questo aumento allarma esperti di sicurezza in PMI, grandi aziende e privati, poiché il furto di dati provoca impatti costosi oltre i normali problemi IT.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Ecco alcuni risultati chiave di &lt;a href='https://commandlinux.com/'&gt;Commandline Linux:&lt;/a&gt;&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text5" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Il rischio non è ipotetico o teorico. Con migliaia di vulnerabilità (CVE) segnalate ogni anno e 8–9 nuove emergere ogni giorno, in attesa di essere sfruttate, la superficie di attacco si sta espandendo costantemente.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Le piccole e medie imprese sono esposte a grande esposizione a causa delle risorse di sicurezza limitate, mentre le organizzazioni più grandi, con dati molto più critici, affrontano rischi amplificati.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text7" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Quasi l'89% degli attacchi e dei tentativi di bruta forza inizia con punti di accesso base come SSH.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Il 32% degli attacchi ransomware sfrutta vulnerabilità note, il che significa che il ritardo nel patch si traduce direttamente in rischio.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Quasi il 46% delle organizzazioni riferisce di aver perso clienti o ricavi dopo un incidente relativo alla sicurezza.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Title" xml:space="preserve">
+    <value>Sicurezza dei dati Linux per le piccole imprese nel 2026: una breve guida alla crittografia dei file Linux e alle migliori pratiche</value>
+  </data>
   <data name="Blog_LYCWAR_Summary" xml:space="preserve">
     <value>Quando usi AxCrypt 2, prima devi "accedere" - dopo la prima volta, è sufficiente inserire la tua password. Poiché AxCrypt è un'applicazione di crittografia dei file basata su password, ha senso.</value>
   </data>
@@ -12019,6 +12328,156 @@ In sintesi, la privacy a casa è fondamentalmente una questione di considerazion
   <data name="Blog_UODPCH_Title" xml:space="preserve">
     <value>Utilizzo di password diverse considerate dannose</value>
   </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Heading" xml:space="preserve">
+    <value>Il momento di agire è ora con AxCrypt</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text1" xml:space="preserve">
+    <value>Nel 2026, le minacce digitali si sono evolute e i dati valgono più dell'oro.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text2" xml:space="preserve">
+    <value>Non ritardare né pensare che la crittografia sia difficile o costosa. Offriamo soluzioni di crittografia come AxCrypt Free to AxCrypt business, e siamo pensati per tutti.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text3" xml:space="preserve">
+    <value>Che tu sia nuovo alla crittografia o voglia semplicemente mettere in sicurezza qualche file su Windows 11, Linux o Mac, ci pensiamo noi.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text4" xml:space="preserve">
+    <value>Non lasciare che i tuoi dati si uniscano al 48% restante a rischio.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text5" xml:space="preserve">
+    <value>Assicura il tuo futuro.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text6" xml:space="preserve">
+    <value>Scarica AxCrypt ora e &lt;a href='https://account.axcrypt.net/en/Home/Login?Signup=True'&gt;inizia una prova GRATUITA di 14 giorni&lt;/a&gt;.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text1" xml:space="preserve">
+    <value>La maggior parte delle organizzazioni utilizza strumenti e programmi di crittografia, ma è scarso. E quando si tratta di lavoro da remoto, il divario si allarga. &lt;a href='https://nordlayer.com/blog/byod-security-risks/'&gt;Secondo il riassunto di NordLayer&lt;/a&gt;, il problema risiede in BYOD, Wi-Fi non protetto o pubblico, shadow IT, trasferimenti di file non criptati o addirittura cartelle cloud pubbliche che rimangono esposte più a lungo di quanto dovrebbero idealmente.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text10" xml:space="preserve">
+    <value>Se usi attivamente Windows 11 e cerchi software gratuiti per la crittografia dei file o una crittografia robusta per le aziende per proteggere i dati e il flusso di lavoro del tuo team, AxCrypt è la tua soluzione definitiva per il panorama delle minacce del 2026.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text11" xml:space="preserve">
+    <value>Leggi di più qui per informazioni e soluzioni sulla sicurezza dei dati cloud.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text2" xml:space="preserve">
+    <value>Un altro punto di preoccupazione è come la condivisione sicura dei file stia solo lentamente guadagnando terreno, e come i servizi di condivisione file cloud e i percorsi di accesso remoto diventino punti di ingresso separati. E quindi, in aggiunto, una singola configurazione errata o un lotto di credenziali rubate può diventare un gateway per un attaccante che può accedere direttamente ai dati aziendali.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text3" xml:space="preserve">
+    <value>Un altro rapporto dei dati di risposta agli &lt;a href='https://blog.talosintelligence.com/ir-trends-q1-2026/'&gt;incidenti di Talo&lt;/a&gt; mostra come gli attaccanti stiano attivamente sfruttando le giunture deboli e come il phishing sia il vettore di accesso iniziale più osservato nel suo rapporto del primo trimestre 2026, e le debolezze MFA, insieme a infrastrutture esposte e registrazioni scadenti, siano stati problemi costanti.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Quindi, come si fa a mettere in sicurezza lo storage cloud e ridurre al minimo i rischi di sicurezza cloud?&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text5" xml:space="preserve">
+    <value>In un'epoca in cui l''ufficio" si trova dove c'è una buona connessione internet, e la sicurezza dei dati cloud non può essere compromessa, e le pause caffè sono letteralmente nella tua cucina, AxCrypt offre l'ambiente di archiviazione cloud sicuro a cui la maggior parte dei team moderni sta ancora cercando di adeguarsi.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Crittografia cloud senza sforzo: Che si tratti di Google Drive, OneDrive o anche Dropbox, AxCrypt si integra perfettamente per ridurre le difficoltà e massimizzare lo storage cloud sicuro, lasciando nessun file non criptato sul cloud accessibile. Se stai cercando qualcosa che funzioni perfettamente con il cloud, con file locali e uno che funzioni in modo fluido e fluido su tutti i principali sistemi operativi, allora AxCrypt è l'app per criptare file che funziona alla velocità del business.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text7" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Pensato per tutti: Che tu stia lavorando su Windows e voglia AxCrypt Windows 11, AxCrypt per Linux o anche macOS, AxCrypt funziona senza intoppi su tutti questi sistemi operativi e persino sul tuo mobile, aiutandoti a trovare tutte le risposte su come visualizzare i file criptati su Android.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Mitigazione dei rischi di sicurezza nel cloud: Implementare AxCrypt Free o Premium a livello organizzativo elimina rischi di shadow IT e furto di credenziali. Se gli attaccanti accedono a una cartella cloud, la crittografia AES-256 bit ne protegge il contenuto.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Favorire la condivisione sicura dei file: AxCrypt consente ai membri del team di condividere file con le proprie password, semplificando le migliori pratiche di sicurezza cloud. Offre il modo più efficiente per criptare i file nel cloud, senza il carico amministrativo della tradizionale gestione delle chiavi.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text1" xml:space="preserve">
+    <value>La transizione verso una forza lavoro senza confini non dovrebbe costringere a scegliere tra velocità e sicurezza. Una delle principali ragioni per cui i file non criptati persistono nel cloud è l'attrito causato dalla sicurezza e crittografia tradizionali.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text2" xml:space="preserve">
+    <value>Il panorama delle minacce in evoluzione di oggi rende la sicurezza una sfida, ma non può essere un pensiero secondario o ignorato.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text3" xml:space="preserve">
+    <value>Con l'aumento degli attacchi informatici guidati dall'IA e di altri gravi rischi legati ai dati, i dipendenti spesso trovano soluzioni alternative, trasformando il divario del 48% in violazioni. L'obiettivo è granulare: la crittografia dei file deve essere invisibile ma forte.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text4" xml:space="preserve">
+    <value>Le aziende hanno bisogno di crittografia dei dati, soprattutto a livello granulare. Non solo metti in sicurezza file e cartelle, ma dai anche al tuo team il potere di lavorare ovunque in piena sicurezza e protezione. AxCrypt offre questa sicurezza attraverso la sicurezza a livello di file per le aziende, una sicurezza a prova di bomba.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text5" xml:space="preserve">
+    <value>La vera prevenzione delle violazioni dei dati non deriva da restrizioni rigide, ma da una protezione strategica e intelligente dei dati a livello cellulare. Funziona automaticamente, quindi anche se te ne dimentichi, i tuoi dati restano protetti.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text6" xml:space="preserve">
+    <value>Che tu voglia automatizzare l'intero processo di crittografia o abbia bisogno di un'app semplice per criptare i file al volo, AxCrypt garantisce che la tua produttività rimanga intatta e la tua privacy sia sicura grazie alla nostra sicurezza zero-knowledge.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Heading1" xml:space="preserve">
+    <value>Come fa la crittografia dei file cloud può ridurre al minimo il rischio di violazioni dei dati</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Heading2" xml:space="preserve">
+    <value>Garantire la sicurezza delle forze lavoro da remoto senza sacrificare la produttività</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Summary" xml:space="preserve">
+    <value>Con sempre più flussi di lavoro che si spostano verso il cloud e l'aumento di organizzazioni remote e decentralizzate, le violazioni diventano sempre più attese e la superficie di attacco si allarga.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text1" xml:space="preserve">
+    <value>&lt;b&gt;Introduzione&lt;b&gt;&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text10" xml:space="preserve">
+    <value>&lt;b&gt;2.&lt;/b&gt; Quasi la metà dei dati mondiali vivrà con hyperscaler come AWS, Azure e Google. Secondo &lt;a href='https://spacelift.io/blog/cloud-computing-statistics'&gt;SpaceLift&lt;/a&gt;, AWS guida il mercato del cloud pubblico con circa il 32% di quota, seguita da Microsoft Azure con il 23%.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text11" xml:space="preserve">
+    <value>&lt;b&gt;3.&lt;/b&gt; Il rischio cloud è in aumento: circa il 45% delle violazioni dati avviene nel cloud, e i server restano i principali bersagli.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text12" xml:space="preserve">
+    <value>&lt;b&gt;4.&lt;/b&gt; Nonostante una maggiore attenzione alla sicurezza, persiste un grande divario: il 48% delle aziende conserva ancora dati criptati e non criptati nel cloud, spesso aggravati dalle pratiche BYOD e dalla condivisione dei file di comodità.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text13" xml:space="preserve">
+    <value>&lt;b&gt;Ecco quindi il problema principale: il 48% delle aziende conserva ancora file non criptati sul cloud, e questo pericoloso divario continua a persistere e ampliarsi.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text14" xml:space="preserve">
+    <value>&lt;b&gt;Ma perché?&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text15" xml:space="preserve">
+    <value>Le lacune esistono esattamente quando ci sono file non criptati sul cloud, e si allargano ancora di più quando la crittografia diventa una politica sulla carta e non una pratica quotidiana nel cloud provisioning, gestione delle chiavi o controllo degli accessi. Questa lacuna e i rischi per la sicurezza del cloud si amplificano anche quando l'adozione del cloud avanza più velocemente della governance dei dati.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text16" xml:space="preserve">
+    <value>Un buon 83% delle aziende che dà priorità alla sicurezza dei dati cloud. Ma che dire del resto?</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text17" xml:space="preserve">
+    <value>Questa lacuna esiste, ed ecco le ragioni principali per cui esiste:</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text18" xml:space="preserve">
+    <value>&lt;b&gt;1. Le persone preferiscono la comodità alla sicurezza:&lt;/b&gt; piattaforme cloud come Google Drive, OneDrive e Dropbox rendono la condivisione facile con le impostazioni predefinite, come se chiunque abbia il link potesse accedervi. Molti team presumono che le protezioni integrate del fornitore siano sufficienti a proteggere le informazioni sensibili. Ma in realtà, se chiunque abbia il link abbia accesso, ha accesso praticamente a tutto nella tua azienda.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text19" xml:space="preserve">
+    <value>&lt;b&gt;2. Complessità presunta:&lt;/b&gt; La maggior parte della crittografia tradizionale appare complicata e ingombrante, causando passaggi aggiuntivi, gestione delle chiavi, flussi di lavoro interrotti, script complessi e la necessità di molti sviluppatori o programmatori. Nelle organizzazioni in rapido movimento, specialmente con team remoti, il tempo è limitato. Questo divario è il luogo in cui avvengono le violazioni dei dati cloud. Molti presumono che implementare la sicurezza dei dati cloud sia difficile e scartano l'idea.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text2" xml:space="preserve">
+    <value>Con sempre più flussi di lavoro che si spostano verso il cloud e l'aumento di organizzazioni remote e decentralizzate, le violazioni diventano sempre più attese e la superficie di attacco si allarga.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text20" xml:space="preserve">
+    <value>&lt;b&gt;3. Vincoli di risorse:&lt;/b&gt; Un'altra sfida che le PMI e le aziende di medie dimensioni in rapida crescita affrontano è la mancanza di team di sicurezza dedicati. Spesso danno priorità alla produttività, lasciando alle spalle la sicurezza dei dati cloud. La crittografia viene spesso trattata come un ripensamento o ritenuta troppo costosa per la gestione durante la crescita.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text21" xml:space="preserve">
+    <value>&lt;b&gt;4. Politiche incoerenti e cultura BYOD:&lt;/b&gt; il lavoro ibrido e da remoto spesso mescola dispositivi personali e aziendali. Alcune organizzazioni remote si affidano ai sistemi personali dei dipendenti, che possono essere compromessi. Questo causa shadow IT, caricamenti non criptati e download non sicuri. L'invio di informazioni sensibili tramite canali non sicuri e Wi-Fi pubblico espone dati non criptati ad hacker e attaccanti.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text22" xml:space="preserve">
+    <value>&lt;b&gt;5. L'ultimo è il nostro preferito. Non succederebbe mai a noi :&lt;/b&gt; finché non si verifica una violazione, il rischio sembra astratto. Molte PMI, freelance e piccoli gruppi credono erroneamente di essere al sicuro. Quando pensano che violazioni o attacchi non li riguarderanno, è allora che si verificano gli incidenti. Trascurano la sicurezza dei dati, inviano informazioni sensibili tramite canali non sicuri e permettono a terze parti di vedere tutto. Questa mentalità è dannosa, soprattutto per le organizzazioni senza uffici o senza adeguata sicurezza cloud.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text3" xml:space="preserve">
+    <value>Entro il 2026, quasi il 98% dei lavoratori cercherà opzioni di lavoro da remoto e circa il 27% della forza lavoro intende passare completamente a remoto. Fonti affermano che la forza lavoro ibrida ora domina il panorama professionale, con quasi il 52% che punta a migliorare l'equilibrio tra lavoro e vita privata. Quasi l'89% dei dipendenti tecnologici adotta il lavoro ibrido e da remoto.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text4" xml:space="preserve">
+    <value>Il lavoro da remoto e ibrido sembra comodo e praticabile, ma comporta numerose minacce.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text5" xml:space="preserve">
+    <value>File non criptati nel cloud - la preda più facile a portata di mano, per cominciare.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text6" xml:space="preserve">
+    <value>La maggior parte dei dipendenti e dei professionisti, ancora oggi, crede che la sicurezza base dei dati cloud debba fare il suo lavoro. Ma in realtà, questa è la porta d'accesso a tutti i rischi. Poiché il panorama delle minacce è in continua evoluzione, e con attacchi informatici alimentati dall'IA e malware pronti all'uso, è facile superare il mercato. Non serve molto hacker esperto per bypassare la sicurezza dei dati cloud di base o anche le scappatoie basate su privilegi e mettere il possesso di tutti i tuoi dati.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text7" xml:space="preserve">
+    <value>Senza solide pratiche di sicurezza dei dati cloud e un'app per criptare i file nel cloud, specialmente lavorando da remoto, non sei solo nei guai per una imminente violazione dei dati, ma anche per non aver rispettato i parametri di conformità.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text8" xml:space="preserve">
+    <value>Per mettere le cose in una prospettiva statistica su cosa sta accadendo con il lavoro da remoto e le forze lavoro cloud senza confini, ecco un rapporto con le principali statistiche sulla sicurezza dei dati cloud del 2026 finora.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text9" xml:space="preserve">
+    <value>&lt;b&gt;1.&lt;/b&gt; Entro il 2026, circa 200 zettabyte di dati saranno archiviati nel cloud, accelerando il passaggio verso un lavoro remoto e cloud-first.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Title" xml:space="preserve">
+    <value>Perché il 48% delle aziende conserva ancora file non criptati nel cloud, e come AxCrypt lo risolve</value>
+  </data>
   <data name="Blog_WAMHIHY_Conclusion_Heading" xml:space="preserve">
     <value>Fatti pagare senza investire!</value>
   </data>
@@ -12054,6 +12513,9 @@ In sintesi, la privacy a casa è fondamentalmente una questione di considerazion
   </data>
   <data name="Blog_WAMHIHY_H2_Text4" xml:space="preserve">
     <value>Costruisci una reputazione migliore - Puoi migliorare la tua reputazione su Internet associandoti a un'azienda rispettabile e affidabile come AxCrypt.</value>
+  </data>
+  <data name="Blog_WAMHIHY_H2_Text5" xml:space="preserve">
+    <value>Inoltre, creare materiali &lt;a href='https://www.adobe.com/express/create/brochure'&gt;di design brochure&lt;/a&gt; visivamente accattivanti per il tuo pubblico può aiutare a presentare le promozioni affiliate in modo più professionale e attraente.</value>
   </data>
   <data name="Blog_WAMHIHY_H3_SH1_Text1" xml:space="preserve">
     <value>Con la nostra crittografia a 256 bit, AxCrypt aumenta la sicurezza dei dati e riduce i rischi di violazioni implementando un software di crittografia intuitivo e facile da usare.</value>
@@ -14891,6 +15353,9 @@ L'innovazione nell'informazione non è intrinsecamente negativa.  Le informazion
   <data name="BrandToneLabel" xml:space="preserve">
     <value>Tono del Brand</value>
   </data>
+  <data name="BrowseFilesText" xml:space="preserve">
+    <value>Sfoglia i file</value>
+  </data>
   <data name="BrowseText" xml:space="preserve">
     <value>Sfoglia</value>
   </data>
@@ -14899,6 +15364,9 @@ L'innovazione nell'informazione non è intrinsecamente negativa.  Le informazion
   </data>
   <data name="BruteForceResistantText" xml:space="preserve">
     <value>Contromisura dinamica della forza bruta - wrapping iterativo delle password che rende gli attacchi ancora più difficili.</value>
+  </data>
+  <data name="BulkActionText" xml:space="preserve">
+    <value>Azione bulk</value>
   </data>
   <data name="BusinessAcceptInvitationText" xml:space="preserve">
     <value>Accetta l'Invito</value>
@@ -15833,6 +16301,45 @@ Devi effettuare queste operazioni per completare il processo.</value>
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>Clicca qui per criptare i file aperti o nuovi file contenuti in cartelle protette, ma prima assicurati che non siano in uso.</value>
   </data>
+  <data name="CloudServicesConnectedText" xml:space="preserve">
+    <value>Connesso</value>
+  </data>
+  <data name="CloudServicesConnectText" xml:space="preserve">
+    <value>Connetti</value>
+  </data>
+  <data name="CloudServicesDisconnectText" xml:space="preserve">
+    <value>Disconnesso</value>
+  </data>
+  <data name="CloudServicesDropBoxHelpText" xml:space="preserve">
+    <value>Mantieni i file criptati su Dropbox — solo tu possiedi la chiave.</value>
+  </data>
+  <data name="CloudServicesFooter" xml:space="preserve">
+    <value>Consiglio: puoi rimanere connesso a più fornitori contemporaneamente.</value>
+  </data>
+  <data name="CloudServicesGoogleDriveHelpText" xml:space="preserve">
+    <value>Cripta i file prima di caricarli su Google Drive.</value>
+  </data>
+  <data name="CloudServicesLocalHelpText" xml:space="preserve">
+    <value>Sfoglia i file su questo dispositivo.</value>
+  </data>
+  <data name="CloudServicesLocalHelpText1" xml:space="preserve">
+    <value>Connettiti per gestire i file criptati in questo provider.</value>
+  </data>
+  <data name="CloudServicesManageFilesText" xml:space="preserve">
+    <value>Gestisci i file</value>
+  </data>
+  <data name="CloudServicesNotConnectedText" xml:space="preserve">
+    <value>Non connesso</value>
+  </data>
+  <data name="CloudServicesOneDriveHelpText" xml:space="preserve">
+    <value>Invia file criptati a OneDrive senza esporre i contenuti.</value>
+  </data>
+  <data name="CloudServicesPhoneBrowserHelpText" xml:space="preserve">
+    <value>Apri e decripta i file memorizzati sul tuo telefono.</value>
+  </data>
+  <data name="CloudServicesSubTitle" xml:space="preserve">
+    <value>Connettiti, naviga e gestisci il tuo cloud storage criptato. I file vengono criptati sul tuo dispositivo &lt;em&gt;prima di&lt;/em&gt; raggiungere qualsiasi cloud.</value>
+  </data>
   <data name="CloudServicesText" xml:space="preserve">
     <value>Servizi cloud</value>
   </data>
@@ -16517,8 +17024,17 @@ Se non accetti i nostri cookie temporanei di sessione, non puoi connetterti e il
   <data name="DebugLoggingToolStripMenuItemText" xml:space="preserve">
     <value>Registrazione</value>
   </data>
+  <data name="DebugManageAccountSubTitle" xml:space="preserve">
+    <value>Aggiorna profilo, sicurezza e contatti su axcrypt.net</value>
+  </data>
   <data name="DebugManageAccountToolStripMenuItemText" xml:space="preserve">
     <value>Gestisci l'ID AxCrypt</value>
+  </data>
+  <data name="DebugModeDescription" xml:space="preserve">
+    <value>Scrivi log dettagliati degli errori per aiutare a diagnosticare i problemi</value>
+  </data>
+  <data name="DebugModeTitle" xml:space="preserve">
+    <value>Modalità Debug</value>
   </data>
   <data name="DebugOptionsToolStripMenuItemText" xml:space="preserve">
     <value>Opzioni</value>
@@ -17317,8 +17833,14 @@ Contattaci a &lt;a href="mailto:support@axcrypt.net" style="color: white; font-w
   <data name="EncryptFileOpenDialogTitle" xml:space="preserve">
     <value>Seleziona i file da proteggere.</value>
   </data>
+  <data name="EncryptFilesAllSubFoldersPopup" xml:space="preserve">
+    <value>Cripta i file in tutte le sottocartelle</value>
+  </data>
   <data name="EncryptFileSaveAsDialogTitle" xml:space="preserve">
     <value>File già esistente, salva come</value>
+  </data>
+  <data name="EncryptFilesBeforeUploadPopup" xml:space="preserve">
+    <value>Crittografare i file prima del caricamento</value>
   </data>
   <data name="EncryptLabelText" xml:space="preserve">
     <value>Esegui la crittografia</value>
@@ -17328,6 +17850,9 @@ Contattaci a &lt;a href="mailto:support@axcrypt.net" style="color: white; font-w
   </data>
   <data name="EncryptToolStripMenuItemText" xml:space="preserve">
     <value>Proteggi</value>
+  </data>
+  <data name="EncryptUnlimitedText" xml:space="preserve">
+    <value>Cifra testo illimitato</value>
   </data>
   <data name="EnglishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Inglese</value>
@@ -17393,6 +17918,9 @@ Contattaci a &lt;a href="mailto:support@axcrypt.net" style="color: white; font-w
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>Esci</value>
   </data>
+  <data name="ExitToolSubTitle" xml:space="preserve">
+    <value>Chiudi l'app AxCrypt</value>
+  </data>
   <data name="ExpirationDatePrompt" xml:space="preserve">
     <value>Data di scadenza</value>
   </data>
@@ -17405,6 +17933,9 @@ Contattaci a &lt;a href="mailto:support@axcrypt.net" style="color: white; font-w
   <data name="ExpireInLabelFirstPart" xml:space="preserve">
     <value>Scadrà in</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
+  </data>
+  <data name="ExpiryDatesKeys" xml:space="preserve">
+    <value>Date di scadenza sulle chiavi</value>
   </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Esportato con successo!</value>
@@ -17420,6 +17951,9 @@ Contattaci a &lt;a href="mailto:support@axcrypt.net" style="color: white; font-w
   </data>
   <data name="ExportSharingKeyToolStripMenuItemToolTipText" xml:space="preserve">
     <value>Invia la Chiave Pubblica che hai esportato ad altri utenti con cui vuoi condividere i file criptati.</value>
+  </data>
+  <data name="ExtraPrivacyProtectionPopup" xml:space="preserve">
+    <value>Protezione della privacy aggiuntiva</value>
   </data>
   <data name="FailedAddFolderNotification" xml:space="preserve">
     <value>Errore nell’aggiunta della/le cartella/e: {0}</value>
@@ -17985,9 +18519,27 @@ Effettua il backup di tutti i tuoi file importanti - protetti e senza protezione
     <value>Data di modifica</value>
     <comment>A menu text for selecting file properties - date modified for encryption.</comment>
   </data>
+  <data name="FilePropertiesDescription" xml:space="preserve">
+    <value>Mantieni invariata la data di modifica del file originale anche dopo la crittografia.</value>
+  </data>
   <data name="FilePropertiesFileNameToolStripMenuItem" xml:space="preserve">
     <value>nome file</value>
     <comment>A menu text for selecting file properties - file name for encryption.</comment>
+  </data>
+  <data name="FilePropertiesInfoText" xml:space="preserve">
+    <value>Queste proprietà sono memorizzate &lt;strong&gt;all'interno del file criptato&lt;/strong&gt;. Ti permettono di ordinare e identificare i file senza decifrarli.</value>
+  </data>
+  <data name="FilePropertiesOriginalFileNameDescription" xml:space="preserve">
+    <value>Nascondere i nomi originali dei file sostituendoli con nomi casuali sicuri durante la crittografia.</value>
+  </data>
+  <data name="FilePropertiesOriginalFileNameTitle" xml:space="preserve">
+    <value>Nome file originale</value>
+  </data>
+  <data name="FilePropertiesSortableColumns" xml:space="preserve">
+    <value>Colonne Ordinabili</value>
+  </data>
+  <data name="FilePropertiesSubTitle" xml:space="preserve">
+    <value>Scegli quali metadati sono incorporati all'interno di ogni file criptato</value>
   </data>
   <data name="FilePropertiesToolStripMenuItemText" xml:space="preserve">
     <value>Proprietà del file di crittografia</value>
@@ -18025,6 +18577,9 @@ Effettua il backup di tutti i tuoi file importanti - protetti e senza protezione
   </data>
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>Finanza</value>
+  </data>
+  <data name="FindEncryptedFilesQuicklyPopup" xml:space="preserve">
+    <value>Trova rapidamente i file criptati</value>
   </data>
   <data name="FindFileFeatureTitle" xml:space="preserve">
     <value>Trova file</value>
@@ -18346,6 +18901,9 @@ Visita il nostro &lt;a href="{0}"&gt;supporto della community&lt;/a&gt;.</value>
   </data>
   <data name="GeneralLabel" xml:space="preserve">
     <value>Generale</value>
+  </data>
+  <data name="GenerateSecureRandomFileNamesPopup" xml:space="preserve">
+    <value>Genera nomi di file casuali sicuri</value>
   </data>
   <data name="GenerateText" xml:space="preserve">
     <value>Generare</value>
@@ -19200,14 +19758,83 @@ Se per qualsiasi ragione non sai o non ti ricordi la password, devi resettare la
   <data name="HelpContactsprtText4" xml:space="preserve">
     <value>Richiedi una funzionalità</value>
   </data>
+  <data name="HelpOverlayAnyServerDescription" xml:space="preserve">
+    <value>No. Tutta la crittografia e la decrittografia avvengono localmente sul tuo dispositivo. SecureApp non trasmette mai i tuoi dati non criptati.</value>
+  </data>
+  <data name="HelpOverlayAnyServerTitle" xml:space="preserve">
+    <value>I miei dati vengono inviati a qualche server?</value>
+  </data>
+  <data name="HelpOverlayCollapseSidebarDescription" xml:space="preserve">
+    <value>Clicca sul pulsante ← in alto nella barra laterale per comprimerlo e avere più spazio sullo schermo. Passa il mouse sulle icone per vedere le etichette.</value>
+  </data>
+  <data name="HelpOverlayCollapseSidebarTitle" xml:space="preserve">
+    <value>Comprimi la barra laterale</value>
+  </data>
+  <data name="HelpOverlayDragDropEncryptDescription" xml:space="preserve">
+    <value>Trascina qualsiasi file dal desktop nella sezione Recenti per criptarlo istantaneamente — senza bisogno di dialogo.</value>
+  </data>
+  <data name="HelpOverlayDragDropEncryptTitle" xml:space="preserve">
+    <value>Trascina e lascia per criptare</value>
+  </data>
+  <data name="HelpOverlayEncryptYourFirstFileDescription" xml:space="preserve">
+    <value>Clicca su 'Cripta file' da Quick Actions, oppure trascina e rilasci qualsiasi file nella sezione Archivi Recenti. Il tuo file viene criptato immediatamente con AES-256.</value>
+  </data>
+  <data name="HelpOverlayEncryptYourFirstFileTitle" xml:space="preserve">
+    <value>Cripta il tuo primo file</value>
+  </data>
+  <data name="HelpOverlayGlobalSearchDescription" xml:space="preserve">
+    <value>Cerca qualsiasi file, strumento o pagina dalla barra di ricerca in alto. I risultati vengono filtrati in tempo reale mentre scrivi.</value>
+  </data>
+  <data name="HelpOverlayGlobalSearchTitle" xml:space="preserve">
+    <value>Ricerca globale</value>
+  </data>
+  <data name="HelpOverlayQuickEncryptShortcutDescription" xml:space="preserve">
+    <value>Premi Ctrl+E ovunque nell'app per aprire istantaneamente il selettore file e criptare un nuovo file.</value>
+  </data>
+  <data name="HelpOverlayQuickEncryptShortcutTitle" xml:space="preserve">
+    <value>Scorciatoia rapida per la crittografia</value>
+  </data>
+  <data name="HelpOverlayRightClickContextMenuDescription" xml:space="preserve">
+    <value>Clicca con il tasto destro su qualsiasi file nella lista Recenti per azioni rapide: apri, condividi la tasta, rinomina anonimamente o rimuovi da recenti.</value>
+  </data>
+  <data name="HelpOverlayRightClickContextMenuTitle" xml:space="preserve">
+    <value>Clic destro Menu contestuale</value>
+  </data>
+  <data name="HelpOverlaySetupYourVaultDescription" xml:space="preserve">
+    <value>Il Vault conserva tutti i file criptati in un'unica cartella sicura. Abilita la crittografia automatica così i nuovi file sono protetti nel momento in cui li salvi.</value>
+  </data>
+  <data name="HelpOverlaySetupYourVaultTitle" xml:space="preserve">
+    <value>Crea il tuo Vault</value>
+  </data>
+  <data name="HelpOverlayShareFileSecurelyDescription" xml:space="preserve">
+    <value>Usa 'Condividi in modo sicuro' per generare una chiave di condivisione una tantum. Il destinatario può aprire il file solo con quella chiave, e puoi revocare l'accesso in qualsiasi momento.</value>
+  </data>
+  <data name="HelpOverlayShareFileSecurelyTitle" xml:space="preserve">
+    <value>Condividi un file in modo sicuro</value>
+  </data>
+  <data name="HelpOverlayTitle" xml:space="preserve">
+    <value>Inizia con SecureApp</value>
+  </data>
+  <data name="HelpOverlayWhatHappensDescription" xml:space="preserve">
+    <value>SecureApp non può recuperare la tua password — questo è voluto. Conserva sempre la password in un luogo sicuro. La gestione delle chiavi (Pro) ti permette di impostare le chiavi di recupero.</value>
+  </data>
+  <data name="HelpOverlayWhatHappensTitle" xml:space="preserve">
+    <value>Cosa succede se dimentico la password?</value>
+  </data>
   <data name="HelpToolStripMenuItemText" xml:space="preserve">
     <value>Aiuto</value>
+  </data>
+  <data name="HelpToolSubTitle" xml:space="preserve">
+    <value>Apri il centro assistenza e la guida per iniziare in-app </value>
   </data>
   <data name="HelpViewHelpMenuItemText" xml:space="preserve">
     <value>Visualizza Aiuto</value>
   </data>
   <data name="HideFeaturesLabel" xml:space="preserve">
     <value>Nascondi funzionalità</value>
+  </data>
+  <data name="HideOriginalFileNamesPopup" xml:space="preserve">
+    <value>Nascondi i nomi dei file originali</value>
   </data>
   <data name="HideRecentFilesListTabToolTipText" xml:space="preserve">
     <value>L'elenco dei File Recenti è disabilitato. Vai in Opzioni per abilitarlo.</value>
@@ -20237,6 +20864,12 @@ SVEZIA</value>
   <data name="JobTitlePlaceholder" xml:space="preserve">
     <value>Digita la tua qualifica</value>
   </data>
+  <data name="KeepCloudDataPrivatePopup" xml:space="preserve">
+    <value>Mantieni privati i dati cloud</value>
+  </data>
+  <data name="KeepFolderStructurePopup" xml:space="preserve">
+    <value>Mantieni organizzata la struttura delle cartelle</value>
+  </data>
   <data name="KeepMeUpdatedLinkLabel" xml:space="preserve">
     <value>Tienimi aggiornato</value>
   </data>
@@ -20333,6 +20966,9 @@ Per favore indica la lingua da utilizzare nell'invito e un messaggio personalizz
   </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>Clicca su &lt;b&gt;Applica&lt;/b&gt; .</value>
+  </data>
+  <data name="KeyShareOneTime" xml:space="preserve">
+    <value>Chiavi di condivisione unica</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>In genere, i dipendenti condividono informazioni di lavoro rilevanti tra loro. Tuttavia, garantire la sicurezza dei dati durante la condivisione è fondamentale. Per questo è essenziale che un software di crittografia offra funzionalità che permettano di inviare e ricevere file in modo sicuro.</value>
@@ -20672,6 +21308,9 @@ Abilitare la conversione automatica dei file AxCrypt 1.x (azione raccomandata)?<
   </data>
   <data name="LogoAndIconLabel" xml:space="preserve">
     <value>Logo e icona</value>
+  </data>
+  <data name="LogOffSubTitle" xml:space="preserve">
+    <value>Disconnettiti da questo dispositivo — i tuoi file rimangono criptati</value>
   </data>
   <data name="LogOffText" xml:space="preserve">
     <value>Disconnettiti</value>
@@ -21528,6 +22167,9 @@ Questo programma è autorizzato secondo l'accordo.
   <data name="Meta-Description-Blog-ITTROLPPAVU" xml:space="preserve">
     <value>Scopri in che modo i contenuti multimediali personali non protetti possono portare al furto di identità. Scopri i suggerimenti per proteggere le tue foto e i tuoi video utilizzando la crittografia AES-256 di AxCrypt.</value>
   </data>
+  <data name="Meta-Description-Blog-LDSFSB2SGLFEBP" xml:space="preserve">
+    <value>Proteggi i server Linux e i file aziendali nel 2026 con la crittografia dei file Linux, le migliori pratiche di cybersecurity e la condivisione sicura dei dati per le PMI.</value>
+  </data>
   <data name="Meta-Description-Blog-LYCWAR" xml:space="preserve">
     <value>Ti chiedi se è sicuro lasciare AxCrypt in esecuzione sul tuo computer? Scopri le precauzioni da prendere e come garantire la sicurezza dei tuoi file.</value>
   </data>
@@ -21611,6 +22253,9 @@ Questo programma è autorizzato secondo l'accordo.
   </data>
   <data name="Meta-Description-Blog-UODPCH" xml:space="preserve">
     <value>Scopri perché l'utilizzo di password diverse potrebbe aumentare i rischi per la sicurezza. Scopri in che modo la crittografia e la gestione delle password possono aiutarti a proteggere i tuoi dati.</value>
+  </data>
+  <data name="Meta-Description-Blog-W4BSSUFOTCAHAFI" xml:space="preserve">
+    <value>Il 48% delle aziende memorizza file non criptati sul cloud. Scopri come la crittografia AES-256 di AxCrypt protegge i tuoi dati, previene violazioni e protegge i team remoti.</value>
   </data>
   <data name="Meta-Description-Blog-WATPOI" xml:space="preserve">
     <value>Esplora l'impatto di WikiLeaks e l'importanza della crittografia nella salvaguardia delle informazioni sensibili. Impara le lezioni sulla protezione dei dati.</value>
@@ -22182,6 +22827,9 @@ Questo programma è autorizzato secondo l'accordo.
   <data name="Meta-Title-Blog-ITTROLPPAVU" xml:space="preserve">
     <value>Proteggi foto e video personali dal furto di identità</value>
   </data>
+  <data name="Meta-Title-Blog-LDSFSB2SGLFEBP" xml:space="preserve">
+    <value>Sicurezza dei dati Linux per PMI nel 2026: crittografia dei file e migliori pratiche</value>
+  </data>
   <data name="Meta-Title-Blog-LYCWAR" xml:space="preserve">
     <value>È sicuro lasciare AxCrypt in esecuzione sul tuo computer?</value>
   </data>
@@ -22265,6 +22913,9 @@ Questo programma è autorizzato secondo l'accordo.
   </data>
   <data name="Meta-Title-Blog-UODPCH" xml:space="preserve">
     <value>Perché l'utilizzo di password diverse può essere dannoso per la sicurezza</value>
+  </data>
+  <data name="Meta-Title-Blog-W4BSSUFOTCAHAFI" xml:space="preserve">
+    <value>Perché il 48% delle aziende memorizza file non criptati su cloud | AxCrypt</value>
   </data>
   <data name="Meta-Title-Blog-WATPOI" xml:space="preserve">
     <value>WikiLeaks: Il ruolo della crittografia nella protezione delle informazioni</value>
@@ -22634,6 +23285,9 @@ un qualsiasi tipo di multifattore (app di autenticazione, e-mail e SMS).</value>
   </data>
   <data name="MFAText2" xml:space="preserve">
     <value>Seleziona il tuo metodo di autenticazione.</value>
+  </data>
+  <data name="MFAuthenticationAdditionalFactorText" xml:space="preserve">
+    <value>Aggiungi un fattore aggiuntivo sopra la password per l'accesso.</value>
   </data>
   <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>Come abilitare l'MFA in AxCrypt?</value>
@@ -23061,6 +23715,9 @@ un qualsiasi tipo di multifattore (app di autenticazione, e-mail e SMS).</value>
   <data name="NisWhatsInsidesubheading" xml:space="preserve">
     <value>Cosa c'è dentro:</value>
   </data>
+  <data name="NoCloudServicesText" xml:space="preserve">
+    <value>Al momento non sono disponibili provider cloud.</value>
+  </data>
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>Sei Disconnesso. Clicca per Connetterti.</value>
   </data>
@@ -23199,6 +23856,9 @@ Per tornare alla pagina iniziale clicca &lt;a href="{1}"&gt;qui&lt;/a&gt;.</valu
   <data name="OneFreeMonthLabel" xml:space="preserve">
     <value>14 giorni gratis</value>
   </data>
+  <data name="OneLatestStandardPopup" xml:space="preserve">
+    <value>Conformità con un solo clic agli standard più recenti</value>
+  </data>
   <data name="OnlyAdminOnActiveBusinessSubscriptionError" xml:space="preserve">
     <value>L'utente non può essere eliminato in quanto è l'unico amministratore dell'abbonamento Business. Cancella l'abbonamento oppure nomina un altro amministratore.</value>
   </data>
@@ -23235,8 +23895,14 @@ Per tornare alla pagina iniziale clicca &lt;a href="{1}"&gt;qui&lt;/a&gt;.</valu
   <data name="OptionsChangePassphraseToolStripMenuItemText" xml:space="preserve">
     <value>Modifica Password</value>
   </data>
+  <data name="OptionsClearAllSettingsAndExitSubTitle" xml:space="preserve">
+    <value>Resetta tutte le preferenze e avvia una sessione da zero su questo dispositivo</value>
+  </data>
   <data name="OptionsClearAllSettingsAndExitToolStripMenuItemText" xml:space="preserve">
     <value>Cancella Tutte le Impostazioni e Riavvia</value>
+  </data>
+  <data name="OptionsConvertMenuItemDescription" xml:space="preserve">
+    <value>Aggiorna automaticamente i file cifrati AES-128 a AES-256 quando vengono aperti.</value>
   </data>
   <data name="OptionsConvertMenuItemText" xml:space="preserve">
     <value>Aggiornamento automatico dei file ad AES-256</value>
@@ -23249,8 +23915,14 @@ Per tornare alla pagina iniziale clicca &lt;a href="{1}"&gt;qui&lt;/a&gt;.</valu
   <data name="OptionsDebugToolStripMenuItemText" xml:space="preserve">
     <value>Debug</value>
   </data>
+  <data name="OptionsHideRecentFilesDescription" xml:space="preserve">
+    <value>Non elencare i file che hai aperto di recente nella schermata principale</value>
+  </data>
   <data name="OptionsHideRecentFilesToolStripMenuItemText" xml:space="preserve">
     <value>Nascondi File Recenti</value>
+  </data>
+  <data name="OptionsIncludeSubfoldersDescription" xml:space="preserve">
+    <value>Quando si cifra una cartella, si cripta anche ogni file nelle sue sottocartelle</value>
   </data>
   <data name="OptionsIncludeSubfoldersToolStripMenuItemText" xml:space="preserve">
     <value>Includi le Sottocartelle</value>
@@ -24062,6 +24734,9 @@ Gli spazi bianchi e le parti uguali a password comuni vengono ignorate e non agg
   <data name="PreparingAxCryptText" xml:space="preserve">
     <value>Preparazione di AxCrypt...</value>
   </data>
+  <data name="PreserveOriginalModifiedDatePopup" xml:space="preserve">
+    <value>Conservare la data originale di modifica</value>
+  </data>
   <data name="PressAndHoldLabel" xml:space="preserve">
     <value>Clicca e mantieni premuto per visualizzare di più</value>
     <comment>Tooltip for Press and hold gesture in mobile application</comment>
@@ -24352,6 +25027,9 @@ Gli spazi bianchi e le parti uguali a password comuni vengono ignorate e non agg
   </data>
   <data name="PrimaryReasonForCancelationLabelText" xml:space="preserve">
     <value>Quali sono i motivi principali della disdetta?</value>
+  </data>
+  <data name="PriorityCustomerSupport" xml:space="preserve">
+    <value>Assistenza clienti prioritaria</value>
   </data>
   <data name="PrioritySupportTitle" xml:space="preserve">
     <value>Supporto Prioritario</value>
@@ -25102,6 +25780,9 @@ Crittografa i tuoi file con AES-256, il più potente degli algoritmi AES.  Viene
   <data name="PromptXecretsSecretText" xml:space="preserve">
     <value>Password o segreto</value>
   </data>
+  <data name="PROText" xml:space="preserve">
+    <value>PRO</value>
+  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>Il periodo selezionato per l'abbonamento non è valido. Un abbonamento valido deve durare almeno {0} mesi e non più di {1} mesi.</value>
   </data>
@@ -25160,6 +25841,111 @@ La ricevuta del tuo acquisto ti è stata inviata per e-mail.</value>
     <value>&lt;b&gt;Hai delle domande in merito ad AxCrypt Business?&lt;/b&gt;
 &lt;a href="mailto:business@axcrypt.net"&gt;Contattaci&lt;/a&gt; e ti aiuteremo il prima possibile.</value>
   </data>
+  <data name="QuickActionsSubTitle" xml:space="preserve">
+    <value>Accesso con un solo clic alle cose che fai di più — aprire, criptare, decriptare o condividere.</value>
+  </data>
+  <data name="QuickActionsTitle" xml:space="preserve">
+    <value>Azioni rapide</value>
+  </data>
+  <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
+    <value>Algoritmi avanzati</value>
+  </data>
+  <data name="QuickSecureActionAdvancedVaultSecurity" xml:space="preserve">
+    <value>Accedi a una sicurezza avanzata dei vault</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyEncrypt" xml:space="preserve">
+    <value>Crittografia automatica dei file aggiunti/modificati</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyMonitor" xml:space="preserve">
+    <value>Rimuovere l'accesso in qualsiasi momento</value>
+  </data>
+  <data name="QuickSecureActionControlFiles" xml:space="preserve">
+    <value>Controlla chi può accedere ai file</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShare" xml:space="preserve">
+    <value>Cripta e Condividi</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShareDescription" xml:space="preserve">
+    <value>Metti in sicurezza un file e preparalo per essere condiviso in sicurezza.</value>
+  </data>
+  <data name="QuickSecureActionEncryptedVaults" xml:space="preserve">
+    <value>Conserva e proteggi i tuoi file sensibili in modo sicuro in casseforti criptate.</value>
+  </data>
+  <data name="QuickSecureActionHeader" xml:space="preserve">
+    <value>Scegliere un'azione</value>
+  </data>
+  <data name="QuickSecureActionMonitorMultiple" xml:space="preserve">
+    <value>Monitora in modo sicuro più cartelle</value>
+  </data>
+  <data name="QuickSecureActionNoNeedSharePasswords" xml:space="preserve">
+    <value>Non c'è bisogno di condividere le password</value>
+  </data>
+  <data name="QuickSecureActionPermanentFileDeletion" xml:space="preserve">
+    <value>Cancellazione permanente del file</value>
+  </data>
+  <data name="QuickSecureActionPermanentlyDelete" xml:space="preserve">
+    <value>Elimina definitivamente i file così non possono essere recuperati.</value>
+  </data>
+  <data name="QuickSecureActionPreventFileRecovery" xml:space="preserve">
+    <value>Impedire il recupero dei file</value>
+  </data>
+  <data name="QuickSecureActionProtectImportantFiles" xml:space="preserve">
+    <value>Proteggi file e cartelle importanti</value>
+  </data>
+  <data name="QuickSecureActionProtectSensitive" xml:space="preserve">
+    <value>Proteggi automaticamente i file sensibili</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFiles" xml:space="preserve">
+    <value>File Sicuri Recenti</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFilesDescription" xml:space="preserve">
+    <value>Elimina definitivamente i file così non possono essere recuperati.</value>
+  </data>
+  <data name="QuickSecureActionRemoveAccessAnytime" xml:space="preserve">
+    <value>Rimuovere l'accesso in qualsiasi momento</value>
+  </data>
+  <data name="QuickSecureActionSecureEncryptedVaults" xml:space="preserve">
+    <value>Creare vault sicuri criptati</value>
+  </data>
+  <data name="QuickSecureActionSecureFilesShare" xml:space="preserve">
+    <value>Mettere file sicuri e condividere in modo sicuro l'accesso criptato con altri.</value>
+  </data>
+  <data name="QuickSecureActionSecureFolder" xml:space="preserve">
+    <value>Cartella sicura</value>
+  </data>
+  <data name="QuickSecureActionSecureFolderDescription" xml:space="preserve">
+    <value>Proteggi tutti i file all'interno di una cartella con crittografia.</value>
+  </data>
+  <data name="QuickSecureActionSensitiveInformation" xml:space="preserve">
+    <value>Proteggere le informazioni sensibili</value>
+  </data>
+  <data name="QuickSecureActionShareFileAccessSecurely" xml:space="preserve">
+    <value>Condividi l'accesso ai file in modo sicuro</value>
+  </data>
+  <data name="QuickSecureActionUnlimitedFiles" xml:space="preserve">
+    <value>File illimitati</value>
+  </data>
+  <data name="QuickSecureActionUnlockAdvanced" xml:space="preserve">
+    <value>Sblocca funzionalità di sicurezza avanzate</value>
+  </data>
+  <data name="QuickSecureActionUnlockMoreFeatures" xml:space="preserve">
+    <value>Aggiorna per sbloccare più funzionalità.</value>
+  </data>
+  <data name="QuickSecureActionUnlockPremium" xml:space="preserve">
+    <value>Sblocca le caratteristiche di protezione premium</value>
+  </data>
+  <data name="QuickSecureActionUnlockSecurityTools" xml:space="preserve">
+    <value>Sblocca strumenti di sicurezza avanzati</value>
+  </data>
+  <data name="QuickSecureAddFilesVault" xml:space="preserve">
+    <value>Aggiungi file al Vault</value>
+  </data>
+  <data name="QuickSecureAddFilesVaultDescription" xml:space="preserve">
+    <value>Conserva i tuoi file importanti in una cassaforte sicura.</value>
+  </data>
+  <data name="QuickSecureSecureDeleteDescription" xml:space="preserve">
+    <value>Elimina definitivamente i file così non possono essere recuperati.</value>
+  </data>
   <data name="RateApplicationLinkAndroid" xml:space="preserve">
     <value>Per favore valutaci su &lt;a&gt;Google Play&lt;/a&gt;</value>
     <comment>Link to app store in mobile application (Android)</comment>
@@ -25201,14 +25987,50 @@ La ricevuta del tuo acquisto ti è stata inviata per e-mail.</value>
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>Ti invitiamo a ritentare il pagamento il prima possibile per proteggere i tuoi dati sensibili e continuare a usufruire delle funzionalità a pagamento.</value>
   </data>
+  <data name="RecentFilesAES256Always" xml:space="preserve">
+    <value>AES-256 sempre</value>
+  </data>
+  <data name="RecentFilesBatchEncryption" xml:space="preserve">
+    <value>Crittografia batch</value>
+  </data>
+  <data name="RecentFilesDropFiles" xml:space="preserve">
+    <value>Lascia qui i file per criptarli</value>
+  </data>
+  <data name="RecentFilesFreePlan" xml:space="preserve">
+    <value>Il piano gratuito permette di cifrare 3 file. Fai l'upgrade per illimitato.</value>
+  </data>
+  <data name="RecentFileShareContextMenu" xml:space="preserve">
+    <value>Condividi file criptati in modo sicuro con una chiave monouso</value>
+  </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>Non hai aperto nessun file protetto di recente. Clicca &lt;b&gt;su Apri File Protetto&lt;/b&gt; per cercare un file protetto.</value>
+  </data>
+  <data name="RecentFilesNoFilesCurrentlyOpen" xml:space="preserve">
+    <value>Attualmente non sono aperti file</value>
+  </data>
+  <data name="RecentFilesNoSharedFilesYet" xml:space="preserve">
+    <value>Nessun file condiviso ancora</value>
   </data>
   <data name="RecentFilesOpenToolStripMenuItemText" xml:space="preserve">
     <value>Apri</value>
   </data>
+  <data name="RecentFilesReencryptClose" xml:space="preserve">
+    <value>Ri-crittografia e chiusura</value>
+  </data>
+  <data name="RecentFilesShareSomeone" xml:space="preserve">
+    <value>Condividi un file con qualcuno e apparirà qui.</value>
+  </data>
+  <data name="RecentFilesSubTitle" xml:space="preserve">
+    <value>Fai doppio clic su un file per aprirlo. Clicca con il tasto destro per altre azioni.</value>
+  </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>File Recenti</value>
+  </data>
+  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
+    <value>Crittografia illimitata</value>
+  </data>
+  <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
+    <value>I file che aprirai appariranno qui mentre vengono decriptati.</value>
   </data>
   <data name="RecentFoldersText" xml:space="preserve">
     <value>Cartelle recenti</value>
@@ -25354,6 +26176,9 @@ Un periodo di prova di AxCrypt Premium della durata di 30 giorni è incluso e pu
   </data>
   <data name="RemoveText" xml:space="preserve">
     <value>Rimuovi</value>
+  </data>
+  <data name="RenameDeleteOrDecryptFilesPopup" xml:space="preserve">
+    <value>Rinomina, elimina o decripta i file</value>
   </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>C'è un abbonamento ricorsivo attivo su questo account. Gli abbonamenti Business ricorsivi non devono essere rinnovati manualmente.</value>
@@ -25889,6 +26714,9 @@ Oggetto: Rapporto Istantaneo AxCrypt </value>
   <data name="ReviewsLabel" xml:space="preserve">
     <value>Recensioni</value>
   </data>
+  <data name="RevokeAccessAnytime" xml:space="preserve">
+    <value>Revoca l'accesso in qualsiasi momento</value>
+  </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>русский (Russo)</value>
     <comment>The name of the Russian Language in Russian. It should never be translated.</comment>
@@ -25899,6 +26727,9 @@ Oggetto: Rapporto Istantaneo AxCrypt </value>
   </data>
   <data name="SaveSecretErrorIsReadOnly" xml:space="preserve">
     <value>Solo gli utenti con un valido piano di abbonamento possono registrare password.</value>
+  </data>
+  <data name="ScheduledVaultBackupsPopup" xml:space="preserve">
+    <value>Backup programmati del caveau</value>
   </data>
   <data name="ScriptingEnabledLabel" xml:space="preserve">
     <value>Scripting abilitato</value>
@@ -25964,6 +26795,9 @@ Oggetto: Rapporto Istantaneo AxCrypt </value>
   </data>
   <data name="SecureCloudFaq3Ans" xml:space="preserve">
     <value>Sì, puoi condividere file crittografati archiviati nel cloud tramite la funzione Condivisione delle chiavi disponibile nell’applicazione. &lt;br/&gt;&lt;br/&gt;Con la funzionalità Cloud Security, puoi concedere accesso e autorizzare gli utenti. I tuoi file rimangono protetti e sono accessibili solo agli utenti approvati o autorizzati. &lt;br/&gt;&lt;br/&gt;Questa funzione di sincronizzazione cloud garantisce la massima protezione dei file, offrendo controllo totale e sicurezza sui tuoi dati.</value>
+  </data>
+  <data name="SecureCloudFileProtectionPopup" xml:space="preserve">
+    <value>Protezione sicura dei file nel  cloud</value>
   </data>
   <data name="SecureCloudGuidebuttonHead1" xml:space="preserve">
     <value>Proteggi i file nel cloud tramite l’applicazione</value>
@@ -26091,6 +26925,9 @@ Oggetto: Rapporto Istantaneo AxCrypt </value>
   </data>
   <data name="SecureCloudWhatNextText2" xml:space="preserve">
     <value>&lt;a href='/information/guides/vault/'&gt;Guida alle funzionalità del Vault di AxCrypt | Crittografia e Protezione dei File&lt;/a&gt;</value>
+  </data>
+  <data name="SecuredCloudHelpText" xml:space="preserve">
+    <value>Proteggi i tuoi file archiviati nel cloud con crittografia sicura e funzionalità di sicurezza avanzate.</value>
   </data>
   <data name="SecuredCloudLinkLabel" xml:space="preserve">
     <value>Sicurezza nel cloud</value>
@@ -26344,6 +27181,12 @@ Oggetto: Rapporto Istantaneo AxCrypt </value>
   <data name="SecuredMessengerText" xml:space="preserve">
     <value>Garantisci una comunicazione privata e sicura tra i dispositivi con la crittografia AES-256 per i destinatari previsti.</value>
   </data>
+  <data name="SecureEncryptedVaultPopup" xml:space="preserve">
+    <value>Vault criptato sicuro</value>
+  </data>
+  <data name="SecureKeySharingPopup" xml:space="preserve">
+    <value>Condivisione sicura delle chiavi</value>
+  </data>
   <data name="SecurityBlock1Heading" xml:space="preserve">
     <value>Perchè AxCrypt è sicuro?</value>
   </data>
@@ -26497,6 +27340,42 @@ Oggetto: Rapporto Istantaneo AxCrypt </value>
   <data name="SecuritySectionText" xml:space="preserve">
     <value>La sicurezza è fondamentale per noi. Tutto ciò che facciamo con AxCrypt è fatto con la sicurezza come massima priorità. Ci assicuriamo che nessuno possa mai avere accesso ai tuoi file criptati, finchè hai il controllo della tua password.</value>
     <comment>Description of "Security" section of About Us page in mobile application.</comment>
+  </data>
+  <data name="SecurityStatusEncryptionsPerMonth" xml:space="preserve">
+    <value>2 file crittografati al mese</value>
+  </data>
+  <data name="SecurityStatusFreePlan" xml:space="preserve">
+    <value>Il piano gratuito include la crittografia di 2 file al mese.</value>
+  </data>
+  <data name="SecurityStatusGroupkeySharing" xml:space="preserve">
+    <value>Condivisione delle chiavi di gruppo</value>
+  </data>
+  <data name="SecurityStatusGroupkeySharingDescription" xml:space="preserve">
+    <value>Condividi l'accesso per team o ruolo — gestito centralmente.</value>
+  </data>
+  <data name="SecurityStatusMasterKeyRecovery" xml:space="preserve">
+    <value>Recupero della chiave principale</value>
+  </data>
+  <data name="SecurityStatusMasterKeyRecoveryDescription" xml:space="preserve">
+    <value>La tua organizzazione può recuperare i file se un membro perde l'accesso.</value>
+  </data>
+  <data name="SecurityStatusSecureDeleteTitle" xml:space="preserve">
+    <value>Cancella permanentemente i file con sovrascrittura multi-passaggio.</value>
+  </data>
+  <data name="SecurityStatusTitle" xml:space="preserve">
+    <value>Stato di sicurezza</value>
+  </data>
+  <data name="SecurityStatusUnlimitedAES256" xml:space="preserve">
+    <value>Crittografia e condivisione delle chiavi illimitate AES-256</value>
+  </data>
+  <data name="SecurityStatusUnlimitedAES256Description" xml:space="preserve">
+    <value>Niente tappi giornalieri — e condividi le chiavi con destinatari fidati.</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription" xml:space="preserve">
+    <value>Niente intoppi giornalieri — e condividi le chiavi con destinatari fidati.</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription1" xml:space="preserve">
+    <value>Nessun limite giornaliero, condivisione delle chiavi, rinomina anonima.</value>
   </data>
   <data name="SecurityUpdateAvailableWarning" xml:space="preserve">
     <value>Il tuo software deve essere aggiornato a causa di un problema di protezione.</value>
@@ -26706,6 +27585,21 @@ Potrebbe essere necessario informare direttamente '{0}' riguardo la protezione d
   </data>
   <data name="ShowPasswordOptionPrompt" xml:space="preserve">
     <value>Mostra la Password</value>
+  </data>
+  <data name="ShowUpgradeAutoEncryptOpenedPopup" xml:space="preserve">
+    <value>Crittografia automatica di file aperti o in attesa</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPendingPopup" xml:space="preserve">
+    <value>Disconnettiti automaticamente e metti in sicurezza i file aperti o in attesa dopo un periodo di inattività.</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPopup" xml:space="preserve">
+    <value>Protezione per la cancellazione automatica</value>
+  </data>
+  <data name="ShowUpgradeEnhancedSecurityPopup" xml:space="preserve">
+    <value>Sblocca le funzionalità di sicurezza potenziate</value>
+  </data>
+  <data name="ShowUpgradeProtectSensitivePopup" xml:space="preserve">
+    <value>Proteggere i dati sensibili</value>
   </data>
   <data name="SignedInUserInfo" xml:space="preserve">
     <value>Accesso eseguito con &lt;b&gt;{0}&lt;/b&gt;</value>
@@ -27005,6 +27899,9 @@ Per andare alla pagina iniziale, clicca &lt;a href="{1}"&gt;qui&lt;/a&gt; .</val
   <data name="SubscriptionDeletedText" xml:space="preserve">
     <value>Eliminato</value>
   </data>
+  <data name="SubscriptionDetailsSubTitle" xml:space="preserve">
+    <value>Visualizza il tuo piano, i dettagli di fatturazione e il rinnovo</value>
+  </data>
   <data name="SubscriptionDetailsTitle" xml:space="preserve">
     <value>Dettagli dell'abbonamento</value>
   </data>
@@ -27126,6 +28023,9 @@ Per andare alla pagina iniziale, clicca &lt;a href="{1}"&gt;qui&lt;/a&gt; .</val
   </data>
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Svenska (Svedese)</value>
+  </data>
+  <data name="SwitchToDarkActionDescription" xml:space="preserve">
+    <value>Più piacevole per gli occhi in condizioni di scarsa illuminazione — si applica istantaneamente su tutta l'app</value>
   </data>
   <data name="SwitchToDarkActionText" xml:space="preserve">
     <value>Passa alla modalità scura</value>
@@ -27484,6 +28384,9 @@ Per andare alla pagina iniziale, clicca &lt;a href="{1}"&gt;qui&lt;/a&gt; .</val
   <data name="TextCheckEmailAndSpam" xml:space="preserve">
     <value>Controlla la tua casella di posta e lo spam!</value>
   </data>
+  <data name="TextEncryptionAdvancedProtectionFeatures" xml:space="preserve">
+    <value>Cripta il testo in modo sicuro con funzionalità di protezione avanzate.</value>
+  </data>
   <data name="TextEncryptionEmailBodyText" xml:space="preserve">
     <value>Questo testo è crittografato — usa AxCrypt per visualizzare il messaggio originale.</value>
   </data>
@@ -27698,6 +28601,9 @@ Per andare alla pagina iniziale, clicca &lt;a href="{1}"&gt;qui&lt;/a&gt; .</val
   </data>
   <data name="ToolTipPremiumNeededForSecrets" xml:space="preserve">
     <value>Un piano di abbonamento a pagamento è richiesto per la gestione delle password. Clicca per fare l'upgrade ora!</value>
+  </data>
+  <data name="TopBarPrivacySecurity" xml:space="preserve">
+    <value>Privacy e Sicurezza</value>
   </data>
   <data name="TotalLicencesText" xml:space="preserve">
     <value>Licenze (Usate/Totali)</value>
@@ -27966,8 +28872,26 @@ Il Team di AxCrypt</value>
   <data name="UnknownLogOn" xml:space="preserve">
     <value>Password sconosciuta. Clicca su 'Nuovo' per creare una nuova password.</value>
   </data>
+  <data name="UnlimitedVaultEntriesPopup" xml:space="preserve">
+    <value>Ingressi illimitati nelle casseforti</value>
+  </data>
+  <data name="UnlockAdvancedCloudSecurityPopup" xml:space="preserve">
+    <value>Sblocca la sicurezza cloud avanzata</value>
+  </data>
+  <data name="UnlockAdvancedEncryptionFeaturesPopup" xml:space="preserve">
+    <value>Sblocca funzionalità avanzate di crittografia</value>
+  </data>
   <data name="UnlockAdvancedFeaturesText" xml:space="preserve">
     <value>Sblocca le funzionalità &lt;span&gt;di crittografia più forti e illimitate&lt;/span&gt; !</value>
+  </data>
+  <data name="UnlockAdvancedFileManagementPopup" xml:space="preserve">
+    <value>Sblocca la gestione avanzata dei file</value>
+  </data>
+  <data name="UnlockAdvancedFileSecurityPopup" xml:space="preserve">
+    <value>Sblocca la sicurezza avanzata dei file</value>
+  </data>
+  <data name="UnlockAdvancedFolderPopup" xml:space="preserve">
+    <value>Sblocca la protezione avanzata delle cartelle</value>
   </data>
   <data name="UnlockFeatures" xml:space="preserve">
     <value>Sblocca le nostre &lt;span&gt;straordinarie&lt;/span&gt; &lt;span&gt;funzionalità!&lt;/span&gt; Passa a &lt;span&gt;Premium&lt;/span&gt; o &lt;b&gt;Business&lt;/b&gt;</value>
@@ -28004,6 +28928,9 @@ Il Team di AxCrypt</value>
   </data>
   <data name="UpdatePaymentDetailsText" xml:space="preserve">
     <value>Aggiorna dettagli di pagamento</value>
+  </data>
+  <data name="UpdateRequiredText" xml:space="preserve">
+    <value>Aggiornamento richiesto</value>
   </data>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} Aggiornato correttamente.</value>
@@ -28048,6 +28975,9 @@ Il Team di AxCrypt</value>
   <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
     <value>&lt;strong&gt;Esegui l'upgrade per sbloccare tutte le funzionalità di crittografia!&lt;/strong&gt;</value>
   </data>
+  <data name="UpgradeToUnlockText" xml:space="preserve">
+    <value>Aggiorna per sbloccare</value>
+  </data>
   <data name="UpgradeVersionDialogText" xml:space="preserve">
     <value>Vuoi scaricarlo ora o al prossimo avvio?</value>
   </data>
@@ -28065,6 +28995,9 @@ Il Team di AxCrypt</value>
   </data>
   <data name="UsageOtherText" xml:space="preserve">
     <value>Altro</value>
+  </data>
+  <data name="UsageTipsAnonymousFileDescription" xml:space="preserve">
+    <value>I file criptati non lasciano traccia del nome originale sul disco.</value>
   </data>
   <data name="UsageTipsAnonymousFileHeading" xml:space="preserve">
     <value>Nomi di file anonimi</value>
@@ -28209,6 +29142,9 @@ Il Team di AxCrypt</value>
   </data>
   <data name="UseNecessaryCookiesOnlyPromptText" xml:space="preserve">
     <value>Usa solo i cookie necessari</value>
+  </data>
+  <data name="UserActivitiesDescription" xml:space="preserve">
+    <value>Registra tutte le operazioni dei file — criptare, decriptare, condividere, eliminare</value>
   </data>
   <data name="UserActivitiesText" xml:space="preserve">
     <value>Attività degli utenti</value>
@@ -28543,8 +29479,23 @@ Il Team di AxCrypt</value>
   <data name="VaultMisConfigured" xml:space="preserve">
     <value>Il percorso impostato per il Vault sembra essere stato spostato o cancellato. Si prega di riconfigurare il Vault dalle Impostazioni → Impostazioni Avanzate → Impostazioni del Vault.</value>
   </data>
+  <data name="VaultSettingsDescription" xml:space="preserve">
+    <value>Percorso di archivio, timer di blocco automatico e frequenza di backup</value>
+  </data>
   <data name="VaultSettingsTitle" xml:space="preserve">
     <value>Impostazioni del Vault</value>
+  </data>
+  <data name="VaultStatusAuto-encryption" xml:space="preserve">
+    <value>L'autocrittografia è &lt;strong&gt;ATTIVA&lt;/strong&gt;</value>
+  </data>
+  <data name="VaultStatusPaidText" xml:space="preserve">
+    <value>Safe Vault è una funzione a pagamento</value>
+  </data>
+  <data name="VaultStatusText" xml:space="preserve">
+    <value>Stato del Vault</value>
+  </data>
+  <data name="VaultStatusUnlockUnlimited" xml:space="preserve">
+    <value>Sblocca spazio protetto illimitato e crittografia automatica.</value>
   </data>
   <data name="VaultText" xml:space="preserve">
     <value>Archivio protetto</value>
@@ -28593,6 +29544,9 @@ Per completare l'accesso ad AxCrypt, inserisci il passcode monouso (OTP) nella f
   </data>
   <data name="ViewAllText" xml:space="preserve">
     <value>Visualizza tutto..</value>
+  </data>
+  <data name="ViewAndManageFileReferencesPopup" xml:space="preserve">
+    <value>Visualizza e gestisce i riferimenti dei file</value>
   </data>
   <data name="ViewCardTitle" xml:space="preserve">
     <value>Visualizza scheda</value>
