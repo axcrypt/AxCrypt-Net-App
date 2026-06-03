@@ -709,8 +709,14 @@ Please sign in using the same password you used then.</value>
   <data name="AnnualSubscriptionTitle" xml:space="preserve">
     <value>Annual</value>
   </data>
+  <data name="AnonymousRenameDescription" xml:space="preserve">
+    <value>Replace original filenames with random identifiers to hide file contents from filename alone.</value>
+  </data>
   <data name="AnonymousRenameMenuDescription" xml:space="preserve">
     <value>Use the Tools page to replace filenames with random IDs — so no one can guess a file's contents from its name alone.</value>
+  </data>
+  <data name="AnonymousRenameMenuPopup" xml:space="preserve">
+    <value>Rename files with random names to help protect your privacy</value>
   </data>
   <data name="AnonymousRenameMenuText" xml:space="preserve">
     <value>Anonymous Rename</value>
@@ -16213,6 +16219,9 @@ You must complete these steps to complete the process.</value>
   <data name="CloudBrowserPageTips" xml:space="preserve">
     <value>Tip: double-click a folder to open it, or select files to encrypt / share / open.</value>
   </data>
+  <data name="CloudBrowserPageTips1" xml:space="preserve">
+    <value>+ Add files</value>
+  </data>
   <data name="CloudServicesConnectedText" xml:space="preserve">
     <value>Connected</value>
   </data>
@@ -16922,18 +16931,33 @@ If you do not accept our temporary session cookies you cannot sign in and the si
   <data name="DaysText" xml:space="preserve">
     <value>days</value>
   </data>
+  <data name="DebugCheckVersionNowDescription" xml:space="preserve">
+    <value>Check for the latest AxCrypt updates to improve security, stability, and performance.</value>
+  </data>
   <data name="DebugCheckVersionNowToolStripMenuItemText" xml:space="preserve">
     <value>Check Version Now</value>
   </data>
   <data name="DebugCryptoPolicyToolStripMenuItemText" xml:space="preserve">
     <value>License Policy</value>
   </data>
+  <data name="DebugDiagnosticsToolStripMenuItemText" xml:space="preserve">
+    <value>Debug &amp; Diagnostics</value>
+  </data>
+  <data name="DebugFileDescription" xml:space="preserve">
+    <value>Analyze a file’s encryption status and compatibility with AxCrypt.</value>
+  </data>
   <data name="DebugFileFormatCheckToolStripMenuItemText" xml:space="preserve">
     <value>Check File</value>
     <comment>A debug menu item starting the AxCrypt File Format check function</comment>
   </data>
+  <data name="DebugLoggingDescription" xml:space="preserve">
+    <value>View application logs to help diagnose issues and troubleshoot problems.</value>
+  </data>
   <data name="DebugLoggingToolStripMenuItemText" xml:space="preserve">
     <value>Logging</value>
+  </data>
+  <data name="DebugManageAccountDescription" xml:space="preserve">
+    <value>Run encryption test scenarios.</value>
   </data>
   <data name="DebugManageAccountSubTitle" xml:space="preserve">
     <value>Update profile, security, and contact info on axcrypt.net</value>
@@ -16946,6 +16970,9 @@ If you do not accept our temporary session cookies you cannot sign in and the si
   </data>
   <data name="DebugModeTitle" xml:space="preserve">
     <value>Debug Mode</value>
+  </data>
+  <data name="DebugOptionsToolStripDescription" xml:space="preserve">
+    <value>Remove temporary stored data.</value>
   </data>
   <data name="DebugOptionsToolStripMenuItemText" xml:space="preserve">
     <value>Options</value>
@@ -17161,6 +17188,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   </data>
   <data name="DiscountCodeTitle" xml:space="preserve">
     <value>Discount Code</value>
+  </data>
+  <data name="DiscoveryActivityText" xml:space="preserve">
+    <value>Discovery &amp; Activity</value>
   </data>
   <data name="DoMoreAxCryptSubscriptionContent1" xml:space="preserve">
     <value>AxCrypt enables secure file sharing among educators, administrators, and students. Encrypted files can be shared within the institution's network or through cloud storage.</value>
@@ -17393,6 +17423,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   <data name="DutchLanguageSelection" xml:space="preserve">
     <value>Nederlands (Dutch)</value>
     <comment>The name of the Dutch language for selection.</comment>
+  </data>
+  <data name="EasyEncryptedOnboardingPopup" xml:space="preserve">
+    <value>Easy encrypted onboarding</value>
   </data>
   <data name="EasyInstallationLabel" xml:space="preserve">
     <value>Easy installation and use</value>
@@ -17749,6 +17782,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   <data name="EncryptFilesBeforeUploadPopup" xml:space="preserve">
     <value>Encrypt files before upload</value>
   </data>
+  <data name="EncryptionManagementText" xml:space="preserve">
+    <value>Encryption Management</value>
+  </data>
   <data name="EncryptLabelText" xml:space="preserve">
     <value>Encrypt</value>
   </data>
@@ -17760,6 +17796,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   </data>
   <data name="EncryptUnlimitedText" xml:space="preserve">
     <value>Encrypt unlimited text</value>
+  </data>
+  <data name="EndToEndProtectionPopup" xml:space="preserve">
+    <value>End-to-end protection</value>
   </data>
   <data name="EnglishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>English</value>
@@ -17847,11 +17886,17 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Exported successfully!</value>
   </data>
+  <data name="ExportMyPrivateKeyDescription" xml:space="preserve">
+    <value>Backup or transfer your AxCrypt identity and sharing keys securely for recovery or device migration.</value>
+  </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemText" xml:space="preserve">
     <value>Export AxCrypt ID Secret and Sharing Key Pair</value>
   </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemToolTipText" xml:space="preserve">
     <value>To move an AxCrypt ID, export the Secret and Sharing Key Pair and then import it elsewhere.</value>
+  </data>
+  <data name="ExportSharingKeyDescription" xml:space="preserve">
+    <value>Share your public key so others can securely send encrypted files to you.</value>
   </data>
   <data name="ExportSharingKeyToolStripMenuItemText" xml:space="preserve">
     <value>Export My Public Sharing Key</value>
@@ -18473,6 +18518,9 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
   </data>
   <data name="FindEncryptedFilesQuicklyPopup" xml:space="preserve">
     <value>Find encrypted files quickly</value>
+  </data>
+  <data name="FindFileFeatureDescription" xml:space="preserve">
+    <value>Scan and locate all encrypted files in one place.</value>
   </data>
   <data name="FindFileFeatureTitle" xml:space="preserve">
     <value>Find files</value>
@@ -20005,8 +20053,14 @@ If you want to view or update the file contents, please decrypt it separately, a
   <data name="ImportPublicKeysFileSelectionTitle" xml:space="preserve">
     <value>Select Sharing Key Files</value>
   </data>
+  <data name="ImportSomeonesPublicDescription" xml:space="preserve">
+    <value>Add a trusted user’s public key to access encrypted shared files securely.</value>
+  </data>
   <data name="ImportSomeonesPublicSharingKeyText" xml:space="preserve">
     <value>Import Someone`s Public Sharing Key</value>
+  </data>
+  <data name="ImproveFilePrivacyPopup" xml:space="preserve">
+    <value>Improve file privacy</value>
   </data>
   <data name="ImproveOurServiceCommentText" xml:space="preserve">
     <value>What would you recommend us for improving our service?</value>
@@ -20603,6 +20657,9 @@ Sign in to AxCrypt with {2}, enter the 6-digit verification code and set your se
   <data name="Invite" xml:space="preserve">
     <value>User to invite</value>
   </data>
+  <data name="InviteEmailSuccessfullyText" xml:space="preserve">
+    <value>Invite sent to {0} successfully!</value>
+  </data>
   <data name="InviteFriendAxCryptText" xml:space="preserve">
     <value>Invite your friend to AxCrypt!</value>
   </data>
@@ -20614,6 +20671,12 @@ Sign in to AxCrypt with {2}, enter the 6-digit verification code and set your se
   </data>
   <data name="InviteUserPersonalizedMessageTitle" xml:space="preserve">
     <value>Personal message</value>
+  </data>
+  <data name="InviteUserToolPopup" xml:space="preserve">
+    <value>Send a secure onboarding invite to colleagues or friends with offline key sharing support.</value>
+  </data>
+  <data name="InviteUserToolStripDescription" xml:space="preserve">
+    <value>Send a secure onboarding invite to a colleague or friend. They'll be set up with end-to-end encryption from day one.</value>
   </data>
   <data name="InviteUserToolStripMenuItemText" xml:space="preserve">
     <value>Invite a friend</value>
@@ -21311,6 +21374,9 @@ Enable automatic conversion of AxCrypt 1.x files (recommended)?</value>
   </data>
   <data name="MainSiteUrl" xml:space="preserve">
     <value>https://axcrypt.net/</value>
+  </data>
+  <data name="ManageAnonymousFiles" xml:space="preserve">
+    <value>Manage anonymous encrypted files</value>
   </data>
   <data name="ManageGroupAccessHeading" xml:space="preserve">
     <value>Manage Group Access</value>
@@ -23779,6 +23845,9 @@ To return to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
   <data name="OfflineInternetRequiredText" xml:space="preserve">
     <value>You’re offline. Disable Always Offline mode or connect to the internet to continue.</value>
   </data>
+  <data name="OfflineKeySharingPopup" xml:space="preserve">
+    <value>Offline key sharing</value>
+  </data>
   <data name="OfflineNoPremiumWarning" xml:space="preserve">
     <value>You're offline so we can't check your subscription plan. Please go online so we can update your status!</value>
   </data>
@@ -23832,6 +23901,9 @@ To return to the start page, click &lt;a href="{1}"&gt;here&lt;/a&gt;.</value>
   </data>
   <data name="OpenToolStripButtonToolTipText" xml:space="preserve">
     <value>Click to select a secured file to open.</value>
+  </data>
+  <data name="OpenToolText" xml:space="preserve">
+    <value>Open tool</value>
   </data>
   <data name="OpenWebPageForPurchaseRequest" xml:space="preserve">
     <value>Would you like us to open a web page where you can make a purchase?</value>
@@ -25011,6 +25083,9 @@ White space, and parts that are equal to common passwords are ignored and do not
   <data name="PrioritySupportTitle" xml:space="preserve">
     <value>Priority Support</value>
   </data>
+  <data name="PrivacyAnonymityTitle" xml:space="preserve">
+    <value>Privacy &amp; Anonymity</value>
+  </data>
   <data name="PrivacyPolicyBlock10Heading" xml:space="preserve">
     <value>Sharing information</value>
   </data>
@@ -25757,6 +25832,9 @@ HubSpot is an integrated software solution with which we cover various aspects o
   <data name="ProtectedEverywhereText" xml:space="preserve">
     <value>Protected everywhere.</value>
   </data>
+  <data name="ProtectFileIdentityPopup" xml:space="preserve">
+    <value>Protect file identity securely</value>
+  </data>
   <data name="PROText" xml:space="preserve">
     <value>PRO</value>
   </data>
@@ -26155,6 +26233,9 @@ Please &lt;a href="mailto:premium@axcrypt.net"&gt;contact us&lt;/a&gt; and we wi
   <data name="RenameDeleteOrDecryptFilesPopup" xml:space="preserve">
     <value>Rename, delete, or decrypt files</value>
   </data>
+  <data name="RenameFilesSecurelyPopup" xml:space="preserve">
+    <value>Rename files securely</value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>There is an active recurring subscription on this account. Recurring Business subscriptions do not have to be renewed manually.</value>
   </data>
@@ -26172,6 +26253,9 @@ Cloud Storage Awareness</value>
   </data>
   <data name="RenewSubscriptionTitle" xml:space="preserve">
     <value>Renew your subscription!</value>
+  </data>
+  <data name="ReportSnapshotDescription" xml:space="preserve">
+    <value>Open saved diagnostic reports for troubleshooting and support assistance.</value>
   </data>
   <data name="ReportSnapshotIntro" xml:space="preserve">
     <value>This is a snapshop report of detected errors in AxCrypt. Please copy all of this text and e-mail to:
@@ -26670,6 +26754,9 @@ Subject: AxCrypt Report Snapshot</value>
   <data name="ResourcesHeading" xml:space="preserve">
     <value>Resources</value>
   </data>
+  <data name="RestoreAnonymousNamesDescription" xml:space="preserve">
+    <value>Undo anonymous renaming and restore files to their original filenames using the stored rename map.</value>
+  </data>
   <data name="RestoreAnonymousNamesMenuText" xml:space="preserve">
     <value>Rename to original</value>
     <comment>Displayed as a menu or context menu choice, and is used to restore the original name for encrypted files that have been renamed either manually or by using the anonymous rename function.</comment>
@@ -26683,6 +26770,9 @@ Subject: AxCrypt Report Snapshot</value>
   </data>
   <data name="RestoreNowText" xml:space="preserve">
     <value>Restore now</value>
+  </data>
+  <data name="RestoreRenamePopup" xml:space="preserve">
+    <value>Restore original file names</value>
   </data>
   <data name="RestoreToOriginalToolTipText" xml:space="preserve">
     <value>Restore to original requires a paid subscription plan!.</value>
@@ -26928,6 +27018,9 @@ Subject: AxCrypt Report Snapshot</value>
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>AxCrypt Secure Delete</value>
+  </data>
+  <data name="SecureDeleteToolDescription" xml:space="preserve">
+    <value>Permanently wipe files with multi-pass overwriting. Makes recovery impossible even with forensic tools.</value>
   </data>
   <data name="SecureDeleteToolStripMenuItemText" xml:space="preserve">
     <value>Secure Delete</value>
@@ -27180,6 +27273,9 @@ Subject: AxCrypt Report Snapshot</value>
   </data>
   <data name="SecureKeySharingPopup" xml:space="preserve">
     <value>Secure key sharing</value>
+  </data>
+  <data name="SecureUserInvitesPopup" xml:space="preserve">
+    <value>Secure user invites</value>
   </data>
   <data name="SecurityBlock1Heading" xml:space="preserve">
     <value>Why is AxCrypt secure?</value>
@@ -27563,6 +27659,9 @@ Please consider informing '{0}' directly about AxCrypt file security.</value>
   <data name="ShareWithOthersTitle" xml:space="preserve">
     <value>Easy access to passwords</value>
     <comment>Title of "Share With Others" slide on Onboarding screen in mobile application.</comment>
+  </data>
+  <data name="SharingCollaborationTitle" xml:space="preserve">
+    <value>Sharing &amp; Collaboration</value>
   </data>
   <data name="SharingEncryptedText" xml:space="preserve">
     <value>Sharing AxCrypt Encrypted Text</value>
@@ -28572,9 +28671,6 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   <data name="TextPreferenceUpdate" xml:space="preserve">
     <value>Update - Get notified of all AxCrypt updates</value>
   </data>
-  <data name="Texts.CloudBrowserPageTips1" xml:space="preserve">
-    <value>+ Add files</value>
-  </data>
   <data name="TfaCodeGeneratedText" xml:space="preserve">
     <value>To finish signing in, enter the 6-digit verification code from the selected authentication method.</value>
   </data>
@@ -28669,6 +28765,9 @@ The AxCrypt Team</value>
   </data>
   <data name="TryAxcryptfree" xml:space="preserve">
     <value>Try AxCrypt for free</value>
+  </data>
+  <data name="TryBrokenFileDescription" xml:space="preserve">
+    <value>Attempt to recover and open damaged or partially corrupted encrypted files.</value>
   </data>
   <data name="TryBrokenFileToolStripMenuItemText" xml:space="preserve">
     <value>Try Broken File</value>
@@ -28907,6 +29006,9 @@ The AxCrypt Team</value>
   <data name="UnlockAdvancedFolderPopup" xml:space="preserve">
     <value>Unlock advanced folder protection</value>
   </data>
+  <data name="UnlockAdvancedPrivacyPopup" xml:space="preserve">
+    <value>Unlock advanced privacy features</value>
+  </data>
   <data name="UnlockFeatures" xml:space="preserve">
     <value>Unlock our &lt;span&gt;amazing&lt;/span&gt; &lt;span&gt;features!&lt;/span&gt; Upgrade to &lt;span&gt;Premium&lt;/span&gt; or &lt;b&gt;Business&lt;/b&gt;</value>
   </data>
@@ -28960,6 +29062,9 @@ The AxCrypt Team</value>
   </data>
   <data name="UpgradeFeatureText" xml:space="preserve">
     <value>Upgrade to access this &lt;strong&gt;feature!&lt;/strong&gt;</value>
+  </data>
+  <data name="UpgradeLegacyFilesDescription" xml:space="preserve">
+    <value>Scan and re-encrypt legacy AES-128 files to the stronger AES-256 standard with one click.</value>
   </data>
   <data name="UpgradeLegacyFilesMenuItemText" xml:space="preserve">
     <value>Upgrade files to AES-256</value>
@@ -29156,6 +29261,9 @@ The AxCrypt Team</value>
   </data>
   <data name="UserActivitiesText" xml:space="preserve">
     <value>User Activities</value>
+  </data>
+  <data name="UserActivityDescription" xml:space="preserve">
+    <value>View all file actions and history.</value>
   </data>
   <data name="UserActivityTitle" xml:space="preserve">
     <value>User Activity</value>
@@ -29493,7 +29601,7 @@ The AxCrypt Team</value>
   <data name="VaultSettingsTitle" xml:space="preserve">
     <value>Vault Settings</value>
   </data>
-  <data name="VaultStatusAuto-encryption" xml:space="preserve">
+  <data name="VaultStatusAutoEncryption" xml:space="preserve">
     <value>Auto-encryption is &lt;strong&gt;ON&lt;/strong&gt;</value>
   </data>
   <data name="VaultStatusPaidText" xml:space="preserve">
@@ -29540,6 +29648,9 @@ To complete your AxCrypt login enter the one-time passcode (OTP) in the authenti
   <data name="VerifyAccountLabel" xml:space="preserve">
     <value>Please verify your new account</value>
     <comment>Text displayed on Activation code page in mobile app.</comment>
+  </data>
+  <data name="VerifyFileDescription" xml:space="preserve">
+    <value>Verify whether a file is encrypted and authenticated by AxCrypt.</value>
   </data>
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>Check and Verify File</value>

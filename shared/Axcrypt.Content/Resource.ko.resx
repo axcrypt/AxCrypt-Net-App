@@ -232,6 +232,9 @@
   <data name="AboutPartnerSting" xml:space="preserve">
     <value>STING은 재능 있는 사람들이 지속 가능한 사업에 대한 그들의 생각을 바꿀 수 있도록 돕습니다.</value>
   </data>
+  <data name="AboutUsDescription" xml:space="preserve">
+    <value>앱 정보와 버전 정보.</value>
+  </data>
   <data name="AboutUsHistory2025Text" xml:space="preserve">
     <value>AxCrypt는 명확성과 사용 편의성을 위해 신선하게 설계된 새로운 인터페이스를 선보입니다. 성능 향상을 통해 앱은 모든 주요 운영체제에서 안정성, 보안 강화, 호환성을 제공했습니다. 보안 메신저, 텍스트 암호화, 금고 등 세 가지 신규 기능과 비밀번호 관리자의 향상된 기능들이 합쳐져 즉각적인 보호와 보안을 단순화한 통합 경험을 만들어냈습니다.</value>
   </data>
@@ -679,6 +682,9 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
     <value>활성화되는시 비활성화 될 때까지 인터넷 접속을 요구하지 않습니다.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
   </data>
+  <data name="AlwaysText" xml:space="preserve">
+    <value>항상.</value>
+  </data>
   <data name="AndMoreText" xml:space="preserve">
     <value>... 그리고 그 외</value>
   </data>
@@ -704,8 +710,14 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
   <data name="AnnualSubscriptionTitle" xml:space="preserve">
     <value>연간</value>
   </data>
+  <data name="AnonymousRenameDescription" xml:space="preserve">
+    <value>파일 이름만으로는 파일 내용을 숨기기 위해 원래 파일명을 임의 식별자로 대체하세요.</value>
+  </data>
   <data name="AnonymousRenameMenuDescription" xml:space="preserve">
     <value>도구 페이지를 이용해 파일 이름을 무작위 ID로 교체하세요 — 아무도 파일 이름만으로 내용을 추측할 수 없습니다.</value>
+  </data>
+  <data name="AnonymousRenameMenuPopup" xml:space="preserve">
+    <value>개인정보 보호를 위해 무작위 이름으로 파일 이름을 바꾸세요</value>
   </data>
   <data name="AnonymousRenameMenuText" xml:space="preserve">
     <value>익명 이름 다시 짓기</value>
@@ -16335,6 +16347,12 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>열린 파일 또는 새 파일들을 암호화하시려면 여기를 누르시기 바랍니다. 그러나 본파일이 이미 사용중이 아닌지를 확인 해주시기 바랍니다.</value>
   </data>
+  <data name="CloudBrowserPageTips" xml:space="preserve">
+    <value>팁: 폴더를 더블 클릭해서 열거나, 파일을 선택해 암호화/공유/열기.</value>
+  </data>
+  <data name="CloudBrowserPageTips1" xml:space="preserve">
+    <value>+ 파일 추가</value>
+  </data>
   <data name="CloudServicesConnectedText" xml:space="preserve">
     <value>연결</value>
   </data>
@@ -17045,18 +17063,33 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="DaysText" xml:space="preserve">
     <value>일</value>
   </data>
+  <data name="DebugCheckVersionNowDescription" xml:space="preserve">
+    <value>보안, 안정성, 성능을 향상시키기 위한 최신 AxCrypt 업데이트를 확인하세요.</value>
+  </data>
   <data name="DebugCheckVersionNowToolStripMenuItemText" xml:space="preserve">
     <value>현재 버전을 확인해보세요.</value>
   </data>
   <data name="DebugCryptoPolicyToolStripMenuItemText" xml:space="preserve">
     <value>라이센스 폴리시</value>
   </data>
+  <data name="DebugDiagnosticsToolStripMenuItemText" xml:space="preserve">
+    <value>디버그 및 진단</value>
+  </data>
+  <data name="DebugFileDescription" xml:space="preserve">
+    <value>파일의 암호화 상태와 AxCrypt와의 호환성을 분석하세요.</value>
+  </data>
   <data name="DebugFileFormatCheckToolStripMenuItemText" xml:space="preserve">
     <value>파일 확인</value>
     <comment>A debug menu item starting the AxCrypt File Format check function</comment>
   </data>
+  <data name="DebugLoggingDescription" xml:space="preserve">
+    <value>애플리케이션 로그를 확인하여 문제 진단과 문제 해결에 도움을 주세요.</value>
+  </data>
   <data name="DebugLoggingToolStripMenuItemText" xml:space="preserve">
     <value>로그인 중</value>
+  </data>
+  <data name="DebugManageAccountDescription" xml:space="preserve">
+    <value>암호화 테스트 시나리오를 실행하세요.</value>
   </data>
   <data name="DebugManageAccountSubTitle" xml:space="preserve">
     <value>프로필, 보안, 연락처 정보를 axcrypt.net 에서 업데이트하세요</value>
@@ -17069,6 +17102,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   </data>
   <data name="DebugModeTitle" xml:space="preserve">
     <value>디버그 모드</value>
+  </data>
+  <data name="DebugOptionsToolStripDescription" xml:space="preserve">
+    <value>임시 저장된 데이터를 제거하세요.</value>
   </data>
   <data name="DebugOptionsToolStripMenuItemText" xml:space="preserve">
     <value>옵션</value>
@@ -17284,6 +17320,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   </data>
   <data name="DiscountCodeTitle" xml:space="preserve">
     <value>할인 코드</value>
+  </data>
+  <data name="DiscoveryActivityText" xml:space="preserve">
+    <value>발견 및 활동</value>
   </data>
   <data name="DoMoreAxCryptSubscriptionContent1" xml:space="preserve">
     <value>AxCrypt는 교육자, 관리자 및 학생 간의 안전한 파일 공유를 가능하게 합니다. 암호화된 파일은 기관의 네트워크 내에서 또는 클라우드 스토리지를 통해 공유할 수 있습니다.</value>
@@ -17516,6 +17555,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="DutchLanguageSelection" xml:space="preserve">
     <value>네덜란드어(Dutch)</value>
     <comment>The name of the Dutch language for selection.</comment>
+  </data>
+  <data name="EasyEncryptedOnboardingPopup" xml:space="preserve">
+    <value>쉬운 암호화 온보딩</value>
   </data>
   <data name="EasyInstallationLabel" xml:space="preserve">
     <value>쉬운 설치와 사용</value>
@@ -17872,6 +17914,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="EncryptFilesBeforeUploadPopup" xml:space="preserve">
     <value>업로드 전에 파일 암호화</value>
   </data>
+  <data name="EncryptionManagementText" xml:space="preserve">
+    <value>암호화 관리</value>
+  </data>
   <data name="EncryptLabelText" xml:space="preserve">
     <value>암호화하다</value>
   </data>
@@ -17883,6 +17928,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   </data>
   <data name="EncryptUnlimitedText" xml:space="preserve">
     <value>무제한 텍스트 암호화</value>
+  </data>
+  <data name="EndToEndProtectionPopup" xml:space="preserve">
+    <value>종단 간 보호</value>
   </data>
   <data name="EnglishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>영어</value>
@@ -17970,11 +18018,17 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>성공적으로 내보내졌습니다!</value>
   </data>
+  <data name="ExportMyPrivateKeyDescription" xml:space="preserve">
+    <value>복구나 기기 이전을 위해 AxCrypt 신원과 공유 키를 안전하게 백업하거나 전송하세요.</value>
+  </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemText" xml:space="preserve">
     <value>AxCrypt ID 암호 키와 공유 키 수출</value>
   </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemToolTipText" xml:space="preserve">
     <value>AxCript ID를 옮기시고 싶으시면 비밀 키와 공유 키를 수출 한뒤 원하시는 위치에 옮기시면 됩니다.</value>
+  </data>
+  <data name="ExportSharingKeyDescription" xml:space="preserve">
+    <value>공개키를 공유해서 다른 사람들이 안전하게 암호화된 파일을 보낼 수 있도록 하세요.</value>
   </data>
   <data name="ExportSharingKeyToolStripMenuItemText" xml:space="preserve">
     <value>공유 공개 키를 수출</value>
@@ -18509,6 +18563,12 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="FileIsWriteProtectedWarning" xml:space="preserve">
     <value>'{0}' 는 보안되어 있다고 적혀있습니다.</value>
   </data>
+  <data name="FileListButtonText" xml:space="preserve">
+    <value>이 장치에서 파일 추가하기</value>
+  </data>
+  <data name="FileListSubTitle" xml:space="preserve">
+    <value>클라우드 계정에 파일을 올리거나 이 기기에서 업로드하세요.</value>
+  </data>
   <data name="FileNotFound" xml:space="preserve">
     <value>파일이 존재하지 않습니다.</value>
   </data>
@@ -18590,6 +18650,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   </data>
   <data name="FindEncryptedFilesQuicklyPopup" xml:space="preserve">
     <value>암호화된 파일을 빠르게 찾기</value>
+  </data>
+  <data name="FindFileFeatureDescription" xml:space="preserve">
+    <value>모든 암호화된 파일을 한 곳에서 스캔하고 찾아보세요.</value>
   </data>
   <data name="FindFileFeatureTitle" xml:space="preserve">
     <value>파일 찾기</value>
@@ -19693,6 +19756,9 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="helpcentercommunityText" xml:space="preserve">
     <value>&lt;br/&gt;에서 원하는 항목을 찾을 수 없습니다. &lt;span&gt; &lt;br/&gt; 지원에 문의하거나 &lt;br/&gt; 커뮤니티 포럼을 방문하십시오!&lt;/span&gt;</value>
   </data>
+  <data name="HelpCenterComponentDescription" xml:space="preserve">
+    <value>도움과 답변을 받으세요</value>
+  </data>
   <data name="helpcenterGuideContent1" xml:space="preserve">
     <value>다운로드하는 방법?</value>
   </data>
@@ -20118,8 +20184,14 @@ AxCrypt 개인 정보 보호 정책을 참조하십시오.</value>
   <data name="ImportPublicKeysFileSelectionTitle" xml:space="preserve">
     <value>공유 키 파일들을 선택해주십시오</value>
   </data>
+  <data name="ImportSomeonesPublicDescription" xml:space="preserve">
+    <value>신뢰할 수 있는 사용자의 공개키를 추가하여 암호화된 공유 파일에 안전하게 접근하세요.</value>
+  </data>
   <data name="ImportSomeonesPublicSharingKeyText" xml:space="preserve">
     <value>다른 사용자의 공개 공유 키 가져오기</value>
+  </data>
+  <data name="ImproveFilePrivacyPopup" xml:space="preserve">
+    <value>파일 프라이버시 개선</value>
   </data>
   <data name="ImproveOurServiceCommentText" xml:space="preserve">
     <value>서비스 향상을 위해 코멘트를 남겨주세요.</value>
@@ -20720,6 +20792,9 @@ AxCrypt 개인 정보 보호 정책을 참조하십시오.</value>
   <data name="Invite" xml:space="preserve">
     <value>초대할 사용자</value>
   </data>
+  <data name="InviteEmailSuccessfullyText" xml:space="preserve">
+    <value>초대장 발송됨 {0} 성공적으로!</value>
+  </data>
   <data name="InviteFriendAxCryptText" xml:space="preserve">
     <value>AxCrypt에 친구를 초대하세요!</value>
   </data>
@@ -20731,6 +20806,12 @@ AxCrypt 개인 정보 보호 정책을 참조하십시오.</value>
   </data>
   <data name="InviteUserPersonalizedMessageTitle" xml:space="preserve">
     <value>개인 메시지</value>
+  </data>
+  <data name="InviteUserToolPopup" xml:space="preserve">
+    <value>오프라인 키 공유 지원이 있는 동료나 친구에게 안전한 온보딩 초대장을 보내세요.</value>
+  </data>
+  <data name="InviteUserToolStripDescription" xml:space="preserve">
+    <value>동료나 친구에게 안전한 온보딩 초대장을 보내세요. 처음부터 종단 간 암호화로 설정될 것입니다.</value>
   </data>
   <data name="InviteUserToolStripMenuItemText" xml:space="preserve">
     <value>친구 초대하기</value>
@@ -21403,6 +21484,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   </data>
   <data name="MailGunPremiumSupportTitle" xml:space="preserve">
     <value>{{useremail}}이(가) 도움을 주길 원합니다...</value>
+  </data>
+  <data name="ManageAnonymousFiles" xml:space="preserve">
+    <value>익명 암호화 파일 관리</value>
   </data>
   <data name="ManageGroupAccessHeading" xml:space="preserve">
     <value>그룹 액세스 관리</value>
@@ -23543,11 +23627,50 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   <data name="NameOnCardPrompt" xml:space="preserve">
     <value>카드에 명시된 이름</value>
   </data>
+  <data name="NavigationPaneDescription" xml:space="preserve">
+    <value>여러분의 생각을 나눠주세요.</value>
+  </data>
   <data name="NavigationPaneFeedback" xml:space="preserve">
     <value>의견</value>
   </data>
   <data name="NavigationPaneHome" xml:space="preserve">
     <value>홈</value>
+  </data>
+  <data name="NavPageHelpCenterLinkLabel" xml:space="preserve">
+    <value>도움말 &amp;gt; 지원</value>
+  </data>
+  <data name="NavPageHelpCenterSubtitle" xml:space="preserve">
+    <value>FAQ를 둘러보거나, 지식 기반을 검색하거나, 피드백을 보내거나, 저희 지원팀에 연락하세요.</value>
+  </data>
+  <data name="NavPageHelpCenterTitle" xml:space="preserve">
+    <value>도움말 센터</value>
+  </data>
+  <data name="NavPagePasswordManagerSubtitle" xml:space="preserve">
+    <value>비밀번호를 저장하고, 강력한 비밀번호를 생성하며, 자동 채우기 기능을 모두 AES-256으로 보호합니다.</value>
+  </data>
+  <data name="NavPageSecuredFoldersSubtitle" xml:space="preserve">
+    <value>AxCrypt가 감시하는 폴더 — 입력하는 모든 것은 자동으로 암호화됩니다.</value>
+  </data>
+  <data name="NavPageSecuredMessengerSubtitle" xml:space="preserve">
+    <value>종단 간 암호화된 메시지를 보내세요 — 수신자만 읽을 수 있습니다.</value>
+  </data>
+  <data name="NavPageSubtitle" xml:space="preserve">
+    <value>암호화된 대시보드 — 최근 파일, 빠른 동작, 보안 상태를 한눈에 확인할 수 있습니다.</value>
+  </data>
+  <data name="NavPageTextEncryptionSubtitle" xml:space="preserve">
+    <value>텍스트를 붙여넣고 암호화한 뒤, 암호문을 어디든 안전하게 공유하세요.</value>
+  </data>
+  <data name="NavPageToolsLinkLabel" xml:space="preserve">
+    <value>도구</value>
+  </data>
+  <data name="NavPageToolsNotificationsSubtitle" xml:space="preserve">
+    <value>활동 알림, 공유 키 초대, 시스템 메시지가 한 곳에서 제공됩니다.</value>
+  </data>
+  <data name="NavPageToolsSubtitle" xml:space="preserve">
+    <value>보안 삭제, 익명 이름 변경, 파일 검증 및 기타 AxCrypt 유틸리티 기능들.</value>
+  </data>
+  <data name="NavPageVaultSubtitle" xml:space="preserve">
+    <value>파일을 자동으로 보호하고 신뢰할 수 있는 사람들과 안전하게 공유하는 사적인 암호화 공간입니다.</value>
   </data>
   <data name="NeedAnyHelpText" xml:space="preserve">
     <value>도움이 필요하신가요?</value>
@@ -23831,6 +23954,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   <data name="OfflineInternetRequiredText" xml:space="preserve">
     <value>당신은 오프라인입니다. 항상 오프라인 모드를 비활성화하거나 인터넷에 연결해서 계속 진행하세요.</value>
   </data>
+  <data name="OfflineKeySharingPopup" xml:space="preserve">
+    <value>오프라인 키 공유</value>
+  </data>
   <data name="OfflineNoPremiumWarning" xml:space="preserve">
     <value>오프라인 상태이므로 구독 상태를 확인할 수 없습니다. 사용자님의 상태를 업데이트 할 수 있도록 온라인 상태로 전환해주세요.</value>
   </data>
@@ -23884,6 +24010,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   </data>
   <data name="OpenToolStripButtonToolTipText" xml:space="preserve">
     <value>보안된 파일을 열기위해 클릭하십시오.</value>
+  </data>
+  <data name="OpenToolText" xml:space="preserve">
+    <value>오픈 툴</value>
   </data>
   <data name="OpenWebPageForPurchaseRequest" xml:space="preserve">
     <value>구매할 수 있는 웹 페이지를 여시겠습니까?</value>
@@ -24063,6 +24192,21 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   </data>
   <data name="PageNotFoundInfo" xml:space="preserve">
     <value>페이지를 찾을 수 없ㅅ브니다. 오류가 발생했거나, 페이지가 존재하지 않습니다.</value>
+  </data>
+  <data name="PagesHeadline" xml:space="preserve">
+    <value>암호화된 파일, 폴더, 유료 도구를 제한 없이 검색하고 열어보세요.</value>
+  </data>
+  <data name="PagesPrioritySupportPopup" xml:space="preserve">
+    <value>우선 지원과 더 강력한 제한</value>
+  </data>
+  <data name="PagesSearchAcrossPopup" xml:space="preserve">
+    <value>암호화된 모든 파일을 검색하세요</value>
+  </data>
+  <data name="PagesSearchOpenSecuredPopup" xml:space="preserve">
+    <value>검색에서 바로 보안 폴더를 열기</value>
+  </data>
+  <data name="PagesUnlockFindFilesPopup" xml:space="preserve">
+    <value>파일 찾기 및 기타 유료 도구 잠금 해제</value>
   </data>
   <data name="PaidSubscriptionNeededForMobileApp" xml:space="preserve">
     <value>AxCrypt의 모바일 버전을 사용하려면 구독 서비스가 필요합니다.</value>
@@ -25031,6 +25175,9 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   <data name="PrioritySupportTitle" xml:space="preserve">
     <value>Priority Support</value>
   </data>
+  <data name="PrivacyAnonymityTitle" xml:space="preserve">
+    <value>개인정보 보호 및 익명</value>
+  </data>
   <data name="PrivacyPolicyBlock10Heading" xml:space="preserve">
     <value>정보 공유하기</value>
   </data>
@@ -25774,6 +25921,12 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="PromptXecretsSecretText" xml:space="preserve">
     <value>비밀번호 또는 비밀</value>
   </data>
+  <data name="ProtectedEverywhereText" xml:space="preserve">
+    <value>어디서나 보호받고 있어.</value>
+  </data>
+  <data name="ProtectFileIdentityPopup" xml:space="preserve">
+    <value>파일 신원을 안전하게 보호하세요</value>
+  </data>
   <data name="PROText" xml:space="preserve">
     <value>프로</value>
   </data>
@@ -26170,6 +26323,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="RenameDeleteOrDecryptFilesPopup" xml:space="preserve">
     <value>파일 이름 변경, 삭제 또는 복호화</value>
   </data>
+  <data name="RenameFilesSecurelyPopup" xml:space="preserve">
+    <value>파일 이름 변경하기</value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>AxCrypt Business 구독 갱신할 시간입니다.</value>
   </data>
@@ -26187,6 +26343,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="RenewSubscriptionTitle" xml:space="preserve">
     <value>구독 갱신하기!</value>
+  </data>
+  <data name="ReportSnapshotDescription" xml:space="preserve">
+    <value>문제 해결과 지원 지원을 위해 저장된 진단 보고서를 열어보세요.</value>
   </data>
   <data name="ReportSnapshotIntro" xml:space="preserve">
     <value>AxCrypt에서 발생한 오류 보고서입니다. 아래와 같이 이메일 주소과 타이틀을 복사해서 작성해주세요.</value>
@@ -26676,6 +26835,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="ResourcesHeading" xml:space="preserve">
     <value>자원</value>
   </data>
+  <data name="RestoreAnonymousNamesDescription" xml:space="preserve">
+    <value>익명 이름 변경을 되돌리고 저장된 이름 변경 맵을 사용해 파일을 원래 파일명으로 복원하세요.</value>
+  </data>
   <data name="RestoreAnonymousNamesMenuText" xml:space="preserve">
     <value>원본으로 이름 변경</value>
     <comment>Displayed as a menu or context menu choice, and is used to restore the original name for encrypted files that have been renamed either manually or by using the anonymous rename function.</comment>
@@ -26689,6 +26851,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="RestoreNowText" xml:space="preserve">
     <value>지금 복원하세요</value>
+  </data>
+  <data name="RestoreRenamePopup" xml:space="preserve">
+    <value>원래 파일 이름 복원하기</value>
   </data>
   <data name="RestoreToOriginalToolTipText" xml:space="preserve">
     <value>원본으로 복원하려면 유료 구독 플랜이 필요합니다!.</value>
@@ -26916,6 +27081,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>AxCrypt 보안 삭제</value>
+  </data>
+  <data name="SecureDeleteToolDescription" xml:space="preserve">
+    <value>멀티패스 덮어쓰기로 파일을 영구 삭제하세요. 포렌식 도구를 써도 복구가 불가능해집니다.</value>
   </data>
   <data name="SecureDeleteToolStripMenuItemText" xml:space="preserve">
     <value>보안 삭제</value>
@@ -27168,6 +27336,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="SecureKeySharingPopup" xml:space="preserve">
     <value>보안 키 공유</value>
+  </data>
+  <data name="SecureUserInvitesPopup" xml:space="preserve">
+    <value>사용자 초대 보안</value>
   </data>
   <data name="SecurityBlock1Heading" xml:space="preserve">
     <value>AxCrypt이 왜 안전할까요?</value>
@@ -27468,6 +27639,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="ShareAsLinkActionText" xml:space="preserve">
     <value>링크로 공유하기</value>
   </data>
+  <data name="SharedByMeText" xml:space="preserve">
+    <value>나도 공유했다</value>
+  </data>
   <data name="SharedKeyUserListTitle" xml:space="preserve">
     <value>선택한 파일에 액세스 권한이 있는 모든 사용자 ({0})</value>
   </data>
@@ -27550,6 +27724,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
     <value>비밀번호에 쉽게 접근하기</value>
     <comment>Title of "Share With Others" slide on Onboarding screen in mobile application.</comment>
   </data>
+  <data name="SharingCollaborationTitle" xml:space="preserve">
+    <value>공유 및 협업</value>
+  </data>
   <data name="SharingEncryptedText" xml:space="preserve">
     <value>AxCrypt 암호화된 텍스트 공유</value>
   </data>
@@ -27587,6 +27764,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="SignInBeforePremiumMessage" xml:space="preserve">
     <value>먼저 로그인하세요!</value>
     <comment>A short message used in the sign in dialog, to explain that a user should sign in first and then purchase or try premium as appropriate.</comment>
+  </data>
+  <data name="SigningYouInText" xml:space="preserve">
+    <value>등록 중...</value>
   </data>
   <data name="SignInLinkLabel" xml:space="preserve">
     <value>사인업</value>
@@ -28360,6 +28540,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="TextCheckEmailAndSpam" xml:space="preserve">
     <value>이메일과 스팸메일을 확인하기!</value>
   </data>
+  <data name="TextEncryptionAccessEveryPopup" xml:space="preserve">
+    <value>앱 내 모든 페이지에 접근할 수 있습니다</value>
+  </data>
   <data name="TextEncryptionAdvancedProtectionFeatures" xml:space="preserve">
     <value>고급 보호 기능을 통해 텍스트를 안전하게 암호화하세요.</value>
   </data>
@@ -28519,6 +28702,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   <data name="TextEncryptionLinkLabel" xml:space="preserve">
     <value>텍스트 암호화</value>
   </data>
+  <data name="TextEncryptionPaidPlanPopup" xml:space="preserve">
+    <value>이 페이지는 유료 요금제의 일부입니다. 업그레이드하면 잠금 해제됩니다.</value>
+  </data>
   <data name="TextEncryptionSideMenuHead1" xml:space="preserve">
     <value>텍스트 암호화</value>
   </data>
@@ -28530,6 +28716,9 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="TextEncryptionText" xml:space="preserve">
     <value>기밀 평문을 안전하고 읽을 수 없는 형식으로 변환하세요.</value>
+  </data>
+  <data name="TextEncryptionWithoutLimitsPopup" xml:space="preserve">
+    <value>유료 기능을 제한 없이 잠금 해제하세요</value>
   </data>
   <data name="TextPreferenceCritical" xml:space="preserve">
     <value>알림 - AxCrypt 업데이트를 알려주기</value>
@@ -28630,6 +28819,9 @@ AxCrypt 팀</value>
   </data>
   <data name="TryAxcryptfree" xml:space="preserve">
     <value>AxCrypt를 무료로 사용해 보세요</value>
+  </data>
+  <data name="TryBrokenFileDescription" xml:space="preserve">
+    <value>손상되거나 부분적으로 손상된 암호화된 파일을 복구하고 열어보세요.</value>
   </data>
   <data name="TryBrokenFileToolStripMenuItemText" xml:space="preserve">
     <value>오류가 나는 파일로 시도해보세요</value>
@@ -28869,6 +29061,9 @@ AxCrypt 팀</value>
   <data name="UnlockAdvancedFolderPopup" xml:space="preserve">
     <value>고급 폴더 보호 해제</value>
   </data>
+  <data name="UnlockAdvancedPrivacyPopup" xml:space="preserve">
+    <value>고급 개인정보 보호 기능 잠금 해제</value>
+  </data>
   <data name="UnlockFeatures" xml:space="preserve">
     <value>우리의 놀라운 기능을 잠금 해제 하세요!프리미엄 또는 비즈니스 로 업그레이드</value>
   </data>
@@ -28922,6 +29117,9 @@ AxCrypt 팀</value>
   </data>
   <data name="UpgradeFeatureText" xml:space="preserve">
     <value>이 기능에 액세스하려면 업그레이드하세요 !</value>
+  </data>
+  <data name="UpgradeLegacyFilesDescription" xml:space="preserve">
+    <value>한 번의 클릭으로 더 강력한 AES-256 표준으로 레거시 AES-128 파일을 스캔하고 재암호화할 수 있습니다.</value>
   </data>
   <data name="UpgradeLegacyFilesMenuItemText" xml:space="preserve">
     <value>1.x 파일 및 AES-128 파일 업그레이드</value>
@@ -29118,6 +29316,9 @@ AxCrypt 팀</value>
   </data>
   <data name="UserActivitiesText" xml:space="preserve">
     <value>사용자 활동</value>
+  </data>
+  <data name="UserActivityDescription" xml:space="preserve">
+    <value>모든 파일 작업 및 이력을 확인하세요.</value>
   </data>
   <data name="UserActivityTitle" xml:space="preserve">
     <value>사용자 활동</value>
@@ -29455,7 +29656,7 @@ AxCrypt 팀</value>
   <data name="VaultSettingsTitle" xml:space="preserve">
     <value>볼트 설정</value>
   </data>
-  <data name="VaultStatusAuto-encryption" xml:space="preserve">
+  <data name="VaultStatusAutoEncryption" xml:space="preserve">
     <value>자동 암호화는 켜 져 있습니다</value>
   </data>
   <data name="VaultStatusPaidText" xml:space="preserve">
@@ -29503,11 +29704,29 @@ AxCrypt 로그인을 완료하려면 인증 창에 일회용 암호(OTP)를 입�
     <value>사용자님의 새로운 계정을 인증해주세요</value>
     <comment>Text displayed on Activation code page in mobile app.</comment>
   </data>
+  <data name="VerifyFileDescription" xml:space="preserve">
+    <value>파일이 AxCrypt에 의해 암호화되고 인증되었는지 확인하세요.</value>
+  </data>
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>파일 체크 및 확인</value>
   </data>
+  <data name="VerifyMFABrandSubTitle" xml:space="preserve">
+    <value>파일, 비밀번호, 개인 메시지는 강력한 암호화로 안전하게 보호하며, 공유, 동기화, 클라우드에 저장되기 전에 미리 처리합니다.</value>
+  </data>
+  <data name="VerifyMFAOffline" xml:space="preserve">
+    <value>온라인 과 오프라인 작업</value>
+  </data>
+  <data name="VerifyMFASecureCloudStorage" xml:space="preserve">
+    <value>안전한 클라우드 저장 및 간단한 공유</value>
+  </data>
   <data name="VerifyMfaText" xml:space="preserve">
     <value>다단계 검증</value>
+  </data>
+  <data name="VerifyMFAWhyAxCryptLabel" xml:space="preserve">
+    <value>AES-256 장치 암호화</value>
+  </data>
+  <data name="VerifyMFAWorksAcrossDevices" xml:space="preserve">
+    <value>기기 간 작동</value>
   </data>
   <data name="VerifyPasswordPrompt" xml:space="preserve">
     <value>비밀번호를 확인해 주시기 바랍니다.</value>
@@ -29950,6 +30169,9 @@ AxCrypt사용은 매우 쉽습니다. 매인 윈도우 창으로 시작하거나
   </data>
   <data name="YourEmailText" xml:space="preserve">
     <value>이메일</value>
+  </data>
+  <data name="YourFilesText" xml:space="preserve">
+    <value>네 파일.</value>
   </data>
   <data name="YourPasswordText" xml:space="preserve">
     <value>비밀번호:</value>
