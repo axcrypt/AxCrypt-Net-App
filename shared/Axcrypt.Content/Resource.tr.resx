@@ -461,6 +461,9 @@ Tahmin edilmesi zor bir tane seç çünkü bu hem siteye erişimi sağlar hem de
   <data name="AddEmailPromptText" xml:space="preserve">
     <value>E-posta ekle</value>
   </data>
+  <data name="AddExtraPrivacyProtectionPopup" xml:space="preserve">
+    <value>Ekstra gizlilik koruması ekleyin</value>
+  </data>
   <data name="AddFileLabel" xml:space="preserve">
     <value>AxCrypt dosyasını aç</value>
     <comment>Tooltip for "AddFile" button in mobile application</comment>
@@ -529,6 +532,27 @@ Tahmin edilmesi zor bir tane seç çünkü bu hem siteye erişimi sağlar hem de
   </data>
   <data name="AdminLabel" xml:space="preserve">
     <value>Yönetici</value>
+  </data>
+  <data name="AdvancedDebugWarningText" xml:space="preserve">
+    <value>Ayıklama günlükleri dosya yollarını içerebilir. Gizliliğinizi korumak için aktif olarak sorun çıkarmadığınızda devre dışı bırakın.</value>
+  </data>
+  <data name="AdvancedDiagnosticsText" xml:space="preserve">
+    <value>Tanı ve İzleme</value>
+  </data>
+  <data name="AdvancedEncryptionAlgorithms" xml:space="preserve">
+    <value>Gelişmiş şifreleme algoritmaları</value>
+  </data>
+  <data name="AdvancedFooterHintText" xml:space="preserve">
+    <value>Değişiklikler hemen yürürlüğe girer</value>
+  </data>
+  <data name="AdvancedOptionsConfiguration" xml:space="preserve">
+    <value>Yapılandırma</value>
+  </data>
+  <data name="AdvancedOptionsSubTitle" xml:space="preserve">
+    <value>Uygulama yapılandırması, tanılama ve izleme kontrolleri</value>
+  </data>
+  <data name="AdvancedOptionsTitle" xml:space="preserve">
+    <value>Gelişmiş Seçenekler</value>
   </data>
   <data name="AdvancedSettingsText" xml:space="preserve">
     <value>Gelişmiş ayarlar</value>
@@ -674,6 +698,9 @@ Lütfen aynı şifreyi kullanarak oturum aç.</value>
     <value>Devredeyken internet erişimi gerekli değildir ve kullanılmaz, devredışı edilene kadar.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
   </data>
+  <data name="AlwaysText" xml:space="preserve">
+    <value>Her zaman.</value>
+  </data>
   <data name="AndMoreText" xml:space="preserve">
     <value>... ve daha fazlası</value>
   </data>
@@ -695,6 +722,12 @@ Lütfen aynı şifreyi kullanarak oturum aç.</value>
   <data name="AnnualSubscriptionTitle" xml:space="preserve">
     <value>Yıllık</value>
   </data>
+  <data name="AnonymousRenameDescription" xml:space="preserve">
+    <value>Orijinal dosya adlarını rastgele tanımlayıcılarla değiştirerek dosya içeriğini sadece dosya adından gizleyin.</value>
+  </data>
+  <data name="AnonymousRenameMenuPopup" xml:space="preserve">
+    <value>Gizliliğinizi korumak için dosyaları rastgele isimlerle yeniden adlandırın</value>
+  </data>
   <data name="AnonymousRenameMenuText" xml:space="preserve">
     <value>Anonim yeni isimlendirme</value>
   </data>
@@ -709,6 +742,9 @@ Lütfen aynı şifreyi kullanarak oturum aç.</value>
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
     <value>AxCrypt Kimliği Onayı [ {0} ]</value>
+  </data>
+  <data name="AppConfigurationDescription" xml:space="preserve">
+    <value>Veri yolları, önbellek konumu ve sıfırlama varsayılanları</value>
   </data>
   <data name="AppConfigurationText" xml:space="preserve">
     <value>Uygulama yapılandırması</value>
@@ -820,6 +856,9 @@ Aboneliklere  yapılan güncellemeler buraya bir kaç dakika içinde yansıtıla
   <data name="AutoDeletionMailSubject" xml:space="preserve">
     <value>AxCrypt kimliğin yakında silinecektir!</value>
   </data>
+  <data name="AutolockOnInactivityPopup" xml:space="preserve">
+    <value>Hareketsizlikte otomatik kilitleme</value>
+  </data>
   <data name="AutomatedMessageText" xml:space="preserve">
     <value>Bu otomatik bir mesajdır. Lütfen bu e-postaya doğrudan yanıt vermeyin.</value>
   </data>
@@ -828,6 +867,15 @@ Aboneliklere  yapılan güncellemeler buraya bir kaç dakika içinde yansıtıla
   </data>
   <data name="AutomaticFileUpdatingText" xml:space="preserve">
     <value>Dosyaları, açıp güncelledikten sonra otomatik olarak güvence altına alma</value>
+  </data>
+  <data name="AutoUpgradeFilesAES256" xml:space="preserve">
+    <value>Dosyaları AES-256'ya otomatik yükseltme</value>
+  </data>
+  <data name="AvailablePremiumBusinessPlans" xml:space="preserve">
+    <value>Premium ve İş planlarında mevcuttur.</value>
+  </data>
+  <data name="AvoidVisibleEncryptionPopup" xml:space="preserve">
+    <value>Görünür şifreleme zaman damgası değişikliklerinden kaçının</value>
   </data>
   <data name="AwardsLabel" xml:space="preserve">
     <value>Ödüller</value>
@@ -1571,6 +1619,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
     <value>AxCrypt güvenlik sayfasını inceleyin: &lt;a href='/information/security/'&gt;&lt;b&gt;Why is AxCrypt secure? | Algorithms&lt;/b&gt;&lt;/a&gt;.
 </value>
   </data>
+  <data name="BackgroundEncryptionMigrationPopup" xml:space="preserve">
+    <value>Arka plan şifreleme göçü</value>
+  </data>
   <data name="BacktoAxCryptIDText" xml:space="preserve">
     <value>&lt;span&gt;AxCrypt Kimliğe&lt;/span&gt; geri dön</value>
   </data>
@@ -1586,6 +1637,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="BadEmail" xml:space="preserve">
     <value>Yanlış e-posta adresi</value>
     <comment>Displayed when email address format validation fails.</comment>
+  </data>
+  <data name="BatchEncryptMultiplePopup" xml:space="preserve">
+    <value>Birden fazla dosyayı aynı anda toplu şifrele</value>
   </data>
   <data name="BecomeanAffiliateText" xml:space="preserve">
     <value>Satış Ortağı Olun</value>
@@ -2509,6 +2563,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="Blog_AFEWACLT_Conclusion_Text3" xml:space="preserve">
     <value>&lt;b&gt;Start automating file encryption with AxCrypt today.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_AFEWACLT_H1_Text1" xml:space="preserve">
+    <value> &lt;b&gt;command-line tool&lt;/b&gt;, grafik arayüz (UI) yerine basit komutlar yazarak dosyaları şifrelemek gibi görevleri gerçekleştirmenize olanak tanır.</value>
   </data>
   <data name="Blog_AFEWACLT_H1_Text2" xml:space="preserve">
     <value>Bunu şöyle düşünün:</value>
@@ -6008,6 +6065,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="Blog_EYNTKAAPCA_H1_Text42" xml:space="preserve">
     <value>&lt;b&gt;4: Deepfake Cyber Threats and the Story of  the 35$ Million Voice:&lt;/b&gt;</value>
   </data>
+  <data name="Blog_EYNTKAAPCA_H1_Text43" xml:space="preserve">
+    <value>&lt;b&gt;Artificial intelligence in cybercrime&lt;/b&gt;, 'Ağzına kelimeler koymak' metaforunu gerçekten hayata geçirdi.</value>
+  </data>
   <data name="Blog_EYNTKAAPCA_H1_Text44" xml:space="preserve">
     <value>Evet. Bu saldırganların ihtiyacı olan tek şey, sesinizin veya videonuzun 3 saniyelik bir kaydı. Üretken yapay zekaya aktarıldığında, kelimenin tam anlamıyla senin her şeyini taklit eder. Şimdi saldırganın yapması gereken tek şey bir senaryo geliştirmek.</value>
   </data>
@@ -8198,6 +8258,15 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="Blog_HTEAPDFWA_Conclusion_Text1" xml:space="preserve">
     <value>Veri güvenliği, daha fazla güvenlik aracı veya özel şifreleme için karmaşık betik eklemekle ilgili değildir.</value>
   </data>
+  <data name="Blog_HTEAPDFWA_Conclusion_Text10" xml:space="preserve">
+    <value>AxCrypt Linux için mevcut!</value>
+  </data>
+  <data name="Blog_HTEAPDFWA_Conclusion_Text11" xml:space="preserve">
+    <value>&lt;a href='https://axcrypt.net/download/'&gt;Download for Linux&lt;/a&gt;!</value>
+  </data>
+  <data name="Blog_HTEAPDFWA_Conclusion_Text12" xml:space="preserve">
+    <value>Siber güvenlik ve veri yönetimi içerikleriyle güncel kalmak için sosyal medya platformumuzda bizi takip edin!</value>
+  </data>
   <data name="Blog_HTEAPDFWA_Conclusion_Text2" xml:space="preserve">
     <value>Doğru olanları doğru şekilde kullanmakla ilgili.</value>
   </data>
@@ -8221,6 +8290,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="Blog_HTEAPDFWA_Conclusion_Text9" xml:space="preserve">
     <value>&lt;a href='https://axcrypt.net/business/'&gt;Click here to begin your process&lt;/a&gt;!</value>
+  </data>
+  <data name="Blog_HTEAPDFWA_H1_Text1" xml:space="preserve">
+    <value>Güvenlik biraz karmaşık hissetmeye başladığı anda, insanlar planı bırakır ya da tembel çözümlere veya tam güvenlik sağlamayan alternatiflere başvurur.</value>
   </data>
   <data name="Blog_HTEAPDFWA_H1_Text10" xml:space="preserve">
     <value>&lt;li&gt;Right-click and click on Secure.&lt;/li&gt;</value>
@@ -8252,8 +8324,14 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="Blog_HTEAPDFWA_H1_Text19" xml:space="preserve">
     <value>&lt;li&gt;Click ‘Stop Securing'.&lt;/li&gt;</value>
   </data>
+  <data name="Blog_HTEAPDFWA_H1_Text2" xml:space="preserve">
+    <value>Dropbox 256-bit şifreleme kullanıyor, ancak günümüzün gelişen tehdit ortamı göz önüne alındığında dikkatli olmak şart. AxCrypt, şifreleme ve veri güvenliğini basitleştirerek, verileri saniyeler içinde güvence altına alan güçlü ve kullanıcı dostu bir araç sunar. AxCrypt kullanarak Dropbox dosyalarını nasıl güvence altına alabileceğinize bakalım.</value>
+  </data>
   <data name="Blog_HTEAPDFWA_H1_Text20" xml:space="preserve">
     <value>&lt;li&gt;Your files are now decrypted permanently.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_HTEAPDFWA_H1_Text21" xml:space="preserve">
+    <value>&lt;b&gt;Please note:&lt;/b&gt; Ayrıca sağ alttaki eylem menüsünü kullanarak güvenli durabilirsiniz.</value>
   </data>
   <data name="Blog_HTEAPDFWA_H1_Text22" xml:space="preserve">
     <value>&lt;b&gt;2. Open Secured - this temporarily decrypts the file.&lt;/b&gt;</value>
@@ -8264,6 +8342,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="Blog_HTEAPDFWA_H1_Text24" xml:space="preserve">
     <value>&lt;li&gt;Click on Open Secure.&lt;/li&gt;</value>
   </data>
+  <data name="Blog_HTEAPDFWA_H1_Text25" xml:space="preserve">
+    <value>&lt;b&gt;Please note:&lt;/b&gt; Bu eylemi eylem menüsünden de gerçekleştirebilirsiniz. Dosyalarınız şifreli ve güvenli kalır, çalışırken kısa bir süre açılır ve çıkışta tekrar şifreler.</value>
+  </data>
   <data name="Blog_HTEAPDFWA_H1_Text26" xml:space="preserve">
     <value>Bir dosyayı AxCrypt ile şifrelemeden önce Dropbox üzerinden paylaştıysanız, şifrelemenin ne zaman ve nasıl uygulandığını anlamak aracın kendisi kadar önemlidir. Diyelim ki Dropbox üzerinden önemli bir dosya gönderdiniz ve şifrelenmemişti. Alıcının dosyaları görmesini veya indirmesini istemezsiniz, ancak iyi haber şu: şifreleyebilirsiniz, ama dermen.</value>
   </data>
@@ -8272,6 +8353,15 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="Blog_HTEAPDFWA_H1_Text28" xml:space="preserve">
     <value>&lt;table border='1' cellpadding='8' cellspacing='0'&gt;&lt;tr&gt;&lt;th&gt;Feature&lt;/th&gt;&lt;th&gt;Dropbox&lt;/th&gt;&lt;th&gt;AxCrypt&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Encryption Type&lt;/td&gt;&lt;td&gt;At rest&lt;/td&gt;&lt;td&gt;End-to-end, in-transit, at use, and at rest.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Key Ownership&lt;/td&gt;&lt;td&gt;Platform-controlled&lt;/td&gt;&lt;td&gt;User-controlled&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Data Visibility&lt;/td&gt;&lt;td&gt;Accessible under conditions&lt;/td&gt;&lt;td&gt;Fully private&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Security Control&lt;/td&gt;&lt;td&gt;Limited&lt;/td&gt;&lt;td&gt;Complete and layered protection with 2FA&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</value>
+  </data>
+  <data name="Blog_HTEAPDFWA_H1_Text3" xml:space="preserve">
+    <value>Ancak Dropbox dosyaları için AxCrypt güvenliğini kullanmaya başlamadan önce, önce hesabınızı doğrulamalı ve bulut depolama platformuna erişmek ve etkileşime girmek için AxCrypt'e yeterli izinler vermelisiniz. Bu izinleri verdikten sonra, uygulama kayıtlı Dropbox hesabında saklanan dosyalarınızı güvenli bir şekilde açar, şifreler, şifre çözer ve yönetir.</value>
+  </data>
+  <data name="Blog_HTEAPDFWA_H1_Text4" xml:space="preserve">
+    <value>AxCrypt verilerinizi asla saklamaz; sadece şifrelenmiş dosyalar işlenir.</value>
+  </data>
+  <data name="Blog_HTEAPDFWA_H1_Text5" xml:space="preserve">
+    <value>&lt;b&gt;Two ways to secure Dropbox files using AxCrypt:&lt;/b&gt;</value>
   </data>
   <data name="Blog_HTEAPDFWA_H1_Text6" xml:space="preserve">
     <value>&lt;b&gt;1. Right-Click Encryption:&lt;/b&gt;</value>
@@ -8321,6 +8411,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="Blog_HTEAPDFWA_H2_Text9" xml:space="preserve">
     <value>Bulut güvenliği ve bulut veri şifreleme hakkında daha fazla bilgiyi Kaynaklar ve Rehberler sayfamızda bulabilirsiniz. Çünkü Dropbox bulut depolamasını AxCrypt ile korursanız, erişim ele geçirilse bile verileriniz ele geçirilmez.</value>
   </data>
+  <data name="Blog_HTEAPDFWA_H3_Text1" xml:space="preserve">
+    <value>Bir bakışta, dosya güvenliği önemsiz bir teknik görev gibi görünebilir.  Ama gerçekte, bu birkaç tutarlı alışkanlığa dayanıyor.</value>
+  </data>
   <data name="Blog_HTEAPDFWA_H3_Text10" xml:space="preserve">
     <value>Şifreleri ve doğrulama bağlantılarını unutmaya yer yok, hatta güvenilir e-posta kimliklerine gönderilen kodları bile unutamaz.</value>
   </data>
@@ -8329,6 +8422,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="Blog_HTEAPDFWA_H3_Text12" xml:space="preserve">
     <value>Bu biraz sert gelse de, şifrelemeyi güvenilir ve güvenilir kılan şey tam da budur ve sadece doğru anahtarlar verilerin kilidini açabilir, istisna yoktur, ne olursa olsun.</value>
+  </data>
+  <data name="Blog_HTEAPDFWA_H3_Text2" xml:space="preserve">
+    <value>Bu blogdan alabileceğiniz en büyük öğrenme, şifrelemenin doğru şekilde nasıl kullanabileceğinizden daha az güçlü olduğudur.</value>
   </data>
   <data name="Blog_HTEAPDFWA_H3_Text3" xml:space="preserve">
     <value>Dropbox dosyaları için AxCrypt güvenliğini kullandığınızda güçlü bir avantajdan yararlanıyorsunuz, ancak küçük hatalarla doğru şekilde nasıl uygulanacağını bilmiyorsanız veri sızıntısı veya kaybı riski oluşabilir.</value>
@@ -8849,6 +8945,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="Blog_HTSGDDWA_H2_Text3" xml:space="preserve">
     <value>Verileri şifrelemek ve şifrelemek için tek bir paylaşılan gizli anahtar kullanır; bu da büyük dosyaların, veritabanlarının ve tam disk şifrelemesinin güvenliği için oldukça verimli hale gelir. Yüksek seviyeli güvenlik için endüstri standardı olarak kabul edilir.</value>
+  </data>
+  <data name="Blog_HTSGDDWA_H2_Text4" xml:space="preserve">
+    <value>AxCrypt'in Google Drive dosyaları için şifreleme aracı, katmanlı korumaya sahip altın standart, kırılmaz bir algoritma kullanıyor. Hassas dosyaları şifrelemek için karmaşık koda veya BT uzmanına ihtiyacınız yok, sadece bir bilgisayar ve bir fare, neredeyse her şeyi sağ tıklayıp şifreleyebiliyorsunuz.</value>
   </data>
   <data name="Blog_HTSGDDWA_H2_Text5" xml:space="preserve">
     <value>Daha da iyi!</value>
@@ -9897,6 +9996,216 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="Blog_ITESBETFC_Title" xml:space="preserve">
     <value>Eğitim Sektörü Siber Saldırılar için kolay bir hedef haline mi geliyor?</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Heading" xml:space="preserve">
+    <value>Verileriniz bir ihlalin dikkatsiz bir tık uzağında,</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text1" xml:space="preserve">
+    <value>Şimdi düzelt!</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text2" xml:space="preserve">
+    <value>Gerçek konuşmak: İşiniz konusunda ciddi düşünüyorsanız ve Linux ile diğer tüm cihazlarda iş verilerini korumakta ciddi bir adım.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text3" xml:space="preserve">
+    <value>&lt;li&gt;Encrypt any unencrypted files or sensitive information that you think could be used against you in a ransomware attack. &lt;a href='https://account.axcrypt.net/en/Home/Login?Signup=True'&gt;Start your AxCrypt Free trial from here.&lt;/a&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text4" xml:space="preserve">
+    <value>&lt;li&gt;If you haven’t maximised the use of AxCrypt in your data security practices and want to learn more, check out &lt;a href='https://axcrypt.net/helpcenter/'&gt;Our Guides in Our Resources.&lt;/a&gt;&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Conclusion_Text5" xml:space="preserve">
+    <value>&lt;li&gt;&lt;a href='https://axcrypt.net/blog/'&gt;Pick your next read and stay updated&lt;/a&gt; with the current Cybersecurity Trends with AxCrypt.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text1" xml:space="preserve">
+    <value>Yüksek güvenlikli alanlarda çalışan kullanıcıların, Android'de şifreli dosyaları nasıl göreceklerini veya iş istasyonlarında .axx dosyalarını (AxCrypt Şifreli Dosyalar) nasıl yöneteceklerini bilmeleri gerekir. AxCrypt Windows 11 veya Linux için AxCrypt kullanılarak da veri sızdırımını önlemeye yönelik güvenlik kesintisiz olmalıdır.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text10" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Once you have encrypted the file, you can see that it is saved with the .axx file extension.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text12" xml:space="preserve">
+    <value>&lt;b&gt;3. Automating your encryption with AxCrypt’s Vault Feature:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text13" xml:space="preserve">
+    <value>Artık Linux'ta dosyaları korumaya başlayabilirsin, hiçbirini kaçırmadan başlayabilirsin.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text14" xml:space="preserve">
+    <value>&lt;b&gt;Here is how you can configure the AxCrypt Vault.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text15" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;All you have to do is log in to the application &gt; click on settings &gt; advanced settings &gt; and then Vault Settings.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text16" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Choose where you want the Vault to reside, and then confirm your selection.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text17" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;This is optional, but if you are really, REALLY serious about your privacy, then randomise the Vault for an additional layer of privacy.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text18" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;If you have nested files and folders, then be sure to select “Include Subfolders”.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text19" xml:space="preserve">
+    <value>Yapılandırıldıktan sonra, eklenen dosyalar otomatik olarak Vault'a taşınır ve şifrelenir, böylece gizli Linux dosyaları korunur.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text2" xml:space="preserve">
+    <value>Güvenli bir sistemde, şifreli dosyaları şifresiz açmanın cevabı olmamalı, güçlü şifreleme tam olarak bunu önlemek için tasarlanmıştır.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text20" xml:space="preserve">
+    <value>&lt;b&gt;How to Add Files to the AxCrypt Vault:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text21" xml:space="preserve">
+    <value>Eylem menüsünü kullanmak:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text27" xml:space="preserve">
+    <value>&lt;b&gt;4. Secure Files on the Cloud with AxCrypt for Linux with Cloud Security:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text28" xml:space="preserve">
+    <value>Ekipler, serbest çalışanlar ve merkezi olmayan kuruluşlar için, bu Linux Server Güvenliği, özellikle bulutla çalışırken verilerinizi güvence altına almak için tam ihtiyacınız olan şeydir.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text29" xml:space="preserve">
+    <value>&lt;b&gt;Here is how you can Secure Cloud Storage on Linux with AxCrypt:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text3" xml:space="preserve">
+    <value>Linux sunucu güvenliği için şifreleme en güçlü ilk savunmanızdır. İç belgeleri veya müşteri verilerini yönetiyorsanız, dosyaların güvenliği çok önemlidir—özellikle bir ihlali yıkıcı olabilecek KOBİ'ler için. BitLocker veya FileVault'un aksine, birçok ekip belirli klasörleri koruyan ve Linux iş akışlarıyla birlikte çalışan özel, çapraz platform şifreleme gerektirir.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text30" xml:space="preserve">
+    <value>&lt;b&gt;Method A:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text31" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Encrypt Existing Cloud Files&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text32" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Open AxCrypt and select your cloud provider&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text33" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Choose the file you want to protect&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text34" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Click the action menu (3 dots) → Select Secure&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text35" xml:space="preserve">
+    <value>&lt;b&gt;Method B:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text36" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Upload &amp; Encrypt Simultaneously&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text37" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Click the “+” button in the app&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text38" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Select the file to upload&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text39" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Open it to encrypt&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Let’s take a look at how to work with AxCrypt for Linux:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text41" xml:space="preserve">
+    <value>&lt;b&gt;5. Share Files Securely with Key Sharing:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text42" xml:space="preserve">
+    <value>Küçük işletmeler için Linux veri güvenliğine odaklanan işletmeler için bu yükseltme, geleneksel dosya paylaşım yöntemlerinin ötesine geçiyor.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text43" xml:space="preserve">
+    <value>&lt;b&gt;How to Share Files Securely Using Key Sharing&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text44" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Encrypt your file using AxCrypt&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text45" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Right-click the file → Click Share Keys&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text47" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Click Apply&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text48" xml:space="preserve">
+    <value>Bittiğinde:</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text49" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;The recipient gets access to decrypt the file&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text5" xml:space="preserve">
+    <value>&lt;b&gt;1. Installation:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text50" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;You still need to send the file separately via email, the cloud, or a secure channel. This file will still be secure with the 256 Bit encryption algorithm.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text51" xml:space="preserve">
+    <value>Bu iş akışı, Linux ve dağıtık ekiplerde uzak dosyaların güvenliği için gereklidir; böylece güvenlik dosyalarınızla birlikte taşınabilir, nereye taşınabilir veya dinlenebilir.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text7" xml:space="preserve">
+    <value>&lt;b&gt;2. Encrypting &amp; decrypting files on AxCrypt for Linux:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Once you have successfully created an account with AxCrypt for Linux and logged into the application, to encrypt your files, you must click on the ‘Secure' button present in the action menu.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H1_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;This will now redirect you to the file selection window, where you can choose a file you want to encrypt.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text1" xml:space="preserve">
+    <value>Linux Server Güvenliği, 2026'da KOBİ'ler için her zamankinden daha kritik hale geliyor çünkü Linux'un bulut/sunucu kurulumlarında artan kullanımı nedeniyle. Web tabanlı bilgisayarların %75'ini çalıştırıyor ve onları birincil hedef haline getiriyor.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text2" xml:space="preserve">
+    <value>Linux Sunucularında dosyaları korumaya veya Linux sunucu güvenliğini iyileştirmeyi hedefleyen KOBİ'ler için zorluk önleme değil, sistemleri geleceğe hazırlıklı hale getirmek ve istismarların önünde kalmaktır. Saldırganlar boşlukları ve arka kapıları bilir. Bu nedenle, Linux Dosya Şifreleme ve Linux'ta dosya şifreleme her zamankinden daha hayati hale geldi.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text3" xml:space="preserve">
+    <value>Saldırı penceresi ise kusurları tespit etmek ve düzeltmek arasındadır. Bu dönemde Linux'ta hassas dosyaların güvenliğini sağlamak çok önemlidir. Commandline Linux ve Linux Security'nin 2025'te istismar edilen güvenlik açıklarıyla ilgili bulgularını inceledik ve modern Linux şifreleme yazılımı AxCrypt gibi araçların küçük işletmelerde dosya şifreleme için neden kritik olduğunu vurguladık.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Vulnerabilities identified and being actively exploited.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text1" xml:space="preserve">
+    <value>KOB'ler artık birincil hedefler. Bir kaçırılan yama veya bir oltalama SSH anahtarı saldırganlara sistemlerinizi devredebilir. Hassas verileri varsayılan olarak şifreleyin ve belirgin boşlukları hızlıca kapatın.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text2" xml:space="preserve">
+    <value>Tepki düzeltmelerinden proaktif güvenliğe geçin: hızlı yamalayın, güçlü kimlik bilgilerini uygulayın, sürekli izleyin ve üçüncü taraf riskini azaltın.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H4_Text3" xml:space="preserve">
+    <value>Güvenlik, temel bir iş fonksiyonudur; geliri, güveni ve uyumu korur. Bugünden başlayın: dosyaları şifreleyin, erişimi güçlendirin ve güvenliği herkesin işi olarak kabul edin.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading1" xml:space="preserve">
+    <value>Linux için AxCrypt: Linux sunucu güvenliği ve Linux sunucularında dosyaların güvenliği ve güvenli paylaşımı hakkında adım adım rehber</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading2" xml:space="preserve">
+    <value>Linux sunucu güvenliği, 2026'da Küçük ve Orta Ölçekli İşletmeler için neden her zamankinden daha önemli?</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Heading4" xml:space="preserve">
+    <value>Son Çıkarımlar ve Eylem Planı</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Summary" xml:space="preserve">
+    <value>2026 başlarında gelişmiş yapay zeka siber saldırıları Linux sunucularını ve uç noktalarını hedef aldı. Bu artış, KOBİ'ler, büyük şirketler ve bireyler arasında güvenlik uzmanlarını endişelendiriyor; çünkü veri hırsızlığı olağan BT sorunlarının ötesinde pahalı etkilere yol açıyor.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text1" xml:space="preserve">
+    <value>&lt;b&gt;Introduction&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text10" xml:space="preserve">
+    <value>Bu bulgular sadece bir şeyi gösteriyor: siber tehditler artık teoride yok ve öngörülü bir şey değil. Aktif, kalıcı ve bu makaleyi okurken zaten oluyor.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text2" xml:space="preserve">
+    <value>Linux, modern iş altyapılarını güçlendirir: bulut, sunucular, konteynerler ve IoT. KOB'ler için performans ve maliyet açısından en iyi seçimdir. Küçük işletmeler için Linux veri güvenliği artık ana iş yüklerinin Linux'a geçmesi nedeniyle bir pano önceliği haline geldi. Linux kullanımının start-up'larda, barındırmada ve daha fazlasında artmasıyla, KOBİ'ler için Linux Siber Güvenliği artık vazgeçilmez hale geldi. 2026'da küçük işletmeler için Linux veri güvenliğinde temel bir ihtiyaç bu.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text3" xml:space="preserve">
+    <value>2026 başlarında gelişmiş yapay zeka siber saldırıları Linux sunucularını ve uç noktalarını hedef aldı. Bu artış, KOBİ'ler, büyük şirketler ve bireyler arasında güvenlik uzmanlarını endişelendiriyor; çünkü veri hırsızlığı olağan BT sorunlarının ötesinde pahalı etkilere yol açıyor.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text4" xml:space="preserve">
+    <value>&lt;b&gt;Here are some key findings from &lt;a href='https://commandlinux.com/'&gt;Commandline Linux:&lt;/a&gt;&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text5" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;The risk is not a hypothetical or theoretical one. With thousands of vulnerabilities (CVEs) reported every year and 8–9 new ones emerging daily, waiting to be exploited, the attack surface is constantly expanding.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Small and medium-sized businesses face high exposure due to limited security resources, while larger organisations, with far more critical data, face amplified risk.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text7" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Nearly 89% of brute-force attacks and attempts start with basic access points like SSH.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;32% of ransomware attacks exploit known vulnerabilities, meaning delayed patching directly translates to risk.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Nearly 46% of organisations report losing customers or revenue after a security incident.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_Title" xml:space="preserve">
+    <value>2026'da Küçük İşletmeler İçin Linux Veri Güvenliği: Linux Dosya Şifreleme ve En İyi Uygulamalar İçin Kısa Bir Rehber</value>
   </data>
   <data name="Blog_LYCWAR_Summary" xml:space="preserve">
     <value>AxCrypt 2'yi kullandığınızda, önce "oturum açmanız" gerekir - ilk seferden sonra, bu sadece parolanızı girmek anlamına gelir. Bu, AxCrypt parola tabanlı bir dosya şifreleme uygulaması olduğu için anlam ifade eder.</value>
@@ -11154,6 +11463,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="Blog_TBGTEFAF_Conclusion_Text3" xml:space="preserve">
     <value>Eğer 2026'da hedefleriniz verileri güvence altına almak ve dijital güvenliği sıkılaştırmaksa, sohbet edelim!</value>
   </data>
+  <data name="Blog_TBGTEFAF_Conclusion_Text4" xml:space="preserve">
+    <value>Ücretsiz denemenizi &lt;a href='https://account.axcrypt.net/en/Home/Login?Signup=True'&gt;here&lt;/a&gt; başlatabilirsiniz.</value>
+  </data>
   <data name="Blog_TBGTEFAF_H1_Text1" xml:space="preserve">
     <value>Şifreleme 'güzel eklenti'den 'MUTLAKA OLMALI'ya dönüştü.</value>
   </data>
@@ -11207,6 +11519,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="Blog_TBGTEFAF_H1_Text9" xml:space="preserve">
     <value>&lt;b&gt;We are talking about:&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_TBGTEFAF_H2_Text1" xml:space="preserve">
+    <value>Gururla 'BitLocker benim ihtiyacım olan her şey' gibi şeyler söyleyebileceğimiz günler geride kaldı. Ya &lt;b&gt;‘We password-protect files, folders, and drives.&lt;/b&gt;</value>
   </data>
   <data name="Blog_TBGTEFAF_H2_Text2" xml:space="preserve">
     <value>Gerçek şu ki...</value>
@@ -11952,6 +12267,120 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="Blog_UODPCH_Title" xml:space="preserve">
     <value>Zararlı olduğu düşünülen farklı parolaların kullanılması</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Heading" xml:space="preserve">
+    <value>Harekete geçme zamanı şimdi AxCrypt ile</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text1" xml:space="preserve">
+    <value>2026'da dijital tehditler gelişti ve veri altından daha değerli oldu.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text2" xml:space="preserve">
+    <value>Şifrelemeyi geciktirmeyin veya zor ya da pahalı olduğunu düşünmeyin. AxCrypt Free'den AxCrypt'e gibi şifreleme çözümleriyle birlikte gelir ve herkes için tasarlanmışız.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text3" xml:space="preserve">
+    <value>Şifreleme konusunda yeni olun, ister Windows 11, Linux veya Mac'te birkaç dosyayı güvence altına almak istiyor olun, size yardımcı oluyoruz.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text4" xml:space="preserve">
+    <value>Verilerinizin risk altındaki %48'e katılmasına izin vermeyin.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text5" xml:space="preserve">
+    <value>Geleceğini güvence altına al.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text10" xml:space="preserve">
+    <value>Aktif olarak Windows 11 kullanıyorsanız ve ekibinizin verilerini ve iş akışını korumak için ücretsiz dosya şifreleme yazılımı veya işletmeler için sağlam şifreleme arıyorsanız, AxCrypt 2026 tehdit ortamı için kesin çözümünüzdür.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text11" xml:space="preserve">
+    <value>Bulut veri güvenliği hakkında bilgi ve çözümler için daha fazlasını buradan okuyabilirsiniz.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text2" xml:space="preserve">
+    <value>Bir diğer endişe noktası ise, güvenli dosya paylaşımının yavaş yavaş yayıldığı ve bulut dosya paylaşım hizmetleri ile uzaktan erişim yollarının ayrı giriş noktaları haline gelmesi. Ve sonuçta, tek bir yanlış yapılandırma veya çalınan bir kimlik bilgileri grubu, saldırganın şirket verilerine doğrudan erişmesi için bir kapı olabilir.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text4" xml:space="preserve">
+    <value>&lt;b&gt;So, how do you secure cloud storage and minimise cloud security risks?&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text5" xml:space="preserve">
+    <value>'Ofis'in iyi internetin olduğu yerde, bulut veri güvenliğinin tehlikeye giremeyeceği ve kahve molalarının mutfağınızda olduğu bir çağda, AxCrypt çoğu modern ekibin hâlâ ulaşmaya çalıştığı güvenli bulut depolama ortamını sunuyor.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text6" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Zero-effort cloud encryption: Be it Google Drive, OneDrive, or even Dropbox, AxCrypt seamlessly integrates itself to minimise friction and maximise secure cloud storage, leaving no unencrypted files on the cloud for anyone to access. If you are looking at something that works seamlessly with the cloud, with local files and one that works smoothly and seamlessly across all major OS, then AxCrypt is the app to encrypt files that works at the speed of business.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text7" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Built for all: Whether you are working on Windows and you want the AxCrypt Windows 11, or the AxCrypt for Linux or even macOS, AxCrypt works without a hiccup on all these OS and even on your mobile, helping you find all your answers to how to view encrypted files on Android.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text8" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Mitigating cloud security risks: Implementing AxCrypt Free or Premium organisation-wide removes shadow IT and credential theft risks. If attackers access a cloud folder, AES-256-bit encryption protects its contents.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text9" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Empowering secure file sharing: AxCrypt enables team members to share files with their own passwords, simplifying cloud security best practices. It offers the most efficient way to encrypt files in the cloud, without the administrative burden of traditional key management.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text1" xml:space="preserve">
+    <value>Sınırsız bir iş gücüne geçiş, hız ile güvenlik arasında bir seçim yapmaya zorlamamalıdır. Şifrelenmemiş dosyaların bulutta kalmasının başlıca nedenlerinden biri, geleneksel güvenlik ve şifrelemenin yarattığı sürtüşmedir.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text2" xml:space="preserve">
+    <value>Bugünün gelişen tehdit ortamı güvenliği zorlaştırıyor, ancak bu sonradan düşünülen ya da göz ardı edilemeyecek.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text3" xml:space="preserve">
+    <value>Yapay zeka kaynaklı siber saldırılar ve diğer ciddi veri riskleri arttıkça, çalışanlar genellikle çözümler bularak %48'lik farkı ihlallere dönüştürüyor. Amaç ayrıntılıdır: dosya şifreleme görünmez ama güçlü olmalıdır.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text4" xml:space="preserve">
+    <value>İşletmeler, özellikle ayrıntılı düzeyde veri şifrelemesine ihtiyaç duyar. Dosyaları ve klasörleri güvence altına almakla kalmaz, aynı zamanda ekibinize tam güven ve güvenle her yerde çalışmasını sağlarsınız. AxCrypt, bu güveni şirketler için dosya düzeyinde güvenlik yoluyla sağlıyor; bu güven sağlam bir sistem.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text5" xml:space="preserve">
+    <value>Gerçek veri ihlali önleme, katı kısıtlamalardan değil, hücresel düzeyde stratejik, akıllı veri korumasından kaynaklanır. Otomatik olarak çalışır, yani unutsanız bile verileriniz korunur.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H2_Text6" xml:space="preserve">
+    <value>Tüm şifreleme sürecinizi otomatikleştirmek isteyin, ister dosyaları anında şifrelemek için basit bir uygulamaya ihtiyacınız olsun, AxCrypt sıfır bilgi güvenliğimizle verimlilikinizin korunmasını ve gizliliğinizin korunmasını sağlar.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Heading1" xml:space="preserve">
+    <value>Bulut Dosya Şifrelemesi Veri İhlali Riskini Nasıl En Aza Düşürür?</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Heading2" xml:space="preserve">
+    <value>Verimlilikten Ödün Vermeden Uzaktan İş Gücünün Güvence Altına Alınması</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Summary" xml:space="preserve">
+    <value>Daha fazla iş akışı buluta kaydıkça ve uzak, merkeziyetsiz organizasyonlar arttıkça, ihlaller bekleniyor ve saldırı yüzeyi genişliyor.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text1" xml:space="preserve">
+    <value>&lt;b&gt;Introduction&lt;b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text11" xml:space="preserve">
+    <value>&lt;b&gt;3.&lt;/b&gt; Bulut riski artıyor: veri ihlallerinin yaklaşık %45'i bulutta gerçekleşir ve sunucular birincil hedefler olarak kalır.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text12" xml:space="preserve">
+    <value>&lt;b&gt;4.&lt;/b&gt; Güvenliğe daha fazla odaklanılmasına rağmen, büyük bir boşluk devam ediyor: İşletmelerin %48'i hâlâ hem şifrelenmiş hem de şifrelenmemiş verileri bulutta saklıyor, bu durum genellikle BYOD uygulamaları ve kolaylaştırıcı dosya paylaşımı nedeniyle daha da kötüleşiyor.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text13" xml:space="preserve">
+    <value>&lt;b&gt;So here is the core problem, and that is 48% of businesses still store unencrypted files on the cloud, and this dangerous gap continues to persist and widen.&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text14" xml:space="preserve">
+    <value>&lt;b&gt;But why?&lt;/b&gt;</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text15" xml:space="preserve">
+    <value>Bu boşluklar tam olarak bulutta şifrelenmemiş dosyalar olduğunda ortaya çıkıyor ve şifreleme, bulut sağlama, anahtar yönetimi veya erişim kontrolü gibi günlük uygulamalar yerine kağıt üzerinde bir politika haline geldiğinde daha da genişliyor. Bu boşluk ve bulut güvenlik riskleri, bulut benimseme veri yönetiminden daha hızlı ilerlediğinde de artıyor.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text16" xml:space="preserve">
+    <value>Bulut veri güvenliğine öncelik veren işletmelerin yaklaşık %83'ü var. Peki ya geri kalanlar?</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text17" xml:space="preserve">
+    <value>Bu boşluk var ve işte varlığının başlıca nedenleri:</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text2" xml:space="preserve">
+    <value>Daha fazla iş akışı buluta kaydıkça ve uzak, merkeziyetsiz organizasyonlar arttıkça, ihlaller bekleniyor ve saldırı yüzeyi genişliyor.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text3" xml:space="preserve">
+    <value>2026 yılına gelindiğinde, çalışanların yaklaşık %98'i uzaktan çalışma seçenekleri arayacak ve iş gücünün yaklaşık %27'si tamamen uzaktan çalışmayı hedefliyor. Kaynaklar, hibrit iş gücünün artık profesyonel ortamda hakim olduğunu ve yaklaşık %52'sinin iş-yaşam dengesini iyileştirmeyi hedeflediğini iddia ediyor. Teknoloji çalışanlarının neredeyse %89'u hibrit ve uzaktan çalışmayı benimsemektedir.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text4" xml:space="preserve">
+    <value>Uzaktan ve hibrit çalışma pratik ve uygulanabilir görünse de, birçok tehdit taşıyor.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text5" xml:space="preserve">
+    <value>Bulutta şifrelenmemiş dosyalar - en düşük asılan meyve.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text6" xml:space="preserve">
+    <value>Bugün bile çoğu çalışan ve profesyonel, temel bulut veri güvenliğinin işe yaraması gerektiğine inanıyor. Ama gerçekte, bu tüm risklere açılan kapıdır. Tehdit alanı sürekli geliştiği ve yapay zeka destekli siber saldırılar ile kullanıma hazır kötü amaçlı yazılımlarla kolayca aşılması mümkün olduğu için. Temel bulut veri güvenliğini veya ayrıcalık temelli boşlukları atlayıp tüm verilerinize sahip olmak için çok yetenekli bir hacker gerekmez.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Title" xml:space="preserve">
+    <value>Neden işletmelerin %48'i hâlâ şifrelenmemiş dosyaları bulutta saklıyor ve AxCrypt bunu nasıl düzeltiyor?</value>
   </data>
   <data name="Blog_WAMHIHY_Conclusion_Heading" xml:space="preserve">
     <value>Yatırım yapmadan ödeme alın!</value>
@@ -13656,8 +14085,14 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="Blog_WITHDEPYD_H3_Text17" xml:space="preserve">
     <value>&lt;li style='margin-left:30px;'&gt;On the AxCrypt app homepage, click your cloud storage provider.&lt;/li&gt;</value>
   </data>
+  <data name="Blog_WITHDEPYD_H3_Text18" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;A file selection pop-up will show your cloud files.&lt;/li&gt;</value>
+  </data>
   <data name="Blog_WITHDEPYD_H3_Text2" xml:space="preserve">
     <value>&lt;li style='margin-left:30px;'&gt;&lt;a href='https://axcrypt.net/download/'&gt;Download the applicaiton, sign up, and verify yourself if your are new user.&lt;/li&gt;</value>
+  </data>
+  <data name="Blog_WITHDEPYD_H3_Text20" xml:space="preserve">
+    <value>&lt;li style='margin-left:30px;'&gt;Click the Action Menu (3 dots) at the pop-up's bottom right.&lt;/li&gt;</value>
   </data>
   <data name="Blog_WITHDEPYD_H3_Text21" xml:space="preserve">
     <value>&lt;li style='margin-left:30px;'&gt;Click Secure; your file encrypts with an .axx extension.&lt;/li&gt;</value>
@@ -13697,6 +14132,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="Blog_WITHDEPYD_Heading1" xml:space="preserve">
     <value>Typosquatting nedir?</value>
+  </data>
+  <data name="Blog_WITHDEPYD_Heading2" xml:space="preserve">
+    <value>Hassas Verileri Depolamak ve Korumak İçin Daha Akıllıca Bir Yöntem</value>
   </data>
   <data name="Blog_WITHDEPYD_Heading3" xml:space="preserve">
     <value>Şifreleme hassas verileri nasıl korur - Hem bulut hem de yerel (AxCrypt ile)</value>
@@ -14795,6 +15233,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="BrandToneLabel" xml:space="preserve">
     <value>Marka yaklaşımı</value>
   </data>
+  <data name="BrowseFilesText" xml:space="preserve">
+    <value>Dosyalara göz atma</value>
+  </data>
   <data name="BrowseText" xml:space="preserve">
     <value>Gözat</value>
   </data>
@@ -14803,6 +15244,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="BruteForceResistantText" xml:space="preserve">
     <value>Dinamik kaba kuvvet önlemi, yinelemeli şifre paketleme saldırıları daha da zor hale getirir.</value>
+  </data>
+  <data name="BulkActionText" xml:space="preserve">
+    <value>Toplu aksiyon</value>
   </data>
   <data name="BusinessAcceptInvitationText" xml:space="preserve">
     <value>Daveti Kabul Et</value>
@@ -14980,6 +15424,9 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   <data name="BusinessProductKeyList10" xml:space="preserve">
     <value>Hassas dosyaları yeniden adlandırarak kritik verileri maskeleyin.</value>
   </data>
+  <data name="BusinessProductKeyList11" xml:space="preserve">
+    <value>Sıfır bilgi modeli: sunucularımızda veri depolanmaz, arka kapılar yoktur.</value>
+  </data>
   <data name="BusinessProductKeyList12" xml:space="preserve">
     <value>Sıfır güven ortamında güvenli anahtar paylaşımı.</value>
   </data>
@@ -15039,6 +15486,12 @@ Uyarıldın, şimdi uygulamanın tadını çıkarma zamanı!</value>
   </data>
   <data name="BusinessProductKeyParagraph5" xml:space="preserve">
     <value>Dosyaların ötesinde hassas iş verilerini koruyun, mesajları, anahtarları, kodları ve kritik metinleri anında Metin Şifreleme ile şifreleyin; böylece güvenli iş birliği sağlanır.</value>
+  </data>
+  <data name="BusinessProductKeyParagraph6" xml:space="preserve">
+    <value>Windows, Mac, Linux, Android ve iOS'ta hassas dosyaları anında şifreleyin. Artık karmaşık şifreleme yok.</value>
+  </data>
+  <data name="BusinessProductKeyParagraph7" xml:space="preserve">
+    <value>Sorunsuz iş birliği yapın ve yetkili ekip üyelerine e-posta yoluyla erişim izni verin. Ekiplerle sürtünmesiz iş birliği.</value>
   </data>
   <data name="BusinessProductKeyParagraph8" xml:space="preserve">
     <value>Organizasyonel Verimli Operasyonlar için Merkezi Anahtar Yönetimi. Tam Kontrol ve sıfır sarı leke.</value>
@@ -15723,6 +16176,48 @@ Bundan sonra &lt;b&gt;{0}&lt;/b&gt; ve var olan şifreni kullanarak oturum açab
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>Şifrelenmiş klasörlerdeki açık olan veya yeni dosyaları şifrelemek için tıkla, ama önce kullanılmadıklarından emin ol.</value>
   </data>
+  <data name="CloudBrowserPageTips" xml:space="preserve">
+    <value>İpucu: bir klasörü açmak için çift tıklayın veya şifrelemek / paylaşmak / açmak için dosyaları seçin.</value>
+  </data>
+  <data name="CloudBrowserPageTips1" xml:space="preserve">
+    <value>+ Dosya ekle</value>
+  </data>
+  <data name="CloudServicesConnectedText" xml:space="preserve">
+    <value>Bağlantılı</value>
+  </data>
+  <data name="CloudServicesConnectText" xml:space="preserve">
+    <value>Bağlantı</value>
+  </data>
+  <data name="CloudServicesDisconnectText" xml:space="preserve">
+    <value>Ayırmak</value>
+  </data>
+  <data name="CloudServicesDropBoxHelpText" xml:space="preserve">
+    <value>Dosyaları Dropbox'ta şifreli tutun — anahtarı sadece sizde tutuyorsunuz.</value>
+  </data>
+  <data name="CloudServicesFooter" xml:space="preserve">
+    <value>İpucu: aynı anda birden fazla sağlayıcıya oturum açarak kalabilirsiniz.</value>
+  </data>
+  <data name="CloudServicesGoogleDriveHelpText" xml:space="preserve">
+    <value>Dosyaları Google Drive'a yüklemeden önce şifreleyin.</value>
+  </data>
+  <data name="CloudServicesLocalHelpText" xml:space="preserve">
+    <value>Bu cihazdaki dosyaları gezin.</value>
+  </data>
+  <data name="CloudServicesLocalHelpText1" xml:space="preserve">
+    <value>Bu sağlayıcıda şifrelenmiş dosyaları yönetmek için bağlanın.</value>
+  </data>
+  <data name="CloudServicesManageFilesText" xml:space="preserve">
+    <value>Dosyaları Yönet</value>
+  </data>
+  <data name="CloudServicesNotConnectedText" xml:space="preserve">
+    <value>Bağlantılı değil</value>
+  </data>
+  <data name="CloudServicesOneDriveHelpText" xml:space="preserve">
+    <value>Şifrelenmiş dosyaları içeriği açığa çıkarmadan OneDrive'a gönderin.</value>
+  </data>
+  <data name="CloudServicesPhoneBrowserHelpText" xml:space="preserve">
+    <value>Telefonunuzda saklanan dosyaları açın ve şifrenizi çözün.</value>
+  </data>
   <data name="CloudServicesText" xml:space="preserve">
     <value>Bulut hizmetleri</value>
   </data>
@@ -16336,21 +16831,48 @@ Geçici oturum çerezlerimizi kabul etmediğin halde oturum açamazsın ve site 
   <data name="DaysText" xml:space="preserve">
     <value>Günler</value>
   </data>
+  <data name="DebugCheckVersionNowDescription" xml:space="preserve">
+    <value>Güvenliği, istikrarı ve performansı artırmak için en son AxCrypt güncellemelerini kontrol edin.</value>
+  </data>
   <data name="DebugCheckVersionNowToolStripMenuItemText" xml:space="preserve">
     <value>Şimdi Sürümü Denetle</value>
   </data>
   <data name="DebugCryptoPolicyToolStripMenuItemText" xml:space="preserve">
     <value>Lisans Politikası</value>
   </data>
+  <data name="DebugDiagnosticsToolStripMenuItemText" xml:space="preserve">
+    <value>Hata Hata Düzeltme ve Tanı</value>
+  </data>
+  <data name="DebugFileDescription" xml:space="preserve">
+    <value>Bir dosyanın şifreleme durumunu ve AxCrypt ile uyumluluğunu analiz edin.</value>
+  </data>
   <data name="DebugFileFormatCheckToolStripMenuItemText" xml:space="preserve">
     <value>Dosyayı Kontrol Et</value>
     <comment>A debug menu item starting the AxCrypt File Format check function</comment>
   </data>
+  <data name="DebugLoggingDescription" xml:space="preserve">
+    <value>Sorunları teşhis etmek ve sorunları çözmek için uygulama kayıtlarını inceleyin.</value>
+  </data>
   <data name="DebugLoggingToolStripMenuItemText" xml:space="preserve">
     <value>Günlük oluşturma</value>
   </data>
+  <data name="DebugManageAccountDescription" xml:space="preserve">
+    <value>Şifreleme test senaryoları çalıştırın.</value>
+  </data>
+  <data name="DebugManageAccountSubTitle" xml:space="preserve">
+    <value>Profil, güvenlik ve iletişim bilgilerini güncelleyin axcrypt.net</value>
+  </data>
   <data name="DebugManageAccountToolStripMenuItemText" xml:space="preserve">
     <value>AxCrypt ID'nizi Yönetin</value>
+  </data>
+  <data name="DebugModeDescription" xml:space="preserve">
+    <value>Sorunları teşhis etmek için ayrıntılı hata kayıtları yazın</value>
+  </data>
+  <data name="DebugModeTitle" xml:space="preserve">
+    <value>Ayıklama Modu</value>
+  </data>
+  <data name="DebugOptionsToolStripDescription" xml:space="preserve">
+    <value>Geçici depolanmış verileri kaldırın.</value>
   </data>
   <data name="DebugOptionsToolStripMenuItemText" xml:space="preserve">
     <value>Seçenekler</value>
@@ -16568,6 +17090,9 @@ Yollarımızın ayrılmasına üzülsek de AxCrypt'te geçirdiğin zamandan keyi
   </data>
   <data name="DiscountCodeTitle" xml:space="preserve">
     <value>İndirim Kodu</value>
+  </data>
+  <data name="DiscoveryActivityText" xml:space="preserve">
+    <value>Keşif ve Faaliyet</value>
   </data>
   <data name="DoMoreAxCryptSubscriptionContent1" xml:space="preserve">
     <value>AxCrypt eğitimciler, yöneticiler ve öğrenciler arasında güvenli dosya paylaşımını mümkün kılar. Şifrelenmiş dosyalar kurum ağı içinde veya bulut depolama yoluyla paylaşılabilir.</value>
@@ -16791,6 +17316,9 @@ Yollarımızın ayrılmasına üzülsek de AxCrypt'te geçirdiğin zamandan keyi
   <data name="DutchLanguageSelection" xml:space="preserve">
     <value>Hollanda (Hollandaca)</value>
     <comment>The name of the Dutch language for selection.</comment>
+  </data>
+  <data name="EasyEncryptedOnboardingPopup" xml:space="preserve">
+    <value>Kolay şifreli işe alım</value>
   </data>
   <data name="EasyInstallationLabel" xml:space="preserve">
     <value>Kolay kurulum ve kullanım </value>
@@ -17139,8 +17667,14 @@ Yollarımızın ayrılmasına üzülsek de AxCrypt'te geçirdiğin zamandan keyi
   <data name="EncryptFileOpenDialogTitle" xml:space="preserve">
     <value>Korunacak dosyaları seç</value>
   </data>
+  <data name="EncryptFilesAllSubFoldersPopup" xml:space="preserve">
+    <value>Tüm alt klasörlerde dosyaları şifreleyin</value>
+  </data>
   <data name="EncryptFileSaveAsDialogTitle" xml:space="preserve">
     <value>Dosya Mevcut, Farklı Kaydet</value>
+  </data>
+  <data name="EncryptFilesBeforeUploadPopup" xml:space="preserve">
+    <value>Dosyaları yüklemeden önce şifrele</value>
   </data>
   <data name="EncryptLabelText" xml:space="preserve">
     <value>Şifreleme</value>
@@ -17150,6 +17684,12 @@ Yollarımızın ayrılmasına üzülsek de AxCrypt'te geçirdiğin zamandan keyi
   </data>
   <data name="EncryptToolStripMenuItemText" xml:space="preserve">
     <value>Koruma altına al</value>
+  </data>
+  <data name="EncryptUnlimitedText" xml:space="preserve">
+    <value>Sınırsız metin şifrele</value>
+  </data>
+  <data name="EndToEndProtectionPopup" xml:space="preserve">
+    <value>Uçtan uca koruma</value>
   </data>
   <data name="EnglishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>İngilizce</value>
@@ -17217,6 +17757,9 @@ Yollarımızın ayrılmasına üzülsek de AxCrypt'te geçirdiğin zamandan keyi
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>Çıkış</value>
   </data>
+  <data name="ExitToolSubTitle" xml:space="preserve">
+    <value>AxCrypt uygulamasını kapatın</value>
+  </data>
   <data name="ExpirationDatePrompt" xml:space="preserve">
     <value>Sona erme tarihi</value>
   </data>
@@ -17233,17 +17776,26 @@ Yollarımızın ayrılmasına üzülsek de AxCrypt'te geçirdiğin zamandan keyi
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Başarıyla ihraç edildi!</value>
   </data>
+  <data name="ExportMyPrivateKeyDescription" xml:space="preserve">
+    <value>AxCrypt kimliğinizi ve paylaşım anahtarlarınızı kurtarma veya cihaz taşınması için güvenli bir şekilde yedek veya aktarın.</value>
+  </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemText" xml:space="preserve">
     <value>AxCrypt kimliği Gizli ve Paylaşım anahtarı çiftini yolla</value>
   </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemToolTipText" xml:space="preserve">
     <value>Bir AxCrypt kimliğinin yerini değiştirmek için Gizli ve Paylaşım Anahtarı çiftini başka bir yere indir.</value>
   </data>
+  <data name="ExportSharingKeyDescription" xml:space="preserve">
+    <value>Açık anahtarınızı paylaşın ki başkaları size şifreli dosyaları güvenli bir şekilde gönderebilsin.</value>
+  </data>
   <data name="ExportSharingKeyToolStripMenuItemText" xml:space="preserve">
     <value>Ortak paylaşım anahtarımı paylaş</value>
   </data>
   <data name="ExportSharingKeyToolStripMenuItemToolTipText" xml:space="preserve">
     <value>Verilmiş Ortak Paylaşım Anahtarını seninle dosya paylaşımı yapabilmesini istediğin kişilere yolla</value>
+  </data>
+  <data name="ExtraPrivacyProtectionPopup" xml:space="preserve">
+    <value>Ekstra gizlilik koruması</value>
   </data>
   <data name="FailedAddFolderNotification" xml:space="preserve">
     <value>Klasör(ler) eklemek başarısız oldu! {0}</value>
@@ -17771,6 +18323,12 @@ href='https://account.axcrypt.net/en/Home/Login'&gt;AxCrypt ID'm&lt;/a&gt; adres
   <data name="FileIsWriteProtectedWarning" xml:space="preserve">
     <value>'{0}' yazı korumalıdır.</value>
   </data>
+  <data name="FileListButtonText" xml:space="preserve">
+    <value>Bu cihazdan dosya ekle</value>
+  </data>
+  <data name="FileListSubTitle" xml:space="preserve">
+    <value>Bulut hesabınıza bir dosya bırakın veya bu cihazdan bir dosya yükleyin.</value>
+  </data>
   <data name="FileNotFound" xml:space="preserve">
     <value>Öyle bir dosya bulunmamıştır.</value>
   </data>
@@ -17791,9 +18349,24 @@ href='https://account.axcrypt.net/en/Home/Login'&gt;AxCrypt ID'm&lt;/a&gt; adres
     <value>Değiştirilme Tarihi</value>
     <comment>A menu text for selecting file properties - date modified for encryption.</comment>
   </data>
+  <data name="FilePropertiesDescription" xml:space="preserve">
+    <value>Şifrelemeden sonra bile orijinal dosya değiştirilme tarihini değiştirmeden kalın.</value>
+  </data>
   <data name="FilePropertiesFileNameToolStripMenuItem" xml:space="preserve">
     <value>Dosya Adı</value>
     <comment>A menu text for selecting file properties - file name for encryption.</comment>
+  </data>
+  <data name="FilePropertiesOriginalFileNameDescription" xml:space="preserve">
+    <value>Şifreleme sırasında orijinal dosya isimlerini güvenli rastgele isimlerle değiştirerek gizleyin.</value>
+  </data>
+  <data name="FilePropertiesOriginalFileNameTitle" xml:space="preserve">
+    <value>Orijinal Dosya Adı</value>
+  </data>
+  <data name="FilePropertiesSortableColumns" xml:space="preserve">
+    <value>Sıralanabilir Sütunlar</value>
+  </data>
+  <data name="FilePropertiesSubTitle" xml:space="preserve">
+    <value>Her şifrelenmiş dosyanın içinde hangi meta verilerin gömüldüğünü seçin</value>
   </data>
   <data name="FilePropertiesToolStripMenuItemText" xml:space="preserve">
     <value>Şifreleme Dosyası Özellikleri</value>
@@ -17831,6 +18404,12 @@ href='https://account.axcrypt.net/en/Home/Login'&gt;AxCrypt ID'm&lt;/a&gt; adres
   </data>
   <data name="FinancialLinkLabel" xml:space="preserve">
     <value>Finansal</value>
+  </data>
+  <data name="FindEncryptedFilesQuicklyPopup" xml:space="preserve">
+    <value>Şifrelenmiş dosyaları hızlıca bulun</value>
+  </data>
+  <data name="FindFileFeatureDescription" xml:space="preserve">
+    <value>Tüm şifrelenmiş dosyaları tek bir yerde tarayın ve bulun.</value>
   </data>
   <data name="FindFileFeatureTitle" xml:space="preserve">
     <value>Dosyaları bul</value>
@@ -18149,6 +18728,9 @@ Lütfen &lt;a href="{0}"&gt;topluluk desteğimizi&lt;/a&gt; ziyaret edin.</value
   </data>
   <data name="GeneralLabel" xml:space="preserve">
     <value>Genel</value>
+  </data>
+  <data name="GenerateSecureRandomFileNamesPopup" xml:space="preserve">
+    <value>Güvenli rastgele dosya adları oluşturun</value>
   </data>
   <data name="GenerateText" xml:space="preserve">
     <value>Oluşturun</value>
@@ -18936,6 +19518,9 @@ Herhangi bir nedenden dolayı şifreni bilmiyor veya hatırlamıyorsan bir şifr
   <data name="helpcentercommunityText" xml:space="preserve">
     <value>Aradığınız şeyi bulamıyor &lt;br/&gt; musunuz? Hemen &lt;span&gt; destek &lt;br/&gt; birimi ile iletişime geçin veya &lt;br/&gt; topluluk forumumuzu ziyaret edin!&lt;/span&gt;</value>
   </data>
+  <data name="HelpCenterComponentDescription" xml:space="preserve">
+    <value>Yardım ve cevaplar alın</value>
+  </data>
   <data name="helpcenterGuideContent1" xml:space="preserve">
     <value>Nasıl indirilir?</value>
   </data>
@@ -19005,14 +19590,62 @@ Herhangi bir nedenden dolayı şifreni bilmiyor veya hatırlamıyorsan bir şifr
   <data name="HelpContactsprtText4" xml:space="preserve">
     <value>Bir özellik talep edin</value>
   </data>
+  <data name="HelpOverlayAnyServerTitle" xml:space="preserve">
+    <value>Verilerim herhangi bir sunucuya gönderiliyor mu?</value>
+  </data>
+  <data name="HelpOverlayCollapseSidebarTitle" xml:space="preserve">
+    <value>Yan çubuğu çökert</value>
+  </data>
+  <data name="HelpOverlayDragDropEncryptTitle" xml:space="preserve">
+    <value>Şifrelemek için sürükle ve bırak</value>
+  </data>
+  <data name="HelpOverlayEncryptYourFirstFileDescription" xml:space="preserve">
+    <value>Hızlı İşlemler'den 'Dosyayı Şifrele' seçeneğine tıklayın veya herhangi bir dosyayı Son Dosyalar bölümüne sürükleyip bırakın. Dosyanız anında AES-256 ile şifrelenir.</value>
+  </data>
+  <data name="HelpOverlayEncryptYourFirstFileTitle" xml:space="preserve">
+    <value>İlk dosyanızı şifreleyin</value>
+  </data>
+  <data name="HelpOverlayGlobalSearchTitle" xml:space="preserve">
+    <value>Küresel Arama</value>
+  </data>
+  <data name="HelpOverlayQuickEncryptShortcutTitle" xml:space="preserve">
+    <value>Hızlı şifreleme kısayolu</value>
+  </data>
+  <data name="HelpOverlayRightClickContextMenuTitle" xml:space="preserve">
+    <value>Sağ tıklayın Bağlam Menüsü</value>
+  </data>
+  <data name="HelpOverlaySetupYourVaultDescription" xml:space="preserve">
+    <value>Vault, tüm şifrelenmiş dosyaları tek bir güvenli klasörde tutar. Yeni dosyaları kaydettiğiniz anda korumak için otomatik şifrelemeyi etkinleştirin.</value>
+  </data>
+  <data name="HelpOverlaySetupYourVaultTitle" xml:space="preserve">
+    <value>Kasanızı kurun</value>
+  </data>
+  <data name="HelpOverlayShareFileSecurelyDescription" xml:space="preserve">
+    <value>'Güvenli Paylaş' tuşunu kullanarak tek seferlik paylaşım anahtarı oluşturun. Alıcı dosyayı sadece o anahtarla açabilir ve erişimi istediğiniz zaman iptal edebilirsiniz.</value>
+  </data>
+  <data name="HelpOverlayShareFileSecurelyTitle" xml:space="preserve">
+    <value>Dosyayı güvenli bir şekilde paylaşın</value>
+  </data>
+  <data name="HelpOverlayTitle" xml:space="preserve">
+    <value>SecureApp ile Başlayın</value>
+  </data>
+  <data name="HelpOverlayWhatHappensTitle" xml:space="preserve">
+    <value>Şifremi unutursam ne olur?</value>
+  </data>
   <data name="HelpToolStripMenuItemText" xml:space="preserve">
     <value>Yardım</value>
+  </data>
+  <data name="HelpToolSubTitle" xml:space="preserve">
+    <value>Uygulama içi yardım merkezini ve başlangıç rehberini açın</value>
   </data>
   <data name="HelpViewHelpMenuItemText" xml:space="preserve">
     <value>Yardım</value>
   </data>
   <data name="HideFeaturesLabel" xml:space="preserve">
     <value>Özellikleri gizle</value>
+  </data>
+  <data name="HideOriginalFileNamesPopup" xml:space="preserve">
+    <value>Orijinal dosya adlarını gizle</value>
   </data>
   <data name="HideRecentFilesListTabToolTipText" xml:space="preserve">
     <value>Son Dosyalar listesi devre dışı.  Etkinleştirmek için Ayarlara gidin.</value>
@@ -19288,6 +19921,9 @@ Dosyanın içeriğini görmek veya güncellemek istiyorsanız lütfen ayrıca de
   </data>
   <data name="ImportSomeonesPublicSharingKeyText" xml:space="preserve">
     <value>Birinin Açık Paylaşım Anahtarını İçe Aktar</value>
+  </data>
+  <data name="ImproveFilePrivacyPopup" xml:space="preserve">
+    <value>Dosya gizliliğini iyileştirin</value>
   </data>
   <data name="ImproveOurServiceCommentText" xml:space="preserve">
     <value>Hizmetimizi geliştirmek için bize ne önerirsiniz?</value>
@@ -19891,6 +20527,9 @@ Dosyalarını korumaya almak için AxCrypt'i buradan {1} indirip kur.
   <data name="InviteUserPersonalizedMessageTitle" xml:space="preserve">
     <value>Kişisel mesaj</value>
   </data>
+  <data name="InviteUserToolPopup" xml:space="preserve">
+    <value>Çevrimdışı anahtar paylaşım desteğiyle meslektaşlarınıza veya arkadaşlarınıza güvenli bir işe alım daveti gönderin.</value>
+  </data>
   <data name="InviteUserToolStripMenuItemText" xml:space="preserve">
     <value>Bir arkadaşınızı davet edin</value>
   </data>
@@ -20028,6 +20667,12 @@ AB KDV Numarası SE556967618101</value>
   <data name="JobTitlePlaceholder" xml:space="preserve">
     <value>İş unvanınızı yazın</value>
   </data>
+  <data name="KeepCloudDataPrivatePopup" xml:space="preserve">
+    <value>Bulut verilerini gizli tutmak</value>
+  </data>
+  <data name="KeepFolderStructurePopup" xml:space="preserve">
+    <value>Klasör yapısını düzenli tutun</value>
+  </data>
   <data name="KeepMeUpdatedLinkLabel" xml:space="preserve">
     <value>Beni Güncel Tut</value>
   </data>
@@ -20118,6 +20763,9 @@ Lütfen davetiyede kullanılacak olan dili ve alttaki isteğe bağlı mesajı be
   </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>&lt;b&gt;Apply&lt;/b&gt; butonuna dokunun.</value>
+  </data>
+  <data name="KeyShareOneTime" xml:space="preserve">
+    <value>Tek seferlik paylaşım anahtarları</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>Tipik olarak, çalışanlar ilgili ve işle ilgili bilgileri birbirleriyle paylaşırlar. Ancak, paylaşım işlemi sırasında verilerin güvenliği konusunda endişelenmek kaçınılmazdır. Bu, güvenli dosyaların paylaşılmasıyla ilgili endişeleri artırdığından, şifreleme yazılımının dosyaları daha güvenli bir şekilde paylaşmanıza ve almanıza olanak tanıyan bir özelliğe sahip olması inanılmaz derecede önemlidir.</value>
@@ -20480,6 +21128,9 @@ AxCrypt 1.x dosyaları için otomatik çeviriyi devreye sok (önerilir)?</value>
   <data name="LogoAndIconLabel" xml:space="preserve">
     <value>Logo ve simge</value>
   </data>
+  <data name="LogOffSubTitle" xml:space="preserve">
+    <value>Bu cihazdan çıkış yapın — dosyalarınız şifreli kalır</value>
+  </data>
   <data name="LogOffText" xml:space="preserve">
     <value>Oturum kapatma</value>
   </data>
@@ -20559,6 +21210,9 @@ AxCrypt 1.x dosyaları için otomatik çeviriyi devreye sok (önerilir)?</value>
   </data>
   <data name="MailGunPremiumSupportTitle" xml:space="preserve">
     <value>{{user_email}} konusunda yardım istiyorum...</value>
+  </data>
+  <data name="ManageAnonymousFiles" xml:space="preserve">
+    <value>Anonim şifreli dosyaları yönetin</value>
   </data>
   <data name="ManageGroupAccessHeading" xml:space="preserve">
     <value>Grup Erişimini Yönet</value>
@@ -21196,6 +21850,9 @@ Bu program anlaşmaya göre lisanslanmıştır.
   <data name="Meta-Description-Blog-CWIELTI" xml:space="preserve">
     <value>Şifreleme ile kripto para arasındaki ilişkiyi anlayın. Şifrelemenin kripto dünyasındaki işlemleri ve dijital varlıkları nasıl koruduğunu öğrenin.</value>
   </data>
+  <data name="Meta-Description-Blog-DADSGCEBPFC" xml:space="preserve">
+    <value>Flört uygulamalarının güçlü yönetişim, düzenleyici uyum ve şifreleme yoluyla hassas kullanıcı verilerini nasıl koruyabileceğini öğrenin. Gerçek ihlal örneklerini, GDPR ve CCPA risklerini ve CISO'ların güven oluşturmak ve hukuki açıdan zarar görmek için takip etmesi gereken en iyi uygulamaları keşfedin.</value>
+  </data>
   <data name="Meta-Description-Blog-DARATAIUIS" xml:space="preserve">
     <value>Verilerin depolandığı, iletildiği ve kullanıldığı anlarda güvence altına alınmasının önemini öğrenin. Şifrelemenin veri hareketinin her aşamasını nasıl koruduğunu keşfedin.</value>
   </data>
@@ -21358,6 +22015,9 @@ Bu program anlaşmaya göre lisanslanmıştır.
   <data name="Meta-Description-Blog-ITTROLPPAVU" xml:space="preserve">
     <value>Korumasız kişisel medyanın kimlik hırsızlığına nasıl yol açabileceğini öğrenin. Fotoğraf ve videolarınızı AxCrypt’in AES-256 şifrelemesiyle nasıl koruyacağınız hakkında ipuçları keşfedin.</value>
   </data>
+  <data name="Meta-Description-Blog-LDSFSB2SGLFEBP" xml:space="preserve">
+    <value>2026'da Linux dosya şifrelemesi, siber güvenlik en iyi uygulamaları ve KOBİ'ler için güvenli veri paylaşımı ile Linux sunucularını ve iş dosyalarını koruyun.</value>
+  </data>
   <data name="Meta-Description-Blog-LYCWAR" xml:space="preserve">
     <value>AxCrypt’i bilgisayarınızda açık bırakmanın güvenli olup olmadığını mı merak ediyorsunuz? Almanız gereken önlemleri ve dosyalarınızın güvende kalmasını nasıl sağlayacağınızı öğrenin.</value>
   </data>
@@ -21442,6 +22102,9 @@ Bu program anlaşmaya göre lisanslanmıştır.
   </data>
   <data name="Meta-Description-Blog-UODPCH" xml:space="preserve">
     <value>Farklı parolalar kullanmanın güvenlik risklerinizi nasıl artırabileceğini öğrenin. Verilerinizi güvende tutmak için şifreleme ve parola yönetiminin nasıl yardımcı olabileceğini keşfedin.</value>
+  </data>
+  <data name="Meta-Description-Blog-W4BSSUFOTCAHAFI" xml:space="preserve">
+    <value>İşletmelerin %48'i şifrelenmemiş dosyaları bulutta saklar. AxCrypt'in AES-256 şifrelemesinin verilerinizi nasıl güvence altına aldığını, ihlalleri nasıl önlediğini ve uzak ekipleri nasıl koruduğunu öğrenin.</value>
   </data>
   <data name="Meta-Description-Blog-WATPOI" xml:space="preserve">
     <value>WikiLeaks’in etkisini ve hassas bilgileri korumada şifrelemenin önemini keşfedin. Veri koruma konusunda alınacak dersleri öğrenin.</value>
@@ -22026,6 +22689,9 @@ Bu program anlaşmaya göre lisanslanmıştır.
   <data name="Meta-Title-Blog-ITTROLPPAVU" xml:space="preserve">
     <value>Kişisel Fotoğraf ve Videolarınızı Kimlik Hırsızlığından Koruyun</value>
   </data>
+  <data name="Meta-Title-Blog-LDSFSB2SGLFEBP" xml:space="preserve">
+    <value>2026'da KOBİ'ler için Linux Veri Güvenliği: Dosya Şifreleme ve En İyi Uygulamalar</value>
+  </data>
   <data name="Meta-Title-Blog-LYCWAR" xml:space="preserve">
     <value>AxCrypt’i Bilgisayarınızda Çalışır Bırakmak Güvenli mi?</value>
   </data>
@@ -22109,6 +22775,9 @@ Bu program anlaşmaya göre lisanslanmıştır.
   </data>
   <data name="Meta-Title-Blog-UODPCH" xml:space="preserve">
     <value>Farklı Parolalar Kullanmak Güvenliğinize Neden Zararlı Olabilir</value>
+  </data>
+  <data name="Meta-Title-Blog-W4BSSUFOTCAHAFI" xml:space="preserve">
+    <value>İşletmelerin %48'i Neden Bulutta Şifrelenmemiş Dosyaları Depolıyor | AxCrypt</value>
   </data>
   <data name="Meta-Title-Blog-WATPOI" xml:space="preserve">
     <value>WikiLeaks: Bilgiyi Korumada Şifrelemenin Rolü</value>
@@ -22491,6 +23160,9 @@ herhangi bir çok faktörlü türde (Authenticator uygulaması, E-posta ve SMS).
   <data name="MFAText2" xml:space="preserve">
     <value>Lütfen kimlik doğrulama yönteminizi seçin.</value>
   </data>
+  <data name="MFAuthenticationAdditionalFactorText" xml:space="preserve">
+    <value>Giriş için şifrenize ek bir faktör ekleyin.</value>
+  </data>
   <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>AxCrypt'te MFA nasıl etkinleştirilir?</value>
   </data>
@@ -22747,11 +23419,50 @@ herhangi bir çok faktörlü türde (Authenticator uygulaması, E-posta ve SMS).
   <data name="NameOnCardPrompt" xml:space="preserve">
     <value>Kart üzerindeki isim</value>
   </data>
+  <data name="NavigationPaneDescription" xml:space="preserve">
+    <value>Düşüncelerinizi paylaşın.</value>
+  </data>
   <data name="NavigationPaneFeedback" xml:space="preserve">
     <value>Görüşlerin</value>
   </data>
   <data name="NavigationPaneHome" xml:space="preserve">
     <value>Giriş</value>
+  </data>
+  <data name="NavPageHelpCenterLinkLabel" xml:space="preserve">
+    <value>Yardım &amp; Destek</value>
+  </data>
+  <data name="NavPageHelpCenterSubtitle" xml:space="preserve">
+    <value>SSS'e göz atın, bilgi tabanında arama yapın, geri bildirim gönderin veya destek ekibimize ulaşın.</value>
+  </data>
+  <data name="NavPageHelpCenterTitle" xml:space="preserve">
+    <value>Yardım Merkezi</value>
+  </data>
+  <data name="NavPagePasswordManagerSubtitle" xml:space="preserve">
+    <value>Şifreleri depolayın, güçlü olanlar oluşturun ve otomatik doldurun — hepsi AES-256 ile korunur.</value>
+  </data>
+  <data name="NavPageSecuredFoldersSubtitle" xml:space="preserve">
+    <value>Klasörler AxCrypt saatleri — içine attığınız her şey otomatik olarak şifrelenir.</value>
+  </data>
+  <data name="NavPageSecuredMessengerSubtitle" xml:space="preserve">
+    <value>Uçtan uca şifreli mesajlar gönderin — sadece alıcı okuyabilir.</value>
+  </data>
+  <data name="NavPageSubtitle" xml:space="preserve">
+    <value>Şifrelenmiş gösterge paneliniz — son dosyalar, hızlı işlemler ve güvenlik durumu bir bakışta.</value>
+  </data>
+  <data name="NavPageTextEncryptionSubtitle" xml:space="preserve">
+    <value>Herhangi bir metni yapıştırın, şifreleyin ve şifreli metni güvenli bir şekilde istediğiniz yerde paylaşın.</value>
+  </data>
+  <data name="NavPageToolsLinkLabel" xml:space="preserve">
+    <value>Araçlar</value>
+  </data>
+  <data name="NavPageToolsNotificationsSubtitle" xml:space="preserve">
+    <value>Etkinlik uyarıları, anahtar paylaşım davetileri ve sistem mesajları tek bir yerde.</value>
+  </data>
+  <data name="NavPageToolsSubtitle" xml:space="preserve">
+    <value>Güvenli silme, anonim adlandırma, dosya doğrulama ve diğer AxCrypt araçları.</value>
+  </data>
+  <data name="NavPageVaultSubtitle" xml:space="preserve">
+    <value>Dosyalarınızı otomatik olarak koruyan ve güvendiğiniz kişilerle güvenli şekilde paylaşan özel, şifreli bir alan.</value>
   </data>
   <data name="NeedAnyHelpText" xml:space="preserve">
     <value>Yardıma ihtiyacın var mı?</value>
@@ -22918,6 +23629,9 @@ herhangi bir çok faktörlü türde (Authenticator uygulaması, E-posta ve SMS).
   <data name="NisWhatsInsidesubheading" xml:space="preserve">
     <value>İçindekiler:</value>
   </data>
+  <data name="NoCloudServicesText" xml:space="preserve">
+    <value>Şu anda bulut sağlayıcısı yok.</value>
+  </data>
   <data name="NoDefaultEncryptionKeySetToolTip" xml:space="preserve">
     <value>Oturumun kapalı. Oturum açmak için tıkla.</value>
   </data>
@@ -23032,6 +23746,9 @@ Başlangıç sayfasına dönmek için &lt;a href="{1}"&gt;buraya&lt;/a&gt; tıkl
   <data name="OfflineInternetRequiredText" xml:space="preserve">
     <value>Çevrimdışısın. Devam etmek için Always Offline modunu devre dışı bırakın veya internete bağlanın.</value>
   </data>
+  <data name="OfflineKeySharingPopup" xml:space="preserve">
+    <value>Çevrimdışı anahtar paylaşımı</value>
+  </data>
   <data name="OfflineNoPremiumWarning" xml:space="preserve">
     <value>Çevrimdışı olduğun için Premium üyeliğini kontrol edemiyoruz. Lütfen durumunu güncelleyebilmemiz için çevrimiçi ol!</value>
   </data>
@@ -23052,6 +23769,9 @@ Başlangıç sayfasına dönmek için &lt;a href="{1}"&gt;buraya&lt;/a&gt; tıkl
   </data>
   <data name="OneFreeMonthLabel" xml:space="preserve">
     <value>14 gün ücretsiz</value>
+  </data>
+  <data name="OneLatestStandardPopup" xml:space="preserve">
+    <value>En son standartlara tek tıklama ile uyum</value>
   </data>
   <data name="OnlyAdminOnActiveBusinessSubscriptionError" xml:space="preserve">
     <value>Bu kullanıcı Business aboneliğinin tek yöneticisi olduğu için silinemedi. Aboneliği iptal edin veya başka bir yönetici atayın.</value>
@@ -23077,6 +23797,9 @@ Başlangıç sayfasına dönmek için &lt;a href="{1}"&gt;buraya&lt;/a&gt; tıkl
   <data name="OpenToolStripButtonToolTipText" xml:space="preserve">
     <value>Açmak için koruma altına alınmış dosyayı seç</value>
   </data>
+  <data name="OpenToolText" xml:space="preserve">
+    <value>Açık araç</value>
+  </data>
   <data name="OpenWebPageForPurchaseRequest" xml:space="preserve">
     <value>Satın alma işlemi yapabileceğiniz bir web sayfası açmamızı ister misiniz?</value>
   </data>
@@ -23086,8 +23809,14 @@ Başlangıç sayfasına dönmek için &lt;a href="{1}"&gt;buraya&lt;/a&gt; tıkl
   <data name="OptionsChangePassphraseToolStripMenuItemText" xml:space="preserve">
     <value>Parolayı değiştir</value>
   </data>
+  <data name="OptionsClearAllSettingsAndExitSubTitle" xml:space="preserve">
+    <value>Tercihleri sıfırlayın ve bu cihazda yeni bir oturum başlatın</value>
+  </data>
   <data name="OptionsClearAllSettingsAndExitToolStripMenuItemText" xml:space="preserve">
     <value>Tüm Ayarları Sıfırla ve Yeniden Başlat</value>
+  </data>
+  <data name="OptionsConvertMenuItemDescription" xml:space="preserve">
+    <value>AES-128 şifreli dosyalarını açıldığında otomatik olarak AES-256'ya yükseltin.</value>
   </data>
   <data name="OptionsConvertMenuItemText" xml:space="preserve">
     <value>Dosyaları AES-256'ya Otomatik Yükseltme</value>
@@ -23102,6 +23831,9 @@ Başlangıç sayfasına dönmek için &lt;a href="{1}"&gt;buraya&lt;/a&gt; tıkl
   </data>
   <data name="OptionsHideRecentFilesToolStripMenuItemText" xml:space="preserve">
     <value>Son Dosyaları Gizle</value>
+  </data>
+  <data name="OptionsIncludeSubfoldersDescription" xml:space="preserve">
+    <value>Bir klasörü şifrelerken, alt klasörlerindeki tüm dosyaları da şifreleyin</value>
   </data>
   <data name="OptionsIncludeSubfoldersToolStripMenuItemText" xml:space="preserve">
     <value>Alt Klasörleri Dahil Et</value>
@@ -23262,6 +23994,21 @@ Başlangıç sayfasına dönmek için &lt;a href="{1}"&gt;buraya&lt;/a&gt; tıkl
   </data>
   <data name="PageNotFoundInfo" xml:space="preserve">
     <value>Aradığınız sayfayı bulamadık. Ya bir şey yolunda gitmedi ya da böyle bir sayfa yok.</value>
+  </data>
+  <data name="PagesHeadline" xml:space="preserve">
+    <value>Şifreli dosyaları, klasörleri ve ücretli araçları sınırsız arayın ve açın.</value>
+  </data>
+  <data name="PagesPrioritySupportPopup" xml:space="preserve">
+    <value>Öncelikli destek ve daha güçlü sınırlar</value>
+  </data>
+  <data name="PagesSearchAcrossPopup" xml:space="preserve">
+    <value>Tüm şifrelenmiş dosyalarınızı arayın</value>
+  </data>
+  <data name="PagesSearchOpenSecuredPopup" xml:space="preserve">
+    <value>Güvenli klasörleri doğrudan arama yoluyla açın</value>
+  </data>
+  <data name="PagesUnlockFindFilesPopup" xml:space="preserve">
+    <value>Find Files ve diğer ücretli araçların kilidini aç</value>
   </data>
   <data name="PaidSubscriptionNeededForMobileApp" xml:space="preserve">
     <value>AxCrypt mobili kullanmak için abone olmanız gerekir.</value>
@@ -23948,6 +24695,9 @@ Boşluklar ve yaygın parolalara eşit olan kısımlar dikkate alınmaz ve herha
   <data name="PreparingAxCryptText" xml:space="preserve">
     <value>AxCrypt hazırlanıyor...</value>
   </data>
+  <data name="PreserveOriginalModifiedDatePopup" xml:space="preserve">
+    <value>Orijinal değiştirilmiş tarihi koruma</value>
+  </data>
   <data name="PressAndHoldLabel" xml:space="preserve">
     <value>Daha fazlasını görmek için tıklayıp basılı tut.</value>
     <comment>Tooltip for Press and hold gesture in mobile application</comment>
@@ -24196,8 +24946,14 @@ Boşluklar ve yaygın parolalara eşit olan kısımlar dikkate alınmaz ve herha
   <data name="PrimaryReasonForCancelationLabelText" xml:space="preserve">
     <value>İptalin başlıca nedenleri nelerdir?</value>
   </data>
+  <data name="PriorityCustomerSupport" xml:space="preserve">
+    <value>Öncelikli müşteri desteği</value>
+  </data>
   <data name="PrioritySupportTitle" xml:space="preserve">
     <value>Öncelikli Destek</value>
+  </data>
+  <data name="PrivacyAnonymityTitle" xml:space="preserve">
+    <value>Gizlilik ve Anonimlik</value>
   </data>
   <data name="PrivacyPolicyBlock10Heading" xml:space="preserve">
     <value>Bilgi paylaşımı</value>
@@ -24914,6 +25670,15 @@ HubSpot, CRM sistemi aracılığıyla iletişim yönetimi dahil, çevrimiçi paz
   <data name="PromptXecretsSecretText" xml:space="preserve">
     <value>Parola veya gizli</value>
   </data>
+  <data name="ProtectedEverywhereText" xml:space="preserve">
+    <value>Her yerde korunmuş.</value>
+  </data>
+  <data name="ProtectFileIdentityPopup" xml:space="preserve">
+    <value>Dosya kimliğini güvenli bir şekilde koruyun</value>
+  </data>
+  <data name="PROText" xml:space="preserve">
+    <value>LEHİNDE</value>
+  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>Kaydolma zamanı geçersiz. Geçerli bir kayıt en az {0} ay ve en fazla {1} ay arasında olmalıdır.</value>
   </data>
@@ -24972,6 +25737,111 @@ Lütfen &lt;a href="mailto:passwordmanager@axcrypt.net"&gt;adresinden bizimle il
     <value>&lt;b&gt;xCrypt Business hakkında herhangi bir sorunuz var mı?&lt;/b&gt;
 Lütfen en hızlı şekilde size yardımcı olabilmemiz için &lt;a href="mailto:business@axcrypt.net"&gt;bize ulaşın&lt;/a&gt;.</value>
   </data>
+  <data name="QuickActionsSubTitle" xml:space="preserve">
+    <value>En çok yaptığınız şeylere — açmak, şifrelemek, şifre çözmek veya paylaşmak — tek tıklamayla erişim.</value>
+  </data>
+  <data name="QuickActionsTitle" xml:space="preserve">
+    <value>Hızlı Eylemler</value>
+  </data>
+  <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
+    <value>İleri algoritmalar</value>
+  </data>
+  <data name="QuickSecureActionAdvancedVaultSecurity" xml:space="preserve">
+    <value>Gelişmiş kasa güvenliğine erişim</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyEncrypt" xml:space="preserve">
+    <value>Eklenen/değiştirilmiş dosyaları otomatik olarak şifrele</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyMonitor" xml:space="preserve">
+    <value>Klasörlerinizi güvenli şifrelemeyle otomatik olarak izleyin ve koruyun.</value>
+  </data>
+  <data name="QuickSecureActionControlFiles" xml:space="preserve">
+    <value>Dosyalara kimlerin erişebileceğini kontrol edin</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShare" xml:space="preserve">
+    <value>Şifrele ve Paylaş</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShareDescription" xml:space="preserve">
+    <value>Bir dosyayı güvence altına alın ve güvenli şekilde paylaşmaya hazır hale getirin.</value>
+  </data>
+  <data name="QuickSecureActionEncryptedVaults" xml:space="preserve">
+    <value>Hassas dosyalarınızı şifreli kasalarda güvenli bir şekilde saklayıp koruyun.</value>
+  </data>
+  <data name="QuickSecureActionHeader" xml:space="preserve">
+    <value>Bir eylem seç</value>
+  </data>
+  <data name="QuickSecureActionMonitorMultiple" xml:space="preserve">
+    <value>Birden fazla klasörü güvenli bir şekilde izleyin</value>
+  </data>
+  <data name="QuickSecureActionNoNeedSharePasswords" xml:space="preserve">
+    <value>Şifre paylaşmaya gerek yok</value>
+  </data>
+  <data name="QuickSecureActionPermanentFileDeletion" xml:space="preserve">
+    <value>Kalıcı dosya silme</value>
+  </data>
+  <data name="QuickSecureActionPermanentlyDelete" xml:space="preserve">
+    <value>Dosyaları kalıcı olarak sil, böylece kurtarılamasınlar.</value>
+  </data>
+  <data name="QuickSecureActionPreventFileRecovery" xml:space="preserve">
+    <value>Dosya kurtarmayı önlem</value>
+  </data>
+  <data name="QuickSecureActionProtectImportantFiles" xml:space="preserve">
+    <value>Önemli dosyaları ve klasörleri koruyun</value>
+  </data>
+  <data name="QuickSecureActionProtectSensitive" xml:space="preserve">
+    <value>Hassas dosyaları otomatik olarak koruyun</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFiles" xml:space="preserve">
+    <value>Son Güvenli Dosyalar</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFilesDescription" xml:space="preserve">
+    <value>Yakın zamanda korunan veya erişilen dosyalarınızı hızlıca açın.</value>
+  </data>
+  <data name="QuickSecureActionRemoveAccessAnytime" xml:space="preserve">
+    <value>Erişimi istediğiniz zaman kaldırın</value>
+  </data>
+  <data name="QuickSecureActionSecureEncryptedVaults" xml:space="preserve">
+    <value>Güvenli şifreli kasalar oluşturun</value>
+  </data>
+  <data name="QuickSecureActionSecureFilesShare" xml:space="preserve">
+    <value>Dosyaları güvence altına alın ve şifreli erişimi başkalarıyla güvenli şekilde paylaşın.</value>
+  </data>
+  <data name="QuickSecureActionSecureFolder" xml:space="preserve">
+    <value>Güvenli Klasör</value>
+  </data>
+  <data name="QuickSecureActionSecureFolderDescription" xml:space="preserve">
+    <value>Bir klasördeki tüm dosyaları şifreleme ile koruyun.</value>
+  </data>
+  <data name="QuickSecureActionSensitiveInformation" xml:space="preserve">
+    <value>Hassas bilgileri koruyun</value>
+  </data>
+  <data name="QuickSecureActionShareFileAccessSecurely" xml:space="preserve">
+    <value>Dosya erişimini güvenli bir şekilde paylaşın</value>
+  </data>
+  <data name="QuickSecureActionUnlimitedFiles" xml:space="preserve">
+    <value>Sınırsız dosyalar</value>
+  </data>
+  <data name="QuickSecureActionUnlockAdvanced" xml:space="preserve">
+    <value>Gelişmiş güvenlik özelliklerini açın</value>
+  </data>
+  <data name="QuickSecureActionUnlockMoreFeatures" xml:space="preserve">
+    <value>Daha fazla özelliğin kilidini açmak için yükseltme.</value>
+  </data>
+  <data name="QuickSecureActionUnlockPremium" xml:space="preserve">
+    <value>Premium koruma özelliklerini aç</value>
+  </data>
+  <data name="QuickSecureActionUnlockSecurityTools" xml:space="preserve">
+    <value>Gelişmiş güvenlik araçlarının kilidini açın</value>
+  </data>
+  <data name="QuickSecureAddFilesVault" xml:space="preserve">
+    <value>Dosyaları Vault'a Ekle</value>
+  </data>
+  <data name="QuickSecureAddFilesVaultDescription" xml:space="preserve">
+    <value>Önemli dosyalarınızı güvenli bir Kasada sakla.</value>
+  </data>
+  <data name="QuickSecureSecureDeleteDescription" xml:space="preserve">
+    <value>Dosyaları kalıcı olarak sil, böylece kurtarılamasınlar.</value>
+  </data>
   <data name="RateApplicationLinkAndroid" xml:space="preserve">
     <value>Lütfen bizi &lt;a&gt;Google Play&lt;/a&gt; de notlandırın</value>
     <comment>Link to app store in mobile application (Android)</comment>
@@ -25013,14 +25883,50 @@ Lütfen en hızlı şekilde size yardımcı olabilmemiz için &lt;a href="mailto
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>Hassas verilerinizi korumak ve ücretli özelliklerden yararlanmaya devam etmek için ödemeyi en kısa sürede yeniden denemenizi öneririz.</value>
   </data>
+  <data name="RecentFilesAES256Always" xml:space="preserve">
+    <value>AES-256 her zaman</value>
+  </data>
+  <data name="RecentFilesBatchEncryption" xml:space="preserve">
+    <value>Toplu şifreleme</value>
+  </data>
+  <data name="RecentFilesDropFiles" xml:space="preserve">
+    <value>Dosyaları şifrelemek için buraya bırakın</value>
+  </data>
+  <data name="RecentFilesFreePlan" xml:space="preserve">
+    <value>Ücretsiz plan, 3 dosyanın şifrelenmesine izin veriyor. Sınırsız yükseltme.</value>
+  </data>
+  <data name="RecentFileShareContextMenu" xml:space="preserve">
+    <value>Şifrelenmiş dosyaları tek seferlik anahtarla güvenli şekilde paylaşın</value>
+  </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>Yakın zamanda güvenli dosya açmadınız. Güvenli bir dosyaya göz atmak &lt;b&gt;için Güvenli&lt;/b&gt; Aç'ı tıklayın.</value>
+  </data>
+  <data name="RecentFilesNoFilesCurrentlyOpen" xml:space="preserve">
+    <value>Şu anda açık dosya yok</value>
+  </data>
+  <data name="RecentFilesNoSharedFilesYet" xml:space="preserve">
+    <value>Henüz paylaşılan dosya yok</value>
   </data>
   <data name="RecentFilesOpenToolStripMenuItemText" xml:space="preserve">
     <value>Aç</value>
   </data>
+  <data name="RecentFilesReencryptClose" xml:space="preserve">
+    <value>Yeniden şifreleme ve kapatma</value>
+  </data>
+  <data name="RecentFilesShareSomeone" xml:space="preserve">
+    <value>Birisiyle bir dosya paylaşın, burada görünecek.</value>
+  </data>
+  <data name="RecentFilesSubTitle" xml:space="preserve">
+    <value>Bir dosyayı açmak için iki kez tıklayın. Daha fazla işlem için sağ tıklayın.</value>
+  </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>Son eklenen dosyalar</value>
+  </data>
+  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
+    <value>Sınırsız Şifreleme</value>
+  </data>
+  <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
+    <value>Açtığınız dosyalar şifre çözülürken burada görünecektir.</value>
   </data>
   <data name="RecentFoldersText" xml:space="preserve">
     <value>Son Klasörler</value>
@@ -25164,6 +26070,12 @@ Lütfen en hızlı şekilde size yardımcı olabilmemiz için &lt;a href="mailto
   <data name="RemoveText" xml:space="preserve">
     <value>Kaldırmak</value>
   </data>
+  <data name="RenameDeleteOrDecryptFilesPopup" xml:space="preserve">
+    <value>Dosyaları yeniden adlandırın, silin veya şifre çözün</value>
+  </data>
+  <data name="RenameFilesSecurelyPopup" xml:space="preserve">
+    <value>Dosyaları güvenli bir şekilde yeniden adlandırma</value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>Bu hesapta aktif olarak tekrarlanan bir abonelik bulunmaktadır.  Tekrarlanan Business aboneliklerinin elle yenilenmesine gerek yoktur.</value>
   </data>
@@ -25181,6 +26093,9 @@ Bulut Depolama Farkındalığı</value>
   </data>
   <data name="RenewSubscriptionTitle" xml:space="preserve">
     <value>Aboneliğinizi yenileyin!</value>
+  </data>
+  <data name="ReportSnapshotDescription" xml:space="preserve">
+    <value>Sorun giderme ve destek desteği için kaydedilen tanı raporlarını açın.</value>
   </data>
   <data name="ReportSnapshotIntro" xml:space="preserve">
     <value>Bu, AxCrypt'te belirlenen hataların görüntülü bir raporudur. Lütfen bu metnin hepsini kopyalayın ve aşağıdaki adrese e-mail yoluyla iletin:
@@ -25685,6 +26600,9 @@ Konu: AxCrypt Report Snapshot</value>
   <data name="ResourcesHeading" xml:space="preserve">
     <value>Kaynaklar</value>
   </data>
+  <data name="RestoreAnonymousNamesDescription" xml:space="preserve">
+    <value>Anonim yeniden adlandırmayı geri alın ve dosyaları orijinal dosya adlarına geri getirin, böylece saklanan yeniden adlandırma haritası kullanılır.</value>
+  </data>
   <data name="RestoreAnonymousNamesMenuText" xml:space="preserve">
     <value>Orijinal isme yeniden adlandır</value>
     <comment>Displayed as a menu or context menu choice, and is used to restore the original name for encrypted files that have been renamed either manually or by using the anonymous rename function.</comment>
@@ -25699,6 +26617,9 @@ Konu: AxCrypt Report Snapshot</value>
   </data>
   <data name="RestoreNowText" xml:space="preserve">
     <value>Şimdi restore et</value>
+  </data>
+  <data name="RestoreRenamePopup" xml:space="preserve">
+    <value>Orijinal dosya adlarını geri getir</value>
   </data>
   <data name="RestoreToOriginalToolTipText" xml:space="preserve">
     <value>Orijinale geri dönmek için ücretli bir abonelik planı gerekir!</value>
@@ -25719,6 +26640,9 @@ Konu: AxCrypt Report Snapshot</value>
   </data>
   <data name="SaveSecretErrorIsReadOnly" xml:space="preserve">
     <value>Şifre girişlerini sadece Premium üyeliği olan kullanıcılar kaydedebilir.</value>
+  </data>
+  <data name="ScheduledVaultBackupsPopup" xml:space="preserve">
+    <value>Planlı kasa yedeklemeleri</value>
   </data>
   <data name="ScriptingEnabledLabel" xml:space="preserve">
     <value>Komut dizisi etkinleştirildi</value>
@@ -25795,6 +26719,9 @@ Konu: AxCrypt Report Snapshot</value>
   <data name="SecureCloudFaq3" xml:space="preserve">
     <value>Bulutta saklanan şifreli dosyaları güvenli bir şekilde paylaşabilir miyim?</value>
   </data>
+  <data name="SecureCloudFileProtectionPopup" xml:space="preserve">
+    <value>Güvenli bulut dosya koruması</value>
+  </data>
   <data name="SecureCloudGuidebuttonHead1" xml:space="preserve">
     <value>Uygulama aracılığıyla bulut depolamadaki dosyaları koruyun</value>
   </data>
@@ -25828,8 +26755,17 @@ Konu: AxCrypt Report Snapshot</value>
   <data name="SecureCloudGuideStepText16" xml:space="preserve">
     <value>AxCrypt'e giriş yapın ve mevcut 3 bulut depolama sağlayıcısından birini seçin.</value>
   </data>
+  <data name="SecureCloudGuideStepText17" xml:space="preserve">
+    <value>Dosyanızı bulun ve seçin.</value>
+  </data>
+  <data name="SecureCloudGuideStepText19" xml:space="preserve">
+    <value>Anahtarları güvenli bir şekilde paylaşmak istediğiniz e-posta kimliğini ekleyin ve &lt;strong&gt;'Add'.&lt;/strong&gt;</value>
+  </data>
   <data name="SecureCloudGuideStepText2" xml:space="preserve">
     <value>Bulut dosyalarını gösteren bir dosya seçimi açılır.</value>
+  </data>
+  <data name="SecureCloudGuideStepText21" xml:space="preserve">
+    <value>&lt;strong&gt;Yes.&lt;/strong&gt; AxCrypt tarafından geliştirilen Cloud Security, sıfır bilgi içeren bir bulut depolama çözümü olarak tasarlanmıştır. Bu, dosyalarınızın AES-256 şifreleme algoritması kullanılarak şifrelendiği anlamına gelir ve bulut depolama platformlarına yüklenen hiçbir bilgi veya veriye erişimimiz yoktur. Bulut depolama sağlayıcısı şifreleme anahtarlarınızı kontrol etmez. Bu, daha güçlü veri gizliliği ve gerçek uçtan uca şifrelenmiş bulut senkronizasyonunu garanti eder.</value>
   </data>
   <data name="SecureCloudGuideStepText22" xml:space="preserve">
     <value>Dosyayı uygulamadaki mevcut bulut depolama seçeneklerinden bulun.</value>
@@ -25840,8 +26776,17 @@ Konu: AxCrypt Report Snapshot</value>
   <data name="SecureCloudGuideStepText25" xml:space="preserve">
     <value>Aç tuşuna tıklayın ve dosya artık hem yerel hem bulut olmak üzere her iki konumda da şifrelenmiştir.</value>
   </data>
+  <data name="SecureCloudGuideStepText26" xml:space="preserve">
+    <value>&lt;strong&gt;Please note:&lt;/strong&gt; Dosya hem yerel hem de bulut üzerinde şifrelenecek.</value>
+  </data>
   <data name="SecureCloudGuideStepText3" xml:space="preserve">
     <value>Korumak istediğiniz dosyayı seçin.</value>
+  </data>
+  <data name="SecureCloudGuideStepText4" xml:space="preserve">
+    <value>Açılır pencerenin sağ alt köşesindeki Eylem Menüsü'ne (3 nokta) tıklayın.</value>
+  </data>
+  <data name="SecureCloudGuideStepText5" xml:space="preserve">
+    <value>Secure'a tıklayın ve dosyanız .axx uzantısıyla şifrelendi.</value>
   </data>
   <data name="SecureCloudGuideStepText7" xml:space="preserve">
     <value>Açmak istediğiniz dosyayı güvenli bir şekilde bulun.</value>
@@ -25855,11 +26800,20 @@ Konu: AxCrypt Report Snapshot</value>
   <data name="SecureCloudSideMenuHead1" xml:space="preserve">
     <value>İşte bulut depolamada dosyaları nasıl koruyacaklar</value>
   </data>
+  <data name="SecureCloudWhatNextText2" xml:space="preserve">
+    <value>&lt;a href='/information/guides/vault/'&gt;AxCrypt Vault Feature Guide | Encrypt &amp; Protect Files&lt;/a&gt;</value>
+  </data>
+  <data name="SecuredCloudHelpText" xml:space="preserve">
+    <value>Bulutta depolanan dosyalarınızı güvenli şifreleme ve gelişmiş güvenlik özellikleriyle koruyun.</value>
+  </data>
   <data name="SecuredCloudLinkLabel" xml:space="preserve">
     <value>Bulut Güvenliği</value>
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>AxCrypt güvenli silme</value>
+  </data>
+  <data name="SecureDeleteToolDescription" xml:space="preserve">
+    <value>Dosyaları çoklu geçiş üzerine yazma ile kalıcı olarak sil. Adli tıp araçlarıyla bile kurtarma imkansız hale geliyor.</value>
   </data>
   <data name="SecureDeleteToolStripMenuItemText" xml:space="preserve">
     <value>Güvenli sil</value>
@@ -26108,6 +27062,15 @@ Konu: AxCrypt Report Snapshot</value>
   <data name="SecuredMessengerText" xml:space="preserve">
     <value>Hedef alıcılar için cihazlar arasında AES-256 şifrelemesiyle özel ve güvenli iletişim sağlayın.</value>
   </data>
+  <data name="SecureEncryptedVaultPopup" xml:space="preserve">
+    <value>Güvenli şifreli vault</value>
+  </data>
+  <data name="SecureKeySharingPopup" xml:space="preserve">
+    <value>Güvenli anahtar paylaşımı</value>
+  </data>
+  <data name="SecureUserInvitesPopup" xml:space="preserve">
+    <value>Güvenli kullanıcı davetleri</value>
+  </data>
   <data name="SecurityBlock1Heading" xml:space="preserve">
     <value>AxCrypt neden güvenli?</value>
   </data>
@@ -26260,6 +27223,42 @@ Konu: AxCrypt Report Snapshot</value>
     <value>Güvenlik bizim için çok önemli. AxCrypt'te yaptığımız herşey en yüksek güvenlik seviyesinde yapılmaktadır. Şifren kontrolün altında olduğu sürece, senden başka kimsenin asla şifreli dosyalarınıza erişemeyeceğini garanti ediyoruz.</value>
     <comment>Description of "Security" section of About Us page in mobile application.</comment>
   </data>
+  <data name="SecurityStatusEncryptionsPerMonth" xml:space="preserve">
+    <value>Ayda 2 şifreleme</value>
+  </data>
+  <data name="SecurityStatusFreePlan" xml:space="preserve">
+    <value>Ücretsiz plan, ayda 2 dosya şifrelemesi içerir.</value>
+  </data>
+  <data name="SecurityStatusGroupkeySharing" xml:space="preserve">
+    <value>Grup anahtarı paylaşımı</value>
+  </data>
+  <data name="SecurityStatusGroupkeySharingDescription" xml:space="preserve">
+    <value>Ekip veya rol bazında erişimi paylaşın — merkezi olarak yönetilir.</value>
+  </data>
+  <data name="SecurityStatusMasterKeyRecovery" xml:space="preserve">
+    <value>Ana Anahtar Kurtarma</value>
+  </data>
+  <data name="SecurityStatusMasterKeyRecoveryDescription" xml:space="preserve">
+    <value>Bir üye erişimi kaybederse organizasyonunuz dosyaları kurtarabilir.</value>
+  </data>
+  <data name="SecurityStatusSecureDeleteTitle" xml:space="preserve">
+    <value>Dosyaları çoklu geçiş üzerine yazma ile kalıcı olarak sil.</value>
+  </data>
+  <data name="SecurityStatusTitle" xml:space="preserve">
+    <value>Güvenlik Durumu</value>
+  </data>
+  <data name="SecurityStatusUnlimitedAES256" xml:space="preserve">
+    <value>Sınırsız AES-256 şifreleme ve anahtar paylaşımı</value>
+  </data>
+  <data name="SecurityStatusUnlimitedAES256Description" xml:space="preserve">
+    <value>Günlük kapsayım yok — ayrıca anahtarları güvenilir alıcılarla paylaşabilirsiniz.</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription" xml:space="preserve">
+    <value>Günlük kapsayım yok — ayrıca anahtarları güvenilir alıcılarla paylaşabilirsiniz.</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription1" xml:space="preserve">
+    <value>Günlük sınır yok, anahtar paylaşımı, anonim isim değişikliği.</value>
+  </data>
   <data name="SecurityUpdateAvailableWarning" xml:space="preserve">
     <value>Sürümün bir güvenlik sorunu nedeniyle yenilenmelidir.</value>
     <comment>Displayed prominently, perhaps as a pop-up, when it's discovered that an update is available the contains a security fix.</comment>
@@ -26370,6 +27369,9 @@ Parola, hem çevrimiçi parola yöneticisindeki parolalarını hem de siteye eri
   <data name="ShareAsLinkActionText" xml:space="preserve">
     <value>Link olarak Paylaş</value>
   </data>
+  <data name="SharedByMeText" xml:space="preserve">
+    <value>Benim tarafımdan paylaşıldı</value>
+  </data>
   <data name="SharedKeyUserListTitle" xml:space="preserve">
     <value>Seçili dosyalara erişimi olan tüm kullanıcılar ({0})</value>
   </data>
@@ -26468,12 +27470,30 @@ Lütfen AxCrypt dosya güvenliği hakkında '{0}' e bildir.</value>
   <data name="ShowPasswordOptionPrompt" xml:space="preserve">
     <value>Parolayı Göster</value>
   </data>
+  <data name="ShowUpgradeAutoEncryptOpenedPopup" xml:space="preserve">
+    <value>Otomatik şifreleme açılan veya bekleyen dosyaları</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPendingPopup" xml:space="preserve">
+    <value>Bir süre hareketsizlikten sonra otomatik olarak çıkış yapın ve açık veya bekleyen dosyalarınızı güvence altına alın.</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPopup" xml:space="preserve">
+    <value>Otomatik çıkış koruması</value>
+  </data>
+  <data name="ShowUpgradeEnhancedSecurityPopup" xml:space="preserve">
+    <value>Gelişmiş güvenlik özelliklerini açın</value>
+  </data>
+  <data name="ShowUpgradeProtectSensitivePopup" xml:space="preserve">
+    <value>Hassas verileri koruyun</value>
+  </data>
   <data name="SignedInUserInfo" xml:space="preserve">
     <value>&lt;b&gt;{0}&lt;/b&gt; ile giriş yapıldı</value>
   </data>
   <data name="SignInBeforePremiumMessage" xml:space="preserve">
     <value>Önce oturum aç!</value>
     <comment>A short message used in the sign in dialog, to explain that a user should sign in first and then purchase or try premium as appropriate.</comment>
+  </data>
+  <data name="SigningYouInText" xml:space="preserve">
+    <value>Seni kaydediyorum...</value>
   </data>
   <data name="SignInLinkLabel" xml:space="preserve">
     <value>Giriş yap</value>
@@ -26787,6 +27807,9 @@ Anasayfaya gitmek için &lt;a href="{1}"&gt;buraya&lt;/a&gt; tıkla.</value>
   <data name="SubscriptionDeletedText" xml:space="preserve">
     <value>Silindi</value>
   </data>
+  <data name="SubscriptionDetailsSubTitle" xml:space="preserve">
+    <value>Planınızı, faturalarınızı ve yenileme detaylarınızı görüntüleyin</value>
+  </data>
   <data name="SubscriptionDetailsTitle" xml:space="preserve">
     <value>Abonelik ayrıntıları</value>
   </data>
@@ -26912,6 +27935,9 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   </data>
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Svenska (İsveççe)</value>
+  </data>
+  <data name="SwitchToDarkActionDescription" xml:space="preserve">
+    <value>Düşük ışıkta göze daha kolay — uygulamada anında uygulanıyor</value>
   </data>
   <data name="SwitchToDarkActionText" xml:space="preserve">
     <value>Karanlık Moda Geçin</value>
@@ -27262,6 +28288,12 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   <data name="TextCheckEmailAndSpam" xml:space="preserve">
     <value>E-posta kutunu ve istenmeyen kutusunu kontrol et!</value>
   </data>
+  <data name="TextEncryptionAccessEveryPopup" xml:space="preserve">
+    <value>Uygulamadaki her sayfaya erişin</value>
+  </data>
+  <data name="TextEncryptionAdvancedProtectionFeatures" xml:space="preserve">
+    <value>Metninizi gelişmiş koruma özellikleriyle güvenli bir şekilde şifreleyin.</value>
+  </data>
   <data name="TextEncryptionEmailBodyText" xml:space="preserve">
     <value>Bu metin şifrelenmiştir — orijinal mesajı görüntülemek için AxCrypt kullanın.</value>
   </data>
@@ -27403,6 +28435,9 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   <data name="TextEncryptionLinkLabel" xml:space="preserve">
     <value>Metin Şifreleme</value>
   </data>
+  <data name="TextEncryptionPaidPlanPopup" xml:space="preserve">
+    <value>Bu sayfa ücretli bir planın parçasıdır. Açmak için yükseltme.</value>
+  </data>
   <data name="TextEncryptionSideMenuHead1" xml:space="preserve">
     <value>Metni Şifrele</value>
   </data>
@@ -27414,6 +28449,9 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   </data>
   <data name="TextEncryptionText" xml:space="preserve">
     <value>Gizli düz metninizi güvenli, okunamaz bir formata dönüştürün.</value>
+  </data>
+  <data name="TextEncryptionWithoutLimitsPopup" xml:space="preserve">
+    <value>Ücretli özellikleri sınırsız açın</value>
   </data>
   <data name="TextPreferenceCritical" xml:space="preserve">
     <value>Kritik - Önemli AxCrypt güncellemeleri için bildiri al</value>
@@ -27461,6 +28499,9 @@ Please visit our &lt;a href="{0}"&gt;community support&lt;/a&gt;.</value>
   </data>
   <data name="ToolTipPremiumNeededForSecrets" xml:space="preserve">
     <value>Şifre idaresi için Premium gereklidir. Premium'a yükselmek için tıkla!</value>
+  </data>
+  <data name="TopBarPrivacySecurity" xml:space="preserve">
+    <value>Gizlilik ve Güvenlik</value>
   </data>
   <data name="TotalLicencesText" xml:space="preserve">
     <value>Lisanslar (Kullanılan/Toplam)</value>
@@ -27513,6 +28554,9 @@ AxCrypt Ekibi</value>
   </data>
   <data name="TryAxcryptfree" xml:space="preserve">
     <value>AxCrypt'i ücretsiz deneyin</value>
+  </data>
+  <data name="TryBrokenFileDescription" xml:space="preserve">
+    <value>Hasarlı veya kısmen bozuk şifreli dosyaları kurtarmaya ve açmaya çalışın.</value>
   </data>
   <data name="TryBrokenFileToolStripMenuItemText" xml:space="preserve">
     <value>Bozuk Dosya Deneyin</value>
@@ -27712,6 +28756,24 @@ AxCrypt Ekibi</value>
   <data name="UnknownLogOn" xml:space="preserve">
     <value>Şifre daha önceden tanınmamaktadır. Yeni bir tane yaratmak için 'Yeni' ye tıkla.</value>
   </data>
+  <data name="UnlimitedVaultEntriesPopup" xml:space="preserve">
+    <value>Sınırsız kasalı girişleri</value>
+  </data>
+  <data name="UnlockAdvancedCloudSecurityPopup" xml:space="preserve">
+    <value>Gelişmiş bulut güvenliğinin kilidini açın</value>
+  </data>
+  <data name="UnlockAdvancedEncryptionFeaturesPopup" xml:space="preserve">
+    <value>Gelişmiş şifreleme özelliklerini açın</value>
+  </data>
+  <data name="UnlockAdvancedFileManagementPopup" xml:space="preserve">
+    <value>Gelişmiş dosya yönetimini açın</value>
+  </data>
+  <data name="UnlockAdvancedFolderPopup" xml:space="preserve">
+    <value>Gelişmiş klasör korumasını açın</value>
+  </data>
+  <data name="UnlockAdvancedPrivacyPopup" xml:space="preserve">
+    <value>Gelişmiş gizlilik özelliklerini açın</value>
+  </data>
   <data name="UnlockFeatures" xml:space="preserve">
     <value>Kilitli &lt;span&gt;amazing&lt;/span&gt; &lt;span&gt;features!&lt;/span&gt; özellikerimizi açın! &lt;span&gt;Premium&lt;/span&gt; veya &lt;b&gt;Business&lt;/b&gt;’e yükseltin
 </value>
@@ -27748,6 +28810,9 @@ AxCrypt Ekibi</value>
   </data>
   <data name="UpdatePaymentDetailsText" xml:space="preserve">
     <value>Ödeme ayrıntılarını güncelleyin</value>
+  </data>
+  <data name="UpdateRequiredText" xml:space="preserve">
+    <value>Güncelleme gerekli</value>
   </data>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} başarılı bir şekilde güncellendi.</value>
@@ -27807,6 +28872,9 @@ AxCrypt Ekibi</value>
   </data>
   <data name="UsageOtherText" xml:space="preserve">
     <value>Diğer</value>
+  </data>
+  <data name="UsageTipsAnonymousFileDescription" xml:space="preserve">
+    <value>Şifrelenmiş dosyalar diskte orijinal ismin izini bırakmıyor.</value>
   </data>
   <data name="UsageTipsAnonymousFileHeading" xml:space="preserve">
     <value>Anonim dosya isimleri</value>
@@ -27946,8 +29014,14 @@ AxCrypt Ekibi</value>
   <data name="UseNecessaryCookiesOnlyPromptText" xml:space="preserve">
     <value>Yalnızca gerekli çerezleri kullanın</value>
   </data>
+  <data name="UserActivitiesDescription" xml:space="preserve">
+    <value>Tüm dosya işlemlerini kaydet — şifrele, şifre çözme, paylaş, sil</value>
+  </data>
   <data name="UserActivitiesText" xml:space="preserve">
     <value>Kullanıcı Faaliyetleri</value>
+  </data>
+  <data name="UserActivityDescription" xml:space="preserve">
+    <value>Tüm dosya işlemlerini ve geçmişini görüntüleyin.</value>
   </data>
   <data name="UserActivityTitle" xml:space="preserve">
     <value>Kullanıcı Aktivitesi</value>
@@ -28041,6 +29115,9 @@ AxCrypt Ekibi</value>
   </data>
   <data name="VaultGuideFaq2" xml:space="preserve">
     <value>Bilgisayarımda birden fazla Vault olabilir mi?</value>
+  </data>
+  <data name="VaultGuideFaq2Ans" xml:space="preserve">
+    <value>&lt;b&gt;AxCrypt supports only one active Vault per system.&lt;/b&gt; Mevcut vault klasörü, başka bir klasör Vault olarak yapılandırıldığı anda güvenli klasör olarak maskelenir.</value>
   </data>
   <data name="VaultGuideFaq3" xml:space="preserve">
     <value>Vault içindeki dosyaları manuel olarak şifrelemem veya çözmem gerekiyor mu?</value>
@@ -28240,17 +29317,29 @@ AxCrypt girişinizi tamamlamak için kimlik doğrulama penceresine tek kullanım
     <value>Lütfen hesabını doğrula</value>
     <comment>Text displayed on Activation code page in mobile app.</comment>
   </data>
+  <data name="VerifyFileDescription" xml:space="preserve">
+    <value>Bir dosyanın AxCrypt tarafından şifrelenip doğrulanmadığını doğrulayın.</value>
+  </data>
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>Dosyayı Kontrol Et ve Doğrula</value>
   </data>
+  <data name="VerifyMFASecureCloudStorage" xml:space="preserve">
+    <value>Güvenli bulut depolama ve basit paylaşım</value>
+  </data>
   <data name="VerifyMfaText" xml:space="preserve">
     <value>Çok faktörlü doğrulama</value>
+  </data>
+  <data name="VerifyMFAWorksAcrossDevices" xml:space="preserve">
+    <value>Cihazlar arasında çalışır</value>
   </data>
   <data name="VerifyPasswordPrompt" xml:space="preserve">
     <value>Parolayı Doğrula</value>
   </data>
   <data name="ViewAllText" xml:space="preserve">
     <value>Tümünü Görüntüle..</value>
+  </data>
+  <data name="ViewAndManageFileReferencesPopup" xml:space="preserve">
+    <value>Dosya referanslarını görüntüle ve yönet</value>
   </data>
   <data name="ViewCardTitle" xml:space="preserve">
     <value>Kartı Görüntüle</value>
@@ -28676,6 +29765,9 @@ Daha fazla bilgi için Tamam'ı tıklayarak bir web tarayıcısı aç ve interne
   </data>
   <data name="YourEmailText" xml:space="preserve">
     <value>E-posta adresiniz</value>
+  </data>
+  <data name="YourFilesText" xml:space="preserve">
+    <value>Dosyaların.</value>
   </data>
   <data name="YourPasswordText" xml:space="preserve">
     <value>Şifreniz:</value>

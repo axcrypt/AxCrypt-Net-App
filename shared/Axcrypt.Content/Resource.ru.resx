@@ -228,6 +228,9 @@
   <data name="AboutPartnerSting" xml:space="preserve">
     <value>STING помогает талантливым людям превратить свои идеи в настоящий бизнес.</value>
   </data>
+  <data name="AboutUsDescription" xml:space="preserve">
+    <value>Информация о приложении и детали версии.</value>
+  </data>
   <data name="AboutUsHistory2025Text" xml:space="preserve">
     <value>AxCrypt предоставляет обновленный, свежий интерфейс, разработанный для ясности и простоты использования. Благодаря улучшению производительности приложение обеспечивает замечательную стабильность, повышенную безопасность и совместимость со всеми основными операционными системами. Три новые функции – защищенный мессенджер, шифрование текста и Vault, а также улучшения в менеджере паролей, создали единый интерфейс, упрощающий мгновенную защиту и безопасность.</value>
   </data>
@@ -663,6 +666,9 @@
     <value>После активирования доступ к Интернету больше не нужен и не требуется до момента дезактивирования.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
   </data>
+  <data name="AlwaysText" xml:space="preserve">
+    <value>Всегда.</value>
+  </data>
   <data name="AndMoreText" xml:space="preserve">
     <value>... и многое другое</value>
   </data>
@@ -687,8 +693,14 @@
   <data name="AnnualSubscriptionTitle" xml:space="preserve">
     <value>Годовая</value>
   </data>
+  <data name="AnonymousRenameDescription" xml:space="preserve">
+    <value>Замените исходные имена файлов случайными идентификаторами, чтобы скрыть содержимое файлов, судя по одному только имени файла</value>
+  </data>
   <data name="AnonymousRenameMenuDescription" xml:space="preserve">
     <value>Используйте страницу "Инструменты", чтобы заменить имена файлов случайными идентификаторами – чтобы никто не мог угадать содержимое файла только по названию.</value>
+  </data>
+  <data name="AnonymousRenameMenuPopup" xml:space="preserve">
+    <value>Переименуйте файлы со случайными именами, чтобы защитить свою приватность</value>
   </data>
   <data name="AnonymousRenameMenuText" xml:space="preserve">
     <value>Анонимное Переименование</value>
@@ -16155,6 +16167,12 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>Нажмите для кодирования всех открытых файлов или новых файлов в защищённых папках. Однако вначале убедитесь, что они не в использовании.</value>
   </data>
+  <data name="CloudBrowserPageTips" xml:space="preserve">
+    <value>Совет: дважды кликните по папке, чтобы открыть её, или выберите файлы для шифрования / обмена / открытия.</value>
+  </data>
+  <data name="CloudBrowserPageTips1" xml:space="preserve">
+    <value>+ Добавить файлы</value>
+  </data>
   <data name="CloudServicesConnectedText" xml:space="preserve">
     <value>Подключено</value>
   </data>
@@ -16861,18 +16879,33 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   <data name="DaysText" xml:space="preserve">
     <value>дни</value>
   </data>
+  <data name="DebugCheckVersionNowDescription" xml:space="preserve">
+    <value>Проверьте последние обновления AxCrypt для повышения безопасности, стабильности и производительности.</value>
+  </data>
   <data name="DebugCheckVersionNowToolStripMenuItemText" xml:space="preserve">
     <value>Протестируйте Версию Прямо Сейчас</value>
   </data>
   <data name="DebugCryptoPolicyToolStripMenuItemText" xml:space="preserve">
     <value>Политика лицензирования</value>
   </data>
+  <data name="DebugDiagnosticsToolStripMenuItemText" xml:space="preserve">
+    <value>Отладка и диагностика</value>
+  </data>
+  <data name="DebugFileDescription" xml:space="preserve">
+    <value>Проанализируйте статус шифрования и совместимость файла с AxCrypt.</value>
+  </data>
   <data name="DebugFileFormatCheckToolStripMenuItemText" xml:space="preserve">
     <value>Проверить файл</value>
     <comment>A debug menu item starting the AxCrypt File Format check function</comment>
   </data>
+  <data name="DebugLoggingDescription" xml:space="preserve">
+    <value>Просмотрите журналы приложений для помощи в диагностике и устранении неполадок.</value>
+  </data>
   <data name="DebugLoggingToolStripMenuItemText" xml:space="preserve">
     <value>Регистрация</value>
+  </data>
+  <data name="DebugManageAccountDescription" xml:space="preserve">
+    <value>Запустите сценарии тестирования шифрования.</value>
   </data>
   <data name="DebugManageAccountSubTitle" xml:space="preserve">
     <value>Обновите профиль, безопасность и контактную информацию axcrypt.net</value>
@@ -16885,6 +16918,9 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   </data>
   <data name="DebugModeTitle" xml:space="preserve">
     <value>Режим отладки</value>
+  </data>
+  <data name="DebugOptionsToolStripDescription" xml:space="preserve">
+    <value>Удалить временно сохранённые данные.</value>
   </data>
   <data name="DebugOptionsToolStripMenuItemText" xml:space="preserve">
     <value>Опции</value>
@@ -17091,6 +17127,9 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   </data>
   <data name="DiscountCodeTitle" xml:space="preserve">
     <value>Промокод</value>
+  </data>
+  <data name="DiscoveryActivityText" xml:space="preserve">
+    <value>Открытия и мероприятия </value>
   </data>
   <data name="DoMoreAxCryptSubscriptionContent1" xml:space="preserve">
     <value>AxCrypt обеспечивает безопасный обмен файлами между преподавателями, администраторами и учащимися. Зашифрованные файлы можно передавать в сети учреждения или через облачное хранилище.</value>
@@ -17317,6 +17356,9 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   <data name="DutchLanguageSelection" xml:space="preserve">
     <value>Голландский</value>
     <comment>The name of the Dutch language for selection.</comment>
+  </data>
+  <data name="EasyEncryptedOnboardingPopup" xml:space="preserve">
+    <value>Простое зашифрованное подключение</value>
   </data>
   <data name="EasyInstallationLabel" xml:space="preserve">
     <value>Простота установки и использования</value>
@@ -17673,6 +17715,9 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   <data name="EncryptFilesBeforeUploadPopup" xml:space="preserve">
     <value>Шифруйте файлы перед загрузкой</value>
   </data>
+  <data name="EncryptionManagementText" xml:space="preserve">
+    <value>Управление шифрованием</value>
+  </data>
   <data name="EncryptLabelText" xml:space="preserve">
     <value>Зашифровать</value>
   </data>
@@ -17684,6 +17729,9 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   </data>
   <data name="EncryptUnlimitedText" xml:space="preserve">
     <value>Шифруйте неограниченный текст</value>
+  </data>
+  <data name="EndToEndProtectionPopup" xml:space="preserve">
+    <value>Сквозная защита</value>
   </data>
   <data name="EnglishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Английский</value>
@@ -17768,11 +17816,17 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Успешно экспортировано!</value>
   </data>
+  <data name="ExportMyPrivateKeyDescription" xml:space="preserve">
+    <value>Создайте резервную копию или перенесите свои учетные данные и ключи совместного доступа AxCrypt для восстановления или переноса на другое устройство.</value>
+  </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemText" xml:space="preserve">
     <value>Экспортировать AxCrypt ID Засекреченный и Совместного Пользования Ключи</value>
   </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemToolTipText" xml:space="preserve">
     <value>Для перемещения AxCrypt ID, экспортируйте Засекреченный и Совместного Пользования Ключи, после чего импортируйте их в другое место.</value>
+  </data>
+  <data name="ExportSharingKeyDescription" xml:space="preserve">
+    <value>Поделитесь своим публичным ключом, чтобы другие могли безопасно отправлять вам зашифрованные файлы.</value>
   </data>
   <data name="ExportSharingKeyToolStripMenuItemText" xml:space="preserve">
     <value>Экспортировать Мой Ключ Общего Доступа</value>
@@ -18298,6 +18352,12 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   <data name="FileIsWriteProtectedWarning" xml:space="preserve">
     <value>'{0}' имеет защиту от записи.</value>
   </data>
+  <data name="FileListButtonText" xml:space="preserve">
+    <value>Добавляйте файлы с этого устройства</value>
+  </data>
+  <data name="FileListSubTitle" xml:space="preserve">
+    <value>Перетащите файл в свой облачный аккаунт или загрузите его с этого устройства.</value>
+  </data>
   <data name="FileNotFound" xml:space="preserve">
     <value>Файл не существует.</value>
   </data>
@@ -18379,6 +18439,9 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   </data>
   <data name="FindEncryptedFilesQuicklyPopup" xml:space="preserve">
     <value>Быстро находите зашифрованные файлы</value>
+  </data>
+  <data name="FindFileFeatureDescription" xml:space="preserve">
+    <value>Отсканируйте и найдите все зашифрованные файлы в одном месте.</value>
   </data>
   <data name="FindFileFeatureTitle" xml:space="preserve">
     <value>Поиск файлов</value>
@@ -19475,6 +19538,9 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   <data name="helpcentercommunityText" xml:space="preserve">
     <value>Не можете &lt;br/&gt;найти что-то? Просто &lt;span&gt; свяжитесь &lt;br/&gt; с поддержкой или посетите наш &lt;br/&gt; форум!&lt;/span&gt;</value>
   </data>
+  <data name="HelpCenterComponentDescription" xml:space="preserve">
+    <value>Получите помощь и ответы</value>
+  </data>
   <data name="helpcenterGuideContent1" xml:space="preserve">
     <value>Как скачать?</value>
   </data>
@@ -19902,8 +19968,14 @@ OneDrive или Dropbox с шифрованием с нулевым разгла
   <data name="ImportPublicKeysFileSelectionTitle" xml:space="preserve">
     <value>Выберите Файлы с Ключом Совместного Использования</value>
   </data>
+  <data name="ImportSomeonesPublicDescription" xml:space="preserve">
+    <value>Добавьте публичный ключ доверенного пользователя для безопасного доступа к зашифрованным общим файлам.</value>
+  </data>
   <data name="ImportSomeonesPublicSharingKeyText" xml:space="preserve">
     <value>Импорт чужого ключа общего доступа</value>
+  </data>
+  <data name="ImproveFilePrivacyPopup" xml:space="preserve">
+    <value>Повышение конфиденциальности файлов</value>
   </data>
   <data name="InactivitySignoutToolTipText" xml:space="preserve">
     <value>Для выхода из режима «Неактивность» требуется платный план подписки!</value>
@@ -20497,6 +20569,9 @@ OneDrive или Dropbox с шифрованием с нулевым разгла
   <data name="Invite" xml:space="preserve">
     <value>Пригласить пользователя</value>
   </data>
+  <data name="InviteEmailSuccessfullyText" xml:space="preserve">
+    <value>Приглашение отправлено {0} успешно!</value>
+  </data>
   <data name="InviteFriendAxCryptText" xml:space="preserve">
     <value>Пригласите своего друга в AxCrypt!</value>
   </data>
@@ -20508,6 +20583,12 @@ OneDrive или Dropbox с шифрованием с нулевым разгла
   </data>
   <data name="InviteUserPersonalizedMessageTitle" xml:space="preserve">
     <value>Личное сообщение</value>
+  </data>
+  <data name="InviteUserToolPopup" xml:space="preserve">
+    <value>Отправьте безопасное приглашение на регистрацию коллегам или друзьям с офлайн-поддержкой обмена ключами.</value>
+  </data>
+  <data name="InviteUserToolStripDescription" xml:space="preserve">
+    <value>Отправьте безопасное приглашение на регистрацию коллеге или другу. С самого первого дня их аккаунт будет защищен сквозным шифрованием.</value>
   </data>
   <data name="InviteUserToolStripMenuItemText" xml:space="preserve">
     <value>Пригласить друга</value>
@@ -21146,6 +21227,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="MailGunPremiumSupportTitle" xml:space="preserve">
     <value>{{user_email}} хотел бы получить помощь с...</value>
+  </data>
+  <data name="ManageAnonymousFiles" xml:space="preserve">
+    <value>Управление анонимными зашифрованными файлами</value>
   </data>
   <data name="ManageGroupAccessHeading" xml:space="preserve">
     <value>Управление групповым доступом</value>
@@ -23193,6 +23277,9 @@ SE-114 29 Стокгольм
   <data name="NameOnCardPrompt" xml:space="preserve">
     <value>Имя держателя карты</value>
   </data>
+  <data name="NavigationPaneDescription" xml:space="preserve">
+    <value>Поделитесь своими мыслями.</value>
+  </data>
   <data name="NavigationPaneFeedback" xml:space="preserve">
     <value>Обратная Связь</value>
   </data>
@@ -23513,6 +23600,9 @@ SE-114 29 Стокгольм
   <data name="OfflineInternetRequiredText" xml:space="preserve">
     <value>Вы оффлайн. Отключите режим Всегда оффлайн или подключитесь к интернету, чтобы продолжить.</value>
   </data>
+  <data name="OfflineKeySharingPopup" xml:space="preserve">
+    <value>Офлайн-совместное использование ключей</value>
+  </data>
   <data name="OfflineNoPremiumWarning" xml:space="preserve">
     <value>Вы находитесь в режиме оффлайн, поэтому мы не можем проверить Вашу подписку. Пожалуйста, перейдите в режим онлайн, чтобы мы смогли обновить Ваш статус!</value>
   </data>
@@ -23566,6 +23656,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="OpenToolStripButtonToolTipText" xml:space="preserve">
     <value>Нажмите для выбора защищённого файла для его открытия.</value>
+  </data>
+  <data name="OpenToolText" xml:space="preserve">
+    <value>Открытый инструмент</value>
   </data>
   <data name="OpenWebPageForPurchaseRequest" xml:space="preserve">
     <value>Хотите, чтобы мы открыли веб-страницу, на которой вы сможете совершить покупку?</value>
@@ -24690,6 +24783,9 @@ SE-114 29 Стокгольм
   <data name="PrioritySupportTitle" xml:space="preserve">
     <value>Приоритетная Поддержка</value>
   </data>
+  <data name="PrivacyAnonymityTitle" xml:space="preserve">
+    <value>Конфиденциальность и анонимность</value>
+  </data>
   <data name="PrivacyPolicyBlock1List1Item1" xml:space="preserve">
     <value>Адрес вашей электронной почты.</value>
   </data>
@@ -25353,6 +25449,12 @@ SE-114 29 Стокгольм
   <data name="PromptXecretsSecretText" xml:space="preserve">
     <value>Пароль или секрет</value>
   </data>
+  <data name="ProtectedEverywhereText" xml:space="preserve">
+    <value>Защищено везде.</value>
+  </data>
+  <data name="ProtectFileIdentityPopup" xml:space="preserve">
+    <value>Безопасная защита идентичности файла</value>
+  </data>
   <data name="PROText" xml:space="preserve">
     <value>Профессионал</value>
   </data>
@@ -25742,6 +25844,9 @@ SE-114 29 Стокгольм
   <data name="RenameDeleteOrDecryptFilesPopup" xml:space="preserve">
     <value>Переименование, удаление или расшифровка файлов</value>
   </data>
+  <data name="RenameFilesSecurelyPopup" xml:space="preserve">
+    <value>Безопасно переименовать файлы</value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>На эту учетную запись действует активная повторная подписка. Повторные Business подписки не нужно продлевать вручную.</value>
   </data>
@@ -25759,6 +25864,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="RenewSubscriptionTitle" xml:space="preserve">
     <value>Обновите ваше подписку!</value>
+  </data>
+  <data name="ReportSnapshotDescription" xml:space="preserve">
+    <value>Откройте сохранённые диагностические отчёты для устранения неполадок и получения помощи.</value>
   </data>
   <data name="ReportSnapshotIntro" xml:space="preserve">
     <value>Это краткий отчет об обнаруженных ошибках AxCrypt. Пожалуйста, скопируйте весь этот текст и напишите по адресу: 
@@ -26255,6 +26363,9 @@ SE-114 29 Стокгольм
   <data name="ResourcesHeading" xml:space="preserve">
     <value>Ресурсы</value>
   </data>
+  <data name="RestoreAnonymousNamesDescription" xml:space="preserve">
+    <value>Отмените анонимное переименование и восстановление файлов к их исходным именам, используя сохранённую карту переименований.</value>
+  </data>
   <data name="RestoreAnonymousNamesMenuText" xml:space="preserve">
     <value>Измените имя на оригинал</value>
     <comment>Displayed as a menu or context menu choice, and is used to restore the original name for encrypted files that have been renamed either manually or by using the anonymous rename function.</comment>
@@ -26268,6 +26379,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="RestoreNowText" xml:space="preserve">
     <value>Восстановить сейчас</value>
+  </data>
+  <data name="RestoreRenamePopup" xml:space="preserve">
+    <value>Восстановление оригинальных имен файлов</value>
   </data>
   <data name="RestoreToOriginalToolTipText" xml:space="preserve">
     <value>Для восстановления исходного плана требуется платная подписка!</value>
@@ -26510,6 +26624,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>AxCrypt Безопасное Удаление</value>
+  </data>
+  <data name="SecureDeleteToolDescription" xml:space="preserve">
+    <value>Навсегда стирайте файлы с помощью многократной перезаписи. Это делает восстановление невозможным даже для криминалистической экспертизы.</value>
   </data>
   <data name="SecureDeleteToolStripMenuItemText" xml:space="preserve">
     <value>Безопасное Удаление</value>
@@ -26762,6 +26879,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="SecureKeySharingPopup" xml:space="preserve">
     <value>Безопасное совместное использование ключей</value>
+  </data>
+  <data name="SecureUserInvitesPopup" xml:space="preserve">
+    <value>Безопасные приглашения пользователей</value>
   </data>
   <data name="SecurityBlock1Heading" xml:space="preserve">
     <value>Почему AxCrypt надежен?</value>
@@ -27143,6 +27263,9 @@ SE-114 29 Стокгольм
     <value>Легкий доступ к паролям</value>
     <comment>Title of "Share With Others" slide on Onboarding screen in mobile application.</comment>
   </data>
+  <data name="SharingCollaborationTitle" xml:space="preserve">
+    <value>Обмен и сотрудничество</value>
+  </data>
   <data name="SharingEncryptedText" xml:space="preserve">
     <value>Обмен зашифрованным текстом AxCrypt</value>
   </data>
@@ -27180,6 +27303,9 @@ SE-114 29 Стокгольм
   <data name="SignInBeforePremiumMessage" xml:space="preserve">
     <value>Сначала выполните вход в систему!</value>
     <comment>A short message used in the sign in dialog, to explain that a user should sign in first and then purchase or try premium as appropriate.</comment>
+  </data>
+  <data name="SigningYouInText" xml:space="preserve">
+    <value>Вход в систему...</value>
   </data>
   <data name="SignInLinkLabel" xml:space="preserve">
     <value>Войти</value>
@@ -28219,6 +28345,9 @@ SE-114 29 Стокгольм
   <data name="TryAxcryptfree" xml:space="preserve">
     <value>Попробуйте функции AxCrypt бесплатно</value>
   </data>
+  <data name="TryBrokenFileDescription" xml:space="preserve">
+    <value>Попытка восстановить и открыть повреждённые или частично искаженные зашифрованные файлы.</value>
+  </data>
   <data name="TryBrokenFileToolStripMenuItemText" xml:space="preserve">
     <value>Попробуйте Broken File</value>
   </data>
@@ -28456,6 +28585,9 @@ SE-114 29 Стокгольм
   <data name="UnlockAdvancedFolderPopup" xml:space="preserve">
     <value>Разблокируйте расширенную защиту папок</value>
   </data>
+  <data name="UnlockAdvancedPrivacyPopup" xml:space="preserve">
+    <value>Разблокируйте расширенные функции конфиденциальности</value>
+  </data>
   <data name="UnlockFeatures" xml:space="preserve">
     <value>Откройте для себя наши &lt;span&gt;удивительные&lt;/span&gt; &lt;span&gt;функции!&lt;/span&gt; Повышение до &lt;span&gt;Premium&lt;/span&gt; или &lt;b&gt;Business&lt;/b&gt;</value>
   </data>
@@ -28509,6 +28641,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="UpgradeFeatureText" xml:space="preserve">
     <value>Обновитесь, чтобы получить доступ к этой &lt;strong&gt;функции!&lt;/strong&gt;</value>
+  </data>
+  <data name="UpgradeLegacyFilesDescription" xml:space="preserve">
+    <value>Отсканируйте и перешифруйте устаревшие файлы AES-128 по более сильному стандарту AES-256 одним кликом.</value>
   </data>
   <data name="UpgradeLegacyFilesMenuItemText" xml:space="preserve">
     <value>Обновить файлы: AES-256</value>
@@ -28699,6 +28834,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="UserActivitiesText" xml:space="preserve">
     <value>Действия пользователя</value>
+  </data>
+  <data name="UserActivityDescription" xml:space="preserve">
+    <value>Просмотрите все действия и историю файлов.</value>
   </data>
   <data name="UserActivityTitle" xml:space="preserve">
     <value>Активность пользователя</value>
@@ -29084,11 +29222,29 @@ SE-114 29 Стокгольм
     <value>Пожалуйста, подтвердите Ваш новый аккаунт</value>
     <comment>Text displayed on Activation code page in mobile app.</comment>
   </data>
+  <data name="VerifyFileDescription" xml:space="preserve">
+    <value>Проверьте, зашифрован ли файл и прошел ли он аутентификацию с помощью AxCrypt.</value>
+  </data>
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>Пожалуйста, проверьте и подтвердите файл</value>
   </data>
+  <data name="VerifyMFABrandSubTitle" xml:space="preserve">
+    <value>Защищённые файлы, пароли и личные сообщения с мощным шифрованием – прежде чем они будут переданы, синхронизированы или сохранены в облаке.</value>
+  </data>
+  <data name="VerifyMFAOffline" xml:space="preserve">
+    <value>Работы онлайн &lt;em&gt;и&lt;/em&gt; офлайн</value>
+  </data>
+  <data name="VerifyMFASecureCloudStorage" xml:space="preserve">
+    <value>Безопасное облачное хранилище и простое совместное использование</value>
+  </data>
   <data name="VerifyMfaText" xml:space="preserve">
     <value>Многофакторная проверка подлинности</value>
+  </data>
+  <data name="VerifyMFAWhyAxCryptLabel" xml:space="preserve">
+    <value>Шифрование устройств AES-256</value>
+  </data>
+  <data name="VerifyMFAWorksAcrossDevices" xml:space="preserve">
+    <value>Работа на разных устройствах</value>
   </data>
   <data name="VerifyPasswordPrompt" xml:space="preserve">
     <value>Подтвердить Пароль</value>
@@ -29530,6 +29686,9 @@ SE-114 29 Стокгольм
   </data>
   <data name="YourEmailText" xml:space="preserve">
     <value>Ваш адрес электронной почты </value>
+  </data>
+  <data name="YourFilesText" xml:space="preserve">
+    <value>Ваши файлы.</value>
   </data>
   <data name="YourPasswordText" xml:space="preserve">
     <value>Ваш пароль:</value>
