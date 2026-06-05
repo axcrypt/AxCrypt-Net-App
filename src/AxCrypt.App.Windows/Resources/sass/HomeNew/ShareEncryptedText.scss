@@ -2,7 +2,41 @@
 // to the shared .skd-* (share-key dialog) design system.
 
 // Slightly wider than the key-share modal to fit the expiry row
-.tsd-modal { max-width: 500px; }
+.tsd-modal {
+    position: relative;
+    max-width: 500px;
+}
+
+.tsd-apply-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, .56);
+    border-radius: inherit;
+
+    .axl--body {
+        min-height: 0;
+        width: 190px;
+        padding: 22px 26px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, .86);
+        box-shadow: 0 18px 42px rgba(15, 23, 42, .16);
+    }
+
+    .axl--body .axl-logo {
+        width: 46px;
+        height: 46px;
+    }
+
+    .axl-msg {
+        font-size: 12.5px;
+        max-width: none;
+        white-space: nowrap;
+    }
+}
 
 // Header icon — indigo tint to distinguish from key-share
 .tsd-header-icon {
@@ -201,6 +235,15 @@
 
 // Dark theme — mirrors ShareKey.scss token set exactly
 html[data-theme="dark"] {
+
+    .tsd-apply-overlay {
+        background: rgba(15, 23, 42, .42);
+
+        .axl--body {
+            background: rgba(30, 37, 48, .88);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, .45);
+        }
+    }
 
     // Header icon
     .tsd-header-icon {

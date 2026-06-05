@@ -30,7 +30,7 @@
 }
 else
 {
-    <div class="page-content-body-section vlt-body" @onclick="async () => await HideContextMenu()">
+    <div class="page-content-body-section vlt-body">
 
         @* ── Compact toolbar: search + add + share + settings ── *@
         <div class="vlt-toolbar">
@@ -158,9 +158,7 @@ else
                             </div>
                         </div>
                         <div class="@(isListView ? "list-view-div" : "grid-view-div")"
-                             @onclick="async () => await HideContextMenu()"
-                             @oncontextmenu="@(async e => await ShowContextMenu(e, "", "", "create", ""))"
-                             @oncontextmenu:preventDefault="true">
+                             @onclick="async () => await CloseMenus()">
                             <ul class="vlt-file-list @(isListView ? "list-view" : "grid-view")">
                                 @foreach (VaultItem file in ViewModel.VaultItemList)
                                 {
@@ -168,7 +166,7 @@ else
                                     bool isChecked = _selectedPaths.Contains(file.Filepath);
                                     <li class="file-list-item @(ViewModel.SelectedFilePath == file.Filepath ? "selected" : "") @(isChecked ? "vlt-row--checked" : "")"
                                         @ondblclick="() => OnItemDoubleClick(file)"
-                                        @oncontextmenu="@(isListView ? async (e) => await ShowContextMenu(e, filename, file.Filepath, file.FileType, file.Size) : async (e) => await HideContextMenu())"
+                                        @oncontextmenu="async () => await SelectFile(file.FileType, filename, file.Filepath, file.Size)"
                                         @oncontextmenu:preventDefault="true"
                                         @oncontextmenu:stopPropagation
                                         @onclick="async () => await SelectFile(file.FileType, filename, file.Filepath, file.Size)">
@@ -196,71 +194,13 @@ else
                                                 <span>@file.Size</span>
                                                 <span>@file.ModifiedDate</span>
                                             }
-                                            <span class="file-actions" @onclick:stopPropagation="true">
-                                                <button type="button" class="vlt-more-btn" title="More actions"
-                                                        aria-label="More actions"
-                                                        @onclick="async (e) => await ShowContextMenu(e, filename, file.Filepath, file.FileType, file.Size)">
-                                                    <span class="vlt-more-dot"></span>
-                                                    <span class="vlt-more-dot"></span>
-                                                    <span class="vlt-more-dot"></span>
-                                                </button>
-                                            </span>
                                         </div>
                                     </li>
                                 }
                             </ul>
-
-                            @* Detail side panel removed — the action bar at the
-                               bottom shows file name + actions for both views. *@
                         </div>
 
 
-                        @if (contextMenuType == "file" && !String.IsNullOrEmpty(ViewModel.SelectedFilePath))
-                        {
-                            <div class="context-menu-action"
-                                 style="position:absolute; top:@(contextMenuY)px; left:@(contextMenuX)px;"
-                                 @onclick:stopPropagation="true"
-                                 @oncontextmenu:stopPropagation="true"
-                                 @oncontextmenu:preventDefault="true">
-                                <span class="menu-item"
-                                      @onclick='async () => await RunFileAction("Open")'>@Texts.RecentFilesOpenToolStripMenuItemText</span>
-                                <span class="menu-item"
-                                      @onclick="async () => await DecryptVaultFile()">@Texts.DecryptToolStripMenuItemText</span>
-                                <span class="menu-item"
-                                      @onclick='async () => await RunFileAction("Reveal")'>@Texts.ShowInFolderText</span>
-                                <span class="menu-item"
-                                      @onclick='async () => await RunFileAction("RenameAnonymously")'>@Texts.AnonymousRenameMenuText</span>
-                                <span class="menu-item"
-                                      @onclick='async () => await RunFileAction("RenameOriginal")'>@Texts.RestoreAnonymousNamesMenuText</span>
-                            </div>
-                        }
-                        else if (contextMenuType == "folder")
-                        {
-                            <div class="context-menu-action"
-                                 style="position: absolute; top:@(contextMenuY)px; left:@(contextMenuX)px;"
-                                 @onclick:stopPropagation="true"
-                                 @oncontextmenu:stopPropagation="true"
-                                 @oncontextmenu:preventDefault="true">
-                                <span class="menu-item"
-                                      @onclick="async () => await DecryptVaultFolder()">@Texts.DecryptToolStripMenuItemText</span>
-                                <span class="menu-item"
-                                      @onclick='async () => await RevealVaultFolder()'>@Texts.ShowInFolderText</span>
-                                <span class="menu-item"
-                                      @onclick="async () => await CreateNewFolderFromMenu(ViewModel.SelectedFilePath)">@Texts.CreateNewFolderText</span>
-                            </div>
-                        }
-                        else if (contextMenuType == "create")
-                        {
-                            <div class="context-menu-action"
-                                 style="position: absolute; top:@(contextMenuY)px; left:@(contextMenuX)px;"
-                                 @onclick:stopPropagation="true"
-                                 @oncontextmenu:stopPropagation="true"
-                                 @oncontextmenu:preventDefault="true">
-                                <span class="menu-item"
-                                      @onclick="async () => await CreateNewFolderFromMenu(ViewModel.CurrentFolder)">@Texts.CreateNewFolderText</span>
-                                <span class="menu-item" @onclick="AddVaultFolder">@Texts.AddNewFolderText</span>
-                            </div>
-                        }
                     </div>
                 }
                 else
@@ -301,9 +241,10 @@ else
                     </nav>
                 </div>
 
-                @* ── Action bar — mirrors cbp-actionbar pattern ── *@
+                @* ── Action bar ──────────────────────────────────────────────── *@
                 @if (_selectedPaths.Any())
                 {
+                    @* Multi-select (checkbox) — batch actions *@
                     <div class="cbp-actionbar vlt-actionbar" role="region" aria-label="Bulk actions">
                         <span class="cbp-actionbar-count">@_selectedPaths.Count selected</span>
                         <button type="button" class="cbp-btn cbp-btn--ghost"
@@ -315,7 +256,7 @@ else
                                 @onclick="async () => await BatchRenameAsync()">
                             @Texts.AnonymousRenameMenuText
                         </button>
-                        <button type="button" class="cbp-btn cbp-btn cbp-btn--ghost"
+                        <button type="button" class="cbp-btn cbp-btn--ghost"
                                 @onclick="async () => await BatchRestoreRenameAsync()">
                             @Texts.RestoreAnonymousNamesMenuText
                         </button>
@@ -325,8 +266,57 @@ else
                         </button>
                     </div>
                 }
+                else if (ViewModel.isfileselected && !string.IsNullOrEmpty(ViewModel.SelectedFilePath))
+                {
+                    @* Single file or folder selected (click / right-click) *@
+                    <div class="cbp-actionbar vlt-actionbar" role="region" aria-label="File actions">
+                        <span class="cbp-actionbar-file" title="@ViewModel.SelectedFilePath">
+                            @ViewModel.SelectedFile
+                        </span>
+                        <span class="cbp-actionbar-spacer"></span>
+                        @if (!ViewModel.IsFolder)
+                        {
+                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                                    @onclick='async () => await RunFileAction("Open")'>
+                                @Texts.RecentFilesOpenToolStripMenuItemText
+                            </button>
+                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                                    @onclick="async () => await DecryptVaultFile()">
+                                @Texts.DecryptToolStripMenuItemText
+                            </button>
+                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                                    @onclick='async () => await RunFileAction("Reveal")'>
+                                @Texts.ShowInFolderText
+                            </button>
+                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                                    @onclick='async () => await RunFileAction("RenameAnonymously")'>
+                                @Texts.AnonymousRenameMenuText
+                            </button>
+                            <button type="button" class="cbp-btn cbp-btn--primary"
+                                    @onclick='async () => await RunFileAction("RenameOriginal")'>
+                                @Texts.RestoreAnonymousNamesMenuText
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                                    @onclick="async () => await DecryptVaultFolder()">
+                                @Texts.DecryptToolStripMenuItemText
+                            </button>
+                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                                    @onclick="async () => await RevealVaultFolder()">
+                                @Texts.ShowInFolderText
+                            </button>
+                            <button type="button" class="cbp-btn cbp-btn--primary"
+                                    @onclick="async () => await CreateNewFolderFromMenu(ViewModel.SelectedFilePath)">
+                                @Texts.CreateNewFolderText
+                            </button>
+                        }
+                    </div>
+                }
                 else
                 {
+                    @* Nothing selected *@
                     <div class="cbp-actionbar cbp-actionbar--idle vlt-actionbar">
                         <span class="cbp-actionbar-hint">@Texts.VaultDrogDropText</span>
                     </div>
@@ -338,28 +328,8 @@ else
         <script>
                 window.scrollToFirstMatch = function () {
                     const el = document.getElementById("firstMatch");
-                    if (el) {
-                        el.scrollIntoView({ behavior: "smooth", block: "center" });
-                    }
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
                 };
-
-                window.getElementRect = (selector) => {
-                    const el = document.querySelector(selector);
-                    if (!el) return null;
-
-                    const rect = el.getBoundingClientRect();
-                    return {
-                        top: rect.top,
-                        left: rect.left,
-                        bottom: rect.bottom,
-                        height: rect.height,
-                        width: rect.width,
-                        scrollTop: el.scrollTop,
-                        scrollLeft: el.scrollLeft
-                    };
-                };
-
-                window.getWindowHeight = () => window.innerHeight;
         </script>
 
     </div>
@@ -389,12 +359,6 @@ else
 }
 @code {
     private bool isListView { get; set; } = true;
-    private double contextMenuX { get; set; }
-    private double contextMenuY { get; set; }
-    private string flipContextMenu { get; set; } = "top left";
-    private string flipTransform { get; set; } = "translateY(0)";
-    private double contextMenuHeight { get; set; } = 210;
-    private double contextMenuWidth { get; set; } = 180;
     private bool DropZoneActive { get; set; }
 
     // ── Multi-select state (mirrors cbp SelectedFiles pattern) ──────
@@ -450,9 +414,7 @@ else
         ClearVaultSelection();
     }
     private bool isAddMenuOpen { get; set; }
-
     private string searchText = string.Empty;
-    private string contextMenuType = "";
 
     // Stored delegate references for clean removal in Dispose(). All
     // backing events are Action variants (Action, Action<IList<string>>),
@@ -522,7 +484,6 @@ else
     {
         isListView = listView;
         ViewModel.isfileselected = false;
-        contextMenuType = "";
         isAddMenuOpen = false;
         _selectedPaths.Clear();
     }
@@ -533,77 +494,31 @@ else
         ViewModel.LoadVaultItems();
     }
 
-    private async Task ShowContextMenu(MouseEventArgs e, string fileName, string filePath, string selectedFolder, string fileSize)
-    {
-        isAddMenuOpen = false;
-        ElementRect container = await JSRuntime.InvokeAsync<ElementRect>("getElementRect", ".vlt-content-area");
-
-        contextMenuX = e.ClientX - container.Left + container.ScrollLeft;
-        contextMenuY = e.ClientY - container.Top + container.ScrollTop;
-
-        if (contextMenuX + contextMenuWidth > container.Width)
-        {
-            contextMenuX = container.Width - contextMenuWidth - 10;
-        }
-
-        double maxVisibleHeight = container.Height - 40;
-        if (contextMenuY + contextMenuHeight > maxVisibleHeight)
-        {
-            contextMenuY = maxVisibleHeight - contextMenuHeight - 10;
-        }
-
-        contextMenuX = Math.Max(0, contextMenuX);
-        contextMenuY = Math.Max(0, contextMenuY);
-
-        contextMenuType = selectedFolder;
-
-        if (selectedFolder == "create")
-            return;
-
-        flipContextMenu = "top left";
-        flipTransform = "translateY(0)";
-
-        if (selectedFolder != "create" && contextMenuY + contextMenuHeight > container.Height)
-        {
-            flipContextMenu = "bottom left";
-            flipTransform = $"translateY(-{contextMenuHeight}px)";
-        }
-
-        ViewModel.SelectedFile = fileName;
-        ViewModel.SelectedFilePath = filePath;
-        ViewModel.IsFolder = selectedFolder == "folder";
-        ViewModel.SelectedFileSize = fileSize;
-        ViewModel.isfileselected = !string.IsNullOrEmpty(filePath);
-        await UpdateUIState();
-    }
-
     private async Task SelectFile(string Type, string fileName, string filePath, string fileSize)
     {
         ViewModel.SelectedFile = fileName;
         ViewModel.SelectedFilePath = filePath;
-        ViewModel.IsFolder = Type == "folder" ? true : false;
+        ViewModel.IsFolder = Type == "folder";
         ViewModel.SelectedFileSize = fileSize;
         ViewModel.isfileselected = true;
-        await HideContextMenu();
+        isAddMenuOpen = false;
+        await UpdateUIState();
     }
 
-    private async Task HideContextMenu()
+    private async Task CloseMenus()
     {
-        contextMenuType = "";
         isAddMenuOpen = false;
         await UpdateUIState();
     }
 
     private void ToggleAddMenu()
     {
-        contextMenuType = "";
         isAddMenuOpen = !isAddMenuOpen;
     }
 
     private async Task AddVaultFiles()
     {
         isAddMenuOpen = false;
-        contextMenuType = "";
         ViewModel.AddVaultFiles();
         await UpdateUIState();
     }
@@ -611,42 +526,36 @@ else
     private async Task AddVaultFolder()
     {
         isAddMenuOpen = false;
-        contextMenuType = "";
         ViewModel.AddVaultFolder();
         await UpdateUIState();
     }
 
     private async Task RunFileAction(string action)
     {
-        contextMenuType = "";
         await ViewModel.PrepareFileActionAsync(action);
         await UpdateUIState();
     }
 
     private async Task DecryptVaultFile()
     {
-        contextMenuType = "";
         await ViewModel.DecryptVaultFileAsync();
         await UpdateUIState();
     }
 
     private async Task DecryptVaultFolder()
     {
-        contextMenuType = "";
         await ViewModel.DecryptVaultfolder();
         await UpdateUIState();
     }
 
     private async Task RevealVaultFolder()
     {
-        contextMenuType = "";
         ViewModel.FolderActionReveal();
         await UpdateUIState();
     }
 
     private async Task CreateNewFolderFromMenu(string folderPath)
     {
-        contextMenuType = "";
         CreateNewFolder(folderPath);
         await UpdateUIState();
     }
@@ -822,14 +731,4 @@ else
         return true;
     }
 
-    public class ElementRect
-    {
-        public double Top { get; set; }
-        public double Left { get; set; }
-        public double Bottom { get; set; }
-        public double Height { get; set; }
-        public double Width { get; set; }
-        public double ScrollTop { get; set; }
-        public double ScrollLeft { get; set; }
-    }
 }

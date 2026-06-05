@@ -89,7 +89,13 @@
 
         await profileViewModel!.InitializeAsync();
 
-        FileDropService.CurrentPage = navigationManager.Uri.Replace(navigationManager.BaseUri, "/");
+        string currentPath = navigationManager.Uri.Replace(navigationManager.BaseUri, "/");
+        FileDropService.CurrentPage = currentPath;
+
+        // Refresh the active-page title on every mount so a language change
+        // (which does an in-process forceLoad) gets the new-culture strings
+        // rather than stale text baked into the singleton's CurrentPage.
+        navPageService.SetActivePage(currentPath);
 
         navigationManager.LocationChanged += OnLocationChanged;
         popupService.OnChange += UpdatePageState;

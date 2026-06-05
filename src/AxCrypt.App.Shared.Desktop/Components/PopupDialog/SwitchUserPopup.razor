@@ -15,12 +15,20 @@
 {
     <div class="SwitchUser-backdrop">
         <div class="SwitchUser-popup" role="dialog" aria-modal="true" aria-labelledby="switch-user-title">
-            <div class="popup-image-paragraph">
-                <span class="switch-user-hero">
-                    <img class="popup-image" src="images/prfls_1.svg" alt="Switch user">
-                </span>
-                <h2 id="switch-user-title" class="switch-user-title">@Texts.SwitchUserButtonText</h2>
-                <span class="popup-paragraph">@((MarkupString)string.Format(Texts.SwitchUserPopupText))</span>
+            <div class="axd-header" style="padding: 18px 22px 14px;">
+                <div class="axd-header-icon axd-header-icon--prem">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <div class="axd-header-text">
+                    <p id="switch-user-title" class="axd-title">@Texts.SwitchUserButtonText</p>
+                    <p class="axd-sub">@((MarkupString)string.Format(Texts.SwitchUserPopupText))</p>
+                </div>
+                <button class="axd-close" @onclick="popupService.ToggleSwitchUserPopupOpen" aria-label="Close">&times;</button>
             </div>
             <div class="switch-user-list">
                 @{

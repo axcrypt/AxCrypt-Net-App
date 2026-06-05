@@ -199,14 +199,14 @@
     cursor: pointer;
 }
 
-.sm-toggle-row--locked .sm-toggle-label,
-.sm-toggle-row--locked .sm-toggle-desc {
-    color: $text-muted;
-}
+    .sm-toggle-row--locked .sm-toggle-label,
+    .sm-toggle-row--locked .sm-toggle-desc {
+        color: $text-muted;
+    }
 
-.sm-toggle-row--locked:hover {
-    background: #fffbeb; // amber-50 — hints at the upgrade pitch the popup will show
-}
+    .sm-toggle-row--locked:hover {
+        background: #fffbeb; // amber-50 — hints at the upgrade pitch the popup will show
+    }
 
 .sm-toggle-info {
     display: flex;
@@ -289,4 +289,191 @@
 
 .sm-advanced-btn:hover .sm-adv-arrow {
     transform: translateX(2px);
+}
+
+.settings-menu-item-container {
+    padding: 0 20px;
+    min-height: 40px;
+
+    .stngs-menu-icon {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        top: 90px;
+        left: 20px;
+
+        &.IcoEye {
+            content: Url(/images/default/IcoEye.svg);
+        }
+
+        &.Ico256 {
+            content: Url(/images/default/Ico256.svg);
+        }
+
+        &.IcoIncldFldrs24px {
+            content: Url(/images/default/IcoIncldFldrs24px.svg);
+        }
+
+        &.Icoinactsign {
+            content: Url(/images/default/IcoSlpMd.svg);
+        }
+
+        &.IcoRstr {
+            content: Url(/images/default/IcoRstr.svg);
+        }
+
+        &.IcoAdvsSttns {
+            content: Url(/images/default/IcoAdvsSttns.svg);
+        }
+
+        &.IcoOffln {
+            content: Url(/images/default/IcoOffln.svg);
+        }
+
+        &.IcoEncrptSttgs {
+            content: Url(/images/default/IcoEncrptSttgs.svg);
+        }
+
+        &.IcoInvtFrnd {
+            content: Url(/images/default/IcoInvtFrnd.svg);
+        }
+
+        &.IcoDbg {
+            content: Url(/images/default/IcoDbg.svg);
+        }
+
+        &.IcoChckVrsn {
+            content: Url(/images/default/IcoChckVrsn.svg);
+        }
+
+        &.IcoOptns {
+            content: Url(/images/default/IcoOptns.svg);
+        }
+
+        &.IcoLgng {
+            content: Url(/images/default/IcoLgng.svg);
+        }
+
+        &.IcoFileLgng {
+            content: Url(/images/default/IcoFileLgng.svg);
+        }
+
+        &.IcoUsers {
+            content: Url(/images/default/IcoUsers.svg);
+        }
+
+        &.IcoBrkFl {
+            content: Url(/images/default/IcoBrkFl.svg);
+        }
+
+        &.IcoChckVer {
+            content: Url(/images/default/IcoChckVer.svg);
+        }
+
+        &.IcoChckFl {
+            content: Url(/images/default/IcoChckFl.svg);
+        }
+
+        &.IcoErrRprt {
+            content: Url(/images/default/IcoErrRprt.svg);
+        }
+
+        &.IcoDkMd {
+            content: $IcoDrkMod;
+        }
+    }
+
+    &:hover, &.selected {
+        background: $HglhtTxt;
+
+        .IcoEye {
+            content: $IcoEye;
+        }
+
+        .Ico256 {
+            content: $Ico256;
+        }
+
+        .IcoIncldFldrs24px {
+            content: $IcoIncldFldrs24px;
+        }
+
+        .Icoinactsign {
+            content: $IcoSlpMd;
+        }
+
+        .IcoRstr {
+            content: $IcoRstr;
+        }
+
+        .IcoAdvsSttns {
+            content: $IcoAdvsSttns;
+        }
+
+        .IcoOffln {
+            content: $IcoOffln;
+        }
+
+        .IcoEncrptSttgs {
+            content: $IcoEncrptSttgs;
+        }
+
+        .IcoInvtFrnd {
+            content: $IcoInvtFrnd;
+        }
+
+        .IcoDbg {
+            content: $IcoDbg;
+        }
+
+        .IcoErrRprt {
+            content: $IcoErrRprt;
+        }
+
+        .IcoChckFl {
+            content: $IcoChckFl;
+        }
+
+        .IcoChckVer {
+            content: $IcoChckVer;
+        }
+
+        .IcoBrkFl {
+            content: $IcoBrkFl;
+        }
+
+        .IcoUsers {
+            content: $IcoUsers;
+        }
+
+        .IcoLgng {
+            content: $IcoLgng;
+        }
+
+        .IcoOptns {
+            content: $IcoOptns;
+        }
+
+        .IcoFileLgng {
+            content: $IcoFileLgng;
+        }
+
+        .IcoChckVrsn {
+            content: $IcoChckVrsn;
+        }
+
+        .next-arrow {
+            float: right;
+            content: $IcoDrpDwn;
+            padding-top: 3px;
+            height: 14px;
+            margin: 5px 0px 0 20px;
+        }
+    }
+
+    a:hover {
+        span {
+            color: $TxtClr !important;
+        }
+    }
 }

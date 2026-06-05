@@ -18,8 +18,12 @@ namespace AxCrypt.App.Shared.Desktop.Services;
 public class FilePasswordWindowService : IFilePasswordWindowService
 {
     private Window? _window;
+    private DateTime _suppressMainWindowReloadUntilUtc = DateTime.MinValue;
 
     private UserFilePasswordViewModel? _userFilePasswordViewModel;
+
+    public bool ShouldSuppressMainWindowReload =>
+        _window != null || DateTime.UtcNow < _suppressMainWindowReloadUntilUtc;
 
     public async Task<DialogResult> ShowWindow(string? encryptedFileFullName)
     {
@@ -160,6 +164,8 @@ public class FilePasswordWindowService : IFilePasswordWindowService
 
     public void Close()
     {
+        _suppressMainWindowReloadUntilUtc = DateTime.UtcNow.AddSeconds(3);
+
         if (_window == null)
         {
             return;

@@ -6,13 +6,16 @@ using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core;
+using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using static AxCrypt.Abstractions.TypeResolve;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels.Home;
@@ -43,11 +46,118 @@ public class ActionsViewModel : ViewModelBase
     public void Initialized()
     {
         _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { ConfigureMenusAccordingToPolicyAsync(license); });
-        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) => { AreFilesPending = areFilesPending; UpdateViewState(); });
+        _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FilesArePending), (bool areFilesPending) =>
+        {
+            AreFilesPending = areFilesPending;
+            UpdateViewState();
+            // Start (or stop) the background file-lock poll so the broom disappears
+            // as soon as the viewer (e.g. Windows Photos) releases the file handle,
+            // even when the app's background process stays running.
+            if (areFilesPending)
+                StartPendingFilePoll();
+            else
+                StopPendingFilePoll();
+        });
         _mainViewModel.BindPropertyChanged(nameof(_mainViewModel.FoldersArePending), (bool areFoldersPending) => { AreFoldersPending = areFoldersPending; UpdateViewState(); });
     }
 
     public bool AreFilesPending { get; set; }
+
+    // ── File-lock polling (broom auto-dismiss) ──────────────────────
+    // Windows apps (e.g. Photos) often keep a background process alive
+    // after the user "closes" them, so the process-exit check in Core
+    // never fires. We poll whether the temp decrypted file is still
+    // locked by any process. The moment Photos releases the handle the
+    // broom disappears automatically.
+
+    private CancellationTokenSource? _pollCts;
+    private readonly HashSet<string> _pollObservedLockedFiles = new(StringComparer.OrdinalIgnoreCase);
+
+    private void StartPendingFilePoll()
+    {
+        StopPendingFilePoll();
+        _pollObservedLockedFiles.Clear();
+        _pollCts = new CancellationTokenSource();
+        _ = PollPendingFilesAsync(_pollCts.Token);
+    }
+
+    private void StopPendingFilePoll()
+    {
+        _pollCts?.Cancel();
+        _pollCts?.Dispose();
+        _pollCts = null;
+        _pollObservedLockedFiles.Clear();
+    }
+
+    private async Task PollPendingFilesAsync(CancellationToken ct)
+    {
+        // Brief initial delay so the viewer has time to acquire its handle
+        // before we start checking.
+        await Task.Delay(2_500, ct).ContinueWith(_ => { }).ConfigureAwait(false);
+
+        while (!ct.IsCancellationRequested && AreFilesPending)
+        {
+            try
+            {
+                var recentFiles = _mainViewModel?.RecentFiles;
+
+                if (recentFiles != null)
+                {
+                    // Collect the on-disk paths of all files that are still marked
+                    // as "decrypted" (i.e. have a temp copy open for editing).
+                    List<string> openPaths = recentFiles
+                        .Where(f => f.IsDecrypted)
+                        .Select(f => f.DecryptedFileInfo?.FullName ?? string.Empty)
+                        .Where(p => !string.IsNullOrEmpty(p) && File.Exists(p))
+                        .ToList();
+
+                    HashSet<string> openPathSet = new(openPaths, StringComparer.OrdinalIgnoreCase);
+                    _pollObservedLockedFiles.RemoveWhere(path => !openPathSet.Contains(path));
+
+                    foreach (string path in openPaths.Where(IsFileLocked))
+                    {
+                        _pollObservedLockedFiles.Add(path);
+                    }
+
+                    // Only auto-clean after every tracked temp file has first been
+                    // observed as locked/open, then later released. This avoids
+                    // racing the launch path for apps that acquire their file handle
+                    // after the decrypted temp file is created.
+                    if (openPaths.Any() &&
+                        openPaths.All(path => _pollObservedLockedFiles.Contains(path)) &&
+                        openPaths.All(path => !IsFileLocked(path)))
+                    {
+                        await EncryptPendingFiles().ConfigureAwait(false);
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                // Polling must never crash — swallow and retry.
+            }
+
+            await Task.Delay(2_000, ct).ContinueWith(_ => { }).ConfigureAwait(false);
+        }
+    }
+
+    /// <summary>
+    /// Returns true if another process holds an open handle on <paramref name="path"/>.
+    /// Uses the same data-store lock probe as Core's re-encryption flow so
+    /// shell-hosted viewers such as Photos are detected consistently.
+    /// </summary>
+    private static bool IsFileLocked(string path)
+    {
+        try
+        {
+            if (!File.Exists(path)) return false;
+            return New<IDataStore>(path).IsLocked();
+        }
+        catch
+        {
+            return true;    // treat any other error as locked to be safe
+        }
+    }
 
     public bool AreFoldersPending { get; set; }
 
@@ -184,7 +294,21 @@ public class ActionsViewModel : ViewModelBase
         {
             await _batchService.RunAsync(
                 selected,
-                async (path) => await _fileOperationViewModel.DecryptFiles.ExecuteAsync(new[] { path }),
+                async (path) =>
+                {
+                    await _fileOperationViewModel.DecryptFiles.ExecuteAsync(new[] { path });
+
+                    // Core commands surface failures through internal status callbacks
+                    // rather than exceptions, so BatchFileOperationService cannot detect
+                    // a silent failure from the try/catch alone. If the encrypted file
+                    // still exists after the operation it was not actually decrypted
+                    // (e.g. file is in use, permission denied, wrong password).
+                    // Throwing here pushes the file into the Failed list and prevents
+                    // the misleading "Decrypted successfully" toast.
+                    if (System.IO.File.Exists(path))
+                        throw new System.IO.IOException(
+                            "The file could not be decrypted. It may be open in another application.");
+                },
                 "Decrypted");
             return;
         }

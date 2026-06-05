@@ -14,13 +14,18 @@ public class NavPageService
     //  PAGE TITLES (dynamic per nav item)
     // ═══════════════════════════════════════════
 
-    private static PageMeta DefaultCurrentPageMeta =
+    // Intentionally a property (not a static field) so Texts.* re-reads
+    // the current culture on every access. A static field would bake in
+    // the startup language and never update after a language change + reload.
+    private static PageMeta DefaultCurrentPageMeta =>
         new()
         {
-            Title = Texts.WelcomeBackTitle,
-            Subtitle = "Your encrypted dashboard — recent files, quick actions, and security status at a glance."
+            Title    = Texts.WelcomeBackTitle,
+            Subtitle = Texts.NavPageSubtitle,
         };
 
+    // Initialised lazily via the property so the first read also picks up
+    // the correct culture even if the user changed language before login.
     public PageMeta CurrentPage { get; set; } = DefaultCurrentPageMeta;
 
     public void SetActivePage(NavPage page)
@@ -33,6 +38,15 @@ public class NavPageService
     {
         CurrentPage = NavPageData.NavPages.FirstOrDefault(nv => nv.Href == navUrl) ?? DefaultCurrentPageMeta;
         UpdateViewState();
+    }
+
+    /// <summary>Re-reads the title and subtitle for the current page using the
+    /// active culture. Call after a language change to update the TopBar title
+    /// without requiring a full navigation.</summary>
+    public void RefreshCurrentPage()
+    {
+        string href = (CurrentPage as NavPage)?.Href ?? "/";
+        SetActivePage(href);
     }
 
     public IEnumerable<NavPage>? SideMenuNavPages

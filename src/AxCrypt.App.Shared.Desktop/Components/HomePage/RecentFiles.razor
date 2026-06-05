@@ -196,6 +196,13 @@
         recentFilesViewModel.OnInitialized();
         recentFilesViewModel.OnUpdateViewState += UpdatePageState;
 
+        // Also refresh when any QuickAction operation (encrypt / open / decrypt /
+        // share-key) completes. The ViewModel property-change chain that drives
+        // recentFilesViewModel can arrive one render tick after homeActionModel
+        // fires its own update — subscribing here ensures both components repaint
+        // in the same cycle so the file list never lags a QuickAction.
+        homeActionModel.OnUpdateViewState += UpdatePageState;
+
         FileDropService.ResetOnDropped();
         _onFilesDropped = (files) => _ = HandleDroppedFiles(files);
         FileDropService.OnFilesDropped    += _onFilesDropped;
@@ -210,6 +217,7 @@
         // VM is a singleton — unhook so the next mount doesn't stack
         // up duplicate handlers (one ActiveFile change → N redraws).
         recentFilesViewModel.OnUpdateViewState -= UpdatePageState;
+        homeActionModel.OnUpdateViewState      -= UpdatePageState;
 
         // Unsubscribe FileDropService events.  Without this, each navigation
         // back to the home page adds another copy of each handler, causing

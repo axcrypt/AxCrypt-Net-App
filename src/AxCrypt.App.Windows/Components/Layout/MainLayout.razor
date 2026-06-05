@@ -12,6 +12,7 @@
 @inject NavigationManager navigationManager
 @inject ImportPrivateKeyViewModel ImportViewModel
 @inject PopupService popupService
+@inject IFilePasswordWindowService FilePasswordWindowService
 @* PaidFeaturegateService is no longer injected here — the paid-gate
    modal now lives entirely inside its own component
    (Components/Shared/PaidGateDialog.razor) which injects the service
@@ -29,7 +30,7 @@
            from cold start through to in-app waits. *@
         <main>
             <AxCrypt.App.Shared.Desktop.Components.Shared.AxLoader
-                Mode="AxCrypt.App.Shared.Desktop.Components.Shared.LoaderMode.FullPage"
+                Mode="AxCrypt.App.Shared.Desktop.Models.LoaderMode.FullPage"
                 Message="@Texts.PreparingAxCryptText" />
         </main>
     }
@@ -122,6 +123,12 @@
 
     private bool CanShowSignInPage { get; set; }
 
+    // Tracks whether the user has been signed in at any point this session.
+    // Distinguishes a sign-out (was signed in → now signed out) from a
+    // pre-login signup flow so we redirect to login after sign-out even
+    // when the current page is /upgradePage or /planAndPay.
+    private bool _wasSignedIn = false;
+
     protected async override Task OnInitializedAsync()
     {
         await InitiateDelayToRenderPage();
@@ -143,6 +150,9 @@
 
     private void UpdateSignInPageState(bool canShowSignInPage)
     {
+        // If currently logged in, record that we have been signed in this session.
+        if (LogOnViewModel.IsLoggedOn) _wasSignedIn = true;
+
         CanShowSignInPage = canShowSignInPage;
         string currentURi = navigationManager.Uri;
 
@@ -157,9 +167,11 @@
         // is the "update available popup pops up unexpectedly" symptom.
         string currentPath = currentURi.Replace(navigationManager.BaseUri, "").TrimStart('/');
         bool atRoot = currentPath == "";
-        // Allow /upgradePage to stay visible after signup even before full login
-        bool atUpgradePage = currentPath == "upgradePage";
-        if (CanShowSignInPage && !LogOnViewModel.IsLoggedOn && !atRoot && !atUpgradePage)
+        // Allow /upgradePage and /planAndPay to stay visible during the pre-login
+        // signup flow (user has never signed in this session). After an explicit
+        // sign-out (_wasSignedIn == true), always navigate back to login.
+        bool atUpgradePage = (currentPath == "upgradePage" || currentPath == "planAndPay") && !_wasSignedIn;
+        if (CanShowSignInPage && !LogOnViewModel.IsLoggedOn && !atRoot && !atUpgradePage && !FilePasswordWindowService.ShouldSuppressMainWindowReload)
         {
             navigationManager.NavigateTo("/", true);
             return;
@@ -172,13 +184,16 @@
     {
         if (LogOnViewModel.IsLoggedOn)
         {
+            _wasSignedIn = true;
             await AddCssAsync();
         }
 
         string currentURi = navigationManager.Uri;
         string subPath = currentURi.Replace(navigationManager.BaseUri, "").TrimStart('/');
-        // Allow /upgradePage to remain after signup before full login state is established
-        if (!LogOnViewModel.IsLoggedOn && subPath != "" && subPath != "upgradePage")
+        // Allow /upgradePage and /planAndPay to remain during the pre-login signup flow.
+        // After a sign-out (_wasSignedIn == true), treat upgrade pages like any other page.
+        bool atUpgradePage = (subPath == "upgradePage" || subPath == "planAndPay") && !_wasSignedIn;
+        if (!LogOnViewModel.IsLoggedOn && subPath != "" && !atUpgradePage && !FilePasswordWindowService.ShouldSuppressMainWindowReload)
         {
             navigationManager.NavigateTo("/", true);
             return;

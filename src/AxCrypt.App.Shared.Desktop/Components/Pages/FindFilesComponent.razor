@@ -18,13 +18,12 @@
         Meta    (match count strip when a query is active)
         Card    (list view OR grid view)
           └── context menu (fixed popover)
-        Action bar (selected-file actions, always visible at bottom)
 
     CSS lives in HomeNew/FindFiles.scss (.ff-*).
     All FindFilesViewModel hooks are preserved unchanged.
 *@
 
-<div class="ff-page" @onclick="async () => await HideContextMenu()">
+<div class="ff-page">
 
     @if (!ViewModel.HasFindFilesCapability)
     {
@@ -118,9 +117,7 @@
         @* ── File card ────────────────────────────────────────── *@
         @if (ViewModel.FindFilesCount > 0)
         {
-            <div class="ff-card" id="user_files_section"
-                 @onclick="async () => await HideContextMenu()"
-                 @onclick:stopPropagation>
+            <div class="ff-card" id="user_files_section">
 
                 @if (isListView)
                 {
@@ -130,7 +127,7 @@
                         <span aria-hidden="true"></span>
                         <span role="columnheader">@Texts.NameLabel</span>
                         <span role="columnheader" class="ff-col-path">@Texts.FindPathTitle</span>
-                        <span aria-hidden="true"></span>
+                        <span role="columnheader" class="ff-col-actions">Actions</span>
                     </div>
 
                     <div class="ff-list-wrap">
@@ -144,7 +141,7 @@
                                 <li class="ff-row @(selected ? "ff-row--selected" : "") @(isChecked ? "ff-row--checked" : "")"
                                     role="row"
                                     @onclick="async () => await SelectFile(fileName, file.FilePath)"
-                                    @oncontextmenu="e => ShowContextMenu(e, fileName, file.FilePath)"
+                                    @oncontextmenu="async (e) => await ShowContextMenu(e, fileName, file.FilePath)"
                                     @oncontextmenu:preventDefault="true">
 
                                     <input type="checkbox"
@@ -170,15 +167,11 @@
 
                                     <button type="button"
                                             class="ff-row-menu"
-                                            aria-label="Row options"
-                                            @onclick="e => ShowContextMenu(e, fileName, file.FilePath)"
-                                            @onclick:stopPropagation>
-                                        <svg width="14" height="14" viewBox="0 0 24 24"
-                                             fill="currentColor" aria-hidden="true">
-                                            <circle cx="12" cy="5"  r="1.6" />
-                                            <circle cx="12" cy="12" r="1.6" />
-                                            <circle cx="12" cy="19" r="1.6" />
-                                        </svg>
+                                            title="More actions"
+                                            aria-label="More actions for @fileName"
+                                            @onclick="async (e) => await ShowContextMenu(e, fileName, file.FilePath)"
+                                            @onclick:stopPropagation="true">
+                                        @DotsSvg
                                     </button>
                                 </li>
                             }
@@ -198,7 +191,7 @@
 
                                 <div class="ff-tile @(selected ? "ff-tile--selected" : "") @(isChecked ? "ff-tile--checked" : "")"
                                      @onclick="async () => await SelectFile(fileName, file.FilePath)"
-                                     @oncontextmenu="e => ShowContextMenu(e, fileName, file.FilePath)"
+                                     @oncontextmenu="async (e) => await ShowContextMenu(e, fileName, file.FilePath)"
                                      @oncontextmenu:preventDefault="true">
 
                                     @* Checkbox overlay *@
@@ -215,18 +208,13 @@
                                         @((MarkupString)HighlightMatch(fileName))
                                     </span>
 
-                                    @* Three-dot menu button *@
                                     <button type="button"
                                             class="ff-tile-menu"
-                                            aria-label="Row options"
-                                            @onclick="e => ShowContextMenu(e, fileName, file.FilePath)"
-                                            @onclick:stopPropagation>
-                                        <svg width="13" height="13" viewBox="0 0 24 24"
-                                             fill="currentColor" aria-hidden="true">
-                                            <circle cx="12" cy="5"  r="1.6" />
-                                            <circle cx="12" cy="12" r="1.6" />
-                                            <circle cx="12" cy="19" r="1.6" />
-                                        </svg>
+                                            title="More actions"
+                                            aria-label="More actions for @fileName"
+                                            @onclick="async (e) => await ShowContextMenu(e, fileName, file.FilePath)"
+                                            @onclick:stopPropagation="true">
+                                        @DotsSvg
                                     </button>
                                 </div>
                             }
@@ -235,75 +223,6 @@
                 }
             </div>
 
-            @* ── Context menu ─────────────────────────────────── *@
-            @if (IsContextMenuVisible)
-            {
-                <div class="ff-context-menu"
-                     style="top: @(ContextMenuY)px; left: @(ContextMenuX)px;
-                    transform-origin: @flipContextMenu;
-                    transform: @flipTransform;"
-                     role="menu"
-                     @onclick:stopPropagation>
-                    <button type="button" class="ff-context-item" role="menuitem"
-                            @onclick='() => RunActionAsync("Open")'>
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-                            <polyline points="15 3 21 3 21 9" />
-                            <line x1="10" y1="14" x2="21" y2="3" />
-                        </svg>
-                        @Texts.RecentFilesOpenToolStripMenuItemText
-                    </button>
-                    <button type="button" class="ff-context-item" role="menuitem"
-                            @onclick='() => RunActionAsync("Decrypt")'>
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <rect x="3" y="11" width="18" height="11" rx="2" />
-                            <path d="M7 11V7a5 5 0 019.9-1" />
-                        </svg>
-                        @Texts.DecryptToolStripMenuItemText
-                    </button>
-                    <button type="button" class="ff-context-item" role="menuitem"
-                            @onclick='() => RunActionAsync("Reveal")'>
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
-                        </svg>
-                        @Texts.ShowInFolderText
-                    </button>
-                    <button type="button" class="ff-context-item" role="menuitem"
-                            @onclick='() => RunActionAsync("RenameAnonymously")'>
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <path d="M12 20h9" />
-                            <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
-                        </svg>
-                        @Texts.AnonymousRenameMenuText
-                    </button>
-                    <button type="button" class="ff-context-item" role="menuitem"
-                            @onclick='() => RunActionAsync("RenameOriginal")'>
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <polyline points="1 4 1 10 7 10" />
-                            <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
-                        </svg>
-                        @Texts.RestoreAnonymousNamesMenuText
-                    </button>
-                    <div class="ff-context-divider" role="separator"></div>
-                    <button type="button" class="ff-context-item ff-context-item--danger"
-                            role="menuitem"
-                            @onclick='() => RunActionAsync("Delete")'>
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <polyline points="3 6 5 6 21 6" />
-                            <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
-                            <path d="M10 11v6M14 11v6" />
-                            <path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2" />
-                        </svg>
-                        @Texts.RemoveRecentFileToolStripMenuItemText
-                    </button>
-                </div>
-            }
         }
         else
         {
@@ -330,7 +249,64 @@
             </div>
         }
 
-        @* ── Action bar — multi-select (cbp-actionbar pattern) ── *@
+        @* ── Context menu ─────────────────────────────────────── *@
+        @if (_ctxVisible)
+        {
+            @* Invisible page-scoped backdrop — click anywhere outside closes it *@
+            <div class="ff-context-backdrop"
+                 @onclick="CloseContextMenu"
+                 @oncontextmenu="CloseContextMenu"
+                 @oncontextmenu:preventDefault="true"></div>
+
+            <div class="ff-context-menu"
+                 style="left:@(_ctxX)px;top:@(_ctxY)px;"
+                 @onclick:stopPropagation="true">
+                <button class="ff-context-item" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Open"); }'>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                    @Texts.RecentFilesOpenToolStripMenuItemText
+                </button>
+                <button class="ff-context-item" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Decrypt"); }'>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2"/>
+                        <path d="M7 11V7a5 5 0 019.9-1"/>
+                    </svg>
+                    @Texts.DecryptToolStripMenuItemText
+                </button>
+                <button class="ff-context-item" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Reveal"); }'>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                    </svg>
+                    @Texts.ShowInFolderText
+                </button>
+                <button class="ff-context-item" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("RenameAnonymously"); }'>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                    @Texts.AnonymousRenameMenuText
+                </button>
+                <button class="ff-context-item" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("RenameOriginal"); }'>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10"/>
+                        <path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+                    </svg>
+                    @Texts.RestoreAnonymousNamesMenuText
+                </button>
+                <div class="ff-context-divider"></div>
+                <button class="ff-context-item ff-context-item--danger" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Delete"); }'>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
+                    </svg>
+                    @Texts.RemoveRecentFileToolStripMenuItemText
+                </button>
+            </div>
+        }
+
         @if (_selectedPaths.Any())
         {
             <div class="ff-actionbar" role="region" aria-label="Bulk actions">
@@ -340,10 +316,6 @@
                 </button>
                 <span class="ff-actionbar-spacer"></span>
                 <button type="button" class="ff-btn ff-btn--ghost"
-                        @onclick='async () => await BatchRunAsync("Open")'>
-                    @Texts.RecentFilesOpenToolStripMenuItemText
-                </button>
-                <button type="button" class="ff-btn ff-btn--ghost"
                         @onclick='async () => await BatchRunAsync("Decrypt")'>
                     @Texts.DecryptToolStripMenuItemText
                 </button>
@@ -351,52 +323,10 @@
                         @onclick='async () => await BatchRunAsync("Reveal")'>
                     @Texts.ShowInFolderText
                 </button>
-                <button type="button" class="ff-btn ff-btn--primary"
-                        @onclick='async () => await BatchRunAsync("RenameAnonymously")'>
-                    @Texts.AnonymousRenameMenuText
-                </button>
                 <button type="button" class="ff-btn ff-btn--danger"
                         @onclick='async () => await BatchRunAsync("Delete")'>
                     @Texts.RemoveRecentFileToolStripMenuItemText
                 </button>
-            </div>
-        }
-        else if (ViewModel.SelectedFile != null)
-        {
-            @* Single-file selection (click without checkbox) *@
-            <div class="ff-actionbar" role="region" aria-label="File actions">
-                <span class="ff-actionbar-file" title="@ViewModel.SelectedFilePath">
-                    @ViewModel.SelectedFile
-                </span>
-                <span class="ff-actionbar-spacer"></span>
-                <button type="button" class="ff-btn ff-btn--ghost"
-                        @onclick='() => RunActionAsync("Open")'>
-                    @Texts.RecentFilesOpenToolStripMenuItemText
-                </button>
-                <button type="button" class="ff-btn ff-btn--ghost"
-                        @onclick='() => RunActionAsync("Decrypt")'>
-                    @Texts.DecryptToolStripMenuItemText
-                </button>
-                <button type="button" class="ff-btn ff-btn--ghost"
-                        @onclick='() => RunActionAsync("Reveal")'>
-                    @Texts.ShowInFolderText
-                </button>
-                <button type="button" class="ff-btn ff-btn--primary"
-                        @onclick='() => RunActionAsync("RenameAnonymously")'>
-                    @Texts.AnonymousRenameMenuText
-                </button>
-                <button type="button" class="ff-btn ff-btn--danger"
-                        @onclick='() => RunActionAsync("Delete")'>
-                    @Texts.RemoveRecentFileToolStripMenuItemText
-                </button>
-            </div>
-        }
-        else
-        {
-            <div class="ff-actionbar ff-actionbar--idle">
-                <span class="ff-actionbar-hint">
-                    Select files with the checkboxes, then act — or click a file to select it.
-                </span>
             </div>
         }
     }
@@ -407,17 +337,23 @@
         const el = document.getElementById("firstMatch");
         if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
     };
-    window.getWindowHeight = () => window.innerHeight;
+
+    // Returns page/card bounds for context-menu edge detection.
+    window.getFindFilesMenuBounds = function () {
+        const page = document.querySelector(".ff-page");
+        const card = document.getElementById("user_files_section");
+        const rect = (card || page || document.documentElement).getBoundingClientRect();
+        return {
+            left: Math.max(rect.left, 0),
+            top: Math.max(rect.top, 0),
+            right: Math.min(rect.right, document.documentElement.clientWidth),
+            bottom: Math.min(rect.bottom, document.documentElement.clientHeight)
+        };
+    };
 </script>
 
 @code {
     private bool isListView { get; set; } = true;
-    private bool IsContextMenuVisible { get; set; }
-    private double ContextMenuX { get; set; }
-    private double ContextMenuY { get; set; }
-    private string flipContextMenu { get; set; } = "top left";
-    private string flipTransform { get; set; } = "translateY(0)";
-    private const double ContextMenuHeight = 240;
 
     private string SearchText = string.Empty;
     private Action? _onUpdateViewState;
@@ -444,7 +380,6 @@
             await ViewModel.HandleActionAsync(action, path);
         }
         ClearSelection();
-        await HideContextMenu();
     }
 
     // ── Lifecycle ─────────────────────────────────────────────────
@@ -499,54 +434,60 @@
     {
         isListView = listView;
         ViewModel.SelectedFile = null;
-        IsContextMenuVisible = false;
     }
 
     private async Task SelectFile(string fileName, string filePath)
     {
         ViewModel.SelectedFile = fileName;
         ViewModel.SelectedFilePath = filePath;
-        await HideContextMenu();
-    }
-
-    private async Task ShowContextMenu(MouseEventArgs e, string fileName, string filePath)
-    {
-        ViewModel.SelectedFile = fileName;
-        ViewModel.SelectedFilePath = filePath;
-
-        ContextMenuX = e.ClientX;
-        ContextMenuY = e.ClientY;
-
-        double windowHeight = await JSRuntime.InvokeAsync<double>("getWindowHeight");
-        if (ContextMenuY + ContextMenuHeight > windowHeight)
-        {
-            flipContextMenu = "bottom left";
-            flipTransform = $"translateY(-{ContextMenuHeight}px)";
-        }
-        else
-        {
-            flipContextMenu = "top left";
-            flipTransform = "translateY(0)";
-        }
-
-        IsContextMenuVisible = true;
         await UpdateUIState();
-    }
-
-    private async Task HideContextMenu()
-    {
-        if (IsContextMenuVisible)
-        {
-            IsContextMenuVisible = false;
-            await UpdateUIState();
-        }
     }
 
     private async Task RunActionAsync(string action)
     {
-        try { await ViewModel.HandleActionAsync(action, ViewModel.SelectedFilePath); }
-        finally { await HideContextMenu(); }
+        await ViewModel.HandleActionAsync(action, ViewModel.SelectedFilePath);
+        await UpdateUIState();
     }
+
+    // ── Context menu ──────────────────────────────────────────────
+    private bool   _ctxVisible = false;
+    private double _ctxX       = 0;
+    private double _ctxY       = 0;
+    private RenderFragment DotsSvg => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="5" r="1" /><circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" /></svg>;
+
+    private async Task ShowContextMenu(MouseEventArgs e, string fileName, string filePath)
+    {
+        // Select the file first so actions know the target.
+        await SelectFile(fileName, filePath);
+
+        const double menuW = 200;   // approximate width of .ff-context-menu
+        const double menuH = 260;   // approximate height for 6 items + divider
+
+        var bounds = await JSRuntime.InvokeAsync<MenuBounds>("getFindFilesMenuBounds");
+
+        _ctxX = (e.ClientX + menuW > bounds.Right) ? e.ClientX - menuW : e.ClientX;
+        _ctxY = (e.ClientY + menuH > bounds.Bottom) ? e.ClientY - menuH : e.ClientY;
+
+        if (_ctxX < bounds.Left + 4) _ctxX = bounds.Left + 4;
+        if (_ctxY < bounds.Top + 4) _ctxY = bounds.Top + 4;
+
+        _ctxVisible = true;
+        await UpdateUIState();
+    }
+
+    private void CloseContextMenu()
+    {
+        _ctxVisible = false;
+        StateHasChanged();
+    }
+
+    private async Task RunContextActionAsync(string action)
+    {
+        await ViewModel.HandleActionAsync(action, ViewModel.SelectedFilePath);
+        await UpdateUIState();
+    }
+
+    private record MenuBounds(double Left, double Top, double Right, double Bottom);
 
     private async Task UpdateUIState() =>
         await InvokeAsync(StateHasChanged);

@@ -1,0 +1,129 @@
+// ── PopupDialogs.scss ─────────────────────────────────────────────────
+// Shared extras for ConfirmWipeDialog and About popup dialogs.
+// Builds on the shared axd-* shell from AxcryptDialogs.scss.
+
+// ── Danger button (missing from axd-btn set) ─────────────────────────
+.axd-btn--danger {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+}
+
+.axd-btn--danger:hover {
+    background: #dc2626;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, .30);
+}
+
+.axd-btn--danger:active {
+    transform: scale(.98);
+}
+
+// ── About Dialog (abt-*) ─────────────────────────────────────────────
+
+.abt-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.abt-logo {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.abt-product-name {
+    font-size: 16px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 2px;
+}
+
+.abt-tagline {
+    font-size: 12.5px;
+    color: #6b7280;
+    margin: 0;
+}
+
+.abt-info-grid {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f9fafb;
+}
+
+.abt-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 14px;
+    font-size: 12.5px;
+
+    & + .abt-info-row {
+        border-top: 1px solid #e5e7eb;
+    }
+}
+
+.abt-info-label {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.abt-info-value {
+    color: #111827;
+    font-weight: 600;
+    text-align: right;
+}
+
+.abt-link {
+    color: #48772c;
+    font-size: 12.5px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.abt-link:hover {
+    color: #3a6023;
+}
+
+.abt-description {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.abt-copyright {
+    font-size: 11.5px;
+    color: #9ca3af;
+}
+
+// ── Dark theme ───────────────────────────────────────────────────────
+html[data-theme="dark"] {
+    .axd-btn--danger       { background: #ef4444; }
+    .axd-btn--danger:hover { background: #dc2626; }
+
+    .abt-logo-row          { border-bottom-color: #2a3340; }
+    .abt-product-name      { color: #e8ecf1; }
+    .abt-tagline           { color: #8892a0; }
+
+    .abt-info-grid         { background: #141a22; border-color: #2a3340; }
+
+    .abt-info-row + .abt-info-row { border-top-color: #2a3340; }
+
+    .abt-info-label        { color: #6b7280; }
+    .abt-info-value        { color: #e8ecf1; }
+    .abt-link              { color: #b8e89a; }
+    .abt-link:hover        { color: #a0d87e; }
+    .abt-description       { color: #8892a0; }
+    .abt-copyright         { color: #4b5563; }
+}

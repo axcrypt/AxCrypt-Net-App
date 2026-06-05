@@ -1,4 +1,5 @@
 ﻿using AxCrypt.App.Shared.CloudCore.CloudFileProviderUtility;
+using AxCrypt.App.Shared.CloudCore.iCloud;
 using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Providers;
@@ -81,6 +82,9 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
 
                 case Core.IO.FileProvider.DropBox:
                     return New<FileProvidersUserAccessInfo>().DropBoxAccessInfo?.Any() ?? false;
+
+                case Core.IO.FileProvider.iCloud:
+                    return New<IICloudPlatformFileAccess>().IsAvailable;
 
                 default:
                     return false;

@@ -1,12 +1,4 @@
-/* ================================================================
-   PlanAndPayPage.css
-   Plan & Pay — MAUI Blazor desktop (min-width 1230px)
-   Prefix: pp-*
-   ================================================================ */
-
-/* ── Shell ──────────────────────────────────────────────────── */
-
-.pp-shell {
+﻿.pp-shell {
   padding: 28px 32px;
   background: #f3f4f6;
   font-family: "Segoe UI", system-ui, sans-serif;
@@ -16,16 +8,15 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  font-size: 13px;
 }
-
-/* ── Plan switcher tabs (Free users only) ─────────────────── */
 
 .pp-plan-tabs {
   display: flex;
   gap: 10px;
   background: #fff;
   border: 1px solid #e5e7eb;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 6px;
   align-self: center;
 }
@@ -43,9 +34,24 @@
   transition: background 0.15s, border-color 0.15s;
   color: #6b7280;
 }
-
 .pp-tab:hover {
   background: #f9fafb;
+}
+.pp-tab--active {
+  background: #f0fdf4;
+  border-color: #48772c;
+  color: #48772c;
+}
+.pp-tab--active .pp-tab-sub {
+  color: rgb(94.527607362, 156.2331288344, 57.7668711656);
+}
+.pp-tab--active.pp-tab--biz {
+  background: #f0f2f5;
+  border-color: #111827;
+  color: #111827;
+}
+.pp-tab--active.pp-tab--biz .pp-tab-sub {
+  color: #374151;
 }
 
 .pp-tab-name {
@@ -61,32 +67,14 @@
   color: #9ca3af;
 }
 
-.pp-tab--active {
-  background: #f0fdf4;
-  border-color: #48772c;
-  color: #48772c;
-}
-
-.pp-tab--active .pp-tab-sub {
-  color: #6aaa4a;
-}
-
-.pp-tab--active.pp-tab--biz {
-  background: #f0f2f5;
-  border-color: #111827;
-  color: #111827;
-}
-
-.pp-tab--active.pp-tab--biz .pp-tab-sub {
-  color: #4b5563;
-}
-
-/* ── Hero ────────────────────────────────────────────────────── */
-
 .pp-hero {
   text-align: center;
   max-width: 640px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .pp-hero-badge {
@@ -96,17 +84,14 @@
   font-size: 12px;
   font-weight: 700;
   padding: 4px 14px;
-  border-radius: 20px;
-  margin-bottom: 10px;
+  border-radius: 99px;
   border: 1px solid transparent;
 }
-
 .pp-hero-badge--prem {
   background: #f0fdf4;
   border-color: #bbf7d0;
   color: #166534;
 }
-
 .pp-hero-badge--biz {
   background: #f0f2f5;
   border-color: #d1d5db;
@@ -136,16 +121,12 @@
   margin: 0;
 }
 
-/* ── 2-column body ───────────────────────────────────────────── */
-
 .pp-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
   gap: 24px;
   align-items: start;
 }
-
-/* ── LEFT: features column ───────────────────────────────────── */
 
 .pp-features-col {
   background: #fff;
@@ -156,8 +137,9 @@
   flex-direction: column;
   gap: 16px;
 }
-
-/* Billing toggle */
+.pp-features-col--biz {
+  border-color: #374151;
+}
 
 .pp-billing-wrap {
   display: flex;
@@ -165,11 +147,11 @@
 }
 
 .pp-billing {
-  display: flex;
+  display: inline-flex;
   background: #f3f4f6;
   border-radius: 10px;
   padding: 3px;
-  gap: 3px;
+  gap: 2px;
 }
 
 .pp-bill-btn {
@@ -187,11 +169,10 @@
   transition: background 0.12s, color 0.12s;
   white-space: nowrap;
 }
-
 .pp-bill-btn--on {
   background: #fff;
   color: #111827;
-  box-shadow: 0 1px 3px rgba(0,0,0,.10);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .pp-save-badge {
@@ -202,8 +183,6 @@
   font-weight: 700;
   padding: 2px 7px;
 }
-
-/* Price block */
 
 .pp-price-block {
   display: flex;
@@ -217,11 +196,9 @@
   font-weight: 800;
   color: #111827;
 }
-
 .pp-price--prem {
   color: #48772c;
 }
-
 .pp-price--biz {
   color: #111827;
 }
@@ -238,8 +215,6 @@
   margin-top: -8px;
 }
 
-/* Section labels (Business) */
-
 .pp-feat-section-label {
   display: flex;
   align-items: center;
@@ -253,12 +228,9 @@
   border-top: 1px solid #e5e7eb;
   margin-top: 4px;
 }
-
 .pp-feat-section-label--team {
   color: #374151;
 }
-
-/* Feature list */
 
 .pp-feat-list {
   list-style: none;
@@ -268,7 +240,6 @@
   flex-direction: column;
   gap: 8px;
 }
-
 .pp-feat-list--grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -282,12 +253,9 @@
   font-size: 13px;
   color: #111827;
 }
-
 .pp-feat--off {
   color: #9ca3af;
 }
-
-/* ── RIGHT: order summary column ─────────────────────────────── */
 
 .pp-summary-col {
   position: sticky;
@@ -304,8 +272,6 @@
   gap: 14px;
 }
 
-/* Summary header */
-
 .pp-summary-header {
   display: flex;
   flex-direction: column;
@@ -318,14 +284,13 @@
   font-size: 15px;
   font-weight: 700;
   color: #111827;
+  display: block;
 }
 
 .pp-summary-subtitle {
   font-size: 11.5px;
   color: #9ca3af;
 }
-
-/* Plan pill */
 
 .pp-plan-pill {
   display: flex;
@@ -334,25 +299,27 @@
   border-radius: 10px;
   padding: 9px 13px;
 }
-
 .pp-plan-pill--prem {
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
 }
-
+.pp-plan-pill--prem .pp-plan-pill-name {
+  color: #166534;
+}
+.pp-plan-pill--prem .pp-plan-pill-billing {
+  border-color: #d1fae5;
+}
 .pp-plan-pill--biz {
   background: #f0f2f5;
   border: 1px solid #d1d5db;
+}
+.pp-plan-pill--biz .pp-plan-pill-name {
+  color: #111827;
 }
 
 .pp-plan-pill-name {
   font-size: 13px;
   font-weight: 700;
-  color: #166534;
-}
-
-.pp-plan-pill--biz .pp-plan-pill-name {
-  color: #111827;
 }
 
 .pp-plan-pill-billing {
@@ -361,15 +328,9 @@
   background: #fff;
   border-radius: 99px;
   padding: 2px 9px;
-  color: #4b5563;
-  border: 1px solid #d1fae5;
+  color: #374151;
+  border: 1px solid #d1d5db;
 }
-
-.pp-plan-pill--biz .pp-plan-pill-billing {
-  border-color: #d1d5db;
-}
-
-/* Trial highlight */
 
 .pp-trial-box {
   display: flex;
@@ -384,24 +345,20 @@
   padding: 9px 12px;
   line-height: 1.45;
 }
-
 .pp-trial-box svg {
   flex-shrink: 0;
   margin-top: 1px;
 }
-
 .pp-trial-box--biz {
   background: #f0f2f5;
   border-color: #d1d5db;
   color: #374151;
 }
 
-/* Price rows */
-
 .pp-price-rows {
   background: linear-gradient(180deg, #fafafa, #f3f4f6);
   border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -413,45 +370,32 @@
   font-size: 12.5px;
   border-bottom: 1px solid #f3f4f6;
 }
-
 .pp-price-row:last-child {
   border-bottom: none;
 }
-
 .pp-price-row span {
   color: #6b7280;
 }
-
 .pp-price-row strong {
   color: #111827;
   font-weight: 700;
 }
-
 .pp-price-row--today {
   background: #f0fdf4;
 }
-
 .pp-price-row--today span {
   color: #166534;
   font-weight: 700;
+}
+.pp-price-row--after span, .pp-price-row--after strong {
+  font-size: 11.5px;
+  color: #9ca3af;
 }
 
 .pp-price-zero {
   color: #16a34a !important;
   font-size: 15px !important;
 }
-
-.pp-price-row--after span {
-  color: #9ca3af;
-  font-size: 11.5px;
-}
-
-.pp-price-row--after strong {
-  color: #6b7280;
-  font-size: 11.5px;
-}
-
-/* Discount */
 
 .pp-discount {
   border: 1px solid #e5e7eb;
@@ -471,7 +415,6 @@
   padding: 9px 12px;
   user-select: none;
 }
-
 .pp-discount-toggle::-webkit-details-marker {
   display: none;
 }
@@ -492,7 +435,6 @@
   padding: 7px 10px;
   width: 100%;
 }
-
 .pp-discount-input:focus {
   border-color: #48772c;
   background: #fff;
@@ -509,12 +451,9 @@
   padding: 7px 14px;
   white-space: nowrap;
 }
-
 .pp-discount-apply:hover {
   background: #e5e7eb;
 }
-
-/* Terms */
 
 .pp-terms {
   display: flex;
@@ -525,7 +464,6 @@
   cursor: pointer;
   line-height: 1.45;
 }
-
 .pp-terms input {
   accent-color: #48772c;
   flex-shrink: 0;
@@ -543,8 +481,6 @@
   padding: 0;
   text-decoration: underline;
 }
-
-/* CTA buttons */
 
 .pp-cta-wrap {
   display: flex;
@@ -565,18 +501,15 @@
   transition: opacity 0.15s, transform 0.1s;
   width: 100%;
 }
-
 .pp-cta-primary:hover:not(:disabled) {
   opacity: 0.9;
   transform: scale(1.01);
 }
-
 .pp-cta-primary:disabled {
   opacity: 0.42;
   cursor: not-allowed;
   transform: none;
 }
-
 .pp-cta-primary--biz {
   background: #111827;
 }
@@ -597,12 +530,9 @@
   transition: border-color 0.14s;
   width: 100%;
 }
-
 .pp-cta-paypal:hover {
   border-color: #003087;
 }
-
-/* Trust line */
 
 .pp-trust-line {
   display: flex;
@@ -613,7 +543,6 @@
   color: #9ca3af;
   justify-content: center;
 }
-
 .pp-trust-line span {
   display: flex;
   align-items: center;
@@ -623,8 +552,6 @@
 .pp-trust-dot {
   color: #d1d5db;
 }
-
-/* ── Trust row (bottom) ──────────────────────────────────────── */
 
 .pp-trust-row {
   display: flex;
@@ -644,14 +571,6 @@
   border-radius: 10px;
   padding: 9px 16px;
 }
-
 .pp-trust-item strong {
   color: #374151;
-}
-
-/* ── Business plan: accent border on features col ──────────── */
-
-.pp-shell:has(.pp-tab--biz.pp-tab--active) .pp-features-col,
-.pp-features-col--biz {
-  border-color: #374151;
 }

@@ -173,12 +173,6 @@ input[type="radio"] {
     }
 }
 
-/// site.scss ends here
-
-.home-title {
-    content: url('/images/default/Title-hand.svg');
-}
-
 .home-index {
     a {
         text-decoration: none;
@@ -194,105 +188,6 @@ input[type="radio"] {
         font-weight: 700;
         font-size: 16px;
     }
-}
-
-.head-sec {
-    display: inline-flex;
-    gap: 5px;
-    align-items: center;
-}
-
-.home-body {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-
-.mre-act-sec {
-    display: flex;
-    gap: 1.5%;
-    justify-content: space-between;
-
-    .more-actions-section {
-        display: flex;
-        gap: 2%;
-        margin-top: 35px;
-    }
-}
-
-.act-box {
-    display: block;
-    margin-right: 15px;
-    margin-top: 20px;
-    padding: 15px 5px;
-    width: 85px;
-    height: 85px;
-    border-radius: 4px;
-    background-color: $ActnBgClr;
-    color: $WhtTxtClr;
-    text-align: center;
-    line-height: 16px;
-    box-shadow: 0px 4px 6px 0px $BoxShadowClr;
-    cursor: pointer;
-    line-height: 14px;
-    align-content: center;
-}
-
-.opnscrd-act {
-    content: url(/images/default/IcoOpnScrd.svg);
-}
-
-.scr-act {
-    content: url(/images/default/IcoScr.svg);
-}
-
-.stpscr-act {
-    content: url(/images/default/IcoStpScr.svg);
-}
-
-.shrks-act {
-    content: url(/images/default/IcoShrKs.svg);
-}
-
-.PssdMngr-act {
-    content: url(/images/premium/icoPssdMngrWhite.svg);
-}
-
-.mtrkey-act {
-    content: url(/images/business/IcoMstrKey.svg);
-    width: 27px;
-    height: 24px;
-}
-
-.grp-act {
-    content: url(/images/business/IcoGroup.svg);
-    width: 34px;
-    height: 24px;
-}
-
-.cln-act {
-    content: url(/images/default/IcoCln.svg);
-}
-
-.vwr-shrks-act {
-    content: url(/images/free/IcoShrKs.svg);
-}
-
-.new-mssg {
-    content: url(/images/default/IcoNwMssg.svg);
-}
-
-.act-img {
-    margin: auto auto;
-    display: block;
-    padding-bottom: 4px;
-}
-
-.text-size, .act-txt-sze {
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 14px;
-    word-wrap: anywhere;
 }
 
 .text-style {

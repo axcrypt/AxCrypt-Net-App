@@ -1,4 +1,4 @@
-﻿@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Common
 @using AxCrypt.Content
 @using AxCrypt.Core.UI
@@ -7,48 +7,82 @@
 
 @inject GlobalDialogViewModel versionViewModel
 
+@implements IDisposable
+
 @if (IsVisible)
 {
-    <div id="modal-dialog6" class="modalDialog">
-        <div class="invite-popup">
-            <div class="modal-header">
-                <label for="title" class="modal-title">@versionViewModel.LogOnViewModel!.GlobalViewModel!.Title</label>
-            </div>
-            <div class="modal-body">
-                <div class="label-text-1">
-                    <p style="">@((MarkupString)versionViewModel.LogOnViewModel.GlobalViewModel.MessageText!)</p>
-                </div>
-                <div class="modal-footer">
-                    @if (versionViewModel.LogOnViewModel.PopupButtons.Contains(PopupButtons.Ok))
-                    {
-                        <button class="button font-medium success btn-small" @onclick="Button_OkClicked"> @Texts.ButtonOkText </button>
-                    }
+    <div class="axd-backdrop" @onclick="OnBackdropClick">
+        <div class="axd-modal axd-modal--narrow"
+             role="alertdialog"
+             aria-modal="true"
+             aria-labelledby="gdlg-title"
+             @onclick:stopPropagation>
 
-                    @if (versionViewModel.LogOnViewModel.PopupButtons.Contains(PopupButtons.Cancel))
-                    {
-                        <button class="btn-small font-medium button cancel" @onclick="Button_CancelClicked"> @Texts.ButtonCancelText </button>
-                    }
+            @* ── Header ──────────────────────────────────────────── *@
+            <header class="axd-header">
+                <div class="axd-header-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
                 </div>
+                <div class="axd-header-text">
+                    <h2 id="gdlg-title" class="axd-title">
+                        @versionViewModel.LogOnViewModel!.GlobalViewModel!.Title
+                    </h2>
+                </div>
+                <button type="button" class="axd-close"
+                        @onclick="OnBackdropClick"
+                        aria-label="Close">×</button>
+            </header>
+
+            @* ── Body ────────────────────────────────────────────── *@
+            <div class="axd-body gdlg-body">
+
+                @* Message (may contain HTML markup) *@
+                <div class="gdlg-message">
+                    @((MarkupString)versionViewModel.LogOnViewModel.GlobalViewModel.MessageText!)
+                </div>
+
+                @* Don't-show-again checkbox (only when the dialog supports it) *@
                 @if (versionViewModel.LogOnViewModel.GlobalViewModel.DontShowAgainOptions != DoNotShowAgainOptions.None)
                 {
-                    <div>
-                        <label> <input class="check-box" type="checkbox" @onchange="(e)=> ToggleCheckbox(e)" checked="@versionViewModel.IsCheckboxDontShowThisAgain" />@Texts.DontShowAgainCheckBoxText</label>
-                    </div>
+                    <label class="gdlg-dontshow">
+                        <input type="checkbox"
+                               class="gdlg-dontshow-check"
+                               checked="@versionViewModel.IsCheckboxDontShowThisAgain"
+                               @onchange="ToggleCheckbox" />
+                        <span>@Texts.DontShowAgainCheckBoxText</span>
+                    </label>
                 }
+
             </div>
+
+            @* ── Footer ──────────────────────────────────────────── *@
+            <footer class="axd-footer">
+                @if (versionViewModel.LogOnViewModel.PopupButtons.Contains(PopupButtons.Cancel))
+                {
+                    <button type="button" class="axd-btn axd-btn--ghost"
+                            @onclick="Button_CancelClicked">
+                        @Texts.ButtonCancelText
+                    </button>
+                }
+                @if (versionViewModel.LogOnViewModel.PopupButtons.Contains(PopupButtons.Ok))
+                {
+                    <button type="button" class="axd-btn axd-btn--primary"
+                            @onclick="Button_OkClicked">
+                        @Texts.ButtonOkText
+                    </button>
+                }
+            </footer>
+
         </div>
     </div>
 }
-<style>
-    .label-text-1 {
-        font-size: 14px;
-        white-space: pre-wrap;
-        text-align: left;
-        max-height: 350px;
-        overflow-y: auto;
-        margin-bottom: 20px;
-    }
-</style>
+
 @code {
     private bool IsVisible;
 
@@ -58,12 +92,17 @@
         versionViewModel.LogOnViewModel!.GlobalPopupDialog.OnDialogVisibilityChanged += UpdateUpgradeVersionDialogState;
     }
 
+    public void Dispose()
+    {
+        versionViewModel.LogOnViewModel!.GlobalPopupDialog.OnDialogVisibilityChanged -= UpdateUpgradeVersionDialogState;
+    }
+
     private void ToggleCheckbox(ChangeEventArgs e)
     {
         versionViewModel.IsCheckboxDontShowThisAgain = (bool)e.Value!;
     }
 
-    void UpdateUpgradeVersionDialogState(bool isVisible)
+    private void UpdateUpgradeVersionDialogState(bool isVisible)
     {
         InvokeAsync(() =>
         {
@@ -72,13 +111,21 @@
         });
     }
 
-    private void Button_OkClicked(MouseEventArgs e)
-    {
+    private void Button_OkClicked(MouseEventArgs e) =>
         versionViewModel.Button_OkClicked();
-    } 
-    
-    private void Button_CancelClicked(MouseEventArgs e)
-    {
+
+    private void Button_CancelClicked(MouseEventArgs e) =>
         versionViewModel.Button_CancelClicked();
+
+    /// <summary>
+    /// Backdrop click dismisses with Cancel if that button is present,
+    /// otherwise falls through to Ok — preserving each dialog's intent.
+    /// </summary>
+    private void OnBackdropClick()
+    {
+        if (versionViewModel.LogOnViewModel!.PopupButtons.Contains(PopupButtons.Cancel))
+            versionViewModel.Button_CancelClicked();
+        else
+            versionViewModel.Button_OkClicked();
     }
 }

@@ -1,54 +1,4 @@
-﻿/* loading wheel*/
-.loading-content {
-  text-align: center;
-}
-
-.loading-content img {
-  width: 100px;
-  max-width: 100px;
-  height: 100px;
-  content: url(/images/default/Loading_560x560.gif);
-  user-select: none;
-  outline: none;
-  pointer-events: none;
-}
-
-.loading-content span {
-  display: block;
-  margin-top: 10px;
-  font-size: 18px;
-  color: #333;
-}
-
-/* Full-page overlay */
-.secrets-loading-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: conic-gradient(from 10.99deg at 98.18% 128.62%, #FFFEE8 0deg, rgba(200, 199, 180, 0.8) 353.48deg, #F5FFF0 360deg);
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-}
-
-.secrets-loading-overlay .loading-content span {
-  margin-top: 20px;
-  font-size: 20px;
-  color: white;
-}
-
-/* no overlay*/
-.secrets-loading-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.page-title-container {
+﻿.page-title-container {
   display: inline-flex;
 }
 
@@ -566,11 +516,6 @@ input:checked + .slider:before {
     top: 10px !important;
   }
 }
-.body-content-section .secrets-loading-overlay {
-  align-items: normal;
-  padding: 10% 20px;
-}
-
 .parent-container {
   position: relative;
   width: 100%;

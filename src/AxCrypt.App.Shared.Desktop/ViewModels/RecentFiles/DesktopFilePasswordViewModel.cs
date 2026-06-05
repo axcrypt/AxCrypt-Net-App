@@ -6,12 +6,12 @@ using AxCrypt.Core.UI;
 using System.Windows.Input;
 using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Core.Extensions;
-using AxCrypt.App.Shared.Desktop.UI.Services;
 using Microsoft.Maui.Controls;
 using System.Threading.Tasks;
 using System;
 using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Desktop.Services.Interface;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels.RecentFiles
 {

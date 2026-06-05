@@ -24,45 +24,71 @@
   color: #111827;
 }
 
-.popup-image-paragraph {
+.axd-header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 28px 30px 18px;
-  text-align: center;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.switch-user-hero {
-  width: 88px;
-  height: 88px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 4px;
-  border-radius: 24px;
+.axd-header-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
   background: rgba(72, 119, 44, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #48772C;
 }
 
-.popup-image {
-  width: 68px;
-  height: 68px;
-  object-fit: contain;
+.axd-header-icon--prem {
+  background: rgba(72, 119, 44, 0.1);
+  color: #48772C;
 }
 
-.switch-user-title {
-  margin: 0;
+.axd-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.axd-title {
+  font-size: 15px;
+  font-weight: 700;
   color: #111827;
-  font-size: 19px;
-  font-weight: 800;
-  line-height: 1.25;
+  margin: 0 0 2px;
+  line-height: 1.3;
 }
 
-.popup-paragraph {
-  max-width: 330px;
+.axd-sub {
+  font-size: 12.5px;
   color: #6b7280;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.55;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.axd-close {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  line-height: 1;
+  color: #9ca3af;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+}
+
+.axd-close:hover {
+  background: #f3f4f6;
+  color: #111827;
 }
 
 .switch-user-list {
@@ -258,15 +284,29 @@ html[data-theme=dark] .SwitchUser-popup {
   color: #e8ecf1;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.58);
 }
-html[data-theme=dark] .switch-user-hero {
-  background: rgba(127, 204, 92, 0.14);
+html[data-theme=dark] .axd-header {
+  border-bottom-color: #2a3340;
 }
-html[data-theme=dark] .switch-user-title,
-html[data-theme=dark] .select-email {
+html[data-theme=dark] .axd-header-icon,
+html[data-theme=dark] .axd-header-icon--prem {
+  background: rgba(127, 204, 92, 0.14);
+  color: #b8e89a;
+}
+html[data-theme=dark] .axd-title {
   color: #e8ecf1;
 }
-html[data-theme=dark] .popup-paragraph {
-  color: #b5bcc7;
+html[data-theme=dark] .axd-sub {
+  color: #8892a0;
+}
+html[data-theme=dark] .axd-close {
+  color: #6b7280;
+}
+html[data-theme=dark] .axd-close:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #e8ecf1;
+}
+html[data-theme=dark] .select-email {
+  color: #e8ecf1;
 }
 html[data-theme=dark] .switch-user-list {
   border-color: #2a3645;
@@ -2679,4 +2719,146 @@ html[data-theme=dark] .lp-loading-msg {
 .sup2-back-btn:hover {
   color: #111;
   background: #f3f4f6;
+}
+
+.axd-btn--danger {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+}
+
+.axd-btn--danger:hover {
+  background: #dc2626;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.axd-btn--danger:active {
+  transform: scale(0.98);
+}
+
+.abt-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.abt-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.abt-product-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 2px;
+}
+
+.abt-tagline {
+  font-size: 12.5px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.abt-info-grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f9fafb;
+}
+
+.abt-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 14px;
+  font-size: 12.5px;
+}
+.abt-info-row + .abt-info-row {
+  border-top: 1px solid #e5e7eb;
+}
+
+.abt-info-label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.abt-info-value {
+  color: #111827;
+  font-weight: 600;
+  text-align: right;
+}
+
+.abt-link {
+  color: #48772c;
+  font-size: 12.5px;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 500;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.abt-link:hover {
+  color: #3a6023;
+}
+
+.abt-description {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.abt-copyright {
+  font-size: 11.5px;
+  color: #9ca3af;
+}
+
+html[data-theme=dark] .axd-btn--danger {
+  background: #ef4444;
+}
+html[data-theme=dark] .axd-btn--danger:hover {
+  background: #dc2626;
+}
+html[data-theme=dark] .abt-logo-row {
+  border-bottom-color: #2a3340;
+}
+html[data-theme=dark] .abt-product-name {
+  color: #e8ecf1;
+}
+html[data-theme=dark] .abt-tagline {
+  color: #8892a0;
+}
+html[data-theme=dark] .abt-info-grid {
+  background: #141a22;
+  border-color: #2a3340;
+}
+html[data-theme=dark] .abt-info-row + .abt-info-row {
+  border-top-color: #2a3340;
+}
+html[data-theme=dark] .abt-info-label {
+  color: #6b7280;
+}
+html[data-theme=dark] .abt-info-value {
+  color: #e8ecf1;
+}
+html[data-theme=dark] .abt-link {
+  color: #b8e89a;
+}
+html[data-theme=dark] .abt-link:hover {
+  color: #a0d87e;
+}
+html[data-theme=dark] .abt-description {
+  color: #8892a0;
+}
+html[data-theme=dark] .abt-copyright {
+  color: #4b5563;
 }

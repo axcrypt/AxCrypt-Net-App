@@ -56,53 +56,6 @@
                 </button>
             </div>
 
-            <!-- ── Secure Delete ── -->
-            @if (ActiveTool.Id == "secure-delete")
-            {
-                <div class="tool-body">
-                    <div class="tool-warning-banner">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-                            <line x1="12" y1="9" x2="12" y2="13" />
-                            <line x1="12" y1="17" x2="12.01" y2="17" />
-                        </svg>
-                        This operation is <strong>permanent and irreversible</strong>. Files are overwritten with random data before deletion.
-                    </div>
-                    <div class="tool-drop-zone @(IsDragging ? "tool-drop-zone--active" : "")"
-                         @ondragover:preventDefault="true"
-                         @ondragover="() => IsDragging = true"
-                         @ondragleave="() => IsDragging = false"
-                         @ondrop="OnFileDrop">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5">
-                            <polyline points="16 16 12 12 8 16" />
-                            <line x1="12" y1="12" x2="12" y2="21" />
-                            <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3" />
-                        </svg>
-                        <p class="drop-label">Drop files here or <button class="drop-browse" @onclick="BrowseFiles">browse</button></p>
-                        <p class="drop-sub">All file types supported · Overwrites @SelectedPassCount passes times before deletion</p>
-                    </div>
-                    <div class="tool-option-row">
-                        <label class="tool-option-label">Overwrite passes</label>
-                        <div class="pass-selector">
-                            @foreach (var p in new[] { 1, 3, 7, 35 })
-                            {
-                                <button class="pass-btn @(SelectedPassCount == p ? "pass-btn--active" : "")"
-                                        @onclick="() => SelectedPassCount = p">
-                                    @p
-                                </button>
-                            }
-                        </div>
-                    </div>
-                    <button class="tool-action-btn tool-action-btn--danger" disabled="@(!ToolFilesQueued)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="3 6 5 6 21 6" />
-                            <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2" />
-                        </svg>
-                        Securely Delete @(ToolFilesQueued ? "Files" : "(no files selected)")
-                    </button>
-                </div>
-            }
-
             <!-- ── Anonymous Rename ── -->
             @if (ActiveTool.Id == "anon-rename")
             {

@@ -22,7 +22,7 @@
 
     @if (LogOnViewModel.IsVisible)
     {
-        <AxCrypt.App.Shared.Desktop.Components.LoginPageNew />
+        <AxCrypt.App.Shared.Desktop.Components.LoginPage />
     }
     else if (!LogOnViewModel.IsVisible && LogOnViewModel.IsMfaEnabled)
     {
@@ -46,13 +46,12 @@
         }
         else
         {
-            <AxCrypt.App.Shared.Desktop.Components.SignUpPageNew />
+            <AxCrypt.App.Shared.Desktop.Components.SignUpPage />
         }
     }
     else if (LogOnViewModel.IsLoggedOn)
     {
-       @*  <AxCrypt.App.Shared.Desktop.Components.Pages.HomePage /> *@
-        <AxCrypt.App.Shared.Desktop.Components.Pages.NewHomePage />
+        <AxCrypt.App.Shared.Desktop.Components.Pages.HomePage />
 
         @* Hold the full-page loader as an overlay for one render-and-settle
            cycle after sign-in so the user never sees a blank frame between
@@ -63,7 +62,7 @@
         @if (_postSignInOverlay)
         {
             <AxCrypt.App.Shared.Desktop.Components.Shared.AxLoader
-                Mode="AxCrypt.App.Shared.Desktop.Components.Shared.LoaderMode.FullPage"
+                Mode="AxCrypt.App.Shared.Desktop.Models.LoaderMode.FullPage"
                 Message="@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage" />
         }
     }
@@ -75,17 +74,15 @@
            instead of the heavy 560x560 Loading GIF, so the wait right
            after sign-in matches the boot loader and every in-app loader.
            Arm the overlay so the next render — when IsLoggedOn flips to
-           true and we move into the NewHomePage branch above — keeps the
+           true and we move into the HomePage branch above — keeps the
            loader visible until the home page has had a chance to draw. *@
         _armPostSignInOverlay = true;
 
         <AxCrypt.App.Shared.Desktop.Components.Shared.AxLoader
-            Mode="AxCrypt.App.Shared.Desktop.Components.Shared.LoaderMode.FullPage"
+            Mode="AxCrypt.App.Shared.Desktop.Models.LoaderMode.FullPage"
             Message="@AxCrypt.Content.Texts.ProgressIndicatorWaitMessage" />
 
-        <AxCrypt.App.Shared.Desktop.Components.PopupDialog.TryNowSubscriptionDialog />
         <AxCrypt.App.Shared.Desktop.Components.PopupDialog.TryUpgradeDialog />
-        <AxCrypt.App.Shared.Desktop.Components.PopupDialog.UpgradeSubscriptionDialog />
     }
 
 </div>
@@ -94,7 +91,7 @@
     public bool ShowSignUp { get; set; }
 
     // ── Post sign-in overlay state ───────────────────────────────
-    // The overlay covers NewHomePage during its first-paint settle so
+    // The overlay covers HomePage during its first-paint settle so
     // the user never sees a blank/half-rendered home between the
     // sign-in loader and the live home. Two ways it gets triggered:
     //

@@ -48,12 +48,6 @@ public class UserService
 
     public void InitializeData(Api.Model.SubscriptionLevel subscriptionLevel, string userEmail)
     {
-        // SignUpFrom is sticky account data Core exposes as a raw string.
-        // It can be empty (account not fully loaded yet) or hold an
-        // unexpected value — a hard Enum.Parse would throw and abort the
-        // whole post-sign-in handshake. Parse defensively: on failure we
-        // pass None and let the overload below derive a sensible fallback
-        // from the current subscription level.
         SignUpFrom signUpFrom =
             Enum.TryParse(AxCryptUserAccountViewModel.SignUpFrom, ignoreCase: true, out SignUpFrom parsed)
                 ? parsed

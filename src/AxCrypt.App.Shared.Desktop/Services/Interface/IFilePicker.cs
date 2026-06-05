@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AxCrypt.Core.IO;
 
-namespace AxCrypt.App.Shared.Desktop.UI.Services
+namespace AxCrypt.App.Shared.Desktop.Services.Interface
 {
     public interface IFilePicker
     {

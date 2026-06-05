@@ -100,5 +100,9 @@
                 await homeActionModel!.ShareKeysAsync(EventArgs.Empty);
                 break;
         }
+
+        // Force an immediate repaint so tile states (e.g. pending indicator)
+        // update without waiting for the next VM event tick.
+        await InvokeAsync(StateHasChanged);
     }
 }

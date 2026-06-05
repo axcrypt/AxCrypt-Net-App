@@ -1,38 +1,94 @@
-﻿@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Content
 
 @inject LogOnViewModel LogOnModel
 
 @if (IsVisible)
 {
-    <div id="modal-dialog6" class="modalDialog" style="display: block;">
-        <div>
-            <div class="close-img" onclick="closeModalDialog('modal-dialog6')"></div>
-            <div>
-                <div class="modal-header text-center">
-                    <span>@Texts.ChangeOptionGenericWarning</span>
+    <div class="axd-backdrop" @onclick="ClosePopup">
+        <div class="axd-modal axd-modal--narrow"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="conf-title"
+             @onclick:stopPropagation>
+
+            @* ── Header ──────────────────────────────────────────── *@
+            <header class="axd-header">
+                <div class="axd-header-icon axd-header-icon--warn" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z"/>
+                    </svg>
                 </div>
-                <div class="modal-body">
-                    <div>
-                        <label>@Texts.VerifyPasswordPrompt:</label>
-                        <input type="password" class="form-control pswd-img" placeholder=@Texts.TypeYourPasswordText />
+                <div class="axd-header-text">
+                    <h2 id="conf-title" class="axd-title">@Texts.ChangeOptionGenericWarning</h2>
+                    <p class="axd-sub">@Texts.VerifyPasswordPrompt</p>
+                </div>
+                <button type="button" class="axd-close"
+                        @onclick="ClosePopup"
+                        aria-label="Close">×</button>
+            </header>
+
+            @* ── Body ────────────────────────────────────────────── *@
+            <div class="axd-body">
+
+                <div class="axd-field">
+                    <div class="axd-field-label-row">
+                        <label class="axd-label" for="conf-password">
+                            @Texts.VerifyPasswordPrompt
+                        </label>
                     </div>
-                    <div>
-                        <input type="checkbox" />
-                        <span class="grey-clr font-medium">@Texts.ShowPasswordOptionPrompt</span>
+                    <div class="lp-input-wrap">
+                        <input type="@(_showPassword ? "text" : "password")"
+                               id="conf-password"
+                               class="axd-input lp-input--password"
+                               placeholder="@Texts.TypeYourPasswordText"
+                               autocomplete="current-password" />
+                        <button type="button"
+                                class="lp-eye"
+                                tabindex="-1"
+                                @onclick="() => _showPassword = !_showPassword"
+                                aria-label="@(_showPassword ? "Hide password" : "Show password")">
+                            @if (_showPassword)
+                            {
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24" />
+                                    <line x1="1" y1="1" x2="23" y2="23" />
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                            }
+                        </button>
                     </div>
                 </div>
+
             </div>
-            <div class="modal-footer">
-                <button class="button success btn-small">@Texts.ButtonOkText</button>
-                <button class="button cancel btn-small" onclick="closeModalDialog('modal-dialog6')">@Texts.ButtonCancelText</button>
-            </div>
+
+            @* ── Footer ──────────────────────────────────────────── *@
+            <footer class="axd-footer">
+                <button type="button" class="axd-btn axd-btn--ghost" @onclick="ClosePopup">
+                    @Texts.ButtonCancelText
+                </button>
+                <button type="button" class="axd-btn axd-btn--primary" @onclick="ClosePopup">
+                    @Texts.ButtonOkText
+                </button>
+            </footer>
+
         </div>
     </div>
 }
 
 @code {
     private bool IsVisible;
+    private bool _showPassword;
 
     protected override void OnInitialized()
     {
@@ -45,6 +101,7 @@
         InvokeAsync(() =>
         {
             IsVisible = canShowConformDialog;
+            if (!canShowConformDialog) _showPassword = false;
             StateHasChanged(); // Refresh UI
         });
     }
@@ -52,5 +109,6 @@
     private void ClosePopup()
     {
         //LogOnModel.ConformDialog.Close();
+        IsVisible = false;
     }
 }

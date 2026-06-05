@@ -56,6 +56,8 @@ public class TextShareViewModel : ViewModelBase
 
     public Uri? SharedLink { get; set; } = null;
 
+    public bool IsApplying { get; private set; } = false;
+
     public IEnumerable<KeyValuePair<string, string>> ExpiryOptionsList
     {
         get
@@ -181,6 +183,11 @@ public class TextShareViewModel : ViewModelBase
 
     public async Task ApplyAsync(int tabindex)
     {
+        if (IsApplying)
+        {
+            return;
+        }
+
         ErrorMessage = "";
         if (string.IsNullOrEmpty(PlainText))
         {
@@ -201,28 +208,36 @@ public class TextShareViewModel : ViewModelBase
             return;
         }
 
-        UsageLimit usage = await New<UserEntitlementService>().GetAvailableUsageLimit(LimitedCapability.ShareEncryptedText, New<AccountStatusViewModel>().SubscriptionLevel);
-
-        if (usage != null && ReceiverList.Count > (usage.MaxCount - usage.UsedCount))
+        try
         {
-            ErrorMessage = usage.ValidationMessage;
-            return;
-        }
+            IsApplying = true;
+            UpdateViewState();
 
-        IEnumerable<UserPublicKey> availablePublicKeys = null;
-        if (ReceiverList != null && ReceiverList.Any())
-        {
-            using (ProcessIndicator indicator = new ProcessIndicator(true))
+            UsageLimit usage = await New<UserEntitlementService>().GetAvailableUsageLimit(LimitedCapability.ShareEncryptedText, New<AccountStatusViewModel>().SubscriptionLevel);
+
+            if (usage != null && ReceiverList.Count > (usage.MaxCount - usage.UsedCount))
+            {
+                ErrorMessage = usage.ValidationMessage;
+                return;
+            }
+
+            IEnumerable<UserPublicKey>? availablePublicKeys = null;
+            if (ReceiverList != null && ReceiverList.Any())
             {
                 availablePublicKeys = await GetPublicKeysAsync(ReceiverList);
             }
+
+            await InternalApplyShareAsync(availablePublicKeys, Passphrase);
+
+            if (ReceiverList != null && ReceiverList.Any() && usage != null)
+            {
+                await New<UserEntitlementService>().SyncUserUsageCountAsync(LimitedCapability.ShareEncryptedText, New<AccountStatusViewModel>().SubscriptionLevel, ReceiverList.Count());
+            }
         }
-
-        await InternalApplyShareAsync(availablePublicKeys, Passphrase);
-
-        if (ReceiverList != null && ReceiverList.Any() && usage != null)
+        finally
         {
-            await New<UserEntitlementService>().SyncUserUsageCountAsync(LimitedCapability.ShareEncryptedText, New<AccountStatusViewModel>().SubscriptionLevel, ReceiverList.Count());
+            IsApplying = false;
+            UpdateViewState();
         }
     }
 
@@ -231,29 +246,26 @@ public class TextShareViewModel : ViewModelBase
         SetExpiresIn();
         LogOnIdentity logOnIdentity = New<KnownIdentities>().DefaultEncryptionIdentity;
 
-        using (ProcessIndicator indicator = new ProcessIndicator(true))
+        string encryptedText = await TextCryptor.EncryptTextAsync(passphrase.EncryptionIdentity(), PlainText, availablePublicKeys);
+        _textEncryptionViewModel.EncryptedText = encryptedText;
+
+        TextEncryptionApiModel textEncryptionApiModel = new TextEncryptionApiModel()
         {
-            string encryptedText = await TextCryptor.EncryptTextAsync(passphrase.EncryptionIdentity(), PlainText, availablePublicKeys);
-            _textEncryptionViewModel.EncryptedText = encryptedText;
+            EncryptedText = encryptedText,
+            Recipients = ReceiverList.Select(su => su.Address),
+            Owner = logOnIdentity.UserEmail.Address,
+            VisibleUntil = ExpiresIn,
+            CreatedUtc = New<INow>().Utc,
+            UpdatedUtc = New<INow>().Utc,
+        };
 
-            TextEncryptionApiModel textEncryptionApiModel = new TextEncryptionApiModel()
-            {
-                EncryptedText = encryptedText,
-                Recipients = ReceiverList.Select(su => su.Address),
-                Owner = logOnIdentity.UserEmail.Address,
-                VisibleUntil = ExpiresIn,
-                CreatedUtc = New<INow>().Utc,
-                UpdatedUtc = New<INow>().Utc,
-            };
+        Guid sharedSecretId = await TextShareApiHelper.ShareTextAsync(logOnIdentity, textEncryptionApiModel);
 
-            Guid sharedSecretId = await TextShareApiHelper.ShareTextAsync(logOnIdentity, textEncryptionApiModel);
-
-            if (sharedSecretId != Guid.Empty)
-            {
-                Uri baseApiUri = AxCrypt.Core.Resolve.UserSettings.RestApiBaseUrl;
-                string accountWebDomain = baseApiUri.ToString().Replace(AxCrypt.Core.Resolve.UserSettings.RestApiBaseUrl.PathAndQuery, "/");
-                SharedLink = new Uri($"{accountWebDomain}GlobalTextEncryption/Decrypt?email={logOnIdentity.UserEmail}&id={sharedSecretId}");
-            }
+        if (sharedSecretId != Guid.Empty)
+        {
+            Uri baseApiUri = AxCrypt.Core.Resolve.UserSettings.RestApiBaseUrl;
+            string accountWebDomain = baseApiUri.ToString().Replace(AxCrypt.Core.Resolve.UserSettings.RestApiBaseUrl.PathAndQuery, "/");
+            SharedLink = new Uri($"{accountWebDomain}GlobalTextEncryption/Decrypt?email={logOnIdentity.UserEmail}&id={sharedSecretId}");
         }
     }
 

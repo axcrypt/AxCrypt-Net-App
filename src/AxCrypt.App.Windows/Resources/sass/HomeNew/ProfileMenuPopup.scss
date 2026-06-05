@@ -150,8 +150,8 @@
     font-weight: 700;
     padding: 2px 8px;
     border-radius: 20px;
-    background: $brand-green-lt;
-    color: $brand-green;
+    background: $brand-green;
+    color: #fff;
     text-transform: capitalize;
     letter-spacing: .02em;
     align-self: flex-start;
@@ -226,3 +226,34 @@ html[data-theme="dark"] {
         color: #b8e89a;
     }
 }
+
+.subs-dtls-popup {
+    .center-column {
+        margin: 20px 10px;
+        line-height: 28px;
+        gap: 12px;
+    }
+
+    .ico-user-dk {
+        content: $IcoUserDesk;
+    }
+
+    span {
+        padding-right: 8px;
+    }
+}
+
+.sub-pop2 {
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    z-index: 10;
+}
+
+    .sub-pop2 a.active,
+    .sub-pop2 a:hover {
+        background-color: $colAvtr;
+        color: $TxtClr !important;
+        padding: 10px 25px;
+        margin: 0 -20px;
+    }

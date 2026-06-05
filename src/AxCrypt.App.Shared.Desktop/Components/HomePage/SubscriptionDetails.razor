@@ -1,33 +1,190 @@
-﻿@using AxCrypt.Api.Model
+@using AxCrypt.Api.Model
 @using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Services
 @using AxCrypt.Content
+@using static AxCrypt.Abstractions.TypeResolve
 
 @inject ProfileViewModel profileViewModel
+@inject NavigationManager Navigation
 
-<div class="subs-dtls-popup model-popup sub-pop2" style="display:none;" id="subscription-details-side-popup">
-    <div class="close-img" id="close-subscription-details-side-popup"></div>
-    <div class="center-column" style="padding:0;">
-        <div>
-            <img class="ico-user-dk" src="" alt="Ico-user" />
-        </div>
-        <div>
-            <span class="txt-clr">@Texts.PromptSubscription:</span>
-            <span class="font-bold sub-head-clr">@profileViewModel!.Account.SubscriptionLevel.ToString()</span><br />
+@if (_isVisible)
+{
+    <div class="axd-backdrop" @onclick="Close">
+        <div class="axd-modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="sd-title"
+             @onclick:stopPropagation>
 
-            @if (profileViewModel.Account.SubscriptionLevel != SubscriptionLevel.Free)
-            {
-                <span class="txt-clr">@Texts.TypeText</span>
-                <span class="font-bold sub-head-clr">@profileViewModel.Account.Subscription</span>
+            @* ── Header ──────────────────────────────────────────── *@
+            <header class="axd-header">
+                <div class="axd-header-icon @HeaderIconClass" aria-hidden="true">
+                    @PlanIcon
+                </div>
+                <div class="axd-header-text">
+                    <h2 id="sd-title" class="axd-title">@Texts.SubscriptionDetailsTitle</h2>
+                    <p class="axd-sub">@PlanDisplayName</p>
+                </div>
+                <button type="button" class="axd-close" @onclick="Close" aria-label="Close">×</button>
+            </header>
 
-                <br />
+            @* ── Body ────────────────────────────────────────────── *@
+            <div class="axd-body sd-body">
 
-                <span class="txt-clr">@Texts.ValidUntilText</span>
-                <span class="font-bold sub-head-clr">@profileViewModel.ValidFormatted</span>
+                @* Plan badge + status *@
+                <div class="sd-plan-row">
+                    <span class="sd-plan-badge @PlanBadgeClass">@PlanDisplayName</span>
+                    @if (!IsFree)
+                    {
+                        <span class="sd-status-dot"></span>
+                        <span class="sd-status-label">Active</span>
+                    }
+                </div>
 
-                <br />
+                @if (!IsFree)
+                {
+                    @* Billing details *@
+                    <div class="sd-detail-grid">
+                        <div class="sd-detail-row">
+                            <span class="sd-detail-label">@Texts.TypeText</span>
+                            <span class="sd-detail-value">@profileViewModel.Account.Subscription</span>
+                        </div>
+                        <div class="sd-detail-row">
+                            <span class="sd-detail-label">@Texts.ValidUntilText</span>
+                            <span class="sd-detail-value">@profileViewModel.ValidFormatted</span>
+                        </div>
+                        @if (profileViewModel.Account.DaysLeft > 0)
+                        {
+                            <div class="sd-detail-row">
+                                <span class="sd-detail-label">Days remaining</span>
+                                <span class="sd-days-chip @(profileViewModel.Account.DaysLeft <= 14 ? "sd-days-chip--warn" : "")">
+                                    @profileViewModel.Account.DaysLeft days
+                                </span>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    @* Free tier info *@
+                    <div class="sd-free-note">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <span>You're on the <strong>Free</strong> plan. Upgrade to unlock unlimited encryption, secure vault, key sharing, and more.</span>
+                    </div>
+                }
 
-                @* <a class="can-subs" @onclick="profileViewModel.CancelSubscription">@Texts.CancelSubscriptionPrompt</a> *@
-            }
+            </div>
+
+            @* ── Footer ──────────────────────────────────────────── *@
+            <footer class="axd-footer">
+                <button type="button" class="axd-btn axd-btn--ghost" @onclick="Close">
+                    @Texts.ButtonNotNow
+                </button>
+                @if (IsFree)
+                {
+                    <button type="button" class="axd-btn axd-btn--primary" @onclick="GoToUpgrade">
+                        Upgrade now →
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="axd-btn axd-btn--primary" @onclick="ManageSubscription">
+                        Manage subscription
+                    </button>
+                }
+            </footer>
+
         </div>
     </div>
-</div>
+}
+
+@code {
+    private bool _isVisible;
+
+    // ── Helpers ──────────────────────────────────────────────────────
+    private SubscriptionLevel Level => profileViewModel.Account.SubscriptionLevel;
+
+    private bool IsFree =>
+        Level == SubscriptionLevel.Free ||
+        Level == SubscriptionLevel.Unknown;
+
+    private string PlanDisplayName => Level switch
+    {
+        SubscriptionLevel.Business      => Texts.LicenseBusinessNameText,
+        SubscriptionLevel.Premium       => Texts.LicensePremiumNameText,
+        SubscriptionLevel.PasswordManager => "Password Manager",
+        _                               => Texts.LicenseFreeNameText,
+    };
+
+    private string HeaderIconClass => Level switch
+    {
+        SubscriptionLevel.Business => "axd-header-icon--biz",
+        SubscriptionLevel.Premium  => "axd-header-icon--prem",
+        _                          => "",
+    };
+
+    private string PlanBadgeClass => Level switch
+    {
+        SubscriptionLevel.Business => "sd-plan-badge--biz",
+        SubscriptionLevel.Premium  => "sd-plan-badge--prem",
+        _                          => "sd-plan-badge--free",
+    };
+
+    private RenderFragment PlanIcon => Level switch
+    {
+        SubscriptionLevel.Business =>
+            @<svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+                <line x1="12" y1="12" x2="12" y2="16"/>
+                <line x1="10" y1="14" x2="14" y2="14"/>
+            </svg>,
+        SubscriptionLevel.Premium =>
+            @<svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>,
+        _ =>
+            @<svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="1" y="4" width="22" height="16" rx="2"/>
+                <line x1="1" y1="10" x2="23" y2="10"/>
+            </svg>,
+    };
+
+    // ── Public API (called via @ref from UserProfile) ─────────────────
+    public void Show()
+    {
+        _isVisible = true;
+        InvokeAsync(StateHasChanged);
+    }
+
+    // ── Actions ──────────────────────────────────────────────────────
+    private void Close()
+    {
+        _isVisible = false;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void GoToUpgrade()
+    {
+        Close();
+        Navigation.NavigateTo("/upgradePage");
+    }
+
+    private void ManageSubscription()
+    {
+        Close();
+        profileViewModel.UpgradeSubscription();
+    }
+}

@@ -9,8 +9,6 @@
 @inject UserService userService
 @inject PopupService popupService
 @inject ProfileViewModel profileViewModel
-@inject IJSRuntime JSRuntime
-
 @implements IDisposable
 
 @* ── Profile row (sidebar footer trigger) ──────────────────────── *@
@@ -76,14 +74,16 @@
         }
     </div>
 
-    @* Hidden trigger for the SubscriptionDetails JS interaction *@
-    <button id="subscription-details-button-action" style="display:none;"></button>
 }
 
-<AxCrypt.App.Shared.Desktop.Components.HomePage.SubscriptionDetails />
+<AxCrypt.App.Shared.Desktop.Components.HomePage.SubscriptionDetails @ref="_subDetails" />
 
 @code {
     private const string EnterKey = "Enter";
+
+    // Reference to the subscription details popup — Show() is called directly
+    // instead of the old JS-click workaround.
+    private SubscriptionDetails _subDetails = default!;
 
     // ── Icons ──────────────────────────────────────────────────────
     // All 16×16 stroke icons — consistent weight (stroke-width 2),
@@ -232,7 +232,7 @@
                 profileViewModel!.ViewHelpMenuItemClick();
                 break;
             case "/subscriptiondetails":
-                await JSRuntime.InvokeVoidAsync("triggerClick", "subscription-details-button-action");
+                _subDetails.Show();
                 break;
             case "/manageaccount":
                 profileViewModel!.RedirectToMyAxCryptIDPage();

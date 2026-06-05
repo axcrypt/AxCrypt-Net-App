@@ -72,17 +72,19 @@ namespace AxCrypt.Core.Session
                     {
                         return activeFile;
                     }
-                    if (activeFile.IsDecrypted && activeFile.Status.HasMask(ActiveFileStatus.AssumedOpenAndDecrypted))
-                    {
-                        await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "The file ({0}) could not be updated and re-encrypted because it is open in another application.\r\nPlease close all applications using the file and try again.\r\nAxCrypt will automatically continue once the file becomes available.".InvariantFormat(activeFile.DecryptedFileInfo.FullName), DoNotShowAgainOptions.None);
-                        return activeFile;
-                    }
-                    if (New<FileLocker>().IsLocked(activeFile.DecryptedFileInfo))
+                    if (activeFile.IsDecrypted &&
+                        activeFile.Status.HasMask(ActiveFileStatus.AssumedOpenAndDecrypted) &&
+                        activeFile.DecryptedFileInfo.IsLocked())
                     {
                         if (Resolve.Log.IsInfoEnabled)
                         {
                             Resolve.Log.LogInfo("Not deleting '{0}' because it is marked as locked.".InvariantFormat(activeFile.DecryptedFileInfo.FullName));
                         }
+                        await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, "The file ({0}) could not be updated and re-encrypted because it is open in another application.\r\nPlease close all applications using the file and try again.\r\nAxCrypt will automatically continue once the file becomes available.".InvariantFormat(activeFile.DecryptedFileInfo.FullName), DoNotShowAgainOptions.None);
+                        return activeFile;
+                    }
+                    if (New<FileLocker>().IsLocked(activeFile.DecryptedFileInfo))
+                    {
                         return activeFile;
                     }
                     if (activeFile.Status.HasMask(ActiveFileStatus.NotShareable))
@@ -96,7 +98,7 @@ namespace AxCrypt.Core.Session
                             activeFile = await CheckIfTimeToUpdate(activeFile, encryptedFileLock, decryptedFileLock, progress).Free();
                             if (activeFile.Status.HasMask(ActiveFileStatus.AssumedOpenAndDecrypted))
                             {
-                                activeFile = await TryDelete(activeFile, decryptedFileLock, progress).Free();
+                                activeFile = await TryDeleteAfterCleanupRequest(activeFile, decryptedFileLock, progress).Free();
                             }
                         }
                     }
@@ -389,7 +391,17 @@ namespace AxCrypt.Core.Session
 
         private static async Task<ActiveFile> TryDelete(ActiveFile activeFile, FileLock decryptedFileLock, IProgressContext progress)
         {
-            if (Resolve.ProcessState.HasActiveProcess(activeFile))
+            return await TryDeleteCore(activeFile, decryptedFileLock, progress, false).Free();
+        }
+
+        private static async Task<ActiveFile> TryDeleteAfterCleanupRequest(ActiveFile activeFile, FileLock decryptedFileLock, IProgressContext progress)
+        {
+            return await TryDeleteCore(activeFile, decryptedFileLock, progress, true).Free();
+        }
+
+        private static async Task<ActiveFile> TryDeleteCore(ActiveFile activeFile, FileLock decryptedFileLock, IProgressContext progress, bool ignoreActiveProcess)
+        {
+            if (!ignoreActiveProcess && Resolve.ProcessState.HasActiveProcess(activeFile))
             {
                 if (Resolve.Log.IsInfoEnabled)
                 {

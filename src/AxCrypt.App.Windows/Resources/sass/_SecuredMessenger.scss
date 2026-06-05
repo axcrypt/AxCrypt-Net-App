@@ -846,6 +846,18 @@ textarea[readonly] {
         flex-direction: column;
         flex: 1;
         min-height: 0;
+
+        /* Compose form (.ncm) must stretch to fill the pane and never
+           let its footer be clipped when the window is short. */
+        .ncm {
+            flex: 1 !important;
+            height: auto !important;   /* override inline height:100% */
+            min-height: 0 !important;
+        }
+
+        .ncm-foot {
+            flex-shrink: 0 !important; /* footer never compresses away */
+        }
     }
 
     #viewer-messenger-section {

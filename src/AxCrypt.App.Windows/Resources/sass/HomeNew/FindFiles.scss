@@ -7,6 +7,7 @@
 // after the TopBar — same pattern as .cbp-page and .content-grid.
 // `height: 100%` does not work inside a flex column; flex: 1 does.
 .ff-page {
+    position: relative;
     flex: 1;
     min-height: 0;
     display: flex;
@@ -166,6 +167,11 @@
     font-weight: 800;
     letter-spacing: .04em;
     text-transform: uppercase;
+}
+
+.ff-col-actions {
+    overflow: hidden;
+    text-indent: -999px;
 }
 
 .ff-list {
@@ -342,6 +348,12 @@
 }
 
 // ── Context menu ──────────────────────────────────────────────────
+.ff-context-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 799;
+}
+
 .ff-context-menu {
     position: fixed;
     z-index: 800;

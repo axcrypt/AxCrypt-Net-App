@@ -6,38 +6,58 @@
 
 @if (IsVisible)
 {
-    <div class="abt-axc-sec">
-        <div id="modal-dialog2" class="modalDialog" style="display: block;">
-            <div class="abt-axc text-center">
-                <div class="close-img" @onclick="CloseDialog"></div>
-                <div style="display:flex; align-items:center; gap: 4%;">
-                    <div style="padding: 5% 3%;"><img src="images/default/axcrypt_icon_text.svg" alt="AxCrypt-icon" /></div>
-                    <div style="text-align: left; word-break:break-word;">
-                        <h3 class="txt-clr">@AboutViewModel.ProductName</h3>
-                        <h4 style="font-size:18px">@Texts.FileEncryptionEasyText</h4>
+    <div class="axd-backdrop">
+        <div class="axd-modal">
 
-                        <label class="txt-clr">@((MarkupString)string.Format(AxCrypt.Content.Texts.AppVersionLabel, ": <span class='font-bold sub-head-clr'>" + @AboutViewModel.Version + "</span>"))</label>
-                        <br />
+            <div class="axd-header">
+                <div class="axd-header-icon axd-header-icon--prem">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                </div>
+                <div class="axd-header-text">
+                    <p class="axd-title">About AxCrypt</p>
+                    <p class="axd-sub">@AboutViewModel.ProductName</p>
+                </div>
+                <button class="axd-close" @onclick="CloseDialog" aria-label="Close">&times;</button>
+            </div>
 
-                        <label class="txt-clr">@AxCrypt.Content.Texts.PromptSubscription:</label>
-                        <span style="font-weight:500;font-size:15px;">@AboutViewModel.SubscriptionStatusAndExpiration</span>
-                        <br />
-
-                        <label class="txt-clr">@AxCrypt.Content.Texts.AboutUsLinkLabel:</label>
-                        <a class="font-small sub-head-clr" style="font-size: 12px;" @onclick="OpenAboutPage">https://www.axcrypt.net/information/axcrypt/</a> <br />
-
-                        <span class="grey-clr" style="font-size:13px;">@AboutViewModel.Copyright</span>
-                        <br />
-
-                        <label class="highlight-text">
-                            @((MarkupString)(string.Format(Texts.AxCryptAboutDescription1)))
-                        </label>
-                        <br />
-
-                        <span style="font-size: 12px;">@Texts.AxCryptAboutDescription2</span>
+            <div class="axd-body">
+                <div class="abt-logo-row">
+                    <img class="abt-logo" src="images/default/axcrypt_icon_text.svg" alt="AxCrypt" />
+                    <div>
+                        <p class="abt-product-name">@AboutViewModel.ProductName</p>
+                        <p class="abt-tagline">@Texts.FileEncryptionEasyText</p>
                     </div>
                 </div>
+
+                <div class="abt-info-grid">
+                    <div class="abt-info-row">
+                        <span class="abt-info-label">@string.Format(AxCrypt.Content.Texts.AppVersionLabel, "")</span>
+                        <span class="abt-info-value">@AboutViewModel.Version</span>
+                    </div>
+                    <div class="abt-info-row">
+                        <span class="abt-info-label">@AxCrypt.Content.Texts.PromptSubscription</span>
+                        <span class="abt-info-value">@AboutViewModel.SubscriptionStatusAndExpiration</span>
+                    </div>
+                    <div class="abt-info-row">
+                        <span class="abt-info-label">@AxCrypt.Content.Texts.AboutUsLinkLabel</span>
+                        <a class="abt-link" @onclick="OpenAboutPage">axcrypt.net/information/axcrypt/</a>
+                    </div>
+                </div>
+
+                <p class="abt-description">@((MarkupString)(string.Format(Texts.AxCryptAboutDescription1)))</p>
+                <p class="abt-description">@Texts.AxCryptAboutDescription2</p>
+                <p class="abt-copyright">@AboutViewModel.Copyright</p>
             </div>
+
+            <div class="axd-footer">
+                <button class="axd-btn axd-btn--ghost" @onclick="CloseDialog">Close</button>
+                <button class="axd-btn axd-btn--primary" @onclick="OpenAboutPage">@AxCrypt.Content.Texts.AboutUsLinkLabel</button>
+            </div>
+
         </div>
     </div>
 }

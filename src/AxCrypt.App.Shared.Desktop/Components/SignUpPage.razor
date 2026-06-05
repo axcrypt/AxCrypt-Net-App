@@ -1,51 +1,21 @@
-@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Desktop.Services
+@using AxCrypt.App.Shared.Helpers
 @using AxCrypt.App.Shared.Models
-@using AxCrypt.App.Shared.ViewModels
-@using AxCrypt.Content
 @using AxCrypt.App.Shared.Utility
+@using AxCrypt.Content
+@using AxCrypt.Core.UI.ViewModel
 
+@inject OnlineSignUpService SignUp
 @inject RegisterViewModel Register
-@inject LogOnViewModel logOnViewModel
-@inject ProfileViewModel profileViewModel
+@inject PasswordStrengthMeterViewModel StrengthMeter
+@inject IJSRuntime JSRuntime
 @inject NavigationManager Navigation
 
-@*
-    SignUpPage — the modern ONLINE sign-up page (separated from
-    RegisterPage, which is now offline-only).
-
-    Conversion-focused user flow:
-       Step 1 (this page)
-          ── capture email + password locally
-          ── show plan teaser (Free is genuinely free; paid plans
-              have a small price anchor) so the user knows what's
-              coming before they click
-          ── trust row + social proof to reduce friction
-          ── "no credit card needed" risk-reversal
-       Step 2 (account web)
-          ── plan-grid + Stripe checkout owned by the existing web
-              flow. We don't duplicate plan UI in the app — the web
-              owns identity creation end-to-end so we never end up
-              with a half-created account.
-
-    Conversion improvements vs. the old "click Sign Up → web redirect"
-    flow:
-      • Single in-app form, no context switch to a browser tab for
-        the credential step. The user only ever sees a browser at
-        the payment step (where they expect it).
-      • Plan teaser at the top so the user knows the upper bound
-        before committing.
-      • "Try Premium free for 30 days" pre-checked toggle drives the
-        web hand-off straight to the Premium trial path
-        (?reqFrom=Premium&trial=1) instead of generic signup, which
-        the account web's analytics show converts ~2× better than
-        a cold plan grid.
-      • Social proof + trust row reduces the abandonment we saw on
-        the old plain form.
-*@
+@implements IDisposable
 
 <section class="lp-shell">
 
-    @* ── Brand panel (left) — identical to LoginPageNew ─── *@
+    @* ── Brand panel (left) ─────────────────────────── *@
     <aside class="lp-brand">
         <div class="lp-brand-bg"></div>
         <img class="lp-brand-key" src="images/axcryptIcon.png" alt="" aria-hidden="true" />
@@ -56,8 +26,8 @@
             </div>
 
             <h1 class="lp-brand-headline">
-                Your files.<br/>
-                Protected everywhere.<br/>
+                Your files.<br />
+                Protected everywhere.<br />
                 <span class="lp-brand-emphasis">Always.</span>
             </h1>
 
@@ -69,25 +39,25 @@
             <ul class="lp-brand-pills" aria-label="Why AxCrypt">
                 <li>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
-                        <polyline points="20 6 9 17 4 12"/>
+                        <polyline points="20 6 9 17 4 12" />
                     </svg>
                     AES-256 device encryption
                 </li>
                 <li>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
-                        <polyline points="20 6 9 17 4 12"/>
+                        <polyline points="20 6 9 17 4 12" />
                     </svg>
                     Secure cloud storage &amp; simple sharing
                 </li>
                 <li>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
-                        <polyline points="20 6 9 17 4 12"/>
+                        <polyline points="20 6 9 17 4 12" />
                     </svg>
                     Works across devices
                 </li>
                 <li>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
-                        <polyline points="20 6 9 17 4 12"/>
+                        <polyline points="20 6 9 17 4 12" />
                     </svg>
                     @((MarkupString)Texts.VerifyMFAOffline)
                 </li>
@@ -97,293 +67,485 @@
         <div class="lp-brand-footer">© AxCrypt — File security made easy</div>
     </aside>
 
-    @* ── Form panel (right) ──────────────────────────────── *@
-    <article class="lp-form" id="content-wrap">
-        <div class="lp-form-inner sup-form-inner">
+    @* ── Form panel (right) ──────────────────────────── *@
+    <article class="lp-form sup2-form" id="content-wrap">
+        @* sup2-scroll lets the form panel scroll when the window is short *@
+        <div class="sup2-scroll">
+        <div class="sup2-inner">
 
-            @* ── Step header + plan teaser ──────────────── *@
-            <div class="lp-form-head">
-                <ol class="lp-steps" role="list" aria-label="Sign-up progress">
-                    <li class="lp-step lp-step--active">
-                        <span class="lp-step-dot">1</span>
-                        <span class="lp-step-label">Account</span>
-                    </li>
-                    <li class="lp-step-sep" aria-hidden="true"></li>
-                    <li class="lp-step">
-                        <span class="lp-step-dot">2</span>
-                        <span class="lp-step-label">Plan</span>
-                    </li>
-                </ol>
+            @* ── Step indicator (2 steps) ────────────── *@
+            <ol class="sup2-steps" role="list" aria-label="Sign-up progress">
+                <li class="sup2-step @(SignUp.Step == SignUpStep.Email ? "sup2-step--active" : "sup2-step--done")">
+                    <span class="sup2-step-dot">
+                        @if (SignUp.Step != SignUpStep.Email)
+                        {
+                            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        }
+                        else
+                        {
 
-                <h2 class="lp-title">Create your AxCrypt account</h2>
-                <p class="lp-sub">Step 1 of 2 — your email and a strong password.</p>
+                            <span>1</span>
+                        }
+                    </span>
+                    <span class="sup2-step-label">Account</span>
+                </li>
+                <li class="sup2-step-sep" aria-hidden="true"></li>
+                <li class="sup2-step @(SignUp.Step != SignUpStep.Email ? "sup2-step--active" : "")">
+                    <span class="sup2-step-dot"><span>2</span></span>
+                    <span class="sup2-step-label">Verify &amp; Password</span>
+                </li>
+            </ol>
 
-                @* Plan teaser — sets the upper bound + anchors the
-                   conversation around Free always being available. *@
-                <div class="sup-plans" aria-label="Available plans">
-                    <span class="sup-plan sup-plan--free">Free <small>$0</small></span>
-                    <span class="sup-plan sup-plan--premium">Premium <small>from $3.75/mo</small></span>
-                    <span class="sup-plan sup-plan--business">Business <small>per seat</small></span>
+            @* ── Error banner (shared across all steps) ─ *@
+            @if (!string.IsNullOrEmpty(SignUp.ErrorMessage))
+            {
+                <div class="lp-error" role="alert">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <span>@SignUp.ErrorMessage</span>
                 </div>
-            </div>
+            }
 
-            <EditForm Model="@Register.CreateAccountModel" class="lp-form-fields">
+            @* ══════════════════════════════════════════════════ *@
+            @*  STEP 1 — Email + account type                     *@
+            @* ══════════════════════════════════════════════════ *@
+            @if (SignUp.Step == SignUpStep.Email)
+            {
+                <div class="sup2-head">
+                    <h2 class="lp-title">Create your account</h2>
+                    <p class="lp-sub">Start with your email address.</p>
+                </div>
 
-                @if (!string.IsNullOrEmpty(Register.ErrorMessage))
-                {
-                    <div class="lp-error" role="alert">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <line x1="12" y1="8" x2="12" y2="12"/>
-                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                @* Account type toggle *@
+                <div class="sup2-type-row" role="group" aria-label="Account type">
+                    <button type="button"
+                            class="sup2-type-btn @(_isBusinessAccount ? "" : "sup2-type-btn--active")"
+                            @onclick="() => _isBusinessAccount = false">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
                         </svg>
-                        <span>@Register.ErrorMessage</span>
-                    </div>
-                }
+                        <span class="sup2-type-label">Private</span>
+                        <span class="sup2-type-sub">Personal files &amp; vault</span>
+                    </button>
+                    <button type="button"
+                            class="sup2-type-btn @(_isBusinessAccount ? "sup2-type-btn--active" : "")"
+                            @onclick="() => _isBusinessAccount = true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <rect x="2" y="7" width="20" height="14" rx="2" />
+                            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+                            <line x1="12" y1="12" x2="12" y2="16" />
+                            <line x1="10" y1="14" x2="14" y2="14" />
+                        </svg>
+                        <span class="sup2-type-label">Business</span>
+                        <span class="sup2-type-sub">Team sharing &amp; billing</span>
+                    </button>
+                </div>
 
-                @* ── Email ───────────────────────────────── *@
-                <div class="lp-field">
+                <div class="lp-field" style="margin-top:1.25rem;">
                     <div class="lp-field-head">
-                        <label for="sup-email">@Texts.YourEmailText</label>
+                        <label for="sup2-email">Email address</label>
                     </div>
                     <input type="email"
-                           id="sup-email"
+                           id="sup2-email"
                            class="lp-input"
-                           @bind-value="Register.CreateAccountModel.UserEmail"
+                           @bind-value="_email"
                            @bind-value:event="oninput"
+                           @onkeydown="OnEmailKeyDown"
                            placeholder="@Texts.TypeYourEmailPlaceHolderText"
                            autocomplete="email"
                            tabindex="1" />
                 </div>
 
-                @* ── Password (with eye toggle) ──────────── *@
-                <div class="lp-field">
-                    <div class="lp-field-head">
-                        <label for="sup-password">@Texts.CreatePasswordText</label>
-                    </div>
-                    <div class="lp-input-wrap">
-                        <input type="@passwordFieldType"
-                               id="sup-password"
-                               class="lp-input"
-                               @bind-value="Register.CreateAccountModel.PasswordText"
-                               @bind-value:event="oninput"
-                               placeholder="Create your password"
-                               autocomplete="new-password"
-                               tabindex="2" />
-                        <button type="button"
-                                class="lp-input-eye"
-                                @onclick="TogglePasswordVisibility"
-                                title="@(canShowPassword ? "Hide password" : "Show password")"
-                                aria-label="@(canShowPassword ? "Hide password" : "Show password")"
-                                tabindex="-1">
-                            @if (canShowPassword)
-                            {
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2"
-                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a18.46 18.46 0 015.06-5.94"/>
-                                    <path d="M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 8 11 8a18.46 18.46 0 01-3.17 4.07"/>
-                                    <line x1="1" y1="1" x2="23" y2="23"/>
-                                </svg>
-                            }
-                            else
-                            {
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2"
-                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                </svg>
-                            }
-                        </button>
-                    </div>
-                    <AxCrypt.App.Shared.Desktop.Components.Shared.PasswordStrengthMeterComponent
-                        InputValue="@Register.CreateAccountModel.PasswordText" />
-                </div>
-
-                @* ── Verify password ─────────────────────── *@
-                <div class="lp-field">
-                    <div class="lp-field-head">
-                        <label for="sup-verify">@Texts.VerifyPasswordPrompt</label>
-                    </div>
-                    <input type="@passwordFieldType"
-                           id="sup-verify"
-                           class="lp-input"
-                           @bind-value="Register.CreateAccountModel.Verification"
-                           @bind-value:event="oninput"
-                           placeholder="Type your password one more time"
-                           autocomplete="new-password"
-                           tabindex="3" />
-                </div>
-
-                @* ── 30-day Premium trial toggle ──────────── *@
-                @* Pre-checked because:
-                   (a) the user can pick Free during checkout for $0,
-                   (b) showing "Premium 30 days free" as the default
-                       anchors the user to the Premium offer when they
-                       hit the plan grid, which the account web's data
-                       shows converts ~2× better than no anchor. *@
-                <label class="sup-trial">
-                    <input type="checkbox"
-                           class="sup-trial-check"
-                           @bind="StartWithTrial"
-                           tabindex="4" />
-                    <span>
-                        <strong>Try Premium free for 30 days.</strong>
-                        Cancel anytime — keep the Free plan if you don't upgrade.
-                    </span>
-                </label>
-
                 <button type="button"
-                        class="lp-cta sup-cta"
-                        disabled="@_isSubmitting"
-                        tabindex="5"
-                        @onclick="ContinueAsync">
-                    @if (_isSubmitting)
+                        class="lp-cta sup2-cta @(SignUp.IsBusy ? "lp-submit--loading" : "")"
+                        disabled="@SignUp.IsBusy"
+                        tabindex="2"
+                        @onclick="ContinueFromEmailAsync">
+                    @if (SignUp.IsBusy)
                     {
                         <span class="lp-cta-spinner" aria-hidden="true"></span>
-                        <span>Creating account…</span>
+                        <span>Sending code…</span>
                     }
                     else
                     {
-                        <span>Continue — pick your plan</span>
+                        <span>Continue</span>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12 5 19 12 12 19"/>
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
                         </svg>
                     }
                 </button>
 
-                @* ── Risk reversal + trust row ─────────────── *@
-                <p class="sup-risk">
-                    No credit card required • Free plan available forever
-                </p>
-
-                <div class="sup-trust" aria-label="Security &amp; compliance">
-                    <span>AES-256</span>
-                    <span class="sup-trust-dot"></span>
-                    <span>HIPAA</span>
-                    <span class="sup-trust-dot"></span>
-                    <span>GDPR</span>
-                    <span class="sup-trust-dot"></span>
-                    <span>10M+ users</span>
+                <div class="lp-form-foot" style="margin-top:1rem;">
+                    <span style="font-size:0.8rem;color:#6b7280;">Already have an account?</span>
+                    <button type="button" class="lp-link" style="font-size:0.8rem;" @onclick="GoToLogin">Sign in</button>
                 </div>
-            </EditForm>
+            }
 
-            @* ── Footer: back to sign in + key import ──── *@
-            <div class="lp-form-foot">
-                <NavLink class="lp-link" href="javascript:void(0)" @onclick="GoToLogin">
-                    @Texts.AlreadyRegisteredLink
-                </NavLink>
+            @* ══════════════════════════════════════════════════ *@
+            @*  STEP 2 — Verify email + set password (combined)   *@
+            @* ══════════════════════════════════════════════════ *@
+            else if (SignUp.Step == SignUpStep.Code || SignUp.Step == SignUpStep.Password)
+            {
+                <div class="sup2-head">
+                    <h2 class="lp-title">Verify &amp; secure your account</h2>
+                    <p class="lp-sub">
+                        Enter the code sent to <strong style="color:#16a34a;">@SignUp.Email</strong>,
+                        then choose your password.
+                    </p>
+                </div>
 
-                <button type="button" class="lp-link lp-link--mini"
-                        @onclick="InitiateImportAxCryptIdOnSignUp">
-                    @Texts.ImportMyPrivateKeyToolStripMenuItemText
+                @* ── OTP boxes ─────────────────────────────── *@
+                <div class="lp-field-head" style="margin-bottom:4px;">
+                    <label style="font-size:0.78rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.04em;">
+                        Verification code
+                    </label>
+                </div>
+                <div class="sup2-otp-row" id="sup2-otp-row" aria-label="Verification code">
+                    @for (int i = 0; i < 6; i++)
+                    {
+                        int idx = i;
+                        <input type="text"
+                               inputmode="numeric"
+                               maxlength="1"
+                               class="sup2-otp-box @(string.IsNullOrEmpty(_otpDigits[idx]) ? "" : "sup2-otp-box--filled")"
+                               id="sup2-otp-@idx"
+                               value="@_otpDigits[idx]"
+                               @oninput="e => OnOtpInput(idx, e)"
+                               @onkeydown="e => OnOtpKeyDown(idx, e)"
+                               autocomplete="one-time-code"
+                               tabindex="@(idx + 1)" />
+                    }
+                </div>
+
+                <div class="sup2-resend">
+                    <span style="font-size:0.78rem;color:#6b7280;">Didn't receive it?</span>
+                    @if (SignUp.CanResend())
+                    {
+                        <button type="button" class="sup2-resend-btn" @onclick="ResendCodeAsync">
+                            Resend code
+                        </button>
+                    }
+                    else
+                    {
+                        <span class="sup2-resend-cooldown">Resend in @_resendSecondsLeft s</span>
+                    }
+                </div>
+
+                @* ── Divider ───────────────────────────────── *@
+                <div class="sup2-step-divider" aria-hidden="true"></div>
+
+                @* ── Password fields ───────────────────────── *@
+                <div class="lp-field">
+                    <div class="lp-field-head">
+                        <label for="sup2-pw">Password</label>
+                    </div>
+                    <div class="lp-input-wrap">
+                        <input type="@(_showPassword ? "text" : "password")"
+                               id="sup2-pw"
+                               class="lp-input lp-input--password"
+                               @bind-value="_password"
+                               @bind-value:event="oninput"
+                               placeholder="Create your password"
+                               autocomplete="new-password"
+                               tabindex="7" />
+                        <button type="button" class="lp-eye" tabindex="-1" @onclick="TogglePassword"
+                                aria-label="@(_showPassword ? "Hide password" : "Show password")">
+                            @if (_showPassword)
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24" />
+                                    <line x1="1" y1="1" x2="23" y2="23" />
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                            }
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lp-field">
+                    <div class="lp-field-head">
+                        <label for="sup2-pw-confirm">Confirm password</label>
+                    </div>
+                    <input type="@(_showPassword ? "text" : "password")"
+                           id="sup2-pw-confirm"
+                           class="lp-input"
+                           @bind-value="_confirmPassword"
+                           @bind-value:event="oninput"
+                           placeholder="Type your password one more time"
+                           autocomplete="new-password"
+                           tabindex="8" />
+                </div>
+
+                <AxCrypt.App.Shared.Desktop.Components.Shared.PasswordStrengthMeterComponent InputValue="@_password" />
+
+                @* Single CTA — verifies OTP + captures password in one click *@
+                <button type="button"
+                        class="lp-cta sup2-cta @(SignUp.IsBusy || _isSubmitting ? "lp-submit--loading" : "")"
+                        disabled="@(SignUp.IsBusy || _isSubmitting)"
+                        tabindex="9"
+                        @onclick="VerifyAndContinueToPlanAsync">
+                    @if (SignUp.IsBusy || _isSubmitting)
+                    {
+                        <span class="lp-cta-spinner" aria-hidden="true"></span>
+                        <span>Setting up…</span>
+                    }
+                    else
+                    {
+                        <span>Continue to plan</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    }
                 </button>
-            </div>
-        </div>
-    </article>
 
-    @* ── Vertical loading overlay — shown while account is being created ── *@
-    @if (_isSubmitting)
-    {
-        <div class="lp-loading-overlay" role="status" aria-live="polite">
-            <div class="lp-loading-card">
-                <span class="lp-loading-spinner" aria-hidden="true"></span>
-                <span class="lp-loading-msg">Creating your account…</span>
-            </div>
+                <div class="sup2-back-row">
+                    <button type="button" class="sup2-back-btn" @onclick="BackToEmail">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="19" y1="12" x2="5" y2="12" />
+                            <polyline points="12 19 5 12 12 5" />
+                        </svg>
+                        Back
+                    </button>
+                </div>
+            }
+
+            <p class="lp-legal" style="margin-top:1.5rem;">
+                @Texts.AgreeOurText
+                <a class="lp-link lp-link--inline" href="https://axcrypt.net/information/privacy-policy/" target="_blank">
+                    @Texts.PrivacyPolicyLinkLabel
+                </a>
+                @Texts.AndText
+                <a class="lp-link lp-link--inline" href="https://axcrypt.net/information/terms-of-use/" target="_blank">
+                    @Texts.TermsOfUseLinkLabel
+                </a>
+            </p>
+
         </div>
-    }
+        </div>@* sup2-scroll *@
+    </article>
 </section>
 
-@code {
-    private bool _isSubmitting = false;
-    private string passwordFieldType = "password";
-    private bool canShowPassword = false;
-    private bool StartWithTrial { get; set; } = true;
+@* ── Loading overlay ─────────────────────────────────── *@
+@if (_isSubmitting)
+{
+    <div class="lp-loading-overlay" role="status" aria-live="polite">
+        <div class="lp-loading-card">
+            <span class="lp-loading-spinner" aria-hidden="true"></span>
+            <span class="lp-loading-msg">Setting up your account…</span>
+        </div>
+    </div>
+}
 
-    private void TogglePasswordVisibility()
+<script type="text/javascript">
+    window.sup2 = {
+        focusOtp: function (idx) {
+            const el = document.getElementById('sup2-otp-' + idx);
+            if (el) { el.focus(); el.select(); }
+        }
+    };
+</script>
+
+@code {
+    // ── Local state ──────────────────────────────────────────────
+    private string _email = string.Empty;
+    private bool _isBusinessAccount = false;
+    private string[] _otpDigits = new string[6];
+    private string _password = string.Empty;
+    private string _confirmPassword = string.Empty;
+    private bool _showPassword = false;
+    private bool _isSubmitting = false;
+    private int _resendSecondsLeft = 0;
+    private System.Threading.CancellationTokenSource? _cooldownCts;
+
+    // ── Lifecycle ────────────────────────────────────────────────
+    protected override void OnInitialized()
     {
-        canShowPassword = !canShowPassword;
-        passwordFieldType = canShowPassword ? "text" : "password";
+        SignUp.Reset();
+        SignUp.OnChange += OnSignUpChanged;
     }
 
-    /// <summary>
-    /// Validate locally, then hand off to the account web for plan
-    /// selection / payment. We deliberately don't create the AxCrypt
-    /// identity here — Core's web flow owns identity creation
-    /// end-to-end so we never leave a half-created account behind if
-    /// the user closes the browser mid-checkout.
-    /// </summary>
-    private async Task ContinueAsync()
+    public void Dispose()
     {
-        if (_isSubmitting)
+        SignUp.OnChange -= OnSignUpChanged;
+        _cooldownCts?.Cancel();
+        _cooldownCts?.Dispose();
+    }
+
+    private void OnSignUpChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    // ── Step 1 handlers ─────────────────────────────────────────
+    private async Task ContinueFromEmailAsync()
+    {
+        bool ok = await SignUp.SendCodeAsync(_email, _isBusinessAccount);
+        if (ok)
         {
+            StartCooldownTicker();
+            await FocusOtpBox(0);
+        }
+    }
+
+    private async Task OnEmailKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter") await ContinueFromEmailAsync();
+    }
+
+    // ── Step 2 handlers ─────────────────────────────────────────
+    private void OnOtpInput(int idx, ChangeEventArgs e)
+    {
+        string raw = e.Value?.ToString() ?? string.Empty;
+
+        // Accept a full paste (6 digits) into any box
+        string digits = new string(raw.Where(char.IsDigit).ToArray());
+        if (digits.Length == 6)
+        {
+            for (int i = 0; i < 6; i++)
+                _otpDigits[i] = digits[i].ToString();
+            InvokeAsync(() => FocusOtpBox(5));
             return;
         }
 
-        Register.ErrorMessage = string.Empty;
-
-        string? email    = Register.CreateAccountModel?.UserEmail;
-        string? password = Register.CreateAccountModel?.PasswordText;
-        string? verify   = Register.CreateAccountModel?.Verification;
-
-        // Local pre-validation — quick + clear.
-        if (string.IsNullOrWhiteSpace(email) || !email!.Contains('@'))
+        // Single character — fill this box and advance
+        string ch = digits.Length > 0 ? digits[digits.Length - 1].ToString() : string.Empty;
+        _otpDigits[idx] = ch;
+        if (!string.IsNullOrEmpty(ch) && idx < 5)
         {
-            Register.ErrorMessage = "Please enter a valid email address.";
-            return;
+            InvokeAsync(() => FocusOtpBox(idx + 1));
         }
-        if (string.IsNullOrWhiteSpace(password) || password!.Length < 8)
-        {
-            Register.ErrorMessage = "Use a password with at least 8 characters.";
-            return;
-        }
-        if (!string.Equals(password, verify, StringComparison.Ordinal))
-        {
-            Register.ErrorMessage = "Passwords don't match — please retype.";
-            return;
-        }
+    }
 
+    private async Task OnOtpKeyDown(int idx, KeyboardEventArgs e)
+    {
+        if (e.Key == "Backspace" && string.IsNullOrEmpty(_otpDigits[idx]) && idx > 0)
+        {
+            _otpDigits[idx - 1] = string.Empty;
+            await FocusOtpBox(idx - 1);
+        }
+        else if (e.Key == "Enter")
+        {
+            await VerifyCodeAsync();
+        }
+    }
+
+    private async Task VerifyCodeAsync()
+    {
+        string code = string.Concat(_otpDigits);
+        await SignUp.VerifyCodeAsync(code);
+    }
+
+    private async Task ResendCodeAsync()
+    {
+        bool ok = await SignUp.ResendCodeAsync();
+        if (ok) StartCooldownTicker();
+    }
+
+    private void BackToEmail()
+    {
+        _cooldownCts?.Cancel();
+        _otpDigits = new string[6];
+        _password = string.Empty;
+        _confirmPassword = string.Empty;
+        SignUp.Reset();
+        _email = SignUp.Email; // preserve what the user typed
+    }
+
+    // ── Combined step 2 handler ──────────────────────────────────
+    /// <summary>
+    /// Single action for the combined Verify + Password step:
+    /// 1. Verify the OTP → if it fails, surface the error and stop.
+    /// 2. Capture the password locally → if validation fails, stop.
+    /// 3. Store credentials and open the upgrade dialog.
+    /// </summary>
+    private async Task VerifyAndContinueToPlanAsync()
+    {
+        if (SignUp.IsBusy || _isSubmitting) return;
+
+        // Step 1 — verify OTP
+        string code = string.Concat(_otpDigits);
+
+        // Step 2 — capture password (local validation)
+        bool pwOk = SignUp.CapturePassword(_password, _confirmPassword);
+        if (!pwOk) return; // error message already set on SignUp
+
+        // Step 3 — finish
         try
         {
             _isSubmitting = true;
+            await InvokeAsync(StateHasChanged);
 
-            // If the user opted into the trial, send them down the
-            // Premium trial funnel; otherwise the generic signup URL.
-            // The account web reads ?reqFrom + ?trial to pre-select
-            // the right plan tile.
-            AxCrypt.Core.BrowseUtility.RedirectToAccountWebUrl(
-                StartWithTrial
-                    ? "{0}HomeUser/Login?Signup=True&reqFrom=Premium&trial=1"
-                    : Texts.LinkToSignUpWebPage);
+            Register.CreateAccountModel.UserEmail = SignUp.Email;
+            Register.CreateAccountModel.PasswordText = SignUp.Password;
 
-            // Close the in-app signup panel so the user lands back on
-            // sign-in when they return from the browser.
+            bool codeOk = await SignUp.VerifyCodeAsync(code);
+            if (!codeOk) return; // error message already set on SignUp
+
             Register.ShowSignUp = false;
             Register.DialogResult = DialogResult.OK;
-        }
-        catch (Exception ex)
-        {
-            Register.ErrorMessage = ex.Message;
+
+            // Navigate to the Plan & Pay page so the user can choose and activate their plan.
+            Navigation.NavigateTo("/planAndPay");
         }
         finally
         {
             _isSubmitting = false;
+            SignUp.Reset();
         }
     }
 
-    private async Task InitiateImportAxCryptIdOnSignUp()
-    {
-        await profileViewModel.HandleImportAndExportKeys(KeyManagement.ImportAxCryptID);
-        Register.ShowSignUp = false;
-        Register.DialogResult = DialogResult.Abort;
-    }
+    private void TogglePassword() => _showPassword = !_showPassword;
 
+    // ── Helpers ──────────────────────────────────────────────────
     private void GoToLogin()
     {
+        SignUp.Reset();
         Register.ShowSignUp = false;
         Register.DialogResult = DialogResult.Cancel;
+    }
+
+    private async Task FocusOtpBox(int idx)
+    {
+        await JSRuntime.InvokeVoidAsync("sup2.focusOtp", idx);
+    }
+
+    /// <summary>
+    /// Ticks every second and updates _resendSecondsLeft so the
+    /// "Resend in N s" countdown stays live without a full service event.
+    /// </summary>
+    private void StartCooldownTicker()
+    {
+        _cooldownCts?.Cancel();
+        _cooldownCts?.Dispose();
+        _cooldownCts = new System.Threading.CancellationTokenSource();
+        var token = _cooldownCts.Token;
+
+        _ = Task.Run(async () =>
+        {
+            while (!token.IsCancellationRequested)
+            {
+                int left = SignUp.SecondsUntilResend();
+                _resendSecondsLeft = left;
+                await InvokeAsync(StateHasChanged);
+                if (left <= 0) break;
+                await Task.Delay(1000, token).ContinueWith(_ => { }); // swallow cancellation
+            }
+        }, token);
     }
 }

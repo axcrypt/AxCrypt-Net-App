@@ -34,12 +34,15 @@ namespace AxCrypt.App.Shared.CloudCore.iCloud
 
         public override string PageTitle { get; } = Texts.KnownFolderNameICloud;
 
-        public iCloudServices(Action<FileStorageProvider> initiateFilePicker): this(new iCloudAuthenticator(), initiateFilePicker) { }
+        public iCloudServices(Action<FileStorageProvider> initiateFilePicker) : this(new iCloudAuthenticator(), initiateFilePicker) { }
 
         public iCloudServices(iCloudAuthenticator instance, Action<FileStorageProvider> initiateFilePicker)
         {
             if (!New<IInternetState>().Connected)
-                throw new InvalidOperationException("No Internet Access. Please check your internet connection.");
+            {
+                New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.WarningTitle,
+                    $"{Texts.NoInternetErrorMessage}\n\nYou can continue to access your iCloud files, but changes will sync only after the device reconnects to the internet.");
+            }
 
             _instance = instance;
             _iCloudPlatformFileAccess = New<IICloudPlatformFileAccess>();
@@ -55,19 +58,7 @@ namespace AxCrypt.App.Shared.CloudCore.iCloud
 
         private async void StartOAuthLoginPresenter()
         {
-            if (iCloudConfiguration.SupportsNativeiCloudIntegration)
-            {
-                await InitializeAsync();
-                return;
-            }
-
-            if (_instance.CurrentAccessInfo != null)
-            {
-                await InitializeAsync();
-                return;
-            }
-
-            await InitializeAuth();
+            await InitializeAsync();
         }
 
         private async Task InitializeAuth()
@@ -97,21 +88,14 @@ namespace AxCrypt.App.Shared.CloudCore.iCloud
 
         private async Task InitializeAsync()
         {
-            if (!New<IInternetState>().Connected)
-                return;
-
-            if (!iCloudConfiguration.SupportsNativeiCloudIntegration && _instance.CurrentAccessInfo == null)
-                return;
-
-            using ProcessIndicator processIndicator = new ProcessIndicator();
-            await LoadiCloudFilesAsync();
+            using (ProcessIndicator processIndicator = new ProcessIndicator())
+            {
+                await LoadiCloudFilesAsync();
+            }
         }
 
         public async Task LoadiCloudFilesAsync()
         {
-            if (!New<IInternetState>().Connected)
-                return;
-
             await CleanupOrphanedFilesAsync();
             await LoadCloudContainerAsync();
             await ListFilesAsync();
@@ -150,9 +134,9 @@ namespace AxCrypt.App.Shared.CloudCore.iCloud
                         string intended = orphan[..^".uploading".Length];
 
                         if (File.Exists(intended))
-                            File.Delete(orphan);          
+                            File.Delete(orphan);
                         else
-                            File.Move(orphan, intended);  
+                            File.Move(orphan, intended);
                     }
                     catch (Exception ex)
                     {
@@ -164,7 +148,7 @@ namespace AxCrypt.App.Shared.CloudCore.iCloud
                 {
                     try
                     {
-                        File.Delete(pending);           
+                        File.Delete(pending);
                     }
                     catch (Exception ex)
                     {

@@ -61,12 +61,15 @@
                                             @onclick="() => OnBrowse(provider)">
                                         @Texts.BrowseFilesText
                                     </button>
-                                    <button type="button"
-                                            class="cm-btn cm-btn--ghost"
-                                            title="Sign out of this account"
-                                            @onclick="() => OnDisconnect(provider)">
-                                        @Texts.CloudServicesDisconnectText
-                                    </button>
+                                    @if (provider.Value != Core.IO.FileProvider.iCloud)
+                                    {
+                                        <button type="button"
+                                                class="cm-btn cm-btn--ghost"
+                                                title="Sign out of this account"
+                                                @onclick="() => OnDisconnect(provider)">
+                                            @Texts.CloudServicesDisconnectText
+                                        </button>
+                                    }
                                 }
                                 else
                                 {

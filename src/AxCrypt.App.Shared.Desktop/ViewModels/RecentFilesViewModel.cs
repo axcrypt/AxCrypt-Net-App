@@ -507,7 +507,16 @@ public class RecentFilesViewModel : ViewModelBase
     {
         await _batchService.RunAsync(
             _mainViewModel.SelectedRecentFiles,
-            async (path) => await _fileOperationViewModel.DecryptFiles.ExecuteAsync(new[] { path }),
+            async (path) =>
+            {
+                await _fileOperationViewModel.DecryptFiles.ExecuteAsync(new[] { path });
+                // Core commands don't throw on error — verify the encrypted file was
+                // actually removed. If it still exists, the operation silently failed
+                // (e.g. file in use, permission denied). Throwing pushes it to Failed.
+                if (System.IO.File.Exists(path))
+                    throw new System.IO.IOException(
+                        "The file could not be decrypted. It may be open in another application.");
+            },
             "Decrypted");
     }
 

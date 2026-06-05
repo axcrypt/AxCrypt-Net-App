@@ -1,57 +1,59 @@
-﻿@implements IDisposable
-@using AxCrypt.App.Shared.Desktop.ViewModels
-@using AxCrypt.App.Shared.ViewModels
-@using AxCrypt.Content
-@using AxCrypt.Core.Runtime
-@using Microsoft.JSInterop
+﻿@inject NavigationManager Navigation
 
-@inject RecentFilesViewModel RecentFilesViewModel
-@inject IJSRuntime JSRuntime
+<!-- Two-column content grid -->
+<div style="display: grid;height: 100vh;gap: 16px;grid-template-rows: 0.85fr 0px;">
+    <div class="content-grid">
+        <!-- LEFT -->
+        <div class="left-col">
 
-<div class="home-index">
-    <div class="hm-page-title head-sec top-page-title-container">
-        <h1 class="fle-nme" style="margin-bottom:0px;">@Texts.WelcomeBackTitle</h1>
-        @* <img class="home-title" style="height:30px;" src="" alt="hand-img" /> *@
+            <!-- Quick Actions -->
+            <AxCrypt.App.Shared.Desktop.Components.HomePage.QuickAction />
+
+            <!-- Free plan limit bar for free users — file encryption quota. -->
+            <AxCrypt.App.Shared.Desktop.Components.Shared.FreePlanLimitBar
+                Feature="AxCrypt.App.Entitlement.Contracts.FeatureKey.FileEncryption" />
+
+            <!-- Recent Files -->
+            <AxCrypt.App.Shared.Desktop.Components.HomePage.RecentFiles />
+        </div>
+
+        <!-- RIGHT -->
+        <div class="right-col">
+
+            <!-- Vault Status -->
+            <AxCrypt.App.Shared.Desktop.Components.HomePage.VaultStatus />
+
+
+            <!-- Cloud Drives -->
+            <AxCrypt.App.Shared.Desktop.Components.HomePage.CloudDrives />
+
+
+            <!-- Security Status -->
+            <AxCrypt.App.Shared.Desktop.Components.HomePage.SecurityStatus />
+
+
+            <!-- CTA -->
+            <AxCrypt.App.Shared.Desktop.Components.HomePage.QuickSecureAction />
+
+        </div>
     </div>
-
-    <AxCrypt.App.Shared.Desktop.Components.Home.ActionsComponent />
-    <AxCrypt.App.Shared.Desktop.Components.Home.SubActionsComponent />
-    <AxCrypt.App.Shared.Desktop.Components.Home.RecentFilesComponent />
-    @* <AxCrypt.App.Shared.Desktop.Components.Shared.CloudSyncProgressBar /> *@
+    <div id="footer" style="padding: 16px;background-color: #ffffff;">
+    </div>
 </div>
 
 @code {
-    protected override async Task OnInitializedAsync()
-    {
-        await base.OnInitializedAsync();
-        RecentFilesViewModel.OnUpdateViewState += UpdatePageState;
-    }
+    // ── State ──────────────────────────────────────────────────
+    // ── Data ───────────────────────────────────────────────────
 
-    public void Dispose()
-    {
-        RecentFilesViewModel.OnUpdateViewState -= UpdatePageState;
-    }
+    // ── SVG icon helpers (inline markup strings) ───────────────
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("setHtmlLang", Core.Resolve.UserSettings.CultureName);
-            await base.OnAfterRenderAsync(firstRender);
-            if (!Core.Resolve.UserSettings.HasSeenStartupHelp)
-            {
-                await Task.Delay(2500);
-                await JSRuntime.InvokeVoidAsync("startHomeHelp", RecentFilesViewModel.LogOnViewModel.SubscriptionLevel.ToString().ToLower());
-                Core.Resolve.UserSettings.HasSeenStartupHelp = true;
-            }
-        }
-    }
+    private RenderFragment EyeSvg => @<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>;
+    private RenderFragment DotsSvg => @<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1" /><circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" /></svg>;
+    private RenderFragment FolderSvg => @<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>;
+    private RenderFragment PlusSvg => @<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>;
+    private RenderFragment GreenTickSvg => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#22c55e" stroke-width="2.5" /></svg>;
+    private RenderFragment GreenCheckSvg => @<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>;
+    private RenderFragment ShieldSmSvg => @<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z" /></svg>;
+    private RenderFragment ChevronRightSvg => @<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6" /></svg>;
 
-    private void UpdatePageState()
-    {
-        InvokeAsync(() =>
-        {
-            StateHasChanged(); // Refresh UI
-        });
-    }
 }

@@ -294,6 +294,19 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
                 {
                     await _fileOperationViewModel.WipeFiles.ExecuteAsync(filesToWipe);
 
+                    // Guard the toast and usage recording behind the confirmation
+                    // dialog result. WipeFiles.ExecuteAsync triggers the confirm
+                    // dialog internally (HandleWipeConfirm) and returns normally
+                    // regardless of the user's choice — we must read the VM to tell
+                    // whether the user actually pressed Yes vs No / Cancel.
+                    ConfirmWipeDialogViewModel confirmVm =
+                        AxCServiceProvider.GetService<ConfirmWipeDialogViewModel>();
+
+                    if (!confirmVm.OptedYes)
+                    {
+                        return; // user pressed No or Cancel — no toast, no usage charge
+                    }
+
                     _statusAlertService.Success(count == 1
                         ? $"Securely deleted 1 file."
                         : $"Securely deleted {count} files.");

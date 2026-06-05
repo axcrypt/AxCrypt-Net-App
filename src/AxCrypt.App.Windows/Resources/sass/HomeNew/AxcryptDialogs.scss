@@ -49,7 +49,22 @@
     color: #d97706;
 }
 
-.axd-header-text { flex: 1; min-width: 0; }
+// Premium plan icon — green tint
+.axd-header-icon--prem {
+    background: rgba(72, 119, 44, .10);
+    color: #48772C;
+}
+
+// Business plan icon — dark tint
+.axd-header-icon--biz {
+    background: rgba(17, 24, 39, .08);
+    color: #111827;
+}
+
+.axd-header-text {
+    flex: 1;
+    min-width: 0;
+}
 
 .axd-title {
     font-size: 15px;
@@ -83,7 +98,10 @@
     transition: background .12s, color .12s;
 }
 
-.axd-close:hover { background: #f3f4f6; color: #111827; }
+    .axd-close:hover {
+        background: #f3f4f6;
+        color: #111827;
+    }
 
 .axd-body {
     padding: 20px;
@@ -93,7 +111,11 @@
     overflow-y: auto;
 }
 
-.axd-field { display: flex; flex-direction: column; gap: 6px; }
+.axd-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
 
 .axd-field-label-row {
     display: flex;
@@ -115,11 +137,11 @@
     cursor: default;
 }
 
-.axd-tooltip-wrap:hover .axd-tooltip,
-.axd-tooltip-wrap:focus-within .axd-tooltip {
-    opacity: 1;
-    pointer-events: auto;
-}
+    .axd-tooltip-wrap:hover .axd-tooltip,
+    .axd-tooltip-wrap:focus-within .axd-tooltip {
+        opacity: 1;
+        pointer-events: auto;
+    }
 
 .axd-tooltip {
     position: absolute;
@@ -165,12 +187,13 @@
     background: #fff;
     outline: none;
     transition: border-color .12s, box-shadow .12s;
+    width: 100%;
 }
 
-.axd-input:focus {
-    border-color: #48772C;
-    box-shadow: 0 0 0 3px rgba(72,119,44,.12);
-}
+    .axd-input:focus {
+        border-color: #48772C;
+        box-shadow: 0 0 0 3px rgba(72,119,44,.12);
+    }
 
 .axd-input--readonly {
     background: #f9fafb;
@@ -195,8 +218,15 @@
     flex-shrink: 0;
 }
 
-.axd-btn--primary { background: #48772C; color: #fff; }
-.axd-btn--primary:hover { background: #3a6023; box-shadow: 0 2px 8px rgba(72,119,44,.30); }
+.axd-btn--primary {
+    background: #48772C;
+    color: #fff;
+}
+
+    .axd-btn--primary:hover {
+        background: #3a6023;
+        box-shadow: 0 2px 8px rgba(72,119,44,.30);
+    }
 
 .axd-btn--ghost {
     background: transparent;
@@ -204,7 +234,10 @@
     border: 1.5px solid #d1d5db;
 }
 
-.axd-btn--ghost:hover { background: #f3f4f6; border-color: #9ca3af; }
+    .axd-btn--ghost:hover {
+        background: #f3f4f6;
+        border-color: #9ca3af;
+    }
 
 .axd-error {
     display: flex;
@@ -243,7 +276,9 @@
     border-bottom: 1px solid #f3f4f6;
 }
 
-.axd-toggle-row:last-child { border-bottom: none; }
+    .axd-toggle-row:last-child {
+        border-bottom: none;
+    }
 
 .axd-toggle-label {
     font-size: 13px;
@@ -265,7 +300,11 @@
     flex-shrink: 0;
 }
 
-.axd-switch input { opacity: 0; width: 0; height: 0; }
+    .axd-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 
 .axd-switch-track {
     position: absolute;
@@ -276,44 +315,386 @@
     cursor: pointer;
 }
 
-.axd-switch-track::after {
-    content: "";
-    position: absolute;
-    left: 3px;
-    top: 3px;
-    width: 16px;
-    height: 16px;
-    background: #fff;
-    border-radius: 50%;
-    transition: transform .2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    .axd-switch-track::after {
+        content: "";
+        position: absolute;
+        left: 3px;
+        top: 3px;
+        width: 16px;
+        height: 16px;
+        background: #fff;
+        border-radius: 50%;
+        transition: transform .2s;
+        box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    }
+
+.axd-switch input:checked + .axd-switch-track {
+    background: #48772C;
 }
 
-.axd-switch input:checked + .axd-switch-track { background: #48772C; }
-.axd-switch input:checked + .axd-switch-track::after { transform: translateX(18px); }
+    .axd-switch input:checked + .axd-switch-track::after {
+        transform: translateX(18px);
+    }
 
 // ── Dark theme ───────────────────────────────────────────────────
 
 html[data-theme="dark"] {
-    .axd-modal { background: #1e2530; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
-    .axd-header { border-bottom-color: #2a3340; }
-    .axd-header-icon { background: rgba(127,204,92,.12); color: #7fcc5c; }
-    .axd-header-icon--warn { background: rgba(245,158,11,.15); color: #fbbf24; }
-    .axd-title { color: #e8ecf1; }
-    .axd-sub { color: #8892a0; }
-    .axd-close { color: #6b7280; }
-    .axd-close:hover { background: rgba(255,255,255,.07); color: #e8ecf1; }
+    .axd-modal {
+        background: #1e2530;
+        box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+
+    .axd-header {
+        border-bottom-color: #2a3340;
+    }
+
+    .axd-header-icon {
+        background: rgba(127,204,92,.12);
+        color: #7fcc5c;
+    }
+
+    .axd-header-icon--warn {
+        background: rgba(245,158,11,.15);
+        color: #fbbf24;
+    }
+
+    .axd-title {
+        color: #e8ecf1;
+    }
+
+    .axd-sub {
+        color: #8892a0;
+    }
+
+    .axd-close {
+        color: #6b7280;
+    }
+
+        .axd-close:hover {
+            background: rgba(255,255,255,.07);
+            color: #e8ecf1;
+        }
+
     .axd-label,
-    .axd-toggle-label { color: #b5bcc7; }
-    .axd-input { background: #141a22; border-color: #2a3340; color: #e8ecf1; }
-    .axd-input:focus { border-color: #7fcc5c; box-shadow: 0 0 0 3px rgba(127,204,92,.12); }
-    .axd-input--readonly { background: #1a212b; color: #6b7280; }
-    .axd-btn--ghost { color: #b5bcc7; border-color: #2a3340; }
-    .axd-btn--ghost:hover { background: rgba(255,255,255,.06); border-color: #3d4d5e; }
-    .axd-footer { border-top-color: #2a3340; }
-    .axd-tooltip { background: #0f1520; }
-    .axd-toggles { border-color: #2a3340; }
-    .axd-toggle-row { border-bottom-color: #2a3340; }
-    .axd-switch-track { background: #3d4d5e; }
-    .axd-switch input:checked + .axd-switch-track { background: #7fcc5c; }
+    .axd-toggle-label {
+        color: #b5bcc7;
+    }
+
+    .axd-input {
+        background: #141a22;
+        border-color: #2a3340;
+        color: #e8ecf1;
+    }
+
+        .axd-input:focus {
+            border-color: #7fcc5c;
+            box-shadow: 0 0 0 3px rgba(127,204,92,.12);
+        }
+
+    .axd-input--readonly {
+        background: #1a212b;
+        color: #6b7280;
+    }
+
+    .axd-btn--ghost {
+        color: #b5bcc7;
+        border-color: #2a3340;
+    }
+
+        .axd-btn--ghost:hover {
+            background: rgba(255,255,255,.06);
+            border-color: #3d4d5e;
+        }
+
+    .axd-footer {
+        border-top-color: #2a3340;
+    }
+
+    .axd-tooltip {
+        background: #0f1520;
+    }
+
+    .axd-toggles {
+        border-color: #2a3340;
+    }
+
+    .axd-toggle-row {
+        border-bottom-color: #2a3340;
+    }
+
+    .axd-switch-track {
+        background: #3d4d5e;
+    }
+
+    .axd-switch input:checked + .axd-switch-track {
+        background: #7fcc5c;
+    }
+    // Subscription details — dark overrides
+    .axd-header-icon--prem {
+        background: rgba(127,204,92,.14);
+        color: #b8e89a;
+    }
+
+    .axd-header-icon--biz {
+        background: rgba(255,255,255,.08);
+        color: #e8ecf1;
+    }
+
+    .sd-detail-grid {
+        background: #141a22;
+        border-color: #2a3340;
+    }
+
+    .sd-detail-label {
+        color: #6b7280;
+    }
+
+    .sd-detail-value {
+        color: #e8ecf1;
+    }
+
+    .sd-plan-badge--free {
+        background: rgba(255,255,255,.08);
+        color: #8892a0;
+    }
+
+    .sd-plan-badge--prem {
+        background: rgba(127,204,92,.16);
+        color: #b8e89a;
+        border-color: rgba(127,204,92,.3);
+    }
+
+    .sd-plan-badge--biz {
+        background: rgba(255,255,255,.10);
+        color: #e8ecf1;
+    }
+
+    .sd-free-note {
+        background: rgba(17,24,39,.4);
+        border-color: #2a3340;
+        color: #8892a0;
+    }
+
+    .sd-days-chip {
+        background: rgba(127,204,92,.16);
+        color: #b8e89a;
+    }
+
+    .sd-days-chip--warn {
+        background: rgba(245,158,11,.16);
+        color: #fbbf24;
+    }
+}
+
+// ── Subscription Details dialog (sd-*) ───────────────────────────────
+// Lives here (not a separate file) because it's a light wrapper over
+// the shared axd-* shell; all layout comes from axd-backdrop/axd-modal.
+
+.sd-body {
+    gap: 14px;
+}
+
+// Plan badge row
+.sd-plan-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sd-plan-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+}
+
+.sd-plan-badge--prem {
+    background: rgba(72, 119, 44, .10);
+    color: #3a6023;
+    border-color: rgba(72, 119, 44, .25);
+}
+
+.sd-plan-badge--biz {
+    background: #f3f4f6;
+    color: #111827;
+    border-color: #d1d5db;
+}
+
+.sd-plan-badge--free {
+    background: #f3f4f6;
+    color: #6b7280;
+    border-color: #e5e7eb;
+}
+
+.sd-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+}
+
+.sd-status-label {
+    font-size: 12px;
+    color: #16a34a;
+    font-weight: 600;
+}
+
+// Billing detail grid
+.sd-detail-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.sd-detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+
+    & + .sd-detail-row {
+        border-top: 1px solid #e5e7eb;
+    }
+}
+
+.sd-detail-label {
+    font-size: 12.5px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.sd-detail-value {
+    font-size: 12.5px;
+    color: #111827;
+    font-weight: 600;
+    text-align: right;
+}
+
+// Days remaining chip
+.sd-days-chip {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 20px;
+    background: rgba(72, 119, 44, .10);
+    color: #3a6023;
+}
+
+.sd-days-chip--warn {
+    background: rgba(245, 158, 11, .12);
+    color: #b45309;
+}
+
+// Free plan notice
+.sd-free-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.5;
+
+    svg {
+        flex-shrink: 0;
+        margin-top: 1px;
+        color: #6b7280;
+    }
+
+    strong {
+        color: #111827;
+    }
+}
+
+// ── Global Popup Dialog (gdlg-*) ─────────────────────────────────────
+// General-purpose alert / confirm / info dialog fed by GlobalDialogViewModel.
+// Slots into the axd-* shell; only the body content needs extra rules.
+
+.gdlg-body {
+    gap: 14px;
+}
+
+// Message area — preserves HTML markup, caps height and scrolls
+.gdlg-message {
+    font-size: 13.5px;
+    color: #374151;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    max-height: 320px;
+    overflow-y: auto;
+    word-break: break-word;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 9px;
+    }
+    // Tighten paragraphs inside the markup
+    p {
+        margin: 0 0 8px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    a {
+        color: #48772c;
+        text-decoration: underline;
+    }
+
+    ul, ol {
+        padding-left: 18px;
+        margin: 4px 0;
+    }
+}
+
+// Don't-show-again checkbox row
+.gdlg-dontshow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 12.5px;
+    color: #6b7280;
+    padding-top: 4px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.gdlg-dontshow-check {
+    width: 15px;
+    height: 15px;
+    accent-color: #48772c;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+// Dark theme
+html[data-theme="dark"] {
+    .gdlg-message {
+        color: #c8d0db;
+    }
+
+        .gdlg-message a {
+            color: #b8e89a;
+        }
+
+    .gdlg-dontshow {
+        color: #6b7280;
+        border-top-color: #2a3340;
+    }
 }

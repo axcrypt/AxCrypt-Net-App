@@ -1,4 +1,6 @@
-﻿@using AxCrypt.App.Shared.Desktop.Services
+﻿@implements IDisposable
+@using AxCrypt.App.Shared.Desktop.Components.PopupDialog
+@using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Desktop.ViewModels.Main
 @using AxCrypt.App.Shared.Models
@@ -184,7 +186,7 @@
                                 {
                                     <button class="toggle-switch @(tog.IsOn ? "toggle-switch--on" : "")"
                                             @onclick:stopPropagation="true"
-                                            @onclick="() => { tog.IsOn = !tog.IsOn; tog.OnClickFunc(); }">
+                                            @onclick="async () => { await tog.OnClickFunc(); await RefreshComponentAsync(); }">
                                         <span class="toggle-thumb"></span>
                                     </button>
                                 }
@@ -238,7 +240,7 @@
 }
 
 <AxCrypt.App.Shared.Desktop.Components.HomePage.HelpOverlay />
-<AxCrypt.App.Shared.Desktop.Components.PopupDialog.AdvancedOptionsDialog />
+<AxCrypt.App.Shared.Desktop.Components.PopupDialog.AppConfigurationDialog />
 <AxCrypt.App.Shared.Desktop.Components.PopupDialog.VaultSettingsPopup />
 
 <AxCrypt.App.Shared.Desktop.Components.Shared.ProgressBar />
@@ -273,6 +275,10 @@
 
         navPageService.OnUpdateViewState += async () => await RefreshComponentAsync();
         popupService.OnChange += async () => await RefreshComponentAsync();
+        // Re-render whenever AppSettingsViewModel pushes state (e.g. after
+        // password confirmation for AES-256 upgrade or Include Subfolders).
+        _onSettingsUpdate = () => _ = RefreshComponentAsync();
+        SettingsViewModel.OnUpdateViewState += _onSettingsUpdate;
 
         SettingsViewModel.Initialized();
 
@@ -388,6 +394,17 @@
             Texts.ShowUpgradeProtectSensitivePopup,
             Texts.ShowUpgradeEnhancedSecurityPopup
         });
+    }
+
+    private Action? _onSettingsUpdate;
+
+    public void Dispose()
+    {
+        if (_onSettingsUpdate != null)
+        {
+            SettingsViewModel.OnUpdateViewState -= _onSettingsUpdate;
+            _onSettingsUpdate = null;
+        }
     }
 
     private async Task RefreshComponentAsync()

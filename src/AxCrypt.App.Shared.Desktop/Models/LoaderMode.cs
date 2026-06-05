@@ -1,4 +1,6 @@
-namespace AxCrypt.App.Shared.Desktop.Components.Shared;
+using AxCrypt.App.Shared.Desktop.Components.Shared;
+
+namespace AxCrypt.App.Shared.Desktop.Models;
 
 /// <summary>
 /// Layout for <see cref="AxLoader"/>.

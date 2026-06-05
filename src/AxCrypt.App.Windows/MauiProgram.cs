@@ -65,22 +65,17 @@ namespace AxCrypt.App.Windows
 
             services.AddSingleton<MainPage>();
             services.AddSingleton<IndexPage>();
-            services.AddSingleton<SecuredFolders>();
-            services.AddSingleton<PasswordManagerComponent>();
-            services.AddSingleton<TextEncryption>();
-            services.AddSingleton<Notification>();
-            services.AddSingleton<FindFiles>();
-            services.AddSingleton<Vault>();
-            services.AddSingleton<Support>();
-            services.AddSingleton<SecuredMessengerComponent>();
-
-            services.AddSingleton<ActivityPage>();
-            services.AddSingleton<FeedbackPage>();
-            services.AddSingleton<FilesPage>();
-            services.AddSingleton<SupportPage>();
-            services.AddSingleton<UpgradePage>();
+            services.AddSingleton<SecuredFoldersPage>();
+            services.AddSingleton<PasswordManagerPage>();
+            services.AddSingleton<TextEncryptionPage>();
+            services.AddSingleton<NotificationPage>();
+            services.AddSingleton<FindFilesPage>();
             services.AddSingleton<VaultPage>();
-            services.AddSingleton<HelpCenter>();
+            services.AddSingleton<SupportPage>();
+            services.AddSingleton<SecuredMessengerPage>();
+
+            services.AddSingleton<UpgradePage>();
+            services.AddSingleton<HelpCenterPage>();
 
             SharedFactory.RegisterSingletons(services);
             SharedFactory.RegisterTypeFactories();
