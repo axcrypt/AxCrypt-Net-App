@@ -419,6 +419,10 @@ public class RecentFilesViewModel : ViewModelBase
                 await RestoreToOriginalRecentFiles(args);
                 break;
 
+            case SecuredFilesContextMenu.ReEncryptAndClose:
+                await ReEncryptAndCloseOpenFiles();
+                break;
+
             case SecuredFilesContextMenu.ClearRecentFiles:
                 await ClearAllRecentFiles();
                 break;
@@ -493,6 +497,15 @@ public class RecentFilesViewModel : ViewModelBase
             }
             await _fileOperationViewModel.OpenFiles.ExecuteAsync(new List<string> { selectedFilePath });
         }
+    }
+
+    private async Task ReEncryptAndCloseOpenFiles()
+    {
+        await new ApplicationManager().WaitForBackgroundToCompleteAsync();
+        await _mainViewModel.EncryptPendingFiles.ExecuteAsync(null!);
+        await new ApplicationManager().WaitForBackgroundToCompleteAsync();
+
+        UpdateRecentFiles(_mainViewModel.RecentFiles);
     }
 
     private async Task RemoveFromListKeepSecured()

@@ -365,11 +365,33 @@ namespace AxCrypt.App.Shared.ViewModels
 
         public void RefreshVaultContainers()
         {
-            if (_vaultBasePath != Resolve.UserSettings.VaultEncryptDataPath)
+            string vaultPath = Resolve.UserSettings.VaultEncryptDataPath ?? "";
+            bool pathChanged = !string.Equals(_vaultBasePath, vaultPath, StringComparison.OrdinalIgnoreCase);
+
+            _vaultBasePath = vaultPath;
+
+            if (pathChanged || string.IsNullOrEmpty(_currentFolder) || !IsFolderInsideVault(_currentFolder))
             {
-                _vaultBasePath = Resolve.UserSettings.VaultEncryptDataPath ?? "";
                 _currentFolder = _vaultBasePath;
             }
+
+            SelectedFilePath = "";
+            SelectedFileSize = "";
+            SelectedSubFolderPath = "";
+            SelectedFile = "";
+            isfileselected = false;
+            CreateNewFolder = false;
+            ErrorMessage = "";
+            VaultItemList = new List<VaultItem>();
+            VaultBreadCrumb.Clear();
+
+            if (!IsVaultConfigured)
+            {
+                UpdateViewState();
+                return;
+            }
+
+            LoadVaultItems();
         }
 
         public void LoadVaultItems()
@@ -379,16 +401,16 @@ namespace AxCrypt.App.Shared.ViewModels
                 return;
             }
 
+            if (!IsFolderInsideVault(CurrentFolder))
+            {
+                CurrentFolder = VaultBasePath;
+            }
+
             IDataContainer vaultfolder = New<IDataContainer>(CurrentFolder);
             if (!vaultfolder.IsAvailable)
             {
                 VaultItemList = new List<VaultItem>();
                 return;
-            }
-
-            if (!CurrentFolder.Contains(VaultBasePath))
-            {
-                CurrentFolder = VaultBasePath;
             }
 
             IEnumerable<VaultItem> fileItems = GetFileItems(vaultfolder);
@@ -397,6 +419,22 @@ namespace AxCrypt.App.Shared.ViewModels
 
             CreateBreadcrums();
             UpdateViewState();
+        }
+
+        private bool IsFolderInsideVault(string folderPath)
+        {
+            if (string.IsNullOrEmpty(folderPath) || string.IsNullOrEmpty(VaultBasePath))
+            {
+                return false;
+            }
+
+            char[] separators = new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar, '\\', '/' };
+            string normalizedFolder = folderPath.NormalizeFolderPath().TrimEnd(separators);
+            string normalizedVault = VaultBasePath.NormalizeFolderPath().TrimEnd(separators);
+
+            return string.Equals(normalizedFolder, normalizedVault, StringComparison.OrdinalIgnoreCase)
+                || normalizedFolder.StartsWith(normalizedVault + "\\", StringComparison.OrdinalIgnoreCase)
+                || normalizedFolder.StartsWith(normalizedVault + "/", StringComparison.OrdinalIgnoreCase);
         }
 
         private bool CheckActiveFiles(string filePath)

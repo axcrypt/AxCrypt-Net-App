@@ -240,15 +240,7 @@
 
     private async Task AddCssAsync()
     {
-        string subscriptionLevel = SubscriptionLevel;
-        string cssBasePath = subscriptionLevel switch
-        {
-            "business" => "business",
-            "premium" => "premium",
-            "passwordmanager" => "free",
-            "free" => "free",
-            _ => "free"
-        };
+        string cssBasePath = CssService.GetSubscriptionCssBasePath(SubscriptionLevel);
 
         bool loaded = await JS.InvokeAsync<bool>("addCssFile", cssBasePath, "appstylebundle.min.css");
         if (loaded)

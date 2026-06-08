@@ -74,7 +74,7 @@ public static class ShareKeyService
     {
         try
         {
-            IEnumerable<string> encryptableFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncryptable());
+            IEnumerable<string> encryptableFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncryptable()).ToList();
             if (encryptableFileNames != null && encryptableFileNames.Any())
             {
                 PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "There are some unencrypted files also selected for key sharing. AxCrypt will encrypt and then key share the selected files. Would you like to continue to proceed?");
@@ -93,26 +93,29 @@ public static class ShareKeyService
                 return false;
             }
 
+            IFeatureUsageProvider? usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
+            FeatureUsage featureUsage = usage.GetUsage(FeatureKey.KeyShare);
+            int availableCount = featureUsage.Remaining;
+
+            if (availableCount == 0)
+            {
+                return false;
+            }
+
+            fileOperationViewModel.Recipients = viewModel.SharedWith;
+
+            if (featureUsage.Limit > 0)
+            {
+                encryptableFileNames = sharekeyViewModel.SelectedFilesOrFolders!.Where(f => New<IDataStore>(f).IsEncryptable())
+                .Take(availableCount).ToList();
+
+                fileOperationViewModel.Recipients = viewModel.SharedWith.Take(availableCount);
+            }
+
             if (encryptableFileNames != null && encryptableFileNames.Any())
             {
-                IFeatureUsageProvider? usage = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>();
-                fileOperationViewModel.Recipients = viewModel.SharedWith;
-                FeatureUsage featureUsage = usage.GetUsage(FeatureKey.KeyShare);
-                int availableCount = featureUsage.Remaining;
-                if (availableCount == 0)
-                {
-                    return false;
-                }
-
-                if (featureUsage.Limit > 0)
-                {
-                    encryptableFileNames = encryptableFileNames.Take(availableCount);
-                    fileOperationViewModel.Recipients = viewModel.SharedWith.Take(availableCount);
-                }
-
                 await fileOperationViewModel.EncryptFiles.ExecuteAsync(encryptableFileNames);
                 fileOperationViewModel.Recipients = null;
-                return true;
             }
 
             await viewModel.ShareFiles.ExecuteAsync(null);

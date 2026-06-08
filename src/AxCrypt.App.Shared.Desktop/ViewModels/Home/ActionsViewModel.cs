@@ -6,6 +6,7 @@ using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Core;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI;
@@ -17,6 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AxCrypt.Abstractions;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels.Home;
 
@@ -233,11 +235,7 @@ public class ActionsViewModel : ViewModelBase
         IEnumerable<string>? selected = _mainViewModel?.SelectedRecentFiles;
         if (selected != null && selected.Any())
         {
-            await _batchService.RunAsync(
-                selected,
-                async (path) => await _fileOperationViewModel.EncryptFiles.ExecuteAsync(new[] { path }),
-                "Encrypted",
-                FeatureKey.FileEncryption);
+            await EncryptFilesSkippingAlreadyEncrypted(selected);
             return;
         }
 
@@ -256,11 +254,53 @@ public class ActionsViewModel : ViewModelBase
             return; // Picker cancelled — nothing encrypted, quota unchanged.
         }
 
+        await EncryptFilesSkippingAlreadyEncrypted(args.SelectedFiles);
+    }
+
+    private async Task EncryptFilesSkippingAlreadyEncrypted(IEnumerable<string> filePaths)
+    {
+        List<string> paths = filePaths.Where(path => !string.IsNullOrWhiteSpace(path)).ToList();
+        List<string> alreadyEncrypted = paths.Where(IsAlreadyEncrypted).ToList();
+        List<string> encryptable = paths.Except(alreadyEncrypted, StringComparer.OrdinalIgnoreCase).ToList();
+
+        if (alreadyEncrypted.Count > 0)
+        {
+            ShowAlreadyEncryptedMessage(alreadyEncrypted);
+        }
+
+        if (!encryptable.Any())
+        {
+            return;
+        }
+
         await _batchService.RunAsync(
-            args.SelectedFiles,
+            encryptable,
             async (path) => await _fileOperationViewModel.EncryptFiles.ExecuteAsync(new[] { path }),
             "Encrypted",
             FeatureKey.FileEncryption);
+    }
+
+    private static bool IsAlreadyEncrypted(string path)
+    {
+        try
+        {
+            return New<IDataStore>(path).IsEncrypted();
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private void ShowAlreadyEncryptedMessage(IList<string> alreadyEncrypted)
+    {
+        if (alreadyEncrypted.Count == 1)
+        {
+            New<IStatusChecker>().CheckStatusAndShowMessage(ErrorStatus.FileAlreadyEncrypted, alreadyEncrypted[0], string.Empty);
+            return;
+        }
+
+        _statusAlertService.Error($"{alreadyEncrypted.Count} selected files are already encrypted.");
     }
 
     /// <summary>

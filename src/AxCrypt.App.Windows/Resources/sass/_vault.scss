@@ -38,7 +38,6 @@
 .vlt-body {
     gap: 14px;
     color: #111827;
-
     // ── Compact single-row toolbar ─────────────────────────────────
     .vlt-toolbar {
         display: flex;
@@ -47,7 +46,6 @@
         flex-shrink: 0;
         flex-wrap: wrap;
     }
-
     // Search — stretches to fill available space
     .vlt-search {
         flex: 1;
@@ -68,7 +66,10 @@
         }
     }
 
-    .vlt-search-icon { color: #9ca3af; flex-shrink: 0; }
+    .vlt-search-icon {
+        color: #9ca3af;
+        flex-shrink: 0;
+    }
 
     .vlt-search-input {
         flex: 1;
@@ -78,7 +79,9 @@
         font-size: 13px;
         color: #111827;
 
-        &::placeholder { color: #9ca3af; }
+        &::placeholder {
+            color: #9ca3af;
+        }
     }
 
     .vlt-search-clear {
@@ -90,9 +93,10 @@
         cursor: pointer;
         padding: 0 2px;
 
-        &:hover { color: #111827; }
+        &:hover {
+            color: #111827;
+        }
     }
-
     // Shared toolbar button base
     .vlt-tb-btn {
         height: 36px;
@@ -114,7 +118,6 @@
             background: #f3f4f6;
             border-color: #9ca3af;
         }
-
         // Primary (Add)
         &--primary {
             background: $brand-green;
@@ -127,7 +130,6 @@
                 color: #fff;
             }
         }
-
         // Icon-only (Settings)
         &--icon {
             width: 36px;
@@ -135,7 +137,6 @@
             justify-content: center;
         }
     }
-
     // Share Keys gets the green accent
     .vault-share-key-btn {
         border-color: $BtnBackClr;
@@ -148,7 +149,6 @@
             color: #fff;
         }
     }
-
     // Add dropdown
     .vlt-add {
         position: relative;
@@ -157,7 +157,10 @@
 
     .vlt-tb-caret {
         transition: transform .15s;
-        &--open { transform: rotate(180deg); }
+
+        &--open {
+            transform: rotate(180deg);
+        }
     }
 
     .vlt-add-menu {
@@ -252,7 +255,7 @@
         // 120px = size
         // 135px = modified
         // 40px  = actions
-        grid-template-columns: 20px minmax(180px, 1fr) 120px 135px 40px;
+        grid-template-columns: 20px minmax(180px,1fr) 120px 190px;
         gap: 16px;
         flex: 1 1 auto;
         min-width: 0;
@@ -349,7 +352,6 @@
             }
         }
     }
-
     // ── Checkbox (list view only) ──────────────────────────────
     .vlt-row-check {
         width: 16px;
@@ -360,7 +362,9 @@
         accent-color: $brand-green;
     }
 
-    .vlt-row-check--hidden { visibility: hidden; }
+    .vlt-row-check--hidden {
+        visibility: hidden;
+    }
 
     .vlt-row--checked {
         background: rgba($brand-green, .10) !important;
@@ -457,7 +461,6 @@
         color: $brand-green;
         font-weight: 800;
     }
-
     // ── Grid view — matches Cloud Browser (.cbp-tile) style ──────
     .vlt-file-list.grid-view {
         display: grid;
@@ -467,62 +470,62 @@
         padding: 4px;
     }
 
-    .vlt-file-list.grid-view .file-list-item {
-        border: 1.5px solid transparent;
-        border-radius: 10px;
-        min-height: unset;
+        .vlt-file-list.grid-view .file-list-item {
+            border: 1.5px solid transparent;
+            border-radius: 10px;
+            min-height: unset;
 
-        &:hover {
-            background: #f9fafb;
-            border-color: #e5e7eb;
+            &:hover {
+                background: #f9fafb;
+                border-color: #e5e7eb;
+            }
+
+            &.selected, &.vlt-row--checked {
+                background: rgba($brand-green, .10) !important;
+                border-color: $brand-green !important;
+                box-shadow: none !important;
+            }
+        }
+        // Tile card: icon centred above filename — no checkbox, no kebab
+        .vlt-file-list.grid-view .file-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 10px 12px;
+            min-height: unset;
+            text-align: center;
+        }
+        // Hide checkbox and kebab menu in grid — action bar handles everything
+        .vlt-file-list.grid-view .vlt-row-check,
+        .vlt-file-list.grid-view .vlt-row-check--hidden,
+        .vlt-file-list.grid-view .file-actions {
+            display: none !important;
         }
 
-        &.selected, &.vlt-row--checked {
-            background: rgba($brand-green, .10) !important;
-            border-color: $brand-green !important;
-            box-shadow: none !important;
+        .vlt-file-list.grid-view .file-img-det {
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
         }
-    }
 
-    // Tile card: icon centred above filename — no checkbox, no kebab
-    .vlt-file-list.grid-view .file-details {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 16px 10px 12px;
-        min-height: unset;
-        text-align: center;
-    }
+        .vlt-file-list.grid-view .list-file-icon {
+            width: 40px;
+            height: 40px;
+        }
 
-    // Hide checkbox and kebab menu in grid — action bar handles everything
-    .vlt-file-list.grid-view .vlt-row-check,
-    .vlt-file-list.grid-view .vlt-row-check--hidden,
-    .vlt-file-list.grid-view .file-actions { display: none !important; }
-
-    .vlt-file-list.grid-view .file-img-det {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        width: 100%;
-    }
-
-    .vlt-file-list.grid-view .list-file-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .vlt-file-list.grid-view .file-name {
-        display: -webkit-box;
-        max-width: 120px;
-        white-space: normal;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        text-align: center;
-        font-size: 12px;
-        font-weight: 500;
-    }
+        .vlt-file-list.grid-view .file-name {
+            display: -webkit-box;
+            max-width: 120px;
+            white-space: normal;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+        }
 
     .detail-section {
         display: flex;

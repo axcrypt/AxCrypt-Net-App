@@ -1,13 +1,14 @@
-﻿using AxCrypt.App.Entitlement.Models;
+﻿using AxCrypt.Common;
 using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.Helpers;
-using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.Content;
 using AxCrypt.Core;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using Microsoft.AspNetCore.Components;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -181,7 +183,7 @@ public class RecentFoldersViewModel : ViewModelBase
                 break;
 
             case SecuredFolderContextMenu.DecryptTemporarily:
-                DecryptTemporarily();
+                await DecryptTemporarily();
                 break;
 
             case SecuredFolderContextMenu.ShowInExplorer:
@@ -351,9 +353,56 @@ public class RecentFoldersViewModel : ViewModelBase
         }
     }
 
-    private async void DecryptTemporarily()
+    private async Task DecryptTemporarily()
     {
-        await _fileOperationViewModel.DecryptFolders.ExecuteAsync(_mainViewModel.SelectedWatchedFolders);
+        IEnumerable<string> selectedFolders = _mainViewModel.SelectedWatchedFolders?.ToList() ?? new List<string>();
+        await _fileOperationViewModel.DecryptFolders.ExecuteAsync(selectedFolders);
+
+        await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.WatchedFolderChange));
+        LogOnViewModel.UIStateChanged();
+        UpdateViewState();
+    }
+
+    public bool IsTemporarilyDecrypted(string folderPath)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(folderPath))
+            {
+                return false;
+            }
+
+            IDataContainer container = New<IDataContainer>(folderPath);
+            if (!container.IsAvailable)
+            {
+                return false;
+            }
+
+            WatchedFolder? watchedFolder = Resolve.KnownIdentities.LoggedOnWatchedFolders
+                .FirstOrDefault(wf => string.Equals(
+                    wf.Path.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                    folderPath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                    StringComparison.OrdinalIgnoreCase));
+
+            List<IDataContainer> ignoredFolders = watchedFolder?.IgnoredFolders
+                .Select(ignored => New<IDataContainer>(ignored))
+                .ToList() ?? new List<IDataContainer>();
+
+            List<IDataStore> files = container
+                .ListOfFiles(ignoredFolders, New<UserSettings>().FolderOperationMode.Policy())
+                .ToList();
+
+            if (!New<UserSettings>().DoNotShowAgain.HasFlag(DoNotShowAgainOptions.IgnoreFileWarning))
+            {
+                return files.Any(file => !file.IsEncrypted());
+            }
+
+            return files.Any(file => file.IsEncryptable());
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private void OpenSelectedFolder()

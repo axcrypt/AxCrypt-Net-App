@@ -113,6 +113,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
             }
 
             await LogOnViewModel.MainViewModel.CreateVaultFolders.ExecuteAsync(VaultEncryptDataPath);
+            AxCServiceProviderExtension.GetService<VaultViewModel>().RefreshVaultContainers();
         }
 
         public async Task MoveVaulttoSecuredfolder()

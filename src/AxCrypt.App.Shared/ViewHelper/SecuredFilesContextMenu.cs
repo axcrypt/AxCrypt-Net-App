@@ -16,5 +16,7 @@ public enum SecuredFilesContextMenu
 
     RenameToOriginal,
 
+    ReEncryptAndClose,
+
     ClearRecentFiles,
 }

@@ -58,10 +58,18 @@
                     @foreach (string folder in RecentFoldersViewModel.RecentFoldersList)
                     {
                         string folderWithoutTrailingSlash = folder.TrimEnd('\\');
-                        <div title="@folderWithoutTrailingSlash" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls fle-nme" style="white-space: nowrap" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
+                        bool isTemporarilyDecrypted = RecentFoldersViewModel.IsTemporarilyDecrypted(folder);
+                        string folderStateTitle = isTemporarilyDecrypted
+                            ? $"{folderWithoutTrailingSlash} - temporarily decrypted"
+                            : folderWithoutTrailingSlash;
+                        <div title="@folderStateTitle" class="rcnt-fld-bx fld-dflt-cl recent-folder-action-cls fle-nme @(isTemporarilyDecrypted ? "fld-tem-cl whte-clr" : "")" style="white-space: nowrap; position: relative;" @ondblclick="(arg) => RecentFoldersViewModel.HandleDoubleClick(arg, folder)"
                              @oncontextmenu="(e) => RecentFoldersViewModel.SecuredContextMenu(e, folder)">
                             <img class="fldr-img" src="" /><br /><label title="@folderWithoutTrailingSlash">@GetBeforeLastFolderName(folderWithoutTrailingSlash)</label>
                             <span style="font-size:8px; display: block; padding-top: 0px;">@folderWithoutTrailingSlash</span>
+                            @if (isTemporarilyDecrypted)
+                            {
+                                <img class="file-dec-icon" alt="" title="@Texts.CleanUpPromptText" style="position:absolute; top:8px; right:8px; width:18px; height:18px;" />
+                            }
                         </div>
                     }
                 }
@@ -122,6 +130,7 @@
 
         RecentFoldersViewModel.OnUpdateViewState += UpdateStateChanged;
         RecentFoldersViewModel.LogOnViewModel.OnUIStateChanged += UpdateStateChanged;
+        homeActionModel!.OnUpdateViewState += UpdateStateChanged;
 
         FileDropService.ResetOnDropped();
         _onFoldersDroppedHandler = async (folders) =>
@@ -156,6 +165,7 @@
         }
         RecentFoldersViewModel.OnUpdateViewState -= UpdateStateChanged;
         RecentFoldersViewModel.LogOnViewModel.OnUIStateChanged -= UpdateStateChanged;
+        homeActionModel!.OnUpdateViewState -= UpdateStateChanged;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

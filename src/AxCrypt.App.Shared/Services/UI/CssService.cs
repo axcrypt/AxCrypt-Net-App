@@ -5,17 +5,22 @@ namespace AxCrypt.App.Shared.Services;
 
 public class CssService : ICssService
 {
-    public IList<KeyValuePair<string, string>> ApplySubscriptionCssAsync(string subscriptionLevel)
+    public string GetSubscriptionCssBasePath(string subscriptionLevel)
     {
-        string cssBasePath = subscriptionLevel switch
+        return (subscriptionLevel ?? string.Empty).Trim().ToLowerInvariant() switch
         {
             "business" => "business",
             "premium" => "premium",
-            "passwordmanager" => "free",
+            "passwordmanager" => "premium",
             "free" => "free",
             _ => "free"
         };
+    }
 
+    public IList<KeyValuePair<string, string>> ApplySubscriptionCssAsync(string subscriptionLevel)
+    {
+        string cssBasePath = GetSubscriptionCssBasePath(subscriptionLevel);
+        bool isFreeLayout = cssBasePath == "free";
         IList<KeyValuePair<string, string>> cssFiles = new List<KeyValuePair<string, string>>()
         {
             new KeyValuePair<string, string>(cssBasePath, "sidemenu.min.css"),
@@ -29,11 +34,11 @@ public class CssService : ICssService
             new KeyValuePair<string, string>(cssBasePath, "support.min.css"),
         };
 
-        if (subscriptionLevel == "free")
+        if (isFreeLayout)
         {
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "upgradesubscription.min.css"));
         }
-        if (subscriptionLevel != "free")
+        else
         {
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "sharesecret.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "filepicker.min.css"));

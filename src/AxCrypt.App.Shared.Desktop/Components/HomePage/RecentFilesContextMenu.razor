@@ -1,6 +1,7 @@
 @using AxCrypt.App.Shared.Desktop.Models
 @using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Desktop.ViewModels.Home
 @using AxCrypt.App.Shared.Utility.View
 @using AxCrypt.App.Shared.ViewModels
 @using AxCrypt.Content
@@ -54,10 +55,13 @@
             <span class="ctx-label">@Texts.McInfMenuOpen</span>
         </button>
 
-        <button class="ctx-item" @onclick="CtxCleanUp">
-            <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M9 6v14a2 2 0 002 2h2a2 2 0 002-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
-            <span class="ctx-label">@((MarkupString)Texts.RecentFilesReencryptClose)</span>
-        </button>
+        @if (CanCleanUpTarget)
+        {
+            <button class="ctx-item" @onclick="CtxCleanUp">
+                <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M9 6v14a2 2 0 002 2h2a2 2 0 002-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
+                <span class="ctx-label">@((MarkupString)Texts.RecentFilesReencryptClose)</span>
+            </button>
+        }
 
         <button class="ctx-item @(paidFeaturegateService.IsPaidFeature("share") ? "ctx-item--locked" : "")"
                 @onclick="CtxShare">
@@ -120,6 +124,8 @@
 
     private int SelectedCount => recentFilesViewModel.SelectedFiles?.Count() ?? 0;
 
+    private bool CanCleanUpTarget => TargetFile?.CleanUpNeeded == true;
+
     // ── After-render: clamp the menu so it never spills off-screen ─
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -156,7 +162,7 @@
     }
 
     private Task CtxOpen()                => RunAndClose(SecuredFilesContextMenu.OpenSecured);
-    private Task CtxCleanUp()             => RunAndClose(SecuredFilesContextMenu.StopSecureAndRemoveFromList);
+    private Task CtxCleanUp()             => RunAndClose(SecuredFilesContextMenu.ReEncryptAndClose);
     private Task CtxShare()
     {
         if (paidFeaturegateService.IsPaidFeature("share"))
@@ -174,4 +180,5 @@
     private Task CtxRestoreOriginalName() => RunAndClose(SecuredFilesContextMenu.RenameToOriginal);
     private Task CtxRemove()              => RunAndClose(SecuredFilesContextMenu.RemoveFromListButKeepSecured);
     private Task CtxDecryptAndRemove()    => RunAndClose(SecuredFilesContextMenu.StopSecureAndRemoveFromList);
+
 }

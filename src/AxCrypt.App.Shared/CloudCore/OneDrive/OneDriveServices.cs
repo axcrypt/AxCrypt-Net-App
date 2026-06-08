@@ -248,7 +248,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
             DriveItemCollectionResponse? response = await _graphClient
                 .Drives[_userDriveId].Items[folder].Children.GetAsync();
 
-            return (response?.Value == null ? response?.Value : Array.Empty<DriveItem>())!;
+            return (response?.Value != null ? response?.Value : Array.Empty<DriveItem>())!;
         }
 
         #endregion
