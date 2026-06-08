@@ -5,7 +5,7 @@
 	
 	<PropertyGroup>
 		<_AxCryptMajor>3</_AxCryptMajor>
-		<AxMinorVersion Condition=" '$(AxMinorVersion)' == '' ">0</AxMinorVersion>
+		<AxMinorVersion Condition=" '$(AxMinorVersion)' == '' ">1</AxMinorVersion>
 		<AxBuildNumber Condition=" '$(AxBuildNumber)' == '' ">1</AxBuildNumber>
 		<FinalAppVersion>$(_AxCryptMajor).$(AxMinorVersion).$(AxBuildNumber).0</FinalAppVersion>
 		
