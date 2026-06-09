@@ -2420,17 +2420,19 @@ bold.text-style {
 }
 
 /* =============================================================
-   Batch operation toast (per-file failure summary)
+   Batch operation toast — variants below override the accent strip.
    ============================================================= */
 .batch-toast {
     background: $dt-surface-3 !important;
     color: $dt-text !important;
     border: 1px solid $dt-border-strong !important;
     box-shadow: $dt-shadow-pop !important;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, .04) 0 4px, transparent 4px) !important;
 }
 
 .bt-title {
     color: $dt-text !important;
+    font-weight: 700 !important;
 }
 
 .bt-sub {
@@ -2471,34 +2473,60 @@ bold.text-style {
 }
 
 .bt-failure-reason {
-    color: $dt-danger !important;
+    color: #FCA5A5 !important;
+}
+
+.batch-toast--progress {
+    background: linear-gradient(135deg, rgba(96, 165, 250, .14) 0%, $dt-surface-3 60%) !important;
+    border-color: rgba(96, 165, 250, .42) !important;
+    background-image: linear-gradient(90deg, #60A5FA 0 4px, transparent 4px) !important;
 }
 
 .batch-toast--progress .bt-icon {
-    background: $dt-info-soft !important;
-    color: $dt-info !important;
+    background: rgba(96, 165, 250, .20) !important;
+    color: #93C5FD !important;
 }
 
 .batch-toast--success {
-    border-color: rgba(74, 222, 128, .35) !important;
+    background: linear-gradient(135deg, rgba(127, 204, 92, .16) 0%, $dt-surface-3 60%) !important;
+    border-color: rgba(127, 204, 92, .50) !important;
+    background-image: linear-gradient(90deg, #7FCC5C 0 4px, transparent 4px) !important;
 }
 
 .batch-toast--success .bt-icon {
-    background: $dt-success-soft !important;
-    color: $dt-success !important;
+    background: rgba(127, 204, 92, .22) !important;
+    color: #B8E89A !important;
+}
+
+.batch-toast--success .bt-title {
+    color: #B8E89A !important;
 }
 
 .batch-toast--error {
-    border-color: rgba(248, 113, 113, .35) !important;
+    background: linear-gradient(135deg, rgba(248, 113, 113, .16) 0%, $dt-surface-3 60%) !important;
+    border-color: rgba(248, 113, 113, .50) !important;
+    background-image: linear-gradient(90deg, #F87171 0 4px, transparent 4px) !important;
 }
 
 .batch-toast--error .bt-icon {
-    background: $dt-danger-soft !important;
-    color: $dt-danger !important;
+    background: rgba(248, 113, 113, .22) !important;
+    color: #FCA5A5 !important;
 }
 
 .batch-toast--error .bt-title {
-    color: $dt-danger !important;
+    color: #FCA5A5 !important;
+}
+
+/* Legacy alert-box.success — matches the toast tint. */
+.alert-box.success {
+    background-color: rgba(127, 204, 92, .16) !important;
+    border: 1px solid rgba(127, 204, 92, .50) !important;
+    color: #B8E89A !important;
+}
+
+.alert-box.success a,
+.alert-box.success .clse-img {
+    color: #B8E89A !important;
 }
 
 /* =============================================================

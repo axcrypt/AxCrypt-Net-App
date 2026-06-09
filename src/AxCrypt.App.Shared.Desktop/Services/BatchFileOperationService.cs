@@ -135,23 +135,39 @@ public class BatchFileOperationService
 
     private void PublishSummary(BatchOperationResult result)
     {
-        if (_statusAlertService == null || result.Total == 0)
+        // BatchOperationToast is the single feedback surface — it
+        // handles both single-file and multi-file outcomes via OnFinished.
+    }
+
+    /// <summary>
+    /// Pump a synthetic result into <see cref="OnFinished"/> for ops that
+    /// don't iterate per-file (e.g. key sharing). Toast picks it up like
+    /// any real batch.
+    /// </summary>
+    public void PublishExternalResult(string operationName, int succeededCount, IEnumerable<BatchFileError>? failures = null)
+    {
+        int total = succeededCount + (failures?.Count() ?? 0);
+        if (total <= 0)
         {
             return;
         }
 
-        // BatchOperationToast owns the notification for multi-file batches and
-        // any operation that has failures — it renders the richer breakdown with
-        // a per-file failure list and an auto-dismiss on success. Publishing the
-        // lightweight alert on top of it would show two toasts for the same event.
-        // Only push the simple success alert for single-file operations that
-        // BatchOperationToast explicitly hides itself for.
-        if (result.Total > 1 || result.HasFailures)
+        BatchOperationResult result = new BatchOperationResult(operationName, total);
+        for (int i = 0; i < succeededCount; i++)
         {
-            return;
+            // Path content unused — toast shows count, not the list.
+            result.Succeeded.Add(string.Empty);
+        }
+        if (failures != null)
+        {
+            foreach (BatchFileError err in failures)
+            {
+                result.Failed.Add(err);
+            }
         }
 
-        _statusAlertService.Success($"{result.OperationName} {result.Succeeded.Count} file(s) successfully.");
+        LastResult = result;
+        OnFinished?.Invoke(result);
     }
 
     /// <summary>

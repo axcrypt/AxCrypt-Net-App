@@ -98,12 +98,14 @@
     {
         Result = result;
         DetailOpen = false;
-        Visible = result.Total > 1 || result.HasFailures;
+        // Render every completed op so decrypt / share-key (single-file)
+        // still produce feedback — HomeNew has no legacy alert-box host.
+        Visible = result.Total > 0;
         InvokeAsync(StateHasChanged);
 
-        if (!result.HasFailures && result.Total > 1)
+        if (!result.HasFailures)
         {
-            ScheduleAutoDismiss(8000);
+            ScheduleAutoDismiss(result.Total > 1 ? 8000 : 4000);
         }
     }
 
@@ -154,7 +156,12 @@
             if (HadFailures) return Result!.HasSucceeded
                 ? $"{Result.OperationName} {Result.Succeeded.Count}/{Result.Total} • {Result.Failed.Count} failed"
                 : $"{Result.OperationName} failed for {Result.Failed.Count} file(s)";
-            if (AllSucceeded) return $"{Result!.OperationName} {Result.Succeeded.Count} file(s)";
+            if (AllSucceeded)
+            {
+                return Result!.Total == 1
+                    ? $"{Result.OperationName} successfully"
+                    : $"{Result.OperationName} {Result.Succeeded.Count} file(s)";
+            }
             return "";
         }
     }

@@ -381,11 +381,14 @@ public class ActionsViewModel : ViewModelBase
             _mainViewModel!.SelectedRecentFiles,
             _fileOperationViewModel);
 
-        // Only record metered usage when key sharing actually completed —
-        // cancelling the file picker or the share dialog must not consume quota.
+        // Cancelled picker / dialog must not consume quota.
         if (shared)
         {
             await _batchService.RecordMeteredUsageAsync(FeatureKey.KeyShare);
+
+            // Share-key bypasses RunAsync, so pump a synthetic result for the toast.
+            int sharedCount = _mainViewModel?.SelectedRecentFiles?.Count() ?? 0;
+            _batchService.PublishExternalResult("Shared key for", Math.Max(sharedCount, 1));
         }
         ReconcileFreeTierUsage();
     }

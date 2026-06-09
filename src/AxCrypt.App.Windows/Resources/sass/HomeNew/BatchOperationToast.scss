@@ -144,13 +144,25 @@
 }
 
 // ── Variants ───────────────────────────────
+// 4 px left accent strip + soft tinted background + variant-tinted title.
+
+.batch-toast--progress {
+    border-color: #bfdbfe;
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 70%);
+    background-image: linear-gradient(90deg, #2563eb 0 4px, transparent 4px), linear-gradient(135deg, #eff6ff 0%, #ffffff 70%);
+}
+
 .batch-toast--progress .bt-icon {
     background: #eff6ff;
     color: #1d4ed8;
 }
 
+.batch-toast--progress .bt-title { color: #1e40af; }
+
 .batch-toast--success {
     border-color: #bbf7d0;
+    background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 70%);
+    background-image: linear-gradient(90deg, #48772C 0 4px, transparent 4px), linear-gradient(135deg, #f0fdf4 0%, #ffffff 70%);
 }
 
 .batch-toast--success .bt-icon {
@@ -158,8 +170,12 @@
     color: #15803d;
 }
 
+.batch-toast--success .bt-title { color: #166534; }
+
 .batch-toast--error {
     border-color: #fecaca;
+    background: linear-gradient(135deg, #fef2f2 0%, #ffffff 70%);
+    background-image: linear-gradient(90deg, #dc2626 0 4px, transparent 4px), linear-gradient(135deg, #fef2f2 0%, #ffffff 70%);
 }
 
 .batch-toast--error .bt-icon {

@@ -139,6 +139,18 @@ public partial class MainPage : ContentPage, ISignIn
     {
         Task.Run(async () => await InitializeMainPage());
 
+        // After Switch User / Clear Settings the parent process kills
+        // itself and the new instance can land in the taskbar without
+        // coming forward (Windows foreground-stealing block). When we
+        // detect the "--restart" hand-off, push focus once the window
+        // is laid out — Dispatcher delay so the HWND is real.
+        if (Infrastructure.RestartFocusHelper.IsRestartLaunch)
+        {
+            Microsoft.Maui.Controls.Window? window = Application.Current?.Windows.FirstOrDefault();
+            Dispatcher.DispatchDelayed(TimeSpan.FromMilliseconds(150),
+                () => Infrastructure.RestartFocusHelper.ForceForeground(window));
+        }
+
         base.OnAppearing();
     }
 

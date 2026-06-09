@@ -19,11 +19,7 @@
 
 <div class="row smx-body">
     <div class="all-msg" style="padding: 0;">
-        @* List-pane header — title on the left, persistent bulk-action
-           toolbar in the middle, "New message" on the right. The old
-           markup wrapped everything inside a single <button>, which hid
-           the bulk-action icons and produced invalid nesting. Split into
-           explicit zones so every option is visible on the page. *@
+        @* List-pane header. Bulk-action chip appears only when items are selected. *@
         <div class="center-column smx-list-header">
             <div class="smx-list-header-title">
                 <input type="checkbox"
@@ -37,26 +33,28 @@
                      @onclick="@ManageSecMgrViewModel.ToggleMultiCheckbox" />
             </div>
 
-            <div class="smx-list-header-actions @activeClass" aria-label="Bulk actions">
-                <button type="button" class="smx-bulk-btn smx-bulk-btn--danger" title="Delete"
-                        disabled="@(!ManageSecMgrViewModel.AnySelected)"
-                        @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("delete"))">
-                    <img class="multi-dlt" src="" alt="Delete" />
-                </button>
-                @if (SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
-                {
-                    <button type="button" class="smx-bulk-btn" title="Mark as read"
-                            disabled="@(!ManageSecMgrViewModel.AnySelected)"
-                            @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("read"))">
-                        <img class="multi-read" src="" alt="Read" />
+            <span class="smx-list-header-spacer"></span>
+
+            @if (ManageSecMgrViewModel.AnySelected)
+            {
+                <div class="smx-list-header-actions smx-list-header-actions--active" aria-label="Bulk actions">
+                    <button type="button" class="smx-bulk-btn smx-bulk-btn--danger" title="Delete"
+                            @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("delete"))">
+                        <img class="multi-dlt" src="" alt="Delete" />
                     </button>
-                    <button type="button" class="smx-bulk-btn" title="Mark as unread"
-                            disabled="@(!ManageSecMgrViewModel.AnySelected)"
-                            @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("unread"))">
-                        <img class="multi-unread" src="" alt="Unread" />
-                    </button>
-                }
-            </div>
+                    @if (SecMessengerFilterTab != AxCrypt.Api.SecuredMessenger.SecureMsgrFilterTab.Sent)
+                    {
+                        <button type="button" class="smx-bulk-btn" title="Mark as read"
+                                @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("read"))">
+                            <img class="multi-read" src="" alt="Read" />
+                        </button>
+                        <button type="button" class="smx-bulk-btn" title="Mark as unread"
+                                @onclick="@(() => ManageSecMgrViewModel.MultiActionAsync("unread"))">
+                            <img class="multi-unread" src="" alt="Unread" />
+                        </button>
+                    }
+                </div>
+            }
 
             <button class="button success fnt-small smx-new-btn"
                     id="create-new-message"
@@ -66,7 +64,7 @@
                     <line x1="12" y1="5" x2="12" y2="19" />
                     <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
-                <span>@Texts.NewMessageText</span>
+                <span class="smx-new-btn-label">@Texts.NewMessageText</span>
             </button>
         </div>
         <div id="all-message-list" class="message-list-section">

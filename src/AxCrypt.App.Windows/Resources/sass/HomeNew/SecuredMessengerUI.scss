@@ -62,10 +62,12 @@
 }
 
 // ── List-pane header ──────────────────────────────────────────────
+// [ ☑ Inbox ]   ←spacer→   [ bulk chip when selected ]   [ + New ]
 .smx-list-header {
     display: flex;
     align-items: center;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
     padding: 8px 12px;
     min-height: 48px;
 }
@@ -90,12 +92,26 @@
 
 .smx-list-header-title .select-option:hover { opacity: 1; }
 
+.smx-list-header-spacer { flex: 1; }
+
+// Bulk-action chip — visible only when a selection exists.
 .smx-list-header-actions {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    flex: 1;
-    justify-content: flex-start;
+}
+
+.smx-list-header-actions--active {
+    padding: 2px 4px;
+    background: rgba(72, 119, 44, .08);
+    border: 1px dashed rgba(72, 119, 44, .35);
+    border-radius: 8px;
+    animation: smxBulkChipIn .12s ease-out;
+}
+
+@keyframes smxBulkChipIn {
+    from { opacity: 0; transform: translateY(-2px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 // ── Bulk-action buttons ───────────────────────────────────────────
@@ -147,6 +163,12 @@
 
 .smx-new-btn svg { flex-shrink: 0; }
 
+// Collapse "New message" label below 520 px — + icon stays.
+@media (max-width: 520px) {
+    .smx-new-btn .smx-new-btn-label { display: none; }
+    .smx-new-btn { padding: 6px 9px; }
+}
+
 // ── Dark theme ────────────────────────────────────────────────────
 
 html[data-theme="dark"] {
@@ -162,5 +184,9 @@ html[data-theme="dark"] {
     .smx-bulk-btn--danger:hover:not(:disabled) {
         background: rgba(248, 113, 113, .14);
         border-color: rgba(248, 113, 113, .35);
+    }
+    .smx-list-header-actions--active {
+        background: rgba(127, 204, 92, .12);
+        border-color: rgba(127, 204, 92, .35);
     }
 }
