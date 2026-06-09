@@ -74,7 +74,7 @@ public static class ShareKeyService
     {
         try
         {
-            IEnumerable<string> encryptableFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncryptable()).ToList();
+            IEnumerable<string> encryptableFileNames = fileNames.Where(f => New<IDataStore>(f).IsEncryptable());
             if (encryptableFileNames != null && encryptableFileNames.Any())
             {
                 PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "There are some unencrypted files also selected for key sharing. AxCrypt will encrypt and then key share the selected files. Would you like to continue to proceed?");
@@ -103,11 +103,10 @@ public static class ShareKeyService
             }
 
             fileOperationViewModel.Recipients = viewModel.SharedWith;
-
+            encryptableFileNames = sharekeyViewModel.SelectedFilesOrFolders!.Where(f => New<IDataStore>(f).IsEncryptable()).ToList();
             if (featureUsage.Limit > 0)
             {
-                encryptableFileNames = sharekeyViewModel.SelectedFilesOrFolders!.Where(f => New<IDataStore>(f).IsEncryptable())
-                .Take(availableCount).ToList();
+                encryptableFileNames = encryptableFileNames.Take(availableCount).ToList();
 
                 fileOperationViewModel.Recipients = viewModel.SharedWith.Take(availableCount);
             }

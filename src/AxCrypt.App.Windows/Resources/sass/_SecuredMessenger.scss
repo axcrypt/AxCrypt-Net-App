@@ -676,11 +676,14 @@ textarea[readonly] {
         margin: 0;
     }
 
-    /* Left — message list pane. Header + scrolling list + load-more. */
+    /* Left — message list pane. Header + scrolling list + load-more.
+       The pane height tracks viewport so on full-screen there's no
+       wasted whitespace and on a min-size window it still scrolls. */
     .all-msg {
         display: flex;
         flex-direction: column;
-        min-height: calc(100vh - 290px);
+        height: calc(100vh - 230px);
+        min-height: 360px;
         border: 1px solid #e2e5e9;
         border-radius: 10px;
         overflow: hidden;
@@ -695,16 +698,25 @@ textarea[readonly] {
         overflow-y: auto;
     }
 
-    /* Right — reading pane. A flex column so the empty state can fill it. */
+    /* Right — reading / compose pane. Single column, no internal scroll;
+       inner panes (.ncm-body / .smv-thread) handle their own scroll if
+       the content overflows. Outer scroll lives on
+       .page-content-body-section so we never stack two scrollers. */
     .smx-reader {
         display: flex;
         flex-direction: column;
-        min-height: calc(100vh - 290px);
-        max-height: calc(100vh - 290px);
-        overflow-y: auto;
+        height: calc(100vh - 230px);
+        min-height: 360px;
         border: 1px solid #e2e5e9;
         border-radius: 10px;
-        padding: 16px;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    /* On short windows fall back to a fixed-ish minimum so the panes
+       remain usable instead of squashing the message rows. */
+    @media (max-height: 640px) {
+        .all-msg, .smx-reader { height: 480px; }
     }
 
     /* Shared empty state — centred in whichever pane it sits in. */
@@ -1475,7 +1487,10 @@ textarea[readonly] {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding: 4px;
+    padding: 16px;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
 }
 
 .smv-card {
@@ -1485,6 +1500,16 @@ textarea[readonly] {
     box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
     overflow: hidden;
     transition: border-color .14s, box-shadow .14s;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Single-message threads stretch the only card to fill the pane so the
+   textarea actually grows; multi-message threads keep cards content-sized
+   and let .smv-thread scroll. */
+.smv-thread > .smv-card:only-child {
+    flex: 1 1 auto;
+    min-height: 0;
 }
 .smv-card:hover {
     border-color: rgba($brand-green, .35);
@@ -1641,12 +1666,20 @@ textarea[readonly] {
 .smv-body {
     border-top: 1px solid #f0f1f3;
     background: #fafafa;
+    /* Single-message threads: let the body fill whatever room is left
+       inside the reading pane so the textarea opens naturally on
+       full-screen instead of capping at the legacy 360px. */
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
 }
 
 .smv-textarea {
     width: 100%;
-    min-height: 140px;
-    max-height: 360px;
+    flex: 1 1 0;
+    min-height: 160px;
+    height: 100%;
     padding: 14px 16px;
     border: none;
     background: transparent;

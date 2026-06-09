@@ -2378,11 +2378,7 @@ bold.text-style {
 }
 
 /* =============================================================
-   Batch operation toast (per-file failure summary)
-
-   Each variant gets a 4 px left-edge accent strip + a soft
-   tinted background so success vs. failure reads at a glance
-   on a dark surface. Title color also matches the variant.
+   Batch operation toast — variants below override the accent strip.
    ============================================================= */
 .batch-toast {
   background: #232E3B !important;
@@ -2445,13 +2441,13 @@ bold.text-style {
 }
 
 .batch-toast--progress .bt-icon {
-  background: rgba(96, 165, 250, 0.20) !important;
+  background: rgba(96, 165, 250, 0.2) !important;
   color: #93C5FD !important;
 }
 
 .batch-toast--success {
   background: linear-gradient(135deg, rgba(127, 204, 92, 0.16) 0%, #232E3B 60%) !important;
-  border-color: rgba(127, 204, 92, 0.50) !important;
+  border-color: rgba(127, 204, 92, 0.5) !important;
   background-image: linear-gradient(90deg, #7FCC5C 0 4px, transparent 4px) !important;
 }
 
@@ -2466,7 +2462,7 @@ bold.text-style {
 
 .batch-toast--error {
   background: linear-gradient(135deg, rgba(248, 113, 113, 0.16) 0%, #232E3B 60%) !important;
-  border-color: rgba(248, 113, 113, 0.50) !important;
+  border-color: rgba(248, 113, 113, 0.5) !important;
   background-image: linear-gradient(90deg, #F87171 0 4px, transparent 4px) !important;
 }
 
@@ -2479,10 +2475,10 @@ bold.text-style {
   color: #FCA5A5 !important;
 }
 
-/* Legacy alert-box.success — dark variant matches the toast above */
+/* Legacy alert-box.success — matches the toast tint. */
 .alert-box.success {
   background-color: rgba(127, 204, 92, 0.16) !important;
-  border: 1px solid rgba(127, 204, 92, 0.50) !important;
+  border: 1px solid rgba(127, 204, 92, 0.5) !important;
   color: #B8E89A !important;
 }
 

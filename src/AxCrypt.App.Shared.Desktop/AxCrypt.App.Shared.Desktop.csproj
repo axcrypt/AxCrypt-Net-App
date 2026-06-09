@@ -17,6 +17,8 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.90" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="9.0.90" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.7" />
+		<!-- Security: override vulnerable transitive deps (GHSA-37gx-xxp4-5rgx, GHSA-w3x6-4m5h-cxqf, patched in 9.0.15) -->
+		<PackageReference Include="System.Security.Cryptography.Xml" Version="9.0.15" />
 	</ItemGroup>
 	
     <ItemGroup>

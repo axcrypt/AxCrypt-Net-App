@@ -118,6 +118,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.7" />
 		<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
 		<PackageReference Include="PInvoke.User32" Version="0.7.124" />
+		<!-- Security: override vulnerable transitive deps (GHSA-37gx-xxp4-5rgx, GHSA-w3x6-4m5h-cxqf, patched in 9.0.15) -->
+		<PackageReference Include="System.Security.Cryptography.Xml" Version="9.0.15" />
 	</ItemGroup>
 
 	<ItemGroup>
