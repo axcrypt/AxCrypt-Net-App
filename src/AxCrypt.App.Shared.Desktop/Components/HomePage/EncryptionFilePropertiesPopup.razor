@@ -59,7 +59,7 @@
                                 @onclick="async () => { await item.OnClickFunc(); }">
 @*                                 title="@(item.IsToggled ? "Turn off" : "Turn on")">
  *@                            <span class="efp-toggle-knob"></span>
-                            <span class="efp-toggle-label">@(item.IsToggled? Texts.ONText: Texts.OFFText)</span>
+                            <span class="efp-toggle-label" aria-hidden="true" title="@(item.IsToggled ? Texts.ONText : Texts.OFFText)">@(item.IsToggled ? "I" : "O")</span>
                         </button>
                     }
                     else

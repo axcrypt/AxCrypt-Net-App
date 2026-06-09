@@ -2435,9 +2435,9 @@ bold.text-style {
 }
 
 .batch-toast--progress {
-  background: linear-gradient(135deg, rgba(96, 165, 250, 0.14) 0%, #232E3B 60%) !important;
+  background-color: #232E3B !important;
+  background-image: linear-gradient(90deg, #60A5FA 0 4px, transparent 4px), linear-gradient(135deg, rgba(96, 165, 250, 0.14) 0%, transparent 60%) !important;
   border-color: rgba(96, 165, 250, 0.42) !important;
-  background-image: linear-gradient(90deg, #60A5FA 0 4px, transparent 4px) !important;
 }
 
 .batch-toast--progress .bt-icon {
@@ -2446,9 +2446,9 @@ bold.text-style {
 }
 
 .batch-toast--success {
-  background: linear-gradient(135deg, rgba(127, 204, 92, 0.16) 0%, #232E3B 60%) !important;
+  background-color: #232E3B !important;
+  background-image: linear-gradient(90deg, #7FCC5C 0 4px, transparent 4px), linear-gradient(135deg, rgba(127, 204, 92, 0.14) 0%, transparent 60%) !important;
   border-color: rgba(127, 204, 92, 0.5) !important;
-  background-image: linear-gradient(90deg, #7FCC5C 0 4px, transparent 4px) !important;
 }
 
 .batch-toast--success .bt-icon {
@@ -2461,9 +2461,9 @@ bold.text-style {
 }
 
 .batch-toast--error {
-  background: linear-gradient(135deg, rgba(248, 113, 113, 0.16) 0%, #232E3B 60%) !important;
+  background-color: #232E3B !important;
+  background-image: linear-gradient(90deg, #F87171 0 4px, transparent 4px), linear-gradient(135deg, rgba(248, 113, 113, 0.14) 0%, transparent 60%) !important;
   border-color: rgba(248, 113, 113, 0.5) !important;
-  background-image: linear-gradient(90deg, #F87171 0 4px, transparent 4px) !important;
 }
 
 .batch-toast--error .bt-icon {
@@ -2473,6 +2473,16 @@ bold.text-style {
 
 .batch-toast--error .bt-title {
   color: #FCA5A5 !important;
+}
+
+.smx-tab-badge {
+  background: #2A3645 !important;
+  color: #B5BCC7 !important;
+}
+
+.smx-tab-badge--unread {
+  background: #7FCC5C !important;
+  color: #0F1A07 !important;
 }
 
 /* Legacy alert-box.success — matches the toast tint. */

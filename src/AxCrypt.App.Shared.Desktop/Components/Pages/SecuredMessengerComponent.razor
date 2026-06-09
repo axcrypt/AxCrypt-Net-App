@@ -103,6 +103,10 @@
                         <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z" />
                     </svg>
                     <span>@Texts.InboxText</span>
+                    @if (_inboxCount > 0)
+                    {
+                        <span class="smx-tab-badge">@_inboxCount</span>
+                    }
                 </button>
                 <button type="button"
                         class="smx-filter-tab @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Sent ? "smx-filter-tab--active" : "")"
@@ -115,6 +119,10 @@
                         <polygon points="22 2 15 22 11 13 2 9 22 2" />
                     </svg>
                     <span>@Texts.SentText</span>
+                    @if (_sentCount > 0)
+                    {
+                        <span class="smx-tab-badge">@_sentCount</span>
+                    }
                 </button>
                 <button type="button"
                         class="smx-filter-tab @(SecMsgrViewModel.Messenger.SecMessengerFilterTab == SecureMsgrFilterTab.Unread ? "smx-filter-tab--active" : "")"
@@ -127,9 +135,13 @@
                         <circle cx="12" cy="12" r="3" fill="currentColor" />
                     </svg>
                     <span>@Texts.UnReadText</span>
+                    @if (_unreadCount > 0)
+                    {
+                        <span class="smx-tab-badge smx-tab-badge--unread">@_unreadCount</span>
+                    }
                 </button>
             </nav>
-            <div id="search-message-list" class="parent-container">
+            <div id="search-message-list">
                 <AxCrypt.App.Shared.Desktop.Components.SecuredMessenger.Body />
             </div>
         </div>
@@ -139,6 +151,13 @@
 
 @code {
     private SecureMsgrFilterTab activeTab = SecureMsgrFilterTab.Inbox;
+
+    // Per-tab message counts — updated each time a tab finishes loading.
+    // Counts persist across tab switches so the badge stays visible even
+    // when a different tab is active.
+    private int _inboxCount;
+    private int _sentCount;
+    private int _unreadCount;
 
     // OnTabUpdateViewState is event Action<SecureMsgrFilterTab> — match
     // it and fire-and-forget the async UpdateTabState() inside the
@@ -190,6 +209,17 @@
         SecMsgrViewModel.NewSecMsgrViewModel.ParentId = parentId;
         activeTab = securedMessengerFilterTab;
         await SecMsgrViewModel.SetSelectedTabActive(securedMessengerFilterTab);
+        UpdateTabCount(securedMessengerFilterTab, SecMsgrViewModel.Messenger.Messages.Count);
+    }
+
+    private void UpdateTabCount(SecureMsgrFilterTab tab, int count)
+    {
+        switch (tab)
+        {
+            case SecureMsgrFilterTab.Inbox:  _inboxCount  = count; break;
+            case SecureMsgrFilterTab.Sent:   _sentCount   = count; break;
+            case SecureMsgrFilterTab.Unread: _unreadCount = count; break;
+        }
     }
 
     private async Task SearchList()

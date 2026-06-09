@@ -221,6 +221,10 @@
     flex-shrink: 0;
     transition: background 0.22s;
     padding: 0;
+    // Clip translated on/off text that is longer than the pill width.
+    // Short strings like "ON"/"OFF" still appear; long translations
+    // (Korean, etc.) are silently trimmed at the pill boundary.
+    overflow: hidden;
 }
 .adv-toggle--on { background: #2d7a2d; }
 
@@ -244,9 +248,9 @@
     transform: translateY(-50%);
     font-size: 9.5px;
     font-weight: 700;
-    letter-spacing: 0.04em;
     pointer-events: none;
     color: #ffffff;
+    white-space: nowrap;
 }
 .adv-toggle--on    .adv-toggle-label { left: 8px; }
 .adv-toggle:not(.adv-toggle--on) .adv-toggle-label { right: 6px; color: #9ca3af; }

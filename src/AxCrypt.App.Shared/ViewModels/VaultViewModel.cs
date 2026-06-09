@@ -300,6 +300,95 @@ namespace AxCrypt.App.Shared.ViewModels
             SelectedSubFolderPath = "";
         }
 
+        /// <summary>
+        /// Decrypts a batch of vault files, prompting for the destination folder only once.
+        /// </summary>
+        public async Task BatchDecryptVaultFilesAsync(IEnumerable<string> filePaths)
+        {
+            await HandleVaultFolderSelection();
+            if (string.IsNullOrEmpty(SelectedSubFolderPath))
+                return;
+
+            while (New<IDataContainer>(SelectedSubFolderPath).IsVault())
+            {
+                await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.VaultValidationDecryptPath);
+                await HandleVaultFolderSelection();
+                if (string.IsNullOrEmpty(SelectedSubFolderPath))
+                    return;
+            }
+
+            string destinationFolder = SelectedSubFolderPath;
+
+            await RunVaultBatchAsync(
+                filePaths,
+                "Decrypted",
+                async (path) =>
+                {
+                    IVaultDataStore store = New<IVaultDataStore>().Create(path, destinationFolder);
+                    await New<VaultOperationViewModel>().DecryptFiles.ExecuteAsync(new List<IVaultDataStore> { store });
+                });
+
+            SelectedSubFolderPath = "";
+        }
+
+        /// <summary>
+        /// Fault-tolerant per-file vault loop. Publishes the summary via
+        /// <see cref="IBatchToastBridge"/>; falls back to IStatusAlertService
+        /// when no bridge is registered.
+        /// </summary>
+        private async Task RunVaultBatchAsync(
+            IEnumerable<string>? paths,
+            string operationName,
+            Func<string, Task> perFile)
+        {
+            List<string> work = paths?.Where(p => !string.IsNullOrWhiteSpace(p)).ToList() ?? new List<string>();
+            if (work.Count == 0)
+            {
+                return;
+            }
+
+            int succeeded = 0;
+            List<(string FilePath, string Reason)> failures = new();
+            foreach (string path in work)
+            {
+                try
+                {
+                    await perFile(path);
+                    succeeded++;
+                }
+                catch (Exception ex)
+                {
+                    failures.Add((path, FriendlyReason(ex)));
+                }
+            }
+
+            IBatchToastBridge? bridge = AxCServiceProviderExtension.GetService<IBatchToastBridge>();
+            bridge?.PublishResult(operationName, succeeded, failures.Count > 0 ? failures : null);
+
+            if (bridge == null && _statusAlertService != null)
+            {
+                if (failures.Count == 0)
+                {
+                    _statusAlertService.Success($"{operationName} {succeeded} file(s) successfully.");
+                }
+                else
+                {
+                    _statusAlertService.Error($"{operationName} failed for {failures.Count} file(s).");
+                }
+            }
+        }
+
+        private static string FriendlyReason(Exception ex) => ex switch
+        {
+            UnauthorizedAccessException => "Permission denied",
+            FileNotFoundException => "File not found",
+            DirectoryNotFoundException => "Folder not found",
+            IOException ioex when ioex.Message.Contains("being used") => "File is open in another program",
+            IOException ioex => ioex.Message,
+            OperationCanceledException => "Cancelled",
+            _ => string.IsNullOrWhiteSpace(ex.Message) ? ex.GetType().Name : ex.Message,
+        };
+
         public async Task DecryptVaultfolder()
         {
             await PremiumFeature_ClickAsync(LicenseCapability.Vault, async () => { await HandleVaultFolderSelection(); });

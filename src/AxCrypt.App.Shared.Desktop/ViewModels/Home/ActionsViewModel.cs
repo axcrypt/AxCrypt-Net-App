@@ -332,29 +332,55 @@ public class ActionsViewModel : ViewModelBase
         IEnumerable<string>? selected = _mainViewModel?.SelectedRecentFiles;
         if (selected != null && selected.Any())
         {
-            await _batchService.RunAsync(
-                selected,
-                async (path) =>
-                {
-                    await _fileOperationViewModel.DecryptFiles.ExecuteAsync(new[] { path });
-
-                    // Core commands surface failures through internal status callbacks
-                    // rather than exceptions, so BatchFileOperationService cannot detect
-                    // a silent failure from the try/catch alone. If the encrypted file
-                    // still exists after the operation it was not actually decrypted
-                    // (e.g. file is in use, permission denied, wrong password).
-                    // Throwing here pushes the file into the Failed list and prevents
-                    // the misleading "Decrypted successfully" toast.
-                    if (System.IO.File.Exists(path))
-                        throw new System.IO.IOException(
-                            "The file could not be decrypted. It may be open in another application.");
-                },
-                "Decrypted");
+            await DecryptFilesBatchAsync(selected);
             return;
         }
 
-        // Fall-through: no selection → let Core ask the user via its picker.
-        await _fileOperationViewModel.DecryptFiles.ExecuteAsync(null!);
+        // Quick Actions tile with no pre-selection: open the picker
+        // locally so we know exactly which files the user chose, then
+        // route through the same batch loop. The previous fall-through
+        // called Core's DecryptFiles.ExecuteAsync(null!) directly, which
+        // skipped BatchFileOperationService entirely — so the user got
+        // no confirmation toast.
+        FileSelectionEventArgs args = new FileSelectionEventArgs(Enumerable.Empty<string>())
+        {
+            FileSelectionType = FileSelectionType.Decrypt,
+        };
+        await New<IDataItemSelection>().HandleSelection(args);
+
+        if (args.Cancel || !args.SelectedFiles.Any())
+        {
+            return;
+        }
+
+        await DecryptFilesBatchAsync(args.SelectedFiles);
+    }
+
+    /// <summary>
+    /// Per-file decrypt loop with the toast-friendly "encrypted file still
+    /// on disk → treat as failure" guard. Shared between the Recent Files
+    /// selection path and the Quick Actions picker path.
+    /// </summary>
+    private async Task DecryptFilesBatchAsync(IEnumerable<string> paths)
+    {
+        await _batchService.RunAsync(
+            paths,
+            async (path) =>
+            {
+                await _fileOperationViewModel.DecryptFiles.ExecuteAsync(new[] { path });
+
+                // Core commands surface failures through internal status
+                // callbacks instead of exceptions, so a silent failure
+                // can't be detected from try/catch alone. If the .axx
+                // is still on disk after the call it didn't decrypt
+                // (file in use, permission denied, wrong password).
+                // Throw so the file lands in Failed instead of
+                // showing a misleading green toast.
+                if (System.IO.File.Exists(path))
+                    throw new System.IO.IOException(
+                        "The file could not be decrypted. It may be open in another application.");
+            },
+            "Decrypted");
     }
 
     public async Task ShareKeys(EventArgs e)

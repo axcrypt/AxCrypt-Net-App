@@ -237,6 +237,9 @@
     flex-shrink: 0;
     transition: background 0.2s;
     padding: 0;
+    // Safety net: clip any text content that exceeds the pill boundary
+    // (guards against long translated on/off strings in non-English locales).
+    overflow: hidden;
 }
 
 .toggle-switch--on {

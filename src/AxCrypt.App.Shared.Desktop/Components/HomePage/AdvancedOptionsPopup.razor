@@ -100,7 +100,7 @@
                                 @onclick="() => ToggleItem(tog)"
                                 title="@(tog.IsOn ? "Turn off" : "Turn on")">
                             <span class="adv-toggle-knob"></span>
-                            <span class="adv-toggle-label">@(tog.IsOn ? Texts.ONText : Texts.OFFText)</span>
+                            <span class="adv-toggle-label" aria-hidden="true" title="@(tog.IsOn ? Texts.ONText : Texts.OFFText)">@(tog.IsOn ? "I" : "O")</span>
                         </button>
                     }
                 </div>

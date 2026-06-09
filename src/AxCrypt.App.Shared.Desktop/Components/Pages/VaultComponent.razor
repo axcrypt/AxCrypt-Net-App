@@ -170,7 +170,7 @@ else
                                         @oncontextmenu="async () => await SelectFile(file.FileType, filename, file.Filepath, file.Size)"
                                         @oncontextmenu:preventDefault="true"
                                         @oncontextmenu:stopPropagation
-                                        @onclick="async () => await SelectFile(file.FileType, filename, file.Filepath, file.Size)">
+                                        @onclick="async () => await OnRowClick(file, filename)">
                                         <div class="file-details">
                                             @* Checkbox — files only; folders not selectable for batch ops *@
                                             @if (file.FileType != "folder")
@@ -379,13 +379,7 @@ else
 
     private async Task BatchDecryptAsync()
     {
-        foreach (string path in _selectedPaths.ToList())
-        {
-            ViewModel.SelectedFilePath = path;
-            ViewModel.SelectedFile = System.IO.Path.GetFileName(path);
-            ViewModel.IsFolder = false;
-            await ViewModel.DecryptVaultFileAsync();
-        }
+        await ViewModel.BatchDecryptVaultFilesAsync(_selectedPaths.ToList());
         ClearVaultSelection();
     }
 
@@ -493,6 +487,13 @@ else
     {
         ViewModel.CurrentFolder = folderpath;
         ViewModel.LoadVaultItems();
+    }
+
+    private async Task OnRowClick(VaultItem file, string filename)
+    {
+        await SelectFile(file.FileType, filename, file.Filepath, file.Size);
+        if (file.FileType != "folder")
+            ToggleSelection(file.Filepath);
     }
 
     private async Task SelectFile(string Type, string fileName, string filePath, string fileSize)

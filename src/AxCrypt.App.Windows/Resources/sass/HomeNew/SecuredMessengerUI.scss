@@ -55,6 +55,31 @@
     border-radius: 2px;
 }
 
+// ── Tab count badge ────────────────────────────────────────────────
+// Small pill shown next to each tab label with the message count.
+// Only rendered when count > 0 (controlled in the Razor component).
+.smx-tab-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    background: #e5e7eb;
+    color: #374151;
+    margin-left: 4px;
+}
+
+// Unread badge uses brand green to draw attention.
+.smx-tab-badge--unread {
+    background: #48772C;
+    color: #fff;
+}
+
 // Tighten parent container gap below tabs
 #search-message-list.parent-container {
     margin-top: 0;
@@ -177,6 +202,8 @@ html[data-theme="dark"] {
     .smx-filter-tab:hover { color: #E8ECF1; background: rgba(127, 204, 92, .12); }
     .smx-filter-tab--active { color: #B8E89A; }
     .smx-filter-tab--active::after { background: #7FCC5C; }
+    .smx-tab-badge { background: #2A3645; color: #B5BCC7; }
+    .smx-tab-badge--unread { background: #7FCC5C; color: #0F1A07; }
     .smx-bulk-btn:hover:not(:disabled) {
         background: rgba(255, 255, 255, .06);
         border-color: rgba(255, 255, 255, .12);

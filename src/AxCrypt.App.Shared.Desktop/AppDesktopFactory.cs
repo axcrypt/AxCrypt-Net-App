@@ -65,6 +65,9 @@ public static class AppDesktopFactory
         services.AddSingleton<BatchFileOperationService>();
         services.AddSingleton<OnlineSignUpService>();
 
+        // Shared → Desktop bridge for batch toast results.
+        services.AddSingleton<IBatchToastBridge, BatchToastBridge>();
+
         TypeMap.Register.Singleton<UserEntitlementService>(() => new UserEntitlementService());
 
         // UI-facing feature usage provider — wraps UserEntitlementService and

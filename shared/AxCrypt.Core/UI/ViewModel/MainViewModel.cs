@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt - Copyright 2026, AxCrypt AB, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -17,10 +17,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with AxCrypt.  If not, see <http://www.gnu.org/licenses/>.
- *
- * The source is maintained at http://bitbucket.org/AxCrypt-net please visit for
- * updates, contributions and contact with the author. You may also visit
- * http://www.axcrypt.net for more information about the author.
 */
 
 #endregion Coypright and License

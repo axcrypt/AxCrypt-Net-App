@@ -1128,6 +1128,7 @@ html[data-theme=dark] .pm-plan-badge {
   flex-shrink: 0;
   transition: background 0.2s;
   padding: 0;
+  overflow: hidden;
 }
 
 .toggle-switch--on {
@@ -1534,6 +1535,7 @@ html[data-theme=dark] .pm-plan-badge {
   flex-shrink: 0;
   transition: background 0.22s;
   padding: 0;
+  overflow: hidden;
 }
 
 .efp-toggle--on {
@@ -1563,9 +1565,9 @@ html[data-theme=dark] .pm-plan-badge {
   transform: translateY(-50%);
   font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.04em;
   pointer-events: none;
   color: #ffffff;
+  white-space: nowrap;
 }
 
 .efp-toggle--on .efp-toggle-label {
@@ -3997,6 +3999,7 @@ html[data-theme=dark] .skd-mini-text {
   flex-shrink: 0;
   transition: background 0.22s;
   padding: 0;
+  overflow: hidden;
 }
 
 .adv-toggle--on {
@@ -4026,9 +4029,9 @@ html[data-theme=dark] .skd-mini-text {
   transform: translateY(-50%);
   font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.04em;
   pointer-events: none;
   color: #ffffff;
+  white-space: nowrap;
 }
 
 .adv-toggle--on .adv-toggle-label {
@@ -5328,6 +5331,27 @@ html[data-theme=dark] .tug-no-charge {
   border-radius: 2px;
 }
 
+.smx-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  background: #e5e7eb;
+  color: #374151;
+  margin-left: 4px;
+}
+
+.smx-tab-badge--unread {
+  background: #48772C;
+  color: #fff;
+}
+
 #search-message-list.parent-container {
   margin-top: 0;
   padding-top: 0;
@@ -5464,6 +5488,14 @@ html[data-theme=dark] .smx-filter-tab--active {
 }
 html[data-theme=dark] .smx-filter-tab--active::after {
   background: #7FCC5C;
+}
+html[data-theme=dark] .smx-tab-badge {
+  background: #2A3645;
+  color: #B5BCC7;
+}
+html[data-theme=dark] .smx-tab-badge--unread {
+  background: #7FCC5C;
+  color: #0F1A07;
 }
 html[data-theme=dark] .smx-bulk-btn:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.06);
@@ -15882,7 +15914,7 @@ textarea[readonly] {
   background: #fff;
   border: 1px solid #e2e5e9;
   border-radius: 10px;
-  padding: 14px;
+  padding: 10px;
   margin-top: 16px;
 }
 
@@ -15891,17 +15923,12 @@ textarea[readonly] {
    panes that fill the available height; empty states fill the space
    so a pane is never just blank. */
 .secured-messenger {
-  /* Two-pane split inside the message-list card. */
-  /* Left — message list pane. Header + scrolling list + load-more.
-     The pane height tracks viewport so on full-screen there's no
-     wasted whitespace and on a min-size window it still scrolls. */
+  /* Two-pane split. height:100% + grid-template-rows:1fr let the grid
+     row fill the flex parent so both panes stretch to the app height. */
+  /* Left — message list pane. */
   /* The scrolling list claims the space between header and load-more. */
-  /* Right — reading / compose pane. Single column, no internal scroll;
-     inner panes (.ncm-body / .smv-thread) handle their own scroll if
-     the content overflows. Outer scroll lives on
-     .page-content-body-section so we never stack two scrollers. */
-  /* On short windows fall back to a fixed-ish minimum so the panes
-     remain usable instead of squashing the message rows. */
+  /* Right — reading / compose pane. */
+  /* On short windows fall back to a fixed-ish minimum. */
   /* Shared empty state — centred in whichever pane it sits in. */
   /* ── List-pane header ──────────────────────────────────────
      The legacy markup wraps the "Inbox" title in a Foundation
@@ -15931,13 +15958,16 @@ textarea[readonly] {
 .secured-messenger .smx-body {
   display: grid;
   grid-template-columns: 40% 60%;
+  grid-template-rows: 1fr;
   gap: 14px;
   margin: 0;
+  flex: 1;
+  min-height: 0;
 }
 .secured-messenger .all-msg {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 230px);
+  height: 100%;
   min-height: 360px;
   border: 1px solid #e2e5e9;
   border-radius: 10px;
@@ -15953,7 +15983,7 @@ textarea[readonly] {
 .secured-messenger .smx-reader {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 230px);
+  height: 100%;
   min-height: 360px;
   border: 1px solid #e2e5e9;
   border-radius: 10px;
@@ -16072,11 +16102,11 @@ textarea[readonly] {
   min-height: 0;
   /* Compose form (.ncm) must stretch to fill the pane and never
      let its footer be clipped when the window is short. */
-}
-.secured-messenger .smx-reader-content .ncm {
-  flex: 1 !important;
-  height: auto !important; /* override inline height:100% */
-  min-height: 0 !important;
+  /*        .ncm {
+              flex: 1 !important;
+              height: auto !important;   // override inline height:100% 
+              min-height: 0 !important;
+          }*/
 }
 .secured-messenger .smx-reader-content .ncm-foot {
   flex-shrink: 0 !important; /* footer never compresses away */
@@ -16084,6 +16114,7 @@ textarea[readonly] {
 .secured-messenger #viewer-messenger-section {
   flex: 1;
   min-height: 0;
+  overflow-y: auto;
 }
 .secured-messenger .smx-reader .view-section {
   box-shadow: none;
@@ -16223,17 +16254,78 @@ textarea[readonly] {
    narrower windows. The messenger's master-detail panes already
    manage their own width and per-pane scrolling, so the page just
    needs to fill the space between the margins. */
+/* ── Secured Messenger — full-height flex chain ──────────────────────
+   Replace the old calc(92vh - 230px) magic number on the panes with a
+   proper flex chain so the panes fill whatever space the app actually
+   has, regardless of window size or DPI.
+
+   Chain:
+     .page-content-body-section  (height: 100vh - chrome)
+       → #sec-msg-search-section  (flex-shrink: 0, natural height)
+       → .medium-12:last-child    (flex: 1, column)
+           → .smx-filter-tabs     (flex-shrink: 0, natural height)
+           → #search-message-list (flex: 1, column)
+               → .smx-body        (flex: 1, grid with 1fr row)
+                   → .all-msg / .smx-reader  (height: 100%)
+
+   110px = MAUI window chrome + topbar (established by existing
+   page-content-body-section max-height formula in _homenew.scss).
+   Add 10px content-grid padding-top + 20px page-body margin-top = 140px.
+*/
 .secured-messenger .page-content-body-section {
+  /* Kill shared page constraints; messenger owns its own scrolling. */
   max-width: none;
+  max-height: none !important;
+  overflow: hidden;
+  /* Turn the Foundation .row into a vertical flex column so the two
+     .medium-12 children stack and flex-grow propagates height. */
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  /* Bounded height = full viewport minus chrome above. */
+  height: calc(100vh - 140px);
+  margin: 0 20px;
+  padding: 0;
 }
 
-/* …and the shared rule clamps height to 80vh with its own scrollbar
-   below 1300px — that fought the panes' internal scroll (two
-   scrollbars). The panes own the scrolling now. */
+/* Search / filter bar — takes its natural height, never grows. */
+.secured-messenger #sec-msg-search-section {
+  flex: 0 0 auto;
+  width: 100%;
+  float: none;
+}
+
+/* Body column — fills everything below the search bar. */
+.secured-messenger .page-content-body-section > .columns:last-child {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  float: none;
+  padding: 0;
+}
+
+/* Tab strip — fixed height, sits above the message list. */
+.secured-messenger .smx-filter-tabs {
+  flex-shrink: 0;
+}
+
+/* Message list + compose area — fill the rest. */
+.secured-messenger #search-message-list {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Below 1300px the shared rule adds max-height: 80vh — already killed
+   by the !important above, but keep this for clarity. */
 @media only screen and (max-width: 1300px) {
   .secured-messenger .page-content-body-section {
-    max-height: none;
-    overflow-y: visible;
+    max-height: none !important;
+    overflow: hidden;
   }
 }
 .text-fnt-size {
@@ -16460,7 +16552,7 @@ textarea[readonly] {
     background-size: 32px;
   }
   #secured-mess-body {
-    min-height: 80px;
+    min-height: 110px;
     border: 1px solid grey;
   }
   .flex-direction {

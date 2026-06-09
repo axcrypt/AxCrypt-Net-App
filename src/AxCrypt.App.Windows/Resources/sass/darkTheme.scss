@@ -2476,10 +2476,16 @@ bold.text-style {
     color: #FCA5A5 !important;
 }
 
+// Each variant: background-color provides the solid dark base;
+// background-image layers the 4 px accent strip over a soft tint gradient.
+// Using background shorthand + background-image separately would reset
+// background-color to transparent, making the toast invisible in dark mode.
 .batch-toast--progress {
-    background: linear-gradient(135deg, rgba(96, 165, 250, .14) 0%, $dt-surface-3 60%) !important;
+    background-color: $dt-surface-3 !important;
+    background-image:
+        linear-gradient(90deg, $dt-info 0 4px, transparent 4px),
+        linear-gradient(135deg, $dt-info-soft 0%, transparent 60%) !important;
     border-color: rgba(96, 165, 250, .42) !important;
-    background-image: linear-gradient(90deg, #60A5FA 0 4px, transparent 4px) !important;
 }
 
 .batch-toast--progress .bt-icon {
@@ -2488,9 +2494,11 @@ bold.text-style {
 }
 
 .batch-toast--success {
-    background: linear-gradient(135deg, rgba(127, 204, 92, .16) 0%, $dt-surface-3 60%) !important;
+    background-color: $dt-surface-3 !important;
+    background-image:
+        linear-gradient(90deg, $dt-brand 0 4px, transparent 4px),
+        linear-gradient(135deg, $dt-brand-soft 0%, transparent 60%) !important;
     border-color: rgba(127, 204, 92, .50) !important;
-    background-image: linear-gradient(90deg, #7FCC5C 0 4px, transparent 4px) !important;
 }
 
 .batch-toast--success .bt-icon {
@@ -2503,9 +2511,11 @@ bold.text-style {
 }
 
 .batch-toast--error {
-    background: linear-gradient(135deg, rgba(248, 113, 113, .16) 0%, $dt-surface-3 60%) !important;
+    background-color: $dt-surface-3 !important;
+    background-image:
+        linear-gradient(90deg, $dt-danger 0 4px, transparent 4px),
+        linear-gradient(135deg, $dt-danger-soft 0%, transparent 60%) !important;
     border-color: rgba(248, 113, 113, .50) !important;
-    background-image: linear-gradient(90deg, #F87171 0 4px, transparent 4px) !important;
 }
 
 .batch-toast--error .bt-icon {
@@ -2515,6 +2525,17 @@ bold.text-style {
 
 .batch-toast--error .bt-title {
     color: #FCA5A5 !important;
+}
+
+// ── Messenger tab count badges ─────────────────────────────────────
+.smx-tab-badge {
+    background: $dt-surface-4 !important;
+    color: $dt-text-secondary !important;
+}
+
+.smx-tab-badge--unread {
+    background: $dt-brand !important;
+    color: $dt-text-on-brand !important;
 }
 
 /* Legacy alert-box.success — matches the toast tint. */

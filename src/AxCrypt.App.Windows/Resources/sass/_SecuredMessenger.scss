@@ -657,7 +657,7 @@ textarea[readonly] {
         background: #fff;
         border: 1px solid #e2e5e9;
         border-radius: 10px;
-        padding: 14px;
+        padding: 10px;
         margin-top: 16px;
     }
 }
@@ -668,21 +668,23 @@ textarea[readonly] {
    so a pane is never just blank. */
 .secured-messenger {
 
-    /* Two-pane split inside the message-list card. */
+    /* Two-pane split. height:100% + grid-template-rows:1fr let the grid
+       row fill the flex parent so both panes stretch to the app height. */
     .smx-body {
         display: grid;
         grid-template-columns: 40% 60%;
+        grid-template-rows: 1fr;
         gap: 14px;
         margin: 0;
+        flex: 1;
+        min-height: 0;
     }
 
-    /* Left — message list pane. Header + scrolling list + load-more.
-       The pane height tracks viewport so on full-screen there's no
-       wasted whitespace and on a min-size window it still scrolls. */
+    /* Left — message list pane. */
     .all-msg {
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 230px);
+        height: 100%;
         min-height: 360px;
         border: 1px solid #e2e5e9;
         border-radius: 10px;
@@ -698,14 +700,11 @@ textarea[readonly] {
         overflow-y: auto;
     }
 
-    /* Right — reading / compose pane. Single column, no internal scroll;
-       inner panes (.ncm-body / .smv-thread) handle their own scroll if
-       the content overflows. Outer scroll lives on
-       .page-content-body-section so we never stack two scrollers. */
+    /* Right — reading / compose pane. */
     .smx-reader {
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 230px);
+        height: 100%;
         min-height: 360px;
         border: 1px solid #e2e5e9;
         border-radius: 10px;
@@ -713,8 +712,7 @@ textarea[readonly] {
         overflow: hidden;
     }
 
-    /* On short windows fall back to a fixed-ish minimum so the panes
-       remain usable instead of squashing the message rows. */
+    /* On short windows fall back to a fixed-ish minimum. */
     @media (max-height: 640px) {
         .all-msg, .smx-reader { height: 480px; }
     }
@@ -861,11 +859,11 @@ textarea[readonly] {
 
         /* Compose form (.ncm) must stretch to fill the pane and never
            let its footer be clipped when the window is short. */
-        .ncm {
+/*        .ncm {
             flex: 1 !important;
-            height: auto !important;   /* override inline height:100% */
+            height: auto !important;   // override inline height:100% 
             min-height: 0 !important;
-        }
+        }*/
 
         .ncm-foot {
             flex-shrink: 0 !important; /* footer never compresses away */
@@ -875,6 +873,7 @@ textarea[readonly] {
     #viewer-messenger-section {
         flex: 1;
         min-height: 0;
+        overflow-y: auto;
     }
 
     /* The reading pane already frames the content — drop the inner
@@ -1043,17 +1042,80 @@ textarea[readonly] {
    narrower windows. The messenger's master-detail panes already
    manage their own width and per-pane scrolling, so the page just
    needs to fill the space between the margins. */
+/* ── Secured Messenger — full-height flex chain ──────────────────────
+   Replace the old calc(92vh - 230px) magic number on the panes with a
+   proper flex chain so the panes fill whatever space the app actually
+   has, regardless of window size or DPI.
+
+   Chain:
+     .page-content-body-section  (height: 100vh - chrome)
+       → #sec-msg-search-section  (flex-shrink: 0, natural height)
+       → .medium-12:last-child    (flex: 1, column)
+           → .smx-filter-tabs     (flex-shrink: 0, natural height)
+           → #search-message-list (flex: 1, column)
+               → .smx-body        (flex: 1, grid with 1fr row)
+                   → .all-msg / .smx-reader  (height: 100%)
+
+   110px = MAUI window chrome + topbar (established by existing
+   page-content-body-section max-height formula in _homenew.scss).
+   Add 10px content-grid padding-top + 20px page-body margin-top = 140px.
+*/
 .secured-messenger .page-content-body-section {
+    /* Kill shared page constraints; messenger owns its own scrolling. */
     max-width: none;
+    max-height: none !important;
+    overflow: hidden;
+
+    /* Turn the Foundation .row into a vertical flex column so the two
+       .medium-12 children stack and flex-grow propagates height. */
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+
+    /* Bounded height = full viewport minus chrome above. */
+    height: calc(100vh - 140px);
+    margin: 0 20px;   // keep horizontal gutters; remove vertical margins
+    padding: 0;
 }
 
-/* …and the shared rule clamps height to 80vh with its own scrollbar
-   below 1300px — that fought the panes' internal scroll (two
-   scrollbars). The panes own the scrolling now. */
+/* Search / filter bar — takes its natural height, never grows. */
+.secured-messenger #sec-msg-search-section {
+    flex: 0 0 auto;
+    width: 100%;
+    float: none;
+}
+
+/* Body column — fills everything below the search bar. */
+.secured-messenger .page-content-body-section > .columns:last-child {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    float: none;
+    padding: 0;
+}
+
+/* Tab strip — fixed height, sits above the message list. */
+.secured-messenger .smx-filter-tabs {
+    flex-shrink: 0;
+}
+
+/* Message list + compose area — fill the rest. */
+.secured-messenger #search-message-list {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Below 1300px the shared rule adds max-height: 80vh — already killed
+   by the !important above, but keep this for clarity. */
 @media only screen and (max-width: 1300px) {
     .secured-messenger .page-content-body-section {
-        max-height: none;
-        overflow-y: visible;
+        max-height: none !important;
+        overflow: hidden;
     }
 }
 
@@ -1323,7 +1385,7 @@ textarea[readonly] {
     }
 
     #secured-mess-body {
-        min-height: 80px;
+        min-height: 110px;
         border: 1px solid grey;
     }
 
