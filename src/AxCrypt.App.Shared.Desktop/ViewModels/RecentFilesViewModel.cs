@@ -6,6 +6,7 @@ using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility.View;
 using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
@@ -447,13 +448,17 @@ public class RecentFilesViewModel : ViewModelBase
             return;
         }
 
-        int availableCount = await New<UserEntitlementService>().GetRemainingCount(LimitedCapability.SecureFolders, New<AccountStatusViewModel>().SubscriptionLevel, files.Count());
-        if (availableCount <= 0)
+        int availableEncryptionLimit = AxCServiceProviderExtension.GetService<IFeatureUsageProvider>().GetUsage(FeatureKey.FileEncryption).Remaining;
+        if (availableEncryptionLimit <= 0)
         {
+            AxCServiceProviderExtension.GetService<PaidFeaturegateService>().ShowPaidGate(
+                Texts.RecentFilesUnlimitedEncryption,
+                Texts.QuickActionEncryptFileHelpText,
+                new[] { Texts.QuickActionUnlimitedFileEncryptions, Texts.QuickActionEncryptFilesSeconds, Texts.QuickActionSecureStrongEncryption, Texts.UnlockAdvancedEncryptionFeaturesPopup });
             return;
         }
         
-        files = files.Take(availableCount).ToList();
+        files = files.Take(availableEncryptionLimit).ToList();
 
         // FeatureKey.FileEncryption → the batch service reports the
         // successful count to the entitlement provider on finish, so the

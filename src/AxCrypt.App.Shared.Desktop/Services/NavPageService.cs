@@ -20,7 +20,7 @@ public class NavPageService
     private static PageMeta DefaultCurrentPageMeta =>
         new()
         {
-            Title    = Texts.WelcomeBackTitle,
+            Title    = Texts.HomeLinkLabel,
             Subtitle = Texts.NavPageSubtitle,
         };
 

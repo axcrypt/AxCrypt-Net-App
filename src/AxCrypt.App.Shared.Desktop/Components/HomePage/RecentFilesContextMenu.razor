@@ -69,7 +69,7 @@
             <span class="ctx-label">@Texts.ShareKeysToolStripMenuItemText</span>
             @if (paidFeaturegateService.IsPaidFeature("share"))
             {
-                <span class="ctx-lock-badge">Text.PROText</span>
+                <span class="ctx-lock-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg></span>
             }
         </button>
 
@@ -161,24 +161,25 @@
         await recentFilesViewModel.RunContextMenuActionForTarget(EventArgs.Empty, action);
     }
 
-    private Task CtxOpen()                => RunAndClose(SecuredFilesContextMenu.OpenSecured);
-    private Task CtxCleanUp()             => RunAndClose(SecuredFilesContextMenu.ReEncryptAndClose);
+    private Task CtxOpen() => RunAndClose(SecuredFilesContextMenu.OpenSecured);
+    private Task CtxCleanUp() => RunAndClose(SecuredFilesContextMenu.ReEncryptAndClose);
     private Task CtxShare()
     {
         if (paidFeaturegateService.IsPaidFeature("share"))
         {
             CloseMenu();
             paidFeaturegateService.ShowPaidGate(
-                Texts.KeyShareLabelText,
-                Texts.RecentFileShareContextMenu,
-                new[] { Texts.KeyShareOneTime, Texts.RevokeAccessAnytime, Texts.ExpiryDatesKeys });
+                Texts.ShareKeysToolStripMenuItemText,
+                Texts.QuickActionShareSecurelyHelpText,
+                new[] { Texts.QuickSecureActionShareFileAccessSecurely, Texts.QuickSecureActionNoNeedSharePasswords, Texts.QuickSecureActionControlFiles, Texts.QuickSecureActionRemoveAccessAnytime }
+            );
             return Task.CompletedTask;
         }
         return RunAndClose(SecuredFilesContextMenu.ShareKey);
     }
-    private Task CtxShowInFolder()        => RunAndClose(SecuredFilesContextMenu.ShowInFolder);
+    private Task CtxShowInFolder() => RunAndClose(SecuredFilesContextMenu.ShowInFolder);
     private Task CtxRestoreOriginalName() => RunAndClose(SecuredFilesContextMenu.RenameToOriginal);
-    private Task CtxRemove()              => RunAndClose(SecuredFilesContextMenu.RemoveFromListButKeepSecured);
-    private Task CtxDecryptAndRemove()    => RunAndClose(SecuredFilesContextMenu.StopSecureAndRemoveFromList);
+    private Task CtxRemove() => RunAndClose(SecuredFilesContextMenu.RemoveFromListButKeepSecured);
+    private Task CtxDecryptAndRemove() => RunAndClose(SecuredFilesContextMenu.StopSecureAndRemoveFromList);
 
 }

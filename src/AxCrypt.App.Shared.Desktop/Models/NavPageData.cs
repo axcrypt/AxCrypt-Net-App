@@ -16,7 +16,7 @@ public static class NavPageData
                 {
                     Href = "/",
                     Label = Texts.HomeLinkLabel,
-                    Title = Texts.WelcomeBackTitle,
+                    Title = Texts.HomeLinkLabel,
                     Subtitle = Texts.NavPageSubtitle,
                     Match = NavLinkMatch.All,
                     StyleClass = "nav-home-ico",

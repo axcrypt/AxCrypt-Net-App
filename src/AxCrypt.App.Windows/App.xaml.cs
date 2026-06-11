@@ -442,10 +442,11 @@ public partial class App : Application
         if (availableCount <= 0)
         {
             AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
-            AxCServiceProvider.GetService<PaidFeaturegateService>().ShowPaidGate(
+            AxCServiceProviderExtension.GetService<PaidFeaturegateService>().ShowPaidGate(
                 Texts.RecentFilesUnlimitedEncryption,
-                Texts.RecentFilesFreePlan,
-                new[] { Texts.QuickSecureActionUnlimitedFiles, Texts.RecentFilesBatchEncryption, Texts.RecentFilesAES256Always });
+                Texts.QuickActionEncryptFileHelpText,
+                new[] { Texts.QuickActionUnlimitedFileEncryptions, Texts.QuickActionEncryptFilesSeconds, Texts.QuickActionSecureStrongEncryption, Texts.UnlockAdvancedEncryptionFeaturesPopup });
+
             return;
         }
 

@@ -87,7 +87,7 @@
                 break;
 
             case QuickActionType.Encrypt:
-                if (!homeActionModel!.EncryptButtonEnabled && isLockedFeature) { homeActionModel.UpgradeDialog(); return; }
+                if (!homeActionModel!.EncryptButtonEnabled) { paidFeaturegateService.ShowPaidGate(qa.Label, qa.HelpText, qa.PaidPerks); return; }
                 await homeActionModel.SecureFileAsync();
                 break;
 
@@ -96,7 +96,7 @@
                 break;
 
             case QuickActionType.ShareKey:
-                if (!homeActionModel!.EncryptButtonEnabled && isLockedFeature) { homeActionModel.UpgradeDialog(); return; }
+                if (!homeActionModel!.KeyShareButtonEnabled) { paidFeaturegateService.ShowPaidGate(qa.Label, qa.HelpText, qa.PaidPerks); return; }
                 await homeActionModel!.ShareKeysAsync(EventArgs.Empty);
                 break;
         }
