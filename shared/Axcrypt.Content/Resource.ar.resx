@@ -254,6 +254,9 @@
   <data name="AboutPartnerSting" xml:space="preserve">
     <value>تساعد STING الأشخاص الموهوبين على تحويل أفكارهم إلى أعمال مستدامة.</value>
   </data>
+  <data name="AboutUsDescription" xml:space="preserve">
+    <value>معلومات التطبيق وتفاصيل الإصدار.</value>
+  </data>
   <data name="AboutUsHistory2025Text" xml:space="preserve">
     <value>يطرح أكس كريبت واجهة جديدة ومنعشة مصممة لتوفير الوضوح وسهولة الاستخدام. ومع تحسينات في الأداء، أصبح التطبيق أكثر استقرارًا وأمانًا، ومتوافقًا مع جميع أنظمة التشغيل الرئيسية. كما تم تقديم ثلاث ميزات جديدة، مثل المراسلة الآمنة، وتشفير النصوص، وميزة الخزنة (قبو)، بالإضافة إلى تحسينات أُجريت على مدير كلمات المرور، بهدف توفير تجربة موحّدة تُبسّط الحماية والأمان الفوريين.</value>
   </data>
@@ -548,6 +551,9 @@
   <data name="AdvancedDiagnosticsText" xml:space="preserve">
     <value>التشخيص والمراقبة</value>
   </data>
+  <data name="AdvancedEncryptionAlgorithms" xml:space="preserve">
+    <value>خوارزميات تشفير متقدمة.</value>
+  </data>
   <data name="AdvancedFooterHintText" xml:space="preserve">
     <value>تدخل التغييرات حيّز التنفيذ فورًا.</value>
   </data>
@@ -701,9 +707,15 @@
     <value>دائما غير متصل</value>
     <comment>Menu choice with checkbox indicating if we are running offline or not.</comment>
   </data>
+  <data name="AlwaysOfflineDescription" xml:space="preserve">
+    <value>يعمل بالكامل دون اتصال بالإنترنت — ولا تتم المزامنة أو الاتصال بخوادمنا مطلقًا</value>
+  </data>
   <data name="AlwaysOfflineToolTip" xml:space="preserve">
     <value>عند التمكين ، لا يتم استخدام الوصول إلى الإنترنت مطلقًا أو مطلوبًا ، حتى يتم تعطيله.</value>
     <comment>A tool tip explaining that this causes AxCrypt never to access the Internet.</comment>
+  </data>
+  <data name="AlwaysText" xml:space="preserve">
+    <value>دائماً</value>
   </data>
   <data name="AndMoreText" xml:space="preserve">
     <value>والمزيد</value>
@@ -729,8 +741,14 @@
   <data name="AnnualSubscriptionTitle" xml:space="preserve">
     <value>سنوي</value>
   </data>
+  <data name="AnonymousRenameDescription" xml:space="preserve">
+    <value>استبدل أسماء الملفات الأصلية بمعرّفات عشوائية لإخفاء محتوى الملفات من خلال اسم الملف فقط.</value>
+  </data>
   <data name="AnonymousRenameMenuDescription" xml:space="preserve">
     <value>استخدم صفحة "الأدوات" لاستبدال أسماء الملفات بمعرّفات عشوائية — بحيث لا يمكن لأي شخص تخمين محتوى الملف من اسمه فقط.</value>
+  </data>
+  <data name="AnonymousRenameMenuPopup" xml:space="preserve">
+    <value>إعادة تسمية الملفات بأسماء عشوائية للمساعدة في حماية خصوصيتك</value>
   </data>
   <data name="AnonymousRenameMenuText" xml:space="preserve">
     <value>إعادة تسمية مجهولة</value>
@@ -870,6 +888,12 @@
   </data>
   <data name="AutomaticFileUpdatingText" xml:space="preserve">
     <value>التحديث التلقائي للملف المحمي بعد فتحه وحفظه.</value>
+  </data>
+  <data name="AutoUpgradeFilesAES256" xml:space="preserve">
+    <value>ترقية الملفات تلقائيًا إلى تشفير AES-256</value>
+  </data>
+  <data name="AvailablePremiumBusinessPlans" xml:space="preserve">
+    <value>متاح في الخطط المميزة وخطط الأعمال.</value>
   </data>
   <data name="AvoidVisibleEncryptionPopup" xml:space="preserve">
     <value>تجنب ظهور تغييرات في طوابع وقت التشفير.</value>
@@ -1579,6 +1603,9 @@
 
 </value>
   </data>
+  <data name="BackgroundEncryptionMigrationPopup" xml:space="preserve">
+    <value>ترحيل التشفير في الخلفية</value>
+  </data>
   <data name="BacktoAxCryptIDText" xml:space="preserve">
     <value>رجوع إلى &lt;span&gt; معرف اكسكربت&lt;/span&gt;</value>
   </data>
@@ -1594,6 +1621,9 @@
   <data name="BadEmail" xml:space="preserve">
     <value>عنوان البريد الألكتروني غير صحيح</value>
     <comment>Displayed when email address format validation fails.</comment>
+  </data>
+  <data name="BatchEncryptMultiplePopup" xml:space="preserve">
+    <value>تشفير عدة ملفات دفعة واحدة</value>
   </data>
   <data name="BecomeanAffiliateText" xml:space="preserve">
     <value>كن مسوقا بالعمولة</value>
@@ -10201,6 +10231,22 @@
   <data name="Blog_LDSFSB2SGLFEBP_H2_Text4" xml:space="preserve">
     <value>تم تحديد الثغرات الأمنية ويتم استغلالها بشكل نشط.</value>
   </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H2_Text5" xml:space="preserve">
+    <value>معرّف CVE نوع الثغرة درجة CVSS&lt;
+ر (Use-after-free)  
+CVE-2024-53104 كتابة خارج الحدوCVE-2024-1086 استخدام بعد التحر
+يد  
+CVE-2024-53150 قراءة خارج الحدود  
+CVE-2024-53197 ثغرة في نظام الصوت ALSA مرتفعة  
+-2021-22555 كتابة خارج حدود الكومة (Heap) 8.3  CVE-2024-50302 ثغرة في برنامج تشغيل HID مرتفعة  
+CVE-2023-0386 تصعيد الصلاحيات 7.8  
+CV
+ECVE-2022-0847 تصعيد الصلاحيات 7.8  
+CVE-2019-13272 إدارة غير سليمة للصلاحيات 7.8  
+CVE-2021-3493 تصعيد الصلاحيات 7.8  
+CVE-2025-21756 استخدام بعد التحرير (Use-after-free) مرتفعة  
+CVE-2025-38352 حالة سباق (Race condition) مرتفعة</value>
+  </data>
   <data name="Blog_LDSFSB2SGLFEBP_H2_Text6" xml:space="preserve">
     <value>تكشف القائمة عن نمط واضح في أساليب المهاجم. معظم الاستشهادات تتعلق بثغرات تصعيد الامتيازات التي تتبعها وكالة الأمن السيبراني وأمن البنية التحتية الأمريكية (CISA). بدءًا من ثغرات مرشح صافي مثل CVE-2024-1086 وصولًا إلى مشكلات نظام تراكب FS ومشكلات التعريفات (السائقين)، يستهدف المهاجمون الأجزاء الأساسية من نظام لينكس للحصول على صلاحيات الجذر (جذر) بأقل قدر من الجهد.</value>
   </data>
@@ -10212,6 +10258,9 @@
   </data>
   <data name="Blog_LDSFSB2SGLFEBP_H3_Text1" xml:space="preserve">
     <value>أصبحت حوادث تسريب البيانات لم تعد أحداثًا نادرة، بل أصبحت متوقعة. وهذا يعني أن أمن بيانات لينكس للشركات الصغيرة يجب أن يكون أكثر تشددًا. فيما يلي أهم الإحصاءات الحديثة التي تُشكّل ملامح الأمن السيبراني في عام 2026.</value>
+  </data>
+  <data name="Blog_LDSFSB2SGLFEBP_H3_Text2" xml:space="preserve">
+    <value>حدود الجدول='1' cellpacing='0' cellpadding='8' إحصائيات مترية مصدر النتيجة متوسط ​​تكلفة خرق البيانات في عام 2025 من 4.44 مليون دولار إلى 4.45 مليون دولار. وصل وقت الاستجابة للخرق إلى أدنى مستوى له منذ تسع سنوات عند 241 يومًا. الذكاء الاصطناعي سلاح ذو حدين: فقد وفر 19 مليون دولار من تكاليف الاختراق، لكن ما يقرب من 20% من المؤسسات واجهت انتهاكات من "Shadow AI"، بتكلفة 670 ألف دولار في المتوسط. تحدث هجمات الهندسة الاجتماعية مثل انتحال الهوية العميقة في ما يقرب من 1 من كل 6 انتهاكات. تقرير تكلفة خرق البيانات لعام 2025: الشركات الصغيرة والمتوسطة المستهدفة بالهجمات الإلكترونية كانت 30% من الانتهاكات بسبب تورط طرف ثالث (مرتين مقارنة بعام 2024). لا يتم استهداف الشركات الصغيرة من قبل "نشطاء القرصنة" أو المطلعين على بواطن الأمور؛ وبدلاً من ذلك، يسعى المجرمون الخارجيون إلى الحصول على أيام دفع سهلة من خلال استغلال كلمات المرور الضعيفة والأخطاء البشرية.business/resources/infographics/2025-dbir-smb-snapshot.pdf' تقرير التحقيقات في خروقات البيانات لعام 2025 - تقرير التحقيقات في خروقات البيانات لعام 2025. لقطة للشركات الصغيرة والمتوسطة الحجم معدل تكرار الاختراقات ومعدل النجاح 3,049 حادثًا إجماليًا، منها 2,842 حادثًا أدى إلى الكشف المؤكد عن البيانات. تواجه الشركات الصغيرة معدل تحويل مرتفع من الهجوم إلى فقدان البيانات الفعلي، حيث يؤدي ما يقرب من 93% من الحوادث إلى حدوث اختراق ناجح. يُظهر Verizon DBIR برامج الفدية المتضمنة في 44 من خروقات البيانات، حيث تتسبب برامج الفدية المتورطة في 44% من خروقات البيانات في أنماط الهجوم الأساسية، حيث يتسبب اقتحام النظام والهندسة الاجتماعية وهجمات تطبيقات الويب الأساسية في 96% من الانتهاكات. تكون الجهود الأمنية أكثر فعالية عندما تركز على هذه النواقل الثلاثة، والتي تمثل معظم نقاط الضعف في الشركات الصغيرة. Third-party-risk/verizon-2025-dbir-third-party-risk-explosion/ الطفرة المستمرة لبرامج الفدية: تكتيكات جديدة وجدول مدفوعات متغير</value>
   </data>
   <data name="Blog_LDSFSB2SGLFEBP_H4_Text1" xml:space="preserve">
     <value>الشركات الصغيرة والمتوسطة (SMBs) أصبحت الآن أهدافًا رئيسية. أي تحديث أمني مفقود أو مفتاح SSH تم اصطياده عبر التصيّد يمكن أن يمنح المهاجمين الوصول إلى أنظمتك. قم بتشفير البيانات الحساسة افتراضيًا وأغلق الثغرات الواضحة بسرعة.</value>
@@ -12423,6 +12472,10 @@
   <data name="Blog_W4BSSUFOTCAHAFI_Conclusion_Text6" xml:space="preserve">
     <value>قم بتنزيل أكس كريبت الآن وابدأ فترة تجريبية مجانية لمدة 14 يومًا.</value>
   </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text1" xml:space="preserve">
+    <value>معظم المؤسسات تقوم بالفعل بنشر واستخدام أدوات وبرامج التشفير، ولكن ذلك لا يزال محدودًا. وعندما يتعلق الأمر بالعمل عن بُعد، تتسع هذه الفجوة.
+ووفقًا لملخص NordLayer، تكمن المشكلة في استخدام أجهزة الموظفين الشخصية (BYOD)، وشبكات Wi-Fi غير الآمنة أو العامة، وتقنية المعلومات غير الخاضعة للإشراف (Shadow IT)، بالإضافة إلى عمليات نقل الملفات غير المشفرة أو حتى مجلدات التخزين السحابي العامة التي تظل مكشوفة لفترة أطول مما ينبغي.</value>
+  </data>
   <data name="Blog_W4BSSUFOTCAHAFI_H1_Text10" xml:space="preserve">
     <value>إذا كنت تستخدم ويندوز  11 بشكل نشط وتبحث عن برنامج مجاني لتشفير الملفات أو عن تشفير قوي للشركات لحماية بيانات فريقك وسير العمل، فإن أكس كريبت هو الحل الأمثل لك في مشهد التهديدات لعام 2026.</value>
   </data>
@@ -12440,6 +12493,12 @@
   </data>
   <data name="Blog_W4BSSUFOTCAHAFI_H1_Text5" xml:space="preserve">
     <value>في عصرٍ أصبح فيه “المكتب” في أي مكان يتوفر فيه اتصال إنترنت جيد، وحيث لا يمكن التهاون بأمن بيانات السحابة، وأصبحت استراحات القهوة حرفيًا في مطبخك، يوفر أكس كريبت بيئة تخزين سحابي آمنة لا تزال معظم الفرق الحديثة تحاول الوصول إلى مستواها.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text6" xml:space="preserve">
+    <value>تشفير سحابي دون أي جهد: سواء كنت تستخدم  محرك جوجل أو ون درايف أو حتى دروببوإكس، فإن أكس كريبت يندمج بسلاسة لتقليل التعقيدات إلى أدنى حد وتعظيم أمان التخزين السحابي، بحيث لا يترك أي ملفات غير مشفّرة على السحابة يمكن لأي شخص الوصول إليها. إذا كنت تبحث عن حل يعمل بسلاسة مع السحابة ومع الملفات المحلية، ويتوافق بشكل سلس وسهل مع جميع أنظمة التشغيل الرئيسية، فإن أكس كريبت هو التطبيق المناسب لتشفير الملفات، حيث يعمل بالكفاءة والسرعة التي تتطلبها بيئة الأعمال.</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_H1_Text7" xml:space="preserve">
+    <value>مُصمَّم للجميع: سواء كنت تعمل على نظام ويندوز وتريد أكس كريبت لنظام ويندوز 11، أو أكس كريبت لنظام لينكس، أو حتى macOS، فإن أكس كريبت يعمل بسلاسة على جميع هذه أنظمة التشغيل، وحتى على هاتفك المحمول، مما يساعدك في العثور على كل إجاباتك حول كيفية عرض الملفات المشفّرة على أندرويد.</value>
   </data>
   <data name="Blog_W4BSSUFOTCAHAFI_H1_Text8" xml:space="preserve">
     <value>التخفيف من مخاطر أمن السحابة: إن تطبيق أكس كريبت حر أو Premium على مستوى المؤسسة يزيل مخاطر “تكنولوجيا المعلومات غير المصرّح بها” (الظل تكنولوجيا المعلومات ) وسرقة بيانات الاعتماد. وإذا تمكن المهاجمون من الوصول إلى مجلد سحابي، فإن التشفير بمعيار AES-256-bit يحمي محتوياته.</value>
@@ -12476,6 +12535,9 @@
   </data>
   <data name="Blog_W4BSSUFOTCAHAFI_Text1" xml:space="preserve">
     <value>مقدمة</value>
+  </data>
+  <data name="Blog_W4BSSUFOTCAHAFI_Text10" xml:space="preserve">
+    <value>سيتم تخزين ما يقرب من نصف بيانات العالم لدى مزوّدي الخدمات السحابية العملاقة (فرط التدرج) مثل AWS أزور جوجل. ووفقًا للبيانات، تتصدر AWS سوق الحوسبة السحابية العامة بحصة تبلغ نحو 32%، تليها مايكروسوفت أزور بحصة تبلغ 23%.</value>
   </data>
   <data name="Blog_W4BSSUFOTCAHAFI_Text11" xml:space="preserve">
     <value>تتزايد مخاطر السحابة: يحدث حوالي 45٪ من حوادث اختراق البيانات في السحابة، ولا تزال الخوادم الهدف الأساسي للهجمات.</value>
@@ -15485,6 +15547,9 @@ BitLocker
   <data name="BruteForceResistantText" xml:space="preserve">
     <value>مقياس القوة الغاشمة الديناميكي - التفاف كلمة المرور التكراري يجعل الهجمات أكثر صعوبة.</value>
   </data>
+  <data name="BulkActionText" xml:space="preserve">
+    <value>إجراء جماعي</value>
+  </data>
   <data name="BusinessAcceptInvitationText" xml:space="preserve">
     <value>قبول دعوة</value>
   </data>
@@ -16422,6 +16487,12 @@ BitLocker
   <data name="CloseAndRemoveOpenFilesToolStripButtonToolTipText" xml:space="preserve">
     <value>انقر لتشفير أي ملفات مفتوحة أو ملفات جديدة في مجلدات مؤمنة ، ولكن تأكد من أنها ليست قيد الاستخدام أولاً.</value>
   </data>
+  <data name="CloudBrowserPageTips" xml:space="preserve">
+    <value>نصيحة: انقر نقرًا مزدوجًا على مجلد لفتحه، أو حدِّد الملفات لتشفيرها / مشاركتها / فتحها.</value>
+  </data>
+  <data name="CloudBrowserPageTips1" xml:space="preserve">
+    <value>إضافة ملفات</value>
+  </data>
   <data name="CloudServicesConnectedText" xml:space="preserve">
     <value>متصل</value>
   </data>
@@ -17136,18 +17207,36 @@ BitLocker
   <data name="DaysText" xml:space="preserve">
     <value>أيام</value>
   </data>
+  <data name="DebugCheckVersionNowDescription" xml:space="preserve">
+    <value>تحقق من أحدث تحديثات أكس كريبت لتحسين الأمان والاستقرار والأداء.</value>
+  </data>
   <data name="DebugCheckVersionNowToolStripMenuItemText" xml:space="preserve">
     <value>تحقق من الإصدار الآن </value>
   </data>
   <data name="DebugCryptoPolicyToolStripMenuItemText" xml:space="preserve">
     <value>سياسة الترخيص</value>
   </data>
+  <data name="DebugDiagnosticsToolStripMenuItemText" xml:space="preserve">
+    <value>تصحيح الأخطاء والتشخيص</value>
+  </data>
+  <data name="DebugFileDescription" xml:space="preserve">
+    <value>تحليل حالة تشفير الملف ومدى توافقه مع أكس كريبت.</value>
+  </data>
   <data name="DebugFileFormatCheckToolStripMenuItemText" xml:space="preserve">
     <value>تحقق من الملف</value>
     <comment>A debug menu item starting the AxCrypt File Format check function</comment>
   </data>
+  <data name="DebugLoggingDescription" xml:space="preserve">
+    <value>عرض سجلات التطبيق للمساعدة في تشخيص المشكلات واستكشاف الأخطاء وإصلاحها.</value>
+  </data>
   <data name="DebugLoggingToolStripMenuItemText" xml:space="preserve">
     <value>تسجيل</value>
+  </data>
+  <data name="DebugManageAccountDescription" xml:space="preserve">
+    <value>تشغيل سيناريوهات اختبار التشفير.</value>
+  </data>
+  <data name="DebugManageAccountSubTitle" xml:space="preserve">
+    <value>قم بتحديث الملف الشخصي، وإعدادات الأمان، ومعلومات الاتصال على أكس كريبت.net.</value>
   </data>
   <data name="DebugManageAccountToolStripMenuItemText" xml:space="preserve">
     <value>إدارة معرف اكسكربت</value>
@@ -17157,6 +17246,9 @@ BitLocker
   </data>
   <data name="DebugModeTitle" xml:space="preserve">
     <value>وضع التصحيح</value>
+  </data>
+  <data name="DebugOptionsToolStripDescription" xml:space="preserve">
+    <value>إزالة البيانات المخزنة مؤقتًا.</value>
   </data>
   <data name="DebugOptionsToolStripMenuItemText" xml:space="preserve">
     <value>خيارات</value>
@@ -17371,6 +17463,9 @@ BitLocker
   </data>
   <data name="DiscountCodeTitle" xml:space="preserve">
     <value>رمز التخفيض</value>
+  </data>
+  <data name="DiscoveryActivityText" xml:space="preserve">
+    <value>اكتشاف ونشاط</value>
   </data>
   <data name="DoMoreAxCryptSubscriptionContent1" xml:space="preserve">
     <value>يتيح اكسكربت مشاركة الملفات بشكل آمن بين المعلمين والمسؤولين والطلاب. يمكن مشاركة الملفات المشفرة داخل شبكة المؤسسة أو من خلال التخزين السحابي.</value>
@@ -17605,6 +17700,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="DutchLanguageSelection" xml:space="preserve">
     <value>Nederlands (الهولندية)</value>
     <comment>The name of the Dutch language for selection.</comment>
+  </data>
+  <data name="EasyEncryptedOnboardingPopup" xml:space="preserve">
+    <value>إعداد سهل ومشفّر للانضمام</value>
   </data>
   <data name="EasyInstallationLabel" xml:space="preserve">
     <value>سهل التركيب والاستخدام</value>
@@ -17959,11 +18057,17 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="EncryptFileOpenDialogTitle" xml:space="preserve">
     <value>حدد الملفات لتأمينها</value>
   </data>
+  <data name="EncryptFilesAllSubFoldersPopup" xml:space="preserve">
+    <value>قم بتشفير الملفات في جميع المجلدات الفرعية.</value>
+  </data>
   <data name="EncryptFileSaveAsDialogTitle" xml:space="preserve">
     <value>الملف موجود ، حفظ باسم</value>
   </data>
   <data name="EncryptFilesBeforeUploadPopup" xml:space="preserve">
     <value>قم بتشفير الملفات قبل رفعها</value>
+  </data>
+  <data name="EncryptionManagementText" xml:space="preserve">
+    <value>إدارة التشفير</value>
   </data>
   <data name="EncryptLabelText" xml:space="preserve">
     <value>تشفير</value>
@@ -17973,6 +18077,12 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="EncryptToolStripMenuItemText" xml:space="preserve">
     <value>تأمين</value>
+  </data>
+  <data name="EncryptUnlimitedText" xml:space="preserve">
+    <value>تشفير نص غير محدود</value>
+  </data>
+  <data name="EndToEndProtectionPopup" xml:space="preserve">
+    <value>الحماية من الطرف إلى الطرف</value>
   </data>
   <data name="EnglishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>إنجليزي</value>
@@ -18038,6 +18148,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="ExitToolStripMenuItemText" xml:space="preserve">
     <value>خروج</value>
   </data>
+  <data name="ExitToolSubTitle" xml:space="preserve">
+    <value>أغلق تطبيق أكس كريبت.</value>
+  </data>
   <data name="ExpirationDatePrompt" xml:space="preserve">
     <value>تاريخ إنتهاء الصلاحية</value>
   </data>
@@ -18051,14 +18164,23 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
     <value>تنتهي الصلاحية</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
+  <data name="ExpiryDatesKeys" xml:space="preserve">
+    <value>تواريخ انتهاء صلاحية المفاتيح.</value>
+  </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>تم التصدير بنجاح!</value>
+  </data>
+  <data name="ExportMyPrivateKeyDescription" xml:space="preserve">
+    <value>انسخ أو انقل هوية أكس كريبت الخاصة بك ومفاتيح المشاركة بشكل آمن من أجل الاستعادة أو نقلها إلى جهاز آخر.</value>
   </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemText" xml:space="preserve">
     <value>تصدير سر معرف اكسكربت ومشاركة زوج المفاتيح</value>
   </data>
   <data name="ExportMyPrivateKeyToolStripMenuItemToolTipText" xml:space="preserve">
     <value>لنقل معرف اكسكربت ، قم بتصدير زوج المفتاح السري والمشاركة ثم قم باستيراده في مكان آخر.</value>
+  </data>
+  <data name="ExportSharingKeyDescription" xml:space="preserve">
+    <value>مشاركة مفتاحك العام لكي يتمكن الآخرون من إرسال ملفات مشفرة إليك بشكل آمن.</value>
   </data>
   <data name="ExportSharingKeyToolStripMenuItemText" xml:space="preserve">
     <value>تصدير مفتاح المشاركة العام الخاص بي</value>
@@ -18595,6 +18717,12 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   <data name="FileIsWriteProtectedWarning" xml:space="preserve">
     <value>"{0}" محمي ضد الكتابة.</value>
   </data>
+  <data name="FileListButtonText" xml:space="preserve">
+    <value>أضف ملفات من هذا الجهاز.</value>
+  </data>
+  <data name="FileListSubTitle" xml:space="preserve">
+    <value>ضع ملفًا في حسابك السحابي، أو قم برفع واحد من هذا الجهاز.</value>
+  </data>
   <data name="FileNotFound" xml:space="preserve">
     <value>الملف غير موجود.</value>
   </data>
@@ -18676,6 +18804,9 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="FindEncryptedFilesQuicklyPopup" xml:space="preserve">
     <value>اعثر على الملفات المُشفَّرة بسرعة</value>
+  </data>
+  <data name="FindFileFeatureDescription" xml:space="preserve">
+    <value>قم بفحص وتحديد جميع الملفات المشفّرة في مكان واحد.</value>
   </data>
   <data name="FindFileFeatureTitle" xml:space="preserve">
     <value>ابحث عن الملفات</value>
@@ -19787,6 +19918,9 @@ https://axcrypt.net/information/guides/encryption-decryption/</value>
   <data name="helpcentercommunityText" xml:space="preserve">
     <value>لا يمكن العثور على ما أنت عليه &lt;br/&gt; تبحث عن؟ عادل &lt;span&gt; الاتصال &lt;br/&gt; دعم أو زيارة موقعنا &lt;br/&gt; منتدى المجتمع!&lt;/span&gt;</value>
   </data>
+  <data name="HelpCenterComponentDescription" xml:space="preserve">
+    <value>احصل على المساعدة والأجوبة</value>
+  </data>
   <data name="helpcenterGuideContent1" xml:space="preserve">
     <value>كيفية التحميل؟</value>
   </data>
@@ -19859,6 +19993,9 @@ https://axcrypt.net/information/guides/encryption-decryption/</value>
   <data name="HelpOverlayAnyServerDescription" xml:space="preserve">
     <value>لا. يتم كل التشفير وفك التشفير محليًا على جهازك. لا يقوم تطبيق تطبيق آمن بإرسال بياناتك غير المشفّرة مطلقًا.</value>
   </data>
+  <data name="HelpOverlayAnyServerTitle" xml:space="preserve">
+    <value>هل يتم إرسال بياناتي إلى أي خادم؟</value>
+  </data>
   <data name="HelpOverlayCollapseSidebarDescription" xml:space="preserve">
     <value>انقر على زر ← في أعلى الشريط الجانبي لطيّه للحصول على مساحة أكبر على الشاشة. مرّر المؤشر فوق الأيقونات لرؤية التسميات.</value>
   </data>
@@ -19913,8 +20050,14 @@ https://axcrypt.net/information/guides/encryption-decryption/</value>
   <data name="HelpOverlayWhatHappensDescription" xml:space="preserve">
     <value>لا يمكن لتطبيق تطبيق آمن استعادة كلمة المرور الخاصة بك — وهذا مقصود تصميميًا. احرص دائمًا على حفظ كلمة المرور في مكان آمن. تتيح لك ميزة إدارة المفاتيح (Pro) إعداد مفاتيح استرداد.</value>
   </data>
+  <data name="HelpOverlayWhatHappensTitle" xml:space="preserve">
+    <value>ماذا يحدث إذا نسيت كلمة المرور الخاصة بي؟</value>
+  </data>
   <data name="HelpToolStripMenuItemText" xml:space="preserve">
     <value>مساعدة</value>
+  </data>
+  <data name="HelpToolSubTitle" xml:space="preserve">
+    <value>افتح مركز المساعدة داخل التطبيق ودليل البدء</value>
   </data>
   <data name="HelpViewHelpMenuItemText" xml:space="preserve">
     <value>عرض مساعدة</value>
@@ -20205,8 +20348,14 @@ https://axcrypt.net/information/guides/encryption-decryption/</value>
   <data name="ImportPublicKeysFileSelectionTitle" xml:space="preserve">
     <value>حدد مشاركة ملفات المفاتيح</value>
   </data>
+  <data name="ImportSomeonesPublicDescription" xml:space="preserve">
+    <value>أضِف المفتاح العام لمستخدم موثوق به للوصول إلى الملفات المشفّرة المشتركة بأمان.</value>
+  </data>
   <data name="ImportSomeonesPublicSharingKeyText" xml:space="preserve">
     <value>استيراد المفتاح العام للمشاركة لشخص ما</value>
+  </data>
+  <data name="ImproveFilePrivacyPopup" xml:space="preserve">
+    <value>تحسين خصوصية الملفات</value>
   </data>
   <data name="ImproveOurServiceCommentText" xml:space="preserve">
     <value>بماذا تنصحنا لتحسين خدماتنا؟</value>
@@ -20804,6 +20953,9 @@ https://axcrypt.net/information/guides/encryption-decryption/</value>
   <data name="Invite" xml:space="preserve">
     <value>مستخدم للدعوة</value>
   </data>
+  <data name="InviteEmailSuccessfullyText" xml:space="preserve">
+    <value>تم إرسال الدعوة إلى {0} بنجاح!</value>
+  </data>
   <data name="InviteFriendAxCryptText" xml:space="preserve">
     <value>ادعُ صديقك إلى أكسكريبت!</value>
   </data>
@@ -20815,6 +20967,12 @@ https://axcrypt.net/information/guides/encryption-decryption/</value>
   </data>
   <data name="InviteUserPersonalizedMessageTitle" xml:space="preserve">
     <value>رسالة شخصية</value>
+  </data>
+  <data name="InviteUserToolPopup" xml:space="preserve">
+    <value>إرسال دعوة إعداد آمنة إلى الزملاء أو الأصدقاء مع دعم مشاركة المفاتيح دون اتصال بالإنترنت.</value>
+  </data>
+  <data name="InviteUserToolStripDescription" xml:space="preserve">
+    <value>أرسل دعوة إعداد آمنة إلى زميل أو صديق. سيتم إعداد حسابه مع تشفير طرفي منذ البداية.</value>
   </data>
   <data name="InviteUserToolStripMenuItemText" xml:space="preserve">
     <value>أدع صديقا</value>
@@ -20958,6 +21116,9 @@ SE-114 29 ستوكهولم
   <data name="KeepCloudDataPrivatePopup" xml:space="preserve">
     <value>حافظ على خصوصية البيانات السحابية</value>
   </data>
+  <data name="KeepFolderStructurePopup" xml:space="preserve">
+    <value>الحفاظ على بنية المجلدات منظمة</value>
+  </data>
   <data name="KeepMeUpdatedLinkLabel" xml:space="preserve">
     <value>ابقني على علم بآخر التطورات</value>
   </data>
@@ -21055,6 +21216,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>اضغط على الزر</value>
+  </data>
+  <data name="KeyShareOneTime" xml:space="preserve">
+    <value>مفاتيح مشاركة تُستخدم لمرة واحدة</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>عادةً ما يشارك الموظفون المعلومات ذات الصلة بالعمل مع بعضهم البعض. ومع ذلك، من الطبيعي القلق بشأن أمان البيانات أثناء عملية المشاركة. وبما أن هذا يثير القلق بشأن مشاركة الملفات المؤمّنة، فمن الضروري جدًا أن يحتوي برنامج التشفير على ميزة تتيح لك مشاركة واستلام الملفات بطريقة أكثر أمانًا.</value>
@@ -21396,6 +21560,9 @@ SE-114 29 ستوكهولم
   <data name="LogoAndIconLabel" xml:space="preserve">
     <value>الشعار والأيقونة</value>
   </data>
+  <data name="LogOffSubTitle" xml:space="preserve">
+    <value>سجّل الخروج من هذا الجهاز — ستبقى ملفاتك </value>
+  </data>
   <data name="LogOffText" xml:space="preserve">
     <value>خروج</value>
   </data>
@@ -21484,6 +21651,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="MailGunPremiumSupportTitle" xml:space="preserve">
     <value>يرغب {{user_email}} في الحصول على مساعدة بشأن ...</value>
+  </data>
+  <data name="ManageAnonymousFiles" xml:space="preserve">
+    <value>إدارة الملفات المشفّرة المجهولة الهوية</value>
   </data>
   <data name="ManageGroupAccessHeading" xml:space="preserve">
     <value>إدارة الوصول إلى المجموعة</value>
@@ -23385,6 +23555,9 @@ SE-114 29 ستوكهولم
   <data name="MFAText2" xml:space="preserve">
     <value>يرجى اختيار طريقة المصادقة الخاصة بك.</value>
   </data>
+  <data name="MFAuthenticationAdditionalFactorText" xml:space="preserve">
+    <value>أضف عامل تحقق إضافيًا إلى جانب كلمة المرور لتسجيل الدخول.</value>
+  </data>
   <data name="MFAuthenticationCaroselHead1" xml:space="preserve">
     <value>كيفية تفعيل المصادقة متعددة العوامل (MFA) في أكسكريبت؟</value>
   </data>
@@ -23657,11 +23830,50 @@ SE-114 29 ستوكهولم
   <data name="NameOnCardPrompt" xml:space="preserve">
     <value>الاسم على البطاقة</value>
   </data>
+  <data name="NavigationPaneDescription" xml:space="preserve">
+    <value>شارك أفكارك.</value>
+  </data>
   <data name="NavigationPaneFeedback" xml:space="preserve">
     <value>استجابة</value>
   </data>
   <data name="NavigationPaneHome" xml:space="preserve">
     <value>الصفحة الرئيسية</value>
+  </data>
+  <data name="NavPageHelpCenterLinkLabel" xml:space="preserve">
+    <value>المساعدة والدعم</value>
+  </data>
+  <data name="NavPageHelpCenterSubtitle" xml:space="preserve">
+    <value>تصفّح الأسئلة الشائعة، وابحث في قاعدة المعرفة، وأرسل ملاحظاتك، أو تواصل مع فريق الدعم لدينا.</value>
+  </data>
+  <data name="NavPageHelpCenterTitle" xml:space="preserve">
+    <value>مركز المساعدة</value>
+  </data>
+  <data name="NavPagePasswordManagerSubtitle" xml:space="preserve">
+    <value>تخزين كلمات المرور، وإنشاء كلمات مرور قوية، وملؤها تلقائيًا — جميعها محمية بتشفير AES-256.</value>
+  </data>
+  <data name="NavPageSecuredFoldersSubtitle" xml:space="preserve">
+    <value>المجلدات التي يراقبها أكس كريبت — أي ملف تقوم بإضافته يتم تشفيره تلقائيًا.</value>
+  </data>
+  <data name="NavPageSecuredMessengerSubtitle" xml:space="preserve">
+    <value>أرسل رسائل مشفّرة من طرف إلى طرف — فقط المستلم يمكنه قراءتها.</value>
+  </data>
+  <data name="NavPageSubtitle" xml:space="preserve">
+    <value>لوحة التحكم المشفّرة الخاصة بك — الملفات الحديثة، والإجراءات السريعة، وحالة الأمان في لمحة واحدة.</value>
+  </data>
+  <data name="NavPageTextEncryptionSubtitle" xml:space="preserve">
+    <value>الصق أي نص، قم بتشفيره، وشارِك النص المُشفَّر بأمان في أي مكان.</value>
+  </data>
+  <data name="NavPageToolsLinkLabel" xml:space="preserve">
+    <value>أدوات</value>
+  </data>
+  <data name="NavPageToolsNotificationsSubtitle" xml:space="preserve">
+    <value>تنبيهات النشاط، ودعوات مشاركة المفاتيح، ورسائل النظام في مكان واحد.</value>
+  </data>
+  <data name="NavPageToolsSubtitle" xml:space="preserve">
+    <value>الحذف الآمن، إعادة التسمية بشكل مجهول، التحقق من الملفات، وأدوات أكس كريبت الأخرى.</value>
+  </data>
+  <data name="NavPageVaultSubtitle" xml:space="preserve">
+    <value>مساحة خاصة ومشفّرة تقوم بحماية ملفاتك تلقائيًا، وتتيح مشاركتها بشكل آمن مع الأشخاص الموثوقين.</value>
   </data>
   <data name="NeedAnyHelpText" xml:space="preserve">
     <value>هل تحتاج إلى أي مساعدة؟</value>
@@ -23941,6 +24153,9 @@ SE-114 29 ستوكهولم
   <data name="OfflineInternetRequiredText" xml:space="preserve">
     <value>أنت غير متصل بالإنترنت. قم بإيقاف وضع عدم الاتصال دائمًا أو اتصل بالإنترنت للمتابعة. </value>
   </data>
+  <data name="OfflineKeySharingPopup" xml:space="preserve">
+    <value>مشاركة المفاتيح دون اتصال بالإنترنت</value>
+  </data>
   <data name="OfflineNoPremiumWarning" xml:space="preserve">
     <value>أنت غير متصل بالإنترنت لذا لا يمكننا التحقق من خطة اشتراكك. يرجى الاتصال بالإنترنت حتى نتمكن من تحديث حالتك!</value>
   </data>
@@ -23964,6 +24179,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="OneFreeMonthLabel" xml:space="preserve">
     <value>14 يومًا مجانًا</value>
+  </data>
+  <data name="OneLatestStandardPopup" xml:space="preserve">
+    <value>بنقرة واحدة الامتثال لأحدث المعايير</value>
   </data>
   <data name="OnlyAdminOnActiveBusinessSubscriptionError" xml:space="preserve">
     <value>تعذر حذف المستخدم لأنه المسؤول الوحيد عن اشتراك الأعمال. إما إلغاء الاشتراك أو ترشيح مسؤول آخر.</value>
@@ -23992,6 +24210,9 @@ SE-114 29 ستوكهولم
   <data name="OpenToolStripButtonToolTipText" xml:space="preserve">
     <value>انقر لتحديد ملف مؤمن لفتحه.</value>
   </data>
+  <data name="OpenToolText" xml:space="preserve">
+    <value>أداة مفتوحة</value>
+  </data>
   <data name="OpenWebPageForPurchaseRequest" xml:space="preserve">
     <value>هل تريد منا أن نفتح صفحة ويب حيث يمكنك إجراء عملية شراء؟</value>
   </data>
@@ -24001,8 +24222,15 @@ SE-114 29 ستوكهولم
   <data name="OptionsChangePassphraseToolStripMenuItemText" xml:space="preserve">
     <value>غير كلمة السر</value>
   </data>
+  <data name="OptionsClearAllSettingsAndExitSubTitle" xml:space="preserve">
+    <value>إعادة تعيين التفضيلات وبدء جلسة جديدة على هذا الجهاز.</value>
+  </data>
   <data name="OptionsClearAllSettingsAndExitToolStripMenuItemText" xml:space="preserve">
     <value>امسح كل الإعدادات وأعد التشغيل</value>
+  </data>
+  <data name="OptionsConvertMenuItemDescription" xml:space="preserve">
+    <value>
+قم تلقائيًا بترقية الملفات المشفّرة بتقنية AES-128 إلى AES-256 عند فتحها.</value>
   </data>
   <data name="OptionsConvertMenuItemText" xml:space="preserve">
     <value>ملفات الترقية التلقائية إلى AES-256</value>
@@ -24015,8 +24243,14 @@ SE-114 29 ستوكهولم
   <data name="OptionsDebugToolStripMenuItemText" xml:space="preserve">
     <value>تصحيح</value>
   </data>
+  <data name="OptionsHideRecentFilesDescription" xml:space="preserve">
+    <value>لا تعرض الملفات التي تم فتحها مؤخرًا على الشاشة الرئيسية</value>
+  </data>
   <data name="OptionsHideRecentFilesToolStripMenuItemText" xml:space="preserve">
     <value>إخفاء الملفات الأخيرة</value>
+  </data>
+  <data name="OptionsIncludeSubfoldersDescription" xml:space="preserve">
+    <value>عند تشفير مجلد، قم أيضًا بتشفير كل ملف داخل المجلدات الفرعية الخاصة به.</value>
   </data>
   <data name="OptionsIncludeSubfoldersToolStripMenuItemText" xml:space="preserve">
     <value>اشتمال المجلدات الفرعية</value>
@@ -24158,6 +24392,21 @@ SE-114 29 ستوكهولم
   </data>
   <data name="PageNotFoundInfo" xml:space="preserve">
     <value>لم نتمكن من العثور على الصفحة التي تبحث عنها. حدث خطأ ما أو أن الصفحة غير موجودة.</value>
+  </data>
+  <data name="PagesHeadline" xml:space="preserve">
+    <value>بحث وفتح الملفات والمجلدات والأدوات المشفرة المشفرة بلا حدود</value>
+  </data>
+  <data name="PagesPrioritySupportPopup" xml:space="preserve">
+    <value>دعم ذو أولوية وحدود أقوى</value>
+  </data>
+  <data name="PagesSearchAcrossPopup" xml:space="preserve">
+    <value>ابحث في جميع ملفاتك المشفرة</value>
+  </data>
+  <data name="PagesSearchOpenSecuredPopup" xml:space="preserve">
+    <value>افتح المجلدات المحمية مباشرةً من البحث</value>
+  </data>
+  <data name="PagesUnlockFindFilesPopup" xml:space="preserve">
+    <value>إلغاء قفل "البحث عن الملفات" وأدوات مدفوعة أخرى</value>
   </data>
   <data name="PaidSubscriptionNeededForMobileApp" xml:space="preserve">
     <value>من أجل استخدام اكسكربت للجوال ، يجب أن يكون لديك اشتراك.</value>
@@ -25127,8 +25376,14 @@ SE-114 29 ستوكهولم
   <data name="PrimaryReasonForCancelationLabelText" xml:space="preserve">
     <value>ما هي الأسباب الرئيسية للإلغاء؟</value>
   </data>
+  <data name="PriorityCustomerSupport" xml:space="preserve">
+    <value>دعم العملاء ذو الأولوية</value>
+  </data>
   <data name="PrioritySupportTitle" xml:space="preserve">
     <value>دعم الأولوية</value>
+  </data>
+  <data name="PrivacyAnonymityTitle" xml:space="preserve">
+    <value>الخصوصية وإخفاء الهوية</value>
   </data>
   <data name="PrivacyPolicyBlock10Heading" xml:space="preserve">
     <value>مشاركة المعلومات</value>
@@ -25877,6 +26132,15 @@ SE-114 29 ستوكهولم
   <data name="PromptXecretsSecretText" xml:space="preserve">
     <value>كلمة المرور أو السر</value>
   </data>
+  <data name="ProtectedEverywhereText" xml:space="preserve">
+    <value>محمي في كل مكان.</value>
+  </data>
+  <data name="ProtectFileIdentityPopup" xml:space="preserve">
+    <value>حماية هوية الملف بشكل آمن</value>
+  </data>
+  <data name="PROText" xml:space="preserve">
+    <value>احترافي</value>
+  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>وقت الاشتراك المحدد غير صالح. يجب أن يكون الاشتراك الصالح {0} شهرًا على الأقل وألا يزيد عن {1} شهرًا.</value>
   </data>
@@ -25942,11 +26206,26 @@ SE-114 29 ستوكهولم
   <data name="QuickActionsTitle" xml:space="preserve">
     <value>الإجراءات السريعة</value>
   </data>
+  <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
+    <value>خوارزميات متقدمة</value>
+  </data>
   <data name="QuickSecureActionAdvancedVaultSecurity" xml:space="preserve">
     <value>الوصول إلى ميزات أمان الخزائن المتقدمة</value>
   </data>
+  <data name="QuickSecureActionAutomaticallyEncrypt" xml:space="preserve">
+    <value> تشفير الملفات المضافة أو المعدَّلة تلقائيًا.</value>
+  </data>
+  <data name="QuickSecureActionAutomaticallyMonitor" xml:space="preserve">
+    <value>راقب مجلداتك واحمِها تلقائيًا باستخدام تشفير آمن.</value>
+  </data>
+  <data name="QuickSecureActionControlFiles" xml:space="preserve">
+    <value>التحكّم في من يمكنه الوصول إلى الملفات</value>
+  </data>
   <data name="QuickSecureActionEncryptAndShare" xml:space="preserve">
     <value>تشفير ومشاركة</value>
+  </data>
+  <data name="QuickSecureActionEncryptAndShareDescription" xml:space="preserve">
+    <value>قم بتأمين الملف وتجهيزه للمشاركة بأمان.</value>
   </data>
   <data name="QuickSecureActionEncryptedVaults" xml:space="preserve">
     <value>قم بتخزين وحماية ملفاتك الحساسة بأمان داخل خزائنu
@@ -25954,6 +26233,12 @@ SE-114 29 ستوكهولم
   </data>
   <data name="QuickSecureActionHeader" xml:space="preserve">
     <value>اختر إجراءً</value>
+  </data>
+  <data name="QuickSecureActionMonitorMultiple" xml:space="preserve">
+    <value>راقب عدة مجلدات بأمان</value>
+  </data>
+  <data name="QuickSecureActionNoNeedSharePasswords" xml:space="preserve">
+    <value>لا حاجة لمشاركة كلمات المرور.</value>
   </data>
   <data name="QuickSecureActionPermanentFileDeletion" xml:space="preserve">
     <value>الحذف الدائم للملفات</value>
@@ -25967,20 +26252,59 @@ SE-114 29 ستوكهولم
   <data name="QuickSecureActionProtectImportantFiles" xml:space="preserve">
     <value>حماية الملفات والمجلدات المهمة</value>
   </data>
+  <data name="QuickSecureActionProtectSensitive" xml:space="preserve">
+    <value>احمِ الملفات الحساسة تلقائيًا</value>
+  </data>
+  <data name="QuickSecureActionRecentSecureFiles" xml:space="preserve">
+    <value> الملفات الآمنة الأخيرة</value>
+  </data>
   <data name="QuickSecureActionRecentSecureFilesDescription" xml:space="preserve">
     <value>افتح بسرعة ملفاتك التي تم الوصول إليها مؤخرًا أو التي تم حمايتها.</value>
+  </data>
+  <data name="QuickSecureActionRemoveAccessAnytime" xml:space="preserve">
+    <value>إزالة صلاحية الوصول في أي وقت</value>
   </data>
   <data name="QuickSecureActionSecureEncryptedVaults" xml:space="preserve">
     <value>إنشاء خزائن مشفّرة</value>
   </data>
+  <data name="QuickSecureActionSecureFilesShare" xml:space="preserve">
+    <value>أمّن ملفاتك وشارك صلاحيات الوصول المشفّرة مع الآخرين بأمان.</value>
+  </data>
+  <data name="QuickSecureActionSecureFolder" xml:space="preserve">
+    <value>المجلد الآمن.</value>
+  </data>
+  <data name="QuickSecureActionSecureFolderDescription" xml:space="preserve">
+    <value>قم بحماية جميع الملفات الموجودة داخل المجلد باستخدام التشفير.</value>
+  </data>
   <data name="QuickSecureActionSensitiveInformation" xml:space="preserve">
     <value>حماية المعلومات الحساسة</value>
+  </data>
+  <data name="QuickSecureActionShareFileAccessSecurely" xml:space="preserve">
+    <value>شارك الوصول إلى الملفات بأمان</value>
+  </data>
+  <data name="QuickSecureActionUnlimitedFiles" xml:space="preserve">
+    <value>ملفات غير محدودة</value>
   </data>
   <data name="QuickSecureActionUnlockAdvanced" xml:space="preserve">
     <value>فتح ميزات الأمان المتقدمة</value>
   </data>
+  <data name="QuickSecureActionUnlockMoreFeatures" xml:space="preserve">
+    <value> قم بالترقية لفتح المزيد من الميزات.</value>
+  </data>
   <data name="QuickSecureActionUnlockPremium" xml:space="preserve">
     <value>إلغاء قفل ميزات الحماية </value>
+  </data>
+  <data name="QuickSecureActionUnlockSecurityTools" xml:space="preserve">
+    <value>افتح أدوات الأمان المتقدمة</value>
+  </data>
+  <data name="QuickSecureAddFilesVault" xml:space="preserve">
+    <value>أضف الملفات إلى الخزنة.</value>
+  </data>
+  <data name="QuickSecureAddFilesVaultDescription" xml:space="preserve">
+    <value>قم بتخزين ملفاتك المهمة في خزنة آمنة.</value>
+  </data>
+  <data name="QuickSecureSecureDeleteDescription" xml:space="preserve">
+    <value>احذف الملفات نهائيًا بحيث لا يمكن استعادتها.</value>
   </data>
   <data name="RateApplicationLinkAndroid" xml:space="preserve">
     <value>يرجى تقييمنا على &lt;a&gt; تطبيقات جوجل &lt;/a&gt;</value>
@@ -26026,11 +26350,17 @@ SE-114 29 ستوكهولم
   <data name="RecentFilesAES256Always" xml:space="preserve">
     <value>تشفير AES-256 دائمًا</value>
   </data>
+  <data name="RecentFilesBatchEncryption" xml:space="preserve">
+    <value>التشفير الدفعي</value>
+  </data>
   <data name="RecentFilesDropFiles" xml:space="preserve">
     <value>قم بإسقاط الملفات هنا لتشفيرها.</value>
   </data>
   <data name="RecentFilesFreePlan" xml:space="preserve">
     <value>الخطة المجانية تسمح بتشفير 3 ملفات. قم بالترقية للحصول على عدد غير محدود.</value>
+  </data>
+  <data name="RecentFileShareContextMenu" xml:space="preserve">
+    <value>شارك الملفات المشفّرة بأمان باستخدام مفتاح يُستخدم لمرة واحدة.</value>
   </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>لم تفتح أي ملفات مؤمنة مؤخرًا. انقر فوق &lt;b&gt; فتح مؤمن &lt;/ b&gt; للاستعراض بحثًا عن ملفات مؤمنة.</value>
@@ -26043,6 +26373,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="RecentFilesOpenToolStripMenuItemText" xml:space="preserve">
     <value>فتح</value>
+  </data>
+  <data name="RecentFilesReencryptClose" xml:space="preserve">
+    <value>إعادة التشفير والإغلاق</value>
   </data>
   <data name="RecentFilesShareSomeone" xml:space="preserve">
     <value>شارك ملفًا مع شخص ما وسيظهر هنا.</value>
@@ -26205,6 +26538,9 @@ SE-114 29 ستوكهولم
   <data name="RenameDeleteOrDecryptFilesPopup" xml:space="preserve">
     <value>إعادة تسمية الملفات أو حذفها أو فك تشفيرها.</value>
   </data>
+  <data name="RenameFilesSecurelyPopup" xml:space="preserve">
+    <value>إعادة تسمية الملفات بشكل آمن</value>
+  </data>
   <data name="RenewActiveBusinessSubscriptionWarning" xml:space="preserve">
     <value>هناك اشتراك نشط متكرر على هذا الحساب. لا يلزم تجديد اشتراكات الأعمال المتكررة يدويا.</value>
   </data>
@@ -26222,6 +26558,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="RenewSubscriptionTitle" xml:space="preserve">
     <value>جدد اشتراكك!</value>
+  </data>
+  <data name="ReportSnapshotDescription" xml:space="preserve">
+    <value>افتح تقارير التشخيص المحفوظة لاستكشاف الأخطاء وإصلاحها وتقديم المساعدة والدعم.</value>
   </data>
   <data name="ReportSnapshotIntro" xml:space="preserve">
     <value>هذا تقرير لقطة عن الأخطاء المكتشفة في اكسكربت. يرجى نسخ كل هذا النص وإرساله بالبريد الإلكتروني إلى:
@@ -26717,6 +27056,9 @@ SE-114 29 ستوكهولم
   <data name="ResourcesHeading" xml:space="preserve">
     <value>الموارد</value>
   </data>
+  <data name="RestoreAnonymousNamesDescription" xml:space="preserve">
+    <value>تراجع عن إعادة التسمية المجهولة واستعد أسماء الملفات الأصلية باستخدام خريطة إعادة التسمية المخزنة.</value>
+  </data>
   <data name="RestoreAnonymousNamesMenuText" xml:space="preserve">
     <value>إعادة تسمية إلى الأصل</value>
     <comment>Displayed as a menu or context menu choice, and is used to restore the original name for encrypted files that have been renamed either manually or by using the anonymous rename function.</comment>
@@ -26731,6 +27073,9 @@ SE-114 29 ستوكهولم
   <data name="RestoreNowText" xml:space="preserve">
     <value>استعادة الآن</value>
   </data>
+  <data name="RestoreRenamePopup" xml:space="preserve">
+    <value>استعادة أسماء الملفات الأصلية</value>
+  </data>
   <data name="RestoreToOriginalToolTipText" xml:space="preserve">
     <value>استعادة إلى الأصلية تتطلب خطة اشتراك مدفوعة!</value>
   </data>
@@ -26739,6 +27084,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="ReviewsLabel" xml:space="preserve">
     <value>المراجعات</value>
+  </data>
+  <data name="RevokeAccessAnytime" xml:space="preserve">
+    <value>يمكنك إلغاء الوصول في أي وقت.</value>
   </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>русский (الروسية)</value>
@@ -26957,6 +27305,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="SecureDeleteDialogTitle" xml:space="preserve">
     <value>اكسكربت حذف الآمن</value>
+  </data>
+  <data name="SecureDeleteToolDescription" xml:space="preserve">
+    <value>حذف الملفات بشكل دائم عبر الكتابة فوقها بعدة تمريرات. يجعل استعادتها مستحيلة حتى باستخدام أدوات التحليل الجنائي.</value>
   </data>
   <data name="SecureDeleteToolStripMenuItemText" xml:space="preserve">
     <value>حذف آمن</value>
@@ -27217,6 +27568,12 @@ SE-114 29 ستوكهولم
   <data name="SecureEncryptedVaultPopup" xml:space="preserve">
     <value>خزنة آمنة ومشفّرة.</value>
   </data>
+  <data name="SecureKeySharingPopup" xml:space="preserve">
+    <value>مشاركة المفاتيح بشكل آمن</value>
+  </data>
+  <data name="SecureUserInvitesPopup" xml:space="preserve">
+    <value>دعوات مستخدمين آمنة</value>
+  </data>
   <data name="SecurityBlock1Heading" xml:space="preserve">
     <value>لماذا يعد اكسكربت آمنًا؟</value>
   </data>
@@ -27387,6 +27744,12 @@ SE-114 29 ستوكهولم
   <data name="SecurityStatusMasterKeyRecoveryDescription" xml:space="preserve">
     <value>يمكن لمؤسستك استعادة الملفات إذا فقد أحد الأعضاء إمكانية الوصول.</value>
   </data>
+  <data name="SecurityStatusSecureDeleteTitle" xml:space="preserve">
+    <value>امسح الملفات نهائيًا باستخدام الكتابة فوقها عدة مرات</value>
+  </data>
+  <data name="SecurityStatusTitle" xml:space="preserve">
+    <value>حالة الأمان.</value>
+  </data>
   <data name="SecurityStatusUnlimitedAES256" xml:space="preserve">
     <value>تشفير AES-256 غير محدود ومشاركة المفاتيح</value>
   </data>
@@ -27395,6 +27758,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="SecurityStatusUnlimitedDescription" xml:space="preserve">
     <value>لا توجد حدود يومية — بالإضافة إلى إمكانية مشاركة المفاتيح مع المستلمين الموثوقين.</value>
+  </data>
+  <data name="SecurityStatusUnlimitedDescription1" xml:space="preserve">
+    <value>لا توجد حدود يومية، ومشاركة للمفاتيح، وإعادة تسمية مجهولة الهوية.</value>
   </data>
   <data name="SecurityUpdateAvailableWarning" xml:space="preserve">
     <value>يحتاج برنامجك إلى التحديث بسبب مشكلة أمنية.</value>
@@ -27506,6 +27872,9 @@ SE-114 29 ستوكهولم
   <data name="ShareAsLinkActionText" xml:space="preserve">
     <value>مشاركة كرابط</value>
   </data>
+  <data name="SharedByMeText" xml:space="preserve">
+    <value>تمت مشاركته بواسطتي</value>
+  </data>
   <data name="SharedKeyUserListTitle" xml:space="preserve">
     <value>جميع المستخدمين الذين لديهم حق الوصول في الملفات المحددة ({0})</value>
   </data>
@@ -27588,6 +27957,9 @@ SE-114 29 ستوكهولم
     <value>سهولة الوصول إلى كلمات المرور</value>
     <comment>Title of "Share With Others" slide on Onboarding screen in mobile application.</comment>
   </data>
+  <data name="SharingCollaborationTitle" xml:space="preserve">
+    <value>المشاركة والتعاون</value>
+  </data>
   <data name="SharingEncryptedText" xml:space="preserve">
     <value>مشاركة نص أكس كريبت المشفّر</value>
   </data>
@@ -27604,12 +27976,30 @@ SE-114 29 ستوكهولم
   <data name="ShowPasswordOptionPrompt" xml:space="preserve">
     <value>عرض كلمة المرور</value>
   </data>
+  <data name="ShowUpgradeAutoEncryptOpenedPopup" xml:space="preserve">
+    <value>التشفير التلقائي للملفات المفتوحة أو المعلقة.</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPendingPopup" xml:space="preserve">
+    <value>تسجيل الخروج تلقائيًا وتأمين ملفاتك المفتوحة أو المعلقة بعد فترة من عدم النشاط.</value>
+  </data>
+  <data name="ShowUpgradeAutoSignoutPopup" xml:space="preserve">
+    <value>حماية تسجيل الخروج التلقائي</value>
+  </data>
+  <data name="ShowUpgradeEnhancedSecurityPopup" xml:space="preserve">
+    <value>فتح ميزات الأمان المحسّنة.</value>
+  </data>
+  <data name="ShowUpgradeProtectSensitivePopup" xml:space="preserve">
+    <value>حماية البيانات الحساسة.</value>
+  </data>
   <data name="SignedInUserInfo" xml:space="preserve">
     <value>تم تسجيل الدخول باستخدام &lt;b&gt; {0} &lt;/b&gt;</value>
   </data>
   <data name="SignInBeforePremiumMessage" xml:space="preserve">
     <value>قم بتسجيل الدخول أولاً!</value>
     <comment>A short message used in the sign in dialog, to explain that a user should sign in first and then purchase or try premium as appropriate.</comment>
+  </data>
+  <data name="SigningYouInText" xml:space="preserve">
+    <value>جارٍ تسجيل دخولك…</value>
   </data>
   <data name="SignInLinkLabel" xml:space="preserve">
     <value>تسجيل الدخول </value>
@@ -27911,6 +28301,9 @@ SE-114 29 ستوكهولم
   <data name="SubscriptionDeletedText" xml:space="preserve">
     <value>تم الحذف</value>
   </data>
+  <data name="SubscriptionDetailsSubTitle" xml:space="preserve">
+    <value>عرض خطتك وتفاصيل الفوترة والتجديد</value>
+  </data>
   <data name="SubscriptionDetailsTitle" xml:space="preserve">
     <value>تفاصيل الاشتراك</value>
   </data>
@@ -28036,6 +28429,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="SwedishLanguageToolStripMenuItemText" xml:space="preserve">
     <value>Svenska (السويدية)</value>
+  </data>
+  <data name="SwitchToDarkActionDescription" xml:space="preserve">
+    <value>أسهل على العينين في الإضاءة المنخفضة — يُطبَّق فورًا على مستوى التطبيق بالكامل</value>
   </data>
   <data name="SwitchToDarkActionText" xml:space="preserve">
     <value>التبديل إلى الوضع الداكن</value>
@@ -28390,6 +28786,12 @@ SE-114 29 ستوكهولم
   <data name="TextCheckEmailAndSpam" xml:space="preserve">
     <value>تحقق من البريد الإلكتروني والبريد العشوائي!</value>
   </data>
+  <data name="TextEncryptionAccessEveryPopup" xml:space="preserve">
+    <value>الوصول إلى كل صفحة داخل التطبيق.</value>
+  </data>
+  <data name="TextEncryptionAdvancedProtectionFeatures" xml:space="preserve">
+    <value>شفِّر نصوصك بأمان باستخدام ميزات حماية متقدمة.</value>
+  </data>
   <data name="TextEncryptionEmailBodyText" xml:space="preserve">
     <value>هذا النص مُشفَّر — استخدم أكس كريبت لعرض الرسالة الأصلية.</value>
   </data>
@@ -28547,6 +28949,9 @@ SE-114 29 ستوكهولم
   <data name="TextEncryptionLinkLabel" xml:space="preserve">
     <value>تشفير النصوص.</value>
   </data>
+  <data name="TextEncryptionPaidPlanPopup" xml:space="preserve">
+    <value>هذه الصفحة جزء من خطة مدفوعة. قم بالترقية لفتحها.</value>
+  </data>
   <data name="TextEncryptionSideMenuHead1" xml:space="preserve">
     <value>تشفير النص.</value>
   </data>
@@ -28558,6 +28963,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="TextEncryptionText" xml:space="preserve">
     <value>حوّل نصك السري العادي إلى صيغة آمنة وغير قابلة للقراءة.</value>
+  </data>
+  <data name="TextEncryptionWithoutLimitsPopup" xml:space="preserve">
+    <value>فتح الميزات المدفوعة بلا حدود</value>
   </data>
   <data name="TextPreferenceCritical" xml:space="preserve">
     <value>حرجة - احصل على إخطارات بتحديثات اكسكربت الهامة</value>
@@ -28605,6 +29013,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="ToolTipPremiumNeededForSecrets" xml:space="preserve">
     <value>مطلوب خطة اشتراك مدفوعة لإدارة كلمة المرور. انقر للترقية الآن!</value>
+  </data>
+  <data name="TopBarPrivacySecurity" xml:space="preserve">
+    <value>الخصوصية والأمان</value>
   </data>
   <data name="TotalLicencesText" xml:space="preserve">
     <value>التراخيص (مستعملة/إجمالية)</value>
@@ -28656,6 +29067,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="TryAxcryptfree" xml:space="preserve">
     <value>جرب اكسكربت مجانا</value>
+  </data>
+  <data name="TryBrokenFileDescription" xml:space="preserve">
+    <value>محاولة استعادة وفتح الملفات المشفّرة التالفة أو التي تعرضت لفساد جزئي.</value>
   </data>
   <data name="TryBrokenFileToolStripMenuItemText" xml:space="preserve">
     <value>جرب الملف المكسور</value>
@@ -28891,6 +29305,12 @@ SE-114 29 ستوكهولم
   <data name="UnlockAdvancedFileSecurityPopup" xml:space="preserve">
     <value>إلغاء قفل الأمان المتقدم للملفات</value>
   </data>
+  <data name="UnlockAdvancedFolderPopup" xml:space="preserve">
+    <value>فتح حماية المجلدات المتقدمة</value>
+  </data>
+  <data name="UnlockAdvancedPrivacyPopup" xml:space="preserve">
+    <value>إلغاء قفل ميزات الخصوصية المتقدمة</value>
+  </data>
   <data name="UnlockFeatures" xml:space="preserve">
     <value>افتح &lt;span&gt;ميزاتنا&lt;/span&gt; &lt;span&gt;الرائعة!&lt;/span&gt; قم بالترقية إلى &lt;span&gt;البريميوم&lt;/span&gt; أو &lt;b&gt;الأعمال&lt;/b&gt;</value>
   </data>
@@ -28927,6 +29347,9 @@ SE-114 29 ستوكهولم
   <data name="UpdatePaymentDetailsText" xml:space="preserve">
     <value>تحديث تفاصيل الدفع</value>
   </data>
+  <data name="UpdateRequiredText" xml:space="preserve">
+    <value>يلزم التحديث</value>
+  </data>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>{0} تم التحديث بنجاح.</value>
   </data>
@@ -28941,6 +29364,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="UpgradeFeatureText" xml:space="preserve">
     <value>قم بالترقية للوصول إلى هذه الميزة!</value>
+  </data>
+  <data name="UpgradeLegacyFilesDescription" xml:space="preserve">
+    <value>فحص وإعادة تشفير الملفات القديمة بتشفير AES-128 إلى معيار AES-256 الأقوى بنقرة واحدة.</value>
   </data>
   <data name="UpgradeLegacyFilesMenuItemText" xml:space="preserve">
     <value>قم بترقية الملفات إلى AES-256</value>
@@ -28969,6 +29395,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="UpgradeToUnlockFullEncryptionFeaturesText" xml:space="preserve">
     <value>قم بالترقية لفتح جميع ميزات التشفير الكاملة!</value>
+  </data>
+  <data name="UpgradeToUnlockText" xml:space="preserve">
+    <value>قم بالترقية لفتح</value>
   </data>
   <data name="UpgradeVersionDialogText" xml:space="preserve">
     <value>هل تريد تنزيله الآن أم عند التشغيل التالي؟</value>
@@ -29134,6 +29563,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="UserActivitiesText" xml:space="preserve">
     <value>أنشطة المستخدم</value>
+  </data>
+  <data name="UserActivityDescription" xml:space="preserve">
+    <value>عرض جميع إجراءات الملفات وسجلّ النشاط.</value>
   </data>
   <data name="UserActivityTitle" xml:space="preserve">
     <value>نشاط المستخدم</value>
@@ -29471,8 +29903,17 @@ SE-114 29 ستوكهولم
   <data name="VaultSettingsTitle" xml:space="preserve">
     <value>إعدادات الخزنة</value>
   </data>
+  <data name="VaultStatusAutoEncryption" xml:space="preserve">
+    <value>التشفير التلقائي قيد التشغيل</value>
+  </data>
   <data name="VaultStatusPaidText" xml:space="preserve">
     <value>"الخزنة الآمنة هي ميزة مدفوعة"</value>
+  </data>
+  <data name="VaultStatusText" xml:space="preserve">
+    <value>حالة المدفن</value>
+  </data>
+  <data name="VaultStatusUnlockUnlimited" xml:space="preserve">
+    <value>افتح سعة تخزين محمية غير محدودة والتشفير التلقائي.</value>
   </data>
   <data name="VaultText" xml:space="preserve">
     <value>الخزنة</value>
@@ -29511,11 +29952,29 @@ SE-114 29 ستوكهولم
     <value>يرجى التحقق من حسابك الجديد</value>
     <comment>Text displayed on Activation code page in mobile app.</comment>
   </data>
+  <data name="VerifyFileDescription" xml:space="preserve">
+    <value>التحقق مما إذا كان الملف مشفّرًا ومصادَقًا بواسطة أكس كريبت. </value>
+  </data>
   <data name="VerifyFileToolStripMenuItem" xml:space="preserve">
     <value>التحقق من الملف والتحقق منه</value>
   </data>
+  <data name="VerifyMFABrandSubTitle" xml:space="preserve">
+    <value>قم بتأمين الملفات وكلمات المرور والرسائل الخاصة باستخدام تشفير قوي — قبل مشاركتها أو مزامنتها أو تخزينها في السحابة.</value>
+  </data>
+  <data name="VerifyMFAOffline" xml:space="preserve">
+    <value>يعمل عبر الإنترنت وبدون اتصال بالإنترنت</value>
+  </data>
+  <data name="VerifyMFASecureCloudStorage" xml:space="preserve">
+    <value>تخزين سحابي آمن ومشاركة بسيطة</value>
+  </data>
   <data name="VerifyMfaText" xml:space="preserve">
     <value>التحقق متعدد العوامل</value>
+  </data>
+  <data name="VerifyMFAWhyAxCryptLabel" xml:space="preserve">
+    <value>تشفير الجهاز باستخدام AES-256</value>
+  </data>
+  <data name="VerifyMFAWorksAcrossDevices" xml:space="preserve">
+    <value>يعمل عبر الأجهزة المختلفة</value>
   </data>
   <data name="VerifyPasswordPrompt" xml:space="preserve">
     <value>اكد كلمة المرور</value>
@@ -29967,6 +30426,9 @@ SE-114 29 ستوكهولم
   </data>
   <data name="YourEmailText" xml:space="preserve">
     <value>بريدك الإلكتروني</value>
+  </data>
+  <data name="YourFilesText" xml:space="preserve">
+    <value>ملفاتك.</value>
   </data>
   <data name="YourPasswordText" xml:space="preserve">
     <value>كلمة المرور الخاصة بك:</value>
