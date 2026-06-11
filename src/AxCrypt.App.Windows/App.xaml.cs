@@ -1,6 +1,9 @@
 using AxCrypt.Abstractions;
+using AxCrypt.Api.Model;
+using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.Desktop;
 using AxCrypt.App.Shared.Desktop.Code;
+using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Helpers;
@@ -366,7 +369,7 @@ public partial class App : Application
         switch (e.Verb)
         {
             case CommandVerb.Encrypt:
-                await _fileOperationViewModel.EncryptFiles.ExecuteAsync(e.Arguments);
+                await EncryptFilesWithinFreeLimitAsync(e.Arguments);
                 break;
 
             case CommandVerb.Decrypt:
@@ -420,6 +423,33 @@ public partial class App : Application
         {
             await Task.Delay(100);
         }
+    }
+
+    /// <summary>
+    /// Free-tier gate for the Explorer right-click "Encrypt" action. Mirrors
+    /// the in-app file-picker flow (FileFolderSelection): ask the entitlement
+    /// service how many encryptions remain this month, trim the batch to that
+    /// count, and surface the paid-gate popup when the quota is exhausted.
+    /// Paid tiers pass through untouched (GetRemainingCount short-circuits).
+    /// </summary>
+    private async Task EncryptFilesWithinFreeLimitAsync(IEnumerable<string> files)
+    {
+        int availableCount = await New<UserEntitlementService>().GetRemainingCount(
+            LimitedCapability.StrongerEncryption,
+            New<AccountStatusViewModel>().SubscriptionLevel,
+            files.Count());
+
+        if (availableCount <= 0)
+        {
+            AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
+            AxCServiceProvider.GetService<PaidFeaturegateService>().ShowPaidGate(
+                Texts.RecentFilesUnlimitedEncryption,
+                Texts.RecentFilesFreePlan,
+                new[] { Texts.QuickSecureActionUnlimitedFiles, Texts.RecentFilesBatchEncryption, Texts.RecentFilesAES256Always });
+            return;
+        }
+
+        await _fileOperationViewModel.EncryptFiles.ExecuteAsync(files.Take(availableCount).ToList());
     }
 
     private async Task PremiumFeatureActionAsync(LicenseCapability requiredCapability, Func<Task> realHandler)
