@@ -12,6 +12,7 @@ using Microsoft.Graph.Drives.Item.Items.Item.CreateLink;
 using Microsoft.Graph.Drives.Item.Items.Item.CreateUploadSession;
 using Microsoft.Graph.Drives.Item.Items.Item.Invite;
 using Microsoft.Graph.Drives.Item.Items.Item.SearchWithQ;
+using Microsoft.Graph.Drives.Item.Root;
 using Microsoft.Graph.Models;
 using Microsoft.Graph.Models.ODataErrors;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -552,11 +553,12 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
                 // Resolve the destination folder.
                 string normalizedPath = actualParentPath?.Trim('/') ?? "";
-                DriveItem? destinationFolder = string.IsNullOrEmpty(normalizedPath) ||
-                    normalizedPath.Equals("root", StringComparison.OrdinalIgnoreCase) ||
-                    normalizedPath.StartsWith("drives/", StringComparison.OrdinalIgnoreCase)
-                    ? await _graphClient.Drives[_userDriveId].Root.GetAsync()
-                    : await _graphClient.Drives[_userDriveId].Root.ItemWithPath(actualParentPath).GetAsync();
+                
+                RootRequestBuilder driveRoot = _graphClient.Drives[_userDriveId].Root;
+
+                DriveItem? destinationFolder = ResolveDestinationPath(normalizedPath) is { } resolvedPath
+                ? await driveRoot.ItemWithPath(resolvedPath).GetAsync()
+                : await driveRoot.GetAsync();
 
                 DriveItem? tempFolder = await _graphClient.Drives[_userDriveId].Root
                     .ItemWithPath(cloudFileItem.ParentPath).GetAsync();
@@ -654,6 +656,22 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
         #endregion
 
         #region Helpers
+
+        private static string? ResolveDestinationPath(string? normalizedPath)
+        {
+            if (string.IsNullOrEmpty(normalizedPath) ||
+                normalizedPath.Equals("root", StringComparison.OrdinalIgnoreCase))
+                return null;
+
+            if (normalizedPath.StartsWith("drives/", StringComparison.OrdinalIgnoreCase))
+            {
+                int rootIndex = normalizedPath.IndexOf("root:/", StringComparison.OrdinalIgnoreCase);
+                if (rootIndex >= 0)
+                    normalizedPath = normalizedPath[(rootIndex + "root:/".Length)..];
+            }
+
+            return normalizedPath;
+        }
 
         public async Task<bool> MoveFile(string fileId, string folderId)
         {
