@@ -663,9 +663,12 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
             if (normalizedPath.StartsWith("drives/", StringComparison.OrdinalIgnoreCase))
             {
-                int rootIndex = normalizedPath.IndexOf("root:/", StringComparison.OrdinalIgnoreCase);
+                int rootIndex = normalizedPath.IndexOf("root:", StringComparison.OrdinalIgnoreCase);
                 if (rootIndex >= 0)
-                    normalizedPath = normalizedPath[(rootIndex + "root:/".Length)..];
+                {
+                    normalizedPath = normalizedPath[(rootIndex + "root:".Length)..].TrimStart('/');
+                    return string.IsNullOrEmpty(normalizedPath) ? null : normalizedPath;
+                }
             }
 
             return normalizedPath;
