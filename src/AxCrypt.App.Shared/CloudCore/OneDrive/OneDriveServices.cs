@@ -579,8 +579,6 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
                     await _graphClient.Drives[_userDriveId].Items[tempFolder.Id].DeleteAsync(cancellationToken: ct);
                     cloudFileItem.FileID = newFileId;
 
-                    // Refresh so the UI reflects the updated file immediately.
-                    await LoadDriveFilesAsync();
                     return true;
                 }
                 catch (Exception)

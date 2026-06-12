@@ -502,8 +502,6 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
                         WipeLocalFile(originalFilePath);
                 }
 
-                // Refresh the file list so the deletion is reflected immediately.
-                await LoadDriveFilesAsync();
                 return true;
             }
             catch (Exception)
@@ -571,8 +569,6 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
                     DeleteResult deleteResult = await _dropboxclient.Files.DeleteV2Async(new DeleteArg(tempFolder));
                     cloudFileItem.FileID = newFileId;
 
-                    // Refresh so the UI reflects the updated file immediately.
-                    await LoadDriveFilesAsync();
                     return deleteResult != null;
                 }
                 catch (Exception)

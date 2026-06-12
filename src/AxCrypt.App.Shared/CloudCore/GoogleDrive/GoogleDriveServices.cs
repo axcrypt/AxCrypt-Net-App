@@ -547,8 +547,6 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
 
                 cloudFileItem.FileID = newFileId;
 
-                // Refresh the file list so the UI reflects the change immediately.
-                await LoadDriveFilesAsync();
                 return true;
             }
             catch (Exception)
@@ -697,8 +695,6 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
                     }
                 }
 
-                // Refresh the file list so the deletion is reflected immediately.
-                await LoadDriveFilesAsync();
                 return true;
             }
             catch (Exception)
