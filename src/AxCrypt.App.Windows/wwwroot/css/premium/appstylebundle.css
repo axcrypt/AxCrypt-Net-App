@@ -16620,12 +16620,12 @@ html[data-theme=dark] .smv-card {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 html[data-theme=dark] .smv-card:hover {
-  border-color: rgba(72, 119, 44, 0.55);
+  border-color: rgba(127, 204, 92, 0.45);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
 }
 html[data-theme=dark] .smv-avatar {
-  background: rgba(72, 119, 44, 0.22);
-  color: rgb(132.4570552147, 195.7484662577, 94.7515337423);
+  background: rgba(127, 204, 92, 0.2);
+  color: #7FCC5C;
 }
 html[data-theme=dark] .smv-label {
   color: #b5bcc7;
@@ -16637,13 +16637,13 @@ html[data-theme=dark] .smv-email--to {
   color: #cbd5e1;
 }
 html[data-theme=dark] .smv-more {
-  background: rgba(72, 119, 44, 0.22);
-  color: rgb(132.4570552147, 195.7484662577, 94.7515337423);
+  background: rgba(127, 204, 92, 0.18);
+  color: #7FCC5C;
 }
 html[data-theme=dark] .smv-pill {
-  background: rgba(72, 119, 44, 0.22);
-  border-color: rgba(72, 119, 44, 0.45);
-  color: rgb(132.4570552147, 195.7484662577, 94.7515337423);
+  background: rgba(127, 204, 92, 0.18);
+  border-color: rgba(127, 204, 92, 0.4);
+  color: #B8E89A;
 }
 html[data-theme=dark] .smv-pill--once {
   background: rgba(245, 158, 11, 0.18);
@@ -16661,9 +16661,9 @@ html[data-theme=dark] .smv-icon-btn:hover {
   color: #e8ecf1;
 }
 html[data-theme=dark] .smv-icon-btn--primary:hover {
-  background: rgba(72, 119, 44, 0.22);
-  border-color: rgba(72, 119, 44, 0.55);
-  color: rgb(146.6932515337, 202.6319018405, 113.3680981595);
+  background: rgba(127, 204, 92, 0.2);
+  border-color: rgba(127, 204, 92, 0.5);
+  color: #9BE076;
 }
 html[data-theme=dark] .smv-icon-btn--danger:hover {
   background: rgba(248, 113, 113, 0.18);
@@ -17099,19 +17099,21 @@ html[data-theme=dark] .smv-body--loading {
 
 /* Dark theme */
 html[data-theme=dark] .page-content-body-section .action-tabs {
-  background: #1c2530;
+  background: #1a2232;
 }
 html[data-theme=dark] .page-content-body-section .action-tabs .act-tab a {
   color: #b5bcc7;
 }
 html[data-theme=dark] .page-content-body-section .action-tabs .act-tab.active {
-  background: #232e3b;
+  background: #48772C;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 html[data-theme=dark] .page-content-body-section .action-tabs .act-tab.active a {
-  color: rgb(146.6932515337, 202.6319018405, 113.3680981595);
+  font-weight: 700;
+  color: #fff;
 }
-html[data-theme=dark] .page-content-body-section .action-tabs .act-tab:hover {
-  background: rgba(255, 255, 255, 0.04);
+html[data-theme=dark] .page-content-body-section .action-tabs .act-tab:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.06);
 }
 html[data-theme=dark] .entr-txt-box,
 html[data-theme=dark] .encrypt-txt-box {
