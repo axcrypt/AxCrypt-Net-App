@@ -1,3 +1,10 @@
 @page "/upgradePage"
+@* Legacy route — kept so any deep-link or bookmark still works *@
+@inject NavigationManager Navigation
 
-<AxCrypt.App.Shared.Desktop.Components.Pages.Main.UpgradePage />
+@code {
+    protected override void OnInitialized()
+    {
+        Navigation.NavigateTo("/planAndPay", replace: true);
+    }
+}

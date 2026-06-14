@@ -1,7 +1,8 @@
 ﻿using AxCrypt.App.Shared.Models;
-using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.ViewModels;
+using AxCrypt.Core.UI.ViewModel;
 
 namespace AxCrypt.App.Shared.Helpers;
 
@@ -56,7 +57,7 @@ public static class AxCServiceProviderExtension
             return GetService<ErrorReportService>();
         }
     }
-    
+
     public static LogViewModel? LogViewModel
     {
         get
@@ -86,6 +87,14 @@ public static class AxCServiceProviderExtension
         get
         {
             return GetService<AccountSetupViewModel>();
+        }
+    }
+
+    public static CreateNewAccountViewModel? CreateNewAccountViewModel
+    {
+        get
+        {
+            return GetService<CreateNewAccountViewModel>();
         }
     }
 }

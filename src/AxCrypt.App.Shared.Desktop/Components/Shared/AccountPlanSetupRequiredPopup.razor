@@ -3,6 +3,7 @@
 
 @inject AccountSetupViewModel accountSetupModel
 @inject UpgradeSubscriptionViewModel upgradeModel
+@inject NavigationManager Navigation
 
 <style>
     #account-setup-required.modalDialog {
@@ -202,14 +203,14 @@
 
     public void OpenBusinessPage()
     {
-        upgradeModel.OpenBusinessPage();
         accountSetupModel.PopupResult = Utility.DialogResult.Cancel;
+        Navigation.NavigateTo("/planAndPay?plan=business");
     }
 
     public void OpenPremiumPage()
     {
-        upgradeModel.OpenPremiumPage();
         accountSetupModel.PopupResult = Utility.DialogResult.Cancel;
+        Navigation.NavigateTo("/planAndPay");
     }
 
     public async Task ActivateViewerPlanAsync()

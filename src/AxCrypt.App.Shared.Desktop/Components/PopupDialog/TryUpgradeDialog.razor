@@ -3,6 +3,7 @@
 @using AxCrypt.Content
 
 @inject UpgradeSubscriptionViewModel upgradeModel
+@inject NavigationManager Navigation
 
 @if (IsVisible)
 {
@@ -67,7 +68,7 @@
                         <span>@Texts.TryUpgradePlanFeatureText5</span>
                     </div>
                     <div class="tug-feat tug-feat--more">
-                        <button type="button" class="tug-more-link" @onclick="upgradeModel.OpenPricingPage">
+                        <button type="button" class="tug-more-link" @onclick='() => { ClosePopup(); Navigation.NavigateTo("/planAndPay"); }'>
                             @Texts.AndMoreText →
                         </button>
                     </div>
@@ -117,14 +118,14 @@
 
     public void OpenBusinessPage()
     {
-        upgradeModel.OpenBusinessPage();
         ClosePopup();
+        Navigation.NavigateTo("/planAndPay?plan=business");
     }
 
     public void OpenPremiumPage()
     {
-        upgradeModel.OpenPremiumPage();
         ClosePopup();
+        Navigation.NavigateTo("/planAndPay");
     }
 
     private void UpdateUpgradeDialogState(bool canShowUpgradeDialog)

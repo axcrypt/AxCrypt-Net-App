@@ -263,9 +263,9 @@ namespace AxCrypt.Core.Service
             return await _apiClient.PostFeedbackAsync(subject, message).Free();
         }
 
-        public async Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null)
+        public async Task SignupAsync(EmailAddress email, CultureInfo culture, string signUpFrom, string? utm = null, string? platForm = null)
         {
-            await _apiClient.PostAllAccountsUserAsync(email.Address, culture, utm).Free();
+            await _apiClient.PostAllAccountsUserAsync(email.Address, culture, signUpFrom, utm, platForm).Free();
         }
 
         public async Task PasswordResetAsync(string verificationCode)
@@ -394,6 +394,36 @@ namespace AxCrypt.Core.Service
             }
 
             await _apiClient.PostSetMyAccountViewerPlanAsync().Free();
+        }
+
+        public async Task<IEnumerable<PricingInfoApiModel>> GetPurchasePricingAsync(string signUpFrom, string discountCode, string ip, int members, string country)
+        {
+            if (string.IsNullOrEmpty(_apiClient.Identity.User))
+            {
+                throw new InvalidOperationException("The account service requires a user.");
+            }
+
+            return await _apiClient.GetPurchasePricingAsync(signUpFrom, discountCode, ip, members, country).Free();
+        }
+
+        public async Task<Uri> GetStripeCheckoutSessionUrlAsync(PurchaseInfoApiModel purchaseInfoApiModel)
+        {
+            if (string.IsNullOrEmpty(_apiClient.Identity.User))
+            {
+                throw new InvalidOperationException("The account service requires a user.");
+            }
+
+            return await _apiClient.GetCheckoutSessionUrlAsync(purchaseInfoApiModel).Free();
+        }
+
+        public async Task<string> GetPayPalCheckoutSessionUrlAsync(int subsMonths, string currency, string ip)
+        {
+            if (string.IsNullOrEmpty(_apiClient.Identity.User))
+            {
+                throw new InvalidOperationException("The account service requires a user.");
+            }
+
+            return await _apiClient.GetPayPalCheckoutSessionUrlAsync(subsMonths, currency, ip).Free();
         }
     }
 }

@@ -5,6 +5,7 @@ using AxCrypt.Core;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.UI;
+using Microsoft.Maui.Devices;
 using System;
 using System.Globalization;
 using System.Threading;
@@ -28,9 +29,22 @@ public class OnlineSignUpService
     /// <summary>Server-issued token for the account-web hand-off.</summary>
     public string VerificationToken { get; private set; } = string.Empty;
 
+    // ── Business info captured in Step 1 ──────────────────────────────
+    public string OrganizationName { get; private set; } = string.Empty;
+    public string Country { get; private set; } = string.Empty;
+    public string VatNumber { get; private set; } = string.Empty;
+
+    public void SetBusinessInfo(string orgName, string country, string vat)
+    {
+        OrganizationName = orgName ?? string.Empty;
+        Country = country ?? string.Empty;
+        VatNumber = vat ?? string.Empty;
+    }
+
     public DateTime? CodeSentAtUtc { get; private set; }
     public int ResendCooldownSeconds { get; private set; } = 30;
     public bool IsBusy { get; private set; }
+    public bool EFF { get; set; }
     public string? ErrorMessage { get; private set; }
 
     /// <summary>Raised on any state change — UI calls StateHasChanged.</summary>
@@ -56,6 +70,9 @@ public class OnlineSignUpService
         Code = string.Empty;
         Password = string.Empty;
         VerificationToken = string.Empty;
+        OrganizationName = string.Empty;
+        Country = string.Empty;
+        VatNumber = string.Empty;
         CodeSentAtUtc = null;
         IsBusy = false;
         ErrorMessage = null;
@@ -83,8 +100,11 @@ public class OnlineSignUpService
 
         try
         {
+            // Private signup → Free so PlanAndPay shows both Free + Premium cards
+            SignUpFrom signUpFrom = isBusiness == null ? SignUpFrom.Premium : isBusiness.Value ? SignUpFrom.Business : SignUpFrom.Premium;
+            string platForm = GetPlatForm();
 
-            await New<LogOnIdentity, IAccountService>(New<KnownIdentities>().DefaultEncryptionIdentity).SignupAsync(EmailAddress.Parse(email!), new CultureInfo(Resolve.UserSettings.CultureName), "");
+            await New<LogOnIdentity, IAccountService>(New<KnownIdentities>().DefaultEncryptionIdentity).SignupAsync(EmailAddress.Parse(email!), new CultureInfo(Resolve.UserSettings.CultureName), signUpFrom.ToString(), "", platForm);
 
             await Task.Delay(450); // stubbed network
 
@@ -92,7 +112,7 @@ public class OnlineSignUpService
             Step = SignUpStep.Code;
             if (isBusiness != null)
             {
-                SignUpFrom signUpFrom = isBusiness.Value ? SignUpFrom.Business : SignUpFrom.Premium;
+                //SignUpFrom signUpFrom = isBusiness.Value ? SignUpFrom.Business : SignUpFrom.Premium;
                 AxCServiceProvider.GetService<UserService>().InitializeData(SubscriptionLevel.Unknown, email!, signUpFrom);
             }
             return true;
@@ -107,6 +127,21 @@ public class OnlineSignUpService
             IsBusy = false;
             Notify();
         }
+    }
+
+    private static string GetPlatForm()
+    {
+        if (DeviceInfo.Platform == DevicePlatform.WinUI)
+        {
+            return "Windows";
+        }
+
+        if (DeviceInfo.Platform == DevicePlatform.MacCatalyst || DeviceInfo.Platform == DevicePlatform.macOS)
+        {
+            return "Mac";
+        }
+
+        return "";
     }
 
     /// <summary>Resend if the cooldown has elapsed.</summary>

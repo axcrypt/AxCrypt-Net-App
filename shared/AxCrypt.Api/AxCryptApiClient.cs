@@ -6,6 +6,7 @@ using AxCrypt.Api.Model.MFA;
 using AxCrypt.Common;
 using System.Globalization;
 using System.Net;
+using System.Text.RegularExpressions;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Api
@@ -217,7 +218,7 @@ namespace AxCrypt.Api
             return accountKey;
         }
 
-        public async Task PostAllAccountsUserAsync(string userName, CultureInfo culture, string? utm = null)
+        public async Task PostAllAccountsUserAsync(string userName, CultureInfo culture, string signUpFrom, string? utm = null, string? platForm = null)
         {
             if (userName == null)
             {
@@ -228,7 +229,7 @@ namespace AxCrypt.Api
                 throw new ArgumentNullException(nameof(culture));
             }
 
-            Uri resource = BaseUrl.PathCombine("users/all/accounts/{0}?culture={1}&utm={2}".With(ApiCaller.PathSegmentEncode(userName), culture.Name, utm ?? ""));
+            Uri resource = BaseUrl.PathCombine("usersv2/all/accounts/{0}?culture={1}&utm={2}&signUpFrom={3}&platform={4}".With(ApiCaller.EncodePathParams(userName), culture.Name, utm ?? "", signUpFrom, platForm));
 
             RestResponse restResponse = await Caller.RestAsync(new RestIdentity(), new RestRequest("POST", resource, Timeout)).Free();
             ApiCaller.EnsureStatusOk(restResponse);
@@ -509,6 +510,45 @@ namespace AxCrypt.Api
 
             RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("POST", resource, Timeout));
             ApiCaller.EnsureStatusOk(restResponse);
+        }
+
+        public async Task<IEnumerable<PricingInfoApiModel>> GetPurchasePricingAsync(string signUpFrom, string discountCode, string ip, int members, string country)
+        {
+            Uri resource;
+            if (string.IsNullOrEmpty(country))
+            {
+                resource = BaseUrl.PathCombine("inappsubs/pricing?signUpFrom={0}&discountCode={1}&ip={2}&members={3}".With(signUpFrom, discountCode, ip, members.ToString()));
+            }
+            else
+            {
+                resource = BaseUrl.PathCombine("inappsubs/pricing?signUpFrom={0}&discountCode={1}&ip={2}&members={3}&culture={4}".With(signUpFrom, discountCode, ip, members.ToString(), country));
+            }
+
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("GET", resource, Timeout));
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            return Serializer.Deserialize<IEnumerable<PricingInfoApiModel>>(restResponse.Content);
+        }
+
+        public async Task<Uri> GetCheckoutSessionUrlAsync(PurchaseInfoApiModel purchaseInfoApiModel)
+        {
+            Uri resource = BaseUrl.PathCombine("inappsubs/checkoutsession");
+            RestContent content = new RestContent(Serializer.Serialize(purchaseInfoApiModel));
+
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("PUT", resource, Timeout, content));
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            return Serializer.Deserialize<Uri>(restResponse.Content);
+        }
+
+        public async Task<string> GetPayPalCheckoutSessionUrlAsync(int subsMonths, string currency, string ip)
+        {
+            Uri resource = BaseUrl.PathCombine("inappsubs/paypal/checkoutsession?subsMonths={0}&currency={1}&ip={2}".With(subsMonths.ToString(), currency, ip));
+
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("GET", resource, Timeout));
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            return Serializer.Deserialize<string>(restResponse.Content);
         }
 
         private static IStringSerializer Serializer

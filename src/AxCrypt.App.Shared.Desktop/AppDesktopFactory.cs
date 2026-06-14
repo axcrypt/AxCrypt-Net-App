@@ -54,6 +54,7 @@ public static class AppDesktopFactory
         services.AddSingleton<VerifyAccountDialogViewModel>();
         services.AddSingleton<VerifyPasswordViewModel>();
         services.AddSingleton<ConfirmWipeDialogViewModel>();
+        services.AddSingleton<PlanAndPayViewModel>();
 
         services.AddSingleton<SecuredMessage>();
 
@@ -70,6 +71,7 @@ public static class AppDesktopFactory
         services.AddSingleton<NavPageService>();
         services.AddSingleton<BatchFileOperationService>();
         services.AddSingleton<OnlineSignUpService>();
+        services.AddSingleton<SignUpViewModel>();
 
         // Shared → Desktop bridge for batch toast results.
         services.AddSingleton<IBatchToastBridge, BatchToastBridge>();

@@ -24,7 +24,7 @@
         from cache and are marked stale).
       • Shows a "Stale" indicator when the provider hasn't been able
         to refresh from the API recently.
-      • CTA navigates to /upgradePage where the plan list is
+      • CTA navigates to /planAndPay where the plan list is
         filtered by SignUpFrom.
 *@
 
@@ -53,7 +53,7 @@
                 }
             </span>
             <button class="flb-upgrade"
-                    @onclick='() => navigationManager.NavigateTo("/upgradePage")'>
+                    @onclick='() => navigationManager.NavigateTo("/planAndPay")'>
                 Upgrade
             </button>
         </div>

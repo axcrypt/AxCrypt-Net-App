@@ -50,3 +50,14 @@
     min-height: 0;
     overflow-y: auto;
 }
+
+// ── Plan & Pay: fix scroll chain for non-logged-in route ─────────
+// When user arrives via signup flow they're not logged in, so @Body
+// is wrapped in #body-section. That div must be a flex column so
+// pp-shell (which has overflow-y:auto + flex:1) can actually scroll.
+#body-section {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}

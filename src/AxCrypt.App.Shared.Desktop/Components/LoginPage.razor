@@ -460,52 +460,52 @@
         });
     }
 
-    // private async Task CreateNewAccountLabel_LinkClicked(EventArgs e)
-    // {
-    //     // Was: bounced the user out to the web signup page, which lost the
-    //     // email they had already typed, opened a separate browser session,
-    //     // and made completing first-run feel like two products. The
-    //     // RegisterPage component already does a full in-app account-creation
-    //     // step (email + password + verify) and only needs to be brought to
-    //     // the front. Once the account is created (RegisterViewModel.ButtonOk
-    //     // → CreateAccountAsync → DialogResult.OK) the existing flow takes
-    //     // over and routes paid plans to the web for the payment step.
-    //     //
-    //     // Sequence:
-    //     //   1. Suppress the login form (IsVisible = false) so the IndexPage
-    //     //      else-if ladder falls through to ShowSignUp.
-    //     //   2. Carry the email + password the user might have already typed
-    //     //      into RegisterPage so they don't re-type. Passphrase is
-    //     //      optional — empty string is fine and pre-fills as blank.
-    //     //   3. await RegisterModel.ShowDialog — internal loop spins on
-    //     //      DialogResult, so awaiting here cleans up when the user
-    //     //      finishes / cancels and lets us reset login state.
-    //     string passphrase = LogOnViewModel.LogOnAccountModel?.PasswordText ?? string.Empty;
-    //     AxCrypt.Core.UI.EmailAddress email = AxCrypt.Core.UI.EmailAddress.Empty;
-    //     if (!string.IsNullOrWhiteSpace(LogOnViewModel.LogOnAccountModel?.UserEmail)
-    //         && AxCrypt.Core.UI.EmailAddress.TryParse(LogOnViewModel.LogOnAccountModel!.UserEmail, out AxCrypt.Core.UI.EmailAddress parsed))
-    //     {
-    //         email = parsed;
-    //     }
-
-    //     LogOnViewModel.IsVisible = false;
-    //     await RegisterModel.ShowDialog(passphrase, email);
-
-    //     // RegisterPage returns either via successful sign-up (DialogResult.OK
-    //     // → the LogOn flow takes over and shows the home/upgrade path) or via
-    //     // the user clicking "Already have an account?" (DialogResult.Cancel).
-    //     // For the cancel path, bring the login form back so the user isn't
-    //     // stranded on an empty loader.
-    //     if (RegisterModel.DialogResult == DialogResult.Cancel)
-    //     {
-    //         LogOnViewModel.IsVisible = true;
-    //     }
-    // }
-
-    private void CreateNewAccountLabel_LinkClicked(EventArgs e)
+    private async Task CreateNewAccountLabel_LinkClicked(EventArgs e)
     {
-        BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToSignUpWebPage);
+        // Was: bounced the user out to the web signup page, which lost the
+        // email they had already typed, opened a separate browser session,
+        // and made completing first-run feel like two products. The
+        // RegisterPage component already does a full in-app account-creation
+        // step (email + password + verify) and only needs to be brought to
+        // the front. Once the account is created (RegisterViewModel.ButtonOk
+        // → CreateAccountAsync → DialogResult.OK) the existing flow takes
+        // over and routes paid plans to the web for the payment step.
+        //
+        // Sequence:
+        //   1. Suppress the login form (IsVisible = false) so the IndexPage
+        //      else-if ladder falls through to ShowSignUp.
+        //   2. Carry the email + password the user might have already typed
+        //      into RegisterPage so they don't re-type. Passphrase is
+        //      optional — empty string is fine and pre-fills as blank.
+        //   3. await RegisterModel.ShowDialog — internal loop spins on
+        //      DialogResult, so awaiting here cleans up when the user
+        //      finishes / cancels and lets us reset login state.
+        string passphrase = LogOnViewModel.LogOnAccountModel?.PasswordText ?? string.Empty;
+        AxCrypt.Core.UI.EmailAddress email = AxCrypt.Core.UI.EmailAddress.Empty;
+        if (!string.IsNullOrWhiteSpace(LogOnViewModel.LogOnAccountModel?.UserEmail)
+            && AxCrypt.Core.UI.EmailAddress.TryParse(LogOnViewModel.LogOnAccountModel!.UserEmail, out AxCrypt.Core.UI.EmailAddress parsed))
+        {
+            email = parsed;
+        }
+
+        LogOnViewModel.IsVisible = false;
+        await RegisterModel.ShowDialog(passphrase, email);
+
+        // RegisterPage returns either via successful sign-up (DialogResult.OK
+        // → the LogOn flow takes over and shows the home/upgrade path) or via
+        // the user clicking "Already have an account?" (DialogResult.Cancel).
+        // For the cancel path, bring the login form back so the user isn't
+        // stranded on an empty loader.
+        if (RegisterModel.DialogResult == DialogResult.Cancel)
+        {
+            LogOnViewModel.IsVisible = true;
+        }
     }
+
+    // private void CreateNewAccountLabel_LinkClicked(EventArgs e)
+    // {
+    //     BrowseUtility.RedirectToAccountWebUrl(Texts.LinkToSignUpWebPage);
+    // }
 
     private void ForgetPassword_ButtonClicked(EventArgs e)
     {

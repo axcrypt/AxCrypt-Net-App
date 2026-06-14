@@ -6,7 +6,7 @@
 //    • SignUpFrom == Premium         → "Upgrade to Premium"   (premium brand)
 //    • SignUpFrom == Business        → "Upgrade to Business"  (business brand)
 //
-//  The popup's CTA always navigates to /upgradePage, which then
+//  The popup's CTA always navigates to /planAndPay, which then
 //  shows the appropriate plan grid based on the same SignUpFrom value.
 // ═══════════════════════════════════════════
 
@@ -129,7 +129,7 @@ public class PaidFeaturegateService
 
     /// <summary>
     /// Map the user's SignUpFrom to a popup target tier.
-    /// • None / Free → generic (we'll show the full /upgradePage ladder).
+    /// • None / Free → generic (we'll show the full /planAndPay ladder).
     /// • Premium     → pitch Premium re-activation.
     /// • Business    → pitch Business re-activation.
     /// </summary>

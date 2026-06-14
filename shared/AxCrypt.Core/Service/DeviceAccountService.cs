@@ -315,20 +315,20 @@ namespace AxCrypt.Core.Service
             await _localService.SaveAsync(keyPairs).Free();
         }
 
-        public async Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null)
+        public async Task SignupAsync(EmailAddress email, CultureInfo culture, string signUpFrom, string? utm = null, string? platForm = null)
         {
             if (New<AxCryptOnlineState>().IsOnline)
             {
                 try
                 {
-                    await _remoteService.SignupAsync(email, culture, utm).Free();
+                    await _remoteService.SignupAsync(email, culture, signUpFrom, utm, platForm).Free();
                 }
                 catch (ApiException aex)
                 {
                     await aex.HandleApiExceptionAsync();
                 }
             }
-            await _localService.SignupAsync(email, culture, utm).Free();
+            await _localService.SignupAsync(email, culture, signUpFrom, utm, platForm).Free();
         }
 
         public async Task<AccountStatus> StatusAsync(EmailAddress email)
@@ -514,6 +514,57 @@ namespace AxCrypt.Core.Service
             }
 
             await _localService.SetMyAccountViewerPlanAsync().Free();
+        }
+
+        public async Task<IEnumerable<PricingInfoApiModel>> GetPurchasePricingAsync(string signUpFrom, string discountCode, string ip, int members, string country)
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                try
+                {
+                    return await _remoteService.GetPurchasePricingAsync(signUpFrom, discountCode, ip, members, country).Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                }
+            }
+
+            return await _localService.GetPurchasePricingAsync(signUpFrom, discountCode, ip, members, country).Free();
+        }
+
+        public async Task<Uri> GetStripeCheckoutSessionUrlAsync(PurchaseInfoApiModel purchaseInfoApiModel)
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                try
+                {
+                    return await _remoteService.GetStripeCheckoutSessionUrlAsync(purchaseInfoApiModel).Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                }
+            }
+
+            return await _localService.GetStripeCheckoutSessionUrlAsync(purchaseInfoApiModel).Free();
+        }
+
+        public async Task<string> GetPayPalCheckoutSessionUrlAsync(int subsMonths, string currency, string ip)
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                try
+                {
+                    return await _remoteService.GetPayPalCheckoutSessionUrlAsync(subsMonths, currency, ip).Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                }
+            }
+
+            return await _localService.GetPayPalCheckoutSessionUrlAsync(subsMonths, currency, ip).Free();
         }
     }
 }

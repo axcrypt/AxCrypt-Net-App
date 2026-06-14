@@ -17,7 +17,7 @@
       pgm-tier--premium   → Premium re-activation → green
       pgm-tier--business  → Business re-activation → dark / SOC color
 
-    CTA always navigates to /upgradePage; that page's plan grid then
+    CTA always navigates to /planAndPay; that page's plan grid then
     filters itself by the same SignUpFrom value, so the funnel ends at
     one consistent destination.
 
@@ -86,6 +86,6 @@
     private void OpenUpgradePage()
     {
         popupService.ClosePaidGate();
-        navigationManager.NavigateTo("/upgradePage");
+        navigationManager.NavigateTo("/planAndPay");
     }
 }

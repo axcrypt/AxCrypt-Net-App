@@ -106,7 +106,7 @@ namespace AxCrypt.Core.Service
             return _completedTask;
         }
 
-        public Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null)
+        public Task SignupAsync(EmailAddress email, CultureInfo culture, string signUpFrom, string? utm = null, string? platForm = null)
         {
             return _completedTask;
         }
@@ -184,6 +184,21 @@ namespace AxCrypt.Core.Service
         public Task SetMyAccountViewerPlanAsync()
         {
             return _completedTask;
+        }
+
+        public Task<IEnumerable<PricingInfoApiModel>> GetPurchasePricingAsync(string signUpFrom, string discountCode, string ip, int members, string country)
+        {
+            return Task.FromResult((IEnumerable<PricingInfoApiModel>)null);
+        }
+
+        public Task<Uri> GetStripeCheckoutSessionUrlAsync(PurchaseInfoApiModel purchaseInfoApiModel)
+        {
+            return Task.FromResult(new Uri(""));
+        }
+
+        public Task<string> GetPayPalCheckoutSessionUrlAsync(int subsMonths, string currency, string ip)
+        {
+            return Task.FromResult((""));
         }
     }
 }

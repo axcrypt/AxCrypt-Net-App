@@ -144,7 +144,7 @@ namespace AxCrypt.Core.Service
         /// in an email to the provided email address in Identity.
         /// </summary>
         /// <returns></returns>
-        Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null);
+        Task SignupAsync(EmailAddress email, CultureInfo culture, string signUpFrom, string? utm = null, string? platForm = null);
 
         /// <summary>
         /// Resets the password for the account.
@@ -222,5 +222,11 @@ namespace AxCrypt.Core.Service
         Task<bool> UpdateRememberMeOnMFAInfoAsync(MultiFactorAuthApiModel multiFactorAuthApi);
 
         Task SetMyAccountViewerPlanAsync();
+
+        Task<IEnumerable<PricingInfoApiModel>> GetPurchasePricingAsync(string signUpFrom, string discountCode, string ip, int members, string country);
+
+        Task<Uri> GetStripeCheckoutSessionUrlAsync(PurchaseInfoApiModel purchaseInfoApiModel);
+
+        Task<string> GetPayPalCheckoutSessionUrlAsync(int subsMonths, string currency, string ip);
     }
 }

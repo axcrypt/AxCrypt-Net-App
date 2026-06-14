@@ -738,6 +738,13 @@ html[data-theme=dark] .pm-plan-badge {
   overflow-y: auto;
 }
 
+#body-section {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .topbar {
   display: grid;
   grid-template-areas: "pagetitle toptools" "pagesubtitle pagesubtitle";

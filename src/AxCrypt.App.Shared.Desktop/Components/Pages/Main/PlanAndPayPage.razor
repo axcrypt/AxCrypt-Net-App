@@ -1,420 +1,828 @@
 @using AxCrypt.App.Entitlement.Contracts
-@using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.Desktop.Models
+@using AxCrypt.App.Shared.Desktop.ViewModels
+@using AxCrypt.App.Shared.Desktop.Components.Shared
 @using AxCrypt.Content
 @using static AxCrypt.Abstractions.TypeResolve
 
 @inject NavigationManager Navigation
-@inject UserService userService
+@inject PlanAndPayViewModel ViewModel
+@inject IJSRuntime JSRuntime
+
+@implements IDisposable
 
 <div class="pp-shell">
 
-    @* ── Plan switcher (Free / None users can toggle Premium ↔ Business) ── *@
-    @if (IsFreeUser)
+    @* ── Page header ── *@
+    <div class="pp-page-header">
+        <div class="pp-step-chip">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <polyline points="9 11 12 14 22 4" />
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+            </svg>
+            @ViewModel.StepChipText
+        </div>
+        <h1 class="pp-page-title">@ViewModel.PageTitle</h1>
+        <p class="pp-page-sub">14-day free trial on paid plans &mdash; no card charged today.</p>
+    </div>
+
+    @* ── Account type toggle — only when no signup type was pre-selected ── *@
+    @if (ViewModel.Origin == SignUpFrom.None)
     {
-        <div class="pp-plan-tabs" role="tablist" aria-label="Select plan">
-            <button class="pp-tab @(!_showBusiness ? "pp-tab--active pp-tab--prem" : "")"
-                    role="tab" aria-selected="@(!_showBusiness)"
-                    @onclick="() => _showBusiness = false">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+        <div class="pp-acct-toggle">
+            <button type="button" class="pp-acct-btn @(!ViewModel.ShowingBusiness ? "pp-acct-btn--on" : "")"
+                    @onclick="ViewModel.ShowPlanComparison">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
                 </svg>
-                <span class="pp-tab-name">Premium</span>
-                <span class="pp-tab-sub">For individuals</span>
+                Private
             </button>
-            <button class="pp-tab @(_showBusiness ? "pp-tab--active pp-tab--biz" : "")"
-                    role="tab" aria-selected="@_showBusiness"
-                    @onclick="() => _showBusiness = true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+            <button type="button" class="pp-acct-btn @(ViewModel.ShowingBusiness ? "pp-acct-btn--on" : "")"
+                    @onclick="ViewModel.SelectBusinessPlan">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                    <path d="M16 3.13a4 4 0 010 7.75" />
                 </svg>
-                <span class="pp-tab-name">Business</span>
-                <span class="pp-tab-sub">For teams</span>
+                Business
             </button>
         </div>
     }
 
-    @* ── Hero ── *@
-    <div class="pp-hero">
-        <div class="pp-hero-badge @(ShowingBusiness ? "pp-hero-badge--biz" : "pp-hero-badge--prem")">
-            @if (ShowingBusiness)
-            {
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-                </svg>
-                <span>For Teams</span>
-            }
-            else
-            {
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                </svg>
-                <span>Most Popular</span>
-            }
+    @* ── Billing toggle — centered above plan content ── *@
+    <div class="pp-billing-wrap pp-billing-wrap--centered">
+        <div class="pp-billing" role="group" aria-label="Billing period">
+            <button class="pp-bill-btn @(!ViewModel.YearlyBilling ? "pp-bill-btn--on" : "")"
+                    @onclick="() => ViewModel.SetYearlyBilling(false)">
+                Monthly
+            </button>
+            <button class="pp-bill-btn @(ViewModel.YearlyBilling ? "pp-bill-btn--on" : "")"
+                    @onclick="() => ViewModel.SetYearlyBilling(true)">
+                Yearly
+                <span class="pp-save-badge">Save 20%</span>
+            </button>
         </div>
-
-        <h1 class="pp-hero-title">
-            @if (ShowingBusiness)
-            {
-                <span>AxCrypt <span class="pp-hero-accent-biz">Business</span></span>
-            }
-            else
-            {
-                <span>AxCrypt <span class="pp-hero-accent-prem">Premium</span></span>
-            }
-        </h1>
-
-        <p class="pp-hero-sub">
-            @if (ShowingBusiness)
-            {
-                <span>Secure collaboration, shared vault, admin controls, and compliance tools for your organisation.</span>
-            }
-            else
-            {
-                <span>Unlimited encryption, secure key sharing, Password Manager, and Cloud Drive — everything for serious file security.</span>
-            }
-        </p>
     </div>
 
-    @* ── 2-column body ── *@
-    <div class="pp-body">
+    @* ── Initial pricing fetch: nothing to show yet, so the wheel replaces the body instead of rendering cards with blank prices — refetches keep prior data and use their own inline spinners ── *@
+    @if (ViewModel.IsPricingLoading && !ViewModel.HasPricingData)
+    {
+        <AxLoader Mode="LoaderMode.Body" Message="Loading pricing…" />
+    }
+    else
+    {
+    @* ── Main body: 3-col for Business, 2-col for comparison, 1-col for a chosen individual plan ── *@
+    <div class="pp-body @(ViewModel.ShowingBusiness ? "pp-body--biz" : ViewModel.ShowingSoloIndividualPlan ? "pp-body--solo" : "")">
 
-        @* ───────── LEFT: plan features ───────── *@
-        <div class="pp-features-col">
+        @* ───────── LEFT: plan card(s) ───────── *@
+        <div class="pp-plan-col">
 
-            @* Billing toggle *@
-            <div class="pp-billing-wrap">
-                <div class="pp-billing" role="group" aria-label="Billing period">
-                    <button class="pp-bill-btn @(!_yearlyBilling ? "pp-bill-btn--on" : "")"
-                            @onclick="() => _yearlyBilling = false">
-                        Monthly
-                    </button>
-                    <button class="pp-bill-btn @(_yearlyBilling ? "pp-bill-btn--on" : "")"
-                            @onclick="() => _yearlyBilling = true">
-                        Yearly
-                        <span class="pp-save-badge">Save 20%</span>
-                    </button>
-                </div>
-            </div>
-
-            @* Price *@
-            <div class="pp-price-block">
-                <span class="pp-price @(ShowingBusiness ? "pp-price--biz" : "pp-price--prem")">
-                    @(ShowingBusiness ? BusinessPrice : PremiumPrice)
-                </span>
-                <span class="pp-price-period">
-                    @(ShowingBusiness ? BusinessPeriod : PremiumPeriod)
-                </span>
-            </div>
-            @if (_yearlyBilling)
+            @* ── Pricing load failure — surfaced instead of silently leaving the page blank ── *@
+            @if (ViewModel.PricingLoadFailed && !ViewModel.IsPricingLoading)
             {
-                <div class="pp-price-note">
-                    @(ShowingBusiness ? "≈ $10.42 / user / month — billed yearly" : "≈ $3.92 / month — billed yearly")
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;border-radius:10px;padding:12px 14px;margin-bottom:14px;">
+                    <span>Could not load pricing. Please check your connection and try again.</span>
+                    <button type="button" class="pp-link" style="flex-shrink:0;" @onclick="ViewModel.RetryPricingLoadAsync">
+                        Try again
+                    </button>
                 </div>
             }
 
-            @* ── Business seat stepper ── *@
-            @if (ShowingBusiness)
+            @* ── Free / Premium: comparison shows both cards; a selection collapses to one solo card ── *@
+            @if (!ViewModel.ShowingBusiness)
             {
-                <div class="pp-seats-wrap" aria-label="Number of business users">
-                    <span class="pp-seats-label">Number of users</span>
-                    <div class="pp-seats-stepper">
-                        <button class="pp-seat-btn" @onclick="DecrementSeats" aria-label="Decrease users" type="button">&#8722;</button>
-                        <input class="pp-seat-input" type="number" min="1"
-                               value="@_businessSeats"
-                               @onchange="@(e => OnSeatsChange(e.Value?.ToString()))" />
-                        <button class="pp-seat-btn" @onclick="IncrementSeats" aria-label="Increase users" type="button">&#43;</button>
+                <div class="@(ViewModel.ShowingComparison ? "pp-cards-row" : "pp-cards-solo")">
+
+                    @* Free card — shown while comparing, or once Free is selected; the whole box is clickable while comparing (not just the CTA button), matching the Premium card. *@
+                    @if (ViewModel.ShowingComparison || ViewModel.ShowingFreeSolo)
+                    {
+                        <div class="pp-free-card" style="@(ViewModel.ShowingComparison ? "cursor:pointer;" : "")"
+                             @onclick="ViewModel.SelectFree">
+                            <div class="pp-card-inner">
+                                <h3 class="pp-card-title pp-card-title--free">Free</h3>
+                                <p class="pp-card-desc">Get started, no commitment</p>
+                                <div class="pp-price-block">
+                                    <span class="pp-price">$0</span>
+                                    <span class="pp-price-period">/ forever</span>
+                                </div>
+                                <ul class="pp-feat-list" aria-label="Free plan features">
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Encrypt up to 2 files / month</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Share key up to 1 file / 1 user</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon AES-256 Encryption</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Open encrypted files</li>
+                                    <li class="pp-feat pp-feat--off">@DashIcon Secure Vault (unlimited)</li>
+                                    <li class="pp-feat pp-feat--off">@DashIcon Key Sharing (unlimited)</li>
+                                    <li class="pp-feat pp-feat--off">@DashIcon Cloud Drive Encryption</li>
+                                    <li class="pp-feat pp-feat--off">@DashIcon Password Manager</li>
+                                    <li class="pp-feat pp-feat--off">@DashIcon Secured Messenger</li>
+                                </ul>
+                            </div>
+                            @* Card CTA only appears while comparing — once selected, the order summary drives the next step *@
+                            @if (ViewModel.ShowingComparison)
+                            {
+                                <button class="pp-card-cta pp-card-cta--free" @onclick="ViewModel.SelectFree">
+                                    Continue with Free
+                                </button>
+                            }
+                        </div>
+                    }
+
+                    @* Premium card — shown while comparing, or once Premium is selected (also the only option for non-Free-eligible users); whole box is clickable while comparing, like the Free card. *@
+                    @if (ViewModel.ShowingComparison || ViewModel.ShowingPremiumSolo)
+                    {
+                        <div class="pp-prem-card" style="@(ViewModel.ShowingComparison ? "cursor:pointer;" : "")"
+                             @onclick="ViewModel.SelectPremium">
+                            <div class="pp-card-banner">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 7v5l3 3" />
+                                </svg>
+                                14 days free &mdash; then billed automatically
+                            </div>
+                            <div class="pp-card-inner">
+                                <div class="pp-card-badge pp-card-badge--prem">
+                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    TOP RATED
+                                </div>
+                                <h3 class="pp-card-title pp-card-title--prem">Premium</h3>
+                                <p class="pp-card-desc">Complete protection for individuals</p>
+                                <div class="pp-price-block">
+                                    <span class="pp-price pp-price--prem">@ViewModel.PremiumPriceText</span>
+                                    <span class="pp-price-period">@ViewModel.PremiumPeriodText</span>
+                                </div>
+                                @if (ViewModel.YearlyBilling)
+                                {
+                                    <div class="pp-price-note">&asymp; @ViewModel.PremiumMonthlyEquivalentText / month &mdash; billed yearly</div>
+                                }
+                                <ul class="pp-feat-list" aria-label="Premium plan features">
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Unlimited AES-256 encryption</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Share Keys (unlimited)</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Secure Vault (unlimited)</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Cloud Drive Encryption</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Unlimited Text Encryption</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Batch encrypt / decrypt folders</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Unlimited Passwords</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Unlimited Secured Messenger</li>
+                                    <li class="pp-feat pp-feat--on">@CheckIcon Priority Support + live chat</li>
+                                </ul>
+                            </div>
+                            @if (ViewModel.ShowingComparison)
+                            {
+                                <button class="pp-card-cta pp-card-cta--prem" @onclick="ViewModel.SelectPremium">
+                                    Continue with Premium
+                                </button>
+                            }
+                        </div>
+                    }
+
+                </div>
+
+                @* ── Switch link — lets a solo selection go back to comparing plans ── *@
+                @if (!ViewModel.ShowingComparison && ViewModel.FreePlanAvailable)
+                {
+                    <div style="text-align:center;margin-top:12px;">
+                        <button type="button" class="pp-link" @onclick="ViewModel.ShowPlanComparison">
+                            @(ViewModel.ShowingFreeSolo ? "Compare with Premium" : "See our Free plan")
+                        </button>
+                    </div>
+                }
+            }
+
+            @* ── Business: compact card (3-col, left column) ── *@
+            @if (ViewModel.ShowingBusiness)
+            {
+                <div class="pp-biz-card">
+                    <div class="pp-card-banner pp-card-banner--biz">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 7v5l3 3" />
+                        </svg>
+                        14 days free &mdash; then billed automatically
+                    </div>
+                    <div class="pp-card-inner pp-card-inner--compact">
+                        <div class="pp-card-badge pp-card-badge--biz">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                                <path d="M16 3.13a4 4 0 010 7.75" />
+                            </svg>
+                            FOR TEAMS
+                        </div>
+
+                        <div class="pp-biz-card-top">
+                            <div>
+                                <h3 class="pp-card-title pp-card-title--biz">Business</h3>
+                                <p class="pp-card-desc">Secure collaboration for your whole team</p>
+                            </div>
+                            <div class="pp-biz-price-wrap">
+                                <div class="pp-price-block">
+                                    @if (ViewModel.PriceLoading)
+                                    {
+                                        <span class="pp-price-fetch-spinner" aria-label="Updating price" role="status"></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="pp-price pp-price--biz">@ViewModel.BusinessPriceText</span>
+                                    }
+                                    <span class="pp-price-period">@ViewModel.BusinessPeriodText</span>
+                                </div>
+                                @if (ViewModel.YearlyBilling)
+                                {
+                                    <div class="pp-price-note">&asymp; @ViewModel.BusinessMonthlyEquivalentText / user / month &mdash; billed yearly</div>
+                                }
+                            </div>
+                        </div>
+
+                        @* Members stepper *@
+                        <div class="pp-members-row">
+                            <div class="pp-members-label">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 010 7.75" />
+                                </svg>
+                                <span>Number of users</span>
+                            </div>
+                            <div class="pp-members-counter">
+                                <button class="pp-members-btn" type="button"
+                                        @onclick="() => ViewModel.ChangeMembersAsync(-1)"
+                                        disabled="@ViewModel.PriceLoading"
+                                        aria-label="Remove user">
+                                    −
+                                </button>
+                                <span class="pp-members-val" aria-live="polite">@ViewModel.MembersCount</span>
+                                <button class="pp-members-btn" type="button"
+                                        @onclick="() => ViewModel.ChangeMembersAsync(1)"
+                                        disabled="@ViewModel.PriceLoading"
+                                        aria-label="Add user">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+
+                        @* Premium features *@
+                        <div class="pp-feat-section-label">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z" />
+                            </svg>
+                            Premium features included
+                        </div>
+                        <ul class="pp-feat-list pp-feat-list--tight" aria-label="Premium features included in Business">
+                            <li class="pp-feat pp-feat--on">@CheckIcon Unlimited AES-256 encryption</li>
+                            <li class="pp-feat pp-feat--on">@CheckIcon Cloud Drive Encryption</li>
+                            <li class="pp-feat pp-feat--on">@CheckIcon Password Manager</li>
+                            <li class="pp-feat pp-feat--on">@CheckIcon Secured Messenger</li>
+                        </ul>
+
+                        @* Team &amp; admin features *@
+                        <div class="pp-feat-section-label pp-feat-section-label--team">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="9" cy="7" r="3" />
+                                <path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" />
+                                <circle cx="17" cy="6" r="2" />
+                                <path d="M21 21v-2a4 4 0 00-3-3.86" />
+                            </svg>
+                            Team &amp; admin features
+                        </div>
+                        <ul class="pp-feat-list pp-feat-list--tight" aria-label="Business team features">
+                            <li class="pp-feat pp-feat--on">@CheckIcon Master Key recovery</li>
+                            <li class="pp-feat pp-feat--on">@CheckIcon Group management &amp; key access</li>
+                            <li class="pp-feat pp-feat--on">@CheckIcon Shared team vault</li>
+                            <li class="pp-feat pp-feat--on">@CheckIcon Central admin dashboard</li>
+                            <li class="pp-feat pp-feat--on">@CheckIcon Audit log &mdash; every action</li>
+                            <li class="pp-feat pp-feat--on">@CheckIcon HIPAA / GDPR / NIS 2</li>
+                            <li class="pp-feat pp-feat--on">@CheckIcon @Texts.PricingFeatureListAccountManager</li>
+                        </ul>
+
                     </div>
                 </div>
             }
 
-            @* ── PREMIUM features ── *@
-            @if (!ShowingBusiness)
-            {
-                <ul class="pp-feat-list" aria-label="Premium plan features">
-                    <li class="pp-feat pp-feat--on">@CheckIcon Unlimited AES-256 encryption</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Secure Vault (unlimited)</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Cloud Drive Encryption</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon @Texts.GetStartedKeySharingHeading</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Batch encrypt &amp; decrypt folders</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Password Manager</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Secured Messenger</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon @Texts.PricingFeatureListMobileApps</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Priority support + live chat</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon HIPAA / GDPR compliant</li>
-                </ul>
-            }
+        </div>@* /.pp-plan-col *@
 
-            @* ── BUSINESS features ── *@
-            @if (ShowingBusiness)
-            {
-                <div class="pp-feat-section-label">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z"/>
-                    </svg>
-                    Premium features included
-                </div>
-                <ul class="pp-feat-list pp-feat-list--grid" aria-label="Premium features included in Business">
-                    <li class="pp-feat pp-feat--on">@CheckIcon <strong>Unlimited</strong>&nbsp;AES-256 encryption</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Secure Vault (unlimited)</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Cloud Drive Encryption</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon @Texts.GetStartedKeySharingHeading</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Password Manager</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Secured Messenger</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Batch encrypt / decrypt folders</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Priority support + live chat</li>
-                </ul>
+        @* ───────── MIDDLE: company & billing info (business only) ───────── *@
+        @if (ViewModel.ShowingBusiness)
+        {
+            <div class="pp-info-col">
 
-                <div class="pp-feat-section-label pp-feat-section-label--team">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="9" cy="7" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
-                        <circle cx="17" cy="6" r="2"/><path d="M21 21v-2a4 4 0 00-3-3.86"/>
-                    </svg>
-                    Team &amp; admin features
+                @* ── Section 1: Company information — its own card, independent of Billing details ── *@
+                <div class="pp-right-card pp-right-card--info">
+                    @* Collapsed by default once pre-filled from signup; otherwise always expanded and required *@
+                    @if (ViewModel.CompanyInfoFromSignup)
+                    {
+                        <button type="button" class="pp-biz-readonly-hd" @onclick="ViewModel.ToggleCompanyInfoExpanded">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <rect x="2" y="7" width="20" height="14" rx="2" />
+                                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+                            </svg>
+                            <span class="pp-biz-readonly-title">Company information</span>
+                            <span class="pp-biz-readonly-preview">@ViewModel.OrgName</span>
+                            <svg class="pp-biz-readonly-chevron @(ViewModel.CompanyInfoExpanded ? "pp-biz-readonly-chevron--open" : "")" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                    }
+                    else
+                    {
+                        <div class="pp-biz-section-hd">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <rect x="2" y="7" width="20" height="14" rx="2" />
+                                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+                            </svg>
+                            <span>Company information</span>
+                            <span class="pp-biz-required-badge">Required</span>
+                        </div>
+                    }
+
+                    @if (!ViewModel.CompanyInfoFromSignup || ViewModel.CompanyInfoExpanded)
+                    {
+                        <div class="pp-bizinfo-body">
+
+                            @* ── Business selector: shown when API returns multiple accounts ── *@
+                            @if (ViewModel.Businesses.Count > 1)
+                            {
+                                <div class="pp-biz-selector-row">
+                                    <label class="pp-biz-label" for="pp-biz-selector">
+                                        Your business account <span class="pp-biz-star">*</span>
+                                    </label>
+                                    <select class="pp-biz-input pp-biz-select" id="pp-biz-selector" @onchange="OnBusinessSelected">
+                                        <option value="">— Select your business —</option>
+                                        @foreach (var biz in ViewModel.Businesses)
+                                        {
+                                            <option value="@biz.Key" selected="@(ViewModel.SelectedBusinessId == biz.Key)">@biz.Value</option>
+                                        }
+                                    </select>
+                                    @if (ViewModel.ShowCompanyValidationErrors && ViewModel.BusinessSelectionMissing)
+                                    {
+                                        <span style="color:#dc2626;font-size:12px;margin-top:4px;display:block;">Please select your business account</span>
+                                    }
+                                </div>
+                                @if (!string.IsNullOrEmpty(ViewModel.SelectedBusinessId))
+                                {
+                                    <div class="pp-bizinfo-divider"></div>
+                                }
+                            }
+
+                            @* Company info fields: always for 0 businesses; for multi-biz only after selection *@
+                            @if (ViewModel.Businesses.Count == 0 || !string.IsNullOrEmpty(ViewModel.SelectedBusinessId))
+                            {
+                                <div class="pp-biz-grid">
+                                    <div>
+                                        <label class="pp-biz-label" for="pp-biz-name">Company name <span class="pp-biz-star">*</span></label>
+                                        <input class="pp-biz-input" id="pp-biz-name" type="text" @bind="ViewModel.OrgName" placeholder="Acme Corp"
+                                               style="@(ViewModel.ShowCompanyValidationErrors && ViewModel.CompanyNameMissing ? "border-color:#dc2626;" : "")" />
+                                        @if (ViewModel.ShowCompanyValidationErrors && ViewModel.CompanyNameMissing)
+                                        {
+                                            <span style="color:#dc2626;font-size:12px;margin-top:4px;display:block;">Company name is required</span>
+                                        }
+                                    </div>
+                                    <div>
+                                        <label class="pp-biz-label" for="pp-biz-country">Country <span class="pp-biz-star">*</span></label>
+                                        <select class="pp-biz-input pp-biz-select" id="pp-biz-country" @bind="ViewModel.OrgCountry"
+                                                style="@(ViewModel.ShowCompanyValidationErrors && ViewModel.CompanyCountryMissing ? "border-color:#dc2626;" : "")">
+                                            <option value="">— Select country —</option>
+                                            @foreach ((string ctry, string ctrname) in PlanAndPayViewModel.Countries)
+                                            {
+                                                <option value="@ctry">@ctrname</option>
+                                            }
+                                        </select>
+                                        @if (ViewModel.ShowCompanyValidationErrors && ViewModel.CompanyCountryMissing)
+                                        {
+                                            <span style="color:#dc2626;font-size:12px;margin-top:4px;display:block;">Country is required</span>
+                                        }
+                                    </div>
+                                    <div class="pp-biz-wide">
+                                        <label class="pp-biz-label" for="pp-biz-vat">VAT number <span class="pp-biz-optional">(optional)</span></label>
+                                        <input class="pp-biz-input" id="pp-biz-vat" type="text" @bind="ViewModel.OrgVat" placeholder="EU123456789" />
+                                    </div>
+                                </div>
+                            }
+
+                            @if (ViewModel.CompanyInfoFromSignup)
+                            {
+                                <button type="button" class="pp-biz-readonly-edit" style="margin:10px 0 2px"
+                                        @onclick="() => ViewModel.CompanyInfoExpanded = false">
+                                    Done editing
+                                </button>
+                            }
+                        </div>
+                    }
                 </div>
-                <ul class="pp-feat-list pp-feat-list--grid" aria-label="Business team features">
-                    <li class="pp-feat pp-feat--on">@CheckIcon Master Key recovery</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Group management — seats, roles, invites</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Group key access — shared encryption keys</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Shared team vault</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Central admin dashboard</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Audit log — every encrypt, share &amp; access</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Multi-factor authentication</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Role-based access control</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon HIPAA / GDPR / NIS 2 compliance</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon Per-seat invoicing &amp; PO support</li>
-                    <li class="pp-feat pp-feat--on">@CheckIcon @Texts.PricingFeatureListAccountManager</li>
-                </ul>
-            }
-        </div>
+
+                @* ── Section 2: Billing details — separate card, always expanded, no collapse control ── *@
+                <div class="pp-right-card pp-right-card--info" style="margin-top:16px;">
+                    <div class="pp-bizinfo-billing-hd">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <rect x="1" y="4" width="22" height="16" rx="2" />
+                            <line x1="1" y1="10" x2="23" y2="10" />
+                        </svg>
+                        <span>Billing details</span>
+                    </div>
+
+                    <div class="pp-biz-grid pp-bizinfo-billing-body">
+                        <div>
+                            <label class="pp-biz-label" for="pp-biz-invoice">Invoice email <span class="pp-biz-optional">(optional)</span></label>
+                            <input class="pp-biz-input" id="pp-biz-invoice" type="email" @bind="ViewModel.InvoiceEmail" placeholder="billing@company.com" />
+                        </div>
+                        <div>
+                            <label class="pp-biz-label" for="pp-biz-phone">Phone number <span class="pp-biz-optional">(optional)</span></label>
+                            <input class="pp-biz-input" id="pp-biz-phone" type="tel" @bind="ViewModel.PhoneNumber" placeholder="+1 555 000 0000" />
+                        </div>
+                        <div class="pp-biz-wide">
+                            <label class="pp-biz-label" for="pp-biz-address">Company address <span class="pp-biz-star">*</span></label>
+                            <textarea class="pp-biz-input pp-biz-textarea" id="pp-biz-address" rows="2"
+                                      @bind="ViewModel.Address" placeholder="Street, City, State, ZIP"
+                                      style="@(ViewModel.ShowCompanyValidationErrors && ViewModel.AddressMissing ? "border-color:#dc2626;" : "")"></textarea>
+                            @if (ViewModel.ShowCompanyValidationErrors && ViewModel.AddressMissing)
+                            {
+                                <span style="color:#dc2626;font-size:12px;margin-top:4px;display:block;">Address is required</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
 
         @* ───────── RIGHT: order summary ───────── *@
         <div class="pp-summary-col">
-            <div class="pp-summary-card">
-
+            <div class="pp-right-card pp-right-card--order">
                 @* Header *@
                 <div class="pp-summary-header">
-                    <span class="pp-summary-title">Order summary</span>
-                    <span class="pp-summary-subtitle">Review before checkout</span>
-                </div>
-
-                @* Plan pill *@
-                <div class="pp-plan-pill @(ShowingBusiness ? "pp-plan-pill--biz" : "pp-plan-pill--prem")">
-                    <span class="pp-plan-pill-name">@ReviewPlanName</span>
-                    <span class="pp-plan-pill-billing">@ReviewBilling</span>
-                </div>
-
-                @* ── Business company info ── *@
-                @if (ShowingBusiness)
-                {
-                    @if (string.IsNullOrWhiteSpace(_orgName))
-                    {
-                        <div class="pp-biz-info-form">
-                            <div class="pp-biz-info-header">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0">
-                                    <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
-                                </svg>
-                                <span>Company information</span>
-                                <span class="pp-biz-required-badge">Required before purchase</span>
-                            </div>
-                            <div class="pp-biz-grid">
-                                <div>
-                                    <label class="pp-biz-label" for="pp-biz-name">Company name <span class="pp-biz-star">*</span></label>
-                                    <input class="pp-biz-input" id="pp-biz-name" type="text" @bind="_orgName" placeholder="Acme Corp" />
-                                </div>
-                                <div>
-                                    <label class="pp-biz-label" for="pp-biz-country">Country <span class="pp-biz-star">*</span></label>
-                                    <input class="pp-biz-input" id="pp-biz-country" type="text" @bind="_orgCountry" placeholder="United States" />
-                                </div>
-                                <div class="pp-biz-wide">
-                                    <label class="pp-biz-label" for="pp-biz-vat">VAT number <span class="pp-biz-optional">(optional)</span></label>
-                                    <input class="pp-biz-input" id="pp-biz-vat" type="text" @bind="_orgVat" placeholder="EU123456789" />
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <details class="pp-biz-accordion">
-                            <summary class="pp-biz-accordion-toggle">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0">
-                                    <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
-                                </svg>
-                                <span>@_orgName</span>
-                                <span class="pp-biz-accordion-note">Company info</span>
-                                <svg class="pp-biz-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round"/></svg>
-                            </summary>
-                            <div class="pp-biz-accordion-body">
-                                <div class="pp-biz-info-row"><span class="pp-biz-info-label">Company</span><span class="pp-biz-info-value">@_orgName</span></div>
-                                @if (!string.IsNullOrWhiteSpace(_orgCountry))
-                                {
-                                    <div class="pp-biz-info-row"><span class="pp-biz-info-label">Country</span><span class="pp-biz-info-value">@_orgCountry</span></div>
-                                }
-                                @if (!string.IsNullOrWhiteSpace(_orgVat))
-                                {
-                                    <div class="pp-biz-info-row"><span class="pp-biz-info-label">VAT number</span><span class="pp-biz-info-value">@_orgVat</span></div>
-                                }
-                            </div>
-                        </details>
-                    }
-                }
-
-                @* Trial highlight *@
-                @if (_trialEligible)
-                {
-                    <div class="pp-trial-box @(ShowingBusiness ? "pp-trial-box--biz" : "")">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                            <circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 3"/>
-                        </svg>
-                        <span><strong>14 days free</strong> — your card is charged only after the trial ends</span>
+                    <div class="pp-summary-header-text">
+                        <span class="pp-summary-title">@(ViewModel.ShowingBusiness ? "Your order" : "Order summary")</span>
+                        <span class="pp-summary-subtitle">@(ViewModel.ShowingBusiness ? "Review & activate your team plan" : "Review before checkout")</span>
                     </div>
-                }
-
-                @* Price rows *@
-                <div class="pp-price-rows">
-                    <div class="pp-price-row">
-                        <span>Subtotal</span>
-                        <strong>@ReviewSubtotal</strong>
-                    </div>
-                    <div class="pp-price-row">
-                        <span>VAT</span>
-                        <strong>Calculated at checkout</strong>
-                    </div>
-                    @if (_trialEligible)
+                    @if (ViewModel.FreePlanAvailable && !ViewModel.ShowingBusiness)
                     {
-                        <div class="pp-price-row pp-price-row--today">
-                            <span>Due today</span>
-                            <strong class="pp-price-zero">$0.00</strong>
-                        </div>
-                        <div class="pp-price-row pp-price-row--after">
-                            <span>After 14-day trial</span>
-                            <strong>@ReviewAfterTrial</strong>
-                        </div>
+                        <button class="pp-change-plan" @onclick="ViewModel.SelectBusinessPlan">
+                            Business plan
+                        </button>
                     }
-                    else
+                    @if (ViewModel.FreePlanAvailable && ViewModel.ShowingBusiness)
                     {
-                        <div class="pp-price-row pp-price-row--today">
-                            <span>Due today</span>
-                            <strong>@ReviewAfterTrial</strong>
-                        </div>
+                        <button class="pp-change-plan" @onclick="ViewModel.ShowPlanComparison">
+                            Change plan
+                        </button>
                     }
                 </div>
 
-                @* ── Business billing details (open by default) ── *@
-                @if (ShowingBusiness)
+                @* Paid-plan pricing detail — hidden while the Free plan is selected, since it has no price to review *@
+                @if (!ViewModel.ShowingFreeSolo)
                 {
-                    <details class="pp-biz-accordion" open>
-                        <summary class="pp-biz-accordion-toggle">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0">
-                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke-linejoin="round"/>
+                    @* Plan pill *@
+                    <div class="pp-plan-pill @(ViewModel.ShowingBusiness ? "pp-plan-pill--biz" : "pp-plan-pill--prem")">
+                        <span class="pp-plan-pill-name">@ViewModel.ReviewPlanName</span>
+                        <span class="pp-plan-pill-billing">@ViewModel.ReviewBillingText</span>
+                    </div>
+
+                    @* Trial highlight *@
+                    @if (ViewModel.TrialEligible)
+                    {
+                        <div class="pp-trial-box @(ViewModel.ShowingBusiness ? "pp-trial-box--biz" : "")">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 7v5l3 3" />
                             </svg>
-                            <span>Billing details</span>
-                            <span class="pp-biz-accordion-note">required for billing</span>
-                            <svg class="pp-biz-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round"/></svg>
+                            <span><strong>14 days free</strong> &mdash; your card is charged only after the trial ends</span>
+                        </div>
+                    }
+
+                    @* Discount code — summary stays neutral; applied/failed state lives entirely in the body *@
+                    <details class="pp-discount @(ViewModel.DiscountApplied == true ? "pp-discount--valid" : ViewModel.DiscountApplied == false ? "pp-discount--invalid" : "")" open="@(ViewModel.DiscountApplied != null)">
+                        <summary class="pp-discount-toggle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="16" />
+                                <line x1="8" y1="12" x2="16" y2="12" />
+                            </svg>
+                            <span>Have a discount code?</span>
                         </summary>
-                        <div class="pp-biz-accordion-body">
-                            <div class="pp-biz-grid">
-                                <div>
-                                    <label class="pp-biz-label" for="pp-biz-invoice">Invoice email</label>
-                                    <input class="pp-biz-input" id="pp-biz-invoice" type="email" @bind="_invoiceEmail" placeholder="billing@company.com" />
+                        <div class="pp-discount-body">
+                            @if (ViewModel.DiscountApplied == true)
+                            {
+                                @* Applied — code + savings replace the input until it's removed *@
+                                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                                    <span style="color:#16a34a;font-weight:600;display:flex;align-items:center;gap:6px;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+                                        @ViewModel.AppliedDiscountLabel
+                                    </span>
+                                    <button type="button" @onclick="ViewModel.RemoveAppliedDiscountAsync" aria-label="Remove discount code"
+                                            style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;border:none;background:#ef4444;color:#fff;font-size:15px;font-weight:700;line-height:1;cursor:pointer;flex-shrink:0;">
+                                        &times;
+                                    </button>
                                 </div>
-                                <div>
-                                    <label class="pp-biz-label" for="pp-biz-phone">Phone number</label>
-                                    <input class="pp-biz-input" id="pp-biz-phone" type="tel" @bind="_phoneNumber" placeholder="+1 555 000 0000" />
+                                <div style="background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;border-radius:10px;padding:10px 12px;font-weight:600;font-size:13px;margin-top:8px;">
+                                    @ViewModel.DiscountSavingsBannerText
                                 </div>
-                                <div class="pp-biz-wide">
-                                    <label class="pp-biz-label" for="pp-biz-address">Company address</label>
-                                    <textarea class="pp-biz-input pp-biz-textarea" id="pp-biz-address" rows="2"
-                                              @bind="_address" placeholder="Street, City, State, ZIP"></textarea>
-                                </div>
-                            </div>
+                            }
+                            else
+                            {
+                                @* Controlled input (value + oninput) instead of @bind: guarantees the code is current the instant "Apply" is clicked, instead of waiting for the input's own blur/change event. *@
+                                <input class="pp-discount-input @(ViewModel.DiscountApplied == false ? "pp-discount-input--invalid" : "")"
+                                       value="@ViewModel.DiscountCode" @oninput="e => ViewModel.UpdateDiscountCode(e.Value?.ToString() ?? string.Empty)" placeholder="Enter code" />
+                                <button class="pp-discount-apply" disabled="@ViewModel.DiscountLoading" @onclick="ViewModel.ApplyDiscountAsync">
+                                    @if (ViewModel.DiscountLoading)
+                                    {
+                                        <span class="pp-discount-spinner" aria-hidden="true"></span>
+                                    }
+                                    else
+                                    {
+                                        <span>Apply</span>
+                                    }
+                                </button>
+                                @if (ViewModel.DiscountApplied == false)
+                                {
+                                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px;">
+                                        <p class="pp-discount-msg pp-discount-msg--invalid" style="margin:0;">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                                            Invalid or expired discount code
+                                        </p>
+                                        <button type="button" class="pp-link" style="font-size:11px;padding:0;flex-shrink:0;" @onclick="ViewModel.RemoveAppliedDiscountAsync">
+                                            Remove
+                                        </button>
+                                    </div>
+                                }
+                            }
                         </div>
                     </details>
+
+                    @* Price rows *@
+                    <div class="pp-price-rows">
+                        @if (ViewModel.ShowingBusiness)
+                        {
+                            <div class="pp-price-row">
+                                <span>Members</span>
+                                <strong>@ViewModel.MembersCount seat@(ViewModel.MembersCount != 1 ? "s" : "")</strong>
+                            </div>
+                        }
+                        <div class="pp-price-row">
+                            <span>Subtotal</span>
+                            <strong>
+                                @if (ViewModel.PriceLoading && ViewModel.ShowingBusiness)
+                                {
+                                    <span class="pp-inline-spinner" aria-label="Calculating" role="status"></span>
+                                }
+                                else
+                                {
+                                    @ViewModel.ReviewSubtotalText
+                                }
+                            </strong>
+                        </div>
+                        <div class="pp-price-row">
+                            <span>VAT</span>
+                            <strong>@ViewModel.AmountVatText</strong>
+                        </div>
+                        @if (ViewModel.TrialEligible)
+                        {
+                            <div class="pp-price-row pp-price-row--today">
+                                <span>Due today</span>
+                                <strong class="pp-price-zero">$0.00</strong>
+                            </div>
+                            <div class="pp-price-row pp-price-row--after">
+                                <span>After 14-day trial</span>
+                                <strong>
+                                    @if (ViewModel.PriceLoading && ViewModel.ShowingBusiness)
+                                    {
+                                        <span class="pp-inline-spinner" aria-label="Calculating" role="status"></span>
+                                    }
+                                    else
+                                    {
+                                        @ViewModel.ReviewAfterTrialDisplayText
+                                    }
+                                </strong>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="pp-price-row pp-price-row--today">
+                                <span>Due today</span>
+                                <strong>
+                                    @if (ViewModel.PriceLoading && ViewModel.ShowingBusiness)
+                                    {
+                                        <span class="pp-inline-spinner" aria-label="Calculating" role="status"></span>
+                                    }
+                                    else
+                                    {
+                                        @ViewModel.ReviewAfterTrialDisplayText
+                                    }
+                                </strong>
+                            </div>
+                        }
+                    </div>
                 }
 
-                @* Discount code *@
-                <details class="pp-discount">
-                    <summary class="pp-discount-toggle">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
-                        </svg>
-                        Have a discount code?
-                    </summary>
-                    <div class="pp-discount-body">
-                        <input class="pp-discount-input" @bind="_discountCode" placeholder="Enter code" />
-                        <button class="pp-discount-apply" @onclick="OnApplyDiscount">Apply</button>
+                @* Terms + CTA — changes based on the selected plan *@
+                @if (ViewModel.ShowingFreeSolo)
+                {
+                    @* ── Free plan activation — self-contained styling (not pp-plan-pill, which overlapped here) ── *@
+                    <div style="display:flex;align-items:center;justify-content:space-between;background:#f3f4f6;border-radius:10px;padding:10px 14px;margin-bottom:14px;">
+                        <strong style="font-size:14px;">Free plan</strong>
+                        <span style="font-size:12px;color:#6b7280;">$0 / forever</span>
                     </div>
-                </details>
 
-                @* Terms *@
-                <label class="pp-terms">
-                    <input type="checkbox" @bind="_termsAccepted" />
-                    <span>
-                        I accept AxCrypt's
-                        <button class="pp-link" @onclick='() => OpenLink("https://axcrypt.net/information/terms-of-use/")'>Terms of Service</button>
-                        and
-                        <button class="pp-link" @onclick='() => OpenLink("https://axcrypt.net/information/privacy-policy/")'>Privacy Policy</button>.
-                    </span>
-                </label>
+                    <div class="pp-free-upsell">
+                        <div class="pp-free-upsell-hd">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:#f59e0b" aria-hidden="true">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            Unlock more with Premium
+                        </div>
+                        <ul class="pp-free-upsell-list">
+                            <li>@CheckIcon Encrypt &amp; share <strong>unlimited</strong> files</li>
+                            <li>@CheckIcon Secure folders &amp; cloud storage sync</li>
+                            <li>@CheckIcon Password manager &amp; secure vault</li>
+                        </ul>
+                        <button class="pp-free-upsell-btn" @onclick="ViewModel.SelectPremium">
+                            Try Premium free for 14 days &rarr;
+                        </button>
+                    </div>
 
-                @* CTA buttons *@
-                <div class="pp-cta-wrap">
-                    <button class="pp-cta-primary @(ShowingBusiness ? "pp-cta-primary--biz" : "")"
-                            disabled="@(!_termsAccepted || BusinessInfoMissing)"
-                            @onclick="OnCheckout">
-                        @CtaText
+                    <label class="pp-terms">
+                        <input type="checkbox" checked="@ViewModel.TermsAccepted" @onchange="OnTermsCheckboxChanged" />
+                        <span>
+                            I accept AxCrypt's
+                            <button class="pp-link" @onclick='() => OpenLink("https://axcrypt.net/information/privacy-policy/")'>Privacy Policy</button>
+                            and
+                            <button class="pp-link" @onclick='() => OpenLink("https://axcrypt.net/information/terms-of-use/")'>Terms of Service</button>.
+                        </span>
+                    </label>
+
+                    <button class="pp-cta-primary pp-cta-primary--free"
+                            disabled="@(!ViewModel.TermsAccepted || ViewModel.CheckoutPending)"
+                            @onclick="OnActivateFreeClick">
+                        Activate Free Account
                     </button>
-                    <button class="pp-cta-paypal" @onclick="OnPayPalCheckout">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M7.5 3.5h9a4 4 0 014 4v.5a4.5 4.5 0 01-4.5 4.5H13l-1.5 8.5H7l1.5-8.5H5L7.5 3.5z" stroke="#003087" stroke-width="1.5" stroke-linejoin="round"/>
+                    <div class="pp-trust-line" style="justify-content:center;margin-top:6px;">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 0110 0v4" />
                         </svg>
-                        Continue with PayPal
-                    </button>
-                </div>
+                        <span>No credit card required &middot; Free forever</span>
+                    </div>
+                }
+                else
+                {
+                    @* ── Paid plan checkout ── *@
+                    <label class="pp-terms">
+                        <input type="checkbox" checked="@ViewModel.TermsAccepted" @onchange="OnTermsCheckboxChanged" />
+                        <span>
+                            I accept AxCrypt's
+                            <button class="pp-link" @onclick='() => OpenLink("https://axcrypt.net/information/privacy-policy/")'>Privacy Policy</button>
+                            and
+                            <button class="pp-link" @onclick='() => OpenLink("https://axcrypt.net/information/terms-of-use/")'>Terms of Service</button>.
+                        </span>
+                    </label>
 
-                @* Trust line *@
-                <div class="pp-trust-line">
-                    <span>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+                    @if (ViewModel.TrialEligible)
+                    {
+                        <p class="pp-cta-label">Start your free trial with</p>
+                    }
+                    <div class="pp-cta-wrap">
+                        <button class="pp-cta-primary @(ViewModel.ShowingBusiness ? "pp-cta-primary--biz" : "")"
+                                disabled="@ViewModel.CheckoutDisabled"
+                                @onclick="OnCheckoutClick">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex-shrink:0">
+                                <rect x="1" y="4" width="22" height="16" rx="2" />
+                                <line x1="1" y1="10" x2="23" y2="10" />
+                            </svg>
+                            @(ViewModel.TrialEligible ? "Card" : ViewModel.CtaText)
+                        </button>
+                        @if (!ViewModel.ShowingBusiness)
+                        {
+                            <button class="pp-cta-paypal" disabled="@(!ViewModel.TermsAccepted)"
+                                    @onclick="OnPayPalClick" title="Pay with PayPal">
+                                <svg width="90" height="15" viewBox="0 0 44 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <text y="13" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#003087">Pay</text>
+                                    <text x="26" y="13" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#009cde">Pal</text>
+                                </svg>
+                            </button>
+                        }
+                    </div>
+
+                    <div class="pp-trust-line">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 0110 0v4" />
                         </svg>
-                        Secure checkout
-                    </span>
-                    <span class="pp-trust-dot">·</span>
-                    @if (_trialEligible) { <span>No charge during trial</span> <span class="pp-trust-dot">·</span> }
-                    <span>Cancel anytime</span>
-                </div>
+                        <span>Secure checkout &middot; Stripe@(!ViewModel.ShowingBusiness ? " & PayPal" : "")</span>
+                        @if (ViewModel.TrialEligible)
+                        {
+                            <span class="pp-trust-dot">&middot;</span><span>No charge during trial</span>
+                        }
+                        <span class="pp-trust-dot">&middot;</span><span>Cancel anytime</span>
+                    </div>
+                }
 
             </div>
-        </div>
+
+        </div>@* /.pp-summary-col *@
 
     </div>@* /.pp-body *@
+    }
+
+    @* ── Checkout overlay — shown while waiting for browser payment ── *@
+    @if (ViewModel.CheckoutPending || ViewModel.CheckoutSuccess || ViewModel.CheckoutError != null)
+    {
+        <div class="pp-checkout-overlay" role="dialog" aria-modal="true" aria-label="Payment status">
+            <div class="pp-checkout-modal">
+                @if (ViewModel.CheckoutSuccess)
+                {
+                    <div class="pp-checkout-icon pp-checkout-icon--ok">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </div>
+                    <h3 class="pp-checkout-modal-title">Payment successful!</h3>
+                    <p class="pp-checkout-modal-sub">@ViewModel.OverlaySuccessMessage</p>
+                }
+                else if (ViewModel.CheckoutError != null)
+                {
+                    <div class="pp-checkout-icon pp-checkout-icon--err">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                    </div>
+                    <h3 class="pp-checkout-modal-title">Payment not confirmed</h3>
+                    <p class="pp-checkout-modal-sub">@ViewModel.CheckoutError</p>
+                    <div class="pp-checkout-modal-btns">
+                        @if (ViewModel.ShowCheckNowButton)
+                        {
+                            <button class="pp-checkout-btn pp-checkout-btn--primary" @onclick="OnCheckPaymentNowClick">
+                                Check payment status
+                            </button>
+                        }
+                        <button class="pp-checkout-btn pp-checkout-btn--ghost" @onclick="ViewModel.DismissCheckoutOverlay">
+                            Close
+                        </button>
+                    </div>
+                    <p class="pp-checkout-modal-sub" style="margin-top:10px;">
+                        Still stuck? <button type="button" class="pp-link" @onclick="ShowLoginPageAsync">Log in</button> to refresh your account.
+                    </p>
+                }
+                else
+                {
+                    <div class="pp-checkout-spinner" role="status" aria-label="@ViewModel.OverlayWaitingTitle"></div>
+                    <h3 class="pp-checkout-modal-title">@ViewModel.OverlayWaitingTitle</h3>
+                    <p class="pp-checkout-modal-sub">@ViewModel.OverlayWaitingMessage</p>
+                    <div class="pp-checkout-modal-btns">
+                        @if (ViewModel.ShowCheckNowButton)
+                        {
+                            <button class="pp-checkout-btn pp-checkout-btn--primary" @onclick="OnCheckPaymentNowClick">
+                                I&apos;ve completed payment
+                            </button>
+                        }
+                        <button class="pp-checkout-btn pp-checkout-btn--ghost" @onclick="ViewModel.DismissCheckoutOverlay">
+                            Cancel
+                        </button>
+                    </div>
+                    @* ── Escape hatch: if status hasn't updated in 15s, offer a login link instead of an indefinite wheel ── *@
+                    @if (ViewModel.ShowLoginFallback)
+                    {
+                        <p class="pp-checkout-modal-sub" style="margin-top:10px;">
+                            Taking a while? <button type="button" class="pp-link" @onclick="ShowLoginPageAsync">Log in</button> to refresh your account status.
+                        </p>
+                    }
+                }
+            </div>
+        </div>
+    }
 
     @* ── Trust row ── *@
     <div class="pp-trust-row">
         <div class="pp-trust-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0110 0v4" />
             </svg>
-            <span>All encryption is <strong>local</strong> — we never see your files</span>
+            <span>All encryption is <strong>local</strong> &mdash; we never see your files</span>
         </div>
         <div class="pp-trust-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z"/>
+                <path d="M12 2L4 6v6c0 5 3.5 10 8 11.35C16.5 22 20 17 20 12V6L12 2z" />
             </svg>
             <span><strong>AES-256</strong> military-grade encryption</span>
         </div>
         <div class="pp-trust-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
             </svg>
             <span>Trusted by <strong>1,000,000+</strong> users worldwide</span>
         </div>
         <div class="pp-trust-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                <polyline points="17 6 23 6 23 12" />
             </svg>
             <span>File security from <strong>Sweden</strong> since 2008</span>
         </div>
@@ -423,115 +831,127 @@
 </div>
 
 @code {
-    // ── Plan state ──────────────────────────────────────────────
-    private SignUpFrom Origin => userService.SignUpFrom;
+    // ── Query parameter: ?plan=business pre-selects the business view ──
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "plan")]
+    public string? PlanQuery { get; set; }
 
-    private bool IsPremiumUser  => Origin == SignUpFrom.Premium;
-    private bool IsBusinessUser => Origin == SignUpFrom.Business;
-    private bool IsFreeUser     => Origin == SignUpFrom.Free || Origin == SignUpFrom.None;
-
-    private bool _showBusiness  = false;
-    private bool _yearlyBilling = true;
-    private bool _trialEligible = true; // TODO: wire to IFeatureUsageProvider / entitlement service
-    private bool _termsAccepted = false;
-    private string _discountCode = "";
-    private int _businessSeats = 5;
-
-    // ── Business company info ───────────────────────────────────
-    private string _orgName    = "";
-    private string _orgCountry = "";
-    private string _orgVat     = "";
-
-    // ── Business billing details ────────────────────────────────
-    private string _invoiceEmail = "";
-    private string _phoneNumber  = "";
-    private string _address      = "";
-
-    private bool BusinessInfoMissing => ShowingBusiness && string.IsNullOrWhiteSpace(_orgName);
-
-    private bool ShowingBusiness => IsBusinessUser || (IsFreeUser && _showBusiness);
-
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        // Premium and Business users are pinned to their origin plan
-        _showBusiness = IsBusinessUser;
+        // Re-render whenever the view model's state changes (including from the background payment poller).
+        ViewModel.OnUpdateViewState += OnViewModelChanged;
+        // Navigate home once a checkout or free-plan activation has finished successfully.
+        ViewModel.RequestNavigateHome += OnNavigateHomeRequested;
+
+        await ViewModel.InitializeAsync(PlanQuery);
     }
 
-    // ── Pricing ─────────────────────────────────────────────────
-    private string PremiumPrice  => _yearlyBilling ? "$47"  : "$5";
-    private string PremiumPeriod => _yearlyBilling ? "/ year" : "/ month";
-    private string BusinessPrice  => _yearlyBilling ? "$125" : "$13";
-    private string BusinessPeriod => _yearlyBilling ? "/ user / year" : "/ user / month";
+    private void OnViewModelChanged() => InvokeAsync(StateHasChanged);
 
-    // ── Review strings ───────────────────────────────────────────
-    private string ReviewPlanName =>
-        ShowingBusiness
-            ? $"Business {(_yearlyBilling ? "Yearly" : "Monthly")}"
-            : $"Premium {(_yearlyBilling ? "Yearly" : "Monthly")}";
+    private void OnNavigateHomeRequested() => InvokeAsync(() => Navigation.NavigateTo("/"));
 
-    private string ReviewBilling => _yearlyBilling ? "Yearly billing" : "Monthly billing";
-
-    private string ReviewSubtotal =>
-        ShowingBusiness
-            ? (_yearlyBilling
-                ? $"${125 * _businessSeats}.00 ({_businessSeats} users × $125)"
-                : $"${13 * _businessSeats}.00 ({_businessSeats} users × $13)")
-            : (_yearlyBilling ? "$47.00" : "$5.00");
-
-    private string ReviewAfterTrial =>
-        ShowingBusiness
-            ? (_yearlyBilling
-                ? $"${125 * _businessSeats}.00 / year"
-                : $"${13 * _businessSeats}.00 / month")
-            : (_yearlyBilling ? "$47.00 / year" : "$5.00 / month");
-
-    private string CtaText =>
-        _trialEligible ? "Start 14-Day Free Trial →" : "Buy Now →";
-
-    // ── Actions ──────────────────────────────────────────────────
-    private string BuildCheckoutUrl(string? extraParams = null)
+    // ── Actions — thin delegation to the view model ─────────────────────
+    // Guards checkout with the same field validation as the terms checkbox, in case either button is ever reachable while required Business info is still missing.
+    private async Task OnCheckoutClick()
     {
-        var plan    = ShowingBusiness ? "Business" : "Premium";
-        var billing = _yearlyBilling ? "yearly" : "monthly";
-        var seats   = ShowingBusiness ? $"&members={_businessSeats}" : "";
-        var org     = ShowingBusiness && !string.IsNullOrWhiteSpace(_orgName)
-                        ? $"&orgName={Uri.EscapeDataString(_orgName)}&country={Uri.EscapeDataString(_orgCountry)}"
-                        : "";
-        var vat     = ShowingBusiness && !string.IsNullOrWhiteSpace(_orgVat)
-                        ? $"&vat={Uri.EscapeDataString(_orgVat)}"
-                        : "";
-        var extra   = string.IsNullOrWhiteSpace(extraParams) ? "" : $"&{extraParams}";
-        return $"https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom={plan}&billing={billing}{seats}{org}{vat}{extra}";
+        if (!ViewModel.ValidateBeforeCheckout())
+        {
+            await FocusFirstInvalidFieldAsync();
+            return;
+        }
+        await ViewModel.CheckoutAsync();
     }
 
-    private void OnCheckout() =>
-        New<Abstractions.IBrowser>().OpenUri(new Uri(BuildCheckoutUrl()));
-
-    private void OnPayPalCheckout() =>
-        New<Abstractions.IBrowser>().OpenUri(new Uri(BuildCheckoutUrl("provider=paypal")));
-
-    private void OnApplyDiscount()
+    private async Task OnPayPalClick()
     {
-        if (!string.IsNullOrWhiteSpace(_discountCode))
-            New<Abstractions.IBrowser>().OpenUri(
-                new Uri(BuildCheckoutUrl($"code={Uri.EscapeDataString(_discountCode)}")));
+        if (!ViewModel.ValidateBeforeCheckout())
+        {
+            await FocusFirstInvalidFieldAsync();
+            return;
+        }
+        await ViewModel.PayPalCheckoutAsync();
     }
 
-    private void IncrementSeats() => _businessSeats = Math.Max(1, _businessSeats + 1);
-    private void DecrementSeats() => _businessSeats = Math.Max(1, _businessSeats - 1);
-    private void OnSeatsChange(string? value)
+    private async Task OnTermsCheckboxChanged(ChangeEventArgs e)
     {
-        if (int.TryParse(value, out int n))
-            _businessSeats = Math.Max(1, n);
+        ViewModel.SetTermsAccepted((bool)e.Value!);
+        if (ViewModel.ShowCompanyValidationErrors)
+        {
+            await FocusFirstInvalidFieldAsync();
+        }
     }
 
-    private void OpenLink(string url) =>
-        New<Abstractions.IBrowser>().OpenUri(new Uri(url));
+    // Focuses and scrolls to the first invalid Business field, in page order: business selector, then Company name, Country, then Address.
+    private async Task FocusFirstInvalidFieldAsync()
+    {
+        string? targetId = ViewModel.BusinessSelectionMissing ? "pp-biz-selector"
+            : ViewModel.CompanyNameMissing ? "pp-biz-name"
+            : ViewModel.CompanyCountryMissing ? "pp-biz-country"
+            : ViewModel.AddressMissing ? "pp-biz-address"
+            : null;
+
+        if (targetId != null)
+        {
+            await JSRuntime.InvokeVoidAsync("ppFunctions.focusAndScroll", targetId);
+        }
+    }
+
+    private async Task OnCheckPaymentNowClick()
+    {
+        bool paid = await ViewModel.CheckPaymentNowAsync();
+        if (paid)
+        {
+            await Task.Delay(2_500);
+            await ShowLoginPageAsync();
+        }
+    }
+
+    // The sign-out-or-unsuppress-login decision lives in ViewModel.RecoverSessionAsync — this is just the Blazor-specific navigation step reacting to it.
+    private async Task ShowLoginPageAsync()
+    {
+        if (await ViewModel.RecoverSessionAsync())
+        {
+            Navigation.NavigateTo("/");
+        }
+    }
+
+    // Navigation on success is handled by ViewModel.RequestNavigateHome (see OnNavigateHomeRequested), same as the paid-checkout flow.
+    private Task OnActivateFreeClick() => ViewModel.ActivateFreeAsync();
+
+    private void OnBusinessSelected(ChangeEventArgs e) => ViewModel.SelectBusinessAccount(e.Value?.ToString());
+
+    private void OpenLink(string url) => ViewModel.OpenExternalLink(url);
+
+    public void Dispose()
+    {
+        ViewModel.OnUpdateViewState -= OnViewModelChanged;
+        ViewModel.RequestNavigateHome -= OnNavigateHomeRequested;
+        ViewModel.CancelPendingOperations();
+    }
 
     // ── Icons ────────────────────────────────────────────────────
     private static RenderFragment CheckIcon =>
         @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0">
-            <circle cx="12" cy="12" r="10" fill="#22c55e"/>
-            <polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none"/>
+            <circle cx="12" cy="12" r="10" fill="#22c55e" />
+            <polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" />
+        </svg>;
+
+    private static RenderFragment DashIcon =>
+        @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0">
+            <circle cx="12" cy="12" r="10" fill="#e5e7eb" />
+            <line x1="8" y1="12" x2="16" y2="12" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" />
         </svg>;
 }
+
+@* Focus/scroll helper for the Business field validation — mirrors LoginPage's loginFunctions pattern. *@
+<script type="text/javascript">
+    window.ppFunctions = {
+        focusAndScroll: function (id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth", block: "center" });
+                element.focus({ preventScroll: true });
+            }
+        }
+    }
+</script>

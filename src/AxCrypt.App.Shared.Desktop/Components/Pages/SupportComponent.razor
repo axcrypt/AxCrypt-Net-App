@@ -6,6 +6,7 @@
 @inject SupportViewModel SupportViewModel
 @inject LogOnViewModel LogOnModel
 @inject IJSRuntime _jsRuntime
+@inject NavigationManager Navigation
 
 <div class="medium-12 columns support page-content-body-section">
     <p class="sub-head-clr hide-txt">@(PageDescription)</p>
@@ -139,12 +140,12 @@
 
     public void OpenBusinessPage()
     {
-        Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/Login?eff=1&reqFrom=Business");
+        Navigation.NavigateTo("/planAndPay?plan=business");
     }
 
     public void OpenPremiumPage()
     {
-        Core.BrowseUtility.RedirectToAccountWebUrl("{0}HomeUser/Login?eff=1&reqFrom=Premium");
+        Navigation.NavigateTo("/planAndPay");
     }
 
 

@@ -6,6 +6,7 @@ using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.UI;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -88,9 +89,9 @@ namespace AxCrypt.Core.Service
             await New<ICache>().UpdateItemAsync(async () => await _service.SaveAsync(keyPairs), _key).Free();
         }
 
-        public async Task SignupAsync(EmailAddress email, CultureInfo culture, string? utm = null)
+        public async Task SignupAsync(EmailAddress email, CultureInfo culture, string signUpFrom, string? utm = null, string? platForm = null)
         {
-            await New<ICache>().UpdateItemAsync(async () => await _service.SignupAsync(email, culture, utm), _key).Free();
+            await New<ICache>().UpdateItemAsync(async () => await _service.SignupAsync(email, culture, signUpFrom, utm, platForm), _key).Free();
         }
 
         public async Task<AccountStatus> StatusAsync(EmailAddress email)
@@ -177,6 +178,21 @@ namespace AxCrypt.Core.Service
         public async Task SetMyAccountViewerPlanAsync()
         {
             await _service.SetMyAccountViewerPlanAsync();
+        }
+
+        public async Task<IEnumerable<PricingInfoApiModel>> GetPurchasePricingAsync(string signUpFrom, string discountCode, string ip, int members, string country)
+        {
+            return await New<ICache>().UpdateItemAsync(() => _service.GetPurchasePricingAsync(signUpFrom, discountCode, ip, members, country)).Free();
+        }
+
+        public async Task<Uri> GetStripeCheckoutSessionUrlAsync(PurchaseInfoApiModel purchaseInfoApiModel)
+        {
+            return await New<ICache>().UpdateItemAsync(() => _service.GetStripeCheckoutSessionUrlAsync(purchaseInfoApiModel)).Free();
+        }
+
+        public async Task<string> GetPayPalCheckoutSessionUrlAsync(int subsMonths, string currency, string ip)
+        {
+            return await New<ICache>().UpdateItemAsync(() => _service.GetPayPalCheckoutSessionUrlAsync(subsMonths, currency, ip)).Free();
         }
     }
 }
