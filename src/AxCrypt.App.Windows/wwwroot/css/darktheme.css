@@ -3363,3 +3363,216 @@ bold.text-style {
 .erp-card .axl-msg {
   color: #E8ECF1 !important;
 }
+
+/* =============================================================
+   Login page — sign-up step indicator, CTA, hints, footer.
+   Belt-and-suspenders !important overrides so these newer classes
+   stay dark even before loginnew.min.css finishes parsing.
+   ============================================================= */
+.lp-step {
+  color: #7A8494 !important;
+}
+
+.lp-step-dot {
+  background: #2A3645 !important;
+  color: #B5BCC7 !important;
+}
+
+.lp-step--active {
+  color: #B8E89A !important;
+}
+
+.lp-step--active .lp-step-dot {
+  background: #7FCC5C !important;
+  color: #0F1A07 !important;
+}
+
+.lp-step-sep {
+  background: linear-gradient(90deg, #7FCC5C 0%, #2A3645 100%) !important;
+}
+
+.lp-info--offline {
+  background: rgba(245, 158, 11, 0.12) !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
+  color: #FCD34D !important;
+}
+
+.lp-info--offline svg {
+  color: #FCD34D !important;
+}
+
+.lp-cta {
+  background: linear-gradient(180deg, #7FCC5C 0%, #5FB13E 100%) !important;
+  color: #0F1A07 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+.lp-cta:disabled {
+  background: #2A3645 !important;
+  color: #6B7280 !important;
+}
+
+.lp-hint {
+  color: #B5BCC7 !important;
+}
+
+.lp-hint strong {
+  color: #E8ECF1 !important;
+}
+
+.lp-form-foot {
+  border-top-color: #2A3645 !important;
+}
+
+.lp-input-eye {
+  color: #B5BCC7 !important;
+}
+
+.lp-input-eye:hover {
+  background: #232E3B !important;
+  color: #E8ECF1 !important;
+}
+
+.lp-loading-card {
+  background: #1E2530 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55) !important;
+}
+
+.lp-loading-spinner {
+  border-color: rgba(127, 204, 92, 0.2) !important;
+  border-top-color: #7FCC5C !important;
+}
+
+.lp-loading-msg {
+  color: #B5BCC7 !important;
+}
+
+/* =============================================================
+   Sign-up plan pills, trial row, trust row — dark overrides.
+   ============================================================= */
+.sup-plan {
+  background: #1C2530 !important;
+  border-color: #3A4554 !important;
+  color: #E8ECF1 !important;
+}
+
+.sup-plan small {
+  color: #B5BCC7 !important;
+}
+
+.sup-plan--free {
+  border-color: rgba(127, 204, 92, 0.55) !important;
+  background: rgba(127, 204, 92, 0.14) !important;
+  color: #B8E89A !important;
+}
+
+.sup-plan--free small {
+  color: #B8E89A !important;
+}
+
+.sup-plan--premium {
+  border-color: rgba(251, 191, 36, 0.55) !important;
+  background: rgba(251, 191, 36, 0.14) !important;
+  color: #FCD34D !important;
+}
+
+.sup-plan--premium small {
+  color: #FCD34D !important;
+}
+
+.sup-plan--business {
+  background: #F3F4F6 !important;
+  border-color: #F3F4F6 !important;
+  color: #111827 !important;
+}
+
+.sup-plan--business small {
+  color: #4B5563 !important;
+}
+
+.sup-trial {
+  background: rgba(127, 204, 92, 0.14) !important;
+  border-color: rgba(127, 204, 92, 0.35) !important;
+  color: #B8E89A !important;
+}
+
+.sup-trial:hover {
+  border-color: rgba(127, 204, 92, 0.65) !important;
+}
+
+.sup-trial-check {
+  accent-color: #7FCC5C !important;
+}
+
+.sup-trial strong {
+  color: #D1F0BB !important;
+}
+
+.sup-risk {
+  color: #B5BCC7 !important;
+}
+
+.sup-trust {
+  color: #7A8494 !important;
+}
+
+/* =============================================================
+   About dialog dark overrides.
+   ============================================================= */
+.abt-logo-row {
+  border-bottom-color: #2A3340 !important;
+}
+
+.abt-product-name {
+  color: #E8ECF1 !important;
+}
+
+.abt-tagline {
+  color: #8892A0 !important;
+}
+
+.abt-info-grid {
+  background: #141A22 !important;
+  border-color: #2A3340 !important;
+}
+
+.abt-info-row + .abt-info-row {
+  border-top-color: #2A3340 !important;
+}
+
+.abt-info-label {
+  color: #6B7280 !important;
+}
+
+.abt-info-value {
+  color: #E8ECF1 !important;
+}
+
+.abt-link {
+  color: #B8E89A !important;
+}
+
+.abt-link:hover {
+  color: #A0D87E !important;
+}
+
+.abt-description {
+  color: #8892A0 !important;
+}
+
+.abt-copyright {
+  color: #4B5563 !important;
+}
+
+/* =============================================================
+   Danger button dark override (used in About / delete dialogs).
+   ============================================================= */
+.axd-btn--danger {
+  background: #EF4444 !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.axd-btn--danger:hover {
+  background: #DC2626 !important;
+}

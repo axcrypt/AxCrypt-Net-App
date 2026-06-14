@@ -1,2 +1,48 @@
-﻿@import "_variables";
+@import "_variables";
 @import "../_textencryption";
+
+// ── Business: active tab = true black in light mode ──────────────────────────
+.page-content-body-section .action-tabs {
+    .act-tab.active {
+        background: #000000 !important;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255, 255, 255, .06);
+
+        a {
+            color: #ffffff;
+        }
+    }
+}
+
+// ── Business: dark mode tab visibility fix ───────────────────────────────────
+// Brand colour is black (#232323) which blends into any dark background.
+// Override with a frosted-glass active tab so the tabs are clearly readable.
+html[data-theme="dark"] {
+    .page-content-body-section .action-tabs {
+        // Slightly warmer dark container so there is visible separation
+        // from the page background
+        background: #1e1e1e;
+
+        .act-tab a {
+            color: #b0b0b0;
+        }
+
+        // Active tab: semi-transparent white surface — stands out clearly
+        // against any dark background regardless of exact shade
+        .act-tab.active {
+            background: rgba(255, 255, 255, .13) !important;
+            border: 1px solid rgba(255, 255, 255, .18);
+            box-shadow:
+                0 1px 4px rgba(0, 0, 0, .3),
+                inset 0 1px 0 rgba(255, 255, 255, .06);
+
+            a {
+                font-weight: 700;
+                color: #f0f0f0;
+            }
+        }
+
+        .act-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, .06);
+        }
+    }
+}

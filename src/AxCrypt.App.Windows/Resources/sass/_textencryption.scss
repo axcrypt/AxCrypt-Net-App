@@ -276,22 +276,24 @@
 /* Dark theme */
 html[data-theme="dark"] {
     .page-content-body-section .action-tabs {
-        background: #1c2530;
+        background: #1a2232;
 
         .act-tab a {
             color: #b5bcc7;
         }
 
         .act-tab.active {
-            background: #232e3b;
+            background: $Colsublvl;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(255, 255, 255, .08);
 
             a {
-                color: lighten($brand-green, 30%);
+                font-weight: 700;
+                color: #fff;
             }
         }
 
-        .act-tab:hover {
-            background: rgba(255, 255, 255, .04);
+        .act-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, .06);
         }
     }
 

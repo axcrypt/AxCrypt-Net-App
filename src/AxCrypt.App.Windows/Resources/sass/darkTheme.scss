@@ -1332,9 +1332,56 @@ bold.text-style {
 }
 
 /* =============================================================
-   Quick Actions — clean-up attention pill
-   (visible only while files are open / pending re-encryption)
+   Quick Actions
    ============================================================= */
+
+// Enabled tiles — in dark mode, the light-mode brand-colour fill
+// (green for premium/free, black for business) is invisible or
+// harsh against dark surfaces. Replace with an elevated dark card
+// that uses the universal dark-theme token system so all three
+// themes look correct from a single rule set.
+.qa-btn:not(.disabled) {
+    background: $dt-surface-3 !important;       // #232E3B — elevated surface
+    border-color: $dt-border-strong !important;  // #3A4554
+    color: $dt-text !important;                  // #E8ECF1
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, .22),
+        0 4px 12px rgba(0, 0, 0, .28),
+        inset 0 1px 0 rgba(255, 255, 255, .05) !important;
+
+    &:hover {
+        background: $dt-surface-4 !important;    // #2A3645 — one step higher
+        border-color: $dt-brand !important;       // green accent ring on hover
+        box-shadow:
+            0 2px 4px rgba(0, 0, 0, .25),
+            0 8px 20px rgba(0, 0, 0, .32),
+            inset 0 1px 0 rgba(255, 255, 255, .07) !important;
+    }
+
+    &:active {
+        box-shadow:
+            0 1px 2px rgba(0, 0, 0, .2),
+            inset 0 1px 3px rgba(0, 0, 0, .18) !important;
+    }
+
+    &:focus-visible {
+        box-shadow:
+            0 0 0 3px $dt-accent-ring,
+            0 4px 10px rgba(0, 0, 0, .25),
+            inset 0 1px 0 rgba(255, 255, 255, .05) !important;
+    }
+
+    .qa-label {
+        color: $dt-text !important;
+    }
+
+    .qa-desc {
+        color: $dt-text-secondary !important;
+    }
+}
+
+// Clean-up attention pill
+// (visible only while files are open / pending re-encryption)
 .qa-cleanup-pill {
     background: rgba(251, 191, 36, .10) !important;
     border: 1px solid rgba(251, 191, 36, .35) !important;
