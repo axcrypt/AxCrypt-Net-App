@@ -1806,27 +1806,28 @@ html[data-theme="dark"] {
         box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
     }
     .smv-card:hover {
-        border-color: rgba($brand-green, .55);
+        border-color: rgba(127, 204, 92, .45);
         box-shadow: 0 6px 18px rgba(0, 0, 0, .45);
     }
 
+    // Use hardcoded dark-theme green so Business tier ($brand-green: #000) stays visible.
     .smv-avatar {
-        background: rgba($brand-green, .22);
-        color: lighten($brand-green, 25%);
+        background: rgba(127, 204, 92, .20);
+        color: #7FCC5C;
     }
 
     .smv-label { color: #b5bcc7; }
     .smv-email { color: #e8ecf1; }
     .smv-email--to { color: #cbd5e1; }
     .smv-more {
-        background: rgba($brand-green, .22);
-        color: lighten($brand-green, 25%);
+        background: rgba(127, 204, 92, .18);
+        color: #7FCC5C;
     }
 
     .smv-pill {
-        background: rgba($brand-green, .22);
-        border-color: rgba($brand-green, .45);
-        color: lighten($brand-green, 25%);
+        background: rgba(127, 204, 92, .18);
+        border-color: rgba(127, 204, 92, .40);
+        color: #B8E89A;
     }
     .smv-pill--once {
         background: rgba(245, 158, 11, .18);
@@ -1845,9 +1846,9 @@ html[data-theme="dark"] {
         color: #e8ecf1;
     }
     .smv-icon-btn--primary:hover {
-        background: rgba($brand-green, .22);
-        border-color: rgba($brand-green, .55);
-        color: lighten($brand-green, 30%);
+        background: rgba(127, 204, 92, .20);
+        border-color: rgba(127, 204, 92, .50);
+        color: #9BE076;
     }
     .smv-icon-btn--danger:hover {
         background: rgba(248, 113, 113, .18);
