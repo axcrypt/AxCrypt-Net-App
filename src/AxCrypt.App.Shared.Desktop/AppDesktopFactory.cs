@@ -59,7 +59,6 @@ public static class AppDesktopFactory
         services.AddSingleton<DesktopFilePickerViewModel>();
 
         services.AddSingleton<PopupService>();
-        services.AddSingleton<UserService>();
         services.AddSingleton<PaidFeaturegateService>();
         services.AddSingleton<NavPageService>();
         services.AddSingleton<BatchFileOperationService>();

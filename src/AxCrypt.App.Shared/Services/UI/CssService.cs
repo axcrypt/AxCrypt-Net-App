@@ -40,6 +40,7 @@ public class CssService : ICssService
         }
         else
         {
+            cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "modern.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "sharesecret.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "filepicker.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "textencryption.min.css"));

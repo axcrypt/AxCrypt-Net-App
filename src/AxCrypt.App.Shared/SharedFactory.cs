@@ -40,66 +40,66 @@ namespace AxCrypt.App.Shared
             services.AddSingleton<ProgressBarService>();
             services.AddSingleton<FileDropService>();
             services.AddSingleton<ErrorReportService>();
+            services.AddSingleton<UserService>();
+
+            services.AddSingleton<GlobalDialogViewModel>();
+            services.AddSingleton<UserPromptViewModel>();
+
+            services.AddSingleton<LogOnViewModel>();
+            services.AddSingleton<MultiFactorAuthViewModel>();
+            services.AddSingleton<UpgradeVersionViewModel>();
+            services.AddSingleton<UpgradeSubscriptionViewModel>();
+            services.AddSingleton<RegisterViewModel>();
+            services.AddSingleton<SwitchUserViewModel>();
+            services.AddSingleton<AccountSetupViewModel>();
+
+            services.AddSingleton<ShareKeyViewModel>();
 
             services.AddSingleton<FindFilesViewModel>();
             services.AddSingleton<VaultViewModel>();
             services.AddSingleton<SupportViewModel>();
             services.AddSingleton<NotificationItemViewModel>();
             services.AddSingleton<FilePasswordDialogViewModel>();
-
-            services.AddSingleton<RegisterViewModel>();
             services.AddSingleton<AppLocalizationOptions>();
-            services.AddSingleton<SwitchUserViewModel>();
-
-            services.AddSingleton<SecretService>();
             services.AddSingleton<SupportService>();
-            services.AddSingleton<LogOnViewModel>();
+            services.AddSingleton<AboutViewModel>();
+            services.AddSingleton<FolderSettingsViewModel>();
+
+            services.AddSingleton<UserNotificationService>();
+            services.AddSingleton<NotificationViewModel>();
             services.AddSingleton<NotificationViewModel>();
             services.AddSingleton<FeedbackViewModel>();
-            services.AddSingleton<AboutViewModel>();
-            services.AddSingleton<GlobalDialogViewModel>();
-            services.AddSingleton<ShareKeyViewModel>();
-            services.AddSingleton<FolderSettingsViewModel>();
-            services.AddSingleton<UserPromptViewModel>();
+
+            services.AddSingleton<TextEncryptionViewModel>();
+            services.AddSingleton<TextShareViewModel>();
+
+            services.AddSingleton<SecretService>();
 
             services.AddSingleton<SecretClientModel>();
             services.AddSingleton<SecretsClientModel>();
-
             services.AddSingleton<NewSecretViewModel>();
             services.AddSingleton<ShareSecretViewModel>();
             services.AddScoped<ManageSecretViewModel>();
             services.AddSingleton<EditSecretViewModel>();
             services.AddSingleton<ViewSecretViewModel>();
-            services.AddSingleton<UserNotificationService>();
-            services.AddSingleton<NotificationViewModel>();
-
             services.AddSingleton<ManageSecMsgrViewModel>();
             services.AddSingleton<NewSecMsgrViewModel>();
+
             services.AddSingleton<SecuredMessengerModel>();
-
-            services.AddTransient<SecretsListViewModel>();
-
             services.AddSingleton<ISecureMessagingService, SecureMessagingService>();
             services.AddSingleton<LogViewModel>();
-            services.AddSingleton<MultiFactorAuthViewModel>();
-            services.AddSingleton<UpgradeVersionViewModel>();
-            services.AddSingleton<UpgradeSubscriptionViewModel>();
-
             services.AddSingleton<FilePickerViewModel>();
+            services.AddSingleton<DropBoxAccessInfo>();
+            services.AddSingleton<OneDriveAccessInfo>();
+            services.AddSingleton<iCloudAccessInfo>();
+            services.AddSingleton<FileProviderSelectionViewModel>();
+
+            services.AddTransient<SecretsListViewModel>();
 
             TypeMap.Register.Singleton<IUpgradeVersionService>(() => new UpgradeVersionService());
             TypeMap.Register.Singleton<AccountStatusViewModel>(() => new AccountStatusViewModel());
             TypeMap.Register.Singleton<IUserNotificationService>(() => new UserNotificationApiService());
             TypeMap.Register.Singleton<AxCryptUserAccountViewModel>(() => new AxCryptUserAccountViewModel());
-
-            services.AddSingleton<DropBoxAccessInfo>();
-            services.AddSingleton<OneDriveAccessInfo>();
-            services.AddSingleton<iCloudAccessInfo>();
-            services.AddSingleton<FileProviderSelectionViewModel>();
-            services.AddSingleton<AccountSetupViewModel>();
-
-            services.AddSingleton<TextEncryptionViewModel>();
-            services.AddSingleton<TextShareViewModel>();
         }
 
         public static void RegisterTypeFactories()
