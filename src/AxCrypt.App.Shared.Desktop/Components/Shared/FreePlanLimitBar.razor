@@ -128,28 +128,28 @@
     // ── Per-feature copy ────────────────────────────────────────
     private static string DefaultTitle(FeatureKey f) => f switch
     {
-        FeatureKey.FileEncryption => "files encrypted",
-        FeatureKey.KeyShare       => "key shares",
-        FeatureKey.PasswordEntry  => "passwords saved",
-        FeatureKey.SecuredMessage => "secured messages",
+        FeatureKey.FileEncryption => Texts.FreeLimitFileEncryptionLabel,
+        FeatureKey.KeyShare => Texts.FreeLimitKeyShareLabel,
+        FeatureKey.PasswordEntry => Texts.FreeLimitPasswordEntryLabel,
+        FeatureKey.SecuredMessage => Texts.FreeLimitSecuredMessageLabel,
         _                         => "usage",
     };
 
     private static string DefaultRemainingHint(FeatureKey f) => f switch
     {
-        FeatureKey.FileEncryption => "encryptions remaining this month",
-        FeatureKey.KeyShare       => "key shares remaining",
-        FeatureKey.PasswordEntry  => "passwords slots remaining",
+        FeatureKey.FileEncryption => Texts.FreeLimitFileEncryptionStatusText,
+        FeatureKey.KeyShare => Texts.FreeLimitKeyShareStatusText,
+        FeatureKey.PasswordEntry => Texts.FreeLimitPasswordEntryStatusText,
         FeatureKey.SecuredMessage => "messages remaining this month",
-        _                         => "remaining",
+        _ => Texts.FreeLimitRemainingStatusText,
     };
 
     private static string DefaultMaxedHint(FeatureKey f) => f switch
     {
-        FeatureKey.FileEncryption => "Monthly limit reached — upgrade for unlimited files",
-        FeatureKey.KeyShare       => "Sharing limit reached — upgrade to share with more people",
-        FeatureKey.PasswordEntry  => "Password limit reached — upgrade for unlimited entries",
-        FeatureKey.SecuredMessage => "Message limit reached — upgrade for unlimited messages",
-        _                         => "Limit reached — upgrade to continue",
+        FeatureKey.FileEncryption => Texts.FreeLimitFileEncryptionReachedText,
+        FeatureKey.KeyShare => Texts.FreeLimitKeyShareReachedText,
+        FeatureKey.PasswordEntry => Texts.FreeLimitPasswordEntryReachedText,
+        FeatureKey.SecuredMessage => Texts.FreeLimitSecuredMessageReachedText,
+        _ => Texts.FreeLimitReachedText,
     };
 }

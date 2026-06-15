@@ -17880,9 +17880,6 @@ We're sad to see you go and hope you enjoyed your time with AxCrypt!</value>
     <value>Expire in</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
-  <data name="ExpiryDatesKeys" xml:space="preserve">
-    <value>Expiry dates on keys</value>
-  </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Exported successfully!</value>
   </data>
@@ -20913,14 +20910,8 @@ A recipient is identified by the AxCrypt ID sign in email, but we do not send th
 Please specify the language to use in the invitation and an optional personal message below.</value>
     <comment>This is a dialog text that is presented whenever a new user is about to be invited to use AxCrypt, either as a result of an attempt to key share to someone who does not have an AxCrypt ID yet, or as the result of an explicit invitation.</comment>
   </data>
-  <data name="KeyShareLabelText" xml:space="preserve">
-    <value>Key Share</value>
-  </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>Tap the &lt;b&gt;Apply&lt;/b&gt; button.</value>
-  </data>
-  <data name="KeyShareOneTime" xml:space="preserve">
-    <value>One-time share keys</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>Typically, employees share relevant and work-related information with each other. However, worrying about the data’s security during the sharing process is inevitable. Since this raises concern about sharing secured files, it is incredibly vital for encryption software to have a feature that lets you share and receive files more securely.</value>
@@ -25835,9 +25826,6 @@ HubSpot is an integrated software solution with which we cover various aspects o
   <data name="ProtectFileIdentityPopup" xml:space="preserve">
     <value>Protect file identity securely</value>
   </data>
-  <data name="PROText" xml:space="preserve">
-    <value>PRO</value>
-  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>The selected subsciption time is invalid. A valid subscription has to be at least {0} month and no longer than {1} months.</value>
   </data>
@@ -26042,20 +26030,8 @@ Please &lt;a href="mailto:premium@axcrypt.net"&gt;contact us&lt;/a&gt; and we wi
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>We urge you to re-attempt the payment ASAP to protect your sensitive data and continue enjoying the paid features.</value>
   </data>
-  <data name="RecentFilesAES256Always" xml:space="preserve">
-    <value>AES-256 always</value>
-  </data>
-  <data name="RecentFilesBatchEncryption" xml:space="preserve">
-    <value>Batch encryption</value>
-  </data>
   <data name="RecentFilesDropFiles" xml:space="preserve">
     <value>Drop files here to encrypt</value>
-  </data>
-  <data name="RecentFilesFreePlan" xml:space="preserve">
-    <value>Free plan allows encrypting 3 files. Upgrade for unlimited.</value>
-  </data>
-  <data name="RecentFileShareContextMenu" xml:space="preserve">
-    <value>Share encrypted files securely with a one-time key</value>
   </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>You haven't opened any secured files recently. Click &lt;b&gt;Open Secured&lt;/b&gt; to browse for a secured files.</value>
@@ -26080,9 +26056,6 @@ Please &lt;a href="mailto:premium@axcrypt.net"&gt;contact us&lt;/a&gt; and we wi
   </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>Recent Files</value>
-  </data>
-  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
-    <value>Unlimited Encryption</value>
   </data>
   <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
     <value>Files you open will appear here while they are decrypted.</value>
@@ -26782,9 +26755,6 @@ Subject: AxCrypt Report Snapshot</value>
   </data>
   <data name="ReviewsLabel" xml:space="preserve">
     <value>Reviews</value>
-  </data>
-  <data name="RevokeAccessAnytime" xml:space="preserve">
-    <value>Revoke access anytime</value>
   </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>русский (Russian)</value>
@@ -30182,5 +30152,50 @@ no prompts. By default UI and all prompts are displayed.
   </data>
   <data name="QuickActionUnlimitedFileEncryptions" xml:space="preserve">
     <value>Unlimited file encryptions</value>
+  </data>
+  <data name="FreeLimitFileEncryptionLabel" xml:space="preserve">
+    <value>files encrypted</value>
+  </data>
+  <data name="FreeLimitFileEncryptionReachedText" xml:space="preserve">
+    <value>Monthly limit reached — upgrade for unlimited files</value>
+  </data>
+  <data name="FreeLimitFileEncryptionStatusText" xml:space="preserve">
+    <value>encryptions remaining this month</value>
+  </data>
+  <data name="FreeLimitKeyShareLabel" xml:space="preserve">
+    <value>key shares</value>
+  </data>
+  <data name="FreeLimitKeyShareReachedText" xml:space="preserve">
+    <value>Sharing limit reached — upgrade to share with more people</value>
+  </data>
+  <data name="FreeLimitKeyShareStatusText" xml:space="preserve">
+    <value>key shares remaining</value>
+  </data>
+  <data name="FreeLimitPasswordEntryLabel" xml:space="preserve">
+    <value>passwords saved</value>
+  </data>
+  <data name="FreeLimitPasswordEntryReachedText" xml:space="preserve">
+    <value>Password limit reached — upgrade for unlimited entries</value>
+  </data>
+  <data name="FreeLimitPasswordEntryStatusText" xml:space="preserve">
+    <value>passwords slots remaining</value>
+  </data>
+  <data name="FreeLimitReachedText" xml:space="preserve">
+    <value>Limit reached — upgrade to continue</value>
+  </data>
+  <data name="FreeLimitRemainingStatusText" xml:space="preserve">
+    <value>remaining</value>
+  </data>
+  <data name="FreeLimitSecuredMessageLabel" xml:space="preserve">
+    <value>secured messages</value>
+  </data>
+  <data name="FreeLimitSecuredMessageReachedText" xml:space="preserve">
+    <value>Message limit reached — upgrade for unlimited messages</value>
+  </data>
+  <data name="FreeLimitSecuredMessageStatusText" xml:space="preserve">
+    <value>messages remaining this month</value>
+  </data>
+  <data name="FreeLimitUsageLabel" xml:space="preserve">
+    <value>usage</value>
   </data>
 </root>
