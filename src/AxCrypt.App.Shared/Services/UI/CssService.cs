@@ -32,6 +32,7 @@ public class CssService : ICssService
             new KeyValuePair<string, string>(cssBasePath, "secretlist.min.css"),
             new KeyValuePair<string, string>(cssBasePath, "securedmessenger.min.css"),
             new KeyValuePair<string, string>(cssBasePath, "support.min.css"),
+            new KeyValuePair<string, string>(cssBasePath, "modern.min.css")
         };
 
         if (isFreeLayout)
@@ -40,7 +41,6 @@ public class CssService : ICssService
         }
         else
         {
-            cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "modern.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "sharesecret.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "filepicker.min.css"));
             cssFiles.Add(new KeyValuePair<string, string>(cssBasePath, "textencryption.min.css"));
