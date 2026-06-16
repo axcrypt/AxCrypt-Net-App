@@ -443,7 +443,7 @@ public partial class App : Application
         {
             AxCServiceProvider.GetService<IWindowService>().RestoreWindowWithFocus();
             AxCServiceProviderExtension.GetService<PaidFeaturegateService>().ShowPaidGate(
-                Texts.RecentFilesUnlimitedEncryption,
+                Texts.QuickActionEncryptFile,
                 Texts.QuickActionEncryptFileHelpText,
                 new[] { Texts.QuickActionUnlimitedFileEncryptions, Texts.QuickActionEncryptFilesSeconds, Texts.QuickActionSecureStrongEncryption, Texts.UnlockAdvancedEncryptionFeaturesPopup });
 

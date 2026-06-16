@@ -452,7 +452,7 @@ public class RecentFilesViewModel : ViewModelBase
         if (availableEncryptionLimit <= 0)
         {
             AxCServiceProviderExtension.GetService<PaidFeaturegateService>().ShowPaidGate(
-                Texts.RecentFilesUnlimitedEncryption,
+                Texts.QuickActionUnlimitedFileEncryptions,
                 Texts.QuickActionEncryptFileHelpText,
                 new[] { Texts.QuickActionUnlimitedFileEncryptions, Texts.QuickActionEncryptFilesSeconds, Texts.QuickActionSecureStrongEncryption, Texts.UnlockAdvancedEncryptionFeaturesPopup });
             return;
