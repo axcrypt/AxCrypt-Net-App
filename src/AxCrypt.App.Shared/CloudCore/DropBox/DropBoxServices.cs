@@ -567,7 +567,6 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
                 try
                 {
                     DeleteResult deleteResult = await _dropboxclient.Files.DeleteV2Async(new DeleteArg(tempFolder));
-                    cloudFileItem.FileID = newFileId;
 
                     return deleteResult != null;
                 }
