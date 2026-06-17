@@ -385,27 +385,17 @@ else
 
     private async Task BatchRenameAsync()
     {
-        // Reveal the first selected file — revealing multiple Explorer
+        // Rename the selected file — multiple Explorer
         // windows for each would be disruptive.
-        string? first = _selectedPaths.FirstOrDefault();
-        if (first != null)
-        {
-            ViewModel.SelectedFilePath = first;
-            ViewModel.SelectedFile = System.IO.Path.GetFileName(first);
-            await ViewModel.PrepareFileActionAsync("RenameAnonymously");
-        }
+        await ViewModel.BatcRetoreAndRenameVaultFilesAsync(_selectedPaths.ToList(), "RenameAnonymously");
         ClearVaultSelection();
     }
 
     private async Task BatchRestoreRenameAsync()
     {
-        if (_selectedPaths.Any())
-        {
-            ViewModel.SelectedFilePath = _selectedPaths.First();
-            ViewModel.SelectedFile = System.IO.Path.GetFileName(_selectedPaths.First());
-            await ViewModel.PrepareFileActionAsync("RenameOriginal");
-        }
-
+        // Restore the selected file — multiple Explorer
+        // windows for each would be disruptive.
+        await ViewModel.BatcRetoreAndRenameVaultFilesAsync(_selectedPaths.ToList(), "RenameOriginal");
         ClearVaultSelection();
     }
     private bool isAddMenuOpen { get; set; }

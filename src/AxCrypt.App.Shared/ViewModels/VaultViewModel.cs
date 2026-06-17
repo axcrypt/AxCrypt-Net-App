@@ -332,6 +332,23 @@ namespace AxCrypt.App.Shared.ViewModels
         }
 
         /// <summary>
+        /// Retore & Rename a batch of vault files
+        /// </summary>
+        public async Task BatcRetoreAndRenameVaultFilesAsync(IEnumerable<string> filePaths, string fileOperation)
+        {
+            await RunVaultBatchAsync(
+                filePaths,
+                fileOperation,
+                async (path) =>
+                {
+                    SelectedFilePath = path;
+                    await HandleFileActionAsync(fileOperation);
+                });
+
+            SelectedSubFolderPath = "";
+        }
+
+        /// <summary>
         /// Fault-tolerant per-file vault loop. Publishes the summary via
         /// <see cref="IBatchToastBridge"/>; falls back to IStatusAlertService
         /// when no bridge is registered.
