@@ -28,11 +28,6 @@ namespace AxCrypt.Core.Session
 
         private async Task DeviceWasLocked(object sender, DeviceLockedEventArgs e)
         {
-            if (New<LicensePolicy>().Capabilities.Has(LicenseCapability.Viewer))
-            {
-                return;
-            }
-
             if (!New<IUIThread>().IsOn)
             {
                 throw new InternalErrorException("Must be on UI thread to handle device locking events.");

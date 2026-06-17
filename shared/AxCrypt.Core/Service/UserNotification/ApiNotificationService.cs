@@ -73,9 +73,9 @@ namespace AxCrypt.Core.Service.Secrets
                 IEnumerable<UserNotificationApiModel> notificationList = await _apiClient.GetAllUserNotificationAsync(useremail, subslevel).Free();
                 return notificationList;
             }
-            catch (UnauthorizedException ex)
+            catch (UnauthorizedException)
             {
-                throw ex;
+                throw;
             }
         }
         
@@ -91,9 +91,9 @@ namespace AxCrypt.Core.Service.Secrets
                 bool isInserted = await _apiClient.InsertUserNotificationAsync(notificationModel).Free();
                 return isInserted;
             }
-            catch (UnauthorizedException ex)
+            catch (UnauthorizedException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -107,9 +107,9 @@ namespace AxCrypt.Core.Service.Secrets
             {
                 //
             }
-            catch (UnauthorizedException ex)
+            catch (UnauthorizedException)
             {
-                throw ex;
+                throw;
             }
             return false;
         }

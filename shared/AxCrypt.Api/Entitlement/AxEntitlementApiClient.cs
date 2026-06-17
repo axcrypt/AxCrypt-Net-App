@@ -50,18 +50,11 @@ namespace AxCrypt.Api
             {
                 SubscriptionLevel = subsLevel,
             };
-            try
-            {
-                RestContent content = new RestContent(Serializer.Serialize(entitlementApiModel));
-                RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("POST", resource, Timeout, content)).Free();
-                ApiCaller.EnsureStatusOk(restResponse);
-                EntitlementApiModel userSecrets = Serializer.Deserialize<EntitlementApiModel>(restResponse.Content);
-                return userSecrets;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            RestContent content = new RestContent(Serializer.Serialize(entitlementApiModel));
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("POST", resource, Timeout, content)).Free();
+            ApiCaller.EnsureStatusOk(restResponse);
+            EntitlementApiModel userSecrets = Serializer.Deserialize<EntitlementApiModel>(restResponse.Content);
+            return userSecrets;
         }
 
         /// <summary>

@@ -35,7 +35,7 @@ namespace AxCrypt.Mono.Portable
 {
     public class PortableFactory : IPortableFactory
     {
-        public static AxCryptHMACSHA1 AxCryptHMACSHA1()
+        public static AxCrypt.Abstractions.Algorithm.AxCryptHMACSHA1 AxCryptHMACSHA1()
         {
             return new AxCryptHMACSHA1Wrapper(new HMACSHA1CryptoServiceProvider());
         }

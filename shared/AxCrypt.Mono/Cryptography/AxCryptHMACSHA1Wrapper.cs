@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AxCrypt.Mono.Cryptography
 {
-    internal class AxCryptHMACSHA1Wrapper : AxCryptHMACSHA1
+    internal class AxCryptHMACSHA1Wrapper : AxCrypt.Abstractions.Algorithm.AxCryptHMACSHA1
     {
         private System.Security.Cryptography.KeyedHashAlgorithm _hmac;
 

@@ -66,9 +66,22 @@ namespace AxCrypt.Core.Crypto.Asymmetric
             _cryptoHash.BlockUpdate(input, inOff, length);
         }
 
+        public void BlockUpdate(ReadOnlySpan<byte> input)
+        {
+            _cryptoHash.BlockUpdate(input.ToArray(), 0, input.Length);
+        }
+
         public int DoFinal(byte[] output, int outOff)
         {
             return _cryptoHash.DoFinal(output, outOff);
+        }
+
+        public int DoFinal(Span<byte> output)
+        {
+            byte[] hash = new byte[GetDigestSize()];
+            int length = _cryptoHash.DoFinal(hash, 0);
+            hash.AsSpan(0, length).CopyTo(output);
+            return length;
         }
 
         public void Reset()

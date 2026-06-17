@@ -25,8 +25,8 @@
 
 #endregion Coypright and License
 
-using AxCrypt.Abstractions;
 using System;
+using System.Diagnostics;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -65,10 +65,10 @@ namespace AxCrypt.Core.Crypto
         /// <param name="cryptoId">The id of the crypto to use for the wrap.</param>
         public virtual long KeyWrapIterations(Guid cryptoId)
         {
-            DateTime startTime = New<INow>().Utc;
+            Stopwatch stopwatch = Stopwatch.StartNew();
             WrapIterator wrapIterator = new WrapIterator(cryptoId);
 
-            long iterationsPerSecond = IterationsPerSecond(startTime, wrapIterator.Iterate);
+            long iterationsPerSecond = IterationsPerSecond(stopwatch, wrapIterator.Iterate);
             long defaultIterations = iterationsPerSecond / 20;
 
             if (defaultIterations < 5000)
@@ -79,18 +79,17 @@ namespace AxCrypt.Core.Crypto
             return defaultIterations;
         }
 
-        private static long IterationsPerSecond(DateTime startTime, Action<long> iterate)
+        private static long IterationsPerSecond(Stopwatch stopwatch, Action<long> iterate)
         {
             long iterationsIncrement = 1000;
             long totalIterations = 0;
-            DateTime endTime;
             do
             {
                 iterate(iterationsIncrement);
                 totalIterations += iterationsIncrement;
-                endTime = New<INow>().Utc;
-            } while ((endTime - startTime).TotalMilliseconds < 500);
-            long iterationsPerSecond = totalIterations * 1000 / (long)(endTime - startTime).TotalMilliseconds;
+            } while (stopwatch.ElapsedMilliseconds < 500);
+            long elapsedMilliseconds = Math.Max(1, stopwatch.ElapsedMilliseconds);
+            long iterationsPerSecond = totalIterations * 1000 / elapsedMilliseconds;
             return iterationsPerSecond;
         }
     }

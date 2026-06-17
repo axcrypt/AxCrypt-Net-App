@@ -35,8 +35,12 @@ using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.UI.ViewModel
 {
-    public class PasswordStrengthMeterViewModel : ViewModelBase
+    public class PasswordStrengthMeterViewModel
     {
+        ///commended for core migration 
+
+        //: ViewModelBase
+
         public PasswordStrengthMeterViewModel()
         {
             InitializePropertyValues();
@@ -44,13 +48,34 @@ namespace AxCrypt.Core.UI.ViewModel
             SubscribeToModelEvents();
         }
 
-        public string PasswordCandidate { get { return GetProperty<string>(nameof(PasswordCandidate)); } set { SetProperty(nameof(PasswordCandidate), value); } }
+        //public string PasswordCandidate { get { return GetProperty<string>(nameof(PasswordCandidate)); } set { SetProperty(nameof(PasswordCandidate), value); } }
 
-        public int EstimatedBits { get { return GetProperty<int>(nameof(EstimatedBits)); } set { SetProperty(nameof(EstimatedBits), value); } }
+        private string _passwordStrength;
 
-        public int PercentStrength { get { return GetProperty<int>(nameof(PercentStrength)); } set { SetProperty(nameof(PercentStrength), value); } }
+        public string? PasswordCandidate
+        {
+            get
+            {
+                return _passwordStrength;
+            }
+            set
+            {
+                _passwordStrength = value;
+                TestCandidate(value);
+            }
+        }
 
-        public PasswordStrength PasswordStrength { get { return GetProperty<PasswordStrength>(nameof(PasswordStrength)); } set { SetProperty(nameof(PasswordStrength), value); } }
+        public int EstimatedBits { get; set; }
+
+        public int PercentStrength { get; set; }
+
+        public PasswordStrength PasswordStrength { get; set; }
+
+        //public int EstimatedBits { get { return GetProperty<int>(nameof(EstimatedBits)); } set { SetProperty(nameof(EstimatedBits), value); } }
+
+        //public int PercentStrength { get { return GetProperty<int>(nameof(PercentStrength)); } set { SetProperty(nameof(PercentStrength), value); } }
+
+        //public PasswordStrength PasswordStrength { get { return GetProperty<PasswordStrength>(nameof(PasswordStrength)); } set { SetProperty(nameof(PasswordStrength), value); } }
 
         public string StrengthTip
         {
@@ -85,7 +110,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private void BindPropertyChangedEvents()
         {
-            BindPropertyChangedInternal(nameof(PasswordCandidate), (string pc) => { TestCandidate(pc); });
+            //BindPropertyChangedInternal(nameof(PasswordCandidate), (string pc) => { TestCandidate(pc); });
         }
 
         private static void SubscribeToModelEvents()

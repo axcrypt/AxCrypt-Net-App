@@ -25,19 +25,18 @@
 
 #endregion Coypright and License
 
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AxCrypt.Core.Crypto.Asymmetric
 {
     internal class BouncyCastleRandomGenerator : Org.BouncyCastle.Crypto.Prng.IRandomGenerator
     {
         public void AddSeedMaterial(byte[] seed)
+        {
+        }
+
+        public void AddSeedMaterial(ReadOnlySpan<byte> seed)
         {
         }
 
@@ -52,14 +51,30 @@ namespace AxCrypt.Core.Crypto.Asymmetric
                 throw new ArgumentNullException("buffer");
             }
 
-            byte[] random = Resolve.RandomGenerator.Generate(buffer.Length);
-            random.CopyTo(buffer, 0);
+            System.Security.Cryptography.RandomNumberGenerator.Fill(buffer);
         }
 
         public void NextBytes(byte[] buffer, int start, int len)
         {
-            byte[] random = Resolve.RandomGenerator.Generate(len);
-            Array.Copy(random, 0, buffer, start, len);
+            if (buffer == null)
+            {
+                throw new ArgumentNullException(nameof(buffer));
+            }
+            if (start < 0 || start > buffer.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(start));
+            }
+            if (len < 0 || len > buffer.Length - start)
+            {
+                throw new ArgumentOutOfRangeException(nameof(len));
+            }
+
+            System.Security.Cryptography.RandomNumberGenerator.Fill(buffer.AsSpan(start, len));
+        }
+
+        public void NextBytes(Span<byte> buffer)
+        {
+            System.Security.Cryptography.RandomNumberGenerator.Fill(buffer);
         }
 
         public static SecureRandom CreateSecureRandom()

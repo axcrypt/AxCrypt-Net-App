@@ -5,15 +5,15 @@ using System.Linq;
 
 namespace AxCrypt.Core.UI
 {
-    public enum SecretShareVisibility
-    {
-        None = 0,
-        Once,
-        Forever,
-        OneHour,
-        OneDay,
-        OneWeek,
-        OneMonth,
-        OneYear
-    }
+    //public enum SecretShareVisibility
+    //{
+    //    None = 0,
+    //    Once,
+    //    Forever,
+    //    OneHour,
+    //    OneDay,
+    //    OneWeek,
+    //    OneMonth,
+    //    OneYear
+    //}
 }

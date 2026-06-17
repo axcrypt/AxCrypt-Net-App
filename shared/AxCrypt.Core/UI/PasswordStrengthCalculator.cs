@@ -25,10 +25,10 @@
 
 #endregion Coypright and License
 
-using Org.BouncyCastle.Utilities.Zlib;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 
@@ -102,18 +102,15 @@ namespace AxCrypt.Core.UI
 
         private static int CompressedLength(string text)
         {
-            using (MemoryStream textStream = new MemoryStream(Encoding.UTF8.GetBytes(text)))
+            using (MemoryStream compressedStream = new MemoryStream())
             {
-                using (ZOutputStream deflatingStream = new ZOutputStream(Stream.Null, 9))
+                using (ZLibStream deflatingStream = new ZLibStream(compressedStream, CompressionLevel.SmallestSize, leaveOpen: true))
                 {
-                    deflatingStream.FlushMode = JZlib.Z_NO_FLUSH;
+                    using MemoryStream textStream = new MemoryStream(Encoding.UTF8.GetBytes(text));
                     textStream.CopyTo(deflatingStream);
-                    deflatingStream.FlushMode = JZlib.Z_FINISH;
-                    deflatingStream.Finish();
-
-                    int length = (int)deflatingStream.TotalOut;
-                    return length;
                 }
+
+                return (int)compressedStream.Length;
             }
         }
 

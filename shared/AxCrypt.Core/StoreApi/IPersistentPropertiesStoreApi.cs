@@ -1,4 +1,5 @@
-﻿using AxCrypt.Api.Model.Migration;
+﻿using AxCrypt.Abstractions.Rest;
+using AxCrypt.Api.Model.Migration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,8 +8,8 @@ namespace AxCrypt.Core.StoreApi
 {
     public interface IPersistentPropertiesStoreApi
     {
-        Task<bool> CreatePersistentPropertiesAsync(PersistentPropertiesApiModel persistentProperties);
+        Task<bool> CreatePersistentPropertiesAsync(AxCrypt.Abstractions.Rest.RestContent restContent);
 
-        Task<PersistentPropertiesApiModel> GetPersistentPropertiesAsync();
+        Task<AxCrypt.Abstractions.Rest.RestResponse> GetPersistentPropertiesAsync();
     }
 }

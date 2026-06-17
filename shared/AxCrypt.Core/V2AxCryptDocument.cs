@@ -35,10 +35,10 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Reader;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
-using Org.BouncyCastle.Utilities.Zlib;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 
 using static AxCrypt.Abstractions.TypeResolve;
@@ -245,18 +245,21 @@ namespace AxCrypt.Core
             DocumentHeaders.WriteStartWithHmac(outputHmacStream);
             if (DocumentHeaders.IsCompressed)
             {
-                using (ZOutputStream deflatingStream = new ZOutputStream(encryptingStream, -1))
+                _plaintextLength = 0;
+                CountingWriteStream compressedCounter = new CountingWriteStream(encryptingStream);
+                using (ZLibStream deflatingStream = new ZLibStream(compressedCounter, CompressionLevel.Optimal, leaveOpen: true))
                 {
-                    deflatingStream.FlushMode = JZlib.Z_SYNC_FLUSH;
-                    inputStream.CopyTo(deflatingStream);
-                    deflatingStream.FlushMode = JZlib.Z_FINISH;
-                    deflatingStream.Finish();
-
-                    _plaintextLength = deflatingStream.TotalIn;
-                    _compressedPlaintextLength = deflatingStream.TotalOut;
-                    encryptingStream.FinalFlush();
-                    DocumentHeaders.WriteEndWithHmac(hmacCalculator, outputHmacStream, _plaintextLength, _compressedPlaintextLength);
+                    byte[] buffer = new byte[OS.Current.StreamBufferSize];
+                    int read;
+                    while ((read = inputStream.Read(buffer, 0, buffer.Length)) != 0)
+                    {
+                        deflatingStream.Write(buffer, 0, read);
+                        _plaintextLength += read;
+                    }
                 }
+                _compressedPlaintextLength = compressedCounter.BytesWritten;
+                encryptingStream.FinalFlush();
+                DocumentHeaders.WriteEndWithHmac(hmacCalculator, outputHmacStream, _plaintextLength, _compressedPlaintextLength);
             }
             else
             {

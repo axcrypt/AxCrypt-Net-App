@@ -5,10 +5,6 @@ namespace AxCrypt.Api.Model
     [JsonObject(MemberSerialization.OptIn)]
     public class StoreKitTransaction
     {
-        public StoreKitTransaction()
-        {
-        }
-
         public StoreKitTransaction(string productId, string receiptData, string paidBy, string paidFor, string transactionId, string currencyPaid, decimal amountPaid, DateTime dateTimeUtc, string paymentStatus)
         {
             ProductId = productId;
@@ -63,5 +59,7 @@ namespace AxCrypt.Api.Model
 
         [JsonProperty("discount_code")]
         public string AppliedDiscountCode { get; set; } = string.Empty;
+
+        public string PurchaseEnvironment { get; set; } = "Production";
     }
 }

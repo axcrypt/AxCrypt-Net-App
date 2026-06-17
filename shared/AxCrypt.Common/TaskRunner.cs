@@ -35,6 +35,11 @@ namespace AxCrypt.Common
         /// </remarks>
         public static void WaitFor(Func<Task> task)
         {
+            if (task == null)
+            {
+                throw new ArgumentNullException(nameof(task));
+            }
+
             bool isOn = New<IUIThread>().IsOn;
             try
             {
@@ -56,6 +61,11 @@ namespace AxCrypt.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static T WaitFor<T>(Func<Task<T>> task)
         {
+            if (task == null)
+            {
+                throw new ArgumentNullException(nameof(task));
+            }
+
             bool isOn = New<IUIThread>().IsOn;
             try
             {

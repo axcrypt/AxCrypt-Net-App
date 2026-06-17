@@ -20,14 +20,27 @@ namespace AxCrypt.Api
 
         public async Task<RestResponse> RestAsync(RestIdentity identity, RestRequest request)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             try
             {
                 RestResponse response = await RestCaller.SendAsync(identity, request).Free();
                 return response;
             }
+            catch (OperationCanceledException ex)
+            {
+                throw new OfflineApiException(ApiCallMessage(request, ex), ex);
+            }
+            catch (TimeoutException ex)
+            {
+                throw new OfflineApiException(ApiCallMessage(request, ex), ex);
+            }
             catch (Exception ex) when (!(ex is OfflineApiException))
             {
-                throw new ApiException(string.Format(CultureInfo.InvariantCulture, "{2} {1} {0}", request.Url, request.Method, ex.Message), ex);
+                throw new ApiException(ApiCallMessage(request, ex), ex);
             }
         }
 
@@ -48,12 +61,17 @@ namespace AxCrypt.Api
             }
             if (restResponse.StatusCode == HttpStatusCode.BadRequest)
             {
-                throw new BadRequestApiException("Malformed API request.");
+                throw new BadRequestApiException(string.IsNullOrEmpty(restResponse.Content) ? "Malformed API request." : restResponse.Content, restResponse.StatusCode);
             }
-            if (restResponse.StatusCode != HttpStatusCode.OK && restResponse.StatusCode != HttpStatusCode.Created)
+            if (restResponse.StatusCode != HttpStatusCode.OK && restResponse.StatusCode != HttpStatusCode.Created && restResponse.StatusCode != HttpStatusCode.NoContent)
             {
-                throw new ApiException(restResponse.Content, ErrorStatus.ApiHttpResponseError);
+                throw new ApiException(restResponse.Content, restResponse.StatusCode);
             }
+        }
+
+        private static string ApiCallMessage(RestRequest request, Exception exception)
+        {
+            return string.Format(CultureInfo.InvariantCulture, "{0} {1} failed: {2}", request.Method, request.Url, exception.Message);
         }
 
         public static void EnsureStatusOk(ResponseBase apiResponse)

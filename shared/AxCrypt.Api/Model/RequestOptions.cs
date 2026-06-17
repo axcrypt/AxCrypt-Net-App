@@ -22,10 +22,31 @@ namespace AxCrypt.Api
         [JsonProperty("pageNumber")]
         public int PageNumber { get; set; } = 0;
 
+        [JsonProperty("allitem")]
+        public bool AllItem { get; set; }
+
         [JsonProperty("startDate")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [JsonProperty("endDate")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
+
+        [JsonProperty("isOnlyPaidOrTrialUsers")]
+        public bool IsOnlyPaidOrTrialUsers { get; set; }
+
+        [JsonProperty("subscriptionlevel")]
+        public string SubscriptionLevel { get; set; } = string.Empty;
+
+        [JsonProperty("ispushnotification")]
+        public bool IsPushNotification { get; set; }
+
+        [JsonProperty("preferredculturename")]
+        public string PreferredCultureName { get; set; } = string.Empty;
+
+        [JsonProperty("accountsOlderThanInDaysFilter")]
+        public int AccountsOlderThanInDaysFilter { get; set; }
+
+        [JsonProperty("maxuserlimit")]
+        public int MaxUserLimit { get; set; } = 200000;
     }
 }

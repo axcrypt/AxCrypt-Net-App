@@ -26,31 +26,20 @@
 #endregion Coypright and License
 
 using AxCrypt.Abstractions.Algorithm;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Prng;
-using Org.BouncyCastle.Security;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AxCrypt.Core.Algorithm.Implementation
 {
     internal class BouncyCastleRandomNumberGenerator : RandomNumberGenerator
     {
-        private SecureRandom _rng;
-
-        public BouncyCastleRandomNumberGenerator()
-        {
-            _rng = new SecureRandom(new DigestRandomGenerator(new Sha512Digest()));
-            _rng.SetSeed(SecureRandom.GetSeed(32));
-        }
-
         public override void GetBytes(byte[] data)
         {
-            _rng.NextBytes(data);
-            _rng.SetSeed(SecureRandom.GetSeed(16));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            System.Security.Cryptography.RandomNumberGenerator.Fill(data);
         }
     }
 }

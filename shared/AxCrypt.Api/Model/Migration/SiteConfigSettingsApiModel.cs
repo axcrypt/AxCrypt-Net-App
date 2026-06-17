@@ -9,10 +9,11 @@ namespace AxCrypt.Api.Model.Migration
         public SiteConfigSettingsApiModel()
         { }
 
-        [JsonProperty("key")]
-        public string? Key { get; set; }
 
-        [JsonProperty("value")]
-        public string? Value { get; set; }
+        [JsonProperty("siteconfigkey")]
+        public string? SiteConfigKey { get; set; }
+
+        [JsonProperty("siteconfigvalue")]
+        public string? SiteConfigValue { get; set; }
     }
 }

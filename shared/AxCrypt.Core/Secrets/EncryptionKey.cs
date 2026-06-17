@@ -30,25 +30,33 @@
 
 #endregion License
 
+using Newtonsoft.Json;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Secrets
-{
-    /// <summary>
-    /// An immutable encryption key container.
-    /// </summary>
-    /// <remarks>
-    /// Instances of this class cannot be serialized. Do not place in a location that survives an AppDomain restart.
-    /// </remarks>
+{  /// <summary>
+   /// An immutable encryption key container.
+   /// </summary>
+   /// <remarks>
+   /// Instances of this class cannot be serialized. Do not place in a location that survives an AppDomain restart.
+   /// </remarks>
+    [JsonObject(MemberSerialization = MemberSerialization.Fields)]
     public class EncryptionKey : IEquatable<EncryptionKey>
     {
         private byte[] _bytes;
+        private byte[] _randomKeyBytes;
 
         /// <summary>
         /// Encrypts a string for use in this AppDomain. The string can only be decrypted in the
         /// lifetime of this AppDomain. The decryption method is not publically visible.
         /// </summary>
         /// <param name="keyString">The password etc. It is assumed to be normalized by the caller.</param>
+        [JsonConstructor]
+        public EncryptionKey(byte[] bytes)
+        {
+            _bytes = bytes;
+        }
+
         public EncryptionKey(string passphrase)
         {
             if (passphrase == null)
@@ -59,6 +67,22 @@ namespace AxCrypt.Core.Secrets
             _bytes = New<TransientProtectedData>().Protect(passphrase);
         }
 
+        public EncryptionKey(string passphrase, byte[] key)
+        {
+            if (passphrase == null)
+            {
+                throw new ArgumentNullException("passphrase");
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException("key");
+            }
+
+            _bytes = New<TransientProtectedData>().Protect(passphrase, key);
+            _randomKeyBytes = key;
+        }
+
         public EncryptionKey(EncryptionKey key)
         {
             if (key == null)
@@ -66,6 +90,7 @@ namespace AxCrypt.Core.Secrets
                 throw new ArgumentNullException("key");
             }
             _bytes = key._bytes;
+            _randomKeyBytes = key._randomKeyBytes;
         }
 
         /// <summary>
@@ -76,7 +101,23 @@ namespace AxCrypt.Core.Secrets
         protected internal string DecryptPassphrase()
         {
             string keyString;
+
+            if (_randomKeyBytes != null)
+            {
+                return DecryptPassphrase(_randomKeyBytes);
+            }
+
             if (!New<TransientProtectedData>().TryUnprotect(_bytes, out keyString))
+            {
+                return null;
+            }
+            return keyString;
+        }
+
+        private string DecryptPassphrase(byte[] randomKey)
+        {
+            string keyString;
+            if (!New<TransientProtectedData>().TryUnprotect(_bytes, randomKey, out keyString))
             {
                 return null;
             }

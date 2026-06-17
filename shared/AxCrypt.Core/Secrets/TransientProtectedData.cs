@@ -5,9 +5,7 @@
 #region License
 
 /*
- *  AxCrypt.Xecrets.Core - Xecrets Core and Reference Implementation
- *
- *  Copyright (C) 2010 Svante Seleborg
+ *  Copyright (C) 2026 AxCrypt AB
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -83,6 +81,41 @@ namespace AxCrypt.Core.Secrets
             byte[] protectedBytes = Protect(bytes);
             Array.Clear(bytes, 0, bytes.Length);
             return protectedBytes;
+        }
+
+        public byte[] Protect(string value, byte[] key)
+        {
+            byte[] bytes = Encoding.Unicode.GetBytes(value);
+            byte[] protectedBytes = AesEncryption.EncryptData(bytes, key, Entropy());
+            Array.Clear(bytes, 0, bytes.Length);
+            return protectedBytes;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        public bool TryUnprotect(byte[] protectedValue, byte[] key, out string value)
+        {
+            value = null;
+            byte[] bytes;
+            if (!AesEncryption.TryUnprotect(protectedValue, key, _entropy, out bytes))
+            {
+                return false;
+            }
+            try
+            {
+                value = Encoding.Unicode.GetString(bytes, 0, bytes.Length);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                if (bytes != null)
+                {
+                    Array.Clear(bytes, 0, bytes.Length);
+                }
+            }
+            return true;
         }
 
         public byte[] Protect(byte[] value)

@@ -75,9 +75,9 @@ namespace AxCrypt.Core.Service.TextEncryption
                 Guid result = await _apiClient.ShareTextAsync(textEncryptionApiModel).Free();
                 return result;
             }
-            catch (UnauthorizedException ex)
+            catch (UnauthorizedException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -100,9 +100,9 @@ namespace AxCrypt.Core.Service.TextEncryption
 
                 return userAccountKeys.Select(uak => uak.ToUserPublicKey());
             }
-            catch (UnauthorizedException ex)
+            catch (UnauthorizedException)
             {
-                throw ex;
+                throw;
             }
         }
     }

@@ -77,21 +77,7 @@ namespace AxCrypt.Core.Session
 
         private async void VaultWatchedFolder_Changed(object sender, FileWatcherEventArgs e)
         {
-            IEnumerable<string> changedFiles = e.FullNames
-                .Where(fullName => !IsTemporaryVaultStagingFile(fullName))
-                .ToList();
-
-            if (!changedFiles.Any())
-            {
-                return;
-            }
-
-            await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.VaultFolderChange, changedFiles));
-        }
-
-        private static bool IsTemporaryVaultStagingFile(string fullName)
-        {
-            return string.Equals(System.IO.Path.GetExtension(fullName), ".tmp", StringComparison.OrdinalIgnoreCase);
+            await Resolve.SessionNotify.NotifyAsync(new SessionNotification(SessionNotificationType.VaultFolderChange, e.FullNames));
         }
 
         public void RemoveVaultWatchedFolder(string folderPath)

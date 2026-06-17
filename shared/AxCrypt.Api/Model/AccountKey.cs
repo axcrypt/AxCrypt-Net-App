@@ -10,14 +10,16 @@ namespace AxCrypt.Api.Model
     {
         public static readonly AccountKey Empty = new AccountKey(String.Empty, String.Empty, KeyPair.Empty, DateTime.MinValue, PrivateKeyStatus.PassphraseUnknown);
 
-        public AccountKey(string user, string thumbprint, KeyPair keyPair, DateTime timestamp, PrivateKeyStatus status)
+        public AccountKey(string user, string thumbprint, KeyPair keyPair, DateTime timestamp, PrivateKeyStatus status, PrivateKeyStatus userKeyPairStatus = PrivateKeyStatus.None)
         {
             User = user ?? throw new ArgumentNullException("user");
             Thumbprint = thumbprint ?? throw new ArgumentNullException("thumbprint");
             KeyPair = keyPair ?? throw new ArgumentNullException("keyPair");
 
             Timestamp = timestamp;
-            Status = status;
+            Status = status == PrivateKeyStatus.None ? userKeyPairStatus : status;
+            UserKeyPairStatus = userKeyPairStatus == PrivateKeyStatus.None ? status : userKeyPairStatus;
+
         }
 
         /// <summary>
@@ -68,6 +70,15 @@ namespace AxCrypt.Api.Model
         /// </value>
         [JsonProperty("keypair_status")]
         public PrivateKeyStatus Status { get; } 
+
+        /// <summary>
+        /// Gets the status of this key pair
+        /// </summary>
+        /// <value>
+        /// The status.
+        /// </value>
+        [JsonProperty("userkeypairstatus")]
+        public PrivateKeyStatus UserKeyPairStatus { get; }
 
         /// <summary>
         /// Gets the user name, typically the email address.

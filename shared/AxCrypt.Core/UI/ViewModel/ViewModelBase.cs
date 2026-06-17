@@ -34,6 +34,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -194,7 +195,8 @@ namespace AxCrypt.Core.UI.ViewModel
                         ex = ((AggregateException)ex).InnerExceptions.First();
                     }
                     New<IReport>().Exception(ex);
-                    throw ex;
+                    ExceptionDispatchInfo.Capture(ex).Throw();
+                    throw;
                 }
 
                 return isValid ? String.Empty : ValidationError.ToString(CultureInfo.InvariantCulture);

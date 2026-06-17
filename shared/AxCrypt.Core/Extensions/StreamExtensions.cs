@@ -26,10 +26,10 @@
 #endregion Coypright and License
 
 using AxCrypt.Abstractions.Algorithm;
-using Org.BouncyCastle.Utilities.Zlib;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 
 using static AxCrypt.Abstractions.TypeResolve;
@@ -121,7 +121,7 @@ namespace AxCrypt.Core.Extensions
                 {
                     using (Stream deflatedPlaintextStream = New<CryptoStreamBase>().Initialize(encryptedInputStream, transform, CryptoStreamMode.Read))
                     {
-                        using (Stream inflatedPlaintextStream = new ZInputStream(deflatedPlaintextStream))
+                        using (Stream inflatedPlaintextStream = new ZLibStream(deflatedPlaintextStream, CompressionMode.Decompress))
                         {
                             try
                             {

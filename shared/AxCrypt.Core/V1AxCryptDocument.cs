@@ -35,11 +35,11 @@ using AxCrypt.Core.IO;
 using AxCrypt.Core.Reader;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
-using Org.BouncyCastle.Utilities.Zlib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.IO.Compression;
 
 using static AxCrypt.Abstractions.TypeResolve;
 
@@ -220,16 +220,21 @@ namespace AxCrypt.Core
 
         private static void EncryptWithCompressionInternal(V1DocumentHeaders outputDocumentHeaders, Stream inputStream, Stream encryptingStream)
         {
-            using (ZOutputStream deflatingStream = new ZOutputStream(encryptingStream, -1))
+            long uncompressedLength = 0;
+            CountingWriteStream compressedCounter = new CountingWriteStream(encryptingStream);
+            using (ZLibStream deflatingStream = new ZLibStream(compressedCounter, CompressionLevel.Optimal, leaveOpen: true))
             {
-                deflatingStream.FlushMode = JZlib.Z_SYNC_FLUSH;
-                inputStream.CopyTo(deflatingStream);
-                deflatingStream.FlushMode = JZlib.Z_FINISH;
-                deflatingStream.Finish();
-
-                outputDocumentHeaders.UncompressedLength = deflatingStream.TotalIn;
-                outputDocumentHeaders.PlaintextLength = deflatingStream.TotalOut;
+                byte[] buffer = new byte[OS.Current.StreamBufferSize];
+                int read;
+                while ((read = inputStream.Read(buffer, 0, buffer.Length)) != 0)
+                {
+                    deflatingStream.Write(buffer, 0, read);
+                    uncompressedLength += read;
+                }
             }
+
+            outputDocumentHeaders.UncompressedLength = uncompressedLength;
+            outputDocumentHeaders.PlaintextLength = compressedCounter.BytesWritten;
         }
 
         /// <summary>

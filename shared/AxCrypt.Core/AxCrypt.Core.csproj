@@ -5,9 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
+    <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 	
   <ItemGroup>
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.1" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="10.0.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
@@ -16,7 +19,6 @@
     <ProjectReference Include="..\AxCrypt.Api\AxCrypt.Api.csproj" />
     <ProjectReference Include="..\AxCrypt.Common\AxCrypt.Common.csproj" />
     <ProjectReference Include="..\Axcrypt.Content\AxCrypt.Content.csproj" />
-    <ProjectReference Include="..\BouncyCastle.AxCrypt\src\BouncyCastle.AxCrypt.csproj" />
   </ItemGroup>
 
   <ItemGroup>

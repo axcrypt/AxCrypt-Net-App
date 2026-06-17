@@ -11,6 +11,6 @@ namespace AxCrypt.Core.StoreApi
 {
     public interface ISecretStoreApiService
     {
-        Task<IList<SecretApiModel>> GetListAsync(string userEmail);
+        Task<IEnumerable<SecretApiModel>> GetListAsync(string userEmail);
     }
 }

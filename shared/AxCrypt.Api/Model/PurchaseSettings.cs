@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace AxCrypt.Api.Model
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class PurchaseSettings
+    public class PurchaseSettings : BaseApiModel
     {
         public PurchaseSettings(string provider)
         {
@@ -16,26 +16,28 @@ namespace AxCrypt.Api.Model
         }
 
         public static PurchaseSettings Empty { get; } = new PurchaseSettings();
-
         [JsonProperty("provider")]
         public string Provider { get; private set; }
 
-        [JsonProperty("premiumProductIds")]
+        [JsonProperty("premiumproductids")]
         public string PremiumProductIdsWithAmount { get; set; }
 
-        [JsonProperty("businessProductIds")]
+        [JsonProperty("liteproductids")]
+        public string LiteProductIdsWithAmount { get; set; }
+
+        [JsonProperty("businessproductids")]
         public string BusinessProductIdsWithAmount { get; set; }
 
-        [JsonProperty("passwordManagerProductId")]
+        [JsonProperty("passwordmanagerproductid")]
         public string PasswordManagerProductId { get; set; }
 
-        [JsonProperty("yearlyDiscountPercent")]
+        [JsonProperty("yearlydiscountpercentage")]
         public int YearlyDiscountPercentage { get; set; }
 
-        [JsonProperty("taxRates")]
+        [JsonProperty("taxrates")]
         public string TaxRates { get; set; }
 
-        [JsonProperty("microPaymentProductId")]
+        [JsonProperty("micropaymentproductid")]
         public string MicroPaymentProductId { get; set; }
 
         public IDictionary<string, string> PremiumProductIdList
@@ -127,7 +129,7 @@ namespace AxCrypt.Api.Model
             return string.Empty;
         }
 
-        [JsonProperty("appstore_sandbox_url")]
+        [JsonProperty("appstoresandboxurl")]
         public string AppStoreSandboxUrl { get; set; }
     }
 }

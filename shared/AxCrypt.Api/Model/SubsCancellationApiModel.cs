@@ -11,13 +11,13 @@ namespace AxCrypt.Api.Model
     public class SubsCancellationApiModel : BaseApiModel
     {
         [JsonProperty("useremail")]
-        public string UserEmail { get; set; }
+        public string UserEmail { get; set; } = string.Empty;
 
         [JsonProperty("subslvl")]
-        public string SubscriptionLevel { get; set; }
+        public string SubscriptionLevel { get; set; } = string.Empty;
 
         [JsonProperty("cancelnoptns")]
-        public string CancelationReason { get; set; }
+        public string CancelationReason { get; set; } = string.Empty;
 
         public IEnumerable<string> CancelationReasonNames
         {
@@ -29,17 +29,21 @@ namespace AxCrypt.Api.Model
                 }
 
                 IEnumerable<int> cancelationReasons = CancelationReason.Split(',').Select(cr => int.Parse(cr));
-                return cancelationReasons.Select(cr => Enum.GetName(typeof(SubsCancelnRsnOptn), cr));
+                return cancelationReasons.Select(cr => Enum.GetName(typeof(SubsCancelnRsnOptn), cr))!;
             }
         }
 
         [JsonProperty("comment")]
-        public string Comment { get; set; }
+        public string Comment { get; set; } = string.Empty;
 
         [JsonProperty("userrecommendation")]
-        public string UserRecommendation { get; set; }
+        public string UserRecommendation { get; set; } = string.Empty;
 
         [JsonProperty("paymentprovider")]
-        public string PaymentProvider { get; set; }
+        public string PaymentProvider { get; set; } = string.Empty;
+
+
+        [JsonProperty("cancelnoptoutrsn")]
+        public string CancelnOptOutRsn { get; set; } = string.Empty;
     }
 }

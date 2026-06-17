@@ -15,6 +15,6 @@ namespace AxCrypt.Core.StoreApi
 
         Task<bool> CreateAsync(UTMTagPurchaseActivityApiModel utm);
 
-        Task<IEnumerable<UTMTagActivityExportApiModel>> ListUTMTagActivitiesAsync(IEnumerable<Guid> id);
+        Task<AxCrypt.Abstractions.Rest.RestResponse> ListUTMTagActivitiesAsync(IEnumerable<Guid> id);
     }
 }

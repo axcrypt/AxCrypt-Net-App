@@ -11,7 +11,7 @@
     <!-- Do not re-add System.Drawing.Common: Windows-only, crashed Mac AOT (forced slow interpreter); SystemEvents is referenced directly instead. -->
     <PackageReference Include="Microsoft.Win32.SystemEvents" Version="9.0.7" />
     <PackageReference Include="System.Runtime.Caching" Version="9.0.7" />
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="9.0.15" />
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="9.0.9" />
   </ItemGroup>
 
   <ItemGroup>

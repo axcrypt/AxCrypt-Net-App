@@ -25,20 +25,12 @@
 
 #endregion Coypright and License
 
-using AxCrypt.Abstractions;
-using AxCrypt.Abstractions.Algorithm;
-using AxCrypt.Core.Algorithm;
 using System;
-using System.Linq;
-
-using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Crypto
 {
     public class RandomGenerator : IRandomGenerator
     {
-        private RandomNumberGenerator _rng = New<RandomNumberGenerator>();
-
         public byte[] Generate(int count)
         {
             if (count < 0)
@@ -47,7 +39,7 @@ namespace AxCrypt.Core.Crypto
             }
 
             byte[] data = new byte[count];
-            _rng.GetBytes(data);
+            System.Security.Cryptography.RandomNumberGenerator.Fill(data);
             return data;
         }
     }

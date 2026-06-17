@@ -25,16 +25,11 @@
 
 #endregion Coypright and License
 
-using AxCrypt.Abstractions;
-using AxCrypt.Abstractions.Algorithm;
-using AxCrypt.Core.Algorithm;
-using AxCrypt.Core.Extensions;
 using AxCrypt.Core.Runtime;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 using System.Text;
-
-using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Crypto
 {
@@ -82,34 +77,14 @@ namespace AxCrypt.Core.Crypto
             return bytes;
         }
 
-        private static readonly byte[] _empty = new byte[0];
-
         private static byte[] F(string password, Salt salt, int derivationIterations)
         {
-            HMAC hmacsha512 = New<HMACSHA512>().Initialize(new SymmetricKey(new UTF8Encoding(false).GetBytes(password)));
-
-            hmacsha512.TransformBlock(salt.GetBytes(), 0, salt.Length, null, 0);
-            byte[] iBytes = 1.GetBigEndianBytes();
-
-            hmacsha512.TransformBlock(iBytes, 0, iBytes.Length, null, 0);
-            hmacsha512.TransformFinalBlock(_empty, 0, 0);
-
-            byte[] u = hmacsha512.Hash();
-            byte[] un = u;
-
-            for (int c = 2; c <= derivationIterations; ++c)
-            {
-                hmacsha512.Initialize();
-                hmacsha512.TransformBlock(u, 0, u.Length, null, 0);
-                hmacsha512.TransformFinalBlock(_empty, 0, 0);
-                u = hmacsha512.Hash();
-                for (int i = 0; i < u.Length; i++)
-                {
-                    un[i] ^= u[i];
-                }
-            }
-
-            return un;
+            return Rfc2898DeriveBytes.Pbkdf2(
+                new UTF8Encoding(false).GetBytes(password),
+                salt.GetBytes(),
+                derivationIterations,
+                HashAlgorithmName.SHA512,
+                64);
         }
     }
 }

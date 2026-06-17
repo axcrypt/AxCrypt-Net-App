@@ -11,7 +11,7 @@ namespace AxCrypt.Core.StoreApi
     {
         Task<Guid> CreateAsync(UTMTagApiModel model);
 
-        Task<IList<UTMTagApiModel>> GetUTMTagsAsync();
+        Task<IEnumerable<UTMTagApiModel>> GetUTMTagsAsync();
 
         Task<bool> UpdateAsync(UTMTagApiModel model);
 

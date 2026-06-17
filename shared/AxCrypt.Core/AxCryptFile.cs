@@ -468,33 +468,53 @@ namespace AxCrypt.Core
                     {
                         Task decryption = Task.Run(() =>
                         {
-                            Decrypt(from, pipeline, identity);
-                            pipeline.Complete();
-                        }).ContinueWith((t) => { if (t.IsFaulted) tokenSource.Cancel(); }, tokenSource.Token, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Current);
+                            try
+                            {
+                                Decrypt(from, pipeline, identity);
+                                pipeline.Complete();
+                            }
+                            catch
+                            {
+                                tokenSource.Cancel();
+                                throw;
+                            }
+                        });
 
                         Task encryption = Task.Run(async () =>
                         {
-                            bool isWriteProteced = from.IsWriteProtected;
-                            if (isWriteProteced)
+                            bool isWriteProtected = from.IsWriteProtected;
+                            try
                             {
-                                from.IsWriteProtected = false;
+                                if (isWriteProtected)
+                                {
+                                    from.IsWriteProtected = false;
+                                }
+                                await EncryptToFileWithBackupAsync(fileLock, (Stream s) =>
+                                {
+                                    Encrypt(pipeline, s, encryptedProperties, encryptionParameters, AxCryptOptions.EncryptWithCompression, progress);
+                                    return Constant.CompletedTask;
+                                }, progress).Free();
                             }
-                            await EncryptToFileWithBackupAsync(fileLock, (Stream s) =>
+                            catch
                             {
-                                Encrypt(pipeline, s, encryptedProperties, encryptionParameters, AxCryptOptions.EncryptWithCompression, progress);
-                                return Constant.CompletedTask;
-                            }, progress);
-                            from.IsWriteProtected = isWriteProteced;
-                        }).ContinueWith((t) => { if (t.IsFaulted) tokenSource.Cancel(); }, tokenSource.Token, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Current);
+                                tokenSource.Cancel();
+                                throw;
+                            }
+                            finally
+                            {
+                                from.IsWriteProtected = isWriteProtected;
+                            }
+                        });
 
+                        Task changeEncryption = Task.WhenAll(decryption, encryption);
                         try
                         {
-                            Task.WaitAll(decryption, encryption);
+                            await changeEncryption.Free();
                         }
-                        catch (AggregateException ae)
+                        catch (Exception ex)
                         {
-                            New<IReport>().Exception(ae);
-                            IEnumerable<Exception> exceptions = ae.InnerExceptions.Where(ex1 => ex1.GetType() != typeof(OperationCanceledException));
+                            New<IReport>().Exception(changeEncryption.Exception ?? ex);
+                            IEnumerable<Exception> exceptions = (changeEncryption.Exception?.Flatten().InnerExceptions ?? (IEnumerable<Exception>)new[] { ex }).Where(ex1 => ex1.GetType() != typeof(OperationCanceledException));
                             if (!exceptions.Any())
                             {
                                 return;
@@ -506,8 +526,8 @@ namespace AxCrypt.Core
                                 ExceptionDispatchInfo.Capture(axCryptExceptions.First()).Throw();
                             }
 
-                            Exception ex = exceptions.First();
-                            throw new InternalErrorException(ex.Message, Abstractions.ErrorStatus.Exception, ex);
+                            Exception firstException = exceptions.First();
+                            throw new InternalErrorException(firstException.Message, Abstractions.ErrorStatus.Exception, firstException);
                         }
                     }
                 }
@@ -1190,7 +1210,7 @@ namespace AxCrypt.Core
         {
             if (ex is OperationCanceledException)
             {
-                throw ex;
+                ExceptionDispatchInfo.Capture(ex).Throw();
             }
             throw new FileOperationException(ex.Message, dataStore.FullName, ErrorStatus(ex), ex);
         }

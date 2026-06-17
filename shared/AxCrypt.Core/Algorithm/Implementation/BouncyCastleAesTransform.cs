@@ -63,15 +63,15 @@ namespace AxCrypt.Core.Algorithm.Implementation
         {
             if (cipherMode == CipherMode.ECB && paddingMode == PaddingMode.None)
             {
-                return new BufferedBlockCipher(new AesFastEngine());
+                return new BufferedBlockCipher(new AesEngine());
             }
             if (cipherMode == CipherMode.CBC && paddingMode == PaddingMode.PKCS7)
             {
-                return new PaddedBufferedBlockCipher(new CbcBlockCipher(new AesFastEngine()), new Pkcs7Padding());
+                return new PaddedBufferedBlockCipher(new CbcBlockCipher(new AesEngine()), new Pkcs7Padding());
             }
             if (cipherMode == CipherMode.CBC && paddingMode == PaddingMode.None)
             {
-                return new BufferedBlockCipher(new CbcBlockCipher(new AesFastEngine()));
+                return new BufferedBlockCipher(new CbcBlockCipher(new AesEngine()));
             }
             throw new NotSupportedException("Only ECB and CBC w/Pkcs7 supported.");
         }

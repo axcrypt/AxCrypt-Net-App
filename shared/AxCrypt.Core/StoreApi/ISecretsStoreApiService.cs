@@ -21,5 +21,9 @@ namespace AxCrypt.Core.StoreApi
         Task<bool> UpdateSecretSharedWithAsync(ShareSecretApiModel sharedSecret);
 
         Task<bool> DeleteSecretSharedAsync(ShareSecretApiModel sharedSecret);
+
+        Task<long> GetFreeUserSecretsCountAsync(string userEmail);
+
+        Task<bool> InsertFreeUserSecretsAsync(string userEmail);
     }
 }

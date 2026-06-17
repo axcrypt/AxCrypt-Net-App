@@ -18,6 +18,12 @@
         FoundBetterDeal,
         UsageOther,
         PricingOther,
-        TechnicalOther
+        TechnicalOther,
+        CANCEL_SURVEY_REASON_UNSPECIFIED,
+        CANCEL_SURVEY_REASON_NOT_ENOUGH_USAGE,
+        CANCEL_SURVEY_REASON_TECHNICAL_ISSUES,
+        CANCEL_SURVEY_REASON_COST_RELATED,
+        CANCEL_SURVEY_REASON_FOUND_BETTER_APP,
+        CANCEL_SURVEY_REASON_OTHERS
     }
 }

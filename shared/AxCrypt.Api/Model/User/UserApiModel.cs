@@ -1,14 +1,16 @@
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace AxCrypt.Api.Model.User
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class UserApiModel : BaseApiModel
+    public class UserApiModel : UserAccountActivityApiModel
     {
         public static UserApiModel Empty = new UserApiModel(0, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, DateTime.MinValue, DateTime.MinValue);
+
+        public UserApiModel()
+        {
+        }
 
         public UserApiModel(long id, string userEmail, string role, string passwordSalt, string passwordHash, string activationCode, DateTime createdUtc, DateTime updatedUtc)
         {
@@ -25,9 +27,6 @@ namespace AxCrypt.Api.Model.User
         [JsonProperty("id")]
         public long Id { get; set; }
 
-        [JsonProperty("userEmail")]
-        public string UserEmail { get; set; }
-
         [JsonProperty("role")]
         public string Role { get; set; }
 
@@ -36,44 +35,20 @@ namespace AxCrypt.Api.Model.User
 
         [JsonProperty("passwordHash")]
         public string PasswordHash { get; set; }
-
-        [JsonProperty("providerUserKey")]
-        public string ProviderUserKey { get; set; }
-
+       
         [JsonProperty("activationCode")]
         public string ActivationCode { get; set; }
 
-        [JsonProperty("approvedTime")]
-        public DateTime ApprovedTime { get; set; }
+        [JsonProperty("isapproved")]
+        public bool IsApproved { get; set; }
 
-        [JsonProperty("locale")]
-        public string Locale { get; set; }
+        [JsonProperty("pendingemailchangefrom")]
+        public string PendingEmailChangeFrom { get; set; } = string.Empty;
 
-        [JsonProperty("lang")]
-        public int Lang { get; set; }
+        [JsonProperty("multifactortype")]
+        public string MultiFactorType { get; set; }
 
-        [JsonProperty("origin")]
-        public int Origin { get; set; }
-
-        [JsonProperty("lastPwdResetTime")]
-        public DateTime LastPwdResetTime { get; set; }
-
-        [JsonProperty("lastPwdChangedTime")]
-        public DateTime LastPwdChangedTime { get; set; }
-
-        [JsonProperty("lastLogonTime")]
-        public DateTime LastLogOnTime { get; set; }
-
-        [JsonProperty("lastLockedOutTime")]
-        public DateTime LastLockedOutTime { get; set; }
-
-        [JsonProperty("failedPwdAtmptCount")]
-        public int FailedPwdAtmptCount { get; set; }
-
-        [JsonProperty("failedPwdAtmptWindStart")]
-        public int FailedPwdAtmptWindStart { get; set; }
-
-        [JsonProperty("isEnabled")]
-        public bool IsEnabled { get; set; }
+        [JsonProperty("signupFrom")]
+        public string SignupFrom { get; set; }
     }
 }

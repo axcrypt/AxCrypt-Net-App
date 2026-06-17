@@ -78,9 +78,19 @@ namespace AxCrypt.Core.Algorithm.Implementation
             _digest.BlockUpdate(input, inOff, length);
         }
 
+        public void BlockUpdate(ReadOnlySpan<byte> input)
+        {
+            _digest.BlockUpdate(input);
+        }
+
         public int DoFinal(byte[] output, int outOff)
         {
             return _digest.DoFinal(output, outOff);
+        }
+
+        public int DoFinal(Span<byte> output)
+        {
+            return _digest.DoFinal(output);
         }
 
         public void Reset()

@@ -79,9 +79,9 @@ namespace AxCrypt.Core.Service.SecuredMessenger
             {
                 return await _apiClient.GetListAsync(requestOptions);
             }
-            catch (ApiException ex)
+            catch (ApiException)
             {
-                throw ex;
+                throw;
             }
             catch (UnauthorizedException)
             {
@@ -95,9 +95,9 @@ namespace AxCrypt.Core.Service.SecuredMessenger
             {
                 return await _apiClient.GetSentListAsync(requestOptions);
             }
-            catch (ApiException ex)
+            catch (ApiException)
             {
-                throw ex;
+                throw;
             }
             catch (UnauthorizedException)
             {
@@ -111,9 +111,9 @@ namespace AxCrypt.Core.Service.SecuredMessenger
             {
                 return await _apiClient.GetUnreadListAsync(requestOptions);
             }
-            catch (ApiException ex)
+            catch (ApiException)
             {
-                throw ex;
+                throw;
             }
             catch (UnauthorizedException)
             {
@@ -142,9 +142,9 @@ namespace AxCrypt.Core.Service.SecuredMessenger
             {
                 return await _apiClient.GetAsync(id, userEmail);
             }
-            catch (ApiException ex)
+            catch (ApiException)
             {
-                throw ex;
+                throw;
             }
             catch (UnauthorizedException)
             {

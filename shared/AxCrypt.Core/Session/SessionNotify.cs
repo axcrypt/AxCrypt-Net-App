@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2026, AxCrypt AB, All Rights Reserved
+ * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
