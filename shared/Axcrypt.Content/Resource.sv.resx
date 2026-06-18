@@ -18506,9 +18506,6 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
     <value>Avslutas om</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
-  <data name="ExpiryDatesKeys" xml:space="preserve">
-    <value>Utgångsdatum på nycklar</value>
-  </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Exporten lyckades!</value>
   </data>
@@ -19284,6 +19281,51 @@ Vi är ledsna att du lämnar oss, men vi hoppas du uppskattat AxCrypt.</value>
   </data>
   <data name="FreeLabel" xml:space="preserve">
     <value>Gratis</value>
+  </data>
+  <data name="FreeLimitFileEncryptionLabel" xml:space="preserve">
+    <value>filer krypterade</value>
+  </data>
+  <data name="FreeLimitFileEncryptionReachedText" xml:space="preserve">
+    <value>Månadsgräns uppnådd — uppgradera för obegränsade filer</value>
+  </data>
+  <data name="FreeLimitFileEncryptionStatusText" xml:space="preserve">
+    <value>krypteringar kvarstår denna månad</value>
+  </data>
+  <data name="FreeLimitKeyShareLabel" xml:space="preserve">
+    <value>Nyckeldelningar</value>
+  </data>
+  <data name="FreeLimitKeyShareReachedText" xml:space="preserve">
+    <value>Delandegräns uppnådd — uppgradera för att dela med fler personer</value>
+  </data>
+  <data name="FreeLimitKeyShareStatusText" xml:space="preserve">
+    <value>Nyckeldelningar återstår</value>
+  </data>
+  <data name="FreeLimitPasswordEntryLabel" xml:space="preserve">
+    <value>Lösenord sparade</value>
+  </data>
+  <data name="FreeLimitPasswordEntryReachedText" xml:space="preserve">
+    <value>Lösenordsgränsen har uppnåtts — uppgradera för obegränsat antal poster</value>
+  </data>
+  <data name="FreeLimitPasswordEntryStatusText" xml:space="preserve">
+    <value>Lösenordsplatser kvar</value>
+  </data>
+  <data name="FreeLimitReachedText" xml:space="preserve">
+    <value>Gränsen har uppnåtts — uppgradera för att fortsätta</value>
+  </data>
+  <data name="FreeLimitRemainingStatusText" xml:space="preserve">
+    <value>återstår</value>
+  </data>
+  <data name="FreeLimitSecuredMessageLabel" xml:space="preserve">
+    <value>Säkrade meddelanden</value>
+  </data>
+  <data name="FreeLimitSecuredMessageReachedText" xml:space="preserve">
+    <value>Meddelandegräns uppnådd — uppgradera för obegränsade meddelanden</value>
+  </data>
+  <data name="FreeLimitSecuredMessageStatusText" xml:space="preserve">
+    <value>meddelanden kvar denna månad</value>
+  </data>
+  <data name="FreeLimitUsageLabel" xml:space="preserve">
+    <value>Användning</value>
   </data>
   <data name="FreePasswordGeneratorText" xml:space="preserve">
     <value>Gratis lösenord &lt;br/&gt;generator</value>
@@ -21543,14 +21585,8 @@ En mottagare identifieras med epostadressen för sitt AxCrypt ID, men vi skickar
 Ange språk för inbjudan, och ett eventuellt personligt meddelande neda.</value>
     <comment>This is a dialog text that is presented whenever a new user is about to be invited to use AxCrypt, either as a result of an attempt to key share to someone who does not have an AxCrypt ID yet, or as the result of an explicit invitation.</comment>
   </data>
-  <data name="KeyShareLabelText" xml:space="preserve">
-    <value>Nyckeldelning</value>
-  </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>Tryck på &lt;b&gt;knappen Tillämpa&lt;/b&gt;.</value>
-  </data>
-  <data name="KeyShareOneTime" xml:space="preserve">
-    <value>Engångsdelningsnycklar</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>Vanligtvis delar anställda relevant och arbetsrelaterad information med varandra. Det är dock oundvikligt att oroa sig för datasäkerheten under delningsprocessen. Eftersom detta väcker oro för att dela skyddade filer är det otroligt viktigt att krypteringsprogram har en funktion som gör att ni kan dela och ta emot filer på ett säkrare sätt.</value>
@@ -26404,9 +26440,6 @@ HubSpot är en integrerad mjukvarulösning där vi täcker olika aspekter av vå
   <data name="ProtectFileIdentityPopup" xml:space="preserve">
     <value>Skydda filidentiteten säkert</value>
   </data>
-  <data name="PROText" xml:space="preserve">
-    <value>PRO</value>
-  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>Ogiltig tidsperiod, den måste vara minst {0} månad(er) och högst {1} månader.</value>
   </data>
@@ -26465,11 +26498,56 @@ Vänligen &lt;a href="mailto:business@axcrypt.net"&gt;kontakta oss&lt;/a&gt; så
   <data name="QueriesAboutAxCryptPremium" xml:space="preserve">
     <value>&lt;b&gt;Har du några frågor om AxCrypt Premium?&lt;/b&gt; Vänligen &lt;a href="mailto:premium@axcrypt.net"&gt;contact us&lt;/a&gt; och vi kommer att hjälpa dig så snart som möjligt.</value>
   </data>
+  <data name="QuickActionDecryptFile" xml:space="preserve">
+    <value>Dekryptera Fil</value>
+  </data>
+  <data name="QuickActionDecryptFileDescription" xml:space="preserve">
+    <value>Lås upp och få tillgång till skyddade filer</value>
+  </data>
+  <data name="QuickActionDecryptFileHelpText" xml:space="preserve">
+    <value>Dekryptera krypterade filer säkert med rätt lösenord.</value>
+  </data>
+  <data name="QuickActionEncryptFile" xml:space="preserve">
+    <value>Kryptera Filen</value>
+  </data>
+  <data name="QuickActionEncryptFileDescription" xml:space="preserve">
+    <value>Säkra filer med AES-256-kryptering</value>
+  </data>
+  <data name="QuickActionEncryptFileHelpText" xml:space="preserve">
+    <value>Du har nått gränsen för gratis kryptering. Uppgradera för att fortsätta skydda filer utan begänsningar.</value>
+  </data>
+  <data name="QuickActionEncryptFilesSeconds" xml:space="preserve">
+    <value>Kryptera filer på några sekunder</value>
+  </data>
+  <data name="QuickActionOpenEncrypted" xml:space="preserve">
+    <value>Öppna Krypterad</value>
+  </data>
+  <data name="QuickActionOpenEncryptedDescription" xml:space="preserve">
+    <value>Förhandsgranska krypterade filer utan att permanent dekryptera</value>
+  </data>
+  <data name="QuickActionOpenEncryptedHelpText" xml:space="preserve">
+    <value>Öppna och visa krypterade filer säkert samtidigt som originalfilen hålls krypterad på disken.</value>
+  </data>
+  <data name="QuickActionSecureStrongEncryption" xml:space="preserve">
+    <value>Säkra filer med stark kryptering</value>
+  </data>
+  <data name="QuickActionShareSecurely" xml:space="preserve">
+    <value>Dela på ett säkert sätt</value>
+  </data>
+  <data name="QuickActionShareSecurelyDescription" xml:space="preserve">
+    <value>Dela säker åtkomst till krypterade filer</value>
+  </data>
+  <data name="QuickActionShareSecurelyHelpText" xml:space="preserve">
+    <value>Dela krypterade filer säkert med andra utan att dela lösenord.</value>
+  </data>
   <data name="QuickActionsSubTitle" xml:space="preserve">
     <value>Ett-klicks åtkomst till det du gör mest – öppna, kryptera, dekryptera eller dela.</value>
   </data>
   <data name="QuickActionsTitle" xml:space="preserve">
     <value>Snabba Åtgärder</value>
+  </data>
+  <data name="QuickActionUnlimitedFileEncryptions" xml:space="preserve">
+    <value>Obegränsade filkrypteringar</value>
   </data>
   <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
     <value>Avancerade algoritmer</value>
@@ -26611,20 +26689,8 @@ Vänligen &lt;a href="mailto:business@axcrypt.net"&gt;kontakta oss&lt;/a&gt; så
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>Vi uppmanar dig att försöka betala igen så fort som möjligt för att skydda dina känsliga uppgifter och fortsätta att njuta av de betalda funktionerna.</value>
   </data>
-  <data name="RecentFilesAES256Always" xml:space="preserve">
-    <value>AES-256 alltid</value>
-  </data>
-  <data name="RecentFilesBatchEncryption" xml:space="preserve">
-    <value>Batchkryptering</value>
-  </data>
   <data name="RecentFilesDropFiles" xml:space="preserve">
     <value>Släpp filer här för kryptering</value>
-  </data>
-  <data name="RecentFilesFreePlan" xml:space="preserve">
-    <value>Gratisprenumeration tillåter kryptering av 3 filer. Uppgradera för obegränsad användning.</value>
-  </data>
-  <data name="RecentFileShareContextMenu" xml:space="preserve">
-    <value>Dela krypterade filer säkert med en engångsnyckel</value>
   </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>Du har inte öppnat några säkra filer nyligen. Klicka på &lt;b&gt;Open Secured&lt;/b&gt; för att bläddra efter säkra filer.</value>
@@ -26649,9 +26715,6 @@ Vänligen &lt;a href="mailto:business@axcrypt.net"&gt;kontakta oss&lt;/a&gt; så
   </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>Aktuella</value>
-  </data>
-  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
-    <value>Obegränsad Kryptering</value>
   </data>
   <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
     <value>Filer du öppnar kommer att visas här medan de dekrypteras.</value>
@@ -27353,9 +27416,6 @@ Till: support@axcrypt.net
   </data>
   <data name="ReviewsLabel" xml:space="preserve">
     <value>Recensioner</value>
-  </data>
-  <data name="RevokeAccessAnytime" xml:space="preserve">
-    <value>Återkalla åtkomst när som helst</value>
   </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>русский (Ryska)</value>

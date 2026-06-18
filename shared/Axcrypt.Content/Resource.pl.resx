@@ -17866,9 +17866,6 @@ Przykro nam, że rozstajesz się z nami i mamy nadzieję, że byłeś zadowolony
     <value>Wygasa</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
-  <data name="ExpiryDatesKeys" xml:space="preserve">
-    <value>Daty ważności klawiszy</value>
-  </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Eksport udał się sukcesem!</value>
   </data>
@@ -18644,6 +18641,51 @@ Przykro nam, że rozstajesz się z nami i mamy nadzieję, że byłeś zadowolony
   </data>
   <data name="FreeLabel" xml:space="preserve">
     <value>Bezpłatny</value>
+  </data>
+  <data name="FreeLimitFileEncryptionLabel" xml:space="preserve">
+    <value>pliki zaszyfrowane</value>
+  </data>
+  <data name="FreeLimitFileEncryptionReachedText" xml:space="preserve">
+    <value>Osiągnięty miesięczny limit — aktualizacja na nieograniczoną liczbę plików</value>
+  </data>
+  <data name="FreeLimitFileEncryptionStatusText" xml:space="preserve">
+    <value>szyfrowania pozostają w tym miesiącu</value>
+  </data>
+  <data name="FreeLimitKeyShareLabel" xml:space="preserve">
+    <value>Kluczowe akcje</value>
+  </data>
+  <data name="FreeLimitKeyShareReachedText" xml:space="preserve">
+    <value>Limit udostępniania — aktualizacja, aby udostępnić większej liczbie osób</value>
+  </data>
+  <data name="FreeLimitKeyShareStatusText" xml:space="preserve">
+    <value>Kluczowe akcje pozostały</value>
+  </data>
+  <data name="FreeLimitPasswordEntryLabel" xml:space="preserve">
+    <value>Hasła zapisane</value>
+  </data>
+  <data name="FreeLimitPasswordEntryReachedText" xml:space="preserve">
+    <value>Osiągnięty limit haseł — aktualizacja, aby uzyskać nieograniczone wpisy</value>
+  </data>
+  <data name="FreeLimitPasswordEntryStatusText" xml:space="preserve">
+    <value>Pozostałe sloty haseł</value>
+  </data>
+  <data name="FreeLimitReachedText" xml:space="preserve">
+    <value>Limit osiągnięty — aktualizacja, aby kontynuować</value>
+  </data>
+  <data name="FreeLimitRemainingStatusText" xml:space="preserve">
+    <value>pozostała</value>
+  </data>
+  <data name="FreeLimitSecuredMessageLabel" xml:space="preserve">
+    <value>Wiadomości zabezpieczone</value>
+  </data>
+  <data name="FreeLimitSecuredMessageReachedText" xml:space="preserve">
+    <value>Osiągnięty limit wiadomości — aktualizacja na nieograniczoną liczbę wiadomości</value>
+  </data>
+  <data name="FreeLimitSecuredMessageStatusText" xml:space="preserve">
+    <value>wiadomości pozostają w tym miesiącu</value>
+  </data>
+  <data name="FreeLimitUsageLabel" xml:space="preserve">
+    <value>Zastosowanie</value>
   </data>
   <data name="FreePasswordGeneratorText" xml:space="preserve">
     <value>Bezpłatny generator haseł</value>
@@ -20898,14 +20940,8 @@ Adresat jest identyfikowany przez AxCrypt ID w wiadomości e-mail, ale nie wysy�
 Podaj poniżej język zaproszenia i opcjonalną wiadomość osobistą.</value>
     <comment>This is a dialog text that is presented whenever a new user is about to be invited to use AxCrypt, either as a result of an attempt to key share to someone who does not have an AxCrypt ID yet, or as the result of an explicit invitation.</comment>
   </data>
-  <data name="KeyShareLabelText" xml:space="preserve">
-    <value>Udostępnij klucz</value>
-  </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>Naciśnij przycisk Apply.</value>
-  </data>
-  <data name="KeyShareOneTime" xml:space="preserve">
-    <value>Klucze jednorazowego udostępniania</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>Zazwyczaj pracownicy dzielą się istotnymi i zawodowymi informacjami między sobą. Jednak obawy o bezpieczeństwo danych podczas procesu udostępniania są nieuniknione. Ponieważ budzi to obawy dotyczące udostępniania zabezpieczonych plików, niezwykle ważne jest, aby oprogramowanie szyfrujące miało funkcję umożliwiającą bezpieczniejsze udostępnianie i odbieranie plików.</value>
@@ -25762,9 +25798,6 @@ Białe miejsca i części występujące w popularnych hasłach są ignorowane i 
   <data name="ProtectFileIdentityPopup" xml:space="preserve">
     <value>Chroń tożsamość pliku bezpiecznie</value>
   </data>
-  <data name="PROText" xml:space="preserve">
-    <value>PRO</value>
-  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>Wybrany czas subskrypcji jest nieprawidłowy. Ważna subskrypcja musi wynosić co najmniej {0} miesiąc(e) i nie dłużej niż {1} miesięcy.</value>
   </data>
@@ -25821,11 +25854,56 @@ Potwierdzenie zakupu zostanie wysłane na Twój email przez Twojego dostawcę p�
   <data name="QueriesAboutAxCryptPremium" xml:space="preserve">
     <value>&lt;b&gt;Czy masz jakieś pytania dotyczące AxCrypt Business?&lt;/b&gt; Prosimy &lt;a href="mailto:business@axcrypt.net"&gt; o kontakt &lt;/a&gt;, a my pomożemy jak najszybciej.</value>
   </data>
+  <data name="QuickActionDecryptFile" xml:space="preserve">
+    <value>Plik deszyfrowany</value>
+  </data>
+  <data name="QuickActionDecryptFileDescription" xml:space="preserve">
+    <value>Odblokuj i uzyskaj dostęp do chronionych plików</value>
+  </data>
+  <data name="QuickActionDecryptFileHelpText" xml:space="preserve">
+    <value>Odszyfruj zaszyfrowane pliki bezpiecznie, używając poprawnego hasła.</value>
+  </data>
+  <data name="QuickActionEncryptFile" xml:space="preserve">
+    <value>Encrypt File</value>
+  </data>
+  <data name="QuickActionEncryptFileDescription" xml:space="preserve">
+    <value>Bezpieczne pliki z szyfrowaniem AES-256</value>
+  </data>
+  <data name="QuickActionEncryptFileHelpText" xml:space="preserve">
+    <value>Osiągnąłeś limit darmowego szyfrowania. Zaktualizuj, aby nadal chronić pliki bez ograniczeń.</value>
+  </data>
+  <data name="QuickActionEncryptFilesSeconds" xml:space="preserve">
+    <value>Zaszyfruj pliki w kilka sekund</value>
+  </data>
+  <data name="QuickActionOpenEncrypted" xml:space="preserve">
+    <value>Otwarte szyfrowanie</value>
+  </data>
+  <data name="QuickActionOpenEncryptedDescription" xml:space="preserve">
+    <value>Podgląd zaszyfrowanych plików bez trwałego odszyfrowania</value>
+  </data>
+  <data name="QuickActionOpenEncryptedHelpText" xml:space="preserve">
+    <value>Otwórz i przeglądaj zaszyfrowane pliki bezpiecznie, zachowując oryginalny plik zaszyfrowany na dysku.</value>
+  </data>
+  <data name="QuickActionSecureStrongEncryption" xml:space="preserve">
+    <value>Zabezpiecz pliki z silnym szyfrowaniem</value>
+  </data>
+  <data name="QuickActionShareSecurely" xml:space="preserve">
+    <value>Udostępniaj bezpiecznie</value>
+  </data>
+  <data name="QuickActionShareSecurelyDescription" xml:space="preserve">
+    <value>Udostępnij bezpieczny dostęp do zaszyfrowanych plików</value>
+  </data>
+  <data name="QuickActionShareSecurelyHelpText" xml:space="preserve">
+    <value>Bezpieczne udostępnianie zaszyfrowanych plików innym bez udostępniania haseł.</value>
+  </data>
   <data name="QuickActionsSubTitle" xml:space="preserve">
     <value>Jednym kliknięciem dostęp do rzeczy, które robisz najczęściej — otwierasz, szyfruj, odszyfrujesz lub udostępniasz się.</value>
   </data>
   <data name="QuickActionsTitle" xml:space="preserve">
     <value>Szybkie akcje</value>
+  </data>
+  <data name="QuickActionUnlimitedFileEncryptions" xml:space="preserve">
+    <value>Nieograniczone szyfrowanie plików</value>
   </data>
   <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
     <value>Zaawansowane algorytmy</value>
@@ -25967,20 +26045,8 @@ Potwierdzenie zakupu zostanie wysłane na Twój email przez Twojego dostawcę p�
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>Zachęcamy do jak najszybszego ponownego dokonania płatności w celu ochrony poufnych danych i umożliwienia dalszego korzystania z płatnych funkcji.</value>
   </data>
-  <data name="RecentFilesAES256Always" xml:space="preserve">
-    <value>AES-256 zawsze</value>
-  </data>
-  <data name="RecentFilesBatchEncryption" xml:space="preserve">
-    <value>Szyfrowanie wsadowe</value>
-  </data>
   <data name="RecentFilesDropFiles" xml:space="preserve">
     <value>Wrzuć tutaj pliki do szyfrowania</value>
-  </data>
-  <data name="RecentFilesFreePlan" xml:space="preserve">
-    <value>Darmowy plan pozwala na szyfrowanie 3 plików. Ulepsz na nielimitowany.</value>
-  </data>
-  <data name="RecentFileShareContextMenu" xml:space="preserve">
-    <value>Udostępniaj zaszyfrowane pliki bezpiecznie za pomocą jednorazowego klucza</value>
   </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>Ostatnio nie otwierałeś żadnych zabezpieczonych plików. Kliknij &lt;b&gt;Otwórz zabezpieczone&lt;/b&gt;, aby wyszukać zabezpieczone pliki.</value>
@@ -26005,9 +26071,6 @@ Potwierdzenie zakupu zostanie wysłane na Twój email przez Twojego dostawcę p�
   </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>Ostatnie pliki</value>
-  </data>
-  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
-    <value>Nieograniczone szyfrowanie</value>
   </data>
   <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
     <value>Pliki, które otworzysz, pojawią się tutaj podczas ich odszyfrowania.</value>
@@ -26703,9 +26766,6 @@ Temat: Migawka raportu AxCrypt</value>
   </data>
   <data name="ReviewsLabel" xml:space="preserve">
     <value>Opinie </value>
-  </data>
-  <data name="RevokeAccessAnytime" xml:space="preserve">
-    <value>Cofnij dostęp w dowolnym momencie</value>
   </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>rosyjski</value>

@@ -17960,10 +17960,6 @@
     <value>过期</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
-  <data name="ExpiryDatesKeys" xml:space="preserve">
-    <value>密钥到期日期
-</value>
-  </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>导出成功！</value>
   </data>
@@ -18738,6 +18734,66 @@
   </data>
   <data name="FreeLabel" xml:space="preserve">
     <value>Free</value>
+  </data>
+  <data name="FreeLimitFileEncryptionLabel" xml:space="preserve">
+    <value>文件已加密
+</value>
+  </data>
+  <data name="FreeLimitFileEncryptionReachedText" xml:space="preserve">
+    <value>已达到每月限额——升级即可无限制使用文件。
+</value>
+  </data>
+  <data name="FreeLimitFileEncryptionStatusText" xml:space="preserve">
+    <value>本月剩余加密次数
+</value>
+  </data>
+  <data name="FreeLimitKeyShareLabel" xml:space="preserve">
+    <value>密钥共享
+</value>
+  </data>
+  <data name="FreeLimitKeyShareReachedText" xml:space="preserve">
+    <value>已达到共享限额——升级即可与更多人共享。
+</value>
+  </data>
+  <data name="FreeLimitKeyShareStatusText" xml:space="preserve">
+    <value>剩余密钥共享次数
+</value>
+  </data>
+  <data name="FreeLimitPasswordEntryLabel" xml:space="preserve">
+    <value>密码已保存
+</value>
+  </data>
+  <data name="FreeLimitPasswordEntryReachedText" xml:space="preserve">
+    <value>密码数量已达上限——升级即可获得无限条目
+</value>
+  </data>
+  <data name="FreeLimitPasswordEntryStatusText" xml:space="preserve">
+    <value>剩余密码槽位
+</value>
+  </data>
+  <data name="FreeLimitReachedText" xml:space="preserve">
+    <value>已达到限额——升级即可继续。
+</value>
+  </data>
+  <data name="FreeLimitRemainingStatusText" xml:space="preserve">
+    <value>剩余
+</value>
+  </data>
+  <data name="FreeLimitSecuredMessageLabel" xml:space="preserve">
+    <value>安全消息
+</value>
+  </data>
+  <data name="FreeLimitSecuredMessageReachedText" xml:space="preserve">
+    <value>消息数量已达上限——升级即可获得无限消息。
+</value>
+  </data>
+  <data name="FreeLimitSecuredMessageStatusText" xml:space="preserve">
+    <value>本月剩余消息数
+</value>
+  </data>
+  <data name="FreeLimitUsageLabel" xml:space="preserve">
+    <value>使用情况
+</value>
   </data>
   <data name="FreePasswordGeneratorText" xml:space="preserve">
     <value>免费密码 &lt;br/&gt;发电机</value>
@@ -21002,9 +21058,6 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>点击 &lt;b&gt;应用&lt;/b&gt; 按钮。</value>
-  </data>
-  <data name="KeyShareOneTime" xml:space="preserve">
-    <value>一次性共享密钥</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>通常，员工会相互共享相关和与工作相关的信息。但是，在共享过程中担心数据的安全性是不可避免的。由于这引起了对共享安全文件的担忧，因此加密软件具有可让您更安全地共享和接收文件的功能非常重要。</value>
@@ -25806,9 +25859,6 @@ SE-114 29 斯德哥尔摩
     <value>安全保护文件身份
 </value>
   </data>
-  <data name="PROText" xml:space="preserve">
-    <value>专业版</value>
-  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>所选订阅时间无效。 有效订阅必须至少为{0}个月，且不超过{1}个月。</value>
   </data>
@@ -25867,12 +25917,72 @@ SE-114 29 斯德哥尔摩
     <value>&lt;b&gt;您对AxCrypt业务有任何疑问吗？&lt;/b&gt;
 请&lt;a href="mailto:business@axcrypt.net"&gt;联系我们&lt;/a&gt;我们将尽快帮助您。</value>
   </data>
+  <data name="QuickActionDecryptFile" xml:space="preserve">
+    <value>解密文件
+</value>
+  </data>
+  <data name="QuickActionDecryptFileDescription" xml:space="preserve">
+    <value>解锁并访问受保护文件
+</value>
+  </data>
+  <data name="QuickActionDecryptFileHelpText" xml:space="preserve">
+    <value>使用正确的密码安全解密加密文件。
+</value>
+  </data>
+  <data name="QuickActionEncryptFile" xml:space="preserve">
+    <value>加密文件
+</value>
+  </data>
+  <data name="QuickActionEncryptFileDescription" xml:space="preserve">
+    <value>使用 AES-256 加密保护文件
+</value>
+  </data>
+  <data name="QuickActionEncryptFileHelpText" xml:space="preserve">
+    <value>您已达到免费加密额度上限。升级后即可继续无限制保护文件。
+</value>
+  </data>
+  <data name="QuickActionEncryptFilesSeconds" xml:space="preserve">
+    <value>数秒内加密文件
+</value>
+  </data>
+  <data name="QuickActionOpenEncrypted" xml:space="preserve">
+    <value>打开加密文件
+</value>
+  </data>
+  <data name="QuickActionOpenEncryptedDescription" xml:space="preserve">
+    <value>无需永久解密即可预览加密文件
+</value>
+  </data>
+  <data name="QuickActionOpenEncryptedHelpText" xml:space="preserve">
+    <value>安全打开并查看加密文件，同时保持磁盘上的原始文件处于加密状态。
+</value>
+  </data>
+  <data name="QuickActionSecureStrongEncryption" xml:space="preserve">
+    <value>使用强加密保护文件
+</value>
+  </data>
+  <data name="QuickActionShareSecurely" xml:space="preserve">
+    <value>安全共享
+</value>
+  </data>
+  <data name="QuickActionShareSecurelyDescription" xml:space="preserve">
+    <value>安全共享加密文件的访问权限
+</value>
+  </data>
+  <data name="QuickActionShareSecurelyHelpText" xml:space="preserve">
+    <value>无需共享密码，即可与他人安全共享加密文件。
+</value>
+  </data>
   <data name="QuickActionsSubTitle" xml:space="preserve">
     <value>一键访问您最常执行的操作——打开、加密、解密或共享。
 </value>
   </data>
   <data name="QuickActionsTitle" xml:space="preserve">
     <value>快速操作
+</value>
+  </data>
+  <data name="QuickActionUnlimitedFileEncryptions" xml:space="preserve">
+    <value>无限文件加密次数
 </value>
   </data>
   <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
@@ -26022,21 +26132,8 @@ SE-114 29 斯德哥尔摩
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>我们敦促您尽快重新尝试付款，以保护您的敏感数据并继续享受付费功能。</value>
   </data>
-  <data name="RecentFilesAES256Always" xml:space="preserve">
-    <value>始终使用 AES-256</value>
-  </data>
-  <data name="RecentFilesBatchEncryption" xml:space="preserve">
-    <value>批量加密</value>
-  </data>
   <data name="RecentFilesDropFiles" xml:space="preserve">
     <value>将文件拖放到此处进行加密
-</value>
-  </data>
-  <data name="RecentFilesFreePlan" xml:space="preserve">
-    <value>免费方案允许加密 3 个文件。升级后可无限制加密文件。</value>
-  </data>
-  <data name="RecentFileShareContextMenu" xml:space="preserve">
-    <value>使用一次性密钥安全共享加密文件
 </value>
   </data>
   <data name="RecentFilesNoFilesCurrentlyOpen" xml:space="preserve">
@@ -26061,9 +26158,6 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>最近的文件</value>
-  </data>
-  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
-    <value>无限制加密</value>
   </data>
   <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
     <value>您打开的文件在解密期间将显示在此处。</value>
@@ -26747,10 +26841,6 @@ SE-114 29 斯德哥尔摩
   </data>
   <data name="ReviewsLabel" xml:space="preserve">
     <value>审查</value>
-  </data>
-  <data name="RevokeAccessAnytime" xml:space="preserve">
-    <value>随时撤销访问权限
-</value>
   </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>俄语</value>

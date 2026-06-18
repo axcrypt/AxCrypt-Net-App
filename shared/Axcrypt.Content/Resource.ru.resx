@@ -17810,9 +17810,6 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
     <value>Истекает через</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
-  <data name="ExpiryDatesKeys" xml:space="preserve">
-    <value>Сроки действия ключей</value>
-  </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Успешно экспортировано!</value>
   </data>
@@ -18579,6 +18576,51 @@ href='https://www. halcyon.ai/blog/verizon-dbir-shows-ransomware-involved-in-44-
   </data>
   <data name="FreeLabel" xml:space="preserve">
     <value>Бесплатно </value>
+  </data>
+  <data name="FreeLimitFileEncryptionLabel" xml:space="preserve">
+    <value>Файлы зашифрованы</value>
+  </data>
+  <data name="FreeLimitFileEncryptionReachedText" xml:space="preserve">
+    <value>Достигнутый месячный лимит – перейдите на тарифный план с неограниченным объемом файлов</value>
+  </data>
+  <data name="FreeLimitFileEncryptionStatusText" xml:space="preserve">
+    <value>доступно шифрований в этом месяце</value>
+  </data>
+  <data name="FreeLimitKeyShareLabel" xml:space="preserve">
+    <value>части ключа</value>
+  </data>
+  <data name="FreeLimitKeyShareReachedText" xml:space="preserve">
+    <value>Достигнут лимит совместного использования – обновите свой тариф, чтобы делиться с большим количеством людей</value>
+  </data>
+  <data name="FreeLimitKeyShareStatusText" xml:space="preserve">
+    <value>оставшиеся части ключа</value>
+  </data>
+  <data name="FreeLimitPasswordEntryLabel" xml:space="preserve">
+    <value>пароли сохранены</value>
+  </data>
+  <data name="FreeLimitPasswordEntryReachedText" xml:space="preserve">
+    <value>Достигнут лимит пароля – перейдите на тарифный план с неограниченным количеством записей</value>
+  </data>
+  <data name="FreeLimitPasswordEntryStatusText" xml:space="preserve">
+    <value>оставшиеся слоты для паролей</value>
+  </data>
+  <data name="FreeLimitReachedText" xml:space="preserve">
+    <value>Достигнут лимит – обновите для продолжения</value>
+  </data>
+  <data name="FreeLimitRemainingStatusText" xml:space="preserve">
+    <value>оставшиеся</value>
+  </data>
+  <data name="FreeLimitSecuredMessageLabel" xml:space="preserve">
+    <value>защищённые сообщения</value>
+  </data>
+  <data name="FreeLimitSecuredMessageReachedText" xml:space="preserve">
+    <value>Достигнутый лимит сообщений – обновите свой тариф для неограниченного количества сообщений</value>
+  </data>
+  <data name="FreeLimitSecuredMessageStatusText" xml:space="preserve">
+    <value>оставшихся сообщений в этом месяце</value>
+  </data>
+  <data name="FreeLimitUsageLabel" xml:space="preserve">
+    <value>использование</value>
   </data>
   <data name="FreePasswordGeneratorText" xml:space="preserve">
     <value>Бесплатный &lt;br/&gt;генератор паролей</value>
@@ -20822,9 +20864,6 @@ SE-114 29 Стокгольм
   </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>Нажмите кнопку&lt;b&gt;«Применить»&lt;/b&gt;.</value>
-  </data>
-  <data name="KeyShareOneTime" xml:space="preserve">
-    <value>Одноразовые ключи для совместного использования</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>Как правило, сотрудники обмениваются друг с другом актуальной и связанной с работой информацией. Однако беспокойство о безопасности данных в процессе обмена неизбежно. Поскольку это вызывает опасения по поводу обмена защищенными файлами, для программного обеспечения шифрования невероятно важно иметь функцию, которая позволяет более безопасно обмениваться файлами и получать их.</value>
@@ -25455,9 +25494,6 @@ SE-114 29 Стокгольм
   <data name="ProtectFileIdentityPopup" xml:space="preserve">
     <value>Безопасная защита идентичности файла</value>
   </data>
-  <data name="PROText" xml:space="preserve">
-    <value>Профессионал</value>
-  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>Выбранное время подписки недействительно. Действительная подписка должна быть минимум {0} месяцев или не более {1} месяцев.</value>
   </data>
@@ -25516,11 +25552,56 @@ SE-114 29 Стокгольм
     <value>&lt;b&gt;Остались вопросы о подписке AxCrypt Business?&lt;/b&gt;
 Пожалуйста &lt;a href="mailto:business@axcrypt.net"&gt;свяжитесь с нами&lt;/a&gt; и мы поможем вам в ближайшее время.</value>
   </data>
+  <data name="QuickActionDecryptFile" xml:space="preserve">
+    <value>Расшифруйте файл</value>
+  </data>
+  <data name="QuickActionDecryptFileDescription" xml:space="preserve">
+    <value>Разблокировка и доступ к защищённым файлам</value>
+  </data>
+  <data name="QuickActionDecryptFileHelpText" xml:space="preserve">
+    <value>Безопасно расшифруйте зашифрованные файлы с помощью правильного пароля.</value>
+  </data>
+  <data name="QuickActionEncryptFile" xml:space="preserve">
+    <value>Зашифровать файл</value>
+  </data>
+  <data name="QuickActionEncryptFileDescription" xml:space="preserve">
+    <value>Защитите файлы с помощью шифрования AES-256</value>
+  </data>
+  <data name="QuickActionEncryptFileHelpText" xml:space="preserve">
+    <value>Вы достигли лимита бесплатного шифрования. Обновитесь, чтобы продолжать защищать файлы без ограничений.</value>
+  </data>
+  <data name="QuickActionEncryptFilesSeconds" xml:space="preserve">
+    <value>Зашифруйте файлы за считанные секунды</value>
+  </data>
+  <data name="QuickActionOpenEncrypted" xml:space="preserve">
+    <value>Открытое шифрование</value>
+  </data>
+  <data name="QuickActionOpenEncryptedDescription" xml:space="preserve">
+    <value>Предварительно просматривайте зашифрованные файлы без окончательной расшифровки</value>
+  </data>
+  <data name="QuickActionOpenEncryptedHelpText" xml:space="preserve">
+    <value>Открывайте и просматривайте зашифрованные файлы безопасно, сохраняя оригинальный файл зашифрованным на диске.</value>
+  </data>
+  <data name="QuickActionSecureStrongEncryption" xml:space="preserve">
+    <value>Защитите файлы с надёжным шифрованием</value>
+  </data>
+  <data name="QuickActionShareSecurely" xml:space="preserve">
+    <value>Делитесь безопасно</value>
+  </data>
+  <data name="QuickActionShareSecurelyDescription" xml:space="preserve">
+    <value>Предоставить безопасный доступ к зашифрованным файлам</value>
+  </data>
+  <data name="QuickActionShareSecurelyHelpText" xml:space="preserve">
+    <value>Безопасно делитесь зашифрованными файлами с другими без использования паролей.</value>
+  </data>
   <data name="QuickActionsSubTitle" xml:space="preserve">
     <value>Получите доступ в один клик к тому, что вы делаете чаще всего – открыть, зашифровать, расшифровать или поделиться.</value>
   </data>
   <data name="QuickActionsTitle" xml:space="preserve">
     <value>Быстрые действия</value>
+  </data>
+  <data name="QuickActionUnlimitedFileEncryptions" xml:space="preserve">
+    <value>Неограниченное шифрование файлов</value>
   </data>
   <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
     <value>Продвинутые алгоритмы</value>
@@ -25659,20 +25740,8 @@ SE-114 29 Стокгольм
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>Мы настоятельно рекомендуем вам как можно скорее повторить попытку оплаты, чтобы защитить свои конфиденциальные данные и продолжить пользоваться платными функциями.</value>
   </data>
-  <data name="RecentFilesAES256Always" xml:space="preserve">
-    <value>AES-256 всегда</value>
-  </data>
-  <data name="RecentFilesBatchEncryption" xml:space="preserve">
-    <value>Пакетное шифрование</value>
-  </data>
   <data name="RecentFilesDropFiles" xml:space="preserve">
     <value>Сбросьте файлы сюда для шифрования</value>
-  </data>
-  <data name="RecentFilesFreePlan" xml:space="preserve">
-    <value>Бесплатный тариф позволяет шифровать 3 файла. Обновитесь на безлимитный. </value>
-  </data>
-  <data name="RecentFileShareContextMenu" xml:space="preserve">
-    <value>Безопасно обменивайте зашифрованные файлы с помощью одноразового ключа</value>
   </data>
   <data name="RecentFilesNoFilesCurrentlyOpen" xml:space="preserve">
     <value>В настоящее время файлы не открыты</value>
@@ -25694,9 +25763,6 @@ SE-114 29 Стокгольм
   </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>Недавние Файлы</value>
-  </data>
-  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
-    <value>Неограниченное шифрование</value>
   </data>
   <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
     <value>Файлы, которые вы открываете, будут отображаться здесь во время расшифровки.</value>
@@ -26391,9 +26457,6 @@ SE-114 29 Стокгольм
   </data>
   <data name="ReviewsLabel" xml:space="preserve">
     <value>Обзоры</value>
-  </data>
-  <data name="RevokeAccessAnytime" xml:space="preserve">
-    <value>Отменить доступ в любое время</value>
   </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>Русский</value>

@@ -18164,9 +18164,6 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
     <value>تنتهي الصلاحية</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
-  <data name="ExpiryDatesKeys" xml:space="preserve">
-    <value>تواريخ انتهاء صلاحية المفاتيح.</value>
-  </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>تم التصدير بنجاح!</value>
   </data>
@@ -18944,6 +18941,51 @@ AxCrypt  تدعم  ملفات تشفير Google Drive في الAndroid  و IOS. 
   </data>
   <data name="FreeLabel" xml:space="preserve">
     <value>مجاني</value>
+  </data>
+  <data name="FreeLimitFileEncryptionLabel" xml:space="preserve">
+    <value>تم تشفير الملفات</value>
+  </data>
+  <data name="FreeLimitFileEncryptionReachedText" xml:space="preserve">
+    <value>تم الوصول إلى الحد الشهري — قم بالترقية للحصول على عدد غير محدود من الملفات</value>
+  </data>
+  <data name="FreeLimitFileEncryptionStatusText" xml:space="preserve">
+    <value>عمليات التشفير المتبقية هذا الشهر</value>
+  </data>
+  <data name="FreeLimitKeyShareLabel" xml:space="preserve">
+    <value>مشاركات المفتاح</value>
+  </data>
+  <data name="FreeLimitKeyShareReachedText" xml:space="preserve">
+    <value>تم الوصول إلى حدّ المشاركة — قم بالترقية للمشاركة مع عدد أكبر من الأشخاص</value>
+  </data>
+  <data name="FreeLimitKeyShareStatusText" xml:space="preserve">
+    <value>حصص المفتاح المتبقية</value>
+  </data>
+  <data name="FreeLimitPasswordEntryLabel" xml:space="preserve">
+    <value>تم حفظ كلمات المرور</value>
+  </data>
+  <data name="FreeLimitPasswordEntryReachedText" xml:space="preserve">
+    <value>تم الوصول إلى حدّ كلمات المرور — قم بالترقية للحصول على عدد غير محدود من الإدخالات</value>
+  </data>
+  <data name="FreeLimitPasswordEntryStatusText" xml:space="preserve">
+    <value>خانات كلمات المرور المتبقية</value>
+  </data>
+  <data name="FreeLimitReachedText" xml:space="preserve">
+    <value>تم الوصول إلى الحدّ المسموح — قم بالترقية للمتابعة</value>
+  </data>
+  <data name="FreeLimitRemainingStatusText" xml:space="preserve">
+    <value>متبقي</value>
+  </data>
+  <data name="FreeLimitSecuredMessageLabel" xml:space="preserve">
+    <value>الرسائل المؤمَّنة</value>
+  </data>
+  <data name="FreeLimitSecuredMessageReachedText" xml:space="preserve">
+    <value>تم الوصول إلى حدّ الرسائل — قم بالترقية للحصول على عدد غير محدود من الرسائل</value>
+  </data>
+  <data name="FreeLimitSecuredMessageStatusText" xml:space="preserve">
+    <value>الرسائل المتبقية هذا الشهر</value>
+  </data>
+  <data name="FreeLimitUsageLabel" xml:space="preserve">
+    <value>الاستخدام</value>
   </data>
   <data name="FreePasswordGeneratorText" xml:space="preserve">
     <value>كلمة مرور مجانية &lt;br/&gt;مولد</value>
@@ -21211,14 +21253,8 @@ SE-114 29 ستوكهولم
 يرجى تحديد اللغة المراد استخدامها في الدعوة والرسالة الشخصية الاختيارية أدناه.</value>
     <comment>This is a dialog text that is presented whenever a new user is about to be invited to use AxCrypt, either as a result of an attempt to key share to someone who does not have an AxCrypt ID yet, or as the result of an explicit invitation.</comment>
   </data>
-  <data name="KeyShareLabelText" xml:space="preserve">
-    <value>مفتاح المشاركة</value>
-  </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>اضغط على الزر</value>
-  </data>
-  <data name="KeyShareOneTime" xml:space="preserve">
-    <value>مفاتيح مشاركة تُستخدم لمرة واحدة</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>عادةً ما يشارك الموظفون المعلومات ذات الصلة بالعمل مع بعضهم البعض. ومع ذلك، من الطبيعي القلق بشأن أمان البيانات أثناء عملية المشاركة. وبما أن هذا يثير القلق بشأن مشاركة الملفات المؤمّنة، فمن الضروري جدًا أن يحتوي برنامج التشفير على ميزة تتيح لك مشاركة واستلام الملفات بطريقة أكثر أمانًا.</value>
@@ -26138,9 +26174,6 @@ SE-114 29 ستوكهولم
   <data name="ProtectFileIdentityPopup" xml:space="preserve">
     <value>حماية هوية الملف بشكل آمن</value>
   </data>
-  <data name="PROText" xml:space="preserve">
-    <value>احترافي</value>
-  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>وقت الاشتراك المحدد غير صالح. يجب أن يكون الاشتراك الصالح {0} شهرًا على الأقل وألا يزيد عن {1} شهرًا.</value>
   </data>
@@ -26200,11 +26233,58 @@ SE-114 29 ستوكهولم
 يرجى &lt;a href="mailto:premium@axcrypt.net"&gt; الاتصال بنا &lt;/a&gt; وسنساعدك في أقرب وقت ممكن.
 </value>
   </data>
+  <data name="QuickActionDecryptFile" xml:space="preserve">
+    <value>فك تشفير ملف
+</value>
+  </data>
+  <data name="QuickActionDecryptFileDescription" xml:space="preserve">
+    <value>إلغاء قفل الملفات المحمية والوصول إليها</value>
+  </data>
+  <data name="QuickActionDecryptFileHelpText" xml:space="preserve">
+    <value>فك تشفير الملفات المشفّرة بأمان باستخدام كلمة المرور الصحيحة.</value>
+  </data>
+  <data name="QuickActionEncryptFile" xml:space="preserve">
+    <value>تشفير ملف</value>
+  </data>
+  <data name="QuickActionEncryptFileDescription" xml:space="preserve">
+    <value>تأمين الملفات باستخدام تشفير AES-256</value>
+  </data>
+  <data name="QuickActionEncryptFileHelpText" xml:space="preserve">
+    <value>لقد وصلت إلى الحدّ المجاني للتشفير. قم بالترقية لمواصلة حماية الملفات دون أي قيود.</value>
+  </data>
+  <data name="QuickActionEncryptFilesSeconds" xml:space="preserve">
+    <value>شفّر الملفات في ثوانٍ</value>
+  </data>
+  <data name="QuickActionOpenEncrypted" xml:space="preserve">
+    <value>فتح المحتوى المشفّر</value>
+  </data>
+  <data name="QuickActionOpenEncryptedDescription" xml:space="preserve">
+    <value>معاينة الملفات المشفّرة دون فك تشفيرها بشكل دائم</value>
+  </data>
+  <data name="QuickActionOpenEncryptedHelpText" xml:space="preserve">
+    <value>افتح واعرض الملفات المشفّرة بأمان مع الحفاظ على الملف الأصلي مشفّرًا على القرص.</value>
+  </data>
+  <data name="QuickActionSecureStrongEncryption" xml:space="preserve">
+    <value>حماية الملفات بتشفير قوي
+</value>
+  </data>
+  <data name="QuickActionShareSecurely" xml:space="preserve">
+    <value>المشاركة بأمان</value>
+  </data>
+  <data name="QuickActionShareSecurelyDescription" xml:space="preserve">
+    <value>مشاركة وصول آمن إلى الملفات المشفّرة</value>
+  </data>
+  <data name="QuickActionShareSecurelyHelpText" xml:space="preserve">
+    <value>شارك الملفات المشفّرة بأمان مع الآخرين دون الحاجة إلى مشاركة كلمات المرور.</value>
+  </data>
   <data name="QuickActionsSubTitle" xml:space="preserve">
     <value>وصول بنقرة واحدة إلى الأشياء التي تقوم بها بشكل متكرر — فتح أو تشفير أو فك التشفير أو المشاركة.</value>
   </data>
   <data name="QuickActionsTitle" xml:space="preserve">
     <value>الإجراءات السريعة</value>
+  </data>
+  <data name="QuickActionUnlimitedFileEncryptions" xml:space="preserve">
+    <value>عمليات تشفير ملفات غير محدودة</value>
   </data>
   <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
     <value>خوارزميات متقدمة</value>
@@ -26347,20 +26427,8 @@ SE-114 29 ستوكهولم
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>نحثك على إعادة محاولة الدفع في أسرع وقت ممكن لحماية بياناتك الحساسة والاستمرار في الاستمتاع بالميزات المدفوعة.</value>
   </data>
-  <data name="RecentFilesAES256Always" xml:space="preserve">
-    <value>تشفير AES-256 دائمًا</value>
-  </data>
-  <data name="RecentFilesBatchEncryption" xml:space="preserve">
-    <value>التشفير الدفعي</value>
-  </data>
   <data name="RecentFilesDropFiles" xml:space="preserve">
     <value>قم بإسقاط الملفات هنا لتشفيرها.</value>
-  </data>
-  <data name="RecentFilesFreePlan" xml:space="preserve">
-    <value>الخطة المجانية تسمح بتشفير 3 ملفات. قم بالترقية للحصول على عدد غير محدود.</value>
-  </data>
-  <data name="RecentFileShareContextMenu" xml:space="preserve">
-    <value>شارك الملفات المشفّرة بأمان باستخدام مفتاح يُستخدم لمرة واحدة.</value>
   </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>لم تفتح أي ملفات مؤمنة مؤخرًا. انقر فوق &lt;b&gt; فتح مؤمن &lt;/ b&gt; للاستعراض بحثًا عن ملفات مؤمنة.</value>
@@ -26385,9 +26453,6 @@ SE-114 29 ستوكهولم
   </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>الملفات الأخيرة</value>
-  </data>
-  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
-    <value>تشفير غير محدود</value>
   </data>
   <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
     <value>ستظهر الملفات التي تفتحها هنا أثناء فك تشفيرها.</value>
@@ -27084,9 +27149,6 @@ SE-114 29 ستوكهولم
   </data>
   <data name="ReviewsLabel" xml:space="preserve">
     <value>المراجعات</value>
-  </data>
-  <data name="RevokeAccessAnytime" xml:space="preserve">
-    <value>يمكنك إلغاء الوصول في أي وقت.</value>
   </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>русский (الروسية)</value>

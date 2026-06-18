@@ -17982,9 +17982,6 @@ Contattaci a &lt;a href="mailto:support@axcrypt.net" style="color: white; font-w
     <value>Scadrà in</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
-  <data name="ExpiryDatesKeys" xml:space="preserve">
-    <value>Date di scadenza sulle chiavi</value>
-  </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Esportato con successo!</value>
   </data>
@@ -18780,6 +18777,51 @@ Effettua il backup di tutti i tuoi file importanti - protetti e senza protezione
   </data>
   <data name="FreeLabel" xml:space="preserve">
     <value>Gratis</value>
+  </data>
+  <data name="FreeLimitFileEncryptionLabel" xml:space="preserve">
+    <value>file crittografati</value>
+  </data>
+  <data name="FreeLimitFileEncryptionReachedText" xml:space="preserve">
+    <value>Limite mensile raggiunto — fai l'upgrade per file illimitati</value>
+  </data>
+  <data name="FreeLimitFileEncryptionStatusText" xml:space="preserve">
+    <value>Crittaggi rimanenti questo mese</value>
+  </data>
+  <data name="FreeLimitKeyShareLabel" xml:space="preserve">
+    <value>Gestione condivisione chiavi</value>
+  </data>
+  <data name="FreeLimitKeyShareReachedText" xml:space="preserve">
+    <value>Limite di condivisione raggiunto — aggiorna per condividere con più persone</value>
+  </data>
+  <data name="FreeLimitKeyShareStatusText" xml:space="preserve">
+    <value>Condivisione delle chiavi rimaste</value>
+  </data>
+  <data name="FreeLimitPasswordEntryLabel" xml:space="preserve">
+    <value>Password salvate</value>
+  </data>
+  <data name="FreeLimitPasswordEntryReachedText" xml:space="preserve">
+    <value>Limite di password raggiunto — fai l'upgrade per partecipazioni illimitate</value>
+  </data>
+  <data name="FreeLimitPasswordEntryStatusText" xml:space="preserve">
+    <value>slot password rimanenti</value>
+  </data>
+  <data name="FreeLimitReachedText" xml:space="preserve">
+    <value>Limite raggiunto — aggiorna per continuare</value>
+  </data>
+  <data name="FreeLimitRemainingStatusText" xml:space="preserve">
+    <value>rimanente</value>
+  </data>
+  <data name="FreeLimitSecuredMessageLabel" xml:space="preserve">
+    <value>Messaggi protetti</value>
+  </data>
+  <data name="FreeLimitSecuredMessageReachedText" xml:space="preserve">
+    <value>Limite di messaggi raggiunto — aggiornamento per messaggi illimitati</value>
+  </data>
+  <data name="FreeLimitSecuredMessageStatusText" xml:space="preserve">
+    <value>Messaggi rimasti questo mese</value>
+  </data>
+  <data name="FreeLimitUsageLabel" xml:space="preserve">
+    <value>Utilizzo</value>
   </data>
   <data name="FreePasswordGeneratorText" xml:space="preserve">
     <value>Password gratuita &lt;br/&gt;generatore</value>
@@ -21042,14 +21084,8 @@ Un destinatario è identificato dall'email di registrazione AxCrypt ID, ma non g
 Per favore indica la lingua da utilizzare nell'invito e un messaggio personalizzato opzionale qui sotto.</value>
     <comment>This is a dialog text that is presented whenever a new user is about to be invited to use AxCrypt, either as a result of an attempt to key share to someone who does not have an AxCrypt ID yet, or as the result of an explicit invitation.</comment>
   </data>
-  <data name="KeyShareLabelText" xml:space="preserve">
-    <value>Condivisione Chiavi</value>
-  </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>Clicca su &lt;b&gt;Applica&lt;/b&gt; .</value>
-  </data>
-  <data name="KeyShareOneTime" xml:space="preserve">
-    <value>Chiavi di condivisione unica</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>In genere, i dipendenti condividono informazioni di lavoro rilevanti tra loro. Tuttavia, garantire la sicurezza dei dati durante la condivisione è fondamentale. Per questo è essenziale che un software di crittografia offra funzionalità che permettano di inviare e ricevere file in modo sicuro.</value>
@@ -25933,9 +25969,6 @@ Crittografa i tuoi file con AES-256, il più potente degli algoritmi AES.  Viene
   <data name="ProtectFileIdentityPopup" xml:space="preserve">
     <value>Proteggi l'identità del file in modo sicuro</value>
   </data>
-  <data name="PROText" xml:space="preserve">
-    <value>PRO</value>
-  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>Il periodo selezionato per l'abbonamento non è valido. Un abbonamento valido deve durare almeno {0} mesi e non più di {1} mesi.</value>
   </data>
@@ -25994,11 +26027,56 @@ La ricevuta del tuo acquisto ti è stata inviata per e-mail.</value>
     <value>&lt;b&gt;Hai delle domande in merito ad AxCrypt Business?&lt;/b&gt;
 &lt;a href="mailto:business@axcrypt.net"&gt;Contattaci&lt;/a&gt; e ti aiuteremo il prima possibile.</value>
   </data>
+  <data name="QuickActionDecryptFile" xml:space="preserve">
+    <value>Decrittografa il file</value>
+  </data>
+  <data name="QuickActionDecryptFileDescription" xml:space="preserve">
+    <value>Sblocca e accedi ai file protetti</value>
+  </data>
+  <data name="QuickActionDecryptFileHelpText" xml:space="preserve">
+    <value>Decripta i file crittografati in modo sicuro tramite la password corretta.</value>
+  </data>
+  <data name="QuickActionEncryptFile" xml:space="preserve">
+    <value>Crittografa il file</value>
+  </data>
+  <data name="QuickActionEncryptFileDescription" xml:space="preserve">
+    <value>File protetti con crittografia AES-256</value>
+  </data>
+  <data name="QuickActionEncryptFileHelpText" xml:space="preserve">
+    <value>Hai raggiunto il limite di crittografia gratuita. Aggiorna per continuare a proteggere i file senza restrizioni.</value>
+  </data>
+  <data name="QuickActionEncryptFilesSeconds" xml:space="preserve">
+    <value>Crittografa i file in pochi secondi</value>
+  </data>
+  <data name="QuickActionOpenEncrypted" xml:space="preserve">
+    <value>Apri contenuto crittografato</value>
+  </data>
+  <data name="QuickActionOpenEncryptedDescription" xml:space="preserve">
+    <value>Visualizza in anteprima i file crittografati senza decrittografarli in modo permanente.</value>
+  </data>
+  <data name="QuickActionOpenEncryptedHelpText" xml:space="preserve">
+    <value>Apri e visualizza i file criptati in modo sicuro mantenendo il file originale criptato su disco.</value>
+  </data>
+  <data name="QuickActionSecureStrongEncryption" xml:space="preserve">
+    <value>File sicuri con crittografia robusta</value>
+  </data>
+  <data name="QuickActionShareSecurely" xml:space="preserve">
+    <value>Condividi in modo sicuro</value>
+  </data>
+  <data name="QuickActionShareSecurelyDescription" xml:space="preserve">
+    <value>Condividi con accesso sicuro ai file criptati</value>
+  </data>
+  <data name="QuickActionShareSecurelyHelpText" xml:space="preserve">
+    <value>Condividi in modo sicuro i file criptati con altri utenti senza condividere password.</value>
+  </data>
   <data name="QuickActionsSubTitle" xml:space="preserve">
     <value>Accesso con un solo clic alle cose che fai di più — aprire, criptare, decriptare o condividere.</value>
   </data>
   <data name="QuickActionsTitle" xml:space="preserve">
     <value>Azioni rapide</value>
+  </data>
+  <data name="QuickActionUnlimitedFileEncryptions" xml:space="preserve">
+    <value>Crittografia illimitata dei file</value>
   </data>
   <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
     <value>Algoritmi avanzati</value>
@@ -26140,20 +26218,8 @@ La ricevuta del tuo acquisto ti è stata inviata per e-mail.</value>
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>Ti invitiamo a ritentare il pagamento il prima possibile per proteggere i tuoi dati sensibili e continuare a usufruire delle funzionalità a pagamento.</value>
   </data>
-  <data name="RecentFilesAES256Always" xml:space="preserve">
-    <value>AES-256 sempre</value>
-  </data>
-  <data name="RecentFilesBatchEncryption" xml:space="preserve">
-    <value>Crittografia batch</value>
-  </data>
   <data name="RecentFilesDropFiles" xml:space="preserve">
     <value>Lascia qui i file per criptarli</value>
-  </data>
-  <data name="RecentFilesFreePlan" xml:space="preserve">
-    <value>Il piano gratuito permette di cifrare 3 file. Fai l'upgrade per illimitato.</value>
-  </data>
-  <data name="RecentFileShareContextMenu" xml:space="preserve">
-    <value>Condividi file criptati in modo sicuro con una chiave monouso</value>
   </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>Non hai aperto nessun file protetto di recente. Clicca &lt;b&gt;su Apri File Protetto&lt;/b&gt; per cercare un file protetto.</value>
@@ -26178,9 +26244,6 @@ La ricevuta del tuo acquisto ti è stata inviata per e-mail.</value>
   </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>File Recenti</value>
-  </data>
-  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
-    <value>Crittografia illimitata</value>
   </data>
   <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
     <value>I file che aprirai appariranno qui mentre vengono decriptati.</value>
@@ -26878,9 +26941,6 @@ Oggetto: Rapporto Istantaneo AxCrypt </value>
   </data>
   <data name="ReviewsLabel" xml:space="preserve">
     <value>Recensioni</value>
-  </data>
-  <data name="RevokeAccessAnytime" xml:space="preserve">
-    <value>Revoca l'accesso in qualsiasi momento</value>
   </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>русский (Russo)</value>

@@ -17969,9 +17969,6 @@ We vinden het jammer dat u ons verlaat en hopen dat u genoten heeft van uw tijd 
     <value>Verloopt in</value>
     <comment>The first part of "Expired in x days" label in mobile application</comment>
   </data>
-  <data name="ExpiryDatesKeys" xml:space="preserve">
-    <value>Vervaldatums op sleutels</value>
-  </data>
   <data name="ExportedSuccessfullyText" xml:space="preserve">
     <value>Succesvol geëxporteerd!</value>
   </data>
@@ -18748,6 +18745,51 @@ We vinden het jammer dat u ons verlaat en hopen dat u genoten heeft van uw tijd 
   </data>
   <data name="FreeLabel" xml:space="preserve">
     <value>Gratis</value>
+  </data>
+  <data name="FreeLimitFileEncryptionLabel" xml:space="preserve">
+    <value>bestanden versleuteld</value>
+  </data>
+  <data name="FreeLimitFileEncryptionReachedText" xml:space="preserve">
+    <value>Maandelijkse limiet bereikt — upgrade voor onbeperkte bestanden</value>
+  </data>
+  <data name="FreeLimitFileEncryptionStatusText" xml:space="preserve">
+    <value>resterende versleutelingen deze maand</value>
+  </data>
+  <data name="FreeLimitKeyShareLabel" xml:space="preserve">
+    <value>sleuteldelingen</value>
+  </data>
+  <data name="FreeLimitKeyShareReachedText" xml:space="preserve">
+    <value>Deellimiet bereikt — upgrade om met meer mensen te kunnen delen</value>
+  </data>
+  <data name="FreeLimitKeyShareStatusText" xml:space="preserve">
+    <value>resterende sleuteldelingen</value>
+  </data>
+  <data name="FreeLimitPasswordEntryLabel" xml:space="preserve">
+    <value>opgeslagen wachtwoorden</value>
+  </data>
+  <data name="FreeLimitPasswordEntryReachedText" xml:space="preserve">
+    <value>Wachtwoordlimiet bereikt — upgrade voor onbeperkte invoer</value>
+  </data>
+  <data name="FreeLimitPasswordEntryStatusText" xml:space="preserve">
+    <value>resterende wachtwoordslots</value>
+  </data>
+  <data name="FreeLimitReachedText" xml:space="preserve">
+    <value>Limiet bereikt — upgrade om verder te gaan</value>
+  </data>
+  <data name="FreeLimitRemainingStatusText" xml:space="preserve">
+    <value>resterend</value>
+  </data>
+  <data name="FreeLimitSecuredMessageLabel" xml:space="preserve">
+    <value>beveiligde berichten</value>
+  </data>
+  <data name="FreeLimitSecuredMessageReachedText" xml:space="preserve">
+    <value>Berichtlimiet bereikt — upgrade voor onbeperkte berichten</value>
+  </data>
+  <data name="FreeLimitSecuredMessageStatusText" xml:space="preserve">
+    <value>resterende berichten deze maand</value>
+  </data>
+  <data name="FreeLimitUsageLabel" xml:space="preserve">
+    <value>gebruik</value>
   </data>
   <data name="FreePasswordGeneratorText" xml:space="preserve">
     <value>Gratis wachtwoord &lt;br/&gt;Generator</value>
@@ -21010,14 +21052,8 @@ Een ontvanger is geïdentificeerd via de AxCrypt ID aanmeld email, maar we verst
 Geef de taal van voorkeur voor de uitnodiging op en schrijf hieronder optioneel een persoonlijk bericht.</value>
     <comment>This is a dialog text that is presented whenever a new user is about to be invited to use AxCrypt, either as a result of an attempt to key share to someone who does not have an AxCrypt ID yet, or as the result of an explicit invitation.</comment>
   </data>
-  <data name="KeyShareLabelText" xml:space="preserve">
-    <value>Sleutel Delen</value>
-  </data>
   <data name="KeyShareMobileStep7" xml:space="preserve">
     <value>Tik op de &lt;b&gt;Toepassen&lt;/b&gt;-knop.</value>
-  </data>
-  <data name="KeyShareOneTime" xml:space="preserve">
-    <value>Eenmalige deelsleutels</value>
   </data>
   <data name="KeyShareOverviewParagraph1" xml:space="preserve">
     <value>Werknemers delen doorgaans relevante en werkgerelateerde informatie met elkaar. Toch is het onvermijdelijk zich zorgen te maken over de beveiliging van de gegevens tijdens het delen. Omdat dit vragen oproept over het delen van beveiligde bestanden, is het ontzettend belangrijk dat versleutelingssoftware een functie heeft waarmee u bestanden veiliger kunt delen en ontvangen.</value>
@@ -25912,9 +25948,6 @@ HubSpot is een geïntegreerde softwareoplossing waarmee we verschillende aspecte
   <data name="ProtectFileIdentityPopup" xml:space="preserve">
     <value>Bescherm bestandsidentiteit veilig</value>
   </data>
-  <data name="PROText" xml:space="preserve">
-    <value>PRO</value>
-  </data>
   <data name="PurchaseErrorSubscriptionTime" xml:space="preserve">
     <value>De geselecteerde abonnementsduur is ongeldig. Een geldig abonnement moet minstens {0} maand duren en niet langer zijn dan {1} maanden.</value>
   </data>
@@ -25973,11 +26006,57 @@ Neem &lt;a href="mailto:passwordmanager@axcrypt.net"&gt;contact met ons op&lt;/a
     <value>&lt;b&gt;Heeft u een vraag over AxCrypt Premium?&lt;/b&gt;
 Alstublieft &lt;a href="mailto:premium@axcrypt.net"&gt;contacteer ons&lt;/a&gt; en we zullen u zo spoedig mogelijk helpen.</value>
   </data>
+  <data name="QuickActionDecryptFile" xml:space="preserve">
+    <value>Ontsleutel Bestand</value>
+  </data>
+  <data name="QuickActionDecryptFileDescription" xml:space="preserve">
+    <value>Ontgrendel en open beveiligde bestanden</value>
+  </data>
+  <data name="QuickActionDecryptFileHelpText" xml:space="preserve">
+    <value>Ontsleutel versleutelde bestanden veilig met het juiste wachtwoord.</value>
+  </data>
+  <data name="QuickActionEncryptFile" xml:space="preserve">
+    <value>Versleutel Bestand</value>
+  </data>
+  <data name="QuickActionEncryptFileDescription" xml:space="preserve">
+    <value>Beveilig bestanden met AES-256-versleuteling</value>
+  </data>
+  <data name="QuickActionEncryptFileHelpText" xml:space="preserve">
+    <value>U heeft de gratis versleutelingslimiet bereikt. Upgrade om door te gaan met het beschermen van bestanden zonder beperkingen.</value>
+  </data>
+  <data name="QuickActionEncryptFilesSeconds" xml:space="preserve">
+    <value>Versleutel bestanden in seconden</value>
+  </data>
+  <data name="QuickActionOpenEncrypted" xml:space="preserve">
+    <value>Versleuteld Openen</value>
+  </data>
+  <data name="QuickActionOpenEncryptedDescription" xml:space="preserve">
+    <value>Bekijk een voorbeeld van versleutelde bestanden zonder ze permanent te ontsleutelen.</value>
+  </data>
+  <data name="QuickActionOpenEncryptedHelpText" xml:space="preserve">
+    <value>Open en bekijk versleutelde bestanden veilig terwijl het oorspronkelijke bestand op de schijf versleuteld blijft.</value>
+  </data>
+  <data name="QuickActionSecureStrongEncryption" xml:space="preserve">
+    <value>Beveilig bestanden met sterke versleuteling</value>
+  </data>
+  <data name="QuickActionShareSecurely" xml:space="preserve">
+    <value>Deel Veilig
+</value>
+  </data>
+  <data name="QuickActionShareSecurelyDescription" xml:space="preserve">
+    <value>Deel veilige toegang tot versleutelde bestanden</value>
+  </data>
+  <data name="QuickActionShareSecurelyHelpText" xml:space="preserve">
+    <value>Deel versleutelde bestanden veilig met anderen zonder wachtwoorden te delen.</value>
+  </data>
   <data name="QuickActionsSubTitle" xml:space="preserve">
     <value>Eénklikstoegang tot de dingen die u het vaakst doet — openen, versleutelen, ontsleutelen of delen.</value>
   </data>
   <data name="QuickActionsTitle" xml:space="preserve">
     <value>Snelle Acties</value>
+  </data>
+  <data name="QuickActionUnlimitedFileEncryptions" xml:space="preserve">
+    <value>Onbeperkte bestandsversleutelingen</value>
   </data>
   <data name="QuickSecureActionAdvancedAlgorithms" xml:space="preserve">
     <value>Geavanceerde algoritmen</value>
@@ -26120,20 +26199,8 @@ Alstublieft &lt;a href="mailto:premium@axcrypt.net"&gt;contacteer ons&lt;/a&gt; 
   <data name="ReAttemptPaymentText" xml:space="preserve">
     <value>We raden u aan om de betaling zo snel mogelijk opnieuw uit te voeren om uw gevoelige gegevens te beschermen en te blijven genieten van de betaalde functies.</value>
   </data>
-  <data name="RecentFilesAES256Always" xml:space="preserve">
-    <value>AES-256 altijd</value>
-  </data>
-  <data name="RecentFilesBatchEncryption" xml:space="preserve">
-    <value>Batchversleuteling</value>
-  </data>
   <data name="RecentFilesDropFiles" xml:space="preserve">
     <value>Sleep bestanden hierheen om te versleutelen</value>
-  </data>
-  <data name="RecentFilesFreePlan" xml:space="preserve">
-    <value>Het gratis abonnement staat het versleutelen van 3 bestanden toe. Upgrade voor onbeperkt gebruik.</value>
-  </data>
-  <data name="RecentFileShareContextMenu" xml:space="preserve">
-    <value>Deel versleutelde bestanden veilig met een eenmalige sleutel.</value>
   </data>
   <data name="RecentFilesListInfoText" xml:space="preserve">
     <value>U heeft recentelijk geen beveiligde bestanden geopend. Klik &lt;b&gt;op Beveiligd Openen&lt;/b&gt; om naar beveiligde bestanden te zoeken.</value>
@@ -26158,9 +26225,6 @@ Alstublieft &lt;a href="mailto:premium@axcrypt.net"&gt;contacteer ons&lt;/a&gt; 
   </data>
   <data name="RecentFilesTabPageText" xml:space="preserve">
     <value>Recente Bestanden</value>
-  </data>
-  <data name="RecentFilesUnlimitedEncryption" xml:space="preserve">
-    <value>Onbeperkte Versleuteling</value>
   </data>
   <data name="RecentFilesYouOpenWillAppear" xml:space="preserve">
     <value>Bestanden die u opent verschijnen hier terwijl ze worden ontsleuteld.</value>
@@ -26856,9 +26920,6 @@ Onderwerp: AxCrypt Rapport Snapshot </value>
   </data>
   <data name="ReviewsLabel" xml:space="preserve">
     <value>Reviews</value>
-  </data>
-  <data name="RevokeAccessAnytime" xml:space="preserve">
-    <value>Toegang op elk moment intrekken</value>
   </data>
   <data name="RussianLanguageSelection" xml:space="preserve">
     <value>русский (Russisch)</value>
