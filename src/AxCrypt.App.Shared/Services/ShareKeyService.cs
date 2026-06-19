@@ -80,6 +80,7 @@ public static class ShareKeyService
                 PopupButtons click = await New<IPopup>().ShowAsync(PopupButtons.OkCancel, Texts.InformationTitle, "There are some unencrypted files also selected for key sharing. AxCrypt will encrypt and then key share the selected files. Would you like to continue to proceed?");
                 if (click != PopupButtons.Ok)
                 {
+                    sharekeyViewModel!.CloseShareKeyPopUp();
                     return false;
                 }
             }

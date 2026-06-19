@@ -17,6 +17,8 @@ namespace AxCrypt.Core.IO
 
         public string FileName { get; set; }
 
+        public string ImportFullName { get; set; }
+
         public string FileID { get; set; }
 
         public bool IsFolder { get; set; }

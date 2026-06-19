@@ -7,9 +7,12 @@ using AxCrypt.App.Shared.Models;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.Common;
 using AxCrypt.Content;
+using AxCrypt.Core;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Extensions;
+using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
 using System.Collections.ObjectModel;
@@ -105,12 +108,36 @@ public class ShareKeyViewModel : ViewModelBase
         SelectedFilesOrFolders = SelectedFilesOrFolders
             .Where(f => !string.Equals(f, path, StringComparison.OrdinalIgnoreCase))
             .ToList();
+
+        try
+        {
+            DeleteCloudFileOnRemove(path);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+
         _viewModel!.UpdateFiles(SelectedFilesOrFolders);
 
         if (!SelectedFilesOrFolders.Any())
         {
             PageResult = DialogResult.Cancel;
             LogOnViewModel.ShareKeyDialog.Close();
+        }
+    }
+
+    private void DeleteCloudFileOnRemove(string path)
+    {
+        if (!IsCloudFile)
+        {
+            return;
+        }
+
+        ActiveFile activeFile = Resolve.FileSystemState.FindActiveFileFromEncryptedPath(path);
+        if (activeFile == null)
+        {
+            New<IDataStore>(path).Delete();
         }
     }
 
@@ -165,6 +192,15 @@ public class ShareKeyViewModel : ViewModelBase
     public void OpenSyncPopup()
     {
         SyncPopup = true;
+    }
+
+    public void CloseShareKeyPopUp()
+    {
+        KeySharingUserEmail = "";
+        SelectedFilesOrFolders = new List<string>();
+        CloseSyncPopup();
+        PageResult = DialogResult.Cancel;
+        LogOnViewModel.ShareKeyDialog.Close();
     }
 
     public void CloseSyncPopup()

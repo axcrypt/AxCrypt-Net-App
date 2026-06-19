@@ -421,11 +421,7 @@
 
     private void Close()
     {
-        ShareKeyViewModel!.KeySharingUserEmail = "";
-        ShareKeyViewModel.SelectedFilesOrFolders = new List<string>();
-        ShareKeyViewModel.CloseSyncPopup();
-        ShareKeyViewModel.PageResult = DialogResult.Cancel;
-        ShareKeyViewModel.LogOnViewModel.ShareKeyDialog.Close();
+        ShareKeyViewModel!.CloseShareKeyPopUp();
     }
 
     private string GetIconForFile(string file)
@@ -433,11 +429,6 @@
         string fileName = File.Exists(file)
             ? Path.GetFileName(file)
             : Directory.Exists(file) ? new DirectoryInfo(file).FullName : string.Empty;
-
-        if (ShareKeyViewModel.IsCloudFile)
-        {
-            fileName = file;
-        }
 
         if (string.IsNullOrEmpty(fileName))
         {

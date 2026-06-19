@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt - Copyright 2026, AxCrypt AB, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -18,9 +18,6 @@
  * You should have received a copy of the GNU General Public License
  * along with AxCrypt.  If not, see <http://www.gnu.org/licenses/>.
  *
- * The source is maintained at http://bitbucket.org/AxCrypt-net please visit for
- * updates, contributions and contact with the author. You may also visit
- * http://www.axcrypt.net for more information about the author.
 */
 
 #endregion Coypright and License
@@ -32,12 +29,8 @@ using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
-using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.UI.ViewModel
@@ -50,6 +43,7 @@ namespace AxCrypt.Core.UI.ViewModel
         private LogOnIdentity _identity;
 
         private IEnumerable<string> _filesOrfolderPaths;
+        private static IDictionary<string, IEnumerable<UserPublicKey>> _filesWithShareKeyHolders = new Dictionary<string, IEnumerable<UserPublicKey>>();
 
         public IEnumerable<UserPublicKey> SharedWith
         { get { return GetProperty<IEnumerable<UserPublicKey>>(nameof(SharedWith)); } private set { SetProperty(nameof(SharedWith), value.ToList()); } }
@@ -97,6 +91,7 @@ namespace AxCrypt.Core.UI.ViewModel
             if (files == null) throw new ArgumentNullException(nameof(files));
             if (identity == null) throw new ArgumentNullException(nameof(identity));
 
+            _filesWithShareKeyHolders = new Dictionary<string, IEnumerable<UserPublicKey>>();
             IEnumerable<UserPublicKey> sharedWith = await GetAllPublicKeyRecipientsFromEncryptedFiles(files, identity);
             return new SharingListViewModel(files, sharedWith, identity);
         }
@@ -104,6 +99,11 @@ namespace AxCrypt.Core.UI.ViewModel
         public void UpdateFiles(IEnumerable<string> files)
         {
             _filesOrfolderPaths = files;
+            _filesWithShareKeyHolders = _filesWithShareKeyHolders.Where(fks => files.Contains(fks.Key)).ToDictionary();
+
+            IEnumerable<UserPublicKey> sharedWith = _filesWithShareKeyHolders.SelectMany(fsk => fsk.Value);
+            EmailAddress userEmail = _identity.ActiveEncryptionKeyPair.UserEmail;
+            SharedWith = sharedWith.Where(sw => sw.Email != userEmail).OrderBy(e => e.Email.Address).ToList();
         }
 
         public static async Task<SharingListViewModel> CreateForFoldersAsync(IEnumerable<string> folders, LogOnIdentity identity)
@@ -281,6 +281,7 @@ namespace AxCrypt.Core.UI.ViewModel
         private static async Task<IEnumerable<UserPublicKey>> GetAllPublicKeyRecipientsFromEncryptedFiles(IEnumerable<string> fileNames, LogOnIdentity identity)
         {
             IEnumerable<Tuple<string, EncryptedProperties>> files = await ListValidAsync(fileNames, identity);
+            _filesWithShareKeyHolders = files.ToDictionary(file => file.Item1, file => file.Item2.SharedKeyHolders);
             IEnumerable<UserPublicKey> sharedWith = files.SelectMany(f => f.Item2.SharedKeyHolders);
 
             UpdateKnownKeys(sharedWith);

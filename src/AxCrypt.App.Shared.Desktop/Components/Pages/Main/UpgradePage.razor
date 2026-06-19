@@ -237,8 +237,8 @@
         </svg>;
 
     private void OnPremiumUpgradeClick() =>
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom=Premium"));
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/HomeUser/Login?reqFrom=Premium"));
 
     private void OnBusinessUpgradeClick() =>
-        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom=Business"));
+        New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/HomeUser/Login?reqFrom=Business"));
 }

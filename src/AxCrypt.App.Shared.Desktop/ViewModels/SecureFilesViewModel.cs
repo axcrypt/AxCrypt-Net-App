@@ -414,7 +414,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             CloudFileOperationViewModel fileOperationViewModel = new CloudFileOperationViewModel(
                 SelectedFileStorageProvider, this);
 
-            IList<FileOperationContext> ShareKeyFileListItem = new List<FileOperationContext>();
+            IList<FileOperationContext> shareKeyFileOperationContextList = new List<FileOperationContext>();
 
             foreach (FilePickerItemViewModel fileItem in FileItems)
             {
@@ -440,23 +440,24 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                     continue;
                 }
 
-                ShareKeyFileListItem.Add(await fileOperationViewModel.ShareKeyWithCloudFile(fileItem));
+                fileItem.ImportFullName = file.FullName;
+                shareKeyFileOperationContextList.Add(await fileOperationViewModel.ShareKeyWithCloudFile(fileItem));
             }
 
-            IEnumerable<string> ShareKeyFilepathList = ShareKeyFileListItem.Select(f => f.FullName);
+            IEnumerable<string> shareKeyFilepathList = shareKeyFileOperationContextList.Select(f => f.FullName);
 
             SharingListViewModel sharingListViewModel = await SharingListViewModel.CreateForFilesAsync(
-                                                             ShareKeyFilepathList,
+                                                             shareKeyFilepathList,
                                                              Resolve.KnownIdentities.DefaultEncryptionIdentity
                                                         );
 
             _shareKeyViewModel = AxCServiceProvider.GetService<ShareKeyViewModel>();
 
-            await _shareKeyViewModel!.SetSelectedFilesOrFolders(FileItems.Select(e => e.FileName), sharingListViewModel, true);
+            await _shareKeyViewModel!.SetSelectedFilesOrFolders(FileItems.Select(e => e.ImportFullName), sharingListViewModel, true);
 
             if (_shareKeyViewModel.PageResult == DialogResult.Cancel)
             {
-                foreach (string itemPath in ShareKeyFileListItem.Select(f => f.FullName))
+                foreach (string itemPath in shareKeyFilepathList)
                 {
                     IDataStore file = New<IDataStore>(itemPath);
                     file.Delete();
@@ -465,7 +466,10 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 return;
             }
 
-            await fileOperationViewModel.ShareKeyPreparedFile(ShareKeyFileListItem, FileItems, sharingListViewModel!.SharedWith);
+            shareKeyFileOperationContextList = shareKeyFileOperationContextList.Where(skfoc => _shareKeyViewModel.SelectedFilesOrFolders!.Contains(skfoc.FullName)).ToList();
+            FileItems = FileItems.Where(fileItem => _shareKeyViewModel.SelectedFilesOrFolders!.Contains(fileItem.ImportFullName)).ToList();
+
+            await fileOperationViewModel.ShareKeyPreparedFile(shareKeyFileOperationContextList, FileItems, sharingListViewModel!.SharedWith);
         }
 
         private string GetFullPathByFileSource(FilePickerItemViewModel selectedFileItem,
