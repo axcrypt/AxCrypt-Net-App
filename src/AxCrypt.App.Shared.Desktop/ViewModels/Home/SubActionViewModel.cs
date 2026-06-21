@@ -203,13 +203,12 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
                     filesToRename = args.SelectedFiles;
                 }
 
-                int count = filesToRename.Count();
                 try
                 {
+                    // ExecuteAsync fires the batch-completion notification itself —
+                    // calling _statusAlertService.Success() here would produce a
+                    // second confirmation message (the same bug fixed for Recent Files).
                     await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(filesToRename);
-                    _statusAlertService.Success(count == 1
-                        ? "Anonymously renamed 1 file."
-                        : $"Anonymously renamed {count} files.");
                 }
                 catch (Exception ex)
                 {
@@ -244,13 +243,12 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
                     filesToRestore = args.SelectedFiles;
                 }
 
-                int count = filesToRestore.Count();
                 try
                 {
+                    // ExecuteAsync fires the batch-completion notification itself —
+                    // calling _statusAlertService.Success() here would produce a
+                    // second confirmation message (the same bug fixed for Recent Files).
                     await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(filesToRestore);
-                    _statusAlertService.Success(count == 1
-                        ? "Restored original name for 1 file."
-                        : $"Restored original names for {count} files.");
                 }
                 catch (Exception ex)
                 {
