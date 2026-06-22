@@ -114,6 +114,21 @@
                 </div>
             }
 
+            @* ── Business seat stepper ── *@
+            @if (ShowingBusiness)
+            {
+                <div class="pp-seats-wrap" aria-label="Number of business users">
+                    <span class="pp-seats-label">Number of users</span>
+                    <div class="pp-seats-stepper">
+                        <button class="pp-seat-btn" @onclick="DecrementSeats" aria-label="Decrease users" type="button">&#8722;</button>
+                        <input class="pp-seat-input" type="number" min="1"
+                               value="@_businessSeats"
+                               @onchange="@(e => OnSeatsChange(e.Value?.ToString()))" />
+                        <button class="pp-seat-btn" @onclick="IncrementSeats" aria-label="Increase users" type="button">&#43;</button>
+                    </div>
+                </div>
+            }
+
             @* ── PREMIUM features ── *@
             @if (!ShowingBusiness)
             {
@@ -190,6 +205,61 @@
                     <span class="pp-plan-pill-billing">@ReviewBilling</span>
                 </div>
 
+                @* ── Business company info ── *@
+                @if (ShowingBusiness)
+                {
+                    @if (string.IsNullOrWhiteSpace(_orgName))
+                    {
+                        <div class="pp-biz-info-form">
+                            <div class="pp-biz-info-header">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0">
+                                    <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+                                </svg>
+                                <span>Company information</span>
+                                <span class="pp-biz-required-badge">Required before purchase</span>
+                            </div>
+                            <div class="pp-biz-grid">
+                                <div>
+                                    <label class="pp-biz-label" for="pp-biz-name">Company name <span class="pp-biz-star">*</span></label>
+                                    <input class="pp-biz-input" id="pp-biz-name" type="text" @bind="_orgName" placeholder="Acme Corp" />
+                                </div>
+                                <div>
+                                    <label class="pp-biz-label" for="pp-biz-country">Country <span class="pp-biz-star">*</span></label>
+                                    <input class="pp-biz-input" id="pp-biz-country" type="text" @bind="_orgCountry" placeholder="United States" />
+                                </div>
+                                <div class="pp-biz-wide">
+                                    <label class="pp-biz-label" for="pp-biz-vat">VAT number <span class="pp-biz-optional">(optional)</span></label>
+                                    <input class="pp-biz-input" id="pp-biz-vat" type="text" @bind="_orgVat" placeholder="EU123456789" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <details class="pp-biz-accordion">
+                            <summary class="pp-biz-accordion-toggle">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0">
+                                    <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+                                </svg>
+                                <span>@_orgName</span>
+                                <span class="pp-biz-accordion-note">Company info</span>
+                                <svg class="pp-biz-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round"/></svg>
+                            </summary>
+                            <div class="pp-biz-accordion-body">
+                                <div class="pp-biz-info-row"><span class="pp-biz-info-label">Company</span><span class="pp-biz-info-value">@_orgName</span></div>
+                                @if (!string.IsNullOrWhiteSpace(_orgCountry))
+                                {
+                                    <div class="pp-biz-info-row"><span class="pp-biz-info-label">Country</span><span class="pp-biz-info-value">@_orgCountry</span></div>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(_orgVat))
+                                {
+                                    <div class="pp-biz-info-row"><span class="pp-biz-info-label">VAT number</span><span class="pp-biz-info-value">@_orgVat</span></div>
+                                }
+                            </div>
+                        </details>
+                    }
+                }
+
                 @* Trial highlight *@
                 @if (_trialEligible)
                 {
@@ -231,6 +301,38 @@
                     }
                 </div>
 
+                @* ── Business billing details (open by default) ── *@
+                @if (ShowingBusiness)
+                {
+                    <details class="pp-biz-accordion" open>
+                        <summary class="pp-biz-accordion-toggle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Billing details</span>
+                            <span class="pp-biz-accordion-note">required for billing</span>
+                            <svg class="pp-biz-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round"/></svg>
+                        </summary>
+                        <div class="pp-biz-accordion-body">
+                            <div class="pp-biz-grid">
+                                <div>
+                                    <label class="pp-biz-label" for="pp-biz-invoice">Invoice email</label>
+                                    <input class="pp-biz-input" id="pp-biz-invoice" type="email" @bind="_invoiceEmail" placeholder="billing@company.com" />
+                                </div>
+                                <div>
+                                    <label class="pp-biz-label" for="pp-biz-phone">Phone number</label>
+                                    <input class="pp-biz-input" id="pp-biz-phone" type="tel" @bind="_phoneNumber" placeholder="+1 555 000 0000" />
+                                </div>
+                                <div class="pp-biz-wide">
+                                    <label class="pp-biz-label" for="pp-biz-address">Company address</label>
+                                    <textarea class="pp-biz-input pp-biz-textarea" id="pp-biz-address" rows="2"
+                                              @bind="_address" placeholder="Street, City, State, ZIP"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                }
+
                 @* Discount code *@
                 <details class="pp-discount">
                     <summary class="pp-discount-toggle">
@@ -259,7 +361,7 @@
                 @* CTA buttons *@
                 <div class="pp-cta-wrap">
                     <button class="pp-cta-primary @(ShowingBusiness ? "pp-cta-primary--biz" : "")"
-                            disabled="@(!_termsAccepted)"
+                            disabled="@(!_termsAccepted || BusinessInfoMissing)"
                             @onclick="OnCheckout">
                         @CtaText
                     </button>
@@ -333,6 +435,19 @@
     private bool _trialEligible = true; // TODO: wire to IFeatureUsageProvider / entitlement service
     private bool _termsAccepted = false;
     private string _discountCode = "";
+    private int _businessSeats = 5;
+
+    // ── Business company info ───────────────────────────────────
+    private string _orgName    = "";
+    private string _orgCountry = "";
+    private string _orgVat     = "";
+
+    // ── Business billing details ────────────────────────────────
+    private string _invoiceEmail = "";
+    private string _phoneNumber  = "";
+    private string _address      = "";
+
+    private bool BusinessInfoMissing => ShowingBusiness && string.IsNullOrWhiteSpace(_orgName);
 
     private bool ShowingBusiness => IsBusinessUser || (IsFreeUser && _showBusiness);
 
@@ -358,43 +473,56 @@
 
     private string ReviewSubtotal =>
         ShowingBusiness
-            ? (_yearlyBilling ? "$125.00 / user" : "$13.00 / user")
+            ? (_yearlyBilling
+                ? $"${125 * _businessSeats}.00 ({_businessSeats} users × $125)"
+                : $"${13 * _businessSeats}.00 ({_businessSeats} users × $13)")
             : (_yearlyBilling ? "$47.00" : "$5.00");
 
     private string ReviewAfterTrial =>
         ShowingBusiness
-            ? (_yearlyBilling ? "$125.00 / user / year" : "$13.00 / user / month")
+            ? (_yearlyBilling
+                ? $"${125 * _businessSeats}.00 / year"
+                : $"${13 * _businessSeats}.00 / month")
             : (_yearlyBilling ? "$47.00 / year" : "$5.00 / month");
 
     private string CtaText =>
         _trialEligible ? "Start 14-Day Free Trial →" : "Buy Now →";
 
     // ── Actions ──────────────────────────────────────────────────
-    private void OnCheckout()
+    private string BuildCheckoutUrl(string? extraParams = null)
     {
         var plan    = ShowingBusiness ? "Business" : "Premium";
         var billing = _yearlyBilling ? "yearly" : "monthly";
-        New<Abstractions.IBrowser>().OpenUri(
-            new Uri($"https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom={plan}&billing={billing}"));
+        var seats   = ShowingBusiness ? $"&members={_businessSeats}" : "";
+        var org     = ShowingBusiness && !string.IsNullOrWhiteSpace(_orgName)
+                        ? $"&orgName={Uri.EscapeDataString(_orgName)}&country={Uri.EscapeDataString(_orgCountry)}"
+                        : "";
+        var vat     = ShowingBusiness && !string.IsNullOrWhiteSpace(_orgVat)
+                        ? $"&vat={Uri.EscapeDataString(_orgVat)}"
+                        : "";
+        var extra   = string.IsNullOrWhiteSpace(extraParams) ? "" : $"&{extraParams}";
+        return $"https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom={plan}&billing={billing}{seats}{org}{vat}{extra}";
     }
 
-    private void OnPayPalCheckout()
-    {
-        var plan    = ShowingBusiness ? "Business" : "Premium";
-        var billing = _yearlyBilling ? "yearly" : "monthly";
-        New<Abstractions.IBrowser>().OpenUri(
-            new Uri($"https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom={plan}&billing={billing}&provider=paypal"));
-    }
+    private void OnCheckout() =>
+        New<Abstractions.IBrowser>().OpenUri(new Uri(BuildCheckoutUrl()));
+
+    private void OnPayPalCheckout() =>
+        New<Abstractions.IBrowser>().OpenUri(new Uri(BuildCheckoutUrl("provider=paypal")));
 
     private void OnApplyDiscount()
     {
         if (!string.IsNullOrWhiteSpace(_discountCode))
-        {
-            var plan    = ShowingBusiness ? "Business" : "Premium";
-            var billing = _yearlyBilling ? "yearly" : "monthly";
             New<Abstractions.IBrowser>().OpenUri(
-                new Uri($"https://account.axcrypt.net/en/HomeUser/Login?eff=1&reqFrom={plan}&billing={billing}&code={Uri.EscapeDataString(_discountCode)}"));
-        }
+                new Uri(BuildCheckoutUrl($"code={Uri.EscapeDataString(_discountCode)}")));
+    }
+
+    private void IncrementSeats() => _businessSeats = Math.Max(1, _businessSeats + 1);
+    private void DecrementSeats() => _businessSeats = Math.Max(1, _businessSeats - 1);
+    private void OnSeatsChange(string? value)
+    {
+        if (int.TryParse(value, out int n))
+            _businessSeats = Math.Max(1, n);
     }
 
     private void OpenLink(string url) =>
