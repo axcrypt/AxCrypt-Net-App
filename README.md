@@ -3,7 +3,6 @@
 ![AxCrypt Logo](./assets/images/axcrypt-logo.png)
 
 [![Build Status](https://github.com/yourusername/axcrypt/workflows/build/badge.svg)](https://github.com/yourusername/axcrypt/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/yourusername/axcrypt/releases)
 
 ## Overview
