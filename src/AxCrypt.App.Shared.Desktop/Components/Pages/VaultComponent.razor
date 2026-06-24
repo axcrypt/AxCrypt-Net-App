@@ -253,11 +253,11 @@ else
                             @Texts.ClearButtonText
                         </button>
                         <span class="cbp-actionbar-spacer"></span>
-                        <button type="button" class="cbp-btn cbp-btn--ghost"
+                        <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_isRenaming"
                                 @onclick="async () => await BatchRenameAsync()">
                             @Texts.AnonymousRenameMenuText
                         </button>
-                        <button type="button" class="cbp-btn cbp-btn--ghost"
+                        <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_isRestoring"
                                 @onclick="async () => await BatchRestoreRenameAsync()">
                             @Texts.RestoreAnonymousNamesMenuText
                         </button>
@@ -361,6 +361,8 @@ else
 @code {
     private bool isListView { get; set; } = true;
     private bool DropZoneActive { get; set; }
+    private bool _isRenaming = false;
+    private bool _isRestoring = false;
 
     // ── Multi-select state (mirrors cbp SelectedFiles pattern) ──────
     private readonly HashSet<string> _selectedPaths = new();
@@ -385,19 +387,40 @@ else
 
     private async Task BatchRenameAsync()
     {
-        // Rename the selected file — multiple Explorer
-        // windows for each would be disruptive.
-        await ViewModel.BatcRetoreAndRenameVaultFilesAsync(_selectedPaths.ToList(), "RenameAnonymously");
-        ClearVaultSelection();
+        if (_isRenaming) return; 
+        _isRenaming = true;
+
+        try
+        {
+            // Rename the selected file — multiple Explorer
+            // windows for each would be disruptive.
+            await ViewModel.BatcRetoreAndRenameVaultFilesAsync(_selectedPaths.ToList(), "RenameAnonymously");
+            ClearVaultSelection();
+        }
+        finally
+        {
+            _isRenaming = false;
+        }
     }
 
     private async Task BatchRestoreRenameAsync()
     {
-        // Restore the selected file — multiple Explorer
-        // windows for each would be disruptive.
-        await ViewModel.BatcRetoreAndRenameVaultFilesAsync(_selectedPaths.ToList(), "RenameOriginal");
-        ClearVaultSelection();
+        if (_isRestoring) return;
+        _isRestoring = true;
+
+        try
+        {
+            // Restore the selected file — multiple Explorer
+            // windows for each would be disruptive.
+            await ViewModel.BatcRetoreAndRenameVaultFilesAsync(_selectedPaths.ToList(), "RenameOriginal");
+            ClearVaultSelection();
+        }
+        finally
+        {
+            _isRestoring = false;
+        }
     }
+
     private bool isAddMenuOpen { get; set; }
     private string searchText = string.Empty;
 

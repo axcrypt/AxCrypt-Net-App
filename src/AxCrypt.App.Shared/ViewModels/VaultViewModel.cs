@@ -158,11 +158,6 @@ namespace AxCrypt.App.Shared.ViewModels
                     try
                     {
                         await _fileOperationViewModel.RandomRenameFiles.ExecuteAsync(new[] { SelectedFilePath });
-
-                        if (!CheckActiveFiles(SelectedFilePath))
-                        {
-                            _statusAlertService.Success(Texts.FileRenameSuccessAlertMsg.InvariantFormat(Path.GetFileName(SelectedFilePath)));
-                        }
                     }
                     catch (Exception ex)
                     {
@@ -174,10 +169,6 @@ namespace AxCrypt.App.Shared.ViewModels
                     try
                     {
                         await _fileOperationViewModel.RestoreRandomRenameFiles.ExecuteAsync(new[] { SelectedFilePath });
-                        if (!CheckActiveFiles(SelectedFilePath))
-                        {
-                            _statusAlertService.Success(Texts.FileRestoreRenameSuccessAlertMsg.InvariantFormat(Path.GetFileName(SelectedFilePath)));
-                        }
                     }
                     catch (Exception ex)
                     {
