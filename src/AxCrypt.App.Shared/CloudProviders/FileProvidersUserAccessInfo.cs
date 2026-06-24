@@ -90,14 +90,14 @@ namespace AxCrypt.App.Shared.Providers
 
         public void Remove(GoogleDriveAccessInfo driveAccessInfo)
         {
-            if (_fileProvidersUserAccessInfo == null)
+            if (_fileProvidersUserAccessInfo == null || driveAccessInfo == null)
             {
                 return;
             }
 
             IList<GoogleDriveAccessInfo> googleDriveAccessInfoList = _fileProvidersUserAccessInfo.GoogleDriveAccessInfo.ToList();
 
-            GoogleDriveAccessInfo gDriveAccessInfo = googleDriveAccessInfoList.SingleOrDefault(gdf => gdf.RefreshToken == driveAccessInfo.RefreshToken);
+            GoogleDriveAccessInfo? gDriveAccessInfo = googleDriveAccessInfoList.SingleOrDefault(gdf => gdf.RefreshToken == driveAccessInfo.RefreshToken);
             if (gDriveAccessInfo == null)
             {
                 return;
@@ -146,14 +146,14 @@ namespace AxCrypt.App.Shared.Providers
 
         public void Remove(DropBoxAccessInfo driveAccessInfo)
         {
-            if (_fileProvidersUserAccessInfo == null)
+            if (_fileProvidersUserAccessInfo == null || driveAccessInfo == null)
             {
                 return;
             }
 
             IList<DropBoxAccessInfo> dropBoxAccessInfoList = _fileProvidersUserAccessInfo.DropBoxAccessInfo.ToList();
 
-            DropBoxAccessInfo gDriveAccessInfo = dropBoxAccessInfoList.SingleOrDefault(dbi => dbi.RefreshToken == driveAccessInfo.RefreshToken);
+            DropBoxAccessInfo? gDriveAccessInfo = dropBoxAccessInfoList.SingleOrDefault(dbi => dbi.RefreshToken == driveAccessInfo.RefreshToken);
             if (gDriveAccessInfo == null)
             {
                 return;
@@ -202,14 +202,14 @@ namespace AxCrypt.App.Shared.Providers
 
         public void Remove(OneDriveAccessInfo driveAccessInfo)
         {
-            if (_fileProvidersUserAccessInfo == null)
+            if (_fileProvidersUserAccessInfo == null || driveAccessInfo == null)
             {
                 return;
             }
 
             IList<OneDriveAccessInfo> oneDriveAccessInfoList = _fileProvidersUserAccessInfo.OneDriveAccessInfo.ToList();
 
-            OneDriveAccessInfo gDriveAccessInfo = oneDriveAccessInfoList.SingleOrDefault(dbi => dbi.RefreshToken == driveAccessInfo.RefreshToken);
+            OneDriveAccessInfo? gDriveAccessInfo = oneDriveAccessInfoList.SingleOrDefault(dbi => dbi.RefreshToken == driveAccessInfo.RefreshToken);
             if (gDriveAccessInfo == null)
             {
                 return;
