@@ -1135,6 +1135,12 @@ html[data-theme=dark] .pm-plan-badge {
   background: #48772C;
 }
 
+.toggle-switch--locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .toggle-thumb {
   position: absolute;
   top: 3px;
@@ -4004,6 +4010,12 @@ html[data-theme=dark] .skd-mini-text {
 
 .adv-toggle--on {
   background: #2d7a2d;
+}
+
+.adv-toggle--locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .adv-toggle-knob {
@@ -9850,6 +9862,29 @@ html[data-theme=dark] .cbp-btn--ghost:hover {
   opacity: 0;
   flex-shrink: 0;
   transition: opacity 0.12s, transform 0.12s;
+}
+
+.nam-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(1px);
+}
+
+.nam-lock-badge {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.nam-item--locked .nam-label {
+  color: #9ca3af;
+}
+
+.nam-item--locked:hover {
+  background: rgba(245, 158, 11, 0.07);
 }
 
 @media (max-width: 900px) {
@@ -16227,6 +16262,7 @@ textarea[readonly] {
   background: #eaf3de;
 }
 .secured-messenger .smx-msg-avatar {
+  position: relative;
   width: 40px;
   height: 40px;
   flex-shrink: 0;
@@ -16248,10 +16284,19 @@ textarea[readonly] {
   letter-spacing: 0.02em;
 }
 .secured-messenger .smx-msg-check {
+  display: none;
   width: 17px;
   height: 17px;
   cursor: pointer;
   accent-color: #48772C;
+}
+.secured-messenger .smx-msg-row:hover .smx-msg-check,
+.secured-messenger .smx-msg-row--select .smx-msg-check {
+  display: block;
+}
+.secured-messenger .smx-msg-row:hover .smx-msg-initials,
+.secured-messenger .smx-msg-row--select .smx-msg-initials {
+  display: none;
 }
 .secured-messenger .smx-msg-main {
   flex: 1;

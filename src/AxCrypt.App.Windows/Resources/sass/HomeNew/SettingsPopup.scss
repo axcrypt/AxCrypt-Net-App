@@ -246,6 +246,12 @@
     background: $brand-green;
 }
 
+.toggle-switch--locked {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .toggle-thumb {
     position: absolute;
     top: 3px;

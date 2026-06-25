@@ -7,7 +7,6 @@
 
 @inject UserService userService
 @inject CloudDriveViewModel cloudDriveViewModel
-@inject DesktopFilePickerViewModel filePickerViewModel
 @inject PaidFeaturegateService paidFeaturegateService
 @inject NavigationManager Navigation
 
@@ -17,7 +16,7 @@
         <h2 class="section-title">@Texts.CloudServicesText</h2>
         @if (userService.IsFreeTier)
         {
-            <span class="pro-pill" @onclick="ShowUpgradePopup"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg></span>
+            <span class="pro-pill" @onclick="ShowUpgradePopup"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg></span>
         }
         else
         {
@@ -64,69 +63,26 @@
 @code {
     protected override void OnInitialized()
     {
-        cloudDriveViewModel.FileProviderViewModel.OnUpdateViewState += async () => await UpdateUIState();
+        cloudDriveViewModel.FileProviderViewModel.OnUpdateViewState += async () => await InvokeAsync(StateHasChanged);
         base.OnInitialized();
     }
 
-    async Task UpdateUIState()
-    {
-        await InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });
-    }
-    
     private bool _managerOpen;
+    private void OpenManager()  => _managerOpen = true;
+    private void CloseManager() => _managerOpen = false;
 
-    private void OpenManager()
-    {
-        _managerOpen = true;
-    }
-
-    private void CloseManager()
-    {
-        _managerOpen = false;
-    }
-
-    /// <summary>
-    /// Row click — bypass the Cloud Manager popup entirely:
-    ///   • If the provider is already connected, prime the picker view
-    ///     model (so the nav page can render the file list) and navigate
-    ///     straight to /cloudbrowser.
-    ///   • If the provider is NOT connected, run only the auth flow. When
-    ///     the user finishes auth successfully (IsConnected flips true),
-    ///     navigate to the browser page; on cancel / failure stay on the
-    ///     home page with no popup chrome.
-    /// In both cases the legacy FilePickerComponent modal is suppressed by
-    /// forcing <c>filePickerViewModel.IsVisible = false</c>.
-    /// </summary>
+    // Delegate row action to ViewModel; navigate when it returns a route.
     private async Task OnRowAction(FileProviderItem provider)
     {
-        await cloudDriveViewModel.FileProviderViewModel.SubActionSelectProvider(provider);
-
-        // Always suppress the legacy modal — the nav page is the new home
-        // for cloud browsing.
-        filePickerViewModel.IsVisible = false;
-
-        if (cloudDriveViewModel.IsConnected(provider))
+        string? route = await cloudDriveViewModel.HandleRowActionAsync(provider);
+        if (route != null)
         {
-            Navigation.NavigateTo("/cloudbrowser");
+            Navigation.NavigateTo(route);
         }
-        // else: auth was cancelled / failed — leave the user on the home
-        // page; the row still shows "Connect" so they can try again.
     }
 
-    private void ShowUpgradePopup()
-    {
-        paidFeaturegateService.ShowPaidGate(Texts.SecuredCloudLinkLabel,
-            Texts.SecuredCloudHelpText,
-            new[]
-            {
-                Texts.SecureCloudFileProtectionPopup,
-                Texts.KeepCloudDataPrivatePopup,
-                Texts.UnlockAdvancedCloudSecurityPopup
-            });
-    }
+    // Delegate upgrade popup to ViewModel.
+    private void ShowUpgradePopup() => cloudDriveViewModel.ShowUpgradePopup();
 }
 
 <style>

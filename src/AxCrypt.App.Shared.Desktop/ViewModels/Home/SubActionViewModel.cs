@@ -1,6 +1,7 @@
 ﻿using AxCrypt.Api.Model;
 using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.CloudCore.CloudFileProviderUtility;
+using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser;
 using AxCrypt.App.Shared.Desktop.ViewModels.Main;
 using AxCrypt.App.Shared.Helpers;
@@ -328,6 +329,20 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
         public void UpgradeDialog()
         {
             AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
+        }
+
+        /// <summary>
+        /// Shows the tier-targeted paid-gate popup for the Vault feature.
+        /// Consolidated here since VaultStatus.razor and QuickSecureAction.razor
+        /// used identical copy — use this single method from both components.
+        /// </summary>
+        public void ShowVaultUpgradePopup()
+        {
+            PaidFeaturegateService? paidGate = AxCServiceProviderExtension.GetService<PaidFeaturegateService>();
+            paidGate?.ShowPaidGate(
+                Texts.VaultText,
+                Texts.QuickSecureActionEncryptedVaults,
+                new[] { Texts.QuickSecureActionSecureEncryptedVaults, Texts.QuickSecureActionProtectImportantFiles, Texts.QuickSecureActionAdvancedVaultSecurity, Texts.QuickSecureActionUnlockPremium });
         }
 
         public void AlwaysOfflineForFreeUser()

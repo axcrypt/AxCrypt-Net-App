@@ -6,7 +6,7 @@
 @using AxCrypt.App.Shared.Services
 @using AxCrypt.Content
 
-@inject ActionsViewModel? homeActionModel
+@inject ActionsViewModel homeActionModel
 @inject UserService userService
 @inject PaidFeaturegateService paidFeaturegateService
 @inject IFeatureUsageProvider usage
@@ -23,7 +23,7 @@
         @foreach (QuickActionItem qa in QuickActionCatalog.Items)
         {
             <QuickActionTile Item="qa"
-                             IsLocked="IsLockedFor(qa)"
+                             IsLocked="homeActionModel.IsLockedFor(qa, userService, usage)"
                              OnInvoke="OnQuickAction" />
         }
     </div>
@@ -47,62 +47,16 @@
 
     public void Dispose()
     {
-        if (homeActionModel != null && _onActionModelUpdate != null)
+        if (_onActionModelUpdate != null)
             homeActionModel.OnUpdateViewState -= _onActionModelUpdate;
         if (_onUsageChange != null)
             usage.OnChange -= _onUsageChange;
     }
 
-    private bool IsLockedFor(QuickActionItem qa)
-    {
-        if (qa.IsPaid && userService.IsFreeTier) return true;
-
-        if (qa.Type == QuickActionType.Encrypt
-            && userService.IsFreeTier
-            && !usage.CanUse(FeatureKey.FileEncryption)) return true;
-
-        if (qa.Type == QuickActionType.ShareKey
-            && userService.IsFreeTier
-            && !usage.CanUse(FeatureKey.KeyShare)) return true;
-
-        return false;
-    }
-
-    // ── Dispatch ───────────────────────────────────────────────
+    // Delegate entirely to ViewModel; force repaint so tile states update immediately.
     private async Task OnQuickAction(QuickActionItem qa)
     {
-        // Locked → show the tier-targeted paid-gate popup with the
-        // tile's own copy + perks. The popup CTA goes to /upgradePage.
-        bool isLockedFeature = IsLockedFor(qa);
-        if (isLockedFeature)
-        {
-            paidFeaturegateService.ShowPaidGate(qa.Label, qa.HelpText, qa.PaidPerks);
-            return;
-        }
-
-        switch (qa.Type)
-        {
-            case QuickActionType.OpenSecured:
-                await homeActionModel!.OpenFile();
-                break;
-
-            case QuickActionType.Encrypt:
-                if (!homeActionModel!.EncryptButtonEnabled) { paidFeaturegateService.ShowPaidGate(qa.Label, qa.HelpText, qa.PaidPerks); return; }
-                await homeActionModel.SecureFileAsync();
-                break;
-
-            case QuickActionType.Decrypt:
-                await homeActionModel!.StopSecuringFile();
-                break;
-
-            case QuickActionType.ShareKey:
-                if (!homeActionModel!.KeyShareButtonEnabled) { paidFeaturegateService.ShowPaidGate(qa.Label, qa.HelpText, qa.PaidPerks); return; }
-                await homeActionModel!.ShareKeysAsync(EventArgs.Empty);
-                break;
-        }
-
-        // Force an immediate repaint so tile states (e.g. pending indicator)
-        // update without waiting for the next VM event tick.
+        await homeActionModel.HandleQuickActionAsync(qa, userService, usage, paidFeaturegateService);
         await InvokeAsync(StateHasChanged);
     }
 }

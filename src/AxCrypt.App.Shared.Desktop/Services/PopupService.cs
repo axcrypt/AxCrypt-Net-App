@@ -100,7 +100,7 @@ public class PopupService
     public void CloseAllPopups()
     {
         ProfileMenuOpen = SettingsMenuOpen = NewActionMenuOpen = ContextMenuOpen =
-        PaidGateOpen = HelpOpen = HelpOverlayOpen =
+        HelpOpen = HelpOverlayOpen =
         AdvancedSettingsOpen = EncryptionFilePropertiesOpen = SwitchUserPopupOpen = false;
         Notify();
     }

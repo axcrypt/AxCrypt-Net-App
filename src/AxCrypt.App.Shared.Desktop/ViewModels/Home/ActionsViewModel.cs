@@ -1,5 +1,6 @@
 ﻿using AxCrypt.Api.Model;
 using AxCrypt.App.Entitlement.Contracts;
+using AxCrypt.App.Shared.Desktop.Models;
 using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Services;
@@ -19,6 +20,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AxCrypt.Abstractions;
+using AxCrypt.Content;
 
 namespace AxCrypt.App.Shared.Desktop.ViewModels.Home;
 
@@ -413,8 +415,13 @@ public class ActionsViewModel : ViewModelBase
             await _batchService.RecordMeteredUsageAsync(FeatureKey.KeyShare);
 
             // Share-key bypasses RunAsync, so pump a synthetic result for the toast.
-            int sharedCount = _mainViewModel?.SelectedRecentFiles?.Count() ?? 0;
-            _batchService.PublishExternalResult("Shared key for", Math.Max(sharedCount, 1));
+            // Use the files still in the dialog at Apply time — the user may have
+            // removed chips before clicking Apply, so SelectedFilesOrFolders (2) is
+            // more accurate than SelectedRecentFiles (the original 3-file selection).
+            int sharedCount = _sharekeyViewModel?.SelectedFilesOrFolders?.Count()
+                              ?? _mainViewModel?.SelectedRecentFiles?.Count()
+                              ?? 0;
+            _batchService.PublishExternalResult(Texts.ShareKeysToolStripMenuItemText, Math.Max(sharedCount, 1));
         }
         ReconcileFreeTierUsage();
     }
@@ -500,6 +507,61 @@ public class ActionsViewModel : ViewModelBase
     //{
     //    New<Abstractions.IBrowser>().OpenUri(new Uri("https://account.axcrypt.net/en/HomeBusiness/CreateSubscription"));
     //}
+
+    // ── QuickAction tile helpers ───────────────────────────────
+    /// <summary>
+    /// Returns true when a QuickActionItem should be rendered locked for
+    /// the current user (plan restrictions or per-use quota).
+    /// </summary>
+    public bool IsLockedFor(QuickActionItem qa, UserService userService, IFeatureUsageProvider usage)
+    {
+        if (qa.IsPaid && userService.IsFreeTier) return true;
+
+        if (qa.Type == QuickActionType.Encrypt
+            && userService.IsFreeTier
+            && !usage.CanUse(FeatureKey.FileEncryption)) return true;
+
+        if (qa.Type == QuickActionType.ShareKey
+            && userService.IsFreeTier
+            && !usage.CanUse(FeatureKey.KeyShare)) return true;
+
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the action for a QuickActionItem.
+    /// Shows the paid-gate popup when the tile is locked; otherwise delegates
+    /// to the appropriate file operation.
+    /// </summary>
+    public async Task HandleQuickActionAsync(QuickActionItem qa, UserService userService, IFeatureUsageProvider usage, PaidFeaturegateService paidGateService)
+    {
+        if (IsLockedFor(qa, userService, usage))
+        {
+            paidGateService.ShowPaidGate(qa.Label, qa.HelpText, qa.PaidPerks);
+            return;
+        }
+
+        switch (qa.Type)
+        {
+            case QuickActionType.OpenSecured:
+                await OpenFile();
+                break;
+
+            case QuickActionType.Encrypt:
+                if (!EncryptButtonEnabled) { paidGateService.ShowPaidGate(qa.Label, qa.HelpText, qa.PaidPerks); return; }
+                await SecureFileAsync();
+                break;
+
+            case QuickActionType.Decrypt:
+                await StopSecuringFile();
+                break;
+
+            case QuickActionType.ShareKey:
+                if (!KeyShareButtonEnabled) { paidGateService.ShowPaidGate(qa.Label, qa.HelpText, qa.PaidPerks); return; }
+                await ShareKeysAsync(EventArgs.Empty);
+                break;
+        }
+    }
 
     private async Task PremiumFeature_ClickAsync(LicenseCapability requiredCapability, Func<object, EventArgs, Task> realHandler, object sender, EventArgs e)
     {

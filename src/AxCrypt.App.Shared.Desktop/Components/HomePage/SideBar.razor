@@ -16,6 +16,7 @@
 @inject FileDropService FileDropService
 @inject ProfileViewModel profileViewModel
 @inject PaidFeaturegateService paidFeaturegateService
+@inject SideBarViewModel sideBarVm
 @inject IJSRuntime JSRuntime
 
 <!-- ═══════════════════════ SIDEBAR ═══════════════════════ -->
@@ -40,7 +41,7 @@
         @foreach (NavPage navPage in navPageService.SideMenuNavPages!)
         {
             bool isPaidFeatureFreeUser = navPage.IsPaid && userService.IsFreeTier;
-            string cssStyleClass = isPaidFeatureFreeUser ? "nav-item nav-item--locked " + GetClassByActiveTab(navPage.Href) : "nav-item";
+            string cssStyleClass = isPaidFeatureFreeUser ? "nav-item nav-item--locked " + sideBarVm.GetActiveTabClass(navPage.Href) : "nav-item";
             string menuNavLink = isPaidFeatureFreeUser ? "javascript:void(0);" : navPage.Href;
             <NavLink href="@menuNavLink" class="@(cssStyleClass)"
                      ActiveClass="nav-item--active" Match="@navPage.Match"
@@ -81,21 +82,15 @@
 </aside>
 
 @code {
-    private string TabActive = "";
-
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-
         await profileViewModel!.InitializeAsync();
 
         string currentPath = navigationManager.Uri.Replace(navigationManager.BaseUri, "/");
         FileDropService.CurrentPage = currentPath;
-
-        // Refresh the active-page title on every mount so a language change
-        // (which does an in-process forceLoad) gets the new-culture strings
-        // rather than stale text baked into the singleton's CurrentPage.
         navPageService.SetActivePage(currentPath);
+        sideBarVm.UpdateActiveTabForPath(currentPath);
 
         navigationManager.LocationChanged += OnLocationChanged;
         popupService.OnChange += UpdatePageState;
@@ -103,102 +98,23 @@
 
     private void OnLocationChanged(object? obj, LocationChangedEventArgs args)
     {
-        UpdateActiveTabByNavigation();
+        string currentPath = navigationManager.Uri.Replace(navigationManager.BaseUri, "/");
+        sideBarVm.UpdateActiveTabForPath(currentPath);
+        FileDropService.CurrentPage = currentPath;
         UpdatePageState();
     }
 
-    string[] SecretNavUrls = new[]
-    {
-        "/editpassword",
-        "/editnote",
-        "/editcard",
-        "/viewcard",
-        "/viewnote",
-        "/viewpassword",
-        "/AddCard",
-        "/AddNote",
-        "/AddPassword"
-    };
+    private void UpdatePageState() => InvokeAsync(StateHasChanged);
 
-    private void UpdateActiveTabByNavigation()
-    {
-        TabActive = "";
-        if (SecretNavUrls.Contains(navigationManager.Uri.Replace(navigationManager.BaseUri, "/")))
-        {
-            TabActive = "passwordManager";
-            return;
-        }
-
-        FileDropService.CurrentPage = navigationManager.Uri.Replace(navigationManager.BaseUri, "/");
-    }
-
-    private string GetClassByActiveTab(string activeTab)
-    {
-        return TabActive == activeTab.Replace("/", "") ? "nav-item--active" : "";
-    }
-
-    private void UpdatePageState()
-    {
-        InvokeAsync(() =>
-        {
-            StateHasChanged(); // Refresh UI
-        });
-    }
-
+    // Delegate nav-menu click entirely to the ViewModel.
     private void OnClickNavMenu(NavPage navPage)
     {
-        if (navPage.IsPaid && userService.IsFreeTier)
-        {
-            switch (navPage.Href)
-            {
-                case "/vault":
-                    paidFeaturegateService.ShowPaidGate(Texts.VaultText, Texts.QuickSecureActionEncryptedVaults, new[] { Texts.QuickSecureActionSecureEncryptedVaults, Texts.QuickSecureActionProtectImportantFiles, Texts.QuickSecureActionAdvancedVaultSecurity, Texts.QuickSecureActionUnlockPremium });
-                    break;
-
-                case "/textencryption":
-                    paidFeaturegateService.ShowPaidGate(Texts.TextEncryptionLinkLabel, Texts.TextEncryptionAdvancedProtectionFeatures, new[] { Texts.EncryptUnlimitedText, Texts.AdvancedEncryptionAlgorithms, Texts.QuickSecureActionSensitiveInformation, Texts.PriorityCustomerSupport });
-                    break;
-
-                case "/securedfolders":
-                    paidFeaturegateService.ShowPaidGate(Texts.WatchedFoldersTabPageText, Texts.QuickSecureActionAutomaticallyMonitor, new[] { Texts.QuickSecureActionAutomaticallyEncrypt, Texts.QuickSecureActionMonitorMultiple, Texts.QuickSecureActionProtectSensitive, Texts.QuickSecureActionUnlockAdvanced });
-                    break;
-                default:
-                    break;
-            }
-            //AxCServiceProviderExtension.UpgradeSubscriptionViewModel!.ShowUpgradeDialog();
-            return;
-        }
-
-        navPageService.SetActivePage(navPage);
+        sideBarVm.HandleNavMenuClick(navPage);
+        // Navigation itself is handled by the NavLink href attribute.
     }
 
-    void UpdateUIState(bool result)
-    {
-        if (!result)
-        {
-            TabActive = "";
-            UpdateActiveTabByNavigation();
-        }
-
-        InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });
-    }
-
-    // ── SVG icon helpers (inline markup strings) ───────────────
-    private RenderFragment HomeIcon => @<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>;
-    private RenderFragment FilesIcon => @<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>;
-    private RenderFragment VaultIcon => @<svg width="16" height="16" viewBox="0 0 24 24"><image href="images/default/IcoVlt.svg" width="24" height="24" /></svg>;
-    private RenderFragment LockIcon => @<svg width="16" height="16" viewBox="0 0 24 24"><image href="images/default/IcoScrts.svg" width="24" height="24" /></svg>;
-    private RenderFragment SecuredMessangerIcon => @<svg width="16" height="16" viewBox="0 0 24 24"><image href="images/default/IcoScrdMssngr.svg" width="24" height="24" /></svg>;
-    private RenderFragment TextEncryptionIcon => @<svg width="16" height="16" viewBox="0 0 24 24"><image href="images/default/IcoTxtEncrypt.svg" width="24" height="24" /></svg>;
-    private RenderFragment ToolsIcon => @<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3" /><path d="M19.07 4.93l-1.41 1.41M5.34 18.66l-1.41 1.41M20 12h2M2 12h2M19.07 19.07l-1.41-1.41M5.34 5.34L3.93 3.93M12 20v2M12 2v2" /></svg>;
-    private RenderFragment ActivityIcon => @<svg width="16" height="16" viewBox="0 0 24 24"><image href="images/default/IcoFileLgng.svg" width="24" height="24" /></svg>;
-    private RenderFragment FeedbackIcon => @<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>;
-    private RenderFragment SupportIcon => @<svg width="16" height="16" viewBox="0 0 24 24"><image href="images/default/IcoSupport.svg" width="24" height="24" /></svg>;
-    private RenderFragment ClockIcon => @<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>;
-    // Collapse / Expand chevron icons
+    // ── SVG icon helpers (UI-only) ─────────────────────────────
+    private RenderFragment ClockIcon    => @<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>;
     private RenderFragment CollapseIcon => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6" /></svg>;
-    private RenderFragment ExpandIcon => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6" /></svg>;
+    private RenderFragment ExpandIcon   => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6" /></svg>;
 }

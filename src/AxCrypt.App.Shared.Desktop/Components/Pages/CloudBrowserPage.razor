@@ -427,7 +427,8 @@
 
     private async Task UpdateFileOperation(FileOperationOption operation)
     {
-        await _guard.RunAsync(async () =>
+        await WithLoading(async () => await
+        _guard.RunAsync(async () =>
         {
             ViewModel.SelectedFileOperation = operation;
             try
@@ -438,7 +439,7 @@
             {
                 AxCServiceProviderExtension.ErrorReportService?.Report(ex, "Cloud browser action");
             }
-        }, () => InvokeAsync(StateHasChanged));
+        }, () => InvokeAsync(StateHasChanged)));
     }
 
     private string HighlightMatch(string input)

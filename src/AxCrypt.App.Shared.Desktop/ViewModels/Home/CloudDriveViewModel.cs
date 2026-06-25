@@ -1,5 +1,6 @@
 ﻿using AxCrypt.App.Shared.CloudCore.CloudFileProviderUtility;
 using AxCrypt.App.Shared.CloudCore.iCloud;
+using AxCrypt.App.Shared.Desktop.Services;
 using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Providers;
@@ -7,6 +8,7 @@ using AxCrypt.App.Shared.Services;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Shared.ViewModels.FileBrowser;
+using AxCrypt.Content;
 using AxCrypt.Core.Runtime;
 using AxCrypt.Core.UI.ViewModel;
 using System.Linq;
@@ -18,14 +20,18 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
     public class CloudDriveViewModel : ViewModelBase
     {
         private MainViewModel? _mainViewModel;
+        private PaidFeaturegateService? _paidGateService;
+        private DesktopFilePickerViewModel? _filePickerVm;
         public FileProviderSelectionViewModel FileProviderViewModel;
 
         public bool HasEncryptionCapability { get; set; }
 
         public CloudDriveViewModel()
         {
-            LogOnViewModel = AxCServiceProviderExtension.LogOnViewModel!;
-            _mainViewModel = LogOnViewModel.MainViewModel;
+            LogOnViewModel    = AxCServiceProviderExtension.LogOnViewModel!;
+            _mainViewModel    = LogOnViewModel.MainViewModel;
+            _paidGateService  = AxCServiceProviderExtension.GetService<PaidFeaturegateService>();
+            _filePickerVm     = AxCServiceProvider.GetService<DesktopFilePickerViewModel>();
             FileProviderViewModel = AxCServiceProvider.GetService<FileProviderSelectionViewModel>();
             _mainViewModel!.BindPropertyChanged(nameof(_mainViewModel.License), (LicenseCapabilities license) => { if (_mainViewModel.LoggedOn) ConfigureMenusAccordingToPolicy(license); });
 
@@ -89,6 +95,35 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
                 default:
                     return false;
             }
+        }
+
+        // ── Upgrade prompt ─────────────────────────────────────
+        /// <summary>Shows the paid-gate popup for the Cloud Services feature.</summary>
+        public void ShowUpgradePopup()
+        {
+            _paidGateService?.ShowPaidGate(
+                Texts.SecuredCloudLinkLabel,
+                Texts.SecuredCloudHelpText,
+                new[] { Texts.SecureCloudFileProtectionPopup, Texts.KeepCloudDataPrivatePopup, Texts.UnlockAdvancedCloudSecurityPopup });
+        }
+
+        // ── Row action ─────────────────────────────────────────
+        /// <summary>
+        /// Handles a cloud-drive row click.
+        /// Runs the auth / selection flow and returns the route the razor should navigate to,
+        /// or null when no navigation is required (auth cancelled / failed).
+        /// </summary>
+        public async Task<string?> HandleRowActionAsync(FileProviderItem provider)
+        {
+            await FileProviderViewModel.SubActionSelectProvider(provider);
+
+            // Always suppress the legacy modal — the nav page is the home for cloud browsing.
+            if (_filePickerVm != null)
+            {
+                _filePickerVm.IsVisible = false;
+            }
+
+            return IsConnected(provider) ? "/cloudbrowser" : null;
         }
 
         public void DisconnetCloudService(FileProviderItem provider)

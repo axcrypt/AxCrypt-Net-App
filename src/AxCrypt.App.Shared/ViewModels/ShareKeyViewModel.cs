@@ -198,6 +198,8 @@ public class ShareKeyViewModel : ViewModelBase
     {
         KeySharingUserEmail = "";
         SelectedFilesOrFolders = new List<string>();
+        _shareKeyUserList = new List<ShareKeyUser>();
+
         CloseShareKeyPopUp();
     }
 

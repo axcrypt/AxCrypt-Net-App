@@ -226,7 +226,12 @@
     // (Korean, etc.) are silently trimmed at the pill boundary.
     overflow: hidden;
 }
-.adv-toggle--on { background: #2d7a2d; }
+.adv-toggle--on     { background: #2d7a2d; }
+.adv-toggle--locked {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
 
 .adv-toggle-knob {
     position: absolute;

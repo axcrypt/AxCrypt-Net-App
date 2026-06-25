@@ -95,10 +95,11 @@
                     }
                     else
                     {
-                        <button class="adv-toggle @(tog.IsOn ? "adv-toggle--on" : "")"
-                                @onclick:stopPropagation
-                                @onclick="() => ToggleItem(tog)"
-                                title="@(tog.IsOn ? "Turn off" : "Turn on")">
+                        <button class="adv-toggle @(tog.IsOn ? "adv-toggle--on" : "") @(togLocked ? "adv-toggle--locked" : "")"
+                            @onclick:stopPropagation="!togLocked"
+                            @onclick="() => { if (!togLocked) { ToggleItem(tog); InvokeAsync(StateHasChanged); } }"
+                            title="@(togLocked ? "Locked — click to upgrade" : (tog.IsOn ? "Turn off" : "Turn on"))"
+                            aria-pressed="@tog.IsOn.ToString().ToLower()">
                             <span class="adv-toggle-knob"></span>
                             <span class="adv-toggle-label" aria-hidden="true" title="@(tog.IsOn ? Texts.ONText : Texts.OFFText)">@(tog.IsOn ? "I" : "O")</span>
                         </button>

@@ -1,11 +1,9 @@
-@using AxCrypt.Api.Model
 @using AxCrypt.App.Shared.Desktop.Models
-@using AxCrypt.App.Shared.Services
+@using AxCrypt.App.Shared.Desktop.ViewModels.Home
 @using AxCrypt.Content
-@using static AxCrypt.Abstractions.TypeResolve
 
 @inject NavigationManager Navigation
-@inject UserService userService
+@inject SecurityStatusViewModel securityVm
 
 @*
     Security Status — adapts to the user's subscription tier.
@@ -26,10 +24,10 @@
 <section class="card security-status-card">
     <div class="card-header-row">
         <h2 class="section-title">@Texts.SecurityStatusTitle</h2>
-        <span class="sec-tier-pill sec-tier-pill--@TierClass" title="Your current plan">@TierLabel</span>
+        <span class="sec-tier-pill sec-tier-pill--@securityVm.TierClass" title="Your current plan">@securityVm.TierLabel</span>
     </div>
 
-    @foreach (SecurityItem s in SecurityItems)
+    @foreach (SecurityItem s in securityVm.GetSecurityItems())
     {
         bool clickable = !string.IsNullOrEmpty(s.ActionRoute);
         <div class="security-row security-row--@StateClass(s.State) @(clickable ? "security-row--clickable" : "")"
@@ -53,164 +51,49 @@
 </section>
 
 @code {
-    private List<SecurityItem> SecurityItems => BuildItems(userService.SubscriptionLevel);
-
-    // ── Tier identification ────────────────────────────────────
-    private bool IsBusiness => userService.SubscriptionLevel == SubscriptionLevel.Business;
-    private bool IsPremium => userService.SubscriptionLevel == SubscriptionLevel.Premium
-                            || userService.SubscriptionLevel == SubscriptionLevel.PasswordManager;
-    private bool IsFree => userService.IsFreeTier;
-
-    private string TierLabel =>
-        IsBusiness ? "Business" :
-        IsPremium ? "Premium" : "Free";
-
-    private string TierClass =>
-        IsBusiness ? "business" :
-        IsPremium ? "premium" : "free";
-
-    private const string MfaSetupUrl = "https://account.axcrypt.net/en/Security#mfa-expnd-collps";
-
-    private static SecurityItem MfaItem()
+    // ── Lifecycle ──────────────────────────────────────────────
+    protected override void OnInitialized()
     {
-        bool isMfaEnabled = AxCrypt.Core.UI.ViewModel.AxCryptUserAccountViewModel.MFAEnabledType != MultiFactorAuthType.None;
-        return new()
-        {
-            Title = Texts.MFAuthenticationLinkLable,
-            Description = Texts.MFAuthenticationAdditionalFactorText,
-            State = isMfaEnabled ? SecurityItemState.Active : SecurityItemState.Warning,
-            ActionRoute = MfaSetupUrl,
-            ActionLabel = isMfaEnabled ? "" : "Set up",
-        };
+        // Re-render when the VM detects a subscription change.
+        securityVm.OnUpdateViewState += () => InvokeAsync(StateHasChanged);
     }
 
-    private static List<SecurityItem> BuildItems(SubscriptionLevel level)
-    {
-        bool business = level == SubscriptionLevel.Business;
-        bool premium = level == SubscriptionLevel.Premium || level == SubscriptionLevel.PasswordManager;
-
-        if (business)
-        {
-            return new()
-            {
-                new() { Title = Texts.SecurityStatusUnlimitedAES256,
-                        Description = Texts.SecurityStatusUnlimitedAES256Description,
-                        State = SecurityItemState.Active },
-                new() { Title = Texts.SecurityStatusMasterKeyRecovery,
-                        Description = Texts.SecurityStatusMasterKeyRecoveryDescription,
-                        State = SecurityItemState.Active },
-                new() { Title = Texts.SecurityStatusGroupkeySharing,
-                        Description = Texts.SecurityStatusGroupkeySharingDescription,
-                        State = SecurityItemState.Active },
-                MfaItem(),
-            };
-        }
-
-        if (premium)
-        {
-            return new()
-            {
-                new() { Title = Texts.SecurityStatusUnlimitedAES256,
-                        Description = Texts.SecurityStatusUnlimitedDescription,
-                        State = SecurityItemState.Active },
-                new() { Title = Texts.UsageTipsAnonymousFileHeading,
-                        Description = Texts.UsageTipsAnonymousFileDescription,
-                        State = SecurityItemState.Active },
-                MfaItem(),
-            };
-        }
-
-        // Free
-        return new()
-        {
-            new() { Title = Texts.SecurityStatusEncryptionsPerMonth,
-                    Description = Texts.SecurityStatusFreePlan,
-                    State = SecurityItemState.Active },
-
-            new() { Title = Texts.SecurityStatusUnlimitedAES256,
-                    Description = Texts.SecurityStatusUnlimitedDescription1,
-                    State = SecurityItemState.Locked,
-                    ActionRoute = "/upgradePage",
-                    ActionLabel = "Upgrade" },
-            new() { Title = Texts.SecureDeleteToolStripMenuItemText,
-                    Description = Texts.SecurityStatusSecureDeleteTitle,
-                    State = SecurityItemState.Locked,
-                    ActionRoute = "/upgradePage",
-                    ActionLabel = "Upgrade" },
-        };
-    }
-
-    // Routes a security-row action. An http(s) ActionRoute opens in the
-    // user's external browser (e.g. MFA setup on the account website);
-    // anything else is treated as an in-app route.
+    // ── Action routing (UI concern — needs NavigationManager) ──
     private void OpenAction(SecurityItem s)
     {
-        if (string.IsNullOrEmpty(s.ActionRoute))
-        {
-            return;
-        }
+        string? route = securityVm.GetActionRoute(s);
+        if (string.IsNullOrEmpty(route)) return;
 
-        if (s.ActionRoute.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-        {
-            AxCrypt.Core.BrowseUtility.RedirectTo(s.ActionRoute);
-        }
+        if (SecurityStatusViewModel.IsExternalUrl(route))
+            SecurityStatusViewModel.OpenExternalUrl(route);
         else
-        {
-            Navigation.NavigateTo(s.ActionRoute);
-        }
+            Navigation.NavigateTo(route);
     }
 
-    // ── Render helpers ─────────────────────────────────────────
-    private string StateClass(SecurityItemState s) => s switch
+    // ── Render helpers (CSS/SVG — UI only) ────────────────────
+    private static string StateClass(SecurityItemState s) => s switch
     {
         SecurityItemState.Warning => "warn",
-        SecurityItemState.Locked => "lock",
-        _ => "ok",
+        SecurityItemState.Locked  => "lock",
+        _                         => "ok",
     };
 
     private RenderFragment StateIcon(SecurityItemState s) => s switch
     {
         SecurityItemState.Warning => GreenWarn,
-        SecurityItemState.Locked => GreenLock,
-        _ => GreenCheckSvg,
+        SecurityItemState.Locked  => GreenLock,
+        _                         => GreenCheckSvg,
     };
 
     private RenderFragment StateBadge(SecurityItemState s) => s switch
     {
-        SecurityItemState.Warning => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b"
-                                           stroke-width="2.5">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="8" x2="12" y2="12" />
-            <line x1="12" y1="16" x2="12.01" y2="16" />
-        </svg>,
-        SecurityItemState.Locked => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9ca3af"
-                                          stroke-width="2.5">
-            <rect x="3" y="11" width="18" height="11" rx="2" />
-            <path d="M7 11V7a5 5 0 0110 0v4" />
-        </svg>,
-        _ => GreenTickSvg,
+        SecurityItemState.Warning => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>,
+        SecurityItemState.Locked  => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg>,
+        _                         => GreenTickSvg,
     };
 
-    private RenderFragment GreenTickSvg => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-        <polyline points="20 6 9 17 4 12" stroke="#22c55e" stroke-width="2.5" />
-    </svg>;
-    private RenderFragment GreenCheckSvg => @<svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" fill="#22c55e" />
-        <polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" />
-    </svg>;
-    private RenderFragment GreenWarn => @<svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" fill="#f59e0b" />
-        <line x1="12" y1="8" x2="12" y2="13" stroke="white" stroke-width="2.4" stroke-linecap="round" />
-        <line x1="12" y1="16" x2="12.01" y2="16" stroke="white" stroke-width="2.4" stroke-linecap="round" />
-    </svg>;
-    private RenderFragment GreenLock => @<svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" fill="#9ca3af" />
-        <rect x="8" y="11" width="8" height="6" rx="1" fill="white" />
-        <path d="M10 11V9a2 2 0 014 0v2" stroke="white" stroke-width="1.6" fill="none" />
-    </svg>;
-
-    protected override void OnInitialized()
-    {
-        userService.OnChange += () => InvokeAsync(StateHasChanged);
-    }
+    private RenderFragment GreenTickSvg  => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#22c55e" stroke-width="2.5" /></svg>;
+    private RenderFragment GreenCheckSvg => @<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e" /><polyline points="8 12 11 15 16 9" stroke="white" stroke-width="2" fill="none" /></svg>;
+    private RenderFragment GreenWarn     => @<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#f59e0b" /><line x1="12" y1="8" x2="12" y2="13" stroke="white" stroke-width="2.4" stroke-linecap="round" /><line x1="12" y1="16" x2="12.01" y2="16" stroke="white" stroke-width="2.4" stroke-linecap="round" /></svg>;
+    private RenderFragment GreenLock     => @<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#9ca3af" /><rect x="8" y="11" width="8" height="6" rx="1" fill="white" /><path d="M10 11V9a2 2 0 014 0v2" stroke="white" stroke-width="1.6" fill="none" /></svg>;
 }

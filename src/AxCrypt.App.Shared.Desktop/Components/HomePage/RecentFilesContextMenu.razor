@@ -69,7 +69,7 @@
             <span class="ctx-label">@Texts.ShareKeysToolStripMenuItemText</span>
             @if (paidFeaturegateService.IsPaidFeature("share"))
             {
-                <span class="ctx-lock-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg></span>
+                <span class="ctx-lock-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg></span>
             }
         </button>
 
@@ -127,7 +127,8 @@
 
     private int SelectedCount => recentFilesViewModel.SelectedFiles?.Count() ?? 0;
 
-    private bool CanCleanUpTarget => TargetFile?.CleanUpNeeded == true;
+    // Delegate status derivation to ViewModel (single source of truth for "Opened" state).
+    private bool CanCleanUpTarget => TargetFile != null && RecentFilesViewModel.StatusKey(TargetFile) == "Opened";
 
     // ── After-render: clamp the menu so it never spills off-screen ─
     protected override async Task OnAfterRenderAsync(bool firstRender)

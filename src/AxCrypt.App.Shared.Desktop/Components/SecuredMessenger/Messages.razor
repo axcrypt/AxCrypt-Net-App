@@ -40,23 +40,17 @@
        in the style of a modern secure-messaging app. All view-model
        wiring (open thread, multi-select) is preserved 1:1. *@
     <div id="unread-message-@messageSelectionId"
-         class="smx-msg-row @(isUnread ? "smx-msg-row--unread" : "") @(isActive ? "smx-msg-row--active" : "")"
+         class="smx-msg-row @(isUnread ? "smx-msg-row--unread" : "") @(isActive ? "smx-msg-row--active" : "") @(selectMode ? "smx-msg-row--select" : "")"
          data-id="@Model.Id" data-parent="@Model.ParentId"
          @onclick="async (e) => await ManageSecMgrViewModel.ViewMessageReplies(messageSelectionId, SecMessengerFilterTab)">
 
         <div class="smx-msg-avatar">
-            @if (selectMode)
-            {
-                <input type="checkbox" class="smx-msg-check"
-                       checked="@Model.IsSelected"
-                       @onclick:stopPropagation="true"
-                       @onchange="() => ManageSecMgrViewModel.SelectMessagesForActions(Model)"
-                       data-id="@messageSelectionId" />
-            }
-            else
-            {
-                <span class="smx-msg-initials">@initials</span>
-            }
+            <span class="smx-msg-initials">@initials</span>
+            <input type="checkbox" class="smx-msg-check"
+                   checked="@Model.IsSelected"
+                   @onclick:stopPropagation="true"
+                   @onchange="HandleCheckboxChange"
+                   data-id="@messageSelectionId" />
         </div>
 
         <div class="smx-msg-main">
@@ -118,9 +112,13 @@
     {
     }
 
-    private void OnMessageCheckboxChanged(ChangeEventArgs e)
+    // If select mode isn't active, enable it first so all other rows show their
+    // checkboxes. Then select/deselect this message.
+    private void HandleCheckboxChange()
     {
-        UpdateState();
+        if (!ManageSecMgrViewModel.isMultiCheckboxVisible)
+            ManageSecMgrViewModel.ToggleMultiCheckbox();
+        ManageSecMgrViewModel.SelectMessagesForActions(Model);
     }
 
     void UpdateState()

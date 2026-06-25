@@ -49,7 +49,10 @@
                     <div class="ncm-chips" @onclick="FocusToInput">
                         @foreach (MessengerReceiver receiver in newSecMsgrViewModel.ReceiverList)
                         {
-                            <span class="ncm-chip" title="@receiver.EmailAddress">
+                            <span class="ncm-chip" title="Click to edit — @receiver.EmailAddress"
+                                  @onclick="async () => await EditEmail(receiver.EmailAddress)"
+                                  @onclick:stopPropagation="true"
+                                  style="cursor:pointer">
                                 <span class="ncm-chip-text">@receiver.EmailAddress</span>
                                 <button type="button"
                                         class="ncm-chip-x"
@@ -65,7 +68,8 @@
                                @ref="_toInputRef"
                                @bind="newSecMsgrViewModel.UserEmail"
                                @bind:event="oninput"
-                               @onkeydown="HandleKeyPress" />
+                               @onkeydown="HandleKeyPress"
+                               @onfocusout="HandleFocusOut" />
                     </div>
                 </div>
                 <div class="ncm-field ncm-field--visibility">
@@ -86,7 +90,7 @@
                 </div>
             </div>
 
-            <p class="ncm-hint ncm-recipient-hint">Press <kbd>Enter</kbd> or <kbd>,</kbd> to add each recipient.</p>
+            <p class="ncm-hint ncm-recipient-hint">Press <kbd>Enter</kbd> or <kbd>,</kbd> to add each recipient. Click a chip to edit it.</p>
 
             @if (!string.IsNullOrEmpty(ErrorMessage))
             {
@@ -236,6 +240,21 @@
                 AddEmail(trimmedEmail);
             }
         }
+    }
+
+    // Auto-add on focus-out if a valid email is in the field.
+    private void HandleFocusOut()
+    {
+        if (!string.IsNullOrWhiteSpace(newSecMsgrViewModel.UserEmail))
+            AddEmail(newSecMsgrViewModel.UserEmail.Trim());
+    }
+
+    // Click-to-edit: remove the chip and restore the email to the input.
+    private async Task EditEmail(string email)
+    {
+        RemoveEmail(email);
+        newSecMsgrViewModel.UserEmail = email;
+        try { await _toInputRef.FocusAsync(); } catch { }
     }
 
     private void RemoveEmail(string email)

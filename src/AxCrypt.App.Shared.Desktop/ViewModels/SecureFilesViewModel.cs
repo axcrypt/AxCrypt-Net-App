@@ -1,4 +1,5 @@
-﻿using AxCrypt.Abstractions;
+﻿// LEGACY — depends on Microsoft.Maui.Controls; superseded by ActionsViewModel + RecentFilesViewModel. Not referenced in any Blazor component.
+using AxCrypt.Abstractions;
 using AxCrypt.App.Shared.CloudCore;
 using AxCrypt.App.Shared.Desktop.Services.Interface;
 using AxCrypt.App.Shared.Desktop.ViewModels.RecentFiles;

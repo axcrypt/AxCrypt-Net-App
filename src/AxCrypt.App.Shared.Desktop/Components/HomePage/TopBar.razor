@@ -12,6 +12,7 @@
 @inject NavigationManager Navigation
 @inject AppSettingsViewModel SettingsViewModel
 @inject TopMenuViewModel TopMenuViewModel
+@inject TopBarViewModel topBarVm
 @inject IJSRuntime JSRuntime
 @inject AppLocalizationOptions? localizationOptions
 @inject PopupService popupService
@@ -137,7 +138,7 @@
 
                             @if (!SettingsViewModel.EnableInActivitySignOut)
                             {
-                                <span class="nav-lock-icon" title="Locked! Upgrade to unlock" @onclick="ShowUpgradePopup">
+                                <span class="nav-lock-icon" title="Locked! Upgrade to unlock" @onclick="topBarVm.ShowInactivitySignOutUpgradePopup">
                                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg>
                                 </span>
                             }
@@ -170,7 +171,7 @@
                             </svg>
                             @((MarkupString)Texts.TopBarPrivacySecurity)
                         </div>
-                        @foreach (SettingToggle tog in SettingToggles)
+                        @foreach (SettingToggle tog in topBarVm.BuildSettingToggles(ToggleThemeAsync))
                         {
                             bool locked = !tog.IsEnable;
                             <div class="sm-toggle-row settings-menu-item-container @(locked ? "sm-toggle-row--locked" : "")"
@@ -184,9 +185,11 @@
                                 </div>
                                 @if (tog.IsEnable)
                                 {
-                                    <button class="toggle-switch @(tog.IsOn ? "toggle-switch--on" : "")"
-                                            @onclick:stopPropagation="true"
-                                            @onclick="async () => { await tog.OnClickFunc(); await RefreshComponentAsync(); }">
+                                    <button class="toggle-switch @(tog.IsOn ? "toggle-switch--on" : "") @(!tog.IsEnable ? "toggle-switch--locked" : "")"
+                                            @onclick:stopPropagation="tog.IsEnable"
+                                            @onclick="async () => { if (tog.IsEnable) { await tog.OnClickFunc(); await RefreshComponentAsync(); } }"
+                                            title="@(tog.IsEnable ? (tog.IsOn ? "Turn off" : "Turn on") : "Locked — click to upgrade")"
+                                            aria-pressed="@tog.IsOn.ToString().ToLower()">
                                         <span class="toggle-thumb"></span>
                                     </button>
                                 }
@@ -253,150 +256,35 @@
 <AxCrypt.App.Shared.Desktop.Components.Shared.ErrorReportPopup />
 
 @code {
+    private Action? _onSettingsUpdate;
 
-    private List<SettingToggle> SettingToggles => BuildSettingToggles();
-
-    private List<SettingToggle> BuildSettingToggles() => new()
-    {
-        new() { Label=Texts.OptionsHideRecentFilesToolStripMenuItemText, Description=Texts.OptionsHideRecentFilesDescription, IsEnable=true, IsOn=SettingsViewModel.HideRecentFiles, ImageClass = "stngs-menu-icon IcoEye", OnClickFunc = ()=> { SettingsViewModel.ToggleHideRecentFiles(); return Task.CompletedTask; } },
-        new() { Label=Texts.AlwaysOffline, Description=Texts.AlwaysOfflineDescription, IsEnable=true, IsOn=SettingsViewModel.AlwaysOffline, ImageClass = "stngs-menu-icon IcoOffln", OnClickFunc = ()=> { SettingsViewModel.ToggleAlwaysOffline(null!); return Task.CompletedTask; }  },
-        new() { Label=Texts.OptionsConvertMenuItemText, Description=Texts.OptionsConvertMenuItemDescription, IsEnable=SettingsViewModel.EnableAutoUpgrade,  IsOn=SettingsViewModel.AutoUpgradeToAES256, ImageClass = "stngs-menu-icon Ico256",
-                PaidPerks=new[]{Texts.AutoUpgradeFilesAES256,Texts.BackgroundEncryptionMigrationPopup,Texts.OneLatestStandardPopup},
-                OnClickFunc = async ()=> await SettingsViewModel.ToggleEncryptionUpgradeMode() },
-        new() { Label=Texts.OptionsIncludeSubfoldersToolStripMenuItemText, Description=Texts.OptionsIncludeSubfoldersDescription, IsEnable=SettingsViewModel.EnableIncludeSubfolders, IsOn=SettingsViewModel.IncludeSubfolders, ImageClass = "stngs-menu-icon IcoIncldFldrs24px",
-                PaidPerks=new[]{ Texts.EncryptFilesAllSubFoldersPopup, Texts.BatchEncryptMultiplePopup, Texts.KeepFolderStructurePopup, Texts.UnlockAdvancedFolderPopup },
-                OnClickFunc = async ()=> await SettingsViewModel.ToggleIncludeSubfolders(null!) },
-        new() { Label=SettingsViewModel.DarkTheme ? Texts.SwitchToLightActionText : Texts.SwitchToDarkActionText, Description=Texts.SwitchToDarkActionDescription, IsEnable=true, IsOn=SettingsViewModel.DarkTheme, ImageClass = "stngs-menu-icon IcoDkMd", OnClickFunc = async ()=> await ToggleTheme() },
-    };
-
+    // ── Lifecycle ──────────────────────────────────────────────
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
 
         navPageService.OnUpdateViewState += async () => await RefreshComponentAsync();
-        popupService.OnChange += async () => await RefreshComponentAsync();
-        // Re-render whenever AppSettingsViewModel pushes state (e.g. after
-        // password confirmation for AES-256 upgrade or Include Subfolders).
+        popupService.OnChange            += async () => await RefreshComponentAsync();
+
         _onSettingsUpdate = () => _ = RefreshComponentAsync();
         SettingsViewModel.OnUpdateViewState += _onSettingsUpdate;
 
         SettingsViewModel.Initialized();
 
-        string currentCulture = Resolve.UserSettings.CultureName;
-        CultureOption cultureOption = localizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == currentCulture)!;
-
+        // Pre-select the current culture in the language dropdown.
+        string currentCulture   = Resolve.UserSettings.CultureName;
+        CultureOption? cultureOption = localizationOptions?.SupportedCultures.FirstOrDefault(c => c.Name == currentCulture);
         if (cultureOption != null)
         {
-            SettingsViewModel.SelectedLanguage = cultureOption.Name;
-            SettingsViewModel.SelectedLanguageImageUrl = cultureOption.ImageUrl!;
+            SettingsViewModel.SelectedLanguage           = cultureOption.Name;
+            SettingsViewModel.SelectedLanguageImageUrl   = cultureOption.ImageUrl!;
             SettingsViewModel.SelectedLanguageDisplayName = cultureOption.DisplayName!;
         }
 
-        // Wire up the update-availability indicator. Push state changes
-        // (ShowUpdate / IsMandatoryUpdate / VersionHoverText) into a re-render.
         TopMenuViewModel.Initialize();
-        TopMenuViewModel.BindPropertyChanged(nameof(TopMenuViewModel.ShowUpdate), async (bool _) => await RefreshComponentAsync());
-        TopMenuViewModel.BindPropertyChanged(nameof(TopMenuViewModel.IsMandatoryUpdate), async (bool _) => await RefreshComponentAsync());
+        TopMenuViewModel.BindPropertyChanged(nameof(TopMenuViewModel.ShowUpdate),       async (bool _) => await RefreshComponentAsync());
+        TopMenuViewModel.BindPropertyChanged(nameof(TopMenuViewModel.IsMandatoryUpdate),async (bool _) => await RefreshComponentAsync());
     }
-
-    private string SearchQuery { get; set; } = string.Empty;
-
-    private async Task ToggleTheme()
-    {
-        SettingsViewModel.SwitchDarkMode();
-        string savedTheme = SettingsViewModel.DarkTheme ? "dark" : "light";
-        await JSRuntime.InvokeVoidAsync("setTheme", savedTheme);
-        // Re-render so the toggle label and IsOn state update immediately.
-        await RefreshComponentAsync();
-    }
-
-    private async Task ChangeLanguageAsync(CultureOption culture)
-    {
-        SettingsViewModel.SelectedLanguage = culture.Name;
-        SettingsViewModel.SelectedLanguageImageUrl = culture.ImageUrl!;
-        SettingsViewModel.SelectedLanguageDisplayName = culture.DisplayName!;
-
-        SettingsViewModel.SetLanguageAsync(culture.Name!);
-
-        await JSRuntime.InvokeVoidAsync("setHtmlLang", Core.Resolve.UserSettings.CultureName);
-
-        Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
-    }
-
-    /// <summary>
-    /// Settings popup row click. For enabled rows we no-op here (the
-    /// inner toggle button handles its own click + stopPropagation).
-    /// For locked rows we close the settings popup and surface the
-    /// tier-targeted paid-gate popup, using the row's PaidPerks as
-    /// the pitch copy. CTA in the popup navigates to /upgradePage.
-    /// </summary>
-    private void OnSettingToggleRowClick(SettingToggle tog)
-    {
-        if (tog.IsEnable)
-        {
-            // Toggle is the click target — nothing to do at the row level.
-            return;
-        }
-
-        popupService.CloseAllPopups();
-        paidFeaturegateService.ShowPaidGate(
-            feature: tog.Label,
-            desc: string.IsNullOrWhiteSpace(tog.Description)
-                ? Texts.AvailablePremiumBusinessPlans
-                : tog.Description,
-            perks: tog.PaidPerks.Length > 0
-                ? tog.PaidPerks
-                : new[] { Texts.QuickActionUnlimitedFileEncryptions, Texts.SecureKeySharingPopup, Texts.PrioritySupportTitle });
-    }
-
-    /// <summary>Handles the language &lt;select&gt; onchange — resolves the
-    /// picked culture and delegates to <see cref="ChangeLanguageAsync"/>.</summary>
-    private async Task OnLanguageChangedAsync(ChangeEventArgs e)
-    {
-        string? cultureName = e.Value?.ToString();
-        if (string.IsNullOrEmpty(cultureName) || localizationOptions == null)
-        {
-            return;
-        }
-
-        CultureOption? culture = localizationOptions.SupportedCultures
-            .FirstOrDefault(c => c.Name == cultureName);
-        if (culture == null)
-        {
-            return;
-        }
-
-        await ChangeLanguageAsync(culture);
-    }
-
-    private void OnUpdateClick()
-    {
-        // The "version available" popup is meant to surface ONLY at sign-in
-        // (driven by MainViewModel.DownloadVersion → TopMenuViewModel.SetSoftwareStatus
-        // → AvailableVersionDialog). Re-running CheckAxCryptVersionAsync here
-        // would re-fire that popup every time the user clicks the topbar pill,
-        // which is the exact behavior the user reported as unwanted.
-        //
-        // Since the pill is only rendered when ShowUpdate is true — i.e. we
-        // already know an update is available — clicking it should go
-        // straight to the download URL. Mirrors the redirect pattern used
-        // in AxCrypt.Core/UI/Display.cs.
-        Core.BrowseUtility.RedirectTo(Core.Resolve.UserSettings.UpdateUrl.ToString());
-    }
-
-    private void ShowUpgradePopup()
-    {
-        paidFeaturegateService.ShowPaidGate(Texts.IdleSignOutToolStripMenuItemText, Texts.ShowUpgradeAutoSignoutPendingPopup,
-        new[]
-        {
-            Texts.ShowUpgradeAutoSignoutPopup,
-            Texts.ShowUpgradeAutoEncryptOpenedPopup,
-            Texts.ShowUpgradeProtectSensitivePopup,
-            Texts.ShowUpgradeEnhancedSecurityPopup
-        });
-    }
-
-    private Action? _onSettingsUpdate;
 
     public void Dispose()
     {
@@ -407,41 +295,51 @@
         }
     }
 
-    private async Task RefreshComponentAsync()
+    // ── Theme toggle (JS interop stays in razor) ───────────────
+    private async Task ToggleThemeAsync()
     {
-        await InvokeAsync(() =>
+        SettingsViewModel.SwitchDarkMode();
+        await JSRuntime.InvokeVoidAsync("setTheme", SettingsViewModel.DarkTheme ? "dark" : "light");
+        await RefreshComponentAsync();
+    }
+
+    // ── Language change (JS interop + navigation stay in razor) ──
+    private async Task OnLanguageChangedAsync(ChangeEventArgs e)
+    {
+        string? cultureName = e.Value?.ToString();
+        if (string.IsNullOrEmpty(cultureName) || localizationOptions == null) return;
+
+        CultureOption? culture = localizationOptions.SupportedCultures.FirstOrDefault(c => c.Name == cultureName);
+        if (culture == null) return;
+
+        SettingsViewModel.SelectedLanguage            = culture.Name;
+        SettingsViewModel.SelectedLanguageImageUrl    = culture.ImageUrl!;
+        SettingsViewModel.SelectedLanguageDisplayName = culture.DisplayName!;
+        SettingsViewModel.SetLanguageAsync(culture.Name!);
+        await JSRuntime.InvokeVoidAsync("setHtmlLang", Core.Resolve.UserSettings.CultureName);
+        Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+    }
+
+    // ── Settings toggle row click — delegate to ViewModel ─────
+    private void OnSettingToggleRowClick(SettingToggle tog)
+    {
+        bool handled = topBarVm.HandleSettingToggleRowClick(tog);
+        if (!handled)
         {
-            StateHasChanged(); // Refresh UI
-        });
+            popupService.CloseAllPopups();
+        }
     }
 
+    // ── Update pill click — delegate to ViewModel ─────────────
+    private void OnUpdateClick() => topBarVm.HandleUpdateClick();
+
+    // ── Popup open/close (UI-only state) ──────────────────────
     private bool _encOpen = false;
-
-    private void OpenPopup()
-    {
-        _encOpen = true;
-    }
-
-    private void ClosePopup()
-    {
-        _encOpen = false;
-    }
-
+    private void OpenPopup()         => _encOpen = true;
+    private void ClosePopup()        => _encOpen = false;
     private bool _advOpen = false;
+    private void OpenAdvancedPopup() => _advOpen = true;
+    private void CloseAdvancedPopup()=> _advOpen = false;
 
-    private void OpenAdvancedPopup()
-    {
-        _advOpen = true;
-    }
-
-    private void CloseAdvancedPopup()
-    {
-        _advOpen = false;
-    }
-
-    // ── SVG icon helpers (inline markup strings) ───────────────
-    private RenderFragment SearchSvg => @<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>;
-    private RenderFragment GearSvg => @<svg width="18" height="18" viewBox="0 0 24 24"><images href="images/default/IcoExtrFtr.svg" /></svg>;
-    private RenderFragment MicSvg => @<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" /><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" /></svg>;
-
+    private async Task RefreshComponentAsync() => await InvokeAsync(StateHasChanged);
 }

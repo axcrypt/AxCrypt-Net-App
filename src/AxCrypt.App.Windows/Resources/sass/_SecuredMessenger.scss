@@ -921,6 +921,7 @@ textarea[readonly] {
     }
 
     .smx-msg-avatar {
+        position: relative;
         width: 40px;
         height: 40px;
         flex-shrink: 0;
@@ -943,11 +944,23 @@ textarea[readonly] {
         letter-spacing: .02em;
     }
 
+    // Checkbox hidden by default; revealed on row hover or in select mode.
     .smx-msg-check {
+        display: none;
         width: 17px;
         height: 17px;
         cursor: pointer;
         accent-color: $brand-green;
+    }
+
+    .smx-msg-row:hover .smx-msg-check,
+    .smx-msg-row--select .smx-msg-check {
+        display: block;
+    }
+
+    .smx-msg-row:hover .smx-msg-initials,
+    .smx-msg-row--select .smx-msg-initials {
+        display: none;
     }
 
     .smx-msg-main {

@@ -79,6 +79,45 @@ public class PaidFeaturegateService
     public bool IsPaidFeature(string key) =>
         _userService.IsFreeTier && new[] { "share", "vault", "cloud", "folder" }.Contains(key);
 
+    /// <summary>
+    /// Shows a tier-targeted paid gate popup for a given in-app page route.
+    /// Consolidates the per-route copy used by SideBar, GlobalSearch, and QuickSecureAction
+    /// so the upgrade pitch is consistent across all surfaces.
+    /// </summary>
+    public void ShowPaidGateForPage(string route)
+    {
+        switch (route)
+        {
+            case "/vault":
+                ShowPaidGate(
+                    Content.Texts.VaultText,
+                    Content.Texts.QuickSecureActionEncryptedVaults,
+                    new[] { Content.Texts.QuickSecureActionSecureEncryptedVaults, Content.Texts.QuickSecureActionProtectImportantFiles, Content.Texts.QuickSecureActionAdvancedVaultSecurity, Content.Texts.QuickSecureActionUnlockPremium });
+                break;
+
+            case "/securedfolders":
+                ShowPaidGate(
+                    Content.Texts.WatchedFoldersTabPageText,
+                    Content.Texts.QuickSecureActionAutomaticallyMonitor,
+                    new[] { Content.Texts.QuickSecureActionAutomaticallyEncrypt, Content.Texts.QuickSecureActionMonitorMultiple, Content.Texts.QuickSecureActionProtectSensitive, Content.Texts.QuickSecureActionUnlockAdvanced });
+                break;
+
+            case "/textencryption":
+                ShowPaidGate(
+                    Content.Texts.TextEncryptionLinkLabel,
+                    Content.Texts.TextEncryptionAdvancedProtectionFeatures,
+                    new[] { Content.Texts.EncryptUnlimitedText, Content.Texts.AdvancedEncryptionAlgorithms, Content.Texts.QuickSecureActionSensitiveInformation, Content.Texts.PriorityCustomerSupport });
+                break;
+
+            default:
+                ShowPaidGate(
+                    route.TrimStart('/'),
+                    Content.Texts.TextEncryptionPaidPlanPopup,
+                    new[] { Content.Texts.TextEncryptionAccessEveryPopup, Content.Texts.TextEncryptionWithoutLimitsPopup, Content.Texts.PrioritySupportTitle });
+                break;
+        }
+    }
+
     public void ShowPaidGate(string feature, string desc, string[] perks)
     {
         PaidGateFeature = feature;

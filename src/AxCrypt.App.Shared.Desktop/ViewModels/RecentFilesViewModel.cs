@@ -546,7 +546,20 @@ public class RecentFilesViewModel : ViewModelBase
         // dialog appear at once; the service populates it when ready.
         _sharekeyViewModel!.LogOnViewModel.ShareKeyDialog.Show();
 
+        int originalCount = _mainViewModel.SelectedRecentFiles?.Count() ?? 0;
+
         await ShareKeyService.ShareKeysAsync(_mainViewModel.SelectedRecentFiles, _sharekeyViewModel!, _fileOperationViewModel);
+
+        // The compiled ShareKeyService publishes a toast internally using the
+        // original selection count (all 3 files).  If the user removed a file
+        // chip from the dialog before clicking Apply, SelectedFilesOrFolders
+        // reflects the actual number shared.  Re-publish only when the count
+        // differs so the toast always shows the correct number.
+        int actualCount = _sharekeyViewModel.SelectedFilesOrFolders?.Count() ?? 0;
+        if (actualCount > 0 && actualCount != originalCount)
+        {
+            _batchService.PublishExternalResult(Texts.ShareKeysToolStripMenuItemText, actualCount);
+        }
     }
 
     private async Task ShowInFolder()
@@ -577,4 +590,62 @@ public class RecentFilesViewModel : ViewModelBase
 
         UpgradePopup();
     }
+
+    // ── File status helpers ────────────────────────────────────
+    // Centralised here so RecentFiles.razor, RecentFilesContextMenu.razor,
+    // and GlobalSearchViewModel all derive status from one place.
+
+    /// <summary>
+    /// Derives the display-status key for a file.
+    /// Priority (most specific wins): Opened → MasterKey → Shared → Encrypted.
+    /// </summary>
+    public static string StatusKey(FileDetails f)
+    {
+        if (f.CleanUpNeeded)                                                         return "Opened";
+        if (f.IsMasterKeyShared)                                                     return "MasterKey";
+        if (f.IsKeyShared || (f.SharedWith != null && f.SharedWith.Count > 0))      return "Shared";
+        return "Encrypted";
+    }
+
+    // ── Filter / count helpers ─────────────────────────────────
+
+    /// <summary>Returns the files visible under the given filter tab id ("All", "Opened", "Shared").</summary>
+    public IEnumerable<FileDetails> GetDisplayedFiles(string activeTab) =>
+        activeTab switch
+        {
+            "Opened" => RecentFilesList.Where(f => StatusKey(f) == "Opened"),
+            "Shared" => RecentFilesList.Where(f => StatusKey(f) == "Shared"),
+            _        => RecentFilesList,
+        };
+
+    /// <summary>Returns the count of files shown under the given filter tab.</summary>
+    public int CountForTab(string tab) =>
+        tab switch
+        {
+            "All"    => RecentFilesList?.Count() ?? 0,
+            "Opened" => RecentFilesList?.Count(f => StatusKey(f) == "Opened") ?? 0,
+            "Shared" => RecentFilesList?.Count(f => StatusKey(f) == "Shared") ?? 0,
+            _        => 0,
+        };
+
+    /// <summary>Returns the number of currently checked/selected files.</summary>
+    public int SelectedCount => RecentFilesList?.Count(f => f.IsChecked) ?? 0;
+
+    /// <summary>Returns the empty-state headline for the given tab.</summary>
+    public static string EmptyTitle(string activeTab) =>
+        activeTab switch
+        {
+            "Opened" => Content.Texts.RecentFilesNoFilesCurrentlyOpen,
+            "Shared" => Content.Texts.RecentFilesNoSharedFilesYet,
+            _        => Content.Texts.LetsStartOurJourneyText,
+        };
+
+    /// <summary>Returns the empty-state sub-text for the given tab.</summary>
+    public static string EmptySub(string activeTab) =>
+        activeTab switch
+        {
+            "Opened" => Content.Texts.RecentFilesYouOpenWillAppear,
+            "Shared" => Content.Texts.RecentFilesShareSomeone,
+            _        => Content.Texts.AddAndSecureYourFirstFileText,
+        };
 }

@@ -1,0 +1,142 @@
+@* Detail pane — Create and Edit form. Shared between both modes; IsEdit controls the title and subtitle.
+   The caller owns the working-copy VMs (Password/Card/Note) and reads them back after OnSave fires. *@
+@using AxCrypt.Api.Model.Secret
+@using AxCrypt.App.Shared.Models.Secret
+@using AxCrypt.Content
+
+<div class="pmx-detail">
+    <header class="pmx-detail-head">
+        <span class="pmx-detail-icon pmx-row-icon--@PmHelpers.TypeKey(SecretType)">
+            <PmTypeIcon Type="SecretType" />
+        </span>
+        <div class="pmx-detail-titles">
+            <h2 class="pmx-detail-title">@(IsEdit ? "Edit" : "New") @PmHelpers.TypeName(SecretType)</h2>
+            <span class="pmx-detail-sub">@(IsEdit ? "Changes encrypt on save" : "Encrypted end-to-end on save")</span>
+        </div>
+        <div class="pmx-detail-actions">
+            <button type="button" class="pmx-btn pmx-btn--ghost" @onclick="OnCancel">@Texts.ButtonCancelText</button>
+            <button type="button" class="pmx-btn pmx-btn--primary" @onclick="OnSave">@Texts.ButtonSaveText</button>
+        </div>
+    </header>
+
+    @if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <div class="pmx-error">@ErrorMessage</div>
+    }
+
+    <div class="pmx-detail-body">
+        @switch (SecretType)
+        {
+            case SecretType.Password: @FormPassword(); break;
+            case SecretType.Card:     @FormCard();     break;
+            case SecretType.Note:     @FormNote();     break;
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public SecretType SecretType { get; set; }
+    // True → Edit header/subtitle; false → Create header/subtitle.
+    [Parameter] public bool IsEdit { get; set; }
+    [Parameter, EditorRequired] public SecretPasswordViewModel Password { get; set; } = null!;
+    [Parameter, EditorRequired] public SecretCardViewModel Card { get; set; } = null!;
+    [Parameter, EditorRequired] public SecretNoteViewModel Note { get; set; } = null!;
+    [Parameter] public string? ErrorMessage { get; set; }
+    [Parameter] public EventCallback OnSave { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+    // Receives the password VM to fill SecretValue in-place with a suggested password.
+    [Parameter] public EventCallback<SecretPasswordViewModel> OnSuggestPassword { get; set; }
+
+    // ── Form field renderers ─────────────────────────────────────
+
+    private RenderFragment FormPassword() => __builder =>
+    {
+        var p = Password;
+        <div class="pmx-field">
+            <label class="pmx-field-label">@Texts.DescriptionLabel <span style="color:red">*</span></label>
+            <textarea class="pmx-textarea pmx-textarea--tall" rows="4"
+                      placeholder="e.g. Gmail — work account, recovery email is …"
+                      @bind="p.SecretDesc" @bind:event="oninput"></textarea>
+        </div>
+        <div class="pmx-field">
+            <label class="pmx-field-label">@Texts.UserNamePrompt</label>
+            <input class="pmx-input" type="text" placeholder="name@example.com"
+                   @bind="p.Username" @bind:event="oninput" />
+        </div>
+        <div class="pmx-field">
+            <label class="pmx-field-label">@Texts.PassphrasePrompt <span style="color:red">*</span></label>
+            <div class="pmx-input-row">
+                <input class="pmx-input" type="text" placeholder="••••••••"
+                       @bind="p.SecretValue" @bind:event="oninput" />
+                <button type="button" class="pmx-suggest-btn" title="@Texts.ButtonSuggestText"
+                        @onclick="async () => await OnSuggestPassword.InvokeAsync(p)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 2v6h-6"/>
+                        <path d="M3 12a9 9 0 0115-6.7L21 8"/>
+                        <path d="M3 22v-6h6"/>
+                        <path d="M21 12a9 9 0 01-15 6.7L3 16"/>
+                    </svg>
+                    <span>@Texts.ButtonSuggestText</span>
+                </button>
+            </div>
+        </div>
+        <div class="pmx-field">
+            <label class="pmx-field-label">@Texts.PasswordUrlPrompt</label>
+            <input class="pmx-input" type="text" placeholder="www.example.com"
+                   @bind="p.Url" @bind:event="oninput" />
+        </div>
+    };
+
+    private RenderFragment FormCard() => __builder =>
+    {
+        var c = Card;
+        <div class="pmx-field">
+            <label class="pmx-field-label">@Texts.DescriptionLabel <span style="color:red">*</span></label>
+            <textarea class="pmx-textarea pmx-textarea--tall" rows="4"
+                      placeholder="e.g. Visa — personal card, billing address on file"
+                      @bind="c.SecretDesc" @bind:event="oninput"></textarea>
+        </div>
+        <div class="pmx-field">
+            <label class="pmx-field-label">@Texts.CardNumberPrompt <span style="color:red">*</span></label>
+            <input class="pmx-input" type="text" maxlength="19" placeholder="XXXX XXXX XXXX XXXX"
+                   @bind="c.CardNumber" @bind:event="oninput"
+                   onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+        </div>
+        <div class="pmx-field">
+            <label class="pmx-field-label">@Texts.NameOnCardPrompt <span style="color:red">*</span></label>
+            <input class="pmx-input" type="text" placeholder="Name and Surname"
+                   @bind="c.NameOnCard" @bind:event="oninput" />
+        </div>
+        <div class="pmx-field-grid">
+            <div class="pmx-field">
+                <label class="pmx-field-label">@Texts.ExpirationDatePrompt <span style="color:red">*</span></label>
+                <input class="pmx-input" type="text" maxlength="7" placeholder="MM/YYYY"
+                       value="@c.ExpirationDate"
+                       @oninput="e => c.OnExpirationDateInput(e)"
+                       onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+            </div>
+            <div class="pmx-field">
+                <label class="pmx-field-label">@Texts.SecurityCodePrompt <span style="color:red">*</span></label>
+                <input class="pmx-input" type="text" maxlength="3" placeholder="000"
+                       @bind="c.SecurityCode" @bind:event="oninput"
+                       onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+            </div>
+        </div>
+    };
+
+    private RenderFragment FormNote() => __builder =>
+    {
+        var n = Note;
+        <div class="pmx-field">
+            <label class="pmx-field-label">@Texts.DescriptionLabel <span style="color:red">*</span></label>
+            <textarea class="pmx-textarea pmx-textarea--tall" rows="4"
+                      placeholder="e.g. WiFi login — home router, recovery codes"
+                      @bind="n.SecretDesc" @bind:event="oninput"></textarea>
+        </div>
+        <div class="pmx-field">
+            <label class="pmx-field-label">@Texts.NoteLabel <span style="color:red">*</span></label>
+            <textarea class="pmx-textarea" rows="9" placeholder="Type your secure note…"
+                      @bind="n.Note" @bind:event="oninput"></textarea>
+        </div>
+    };
+}

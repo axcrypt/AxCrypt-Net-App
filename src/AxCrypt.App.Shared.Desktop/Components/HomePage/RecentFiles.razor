@@ -114,7 +114,7 @@
                 <div class="files-table-body">
                 @foreach (FileDetails f in DisplayedFiles)
                 {
-                    string statusKey = StatusKey(f);
+                    string statusKey = RecentFilesViewModel.StatusKey(f);
                     @* Selection is checkbox-only — single-clicking the row
                        no longer toggles selection. Double-click opens, the
                        right-click opens the context menu without changing
@@ -233,24 +233,14 @@
 
     private void SetTab(string id) => ActiveTab = id;
 
-    // ── Status derivation ─────────────────────────────────────
-    //  Priority (most specific wins):
-    //   Opened     → file is currently decrypted (CleanUpNeeded == true)
-    //   MasterKey  → a business master key is applied (IsMasterKeyShared)
-    //   Shared     → external key-share recipients (IsKeyShared / SharedWith)
-    //   Encrypted  → default at-rest encrypted state
-    //
-    //  MasterKey only shows up for files whose owner is on a business
-    //  plan — free/premium files never set IsMasterKeyShared.
-    // ──────────────────────────────────────────────────────────
-    private static string StatusKey(FileDetails f)
-    {
-        if (f.CleanUpNeeded) return "Opened";
-        if (f.IsMasterKeyShared) return "MasterKey";
-        if (f.IsKeyShared || (f.SharedWith != null && f.SharedWith.Count > 0)) return "Shared";
-        return "Encrypted";
-    }
+    // ── Delegate filter/count/status to ViewModel ─────────────
+    private IEnumerable<FileDetails> DisplayedFiles => recentFilesViewModel.GetDisplayedFiles(ActiveTab);
+    private int CountFor(string tab) => recentFilesViewModel.CountForTab(tab);
+    private int SelectedCount => recentFilesViewModel.SelectedCount;
+    private string EmptyTitle => RecentFilesViewModel.EmptyTitle(ActiveTab);
+    private string EmptySub   => RecentFilesViewModel.EmptySub(ActiveTab);
 
+    // ── UI-only display helpers (CSS classes, truncated ext) ───
     private static string StatusLabel(string key) => key switch
     {
         "Opened"    => "Opened",
@@ -268,10 +258,7 @@
     };
 
     // CSS class slug for the status badge — must match the lowercase /
-    // kebab-case names declared in HomeNew/FilesTable.scss. Previously
-    // the Razor used `badge--@statusKey` which produced PascalCase
-    // class names like "badge--Opened" — none of the CSS rules
-    // matched, so the badge had no background/foreground tint.
+    // kebab-case names declared in HomeNew/FilesTable.scss.
     private static string BadgeSlug(string key) => key switch
     {
         "Opened"    => "opened",
@@ -286,39 +273,6 @@
         if (string.IsNullOrEmpty(ext)) return "FILE";
         return ext.Length > 4 ? ext.Substring(0, 4) : ext;
     }
-
-    private IEnumerable<FileDetails> DisplayedFiles =>
-        ActiveTab switch
-        {
-            "Opened" => recentFilesViewModel.RecentFilesList.Where(f => StatusKey(f) == "Opened"),
-            "Shared" => recentFilesViewModel.RecentFilesList.Where(f => StatusKey(f) == "Shared"),
-            _        => recentFilesViewModel.RecentFilesList,
-        };
-
-    private int CountFor(string tab) => tab switch
-    {
-        "All"    => recentFilesViewModel.RecentFilesList?.Count() ?? 0,
-        "Opened" => recentFilesViewModel.RecentFilesList?.Count(f => StatusKey(f) == "Opened") ?? 0,
-        "Shared" => recentFilesViewModel.RecentFilesList?.Count(f => StatusKey(f) == "Shared") ?? 0,
-        _        => 0,
-    };
-
-    private int SelectedCount =>
-        recentFilesViewModel.RecentFilesList?.Count(f => f.IsChecked) ?? 0;
-
-    private string EmptyTitle => ActiveTab switch
-    {
-        "Opened" => Texts.RecentFilesNoFilesCurrentlyOpen,
-        "Shared" => Texts.RecentFilesNoSharedFilesYet,
-        _        => Texts.LetsStartOurJourneyText,
-    };
-
-    private string EmptySub => ActiveTab switch
-    {
-        "Opened" => Texts.RecentFilesYouOpenWillAppear,
-        "Shared" => Texts.RecentFilesShareSomeone,
-        _        => Texts.AddAndSecureYourFirstFileText,
-    };
 
     // ═══════════════════════════════════════════
     //  Selection wiring

@@ -30,7 +30,7 @@
                 <span class="mutli-slct-btn">@TabTitleText</span>
                 <img class="select-option" src="/images/default/IcoSelect.svg"
                      style="height: 14px;" alt="Select" title="Toggle selection mode"
-                     @onclick="@ManageSecMgrViewModel.ToggleMultiCheckbox" />
+                     @onclick="ToggleSelectMode" />
             </div>
 
             <span class="smx-list-header-spacer"></span>
@@ -205,6 +205,14 @@
         {
             StateHasChanged(); // Refresh UI
         });
+    }
+
+    // Wraps ToggleMultiCheckbox and forces a cascading re-render so all
+    // Messages child components pick up the updated isMultiCheckboxVisible.
+    private void ToggleSelectMode()
+    {
+        ManageSecMgrViewModel.ToggleMultiCheckbox();
+        StateHasChanged();
     }
 
     void UpdateState()

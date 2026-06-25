@@ -1,19 +1,13 @@
-﻿@using AxCrypt.App.Shared.Desktop.Services
-@using AxCrypt.App.Shared.Desktop.ViewModels
-@using AxCrypt.App.Shared.Desktop.ViewModels.Home
+﻿@using AxCrypt.App.Entitlement.Contracts
 @using AxCrypt.App.Shared.Desktop.Models
-@using AxCrypt.App.Shared.Desktop.ViewModels.Main
-@using AxCrypt.App.Shared.ViewModels
+@using AxCrypt.App.Shared.Desktop.ViewModels.Home
+@using AxCrypt.App.Shared.Services
 @using AxCrypt.Content
 
 @inject NavigationManager Navigation
-@inject NavPageService navPageService
-@inject ActionsViewModel? homeActionModel
-@inject VaultViewModel vaultViewModel
-@inject RecentFoldersViewModel RecentFoldersViewModel
-@inject SubActionViewModel? subActionModel
-@inject PaidFeaturegateService paidFeaturegateService
-@inject AppSettingsViewModel appSettingsViewModel
+@inject QuickSecureActionViewModel quickSecureVm
+@inject UserService userService
+@inject IFeatureUsageProvider usage
 
 <!-- CTA -->
 <div class="cta-wrapper">
@@ -30,13 +24,15 @@
     {
         <div class="new-action-menu">
             <div class="nam-header">@Texts.QuickSecureActionHeader</div>
-            @foreach (NewActionGroup grp in NewActionGroups)
+            @foreach (NewActionGroup grp in quickSecureVm.GetNewActionGroups())
             {
                 @foreach (NewActionItem item in grp.Items)
                 {
                     @if (item.IsEnable)
                     {
-                        <button class="nam-item" @onclick="async (e) => await OnNewAction(e, item)">
+                        bool isLocked = quickSecureVm.IsLockedFor(item, userService, usage);
+                        <button class="nam-item @(isLocked ? "nam-item--locked" : "")"
+                                @onclick="async (e) => await OnNewAction(e, item)">
                             <span class="nam-icon nam-icon-bg">
                                 @((MarkupString)item.IconSvg)
                             </span>
@@ -44,128 +40,45 @@
                                 <span class="nam-label">@item.Label</span>
                                 <span class="nam-desc">@item.Description</span>
                             </div>
-                            <svg class="nam-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="9 18 15 12 9 6" />
-                            </svg>
+                            @if (isLocked)
+                            {
+                                <span class="nam-lock-badge" title="Paid feature — click to upgrade">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" />
+                                        <path d="M7 11V7a5 5 0 0110 0v4" />
+                                    </svg>
+                                </span>
+                            }
+                            else
+                            {
+                                <svg class="nam-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9 18 15 12 9 6" />
+                                </svg>
+                            }
                         </button>
                     }
                 }
             }
         </div>
+        <div class="nam-backdrop" @onclick="CloseMenu"></div>
     }
 </div>
 
 @code {
-    private bool ProfileMenuOpen { get; set; } = false;
-
     private bool NewActionMenuOpen { get; set; } = false;
 
-    private bool SettingsMenuOpen { get; set; } = false;
+    private void ToggleNewActionMenu() => NewActionMenuOpen = !NewActionMenuOpen;
+    private void CloseMenu() => NewActionMenuOpen = false;
 
-    private void ToggleNewActionMenu() { NewActionMenuOpen = !NewActionMenuOpen; ProfileMenuOpen = false; SettingsMenuOpen = false; }
-
+    // Delegate dispatch to ViewModel; navigate when a route is returned.
     private async Task OnNewAction(EventArgs e, NewActionItem item)
     {
         NewActionMenuOpen = false;
-
-        switch (item.Route)
-        {
-            case "/actions/share":
-                if (!homeActionModel!.KeyShareButtonEnabled)
-                {
-                    paidFeaturegateService.ShowPaidGate(Texts.QuickSecureActionEncryptAndShare, Texts.QuickSecureActionSecureFilesShare, new[] { Texts.QuickSecureActionShareFileAccessSecurely, Texts.QuickSecureActionNoNeedSharePasswords, Texts.QuickSecureActionControlFiles, Texts.QuickSecureActionRemoveAccessAnytime });
-                    return;
-                }
-
-                await homeActionModel.ShareKeysAsync(e);
-                break;
-
-            case "/actions/encrypt-folder":
-                if (RecentFoldersViewModel.HasNoSubscription)
-                {
-                    paidFeaturegateService.ShowPaidGate(Texts.WatchedFoldersTabPageText, Texts.QuickSecureActionAutomaticallyMonitor, new[] { Texts.QuickSecureActionAutomaticallyEncrypt, Texts.QuickSecureActionMonitorMultiple, Texts.QuickSecureActionProtectSensitive, Texts.QuickSecureActionUnlockAdvanced });
-                    return;
-                }
-
-                await RecentFoldersViewModel.AddSecuredFolder(e);
-                break;
-
-            case "/actions/vault-add":
-                if (!subActionModel!.EnableVault)
-                {
-                    paidFeaturegateService.ShowPaidGate(Texts.VaultText, Texts.QuickSecureActionEncryptedVaults, new[] { Texts.QuickSecureActionSecureEncryptedVaults, Texts.QuickSecureActionProtectImportantFiles, Texts.QuickSecureActionAdvancedVaultSecurity, Texts.QuickSecureActionUnlockPremium });
-                    return;
-                }
-
-                await ValidateVaultNavigation();
-                break;
-
-            case "/actions/secure-delete":
-                if (!subActionModel!.EnableVault)
-                {
-                    paidFeaturegateService.ShowPaidGate(Texts.SecureDeleteToolStripMenuItemText, Texts.QuickSecureActionPermanentlyDelete, new[] { Texts.QuickSecureActionPermanentFileDeletion, Texts.QuickSecureActionPreventFileRecovery, Texts.QuickSecureActionSensitiveInformation, Texts.QuickSecureActionUnlockSecurityTools });
-                    return;
-                }
-
-                subActionModel.SecureWipeFiles(e);
-                break;
-
-            case "/actions/findfiles":
-                if (!subActionModel!.EnableVault)
-                {
-                    paidFeaturegateService.ShowPaidGate(Texts.FindFileFeatureTitle, Texts.QuickSecureActionUnlockMoreFeatures, new[] { Texts.QuickSecureActionUnlimitedFiles, Texts.PrioritySupportTitle, Texts.QuickSecureActionAdvancedAlgorithms });
-                    return;
-                }
-
-                ValidateFindFilesNavigation();
-                break;
-
-            default:
-                break;
-        }
+        string? route = await quickSecureVm.HandleNewActionAsync(e, item, userService, usage);
+        if (route != null)
+            Navigation.NavigateTo(route);
     }
 
-    private async Task ValidateVaultNavigation()
-    {
-        bool isValid = await subActionModel!.ValidateVaultPath();
-        if (isValid)
-        {
-            await vaultViewModel.AddVaultFiles();
-        }
-    }
-
-    private void ValidateFindFilesNavigation()
-    {
-        navPageService.SetActivePage("/findfiles");
-        Navigation.NavigateTo("/findfiles");
-    }
-
-    // ── New Secure Action Menu Data ────────────────────────────
-    private List<NewActionGroup> NewActionGroups
-    {
-        get
-        {
-            return new List<NewActionGroup> {
-                new NewActionGroup
-                {
-                    GroupLabel = "ENCRYPTION",
-                    Items = new()
-                        {
-                            new() { Label=Texts.QuickSecureActionEncryptAndShare, Description=Texts.QuickSecureActionEncryptAndShareDescription, Route="/actions/share",
-                                IconSvg="<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#6c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='11' width='14' height='11' rx='2'/><path d='M7 11V7a5 5 0 0110 0'/><circle cx='10' cy='16' r='1' fill='#2563eb'/><path d='M18 13h4M20 11l2 2-2 2'/></svg>" },
-                            new() { Label=Texts.QuickSecureActionSecureFolder, Description=Texts.QuickSecureActionSecureFolderDescription, Route="/actions/encrypt-folder",
-                                IconSvg="<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#6c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z'/><rect x='9' y='11' width='6' height='5' rx='1'/><path d='M11 11v-1.5a1.5 1.5 0 013 0V11'/><circle cx='12' cy='14' r='0.8' fill='#2563eb'/></svg>" },
-                            new() { Label=Texts.QuickSecureAddFilesVault, Description=Texts.QuickSecureAddFilesVaultDescription, Route="/actions/vault-add",
-                                IconSvg="<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#6c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='3' width='18' height='18' rx='2'/><circle cx='10' cy='12' r='4'/><circle cx='10' cy='12' r='1.5' fill='#2563eb'/><line x1='10' y1='8' x2='10' y2='6'/><line x1='14' y1='12' x2='16' y2='12'/><line x1='10' y1='16' x2='10' y2='18'/><line x1='6' y1='12' x2='4' y2='12'/><rect x='20' y='10' width='2' height='4' rx='1'/><line x1='16' y1='3' x2='16' y2='7'/><line x1='14' y1='5' x2='18' y2='5'/></svg>" },
-                            new() { Label=Texts.SecureDeleteToolStripMenuItemText, Description=Texts.QuickSecureSecureDeleteDescription, Route="/actions/secure-delete",
-                                IconSvg="<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#6c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='3 6 5 6 21 6'/><path d='M8 6V4a1 1 0 011-1h6a1 1 0 011 1v2'/><rect x='5' y='6' width='14' height='15' rx='2'/><line x1='9' y1='10' x2='9.01' y2='17' stroke-dasharray='1.5 2'/><line x1='12' y1='10' x2='12.01' y2='17' stroke-dasharray='1.5 2'/><line x1='15' y1='10' x2='15.01' y2='17' stroke-dasharray='1.5 2'/></svg>" },
-                            new() { Label=Texts.QuickSecureActionRecentSecureFiles, Description=Texts.QuickSecureActionRecentSecureFilesDescription, Route="/actions/findfiles", IsEnable=appSettingsViewModel.EnableFindFiles,
-                                IconSvg="<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#6c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h5'/><path d='M14 2v6h6'/><circle cx='17' cy='17' r='5'/><polyline points='17 14 17 17 19 18'/></svg>" },
-                        }
-                }
-             };
-        }
-    }
-
+    // ── UI-only SVG helper ─────────────────────────────────────
     private RenderFragment PlusSvg => @<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>;
 }

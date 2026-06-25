@@ -41,6 +41,13 @@ public static class AppDesktopFactory
         services.AddSingleton<RecentFoldersViewModel>();
         services.AddSingleton<VaultSettingsViewModel>();
 
+        // ── New homepage ViewModels (refactored from razor @code blocks) ──
+        services.AddSingleton<SecurityStatusViewModel>();
+        services.AddSingleton<SideBarViewModel>();
+        services.AddSingleton<TopBarViewModel>();
+        services.AddSingleton<QuickSecureActionViewModel>();
+        services.AddSingleton<GlobalSearchViewModel>();
+
         services.AddSingleton<SuggestionViewModel>();
         services.AddSingleton<InviteViewModel>();
         services.AddSingleton<ImportPrivateKeyViewModel>();
