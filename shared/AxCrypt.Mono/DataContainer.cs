@@ -165,7 +165,9 @@ namespace AxCrypt.Mono
                     return new IDataStore[0];
                 }
                 _info.Refresh();
-                return _info.EnumerateFiles().Select((fi) => new DataStore(fi.FullName));
+                EnumerationOptions options = new EnumerationOptions { AttributesToSkip = FileAttributes.System };
+                string searchPattern = "*";
+                return _info.EnumerateFiles(searchPattern, options).Select((fi) => new DataStore(fi.FullName));
             }
         }
 

@@ -42,6 +42,8 @@ public class PlatformInitializer
         New<FileFilter>().AddUnencryptable(new Regex(@"\\desktop\.ini$"));
         New<FileFilter>().AddUnencryptable(new Regex(@".*\.tmp$"));
         New<FileFilter>().AddUnencryptable(new Regex(@"^.*\\~\$[^\\]*$"));
+        New<FileFilter>().AddUnencryptable(new Regex(@"\\\$Recycle.Bin\*$"));
+        New<FileFilter>().AddUnencryptable(new Regex(@"\\System Volume Information\*$"));
 
         AddEnvironmentVariableBasedFilePathFilter(@"^{0}(?!Temp$)", "SystemRoot");
         AddEnvironmentVariableBasedFilePathFilter(@"^{0}(?!Temp$)", "windir");
@@ -50,16 +52,46 @@ public class PlatformInitializer
         AddEnvironmentVariableBasedFilePathFilter(@"^{0}", "ProgramFiles(x86)");
         AddEnvironmentVariableBasedFilePathFilter(@"^{0}$", "SystemDrive");
 
+        // Windows 11 specific system app locations (hardcoded since no env vars)
+        AddFolderPathFilter(@"C:\Windows\SystemApps");
+        AddFolderPathFilter(@"C:\Program Files\WindowsApps");
+        AddFolderPathFilter(@"C:\WindowsApps"); // sometimes appears outside Program Files
+        AddFolderPathFilter(@"C:\Recovery");
+        AddFolderPathFilter(@"C:\$WinREAgent");
+
+        // Default user profile template
+        AddFolderPathFilter(@"C:\Users\Default");
+        AddFolderPathFilter(@"C:\Users\All Users"); // legacy junction
+
         New<FileFilter>().AddPlatformIndependent();
 
+        AddDefaultWindows11FolderFilters();
+    }
+
+    public static void AddDefaultWindows11FolderFilters()
+    {
+        // Core system and program folders
         AddEnvironmentVariableBasedFolderPathFilter("ProgramData");
-        AddEnvironmentVariableBasedFolderPathFilter("ProgramFiles(x86)");
         AddEnvironmentVariableBasedFolderPathFilter("ProgramFiles");
+        AddEnvironmentVariableBasedFolderPathFilter("ProgramFiles(x86)");
+        AddEnvironmentVariableBasedFolderPathFilter("ProgramW6432");
         AddEnvironmentVariableBasedFolderPathFilter("SystemRoot");
+        AddEnvironmentVariableBasedFolderPathFilter("windir");
+
+        // User profile and app data
         AddEnvironmentVariableBasedFolderPathFilter("APPDATA");
         AddEnvironmentVariableBasedFolderPathFilter("LOCALAPPDATA");
-        AddEnvironmentVariableBasedFolderPathFilter("windir");
-        AddEnvironmentVariableBasedFolderPathFilter("ProgramW6432");
+        AddEnvironmentVariableBasedFolderPathFilter("USERPROFILE");
+        AddEnvironmentVariableBasedFolderPathFilter("PUBLIC");
+
+        // Common program files
+        AddEnvironmentVariableBasedFolderPathFilter("CommonProgramFiles");
+        AddEnvironmentVariableBasedFolderPathFilter("CommonProgramFiles(x86)");
+        AddEnvironmentVariableBasedFolderPathFilter("CommonProgramW6432");
+
+        // Temporary folders
+        AddEnvironmentVariableBasedFolderPathFilter("TEMP");
+        AddEnvironmentVariableBasedFolderPathFilter("TMP");
     }
 
     private static void AddEnvironmentVariableBasedFilePathFilter(string formatRegularExpression, string name)
@@ -76,6 +108,16 @@ public class PlatformInitializer
     private static void AddEnvironmentVariableBasedFolderPathFilter(string name)
     {
         IDataContainer folder = name.FolderFromEnvironment();
+        if (folder == null)
+        {
+            return;
+        }
+        New<FileFilter>().AddForbiddenFolderFilters(folder.FullName);
+    }
+
+    private static void AddFolderPathFilter(string name)
+    {
+        IDataContainer folder = New<IDataContainer>(name);
         if (folder == null)
         {
             return;

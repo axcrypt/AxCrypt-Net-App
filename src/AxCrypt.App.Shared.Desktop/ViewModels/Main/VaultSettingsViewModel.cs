@@ -99,15 +99,19 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Main
 
             New<UserSettings>().VaultEncryptDataPath = VaultEncryptDataPath;
             New<UserSettings>().AutoVaultEncryptSigninFiles = AutoVaultEncryptSigninFiles;
-            New<UserSettings>().VaultEncryptWithAutoRenameFiles = VaultEncryptWithAutoRenameFiles;
 
             VaultSettingsDialog.Close();
 
-            if (New<UserSettings>().VaultEncryptWithAutoRenameFiles)
+            bool onChanged = New<UserSettings>().VaultEncryptWithAutoRenameFiles != VaultEncryptWithAutoRenameFiles;
+            if (onChanged)
+            {
+                New<UserSettings>().VaultEncryptWithAutoRenameFiles = VaultEncryptWithAutoRenameFiles;
+            }
+            if (onChanged && VaultEncryptWithAutoRenameFiles)
             {
                 await RenameEncryptedVaultFiles();
             }
-            else
+            if (onChanged && !VaultEncryptWithAutoRenameFiles)
             {
                 await RestoreEncryptedVaultFiles();
             }
