@@ -50,21 +50,21 @@
             }
         </div>
 
-        <button class="ctx-item" @onclick="CtxOpen">
+        <button class="ctx-item" disabled="@_guard.IsProcessing" @onclick="CtxOpen">
             <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
             <span class="ctx-label">@Texts.McInfMenuOpen</span>
         </button>
 
         @if (CanCleanUpTarget)
         {
-            <button class="ctx-item" @onclick="CtxCleanUp">
+            <button class="ctx-item" disabled="@_guard.IsProcessing" @onclick="CtxCleanUp">
                 <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M9 6v14a2 2 0 002 2h2a2 2 0 002-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
                 <span class="ctx-label">@((MarkupString)Texts.RecentFilesReencryptClose)</span>
             </button>
         }
 
         <button class="ctx-item @(paidFeaturegateService.IsPaidFeature("share") ? "ctx-item--locked" : "")"
-                @onclick="CtxShare">
+                disabled="@_guard.IsProcessing" @onclick="CtxShare">
             <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></svg>
             <span class="ctx-label">@Texts.ShareKeysToolStripMenuItemText</span>
             @if (paidFeaturegateService.IsPaidFeature("share"))
@@ -73,24 +73,24 @@
             }
         </button>
 
-        <button class="ctx-item" @onclick="CtxShowInFolder">
+        <button class="ctx-item" disabled="@_guard.IsProcessing" @onclick="CtxShowInFolder">
             <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
             <span class="ctx-label">@Texts.ShowInFolderText</span>
         </button>
 
-        <button class="ctx-item" @onclick="CtxRestoreOriginalName">
+        <button class="ctx-item" disabled="@_guard.IsProcessing" @onclick="CtxRestoreOriginalName">
             <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10" /><path d="M3.51 15a9 9 0 102.13-9.36L1 10" /></svg>
             <span class="ctx-label">@Texts.RestoreAnonymousNamesMenuText</span>
         </button>
 
         <div class="ctx-divider"></div>
 
-        <button class="ctx-item ctx-item--danger" @onclick="CtxRemove">
+        <button class="ctx-item ctx-item--danger" disabled="@_guard.IsProcessing" @onclick="CtxRemove">
             <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" /></svg>
             <span class="ctx-label">@Texts.RemoveRecentFileToolStripMenuItemText</span>
         </button>
 
-        <button class="ctx-item ctx-item--danger" @onclick="CtxDecryptAndRemove">
+        <button class="ctx-item ctx-item--danger" disabled="@_guard.IsProcessing" @onclick="CtxDecryptAndRemove">
             <svg class="ctx-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
             <span class="ctx-label">@Texts.DecryptAndRemoveFromListToolStripMenuItemText</span>
         </button>
@@ -104,6 +104,9 @@
 }
 
 @code {
+    // Re-entrancy guard — prevents double-click from running two concurrent context-menu actions.
+    private readonly OperationGuard _guard = new();
+
     // ── Open state ─────────────────────────────────────────────
     private bool IsOpen => popupService.ContextMenuOpen
         && (recentFilesViewModel.ContextMenuTarget != null
@@ -158,7 +161,9 @@
         // Close the menu visually before the (potentially async) action
         // runs so the user gets immediate feedback.
         popupService.CloseAllPopups();
-        await recentFilesViewModel.RunContextMenuActionForTarget(EventArgs.Empty, action);
+        await _guard.RunAsync(
+            () => recentFilesViewModel.RunContextMenuActionForTarget(EventArgs.Empty, action),
+            () => InvokeAsync(StateHasChanged));
     }
 
     private Task CtxOpen() => RunAndClose(SecuredFilesContextMenu.OpenSecured);

@@ -1,4 +1,5 @@
 @using AxCrypt.App.Shared.Desktop.Models
+@using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Desktop.ViewModels.FileBrowser
 @using AxCrypt.App.Shared.Desktop.Components.Shared
 @using AxCrypt.App.Shared.Helpers
@@ -221,18 +222,22 @@
             <button type="button" class="cbp-btn cbp-btn--ghost" @onclick="ClearSelection">@Texts.ClearButtonText</button>
             <span class="cbp-actionbar-spacer"></span>
             <button type="button" class="cbp-btn cbp-btn--ghost"
+                    disabled="@_guard.IsProcessing"
                     @onclick="async () => await UpdateFileOperation(FileOperationOption.OpenSecured)">
                 @Texts.OpenEncryptedToolStripMenuItemText
             </button>
             <button type="button" class="cbp-btn cbp-btn--ghost"
+                    disabled="@_guard.IsProcessing"
                     @onclick="async () => await UpdateFileOperation(FileOperationOption.Decrypt)">
                 @Texts.DecryptToolStripMenuItemText
             </button>
             <button type="button" class="cbp-btn cbp-btn--ghost"
+                    disabled="@_guard.IsProcessing"
                     @onclick="async () => await UpdateFileOperation(FileOperationOption.ShareKey)">
                 @Texts.ShareKeysToolStripMenuItemText
             </button>
             <button type="button" class="cbp-btn cbp-btn--primary"
+                    disabled="@_guard.IsProcessing"
                     @onclick="async () => await UpdateFileOperation(FileOperationOption.Encrypt)">
                 @Texts.EncryptToolStripMenuItemText
             </button>
@@ -265,6 +270,11 @@
 
 @code {
     private bool IsListView { get; set; } = true;
+
+    // Guard against re-entrant file operations (e.g. double-click on Share Key).
+    // A second click while the first is awaiting ProcessSelectedFileItemActionAsync
+    // causes concurrent downloads + dialog opens which deadlocks the app.
+    private readonly OperationGuard _guard = new();
 
     protected override void OnInitialized()
     {
@@ -417,14 +427,18 @@
 
     private async Task UpdateFileOperation(FileOperationOption operation)
     {
-        ViewModel.SelectedFileOperation = operation;
-        await ViewModel.ProcessSelectedFileItemActionAsync();
-
-        // After any action (encrypt, decrypt, delete, share) force a re-render
-        // so the file list reflects changes immediately — the ViewModel may have
-        // already raised OnUpdateViewState, but a direct call here guarantees the
-        // UI is consistent even if the event fires on a background thread.
-        await InvokeAsync(StateHasChanged);
+        await _guard.RunAsync(async () =>
+        {
+            ViewModel.SelectedFileOperation = operation;
+            try
+            {
+                await ViewModel.ProcessSelectedFileItemActionAsync();
+            }
+            catch (Exception ex)
+            {
+                AxCServiceProviderExtension.ErrorReportService?.Report(ex, "Cloud browser action");
+            }
+        }, () => InvokeAsync(StateHasChanged));
     }
 
     private string HighlightMatch(string input)

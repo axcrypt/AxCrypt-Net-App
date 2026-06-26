@@ -60,19 +60,19 @@
             <div class="rf-bulk-bar" role="toolbar" aria-label="Bulk actions">
                 <span class="rf-bulk-count">@SelectedCount selected</span>
                 <div class="rf-bulk-actions">
-                    <button class="rf-bulk-btn" @onclick="BulkOpen" title="Open selected files">
+                    <button class="rf-bulk-btn" disabled="@_guard.IsProcessing" @onclick="BulkOpen" title="Open selected files">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
                         @Texts.McInfMenuOpen
                     </button>
-                    <button class="rf-bulk-btn" @onclick="BulkShareKey" title="Share key for selected files">
+                    <button class="rf-bulk-btn" disabled="@_guard.IsProcessing" @onclick="BulkShareKey" title="Share key for selected files">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></svg>
                         @Texts.ShareKeysToolStripMenuItemText
                     </button>
-                    <button class="rf-bulk-btn" @onclick="BulkCleanUp" title="Re-encrypt and close selected files">
+                    <button class="rf-bulk-btn" disabled="@_guard.IsProcessing" @onclick="BulkCleanUp" title="Re-encrypt and close selected files">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M9 6v14a2 2 0 002 2h2a2 2 0 002-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
                         @Texts.CleanUpPromptText
                     </button>
-                    <button class="rf-bulk-btn rf-bulk-btn--danger" @onclick="BulkRemove" title="Remove selected from list">
+                    <button class="rf-bulk-btn rf-bulk-btn--danger" disabled="@_guard.IsProcessing" @onclick="BulkRemove" title="Remove selected from list">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" /></svg>
                         @Texts.RemoveText
                     </button>
@@ -148,7 +148,7 @@
                         <div class="tcol tcol-size">@f.FileSize</div>
 
                         <div class="tcol tcol-act" @onclick:stopPropagation="true">
-                            <button class="icon-btn-sm" title="Open" @onclick="async (e) => await OpenFile(f)">@EyeSvg</button>
+                            <button class="icon-btn-sm" title="Open" disabled="@_guard.IsProcessing" @onclick="async (e) => await OpenFile(f)">@EyeSvg</button>
                             <button class="icon-btn-sm" title="More actions" @onclick="async (e) => await OnDotsMenu(e, f)">@DotsSvg</button>
                         </div>
                     </div>
@@ -175,6 +175,9 @@
     private string ActiveTab { get; set; } = "All";
 
     private bool DropZoneActive { get; set; }
+
+    // Re-entrancy guard — prevents double-click from launching two concurrent file operations.
+    private readonly OperationGuard _guard = new();
 
     // FileDropService.OnFilesDropped is event Action<IList<string>> —
     // match the signature and fire-and-forget the async handler so the
@@ -347,9 +350,9 @@
     // ═══════════════════════════════════════════
     private async Task OnRowDoubleClick(MouseEventArgs e, FileDetails f)
     {
-        await recentFilesViewModel.OpenSecuredMouseDoubleClick(
-            new MouseEventArgs { Type = "dblclick" },
-            f.FilePath);
+        await _guard.RunAsync(
+            () => recentFilesViewModel.OpenSecuredMouseDoubleClick(new MouseEventArgs { Type = "dblclick" }, f.FilePath),
+            () => InvokeAsync(StateHasChanged));
         await RefreshNow();
     }
 
@@ -376,9 +379,9 @@
     private async Task OpenFile(FileDetails f)
     {
         // Eye-icon equivalent of double-click.
-        await recentFilesViewModel.OpenSecuredMouseDoubleClick(
-            new MouseEventArgs { Type = "dblclick" },
-            f.FilePath);
+        await _guard.RunAsync(
+            () => recentFilesViewModel.OpenSecuredMouseDoubleClick(new MouseEventArgs { Type = "dblclick" }, f.FilePath),
+            () => InvokeAsync(StateHasChanged));
         await RefreshNow();
     }
 
@@ -393,25 +396,33 @@
     // ═══════════════════════════════════════════
     private async Task BulkOpen()
     {
-        await recentFilesViewModel.OnContextMenuAction(EventArgs.Empty, SecuredFilesContextMenu.OpenSecured);
+        await _guard.RunAsync(
+            () => recentFilesViewModel.OnContextMenuAction(EventArgs.Empty, SecuredFilesContextMenu.OpenSecured),
+            () => InvokeAsync(StateHasChanged));
         await RefreshNow();
     }
 
     private async Task BulkShareKey()
     {
-        await recentFilesViewModel.OnContextMenuAction(EventArgs.Empty, SecuredFilesContextMenu.ShareKey);
+        await _guard.RunAsync(
+            () => recentFilesViewModel.OnContextMenuAction(EventArgs.Empty, SecuredFilesContextMenu.ShareKey),
+            () => InvokeAsync(StateHasChanged));
         await RefreshNow();
     }
 
     private async Task BulkCleanUp()
     {
-        await homeActionModel.CleanAndRemoveOpenFilesButton_Click(EventArgs.Empty);
+        await _guard.RunAsync(
+            () => homeActionModel.CleanAndRemoveOpenFilesButton_Click(EventArgs.Empty),
+            () => InvokeAsync(StateHasChanged));
         await RefreshNow();
     }
 
     private async Task BulkRemove()
     {
-        await recentFilesViewModel.OnContextMenuAction(EventArgs.Empty, SecuredFilesContextMenu.RemoveFromListButKeepSecured);
+        await _guard.RunAsync(
+            () => recentFilesViewModel.OnContextMenuAction(EventArgs.Empty, SecuredFilesContextMenu.RemoveFromListButKeepSecured),
+            () => InvokeAsync(StateHasChanged));
         await RefreshNow();
     }
 

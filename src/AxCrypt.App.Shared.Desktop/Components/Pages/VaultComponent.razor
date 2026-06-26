@@ -1,4 +1,5 @@
 ﻿@implements IDisposable
+@using AxCrypt.App.Shared.Desktop.Services
 @using AxCrypt.App.Shared.Desktop.ViewModels.Main
 @using AxCrypt.App.Shared.Services
 @using AxCrypt.App.Shared.ViewModels
@@ -253,15 +254,15 @@ else
                             @Texts.ClearButtonText
                         </button>
                         <span class="cbp-actionbar-spacer"></span>
-                        <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_isRenaming"
+                        <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_guard.IsProcessing"
                                 @onclick="async () => await BatchRenameAsync()">
                             @Texts.AnonymousRenameMenuText
                         </button>
-                        <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_isRestoring"
+                        <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_guard.IsProcessing"
                                 @onclick="async () => await BatchRestoreRenameAsync()">
                             @Texts.RestoreAnonymousNamesMenuText
                         </button>
-                        <button type="button" class="cbp-btn cbp-btn--primary"
+                        <button type="button" class="cbp-btn cbp-btn--primary" disabled="@_guard.IsProcessing"
                                 @onclick="async () => await BatchDecryptAsync()">
                             @Texts.DecryptToolStripMenuItemText
                         </button>
@@ -277,30 +278,30 @@ else
                         <span class="cbp-actionbar-spacer"></span>
                         @if (!ViewModel.IsFolder)
                         {
-                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                            <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_guard.IsProcessing"
                                     @onclick='async () => await RunFileAction("Open")'>
                                 @Texts.RecentFilesOpenToolStripMenuItemText
                             </button>
-                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                            <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_guard.IsProcessing"
                                     @onclick="async () => await DecryptVaultFile()">
                                 @Texts.DecryptToolStripMenuItemText
                             </button>
-                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                            <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_guard.IsProcessing"
                                     @onclick='async () => await RunFileAction("Reveal")'>
                                 @Texts.ShowInFolderText
                             </button>
-                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                            <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_guard.IsProcessing"
                                     @onclick='async () => await RunFileAction("RenameAnonymously")'>
                                 @Texts.AnonymousRenameMenuText
                             </button>
-                            <button type="button" class="cbp-btn cbp-btn--primary"
+                            <button type="button" class="cbp-btn cbp-btn--primary" disabled="@_guard.IsProcessing"
                                     @onclick='async () => await RunFileAction("RenameOriginal")'>
                                 @Texts.RestoreAnonymousNamesMenuText
                             </button>
                         }
                         else
                         {
-                            <button type="button" class="cbp-btn cbp-btn--ghost"
+                            <button type="button" class="cbp-btn cbp-btn--ghost" disabled="@_guard.IsProcessing"
                                     @onclick="async () => await DecryptVaultFolder()">
                                 @Texts.DecryptToolStripMenuItemText
                             </button>
@@ -361,8 +362,10 @@ else
 @code {
     private bool isListView { get; set; } = true;
     private bool DropZoneActive { get; set; }
-    private bool _isRenaming = false;
-    private bool _isRestoring = false;
+
+    // Re-entrancy guard — prevents double-click from running two concurrent file operations.
+    // Replaces the former per-operation _isRenaming / _isRestoring flags.
+    private readonly OperationGuard _guard = new();
 
     // ── Multi-select state (mirrors cbp SelectedFiles pattern) ──────
     private readonly HashSet<string> _selectedPaths = new();
@@ -381,44 +384,31 @@ else
 
     private async Task BatchDecryptAsync()
     {
-        await ViewModel.BatchDecryptVaultFilesAsync(_selectedPaths.ToList());
-        ClearVaultSelection();
+        await _guard.RunAsync(async () =>
+        {
+            await ViewModel.BatchDecryptVaultFilesAsync(_selectedPaths.ToList());
+            ClearVaultSelection();
+        }, () => InvokeAsync(StateHasChanged));
     }
 
     private async Task BatchRenameAsync()
     {
-        if (_isRenaming) return; 
-        _isRenaming = true;
-
-        try
+        // Rename the selected file — multiple Explorer windows for each would be disruptive.
+        await _guard.RunAsync(async () =>
         {
-            // Rename the selected file — multiple Explorer
-            // windows for each would be disruptive.
             await ViewModel.BatcRetoreAndRenameVaultFilesAsync(_selectedPaths.ToList(), "RenameAnonymously");
             ClearVaultSelection();
-        }
-        finally
-        {
-            _isRenaming = false;
-        }
+        }, () => InvokeAsync(StateHasChanged));
     }
 
     private async Task BatchRestoreRenameAsync()
     {
-        if (_isRestoring) return;
-        _isRestoring = true;
-
-        try
+        // Restore the selected file — multiple Explorer windows for each would be disruptive.
+        await _guard.RunAsync(async () =>
         {
-            // Restore the selected file — multiple Explorer
-            // windows for each would be disruptive.
             await ViewModel.BatcRetoreAndRenameVaultFilesAsync(_selectedPaths.ToList(), "RenameOriginal");
             ClearVaultSelection();
-        }
-        finally
-        {
-            _isRestoring = false;
-        }
+        }, () => InvokeAsync(StateHasChanged));
     }
 
     private bool isAddMenuOpen { get; set; }
@@ -547,19 +537,25 @@ else
 
     private async Task RunFileAction(string action)
     {
-        await ViewModel.PrepareFileActionAsync(action);
+        await _guard.RunAsync(
+            () => ViewModel.PrepareFileActionAsync(action),
+            () => InvokeAsync(StateHasChanged));
         await UpdateUIState();
     }
 
     private async Task DecryptVaultFile()
     {
-        await ViewModel.DecryptVaultFileAsync();
+        await _guard.RunAsync(
+            () => ViewModel.DecryptVaultFileAsync(),
+            () => InvokeAsync(StateHasChanged));
         await UpdateUIState();
     }
 
     private async Task DecryptVaultFolder()
     {
-        await ViewModel.DecryptVaultfolder();
+        await _guard.RunAsync(
+            () => ViewModel.DecryptVaultfolder(),
+            () => InvokeAsync(StateHasChanged));
         await UpdateUIState();
     }
 
@@ -702,7 +698,9 @@ else
 
         string filename = System.IO.Path.GetFileName(file.Filepath);
         await SelectFile(file.FileType, filename, file.Filepath, file.Size!);
-        await ViewModel.PrepareFileActionAsync("Open");
+        await _guard.RunAsync(
+            () => ViewModel.PrepareFileActionAsync("Open"),
+            () => InvokeAsync(StateHasChanged));
     }
 
     private void CreateNewFolder(string folderPath)

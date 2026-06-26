@@ -261,7 +261,7 @@
             <div class="ff-context-menu"
                  style="left:@(_ctxX)px;top:@(_ctxY)px;"
                  @onclick:stopPropagation="true">
-                <button class="ff-context-item" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Open"); }'>
+                <button class="ff-context-item" disabled="@_guard.IsProcessing" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Open"); }'>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
                         <polyline points="15 3 21 3 21 9"/>
@@ -269,27 +269,27 @@
                     </svg>
                     @Texts.RecentFilesOpenToolStripMenuItemText
                 </button>
-                <button class="ff-context-item" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Decrypt"); }'>
+                <button class="ff-context-item" disabled="@_guard.IsProcessing" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Decrypt"); }'>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="11" width="18" height="11" rx="2"/>
                         <path d="M7 11V7a5 5 0 019.9-1"/>
                     </svg>
                     @Texts.DecryptToolStripMenuItemText
                 </button>
-                <button class="ff-context-item" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Reveal"); }'>
+                <button class="ff-context-item" disabled="@_guard.IsProcessing" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Reveal"); }'>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
                     </svg>
                     @Texts.ShowInFolderText
                 </button>
-                <button class="ff-context-item" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("RenameAnonymously"); }'>
+                <button class="ff-context-item" disabled="@_guard.IsProcessing" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("RenameAnonymously"); }'>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
                         <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
                     </svg>
                     @Texts.AnonymousRenameMenuText
                 </button>
-                <button class="ff-context-item" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("RenameOriginal"); }'>
+                <button class="ff-context-item" disabled="@_guard.IsProcessing" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("RenameOriginal"); }'>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="1 4 1 10 7 10"/>
                         <path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
@@ -297,7 +297,7 @@
                     @Texts.RestoreAnonymousNamesMenuText
                 </button>
                 <div class="ff-context-divider"></div>
-                <button class="ff-context-item ff-context-item--danger" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Delete"); }'>
+                <button class="ff-context-item ff-context-item--danger" disabled="@_guard.IsProcessing" @onclick='async () => { CloseContextMenu(); await RunContextActionAsync("Delete"); }'>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="3 6 5 6 21 6"/>
                         <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
@@ -315,15 +315,15 @@
                     @Texts.ClearButtonText
                 </button>
                 <span class="ff-actionbar-spacer"></span>
-                <button type="button" class="ff-btn ff-btn--ghost"
+                <button type="button" class="ff-btn ff-btn--ghost" disabled="@_guard.IsProcessing"
                         @onclick='async () => await BatchRunAsync("Decrypt")'>
                     @Texts.DecryptToolStripMenuItemText
                 </button>
-                <button type="button" class="ff-btn ff-btn--ghost"
+                <button type="button" class="ff-btn ff-btn--ghost" disabled="@_guard.IsProcessing"
                         @onclick='async () => await BatchRunAsync("Reveal")'>
                     @Texts.ShowInFolderText
                 </button>
-                <button type="button" class="ff-btn ff-btn--danger"
+                <button type="button" class="ff-btn ff-btn--danger" disabled="@_guard.IsProcessing"
                         @onclick='async () => await BatchRunAsync("Delete")'>
                     @Texts.RemoveRecentFileToolStripMenuItemText
                 </button>
@@ -358,6 +358,9 @@
     private string SearchText = string.Empty;
     private Action? _onUpdateViewState;
 
+    // Re-entrancy guard — prevents double-click from running two concurrent file operations.
+    private readonly OperationGuard _guard = new();
+
     // ── Multi-select ──────────────────────────────────────────────
     private readonly HashSet<string> _selectedPaths = new();
 
@@ -375,11 +378,14 @@
 
     private async Task BatchRunAsync(string action)
     {
-        foreach (string path in _selectedPaths.ToList())
+        await _guard.RunAsync(async () =>
         {
-            await ViewModel.HandleActionAsync(action, path);
-        }
-        ClearSelection();
+            foreach (string path in _selectedPaths.ToList())
+            {
+                await ViewModel.HandleActionAsync(action, path);
+            }
+            ClearSelection();
+        }, () => InvokeAsync(StateHasChanged));
     }
 
     // ── Lifecycle ─────────────────────────────────────────────────
@@ -445,7 +451,9 @@
 
     private async Task RunActionAsync(string action)
     {
-        await ViewModel.HandleActionAsync(action, ViewModel.SelectedFilePath);
+        await _guard.RunAsync(
+            () => ViewModel.HandleActionAsync(action, ViewModel.SelectedFilePath),
+            () => InvokeAsync(StateHasChanged));
         await UpdateUIState();
     }
 
@@ -483,7 +491,9 @@
 
     private async Task RunContextActionAsync(string action)
     {
-        await ViewModel.HandleActionAsync(action, ViewModel.SelectedFilePath);
+        await _guard.RunAsync(
+            () => ViewModel.HandleActionAsync(action, ViewModel.SelectedFilePath),
+            () => InvokeAsync(StateHasChanged));
         await UpdateUIState();
     }
 
