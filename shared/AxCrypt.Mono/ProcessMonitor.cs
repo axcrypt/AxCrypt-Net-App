@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +24,20 @@ namespace AxCrypt.Mono
 
         public ProcessMonitor()
         {
+            // On macOS / Mac Catalyst, Process.GetProcesses() calls sysctl(KERN_PROC_ALL)
+            // every 500 ms — an expensive kernel round-trip that causes "not responding"
+            // and floods SessionChange notifications as system processes churn.
+            //
+            // NOTE: RuntimeInformation.IsOSPlatform(OSPlatform.OSX) returns FALSE on
+            // Mac Catalyst because the runtime platform string is "MACCATALYST", not "OSX".
+            // Both checks are required to cover native macOS and Mac Catalyst (MAUI).
+            //
+            // MacFileCloseMonitor (kqueue EVFILT_VNODE + lsof) handles file-close
+            // detection on macOS, so this process-poll loop is not needed there.
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ||
+                RuntimeInformation.IsOSPlatform(OSPlatform.Create("MACCATALYST")))
+                return;
+
             _action = new DelayedAction(New<IDelayTimer>(), TimeSpan.FromMilliseconds(500));
             _currentSessionId = Process.GetCurrentProcess().SessionId;
             _processIds = GetCurrentIds();
