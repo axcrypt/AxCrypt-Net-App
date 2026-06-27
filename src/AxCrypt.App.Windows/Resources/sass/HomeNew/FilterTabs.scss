@@ -17,7 +17,7 @@
     transition: all .15s;
 }
 
-    .tab:hover {
+    .tab:hover:not(.tab--active) {
         border-color: $brand-green;
         color: $brand-green;
     }
@@ -25,7 +25,7 @@
 .tab--active {
     background: $brand-green;
     border-color: $brand-green;
-    color: #fff;
+    color: #fff !important;
     font-weight: 600;
 }
 

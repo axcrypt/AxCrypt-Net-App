@@ -2201,6 +2201,27 @@ bold.text-style {
     background: rgba(255, 255, 255, .35) !important;
 }
 
+/* Filter tabs (Recent Files — All / Opened / Shared) */
+.tab {
+    background: $dt-surface-3 !important;
+    border-color: $dt-border-strong !important;
+    color: $dt-text-secondary !important;
+}
+
+.tab:hover:not(.tab--active) {
+    border-color: $dt-brand !important;
+    color: $dt-brand !important;
+    background: $dt-surface-3 !important;
+}
+
+.tab--active {
+    background: $dt-brand !important;
+    border-color: $dt-brand !important;
+    color: $dt-text-on-brand !important;
+    /* Visible ring so the active tab stands out on a dark background */
+    box-shadow: 0 0 0 2px rgba(127, 204, 92, .35) !important;
+}
+
 .tab-count {
     background: rgba(255, 255, 255, .08) !important;
     color: $dt-text-secondary !important;

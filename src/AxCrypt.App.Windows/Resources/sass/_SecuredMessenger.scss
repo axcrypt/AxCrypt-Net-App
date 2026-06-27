@@ -666,6 +666,18 @@ textarea[readonly] {
    The message list and the reading pane sit side by side as framed
    panes that fill the available height; empty states fill the space
    so a pane is never just blank. */
+
+/* Make .secured-messenger a flex item so it fills the remaining space
+   inside .main-content after TopBar, regardless of whether FreePlanLimitBar
+   is visible. This replaces the old fixed calc(100vh - 140px) approach that
+   didn't account for the free-tier bar's height and clipped the Send button. */
+.secured-messenger {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
 .secured-messenger {
 
     /* Two-pane split. height:100% + grid-template-rows:1fr let the grid
@@ -1073,8 +1085,13 @@ textarea[readonly] {
     flex-wrap: nowrap !important;
     align-items: stretch !important;
 
-    /* Bounded height = full viewport minus chrome above. */
-    height: calc(100vh - 140px);
+    /* Fill whatever remains in .secured-messenger after FreePlanLimitBar.
+       Replaces the old fixed calc(100vh - 140px) which didn't account for
+       the free-tier bar height, clipping the footer (Send button) for
+       free users and preventing body scroll. */
+    flex: 1;
+    min-height: 0;
+    height: auto;
     margin: 0 20px;   // keep horizontal gutters; remove vertical margins
     padding: 0;
 }

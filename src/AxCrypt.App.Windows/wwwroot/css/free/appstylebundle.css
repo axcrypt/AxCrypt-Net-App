@@ -7182,6 +7182,412 @@ html[data-theme=dark] .pmx-readonly-pill {
   color: #B5BCC7;
 }
 
+.spd-panel {
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.spd-panel-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.spd-panel-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.spd-panel-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.spd-panel-sub {
+  font-size: 0.78rem;
+  color: #6b7280;
+  margin: 2px 0 0;
+}
+
+.spd-panel--premium .spd-panel-icon {
+  background: #e6f2dc;
+  color: #48772C;
+}
+
+.spd-panel--business .spd-panel-icon {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.spd-biz-banner {
+  margin: 0;
+}
+
+.spd-info-text {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.spd-panel--business .spd-biz-banner {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #111827;
+}
+.spd-panel--business .spd-biz-banner .skd-biz-banner-text {
+  color: #111827;
+}
+.spd-panel--business .spd-biz-banner .skd-link {
+  color: #374151;
+  text-decoration: underline;
+}
+.spd-panel--business .spd-biz-banner strong {
+  color: #000;
+}
+
+.spd-add-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.spd-input-wrap {
+  flex: 1;
+  min-width: 160px;
+}
+
+.spd-visibility-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.spd-visibility-select {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 38px;
+  padding: 0 2rem 0 0.75rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 0.82rem;
+  color: #111827;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.spd-panel--premium .spd-visibility-select:focus {
+  border-color: #48772C;
+}
+
+.spd-panel--business .spd-visibility-select:focus {
+  border-color: #374151;
+}
+
+.spd-select-caret {
+  position: absolute;
+  right: 8px;
+  pointer-events: none;
+  color: #9ca3af;
+}
+
+.spd-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.spd-list-wrap {
+  position: relative;
+}
+
+.spd-recipient-list .spd-recipient {
+  display: grid;
+  grid-template-columns: 36px 1fr auto 32px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  position: relative;
+}
+
+.spd-visibility-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: #f3f4f6;
+  color: #6b7280;
+  border-radius: 20px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  justify-self: end;
+}
+
+.spd-recipient--active {
+  background: #fafafa;
+}
+
+.spd-row-menu {
+  grid-column: 1/-1;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.spd-row-menu-item {
+  width: 100%;
+  border-radius: 6px;
+  font-size: 12.5px;
+  padding: 6px 10px;
+}
+
+.spd-empty {
+  padding: 0.75rem 0;
+}
+
+.spd-apply-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.spd-panel--premium .skd-btn--primary {
+  background: #48772C;
+}
+.spd-panel--premium .skd-btn--primary:hover:not(:disabled) {
+  background: #5a8f36;
+}
+
+.spd-panel--business .skd-btn--primary {
+  background: #111827;
+}
+.spd-panel--business .skd-btn--primary:hover:not(:disabled) {
+  background: #1f2937;
+}
+
+.spd-btn--loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.spd-spinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spd-spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+html[data-theme=dark] .spd-panel {
+  background: #161D26;
+  border-color: #2A3340;
+}
+html[data-theme=dark] .spd-panel-title {
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-panel-sub {
+  color: #8a95a3;
+}
+html[data-theme=dark] .spd-panel--premium .spd-panel-icon {
+  background: #14532d;
+  color: #7FCC5C;
+}
+html[data-theme=dark] .spd-panel--business .spd-panel-icon {
+  background: #2A3340;
+  color: #B5BCC7;
+}
+html[data-theme=dark] .spd-info-text {
+  color: #8a95a3;
+}
+html[data-theme=dark] .spd-panel--business .spd-biz-banner {
+  background: #1C2530;
+  border-color: #3A4554;
+  color: #B5BCC7;
+}
+html[data-theme=dark] .spd-panel--business .spd-biz-banner .skd-biz-banner-text {
+  color: #B5BCC7;
+}
+html[data-theme=dark] .spd-panel--business .spd-biz-banner .skd-link {
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-panel--business .spd-biz-banner strong {
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-panel .skd-input {
+  background: #232E3B;
+  border-color: #2A3340;
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-panel .skd-input::placeholder {
+  color: #5a6575;
+}
+html[data-theme=dark] .spd-panel--premium .skd-input:focus {
+  border-color: #7FCC5C;
+}
+html[data-theme=dark] .spd-panel--business .skd-input:focus {
+  border-color: #4a5568;
+}
+html[data-theme=dark] .spd-panel .skd-input-icon {
+  color: #5a6575;
+}
+html[data-theme=dark] .spd-visibility-select {
+  background: #232E3B;
+  border-color: #2A3340;
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-panel--premium .spd-visibility-select:focus {
+  border-color: #7FCC5C;
+}
+html[data-theme=dark] .spd-panel--business .spd-visibility-select:focus {
+  border-color: #4a5568;
+}
+html[data-theme=dark] .spd-select-caret {
+  color: #5a6575;
+}
+html[data-theme=dark] .spd-recipient-list .spd-recipient {
+  border-color: #2A3340;
+}
+html[data-theme=dark] .spd-recipient--active {
+  background: #1a2332;
+}
+html[data-theme=dark] .skd-recipient-name {
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-visibility-badge {
+  background: #2A3340;
+  color: #8a95a3;
+}
+html[data-theme=dark] .spd-row-menu {
+  border-top-color: #2A3340;
+}
+html[data-theme=dark] .spd-row-menu-item {
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-row-menu-item:hover {
+  background: #232E3B;
+}
+html[data-theme=dark] .spd-panel .skd-recipient-avatar {
+  background: #2A3340;
+  color: #8a95a3;
+}
+html[data-theme=dark] .spd-panel--premium .skd-recipient-avatar {
+  background: #14532d;
+  color: #7FCC5C;
+}
+html[data-theme=dark] .spd-panel--business .skd-recipient-avatar {
+  background: #2A3340;
+  color: #B5BCC7;
+}
+html[data-theme=dark] .skd-recipient-menu-btn {
+  color: #5a6575;
+}
+html[data-theme=dark] .skd-recipient-menu-btn:hover {
+  color: #E8ECF1;
+  background: #232E3B;
+}
+html[data-theme=dark] .spd-panel .skd-suggestions {
+  background: #232E3B;
+  border-color: #2A3340;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+html[data-theme=dark] .spd-panel .skd-suggestion {
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-panel .skd-suggestion:hover {
+  background: #2A3645;
+}
+html[data-theme=dark] .spd-panel .skd-suggestion-text {
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-panel--premium .skd-suggestion-avatar {
+  background: #14532d;
+  color: #7FCC5C;
+}
+html[data-theme=dark] .spd-panel--premium .skd-suggestion-avatar--group {
+  background: #14532d;
+  color: #7FCC5C;
+}
+html[data-theme=dark] .spd-panel--business .skd-suggestion-avatar {
+  background: #2A3340;
+  color: #B5BCC7;
+}
+html[data-theme=dark] .spd-panel--business .skd-suggestion-avatar--group {
+  background: #3A4554;
+  color: #B5BCC7;
+}
+html[data-theme=dark] .spd-panel .skd-suggestion-tag {
+  background: #2A3340;
+  color: #8a95a3;
+}
+html[data-theme=dark] .spd-panel--business .skd-suggestion-tag {
+  background: #3A4554;
+  color: #B5BCC7;
+}
+html[data-theme=dark] .spd-panel .skd-list-title {
+  color: #8a95a3;
+}
+html[data-theme=dark] .spd-panel .skd-error {
+  background: #2d1b1b;
+  border-color: #7f1d1d;
+  color: #fca5a5;
+}
+html[data-theme=dark] .spd-panel .skd-empty-title {
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-panel .skd-empty-sub {
+  color: #8a95a3;
+}
+html[data-theme=dark] .spd-panel .skd-empty svg {
+  color: #2A3340;
+}
+html[data-theme=dark] .spd-panel--premium .skd-btn--primary {
+  background: #48772C;
+}
+html[data-theme=dark] .spd-panel--premium .skd-btn--primary:hover:not(:disabled) {
+  background: #5a8f36;
+}
+html[data-theme=dark] .spd-panel--business .skd-btn--primary {
+  background: #111827;
+}
+html[data-theme=dark] .spd-panel--business .skd-btn--primary:hover:not(:disabled) {
+  background: #1f2937;
+}
+html[data-theme=dark] .spd-panel .skd-btn--ghost {
+  border-color: #2A3340;
+  color: #B5BCC7;
+  background: transparent;
+}
+html[data-theme=dark] .spd-panel .skd-btn--ghost:hover {
+  background: #232E3B;
+  color: #E8ECF1;
+}
+html[data-theme=dark] .spd-panel .skd-btn:disabled {
+  opacity: 0.4;
+}
+
 .card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
@@ -7507,7 +7913,7 @@ html[data-theme=dark] .pmx-readonly-pill {
   transition: all 0.15s;
 }
 
-.tab:hover {
+.tab:hover:not(.tab--active) {
   border-color: #48772C;
   color: #48772C;
 }
@@ -7515,7 +7921,7 @@ html[data-theme=dark] .pmx-readonly-pill {
 .tab--active {
   background: #48772C;
   border-color: #48772C;
-  color: #fff;
+  color: #fff !important;
   font-weight: 600;
 }
 
@@ -15922,6 +16328,17 @@ textarea[readonly] {
    The message list and the reading pane sit side by side as framed
    panes that fill the available height; empty states fill the space
    so a pane is never just blank. */
+/* Make .secured-messenger a flex item so it fills the remaining space
+   inside .main-content after TopBar, regardless of whether FreePlanLimitBar
+   is visible. This replaces the old fixed calc(100vh - 140px) approach that
+   didn't account for the free-tier bar's height and clipped the Send button. */
+.secured-messenger {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
 .secured-messenger {
   /* Two-pane split. height:100% + grid-template-rows:1fr let the grid
      row fill the flex parent so both panes stretch to the app height. */
@@ -16283,8 +16700,13 @@ textarea[readonly] {
   flex-direction: column !important;
   flex-wrap: nowrap !important;
   align-items: stretch !important;
-  /* Bounded height = full viewport minus chrome above. */
-  height: calc(100vh - 140px);
+  /* Fill whatever remains in .secured-messenger after FreePlanLimitBar.
+     Replaces the old fixed calc(100vh - 140px) which didn't account for
+     the free-tier bar height, clipping the footer (Send button) for
+     free users and preventing body scroll. */
+  flex: 1;
+  min-height: 0;
+  height: auto;
   margin: 0 20px;
   padding: 0;
 }

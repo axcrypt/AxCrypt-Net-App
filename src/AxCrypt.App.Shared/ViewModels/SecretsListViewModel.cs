@@ -432,11 +432,6 @@ public class SecretsListViewModel : AxCrypt.Core.UI.ViewModel.ViewModelBase
 
     public async Task FilterSharedSecrets(SecretFilterOption secretFilter)
     {
-        if (SelectedSecretListFilter == secretFilter)
-        {
-            return;
-        }
-
         SelectedSecretListFilter = secretFilter;
         UpdateSecretListFilterStyle(secretFilter);
 
