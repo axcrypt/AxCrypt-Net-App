@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Security.Cryptography;
-using AxCrypt.Abstractions;
+﻿using AxCrypt.Abstractions;
 using AxCrypt.Core.Extensions;
-using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Header;
+using System.Security.Cryptography;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Mono
@@ -24,12 +19,12 @@ namespace AxCrypt.Mono
 
         #region IProtectedData Members
 
-        public byte[] Protect(byte[] userData, byte[] optionalEntropy)
+        public byte[] Protect(byte[] userData, byte[] optionalEntropy = null)
         {
             return ProtectedData.Protect(userData, optionalEntropy, _scope);
         }
 
-        public byte[] Unprotect(byte[] encryptedData, byte[] optionalEntropy)
+        public byte[] Unprotect(byte[] encryptedData, byte[] optionalEntropy = null)
         {
             if (encryptedData.Locate(_axCryptGuid, 0, _axCryptGuid.Length) == 0)
             {

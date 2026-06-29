@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace AxCrypt.Common
+﻿namespace AxCrypt.Common
 {
     [Flags]
     public enum DoNotShowAgainOptions
     {
-        None = 0x0,
-        FileAssociationBrokenWarning = 0x1,
-        LavasoftWebCompanionExistenceWarning = 0x2,
-        TryPremium = 0x4,
-        SignedInSoNoPasswordRequired = 0x8,
-        WillNotForgetPassword = 0x10,
-        IgnoreFileWarning = 0x20,
-        UnopenableFileWarning = 0x40,
-        KeySharingRemovedInFreeModeWarning = 0x80,
-        MasterKeyWarning = 0x100,
-        MasterKeyRemovedWarning = 0x200,
-        UpgradeSubscriptionWarning = 0x466,
-        VaultDragDropWarning = 0x400
+        None = 0x0000,
+        FileAssociationBrokenWarning = 0x0001,
+        LavasoftWebCompanionExistenceWarning = 0x0002,
+        TryPremium = 0x0004,
+        SignedInSoNoPasswordRequired = 0x0008,
+        WillNotForgetPassword = 0x0010,
+        IgnoreFileWarning = 0x0020,
+        UnopenableFileWarning = 0x0040,
+        KeySharingRemovedInFreeModeWarning = 0x0080,
+        MasterKeyWarning = 0x0100,
+        MasterKeyRemovedWarning = 0x0200,
+        VaultDragDropWarning = 0x0400,
+        FilePasswordWarning = 0x0800,
+        UpgradeSubscriptionWarning = 0x1000,
     }
 }

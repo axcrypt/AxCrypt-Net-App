@@ -9,9 +9,14 @@
 //------------------------------------------------------------------------------
 
 namespace AxCrypt.Core.Test.Properties {
+    using AxCrypt.Core.Crypto;
+    using AxCrypt.Core.Service;
+    using Newtonsoft.Json;
     using System;
-    
-    
+    using System.Diagnostics;
+    using System.Text;
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -126,6 +131,27 @@ namespace AxCrypt.Core.Test.Properties {
                 return ((byte[])(obj));
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] helloworld_V2_key_a_txt {
+            get
+            {
+                object obj = ResourceManager.GetObject("helloworld_V2_key_a_txt", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] helloworld_V2_Withkey_a_txt {
+            get {
+                object obj = ResourceManager.GetObject("helloworld_V2_Withkey_a_txt", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
@@ -232,6 +258,26 @@ namespace AxCrypt.Core.Test.Properties {
             get {
                 object obj = ResourceManager.GetObject("uncompressable_zip", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static UserKeyPair User_Resource_Key1
+        {
+            get
+            {
+                try
+                {
+                    object obj = ResourceManager.GetObject("User_Resource_Key1", resourceCulture);
+                    string json = Encoding.UTF8.GetString((byte[])obj);
+                    return Resolve.Serializer.Deserialize<UserKeyPair>(json) ?? UserKeyPair.Empty;
+                }
+                catch (Exception ex)
+                {
+                    return UserKeyPair.Empty;
+                }
             }
         }
     }

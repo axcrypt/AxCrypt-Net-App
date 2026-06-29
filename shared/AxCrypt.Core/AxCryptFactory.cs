@@ -79,6 +79,14 @@ namespace AxCrypt.Core
             }
         }
 
+        // True when the identity (passphrase and/or private keys) can decrypt the given file.
+        public virtual bool IsKeyValid(LogOnIdentity identity, string encryptedFileFullName)
+        {
+            IDataStore encryptedStore = New<IDataStore>(encryptedFileFullName);
+            IEnumerable<DecryptionParameter> parameters = encryptedStore.DecryptionParameters(identity.Passphrase, identity.GetPrivateKeys());
+            return FindDecryptionParameter(parameters, encryptedStore) != null;
+        }
+
         public virtual DecryptionParameter FindDecryptionParameter(IEnumerable<DecryptionParameter> decryptionParameters, IDataStore encryptedFileInfo)
         {
             if (encryptedFileInfo == null)

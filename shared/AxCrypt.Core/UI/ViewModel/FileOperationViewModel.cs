@@ -121,6 +121,10 @@ namespace AxCrypt.Core.UI.ViewModel
 
         public IAsyncAction IntegrityCheckFiles { get; private set; }
 
+        public Passphrase DisplayEncryptPassphrase { get; set; }
+
+        public bool IncludeRecoveryKey { get; set; }
+
         public event Func<object, FileSelectionEventArgs, Task> SelectingFilesAsync;
 
         // Async method to trigger the event
@@ -566,13 +570,17 @@ namespace AxCrypt.Core.UI.ViewModel
 
                 return Task.CompletedTask;
             };
-            return controller.EncryptFileAsync(file, Recipients);
+
+            LogOnIdentity logOnIdentity = EncryptionIdentity(DisplayEncryptPassphrase);
+            return controller.EncryptFileAsync(file, Recipients, logOnIdentity);
         }
 
         private Task<FileOperationContext> EncryptFileWorkManyAsync(IDataStore file, IProgressContext progress)
         {
             FileOperationsController controller = EncryptFileWorkController(progress);
-            return controller.EncryptFileAsync(file, Recipients);
+            LogOnIdentity logOnIdentity = EncryptionIdentity(DisplayEncryptPassphrase);
+
+            return controller.EncryptFileAsync(file, Recipients, logOnIdentity);
         }
 
         private Task<FileOperationContext> VerifyAndAddActiveWorkAsync(IDataStore fullName, IProgressContext progress)
@@ -789,6 +797,29 @@ namespace AxCrypt.Core.UI.ViewModel
             FileOperationsController operationsController = new FileOperationsController(progress);
 
             return operationsController.IntegrityCheckAsync(dataStore);
+        }
+
+        // Exposes the identity for the currently configured DisplayEncryptPassphrase so callers
+        // (e.g. Share with People) can re-key files that were encrypted with a file password.
+        public LogOnIdentity CurrentEncryptionIdentity() => EncryptionIdentity(DisplayEncryptPassphrase);
+
+        // Builds the identity used to encrypt: the account identity by default, a file-password
+        // identity when a passphrase is supplied, optionally bundling the account recovery key.
+        private LogOnIdentity EncryptionIdentity(Passphrase passphrase)
+        {
+            LogOnIdentity logOnIdentity = Resolve.KnownIdentities.DefaultEncryptionIdentity;
+            if (passphrase == null || passphrase == Passphrase.Empty)
+            {
+                return logOnIdentity;
+            }
+
+            if (!IncludeRecoveryKey)
+            {
+                return new LogOnIdentity(passphrase);
+            }
+
+            // File password + account recovery key: the owner can still open the file with their account.
+            return new LogOnIdentity(new[] { logOnIdentity.ActiveEncryptionKeyPair }, passphrase);
         }
     }
 }

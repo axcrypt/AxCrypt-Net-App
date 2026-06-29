@@ -1,5 +1,4 @@
 ﻿using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
 using AxCrypt.Api.Model.Groups;
 using AxCrypt.Api.Model.Masterkey;
 using AxCrypt.Core.Crypto.Asymmetric;

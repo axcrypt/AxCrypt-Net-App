@@ -23,34 +23,30 @@
  * http://www.axcrypt.net for more information about the author.
 */
 
-using System.IO;
-
 #endregion Coypright and License
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+using AxCrypt.Abstractions;
+using AxCrypt.Abstractions.Algorithm;
+using AxCrypt.Api;
+using AxCrypt.Api.Implementation;
+using AxCrypt.Common;
+using AxCrypt.Core.Algorithm.Implementation;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Crypto.Asymmetric;
+using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
+using AxCrypt.Core.Portable;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
 using AxCrypt.Core.UI.ViewModel;
-using AxCrypt.Core.Portable;
-using AxCrypt.Mono.Portable;
-using AxCrypt.Core.Crypto.Asymmetric;
-using AxCrypt.Core.Algorithm.Implementation;
-using AxCrypt.Mono;
-using AxCrypt.Abstractions;
-using AxCrypt.Api.Implementation;
-using AxCrypt.Core.Service;
-using static AxCrypt.Abstractions.TypeResolve;
 using AxCrypt.Fake;
-using AxCrypt.Common;
-using AxCrypt.Api;
+using AxCrypt.Mono;
+using AxCrypt.Mono.Portable;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using AxCrypt.Core.Extensions;
-using AxCrypt.Abstractions.Algorithm;
+using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Test
 {
@@ -100,7 +96,8 @@ namespace AxCrypt.Core.Test
             TypeMap.Register.Singleton<IKnownFoldersDiscovery>(() => new FakeKnownFoldersDiscovery());
             TypeMap.Register.Singleton<IGlobalNotification>(() => new FakeGlobalNotification());
             TypeMap.Register.Singleton<CanOpenEncryptedFile>(() => new CanOpenEncryptedFile());
-
+            TypeMap.Register.Singleton<WorkFolderWatcher>(() => new WorkFolderWatcher());
+            TypeMap.Register.Singleton<FileWorkFolder>(() => new FileWorkFolder(Resolve.UserSettings.TemporaryFilePath), () => New<WorkFolderWatcher>());
             TypeMap.Register.New<AxCryptFactory>(() => new AxCryptFactory());
             TypeMap.Register.New<AxCryptFile>(() => new AxCryptFile());
             TypeMap.Register.New<ActiveFileAction>(() => new ActiveFileAction());

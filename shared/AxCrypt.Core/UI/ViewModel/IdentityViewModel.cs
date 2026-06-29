@@ -373,7 +373,7 @@ namespace AxCrypt.Core.UI.ViewModel
 
         private async Task<LogOnIdentity> AddKnownIdentityFromEventAsync(LogOnEventArgs logOnArgs)
         {
-            if (logOnArgs.Cancel || logOnArgs.Passphrase == Passphrase.Empty)
+            if (logOnArgs.Cancel || (logOnArgs.Passphrase == Passphrase.Empty && logOnArgs.RecoveryKey == UserKeyPair.Empty))
             {
                 return LogOnIdentity.Empty;
             }
@@ -382,13 +382,21 @@ namespace AxCrypt.Core.UI.ViewModel
 
             Passphrase passphrase = logOnArgs.Passphrase;
             LogOnIdentity identity = await LogOnIdentityFromCredentialsAsync(EmailAddress.Parse(logOnArgs.UserEmail), passphrase);
-            if (identity == LogOnIdentity.Empty)
+            if (identity != LogOnIdentity.Empty)
             {
-                identity = new LogOnIdentity(passphrase);
-                _fileSystemState.KnownPassphrases.Add(passphrase);
-                await _fileSystemState.Save();
+                await _knownIdentities.AddAsync(identity);
+                return identity;
             }
-            await _knownIdentities.AddAsync(identity);
+
+            if (logOnArgs.RecoveryKey != UserKeyPair.Empty)
+            {
+                identity = new LogOnIdentity(new[] { logOnArgs.RecoveryKey }, null);
+                return identity;
+            }
+
+            identity = new LogOnIdentity(passphrase);
+            _fileSystemState.KnownPassphrases.Add(passphrase);
+            await _fileSystemState.Save();
             return identity;
         }
     }

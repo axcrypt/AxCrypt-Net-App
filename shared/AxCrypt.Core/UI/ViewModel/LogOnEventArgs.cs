@@ -27,6 +27,7 @@
 
 using AxCrypt.Api.Model;
 using AxCrypt.Core.Crypto;
+using AxCrypt.Core.Service;
 
 namespace AxCrypt.Core.UI.ViewModel
 {
@@ -56,6 +57,8 @@ namespace AxCrypt.Core.UI.ViewModel
         public bool DisplayPassphrase { get; set; }
 
         public Passphrase Passphrase { get; set; }
+
+        public UserKeyPair RecoveryKey { get; set; }
 
         public string Name { get; set; }
 

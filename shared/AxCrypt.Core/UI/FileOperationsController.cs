@@ -193,9 +193,11 @@ namespace AxCrypt.Core.UI
             return DoFileAsync(fileInfo, EncryptFilePreparationAsync, EncryptFileOperationAsync);
         }
 
-        public Task<FileOperationContext> EncryptFileAsync(IDataStore fileInfo, IEnumerable<UserPublicKey> userPublicKeys)
+        public Task<FileOperationContext> EncryptFileAsync(IDataStore fileInfo, IEnumerable<UserPublicKey> userPublicKeys, LogOnIdentity logOnIdentity = null)
         {
             _eventArgs.Recipients = userPublicKeys;
+            _eventArgs.LogOnIdentity = logOnIdentity;
+
             return EncryptFileAsync(fileInfo);
         }
 
@@ -353,7 +355,7 @@ namespace AxCrypt.Core.UI
                 }
                 else
                 {
-                    _eventArgs.LogOnIdentity = Resolve.KnownIdentities.DefaultEncryptionIdentity;
+                    _eventArgs.LogOnIdentity ??= Resolve.KnownIdentities.DefaultEncryptionIdentity;
                 }
 
                 OnQuerySharedPublicKeys(_eventArgs);

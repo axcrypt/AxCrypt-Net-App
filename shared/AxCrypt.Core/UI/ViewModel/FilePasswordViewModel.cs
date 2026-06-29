@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt - Copyright 2026, AxCrypt AB, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -18,8 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with AxCrypt.  If not, see <http://www.gnu.org/licenses/>.
  *
- * The source is maintained at http://bitbucket.org/AxCrypt-net please visit for
- * updates, contributions and contact with the author. You may also visit
+ * Visit
  * http://www.axcrypt.net for more information about the author.
 */
 
@@ -29,11 +28,7 @@ using AxCrypt.Abstractions;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using AxCrypt.Core.Service;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.UI.ViewModel
@@ -56,6 +51,7 @@ namespace AxCrypt.Core.UI.ViewModel
             FileName = string.IsNullOrEmpty(_encryptedFileFullName) ? string.Empty : New<IDataStore>(_encryptedFileFullName).Name;
             IsLegacyFile = IsLegacyFileInternal(_encryptedFileFullName);
             KeyFileName = string.Empty;
+            RecoveryKey = UserKeyPair.Empty;
         }
 
         private void BindPropertyChangedEvents()
@@ -73,29 +69,11 @@ namespace AxCrypt.Core.UI.ViewModel
 
         public string KeyFileName { get { return GetProperty<string>(nameof(KeyFileName)); } set { SetProperty(nameof(KeyFileName), value); } }
 
-        public Passphrase Passphrase
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(KeyFileName))
-                {
-                    return Passphrase.Create(PasswordText);
-                }
+        // Passphrase is now derived from the typed text only; the recovery key (if any)
+        // is carried separately in RecoveryKey and validated via ValidateKeyFile.
+        public Passphrase Passphrase => Passphrase.Create(PasswordText);
 
-                IDataStore keyFile = New<IDataStore>(KeyFileName);
-                if (!keyFile.IsAvailable)
-                {
-                    return Passphrase.Empty;
-                }
-
-                byte[] extra;
-                using (Stream stream = New<IDataStore>(KeyFileName).OpenRead())
-                {
-                    extra = stream.ToArray();
-                }
-                return Passphrase.Create(PasswordText, extra);
-            }
-        }
+        public UserKeyPair RecoveryKey { get; set; }
 
         protected override async Task<bool> ValidateAsync(string columnName)
         {
@@ -114,11 +92,6 @@ namespace AxCrypt.Core.UI.ViewModel
                     return ValidateKeyFile();
 
                 case nameof(PasswordText):
-                    if (!string.IsNullOrEmpty(KeyFileName) && !ValidateKeyFile())
-                    {
-                        return false;
-                    }
-
                     if (New<KnownIdentities>().DefaultEncryptionIdentity.Passphrase == Passphrase)
                     {
                         ValidationError = (int)ViewModel.ValidationError.SamePasswordAlreadySignedIn;
@@ -151,9 +124,23 @@ namespace AxCrypt.Core.UI.ViewModel
             }
             try
             {
-                using (Stream stream = New<IDataStore>(KeyFileName).OpenRead())
+                // Read the recovery-key JSON through the IDataStore abstraction (single handle,
+                // testable) rather than opening the file twice via System.IO.File.
+                UserKeyPair userKeyPair = DeserializeRecoveryKey(KeyFileName);
+                if (userKeyPair == UserKeyPair.Empty)
                 {
+                    ValidationError = (int)ViewModel.ValidationError.WrongPassphrase;
+                    return false;
                 }
+
+                LogOnIdentity identity = new LogOnIdentity(new[] { userKeyPair }, Passphrase);
+                if (!IsKeyPairValidForFileIfAny(identity, _encryptedFileFullName))
+                {
+                    ValidationError = (int)ViewModel.ValidationError.WrongPassphrase;
+                    return false;
+                }
+
+                RecoveryKey = identity.ActiveEncryptionKeyPair;
             }
             catch (IOException ioex)
             {
@@ -161,7 +148,24 @@ namespace AxCrypt.Core.UI.ViewModel
                 ValidationError = (int)ViewModel.ValidationError.KeyFileInaccessible;
                 return false;
             }
+
             return true;
+        }
+
+        // Reads and deserializes a recovery key file; returns UserKeyPair.Empty on malformed content.
+        private static UserKeyPair DeserializeRecoveryKey(string keyFileName)
+        {
+            using Stream stream = New<IDataStore>(keyFileName).OpenRead();
+            using StreamReader reader = new StreamReader(stream);
+            string json = reader.ReadToEnd();
+            try
+            {
+                return Resolve.Serializer.Deserialize<UserKeyPair>(json);
+            }
+            catch (Exception)
+            {
+                return UserKeyPair.Empty;
+            }
         }
 
         private static bool IsLegacyFileInternal(string encryptedFileFullName)
@@ -181,6 +185,15 @@ namespace AxCrypt.Core.UI.ViewModel
                 return true;
             }
             return await New<AxCryptFactory>().IsPassphraseValid(passphrase, encryptedFileFullName);
+        }
+
+        private static bool IsKeyPairValidForFileIfAny(LogOnIdentity identity, string encryptedFileFullName)
+        {
+            if (string.IsNullOrEmpty(encryptedFileFullName))
+            {
+                return true;
+            }
+            return New<AxCryptFactory>().IsKeyValid(identity, encryptedFileFullName);
         }
 
         private bool IsKnownIdentity()
