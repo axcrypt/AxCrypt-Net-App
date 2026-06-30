@@ -119,6 +119,7 @@ public static class ShareKeyService
             }
 
             await viewModel.ShareFiles.ExecuteAsync(null);
+            fileOperationViewModel.Recipients = null;
             return true;
         }
         catch (Exception ex)

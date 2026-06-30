@@ -194,10 +194,15 @@ public class ShareKeyViewModel : ViewModelBase
         SyncPopup = true;
     }
 
-    public void CloseShareKeyPopUp()
+    public void ExitShareKeyWithReset()
     {
         KeySharingUserEmail = "";
         SelectedFilesOrFolders = new List<string>();
+        CloseShareKeyPopUp();
+    }
+
+    public void CloseShareKeyPopUp()
+    {
         CloseSyncPopup();
         PageResult = DialogResult.Cancel;
         LogOnViewModel.ShareKeyDialog.Close();
