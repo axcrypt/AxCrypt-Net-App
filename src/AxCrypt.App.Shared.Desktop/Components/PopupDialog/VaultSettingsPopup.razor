@@ -157,7 +157,7 @@
         if (string.IsNullOrEmpty(VaultSettingsViewModel.VaultEncryptDataPath) || !New<IDataContainer>(VaultSettingsViewModel.VaultEncryptDataPath).IsAvailable)
         {
             await New<IPopup>().ShowAsync(PopupButtons.Ok, Texts.WarningTitle, Texts.InvalidVaultSetting);
-            VaultSettingsViewModel.VaultEncryptDataPath = "";
+            VaultSettingsViewModel.VaultEncryptDataPath = New<UserSettings>().VaultEncryptDataPath;
             return;
         }
 
