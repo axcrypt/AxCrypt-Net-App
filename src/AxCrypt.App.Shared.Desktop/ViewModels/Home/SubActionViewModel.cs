@@ -178,7 +178,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             _mainViewModel.OpenSelectedFolder.Execute(_mainViewModel.SelectedWatchedFolders.First());
         }
 
-        public async void RandomRenameAsync(EventArgs e)
+        public async Task RandomRenameAsync(EventArgs e)
         {
             await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) =>
             {
@@ -258,7 +258,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             }, null!, e);
         }
 
-        public async void SecureWipeFiles(EventArgs e)
+        public async Task SecureWipeFiles(EventArgs e)
         {
             await PremiumFeature_ClickAsync(LicenseCapability.SecureWipe, async (ss, ee) =>
             {
@@ -321,7 +321,7 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels.Home
             }, null!, e);
         }
 
-        public async void EncryptionUpgrade(EventArgs e)
+        public async Task EncryptionUpgrade(EventArgs e)
         {
             await _fileOperationViewModel!.AsyncEncryptionUpgrade.ExecuteAsync(null!);
         }

@@ -281,7 +281,7 @@ public class AppSettingsViewModel : ViewModelBase
         New<InactivitySignOut>().RestartInactivityTimer();
     }
 
-    public async void RestoreRename(EventArgs args)
+    public async Task RestoreRename(EventArgs args)
     {
         await PremiumFeature_ClickAsync(LicenseCapability.RandomRename, async (ss, ee) => { await _fileOperationViewModel!.RestoreRandomRenameFiles.ExecuteAsync(null!); }, null!, args);
     }
@@ -582,17 +582,17 @@ public class AppSettingsViewModel : ViewModelBase
         ShowManageAxCryptID = false;
     }
 
-    public async void OpenBrokenFiles()
+    public async Task OpenBrokenFiles()
     {
         await _fileOperationViewModel!.TryBrokenFiles.ExecuteAsync(null!);
     }
 
-    public async void VerifyAxCryptFiles()
+    public async Task VerifyAxCryptFiles()
     {
         await _fileOperationViewModel!.VerifyFiles.ExecuteAsync(null!);
     }
 
-    public async void AxCryptFileFormatCheck()
+    public async Task AxCryptFileFormatCheck()
     {
         await _fileOperationViewModel!.IntegrityCheckFiles.ExecuteAsync(null!);
     }

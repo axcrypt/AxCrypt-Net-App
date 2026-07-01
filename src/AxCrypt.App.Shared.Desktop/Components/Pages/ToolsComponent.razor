@@ -320,7 +320,8 @@
                 @foreach (ToolItem tool in group.Tools)
                 {
                     <button class="tool-card @(ActiveTool?.Id == tool.Id ? "tool-card--active" : "") @(tool.IsDanger ? "tool-card--danger" : "")"
-                            @onclick="async (e) => await SelectTool(e, tool)">
+                            disabled="@_guard.IsProcessing"
+                            @onclick="async (e) => await OnSelectTool(e, tool)">
                         <div class="tc-header">
                             <span class="tc-icon @tool.IconBg">
                                 <img src="" class="@tool.IconSvg" title="@tool.IconSvg" />
@@ -475,7 +476,7 @@
 
         if (target != null)
         {
-            await SelectTool(new Microsoft.AspNetCore.Components.Web.MouseEventArgs(), target);
+            await OnSelectTool(new Microsoft.AspNetCore.Components.Web.MouseEventArgs(), target);
         }
     }
 
@@ -535,6 +536,11 @@
         InviteEmail = string.Empty; StateHasChanged();
     }
 
+    private readonly OperationGuard _guard = new();
+
+    private Task OnSelectTool(EventArgs e, ToolItem tool) =>
+        _guard.RunAsync(() => SelectTool(e, tool), () => InvokeAsync(StateHasChanged));
+
     private async Task SelectTool(EventArgs e, ToolItem tool)
     {
         //ActiveTool = ActiveTool?.Id == tool.Id ? null : tool;
@@ -569,15 +575,15 @@
                 break;
 
             case "debug-trybrokenfile":
-                appSettingsViewModel.OpenBrokenFiles();
+                await appSettingsViewModel.OpenBrokenFiles();
                 break;
 
             case "debug-verifyfiletool":
-                appSettingsViewModel.VerifyAxCryptFiles();
+                await appSettingsViewModel.VerifyAxCryptFiles();
                 break;
 
             case "debug-checktools":
-                appSettingsViewModel.AxCryptFileFormatCheck();
+                await appSettingsViewModel.AxCryptFileFormatCheck();
                 break;
 
             case "debug-reportsnapshot":
@@ -591,7 +597,7 @@
                     return;
                 }
 
-                subActionModel.EncryptionUpgrade(e);
+                await subActionModel.EncryptionUpgrade(e);
                 break;
 
             case "anon-rename":
@@ -608,7 +614,7 @@
                     return;
                 }
 
-                subActionModel.RandomRenameAsync(e);
+                await subActionModel.RandomRenameAsync(e);
                 break;
 
             case "secure-delete":
@@ -625,7 +631,7 @@
                     return;
                 }
 
-                subActionModel.SecureWipeFiles(e);
+                await subActionModel.SecureWipeFiles(e);
                 break;
 
             case "restore-rename":
@@ -635,7 +641,7 @@
                     return;
                 }
 
-                appSettingsViewModel.RestoreRename(e);
+                await appSettingsViewModel.RestoreRename(e);
                 break;
 
             case "import-public-key":
