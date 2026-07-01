@@ -1,13 +1,13 @@
 using AxCrypt.Abstractions;
-using AxCrypt.Api.Model;
+using AxCrypt.App.Entitlement.Contracts;
 using AxCrypt.App.Entitlement.Services;
 using AxCrypt.App.Shared.Desktop;
 using AxCrypt.App.Shared.Desktop.Code;
 using AxCrypt.App.Shared.Desktop.Services;
-using AxCrypt.App.Shared.Services;
-using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Helpers;
 using AxCrypt.App.Shared.Models;
+using AxCrypt.App.Shared.Services;
+using AxCrypt.App.Shared.Services.Interface;
 using AxCrypt.App.Shared.Utility;
 using AxCrypt.App.Shared.ViewModels;
 using AxCrypt.App.Windows.Infrastructure;
@@ -450,7 +450,11 @@ public partial class App : Application
             return;
         }
 
-        await _fileOperationViewModel.EncryptFiles.ExecuteAsync(files.Take(availableCount).ToList());
+        await AxCServiceProvider.GetService<BatchFileOperationService>().RunAsync(
+            files.Take(availableCount).ToList(),
+            async (path) => await _fileOperationViewModel.EncryptFiles.ExecuteAsync(new[] { path }),
+            "Encrypted",
+            FeatureKey.FileEncryption);
     }
 
     private async Task PremiumFeatureActionAsync(LicenseCapability requiredCapability, Func<Task> realHandler)
