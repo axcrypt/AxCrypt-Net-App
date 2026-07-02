@@ -359,6 +359,12 @@
   <data name="ActivateMailBodyManualLinkPlainText" xml:space="preserve">
     <value>수동으로 인증하실 경우, {0}로 가셔서 {1}와 인증 코드 {2}를 입력해주세요.</value>
   </data>
+  <data name="ActivateMailBodyText1" xml:space="preserve">
+    <value>일회성 코드</value>
+  </data>
+  <data name="ActivateMailBodyText2" xml:space="preserve">
+    <value>새 코드를 요청할 때까지 유효합니다</value>
+  </data>
   <data name="ActivateMailBodyTitle" xml:space="preserve">
     <value>안녕하세요, AxCrypt에 오신것을 환영합니다!</value>
   </data>
@@ -688,9 +694,6 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
   <data name="AndMoreText" xml:space="preserve">
     <value>... 그리고 그 외</value>
   </data>
-  <data name="AndroidDownloadLinkTooltip" xml:space="preserve">
-    <value>이동 중에도 파일을 안전하게 열고, 접근하며, 잠금 해제할 수 있습니다. 안드로이드 7.0 이상 이 필요합니다.</value>
-  </data>
   <data name="AndroidIosTitle" xml:space="preserve">
     <value>(안드로이드/iOS)</value>
   </data>
@@ -732,7 +735,7 @@ AxCrypt ID 이메일 인증의 링크 클릭이 작동하지 않았습니다. (�
     <value>누구든지</value>
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
-    <value>AxCrypt ID 확인 [ {0} ]</value>
+    <value>AxCrypt ID 확인 </value>
   </data>
   <data name="AppConfigurationDescription" xml:space="preserve">
     <value>데이터 경로, 캐시 위치, 그리고 리셋 기본값</value>
@@ -17666,128 +17669,272 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
   <data name="DoubleClickToOpenToolTip" xml:space="preserve">
     <value>더블클릭해서 열기. 필요시 비밀번호작성을 요구할수 있습니다.</value>
   </data>
-  <data name="DownloadAsTxtButton" xml:space="preserve">
-    <value>다운로드 as.TXT</value>
+  <data name="DownloadAndroidLabel" xml:space="preserve">
+    <value>안드로이드</value>
   </data>
-  <data name="DownloadAxcrypt2LinkLabel" xml:space="preserve">
-    <value>AxCrypt 2 다운로드</value>
+  <data name="DownloadAndroidRequirement" xml:space="preserve">
+    <value>안드로이드 7.0+</value>
   </data>
-  <data name="DownloadAxCryptAppPrompt" xml:space="preserve">
-    <value>AxCrypt 앱 다운로드</value>
+  <data name="DownloadBenefitCloudDriveEncryption" xml:space="preserve">
+    <value>클라우드 드라이브 암호화</value>
   </data>
-  <data name="DownloadAxcryptDescription" xml:space="preserve">
-    <value>데스크톱 또는 모바일용 AxCrypt를 다운로드하고 암호화 세계로 놀라운 여정을 시작하세요.</value>
+  <data name="DownloadBenefitEasyToUse" xml:space="preserve">
+    <value>사용 편의성</value>
   </data>
-  <data name="DownloadAxcryptLatestFeatures1" xml:space="preserve">
-    <value>AxCrypt 암호화에는 백도어가 없습니다. 비밀번호가 없다면 파일이 손실될 수 있습니다. 절대로 비밀번호를 분실하지 마세요!  암호화 여부에 관계없이 중요한 파일은 항상 백업해 두세요..</value>
+  <data name="DownloadBenefitStrongEncryption" xml:space="preserve">
+    <value>강한 암호화 (AES-256)</value>
   </data>
-  <data name="DownloadAxcryptLatestFeatures2" xml:space="preserve">
-    <value>이것은 AxCrypt의 공식 다운로드 사이트입니다. &lt;a class="premium-font" href="/information/cryptographic-hashes-of-files/"&gt;SHA256 해시를 여기서 확인하세요&lt;/a&gt;.</value>
+  <data name="DownloadBenefitZeroKnowledgeSecurity" xml:space="preserve">
+    <value>제로 지식 보안</value>
   </data>
-  <data name="DownloadAxcryptLatestFeatures3" xml:space="preserve">
-    <value>AxCrypt 2를 설치하고 오래된 파일을 열면 이러한 파일을 더 이상 AxCrypt 1로 열 수 없습니다.</value>
+  <data name="DownloadBusinessFeatureAuditLogs" xml:space="preserve">
+    <value>감사 기록 및 보고</value>
   </data>
-  <data name="DownloadEncryptedTextAsTxtTooltipText" xml:space="preserve">
-    <value>암호화된 텍스트를 txt 파일로 다운로드하세요</value>
+  <data name="DownloadBusinessFeatureCentralizedKeys" xml:space="preserve">
+    <value>중앙 집중식 키 관리</value>
   </data>
-  <data name="DownloadHeroHeadingMac" xml:space="preserve">
-    <value>AxCrypt의 macOS 버전</value>
+  <data name="DownloadBusinessFeatureCompliance" xml:space="preserve">
+    <value>HIPAA/GDPR/NIS2 준수 의식</value>
   </data>
-  <data name="DownloadHeroHeadingWindows" xml:space="preserve">
-    <value>윈도우를 위한 AxCrypt</value>
+  <data name="DownloadBusinessFeatureTeamManagement" xml:space="preserve">
+    <value>팀 관리 및 역할</value>
   </data>
-  <data name="DownloadHeroHeadingWindowsPortable" xml:space="preserve">
-    <value>Windows에 적합한 AxCrypt의 standalone/portable 버전</value>
+  <data name="DownloadDetectedAndroidOptionSuggestion" xml:space="preserve">
+    <value>구글 플레이에서 안드로이드 앱을 받아보세요</value>
   </data>
-  <data name="DownloadHeroListDoubleClick" xml:space="preserve">
-    <value>두 번 클릭 통합으로 보안 없이 파일 작업을 할 수 있는 만큼 보안 파일을 쉽게 열고 편집하고 저장할 수 있습니다.</value>
+  <data name="DownloadDetectedButtonPrefix" xml:space="preserve">
+    <value>다운로드</value>
   </data>
-  <data name="DownloadHeroListMultilingualSupport" xml:space="preserve">
-    <value>다양한 언어(영어, 네덜란드어, 프랑스어, 독일어, 이탈리아어, 한국어, 포르투갈어, 러시아어, 스페인어, 스웨덴어, 터키어, 폴란드어) 서비스를 제공합니다. </value>
+  <data name="DownloadDetectedDefaultOptionSuggestion" xml:space="preserve">
+    <value>화살표를 사용해 다른 다운로드 옵션을 선택하세요</value>
   </data>
-  <data name="DownloadHeroListOpenSecured" xml:space="preserve">
-    <value>모바일 장치에서 보안 파일을 열어보세요. 아래 정보를 참고하세요.</value>
+  <data name="DownloadDetectedIosOptionSuggestion" xml:space="preserve">
+    <value>iOS 앱을 앱 스토어에서 받아보세요</value>
   </data>
-  <data name="DownloadHeroListRightClick" xml:space="preserve">
-    <value>윈도우스를 실행하고 바우스 오른쪽 버튼을 클릭하면 가장 쉽게 파일을 보호할 수 있습니다.</value>
+  <data name="DownloadDetectedLinuxDescription" xml:space="preserve">
+    <value>Ubuntu / Debian / Red Hat</value>
   </data>
-  <data name="DownloadHeroListSecureAny" xml:space="preserve">
-    <value>강력한 암호화를 이용하여 파일의 숫자 정보를 보호하세요.</value>
+  <data name="DownloadDetectedLinuxOptionSuggestion" xml:space="preserve">
+    <value>Ubuntu를 추천합니다; RedHat은 화살표 메뉴에 있습니다</value>
   </data>
-  <data name="DownloadHeroListSecuredFolders" xml:space="preserve">
-    <value>보안 폴더는 필요에 따라 자동으로 파일을 보호합니다.</value>
+  <data name="DownloadDetectedMacDescription" xml:space="preserve">
+    <value>애플 실리콘과 인텔</value>
   </data>
-  <data name="DownloadHeroListShareKeys" xml:space="preserve">
-    <value>다른 사용자와 key를 공유하여 자신의 암호로 다른 AxCrypt 사용자가 보안 파일을 열 수 있도록 허용하세요.</value>
+  <data name="DownloadDetectedMacOptionSuggestion" xml:space="preserve">
+    <value>화살표를 사용해 애플 실리콘 또는 인텔을 선택하세요</value>
   </data>
-  <data name="DownloadInformationButtonLabel" xml:space="preserve">
-    <value>릴리즈 노트 읽기</value>
+  <data name="DownloadDetectedOptionsAriaLabel" xml:space="preserve">
+    <value>다운로드 옵션 표시</value>
   </data>
-  <data name="DownloadInformationListKeepInMind" xml:space="preserve">
-    <value>AxCrypt 2를 설치하고 이전 파일을 열면 AxCrypt 1을 통해 더이상 파일을 열 수 없습니다.</value>
+  <data name="DownloadDetectedPlatformLabel" xml:space="preserve">
+    <value>탐지 플랫폼</value>
   </data>
-  <data name="DownloadInformationListNoBackdoors" xml:space="preserve">
-    <value>AxCrypt는 백도어가 없는 암호화 서비스를 제공합니다. 암호가 없으면 파일이 손실되오니 암호를 꼭 기억하세요. 또한, 암호화가 되든 안 되든 중요한 파일의 적절한 백업을 항상 유지하세요.</value>
+  <data name="DownloadDetectedRecommendedDevice" xml:space="preserve">
+    <value>이 기기에 추천</value>
   </data>
-  <data name="DownloadInformationListOfficialDownload" xml:space="preserve">
-    <value>이 사이트는 AxCrypt의 공식적인 다운로드를 제공합니다. SHA256 hash &lt;a href="/information/cryptographic-hashes-of-files"&gt;를 살펴봐주세요&lt;/a&gt;.</value>
+  <data name="DownloadDetectedWindowsDescription" xml:space="preserve">
+    <value>윈도우 11 / 10</value>
   </data>
-  <data name="DownloadInformationSubheading" xml:space="preserve">
-    <value>최근 버전이 궁금하시면 &lt;a href='/information/release-notes'&gt;release notes&lt;/a&gt;을 참고해주세요.</value>
+  <data name="DownloadDetectedWindowsOptionSuggestion" xml:space="preserve">
+    <value>관리자 또는 IT 설정이 필요하신가요? 화살표에서 MSI를 선택하세요</value>
+  </data>
+  <data name="DownloadHelpButton" xml:space="preserve">
+    <value>도움말 센터 방문</value>
+  </data>
+  <data name="DownloadHelpContactSupportSubtitle" xml:space="preserve">
+    <value>저희 지원팀의 도움을 받아보세요</value>
+  </data>
+  <data name="DownloadHelpContactSupportTitle" xml:space="preserve">
+    <value>지원 담당자에게 연락하세요</value>
+  </data>
+  <data name="DownloadHelpDescription" xml:space="preserve">
+    <value>저희는 AxCrypt를 설치하고 설정하며 최대한 활용할 수 있도록 도와드리겠습니다.</value>
+  </data>
+  <data name="DownloadHelpFaqSubtitle" xml:space="preserve">
+    <value>자주 묻는 질문에 대한 답을 찾기</value>
+  </data>
+  <data name="DownloadHelpFaqTitle" xml:space="preserve">
+    <value>자주 묻는 질문</value>
+  </data>
+  <data name="DownloadHelpInstallationGuideSubtitle" xml:space="preserve">
+    <value>단계별 설정 지침</value>
+  </data>
+  <data name="DownloadHelpInstallationGuideTitle" xml:space="preserve">
+    <value>설치 가이드</value>
+  </data>
+  <data name="DownloadHelpTitle" xml:space="preserve">
+    <value>도움이 필요하신가요?</value>
+  </data>
+  <data name="DownloadHelpUserDocumentationSubtitle" xml:space="preserve">
+    <value>AxCrypt 사용법을 배우기</value>
+  </data>
+  <data name="DownloadHelpUserDocumentationTitle" xml:space="preserve">
+    <value>사용자 문서</value>
+  </data>
+  <data name="DownloadHeroBrandName" xml:space="preserve">
+    <value>액스크립트</value>
+  </data>
+  <data name="DownloadHeroDescriptionLine1" xml:space="preserve">
+    <value>파일을 안전하게 보호하고 개인정보를 보호하세요.</value>
+  </data>
+  <data name="DownloadHeroDescriptionLine2" xml:space="preserve">
+    <value>무료로 사용할 수 있습니다. 시작하기 쉽습니다.</value>
+  </data>
+  <data name="DownloadHeroTitleAction" xml:space="preserve">
+    <value>다운로드</value>
+  </data>
+  <data name="DownloadHeroTitleLine1" xml:space="preserve">
+    <value>파일 암호화</value>
+  </data>
+  <data name="DownloadHeroTitleLine2" xml:space="preserve">
+    <value>소프트웨어</value>
+  </data>
+  <data name="DownloadIosLabel" xml:space="preserve">
+    <value>iOS</value>
+  </data>
+  <data name="DownloadIosRequirement" xml:space="preserve">
+    <value>iOS 16.4+</value>
+  </data>
+  <data name="DownloadLatestVersionLabel" xml:space="preserve">
+    <value>최신 버전</value>
+  </data>
+  <data name="DownloadLegacyDownloadsButton" xml:space="preserve">
+    <value>레거시 다운로드 보기</value>
+  </data>
+  <data name="DownloadLegacyDownloadsDescription" xml:space="preserve">
+    <value>이전 버전 및 이전 릴리스 접근</value>
+  </data>
+  <data name="DownloadLegacyDownloadsTitle" xml:space="preserve">
+    <value>레거시 다운로드</value>
   </data>
   <data name="DownloadLinkLabel" xml:space="preserve">
     <value>다운로드</value>
   </data>
-  <data name="DownloadMobileBodyText" xml:space="preserve">
-    <value>&lt;p&gt;언제 어디서나 파일들을 암호화하고 해제하십시오. 모바일 앱은 가장 보편적인 구글드라이브와 드롭박스 등의 클라우드 스토리지 서비스를 지원합니다. (타 서비스 추가 예정)&lt;/p&gt;&lt;p&gt;당신의 보안 파일 또는 공유된 파일은 어느 플랫폼에서든지 구독하지 않고도 볼 수 있습니다. 현재 모바일도 포함입니다! &lt;/p&gt;&lt;p&gt;더 보시기를 원하시면 &lt;a href='#'&gt;여기&lt;/a&gt;&lt;/p&gt;</value>
+  <data name="DownloadMainGridAriaLabel" xml:space="preserve">
+    <value>다운로드</value>
   </data>
-  <data name="DownloadMobileBodyText1" xml:space="preserve">
-    <value>언제 어디서나 파일을 암호화하고 해제하세요. 모바일 앱은 구글드라이브 또는 드롭박스 등의 가장 일반적인 클라우드 저장소를 지원합니다 (그 외 클라우드 추후 지원 예정).</value>
+  <data name="DownloadMobileAppsNote" xml:space="preserve">
+    <value>구글 플레이와 앱 스토어</value>
   </data>
-  <data name="DownloadMobileBodyText2" xml:space="preserve">
-    <value>당신의 기존 보안된 파일이나 공유된 파일은 구독과는 상관없이 언제 어느 플랫폼에서든지 볼 수 있으며, 현재는 모바일 기기를 포함하고 있습니다!</value>
-  </data>
-  <data name="DownloadMobileBodyText3" xml:space="preserve">
-    <value>더보기 &lt;a href={url}&gt;클릭&lt;/a&gt;</value>
-  </data>
-  <data name="DownloadMobileHeading" xml:space="preserve">
-    <value>AxCrypt 모바일</value>
-  </data>
-  <data name="DownloadNavHeading" xml:space="preserve">
-    <value>다른 플랫폼</value>
+  <data name="DownloadMobileAppsTitle" xml:space="preserve">
+    <value>모바일 앱</value>
   </data>
   <data name="DownloadNowText" xml:space="preserve">
     <value>지금 다운로드</value>
   </data>
-  <data name="DownloadpageHeadingTitle" xml:space="preserve">
-    <value>파일 보안 은 쉬워야 합니다.</value>
+  <data name="DownloadOtherBetaDownloadsSubtitle" xml:space="preserve">
+    <value>최신 미리보기 빌드를 사용해 보세요</value>
   </data>
-  <data name="DownloadPlainText" xml:space="preserve">
-    <value>텍스트를 txt 파일로 다운로드하세요</value>
+  <data name="DownloadOtherBetaDownloadsTitle" xml:space="preserve">
+    <value>베타 다운로드</value>
   </data>
-  <data name="DownloadPrimiumPlusHeading" xml:space="preserve">
-    <value>&lt;span&gt;프리미엄&lt;/span&gt; 플러스:</value>
+  <data name="DownloadOtherBrowserExtensionTitle" xml:space="preserve">
+    <value>브라우저 확장 프로그램 (베타)</value>
   </data>
-  <data name="DownloadReleaseNotes" xml:space="preserve">
-    <value>릴리즈 노트 보기</value>
+  <data name="DownloadOtherCliSubtitle" xml:space="preserve">
+    <value>자동화를 위한 강력한 CLI</value>
   </data>
-  <data name="DownloadsubHeading" xml:space="preserve">
-    <value>모든 플랫폼.</value>
+  <data name="DownloadOtherCliTitle" xml:space="preserve">
+    <value>명령줄 인터페이스(CLI)</value>
   </data>
-  <data name="DownloadSuccessfullyNotification" xml:space="preserve">
-    <value>귀하의 파일이 성공적으로 다운로드되었습니다. {0}</value>
+  <data name="DownloadOtherComingSoonSubtitle" xml:space="preserve">
+    <value>개봉박두</value>
+  </data>
+  <data name="DownloadOtherDownloadsTitle" xml:space="preserve">
+    <value>기타 다운로드</value>
+  </data>
+  <data name="DownloadOtherSourceCodeSubtitle" xml:space="preserve">
+    <value>기술 적 세부 사항</value>
+  </data>
+  <data name="DownloadOtherSourceCodeTitle" xml:space="preserve">
+    <value>소스 코드</value>
+  </data>
+  <data name="DownloadPlanAxCryptLabel" xml:space="preserve">
+    <value>액스크립트</value>
+  </data>
+  <data name="DownloadPlanBusinessCta" xml:space="preserve">
+    <value>비즈니스 프리 시도</value>
+  </data>
+  <data name="DownloadPlanBusinessDescription" xml:space="preserve">
+    <value>팀과 조직을 위한 강력한 암호화 및 키 관리.</value>
+  </data>
+  <data name="DownloadPlanBusinessName" xml:space="preserve">
+    <value>사업</value>
+  </data>
+  <data name="DownloadPlanLearnMore" xml:space="preserve">
+    <value>더 알아보세요</value>
+  </data>
+  <data name="DownloadPlanPremiumCta" xml:space="preserve">
+    <value>프리미엄 무료 체험</value>
+  </data>
+  <data name="DownloadPlanPremiumDescription" xml:space="preserve">
+    <value>안전한 공유, 클라우드 통합 등 고급 기능을 활용하세요.</value>
+  </data>
+  <data name="DownloadPlanPremiumName" xml:space="preserve">
+    <value>프리미엄</value>
+  </data>
+  <data name="DownloadPlatformAllPlatformsTitle" xml:space="preserve">
+    <value>모든 승강장</value>
+  </data>
+  <data name="DownloadPlatformDownloadAriaPrefix" xml:space="preserve">
+    <value>다운로드</value>
+  </data>
+  <data name="DownloadPlatformDownloadButton" xml:space="preserve">
+    <value>다운로드</value>
+  </data>
+  <data name="DownloadPremiumFeatureCloudStorage" xml:space="preserve">
+    <value>클라우드 스토리지 통합</value>
+  </data>
+  <data name="DownloadPremiumFeatureMore" xml:space="preserve">
+    <value>그리고 그 외에도 많은 것을 말합니다</value>
+  </data>
+  <data name="DownloadPremiumFeaturePrioritySupport" xml:space="preserve">
+    <value>우선 지원</value>
+  </data>
+  <data name="DownloadPremiumFeatureSecureSharing" xml:space="preserve">
+    <value>보안 파일 공유</value>
+  </data>
+  <data name="DownloadResourceReleaseNotesSubtitle" xml:space="preserve">
+    <value>새로운 소식을 확인해 보세요</value>
+  </data>
+  <data name="DownloadResourceReleaseNotesTitle" xml:space="preserve">
+    <value>출시 노트</value>
+  </data>
+  <data name="DownloadResourcesAriaLabel" xml:space="preserve">
+    <value>자료 다운로드</value>
+  </data>
+  <data name="DownloadResourceSecuritySubtitle" xml:space="preserve">
+    <value>보안에 대해 알아보세요</value>
+  </data>
+  <data name="DownloadResourceSecurityTitle" xml:space="preserve">
+    <value>보안 정보</value>
+  </data>
+  <data name="DownloadResourceSha256Subtitle" xml:space="preserve">
+    <value>다운로드 확인</value>
+  </data>
+  <data name="DownloadResourceSha256Title" xml:space="preserve">
+    <value>SHA256 해시</value>
+  </data>
+  <data name="DownloadResourceSystemRequirementsSubtitle" xml:space="preserve">
+    <value>체크 요건</value>
+  </data>
+  <data name="DownloadResourceSystemRequirementsTitle" xml:space="preserve">
+    <value>시스템 요구사항</value>
+  </data>
+  <data name="DownloadSeeOptionsLabel" xml:space="preserve">
+    <value>옵션 보기</value>
   </data>
   <data name="DownloadtheGuide" xml:space="preserve">
     <value>가이드 다운로드</value>
   </data>
-  <data name="DownloadTryCtaHeading" xml:space="preserve">
-    <value>14일 무료 구독을 이용해 보세요...</value>
+  <data name="DownloadTrustNote" xml:space="preserve">
+    <value>전 세계 수백만 명이 신뢰하여 파일을 비공개로 안전하게 지키도록 합니다.</value>
   </data>
-  <data name="DownloadTryMobileSubscription" xml:space="preserve">
-    <value>당신의 안드로이드 및 아이폰, 또는 타블렛 피시를 사용하여 언제 어디서나 파일 암호화 혹은 해제 작업을 할 수 있습니다. AxCrypt 모바일 암호화 작업은 안드로이드와 iOS 환경 모두를 지원합니다. 그리고 AxCrypt의 구글드라이브 파일 암호화 작업 또한  iOS와 안드로이드 환경 모두를 지원합니다. 현재 로컬 저장소에서의 암호화 작업은 안드로이드 환경만을 지원합니다. 아이클라우드, 드롭박스, 원드라이브 등의 다른 클라우드 서비스는 추후 출시되는 버전에서 지원될 예정입니다. </value>
+  <data name="DownloadVersionPrefix" xml:space="preserve">
+    <value>버전</value>
   </data>
-  <data name="DownloadViewerPlusHeading" xml:space="preserve">
-    <value>&lt;span&gt;암호 관리자&lt;/span&gt; 플러스:</value>
+  <data name="DownloadWindowsX64Title" xml:space="preserve">
+    <value>윈도우 (x64)</value>
   </data>
   <data name="DutchLanguageSelection" xml:space="preserve">
     <value>네덜란드어(Dutch)</value>
@@ -18361,10 +18508,10 @@ You have been invited by &lt;b&gt;{0}&lt;/b&gt;. Note, this business has the fea
     <value>AxCrypt 1.x과 2.x의 차이점은 무엇인가요?</value>
   </data>
   <data name="FaqDifference1&amp;2Answer1" xml:space="preserve">
-    <value>AxCrypt 1.x는 레거시 버전입니다. 더 이상 그것에 대한 지원은 없습니다.  AxCrypt 2.x을 기능 향상을 위해 노력하며, 1.x를 사용하는 것은 절대 권장하지 않습니다. 최신 버전의  AxCrypt을 다운로드 하는 것을 추천합니다.</value>
+    <value>AxCrypt 1.x는 구식이며 더 이상 지원되지 않습니다. AxCrypt 2는 2024년에 유지보수가 중단된 레거시 데스크톱 버전이기도 합니다. 신규 설치와 일상 사용에는 현재 출시된 AxCrypt 3를 추천하며, 여기에서 다운로드할 수 있습니다</value>
   </data>
   <data name="FaqDifference1&amp;2Answer2" xml:space="preserve">
-    <value>legacy 다운로드에 대한 특정 요구가 있는 사용자의 경우, 이곳에서 &lt;a href='/information/legacy-downloads/'&gt;&lt;/a&gt;.</value>
+    <value>특정 호환성, 아카이브 복구 또는 마이그레이션 요구사항이 있다면, 여기에서&lt;/a&gt; 레거시 다운로드를 이용할 수 있습니다.</value>
   </data>
   <data name="FaqDifferenceStandaloneInstaller" xml:space="preserve">
     <value>standalone 버전과 installer 버전의 차이점은 무엇인가요?</value>
@@ -22276,7 +22423,7 @@ AxCrypt ID 로그인시 사용한 이메일을 통해 수신자의 신원확인�
     <value>떠나기</value>
   </data>
   <data name="Legacy-verify-Download-Answer" xml:space="preserve">
-    <value>대부분의 설치 관리자 및 실행 파일은 'Axantum Software AB' 또는 'AxCrypt AB'에서 Authenticode로 디지털 서명됩니다. 다운로드 후 파일을 마우스 오른쪽 단추로 클릭하고 '속성'을 선택하여 서명을 확인합니다. | 디지털 서명. 그런 다음 서명을 두 번 클릭하고 '이 디지털 서명은 정상'임을 확인합니다.</value>
+    <value>AxCrypt 설치 프로그램과 실행 파일은 'AxCrypt AB'에 의해 Authenticode로 디지털 서명됩니다. 다운로드 후에는 파일을 우클릭하여 '속성 | 디지털 서명'. 그 후 서명을 더블 클릭하고 '이 디지털 서명은 괜찮습니다'가 표시되는지 확인하세요.</value>
   </data>
   <data name="Legacy-verify-Download-Question" xml:space="preserve">
     <value>&lt;span&gt;다운로드를 확인하는 방법&lt;/span&gt;</value>
@@ -22288,93 +22435,291 @@ AxCrypt ID 로그인시 사용한 이메일을 통해 수신자의 신원확인�
     <value>AxCrypt Legacy는 사용자에게 안전한 파일 암호화를 제공하도록 설계되었으며 간단한 암호 시스템을 통해 안정적이고 효과적인 보호 기능을 제공합니다. 이는 개인 및 전문 사용자 모두가 파일 암호화에 액세스할 수 있도록 하는 데 중요한 역할을 하여 승인된 개인만 암호화된 데이터에 액세스할 수 있도록 했습니다. 사용자 친화적인 인터페이스를 통해 많은 사람들이 암호화 기술에 익숙하지 않은 경우에도 중요한 파일을 쉽게 보호할 수 있었습니다.</value>
   </data>
   <data name="Legacy-Version-Point2" xml:space="preserve">
-    <value>레거시 버전에는 시대적 요구 사항을 충족하는 필수 AES 암호화 기능이 도입되어 사용자가 여러 암호화 작업을 효율적으로 수행할 수 있습니다. Axcrypt Legacy는 미래 발전을 위한 발판을 마련함으로써 고급 암호화에 대한 우리의 약속을 보여주었습니다. AxCrypt Legacy는 더 이상 적극적으로 지원되지 않지만 이를 통해 암호화된 파일은 안전하게 유지되며 AxCrypt 2를 사용하여 계속 암호 해독할 수 있으므로 중요한 데이터에 대한 지속적인 액세스가 보장됩니다. 우리는 AxCrypt Legacy가 개발에서 수행한 중요한 역할에 감사하며 사용자가 AxCrypt 2로 전환하여 향상된 AES-256 파일 암호화 및 기타 최신 기능의 이점을 누릴 수 있도록 권장합니다.</value>
+    <value>기존 버전은 당시로서는 중요한 파일 암호화 기능을 도입했으나, 현재는 데스크톱 사용을 위해 유지보수나 지원이 이루어지지 않습니다. AxCrypt 3는 현재 AES-256 암호화, 향상된 성능, 고급 기능, 그리고 구형 AxCrypt 암호화 파일 지원에 대한 권장 릴리스입니다.</value>
   </data>
   <data name="Legacy-Version-Point3" xml:space="preserve">
-    <value>참고: 이는 AxCrypt 레거시 다운로드입니다. 우리는 이를 보증하지 않으며 특별히 필요한 경우가 아니면 다운로드하여 사용하지 말 것을 권고합니다. AxCrypt 2로 암호화된 새 파일은 AxCrypt Legacy와 호환되지 않습니다! AxCrypt Legacy로 암호화된 파일은 AxCrypt 2로 복호화할 수 있습니다.</value>
+    <value>참고: 이 레거시 다운로드는 특정 호환성, 아카이브 복구 또는 마이그레이션 사례에만 제공됩니다. 새로운 암호화 작업과 일상 데스크톱 사용에는 AxCrypt 3를 사용하세요.</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Label" xml:space="preserve">
+    <value>아카이브</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point1" xml:space="preserve">
+    <value>구식 및 지원 없음</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point2" xml:space="preserve">
+    <value>새로운 암호화나 일상 업무에는 적합하지 않습니다</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point3" xml:space="preserve">
+    <value>제어된 아카이브 복구에만 사용됩니다</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point4" xml:space="preserve">
+    <value>AxCrypt 3는 오래된 암호화 파일을 지원합니다</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Setup1644Label" xml:space="preserve">
+    <value>1.6.4.4 구 설정</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Setup173180Label" xml:space="preserve">
+    <value>1.7.3180 XP 설정</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Setup173233Label" xml:space="preserve">
+    <value>1.7.3233 설정</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Status" xml:space="preserve">
+    <value>폐기된 아카이브</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Summary" xml:space="preserve">
+    <value>매우 오래된 윈도우 전용 다운로드를 희귀한 아카이브 접근용으로 사용합니다.</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Label" xml:space="preserve">
+    <value>레거시</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2MacPackageLabel" xml:space="preserve">
+    <value>macOS 패키지</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point1" xml:space="preserve">
+    <value>기존 AxCrypt 2 배포를 위한</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point2" xml:space="preserve">
+    <value>유지보수는 2024년에 중단되었습니다</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point3" xml:space="preserve">
+    <value>10.0.19041.0 이하의 Windows 빌드에 대한 사용</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point4" xml:space="preserve">
+    <value>가능하면 AxCrypt 3로 업그레이드하세요</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Status" xml:space="preserve">
+    <value>유지보수는 2024년에 중단되었습니다</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Summary" xml:space="preserve">
+    <value>오래된 데스크톱 환경이 아직 AxCrypt 3로 옮길 수 없을 때만 사용하세요.</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2WindowsInstallerLabel" xml:space="preserve">
+    <value>윈도우 설치 프로그램</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2WindowsPortableLabel" xml:space="preserve">
+    <value>윈도우 포터블</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3DownloadLabel" xml:space="preserve">
+    <value>AxCrypt 3 다운로드</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Label" xml:space="preserve">
+    <value>추천</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point1" xml:space="preserve">
+    <value>현재 지원되는 데스크톱 앱</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point2" xml:space="preserve">
+    <value>AES-256, 더 빠른 워크플로우와 최신 기능</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point3" xml:space="preserve">
+    <value>AxCrypt v1, v2, v3 파일을 지원합니다</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point4" xml:space="preserve">
+    <value>윈도우에는 Windows 10.0.19041.0 이상 버전이 필요합니다</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Status" xml:space="preserve">
+    <value>현재 발매</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Summary" xml:space="preserve">
+    <value>새로운 데스크톱 설치와 일상적인 파일 암호화에 가장 좋은 선택입니다.</value>
+  </data>
+  <data name="LegacyCompareDecisionArchiveDescription" xml:space="preserve">
+    <value>구식이고, 유지보수되지 않았으며, 현대 데스크톱 사용에는 지원되지 않습니다. 희귀한 아카이브 복구 사례에만 사용하세요.</value>
+  </data>
+  <data name="LegacyCompareDecisionArchiveLabel" xml:space="preserve">
+    <value>아카이브</value>
+  </data>
+  <data name="LegacyCompareDecisionArchiveTitle" xml:space="preserve">
+    <value>새 작업은 AxCrypt 1.x를 피하세요</value>
+  </data>
+  <data name="LegacyCompareDecisionCompatibilityDescription" xml:space="preserve">
+    <value>구형 데스크톱 배포, 마이그레이션 테스트, AxCrypt 3를 실행할 수 없는 시스템에 사용할 수 있습니다. AxCrypt 2의 유지보수는 2024년에 중단되었습니다.</value>
+  </data>
+  <data name="LegacyCompareDecisionCompatibilityLabel" xml:space="preserve">
+    <value>호환성</value>
+  </data>
+  <data name="LegacyCompareDecisionCompatibilityTitle" xml:space="preserve">
+    <value>AxCrypt 2는 필요할 때만 사용하세요</value>
+  </data>
+  <data name="LegacyCompareDecisionMostUsersDescription" xml:space="preserve">
+    <value>최신 데스크톱 운영체제, 더 빠른 성능, AES-256 암호화, 능동 보안 업데이트, 최신 AxCrypt 경험에 권장됩니다.</value>
+  </data>
+  <data name="LegacyCompareDecisionMostUsersLabel" xml:space="preserve">
+    <value>대부분의 사용자</value>
+  </data>
+  <data name="LegacyCompareDecisionMostUsersTitle" xml:space="preserve">
+    <value>AxCrypt 3 설치</value>
+  </data>
+  <data name="LegacyCompareIntro" xml:space="preserve">
+    <value>AxCrypt 3는 모든 신규 설치와 일상 사용에 권장되는 데스크톱 버전입니다. 레거시 다운로드는 이전 배포와의 임시 호환성, 마이그레이션 테스트, 또는 보관된 파일 접근이 필요한 사용자에게만 제공됩니다.</value>
+  </data>
+  <data name="LegacyCompareKicker" xml:space="preserve">
+    <value>버전 비교</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportAxCrypt1" xml:space="preserve">
+    <value>레거시 아카이브 시나리오</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportAxCrypt2" xml:space="preserve">
+    <value>구버전 v2 워크플로우 지원</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportAxCrypt3" xml:space="preserve">
+    <value>v1, v2, v3 파일 지원</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportLabel" xml:space="preserve">
+    <value>이전 파일 지원</value>
+  </data>
+  <data name="LegacyComparePlatformFitAxCrypt1" xml:space="preserve">
+    <value>매우 오래된 Windows 환경</value>
+  </data>
+  <data name="LegacyComparePlatformFitAxCrypt2" xml:space="preserve">
+    <value>구형 윈도우 및 macOS 배포</value>
+  </data>
+  <data name="LegacyComparePlatformFitAxCrypt3" xml:space="preserve">
+    <value>현재 Windows, macOS, Linux</value>
+  </data>
+  <data name="LegacyComparePlatformFitLabel" xml:space="preserve">
+    <value>데스크톱 플랫폼 적합성</value>
+  </data>
+  <data name="LegacyCompareQuickComparisonTitle" xml:space="preserve">
+    <value>간단한 비교</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseAxCrypt1" xml:space="preserve">
+    <value>희귀 아카이브 복구만 가능합니다</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseAxCrypt2" xml:space="preserve">
+    <value>호환성 및 마이그레이션만</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseAxCrypt3" xml:space="preserve">
+    <value>신규 설치 및 일상 데스크톱 사용</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseLabel" xml:space="preserve">
+    <value>권장 사용 방법</value>
+  </data>
+  <data name="LegacyCompareSupportStatusAxCrypt1" xml:space="preserve">
+    <value>폐기된 아카이브</value>
+  </data>
+  <data name="LegacyCompareSupportStatusAxCrypt2" xml:space="preserve">
+    <value>유지보수는 2024년에 중단되었습니다</value>
+  </data>
+  <data name="LegacyCompareSupportStatusAxCrypt3" xml:space="preserve">
+    <value>현재 유지되는 릴리스</value>
+  </data>
+  <data name="LegacyCompareSupportStatusLabel" xml:space="preserve">
+    <value>지원 상태</value>
+  </data>
+  <data name="LegacyCompareTitle" xml:space="preserve">
+    <value>올바른 AxCrypt 버전을 선택하세요</value>
   </data>
   <data name="LegacyConversionVerificationPrompt" xml:space="preserve">
     <value>파일 변환 이후에는 현재 AxCrypt 비밀번호로만 열 수 있습니다. 비밀번호를 확인하십시오.
 
 이 비밀번호를 잊지 마십시오!</value>
   </data>
-  <data name="LegacyDownloadsContent" xml:space="preserve">
-    <value>이전 버전이 필요하십니까? 이전 시스템과의 호환성을 위해 이전 AxCrypt 릴리스를 다운로드하십시오.</value>
+  <data name="LegacyDownloadsComparisonDescription" xml:space="preserve">
+    <value>지원 상태, 플랫폼 적합성, 기능 커버리지, 마이그레이션 목적, 다운로드 옵션으로 AxCrypt 3와 구형 AxCrypt 데스크톱 버전을 비교해 보세요.</value>
+  </data>
+  <data name="LegacyDownloadsComparisonTitle" xml:space="preserve">
+    <value>레거시 다운로드 비교</value>
   </data>
   <data name="LegacyDownloadsDescription" xml:space="preserve">
-    <value>레거시 AxCrypt 1.x 다운로드 입니다. &lt;strong&gt;AxCrypt 2.x로 암호화된 새 파일은 레거시 AxCrypt 1.x!&lt;/strong&gt; 레거시 AxCrypt 1.x로 암호화된 파일은 AxCrypt 2.x로 해독할 수 있습니다.</value>
+    <value>이들은 특정 호환성, 아카이브 복구 또는 마이그레이션 사례를 위한 레거시 AxCrypt 다운로드입니다. 새로운 암호화 작업에 사용하지 마세요. AxCrypt 3는 권장되는 데스크톱 버전이며 AxCrypt v1, v2, v3의 암호화된 파일을 지원합니다."</value>
   </data>
-  <data name="LegacyDownloadsHeading" xml:space="preserve">
-    <value>레거시 다운로드.</value>
+  <data name="LegacyDownloadsGuidanceKicker" xml:space="preserve">
+    <value>버전 가이드</value>
   </data>
-  <data name="LegacyDownloadsHowToVerifyHeading" xml:space="preserve">
-    <value>다운로드를 확인하는 법</value>
+  <data name="LegacyDownloadsIntro" xml:space="preserve">
+    <value>특정 데스크톱 호환성 및 마이그레이션 요구를 위해 구형 AxCrypt 버전도 제공됩니다. 신규 설치와 일상 사용을 위해 AxCrypt 3는 권장되고 적극적으로 유지보수되는 데스크톱 버전으로, 더 나은 성능, 최신 플랫폼 지원, 최신 제품 기능을 갖추고 있습니다.</value>
   </data>
-  <data name="LegacyDownloadsHowToVerifyText" xml:space="preserve">
-    <value>대부분의 설치 프로그램 및 실행 파일은 &lt;a href='http://msdn.microsoft.com/en-us/library/ms537361(v=VS.85).aspx'&gt;Authenticode&lt;/a&gt;에   ‘Axantum Software AB’이나  ‘AxCrypt AB으로 디지털 사인이 되어있습니다. 마우스 오른족 버튼을 클릭하여 다운로드 후 사인을 하고 ‘Properties | Digital Signatures을 클릭해주세요. 그런 다음 사인을 두번 클릭하고 '이 디지털 사인은 유효합니다.'라고 표시되는지 확인해주세요.</value>
-  </data>
-  <data name="LegacyDownloadsLinkLabel" xml:space="preserve">
+  <data name="LegacyDownloadsKicker" xml:space="preserve">
     <value>레거시 다운로드</value>
   </data>
-  <data name="LegacyDownloadsParagraph" xml:space="preserve">
-    <value>이전 버전이 필요하신가요? macOS용 AxCrypt의 이전 릴리스를 다운로드합니다.</value>
+  <data name="LegacyDownloadsPrimaryCta" xml:space="preserve">
+    <value>AxCrypt 3 다운로드</value>
   </data>
-  <data name="LegacyDownloadsWarning" xml:space="preserve">
-    <value>이 버전은 서비스를 더이상 지원하지 않습니다. AxCrypt 1.x는 유지되지 않으며 특별히 필요하지 않은 한 다운로드해서는 안 됩니다. 또한, 이에 대한 책임이 있습니다.</value>
+  <data name="LegacyDownloadsQuestionsKicker" xml:space="preserve">
+    <value>질문</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedBadge" xml:space="preserve">
+    <value>추천</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint1" xml:space="preserve">
+    <value>현재 데스크톱 버전</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint2" xml:space="preserve">
+    <value>더 빠르고 사용하기 쉽습니다</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint3" xml:space="preserve">
+    <value>v1, v2, v3 파일 지원</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint4" xml:space="preserve">
+    <value>고급 기능 및 보안</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedTitle" xml:space="preserve">
+    <value>신규 설치는 AxCrypt 3를 사용하세요</value>
+  </data>
+  <data name="LegacyDownloadsSafetyKicker" xml:space="preserve">
+    <value>안전 다운로드</value>
+  </data>
+  <data name="LegacyDownloadsSecondaryCta" xml:space="preserve">
+    <value>기존 버전 비교</value>
+  </data>
+  <data name="LegacyDownloadsTitle" xml:space="preserve">
+    <value>AxCrypt 레거시 다운로드</value>
   </data>
   <data name="LegacyFaq1" xml:space="preserve">
-    <value>기존 버전과 비교하여 AxCrypt 2의 새로운 기능</value>
+    <value>기존 AxCrypt 대신 무엇을 사용해야 할까요?</value>
   </data>
   <data name="LegacyFaq1Ans" xml:space="preserve">
-    <value>AxCrypt 2는 최신 인터페이스, 통합 암호 시스템 및 향상된 암호화 기능을 제공합니다. 기존 버전과 달리 간편한 로그인 프로세스와 고급 기능이 포함되어 있어 파일 관리 및 공유가 용이합니다.</value>
+    <value>새로운 데스크톱 설치와 일상 암호화 작업에는 AxCrypt 3를 사용하세요. 현재 유지 유지되는 버전으로, AES-256 암호화, 향상된 성능, 최신 플랫폼 지원, 그리고 안전한 공유, 클라우드 드라이브 보호, 비즈니스 사용을 위한 고급 기능을 갖추고 있습니다.</value>
   </data>
   <data name="LegacyFaq2" xml:space="preserve">
-    <value>AxCrypt 2는 파일 암호 해독을 어떻게 처리합니까?</value>
+    <value>AxCrypt 3가 오래된 암호화된 파일을 열 수 있나요?</value>
   </data>
   <data name="LegacyFaq2Ans" xml:space="preserve">
-    <value>AxCrypt 2에서는 단일 암호를 사용하여 모든 파일의 암호를 해독합니다. 이렇게 하면 각 파일에 다른 암호가 필요했던 기존 버전에 비해 파일 관리가 간소화됩니다.</value>
+    <value>네. AxCrypt 3는 AxCrypt v1, v2, v3의 암호화된 파일을 지원하므로 대부분의 사용자는 일상 작업을 위해 오래된 설치 프로그램을 유지하지 않고도 최신 버전으로 이동할 수 있습니다.</value>
   </data>
   <data name="LegacyFaq3" xml:space="preserve">
     <value>이전 AxCrypt 1.x를 계속 사용할 수 있습니까?</value>
   </data>
   <data name="LegacyFaq3Ans" xml:space="preserve">
-    <value>AxCrypt Legacy는 계속 사용할 수 있지만 보안 및 사용자 환경을 향상시키려면 AxCrypt 2로 업그레이드하는 것이 좋습니다. 새 버전은 Axcrypt Legacy에서 제공하는 AES-128 암호화와 달리 고급 AES-256 암호화를 제공합니다.</value>
+    <value>AxCrypt 1.x 다운로드는 희귀한 아카이브 복구 또는 호환성 사례에만 제공됩니다. 이들은 구식이고 유지보수가 되지 않으며, 새로운 암호화 작업에 권장되지 않습니다. 가능하면 AxCrypt 3를 사용하세요."</value>
   </data>
   <data name="LegacyFaq4" xml:space="preserve">
-    <value>AxCrypt 2는 어떤 운영 체제에서 사용할 수 있습니까?</value>
+    <value>어떤 운영체제가 AxCrypt 3를 사용해야 할까요?</value>
   </data>
   <data name="LegacyFaq4Ans" xml:space="preserve">
-    <value>AxCrypt 2는 Windows, macOS, iOS 및 Android를 포함한 여러 플랫폼에서 사용할 수 있습니다.</value>
+    <value>AxCrypt 3는 현재 Windows, macOS, Linux 데스크톱 환경에 권장됩니다. Windows에서는 AxCrypt 3가 Windows 10.0.19041.0 이상이어야 합니다.</value>
   </data>
   <data name="LegacyFaq5" xml:space="preserve">
-    <value>AxCrypt 2는 암호 관리를 어떻게 개선합니까?</value>
+    <value>언제 AxCrypt 2를 사용해야 하나요?</value>
   </data>
   <data name="LegacyFaq5Ans" xml:space="preserve">
-    <value>AxCrypt 2를 사용하면 암호화된 모든 파일에 강력한 단일 암호를 사용할 수 있으므로 여러 암호가 필요하지 않습니다. 이렇게 하면 파일을 더 쉽게 관리할 수 있을 뿐만 아니라 취약한 암호의 위험을 줄여 전반적인 보안을 강화할 수 있습니다.</value>
+    <value>기존 데스크톱 배포, 마이그레이션 프로젝트 또는 10.0.19041.0 이하의 윈도우 빌드가 필요할 때만 AxCrypt 2를 사용하세요. AxCrypt 2의 유지보수는 2024년에 중단되었으며, 신규 설치에 선택되어서는 안 됩니다.</value>
   </data>
   <data name="LegacyFaq6" xml:space="preserve">
-    <value>AxCrypt 2에서 자체 암호 해독이 지원됩니까?</value>
+    <value>현재 AxCrypt에서 자가 복호화가 지원되나요?</value>
   </data>
   <data name="LegacyFaq6Ans" xml:space="preserve">
-    <value>아니요, AxCrypt 2는 파일의 자체 암호 해독을 지원하지 않습니다. 이 기능은 바이러스 백신 프로그램이 스크리닝할 수 없는 악성 소프트웨어를 포함하여 강력한 암호화 정보를 포함하는 자체 해독 파일의 가능성과 같은 심각한 보안 위험으로 인해 제거되었다.</value>
+    <value>아니. 레거시 자가 복호화 파일은 실행 가능한 컨테이너가 보안 및 배포 위험을 초래할 수 있기 때문에 현대 사용에는 권장되지 않습니다. 현재 암호화 및 공유 워크플로우에는 AxCrypt 3를 사용하세요.</value>
   </data>
   <data name="LegacyFaq7" xml:space="preserve">
-    <value>AxCrypt 2는 AxCrypt 1.x에 비해 보안을 어떻게 강화합니까?</value>
+    <value>AxCrypt 3가 이전 버전에 비해 어떻게 보안을 향상시키나요?</value>
   </data>
   <data name="LegacyFaq7Ans" xml:space="preserve">
-    <value>AxCrypt 2는 강력한 AES-256 암호화 알고리즘, 통합 암호 시스템, 향상된 파일 공유 기능 등 몇 가지 향상된 보안 기능을 제공합니다. 또한 새 버전은 간소화된 로그인 프로세스와 최신 인터페이스를 통해 일반적인 보안 위험에 대한 더 나은 보호를 제공합니다.</value>
+    <value>AxCrypt 3는 최신 AES-256 암호화, 능동적 제품 지원, 최신 앱 프레임워크, 향상된 성능, 보다 사용자 친화적인 데스크톱 경험, 안전한 공유, 클라우드 드라이브 암호화, 그리고 팀과 기업을 위한 고급 기능을 제공합니다.</value>
   </data>
   <data name="LegacyFaq8" xml:space="preserve">
-    <value>AxCrypt 2로 업그레이드하면 기존 암호화된 파일에 영향을 주나요?</value>
+    <value>AxCrypt 3로 옮기면 오래된 암호화된 파일에 영향을 미칠까요?</value>
   </data>
   <data name="LegacyFaq8Ans" xml:space="preserve">
-    <value>AxCrypt 2로 업그레이드해도 기존의 암호화된 파일에는 영향을 주지 않습니다. 새 버전은 AxCrypt 1.x를 사용하여 암호화 된 파일과 완벽하게 호환되며 자동 변환 기능을 제공하여 파일을 새 시스템에 신속하게 적응시킵니다.</value>
+    <value>AxCrypt 3는 AxCrypt v1, v2, v3의 암호화된 파일을 지원합니다. 대부분의 사용자는 AxCrypt 3로 이전하면서도 이전 보호 파일에 접근할 수 있습니다.</value>
   </data>
   <data name="LegacyFaq9" xml:space="preserve">
-    <value>AxCrypt Legacy에서 AxCrypt 2로 업그레이드하는 방법</value>
+    <value>레거시 AxCrypt에서 AxCrypt 3로 어떻게 전환하나요?</value>
   </data>
   <data name="LegacyFaq9Ans" xml:space="preserve">
-    <value>AxCrypt Legacy에서 AxCrypt 2로 업그레이드하려면 기존 AxCrypt 1 설치 시 AxCrypt 2를 설치하기만 하면 됩니다. 먼저 제거할 필요가 없습니다. 피해도 없습니다.</value>
+    <value>메인 다운로드 페이지에서 AxCrypt 3를 다운로드하고 설치하세요. 특정 호환성, 아카이브 복구, 단기 마이그레이션 요구사항이 있을 때만 레거시 설치 프로그램을 유지하세요.</value>
   </data>
   <data name="LegacyOpenMessage" xml:space="preserve">
     <value>AxCrypt 2는 새로운 형식의 파일을 사용합니다.
@@ -22384,16 +22729,46 @@ AxCrypt 1.x 레거시 파일을 여실수 있습니다, 하지만 전환되어�
 AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   </data>
   <data name="LegacyType" xml:space="preserve">
-    <value>AxCrypt 레거시 대 &lt;span&gt; AxCrypt 2 &lt;/span&gt;</value>
+    <value>AxCrypt 레거시 대 AxCrypt 3 </value>
   </data>
   <data name="LegacyTypeSummary" xml:space="preserve">
-    <value>AxCrypt 2는 고급 보안 기능과 직관적인 인터페이스를 통해 파일 암호화를 재정의합니다. 데이터 보호를 강화할 뿐만 아니라 암호화 프로세스를 단순화하여 효율적이고 안정적인 보안을 위한 최고의 선택입니다.</value>
+    <value>AxCrypt 3는 현재 파일 암호화를 위한 권장 데스크톱 릴리스입니다. AES-256 암호화, 향상된 성능, 최신 플랫폼 지원, 고급 기능, 그리고 구형 AxCrypt 암호화 파일과의 호환성을 제공합니다.</value>
   </data>
   <data name="LegacyVersionBtn" xml:space="preserve">
     <value>최신 버전 받기</value>
   </data>
+  <data name="LegacyVsAxCrypt3Faq1Answer" xml:space="preserve">
+    <value>새로운 데스크톱 설치, 일상 암호화 작업, 현재 Windows, macOS, Linux 시스템, 클라우드 드라이브 워크플로우, 지속적인 보안 업데이트에 AxCrypt 3를 사용하세요. 레거시 다운로드는 기존 데스크톱 설치, 이전 배포 또는 마이그레이션 프로젝트에서 특별히 필요할 때만 사용해야 합니다.</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq1Question" xml:space="preserve">
+    <value>AxCrypt 3를 사용해야 할까요, 아니면 레거시 버전을 사용해야 할까요?</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq2Answer" xml:space="preserve">
+    <value>AxCrypt 3는 현재 유지보수되는 데스크톱 릴리스 라인입니다. 최신 앱 프레임워크를 기반으로 하며, 더 빠르고 사용자 친화적인 경험을 제공하고, 최신 Windows, macOS, Linux 버전을 지원하고, AES-256 암호화를 사용하고, 구형 AxCrypt 암호화 파일을 지원하며, 보안 공유, 클라우드 드라이브 암호화, 비즈니스 사용 및 팀 워크플로우 등 다양한 기능을 포함하고 있습니다.</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq2Question" xml:space="preserve">
+    <value>AxCrypt 3가 기존 AxCrypt보다 어떻게 더 나은가요?</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq3Answer" xml:space="preserve">
+    <value>AxCrypt 2는 기존 AxCrypt 2 데스크톱 워크플로우, 마이그레이션 테스트, 또는 AxCrypt 3를 실행할 수 없는 10.0.19041.0 이하의 Windows 빌드와의 호환성을 위해서만 다운로드하세요. AxCrypt 2 유지보수는 2024년에 중단되었으므로 신규 설치에 선택되어서는 안 됩니다.</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq3Question" xml:space="preserve">
+    <value>언제 AxCrypt 2를 다운로드해야 하나요?</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq4Answer" xml:space="preserve">
+    <value>아니. AxCrypt 1.x 다운로드는 매우 오래된 Windows 환경과의 드문 호환성 사례를 위한 구식 아카이브 파일입니다. 이 기능은 유지보수되지 않으며, 현대 데스크톱 사용에는 지원되지 않고, 새로운 암호화 작업에도 권장되지 않습니다.</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq4Question" xml:space="preserve">
+    <value>AxCrypt 1.x 다운로드가 권장되나요?</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq5Answer" xml:space="preserve">
+    <value>네. AxCrypt 3는 일상 사용 기본 데스크톱 버전이자 이전 권장 대상이어야 합니다. AxCrypt v1, v2, v3의 암호화 파일을 지원하며, 더 빠른 최신 앱, 향상된 보안, 더 쉬운 워크플로우, 그리고 더 고급 기능을 제공합니다. 특정 호환성, 아카이브 복구, 단기 마이그레이션 요구사항이 있을 때만 레거시 버전을 유지하세요.</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq5Question" xml:space="preserve">
+    <value>AxCrypt 3가 일상적으로 사용할 때 기존 AxCrypt를 대체할 수 있을까요?</value>
+  </data>
   <data name="LegacyWarning" xml:space="preserve">
-    <value>이 버전은 구식이며 이에 대한 지원을 제공하지 않습니다. AxCrypt Legacy는 유지 관리되지 않으며 특별히 필요한 경우가 아니면 다운로드하지 않아야 합니다. 그것을 사용하는 것은 당신의 책임이다.</value>
+    <value>이 버전은 구식이고, 유지보수가 없으며, 현대 데스크톱 용도로는 지원되지 않습니다. 특정 호환성, 아카이브 복구 또는 마이그레이션 요구사항이 없으면 다운로드하지 마세요.</value>
   </data>
   <data name="LegalIndusLinkLabel" xml:space="preserve">
     <value>합법의 도축</value>
@@ -24787,6 +25162,21 @@ AxCrypt 1.x 파일을 자동적으로 전환하시겠습니까 (추천)?</value>
   </data>
   <data name="NeedProductForProjectText" xml:space="preserve">
     <value>프로젝트에 임시로 사용하고 있었습니다</value>
+  </data>
+  <data name="NewActivateMailText1" xml:space="preserve">
+    <value>당신의 인증 코드</value>
+  </data>
+  <data name="NewActivateMailText2" xml:space="preserve">
+    <value>아래 코드를 사용하여 가입을 완료하세요. 이 이메일 주소가 귀하의 것임을 확인해 줍니다.</value>
+  </data>
+  <data name="NewActivateMailText3" xml:space="preserve">
+    <value>이 코드를 절대 공유하지 마세요. 우리 팀은 절대 당신에게 요구하지 않을 거예요. 요청하지 않으셨다면 계정이 위험에 처할 수 있으니 즉시 비밀번호를 변경 하고 지원팀 에 연락해 주세요.</value>
+  </data>
+  <data name="NewActivateMailText4" xml:space="preserve">
+    <value>이 코드는 새 코드를 요청할 때까지 계속 유효합니다. 새 코드를 요청하면 이 코드는 즉시 무효화됩니다.</value>
+  </data>
+  <data name="NewActivateMailText5" xml:space="preserve">
+    <value>이 이메일은 AxCrypt에서 등록을 시작하셔서 {{to_email}}로 보낸 것입니다.</value>
   </data>
   <data name="NewCardSavedText" xml:space="preserve">
     <value>새 카드 항목이 저장되었습니다.</value>
@@ -27335,6 +27725,24 @@ HubSpot은 CRM 시스템을 통한 연락처 관리 등 온라인 마케팅 활�
   </data>
   <data name="RegisterError" xml:space="preserve">
     <value>가입에 실패하셨습니다. 이메일 주소를 다시 확인하시고 재시도 해주시기 바랍니다.</value>
+  </data>
+  <data name="RegisterExistMailBodyText1" xml:space="preserve">
+    <value>무슨 일이 있었나요?</value>
+  </data>
+  <data name="RegisterExistMailBodyText2" xml:space="preserve">
+    <value>누군가 AxCrypt 가입 페이지에서 당신의 이메일 주소를 입력했습니다. 이건 당신일 수도 있었고 — 아니면 다른 누군가일 수도 있었어요. 어쨌든 기존 계정은 손상되지 않고 모든 암호화된 파일은 안전하게 유지됩니다.</value>
+  </data>
+  <data name="RegisterExistMailButtonText" xml:space="preserve">
+    <value>내 계정에 로그인해</value>
+  </data>
+  <data name="RegisterExistMailText1" xml:space="preserve">
+    <value>누군가 네 계정 등록을 시도했어</value>
+  </data>
+  <data name="RegisterExistMailText2" xml:space="preserve">
+    <value>&lt;strong style="color:#1a2d0e;"&gt;{{to_email}}} 가입 요청을 받았습니다. 이미 AxCrypt 계정이 있으니 새 계정이 생성되지 않았으며, 데이터는 안전합니다.</value>
+  </data>
+  <data name="RegisterExistMailTitleText" xml:space="preserve">
+    <value>보안 공지</value>
   </data>
   <data name="RegisterLink" xml:space="preserve">
     <value>새로운 사용자이신가요? 회원가입해주시기 바랍니다</value>
@@ -31031,15 +31439,6 @@ AxCrypt사용은 매우 쉽습니다. 매인 윈도우 창으로 시작하거나
   </data>
   <data name="WindowsCompatibleText" xml:space="preserve">
     <value>윈도우 비스타/2008/7/8/10 32- and 64-bit 호환가능</value>
-  </data>
-  <data name="WindowsDownloadLinkTooltip" xml:space="preserve">
-    <value>Windows 10(v1809+)과 11 에서는 파일을 안전하게 보관하세요. 빠르고 쉽게 설정할 수 있으며, 기술적인 지식이 전혀 필요하지 않습니다. 파일을 우클릭해 보호, 열기, 관리하면 됩니다.</value>
-  </data>
-  <data name="WindowsMSIDownloadLinkTooltip" xml:space="preserve">
-    <value>IT 팀과 기업 에 가장 적합합니다. 여러 기기에 동시에 설치하세요.&lt;br/&gt; 조직 전반에 걸쳐 조용한 설치와 쉬운 설정 기능을 지원합니다.</value>
-  </data>
-  <data name="WindowsPortableDownloadLinkTooltip" xml:space="preserve">
-    <value>설치는 필요 없습니다. USB나 제한된 시스템에서 직접 실행하세요. 우클릭 옵션 없이도 작동하며, 앱을 통해 파일을 열고 보호하며 관리할 수 있습니다.</value>
   </data>
   <data name="WipeFileSelectFileDialogTitle" xml:space="preserve">
     <value>안전한 삭제를 위래 파일들을 선택하십시오</value>

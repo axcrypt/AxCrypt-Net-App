@@ -691,9 +691,6 @@ Per favore connettiti usando la stessa password che avevi già utilizzato.</valu
   <data name="AndMoreText" xml:space="preserve">
     <value>... e altro ancora</value>
   </data>
-  <data name="AndroidDownloadLinkTooltip" xml:space="preserve">
-    <value>Apri, accedi e sblocca i tuoi file in modo sicuro ovunque ti trovi.&lt;br/&gt;Richiede &lt;b&gt;Android 7.0 o superiore&lt;/b&gt;.</value>
-  </data>
   <data name="AndroidIosTitle" xml:space="preserve">
     <value>&lt;span&gt;(Android/iOS)&lt;/span&gt;</value>
   </data>
@@ -734,7 +731,7 @@ Per favore connettiti usando la stessa password che avevi già utilizzato.</valu
     <value>Chiunque</value>
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
-    <value>Verifica dell'AxCrypt ID [ {0} ]</value>
+    <value>Verifica dell'AxCrypt ID</value>
   </data>
   <data name="AppConfigurationDescription" xml:space="preserve">
     <value>Percorsi dati, posizione della cache e reset dei valori predefiniti</value>
@@ -17633,129 +17630,272 @@ il servizio personale diretto e il supporto sono in inglese.</value>
   <data name="DoubleClickToOpenToolTip" xml:space="preserve">
     <value>Fai doppio click per aprire. Se necessario, ti verrà richiesta la password.</value>
   </data>
-  <data name="DownloadAsTxtButton" xml:space="preserve">
-    <value>Scarica in formato.TXT</value>
+  <data name="DownloadAndroidLabel" xml:space="preserve">
+    <value>Android</value>
   </data>
-  <data name="DownloadAxcrypt2LinkLabel" xml:space="preserve">
-    <value>Scarica AxCrypt 2</value>
+  <data name="DownloadAndroidRequirement" xml:space="preserve">
+    <value>Android 7.0+</value>
   </data>
-  <data name="DownloadAxCryptAppPrompt" xml:space="preserve">
-    <value>Scarica l'App AxCrypt</value>
+  <data name="DownloadBenefitCloudDriveEncryption" xml:space="preserve">
+    <value>Crittografia dei dischi cloud</value>
   </data>
-  <data name="DownloadAxcryptDescription" xml:space="preserve">
-    <value>Scarica AxCrypt per &lt;b&gt;desktop&lt;/b&gt; o &lt;b&gt;mobile&lt;/b&gt; e inizia subito a esplorare il mondo della crittografia in totale sicurezza.</value>
+  <data name="DownloadBenefitEasyToUse" xml:space="preserve">
+    <value>Di facile utilizzo</value>
   </data>
-  <data name="DownloadAxcryptLatestFeatures1" xml:space="preserve">
-    <value>AxCrypt è crittografia senza backdoor. Senza la password i tuoi file vengono persi. Non dimenticare la password! Conserva sempre backup adeguati di file importanti, crittografati o meno.</value>
+  <data name="DownloadBenefitStrongEncryption" xml:space="preserve">
+    <value>Crittografia robusta (AES-256)</value>
   </data>
-  <data name="DownloadAxcryptLatestFeatures2" xml:space="preserve">
-    <value>Questo è l'unico sito di download ufficiale per AxCrypt. Cerca &lt;a class="premium-font" href="/information/cryptographic-hashes-of-files/"&gt;l'hash SHA256 qui&lt;/a&gt;.</value>
+  <data name="DownloadBenefitZeroKnowledgeSecurity" xml:space="preserve">
+    <value>Sicurezza a conoscenza zero</value>
   </data>
-  <data name="DownloadAxcryptLatestFeatures3" xml:space="preserve">
-    <value>Tieni presente che se installi AxCrypt 2 e apri vecchi file, questi file non saranno più possibili da aprire con AxCrypt 1.</value>
+  <data name="DownloadBusinessFeatureAuditLogs" xml:space="preserve">
+    <value>Log di audit e reportistica</value>
   </data>
-  <data name="DownloadEncryptedTextAsTxtTooltipText" xml:space="preserve">
-    <value>Scarica testo criptato come file txt</value>
+  <data name="DownloadBusinessFeatureCentralizedKeys" xml:space="preserve">
+    <value>Gestione centralizzata delle chiavi</value>
   </data>
-  <data name="DownloadHeroHeadingMac" xml:space="preserve">
-    <value>AxCrypt per macOS</value>
+  <data name="DownloadBusinessFeatureCompliance" xml:space="preserve">
+    <value>Consapevole della conformità HIPAA/GDPR/NIS2</value>
   </data>
-  <data name="DownloadHeroHeadingWindows" xml:space="preserve">
-    <value>AxCrypt per Windows</value>
+  <data name="DownloadBusinessFeatureTeamManagement" xml:space="preserve">
+    <value>Gestione del team e ruoli</value>
   </data>
-  <data name="DownloadHeroHeadingWindowsPortable" xml:space="preserve">
-    <value>AxCrypt versione stand-alone/portatile per Windows</value>
+  <data name="DownloadDetectedAndroidOptionSuggestion" xml:space="preserve">
+    <value>Scarica l'app Android da Google Play</value>
   </data>
-  <data name="DownloadHeroListDoubleClick" xml:space="preserve">
-    <value>L'integrazione con il doppio click semplifica l'apertura, la modifica e il salvataggio dei file protetti così come se stessi lavorando con file senza protezione.</value>
+  <data name="DownloadDetectedButtonPrefix" xml:space="preserve">
+    <value>Scarica per</value>
   </data>
-  <data name="DownloadHeroListMultilingualSupport" xml:space="preserve">
-    <value>Supporto multilingue per inglese, olandese, francese, tedesco, italiano, coreano, portoghese, russo, spagnolo, svedese e turco. Altre in arrivo.</value>
+  <data name="DownloadDetectedDefaultOptionSuggestion" xml:space="preserve">
+    <value>Usa la freccia per scegliere un'altra opzione di download</value>
   </data>
-  <data name="DownloadHeroListOpenSecured" xml:space="preserve">
-    <value>Apri file protetti sul tuo dispositivo mobile. Vedi le informazioni di seguito.</value>
+  <data name="DownloadDetectedIosOptionSuggestion" xml:space="preserve">
+    <value>Scarica l'app iOS dall'App Store</value>
   </data>
-  <data name="DownloadHeroListRightClick" xml:space="preserve">
-    <value>L'integrazione del tasto destro del mouse con Windows Explorer rende AxCrypt il modo più semplice per proteggere i singoli file in Windows.</value>
+  <data name="DownloadDetectedLinuxDescription" xml:space="preserve">
+    <value>Ubuntu / Debian / Red Hat</value>
   </data>
-  <data name="DownloadHeroListSecureAny" xml:space="preserve">
-    <value>Proteggi un numero qualsiasi di file utilizzando una crittografia avanzata.</value>
+  <data name="DownloadDetectedLinuxOptionSuggestion" xml:space="preserve">
+    <value>Si suggerisce Ubuntu; RedHat è nel menu delle frecce</value>
   </data>
-  <data name="DownloadHeroListSecuredFolders" xml:space="preserve">
-    <value>Le cartelle protette proteggeranno automaticamente i file come richiesto on demand.</value>
+  <data name="DownloadDetectedMacDescription" xml:space="preserve">
+    <value>Apple Silicon e Intel</value>
   </data>
-  <data name="DownloadHeroListShareKeys" xml:space="preserve">
-    <value>Condividi le chiavi con altri e consenti ai file protetti di essere aperti da altri utenti AxCrypt con la propria password.</value>
+  <data name="DownloadDetectedMacOptionSuggestion" xml:space="preserve">
+    <value>Usa la freccia per scegliere Apple Silicon o Intel</value>
   </data>
-  <data name="DownloadInformationButtonLabel" xml:space="preserve">
-    <value>Leggi le note di rilascio</value>
+  <data name="DownloadDetectedOptionsAriaLabel" xml:space="preserve">
+    <value>Mostra opzioni di download</value>
   </data>
-  <data name="DownloadInformationListKeepInMind" xml:space="preserve">
-    <value>Tieni presente che se installi AxCrypt 2 e apri vecchi file, questi file non potranno più essere aperti con AxCrypt 1.</value>
+  <data name="DownloadDetectedPlatformLabel" xml:space="preserve">
+    <value>Piattaforma rilevata</value>
   </data>
-  <data name="DownloadInformationListNoBackdoors" xml:space="preserve">
-    <value>AxCrypt è una crittografia senza backdoor. Senza la password i tuoi file andranno persi. Non dimenticare la tua password! Conserva sempre backup adeguati dei file importanti, criptati o meno.</value>
+  <data name="DownloadDetectedRecommendedDevice" xml:space="preserve">
+    <value>Consigliato per questo dispositivo</value>
   </data>
-  <data name="DownloadInformationListOfficialDownload" xml:space="preserve">
-    <value>Questo è l'unico sito ufficiale per il download di AxCrypt. Cerca SHA256 hash.</value>
+  <data name="DownloadDetectedWindowsDescription" xml:space="preserve">
+    <value>Windows 11 / 10</value>
   </data>
-  <data name="DownloadInformationSubheading" xml:space="preserve">
-    <value>Leggi le &lt;a href='/information/release-notes'&gt;note di rilascio&lt;/a&gt; per sapere qual è la versione attuale.</value>
+  <data name="DownloadDetectedWindowsOptionSuggestion" xml:space="preserve">
+    <value>Hai bisogno di un setup amministrativo o IT? Scegli MSI dalla freccia</value>
+  </data>
+  <data name="DownloadHelpButton" xml:space="preserve">
+    <value>Visita il nostro Centro Assistenza</value>
+  </data>
+  <data name="DownloadHelpContactSupportSubtitle" xml:space="preserve">
+    <value>Ricevi assistenza dal nostro team di supporto</value>
+  </data>
+  <data name="DownloadHelpContactSupportTitle" xml:space="preserve">
+    <value>Contatta il supporto</value>
+  </data>
+  <data name="DownloadHelpDescription" xml:space="preserve">
+    <value>Siamo qui per aiutarti ad installare, configurare e ottenere il massimo da AxCrypt.</value>
+  </data>
+  <data name="DownloadHelpFaqSubtitle" xml:space="preserve">
+    <value>Trova risposte alle domande più comuni</value>
+  </data>
+  <data name="DownloadHelpFaqTitle" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="DownloadHelpInstallationGuideSubtitle" xml:space="preserve">
+    <value>Istruzioni di configurazione passo dopo passo</value>
+  </data>
+  <data name="DownloadHelpInstallationGuideTitle" xml:space="preserve">
+    <value>Guida all'installazione</value>
+  </data>
+  <data name="DownloadHelpTitle" xml:space="preserve">
+    <value>Hai bisogno di aiuto?</value>
+  </data>
+  <data name="DownloadHelpUserDocumentationSubtitle" xml:space="preserve">
+    <value>Impara ad usare AxCrypt</value>
+  </data>
+  <data name="DownloadHelpUserDocumentationTitle" xml:space="preserve">
+    <value>Documentazione utente</value>
+  </data>
+  <data name="DownloadHeroBrandName" xml:space="preserve">
+    <value>AxCrypt</value>
+  </data>
+  <data name="DownloadHeroDescriptionLine1" xml:space="preserve">
+    <value>Proteggi i tuoi file e la tua privacy.</value>
+  </data>
+  <data name="DownloadHeroDescriptionLine2" xml:space="preserve">
+    <value>Gratis da usare. Facile da configurare.</value>
+  </data>
+  <data name="DownloadHeroTitleAction" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadHeroTitleLine1" xml:space="preserve">
+    <value>Crittografia dei file</value>
+  </data>
+  <data name="DownloadHeroTitleLine2" xml:space="preserve">
+    <value>Software</value>
+  </data>
+  <data name="DownloadIosLabel" xml:space="preserve">
+    <value>Ios</value>
+  </data>
+  <data name="DownloadIosRequirement" xml:space="preserve">
+    <value>iOS 16.4+</value>
+  </data>
+  <data name="DownloadLatestVersionLabel" xml:space="preserve">
+    <value>Ultima versione</value>
+  </data>
+  <data name="DownloadLegacyDownloadsButton" xml:space="preserve">
+    <value>Visualizza i download legacy</value>
+  </data>
+  <data name="DownloadLegacyDownloadsDescription" xml:space="preserve">
+    <value>Accedi alle versioni più vecchie e alle uscite precedenti</value>
+  </data>
+  <data name="DownloadLegacyDownloadsTitle" xml:space="preserve">
+    <value>Download delle versioni precedenti</value>
   </data>
   <data name="DownloadLinkLabel" xml:space="preserve">
     <value>Scarica</value>
   </data>
-  <data name="DownloadMobileBodyText" xml:space="preserve">
-    <value>&lt;p&gt;Cripta e decripta i tuoi file ovunque e in qualsiasi momento. Le app per dispositivi mobili sono compatibili con i più diffusi sistemi di archiviazione in cloud come Google Drive e Dropbox (e altri se ne aggiungeranno presto).&lt;/p&gt;&lt;p&gt;Potrai sempre visualizzare i tuoi file protetti già esistenti e i file condivisi con te su qualsiasi piattaforma, senza necessità di abbonamento. Adesso anche su dispositivi mobili!&lt;/p&gt;&lt;p&gt;Scopri di più &lt;a href='#'&gt;here&lt;/a&gt;&lt;/p&gt;
-</value>
+  <data name="DownloadMainGridAriaLabel" xml:space="preserve">
+    <value>Download</value>
   </data>
-  <data name="DownloadMobileBodyText1" xml:space="preserve">
-    <value>Cripta e decripta file, ovunque e in qualsiasi momento. Le app supportano i più comuni sistemi di archiviazione in cloud come Google Drive e Dropbox  (e molti altri si aggiungeranno presto).</value>
+  <data name="DownloadMobileAppsNote" xml:space="preserve">
+    <value>Google Play e App Store</value>
   </data>
-  <data name="DownloadMobileBodyText2" xml:space="preserve">
-    <value>Potrai sempre visualizzare i tuoi file protetti già esistenti e i file condivisi con te su qualsiasi piattaforma, senza necessità di abbonamento. Adesso anche su dispositivi mobili!</value>
-  </data>
-  <data name="DownloadMobileBodyText3" xml:space="preserve">
-    <value>Scopri di più &lt;a href={url}&gt;qui&lt;/a&gt;</value>
-  </data>
-  <data name="DownloadMobileHeading" xml:space="preserve">
-    <value>AxCrypt Mobile</value>
-  </data>
-  <data name="DownloadNavHeading" xml:space="preserve">
-    <value>Altre piattaforme</value>
+  <data name="DownloadMobileAppsTitle" xml:space="preserve">
+    <value>App mobili</value>
   </data>
   <data name="DownloadNowText" xml:space="preserve">
     <value>Scarica ora</value>
   </data>
-  <data name="DownloadpageHeadingTitle" xml:space="preserve">
-    <value>Mettere i file in &lt;span&gt;sicurezza&lt;/span&gt; &lt;strong&gt;dei file&lt;/strong&gt; &lt;strong&gt;dovrebbe essere&lt;/strong&gt; &lt;span&gt;facile.&lt;/span&gt;</value>
+  <data name="DownloadOtherBetaDownloadsSubtitle" xml:space="preserve">
+    <value>Prova le ultime versioni preview</value>
   </data>
-  <data name="DownloadPlainText" xml:space="preserve">
-    <value>Scarica il testo in chiaro come file txt</value>
+  <data name="DownloadOtherBetaDownloadsTitle" xml:space="preserve">
+    <value>Download Beta</value>
   </data>
-  <data name="DownloadPrimiumPlusHeading" xml:space="preserve">
-    <value>&lt;span&gt;Premium&lt;/span&gt; plus:</value>
+  <data name="DownloadOtherBrowserExtensionTitle" xml:space="preserve">
+    <value>Estensione browser (Beta)</value>
   </data>
-  <data name="DownloadReleaseNotes" xml:space="preserve">
-    <value>Consulta le Note sulla Versione</value>
+  <data name="DownloadOtherCliSubtitle" xml:space="preserve">
+    <value>Potente CLI per l'automazione</value>
   </data>
-  <data name="DownloadsubHeading" xml:space="preserve">
-    <value>&lt;strong&gt;Tutte&lt;/strong&gt; &lt;span&gt;le piattaforme.&lt;/span&gt;</value>
+  <data name="DownloadOtherCliTitle" xml:space="preserve">
+    <value>Interfaccia a Riga di Comando (CLI)</value>
   </data>
-  <data name="DownloadSuccessfullyNotification" xml:space="preserve">
-    <value>Il file è stato salvato correttamente in {0}</value>
+  <data name="DownloadOtherComingSoonSubtitle" xml:space="preserve">
+    <value>Prossimamente</value>
+  </data>
+  <data name="DownloadOtherDownloadsTitle" xml:space="preserve">
+    <value>Altri download</value>
+  </data>
+  <data name="DownloadOtherSourceCodeSubtitle" xml:space="preserve">
+    <value>Dettagli tecnici</value>
+  </data>
+  <data name="DownloadOtherSourceCodeTitle" xml:space="preserve">
+    <value>Codice sorgente</value>
+  </data>
+  <data name="DownloadPlanAxCryptLabel" xml:space="preserve">
+    <value>AxCrypt</value>
+  </data>
+  <data name="DownloadPlanBusinessCta" xml:space="preserve">
+    <value>Prova la versione Business Gratis</value>
+  </data>
+  <data name="DownloadPlanBusinessDescription" xml:space="preserve">
+    <value>Potente crittografia e gestione delle chiavi per team e organizzazioni.</value>
+  </data>
+  <data name="DownloadPlanBusinessName" xml:space="preserve">
+    <value>Business</value>
+  </data>
+  <data name="DownloadPlanLearnMore" xml:space="preserve">
+    <value>Per ulteriori informazioni</value>
+  </data>
+  <data name="DownloadPlanPremiumCta" xml:space="preserve">
+    <value>Prova la versione Premium Gratis</value>
+  </data>
+  <data name="DownloadPlanPremiumDescription" xml:space="preserve">
+    <value>Ottieni funzionalità avanzate per una condivisione sicura, integrazione cloud ed altro ancora.</value>
+  </data>
+  <data name="DownloadPlanPremiumName" xml:space="preserve">
+    <value>Premium</value>
+  </data>
+  <data name="DownloadPlatformAllPlatformsTitle" xml:space="preserve">
+    <value>Compatibile con tutte le piattaforme</value>
+  </data>
+  <data name="DownloadPlatformDownloadAriaPrefix" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadPlatformDownloadButton" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadPremiumFeatureCloudStorage" xml:space="preserve">
+    <value>Integrazione con lo storage cloud</value>
+  </data>
+  <data name="DownloadPremiumFeatureMore" xml:space="preserve">
+    <value>E molto altro ancora</value>
+  </data>
+  <data name="DownloadPremiumFeaturePrioritySupport" xml:space="preserve">
+    <value>Supporto prioritario</value>
+  </data>
+  <data name="DownloadPremiumFeatureSecureSharing" xml:space="preserve">
+    <value>Condivisione file sicura</value>
+  </data>
+  <data name="DownloadResourceReleaseNotesSubtitle" xml:space="preserve">
+    <value>Guarda cosa c'è di nuovo</value>
+  </data>
+  <data name="DownloadResourceReleaseNotesTitle" xml:space="preserve">
+    <value>Note di rilascio</value>
+  </data>
+  <data name="DownloadResourcesAriaLabel" xml:space="preserve">
+    <value>Risorse da scaricare</value>
+  </data>
+  <data name="DownloadResourceSecuritySubtitle" xml:space="preserve">
+    <value>Informazioni sulla sicurezza</value>
+  </data>
+  <data name="DownloadResourceSecurityTitle" xml:space="preserve">
+    <value>Informazioni di sicurezza</value>
+  </data>
+  <data name="DownloadResourceSha256Subtitle" xml:space="preserve">
+    <value>Verifica i download</value>
+  </data>
+  <data name="DownloadResourceSha256Title" xml:space="preserve">
+    <value>SHA256 Hash</value>
+  </data>
+  <data name="DownloadResourceSystemRequirementsSubtitle" xml:space="preserve">
+    <value>Verifica requisiti</value>
+  </data>
+  <data name="DownloadResourceSystemRequirementsTitle" xml:space="preserve">
+    <value>Requisiti del sistema</value>
+  </data>
+  <data name="DownloadSeeOptionsLabel" xml:space="preserve">
+    <value>Vedi opzioni</value>
   </data>
   <data name="DownloadtheGuide" xml:space="preserve">
     <value>Scarica la guida</value>
   </data>
-  <data name="DownloadTryCtaHeading" xml:space="preserve">
-    <value>Prova i nostri abbonamenti per 14 &lt;span&gt;giorni gratuitamente...&lt;/span&gt;</value>
+  <data name="DownloadTrustNote" xml:space="preserve">
+    <value>Scelto da milioni di utenti in tutto il mondo per mantenere i propri file privati e al sicuro.</value>
   </data>
-  <data name="DownloadTryMobileSubscription" xml:space="preserve">
-    <value>Puoi criptare e decriptare i file sul tuo telefono Android, iPhone o tablet da qualsiasi luogo e in qualsiasi momento. La crittografia mobile di AxCrypt supporta sia Android che iOS. AxCrypt supporta la crittografia dei file di Google Drive su iOS e Android. La crittografia in locale è disponibile per ora solo su Android. Altri cloud, come iCloud, DropBox, OneDrive e altri, saranno supportati nelle prossime versioni.</value>
+  <data name="DownloadVersionPrefix" xml:space="preserve">
+    <value>Versione</value>
   </data>
-  <data name="DownloadViewerPlusHeading" xml:space="preserve">
-    <value>&lt;span&gt;Password Manager&lt;/span&gt; più:</value>
+  <data name="DownloadWindowsX64Title" xml:space="preserve">
+    <value>Windows (x64)</value>
   </data>
   <data name="DutchLanguageSelection" xml:space="preserve">
     <value>Nederlands (Olandese)</value>
@@ -18336,11 +18476,10 @@ Effettua il backup di tutti i tuoi file importanti - protetti e senza protezione
     <value>Qual è la differenza tra AxCrypt 1.x e 2.x?</value>
   </data>
   <data name="FaqDifference1&amp;2Answer1" xml:space="preserve">
-    <value>AxCrypt 1.x è una versione legacy. Ciò significa che è obsoleta e non beneficia più di alcun supporto, mentre AxCrypt 2.x è la versione su cui stiamo continuamente lavorando per migliorarla. È assolutamente sconsigliato utilizzare 1.x. Raccomandiamo a tutti gli utenti, vecchi e nuovi, di utilizzare sempre la versione rilasciata più di recente di AxCrypt, che può essere scaricata &lt;a href='/download'&gt;qui&lt;/a&gt;.
-</value>
+    <value>AxCrypt 1.x è obsoleto e non è più supportato. AxCrypt 2 è anch'esso una versione desktop legacy, con la manutenzione interrotta nel 2024. Per nuove installazioni e uso quotidiano, consigliamo l'attuale versione di AxCrypt 3, che può essere &lt;a href='/download'&gt;scaricata qui&lt;/a&gt;</value>
   </data>
   <data name="FaqDifference1&amp;2Answer2" xml:space="preserve">
-    <value>Per gli utenti che hanno necessità specifica dei download legacy (utilizzo a proprio rischio), possono essere trovati &lt;a href='/information/legacy-downloads/'&gt;qui&lt;/a&gt;.</value>
+    <value>Se hai una specifica compatibilità, un requisito di recupero degli archivi o di migrazione, i download legacy sono &lt;a href='/legacy-downloads/'&gt;disponibili qui&lt;/a&gt;.</value>
   </data>
   <data name="FaqDifferenceStandaloneInstaller" xml:space="preserve">
     <value>Quali sono le principali differenze tra la versione stand-alone e la versione installer di AxCrypt?</value>
@@ -22270,7 +22409,7 @@ Per favore indica la lingua da utilizzare nell'invito e un messaggio personalizz
     <value>Abbandona</value>
   </data>
   <data name="Legacy-verify-Download-Answer" xml:space="preserve">
-    <value>La maggior parte degli installatori e degli eseguibili sono firmati digitalmente con Authenticode da 'Axantum Software AB' o 'AxCrypt AB'. Verifica la firma dopo il download facendo clic con il pulsante destro del mouse sul file e seleziona 'Proprietà | Firme digitali'. Quindi fare doppio clic sulla firma e verificare che venga visualizzato "Questa firma digitale è OK".</value>
+    <value>Gli installer e gli eseguibili di AxCrypt sono firmati digitalmente con Authenticode da “AxCrypt AB”. Dopo il download, verifica la firma facendo clic con il tasto destro sul file e selezionando “Proprietà | Firme digitali”. Quindi fai doppio clic sulla firma e assicurati che venga visualizzato “La firma digitale è valida”.</value>
   </data>
   <data name="Legacy-verify-Download-Question" xml:space="preserve">
     <value>Come verificare un &lt;span&gt;download?&lt;/span&gt;</value>
@@ -22282,94 +22421,291 @@ Per favore indica la lingua da utilizzare nell'invito e un messaggio personalizz
     <value>AxCrypt Legacy è stato progettato per fornire una crittografia sicura dei file per gli utenti, offrendo una protezione affidabile ed efficace attraverso un semplice sistema di passphrase. Ha svolto un ruolo importante nel rendere la crittografia dei file accessibile sia agli utenti personali che a quelli professionali, garantendo che solo le persone autorizzate potessero accedere ai dati crittografati. La sua interfaccia user-friendly ha permesso a molti di proteggere facilmente i file sensibili, anche se non avevano familiarità con le tecnologie di crittografia.</value>
   </data>
   <data name="Legacy-Version-Point2" xml:space="preserve">
-    <value>La versione Legacy ha introdotto funzionalità essenziali di crittografia AES che soddisfacevano le esigenze del suo tempo, consentendo agli utenti di eseguire più operazioni di crittografia in modo efficiente. Ponendo le basi per i progressi futuri, Axcrypt Legacy ha dimostrato il nostro impegno per la crittografia avanzata. Sebbene AxCrypt Legacy non sia più supportato attivamente, i file crittografati con esso rimangono sicuri e possono ancora essere decrittografati utilizzando AxCrypt 2, garantendo l'accesso continuo ai dati importanti. Apprezziamo il ruolo vitale svolto da AxCrypt Legacy nel nostro sviluppo e incoraggiamo gli utenti a passare ad AxCrypt 2 per beneficiare della crittografia dei file AES-256 avanzata e di altre funzionalità più recenti.</value>
+    <value>La versione legacy introdusse importanti capacità di crittografia dei file per l'epoca, ma non è più mantenuta né supportata per l'uso desktop moderno. AxCrypt 3 è la versione raccomandata per la crittografia attuale AES-256, prestazioni migliorate, funzionalità avanzate e supporto per file AxCrypt più vecchi cifrati.</value>
   </data>
   <data name="Legacy-Version-Point3" xml:space="preserve">
-    <value>NOTA: Questi sono download di AxCrypt Legacy. Non li approviamo e ti invitiamo a non scaricarli e utilizzarli, a meno che tu non ne abbia una necessità specifica. I nuovi file crittografati con AxCrypt 2 non sono compatibili con AxCrypt Legacy ! I file crittografati con AxCrypt Legacy sono decifrabili da AxCrypt 2.</value>
+    <value>NOTA: Questi download legacy sono forniti solo per compatibilità specifica, recupero archivio o casi di migrazione. Usa AxCrypt 3 per il nuovo lavoro di crittografia e l'uso quotidiano del desktop.</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Label" xml:space="preserve">
+    <value>Archivio</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point1" xml:space="preserve">
+    <value>Obsoleto e non supportato</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point2" xml:space="preserve">
+    <value>Non per nuove crittografia o per il lavoro quotidiano</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point3" xml:space="preserve">
+    <value>Utilizzo solo per il recupero controllato degli archivi</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point4" xml:space="preserve">
+    <value>AxCrypt 3 supporta file cifrati più vecchi</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Setup1644Label" xml:space="preserve">
+    <value>1.6.4.4 Vecchia configurazione</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Setup173180Label" xml:space="preserve">
+    <value>1.7.3180 Configurazione XP</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Setup173233Label" xml:space="preserve">
+    <value>1.7.3233 Configurazione</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Status" xml:space="preserve">
+    <value>Archivio obsoleto</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Summary" xml:space="preserve">
+    <value>Download molto vecchi solo su Windows per un raro accesso agli archivi.</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Label" xml:space="preserve">
+    <value>Legacy</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2MacPackageLabel" xml:space="preserve">
+    <value>Pacchetto macOS</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point1" xml:space="preserve">
+    <value>Per le implementazioni esistenti di AxCrypt 2</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point2" xml:space="preserve">
+    <value>La manutenzione è interrotta nel 2024</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point3" xml:space="preserve">
+    <value>Utilizzo per le build Windows sotto 10.0.19041.0</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point4" xml:space="preserve">
+    <value>Aggiorna ad AxCrypt 3 quando è possibile</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Status" xml:space="preserve">
+    <value>La manutenzione è stata interrotta nel 2024</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Summary" xml:space="preserve">
+    <value>Da usare solo quando un ambiente desktop più vecchio non può ancora passare ad AxCrypt 3.</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2WindowsInstallerLabel" xml:space="preserve">
+    <value>Installatore di Windows</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2WindowsPortableLabel" xml:space="preserve">
+    <value>Windows portatile</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3DownloadLabel" xml:space="preserve">
+    <value>Scarica AxCrypt 3</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Label" xml:space="preserve">
+    <value>Consigliato</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point1" xml:space="preserve">
+    <value>App desktop attualmente supportata</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point2" xml:space="preserve">
+    <value>AES-256, flussi di lavoro più veloci e le ultime funzionalità</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point3" xml:space="preserve">
+    <value>Supporta file da AxCrypt v1, v2 e v3</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point4" xml:space="preserve">
+    <value>Windows 10.0.19041.0 o versioni successive sono obbligatorie su Windows</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Status" xml:space="preserve">
+    <value>Pubblicazione attuale</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Summary" xml:space="preserve">
+    <value>La scelta migliore per nuove installazioni desktop e crittografia dei file di tutti i giorni.</value>
+  </data>
+  <data name="LegacyCompareDecisionArchiveDescription" xml:space="preserve">
+    <value>Obsoleto, non mantenuto e non supportato per l'uso desktop moderno. Usa solo per casi rari di recupero archivio.</value>
+  </data>
+  <data name="LegacyCompareDecisionArchiveLabel" xml:space="preserve">
+    <value>Archivio</value>
+  </data>
+  <data name="LegacyCompareDecisionArchiveTitle" xml:space="preserve">
+    <value>Evita AxCrypt 1.x per i nuovi lavori</value>
+  </data>
+  <data name="LegacyCompareDecisionCompatibilityDescription" xml:space="preserve">
+    <value>Disponibile per vecchie implementazioni desktop, test di migrazione e sistemi che non possono eseguire AxCrypt 3. La manutenzione di AxCrypt 2 è interrotta nel 2024.</value>
+  </data>
+  <data name="LegacyCompareDecisionCompatibilityLabel" xml:space="preserve">
+    <value>Compatibilità</value>
+  </data>
+  <data name="LegacyCompareDecisionCompatibilityTitle" xml:space="preserve">
+    <value>Usa AxCrypt 2 solo quando necessario</value>
+  </data>
+  <data name="LegacyCompareDecisionMostUsersDescription" xml:space="preserve">
+    <value>Consigliato per sistemi operativi desktop attuali, prestazioni più veloci, crittografia AES-256, aggiornamenti attivi di sicurezza e l'ultima esperienza AxCrypt.</value>
+  </data>
+  <data name="LegacyCompareDecisionMostUsersLabel" xml:space="preserve">
+    <value>La maggior parte degli utenti</value>
+  </data>
+  <data name="LegacyCompareDecisionMostUsersTitle" xml:space="preserve">
+    <value>Installa AxCrypt 3</value>
+  </data>
+  <data name="LegacyCompareIntro" xml:space="preserve">
+    <value>AxCrypt 3 è la versione desktop consigliata per tutte le nuove installazioni e l'uso giornaliero. I download legacy sono forniti solo per gli utenti che necessitano di compatibilità temporanea con implementazioni più vecchie, test di migrazione o accesso a file archiviati.</value>
+  </data>
+  <data name="LegacyCompareKicker" xml:space="preserve">
+    <value>Confronto delle versioni</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportAxCrypt1" xml:space="preserve">
+    <value>Scenari di archivio legacy</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportAxCrypt2" xml:space="preserve">
+    <value>Supporta flussi di lavoro più vecchi v2</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportAxCrypt3" xml:space="preserve">
+    <value>Supporta file v1, v2 e v3</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportLabel" xml:space="preserve">
+    <value>Supporto ai file più vecchi</value>
+  </data>
+  <data name="LegacyComparePlatformFitAxCrypt1" xml:space="preserve">
+    <value>Ambienti Windows molto vecchi</value>
+  </data>
+  <data name="LegacyComparePlatformFitAxCrypt2" xml:space="preserve">
+    <value>Installazioni più vecchie di Windows e macOS</value>
+  </data>
+  <data name="LegacyComparePlatformFitAxCrypt3" xml:space="preserve">
+    <value>Windows, macOS e Linux attuali</value>
+  </data>
+  <data name="LegacyComparePlatformFitLabel" xml:space="preserve">
+    <value>Adattamento per piattaforme desktop</value>
+  </data>
+  <data name="LegacyCompareQuickComparisonTitle" xml:space="preserve">
+    <value>Confronto veloce</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseAxCrypt1" xml:space="preserve">
+    <value>Solo recupero raro di archivi</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseAxCrypt2" xml:space="preserve">
+    <value>Solo compatibilità e migrazione</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseAxCrypt3" xml:space="preserve">
+    <value>Nuove installazioni e uso quotidiano del desktop</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseLabel" xml:space="preserve">
+    <value>Uso consigliato</value>
+  </data>
+  <data name="LegacyCompareSupportStatusAxCrypt1" xml:space="preserve">
+    <value>Archivio obsoleto</value>
+  </data>
+  <data name="LegacyCompareSupportStatusAxCrypt2" xml:space="preserve">
+    <value>La manutenzione è stata interrotta nel 2024</value>
+  </data>
+  <data name="LegacyCompareSupportStatusAxCrypt3" xml:space="preserve">
+    <value>Versione aggiornata mantenuta</value>
+  </data>
+  <data name="LegacyCompareSupportStatusLabel" xml:space="preserve">
+    <value>Stato di supporto</value>
+  </data>
+  <data name="LegacyCompareTitle" xml:space="preserve">
+    <value>Scegli la versione giusta di AxCrypt</value>
   </data>
   <data name="LegacyConversionVerificationPrompt" xml:space="preserve">
     <value>Dopo che i file vengono convertiti si aprono solamente con la password attuale di AxCrypt. Per favore verifica la tua password.
 
 Non dimenticarti questa password!</value>
   </data>
-  <data name="LegacyDownloadsContent" xml:space="preserve">
-    <value>Hai bisogno di una versione precedente? Scarica le versioni precedenti di AxCrypt per garantire la compatibilità con i sistemi precedenti.</value>
+  <data name="LegacyDownloadsComparisonDescription" xml:space="preserve">
+    <value>Confronta AxCrypt 3 con le versioni desktop precedenti di AxCrypt in base allo stato del supporto, all'adattamento della piattaforma, alla copertura delle funzionalità, allo scopo della migrazione e alle opzioni di download.</value>
+  </data>
+  <data name="LegacyDownloadsComparisonTitle" xml:space="preserve">
+    <value>Confronto dei download legacy</value>
   </data>
   <data name="LegacyDownloadsDescription" xml:space="preserve">
-    <value>Questi sono download Legacy AxCrypt 1.x. Non li approviamo e ti esortiamo a non scaricarli e utilizzarli, a meno che tu non ne abbia una specifica esigenza. &lt;strong&gt;I nuovi file criptati con AxCrypt 2.x non sono compatibili con legacy AxCrypt 1.x!&lt;/strong&gt;. I file criptati con legacy AxCrypt 1.x sono decriptabili con AxCrypt 2.x.
-</value>
+    <value>Si tratta di download legacy di AxCrypt per compatibilità specifica, recupero archivio o casi di migrazione. Non usarli per nuovi lavori di crittografia. AxCrypt 3 è la versione desktop consigliata e supporta file criptati da AxCrypt v1, v2 e v3."</value>
   </data>
-  <data name="LegacyDownloadsHeading" xml:space="preserve">
-    <value>Download legacy.</value>
+  <data name="LegacyDownloadsGuidanceKicker" xml:space="preserve">
+    <value>Guida alla versione</value>
   </data>
-  <data name="LegacyDownloadsHowToVerifyHeading" xml:space="preserve">
-    <value>Come Verificare un Download</value>
+  <data name="LegacyDownloadsIntro" xml:space="preserve">
+    <value>Le versioni precedenti di AxCrypt sono disponibili per specifiche esigenze di compatibilità e migrazione dei desktop. Per le nuove installazioni e l'uso quotidiano, AxCrypt 3 è la versione desktop consigliata e mantenuta attivamente, con prestazioni migliori, supporto attuale della piattaforma e le ultime funzionalità del prodotto.</value>
   </data>
-  <data name="LegacyDownloadsHowToVerifyText" xml:space="preserve">
-    <value>La maggior parte dei programmi di installazione e degli eseguibili sono firmati digitalmente con &lt;a href='http://msdn.microsoft.com/en-us/library/ms537361(v=VS.85).aspx'&gt;Authenticode&lt;/a&gt; di "Axantum Software AB" o "AxCrypt AB". Verifica la firma dopo il download facendo click con il tasto destro del mouse sul file e selezionando "Proprietà | Firme Digitali ”. Quindi fai doppio clic sulla firma e conferma che viene visualizzato "Questa firma digitale è OK".</value>
+  <data name="LegacyDownloadsKicker" xml:space="preserve">
+    <value>Download legacy</value>
   </data>
-  <data name="LegacyDownloadsLinkLabel" xml:space="preserve">
-    <value>Download Precedenti</value>
+  <data name="LegacyDownloadsPrimaryCta" xml:space="preserve">
+    <value>Scarica AxCrypt 3</value>
   </data>
-  <data name="LegacyDownloadsParagraph" xml:space="preserve">
-    <value>Hai bisogno di una versione precedente? Scarica una versione precedente di AxCrypt per macOS.</value>
+  <data name="LegacyDownloadsQuestionsKicker" xml:space="preserve">
+    <value>Domande</value>
   </data>
-  <data name="LegacyDownloadsWarning" xml:space="preserve">
-    <value>Questa versione è obsoleta e non beneficia di assistenza. AxCrypt 1.x non è mantenuto e non dovresti scaricarlo, a meno di necessità specifiche. L'utilizzo è a proprio rischio e pericolo.</value>
+  <data name="LegacyDownloadsRecommendedBadge" xml:space="preserve">
+    <value>Consigliato</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint1" xml:space="preserve">
+    <value>Versione desktop attuale</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint2" xml:space="preserve">
+    <value>Più veloce e facile da usare</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint3" xml:space="preserve">
+    <value>Supporta file v1, v2 e v3</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint4" xml:space="preserve">
+    <value>Funzionalità avanzate e sicurezza</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedTitle" xml:space="preserve">
+    <value>Usa AxCrypt 3 per le nuove installazioni</value>
+  </data>
+  <data name="LegacyDownloadsSafetyKicker" xml:space="preserve">
+    <value>Sicurezza del download</value>
+  </data>
+  <data name="LegacyDownloadsSecondaryCta" xml:space="preserve">
+    <value>Confronta le versioni legacy</value>
+  </data>
+  <data name="LegacyDownloadsTitle" xml:space="preserve">
+    <value>Download legacy di AxCrypt</value>
   </data>
   <data name="LegacyFaq1" xml:space="preserve">
-    <value>Cosa c'è di nuovo in AxCrypt 2 rispetto alla versione legacy?</value>
+    <value>Cosa dovrei usare invece dell'AxCrypt legacy?</value>
   </data>
   <data name="LegacyFaq1Ans" xml:space="preserve">
-    <value>AxCrypt 2 introduce un'interfaccia moderna, un sistema di password unificato e funzionalità di crittografia avanzate. A differenza della versione legacy, include un processo di accesso semplificato e funzionalità avanzate per semplificare la gestione e la condivisione dei file.</value>
+    <value>Usa AxCrypt 3 per nuove installazioni desktop e per la crittografia quotidiana. È l'attuale versione mantenuta con crittografia AES-256, prestazioni migliorate, supporto alla piattaforma moderna e funzionalità avanzate per la condivisione sicura, la protezione del disco cloud e l'uso aziendale.</value>
   </data>
   <data name="LegacyFaq2" xml:space="preserve">
-    <value>In che modo AxCrypt 2 gestisce la decrittografia dei file?</value>
+    <value>AxCrypt 3 può aprire file criptati più vecchi?</value>
   </data>
   <data name="LegacyFaq2Ans" xml:space="preserve">
-    <value>Con AxCrypt 2, utilizzi un'unica password per decrittografare tutti i tuoi file. Ciò semplifica la gestione dei file rispetto alla versione precedente, in cui erano necessarie password diverse per ogni file.</value>
+    <value>Sì. AxCrypt 3 supporta file criptati da AxCrypt v1, v2 e v3, quindi la maggior parte degli utenti può passare alla versione attuale senza mantenere vecchie versioni per il lavoro quotidiano.</value>
   </data>
   <data name="LegacyFaq3" xml:space="preserve">
     <value>Posso ancora utilizzare il vecchio AxCrypt 1.x?</value>
   </data>
   <data name="LegacyFaq3Ans" xml:space="preserve">
-    <value>Sebbene AxCrypt Legacy sia ancora disponibile, consigliamo vivamente di eseguire l'aggiornamento ad AxCrypt 2 per una maggiore sicurezza ed esperienza utente. La nuova versione offre la crittografia AES-256 avanzata a differenza della crittografia AES-128 fornita da Axcrypt Legacy.</value>
+    <value>I download di AxCrypt 1.x sono disponibili solo per rari casi di recupero o compatibilità degli archivi. Sono obsoleti, non mantenuti e non raccomandati per nuovi lavori di crittografia. Usa AxCrypt 3 ogni volta che puoi."</value>
   </data>
   <data name="LegacyFaq4" xml:space="preserve">
-    <value>In quali sistemi operativi è disponibile AxCrypt 2?</value>
+    <value>Quali sistemi operativi dovrebbero usare AxCrypt 3?</value>
   </data>
   <data name="LegacyFaq4Ans" xml:space="preserve">
-    <value>AxCrypt 2 è disponibile su più piattaforme, tra cui Windows, macOS, iOS e Android.</value>
+    <value>AxCrypt 3 è consigliato per gli attuali ambienti desktop Windows, macOS e Linux. Su Windows, AxCrypt 3 richiede Windows 10.0.19041.0 o versioni successive.</value>
   </data>
   <data name="LegacyFaq5" xml:space="preserve">
-    <value>In che modo AxCrypt 2 migliora la gestione delle password?</value>
+    <value>Quando dovrei usare AxCrypt 2?</value>
   </data>
   <data name="LegacyFaq5Ans" xml:space="preserve">
-    <value>AxCrypt 2 elimina la necessità di più password consentendo di utilizzare un'unica password complessa per tutti i file crittografati. Questo non solo semplifica la gestione dei file, ma migliora anche la sicurezza generale riducendo il rischio di password deboli.</value>
+    <value>Usa AxCrypt 2 solo quando una distribuzione desktop esistente, un progetto di migrazione o una versione Windows inferiore a 10.0.19041.0 lo richiede. La manutenzione di AxCrypt 2 si è interrotta nel 2024 e non dovrebbe essere selezionata per nuove installazioni.</value>
   </data>
   <data name="LegacyFaq6" xml:space="preserve">
-    <value>L'autodecrittografia è supportata in AxCrypt 2?</value>
+    <value>L'auto-decrittizzazione è supportata nell'attuale AxCrypt?</value>
   </data>
   <data name="LegacyFaq6Ans" xml:space="preserve">
-    <value>No, AxCrypt 2 non supporta l'autodecrittografia dei file. Questa funzione è stata rimossa a causa di rischi significativi per la sicurezza, ad esempio la possibilità che i file autodecrittografati contengano informazioni fortemente crittografate, incluso il software dannoso, che è impossibile da controllare per i programmi antivirus.</value>
+    <value>No. I file legacy auto-decrittificanti non sono raccomandati per l'uso moderno perché i container eseguibili possono creare rischi di sicurezza e distribuzione. Usa AxCrypt 3 per la crittografia attuale e i flussi di lavoro di condivisione.</value>
   </data>
   <data name="LegacyFaq7" xml:space="preserve">
-    <value>In che modo AxCrypt 2 migliora la sicurezza rispetto ad AxCrypt 1.x?</value>
+    <value>In che modo AxCrypt 3 migliora la sicurezza rispetto alle versioni precedenti?</value>
   </data>
   <data name="LegacyFaq7Ans" xml:space="preserve">
-    <value>AxCrypt 2 offre diversi miglioramenti della sicurezza, tra cui algoritmi di crittografia AES-256 più potenti, un sistema di password unificato e funzionalità di condivisione dei file migliorate. Inoltre, la nuova versione offre una migliore protezione contro i rischi comuni per la sicurezza grazie al processo di accesso semplificato e all'interfaccia più recente.</value>
+    <value>AxCrypt 3 offre la crittografia AES-256 attuale, supporto attivo per il prodotto, un framework di app moderno, prestazioni migliorate, un'esperienza desktop più intuitiva, condivisione sicura, crittografia cloud-drive e funzionalità avanzate per team e aziende.</value>
   </data>
   <data name="LegacyFaq8" xml:space="preserve">
-    <value>L'aggiornamento ad AxCrypt 2 influirà sui miei file crittografati esistenti?</value>
+    <value>Il passaggio ad AxCrypt 3 influenzerà i miei vecchi file criptati?</value>
   </data>
   <data name="LegacyFaq8Ans" xml:space="preserve">
-    <value>L'aggiornamento ad AxCrypt 2 non influirà sui file crittografati esistenti. La nuova versione è completamente compatibile con i file crittografati utilizzando AxCrypt 1.x e offre anche una funzione di conversione automatica per adattare rapidamente i file al nuovo sistema.</value>
+    <value>AxCrypt 3 supporta file criptati da AxCrypt v1, v2 e v3. La maggior parte degli utenti può passare ad AxCrypt 3 mantenendo l'accesso a file protetti più vecchi.</value>
   </data>
   <data name="LegacyFaq9" xml:space="preserve">
-    <value>Come posso eseguire l'aggiornamento da AxCrypt Legacy ad AxCrypt 2?</value>
+    <value>Come posso passare da AxCrypt legacy ad AxCrypt 3?</value>
   </data>
   <data name="LegacyFaq9Ans" xml:space="preserve">
-    <value>Per eseguire l'aggiornamento da AxCrypt Legacy ad AxCrypt 2, è sufficiente installare AxCrypt 2 sull'installazione di AxCrypt 1 esistente. Non è necessario disinstallare prima. Nemmeno il male.</value>
+    <value>Scarica e installa AxCrypt 3 dalla pagina principale per il download. Mantieni installatori legacy solo quando hai una compatibilità specifica, un richiamo archivio o un requisito di migrazione a breve termine.</value>
   </data>
   <data name="LegacyOpenMessage" xml:space="preserve">
     <value>AxCrypt 2 usa un nuovo formato dei file.
@@ -22379,16 +22715,46 @@ Puoi aprire i file AxCrypt 1.x esistenti, ma se non sono convertiti devi fornire
 Abilitare la conversione automatica dei file AxCrypt 1.x (azione raccomandata)?</value>
   </data>
   <data name="LegacyType" xml:space="preserve">
-    <value>AxCrypt Legacy contro &lt;span&gt; AxCrypt 2 &lt;/span&gt;</value>
+    <value>AxCrypt Legacy vs &lt;span&gt; AxCrypt 3 &lt;/span&gt;</value>
   </data>
   <data name="LegacyTypeSummary" xml:space="preserve">
-    <value>AxCrypt 2 ridefinisce la crittografia dei file con funzionalità di sicurezza avanzate e un'interfaccia intuitiva. Non solo migliora la protezione dei dati, ma semplifica anche il processo di crittografia, rendendola la scelta migliore per una sicurezza efficiente e affidabile.</value>
+    <value>AxCrypt 3 è la versione desktop consigliata per la crittografia attuale dei file. Fornisce la crittografia AES-256, migliori prestazioni, supporto alle piattaforme moderne, funzionalità avanzate e compatibilità con file AxCrypt più vecchi e criptati.</value>
   </data>
   <data name="LegacyVersionBtn" xml:space="preserve">
     <value>Scarica l'ultima versione</value>
   </data>
+  <data name="LegacyVsAxCrypt3Faq1Answer" xml:space="preserve">
+    <value>Usa AxCrypt 3 per le nuove installazioni desktop, le attività quotidiane di crittografia, i sistemi Windows, macOS e Linux attuali, i flussi di lavoro con unità cloud e gli aggiornamenti di sicurezza continui. I download delle versioni legacy dovrebbero essere utilizzati solo quando un’installazione desktop esistente, una distribuzione meno recente o un progetto di migrazione lo richiedono espressamente.</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq1Question" xml:space="preserve">
+    <value>Dovrei usare AxCrypt 3 oppure una versione legacy?</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq2Answer" xml:space="preserve">
+    <value>AxCrypt 3 è l’attuale versione desktop mantenuta e supportata. Basata su un framework applicativo di nuova generazione, offre un’esperienza più veloce e intuitiva, supporta le versioni più recenti di Windows, macOS e Linux, utilizza la crittografia AES-256, è compatibile con i file crittografati delle versioni precedenti di AxCrypt e include funzionalità avanzate per la condivisione sicura, la crittografia delle unità cloud, l’uso aziendale e la collaborazione in team.</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq2Question" xml:space="preserve">
+    <value>In che modo AxCrypt 3 è migliore rispetto ad AxCrypt legacy?</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq3Answer" xml:space="preserve">
+    <value>carica AxCrypt 2 solo se hai bisogno della compatibilità con un flusso di lavoro desktop esistente basato su AxCrypt 2, per test di migrazione o per versioni di Windows precedenti alla 10.0.19041.0 che non supportano AxCrypt 3. Il supporto e la manutenzione di AxCrypt 2 sono terminati nel 2024, pertanto non è consigliato per nuove installazioni.</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq3Question" xml:space="preserve">
+    <value>Quando dovrei scaricare AxCrypt 2?</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq4Answer" xml:space="preserve">
+    <value>No. I download di AxCrypt 1.x sono file di archivio obsoleti per casi rari di compatibilità con ambienti Windows molto antichi. Non sono mantenuti, non supportate per l'uso desktop moderno e non raccomandate per nuovi lavori di crittografia.</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq4Question" xml:space="preserve">
+    <value>Sono consigliati i download di AxCrypt 1.x?</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq5Answer" xml:space="preserve">
+    <value>Sì. AxCrypt 3 dovrebbe essere la versione desktop predefinita per l’uso quotidiano e la scelta consigliata per la migrazione. Supporta i file crittografati creati con AxCrypt v1, v2 e v3, offrendo al contempo un’applicazione più moderna e veloce, una sicurezza migliorata, flussi di lavoro più semplici e funzionalità più avanzate. Mantieni le versioni legacy solo se hai esigenze specifiche di compatibilità, recupero di archivi o migrazione a breve termine.</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq5Question" xml:space="preserve">
+    <value>AxCrypt 3 può sostituire AxCrypt legacy per l'uso quotidiano?</value>
+  </data>
   <data name="LegacyWarning" xml:space="preserve">
-    <value>Questa versione è obsoleta e non offriamo supporto per essa. AxCrypt Legacy non viene mantenuto e non dovresti scaricarlo, a meno che non sia specificamente necessario. Usarlo è a proprio rischio e pericolo.</value>
+    <value>Questa versione è obsoleta, non mantenuta e non supportata per l'uso desktop moderno. Non scaricarlo a meno che tu non abbia una compatibilità specifica, un requisito di recupero dell'archivio o di migrazione.</value>
   </data>
   <data name="LegalIndusLinkLabel" xml:space="preserve">
     <value>AXCRYPT IN CAMPO LEGALE</value>
@@ -31061,15 +31427,6 @@ Per ulteriori informazioni, clicca OK per aprire il nostro sito nel browser.</va
   </data>
   <data name="WindowsCompatibleText" xml:space="preserve">
     <value>Compatibile con Windows Vista/2008/7/8/10 a 32 e 64 bit.</value>
-  </data>
-  <data name="WindowsDownloadLinkTooltip" xml:space="preserve">
-    <value>Mantieni i tuoi file al sicuro su&lt;b&gt; Windows 10 (v1809+) e 11&lt;/b&gt;.&lt;br/&gt; Rapido e facile da configurare—senza bisogno di competenze tecniche.&lt;br/&gt; Basta cliccare con il tasto destro sui tuoi file per metterli in sicurezza, aprirli e gestirli.</value>
-  </data>
-  <data name="WindowsMSIDownloadLinkTooltip" xml:space="preserve">
-    <value>Ideale per &lt;b&gt;i team IT e le aziende&lt;/b&gt;. Installabile su molti dispositivi contemporaneamente.&lt;br/&gt; Supporta l'installazione silenziosa e la configurazione facile in tutta l'organizzazione.</value>
-  </data>
-  <data name="WindowsPortableDownloadLinkTooltip" xml:space="preserve">
-    <value>&lt;b&gt;Non serve installazione&lt;/b&gt; . Eseguila direttamente da &lt;b&gt;una USB o da un sistema limitato&lt;/b&gt;.&lt;br/&gt; Funziona senza opzioni di clic destro—usa l'app per aprire, proteggere e gestire i file.</value>
   </data>
   <data name="WipeFileSelectFileDialogTitle" xml:space="preserve">
     <value>Seleziona i file da eliminare in modo sicuro.</value>

@@ -683,9 +683,6 @@
   <data name="AndMoreText" xml:space="preserve">
     <value>…以及更多</value>
   </data>
-  <data name="AndroidDownloadLinkTooltip" xml:space="preserve">
-    <value>随时随地安全地打开、访问和解锁您的文件。&lt;br/&gt;需要 &lt;b&gt;Android 7.0 或更高版本&lt;/b&gt;。</value>
-  </data>
   <data name="AndroidIosTitle" xml:space="preserve">
     <value>&lt;span&gt;(Android/iOS)&lt;/span&gt;</value>
   </data>
@@ -729,7 +726,7 @@
     <value>任何人</value>
   </data>
   <data name="AppActivateMailSubject" xml:space="preserve">
-    <value>AxCrypt ID验证[{0} ]</value>
+    <value>AxCrypt ID验证</value>
   </data>
   <data name="AppConfigurationDescription" xml:space="preserve">
     <value>数据路径、缓存位置和重置默认设置</value>
@@ -17694,125 +17691,351 @@
   <data name="DoubleClickToOpenToolTip" xml:space="preserve">
     <value>双击打开。 如果需要，系统将提示您输入密码。</value>
   </data>
-  <data name="DownloadAsTxtButton" xml:space="preserve">
-    <value>下载as.TXT</value>
+  <data name="DownloadAndroidLabel" xml:space="preserve">
+    <value>Android</value>
   </data>
-  <data name="DownloadAxcrypt2LinkLabel" xml:space="preserve">
-    <value>AxCrypt 2下载</value>
+  <data name="DownloadAndroidRequirement" xml:space="preserve">
+    <value>Android 7.0 及以上版本
+</value>
   </data>
-  <data name="DownloadAxCryptAppPrompt" xml:space="preserve">
-    <value>下载AxCrypt应用程序</value>
+  <data name="DownloadBenefitCloudDriveEncryption" xml:space="preserve">
+    <value>云盘加密
+</value>
   </data>
-  <data name="DownloadAxcryptDescription" xml:space="preserve">
-    <value>下载AxCrypt，支持 &lt;b&gt;桌面&lt;/b&gt; 或 &lt;b&gt;移动&lt;/b&gt; 端，开启你进入加密世界的奇妙旅程。</value>
+  <data name="DownloadBenefitEasyToUse" xml:space="preserve">
+    <value>易于使用
+</value>
   </data>
-  <data name="DownloadAxcryptLatestFeatures1" xml:space="preserve">
-    <value>AxCrypt是没有后门的加密。 如果没有密码，您的文件将丢失。 不要忘记密码！ 始终保持重要文件的适当备份，加密与否。</value>
+  <data name="DownloadBenefitStrongEncryption" xml:space="preserve">
+    <value>强加密（AES-256）
+</value>
   </data>
-  <data name="DownloadAxcryptLatestFeatures2" xml:space="preserve">
-    <value>这是AxCrypt的唯一官方下载站点。在此处查找 &lt;a class="premium-font" href="/information/cryptographic-hashes-of-files/"&gt;SHA256 hash here&lt;/a&gt;。</value>
+  <data name="DownloadBenefitZeroKnowledgeSecurity" xml:space="preserve">
+    <value>零知识安全保护
+</value>
   </data>
-  <data name="DownloadAxcryptLatestFeatures3" xml:space="preserve">
-    <value>请记住，如果您安装AxCrypt2并打开旧文件，这些文件将不再可能使用AxCrypt1打开。</value>
+  <data name="DownloadBusinessFeatureAuditLogs" xml:space="preserve">
+    <value>审计日志和报告功能
+</value>
   </data>
-  <data name="DownloadEncryptedTextAsTxtTooltipText" xml:space="preserve">
-    <value>将加密文本下载为 .txt 文件</value>
+  <data name="DownloadBusinessFeatureCentralizedKeys" xml:space="preserve">
+    <value>集中式密钥管理
+</value>
   </data>
-  <data name="DownloadHeroHeadingMac" xml:space="preserve">
-    <value>AxCrypt 适用于macOS</value>
+  <data name="DownloadBusinessFeatureCompliance" xml:space="preserve">
+    <value>关注 HIPAA/GDPR/NIS2 合规要求。
+</value>
   </data>
-  <data name="DownloadHeroHeadingWindows" xml:space="preserve">
-    <value>AxCrypt对于Windows</value>
+  <data name="DownloadBusinessFeatureTeamManagement" xml:space="preserve">
+    <value>团队管理和角色
+</value>
   </data>
-  <data name="DownloadHeroListDoubleClick" xml:space="preserve">
-    <value>双击集成使得它很容易打开，编辑和保存安全的文件，因为它是没有安全的文件工作。</value>
+  <data name="DownloadDetectedAndroidOptionSuggestion" xml:space="preserve">
+    <value>从 Google Play 获取 Android 应用。
+</value>
   </data>
-  <data name="DownloadHeroListMultilingualSupport" xml:space="preserve">
-    <value>多语言支持在英语，荷兰语，法语，德语，意大利语，韩语，葡萄牙语，俄语，西班牙语，瑞典语和土耳其语。 更多的惊喜。</value>
+  <data name="DownloadDetectedButtonPrefix" xml:space="preserve">
+    <value>下载适用于
+</value>
   </data>
-  <data name="DownloadHeroListOpenSecured" xml:space="preserve">
-    <value>在移动设备上打开受保护的文件。 请参阅下面的信息。</value>
+  <data name="DownloadDetectedDefaultOptionSuggestion" xml:space="preserve">
+    <value>使用箭头选择其他下载选项。
+</value>
   </data>
-  <data name="DownloadHeroListRightClick" xml:space="preserve">
-    <value>右键单击与Windows资源管理器的集成使得AxCrypt在Windows中保护单个文件的最简单方法。</value>
+  <data name="DownloadDetectedIosOptionSuggestion" xml:space="preserve">
+    <value>从 App Store 获取 iOS 应用。
+</value>
   </data>
-  <data name="DownloadHeroListSecureAny" xml:space="preserve">
-    <value>使用强加密保护任意数量的文件。</value>
+  <data name="DownloadDetectedLinuxDescription" xml:space="preserve">
+    <value>Ubuntu / Debian / Red Hat</value>
   </data>
-  <data name="DownloadHeroListSecuredFolders" xml:space="preserve">
-    <value>受保护的文件夹将根据需要自动保护文件。</value>
+  <data name="DownloadDetectedLinuxOptionSuggestion" xml:space="preserve">
+    <value>建议选择 Ubuntu；Red Hat 位于箭头菜单中。
+</value>
   </data>
-  <data name="DownloadHeroListShareKeys" xml:space="preserve">
-    <value>与其他人共享密钥，并允许其他AxCrypt用户使用自己的密码打开安全的文件。</value>
+  <data name="DownloadDetectedMacDescription" xml:space="preserve">
+    <value>Apple Silicon 和 Intel
+</value>
   </data>
-  <data name="DownloadInformationButtonLabel" xml:space="preserve">
-    <value>阅读发行说明</value>
+  <data name="DownloadDetectedMacOptionSuggestion" xml:space="preserve">
+    <value>使用箭头选择 Apple Silicon 或 Intel。
+</value>
   </data>
-  <data name="DownloadInformationListKeepInMind" xml:space="preserve">
-    <value>请记住，如果您安装AxCrypt2并打开旧文件，这些文件将不再可能使用AxCrypt1打开。</value>
+  <data name="DownloadDetectedOptionsAriaLabel" xml:space="preserve">
+    <value>显示下载选项
+</value>
   </data>
-  <data name="DownloadInformationListNoBackdoors" xml:space="preserve">
-    <value>AxCrypt是没有后门的加密。 如果没有密码，您的文件将丢失。 不要忘记您的密码！ 始终保持重要文件的适当备份，加密与否。</value>
+  <data name="DownloadDetectedPlatformLabel" xml:space="preserve">
+    <value>检测到的平台
+</value>
   </data>
-  <data name="DownloadInformationListOfficialDownload" xml:space="preserve">
-    <value>这是AxCrypt唯一的官方下载网站。 查找SHA256哈希.</value>
+  <data name="DownloadDetectedRecommendedDevice" xml:space="preserve">
+    <value>推荐用于此设备
+</value>
   </data>
-  <data name="DownloadInformationSubheading" xml:space="preserve">
-    <value>请阅读&lt;a href='/information/release-notes'&gt;发行说明&lt;/a&gt;以查看当前版本。</value>
+  <data name="DownloadDetectedWindowsDescription" xml:space="preserve">
+    <value>Windows 11 / 10</value>
+  </data>
+  <data name="DownloadDetectedWindowsOptionSuggestion" xml:space="preserve">
+    <value>需要管理员权限或 IT 部署？请从箭头菜单中选择 MSI。
+</value>
+  </data>
+  <data name="DownloadHelpButton" xml:space="preserve">
+    <value>访问帮助中心
+</value>
+  </data>
+  <data name="DownloadHelpContactSupportSubtitle" xml:space="preserve">
+    <value>获取我们支持团队的帮助。
+</value>
+  </data>
+  <data name="DownloadHelpContactSupportTitle" xml:space="preserve">
+    <value>联系支持团队
+</value>
+  </data>
+  <data name="DownloadHelpDescription" xml:space="preserve">
+    <value>我们随时为您提供帮助，协助您安装、设置并充分利用 AxCrypt。
+</value>
+  </data>
+  <data name="DownloadHelpFaqSubtitle" xml:space="preserve">
+    <value>查找常见问题的答案。
+</value>
+  </data>
+  <data name="DownloadHelpFaqTitle" xml:space="preserve">
+    <value>常见问题
+</value>
+  </data>
+  <data name="DownloadHelpInstallationGuideSubtitle" xml:space="preserve">
+    <value>分步设置说明
+</value>
+  </data>
+  <data name="DownloadHelpInstallationGuideTitle" xml:space="preserve">
+    <value>安装指南
+</value>
+  </data>
+  <data name="DownloadHelpTitle" xml:space="preserve">
+    <value>需要帮助？
+</value>
+  </data>
+  <data name="DownloadHelpUserDocumentationSubtitle" xml:space="preserve">
+    <value>了解如何使用 AxCrypt。
+</value>
+  </data>
+  <data name="DownloadHelpUserDocumentationTitle" xml:space="preserve">
+    <value>用户文档
+</value>
+  </data>
+  <data name="DownloadHeroBrandName" xml:space="preserve">
+    <value>AxCrypt</value>
+  </data>
+  <data name="DownloadHeroDescriptionLine1" xml:space="preserve">
+    <value>保护您的文件安全，守护您的隐私。
+</value>
+  </data>
+  <data name="DownloadHeroDescriptionLine2" xml:space="preserve">
+    <value>免费使用，轻松上手。
+</value>
+  </data>
+  <data name="DownloadHeroTitleAction" xml:space="preserve">
+    <value>下载
+</value>
+  </data>
+  <data name="DownloadHeroTitleLine1" xml:space="preserve">
+    <value>文件加密
+</value>
+  </data>
+  <data name="DownloadHeroTitleLine2" xml:space="preserve">
+    <value>软件
+</value>
+  </data>
+  <data name="DownloadIosLabel" xml:space="preserve">
+    <value>iOS</value>
+  </data>
+  <data name="DownloadIosRequirement" xml:space="preserve">
+    <value>iOS 16.4 及以上版本
+</value>
+  </data>
+  <data name="DownloadLatestVersionLabel" xml:space="preserve">
+    <value>最新版本
+</value>
+  </data>
+  <data name="DownloadLegacyDownloadsButton" xml:space="preserve">
+    <value>查看旧版本下载
+</value>
+  </data>
+  <data name="DownloadLegacyDownloadsDescription" xml:space="preserve">
+    <value>访问旧版本和历史版本。
+</value>
+  </data>
+  <data name="DownloadLegacyDownloadsTitle" xml:space="preserve">
+    <value>旧版本下载
+</value>
   </data>
   <data name="DownloadLinkLabel" xml:space="preserve">
     <value>下载</value>
   </data>
-  <data name="DownloadMobileBodyText" xml:space="preserve">
-    <value>&lt;p&gt;加密和解密文件，随时随地。 移动应用程序支持最常见的云存储，如谷歌驱动器和Dropbox（还有更多）。&lt;/p&gt;&lt;p&gt;您现有的安全文件以及与您共享的文件始终可以在任何平台上查看，而无需订阅。 现在包括移动！&lt;/p&gt;&lt;p&gt;阅读更多&lt;a href='#'&gt;这里&lt;/a&gt;&lt;/p&gt;</value>
+  <data name="DownloadMainGridAriaLabel" xml:space="preserve">
+    <value>下载
+</value>
   </data>
-  <data name="DownloadMobileBodyText1" xml:space="preserve">
-    <value>随时随地加密和解密文件。 移动应用程序支持最常见的云存储，如谷歌驱动器和Dropbox（还有更多）。</value>
+  <data name="DownloadMobileAppsNote" xml:space="preserve">
+    <value>Google Play 和 App Store
+</value>
   </data>
-  <data name="DownloadMobileBodyText2" xml:space="preserve">
-    <value>您的现有安全文件和与您共享的文件始终可以在任何平台上查看，而无需订阅。 现在包括移动！</value>
-  </data>
-  <data name="DownloadMobileBodyText3" xml:space="preserve">
-    <value>阅读更多&lt;a href={url}&gt;在这里&lt;/a&gt;</value>
-  </data>
-  <data name="DownloadMobileHeading" xml:space="preserve">
-    <value>AxCrypt移动</value>
-  </data>
-  <data name="DownloadNavHeading" xml:space="preserve">
-    <value>其他平台</value>
+  <data name="DownloadMobileAppsTitle" xml:space="preserve">
+    <value>移动应用
+</value>
   </data>
   <data name="DownloadNowText" xml:space="preserve">
     <value>立即下载</value>
   </data>
-  <data name="DownloadpageHeadingTitle" xml:space="preserve">
-    <value>&lt;strong&gt;文件&lt;/strong&gt; &lt;span&gt;安全&lt;/span&gt; &lt;strong&gt;应该&lt;/strong&gt; &lt;span&gt;简单。&lt;/span&gt;</value>
+  <data name="DownloadOtherBetaDownloadsSubtitle" xml:space="preserve">
+    <value>试用最新预览版本。
+</value>
   </data>
-  <data name="DownloadPlainText" xml:space="preserve">
-    <value>下载纯文本作为txt文件</value>
+  <data name="DownloadOtherBetaDownloadsTitle" xml:space="preserve">
+    <value>测试版下载
+</value>
   </data>
-  <data name="DownloadPrimiumPlusHeading" xml:space="preserve">
-    <value>&lt;span&gt;Premium&lt;/span&gt; plus:</value>
+  <data name="DownloadOtherBrowserExtensionTitle" xml:space="preserve">
+    <value>浏览器扩展程序（测试版）
+</value>
   </data>
-  <data name="DownloadReleaseNotes" xml:space="preserve">
-    <value>请参阅发行说明</value>
+  <data name="DownloadOtherCliSubtitle" xml:space="preserve">
+    <value>用于自动化的强大 CLI。
+</value>
   </data>
-  <data name="DownloadsubHeading" xml:space="preserve">
-    <value>&lt;strong&gt;所有&lt;/strong&gt;&lt;span&gt;平台。&lt;/span&gt;</value>
+  <data name="DownloadOtherCliTitle" xml:space="preserve">
+    <value>命令行界面（CLI）
+</value>
   </data>
-  <data name="DownloadSuccessfullyNotification" xml:space="preserve">
-    <value>您的文件已成功下载于 {0}</value>
+  <data name="DownloadOtherComingSoonSubtitle" xml:space="preserve">
+    <value>即将推出
+</value>
+  </data>
+  <data name="DownloadOtherDownloadsTitle" xml:space="preserve">
+    <value>其他下载
+</value>
+  </data>
+  <data name="DownloadOtherSourceCodeSubtitle" xml:space="preserve">
+    <value>技术详情
+</value>
+  </data>
+  <data name="DownloadOtherSourceCodeTitle" xml:space="preserve">
+    <value>源代码
+</value>
+  </data>
+  <data name="DownloadPlanAxCryptLabel" xml:space="preserve">
+    <value>AxCrypt</value>
+  </data>
+  <data name="DownloadPlanBusinessCta" xml:space="preserve">
+    <value>免费试用商务版
+</value>
+  </data>
+  <data name="DownloadPlanBusinessDescription" xml:space="preserve">
+    <value>强大的加密和密钥管理功能，适用于团队和组织。
+</value>
+  </data>
+  <data name="DownloadPlanBusinessName" xml:space="preserve">
+    <value>商务版
+</value>
+  </data>
+  <data name="DownloadPlanLearnMore" xml:space="preserve">
+    <value>了解更多
+</value>
+  </data>
+  <data name="DownloadPlanPremiumCta" xml:space="preserve">
+    <value>免费试用高级版
+</value>
+  </data>
+  <data name="DownloadPlanPremiumDescription" xml:space="preserve">
+    <value>获取用于安全共享、云集成等的高级功能。
+</value>
+  </data>
+  <data name="DownloadPlanPremiumName" xml:space="preserve">
+    <value>高级版
+</value>
+  </data>
+  <data name="DownloadPlatformAllPlatformsTitle" xml:space="preserve">
+    <value>所有平台
+</value>
+  </data>
+  <data name="DownloadPlatformDownloadAriaPrefix" xml:space="preserve">
+    <value>下载
+</value>
+  </data>
+  <data name="DownloadPlatformDownloadButton" xml:space="preserve">
+    <value>下载
+</value>
+  </data>
+  <data name="DownloadPremiumFeatureCloudStorage" xml:space="preserve">
+    <value>云存储集成
+</value>
+  </data>
+  <data name="DownloadPremiumFeatureMore" xml:space="preserve">
+    <value>以及更多功能。
+</value>
+  </data>
+  <data name="DownloadPremiumFeaturePrioritySupport" xml:space="preserve">
+    <value>优先支持
+</value>
+  </data>
+  <data name="DownloadPremiumFeatureSecureSharing" xml:space="preserve">
+    <value>安全文件共享
+</value>
+  </data>
+  <data name="DownloadResourceReleaseNotesSubtitle" xml:space="preserve">
+    <value>查看新增内容
+</value>
+  </data>
+  <data name="DownloadResourceReleaseNotesTitle" xml:space="preserve">
+    <value>版本说明
+</value>
+  </data>
+  <data name="DownloadResourcesAriaLabel" xml:space="preserve">
+    <value>下载资源
+</value>
+  </data>
+  <data name="DownloadResourceSecuritySubtitle" xml:space="preserve">
+    <value>了解安全信息。
+</value>
+  </data>
+  <data name="DownloadResourceSecurityTitle" xml:space="preserve">
+    <value>安全信息
+</value>
+  </data>
+  <data name="DownloadResourceSha256Subtitle" xml:space="preserve">
+    <value>验证下载文件。
+</value>
+  </data>
+  <data name="DownloadResourceSha256Title" xml:space="preserve">
+    <value>SHA256 哈希值
+</value>
+  </data>
+  <data name="DownloadResourceSystemRequirementsSubtitle" xml:space="preserve">
+    <value>查看要求
+</value>
+  </data>
+  <data name="DownloadResourceSystemRequirementsTitle" xml:space="preserve">
+    <value>系统要求
+</value>
+  </data>
+  <data name="DownloadSeeOptionsLabel" xml:space="preserve">
+    <value>查看选项
+</value>
   </data>
   <data name="DownloadtheGuide" xml:space="preserve">
     <value>下载指南</value>
   </data>
-  <data name="DownloadTryCtaHeading" xml:space="preserve">
-    <value>试用我们的&lt;span&gt;免费&lt;/span&gt;订阅14天......</value>
+  <data name="DownloadTrustNote" xml:space="preserve">
+    <value>深受全球数百万用户信赖，帮助他们保持文件私密与安全。
+</value>
   </data>
-  <data name="DownloadTryMobileSubscription" xml:space="preserve">
-    <value>您可以随时随地加密和解密Android手机，iPhone或平板电脑上的文件。 AxCrypt移动加密支持Android和iOS。 AxCrypt支持iOS和Android上的谷歌云端硬盘文件加密。 本地存储加密目前仅在Android上可用。 其他云驱动器，如iCloud，DropBox，OneDrive和其他，将在即将发布的版本中得到支持</value>
+  <data name="DownloadVersionPrefix" xml:space="preserve">
+    <value>版本
+</value>
   </data>
-  <data name="DownloadViewerPlusHeading" xml:space="preserve">
-    <value>&lt;span&gt;密码管理器&lt;/span&gt; plus：</value>
+  <data name="DownloadWindowsX64Title" xml:space="preserve">
+    <value>Windows (x64)</value>
   </data>
   <data name="DutchLanguageSelection" xml:space="preserve">
     <value>荷兰语</value>
@@ -18390,10 +18613,12 @@
     <value>什么是AxCrypt之间的区别1.x和2x?</value>
   </data>
   <data name="FaqDifference1&amp;2Answer1" xml:space="preserve">
-    <value>&lt;a href='/download'&gt;here&lt;/a&gt;AxCrypt1.x是旧版本。 这意味着它已经过时，不再有任何支持，而AxCrypt2.x是我们不断努力不断改进的版本。 绝对不建议使用1.x。我们建议所有新老用户始终使用最新发布的AxCrypt版本，可以在这里下载&lt;a href='/download'&gt;&lt;/a&gt;。</value>
+    <value>AxCrypt 1.x 已过时且不再受支持。AxCrypt 2 也是旧版桌面版本，其维护已于 2024 年停止。对于新安装和日常使用，我们推荐当前的 AxCrypt 3 版本，可点击&lt;a href='/download'&gt;此处&lt;/a&gt;下载。
+</value>
   </data>
   <data name="FaqDifference1&amp;2Answer2" xml:space="preserve">
-    <value>对于对传统下载有特定需求的用户（使用风险自担），可以在这里找到&lt;a href='/information/legacy-downloads/'&gt;&lt;/a&gt;。</value>
+    <value>如果您有特定的兼容性、归档恢复或迁移需求，可点击&lt;a href='/legacy-downloads/'&gt;此处&lt;/a&gt;获取旧版下载。
+</value>
   </data>
   <data name="FaqDifferenceStandaloneInstaller" xml:space="preserve">
     <value>AxCrypt的独立版本和安装程序版本之间的主要区别是什么？</value>
@@ -22596,7 +22821,8 @@ SE-114 29 斯德哥尔摩
     <value>离开</value>
   </data>
   <data name="Legacy-verify-Download-Answer" xml:space="preserve">
-    <value>大多数安装程序和可执行文件都由“Axantum Software AB”或“AxCrypt AB”使用 Authenticode 进行数字签名。下载后，右键单击文件并选择“属性 |数字签名”。然后双击签名并确认显示“此数字签名正常”。</value>
+    <value>AxCrypt 安装程序和可执行文件均由 “AxCrypt AB” 使用 Authenticode 进行数字签名。下载后，请右键单击文件并选择“属性 | 数字签名”来验证签名。然后双击该签名，并确认显示“此数字签名正常”。
+</value>
   </data>
   <data name="Legacy-verify-Download-Question" xml:space="preserve">
     <value>如何验证 &lt;span&gt;下载？&lt;/span&gt;</value>
@@ -22608,93 +22834,384 @@ SE-114 29 斯德哥尔摩
     <value>AxCrypt Legacy 旨在为用户提供安全的文件加密，通过简单的密码系统提供可靠和有效地保护。它在使个人和专业用户都可以访问文件加密方面发挥了重要作用，确保只有经过授权的个人才能访问加密数据。其用户友好的界面使许多人能够轻松保护敏感文件，即使他们不熟悉加密技术。</value>
   </data>
   <data name="Legacy-Version-Point2" xml:space="preserve">
-    <value>Legacy本引入了满足时代需求的基本 AES 加密功能，允许用户有效地执行多个加密操作。通过为未来的进步奠定基础，Axcrypt Legacy 展示了我们对高级加密的承诺。尽管 AxCrypt Legacy 不再受到积极支持，但使用它加密的文件仍然是安全的，并且仍然可以使用 AxCrypt 2 解密，从而确保对重要数据的持续访问。我们感谢 AxCrypt Legacy 在我们的开发中发挥的重要作用，并鼓励用户过渡到 AxCrypt 2 以受益于增强的 AES-256 文件加密和其他最新功能。</value>
+    <value>该旧版在当时引入了重要的文件加密功能，但如今已不再维护，也不支持现代桌面使用。AxCrypt 3 是推荐版本，适用于当前的 AES-256 加密，性能更优，提供高级功能，并支持旧版 AxCrypt 加密文件。
+</value>
   </data>
   <data name="Legacy-Version-Point3" xml:space="preserve">
-    <value>注意：这些是 AxCrypt Legacy 下载。我们不认可它们，并敦促您不要下载和使用这些，除非您有特殊需求。使用 AxCrypt 2 加密的新文件与 AxCrypt Legacy 不兼容！使用 AxCrypt Legacy 加密的文件可由 AxCrypt 2 解密。</value>
+    <value>注意：这些旧版下载仅适用于特定的兼容性、归档恢复或迁移情况。新的加密工作和日常桌面使用请使用 AxCrypt 3。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Label" xml:space="preserve">
+    <value>归档
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point1" xml:space="preserve">
+    <value>已过时且不受支持。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point2" xml:space="preserve">
+    <value>不适用于新的加密工作或日常使用。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point3" xml:space="preserve">
+    <value>仅用于受控的归档恢复。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Point4" xml:space="preserve">
+    <value>AxCrypt 3 支持旧版加密文件。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Setup1644Label" xml:space="preserve">
+    <value>1.6.4.4 旧版安装程序
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Setup173180Label" xml:space="preserve">
+    <value>1.7.3180 XP 安装程序
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Setup173233Label" xml:space="preserve">
+    <value>1.7.3233 安装程序
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Status" xml:space="preserve">
+    <value>过时归档
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt1Summary" xml:space="preserve">
+    <value>适用于少数归档访问情况的极旧版 Windows 专用下载。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Label" xml:space="preserve">
+    <value>旧版
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2MacPackageLabel" xml:space="preserve">
+    <value>macOS 软件包
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point1" xml:space="preserve">
+    <value>适用于现有的 AxCrypt 2 部署。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point2" xml:space="preserve">
+    <value>维护已于 2024 年停止。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point3" xml:space="preserve">
+    <value>适用于 Windows 版本号低于 10.0.19041.0 的系统。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Point4" xml:space="preserve">
+    <value>尽可能升级到 AxCrypt 3。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Status" xml:space="preserve">
+    <value>维护已于 2024 年停止。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2Summary" xml:space="preserve">
+    <value>仅在旧版桌面环境暂时无法迁移到 AxCrypt 3 时使用。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2WindowsInstallerLabel" xml:space="preserve">
+    <value>Windows 安装程序
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt2WindowsPortableLabel" xml:space="preserve">
+    <value>Windows 便携版
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3DownloadLabel" xml:space="preserve">
+    <value>下载 AxCrypt 3
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Label" xml:space="preserve">
+    <value>推荐
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point1" xml:space="preserve">
+    <value>当前受支持的桌面应用程序
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point2" xml:space="preserve">
+    <value>AES-256、更快的工作流程和最新功能
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point3" xml:space="preserve">
+    <value>支持来自 AxCrypt v1、v2 和 v3 的文件。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Point4" xml:space="preserve">
+    <value>在 Windows 上，需要 Windows 10.0.19041.0 或更高版本。
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Status" xml:space="preserve">
+    <value>当前版本
+</value>
+  </data>
+  <data name="LegacyCompareAxCrypt3Summary" xml:space="preserve">
+    <value>新桌面安装和日常文件加密的最佳选择。
+</value>
+  </data>
+  <data name="LegacyCompareDecisionArchiveDescription" xml:space="preserve">
+    <value>已过时、无人维护，且不支持现代桌面使用。仅适用于少数归档恢复情况。
+</value>
+  </data>
+  <data name="LegacyCompareDecisionArchiveLabel" xml:space="preserve">
+    <value>归档
+</value>
+  </data>
+  <data name="LegacyCompareDecisionArchiveTitle" xml:space="preserve">
+    <value>避免在新工作中使用 AxCrypt 1.x。
+</value>
+  </data>
+  <data name="LegacyCompareDecisionCompatibilityDescription" xml:space="preserve">
+    <value>适用于旧版桌面部署、迁移测试以及无法运行 AxCrypt 3 的系统。AxCrypt 2 的维护已于 2024 年停止。
+</value>
+  </data>
+  <data name="LegacyCompareDecisionCompatibilityLabel" xml:space="preserve">
+    <value>兼容性
+</value>
+  </data>
+  <data name="LegacyCompareDecisionCompatibilityTitle" xml:space="preserve">
+    <value>仅在必要时使用 AxCrypt 2。
+</value>
+  </data>
+  <data name="LegacyCompareDecisionMostUsersDescription" xml:space="preserve">
+    <value>推荐用于当前桌面操作系统，性能更快，采用 AES-256 加密，提供活跃的安全更新，并带来最新的 AxCrypt 使用体验。
+</value>
+  </data>
+  <data name="LegacyCompareDecisionMostUsersLabel" xml:space="preserve">
+    <value>大多数用户
+</value>
+  </data>
+  <data name="LegacyCompareDecisionMostUsersTitle" xml:space="preserve">
+    <value>安装 AxCrypt 3
+</value>
+  </data>
+  <data name="LegacyCompareIntro" xml:space="preserve">
+    <value>AxCrypt 3 是推荐的桌面版本，适用于所有新安装和日常使用。旧版下载仅提供给需要临时兼容旧版部署、进行迁移测试或访问归档文件的用户。
+</value>
+  </data>
+  <data name="LegacyCompareKicker" xml:space="preserve">
+    <value>版本对比
+</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportAxCrypt1" xml:space="preserve">
+    <value>旧版归档场景。
+</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportAxCrypt2" xml:space="preserve">
+    <value>支持旧版 v2 工作流程。
+</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportAxCrypt3" xml:space="preserve">
+    <value>支持 v1、v2 和 v3 文件。
+</value>
+  </data>
+  <data name="LegacyCompareOlderFileSupportLabel" xml:space="preserve">
+    <value>旧版文件支持
+</value>
+  </data>
+  <data name="LegacyComparePlatformFitAxCrypt1" xml:space="preserve">
+    <value>非常旧的 Windows 环境。
+</value>
+  </data>
+  <data name="LegacyComparePlatformFitAxCrypt2" xml:space="preserve">
+    <value>旧版 Windows 和 macOS 部署。
+</value>
+  </data>
+  <data name="LegacyComparePlatformFitAxCrypt3" xml:space="preserve">
+    <value>当前 Windows、macOS 和 Linux 系统。
+</value>
+  </data>
+  <data name="LegacyComparePlatformFitLabel" xml:space="preserve">
+    <value>桌面平台适用性
+</value>
+  </data>
+  <data name="LegacyCompareQuickComparisonTitle" xml:space="preserve">
+    <value>快速对比
+</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseAxCrypt1" xml:space="preserve">
+    <value>仅用于少数归档恢复情况。
+</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseAxCrypt2" xml:space="preserve">
+    <value>仅限兼容性和迁移使用。
+</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseAxCrypt3" xml:space="preserve">
+    <value>新安装和日常桌面使用。
+</value>
+  </data>
+  <data name="LegacyCompareRecommendedUseLabel" xml:space="preserve">
+    <value>推荐用途
+</value>
+  </data>
+  <data name="LegacyCompareSupportStatusAxCrypt1" xml:space="preserve">
+    <value>过时归档
+</value>
+  </data>
+  <data name="LegacyCompareSupportStatusAxCrypt2" xml:space="preserve">
+    <value>维护已于 2024 年停止。
+</value>
+  </data>
+  <data name="LegacyCompareSupportStatusAxCrypt3" xml:space="preserve">
+    <value>当前维护版本。
+</value>
+  </data>
+  <data name="LegacyCompareSupportStatusLabel" xml:space="preserve">
+    <value>支持状态
+</value>
+  </data>
+  <data name="LegacyCompareTitle" xml:space="preserve">
+    <value>选择合适的 AxCrypt 版本。
+</value>
   </data>
   <data name="LegacyConversionVerificationPrompt" xml:space="preserve">
     <value>转换文件后，它们只会使用当前的AxCrypt密码打开。 请验证您的密码。 
 
 不要忘记这个密码！</value>
   </data>
-  <data name="LegacyDownloadsContent" xml:space="preserve">
-    <value>需要旧版本吗？下载以前的 AxCrypt 版本以与早期系统兼容。</value>
+  <data name="LegacyDownloadsComparisonDescription" xml:space="preserve">
+    <value>按支持状态、平台适用性、功能覆盖范围、迁移用途和下载选项，对比 AxCrypt 3 与旧版 AxCrypt 桌面版本。
+</value>
+  </data>
+  <data name="LegacyDownloadsComparisonTitle" xml:space="preserve">
+    <value>旧版下载对比
+</value>
   </data>
   <data name="LegacyDownloadsDescription" xml:space="preserve">
-    <value>这些是传统的AxCrypt1.x下载. 我们不认可它们，并敦促您不要下载和使用这些，除非您有特定的需要。&lt;strong&gt; 使用AxCrypt2.x加密的新文件与传统AxCrypt1.x不兼容!&lt;/strong&gt; 使用传统AxCrypt1.x加密的文件是由AxCrypt2.x解密。</value>
+    <value>这些是旧版 AxCrypt 下载，仅适用于特定的兼容性、归档恢复或迁移情况。请勿将其用于新的加密工作。AxCrypt 3 是推荐的桌面版本，并支持来自 AxCrypt v1、v2 和 v3 的加密文件。
+</value>
   </data>
-  <data name="LegacyDownloadsHeading" xml:space="preserve">
-    <value>旧版下载。</value>
+  <data name="LegacyDownloadsGuidanceKicker" xml:space="preserve">
+    <value>版本指南
+</value>
   </data>
-  <data name="LegacyDownloadsHowToVerifyHeading" xml:space="preserve">
-    <value>如何验证下载</value>
+  <data name="LegacyDownloadsIntro" xml:space="preserve">
+    <value>旧版 AxCrypt 可用于特定的桌面兼容性和迁移需求。对于新安装和日常使用，AxCrypt 3 是推荐且正在积极维护的桌面版本，具备更好的性能、当前平台支持以及最新产品功能。
+</value>
   </data>
-  <data name="LegacyDownloadsHowToVerifyText" xml:space="preserve">
-    <value>大多数安装程序和可执行文件都使用&lt;a href='http://msdn.microsoft.com/en-us/library/ms537361(v=VS.85).aspx'&gt;验证码&lt;/a&gt;通过'Axantum Software AB'或'AxCrypt AB'。 通过右键单击文件并选择"属性|数字签名"下载后验证签名。 然后双击签名并确认显示"此数字签名OK"。</value>
+  <data name="LegacyDownloadsKicker" xml:space="preserve">
+    <value>旧版下载
+</value>
   </data>
-  <data name="LegacyDownloadsLinkLabel" xml:space="preserve">
-    <value>传统下载</value>
+  <data name="LegacyDownloadsPrimaryCta" xml:space="preserve">
+    <value>下载 AxCrypt 3
+</value>
   </data>
-  <data name="LegacyDownloadsParagraph" xml:space="preserve">
-    <value>需要旧版本？下载适用于 macOS 的 AxCrypt 的早期版本。</value>
+  <data name="LegacyDownloadsQuestionsKicker" xml:space="preserve">
+    <value>问题
+</value>
   </data>
-  <data name="LegacyDownloadsWarning" xml:space="preserve">
-    <value>这个版本已经过时，我们不提供支持。 AxCrypt1.x不被维护，你不应该下载它，除非特别需要。 使用它需要您自担风险。</value>
+  <data name="LegacyDownloadsRecommendedBadge" xml:space="preserve">
+    <value>推荐使用
+</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint1" xml:space="preserve">
+    <value>当前桌面版本
+</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint2" xml:space="preserve">
+    <value>更快、更易用
+</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint3" xml:space="preserve">
+    <value>支持 v1、v2 和 v3 文件
+</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedPoint4" xml:space="preserve">
+    <value>高级功能与安全性
+</value>
+  </data>
+  <data name="LegacyDownloadsRecommendedTitle" xml:space="preserve">
+    <value>新安装请使用 AxCrypt 3
+</value>
+  </data>
+  <data name="LegacyDownloadsSafetyKicker" xml:space="preserve">
+    <value>下载安全性
+</value>
+  </data>
+  <data name="LegacyDownloadsSecondaryCta" xml:space="preserve">
+    <value>比较旧版本
+</value>
+  </data>
+  <data name="LegacyDownloadsTitle" xml:space="preserve">
+    <value>AxCrypt 旧版本下载
+</value>
   </data>
   <data name="LegacyFaq1" xml:space="preserve">
-    <value>与旧版本相比，AxCrypt 2 有什么新变化？</value>
+    <value>我应该使用什么来替代旧版 AxCrypt？
+</value>
   </data>
   <data name="LegacyFaq1Ans" xml:space="preserve">
-    <value>AxCrypt 2 引入了现代界面、统一的密码系统和增强的加密功能。与旧版本不同，它包括简化的登录过程和高级功能，可以更轻松地管理和共享文件。</value>
+    <value>新桌面安装和日常加密工作请使用 AxCrypt 3。它是当前维护中的版本，采用 AES-256 加密，性能更优，支持现代平台，并提供用于安全共享、云盘保护和企业使用的高级功能。
+</value>
   </data>
   <data name="LegacyFaq2" xml:space="preserve">
-    <value>AxCrypt 2 如何处理文件解密？</value>
+    <value>AxCrypt 3 可以打开旧版加密文件吗？
+</value>
   </data>
   <data name="LegacyFaq2Ans" xml:space="preserve">
-    <value>使用 AxCrypt 2，您可以使用单个密码解密所有文件。与旧版本相比，这简化了文件管理，因为旧版本每个文件都需要不同的密码。</value>
+    <value>可以。AxCrypt 3 支持来自 AxCrypt v1、v2 和 v3 的加密文件，因此大多数用户都可以迁移到当前版本，而无需保留旧安装程序用于日常工作。
+</value>
   </data>
   <data name="LegacyFaq3" xml:space="preserve">
     <value>我还能使用旧的 AxCrypt 1.x 吗？</value>
   </data>
   <data name="LegacyFaq3Ans" xml:space="preserve">
-    <value>虽然 AxCrypt Legacy 仍然可用，但我们强烈建议升级到 AxCrypt 2 以增强安全性和用户体验。与 Axcrypt Legacy 提供的 AES-256 加密不同，新版本提供高级 AES-128 加密。</value>
+    <value>AxCrypt 1.x 下载仅适用于少数归档恢复或兼容性情况。它们已过时、无人维护，不建议用于新的加密工作。请尽可能使用 AxCrypt 3。
+</value>
   </data>
   <data name="LegacyFaq4" xml:space="preserve">
-    <value>AxCrypt 2 在哪些操作系统中可用？</value>
+    <value>哪些操作系统应使用 AxCrypt 3？
+</value>
   </data>
   <data name="LegacyFaq4Ans" xml:space="preserve">
-    <value>AxCrypt 2 可在多个平台上使用，包括 Windows、macOS、iOS 和 Android。</value>
+    <value>AxCrypt 3 推荐用于当前的 Windows、macOS 和 Linux 桌面环境。在 Windows 上，AxCrypt 3 要求 Windows 10.0.19041.0 或更高版本。
+</value>
   </data>
   <data name="LegacyFaq5" xml:space="preserve">
-    <value>AxCrypt 2 如何改进密码管理？</value>
+    <value>我什么时候应该使用 AxCrypt 2？
+</value>
   </data>
   <data name="LegacyFaq5Ans" xml:space="preserve">
-    <value>AxCrypt 2 允许您对所有加密文件使用一个强密码，从而消除了对多个密码的需求。这不仅使管理文件变得更加容易，而且还通过降低弱密码的风险来提高整体安全性。</value>
+    <value>仅在现有桌面部署、迁移项目或 Windows 版本号低于 10.0.19041.0 的系统需要时，才使用 AxCrypt 2。AxCrypt 2 的维护已于 2024 年停止，不应选择用于新安装。
+</value>
   </data>
   <data name="LegacyFaq6" xml:space="preserve">
-    <value>AxCrypt 2 是否支持自解密？</value>
+    <value>当前版本的 AxCrypt 支持自解密吗？
+</value>
   </data>
   <data name="LegacyFaq6Ans" xml:space="preserve">
-    <value>不可以，AxCrypt 2 不支持文件的自解密。由于存在重大安全风险，例如自解密文件可能包含高度加密的信息，包括防病毒程序无法屏蔽的恶意软件，因此删除了此功能。</value>
+    <value>不支持。旧版自解密文件不建议用于现代环境，因为可执行容器可能带来安全和分发风险。请使用 AxCrypt 3 进行当前的加密和共享工作。
+</value>
   </data>
   <data name="LegacyFaq7" xml:space="preserve">
-    <value>AxCrypt 2 如何增强 AxCrypt 1.x 的安全性？</value>
+    <value>AxCrypt 3 相比旧版本如何提升安全性？
+</value>
   </data>
   <data name="LegacyFaq7Ans" xml:space="preserve">
-    <value>AxCrypt 2 提供了多项安全增强功能，包括更强大的 AES-256 加密算法、统一的密码系统和改进的文件共享功能。此外，新版本通过其简化的登录过程和最新的界面，更好地抵御常见的安全风险。</value>
+    <value>AxCrypt 3 提供当前的 AES-256 加密、活跃的产品支持、现代化应用框架、更优性能、更友好的桌面使用体验、安全共享、云盘加密，以及面向团队和企业的高级功能。
+</value>
   </data>
   <data name="LegacyFaq8" xml:space="preserve">
-    <value>升级到 AxCrypt 2 会影响我现有的加密文件吗？</value>
+    <value>迁移到 AxCrypt 3 会影响我旧版加密文件吗？
+</value>
   </data>
   <data name="LegacyFaq8Ans" xml:space="preserve">
-    <value>升级到 AxCrypt 2 不会影响您现有的加密文件。新版本与使用 AxCrypt 1.x 加密的文件完全兼容，它还提供自动转换功能，让您的文件快速适应新系统。</value>
+    <value>AxCrypt 3 支持来自 AxCrypt v1、v2 和 v3 的加密文件。大多数用户都可以迁移到 AxCrypt 3，同时继续访问旧版受保护文件。
+</value>
   </data>
   <data name="LegacyFaq9" xml:space="preserve">
-    <value>如何从 AxCrypt Legacy 升级到 AxCrypt 2？</value>
+    <value>如何从旧版 AxCrypt 迁移到 AxCrypt 3？
+</value>
   </data>
   <data name="LegacyFaq9Ans" xml:space="preserve">
-    <value>要从 AxCrypt Legacy 升级到 AxCrypt 2，只需在现有的 AxCrypt 1 安装上安装 AxCrypt 2 即可。无需先卸载。也没有造成任何伤害。</value>
+    <value>从主下载页面下载并安装 AxCrypt 3。仅在您有特定的兼容性、归档恢复或短期迁移需求时，才保留旧版安装程序。
+</value>
   </data>
   <data name="LegacyOpenMessage" xml:space="preserve">
     <value>AxCrypt2使用新的文件格式。
@@ -22704,16 +23221,59 @@ SE-114 29 斯德哥尔摩
 启用AxCrypt1的自动转换.x文件（推荐）？</value>
   </data>
   <data name="LegacyType" xml:space="preserve">
-    <value>AxCrypt Legacy 与 &lt;span&gt; AxCrypt 2 &lt;/span&gt;</value>
+    <value>AxCrypt 旧版与 &lt;span&gt; AxCrypt 3 &lt;/span&gt; 对比
+</value>
   </data>
   <data name="LegacyTypeSummary" xml:space="preserve">
-    <value>AxCrypt 2 通过高级安全功能和直观的界面重新定义了文件加密。它不仅可以增强您的数据保护，还可以简化加密过程，使其成为高效可靠安全性的首选。</value>
+    <value>AxCrypt 3 是当前文件加密的推荐桌面版本。它提供 AES-256 加密、更优性能、现代平台支持、高级功能，并兼容旧版 AxCrypt 加密文件。
+</value>
   </data>
   <data name="LegacyVersionBtn" xml:space="preserve">
     <value>获取最新版本</value>
   </data>
+  <data name="LegacyVsAxCrypt3Faq1Answer" xml:space="preserve">
+    <value>对于新的桌面端安装、日常加密工作、当前的 Windows、macOS 和 Linux 系统、云盘工作流程以及持续的安全更新，请使用 AxCrypt 3。只有在现有桌面端安装、旧版部署或迁移项目明确需要时，才应使用旧版下载。
+</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq1Question" xml:space="preserve">
+    <value>我应该使用 AxCrypt 3 还是旧版？
+</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq2Answer" xml:space="preserve">
+    <value>AxCrypt 3 是当前维护的桌面端发布版本系列。它基于更新的应用框架构建，提供更快速、更易用的体验，支持当前的 Windows、macOS 和 Linux 版本，采用 AES-256 加密，支持旧版 AxCrypt 加密文件，并包含更多用于安全共享、云盘加密、企业使用和团队工作流程的功能。
+</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq2Question" xml:space="preserve">
+    <value>AxCrypt 3 相比旧版 AxCrypt 有哪些优势？
+</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq3Answer" xml:space="preserve">
+    <value>仅在需要兼容现有 AxCrypt 2 桌面工作流程、进行迁移测试，或使用低于 10.0.19041.0 且无法运行 AxCrypt 3 的 Windows 版本时，才下载 AxCrypt 2。AxCrypt 2 的维护已于 2024 年停止，因此不应选择它用于新安装。
+</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq3Question" xml:space="preserve">
+    <value>我什么时候应该下载 AxCrypt 2？
+</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq4Answer" xml:space="preserve">
+    <value>不推荐。AxCrypt 1.x 下载文件是过时的归档文件，仅适用于极少数非常旧的 Windows 环境兼容情况。它们已不再维护，不支持现代桌面使用，也不建议用于新的加密工作。
+</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq4Question" xml:space="preserve">
+    <value>是否推荐下载 AxCrypt 1.x？
+</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq5Answer" xml:space="preserve">
+    <value>可以。AxCrypt 3 应作为日常使用的默认桌面版本，也是推荐的迁移目标。它支持 AxCrypt v1、v2 和 v3 的加密文件，同时提供更快速的现代应用、更高的安全性、更简单的工作流程以及更多高级功能。只有在存在特定兼容性、归档恢复或短期迁移需求时，才保留旧版。
+</value>
+  </data>
+  <data name="LegacyVsAxCrypt3Faq5Question" xml:space="preserve">
+    <value>AxCrypt 3 可以取代旧版 AxCrypt 用于日常使用吗？
+</value>
+  </data>
   <data name="LegacyWarning" xml:space="preserve">
-    <value>此版本已过时，我们不提供支持。AxCrypt Legacy 没有维护，除非特别需要，否则您不应下载它。使用它的风险由您自己承担。</value>
+    <value>此版本已过时、无人维护，且不支持现代桌面使用。除非您有特定的兼容性、归档恢复或迁移需求，否则请勿下载。
+</value>
   </data>
   <data name="LegalIndusLinkLabel" xml:space="preserve">
     <value>法律上的AXCRYPT</value>
@@ -31357,15 +31917,6 @@ AxCrypt团队</value>
   </data>
   <data name="WindowsCompatibleText" xml:space="preserve">
     <value>Windows Vista/2008/7/8/10 32位和64位兼容。</value>
-  </data>
-  <data name="WindowsDownloadLinkTooltip" xml:space="preserve">
-    <value>让您的文件在 &lt;b&gt;Windows 10（v1809+）和 11&lt;/b&gt; 上保持安全。&lt;br/&gt; 设置快速简单——无需任何技术技能。&lt;br/&gt; 只需右键点击文件，即可进行保护、打开和管理。</value>
-  </data>
-  <data name="WindowsMSIDownloadLinkTooltip" xml:space="preserve">
-    <value>最适合 &lt;b&gt;IT 团队和企业&lt;/b&gt;使用。可一次性安装到多台设备上。&lt;br/&gt; 支持静默安装，并可在整个组织内轻松完成设置。</value>
-  </data>
-  <data name="WindowsPortableDownloadLinkTooltip" xml:space="preserve">
-    <value>&lt;b&gt;无需安装&lt;/b&gt;。可直接从 &lt;b&gt;USB 或受限系统&lt;/b&gt;运行。&lt;br/&gt; 即使没有右键选项也能使用——通过应用程序打开、保护和管理文件。</value>
   </data>
   <data name="WipeFileSelectFileDialogTitle" xml:space="preserve">
     <value>选择要安全删除的文件</value>
