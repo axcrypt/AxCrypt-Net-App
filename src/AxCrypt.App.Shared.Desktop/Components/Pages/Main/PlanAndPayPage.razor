@@ -3,7 +3,6 @@
 @using AxCrypt.App.Shared.Desktop.ViewModels
 @using AxCrypt.App.Shared.Desktop.Components.Shared
 @using AxCrypt.Content
-@using static AxCrypt.Abstractions.TypeResolve
 
 @inject NavigationManager Navigation
 @inject PlanAndPayViewModel ViewModel
@@ -739,7 +738,7 @@
                             <polyline points="20 6 9 17 4 12" />
                         </svg>
                     </div>
-                    <h3 class="pp-checkout-modal-title">Payment successful!</h3>
+                    <h3 class="pp-checkout-modal-title">@ViewModel.OverlaySuccessTitle</h3>
                     <p class="pp-checkout-modal-sub">@ViewModel.OverlaySuccessMessage</p>
                 }
                 else if (ViewModel.CheckoutError != null)

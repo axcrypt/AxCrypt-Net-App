@@ -254,6 +254,8 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             ? "This only takes a moment."
             : "Complete your payment in the browser window that just opened. This dialog updates automatically.";
 
+        public string OverlaySuccessTitle => _isFreeActivationFlow ? "You're all set!" : "Payment successful!";
+
         public string OverlaySuccessMessage => _isFreeActivationFlow
             ? "Your Free account is now active. Taking you to the app…"
             : "Your account is now active. Taking you to the app…";
@@ -368,6 +370,13 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
         // Called once from the page's OnInitializedAsync; sets up plan pinning, country, pricing and business list.
         public async Task InitializeAsync(string? planQuery)
         {
+            // This view model is a DI singleton, so its state otherwise survives sign-out/sign-in and
+            // repeat visits to this page — without resetting first, a leftover CheckoutSuccess from a
+            // previous visit (e.g. activating Free, then signing out/in and reopening Upgrade) could
+            // show a stale "success" overlay immediately on load, and stale business/discount/terms
+            // state from a different session could leak into this one.
+            ResetState();
+
             // Pre-populate company info from the signup flow, if available.
             if (!string.IsNullOrWhiteSpace(_signUpVm.OrganizationName))
             {
@@ -395,6 +404,47 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
             PopulateBusinessAccounts();
 
             UpdateViewState();
+        }
+
+        // Clears every piece of session-specific state back to its default before InitializeAsync
+        // re-populates what applies to the current visit — this view model is a singleton, so
+        // without this a leftover checkout/activation result, terms acceptance, discount code, or
+        // business form data from a previous sign-in would otherwise still be sitting here.
+        private void ResetState()
+        {
+            CancelPendingOperations();
+
+            CheckoutPending = false;
+            CheckoutSuccess = false;
+            CheckoutError = null;
+            ShowLoginFallback = false;
+            _isFreeActivationFlow = false;
+
+            SelectedPlan = null;
+            TermsAccepted = false;
+            ShowCompanyValidationErrors = false;
+            YearlyBilling = true;
+
+            OrgName = string.Empty;
+            OrgCountry = string.Empty;
+            OrgVat = string.Empty;
+            InvoiceEmail = string.Empty;
+            PhoneNumber = string.Empty;
+            Address = string.Empty;
+            CompanyInfoFromSignup = false;
+            CompanyInfoExpanded = false;
+            Businesses = new List<KeyValuePair<string, string>>();
+            SelectedBusinessId = string.Empty;
+            MembersCount = 1;
+
+            DiscountCode = string.Empty;
+            DiscountApplied = null;
+            DiscountLoading = false;
+            _pricingModelsBeforeDiscount = null;
+
+            _pricingModels = null;
+            PricingLoadFailed = false;
+            IsPricingLoading = false;
         }
 
         // Cancels any in-flight polling/debounce work; called from the view's Dispose.
@@ -938,6 +988,10 @@ namespace AxCrypt.App.Shared.Desktop.ViewModels
                 identity = new LogOnIdentity(
                     EmailAddress.Parse(_registerViewModel.CreateAccountModel.UserEmail),
                     new Passphrase(_registerViewModel.CreateAccountModel.PasswordText));
+            if (identity == LogOnIdentity.Empty)
+                identity = new LogOnIdentity(
+                    EmailAddress.Parse(_logOnViewModel.LogOnAccountModel.UserEmail),
+                    new Passphrase(_logOnViewModel.LogOnAccountModel.PasswordText));
             return identity;
         }
 
