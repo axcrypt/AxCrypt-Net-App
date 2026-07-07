@@ -9,11 +9,13 @@ namespace AxCrypt.Core.IO
     {
         private readonly List<Regex> pathFilters;
         private readonly List<string> forbiddenFolderFilters;
+        private readonly List<string> forbiddenExactFolders;
 
         public FileFilter()
         {
             pathFilters = new List<Regex>();
             forbiddenFolderFilters = new List<string>();
+            forbiddenExactFolders = new List<string>();
         }
 
         public void AddPlatformIndependent()
@@ -63,14 +65,33 @@ namespace AxCrypt.Core.IO
                 return true;
             }
 
+            string normalizedFolder = folder.NormalizeFolderPath().ToLower();
+
+            // Exact-match roots: the folder itself is forbidden, but its subfolders are allowed (e.g. the user profile root).
+            if (forbiddenExactFolders.Contains(normalizedFolder))
+            {
+                return true;
+            }
+
             foreach (string filter in forbiddenFolderFilters)
             {
-                if (folder.NormalizeFolderPath().ToLower().StartsWith(filter))
+                if (normalizedFolder.StartsWith(filter))
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        /// <summary>Forbids exactly this folder without forbidding its subfolders.</summary>
+        public bool AddForbiddenFolderExact(string path)
+        {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+            forbiddenExactFolders.Add(path.NormalizeFolderPath().ToLower());
+            return true;
         }
 
         public bool AddUnencryptable(Regex regex)
