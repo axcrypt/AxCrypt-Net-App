@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
@@ -292,6 +293,17 @@ namespace AxCrypt.Core.Extensions
             return privateKeys.Where(mpk => mpk != null).ToList();
         }
 
+        // Master/group key unwrap is an expensive RSA operation run on every file touch — cache decrypted keys per identity, invalidated when the source collection instance changes.
+        private sealed class DecryptedKeysCache
+        {
+            public object Source;
+            public IList<IAsymmetricPrivateKey> Keys;
+        }
+
+        private static readonly ConditionalWeakTable<LogOnIdentity, DecryptedKeysCache> _privateMasterKeysCache = new ConditionalWeakTable<LogOnIdentity, DecryptedKeysCache>();
+
+        private static readonly ConditionalWeakTable<LogOnIdentity, DecryptedKeysCache> _privateGroupKeysCache = new ConditionalWeakTable<LogOnIdentity, DecryptedKeysCache>();
+
         public static IEnumerable<IAsymmetricPrivateKey> GetPrivateMasterKeys(this LogOnIdentity identity)
         {
             if (identity.GroupMasterKeyPairs == null || !identity.GroupMasterKeyPairs.Any())
@@ -304,19 +316,25 @@ namespace AxCrypt.Core.Extensions
                 return new List<IAsymmetricPrivateKey>();
             }
 
-            IEnumerable<PrivateMasterKeyInfo> privateKeyInfo = identity.GroupMasterKeyPairs.Select(gmk => gmk.PrivateKeys.FirstOrDefault(pk => pk.UserEmail == identity.UserEmail.Address));
-            if (privateKeyInfo == null || !privateKeyInfo.Any())
+            DecryptedKeysCache cache = _privateMasterKeysCache.GetOrCreateValue(identity);
+            lock (cache)
             {
-                return new List<IAsymmetricPrivateKey>();
-            }
+                if (cache.Keys != null && ReferenceEquals(cache.Source, identity.GroupMasterKeyPairs))
+                {
+                    return cache.Keys;
+                }
 
-            IEnumerable<IAsymmetricPrivateKey> privateKeys = privateKeyInfo.Select(pki => GetDecryptedPrivateKey(pki.PrivateKey, identity));
-            if (privateKeys != null)
-            {
+                IList<IAsymmetricPrivateKey> privateKeys = identity.GroupMasterKeyPairs
+                    .Select(gmk => gmk.PrivateKeys.FirstOrDefault(pk => pk.UserEmail == identity.UserEmail.Address))
+                    .Where(pki => pki != null)
+                    .Select(pki => GetDecryptedPrivateKey(pki.PrivateKey, identity))
+                    .Where(pk => pk != null)
+                    .ToList();
+
+                cache.Source = identity.GroupMasterKeyPairs;
+                cache.Keys = privateKeys;
                 return privateKeys;
             }
-
-            return new List<IAsymmetricPrivateKey>();
         }
 
         public static IEnumerable<IAsymmetricPrivateKey> GetPrivateGroupKeys(this LogOnIdentity identity)
@@ -331,19 +349,24 @@ namespace AxCrypt.Core.Extensions
                 return new List<IAsymmetricPrivateKey>();
             }
 
-            IEnumerable<string> privateKeyInfo = identity.UserGroupKeyPairs.Where(pk => pk.MemberEmail == identity.UserEmail.Address).Select(pk => pk.Private);
-            if (privateKeyInfo == null || !privateKeyInfo.Any())
+            DecryptedKeysCache cache = _privateGroupKeysCache.GetOrCreateValue(identity);
+            lock (cache)
             {
-                return new List<IAsymmetricPrivateKey>();
-            }
+                if (cache.Keys != null && ReferenceEquals(cache.Source, identity.UserGroupKeyPairs))
+                {
+                    return cache.Keys;
+                }
 
-            IEnumerable<IAsymmetricPrivateKey> privateKeys = privateKeyInfo.Select(pki => GetDecryptedPrivateKey(pki, identity));
-            if (privateKeys != null)
-            {
+                IList<IAsymmetricPrivateKey> privateKeys = identity.UserGroupKeyPairs
+                    .Where(pk => pk.MemberEmail == identity.UserEmail.Address && pk.Private != null)
+                    .Select(pk => GetDecryptedPrivateKey(pk.Private, identity))
+                    .Where(pk => pk != null)
+                    .ToList();
+
+                cache.Source = identity.UserGroupKeyPairs;
+                cache.Keys = privateKeys;
                 return privateKeys;
             }
-
-            return new List<IAsymmetricPrivateKey>();
         }
 
         private static IAsymmetricPrivateKey GetDecryptedPrivateKey(string privateKeyInfo, LogOnIdentity identity)

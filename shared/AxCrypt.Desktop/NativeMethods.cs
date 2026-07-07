@@ -8,9 +8,6 @@ namespace AxCrypt.Desktop
 {
     internal static class NativeMethods
     {
-        [DllImport("gdi32.dll")]
-        internal static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [In] ref uint pcFonts);
-
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SystemParametersInfo(uint uAction, uint uParam, ref bool lpvParam, int fWinIni);
