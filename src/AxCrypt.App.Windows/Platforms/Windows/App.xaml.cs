@@ -183,7 +183,6 @@ namespace AxCrypt.App.Windows.WinUI
             TypeMap.Register.New<ICryptoPolicy>(() => New<LicensePolicy>().Capabilities.CryptoPolicy);
 
             TypeMap.Register.Singleton<LicensePolicy>(() => new LicensePolicy());
-            TypeMap.Register.Singleton<FontLoader>(() => new FontLoader());
             TypeMap.Register.Singleton<IEmailParser>(() => new EmailParser());
             TypeMap.Register.Singleton<KeyPairService>(() => new KeyPairService(0, 0, New<UserSettings>().AsymmetricKeyBits));
             TypeMap.Register.Singleton<ICache>(() => new ItemCache());
