@@ -1,4 +1,92 @@
-﻿/bin
+# Build outputs
 bin/
 obj/
+[Bb]uild/
+[Oo]ut/
+publish/
+artifacts/
+*.binlog
+
+# Visual Studio / Rider / VS Code
 .vs/
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.csproj.user
+
+# macOS / Windows cruft
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs and dumps
+*.log
+logs/
+*.dmp
+TestResults/
+coverage/
+*.coverage
+*.trx
+
+# Local configuration and secrets — never commit these
+appsettings.local.json
+appsettings.*.local.json
+secrets.json
+*.secrets.json
+.env
+.env.*
+local.settings.json
+
+# Build-time injected cloud OAuth credentials — never commit the generated file
+CloudDriveSecrets.BuildTime.cs
+
+# Certificates, keys, signing material — never commit these
+*.pfx
+*.p12
+*.snk
+*.cer
+*.crt
+*.der
+*.pem
+*.key
+*.keystore
+*.jks
+*.mobileprovision
+*.provisionprofile
+*.pubxml.user
+
+# Exception: BouncyCastle strong-name key is intentionally public
+!shared/BouncyCastle.AxCrypt/src/BouncyCastle.snk
+
+# Packaging / publish artifacts
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+*.apk
+*.aab
+*.ipa
+*.nupkg
+*.snupkg
+AppPackages/
+BundleArtifacts/
+
+# NuGet
+packages/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+
+# Temporary encrypted/decrypted files (AxCrypt work products)
+*.axx.tmp
+*-decrypted.*
+*.tmp.axx
+axcrypt-temp/
+
+# SBOM / scan outputs generated locally
+*.sbom.json
+*.spdx.json
+gitleaks-report.json

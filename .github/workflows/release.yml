@@ -1,0 +1,109 @@
+name: release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  cli:
+    name: Build CLI (${{ matrix.rid }})
+    strategy:
+      matrix:
+        include:
+          - rid: win-x64
+            os: windows-latest
+            archive: zip
+          - rid: osx-arm64
+            os: macos-latest
+            archive: tar
+          - rid: osx-x64
+            os: macos-latest
+            archive: tar
+          - rid: linux-x64
+            os: ubuntu-latest
+            archive: tar
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish self-contained single file
+        run: dotnet publish src/AxCrypt.Cli/AxCrypt.Cli.csproj -c Release -r ${{ matrix.rid }} --self-contained -p:PublishSingleFile=true -o publish/${{ matrix.rid }}
+
+      - name: Archive (tar.gz)
+        if: matrix.archive == 'tar'
+        run: tar -czf axcrypt-cli-${{ github.ref_name }}-${{ matrix.rid }}.tar.gz -C publish/${{ matrix.rid }} .
+
+      - name: Archive (zip)
+        if: matrix.archive == 'zip'
+        run: Compress-Archive -Path publish/${{ matrix.rid }}/* -DestinationPath axcrypt-cli-${{ github.ref_name }}-${{ matrix.rid }}.zip
+        shell: pwsh
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: publish/${{ matrix.rid }}
+          format: spdx-json
+          output-file: axcrypt-cli-${{ github.ref_name }}-${{ matrix.rid }}.sbom.spdx.json
+
+      # --- OFFICIAL AxCrypt AB SIGNING (skipped when secrets are absent) ---
+      # Windows Authenticode signing of the published binary. Runs only in the
+      # protected 'release' environment of the official repository where the
+      # signing secrets exist. Community forks build unsigned artifacts.
+      # See docs/SIGNING.md for macOS notarization and mobile signing details.
+      - name: Sign Windows binary (official builds only)
+        if: matrix.rid == 'win-x64' && vars.AX_OFFICIAL_SIGNING == 'true'
+        shell: pwsh
+        run: |
+          # Example using Azure Trusted Signing / installed certificate:
+          # signtool sign /sha1 $env:AX_SIGNING_CERT_THUMBPRINT /fd sha256 /td sha256 /tr $env:AX_TIMESTAMP_URL publish/win-x64/axcrypt.exe
+          Write-Host "Signing hook: configure AX_SIGNING_CERT_THUMBPRINT and certificate provisioning in the protected environment."
+        env:
+          AX_SIGNING_CERT_THUMBPRINT: ${{ secrets.AX_SIGNING_CERT_THUMBPRINT }}
+          AX_TIMESTAMP_URL: ${{ vars.AX_TIMESTAMP_URL }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cli-${{ matrix.rid }}
+          path: |
+            axcrypt-cli-*
+  release:
+    name: Create GitHub release
+    needs: cli
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: Checksums
+        run: |
+          cd artifacts
+          sha256sum axcrypt-cli-* > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - name: Draft release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          generate_release_notes: true
+          files: artifacts/*
+          body: |
+            ## Verifying this release
+
+            - Compare SHA-256 checksums with `SHA256SUMS.txt` attached below.
+            - **Official AxCrypt AB builds are digitally signed by "AxCrypt AB".**
+              Windows: `signtool verify /pa <file>` · macOS: `codesign -dv --verbose=2 <file>`.
+              A build not signed by AxCrypt AB is not an official build. See docs/SIGNING.md.
+
+            AxCrypt is a trademark of AxCrypt AB. Source code: GPL-3.0-or-later.

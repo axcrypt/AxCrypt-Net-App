@@ -1,0 +1,45 @@
+name: Feature request
+description: Suggest an idea or improvement
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check existing issues first. Note that changes to cryptographic behavior
+        follow the approval process in [CONTRIBUTING.md](../../CONTRIBUTING.md).
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - CLI (axcrypt)
+        - Desktop app (Windows)
+        - Core libraries
+        - Build / CI
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the use case, not only the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: crypto
+    attributes:
+      label: Crypto impact
+      options:
+        - label: This proposal changes encryption formats, algorithms, or key handling (requires crypto design approval).

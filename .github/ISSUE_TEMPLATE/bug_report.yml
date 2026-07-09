@@ -1,0 +1,69 @@
+name: Bug report
+description: Report a reproducible problem in AxCrypt
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug.
+
+        **Security issues:** do NOT report vulnerabilities here — see [SECURITY.md](../../SECURITY.md) for private reporting.
+        **Never** attach passwords, key files, or an encrypted file together with its password.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - CLI (axcrypt)
+        - Desktop app (Windows)
+        - Core libraries
+        - Build / CI
+        - Documentation
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: "e.g. v1.0.0 or commit SHA; `axcrypt version` output"
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Operating system and architecture
+      placeholder: "e.g. Windows 11 x64, Ubuntu 24.04 arm64, macOS 15"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also include what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. axcrypt encrypt --input ...
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output
+      description: Console output or error messages. Remove any sensitive data.
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I have removed all passwords, keys, and sensitive file contents from this report.
+          required: true
+        - label: This is not a security vulnerability (those go through SECURITY.md).
+          required: true

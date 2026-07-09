@@ -47,12 +47,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.App.Shared.Desktop"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxCrypt.App.Entitlement", "AxCrypt.App.Entitlement\AxCrypt.App.Entitlement.csproj", "{27BFD577-71F3-41B5-842A-227682EAF175}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.Cli", "AxCrypt.Cli\AxCrypt.Cli.csproj", "{7C1E43C5-3F1A-4B9E-9C2D-5A8F0E6D21B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxCrypt.Cli.Test", "..\tests\AxCrypt.Cli.Test\AxCrypt.Cli.Test.csproj", "{2B9D6F04-8E57-4C33-A1D2-93E4F7C5A6D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C1E43C5-3F1A-4B9E-9C2D-5A8F0E6D21B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C1E43C5-3F1A-4B9E-9C2D-5A8F0E6D21B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C1E43C5-3F1A-4B9E-9C2D-5A8F0E6D21B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C1E43C5-3F1A-4B9E-9C2D-5A8F0E6D21B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B9D6F04-8E57-4C33-A1D2-93E4F7C5A6D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B9D6F04-8E57-4C33-A1D2-93E4F7C5A6D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B9D6F04-8E57-4C33-A1D2-93E4F7C5A6D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B9D6F04-8E57-4C33-A1D2-93E4F7C5A6D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0AED6448-76A4-41AF-8C16-BF1B6ABE823D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0AED6448-76A4-41AF-8C16-BF1B6ABE823D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AED6448-76A4-41AF-8C16-BF1B6ABE823D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -140,6 +152,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{2B9D6F04-8E57-4C33-A1D2-93E4F7C5A6D8} = {FC72C69B-01ED-43E0-9202-D3A52B9CCEEF}
 		{B220D4E7-789F-4F55-9EAA-226CB662F0D6} = {8208E861-E45D-4F80-8BDD-7DF97043D61A}
 		{C76E3122-94EC-4156-9638-408B6B0C07AE} = {8208E861-E45D-4F80-8BDD-7DF97043D61A}
 		{43696E80-DDBB-493A-8580-0EDC88307772} = {8208E861-E45D-4F80-8BDD-7DF97043D61A}

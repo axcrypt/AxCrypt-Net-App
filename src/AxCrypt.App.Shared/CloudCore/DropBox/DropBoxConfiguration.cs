@@ -8,9 +8,11 @@ namespace AxCrypt.App.Shared.CloudCore.DropBox
     {
         private static DeviceCategory _deviceType => New<ICloudDriveConfiguration>().CurrentDeviceCategory;
 
-        public static readonly string ClientIdOrAppKey = "omrx7hccdskf45r";
+        // No secrets are committed to source. See CloudDriveSecrets for how official
+        // builds and local developers supply these values.
+        public static string ClientIdOrAppKey => CloudDriveSecrets.Get(CloudDriveSecrets.DropBoxAppKey);
 
-        public static readonly string AppSecret = "enma8m952i35ojh";
+        public static string AppSecret => CloudDriveSecrets.Get(CloudDriveSecrets.DropBoxAppSecret);
 
         public static readonly string AuthorizeUrl = "https://www.dropbox.com/oauth2/authorize";
         public static readonly string AccessTokenUrl = "https://api.dropboxapi.com/oauth2/token";

@@ -13,7 +13,9 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
 
         public static readonly string ACCESSTOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
 
-        public static readonly string CLIENT_ID = "ce1f3212-6b9d-4008-8013-c0e0c6cafc38";
+        // No secrets are committed to source. See CloudDriveSecrets for how official
+        // builds and local developers supply this value.
+        public static string CLIENT_ID => CloudDriveSecrets.Get(CloudDriveSecrets.OneDriveClientId);
 
         public static readonly string[] SCOPES = new string[] { "Files.ReadWrite.All" };
 

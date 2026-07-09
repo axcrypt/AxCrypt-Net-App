@@ -1,0 +1,114 @@
+name: ci
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  secret-scan:
+    name: Secret scan (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-test:
+    name: Build & test (cross-platform projects)
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore & build CLI (includes shared libraries)
+        run: dotnet build src/AxCrypt.Cli/AxCrypt.Cli.csproj -c Release
+
+      - name: Test — CLI round trip
+        run: dotnet test tests/AxCrypt.Cli.Test/AxCrypt.Cli.Test.csproj -c Release --logger "trx" --results-directory TestResults
+
+      - name: Test — core
+        run: dotnet test tests/AxCrypt.Core.Test/AxCrypt.Core.Test.csproj -c Release --logger "trx" --results-directory TestResults
+
+      - name: Test — common & mono
+        run: |
+          dotnet test tests/AxCrypt.Common.Test/AxCrypt.Common.Test.csproj -c Release --logger "trx" --results-directory TestResults
+          dotnet test tests/AxCrypt.Mono.Test/AxCrypt.Mono.Test.csproj -c Release --logger "trx" --results-directory TestResults
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}
+          path: TestResults
+
+  format:
+    name: Format check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      # Verify formatting of the CLI and its tests (new code); extend gradually.
+      - run: dotnet format src/AxCrypt.Cli/AxCrypt.Cli.csproj --verify-no-changes
+      - run: dotnet format tests/AxCrypt.Cli.Test/AxCrypt.Cli.Test.csproj --verify-no-changes
+
+  license-check:
+    name: Dependency license check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Restore
+        run: dotnet restore src/AxCrypt.Cli/AxCrypt.Cli.csproj
+      - name: Check package licenses against allow-list
+        run: |
+          dotnet tool install --global nuget-license
+          nuget-license -i src/AxCrypt.Cli/AxCrypt.Cli.csproj -t \
+            --allowed-license-types "MIT;Apache-2.0;BSD-2-Clause;BSD-3-Clause;MS-PL" \
+            || { echo "::error::Found a dependency with a license outside the GPLv3-compatible allow-list. Update THIRD-PARTY-NOTICES.md and the allow-list only after verifying compatibility."; exit 1; }
+
+  package-cli:
+    name: Package CLI artifacts
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Publish (linux-x64, framework-dependent smoke package)
+        run: dotnet publish src/AxCrypt.Cli/AxCrypt.Cli.csproj -c Release -o publish/cli
+      - name: Smoke test
+        run: |
+          publish/cli/axcrypt version
+          echo "hello ci" > /tmp/ci.txt
+          AXCRYPT_PASSWORD=ci-password publish/cli/axcrypt encrypt --input /tmp/ci.txt --output /tmp/ci.txt.axx
+          AXCRYPT_PASSWORD=ci-password publish/cli/axcrypt decrypt --input /tmp/ci.txt.axx --output /tmp/ci.out.txt
+          cmp /tmp/ci.txt /tmp/ci.out.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: axcrypt-cli-ci
+          path: publish/cli

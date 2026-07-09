@@ -14,8 +14,20 @@
 		<_AppDefaultPlatform>x64</_AppDefaultPlatform>
 		<_AxMergedBaseFileName>$(_AxCanonicalAssemblyName)_$(FinalAppVersion)_$(_AppDefaultPlatform)</_AxMergedBaseFileName>
 		<AppOutputPath>$(AppxPackageDir)$(_AxCanonicalAssemblyName)_$(FinalAppVersion)_Test\</AppOutputPath>
-		<PackageCertificateThumbprint>B3E2D8EB3B9AC1E60F5B2D581F9A2B1D1372701C</PackageCertificateThumbprint>
-		<_AxTimeStampUrl>http://time.certum.pl</_AxTimeStampUrl>
+		<!--
+			Code signing is OPTIONAL and only used for official AxCrypt AB releases.
+			No certificate or thumbprint is committed to this repository. Supply the
+			thumbprint of a certificate installed in the build machine certificate
+			store via the AX_SIGNING_CERT_THUMBPRINT environment variable or the
+			PackageCertificateThumbprint MSBuild property. When empty, signing is skipped.
+			signtool.exe is resolved from PATH (Windows SDK) or via AX_SIGNTOOL_PATH.
+			See docs/SIGNING.md.
+		-->
+		<PackageCertificateThumbprint Condition=" '$(PackageCertificateThumbprint)' == '' ">$(AX_SIGNING_CERT_THUMBPRINT)</PackageCertificateThumbprint>
+		<_AxSignToolExe Condition=" '$(AX_SIGNTOOL_PATH)' != '' ">$(AX_SIGNTOOL_PATH)</_AxSignToolExe>
+		<_AxSignToolExe Condition=" '$(_AxSignToolExe)' == '' ">signtool.exe</_AxSignToolExe>
+		<_AxTimeStampUrl Condition=" '$(AX_TIMESTAMP_URL)' != '' ">$(AX_TIMESTAMP_URL)</_AxTimeStampUrl>
+		<_AxTimeStampUrl Condition=" '$(_AxTimeStampUrl)' == '' ">http://time.certum.pl</_AxTimeStampUrl>
 	</PropertyGroup>
 
 	<Target Name="_AxSetVersionedFileName">
@@ -53,9 +65,9 @@
 
 	<!-- 🔐 Signing target -->
 	<Target Name="SignMSIXAfterPublish" AfterTargets="_GenerateAppxPackageFile">
-		<Exec Command='&quot;$(MSBuildThisFileDirectory)signtool.exe&quot; sign /sha1 $(PackageCertificateThumbprint) /fd sha256 /td sha256 /tr &quot;$(_AxTimeStampUrl)&quot; &quot;$(_AxVersionedDefaultFileName)&quot;'
+		<Exec Command='&quot;$(_AxSignToolExe)&quot; sign /sha1 $(PackageCertificateThumbprint) /fd sha256 /td sha256 /tr &quot;$(_AxTimeStampUrl)&quot; &quot;$(_AxVersionedDefaultFileName)&quot;'
 				Condition=" '$(PackageCertificateThumbprint)' != '' "/>
-		<Exec Command='&quot;$(MSBuildThisFileDirectory)signtool.exe&quot; sign /sha1 $(PackageCertificateThumbprint) /fd sha256 /td sha256 /tr &quot;$(_AxTimeStampUrl)&quot; &quot;$(AppOutputPath)$(_AxVersionedFileName)&quot;'
+		<Exec Command='&quot;$(_AxSignToolExe)&quot; sign /sha1 $(PackageCertificateThumbprint) /fd sha256 /td sha256 /tr &quot;$(_AxTimeStampUrl)&quot; &quot;$(AppOutputPath)$(_AxVersionedFileName)&quot;'
 			  Condition=" '$(PackageCertificateThumbprint)' != '' "/>
 	</Target>
 </Project>
