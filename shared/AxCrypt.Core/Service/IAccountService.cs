@@ -228,5 +228,7 @@ namespace AxCrypt.Core.Service
         Task<Uri> GetStripeCheckoutSessionUrlAsync(PurchaseInfoApiModel purchaseInfoApiModel);
 
         Task<string> GetPayPalCheckoutSessionUrlAsync(int subsMonths, string currency, string ip);
+
+        Task<bool> SendInviteFriendEmailAsync(EmailAddress email, CustomMessageParameters customParameters);
     }
 }

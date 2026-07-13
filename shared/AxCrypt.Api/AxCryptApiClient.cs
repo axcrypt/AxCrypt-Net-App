@@ -197,6 +197,23 @@ namespace AxCrypt.Api
             return accountKey;
         }
 
+        public async Task<bool> SendInviteFriendEmailAsync(string userName, CustomMessageParameters customParameters)
+        {
+            if (userName == null)
+            {
+                throw new ArgumentNullException(nameof(userName));
+            }
+
+            Uri resource = BaseUrl.PathCombine("usersv2/invite/{0}".With(ApiCaller.PathSegmentEncode(userName)));
+
+            RestContent content = new RestContent(Serializer.Serialize(customParameters));
+
+            RestResponse restResponse = await Caller.RestAsync(Identity, new RestRequest("POST", resource, Timeout, content)).Free();
+            ApiCaller.EnsureStatusOk(restResponse);
+
+            return Serializer.Deserialize<bool>(restResponse.Content);
+        }
+
         /// <summary>
         /// Gets the public key of any user. If the user does not exist, he or she is invited by the current user.
         /// </summary>

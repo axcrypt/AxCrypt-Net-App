@@ -425,5 +425,10 @@ namespace AxCrypt.Core.Service
 
             return await _apiClient.GetPayPalCheckoutSessionUrlAsync(subsMonths, currency, ip).Free();
         }
+
+        public async Task<bool> SendInviteFriendEmailAsync(EmailAddress email, CustomMessageParameters customParameters)
+        {
+            return await _apiClient.SendInviteFriendEmailAsync(email.Address, customParameters).Free();
+        }
     }
 }

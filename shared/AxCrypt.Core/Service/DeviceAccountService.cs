@@ -566,5 +566,22 @@ namespace AxCrypt.Core.Service
 
             return await _localService.GetPayPalCheckoutSessionUrlAsync(subsMonths, currency, ip).Free();
         }
+
+        public async Task<bool> SendInviteFriendEmailAsync(EmailAddress email, CustomMessageParameters customParameters)
+        {
+            if (New<AxCryptOnlineState>().IsOnline && Identity != LogOnIdentity.Empty)
+            {
+                try
+                {
+                    return await _remoteService.SendInviteFriendEmailAsync(email, customParameters).Free();
+                }
+                catch (ApiException aex)
+                {
+                    await aex.HandleApiExceptionAsync();
+                }
+            }
+
+            return await _localService.SendInviteFriendEmailAsync(email, customParameters).Free();
+        }
     }
 }

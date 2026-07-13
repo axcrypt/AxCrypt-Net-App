@@ -426,5 +426,10 @@ namespace AxCrypt.Core.Service
         {
             return Task.FromResult((""));
         }
+
+        public Task<bool> SendInviteFriendEmailAsync(EmailAddress email, CustomMessageParameters customParameters)
+        {
+            return Task.FromResult(true);
+        }
     }
 }

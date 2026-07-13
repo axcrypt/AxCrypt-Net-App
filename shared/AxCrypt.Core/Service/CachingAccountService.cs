@@ -194,5 +194,10 @@ namespace AxCrypt.Core.Service
         {
             return await New<ICache>().UpdateItemAsync(() => _service.GetPayPalCheckoutSessionUrlAsync(subsMonths, currency, ip)).Free();
         }
+
+        public async Task<bool> SendInviteFriendEmailAsync(EmailAddress email, CustomMessageParameters customParameters)
+        {
+            return await New<ICache>().UpdateItemAsync(() => _service.SendInviteFriendEmailAsync(email, customParameters)).Free();
+        }
     }
 }
