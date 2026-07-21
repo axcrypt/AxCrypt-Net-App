@@ -30,6 +30,7 @@
 
 using AxCrypt.Abstractions;
 using System.Security.Cryptography;
+using System.Text;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Crypto;
@@ -80,9 +81,18 @@ public class TransientProtectedData
         }
     }
 
-    public byte[] Protect(byte[] userData, byte[] key)
+    public byte[] Protect(string value)
+    {
+        byte[] bytes = Encoding.Unicode.GetBytes(value);
+        byte[] protectedBytes = Protect(bytes);
+        Array.Clear(bytes, 0, bytes.Length);
+        return protectedBytes;
+    }
+
+    public byte[] Protect(string value, byte[] key)
     {
         key = key ?? _key;
+        byte[] userData = Encoding.Unicode.GetBytes(value);
         byte[] protectedBytes = CustomAesEncryption.EncryptData(userData, key, _entropy);
         Array.Clear(userData, 0, userData.Length);
         return protectedBytes;
@@ -108,4 +118,83 @@ public class TransientProtectedData
             return null;
         }
     }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+    public bool TryUnprotect(byte[] protectedValue, byte[] key, out string value)
+    {
+        value = null;
+        byte[] bytes;
+        if (!CustomAesEncryption.TryUnprotect(protectedValue, key, out bytes))
+        {
+            return false;
+        }
+        try
+        {
+            value = Encoding.Unicode.GetString(bytes, 0, bytes.Length);
+        }
+        catch
+        {
+            return false;
+        }
+        finally
+        {
+            if (bytes != null)
+            {
+                Array.Clear(bytes, 0, bytes.Length);
+            }
+        }
+        return true;
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+    public bool TryUnprotect(byte[] protectedValue, out string value)
+    {
+        value = null;
+        byte[] bytes;
+        if (!TryUnprotect(protectedValue, out bytes))
+        {
+            return false;
+        }
+        try
+        {
+            value = Encoding.Unicode.GetString(bytes, 0, bytes.Length);
+        }
+        catch
+        {
+            return false;
+        }
+        finally
+        {
+            if (bytes != null)
+            {
+                Array.Clear(bytes, 0, bytes.Length);
+            }
+        }
+        return true;
+    }
+
+    public bool TryUnprotect(byte[] protectedValue, out byte[] bytes)
+    {
+        bytes = null;
+        try
+        {
+            bytes = New<IProtectedData>().Unprotect(protectedValue, _entropy);
+        }
+        catch (AxCryptException)
+        {
+            return false;
+        }
+        catch (FormatException)
+        {
+            return false;
+        }
+        return bytes != null;
+    }
+
+    public byte[] Protect(byte[] value)
+    {
+        byte[] protectedBytes = New<IProtectedData>().Protect(value, Entropy());
+        return protectedBytes;
+    }
+
 }

@@ -30,6 +30,7 @@
 
 #endregion License
 
+using AxCrypt.Core.Crypto;
 using Newtonsoft.Json;
 using static AxCrypt.Abstractions.TypeResolve;
 
