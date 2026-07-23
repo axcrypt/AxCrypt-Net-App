@@ -87,13 +87,13 @@ namespace AxCrypt.International.WebServices
             DateTime today = New<INow>().Utc.ToLocalTime().Date;
             if (fromUtc.Date == today)
             {
-                return new Uri("http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml");
+                return new Uri("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
             }
             if (fromUtc > today.AddDays(-90))
             {
-                return new Uri("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml");
+                return new Uri("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml");
             }
-            return new Uri("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml");
+            return new Uri("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml");
         }
 
         private static void ReadEcbXml(IList<ExchangeRate> dailyRates, WebResponse response)

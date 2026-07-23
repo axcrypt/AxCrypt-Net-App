@@ -38,7 +38,22 @@ namespace AxCrypt.Core.Crypto
 {
     public class CryptoFactory
     {
-        public static readonly int DerivationIterations = 1000;
+        // PBKDF2-HMAC-SHA512 iteration count used to derive the key-encrypting key from a passphrase.
+        // Raised from the legacy 1000 to align with modern guidance (OWASP recommends on the order of
+        // 210,000 for PBKDF2-HMAC-SHA512).
+        //
+        // Backward compatibility: this value is written into each file's key-wrap header
+        // (V2KeyWrapHeaderBlock.DerivationIterations / DerivationSalt) and read back on decryption
+        // (V2AxCryptDocument.Load -> CryptoFactory.RestoreDerivedKey(..., keyWrap.DerivationIterations)).
+        // Existing files therefore keep their own stored count and remain decryptable, and files
+        // written with this value stay readable by older builds that also read the header.
+        //
+        // Caveat: the local passphrase thumbprint (SymmetricKeyThumbprint) is computed with this
+        // constant rather than a stored value, so after upgrading, an install recomputes identity
+        // thumbprints once; locally cached "recent files" key associations may need a single
+        // re-login. No file becomes unreadable. A future format revision should adopt a memory-hard
+        // KDF (Argon2id) via the BouncyCastle dependency.
+        public static readonly int DerivationIterations = 210000;
 
         private Dictionary<Guid, CryptoFactoryCreator> _factories = new Dictionary<Guid, CryptoFactoryCreator>();
 

@@ -207,17 +207,17 @@ namespace AxCrypt.Mono
 
         public void DebugMode(bool enable)
         {
-            if (enable)
-            {
-                ServicePointManager.ServerCertificateValidationCallback = (object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) =>
-                {
-                    return true;
-                };
-            }
-            else
-            {
-                ServicePointManager.ServerCertificateValidationCallback = null;
-            }
+            // Intentionally a no-op for TLS/certificate handling.
+            //
+            // This method previously set ServicePointManager.ServerCertificateValidationCallback
+            // to a delegate that unconditionally returned true, which disabled TLS certificate
+            // validation for the ENTIRE process and persisted across sessions. Because the debug
+            // flag is user-toggleable and saved to settings, that exposed every HTTPS call
+            // (licensing/entitlement API, account credentials, cloud storage) to man-in-the-middle
+            // attacks. Debug verbosity is controlled separately via the logging level, so no
+            // certificate-trust changes are required here. Do not reintroduce a blanket
+            // "accept any certificate" callback.
+            _ = enable;
         }
 
         public SynchronizationContext SynchronizationContext

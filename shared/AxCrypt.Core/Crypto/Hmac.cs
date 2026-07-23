@@ -122,7 +122,11 @@ namespace AxCrypt.Core.Crypto
             {
                 return false;
             }
-            return left._hmac.IsEquivalentTo(right._hmac);
+            // Use a fixed-time comparison for the MAC. FixedTimeEquals does not short-circuit
+            // on the first differing byte, so it does not leak, via timing, how many leading
+            // bytes of a candidate MAC were correct. The length check it performs is on public
+            // (non-secret) lengths. Do not revert this to the early-exit IsEquivalentTo.
+            return System.Security.Cryptography.CryptographicOperations.FixedTimeEquals(left._hmac, right._hmac);
         }
 
         /// <summary>

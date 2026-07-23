@@ -57,23 +57,35 @@ namespace AxCrypt.Core.Crypto
             }
         }
 
+        // Target roughly half a second of key-wrap work on the encrypting device (previously ~1/20 s),
+        // with a substantially higher floor. The resulting count is stored per file and cached per
+        // install, so raising these values strengthens newly written files and freshly calibrated
+        // installs without affecting existing files or already-calibrated installs.
+        private const long TargetWorkFactorDivisor = 2;      // iterationsPerSecond / 2 ~= 0.5 seconds
+
+        private const long MinimumKeyWrapIterations = 20000;
+
         /// <summary>
         /// Get the number of key wrap iterations we use by default. This is a calculated value intended to cause the wrapping
-        /// operation to take approximately 1/20th of a second in the system where the code is run.
-        /// A minimum of 5000 iterations are always guaranteed.
+        /// operation to take approximately half a second on the system where the code is run.
+        /// A minimum of <see cref="MinimumKeyWrapIterations"/> iterations is always guaranteed.
         /// </summary>
         /// <param name="cryptoId">The id of the crypto to use for the wrap.</param>
         public virtual long KeyWrapIterations(Guid cryptoId)
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            // Do the one-off setup (which performs a key derivation of its own) BEFORE starting the
+            // clock, then time only the measurement loop. Previously the setup ran inside the timed
+            // window, which on slow devices could exhaust the 500 ms budget after a single batch,
+            // under-measuring iterations/second and weakening the KDF.
             WrapIterator wrapIterator = new WrapIterator(cryptoId);
 
+            Stopwatch stopwatch = Stopwatch.StartNew();
             long iterationsPerSecond = IterationsPerSecond(stopwatch, wrapIterator.Iterate);
-            long defaultIterations = iterationsPerSecond / 20;
+            long defaultIterations = iterationsPerSecond / TargetWorkFactorDivisor;
 
-            if (defaultIterations < 5000)
+            if (defaultIterations < MinimumKeyWrapIterations)
             {
-                defaultIterations = 5000;
+                defaultIterations = MinimumKeyWrapIterations;
             }
 
             return defaultIterations;

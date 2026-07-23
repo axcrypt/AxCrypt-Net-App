@@ -717,31 +717,57 @@ namespace AxCrypt.Core
                 throw new ArgumentNullException(nameof(progress));
             }
             IDataStore destinationStore = destinationLock.DataStore;
-            try
+
+            // Decrypt into a temporary file first, then move it into place only after DecryptTo
+            // has returned successfully. DecryptTo validates the HMAC trailer and throws on a
+            // mismatch, so unverified or tampered plaintext is never written to the final
+            // destination path. On any failure the temporary (which may hold partial plaintext)
+            // is wiped rather than merely deleted. This mirrors EncryptToFileWithBackupAsync.
+            using (FileLock lockedTemporary = MakeAlternatePath(destinationStore, ".tmp"))
             {
-                if (Resolve.Log.IsInfoEnabled)
+                try
                 {
-                    Resolve.Log.LogInfo("Decrypting to '{0}'.".InvariantFormat(destinationStore.Name));
+                    if (Resolve.Log.IsInfoEnabled)
+                    {
+                        Resolve.Log.LogInfo("Decrypting to '{0}'.".InvariantFormat(destinationStore.Name));
+                    }
+
+                    using (Stream temporaryStream = lockedTemporary.DataStore.OpenWrite())
+                    {
+                        document.DecryptTo(temporaryStream);
+                    }
+
+                    if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
+                    {
+                        Resolve.Log.LogInfo("Decrypted File to '{0}'.".InvariantFormat(destinationStore.Name), destinationStore.FullName, UserActivityLog.Decrypt);
+                    }
+                }
+                catch (Exception)
+                {
+                    if (lockedTemporary.DataStore.IsAvailable)
+                    {
+                        Wipe(lockedTemporary, progress);
+                    }
+                    throw;
                 }
 
-                using (Stream destinationStream = destinationStore.OpenWrite())
+                if (!destinationStore.IsAvailable)
                 {
-                    document.DecryptTo(destinationStream);
+                    try
+                    {
+                        lockedTemporary.DataStore.MoveTo(destinationStore.FullName);
+                    }
+                    catch (Exception ex)
+                    {
+                        HandleException(ex, destinationStore);
+                    }
                 }
+                else
+                {
+                    MoveTemporaryToDestinationWithBackupAndWipe(lockedTemporary, destinationLock, progress);
+                }
+            }
 
-                if (Resolve.Log.IsInfoEnabled || Resolve.Log.IsCustomLogEnabled)
-                {
-                    Resolve.Log.LogInfo("Decrypted File to '{0}'.".InvariantFormat(destinationStore.Name), destinationStore.FullName, UserActivityLog.Decrypt);
-                }
-            }
-            catch (Exception)
-            {
-                if (destinationStore.IsAvailable)
-                {
-                    Wipe(destinationLock, progress);
-                }
-                throw;
-            }
             if (options.HasMask(AxCryptOptions.SetFileTimes))
             {
                 destinationStore.SetFileTimes(document.CreationTimeUtc, document.LastAccessTimeUtc, document.LastWriteTimeUtc);
@@ -1339,17 +1365,15 @@ namespace AxCrypt.Core
 
         public static Passphrase GenerateRandomPassword()
         {
-            const string validFileNameChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=[]{};:|,./<>?`~";
+            const string validPasswordChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=[]{};:|,./<>?`~";
 
-            int randomLength = 18;
-            System.Text.StringBuilder randomPassword = new System.Text.StringBuilder(randomLength + 4);
-            byte[] random = Resolve.RandomGenerator.Generate(randomLength);
-            for (int i = 0; i < randomLength; ++i)
-            {
-                randomPassword.Append(validFileNameChars[random[i] % validFileNameChars.Length]);
-            }
-
-            return new Passphrase(randomPassword.ToString());
+            const int randomLength = 18;
+            // Draw each character uniformly from the alphabet. The previous implementation used
+            // 'randomByte % alphabetLength', which is biased whenever 256 is not a multiple of the
+            // alphabet length (91 here), lowering the effective entropy of generated key passphrases.
+            // GetItems performs unbiased selection from a cryptographic RNG.
+            char[] password = System.Security.Cryptography.RandomNumberGenerator.GetItems<char>(validPasswordChars, randomLength);
+            return new Passphrase(new string(password));
         }
     }
 }
