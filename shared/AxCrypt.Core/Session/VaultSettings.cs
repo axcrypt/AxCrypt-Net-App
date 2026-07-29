@@ -56,13 +56,18 @@ namespace AxCrypt.Core.Session
             if (!await IsValidVaultPath(vaultFolder.Path))
                 return;
 
-            if (_watchedFolders.ContainsKey(vaultFolder.Path))
+            string VaultFolderPath = vaultFolder.Path;
+
+            if (!VaultFolderPath.EndsWith("\\"))
+                VaultFolderPath += "\\";
+
+            if (_watchedFolders.ContainsKey(VaultFolderPath))
                 return;
 
             vaultFolder.Changed += VaultWatchedFolder_Changed!;
-            _watchedFolders.Add(vaultFolder.Path, vaultFolder);
+            _watchedFolders.Add(VaultFolderPath, vaultFolder);
 
-            await AddVaultWatchedFolderAsync(vaultFolder.Path);
+            await AddVaultWatchedFolderAsync(VaultFolderPath);
         }
 
         public async Task AddVaultWatchedFolderAsync(string vaultFolder)
@@ -87,6 +92,12 @@ namespace AxCrypt.Core.Session
         private static bool IsTemporaryVaultStagingFile(string fullName)
         {
             return string.Equals(System.IO.Path.GetExtension(fullName), ".tmp", StringComparison.OrdinalIgnoreCase);
+        }
+
+        public void RemoveVaultWatchedFolder(string folderPath)
+        {
+            if (_watchedFolders.ContainsKey(folderPath))
+                _watchedFolders.Remove(folderPath);
         }
 
         public virtual async Task RemoveAndDecryptVaultWatchedFolder(IDataItem folderInfo)
