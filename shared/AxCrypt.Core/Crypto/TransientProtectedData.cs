@@ -89,10 +89,9 @@ public class TransientProtectedData
         return protectedBytes;
     }
 
-    public byte[] Protect(string value, byte[] key)
+    public byte[] Protect(byte[] userData, byte[] key)
     {
         key = key ?? _key;
-        byte[] userData = Encoding.Unicode.GetBytes(value);
         byte[] protectedBytes = CustomAesEncryption.EncryptData(userData, key, _entropy);
         Array.Clear(userData, 0, userData.Length);
         return protectedBytes;

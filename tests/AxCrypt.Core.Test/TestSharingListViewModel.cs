@@ -28,6 +28,7 @@
 using AxCrypt.Abstractions;
 using AxCrypt.Abstractions.Algorithm;
 using AxCrypt.Api.Implementation;
+using AxCrypt.App.Shared.Core.UI.ViewModel;
 using AxCrypt.Common;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
@@ -37,16 +38,10 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.Test.Properties;
 using AxCrypt.Core.UI;
-using AxCrypt.Core.UI.ViewModel;
 using AxCrypt.Fake;
 using AxCrypt.Mono;
 using AxCrypt.Mono.Portable;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Test

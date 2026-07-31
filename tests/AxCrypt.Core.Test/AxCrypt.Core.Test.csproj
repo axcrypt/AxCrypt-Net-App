@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\axcrypt-net-apps\AxCrypt.App.Shared\AxCrypt.App.Shared.csproj" />
     <ProjectReference Include="..\..\shared\AxCrypt.Api\AxCrypt.Api.csproj" />
     <ProjectReference Include="..\..\shared\AxCrypt.Common\AxCrypt.Common.csproj" />
     <ProjectReference Include="..\..\shared\AxCrypt.Desktop\AxCrypt.Desktop.csproj" />

@@ -77,8 +77,5 @@ namespace AxCrypt.Core.UI.ViewModel
         public string UserDevice { get; set; }
 
         public DateTime RememberUntil { get; set; }
-
-        public string RecoveryKey { get; set; }
-
     }
 }

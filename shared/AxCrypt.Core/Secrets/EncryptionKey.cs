@@ -32,6 +32,7 @@
 
 using AxCrypt.Core.Crypto;
 using Newtonsoft.Json;
+using System.Text;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Secrets
@@ -80,7 +81,8 @@ namespace AxCrypt.Core.Secrets
                 throw new ArgumentNullException("key");
             }
 
-            _bytes = New<TransientProtectedData>().Protect(passphrase, key);
+            byte[] plain = Encoding.UTF8.GetBytes(passphrase);
+            _bytes = New<TransientProtectedData>().Protect(plain, key);
             _randomKeyBytes = key;
         }
 
