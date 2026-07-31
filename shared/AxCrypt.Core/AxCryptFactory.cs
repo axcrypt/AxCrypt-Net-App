@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt - Copyright 2026, AxCrypt AB, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -18,13 +18,13 @@
  * You should have received a copy of the GNU General Public License
  * along with AxCrypt.  If not, see <http://www.gnu.org/licenses/>.
  *
- * The source is maintained at http://bitbucket.org/AxCrypt-net please visit for
- * updates, contributions and contact with the author. You may also visit
+ * Visit
  * http://www.axcrypt.net for more information about the author.
 */
 
 #endregion Coypright and License
 
+using AxCrypt.Abstractions;
 using AxCrypt.Core.Crypto;
 using AxCrypt.Core.Crypto.Asymmetric;
 using AxCrypt.Core.Extensions;
@@ -32,6 +32,8 @@ using AxCrypt.Core.Header;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Reader;
 using AxCrypt.Core.Runtime;
+using AxCrypt.Core.Service;
+using AxCrypt.Core.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,11 +45,38 @@ namespace AxCrypt.Core
 {
     public class AxCryptFactory
     {
-        public virtual bool IsPassphraseValid(Passphrase passphrase, string encryptedFileFullName)
+        public virtual async Task<bool> IsPassphraseValid(Passphrase passphrase, string encryptedFileFullName)
         {
             IDataStore encryptedStore = New<IDataStore>(encryptedFileFullName);
-            IEnumerable<DecryptionParameter> parameters = encryptedStore.DecryptionParameters(passphrase, new IAsymmetricPrivateKey[0]);
+            IEnumerable<IAsymmetricPrivateKey> privateKeys = new IAsymmetricPrivateKey[0];
+            if (New<KnownIdentities>().DefaultEncryptionIdentity == LogOnIdentity.Empty && !string.IsNullOrEmpty(Resolve.UserSettings.UserEmail))
+            {
+                privateKeys = await GetUserPrivateKeysAsync(passphrase);
+            }
+
+            IEnumerable<DecryptionParameter> parameters = encryptedStore.DecryptionParameters(passphrase, privateKeys);
             return New<AxCryptFactory>().FindDecryptionParameter(parameters, encryptedStore) != null;
+        }
+
+        private static async Task<IEnumerable<IAsymmetricPrivateKey>> GetUserPrivateKeysAsync(Passphrase passphrase)
+        {
+            try
+            {
+                LogOnIdentity logOnIdentity = new LogOnIdentity(EmailAddress.Parse(Resolve.UserSettings.UserEmail), passphrase);
+                IEnumerable<UserKeyPair> currentKeyPairs = await New<LogOnIdentity, IAccountService>(logOnIdentity).ListAsync();
+                if (currentKeyPairs == null)
+                {
+                    return new IAsymmetricPrivateKey[0];
+                }
+
+                logOnIdentity = new LogOnIdentity(currentKeyPairs, passphrase);
+                return logOnIdentity.PrivateKeys;
+            }
+            catch (Exception ex)
+            {
+                New<IReport>().Exception(ex);
+                return new IAsymmetricPrivateKey[0];
+            }
         }
 
         public virtual DecryptionParameter FindDecryptionParameter(IEnumerable<DecryptionParameter> decryptionParameters, IDataStore encryptedFileInfo)

@@ -1,7 +1,7 @@
 ﻿#region Coypright and License
 
 /*
- * AxCrypt - Copyright 2016, Svante Seleborg, All Rights Reserved
+ * AxCrypt - Copyright 2026, AxCrypt AB, All Rights Reserved
  *
  * This file is part of AxCrypt.
  *
@@ -18,8 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with AxCrypt.  If not, see <http://www.gnu.org/licenses/>.
  *
- * The source is maintained at http://bitbucket.org/AxCrypt-net please visit for
- * updates, contributions and contact with the author. You may also visit
+ * Please visit
  * http://www.axcrypt.net for more information about the author.
 */
 
@@ -67,17 +66,17 @@ namespace AxCrypt.Core.UI.ViewModel
 
         public string FileName { get { return GetProperty<string>(nameof(FileName)); } set { SetProperty(nameof(FileName), value); } }
 
-        protected override Task<bool> ValidateAsync(string columnName)
+        protected override async Task<bool> ValidateAsync(string columnName)
         {
-            return Task.FromResult(ValidateInternal(columnName));
+            return await ValidateInternal(columnName);
         }
 
-        private bool ValidateInternal(string columnName)
+        private async Task<bool> ValidateInternal(string columnName)
         {
             switch (columnName)
             {
                 case nameof(PasswordText):
-                    if (!IsPassphraseValidForFileIfAny(PasswordText, _encryptedFileFullName))
+                    if (!await IsPassphraseValidForFileIfAny(PasswordText, _encryptedFileFullName))
                     {
                         ValidationError = (int)ViewModel.ValidationError.WrongPassphrase;
                         return false;
@@ -110,13 +109,13 @@ namespace AxCrypt.Core.UI.ViewModel
             return String.Compare(PasswordText, Verification, StringComparison.Ordinal) == 0;
         }
 
-        private static bool IsPassphraseValidForFileIfAny(string passphrase, string encryptedFileFullName)
+        private static async Task<bool> IsPassphraseValidForFileIfAny(string passphrase, string encryptedFileFullName)
         {
             if (String.IsNullOrEmpty(encryptedFileFullName))
             {
                 return true;
             }
-            return New<AxCryptFactory>().IsPassphraseValid(new Passphrase(passphrase), encryptedFileFullName);
+            return await New<AxCryptFactory>().IsPassphraseValid(new Passphrase(passphrase), encryptedFileFullName);
         }
 
         private static bool IsPassphrasePolicyValid(string passphrase)

@@ -97,12 +97,12 @@ namespace AxCrypt.Core.UI.ViewModel
             }
         }
 
-        protected override Task<bool> ValidateAsync(string columnName)
+        protected override async Task<bool> ValidateAsync(string columnName)
         {
-            return Task.FromResult(ValidateInternal(columnName));
+            return await ValidateInternal(columnName);
         }
 
-        private bool ValidateInternal(string columnName)
+        private async Task<bool> ValidateInternal(string columnName)
         {
             switch (columnName)
             {
@@ -124,7 +124,7 @@ namespace AxCrypt.Core.UI.ViewModel
                         ValidationError = (int)ViewModel.ValidationError.SamePasswordAlreadySignedIn;
                         return false;
                     }
-                    if (!IsPassphraseValidForFileIfAny(Passphrase, _encryptedFileFullName))
+                    if (!await IsPassphraseValidForFileIfAny(Passphrase, _encryptedFileFullName))
                     {
                         ValidationError = (int)ViewModel.ValidationError.WrongPassphrase;
                         return false;
@@ -174,13 +174,13 @@ namespace AxCrypt.Core.UI.ViewModel
             return New<IDataStore>(encryptedFileFullName).IsLegacyV1();
         }
 
-        private static bool IsPassphraseValidForFileIfAny(Passphrase passphrase, string encryptedFileFullName)
+        private static async Task<bool> IsPassphraseValidForFileIfAny(Passphrase passphrase, string encryptedFileFullName)
         {
             if (string.IsNullOrEmpty(encryptedFileFullName))
             {
                 return true;
             }
-            return New<AxCryptFactory>().IsPassphraseValid(passphrase, encryptedFileFullName);
+            return await New<AxCryptFactory>().IsPassphraseValid(passphrase, encryptedFileFullName);
         }
 
         private bool IsKnownIdentity()

@@ -102,7 +102,7 @@ namespace AxCrypt.Core.UI.ViewModel
                     return await ValidatePassphraseAsync();
 
                 case nameof(EncryptedFileFullName):
-                    return ValidatePassphraseForFile();
+                    return await ValidatePassphraseForFile();
 
                 case nameof(ShowPassword):
                     return true;
@@ -112,13 +112,13 @@ namespace AxCrypt.Core.UI.ViewModel
             }
         }
 
-        private bool ValidatePassphraseForFile()
+        private async Task<bool> ValidatePassphraseForFile()
         {
             if (string.IsNullOrEmpty(EncryptedFileFullName))
             {
                 return false;
             }
-            return New<AxCryptFactory>().IsPassphraseValid(new Passphrase(PasswordText), EncryptedFileFullName);
+            return await New<AxCryptFactory>().IsPassphraseValid(new Passphrase(PasswordText), EncryptedFileFullName);
         }
 
         private async Task<bool> ValidatePassphraseAsync()
