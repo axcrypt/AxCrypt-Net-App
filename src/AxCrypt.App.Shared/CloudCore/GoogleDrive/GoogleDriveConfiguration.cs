@@ -23,7 +23,7 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
         _deviceType switch
         {
             _ when _deviceType == DeviceCategory.Android || _deviceType == DeviceCategory.iOS => 8 * 1024 * 102,
-            _ when _deviceType == DeviceCategory.Windows || _deviceType == DeviceCategory.Mac => 16 * 1024 * 102,
+            _ when _deviceType == DeviceCategory.Windows || _deviceType == DeviceCategory.Mac || _deviceType == DeviceCategory.Linux => 16 * 1024 * 102,
             _ => 8 * 1024 * 102
         };
 
@@ -32,14 +32,14 @@ namespace AxCrypt.App.Shared.CloudCore.GoogleDrive
         {
             _ when _deviceType == DeviceCategory.iOS => "131011153195-22fcmc5j7gbpijl9atbfkl0lulcf8vl2.apps.googleusercontent.com",
             _ when _deviceType == DeviceCategory.Android => "131011153195-hqc84rbfq31ht7237pjia2ofm0q3d2mc.apps.googleusercontent.com",
-            _ when _deviceType == DeviceCategory.Windows || _deviceType == DeviceCategory.Mac => "131011153195-r9l8gv5cu2828di1o6d4a5gion4354ao.apps.googleusercontent.com",
+            _ when _deviceType == DeviceCategory.Windows || _deviceType == DeviceCategory.Mac || _deviceType == DeviceCategory.Linux => "131011153195-r9l8gv5cu2828di1o6d4a5gion4354ao.apps.googleusercontent.com",
             _ => ""
         };
 
         public static string ClientSecret =>
         _deviceType switch
         {
-            _ when _deviceType == DeviceCategory.Windows || _deviceType == DeviceCategory.Mac => "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",
+            _ when _deviceType == DeviceCategory.Windows || _deviceType == DeviceCategory.Mac|| _deviceType == DeviceCategory.Linux => "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",
             _ => ""
         };
     }
