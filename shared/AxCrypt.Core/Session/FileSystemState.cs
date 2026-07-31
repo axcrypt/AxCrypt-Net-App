@@ -32,14 +32,9 @@ using AxCrypt.Core.Extensions;
 using AxCrypt.Core.IO;
 using AxCrypt.Core.Runtime;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Session
@@ -375,59 +370,6 @@ namespace AxCrypt.Core.Session
             }
         }
 
-        [JsonProperty("vaultFolders")]
-        private List<VaultFolder> _vaultFolders = new List<VaultFolder>();
-
-        public IEnumerable<VaultFolder> AllVaultFolders
-        {
-            get
-            {
-                lock (_vaultFolders)
-                {
-                    return _vaultFolders.ToList();
-                }
-            }
-        }
-
-        public virtual void AddVaultFolder(VaultFolder vaultFolder)
-        {
-            if (vaultFolder == null)
-            {
-                throw new ArgumentNullException("vaultFolder");
-            }
-
-            lock (_watchedFolders)
-            {
-                int i = _vaultFolders.FindIndex((wf) => wf.Matches(vaultFolder.Path));
-                if (i < 0)
-                {
-                    _vaultFolders.Add(vaultFolder);
-                    return;
-                }
-
-                _vaultFolders[i] = vaultFolder;
-            }
-        }
-
-        public virtual void RemoveVaultFolder(VaultFolder vaultFolder)
-        {
-            if (vaultFolder == null)
-            {
-                throw new ArgumentNullException("vaultFolder");
-            }
-
-            lock (_vaultFolders)
-            {
-                int i = _vaultFolders.FindIndex((wf) => wf.Matches(vaultFolder.Path));
-                if (i < 0)
-                {
-                    return;
-                }
-
-                _vaultFolders.RemoveAt(i);
-            }
-        }
-
         private void SetRangeInternal(IEnumerable<ActiveFile> activeFiles, ActiveFileStatus mask)
         {
             lock (_activeFilesByEncryptedPath)
@@ -575,7 +517,6 @@ namespace AxCrypt.Core.Session
             ActiveFilesForSerialization = fileSystemState.ActiveFilesForSerialization;
             _watchedFolders = fileSystemState._watchedFolders;
             KnownPassphrases = fileSystemState.KnownPassphrases;
-            _vaultFolders = fileSystemState._vaultFolders;
         }
 
         public virtual async Task Save()

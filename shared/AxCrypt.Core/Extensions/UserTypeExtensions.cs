@@ -11,14 +11,9 @@ using AxCrypt.Core.Runtime;
 using AxCrypt.Core.Service;
 using AxCrypt.Core.Session;
 using AxCrypt.Core.UI;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 using static AxCrypt.Abstractions.TypeResolve;
 
 namespace AxCrypt.Core.Extensions
@@ -463,20 +458,6 @@ namespace AxCrypt.Core.Extensions
         public static IEnumerable<EmailAddress> SharedWith(this IEnumerable<WatchedFolder> watchedFolders)
         {
             IEnumerable<EmailAddress> sharedWithEmailAddresses = watchedFolders.SelectMany(wf => wf.KeyShares).Distinct();
-
-            return sharedWithEmailAddresses;
-        }
-
-        public static IEnumerable<VaultFolder> ToVaultFolders(this IEnumerable<string> folderPaths)
-        {
-            IEnumerable<VaultFolder> watched = Resolve.FileSystemState.AllVaultFolders.Where((wf) => folderPaths.Contains(wf.Path));
-
-            return watched;
-        }
-
-        public static IEnumerable<EmailAddress> SharedWith(this IEnumerable<VaultFolder> vaultFolders)
-        {
-            IEnumerable<EmailAddress> sharedWithEmailAddresses = vaultFolders.SelectMany(wf => wf.KeyShares).Distinct();
 
             return sharedWithEmailAddresses;
         }

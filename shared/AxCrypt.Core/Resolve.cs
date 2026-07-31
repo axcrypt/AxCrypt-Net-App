@@ -56,7 +56,6 @@ namespace AxCrypt.Core
         public static void RegisterTypeFactories(string workFolderPath, IEnumerable<Assembly> assemblies)
         {
             RegisterTypeFactories(assemblies);
-            TypeMap.Register.Singleton<VaultSettings>(() => new VaultSettings());
 
             TypeMap.Register.Singleton<WorkFolderWatcher>(() => new WorkFolderWatcher());
             TypeMap.Register.Singleton<WorkFolder>(() => new WorkFolder(workFolderPath), () => New<WorkFolderWatcher>());
