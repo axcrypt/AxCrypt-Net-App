@@ -29,7 +29,7 @@ namespace AxCrypt.App.Shared.CloudCore.OneDrive
         _deviceType switch
         {
             _ when _deviceType == DeviceCategory.Android || _deviceType == DeviceCategory.iOS => 8 * 1024 * 102,
-            _ when _deviceType == DeviceCategory.Windows || _deviceType == DeviceCategory.Mac => 16 * 1024 * 102,
+            _ when _deviceType == DeviceCategory.Windows || _deviceType == DeviceCategory.Mac || _deviceType == DeviceCategory.Linux => 16 * 1024 * 102,
             _ => 8 * 1024 * 102
         };
     }
